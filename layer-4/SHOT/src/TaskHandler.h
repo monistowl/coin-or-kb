@@ -7,7 +7,37 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file TaskHandler.h
+ * @brief Task scheduling and execution control
+ *
+ * Orchestrates the modular task-based algorithm workflow.
+ *
+ * **Task Management:**
+ * - addTask(): Register task with string identifier
+ * - getTask(): Retrieve task by ID
+ * - clearTasks(): Reset for new solve
+ *
+ * **Execution Control:**
+ * - getNextTask(): Dequeue next task to run
+ * - setNextTask(): Jump to specific task (for goto/branching)
+ * - terminate(): Signal algorithm termination
+ * - isTerminated(): Check termination flag
+ *
+ * **Workflow Pattern:**
+ * 1. SolutionStrategy adds tasks in order
+ * 2. Solver calls getNextTask() in loop
+ * 3. Tasks execute and may setNextTask() for control flow
+ * 4. Termination tasks set terminate()
+ *
+ * **Task ID Naming:**
+ * - "InitializeIteration", "SolveIteration"
+ * - "CheckTimeLimit", "CheckAbsoluteGap"
+ * - "SelectHyperplanes", "AddHyperplanes"
+ *
+ * @see TaskBase.h for task interface
+ * @see SolutionStrategy/ for task configuration
+ */
 #pragma once
 
 #include <list>

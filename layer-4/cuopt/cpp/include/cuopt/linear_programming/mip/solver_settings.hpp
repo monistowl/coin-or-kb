@@ -14,7 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/**
+ * @file cuopt/linear_programming/mip/solver_settings.hpp
+ * @brief Mixed-integer programming solver configuration
+ *
+ * Settings for GPU-accelerated MIP solver.
+ *
+ * **mip_solver_settings_t Class:**
+ * - set_mip_callback(): User callback for incumbent solutions
+ * - set_time_limit(): Maximum solve time
+ * - set_mip_gap(): Optimality gap tolerance
+ * - set_verbosity(): Output level control
+ *
+ * **MIP Algorithm:**
+ * - Branch-and-bound with GPU LP relaxations
+ * - Population-based heuristics
+ * - Recombination operators for primal improvement
+ *
+ * @see cuopt/linear_programming/solve.hpp for solve_mip()
+ * @see cuopt/linear_programming/mip/solver_solution.hpp for output
+ */
 #pragma once
 
 #include <vector>

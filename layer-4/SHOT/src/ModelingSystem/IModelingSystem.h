@@ -7,7 +7,32 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file ModelingSystem/IModelingSystem.h
+ * @brief Abstract interface for problem input formats
+ *
+ * Base interface for parsing optimization problem files.
+ *
+ * **E_ProblemCreationStatus Enum:**
+ * - NormalCompletion: Problem loaded successfully
+ * - FileDoesNotExist, ErrorInFile: I/O errors
+ * - ErrorInVariables/Constraints/Objective: Parse errors
+ * - CapabilityProblem: Unsupported problem features
+ *
+ * **IModelingSystem Interface:**
+ * - augmentSettings(): Add format-specific settings
+ * - updateSettings(): Extract settings from problem file
+ * - finalizeSolution(): Write solution back to format
+ *
+ * **Implementations:**
+ * - ModelingSystemOSiL: XML OSiL format (Optimization Services)
+ * - ModelingSystemAMPL: .nl format from AMPL
+ * - ModelingSystemGAMS: GAMS interface
+ * - ModelingSystemOS: Optimization Services framework
+ *
+ * @see Solver.h for setProblem() to load problems
+ * @see Results.h for solution output
+ */
 #pragma once
 #include "../Environment.h"
 #include "../Enums.h"

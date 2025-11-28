@@ -7,7 +7,37 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Model/Constraints.h
+ * @brief Constraint hierarchy: linear, quadratic, and nonlinear
+ *
+ * Constraint classes forming an inheritance hierarchy.
+ *
+ * **Constraint Properties:**
+ * - classification: Linear, Quadratic, Signomial, Nonlinear
+ * - convexity: Linear, Convex, Concave, Nonconvex, Unknown
+ * - type: Equality, LessThan, GreaterThan
+ *
+ * **NumericConstraintValue Struct:**
+ * - functionValue: f(x) at evaluation point
+ * - normalizedLHSValue: L - f(x), normalizedRHSValue: f(x) - U
+ * - error: max(0, max(L - f(x), f(x) - U))
+ *
+ * **Constraint Class Hierarchy:**
+ * - Constraint (abstract): Base with index, name, properties
+ * - NumericConstraint: LHS/RHS bounds, gradient/Hessian computation
+ * - LinearConstraint: linearTerms, sparse gradient
+ * - QuadraticConstraint: + quadraticTerms, Hessian
+ * - NonlinearConstraint: + monomials, signomials, nonlinearExpression
+ *
+ * **Derivative Computation:**
+ * - calculateGradient(): Sparse first derivatives
+ * - calculateHessian(): Upper triangular second derivatives
+ * - Sparsity patterns for efficient NLP solver interfaces
+ *
+ * @see Terms.h for LinearTerm, QuadraticTerm definitions
+ * @see NonlinearExpressions.h for expression tree evaluation
+ */
 #pragma once
 
 #include <string>

@@ -7,7 +7,38 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file MIPSolver/MIPSolverBase.h
+ * @brief Common base class for MIP solver implementations
+ *
+ * Shared functionality for CPLEX, Gurobi, and Cbc backends.
+ *
+ * **Problem State:**
+ * - numberOfVariables, numberOfConstraints: Problem size
+ * - variableTypes, variableLowerBounds, variableUpperBounds
+ * - isMinimizationProblem, isProblemDiscrete
+ *
+ * **Hyperplane Creation:**
+ * - createHyperplane(): Add supporting hyperplane cut
+ * - createInteriorHyperplane(): Interior point cut
+ * - createHyperplaneTerms(): Compute cut coefficients
+ * - getConstraintIdentifier(): Named constraint IDs
+ *
+ * **Variable Fixing:**
+ * - fixVariable(), fixVariables(): Fix for NLP subproblem
+ * - unfixVariables(): Restore original bounds
+ * - updateVariableBound(): Dynamic bound update
+ *
+ * **Relaxation Strategy:**
+ * - relaxationStrategy: LP relaxation handling
+ * - executeRelaxationStrategy(): Apply relaxation
+ *
+ * **Dual Auxiliary Variable:**
+ * - Tracks epigraph variable for nonlinear objective
+ * - hasDualAuxiliaryObjectiveVariable(), getDualAuxiliaryObjectiveVariableIndex()
+ *
+ * @see MIPSolverCplex, MIPSolverGurobi, MIPSolverCbc
+ */
 #pragma once
 #include "../Environment.h"
 #include "../Enums.h"

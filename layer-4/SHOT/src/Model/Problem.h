@@ -8,7 +8,38 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Model/Problem.h
+ * @brief Core problem representation with variables, constraints, and objective
+ *
+ * Central data structure holding the optimization problem definition.
+ *
+ * **ProblemProperties Struct:**
+ * - Convexity classification (Convex, Nonconvex, NotSet)
+ * - Problem type flags (MINLP, MIQP, MILP, NLP, etc.)
+ * - Variable counts by type (real, binary, integer, auxiliary)
+ * - Constraint counts by type (linear, quadratic, nonlinear)
+ *
+ * **SpecialOrderedSet Struct:**
+ * - SOS1 (at most one variable nonzero) or SOS2 (contiguous nonzeros)
+ * - Variables and optional weights
+ *
+ * **Problem Class:**
+ * - allVariables, realVariables, binaryVariables, etc.
+ * - linearConstraints, quadraticConstraints, nonlinearConstraints
+ * - objectiveFunction (linear, quadratic, or nonlinear)
+ * - Sparsity patterns for Jacobian and Hessian
+ * - Feasibility bound propagation (FBBT) for tightening bounds
+ *
+ * **Key Methods:**
+ * - add(): Add variables, constraints, objective
+ * - finalize(): Compute properties and sparsity patterns
+ * - getMostDeviatingNumericConstraint(): Find worst violation
+ * - createCopy(): Clone for reformulation
+ *
+ * @see Solver.h for problem loading via setProblem()
+ * @see ReformulatedProblem for auxiliary variable introduction
+ */
 #pragma once
 
 #include "../Structs.h"

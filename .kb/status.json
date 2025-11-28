@@ -1002,8 +1002,8 @@
           "pass1_complete": false,
           "pass2_complete": false,
           "files_total": 105,
-          "files_pass1": 7,
-          "notes": "Pass 1 in progress. Convex MINLP solver using Extended Supporting Hyperplane (ESH) method.",
+          "files_pass1": 23,
+          "notes": "Pass 1 in progress (~22%). Convex MINLP solver using Extended Supporting Hyperplane (ESH) method.",
           "key_subsystems_documented": [
             "Main interface: Solver.h (problem loading, solving, results)",
             "Environment: Environment.h (shared state container)",
@@ -1011,7 +1011,13 @@
             "Primal solver: PrimalSolver.h (NLP-based bounds)",
             "Enumerations: Enums.h (convexity, sources, events)",
             "Data structures: Structs.h (solutions, hyperplanes, cuts)",
-            "Settings: Settings.h (hierarchical configuration)"
+            "Settings: Settings.h (hierarchical configuration)",
+            "Model: Problem.h, Variables.h, Constraints.h, Terms.h, ObjectiveFunction.h",
+            "Solver interfaces: IMIPSolver.h, MIPSolverBase.h, INLPSolver.h",
+            "Strategy: ISolutionStrategy.h, IModelingSystem.h",
+            "Task system: TaskBase.h, TaskHandler.h",
+            "Results: Results.h, Iteration.h",
+            "Supporting: EventHandler.h, IRootsearchMethod.h"
           ],
           "key_concepts_documented": [
             "Extended Supporting Hyperplane (ESH) algorithm for convex MINLP",
@@ -1019,11 +1025,24 @@
             "Primal bounds via fixed-integer NLP subproblems (Ipopt)",
             "Hyperplane generation at boundary and interior points",
             "Integer cuts (no-goods) for MINLP refinement",
-            "OSoL/OSrL XML formats for options and results"
+            "OSoL/OSrL XML formats for options and results",
+            "Term hierarchy: LinearTerm, QuadraticTerm, MonomialTerm, SignomialTerm",
+            "Constraint hierarchy with gradient/Hessian computation",
+            "Task-based modular algorithm composition",
+            "Rootsearch for constraint boundary finding"
           ],
           "pass1_files_annotated": [
             "src/Solver.h", "src/Environment.h", "src/DualSolver.h",
-            "src/PrimalSolver.h", "src/Enums.h", "src/Structs.h", "src/Settings.h"
+            "src/PrimalSolver.h", "src/Enums.h", "src/Structs.h", "src/Settings.h",
+            "src/Results.h", "src/TaskHandler.h", "src/EventHandler.h", "src/Iteration.h",
+            "src/Model/Problem.h", "src/Model/Variables.h", "src/Model/Constraints.h",
+            "src/Model/Terms.h", "src/Model/ObjectiveFunction.h",
+            "src/MIPSolver/IMIPSolver.h", "src/MIPSolver/MIPSolverBase.h",
+            "src/NLPSolver/INLPSolver.h",
+            "src/SolutionStrategy/ISolutionStrategy.h",
+            "src/ModelingSystem/IModelingSystem.h",
+            "src/Tasks/TaskBase.h",
+            "src/RootsearchMethod/IRootsearchMethod.h"
           ],
           "last_updated": "2025-11-28"
         },

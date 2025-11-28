@@ -7,7 +7,45 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Model/Terms.h
+ * @brief Term hierarchy for linear, quadratic, monomial, and signomial expressions
+ *
+ * Building blocks for constraint and objective function representation.
+ *
+ * **Term Base Class:**
+ * - coefficient: Scaling factor
+ * - calculate(): Evaluate at point or interval
+ * - getConvexity(): Linear, Convex, Concave, Nonconvex
+ * - getMonotonicity(): Nondecreasing, Nonincreasing, Constant
+ *
+ * **LinearTerm:** coeff * x
+ * - Always linear convexity
+ * - Monotonicity depends on coefficient sign
+ *
+ * **QuadraticTerm:** coeff * x1 * x2
+ * - isSquare: x1 == x2 (convex if coeff > 0)
+ * - isBilinear: x1 != x2 (nonconvex)
+ * - isBinary, isInteger: Type detection for reformulation
+ *
+ * **QuadraticTerms Collection:**
+ * - Eigenvalue analysis via Eigen for convexity
+ * - allSquares, allPositive flags for structure detection
+ *
+ * **MonomialTerm:** coeff * x1 * x2 * ... * xn
+ * - isBinary: All variables binary (linearizable)
+ * - Generally nonconvex
+ *
+ * **SignomialTerm:** coeff * x1^p1 * x2^p2 * ... * xn^pn
+ * - SignomialElement: (variable, power) pair
+ * - Convexity rules based on power signs and sums
+ *
+ * **Gradient/Hessian Methods:**
+ * - calculateGradient(): Sparse first derivatives
+ * - calculateHessian(): Upper triangular second derivatives
+ *
+ * @see Constraints.h, ObjectiveFunction.h for term usage
+ */
 #pragma once
 #include "../Environment.h"
 #include "../Enums.h"

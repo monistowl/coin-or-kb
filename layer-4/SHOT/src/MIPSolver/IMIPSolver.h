@@ -7,7 +7,41 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file MIPSolver/IMIPSolver.h
+ * @brief Abstract interface for MIP solver backends
+ *
+ * Pure virtual interface for dual problem MIP solvers.
+ *
+ * **Problem Construction:**
+ * - initializeProblem(), finalizeProblem(): Setup/teardown
+ * - addVariable(): With type, bounds, and semi-bounds
+ * - addLinearTermToObjective/Constraint(): Build incrementally
+ * - addQuadraticTermToObjective/Constraint(): For MIQP/MIQCQP
+ *
+ * **Solution Methods:**
+ * - solveProblem(): Execute MIP solver
+ * - repairInfeasibility(): Attempt feasibility repair
+ * - getObjectiveValue(), getDualObjectiveValue(): Bounds
+ * - getVariableSolution(), getAllVariableSolutions(): Points
+ *
+ * **Hyperplane/Cut Management:**
+ * - createHyperplane(): Add supporting hyperplane linearization
+ * - createInteriorHyperplane(): Interior point cuts
+ * - createIntegerCut(): No-good cuts for integer variables
+ *
+ * **Bound Management:**
+ * - setCutOff(): Objective cutoff for pruning
+ * - fixVariable(), unfixVariables(): For integer fixing
+ * - presolveAndUpdateBounds(): Bound tightening
+ *
+ * **Implementations:**
+ * - MIPSolverCplex, MIPSolverGurobi, MIPSolverCbc
+ * - SingleTree variants for callback-based cut addition
+ *
+ * @see DualSolver.h for MIP solver orchestration
+ * @see IRelaxationStrategy.h for LP relaxation handling
+ */
 #pragma once
 #include "../Environment.h"
 #include "../Enums.h"

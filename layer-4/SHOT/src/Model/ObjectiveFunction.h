@@ -7,7 +7,41 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Model/ObjectiveFunction.h
+ * @brief Objective function hierarchy with derivative computation
+ *
+ * Objective function classes mirroring the constraint hierarchy.
+ *
+ * **ObjectiveFunctionProperties:**
+ * - direction: Minimize or Maximize
+ * - classification: Linear, Quadratic, Signomial, Nonlinear
+ * - convexity: Convex, Concave, Linear, Nonconvex
+ * - Term presence flags for structure detection
+ *
+ * **ObjectiveFunction Base:**
+ * - calculateValue(): Evaluate at point or interval
+ * - calculateGradient(), calculateHessian(): Derivatives
+ * - getGradientSparsityPattern(): Nonzero structure
+ *
+ * **LinearObjectiveFunction:**
+ * - linearTerms + constant
+ * - isDualUnbounded(): Unboundedness detection
+ *
+ * **QuadraticObjectiveFunction:**
+ * - + quadraticTerms
+ * - Inherits from LinearObjectiveFunction
+ *
+ * **NonlinearObjectiveFunction:**
+ * - + monomialTerms, signomialTerms, nonlinearExpression
+ * - factorableFunction: CppAD automatic differentiation
+ * - Inherits from QuadraticObjectiveFunction
+ *
+ * @note For minimization with nonlinear objective, SHOT uses
+ *       epigraph reformulation: min t s.t. f(x) <= t
+ *
+ * @see DualSolver.h for objective cut generation
+ */
 #pragma once
 #include "../Structs.h"
 #include "../Enums.h"

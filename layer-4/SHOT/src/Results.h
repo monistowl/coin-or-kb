@@ -7,7 +7,39 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Results.h
+ * @brief Solution results storage and optimality gap tracking
+ *
+ * Central repository for primal/dual solutions and algorithm progress.
+ *
+ * **Primal Solutions:**
+ * - primalSolutions: All found feasible points
+ * - addPrimalSolution(): Submit new incumbent
+ * - getPrimalBound(): Best objective value
+ * - primalSolutionSourceStatistics: Track solution origins
+ *
+ * **Dual Solutions:**
+ * - dualSolutions: Lower/upper bounds from MIP
+ * - getCurrentDualBound(), getGlobalDualBound()
+ * - setDualBound(): Update relaxation bound
+ *
+ * **Optimality Gap:**
+ * - getAbsoluteGlobalObjectiveGap(): |primal - dual|
+ * - getRelativeGlobalObjectiveGap(): |gap| / |primal|
+ * - isRelativeObjectiveGapToleranceMet(): Termination check
+ *
+ * **Iteration Tracking:**
+ * - iterations: Per-iteration state snapshots
+ * - createIteration(), getCurrentIteration()
+ *
+ * **Output Formats:**
+ * - getResultsOSrL(): XML Optimization Services format
+ * - getResultsTrace(): GAMS trace format
+ * - getResultsSol(): AMPL .sol format
+ *
+ * @see Solver.h for getPrimalSolution(), getResultsOSrL()
+ */
 #pragma once
 
 #include <map>

@@ -14,7 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/**
+ * @file cuopt/linear_programming/pdlp/solver_settings.hpp
+ * @brief PDLP first-order LP solver configuration
+ *
+ * Settings for GPU-accelerated Primal-Dual Hybrid Gradient LP solver.
+ *
+ * **pdlp_solver_mode_t Modes:**
+ * - Stable3: Best overall balance (default)
+ * - Stable2: Legacy stable mode
+ * - Methodical1: Slower steps but fewer iterations, 1.3-1.7x memory
+ * - Fast1: Highest speed, lower convergence success
+ *
+ * **pdlp_solver_settings_t Class:**
+ * - set_solver_mode(): Select algorithm mode
+ * - set_eps_optimal(): Primal/dual convergence tolerance
+ * - set_time_limit(): Maximum solve time
+ * - set_warm_start(): Initialize from previous solution
+ *
+ * **Algorithm (PDHG):**
+ * - First-order method, highly parallelizable on GPU
+ * - O(1/k) convergence for LP
+ * - Efficient for large sparse problems
+ *
+ * @see cuopt/linear_programming/solve.hpp for solve_lp()
+ */
 #pragma once
 
 #include <cuopt/linear_programming/constants.h>

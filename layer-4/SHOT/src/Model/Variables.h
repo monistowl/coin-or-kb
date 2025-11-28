@@ -7,7 +7,37 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Model/Variables.h
+ * @brief Decision variable representation with bounds and types
+ *
+ * Variable classes for MINLP problem modeling.
+ *
+ * **VariableProperties Struct:**
+ * - type: Real, Binary, Integer, Semicontinuous, Semiinteger
+ * - auxiliaryType: Tracks origin of reformulation variables
+ * - Context flags: inObjectiveFunction, inLinearConstraints, etc.
+ * - Bound tightening status
+ *
+ * **Variable Class:**
+ * - index, name: Problem identifier
+ * - lowerBound, upperBound: Variable domain
+ * - semiBound: For semicontinuous/semiinteger types
+ * - calculate(): Evaluate at a point
+ * - getBound(): Interval arithmetic bounds
+ * - tightenBounds(): FBBT bound update
+ *
+ * **Variables Collection:**
+ * - Vector wrapper with ownership tracking
+ * - sortByIndex(): Reorder for solver compatibility
+ *
+ * **Interval Arithmetic (CppAD):**
+ * - Uses mc::Interval for bound propagation
+ * - FactorableFunction for automatic differentiation
+ *
+ * @see Constraints.h for variable usage in constraints
+ * @see AuxiliaryVariables.h for reformulation-generated variables
+ */
 #pragma once
 
 #include "../Enums.h"

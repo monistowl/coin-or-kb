@@ -7,7 +7,37 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file NLPSolver/INLPSolver.h
+ * @brief Abstract interface for NLP solver backends
+ *
+ * Pure virtual interface for primal bound NLP solvers.
+ *
+ * **Starting Point:**
+ * - setStartingPoint(): Initialize solver from MIP solution
+ * - clearStartingPoint(): Reset to default
+ *
+ * **Variable Fixing:**
+ * - fixVariables(): Fix integer variables for NLP subproblem
+ * - unfixVariables(): Restore full problem
+ *
+ * **Solution Methods:**
+ * - solveProblem(): Execute NLP solver
+ * - getSolution(): Retrieve primal point
+ * - getObjectiveValue(): Primal objective value
+ *
+ * **Bound Management:**
+ * - getVariableLowerBounds(), getVariableUpperBounds()
+ * - updateVariableLowerBound(), updateVariableUpperBound()
+ *
+ * **Implementations:**
+ * - NLPSolverIpoptBase: Ipopt interior point solver
+ * - NLPSolverGAMS: GAMS NLP solvers
+ * - NLPSolverSHOT: Recursive SHOT for NLP
+ *
+ * @see PrimalSolver.h for fixed-integer NLP subproblems
+ * @see NLPSolverBase.h for implementation utilities
+ */
 #pragma once
 #include "../Environment.h"
 #include "../Enums.h"

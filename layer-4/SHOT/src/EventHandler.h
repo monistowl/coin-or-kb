@@ -7,7 +7,34 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file EventHandler.h
+ * @brief Observer pattern for algorithm events and callbacks
+ *
+ * Allows external code to respond to solver events.
+ *
+ * **Event Types (E_EventType):**
+ * - NewPrimalSolution: New feasible solution found
+ * - UserTerminationCheck: Allow user to request termination
+ *
+ * **Callback Registration:**
+ * - registerCallback(event, callback): Register handler
+ * - Callback signature: void()
+ * - Multiple callbacks per event supported
+ *
+ * **Event Notification:**
+ * - notify(event): Invoke all registered callbacks
+ * - Called by solver at appropriate points
+ *
+ * **Usage Example:**
+ * ```cpp
+ * eventHandler->registerCallback(E_EventType::NewPrimalSolution,
+ *     [&]() { std::cout << "New solution found!" << std::endl; });
+ * ```
+ *
+ * @see Solver.h for event handler access
+ * @see Enums.h for E_EventType definition
+ */
 #pragma once
 #include "Environment.h"
 #include "Enums.h"
