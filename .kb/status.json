@@ -1,0 +1,86 @@
+{
+  "project": "optimization-solver-knowledge-base",
+  "created": "2025-11-28",
+  "current_focus": {
+    "layer": 0,
+    "library": "CoinUtils",
+    "phase": "not_started"
+  },
+  "layers": {
+    "layer-0": {
+      "status": "not_started",
+      "libraries": {
+        "CoinUtils": {
+          "status": "not_started",
+          "pass1_complete": false,
+          "pass2_complete": false,
+          "files_total": null,
+          "files_pass1": 0,
+          "files_pass2": 0,
+          "notes": "First target - smallest foundation library"
+        },
+        "SuiteSparse": {
+          "status": "not_started",
+          "pass1_complete": false,
+          "pass2_complete": false,
+          "files_total": null,
+          "files_pass1": 0,
+          "files_pass2": 0,
+          "notes": "Large library - may need per-submodule tracking"
+        }
+      }
+    },
+    "layer-1": {
+      "status": "blocked",
+      "blocked_by": "layer-0",
+      "libraries": {
+        "Osi": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "Clp": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "CppAD": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "qpOASES": { "status": "not_started", "pass1_complete": false, "pass2_complete": false }
+      }
+    },
+    "layer-2": {
+      "status": "blocked",
+      "blocked_by": "layer-1",
+      "libraries": {
+        "Cgl": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "Cbc": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "Ipopt": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "ADOL-C": { "status": "not_started", "pass1_complete": false, "pass2_complete": false }
+      }
+    },
+    "layer-3": {
+      "status": "blocked",
+      "blocked_by": "layer-2",
+      "libraries": {
+        "Bonmin": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "Couenne": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "SYMPHONY": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "Bcp": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "CHiPPS-ALPS": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "CHiPPS-BLIS": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "Dip": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "DisCO": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "Smi": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "oBB": { "status": "not_started", "pass1_complete": false, "pass2_complete": false }
+      }
+    },
+    "layer-4": {
+      "status": "blocked",
+      "blocked_by": "layer-3",
+      "libraries": {
+        "HiGHS": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "Gravity": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "SHOT": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "OS": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "Cmpl": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "Creme": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "GAMSlinks": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "Sonnet": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "clp-spreadsheet-solver": { "status": "not_started", "pass1_complete": false, "pass2_complete": false },
+        "cuopt": { "status": "not_started", "pass1_complete": false, "pass2_complete": false }
+      }
+    }
+  }
+}

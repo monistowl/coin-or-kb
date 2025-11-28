@@ -1,0 +1,18 @@
+# Archived zip files (original downloads)
+archive/
+
+# Generated knowledge base artifacts
+.kb/indexes/
+.kb/extracts/
+
+# OS files
+.DS_Store
+*.swp
+*~
+
+# Build artifacts (if any builds happen)
+*.o
+*.a
+*.so
+*.dylib
+build/

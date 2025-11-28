@@ -1,0 +1,171 @@
+{
+  "layer-0": {
+    "description": "Foundation libraries - sparse LA, basic utilities",
+    "libraries": {
+      "CoinUtils": {
+        "zip": "CoinUtils-master.zip",
+        "purpose": "Basic utilities, CoinPackedMatrix, message handling"
+      },
+      "SuiteSparse": {
+        "zip": "SuiteSparse-dev.zip",
+        "purpose": "Sparse linear algebra primitives (CHOLMOD, UMFPACK, etc.)"
+      }
+    }
+  },
+  "layer-1": {
+    "description": "Core abstractions and fundamental solvers",
+    "libraries": {
+      "Osi": {
+        "zip": "Osi-master.zip",
+        "purpose": "Open Solver Interface - abstraction layer"
+      },
+      "Clp": {
+        "zip": "Clp-master.zip",
+        "purpose": "LP solver (simplex, interior point)"
+      },
+      "CppAD": {
+        "zip": "CppAD-master.zip",
+        "purpose": "Automatic differentiation via operator overloading"
+      },
+      "qpOASES": {
+        "zip": "qpOASES-master.zip",
+        "purpose": "Quadratic programming solver"
+      }
+    }
+  },
+  "layer-2": {
+    "description": "Advanced solvers building on layer 1",
+    "libraries": {
+      "Cgl": {
+        "zip": "Cgl-master.zip",
+        "purpose": "Cut generator library for MIP"
+      },
+      "Cbc": {
+        "zip": "Cbc-master.zip",
+        "purpose": "MIP solver (branch and cut)"
+      },
+      "Ipopt": {
+        "zip": "Ipopt-stable-3.14.zip",
+        "purpose": "Interior point NLP solver"
+      },
+      "ADOL-C": {
+        "zip": "ADOL-C-master.zip",
+        "purpose": "Automatic differentiation (tape-based)"
+      }
+    }
+  },
+  "layer-3": {
+    "description": "Specialized solvers and frameworks",
+    "libraries": {
+      "Bonmin": {
+        "zip": "Bonmin-master.zip",
+        "purpose": "MINLP solver (combines Cbc + Ipopt)"
+      },
+      "Couenne": {
+        "zip": "Couenne-master.zip",
+        "purpose": "Global optimization via spatial branch and bound"
+      },
+      "SYMPHONY": {
+        "zip": "SYMPHONY-master.zip",
+        "purpose": "Parallel MIP solver"
+      },
+      "Bcp": {
+        "zip": "Bcp-master.zip",
+        "purpose": "Branch-cut-price framework"
+      },
+      "CHiPPS-ALPS": {
+        "zip": "CHiPPS-ALPS-master.zip",
+        "purpose": "Abstract library for parallel search"
+      },
+      "CHiPPS-BLIS": {
+        "zip": "CHiPPS-BLIS-master.zip",
+        "purpose": "Branch-and-cut on ALPS"
+      },
+      "Dip": {
+        "zip": "Dip-master.zip",
+        "purpose": "Decomposition for integer programming"
+      },
+      "DisCO": {
+        "zip": "DisCO-master.zip",
+        "purpose": "Distributed combinatorial optimization"
+      },
+      "Smi": {
+        "zip": "Smi-master.zip",
+        "purpose": "Stochastic modeling interface"
+      },
+      "oBB": {
+        "zip": "oBB-master.zip",
+        "purpose": "Overlapping branch and bound"
+      }
+    }
+  },
+  "layer-4": {
+    "description": "High-level tools, modeling languages, interfaces",
+    "libraries": {
+      "HiGHS": {
+        "zip": "HiGHS-master.zip",
+        "purpose": "Modern LP/MIP solver (standalone)"
+      },
+      "Gravity": {
+        "zip": "Gravity-master.zip",
+        "purpose": "Mathematical modeling language"
+      },
+      "SHOT": {
+        "zip": "SHOT-master.zip",
+        "purpose": "Polyhedral outer approximation for MINLP"
+      },
+      "OS": {
+        "zip": "OS-master.zip",
+        "purpose": "Optimization Services framework"
+      },
+      "Cmpl": {
+        "zip": "Cmpl-master.zip",
+        "purpose": "Mathematical programming language"
+      },
+      "Creme": {
+        "zip": "Creme-master.zip",
+        "purpose": "Capacitated resource management"
+      },
+      "GAMSlinks": {
+        "zip": "GAMSlinks-master.zip",
+        "purpose": "Interface to GAMS"
+      },
+      "Sonnet": {
+        "zip": "Sonnet-master.zip",
+        "purpose": "C# wrapper for COIN-OR"
+      },
+      "clp-spreadsheet-solver": {
+        "zip": "clp-spreadsheet-solver-main.zip",
+        "purpose": "Spreadsheet interface for Clp"
+      },
+      "cuopt": {
+        "zip": "cuopt-main.zip",
+        "purpose": "NVIDIA GPU optimization"
+      }
+    }
+  },
+  "meta": {
+    "description": "Build tools and meta-packages (not annotated)",
+    "libraries": {
+      "coinbrew": {
+        "zip": "coinbrew-master.zip",
+        "purpose": "Build system for COIN-OR"
+      },
+      "coin-or.github.io": {
+        "zip": "coin-or.github.io-master.zip",
+        "purpose": "Website"
+      },
+      "COIN-OR-OptimizationSuite": {
+        "zip": "COIN-OR-OptimizationSuite-master.zip",
+        "purpose": "Meta-package"
+      }
+    }
+  },
+  "duplicates": {
+    "note": "Files with (1) suffix are duplicates, use originals",
+    "files": [
+      "GAMSlinks-master(1).zip",
+      "Ipopt-stable-3.14(1).zip"
+    ]
+  }
+}

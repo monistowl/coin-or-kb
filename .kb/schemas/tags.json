@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "description": "Annotation tag definitions for solver knowledge base",
+  "tags": {
+    "brief": {
+      "description": "One-line summary of what the element does",
+      "required_for": ["public_class", "public_function", "public_method"],
+      "pass": 1,
+      "format": "Single line, no period at end unless multiple sentences",
+      "examples": [
+        "@brief Return the number of non-zero elements in the matrix",
+        "@brief Solve the linear system Ax = b using current factorization"
+      ]
+    },
+    "param": {
+      "description": "Description of a function parameter",
+      "required_for": ["public_function_with_params"],
+      "pass": 1,
+      "format": "@param <name> <description>",
+      "examples": [
+        "@param matrix Pointer to the sparse constraint matrix",
+        "@param tolerance Minimum acceptable pivot magnitude for stability"
+      ]
+    },
+    "return": {
+      "description": "Description of return value",
+      "required_for": ["non_void_public_function"],
+      "pass": 1,
+      "format": "@return <description>",
+      "examples": [
+        "@return Number of non-zeros in the matrix",
+        "@return 0 on success, non-zero error code on failure"
+      ]
+    },
+    "algorithm": {
+      "description": "Named algorithm or technique being implemented",
+      "required_for": ["algorithm_implementation"],
+      "pass": 2,
+      "format": "@algorithm <standard_name>",
+      "examples": [
+        "@algorithm Revised simplex method",
+        "@algorithm Markowitz pivot selection",
+        "@algorithm Forrest-Tomlin update"
+      ]
+    },
+    "math": {
+      "description": "Mathematical formula, theorem, or relationship",
+      "required_for": ["mathematical_code"],
+      "pass": 2,
+      "format": "@math <formula_or_description>",
+      "examples": [
+        "@math Reduced cost: c_j - c_B * B^{-1} * A_j",
+        "@math KKT conditions: grad_L = 0, complementary slackness"
+      ]
+    },
+    "complexity": {
+      "description": "Time and/or space complexity analysis",
+      "required_for": ["algorithms", "hot_paths"],
+      "pass": 2,
+      "format": "@complexity <O-notation> [justification]",
+      "examples": [
+        "@complexity O(n^2) - nested loops over rows and columns",
+        "@complexity O(nnz) where nnz = non-zeros in active submatrix"
+      ]
+    },
+    "ref": {
+      "description": "Literature citation",
+      "required_for": ["published_technique"],
+      "pass": 2,
+      "format": "@ref Author (Year). \"Title\". Journal/Publisher.",
+      "examples": [
+        "@ref Dantzig, G. (1963). \"Linear Programming and Extensions\". Princeton.",
+        "@ref Forrest, Tomlin (1972). \"Updated triangular factors...\" Math. Prog."
+      ]
+    },
+    "invariant": {
+      "description": "Condition that must hold before/after/during execution",
+      "required_for": ["stateful_code", "data_structures"],
+      "pass": 1,
+      "format": "@invariant <condition>",
+      "examples": [
+        "@invariant Matrix must be in column-ordered format",
+        "@invariant Returned pivot satisfies |value| >= tolerance"
+      ]
+    },
+    "see": {
+      "description": "Cross-reference to related code",
+      "required_for": ["optional"],
+      "pass": 1,
+      "format": "@see <symbol_or_file>",
+      "examples": [
+        "@see CoinPackedMatrix::reverseOrdering()",
+        "@see factorize(), updateColumn()"
+      ]
+    },
+    "note": {
+      "description": "Implementation detail, gotcha, or clarification",
+      "required_for": ["optional"],
+      "pass": 2,
+      "format": "@note <text>",
+      "examples": [
+        "@note Falls back to partial pivoting if no stable Markowitz pivot found",
+        "@note This is a hot path - called once per simplex iteration"
+      ]
+    },
+    "todo": {
+      "description": "Marker for incomplete annotation needing further work",
+      "required_for": ["never_in_final"],
+      "pass": 1,
+      "format": "@todo [PASS2:|HUMAN_REVIEW:] <description>",
+      "examples": [
+        "@todo PASS2: Identify the algorithm used for pivot selection",
+        "@todo HUMAN_REVIEW: Purpose of magic constant 1e-12 unclear"
+      ]
+    },
+    "file": {
+      "description": "File-level documentation",
+      "required_for": ["file_header"],
+      "pass": 1,
+      "format": "@file <filename>",
+      "examples": [
+        "@file CoinPackedMatrix.cpp"
+      ]
+    }
+  },
+  "validation_rules": [
+    {
+      "rule": "public_symbols_need_brief",
+      "description": "All public classes, functions, methods must have @brief",
+      "severity": "error"
+    },
+    {
+      "rule": "params_documented",
+      "description": "All parameters of public functions must have @param",
+      "severity": "error"
+    },
+    {
+      "rule": "no_unresolved_todos",
+      "description": "No @todo markers should remain after Pass 2",
+      "severity": "error"
+    },
+    {
+      "rule": "algorithms_identified",
+      "description": "Functions implementing named algorithms should have @algorithm",
+      "severity": "warning"
+    },
+    {
+      "rule": "math_documented",
+      "description": "Code with mathematical basis should have @math",
+      "severity": "warning"
+    }
+  ]
+}
