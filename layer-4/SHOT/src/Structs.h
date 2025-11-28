@@ -7,7 +7,36 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Structs.h
+ * @brief Core data structures and type definitions for SHOT
+ *
+ * Fundamental types, forward declarations, and helper structures.
+ *
+ * **Constants:**
+ * - SHOT_DBL_MIN/MAX/INF/EPS: Double precision limits
+ * - SHOT_INT_MAX, SHOT_LONG_MAX: Integer limits
+ *
+ * **Smart Pointer Typedefs:**
+ * - ProblemPtr, SettingsPtr, ResultsPtr, etc.
+ * - Shared ownership via std::shared_ptr
+ *
+ * **Solution Structures:**
+ * - PrimalSolution: Variable values + objective + source
+ * - DualSolution: Dual bound + iteration + source
+ * - SolutionPoint: Point with constraint deviation
+ *
+ * **Hyperplane Structures:**
+ * - Hyperplane: Supporting hyperplane cut
+ * - GeneratedHyperplane: Hyperplane with metadata
+ * - IntegerCut: No-good cut for integer variables
+ *
+ * **Utility Types:**
+ * - VectorDouble, VectorInteger, VectorString
+ * - PairIndexValue: (index, value) pair
+ *
+ * @see Environment.h for component composition
+ */
 #pragma once
 
 #include "Enums.h"

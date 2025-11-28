@@ -7,7 +7,35 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Solver.h
+ * @brief Main solver interface for convex MINLP problems
+ *
+ * Primary entry point for the SHOT optimizer.
+ *
+ * **Solver Class:**
+ * - setProblem(): Load GAMS/AMPL/OSiL problem file
+ * - solveProblem(): Execute the selected solution strategy
+ * - getPrimalSolution(): Retrieve best incumbent solution
+ *
+ * **Solution Workflow:**
+ * 1. Initialize settings (setOptionsFromFile/String)
+ * 2. Load problem (setProblem)
+ * 3. Solve (solveProblem)
+ * 4. Retrieve results (getResultsOSrL, getPrimalSolution)
+ *
+ * **Callbacks:**
+ * - registerCallback(): Monitor NewPrimalSolution, UserTerminationCheck
+ *
+ * **Results Access:**
+ * - getCurrentDualBound(): Best lower bound
+ * - getPrimalBound(): Best upper bound (incumbent)
+ * - getAbsoluteObjectiveGap(): |primal - dual|
+ * - getRelativeObjectiveGap(): |primal - dual| / |primal|
+ *
+ * @see Environment.h for shared state container
+ * @see SolutionStrategy/ISolutionStrategy.h for algorithm implementations
+ */
 #pragma once
 
 #include <memory>

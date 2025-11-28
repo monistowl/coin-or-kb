@@ -7,7 +7,33 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file PrimalSolver.h
+ * @brief NLP-based primal bound computation and solution repair
+ *
+ * Finds feasible solutions and improves the primal bound.
+ *
+ * **PrimalSolver Class:**
+ * - primalSolutionCandidates: Points to check for feasibility
+ * - fixedPrimalNLPCandidates: Integer-fixed NLP subproblems
+ *
+ * **Primal Solution Sources:**
+ * - MIP solution pool points
+ * - NLP local search from MIP solutions
+ * - Rounding heuristics
+ *
+ * **Solution Validation:**
+ * - addPrimalSolutionCandidate(): Submit candidate point
+ * - checkPrimalSolutionCandidates(): Verify feasibility
+ * - checkPrimalSolutionPoint(): Full constraint check
+ *
+ * **Fixed-Integer NLP:**
+ * - addFixedNLPCandidate(): Queue NLP subproblem
+ * - hasFixedNLPCandidateBeenTested(): Avoid re-solving
+ *
+ * @see DualSolver.h for dual bound computation
+ * @see NLPSolver/ for backend NLP solvers (Ipopt)
+ */
 #pragma once
 #include "Environment.h"
 #include "Enums.h"

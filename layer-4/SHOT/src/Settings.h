@@ -7,7 +7,32 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Settings.h
+ * @brief Solver configuration and option management
+ *
+ * Hierarchical settings system for SHOT algorithm parameters.
+ *
+ * **Settings Categories:**
+ * - Termination: TimeLimit, IterationLimit, ObjectiveGap
+ * - Subsolver: MIP backend, NLP backend
+ * - Algorithm: Cut generation, reformulation options
+ * - Output: Verbosity, logging levels
+ *
+ * **Exception Classes:**
+ * - SettingKeyNotFoundException: Unknown setting key
+ * - SettingSetWrongTypeException: Type mismatch on set
+ * - SettingGetWrongTypeException: Type mismatch on get
+ *
+ * **Settings Types:**
+ * - E_SettingType: Integer, Double, String, Boolean, Enum
+ *
+ * **File Formats:**
+ * - OSoL XML format (Options Service Language)
+ * - Simple key=value format
+ *
+ * @see Solver.h for setOptionsFromFile/String methods
+ */
 #pragma once
 
 #include <memory>

@@ -7,7 +7,35 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Enums.h
+ * @brief Enumeration types for SHOT solver states and options
+ *
+ * Comprehensive enums for algorithm configuration and status tracking.
+ *
+ * **Problem Classification:**
+ * - E_Convexity: Linear, Convex, Concave, Nonconvex, Unknown
+ * - E_DualProblemClass: LP, QP, QCQP, MIP, MIQP, MIQCQP
+ *
+ * **Auxiliary Variable Types:**
+ * - E_AuxiliaryVariableType: NonlinearObjectiveFunction (epigraph),
+ *   BilinearTerms, MonomialPartitioning, etc.
+ *
+ * **Hyperplane Sources (E_HyperplaneSource):**
+ * - MIPOptimalRootsearch, MIPSolutionPoolRootsearch
+ * - LPRelaxedRootsearch, InteriorPointSearch
+ * - PrimalSolutionSearch, ObjectiveCuttingPlane
+ *
+ * **Event Types (E_EventType):**
+ * - NewPrimalSolution: New incumbent found
+ * - UserTerminationCheck: Allow user termination
+ *
+ * **Termination Reasons (E_TerminationReason):**
+ * - Optimal, ObjectiveGapTolerance, TimeLimit
+ * - IterationLimit, InfeasibleProblem, NoDualCutsAdded
+ *
+ * @see Solver.h for using these enums
+ */
 #pragma once
 
 namespace SHOT
