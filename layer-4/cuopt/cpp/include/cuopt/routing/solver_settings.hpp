@@ -14,7 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/**
+ * @file cuopt/routing/solver_settings.hpp
+ * @brief Configuration options for VRP solver behavior
+ *
+ * Controls solver runtime behavior and output options.
+ *
+ * **solver_settings_t Class:**
+ * - set_time_limit(): Maximum solving time in seconds
+ * - set_verbose_mode(): Enable internal progress output
+ * - set_error_logging_mode(): Log constraint violations
+ * - dump_best_results(): Write progress to CSV file
+ *
+ * **Time Limit Guidelines:**
+ * - Small problems (<100 locations): ~1 second
+ * - Large problems: num_locations/5 seconds default
+ * - More time → better solution quality
+ *
+ * @see cuopt/routing/solve.hpp for solver entry point
+ */
 #pragma once
 
 #include <cuopt/routing/routing_structures.hpp>

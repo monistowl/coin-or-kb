@@ -14,6 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @file cuopt/error.hpp
+ * @brief Error handling and exception types for cuOpt
+ *
+ * Defines error types and macros for cuOpt error handling.
+ *
+ * **Error Types (error_type_t):**
+ * - Success: Operation completed successfully
+ * - ValidationError: Input validation failed
+ * - OutOfMemoryError: GPU/CPU memory allocation failed
+ * - RuntimeError: General runtime error
+ *
+ * **Exception Class:**
+ * - logic_error: Exception with error_type_t classification
+ *
+ * **Macros:**
+ * - EXE_CUOPT_EXPECTS(cond, fmt, ...): Assert with formatted message
+ * - EXE_CUOPT_FAIL(fmt, ...): Unconditional failure
+ *
+ * @see cuopt/linear_programming/constants.h for error code constants
+ */
 #pragma once
 
 #include "cuopt/linear_programming/constants.h"

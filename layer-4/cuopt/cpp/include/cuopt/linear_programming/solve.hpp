@@ -14,7 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/**
+ * @file cuopt/linear_programming/solve.hpp
+ * @brief GPU-accelerated LP and MIP solving functions
+ *
+ * Main entry points for linear programming optimization on GPU.
+ *
+ * **LP Solving (PDLP):**
+ * - solve_lp(): GPU-accelerated first-order LP solver
+ * - Uses Primal-Dual Hybrid Gradient (PDHG) algorithm
+ * - Supports warm starting from previous solutions
+ *
+ * **MIP Solving:**
+ * - solve_mip(): Mixed-integer programming with GPU B&B
+ * - Branch-and-bound with LP relaxations
+ *
+ * **Input Formats:**
+ * - optimization_problem_t: Native cuOpt problem representation
+ * - mps_data_model_t: MPS file format parser output
+ *
+ * @see cuopt/linear_programming/optimization_problem.hpp for problem definition
+ * @see cuopt/linear_programming/pdlp/solver_settings.hpp for LP settings
+ * @see cuopt/linear_programming/mip/solver_settings.hpp for MIP settings
+ */
 #pragma once
 
 #include <cuopt/linear_programming/mip/solver_settings.hpp>

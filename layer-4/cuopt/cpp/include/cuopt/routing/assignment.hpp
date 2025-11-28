@@ -14,7 +14,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/**
+ * @file cuopt/routing/assignment.hpp
+ * @brief VRP solution output container with routes and timing
+ *
+ * Container for Vehicle Routing Problem solver output.
+ *
+ * **assignment_t Class:**
+ * - Optimized routes stored in GPU device memory
+ * - Arrival times, truck assignments, node types
+ * - Objective values and solution status
+ *
+ * **Solution Data:**
+ * - get_route(): Ordered sequence of node IDs
+ * - get_truck_id(): Vehicle assignment per stop
+ * - get_arrival_stamp(): Arrival time at each stop
+ * - get_unserviced_nodes(): Orders not serviced (if any)
+ *
+ * **Solution Status (solution_status_t):**
+ * - SUCCESS: Feasible solution found
+ * - INFEASIBLE: No feasible solution exists
+ * - TIMEOUT: Time limit reached
+ * - EMPTY: Solver did not run
+ * - ERROR: Runtime error occurred
+ *
+ * **host_assignment_t:**
+ * - Host-side copy for CPU access
+ * - std::vector storage for routes and stamps
+ *
+ * @see cuopt/routing/solve.hpp for generating solutions
+ * @see cuopt/routing/data_model_view.hpp for problem input
+ */
 #pragma once
 
 #include <cuopt/error.hpp>

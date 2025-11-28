@@ -14,7 +14,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/**
+ * @file cuopt/routing/routing_structures.hpp
+ * @brief Core data structures for VRP problem specification
+ *
+ * Enums and helper classes for VRP constraint modeling.
+ *
+ * **Objective Types (objective_t):**
+ * - COST: Total route cost from cost matrix
+ * - TRAVEL_TIME: Total driving time (excluding waits)
+ * - VARIANCE_ROUTE_SIZE: Balance route lengths
+ * - VARIANCE_ROUTE_SERVICE_TIME: Balance service times
+ * - PRIZE: Sum of collected order prizes
+ * - VEHICLE_FIXED_COST: Per-vehicle usage cost
+ *
+ * **Node Types (node_type_t):**
+ * - DEPOT: Start/end location for vehicles
+ * - PICKUP: Pickup location for PDP
+ * - DELIVERY: Delivery location for PDP
+ * - BREAK: Driver break location
+ *
+ * **Internal Detail Classes:**
+ * - break_dimension_t: Uniform break constraints
+ * - vehicle_break_t: Per-vehicle break constraints
+ * - capacity_t: Capacity dimension (demand/capacity pair)
+ * - order_time_window_t: Time window bounds
+ * - vehicle_time_window_t: Vehicle availability bounds
+ *
+ * @see cuopt/routing/data_model_view.hpp for using these structures
+ */
 #pragma once
 
 #include <raft/core/device_span.hpp>

@@ -14,7 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/**
+ * @file cuopt/routing/solve.hpp
+ * @brief GPU-accelerated Vehicle Routing Problem (VRP) solver entry point
+ *
+ * Main solve function for vehicle routing optimization on GPU.
+ *
+ * **solve() Function:**
+ * - Takes data_model_view_t (problem) and solver_settings_t (config)
+ * - Returns assignment_t with optimized routes
+ *
+ * **Supported VRP Variants:**
+ * - CVRP: Capacitated VRP with vehicle capacity constraints
+ * - VRPTW: VRP with time windows at customer locations
+ * - VRPPD: VRP with pickup and delivery pairs
+ * - Heterogeneous fleet: Different vehicle types/costs
+ * - Multi-depot: Multiple start/return locations
+ *
+ * **Algorithm:**
+ * - Genetic algorithm with GPU-parallel population
+ * - EAX/SREX crossover operators
+ * - Local search refinement
+ *
+ * @see cuopt/routing/data_model_view.hpp for problem input
+ * @see cuopt/routing/solver_settings.hpp for configuration
+ * @see cuopt/routing/assignment.hpp for solution output
+ */
 #pragma once
 
 #include <cuopt/routing/assignment.hpp>

@@ -14,7 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/**
+ * @file cuopt/logger.hpp
+ * @brief Logging infrastructure for cuOpt based on rapids_logger
+ *
+ * Provides configurable logging for cuOpt operations.
+ *
+ * **Configuration:**
+ * - CUOPT_DEBUG_LOG_FILE env var: Log to file instead of stderr
+ * - Log levels: trace, debug, info, warn, error, critical
+ *
+ * **Functions:**
+ * - default_logger(): Get/create the global cuOpt logger
+ * - reset_default_logger(): Reset to default configuration
+ * - default_sink(): Get file or stderr sink
+ * - default_pattern(): Timestamp format string
+ *
+ * @see cuopt/logger_macros.hpp for logging macros
+ */
 #pragma once
 
 #include <cuopt/logger_macros.hpp>

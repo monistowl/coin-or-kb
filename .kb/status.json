@@ -1033,9 +1033,42 @@
           "pass2_complete": false
         },
         "cuopt": {
-          "status": "not_started",
+          "status": "pass1_in_progress",
           "pass1_complete": false,
-          "pass2_complete": false
+          "pass2_complete": false,
+          "files_total": 149,
+          "files_pass1": 11,
+          "notes": "Pass 1 in progress. NVIDIA GPU-accelerated optimization. Excellent existing inline docs. Added @file headers to public API.",
+          "key_subsystems_documented": [
+            "Error handling: error.hpp (error_type_t, logic_error, macros)",
+            "Logging: logger.hpp (rapids_logger integration)",
+            "LP Solver: solve.hpp, optimization_problem.hpp, pdlp/solver_settings.hpp",
+            "MIP Solver: mip/solver_settings.hpp",
+            "VRP Solver: routing/solve.hpp, data_model_view.hpp, assignment.hpp",
+            "VRP Config: routing/solver_settings.hpp, routing_structures.hpp"
+          ],
+          "key_concepts_documented": [
+            "GPU-resident optimization via rmm::device_uvector",
+            "PDLP (Primal-Dual Hybrid Gradient) first-order LP solver",
+            "MIP with GPU branch-and-bound and recombination heuristics",
+            "VRP genetic algorithm with EAX/SREX crossover",
+            "Heterogeneous fleet support (multiple vehicle types/cost matrices)",
+            "Constraint types: capacity, time windows, pickup-delivery, breaks"
+          ],
+          "pass1_files_annotated": [
+            "include/cuopt/error.hpp",
+            "include/cuopt/logger.hpp",
+            "include/cuopt/linear_programming/solve.hpp",
+            "include/cuopt/linear_programming/optimization_problem.hpp",
+            "include/cuopt/linear_programming/mip/solver_settings.hpp",
+            "include/cuopt/linear_programming/pdlp/solver_settings.hpp",
+            "include/cuopt/routing/solve.hpp",
+            "include/cuopt/routing/data_model_view.hpp",
+            "include/cuopt/routing/assignment.hpp",
+            "include/cuopt/routing/solver_settings.hpp",
+            "include/cuopt/routing/routing_structures.hpp"
+          ],
+          "last_updated": "2025-11-28"
         }
       }
     }

@@ -14,7 +14,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/**
+ * @file cuopt/linear_programming/optimization_problem.hpp
+ * @brief GPU-resident linear/integer programming problem representation
+ *
+ * Container for LP/MIP optimization problems stored in GPU memory.
+ *
+ * **optimization_problem_t Class:**
+ * - Represents: min/max c'x s.t. Ax ≤/=/≥ b, l ≤ x ≤ u
+ * - Constraint matrix A in CSR (Compressed Sparse Row) format
+ * - GPU device memory via rmm::device_uvector
+ *
+ * **Problem Components:**
+ * - set_csr_constraint_matrix(): Sparse constraint matrix
+ * - set_constraint_bounds(): RHS values (b)
+ * - set_objective_coefficients(): Cost vector (c)
+ * - set_variable_lower/upper_bounds(): Variable bounds
+ * - set_variable_types(): CONTINUOUS or INTEGER
+ *
+ * **Variable Types:**
+ * - var_t::CONTINUOUS: Real-valued variable
+ * - var_t::INTEGER: Integer-valued variable
+ *
+ * **Problem Categories:**
+ * - LP: All continuous variables
+ * - MIP: Mixed integer and continuous
+ * - IP: All integer variables
+ *
+ * @see cuopt/linear_programming/solve.hpp for solve functions
+ */
 #pragma once
 
 #include <cuopt/linear_programming/pdlp/pdlp_warm_start_data.hpp>

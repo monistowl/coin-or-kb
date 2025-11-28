@@ -14,7 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/**
+ * @file cuopt/routing/data_model_view.hpp
+ * @brief VRP problem definition via non-owning GPU memory views
+ *
+ * Container for Vehicle Routing Problem input data.
+ *
+ * **data_model_view_t Class:**
+ * - Non-owning views to GPU memory for routing problem data
+ * - Supports heterogeneous fleet with multiple vehicle types
+ * - Configurable constraints and objectives
+ *
+ * **Cost/Time Matrices:**
+ * - add_cost_matrix(): Travel cost between locations
+ * - add_transit_time_matrix(): Travel time for constraint checking
+ * - Multiple matrices for heterogeneous fleet
+ *
+ * **Constraints:**
+ * - add_capacity_dimension(): Vehicle capacity limits (CVRP)
+ * - set_order_time_windows(): Delivery time windows (VRPTW)
+ * - set_pickup_delivery_pairs(): PDP pickup-before-delivery
+ * - add_order_precedence(): Order sequencing constraints
+ * - set_vehicle_time_windows(): Vehicle availability windows
+ * - add_vehicle_break(): Required driver breaks
+ *
+ * **Fleet Configuration:**
+ * - set_vehicle_locations(): Start/return depot per vehicle
+ * - set_vehicle_types(): Vehicle type identifiers
+ * - set_drop_return_trips(): Open-ended routes
+ * - add_vehicle_order_match(): Vehicle-order compatibility
+ *
+ * @see cuopt/routing/solve.hpp for solving
+ * @see cuopt/routing/assignment.hpp for solution output
+ */
 #pragma once
 
 #include <cuopt/routing/routing_structures.hpp>
