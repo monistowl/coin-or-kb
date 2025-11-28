@@ -7,7 +7,38 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file NLPSolver/NLPSolverIpoptBase.h
+ * @brief Ipopt implementation of INLPSolver interface
+ *
+ * Provides NLP solving for SHOT's primal problem using Ipopt interior point.
+ *
+ * **IpoptProblem Class (Ipopt::TNLP):**
+ * - Implements Ipopt's TNLP interface
+ * - Provides callbacks for function/gradient/Hessian evaluation
+ * - Sparse Jacobian/Hessian via index placement maps
+ *
+ * **TNLP Callbacks:**
+ * - get_nlp_info(): Problem dimensions and sparsity
+ * - get_bounds_info(): Variable and constraint bounds
+ * - eval_f(): Objective function value
+ * - eval_grad_f(): Objective gradient
+ * - eval_g(): Constraint function values
+ * - eval_jac_g(): Constraint Jacobian (sparse)
+ * - eval_h(): Lagrangian Hessian (sparse)
+ * - finalize_solution(): Store optimal point
+ *
+ * **NLPSolverIpoptBase Class:**
+ * - Wraps IpoptApplication for solve control
+ * - Variable fixing for integer-fixed NLP subproblems
+ * - Starting point management
+ *
+ * **IpoptJournal:**
+ * - Routes Ipopt output through SHOT logging system
+ *
+ * @note Used for fixed-integer NLP subproblems in primal bound computation
+ * @see PrimalSolver.h for NLP subproblem dispatch
+ */
 #pragma once
 #include "NLPSolverBase.h"
 

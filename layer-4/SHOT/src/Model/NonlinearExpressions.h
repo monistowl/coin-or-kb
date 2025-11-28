@@ -10,7 +10,41 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Model/NonlinearExpressions.h
+ * @brief Expression tree nodes for nonlinear functions
+ *
+ * DAG-based representation of nonlinear expressions with convexity analysis.
+ *
+ * **E_NonlinearExpressionTypes:**
+ * - Constant, Variable: Leaf nodes
+ * - Unary: Negate, Invert, SquareRoot, Log, Exp, Square, Sin, Cos, etc.
+ * - Binary: Divide, Power
+ * - N-ary: Sum, Product
+ *
+ * **NonlinearExpression Base Class:**
+ * - calculate(point): Evaluate at numeric point
+ * - calculate(intervals): Interval arithmetic evaluation
+ * - getFactorableFunction(): CppAD automatic differentiation
+ * - getConvexity(): Analyze convexity via composition rules
+ * - getMonotonicity(): Analyze monotonicity
+ * - tightenBounds(): FBBT bound propagation
+ *
+ * **Expression Subclasses:**
+ * - ExpressionConstant, ExpressionVariable
+ * - ExpressionNegate, ExpressionSquare, ExpressionSquareRoot
+ * - ExpressionLog, ExpressionExp
+ * - ExpressionSin, ExpressionCos
+ * - ExpressionSum, ExpressionProduct
+ * - ExpressionDivide, ExpressionPower
+ *
+ * **Convexity Rules:**
+ * - Based on composition theorems (e.g., convex ∘ nondecreasing convex = convex)
+ * - Interval bounds inform sign-dependent rules
+ *
+ * @note Convexity analysis influenced by SUSPECT library
+ * @see Constraints.h for expressions in constraints
+ */
 #pragma once
 #include "../Enums.h"
 #include "Variables.h"

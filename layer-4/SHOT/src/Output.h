@@ -7,7 +7,33 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Output.h
+ * @brief Logging infrastructure using spdlog
+ *
+ * Centralized logging with console and file sinks.
+ *
+ * **Output Class:**
+ * - outputCritical/Error/Warning/Info/Debug/Trace(): Log methods
+ * - setLogLevels(): Configure console and file verbosity
+ * - setConsoleSink(): Custom console output
+ * - setFileSink(): Enable file logging
+ *
+ * **E_LogLevel (Enums.h):**
+ * - Off, Critical, Error, Warning, Info, Debug, Trace
+ *
+ * **OutputStream Class:**
+ * - std::ostream wrapper for solver output redirection
+ * - Routes external solver output through SHOT logging
+ * - Used by CPLEX, Gurobi, Ipopt adapters
+ *
+ * **Implementation:**
+ * - Uses spdlog library for fast, thread-safe logging
+ * - consoleSink: stdout sink
+ * - fileSink: basic_file_sink for persistence
+ *
+ * @see Environment.h for Output access
+ */
 #pragma once
 #include "Enums.h"
 #include "Structs.h"

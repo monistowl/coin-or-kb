@@ -7,7 +7,36 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file MIPSolver/MIPSolverCbc.h
+ * @brief COIN-OR Cbc implementation of IMIPSolver interface
+ *
+ * Provides open-source MIP solving using Cbc branch-and-cut solver.
+ *
+ * **MIPSolverCbc Class:**
+ * - Implements IMIPSolver interface
+ * - Uses OsiClpSolverInterface for LP subproblems
+ * - CbcModel for branch-and-cut
+ * - CoinModel for problem construction
+ *
+ * **Key Data Structures:**
+ * - osiInterface: OSI LP solver (Clp)
+ * - cbcModel: MIP solver model
+ * - coinModel: Problem builder
+ * - objectiveLinearExpression: CoinPackedVector
+ *
+ * **CbcMessageHandler:**
+ * - Custom message handler for SHOT logging
+ * - Routes Cbc output through SHOT's Output system
+ *
+ * **Limitations:**
+ * - supportsQuadraticObjective(): No
+ * - supportsQuadraticConstraints(): No
+ * - LP/MIP only (no MIQP/QCQP)
+ *
+ * @note Default open-source MIP solver, no license required
+ * @see Cbc branch-and-cut library
+ */
 #pragma once
 #include "MIPSolverBase.h"
 

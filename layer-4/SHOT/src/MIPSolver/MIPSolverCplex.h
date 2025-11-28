@@ -7,7 +7,34 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file MIPSolver/MIPSolverCplex.h
+ * @brief IBM CPLEX implementation of IMIPSolver interface
+ *
+ * Provides MIP solving for SHOT's dual problem using CPLEX Concert API.
+ *
+ * **MIPSolverCplex Class:**
+ * - Implements full IMIPSolver interface
+ * - Uses IloModel, IloCplex for problem representation
+ * - Supports LP, MIP, QP, MIQP, QCQP problem types
+ *
+ * **Key Data Structures:**
+ * - cplexModel: IloModel for optimization model
+ * - cplexInstance: IloCplex solver instance
+ * - cplexVars: Variable array
+ * - cplexConstrs: Constraint array
+ *
+ * **Quadratic Support:**
+ * - supportsQuadraticObjective(): Yes
+ * - supportsQuadraticConstraints(): Yes (QCQP)
+ *
+ * **UserTerminationCallbackI:**
+ * - MIP info callback for user termination
+ * - Allows early termination on events
+ *
+ * @note Requires CPLEX Concert Technology headers
+ * @see MIPSolverCplexSingleTree for lazy constraint callback
+ */
 #pragma once
 #include "MIPSolverBase.h"
 #include "MIPSolverCallbackBase.h"

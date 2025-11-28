@@ -7,7 +7,33 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file MIPSolver/MIPSolverGurobi.h
+ * @brief Gurobi implementation of IMIPSolver interface
+ *
+ * Provides MIP solving for SHOT's dual problem using Gurobi C++ API.
+ *
+ * **MIPSolverGurobi Class:**
+ * - Implements full IMIPSolver interface
+ * - Uses GRBModel for problem representation
+ * - Supports LP, MIP, QP, MIQP, QCQP problem types
+ *
+ * **Key Data Structures:**
+ * - gurobiModel: Shared GRBModel pointer
+ * - objectiveLinearExpression, objectiveQuadraticExpression
+ * - constraintLinearExpression, constraintQuadraticExpression
+ *
+ * **GurobiCallbackMultiTree:**
+ * - GRBCallback for multi-tree algorithm
+ * - Handles termination checks during solve
+ *
+ * **Quadratic Support:**
+ * - supportsQuadraticObjective(): Yes
+ * - supportsQuadraticConstraints(): Yes (QCQP)
+ *
+ * @note Requires Gurobi C++ headers
+ * @see MIPSolverGurobSingleTree for lazy constraint callback
+ */
 #pragma once
 #include "MIPSolverBase.h"
 #include "MIPSolverCallbackBase.h"

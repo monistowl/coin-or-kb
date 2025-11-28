@@ -1002,8 +1002,8 @@
           "pass1_complete": false,
           "pass2_complete": false,
           "files_total": 105,
-          "files_pass1": 23,
-          "notes": "Pass 1 in progress (~22%). Convex MINLP solver using Extended Supporting Hyperplane (ESH) method.",
+          "files_pass1": 31,
+          "notes": "Pass 1 in progress (~30%). Convex MINLP solver using Extended Supporting Hyperplane (ESH) method.",
           "key_subsystems_documented": [
             "Main interface: Solver.h (problem loading, solving, results)",
             "Environment: Environment.h (shared state container)",
