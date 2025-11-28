@@ -7,7 +7,30 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Timing.h
+ * @brief Named timer registry for profiling solver phases
+ *
+ * Collection of named timers for performance analysis.
+ *
+ * **Timing Class:**
+ * - createTimer(): Register new timer with name/description
+ * - startTimer()/stopTimer(): Control by name
+ * - getElapsedTime(): Query accumulated time
+ *
+ * **Typical Timers:**
+ * - "Total": Overall solve time
+ * - "DualMIP": MIP solver calls
+ * - "PrimalNLP": NLP subproblem solves
+ * - "Reformulation": Problem transformation
+ *
+ * **Thread Safety:**
+ * - Timers are not thread-safe
+ * - Use in single-threaded solver context
+ *
+ * @see Timer.h for individual timer class
+ * @see Environment.h for accessing via env->timing
+ */
 #pragma once
 #include "Environment.h"
 #include "Timer.h"

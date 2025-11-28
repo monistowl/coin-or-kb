@@ -7,7 +7,27 @@
     This software is licensed under the Eclipse Public License 2.0.
     Please see the README and LICENSE files for more information.
  */
-
+/**
+ * @file NLPSolver/NLPSolverCuttingPlaneMinimax.h
+ * @brief Cutting-plane solver for minimax LP problems
+ *
+ * Built-in LP-based solver for simple minimax problems.
+ *
+ * **NLPSolverCuttingPlaneMinimax Class:**
+ * - Uses MIP solver (CPLEX/Gurobi/Cbc) as LP engine
+ * - Iteratively adds cutting planes
+ * - No external NLP solver dependency
+ *
+ * **Minimax Problem Form:**
+ * - min t
+ * - s.t. f_i(x) <= t for all i
+ *
+ * **Use Case:**
+ * - Finding interior points when Ipopt unavailable
+ * - Solving auxiliary minimax subproblems
+ *
+ * @algorithm Iterative cutting plane for convex minimax
+ */
 #pragma once
 
 #include "NLPSolverBase.h"

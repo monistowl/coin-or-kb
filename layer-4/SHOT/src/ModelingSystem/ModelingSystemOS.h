@@ -7,7 +7,33 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file ModelingSystem/ModelingSystemOS.h
+ * @brief Optimization Services library integration
+ *
+ * Full OS library integration for OSiL and AMPL files.
+ *
+ * **ModelingSystemOS Class:**
+ * - createProblem(filename, format): Read OSiL or nl files
+ * - createProblem(OSInstance): Use existing OS instance
+ * - finalizeSolution(): Generate OSrL output
+ *
+ * **File Formats:**
+ * - E_OSInputFileFormat::OSiL: XML format
+ * - E_OSInputFileFormat::Ampl: nl binary via OSnl2OS
+ *
+ * **OS Library Classes:**
+ * - OSiLReader: Parse OSiL XML
+ * - OSInstance: In-memory problem representation
+ * - OSnl2OS: Convert nl to OSInstance
+ * - OSnLNode: Nonlinear expression tree nodes
+ *
+ * **Expression Conversion:**
+ * - convertOSNonlinearNode(): OSnLNode to SHOT expression
+ * - Preserves convexity annotations if available
+ *
+ * @note Uses COIN-OR OS library (github.com/coin-or/OS)
+ */
 #pragma once
 #include "IModelingSystem.h"
 

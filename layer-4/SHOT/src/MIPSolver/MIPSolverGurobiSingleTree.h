@@ -7,7 +7,28 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file MIPSolver/MIPSolverGurobiSingleTree.h
+ * @brief Gurobi with lazy constraint callback for single-tree ESH
+ *
+ * Extends MIPSolverGurobi with callback-based cut generation.
+ *
+ * **GurobiCallbackSingleTree Class:**
+ * - Inherits GRBCallback + MIPSolverCallbackBase
+ * - callback(): Called at candidate solution points
+ * - createHyperplane()/createIntegerCut(): Add lazy constraints
+ * - addLazyConstraint(): Generate ESH cuts from solution
+ *
+ * **MIPSolverGurobiSingleTree Class:**
+ * - solveProblem(): Single MIP solve with callbacks enabled
+ * - isCallbackInitialized: Track callback registration
+ *
+ * **Node Information:**
+ * - lastExploredNodes/lastOpenNodes: B&B tree progress
+ * - Used for iteration reporting within callback
+ *
+ * @see SolutionStrategySingleTree.h for algorithm context
+ */
 #pragma once
 #include "MIPSolverBase.h"
 #include "MIPSolverGurobi.h"

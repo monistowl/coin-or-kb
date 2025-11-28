@@ -7,7 +7,30 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Timer.h
+ * @brief High-resolution stopwatch for performance measurement
+ *
+ * Lightweight timer using std::chrono::high_resolution_clock.
+ *
+ * **Timer Class:**
+ * - start()/stop(): Pause/resume timing
+ * - restart(): Reset to zero and start
+ * - elapsed(): Get cumulative time in seconds
+ *
+ * **Properties:**
+ * - name: Timer identifier (for Timing registry)
+ * - description: Human-readable label
+ *
+ * **Usage:**
+ * Timer t("SolveMIP", "MIP solver time");
+ * t.start();
+ * // ... computation ...
+ * t.stop();
+ * double seconds = t.elapsed();
+ *
+ * @see Timing.h for timer registry
+ */
 #pragma once
 #include <chrono>
 #include <string>

@@ -8,7 +8,34 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Model/Simplifications.h
+ * @brief Expression tree simplification and term extraction
+ *
+ * Algebraic simplification and structured term extraction.
+ *
+ * **Simplification Functions:**
+ * - simplify(): Recursive expression simplification
+ * - simplifyExpression(ExprType): Type-specific handlers
+ * - Constant folding, negation cancellation, identity removal
+ *
+ * **Term Extraction:**
+ * - extractTermsAndConstant(): Decompose expression into:
+ *   LinearTerms, QuadraticTerms, MonomialTerms, SignomialTerms,
+ *   NonlinearExpression remainder, and constant
+ *
+ * **Conversion Functions:**
+ * - convertProductToLinearTerm/QuadraticTerm/MonomialTerm()
+ * - convertPowerToLinearTerm/QuadraticTerm()
+ * - convertToSignomialTerm(): Extract signomial structure
+ *
+ * **Use Case:**
+ * - Problem reformulation for better convexity analysis
+ * - Extract quadratics for QCQP solvers
+ * - Identify linear/quadratic substructure in NLP
+ *
+ * @see NonlinearExpressions.h for expression tree nodes
+ */
 #pragma once
 #include "../Environment.h"
 #include "../Enums.h"

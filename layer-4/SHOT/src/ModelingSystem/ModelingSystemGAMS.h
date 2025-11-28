@@ -8,7 +8,33 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file ModelingSystem/ModelingSystemGAMS.h
+ * @brief GAMS interface for optimization problem input
+ *
+ * Reads GAMS models via GMO/GEV API.
+ *
+ * **ModelingSystemGAMS Class:**
+ * - setModelingObject(): Accept gmoHandle_t from GAMS
+ * - createProblem(): Convert GMO model to SHOT Problem
+ * - finalizeSolution(): Return solution to GAMS
+ *
+ * **GAMS Integration:**
+ * - gmoHandle_t: GAMS Model Object (GMO)
+ * - gevHandle_t: GAMS Environment (GEV)
+ * - palHandle_t: GAMS Audit Licensing (PAL)
+ *
+ * **Model Conversion:**
+ * - copyVariables/Constraints/ObjectiveFunction()
+ * - parseGamsInstructions(): Bytecode to expression conversion
+ *
+ * **GamsOutputSink:**
+ * - spdlog sink routing to GAMS log
+ * - gevLogPChar() for normal messages
+ * - gevLogStatPChar() for warnings/errors
+ *
+ * @see GMO API documentation (gams.com)
+ */
 #pragma once
 #include "IModelingSystem.h"
 

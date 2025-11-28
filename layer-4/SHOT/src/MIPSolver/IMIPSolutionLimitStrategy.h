@@ -7,7 +7,29 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file MIPSolver/IMIPSolutionLimitStrategy.h
+ * @brief Interface for MIP solution pool limit strategies
+ *
+ * Controls how many solutions MIP solver collects per iteration.
+ *
+ * **IMIPSolutionLimitStrategy Interface:**
+ * - updateLimit(): Adjust limit based on progress
+ * - getNewLimit(): Current solution limit value
+ * - getInitialLimit(): Starting limit
+ *
+ * **Implementations:**
+ * - MIPSolutionLimitStrategyIncrease: Grow limit over time
+ * - MIPSolutionLimitStrategyUnlimited: No limit
+ * - MIPSolutionLimitStrategyAdaptive: Adjust based on gap
+ *
+ * **Purpose:**
+ * - Balance cut generation vs solver time per iteration
+ * - More solutions = more hyperplane generation points
+ * - Fewer solutions = faster MIP solves
+ *
+ * @see TaskExecuteSolutionLimitStrategy for strategy execution
+ */
 #pragma once
 #include "../Environment.h"
 

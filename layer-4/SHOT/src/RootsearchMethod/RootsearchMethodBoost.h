@@ -7,7 +7,29 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file RootsearchMethod/RootsearchMethodBoost.h
+ * @brief Boost.Math rootfinding for constraint boundaries
+ *
+ * Finds constraint boundary points using TOMS 748 or bisection.
+ *
+ * **RootsearchMethodBoost Class:**
+ * - findZero(ptA, ptB, constraints): Find boundary between points
+ * - findZero(pt, objLB, objUB, objective): Objective rootsearch
+ *
+ * **Helper Classes:**
+ * - Test: Functor for constraint max-violation evaluation
+ * - TestObjective: Functor for objective function evaluation
+ * - TerminationCondition: Convergence criterion
+ *
+ * **Algorithm:**
+ * - TOMS 748: Optimal bracketing algorithm (4th order)
+ * - Bisection: Fallback for difficult cases
+ * - Returns boundary point for hyperplane generation
+ *
+ * @see IRootsearchMethod.h for interface contract
+ * @see Boost.Math TOMS 748 documentation
+ */
 #pragma once
 #include "IRootsearchMethod.h"
 #include "../Environment.h"

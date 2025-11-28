@@ -7,7 +7,32 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Report.h
+ * @brief Formatted console output for solver progress
+ *
+ * Generates iteration tables and summary reports.
+ *
+ * **Report Class:**
+ * - outputSolverHeader(): Version and license info
+ * - outputOptionsReport(): Active settings summary
+ * - outputProblemInstanceReport(): Problem statistics
+ *
+ * **Iteration Reporting:**
+ * - outputIterationDetailHeader(): Column headers
+ * - outputIterationDetail(): Per-iteration progress line
+ * - Shows: iteration, time, cuts, bounds, gap
+ *
+ * **Solution Reporting:**
+ * - outputSolutionReport(): Final summary
+ * - outputPrimalSolutionDetailedReport(): Full solution
+ *
+ * **Output Control:**
+ * - Tracks last values to avoid redundant output
+ * - Respects ES_IterationOutputDetail setting
+ *
+ * @see Output.h for underlying logging
+ */
 #pragma once
 #include "Environment.h"
 #include "Enums.h"

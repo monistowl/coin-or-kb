@@ -7,7 +7,29 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file NLPSolver/NLPSolverGAMS.h
+ * @brief GAMS-based NLP solver for fixed-integer subproblems
+ *
+ * Uses GAMS modeling system to call NLP solvers.
+ *
+ * **NLPSolverGAMS Class:**
+ * - Uses gmoHandle_t from GAMS modeling system
+ * - Calls user-selected NLP solver (CONOPT, IPOPT, etc.)
+ * - Manages variable bounds and starting points
+ *
+ * **GAMS Handles:**
+ * - modelingObject: GMO for problem data
+ * - modelingEnvironment: GEV for GAMS environment
+ *
+ * **Solver Configuration:**
+ * - nlpsolver: Solver name (e.g., "CONOPT", "IPOPT")
+ * - timelimit, iterlimit: Resource limits
+ * - solvelink: Execution mode
+ *
+ * @note Requires GAMS license for commercial NLP solvers
+ * @see ModelingSystemGAMS.h for GAMS input processing
+ */
 #pragma once
 #include "NLPSolverBase.h"
 

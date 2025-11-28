@@ -7,7 +7,26 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file MIPSolver/MIPSolverCallbackBase.h
+ * @brief Shared logic for single-tree callback handlers
+ *
+ * Base class for CPLEX and Gurobi callback implementations.
+ *
+ * **MIPSolverCallbackBase Class:**
+ * - addLazyConstraint(): Generate and add ESH cuts
+ * - checkFixedNLPStrategy(): Decide if NLP should be called
+ * - checkIterationLimit()/checkUserTermination(): Termination checks
+ * - printIterationReport(): Console output in callback
+ *
+ * **Task Objects:**
+ * - taskSelectPrimNLPOriginal/Reformulated: Fixed-integer NLP
+ * - taskSelectHPPts: ESH/ECP hyperplane selection
+ * - taskSelectPrimalSolutionFromRootsearch: Rootsearch primal
+ * - tUpdateInteriorPoint: Interior point maintenance
+ *
+ * @see MIPSolverCplexSingleTree.h, MIPSolverGurobiSingleTree.h
+ */
 #pragma once
 
 #include "../Environment.h"

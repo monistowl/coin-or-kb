@@ -7,7 +7,28 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file ModelingSystem/ModelingSystemAMPL.h
+ * @brief AMPL nl-file format reader for optimization problems
+ *
+ * Reads AMPL .nl (nonlinear) binary problem files.
+ *
+ * **ModelingSystemAMPL Class:**
+ * - createProblem(): Parse .nl file into Problem
+ * - augmentSettings(): Add AMPL-specific options
+ * - finalizeSolution(): Write .sol solution file
+ *
+ * **AMPL nl Format:**
+ * - Binary format for optimization instances
+ * - Contains variables, bounds, constraints, expressions
+ * - Used by AMPL-compatible solvers
+ *
+ * **Usage:**
+ * - Standalone: SHOT problem.nl
+ * - Via AMPL: option solver shot; solve;
+ *
+ * @see ASL (AMPL Solver Library) for nl format details
+ */
 #pragma once
 #include "IModelingSystem.h"
 

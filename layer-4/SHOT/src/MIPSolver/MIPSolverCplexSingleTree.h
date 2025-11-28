@@ -7,7 +7,28 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file MIPSolver/MIPSolverCplexSingleTree.h
+ * @brief CPLEX with lazy constraint callback for single-tree ESH
+ *
+ * Extends MIPSolverCplex with callback-based cut generation.
+ *
+ * **MIPSolverCplexSingleTree Class:**
+ * - solveProblem(): Single MIP solve with callbacks enabled
+ * - Uses generic callback API (Context-based)
+ *
+ * **CplexCallback Class:**
+ * - Inherits IloCplex::Callback::Function + MIPSolverCallbackBase
+ * - invoke(): Called at candidate solution points
+ * - createHyperplane()/createIntegerCut(): Add lazy constraints
+ * - addLazyConstraint(): Generate ESH cuts from solution
+ *
+ * **Threading:**
+ * - callbackMutex: Protect shared state in multi-threaded solve
+ * - CPLEX invokes callbacks from multiple threads
+ *
+ * @see SolutionStrategySingleTree.h for algorithm context
+ */
 #pragma once
 #include "MIPSolverCplex.h"
 #include "MIPSolverCallbackBase.h"

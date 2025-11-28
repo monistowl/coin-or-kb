@@ -7,7 +7,29 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file ModelingSystem/ModelingSystemOSiL.h
+ * @brief OSiL XML format reader for optimization problems
+ *
+ * Reads Optimization Services instance Language (OSiL) files.
+ *
+ * **ModelingSystemOSiL Class:**
+ * - createProblem(): Parse OSiL XML into Problem
+ * - augmentSettings(): Add OSiL-specific options
+ * - finalizeSolution(): Write OSrL result format
+ *
+ * **OSiL Format:**
+ * - XML-based optimization instance representation
+ * - <instanceData> contains variables, objectives, constraints
+ * - <nonlinearExpressions> for NLP terms (OSnL format)
+ *
+ * **XML Parsing:**
+ * - Uses tinyxml2 for XML processing
+ * - convertNonlinearNode(): OSnL to SHOT expression conversion
+ *
+ * @note OSiL is part of COIN-OR Optimization Services
+ * @see ModelingSystemOS.h for OS library integration
+ */
 #pragma once
 #include "IModelingSystem.h"
 

@@ -7,7 +7,30 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Model/AuxiliaryVariables.h
+ * @brief Variables introduced during problem reformulation
+ *
+ * Variables created to linearize or convexify expressions.
+ *
+ * **AuxiliaryVariable Class:**
+ * - Extends Variable with expression components
+ * - calculate(): Evaluate auxiliary from original variables
+ * - Properties: constant, linear/quadratic/monomial/signomial terms
+ *
+ * **Auxiliary Variable Types (E_AuxiliaryVariableType):**
+ * - NonlinearObjectiveFunction: Epigraph reformulation
+ * - BilinearTerms: McCormick relaxation variables
+ * - MonomialPartitioning: Product term linearization
+ * - EigenvalueDecomposition: Convexification variables
+ *
+ * **AuxiliaryVariables Collection:**
+ * - Vector of AuxiliaryVariablePtr with Problem ownership
+ * - sortByIndex(): Order by variable index
+ *
+ * @see Variables.h for base Variable class
+ * @see Problem.h for reformulated problem usage
+ */
 #pragma once
 
 #include "../Structs.h"

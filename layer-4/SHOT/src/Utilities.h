@@ -7,7 +7,36 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Utilities.h
+ * @brief Helper functions for vectors, hashing, and I/O
+ *
+ * Standalone utility functions in SHOT::Utilities namespace.
+ *
+ * **Vector Operations:**
+ * - L2Norm(): Euclidean distance between points
+ * - calculateCenterPoint(): Centroid of point set
+ * - displayVector(): Debug output for vectors
+ *
+ * **Hashing:**
+ * - calculateHash(): Hash function for duplicate detection
+ * - Used by hyperplane/integer cut deduplication
+ *
+ * **File I/O:**
+ * - writeStringToFile(), getFileAsString()
+ * - saveVariablePointVectorToFile(): Solution output
+ *
+ * **Numeric:**
+ * - isAlmostEqual(), isAlmostZero(): Tolerance comparisons
+ * - isInteger(): Check for integer values
+ *
+ * **Sparse Containers:**
+ * - SparseVariableVector: Variable→coefficient map
+ * - SparseVariableMatrix: (Variable,Variable)→coefficient
+ * - combineSparseVariable*(): Merge operations
+ *
+ * @see Structs.h for type definitions
+ */
 #pragma once
 
 #include <map>

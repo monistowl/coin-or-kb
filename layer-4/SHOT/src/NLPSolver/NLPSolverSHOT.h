@@ -7,7 +7,28 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file NLPSolver/NLPSolverSHOT.h
+ * @brief SHOT as NLP solver for convex subproblems
+ *
+ * Recursive use of SHOT to solve fixed-integer NLP.
+ *
+ * **NLPSolverSHOT Class:**
+ * - Creates nested SHOT solver instance
+ * - Solves convex NLP after fixing integer variables
+ * - Useful when Ipopt is unavailable
+ *
+ * **Fixed-Integer NLP:**
+ * - fixVariables(): Fix discrete variables to integer values
+ * - solveProblemInstance(): Solve continuous subproblem
+ * - getSolution(): Return primal solution
+ *
+ * **Nested Architecture:**
+ * - Outer SHOT: Full MINLP (uses this as primal solver)
+ * - Inner SHOT: Convex NLP (fixed integers)
+ *
+ * @note Self-referential design for solver-agnostic NLP solving
+ */
 #pragma once
 #include "NLPSolverBase.h"
 
