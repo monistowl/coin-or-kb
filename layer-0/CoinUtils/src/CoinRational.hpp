@@ -74,7 +74,13 @@ public:
    * @param maxdelta Maximum allowed absolute error
    * @param maxdnom Maximum allowed denominator
    *
-   * @todo PASS2: Document the algorithm used (likely continued fractions)
+   * @algorithm Stern-Brocot tree / mediant search for best rational approximation
+   * @math Given lower bound a/b and upper bound c/d, the mediant (a+c)/(b+d)
+   *       is the simplest rational between them. Binary search narrows to
+   *       the best approximation within tolerance.
+   * @complexity O(log(maxdnom)) iterations
+   * @ref Stern (1858), Brocot (1861). See also: Graham, Knuth, Patashnik
+   *      "Concrete Mathematics" Ch. 4.5 for Stern-Brocot tree theory.
    */
   CoinRational(double val, double maxdelta, int64_t maxdnom)
   {
@@ -96,7 +102,11 @@ private:
    * @param maxdnom Maximum denominator allowed
    * @return true if a valid approximation was found, false otherwise
    *
-   * @todo PASS2: Document algorithm (likely Stern-Brocot tree or continued fractions)
+   * @algorithm Stern-Brocot mediant search
+   * @math Maintains interval [a/b, c/d] containing val. Each step computes
+   *       mediant m = (a+c)/(b+d) and narrows interval. Terminates when
+   *       |val - m| <= maxdelta or denominator exceeds maxdnom.
+   * @complexity O(log(maxdnom)) - each step at least doubles denominator
    */
   bool nearestRational_(double val, double maxdelta, int64_t maxdnom);
 };

@@ -1,0 +1,107 @@
+\documentclass[11pt]{article}
+\usepackage{graphics,graphicx}
+%\usepackage[dvips]{graphics,graphicx}
+\DeclareGraphicsExtensions{.ps,.jpg,.eps,.pdf,.png}
+\usepackage{boxedminipage,amsmath,amsfonts}
+\usepackage{url}
+%\usepackage{secdot}
+%\usepackage{natbib}
+\usepackage{verbatim}
+%\usepackage{moreverb}
+\usepackage{enumerate}
+\usepackage{makeidx}
+\usepackage{own}
+\bibliographystyle{plain}
+\makeindex
+
+\font\tti=cmitt10
+
+\input{chapters/frontmatter.tex}   
+
+
+\begin{document}
+
+%Some cross-referencing index entries (to be expanded as needed)
+\index{AMPL Solver Library |see{Third-party software, ASL}}
+\index{ASL|see{Third-party software, ASL}}
+\index{Blas|see{Third-party software, Blas}}
+\index{Harwell Subroutine Library|see{Third-party software, HSL}}
+\index{HSL|see{Third-party software, HSL}}
+\index{Lapack|see{Third-party software, Lapack}}
+\index{Mumps|see{Third-party software, Mumps}}
+
+\index{Bonmin@{\tt Bonmin}|see{COIN-OR projects, {\tt Bonmin}}}
+\index{BuildTools@{\tt BuildTools}|see{COIN-OR projects, {\tt BuildTools}}}
+\index{Cbc@{\tt Cbc}|see{COIN-OR projects, {\tt Cbc}}}
+\index{Cgl@{\tt Cgl}|see{COIN-OR projects, {\tt Cgl}}}
+\index{Clp@{\tt Clp}|see{COIN-OR projects, {\tt Clp}}}
+%\index{Configuration Manager|see{Microsoft Visual Studio, Configuration Manager}}
+\index{Couenne@{\tt Couenne}|see{COIN-OR projects, {\tt Couenne}}}
+\index{CppAD@{\tt CppAD}|see{COIN-OR projects, {\tt CppAD}}}
+\index{CoinUtils@{\tt CoinUtils}|see{COIN-OR projects, {\tt CoinUtils}}}
+%\index{Debug configuration|see{Microsoft Visual Studio, {\tt Debug} configuration}}
+\index{DyLP@{\tt DyLP}|see{COIN-OR projects, {\tt DyLP}}}
+\index{GLPK@{\tt GLPK}|see{Third-party software, {\tt GLPK}}}
+\index{Ipopt@{\tt Ipopt}|see{COIN-OR projects, {\tt Ipopt}}}
+\index{nl files|see{AMPL nl format}}
+\index{Osi@{\tt Osi}|see{COIN-OR projects, {\tt Osi}}}
+%\index{Release configuration|see{Microsoft Visual Studio, {\tt Release} configuration}}
+%\index{Release-plus configuration|see{Microsoft Visual Studio, {\tt Release-plus} configuration}}
+\index{SYMPHONY@{\tt SYMPHONY}|see{COIN-OR projects, {\tt SYMPHONY}}}
+\index{Vol@{\tt Vol}|see{COIN-OR projects, {\tt Vol}}}
+
+\title{Using the CoinAll Binaries}
+\vskip 2in
+\author{Horand Gassmann, Jun Ma,  Kipp Martin}
+\maketitle
+
+\begin{abstract}
+This document explains how to get up and running quickly with the CoinAll binaries.
+It is intended for users of COIN-OR who are interested in solving optimization problems 
+but do not wish to compile source code. 
+ In particular, we show how the user can send optimization problems to a COIN-OR server and get results back.  
+One such COIN-OR server is located at \url{http://74.94.100.129:8080/OSServer/services/OSSolverService}. 
+It  is a 2x Quad-Core Intel(R) Xeon(TM) CPU 2.4GHz 256KB L2, 1536MB L3, 12GB DRAM machine.
+
+\end{abstract}
+
+
+\newpage
+\tableofcontents
+\listoffigures
+\listoftables
+\hyphenation{com-plex-Type}
+\hyphenation{GAMS-links}
+
+\runcodetrue   % we do not build a manual for folks who only want to run the executables
+\uselibsfalse   % we build a manual for folks who want to build against the libraries
+\developfalse   % we do not build a manual for folks who want to actively develop code
+
+
+%\noindent\hrulefill
+\newpage
+
+\input{chapters/CoinAllIntro.tex}
+
+\input{chapters/roadmap.tex}
+
+\input{chapters/downloadbinariesCoinAll.tex}
+
+\input{chapters/ossolverservice.tex}
+
+\input{chapters/modellang.tex}
+
+\input{chapters/schemadescriptions.tex}
+
+\input{chapters/appendix.tex}
+
+
+
+
+\addcontentsline{toc}{section}{Bibliography}
+\bibliography{osUsersManual}
+%\bibliographystyle{amsplain}
+\printindex
+  
+\end{document}
+

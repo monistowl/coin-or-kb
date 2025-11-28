@@ -1,0 +1,13393 @@
+/* A Bison parser, made by GNU Bison 3.0.4.  */
+
+/* Bison implementation for Yacc-like parsers in C
+
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+
+/* As a special exception, you may create a larger work that contains
+   part or all of the Bison parser skeleton and distribute that work
+   under terms of your choice, so long as that work isn't itself a
+   parser generator using the skeleton or a modified version thereof
+   as a parser skeleton.  Alternatively, if you modify or redistribute
+   the parser skeleton itself, you may (at your option) remove this
+   special exception, which will cause the skeleton and the resulting
+   Bison output files to be licensed under the GNU General Public
+   License without this special exception.
+
+   This special exception was added by the Free Software Foundation in
+   version 2.2 of Bison.  */
+
+/* C LALR(1) parser skeleton written by Richard Stallman, by
+   simplifying the original so-called "semantic" parser.  */
+
+/* All symbols defined below should begin with yy or YY, to avoid
+   infringing on user name space.  This should be done even for local
+   variables, as they might otherwise be expanded by user macros.
+   There are some unavoidable exceptions within include files to
+   define necessary library symbols; they are noted "INFRINGES ON
+   USER NAME SPACE" below.  */
+
+/* Identify Bison output.  */
+#define YYBISON 1
+
+/* Bison version.  */
+#define YYBISON_VERSION "3.0.4"
+
+/* Skeleton name.  */
+#define YYSKELETON_NAME "yacc.c"
+
+/* Pure parsers.  */
+#define YYPURE 1
+
+/* Push parsers.  */
+#define YYPUSH 0
+
+/* Pull parsers.  */
+#define YYPULL 1
+
+
+/* Substitute the variable and function names.  */
+#define yyparse         osolparse
+#define yylex           osollex
+#define yyerror         osolerror
+#define yydebug         osoldebug
+#define yynerrs         osolnerrs
+
+
+/* Copy the first part of user declarations.  */
+
+
+
+
+#include "OSConfig.h"
+#include "OSMathUtil.h"
+#include "OSParameters.h"
+#include "OSGeneral.h"
+#include "OSErrorClass.h"
+#include "OSOption.h"
+#include "OSoLParserData.h"
+#include "OSgLParserData.h"
+#include "OSnLParserData.h"
+#include "OSBase64.h"
+
+#include <iostream>
+#include <sstream>
+#include <cstdio>
+#include <cstring>
+
+#define OSOPTION_AVAILABLE
+
+//#define DEBUG
+
+#ifdef DEBUG
+#define YYDEBUG 1
+#endif
+
+
+
+typedef struct yy_buffer_state *YY_BUFFER_STATE;
+YY_BUFFER_STATE osol_scan_string (const char *yy_str , void* yyscanner  );
+int osollex_init(void** ptr_yy_globals);
+int osollex_destroy (void* yyscanner );
+int osolget_lineno( void* yyscanner);
+char *osolget_text (void* yyscanner );
+void osolset_lineno (int line_number , void* yyscanner );
+void osolset_extra (OSoLParserData* parserData , void* yyscanner );
+void  yygetOSOption(const char *ch, OSOption* m_osoption, OSoLParserData *m_parserData, OSgLParserData *osglData, OSnLParserData *osnlData );
+void osol_empty_vectors( OSoLParserData* parserData);
+void osgl_empty_vectors( OSgLParserData* osglData);
+void osnl_empty_vectors( OSnLParserData* osnlData);
+
+
+
+
+
+# ifndef YY_NULLPTR
+#  if defined __cplusplus && 201103L <= __cplusplus
+#   define YY_NULLPTR nullptr
+#  else
+#   define YY_NULLPTR 0
+#  endif
+# endif
+
+/* Enabling verbose error messages.  */
+#ifdef YYERROR_VERBOSE
+# undef YYERROR_VERBOSE
+# define YYERROR_VERBOSE 1
+#else
+# define YYERROR_VERBOSE 0
+#endif
+
+/* In a future release of Bison, this section will be replaced
+   by #include "OSParseosol.tab.hpp".  */
+#ifndef YY_OSOL_OS_SRC_OSPARSERS_OSPARSEOSOL_TAB_HPP_INCLUDED
+# define YY_OSOL_OS_SRC_OSPARSERS_OSPARSEOSOL_TAB_HPP_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int osoldebug;
+#endif
+
+/* Token type.  */
+#ifndef YYTOKENTYPE
+# define YYTOKENTYPE
+  enum yytokentype
+  {
+    ATTRIBUTETEXT = 258,
+    ELEMENTTEXT = 259,
+    ITEMTEXT = 260,
+    INTEGER = 261,
+    DOUBLE = 262,
+    QUOTE = 263,
+    TWOQUOTES = 264,
+    BOOLEAN = 265,
+    GREATERTHAN = 266,
+    ENDOFELEMENT = 267,
+    OSOLSTART = 268,
+    OSOLSTARTEMPTY = 269,
+    OSOLATTRIBUTETEXT = 270,
+    OSOLEND = 271,
+    EMPTYLBVALUEATT = 272,
+    EMPTYUBVALUEATT = 273,
+    LBVALUEATT = 274,
+    UBVALUEATT = 275,
+    EMPTYLBDUALVALUEATT = 276,
+    EMPTYUBDUALVALUEATT = 277,
+    LBDUALVALUEATT = 278,
+    UBDUALVALUEATT = 279,
+    WEIGHTATT = 280,
+    EMPTYWEIGHTATT = 281,
+    TRANSPORTTYPEATT = 282,
+    LOCATIONTYPEATT = 283,
+    FROMATT = 284,
+    TOATT = 285,
+    MAKECOPYATT = 286,
+    NUMBEROFJOBIDSATT = 287,
+    NUMBEROFPATHSATT = 288,
+    NUMBEROFPATHPAIRSATT = 289,
+    NUMBEROFPROCESSESATT = 290,
+    NUMBEROFOTHERVARIABLEOPTIONSATT = 291,
+    NUMBEROFOTHEROBJECTIVEOPTIONSATT = 292,
+    NUMBEROFOTHERCONSTRAINTOPTIONSATT = 293,
+    NUMBEROFOTHERMATRIXPROGRAMMINGOPTIONSATT = 294,
+    NUMBEROFOTHERMATRIXVARIABLEOPTIONSATT = 295,
+    NUMBEROFOTHERMATRIXOBJECTIVEOPTIONSATT = 296,
+    NUMBEROFOTHERMATRIXCONSTRAINTOPTIONSATT = 297,
+    NUMBEROFSOLVEROPTIONSATT = 298,
+    NUMBEROFOTHEROPTIONSATT = 299,
+    NUMBEROFSOSATT = 300,
+    SOSIDXATT = 301,
+    GROUPWEIGHTATT = 302,
+    INSTANCELOCATIONSTART = 303,
+    INSTANCELOCATIONEND = 304,
+    SOLVERTOINVOKESTART = 305,
+    SOLVERTOINVOKEEND = 306,
+    LICENSESTART = 307,
+    LICENSEEND = 308,
+    USERNAMESTART = 309,
+    USERNAMEEND = 310,
+    PASSWORDSTART = 311,
+    PASSWORDEND = 312,
+    CONTACTSTART = 313,
+    CONTACTEND = 314,
+    MINDISKSPACESTART = 315,
+    MINDISKSPACEEND = 316,
+    MINMEMORYSTART = 317,
+    MINMEMORYEND = 318,
+    MINCPUSPEEDSTART = 319,
+    MINCPUSPEEDEND = 320,
+    MINCPUNUMBERSTART = 321,
+    MINCPUNUMBEREND = 322,
+    SERVICETYPESTART = 323,
+    SERVICETYPEEND = 324,
+    MAXTIMESTART = 325,
+    MAXTIMEEND = 326,
+    REQUESTEDSTARTTIMESTART = 327,
+    REQUESTEDSTARTTIMEEND = 328,
+    DEPENDENCIESSTART = 329,
+    DEPENDENCIESEND = 330,
+    PATHSTART = 331,
+    PATHEND = 332,
+    PATHPAIRSTART = 333,
+    PATHPAIREND = 334,
+    REQUIREDDIRECTORIESSTART = 335,
+    REQUIREDDIRECTORIESEND = 336,
+    REQUIREDFILESSTART = 337,
+    REQUIREDFILESEND = 338,
+    DIRECTORIESTOMAKESTART = 339,
+    DIRECTORIESTOMAKEEND = 340,
+    FILESTOMAKESTART = 341,
+    FILESTOMAKEEND = 342,
+    DIRECTORIESTODELETESTART = 343,
+    DIRECTORIESTODELETEEND = 344,
+    FILESTODELETESTART = 345,
+    FILESTODELETEEND = 346,
+    INPUTDIRECTORIESTOMOVESTART = 347,
+    INPUTDIRECTORIESTOMOVEEND = 348,
+    INPUTFILESTOMOVESTART = 349,
+    INPUTFILESTOMOVEEND = 350,
+    OUTPUTDIRECTORIESTOMOVESTART = 351,
+    OUTPUTDIRECTORIESTOMOVEEND = 352,
+    OUTPUTFILESTOMOVESTART = 353,
+    OUTPUTFILESTOMOVEEND = 354,
+    PROCESSESTOKILLSTART = 355,
+    PROCESSESTOKILLEND = 356,
+    PROCESSSTART = 357,
+    PROCESSEND = 358,
+    INITIALVARIABLEVALUESSTART = 359,
+    INITIALVARIABLEVALUESEND = 360,
+    INITIALVARIABLEVALUESSTRINGSTART = 361,
+    INITIALVARIABLEVALUESSTRINGEND = 362,
+    INITIALBASISSTATUSSTART = 363,
+    INITIALBASISSTATUSEND = 364,
+    INTEGERVARIABLEBRANCHINGWEIGHTSSTART = 365,
+    INTEGERVARIABLEBRANCHINGWEIGHTSEND = 366,
+    SOSVARIABLEBRANCHINGWEIGHTSSTART = 367,
+    SOSVARIABLEBRANCHINGWEIGHTSEND = 368,
+    SOSSTART = 369,
+    SOSEND = 370,
+    INITIALOBJECTIVEVALUESSTART = 371,
+    INITIALOBJECTIVEVALUESEND = 372,
+    INITIALOBJECTIVEBOUNDSSTART = 373,
+    INITIALOBJECTIVEBOUNDSEND = 374,
+    INITIALCONSTRAINTVALUESSTART = 375,
+    INITIALCONSTRAINTVALUESEND = 376,
+    INITIALDUALVALUESSTART = 377,
+    INITIALDUALVALUESEND = 378,
+    INITIALMATRIXVARIABLEVALUESSTART = 379,
+    INITIALMATRIXVARIABLEVALUESEND = 380,
+    SOLVEROPTIONSSTART = 381,
+    SOLVEROPTIONSEND = 382,
+    SOLVEROPTIONSTART = 383,
+    SOLVEROPTIONEND = 384,
+    OTHEROPTIONSSTART = 385,
+    OTHEROPTIONSEND = 386,
+    HEADERSTART = 387,
+    HEADEREND = 388,
+    FILENAMESTART = 389,
+    FILENAMEEND = 390,
+    FILENAMEEMPTY = 391,
+    FILENAMESTARTANDEND = 392,
+    FILESOURCESTART = 393,
+    FILESOURCEEND = 394,
+    FILESOURCEEMPTY = 395,
+    FILESOURCESTARTANDEND = 396,
+    FILEDESCRIPTIONSTART = 397,
+    FILEDESCRIPTIONEND = 398,
+    FILEDESCRIPTIONEMPTY = 399,
+    FILEDESCRIPTIONSTARTANDEND = 400,
+    FILECREATORSTART = 401,
+    FILECREATOREND = 402,
+    FILECREATOREMPTY = 403,
+    FILECREATORSTARTANDEND = 404,
+    FILELICENCESTART = 405,
+    FILELICENCEEND = 406,
+    FILELICENCEEMPTY = 407,
+    FILELICENCESTARTANDEND = 408,
+    INDEXESSTART = 409,
+    INDEXESEND = 410,
+    VALUESSTART = 411,
+    VALUESEND = 412,
+    NONZEROSSTART = 413,
+    NONZEROSEND = 414,
+    ELSTART = 415,
+    ELEND = 416,
+    ENUMERATIONSTART = 417,
+    ENUMERATIONEND = 418,
+    ITEMEMPTY = 419,
+    ITEMSTART = 420,
+    ITEMEND = 421,
+    ITEMSTARTANDEND = 422,
+    BASE64START = 423,
+    BASE64END = 424,
+    NUMBEROFELATT = 425,
+    NUMBEROFENUMERATIONSATT = 426,
+    NUMBEROFITEMSATT = 427,
+    EMPTYCATEGORYATT = 428,
+    CATEGORYATT = 429,
+    EMPTYDESCRIPTIONATT = 430,
+    DESCRIPTIONATT = 431,
+    EMPTYSOLVERATT = 432,
+    SOLVERATT = 433,
+    EMPTYNAMEATT = 434,
+    NAMEATT = 435,
+    EMPTYTYPEATT = 436,
+    TYPEATT = 437,
+    EMPTYENUMTYPEATT = 438,
+    ENUMTYPEATT = 439,
+    EMPTYSHAPEATT = 440,
+    SHAPEATT = 441,
+    EMPTYUNITATT = 442,
+    UNITATT = 443,
+    EMPTYVALUEATT = 444,
+    VALUEATT = 445,
+    EMPTYVALUETYPEATT = 446,
+    VALUETYPEATT = 447,
+    EMPTYCONTYPEATT = 448,
+    CONTYPEATT = 449,
+    EMPTYOBJTYPEATT = 450,
+    OBJTYPEATT = 451,
+    EMPTYVARTYPEATT = 452,
+    VARTYPEATT = 453,
+    EMPTYMATRIXCONTYPEATT = 454,
+    MATRIXCONTYPEATT = 455,
+    EMPTYMATRIXOBJTYPEATT = 456,
+    MATRIXOBJTYPEATT = 457,
+    EMPTYMATRIXVARTYPEATT = 458,
+    MATRIXVARTYPEATT = 459,
+    EMPTYMATRIXTYPEATT = 460,
+    MATRIXTYPEATT = 461,
+    EMPTYSYMMETRYATT = 462,
+    SYMMETRYATT = 463,
+    EMPTYROWMAJORATT = 464,
+    ROWMAJORATT = 465,
+    EMPTYBASETRANSPOSEATT = 466,
+    BASETRANSPOSEATT = 467,
+    NUMBEROFBLOCKSATT = 468,
+    NUMBEROFCOLUMNSATT = 469,
+    NUMBEROFROWSATT = 470,
+    NUMBEROFMATRICESATT = 471,
+    NUMBEROFVALUESATT = 472,
+    NUMBEROFCONSTRAINTSATT = 473,
+    NUMBEROFCONATT = 474,
+    NUMBEROFCONIDXATT = 475,
+    NUMBEROFOBJECTIVESATT = 476,
+    NUMBEROFOBJATT = 477,
+    NUMBEROFOBJIDXATT = 478,
+    NUMBEROFVARIABLESATT = 479,
+    NUMBEROFVARATT = 480,
+    NUMBEROFVARIDXATT = 481,
+    NUMBEROFMATRIXCONATT = 482,
+    NUMBEROFMATRIXOBJATT = 483,
+    NUMBEROFMATRIXVARATT = 484,
+    BASEMATRIXIDXATT = 485,
+    TARGETMATRIXFIRSTROWATT = 486,
+    TARGETMATRIXFIRSTCOLATT = 487,
+    BASEMATRIXSTARTROWATT = 488,
+    BASEMATRIXSTARTCOLATT = 489,
+    BASEMATRIXENDROWATT = 490,
+    BASEMATRIXENDCOLATT = 491,
+    SCALARMULTIPLIERATT = 492,
+    SCALARIMAGINARYPARTATT = 493,
+    BLOCKROWIDXATT = 494,
+    BLOCKCOLIDXATT = 495,
+    REATT = 496,
+    IMATT = 497,
+    MATRIXVARIDXATT = 498,
+    MATRIXOBJIDXATT = 499,
+    MATRIXCONIDXATT = 500,
+    IDXATT = 501,
+    INCRATT = 502,
+    MULTATT = 503,
+    SIZEOFATT = 504,
+    COEFATT = 505,
+    CONSTANTATT = 506,
+    MATRICESSTART = 507,
+    MATRICESEND = 508,
+    MATRIXSTART = 509,
+    MATRIXEND = 510,
+    BASEMATRIXEND = 511,
+    BASEMATRIXSTART = 512,
+    BLOCKSSTART = 513,
+    BLOCKSEND = 514,
+    BLOCKSTART = 515,
+    BLOCKEND = 516,
+    COLOFFSETSTART = 517,
+    COLOFFSETEND = 518,
+    ROWOFFSETSTART = 519,
+    ROWOFFSETEND = 520,
+    ELEMENTSSTART = 521,
+    ELEMENTSEND = 522,
+    CONSTANTELEMENTSSTART = 523,
+    CONSTANTELEMENTSEND = 524,
+    COMPLEXELEMENTSSTART = 525,
+    COMPLEXELEMENTSEND = 526,
+    VARREFERENCEELEMENTSSTART = 527,
+    VARREFERENCEELEMENTSEND = 528,
+    LINEARELEMENTSSTART = 529,
+    LINEARELEMENTSEND = 530,
+    CONREFERENCEELEMENTSSTART = 531,
+    CONREFERENCEELEMENTSEND = 532,
+    OBJREFERENCEELEMENTSSTART = 533,
+    OBJREFERENCEELEMENTSEND = 534,
+    REALVALUEDEXPRESSIONSSTART = 535,
+    REALVALUEDEXPRESSIONSSEND = 536,
+    COMPLEXVALUEDEXPRESSIONSSTART = 537,
+    COMPLEXVALUEDEXPRESSIONSSEND = 538,
+    STRINGVALUEDELEMENTSSTART = 539,
+    STRINGVALUEDELEMENTSEND = 540,
+    STARTVECTORSTART = 541,
+    STARTVECTOREND = 542,
+    INDEXSTART = 543,
+    INDEXEND = 544,
+    VALUESTART = 545,
+    VALUEEND = 546,
+    VARIDXSTART = 547,
+    VARIDXEND = 548,
+    TRANSFORMATIONSTART = 549,
+    TRANSFORMATIONEND = 550,
+    MATRIXPROGRAMMINGSTART = 551,
+    MATRIXPROGRAMMINGEND = 552,
+    MATRIXVARIABLESSTART = 553,
+    MATRIXVARIABLESEND = 554,
+    MATRIXVARSTART = 555,
+    MATRIXVAREND = 556,
+    MATRIXOBJECTIVESSTART = 557,
+    MATRIXOBJECTIVESEND = 558,
+    MATRIXOBJSTART = 559,
+    MATRIXOBJEND = 560,
+    MATRIXCONSTRAINTSSTART = 561,
+    MATRIXCONSTRAINTSEND = 562,
+    MATRIXCONSTART = 563,
+    MATRIXCONEND = 564,
+    CONSTART = 565,
+    CONEND = 566,
+    CONSTRAINTSSTART = 567,
+    CONSTRAINTSEND = 568,
+    OBJSTART = 569,
+    OBJEND = 570,
+    OBJECTIVESSTART = 571,
+    OBJECTIVESEND = 572,
+    VARSTART = 573,
+    VAREND = 574,
+    VARIABLESSTART = 575,
+    VARIABLESEND = 576,
+    GENERALSTART = 577,
+    GENERALEND = 578,
+    SYSTEMSTART = 579,
+    SYSTEMEND = 580,
+    SERVICESTART = 581,
+    SERVICEEND = 582,
+    JOBSTART = 583,
+    JOBEND = 584,
+    OPTIMIZATIONSTART = 585,
+    OPTIMIZATIONEND = 586,
+    ATEQUALITYSTART = 587,
+    ATEQUALITYEND = 588,
+    ATLOWERSTART = 589,
+    ATLOWEREND = 590,
+    ATUPPERSTART = 591,
+    ATUPPEREND = 592,
+    BASICSTART = 593,
+    BASICEND = 594,
+    ISFREESTART = 595,
+    ISFREEEND = 596,
+    SUPERBASICSTART = 597,
+    SUPERBASICEND = 598,
+    UNKNOWNSTART = 599,
+    UNKNOWNEND = 600,
+    SERVICEURISTART = 601,
+    SERVICEURIEND = 602,
+    SERVICENAMESTART = 603,
+    SERVICENAMEEND = 604,
+    INSTANCENAMESTART = 605,
+    INSTANCENAMEEND = 606,
+    JOBIDSTART = 607,
+    JOBIDEND = 608,
+    OTHERSTART = 609,
+    OTHEREND = 610,
+    DUMMY = 611,
+    NONLINEAREXPRESSIONSSTART = 612,
+    NONLINEAREXPRESSIONSEND = 613,
+    NUMBEROFNONLINEAREXPRESSIONS = 614,
+    NLSTART = 615,
+    NLEND = 616,
+    MATRIXEXPRESSIONSSTART = 617,
+    MATRIXEXPRESSIONSEND = 618,
+    NUMBEROFEXPR = 619,
+    EXPRSTART = 620,
+    EXPREND = 621,
+    NUMBEROFMATRIXTERMSATT = 622,
+    MATRIXTERMSTART = 623,
+    MATRIXTERMEND = 624,
+    POWERSTART = 625,
+    POWEREND = 626,
+    PLUSSTART = 627,
+    PLUSEND = 628,
+    MINUSSTART = 629,
+    MINUSEND = 630,
+    DIVIDESTART = 631,
+    DIVIDEEND = 632,
+    LNSTART = 633,
+    LNEND = 634,
+    SQRTSTART = 635,
+    SQRTEND = 636,
+    SUMSTART = 637,
+    SUMEND = 638,
+    PRODUCTSTART = 639,
+    PRODUCTEND = 640,
+    EXPSTART = 641,
+    EXPEND = 642,
+    NEGATESTART = 643,
+    NEGATEEND = 644,
+    IFSTART = 645,
+    IFEND = 646,
+    SQUARESTART = 647,
+    SQUAREEND = 648,
+    COSSTART = 649,
+    COSEND = 650,
+    SINSTART = 651,
+    SINEND = 652,
+    VARIABLESTART = 653,
+    VARIABLEEND = 654,
+    ABSSTART = 655,
+    ABSEND = 656,
+    ERFSTART = 657,
+    ERFEND = 658,
+    MAXSTART = 659,
+    MAXEND = 660,
+    ALLDIFFSTART = 661,
+    ALLDIFFEND = 662,
+    MINSTART = 663,
+    MINEND = 664,
+    ESTART = 665,
+    EEND = 666,
+    PISTART = 667,
+    PIEND = 668,
+    TIMESSTART = 669,
+    TIMESEND = 670,
+    NUMBERSTART = 671,
+    NUMBEREND = 672,
+    MATRIXDETERMINANTSTART = 673,
+    MATRIXDETERMINANTEND = 674,
+    MATRIXTRACESTART = 675,
+    MATRIXTRACEEND = 676,
+    MATRIXTOSCALARSTART = 677,
+    MATRIXTOSCALAREND = 678,
+    MATRIXDIAGONALSTART = 679,
+    MATRIXDIAGONALEND = 680,
+    MATRIXDOTTIMESSTART = 681,
+    MATRIXDOTTIMESEND = 682,
+    MATRIXLOWERTRIANGLESTART = 683,
+    MATRIXLOWERTRIANGLEEND = 684,
+    MATRIXUPPERTRIANGLESTART = 685,
+    MATRIXUPPERTRIANGLEEND = 686,
+    MATRIXMERGESTART = 687,
+    MATRIXMERGEEND = 688,
+    MATRIXMINUSSTART = 689,
+    MATRIXMINUSEND = 690,
+    MATRIXNEGATESTART = 691,
+    MATRIXNEGATEEND = 692,
+    MATRIXPLUSSTART = 693,
+    MATRIXPLUSEND = 694,
+    MATRIXTIMESSTART = 695,
+    MATRIXTIMESEND = 696,
+    MATRIXSUMSTART = 697,
+    MATRIXSUMEND = 698,
+    MATRIXPRODUCTSTART = 699,
+    MATRIXPRODUCTEND = 700,
+    MATRIXSCALARTIMESSTART = 701,
+    MATRIXSCALARTIMESEND = 702,
+    MATRIXSUBMATRIXATSTART = 703,
+    MATRIXSUBMATRIXATEND = 704,
+    MATRIXTRANSPOSESTART = 705,
+    MATRIXTRANSPOSEEND = 706,
+    MATRIXREFERENCESTART = 707,
+    MATRIXREFERENCEEND = 708,
+    IDENTITYMATRIXSTART = 709,
+    IDENTITYMATRIXEND = 710,
+    MATRIXINVERSESTART = 711,
+    MATRIXINVERSEEND = 712,
+    COMPLEXCONJUGATESTART = 713,
+    COMPLEXCONJUGATEEND = 714,
+    COMPLEXMINUSSTART = 715,
+    COMPLEXMINUSEND = 716,
+    COMPLEXNEGATESTART = 717,
+    COMPLEXNEGATEEND = 718,
+    COMPLEXNUMBERSTART = 719,
+    COMPLEXNUMBEREND = 720,
+    COMPLEXPLUSSTART = 721,
+    COMPLEXPLUSEND = 722,
+    COMPLEXSQUARESTART = 723,
+    COMPLEXSQUAREEND = 724,
+    COMPLEXSUMSTART = 725,
+    COMPLEXSUMEND = 726,
+    COMPLEXTIMESSTART = 727,
+    COMPLEXTIMESEND = 728,
+    CREATECOMPLEXSTART = 729,
+    CREATECOMPLEXEND = 730,
+    EMPTYINCLUDEDIAGONALATT = 731,
+    INCLUDEDIAGONALATT = 732,
+    EMPTYTRANSPOSEATT = 733,
+    TRANSPOSEATT = 734,
+    EMPTYIDATT = 735,
+    IDATT = 736
+  };
+#endif
+/* Tokens.  */
+#define ATTRIBUTETEXT 258
+#define ELEMENTTEXT 259
+#define ITEMTEXT 260
+#define INTEGER 261
+#define DOUBLE 262
+#define QUOTE 263
+#define TWOQUOTES 264
+#define BOOLEAN 265
+#define GREATERTHAN 266
+#define ENDOFELEMENT 267
+#define OSOLSTART 268
+#define OSOLSTARTEMPTY 269
+#define OSOLATTRIBUTETEXT 270
+#define OSOLEND 271
+#define EMPTYLBVALUEATT 272
+#define EMPTYUBVALUEATT 273
+#define LBVALUEATT 274
+#define UBVALUEATT 275
+#define EMPTYLBDUALVALUEATT 276
+#define EMPTYUBDUALVALUEATT 277
+#define LBDUALVALUEATT 278
+#define UBDUALVALUEATT 279
+#define WEIGHTATT 280
+#define EMPTYWEIGHTATT 281
+#define TRANSPORTTYPEATT 282
+#define LOCATIONTYPEATT 283
+#define FROMATT 284
+#define TOATT 285
+#define MAKECOPYATT 286
+#define NUMBEROFJOBIDSATT 287
+#define NUMBEROFPATHSATT 288
+#define NUMBEROFPATHPAIRSATT 289
+#define NUMBEROFPROCESSESATT 290
+#define NUMBEROFOTHERVARIABLEOPTIONSATT 291
+#define NUMBEROFOTHEROBJECTIVEOPTIONSATT 292
+#define NUMBEROFOTHERCONSTRAINTOPTIONSATT 293
+#define NUMBEROFOTHERMATRIXPROGRAMMINGOPTIONSATT 294
+#define NUMBEROFOTHERMATRIXVARIABLEOPTIONSATT 295
+#define NUMBEROFOTHERMATRIXOBJECTIVEOPTIONSATT 296
+#define NUMBEROFOTHERMATRIXCONSTRAINTOPTIONSATT 297
+#define NUMBEROFSOLVEROPTIONSATT 298
+#define NUMBEROFOTHEROPTIONSATT 299
+#define NUMBEROFSOSATT 300
+#define SOSIDXATT 301
+#define GROUPWEIGHTATT 302
+#define INSTANCELOCATIONSTART 303
+#define INSTANCELOCATIONEND 304
+#define SOLVERTOINVOKESTART 305
+#define SOLVERTOINVOKEEND 306
+#define LICENSESTART 307
+#define LICENSEEND 308
+#define USERNAMESTART 309
+#define USERNAMEEND 310
+#define PASSWORDSTART 311
+#define PASSWORDEND 312
+#define CONTACTSTART 313
+#define CONTACTEND 314
+#define MINDISKSPACESTART 315
+#define MINDISKSPACEEND 316
+#define MINMEMORYSTART 317
+#define MINMEMORYEND 318
+#define MINCPUSPEEDSTART 319
+#define MINCPUSPEEDEND 320
+#define MINCPUNUMBERSTART 321
+#define MINCPUNUMBEREND 322
+#define SERVICETYPESTART 323
+#define SERVICETYPEEND 324
+#define MAXTIMESTART 325
+#define MAXTIMEEND 326
+#define REQUESTEDSTARTTIMESTART 327
+#define REQUESTEDSTARTTIMEEND 328
+#define DEPENDENCIESSTART 329
+#define DEPENDENCIESEND 330
+#define PATHSTART 331
+#define PATHEND 332
+#define PATHPAIRSTART 333
+#define PATHPAIREND 334
+#define REQUIREDDIRECTORIESSTART 335
+#define REQUIREDDIRECTORIESEND 336
+#define REQUIREDFILESSTART 337
+#define REQUIREDFILESEND 338
+#define DIRECTORIESTOMAKESTART 339
+#define DIRECTORIESTOMAKEEND 340
+#define FILESTOMAKESTART 341
+#define FILESTOMAKEEND 342
+#define DIRECTORIESTODELETESTART 343
+#define DIRECTORIESTODELETEEND 344
+#define FILESTODELETESTART 345
+#define FILESTODELETEEND 346
+#define INPUTDIRECTORIESTOMOVESTART 347
+#define INPUTDIRECTORIESTOMOVEEND 348
+#define INPUTFILESTOMOVESTART 349
+#define INPUTFILESTOMOVEEND 350
+#define OUTPUTDIRECTORIESTOMOVESTART 351
+#define OUTPUTDIRECTORIESTOMOVEEND 352
+#define OUTPUTFILESTOMOVESTART 353
+#define OUTPUTFILESTOMOVEEND 354
+#define PROCESSESTOKILLSTART 355
+#define PROCESSESTOKILLEND 356
+#define PROCESSSTART 357
+#define PROCESSEND 358
+#define INITIALVARIABLEVALUESSTART 359
+#define INITIALVARIABLEVALUESEND 360
+#define INITIALVARIABLEVALUESSTRINGSTART 361
+#define INITIALVARIABLEVALUESSTRINGEND 362
+#define INITIALBASISSTATUSSTART 363
+#define INITIALBASISSTATUSEND 364
+#define INTEGERVARIABLEBRANCHINGWEIGHTSSTART 365
+#define INTEGERVARIABLEBRANCHINGWEIGHTSEND 366
+#define SOSVARIABLEBRANCHINGWEIGHTSSTART 367
+#define SOSVARIABLEBRANCHINGWEIGHTSEND 368
+#define SOSSTART 369
+#define SOSEND 370
+#define INITIALOBJECTIVEVALUESSTART 371
+#define INITIALOBJECTIVEVALUESEND 372
+#define INITIALOBJECTIVEBOUNDSSTART 373
+#define INITIALOBJECTIVEBOUNDSEND 374
+#define INITIALCONSTRAINTVALUESSTART 375
+#define INITIALCONSTRAINTVALUESEND 376
+#define INITIALDUALVALUESSTART 377
+#define INITIALDUALVALUESEND 378
+#define INITIALMATRIXVARIABLEVALUESSTART 379
+#define INITIALMATRIXVARIABLEVALUESEND 380
+#define SOLVEROPTIONSSTART 381
+#define SOLVEROPTIONSEND 382
+#define SOLVEROPTIONSTART 383
+#define SOLVEROPTIONEND 384
+#define OTHEROPTIONSSTART 385
+#define OTHEROPTIONSEND 386
+#define HEADERSTART 387
+#define HEADEREND 388
+#define FILENAMESTART 389
+#define FILENAMEEND 390
+#define FILENAMEEMPTY 391
+#define FILENAMESTARTANDEND 392
+#define FILESOURCESTART 393
+#define FILESOURCEEND 394
+#define FILESOURCEEMPTY 395
+#define FILESOURCESTARTANDEND 396
+#define FILEDESCRIPTIONSTART 397
+#define FILEDESCRIPTIONEND 398
+#define FILEDESCRIPTIONEMPTY 399
+#define FILEDESCRIPTIONSTARTANDEND 400
+#define FILECREATORSTART 401
+#define FILECREATOREND 402
+#define FILECREATOREMPTY 403
+#define FILECREATORSTARTANDEND 404
+#define FILELICENCESTART 405
+#define FILELICENCEEND 406
+#define FILELICENCEEMPTY 407
+#define FILELICENCESTARTANDEND 408
+#define INDEXESSTART 409
+#define INDEXESEND 410
+#define VALUESSTART 411
+#define VALUESEND 412
+#define NONZEROSSTART 413
+#define NONZEROSEND 414
+#define ELSTART 415
+#define ELEND 416
+#define ENUMERATIONSTART 417
+#define ENUMERATIONEND 418
+#define ITEMEMPTY 419
+#define ITEMSTART 420
+#define ITEMEND 421
+#define ITEMSTARTANDEND 422
+#define BASE64START 423
+#define BASE64END 424
+#define NUMBEROFELATT 425
+#define NUMBEROFENUMERATIONSATT 426
+#define NUMBEROFITEMSATT 427
+#define EMPTYCATEGORYATT 428
+#define CATEGORYATT 429
+#define EMPTYDESCRIPTIONATT 430
+#define DESCRIPTIONATT 431
+#define EMPTYSOLVERATT 432
+#define SOLVERATT 433
+#define EMPTYNAMEATT 434
+#define NAMEATT 435
+#define EMPTYTYPEATT 436
+#define TYPEATT 437
+#define EMPTYENUMTYPEATT 438
+#define ENUMTYPEATT 439
+#define EMPTYSHAPEATT 440
+#define SHAPEATT 441
+#define EMPTYUNITATT 442
+#define UNITATT 443
+#define EMPTYVALUEATT 444
+#define VALUEATT 445
+#define EMPTYVALUETYPEATT 446
+#define VALUETYPEATT 447
+#define EMPTYCONTYPEATT 448
+#define CONTYPEATT 449
+#define EMPTYOBJTYPEATT 450
+#define OBJTYPEATT 451
+#define EMPTYVARTYPEATT 452
+#define VARTYPEATT 453
+#define EMPTYMATRIXCONTYPEATT 454
+#define MATRIXCONTYPEATT 455
+#define EMPTYMATRIXOBJTYPEATT 456
+#define MATRIXOBJTYPEATT 457
+#define EMPTYMATRIXVARTYPEATT 458
+#define MATRIXVARTYPEATT 459
+#define EMPTYMATRIXTYPEATT 460
+#define MATRIXTYPEATT 461
+#define EMPTYSYMMETRYATT 462
+#define SYMMETRYATT 463
+#define EMPTYROWMAJORATT 464
+#define ROWMAJORATT 465
+#define EMPTYBASETRANSPOSEATT 466
+#define BASETRANSPOSEATT 467
+#define NUMBEROFBLOCKSATT 468
+#define NUMBEROFCOLUMNSATT 469
+#define NUMBEROFROWSATT 470
+#define NUMBEROFMATRICESATT 471
+#define NUMBEROFVALUESATT 472
+#define NUMBEROFCONSTRAINTSATT 473
+#define NUMBEROFCONATT 474
+#define NUMBEROFCONIDXATT 475
+#define NUMBEROFOBJECTIVESATT 476
+#define NUMBEROFOBJATT 477
+#define NUMBEROFOBJIDXATT 478
+#define NUMBEROFVARIABLESATT 479
+#define NUMBEROFVARATT 480
+#define NUMBEROFVARIDXATT 481
+#define NUMBEROFMATRIXCONATT 482
+#define NUMBEROFMATRIXOBJATT 483
+#define NUMBEROFMATRIXVARATT 484
+#define BASEMATRIXIDXATT 485
+#define TARGETMATRIXFIRSTROWATT 486
+#define TARGETMATRIXFIRSTCOLATT 487
+#define BASEMATRIXSTARTROWATT 488
+#define BASEMATRIXSTARTCOLATT 489
+#define BASEMATRIXENDROWATT 490
+#define BASEMATRIXENDCOLATT 491
+#define SCALARMULTIPLIERATT 492
+#define SCALARIMAGINARYPARTATT 493
+#define BLOCKROWIDXATT 494
+#define BLOCKCOLIDXATT 495
+#define REATT 496
+#define IMATT 497
+#define MATRIXVARIDXATT 498
+#define MATRIXOBJIDXATT 499
+#define MATRIXCONIDXATT 500
+#define IDXATT 501
+#define INCRATT 502
+#define MULTATT 503
+#define SIZEOFATT 504
+#define COEFATT 505
+#define CONSTANTATT 506
+#define MATRICESSTART 507
+#define MATRICESEND 508
+#define MATRIXSTART 509
+#define MATRIXEND 510
+#define BASEMATRIXEND 511
+#define BASEMATRIXSTART 512
+#define BLOCKSSTART 513
+#define BLOCKSEND 514
+#define BLOCKSTART 515
+#define BLOCKEND 516
+#define COLOFFSETSTART 517
+#define COLOFFSETEND 518
+#define ROWOFFSETSTART 519
+#define ROWOFFSETEND 520
+#define ELEMENTSSTART 521
+#define ELEMENTSEND 522
+#define CONSTANTELEMENTSSTART 523
+#define CONSTANTELEMENTSEND 524
+#define COMPLEXELEMENTSSTART 525
+#define COMPLEXELEMENTSEND 526
+#define VARREFERENCEELEMENTSSTART 527
+#define VARREFERENCEELEMENTSEND 528
+#define LINEARELEMENTSSTART 529
+#define LINEARELEMENTSEND 530
+#define CONREFERENCEELEMENTSSTART 531
+#define CONREFERENCEELEMENTSEND 532
+#define OBJREFERENCEELEMENTSSTART 533
+#define OBJREFERENCEELEMENTSEND 534
+#define REALVALUEDEXPRESSIONSSTART 535
+#define REALVALUEDEXPRESSIONSSEND 536
+#define COMPLEXVALUEDEXPRESSIONSSTART 537
+#define COMPLEXVALUEDEXPRESSIONSSEND 538
+#define STRINGVALUEDELEMENTSSTART 539
+#define STRINGVALUEDELEMENTSEND 540
+#define STARTVECTORSTART 541
+#define STARTVECTOREND 542
+#define INDEXSTART 543
+#define INDEXEND 544
+#define VALUESTART 545
+#define VALUEEND 546
+#define VARIDXSTART 547
+#define VARIDXEND 548
+#define TRANSFORMATIONSTART 549
+#define TRANSFORMATIONEND 550
+#define MATRIXPROGRAMMINGSTART 551
+#define MATRIXPROGRAMMINGEND 552
+#define MATRIXVARIABLESSTART 553
+#define MATRIXVARIABLESEND 554
+#define MATRIXVARSTART 555
+#define MATRIXVAREND 556
+#define MATRIXOBJECTIVESSTART 557
+#define MATRIXOBJECTIVESEND 558
+#define MATRIXOBJSTART 559
+#define MATRIXOBJEND 560
+#define MATRIXCONSTRAINTSSTART 561
+#define MATRIXCONSTRAINTSEND 562
+#define MATRIXCONSTART 563
+#define MATRIXCONEND 564
+#define CONSTART 565
+#define CONEND 566
+#define CONSTRAINTSSTART 567
+#define CONSTRAINTSEND 568
+#define OBJSTART 569
+#define OBJEND 570
+#define OBJECTIVESSTART 571
+#define OBJECTIVESEND 572
+#define VARSTART 573
+#define VAREND 574
+#define VARIABLESSTART 575
+#define VARIABLESEND 576
+#define GENERALSTART 577
+#define GENERALEND 578
+#define SYSTEMSTART 579
+#define SYSTEMEND 580
+#define SERVICESTART 581
+#define SERVICEEND 582
+#define JOBSTART 583
+#define JOBEND 584
+#define OPTIMIZATIONSTART 585
+#define OPTIMIZATIONEND 586
+#define ATEQUALITYSTART 587
+#define ATEQUALITYEND 588
+#define ATLOWERSTART 589
+#define ATLOWEREND 590
+#define ATUPPERSTART 591
+#define ATUPPEREND 592
+#define BASICSTART 593
+#define BASICEND 594
+#define ISFREESTART 595
+#define ISFREEEND 596
+#define SUPERBASICSTART 597
+#define SUPERBASICEND 598
+#define UNKNOWNSTART 599
+#define UNKNOWNEND 600
+#define SERVICEURISTART 601
+#define SERVICEURIEND 602
+#define SERVICENAMESTART 603
+#define SERVICENAMEEND 604
+#define INSTANCENAMESTART 605
+#define INSTANCENAMEEND 606
+#define JOBIDSTART 607
+#define JOBIDEND 608
+#define OTHERSTART 609
+#define OTHEREND 610
+#define DUMMY 611
+#define NONLINEAREXPRESSIONSSTART 612
+#define NONLINEAREXPRESSIONSEND 613
+#define NUMBEROFNONLINEAREXPRESSIONS 614
+#define NLSTART 615
+#define NLEND 616
+#define MATRIXEXPRESSIONSSTART 617
+#define MATRIXEXPRESSIONSEND 618
+#define NUMBEROFEXPR 619
+#define EXPRSTART 620
+#define EXPREND 621
+#define NUMBEROFMATRIXTERMSATT 622
+#define MATRIXTERMSTART 623
+#define MATRIXTERMEND 624
+#define POWERSTART 625
+#define POWEREND 626
+#define PLUSSTART 627
+#define PLUSEND 628
+#define MINUSSTART 629
+#define MINUSEND 630
+#define DIVIDESTART 631
+#define DIVIDEEND 632
+#define LNSTART 633
+#define LNEND 634
+#define SQRTSTART 635
+#define SQRTEND 636
+#define SUMSTART 637
+#define SUMEND 638
+#define PRODUCTSTART 639
+#define PRODUCTEND 640
+#define EXPSTART 641
+#define EXPEND 642
+#define NEGATESTART 643
+#define NEGATEEND 644
+#define IFSTART 645
+#define IFEND 646
+#define SQUARESTART 647
+#define SQUAREEND 648
+#define COSSTART 649
+#define COSEND 650
+#define SINSTART 651
+#define SINEND 652
+#define VARIABLESTART 653
+#define VARIABLEEND 654
+#define ABSSTART 655
+#define ABSEND 656
+#define ERFSTART 657
+#define ERFEND 658
+#define MAXSTART 659
+#define MAXEND 660
+#define ALLDIFFSTART 661
+#define ALLDIFFEND 662
+#define MINSTART 663
+#define MINEND 664
+#define ESTART 665
+#define EEND 666
+#define PISTART 667
+#define PIEND 668
+#define TIMESSTART 669
+#define TIMESEND 670
+#define NUMBERSTART 671
+#define NUMBEREND 672
+#define MATRIXDETERMINANTSTART 673
+#define MATRIXDETERMINANTEND 674
+#define MATRIXTRACESTART 675
+#define MATRIXTRACEEND 676
+#define MATRIXTOSCALARSTART 677
+#define MATRIXTOSCALAREND 678
+#define MATRIXDIAGONALSTART 679
+#define MATRIXDIAGONALEND 680
+#define MATRIXDOTTIMESSTART 681
+#define MATRIXDOTTIMESEND 682
+#define MATRIXLOWERTRIANGLESTART 683
+#define MATRIXLOWERTRIANGLEEND 684
+#define MATRIXUPPERTRIANGLESTART 685
+#define MATRIXUPPERTRIANGLEEND 686
+#define MATRIXMERGESTART 687
+#define MATRIXMERGEEND 688
+#define MATRIXMINUSSTART 689
+#define MATRIXMINUSEND 690
+#define MATRIXNEGATESTART 691
+#define MATRIXNEGATEEND 692
+#define MATRIXPLUSSTART 693
+#define MATRIXPLUSEND 694
+#define MATRIXTIMESSTART 695
+#define MATRIXTIMESEND 696
+#define MATRIXSUMSTART 697
+#define MATRIXSUMEND 698
+#define MATRIXPRODUCTSTART 699
+#define MATRIXPRODUCTEND 700
+#define MATRIXSCALARTIMESSTART 701
+#define MATRIXSCALARTIMESEND 702
+#define MATRIXSUBMATRIXATSTART 703
+#define MATRIXSUBMATRIXATEND 704
+#define MATRIXTRANSPOSESTART 705
+#define MATRIXTRANSPOSEEND 706
+#define MATRIXREFERENCESTART 707
+#define MATRIXREFERENCEEND 708
+#define IDENTITYMATRIXSTART 709
+#define IDENTITYMATRIXEND 710
+#define MATRIXINVERSESTART 711
+#define MATRIXINVERSEEND 712
+#define COMPLEXCONJUGATESTART 713
+#define COMPLEXCONJUGATEEND 714
+#define COMPLEXMINUSSTART 715
+#define COMPLEXMINUSEND 716
+#define COMPLEXNEGATESTART 717
+#define COMPLEXNEGATEEND 718
+#define COMPLEXNUMBERSTART 719
+#define COMPLEXNUMBEREND 720
+#define COMPLEXPLUSSTART 721
+#define COMPLEXPLUSEND 722
+#define COMPLEXSQUARESTART 723
+#define COMPLEXSQUAREEND 724
+#define COMPLEXSUMSTART 725
+#define COMPLEXSUMEND 726
+#define COMPLEXTIMESSTART 727
+#define COMPLEXTIMESEND 728
+#define CREATECOMPLEXSTART 729
+#define CREATECOMPLEXEND 730
+#define EMPTYINCLUDEDIAGONALATT 731
+#define INCLUDEDIAGONALATT 732
+#define EMPTYTRANSPOSEATT 733
+#define TRANSPOSEATT 734
+#define EMPTYIDATT 735
+#define IDATT 736
+
+/* Value type.  */
+#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+
+union YYSTYPE
+{
+
+
+    double   dval;
+    OsXmlInt ival;
+    char*    sval;
+
+
+};
+
+typedef union YYSTYPE YYSTYPE;
+# define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
+#endif
+
+/* Location type.  */
+#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
+typedef struct YYLTYPE YYLTYPE;
+struct YYLTYPE
+{
+  int first_line;
+  int first_column;
+  int last_line;
+  int last_column;
+};
+# define YYLTYPE_IS_DECLARED 1
+# define YYLTYPE_IS_TRIVIAL 1
+#endif
+
+
+
+int osolparse (OSOption *osoption, OSoLParserData *parserData, OSgLParserData *osglData, OSnLParserData *osnlData);
+
+#endif /* !YY_OSOL_OS_SRC_OSPARSERS_OSPARSEOSOL_TAB_HPP_INCLUDED  */
+
+/* Copy the second part of user declarations.  */
+
+
+
+std::string addErrorMsg(YYLTYPE* mytype, OSOption *osoption, OSoLParserData* parserData, OSgLParserData* osglData, OSnLParserData* osnlData, std::string errormsg ) ;
+void osolerror(YYLTYPE* mytype, OSOption *osoption, OSoLParserData* parserData, OSgLParserData* osglData, OSnLParserData* osnlData, std::string errormsg );
+int osollex(YYSTYPE* lvalp,  YYLTYPE* llocp, void* scanner);
+#define scanner parserData->scanner
+
+
+
+#ifdef short
+# undef short
+#endif
+
+#ifdef YYTYPE_UINT8
+typedef YYTYPE_UINT8 yytype_uint8;
+#else
+typedef unsigned char yytype_uint8;
+#endif
+
+#ifdef YYTYPE_INT8
+typedef YYTYPE_INT8 yytype_int8;
+#else
+typedef signed char yytype_int8;
+#endif
+
+#ifdef YYTYPE_UINT16
+typedef YYTYPE_UINT16 yytype_uint16;
+#else
+typedef unsigned short int yytype_uint16;
+#endif
+
+#ifdef YYTYPE_INT16
+typedef YYTYPE_INT16 yytype_int16;
+#else
+typedef short int yytype_int16;
+#endif
+
+#ifndef YYSIZE_T
+# ifdef __SIZE_TYPE__
+#  define YYSIZE_T __SIZE_TYPE__
+# elif defined size_t
+#  define YYSIZE_T size_t
+# elif ! defined YYSIZE_T
+#  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
+#  define YYSIZE_T size_t
+# else
+#  define YYSIZE_T unsigned int
+# endif
+#endif
+
+#define YYSIZE_MAXIMUM ((YYSIZE_T) -1)
+
+#ifndef YY_
+# if defined YYENABLE_NLS && YYENABLE_NLS
+#  if ENABLE_NLS
+#   include <libintl.h> /* INFRINGES ON USER NAME SPACE */
+#   define YY_(Msgid) dgettext ("bison-runtime", Msgid)
+#  endif
+# endif
+# ifndef YY_
+#  define YY_(Msgid) Msgid
+# endif
+#endif
+
+#ifndef YY_ATTRIBUTE
+# if (defined __GNUC__                                               \
+      && (2 < __GNUC__ || (__GNUC__ == 2 && 96 <= __GNUC_MINOR__)))  \
+     || defined __SUNPRO_C && 0x5110 <= __SUNPRO_C
+#  define YY_ATTRIBUTE(Spec) __attribute__(Spec)
+# else
+#  define YY_ATTRIBUTE(Spec) /* empty */
+# endif
+#endif
+
+#ifndef YY_ATTRIBUTE_PURE
+# define YY_ATTRIBUTE_PURE   YY_ATTRIBUTE ((__pure__))
+#endif
+
+#ifndef YY_ATTRIBUTE_UNUSED
+# define YY_ATTRIBUTE_UNUSED YY_ATTRIBUTE ((__unused__))
+#endif
+
+#if !defined _Noreturn \
+     && (!defined __STDC_VERSION__ || __STDC_VERSION__ < 201112)
+# if defined _MSC_VER && 1200 <= _MSC_VER
+#  define _Noreturn __declspec (noreturn)
+# else
+#  define _Noreturn YY_ATTRIBUTE ((__noreturn__))
+# endif
+#endif
+
+/* Suppress unused-variable warnings by "using" E.  */
+#if ! defined lint || defined __GNUC__
+# define YYUSE(E) ((void) (E))
+#else
+# define YYUSE(E) /* empty */
+#endif
+
+#if defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
+/* Suppress an incorrect diagnostic about yylval being uninitialized.  */
+# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN \
+    _Pragma ("GCC diagnostic push") \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")\
+    _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# define YY_IGNORE_MAYBE_UNINITIALIZED_END \
+    _Pragma ("GCC diagnostic pop")
+#else
+# define YY_INITIAL_VALUE(Value) Value
+#endif
+#ifndef YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+# define YY_IGNORE_MAYBE_UNINITIALIZED_END
+#endif
+#ifndef YY_INITIAL_VALUE
+# define YY_INITIAL_VALUE(Value) /* Nothing. */
+#endif
+
+
+#if ! defined yyoverflow || YYERROR_VERBOSE
+
+/* The parser invokes alloca or malloc; define the necessary symbols.  */
+
+# ifdef YYSTACK_USE_ALLOCA
+#  if YYSTACK_USE_ALLOCA
+#   ifdef __GNUC__
+#    define YYSTACK_ALLOC __builtin_alloca
+#   elif defined __BUILTIN_VA_ARG_INCR
+#    include <alloca.h> /* INFRINGES ON USER NAME SPACE */
+#   elif defined _AIX
+#    define YYSTACK_ALLOC __alloca
+#   elif defined _MSC_VER
+#    include <malloc.h> /* INFRINGES ON USER NAME SPACE */
+#    define alloca _alloca
+#   else
+#    define YYSTACK_ALLOC alloca
+#    if ! defined _ALLOCA_H && ! defined EXIT_SUCCESS
+#     include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
+      /* Use EXIT_SUCCESS as a witness for stdlib.h.  */
+#     ifndef EXIT_SUCCESS
+#      define EXIT_SUCCESS 0
+#     endif
+#    endif
+#   endif
+#  endif
+# endif
+
+# ifdef YYSTACK_ALLOC
+   /* Pacify GCC's 'empty if-body' warning.  */
+#  define YYSTACK_FREE(Ptr) do { /* empty */; } while (0)
+#  ifndef YYSTACK_ALLOC_MAXIMUM
+    /* The OS might guarantee only one guard page at the bottom of the stack,
+       and a page size can be as small as 4096 bytes.  So we cannot safely
+       invoke alloca (N) if N exceeds 4096.  Use a slightly smaller number
+       to allow for a few compiler-allocated temporary stack slots.  */
+#   define YYSTACK_ALLOC_MAXIMUM 4032 /* reasonable circa 2006 */
+#  endif
+# else
+#  define YYSTACK_ALLOC YYMALLOC
+#  define YYSTACK_FREE YYFREE
+#  ifndef YYSTACK_ALLOC_MAXIMUM
+#   define YYSTACK_ALLOC_MAXIMUM YYSIZE_MAXIMUM
+#  endif
+#  if (defined __cplusplus && ! defined EXIT_SUCCESS \
+       && ! ((defined YYMALLOC || defined malloc) \
+             && (defined YYFREE || defined free)))
+#   include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
+#   ifndef EXIT_SUCCESS
+#    define EXIT_SUCCESS 0
+#   endif
+#  endif
+#  ifndef YYMALLOC
+#   define YYMALLOC malloc
+#   if ! defined malloc && ! defined EXIT_SUCCESS
+void *malloc (YYSIZE_T); /* INFRINGES ON USER NAME SPACE */
+#   endif
+#  endif
+#  ifndef YYFREE
+#   define YYFREE free
+#   if ! defined free && ! defined EXIT_SUCCESS
+void free (void *); /* INFRINGES ON USER NAME SPACE */
+#   endif
+#  endif
+# endif
+#endif /* ! defined yyoverflow || YYERROR_VERBOSE */
+
+
+#if (! defined yyoverflow \
+     && (! defined __cplusplus \
+         || (defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL \
+             && defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
+
+/* A type that is properly aligned for any stack member.  */
+union yyalloc
+{
+  yytype_int16 yyss_alloc;
+  YYSTYPE yyvs_alloc;
+  YYLTYPE yyls_alloc;
+};
+
+/* The size of the maximum gap between one aligned stack and the next.  */
+# define YYSTACK_GAP_MAXIMUM (sizeof (union yyalloc) - 1)
+
+/* The size of an array large to enough to hold all stacks, each with
+   N elements.  */
+# define YYSTACK_BYTES(N) \
+     ((N) * (sizeof (yytype_int16) + sizeof (YYSTYPE) + sizeof (YYLTYPE)) \
+      + 2 * YYSTACK_GAP_MAXIMUM)
+
+# define YYCOPY_NEEDED 1
+
+/* Relocate STACK from its old location to the new one.  The
+   local variables YYSIZE and YYSTACKSIZE give the old and new number of
+   elements in the stack, and YYPTR gives the new location of the
+   stack.  Advance YYPTR to a properly aligned location for the next
+   stack.  */
+# define YYSTACK_RELOCATE(Stack_alloc, Stack)                           \
+    do                                                                  \
+      {                                                                 \
+        YYSIZE_T yynewbytes;                                            \
+        YYCOPY (&yyptr->Stack_alloc, Stack, yysize);                    \
+        Stack = &yyptr->Stack_alloc;                                    \
+        yynewbytes = yystacksize * sizeof (*Stack) + YYSTACK_GAP_MAXIMUM; \
+        yyptr += yynewbytes / sizeof (*yyptr);                          \
+      }                                                                 \
+    while (0)
+
+#endif
+
+#if defined YYCOPY_NEEDED && YYCOPY_NEEDED
+/* Copy COUNT objects from SRC to DST.  The source and destination do
+   not overlap.  */
+# ifndef YYCOPY
+#  if defined __GNUC__ && 1 < __GNUC__
+#   define YYCOPY(Dst, Src, Count) \
+      __builtin_memcpy (Dst, Src, (Count) * sizeof (*(Src)))
+#  else
+#   define YYCOPY(Dst, Src, Count)              \
+      do                                        \
+        {                                       \
+          YYSIZE_T yyi;                         \
+          for (yyi = 0; yyi < (Count); yyi++)   \
+            (Dst)[yyi] = (Src)[yyi];            \
+        }                                       \
+      while (0)
+#  endif
+# endif
+#endif /* !YYCOPY_NEEDED */
+
+/* YYFINAL -- State number of the termination state.  */
+#define YYFINAL  6
+/* YYLAST -- Last index in YYTABLE.  */
+#define YYLAST   2256
+
+/* YYNTOKENS -- Number of terminals.  */
+#define YYNTOKENS  486
+/* YYNNTS -- Number of nonterminals.  */
+#define YYNNTS  1229
+/* YYNRULES -- Number of rules.  */
+#define YYNRULES  1839
+/* YYNSTATES -- Number of states.  */
+#define YYNSTATES  2621
+
+/* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
+   by yylex, with out-of-bounds checking.  */
+#define YYUNDEFTOK  2
+#define YYMAXUTOK   736
+
+#define YYTRANSLATE(YYX)                                                \
+  ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
+
+/* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
+   as returned by yylex, without out-of-bounds checking.  */
+static const yytype_uint16 yytranslate[] =
+{
+       0,     2,     2,     2,     2,     2,     2,     2,     2,   483,
+     485,     2,     2,   484,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,   482,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
+      55,    56,    57,    58,    59,    60,    61,    62,    63,    64,
+      65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
+      75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
+      85,    86,    87,    88,    89,    90,    91,    92,    93,    94,
+      95,    96,    97,    98,    99,   100,   101,   102,   103,   104,
+     105,   106,   107,   108,   109,   110,   111,   112,   113,   114,
+     115,   116,   117,   118,   119,   120,   121,   122,   123,   124,
+     125,   126,   127,   128,   129,   130,   131,   132,   133,   134,
+     135,   136,   137,   138,   139,   140,   141,   142,   143,   144,
+     145,   146,   147,   148,   149,   150,   151,   152,   153,   154,
+     155,   156,   157,   158,   159,   160,   161,   162,   163,   164,
+     165,   166,   167,   168,   169,   170,   171,   172,   173,   174,
+     175,   176,   177,   178,   179,   180,   181,   182,   183,   184,
+     185,   186,   187,   188,   189,   190,   191,   192,   193,   194,
+     195,   196,   197,   198,   199,   200,   201,   202,   203,   204,
+     205,   206,   207,   208,   209,   210,   211,   212,   213,   214,
+     215,   216,   217,   218,   219,   220,   221,   222,   223,   224,
+     225,   226,   227,   228,   229,   230,   231,   232,   233,   234,
+     235,   236,   237,   238,   239,   240,   241,   242,   243,   244,
+     245,   246,   247,   248,   249,   250,   251,   252,   253,   254,
+     255,   256,   257,   258,   259,   260,   261,   262,   263,   264,
+     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
+     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
+     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
+     295,   296,   297,   298,   299,   300,   301,   302,   303,   304,
+     305,   306,   307,   308,   309,   310,   311,   312,   313,   314,
+     315,   316,   317,   318,   319,   320,   321,   322,   323,   324,
+     325,   326,   327,   328,   329,   330,   331,   332,   333,   334,
+     335,   336,   337,   338,   339,   340,   341,   342,   343,   344,
+     345,   346,   347,   348,   349,   350,   351,   352,   353,   354,
+     355,   356,   357,   358,   359,   360,   361,   362,   363,   364,
+     365,   366,   367,   368,   369,   370,   371,   372,   373,   374,
+     375,   376,   377,   378,   379,   380,   381,   382,   383,   384,
+     385,   386,   387,   388,   389,   390,   391,   392,   393,   394,
+     395,   396,   397,   398,   399,   400,   401,   402,   403,   404,
+     405,   406,   407,   408,   409,   410,   411,   412,   413,   414,
+     415,   416,   417,   418,   419,   420,   421,   422,   423,   424,
+     425,   426,   427,   428,   429,   430,   431,   432,   433,   434,
+     435,   436,   437,   438,   439,   440,   441,   442,   443,   444,
+     445,   446,   447,   448,   449,   450,   451,   452,   453,   454,
+     455,   456,   457,   458,   459,   460,   461,   462,   463,   464,
+     465,   466,   467,   468,   469,   470,   471,   472,   473,   474,
+     475,   476,   477,   478,   479,   480,   481
+};
+
+#if YYDEBUG
+  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+static const yytype_uint16 yyrline[] =
+{
+       0,   350,   350,   351,   353,   360,   370,   370,   372,   372,
+     374,   376,   378,   387,   388,   391,   399,   399,   412,   412,
+     414,   430,   430,   432,   432,   434,   436,   438,   438,   441,
+     442,   443,   444,   445,   446,   447,   448,   449,   450,   451,
+     455,   457,   466,   466,   468,   468,   470,   472,   482,   484,
+     491,   491,   493,   493,   495,   497,   507,   509,   515,   515,
+     517,   517,   519,   521,   531,   538,   546,   547,   555,   561,
+     561,   563,   563,   565,   567,   575,   577,   583,   583,   585,
+     585,   587,   589,   598,   600,   607,   607,   609,   609,   611,
+     613,   623,   625,   632,   632,   634,   634,   636,   638,   648,
+     650,   656,   656,   658,   658,   660,   662,   672,   674,   680,
+     680,   682,   682,   684,   686,   696,   703,   712,   713,   719,
+     726,   726,   728,   728,   730,   732,   740,   746,   756,   764,
+     769,   775,   775,   777,   779,   783,   783,   785,   796,   815,
+     821,   821,   824,   828,   829,   832,   832,   880,   880,   882,
+     892,   892,   894,   894,   896,   898,   900,   900,   903,   904,
+     905,   906,   907,   911,   913,   923,   925,   925,   928,   929,
+     932,   934,   942,   944,   954,   956,   956,   959,   960,   963,
+     965,   974,   976,   986,   988,   988,   991,   992,   995,   997,
+    1006,  1008,  1018,  1019,  1021,  1023,  1034,  1040,  1050,  1058,
+    1062,  1067,  1067,  1069,  1071,  1075,  1075,  1077,  1132,  1132,
+    1134,  1141,  1141,  1143,  1143,  1145,  1147,  1149,  1149,  1152,
+    1153,  1157,  1159,  1165,  1165,  1167,  1167,  1169,  1171,  1182,
+    1188,  1198,  1206,  1210,  1215,  1215,  1217,  1219,  1223,  1223,
+    1225,  1278,  1278,  1280,  1300,  1300,  1302,  1302,  1304,  1306,
+    1308,  1308,  1311,  1312,  1313,  1314,  1315,  1316,  1317,  1318,
+    1319,  1320,  1321,  1322,  1323,  1324,  1325,  1330,  1336,  1346,
+    1347,  1349,  1349,  1351,  1351,  1353,  1355,  1357,  1364,  1366,
+    1372,  1372,  1374,  1374,  1376,  1378,  1388,  1399,  1409,  1411,
+    1411,  1413,  1413,  1415,  1424,  1424,  1426,  1447,  1458,  1468,
+    1468,  1470,  1470,  1472,  1483,  1494,  1504,  1504,  1506,  1506,
+    1508,  1519,  1530,  1540,  1540,  1542,  1542,  1544,  1555,  1566,
+    1576,  1576,  1578,  1578,  1580,  1591,  1607,  1617,  1619,  1619,
+    1621,  1621,  1623,  1632,  1632,  1634,  1638,  1654,  1664,  1666,
+    1666,  1668,  1668,  1670,  1679,  1679,  1681,  1685,  1701,  1711,
+    1713,  1713,  1715,  1715,  1717,  1726,  1726,  1728,  1732,  1748,
+    1758,  1760,  1760,  1762,  1762,  1764,  1773,  1773,  1775,  1779,
+    1790,  1800,  1802,  1802,  1804,  1804,  1806,  1817,  1828,  1838,
+    1840,  1840,  1842,  1842,  1844,  1870,  1881,  1891,  1893,  1893,
+    1895,  1895,  1897,  1906,  1906,  1908,  1929,  1935,  1945,  1953,
+    1957,  1962,  1962,  1964,  1966,  1970,  1970,  1972,  2026,  2026,
+    2028,  2036,  2038,  2038,  2041,  2048,  2055,  2064,  2064,  2066,
+    2068,  2070,  2077,  2077,  2079,  2086,  2093,  2093,  2099,  2099,
+    2101,  2103,  2105,  2115,  2115,  2130,  2135,  2146,  2154,  2163,
+    2163,  2165,  2167,  2169,  2169,  2172,  2177,  2191,  2197,  2197,
+    2200,  2214,  2219,  2227,  2227,  2231,  2231,  2246,  2251,  2262,
+    2270,  2279,  2279,  2281,  2283,  2285,  2285,  2288,  2294,  2309,
+    2315,  2315,  2318,  2330,  2335,  2341,  2341,  2345,  2345,  2347,
+    2352,  2352,  2354,  2356,  2358,  2361,  2361,  2373,  2373,  2385,
+    2385,  2397,  2397,  2409,  2409,  2421,  2421,  2433,  2433,  2445,
+    2445,  2461,  2466,  2477,  2485,  2494,  2494,  2496,  2498,  2504,
+    2504,  2506,  2511,  2527,  2533,  2533,  2536,  2548,  2553,  2561,
+    2561,  2565,  2565,  2571,  2577,  2585,  2593,  2601,  2601,  2603,
+    2605,  2605,  2607,  2626,  2642,  2650,  2650,  2653,  2654,  2663,
+    2666,  2666,  2668,  2668,  2670,  2675,  2675,  2677,  2682,  2714,
+    2734,  2734,  2737,  2741,  2745,  2746,  2747,  2748,  2749,  2750,
+    2751,  2752,  2755,  2755,  2757,  2757,  2759,  2761,  2761,  2763,
+    2763,  2766,  2781,  2801,  2803,  2803,  2806,  2816,  2817,  2818,
+    2819,  2822,  2824,  2824,  2832,  2832,  2834,  2840,  2847,  2847,
+    2852,  2852,  2854,  2856,  2858,  2867,  2867,  2883,  2889,  2901,
+    2909,  2918,  2918,  2920,  2922,  2924,  2924,  2927,  2932,  2947,
+    2949,  2949,  2952,  2963,  2967,  2974,  2974,  2977,  2977,  2995,
+    3000,  3014,  3022,  3031,  3031,  3033,  3035,  3037,  3037,  3040,
+    3045,  3063,  3065,  3065,  3068,  3079,  3083,  3089,  3096,  3096,
+    3100,  3100,  3102,  3107,  3107,  3109,  3111,  3113,  3116,  3116,
+    3128,  3128,  3140,  3140,  3152,  3152,  3164,  3164,  3176,  3176,
+    3188,  3188,  3200,  3200,  3202,  3208,  3239,  3260,  3260,  3263,
+    3267,  3271,  3272,  3273,  3274,  3275,  3276,  3277,  3278,  3281,
+    3281,  3283,  3283,  3285,  3287,  3287,  3289,  3289,  3292,  3307,
+    3329,  3331,  3331,  3334,  3344,  3345,  3346,  3347,  3350,  3352,
+    3352,  3360,  3360,  3362,  3368,  3375,  3375,  3380,  3380,  3382,
+    3384,  3386,  3394,  3394,  3413,  3418,  3429,  3437,  3446,  3446,
+    3448,  3450,  3452,  3452,  3455,  3460,  3476,  3483,  3483,  3486,
+    3497,  3501,  3508,  3508,  3512,  3512,  3530,  3535,  3548,  3556,
+    3565,  3565,  3567,  3569,  3571,  3571,  3574,  3579,  3598,  3605,
+    3605,  3608,  3619,  3623,  3627,  3633,  3633,  3637,  3637,  3639,
+    3644,  3644,  3646,  3648,  3650,  3653,  3653,  3665,  3665,  3677,
+    3677,  3689,  3689,  3701,  3701,  3713,  3713,  3725,  3725,  3737,
+    3737,  3739,  3745,  3776,  3796,  3796,  3799,  3803,  3807,  3808,
+    3809,  3810,  3811,  3812,  3813,  3814,  3817,  3817,  3819,  3819,
+    3821,  3823,  3823,  3825,  3825,  3828,  3843,  3863,  3865,  3865,
+    3868,  3880,  3881,  3882,  3883,  3886,  3888,  3888,  3897,  3897,
+    3899,  3905,  3907,  3907,  3912,  3912,  3914,  3917,  3920,  3920,
+    3928,  3933,  3933,  3948,  3948,  3950,  3952,  3955,  3959,  3959,
+    3972,  3979,  3990,  3990,  3992,  3994,  3996,  4000,  4000,  4002,
+    4010,  4024,  4024,  4030,  4046,  4064,  4104,  4104,  4106,  4110,
+    4112,  4114,  4114,  4143,  4156,  4169,  4189,  4189,  4191,  4199,
+    4199,  4205,  4207,  4215,  4225,  4236,  4238,  4240,  4240,  4267,
+    4278,  4290,  4310,  4310,  4312,  4443,  4443,  4445,  4467,  4484,
+    4496,  4501,  4501,  4504,  4505,  4506,  4508,  4517,  4526,  4535,
+    4535,  4619,  4626,  4648,  4655,  4655,  4657,  4662,  4669,  4675,
+    4675,  4677,  4682,  4746,  4752,  4754,  4780,  4787,  4787,  4789,
+    4794,  4801,  4807,  4807,  4809,  4812,  4879,  4889,  4897,  4905,
+    4928,  4935,  4942,  4949,  4963,  4973,  4984,  4997,  4997,  4999,
+    5018,  5036,  5046,  5046,  5049,  5057,  5058,  5062,  5062,  5064,
+    5067,  5069,  5073,  5074,  5081,  5083,  5083,  5085,  5086,  5087,
+    5088,  5124,  5126,  5140,  5140,  5142,  5144,  5146,  5148,  5148,
+    5151,  5152,  5153,  5154,  5155,  5157,  5165,  5165,  5167,  5167,
+    5169,  5175,  5183,  5183,  5185,  5185,  5187,  5193,  5201,  5201,
+    5203,  5203,  5205,  5211,  5219,  5219,  5221,  5221,  5223,  5229,
+    5237,  5237,  5239,  5239,  5241,  5252,  5260,  5268,  5270,  5270,
+    5272,  5274,  5283,  5285,  5285,  5287,  5287,  5289,  5298,  5301,
+    5301,  5303,  5303,  5306,  5337,  5345,  5347,  5347,  5349,  5351,
+    5359,  5359,  5361,  5370,  5372,  5372,  5374,  5374,  5376,  5407,
+    5417,  5417,  5419,  5421,  5429,  5429,  5431,  5512,  5525,  5533,
+    5539,  5540,  5543,  5548,  5549,  5554,  5555,  5557,  5559,  5561,
+    5567,  5569,  5574,  5574,  5576,  5578,  5580,  5583,  5585,  5590,
+    5590,  5592,  5594,  5596,  5599,  5601,  5606,  5606,  5608,  5610,
+    5612,  5615,  5617,  5622,  5622,  5624,  5626,  5628,  5631,  5633,
+    5638,  5638,  5640,  5642,  5644,  5647,  5649,  5654,  5654,  5656,
+    5658,  5660,  5663,  5665,  5670,  5670,  5672,  5674,  5676,  5679,
+    5691,  5698,  5699,  5702,  5703,  5704,  5705,  5706,  5707,  5708,
+    5712,  5713,  5723,  5761,  5775,  5776,  5778,  5783,  5784,  5786,
+    5800,  5807,  5808,  5811,  5812,  5813,  5814,  5815,  5816,  5817,
+    5821,  5829,  5838,  5852,  5853,  5855,  5860,  5861,  5863,  5871,
+    5884,  5886,  5886,  5888,  5890,  5913,  5928,  5965,  5988,  6012,
+    6012,  6015,  6016,  6017,  6018,  6019,  6023,  6048,  6076,  6076,
+    6079,  6080,  6082,  6084,  6085,  6086,  6219,  6219,  6221,  6223,
+    6230,  6230,  6232,  6234,  6234,  6264,  6266,  6266,  6271,  6290,
+    6321,  6321,  6324,  6325,  6326,  6327,  6328,  6329,  6330,  6331,
+    6332,  6333,  6336,  6336,  6338,  6338,  6343,  6343,  6343,  6344,
+    6344,  6344,  6345,  6345,  6345,  6346,  6346,  6348,  6350,  6359,
+    6365,  6365,  6368,  6372,  6378,  6380,  6380,  6386,  6396,  6406,
+    6406,  6408,  6410,  6426,  6429,  6429,  6443,  6451,  6451,  6453,
+    6455,  6457,  6463,  6473,  6481,  6481,  6483,  6485,  6487,  6490,
+    6492,  6501,  6507,  6507,  6510,  6514,  6520,  6522,  6524,  6524,
+    6534,  6542,  6542,  6544,  6546,  6548,  6551,  6553,  6562,  6568,
+    6568,  6571,  6575,  6581,  6583,  6586,  6591,  6602,  6618,  6618,
+    6620,  6622,  6624,  6626,  6626,  6628,  6635,  6642,  6661,  6661,
+    6664,  6665,  6667,  6667,  6669,  6671,  6673,  6673,  6676,  6678,
+    6686,  6686,  6691,  6698,  6700,  6709,  6715,  6715,  6718,  6722,
+    6729,  6731,  6734,  6738,  6749,  6765,  6765,  6767,  6769,  6771,
+    6771,  6773,  6775,  6790,  6790,  6792,  6794,  6803,  6805,  6814,
+    6820,  6820,  6823,  6827,  6834,  6836,  6839,  6843,  6854,  6871,
+    6871,  6873,  6875,  6877,  6877,  6879,  6881,  6896,  6896,  6898,
+    6900,  6910,  6912,  6921,  6927,  6927,  6930,  6934,  6940,  6942,
+    6944,  6944,  6954,  6962,  6962,  6964,  6966,  6968,  6971,  6973,
+    6982,  6988,  6988,  6991,  6995,  7001,  7003,  7006,  7010,  7021,
+    7037,  7037,  7039,  7041,  7043,  7043,  7045,  7048,  7060,  7060,
+    7063,  7064,  7065,  7067,  7100,  7102,  7112,  7118,  7118,  7121,
+    7125,  7131,  7133,  7136,  7140,  7151,  7164,  7164,  7166,  7168,
+    7170,  7170,  7172,  7199,  7210,  7210,  7213,  7214,  7215,  7217,
+    7217,  7220,  7222,  7231,  7237,  7237,  7240,  7244,  7250,  7252,
+    7254,  7254,  7264,  7272,  7272,  7274,  7276,  7278,  7281,  7284,
+    7302,  7302,  7313,  7320,  7330,  7338,  7344,  7346,  7360,  7372,
+    7378,  7384,  7384,  7386,  7388,  7390,  7392,  7402,  7408,  7414,
+    7414,  7416,  7418,  7420,  7422,  7422,  7427,  7432,  7444,  7446,
+    7446,  7449,  7450,  7451,  7461,  7468,  7468,  7470,  7472,  7490,
+    7501,  7512,  7534,  7545,  7556,  7567,  7578,  7611,  7622,  7644,
+    7655,  7667,  7678,  7689,  7700,  7714,  7725,  7738,  7752,  7766,
+    7778,  7790,  7810,  7830,  7840,  7870,  7880,  7891,  7903,  7917,
+    7930,  7943,  7953,  7963,  7973,  7986,  7986,  7988,  7998,  8016,
+    8016,  8018,  8025,  8034,  8034,  8036,  8043,  8052,  8052,  8054,
+    8061,  8070,  8070,  8072,  8079,  8162,  8162,  8164,  8171,  8180,
+    8180,  8182,  8189,  8198,  8198,  8200,  8209,  8225,  8225,  8227,
+    8234,  8243,  8243,  8245,  8252,  8261,  8261,  8263,  8270,  8279,
+    8279,  8281,  8288,  8297,  8297,  8299,  8306,  8315,  8315,  8319,
+    8327,  8336,  8336,  8338,  8345,  8354,  8354,  8356,  8363,  8515,
+    8516,  8517,  8518,  8519,  8520,  8521,  8522,  8523,  8524,  8525,
+    8526,  8527,  8528,  8529,  8530,  8531,  8532,  8533,  8534,  8535,
+    8536,  8537,  8538,  8540,  8541,  8542,  8546,  8546,  8549,  8550,
+    8552,  8552,  8555,  8556,  8560,  8560,  8565,  8565,  8570,  8570,
+    8575,  8575,  8580,  8580,  8585,  8585,  8590,  8590,  8595,  8595,
+    8600,  8600,  8605,  8605,  8610,  8610,  8615,  8615,  8620,  8622,
+    8628,  8635,  8635,  8641,  8641,  8653,  8653,  8658,  8658,  8663,
+    8663,  8673,  8680,  8686,  8687,  8689,  8690,  8693,  8697,  8701,
+    8705,  8704,  8725,  8724,  8731,  8732,  8734,  8733,  8740,  8741,
+    8744,  8750,  8758,  8765,  8787,  8787,  8798,  8798,  8801,  8801,
+    8815,  8816,  8819,  8819,  8832,  8833,  8836,  8836,  8849,  8850,
+    8853,  8853,  8863,  8864,  8870,  8871,  8872,  8873,  8874,  8875,
+    8876,  8877,  8878,  8879,  8880,  8881,  8882,  8883,  8884,  8885,
+    8886,  8887,  8888,  8889,  8892,  8903,  8911,  8911,  8914,  8915,
+    8918,  8919,  8921,  8933,  8947,  8952,  8959,  8960,  8962,  8969,
+    8974,  8981,  8982,  8984,  8991,  8996,  9003,  9004,  9006,  9013,
+    9015,  9021,  9023,  9025,  9031,  9033,  9035,  9041,  9043,  9045,
+    9051,  9053,  9055,  9061,  9061,  9066,  9068,  9070,  9076,  9076,
+    9081,  9083,  9094,  9096,  9101,  9101,  9103,  9105,  9111,  9114,
+    9116,  9122,  9125,  9127,  9133,  9137,  9136,  9149,  9149,  9156,
+    9158,  9164,  9168,  9167,  9179,  9179,  9185,  9187,  9193,  9195,
+    9197,  9203,  9206,  9208,  9214,  9331,  9331,  9335,  9336,  9337,
+    9338,  9339,  9340,  9341,  9342,  9343,  9347,  9351,  9360,  9361,
+    9363,  9370,  9370,  9373,  9374,  9378,  9380,  9386,  9389,  9391,
+    9397,  9400,  9400,  9410,  9411,  9417,  9419,  9425,  9428,  9430,
+    9436,  9439,  9441,  9447,  9450,  9452,  9458,  9461,  9463,  9469
+};
+#endif
+
+#if YYDEBUG || YYERROR_VERBOSE || 0
+/* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
+   First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
+static const char *const yytname[] =
+{
+  "$end", "error", "$undefined", "ATTRIBUTETEXT", "ELEMENTTEXT",
+  "ITEMTEXT", "INTEGER", "DOUBLE", "QUOTE", "TWOQUOTES", "BOOLEAN",
+  "GREATERTHAN", "ENDOFELEMENT", "OSOLSTART", "OSOLSTARTEMPTY",
+  "OSOLATTRIBUTETEXT", "OSOLEND", "EMPTYLBVALUEATT", "EMPTYUBVALUEATT",
+  "LBVALUEATT", "UBVALUEATT", "EMPTYLBDUALVALUEATT", "EMPTYUBDUALVALUEATT",
+  "LBDUALVALUEATT", "UBDUALVALUEATT", "WEIGHTATT", "EMPTYWEIGHTATT",
+  "TRANSPORTTYPEATT", "LOCATIONTYPEATT", "FROMATT", "TOATT", "MAKECOPYATT",
+  "NUMBEROFJOBIDSATT", "NUMBEROFPATHSATT", "NUMBEROFPATHPAIRSATT",
+  "NUMBEROFPROCESSESATT", "NUMBEROFOTHERVARIABLEOPTIONSATT",
+  "NUMBEROFOTHEROBJECTIVEOPTIONSATT", "NUMBEROFOTHERCONSTRAINTOPTIONSATT",
+  "NUMBEROFOTHERMATRIXPROGRAMMINGOPTIONSATT",
+  "NUMBEROFOTHERMATRIXVARIABLEOPTIONSATT",
+  "NUMBEROFOTHERMATRIXOBJECTIVEOPTIONSATT",
+  "NUMBEROFOTHERMATRIXCONSTRAINTOPTIONSATT", "NUMBEROFSOLVEROPTIONSATT",
+  "NUMBEROFOTHEROPTIONSATT", "NUMBEROFSOSATT", "SOSIDXATT",
+  "GROUPWEIGHTATT", "INSTANCELOCATIONSTART", "INSTANCELOCATIONEND",
+  "SOLVERTOINVOKESTART", "SOLVERTOINVOKEEND", "LICENSESTART", "LICENSEEND",
+  "USERNAMESTART", "USERNAMEEND", "PASSWORDSTART", "PASSWORDEND",
+  "CONTACTSTART", "CONTACTEND", "MINDISKSPACESTART", "MINDISKSPACEEND",
+  "MINMEMORYSTART", "MINMEMORYEND", "MINCPUSPEEDSTART", "MINCPUSPEEDEND",
+  "MINCPUNUMBERSTART", "MINCPUNUMBEREND", "SERVICETYPESTART",
+  "SERVICETYPEEND", "MAXTIMESTART", "MAXTIMEEND",
+  "REQUESTEDSTARTTIMESTART", "REQUESTEDSTARTTIMEEND", "DEPENDENCIESSTART",
+  "DEPENDENCIESEND", "PATHSTART", "PATHEND", "PATHPAIRSTART",
+  "PATHPAIREND", "REQUIREDDIRECTORIESSTART", "REQUIREDDIRECTORIESEND",
+  "REQUIREDFILESSTART", "REQUIREDFILESEND", "DIRECTORIESTOMAKESTART",
+  "DIRECTORIESTOMAKEEND", "FILESTOMAKESTART", "FILESTOMAKEEND",
+  "DIRECTORIESTODELETESTART", "DIRECTORIESTODELETEEND",
+  "FILESTODELETESTART", "FILESTODELETEEND", "INPUTDIRECTORIESTOMOVESTART",
+  "INPUTDIRECTORIESTOMOVEEND", "INPUTFILESTOMOVESTART",
+  "INPUTFILESTOMOVEEND", "OUTPUTDIRECTORIESTOMOVESTART",
+  "OUTPUTDIRECTORIESTOMOVEEND", "OUTPUTFILESTOMOVESTART",
+  "OUTPUTFILESTOMOVEEND", "PROCESSESTOKILLSTART", "PROCESSESTOKILLEND",
+  "PROCESSSTART", "PROCESSEND", "INITIALVARIABLEVALUESSTART",
+  "INITIALVARIABLEVALUESEND", "INITIALVARIABLEVALUESSTRINGSTART",
+  "INITIALVARIABLEVALUESSTRINGEND", "INITIALBASISSTATUSSTART",
+  "INITIALBASISSTATUSEND", "INTEGERVARIABLEBRANCHINGWEIGHTSSTART",
+  "INTEGERVARIABLEBRANCHINGWEIGHTSEND", "SOSVARIABLEBRANCHINGWEIGHTSSTART",
+  "SOSVARIABLEBRANCHINGWEIGHTSEND", "SOSSTART", "SOSEND",
+  "INITIALOBJECTIVEVALUESSTART", "INITIALOBJECTIVEVALUESEND",
+  "INITIALOBJECTIVEBOUNDSSTART", "INITIALOBJECTIVEBOUNDSEND",
+  "INITIALCONSTRAINTVALUESSTART", "INITIALCONSTRAINTVALUESEND",
+  "INITIALDUALVALUESSTART", "INITIALDUALVALUESEND",
+  "INITIALMATRIXVARIABLEVALUESSTART", "INITIALMATRIXVARIABLEVALUESEND",
+  "SOLVEROPTIONSSTART", "SOLVEROPTIONSEND", "SOLVEROPTIONSTART",
+  "SOLVEROPTIONEND", "OTHEROPTIONSSTART", "OTHEROPTIONSEND", "HEADERSTART",
+  "HEADEREND", "FILENAMESTART", "FILENAMEEND", "FILENAMEEMPTY",
+  "FILENAMESTARTANDEND", "FILESOURCESTART", "FILESOURCEEND",
+  "FILESOURCEEMPTY", "FILESOURCESTARTANDEND", "FILEDESCRIPTIONSTART",
+  "FILEDESCRIPTIONEND", "FILEDESCRIPTIONEMPTY",
+  "FILEDESCRIPTIONSTARTANDEND", "FILECREATORSTART", "FILECREATOREND",
+  "FILECREATOREMPTY", "FILECREATORSTARTANDEND", "FILELICENCESTART",
+  "FILELICENCEEND", "FILELICENCEEMPTY", "FILELICENCESTARTANDEND",
+  "INDEXESSTART", "INDEXESEND", "VALUESSTART", "VALUESEND",
+  "NONZEROSSTART", "NONZEROSEND", "ELSTART", "ELEND", "ENUMERATIONSTART",
+  "ENUMERATIONEND", "ITEMEMPTY", "ITEMSTART", "ITEMEND", "ITEMSTARTANDEND",
+  "BASE64START", "BASE64END", "NUMBEROFELATT", "NUMBEROFENUMERATIONSATT",
+  "NUMBEROFITEMSATT", "EMPTYCATEGORYATT", "CATEGORYATT",
+  "EMPTYDESCRIPTIONATT", "DESCRIPTIONATT", "EMPTYSOLVERATT", "SOLVERATT",
+  "EMPTYNAMEATT", "NAMEATT", "EMPTYTYPEATT", "TYPEATT", "EMPTYENUMTYPEATT",
+  "ENUMTYPEATT", "EMPTYSHAPEATT", "SHAPEATT", "EMPTYUNITATT", "UNITATT",
+  "EMPTYVALUEATT", "VALUEATT", "EMPTYVALUETYPEATT", "VALUETYPEATT",
+  "EMPTYCONTYPEATT", "CONTYPEATT", "EMPTYOBJTYPEATT", "OBJTYPEATT",
+  "EMPTYVARTYPEATT", "VARTYPEATT", "EMPTYMATRIXCONTYPEATT",
+  "MATRIXCONTYPEATT", "EMPTYMATRIXOBJTYPEATT", "MATRIXOBJTYPEATT",
+  "EMPTYMATRIXVARTYPEATT", "MATRIXVARTYPEATT", "EMPTYMATRIXTYPEATT",
+  "MATRIXTYPEATT", "EMPTYSYMMETRYATT", "SYMMETRYATT", "EMPTYROWMAJORATT",
+  "ROWMAJORATT", "EMPTYBASETRANSPOSEATT", "BASETRANSPOSEATT",
+  "NUMBEROFBLOCKSATT", "NUMBEROFCOLUMNSATT", "NUMBEROFROWSATT",
+  "NUMBEROFMATRICESATT", "NUMBEROFVALUESATT", "NUMBEROFCONSTRAINTSATT",
+  "NUMBEROFCONATT", "NUMBEROFCONIDXATT", "NUMBEROFOBJECTIVESATT",
+  "NUMBEROFOBJATT", "NUMBEROFOBJIDXATT", "NUMBEROFVARIABLESATT",
+  "NUMBEROFVARATT", "NUMBEROFVARIDXATT", "NUMBEROFMATRIXCONATT",
+  "NUMBEROFMATRIXOBJATT", "NUMBEROFMATRIXVARATT", "BASEMATRIXIDXATT",
+  "TARGETMATRIXFIRSTROWATT", "TARGETMATRIXFIRSTCOLATT",
+  "BASEMATRIXSTARTROWATT", "BASEMATRIXSTARTCOLATT", "BASEMATRIXENDROWATT",
+  "BASEMATRIXENDCOLATT", "SCALARMULTIPLIERATT", "SCALARIMAGINARYPARTATT",
+  "BLOCKROWIDXATT", "BLOCKCOLIDXATT", "REATT", "IMATT", "MATRIXVARIDXATT",
+  "MATRIXOBJIDXATT", "MATRIXCONIDXATT", "IDXATT", "INCRATT", "MULTATT",
+  "SIZEOFATT", "COEFATT", "CONSTANTATT", "MATRICESSTART", "MATRICESEND",
+  "MATRIXSTART", "MATRIXEND", "BASEMATRIXEND", "BASEMATRIXSTART",
+  "BLOCKSSTART", "BLOCKSEND", "BLOCKSTART", "BLOCKEND", "COLOFFSETSTART",
+  "COLOFFSETEND", "ROWOFFSETSTART", "ROWOFFSETEND", "ELEMENTSSTART",
+  "ELEMENTSEND", "CONSTANTELEMENTSSTART", "CONSTANTELEMENTSEND",
+  "COMPLEXELEMENTSSTART", "COMPLEXELEMENTSEND",
+  "VARREFERENCEELEMENTSSTART", "VARREFERENCEELEMENTSEND",
+  "LINEARELEMENTSSTART", "LINEARELEMENTSEND", "CONREFERENCEELEMENTSSTART",
+  "CONREFERENCEELEMENTSEND", "OBJREFERENCEELEMENTSSTART",
+  "OBJREFERENCEELEMENTSEND", "REALVALUEDEXPRESSIONSSTART",
+  "REALVALUEDEXPRESSIONSSEND", "COMPLEXVALUEDEXPRESSIONSSTART",
+  "COMPLEXVALUEDEXPRESSIONSSEND", "STRINGVALUEDELEMENTSSTART",
+  "STRINGVALUEDELEMENTSEND", "STARTVECTORSTART", "STARTVECTOREND",
+  "INDEXSTART", "INDEXEND", "VALUESTART", "VALUEEND", "VARIDXSTART",
+  "VARIDXEND", "TRANSFORMATIONSTART", "TRANSFORMATIONEND",
+  "MATRIXPROGRAMMINGSTART", "MATRIXPROGRAMMINGEND", "MATRIXVARIABLESSTART",
+  "MATRIXVARIABLESEND", "MATRIXVARSTART", "MATRIXVAREND",
+  "MATRIXOBJECTIVESSTART", "MATRIXOBJECTIVESEND", "MATRIXOBJSTART",
+  "MATRIXOBJEND", "MATRIXCONSTRAINTSSTART", "MATRIXCONSTRAINTSEND",
+  "MATRIXCONSTART", "MATRIXCONEND", "CONSTART", "CONEND",
+  "CONSTRAINTSSTART", "CONSTRAINTSEND", "OBJSTART", "OBJEND",
+  "OBJECTIVESSTART", "OBJECTIVESEND", "VARSTART", "VAREND",
+  "VARIABLESSTART", "VARIABLESEND", "GENERALSTART", "GENERALEND",
+  "SYSTEMSTART", "SYSTEMEND", "SERVICESTART", "SERVICEEND", "JOBSTART",
+  "JOBEND", "OPTIMIZATIONSTART", "OPTIMIZATIONEND", "ATEQUALITYSTART",
+  "ATEQUALITYEND", "ATLOWERSTART", "ATLOWEREND", "ATUPPERSTART",
+  "ATUPPEREND", "BASICSTART", "BASICEND", "ISFREESTART", "ISFREEEND",
+  "SUPERBASICSTART", "SUPERBASICEND", "UNKNOWNSTART", "UNKNOWNEND",
+  "SERVICEURISTART", "SERVICEURIEND", "SERVICENAMESTART", "SERVICENAMEEND",
+  "INSTANCENAMESTART", "INSTANCENAMEEND", "JOBIDSTART", "JOBIDEND",
+  "OTHERSTART", "OTHEREND", "DUMMY", "NONLINEAREXPRESSIONSSTART",
+  "NONLINEAREXPRESSIONSEND", "NUMBEROFNONLINEAREXPRESSIONS", "NLSTART",
+  "NLEND", "MATRIXEXPRESSIONSSTART", "MATRIXEXPRESSIONSEND",
+  "NUMBEROFEXPR", "EXPRSTART", "EXPREND", "NUMBEROFMATRIXTERMSATT",
+  "MATRIXTERMSTART", "MATRIXTERMEND", "POWERSTART", "POWEREND",
+  "PLUSSTART", "PLUSEND", "MINUSSTART", "MINUSEND", "DIVIDESTART",
+  "DIVIDEEND", "LNSTART", "LNEND", "SQRTSTART", "SQRTEND", "SUMSTART",
+  "SUMEND", "PRODUCTSTART", "PRODUCTEND", "EXPSTART", "EXPEND",
+  "NEGATESTART", "NEGATEEND", "IFSTART", "IFEND", "SQUARESTART",
+  "SQUAREEND", "COSSTART", "COSEND", "SINSTART", "SINEND", "VARIABLESTART",
+  "VARIABLEEND", "ABSSTART", "ABSEND", "ERFSTART", "ERFEND", "MAXSTART",
+  "MAXEND", "ALLDIFFSTART", "ALLDIFFEND", "MINSTART", "MINEND", "ESTART",
+  "EEND", "PISTART", "PIEND", "TIMESSTART", "TIMESEND", "NUMBERSTART",
+  "NUMBEREND", "MATRIXDETERMINANTSTART", "MATRIXDETERMINANTEND",
+  "MATRIXTRACESTART", "MATRIXTRACEEND", "MATRIXTOSCALARSTART",
+  "MATRIXTOSCALAREND", "MATRIXDIAGONALSTART", "MATRIXDIAGONALEND",
+  "MATRIXDOTTIMESSTART", "MATRIXDOTTIMESEND", "MATRIXLOWERTRIANGLESTART",
+  "MATRIXLOWERTRIANGLEEND", "MATRIXUPPERTRIANGLESTART",
+  "MATRIXUPPERTRIANGLEEND", "MATRIXMERGESTART", "MATRIXMERGEEND",
+  "MATRIXMINUSSTART", "MATRIXMINUSEND", "MATRIXNEGATESTART",
+  "MATRIXNEGATEEND", "MATRIXPLUSSTART", "MATRIXPLUSEND",
+  "MATRIXTIMESSTART", "MATRIXTIMESEND", "MATRIXSUMSTART", "MATRIXSUMEND",
+  "MATRIXPRODUCTSTART", "MATRIXPRODUCTEND", "MATRIXSCALARTIMESSTART",
+  "MATRIXSCALARTIMESEND", "MATRIXSUBMATRIXATSTART", "MATRIXSUBMATRIXATEND",
+  "MATRIXTRANSPOSESTART", "MATRIXTRANSPOSEEND", "MATRIXREFERENCESTART",
+  "MATRIXREFERENCEEND", "IDENTITYMATRIXSTART", "IDENTITYMATRIXEND",
+  "MATRIXINVERSESTART", "MATRIXINVERSEEND", "COMPLEXCONJUGATESTART",
+  "COMPLEXCONJUGATEEND", "COMPLEXMINUSSTART", "COMPLEXMINUSEND",
+  "COMPLEXNEGATESTART", "COMPLEXNEGATEEND", "COMPLEXNUMBERSTART",
+  "COMPLEXNUMBEREND", "COMPLEXPLUSSTART", "COMPLEXPLUSEND",
+  "COMPLEXSQUARESTART", "COMPLEXSQUAREEND", "COMPLEXSUMSTART",
+  "COMPLEXSUMEND", "COMPLEXTIMESSTART", "COMPLEXTIMESEND",
+  "CREATECOMPLEXSTART", "CREATECOMPLEXEND", "EMPTYINCLUDEDIAGONALATT",
+  "INCLUDEDIAGONALATT", "EMPTYTRANSPOSEATT", "TRANSPOSEATT", "EMPTYIDATT",
+  "IDATT", "' '", "'\\t'", "'\\r'", "'\\n'", "$accept", "osoldoc",
+  "osolStartEmpty", "osolStart", "osolAttributes", "osolContent",
+  "osolEmpty", "osolLaden", "osolEnd", "osolEnding", "osolBody",
+  "headerElement", "generalElement", "generalElementStart",
+  "generalElementContent", "generalElementEmpty", "generalElementLaden",
+  "generalElementBody", "generalElementList", "generalChild", "serviceURI",
+  "serviceURIStart", "serviceURIContent", "serviceURIEmpty",
+  "serviceURILaden", "serviceURIBody", "serviceName", "serviceNameStart",
+  "serviceNameContent", "serviceNameEmpty", "serviceNameLaden",
+  "serviceNameBody", "instanceName", "instanceNameStart",
+  "instanceNameContent", "instanceNameEmpty", "instanceNameLaden",
+  "instanceNameBody", "instanceLocation", "instanceLocationStart",
+  "instanceLocationAttributes", "locationTypeAttribute",
+  "instanceLocationContent", "instanceLocationEmpty",
+  "instanceLocationLaden", "instanceLocationBody", "jobID", "jobIDStart",
+  "jobIDContent", "jobIDEmpty", "jobIDLaden", "jobIDBody",
+  "solverToInvoke", "solverToInvokeStart", "solverToInvokeContent",
+  "solverToInvokeEmpty", "solverToInvokeLaden", "solverToInvokeBody",
+  "license", "licenseStart", "licenseContent", "licenseEmpty",
+  "licenseLaden", "licensebody", "username", "usernameStart",
+  "usernameContent", "usernameEmpty", "usernameLaden", "usernamebody",
+  "password", "passwordStart", "passwordContent", "passwordEmpty",
+  "passwordLaden", "passwordbody", "contact", "contactStart",
+  "contactAttributes", "transportTypeAttribute", "contactContent",
+  "contactContentEmpty", "contactContentLaden", "contactBody",
+  "otherGeneralOptions", "otherGeneralOptionsStart",
+  "otherGeneralOptionsAttributes", "otherGeneralOptionsContent",
+  "otherGeneralOptionsEmpty", "otherGeneralOptionsLaden",
+  "otherGeneralOptionsBody", "otherGeneralOptionArray",
+  "otherGeneralOption", "otherOptionStart", "otherOptionAttributes",
+  "otherOptionAttList", "otherOptionAtt", "otherOptionEnd",
+  "systemElement", "systemElementStart", "systemElementContent",
+  "systemElementEmpty", "systemElementLaden", "systemElementBody",
+  "systemElementList", "systemChild", "minDiskSpace", "minDiskSpaceStart",
+  "minDiskSpaceAttributes", "minDiskSpaceAttList", "minDiskSpaceAtt",
+  "minDiskSpaceContent", "minDiskSpaceValue", "minMemorySize",
+  "minMemoryStart", "minMemoryAttributes", "minMemoryAttList",
+  "minMemoryAtt", "minMemoryContent", "minMemoryValue", "minCPUSpeed",
+  "minCPUSpeedStart", "minCPUSpeedAttributes", "minCPUSpeedAttList",
+  "minCPUSpeedAtt", "minCPUSpeedContent", "minCPUSpeedValue",
+  "minCPUNumber", "minCPUNumberStart", "minCPUNumberAttributes",
+  "minCPUNumberContent", "minCPUNumberValue", "otherSystemOptions",
+  "otherSystemOptionsStart", "otherSystemOptionsAttributes",
+  "otherSystemOptionsContent", "otherSystemOptionsEmpty",
+  "otherSystemOptionsLaden", "otherSystemOptionsBody",
+  "otherSystemOptionArray", "otherSystemOption", "serviceElement",
+  "serviceElementStart", "serviceElementContent", "serviceElementEmpty",
+  "serviceElementLaden", "serviceElementBody", "serviceElementList",
+  "serviceChild", "serviceType", "serviceTypeStart", "serviceTypeContent",
+  "serviceTypeEmpty", "serviceTypeLaden", "serviceTypeBody",
+  "otherServiceOptions", "otherServiceOptionsStart",
+  "otherServiceOptionsAttributes", "otherServiceOptionsContent",
+  "otherServiceOptionsEmpty", "otherServiceOptionsLaden",
+  "otherServiceOptionsBody", "otherServiceOptionArray",
+  "otherServiceOption", "jobElement", "jobElementStart",
+  "jobElementContent", "jobElementEmpty", "jobElementLaden",
+  "jobElementBody", "jobElementList", "jobChild", "maxTime",
+  "maxTimeStart", "maxTimeAttributes", "maxTimeContent", "maxTimeEmpty",
+  "maxTimeLaden", "maxTimeBody", "maxTimeValue", "requestedStartTime",
+  "requestedStartTimeStart", "requestedStartTimeContent",
+  "requestedStartTimeEmpty", "requestedStartTimeLaden",
+  "requestedStartTimeBody", "dependencies", "dependenciesStart",
+  "dependenciesAttributes", "dependenciesContent", "dependenciesEmpty",
+  "dependenciesLaden", "dependenciesList", "dependencyJobID",
+  "requiredDirectories", "requiredDirectoriesStart",
+  "requiredDirectoriesContent", "requiredDirectoriesEmpty",
+  "requiredDirectoriesLaden", "requiredFiles", "requiredFilesStart",
+  "requiredFilesContent", "requiredFilesEmpty", "requiredFilesLaden",
+  "directoriesToMake", "directoriesToMakeStart",
+  "directoriesToMakeContent", "directoriesToMakeEmpty",
+  "directoriesToMakeLaden", "filesToMake", "filesToMakeStart",
+  "filesToMakeContent", "filesToMakeEmpty", "filesToMakeLaden",
+  "inputDirectoriesToMove", "inputDirectoriesToMoveStart",
+  "inputDirectoriesToMoveAttributes", "inputDirectoriesToMoveContent",
+  "inputDirectoriesToMoveEmpty", "inputDirectoriesToMoveLaden",
+  "inputDirectoriesToMoveList", "inputDirectoryToMove", "inputFilesToMove",
+  "inputFilesToMoveStart", "inputFilesToMoveAttributes",
+  "inputFilesToMoveContent", "inputFilesToMoveEmpty",
+  "inputFilesToMoveLaden", "inputFilesToMoveList", "inputFileToMove",
+  "outputFilesToMove", "outputFilesToMoveStart",
+  "outputFilesToMoveAttributes", "outputFilesToMoveContent",
+  "outputFilesToMoveEmpty", "outputFilesToMoveLaden",
+  "outputFilesToMoveList", "outputFileToMove", "outputDirectoriesToMove",
+  "outputDirectoriesToMoveStart", "outputDirectoriesToMoveAttributes",
+  "outputDirectoriesToMoveContent", "outputDirectoriesToMoveEmpty",
+  "outputDirectoriesToMoveLaden", "outputDirectoriesToMoveList",
+  "outputDirectoryToMove", "filesToDelete", "filesToDeleteStart",
+  "filesToDeleteAttributes", "filesToDeleteContent", "filesToDeleteEmpty",
+  "filesToDeleteLaden", "directoriesToDelete", "directoriesToDeleteStart",
+  "directoriesToDeleteAttributes", "directoriesToDeleteContent",
+  "directoriesToDeleteEmpty", "directoriesToDeleteLaden",
+  "processesToKill", "processesToKillStart", "processesToKillAttributes",
+  "processesToKillContent", "processesToKillEmpty", "processesToKillLaden",
+  "processesToKillList", "processID", "otherJobOptions",
+  "otherJobOptionsStart", "otherJobOptionsAttributes",
+  "otherJobOptionsContent", "otherJobOptionsEmpty", "otherJobOptionsLaden",
+  "otherJobOptionsBody", "otherJobOptionArray", "otherJobOption",
+  "optimizationElement", "optimizationStart", "optimizationAttributes",
+  "optimizationAttList", "optimizationATT", "optimizationContent",
+  "optimizationEmpty", "optimizationLaden", "optimizationBody",
+  "variables", "variablesStart", "variablesAttributes",
+  "numberOfOtherVariableOptions", "variablesContent", "variablesEmpty",
+  "variablesLaden", "variablesBody", "initialVariableValues",
+  "initialVariableValuesStart", "initialVariableValuesAttributes",
+  "initialVariableValuesContent", "initialVariableValuesEmpty",
+  "initialVariableValuesLaden", "initialVariableValuesBody",
+  "initVarValueArray", "initVarValue", "initVarValueStart",
+  "initVarValueAttributes", "initVarValueAttList", "initVarValueAtt",
+  "initVarValueContent", "initialVariableValuesString",
+  "initialVariableValuesStringStart",
+  "initialVariableValuesStringAttributes",
+  "initialVariableValuesStringContent", "initialVariableValuesStringEmpty",
+  "initialVariableValuesStringLaden", "initialVariableValuesStringBody",
+  "initVarValueStringArray", "initVarValueString",
+  "initVarValueStringStart", "initVarValueStringAttributes",
+  "initVarValueStringAttList", "initVarValueStringAtt",
+  "initVarValueStringContent", "variableInitialBasis",
+  "variableInitialBasisStart", "variableInitialBasisContent",
+  "variableInitialBasisEmpty", "variableInitialBasisLaden",
+  "variableInitialBasisBody", "variablesBasic", "variablesAtLower",
+  "variablesAtUpper", "variablesAtEquality", "variablesIsFree",
+  "variablesSuperbasic", "variablesUnknown",
+  "integerVariableBranchingWeights",
+  "integerVariableBranchingWeightsStart",
+  "integerVariableBranchingWeightsAttributes",
+  "integerVariableBranchingWeightsContent",
+  "integerVariableBranchingWeightsEmpty",
+  "integerVariableBranchingWeightsLaden",
+  "integerVariableBranchingWeightsBody", "branchingWeightsArray",
+  "branchingWeight", "branchingWeightStart", "branchingWeightAttributes",
+  "branchingWeightAttList", "branchingWeightAtt", "branchingWeightContent",
+  "sosVariableBranchingWeights", "sosVariableBranchingWeightsStart",
+  "sosVariableBranchingWeightsAttributes",
+  "sosVariableBranchingWeightsContent", "sosVariableBranchingWeightsEmpty",
+  "sosVariableBranchingWeightsLaden", "sosWeightGroupArray",
+  "sosWeightGroup", "sosWeightGroupStart", "sosWeightGroupAttributes",
+  "sosWeightGroupAttList", "sosWeightGroupAtt", "sosWeightGroupContent",
+  "sosWeightGroupEmpty", "sosWeightGroupLaden",
+  "otherVariableOptionsArray", "otherVariableOption",
+  "otherVariableOptionStart", "otherVariableOptionAttributes",
+  "otherVariableOptionAttList", "otherVariableOptionATT",
+  "otherVariableOptionContent", "otherVariableOptionEmpty",
+  "otherVariableOptionLaden", "otherVariableOptionBody", "otherVarList",
+  "otherVar", "otherVarStart", "otherVarAttributes", "otherVarAttList",
+  "otherVarAtt", "otherVarContent", "otherVarEmpty", "objectives",
+  "objectivesStart", "objectivesAttributes",
+  "numberOfOtherObjectiveOptions", "objectivesContent", "objectivesEmpty",
+  "objectivesLaden", "objectivesBody", "initialObjectiveValues",
+  "initialObjectiveValuesStart", "initialObjectiveValuesAttributes",
+  "initialObjectiveValuesContent", "initialObjectiveValuesEmpty",
+  "initialObjectiveValuesLaden", "initialObjectiveValuesBody",
+  "initObjValueArray", "initObjValue", "initObjValueStart",
+  "initObjValueAttributes", "initObjValueAttList", "initObjValueAtt",
+  "initObjValueContent", "initialObjectiveBounds",
+  "initialObjectiveBoundsStart", "numberOfObjATT",
+  "initialObjectiveBoundsContent", "initialObjectiveBoundsEmpty",
+  "initialObjectiveBoundsLaden", "initialObjectiveBoundsBody",
+  "initObjBoundArray", "initObjBound", "initObjBoundStart",
+  "initObjBoundAttributes", "initObjBoundAttList", "initObjBoundAtt",
+  "initObjBoundContent", "objectiveInitialBasis",
+  "objectiveInitialBasisStart", "objectiveInitialBasisContent",
+  "objectiveInitialBasisEmpty", "objectiveInitialBasisLaden",
+  "objectiveInitialBasisBody", "objectivesBasic", "objectivesAtLower",
+  "objectivesAtUpper", "objectivesAtEquality", "objectivesIsFree",
+  "objectivesSuperbasic", "objectivesUnknown",
+  "otherObjectiveOptionsArray", "otherObjectiveOption",
+  "otherObjectiveOptionStart", "otherObjectiveOptionAttributes",
+  "otherObjectiveOptionAttList", "otherObjectiveOptionATT",
+  "otherObjectiveOptionContent", "otherObjectiveOptionEmpty",
+  "otherObjectiveOptionLaden", "otherObjectiveOptionBody", "otherObjList",
+  "otherObj", "otherObjStart", "otherObjAttributes", "otherObjAttList",
+  "otherObjAtt", "otherObjContent", "otherObjEmpty", "constraints",
+  "constraintsStart", "constraintsAttributes",
+  "numberOfOtherConstraintOptions", "constraintsContent",
+  "constraintsEmpty", "constraintsLaden", "constraintsBody",
+  "initialConstraintValues", "initialConstraintValuesStart",
+  "initialConstraintValuesAttributes", "initialConstraintValuesContent",
+  "initialConstraintValuesEmpty", "initialConstraintValuesLaden",
+  "initialConstraintValuesBody", "initConValueArray", "initConValue",
+  "initConValueStart", "initConValueAttributes", "initConValueAttList",
+  "initConValueAtt", "initConValueContent", "initialDualValues",
+  "initialDualValuesStart", "initialDualValuesAttributes",
+  "initialDualValuesContent", "initialDualValuesEmpty",
+  "initialDualValuesLaden", "initialDualValuesBody", "initDualValueArray",
+  "initDualValue", "initDualValueStart", "initDualValueAttributes",
+  "initDualValueAttList", "initDualValueAtt", "initDualValueContent",
+  "slacksInitialBasis", "slacksInitialBasisStart",
+  "slacksInitialBasisContent", "slacksInitialBasisEmpty",
+  "slacksInitialBasisLaden", "slacksInitialBasisBody", "slacksBasic",
+  "slacksAtLower", "slacksAtUpper", "slacksAtEquality", "slacksIsFree",
+  "slacksSuperbasic", "slacksUnknown", "otherConstraintOptionsArray",
+  "otherConstraintOption", "otherConstraintOptionStart",
+  "otherConstraintOptionAttributes", "otherConstraintOptionAttList",
+  "otherConstraintOptionATT", "otherConstraintOptionContent",
+  "otherConstraintOptionEmpty", "otherConstraintOptionLaden",
+  "otherConstraintOptionBody", "otherConList", "otherCon", "otherConStart",
+  "otherConAttributes", "otherConAttList", "otherConAtt",
+  "otherConContent", "otherConEmpty", "matrixProgramming",
+  "matrixProgrammingStart", "matrixProgrammingAttributes",
+  "numberOfOtherMatrixProgrammingOptions", "matrixProgrammingContent",
+  "matrixProgrammingEmpty", "matrixProgrammingLaden", "matrixVariables",
+  "matrixVariablesStart", "matrixVariablesAttributes",
+  "matrixVariablesContent", "matrixVariablesEmpty", "matrixVariablesLaden",
+  "matrixVariablesEnd", "initialMatrixVariableValues",
+  "initialMatrixVariableValuesStart",
+  "initialMatrixVariableValuesAttributes",
+  "initialMatrixVariableValuesContent", "initialMatrixVariableValuesEmpty",
+  "initialMatrixVariableValuesLaden", "initialMatrixVariableValuesEnd",
+  "initialMatrixVarArray", "initialMatrixVar",
+  "otherMatrixVariableOptions", "otherMatrixVariableOptionsArray",
+  "otherMatrixVariableOption", "otherMatrixVariableOptionStart",
+  "emptyOtherMatrixVariableOptionEnd", "otherMatrixVariableOptionEnd",
+  "matrixObjectives", "matrixConstraints",
+  "otherMatrixProgrammingOptionArray", "otherMatrixProgrammingOption",
+  "otherMatrixProgrammingOptionStart",
+  "emptyOtherMatrixProgrammingOptionEnd",
+  "otherMatrixProgrammingOptionEnd", "solverOptions", "solverOptionsStart",
+  "numberOfSolverOptionsATT", "solverOptionsContent", "solverOptionsEmpty",
+  "solverOptionsLaden", "solverOptionArray", "solverOption",
+  "solverOptionStart", "emptySolverOptionEnd", "solverOptionEnd",
+  "PathList", "Path", "PathPair", "PathPairStart", "PathPairAttributes",
+  "PathPairAttList", "PathPairAttribute", "PathPairFromATT",
+  "PathPairToATT", "PathPairMakeCopyATT", "PathPairEnd",
+  "groupWeightAttribute", "groupWeightAtt", "lbValueAttribute",
+  "lbValueAtt", "lbValueAttEmpty", "lbValueAttContent",
+  "lbDualValueAttribute", "lbDualValueAtt", "lbDualValueAttEmpty",
+  "lbDualValueAttContent", "sosIdxAttribute", "sosIdxAtt",
+  "sosIdxAttContent", "ubValueAttribute", "ubValueAtt", "ubValueAttEmpty",
+  "ubValueAttContent", "ubDualValueAttribute", "ubDualValueAtt",
+  "ubDualValueAttEmpty", "ubDualValueAttContent", "numberOfJobIDsATT",
+  "numberOfOtherConstraintOptionsAttribute",
+  "numberOfOtherMatrixProgrammingOptionsAttribute",
+  "numberOfOtherMatrixVariableOptionsAttribute",
+  "numberOfOtherObjectiveOptionsAttribute",
+  "numberOfOtherOptionsAttribute", "numberOfOtherVariableOptionsAttribute",
+  "numberOfPathPairsAttribute", "numberOfPathsAttribute",
+  "numberOfProcessesATT", "numberOfSolverOptionsAttribute",
+  "otherEnumerationList", "otherEnumeration", "otherEnumerationStart",
+  "otherEnumerationAttributes", "otherEnumerationAttList",
+  "otherEnumerationATT", "otherEnumerationContent",
+  "otherEnumerationEmpty", "otherEnumerationLaden", "otherEnumerationBody",
+  "aNumber", "quote", "xmlWhiteSpace", "xmlWhiteSpaceChar",
+  "osglFileHeader", "headerElementStart", "headerElementContent",
+  "headerElementEmpty", "headerElementLaden", "headerElementBody",
+  "headerElementList", "headerChild", "fileName", "fileNameContent",
+  "fileNameEmpty", "fileNameLaden", "fileSource", "fileSourceContent",
+  "fileSourceEmpty", "fileSourceLaden", "fileDescription",
+  "fileDescriptionContent", "fileDescriptionEmpty", "fileDescriptionLaden",
+  "fileCreator", "fileCreatorContent", "fileCreatorEmpty",
+  "fileCreatorLaden", "fileLicence", "fileLicenceContent",
+  "fileLicenceEmpty", "fileLicenceLaden", "osglNonNegativeIntArrayData",
+  "osglIntArrayData", "osglIntVectorElArray", "osglIntVectorEl",
+  "osglIntVectorElStart", "osglIntVectorElAttributes",
+  "osglIntVectorElAttList", "osglIntVectorElAtt", "osglIntVectorElContent",
+  "osglIntVectorBase64", "osglIntVectorBase64Content",
+  "osglIntVectorBase64Empty", "osglIntVectorBase64Laden",
+  "osglDblArrayData", "osglDblVectorElArray", "osglDblVectorEl",
+  "osglDblVectorElStart", "osglDblVectorElAttributes",
+  "osglDblVectorElContent", "osglDblVectorBase64",
+  "osglDblVectorBase64Content", "osglDblVectorBase64Empty",
+  "osglDblVectorBase64Laden", "osglStrArrayData", "osglStrVectorElArray",
+  "osglStrVectorEl", "osglStrVectorElStart", "osglStrVectorElAttributes",
+  "osglStrVectorElContent", "osglOtherOptionOrResultEnumeration",
+  "osglOtherOptionOrResultEnumerationStart",
+  "osglOtherOptionOrResultEnumerationAttributes",
+  "osglOtherOptionOrResultEnumerationAttList",
+  "osglOtherOptionOrResultEnumerationATT",
+  "osglOtherOptionOrResultEnumerationContent",
+  "osglOtherOptionOrResultEnumerationEmpty",
+  "osglOtherOptionOrResultEnumerationLaden",
+  "osglOtherOptionOrResultEnumerationBody", "osglBasisStatusBasic",
+  "osglBasicStart", "osglBasicContent", "osglBasicEmpty", "osglBasicLaden",
+  "osglBasicBody", "osglBasisStatusAtLower", "osglAtLowerStart",
+  "osglAtLowerContent", "osglAtLowerEmpty", "osglAtLowerLaden",
+  "osglAtLowerBody", "osglBasisStatusAtUpper", "osglAtUpperStart",
+  "osglAtUpperContent", "osglAtUpperEmpty", "osglAtUpperLaden",
+  "osglAtUpperBody", "osglBasisStatusAtEquality", "osglAtEqualityStart",
+  "osglAtEqualityContent", "osglAtEqualityEmpty", "osglAtEqualityLaden",
+  "osglAtEqualityBody", "osglBasisStatusIsFree", "osglIsFreeStart",
+  "osglIsFreeContent", "osglIsFreeEmpty", "osglIsFreeLaden",
+  "osglIsFreeBody", "osglBasisStatusSuperbasic", "osglSuperbasicStart",
+  "osglSuperbasicContent", "osglSuperbasicEmpty", "osglSuperbasicLaden",
+  "osglSuperbasicBody", "osglBasisStatusUnknown", "osglUnknownStart",
+  "osglUnknownContent", "osglUnknownEmpty", "osglUnknownLaden",
+  "osglUnknownBody", "osglBasisNumberOfElAttribute",
+  "osglOtherMatrixVariableOptionOrResultAttributes",
+  "osglOtherMatrixVariableOptionOrResultAttList",
+  "osglOtherMatrixVariableOptionOrResultATT",
+  "osglOtherMatrixVariableOptionOrResultBody",
+  "osglOtherMatrixVariableOptionOrResultMatrixVarArray",
+  "osglOtherMatrixVariableOptionOrResultMatrixVar",
+  "osglOtherMatrixVariableOptionOrResultEnumerationArray",
+  "osglOtherMatrixVariableOptionOrResultEnumeration",
+  "osglSolverOptionOrResultAttributes", "osglSolverOptionOrResultAttList",
+  "osglSolverOptionOrResultATT", "osglSolverOptionOrResultBody",
+  "osglSolverOptionOrResultMatrixArray", "osglSolverOptionOrResultMatrix",
+  "osglSolverOptionOrResultItemArray", "osglSolverOptionOrResultItem",
+  "osglSolverOptionOrResultItemContent",
+  "osglSolverOptionOrResultItemEmpty", "osglSolverOptionOrResultItemLaden",
+  "osglSolverOptionOrResultItemBody", "osglMatrix",
+  "osglMatrixWithMatrixVarIdx", "matrixStart", "matrixAttributes",
+  "matrixAttributeList", "matrixAttribute", "matrixVarStart",
+  "matrixWithMatrixVarIdxAttributes", "matrixWithMatrixVarIdxATTList",
+  "matrixWithMatrixVarIdxATT", "matrixContent", "matrixEmpty",
+  "matrixLaden", "matrixVarContent", "matrixVarEmpty", "matrixVarLaden",
+  "$@1", "matrixOrBlockBody", "baseMatrix", "baseMatrixStart",
+  "baseMatrixAttributes", "baseMatrixAttList", "baseMatrixAtt",
+  "baseMatrixEnd", "matrixConstructorList", "matrixConstructor",
+  "constantElements", "constantElementsStart",
+  "constantElementsAttributes", "constantElementsAttList",
+  "constantElementsAtt", "constantElementsContent",
+  "constantElementsNonzeros", "matrixElementsStartVector",
+  "matrixElementsStartVectorStart", "matrixElementsStartVectorContent",
+  "matrixElementsStartVectorEmpty", "matrixElementsStartVectorLaden",
+  "matrixElementsStartVectorBody", "matrixElementsIndexVector",
+  "matrixElementsIndexStart", "matrixElementsIndexContent",
+  "matrixElementsIndexEmpty", "matrixElementsIndexLaden",
+  "matrixElementsIndexBody", "constantElementsValues",
+  "constantElementsValueStart", "constantElementsValueContent",
+  "constantElementsValueEmpty", "constantElementsValueLaden",
+  "constantElementsValueBody", "varReferenceElements",
+  "varReferenceElementsStart", "varReferenceElementsAttributes",
+  "varReferenceElementsAttList", "varReferenceElementsAtt",
+  "varReferenceElementsContent", "varReferenceElementsNonzeros",
+  "varReferenceElementsValues", "varReferenceElementsValuesStart",
+  "varReferenceElementsValuesContent", "varReferenceElementsValuesEmpty",
+  "varReferenceElementsValuesLaden", "varReferenceElementsValuesBody",
+  "linearElements", "linearElementsStart", "linearElementsAttributes",
+  "linearElementsAttList", "linearElementsAtt", "linearElementsContent",
+  "linearElementsNonzeros", "linearElementsValues",
+  "linearElementsValuesStart", "linearElementsValuesContent",
+  "linearElementsValuesEmpty", "linearElementsValuesLaden",
+  "linearElementsValuesBody", "linearElementsValuesElList",
+  "linearElementsValuesEl", "linearElementsValuesElStart",
+  "linearElementsValuesElAttributes", "linearElementsValuesElAttList",
+  "linearElementsValuesElAtt", "linearElementsValuesElContent",
+  "linearElementsValuesElEmpty", "linearElementsValuesElLaden",
+  "linearElementsValuesVarIdxList", "linearElementsValuesVarIdx",
+  "linearElementsValuesVarIdxStart", "linearElementsValuesVarIdxCoefATT",
+  "linearElementsValuesVarIdxContent", "realValuedExpressions",
+  "realValuedExpressionsStart", "realValuedExpressionsAttributes",
+  "realValuedExpressionsAttList", "realValuedExpressionsAtt",
+  "realValuedExpressionsContent", "realValuedExpressionsNonzeros",
+  "realValuedExpressionsValues", "realValuedExpressionsValuesStart",
+  "realValuedExpressionsValuesContent", "realValuedExpressionsValuesEmpty",
+  "realValuedExpressionsValuesLaden", "realValuedExpressionsElList",
+  "realValuedExpressionsEl", "realValuedExpressionsElStart",
+  "realValuedExpressionsElContent", "realValuedExpressionsElEmpty",
+  "realValuedExpressionsElLaden", "complexValuedExpressions",
+  "complexValuedExpressionsStart", "complexValuedExpressionsAttributes",
+  "complexValuedExpressionsAttList", "complexValuedExpressionsAtt",
+  "complexValuedExpressionsContent", "complexValuedExpressionsNonzeros",
+  "complexValuedExpressionsValues", "complexValuedExpressionsValuesStart",
+  "complexValuedExpressionsValuesContent",
+  "complexValuedExpressionsValuesEmpty",
+  "complexValuedExpressionsValuesLaden", "complexValuedExpressionsElList",
+  "complexValuedExpressionsEl", "complexValuedExpressionsElStart",
+  "complexValuedExpressionsElContent", "complexValuedExpressionsElEmpty",
+  "complexValuedExpressionsElLaden", "objReferenceElements",
+  "objReferenceElementsStart", "objReferenceElementsAttributes",
+  "objReferenceElementsAttList", "objReferenceElementsAtt",
+  "objReferenceElementsContent", "objReferenceElementsNonzeros",
+  "objReferenceElementsValues", "objReferenceElementsValuesStart",
+  "objReferenceElementsValuesContent", "objReferenceElementsValuesEmpty",
+  "objReferenceElementsValuesLaden", "objReferenceElementsValuesBody",
+  "conReferenceElements", "conReferenceElementsStart",
+  "conReferenceElementsAttributes", "conReferenceElementsAttList",
+  "conReferenceElementsAtt", "conReferenceElementsContent",
+  "conReferenceElementsNonzeros", "conReferenceElementsValues",
+  "conReferenceElementsValuesStart", "conReferenceElementsValuesContent",
+  "conReferenceElementsValuesEmpty", "conReferenceElementsValuesLaden",
+  "conReferenceElementsElList", "conReferenceElementsEl",
+  "conReferenceElementsElStart", "conReferenceElementsElAttributeList",
+  "conReferenceElementsElAttribute", "conReferenceElementsElContent",
+  "complexElements", "complexElementsStart", "complexElementsAttributes",
+  "complexElementsAttList", "complexElementsAtt", "complexElementsContent",
+  "complexElementsNonzeros", "complexElementsValues",
+  "complexElementsValuesStart", "complexElementsValuesContent",
+  "complexElementsValuesEmpty", "complexElementsValuesLaden",
+  "complexElementsElList", "complexElementsEl", "complexElementsElStart",
+  "complexElementsElAttributeList", "complexElementsElAttribute",
+  "complexElementsElEnd", "stringValuedElements",
+  "stringValuedElementsStart", "stringValuedElementsAttributes",
+  "stringValuedElementsAttList", "stringValuedElementsAtt",
+  "stringValuedElementsContent", "stringValuedElementsNonzeros",
+  "stringValuedElementsValues", "stringValuedElementsValueStart",
+  "stringValuedElementsValueContent", "stringValuedElementsValueEmpty",
+  "stringValuedElementsValueLaden", "stringValuedElementsValueBody",
+  "matrixTransformation", "matrixTransformationStart",
+  "matrixTransformationShapeATT", "matrixTransformationEnd",
+  "matrixBlocks", "matrixBlocksStart", "matrixBlocksAttributes",
+  "matrixBlocksContent", "matrixBlocksEnd", "colOffsets", "colOffsetStart",
+  "colOffsetNumberOfElAttribute", "colOffsetContent", "colOffsetEmpty",
+  "colOffsetLaden", "colOffsetBody", "rowOffsets", "rowOffsetStart",
+  "rowOffsetNumberOfElAttribute", "rowOffsetContent", "rowOffsetEmpty",
+  "rowOffsetLaden", "rowOffsetBody", "blockList", "matrixBlock",
+  "matrixBlockStart", "matrixBlockAttributes", "matrixBlockAttList",
+  "matrixBlockAtt", "matrixBlockContent", "blockEmpty", "blockLaden",
+  "osglNumberOfBlocksATT", "osglNumberOfColumnsATT", "osglNumberOfConATT",
+  "osglNumberOfConstraintsATT", "osglNumberOfElATT",
+  "osglNumberOfEnumerationsATT", "osglNumberOfItemsATT",
+  "osglNumberOfMatricesATT", "osglNumberOfMatrixVarATT",
+  "osglNumberOfObjATT", "osglNumberOfObjectivesATT", "osglNumberOfRowsATT",
+  "osglNumberOfValuesATT", "osglNumberOfVarATT", "osglNumberOfVarIdxATT",
+  "osglNumberOfVariablesATT", "osglBase64SizeATT", "osglBaseMatrixIdxATT",
+  "osglBaseMatrixStartRowATT", "osglBaseMatrixStartColATT",
+  "osglBaseMatrixEndRowATT", "osglBaseMatrixEndColATT",
+  "osglBlockRowIdxATT", "osglBlockColIdxATT", "osglIdxATT", "osglIncrATT",
+  "osglMatrixVarIdxATT", "osglMultATT", "osglTargetMatrixFirstRowATT",
+  "osglTargetMatrixFirstColATT", "osglCoefATT", "osglConstantATT",
+  "osglImagPartATT", "osglRealPartATT", "osglScalarMultiplierATT",
+  "osglScalarImaginaryPartATT", "osglBaseTransposeATT",
+  "baseTransposeAttEmpty", "baseTransposeAttContent", "osglCategoryATT",
+  "categoryAttEmpty", "categoryAttContent", "osglConTypeATT",
+  "conTypeAttEmpty", "conTypeAttContent", "osglDescriptionATT",
+  "descriptionAttEmpty", "descriptionAttContent", "osglEnumTypeATT",
+  "enumTypeAttEmpty", "enumTypeAttContent", "osglNameATT", "nameAttEmpty",
+  "nameAttContent", "osglObjTypeATT", "objTypeAttEmpty",
+  "objTypeAttContent", "osglRowMajorATT", "rowMajorAttEmpty",
+  "rowMajorAttContent", "osglShapeATT", "shapeAttEmpty", "shape",
+  "osglSolverATT", "solverAttEmpty", "solverAttContent", "osglSymmetryATT",
+  "symmetryAttEmpty", "symmetryAttContent", "osglTypeATT", "typeAttEmpty",
+  "typeAttContent", "osglUnitATT", "unitAttEmpty", "unitAttContent",
+  "osglValueATT", "valueAttEmpty", "valueAttContent", "osglValueTypeATT",
+  "valueTypeAttEmpty", "valueTypeAttContent", "osglVarTypeATT",
+  "varTypeAttEmpty", "varTypeAttContent", "nlnode", "E", "$@2", "eend",
+  "PI", "$@3", "piend", "times", "$@4", "plus", "$@5", "minus", "$@6",
+  "negate", "$@7", "divide", "$@8", "power", "$@9", "ln", "$@10", "sqrt",
+  "$@11", "square", "$@12", "cos", "$@13", "sin", "$@14", "exp", "$@15",
+  "abs", "absStart", "absEnd", "erf", "$@16", "if", "$@17",
+  "matrixDeterminant", "$@18", "matrixTrace", "$@19", "matrixToScalar",
+  "$@20", "number", "numberStart", "numberEnd", "numberAttributeList",
+  "numberAttribute", "numberidATT", "$@21", "variable", "$@22",
+  "variableend", "$@23", "anotherVariableATT", "variableATT",
+  "variablecoefATT", "variableidxATT", "sum", "$@24", "anothersumnlnode",
+  "allDiff", "$@25", "anotherallDiffnlnode", "max", "$@26",
+  "anothermaxnlnode", "min", "$@27", "anotherminnlnode", "product", "$@28",
+  "anotherproductnlnode", "OSnLMNode", "matrixReference",
+  "matrixReferenceStart", "matrixRefAttributeList", "matrixRefAttribute",
+  "matrixReferenceEnd", "matrixIdxATT", "matrixTransposeATT",
+  "matrixVarReference", "matrixVarReferenceStart", "matrixVarReferenceEnd",
+  "matrixVarIdxATT", "matrixObjReference", "matrixObjReferenceStart",
+  "matrixObjReferenceEnd", "matrixObjIdxATT", "matrixConReference",
+  "matrixConReferenceStart", "matrixConReferenceEnd", "matrixConIdxATT",
+  "matrixDiagonal", "matrixDiagonalStart", "matrixDiagonalContent",
+  "matrixDotTimes", "matrixDotTimesStart", "matrixDotTimesContent",
+  "identityMatrix", "identityMatrixStart", "identityMatrixContent",
+  "matrixInverse", "matrixInverseStart", "matrixInverseContent",
+  "matrixLowerTriangle", "matrixLowerTriangleStart",
+  "matrixLowerTriangleAttribute", "matrixLowerTriangleContent",
+  "matrixUpperTriangle", "matrixUpperTriangleStart",
+  "matrixUpperTriangleAttribute", "matrixUpperTriangleContent",
+  "includeDiagonalATT", "matrixMerge", "matrixMergeStart",
+  "matrixMergeEnd", "matrixMinus", "matrixMinusStart",
+  "matrixMinusContent", "matrixNegate", "matrixNegateStart",
+  "matrixNegateContent", "matrixPlus", "matrixPlusStart",
+  "matrixPlusContent", "matrixSum", "$@29", "anothermatrixsumnode",
+  "matrixTimes", "matrixTimesStart", "matrixTimesContent", "matrixProduct",
+  "$@30", "anothermatrixproductnode", "matrixScalarTimes",
+  "matrixScalarTimesStart", "matrixScalarTimesContent",
+  "matrixSubMatrixAt", "matrixSubMatrixAtStart",
+  "matrixSubMatrixAtContent", "matrixTranspose", "matrixTransposeStart",
+  "matrixTransposeContent", "scalarNode", "OSnLCNode", "complexNumber",
+  "complexNumberStart", "complexNumberEnd", "complexNumberAttributes",
+  "complexNumberAttList", "complexNumberAtt", "createComplex",
+  "createComplexStart", "createComplexContent", "complexPlus",
+  "complexPlusStart", "complexPlusContent", "complexSum", "$@31",
+  "anothercsumnode", "complexMinus", "complexMinusStart",
+  "complexMinusContent", "complexNegate", "complexNegateStart",
+  "complexNegateContent", "complexConjugate", "complexConjugateStart",
+  "complexConjugateContent", "complexTimes", "complexTimesStart",
+  "complexTimesContent", "complexSquare", "complexSquareStart",
+  "complexSquareContent", YY_NULLPTR
+};
+#endif
+
+# ifdef YYPRINT
+/* YYTOKNUM[NUM] -- (External) token number corresponding to the
+   (internal) symbol number NUM (which must be that of a token).  */
+static const yytype_uint16 yytoknum[] =
+{
+       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
+     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
+     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
+     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
+     295,   296,   297,   298,   299,   300,   301,   302,   303,   304,
+     305,   306,   307,   308,   309,   310,   311,   312,   313,   314,
+     315,   316,   317,   318,   319,   320,   321,   322,   323,   324,
+     325,   326,   327,   328,   329,   330,   331,   332,   333,   334,
+     335,   336,   337,   338,   339,   340,   341,   342,   343,   344,
+     345,   346,   347,   348,   349,   350,   351,   352,   353,   354,
+     355,   356,   357,   358,   359,   360,   361,   362,   363,   364,
+     365,   366,   367,   368,   369,   370,   371,   372,   373,   374,
+     375,   376,   377,   378,   379,   380,   381,   382,   383,   384,
+     385,   386,   387,   388,   389,   390,   391,   392,   393,   394,
+     395,   396,   397,   398,   399,   400,   401,   402,   403,   404,
+     405,   406,   407,   408,   409,   410,   411,   412,   413,   414,
+     415,   416,   417,   418,   419,   420,   421,   422,   423,   424,
+     425,   426,   427,   428,   429,   430,   431,   432,   433,   434,
+     435,   436,   437,   438,   439,   440,   441,   442,   443,   444,
+     445,   446,   447,   448,   449,   450,   451,   452,   453,   454,
+     455,   456,   457,   458,   459,   460,   461,   462,   463,   464,
+     465,   466,   467,   468,   469,   470,   471,   472,   473,   474,
+     475,   476,   477,   478,   479,   480,   481,   482,   483,   484,
+     485,   486,   487,   488,   489,   490,   491,   492,   493,   494,
+     495,   496,   497,   498,   499,   500,   501,   502,   503,   504,
+     505,   506,   507,   508,   509,   510,   511,   512,   513,   514,
+     515,   516,   517,   518,   519,   520,   521,   522,   523,   524,
+     525,   526,   527,   528,   529,   530,   531,   532,   533,   534,
+     535,   536,   537,   538,   539,   540,   541,   542,   543,   544,
+     545,   546,   547,   548,   549,   550,   551,   552,   553,   554,
+     555,   556,   557,   558,   559,   560,   561,   562,   563,   564,
+     565,   566,   567,   568,   569,   570,   571,   572,   573,   574,
+     575,   576,   577,   578,   579,   580,   581,   582,   583,   584,
+     585,   586,   587,   588,   589,   590,   591,   592,   593,   594,
+     595,   596,   597,   598,   599,   600,   601,   602,   603,   604,
+     605,   606,   607,   608,   609,   610,   611,   612,   613,   614,
+     615,   616,   617,   618,   619,   620,   621,   622,   623,   624,
+     625,   626,   627,   628,   629,   630,   631,   632,   633,   634,
+     635,   636,   637,   638,   639,   640,   641,   642,   643,   644,
+     645,   646,   647,   648,   649,   650,   651,   652,   653,   654,
+     655,   656,   657,   658,   659,   660,   661,   662,   663,   664,
+     665,   666,   667,   668,   669,   670,   671,   672,   673,   674,
+     675,   676,   677,   678,   679,   680,   681,   682,   683,   684,
+     685,   686,   687,   688,   689,   690,   691,   692,   693,   694,
+     695,   696,   697,   698,   699,   700,   701,   702,   703,   704,
+     705,   706,   707,   708,   709,   710,   711,   712,   713,   714,
+     715,   716,   717,   718,   719,   720,   721,   722,   723,   724,
+     725,   726,   727,   728,   729,   730,   731,   732,   733,   734,
+     735,   736,    32,     9,    13,    10
+};
+# endif
+
+#define YYPACT_NINF -2081
+
+#define yypact_value_is_default(Yystate) \
+  (!!((Yystate) == (-2081)))
+
+#define YYTABLE_NINF -1235
+
+#define yytable_value_is_error(Yytable_value) \
+  0
+
+  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+     STATE-NUM.  */
+static const yytype_int16 yypact[] =
+{
+     334, -2081, -2081,   207,   123,   345, -2081, -2081,   413,     6,
+   -2081,   396, -2081,   493, -2081, -2081, -2081, -2081,   111,   509,
+   -2081, -2081, -2081, -2081, -2081,   123, -2081, -2081, -2081, -2081,
+   -2081,   112,   518,    26, -2081, -2081, -2081, -2081,   322,   929,
+     413, -2081,   118,   540,   -17, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081,   151,    23, -2081, -2081,   544, -2081,   546, -2081,   634,
+   -2081,   437, -2081,   638, -2081,   641, -2081,   644, -2081,   774,
+   -2081,   776, -2081,   457, -2081,   449, -2081,   502, -2081, -2081,
+     504, -2081, -2081,   511, -2081, -2081,   520, -2081, -2081,   522,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081,   204,   780,   -33, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,   211,    81,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,   648, -2081,
+     449, -2081, -2081,    16, -2081, -2081, -2081, -2081,    17, -2081,
+   -2081, -2081, -2081,    14, -2081, -2081, -2081, -2081,   529,   814,
+   -2081,    15, -2081, -2081, -2081, -2081,   144, -2081, -2081, -2081,
+   -2081,   115, -2081, -2081, -2081, -2081,   174, -2081, -2081, -2081,
+   -2081,   155, -2081, -2081, -2081, -2081,   539,   831, -2081, -2081,
+     833, -2081,   426,   424,   422,   420,   466, -2081, -2081, -2081,
+     172, -2081, -2081, -2081, -2081, -2081, -2081, -2081,   246,    32,
+   -2081, -2081,   837, -2081,   449, -2081, -2081,   566,   362,   589,
+     362,   608,   362, -2081,   618,   626, -2081, -2081, -2081,   839,
+   -2081, -2081, -2081,   292, -2081, -2081,   309, -2081, -2081,   317,
+     652,   330, -2081, -2081, -2081, -2081, -2081, -2081,   323, -2081,
+   -2081,   611, -2081, -2081,   613, -2081, -2081,   609, -2081, -2081,
+     621,   694,   132, -2081, -2081, -2081, -2081,   687,     5,   -89,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,   841,
+     206, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081,   375,   524, -2081,
+   -2081,   684, -2081,   877, -2081,   680, -2081,   681, -2081,   681,
+   -2081,   681, -2081,   681, -2081,   697, -2081,   697, -2081,   697,
+   -2081,   697, -2081,   681, -2081,   681, -2081,   700, -2081,   449,
+   -2081, -2081,   113, -2081, -2081, -2081, -2081,   895, -2081,   902,
+   -2081, -2081,   736, -2081, -2081, -2081, -2081, -2081,   902, -2081,
+   -2081, -2081, -2081,   902, -2081, -2081, -2081, -2081,   735,   741,
+   -2081,   -87, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081,   702, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081,   704, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081,   628,   411, -2081, -2081,   447, -2081, -2081, -2081, -2081,
+     764,   786,   788, -2081, -2081, -2081, -2081, -2081, -2081,   905,
+   -2081,   114, -2081, -2081, -2081, -2081,   790,   965, -2081,   792,
+     967,   969,   971,   973,   794,   975, -2081,   977, -2081,   979,
+   -2081,   990, -2081,   992, -2081,   995, -2081,   796,  1018, -2081,
+    1020, -2081, -2081, -2081,   742,   -80, -2081, -2081, -2081, -2081,
+   -2081, -2081,   752, -2081,   807,   754, -2081,   756, -2081, -2081,
+   -2081,   760, -2081, -2081,   726,   411, -2081, -2081, -2081, -2081,
+   -2081, -2081,  1027,   701, -2081,   542,   569,   876,   913,   917,
+     919,   315, -2081, -2081, -2081, -2081, -2081, -2081,   854,   923,
+     -46, -2081, -2081, -2081, -2081,   925,   304, -2081, -2081, -2081,
+   -2081,   142, -2081, -2081, -2081, -2081,   320, -2081, -2081, -2081,
+   -2081,    48, -2081, -2081, -2081, -2081,   927,   305, -2081, -2081,
+   -2081, -2081,   261, -2081, -2081, -2081, -2081,   138, -2081, -2081,
+   -2081, -2081,    53, -2081, -2081, -2081, -2081,   311, -2081, -2081,
+   -2081, -2081,   253, -2081, -2081, -2081, -2081,  1003,   939, -2081,
+   -2081, -2081, -2081,   -63, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081,   804,   411, -2081, -2081, -2081, -2081, -2081, -2081,  1027,
+   -2081, -2081,   616, -2081, -2081, -2081,  1010, -2081,  1012, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,   705,
+     982, -2081,  1032, -2081, -2081,  1013,  1015,  1049, -2081,   991,
+   -2081, -2081, -2081,  1056, -2081,  1057,   -45, -2081,  1064,  1065,
+   -2081,   373, -2081, -2081,   234, -2081,   338, -2081,    70,  1133,
+   -2081, -2081,   316, -2081, -2081, -2081, -2081,   262, -2081, -2081,
+   -2081,   245, -2081, -2081, -2081,   127, -2081, -2081, -2081,   313,
+   -2081,   312,  1135, -2081,  1069,   944, -2081, -2081, -2081,  1000,
+     411, -2081,  1027, -2081, -2081, -2081, -2081,  1137,  1139, -2081,
+     853,  1115, -2081,  1036, -2081, -2081,  1145,  1053, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1157, -2081, -2081,
+   -2081,  1159, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+    1038,   515, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081,  1192, -2081, -2081,  1027, -2081, -2081, -2081, -2081, -2081,
+   -2081,  1080,  1161, -2081,  1040, -2081, -2081,  1198,  1092, -2081,
+   -2081, -2081, -2081, -2081, -2081,   900,  1119,  1004,   845,  1154,
+    1156, -2081, -2081,  1230,  1234,  1236, -2081, -2081, -2081, -2081,
+    1138, -2081, -2081, -2081,  1202, -2081,  1044, -2081, -2081,  1241,
+    1129, -2081, -2081, -2081, -2081, -2081, -2081,   934,  1148,  1031,
+   -2081, -2081, -2081,  1160,  1004,  1262,  1047, -2081, -2081, -2081,
+   -2081,  1264,  1266,  1268, -2081, -2081,  1072, -2081,  1272,   984,
+   -2081, -2081, -2081, -2081, -2081, -2081,   981,  1158,  1067, -2081,
+   -2081, -2081,  1176,  1031,  1280,  1074, -2081, -2081,  1180,  1076,
+    1078, -2081,  1286,   -47, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081,  1307, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+    1275, -2081, -2081, -2081,  1209,  1067,  1311,  1082, -2081, -2081,
+   -2081,  1084,  1086, -2081,  1315,   -76, -2081, -2081, -2081, -2081,
+   -2081,  1211,  1004,   987, -2081, -2081, -2081, -2081,   -71, -2081,
+   -2081, -2081, -2081,  1319, -2081, -2081,  1224,  1017, -2081, -2081,
+   -2081,   972, -2081, -2081, -2081,  1090, -2081, -2081, -2081,  1094,
+    1096, -2081,  1325,   -11, -2081, -2081, -2081, -2081,   985,   987,
+   -2081, -2081, -2081, -2081,   -31, -2081, -2081, -2081, -2081,  1333,
+   -2081, -2081,  1216,  1029, -2081, -2081, -2081, -2081,  1300,  1098,
+   -2081, -2081,  1238,  1041, -2081,  1179, -2081, -2081,  1281,  1099,
+   -2081, -2081, -2081, -2081, -2081,  1101,   202, -2081, -2081, -2081,
+   -2081,   721, -2081,  1413,  1297, -2081, -2081, -2081, -2081,  1071,
+     987, -2081, -2081, -2081, -2081,    -1, -2081, -2081, -2081, -2081,
+    1415, -2081, -2081,  1306,  1121, -2081, -2081, -2081, -2081, -2081,
+    1320,  1041, -2081, -2081, -2081,  1314,  1141, -2081, -2081, -2081,
+   -2081, -2081,  1103,   202,  1081,  1429,  1105,   -78, -2081, -2081,
+   -2081, -2081, -2081, -2081,  1117, -2081,  1179,  1431,  1107, -2081,
+   -2081, -2081,  1109,   202,  1122, -2081, -2081,  1435, -2081, -2081,
+   -2081, -2081,  1439, -2081,  1446, -2081,  1448, -2081,  1454,  1451,
+    1111,   721, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081,  -182, -2081, -2081,
+   -2081,  1232, -2081, -2081, -2081,  1364,  1041, -2081, -2081, -2081,
+    1344,  1153, -2081, -2081, -2081, -2081, -2081,  1113,   202,  1116,
+     452, -2081,  1117, -2081, -2081, -2081,  1118,   182,  1150, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1463,  1019,
+   -2081, -2081, -2081, -2081, -2081, -2081,  1370,  1165, -2081, -2081,
+   -2081,  1143, -2081,  1179,  1123,  1465,  1317, -2081, -2081, -2081,
+   -2081,  1168, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1473,
+    1483,  1485,  1487,  1489,  1493,   -13, -2081, -2081, -2081, -2081,
+   -2081, -2081,   721, -2081,  1204,  1147,  1497,  1125, -2081,  1127,
+     685, -2081,  1117, -2081, -2081, -2081,  1340,   153,  1196, -2081,
+   -2081, -2081, -2081, -2081, -2081,  -110, -2081, -2081, -2081, -2081,
+    1501, -2081,  1488, -2081,  1508, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+    1143, -2081,  1200, -2081, -2081, -2081, -2081,  1510,  1562, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081,  1342,   657,  1509, -2081, -2081,  1242, -2081, -2081, -2081,
+   -2081,  1346,   202, -2081,  1181, -2081,  1179,  1348,  1317, -2081,
+   -2081, -2081, -2081,  1511,  1318, -2081,  1406, -2081,  1229, -2081,
+    1561,  1563, -2081, -2081, -2081,  1564, -2081, -2081,  1565, -2081,
+   -2081, -2081,  1444,  1321, -2081,   297, -2081, -2081, -2081, -2081,
+   -2081, -2081,  1350, -2081, -2081, -2081, -2081,   600,  1568, -2081,
+   -2081, -2081, -2081, -2081,  -107, -2081, -2081, -2081, -2081, -2081,
+    1573, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081,  1143, -2081,  1267, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1222,  1265,
+   -2081, -2081,  1418, -2081, -2081,  1575,  1574,  1576,  1181, -2081,
+   -2081, -2081, -2081,   -25, -2081, -2081, -2081, -2081, -2081,  1580,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081,  1352,    44,  1269, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081,  1243, -2081,  1179,  1354,
+    1317, -2081, -2081, -2081, -2081, -2081,  1251, -2081,  1579,  1356,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1423, -2081,
+   -2081, -2081,  1358,   846,   -37, -2081, -2081,  1360,   600, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1582,
+       0, -2081, -2081,  1237,  1283, -2081, -2081,  1418,  1583,  1181,
+   -2081, -2081,   902,   902, -2081, -2081,  1362,   147, -2081,  1366,
+     281,  1586, -2081, -2081,  1243, -2081, -2081, -2081, -2081, -2081,
+    1240,  1278, -2081, -2081,  1418,  1589,   -84, -2081, -2081, -2081,
+   -2081, -2081,  1590, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081,  1255, -2081,  1179,  1368,  1317, -2081, -2081, -2081,
+   -2081, -2081,  1263, -2081,  1595,    59, -2081, -2081, -2081, -2081,
+    1591,  1134, -2081,  1347, -2081, -2081, -2081, -2081, -2081,  1600,
+    1597,  1598, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081,  1252,   -39, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081,  1373,   147, -2081,  1243,
+   -2081, -2081, -2081,  1293, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081,  1317, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081,  1255, -2081, -2081, -2081,  1375,   147, -2081,
+   -2081,   -61,  1603,   902, -2081, -2081, -2081,  1179,  1379,  1317,
+   -2081, -2081, -2081, -2081, -2081,  1277, -2081,  1604,  1442, -2081,
+    1607, -2081,  1606,  1608, -2081, -2081, -2081, -2081,  1363, -2081,
+   -2081,  1609,  1613,  1614, -2081, -2081, -2081, -2081, -2081, -2081,
+    1260,  1322, -2081,  1459, -2081, -2081,  1381,   333,  1313, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1255, -2081,
+   -2081, -2081, -2081,  1460, -2081, -2081, -2081,  1308, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1617,
+    1383,  1317, -2081, -2081, -2081, -2081, -2081,  1285, -2081, -2081,
+   -2081,  1467,  1623,  1624, -2081,   414,  1385,   762, -2081,  1625,
+    1626,  1387,   281, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081,  1317, -2081, -2081, -2081,
+   -2081, -2081,  1289, -2081, -2081,  1627,  1628, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1215, -2081,
+    1424,  1382, -2081, -2081, -2081,  1636,  1632,  1633,  1634,  1635,
+    1637,  1638,  1639,  1640,  1641, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+    1317, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1347,
+    1644, -2081,  1299, -2081, -2081, -2081,  1620,   203,  1642,   203,
+    1643,   203,  1645,   203,  1646,   203,  1647,   203,  1648,   203,
+    1649,   203,  1650,   203, -2081,  1652,  1651, -2081, -2081, -2081,
+    1655,  1653, -2081, -2081, -2081,  1659,  1660,  1661,  1662,  1663,
+    1664,  1665,   902,   902, -2081,  1513,  1351, -2081, -2081,  1365,
+   -2081,  1669,  1666, -2081, -2081, -2081, -2081, -2081,  1365, -2081,
+   -2081, -2081,  1365, -2081, -2081, -2081,  1365, -2081, -2081, -2081,
+    1365, -2081, -2081, -2081,  1365, -2081, -2081, -2081,  1365, -2081,
+   -2081, -2081,  1365, -2081, -2081, -2081,  1365, -2081, -2081, -2081,
+    1667,   271,  1672,  1411, -2081, -2081,  1671,  1673,  1674,  1675,
+    1676,  1677,  1678,  1679,  1680, -2081, -2081, -2081, -2081, -2081,
+     193,  1391,  1681,  1684,  1392, -2081,  1392, -2081,  1392, -2081,
+    1392, -2081,  1392, -2081,  1392, -2081,  1392, -2081,  1392, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081,  1396, -2081, -2081, -2081,  1447, -2081,  1449, -2081,  1450,
+   -2081,   271, -2081,   271, -2081,  1100, -2081,   271, -2081,  1217,
+   -2081,  1217, -2081,  1393, -2081,   271, -2081,   271, -2081,   271,
+   -2081, -2081,   271, -2081, -2081,   271, -2081,  1100, -2081,   271,
+    1689, -2081,  1428,  1179, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081,  1430,  1408,  1395,  1317, -2081, -2081,
+   -2081, -2081, -2081,  1692,  1412,  1432,  1414,  1426,  1416,  1422,
+    1417,  1425,  1419,  1433,  1420,  1434,  1427,  1443,  1436,  1437,
+   -2081, -2081, -2081, -2081,    13,  1705,  1397,  1707,  1399,  1708,
+    1401,  1294, -2081,   271, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081,  1270, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1100, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081,  1261, -2081,  1717,  1710, -2081,  1712, -2081,
+    1291, -2081, -2081,   271, -2081,  1290, -2081,   271, -2081,   271,
+   -2081,   550, -2081,  1100, -2081,  1279, -2081, -2081, -2081, -2081,
+    1179,  1512, -2081, -2081, -2081, -2081,  1514,  1317, -2081, -2081,
+   -2081, -2081, -2081, -2081,  1441, -2081, -2081, -2081,  1516, -2081,
+   -2081, -2081,  1518, -2081, -2081, -2081,  1520, -2081, -2081, -2081,
+    1522, -2081, -2081, -2081,  1524, -2081, -2081, -2081,  1526, -2081,
+   -2081, -2081,  1528, -2081, -2081, -2081,  1530, -2081,   159,   235,
+    1276, -2081,  1723,  1729, -2081, -2081, -2081, -2081,  1727,  1438,
+   -2081, -2081,  1728,  1440, -2081, -2081,  1730,  1445, -2081, -2081,
+   -2081,  1310,  1100,  1100,  1100,  1100,  1100,  1100, -2081, -2081,
+    1100,  1100,  1100,  1100,  1100,  1100, -2081,  1100, -2081, -2081,
+   -2081,  1532,  1534,  1100,   271,   271,   271, -2081,  1334,     4,
+   -2081,  1732,   271,   271, -2081,  1303, -2081,  1302,  1301, -2081,
+   -2081, -2081, -2081, -2081, -2081,  1733, -2081, -2081, -2081,  1296,
+   -2081, -2081, -2081, -2081,  1735, -2081,  1736, -2081, -2081,  1737,
+   -2081,  1738, -2081,  1739, -2081,  1740, -2081,  1741,  1100, -2081,
+    1288,  1538, -2081,  1317, -2081, -2081, -2081, -2081,  1585, -2081,
+   -2081, -2081, -2081, -2081,  1466, -2081,  1317, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081,  1317, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081,  1750,  1749,  1751, -2081,  1752, -2081,  1753, -2081, -2081,
+    1100,  1100,  1100,  1100,  1384,  1377,   772,   842,  1378,  1380,
+    1100,  1369,  1371,  1367,    55,  1372,   797,   889,   928,  1357,
+   -2081, -2081,  1359, -2081, -2081,  1100,  1355,  1349,  1353, -2081,
+   -2081,  1361, -2081,  1764, -2081, -2081, -2081, -2081, -2081, -2081,
+    1374, -2081,  1376, -2081, -2081, -2081, -2081, -2081, -2081,  1540,
+    1312,  1100,   550,   550,   550,   550,   550,   550,  1100, -2081,
+   -2081, -2081, -2081, -2081,  1317, -2081, -2081, -2081, -2081, -2081,
+    1517,  1318, -2081,  1611, -2081,  1482, -2081, -2081,  1486,  1490,
+    1619,   -64,   -58, -2081,  1491,   -52,   -48, -2081,  1629,  1492,
+    1776, -2081, -2081, -2081, -2081,  1421,  1452,  1410,  1409, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1100, -2081, -2081,
+   -2081,  1046, -2081,  1779,  1780, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1386, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1326, -2081, -2081,
+    1782,  1785, -2081, -2081, -2081,  1100, -2081,   550, -2081,   550,
+   -2081,  1331, -2081,  1336, -2081,   550, -2081,  1327, -2081,   271,
+    1544,   229, -2081,  1533, -2081,  1546, -2081, -2081,  1549, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1548, -2081,
+   -2081, -2081,  1550, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081,  1549, -2081, -2081, -2081, -2081, -2081,
+   -2081,  1453, -2081, -2081,  1793,   902, -2081,  1792,   348, -2081,
+     902,   902,  1329,  1335,  1345, -2081, -2081,  1332, -2081,  1388,
+    1347, -2081, -2081, -2081, -2081,  1800,  1801, -2081, -2081, -2081,
+   -2081, -2081, -2081,    61, -2081, -2081, -2081, -2081,  1799, -2081,
+    1552,   -68,  1100, -2081, -2081, -2081, -2081,   335, -2081, -2081,
+   -2081, -2081,    28,    83,  1802, -2081, -2081,  1455,  1803,  1804,
+   -2081, -2081, -2081,  1806,  1807, -2081, -2081, -2081, -2081, -2081,
+    1555,  1811,  1812,  1654, -2081,   902, -2081, -2081, -2081, -2081,
+   -2081, -2081,  1813,  1814, -2081, -2081, -2081,  1658,  1668,  1818,
+   -2081,  1817, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1670,
+   -2081, -2081, -2081, -2081, -2081, -2081,  1822, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081,  1819,  1820, -2081,  1682,   -41,  1824,
+     902, -2081, -2081,  1685,  1825, -2081,  1686, -2081, -2081, -2081,
+   -2081, -2081, -2081,  1584,  1827,  1828, -2081, -2081, -2081,  1830,
+    1821, -2081, -2081, -2081,   902,  1833, -2081,  1832,  1556, -2081,
+   -2081
+};
+
+  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+     Performed when YYTABLE does not specify something else to do.  Zero
+     means the default is an error.  */
+static const yytype_uint16 yydefact[] =
+{
+       0,     5,     4,     0,    16,     6,     1,   962,    14,    18,
+      17,     0,     7,     0,    13,     2,    12,    20,   147,     0,
+     968,   965,   961,   963,   964,    16,    10,     3,     8,     9,
+     149,   208,     0,     0,    24,    19,    21,    22,     0,   967,
+      14,   210,   241,     0,     0,   153,   148,   150,   151,    65,
+      84,    92,   100,   108,   116,   127,    23,    41,    49,    57,
+      76,     0,    26,    27,    29,     0,    30,     0,    31,     0,
+      32,    66,    33,     0,    34,     0,    35,     0,    36,     0,
+      37,     0,    38,   117,    39,     0,   966,     0,   979,   978,
+       0,   985,   984,     0,   991,   990,     0,   997,   996,     0,
+    1003,  1002,   969,   970,   975,   976,   977,   971,   981,   982,
+     983,   972,   987,   988,   989,   973,   993,   994,   995,   974,
+     999,  1000,  1001,    11,   243,   408,     0,     0,   214,   209,
+     211,   212,   164,   173,   182,   191,   197,   152,     0,   155,
+     156,   158,   166,   159,   175,   160,   184,   161,   192,   162,
+       0,    25,    28,     0,    45,    40,    42,    43,     0,    53,
+      48,    50,    51,     0,    61,    56,    58,    59,     0,     0,
+      67,     0,    80,    75,    77,    78,     0,    88,    83,    85,
+      86,     0,    96,    91,    93,    94,     0,   104,    99,   101,
+     102,     0,   112,   107,   109,   110,     0,     0,   118,   955,
+       0,   128,     0,     0,     0,     0,     0,   410,    15,   412,
+       0,   247,   242,   244,   245,   222,   230,   213,     0,   216,
+     217,   219,     0,   220,     0,   154,   157,     0,   165,     0,
+     174,     0,   183,  1529,     0,     0,   193,  1527,  1528,     0,
+     198,    47,    44,     0,    55,    52,     0,    63,    60,     0,
+       0,     0,    72,    64,    69,    70,    82,    79,     0,    90,
+      87,     0,    98,    95,     0,   106,   103,     0,   114,   111,
+       0,     0,     0,   123,   115,   120,   121,     0,     0,     0,
+     132,   126,   129,   130,   980,   986,   992,   998,  1004,     0,
+     411,   268,   279,   287,   298,   305,   312,   319,   378,   370,
+     326,   337,   359,   348,   386,   397,   246,     0,   249,   250,
+     252,   269,   253,     0,   254,     0,   255,     0,   256,     0,
+     257,     0,   258,     0,   259,     0,   260,     0,   262,     0,
+     261,     0,   263,     0,   264,     0,   265,     0,   266,     0,
+     215,   218,     0,   226,   221,   223,   224,     0,   231,     0,
+     163,  1565,     0,   167,   169,   168,  1563,  1564,     0,   172,
+     176,   178,   177,     0,   181,   185,   187,   186,     0,     0,
+     190,     0,   202,   196,   199,   200,    46,    54,    62,    68,
+      74,    71,     0,    81,    89,    97,   105,   113,   119,   125,
+     122,     0,   955,   954,   957,   958,   959,   960,   956,   131,
+     138,     0,   134,   135,   140,   422,   419,   409,   417,   418,
+       0,     0,     0,   413,   415,   416,   414,   248,   251,     0,
+     270,     0,   283,   278,   280,   281,     0,     0,   288,     0,
+       0,     0,     0,     0,     0,     0,   327,     0,   338,     0,
+     349,     0,   360,     0,   371,     0,   379,     0,     0,   387,
+       0,   398,   228,   225,     0,     0,   235,   229,   232,   233,
+     952,   953,     0,   171,     0,     0,   180,     0,   189,  1530,
+     195,     0,   201,   140,     0,   204,   205,    73,   124,   931,
+     133,   136,     0,   139,   424,     0,   584,   426,     0,     0,
+       0,     0,   274,   267,   271,   272,   285,   282,     0,     0,
+       0,   292,   286,   289,   290,     0,     0,   302,   297,   299,
+     300,     0,   309,   304,   306,   307,     0,   316,   311,   313,
+     314,     0,   323,   318,   320,   321,     0,     0,   331,   325,
+     328,   329,     0,   342,   336,   339,   340,     0,   353,   347,
+     350,   351,     0,   364,   358,   361,   362,     0,   375,   369,
+     372,   373,     0,   383,   377,   380,   381,     0,     0,   391,
+     385,   388,   389,     0,   402,   396,   399,   400,   227,   234,
+     140,     0,   237,   238,   170,  1566,   179,   188,   194,     0,
+     203,   206,     0,   146,   137,  1537,     0,  1569,     0,   141,
+     144,   142,  1535,  1536,   143,  1567,  1568,   420,   586,   701,
+     588,   955,     0,   425,   427,     0,     0,     0,   273,     0,
+     276,   277,   284,     0,   291,     0,     0,   294,     0,     0,
+     301,     0,   885,   308,     0,   315,     0,   322,     0,     0,
+     889,   330,     0,   333,   335,   891,   341,     0,   344,   346,
+     352,     0,   355,   357,   363,     0,   366,   368,   374,     0,
+     382,     0,     0,   390,     0,     0,   393,   401,   140,     0,
+     404,   405,     0,   236,   239,   207,   145,     0,     0,   703,
+     818,   705,   955,     0,   587,   589,     0,   433,   430,   423,
+     428,   429,  1482,  1489,  1494,   275,   926,     0,   293,   295,
+     934,     0,   303,   886,   310,   317,   324,   933,   332,   334,
+       0,   890,   343,   345,   354,   356,   365,   367,   376,   384,
+     935,     0,   392,   394,     0,   403,   406,   240,  1538,  1570,
+     820,   869,   822,   955,     0,   704,   706,     0,   595,   592,
+     585,   590,   591,   955,   435,     0,   455,     0,     0,     0,
+       0,   900,   888,     0,     0,     0,   892,   893,   894,   895,
+       0,   407,   871,   421,     0,   955,     0,   821,   823,     0,
+     712,   709,   702,   707,   708,   955,   597,     0,   617,     0,
+     932,   431,   457,   477,     0,     0,     0,   436,   296,   887,
+     899,     0,     0,     0,   395,   955,     0,   872,     0,   828,
+     826,   819,   824,   825,   955,   714,     0,   734,     0,   930,
+     593,   619,   640,     0,     0,     0,   598,   479,   499,     0,
+       0,   458,     0,     0,   440,   434,   437,   438,   896,   897,
+     898,     0,   877,   875,   870,   873,   874,   955,   830,   859,
+     831,   927,   710,   736,   757,     0,     0,     0,   715,   642,
+     662,     0,     0,   620,     0,     0,   602,   596,   599,   600,
+     501,   521,     0,   485,   482,   478,   480,   481,     0,   462,
+     456,   459,   460,     0,   439,   446,     0,   442,   443,   448,
+     955,     0,   928,   860,   955,     0,   832,   759,   779,     0,
+       0,   737,     0,     0,   719,   713,   716,   717,   594,   648,
+     645,   641,   643,   644,     0,   624,   618,   621,   622,     0,
+     601,   608,     0,   604,   605,   610,   523,   545,     0,     0,
+     502,  1061,     0,   487,   486,     0,   461,   468,     0,   464,
+     465,   470,  1492,   441,   444,     0,   447,   936,   876,   881,
+     878,     0,   861,     0,   838,   835,   829,   833,   834,   711,
+     765,   762,   758,   760,   761,     0,   741,   735,   738,   739,
+       0,   718,   725,     0,   721,   722,   727,   665,   663,   667,
+       0,   650,   649,   623,   630,     0,   626,   627,   632,  1488,
+     603,   606,     0,   609,   432,     0,     0,     0,   506,   500,
+     503,   504,   483,  1068,   489,   488,     0,     0,     0,  1109,
+     463,   466,     0,   469,     0,   454,   445,     0,   449,   450,
+     451,   452,     0,  1521,     0,  1553,     0,  1561,     0,     0,
+       0,  1130,  1131,  1140,  1139,  1138,  1519,  1520,  1134,  1133,
+    1137,  1551,  1552,  1136,  1559,  1560,  1135,     0,   955,   840,
+     851,     0,   782,   780,   784,     0,   767,   766,   740,   747,
+       0,   743,   744,   749,  1481,   720,   723,     0,   726,     0,
+     666,   646,   652,   651,   625,   628,     0,   631,     0,   616,
+     607,   611,   612,   613,   614,   548,   546,   550,     0,     0,
+     528,   522,   525,   526,   505,   512,     0,   508,   509,   514,
+    1075,   491,   490,     0,     0,     0,  1008,  1064,  1060,  1062,
+    1063,     0,   476,   467,   471,   472,   473,   474,   453,     0,
+       0,     0,     0,     0,     0,     0,   882,   879,  1132,   827,
+     865,   862,     0,   929,     0,   850,     0,     0,   841,     0,
+     783,   763,   769,   768,   742,   745,     0,   748,     0,   733,
+     724,   728,   729,   730,   731,     0,   682,   664,   679,   680,
+       0,  1533,     0,  1541,     0,   668,   670,   669,   674,   678,
+     677,  1531,  1532,   671,   676,  1539,  1540,   673,   675,   672,
+     654,   653,     0,   639,   629,   906,   919,     0,     0,   633,
+     636,   903,   904,   905,   637,   916,   917,   918,   634,   635,
+     615,     0,   549,     0,   527,   533,     0,   530,   535,   507,
+     510,     0,   513,  1082,   493,   492,     0,     0,  1008,  1071,
+    1067,  1069,  1070,     0,     0,  1066,  1006,  1007,     0,   475,
+       0,     0,  1522,  1554,  1562,     0,   884,  1152,     0,  1151,
+    1157,   883,     0,  1141,  1143,  1142,  1146,  1148,  1149,  1150,
+    1145,  1159,     0,   837,   836,   855,   852,     0,     0,   847,
+     844,   839,   842,   843,     0,   799,   781,   796,   797,  1525,
+       0,   785,   786,   787,   791,   793,  1523,  1524,   795,   794,
+     788,   790,   792,   789,   771,   770,     0,   756,   746,   911,
+     924,   955,   955,   750,   753,   908,   909,   910,   754,   921,
+     922,   923,   751,   752,   732,   940,   689,   681,     0,   684,
+     686,   691,   685,   937,   942,     0,     0,     0,   656,   655,
+     638,   955,   955,     0,   565,   547,   562,   563,  1577,     0,
+     551,   553,   552,   557,   561,   560,   554,   556,   558,   555,
+     559,  1575,  1576,   524,   529,   531,     0,   534,     0,   520,
+     511,   515,   516,   517,   518,  1089,   495,   494,     0,     0,
+    1008,  1078,  1074,  1076,  1077,  1073,     0,  1483,     0,     0,
+    1011,  1009,  1013,  1065,  1503,  1485,  1486,  1154,     0,   880,
+    1144,  1147,     0,  1158,     0,   866,   863,     0,  1110,  1111,
+    1119,  1121,  1118,  1114,  1120,  1113,  1117,  1116,  1115,     0,
+       0,   806,   798,     0,   801,   803,   808,   802,     0,   773,
+     772,   755,     0,     0,   683,   687,     0,   690,   938,     0,
+     941,     0,  1534,  1542,   658,   657,   907,   920,   572,   564,
+       0,   567,   569,   574,   568,     0,     0,   543,   532,   540,
+     541,   955,     0,   536,   539,   901,   537,   913,   914,   538,
+     519,  1096,   497,   496,     0,     0,  1008,  1085,  1081,  1083,
+    1084,  1080,     0,  1072,     0,     0,  1022,  1018,  1019,  1020,
+       0,  1012,  1153,  1186,  1178,  1155,  1176,  1177,  1557,     0,
+       0,     0,  1160,  1163,  1162,  1164,  1161,  1555,  1556,  1165,
+     868,   867,     0,     0,   856,   853,  1112,  1487,   846,  1166,
+     845,   848,   849,  1168,   800,   804,     0,   807,  1526,   775,
+     774,   955,   955,     0,   700,   688,   698,   692,   696,   697,
+     693,   694,   695,  1008,   949,   939,   947,   948,   943,   944,
+     946,   945,  1484,   660,   659,   566,   570,     0,   573,  1578,
+     542,     0,     0,     0,  1103,   484,   498,     0,     0,  1008,
+    1092,  1088,  1090,  1091,  1087,     0,  1079,     0,     0,  1021,
+       0,  1010,     0,     0,  1014,  1016,  1015,  1188,     0,  1204,
+    1190,     0,     0,     0,   864,  1048,   858,   857,  1129,  1050,
+       0,  1122,  1124,  1123,  1127,  1126,     0,  1167,     0,   817,
+     805,   815,   809,   813,   814,   810,   811,   812,   777,   776,
+     912,   925,   699,     0,   951,   647,   661,     0,   583,   571,
+     581,   575,   579,   580,   576,   577,   578,   544,   955,     0,
+       0,  1008,  1099,  1095,  1097,  1098,  1094,     0,  1086,  1495,
+    1023,     0,     0,     0,  1179,  1185,     0,  1189,  1558,     0,
+       0,     0,  1049,   854,  1125,  1128,  1183,  1182,  1156,  1180,
+    1181,   955,  1169,  1172,  1171,  1175,  1173,  1170,  1174,   816,
+     764,   778,   950,   582,   915,   902,  1008,  1106,  1102,  1104,
+    1105,  1101,     0,  1093,  1017,     0,     0,  1444,  1218,  1395,
+    1250,  1267,  1369,  1352,  1304,  1328,  1422,  1439,  1205,  1206,
+    1220,  1209,  1252,  1212,  1269,  1213,  1306,  1214,  1330,  1210,
+    1354,  1211,  1371,  1207,  1397,  1208,  1424,  1215,  1440,  1216,
+       0,     0,  1203,  1187,  1517,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,  1191,  1192,  1195,  1196,  1197,
+    1198,  1193,  1194,  1200,  1201,  1199,  1515,  1516,  1480,  1490,
+    1008,  1057,  1047,  1055,  1056,  1051,  1052,  1054,  1053,  1186,
+       0,  1108,     0,  1100,  1504,  1506,     0,  1219,     0,  1251,
+       0,  1268,     0,  1305,     0,  1329,     0,  1353,     0,  1370,
+       0,  1396,     0,  1423,  1549,     0,     0,  1441,  1547,  1548,
+       0,     0,  1445,  1202,   955,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,  1059,     0,     0,   955,  1107,     0,
+    1545,     0,     0,  1221,  1222,  1223,  1543,  1544,     0,  1253,
+    1254,  1255,     0,  1270,  1271,  1272,     0,  1307,  1308,  1309,
+       0,  1331,  1332,  1333,     0,  1355,  1356,  1357,     0,  1372,
+    1373,  1374,     0,  1398,  1399,  1400,     0,  1425,  1426,  1427,
+       0,     0,     0,     0,  1443,  1518,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,  1058,  1184,  1505,  1228,  1217,
+    1225,     0,     0,     0,  1234,  1249,  1234,  1266,  1234,  1303,
+    1234,  1327,  1234,  1351,  1234,  1368,  1234,  1394,  1234,  1421,
+    1550,  1725,  1730,  1735,  1740,  1743,  1752,  1757,  1763,  1767,
+    1770,  1773,  1780,  1775,  1782,  1787,  1790,  1793,  1715,  1746,
+    1749,     0,  1694,  1716,  1695,     0,  1696,     0,  1697,     0,
+    1698,     0,  1699,     0,  1713,     0,  1700,     0,  1701,  1753,
+    1702,  1758,  1703,     0,  1704,     0,  1705,     0,  1706,     0,
+    1707,  1708,     0,  1709,  1710,     0,  1711,     0,  1712,     0,
+       0,  1449,     0,     0,  1496,  1507,  1508,  1497,  1498,  1499,
+    1500,  1513,  1514,  1236,     0,     0,     0,  1008,  1231,  1227,
+    1229,  1230,  1546,     0,  1258,     0,  1275,     0,  1312,     0,
+    1336,     0,  1360,     0,  1377,     0,  1403,     0,  1430,     0,
+    1777,  1784,  1442,  1438,     0,     0,     0,     0,     0,     0,
+       0,     0,  1739,     0,  1742,  1624,  1616,  1618,  1622,  1626,
+    1628,  1674,  1690,  1636,  1620,  1643,  1630,  1632,  1634,  1662,
+    1639,  1641,  1682,  1678,  1686,  1606,  1610,  1614,  1652,  1645,
+    1647,  1649,     0,  1600,  1601,  1581,  1582,  1584,  1585,  1586,
+    1587,  1589,  1590,  1591,  1593,  1592,  1594,  1596,     0,  1597,
+    1595,  1603,  1604,  1605,  1579,  1655,  1580,  1583,  1602,  1598,
+    1599,  1588,  1745,     0,  1748,     0,     0,  1754,     0,  1759,
+       0,  1764,  1762,     0,  1766,     0,  1769,     0,  1772,     0,
+    1779,     0,  1786,     0,  1789,     0,  1792,  1479,  1457,  1464,
+       0,     0,  1450,  1224,  1243,  1226,     0,  1008,  1239,  1235,
+    1237,  1238,  1233,  1005,     0,  1491,  1260,  1257,     0,  1256,
+    1277,  1274,     0,  1273,  1314,  1311,     0,  1310,  1338,  1335,
+       0,  1334,  1362,  1359,     0,  1358,  1379,  1376,     0,  1375,
+    1405,  1402,     0,  1401,  1432,  1429,     0,  1428,     0,     0,
+       0,  1720,     0,     0,  1717,  1714,  1718,  1719,     0,     0,
+    1726,  1724,     0,     0,  1731,  1729,     0,     0,  1736,  1734,
+    1741,     0,     0,     0,     0,     0,     0,     0,  1676,  1692,
+       0,     0,     0,     0,     0,     0,  1668,     0,  1684,  1680,
+    1688,     0,     0,     0,     0,     0,     0,  1747,     0,     0,
+    1750,     0,     0,     0,  1765,     0,  1771,     0,     0,  1832,
+    1826,  1829,  1807,  1819,  1838,     0,  1835,  1816,  1795,     0,
+    1796,  1797,  1811,  1798,     0,  1799,     0,  1800,  1801,     0,
+    1802,     0,  1803,     0,  1804,     0,  1805,     0,     0,  1794,
+       0,     0,  1458,  1008,  1453,  1448,  1451,  1452,  1026,  1246,
+    1242,  1244,  1245,  1241,     0,  1232,  1008,  1263,  1259,  1261,
+    1262,  1283,  1280,  1276,  1278,  1279,  1319,  1317,  1313,  1315,
+    1316,  1343,  1341,  1337,  1339,  1340,  1008,  1365,  1361,  1363,
+    1364,  1384,  1382,  1378,  1380,  1381,  1410,  1408,  1404,  1406,
+    1407,  1040,  1435,  1431,  1433,  1434,  1776,  1778,  1783,  1785,
+    1721,     0,     0,     0,  1727,     0,  1732,     0,  1737,  1744,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+    1608,  1607,     0,  1612,  1611,     0,     0,     0,     0,  1640,
+    1638,     0,  1653,     0,  1657,  1658,  1651,  1656,  1659,  1761,
+       0,  1751,     0,  1756,  1768,  1774,  1781,  1821,  1788,     0,
+    1810,     0,     0,     0,     0,     0,     0,     0,     0,  1447,
+    1467,  1446,  1465,  1469,  1008,  1461,  1456,  1459,  1460,  1455,
+       0,     0,  1248,  1024,  1025,     0,  1240,  1265,     0,     0,
+    1282,     0,     0,  1367,     0,     0,     0,  1437,  1039,     0,
+       0,  1723,  1728,  1733,  1738,     0,     0,     0,     0,  1627,
+    1629,  1675,  1677,  1691,  1693,  1637,  1621,     0,  1631,  1633,
+    1635,     0,  1664,     0,     0,  1663,  1669,  1670,  1671,  1642,
+    1683,  1685,  1679,  1681,  1687,  1689,  1609,  1613,     0,  1646,
+    1648,  1650,  1654,  1660,  1755,  1760,  1823,     0,  1808,  1806,
+       0,     0,  1814,  1813,  1812,     0,  1815,     0,  1818,     0,
+    1825,     0,  1828,     0,  1831,     0,  1834,     0,  1837,     0,
+       0,  1468,  1463,     0,  1454,     0,  1029,  1027,  1030,  1247,
+    1264,  1281,  1286,  1284,  1288,  1322,  1318,  1320,     0,  1346,
+    1342,  1344,     0,  1366,  1387,  1383,  1385,  1388,  1413,  1409,
+    1411,  1414,  1043,  1041,  1044,  1436,  1722,  1625,  1617,  1619,
+    1623,     0,  1665,  1666,     0,     0,  1615,     0,     0,  1809,
+       0,     0,     0,     0,     0,  1830,  1833,     0,  1839,     0,
+    1186,  1477,  1466,  1475,  1476,     0,     0,  1470,  1471,  1472,
+    1473,  1474,  1462,     0,  1037,  1033,  1034,  1035,     0,  1031,
+       0,  1287,     0,  1325,  1321,  1323,  1324,     0,  1349,  1345,
+    1347,  1348,     0,     0,     0,  1045,  1644,     0,     0,     0,
+    1661,  1822,  1824,     0,     0,  1817,  1820,  1827,  1836,  1791,
+       0,     0,     0,     0,  1036,     0,  1028,  1296,  1294,  1285,
+    1292,  1293,     0,     0,  1289,  1290,  1291,     0,     0,     0,
+    1573,     0,  1389,  1386,  1392,  1391,  1390,  1571,  1572,     0,
+    1420,  1415,  1412,  1418,  1417,  1416,     0,  1042,  1667,  1673,
+    1672,  1512,  1511,  1478,     0,     0,  1038,     0,     0,     0,
+       0,  1326,  1350,     0,     0,  1419,     0,  1501,  1502,  1032,
+    1295,  1299,  1297,  1300,     0,     0,  1393,  1574,  1046,     0,
+       0,  1301,  1493,  1510,     0,     0,  1298,     0,     0,  1509,
+    1302
+};
+
+  /* YYPGOTO[NTERM-NUM].  */
+static const yytype_int16 yypgoto[] =
+{
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1805, -2081,
+    1816, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1786,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081,  1456,  -349,  -344, -2081, -2081,  -518, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081,  1703, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+    1389, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1631, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081,  1284, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081,  1543, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081,  1239, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081,  1220, -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1223,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081,  1212, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081,  1214, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081,  1206, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081,  1197, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+     996, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081,   943, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+     450, -1063, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081,   679, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081,   456, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081,   966, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+     904, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+     579, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081,   918, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081,   830, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081,   489, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081,   314, -2081, -2081, -2081, -2081, -2081, -2081,   403,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+     654,     7,  -149,  -142, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -1338, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -1084, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,   -86, -2081,
+     149,   175, -2081, -2081, -1133, -1206, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081,  -358,  -388, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2010, -1077, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081,  -570, -2081, -2081, -2081, -2081, -2081,
+    -857, -2081, -2081, -2081, -2081, -2081,  -983, -2081, -2081, -2081,
+   -2081, -2081, -1055, -2081, -2081, -2081, -2081, -2081, -1228, -2081,
+   -2081, -2081, -2081, -2081, -1297, -2081, -2081, -2081, -2081, -2081,
+   -1381, -2081, -2081, -2081, -2081, -2081,  -974, -2081, -2081,   510,
+   -2081, -2081,   318, -2081,   319,   765, -2081,   869,   517, -2081,
+     660, -2081,   659, -2081, -2081, -2081, -2081, -2081,   505, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -1721, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -1059, -2081, -2081, -2081, -2081, -2081, -1266, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,   321,
+    -808, -2081, -1390,  -951, -2081, -2081,   855,  -777, -2081,   324,
+    -800,  -763, -2081, -2081,  -454, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081,  -956,  -633, -2081, -2080, -2081, -2081, -2081, -2081,
+    -631,  -630, -2081, -2081, -2081, -2081, -2081, -1027, -2081, -2081,
+   -2081, -2081, -2081,  -145, -2081, -2081,  -947, -2081, -2081,  -476,
+   -2081, -2081, -2081, -2081, -2081,  -784, -2081, -2081, -2081, -2081,
+   -2081, -1022, -2081, -2081, -1561, -2081, -2081, -1048, -2081, -2081,
+     -90, -2081, -2081,  -482, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -1855, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -1859, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081,    -7, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -1972,  -627, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081,
+   -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081, -2081
+};
+
+  /* YYDEFGOTO[NTERM-NUM].  */
+static const yytype_int16 yydefgoto[] =
+{
+      -1,     3,     4,     5,    13,    27,    28,    29,    15,    16,
+       8,     9,    18,    19,    35,    36,    37,    61,    62,    63,
+      64,    65,   155,   156,   157,   243,    66,    67,   160,   161,
+     162,   246,    68,    69,   165,   166,   167,   249,    70,    71,
+     169,   170,   253,   254,   255,   382,    72,    73,   173,   174,
+     175,   258,    74,    75,   178,   179,   180,   261,    76,    77,
+     183,   184,   185,   264,    78,    79,   188,   189,   190,   267,
+      80,    81,   193,   194,   195,   270,    82,    83,   197,   198,
+     274,   275,   276,   391,    84,    85,   200,   281,   282,   283,
+     401,   402,   403,   404,   482,   483,   589,   584,    31,    32,
+      46,    47,    48,   138,   139,   140,   141,   142,   227,   228,
+     353,   350,   462,   143,   144,   229,   230,   360,   359,   465,
+     145,   146,   231,   232,   365,   364,   467,   147,   148,   235,
+     370,   471,   149,   150,   239,   373,   374,   375,   474,   475,
+     476,    42,    43,   129,   130,   131,   218,   219,   220,   221,
+     222,   344,   345,   346,   454,   223,   224,   347,   457,   458,
+     459,   571,   572,   573,   125,   126,   212,   213,   214,   307,
+     308,   309,   310,   311,   419,   493,   494,   495,   609,   610,
+     312,   313,   423,   424,   425,   498,   314,   315,   427,   502,
+     503,   504,   616,   617,   316,   317,   508,   509,   510,   318,
+     319,   513,   514,   515,   320,   321,   518,   519,   520,   322,
+     323,   523,   524,   525,   324,   325,   435,   529,   530,   531,
+     632,   633,   326,   327,   437,   534,   535,   536,   637,   638,
+     328,   329,   439,   539,   540,   541,   641,   642,   330,   331,
+     441,   544,   545,   546,   645,   646,   332,   333,   443,   549,
+     550,   551,   334,   335,   445,   554,   555,   556,   336,   337,
+     448,   560,   561,   562,   655,   656,   338,   339,   450,   565,
+     566,   567,   659,   660,   661,   208,   209,   289,   290,   413,
+     407,   408,   409,   485,   486,   487,   602,   603,   679,   680,
+     681,   735,   736,   737,   776,   815,   816,   817,   866,   867,
+     868,   869,   925,   926,   998,   996,   773,   774,   810,   860,
+     861,   862,   918,   919,   920,   921,   992,   993,  1094,  1093,
+     808,   809,   855,   856,   857,   912,   913,   984,  1081,  1194,
+    1336,  1432,  1525,   851,   852,   909,   979,   980,   981,  1076,
+    1077,  1078,  1079,  1191,  1192,  1331,  1330,   907,   908,   976,
+    1071,  1072,  1073,  1186,  1187,  1188,  1326,  1327,  1423,  1418,
+    1419,  1420,   974,  1066,  1067,  1181,  1182,  1310,  1305,  1306,
+    1307,  1410,  1411,  1412,  1413,  1517,  1518,  1591,  1589,  1590,
+     599,   600,   673,   674,   730,   731,   732,   767,   768,   769,
+     805,   847,   848,   849,   902,   903,   904,   905,   972,   973,
+    1061,  1060,   802,   803,   842,   896,   897,   898,   965,   966,
+     967,   968,  1056,  1057,  1169,  1164,   840,   841,   891,   892,
+     893,   960,   961,  1052,  1160,  1298,  1404,  1513,  1585,   888,
+     958,   959,  1049,  1050,  1145,  1137,  1138,  1139,  1288,  1289,
+    1290,  1291,  1396,  1397,  1497,  1495,  1496,   670,   671,   724,
+     725,   762,   763,   764,   796,   797,   798,   837,   885,   886,
+     887,   953,   954,   955,   956,  1047,  1048,  1131,  1130,   834,
+     835,   880,   947,   948,   949,  1040,  1041,  1042,  1043,  1126,
+    1127,  1273,  1268,   878,   879,   942,   943,   944,  1035,  1036,
+    1122,  1264,  1389,  1489,  1578,  1640,   939,  1033,  1034,  1119,
+    1120,  1251,  1246,  1247,  1248,  1383,  1384,  1385,  1386,  1486,
+    1487,  1572,  1570,  1571,   721,   722,   756,   757,   791,   792,
+     793,   829,   830,   875,   936,   937,   938,  1234,  1030,  1031,
+    1117,  1241,  1242,  1243,  1480,  1380,  1481,  1114,  1115,  1236,
+    1237,  1475,  1557,   873,   932,  1027,  1111,  1112,  1366,  1471,
+     753,   754,   786,   824,   825,   826,   871,   930,   931,  1107,
+    1221,   621,   622,   634,   635,   700,   701,   746,   747,   748,
+     749,   742,  1424,  1425,  1170,  1171,  1172,  1173,  1274,  1275,
+    1276,  1277,  1426,  1427,  1428,  1174,  1175,  1176,  1177,  1278,
+    1279,  1280,  1281,   428,   726,   758,   876,   675,   201,   604,
+     436,   430,   449,   787,  1292,  1293,  1294,  1399,  1400,  1508,
+    1505,  1506,  1507,  1583,   463,   277,   278,   398,    10,    11,
+      22,    23,    24,    38,    39,   102,   103,   104,   105,   106,
+     107,   108,   109,   110,   111,   112,   113,   114,   115,   116,
+     117,   118,   119,   120,   121,   122,  2072,  2073,  1206,  1351,
+    1352,  1450,  1451,  1544,  1541,  1207,  1447,  1448,  1449,  2342,
+    2343,  2437,  2438,  2508,  2546,  2344,  2505,  2506,  2507,  2357,
+    2358,  2463,  2464,  2524,  2577,  1558,  1559,  1621,  1622,  1725,
+    1722,  1723,  1724,  1775,   914,   915,  1088,  1089,  1090,  1208,
+     985,   986,  1200,  1201,  1202,  1346,  1082,  1083,  1342,  1343,
+    1344,  1442,  1195,  1196,  1438,  1439,  1440,  1535,  1337,  1338,
+    1531,  1532,  1533,  1607,  1433,  1434,  1603,  1604,  1605,  1652,
+    1526,  1527,  1648,  1649,  1650,  1732,   988,  1367,  1368,  1369,
+    1560,  1561,  1562,  1563,  1564,  1010,  1011,  1012,  1222,  1223,
+    1224,  1225,  1226,  1227,  1228,  1229,  1358,  1230,  1565,  1231,
+    1362,  1363,  1462,  1483,  1566,  1567,  1632,  1455,  1456,  1457,
+    1628,  1629,  1630,  1729,  1548,  1549,  1550,  1616,  1617,  1705,
+    1693,  1615,  1668,  1669,  1670,  1736,  1737,  1783,  1839,  1934,
+    1840,  1841,  1939,  1940,  1941,  2074,  1935,  1936,  2069,  2070,
+    2071,  2214,  2065,  2066,  2210,  2211,  2212,  2345,  1671,  1672,
+    1738,  1739,  1789,  1845,  1945,  2077,  2078,  2218,  2219,  2220,
+    2348,  1673,  1674,  1740,  1741,  1793,  1847,  1947,  2081,  2082,
+    2223,  2224,  2225,  2349,  2350,  2443,  2444,  2510,  2511,  2554,
+    2549,  2550,  2551,  2588,  2602,  2603,  2610,  2616,  1675,  1676,
+    1742,  1743,  1797,  1849,  1949,  2085,  2086,  2228,  2229,  2230,
+    2351,  2447,  2448,  2514,  2515,  2516,  1677,  1678,  1744,  1745,
+    1801,  1851,  1951,  2089,  2090,  2233,  2234,  2235,  2352,  2451,
+    2452,  2519,  2520,  2521,  1679,  1680,  1746,  1747,  1805,  1853,
+    1953,  2093,  2094,  2238,  2239,  2240,  2354,  1681,  1682,  1748,
+    1749,  1809,  1855,  1955,  2097,  2098,  2243,  2244,  2245,  2355,
+    2456,  2457,  2522,  2562,  2563,  1683,  1684,  1750,  1751,  1813,
+    1857,  1957,  2101,  2102,  2248,  2249,  2250,  2356,  2460,  2461,
+    2523,  2571,  2572,  1685,  1686,  1752,  1753,  1817,  1859,  1959,
+    2105,  2106,  2253,  2254,  2255,  2359,  1687,  1688,  1756,  1963,
+    1689,  1690,  1761,  1824,  2331,  1922,  1923,  2061,  2205,  2206,
+    2207,  2340,  2059,  2060,  2201,  2336,  2337,  2338,  2433,  2200,
+    2332,  2333,  2430,  2431,  2497,  2492,  2493,  2494,  1762,  1463,
+     838,   414,   989,  1370,  1013,  1014,  1371,   806,   415,  1464,
+    1784,   777,  2555,   416,  1349,  1706,  1707,  1708,  1709,  1710,
+    2498,  2499,   999,  1545,  1635,  1546,  1711,  1712,  2611,  2556,
+    2412,  2413,  1713,  1714,  1715,  1716,  1717,  1015,  1016,  1017,
+    1255,  1256,  1257,  1018,   237,   238,  1374,  1151,  1152,  1019,
+     592,   593,  1154,  1155,  1156,  1785,  1786,  1787,  1757,  1758,
+    1759,  1020,  1021,  1022,  1466,  1467,  1468,  1023,  1024,  1025,
+     355,   356,   357,  1026,   595,   596,  2566,  2567,  2568,  1320,
+    1321,  1322,  2178,  2003,  2151,  2291,  2004,  2152,  2294,  2005,
+    2153,  2006,  2133,  2007,  2134,  2008,  2141,  2009,  2135,  2010,
+    2132,  2011,  2136,  2012,  2137,  2013,  2143,  2014,  2144,  2015,
+    2145,  2016,  2140,  2017,  2018,  2300,  2019,  2147,  2020,  2142,
+    2021,  2154,  2022,  2155,  2023,  2156,  2024,  2025,  2306,  2159,
+    2307,  2308,  2477,  2026,  2146,  2385,  2527,  2284,  2386,  2387,
+    2388,  2027,  2138,  2276,  2028,  2149,  2287,  2029,  2148,  2286,
+    2030,  2150,  2288,  2031,  2139,  2277,  1881,  1882,  1883,  1964,
+    2114,  2115,  2116,  2117,  1884,  1885,  2121,  1966,  1886,  1887,
+    2125,  1968,  1888,  1889,  2129,  1970,  1890,  1891,  1972,  1892,
+    1893,  1974,  1894,  1895,  2032,  1896,  1897,  2034,  1898,  1899,
+    2036,  2311,  1900,  1901,  2038,  2313,  2037,  1902,  1903,  2042,
+    1904,  1905,  2044,  1906,  1907,  2046,  1908,  1909,  2048,  1910,
+    1960,  2108,  1911,  1912,  2050,  1913,  1961,  2109,  1914,  1915,
+    2052,  1916,  1917,  2054,  1918,  1919,  2056,  2179,  2180,  2181,
+    2182,  2409,  2319,  2320,  2414,  2183,  2184,  2416,  2185,  2186,
+    2418,  2187,  2406,  2478,  2188,  2189,  2420,  2190,  2191,  2422,
+    2192,  2193,  2424,  2194,  2195,  2426,  2196,  2197,  2428
+};
+
+  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+     positive, shift that token.  If negative, reduce the rule whose
+     number is the opposite.  If YYTABLE_NINF, syntax error.  */
+static const yytype_int16 yytable[] =
+{
+     466,   594,  1158,   236,   479,   468,  1637,   591,  1776,  1205,
+    1509,   811,  1084,   393,  1190,  2301,  2302,  1062,   247,   256,
+     241,   244,   473,  1148,  2110,  2111,   843,   881,  1157,   614,
+     688,  1520,  1971,  1074,  1973,   215,   916,  1095,  2033,  2559,
+    2002,   900,   399,   132,   472,   133,  2043,   134,  2045,   135,
+    2047,   569,  1285,  2049,  1597,  1285,  2051,  2213,   864,  1498,
+    2055,   665,  2053,  1538,   240,  2543,  2381,  2382,   657,  1161,
+    1405,    49,  1262,    50,    49,    51,    50,    52,    51,    53,
+      52,    54,    53,   354,    54,   361,  1398,   366,   963,   910,
+    1421,  1422,  1132,  1254,  2569,  2570,  2445,   216,  1261,  1146,
+     215,  1178,  2449,  1150,  1053,  1299,   570,  1514,  2454,  1197,
+     951,  1387,  2458,   136,  2131,  1109,  1216,   452,   496,   262,
+    2600,  1345,  1038,  1555,   619,  1478,   473,  1217,  1218,   579,
+    1219,   630,  1586,   611,  1318,   627,   389,  1285,   348,  1265,
+     362,   132,   367,   133,   717,   134,   619,   135,   259,  1573,
+     644,  1217,  1218,    55,  1219,  1313,    55,   696,  2552,   268,
+    1317,  1490,   216,  2158,  1165,  1166,  1167,  1168,   263,  1253,
+    1414,  1282,  1110,  1259,  1269,  1270,  1271,  1272,   265,  1123,
+    1592,  1398,   453,  2553,  2165,  1007,  1008,   497,  2167,  1377,
+    2168,   390,  1579,   587,   588,   260,   751,  1641,  2198,  1165,
+    1166,  1167,  1168,  1381,  1286,   630,  2347,     6,  1398,  1390,
+    1372,   136,   269,   676,   658,  1376,   630,  1220,   619,  2560,
+    2561,   420,  1339,   570,   706,   623,   662,  2446,  1539,   266,
+    2544,  1311,  1726,  2450,  1075,  1315,  1332,   640,   901,  2455,
+    1075,  1220,   291,  2459,   292,  1287,   293,   917,  1382,  2257,
+    2259,  2601,   294,   451,   295,     7,   296,  1075,   297,  2112,
+     298,  1479,   299,  1441,   300,   400,   301,   400,   302,   775,
+     303,   865,   304,  1147,   400,  1542,  1543,  2270,  2271,  2272,
+    2273,  2274,  2275,   964,   727,  2278,  2279,  2280,  2281,  2282,
+    2283,   400,  2285,  1408,   217,  2296,  2297,  2298,  2295,   952,
+    1479,  2383,   305,  2310,  2312,  2384,   615,   615,   137,  1039,
+     619,   658,  1252,  1499,   714,  1469,  1556,   694,  1470,   962,
+    1377,   460,   461,   630,  2410,  2411,   585,   586,    17,   619,
+    1409,  1543,   585,   586,   380,   759,   587,   588,   590,   630,
+     630,  1372,   650,  2328,   704,   770,  1376,     1,     2,    56,
+    2417,  2419,  2421,  2423,  2425,  2427,   636,   702,  2509,  1534,
+      12,   585,   586,   242,  1435,   248,   245,   788,   257,    57,
+    1037,    58,    57,    59,    58,    60,    59,   799,    60,   381,
+     619,   585,   586,   630,  2525,   620,   608,   619,   619,   619,
+     639,   587,   588,   997,   630,   643,   619,   821,   631,   997,
+     647,   709,   648,  1574,   708,   625,   831,    20,    21,   698,
+    1007,  1008,  1780,  1781,   619,  2365,  2366,  2367,  2368,  1312,
+    1782,  2372,  2374,   695,   410,  2377,  1584,   411,   997,    14,
+     412,  2391,  2393,  2395,  1593,    30,  1458,  1459,    41,   872,
+    2398,  1500,  2565,  2573,  1001,  2483,   124,  2484,   997,   619,
+    1000,   987,  1606,  2487,   692,    86,   233,   234,  1190,  1861,
+    1528,  1217,  1218,  1862,  1219,   168,  2415,  1863,  2495,  2496,
+     587,   588,   693,  2429,   151,   693,   438,   693,   440,   693,
+     442,  1933,   927, -1234,   196,  2303,   933,   394,   395,   396,
+     397,  1064,  2113,   199,   431,   639,   432,  1063,   433,   643,
+     693,   306,   693,   647,    25,    26,  2532,   202,   444,   203,
+     446,  1097,   585,   586,  1007,  1008,   204,  1096,   624,  1638,
+      33,    34,  2471,   626,  1651,   205,  2473,   206,   628,    44,
+      45,  1575,   250,  2062,   207,  1861,   225,   233,   234,  1862,
+    1458,  1459,   271,  1863,   743,   744,   745,  1460,  1461,   351,
+     352,   127,   128,  1600,   649,   153,   154,   158,   159,   651,
+    2482,   284,  1594,   285,  1429,   286,  1134,   287,  1159,  1731,
+    2489,  1861,  1133,   340,  1153,  1862,  1631,   349,  1944,  1863,
+    1946,  1179,  1948,  1864,  1950,  1865,  1952,  1866,  1954,  1867,
+    1956,  1868,  1958,  1869,   291,  1870,   292,  1871,   293,  1872,
+     358,  1873,  2256,  1874,   294,  1875,   295,  1876,   296,  1877,
+     297,  1878,   298,  1879,   299,  1880,   300,   288,   301,   363,
+     302,   368,   303,  1140,   304,  1003,  1004,   233,   234,  1005,
+    1006,   585,   586,  1007,  1008,  1141,  1142,   369,  1263,   376,
+    1113,   587,   588,  1774,  1260,   163,   164,  1143,  1144,   171,
+     172,  1283,   176,   177,   305,   181,   182,  2557,   377,  1864,
+     379,  1865,   384,  1866,   386,  1867,   385,  1868,   378,  1869,
+    2202,  1870,  1657,  1871,   804,  1872,   383,  1873,   387,  1874,
+    2258,  1875,  1658,  1876,  1659,  1877,  1660,  1878,  1661,  1879,
+    1662,  1880,  1663,   392,  1664,  1864,  1665,  1865,  1666,  1866,
+    1319,  1867,   388,  1868,   417,  1869,  1316,  1870,  1667,  1871,
+    1334,  1872,   426,  1873,   429,  1874,  1333,  1875,  1975,  1876,
+    1976,  1877,  1977,  1878,  1978,  1879,  1979,  1880,  1980,  1844,
+    1981,   434,  1982,  1846,  1983,   447,  1984,  1848,  1985,   464,
+    1986,  1850,  1987,   469,  1988,  1852,  1989,   470,  1990,  1854,
+    1991,   477,  1992,  1856,  1993,  1378,  1994,  1858,  1995,   480,
+    1996,  1375,  1997,   478,  1998,   400,  1999,   484,  2000,  2540,
+    2001,  1140,   488,  1003,  1004,   233,   234,  1005,  1006,   585,
+     586,  1007,  1008,  1141,  1142,   186,   187,   191,   192,   587,
+     588,   210,   211,  2169,   489,  2170,   490,  2171,   499,  2172,
+     505,  2173,   526,  2174,   557,  2175,  2169,  2176,  2170,  2177,
+    2171,   568,  2172,   574,  2173,   575,  2174,   576,  2175,  2531,
+    2176,   577,  2177,   233,   234,   251,   252,   578,  1140,  1116,
+    1003,  1004,   233,   234,  1005,  1006,   585,   586,  1007,  1008,
+    1141,  1142,   272,   273,   279,   280,   587,   588,   342,   343,
+     371,   372,   405,   406,  1308,  1309,  1140,   580,  1003,  1004,
+     233,   234,  1005,  1006,   585,   586,  1007,  1008,  1141,  1142,
+    2500,   351,   352,   597,   587,   588,   233,   234,  1249,  1250,
+     585,   586,   775,  1392,  1393,   598,  1378,  1465,   421,   422,
+     587,   588,  1375,  1002,  1003,  1004,   233,   234,  1005,  1006,
+     585,   586,  1007,  1008,   836,  1149,   455,   456,   460,   461,
+     587,   588,   601,  1406,  1407,  1502,   491,   492,  1511,   605,
+    1975,  1501,  1976,   606,  1977,   607,  1978,   612,  1979,   613,
+    1980,   618,  1981,   629,  1982,   663,  1983,  1009,  1984,  1790,
+    1985,  1794,  1986,  1798,  1987,  1802,  1988,  1806,  1989,  1810,
+    1990,  1814,  1991,  1818,  1992,  1791,  1993,  1795,  1994,  1799,
+    1995,  1803,  1996,  1807,  1997,  1811,  1998,  1815,  1999,  1819,
+    2000,   666,  2001,  1694,  1695,  1258,   500,   501,   506,   507,
+     511,   512,   516,   517,   521,   522,   527,   528,   532,   533,
+     537,   538,  1696,  1697,  1698,  1699,  1700,  1701,  1702,  1703,
+    1704,   542,   543,   547,   548,  1577,   552,   553,  2169,   652,
+    2170,  1576,  2171,   667,  2172,   668,  2173,   669,  2174,   672,
+    2175,   682,  2176,   683,  2177,   585,   586,  1007,  1008,   558,
+     559,   563,   564,  1522,  1491,  1492,  1596,  1314,   582,   583,
+     653,   654,  1595,   677,   678,   712,   654,   728,   729,   740,
+     741,   760,   761,  1458,  1459,   789,   790,   684,   813,   814,
+    1460,  1461,   685,    87,   686,    88,    89,    90,   687,    91,
+      92,    93,   690,    94,    95,    96,   691,    97,    98,    99,
+     711,   100,   101,   822,   823,   845,   846,   853,   854,   858,
+     859,  1636,  1373,   883,   884,   889,   890,   894,   895,   928,
+     929,   934,   935,  1580,  1581,   940,   941,   945,   946,   977,
+     978,  2304,   994,   995,  1058,  1059,  1069,  1070,  1086,  1087,
+    1091,  1092,  1105,  1106,  1128,  1129,  2339,  1135,  1136,  1162,
+    1163,   715,  1184,  1185,  1198,  1199,  1239,  1240,  1244,  1245,
+    1728,   697,  1975,   710,  1976,   718,  1977,   719,  1978,   720,
+    1979,   733,  1980,   723,  1981,  2371,  1982,   734,  1983,  2353,
+    1984,   738,  1985,   739,  1986,  1599,  1987,  1975,  1988,  1976,
+    1989,  1977,  1990,  1978,  1991,  1979,  1992,  1980,  1993,  1981,
+    1994,  1982,  1995,  1983,  1996,  1984,  1997,  1985,  1998,  1986,
+    1999,  1987,  2000,  1988,  2001,  1989,   750,  1990,   778,  1991,
+     755,  1992,  2390,  1993,   765,  1994,   752,  1995,   766,  1996,
+    1644,  1997,  1975,  1998,  1976,  1999,  1977,  2000,  1978,  2001,
+    1979,   771,  1980,  1373,  1981,   772,  1982,  2373,  1983,   775,
+    1984,   779,  1985,   781,  1986,   780,  1987,   782,  1988,   783,
+    1989,   784,  1990,  1730,  1991,   785,  1992,   794,  1993,   795,
+    1994,   800,  1995,   804,  1996,  1510,  1997,  2432,  1998,  1975,
+    1999,  1976,  2000,  1977,  2001,  1978,   801,  1979,   807,  1980,
+     812,  1981,   818,  1982,   819,  1983,   820,  1984,   827,  1985,
+     833,  1986,   828,  1987,   839,  1988,   836,  1989,   844,  1990,
+     850,  1991,   863,  1992,   832,  1993,  2392,  1994,  1975,  1995,
+    1976,  1996,  1977,  1997,  1978,  1998,  1979,  1999,  1980,  2000,
+    1981,  2001,  1982,   870,  1983,   874,  1984,   877,  1985,   882,
+    1986,   899,  1987,   906,  1988,   911,  1989,   922,  1990,   923,
+    1991,   950,  1992,   970,  1993,   865,  1994,  2394,  1995,   957,
+    1996,   969,  1997,   901,  1998,   975,  1999,   982,  2000,   987,
+    2001,  1266,  1267,  1303,  1304,  1324,  1185,  1328,  1329,  1340,
+    1341,  1364,  1365,  1416,  1417,  1436,  1437,  1445,  1446,  1453,
+    1454,  1473,  1474,  1493,  1494,   983,  1825,  1503,  1504,  1529,
+    1530,  1542,  1543,  2501,  1568,  1569,  1587,  1588,   990,  1837,
+    1601,  1602,  1626,  1627,  1646,  1647,  1691,  1692,  1720,  1721,
+    1754,  1755,  1937,  1938,  2040,  2041,  2067,  2068,  2119,  2120,
+    2123,  2124,  2127,  2128,  1833,  1834,  1975,   917,  1976,  1028,
+    1977,  1029,  1978,  1044,  1979,  1032,  1980,  1045,  1981,  1051,
+    1982,   952,  1983,  1054,  1984,  1065,  1985,  1068,  1986,  1085,
+    1987,  1098,  1988,  1099,  1989,  2472,  1990,  1100,  1991,  1101,
+    1992,  1102,  1993,  1080,  1994,   964,  1995,  1103,  1996,  1104,
+    1997,  1116,  1998,  1039,  1999,  1180,  2000,  1124,  2001,  1183,
+    1975,  1203,  1976,  1121,  1977,  1193,  1978,  1727,  1979,  1210,
+    1980,  1189,  1981,  1075,  1982,  1204,  1983,  1209,  1984,  1211,
+    1985,  1296,  1986,  1212,  1987,  1213,  1988,  1214,  1989,  1215,
+    1990,  1235,  1991,  1233,  1992,  1238,  1993,  1284,  1994,  1295,
+    1995,  1297,  1996,  1301,  1997,  1300,  1998,  1323,  1999,  1347,
+    2000,  1335,  2001,  2203,  2204,  2208,  2209,  2216,  2217,  2221,
+    2222,  2226,  2227,  2231,  2232,  2236,  2237,  2241,  2242,  2246,
+    2247,  2251,  2252,  2289,  2290,  2292,  2293,  2329,  2330,  2334,
+    2335,  2407,  2408,  2410,  2411,  2490,  2491,  2503,  2504,  2512,
+    2513,  2517,  2518,  2547,  2548,  1302,  1350,  1348,  1353,  1354,
+    1357,  1355,  1356,  1216,  1379,  1220,  1388,  1394,  1391,  1286,
+    1285,  1401,  1402,  1415,  1403,  1431,  1443,  1444,  1430,  1452,
+    1477,  1488,  1484,  1381,  1512,  1515,  1408,  1519,  1523,  1524,
+    1536,  1537,  1540,  1551,  1547,  1552,  1553,  1470,  1582,  1598,
+    1608,  1610,  1609,  1611,  1612,  1556,  1613,  1618,  1614,  1619,
+    1620,  1555,  1479,  1642,  1639,  1645,  1653,  1643,  1654,  1655,
+    1656,  1779,  1733,  1718,  1719,  1734,  1735,  1760,  1763,  1764,
+    1765,  1766,  1767,  1768,  1778,  1769,  1770,  1771,  1772,  1773,
+    1777,  1838,  1836,  1788,  1792,  1820,  1796,  1800,  1804,  1808,
+    1812,  1816,  1821,  1822,  1823,  1826,  1827,  1828,  1829,  1830,
+    1831,  1832,  1842,  1921,  1843,  1860,  1835,  2305,  1920,  1924,
+    1933,  1925,  1926,  1927,  1928,  1929,  1930,  1931,  1932,  1942,
+    1943,  1962,  2058,  1965,  2035,  1967,  1969,  2057,  2064,  2063,
+    2075,  2083,  2076,  2087,  2080,  2079,  2084,  2088,  2091,  2092,
+    2096,  2099,  2095,  2118,  2103,  2122,  2126,  2100,  2160,  2130,
+    2161,  2162,  2107,  2163,  2164,  2157,  2104,  2166,  2215,  2260,
+    2199,  2261,  2262,  2263,  2265,  2299,  2267,  2269,  2314,  2264,
+    2309,  2315,  2316,  2318,  2317,  2266,  2321,  2322,  2323,  2324,
+    2325,  2326,  2327,  2341,  2268,  2346,  2360,  2361,  2370,  2362,
+    2363,  2364,  2378,  2369,  2380,  2375,  2379,  2403,  2396,  2376,
+    2400,  2436,  2397,  2439,  2399,  2389,  2401,  2440,  2402,  2442,
+    2434,  2441,  2453,  2465,  2466,  2469,  2470,  2474,  2475,  2462,
+    2480,  2479,  2467,  2481,  2485,  2486,  2488,  1543,  2502,  2528,
+    2530,  2476,  2536,  2404,  2535,  2538,  2537,  2405,  2541,  2542,
+    2545,  2579,  2580,  2576,  2581,  2582,  2583,  2584,  2585,  2591,
+    2594,  2589,  2590,  2586,  2593,  2468,  2596,  2597,  2598,  2592,
+    2604,  2595,  2615,  2607,  2609,  2612,  2613,  2539,  2614,  2618,
+    2619,    40,   226,  2599,  2526,   123,  2606,  2608,   152,  2620,
+     341,   418,   699,   705,  2578,   689,   664,   716,   481,   707,
+     703,   713,   991,   924,   581,  1325,  1521,  1516,  1395,   971,
+    1055,  1125,  1046,  1485,  1623,  1554,  1359,  1232,  1476,  1624,
+    1108,  1472,  1625,  1360,  1361,  1482,  1118,  2435,  1633,  2564,
+    2558,  1634,  2574,  2575,  2039,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,  2529,     0,     0,
+       0,     0,  2533,  2534,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,  2587,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,  2605,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,  2617
+};
+
+static const yytype_int16 yycheck[] =
+{
+     358,   483,  1050,   148,   392,   363,  1567,   483,  1729,  1086,
+    1400,   774,   986,     8,  1077,    11,    12,   973,     4,     4,
+       4,     4,   371,  1050,    11,    12,   803,   835,  1050,    75,
+      75,   115,  1891,   111,  1893,    68,   107,   993,  1897,    11,
+    1895,   117,   131,    60,   131,    62,  1905,    64,  1907,    66,
+    1909,   131,   162,  1912,   115,   162,  1915,  2067,   105,  1397,
+    1919,   579,  1917,     4,   150,     4,    11,    12,   131,  1052,
+    1298,    48,  1120,    50,    48,    52,    50,    54,    52,    56,
+      54,    58,    56,   228,    58,   230,  1292,   232,   119,   852,
+      46,    47,  1048,  1120,    11,    12,   160,   130,  1120,  1050,
+      68,  1057,   160,  1050,   961,  1160,   455,  1404,   160,  1083,
+     121,  1244,   160,   130,  1973,   297,   129,     4,     4,     4,
+     161,  1198,   123,   162,    76,   125,   475,   164,   165,   473,
+     167,    78,  1513,   491,  1182,    87,     4,   162,   224,  1122,
+     230,    60,   232,    62,   662,    64,    76,    66,     4,  1487,
+      97,   164,   165,   130,   167,  1182,   130,    87,   226,     4,
+    1182,  1389,   130,  2018,    17,    18,    19,    20,    53,  1120,
+    1303,  1127,   354,  1120,    21,    22,    23,    24,     4,  1036,
+    1518,  1387,    69,   251,  2043,   181,   182,    73,  2047,  1237,
+    2049,    59,  1489,   189,   190,    51,   714,  1578,  2053,    17,
+      18,    19,    20,   310,   314,    78,  2216,     0,  1414,  1264,
+    1237,   130,    57,   601,   563,  1237,    78,   254,    76,   191,
+     192,   311,  1196,   572,    97,    83,   570,   291,   169,    55,
+     169,  1182,  1622,   291,   318,  1182,  1192,    99,   314,   291,
+     318,   254,    70,   291,    72,   355,    74,   318,   355,  2108,
+    2109,   292,    80,   339,    82,   132,    84,   318,    86,   246,
+      88,   300,    90,  1340,    92,   354,    94,   354,    96,   225,
+      98,   318,   100,  1050,   354,   247,   248,  2132,  2133,  2134,
+    2135,  2136,  2137,   314,   672,  2140,  2141,  2142,  2143,  2144,
+    2145,   354,  2147,   318,   327,  2154,  2155,  2156,  2153,   310,
+     300,   246,   130,  2162,  2163,   250,   352,   352,   325,   310,
+      76,   660,  1120,  1397,   658,  1363,   355,    83,   355,   889,
+    1368,     6,     7,    78,   241,   242,   179,   180,   322,    76,
+     355,   248,   179,   180,     4,   723,   189,   190,   483,    78,
+      78,  1368,    89,  2198,    99,   733,  1368,    13,    14,   323,
+    2322,  2323,  2324,  2325,  2326,  2327,    95,    95,  2438,  1436,
+      15,   179,   180,   347,  1338,   351,   349,   755,   353,   346,
+     940,   348,   346,   350,   348,   352,   350,   765,   352,    49,
+      76,   179,   180,    78,  2464,    81,    71,    76,    76,    76,
+     532,   189,   190,   246,    78,   537,    76,   785,    93,   246,
+     542,    89,    91,  1487,    91,    85,   794,    11,    12,    93,
+     181,   182,   209,   210,    76,  2270,  2271,  2272,  2273,  1182,
+     217,  2276,  2277,    85,   218,  2280,  1503,   221,   246,    16,
+     224,  2286,  2287,  2288,  1518,   324,   207,   208,   326,   827,
+    2295,  1397,  2522,  2523,   926,  2417,   328,  2419,   246,    76,
+     926,   170,  1529,  2425,    81,   133,   175,   176,  1521,   300,
+    1434,   164,   165,   304,   167,    28,  2321,   308,   239,   240,
+     189,   190,   621,  2328,   323,   624,   327,   626,   329,   628,
+     331,   288,   870,   290,    27,   481,   874,   482,   483,   484,
+     485,   973,   479,    44,   319,   637,   321,   973,   323,   641,
+     649,   329,   651,   645,    11,    12,  2478,     5,   333,     5,
+     335,   993,   179,   180,   181,   182,     5,   993,   511,  1567,
+      11,    12,  2377,   516,  1601,     5,  2381,     5,   521,    11,
+      12,  1487,     3,  1923,   330,   300,   325,   175,   176,   304,
+     207,   208,     3,   308,    29,    30,    31,   214,   215,   187,
+     188,    11,    12,  1527,   547,    11,    12,    11,    12,   552,
+    2415,   135,  1518,   139,  1327,   143,  1048,   147,  1050,  1646,
+    2429,   300,  1048,   327,  1050,   304,   243,    11,  1844,   308,
+    1846,  1057,  1848,   424,  1850,   426,  1852,   428,  1854,   430,
+    1856,   432,  1858,   434,    70,   436,    72,   438,    74,   440,
+      11,   442,   443,   444,    80,   446,    82,   448,    84,   450,
+      86,   452,    88,   454,    90,   456,    92,   151,    94,    11,
+      96,     3,    98,   171,   100,   173,   174,   175,   176,   177,
+     178,   179,   180,   181,   182,   183,   184,    11,  1120,   347,
+    1028,   189,   190,  1720,  1120,    11,    12,   195,   196,    11,
+      12,  1127,    11,    12,   130,    11,    12,  2512,   349,   424,
+       8,   426,    51,   428,    55,   430,    53,   432,   351,   434,
+    2060,   436,   258,   438,   222,   440,   353,   442,    57,   444,
+     445,   446,   268,   448,   270,   450,   272,   452,   274,   454,
+     276,   456,   278,     6,   280,   424,   282,   426,   284,   428,
+    1182,   430,     8,   432,   329,   434,  1182,   436,   294,   438,
+    1192,   440,    32,   442,    33,   444,  1192,   446,   370,   448,
+     372,   450,   374,   452,   376,   454,   378,   456,   380,  1788,
+     382,    34,   384,  1792,   386,    35,   388,  1796,   390,     3,
+     392,  1800,   394,     8,   396,  1804,   398,     6,   400,  1808,
+     402,    49,   404,  1812,   406,  1237,   408,  1816,   410,   131,
+     412,  1237,   414,    59,   416,   354,   418,   320,   420,  2490,
+     422,   171,     8,   173,   174,   175,   176,   177,   178,   179,
+     180,   181,   182,   183,   184,    11,    12,    11,    12,   189,
+     190,    11,    12,   458,     8,   460,     8,   462,     8,   464,
+       8,   466,     8,   468,     8,   470,   458,   472,   460,   474,
+     462,    69,   464,    61,   466,     8,   468,    63,   470,   471,
+     472,    65,   474,   175,   176,    11,    12,    67,   171,   229,
+     173,   174,   175,   176,   177,   178,   179,   180,   181,   182,
+     183,   184,    11,    12,    11,    12,   189,   190,    11,    12,
+      11,    12,    11,    12,   197,   198,   171,   131,   173,   174,
+     175,   176,   177,   178,   179,   180,   181,   182,   183,   184,
+    2431,   187,   188,   331,   189,   190,   175,   176,   193,   194,
+     179,   180,   225,  1271,  1272,   316,  1368,  1363,    11,    12,
+     189,   190,  1368,   172,   173,   174,   175,   176,   177,   178,
+     179,   180,   181,   182,   219,  1050,    11,    12,     6,     7,
+     189,   190,    36,  1301,  1302,  1397,    11,    12,  1400,     6,
+     370,  1397,   372,     6,   374,     6,   376,    73,   378,     6,
+     380,     6,   382,     6,   384,   131,   386,   216,   388,  1739,
+     390,  1741,   392,  1743,   394,  1745,   396,  1747,   398,  1749,
+     400,  1751,   402,  1753,   404,  1739,   406,  1741,   408,  1743,
+     410,  1745,   412,  1747,   414,  1749,   416,  1751,   418,  1753,
+     420,   355,   422,   211,   212,  1120,    11,    12,    11,    12,
+      11,    12,    11,    12,    11,    12,    11,    12,    11,    12,
+      11,    12,   230,   231,   232,   233,   234,   235,   236,   237,
+     238,    11,    12,    11,    12,  1487,    11,    12,   458,     6,
+     460,  1487,   462,     3,   464,     3,   466,   312,   468,    37,
+     470,     8,   472,     8,   474,   179,   180,   181,   182,    11,
+      12,    11,    12,  1421,  1392,  1393,  1518,  1182,    11,    12,
+     101,   102,  1518,    11,    12,   101,   102,    11,    12,    11,
+      12,    11,    12,   207,   208,    11,    12,     8,    11,    12,
+     214,   215,    71,   134,     8,   136,   137,   138,    11,   140,
+     141,   142,     8,   144,   145,   146,    11,   148,   149,   150,
+      11,   152,   153,    11,    12,    11,    12,    11,    12,    11,
+      12,  1567,  1237,    11,    12,    11,    12,    11,    12,   127,
+     128,    11,    12,  1491,  1492,    11,    12,    11,    12,    11,
+      12,  2159,    11,    12,    11,    12,    11,    12,    11,    12,
+      11,    12,    11,    12,    11,    12,  2203,    11,    12,    11,
+      12,   131,   113,   114,    11,    12,    11,    12,    11,    12,
+    1622,     8,   370,     8,   372,     8,   374,     8,   376,   296,
+     378,     6,   380,    38,   382,   383,   384,   104,   386,  2236,
+     388,     4,   390,     4,   392,  1523,   394,   370,   396,   372,
+     398,   374,   400,   376,   402,   378,   404,   380,   406,   382,
+     408,   384,   410,   386,   412,   388,   414,   390,   416,   392,
+     418,   394,   420,   396,   422,   398,     4,   400,   353,   402,
+      39,   404,   405,   406,     6,   408,   126,   410,   116,   412,
+    1598,   414,   370,   416,   372,   418,   374,   420,   376,   422,
+     378,   321,   380,  1368,   382,   106,   384,   385,   386,   225,
+     388,    77,   390,     3,   392,    79,   394,     3,   396,     3,
+     398,   103,   400,  1631,   402,    43,   404,     6,   406,   120,
+     408,   317,   410,   222,   412,  1400,   414,  2334,   416,   370,
+     418,   372,   420,   374,   422,   376,   118,   378,   108,   380,
+       8,   382,     8,   384,     8,   386,     8,   388,     6,   390,
+     122,   392,   298,   394,   108,   396,   219,   398,     8,   400,
+     110,   402,     6,   404,   313,   406,   407,   408,   370,   410,
+     372,   412,   374,   414,   376,   416,   378,   418,   380,   420,
+     382,   422,   384,     6,   386,    40,   388,   108,   390,     8,
+     392,     6,   394,   112,   396,   338,   398,     8,   400,   105,
+     402,     6,   404,   117,   406,   318,   408,   409,   410,   354,
+     412,     8,   414,   314,   416,    45,   418,   109,   420,   170,
+     422,    11,    12,    11,    12,   113,   114,    11,    12,    11,
+      12,    11,    12,    11,    12,    11,    12,    11,    12,    11,
+      12,    11,    12,    11,    12,   334,  1764,    11,    12,    11,
+      12,   247,   248,  2431,    11,    12,    11,    12,   107,  1777,
+      11,    12,    11,    12,    11,    12,    11,    12,    11,    12,
+     185,   186,    11,    12,    11,    12,    11,    12,    11,    12,
+      11,    12,    11,    12,  1772,  1773,   370,   318,   372,     6,
+     374,   124,   376,     8,   378,   354,   380,   121,   382,   109,
+     384,   310,   386,   119,   388,   354,   390,     8,   392,     8,
+     394,   319,   396,     8,   398,   399,   400,     8,   402,     3,
+     404,     3,   406,   336,   408,   314,   410,     3,   412,     8,
+     414,   229,   416,   310,   418,   315,   420,   123,   422,     6,
+     370,     6,   372,   109,   374,   332,   376,  1622,   378,     6,
+     380,   111,   382,   318,   384,   168,   386,   319,   388,     6,
+     390,     3,   392,     8,   394,     8,   396,     8,   398,     6,
+     400,   354,   402,   299,   404,     8,   406,   311,   408,     8,
+     410,     3,   412,     3,   414,   315,   416,     8,   418,     8,
+     420,   340,   422,    11,    12,    11,    12,    11,    12,    11,
+      12,    11,    12,    11,    12,    11,    12,    11,    12,    11,
+      12,    11,    12,    11,    12,    11,    12,   259,   260,    11,
+      12,    11,    12,   241,   242,    11,    12,    11,    12,    11,
+      12,    11,    12,    11,    12,     3,   160,   249,   339,     8,
+       5,     8,     8,   129,     6,   254,     3,   355,   311,   314,
+     162,     6,     8,     3,     8,   342,   335,     8,   319,   166,
+       8,     8,   355,   310,     8,   355,   318,     8,     8,   344,
+     337,     6,    11,     3,   257,     8,     8,   355,   315,     6,
+     333,   169,     8,     6,     8,   355,     8,     8,   255,     6,
+       6,   162,   300,   163,   311,     8,   341,   319,   161,     6,
+       6,    11,   343,     8,     8,     8,     8,   213,   256,     3,
+       8,     8,     8,     8,   345,     8,     8,     8,     8,     8,
+       6,   286,   301,    11,    11,     3,    11,    11,    11,    11,
+      11,    11,    11,     8,    11,     6,     6,     6,     6,     6,
+       6,     6,     3,   262,     8,     8,   163,  2159,     6,     8,
+     288,     8,     8,     8,     8,     8,     8,     8,     8,     8,
+       6,   295,   264,   246,   477,   246,   246,     8,   290,   269,
+       8,   275,   290,   281,   290,   273,   290,   290,   283,   290,
+     290,   277,   279,     8,   271,     8,     8,   290,   457,   425,
+       3,    11,   285,    11,   433,   455,   290,   437,   287,   453,
+     451,     8,     3,     6,     6,   401,     6,   427,   435,   301,
+       8,   439,   441,   447,    11,   305,    11,    11,    11,    11,
+      11,    11,    11,   168,   309,   289,     6,     8,   381,     8,
+       8,     8,   393,   379,   397,   387,   395,     3,   411,   389,
+     421,   160,   413,   291,   419,   403,   423,   291,   417,   160,
+     263,   291,   291,   291,     8,   375,   377,     8,     8,   160,
+       8,   465,   371,     8,   463,   459,   469,   248,   265,     6,
+       8,   415,   467,   429,   475,   473,   461,   431,     8,     8,
+      11,     8,     8,    11,     8,     8,   261,     6,     6,   161,
+       3,     8,     8,   169,     6,   373,     4,     8,     8,   161,
+       6,   161,    11,     8,   250,     8,     8,   449,     8,     6,
+       8,    25,   139,   161,   391,    40,   161,   161,    62,   293,
+     219,   308,   632,   641,   399,   616,   572,   660,   402,   645,
+     637,   655,   919,   867,   475,  1186,  1416,  1411,  1289,   903,
+     966,  1041,   954,  1384,  1560,  1472,  1222,  1112,  1368,  1561,
+    1011,  1364,  1563,  1223,  1225,  1380,  1031,  2341,  1567,  2522,
+    2517,  1567,  2523,  2523,  1901,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,  2475,    -1,    -1,
+      -1,    -1,  2480,  2481,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,  2545,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,  2590,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,  2614
+};
+
+  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
+     symbol of state STATE-NUM.  */
+static const yytype_uint16 yystos[] =
+{
+       0,    13,    14,   487,   488,   489,     0,   132,   496,   497,
+    1104,  1105,    15,   490,    16,   494,   495,   322,   498,   499,
+      11,    12,  1106,  1107,  1108,    11,    12,   491,   492,   493,
+     324,   584,   585,    11,    12,   500,   501,   502,  1109,  1110,
+     496,   326,   627,   628,    11,    12,   586,   587,   588,    48,
+      50,    52,    54,    56,    58,   130,   323,   346,   348,   350,
+     352,   503,   504,   505,   506,   507,   512,   513,   518,   519,
+     524,   525,   532,   533,   538,   539,   544,   545,   550,   551,
+     556,   557,   562,   563,   570,   571,   133,   134,   136,   137,
+     138,   140,   141,   142,   144,   145,   146,   148,   149,   150,
+     152,   153,  1111,  1112,  1113,  1114,  1115,  1116,  1117,  1118,
+    1119,  1120,  1121,  1122,  1123,  1124,  1125,  1126,  1127,  1128,
+    1129,  1130,  1131,   494,   328,   650,   651,    11,    12,   629,
+     630,   631,    60,    62,    64,    66,   130,   325,   589,   590,
+     591,   592,   593,   599,   600,   606,   607,   613,   614,   618,
+     619,   323,   505,    11,    12,   508,   509,   510,    11,    12,
+     514,   515,   516,    11,    12,   520,   521,   522,    28,   526,
+     527,    11,    12,   534,   535,   536,    11,    12,   540,   541,
+     542,    11,    12,   546,   547,   548,    11,    12,   552,   553,
+     554,    11,    12,   558,   559,   560,    27,   564,   565,    44,
+     572,  1084,     5,     5,     5,     5,     5,   330,   761,   762,
+      11,    12,   652,   653,   654,    68,   130,   327,   632,   633,
+     634,   635,   636,   641,   642,   325,   591,   594,   595,   601,
+     602,   608,   609,   175,   176,   615,  1499,  1500,  1501,   620,
+    1084,     4,   347,   511,     4,   349,   517,     4,   351,   523,
+       3,    11,    12,   528,   529,   530,     4,   353,   537,     4,
+      51,   543,     4,    53,   549,     4,    55,   555,     4,    57,
+     561,     3,    11,    12,   566,   567,   568,  1101,  1102,    11,
+      12,   573,   574,   575,   135,   139,   143,   147,   151,   763,
+     764,    70,    72,    74,    80,    82,    84,    86,    88,    90,
+      92,    94,    96,    98,   100,   130,   329,   655,   656,   657,
+     658,   659,   666,   667,   672,   673,   680,   681,   685,   686,
+     690,   691,   695,   696,   700,   701,   708,   709,   716,   717,
+     724,   725,   732,   733,   738,   739,   744,   745,   752,   753,
+     327,   634,    11,    12,   637,   638,   639,   643,  1084,    11,
+     597,   187,   188,   596,  1499,  1526,  1527,  1528,    11,   604,
+     603,  1499,  1526,    11,   611,   610,  1499,  1526,     3,    11,
+     616,    11,    12,   621,   622,   623,   347,   349,   351,     8,
+       4,    49,   531,   353,    51,    53,    55,    57,     8,     4,
+      59,   569,     6,     8,   482,   483,   484,   485,  1103,   131,
+     354,   576,   577,   578,   579,    11,    12,   766,   767,   768,
+     218,   221,   224,   765,  1457,  1464,  1469,   329,   657,   660,
+    1526,    11,    12,   668,   669,   670,    32,   674,  1079,    33,
+    1087,  1087,  1087,  1087,    34,   702,  1086,   710,  1086,   718,
+    1086,   726,  1086,   734,  1087,   740,  1087,    35,   746,  1088,
+     754,  1084,     4,    69,   640,    11,    12,   644,   645,   646,
+       6,     7,   598,  1100,     3,   605,  1100,   612,  1100,     8,
+       6,   617,   131,   579,   624,   625,   626,    49,    59,  1101,
+     131,   578,   580,   581,   320,   769,   770,   771,     8,     8,
+       8,    11,    12,   661,   662,   663,     4,    73,   671,     8,
+      11,    12,   675,   676,   677,     8,    11,    12,   682,   683,
+     684,    11,    12,   687,   688,   689,    11,    12,   692,   693,
+     694,    11,    12,   697,   698,   699,     8,    11,    12,   703,
+     704,   705,    11,    12,   711,   712,   713,    11,    12,   719,
+     720,   721,    11,    12,   727,   728,   729,    11,    12,   735,
+     736,   737,    11,    12,   741,   742,   743,     8,    11,    12,
+     747,   748,   749,    11,    12,   755,   756,   757,    69,   131,
+     579,   647,   648,   649,    61,     8,    63,    65,    67,   580,
+     131,   626,    11,    12,   583,   179,   180,   189,   190,   582,
+    1499,  1505,  1506,  1507,  1529,  1530,  1531,   331,   316,   866,
+     867,    36,   772,   773,  1085,     6,     6,     6,    71,   664,
+     665,  1100,    73,     6,    75,   352,   678,   679,     6,    76,
+      81,  1047,  1048,    83,  1047,    85,  1047,    87,  1047,     6,
+      78,    93,   706,   707,  1049,  1050,    95,   714,   715,  1049,
+      99,   722,   723,  1049,    97,   730,   731,  1049,    91,  1047,
+      89,  1047,     6,   101,   102,   750,   751,   131,   579,   758,
+     759,   760,   580,   131,   649,   583,   355,     3,     3,   312,
+     933,   934,    37,   868,   869,  1083,  1101,    11,    12,   774,
+     775,   776,     8,     8,     8,    71,     8,    11,    75,   679,
+       8,    11,    81,  1048,    83,    85,    87,     8,    93,   707,
+    1051,  1052,    95,   715,    99,   723,    97,   731,    91,    89,
+       8,    11,   101,   751,   580,   131,   760,   583,     8,     8,
+     296,  1000,  1001,    38,   935,   936,  1080,  1101,    11,    12,
+     870,   871,   872,     6,   104,   777,   778,   779,     4,     4,
+      11,    12,  1057,    29,    30,    31,  1053,  1054,  1055,  1056,
+       4,   583,   126,  1036,  1037,    39,  1002,  1003,  1081,  1101,
+      11,    12,   937,   938,   939,     6,   116,   873,   874,   875,
+    1101,   321,   106,   792,   793,   225,   780,  1467,   353,    77,
+      79,     3,     3,     3,   103,    43,  1038,  1089,  1101,    11,
+      12,  1004,  1005,  1006,     6,   120,   940,   941,   942,  1101,
+     317,   118,   888,   889,   222,   876,  1463,   108,   806,   807,
+     794,  1467,     8,    11,    12,   781,   782,   783,     8,     8,
+       8,  1101,    11,    12,  1039,  1040,  1041,     6,   298,  1007,
+    1008,  1101,   313,   122,   955,   956,   219,   943,  1456,   108,
+     902,   903,   890,  1463,     8,    11,    12,   877,   878,   879,
+     110,   819,   820,    11,    12,   808,   809,   810,    11,    12,
+     795,   796,   797,     6,   105,   318,   784,   785,   786,   787,
+       6,  1042,  1101,  1029,    40,  1009,  1082,   108,   969,   970,
+     957,  1456,     8,    11,    12,   944,   945,   946,   915,    11,
+      12,   904,   905,   906,    11,    12,   891,   892,   893,     6,
+     117,   314,   880,   881,   882,   883,   112,   833,   834,   821,
+    1467,   338,   811,   812,  1170,  1171,   107,   318,   798,   799,
+     800,   801,     8,   105,   786,   788,   789,  1101,   127,   128,
+    1043,  1044,  1030,  1101,    11,    12,  1010,  1011,  1012,   982,
+      11,    12,   971,   972,   973,    11,    12,   958,   959,   960,
+       6,   121,   310,   947,   948,   949,   950,   354,   916,   917,
+     907,   908,  1170,   119,   314,   894,   895,   896,   897,     8,
+     117,   882,   884,   885,   848,    45,   835,    11,    12,   822,
+     823,   824,   109,   334,   813,  1176,  1177,   170,  1212,  1458,
+     107,   800,   802,   803,    11,    12,   791,   246,   790,  1478,
+    1505,  1529,   172,   173,   174,   177,   178,   181,   182,   216,
+    1221,  1222,  1223,  1460,  1461,  1493,  1494,  1495,  1499,  1505,
+    1517,  1518,  1519,  1523,  1524,  1525,  1529,  1031,     6,   124,
+    1014,  1015,   354,   983,   984,   974,   975,  1170,   123,   310,
+     961,   962,   963,   964,     8,   121,   949,   951,   952,   918,
+     919,   109,   909,  1176,   119,   896,   898,   899,    11,    12,
+     887,   886,  1478,  1505,  1529,   354,   849,   850,     8,    11,
+      12,   836,   837,   838,   111,   318,   825,   826,   827,   828,
+     336,   814,  1182,  1183,  1212,     8,    11,    12,  1172,  1173,
+    1174,    11,    12,   805,   804,  1478,  1505,  1529,   319,     8,
+       8,     3,     3,     3,     8,    11,    12,  1045,  1223,   297,
+     354,  1032,  1033,  1101,  1023,  1024,   229,  1016,  1462,   985,
+     986,   109,   976,  1176,   123,   963,   965,   966,    11,    12,
+     954,   953,  1478,  1505,  1529,    11,    12,   921,   922,   923,
+     171,   183,   184,   195,   196,   920,  1459,  1463,  1493,  1499,
+    1502,  1503,  1504,  1505,  1508,  1509,  1510,  1517,  1523,  1529,
+     910,  1182,    11,    12,   901,    17,    18,    19,    20,   900,
+    1060,  1061,  1062,  1063,  1071,  1072,  1073,  1074,  1478,  1505,
+     315,   851,   852,     6,   113,   114,   839,   840,   841,   111,
+     827,   829,   830,   332,   815,  1188,  1189,  1212,    11,    12,
+    1178,  1179,  1180,     6,   168,  1133,  1134,  1141,  1175,   319,
+       6,     6,     8,     8,     8,     6,   129,   164,   165,   167,
+     254,  1046,  1224,  1225,  1226,  1227,  1228,  1229,  1230,  1231,
+    1233,  1235,  1221,   299,  1013,   354,  1025,  1026,     8,    11,
+      12,  1017,  1018,  1019,    11,    12,   988,   989,   990,   193,
+     194,   987,  1456,  1459,  1493,  1496,  1497,  1498,  1499,  1502,
+    1505,  1517,  1523,  1529,   977,  1182,    11,    12,   968,    21,
+      22,    23,    24,   967,  1064,  1065,  1066,  1067,  1075,  1076,
+    1077,  1078,  1478,  1505,   311,   162,   314,   355,   924,   925,
+     926,   927,  1090,  1091,  1092,     8,     3,     3,   911,  1188,
+     315,     3,     3,    11,    12,   854,   855,   856,   197,   198,
+     853,  1459,  1467,  1493,  1499,  1502,  1505,  1517,  1523,  1529,
+    1535,  1536,  1537,     8,   113,   840,   842,   843,    11,    12,
+     832,   831,  1478,  1505,  1529,   340,   816,  1194,  1195,  1212,
+      11,    12,  1184,  1185,  1186,  1133,  1181,     8,   249,  1470,
+     160,  1135,  1136,   339,     8,     8,     8,     5,  1232,  1046,
+    1226,  1228,  1236,  1237,    11,    12,  1034,  1213,  1214,  1215,
+    1459,  1462,  1493,  1499,  1502,  1505,  1517,  1523,  1529,     6,
+    1021,   310,   355,   991,   992,   993,   994,  1090,     3,   978,
+    1188,   311,  1101,  1101,   355,   926,   928,   929,  1091,  1093,
+    1094,     6,     8,     8,   912,  1194,  1101,  1101,   318,   355,
+     857,   858,   859,   860,  1090,     3,    11,    12,   845,   846,
+     847,    46,    47,   844,  1058,  1059,  1068,  1069,  1070,  1467,
+     319,   342,   817,  1200,  1201,  1212,    11,    12,  1190,  1191,
+    1192,  1133,  1187,   335,     8,    11,    12,  1142,  1143,  1144,
+    1137,  1138,   166,    11,    12,  1243,  1244,  1245,   207,   208,
+     214,   215,  1238,  1455,  1465,  1505,  1520,  1521,  1522,  1523,
+     355,  1035,  1224,    11,    12,  1027,  1215,     8,   125,   300,
+    1020,  1022,  1234,  1239,   355,   993,   995,   996,     8,   979,
+    1194,  1100,  1100,    11,    12,   931,   932,   930,  1060,  1071,
+    1478,  1505,  1529,    11,    12,  1096,  1097,  1098,  1095,  1458,
+    1499,  1529,     8,   913,  1200,   355,   859,   861,   862,     8,
+     115,   826,  1101,     8,   344,   818,  1206,  1207,  1212,    11,
+      12,  1196,  1197,  1198,  1133,  1193,   337,     6,     4,   169,
+      11,  1140,   247,   248,  1139,  1479,  1481,   257,  1250,  1251,
+    1252,     3,     8,     8,  1035,   162,   355,  1028,  1161,  1162,
+    1216,  1217,  1218,  1219,  1220,  1234,  1240,  1241,    11,    12,
+     998,   999,   997,  1060,  1071,  1478,  1505,  1529,   980,  1200,
+    1101,  1101,   315,  1099,  1133,   914,  1206,    11,    12,   864,
+     865,   863,  1060,  1071,  1478,  1505,  1529,   115,     6,  1100,
+    1212,    11,    12,  1202,  1203,  1204,  1133,  1199,   333,     8,
+     169,     6,     8,     8,   255,  1257,  1253,  1254,     8,     6,
+       6,  1163,  1164,  1028,  1218,  1220,    11,    12,  1246,  1247,
+    1248,   243,  1242,  1455,  1465,  1480,  1505,  1520,  1523,   311,
+     981,  1206,   163,   319,  1101,     8,    11,    12,  1208,  1209,
+    1210,  1133,  1205,   341,   161,     6,     6,   258,   268,   270,
+     272,   274,   276,   278,   280,   282,   284,   294,  1258,  1259,
+    1260,  1284,  1285,  1297,  1298,  1324,  1325,  1342,  1343,  1360,
+    1361,  1373,  1374,  1391,  1392,  1409,  1410,  1422,  1423,  1426,
+    1427,    11,    12,  1256,   211,   212,   230,   231,   232,   233,
+     234,   235,   236,   237,   238,  1255,  1471,  1472,  1473,  1474,
+    1475,  1482,  1483,  1488,  1489,  1490,  1491,  1492,     8,     8,
+      11,    12,  1166,  1167,  1168,  1165,  1458,  1499,  1529,  1249,
+    1101,  1133,  1211,   343,     8,     8,  1261,  1262,  1286,  1287,
+    1299,  1300,  1326,  1327,  1344,  1345,  1362,  1363,  1375,  1376,
+    1393,  1394,  1411,  1412,   185,   186,  1424,  1514,  1515,  1516,
+     213,  1428,  1454,   256,     3,     8,     8,     8,     8,     8,
+       8,     8,     8,     8,  1133,  1169,  1250,     6,   345,    11,
+     209,   210,   217,  1263,  1466,  1511,  1512,  1513,    11,  1288,
+    1466,  1511,    11,  1301,  1466,  1511,    11,  1328,  1466,  1511,
+      11,  1346,  1466,  1511,    11,  1364,  1466,  1511,    11,  1377,
+    1466,  1511,    11,  1395,  1466,  1511,    11,  1413,  1466,  1511,
+       3,    11,     8,    11,  1429,  1101,     6,     6,     6,     6,
+       6,     6,     6,  1100,  1100,   163,   301,  1101,   286,  1264,
+    1266,  1267,     3,     8,  1266,  1289,  1266,  1302,  1266,  1329,
+    1266,  1347,  1266,  1365,  1266,  1378,  1266,  1396,  1266,  1414,
+       8,   300,   304,   308,   424,   426,   428,   430,   432,   434,
+     436,   438,   440,   442,   444,   446,   448,   450,   452,   454,
+     456,  1612,  1613,  1614,  1620,  1621,  1624,  1625,  1628,  1629,
+    1632,  1633,  1635,  1636,  1638,  1639,  1641,  1642,  1644,  1645,
+    1648,  1649,  1653,  1654,  1656,  1657,  1659,  1660,  1662,  1663,
+    1665,  1668,  1669,  1671,  1674,  1675,  1677,  1678,  1680,  1681,
+       6,   262,  1431,  1432,     8,     8,     8,     8,     8,     8,
+       8,     8,     8,   288,  1265,  1272,  1273,    11,    12,  1268,
+    1269,  1270,     8,     6,  1272,  1290,  1272,  1303,  1272,  1330,
+    1272,  1348,  1272,  1366,  1272,  1379,  1272,  1397,  1272,  1415,
+    1666,  1672,   295,  1425,  1615,   246,  1623,   246,  1627,   246,
+    1631,  1612,  1634,  1612,  1637,   370,   372,   374,   376,   378,
+     380,   382,   384,   386,   388,   390,   392,   394,   396,   398,
+     400,   402,   404,   406,   408,   410,   412,   414,   416,   418,
+     420,   422,  1538,  1539,  1542,  1545,  1547,  1549,  1551,  1553,
+    1555,  1557,  1559,  1561,  1563,  1565,  1567,  1569,  1570,  1572,
+    1574,  1576,  1578,  1580,  1582,  1583,  1589,  1597,  1600,  1603,
+    1606,  1609,  1640,  1612,  1643,   477,  1646,  1652,  1650,  1652,
+      11,    12,  1655,  1612,  1658,  1612,  1661,  1612,  1664,  1612,
+    1670,  1612,  1676,  1538,  1679,  1612,  1682,     8,   264,  1438,
+    1439,  1433,  1458,   269,   290,  1278,  1279,    11,    12,  1274,
+    1275,  1276,  1132,  1133,  1271,     8,   290,  1291,  1292,   273,
+     290,  1304,  1305,   275,   290,  1331,  1332,   281,   290,  1349,
+    1350,   283,   290,  1367,  1368,   279,   290,  1380,  1381,   277,
+     290,  1398,  1399,   271,   290,  1416,  1417,   285,  1667,  1673,
+      11,    12,   246,   479,  1616,  1617,  1618,  1619,     8,    11,
+      12,  1622,     8,    11,    12,  1626,     8,    11,    12,  1630,
+     425,  1612,  1556,  1548,  1550,  1554,  1558,  1560,  1598,  1610,
+    1568,  1552,  1575,  1562,  1564,  1566,  1590,  1573,  1604,  1601,
+    1607,  1540,  1543,  1546,  1577,  1579,  1581,   455,  1538,  1585,
+     457,     3,    11,    11,   433,  1612,   437,  1612,  1612,   458,
+     460,   462,   464,   466,   468,   470,   472,   474,  1538,  1683,
+    1684,  1685,  1686,  1691,  1692,  1694,  1695,  1697,  1700,  1701,
+    1703,  1704,  1706,  1707,  1709,  1710,  1712,  1713,  1538,   451,
+    1445,  1440,  1458,    11,    12,  1434,  1435,  1436,    11,    12,
+    1280,  1281,  1282,  1132,  1277,   287,    11,    12,  1293,  1294,
+    1295,    11,    12,  1306,  1307,  1308,    11,    12,  1333,  1334,
+    1335,    11,    12,  1351,  1352,  1353,    11,    12,  1369,  1370,
+    1371,    11,    12,  1382,  1383,  1384,    11,    12,  1400,  1401,
+    1402,    11,    12,  1418,  1419,  1420,   443,  1612,   445,  1612,
+     453,     8,     3,     6,   301,     6,   305,     6,   309,   427,
+    1538,  1538,  1538,  1538,  1538,  1538,  1599,  1611,  1538,  1538,
+    1538,  1538,  1538,  1538,  1593,  1538,  1605,  1602,  1608,    11,
+      12,  1541,    11,    12,  1544,  1538,  1612,  1612,  1612,   401,
+    1571,    11,    12,   481,  1523,  1529,  1584,  1586,  1587,     8,
+    1612,  1647,  1612,  1651,   435,   439,   441,    11,   447,  1688,
+    1689,    11,    11,    11,    11,    11,    11,    11,  1538,   259,
+     260,  1430,  1446,  1447,    11,    12,  1441,  1442,  1443,  1133,
+    1437,   168,  1145,  1146,  1151,  1283,   289,  1132,  1296,  1309,
+    1310,  1336,  1354,  1133,  1372,  1385,  1403,  1155,  1156,  1421,
+       6,     8,     8,     8,     8,  1538,  1538,  1538,  1538,   379,
+     381,   383,  1538,   385,  1538,   387,   389,  1538,   393,   395,
+     397,    11,    12,   246,   250,  1591,  1594,  1595,  1596,   403,
+     405,  1538,   407,  1538,   409,  1538,   411,   413,  1538,   419,
+     421,   423,   417,     3,   429,   431,  1698,    11,    12,  1687,
+     241,   242,  1486,  1487,  1690,  1538,  1693,  1683,  1696,  1683,
+    1702,  1683,  1705,  1683,  1708,  1683,  1711,  1683,  1714,  1538,
+    1448,  1449,  1133,  1444,   263,  1470,   160,  1147,  1148,   291,
+     291,   291,   160,  1311,  1312,   160,   291,  1337,  1338,   160,
+     291,  1355,  1356,   291,   160,   291,  1386,  1387,   160,   291,
+    1404,  1405,   160,  1157,  1158,   291,     8,   371,   373,   375,
+     377,  1538,   399,  1538,     8,     8,   415,  1588,  1699,   465,
+       8,     8,  1538,  1683,  1683,   463,   459,  1683,   469,  1612,
+      11,    12,  1451,  1452,  1453,   239,   240,  1450,  1476,  1477,
+    1520,  1523,   265,    11,    12,  1152,  1153,  1154,  1149,  1481,
+    1313,  1314,    11,    12,  1339,  1340,  1341,    11,    12,  1357,
+    1358,  1359,  1388,  1406,  1159,  1481,   391,  1592,     6,  1100,
+       8,   471,  1683,  1100,  1100,   475,   467,   461,   473,   449,
+    1250,     8,     8,     4,   169,    11,  1150,    11,    12,  1316,
+    1317,  1318,   226,   251,  1315,  1468,  1485,  1538,  1684,    11,
+     191,   192,  1389,  1390,  1479,  1481,  1532,  1533,  1534,    11,
+      12,  1407,  1408,  1481,  1486,  1487,    11,  1160,   399,     8,
+       8,     8,     8,   261,     6,     6,   169,  1100,  1319,     8,
+       8,   161,   161,     6,     3,   161,     4,     8,     8,   161,
+     161,   292,  1320,  1321,     6,  1100,   161,     8,   161,   250,
+    1322,  1484,     8,     8,     8,    11,  1323,  1100,     6,     8,
+     293
+};
+
+  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+static const yytype_uint16 yyr1[] =
+{
+       0,   486,   487,   487,   488,   489,   490,   490,   491,   491,
+     492,   493,   494,   495,   495,   496,   497,   497,   498,   498,
+     499,   500,   500,   501,   501,   502,   503,   504,   504,   505,
+     505,   505,   505,   505,   505,   505,   505,   505,   505,   505,
+     506,   507,   508,   508,   509,   509,   510,   511,   512,   513,
+     514,   514,   515,   515,   516,   517,   518,   519,   520,   520,
+     521,   521,   522,   523,   524,   525,   526,   526,   527,   528,
+     528,   529,   529,   530,   531,   532,   533,   534,   534,   535,
+     535,   536,   537,   538,   539,   540,   540,   541,   541,   542,
+     543,   544,   545,   546,   546,   547,   547,   548,   549,   550,
+     551,   552,   552,   553,   553,   554,   555,   556,   557,   558,
+     558,   559,   559,   560,   561,   562,   563,   564,   564,   565,
+     566,   566,   567,   567,   568,   569,   570,   571,   572,   573,
+     573,   574,   574,   575,   576,   577,   577,   578,   579,   580,
+     581,   581,   582,   582,   582,   583,   583,   584,   584,   585,
+     586,   586,   587,   587,   588,   589,   590,   590,   591,   591,
+     591,   591,   591,   592,   593,   594,   595,   595,   596,   596,
+     597,   598,   599,   600,   601,   602,   602,   603,   603,   604,
+     605,   606,   607,   608,   609,   609,   610,   610,   611,   612,
+     613,   614,   615,   615,   616,   617,   618,   619,   620,   621,
+     621,   622,   622,   623,   624,   625,   625,   626,   627,   627,
+     628,   629,   629,   630,   630,   631,   632,   633,   633,   634,
+     634,   635,   636,   637,   637,   638,   638,   639,   640,   641,
+     642,   643,   644,   644,   645,   645,   646,   647,   648,   648,
+     649,   650,   650,   651,   652,   652,   653,   653,   654,   655,
+     656,   656,   657,   657,   657,   657,   657,   657,   657,   657,
+     657,   657,   657,   657,   657,   657,   657,   658,   659,   660,
+     660,   661,   661,   662,   662,   663,   664,   665,   666,   667,
+     668,   668,   669,   669,   670,   671,   672,   673,   674,   675,
+     675,   676,   676,   677,   678,   678,   679,   680,   681,   682,
+     682,   683,   683,   684,   685,   686,   687,   687,   688,   688,
+     689,   690,   691,   692,   692,   693,   693,   694,   695,   696,
+     697,   697,   698,   698,   699,   700,   701,   702,   703,   703,
+     704,   704,   705,   706,   706,   707,   708,   709,   710,   711,
+     711,   712,   712,   713,   714,   714,   715,   716,   717,   718,
+     719,   719,   720,   720,   721,   722,   722,   723,   724,   725,
+     726,   727,   727,   728,   728,   729,   730,   730,   731,   732,
+     733,   734,   735,   735,   736,   736,   737,   738,   739,   740,
+     741,   741,   742,   742,   743,   744,   745,   746,   747,   747,
+     748,   748,   749,   750,   750,   751,   752,   753,   754,   755,
+     755,   756,   756,   757,   758,   759,   759,   760,   761,   761,
+     762,   763,   764,   764,   765,   765,   765,   766,   766,   767,
+     768,   769,   770,   770,   771,   772,   773,   773,   774,   774,
+     775,   776,   777,   778,   778,   779,   780,   781,   781,   782,
+     782,   783,   784,   785,   785,   786,   787,   788,   789,   789,
+     790,   790,   790,   791,   791,   792,   792,   793,   794,   795,
+     795,   796,   796,   797,   798,   799,   799,   800,   801,   802,
+     803,   803,   804,   804,   804,   805,   805,   806,   806,   807,
+     808,   808,   809,   810,   811,   812,   812,   813,   813,   814,
+     814,   815,   815,   816,   816,   817,   817,   818,   818,   819,
+     819,   820,   821,   822,   822,   823,   823,   824,   825,   826,
+     826,   827,   828,   829,   830,   830,   831,   831,   831,   832,
+     832,   833,   833,   834,   835,   836,   836,   837,   837,   838,
+     839,   839,   840,   841,   842,   843,   843,   844,   844,   844,
+     845,   845,   846,   846,   847,   848,   848,   849,   850,   851,
+     852,   852,   853,   853,   853,   853,   853,   853,   853,   853,
+     853,   853,   854,   854,   855,   855,   856,   857,   857,   858,
+     858,   859,   860,   861,   862,   862,   863,   863,   863,   863,
+     863,   864,   865,   865,   866,   866,   867,   868,   869,   869,
+     870,   870,   871,   872,   873,   874,   874,   875,   876,   877,
+     877,   878,   878,   879,   880,   881,   881,   882,   883,   884,
+     885,   885,   886,   886,   886,   887,   887,   888,   888,   889,
+     890,   891,   891,   892,   892,   893,   894,   895,   895,   896,
+     897,   898,   899,   899,   900,   900,   900,   900,   901,   901,
+     902,   902,   903,   904,   904,   905,   906,   907,   908,   908,
+     909,   909,   910,   910,   911,   911,   912,   912,   913,   913,
+     914,   914,   915,   915,   916,   917,   918,   919,   919,   920,
+     920,   920,   920,   920,   920,   920,   920,   920,   920,   921,
+     921,   922,   922,   923,   924,   924,   925,   925,   926,   927,
+     928,   929,   929,   930,   930,   930,   930,   930,   931,   932,
+     932,   933,   933,   934,   935,   936,   936,   937,   937,   938,
+     939,   940,   941,   941,   942,   943,   944,   944,   945,   945,
+     946,   947,   948,   948,   949,   950,   951,   952,   952,   953,
+     953,   953,   954,   954,   955,   955,   956,   957,   958,   958,
+     959,   959,   960,   961,   962,   962,   963,   964,   965,   966,
+     966,   967,   967,   967,   967,   968,   968,   969,   969,   970,
+     971,   971,   972,   973,   974,   975,   975,   976,   976,   977,
+     977,   978,   978,   979,   979,   980,   980,   981,   981,   982,
+     982,   983,   984,   985,   986,   986,   987,   987,   987,   987,
+     987,   987,   987,   987,   987,   987,   988,   988,   989,   989,
+     990,   991,   991,   992,   992,   993,   994,   995,   996,   996,
+     997,   997,   997,   997,   997,   998,   999,   999,  1000,  1000,
+    1001,  1002,  1003,  1003,  1004,  1004,  1005,  1006,  1007,  1007,
+    1008,  1009,  1009,  1010,  1010,  1011,  1012,  1013,  1014,  1014,
+    1015,  1016,  1017,  1017,  1018,  1019,  1020,  1021,  1021,  1022,
+    1023,  1024,  1024,  1025,  1025,  1026,  1027,  1027,  1028,  1029,
+    1030,  1031,  1031,  1032,  1032,  1033,  1034,  1034,  1035,  1036,
+    1036,  1037,  1038,  1039,  1039,  1040,  1041,  1042,  1042,  1043,
+    1043,  1044,  1045,  1045,  1046,  1047,  1047,  1048,  1049,  1050,
+    1051,  1052,  1052,  1053,  1053,  1053,  1054,  1055,  1056,  1057,
+    1057,  1058,  1059,  1060,  1061,  1061,  1062,  1063,  1064,  1065,
+    1065,  1066,  1067,  1068,  1069,  1070,  1071,  1072,  1072,  1073,
+    1074,  1075,  1076,  1076,  1077,  1078,  1079,  1080,  1081,  1082,
+    1083,  1084,  1085,  1086,  1087,  1088,  1089,  1090,  1090,  1091,
+    1092,  1093,  1094,  1094,  1095,  1095,  1095,  1096,  1096,  1097,
+    1098,  1099,  1100,  1100,  1101,  1102,  1102,  1103,  1103,  1103,
+    1103,  1104,  1105,  1106,  1106,  1107,  1108,  1109,  1110,  1110,
+    1111,  1111,  1111,  1111,  1111,  1112,  1113,  1113,  1114,  1114,
+    1115,  1116,  1117,  1117,  1118,  1118,  1119,  1120,  1121,  1121,
+    1122,  1122,  1123,  1124,  1125,  1125,  1126,  1126,  1127,  1128,
+    1129,  1129,  1130,  1130,  1131,  1132,  1133,  1133,  1134,  1134,
+    1135,  1136,  1137,  1138,  1138,  1139,  1139,  1140,  1141,  1142,
+    1142,  1143,  1143,  1144,  1145,  1145,  1146,  1146,  1147,  1148,
+    1149,  1149,  1150,  1151,  1152,  1152,  1153,  1153,  1154,  1155,
+    1156,  1156,  1157,  1158,  1159,  1159,  1160,  1161,  1162,  1163,
+    1164,  1164,  1165,  1165,  1165,  1166,  1166,  1167,  1168,  1169,
+    1170,  1171,  1172,  1172,  1173,  1174,  1175,  1176,  1177,  1178,
+    1178,  1179,  1180,  1181,  1182,  1183,  1184,  1184,  1185,  1186,
+    1187,  1188,  1189,  1190,  1190,  1191,  1192,  1193,  1194,  1195,
+    1196,  1196,  1197,  1198,  1199,  1200,  1201,  1202,  1202,  1203,
+    1204,  1205,  1206,  1207,  1208,  1208,  1209,  1210,  1211,  1212,
+    1213,  1214,  1214,  1215,  1215,  1215,  1215,  1215,  1215,  1215,
+    1215,  1215,  1216,  1216,  1217,  1217,  1218,  1219,  1219,  1220,
+    1221,  1222,  1222,  1223,  1223,  1223,  1223,  1223,  1223,  1223,
+    1223,  1224,  1224,  1225,  1225,  1226,  1227,  1227,  1228,  1229,
+    1229,  1230,  1230,  1231,  1232,  1233,  1234,  1235,  1236,  1237,
+    1237,  1238,  1238,  1238,  1238,  1238,  1239,  1240,  1241,  1241,
+    1242,  1242,  1242,  1242,  1242,  1242,  1243,  1243,  1244,  1245,
+    1246,  1246,  1247,  1249,  1248,  1250,  1251,  1251,  1252,  1253,
+    1254,  1254,  1255,  1255,  1255,  1255,  1255,  1255,  1255,  1255,
+    1255,  1255,  1256,  1256,  1257,  1257,  1258,  1258,  1258,  1258,
+    1258,  1258,  1258,  1258,  1258,  1258,  1258,  1259,  1260,  1261,
+    1262,  1262,  1263,  1263,  1264,  1265,  1265,  1266,  1267,  1268,
+    1268,  1269,  1270,  1271,  1272,  1272,  1273,  1274,  1274,  1275,
+    1276,  1277,  1278,  1279,  1280,  1280,  1281,  1282,  1283,  1284,
+    1285,  1286,  1287,  1287,  1288,  1288,  1289,  1290,  1291,  1291,
+    1292,  1293,  1293,  1294,  1295,  1296,  1297,  1298,  1299,  1300,
+    1300,  1301,  1301,  1302,  1303,  1304,  1304,  1305,  1306,  1306,
+    1307,  1308,  1309,  1310,  1310,  1311,  1312,  1313,  1314,  1314,
+    1315,  1315,  1316,  1316,  1317,  1318,  1319,  1319,  1320,  1321,
+    1322,  1322,  1323,  1324,  1325,  1326,  1327,  1327,  1328,  1328,
+    1329,  1330,  1331,  1331,  1332,  1333,  1333,  1334,  1335,  1336,
+    1336,  1337,  1338,  1339,  1339,  1340,  1341,  1342,  1343,  1344,
+    1345,  1345,  1346,  1346,  1347,  1348,  1349,  1349,  1350,  1351,
+    1351,  1352,  1353,  1354,  1354,  1355,  1356,  1357,  1357,  1358,
+    1359,  1360,  1361,  1362,  1363,  1363,  1364,  1364,  1365,  1366,
+    1367,  1367,  1368,  1369,  1369,  1370,  1371,  1372,  1373,  1374,
+    1375,  1376,  1376,  1377,  1377,  1378,  1379,  1380,  1380,  1381,
+    1382,  1382,  1383,  1384,  1385,  1385,  1386,  1387,  1388,  1388,
+    1389,  1389,  1389,  1390,  1391,  1392,  1393,  1394,  1394,  1395,
+    1395,  1396,  1397,  1398,  1398,  1399,  1400,  1400,  1401,  1402,
+    1403,  1403,  1404,  1405,  1406,  1406,  1407,  1407,  1407,  1408,
+    1408,  1409,  1410,  1411,  1412,  1412,  1413,  1413,  1414,  1415,
+    1416,  1416,  1417,  1418,  1418,  1419,  1420,  1421,  1422,  1423,
+    1424,  1424,  1425,  1426,  1427,  1428,  1429,  1430,  1431,  1432,
+    1433,  1434,  1434,  1435,  1436,  1437,  1438,  1439,  1440,  1441,
+    1441,  1442,  1443,  1444,  1445,  1445,  1446,  1447,  1448,  1449,
+    1449,  1450,  1450,  1450,  1450,  1451,  1451,  1452,  1453,  1454,
+    1455,  1456,  1457,  1458,  1459,  1460,  1461,  1462,  1463,  1464,
+    1465,  1466,  1467,  1468,  1469,  1470,  1471,  1472,  1473,  1474,
+    1475,  1476,  1477,  1478,  1479,  1480,  1481,  1482,  1483,  1484,
+    1485,  1486,  1487,  1488,  1489,  1490,  1490,  1491,  1492,  1493,
+    1493,  1494,  1495,  1496,  1496,  1497,  1498,  1499,  1499,  1500,
+    1501,  1502,  1502,  1503,  1504,  1505,  1505,  1506,  1507,  1508,
+    1508,  1509,  1510,  1511,  1511,  1512,  1513,  1514,  1514,  1515,
+    1516,  1517,  1517,  1518,  1519,  1520,  1520,  1521,  1522,  1523,
+    1523,  1524,  1525,  1526,  1526,  1527,  1528,  1529,  1529,  1530,
+    1531,  1532,  1532,  1533,  1534,  1535,  1535,  1536,  1537,  1538,
+    1538,  1538,  1538,  1538,  1538,  1538,  1538,  1538,  1538,  1538,
+    1538,  1538,  1538,  1538,  1538,  1538,  1538,  1538,  1538,  1538,
+    1538,  1538,  1538,  1538,  1538,  1538,  1540,  1539,  1541,  1541,
+    1543,  1542,  1544,  1544,  1546,  1545,  1548,  1547,  1550,  1549,
+    1552,  1551,  1554,  1553,  1556,  1555,  1558,  1557,  1560,  1559,
+    1562,  1561,  1564,  1563,  1566,  1565,  1568,  1567,  1569,  1570,
+    1571,  1573,  1572,  1575,  1574,  1577,  1576,  1579,  1578,  1581,
+    1580,  1582,  1583,  1584,  1584,  1585,  1585,  1586,  1586,  1586,
+    1588,  1587,  1590,  1589,  1591,  1591,  1592,  1591,  1593,  1593,
+    1594,  1594,  1595,  1596,  1598,  1597,  1599,  1599,  1601,  1600,
+    1602,  1602,  1604,  1603,  1605,  1605,  1607,  1606,  1608,  1608,
+    1610,  1609,  1611,  1611,  1612,  1612,  1612,  1612,  1612,  1612,
+    1612,  1612,  1612,  1612,  1612,  1612,  1612,  1612,  1612,  1612,
+    1612,  1612,  1612,  1612,  1613,  1614,  1615,  1615,  1616,  1616,
+    1617,  1617,  1618,  1619,  1620,  1621,  1622,  1622,  1623,  1624,
+    1625,  1626,  1626,  1627,  1628,  1629,  1630,  1630,  1631,  1632,
+    1633,  1634,  1635,  1636,  1637,  1638,  1639,  1640,  1641,  1642,
+    1643,  1644,  1645,  1646,  1646,  1647,  1648,  1649,  1650,  1650,
+    1651,  1652,  1653,  1654,  1655,  1655,  1656,  1657,  1658,  1659,
+    1660,  1661,  1662,  1663,  1664,  1666,  1665,  1667,  1667,  1668,
+    1669,  1670,  1672,  1671,  1673,  1673,  1674,  1675,  1676,  1677,
+    1678,  1679,  1680,  1681,  1682,  1683,  1683,  1684,  1684,  1684,
+    1684,  1684,  1684,  1684,  1684,  1684,  1685,  1686,  1687,  1687,
+    1688,  1689,  1689,  1690,  1690,  1691,  1692,  1693,  1694,  1695,
+    1696,  1698,  1697,  1699,  1699,  1700,  1701,  1702,  1703,  1704,
+    1705,  1706,  1707,  1708,  1709,  1710,  1711,  1712,  1713,  1714
+};
+
+  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+static const yytype_uint8 yyr2[] =
+{
+       0,     2,     3,     3,     1,     1,     0,     1,     1,     1,
+       1,     3,     1,     1,     0,     6,     0,     1,     0,     2,
+       1,     1,     1,     2,     1,     3,     1,     1,     2,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       2,     1,     1,     1,     2,     1,     3,     1,     2,     1,
+       1,     1,     2,     1,     3,     1,     2,     1,     1,     1,
+       2,     1,     3,     1,     3,     1,     0,     1,     3,     1,
+       1,     2,     1,     3,     1,     2,     1,     1,     1,     2,
+       1,     3,     1,     2,     1,     1,     1,     2,     1,     3,
+       1,     2,     1,     1,     1,     2,     1,     3,     1,     2,
+       1,     1,     1,     2,     1,     3,     1,     2,     1,     1,
+       1,     2,     1,     3,     1,     3,     1,     0,     1,     3,
+       1,     1,     2,     1,     3,     1,     3,     1,     1,     1,
+       1,     2,     1,     3,     1,     1,     2,     3,     1,     1,
+       0,     2,     1,     1,     1,     2,     1,     0,     2,     1,
+       1,     1,     2,     1,     3,     1,     1,     2,     1,     1,
+       1,     1,     1,     3,     1,     1,     0,     2,     1,     1,
+       3,     1,     3,     1,     1,     0,     2,     1,     1,     3,
+       1,     3,     1,     1,     0,     2,     1,     1,     3,     1,
+       3,     1,     0,     1,     3,     1,     3,     1,     1,     1,
+       1,     2,     1,     3,     1,     1,     2,     3,     0,     2,
+       1,     1,     1,     2,     1,     3,     1,     1,     2,     1,
+       1,     2,     1,     1,     1,     2,     1,     3,     1,     3,
+       1,     1,     1,     1,     2,     1,     3,     1,     1,     2,
+       3,     0,     2,     1,     1,     1,     2,     1,     3,     1,
+       1,     2,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     3,     1,     0,
+       1,     1,     1,     2,     1,     3,     1,     1,     2,     1,
+       1,     1,     2,     1,     3,     1,     3,     1,     1,     1,
+       1,     2,     1,     3,     1,     2,     4,     3,     1,     1,
+       1,     2,     1,     3,     3,     1,     1,     1,     2,     1,
+       3,     3,     1,     1,     1,     2,     1,     3,     3,     1,
+       1,     1,     2,     1,     3,     3,     1,     1,     1,     1,
+       2,     1,     3,     1,     2,     1,     3,     1,     1,     1,
+       1,     2,     1,     3,     1,     2,     1,     3,     1,     1,
+       1,     1,     2,     1,     3,     1,     2,     1,     3,     1,
+       1,     1,     1,     2,     1,     3,     1,     2,     1,     3,
+       1,     1,     1,     1,     2,     1,     3,     3,     1,     1,
+       1,     1,     2,     1,     3,     3,     1,     1,     1,     1,
+       2,     1,     3,     1,     2,     4,     3,     1,     1,     1,
+       1,     2,     1,     3,     1,     1,     2,     3,     0,     3,
+       1,     1,     0,     2,     1,     1,     1,     1,     1,     1,
+       3,     5,     0,     3,     1,     1,     0,     1,     1,     1,
+       1,     3,     6,     0,     3,     1,     1,     1,     1,     2,
+       1,     3,     1,     1,     2,     3,     1,     1,     0,     2,
+       1,     1,     1,     2,     1,     0,     3,     1,     1,     1,
+       1,     2,     1,     3,     1,     1,     2,     3,     1,     1,
+       0,     2,     1,     1,     1,     2,     1,     0,     2,     1,
+       1,     1,     1,     3,     7,     0,     1,     0,     1,     0,
+       1,     0,     1,     0,     1,     0,     1,     0,     1,     0,
+       3,     1,     1,     1,     1,     2,     1,     3,     1,     1,
+       2,     3,     1,     1,     0,     2,     1,     1,     1,     2,
+       1,     0,     3,     1,     4,     1,     1,     2,     1,     3,
+       1,     2,     3,     1,     1,     0,     2,     1,     1,     1,
+       1,     1,     2,     1,     3,     0,     2,     3,     1,     1,
+       0,     2,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     2,     1,     3,     1,     1,     1,
+       2,     3,     1,     1,     0,     2,     1,     1,     1,     1,
+       1,     1,     2,     1,     0,     3,     1,     1,     0,     1,
+       1,     1,     1,     3,     4,     0,     3,     1,     1,     1,
+       1,     2,     1,     3,     1,     1,     2,     3,     1,     1,
+       0,     2,     1,     1,     1,     2,     1,     0,     3,     1,
+       1,     1,     1,     2,     1,     3,     1,     1,     2,     3,
+       1,     1,     0,     2,     1,     1,     1,     1,     2,     1,
+       0,     2,     1,     1,     1,     1,     3,     7,     0,     1,
+       0,     1,     0,     1,     0,     1,     0,     1,     0,     1,
+       0,     1,     0,     2,     3,     1,     1,     0,     2,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     2,     1,     3,     1,     1,     1,     2,     3,     1,
+       1,     0,     2,     1,     1,     1,     1,     1,     1,     2,
+       1,     0,     3,     1,     1,     0,     1,     1,     1,     1,
+       3,     4,     0,     3,     1,     1,     1,     1,     2,     1,
+       3,     1,     1,     2,     3,     1,     1,     0,     2,     1,
+       1,     1,     2,     1,     0,     3,     1,     1,     1,     1,
+       2,     1,     3,     1,     1,     2,     3,     1,     1,     0,
+       2,     1,     1,     1,     1,     2,     1,     0,     2,     1,
+       1,     1,     1,     3,     7,     0,     1,     0,     1,     0,
+       1,     0,     1,     0,     1,     0,     1,     0,     1,     0,
+       2,     3,     1,     1,     0,     2,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     2,     1,
+       3,     1,     1,     1,     2,     3,     1,     1,     0,     2,
+       1,     1,     1,     1,     1,     1,     2,     1,     0,     3,
+       1,     1,     0,     1,     1,     1,     1,     6,     0,     3,
+       1,     0,     1,     1,     1,     1,     4,     1,     0,     3,
+       1,     1,     1,     1,     1,     3,     1,     0,     2,     1,
+       1,     0,     2,     3,     5,     1,     1,     2,     1,     0,
+       0,     0,     2,     3,     5,     1,     1,     2,     1,     0,
+       3,     1,     1,     1,     1,     1,     3,     0,     2,     3,
+       5,     1,     1,     2,     1,     1,     2,     4,     3,     1,
+       1,     0,     2,     1,     1,     1,     3,     3,     3,     2,
+       1,     1,     4,     1,     1,     1,     1,     3,     1,     1,
+       1,     1,     4,     1,     1,     4,     1,     1,     1,     1,
+       3,     1,     1,     1,     1,     4,     4,     4,     4,     4,
+       4,     4,     4,     4,     4,     4,     4,     1,     2,     3,
+       1,     1,     0,     2,     1,     1,     1,     1,     1,     1,
+       3,     1,     1,     1,     2,     0,     2,     1,     1,     1,
+       1,     2,     1,     1,     1,     1,     3,     1,     0,     2,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       3,     1,     1,     1,     1,     1,     3,     1,     1,     1,
+       1,     1,     3,     1,     1,     1,     1,     1,     3,     1,
+       1,     1,     1,     1,     3,     1,     1,     1,     0,     2,
+       3,     1,     1,     0,     2,     1,     1,     3,     3,     1,
+       1,     2,     1,     3,     1,     1,     0,     2,     3,     1,
+       0,     1,     3,     3,     1,     1,     2,     1,     3,     1,
+       0,     2,     3,     1,     0,     1,     3,     3,     1,     1,
+       0,     2,     1,     1,     1,     1,     1,     1,     3,     1,
+       3,     1,     1,     1,     1,     3,     1,     3,     1,     1,
+       1,     1,     3,     1,     3,     1,     1,     1,     1,     3,
+       1,     3,     1,     1,     1,     1,     3,     1,     3,     1,
+       1,     1,     1,     3,     1,     3,     1,     1,     1,     1,
+       3,     1,     3,     1,     1,     1,     1,     3,     1,     1,
+       1,     1,     2,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     2,     1,     1,     2,     1,
+       1,     1,     2,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     2,     1,     1,     2,     1,     1,
+       1,     1,     1,     3,     1,     3,     3,     1,     1,     0,
+       2,     1,     1,     1,     1,     1,     1,     1,     0,     2,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     3,
+       1,     1,     1,     0,     4,     2,     0,     3,     1,     1,
+       0,     2,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     2,     1,     0,     2,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     4,     1,     1,
+       0,     2,     1,     1,     3,     0,     2,     2,     1,     1,
+       1,     1,     3,     1,     0,     2,     1,     1,     1,     1,
+       3,     1,     2,     1,     1,     1,     1,     3,     1,     4,
+       1,     1,     0,     2,     1,     1,     3,     2,     0,     2,
+       1,     1,     1,     1,     3,     1,     4,     1,     1,     0,
+       2,     1,     1,     3,     2,     0,     2,     1,     1,     1,
+       1,     3,     1,     0,     2,     3,     1,     1,     0,     2,
+       1,     1,     1,     1,     1,     3,     0,     2,     3,     1,
+       0,     1,     3,     4,     1,     1,     0,     2,     1,     1,
+       3,     2,     0,     2,     1,     1,     1,     1,     3,     0,
+       2,     2,     1,     1,     1,     1,     3,     4,     1,     1,
+       0,     2,     1,     1,     3,     2,     0,     2,     1,     1,
+       1,     1,     3,     0,     2,     2,     1,     1,     1,     1,
+       3,     4,     1,     1,     0,     2,     1,     1,     3,     2,
+       0,     2,     1,     1,     1,     1,     3,     1,     4,     1,
+       1,     0,     2,     1,     1,     3,     2,     0,     2,     1,
+       1,     1,     1,     3,     0,     2,     3,     1,     0,     2,
+       1,     1,     1,     3,     4,     1,     1,     0,     2,     1,
+       1,     3,     2,     0,     2,     1,     1,     1,     1,     3,
+       0,     2,     3,     1,     0,     2,     1,     1,     1,     2,
+       1,     4,     1,     1,     0,     2,     1,     1,     3,     2,
+       0,     2,     1,     1,     1,     1,     3,     1,     5,     1,
+       0,     1,     1,     3,     1,     1,     5,     1,     3,     1,
+       1,     1,     1,     1,     3,     1,     3,     1,     1,     1,
+       1,     1,     3,     1,     0,     2,     3,     1,     1,     0,
+       2,     1,     1,     1,     1,     1,     1,     1,     3,     4,
+       4,     4,     4,     4,     4,     4,     4,     4,     4,     4,
+       4,     4,     4,     4,     4,     4,     4,     4,     4,     4,
+       4,     4,     4,     4,     4,     4,     4,     4,     4,     4,
+       4,     4,     4,     4,     4,     1,     1,     1,     3,     1,
+       1,     1,     3,     1,     1,     1,     3,     1,     1,     1,
+       3,     1,     1,     1,     3,     1,     1,     1,     3,     1,
+       1,     1,     3,     1,     1,     1,     3,     1,     1,     1,
+       3,     1,     1,     1,     3,     1,     1,     1,     3,     1,
+       1,     1,     3,     1,     1,     1,     3,     1,     1,     1,
+       3,     1,     1,     1,     3,     1,     1,     1,     3,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     0,     3,     1,     2,
+       0,     3,     1,     2,     0,     5,     0,     5,     0,     5,
+       0,     4,     0,     5,     0,     5,     0,     4,     0,     4,
+       0,     4,     0,     4,     0,     4,     0,     4,     3,     1,
+       1,     0,     4,     0,     6,     0,     4,     0,     4,     0,
+       4,     3,     1,     1,     2,     0,     2,     1,     1,     1,
+       0,     4,     0,     4,     1,     2,     0,     4,     0,     2,
+       1,     1,     4,     4,     0,     4,     0,     2,     0,     4,
+       0,     2,     0,     4,     0,     2,     0,     4,     0,     2,
+       0,     4,     0,     2,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     3,     1,     0,     2,     1,     1,
+       1,     2,     4,     3,     3,     1,     1,     2,     4,     3,
+       1,     1,     2,     4,     3,     1,     1,     2,     4,     2,
+       1,     2,     2,     1,     3,     2,     1,     2,     2,     1,
+       2,     4,     1,     0,     1,     2,     4,     1,     0,     1,
+       2,     3,     2,     1,     1,     2,     2,     1,     3,     2,
+       1,     2,     2,     1,     3,     0,     4,     0,     2,     2,
+       1,     3,     0,     4,     0,     2,     2,     1,     3,     2,
+       1,     6,     2,     1,     2,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     3,     1,     1,     2,
+       1,     0,     2,     1,     1,     3,     1,     3,     3,     1,
+       3,     0,     5,     0,     2,     3,     1,     3,     3,     1,
+       2,     3,     1,     2,     3,     1,     3,     3,     1,     2
+};
+
+
+#define yyerrok         (yyerrstatus = 0)
+#define yyclearin       (yychar = YYEMPTY)
+#define YYEMPTY         (-2)
+#define YYEOF           0
+
+#define YYACCEPT        goto yyacceptlab
+#define YYABORT         goto yyabortlab
+#define YYERROR         goto yyerrorlab
+
+
+#define YYRECOVERING()  (!!yyerrstatus)
+
+#define YYBACKUP(Token, Value)                                  \
+do                                                              \
+  if (yychar == YYEMPTY)                                        \
+    {                                                           \
+      yychar = (Token);                                         \
+      yylval = (Value);                                         \
+      YYPOPSTACK (yylen);                                       \
+      yystate = *yyssp;                                         \
+      goto yybackup;                                            \
+    }                                                           \
+  else                                                          \
+    {                                                           \
+      yyerror (&yylloc, osoption, parserData, osglData, osnlData, YY_("syntax error: cannot back up")); \
+      YYERROR;                                                  \
+    }                                                           \
+while (0)
+
+/* Error token number */
+#define YYTERROR        1
+#define YYERRCODE       256
+
+
+/* YYLLOC_DEFAULT -- Set CURRENT to span from RHS[1] to RHS[N].
+   If N is 0, then set CURRENT to the empty location which ends
+   the previous symbol: RHS[0] (always defined).  */
+
+#ifndef YYLLOC_DEFAULT
+# define YYLLOC_DEFAULT(Current, Rhs, N)                                \
+    do                                                                  \
+      if (N)                                                            \
+        {                                                               \
+          (Current).first_line   = YYRHSLOC (Rhs, 1).first_line;        \
+          (Current).first_column = YYRHSLOC (Rhs, 1).first_column;      \
+          (Current).last_line    = YYRHSLOC (Rhs, N).last_line;         \
+          (Current).last_column  = YYRHSLOC (Rhs, N).last_column;       \
+        }                                                               \
+      else                                                              \
+        {                                                               \
+          (Current).first_line   = (Current).last_line   =              \
+            YYRHSLOC (Rhs, 0).last_line;                                \
+          (Current).first_column = (Current).last_column =              \
+            YYRHSLOC (Rhs, 0).last_column;                              \
+        }                                                               \
+    while (0)
+#endif
+
+#define YYRHSLOC(Rhs, K) ((Rhs)[K])
+
+
+/* Enable debugging if requested.  */
+#if YYDEBUG
+
+# ifndef YYFPRINTF
+#  include <stdio.h> /* INFRINGES ON USER NAME SPACE */
+#  define YYFPRINTF fprintf
+# endif
+
+# define YYDPRINTF(Args)                        \
+do {                                            \
+  if (yydebug)                                  \
+    YYFPRINTF Args;                             \
+} while (0)
+
+
+/* YY_LOCATION_PRINT -- Print the location on the stream.
+   This macro was not mandated originally: define only if we know
+   we won't break user code: when these are the locations we know.  */
+
+#ifndef YY_LOCATION_PRINT
+# if defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL
+
+/* Print *YYLOCP on YYO.  Private, do not rely on its existence. */
+
+YY_ATTRIBUTE_UNUSED
+static unsigned
+yy_location_print_ (FILE *yyo, YYLTYPE const * const yylocp)
+{
+  unsigned res = 0;
+  int end_col = 0 != yylocp->last_column ? yylocp->last_column - 1 : 0;
+  if (0 <= yylocp->first_line)
+    {
+      res += YYFPRINTF (yyo, "%d", yylocp->first_line);
+      if (0 <= yylocp->first_column)
+        res += YYFPRINTF (yyo, ".%d", yylocp->first_column);
+    }
+  if (0 <= yylocp->last_line)
+    {
+      if (yylocp->first_line < yylocp->last_line)
+        {
+          res += YYFPRINTF (yyo, "-%d", yylocp->last_line);
+          if (0 <= end_col)
+            res += YYFPRINTF (yyo, ".%d", end_col);
+        }
+      else if (0 <= end_col && yylocp->first_column < end_col)
+        res += YYFPRINTF (yyo, "-%d", end_col);
+    }
+  return res;
+ }
+
+#  define YY_LOCATION_PRINT(File, Loc)          \
+  yy_location_print_ (File, &(Loc))
+
+# else
+#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
+# endif
+#endif
+
+
+# define YY_SYMBOL_PRINT(Title, Type, Value, Location)                    \
+do {                                                                      \
+  if (yydebug)                                                            \
+    {                                                                     \
+      YYFPRINTF (stderr, "%s ", Title);                                   \
+      yy_symbol_print (stderr,                                            \
+                  Type, Value, Location, osoption, parserData, osglData, osnlData); \
+      YYFPRINTF (stderr, "\n");                                           \
+    }                                                                     \
+} while (0)
+
+
+/*----------------------------------------.
+| Print this symbol's value on YYOUTPUT.  |
+`----------------------------------------*/
+
+static void
+yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, OSOption *osoption, OSoLParserData *parserData, OSgLParserData *osglData, OSnLParserData *osnlData)
+{
+  FILE *yyo = yyoutput;
+  YYUSE (yyo);
+  YYUSE (yylocationp);
+  YYUSE (osoption);
+  YYUSE (parserData);
+  YYUSE (osglData);
+  YYUSE (osnlData);
+  if (!yyvaluep)
+    return;
+# ifdef YYPRINT
+  if (yytype < YYNTOKENS)
+    YYPRINT (yyoutput, yytoknum[yytype], *yyvaluep);
+# endif
+  YYUSE (yytype);
+}
+
+
+/*--------------------------------.
+| Print this symbol on YYOUTPUT.  |
+`--------------------------------*/
+
+static void
+yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, OSOption *osoption, OSoLParserData *parserData, OSgLParserData *osglData, OSnLParserData *osnlData)
+{
+  YYFPRINTF (yyoutput, "%s %s (",
+             yytype < YYNTOKENS ? "token" : "nterm", yytname[yytype]);
+
+  YY_LOCATION_PRINT (yyoutput, *yylocationp);
+  YYFPRINTF (yyoutput, ": ");
+  yy_symbol_value_print (yyoutput, yytype, yyvaluep, yylocationp, osoption, parserData, osglData, osnlData);
+  YYFPRINTF (yyoutput, ")");
+}
+
+/*------------------------------------------------------------------.
+| yy_stack_print -- Print the state stack from its BOTTOM up to its |
+| TOP (included).                                                   |
+`------------------------------------------------------------------*/
+
+static void
+yy_stack_print (yytype_int16 *yybottom, yytype_int16 *yytop)
+{
+  YYFPRINTF (stderr, "Stack now");
+  for (; yybottom <= yytop; yybottom++)
+    {
+      int yybot = *yybottom;
+      YYFPRINTF (stderr, " %d", yybot);
+    }
+  YYFPRINTF (stderr, "\n");
+}
+
+# define YY_STACK_PRINT(Bottom, Top)                            \
+do {                                                            \
+  if (yydebug)                                                  \
+    yy_stack_print ((Bottom), (Top));                           \
+} while (0)
+
+
+/*------------------------------------------------.
+| Report that the YYRULE is going to be reduced.  |
+`------------------------------------------------*/
+
+static void
+yy_reduce_print (yytype_int16 *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp, int yyrule, OSOption *osoption, OSoLParserData *parserData, OSgLParserData *osglData, OSnLParserData *osnlData)
+{
+  unsigned long int yylno = yyrline[yyrule];
+  int yynrhs = yyr2[yyrule];
+  int yyi;
+  YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
+             yyrule - 1, yylno);
+  /* The symbols being reduced.  */
+  for (yyi = 0; yyi < yynrhs; yyi++)
+    {
+      YYFPRINTF (stderr, "   $%d = ", yyi + 1);
+      yy_symbol_print (stderr,
+                       yystos[yyssp[yyi + 1 - yynrhs]],
+                       &(yyvsp[(yyi + 1) - (yynrhs)])
+                       , &(yylsp[(yyi + 1) - (yynrhs)])                       , osoption, parserData, osglData, osnlData);
+      YYFPRINTF (stderr, "\n");
+    }
+}
+
+# define YY_REDUCE_PRINT(Rule)          \
+do {                                    \
+  if (yydebug)                          \
+    yy_reduce_print (yyssp, yyvsp, yylsp, Rule, osoption, parserData, osglData, osnlData); \
+} while (0)
+
+/* Nonzero means print parse trace.  It is left uninitialized so that
+   multiple parsers can coexist.  */
+int yydebug;
+#else /* !YYDEBUG */
+# define YYDPRINTF(Args)
+# define YY_SYMBOL_PRINT(Title, Type, Value, Location)
+# define YY_STACK_PRINT(Bottom, Top)
+# define YY_REDUCE_PRINT(Rule)
+#endif /* !YYDEBUG */
+
+
+/* YYINITDEPTH -- initial size of the parser's stacks.  */
+#ifndef YYINITDEPTH
+# define YYINITDEPTH 200
+#endif
+
+/* YYMAXDEPTH -- maximum size the stacks can grow to (effective only
+   if the built-in stack extension method is used).
+
+   Do not make this value too large; the results are undefined if
+   YYSTACK_ALLOC_MAXIMUM < YYSTACK_BYTES (YYMAXDEPTH)
+   evaluated with infinite-precision integer arithmetic.  */
+
+#ifndef YYMAXDEPTH
+# define YYMAXDEPTH 10000
+#endif
+
+
+#if YYERROR_VERBOSE
+
+# ifndef yystrlen
+#  if defined __GLIBC__ && defined _STRING_H
+#   define yystrlen strlen
+#  else
+/* Return the length of YYSTR.  */
+static YYSIZE_T
+yystrlen (const char *yystr)
+{
+  YYSIZE_T yylen;
+  for (yylen = 0; yystr[yylen]; yylen++)
+    continue;
+  return yylen;
+}
+#  endif
+# endif
+
+# ifndef yystpcpy
+#  if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
+#   define yystpcpy stpcpy
+#  else
+/* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
+   YYDEST.  */
+static char *
+yystpcpy (char *yydest, const char *yysrc)
+{
+  char *yyd = yydest;
+  const char *yys = yysrc;
+
+  while ((*yyd++ = *yys++) != '\0')
+    continue;
+
+  return yyd - 1;
+}
+#  endif
+# endif
+
+# ifndef yytnamerr
+/* Copy to YYRES the contents of YYSTR after stripping away unnecessary
+   quotes and backslashes, so that it's suitable for yyerror.  The
+   heuristic is that double-quoting is unnecessary unless the string
+   contains an apostrophe, a comma, or backslash (other than
+   backslash-backslash).  YYSTR is taken from yytname.  If YYRES is
+   null, do not copy; instead, return the length of what the result
+   would have been.  */
+static YYSIZE_T
+yytnamerr (char *yyres, const char *yystr)
+{
+  if (*yystr == '"')
+    {
+      YYSIZE_T yyn = 0;
+      char const *yyp = yystr;
+
+      for (;;)
+        switch (*++yyp)
+          {
+          case '\'':
+          case ',':
+            goto do_not_strip_quotes;
+
+          case '\\':
+            if (*++yyp != '\\')
+              goto do_not_strip_quotes;
+            /* Fall through.  */
+          default:
+            if (yyres)
+              yyres[yyn] = *yyp;
+            yyn++;
+            break;
+
+          case '"':
+            if (yyres)
+              yyres[yyn] = '\0';
+            return yyn;
+          }
+    do_not_strip_quotes: ;
+    }
+
+  if (! yyres)
+    return yystrlen (yystr);
+
+  return yystpcpy (yyres, yystr) - yyres;
+}
+# endif
+
+/* Copy into *YYMSG, which is of size *YYMSG_ALLOC, an error message
+   about the unexpected token YYTOKEN for the state stack whose top is
+   YYSSP.
+
+   Return 0 if *YYMSG was successfully written.  Return 1 if *YYMSG is
+   not large enough to hold the message.  In that case, also set
+   *YYMSG_ALLOC to the required number of bytes.  Return 2 if the
+   required number of bytes is too large to store.  */
+static int
+yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
+                yytype_int16 *yyssp, int yytoken)
+{
+  YYSIZE_T yysize0 = yytnamerr (YY_NULLPTR, yytname[yytoken]);
+  YYSIZE_T yysize = yysize0;
+  enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
+  /* Internationalized format string. */
+  const char *yyformat = YY_NULLPTR;
+  /* Arguments of yyformat. */
+  char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
+  /* Number of reported tokens (one for the "unexpected", one per
+     "expected"). */
+  int yycount = 0;
+
+  /* There are many possibilities here to consider:
+     - If this state is a consistent state with a default action, then
+       the only way this function was invoked is if the default action
+       is an error action.  In that case, don't check for expected
+       tokens because there are none.
+     - The only way there can be no lookahead present (in yychar) is if
+       this state is a consistent state with a default action.  Thus,
+       detecting the absence of a lookahead is sufficient to determine
+       that there is no unexpected or expected token to report.  In that
+       case, just report a simple "syntax error".
+     - Don't assume there isn't a lookahead just because this state is a
+       consistent state with a default action.  There might have been a
+       previous inconsistent state, consistent state with a non-default
+       action, or user semantic action that manipulated yychar.
+     - Of course, the expected token list depends on states to have
+       correct lookahead information, and it depends on the parser not
+       to perform extra reductions after fetching a lookahead from the
+       scanner and before detecting a syntax error.  Thus, state merging
+       (from LALR or IELR) and default reductions corrupt the expected
+       token list.  However, the list is correct for canonical LR with
+       one exception: it will still contain any token that will not be
+       accepted due to an error action in a later state.
+  */
+  if (yytoken != YYEMPTY)
+    {
+      int yyn = yypact[*yyssp];
+      yyarg[yycount++] = yytname[yytoken];
+      if (!yypact_value_is_default (yyn))
+        {
+          /* Start YYX at -YYN if negative to avoid negative indexes in
+             YYCHECK.  In other words, skip the first -YYN actions for
+             this state because they are default actions.  */
+          int yyxbegin = yyn < 0 ? -yyn : 0;
+          /* Stay within bounds of both yycheck and yytname.  */
+          int yychecklim = YYLAST - yyn + 1;
+          int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
+          int yyx;
+
+          for (yyx = yyxbegin; yyx < yyxend; ++yyx)
+            if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR
+                && !yytable_value_is_error (yytable[yyx + yyn]))
+              {
+                if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
+                  {
+                    yycount = 1;
+                    yysize = yysize0;
+                    break;
+                  }
+                yyarg[yycount++] = yytname[yyx];
+                {
+                  YYSIZE_T yysize1 = yysize + yytnamerr (YY_NULLPTR, yytname[yyx]);
+                  if (! (yysize <= yysize1
+                         && yysize1 <= YYSTACK_ALLOC_MAXIMUM))
+                    return 2;
+                  yysize = yysize1;
+                }
+              }
+        }
+    }
+
+  switch (yycount)
+    {
+# define YYCASE_(N, S)                      \
+      case N:                               \
+        yyformat = S;                       \
+      break
+      YYCASE_(0, YY_("syntax error"));
+      YYCASE_(1, YY_("syntax error, unexpected %s"));
+      YYCASE_(2, YY_("syntax error, unexpected %s, expecting %s"));
+      YYCASE_(3, YY_("syntax error, unexpected %s, expecting %s or %s"));
+      YYCASE_(4, YY_("syntax error, unexpected %s, expecting %s or %s or %s"));
+      YYCASE_(5, YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s"));
+# undef YYCASE_
+    }
+
+  {
+    YYSIZE_T yysize1 = yysize + yystrlen (yyformat);
+    if (! (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM))
+      return 2;
+    yysize = yysize1;
+  }
+
+  if (*yymsg_alloc < yysize)
+    {
+      *yymsg_alloc = 2 * yysize;
+      if (! (yysize <= *yymsg_alloc
+             && *yymsg_alloc <= YYSTACK_ALLOC_MAXIMUM))
+        *yymsg_alloc = YYSTACK_ALLOC_MAXIMUM;
+      return 1;
+    }
+
+  /* Avoid sprintf, as that infringes on the user's name space.
+     Don't have undefined behavior even if the translation
+     produced a string with the wrong number of "%s"s.  */
+  {
+    char *yyp = *yymsg;
+    int yyi = 0;
+    while ((*yyp = *yyformat) != '\0')
+      if (*yyp == '%' && yyformat[1] == 's' && yyi < yycount)
+        {
+          yyp += yytnamerr (yyp, yyarg[yyi++]);
+          yyformat += 2;
+        }
+      else
+        {
+          yyp++;
+          yyformat++;
+        }
+  }
+  return 0;
+}
+#endif /* YYERROR_VERBOSE */
+
+/*-----------------------------------------------.
+| Release the memory associated to this symbol.  |
+`-----------------------------------------------*/
+
+static void
+yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, OSOption *osoption, OSoLParserData *parserData, OSgLParserData *osglData, OSnLParserData *osnlData)
+{
+  YYUSE (yyvaluep);
+  YYUSE (yylocationp);
+  YYUSE (osoption);
+  YYUSE (parserData);
+  YYUSE (osglData);
+  YYUSE (osnlData);
+  if (!yymsg)
+    yymsg = "Deleting";
+  YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
+
+  YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+  YYUSE (yytype);
+  YY_IGNORE_MAYBE_UNINITIALIZED_END
+}
+
+
+
+
+/*----------.
+| yyparse.  |
+`----------*/
+
+int
+yyparse (OSOption *osoption, OSoLParserData *parserData, OSgLParserData *osglData, OSnLParserData *osnlData)
+{
+/* The lookahead symbol.  */
+int yychar;
+
+
+/* The semantic value of the lookahead symbol.  */
+/* Default value used for initialization, for pacifying older GCCs
+   or non-GCC compilers.  */
+YY_INITIAL_VALUE (static YYSTYPE yyval_default;)
+YYSTYPE yylval YY_INITIAL_VALUE (= yyval_default);
+
+/* Location data for the lookahead symbol.  */
+static YYLTYPE yyloc_default
+# if defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL
+  = { 1, 1, 1, 1 }
+# endif
+;
+YYLTYPE yylloc = yyloc_default;
+
+    /* Number of syntax errors so far.  */
+    int yynerrs;
+
+    int yystate;
+    /* Number of tokens to shift before error messages enabled.  */
+    int yyerrstatus;
+
+    /* The stacks and their tools:
+       'yyss': related to states.
+       'yyvs': related to semantic values.
+       'yyls': related to locations.
+
+       Refer to the stacks through separate pointers, to allow yyoverflow
+       to reallocate them elsewhere.  */
+
+    /* The state stack.  */
+    yytype_int16 yyssa[YYINITDEPTH];
+    yytype_int16 *yyss;
+    yytype_int16 *yyssp;
+
+    /* The semantic value stack.  */
+    YYSTYPE yyvsa[YYINITDEPTH];
+    YYSTYPE *yyvs;
+    YYSTYPE *yyvsp;
+
+    /* The location stack.  */
+    YYLTYPE yylsa[YYINITDEPTH];
+    YYLTYPE *yyls;
+    YYLTYPE *yylsp;
+
+    /* The locations where the error started and ended.  */
+    YYLTYPE yyerror_range[3];
+
+    YYSIZE_T yystacksize;
+
+  int yyn;
+  int yyresult;
+  /* Lookahead token as an internal (translated) token number.  */
+  int yytoken = 0;
+  /* The variables used to return semantic value and location from the
+     action routines.  */
+  YYSTYPE yyval;
+  YYLTYPE yyloc;
+
+#if YYERROR_VERBOSE
+  /* Buffer for error messages, and its allocated size.  */
+  char yymsgbuf[128];
+  char *yymsg = yymsgbuf;
+  YYSIZE_T yymsg_alloc = sizeof yymsgbuf;
+#endif
+
+#define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N), yylsp -= (N))
+
+  /* The number of symbols on the RHS of the reduced rule.
+     Keep to zero when no symbol should be popped.  */
+  int yylen = 0;
+
+  yyssp = yyss = yyssa;
+  yyvsp = yyvs = yyvsa;
+  yylsp = yyls = yylsa;
+  yystacksize = YYINITDEPTH;
+
+  YYDPRINTF ((stderr, "Starting parse\n"));
+
+  yystate = 0;
+  yyerrstatus = 0;
+  yynerrs = 0;
+  yychar = YYEMPTY; /* Cause a token to be read.  */
+  yylsp[0] = yylloc;
+  goto yysetstate;
+
+/*------------------------------------------------------------.
+| yynewstate -- Push a new state, which is found in yystate.  |
+`------------------------------------------------------------*/
+ yynewstate:
+  /* In all cases, when you get here, the value and location stacks
+     have just been pushed.  So pushing a state here evens the stacks.  */
+  yyssp++;
+
+ yysetstate:
+  *yyssp = yystate;
+
+  if (yyss + yystacksize - 1 <= yyssp)
+    {
+      /* Get the current used size of the three stacks, in elements.  */
+      YYSIZE_T yysize = yyssp - yyss + 1;
+
+#ifdef yyoverflow
+      {
+        /* Give user a chance to reallocate the stack.  Use copies of
+           these so that the &'s don't force the real ones into
+           memory.  */
+        YYSTYPE *yyvs1 = yyvs;
+        yytype_int16 *yyss1 = yyss;
+        YYLTYPE *yyls1 = yyls;
+
+        /* Each stack pointer address is followed by the size of the
+           data in use in that stack, in bytes.  This used to be a
+           conditional around just the two extra args, but that might
+           be undefined if yyoverflow is a macro.  */
+        yyoverflow (YY_("memory exhausted"),
+                    &yyss1, yysize * sizeof (*yyssp),
+                    &yyvs1, yysize * sizeof (*yyvsp),
+                    &yyls1, yysize * sizeof (*yylsp),
+                    &yystacksize);
+
+        yyls = yyls1;
+        yyss = yyss1;
+        yyvs = yyvs1;
+      }
+#else /* no yyoverflow */
+# ifndef YYSTACK_RELOCATE
+      goto yyexhaustedlab;
+# else
+      /* Extend the stack our own way.  */
+      if (YYMAXDEPTH <= yystacksize)
+        goto yyexhaustedlab;
+      yystacksize *= 2;
+      if (YYMAXDEPTH < yystacksize)
+        yystacksize = YYMAXDEPTH;
+
+      {
+        yytype_int16 *yyss1 = yyss;
+        union yyalloc *yyptr =
+          (union yyalloc *) YYSTACK_ALLOC (YYSTACK_BYTES (yystacksize));
+        if (! yyptr)
+          goto yyexhaustedlab;
+        YYSTACK_RELOCATE (yyss_alloc, yyss);
+        YYSTACK_RELOCATE (yyvs_alloc, yyvs);
+        YYSTACK_RELOCATE (yyls_alloc, yyls);
+#  undef YYSTACK_RELOCATE
+        if (yyss1 != yyssa)
+          YYSTACK_FREE (yyss1);
+      }
+# endif
+#endif /* no yyoverflow */
+
+      yyssp = yyss + yysize - 1;
+      yyvsp = yyvs + yysize - 1;
+      yylsp = yyls + yysize - 1;
+
+      YYDPRINTF ((stderr, "Stack size increased to %lu\n",
+                  (unsigned long int) yystacksize));
+
+      if (yyss + yystacksize - 1 <= yyssp)
+        YYABORT;
+    }
+
+  YYDPRINTF ((stderr, "Entering state %d\n", yystate));
+
+  if (yystate == YYFINAL)
+    YYACCEPT;
+
+  goto yybackup;
+
+/*-----------.
+| yybackup.  |
+`-----------*/
+yybackup:
+
+  /* Do appropriate processing given the current state.  Read a
+     lookahead token if we need one and don't already have one.  */
+
+  /* First try to decide what to do without reference to lookahead token.  */
+  yyn = yypact[yystate];
+  if (yypact_value_is_default (yyn))
+    goto yydefault;
+
+  /* Not known => get a lookahead token if don't already have one.  */
+
+  /* YYCHAR is either YYEMPTY or YYEOF or a valid lookahead symbol.  */
+  if (yychar == YYEMPTY)
+    {
+      YYDPRINTF ((stderr, "Reading a token: "));
+      yychar = yylex (&yylval, &yylloc, scanner);
+    }
+
+  if (yychar <= YYEOF)
+    {
+      yychar = yytoken = YYEOF;
+      YYDPRINTF ((stderr, "Now at end of input.\n"));
+    }
+  else
+    {
+      yytoken = YYTRANSLATE (yychar);
+      YY_SYMBOL_PRINT ("Next token is", yytoken, &yylval, &yylloc);
+    }
+
+  /* If the proper action on seeing token YYTOKEN is to reduce or to
+     detect an error, take that action.  */
+  yyn += yytoken;
+  if (yyn < 0 || YYLAST < yyn || yycheck[yyn] != yytoken)
+    goto yydefault;
+  yyn = yytable[yyn];
+  if (yyn <= 0)
+    {
+      if (yytable_value_is_error (yyn))
+        goto yyerrlab;
+      yyn = -yyn;
+      goto yyreduce;
+    }
+
+  /* Count tokens shifted since error; after three, turn off error
+     status.  */
+  if (yyerrstatus)
+    yyerrstatus--;
+
+  /* Shift the lookahead token.  */
+  YY_SYMBOL_PRINT ("Shifting", yytoken, &yylval, &yylloc);
+
+  /* Discard the shifted token.  */
+  yychar = YYEMPTY;
+
+  yystate = yyn;
+  YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+  *++yyvsp = yylval;
+  YY_IGNORE_MAYBE_UNINITIALIZED_END
+  *++yylsp = yylloc;
+  goto yynewstate;
+
+
+/*-----------------------------------------------------------.
+| yydefault -- do the default action for the current state.  |
+`-----------------------------------------------------------*/
+yydefault:
+  yyn = yydefact[yystate];
+  if (yyn == 0)
+    goto yyerrlab;
+  goto yyreduce;
+
+
+/*-----------------------------.
+| yyreduce -- Do a reduction.  |
+`-----------------------------*/
+yyreduce:
+  /* yyn is the number of a rule to reduce with.  */
+  yylen = yyr2[yyn];
+
+  /* If YYLEN is nonzero, implement the default value of the action:
+     '$$ = $1'.
+
+     Otherwise, the following line sets YYVAL to garbage.
+     This behavior is undocumented and Bison
+     users should not rely upon it.  Assigning to YYVAL
+     unconditionally makes the parser a bit smaller, and it avoids a
+     GCC warning that YYVAL may be used uninitialized.  */
+  yyval = yyvsp[1-yylen];
+
+  /* Default location.  */
+  YYLLOC_DEFAULT (yyloc, (yylsp - yylen), yylen);
+  YY_REDUCE_PRINT (yyn);
+  switch (yyn)
+    {
+        case 4:
+
+    {
+#ifdef DEBUG
+    yydebug = 1;
+#endif
+}
+
+    break;
+
+  case 5:
+
+    {
+#ifdef DEBUG
+    yydebug = 1;
+#endif
+    parserData->parser_errors = "";
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;
+}
+
+    break;
+
+  case 12:
+
+    {
+        if (parserData->parser_errors != "")
+        {
+            parserData->parser_errors += ("\n\nOSoL input is either invalid or not well-formed.\n"); 
+            osolerror( NULL, osoption, parserData, osglData, osnlData, parserData->parser_errors);
+        }
+    }
+
+    break;
+
+  case 14:
+
+    { parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "unexpected end of file, expecting </osol>");}
+
+    break;
+
+  case 17:
+
+    {
+    if (!osoption->setHeader(osglData->fileName, osglData->source,
+            osglData->description, osglData->fileCreator, osglData->licence) )     
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setHeader failed");
+}
+
+    break;
+
+  case 20:
+
+    {
+    parserData->serviceURIPresent          = false;    
+    parserData->serviceNamePresent         = false;
+    parserData->instanceNamePresent        = false;
+    parserData->instanceLocationPresent    = false;
+    parserData->jobIDPresent               = false;
+    parserData->solverToInvokePresent      = false;
+    parserData->licensePresent             = false;
+    parserData->usernamePresent            = false;
+    parserData->passwordPresent            = false;
+    parserData->contactPresent             = false;
+    parserData->otherGeneralOptionsPresent = false;
+    osoption->general = new GeneralOption();
+}
+
+    break;
+
+  case 41:
+
+    {
+    if (parserData->serviceURIPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <serviceURI>");
+    else
+        parserData->serviceURIPresent = true;
+    
+}
+
+    break;
+
+  case 47:
+
+    {
+        if (osoption->setServiceURI((yyvsp[0].sval)) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setServiceURI failed");
+        free((yyvsp[0].sval)); 
+        parserData->errorText = NULL;
+    }
+
+    break;
+
+  case 49:
+
+    {
+        if (parserData->serviceNamePresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <serviceName>");
+        parserData->serviceNamePresent = true;
+    }
+
+    break;
+
+  case 55:
+
+    {
+        if (osoption->setServiceName((yyvsp[0].sval)) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setServiceName failed");
+        free((yyvsp[0].sval)); 
+        parserData->errorText = NULL;
+    }
+
+    break;
+
+  case 57:
+
+    {    if (parserData->instanceNamePresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <instanceName>");
+        parserData->instanceNamePresent = true;
+    }
+
+    break;
+
+  case 63:
+
+    {
+        if (osoption->setInstanceName((yyvsp[0].sval)) == false) 
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setInstanceName failed");
+        free((yyvsp[0].sval)); 
+        parserData->errorText = NULL;
+    }
+
+    break;
+
+  case 64:
+
+    {
+    if (osoption->setInstanceLocation(parserData->tempStr,parserData->typeAttribute) == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setInstanceLocation failed");
+    parserData->errorText = NULL;
+}
+
+    break;
+
+  case 65:
+
+    {
+        if (parserData->instanceLocationPresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <instanceLocation>");
+        parserData->instanceLocationPresent = true;
+        parserData->typeAttribute = "local";
+    }
+
+    break;
+
+  case 67:
+
+    {   
+        if (verifyLocationType(parserData->typeAttribute) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "instance location type not recognized");
+        parserData->errorText = NULL;
+    }
+
+    break;
+
+  case 68:
+
+    { 
+    parserData->typeAttribute = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 74:
+
+    {    
+        parserData->tempStr = (yyvsp[0].sval);
+        free((yyvsp[0].sval)); 
+    }
+
+    break;
+
+  case 76:
+
+    {    if (parserData->jobIDPresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <jobID>");
+        parserData->jobIDPresent = true;
+    }
+
+    break;
+
+  case 82:
+
+    {
+        if (osoption->setJobID((yyvsp[0].sval)) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setJobID failed");
+        free((yyvsp[0].sval)); 
+        parserData->errorText = NULL;
+    }
+
+    break;
+
+  case 84:
+
+    {
+        if (parserData->solverToInvokePresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <solverToInvoke>");
+        parserData->solverToInvokePresent = true;
+    }
+
+    break;
+
+  case 90:
+
+    {
+        if (osoption->setSolverToInvoke((yyvsp[0].sval)) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setSolverToInvoke failed");
+        free((yyvsp[0].sval)); 
+        parserData->errorText = NULL;
+    }
+
+    break;
+
+  case 92:
+
+    {
+    if (parserData->licensePresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <license>");
+    parserData->licensePresent = true;    
+}
+
+    break;
+
+  case 98:
+
+    {
+        if (osoption->setLicense((yyvsp[0].sval)) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setLicense failed");
+        free((yyvsp[0].sval));
+        parserData->errorText = NULL;
+    }
+
+    break;
+
+  case 100:
+
+    {    if (parserData->usernamePresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <username>");
+    parserData->usernamePresent = true;    
+}
+
+    break;
+
+  case 106:
+
+    {
+        if (osoption->setUserName((yyvsp[0].sval)) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setUsername failed");
+        free((yyvsp[0].sval)); 
+        parserData->errorText = NULL;
+    }
+
+    break;
+
+  case 108:
+
+    {    if (parserData->passwordPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <password>");
+    parserData->passwordPresent = true;    
+}
+
+    break;
+
+  case 114:
+
+    {
+        if (osoption->setPassword((yyvsp[0].sval)) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setPassword failed");
+        free((yyvsp[0].sval)); 
+        parserData->errorText = NULL;
+    }
+
+    break;
+
+  case 115:
+
+    {
+    if (osoption->setContact(parserData->tempStr,parserData->typeAttribute) == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setContact failed");
+    parserData->errorText = NULL;
+}
+
+    break;
+
+  case 116:
+
+    {
+    if (parserData->contactPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <contact>");
+    parserData->contactPresent = true;
+    parserData->typeAttribute = "osp";
+    parserData->tempStr = "";
+}
+
+    break;
+
+  case 118:
+
+    {   
+        if (verifyTransportType(parserData->typeAttribute) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "transport type not recognized");
+    }
+
+    break;
+
+  case 119:
+
+    { 
+        parserData->typeAttribute = (yyvsp[-1].sval); 
+        free((yyvsp[-1].sval));
+    }
+
+    break;
+
+  case 125:
+
+    {
+        parserData->tempStr = (yyvsp[0].sval);
+        free((yyvsp[0].sval));
+    }
+
+    break;
+
+  case 126:
+
+    {
+        parserData->suppressFurtherErrorMessages = false;
+        parserData->ignoreDataAfterErrors = false;        
+    }
+
+    break;
+
+  case 127:
+
+    {
+        if (parserData->otherGeneralOptionsPresent)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <general> <otherOptions>");
+            parserData->ignoreDataAfterErrors = true;            
+        }
+        parserData->otherGeneralOptionsPresent = true;
+    }
+
+    break;
+
+  case 128:
+
+    {
+        if (parserData->tempInt < 0) parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "number of other general options cannot be negative");
+        parserData->numberOf = parserData->tempInt;
+        parserData->kounter = 0;
+    }
+
+    break;
+
+  case 129:
+
+    {
+        if (parserData->numberOf > 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected at least one <other> element");
+    }
+
+    break;
+
+  case 130:
+
+    {
+        if (parserData->kounter < parserData->numberOf - 1)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer <other> elements than specified");
+    }
+
+    break;
+
+  case 137:
+
+    {    
+        parserData->kounter++;
+        if (!parserData->ignoreDataAfterErrors)
+            if (osoption->setAnOtherGeneralOption(osglData->name, osglData->value, 
+                                                  osglData->description) == false)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                    "setOtherGeneralOption failed");
+    }
+
+    break;
+
+  case 138:
+
+    {
+    if (parserData->kounter >= parserData->numberOf)
+    {
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <other> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    }
+    osglData->namePresent = false;
+    osglData->valuePresent = false;
+    osglData->descriptionPresent = false;
+    osglData->name = "";
+    osglData->value = "";
+    osglData->description = "";
+}
+
+    break;
+
+  case 139:
+
+    {
+    if (!osglData->namePresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<other> must have name attribute");
+}
+
+    break;
+
+  case 142:
+
+    {    if (osglData->name.length() == 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "otherOption name cannot be empty");
+    }
+
+    break;
+
+  case 149:
+
+    {
+    parserData->minDiskSpacePresent = false;    
+    parserData->minMemoryPresent = false;
+    parserData->minCPUSpeedPresent = false;
+    parserData->minCPUNumberPresent = false;
+    parserData->otherSystemOptionsPresent = false;
+    osoption->system = new SystemOption();
+}
+
+    break;
+
+  case 164:
+
+    {    if (parserData->minDiskSpacePresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one minDiskSpace element allowed");
+        parserData->minDiskSpacePresent = true;
+        osglData->unitPresent = false;    
+        osglData->descriptionPresent = false;    
+        osglData->unit = "byte";    
+        osglData->description = "";
+    }
+
+    break;
+
+  case 171:
+
+    {
+    if (osoption->setMinDiskSpace(osglData->unit, osglData->description, parserData->tempVal) == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setMinDiskSpace failed");
+    parserData->errorText = NULL;
+}
+
+    break;
+
+  case 173:
+
+    {    if (parserData->minMemoryPresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one minMemory element allowed");
+        parserData->minMemoryPresent = true;
+        osglData->unitPresent = false;    
+        osglData->descriptionPresent = false;    
+        osglData->unit = "byte";    
+        osglData->description = "";
+    }
+
+    break;
+
+  case 180:
+
+    {
+    if (osoption->setMinMemorySize(osglData->unit, osglData->description, parserData->tempVal) == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setMinMemorySize failed");
+    parserData->errorText = NULL;
+}
+
+    break;
+
+  case 182:
+
+    {    if (parserData->minCPUSpeedPresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one minCPUSpeed element allowed");
+        parserData->minCPUSpeedPresent = true;
+        osglData->unitPresent = false;    
+        osglData->descriptionPresent = false;    
+        osglData->unit = "hertz";    
+        osglData->description = "";
+    }
+
+    break;
+
+  case 189:
+
+    {    
+    if (osoption->setMinCPUSpeed(osglData->unit, osglData->description, parserData->tempVal) == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setMinCPUSpeed failed");
+    parserData->errorText = NULL;
+}
+
+    break;
+
+  case 191:
+
+    {    
+    if (parserData->minCPUNumberPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+            "only one minCPUNumber element allowed");
+    parserData->minCPUNumberPresent = true;
+    osglData->descriptionPresent = false;    
+    osglData->description = "";    
+}
+
+    break;
+
+  case 195:
+
+    {
+    if (osoption->setMinCPUNumber((yyvsp[0].ival), osglData->description) == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+            "setMinCPUNumber failed");
+    parserData->errorText = NULL; 
+}
+
+    break;
+
+  case 196:
+
+    {
+        parserData->suppressFurtherErrorMessages = false;
+        parserData->ignoreDataAfterErrors = false;        
+    }
+
+    break;
+
+  case 197:
+
+    {
+    if (parserData->otherSystemOptionsPresent)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <system> <otherOptions>");
+            parserData->ignoreDataAfterErrors = true;
+        }
+    parserData->otherSystemOptionsPresent = true;
+}
+
+    break;
+
+  case 198:
+
+    {
+    if (parserData->tempInt < 0) parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "number of other system options cannot be negative");
+    parserData->numberOf = parserData->tempInt;
+    parserData->kounter = 0;
+}
+
+    break;
+
+  case 199:
+
+    {    if (parserData->numberOf > 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected at least one <other> element");
+    }
+
+    break;
+
+  case 200:
+
+    {    if (parserData->kounter < parserData->numberOf - 1)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer <other> elements than specified");
+    }
+
+    break;
+
+  case 207:
+
+    {
+        parserData->kounter++;
+        if (!parserData->ignoreDataAfterErrors)
+            if (osoption->setAnOtherSystemOption(osglData->name, osglData->value, osglData->description) == false)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setOtherSystemOption failed");
+    }
+
+    break;
+
+  case 210:
+
+    {
+    parserData->serviceTypePresent = false;    
+    parserData->otherServiceOptionsPresent = false;
+    osoption->service = new ServiceOption();
+}
+
+    break;
+
+  case 222:
+
+    {    if (parserData->serviceTypePresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one currentState element allowed");
+        parserData->serviceTypePresent = true;
+    }
+
+    break;
+
+  case 228:
+
+    {
+        parserData->tempStr = (yyvsp[0].sval); 
+        free((yyvsp[0].sval));
+        if (osoption->setServiceType(parserData->tempStr) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setServiceType failed; current system state not recognized");
+        parserData->errorText = NULL;
+    }
+
+    break;
+
+  case 229:
+
+    {
+        parserData->suppressFurtherErrorMessages = false;
+        parserData->ignoreDataAfterErrors = false;        
+    }
+
+    break;
+
+  case 230:
+
+    {
+    if (parserData->otherServiceOptionsPresent)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <service> <otherOptions>");
+            parserData->ignoreDataAfterErrors = true;            
+        }
+    parserData->otherServiceOptionsPresent = true;
+}
+
+    break;
+
+  case 231:
+
+    {
+    if (parserData->tempInt < 0) parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "number of other service options cannot be negative");
+    parserData->numberOf = parserData->tempInt;
+    parserData->kounter = 0;
+}
+
+    break;
+
+  case 232:
+
+    {    if (parserData->numberOf > 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected at least one <other> element");
+    }
+
+    break;
+
+  case 233:
+
+    {    if (parserData->kounter < parserData->numberOf - 1)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer <other> elements than specified");
+    }
+
+    break;
+
+  case 240:
+
+    {    
+        parserData->kounter++;
+        if (!parserData->ignoreDataAfterErrors)
+            if (osoption->setAnOtherServiceOption(osglData->name, osglData->value, osglData->description) == false)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setOtherServiceOption failed");
+    }
+
+    break;
+
+  case 243:
+
+    {
+    parserData->maxTimePresent = false;    
+    parserData->requestedStartTimePresent = false;    
+    parserData->dependenciesPresent = false;    
+    parserData->requiredDirectoriesPresent = false;    
+    parserData->requiredFilesPresent = false;    
+    parserData->directoriesToMakePresent = false;    
+    parserData->filesToMakePresent = false;    
+    parserData->inputDirectoriesToMovePresent = false;    
+    parserData->inputFilesToMovePresent = false;    
+    parserData->outputDirectoriesToMovePresent = false;    
+    parserData->outputFilesToMovePresent = false;    
+    parserData->filesToDeletePresent = false;    
+    parserData->directoriesToDeletePresent = false;    
+    parserData->processesToKillPresent = false;    
+    parserData->otherJobOptionsPresent = false;     
+    osoption->job = new JobOption();
+ }
+
+    break;
+
+  case 267:
+
+    {    
+    if (osoption->setMaxTime(parserData->maxTimeValue, osglData->unit) == false)       
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "max time request could not be honored");
+}
+
+    break;
+
+  case 268:
+
+    {    
+    if (parserData->maxTimePresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <maxTime> element allowed");
+    osglData->unitPresent = false;    
+    osglData->unit = "second"; 
+    parserData->maxTimePresent = true;
+    parserData->maxTimeValue = OSDBL_MAX;
+}
+
+    break;
+
+  case 277:
+
+    {
+    parserData->maxTimeValue = parserData->tempVal;
+}
+
+    break;
+
+  case 279:
+
+    {    if (parserData->requestedStartTimePresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one requestedStartTime element allowed");
+        parserData->requestedStartTimePresent = true;
+    }
+
+    break;
+
+  case 285:
+
+    {
+        if (osoption->setRequestedStartTime((yyvsp[0].sval)) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setRequestedStartTime failed");    
+        free((yyvsp[0].sval)); 
+        parserData->errorText = NULL;
+        }
+
+    break;
+
+  case 286:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setJobDependencies(parserData->numberOf, parserData->jobDependencies) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <job> <dependencies> failed");
+    delete[] parserData->jobDependencies;
+    parserData->jobDependencies = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 287:
+
+    {
+    if (parserData->dependenciesPresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <dependencies> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->dependenciesPresent = true;
+}
+
+    break;
+
+  case 293:
+
+    {
+    if (parserData->kounter < parserData->numberOf)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few job IDs in <dependencies> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 296:
+
+    {
+    if (parserData->kounter >= parserData->numberOf)
+    {
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many job IDs in <dependencies> element");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    }
+    else
+    {
+        parserData->jobDependencies[parserData->kounter] = (yyvsp[-1].sval);
+        parserData->kounter++;
+    }
+    free((yyvsp[-1].sval)); 
+}
+
+    break;
+
+  case 297:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setRequiredDirectories(parserData->numberOf,parserData->paths) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <requiredDirectories> failed");
+    delete[] parserData->paths;
+    parserData->paths = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 298:
+
+    {
+    if (parserData->requiredDirectoriesPresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <requiredDirectories> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->requiredDirectoriesPresent = true;
+}
+
+    break;
+
+  case 303:
+
+    {
+    if (parserData->kounter < parserData->numberOf)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few paths in <requiredDirectories> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 304:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setRequiredFiles(parserData->numberOf, parserData->paths) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <requiredFiles> failed");
+    delete[] parserData->paths;
+    parserData->paths = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 305:
+
+    {
+    if (parserData->requiredFilesPresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <requiredFiles> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->requiredFilesPresent = true;
+}
+
+    break;
+
+  case 310:
+
+    {
+    if (parserData->kounter < parserData->numberOf)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few paths in <requiredFiles> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 311:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setDirectoriesToMake(parserData->numberOf, parserData->paths) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <directoriesToMake> failed");
+    delete[] parserData->paths;
+    parserData->paths = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 312:
+
+    {
+    if (parserData->directoriesToMakePresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <directoriesToMake> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->directoriesToMakePresent = true;
+}
+
+    break;
+
+  case 317:
+
+    {
+    if (parserData->kounter < parserData->numberOf)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few paths in <directoriesToMake> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 318:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setFilesToMake(parserData->numberOf, parserData->paths) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <filesToMake> failed");
+    delete[] parserData->paths;
+    parserData->paths = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 319:
+
+    {
+    if (parserData->filesToMakePresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <filesToMake> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->filesToMakePresent = true;
+}
+
+    break;
+
+  case 324:
+
+    {
+    if (parserData->kounter < parserData->numberOf)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few paths in <filesToMake> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 325:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setPathPairs(ENUM_PATHPAIR_input_dir, parserData->fromPaths, 
+                parserData->toPaths, parserData->makeCopy, parserData->numberOfPathPairs) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <inputDirectoriesToMove> failed");
+    delete[] parserData->fromPaths;
+    delete[] parserData->toPaths;
+    delete[] parserData->makeCopy;
+    parserData->fromPaths = NULL;
+    parserData->toPaths   = NULL;
+    parserData->makeCopy  = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;
+}
+
+    break;
+
+  case 326:
+
+    {
+    if (parserData->inputDirectoriesToMovePresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <inputDirectoriesToMove> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->inputDirectoriesToMovePresent = true;
+}
+
+    break;
+
+  case 332:
+
+    {
+    if (parserData->kounter < parserData->numberOfPathPairs)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few path pairs in <inputDirectoriesToMove> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 336:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setPathPairs(ENUM_PATHPAIR_input_file, parserData->fromPaths, 
+                parserData->toPaths, parserData->makeCopy, parserData->numberOfPathPairs) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <inputFilesToMove> failed");
+    delete[] parserData->fromPaths;
+    delete[] parserData->toPaths;
+    delete[] parserData->makeCopy;
+    parserData->fromPaths = NULL;
+    parserData->toPaths   = NULL;
+    parserData->makeCopy  = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 337:
+
+    {
+    if (parserData->inputFilesToMovePresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <inputFilesToMove> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->inputFilesToMovePresent = true;
+}
+
+    break;
+
+  case 343:
+
+    {
+    if (parserData->kounter < parserData->numberOfPathPairs)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few path pairs in <inputFilesToMove> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 347:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setPathPairs(ENUM_PATHPAIR_output_file, parserData->fromPaths, 
+                parserData->toPaths, parserData->makeCopy, parserData->numberOfPathPairs) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <inputDirectoriesToMake> failed");
+    delete[] parserData->fromPaths;
+    delete[] parserData->toPaths;
+    delete[] parserData->makeCopy;
+    parserData->fromPaths = NULL;
+    parserData->toPaths   = NULL;
+    parserData->makeCopy  = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 348:
+
+    {
+    if (parserData->outputFilesToMovePresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <outputFilesToMove> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->outputFilesToMovePresent = true;
+}
+
+    break;
+
+  case 354:
+
+    {
+    if (parserData->kounter < parserData->numberOfPathPairs)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few path pairs in <outputFilesToMake> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 358:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setPathPairs(ENUM_PATHPAIR_output_dir, parserData->fromPaths, 
+                parserData->toPaths, parserData->makeCopy, parserData->numberOfPathPairs) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <inputDirectoriesToMake> failed");
+    delete[] parserData->fromPaths;
+    delete[] parserData->toPaths;
+    delete[] parserData->makeCopy;
+    parserData->fromPaths = NULL;
+    parserData->toPaths   = NULL;
+    parserData->makeCopy  = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 359:
+
+    {
+    if (parserData->outputDirectoriesToMovePresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <outputDirectoriesToMove> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->outputDirectoriesToMovePresent = true;
+}
+
+    break;
+
+  case 365:
+
+    {
+    if (parserData->kounter < parserData->numberOfPathPairs)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few path pairs in <outputDirectoriesToMake> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 369:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setFilesToDelete(parserData->numberOf, parserData->paths) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <filesToDelete> failed");
+    delete[] parserData->paths;
+    parserData->paths = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 370:
+
+    {
+    if (parserData->filesToDeletePresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <filesToDelete> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->filesToDeletePresent = true;
+}
+
+    break;
+
+  case 376:
+
+    {
+    if (parserData->kounter < parserData->numberOf)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few paths in <filesToDelete> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 377:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setDirectoriesToDelete(parserData->numberOf, parserData->paths) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <directoriesToDelete> failed");
+    delete[] parserData->paths;
+    parserData->paths = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 378:
+
+    {
+    if (parserData->directoriesToDeletePresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <directoriesToDelete> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->directoriesToDeletePresent = true;
+}
+
+    break;
+
+  case 384:
+
+    {
+    if (parserData->kounter < parserData->numberOf)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few paths in <directoriesToDelete> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 385:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setProcessesToKill(parserData->numberOf, parserData->processesToKill) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <processesToKill> failed");
+    delete[] parserData->processesToKill;
+    parserData->processesToKill = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 386:
+
+    {
+    if (parserData->processesToKillPresent)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one <processesToKill> element allowed");
+        parserData->ignoreDataAfterErrors = true;
+    }
+    parserData->processesToKillPresent = true;
+}
+
+    break;
+
+  case 392:
+
+    {
+    if (parserData->kounter < parserData->numberOf)
+    {
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few process IDs in <processesToKill> element");
+        parserData->ignoreDataAfterErrors = true;        
+    }
+}
+
+    break;
+
+  case 395:
+
+    {
+    if (parserData->kounter >= parserData->numberOf)
+    {
+    if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many process IDs in <processesToKill> element");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    }
+    else
+    {
+        parserData->processesToKill[parserData->kounter] = (yyvsp[-1].sval);
+        parserData->kounter++;
+    }
+    free((yyvsp[-1].sval)); 
+}
+
+    break;
+
+  case 396:
+
+    {
+        parserData->suppressFurtherErrorMessages = false;
+        parserData->ignoreDataAfterErrors = false;        
+    }
+
+    break;
+
+  case 397:
+
+    {
+    if (parserData->otherJobOptionsPresent)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated element: <job> <otherOptions>");
+            parserData->ignoreDataAfterErrors = true;            
+        }
+    parserData->otherJobOptionsPresent = true;
+}
+
+    break;
+
+  case 398:
+
+    {
+    if (parserData->tempInt < 0) parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "number of other job options cannot be negative");
+    parserData->numberOf = parserData->tempInt;
+    parserData->kounter = 0;
+}
+
+    break;
+
+  case 399:
+
+    {    if (parserData->numberOf > 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected at least one <other> element");
+    }
+
+    break;
+
+  case 400:
+
+    {    if (parserData->kounter < parserData->numberOf - 1)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer <other> elements than specified");
+    }
+
+    break;
+
+  case 407:
+
+    {
+        parserData->kounter++;
+        if (!parserData->ignoreDataAfterErrors)
+            if (osoption->setAnOtherJobOption(osglData->name, osglData->value, osglData->description) == false)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setOtherJobOption failed");
+    }
+
+    break;
+
+  case 410:
+
+    {
+    osoption->optimization = new OptimizationOption();
+    osglData->numberOfVariablesPresent = false;
+    osglData->numberOfObjectivesPresent = false;
+    osglData->numberOfConstraintsPresent = false;
+}
+
+    break;
+
+  case 414:
+
+    {    
+//        osglData->numberOfVariables = parserData->tempInt; 
+        if (osoption->setNumberOfVariables(osglData->numberOfVariables) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "setNumberOfVariables failed");
+    }
+
+    break;
+
+  case 415:
+
+    {
+//        osglData->numberOfConstraints = parserData->tempInt; 
+        if (osoption->setNumberOfConstraints(osglData->numberOfConstraints) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "setNumberOfConstraints failed");
+    }
+
+    break;
+
+  case 416:
+
+    {    
+//        osglData->numberOfObjectives = parserData->tempInt; 
+        if (osoption->setNumberOfObjectives(osglData->numberOfObjectives) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "setNumberOfObjectives failed");
+    }
+
+    break;
+
+  case 424:
+
+    {
+    parserData->numberOfOtherVariableOptions = 0;
+    osoption->optimization->variables = new VariableOption();
+}
+
+    break;
+
+  case 425:
+
+    {    
+    if (osoption->setNumberOfOtherVariableOptions(parserData->numberOfOtherVariableOptions) == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setNumberOfOtherVariableOptions failed");
+    parserData->iOther = 0;
+}
+
+    break;
+
+  case 427:
+
+    {    
+    parserData->numberOfOtherVariableOptions = parserData->tempInt;
+    parserData->iOther = 0;
+}
+
+    break;
+
+  case 432:
+
+    {
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+
+}
+
+    break;
+
+  case 434:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitVarValues(osglData->numberOfVar, parserData->idxArray, parserData->valArray, parserData->namArray) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <initialVariableValues> failed");
+    delete[] parserData->idxArray;
+    delete[] parserData->namArray;
+    delete[] parserData->valArray;
+    parserData->idxArray = NULL;
+    parserData->namArray = NULL;
+    parserData->valArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 435:
+
+    {
+    osglData->numberOfVarPresent = false;
+}
+
+    break;
+
+  case 436:
+
+    {
+    parserData->kounter = 0;
+    parserData->idxArray = new         int[osglData->numberOfVar];
+    parserData->namArray = new std::string[osglData->numberOfVar];
+    parserData->valArray = new      double[osglData->numberOfVar];
+    for (int i=0; i < osglData->numberOfVar; i++) parserData->namArray[i] = "";
+    for (int i=0; i < osglData->numberOfVar; i++) parserData->valArray[i] = OSNaN();
+}
+
+    break;
+
+  case 437:
+
+    {
+        if (osglData->numberOfVar > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<initialVariableValues>: expected at least one <var> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 438:
+
+    {
+        if (parserData->kounter < osglData->numberOfVar)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<initialVariableValues>: fewer <var> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 445:
+
+    {
+    parserData->kounter++;
+}
+
+    break;
+
+  case 446:
+
+    {    
+    if (parserData->kounter >= osglData->numberOfVar)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <var> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->idxPresent = false;
+    osglData->namePresent = false;
+    osglData->valuePresent = false;
+}
+
+    break;
+
+  case 447:
+
+    {
+    if (osglData->idxPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<var> element must have idx attribute");
+}
+
+    break;
+
+  case 450:
+
+    {
+        if (osglData->idx < 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "variable index must be nonnegative");
+        if (osoption->optimization->numberOfVariablesIsSet)
+        {
+            if (osglData->idx >= osoption->optimization->numberOfVariables)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                    "variable index exceeds upper limit");
+        };
+        if (!parserData->ignoreDataAfterErrors)
+            parserData->idxArray[parserData->kounter] = osglData->idx;
+    }
+
+    break;
+
+  case 451:
+
+    {
+        if (!parserData->ignoreDataAfterErrors)
+            parserData->namArray[parserData->kounter] = osglData->name;
+    }
+
+    break;
+
+  case 452:
+
+    {
+        if (osglData->value == "")
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected an integer or floating point value");
+        if (!parserData->ignoreDataAfterErrors)
+            parserData->valArray[parserData->kounter] = os_strtod((osglData->value).c_str(), NULL);
+    }
+
+    break;
+
+  case 456:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitVarValuesString(osglData->numberOfVar, parserData->idxArray, parserData->valueString, parserData->namArray) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <initialVariableValuesString> failed");
+    delete[] parserData->idxArray;
+    delete[] parserData->namArray;
+    delete[] parserData->valueString;
+    parserData->idxArray = NULL;
+    parserData->namArray = NULL;
+    parserData->valueString = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 457:
+
+    {
+    osglData->numberOfVarPresent = false;
+}
+
+    break;
+
+  case 458:
+
+    {
+    parserData->kounter = 0;
+    parserData->idxArray    = new         int[osglData->numberOfVar];
+    parserData->namArray    = new std::string[osglData->numberOfVar];
+    parserData->valueString = new std::string[osglData->numberOfVar];
+    for (int i=0; i < osglData->numberOfVar; i++) parserData->namArray[i] = "";
+    for (int i=0; i < osglData->numberOfVar; i++) parserData->valueString[i] = "";
+}
+
+    break;
+
+  case 459:
+
+    {
+        if (osglData->numberOfVar > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<initialVariableValuesString>: expected at least one <var> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 460:
+
+    {
+        if (parserData->kounter < osglData->numberOfVar)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few initial values in <initialVariableValuesString> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 467:
+
+    {
+    parserData->kounter++;
+    osglData->value = ""; //Make sure to remove random string
+}
+
+    break;
+
+  case 468:
+
+    {    
+    if (parserData->kounter >= osglData->numberOfVar)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <var> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->idxPresent = false;
+    osglData->namePresent = false;
+    osglData->valuePresent = false;
+    osglData->value = "48r 87e WY EUV e7 df"; //random string...
+}
+
+    break;
+
+  case 469:
+
+    {
+    if (osglData->idxPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<var> element must have idx attribute");
+}
+
+    break;
+
+  case 472:
+
+    {
+        if (osglData->idx< 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "variable index must be nonnegative");
+        if (osoption->optimization->numberOfVariablesIsSet)
+        {
+            if (osglData->idx >= osoption->optimization->numberOfVariables)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "variable index exceeds upper limit");
+        };
+        if (!parserData->ignoreDataAfterErrors)
+            parserData->idxArray[parserData->kounter] = osglData->idx;
+    }
+
+    break;
+
+  case 473:
+
+    {
+        if (!parserData->ignoreDataAfterErrors)
+            parserData->namArray[parserData->kounter] = osglData->name;
+    }
+
+    break;
+
+  case 474:
+
+    {
+        if (!parserData->ignoreDataAfterErrors)
+            parserData->valueString[parserData->kounter] = osglData->value;
+    }
+
+    break;
+
+  case 479:
+
+    {
+    osoption->optimization->variables->initialBasisStatus = new BasisStatus();
+}
+
+    break;
+
+  case 486:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_variables, ENUM_BASIS_STATUS_basic, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set variables basic failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 488:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_variables, ENUM_BASIS_STATUS_atLower, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set variables atLower failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 490:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_variables, ENUM_BASIS_STATUS_atUpper, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set variables atUpper failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 492:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_variables, ENUM_BASIS_STATUS_atEquality, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set variables atEquality failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 494:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_variables, ENUM_BASIS_STATUS_isFree, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set variables isFree failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 496:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_variables, ENUM_BASIS_STATUS_superbasic, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set variables superbasic failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 498:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_variables, ENUM_BASIS_STATUS_unknown, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set variables unknown failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 500:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setIntegerVariableBranchingWeights(osglData->numberOfVar, parserData->idxArray, parserData->valArray, parserData->namArray) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <IntegerVariableBranchingWeights> failed");
+    delete[] parserData->idxArray;
+    delete[] parserData->namArray;
+    delete[] parserData->valArray;
+    parserData->idxArray = NULL;
+    parserData->namArray = NULL;
+    parserData->valArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 501:
+
+    {
+    osglData->numberOfVarPresent = false;
+}
+
+    break;
+
+  case 502:
+
+    {
+    parserData->kounter = 0;
+    parserData->idxArray = new         int[osglData->numberOfVar];
+    parserData->namArray = new std::string[osglData->numberOfVar];
+    parserData->valArray = new      double[osglData->numberOfVar];
+    for (int i=0; i < osglData->numberOfVar; i++) parserData->namArray[i] = "";
+    for (int i=0; i < osglData->numberOfVar; i++) parserData->valArray[i] = OSNaN();
+}
+
+    break;
+
+  case 503:
+
+    {
+        if (osglData->numberOfVar > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected at least one <var> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 504:
+
+    {
+        if (parserData->kounter < osglData->numberOfVar)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer <var> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 511:
+
+    {
+    parserData->kounter++;
+}
+
+    break;
+
+  case 512:
+
+    {    
+    if (parserData->kounter >= osglData->numberOfVar)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <var> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->idxPresent = false;
+    osglData->namePresent = false;
+    osglData->name = "";
+    osglData->valuePresent = false;
+    osglData->value = "1.0";
+}
+
+    break;
+
+  case 513:
+
+    {
+    if (osglData->idxPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<var> element must have idx attribute");
+}
+
+    break;
+
+  case 516:
+
+    {
+        if (osglData->idx < 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "variable index must be nonnegative");
+        if (osoption->optimization->numberOfVariablesIsSet)
+        {
+            if (osglData->idx >= osoption->optimization->numberOfVariables)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "variable index exceeds upper limit");
+        };
+        if (!parserData->ignoreDataAfterErrors)
+            parserData->idxArray[parserData->kounter] = osglData->idx;
+    }
+
+    break;
+
+  case 517:
+
+    {
+        if (!parserData->ignoreDataAfterErrors)
+            parserData->namArray[parserData->kounter] = osglData->name;
+    }
+
+    break;
+
+  case 518:
+
+    {
+        if (osglData->value == "")
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected an integer or floating point value");
+        if (!parserData->ignoreDataAfterErrors)
+            parserData->valArray[parserData->kounter] = os_strtod((osglData->value).c_str(), NULL);
+    }
+
+    break;
+
+  case 522:
+
+    {
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 523:
+
+    {
+    parserData->sosIdxAttributePresent = false;    
+    parserData->currentSOS = 0;
+}
+
+    break;
+
+  case 524:
+
+    {
+    if ((yyvsp[-1].ival) < 0)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "number of <sos> elements must be nonnegative");
+    parserData->numberOfSOS = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 525:
+
+    {
+        if (parserData->numberOfSOS > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected at least one <sos> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 526:
+
+    {    if (parserData->currentSOS != parserData->numberOfSOS)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer <sos> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 532:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (!osoption->setAnotherSOSVariableBranchingWeight(parserData->sosIdx, 
+                    osglData->numberOfVar, parserData->groupWeight,
+                    parserData->idxArray, parserData->valArray, parserData->namArray) )
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "error processing SOS branching weights");
+    delete[] parserData->idxArray;
+    delete[] parserData->namArray;
+    delete[] parserData->valArray;
+    parserData->idxArray = NULL;
+    parserData->namArray = NULL;
+    parserData->valArray = NULL;
+    parserData->currentSOS++;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 533:
+
+    {
+    if (parserData->currentSOS >= parserData->numberOfSOS)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many SOS branching weights");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    parserData->sosIdxAttributePresent = false;
+    parserData->groupWeightAttributePresent = false;
+    parserData->groupWeight = 1.0;
+    parserData->numberOfSOSVar = 0;
+    osglData->numberOfVarPresent = false;
+}
+
+    break;
+
+  case 534:
+
+    {
+    if (!parserData->sosIdxAttributePresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "SOS index required");
+    if (!osglData->numberOfVarPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfVar required");
+}
+
+    break;
+
+  case 538:
+
+    {
+        parserData->kounter = 0;
+        parserData->idxArray = new         int[osglData->numberOfVar];
+        parserData->namArray = new std::string[osglData->numberOfVar];
+        parserData->valArray = new      double[osglData->numberOfVar];
+        for (int i=0; i < osglData->numberOfVar; i++) parserData->valArray[i] = OSNaN();
+        osglData->numberOfVarPresent = true;
+    }
+
+    break;
+
+  case 547:
+
+    {      
+        parserData->iOther++;
+    }
+
+    break;
+
+  case 548:
+
+    {
+    if (parserData->iOther >= parserData->numberOfOtherVariableOptions)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "more <otherVariableOptions> than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->numberOfVarPresent = false;
+    osglData->numberOfVar = 0;
+    osglData->numberOfEnumerationsPresent = false;    
+    osglData->numberOfEnumerations = 0;
+    osglData->namePresent = false;    
+    osglData->valuePresent = false;    
+    osglData->value = "";
+    osglData->solverPresent = false;    
+    osglData->solver = "";
+    osglData->categoryPresent = false;    
+    osglData->category = "";
+    osglData->typePresent = false;    
+    osglData->type = "";
+    osglData->varTypePresent = false;    
+    osglData->varType = "";
+    osglData->enumTypePresent = false;    
+    osglData->enumType = "";
+    osglData->descriptionPresent = false;    
+    osglData->description = "";    
+    parserData->otherOptionType = ENUM_PROBLEM_COMPONENT_variables;
+}
+
+    break;
+
+  case 549:
+
+    {
+        if (!osglData->namePresent) 
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<other> element requires name attribute"); 
+        if (!parserData->ignoreDataAfterErrors)
+            if (!osoption->setOtherVariableOptionAttributes(
+                    parserData->iOther,
+                    osglData->numberOfVar,
+                    osglData->numberOfEnumerations,
+                    osglData->name,
+                    osglData->value,
+                    osglData->solver,
+                    osglData->category,
+                    osglData->type,
+                    osglData->varType,
+                    osglData->enumType,
+                    osglData->description) )
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<other> element could not be initialed"); 
+    }
+
+    break;
+
+  case 552:
+
+    {
+        parserData->kounter = 0;
+    }
+
+    break;
+
+  case 553:
+
+    {
+        parserData->kounter = 0;
+    }
+
+    break;
+
+  case 571:
+
+    {     
+    if (!parserData->ignoreDataAfterErrors)
+        if (!osoption->setOtherVariableOptionVar(
+                parserData->iOther, 
+                parserData->kounter,
+                osglData->idx, 
+                osglData->name,
+                osglData->value,
+                parserData->lbValueAttribute, 
+                parserData->ubValueAttribute) )
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set other variable option <var> element failed");
+    parserData->kounter++;
+}
+
+    break;
+
+  case 572:
+
+    {
+    if (parserData->kounter >= osglData->numberOfVar)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <var> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->idxPresent = false;    
+    osglData->namePresent = false;    
+    osglData->name = "";
+    osglData->valuePresent = false;    
+    osglData->value = "";
+    parserData->lbValueAttributePresent = false;    
+    parserData->lbValueAttribute = "";
+    parserData->ubValueAttributePresent = false;    
+    parserData->ubValueAttribute = "";
+}
+
+    break;
+
+  case 576:
+
+    {
+        if (osglData->idx < 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "variable index must be nonnegative");
+        if (osoption->optimization->numberOfVariablesIsSet)
+        {
+            if (osglData->idx >= osoption->optimization->numberOfVariables)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "variable index exceeds upper limit");
+        };
+    }
+
+    break;
+
+  case 586:
+
+    {
+    parserData->numberOfOtherObjectiveOptions = 0; 
+    osoption->optimization->objectives = new ObjectiveOption();
+}
+
+    break;
+
+  case 587:
+
+    {    
+    if (osoption->setNumberOfOtherObjectiveOptions(parserData->numberOfOtherObjectiveOptions) == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setNumberOfOtherVariableOptions failed");
+    parserData->iOther = 0;
+}
+
+    break;
+
+  case 589:
+
+    {    
+    parserData->numberOfOtherObjectiveOptions = parserData->tempInt;
+}
+
+    break;
+
+  case 594:
+
+    {
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+
+}
+
+    break;
+
+  case 596:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitObjValues(osglData->numberOfObj, parserData->idxArray, parserData->valArray, parserData->namArray) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <initialObjectiveValues> failed");
+    delete[] parserData->idxArray;
+    delete[] parserData->namArray;
+    delete[] parserData->valArray;
+    parserData->idxArray = NULL;
+    parserData->namArray = NULL;
+    parserData->valArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 597:
+
+    {
+    osglData->numberOfObjPresent = false;
+}
+
+    break;
+
+  case 598:
+
+    {
+    parserData->kounter = 0;
+    parserData->idxArray = new         int[osglData->numberOfObj];
+    parserData->namArray = new std::string[osglData->numberOfObj];
+    parserData->valArray = new      double[osglData->numberOfObj];
+    for (int i=0; i < osglData->numberOfObj; i++) parserData->idxArray[i] = -1;
+    for (int i=0; i < osglData->numberOfObj; i++) parserData->namArray[i] = "";
+    for (int i=0; i < osglData->numberOfObj; i++) parserData->valArray[i] = OSNaN();
+}
+
+    break;
+
+  case 599:
+
+    {    
+        if (osglData->numberOfObj > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<initialObjectiveValues>: expected at least one <obj> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 600:
+
+    {
+        if (parserData->kounter < osglData->numberOfObj)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<initialObjectiveValues>: fewer <obj> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 607:
+
+    {
+    parserData->kounter++;
+}
+
+    break;
+
+  case 608:
+
+    {    
+    if (parserData->kounter >= osglData->numberOfObj)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <obj> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->idxPresent = false;
+    osglData->namePresent = false;
+    osglData->valuePresent = false;
+    osglData->idx = -1;
+}
+
+    break;
+
+  case 612:
+
+    {
+        if (osglData->idx >= 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "objective index must be negative");
+        if (osoption->optimization->numberOfObjectivesIsSet)
+        {
+            if (osglData->idx < -osoption->optimization->numberOfObjectives)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "objective index exceeds limit");
+        };
+        parserData->idxArray[parserData->kounter] = osglData->idx;
+    }
+
+    break;
+
+  case 613:
+
+    {
+        parserData->namArray[parserData->kounter] = osglData->name;
+    }
+
+    break;
+
+  case 614:
+
+    {
+        if (osglData->value == "")
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected an integer or floating point value");
+        parserData->valArray[parserData->kounter] = os_strtod((osglData->value).c_str(), NULL);
+    }
+
+    break;
+
+  case 618:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitObjBounds(osglData->numberOfObj, parserData->idxArray, parserData->lbValArray, parserData->ubValArray, parserData->namArray) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <initialObjectiveBounds> failed");
+    delete[] parserData->idxArray;
+    delete[] parserData->namArray;
+    delete[] parserData->lbValArray;
+    delete[] parserData->ubValArray;
+    parserData->idxArray = NULL;
+    parserData->namArray = NULL;
+    parserData->lbValArray = NULL;
+    parserData->ubValArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 619:
+
+    {
+    osglData->numberOfObjPresent = false;
+}
+
+    break;
+
+  case 620:
+
+    {
+    parserData->kounter = 0;
+    parserData->idxArray   = new         int[osglData->numberOfObj];
+    parserData->lbValArray = new      double[osglData->numberOfObj];
+    parserData->ubValArray = new      double[osglData->numberOfObj];
+    parserData->namArray   = new std::string[osglData->numberOfObj];
+    for (int i=0; i < osglData->numberOfObj; i++) parserData->idxArray[i] = -1;
+    for (int i=0; i < osglData->numberOfObj; i++) parserData->namArray[i] = "";
+    for (int i=0; i < osglData->numberOfObj; i++) parserData->lbValArray[i] = OSNaN();
+    for (int i=0; i < osglData->numberOfObj; i++) parserData->ubValArray[i] = OSNaN();
+}
+
+    break;
+
+  case 621:
+
+    {
+        if (osglData->numberOfObj > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<initialObjectiveBounds>: expected at least one <obj> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 622:
+
+    {
+        if (parserData->kounter < osglData->numberOfObj)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<initialObjectiveBounds>: fewer <obj> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 629:
+
+    {
+    parserData->kounter++;
+}
+
+    break;
+
+  case 630:
+
+    {    
+    if (parserData->kounter >= osglData->numberOfObj)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <var> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->idx = -1;
+    osglData->idxPresent = false;
+    osglData->namePresent = false;
+    parserData->lbValueAttributePresent = false;
+    parserData->ubValueAttributePresent = false;
+    parserData->lbValueAttribute = "-INF";
+    parserData->ubValueAttribute = "INF";
+}
+
+    break;
+
+  case 634:
+
+    {
+        if (osglData->idx >= 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "objective index must be nonnegative");
+        if (osoption->optimization->numberOfObjectivesIsSet)
+        {
+            if (osglData->idx < -osoption->optimization->numberOfVariables)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "objective index exceeds limit");
+        };
+        parserData->idxArray[parserData->kounter] = osglData->idx;
+    }
+
+    break;
+
+  case 635:
+
+    {
+        parserData->namArray[parserData->kounter] = osglData->name;
+    }
+
+    break;
+
+  case 636:
+
+    {
+        if (parserData->lbValueAttribute == "")
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected an integer or floating point value");
+        parserData->lbValArray[parserData->kounter] = os_strtod((parserData->lbValueAttribute).c_str(), NULL);
+    }
+
+    break;
+
+  case 637:
+
+    {
+        if (parserData->ubValueAttribute == "")
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected an integer or floating point value");
+        parserData->ubValArray[parserData->kounter] = os_strtod((parserData->ubValueAttribute).c_str(), NULL);
+    }
+
+    break;
+
+  case 642:
+
+    {
+    osoption->optimization->objectives->initialBasisStatus = new BasisStatus();
+}
+
+    break;
+
+  case 649:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_objectives, ENUM_BASIS_STATUS_basic, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set objectives basic failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 651:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_objectives, ENUM_BASIS_STATUS_atLower, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set objectives atLower failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 653:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_objectives, ENUM_BASIS_STATUS_atUpper, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set objectives atUpper failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 655:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_objectives, ENUM_BASIS_STATUS_atEquality, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set objectives atEquality failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 657:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_objectives, ENUM_BASIS_STATUS_isFree, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set objectives isFree failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 659:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_objectives, ENUM_BASIS_STATUS_superbasic, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set objectives superbasic failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 661:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_objectives, ENUM_BASIS_STATUS_unknown, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set objectives unknown failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 664:
+
+    {      
+        parserData->iOther++;  
+    }
+
+    break;
+
+  case 665:
+
+    {
+    if (parserData->iOther >= parserData->numberOfOtherObjectiveOptions)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <otherObjectiveOptions> than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->numberOfObjPresent = false;    
+    osglData->numberOfObj = 0;
+    osglData->numberOfEnumerationsPresent = false;    
+    osglData->numberOfEnumerations = 0;
+    osglData->namePresent = false;    
+    osglData->valuePresent = false;    
+    osglData->value = "";
+    osglData->solverPresent = false;    
+    osglData->solver = "";
+    osglData->categoryPresent = false;    
+    osglData->category = "";
+    osglData->typePresent = false;    
+    osglData->type = "";
+    osglData->objTypePresent = false;    
+    osglData->objType = "";
+    osglData->enumTypePresent = false;    
+    osglData->enumType = "";
+    osglData->descriptionPresent = false;    
+    osglData->description = "";    
+    parserData->otherOptionType = ENUM_PROBLEM_COMPONENT_objectives;
+}
+
+    break;
+
+  case 666:
+
+    {
+        if (!osglData->namePresent) 
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<other> element requires name attribute"); 
+        if (!parserData->ignoreDataAfterErrors)
+            if (!osoption->setOtherObjectiveOptionAttributes(
+                    parserData->iOther,
+                    osglData->numberOfObj,
+                    osglData->numberOfEnumerations,
+                    osglData->name,
+                    osglData->value,
+                    osglData->solver,
+                    osglData->category,
+                    osglData->type,
+                    osglData->objType,
+                    osglData->enumType,
+                    osglData->description) )
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<other> element could not be initialed"); 
+    }
+
+    break;
+
+  case 669:
+
+    {
+        parserData->kounter = 0;
+    }
+
+    break;
+
+  case 670:
+
+    {
+        parserData->kounter = 0;
+    }
+
+    break;
+
+  case 688:
+
+    {  
+    if (!parserData->ignoreDataAfterErrors)
+        if (!osoption->setOtherObjectiveOptionObj(
+                parserData->iOther, 
+                parserData->kounter,
+                osglData->idx, 
+                osglData->name,
+                osglData->value,
+                parserData->lbValueAttribute, 
+                parserData->ubValueAttribute) )
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set other objective option <obj> element failed");
+    parserData->kounter++;
+}
+
+    break;
+
+  case 689:
+
+    {
+
+    if (parserData->kounter >= osglData->numberOfObj)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <obj> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->idxPresent = false;    
+    osglData->idx = -1;
+    osglData->namePresent = false;    
+    osglData->name = "";
+    osglData->valuePresent = false;    
+    osglData->value = "";
+    parserData->lbValueAttributePresent = false;    
+    parserData->lbValueAttribute = "";
+    parserData->ubValueAttributePresent = false;    
+    parserData->ubValueAttribute = "";
+}
+
+    break;
+
+  case 693:
+
+    {
+        if (osglData->idx >= 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "objective index must be negative");
+        if (osoption->optimization->numberOfObjectivesIsSet)
+        {
+            if (osglData->idx < -osoption->optimization->numberOfObjectives)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "objective index exceeds limit");
+        };
+    }
+
+    break;
+
+  case 703:
+
+    {
+    parserData->numberOfOtherConstraintOptions = 0; 
+    osoption->optimization->constraints = new ConstraintOption();
+}
+
+    break;
+
+  case 704:
+
+    {    
+    if (osoption->setNumberOfOtherConstraintOptions(parserData->numberOfOtherConstraintOptions) == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setNumberOfOtherConstraintOptions failed");
+    parserData->iOther = 0;
+}
+
+    break;
+
+  case 706:
+
+    {    
+    parserData->numberOfOtherConstraintOptions = parserData->tempInt;
+}
+
+    break;
+
+  case 711:
+
+    {
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 713:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitConValues(osglData->numberOfCon, parserData->idxArray,
+                                parserData->valArray, parserData->namArray) == false)
+            parserData->parser_errors 
+                += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, 
+                                "set <initialConstraintValues> failed");
+    delete[] parserData->idxArray;
+    delete[] parserData->namArray;
+    delete[] parserData->valArray;
+    parserData->idxArray = NULL;
+    parserData->namArray = NULL;
+    parserData->valArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 714:
+
+    {
+    osglData->numberOfConPresent = false;
+}
+
+    break;
+
+  case 715:
+
+    {
+    parserData->kounter = 0;
+    parserData->idxArray = new         int[osglData->numberOfCon];
+    parserData->namArray = new std::string[osglData->numberOfCon];
+    parserData->valArray = new      double[osglData->numberOfCon];
+    for (int i=0; i < osglData->numberOfCon; i++) parserData->namArray[i] = "";
+    for (int i=0; i < osglData->numberOfCon; i++) parserData->valArray[i] = OSNaN();
+}
+
+    break;
+
+  case 716:
+
+    {
+        if (osglData->numberOfCon > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<initialConstraintValues>: expected at least one <con element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 717:
+
+    {
+        if (parserData->kounter < osglData->numberOfCon)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<initialConstraintValues>: fewer <con> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 724:
+
+    {
+    parserData->kounter++;
+}
+
+    break;
+
+  case 725:
+
+    {    
+    if (parserData->kounter >= osglData->numberOfCon)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "more <con> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->idxPresent = false;
+    osglData->name = "";
+    osglData->namePresent = false;
+    osglData->valuePresent = false;
+}
+
+    break;
+
+  case 726:
+
+    {
+    if (osglData->idxPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+            "<con> element must have idx attribute");
+}
+
+    break;
+
+  case 729:
+
+    {
+        if (osglData->idx < 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "constraint index must be nonnegative");
+        if (osoption->optimization->numberOfConstraintsIsSet)
+        {
+            if (osglData->idx >= osoption->optimization->numberOfConstraints)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "constraint index exceeds upper limit");
+        };
+        parserData->idxArray[parserData->kounter] = osglData->idx;
+    }
+
+    break;
+
+  case 730:
+
+    {
+        parserData->namArray[parserData->kounter] = osglData->name;
+    }
+
+    break;
+
+  case 731:
+
+    {
+        if (osglData->value == "")
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected an integer or floating point value");
+        parserData->valArray[parserData->kounter] = os_strtod((osglData->value).c_str(), NULL);
+    }
+
+    break;
+
+  case 735:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitDualValues(osglData->numberOfCon, parserData->idxArray, parserData->lbValArray, parserData->ubValArray, parserData->namArray) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set <initialConstraintValues> failed");
+    delete[] parserData->idxArray;
+    delete[] parserData->namArray;
+    delete[] parserData->lbValArray;
+    delete[] parserData->ubValArray;
+    parserData->idxArray = NULL;
+    parserData->namArray = NULL;
+    parserData->lbValArray = NULL;
+    parserData->ubValArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 736:
+
+    {
+    osglData->numberOfConPresent = false;
+}
+
+    break;
+
+  case 737:
+
+    {
+    parserData->kounter = 0;
+    parserData->idxArray   = new         int[osglData->numberOfCon];
+    parserData->namArray   = new std::string[osglData->numberOfCon];
+    parserData->lbValArray = new      double[osglData->numberOfCon];
+    parserData->ubValArray = new      double[osglData->numberOfCon];
+    for (int i=0; i < osglData->numberOfCon; i++) parserData->namArray[i] = "";
+    for (int i=0; i < osglData->numberOfCon; i++) parserData->lbValArray[i] = OSNaN();
+    for (int i=0; i < osglData->numberOfCon; i++) parserData->ubValArray[i] = OSNaN();
+}
+
+    break;
+
+  case 738:
+
+    {
+        if (osglData->numberOfCon > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<initialDualValues>: expected at least one <con> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 739:
+
+    {
+        if (parserData->kounter < osglData->numberOfCon)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<initialDualValues>: fewer <con> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 746:
+
+    {    
+    parserData->kounter++;
+}
+
+    break;
+
+  case 747:
+
+    {    
+    if (parserData->kounter >= osglData->numberOfCon)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "more <con> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->idxPresent = false;
+    osglData->namePresent = false;
+    osglData->name = "";
+    parserData->lbValueAttributePresent = false;
+    parserData->ubValueAttributePresent = false;
+    parserData->lbDualValue = OSNaN();
+    parserData->ubDualValue = OSNaN();
+}
+
+    break;
+
+  case 748:
+
+    {
+    if (osglData->idxPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+            "<con> element must have idx attribute");
+}
+
+    break;
+
+  case 751:
+
+    {
+        if (osglData->idx < 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "constraint index must be nonnegative");
+        if (osoption->optimization->numberOfConstraintsIsSet)
+        {
+            if (osglData->idx >= osoption->optimization->numberOfConstraints)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "constraint index exceeds upper limit");
+        };
+        parserData->idxArray[parserData->kounter] = osglData->idx;
+    }
+
+    break;
+
+  case 752:
+
+    {
+        parserData->namArray[parserData->kounter] = osglData->name;
+    }
+
+    break;
+
+  case 753:
+
+    {
+        parserData->lbValArray[parserData->kounter] = parserData->lbDualValue;
+    }
+
+    break;
+
+  case 754:
+
+    {
+        parserData->ubValArray[parserData->kounter] = parserData->ubDualValue;
+    }
+
+    break;
+
+  case 759:
+
+    {
+    osoption->optimization->constraints->initialBasisStatus = new BasisStatus();
+}
+
+    break;
+
+  case 766:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_constraints, ENUM_BASIS_STATUS_basic, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set slacks basic failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 768:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_constraints, ENUM_BASIS_STATUS_atLower, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set slacks atLower failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 770:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_constraints, ENUM_BASIS_STATUS_atUpper, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set slacks atUpper failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 772:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_constraints, ENUM_BASIS_STATUS_atEquality, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set slacks atEquality failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 774:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_constraints, ENUM_BASIS_STATUS_isFree, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set slacks isFree failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 776:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_constraints, ENUM_BASIS_STATUS_superbasic, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set variables superbasic failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 778:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (osoption->setInitBasisStatus(ENUM_PROBLEM_COMPONENT_constraints, ENUM_BASIS_STATUS_unknown, osglData->osglIntArray, osglData->numberOfEl) != true)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set slacks unknown failed");    
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 781:
+
+    {      
+        parserData->iOther++;  
+    }
+
+    break;
+
+  case 782:
+
+    {
+    if (parserData->iOther >= parserData->numberOfOtherConstraintOptions)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <otherConstraintOptions> than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->numberOfConPresent = false;    
+    osglData->numberOfCon = 0;
+    osglData->numberOfEnumerationsPresent = false;    
+    osglData->numberOfEnumerations = 0;
+    osglData->namePresent = false;    
+    osglData->valuePresent = false;    
+    osglData->value = "";
+    osglData->solverPresent = false;    
+    osglData->solver = "";
+    osglData->categoryPresent = false;    
+    osglData->category = "";
+    osglData->typePresent = false;    
+    osglData->type = "";
+    osglData->conTypePresent = false;    
+    osglData->conType = "";
+    osglData->enumTypePresent = false;    
+    osglData->enumType = "";
+    osglData->descriptionPresent = false;    
+    osglData->description = "";    
+    parserData->otherOptionType = ENUM_PROBLEM_COMPONENT_constraints;
+}
+
+    break;
+
+  case 783:
+
+    {
+        if(!osglData->namePresent) 
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<other> element requires name attribute"); 
+        if (!parserData->ignoreDataAfterErrors)
+            if (!osoption->setOtherConstraintOptionAttributes(
+                    parserData->iOther,
+                    osglData->numberOfCon,
+                    osglData->numberOfEnumerations,
+                    osglData->name,
+                    osglData->value,
+                    osglData->solver,
+                    osglData->category,
+                    osglData->type,
+                    osglData->conType,
+                    osglData->enumType,
+                    osglData->description) )
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<other> element could not be initialed"); 
+    }
+
+    break;
+
+  case 786:
+
+    {
+        parserData->kounter = 0;
+    }
+
+    break;
+
+  case 787:
+
+    {
+        parserData->kounter = 0;
+    }
+
+    break;
+
+  case 805:
+
+    {     
+    if (!parserData->ignoreDataAfterErrors)
+        if (!osoption->setOtherConstraintOptionCon(
+                parserData->iOther, 
+                parserData->kounter,
+                osglData->idx, 
+                osglData->name,
+                osglData->value,
+                parserData->lbValueAttribute, 
+                parserData->ubValueAttribute) )
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "set other constraint option <con> element failed");
+    parserData->kounter++;
+}
+
+    break;
+
+  case 806:
+
+    {
+    if (parserData->kounter >= osglData->numberOfCon)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <con> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->idxPresent = false;    
+    osglData->namePresent = false;    
+    osglData->name = "";
+    osglData->valuePresent = false;    
+    osglData->value = "";
+    parserData->lbValueAttributePresent = false;    
+    parserData->lbValueAttribute = "";
+    parserData->ubValueAttributePresent = false;    
+    parserData->ubValueAttribute = "";
+}
+
+    break;
+
+  case 810:
+
+    {
+        if (osglData->idx < 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "constraint index must be nonnegative");
+        if (osoption->optimization->numberOfConstraintsIsSet)
+        {
+            if (osglData->idx >= osoption->optimization->numberOfConstraints)
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                    "constraint index exceeds upper limit");
+        };
+    }
+
+    break;
+
+  case 820:
+
+    {
+    osoption->optimization->matrixProgramming = new MatrixProgrammingOption();
+}
+
+    break;
+
+  case 823:
+
+    {    
+    parserData->numberOfOtherMatrixProgrammingOptions = parserData->tempInt;
+}
+
+    break;
+
+  case 829:
+
+    {  
+//        if (parserData->kounter < parserData->numberOfMatrixVar)  
+//            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+//                "actual number of matrixVar elements less than number attribute");   
+    }
+
+    break;
+
+  case 830:
+
+    {
+    osoption->optimization->matrixProgramming->matrixVariables = new MatrixVariableOption(); 
+}
+
+    break;
+
+  case 832:
+
+    {    
+    parserData->numberOfOtherMatrixVariableOptions = parserData->tempInt;
+    if (parserData->numberOfOtherMatrixVariableOptions < 0)
+        throw ErrorClass("numberOfOtherMatrixVariableOptions cannot be negative");
+    else
+    {
+        osglData->otherMatrixVarOptionOrResultArray
+            = new OtherMatrixVariableOptionOrResult*[parserData->numberOfOtherMatrixVariableOptions];
+        for (int i=0; i < parserData->numberOfOtherMatrixVariableOptions; i++)
+            osglData->otherMatrixVarOptionOrResultArray[i] = new OtherMatrixVariableOptionOrResult();
+    }
+    osglData->kounter = 0;
+}
+
+    break;
+
+  case 839:
+
+    {//store initial matrix values
+       if (osglData->matrixCounter < osglData->numberOfMatrixVar)  
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "actual number of matrixVar less than number attribute");
+        osoption->optimization->matrixProgramming->matrixVariables->initialMatrixVariableValues
+            ->matrixVar = osglData->matrixWithMatrixVarIdx;
+        osoption->optimization->matrixProgramming->matrixVariables->initialMatrixVariableValues
+            ->numberOfMatrixVar = osglData->numberOfMatrixVar;
+        osglData->matrixWithMatrixVarIdx = NULL;
+    }
+
+    break;
+
+  case 840:
+
+    {//allocate initial matrix values
+    osoption->optimization->matrixProgramming->matrixVariables->initialMatrixVariableValues
+        = new InitMatrixVariableValues();
+    osglData->numberOfMatrixVarPresent = false;
+}
+
+    break;
+
+  case 841:
+
+    {    //get number of initial matrix values
+//    osglData->numberOfMatrixVar = parserData->tempInt;
+    osglData->matrixCounter = 0;
+std::cout << "initializing OSMatrixWithMatrixVarIdx array; expect " << parserData->tempInt 
+          << " matrices" << std::endl;
+    osglData->matrixWithMatrixVarIdx = new OSMatrixWithMatrixVarIdx*[osglData->numberOfMatrixVar];
+    for (int i=0; i < osglData->numberOfMatrixVar; i++)
+        osglData->matrixWithMatrixVarIdx[i] = NULL;
+}
+
+    break;
+
+  case 849:
+
+    {
+//    parserData->kounter++;
+std::cout << "processed initialMatrixVar; osglData->matrixCounter now = " << osglData->matrixCounter << std::endl;
+//osglData->matrixWithMatrixVarIdx[osglData->matrixCounter-1]->printMatrix();
+}
+
+    break;
+
+  case 850:
+
+    {
+        if (parserData->iOther > parserData->numberOfOtherMatrixVariableOptions)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "More otherMatrixVariableOption elements than expected");
+        else
+        {
+            osoption->optimization->matrixProgramming->matrixVariables->numberOfOtherMatrixVariableOptions
+                = parserData->numberOfOtherMatrixVariableOptions;
+            osoption->optimization->matrixProgramming->matrixVariables->other
+                = osglData->otherMatrixVarOptionOrResultArray;
+        }
+}
+
+    break;
+
+  case 852:
+
+    {
+        parserData->iOther++;
+    }
+
+    break;
+
+  case 853:
+
+    {
+        if (osglData->numberOfMatrixVar > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "expected at least one <MatrixVar> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+        if (osglData->numberOfEnumerations > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "expected at least one <enumeration> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 854:
+
+    {
+        if (osglData->enumCounter < osglData->numberOfItems)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "fewer <item> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+        if (osglData->matrixCounter < osglData->numberOfMatrixVar)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "fewer <matrixVar> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 855:
+
+    {
+    if (parserData->iOther >= parserData->numberOfOtherMatrixVariableOptions)
+            std::cout << "more <otherMatrixVariableOptions> than specified: "
+                      << "encountered " << parserData->iOther << " out of " 
+                      << parserData->numberOfOtherMatrixVariableOptions << std::endl;
+
+
+    if (parserData->iOther >= parserData->numberOfOtherMatrixVariableOptions)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "more <otherMatrixVariableOptions> than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+
+    osglData->namePresent = false;    
+    osglData->descriptionPresent = false;    
+    osglData->description = "";    
+    osglData->valuePresent = false;    
+    osglData->value = "";
+    osglData->typePresent = false;    
+    osglData->type = "";
+    osglData->solverPresent = false;    
+    osglData->solver = "";
+    osglData->categoryPresent = false;    
+    osglData->category = "";
+    osglData->numberOfEnumerationsPresent = false;    
+    osglData->numberOfEnumerations = 0;
+    osglData->enumTypePresent = false;    
+    osglData->enumType = "";
+    osglData->numberOfMatrixVarPresent = false;
+    osglData->numberOfMatrixVar = 0;
+    osglData->numberOfEnumerations = 0;
+    osglData->matrixCounter = 0;
+    osglData->enumCounter = 0;
+//    parserData->otherOptionType = ENUM_PROBLEM_COMPONENT_variables;
+}
+
+    break;
+
+  case 862:
+
+    {
+/*
+    if (!parserData->ignoreDataAfterErrors)
+        if (!osoption->setSolverOptionContent(
+                    parserData->iOption,
+                    osglData->numberOfMatrices,
+                    osglData->numberOfItems,
+                    osglData->name,
+                    osglData->value,
+                    osglData->solver,
+                    osglData->category,
+                    osglData->type,
+                    osglData->description,
+                    osglData->matrix,
+                    osglData->itemList) )
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setSolverOptionContent failed");
+    if (osglData->numberOfMatrices > 0)
+        delete[] osglData->matrix;
+    osglData->matrix = NULL;
+    if (osglData->numberOfItems > 0)
+        delete[] osglData->itemList;
+    osglData->itemList = NULL;
+    parserData->iOption++;
+*/
+}
+
+    break;
+
+  case 863:
+
+    {
+        if (osglData->numberOfMatrices > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected at least one <matrix> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+        if (osglData->numberOfItems > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected at least one <item> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 864:
+
+    {
+/*
+        if (parserData->kounter < osglData->numberOfItems)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer <item> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+*/
+    }
+
+    break;
+
+  case 865:
+
+    {
+    osglData->namePresent = false;
+    osglData->descriptionPresent = false;
+    osglData->valuePresent = false;
+    osglData->typePresent = false;
+    osglData->solverPresent = false;
+    osglData->categoryPresent = false;
+    osglData->numberOfMatricesPresent = false;
+    osglData->numberOfItemsPresent = false;
+    osglData->description = "";
+    osglData->value = "";
+    osglData->type = "";
+    osglData->solver = "";
+    osglData->category = "";
+    osglData->numberOfMatrices = 0;
+    osglData->numberOfItems = 0;
+    osglData->kounter = 0;
+}
+
+    break;
+
+  case 870:
+
+    {
+        parserData->suppressFurtherErrorMessages = false;
+        parserData->ignoreDataAfterErrors = false;        
+    }
+
+    break;
+
+  case 872:
+
+    {
+    if (!osoption->setNumberOfSolverOptions(parserData->numberOfSolverOptions) )
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setNumberOfSolverOptions failed");
+    parserData->iOption = 0;
+}
+
+    break;
+
+  case 873:
+
+    {
+std::cout << "number of solver options: " << parserData->numberOfSolverOptions;
+std::cout << " why is solverOptions element empty?" << std::endl; 
+        if (parserData->numberOfSolverOptions > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected at least one <solverOption> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 874:
+
+    {
+std::cout << "number of solver options specified: " << parserData->numberOfSolverOptions << std::endl;
+std::cout << " number seen: " << parserData->iOption  << std::endl; 
+        if (parserData->iOption != parserData->numberOfSolverOptions)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer <solverOption> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 878:
+
+    {
+    if (!parserData->ignoreDataAfterErrors)
+        if (!osoption->setSolverOptionContent(
+                    parserData->iOption,
+                    osglData->numberOfMatrices,
+                    osglData->numberOfItems,
+                    osglData->name,
+                    osglData->value,
+                    osglData->solver,
+                    osglData->category,
+                    osglData->type,
+                    osglData->description,
+                    osglData->matrix,
+                    osglData->itemList) )
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "setSolverOptionContent failed");
+    if (osglData->numberOfMatrices > 0)
+        delete[] osglData->matrix;
+    osglData->matrix = NULL;
+    if (osglData->numberOfItems > 0)
+        delete[] osglData->itemList;
+    osglData->itemList = NULL;
+    parserData->iOption++;
+}
+
+    break;
+
+  case 879:
+
+    {
+std::cout << "number of items specified: " << osglData->numberOfItems << std::endl;
+std::cout << " number of items seen: " << osglData->kounter << std::endl; 
+        if (osglData->numberOfItems > 0)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected at least one <item> element");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 880:
+
+    {
+std::cout << "number of items specified: " << osglData->numberOfItems << std::endl;
+std::cout << " number of items seen: " << osglData->kounter << std::endl; 
+        if (osglData->kounter < osglData->numberOfItems)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer <item> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 881:
+
+    {
+    osglData->namePresent = false;
+    osglData->descriptionPresent = false;
+    osglData->valuePresent = false;
+    osglData->typePresent = false;
+    osglData->solverPresent = false;
+    osglData->categoryPresent = false;
+    osglData->numberOfMatricesPresent = false;
+    osglData->numberOfItemsPresent = false;
+    osglData->description = "";
+    osglData->value = "";
+    osglData->type = "";
+    osglData->solver = "";
+    osglData->category = "";
+    osglData->numberOfMatrices = 0;
+    osglData->numberOfItems = 0;
+    osglData->kounter = 0;
+}
+
+    break;
+
+  case 887:
+
+    {
+    if (parserData->kounter >= parserData->numberOf)
+    {
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many paths in <requiredDirectories> element");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    }
+    else
+    {
+        parserData->paths[parserData->kounter] = (yyvsp[-1].sval);
+        parserData->kounter++;
+    }
+    free((yyvsp[-1].sval)); 
+}
+
+    break;
+
+  case 888:
+
+    {    
+    if (parserData->kounter >= parserData->numberOfPathPairs)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many path pairs");
+    else
+    {
+        if (!parserData->pathPairFromPresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "\"from\" attribute must be present");
+        if (!parserData->pathPairToPresent)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "\"to\" attribute must be present");
+           parserData->fromPaths[parserData->kounter] = parserData->pathPairFrom;
+           parserData->toPaths[parserData->kounter] = parserData->pathPairTo;
+        parserData->makeCopy[parserData->kounter] = parserData->pathPairMakeCopy;
+         parserData->kounter++;
+    }
+}
+
+    break;
+
+  case 889:
+
+    {
+//    if (parserData->kounter >= parserData->numberOfPathPairs)
+//        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many path pairs");
+    parserData->pathPairFrom = "";
+    parserData->pathPairTo = "";
+    parserData->pathPairFromPresent = false;
+    parserData->pathPairToPresent = false;
+    parserData->pathPairMakeCopyPresent = false;
+    parserData->pathPairMakeCopy = false;
+}
+
+    break;
+
+  case 890:
+
+    {
+//    parserData->makeCopy[parserData->kounter] = parserData->pathPairMakeCopy;
+}
+
+    break;
+
+  case 896:
+
+    {
+    if (parserData->pathPairFromPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one \"from\" attribute allowed");
+    parserData->pathPairFromPresent = true;
+    parserData->pathPairFrom = (yyvsp[-1].sval);
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 897:
+
+    {
+    if (parserData->pathPairToPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one \"to\" attribute allowed");
+    parserData->pathPairToPresent = true;
+    parserData->pathPairTo = (yyvsp[-1].sval);
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 898:
+
+    {
+    if (parserData->pathPairMakeCopyPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one \"makeCopy\" attribute allowed");
+    parserData->pathPairMakeCopyPresent = true;
+    parserData->pathPairMakeCopy = (strcmp((yyvsp[-1].sval),"true") == 0 || strcmp((yyvsp[-1].sval),"1") == 0);
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 901:
+
+    {
+    if (parserData->groupWeightAttributePresent ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one groupWeight attribute allowed for this element");
+    parserData->groupWeightAttributePresent = true;
+}
+
+    break;
+
+  case 902:
+
+    {
+    parserData->groupWeight = parserData->tempVal;
+}
+
+    break;
+
+  case 903:
+
+    {   
+    if (parserData->lbValueAttributePresent ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one lb attribute allowed for this element");
+    parserData->lbValueAttributePresent = true;
+}
+
+    break;
+
+  case 906:
+
+    { 
+    parserData->lbValueAttribute = ""; 
+}
+
+    break;
+
+  case 907:
+
+    { 
+    parserData->lbValueAttribute = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 908:
+
+    {   if (parserData->lbValueAttributePresent ) 
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one lb attribute allowed for this element");
+            parserData->lbValueAttributePresent = true;
+        }
+
+    break;
+
+  case 911:
+
+    { 
+    parserData->lbDualValue = 0.0; 
+}
+
+    break;
+
+  case 912:
+
+    {
+    parserData->lbDualValue = parserData->tempVal;
+}
+
+    break;
+
+  case 913:
+
+    {   if (parserData->sosIdxAttributePresent ) 
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one sosIdx attribute allowed for this element");
+        parserData->sosIdxAttributePresent = true;
+    }
+
+    break;
+
+  case 915:
+
+    {
+    if ((yyvsp[-1].ival) < 0)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "SOS index must be nonnegative");
+    parserData->sosIdx = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 916:
+
+    {
+   if (parserData->ubValueAttributePresent ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one ub attribute allowed for this element");
+    parserData->ubValueAttributePresent = true;
+}
+
+    break;
+
+  case 919:
+
+    { 
+    parserData->ubValueAttribute = ""; 
+}
+
+    break;
+
+  case 920:
+
+    { 
+    parserData->ubValueAttribute = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 921:
+
+    {   if (parserData->ubValueAttributePresent ) 
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one ub attribute allowed for this element");
+            parserData->ubValueAttributePresent = true;
+        }
+
+    break;
+
+  case 924:
+
+    { parserData->ubDualValue = 0.0; }
+
+    break;
+
+  case 925:
+
+    { 
+    parserData->ubDualValue = parserData->tempVal;
+}
+
+    break;
+
+  case 926:
+
+    {
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("Number of job IDs cannot be negative");
+    else
+        parserData->jobDependencies = new std::string[(yyvsp[-1].ival)];
+    parserData->numberOf = (yyvsp[-1].ival);
+    parserData->kounter = 0;
+}
+
+    break;
+
+  case 927:
+
+    {
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("number of other constraint options cannot be negative");
+    parserData->tempInt = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 928:
+
+    {
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("number of other matrixProgramming options cannot be negative");
+    parserData->tempInt = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 929:
+
+    {
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("number of other matrixVariable options cannot be negative");
+    parserData->tempInt = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 930:
+
+    {
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("number of other objective options cannot be negative");
+    parserData->tempInt = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 931:
+
+    {
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("number of other options cannot be negative");
+    parserData->tempInt = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 932:
+
+    {    
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("number of other variable cannot be negative");
+    parserData->tempInt = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 933:
+
+    {
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("Number of path pairs cannot be negative");
+    else if ((yyvsp[-1].ival) > 0)
+    {
+        parserData->fromPaths = new std::string[(yyvsp[-1].ival)];
+        parserData->toPaths   = new std::string[(yyvsp[-1].ival)];
+        parserData->makeCopy  = new bool[(yyvsp[-1].ival)];
+    }
+    parserData->numberOfPathPairs = (yyvsp[-1].ival);
+    parserData->kounter = 0;
+}
+
+    break;
+
+  case 934:
+
+    {
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("Number of paths cannot be negative");
+    else
+        parserData->paths = new std::string[(yyvsp[-1].ival)];
+    parserData->numberOf = (yyvsp[-1].ival);
+    parserData->kounter = 0;
+}
+
+    break;
+
+  case 935:
+
+    {
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("numberOfProcesses cannot be negative");
+    else
+        parserData->processesToKill = new std::string[(yyvsp[-1].ival)];
+    parserData->numberOf = (yyvsp[-1].ival);
+    parserData->kounter = 0;
+}
+
+    break;
+
+  case 936:
+
+    {    
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("number of solver options cannot be negative");
+    parserData->numberOfSolverOptions = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 939:
+
+    {     
+    if (!parserData->ignoreDataAfterErrors)
+        if (!osoption->setOtherOptionOrResultEnumeration(parserData->otherOptionType, 
+                parserData->iOther,
+                parserData->kounter,
+                osglData->numberOfEl, 
+                osglData->value, 
+                osglData->description, 
+                osglData->osglIntArray) )
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "set <other> option enumeration failed");
+
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    osglData->numberOfEl = 0;
+    parserData->kounter++;
+}
+
+    break;
+
+  case 940:
+
+    {
+    if (parserData->kounter >= osglData->numberOfEnumerations)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "more <enumeration> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->numberOfElPresent = false;
+    osglData->numberOfEl = 0;
+    osglData->valuePresent = false;
+    osglData->value = "";
+    osglData->descriptionPresent = false;
+    osglData->description = "";
+}
+
+    break;
+
+  case 941:
+
+    {
+        if(!osglData->numberOfElPresent) 
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "<other> element enumeration requires numberOfEl attribute"); 
+        if(!osglData->valuePresent) 
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "<other> element enumeration requires value attribute"); 
+    }
+
+    break;
+
+  case 944:
+
+    {
+        osglData->osglCounter = 0;
+//        osglData->numberOfElPresent = true;
+//        osglData->numberOfEl = parserData->numberOf;
+        if (osglData->numberOfEl > 0)
+            osglData->osglIntArray = new int[osglData->numberOfEl];
+    }
+
+    break;
+
+  case 952:
+
+    {parserData->tempVal = (yyvsp[0].ival);}
+
+    break;
+
+  case 953:
+
+    {parserData->tempVal = (yyvsp[0].dval);}
+
+    break;
+
+  case 962:
+
+    {
+    osglData->fileName    = "";
+    osglData->source      = "";
+    osglData->description = "";
+    osglData->fileCreator = "";
+    osglData->licence     = "";
+    osglData->fileNamePresent    = false;
+    osglData->sourcePresent      = false;
+    osglData->descriptionPresent = false;
+    osglData->fileCreatorPresent = false;
+    osglData->licencePresent     = false;
+}
+
+    break;
+
+  case 975:
+
+    {
+    if (osglData->fileNamePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated header information: file name");
+    else
+        osglData->fileNamePresent = true;
+}
+
+    break;
+
+  case 980:
+
+    {
+    osglData->fileName = (yyvsp[-1].sval);
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 981:
+
+    {
+    if (osglData->sourcePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated header information: source");
+    else
+        osglData->sourcePresent = true;
+}
+
+    break;
+
+  case 986:
+
+    {
+    osglData->source = (yyvsp[-1].sval);
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 987:
+
+    {
+    if (osglData->descriptionPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated header information: description");
+    else
+        osglData->descriptionPresent = true;
+}
+
+    break;
+
+  case 992:
+
+    {
+    osglData->description = (yyvsp[-1].sval);
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 993:
+
+    {
+    if (osglData->fileCreatorPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated header information: file creator");
+    else
+        osglData->fileCreatorPresent = true;
+}
+
+    break;
+
+  case 998:
+
+    {
+    osglData->fileCreator = (yyvsp[-1].sval);
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 999:
+
+    {
+    if (osglData->licencePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "Repeated header information: licence");
+    else
+        osglData->licencePresent = true;
+}
+
+    break;
+
+  case 1004:
+
+    {
+    osglData->licence = (yyvsp[-1].sval);
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1005:
+
+    {
+    for (int i=0; i<osglData->numberOfEl; i++)
+        if (osglData->osglIntArray[i] < 0)
+            throw ErrorClass("negative entry detected in nonnegativeIntVector");
+}
+
+    break;
+
+  case 1006:
+
+    {
+         if (osglData->osglCounter < osglData->numberOfEl)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer data elements than specified");
+            parserData->ignoreDataAfterErrors = true;
+        }
+    }
+
+    break;
+
+  case 1011:
+
+    {    
+    osglData->multPresent = false;
+    osglData->incrPresent = false;
+    osglData->mult = 1;
+    osglData->incr = 0;
+}
+
+    break;
+
+  case 1017:
+
+    {
+    if (osglData->osglCounter + osglData->mult > osglData->numberOfEl)
+        throw ErrorClass("OSgL IntVector: more data elements than specified");
+    else
+        for (int i=0; i<osglData->mult; i++)
+            osglData->osglIntArray[osglData->osglCounter++] = (yyvsp[-1].ival) + i*osglData->incr;    
+}
+
+    break;
+
+  case 1023:
+
+    {
+    char* b64string = (yyvsp[-1].sval);
+    if( b64string == NULL) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "base 64 data expected"); 
+    if (osglData->base64Size != sizeof(int))
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "base 64 encoded with a size of int different than on this machine"); 
+
+    std::string base64decodeddata = Base64::decodeb64( b64string );
+    int base64decodeddatalength = base64decodeddata.length();
+    int *intvec = NULL;
+    if ( osglData->numberOfEl != (base64decodeddatalength/osglData->base64Size) )
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "base 64 data length does not match numberOfEl"); 
+    else
+    {
+        intvec = (int*)&base64decodeddata[0];
+        for(int i = 0; i < (base64decodeddatalength/osglData->base64Size); i++)
+        {
+            osglData->osglIntArray[i] = *(intvec++);
+        }
+    }
+    //delete[] b64string;
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1024:
+
+    {
+        if (osglData->osglCounter < osglData->numberOfEl)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer data elements than specified");
+            parserData->ignoreDataAfterErrors = true;
+        }
+    }
+
+    break;
+
+  case 1029:
+
+    {    
+    osglData->multPresent = false;
+    osglData->incrPresent = false;
+    osglData->mult = 1;
+}
+
+    break;
+
+  case 1032:
+
+    {
+    if (osglData->osglCounter + osglData->mult > osglData->numberOfEl)
+        throw ErrorClass("OSgL DblVector: more data elements than specified");
+    else
+        for (int i=0; i<osglData->mult; i++)
+            osglData->osglDblArray[osglData->osglCounter++] = parserData->tempVal;    
+}
+
+    break;
+
+  case 1038:
+
+    {
+    char* b64string = (yyvsp[-1].sval);
+    if( b64string == NULL) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "base 64 data expected"); 
+    if (osglData->base64Size != sizeof(int))
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "base 64 encoded with a size of int different than on this machine"); 
+
+    std::string base64decodeddata = Base64::decodeb64( b64string );
+    int base64decodeddatalength = base64decodeddata.length();
+    double *dblvec = NULL;
+    if ( osglData->numberOfEl != (base64decodeddatalength/osglData->base64Size) )
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "base 64 data length does not match numberOfEl"); 
+    else
+    {
+        dblvec = (double*)&base64decodeddata[0];
+        for(int i = 0; i < (base64decodeddatalength/osglData->base64Size); i++)
+        {
+            osglData->osglDblArray[i] = *(dblvec++);
+        }
+    }
+    //delete[] b64string;
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1039:
+
+    {
+        if (osglData->osglCounter < osglData->numberOfEl)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "fewer data elements than specified");
+            parserData->ignoreDataAfterErrors = true;
+        }
+    }
+
+    break;
+
+  case 1043:
+
+    {    
+    osglData->multPresent = false;
+    osglData->incrPresent = false;
+    osglData->mult = 1;
+}
+
+    break;
+
+  case 1046:
+
+    {
+    if (osglData->osglCounter + osglData->mult > osglData->numberOfEl)
+        throw ErrorClass("OSgL StrVector: more data elements than specified");
+    else
+        for (int i=0; i<osglData->mult; i++)
+            osglData->osglStrArray[osglData->osglCounter++] = (yyvsp[-1].sval);
+    free((yyvsp[-1].sval));    
+}
+
+    break;
+
+  case 1047:
+
+    {
+//    if (osresult->setOtherOptionOrResultEnumeration(parserData->solutionIdx, parserData->iOther, 
+//            parserData->problemComponent, osglData->osglCounter, parserData->valueAttribute, 
+//            parserData->descriptionAttribute, osglData->osglIntArray, osglData->numberOfEl) != true)
+//        throw ErrorClass("set option or result enumeration  failed"); 
+    delete[] osglData->osglIntArray;
+    osglData->osglIntArray = NULL;
+    osglData->numberOfEl = 0;
+    osglData->osglCounter++;
+}
+
+    break;
+
+  case 1048:
+
+    {
+    osglData->valuePresent = false;
+    osglData->descriptionPresent = false;
+    osglData->value = "";
+    osglData->description = "";
+}
+
+    break;
+
+  case 1049:
+
+    {
+        if (!parserData->nameAttributePresent) 
+            throw ErrorClass("other element enumeration requires name attribute"); 
+    }
+
+    break;
+
+  case 1052:
+
+    {
+        osglData->osglCounter = 0;
+        osglData->osglIntArray = new int[osglData->numberOfEl];
+    }
+
+    break;
+
+  case 1061:
+
+    {
+    osglData->numberOfElPresent = false;
+}
+
+    break;
+
+  case 1068:
+
+    {
+    osglData->numberOfElPresent = false;
+}
+
+    break;
+
+  case 1075:
+
+    {
+    osglData->numberOfElPresent = false;
+}
+
+    break;
+
+  case 1082:
+
+    {
+    osglData->numberOfElPresent = false;
+}
+
+    break;
+
+  case 1089:
+
+    {
+    osglData->numberOfElPresent = false;
+}
+
+    break;
+
+  case 1096:
+
+    {
+    osglData->numberOfElPresent = false;
+}
+
+    break;
+
+  case 1103:
+
+    {
+    osglData->numberOfElPresent = false;
+}
+
+    break;
+
+  case 1109:
+
+    {
+    osglData->osglCounter = 0;
+    if (osglData->numberOfEl > 0)
+        osglData->osglIntArray = new int[osglData->numberOfEl];
+}
+
+    break;
+
+  case 1110:
+
+    {
+    if (!osglData->namePresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "name attribute must be present");
+}
+
+    break;
+
+  case 1119:
+
+    {
+        osglData->enumList = new OtherOptionOrResultEnumeration*[osglData->numberOfEnumerations];
+    }
+
+    break;
+
+  case 1121:
+
+    {
+        osglData->matrixWithMatrixVarIdx = new OSMatrixWithMatrixVarIdx*[osglData->numberOfMatrixVar];
+        for (int i=0; i < osglData->numberOfMatrixVar; i++)
+            osglData->matrixWithMatrixVarIdx[i] = NULL;
+    }
+
+    break;
+
+  case 1122:
+
+    {
+        if (osglData->matrixCounter < osglData->numberOfMatrixVar)
+            std::cout << "actual number of matrixVar less than number attribute: "
+                      << "encountered " << osglData->kounter << " out of " 
+                      << osglData->numberOfMatrixVar << std::endl;
+
+        if (osglData->matrixCounter < osglData->numberOfMatrixVar)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "fewer <matrixVar> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+        osglData->otherMatrixVarOptionOrResultArray[parserData->iOther]->name
+            = osglData->name;
+        osglData->otherMatrixVarOptionOrResultArray[parserData->iOther]->description
+            = osglData->description;
+        osglData->otherMatrixVarOptionOrResultArray[parserData->iOther]->value
+            = osglData->value;
+        osglData->otherMatrixVarOptionOrResultArray[parserData->iOther]->type
+            = osglData->type;
+        osglData->otherMatrixVarOptionOrResultArray[parserData->iOther]->solver
+            = osglData->solver;
+        osglData->otherMatrixVarOptionOrResultArray[parserData->iOther]->category
+            = osglData->category;
+        osglData->otherMatrixVarOptionOrResultArray[parserData->iOther]->enumType
+            = osglData->enumType;
+        osglData->otherMatrixVarOptionOrResultArray[parserData->iOther]->numberOfEnumerations
+            = osglData->numberOfEnumerations;
+        osglData->otherMatrixVarOptionOrResultArray[parserData->iOther]->numberOfMatrixVar
+            = osglData->numberOfMatrixVar;
+        if (osglData->numberOfEnumerations > 0)
+            osglData->otherMatrixVarOptionOrResultArray[parserData->iOther]->enumeration
+                = osglData->enumList;
+        if (osglData->numberOfMatrixVar > 0)
+            osglData->otherMatrixVarOptionOrResultArray[parserData->iOther]->matrixVar
+                = osglData->matrixWithMatrixVarIdx;
+    }
+
+    break;
+
+  case 1123:
+
+    {
+std::cout << "number of items specified: " << osglData-> numberOfEnumerations << std::endl;
+std::cout << " number of items seen: " << osglData->kounter << std::endl; 
+        if (osglData->enumCounter < osglData-> numberOfEnumerations)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "fewer <enumeration> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 1129:
+
+    {
+//    osglData->itemList[osglData->kounter] = osglData->itemContent;
+std::cout << " number of enumerations seen so far: " << osglData->kounter << std::endl; 
+    osglData->kounter++;
+}
+
+    break;
+
+  case 1130:
+
+    {
+    if (!osglData->namePresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "name attribute must be present");
+}
+
+    break;
+
+  case 1139:
+
+    {
+        osglData->matrixList = new OSMatrix*[osglData->numberOfMatrices];
+    }
+
+    break;
+
+  case 1140:
+
+    {
+        osglData->itemList = new std::string[osglData->numberOfItems];
+    }
+
+    break;
+
+  case 1141:
+
+    {
+        if (osglData->kounter < osglData->numberOfMatrices)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "fewer <matrix> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 1142:
+
+    {
+std::cout << "number of items specified: " << osglData->numberOfItems << std::endl;
+std::cout << " number of items seen: " << osglData->kounter << std::endl; 
+        if (osglData->kounter < osglData->numberOfItems)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "fewer <item> elements than specified");
+            parserData->ignoreDataAfterErrors = true;        
+        }
+    }
+
+    break;
+
+  case 1148:
+
+    {    
+    osglData->itemList[osglData->kounter] = osglData->itemContent;
+std::cout << " number of items seen so far: " << osglData->kounter << std::endl; 
+    osglData->kounter++;
+}
+
+    break;
+
+  case 1149:
+
+    {
+std::cout << "number of items specified: " << osglData->numberOfItems << std::endl;
+std::cout << " number of items seen: " << osglData->kounter << std::endl; 
+        if (osglData->kounter >= osglData->numberOfItems)
+            if (!parserData->suppressFurtherErrorMessages)
+            {
+                parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <item> elements than specified");
+                parserData->suppressFurtherErrorMessages = true;
+                parserData->ignoreDataAfterErrors = true;
+            }
+        osglData->itemContent = "";            
+    }
+
+    break;
+
+  case 1154:
+
+    {
+std::cout << "number of items specified: " << osglData->numberOfItems << std::endl;
+std::cout << " number of items seen: " << osglData->kounter << std::endl; 
+    if (osglData->kounter >= osglData->numberOfItems)
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more <item> elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    osglData->itemContent = (yyvsp[0].sval); 
+    free((yyvsp[0].sval));
+}
+
+    break;
+
+  case 1155:
+
+    {
+//  IMPORTANT -- HERE IS WHERE WE CREATE THE CONSTRUCTOR LISTS
+    osglData->matrix[osglData->matrixCounter] = 
+        ((OSMatrix*)osglData->mtxConstructorVec[0])->createConstructorTreeFromPrefix(osglData->mtxConstructorVec);
+    osglData->matrix[osglData->matrixCounter]->idx = osglData->matrixCounter;
+    osglData->matrixCounter++;
+}
+
+    break;
+
+  case 1156:
+
+    {
+//  IMPORTANT -- HERE IS WHERE WE CREATE THE CONSTRUCTOR LISTS
+    osglData->matrixWithMatrixVarIdx[osglData->matrixCounter] = 
+        (OSMatrixWithMatrixVarIdx*)((OSMatrixWithMatrixVarIdx*)osglData->mtxConstructorVec[0])
+            ->createConstructorTreeFromPrefix(osglData->mtxConstructorVec);
+    osglData->matrixWithMatrixVarIdx[osglData->matrixCounter]->idx = osglData->matrixCounter;
+    osglData->matrixWithMatrixVarIdx[osglData->matrixCounter]->matrixVarIdx
+        = osglData->matrixVarIdx;
+    osglData->matrixCounter++;
+}
+
+    break;
+
+  case 1157:
+
+    {
+    if (osglData->matrixCounter >= osglData->numberOfMatrices)
+        throw ErrorClass("more matrices than specified");
+    osglData->typePresent = false;
+    osglData->numberOfRowsPresent = false;
+    osglData->numberOfColumnsPresent = false;
+    osglData->namePresent = false;
+    osglData->symmetryPresent = false;
+    osglData->mtxConstructorVec.clear();
+    osglData->mtxBlocksVec.clear();
+    osglData->mtxBlkVec.clear();
+    osglData->nBlocksVec.clear();
+
+    /**
+     *  The <matrix> tag combines the functions of the <nl> tag and the top OSnLNode,
+     *  so we also initial the storage vectors here
+     */
+    osglData->tempC = new OSMatrix();
+    osglData->mtxConstructorVec.push_back((OSMatrix*)osglData->tempC);
+    osglData->mtxBlkVec.push_back((OSMatrix*)osglData->tempC);
+}
+
+    break;
+
+  case 1158:
+
+    {
+    if (osglData->numberOfRowsPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "mandatory attribute numberOfRows is missing");    
+    else
+        ((OSMatrix*)osglData->tempC)->numberOfRows = osglData->numberOfRows;
+    if (osglData->numberOfColumnsPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "mandatory attribute numberOfColumns is missing");
+    else
+        ((OSMatrix*)osglData->tempC)->numberOfColumns = osglData->numberOfColumns;
+    if (osglData->symmetryPresent == true)
+    {
+//        if (osglData->symmetry == "unknown")
+//            osglData->symmetry =  "none";
+        ((OSMatrix*)osglData->tempC)->symmetry 
+            = (ENUM_MATRIX_SYMMETRY)returnMatrixSymmetry(osglData->symmetry);
+    }
+    if (osglData->namePresent == true)
+        ((OSMatrix*)osglData->tempC)->name = osglData->name;
+    if (osglData->typePresent == true)
+        ((OSMatrix*)osglData->tempC)->declaredMatrixType
+            = (ENUM_MATRIX_TYPE)returnMatrixType(osglData->type);
+}
+
+    break;
+
+  case 1166:
+
+    {
+    if (osglData->matrixCounter >= osglData->numberOfMatrixVar)
+        throw ErrorClass("more matrices than specified");
+    osglData->symmetryPresent = false;
+    osglData->typePresent = false;
+    osglData->numberOfRowsPresent = false;
+    osglData->numberOfColumnsPresent = false;
+    osglData->namePresent = false;
+    osglData->matrixVarIdxPresent = false;
+
+    osglData->mtxConstructorVec.clear();
+    osglData->mtxBlocksVec.clear();
+    osglData->mtxBlkVec.clear();
+    osglData->nBlocksVec.clear();
+
+    /**
+     *  The <matrix> tag combines the functions of the <nl> tag and the top OSnLNode,
+     *  so we also initial the storage vectors here
+     */
+    osglData->tempC = new OSMatrixWithMatrixVarIdx();
+    osglData->mtxConstructorVec.push_back((OSMatrixWithMatrixVarIdx*)osglData->tempC);
+    osglData->mtxBlkVec.push_back((OSMatrixWithMatrixVarIdx*)osglData->tempC);
+}
+
+    break;
+
+  case 1167:
+
+    {
+    if (osglData->numberOfRowsPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "mandatory attribute numberOfRows is missing");    
+    else
+        ((OSMatrix*)osglData->tempC)->numberOfRows = osglData->numberOfRows;
+    if (osglData->numberOfColumnsPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "mandatory attribute numberOfColumns is missing");
+    else
+        ((OSMatrix*)osglData->tempC)->numberOfColumns = osglData->numberOfColumns;
+    if (osglData->matrixVarIdxPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "mandatory attribute matrixVarIdx is missing");    
+    else
+        ((OSMatrixWithMatrixVarIdx*)osglData->tempC)->matrixVarIdx = osglData->matrixVarIdx;
+    if (osglData->symmetryPresent == true)
+    {
+        if (osglData->symmetry == "unknown")
+            osglData->symmetry =  "none";
+        ((OSMatrix*)osglData->tempC)->symmetry 
+            = (ENUM_MATRIX_SYMMETRY)returnMatrixSymmetry(osglData->symmetry);
+    }
+    if (osglData->namePresent == true)
+        ((OSMatrix*)osglData->tempC)->name = osglData->name;
+    if (osglData->typePresent == true)
+        ((OSMatrix*)osglData->tempC)->declaredMatrixType
+            = (ENUM_MATRIX_TYPE)returnMatrixType(osglData->type);
+}
+
+    break;
+
+  case 1171:
+
+    {std::cout << "processed osglNumberOfRowsATT attribute: " << osglData->numberOfRows << std::endl;}
+
+    break;
+
+  case 1172:
+
+    {std::cout << "processed osglNumberOfColumnsATT attribute: " << osglData->numberOfColumns  << std::endl;}
+
+    break;
+
+  case 1175:
+
+    {std::cout << "processed osglMatrixVarIdxATT attribute: " << osglData->matrixVarIdx  << std::endl;}
+
+    break;
+
+  case 1179:
+
+    {
+    osglData->mtxBlkVec.back()->m_mChildren = 
+        new MatrixNode*[osglData->mtxBlkVec.back()->inumberOfChildren];
+    osglData->mtxBlkVec.pop_back();
+}
+
+    break;
+
+  case 1183:
+
+    {std::cout << " start matrixVar" << std::endl;}
+
+    break;
+
+  case 1184:
+
+    {
+std::cout << "matrixVar is finished" << std::endl;
+    osglData->mtxBlkVec.back()->m_mChildren = 
+        new MatrixNode*[osglData->mtxBlkVec.back()->inumberOfChildren];
+    osglData->mtxBlkVec.pop_back();
+}
+
+    break;
+
+  case 1187:
+
+    {
+    osglData->mtxBlkVec.back()->inumberOfChildren++; 
+}
+
+    break;
+
+  case 1188:
+
+    {
+    osglData->tempC = new BaseMatrix();
+    osglData->mtxConstructorVec.push_back((BaseMatrix*)osglData->tempC);
+
+    osglData->baseMatrixIdxPresent = false;
+    osglData->targetMatrixFirstRowPresent = false;
+    osglData->targetMatrixFirstColPresent = false;
+    osglData->baseMatrixStartRowPresent = false;
+    osglData->baseMatrixStartColPresent = false;
+    osglData->baseMatrixEndRowPresent = false;
+    osglData->baseMatrixEndColPresent = false;
+    osglData->baseTransposePresent = false;
+    osglData->scalarMultiplierPresent = false;
+    osglData->scalarImaginaryPartPresent = false;
+    osglData->baseMatrixEndRow = -1;
+    osglData->baseMatrixEndCol = -1;
+}
+
+    break;
+
+  case 1189:
+
+    {
+    if (osglData->baseMatrixIdxPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "mandatory attribute baseMatrixIdx is missing");
+    else
+    {
+        if (osglData->baseMatrixIdx < 0 || osglData->baseMatrixIdx >= osglData->matrixCounter)
+            throw ErrorClass("Improper idx value for baseMatrix reference");
+        ((BaseMatrix*)osglData->tempC)->baseMatrixIdx = osglData->baseMatrixIdx;
+        ((BaseMatrix*)osglData->tempC)->baseMatrix = (OSMatrix*)osglData->matrix[osglData->baseMatrixIdx];
+    }
+    if (osglData->targetMatrixFirstRowPresent == true)
+        ((BaseMatrix*)osglData->tempC)->targetMatrixFirstRow = osglData->targetMatrixFirstRow;
+    if (osglData->targetMatrixFirstColPresent == true)
+        ((BaseMatrix*)osglData->tempC)->targetMatrixFirstCol = osglData->targetMatrixFirstCol;
+    if (osglData->baseMatrixStartRowPresent == true)
+        ((BaseMatrix*)osglData->tempC)->baseMatrixStartRow = osglData->baseMatrixStartRow;
+    if (osglData->baseMatrixStartColPresent == true)
+        ((BaseMatrix*)osglData->tempC)->baseMatrixStartCol = osglData->baseMatrixStartCol;
+    if (osglData->baseMatrixEndRowPresent == true)
+        ((BaseMatrix*)osglData->tempC)->baseMatrixEndRow = osglData->baseMatrixEndRow;
+    if (osglData->baseMatrixEndColPresent == true)
+        ((BaseMatrix*)osglData->tempC)->baseMatrixEndCol = osglData->baseMatrixEndCol;
+    if (osglData->baseTransposePresent == true)
+        ((BaseMatrix*)osglData->tempC)->baseTranspose = osglData->baseTranspose;
+    if (osglData->scalarMultiplierPresent == true)
+        ((BaseMatrix*)osglData->tempC)->scalarMultiplier = osglData->scalarMultiplier;
+    if (osglData->scalarImaginaryPartPresent == true)
+        ((BaseMatrix*)osglData->tempC)->scalarImaginaryPart = osglData->scalarImaginaryPart;
+}
+
+    break;
+
+  case 1205:
+
+    {
+    osglData->mtxBlkVec.back()->inumberOfChildren++;
+}
+
+    break;
+
+  case 1218:
+
+    {
+    osglData->tempC = new ConstantMatrixElements(); 
+    osglData->mtxConstructorVec.push_back(osglData->tempC);
+    osglData->numberOfValuesPresent = false;        
+    osglData->rowMajorPresent = false;
+    osglData->rowMajor = false;
+}
+
+    break;
+
+  case 1219:
+
+    {
+    if (osglData->numberOfValuesPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<constantElements>: numberOfValues attribute missing");    
+}
+
+    break;
+
+  case 1222:
+
+    {
+        ((ConstantMatrixElements*)osglData->tempC)->numberOfValues = osglData->numberOfValues;
+    }
+
+    break;
+
+  case 1223:
+
+    {
+        ((ConstantMatrixElements*)osglData->tempC)->rowMajor = osglData->rowMajor;
+    }
+
+    break;
+
+  case 1227:
+
+    {
+    ((MatrixElements*)osglData->tempC)->start = new IntVector();
+    ((MatrixElements*)osglData->tempC)->start->numberOfEl = osglData->numberOfEl;
+    ((MatrixElements*)osglData->tempC)->start->el = osglData->osglIntArray;
+    osglData->osglIntArray = NULL;   // to facilitate garbage collection without a segfault
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 1228:
+
+    {
+    if (osglData->rowMajor == false)
+        osglData->numberOfEl = ((MatrixType*)osglData->mtxBlkVec.back())->numberOfColumns + 1;
+    else
+        osglData->numberOfEl = ((MatrixType*)osglData->mtxBlkVec.back())->numberOfRows + 1;
+    osglData->osglIntArray = new int[osglData->numberOfEl];
+    osglData->osglCounter = 0;
+}
+
+    break;
+
+  case 1232:
+
+    {
+    //verify start vector: first element must be zero, vector must be nondecreasing, 
+    //last element must equal numberOfValues; length must equal numberOfRows + 1 or numberOfColumns + 1
+    if (osglData->osglIntArray[0] != 0)
+        throw ErrorClass("first entry of matrix element start vector is not zero");
+    for (int i=1; i < osglData->numberOfEl; i++)
+    {
+        if (osglData->osglIntArray[i] < osglData->osglIntArray[i-1])
+            throw ErrorClass("matrix element start vector must be nondecreasing");
+    }
+    if (osglData->osglIntArray[osglData->numberOfEl-1] 
+        != ((MatrixElements*)osglData->tempC)->numberOfValues)
+            throw ErrorClass("last entry of matrix element start vector does not equal numberOfValues");
+}
+
+    break;
+
+  case 1235:
+
+    {
+    ((MatrixElements*)osglData->tempC)->index = new IntVector();
+    ((MatrixElements*)osglData->tempC)->index->numberOfEl
+        = ((MatrixElements*)osglData->tempC)->numberOfValues;
+    //check whether the values of the index array are legal and satisfy symmetry assertions
+    int maxindex;
+    //symmetry.substr(0,5) == "upper"/"lower"
+    ((MatrixElements*)osglData->tempC)->index->el = osglData->osglIntArray;
+    osglData->osglIntArray = NULL;   // to facilitate garbage collection without a segfault
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 1236:
+
+    {
+    osglData->numberOfEl = ((MatrixElements*)osglData->tempC)->numberOfValues;
+    if (osglData->numberOfEl > 0)
+        osglData->osglIntArray = new int[osglData->numberOfEl];
+    osglData->osglCounter = 0;
+}
+
+    break;
+
+  case 1242:
+
+    {
+    ((ConstantMatrixElements*)osglData->tempC)->value = new ConstantMatrixValues();
+    ((ConstantMatrixElements*)osglData->tempC)->value->numberOfEl = osglData->numberOfEl;
+    ((ConstantMatrixElements*)osglData->tempC)->value->el = osglData->osglDblArray;
+    osglData->osglDblArray = NULL;   // to facilitate garbage collection without a segfault
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 1243:
+
+    {
+    osglData->numberOfEl = ((ConstantMatrixElements*)osglData->tempC)->numberOfValues;
+    if (osglData->numberOfEl > 0)
+        osglData->osglDblArray = new double[osglData->numberOfEl];
+    osglData->osglCounter = 0;
+}
+
+    break;
+
+  case 1250:
+
+    {
+    osglData->tempC = new VarReferenceMatrixElements();
+    osglData->mtxConstructorVec.push_back(osglData->tempC);
+    osglData->numberOfValuesPresent = false;        
+    osglData->rowMajorPresent = false;
+    osglData->rowMajor = false;
+}
+
+    break;
+
+  case 1251:
+
+    {
+    if (osglData->numberOfValuesPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<varReferenceElements>: numberOfValues attribute missing");    
+}
+
+    break;
+
+  case 1254:
+
+    {
+        ((VarReferenceMatrixElements*)osglData->tempC)->numberOfValues = osglData->numberOfValues;
+    }
+
+    break;
+
+  case 1255:
+
+    {
+        ((VarReferenceMatrixElements*)osglData->tempC)->rowMajor = osglData->rowMajor;
+    }
+
+    break;
+
+  case 1259:
+
+    {
+    ((VarReferenceMatrixElements*)osglData->tempC)->value = new VarReferenceMatrixValues();
+    ((VarReferenceMatrixElements*)osglData->tempC)->value->numberOfEl = osglData->numberOfEl;
+    ((VarReferenceMatrixElements*)osglData->tempC)->value->el = osglData->osglIntArray;
+    osglData->osglIntArray = NULL;   // to facilitate garbage collection without a segfault
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 1260:
+
+    {
+    osglData->numberOfEl = ((VarReferenceMatrixElements*)osglData->tempC)->numberOfValues;
+    if (osglData->numberOfEl > 0)
+        osglData->osglIntArray = new int[osglData->numberOfEl];
+    osglData->osglCounter = 0;
+}
+
+    break;
+
+  case 1267:
+
+    {
+    osglData->tempC = new LinearMatrixElements();
+    osglData->mtxConstructorVec.push_back(osglData->tempC);
+    osglData->numberOfValuesPresent = false;        
+    osglData->rowMajorPresent = false;
+    osglData->rowMajor = false;
+}
+
+    break;
+
+  case 1268:
+
+    {
+    if (osglData->numberOfValuesPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<linearElements>: numberOfValues attribute missing");    
+}
+
+    break;
+
+  case 1271:
+
+    {
+        ((LinearMatrixElements*)osglData->tempC)->numberOfValues = osglData->numberOfValues;
+    }
+
+    break;
+
+  case 1272:
+
+    {
+        ((LinearMatrixElements*)osglData->tempC)->rowMajor = osglData->rowMajor;
+    }
+
+    break;
+
+  case 1275:
+
+    {
+        if (osglData->numberOfValues > 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected <value> element");
+    }
+
+    break;
+
+  case 1276:
+
+    {
+        if (osglData->numberOfValues > osglData->nonzeroCounter)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few <el> elements");
+        else if (osglData->numberOfValues < osglData->nonzeroCounter)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many <el> elements");
+        ((LinearMatrixElements*)osglData->tempC)->value->numberOfEl = osglData->numberOfEl;
+        parserData->suppressFurtherErrorMessages = false;
+        parserData->ignoreDataAfterErrors = false;        
+    }
+
+    break;
+
+  case 1277:
+
+    {
+    osglData->numberOfValues = ((LinearMatrixElements*)osglData->tempC)->numberOfValues;
+    osglData->nonzeroCounter = 0;
+    ((LinearMatrixElements*)osglData->tempC)->value = new LinearMatrixValues();
+    ((LinearMatrixElements*)osglData->tempC)->value->numberOfEl
+        = ((LinearMatrixElements*)osglData->tempC)->numberOfValues;    
+    if (osglData->numberOfValues > 0)
+        ((LinearMatrixElements*)osglData->tempC)->value->el
+        = new LinearMatrixElement*[((LinearMatrixElements*)osglData->tempC)->numberOfValues]; 
+    for (int i=0; i < ((LinearMatrixElements*)osglData->tempC)->numberOfValues; i++)
+        ((LinearMatrixElements*)osglData->tempC)->value->el[i] = new LinearMatrixElement();
+    osglData->osglCounter = 0;
+    osglData->numberOfVarIdxPresent = false;
+}
+
+    break;
+
+  case 1285:
+
+    {
+    osglData->nonzeroCounter++;
+    if (osglData->nonzeroCounter > osglData->numberOfValues)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "linear matrix elements: too many nonzeros");    
+}
+
+    break;
+
+  case 1286:
+
+    {
+    osglData->numberOfVarIdxPresent = false;
+    osglData->constantPresent = false;
+    osglData->constant = 0.0;
+}
+
+    break;
+
+  case 1287:
+
+    {
+    if (osglData->numberOfVarIdxPresent)
+    {
+        ((LinearMatrixElements*)osglData->tempC)->value->el[osglData->nonzeroCounter]->numberOfVarIdx
+            = osglData->numberOfVarIdx;
+        ((LinearMatrixElements*)osglData->tempC)->value->el[osglData->nonzeroCounter]->varIdx
+            = new LinearMatrixElementTerm*[osglData->numberOfVarIdx];
+        ((LinearMatrixElements*)osglData->tempC)->value->el[osglData->nonzeroCounter]->constant
+            = osglData->constant;
+    }
+    else
+    {
+        ((LinearMatrixElements*)osglData->tempC)->value->el[osglData->nonzeroCounter]->numberOfVarIdx = 0;
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfVarIdx attribute missing");
+    }
+    osglData->osglCounter = 0;
+}
+
+    break;
+
+  case 1299:
+
+    {
+    osglData->coefPresent = false;
+    osglData->coef = 1.0;
+    ((LinearMatrixElements*)osglData->tempC)->value->el[osglData->nonzeroCounter]->varIdx[osglData->osglCounter]
+        = new LinearMatrixElementTerm();
+}
+
+    break;
+
+  case 1301:
+
+    {
+    ((LinearMatrixElements*)osglData->tempC)->value->el[osglData->nonzeroCounter]->varIdx[osglData->osglCounter]->coef = osglData->coef;
+}
+
+    break;
+
+  case 1302:
+
+    {
+    ((LinearMatrixElements*)osglData->tempC)->value->el[osglData->nonzeroCounter]->varIdx[osglData->osglCounter]->idx = (yyvsp[-1].ival);
+    osglData->osglCounter++;
+}
+
+    break;
+
+  case 1304:
+
+    {
+    osglData->tempC = new RealValuedExpressions();
+    osglData->mtxConstructorVec.push_back(osglData->tempC);
+    osglData->numberOfValuesPresent = false;        
+    osglData->rowMajorPresent = false;
+    osglData->rowMajor = false;
+}
+
+    break;
+
+  case 1305:
+
+    {
+    if (osglData->numberOfValuesPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<realValuedExpressions>: numberOfValues attribute missing");    
+}
+
+    break;
+
+  case 1308:
+
+    {
+        ((RealValuedExpressions*)osglData->tempC)->numberOfValues = osglData->numberOfValues;
+    }
+
+    break;
+
+  case 1309:
+
+    {
+        ((RealValuedExpressions*)osglData->tempC)->rowMajor = osglData->rowMajor;
+    }
+
+    break;
+
+  case 1312:
+
+    {
+        if (osglData->numberOfValues > 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected <value> element");
+    }
+
+    break;
+
+  case 1313:
+
+    {
+        if (osglData->numberOfValues > osglData->nonzeroCounter)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few <el> elements");
+        else if (osglData->numberOfValues < osglData->nonzeroCounter)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many <el> elements");        
+        ((RealValuedExpressions*)osglData->tempC)->value->numberOfEl = osglData->numberOfEl;
+        parserData->suppressFurtherErrorMessages = false;
+        parserData->ignoreDataAfterErrors = false;        
+    }
+
+    break;
+
+  case 1314:
+
+    {
+    osglData->numberOfValues = ((RealValuedExpressions*)osglData->tempC)->numberOfValues;
+    osglData->nonzeroCounter = 0;
+
+    ((RealValuedExpressions*)osglData->tempC)->value = new RealValuedExpressionArray();
+    ((RealValuedExpressions*)osglData->tempC)->value->numberOfEl
+        = osglData->numberOfValues;
+    if (osglData->numberOfValues > 0)
+    ((RealValuedExpressions*)osglData->tempC)->value->el
+        = new RealValuedExpressionTree*[osglData->numberOfValues];
+
+    for (int i=0; i<osglData->numberOfValues; i++)
+        ((RealValuedExpressions*)osglData->tempC)->value->el[i] = new RealValuedExpressionTree();
+}
+
+    break;
+
+  case 1322:
+
+    {
+        if (osglData->nonzeroCounter >= osglData->numberOfValues) 
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "number of <el> terms greater than expected");
+        // clear the vectors of pointers
+        osnlData->nlNodeVec.clear();
+        osnlData->sumVec.clear();
+        osnlData->allDiffVec.clear();
+        osnlData->maxVec.clear();
+        osnlData->minVec.clear();
+        osnlData->productVec.clear();
+        osnlData->matrixSumVec.clear();
+        osnlData->matrixProductVec.clear();
+    }
+
+    break;
+
+  case 1326:
+
+    {
+    // IMPORTANT -- HERE IS WHERE WE CREATE THE EXPRESSION TREE
+        ((RealValuedExpressions*)osglData->tempC)->value->el[osglData->nonzeroCounter]->m_treeRoot = 
+            ((OSnLNode*)osnlData->nlNodeVec[ 0])->createExpressionTreeFromPrefix( osnlData->nlNodeVec);
+        osglData->nonzeroCounter++;
+    }
+
+    break;
+
+  case 1328:
+
+    {
+    osglData->tempC = new ComplexValuedExpressions();
+    osglData->mtxConstructorVec.push_back(osglData->tempC);
+    osglData->numberOfValuesPresent = false;        
+    osglData->rowMajorPresent = false;
+    osglData->rowMajor = false;
+}
+
+    break;
+
+  case 1329:
+
+    {
+    if (osglData->numberOfValuesPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<complexValuedExpressions>: numberOfValues attribute missing");    
+}
+
+    break;
+
+  case 1332:
+
+    {
+        ((ComplexValuedExpressions*)osglData->tempC)->numberOfValues = osglData->numberOfValues;
+    }
+
+    break;
+
+  case 1333:
+
+    {
+        ((ComplexValuedExpressions*)osglData->tempC)->rowMajor = osglData->rowMajor;
+    }
+
+    break;
+
+  case 1336:
+
+    {
+        if (osglData->numberOfValues > 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected <value> element");
+    }
+
+    break;
+
+  case 1337:
+
+    {
+        if (osglData->numberOfValues > osglData->nonzeroCounter)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few <el> elements");
+        else if (osglData->numberOfValues < osglData->nonzeroCounter)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many <el> elements");        
+        ((ComplexValuedExpressions*)osglData->tempC)->value->numberOfEl = osglData->numberOfEl;
+        parserData->suppressFurtherErrorMessages = false;
+        parserData->ignoreDataAfterErrors = false;        
+    }
+
+    break;
+
+  case 1338:
+
+    {
+    osglData->numberOfValues = ((ComplexValuedExpressions*)osglData->tempC)->numberOfValues;
+    osglData->nonzeroCounter = 0;
+
+    ((ComplexValuedExpressions*)osglData->tempC)->value = new ComplexValuedExpressionArray();
+    ((ComplexValuedExpressions*)osglData->tempC)->value->numberOfEl
+        = osglData->numberOfValues;
+    if (osglData->numberOfValues > 0)
+    ((ComplexValuedExpressions*)osglData->tempC)->value->el
+        = new ComplexValuedExpressionTree*[osglData->numberOfValues];
+
+    for (int i=0; i<osglData->numberOfValues; i++)
+        ((ComplexValuedExpressions*)osglData->tempC)->value->el[i] = new ComplexValuedExpressionTree();
+}
+
+    break;
+
+  case 1346:
+
+    {
+        if (osglData->nonzeroCounter >= osglData->numberOfValues) 
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "number of <el> terms greater than expected");
+        // clear the vectors of pointers
+        osnlData->nlNodeVec.clear();
+        osnlData->sumVec.clear();
+        osnlData->allDiffVec.clear();
+        osnlData->maxVec.clear();
+        osnlData->minVec.clear();
+        osnlData->productVec.clear();
+        osnlData->matrixSumVec.clear();
+        osnlData->matrixProductVec.clear();
+    }
+
+    break;
+
+  case 1350:
+
+    {
+    // IMPORTANT -- HERE IS WHERE WE CREATE THE EXPRESSION TREE
+        if (osglData->nonzeroCounter < osglData->numberOfValues) 
+            ((ComplexValuedExpressions*)osglData->tempC)->value->el[osglData->nonzeroCounter]->m_treeRoot = 
+                ((OSnLNode*)osnlData->nlNodeVec[ 0])->createExpressionTreeFromPrefix( osnlData->nlNodeVec);
+        osglData->nonzeroCounter++;
+    }
+
+    break;
+
+  case 1352:
+
+    {
+    osglData->tempC = new ObjReferenceMatrixElements();
+    osglData->mtxConstructorVec.push_back(osglData->tempC);
+    osglData->numberOfValuesPresent = false;        
+    osglData->rowMajorPresent = false;
+    osglData->rowMajor = false;
+}
+
+    break;
+
+  case 1353:
+
+    {
+    if (osglData->numberOfValuesPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<objReferenceElements>: numberOfValues attribute missing");    
+}
+
+    break;
+
+  case 1356:
+
+    {
+        ((ObjReferenceMatrixElements*)osglData->tempC)->numberOfValues = osglData->numberOfValues;
+    }
+
+    break;
+
+  case 1357:
+
+    {
+        ((ObjReferenceMatrixElements*)osglData->tempC)->rowMajor = osglData->rowMajor;
+    }
+
+    break;
+
+  case 1361:
+
+    {
+    ((ObjReferenceMatrixElements*)osglData->tempC)->value = new ObjReferenceMatrixValues();
+    ((ObjReferenceMatrixElements*)osglData->tempC)->value->numberOfEl = osglData->numberOfEl;
+    ((ObjReferenceMatrixElements*)osglData->tempC)->value->el = osglData->osglIntArray;
+    osglData->osglIntArray = NULL;   // to facilitate garbage collection without a segfault
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 1362:
+
+    {
+    osglData->numberOfEl = ((ObjReferenceMatrixElements*)osglData->tempC)->numberOfValues;
+    if (osglData->numberOfEl > 0)
+        osglData->osglIntArray = new int[osglData->numberOfEl];
+    osglData->osglCounter = 0;
+}
+
+    break;
+
+  case 1369:
+
+    {
+    osglData->tempC = new ConReferenceMatrixElements();
+    osglData->mtxConstructorVec.push_back(osglData->tempC);
+    osglData->numberOfValuesPresent = false;        
+    osglData->rowMajorPresent = false;
+    osglData->rowMajor = false;
+}
+
+    break;
+
+  case 1370:
+
+    {
+    if (osglData->numberOfValuesPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<conReferenceElements>: numberOfValues attribute missing");    
+}
+
+    break;
+
+  case 1373:
+
+    {
+        ((ConReferenceMatrixElements*)osglData->tempC)->numberOfValues = osglData->numberOfValues;
+    }
+
+    break;
+
+  case 1374:
+
+    {
+        ((ConReferenceMatrixElements*)osglData->tempC)->rowMajor = osglData->rowMajor;
+    }
+
+    break;
+
+  case 1377:
+
+    {
+        if (osglData->numberOfValues > 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected <value> element");
+    }
+
+    break;
+
+  case 1378:
+
+    {
+        if (osglData->numberOfValues > osglData->nonzeroCounter)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few <el> elements");
+        else if (osglData->numberOfValues < osglData->nonzeroCounter)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many <el> elements");        
+        ((ConReferenceMatrixElements*)osglData->tempC)->value->numberOfEl = osglData->numberOfEl;
+        parserData->suppressFurtherErrorMessages = false;
+        parserData->ignoreDataAfterErrors = false;        
+    }
+
+    break;
+
+  case 1379:
+
+    {
+    osglData->numberOfValues = ((ConReferenceMatrixElements*)osglData->tempC)->numberOfValues;
+    osglData->nonzeroCounter = 0;
+
+    ((ConReferenceMatrixElements*)osglData->tempC)->value = new ConReferenceMatrixValues();
+    ((ConReferenceMatrixElements*)osglData->tempC)->value->numberOfEl
+        = osglData->numberOfValues;
+    if (osglData->numberOfValues > 0)
+    ((ConReferenceMatrixElements*)osglData->tempC)->value->el
+        = new ConReferenceMatrixElement*[osglData->numberOfValues];
+
+    for (int i=0; i<osglData->numberOfValues; i++)
+        ((ConReferenceMatrixElements*)osglData->tempC)->value->el[i] = new ConReferenceMatrixElement();
+}
+
+    break;
+
+  case 1387:
+
+    {
+        if (osglData->nonzeroCounter >= osglData->numberOfValues) 
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "number of <el> terms greater than expected");
+        osglData->valueTypePresent = false;
+        osglData->multPresent = false;
+        osglData->incrPresent = false;
+        osglData->mult = 1;
+        osglData->incr = 0;
+        osglData->valueType = "";
+    }
+
+    break;
+
+  case 1393:
+
+    {
+    if (osglData->nonzeroCounter + osglData->mult > osglData->numberOfEl)
+    {
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more data elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    }
+    else
+    {
+        if (osglData->valueType == "")
+            osglData->valueType = "value";
+        if (returnConReferenceValueType(osglData->valueType) <= 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+                "invalid valueType attribute in conReferenceElements");
+        else
+        {
+            for (int i=0; i<osglData->mult; i++)
+            {
+                ((ConReferenceMatrixElements*)osglData->tempC)->value->el[osglData->nonzeroCounter + i]->conReference
+                    = (yyvsp[-1].ival) + i*osglData->incr;
+                ((ConReferenceMatrixElements*)osglData->tempC)->value->el[osglData->nonzeroCounter + i]->valueType
+                    = (ENUM_CONREFERENCE_VALUETYPE)returnConReferenceValueType(osglData->valueType);
+            }
+        }
+        osglData->nonzeroCounter += osglData->mult;
+    }
+}
+
+    break;
+
+  case 1395:
+
+    {
+    osglData->tempC = new ComplexMatrixElements();
+    osglData->mtxConstructorVec.push_back(osglData->tempC);
+    osglData->numberOfValuesPresent = false;  
+    osglData->rowMajorPresent = false;
+    osglData->rowMajor = false;
+}
+
+    break;
+
+  case 1396:
+
+    {
+    if (osglData->numberOfValuesPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<complexElements>: numberOfValues attribute missing");    
+}
+
+    break;
+
+  case 1399:
+
+    {
+        ((ComplexMatrixElements*)osglData->tempC)->numberOfValues = osglData->numberOfValues;
+    }
+
+    break;
+
+  case 1400:
+
+    {
+        ((ComplexMatrixElements*)osglData->tempC)->rowMajor = osglData->rowMajor;
+    }
+
+    break;
+
+  case 1403:
+
+    {
+        if (osglData->numberOfValues > 0)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "expected <value> element");
+    }
+
+    break;
+
+  case 1404:
+
+    {
+        if (osglData->numberOfValues > osglData->nonzeroCounter)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too few <el> elements");
+        else if (osglData->numberOfValues < osglData->nonzeroCounter)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many <el> elements");
+        ((ComplexMatrixElements*)osglData->tempC)->value->numberOfEl = osglData->numberOfEl;
+        parserData->suppressFurtherErrorMessages = false;
+        parserData->ignoreDataAfterErrors = false;        
+    }
+
+    break;
+
+  case 1405:
+
+    {
+    osglData->numberOfValues = ((ComplexMatrixElements*)osglData->tempC)->numberOfValues;
+    osglData->nonzeroCounter = 0;
+
+    ((ComplexMatrixElements*)osglData->tempC)->value = new ComplexMatrixValues();
+    ((ComplexMatrixElements*)osglData->tempC)->value->numberOfEl
+        = osglData->numberOfValues;
+    if (osglData->numberOfValues> 0)
+    ((ComplexMatrixElements*)osglData->tempC)->value->el
+        = new std::complex<double>[osglData->numberOfValues];
+}
+
+    break;
+
+  case 1412:
+
+    {
+    if (!osglData->realPartPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "real part missing");
+    if (!osglData->imagPartPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "imaginary part missing");
+
+    if (osglData->nonzeroCounter + osglData->mult > osglData->numberOfEl)
+    {
+        if (!parserData->suppressFurtherErrorMessages)
+        {
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more data elements than specified");
+            parserData->suppressFurtherErrorMessages = true;
+            parserData->ignoreDataAfterErrors = true;
+        }
+    }
+    else
+    {
+        for (int i=0; i<osglData->mult; i++)
+        {
+            ((ComplexMatrixElements*)osglData->tempC)->value->el[osglData->nonzeroCounter + i]
+                = std::complex<double>(osglData->realPart,osglData->imagPart); 
+        }
+        osglData->nonzeroCounter += osglData->mult;
+    }
+}
+
+    break;
+
+  case 1413:
+
+    {
+        if (osglData->nonzeroCounter >= osglData->numberOfValues) 
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, 
+                "number of <el> terms greater than expected");
+        osglData->realPartPresent = false;
+        osglData->imagPartPresent = false;
+        osglData->multPresent = false;
+        osglData->mult = 1;
+    }
+
+    break;
+
+  case 1422:
+
+    {
+    osglData->tempC = new StringValuedMatrixElements();
+    osglData->mtxConstructorVec.push_back(osglData->tempC);
+    osglData->numberOfValuesPresent = false;        
+    osglData->rowMajorPresent = false;
+    osglData->rowMajor = false;
+}
+
+    break;
+
+  case 1423:
+
+    {
+    if (osglData->numberOfValuesPresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<stringValuedElements>: numberOfValues attribute missing");    
+}
+
+    break;
+
+  case 1426:
+
+    {
+        ((StringValuedMatrixElements*)osglData->tempC)->numberOfValues = osglData->numberOfValues;
+    }
+
+    break;
+
+  case 1427:
+
+    {
+        ((StringValuedMatrixElements*)osglData->tempC)->rowMajor = osglData->rowMajor;
+    }
+
+    break;
+
+  case 1431:
+
+    {
+    ((StringValuedMatrixElements*)osglData->tempC)->value = new StringValuedMatrixValues();
+    ((StringValuedMatrixElements*)osglData->tempC)->value->numberOfEl = osglData->numberOfEl;
+    ((StringValuedMatrixElements*)osglData->tempC)->value->el = osglData->osglStrArray;
+    osglData->osglStrArray = NULL;   // to facilitate garbage collection without a segfault
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 1432:
+
+    {
+    osglData->numberOfEl = ((StringValuedMatrixElements*)osglData->tempC)->numberOfValues;
+    if (osglData->numberOfEl > 0)
+        osglData->osglStrArray = new std::string[osglData->numberOfEl];
+    osglData->osglCounter = 0;
+}
+
+    break;
+
+  case 1439:
+
+    {
+    osglData->tempC = new MatrixTransformation();
+    osglData->mtxConstructorVec.push_back((MatrixTransformation*)osglData->tempC);
+
+    // clear the vectors of pointers
+    osnlData->nlNodeVec.clear();
+    osnlData->sumVec.clear();
+    osnlData->allDiffVec.clear();
+    osnlData->maxVec.clear();
+    osnlData->minVec.clear();
+    osnlData->productVec.clear();
+    osnlData->matrixSumVec.clear();
+    osnlData->matrixProductVec.clear();
+
+    osglData->shapePresent = false;   
+}
+
+    break;
+
+  case 1441:
+
+    {
+    if (returnNlExprShape(osglData->shape) > 0)
+        ((MatrixTransformation*)osglData->tempC)->shape 
+            = (ENUM_NL_EXPR_SHAPE)returnNlExprShape(osglData->shape);
+    else
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData,
+            "unknown shape specified in matrix transformation");
+}
+
+    break;
+
+  case 1442:
+
+    {
+    // IMPORTANT -- HERE IS WHERE WE CREATE THE EXPRESSION TREE
+    ((MatrixTransformation*)osglData->tempC)->transformation = 
+        ((OSnLMNode*)osnlData->nlNodeVec[ 0])->createExpressionTreeFromPrefix( osnlData->nlNodeVec);
+}
+
+    break;
+
+  case 1443:
+
+    {
+    // clean up temporary arrays without deleting the information
+    osglData->rowOffsets.back() = NULL;  
+    osglData->colOffsets.back() = NULL;
+    osglData->osglIntArray = NULL;
+    osglData->rowOffsets.pop_back();
+    osglData->colOffsets.pop_back();
+}
+
+    break;
+
+  case 1444:
+
+    {
+    osglData->tempC = new MatrixBlocks();
+    osglData->mtxConstructorVec.push_back((MatrixBlocks*)osglData->tempC);
+    osglData->mtxBlocksVec.push_back((MatrixBlocks*)osglData->tempC);
+    osglData->numberOfBlocksPresent = false;
+}
+
+    break;
+
+  case 1445:
+
+    {
+    osglData->nBlocksVec.push_back(osglData->numberOfBlocks);
+    ((MatrixBlocks*)osglData->tempC)->inumberOfChildren = 0;
+}
+
+    break;
+
+  case 1447:
+
+    {
+    if ( ((MatrixBlocks*)osglData->mtxBlocksVec.back())->inumberOfChildren != 
+                           osglData->nBlocksVec.back())
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, 
+            "Number of blocks does not agree with attribute value numberOfBlocks");
+
+    ((MatrixBlocks*)osglData->mtxBlocksVec.back())->m_mChildren
+        = new MatrixNode*[((MatrixBlocks*)osglData->mtxBlocksVec.back())->inumberOfChildren];
+    osglData->mtxBlocksVec.pop_back();
+    osglData->nBlocksVec.pop_back();
+}
+
+    break;
+
+  case 1448:
+
+    {
+    if (osglData->osglCounter != osglData->numberOfEl)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "number of colOffsets does not match numberOfEl");
+    ((MatrixBlocks*)osglData->tempC)->colOffset = new IntVector();
+    ((MatrixBlocks*)osglData->tempC)->colOffset->numberOfEl = osglData->numberOfEl;
+    ((MatrixBlocks*)osglData->tempC)->colOffset->el = osglData->osglIntArray;
+    osglData->colOffsets.push_back(osglData->osglIntArray);
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 1449:
+
+    {
+    osglData->numberOfEl = 0;
+    osglData->numberOfElPresent = false;
+}
+
+    break;
+
+  case 1450:
+
+    {
+    osglData->osglCounter = 0; 
+    osglData->osglIntArray = new int[osglData->numberOfEl];
+}
+
+    break;
+
+  case 1456:
+
+    {
+    ((MatrixBlocks*)osglData->tempC)->rowOffset = new IntVector();
+    ((MatrixBlocks*)osglData->tempC)->rowOffset->numberOfEl = osglData->numberOfEl;
+    ((MatrixBlocks*)osglData->tempC)->rowOffset->el = osglData->osglIntArray;
+    osglData->rowOffsets.push_back(osglData->osglIntArray);
+    parserData->suppressFurtherErrorMessages = false;
+    parserData->ignoreDataAfterErrors = false;        
+}
+
+    break;
+
+  case 1457:
+
+    {
+    osglData->numberOfEl = 0;
+    osglData->numberOfElPresent = false;
+}
+
+    break;
+
+  case 1458:
+
+    {
+    osglData->osglCounter = 0; 
+    osglData->osglIntArray = new int[osglData->numberOfEl];
+}
+
+    break;
+
+  case 1465:
+
+    {
+    ((MatrixBlocks*)osglData->mtxBlocksVec.back())->inumberOfChildren++;
+}
+
+    break;
+
+  case 1466:
+
+    {
+    osglData->mtxBlkVec.pop_back();
+}
+
+    break;
+
+  case 1467:
+
+    {
+    osglData->tempC = new MatrixBlock();
+    osglData->mtxConstructorVec.push_back((MatrixBlock*)osglData->tempC);
+    osglData->mtxBlkVec.push_back(osglData->tempC);
+
+    osglData->symmetryPresent = false;
+    osglData->typePresent = false;
+    osglData->blockRowIdxPresent = false;
+    osglData->blockColIdxPresent = false;   
+}
+
+    break;
+
+  case 1473:
+
+    {
+        if (verifyMatrixSymmetry(osglData->symmetry) == false)
+            parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "symmetry type not recognized");
+        parserData->errorText = NULL;
+        if (osglData->symmetry == "none")
+            osglData->symmetry =  "unknown";
+        ((MatrixBlock*)osglData->tempC)->symmetry
+            = (ENUM_MATRIX_SYMMETRY)returnMatrixSymmetry(osglData->symmetry);
+    }
+
+    break;
+
+  case 1474:
+
+    {
+        ((MatrixBlock*)osglData->tempC)->declaredMatrixType
+            = (ENUM_MATRIX_TYPE)returnMatrixType(osglData->type);
+    }
+
+    break;
+
+  case 1478:
+
+    {
+    osglData->mtxBlkVec.back()->m_mChildren = 
+        new MatrixNode*[osglData->mtxBlkVec.back()->inumberOfChildren];
+}
+
+    break;
+
+  case 1479:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfBlocksPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfBlocks attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <blocks> cannot be negative");
+    osglData->numberOfBlocksPresent = true;        
+    osglData->numberOfBlocks = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1480:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfColumnsPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfColumns attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <blocks> cannot be negative");
+    osglData->numberOfColumnsPresent = true;        
+    osglData->numberOfColumns = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1481:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfConPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfCon attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <con> cannot be negative");
+    osglData->numberOfConPresent = true;        
+    osglData->numberOfCon = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1482:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfConstraintsPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfConstraints attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of constraints cannot be negative");
+    osglData->numberOfConstraintsPresent = true;        
+    osglData->numberOfConstraints = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1483:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfElPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfEl attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <el> cannot be negative");
+    osglData->numberOfElPresent = true;        
+    osglData->numberOfEl = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1484:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfEnumerationsPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfEnumerations attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <enumerations> cannot be negative");
+    osglData->numberOfEnumerationsPresent = true;        
+    osglData->numberOfEnumerations = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1485:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfItemsPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfItems attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <items> cannot be negative");
+    osglData->numberOfItemsPresent = true;        
+    osglData->numberOfItems = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1486:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfMatricesPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfMatrices attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <matrices> cannot be negative");
+    osglData->numberOfMatricesPresent = true;        
+    osglData->numberOfMatrices = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1487:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfMatrixVarPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfMatrixVar attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <matrixVar> cannot be negative");
+    osglData->numberOfMatrixVarPresent = true;        
+    osglData->numberOfMatrixVar = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1488:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfObjPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfObj attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <obj> cannot be negative");
+    osglData->numberOfObjPresent = true;        
+    osglData->numberOfObj = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1489:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfObjectivesPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfObjectives attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of objectives cannot be negative");
+    osglData->numberOfObjectivesPresent = true;        
+    osglData->numberOfObjectives = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1490:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfRowsPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfRows attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <rows> cannot be negative");
+std::cout << "Number of rows present" << std::endl;
+    osglData->numberOfRowsPresent = true;        
+    osglData->numberOfRows = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1491:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfValuesPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfValues attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <values> cannot be negative");
+    osglData->numberOfValuesPresent = true;        
+    osglData->numberOfValues = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1492:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfVarPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfVar attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <var> cannot be negative");
+    osglData->numberOfVarPresent = true;        
+    osglData->numberOfVar = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1493:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfVarIdxPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfVarIdx attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of <varIdx> cannot be negative");
+    osglData->numberOfVarIdxPresent = true;        
+    osglData->numberOfVarIdx = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1494:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->numberOfVariablesPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "numberOfVariables attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("number of variables cannot be negative");
+    osglData->numberOfVariablesPresent = true;        
+    osglData->numberOfVariables = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1495:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->base64SizePresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "base64Size attribute previously set");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("base64Size cannot be negative");
+    osglData->base64SizePresent = true;        
+    osglData->base64Size = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1496:
+
+    { 
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->baseMatrixIdxPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one baseMatrixIdx attribute in <baseMatrix> element");
+    if ((yyvsp[-1].ival) < 0) throw ErrorClass("baseMatrix idx cannot be negative");
+    if ((yyvsp[-1].ival) > osglData->matrixCounter)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "baseMatrix idx exceeds number of matrices so far");
+    osglData->baseMatrixIdxPresent = true;   
+    osglData->baseMatrixIdx = (yyvsp[-1].ival); 
+}
+
+    break;
+
+  case 1497:
+
+    { 
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, 
+                                         "start and end quotes are not the same");
+    if (osglData->baseMatrixStartRowPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, 
+            "more than one baseMatrixStartRow attribute in <baseMatrix> element");
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("baseMatrix first row cannot be negative");
+    osglData->baseMatrixStartRowPresent = true;   
+    osglData->baseMatrixStartRow = (yyvsp[-1].ival); 
+}
+
+    break;
+
+  case 1498:
+
+    { 
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, 
+                                         "start and end quotes are not the same");
+    if (osglData->baseMatrixStartColPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, 
+            "more than one baseMatrixStartCol attribute in <baseMatrix> element");
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("baseMatrix first column cannot be negative");
+    osglData->baseMatrixStartColPresent = true;   
+    osglData->baseMatrixStartCol = (yyvsp[-1].ival); 
+}
+
+    break;
+
+  case 1499:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->baseMatrixEndRowPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one baseMatrixEndRow attribute in <baseMatrix> element");
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("baseMatrix end row cannot be negative");
+    osglData->baseMatrixEndRowPresent = true;   
+    osglData->baseMatrixEndRow = (yyvsp[-1].ival); 
+}
+
+    break;
+
+  case 1500:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->baseMatrixEndColPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one baseMatrixEndCol attribute in <baseMatrix> element");
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("baseMatrix end col cannot be negative");
+    osglData->baseMatrixEndColPresent = true;   
+    osglData->baseMatrixEndCol = (yyvsp[-1].ival); 
+}
+
+    break;
+
+  case 1501:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->blockRowIdxPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "blockRowIdx attribute previously set");
+    else
+    {
+        if ((yyvsp[-1].ival) < 0) throw ErrorClass("blockRowIdx cannot be negative");
+        osglData->blockRowIdxPresent = true;        
+        osglData->blockRowIdx = (yyvsp[-1].ival);
+        ((MatrixBlock*)osglData->tempC)->blockRowIdx = (yyvsp[-1].ival);
+    }
+
+    // compute the size of the block
+    ((MatrixBlock*)osglData->tempC)->numberOfRows 
+        = osglData->rowOffsets.back()[osglData->blockRowIdx+1]
+        - osglData->rowOffsets.back()[osglData->blockRowIdx];
+}
+
+    break;
+
+  case 1502:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->blockColIdxPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "blockColIdx attribute previously set");
+    else
+    {
+        if ((yyvsp[-1].ival) < 0) throw ErrorClass("blockColIdx cannot be negative");
+        osglData->blockColIdxPresent = true;
+        osglData->blockColIdx = (yyvsp[-1].ival);       
+        ((MatrixBlock*)osglData->tempC)->blockColIdx = (yyvsp[-1].ival);
+    }
+
+    // compute the size of the block
+    ((MatrixBlock*)osglData->tempC)->numberOfColumns 
+        = osglData->colOffsets.back()[osglData->blockColIdx+1] 
+        - osglData->colOffsets.back()[osglData->blockColIdx];
+}
+
+    break;
+
+  case 1503:
+
+    { 
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->idxPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one idx attribute");
+    osglData->idxPresent = true;
+    osglData->idx = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1504:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->incrPresent) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one incr attribute allowed");
+    osglData->incrPresent = true;
+    osglData->incr = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1505:
+
+    {
+    if (osglData->matrixVarIdxPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one matrixVarIdx attribute in <matrixVar> element");
+    osglData->matrixVarIdxPresent = true;
+    if ((yyvsp[-1].ival) < 0)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "<matrixVarIdx> cannot be negative");
+    osglData->matrixVarIdx = (yyvsp[-1].ival); 
+}
+
+    break;
+
+  case 1506:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->multPresent) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "only one mult attribute allowed");
+    if ((yyvsp[-1].ival) <= 0) parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "mult must be positive");
+    osglData->multPresent = true;
+    osglData->mult = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1507:
+
+    { 
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->targetMatrixFirstRowPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one targetMatrixFirstRow attribute in <baseMatrix> element");
+    if ((yyvsp[-1].ival) < 0)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "targetMatrix first row cannot be negative");
+    osglData->targetMatrixFirstRowPresent = true;   
+    osglData->targetMatrixFirstRow = (yyvsp[-1].ival); 
+}
+
+    break;
+
+  case 1508:
+
+    { 
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->targetMatrixFirstColPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one targetMatrixFirstCol attribute in <baseMatrix> element");
+    if ((yyvsp[-1].ival) < 0)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "targetMatrix first col cannot be negative");
+    osglData->targetMatrixFirstColPresent = true;   
+    osglData->targetMatrixFirstCol = (yyvsp[-1].ival); 
+}
+
+    break;
+
+  case 1509:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->coefPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "linear matrix elements: duplicate coef");    
+    else
+    {
+        osglData->coef = parserData->tempVal;
+        osglData->coefPresent = true;
+    }
+}
+
+    break;
+
+  case 1510:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->constantPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "linear matrix elements: duplicate constant");    
+    else
+    {
+        osglData->constant = parserData->tempVal;
+        osglData->constantPresent = true;
+    }
+}
+
+    break;
+
+  case 1511:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->imagPartPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one imaginary part in <complexElement> element");
+    osglData->imagPartPresent = true;   
+    osglData->imagPart = parserData->tempVal;
+}
+
+    break;
+
+  case 1512:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->realPartPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one real part in <complexElement> element");
+    osglData->realPartPresent = true;   
+    osglData->realPart = parserData->tempVal;
+}
+
+    break;
+
+  case 1513:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->scalarMultiplierPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one scalar multiplier attribute in <baseMatrix> element");
+    osglData->scalarMultiplierPresent = true;   
+    osglData->scalarMultiplier = parserData->tempVal;
+}
+
+    break;
+
+  case 1514:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if (osglData->scalarImaginaryPartPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one scalar multiplier imaginary part attribute in <baseMatrix> element");
+    osglData->scalarImaginaryPartPresent = true;   
+    osglData->scalarImaginaryPart = parserData->tempVal;
+}
+
+    break;
+
+  case 1517:
+
+    {
+    if (osglData->baseTransposePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, 
+            "more than one baseTranspose attribute in <baseMatrix> element");
+    else
+        osglData->baseTranspose    = true;
+    osglData->baseTransposePresent = true;   
+}
+
+    break;
+
+  case 1518:
+
+    {
+    if (osglData->baseTransposePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, 
+            "more than one baseTranspose attribute in <baseMatrix> element");
+    else
+    {
+        if      (strcmp((yyvsp[-1].sval),"false") == 0) osglData->baseTranspose = false;
+        else if (strcmp((yyvsp[-1].sval),"true" ) == 0) osglData->baseTranspose = true;
+        else if (strcmp((yyvsp[-1].sval),"1"    ) == 0) osglData->baseTranspose = true;
+        else if (strcmp((yyvsp[-1].sval),"0"    ) == 0) osglData->baseTranspose = false;
+        else parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, 
+            "baseTranspose attribute in <baseMatrix> element must be \"true\" or \"false\"");
+    }
+    osglData->baseTransposePresent = true;
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1521:
+
+    {
+    if (osglData->categoryPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one category attribute");
+    osglData->categoryPresent = true;
+}
+
+    break;
+
+  case 1522:
+
+    { 
+    if (osglData->categoryPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one category attribute");
+    osglData->categoryPresent = true;   
+    osglData->category = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1525:
+
+    { 
+    if (osglData->conTypePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one conType attribute");
+    osglData->conTypePresent = true;  
+}
+
+    break;
+
+  case 1526:
+
+    { 
+    if (osglData->conTypePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one conType attribute");
+    osglData->conTypePresent = true;   
+    osglData->conType = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1529:
+
+    { 
+    if (osglData->descriptionPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one description attribute");
+    osglData->descriptionPresent = true;
+}
+
+    break;
+
+  case 1530:
+
+    { 
+    if (osglData->descriptionPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one description attribute");
+    osglData->descriptionPresent = true;   
+    osglData->description = (yyvsp[-1].sval);
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1533:
+
+    { 
+    if (osglData->enumTypePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one enumType attribute");
+    osglData->enumTypePresent = true;   
+}
+
+    break;
+
+  case 1534:
+
+    { 
+    if (osglData->enumTypePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one enumType attribute");
+    osglData->enumTypePresent = true;   
+    osglData->enumType = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1537:
+
+    { 
+    if (osglData->namePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one name attribute");
+    osglData->namePresent = true;   
+}
+
+    break;
+
+  case 1538:
+
+    { 
+    if (osglData->namePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one name attribute");
+    osglData->namePresent = true;   
+    osglData->name = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1541:
+
+    {
+    if (osglData->objTypePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one objType attribute");
+    osglData->objTypePresent = true;   
+}
+
+    break;
+
+  case 1542:
+
+    {
+    if (osglData->objTypePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one objType attribute");
+    osglData->objTypePresent = true;   
+    osglData->objType = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1545:
+
+    {
+    if (osglData->rowMajorPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "rowMajor attribute encountered more than once");
+    else
+        osglData->rowMajor = true;
+    osglData->rowMajorPresent = true;
+}
+
+    break;
+
+  case 1546:
+
+    {
+    if (osglData->rowMajorPresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "rowMajor attribute encountered more than once");
+    else
+    {
+        if      (strcmp((yyvsp[-1].sval),"false") == 0) osglData->rowMajor = false;
+        else if (strcmp((yyvsp[-1].sval),"true" ) == 0) osglData->rowMajor = true;
+        else if (strcmp((yyvsp[-1].sval),"1"    ) == 0) osglData->rowMajor = true;
+        else if (strcmp((yyvsp[-1].sval),"0"    ) == 0) osglData->rowMajor = false;
+        else parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "rowMajor attribute must be \"true\" or \"false\"");
+    }
+    osglData->rowMajorPresent = true;
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1549:
+
+    {
+   if (osglData->shapePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one shape attribute");
+    osglData->shapePresent = true;   
+}
+
+    break;
+
+  case 1550:
+
+    {
+    if (osglData->shapePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one shape attribute");
+    osglData->shapePresent = true;   
+    osglData->shape = (yyvsp[-1].sval);
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1553:
+
+    {
+    if (osglData->solverPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one solver attribute");
+    osglData->solverPresent = true;   
+}
+
+    break;
+
+  case 1554:
+
+    {
+    if (osglData->solverPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one solver attribute");
+    osglData->solverPresent = true;   
+    osglData->solver = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1557:
+
+    { 
+    if (osglData->symmetryPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one symmetry attribute in <matrix> element");
+    osglData->symmetryPresent = true;   
+}
+
+    break;
+
+  case 1558:
+
+    { 
+    if (osglData->symmetryPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one symmetry attribute in <matrix> element");
+    osglData->symmetryPresent = true;   
+    osglData->symmetry = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1561:
+
+    {
+    if (osglData->typePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one type attribute");
+    osglData->typePresent = true;
+}
+
+    break;
+
+  case 1562:
+
+    {
+    if (osglData->typePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one type attribute");
+    osglData->typePresent = true;
+    osglData->type = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1565:
+
+    { 
+    if (osglData->unitPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one unit attribute");
+    osglData->unitPresent = true;   
+}
+
+    break;
+
+  case 1566:
+
+    { 
+    if (osglData->unitPresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one unit attribute");
+    osglData->unitPresent = true;   
+    osglData->unit = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1569:
+
+    { 
+    if (osglData->valuePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one value attribute");
+    osglData->valuePresent = true;   
+    osglData->value = "";   
+}
+
+    break;
+
+  case 1570:
+
+    { 
+    if (osglData->valuePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one value attribute");
+    osglData->valuePresent = true;   
+    osglData->value = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1573:
+
+    {
+    if (osglData->valueTypePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one valueType attribute");
+    osglData->valueTypePresent = true;   
+}
+
+    break;
+
+  case 1574:
+
+    {
+    if (osglData->valueTypePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one valueType attribute");
+    osglData->valueTypePresent = true;   
+    osglData->valueType = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1577:
+
+    {
+    if (osglData->varTypePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one varType attribute");
+    osglData->varTypePresent = true;   
+}
+
+    break;
+
+  case 1578:
+
+    {
+    if (osglData->varTypePresent == true)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "more than one varType attribute");
+    osglData->varTypePresent = true;   
+    osglData->varType = (yyvsp[-1].sval); 
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1606:
+
+    {    osnlData->nlNodePoint = new OSnLNodeE();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);}
+
+    break;
+
+  case 1610:
+
+    {    osnlData->nlNodePoint = new OSnLNodePI();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);}
+
+    break;
+
+  case 1614:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeTimes();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1616:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodePlus();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1618:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeMinus();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1620:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeNegate();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1622:
+
+    { 
+    osnlData->nlNodePoint = new OSnLNodeDivide();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1624:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodePower();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1626:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeLn();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1628:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeSqrt();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1630:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeSquare();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1632:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeCos();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1634:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeSin();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1636:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeExp();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1639:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeAbs();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1640:
+
+    {
+#ifdef OSINSTANCE_AVAILABLE
+    osinstance->instanceData->nonlinearExpressions->nl[ osnlData->tmpnlcount]->osExpressionTree->bADMustReTape = true;
+#endif
+}
+
+    break;
+
+  case 1641:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeErf();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1642:
+
+    {
+}
+
+    break;
+
+  case 1643:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeIf();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1644:
+
+    {
+#ifdef OSINSTANCE_AVAILABLE
+    osinstance->instanceData->nonlinearExpressions->nl[ osnlData->tmpnlcount]->osExpressionTree->bADMustReTape = true;
+#endif
+}
+
+    break;
+
+  case 1645:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeMatrixDeterminant();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1647:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeMatrixTrace();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1649:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeMatrixToScalar();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1651:
+
+    {
+    osglData->valuePresent = false; 
+    osglData->typePresent  = false; 
+    osnlData->numberidattON = false;
+}
+
+    break;
+
+  case 1652:
+
+    {
+    osnlData->nlNodeNumberPoint = new OSnLNodeNumber();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodeNumberPoint);
+}
+
+    break;
+
+  case 1657:
+
+    {
+        osnlData->nlNodeNumberPoint->type = osglData->type;
+    }
+
+    break;
+
+  case 1658:
+
+    {
+        osnlData->nlNodeNumberPoint->value = atof(osglData->value.c_str());
+    }
+
+    break;
+
+  case 1660:
+
+    {
+    if (osnlData->numberidattON) parserData->parser_errors += 
+        addErrorMsg( NULL, osoption, parserData, osglData, osnlData,"too many number id attributes"); 
+    osnlData->numberidattON = true;
+    osnlData->nlNodeNumberPoint->id = (yyvsp[0].sval);
+    free((yyvsp[0].sval));
+}
+
+    break;
+
+  case 1662:
+
+    {
+    osnlData->nlNodeVariablePoint = new OSnLNodeVariable();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodeVariablePoint);
+}
+
+    break;
+
+  case 1663:
+
+    {osnlData->variablecoefattON = false; osnlData->variableidxattON = false;}
+
+    break;
+
+  case 1666:
+
+    {
+            osnlData->nlNodeVariablePoint->inumberOfChildren = 1;
+            osnlData->nlNodeVariablePoint->m_mChildren = new ExprNode*[ 1];
+        }
+
+    break;
+
+  case 1670:
+
+    {
+            if (osnlData->variablecoefattON) parserData->parser_errors += 
+                addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many variable coef attributes"); 
+            osnlData->variablecoefattON = true; 
+        }
+
+    break;
+
+  case 1671:
+
+    {
+            if (osnlData->variableidxattON) parserData->parser_errors += 
+                addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "too many variable idx attributes"); 
+            osnlData->variableidxattON = true; 
+        }
+
+    break;
+
+  case 1672:
+
+    { 
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) parserData->parser_errors += 
+        addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    osnlData->nlNodeVariablePoint->coef = parserData->tempVal;
+}
+
+    break;
+
+  case 1673:
+
+    { 
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) ) 
+        parserData->parser_errors += 
+            addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if ((yyvsp[-1].ival) < 0)
+        parserData->parser_errors += 
+            addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "variable index cannot be negative");
+    osnlData->nlNodeVariablePoint->idx = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1674:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeSum();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+    osnlData->sumVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1675:
+
+    {
+    ((OSnLNode*)osnlData->sumVec.back())->m_mChildren 
+        = new ExprNode*[ ((OSnLNode*)osnlData->sumVec.back())->inumberOfChildren];
+    osnlData->sumVec.pop_back();
+}
+
+    break;
+
+  case 1677:
+
+    { ((OSnLNode*)osnlData->sumVec.back())->inumberOfChildren++; }
+
+    break;
+
+  case 1678:
+
+    {    
+    osnlData->nlNodePoint = new OSnLNodeAllDiff ();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+    osnlData->allDiffVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1679:
+
+    {
+    ((OSnLNode*)osnlData->allDiffVec.back())->m_mChildren 
+        = new ExprNode*[ ((OSnLNode*)osnlData->allDiffVec.back())->inumberOfChildren];
+    osnlData->allDiffVec.pop_back();
+#ifdef OSINSTANCE_AVAILABLE
+    osinstance->instanceData->nonlinearExpressions->nl[ osnlData->tmpnlcount]->osExpressionTree->bADMustReTape = true;
+#endif
+}
+
+    break;
+
+  case 1681:
+
+    { ((OSnLNode*)osnlData->allDiffVec.back())->inumberOfChildren++; }
+
+    break;
+
+  case 1682:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeMax();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+    osnlData->maxVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1683:
+
+    {
+    osnlData->maxVec.back()->m_mChildren = new ExprNode*[ osnlData->maxVec.back()->inumberOfChildren];
+    osnlData->maxVec.pop_back();
+#ifdef OSINSTANCE_AVAILABLE
+    osinstance->instanceData->nonlinearExpressions->nl[ osnlData->tmpnlcount]->osExpressionTree->bADMustReTape = true;
+#endif
+}
+
+    break;
+
+  case 1685:
+
+    { osnlData->maxVec.back()->inumberOfChildren++; }
+
+    break;
+
+  case 1686:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeMin();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+    osnlData->minVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1687:
+
+    {
+    osnlData->minVec.back()->m_mChildren = new ExprNode*[ osnlData->minVec.back()->inumberOfChildren];
+    osnlData->minVec.pop_back();
+#ifdef OSINSTANCE_AVAILABLE
+    osinstance->instanceData->nonlinearExpressions->nl[ osnlData->tmpnlcount]->osExpressionTree->bADMustReTape = true;
+#endif
+}
+
+    break;
+
+  case 1689:
+
+    { osnlData->minVec.back()->inumberOfChildren++; }
+
+    break;
+
+  case 1690:
+
+    {
+    osnlData->nlNodePoint = new OSnLNodeProduct();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+    osnlData->productVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1691:
+
+    {
+    osnlData->productVec.back()->m_mChildren = new ExprNode*[ osnlData->productVec.back()->inumberOfChildren];
+    osnlData->productVec.pop_back();
+}
+
+    break;
+
+  case 1693:
+
+    { osnlData->productVec.back()->inumberOfChildren++; }
+
+    break;
+
+  case 1714:
+
+    {
+    osnlData->matrixidxattON = false;
+    if (osnlData->idxAttributePresent == false)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "mandatory idx attribute missing");
+    if (osnlData->transposeAttributePresent == true)
+        osnlData->nlMNodeMatrixRef->transpose = osnlData->matrixTransposeAttribute;
+    osnlData->idxAttributePresent = false;
+    osnlData->transposeAttributePresent = false;
+}
+
+    break;
+
+  case 1715:
+
+    {
+    osnlData->nlMNodeMatrixRef = new OSnLMNodeMatrixReference();
+    osnlData->nlNodeVec.push_back(osnlData->nlMNodeMatrixRef);
+    osnlData->idxAttributePresent = false;
+    osnlData->transposeAttributePresent = false;
+}
+
+    break;
+
+  case 1722:
+
+    {
+    if (osnlData->idxAttributePresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "idx attribute repeated");
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) )
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    if ((yyvsp[-1].ival) < 0)
+        throw ErrorClass("Matrix reference must be nonnegative");
+    osnlData->nlMNodeMatrixRef->idx = (yyvsp[-1].ival);
+    osnlData->idxAttributePresent = true;
+}
+
+    break;
+
+  case 1723:
+
+    {
+    if (osnlData->transposeAttributePresent)
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "transpose attribute repeated");
+    if      (strcmp((yyvsp[-1].sval),"false") == 0) osnlData->matrixTransposeAttribute = false;
+    else if (strcmp((yyvsp[-1].sval),"true" ) == 0) osnlData->matrixTransposeAttribute = true;
+    else if (strcmp((yyvsp[-1].sval),"1"    ) == 0) osnlData->matrixTransposeAttribute = true;
+    else if (strcmp((yyvsp[-1].sval),"0"    ) == 0) osnlData->matrixTransposeAttribute = false;
+    else parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "osnlData->includeDiagonal attribute must be \"true\" or \"false\"");
+    free((yyvsp[-1].sval));
+    osnlData->transposeAttributePresent = true;
+}
+
+    break;
+
+  case 1724:
+
+    {
+    osnlData->matrixidxattON = false;
+}
+
+    break;
+
+  case 1725:
+
+    {
+    osnlData->nlMNodeMatrixVar = new OSnLMNodeMatrixVar();
+    osnlData->nlNodeVec.push_back(osnlData->nlMNodeMatrixVar);
+}
+
+    break;
+
+  case 1728:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) )
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    osnlData->nlMNodeMatrixVar->idx = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1729:
+
+    {
+    osnlData->matrixidxattON = false;
+}
+
+    break;
+
+  case 1730:
+
+    {
+    osnlData->nlMNodeMatrixObj = new OSnLMNodeMatrixObj();
+    osnlData->nlNodeVec.push_back(osnlData->nlMNodeMatrixObj);
+}
+
+    break;
+
+  case 1733:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) )
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    osnlData->nlMNodeMatrixObj->idx = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1734:
+
+    {
+    osnlData->matrixidxattON = false;
+}
+
+    break;
+
+  case 1735:
+
+    {
+    osnlData->nlMNodeMatrixCon = new OSnLMNodeMatrixCon();
+    osnlData->nlNodeVec.push_back(osnlData->nlMNodeMatrixCon);
+}
+
+    break;
+
+  case 1738:
+
+    {
+    if ( *(yyvsp[-2].sval) != *(yyvsp[0].sval) )
+        parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "start and end quotes are not the same");
+    osnlData->nlMNodeMatrixCon->idx = (yyvsp[-1].ival);
+}
+
+    break;
+
+  case 1740:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixDiagonal();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1743:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixDotTimes();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1746:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeIdentityMatrix();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1749:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixInverse();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1752:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixLowerTriangle();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1754:
+
+    {
+    ((OSnLMNodeMatrixLowerTriangle*)osnlData->nlNodeVec.back())->includeDiagonal = osnlData->includeDiagonalAttribute;
+}
+
+    break;
+
+  case 1757:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixUpperTriangle();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1759:
+
+    {
+    ((OSnLMNodeMatrixUpperTriangle*)osnlData->nlNodeVec.back())->includeDiagonal = osnlData->includeDiagonalAttribute;
+}
+
+    break;
+
+  case 1761:
+
+    {
+    if      (strcmp((yyvsp[-1].sval),"false") == 0) osnlData->includeDiagonalAttribute = false;
+    else if (strcmp((yyvsp[-1].sval),"true" ) == 0) osnlData->includeDiagonalAttribute = true;
+    else if (strcmp((yyvsp[-1].sval),"1"    ) == 0) osnlData->includeDiagonalAttribute = true;
+    else if (strcmp((yyvsp[-1].sval),"0"    ) == 0) osnlData->includeDiagonalAttribute = false;
+    else parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "osnlData->includeDiagonal attribute must be \"true\" or \"false\"");
+    free((yyvsp[-1].sval));
+}
+
+    break;
+
+  case 1763:
+
+    {
+     parserData->parser_errors += addErrorMsg( NULL, osoption, parserData, osglData, osnlData, "matrix merge not yet implemented");
+}
+
+    break;
+
+  case 1767:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixMinus();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1770:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixNegate();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1773:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixPlus();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1775:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixSum();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+    osnlData->matrixSumVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1776:
+
+    {
+    osnlData->matrixSumVec.back()->m_mChildren 
+        = new ExprNode*[ osnlData->matrixSumVec.back()->inumberOfChildren];
+    osnlData->matrixSumVec.pop_back();
+}
+
+    break;
+
+  case 1778:
+
+    {
+    osnlData->matrixSumVec.back()->inumberOfChildren++;
+}
+
+    break;
+
+  case 1780:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixTimes();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1782:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixProduct();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+    osnlData->matrixProductVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1783:
+
+    {
+    osnlData->matrixProductVec.back()->m_mChildren = new ExprNode*[ osnlData->matrixProductVec.back()->inumberOfChildren];
+    osnlData->matrixProductVec.pop_back();
+}
+
+    break;
+
+  case 1785:
+
+    { 
+    osnlData->matrixProductVec.back()->inumberOfChildren++; 
+}
+
+    break;
+
+  case 1787:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixScalarTimes();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1790:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixSubmatrixAt();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1793:
+
+    {
+    osnlData->nlNodePoint = new OSnLMNodeMatrixTranspose();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1806:
+
+    {
+}
+
+    break;
+
+  case 1807:
+
+    {
+    osglData->realPartPresent = false;
+    osglData->imagPartPresent = false;
+    osnlData->nlNodePoint = new OSnLCNodeNumber();
+    osnlData->nlNodeVec.push_back(osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1810:
+
+    {
+    ((OSnLCNodeNumber*)osnlData->nlNodePoint)->setValue(osglData->realPart, osglData->imagPart);
+std::cout << "just to verify: value = " 
+          << ((OSnLCNodeNumber*)osnlData->nlNodePoint)->getValue() << std::endl;
+}
+
+    break;
+
+  case 1816:
+
+    {
+    osnlData->nlNodePoint = new OSnLCNodeCreate();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1819:
+
+    {
+    osnlData->nlNodePoint = new OSnLCNodePlus();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1821:
+
+    {
+    osnlData->nlNodePoint = new OSnLCNodeSum();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+    osnlData->cSumVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1822:
+
+    {
+    osnlData->cSumVec.back()->m_mChildren = new ExprNode*[ osnlData->cSumVec.back()->inumberOfChildren];
+    osnlData->cSumVec.pop_back();
+}
+
+    break;
+
+  case 1824:
+
+    { 
+    osnlData->cSumVec.back()->inumberOfChildren++; 
+}
+
+    break;
+
+  case 1826:
+
+    {
+    osnlData->nlNodePoint = new OSnLCNodeMinus();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1829:
+
+    {
+    osnlData->nlNodePoint = new OSnLCNodeNegate();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1832:
+
+    {
+    osnlData->nlNodePoint = new OSnLCNodeConjugate();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1835:
+
+    {
+    osnlData->nlNodePoint = new OSnLCNodeTimes();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+  case 1838:
+
+    {
+    osnlData->nlNodePoint = new OSnLCNodeSquare();
+    osnlData->nlNodeVec.push_back( osnlData->nlNodePoint);
+}
+
+    break;
+
+
+
+      default: break;
+    }
+  /* User semantic actions sometimes alter yychar, and that requires
+     that yytoken be updated with the new translation.  We take the
+     approach of translating immediately before every use of yytoken.
+     One alternative is translating here after every semantic action,
+     but that translation would be missed if the semantic action invokes
+     YYABORT, YYACCEPT, or YYERROR immediately after altering yychar or
+     if it invokes YYBACKUP.  In the case of YYABORT or YYACCEPT, an
+     incorrect destructor might then be invoked immediately.  In the
+     case of YYERROR or YYBACKUP, subsequent parser actions might lead
+     to an incorrect destructor call or verbose syntax error message
+     before the lookahead is translated.  */
+  YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
+
+  YYPOPSTACK (yylen);
+  yylen = 0;
+  YY_STACK_PRINT (yyss, yyssp);
+
+  *++yyvsp = yyval;
+  *++yylsp = yyloc;
+
+  /* Now 'shift' the result of the reduction.  Determine what state
+     that goes to, based on the state we popped back to and the rule
+     number reduced by.  */
+
+  yyn = yyr1[yyn];
+
+  yystate = yypgoto[yyn - YYNTOKENS] + *yyssp;
+  if (0 <= yystate && yystate <= YYLAST && yycheck[yystate] == *yyssp)
+    yystate = yytable[yystate];
+  else
+    yystate = yydefgoto[yyn - YYNTOKENS];
+
+  goto yynewstate;
+
+
+/*--------------------------------------.
+| yyerrlab -- here on detecting error.  |
+`--------------------------------------*/
+yyerrlab:
+  /* Make sure we have latest lookahead translation.  See comments at
+     user semantic actions for why this is necessary.  */
+  yytoken = yychar == YYEMPTY ? YYEMPTY : YYTRANSLATE (yychar);
+
+  /* If not already recovering from an error, report this error.  */
+  if (!yyerrstatus)
+    {
+      ++yynerrs;
+#if ! YYERROR_VERBOSE
+      yyerror (&yylloc, osoption, parserData, osglData, osnlData, YY_("syntax error"));
+#else
+# define YYSYNTAX_ERROR yysyntax_error (&yymsg_alloc, &yymsg, \
+                                        yyssp, yytoken)
+      {
+        char const *yymsgp = YY_("syntax error");
+        int yysyntax_error_status;
+        yysyntax_error_status = YYSYNTAX_ERROR;
+        if (yysyntax_error_status == 0)
+          yymsgp = yymsg;
+        else if (yysyntax_error_status == 1)
+          {
+            if (yymsg != yymsgbuf)
+              YYSTACK_FREE (yymsg);
+            yymsg = (char *) YYSTACK_ALLOC (yymsg_alloc);
+            if (!yymsg)
+              {
+                yymsg = yymsgbuf;
+                yymsg_alloc = sizeof yymsgbuf;
+                yysyntax_error_status = 2;
+              }
+            else
+              {
+                yysyntax_error_status = YYSYNTAX_ERROR;
+                yymsgp = yymsg;
+              }
+          }
+        yyerror (&yylloc, osoption, parserData, osglData, osnlData, yymsgp);
+        if (yysyntax_error_status == 2)
+          goto yyexhaustedlab;
+      }
+# undef YYSYNTAX_ERROR
+#endif
+    }
+
+  yyerror_range[1] = yylloc;
+
+  if (yyerrstatus == 3)
+    {
+      /* If just tried and failed to reuse lookahead token after an
+         error, discard it.  */
+
+      if (yychar <= YYEOF)
+        {
+          /* Return failure if at end of input.  */
+          if (yychar == YYEOF)
+            YYABORT;
+        }
+      else
+        {
+          yydestruct ("Error: discarding",
+                      yytoken, &yylval, &yylloc, osoption, parserData, osglData, osnlData);
+          yychar = YYEMPTY;
+        }
+    }
+
+  /* Else will try to reuse lookahead token after shifting the error
+     token.  */
+  goto yyerrlab1;
+
+
+/*---------------------------------------------------.
+| yyerrorlab -- error raised explicitly by YYERROR.  |
+`---------------------------------------------------*/
+yyerrorlab:
+
+  /* Pacify compilers like GCC when the user code never invokes
+     YYERROR and the label yyerrorlab therefore never appears in user
+     code.  */
+  if (/*CONSTCOND*/ 0)
+     goto yyerrorlab;
+
+  yyerror_range[1] = yylsp[1-yylen];
+  /* Do not reclaim the symbols of the rule whose action triggered
+     this YYERROR.  */
+  YYPOPSTACK (yylen);
+  yylen = 0;
+  YY_STACK_PRINT (yyss, yyssp);
+  yystate = *yyssp;
+  goto yyerrlab1;
+
+
+/*-------------------------------------------------------------.
+| yyerrlab1 -- common code for both syntax error and YYERROR.  |
+`-------------------------------------------------------------*/
+yyerrlab1:
+  yyerrstatus = 3;      /* Each real token shifted decrements this.  */
+
+  for (;;)
+    {
+      yyn = yypact[yystate];
+      if (!yypact_value_is_default (yyn))
+        {
+          yyn += YYTERROR;
+          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYTERROR)
+            {
+              yyn = yytable[yyn];
+              if (0 < yyn)
+                break;
+            }
+        }
+
+      /* Pop the current state because it cannot handle the error token.  */
+      if (yyssp == yyss)
+        YYABORT;
+
+      yyerror_range[1] = *yylsp;
+      yydestruct ("Error: popping",
+                  yystos[yystate], yyvsp, yylsp, osoption, parserData, osglData, osnlData);
+      YYPOPSTACK (1);
+      yystate = *yyssp;
+      YY_STACK_PRINT (yyss, yyssp);
+    }
+
+  YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+  *++yyvsp = yylval;
+  YY_IGNORE_MAYBE_UNINITIALIZED_END
+
+  yyerror_range[2] = yylloc;
+  /* Using YYLLOC is tempting, but would change the location of
+     the lookahead.  YYLOC is available though.  */
+  YYLLOC_DEFAULT (yyloc, yyerror_range, 2);
+  *++yylsp = yyloc;
+
+  /* Shift the error token.  */
+  YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
+
+  yystate = yyn;
+  goto yynewstate;
+
+
+/*-------------------------------------.
+| yyacceptlab -- YYACCEPT comes here.  |
+`-------------------------------------*/
+yyacceptlab:
+  yyresult = 0;
+  goto yyreturn;
+
+/*-----------------------------------.
+| yyabortlab -- YYABORT comes here.  |
+`-----------------------------------*/
+yyabortlab:
+  yyresult = 1;
+  goto yyreturn;
+
+#if !defined yyoverflow || YYERROR_VERBOSE
+/*-------------------------------------------------.
+| yyexhaustedlab -- memory exhaustion comes here.  |
+`-------------------------------------------------*/
+yyexhaustedlab:
+  yyerror (&yylloc, osoption, parserData, osglData, osnlData, YY_("memory exhausted"));
+  yyresult = 2;
+  /* Fall through.  */
+#endif
+
+yyreturn:
+  if (yychar != YYEMPTY)
+    {
+      /* Make sure we have latest lookahead translation.  See comments at
+         user semantic actions for why this is necessary.  */
+      yytoken = YYTRANSLATE (yychar);
+      yydestruct ("Cleanup: discarding lookahead",
+                  yytoken, &yylval, &yylloc, osoption, parserData, osglData, osnlData);
+    }
+  /* Do not reclaim the symbols of the rule whose action triggered
+     this YYABORT or YYACCEPT.  */
+  YYPOPSTACK (yylen);
+  YY_STACK_PRINT (yyss, yyssp);
+  while (yyssp != yyss)
+    {
+      yydestruct ("Cleanup: popping",
+                  yystos[*yyssp], yyvsp, yylsp, osoption, parserData, osglData, osnlData);
+      YYPOPSTACK (1);
+    }
+#ifndef yyoverflow
+  if (yyss != yyssa)
+    YYSTACK_FREE (yyss);
+#endif
+#if YYERROR_VERBOSE
+  if (yymsg != yymsgbuf)
+    YYSTACK_FREE (yymsg);
+#endif
+  return yyresult;
+}
+
+
+
+#if 0
+void addErrorMsg(YYLTYPE* mytype, OSOption *osoption, OSoLParserData* parserData, OSgLParserData* osglData, const char* errormsg )
+{
+    osol_empty_vectors( parserData);
+    osgl_empty_vectors( osglData);
+    std::ostringstream outStr;
+    std::string error = errormsg;
+    error = "OSoL input is either invalid or not well-formed: "  + error;
+    outStr << error << std::endl;
+    outStr << "Error occurred when reading: " << osolget_text ( scanner ) << std::endl; 
+    outStr << "See line number: " << osolget_lineno( scanner) << std::endl; 
+    error = outStr.str();
+
+} //end addErrorMsg
+#endif
+
+std::string addErrorMsg(YYLTYPE* mytype, OSOption *osoption, OSoLParserData* parserData, OSgLParserData* osglData, OSnLParserData *osnlData, std::string errormsg )
+{
+    std::ostringstream outStr;
+    outStr << "At line number " << osolget_lineno( scanner) << ": "; 
+    outStr << osolget_text ( scanner ) << std::endl; 
+    outStr << errormsg << std::endl;
+
+    return outStr.str();
+} //end addErrorMsg
+
+void osolerror(YYLTYPE* mytype, OSOption *osoption, OSoLParserData* parserData, OSgLParserData* osglData, OSnLParserData *osnlData, std::string errormsg )
+{
+    osol_empty_vectors( parserData);
+    osgl_empty_vectors( osglData);
+    osnl_empty_vectors( osnlData);
+    throw ErrorClass( errormsg);
+} //end osolerror
+
+void  yygetOSOption(const char *parsestring, OSOption *osoption, 
+      OSoLParserData *parserData, OSgLParserData *osglData, OSnLParserData *osnlData)
+{
+    try{
+        osol_scan_string( parsestring, scanner);
+        osolset_lineno (1 , scanner );
+        //
+        // call the Bison parser
+        //
+        if(  osolparse( osoption,  parserData, osglData, osnlData) != 0) {
+            //osollex_destroy(scanner);
+              throw ErrorClass(  "Error parsing the OSoL file");
+         }
+    }
+    catch(const ErrorClass& eclass){
+        throw ErrorClass(  eclass.errormsg); 
+    }
+} //end yygetOSOption
+
+
+void osol_empty_vectors( OSoLParserData* parserData){
+/*
+    int k;
+    int numOtherVarVec = parserData->otherVarVec.size();
+   
+    for( k = 0; k < numOtherVarVec; k++){
+        if( (parserData->otherVarVec[ k]  != NULL) && (parserData->otherVarVec[ k]->otherVarText != NULL) ) 
+            delete[] parserData->otherVarVec[ k]->otherVarText;
+        if( (parserData->otherVarVec[ k]  != NULL) && (parserData->otherVarVec[ k]->otherVarIndex != NULL) ) 
+            delete[] parserData->otherVarVec[ k]->otherVarIndex;
+            
+        if( parserData->otherVarVec[ k]  != NULL) delete parserData->otherVarVec[ k];
+    }
+
+      parserData->otherVarVec.clear(); 
+      
+      int numDualVals =  parserData->dualVals.size();
+      for(k = 0; k < numDualVals; k++){
+          if( parserData->dualVals[ k]  != NULL  ) 
+            delete parserData->dualVals[ k];
+      }
+      parserData->dualVals.clear();
+      
+      
+       int numObjVals =  parserData->objVals.size();
+      for(k = 0; k < numObjVals; k++){
+          if( parserData->objVals[ k]  != NULL  ) 
+            delete parserData->objVals[ k];
+      }
+      parserData->objVals.clear();
+      
+      
+       int numPrimalVals =  parserData->primalVals.size();
+      for(k = 0; k < numPrimalVals; k++){    
+          if( parserData->primalVals[ k]  != NULL  ) 
+            delete parserData->primalVals[ k];
+      }
+      parserData->primalVals.clear();
+*/      
+}//end osol_empty_vectors
+

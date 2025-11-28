@@ -1,0 +1,92 @@
+/*===========================================================================*
+ * This file is part of the BiCePS Linear Integer Solver (BLIS).             *
+ *                                                                           *
+ * BLIS is distributed under the Eclipse Public License as part of the       *
+ * COIN-OR repository (http://www.coin-or.org).                              *
+ *                                                                           *
+ * Authors:                                                                  *
+ *                                                                           *
+ *          Yan Xu, Lehigh University                                        *
+ *          Ted Ralphs, Lehigh University                                    *
+ *                                                                           *
+ * Conceptual Design:                                                        *
+ *                                                                           *
+ *          Yan Xu, Lehigh University                                        *
+ *          Ted Ralphs, Lehigh University                                    *
+ *          Laszlo Ladanyi, IBM T.J. Watson Research Center                  *
+ *          Matthew Saltzman, Clemson University                             *
+ *                                                                           *
+ *                                                                           *
+ * Copyright (C) 2001-2023, Lehigh University, Yan Xu, and Ted Ralphs.       *
+ * All Rights Reserved.                                                      *
+ *===========================================================================*/
+
+/**
+ * @file BlisMessage.h
+ * @brief Log messages for BLIS MILP solver events
+ *
+ * Defines BLIS_Message enum for CoinMessageHandler logging.
+ * Similar to CoinMessages but specialized for BLIS output.
+ *
+ * **Message types:**
+ * - BLIS_CUTOFF_INC: Cutoff improvement
+ * - BLIS_CUT_STAT_*: Cut generation statistics
+ * - BLIS_GAP_*: Optimality gap status
+ * - BLIS_HEUR_*: Heuristic events and statistics
+ * - BLIS_ROOT_*: Root node processing info
+ *
+ * @see CoinMessageHandler for message output control
+ * @see BlisParams for verbosity settings
+ */
+
+#ifndef BlisMessage_H_
+#define BlisMessage_H_
+
+//#############################################################################
+
+#if defined(_MSC_VER)
+// Turn off compiler warning about long names
+#  pragma warning(disable:4786)
+#endif
+
+/** This deals with Blis messages. */
+#include "CoinMessageHandler.hpp"
+
+#include "BlisConfig.h"
+
+//#############################################################################
+
+enum BLIS_Message
+{
+    BLIS_CUTOFF_INC,
+    BLIS_CUT_STAT_FINAL,
+    BLIS_CUT_STAT_NODE,
+    BLIS_GAP_NO,
+    BLIS_GAP_YES,
+    BLIS_HEUR_BEFORE_ROOT,
+    BLIS_HEUR_STAT_FINAL,
+    BLIS_HEUR_STAT_NODE,
+    BLIS_ROOT_PROCESS,
+    BLIS_ROOT_TIME,
+    BLIS_FEAS_CHECK_TIME,
+    BLIS_W_LP,
+    ///
+    BLIS_DUMMY_END
+};
+
+//#############################################################################
+
+class BLISLIB_EXPORT BlisMessage : public CoinMessages 
+{
+public:
+    
+    /**@name Constructors etc */
+    //@{
+    /** Constructor */
+    BlisMessage(Language language=us_en);
+    //@}
+};
+
+//#############################################################################
+
+#endif

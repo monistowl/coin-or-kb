@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osil xmlns="os.optimizationservices.org" 
+xmlns:os="os.optimizationservices.org" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="os.optimizationservices.org 
+http://www.optimizationservices.org/schemas/2.0/OSiL.xsd">
+<instanceHeader>
+<name>SDPA problem SDPA1.sdpa</name>
+<description>Translated from SDPA format using SDPA2OSiL
+       (C) H.I. Gassmann 2010-2015
+</description>
+</instanceHeader>
+<instanceData>
+<objectives>
+<obj maxOrMin="max" numberOfObjCoef="0"/></objectives>
+<constraints numberOfConstraints="2">
+<con lb="10." ub="10."/>
+<con lb="20." ub="20."/>
+</constraints>
+<nonlinearExpressions numberOfNonlinearExpressions="3">
+<nl idx="-1">
+<matrixTrace>
+<matrixTimes>
+<matrixReference idx="0"/>
+<matrixVar idx="0"/>
+</matrixTimes>
+</matrixTrace>
+</nl>
+<nl idx="0">
+<matrixTrace>
+<matrixTimes>
+<matrixReference idx="1"/>
+<matrixVar idx="0"/>
+</matrixTimes>
+</matrixTrace>
+</nl>
+<nl idx="1">
+<matrixTrace>
+<matrixTimes>
+<matrixReference idx="2"/>
+<matrixVar idx="0"/>
+</matrixTimes>
+</matrixTrace>
+</nl>
+</nonlinearExpressions>
+<matrices numberOfMatrices="3">
+<matrix numberOfColumns="4" numberOfRows="4" symmetry="lower" name="F0">
+<blocks numberOfBlocks="2">
+<colOffset numberOfEl="3">
+<el mult="3" incr="2">0</el>
+</colOffset>
+<rowOffset numberOfEl="3">
+<el mult="3" incr="2">0</el>
+</rowOffset>
+<block blockRowIdx="0" blockColIdx="0">
+<constantElements numberOfValues="2">
+<start>
+<el mult="3" incr="1">0</el>
+</start>
+<index>
+<el>0</el>
+<el>1</el>
+</index>
+<value>
+<el>1.</el>
+<el>2.</el>
+</value>
+</constantElements>
+</block>
+<block blockRowIdx="1" blockColIdx="1">
+<constantElements numberOfValues="2">
+<start>
+<el mult="3" incr="1">0</el>
+</start>
+<index>
+<el>0</el>
+<el>1</el>
+</index>
+<value>
+<el>3.</el>
+<el>4.</el>
+</value>
+</constantElements>
+</block>
+</blocks>
+</matrix>
+<matrix numberOfColumns="4" numberOfRows="4" symmetry="lower" name="F1">
+<blocks numberOfBlocks="1">
+<colOffset numberOfEl="3">
+<el mult="3" incr="2">0</el>
+</colOffset>
+<rowOffset numberOfEl="3">
+<el mult="3" incr="2">0</el>
+</rowOffset>
+<block blockRowIdx="0" blockColIdx="0">
+<constantElements numberOfValues="2">
+<start>
+<el mult="3" incr="1">0</el>
+</start>
+<index>
+<el>0</el>
+<el>1</el>
+</index>
+<value>
+<el mult="2">1.</el>
+</value>
+</constantElements>
+</block>
+</blocks>
+</matrix>
+<matrix numberOfColumns="4" numberOfRows="4" symmetry="lower" name="F2">
+<blocks numberOfBlocks="2">
+<colOffset numberOfEl="3">
+<el mult="3" incr="2">0</el>
+</colOffset>
+<rowOffset numberOfEl="3">
+<el mult="3" incr="2">0</el>
+</rowOffset>
+<block blockRowIdx="0" blockColIdx="0">
+<constantElements numberOfValues="1">
+<start>
+<el mult="2">0</el>
+<el>1</el>
+</start>
+<index>
+<el>1</el>
+</index>
+<value>
+<el>1.</el>
+</value>
+</constantElements>
+</block>
+<block blockRowIdx="1" blockColIdx="1">
+<constantElements numberOfValues="3">
+<start>
+<el>0</el>
+<el>2</el>
+<el>3</el>
+</start>
+<index>
+<el>0</el>
+<el mult="2">1</el>
+</index>
+<value>
+<el>5.</el>
+<el>2.</el>
+<el>6.</el>
+</value>
+</constantElements>
+</block>
+</blocks>
+</matrix>
+</matrices>
+<cones numberOfCones="1">
+<semidefiniteCone numberOfColumns="4" numberOfRows="4"/>
+</cones>
+<matrixProgramming>
+<matrixVariables numberOfMatrixVar="1">
+<matrixVar numberOfColumns="4" numberOfRows="4" lbConeIdx="0"/>
+</matrixVariables>
+</matrixProgramming>
+</instanceData>
+</osil>

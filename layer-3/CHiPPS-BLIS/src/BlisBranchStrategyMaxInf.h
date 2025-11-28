@@ -1,0 +1,102 @@
+/*===========================================================================*
+ * This file is part of the BiCePS Linear Integer Solver (BLIS).             *
+ *                                                                           *
+ * ALPS is distributed under the Eclipse Public License as part of the       *
+ * COIN-OR repository (http://www.coin-or.org).                              *
+ *                                                                           *
+ * Authors:                                                                  *
+ *                                                                           *
+ *          Yan Xu, Lehigh University                                        *
+ *          Ted Ralphs, Lehigh University                                    *
+ *                                                                           *
+ * Conceptual Design:                                                        *
+ *                                                                           *
+ *          Yan Xu, Lehigh University                                        *
+ *          Ted Ralphs, Lehigh University                                    *
+ *          Laszlo Ladanyi, IBM T.J. Watson Research Center                  *
+ *          Matthew Saltzman, Clemson University                             *
+ *                                                                           *
+ *                                                                           *
+ * Copyright (C) 2001-2023, Lehigh University, Yan Xu, and Ted Ralphs.       *
+ * All Rights Reserved.                                                      *
+ *===========================================================================*/
+
+/**
+ * @file BlisBranchStrategyMaxInf.h
+ * @brief Maximum infeasibility branching strategy
+ *
+ * The simplest branching variable selection: branch on the integer
+ * variable that is furthest from being integer.
+ *
+ * **Algorithm:**
+ * 1. For each fractional integer variable xⱼ with value xⱼ*:
+ *    - Compute infeasibility: inf = min(xⱼ* - floor(xⱼ*), ceil(xⱼ*) - xⱼ*)
+ *    - This is the distance to nearest integer
+ * 2. Select variable with maximum infeasibility
+ *
+ * **Rationale:**
+ * Variables far from integrality are "more fractional" and branching
+ * on them may force larger changes to the LP solution.
+ *
+ * **Trade-offs:**
+ * - Very fast: O(n) scan of integer variables
+ * - No learning or LP solves required
+ * - Generally produces larger search trees than pseudo-cost or strong
+ * - Good for initial exploration or when speed matters more than tree size
+ *
+ * @see BlisBranchStrategyPseudo for pseudo-cost branching (learned estimates)
+ * @see BlisBranchStrategyStrong for strong branching (accurate but slow)
+ */
+
+#ifndef BlisBranchStrategyMaxInf_h_
+#define BlisBranchStrategyMaxInf_h_
+
+#include "BcpsBranchObject.h"
+#include "BcpsBranchStrategy.h"
+#include "BlisConfig.h"
+#include "BlisModel.h"
+
+/** This class implements maximum infeasibility branching. */
+class BLISLIB_EXPORT BlisBranchStrategyMaxInf : public BcpsBranchStrategy {
+
+ private:
+
+  /** Illegal Assignment operator.*/
+    BlisBranchStrategyMaxInf& operator=(const BlisBranchStrategyMaxInf& rhs);
+    
+ public:
+    
+    /** MaxInf Constructor. */
+    BlisBranchStrategyMaxInf() {
+	type_ = static_cast<int>(BlisBranchingStrategyMaxInfeasibility);
+    }
+
+    /** MaxInf Constructor. */
+    BlisBranchStrategyMaxInf(BlisModel *model) : BcpsBranchStrategy(model) {
+	type_ = static_cast<int>(BlisBranchingStrategyMaxInfeasibility);
+    }
+    
+    /** Destructor. */
+    virtual ~BlisBranchStrategyMaxInf() {}
+    
+    /** Copy constructor. */
+    BlisBranchStrategyMaxInf(const BlisBranchStrategyMaxInf &);
+    
+    /** Clone a brancing strategy. */
+    virtual BcpsBranchStrategy * clone() const {
+	return new BlisBranchStrategyMaxInf(*this);
+    }
+    
+    /** Create a set of candidate branching objects. */
+    virtual int createCandBranchObjects(int numPassesLeft, double ub);
+    
+    /** Compare branching object thisOne to bestSoFar. If thisOne is better 
+	than bestObject, return branching direction(1 or -1), otherwise
+	return 0. 
+	If bestSorFar is NULL, then always return branching direction(1 or -1).
+    */
+    virtual int betterBranchObject(BcpsBranchObject * thisOne,
+				   BcpsBranchObject * bestSoFar);
+};
+
+#endif

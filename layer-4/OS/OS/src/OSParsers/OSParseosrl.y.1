@@ -1,0 +1,173 @@
+/* $Id: OSParseosrl.y.1 4807 2014-06-08 12:51:58Z Gassmann $ */
+/** @file OSParseosrl.y.1
+ * 
+ * @author  Horand Gassmann, Jun Ma, Kipp Martin
+ *
+ * \remarks
+ * Copyright (C) 2005-2015, Horand Gassmann, Jun Ma, Kipp Martin,
+ * Northwestern University and the University of Chicago.
+ * All Rights Reserved.
+ * This software is licensed under the Eclipse Public License. 
+ * Please see the accompanying LICENSE file in root directory for terms.
+ * 
+ * In order to allow easier maintenance of the parsers, 
+ * the files OSParseosrl.y and OSParseosrl.y are stored in several pieces
+ * that are combined in the makefile.
+ * This is the first part of the file OSParseosrl.y. It contains the
+ * preamble and tokens that are unique to the OSrL parser.
+ * Tokens pertaining to the auxiliary OSgL and OSnL parsers are appended.
+ * These are in files OSParseosgl.y.tokens and OSParseosnl.y.tokens.   
+ * Then follow the syntax rules involving only OSrL constructs (OSParseosrl.y.2). 
+ * After that we put the syntax rules for elements from the OSgL schema, 
+ * maintained in the file OSParseosgl.y.syntax, and then the OSnL syntax
+ * in OSParseosnl.y.syntax. The postamble in OSParseosrl.y.3 is appended at the end.
+ * This process could be repeated for as many other auxiliary schemas as needed.
+ *
+ * Note: Make changes in this file rather than OSParseosrl.y or OSParserosrl.tab.cpp,
+ *       as the latter files are recreated by the build system and are thus to be
+ *       considered fragile.
+ */
+
+%{
+
+ 
+#include "OSConfig.h"
+#include "OSMathUtil.h"
+#include "OSParameters.h"
+#include "OSGeneral.h"
+#include "OSErrorClass.h"
+#include "OSResult.h"
+#include "OSrLParserData.h"
+#include "OSgLParserData.h"
+#include "OSnLParserData.h"
+#include "OSBase64.h"
+
+#include <iostream>
+#include <sstream> 
+#include <stdio.h>
+#include <cstring>
+
+#define OSRESULT_AVAILABLE
+
+//#define DEBUG
+
+#ifdef DEBUG
+#define YYDEBUG 1
+#endif
+
+typedef struct yy_buffer_state *YY_BUFFER_STATE;
+YY_BUFFER_STATE osrl_scan_string (const char *yy_str , void* yyscanner  );
+int osrllex_init(void** ptr_yy_globals);
+int osrllex_destroy (void* yyscanner );
+int osrlget_lineno( void* yyscanner);
+char *osrlget_text (void* yyscanner );
+void osrlset_lineno (int line_number , void* yyscanner );
+void osrlset_extra (OSrLParserData* parserData , void* yyscanner );
+void  yygetOSResult(const char *ch, OSResult* m_osresult, OSrLParserData *m_parserData, OSgLParserData *osglData, OSnLParserData *osnlData );
+void osrl_empty_vectors( OSrLParserData* parserData);
+void osgl_empty_vectors( OSgLParserData* osglData);
+void osnl_empty_vectors( OSnLParserData* osnlData);
+
+
+
+%}
+
+
+%pure-parser
+%locations
+%defines
+%parse-param{OSResult *osresult}
+%parse-param{OSrLParserData *parserData}
+%parse-param{OSgLParserData *osglData}
+%parse-param{OSnLParserData *osnlData}
+%lex-param {void* scanner}
+
+
+%union {
+    double   dval;
+    OsXmlInt ival;
+    char*    sval;
+}
+
+/* %name-prefix="osrl" 
+this fails in Mac OS X
+*/
+
+%{
+std::string addErrorMsg(YYLTYPE* mytype, OSResult *osresult, OSrLParserData* parserData, OSgLParserData* osglData, OSnLParserData* osnlData, std::string errormsg ) ;
+void osrlerror(YYLTYPE* type, OSResult *osresult, OSrLParserData *parserData, OSgLParserData *osglData, OSnLParserData* osnlData, std::string errormsg);
+int osrllex(YYSTYPE* lvalp,  YYLTYPE* llocp, void* scanner);
+#define scanner parserData->scanner
+%}
+
+%token <sval> ATTRIBUTETEXT
+%token <sval> ELEMENTTEXT
+%token <sval> ITEMTEXT
+%token <ival> INTEGER
+%token <dval> DOUBLE
+%token <sval> QUOTE
+%token <sval> TWOQUOTES
+%token <sval> BOOLEAN
+
+%token GREATERTHAN ENDOFELEMENT
+
+%token OSRLSTART OSRLSTARTEMPTY OSRLATTRIBUTETEXT OSRLEND
+
+%token WEIGHTEDOBJECTIVESATT EMPTYWEIGHTEDOBJECTIVESATT
+%token TARGETOBJECTIVENAMEATT EMPTYTARGETOBJECTIVENAMEATT
+
+%token NUMBEROFOTHERCONSTRAINTRESULTSATT NUMBEROFOTHEROBJECTIVERESULTSATT 
+%token NUMBEROFOTHERRESULTSATT NUMBEROFOTHERSOLUTIONRESULTSATT 
+%token NUMBEROFOTHERVARIABLERESULTSATT NUMBEROFSOLUTIONSATT 
+%token NUMBEROFOTHERMATRIXOBJECTIVERESULTSATT NUMBEROFOTHERMATRIXCONSTRAINTRESULTSATT
+%token NUMBEROFOTHERMATRIXPROGRAMMINGRESULTSATT NUMBEROFOTHERMATRIXVARIABLERESULTSATT
+%token NUMBEROFSOLVEROUTPUTSATT NUMBEROFSUBSTATUSESATT NUMBEROFTIMESATT 
+
+%token TARGETOBJECTIVEIDXATT
+
+%token ACTUALSTARTTIMESTART ACTUALSTARTTIMEEND
+%token AVAILABLECPUNUMBERSTART AVAILABLECPUNUMBEREND
+%token AVAILABLECPUSPEEDSTART AVAILABLECPUSPEEDEND
+%token AVAILABLEDISKSPACESTART AVAILABLEDISKSPACEEND
+%token AVAILABLEMEMORYSTART AVAILABLEMEMORYEND
+%token BASISSTATUSSTART BASISSTATUSEND
+%token CURRENTJOBCOUNTSTART CURRENTJOBCOUNTEND
+%token CURRENTSTATESTART CURRENTSTATEEND
+%token DUALVALUESSTART DUALVALUESEND  
+%token ENDTIMESTART ENDTIMEEND
+%token IDXSTART IDXEND
+%token GENERALSTATUSSTART GENERALSTATUSEND 
+%token GENERALSUBSTATUSSTART GENERALSUBSTATUSEND 
+%token MESSAGESTART MESSAGEEND
+%token OPTIMIZATIONSOLUTIONSTATUSSTART OPTIMIZATIONSOLUTIONSTATUSEND
+%token OPTIMIZATIONSOLUTIONSUBSTATUSSTART  OPTIMIZATIONSOLUTIONSUBSTATUSEND 
+%token OTHERRESULTSSTART OTHERRESULTSEND
+%token OTHERSOLUTIONRESULTSTART  OTHERSOLUTIONRESULTEND
+%token OTHERSOLUTIONRESULTSSTART OTHERSOLUTIONRESULTSEND
+%token OTHERSOLVEROUTPUTSTART OTHERSOLVEROUTPUTEND
+%token SCHEDULEDSTARTTIMESTART SCHEDULEDSTARTTIMEEND
+%token SERVICEUTILIZATIONSTART SERVICEUTILIZATIONEND
+%token SOLUTIONSTART SOLUTIONEND  
+%token SOLVERINVOKEDSTART SOLVERINVOKEDEND
+%token SOLVEROUTPUTSTART SOLVEROUTPUTEND
+%token STATUSSTART STATUSEND 
+%token SUBMITTIMESTART SUBMITTIMEEND
+%token SUBSTATUSSTART SUBSTATUSEND
+%token SYSTEMINFORMATIONSTART SYSTEMINFORMATIONEND
+%token TIMESTART TIMEEND
+%token TIMESERVICESTARTEDSTART TIMESERVICESTARTEDEND
+%token TIMESTAMPSTART TIMESTAMPEND
+%token TIMINGINFORMATIONSTART  TIMINGINFORMATIONEND
+%token TOTALJOBSSOFARSTART TOTALJOBSSOFAREND
+%token USEDCPUNUMBERSTART USEDCPUNUMBEREND
+%token USEDCPUSPEEDSTART USEDCPUSPEEDEND
+%token USEDDISKSPACESTART USEDDISKSPACEEND
+%token USEDMEMORYSTART USEDMEMORYEND
+%token VALUESSTRINGSTART VALUESSTRINGEND
+
+%token OTHERMATRIXVARIABLERESULTSTART OTHERMATRIXVARIABLERESULTEND
+%token OTHERMATRIXOBJECTIVERESULTSTART OTHERMATRIXOBJECTIVERESULTEND
+%token OTHERMATRIXCONSTRAINTRESULTSTART OTHERMATRIXCONSTRAINTRESULTEND
+%token OTHERMATRIXPROGRAMMINGRESULTSTART
+%token OTHERMATRIXPROGRAMMINGRESULTEND
+

@@ -1,0 +1,260 @@
+/* $Id: OSParseosil.l.1 4677 2013-09-25 18:20:52Z Gassmann $ */
+/** @file OSParseosil.l.1
+ * 
+ * @author  Robert Fourer, Horand Gassmann, Jun Ma, Kipp Martin, 
+ *
+ * \remarks
+ * Copyright (C) 2005-2015, Robert Fourer, Horand Gassmann, Jun Ma, Kipp Martin,
+ * Northwestern University, and the University of Chicago.
+ * All Rights Reserved.
+ * This software is licensed under the Eclipse Public License. 
+ * Please see the accompanying LICENSE file in root directory for terms.
+ * 
+ * Like the grammar rules in OSParseosil.y, this file is maintained in several pieces 
+ * in order to avoid duplication when parsing elements of auxiliary schemas,
+ * such as OSgL, OSnL, etc. This is the first part of OSparseosil.l.
+ *
+ * IMPORTANT! Convention regarding common patterns, such as "name", etc.:
+ * Commonly occuring patterns must be kept in one place in order to avoid ambiguity in the parser.
+ * Maintenance is easier if they are placed into the OSgL section. At any rate, it is important
+ * to place temporary data into the correct parser data object.
+ */
+%{
+//#define OSILPARSERDEBUG
+
+#ifdef OSILPARSERDEBUG
+	#define YY_PRINT  printf("matched %i characters: %s\n", yyleng, yytext)
+#else     
+	#define YY_PRINT
+#endif
+
+#include <iostream>
+#include <sstream>  
+
+#include "OSConfig.h"
+#include "OSDataStructures.h"
+#include "OSErrorClass.h"
+#include "OSMathUtil.h"
+#include "OSiLParserData.h"
+#include "OSnLParserData.h"
+#include "OSgLParserData.h"
+#include "OSInstance.h"
+#include "OSGeneral.h"
+#include "OSParseosil.tab.hpp"
+
+#ifdef HAVE_CSTDIO
+# include <cstdio>
+#else
+# ifdef HAVE_STDIO_H
+#  include <stdio.h>
+# else
+#  error "don't have header file for stdio"
+# endif
+#endif
+
+#ifdef HAVE_CTIME
+# include <ctime>
+#else
+# ifdef HAVE_TIME_H
+#  include <time.h>
+# else
+#  error "don't have header file for time"
+# endif
+#endif
+
+#ifdef HAVE_CMATH
+# include <cmath>
+#else
+# ifdef HAVE_MATH_H
+#  include <math.h>
+# else
+#  error "don't have header file for math"
+# endif
+#endif
+
+#ifdef HAVE_CSTRING
+# include <cstring>
+#else
+# ifdef HAVE_STRING_H
+#  include <string.h>
+# else
+#  error "don't have header file for string"
+# endif
+#endif
+
+
+#ifdef WIN_
+  #define YY_NO_UNISTD_H
+  #include <io.h>
+  #include <process.h>
+  #ifdef USE_OLD_UNISTD
+     #include<sys/unistd.h>
+  #endif
+#endif
+
+using std::cout;
+using std::endl;
+using std::ostringstream;
+
+%}
+
+%option prefix="osil"
+%option noyywrap
+%option reentrant
+%option bison-bridge
+%option bison-locations
+%option yylineno
+%option nounput
+%option debug
+
+%x osilattributetext
+%x doublequoteattributetext
+%x singlequoteattributetext
+%x startelement
+%x elementtext
+%x itemtext
+%x comment
+%x xmldeclaration
+
+%{
+#define YY_EXTRA_TYPE OSiLParserData*
+%} 
+ 
+xmlwhitespace ([ \t\n\r])
+equality ([ \t\n\r])*=([ \t\n\r])*
+quote [\"|\']  
+twoquotes (\"\"|\'\')
+greater_than (>)
+aninteger ([ \t\n\r]*-?[0-9]+[ \t\n\r]*)
+ /* Distinguishing signed and unsigned integers requires careful ordering of patterns
+    anxmluint ([ \t\n\r]*[0-9]+[ \t\n\r]*)
+    anxmlint ([ \t\n\r]*-?[0-9]+[ \t\n\r]*)
+  */
+adouble ([ \t\n\r]*(-?(([0-9]+|[0-9]*\.[0-9]*)([eE][-+]?[0-9]+)?|INF)|NaN)[ \t\n\r]*)
+aboolean (true|false|1|0)
+%%
+ 
+{xmlwhitespace}*
+
+ /* General patterns matched in more than one element */
+
+{quote} {YY_PRINT;  yylval->sval = yytext; return(QUOTE);}
+{twoquotes} {YY_PRINT;  yylval->sval = yytext; return(TWOQUOTES);}
+({xmlwhitespace}*{greater_than}) {YY_PRINT; return(GREATERTHAN);}
+{aninteger} {YY_PRINT; yylval->ival = OS_a_to_xml_int(yytext); return(INTEGER);}
+ /* {anxmlint} {YY_PRINT; yylval->ival = OS_a_to_xml_uint(yytext); return(UNSIGNEDINT);} */
+
+{adouble} {YY_PRINT; 
+char *yytextEnd;
+yylval->dval = os_strtod_wrap( yytext, &yytextEnd);
+return(DOUBLE);}
+
+{aboolean} {YY_PRINT;  yylval->sval = yytext; return(BOOLEAN);}
+
+({xmlwhitespace}*\/>) {YY_PRINT; return(ENDOFELEMENT);}
+
+ /* Patterns for attributes returning strings (that are potentially empty)*/
+
+ /* ({xmlwhitespace}+id{equality}\"\") {YY_PRINT; return(EMPTYIDATT);} */
+ /* ({xmlwhitespace}+id{equality}\'\') {YY_PRINT; return(EMPTYIDATT);} */
+ /* ({xmlwhitespace}+id{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(IDATT);} */
+ /* ({xmlwhitespace}+id{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(IDATT);} */
+
+({xmlwhitespace}+semidefiniteness{equality}\"\") {YY_PRINT; return(EMPTYSEMIDEFINITENESSATT);}
+({xmlwhitespace}+semidefiniteness{equality}\'\') {YY_PRINT; return(EMPTYSEMIDEFINITENESSATT);}
+({xmlwhitespace}+semidefiniteness{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(SEMIDEFINITENESSATT);}
+({xmlwhitespace}+semidefiniteness{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(SEMIDEFINITENESSATT);}
+
+ /* Patterns for attributes returning numeric values*/
+
+({xmlwhitespace}+numberOfQuadraticTerms{equality}) {YY_PRINT; return(NUMBEROFQTERMSATT);}
+({xmlwhitespace}+numberOfCones{equality}) {YY_PRINT; return(NUMBEROFCONESATT);}
+({xmlwhitespace}+numberOfStages{equality}) {YY_PRINT; return(NUMBEROFSTAGESATT);}
+
+({xmlwhitespace}+idxOne{equality}) {YY_PRINT;   return(IDXONEATT);}
+({xmlwhitespace}+idxTwo{equality}) {YY_PRINT;   return(IDXTWOATT);}
+({xmlwhitespace}+startIdx{equality}) {YY_PRINT; return(STARTIDXATT);}
+({xmlwhitespace}+horizon{equality}) {YY_PRINT; return(HORIZONATT);}
+({xmlwhitespace}+start{equality}) {YY_PRINT; return(STARTATT);}
+
+({xmlwhitespace}+matrixIdx{equality}) {YY_PRINT;  return(MATRIXIDXATT);}
+({xmlwhitespace}+lbMatrixIdx{equality}) {YY_PRINT;  return(LBMATRIXIDXATT);}
+({xmlwhitespace}+lbConeIdx{equality}) {YY_PRINT;  return(LBCONEIDXATT);}
+({xmlwhitespace}+ubMatrixIdx{equality}) {YY_PRINT;  return(UBMATRIXIDXATT);}
+({xmlwhitespace}+ubConeIdx{equality}) {YY_PRINT;  return(UBCONEIDXATT);}
+({xmlwhitespace}+templateMatrixIdx{equality}) {YY_PRINT;  return(TEMPLATEMATRIXIDXATT);}
+({xmlwhitespace}+referenceMatrixIdx{equality}) {YY_PRINT;  return(REFERENCEMATRIXIDXATT);}
+
+({xmlwhitespace}+varReferenceMatrixIdx{equality}) {YY_PRINT;  return(VARREFERENCEMATRIXIDXATT);}
+({xmlwhitespace}+objReferenceMatrixIdx{equality}) {YY_PRINT;  return(OBJREFERENCEMATRIXIDXATT);}
+({xmlwhitespace}+conReferenceMatrixIdx{equality}) {YY_PRINT;  return(CONREFERENCEMATRIXIDXATT);}
+
+({xmlwhitespace}+orderConeIdx{equality}) {YY_PRINT;  return(ORDERCONEIDXATT);}
+({xmlwhitespace}+constantMatrixIdx{equality}) {YY_PRINT;  return(CONSTANTMATRIXIDXATT);}
+
+({xmlwhitespace}+normScaleFactor{equality}) {YY_PRINT;  return(NORMSCALEFACTORATT);}
+({xmlwhitespace}+distortionMatrixIdx{equality}) {YY_PRINT;  return(DISTORTIONMATRIXIDXATT);}
+({xmlwhitespace}+axisDirection{equality}) {YY_PRINT;  return(AXISDIRECTIONATT);}
+({xmlwhitespace}+firstAxisDirection{equality}) {YY_PRINT;  return(FIRSTAXISDIRECTIONATT);}
+({xmlwhitespace}+secondAxisDirection{equality}) {YY_PRINT;  return(SECONDAXISDIRECTIONATT);}
+
+ /* Pattern for top level element  
+    Note: </osil> end tag only; rest is done in custom code (see OSInstance.cpp) */
+
+{xmlwhitespace}*\<\/osil{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(OSILEND);}
+{xmlwhitespace}*\<\/instanceData{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INSTANCEDATAEND);}
+{xmlwhitespace}*\<instanceData{xmlwhitespace}*\/\>{xmlwhitespace}* {YY_PRINT; return(INSTANCEDATASTARTEND);}
+
+ /* patterns for <quadraticCoefficients> */
+
+{xmlwhitespace}*\<quadraticCoefficients {YY_PRINT; return(QUADRATICCOEFFICIENTSSTART);}
+{xmlwhitespace}*\<\/quadraticCoefficients{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(QUADRATICCOEFFICIENTSEND);}
+{xmlwhitespace}*\<qTerm {YY_PRINT; return(QTERMSTART);}
+{xmlwhitespace}*\<\/qTerm{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(QTERMEND);}
+
+ /* Patterns for <cones> element */
+
+{xmlwhitespace}*\<cones {YY_PRINT;  return(CONESSTART);}
+{xmlwhitespace}*\<\/cones{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(CONESEND);}
+{xmlwhitespace}*\<nonnegativeCone {YY_PRINT;  return(NONNEGATIVECONESTART);}
+{xmlwhitespace}*\<\/nonnegativeCone{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(NONNEGATIVECONEEND);}
+{xmlwhitespace}*\<nonpositiveCone {YY_PRINT;  return(NONPOSITIVECONESTART);}
+{xmlwhitespace}*\<\/nonpositiveCone{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(NONPOSITIVECONEEND);}
+{xmlwhitespace}*\<generalOrthantCone {YY_PRINT;  return(ORTHANTCONESTART);}
+{xmlwhitespace}*\<\/generalOrthantCone{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(ORTHANTCONEEND);}
+{xmlwhitespace}*\<polyhedralCone {YY_PRINT;  return(POLYHEDRALCONESTART);}
+{xmlwhitespace}*\<\/polyhedralCone{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(POLYHEDRALCONEEND);}
+{xmlwhitespace}*\<quadraticCone {YY_PRINT;  return(QUADRATICCONESTART);}
+{xmlwhitespace}*\<\/quadraticCone{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(QUADRATICCONEEND);}
+{xmlwhitespace}*\<rotatedQuadraticCone {YY_PRINT;  return(ROTATEDQUADRATICCONESTART);}
+{xmlwhitespace}*\<\/rotatedQuadraticCone{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(ROTATEDQUADRATICCONEEND);}
+{xmlwhitespace}*\<semidefiniteCone {YY_PRINT;  return(SEMIDEFINITECONESTART);}
+{xmlwhitespace}*\<\/semidefiniteCone{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(SEMIDEFINITECONEEND);}
+{xmlwhitespace}*\<productCone {YY_PRINT;  return(PRODUCTCONESTART);}
+{xmlwhitespace}*\<\/productCone{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(PRODUCTCONEEND);}
+{xmlwhitespace}*\<intersectionCone {YY_PRINT;  return(INTERSECTIONCONESTART);}
+{xmlwhitespace}*\<\/intersectionCone{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(INTERSECTIONCONEEND);}
+{xmlwhitespace}*\<dualCone {YY_PRINT;  return(DUALCONESTART);}
+{xmlwhitespace}*\<\/dualCone{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(DUALCONEEND);}
+{xmlwhitespace}*\<polarCone {YY_PRINT;  return(POLARCONESTART);}
+{xmlwhitespace}*\<\/polarCone{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(POLARCONEEND);}
+{xmlwhitespace}*\<direction {YY_PRINT;  return(DIRECTIONSTART);}
+{xmlwhitespace}*\<\/direction{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(DIRECTIONEND);}
+{xmlwhitespace}*\<factors {YY_PRINT;  return(FACTORSSTART);}
+{xmlwhitespace}*\<\/factors{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(FACTORSEND);}
+{xmlwhitespace}*\<components {YY_PRINT;  return(COMPONENTSSTART);}
+{xmlwhitespace}*\<\/components{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT;  return(COMPONENTSEND);}
+
+ /* patterns for <timeDomain> element */
+
+{xmlwhitespace}*\<timeDomain {YY_PRINT; return(TIMEDOMAINSTART);}
+{xmlwhitespace}*\<\/timeDomain{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(TIMEDOMAINEND);}
+{xmlwhitespace}*\<stages {YY_PRINT; return(STAGESSTART);}
+{xmlwhitespace}*\<\/stages{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(STAGESEND);}
+{xmlwhitespace}*\<stage {YY_PRINT; return(STAGESTART);}
+{xmlwhitespace}*\<\/stage{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(STAGEEND);}
+{xmlwhitespace}*\<interval {YY_PRINT; return(INTERVALSTART);}
+{xmlwhitespace}*\<\/interval{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INTERVALEND);}
+
+
+

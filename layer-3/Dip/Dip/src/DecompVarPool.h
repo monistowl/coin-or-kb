@@ -1,0 +1,119 @@
+//===========================================================================//
+// This file is part of the DIP Solver Framework.                            //
+//                                                                           //
+// DIP is distributed under the Eclipse Public License as part of the        //
+// COIN-OR repository (http://www.coin-or.org).                              //
+//                                                                           //
+// Authors: Matthew Galati, SAS Institute Inc. (matthew.galati@sas.com)      //
+//          Ted Ralphs, Lehigh University (ted@lehigh.edu)                   //
+//          Jiadong Wang, Lehigh University (jiw408@lehigh.edu)              //
+//                                                                           //
+// Copyright (C) 2002-2019, Lehigh University, Matthew Galati, Ted Ralphs    //
+// All Rights Reserved.                                                      //
+//===========================================================================//
+
+/**
+ * @file DecompVarPool.h
+ * @brief Pool of generated columns (DecompVar) for column generation
+ *
+ * DecompVarPool manages columns waiting to enter the master problem.
+ * Inherits from std::vector<DecompWaitingCol> for storage.
+ *
+ * **Key Functions:**
+ * - isDuplicate(): Check if column already exists (via hash)
+ * - isParallel(): Check angular distance between columns
+ * - setReducedCosts(): Update reduced costs with new duals
+ * - reExpand(): Regenerate column coefficients after master changes
+ *
+ * **Column Selection:**
+ * - is_less_thanD comparator sorts by reduced cost
+ * - Most negative reduced cost columns enter master first
+ * - Parallel/duplicate columns filtered out
+ *
+ * **Validity Flag:**
+ * - m_colsAreValid: Track if columns need re-expansion
+ * - Set false when master constraint set changes
+ * - reExpand() regenerates coefficients
+ *
+ * **Integration with DecompAlgo:**
+ * - Subproblem solutions become DecompWaitingCol entries
+ * - Pool sorted, filtered, best columns added to master
+ * - Columns may be kept for future iterations
+ *
+ * @see DecompVar.h for column representation
+ * @see DecompWaitingCol.h for pool entry wrapper
+ * @see DecompAlgoPC.h for column generation driver
+ */
+
+#ifndef DECOMP_VAR_POOL_INCLUDE
+#define DECOMP_VAR_POOL_INCLUDE
+
+#include "Decomp.h"
+#include "DecompWaitingCol.h"
+
+class DecompConstraintSet;
+
+// --------------------------------------------------------------------- //
+class is_less_thanD { //member of class instead??
+public:
+   bool operator()( const DecompWaitingCol& x,
+                    const DecompWaitingCol& y) {
+      return x.getVarPtr()->getReducedCost() < y.getVarPtr()->getReducedCost();
+   }
+};
+
+// --------------------------------------------------------------------- //
+class DecompVarPool : public std::vector<DecompWaitingCol> {
+private:
+   DecompVarPool(const DecompVarPool&);
+   DecompVarPool& operator=(const DecompVarPool&);
+
+private:
+   static const char* classTag;
+   bool m_colsAreValid;
+
+public:
+   const inline bool colsAreValid() const {
+      return m_colsAreValid;
+   }
+   inline void setColsAreValid(bool colsAreValid) {
+      m_colsAreValid = colsAreValid;
+   }
+
+   void print(double infinity, std::ostream* os = &std::cout) const;  //THINK: virtual??
+   void reExpand(const DecompConstraintSet& modelCore,
+                 const double                tolZero);
+   bool isDuplicate(const DecompWaitingCol& wcol);
+   bool isDuplicate(const DecompVarList&     vars,
+                    const DecompWaitingCol& wcol);
+   bool isParallel(const DecompVarList&     vars,
+                   const DecompWaitingCol& wcol,
+                   const double             maxCosine);
+   bool setReducedCosts(const double*             u,
+                        const DecompStatus          stat,
+                        DecompVarPool::iterator   first,
+                        DecompVarPool::iterator   last);
+   bool setReducedCosts(const double*             u,
+                        const DecompStatus          stat) {
+      return setReducedCosts(u, stat, begin(), end());
+   }
+
+public:
+   DecompVarPool() :
+      m_colsAreValid(true) {}
+
+   ~DecompVarPool() {
+      //---
+      //--- delete any memory that is left in the waiting cols
+      //---
+      std::vector<DecompWaitingCol>::iterator vi;
+
+      for (vi = begin(); vi != end(); vi++) {
+         (*vi).deleteVar();
+         (*vi).deleteCol();
+      }
+   }
+
+};
+
+#endif

@@ -1,0 +1,266 @@
+\documentclass[11pt]{book}
+\usepackage{graphics,graphicx}
+\usepackage[auto]{chappg}
+%\usepackage[dvips]{graphics,graphicx}
+\DeclareGraphicsExtensions{.ps,.jpg,.eps,.pdf,.png}
+\usepackage{boxedminipage,amsmath,amsfonts}
+\usepackage{url}
+%\usepackage{secdot}
+%\usepackage{natbib}
+\usepackage{verbatim}
+%\usepackage{moreverb}
+\usepackage{enumerate}
+\usepackage{makeidx}
+\usepackage{own}
+\bibliographystyle{plain}
+\makeindex
+
+   
+
+\input{chapters/frontmatter.tex} 
+\topmargin 0pt \headheight 14pt \headsep 8pt \textheight 8.6in
+
+
+\begin{document}
+
+\runcodefalse   % we do not build a manual for folks who only want to run the executables
+\uselibsfalse   % we do not build a manual for folks who want to build against the libraries
+\developtrue   % we build a manual for folks who want to actively develop code
+\bibletrue     % in addition we include stuff that should only be of interest to project managers
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% we can print this bible in regular format (with each chapter starting on a right-hand page)
+% or in condensed format (with each chapter starting on a new page, either left or right)
+% In the first case, chapters can be printed in isolation and placed into a folder;
+% in the second case it is best to print two pages side-by-side on a landscape sheet
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\newif\iftwoup
+\twoupfalse % regular format --- each chapter starts on a right-hand page 
+%\twouptrue % two pages side-by-side in landscape format (paper-conserving) 
+
+\newcommand{\throwpage}{\iftwoup\clearpage\else\cleardoublepage\fi}
+
+%Some cross-referencing index entries (to be expanded as needed)
+\index{AMPL Solver Library |see{Third-party software, ASL}}
+\index{ASL|see{Third-party software, ASL}}
+\index{Blas|see{Third-party software, Blas}}
+\index{Harwell Subroutine Library|see{Third-party software, HSL}}
+\index{HSL|see{Third-party software, HSL}}
+\index{Lapack|see{Third-party software, Lapack}}
+\index{Mumps|see{Third-party software, Mumps}}
+\index{Bonmin@{\tt Bonmin}|see{COIN-OR projects, {\tt Bonmin}}}
+\index{BuildTools@{\tt BuildTools}|see{COIN-OR projects, {\tt BuildTools}}}
+\index{Cbc@{\tt Cbc}|see{COIN-OR projects, {\tt Cbc}}}
+\index{Cgl@{\tt Cgl}|see{COIN-OR projects, {\tt Cgl}}}
+\index{Clp@{\tt Clp}|see{COIN-OR projects, {\tt Clp}}}
+%\index{Configuration Manager|see{Microsoft Visual Studio, Configuration Manager}}
+\index{Couenne@{\tt Couenne}|see{COIN-OR projects, {\tt Couenne}}}
+\index{CppAD@{\tt CppAD}|see{COIN-OR projects, {\tt CppAD}}}
+\index{CoinUtils@{\tt CoinUtils}|see{COIN-OR projects, {\tt CoinUtils}}}
+%\index{Debug configuration|see{Microsoft Visual Studio, {\tt Debug} configuration}}
+\index{DyLP@{\tt DyLP}|see{COIN-OR projects, {\tt DyLP}}}
+\index{GLPK@{\tt GLPK}|see{Third-party software, {\tt GLPK}}}
+\index{Ipopt@{\tt Ipopt}|see{COIN-OR projects, {\tt Ipopt}}}
+\index{nl files|see{AMPL nl format}}
+\index{Osi@{\tt Osi}|see{COIN-OR projects, {\tt Osi}}}
+%\index{Release configuration|see{Microsoft Visual Studio, {\tt Release} configuration}}
+%\index{Release-plus configuration|see{Microsoft Visual Studio, {\tt Release-plus} configuration}}
+\index{SYMPHONY@{\tt SYMPHONY}|see{COIN-OR projects, {\tt SYMPHONY}}}
+\index{Vol@{\tt Vol}|see{COIN-OR projects, {\tt Vol}}}
+
+
+\pagenumbering{roman}
+
+\title{Optimization Services \OSstable\ User's Manual (Insider edition)}
+\vskip 2in
+\author{Horand Gassmann, Jun Ma,  Kipp Martin, and Wayne Sheng}
+\maketitle
+
+\chapter*{\centering \begin{normalsize}Abstract\end{normalsize}}
+\begin{quotation}
+\noindent
+This is the extended User's Manual for the Optimization Services (OS) project.  The objective of OS is to provide a
+general framework consisting of a set of standards for representing optimization instances, results,
+solver options, and communication between clients and solvers in a distributed environment using Web Services.
+This COIN-OR\index{COIN-OR} project provides C++ and Java source code for libraries and executable programs that 
+implement OS standards.   The OS library includes a robust solver and modeling language interface (API) for linear,
+nonlinear and other types of optimization problems.   Also included is the C++ source code for a  command line
+executable {\tt OSSolverService}\index{OSSolverService@{\tt OSSolverService}}  for reading problem instances 
+(OSiL format\index{OSiL}, nl format\index{AMPL nl format}, MPS format\index{MPS format}) and
+calling a solver either locally or on a remote server.  Finally,  both Java\index{Java} source code and a Java {\tt war} 
+file are provided for users who wish to set up a solver service on a server running Apache Tomcat\index{Apache Tomcat}.
+See the Optimization Services home page {\tt\UrlOs} and the COIN-OR Trac page\index{Trac system} {\tt\UrlTrac} for 
+more information.
+\end{quotation}
+\clearpage
+
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\throwpage
+
+\hyphenation{com-plex-Type}
+\hyphenation{GAMS-links}
+
+
+%\noindent\hrulefill
+\throwpage
+
+\pagenumbering{gobble}
+
+\part{Overview}
+
+\pagenumbering{bychapter}
+
+\input{chapters/OSConstitutionArticles.tex}
+
+\input{chapters/Jun_interpretation.tex}
+
+\throwpage
+
+\input{chapters/OSIntro.tex}
+
+\throwpage
+
+\input{chapters/roadmap.tex}
+
+
+
+% Part 1 for folks who just want to run the executables
+
+\throwpage
+
+\pagenumbering{gobble}
+
+\part{Running the OS executables}
+
+\pagenumbering{bychapter}
+
+\input{chapters/downloadbinaries.tex}
+
+\throwpage
+
+\input{chapters/OSSolverService.tex}
+
+\throwpage
+
+\input{chapters/OSSolverServiceRules.tex}
+
+\throwpage
+
+\input{chapters/modellang.tex}
+
+\throwpage
+
+\input{chapters/schemadescriptions.tex}
+
+
+% Part 2 for folks who want to use the libraries to develop their own applications
+
+\throwpage
+
+\pagenumbering{gobble}
+
+\part{Using the OS libraries and API}
+
+\pagenumbering{bychapter}
+
+%\input{chapters/downloadbinaries.tex}
+
+%\throwpage
+
+\input{chapters/codesamples.tex}
+
+\throwpage
+
+\input{chapters/OSDip.tex}
+
+\throwpage
+
+\input{chapters/oslibrary.tex}
+
+\throwpage
+
+\input{chapters/OSInstanceAPI.tex}
+
+\throwpage
+
+\input{chapters/CppAD.tex}
+
+
+% Part 3 for folks who want to build the code
+\throwpage
+
+\pagenumbering{gobble}
+
+\part{Building OS from source}
+
+\pagenumbering{bychapter}
+
+\input{chapters/downloadsource.tex}
+
+\throwpage
+
+\input{chapters/build.tex}
+
+\throwpage
+
+\input{chapters/projectcomponents.tex}
+
+\throwpage
+
+\input{chapters/modifyingFiles.tex}
+
+\throwpage
+
+\input{chapters/tomcat.tex}
+
+%\throwpage
+
+%\input{chapters/fileupload.tex}
+
+
+% Part 4: end items: future plans, bibliography, etc.
+\throwpage
+
+\pagenumbering{gobble}
+
+\part{Developing the project}
+
+\pagenumbering{bychapter}
+
+\input{chapters/OSReleaseProcedures.tex}
+
+\throwpage
+
+\input{chapters/Future_Work.tex}
+
+\throwpage
+
+\input{chapters/appendix.tex}
+
+\throwpage
+
+\addcontentsline{toc}{section}{Bibliography}
+% \addcontentsline{toc}{section}{Bibliography}% alternative for article class
+\bibliography{osUsersManual}
+%\bibliographystyle{amsplain}
+%\bibliography{kippbib}
+ 
+\throwpage
+
+\input{chapters/Kipps_collected_wisdom.tex}
+
+\throwpage
+
+\input{chapters/buildSystemInfo.tex}
+
+\printindex
+  
+\throwpage
+
+\end{document}

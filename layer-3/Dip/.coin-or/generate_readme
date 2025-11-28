@@ -1,0 +1,293 @@
+#!/usr/bin/env bash
+
+# Exit when command fails
+set -e
+#Attempt to use undefined variable outputs error message, and forces an exit
+set -u
+#Causes a pipeline to return the exit status of the last command in the pipe
+#that returned a non-zero return value.
+set -o pipefail
+#set -x
+
+source $COINBREW_HOME/scripts/generate_readme
+
+pushd . > /dev/null
+cd $(dirname $0)
+SCRIPT_DIR=$PWD
+popd > /dev/null
+
+create_variables $SCRIPT_DIR/config.yml
+
+make_header
+
+echo "DIP (Decomposition in Integer Programming) is a framework for
+implementing a wide variety of decomposition-based algorithms for solving
+integer programs, including full generic column generation in which the user
+need only indicate whic constraints to relax and the framework takes care of
+all other aspects of the column-generation. The problem can be specified using
+[DiPPy](https://pypi.org/project/coinor.dippy/), an extension of the
+Python-based modeling language [PuLP](https://github.com/coin-or/PuLP) (see
+[examples](Dip/src/dippy/examples)). If desired, custom subroutines for solving
+the subproblem, branching, heuristics, etc. can be implemented in pure Python
+and called automatically from C++ during execution of the algorithm.
+
+Dip makes it easy to implement and compare different variety of
+decomposition-based algorithm while keeping as many details of the algorithmic
+implem,entation constant as possible, allowing for rigorous empirical
+comparisons.
+
+Using [DiPPy](https://pypi.org/project/coinor.dippy/), one can even implement
+a full column-generation algorithm within an Excel spreadsheet using [Solver
+Studio](http://solverstudio.org). See screen shots below."
+
+make_build_info
+
+echo "## Quickstart with DIP/DipPy
+
+If you are on Linux or OS X, DIP can be installed from source using
+[coinbrew](https://github.com/coin-or/coinbrew) (see below). In Windows, there
+are pre-built binary wheels for DipPy. After build and install of DIP, if you
+are installing DipPy, make sure to set \`PKG_CONFIG_PATH\` to point to the
+directory where the \`.pc\` files are installed (by default, this is in the
+\`lib/pkgconfig\` directory in the installation directory). You may also need to
+set either \`LD_LIBRARY_PATH\` (Linux) or \`DYLD_LIBRARY_PATH\` (OS X) to point to
+the directory where the libraries are installed. Then simply do
+\`\`\`
+pip install coinor.dippy
+\`\`\`
+
+After installation, you can try running the examples to see if trhings are
+working. These should all work out of the box. For a listing of examples and
+some brief instructions, do
+\`\`\`
+python -m coinor.dippy.examples
+\`\`\`
+To get help for an example, do, e.g.,
+\`\`\`
+python -m coinor.dippy.example.cflp --help
+\`\`\`
+or just run
+\`\`\`
+python -m coinor.dippy.examples.cflp
+\`\`\`
+
+## Scrren Shots
+### Using [DiPPy](https://pypi.org/project/coinor.dippy/) in [Solver Studio](http://solverstudio.org)
+![Solver Studio Pic 1](https://raw.githubusercontent.com/coin-or/Dip/master/Dip/images/SolverStudioPic1.png)
+### Choosing algorithm in [Solver Studio](http://solverstudio.org)
+![Solver Studio Pic 3](https://raw.githubusercontent.com/coin-or/Dip/master/Dip/images/SolverStudioPic3.png)
+### Displaying search tree using [GrUMPy](https://github.com/coin-or/GrUMPy)
+![GrUMPy Pic](https://raw.githubusercontent.com/coin-or/Dip/master/Dip/images/GrUMPyPic.png)
+### Editing DipPy Model with Eclipse and PyDev
+![DipPy Pic](https://raw.githubusercontent.com/coin-or/Dip/master/Dip/images/DipPyPic2.png)
+
+"
+
+make_doxygen_info
+
+echo "## Additional Documentation
+
+ * C++ [examples](Dip/examples)
+ * [DiPPy](https://pypi.org/project/coinor.dippy/) (Python) [examples](Dip/src/dippy/examples)
+ * Slides providing a brief introduction are [here](https://coral.ise.lehigh.edu/~ted/files/talks/DecompIFORS14.pdf)
+ * Slides providing a much longer introduction are [here](https://coral.ise.lehigh.edu/~ted/files/talks/DecompCSIRO11.pdf)
+ * For the methodological basis, see
+   * [This](http://dx.doi.org/10.1007/s10107-005-0606-3) paper (pre-print [here](http://coral.ie.lehigh.edu/~ted/files/papers/DECOMP04.pdf)); or
+   * [This](http://coral.ie.lehigh.edu/~ted/files/papers/DECOMP04.pdf) more detailed paper; or
+   * [This](http://coral.ie.lehigh.edu/~ted/files/papers/MatthewGalatiDissertation09.pdf) dissertation (much more detailed)
+ * http://coral.ie.lehigh.edu/~ted/files/papers/MatthewGalatiDissertation09.pdf
+"
+make_links
+
+echo "## CHANGELOG
+
+### Release 0.95.0
+ * Python 3 support added
+
+### Release 0.92.4
+ * Update dependencies
+ * Minor bug fixes for DipPy
+ 
+### Release 0.92.3
+ * Update dependencies
+ * Minor bug fix
+ * Add support for Appveyor and Travis
+ * Install examples with DipPy
+
+### Release 0.92.2
+ * Get rid of pesky global variable DecompInf
+ * Fix bugs in wedding planner example
+ * Fix bugs in DipPy to allow returning no solutions, even when an exact 
+   subproblem solver is used and to allow no branching candidates when 
+   branching. 
+
+### Release 0.91.6
+ * Fixed bugs in Wedding Planner example.
+ * Fixed bug in DipPy having to do with branching.
+
+### Release 0.92.1
+ * Fixed problem with dependency linking
+
+### Release 0.91.5
+ * Fixed bug with SYMPHONY when not all solutions are accepted.
+
+### Release 0.92.0
+ * Substantially re-designed internals
+ * Renamed classes, functions, and parameters more intuitively
+ * Eliminated unnecessary "MILP" parameter section and joined it to "DECOMP,"
+   as well as making "DECOMP" the default parameter section name. 
+ * Changed parameter setting mechanism to make it possible to pass parameters
+   directly to solvers using native names.
+ * Added interface to Gurobi
+ * Added ability to select solver at run-time rather than compile-time.
+ * In DipPy, the user can now return a status in the subproblem solve to
+   indicate whether the subproblem was solved exactly. Previously, DipPy
+   solved the subproblem to optimality internally whenever no solution was
+   returned, which is unnecessary if the user's subproblem solver is exact. It
+   also means that the user was previously required to provide a full
+   description of the subproblem.
+
+### Release 0.91.4
+ * Fixed bugs in examples
+ * Updates to dependencies
+ * Samll bug fixes
+
+### Release 0.91.4
+ * Fixed bugs in examples
+ * Updates to dependencies
+ * Samll bug fixes
+
+### Release 0.91.3
+ * Fixes for correctly producing Doxygen documentation
+
+### Release 0.91.2
+ * Fixed issue with master only variable when solving master as an integer 
+   program.
+ * Added ability to generate multiple columns per iteration with SYMPHONY and 
+   Cbc. 
+
+### Release 0.91.1
+ * Updating dependencies.
+ * Fix for dependency linking
+ * Fix to installation with {{{DESTDIR}}}
+
+### Release 0.91.0
+ * Multiple parallel modes added
+   * Solution of individual subproblems can be parallelized
+   * Multiple subproblems can be solved simultaneously
+   * Multiple algorithms can be executed in parallel (branch and cut plus
+        one or more decomposition-based algorithms)
+ * Warm starting for solutions of subproblems is supported when using
+   SYMPHONY as the subproblem solver. 
+ * Unbounded feasible regions now supported.
+ * Explicit treatment of master-only variables.
+
+### Release 0.9.12:
+
+ * Fixed long-standing issues with stand-alone apps
+
+ * Small some bug fixes 
+
+### Release 0.9.11:
+
+ * Added some new DipPy examples
+
+ * Small bug fixes 
+
+### Release 0.9.10:
+
+ * Fixes to stand-alone app examples
+
+ * Fixes to Visual studio files for examples to support property pages 
+
+##New Stable Version 0.91:
+
+ * Changes to the DipPy callback interface to make it more user friendly
+
+ * Changes to the application interface
+
+ * Planning for other changes to the internal algorithm 
+
+### Release 0.9.9:
+
+ * Fixes to DipPy build and examples
+
+ * Fixes to allow CGL cuts to be generated from within DipPy branch and price. 
+
+### Release 0.9.8:
+
+ * Fixes to DipPy examples
+
+ * Support for dependency linking 
+
+### Release 0.9.7:
+
+ * Fixes to DipPy examples
+
+ * Support for dependency linking 
+
+### Release 0.9.6:
+
+ * Fixes to allow proper installation of DipPy on Mac OS X 
+
+### Release 0.9.5:
+
+ * Small fixes to DipPy
+
+### Release 0.9.4:
+
+ * Fixes to parallel subproblem solution mode with OpenMP
+
+### Release 0.9.3:
+
+ * More updates to build system
+
+### Release 0.9.2:
+
+ * Updates to build system
+
+### Release 0.9.1:
+
+ * Fixes to Python installation
+
+ * Fix to DipPy
+
+### Release 0.9.0:
+
+ * DIP now includes DipPy, a Python-based modeling language.
+
+ * DIP is now a complete generic MILP solver, capable of automatically
+   detecting block structure and applying a decomposition method.
+
+ * DIP and DipPy build out of the box in Windows, OSX, and Linux with a
+   combination of the autotools and a Python setup script.
+
+ * There is now support for solving the subproblems in parallel when there is
+   block structure using OpenMP.
+
+ * Numerous bug fixes and improvements. 
+
+### Release 0.82.2:
+
+ * Fixes to build system
+
+ * Updates to dependencies
+
+### Release 0.82.1:
+
+ * Fixes to build system
+
+ * Updates to dependencies
+
+### Release 0.82.0:
+
+ * Support for MSVC++ version 10 added.
+
+ * Support for BuildTools version 0.7 to incorporate recent enhancements,
+   including proper library versioning in Linux, prohibiting installation of
+   private headers, etc.
+
+ * Updated externals to new stable versions of dependent projects.
+
+ * Minor bug fixes. 
+"

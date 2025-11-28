@@ -1,0 +1,124 @@
+//
+//  Node.h
+//
+/**
+ * @file gravity/Node.h
+ * @brief Graph node/vertex for network optimization models
+ *
+ * Represents a node in network graphs (power systems, transportation, etc.).
+ *
+ * **Node Class:**
+ * - _name: Unique string identifier
+ * - _id: Numeric ID within container
+ * - _type_name: "Nodes" (for indexing)
+ * - _active: Whether node is active in model
+ *
+ * **Connectivity:**
+ * - branches: Vector of incident Arc pointers
+ * - degree(): Number of incident arcs
+ * - addArc(), removeArc(): Modify adjacency
+ *
+ * **Graph Algorithms:**
+ * - explored: BFS/DFS traversal flag
+ * - cycle: True if node is in a cycle
+ * - predecessor: Parent in BFS tree
+ * - distance: Distance from source in BFS
+ * - fill_in: Edges needed to make neighbors a clique
+ *
+ * **Power System Extensions:**
+ * - _phases: Set of phases (for 3-phase systems)
+ *
+ * @see gravity/Arc.h for edge/arc data
+ * @see gravity/Net.h for graph container
+ */
+#ifndef Node_h
+#define Node_h
+#include <vector>
+#include <string>
+#include <set>
+#include <gravity/utils.h>
+#include <gravity/Auxiliary.h>
+
+/** A Node has:
+    a name
+    an ID.
+    a set of branches.
+    Name is the unique lable of a node.
+    ID is determined if it is within a container of nodes.
+ */
+
+class Arc;
+class Path;
+
+class Node{
+    
+public:
+    std::string _name="noname";
+    std::string _type_name="Nodes";
+    int _id=-1;
+    set<int> _phases;
+    bool _active = true;
+    std::vector<Arc*> branches;
+    /* marks the node if it has been explored or not */
+    bool explored = false;
+    /* true if node is in cycle */
+    bool cycle = false;
+
+    Node* predecessor = nullptr;
+    int distance = 0;
+    
+    /* the number of edges needed to make the subgraph formed by adjacent nodes a clique */
+    int fill_in = 0;
+
+    // constructions
+    Node();
+    Node(std::string name, int idx= -1);
+    virtual ~Node();
+    Node* clone();
+    
+    /* number of incident lines */
+    int degree();
+      /*
+     @brief Adds a to the list of incident arcs
+     */
+    void addArc(Arc* a);
+
+    void print() const;
+     /*
+     @brief Find and remove incident arc from list of branches
+     @return 0 if a was found and removed, -1 otherwise
+     */
+    int removeArc(Arc* a);
+
+    void update_fill_in(Node* n);
+    
+    /*
+     @brief Returns true if n is an adjacent node.
+     */
+    bool is_connected(Node* n);
+
+    /*
+     @brief Returns the vector of outgoing active arcs
+     */
+    std::vector<Arc*> get_out();
+    
+    /*
+     @brief Returns the vector of incoming active arcs
+     */
+    std::vector<Arc*> get_in();
+    
+    /*
+     @brief Returns the vector of auxiliary objects attached to current node
+     */
+    virtual vector<gravity::aux*> get_aux(const string& aux_type){return vector<gravity::aux*>();};
+    
+
+    /* return its neighbours */
+    map<string,Node*> get_neighbours() const;
+    
+    std::vector<Node*> get_neighbours_vec() const;
+    
+     size_t get_degree() const;
+};
+
+#endif

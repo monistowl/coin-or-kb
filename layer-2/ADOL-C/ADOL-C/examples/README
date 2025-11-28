@@ -1,0 +1,35 @@
+##############################################################################
+## README -- additional information
+## Revision: $Id: README 295 2009-02-25 13:32:25Z awalther $
+##
+## Copyright (C) Andrea Walther, Andreas Griewank, Andreas Kowarz, 
+##               Hristo Mitev, Sebastian Schlenkrich, Jean Utke, Olaf Vogel 
+##
+## This file is part of ADOL-C. This software is provided as open source.
+## Any use, reproduction, or distribution of the software constitutes 
+## recipient's acceptance of the terms of the accompanying license file.
+## 
+##############################################################################
+
+--------------------------------------------------------------
+
+The directory contains the examples described in the manual
+
+The subdirectory additional_examples contains further example
+code for numerous drivers and applications of ADOL-C
+
+--------------------------------------------------------------
+
+CONTENTS OF THE DIRECTORY
+
+  detexam.cpp          ---> Computation of determinants
+  luexam.coo           ---> Computation of LU factorization with pivoting
+  odexam.cpp           ---> Nonlinear ordinary differential 
+                            equation based on the Robertson test 
+                            problem
+  powexam.cpp          ---> Computation of n-th power
+  speelpenning.cpp     ---> Speelpenning's product
+  traceless_scalar.cpp ---> coordinate transform with traceless
+                            scalar forward mode
+  traceless_vector.cpp ---> coordinate with traceless
+                            vector forward mode

@@ -1,0 +1,100 @@
+%%%%%
+% some other macros
+\newcommand{\figurepath}{./figures}
+\newcommand{\bibpath}{/Users/kmartin/Documents/files/misc}
+\newcommand{\figfiletype}{pdf}
+
+%Brad Bell Macros
+
+% Latex macros defined for all the CppAD documentation:
+\newcommand{\T}{ {\rm T} }
+\newcommand{\R}{ {\bf R} }
+\newcommand{\C}{ {\bf C} }
+\newcommand{\D}[2]{ \frac{\partial #1}{\partial #2} }
+\newcommand{\DD}[3]{ \frac{\partial^2 #1}{\partial #2 \partial #3} }
+\newcommand{\Dpow}[2]{ \frac{\partial^{#1}}{\partial  {#2}^{#1}} }
+\newcommand{\dpow}[2]{ \frac{ {\rm d}^{#1}}{{\rm d}\, {#2}^{#1}} }
+
+% Define the hangref environment used for the References list:
+\newenvironment{hangref}
+  {\begin{list}{}{\setlength{\itemsep}{4pt}
+  \setlength{\parsep}{0pt}\setlength{\leftmargin}{+\parindent}
+  \setlength{\itemindent}{-\parindent}}}{\end{list}}
+
+% Set the page margins to 1 inch all around:
+\marginparwidth 0pt\marginparsep 0pt \topskip 0pt\headsep
+0pt\headheight 0pt \oddsidemargin 0pt\evensidemargin 0pt
+\textwidth 6.5in \topmargin 0pt\textheight 9.0in
+\newtheorem{theorem}{Theorem}
+
+   
+%%%%Added by Leo%%%%
+\newcounter{Fig}
+\renewcommand{\theFig}{\arabic{Fig}}
+\newcommand{\Fig}[2]{\refstepcounter{Fig} \label{#1}
+                     {\small\bf Figure \theFig.} {\small\sl #2 \par}}
+
+\setcounter{topnumber}{3}
+\renewcommand{\topfraction}{.9}
+\setcounter{bottomnumber}{3}
+\renewcommand{\bottomfraction}{.9}
+\setcounter{totalnumber}{4}
+\renewcommand{\textfraction}{.1}
+\setlength{\floatsep}{.25in}
+\setlength{\intextsep}{.25in}
+
+\setlength{\fboxrule}{2\fboxrule} \setlength{\fboxsep}{3\fboxsep}
+
+\newcommand{\Sa}{8pt}
+\newcommand{\Sb}{0pt}
+
+\renewcommand{\_}{{\char"5F}}
+\renewcommand{\{}{{\char"7B}}
+\renewcommand{\}}{{\char"7D}}
+\renewcommand{\^}{{\char"0D}}
+
+\let\accute= \'
+\renewcommand{\'}{{\char"0D}}
+
+\newcommand{\bfit}{\bfseries\itshape}
+
+\newlength{\extopskip} \newlength{\exbottomskip}
+\setlength{\exbottomskip}{1\baselineskip}
+\addtolength{\exbottomskip}{-5.0pt}
+\setlength{\extopskip}{1\exbottomskip}
+\addtolength{\extopskip}{-1\parskip}
+
+\newenvironment{Example}{\vspace{1\extopskip}\noindent\hspace*{2em}
+                         \frenchspacing\small
+                         \tt\begin{tabular}{@{}l@{}}}{
+                         \end{tabular}\\[1\exbottomskip]}
+
+\newcommand{\Titem}{\item[$\triangleright$]}
+\newcommand{\Ditem}{\item[$\diamond$]}
+
+\newenvironment{Itemize}{\begin{quote}\normalsize
+   \baselineskip 20pt plus .3pt minus .1pt \begin{itemize}}
+   {\end{itemize}\end{quote}}
+   % Set path to folder containing figures
+\newcommand{\FigureFolder}{figures}
+
+\newif\ifknitro \knitrofalse    % change to \knitrotrue once we get knitro connected again
+\newif\ifipopt  \ipopttrue      % change to \ipopttrue  once we get the build problems sorted out
+
+\input{URLsAndVersions/cited_URLs.tex}
+\input{URLsAndVersions/currentVersions.tex}
+
+
+% Some logicals for allowing the build of  different configurations of the material with different content  
+\newif\ifruncode   % to build a manual for folks who only want to run the executables 
+\newif\ifuselibs   % to build a manual for folks who want to build against the libraries
+\newif\ifdevelop   % to build a manual for folks who want to actively develop code
+\newif\ifbible    % to build a manual for project managers
+
+\runcodefalse \uselibsfalse \developfalse \biblefalse
+
+%different configurations use different document classes with different text divisions
+\newcommand{\division}[1]{\ifbible\chapter{#1}\else\section{#1}\fi}
+\newcommand{\subdivision}[1]{\ifbible\section{#1}\else\subsection{#1}\fi}
+\newcommand{\subsubdivision}[1]{\ifbible\subsection{#1}\else\subsubsection{#1}\fi}
+

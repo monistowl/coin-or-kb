@@ -1,0 +1,144 @@
+% This is a list of future work. As a stand-alone file it does not process in TeX or LaTeX,
+% but it can be \input into the osUsersManual, and it is small enough so that it can be
+% maintained by a simple text editor.
+%
+% This version dated 13 December 2012
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\division{Implementation Plans for Next Release}\label{section:future-work}
+
+\begin{itemize}
+%\item Implement a Gurobi solver interface.
+
+%\item Implement the {\tt mult} and {\tt incr} features in OSInstance/OSiL parsers.
+
+\item Implement the SOS feature in OSiL
+
+%\item Implement a switch so that the solver output is put into OSrL output. This output should go into a {\tt solutionResult} element in {\tt otherSolutionResults.}
+
+%\item Add an OS option to the OSSolverInterfaces that allows the user to get the log file of the solver. The user would have to use the specific solver option to set the level of log output.
+
+\item Make GAMS OSiL read and OSrL write part of the standard distribution
+
+%\item Implement the Bcp solver
+
+%\item Installer for Windows
+
+%\item Right now the OSSolverService command line parser requires / for path -- allow {$\backslash$} for Windows users
+
+%\item Warmstart for LP
+
+%\item Add support for SDPA
+
+%\item Implement parser for matrices and cones
+
+%\item Proof of Concept: Hook to a solver (CSDP?)
+
+\item Implement parser for scenarios
+
+\item Implement stochastic solver (Deterministic equivalent/decomposition)
+
+\item Put in proper error checking for problems that have zero variables
+
+%\item Prepare a detailed example of how to build a problem instance using the OSInstance API
+
+%\item Run Artistic Style on the code so Gus and Kipp are consistent
+
+\item Proper parsing of xs:boolean (false|true|1|0)
+
+\item Optional attribute "transpose" on OSnLMNodes that reference matrices
+
+\end{itemize}
+
+%=======================================================
+
+\ifbible
+
+\subdivision{Wish List of future development}\label{section:wishlist} 
+
+\begin{itemize}
+
+\item Implement OS as part of CoinUtils. (That is, break out some of the basic routines.)
+
+\item Write a document on how to hook your solver to OS.
+
+\item Add a module to FlopC++ that writes OSiL.
+
+\item Add a module to one or both of the Python modeling language (Pyomo and/or Pulp) that writes OSiL.
+
+\item Investigate the Amazon cloud computing.
+
+%\item Figure out how to put the version number on the executables
+
+%\item Add code so that we can take a LINGO postfix problem instance and generate an OSExpression tree.
+
+%\item Paper on SOS
+
+\item Prepare constraint programming document/report.
+
+%\item Prepare a paper on OSOption and OSResult.
+
+\item Write documentation on the new Java example.
+
+\item Build and document Java distribution for users who want to build OSiL from Java and 
+call OSSolverService from Java. 
+
+\item Paper on matrix programming.
+
+\item Re-check scenario formulation.
+
+%\item Solution files for matrix programming (Imre)
+
+\item Complex numbers in OSiL (Imre).
+
+%\item Figure out why Che-lin's problem dies when finding a sparse Hessian
+
+\item Deal with GAMS list of complaints.
+
+\begin{itemize}
+\item SOS can be used with Cbc and Bonmin,
+\item Cbc can handle semicontinuous+semiinteger variables with Cbc, 
+\item Ipopt and Bonmin allow user defined functions,
+\item enable parameters for Cbc, 
+\item - most important - allow redirecting the output.
+\end{itemize}
+
+%\item Treat \url{https://projects.coin-or.org/OS/ticket/14} 
+%
+%\item[] Stefan's comments regarding this issue:
+%
+%\item[] ``I like the message handling of Ipopt, where you can register several
+%journals that can handle output for different categories with differing
+%print levels. For the GAMSlinks we then have a GamsJournal that is used
+%to direct the output into the GAMS output channels.
+%
+%\item[] ``Cbc and Osi-interfaced solvers use CoinMessageHandler. I do not really
+l%ike them because the message handler sometimes insert spaces or
+%newlines which make them very inflexible about what kind of output you
+%can print, but we have a GamsMessageHandler that does the job. Not all
+%Osi links support this yet. For Clp, Cbc, DyLP it should work. For the
+%trunk versions of Cpx, Msk, Xpr it should also work. Symphony I don't
+%remember.
+%
+%\item[] ``For Bonmin and Couenne one has to pass in both an Ipopt::Journal and a
+%CoinMessageHandler.''
+%
+%\item get a log file from Cbc and put into OSrL
+%
+\item After ticket 14 has been implemented, allow introspection as to which solvers are connected 
+
+\item bilevel and multilevel programming
+
+\item Schema changes for version 3.0:
+
+\begin{itemize}
+\item Make $<$otherVarOption$>$ and $<$otherVarResult$>$ compatible: Eliminate ``ubValue'' and ``lbValue'' attributes and change ``value'' attribute to element content.
+
+\item Eliminate LinearConstraintCoefficientsIntVector by replacing it with IntVector and make LinearConstraintCoefficients compatible with other uses of IntVector.
+
+\end{itemize}
+
+\end{itemize}
+
+\fi

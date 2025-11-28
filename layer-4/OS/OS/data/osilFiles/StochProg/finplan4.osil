@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<osil xmlns="os.optimizationservices.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="os.optimizationservices.org http://www.optimizationservices.org/schemas/OSiL.xsd">
+-->
+<osil xmlns="os.optimizationservices.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="os.optimizationservices.org C:\DataFiles\RESEARCH\OS\OS-trunk-work\OS\schemas\OSiL.xsd">
+	<instanceHeader>
+		<name>FinPlan</name>
+		<source>Birge and Louveaux, Introduction to Stochastic Programming, Springer, 1997</source>
+		<description>
+			In this third version of the financial planning problem, the rates are hypothesized to follow an ARMA(2,2) process of the form
+			
+			       a(t) = M1 a(t-1) + M2 a(t-2) + N0 v(t) + N1 v(t-1) + N2 v(t-2) + C
+			       
+			with M1 = [ (0.9, -0.1), (0.0, 0.9) ], M2 = [ (0.1, 0.0), (0.0, 0.1) ], N0 = transp(0.06, 0.02), N1 = transp(0.02, 0.01), N2 = trransp(-0.01, 0), C = transp(0.05, 0)
+			
+			and a(-1) = transp(1.07, 1.10), a(0) = transp(1.20, 1.06) and v(t) = +1 or -1each with prob 0.5, where v(-1) = -1 and v(0) = 1 are given.
+			
+			This version of the problem models the ARMA(2,2) process explicitly and uses linear transformations. 
+		</description>
+		<fileCreator>H.I. Gassmann, J. Ma and R.K.Martin</fileCreator>
+		<licence>This file is distributed under the Eclipse Public License</licence>
+	</instanceHeader>
+	<instanceData>
+		<variables numberOfVariables="8">
+			<var name="Invest0Stocks" type="C" lb="0.0"/>
+			<var name="Invest0Bonds"/>
+			<var name="Invest1Stocks"/>
+			<var name="Invest1Bonds"/>
+			<var name="Invest2Stocks"/>
+			<var name="Invest2Bonds"/>
+			<var name="wealth"/>
+			<var name="short"/>
+		</variables>
+		<objectives numberOfObjectives="1">
+			<obj name="expectedWealth" maxOrMin="max" numberOfObjCoef="2">
+				<coef idx="6">1.0</coef>
+				<coef idx="7">-4.0</coef>
+			</obj>
+		</objectives>
+		<constraints numberOfConstraints="4">
+			<con name="Budget0" lb="55" ub="55"/>
+			<con name="Budget1" lb="0" ub="0"/>
+			<con name="Budget2" lb="0" ub="0"/>
+			<con name="Budget3" lb="80" ub="80"/>
+		</constraints>
+		<linearConstraintCoefficients numberOfValues="14">
+			<start>
+				<el mult="6" incr="2">0</el>
+				<el mult="3" incr="1">12</el>
+			</start>
+			<rowIdx>
+				<el>0</el>
+				<el>1</el>
+				<el>0</el>
+				<el>1</el>
+				<el>1</el>
+				<el>2</el>
+				<el>1</el>
+				<el>2</el>
+				<el>2</el>
+				<el>3</el>
+				<el>2</el>
+				<el>3</el>
+				<el>3</el>
+				<el>3</el>
+			</rowIdx>
+			<value>
+				<el>1</el>
+				<el>-1.25</el>
+				<el>1</el>
+				<el>-1.14</el>
+				<el>1</el>
+				<el>-1.25</el>
+				<el>1</el>
+				<el>-1.14</el>
+				<el>1</el>
+				<el>-1.25</el>
+				<el>1</el>
+				<el>-1.14</el>
+				<el>1</el>
+				<el>1</el>
+			</value>
+		</linearConstraintCoefficients>
+		<matrices numberOfMatrices="6">
+			<matrix numberOfColumns="2" numberOfRows="2" name="M1">
+				<constantElements numberOfValues="3">
+					<start>
+						<el>0</el>
+						<el>1</el>
+						<el>3</el>
+					</start>
+					<index>
+						<el mult="2">0</el>
+						<el>1</el>
+					</index>
+					<value>
+						<el>0.9</el>
+						<el>-0.1</el>
+						<el>0.9</el>
+					</value>
+				</constantElements>
+			</matrix>
+			<matrix numberOfColumns="2" numberOfRows="2" name="M2">
+				<constantElements numberOfValues="2">
+					<start>
+						<el>0</el>
+						<el>1</el>
+						<el>2</el>
+					</start>
+					<index>
+						<el>0</el>
+						<el>1</el>
+					</index>
+					<value>
+						<el mult="2">0.1</el>
+					</value>
+				</constantElements>
+			</matrix>
+			<matrix numberOfColumns="1" numberOfRows="2" name="N0">
+				<constantElements numberOfValues="2">
+					<start>
+						<el>0</el>
+						<el>2</el>
+					</start>
+					<index>
+						<el>0</el>
+						<el>1</el>
+					</index>
+					<value>
+						<el>0.06</el>
+						<el>0.02</el>
+					</value>
+				</constantElements>
+			</matrix>
+			<matrix numberOfColumns="1" numberOfRows="2" name="N1">
+				<constantElements numberOfValues="2">
+					<start>
+						<el>0</el>
+						<el>2</el>
+					</start>
+					<index>
+						<el>0</el>
+						<el>1</el>
+					</index>
+					<value>
+						<el>0.02</el>
+						<el>0.01</el>
+					</value>
+				</constantElements>
+			</matrix>
+			<matrix numberOfColumns="1" numberOfRows="2" name="N2">
+				<constantElements numberOfValues="1">
+					<start>
+						<el>0</el>
+						<el>1</el>
+					</start>
+					<index>
+						<el>0</el>
+					</index>
+					<value>
+						<el>-0.01</el>
+					</value>
+				</constantElements>
+			</matrix>
+			<matrix numberOfColumns="1" numberOfRows="2" name="C">
+				<constantElements numberOfValues="1">
+					<start>
+						<el>0</el>
+						<el>1</el>
+					</start>
+					<index>
+						<el>0</el>
+					</index>
+					<value>
+						<el>0.05</el>
+					</value>
+				</constantElements>
+			</matrix>
+			<matrix numberOfColumns="1" numberOfRows="2" name="a(0)">
+				<constantElements numberOfValues="2">
+					<start>
+						<el>0</el>
+						<el>2</el>
+					</start>
+					<index>
+						<el>0</el>
+						<el>1</el>
+					</index>
+					<value>
+						<el>1.20</el>
+						<el>1.06</el>
+					</value>
+				</constantElements>
+			</matrix>
+			<matrix numberOfColumns="1" numberOfRows="2" name="a(-1)">
+				<constantElements numberOfValues="2">
+					<start>
+						<el>0</el>
+						<el>2</el>
+					</start>
+					<index>
+						<el>0</el>
+						<el>1</el>
+					</index>
+					<value>
+						<el>1.07</el>
+						<el>1.10</el>
+					</value>
+				</constantElements>
+			</matrix>
+			<matrix numberOfColumns="1" numberOfRows="2" name="a(1)">
+				<transformation shape="constant">
+					<matrixSum>
+						<matrixTimes>
+							<matrixReference idx="0"/>
+							<matrixReference idx="6"/>
+						</matrixTimes>
+						<matrixTimes>
+							<matrixReference idx="1"/>
+							<matrixReference idx="7"/>
+						</matrixTimes>
+						<matrixScalarTimes>
+							<matrixReference idx="4"/>
+							<number value="-1"/>
+						</matrixScalarTimes>
+						<matrixReference idx="3"/>
+						<matrixReference idx="5"/>
+					</matrixSum>
+				</transformation>
+			</matrix>
+			<matrix numberOfColumns="2" numberOfRows="2" name="T0">
+				<constantElements numberOfValues="4">
+					<start>
+						<el mult="3" incr="2">0</el>
+					</start>
+					<index>
+						<el>0</el>
+						<el>1</el>
+						<el>0</el>
+						<el>1</el>
+					</index>
+					<value>
+						<el>0.06</el>
+						<el>0.02</el>
+						<el>1.161</el>
+						<el>1.074</el>
+					</value>
+				</constantElements>
+			</matrix>
+			<matrix numberOfColumns="1" numberOfRows="2" name="T1">
+				<constantElements numberOfValues="9">
+					<start>
+						<el>0</el>
+						<el>2</el>
+						<el mult="4" incr="2">3</el>
+					</start>
+					<index>
+						<el>0</el>
+						<el>1</el>
+						<el>0</el>
+						<el>0</el>
+						<el>1</el>
+						<el>0</el>
+						<el>1</el>
+						<el>0</el>
+						<el>1</el>
+					</index>
+					<value>
+						<el>0.06</el>
+						<el>0.02</el>
+						<el>0.9</el>
+						<el>-0.1</el>
+						<el>0.9</el>
+						<el>0.02</el>
+						<el>0.01</el>
+						<el>0.16</el>
+						<el>0.106</el>
+					</value>
+				</constantElements>
+			</matrix>
+			<matrix numberOfColumns="1" numberOfRows="2" name="T2">
+				<constantElements numberOfValues="11">
+					<start>
+						<el>0</el>
+						<el>2</el>
+						<el>3</el>
+						<el mult="3" incr="1">5</el>
+						<el mult="3" incr="1">9</el>
+					</start>
+					<index>
+						<el>0</el>
+						<el>1</el>
+						<el>0</el>
+						<el>0</el>
+						<el>1</el>
+						<el>0</el>
+						<el>1</el>
+						<el>0</el>
+						<el>1</el>
+						<el>0</el>
+						<el>0</el>
+					</index>
+					<value>
+						<el>0.06</el>
+						<el>0.02</el>
+						<el>0.9</el>
+						<el>-0.1</el>
+						<el>0.9</el>
+						<el mult="2">0.1</el>
+						<el>0.02</el>
+						<el>0.01</el>
+						<el>-0.01</el>
+						<el>0.1</el>
+					</value>
+				</constantElements>
+			</matrix>
+		</matrices>
+		<distributions numberOfDist="1">
+			<dist>
+				<empiricalDiscrete numberOfEl="2">
+					<el value="1" prob="0.5"/>
+					<el value="-1" prob="0.5"/>
+				</empiricalDiscrete>
+			</dist>
+		</distributions>
+		<multilevelAndStochasticProgramming>
+			<levelsOrTimeStages numberOfStages="4">
+				<stage>
+					<variables numberOfVar="2">
+						<var>
+							<el mult="2" incr="1">0</el>
+						</var>
+					</variables>
+					<constraints numberOfCon="1">
+						<con>
+							<el>0</el>
+						</con>
+					</constraints>
+				</stage>
+				<stage>
+					<variables numberOfVar="2">
+						<var>
+							<el mult="2" incr="1">2</el>
+						</var>
+					</variables>
+					<constraints numberOfCon="1">
+						<con>
+							<el>1</el>
+						</con>
+					</constraints>
+				</stage>
+				<stage>
+					<variables numberOfVar="2">
+						<var>
+							<el>4</el>
+							<el>5</el>
+						</var>
+					</variables>
+					<constraints numberOfCon="1">
+						<con>
+							<el>2</el>
+						</con>
+					</constraints>
+				</stage>
+				<stage>
+					<variables numberOfVar="2">
+						<var>
+							<el>6</el>
+							<el>7</el>
+						</var>
+					</variables>
+					<objectives numberOfObj="1">
+						<obj>
+							<el>-1</el>
+						</obj>
+					</objectives>
+					<constraints numberOfCon="1">
+						<con>
+							<el>3</el>
+						</con>
+					</constraints>
+				</stage>
+			</levelsOrTimeStages>
+			<stochasticElements numberOfStochEl="6">
+				<linearConstraintCoefficient rowIdx="1" colIdx="0"/>
+				<linearConstraintCoefficient rowIdx="1" colIdx="0"/>
+				<linearConstraintCoefficient rowIdx="2" colIdx="2"/>
+				<linearConstraintCoefficient rowIdx="2" colIdx="3"/>
+				<linearConstraintCoefficient rowIdx="3" colIdx="4"/>
+				<linearConstraintCoefficient rowIdx="3" colIdx="5"/>
+			</stochasticElements>
+			<implicitTreeData numberOfRV="3">
+				<rv stageIdx="1" distributionIdx="0">
+					<stochasticLocations numberOfEl="2">
+						<el>0</el>
+						<el>1</el>
+					</stochasticLocations>
+					<!-- No AR or MA terms, since the past is known with certainty. M1 a(0) + M2 a(-1) + N1 v(0) + N2 v(-1) + C is a constant vector.-->
+					<linearTransformation idx="9" addConstant="true"/>
+				</rv>
+				<rv stageIdx="2" distributionIdx="0">
+					<stochasticLocations numberOfEl="2">
+						<el>2</el>
+						<el>3</el>
+					</stochasticLocations>
+					<!-- The transformation matrix has 2 rows and 5 columns (1 for v(1), 2 for AR term a(0), 1 for MA term v(0) and one for the constant M2 a(0) + N2 v(0) + C. -->
+					<linearTransformation idx="10" numberOfAR="1" numberOfMA="1" addConstant="true">
+						<ar idx="0"/>
+						<ma idx="0"/>
+					</linearTransformation>
+				</rv>
+				<rv stageIdx="3" distributionIdx="0">
+					<stochasticLocations numberOfEl="2">
+						<el>4</el>
+						<el>5</el>
+					</stochasticLocations>
+					<!-- This transformation matrix has 2 rows and 9 columns (1 for v(2), 2*2 for AR terms, 2 for MA terms and one for the constant. -->
+					<linearTransformation idx="11" numberOfAR="2" numberOfMA="2" addConstant="true">
+						<ar idx="0"/>
+						<ar idx="1"/>
+						<ma idx="0"/>
+						<ma idx="1"/>
+					</linearTransformation>
+				</rv>
+			</implicitTreeData>
+		</multilevelAndStochasticProgramming>
+	</instanceData>
+</osil>

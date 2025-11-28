@@ -1,0 +1,185 @@
+/*===========================================================================*
+ * This file is part of the Abstract Library for Parallel Search (ALPS).     *
+ *                                                                           *
+ * ALPS is distributed under the Eclipse Public License as part of the       *
+ * COIN-OR repository (http://www.coin-or.org).                              *
+ *                                                                           *
+ * Authors:                                                                  *
+ *                                                                           *
+ *          Yan Xu, Lehigh University                                        *
+ *          Aykut Bulut, Lehigh University                                   *
+ *          Ted Ralphs, Lehigh University                                    *
+ *                                                                           *
+ * Conceptual Design:                                                        *
+ *                                                                           *
+ *          Yan Xu, Lehigh University                                        *
+ *          Ted Ralphs, Lehigh University                                    *
+ *          Laszlo Ladanyi, IBM T.J. Watson Research Center                  *
+ *          Matthew Saltzman, Clemson University                             *
+ *                                                                           *
+ *                                                                           *
+ * Copyright (C) 2001-2023, Lehigh University, Yan Xu, Aykut Bulut, and      *
+ *                          Ted Ralphs.                                      *
+ * All Rights Reserved.                                                      *
+ *===========================================================================*/
+
+/**
+ * @file AlpsKnowledgeBrokerSerial.h
+ * @brief Serial (single-process) implementation of ALPS knowledge broker
+ *
+ * AlpsKnowledgeBrokerSerial provides single-threaded tree search.
+ * Use this for debugging or when parallel execution is not needed.
+ *
+ * **Usage:**
+ * @code
+ * MyModel model;
+ * AlpsKnowledgeBrokerSerial broker(argc, argv, model);
+ * broker.search(&model);
+ * broker.printBestSolution();
+ * @endcode
+ *
+ * **Key methods:**
+ * - initializeSearch(): Read parameters and problem data
+ * - rootSearch(): Execute tree search from root
+ * - searchLog(): Print search statistics
+ * - printBestSolution(): Output best solution found
+ *
+ * **Differences from MPI version:**
+ * - Single subtree pool (no distribution)
+ * - No message passing or load balancing
+ * - All phases (rampup/search/rampdown) in one process
+ *
+ * @see AlpsKnowledgeBroker for base class
+ * @see AlpsKnowledgeBrokerMPI for parallel version
+ */
+
+#ifndef AlpsKnowledgeBrokerSerial_h_
+#define AlpsKnowledgeBrokerSerial_h_
+
+#include "AlpsConfig.h"
+
+#include "Alps.h"
+#include "AlpsEnumProcessT.h"
+#include "AlpsKnowledgeBroker.h"
+#include "AlpsMessage.h"
+#include "AlpsModel.h"
+#include "AlpsParams.h"
+
+//#############################################################################
+
+class ALPSLIB_EXPORT AlpsKnowledgeBrokerSerial : public AlpsKnowledgeBroker {
+ private:
+    AlpsKnowledgeBrokerSerial(const AlpsKnowledgeBrokerSerial&);
+    AlpsKnowledgeBrokerSerial& operator=(const AlpsKnowledgeBrokerSerial&);
+
+ public:
+    /** Default constructor. */
+    AlpsKnowledgeBrokerSerial()
+        :
+        AlpsKnowledgeBroker()
+        {}
+
+    /** Useful constructor.
+        Note need read in parameters and data seperately. */
+    AlpsKnowledgeBrokerSerial(AlpsModel& model)
+        :
+        AlpsKnowledgeBroker()
+        {
+            initializeSearch(0, NULL, model);
+        }
+
+    /** Userful constructor.
+        Read in parameters from arguments. Also read in data. */
+    AlpsKnowledgeBrokerSerial(int argc,
+                              char* argv[],
+                              AlpsModel& model,
+                              bool showBanner = true)
+        :
+        AlpsKnowledgeBroker(model)
+        {
+           initializeSearch(argc, argv, model, showBanner);
+        }
+
+
+    /** Destructor. */
+    virtual ~AlpsKnowledgeBrokerSerial() {}
+
+    //-------------------------------------------------------------------------
+    /** @name Report the search results.
+     *
+     */
+    //@{
+
+    /** Search log. */
+    virtual void searchLog();
+
+    /** The process queries the quality of the incumbent that it stores.*/
+    virtual double getIncumbentValue() const {
+        return getBestQuality();
+    }
+
+    /** The process queries the quality of the best
+        solution that it finds. */
+    virtual double getBestQuality() const {
+        if (AlpsKnowledgeBroker::hasKnowledge(AlpsKnowledgeTypeSolution)) {
+            return getBestKnowledge(AlpsKnowledgeTypeSolution).second;
+        }
+        else {
+            return ALPS_INC_MAX;
+        }
+    }
+
+    /** The process outputs the best solution and the quality
+        that it finds to a file or std::out. */
+    virtual void printBestSolution(char* outputFile = 0) const {
+
+        if (msgLevel_ < 1) return;
+
+        if (getNumKnowledges(AlpsKnowledgeTypeSolution) <= 0) {
+            std::cout << "\nALPS did not find a solution."
+                      << std::endl;
+            return;
+        }
+        if (outputFile != 0) {
+            // Write to outputFile
+            std::ofstream os(outputFile);
+            os << "============================================" << std::endl;
+            if (getSolStatus() == AlpsExitStatusOptimal) {
+                os << "Optimal solution:" << std::endl;
+            }
+            else {
+                os << "Best solution found:" << std::endl;
+            }
+            os << "Cost = " << getBestQuality();
+            os << std::endl;
+            dynamic_cast<AlpsSolution* >
+                (getBestKnowledge(AlpsKnowledgeTypeSolution).first)->print(os);
+        }
+        else {                                  // Write to std::cout
+            std::cout << "============================================" << std::endl;
+            if (getSolStatus() == AlpsExitStatusOptimal) {
+                std::cout << "Optimal solution:" << std::endl;
+            }
+            else {
+                std::cout << "Best solution found:" << std::endl;
+            }
+            std::cout << "Cost = " << getBestQuality();
+            std::cout << std::endl;
+            dynamic_cast<AlpsSolution* >
+                (getBestKnowledge(AlpsKnowledgeTypeSolution).first)->print(std::cout);
+            std::cout << "============================================" << std::endl;
+        }
+    }
+    //@}
+
+    /** Reading in Alps and user parameter sets, and read in model data. */
+    virtual void initializeSearch(int argc,
+                                  char* argv[],
+                                  AlpsModel& model,
+                                  bool showBanner = true);
+
+    /** Search for best solution. */
+    virtual void rootSearch(AlpsTreeNode* root);
+
+};
+#endif

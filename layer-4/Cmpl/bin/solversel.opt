@@ -1,0 +1,14 @@
+[glpk]
+: 
+
+[cplex]
+: -warn-invalid-sos  -native-sos -native-sos2 -var-prod-linear 0 -mps-format cplex 
+
+[gurobi]
+: -warn-invalid-sos  -native-sos -native-sos2  -var-prod-linear 0 -mps-format gurobi  
+
+[scip]
+: -warn-invalid-sos  -native-sos -native-sos2  -var-prod-linear 0 -mps-format scip  
+
+[highs]
+:  -mps-format highs  

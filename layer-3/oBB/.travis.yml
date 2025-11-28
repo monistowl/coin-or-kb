@@ -1,0 +1,20 @@
+language: python
+python:
+    - 2.7
+    - 3.5
+    - 3.6
+env:
+    - MPI=mpich
+    - MPI=openmpi
+before_install:
+    - test $MPI == mpich && PACKAGES='mpich libmpich-dev' || true
+    - test $MPI == openmpi && PACKAGES='openmpi-bin libopenmpi-dev' || true
+    - sudo apt-get update -qq && sudo apt-get install -qq $PACKAGES
+    - sudo apt-get install -qq python-numpy libblas-dev liblapack-dev
+    - pip install mpi4py
+    - pip install cvxopt -q
+install:
+    - python setup.py install
+script:
+    - mpiexec -n 5 python $PWD/bin/sines.py
+    - mpiexec -n 5 python $PWD/bin/sines_rr.py

@@ -1,0 +1,162 @@
+/*===========================================================================*
+ * This file is part of the Discrete Conic Optimization (DisCO) Solver.      *
+ *                                                                           *
+ * DisCO is distributed under the Eclipse Public License as part of the      *
+ * COIN-OR repository (http://www.coin-or.org).                              *
+ *                                                                           *
+ * Authors:                                                                  *
+ *          Aykut Bulut, Lehigh University                                   *
+ *          Yan Xu, Lehigh University                                        *
+ *          Ted Ralphs, Lehigh University                                    *
+ *                                                                           *
+ * Copyright (C) 2001-2018, Lehigh University, Aykut Bulut, Yan Xu, and      *
+ *                          Ted Ralphs.                                      *
+ * All Rights Reserved.                                                      *
+ *===========================================================================*/
+
+/**
+ * @file DcoCbfIO.hpp
+ * @brief CBF (Conic Benchmark Format) file reader for DisCO
+ *
+ * DcoCbfIO reads and writes conic problems in the standard CBF format,
+ * which is a text-based format for conic optimization problems.
+ *
+ * **CONES Enum (CBF domain types):**
+ * - FREE_RANGE: Free variables (F)
+ * - POSITIVE_ORT: Nonnegative orthant (L+)
+ * - NEGATIVE_ORT: Nonpositive orthant (L-)
+ * - FIXPOINT_ZERO: Fixed to zero (L=)
+ * - QUAD_CONE: Lorentz/quadratic cone (Q): ||x_{2:n}|| <= x_1
+ * - RQUAD_CONE: Rotated quadratic cone (QR): 2*x_1*x_2 >= ||x_{3:n}||^2
+ *
+ * **File Structure (CBF format):**
+ * - VER: Version number
+ * - OBJSENSE: MIN or MAX
+ * - VAR: Number of variables and domains
+ * - INT: Integer variables
+ * - CON: Number of constraints and domains
+ * - OBJACOORD: Objective coefficients
+ * - ACOORD: Constraint matrix in coordinate format
+ * - BCOORD: Constraint bounds/fixed terms
+ *
+ * **Key Methods:**
+ * - readCbf(): Parse CBF file into internal structures
+ * - writeCbf(): Output problem in CBF format
+ * - getProblem(): Convert to standard form (colLB, colUB, rowLB, rowUB, matrix, cones)
+ *
+ * @see DcoModel.hpp::readInstance() for usage
+ * @see http://cblib.zib.de/ for CBF format specification
+ */
+
+#ifndef DcoCbfIO_hpp_
+#define DcoCbfIO_hpp_
+
+#include <sstream>
+
+class CoinPackedMatrix;
+
+enum CONES {
+  // F
+  FREE_RANGE,
+  // positive orthant, L+
+  POSITIVE_ORT,
+  // negative orthant, L-
+  NEGATIVE_ORT,
+  // fixpoint zero, L=
+  FIXPOINT_ZERO,
+  // quadratic cone, Q
+  QUAD_CONE,
+  // rotated quadratic cone
+  RQUAD_CONE
+};
+
+/*!
+  DisCO's CBF (Conic Benchmark Format) reader.
+
+ */
+
+class DcoCbfIO {
+  /// cbf version
+  int version_;
+  /// direction of optimization, 1 for min, -1 for max
+  int sense_;
+  int num_cols_;
+  int num_col_domains_;
+  CONES * col_domains_;
+  int * col_domain_size_;
+  int num_int_;
+  int * integers_;
+  int num_rows_;
+  int num_row_domains_;
+  CONES * row_domains_;
+  int * row_domain_size_;
+  double * obj_coef_;
+  /// coefficient matrix number of nonzeros
+  int num_nz_;
+  /// coefficient matrix row coordinates
+  int * row_coord_;
+  /// coefficient matrix column coordinates
+  int * col_coord_;
+  /// values of matrix coefficients
+  double * coef_;
+  double * fixed_term_;
+public:
+  DcoCbfIO();
+  /// Construct CBF problem from inputs.
+  DcoCbfIO(int sense,
+           int num_cols, int num_col_domains,
+           CONES const * col_domains, int const * col_domain_size,
+           int num_int, int const * integers,
+           int num_rows, int num_row_domains,
+           CONES const * row_domains, int const * row_domain_size,
+           double const * obj_coef,
+           int num_nz, int const * row_coord,
+           int const * col_coord, double const * coef,
+           double const * fixed_term);
+  ~DcoCbfIO();
+  /// Read from input file.
+  void readCbf(char const * cbf_file);
+  /// Write problem into a given stream.
+  void writeCbf(std::stringstream & problem_stream) const;
+  /// returns nonzero if rows are in quadratic or rotated quadratic domains
+  int check_row_domains() const;
+  /// get number of columns
+  int getNumCols() const { return num_cols_; }
+  /// get number of rows
+  int getNumRows() const { return num_rows_; }
+  int objSense() const { return sense_; }
+  double const * objCoef() const { return obj_coef_; }
+  ///@name Getting integrality
+  int getNumInteger() const { return num_int_; }
+  int const * integerCols() const { return integers_; }
+  //@}
+  //@name Getting linear constraints
+  //@{
+  int const * rowCoord() const { return row_coord_; }
+  int const * colCoord() const { return col_coord_; }
+  double const * matCoef() const { return coef_; }
+  //@}
+  ///@name Getting domains
+  //@{
+  /// get number of column domains
+  int numColDomains() const { return num_col_domains_; }
+  /// get type of column domains
+  CONES const * colDomains() const { return col_domains_; }
+  /// get number of row domains
+  int numRowDomains() const { return num_row_domains_; }
+  /// get type of row domains
+  CONES const * rowDomains() const { return row_domains_; }
+  //@}
+  /// Get problem in standard form.
+  void getProblem(double *& colLB, double *& colUB,
+                  double *& rowLB, double *& rowUB,
+                  CoinPackedMatrix *& matrix,
+                  int & numCones, int *& coneStart,
+                  int *& coneMembers, int *& coneType) const;
+  double getInfinity() const;
+private:
+  DcoCbfIO(DcoCbfIO const &);
+  DcoCbfIO & operator=(DcoCbfIO const &);
+};
+
+#endif

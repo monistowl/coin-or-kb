@@ -1,0 +1,13 @@
+wget ftp://cermsem.univ-paris1.fr/pub/CERMSEM/hifi/MMKP/MMKP.html
+
+for i in 09 11 13
+do
+  wget ftp://cermsem.univ-paris1.fr/pub/CERMSEM/hifi/MMKP/I${i}
+done
+
+for i in I*
+do
+  cat $i | tr '-' ' ' > tmp
+  mv tmp $i
+done
+rm tmp

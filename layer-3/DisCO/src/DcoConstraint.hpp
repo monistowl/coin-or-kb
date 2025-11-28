@@ -1,0 +1,118 @@
+/*===========================================================================*
+ * This file is part of the Discrete Conic Optimization (DisCO) Solver.      *
+ *                                                                           *
+ * DisCO is distributed under the Eclipse Public License as part of the      *
+ * COIN-OR repository (http://www.coin-or.org).                              *
+ *                                                                           *
+ * Authors:                                                                  *
+ *          Aykut Bulut, Lehigh University                                   *
+ *          Yan Xu, Lehigh University                                        *
+ *          Ted Ralphs, Lehigh University                                    *
+ *                                                                           *
+ * Copyright (C) 2001-2018, Lehigh University, Aykut Bulut, Yan Xu, and      *
+ *                          Ted Ralphs.                                      *
+ * All Rights Reserved.                                                      *
+ *===========================================================================*/
+
+/**
+ * @file DcoConstraint.hpp
+ * @brief Abstract base class for DisCO constraints
+ *
+ * DcoConstraint is the base class for all constraints in DisCO,
+ * supporting both linear and conic constraint types.
+ *
+ * **Inheritance:** DcoConstraint -> BcpsConstraint -> BcpsObject -> AlpsKnowledge
+ *
+ * **Constraint Hierarchy:**
+ * - DcoConstraint (ABC)
+ *   - DcoLinearConstraint: Linear row with coefficients
+ *   - DcoConicConstraint: Lorentz or rotated Lorentz cone
+ *
+ * **Type Field (DcoConstraintType):**
+ * - Core: Original problem constraints
+ * - MILP cuts: Clique, Gomory, MIR, etc.
+ * - Conic cuts: IPM, OA approximations
+ *
+ * **Key Methods:**
+ * - createOsiRowCut(): Convert to OsiRowCut (returns NULL for conic)
+ * - constraintType(): Get/set the constraint source type
+ *
+ * @see DcoLinearConstraint.hpp for linear constraints
+ * @see DcoConicConstraint.hpp for conic constraints
+ * @see Dco.hpp for DcoConstraintType enum
+ */
+
+#ifndef DcoConstraint_hpp_
+#define DcoConstraint_hpp_
+
+#include <OsiLorentzCone.hpp>
+#include <BcpsObject.h>
+#include "Dco.hpp"
+
+class OsiRowCut;
+class DcoModel;
+/*!
+  DcoConstraint inherits BcpsConstraint. BcpsConstraint inherits BcpsObject.
+  BcpsObject inherits AlpsKnowledge.
+  DcoConstraint -> BcpsConstraint -> BcpsObject -> AlpsKnowledge.
+
+  <ul>
+  <li> AlpsKnowledge<br>
+       AlpsKnowledge is an abstract base class of any user-defined class that
+       Alps has to know about in order to encode/decode. It has two fields
+       (AlpsEncoded *) and (KnowledgeType) type_.
+
+  <li> BcpsObject<br>
+       BcpsObjects class represents a generic type for mathematical
+       optimization problem object. All that is assumed about an object is
+       that it has bounds and might have integrality constraint. It can be a
+       variable or a constraint row (a mathematical formula of variables).
+
+       It has the following fields, \c objectIndex_, \c repType_, \c intType_,
+       \c validRegion_, \c status_, \c lbHard_, \c ubHard_, \c lbSoft_,
+       \c ubSoft_, \c hashValue_, \c numInactive_, \c effectiveness_.
+
+
+
+  <li> BcpsConstraint<br>
+       Represents a constraint. Does not assume anything for a constraint
+       other than having lower and upper bounds. This class does not have any
+       fields other than the ones inherited.
+
+  <li> DcoConstraint<br>
+       Represents DisCO constraints. DisCO constraints comes in two types,
+       (1) linear constraints (2) conic constraints. Conic constraints are
+       of two types, Lorentz cones or rotated Lorentz Cones. We do not support
+       generic conic constraints (|Ax-b| <= d^Tx-h) yet.
+
+       This class is a base class for linear and conic constraints.
+  </ul>
+
+  todo(aykut) list:
+  <ul>
+  <li> Find a way to log messages. We need model (DcoModel) pointer for this.
+
+  <li> createOsiRowCut() should be implemented in Bcps level.
+
+  </ul>
+ */
+
+class DcoConstraint: public BcpsConstraint {
+  /// Constraint can be from problem definition or created afterwards. For
+  /// generated constraints, possible sources are MILP cut, OA or IPM cut.
+  // todo(aykut) should we make type a const member?
+  DcoConstraintType type_;
+public:
+  DcoConstraint() { type_ = DcoConstraintTypeNotSet; }
+  DcoConstraint(double lb, double ub);
+  virtual ~DcoConstraint();
+  /// Create an OsiRowCut based on this constraint. Returns NULL if this is a
+  /// conic constraint.
+  virtual OsiRowCut * createOsiRowCut(DcoModel * model) const = 0;
+  /// return constraint type
+  virtual DcoConstraintType constraintType() const { return type_; }
+  /// set type of the constraint
+  void setConstraintType(DcoConstraintType type) { type_ = type; }
+};
+
+#endif

@@ -1,0 +1,320 @@
+/* $Id: OSParseosol.l.1 4816 2014-07-02 18:05:16Z Gassmann $ */
+/** @file OSparseosol.l.1
+ * 
+ * @author  Horand Gassmann, Jun Ma, Kipp Martin 
+ *
+ * \remarks
+ * Copyright (C) 2005-2013, Horand Gassmann, Jun Ma, Kipp Martin,
+ * Northwestern University, and the University of Chicago.
+ * All Rights Reserved.
+ * This software is licensed under the Eclipse Public License. 
+ * Please see the accompanying LICENSE file in root directory for terms.
+ * 
+ * Like the grammar rules in OSParseosol.y, this file is maintained in several pieces 
+ * in order to avoid duplication when parsing elements of auxiliary schemas,
+ * such as OSgL, OSnL, etc. This is the first part of OSparseosol.l.   
+ *
+ * IMPORTANT! Convention regarding common patterns, such as "name", etc.:
+ * Commonly occuring patterns must be kept in one place in order to avoid ambiguity in the parser.
+ * Maintenance is easier if they are placed into the OSgL section. At any rate, it is important
+ * to place temporary data into the correct parser data object.
+ */
+%{
+//#define OSOLPARSERDEBUG
+
+#ifdef OSOLPARSERDEBUG
+	#define YY_PRINT  printf("%s", yytext)
+#else     
+	#define YY_PRINT
+#endif
+
+#include <iostream>
+#include <sstream>  
+
+#include "OSConfig.h"
+#include "OSDataStructures.h"
+#include "OSErrorClass.h"
+#include "OSMathUtil.h"
+#include "OSoLParserData.h"
+#include "OSnLParserData.h"
+#include "OSgLParserData.h"
+#include "OSOption.h"
+#include "OSGeneral.h"
+#include "OSParseosol.tab.hpp"
+
+#ifdef HAVE_CSTDIO
+# include <cstdio>
+#else
+# ifdef HAVE_STDIO_H
+#  include <stdio.h>
+# else
+#  error "don't have header file for stdio"
+# endif
+#endif
+
+#ifdef HAVE_CTIME
+# include <ctime>
+#else
+# ifdef HAVE_TIME_H
+#  include <time.h>
+# else
+#  error "don't have header file for time"
+# endif
+#endif
+
+#ifdef HAVE_CMATH
+# include <cmath>
+#else
+# ifdef HAVE_MATH_H
+#  include <math.h>
+# else
+#  error "don't have header file for math"
+# endif
+#endif
+
+#ifdef HAVE_CSTRING
+# include <cstring>
+#else
+# ifdef HAVE_STRING_H
+#  include <string.h>
+# else
+#  error "don't have header file for string"
+# endif
+#endif
+
+
+#ifdef WIN_
+  #define YY_NO_UNISTD_H
+  #include <io.h>
+  #include <process.h>
+  #ifdef USE_OLD_UNISTD
+     #include<sys/unistd.h>  
+  #endif
+#endif
+
+using std::cout;
+using std::endl;
+using std::ostringstream;
+
+%}
+
+%option prefix="osol"
+%option noyywrap
+%option reentrant
+%option bison-bridge
+%option bison-locations
+%option yylineno   
+%option nounput
+
+%x osolattributetext
+%x doublequoteattributetext
+%x singlequoteattributetext
+%x startelement
+%x elementtext
+%x itemtext
+%x comment
+%x xmldeclaration
+  
+%{
+#define YY_EXTRA_TYPE OSoLParserData*
+%} 
+ 
+xmlwhitespace ([ \t\n\r])
+equality ([ \t\n\r])*=([ \t\n\r])*
+quote [\"|\']  
+twoquotes (\"\"|\'\')
+greater_than (>)
+aninteger ([ \t\n\r]*-?[0-9]+[ \t\n\r]*)
+ /* Distinguishing signed and unsigned integers requires careful ordering of patterns
+    anxmluint ([ \t\n\r]*[0-9]+[ \t\n\r]*)
+    anxmlint ([ \t\n\r]*-?[0-9]+[ \t\n\r]*)
+  */
+adouble ([ \t\n\r]*(-?(([0-9]+|[0-9]*\.[0-9]*)([eE][-+]?[0-9]+)?|INF)|NaN)[ \t\n\r]*)
+aboolean (true|false|1|0)
+%%
+ 
+{xmlwhitespace}*
+
+ /* General patterns matched in more than one element */
+
+{quote} {YY_PRINT;  yylval->sval = yytext; return(QUOTE);}
+{twoquotes} {YY_PRINT;  yylval->sval = yytext; return(TWOQUOTES);}
+({xmlwhitespace}*{greater_than}) {YY_PRINT; return(GREATERTHAN);}
+{aninteger} {YY_PRINT; yylval->ival = OS_a_to_xml_int(yytext); return(INTEGER);}
+ /* {anxmlint} {YY_PRINT; yylval->ival = OS_a_to_xml_uint(yytext); return(UNSIGNEDINT);} */
+
+{adouble} {YY_PRINT; 
+char *yytextEnd;
+yylval->dval = os_strtod_wrap( yytext, &yytextEnd);
+return(DOUBLE);}
+
+{aboolean} {YY_PRINT;  yylval->sval = yytext; return(BOOLEAN);}
+
+({xmlwhitespace}*\/>) {YY_PRINT;  return(ENDOFELEMENT);}
+
+ /* patterns for attributes returning strings (that are potentially empty)*/
+
+({xmlwhitespace}+lbValue{equality}\"\") {YY_PRINT; return(EMPTYLBVALUEATT);}
+({xmlwhitespace}+lbValue{equality}\'\') {YY_PRINT; return(EMPTYLBVALUEATT);}
+({xmlwhitespace}+lbValue{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(LBVALUEATT);}
+({xmlwhitespace}+lbValue{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(LBVALUEATT);}
+
+({xmlwhitespace}+ubValue{equality}\"\") {YY_PRINT; return(EMPTYUBVALUEATT);}
+({xmlwhitespace}+ubValue{equality}\'\') {YY_PRINT; return(EMPTYUBVALUEATT);}
+({xmlwhitespace}+ubValue{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(UBVALUEATT);}
+({xmlwhitespace}+ubValue{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(UBVALUEATT);}
+
+({xmlwhitespace}+weight{equality}\"\") {YY_PRINT; return(EMPTYWEIGHTATT);}
+({xmlwhitespace}+weight{equality}\'\') {YY_PRINT; return(EMPTYWEIGHTATT);}
+({xmlwhitespace}+weight{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(WEIGHTATT);}
+({xmlwhitespace}+weight{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(WEIGHTATT);}
+
+({xmlwhitespace}+from{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(FROMATT);}
+({xmlwhitespace}+from{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(FROMATT);}
+({xmlwhitespace}+to{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(TOATT);}
+({xmlwhitespace}+to{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(TOATT);}
+({xmlwhitespace}+makeCopy{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(MAKECOPYATT);}
+({xmlwhitespace}+makeCopy{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(MAKECOPYATT);}
+
+({xmlwhitespace}+locationType{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(LOCATIONTYPEATT);}
+({xmlwhitespace}+locationType{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(LOCATIONTYPEATT);}
+
+({xmlwhitespace}+transportType{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(TRANSPORTTYPEATT);}
+({xmlwhitespace}+transportType{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(TRANSPORTTYPEATT);}
+
+({xmlwhitespace}+from{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(FROMATT);}
+({xmlwhitespace}+from{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(FROMATT);}
+({xmlwhitespace}+to{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(TOATT);}
+({xmlwhitespace}+to{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(TOATT);}
+({xmlwhitespace}+makeCopy{equality}\") {YY_PRINT; BEGIN doublequoteattributetext; return(MAKECOPYATT);}
+({xmlwhitespace}+makeCopy{equality}\') {YY_PRINT; BEGIN singlequoteattributetext; return(MAKECOPYATT);}
+
+ /* Patterns for attributes returning numeric values*/
+
+({xmlwhitespace}+numberOfJobIDs{equality}) {YY_PRINT; return(NUMBEROFJOBIDSATT);}
+({xmlwhitespace}+numberOfOtherOptions{equality}) {YY_PRINT; return(NUMBEROFOTHEROPTIONSATT);}
+({xmlwhitespace}+numberOfOtherConstraintOptions{equality}) {YY_PRINT; return(NUMBEROFOTHERCONSTRAINTOPTIONSATT);}
+({xmlwhitespace}+numberOfOtherObjectiveOptions{equality}) {YY_PRINT; return(NUMBEROFOTHEROBJECTIVEOPTIONSATT);}
+({xmlwhitespace}+numberOfOtherVariableOptions{equality}) {YY_PRINT; return(NUMBEROFOTHERVARIABLEOPTIONSATT);}
+({xmlwhitespace}+numberOfOtherMatrixProgrammingOptions{equality}) {YY_PRINT; return(NUMBEROFOTHERMATRIXPROGRAMMINGOPTIONSATT);}
+({xmlwhitespace}+numberOfOtherMatrixConstraintOptions{equality}) {YY_PRINT; return(NUMBEROFOTHERMATRIXCONSTRAINTOPTIONSATT);}
+({xmlwhitespace}+numberOfOtherMatrixObjectiveOptions{equality}) {YY_PRINT; return(NUMBEROFOTHERMATRIXOBJECTIVEOPTIONSATT);}
+({xmlwhitespace}+numberOfOtherMatrixVariableOptions{equality}) {YY_PRINT; return(NUMBEROFOTHERMATRIXVARIABLEOPTIONSATT);}
+({xmlwhitespace}+numberOfPaths{equality}) {YY_PRINT; return(NUMBEROFPATHSATT);}
+({xmlwhitespace}+numberOfPathPairs{equality}) {YY_PRINT; return(NUMBEROFPATHPAIRSATT);}
+({xmlwhitespace}+numberOfProcesses{equality}) {YY_PRINT; return(NUMBEROFPROCESSESATT);}
+({xmlwhitespace}+numberOfSOS{equality}) {YY_PRINT; return(NUMBEROFSOSATT);}
+({xmlwhitespace}+numberOfSolverOptions{equality}) {YY_PRINT; return(NUMBEROFSOLVEROPTIONSATT);}
+
+({xmlwhitespace}+sosIdx{equality}) {YY_PRINT; return(SOSIDXATT);}
+({xmlwhitespace}+groupWeight{equality}) {YY_PRINT; return(GROUPWEIGHTATT);}
+({xmlwhitespace}+lbDualValue{equality}) {YY_PRINT; return(LBDUALVALUEATT);}
+({xmlwhitespace}+ubDualValue{equality}) {YY_PRINT; return(UBDUALVALUEATT);}
+
+ /* Patterns for top level elements */
+
+{xmlwhitespace}*\<osol{xmlwhitespace}*\> {return(OSOLSTARTEMPTY);}
+{xmlwhitespace}*\<osol{xmlwhitespace}+ {YY_PRINT; BEGIN osolattributetext;  return(OSOLSTART);}
+{xmlwhitespace}*\<\/osol{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(OSOLEND);}
+{xmlwhitespace}*\<optionHeader {YY_PRINT; return(HEADERSTART);}
+{xmlwhitespace}*\<\/optionHeader{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(HEADEREND);}
+
+ /* Patterns for the <general> element */
+
+{xmlwhitespace}*\<instanceLocation {YY_PRINT; return(INSTANCELOCATIONSTART);}
+{xmlwhitespace}*\<\/instanceLocation{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INSTANCELOCATIONEND);}
+{xmlwhitespace}*\<solverToInvoke {YY_PRINT; return(SOLVERTOINVOKESTART);}
+{xmlwhitespace}*\<\/solverToInvoke{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(SOLVERTOINVOKEEND);}
+{xmlwhitespace}*\<license {YY_PRINT; return(LICENSESTART);}
+{xmlwhitespace}*\<\/license{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(LICENSEEND);}
+{xmlwhitespace}*\<userName {YY_PRINT; return(USERNAMESTART);}
+{xmlwhitespace}*\<\/userName{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(USERNAMEEND);}
+{xmlwhitespace}*\<password {YY_PRINT; return(PASSWORDSTART);}
+{xmlwhitespace}*\<\/password{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(PASSWORDEND);}
+{xmlwhitespace}*\<contact {YY_PRINT; return(CONTACTSTART);}
+{xmlwhitespace}*\<\/contact{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(CONTACTEND);}
+
+ /* Patterns for the <system> element */
+
+{xmlwhitespace}*\<minDiskSpace {YY_PRINT; return(MINDISKSPACESTART);}
+{xmlwhitespace}*\<\/minDiskSpace{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(MINDISKSPACEEND);}
+{xmlwhitespace}*\<minMemorySize {YY_PRINT; return(MINMEMORYSTART);}
+{xmlwhitespace}*\<\/minMemorySize{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(MINMEMORYEND);}
+{xmlwhitespace}*\<minCPUSpeed {YY_PRINT; return(MINCPUSPEEDSTART);}
+{xmlwhitespace}*\<\/minCPUSpeed{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(MINCPUSPEEDEND);}
+{xmlwhitespace}*\<minCPUNumber {YY_PRINT; return(MINCPUNUMBERSTART);}
+{xmlwhitespace}*\<\/minCPUNumber{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(MINCPUNUMBEREND);}
+
+ /* Patterns for the <service> element */
+
+{xmlwhitespace}*\<type {YY_PRINT; return(SERVICETYPESTART);}
+{xmlwhitespace}*\<\/type{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(SERVICETYPEEND);}
+
+ /* Patterns for the <job> element */
+
+{xmlwhitespace}*\<maxTime {YY_PRINT; return(MAXTIMESTART);}
+{xmlwhitespace}*\<\/maxTime{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(MAXTIMEEND);}
+{xmlwhitespace}*\<requestedStartTime {YY_PRINT; return(REQUESTEDSTARTTIMESTART);}
+{xmlwhitespace}*\<\/requestedStartTime{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(REQUESTEDSTARTTIMEEND);}
+{xmlwhitespace}*\<dependencies {YY_PRINT; return(DEPENDENCIESSTART);}
+{xmlwhitespace}*\<\/dependencies{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(DEPENDENCIESEND);}
+{xmlwhitespace}*\<requiredDirectories {YY_PRINT; return(REQUIREDDIRECTORIESSTART);}
+{xmlwhitespace}*\<\/requiredDirectories{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(REQUIREDDIRECTORIESEND);}
+{xmlwhitespace}*\<path {YY_PRINT; return(PATHSTART);}
+{xmlwhitespace}*\<\/path{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(PATHEND);}
+{xmlwhitespace}*\<requiredFiles {YY_PRINT; return(REQUIREDFILESSTART);}
+{xmlwhitespace}*\<\/requiredFiles{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(REQUIREDFILESEND);}
+{xmlwhitespace}*\<directoriesToMake {YY_PRINT; return(DIRECTORIESTOMAKESTART);}
+{xmlwhitespace}*\<\/directoriesToMake{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(DIRECTORIESTOMAKEEND);}
+{xmlwhitespace}*\<filesToMake {YY_PRINT; return(FILESTOMAKESTART);}
+{xmlwhitespace}*\<\/filesToMake{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(FILESTOMAKEEND);}
+{xmlwhitespace}*\<inputDirectoriesToMove {YY_PRINT; return(INPUTDIRECTORIESTOMOVESTART);}
+{xmlwhitespace}*\<\/inputDirectoriesToMove{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INPUTDIRECTORIESTOMOVEEND);}
+{xmlwhitespace}*\<inputFilesToMove {YY_PRINT; return(INPUTFILESTOMOVESTART);}
+{xmlwhitespace}*\<\/inputFilesToMove{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INPUTFILESTOMOVEEND);}
+{xmlwhitespace}*\<pathPair {YY_PRINT; return(PATHPAIRSTART);}
+{xmlwhitespace}*\<\/pathPair{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(PATHPAIREND);}
+{xmlwhitespace}*\<outputDirectoriesToMove {YY_PRINT; return(OUTPUTDIRECTORIESTOMOVESTART);}
+{xmlwhitespace}*\<\/outputDirectoriesToMove{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(OUTPUTDIRECTORIESTOMOVEEND);}
+{xmlwhitespace}*\<outputFilesToMove {YY_PRINT; return(OUTPUTFILESTOMOVESTART);}
+{xmlwhitespace}*\<\/outputFilesToMove{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(OUTPUTFILESTOMOVEEND);}
+{xmlwhitespace}*\<directoriesToDelete {YY_PRINT; return(DIRECTORIESTODELETESTART);}
+{xmlwhitespace}*\<\/directoriesToDelete{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(DIRECTORIESTODELETEEND);}
+{xmlwhitespace}*\<filesToDelete {YY_PRINT; return(FILESTODELETESTART);}
+{xmlwhitespace}*\<\/filesToDelete{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(FILESTODELETEEND);}
+{xmlwhitespace}*\<processesToKill {YY_PRINT; return(PROCESSESTOKILLSTART);}
+{xmlwhitespace}*\<\/processesToKill{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(PROCESSESTOKILLEND);}
+{xmlwhitespace}*\<process {YY_PRINT; return(PROCESSSTART);}
+{xmlwhitespace}*\<\/process{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(PROCESSEND);}
+
+ /* Patterns for the <optimization> element */
+
+{xmlwhitespace}*\<initialVariableValues {YY_PRINT; return(INITIALVARIABLEVALUESSTART);}
+{xmlwhitespace}*\<\/initialVariableValues{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INITIALVARIABLEVALUESEND);}
+{xmlwhitespace}*\<initialVariableValuesString {YY_PRINT; return(INITIALVARIABLEVALUESSTRINGSTART);}
+{xmlwhitespace}*\<\/initialVariableValuesString{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INITIALVARIABLEVALUESSTRINGEND);}
+{xmlwhitespace}*\<initialBasisStatus {YY_PRINT; return(INITIALBASISSTATUSSTART);}
+{xmlwhitespace}*\<\/initialBasisStatus{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INITIALBASISSTATUSEND);}
+{xmlwhitespace}*\<integerVariableBranchingWeights {YY_PRINT; return(INTEGERVARIABLEBRANCHINGWEIGHTSSTART);}
+{xmlwhitespace}*\<\/integerVariableBranchingWeights{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INTEGERVARIABLEBRANCHINGWEIGHTSEND);}
+{xmlwhitespace}*\<sosVariableBranchingWeights {YY_PRINT; return(SOSVARIABLEBRANCHINGWEIGHTSSTART);}
+{xmlwhitespace}*\<\/sosVariableBranchingWeights{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(SOSVARIABLEBRANCHINGWEIGHTSEND);}
+{xmlwhitespace}*\<sos {YY_PRINT; return(SOSSTART);}
+{xmlwhitespace}*\<\/sos{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(SOSEND);}
+{xmlwhitespace}*\<initialObjectiveValues {YY_PRINT; return(INITIALOBJECTIVEVALUESSTART);}
+{xmlwhitespace}*\<\/initialObjectiveValues{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INITIALOBJECTIVEVALUESEND);}
+{xmlwhitespace}*\<initialObjectiveBounds {YY_PRINT; return(INITIALOBJECTIVEBOUNDSSTART);}
+{xmlwhitespace}*\<\/initialObjectiveBounds{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INITIALOBJECTIVEBOUNDSEND);}
+{xmlwhitespace}*\<initialConstraintValues {YY_PRINT; return(INITIALCONSTRAINTVALUESSTART);}
+{xmlwhitespace}*\<\/initialConstraintValues{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INITIALCONSTRAINTVALUESEND);}
+{xmlwhitespace}*\<initialDualValues {YY_PRINT; return(INITIALDUALVALUESSTART);}
+{xmlwhitespace}*\<\/initialDualValues{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INITIALDUALVALUESEND);}
+{xmlwhitespace}*\<initialMatrixVariableValues {YY_PRINT; return(INITIALMATRIXVARIABLEVALUESSTART);}
+{xmlwhitespace}*\<\/initialMatrixVariableValues{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(INITIALMATRIXVARIABLEVALUESEND);}
+{xmlwhitespace}*\<solverOptions {YY_PRINT; return(SOLVEROPTIONSSTART);}
+{xmlwhitespace}*\<\/solverOptions{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(SOLVEROPTIONSEND);}
+{xmlwhitespace}*\<solverOption {YY_PRINT; return(SOLVEROPTIONSTART);}
+{xmlwhitespace}*\<\/solverOption{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(SOLVEROPTIONEND);}
+{xmlwhitespace}*\<otherOptions {YY_PRINT; return(OTHEROPTIONSSTART);}
+{xmlwhitespace}*\<\/otherOptions{xmlwhitespace}*\>{xmlwhitespace}* {YY_PRINT; return(OTHEROPTIONSEND);}
+

@@ -1,0 +1,122 @@
+/*===========================================================================*
+ * This file is part of the Abstract Library for Parallel Search (ALPS).     *
+ *                                                                           *
+ * ALPS is distributed under the Eclipse Public License as part of the       *
+ * COIN-OR repository (http://www.coin-or.org).                              *
+ *                                                                           *
+ * Authors:                                                                  *
+ *                                                                           *
+ *          Yan Xu, Lehigh University                                        *
+ *          Aykut Bulut, Lehigh University                                   *
+ *          Ted Ralphs, Lehigh University                                    *
+ *                                                                           *
+ * Conceptual Design:                                                        *
+ *                                                                           *
+ *          Yan Xu, Lehigh University                                        *
+ *          Ted Ralphs, Lehigh University                                    *
+ *          Laszlo Ladanyi, IBM T.J. Watson Research Center                  *
+ *          Matthew Saltzman, Clemson University                             *
+ *                                                                           *
+ *                                                                           *
+ * Copyright (C) 2001-2023, Lehigh University, Yan Xu, Aykut Bulut, and      *
+ *                          Ted Ralphs.                                      *
+ * All Rights Reserved.                                                      *
+ *===========================================================================*/
+
+/**
+ * @file AlpsKnowledgePool.h
+ * @brief Abstract base class for knowledge storage pools
+ *
+ * AlpsKnowledgePool defines the API for all pool types in ALPS.
+ * Knowledge is stored with associated priority values for ordering.
+ *
+ * **Pool types (AlpsKnowledgePoolType):**
+ * - NodePool: Stores tree nodes awaiting processing
+ * - SolutionPool: Stores feasible solutions found
+ * - SubTreePool: Stores subtrees for parallel distribution
+ *
+ * **Core API:**
+ * - addKnowledge(kl, priority): Add with ordering priority
+ * - getKnowledge(): Peek at highest-priority item
+ * - popKnowledge(): Remove highest-priority item
+ * - getBestKnowledge(): Get best quality item
+ * - hasKnowledge(): Check if pool is non-empty
+ *
+ * @see AlpsNodePool for node storage
+ * @see AlpsSolutionPool for solution storage
+ * @see AlpsSubTreePool for subtree storage
+ */
+
+#ifndef AlpsKnowledgePool_h_
+#define AlpsKnowledgePool_h_
+
+#include "AlpsConfig.h"
+
+// STL headers
+#include <climits>
+#include <iostream>
+#include <vector>
+
+// CoinUtils headers
+#include "CoinError.hpp"
+
+// Alps headers
+#include "AlpsKnowledge.h"
+
+/*!
+  This is an abstract base class, fixing an API for pool types of Alps,
+  #AlpsNodePool, #AlpsSolutionPool, #AlpsSubTreePool.
+
+ */
+
+class ALPSLIB_EXPORT AlpsKnowledgePool {
+  AlpsKnowledgePoolType type_;
+
+public:
+  ///@name Constructor and Destructor.
+  //@{
+  /// Default constructor.
+  AlpsKnowledgePool(AlpsKnowledgePoolType type) { type_ = type; }
+  /// Destructor.
+  virtual ~AlpsKnowledgePool() {}
+  //@}
+
+  ///@name Querry methods
+  //@{
+  /// Return size of the pool.
+  virtual int getNumKnowledges() const = 0;
+  /// Check the first item in the pool.
+  virtual std::pair<AlpsKnowledge*, double> getKnowledge() const = 0;
+  /// Check whether the pool is empty.
+  virtual bool hasKnowledge() const = 0;
+  /// Query the quantity limit of knowledges.
+  virtual int getMaxNumKnowledges() const = 0;
+  /// Query the best knowledge in the pool.
+  virtual std::pair<AlpsKnowledge*, double> getBestKnowledge() const = 0;
+  /// Get a reference to all the knowledges in the pool.*/
+  virtual void getAllKnowledges (std::vector<std::pair<AlpsKnowledge*,
+                                 double> >& kls) const = 0;
+  //@}
+
+  ///@name Knowledge manipulation
+  //@{
+  /// Add a knowledge to pool.
+  virtual void addKnowledge(AlpsKnowledge * nk, double priority) = 0;
+  /// Pop the first knowledge from the pool.
+  virtual void popKnowledge() = 0;
+  //@}
+
+  ///@name Other functions
+  //@{
+  /// Set the quantity limit of knowledges that can be stored in the pool.
+  virtual void setMaxNumKnowledges(int num) = 0;
+  //@}
+
+private:
+  /// Disable copy constructor.
+  AlpsKnowledgePool(AlpsKnowledgePool const &);
+  /// Disable copy assignment operator.
+  AlpsKnowledgePool & operator=(AlpsKnowledgePool const &);
+};
+
+#endif

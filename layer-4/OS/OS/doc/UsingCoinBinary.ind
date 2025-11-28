@@ -1,0 +1,145 @@
+\begin{theindex}
+
+  \item AMPL, 4, 22--25
+  \item AMPL nl format, 4, 6, 7, 14--15
+  \item AMPL Solver Library , \see{Third-party software, ASL}{1}
+  \item {\tt amplFiles}, 22
+  \item Apache Axis, 11
+  \item Apache Tomcat, 5, 11
+  \item ASL, \see{Third-party software, ASL}{1}
+
+  \indexspace
+
+  \item Blas, \see{Third-party software, Blas}{1}
+  \item {\tt Bonmin}, \see{COIN-OR projects, {\tt Bonmin}}{1}
+  \item {\tt BuildTools}, \see{COIN-OR projects, {\tt BuildTools}}{1}
+
+  \indexspace
+
+  \item {\tt Cbc}, \see{COIN-OR projects, {\tt Cbc}}{1}
+  \item {\tt Cgl}, \see{COIN-OR projects, {\tt Cgl}}{1}
+  \item {\tt Clp}, \see{COIN-OR projects, {\tt Clp}}{1}
+  \item COIN-OR projects
+    \subitem {\tt Bonmin}, 19
+    \subitem {\tt Cbc}, 19
+    \subitem {\tt Clp}, 8, 9, 19
+    \subitem {\tt Couenne}, 19
+    \subitem {\tt DyLP}, 19
+    \subitem {\tt Ipopt}, 10, 14, 15, 19
+    \subitem {\tt Osi}, 7, 19
+    \subitem {\tt SYMPHONY}, 12, 19, 22--24
+    \subitem {\tt Vol}, 19
+  \item {\tt CoinUtils}, \see{COIN-OR projects, {\tt CoinUtils}}{1}
+  \item {\tt Couenne}, \see{COIN-OR projects, {\tt Couenne}}{1}
+  \item {\tt cplex}, 4, 7, 19
+  \item {\tt CppAD}, \see{COIN-OR projects, {\tt CppAD}}{1}
+
+  \indexspace
+
+  \item default solver, 7, 9, 15, 22, 25
+  \item Downloading
+    \subitem binaries, 5
+  \item {\tt DyLP}, \see{COIN-OR projects, {\tt DyLP}}{1}
+
+  \indexspace
+
+  \item {\tt eastborne.mod}, 22
+
+  \indexspace
+
+  \item file naming conventions, 5
+
+  \indexspace
+
+  \item GAMS, 4, 22, 25--30
+  \item {\tt getJobID}, 6, 9, 16
+  \item {\tt GLPK}, \see{Third-party software, {\tt GLPK}}{1}
+
+  \indexspace
+
+  \item Harwell Subroutine Library, \see{Third-party software, HSL}{1}
+  \item HSL, \see{Third-party software, HSL}{1}
+
+  \indexspace
+
+  \item interactive shell, 6
+  \item {\tt Ipopt}, \see{COIN-OR projects, {\tt Ipopt}}{1}
+
+  \indexspace
+
+  \item Java, 5
+  \item {\tt JobID}, 14--16
+
+  \indexspace
+
+  \item {\tt kill}, 6, 9, 18
+  \item {\tt knock}, 6, 9, 15--18
+
+  \indexspace
+
+  \item Lapack, \see{Third-party software, Lapack}{1}
+  \item LINDO, 4, 7, 9
+
+  \indexspace
+
+  \item Microsoft Visual Studio, 5
+  \item MPS format, 4, 6, 7
+  \item Mumps, \see{Third-party software, Mumps}{1}
+
+  \indexspace
+
+  \item nl files, \see{AMPL nl format}{1}
+
+  \indexspace
+
+  \item Optimization Services, 4
+  \item OS project
+    \subitem stable release, 4, 5
+    \subitem trunk version, 20, 21
+  \item {\tt OSAmplClient}, 4, 5, 22--25
+  \item {\tt Osi}, \see{COIN-OR projects, {\tt Osi}}{1}
+  \item OSiL, 4--7, 10, 11, 14, 15, 30--32, 34--36
+  \item {\tt OSLibrary}, 10
+  \item OSnL, 32--33
+  \item OSoL, 4, 5, 10, 11, 14--16, 34
+  \item OSpL, 17--18, 34
+  \item OSrL, 4, 5, 8, 10, 11, 33--34
+  \item {\tt OSSolverService}, 4--18
+  \item {\tt OSSolverService.jws}, 11
+
+  \indexspace
+
+  \item {\tt parincLinear.osil}, 8
+
+  \indexspace
+
+  \item {\tt remoteSolve1.osol}, 12--13
+  \item {\tt retrieve}, 6, 9, 15--16
+  \item {\it Rosenbrock, H.H.}, 30
+
+  \indexspace
+
+  \item {\tt send}, 6, 9, 13--16
+  \item {\tt serviceLocation}, 9
+  \item SOAP protocol, 5, 11, 14, 15
+  \item {\tt solve}, 6--7, 9--13
+  \item {\tt solveroptions.osol}, 23
+  \item supported solvers, 7
+  \item {\tt SYMPHONY}, \see{COIN-OR projects, {\tt SYMPHONY}}{1}
+
+  \indexspace
+
+  \item {\tt testlocal.config}, 10--11
+  \item {\tt testremote.config}, 11--12
+  \item Third-party software, {\tt GLPK}, 4, 7, 19
+  \item Trac system, 4
+
+  \indexspace
+
+  \item {\tt Vol}, \see{COIN-OR projects, {\tt Vol}}{1}
+
+  \indexspace
+
+  \item XML, 4
+
+\end{theindex}

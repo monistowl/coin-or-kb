@@ -1,0 +1,16 @@
+@COIN_RELOCATABLE_FALSE@prefix=@prefix@
+@COIN_RELOCATABLE_TRUE@prefix=${pcfiledir}/../..
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@/coin
+
+Name: BonminTMINLP
+Description: Ampl Interface to Bonmin
+URL: @PACKAGE_URL@
+Version: @PACKAGE_VERSION@
+Cflags: -I${includedir}
+@COIN_STATIC_BUILD_FALSE@Libs: -L${libdir} -lbonminampl
+@COIN_STATIC_BUILD_FALSE@Requires: bonmin
+@COIN_STATIC_BUILD_FALSE@Requires.private: @BONMINLIB_PCFILES@
+@COIN_STATIC_BUILD_TRUE@Libs: -L${libdir} -lbonminampl @BONMINLIB_LFLAGS_NOPC@
+@COIN_STATIC_BUILD_TRUE@Requires: bonmin @BONMINLIB_PCFILES@

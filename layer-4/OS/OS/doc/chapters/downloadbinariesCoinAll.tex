@@ -1,0 +1,68 @@
+\section{Downloading the CoinAll Binaries}\label{section:obtainingbinaries}
+
+The CoinAll project is actually a meta-project consisting of most of the COIN-OR solvers and supporting utility projects.  We describe how to download this project. 
+
+%Below we describe different methods for obtaining the binaries and C++ source code.
+Most users will only be interested in obtaining the binaries, which we describe  next.
+%in Section~\ref{section:obtainingbinaries}. The remaining sections of this chapter deal with obtaining 
+%the source code for the project, which will be of interest mostly to developers.
+It is also possible to obtain the source code for the projects, which will be of interest mostly to developers. 
+\ifdevelop
+Details can be found in  Section~\ref{section:downloadsource}.
+\else
+If binaries are not provided for a particular operating system, it may be possible to build them from the source.
+For details it is best to start reading the wiki page for the individual project or projects of interest.
+\fi
+
+
+%If the user does not wish to compile source code, the OS library, OSSolverService executable
+%and Tomcat server software configuration are available in binary format for some operating systems.     
+The repository of the binaries is at {\tt\UrlCoinAllDownload}\index{Downloading!binaries}.
+%
+\ifdevelop
+ Unlike the source code described in Section~\ref{section:downloadwithsvn}, the binary files 
+are not subject to version control and can be downloaded using an ordinary browser. 
+%If binaries are not provided for a particular operating system,
+%it may be possible to build them from the source code. Since the source is under version control, 
+%this requires svn. (See Sections \ref{section:svn}, \ref{section:downloadwithsvn} and~\ref{section:build}.)
+\fi
+
+The binary distribution for the CoinAll library and executables follows the following naming convention:
+
+
+\begin{verbatim}
+CoinAll-version_number-platform-compiler-build_options.tgz (zip)
+\end{verbatim}
+For example, CoinAll  Release 1.6.0 compiled with the Intel 11.1 compiler on a 64 bit Windows system is:
+\begin{verbatim}
+CoinAll-1.6.0-win64-intel11.1.zip
+\end{verbatim}
+
+
+
+For more detail on the naming convention and examples see:
+
+\medskip
+\noindent{\tt\UrlCoinNames}
+\medskip
+
+After unpacking the {\tt tgz} or {\tt zip} archives, the following folders are available.
+\begin{itemize}
+
+\item[] {\bf bin --} this directory contains all the executables.
+
+\item[] {\bf examples --} this directory contains several examples that illustrate working with 
+the libraries. Some data files for working with the examples are also included.
+
+\item[]  {\bf include --} the header files that are necessary in order to link against the various libraries.
+
+\item[] {\bf lib --} the libraries that are necessary for creating applications that use the  libraries.
+
+
+\item[] {\bf  share --} license and author information for all the projects used by the CoinAll project as well as a number of further data files of linear and integer programming problems.
+
+\end{itemize}
+
+
+
+

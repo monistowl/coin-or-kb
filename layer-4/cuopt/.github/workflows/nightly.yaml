@@ -1,0 +1,36 @@
+name: Trigger Nightly cuOpt Pipeline
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * *" # 5am UTC / 1am EST
+
+
+jobs:
+  trigger-nightly-builds-and-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        include:
+          - cuopt_branch: "main"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trigger Pipeline
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CUOPT_BRANCH: ${{ matrix.cuopt_branch }}
+        run: |
+          export DATE=$(date +%F)
+          export SHA=$(gh api -q '.commit.sha' "repos/nvidia/cuopt/branches/${CUOPT_BRANCH}")
+
+          # NOTE: '--ref' is the branch to pull the workflow file from, 'branch' input is the branch
+          #       to pull the actual cuOpt source code from
+          gh workflow run build.yaml    \
+            --repo NVIDIA/cuopt         \
+            --ref "${{ github.ref }}"   \
+            -f branch="${CUOPT_BRANCH}" \
+            -f build_type=nightly       \
+            -f date="${DATE}"           \
+            -f sha="${SHA}"             \
+            -f trigger-tests="true"
