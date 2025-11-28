@@ -10,6 +10,10 @@ archive/
 *.swp
 *~
 
+# Python cache
+__pycache__/
+*.pyc
+
 # Build artifacts (if any builds happen)
 *.o
 *.a
