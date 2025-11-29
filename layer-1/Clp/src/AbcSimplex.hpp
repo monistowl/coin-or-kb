@@ -58,21 +58,45 @@ class AbcMatrix;
 class AbcTolerancesEtc;
 
 /** This solves LPs using the simplex method
-    
+
     It inherits from ClpModel and all its arrays are created at
     algorithm time. Originally I tried to work with model arrays
     but for simplicity of coding I changed to single arrays with
     structural variables then row variables.  Some coding is still
     based on old style and needs cleaning up.
-    
+
     For a description of algorithms:
-    
+
     for dual see AbcSimplexDual.hpp and at top of AbcSimplexDual.cpp
     for primal see AbcSimplexPrimal.hpp and at top of AbcSimplexPrimal.cpp
-    
+
     There is an algorithm data member.  + for primal variations
     and - for dual variations
-    
+
+    @algorithm Dual Simplex (ABC variant):
+      Same mathematical algorithm as ClpSimplex dual but with:
+      1. Cache-optimized data layout: [rows|columns] contiguous arrays
+      2. SIMD-vectorized FTRAN/BTRAN via AbcMatrix and helper functions
+      3. Parallel minor iterations via Cilk or pthreads (ABC_PARALLEL)
+      4. Partitioned work vectors for thread-safe sparse ops
+
+    @algorithm Primal Simplex (ABC variant):
+      Standard revised primal with steepest-edge pricing, enhanced with
+      same vectorization and parallelization as dual variant.
+
+    @algorithm Data Layout Optimization:
+      All arrays use [structural|slack] layout instead of separate storage.
+      This improves cache locality during basis updates. Key arrays:
+      - abcSolution_[0..n+m]: primal solution values
+      - abcDj_[0..n+m]: reduced costs (dual solution)
+      - abcLower_/abcUpper_[0..n+m]: variable bounds
+
+    @complexity Same asymptotic complexity as ClpSimplex:
+      Per-iteration: O(m²) average for basis update
+      Practical speedup: 2-4x from SIMD, additional from parallelism
+
+    @ref Forrest, J.J. and Goldfarb, D. (1992). "Steepest-edge simplex
+      algorithms for linear programming". Math. Programming 57:341-374.
 */
 #define PAN
 #if ABC_NORMAL_DEBUG > 0

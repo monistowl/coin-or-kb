@@ -30,6 +30,23 @@
  *
  * Thread safety: Each Clp_Simplex is independent; do not share across threads.
  *
+ * @algorithm LP Solving Methods Exposed:
+ *   - Clp_dual(): Dual revised simplex (preferred for most problems)
+ *   - Clp_primal(): Primal revised simplex (better for highly degenerate)
+ *   - Clp_initialSolve(): Auto-selects method based on ClpSolve options
+ *   - Clp_initialDualSolve/Clp_initialPrimalSolve: Force specific method
+ *   - Clp_initialBarrierSolve: Interior-point with crossover to basis
+ *
+ * @algorithm Warm-Starting Protocol:
+ *   1. Solve initial LP: Clp_initialSolve()
+ *   2. Modify problem (bounds, RHS, etc.)
+ *   3. Re-solve from basis: Clp_dual() or Clp_primal()
+ *   Warm start typically requires O(k) iterations where k << m+n.
+ *
+ * @complexity Same as underlying ClpSimplex methods:
+ *   Per-iteration: O(m²) average, O(m³) worst-case for factorization
+ *   Total: O(m·n·iterations) for complete solve
+ *
  * @see ClpSimplex for the C++ class being wrapped
  * @see ClpSolve for solve options
  */

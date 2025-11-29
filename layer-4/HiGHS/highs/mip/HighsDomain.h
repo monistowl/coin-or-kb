@@ -44,6 +44,35 @@
  * - backtrackToGlobal(): Reset to root node bounds
  * - branchPos_[]: Positions of branching decisions in stack
  *
+ * @algorithm Domain Propagation (constraint propagation for MIP):
+ *   For each constraint a'x <= b with variable bounds:
+ *   1. Compute activity bounds: [min(a'x), max(a'x)] from current bounds
+ *   2. If max(a'x) < b: constraint always satisfied (no propagation)
+ *   3. If min(a'x) > b: infeasible (prune node)
+ *   4. Otherwise, derive tighter variable bounds:
+ *      - If a_j > 0: x_j <= (b - min(a'x) + a_j*l_j) / a_j
+ *      - If a_j < 0: x_j >= (b - min(a'x) + a_j*u_j) / a_j
+ *   Queue affected constraints for re-propagation until fixpoint.
+ *
+ * @algorithm Conflict Analysis (clause learning):
+ *   When propagation detects infeasibility:
+ *   1. Trace back reason chain from conflicting bound change
+ *   2. Build conflict clause from "first UIP" cut
+ *   3. Store learned clause in HighsConflictPool for future pruning
+ *   Similar to CDCL (Conflict-Driven Clause Learning) in SAT solvers.
+ *
+ * @algorithm Objective Propagation:
+ *   Given incumbent z* and objective c'x:
+ *   For each variable, derive bound from c'x < z* constraint.
+ *   Particularly effective when objective has large coefficients.
+ *
+ * @complexity propagate(): O(nnz × propagation_rounds) amortized
+ *   conflictAnalysis(): O(conflict_clause_length × reason_chain_depth)
+ *   backtrack(): O(number_of_bound_changes_to_undo)
+ *
+ * @ref Achterberg, T. (2007). "Conflict analysis in mixed integer
+ *   programming". Discrete Optimization 4:4-20.
+ *
  * @see mip/HighsDomainChange.h for bound change struct
  * @see mip/HighsConflictPool.h for learned conflicts
  */

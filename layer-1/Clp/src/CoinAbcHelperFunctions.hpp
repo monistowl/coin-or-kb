@@ -20,6 +20,28 @@
  * Includes specialized ScatterUpdateN functions for N=1..8 and 4N variants
  * using function pointer dispatch (scatterStruct) for optimal performance.
  *
+ * @algorithm Scatter-Update (sparse AXPY kernel):
+ *   region[index[j]] -= value[j] * pivotValue for j = 0..n-1
+ *   This is the innermost loop of sparse LU factorization (FTRAN).
+ *   Optimization techniques:
+ *   1. Loop unrolling (2x, 4x) to reduce loop overhead
+ *   2. Index prefetching to hide memory latency
+ *   3. SIMD (AVX/AVX2) for aligned dense sections
+ *   4. Cilk parallel for large column counts (grainsize=128)
+ *
+ * @algorithm Gather-Update (sparse dot product):
+ *   result = Σ region[index[j]] * value[j]
+ *   Used in BTRAN (backward transformation).
+ *   Similar optimizations: unrolling, prefetch, SIMD reduction.
+ *
+ * @algorithm Function Pointer Dispatch (scatterStruct):
+ *   Precomputed table of specialized ScatterUpdate{1..8,4N} functions
+ *   avoids branch misprediction in small-column cases.
+ *
+ * @complexity O(nnz) per scatter/gather operation
+ *   With SIMD: ~4x speedup on vectorizable sections
+ *   With Cilk: ~Kx speedup on K cores for large columns
+ *
  * @see CoinAbcFactorization which uses these kernels
  * @see AbcSimplex which uses these for FTRAN/BTRAN
  */

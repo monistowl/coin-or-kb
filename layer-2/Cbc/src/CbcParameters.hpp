@@ -93,10 +93,41 @@
 /*
  */
 
-/* \brief Cbc algorithm parameters class
+/** \brief Cbc algorithm parameters class
 
-  This class defines and stores the parameters used to control the operation 
+  This class defines and stores the parameters used to control the operation
   of Cbc.
+
+  @algorithm Strategy Pattern for MIP Solver Configuration:
+    Encapsulates all tunable aspects of the branch-and-cut algorithm:
+    1. Cut generator activation: which CGL cuts to use, how often, where
+       - CGMode controls: off, root-only, always, conditional ("ifmove")
+       - Generators: Gomory, MIR, clique, probing, flow cover, zero-half
+    2. Primal heuristics: which to run, when, how intensively
+       - Feasibility pump, RINS, RENS, DINS, various diving strategies
+       - VND (Variable Neighborhood Descent) for local improvement
+    3. Node selection strategy: best-bound vs depth-first vs hybrid
+       - NSHybrid: alternates to balance exploration/exploitation
+       - NSDepth: dive deep quickly (good for finding feasible solutions)
+       - NSFewest: best-bound (tighter bounds, more memory)
+    4. Branching: variable selection, SOS handling, orbital branching
+
+  @algorithm Orbital Branching (OrbitalStrategy):
+    Exploits problem symmetry to prune equivalent subtrees:
+    - Detects automorphism group of MIP formulation
+    - Adds symmetry-breaking constraints during branching
+    - OBStrong: full symmetry detection (expensive but powerful)
+    - OBLightweight: faster approximate symmetry handling
+
+  @algorithm Preprocessing Pipeline (IPPMode):
+    Controls integer preprocessing before B&C:
+    - Probing: fix variables by logical implication
+    - Clique detection: identify mutual exclusion constraints
+    - Coefficient strengthening: tighten constraint coefficients
+    - SOS extraction: identify special ordered sets from structure
+
+  @ref Margot, F. (2002). "Pruning by isomorphism in branch-and-cut".
+    Math. Programming 94:71-90. (Orbital branching foundations)
 */
 
 class CBCLIB_EXPORT CbcParameters {
