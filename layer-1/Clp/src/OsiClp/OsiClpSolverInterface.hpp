@@ -29,8 +29,40 @@ static const double OsiClpInfinity = COIN_DBL_MAX;
 //#############################################################################
 
 /** Clp Solver Interface
-    
+
 Instantiation of OsiClpSolverInterface for the Model Algorithm.
+
+@algorithm Adapter/Bridge Pattern for LP Solver Abstraction:
+  Wraps ClpSimplex to provide OSI-compliant interface, enabling solver
+  interoperability in CBC and Cgl. Key adaptations:
+  1. Basis management: Translates between CoinWarmStartBasis and Clp's internal
+     status arrays (handling artificial variable sign conventions)
+  2. Hot-starting: Maintains factorization between related solves for fast
+     strong branching (see markHotStart/solveFromHotStart)
+  3. Simplex tableau access: Provides getBInvARow/getBInvACol for cut
+     generators requiring basis inverse information
+  4. Disaster handling: Recovery mechanism for numerical difficulties
+
+@algorithm Hot-Start Optimization for Strong Branching:
+  1. markHotStart(): Save current basis, factorization, solution
+  2. Modify bounds (single variable typically)
+  3. solveFromHotStart(): Resolve with warm start (few iterations)
+  4. Repeat steps 2-3 for each branching candidate
+  5. unmarkHotStart(): Release saved state
+  This avoids full refactorization for each strong branching LP.
+
+@complexity Most operations O(1) delegations to ClpSimplex
+  initialSolve/resolve: O(m·n·iterations) for underlying simplex
+  Hot-start resolve: O(k·m) where k = iterations to re-optimize (typically small)
+  getBInvARow/getBInvACol: O(nnz(B^{-1})) per call
+
+@invariant basis_ synchronized with modelPtr_->status arrays after each solve
+@invariant fakeMinInSimplex_ == true implies linearObjective_ is negated copy
+@invariant smallModel_ != NULL implies hot-start state is active
+
+@ref Lougee-Heimer, R., et al. (2003). "The Common Optimization INterface for
+  Operations Research: Promoting open-source software in the operations
+  research community". IBM J. Res. Dev. 47(1):57-66.
 
 */
 

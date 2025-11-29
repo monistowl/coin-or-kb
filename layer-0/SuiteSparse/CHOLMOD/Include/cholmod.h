@@ -21,6 +21,27 @@
  * 4. cholmod_solve: Solve Ax = b using the factors
  * 5. cholmod_finish: Free workspace
  *
+ * @algorithm Sparse Cholesky Factorization:
+ *   For SPD matrix A, computes A = L·L' (or L·D·L' for LDL'):
+ *   1. Symbolic analysis: determine nonzero pattern of L
+ *      - Fill-reducing ordering P: minimize nnz(L) in P·A·P'
+ *      - Elimination tree: parent[j] = min{i : L(i,j) ≠ 0, i > j}
+ *   2. Numerical factorization: compute L column-by-column
+ *      - Supernodal: group columns with identical sparsity patterns
+ *      - Use dense BLAS3 for supernodes (cache-efficient)
+ *
+ * @algorithm Update/Downdate (rank-k modification):
+ *   Given L·L' = A, compute L̃ such that L̃·L̃' = A ± C·C':
+ *   - Uses Givens rotations for numerical stability
+ *   - O(k × nnz(L)) complexity for rank-k modification
+ *
+ * @complexity Factorization: O(nnz(L)²/m) with supernodal method
+ *   Solve: O(nnz(L)) per right-hand side
+ *   Fill-in (nnz(L)) depends on ordering quality
+ *
+ * @math For A = L·L': L(j,j) = √(A(j,j) - Σ L(j,k)²)
+ *   L(i,j) = (A(i,j) - Σ L(i,k)·L(j,k)) / L(j,j) for i > j
+ *
  * @ref Davis (2006). "Direct Methods for Sparse Linear Systems".
  *      SIAM. ISBN: 978-0-898716-13-9. Chapter 4-8.
  * @ref Chen, Davis, Hager, Rajamanickam (2008). "Algorithm 887: CHOLMOD,

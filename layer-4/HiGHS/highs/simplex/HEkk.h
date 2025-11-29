@@ -36,6 +36,28 @@
  * **Parallelism:**
  * - chooseSimplexStrategyThreads(): Configure parallel strategy
  *
+ * @algorithm Dual Revised Simplex (default):
+ *   1. Maintain dual feasibility (reduced costs satisfy optimality)
+ *   2. CHUZR: Select leaving variable (primal infeasibility)
+ *   3. BTRAN: Compute pivot row (e_i·B^{-1})
+ *   4. CHUZC: Select entering variable (ratio test)
+ *   5. FTRAN: Compute pivot column (B^{-1}·a_j)
+ *   6. UPDATE: Modify basis, update factorization
+ *
+ * @algorithm Hyper-sparse Computation:
+ *   Exploits sparsity in FTRAN/BTRAN when < 10% of elements nonzero.
+ *   Uses specialized scatter/gather for cache efficiency.
+ *
+ * @complexity Per-iteration: O(nnz(B^{-1}·v)) for FTRAN/BTRAN
+ *   Hyper-sparse: O(nnz(result)) when exploiting sparsity
+ *   Parallelization: independent FTRAN/BTRAN across columns
+ *
+ * @ref Huangfu, Q. and Hall, J.A.J. (2018). "Parallelizing the dual revised
+ *   simplex method". Math. Prog. Computation 10:119-142.
+ *
+ * @ref Hall, J.A.J. and McKinnon, K.I.M. (2005). "Hyper-sparsity in the
+ *   revised simplex method and how to exploit it". Comp. Opt. Appl. 32:259-283.
+ *
  * @see HEkkDual.h for dual simplex implementation
  * @see HEkkPrimal.h for primal simplex implementation
  * @see HSimplexNla.h for basis factorization

@@ -38,6 +38,24 @@
  * - setOptionValue/getOptionValue: Configure solver behavior
  * - getInfo: Retrieve solve statistics (iterations, time, etc.)
  *
+ * @algorithm LP Solving (automatic selection):
+ *   - Simplex (HEkk): Dual revised simplex with steepest-edge pricing,
+ *     hyper-sparse FTRAN/BTRAN, Devex as fallback
+ *   - Interior Point (IPX): Primal-dual with regularization and crossover
+ *   - Presolve: aggressive reduction (substitution, tightening, singleton)
+ *
+ * @algorithm MIP Solving:
+ *   - Presolve: probing, clique detection, coefficient strengthening
+ *   - Cuts: Gomory, MIR, clique, zero-half, knapsack cover
+ *   - Branching: reliability branching with pseudocost initialization
+ *   - Heuristics: RINS, local search, rounding, feasibility pump
+ *
+ * @complexity LP: O(m·n·iterations) simplex, O(n³) per IPM iteration
+ *   MIP: exponential worst-case, highly structure-dependent
+ *
+ * @ref Huangfu, Q. and Hall, J.A.J. (2018). "Parallelizing the dual revised
+ *   simplex method". Math. Prog. Computation 10:119-142.
+ *
  * @see lp_data/HighsLp.h for LP data structure
  * @see lp_data/HighsOptions.h for configuration options
  * @see simplex/HEkk.h for simplex implementation

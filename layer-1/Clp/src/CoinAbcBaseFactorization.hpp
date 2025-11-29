@@ -27,6 +27,22 @@
  * - U stored in column-major with explicit row indices
  * - Pivot region separate for fast diagonal access
  *
+ * @algorithm ABC (Alternative Basis Code) LU Factorization:
+ *   Enhanced sparse LU with modern CPU optimizations:
+ *   1. Markowitz pivot selection with singleton detection
+ *   2. SIMD-vectorized scatter/gather for column updates
+ *   3. Cache-blocking (BLOCKING8) for L2/L3 efficiency
+ *   4. Parallel elimination using Cilk (when ABC_PARALLEL=2)
+ *   5. Hyper-sparse mode for very sparse intermediate results
+ *
+ * @complexity Factorization: O(nnz × fill-in), highly structure-dependent
+ *   FTRAN/BTRAN: O(nnz(L) + nnz(U)) with SIMD acceleration
+ *   SIMD speedup: 2-4x for dense column operations
+ *
+ * @math B = L·U with row/column permutations P, Q:
+ *   P·B·Q = L·U, where L unit lower triangular, U upper triangular
+ *   Markowitz criterion: select pivot minimizing (r_i - 1)(c_j - 1)
+ *
  * Note: 32 bits assumed sufficient for row/column counts,
  * but CoinBigIndex can be 64-bit for element indices.
  *
