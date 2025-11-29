@@ -10,6 +10,47 @@
  *
  * $Id: proto.h 13933 2013-03-29 22:20:46Z karypis $
  *
+ * @file proto.h
+ * @brief Function prototypes for METIS graph partitioning library
+ *
+ * METIS provides multilevel graph partitioning for:
+ * - Fill-reducing orderings in sparse Cholesky (nested dissection)
+ * - Load-balanced parallel computation (k-way partitioning)
+ *
+ * @algorithm Multilevel Graph Partitioning:
+ *   1. COARSENING: Repeatedly contract graph via edge matching
+ *      - Match_SHEM(): Sorted Heavy-Edge Matching (quality)
+ *      - Match_RM(): Random Matching (speed)
+ *      - Match_2Hop(): 2-hop matching for unmatched vertices
+ *   2. INITIAL PARTITION: Partition coarsest graph
+ *      - GrowBisection(): BFS-based region growing
+ *      - RandomBisection(): Random initial cut
+ *   3. UNCOARSENING: Project and refine at each level
+ *      - FM_2WayRefine(): Fiduccia-Mattheyses local search
+ *      - Greedy_KWayOptimize(): Greedy k-way refinement
+ *
+ * @algorithm Nested Dissection Ordering:
+ *   For sparse matrix A, find permutation P minimizing fill in L:
+ *   1. Find vertex separator S splitting graph G(A) into A, B
+ *   2. Order: [ND(A), ND(B), S] recursively
+ *   3. Result: fill-reducing ordering for Cholesky factorization
+ *   Functions: InitSeparator(), GrowBisectionNode()
+ *
+ * @algorithm Fiduccia-Mattheyses (FM) Refinement:
+ *   Local search improving edge-cut:
+ *   1. Compute gains for moving each boundary vertex
+ *   2. Move highest-gain vertex (even if negative)
+ *   3. Track best partition seen during pass
+ *   4. Roll back to best and repeat until no improvement
+ *
+ * @complexity Multilevel partitioning: O(|E|) per level, O(log|V|) levels
+ *   Total: O(|E| log |V|) typical
+ *   FM refinement: O(|E|) per pass
+ *
+ * @ref Karypis, G. and Kumar, V. (1998). "A fast and high quality multilevel
+ *   scheme for partitioning irregular graphs". SIAM J. Sci. Comput. 20:359-392.
+ * @ref George, A. (1973). "Nested dissection of a regular finite element mesh".
+ *   SIAM J. Numer. Anal. 10:345-363.
  */
 
 #ifndef _LIBMETIS_PROTO_H_

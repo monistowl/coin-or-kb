@@ -36,6 +36,10 @@
  * @invariant Warm start objects must be compatible with the solver that
  *   created them. Cross-solver warm starting requires basis translation.
  *
+ * @complexity All query methods (getColSolution, etc.): O(1) pointer return
+ *   initialSolve/resolve: delegated to solver, typically O(m·n·iterations)
+ *   applyCuts: O(cuts × row_length) for constraint matrix update
+ *
  * @ref Lougee-Heimer et al. (2003). "The Common Optimization INterface
  *   for Operations Research". IBM J. Research & Development 47(1):57-66.
  *

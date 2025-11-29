@@ -2,6 +2,53 @@
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 
+/**
+ * @file CbcModel.cpp
+ * @brief Core implementation of the CBC branch-and-cut MIP solver
+ *
+ * This file implements the main solving loop for mixed-integer programs.
+ *
+ * @algorithm Branch-and-Cut Main Loop (branchAndBound):
+ *   while (nodes remain and limits not reached):
+ *     1. SELECT: Choose node from tree (best-bound, depth-first, hybrid)
+ *     2. SOLVE: Re-solve LP relaxation at node (warm start from parent)
+ *     3. FATHOM CHECK: If LP >= cutoff or infeasible, prune node
+ *     4. CUTS: Generate cutting planes (see solveWithCuts):
+ *        - Gomory, MIR, clique, probing, flow cover, etc.
+ *        - Add violated cuts, re-solve LP, repeat until stabilized
+ *     5. HEURISTICS: Try to find feasible solutions
+ *        - Feasibility pump, RINS, diving heuristics
+ *     6. BRANCH: If fractional integers remain, create child nodes
+ *        - Strong branching for variable selection (or pseudocosts)
+ *        - Add children to tree with updated bounds
+ *
+ * @algorithm Cut-and-Resolve Loop (solveWithCuts):
+ *   repeat:
+ *     for each active cut generator:
+ *       generate cuts for current LP solution
+ *     filter and add effective cuts to LP
+ *     resolve LP
+ *   until (no cuts added) or (iteration limit) or (LP worsened < threshold)
+ *
+ * @algorithm Strong Branching (chooseBranch):
+ *   For candidate variables with fractional values:
+ *   1. Tentatively set x_j <= floor(x_j) and resolve LP
+ *   2. Tentatively set x_j >= ceil(x_j) and resolve LP
+ *   3. Score based on min{down_degrade, up_degrade}
+ *   4. Select variable with best score
+ *   Cache pseudocosts for future branching decisions.
+ *
+ * @complexity Worst-case: O(2^n) nodes for n integer variables
+ *   Per-node: O(m·n·LP_iters) + O(cuts × cut_generation)
+ *   Strong branching: O(candidates × LP_iters) per node
+ *
+ * @ref Achterberg, T. et al. (2005). "Branching rules revisited".
+ *   Operations Research Letters 33:42-54.
+ * @ref Padberg, M. and Rinaldi, G. (1991). "A branch-and-cut algorithm
+ *   for the resolution of large-scale symmetric traveling salesman problems".
+ *   SIAM Review 33:60-100.
+ */
+
 #if defined(_MSC_VER)
 // Turn off compiler warning about long names
 #pragma warning(disable : 4786)

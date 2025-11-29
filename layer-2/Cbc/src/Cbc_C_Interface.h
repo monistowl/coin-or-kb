@@ -27,7 +27,35 @@
  * @date 15 Aug 2019
  *
  * The C API for the COIN-OR Branch-and-Cut solver
- * 
+ *
+ * @algorithm Branch-and-Cut MIP Solving (exposed via C API):
+ *   Cbc_solve() runs the complete B&C algorithm:
+ *   1. LP relaxation: Solve root LP (dual simplex, barrier, or auto)
+ *   2. Presolve: Bound tightening, probing, clique detection
+ *   3. Cut generation: Gomory, MIR, clique, zero-half, etc. (CutType enum)
+ *   4. Heuristics: Feasibility pump, RINS, diving (configurable)
+ *   5. Branching: Strong branching with pseudocost fallback
+ *   6. Node selection: Best-bound, depth-first, or hybrid
+ *
+ * @algorithm Cut Generator Control (CutType enum):
+ *   - CT_Gomory/CT_GMI: Tableau-based Gomory fractional cuts
+ *   - CT_MIR/CT_TwoMIR: Mixed-integer rounding cuts
+ *   - CT_Probing: Implications from fixing binary variables
+ *   - CT_Clique: Conflicts detected in binary structure
+ *   - CT_ZeroHalf: Cuts from mod-2 arithmetic
+ *   - CT_LiftAndProject: Balas-style disjunctive cuts
+ *
+ * @algorithm LP Method Selection (LPMethod enum):
+ *   - LPM_Dual: Dual simplex (default, best for warm starts)
+ *   - LPM_Primal: Primal simplex
+ *   - LPM_Barrier: Interior-point with crossover to basis
+ *   - LPM_BarrierNoCross: IPM without crossover (for large LPs)
+ *
+ * @complexity MIP: Exponential worst-case, highly structure-dependent
+ *   Each LP solve: O(m·n·iterations) for simplex
+ *
+ * @ref Land, A.H. and Doig, A.G. (1960). "An automatic method of solving
+ *   discrete programming problems". Econometrica 28(3):497-520.
  */
 
 /*

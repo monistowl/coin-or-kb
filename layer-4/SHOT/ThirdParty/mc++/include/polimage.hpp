@@ -1410,11 +1410,38 @@ struct lt_OAsub
 //! @brief C++ class for polytopic image evaluation
 ////////////////////////////////////////////////////////////////////////
 //! mc::PolImg is a C++ class for evaluation of the polytoptic image of
-//! a factorable function. Propagation of the image is via polytopic 
+//! a factorable function. Propagation of the image is via polytopic
 //! arithmetic, as implemented in mc::PolVar. The template parameter
 //! corresponds to the type used to propagate variable range. Round-off
 //! errors are not accounted for in the computations (non-verified
 //! implementation).
+//!
+//! @algorithm Polyhedral Relaxation of Factorable Functions:
+//!   Constructs LP-representable outer approximation of nonconvex sets:
+//!   1. LIFTING: Decompose f(x) into atoms, introduce auxiliary vars
+//!   2. RELAXATION: Replace nonlinear atoms with convex envelopes
+//!      - Bilinear: McCormick envelopes (4 linear inequalities)
+//!      - Univariate convex: function itself + secant upper bound
+//!      - Univariate concave: secant lower bound + function itself
+//!   3. LINEARIZATION: Outer-approximate convex constraints with cuts
+//!      via sandwich algorithm (adaptive linearization points)
+//!
+//! @algorithm Sandwich Algorithm for Cut Generation:
+//!   Iteratively adds supporting hyperplanes to convex constraint:
+//!   1. Start with cuts at interval endpoints
+//!   2. Find interval with maximum approximation error
+//!   3. Add cut at point minimizing local error
+//!   4. Repeat until error < tolerance
+//!   Convergence: max_error ~ O(1/n²) for n linearization points
+//!
+//! @complexity Cut generation: O(n log n) for n cuts (priority queue)
+//!   DAG evaluation: O(|operations|) to propagate bounds
+//!   Memory: O(|vars| + |cuts|) for polyhedral representation
+//!
+//! @ref Tawarmalani, M. and Sahinidis, N.V. (2004). "Global optimization
+//!   of mixed-integer nonlinear programs". Math. Prog. 99(3):563-591.
+//! @ref McCormick, G.P. (1976). "Computability of global solutions to
+//!   factorable nonconvex programs". Math. Prog. 10:147-175.
 ////////////////////////////////////////////////////////////////////////
 template< class T >
 class PolImg
