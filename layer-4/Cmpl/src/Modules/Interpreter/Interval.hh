@@ -27,7 +27,22 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/Interval.hh
+ * @brief Interval arithmetic
+ *
+ * Numeric intervals with bounds for type constraints.
+ *
+ * **Interval Class:**
+ * - _lowBnd, _uppBnd: Interval bounds
+ * - _lowInc, _uppInc: Bound inclusivity
+ * - contains(): Check value membership
+ * - intersect()/unite(): Interval operations
+ * - toSet(): Convert to enumerated set
+ *
+ * @see SetInfinite.hh for infinite ranges
+ * @see ValType.hh for type bounds
+ */
 
 #ifndef INTERVAL_HH
 #define INTERVAL_HH

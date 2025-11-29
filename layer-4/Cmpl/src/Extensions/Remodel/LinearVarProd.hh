@@ -27,7 +27,25 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/LinearVarProd.hh
+ * @brief Linearization of variable products
+ *
+ * Converts products of optimization variables to linear form.
+ *
+ * **LinearVarProd Class:**
+ * - _prodLinearLvl: Linearization level (bin/int/real)
+ * - linearizeProdBin(): Binary-other variable product
+ * - linearizeProdInt(): Integer decomposition via binaryDecomp()
+ * - linearizeProdReal(): Real variable approximation
+ * - _varProdCache, _intBinCache: Caching for products
+ *
+ * **VarPair/IntVarDecomp:**
+ * - Helper structures for product caching and decomposition
+ *
+ * @see RemodelBase.hh for base class
+ * @see LinearVarProdMod.hh for module interface
+ */
 
 #ifndef LINEARVARPROD_HH
 #define LINEARVARPROD_HH

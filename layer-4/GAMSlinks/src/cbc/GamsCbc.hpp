@@ -3,6 +3,19 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file cbc/GamsCbc.hpp
+ * @brief GAMS interface to CBC MIP solver
+ *
+ * Connects GAMS modeling environment to COIN-OR CBC.
+ *
+ * **GamsCbc Class:**
+ * - gmo/gev: GAMS modeling object and environment handles
+ * - setupProblem()/setupParameters(): Configure CBC from GAMS
+ * - Solve trace support for performance analysis
+ *
+ * @see GamsCbcHeurSolveTrace.hpp for MIP heuristic callback
+ */
 
 #ifndef GAMSCBC_HPP_
 #define GAMSCBC_HPP_

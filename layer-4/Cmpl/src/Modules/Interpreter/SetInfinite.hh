@@ -27,7 +27,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/SetInfinite.hh
+ * @brief Infinite set handling
+ *
+ * Support for infinite sets (int, real domain types).
+ *
+ * **SetInfinite Class:**
+ * - Static methods for infinite set operations
+ * - containsVal(): Check membership
+ * - intersect(): Finite/infinite intersection
+ * - isFinite(): Check if operation produces finite set
+ *
+ * @see CommonData/SetBase.hh for set types
+ * @see Interval.hh for infinite intervals
+ */
 
 #ifndef SETINFINITE_HH
 #define SETINFINITE_HH

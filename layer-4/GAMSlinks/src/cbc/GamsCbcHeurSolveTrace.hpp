@@ -3,6 +3,15 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file cbc/GamsCbcHeurSolveTrace.hpp
+ * @brief CBC heuristic for GAMS solve trace reporting
+ *
+ * CbcHeuristic implementation that reports bound progress
+ * to GAMS solve trace data structure for performance analysis.
+ *
+ * @see GamsCbc.hpp for main GAMS-CBC interface
+ */
 
 #ifndef GAMSCBCHEURSOLVETRACE_HPP_
 #define GAMSCBCHEURSOLVETRACE_HPP_

@@ -26,7 +26,19 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/OutModel/OutModelMatrix.hh
+ * @brief Human-readable matrix output
+ *
+ * Writes optimization model as readable coefficient matrix.
+ *
+ * **OutModelMatrix Class:**
+ * - _outMatrix: Output file handle
+ * - writeMatrix(): Generate matrix representation
+ * - writeColCoeffs(): Format column coefficients
+ *
+ * @see CommonData/OptModel.hh for model data
+ */
 
 #ifndef OUTMODELMATRIX_HH
 #define OUTMODELMATRIX_HH

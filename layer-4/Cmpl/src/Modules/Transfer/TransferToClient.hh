@@ -27,7 +27,19 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Transfer/TransferToClient.hh
+ * @brief Server-to-client result transfer
+ *
+ * Runs on server to send results back to client.
+ *
+ * **TransferToClient Class:**
+ * - _dataFile: Output file for serialized results
+ * - run(): Execute result transfer
+ * - writeDataForClientCmpl(): Serialize server results
+ *
+ * @see TransferFromClient.hh for server initialization
+ */
 
 #ifndef TRANSFERTOCLIENT_HH
 #define TRANSFERTOCLIENT_HH

@@ -3,6 +3,16 @@
 // This code is published under the Eclipse Public License.
 //
 // Authors: Steven Dirkse, Stefan Vigerske
+/**
+ * @file ipopt/GamsNLP.hpp
+ * @brief Ipopt TNLP implementation for GAMS models
+ *
+ * GamsNLP: Implements Ipopt::TNLP using GMO (GAMS Modeling Object)
+ * for objective/constraint evaluation, Jacobian sparsity, Hessian.
+ *
+ * @see GamsIpopt.hpp for solver driver
+ * @see GamsJournal.hpp for output handling
+ */
 
 #ifndef GAMSNLP_HPP_
 #define GAMSNLP_HPP_

@@ -1,5 +1,14 @@
-// Copyright (C) Jan-Willem Goossens 
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file SonnetWrapper/Helpers.h
+ * @brief Core wrapper infrastructure for Sonnet .NET bindings
+ *
+ * Template base classes for C++/CLI wrappers around native COIN-OR objects.
+ * WrapperAbstractBase<T> and WrapperBase<T> handle ownership and lifetime.
+ *
+ * @see OsiSolverInterface.h, ClpModel.h, CbcModel.h for concrete wrappers
+ */
 
 #pragma once
 

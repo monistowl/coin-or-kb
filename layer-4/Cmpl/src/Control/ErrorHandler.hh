@@ -26,7 +26,30 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Control/ErrorHandler.hh
+ * @brief Centralized error handling with severity levels
+ *
+ * Manages error reporting, counting, and exception throwing.
+ *
+ * **Error Levels (ERROR_LVL_*):**
+ * - WARN: Warning, continue execution
+ * - EASY: Error, modules may skip
+ * - NORMAL: Error, finish step then cancel module
+ * - CANCEL: Cancel current module
+ * - FATAL: Cancel entire program
+ *
+ * **ErrorHandler Class:**
+ * - error(): Report error with location
+ * - internalError(): Fatal without location
+ * - setExecStep(): Track current execution step
+ *
+ * **Exception Classes:**
+ * - ModuleException: Cancel current module
+ * - FatalException: Cancel entire program
+ *
+ * @see LocationInfo.hh for error positions
+ */
 
 #ifndef ERRORHANDLER_HH
 #define ERRORHANDLER_HH

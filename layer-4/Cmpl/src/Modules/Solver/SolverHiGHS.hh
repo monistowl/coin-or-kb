@@ -26,6 +26,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
+/**
+ * @file Modules/Solver/SolverHiGHS.hh
+ * @brief HiGHS solver integration
+ *
+ * Calls HiGHS executable for LP/MIP optimization.
+ *
+ * **SolverHiGHS Class:**
+ * - run(): Execute HiGHS and parse results
+ * - readSolFile(): Parse HiGHS solution format
+ * - generateCmdLine(): Build HiGHS command arguments
+ * - writeOptFile(): Generate HiGHS options file
+ *
+ * @see Solver.hh for base interface
+ * @see layer-3/HiGHS for HiGHS solver
+ */
 
 #ifndef SOLVERHIGHS_HH
 #define SOLVERHIGHS_HH

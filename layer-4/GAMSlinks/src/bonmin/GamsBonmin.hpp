@@ -3,6 +3,14 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file bonmin/GamsBonmin.hpp
+ * @brief GAMS interface to Bonmin MINLP solver
+ *
+ * Connects GAMS to COIN-OR Bonmin for mixed-integer nonlinear programming.
+ *
+ * @see GamsMINLP.hpp for NLP subproblem representation
+ */
 
 #ifndef GAMSBONMIN_HPP_
 #define GAMSBONMIN_HPP_

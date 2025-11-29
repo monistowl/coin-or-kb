@@ -26,7 +26,24 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file CommonData/CmplSourceInput.hh
+ * @brief Preprocessed CMPL source for compiler
+ *
+ * Contains source text after precompiler processing.
+ *
+ * **CmplSourceInput Class:**
+ * - contents(): Get preprocessed source string
+ * - setContents(): Store preprocessed source
+ * - Serializable for distributed execution
+ *
+ * **Pipeline Position:**
+ * - Input: Precompiler module output
+ * - Output: Compiler module input
+ *
+ * @see Modules/Precompiler/ for source preprocessing
+ * @see Modules/Compiler/ for compilation
+ */
 
 #ifndef CMPLSOURCEINPUT_HH
 #define CMPLSOURCEINPUT_HH

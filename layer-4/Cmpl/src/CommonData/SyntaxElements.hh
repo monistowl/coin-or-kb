@@ -2,30 +2,54 @@
 /***********************************************************************
  *  This code is part of CMPL
  *
- *  Copyright (C) 2007, 2008, 2009, 2010, 2011 Thomas Schleiff - Halle(Saale), 
+ *  Copyright (C) 2007, 2008, 2009, 2010, 2011 Thomas Schleiff - Halle(Saale),
  *  Germany and Mike Steglich - Technical University of Applied Sciences
- *  Wildau, Germany 
+ *  Wildau, Germany
  *
- *  Coliop3 and CMPL are projects of the Technical University of 
- *  Applied Sciences Wildau and the Institute for Operations Research 
- *  and Business Management at the Martin Luther University 
+ *  Coliop3 and CMPL are projects of the Technical University of
+ *  Applied Sciences Wildau and the Institute for Operations Research
+ *  and Business Management at the Martin Luther University
  *  Halle-Wittenberg.
  *  Please visit the project homepage <www.coliop.org>
- * 
- *  CMPL is free software; you can redistribute it and/or modify it 
- *  under the terms of the GNU General Public License as published by 
- *  the Free Software Foundation; either version 3 of the License, or 
+ *
+ *  CMPL is free software; you can redistribute it and/or modify it
+ *  under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  CMPL is distributed in the hope that it will be useful, but WITHOUT
  *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- *  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public 
+ *  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
  *  License for more details.
- *  
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
+/**
+ * @file CommonData/SyntaxElements.hh
+ * @brief Parse tree and symbol table from compilation
+ *
+ * Represents parsed CMPL syntax for error reporting and IDE support.
+ *
+ * **SyntaxElementType Enum:**
+ * - SyntaxElementStatement, SyntaxElementAssignment
+ * - SyntaxElementCodeblock, SyntaxElementBlockPart
+ * - SyntaxElementBinaryOp, SyntaxElementFuncCall
+ *
+ * **SymbolInfo Class:**
+ * - name, defId, globId: Symbol identification
+ * - predef: Predefined symbol codes (PREDEFSYMVAL_*)
+ * - scopeType: Local/global/parameter scope
+ *
+ * **SyntaxElement Class:**
+ * - Tree structure with _next/_child links
+ * - loc(): Source location info
+ * - writeXML(): Export for tooling
+ *
+ * @see Modules/Compiler/ for syntax generation
+ * @see IntCode.hh for predefined symbol values
+ */
 
 #ifndef SYNTAXELEMENTS_HH
 #define SYNTAXELEMENTS_HH

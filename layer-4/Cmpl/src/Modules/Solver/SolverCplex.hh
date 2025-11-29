@@ -26,6 +26,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
+/**
+ * @file Modules/Solver/SolverCplex.hh
+ * @brief IBM CPLEX solver integration
+ *
+ * Calls CPLEX executable for LP/MIP optimization.
+ *
+ * **SolverCplex Class:**
+ * - run(): Execute CPLEX and parse results
+ * - readSolFile(): Parse CPLEX XML solution format
+ * - generateCmdLine(): Build CPLEX command arguments
+ * - writeCommandFile(): Generate CPLEX command script
+ * - readXmlVal(): Parse XML solution values
+ *
+ * @see Solver.hh for base interface
+ */
 
 #ifndef SOLVERCPLEX_HH
 #define SOLVERCPLEX_HH

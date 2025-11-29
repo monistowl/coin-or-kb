@@ -1,5 +1,15 @@
-// Copyright (C) Jan-Willem Goossens 
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file SonnetWrapper/CoinMessageHandler.h
+ * @brief .NET wrapper for CoinMessageHandler (logging)
+ *
+ * C++/CLI wrapper for COIN-OR logging infrastructure.
+ * CoinMessageHandlerProxy bridges .NET virtual methods to native callbacks.
+ * CoinOneMessage and CoinMessages for custom message definitions.
+ *
+ * @see CoinMpsIO.h for file I/O using message handler
+ */
 
 #pragma once
 

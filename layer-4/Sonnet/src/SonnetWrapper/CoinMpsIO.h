@@ -1,6 +1,16 @@
-// Copyright (C) Jan-Willem Goossens 
+// Copyright (C) Jan-Willem Goossens
 // All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file SonnetWrapper/CoinMpsIO.h
+ * @brief .NET wrapper for CoinMpsIO (MPS file I/O)
+ *
+ * C++/CLI wrapper for reading LP problems from MPS format files.
+ * Exposes row/column bounds, objective coefficients, and matrix data.
+ *
+ * @see CoinPackedMatrix.h for sparse matrix wrapper
+ * @see CoinMessageHandler.h for custom logging
+ */
 
 #pragma once
 

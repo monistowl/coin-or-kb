@@ -3,6 +3,16 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file bonmin/GamsMINLP.hpp
+ * @brief Bonmin TMINLP implementation for GAMS models
+ *
+ * GamsMINLP: Implements Bonmin::TMINLP using GMO for MINLP evaluation.
+ * Handles variable types, SOS constraints, and branching priorities.
+ *
+ * @see GamsBonmin.hpp for Bonmin driver
+ * @see GamsCouenne.hpp for Couenne MINLP solver
+ */
 
 #ifndef GAMSMINLP_HPP_
 #define GAMSMINLP_HPP_

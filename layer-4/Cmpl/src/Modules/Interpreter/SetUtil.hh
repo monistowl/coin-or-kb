@@ -27,7 +27,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/SetUtil.hh
+ * @brief Set manipulation utilities
+ *
+ * Static helper methods for set operations.
+ *
+ * **SetUtil Class:**
+ * - constructSet(): Build set from stack values
+ * - setOperation(): Union, intersection, difference
+ * - convertToSetOrTuple(): Type conversion
+ * - canonicalSet(): Normalize set representation
+ *
+ * @see CommonData/SetBase.hh for set types
+ * @see TupleUtil.hh for tuple operations
+ */
 
 #ifndef SETUTIL_HH
 #define SETUTIL_HH

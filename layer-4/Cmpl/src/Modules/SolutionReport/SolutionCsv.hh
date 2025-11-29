@@ -1,3 +1,17 @@
+/**
+ * @file Modules/SolutionReport/SolutionCsv.hh
+ * @brief CSV (comma-separated) solution output
+ *
+ * Writes solver results in CSV format for spreadsheets.
+ *
+ * **SolutionCsv Class:**
+ * - run(): Generate CSV solution report
+ * - solutionReport(): Format Solution to stream
+ * - writeVarValues()/writeConValues(): Format elements
+ *
+ * @see SolutionReport.hh for base interface
+ */
+
 #ifndef SOLUTIONCSV_HH
 #define SOLUTIONCSV_HH
 

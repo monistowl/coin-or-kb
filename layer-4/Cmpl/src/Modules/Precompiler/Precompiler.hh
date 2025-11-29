@@ -27,7 +27,30 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Precompiler/Precompiler.hh
+ * @brief CMPL input preprocessing
+ *
+ * Reads CMPL files, processes header commands (%include, %arg),
+ * and produces input for the Compiler module.
+ *
+ * **HeaderMode Enum:** No/Init/Include/Arg/Other/Error/Data
+ *
+ * **Precompiler Class:**
+ * - _inputFiles: Ordered input files/strings
+ * - _fileAlias: File name mapping
+ * - _scanner, _resStream: Flex scanner state
+ * - doScan(): Execute preprocessing scanner
+ * - headerStart()/headerEnd(): Process header lines
+ * - openIncludeFile()/closeIncludeFile(): Include stack
+ * - outDefLoc()/outStartPos(): Location tracking output
+ *
+ * **DataImportExtensionPar Class:**
+ * - InternalDataBase: Extension callback interface
+ * - runForData(): Execute external data import
+ *
+ * @see Compiler/Compiler.hh for output consumer
+ */
 
 #ifndef PRECOMPILER_HH
 #define PRECOMPILER_HH

@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/LinearConditionalMod.hh
+ * @brief Module for conditional constraint linearization
+ *
+ * Module interface for LinearConditional extension.
+ *
+ * **LinearConditionalMod Class:**
+ * - Extends LinearLogConMod
+ * - _nameCondVar/_nameCondCon: Naming configuration
+ * - create(): Factory for LinearConditional
+ *
+ * @see LinearConditional.hh for execution class
+ * @see LinearLogConMod.hh for base class
+ */
 
 #ifndef LINEARCONDITIONALMOD_HH
 #define LINEARCONDITIONALMOD_HH

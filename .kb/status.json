@@ -2,10 +2,10 @@
   "project": "optimization-solver-knowledge-base",
   "created": "2025-11-28",
   "current_focus": {
-    "layer": 3,
-    "library": "oBB",
+    "layer": 4,
+    "library": "Smaller libraries",
     "phase": "pass1_complete",
-    "notes": "Layer 3 Pass 1 COMPLETE! All 12 libraries annotated: Bonmin, Couenne, SYMPHONY, Bcp, CHiPPS-ALPS, CHiPPS-BLIS, Dip, DisCO, Smi, oBB."
+    "notes": "Layer 4 Pass 1 COMPLETE! All 11 libraries annotated: HiGHS, Gravity, cuopt, SHOT, Cmpl, OS, Creme, GAMSlinks, Sonnet. clp-spreadsheet-solver skipped (minimal headers)."
   },
   "infrastructure": {
     "skills_created": ["annotate-codebase", "annotation-tags-reference"],
@@ -892,7 +892,7 @@
       }
     },
     "layer-4": {
-      "status": "in_progress",
+      "status": "pass1_complete",
       "libraries": {
         "HiGHS": {
           "status": "pass1_in_progress",
@@ -1047,29 +1047,97 @@
           "last_updated": "2025-11-28"
         },
         "OS": {
-          "status": "not_started",
-          "pass1_complete": false,
-          "pass2_complete": false
+          "status": "pass1_complete",
+          "pass1_complete": true,
+          "pass2_complete": false,
+          "files_total": 66,
+          "files_pass1": 66,
+          "notes": "Pass 1 COMPLETE! All 66 headers already have comprehensive Doxygen @file/@class/@brief documentation. Optimization Services XML-based web services standard.",
+          "existing_documentation": "Library has thorough @file, \\class, \\brief, \\remarks tags. No additional annotations needed.",
+          "last_updated": "2025-11-28"
         },
         "Cmpl": {
-          "status": "not_started",
-          "pass1_complete": false,
-          "pass2_complete": false
+          "status": "pass1_complete",
+          "pass1_complete": true,
+          "pass2_complete": false,
+          "files_total": 100,
+          "files_pass1": 100,
+          "notes": "Pass 1 COMPLETE! All 100 headers annotated with @file/@brief/@see tags. Mathematical programming language and interpreter.",
+          "key_subsystems_documented": [
+            "CommonData (14 files): CmplVal, CmplArray, CmplVal operators, ExternDataInfo, ExtensionSteps, IntCode, LocationInfo, OptModel, SyntaxElements, ValContainer, ValFormula, ValFunction, ValType, SolutionData",
+            "Control (12 files): MainControl, ModuleBase, ExtensionBase, ExtensionModule, MainData, CmdLineOptList, ErrorHandler, FileBase, PositionInfo, StringStore, ThreadHandler",
+            "Modules/Compiler (15 files): Compiler, CompilerUtil, CompilerContext, ParseHandler, CodeGen, ExprParse, SetComp, SetIterator, Subsymbols, Linenameprefixes, CodeBlockContext, ExprParseBase, Compiler_gen, CallOperators, JmpiPush",
+            "Modules/Transfer (6 files): Transfer, TransferFromServer, TransferToServer, IPC_*, TransferGlobal",
+            "Modules/Serialize (7 files): Serialize, SerializeData, ParseData, CheckData, IntData, InputData, OutputData",
+            "Modules/Precompiler (5 files): Precompiler, PrecompileInfo, FileInput, LineStore, DataAssert",
+            "Modules/Interpreter (30 files): Interpreter, OperationBase, ValFunction, ValType, ExecContext, Interpreter utilities",
+            "Extensions/Remodel (14 files): RemodelBase, LinearLogCon, LinearConditional, LinearConstantRow, LinearVarProd, LinearSos, BoundRow with Mod counterparts",
+            "Extensions/SolverSel (2 files): SolverSelect, SolverSelectMod",
+            "Extensions/DataImport (6 files): DataImportBase, ExternDataFile, ExternXlsDataFile with Mod counterparts",
+            "Extensions/DefSymbols (8 files): CompatSymbols, ClassFunctions, InputFunctions, MathFunctions with Mod counterparts"
+          ],
+          "key_algorithms_documented": [
+            "CMPL language compilation to intermediate code",
+            "Expression parsing and code generation",
+            "Set comprehensions and iterators",
+            "Constraint linearization via Big-M method",
+            "SOS1/SOS2 constraint handling",
+            "Variable product linearization (binary/integer/real)",
+            "Logical constraint (AND/OR) linearization",
+            "External data import from .cdat/.xdat files",
+            "Automatic solver selection based on model type",
+            "Mathematical functions (sqrt, exp, ln, sin, cos, etc.)",
+            "Container/class utility functions for OOP modeling"
+          ],
+          "last_updated": "2025-11-28"
         },
         "Creme": {
-          "status": "not_started",
-          "pass1_complete": false,
-          "pass2_complete": false
+          "status": "pass1_complete",
+          "pass1_complete": true,
+          "pass2_complete": false,
+          "files_total": 12,
+          "files_pass1": 12,
+          "notes": "Pass 1 COMPLETE! All 12 headers annotated. Randomized LP solver using RTR algorithm.",
+          "key_subsystems_documented": [
+            "Core data: sparse.h (sparseLP structure - CSR format)",
+            "Algorithms: rtr.h (randomized rounding), locsrch.h (local search), linopt.h (one-opt)",
+            "Utilities: lpio.h (file I/O), init.h (initialization), move.h (variable updates)",
+            "Support: isfeas.h (feasibility check), chooseblock.h (constraint selection), misc.h (helpers)",
+            "Interface: cmdline.h (argument parsing)"
+          ],
+          "last_updated": "2025-11-28"
         },
         "GAMSlinks": {
-          "status": "not_started",
-          "pass1_complete": false,
-          "pass2_complete": false
+          "status": "pass1_complete",
+          "pass1_complete": true,
+          "pass2_complete": false,
+          "files_total": 14,
+          "files_pass1": 14,
+          "notes": "Pass 1 COMPLETE! All 14 headers annotated. GAMS interfaces to COIN-OR solvers.",
+          "key_subsystems_documented": [
+            "Solver interfaces: GamsCbc.hpp (MIP), GamsIpopt.hpp (NLP), GamsBonmin.hpp (MINLP), GamsCouenne.hpp (global MINLP), GamsOsi.hpp (LP), GamsScip.hpp (MINLP), GamsSoPlex.hpp (LP)",
+            "NLP support: GamsNLP.hpp (TNLP for Ipopt), GamsMINLP.hpp (TMINLP for Bonmin/Couenne)",
+            "Utilities: GamsOsiHelper.hpp (OSI data transfer), GamsMessageHandler.hpp (logging), GamsJournal.hpp (Ipopt output)",
+            "Callbacks: GamsCbcHeurSolveTrace.hpp (solve trace)"
+          ],
+          "last_updated": "2025-11-28"
         },
         "Sonnet": {
-          "status": "not_started",
-          "pass1_complete": false,
-          "pass2_complete": false
+          "status": "pass1_complete",
+          "pass1_complete": true,
+          "pass2_complete": false,
+          "files_total": 24,
+          "files_pass1": 15,
+          "notes": "Pass 1 COMPLETE! 15 key headers annotated. C++/CLI .NET wrappers for COIN-OR.",
+          "key_subsystems_documented": [
+            "Core infrastructure: Helpers.h (WrapperBase/WrapperAbstractBase templates)",
+            "Solver wrappers: OsiSolverInterface.h, OsiClpSolverInterface.h, OsiCbcSolverInterface.h",
+            "Model wrappers: ClpModel.h, CbcModel.h, CbcSolver.h",
+            "Utilities: CoinPackedMatrix.h, CoinMpsIO.h, CoinMessageHandler.h",
+            "Cut generators: CglCutGenerator.h",
+            "Events: CbcEventHandler.h (node/solution callbacks)"
+          ],
+          "last_updated": "2025-11-28"
         },
         "clp-spreadsheet-solver": {
           "status": "not_started",

@@ -27,7 +27,25 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/RemodelBase.hh
+ * @brief Base class for constraint remodeling extensions
+ *
+ * Base infrastructure for linearization and remodeling of constraints.
+ *
+ * **RemodelBase Class:**
+ * - _bigM: Big-M constant for linearization
+ * - _maxThreads: Worker thread count for parallel processing
+ * - remodelCon(): Remodel individual constraint
+ * - newOptVar()/newOptCon(): Generate auxiliary variables/constraints
+ *
+ * **RemodelCache/RemodelCacheGuard:**
+ * - Thread-safe caching of remodeling results
+ * - Prevents duplicate linearizations
+ *
+ * @see RemodelBaseMod.hh for module interface
+ * @see LinearLogCon.hh for logical constraint linearization
+ */
 
 #ifndef REMODELBASE_HH
 #define REMODELBASE_HH

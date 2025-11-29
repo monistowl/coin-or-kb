@@ -27,7 +27,23 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DefSymbols/MathFunctions.hh
+ * @brief Mathematical functions for CMPL
+ *
+ * Standard math library functions available in CMPL expressions.
+ *
+ * **MathFunctions Class:**
+ * - _namespace: Function namespace parts
+ * - countFunc(): Register math functions
+ *
+ * **MathFunctionRealToReal:** Base class for real->real functions
+ * **Function Classes:** sqrt, exp, ln, lg, ld, sin, cos, tan,
+ *   asin, acos, atan, sinh, cosh, tanh, abs, ceil, floor, round
+ *
+ * @see MathFunctionsMod.hh for module interface
+ * @see Modules/Interpreter/ValFunction.hh for function base
+ */
 
 #ifndef MATHFUNCTIONS_HH
 #define MATHFUNCTIONS_HH

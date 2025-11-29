@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/ValFunction.hh
+ * @brief CMPL function value types
+ *
+ * Represents callable function objects in CMPL runtime.
+ *
+ * **ValFunctionBase Class:** Base for all function values
+ * **ValFunctionCode Class:** User-defined code functions
+ * **ValFunctionInternal Class:** Built-in functions
+ * **ValFunctionAggr Class:** Aggregation functions (sum, min, max)
+ *
+ * @see ExecContext.hh for function invocation
+ * @see Extensions/DefSymbols/ for built-in implementations
+ */
 
 #ifndef VALFUNCTION_HH
 #define VALFUNCTION_HH

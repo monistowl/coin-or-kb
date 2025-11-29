@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DefSymbols/ClassFunctionsMod.hh
+ * @brief Module for OOP container functions
+ *
+ * Module interface for ClassFunctions extension.
+ *
+ * **ClassFunctionsMod Class:**
+ * - _namespace: Namespace for class.* functions
+ * - init(): Initialize module with namespace
+ * - run(): Create and register ClassFunctions extension
+ *
+ * @see ClassFunctions.hh for execution class
+ * @see Control/ExtensionModule.hh for base class
+ */
 
 #ifndef CLASSFUNCTIONSMOD_HH
 #define CLASSFUNCTIONSMOD_HH

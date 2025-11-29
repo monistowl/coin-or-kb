@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/ValType.hh
+ * @brief CMPL value type system
+ *
+ * Defines type objects for CMPL runtime type checking.
+ *
+ * **ValTypeBase Class:** Base for all type definitions
+ * **ValTypeInternal Class:** Built-in types (real, int, bin, etc.)
+ * **ValTypeUser Class:** User-defined types
+ * **ValTypeObjectType Class:** Object type specifiers (var, con, obj)
+ *
+ * @see CommonData/CmplVal.hh for TP_* constants
+ * @see Interpreter.hh for _dataTypes registry
+ */
 
 #ifndef VALTYPE_HH
 #define VALTYPE_HH

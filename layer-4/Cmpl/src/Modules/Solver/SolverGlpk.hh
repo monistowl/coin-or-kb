@@ -26,6 +26,19 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
+/**
+ * @file Modules/Solver/SolverGlpk.hh
+ * @brief GLPK (GNU Linear Programming Kit) solver integration
+ *
+ * Calls glpsol executable for LP/MIP optimization.
+ *
+ * **SolverGlpk Class:**
+ * - run(): Execute GLPK and parse results
+ * - readSolFile(): Parse GLPK solution format
+ * - generateCmdLine(): Build glpsol command arguments
+ *
+ * @see Solver.hh for base interface
+ */
 
 #ifndef SOLVERGLPK_HH
 #define SOLVERGLPK_HH

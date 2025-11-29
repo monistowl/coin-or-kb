@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/BoundRowMod.hh
+ * @brief Module for row-to-bound conversion
+ *
+ * Module interface for BoundRow extension.
+ *
+ * **BoundRowMod Class:**
+ * - _delAllBoundRow, _delUnnamedBoundRow: Configuration
+ * - useNameSep(): Returns false (no name separator)
+ * - create(): Factory for BoundRow
+ *
+ * @see BoundRow.hh for execution class
+ * @see RemodelBaseMod.hh for base class
+ */
 
 #ifndef BOUNDROWMOD_HH
 #define BOUNDROWMOD_HH

@@ -27,6 +27,28 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
+/**
+ * @file CommonData/Solution.hh
+ * @brief Solver solution results storage
+ *
+ * Holds solution from LP/MIP solver execution.
+ *
+ * **ModelElement Class:**
+ * - Variable or constraint metadata
+ * - name, type, lowerBound, upperBound
+ *
+ * **Solution Class:**
+ * - status(): Optimal, infeasible, unbounded, etc.
+ * - value(): Objective function value
+ * - variableValue()/activity(): Solution values
+ *
+ * **Multiple Solutions:**
+ * - Supports solution pool from MIP solvers
+ * - Each solution indexed separately
+ *
+ * @see OptModel.hh for problem definition
+ * @see Modules/Solver/ for solver integration
+ */
 
 #ifndef SOLUTION_HH
 #define SOLUTION_HH

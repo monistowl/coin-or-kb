@@ -27,7 +27,24 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DataImport/DataImportBase.hh
+ * @brief Base class for external data import extensions
+ *
+ * Framework for importing data from external sources into CMPL.
+ *
+ * **DataImportBase Class:**
+ * - _extSrcType: Data source type identifier
+ * - _handlePrio: Priority for handler selection
+ * - import(): Pure virtual import method
+ *
+ * **ErrorInfo/TxtWord:**
+ * - Utility structures for error handling and text parsing
+ * - scanWord(): Tokenize input with quote/bracket handling
+ *
+ * @see DataImportBaseMod.hh for module interface
+ * @see ExternDataFile.hh for CMPL data file import
+ */
 
 #ifndef DATAIMPORTBASE_HH
 #define DATAIMPORTBASE_HH

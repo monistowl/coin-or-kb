@@ -27,7 +27,29 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file CommonData/ValueTree.hh
+ * @brief Hierarchical tree for tuple-indexed value storage
+ *
+ * Stores optimization elements (vars/cons) by tuple index path.
+ *
+ * **ValueTreeElem Class:**
+ * - id(): Unique element identifier
+ * - setInValueTree(): Place element at tuple path
+ * - getIndexOfLevel(): Extract index at tree depth
+ *
+ * **ValueTree Class:**
+ * - _leafInt/_leafStr: Leaf elements by int/string
+ * - _subInt/_subStr: Subtrees for deeper nesting
+ *
+ * **ValueTreeRoot Class:**
+ * - _flat: Fast lookup by sequential id
+ * - _tree: Hierarchical lookup by tuple index
+ * - Thread-safe with mutex
+ *
+ * @see OptModel.hh for variable/constraint storage
+ * @see Tuple.hh for index path representation
+ */
 
 #ifndef VALUETREE_HH
 #define VALUETREE_HH

@@ -1,5 +1,15 @@
-// Copyright (C) Jan-Willem Goossens 
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file SonnetWrapper/OsiCbcSolverInterface.h
+ * @brief .NET wrapper for OsiCbcSolverInterface (CBC via OSI)
+ *
+ * C++/CLI wrapper exposing CBC MIP solver through OSI interface.
+ * Provides access to CbcModel for node count, strategy, and solution.
+ *
+ * @see CbcModel.h for CBC model wrapper
+ * @see OsiClpSolverInterface.h for CLP solver wrapper
+ */
 
 #pragma once
 

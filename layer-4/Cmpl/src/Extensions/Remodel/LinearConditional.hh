@@ -27,7 +27,23 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/LinearConditional.hh
+ * @brief Linearization of conditional constraints
+ *
+ * Converts conditional (if-then) constraints to linear form.
+ *
+ * **LinearConditional Class:**
+ * - Extends LinearLogCon for conditional handling
+ * - linearizeConditionalCond(): Main linearization entry
+ * - addConForValCond(): Add constraint for conditional variable
+ * - _nameCondVar/_nameCondCon: Naming for generated entities
+ *
+ * Handles CMPL conditional expressions like "x > 0 -> y >= 5".
+ *
+ * @see LinearLogCon.hh for base class
+ * @see ValFormulaCondOp for conditional formula type
+ */
 
 #ifndef LINEARCONDITIONAL_HH
 #define LINEARCONDITIONAL_HH

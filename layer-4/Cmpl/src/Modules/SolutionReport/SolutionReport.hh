@@ -1,3 +1,19 @@
+/**
+ * @file Modules/SolutionReport/SolutionReport.hh
+ * @brief Base class for solution output formatting
+ *
+ * Abstract interface for writing solver results.
+ *
+ * **SolutionReport Class:**
+ * - _ignoreZeros: Skip zero-value variables
+ * - _ignoreVars/_ignoreCons: Filter output
+ * - _displayVarList/_displayConList: Selection filters
+ * - _solutionPool: Handle multiple solutions
+ *
+ * @see SolutionAscii.hh, SolutionCsv.hh, SolutionXml.hh
+ * @see CommonData/Solution.hh for input data
+ */
+
 #ifndef SOLUTIONREPORT_HH
 #define SOLUTIONREPORT_HH
 

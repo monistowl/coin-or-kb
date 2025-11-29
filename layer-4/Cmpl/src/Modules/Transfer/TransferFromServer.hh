@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Transfer/TransferFromServer.hh
+ * @brief Server result retrieval for client
+ *
+ * Waits for and reads results from remote CMPL server.
+ *
+ * **TransferFromServer Class:**
+ * - _serverJobId: Job identification for matching results
+ * - run(): Execute result retrieval
+ * - waitForServerResult(): Poll/wait for completion
+ * - readDataFromServerCmpl(): Deserialize server response
+ *
+ * @see TransferToServer.hh for request initiation
+ */
 
 #ifndef TRANSFERFROMSERVER_HH
 #define TRANSFERFROMSERVER_HH

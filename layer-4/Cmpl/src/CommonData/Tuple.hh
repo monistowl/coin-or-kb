@@ -27,7 +27,29 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file CommonData/Tuple.hh
+ * @brief Multi-dimensional index tuples
+ *
+ * Tuples are used for array indexing and set iteration.
+ *
+ * **Tuple Class:**
+ * - rank(): Number of components
+ * - at(i): Access component by index
+ * - isIndexTuple(): All components are int/string
+ *
+ * **TupleType Enum:**
+ * - tupleIndexOnly: Pure index tuple (TP_ITUPLE)
+ * - tupleSetFinite: Convertible to finite set
+ * - tupleSetInf: Convertible to infinite set
+ *
+ * **Set Integration:**
+ * - hasIterSet(): Tuple comes from set iteration
+ * - concatIter(): Build tuple from multiple iterators
+ *
+ * @see SetIterator.hh for tuple generation
+ * @see SetBase.hh for tuple sets
+ */
 
 #ifndef TUPLE_HH
 #define TUPLE_HH

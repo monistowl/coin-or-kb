@@ -27,7 +27,25 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DataImport/ExternDataFile.hh
+ * @brief Import data from CMPL data files (.cdat)
+ *
+ * Read scalars, sets, and arrays from CMPL data format.
+ *
+ * **ExternDataFile Class:**
+ * - _cdatDefault, _readAll, _assArraySub: Configuration
+ * - import(): Read symbols from data file
+ * - readFileAllSymbols(): Batch read all symbols
+ *
+ * **ExternDataFileHandleOpt:** Command line option handler
+ * **ExternDataFileImport:** File parsing and value caching
+ * - ValueMode enum: scalar/set/array/indices
+ * - readSymbolValues(): Parse symbol from file
+ *
+ * @see DataImportBase.hh for base class
+ * @see ExternXlsDataFile.hh for Excel-originated data
+ */
 
 #ifndef EXTERNDATAFILE_HH
 #define EXTERNDATAFILE_HH

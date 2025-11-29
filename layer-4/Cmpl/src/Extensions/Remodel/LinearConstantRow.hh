@@ -27,7 +27,22 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/LinearConstantRow.hh
+ * @brief Handle constant constraint/objective rows
+ *
+ * Replace constant values in constraints/objectives with dummy rows.
+ *
+ * **LinearConstantRow Class:**
+ * - _delConstRow: Remove vs replace constant rows
+ * - _falseAsError: Error on infeasible constant constraints
+ * - linearizeObj(): Handle constant objective
+ * - linearizeCon(): Handle constant constraint
+ * - newConstOptVar(): Create fixed-value variable
+ *
+ * @see RemodelBase.hh for base class
+ * @see LinearConstantRowMod.hh for module interface
+ */
 
 #ifndef LINEARCONSTANTROW_HH
 #define LINEARCONSTANTROW_HH

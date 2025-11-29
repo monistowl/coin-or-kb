@@ -27,7 +27,31 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file CommonData/CmplArray.hh
+ * @brief Multi-dimensional array indexed by tuple sets
+ *
+ * Core data structure for CMPL array variables and parameters.
+ *
+ * **CmplArray Class:**
+ * - _defset: Definition set (valid index tuples)
+ * - _array: Values indexed by set position
+ * - _validSet: Subset with non-empty values
+ * - _objType: Object type of elements
+ *
+ * **Validity Tracking:**
+ * - allValid(): No empty elements
+ * - hasInvalid(): At least one empty
+ * - getValidSet(): Set of defined indices
+ *
+ * **CmplArrayIterator Class:**
+ * - Iterate over array with tuple indices
+ * - skipEmpty option for sparse arrays
+ * - CmplArrayIteratorRec for nested arrays
+ *
+ * @see SetBase.hh for definition set types
+ * @see Tuple.hh for index representation
+ */
 
 #ifndef CMPLARRAY_HH
 #define CMPLARRAY_HH

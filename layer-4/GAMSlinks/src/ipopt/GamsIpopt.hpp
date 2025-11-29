@@ -3,6 +3,20 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file ipopt/GamsIpopt.hpp
+ * @brief GAMS interface to Ipopt NLP solver
+ *
+ * Connects GAMS modeling environment to COIN-OR Ipopt.
+ *
+ * **GamsIpopt Class:**
+ * - ipopt: SmartPtr to IpoptApplication
+ * - nlp: GamsNLP problem representation
+ * - Warmstart support for sequential solves
+ *
+ * @see GamsNLP.hpp for NLP problem representation
+ * @see GamsJournal.hpp for message handling
+ */
 
 #ifndef GAMSIPOPT_HPP_
 #define GAMSIPOPT_HPP_

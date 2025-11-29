@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/LinearLogConMod.hh
+ * @brief Module for logical constraint linearization
+ *
+ * Module interface for LinearLogCon extension.
+ *
+ * **LinearLogConMod Class:**
+ * - _attachNameConAnd/Or: Naming postfixes for generated constraints
+ * - _attachNameVarOr: Naming for binary indicator variables
+ * - useBigM(): Returns true (uses Big-M method)
+ *
+ * @see LinearLogCon.hh for execution class
+ * @see RemodelBaseMod.hh for base class
+ */
 
 #ifndef LINEARLOGCONMOD_HH
 #define LINEARLOGCONMOD_HH

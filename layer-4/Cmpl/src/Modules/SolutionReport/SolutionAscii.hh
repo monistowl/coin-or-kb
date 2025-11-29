@@ -1,3 +1,17 @@
+/**
+ * @file Modules/SolutionReport/SolutionAscii.hh
+ * @brief Plain text solution output
+ *
+ * Writes solver results in human-readable text format.
+ *
+ * **SolutionAscii Class:**
+ * - run(): Generate ASCII solution report
+ * - solutionReport(): Format Solution to stream
+ * - writeVarValues()/writeConValues(): Format elements
+ *
+ * @see SolutionReport.hh for base interface
+ */
+
 #ifndef SOLUTIONASCII_HH
 #define SOLUTIONASCII_HH
 

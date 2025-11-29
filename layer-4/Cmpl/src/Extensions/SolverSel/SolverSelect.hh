@@ -27,7 +27,22 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/SolverSel/SolverSelect.hh
+ * @brief Automatic solver selection based on model properties
+ *
+ * Select solver and options based on optimization model characteristics.
+ *
+ * **SolverSelect Class:**
+ * - _configFile: Solver selection config file
+ * - ModelExtension enum: Condition/SOS/VarProd extensions
+ * - exec(): Process config file for solver choice
+ * - evalBoolExpr(): Evaluate model type conditions
+ * - getModelExtForType(): Match model to solver capabilities
+ *
+ * @see SolverSelectMod.hh for module interface
+ * @see Modules/Interpreter/OptModel.hh for model types
+ */
 
 #ifndef SOLVERSELECT_HH
 #define SOLVERSELECT_HH

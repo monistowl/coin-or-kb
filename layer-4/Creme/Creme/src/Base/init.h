@@ -4,7 +4,17 @@
  *
  * This code is published under the Eclipse Public License (EPL).
  * See http://www.eclipse.org/legal/epl-v10.html
+ */
+/**
+ * @file Base/init.h
+ * @brief Solution initialization for Creme randomized LP solver
  *
+ * init_x(): Initialize primal variable values.
+ * init_sat(): Initialize constraint satisfaction tracking (b-Ax, sat flags).
+ * calc_lhs(): Compute left-hand side of constraints (with SIMD pragmas).
+ *
+ * @see rtr.h for randomized rounding algorithm
+ * @see sparse.h for LP data structure
  */
 
 #ifndef INIT_H

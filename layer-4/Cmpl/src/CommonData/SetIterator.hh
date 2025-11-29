@@ -27,7 +27,29 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file CommonData/SetIterator.hh
+ * @brief Iterator for traversing finite tuple sets
+ *
+ * Iterates over set elements producing tuples.
+ *
+ * **SetIterator Class:**
+ * - begin()/end(): Standard iteration interface
+ * - curTuple(): Get current iteration element
+ * - useOrder/reverse: Iteration ordering options
+ *
+ * **ReturnMode Enum:**
+ * - iteratorTupleSimple: Scalar for rank-1 sets
+ * - iteratorTupleVal: Always return tuple value
+ * - iteratorTupleObjWithSet: Full tuple with set info
+ *
+ * **Hierarchical Iteration:**
+ * - _sub: Subiterator for nested sets (SetFinite)
+ * - _parent: Parent iterator reference
+ *
+ * @see SetBase.hh for set types
+ * @see Tuple.hh for iteration results
+ */
 
 #ifndef SETITERATOR_HH
 #define SETITERATOR_HH

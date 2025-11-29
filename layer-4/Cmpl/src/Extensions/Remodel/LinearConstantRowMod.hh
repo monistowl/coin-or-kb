@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/LinearConstantRowMod.hh
+ * @brief Module for constant row handling
+ *
+ * Module interface for LinearConstantRow extension.
+ *
+ * **LinearConstantRowMod Class:**
+ * - _delConstRow, _falseAsError: Configuration options
+ * - _attachNameVar: Naming for generated variables
+ * - create(): Factory for LinearConstantRow
+ *
+ * @see LinearConstantRow.hh for execution class
+ * @see RemodelBaseMod.hh for base class
+ */
 
 #ifndef LINEARCONSTANTROWMOD_HH
 #define LINEARCONSTANTROWMOD_HH

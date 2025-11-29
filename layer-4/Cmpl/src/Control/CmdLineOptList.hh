@@ -27,7 +27,30 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Control/CmdLineOptList.hh
+ * @brief Command-line option parsing and storage
+ *
+ * Parses and stores command-line options for module delivery.
+ *
+ * **SingleOption Class:**
+ * - _opt: Option name (without leading '-')
+ * - _neg: Whether negated (no-prefix)
+ * - _args: Argument strings
+ * - _prio: Priority for override handling
+ *
+ * **RegOption Struct:**
+ * - Registers options modules accept
+ * - minArgs/maxArgs: Argument count validation
+ * - handlePrio: Priority-based delivery
+ *
+ * **CmdLineOptList Class:**
+ * - fillFromMain(): Parse argc/argv
+ * - addOption()/delOption(): Modify list
+ * - iterOptions(): Deliver to modules
+ *
+ * @see ModuleBase.hh for option registration
+ */
 
 #ifndef CMDLINEOPTLIST_HH
 #define CMDLINEOPTLIST_HH

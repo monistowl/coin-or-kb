@@ -26,7 +26,28 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Control/FileBase.hh
+ * @brief File I/O abstraction for input/output streams
+ *
+ * Unified handling of files, strings, and standard streams.
+ *
+ * **IO_MODE_* Constants:**
+ * - STD_IO(1): stdin/stdout
+ * - STD_CERR(2): stderr output
+ * - STRING(3): In-memory string
+ * - FILE(4): Filesystem file
+ *
+ * **FileBase Class:**
+ * - _mode, _fileName, _ioString: I/O configuration
+ * - fileNameReplaced(): "{}" -> base name substitution
+ *
+ * **FileOutput/FileInput Classes:**
+ * - open()/close(): Stream lifecycle
+ * - setFile(): Configure from options
+ *
+ * @see LocationInfo.hh for source tracking
+ */
 
 #ifndef FILEBASE_HH
 #define FILEBASE_HH

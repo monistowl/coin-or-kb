@@ -27,7 +27,32 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Control/MainData.hh
+ * @brief Shared data container for inter-module communication
+ *
+ * Central data storage passed between processing modules.
+ *
+ * **MainData Class:**
+ * - setData()/data(): Store/retrieve named data objects
+ * - globStrings(): Global string store
+ * - globLocs(): Location info registry
+ *
+ * **DataBase (Inner Class):**
+ * - Abstract base for storable data objects
+ * - serializeTo()/deserializeFrom(): Persistence
+ * - cleanUp(): Resource cleanup
+ *
+ * **SerializeInfo Struct:**
+ * - Context for data serialization
+ * - Client/server transfer support
+ *
+ * **Access Macros:**
+ * - GET_DATA/SET_DATA: Type-safe data access
+ * - GET_NEW_DATA: Create if not exists
+ *
+ * @see CommonData/ for concrete DataBase implementations
+ */
 
 #ifndef MAINDATA_HH
 #define MAINDATA_HH

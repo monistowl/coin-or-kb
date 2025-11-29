@@ -27,7 +27,19 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DefSymbols/CompatSymbolsMod.hh
+ * @brief Module for backward compatibility symbols
+ *
+ * Module interface for CompatSymbols extension.
+ *
+ * **CompatSymbolsMod Class:**
+ * - run(): Create and register CompatSymbols extension
+ * - createFromSerialization(): Deserialize extension
+ *
+ * @see CompatSymbols.hh for execution class
+ * @see Control/ExtensionModule.hh for base class
+ */
 
 #ifndef COMPATSYMBOLSMOD_HH
 #define COMPATSYMBOLSMOD_HH

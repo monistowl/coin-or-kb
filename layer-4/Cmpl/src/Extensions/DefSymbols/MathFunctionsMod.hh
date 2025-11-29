@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DefSymbols/MathFunctionsMod.hh
+ * @brief Module for mathematical functions
+ *
+ * Module interface for MathFunctions extension.
+ *
+ * **MathFunctionsMod Class:**
+ * - _namespace: Namespace for math functions
+ * - run(): Create and register MathFunctions extension
+ * - regModOptions(): Register namespace options
+ *
+ * @see MathFunctions.hh for execution class
+ * @see Control/ExtensionModule.hh for base class
+ */
 
 #ifndef MATHFUNCTIONSMOD_HH
 #define MATHFUNCTIONSMOD_HH

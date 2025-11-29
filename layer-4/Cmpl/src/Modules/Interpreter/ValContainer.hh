@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/ValContainer.hh
+ * @brief CMPL container value types
+ *
+ * Represents structured data containers (arrays with subsymbols).
+ *
+ * **ValContainer Class:**
+ * - _symbols: Subsymbol value storage
+ * - _names: Subsymbol name mapping
+ * - getElement()/setElement(): Access subsymbols
+ *
+ * @see ValueStore.hh for underlying storage
+ * @see StackValue.hh for container references
+ */
 
 #ifndef VALCONTAINER_HH
 #define VALCONTAINER_HH

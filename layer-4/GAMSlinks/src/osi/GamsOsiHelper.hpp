@@ -3,6 +3,15 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file osi/GamsOsiHelper.hpp
+ * @brief GAMS-OSI data transfer utilities
+ *
+ * Helper functions for loading LP problems from GMO to OSI,
+ * storing solutions from OSI to GMO, and writing problem files.
+ *
+ * @see GamsOsi.hpp for OSI-based solver driver
+ */
 
 #ifndef GAMSOSIHELPER_HPP_
 #define GAMSOSIHELPER_HPP_

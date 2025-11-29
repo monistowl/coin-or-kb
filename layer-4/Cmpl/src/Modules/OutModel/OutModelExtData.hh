@@ -27,7 +27,23 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/OutModel/OutModelExtData.hh
+ * @brief Extension data interface for model output
+ *
+ * Data transfer from extensions to output modules.
+ *
+ * **OutModelExtDataBase Class:**
+ * - Info struct: typeKey, rows, error handling
+ * - getInfo(): Collect extension data from modules
+ *
+ * **OutModelExtDataSOS1/SOS2 Classes:**
+ * - getData(): Retrieve SOS variable sets
+ * - Key constants: SOS1Key(101), SOS2Key(102)
+ *
+ * @see Extensions/ for data providers
+ * @see OutModelMps.hh for data consumers
+ */
 
 #ifndef OUTMODELEXTDATA_HH
 #define OUTMODELEXTDATA_HH

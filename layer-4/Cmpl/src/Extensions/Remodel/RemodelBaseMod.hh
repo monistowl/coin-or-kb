@@ -27,7 +27,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/RemodelBaseMod.hh
+ * @brief Base module for remodeling extensions
+ *
+ * Module interface for constraint linearization extensions.
+ *
+ * **RemodelBaseMod Class:**
+ * - _bigM, _maxThreads: Shared configuration options
+ * - _namePref, _nameSep: Naming for generated entities
+ * - create(): Factory method for remodel extension
+ * - regExtOptions(): Register command line options
+ *
+ * @see RemodelBase.hh for execution class
+ * @see Control/ExtensionModule.hh for base class
+ */
 
 #ifndef REMODELBASEMOD_HH
 #define REMODELBASEMOD_HH

@@ -27,7 +27,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DataImport/DataImportBaseMod.hh
+ * @brief Base module for data import extensions
+ *
+ * Module interface for data import extensions.
+ *
+ * **DataImportBaseMod Class:**
+ * - _extSrcType, _handlePrio: Source type and priority
+ * - _regPrecompiler/_regInterpreter: Registration flags
+ * - createExecObj(): Factory method (pure virtual)
+ * - defaultSrcType(): Default source type (pure virtual)
+ *
+ * @see DataImportBase.hh for execution class
+ * @see Control/ExtensionModule.hh for base class
+ */
 
 #ifndef DATAIMPORTBASEMOD_HH
 #define DATAIMPORTBASEMOD_HH

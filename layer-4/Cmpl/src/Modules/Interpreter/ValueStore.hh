@@ -27,7 +27,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/ValueStore.hh
+ * @brief Symbol value storage
+ *
+ * Storage for symbol values during interpretation.
+ *
+ * **SymbolValue Class:** Container for symbol values with assertions
+ * **ValueStore Class:** Value storage with indexing
+ * **ValueTree Class:** Tree structure for subsymbols
+ * **ValueAssertion Class:** Type/range constraints on values
+ * **VSChangeInfo Class:** Change tracking for rollback
+ *
+ * @see ExecContext.hh for value manipulation
+ * @see StackValue.hh for stack representation
+ */
 
 #ifndef VALUESTORE_HH
 #define VALUESTORE_HH

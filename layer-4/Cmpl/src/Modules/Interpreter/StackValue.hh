@@ -27,7 +27,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/StackValue.hh
+ * @brief Computation stack value representation
+ *
+ * Wraps CmplVal for stack operations with additional context.
+ *
+ * **StackValue Class:**
+ * - _val: Primary value (scalar/array/symbol/list)
+ * - _addVal: Additional context (index set, container, count)
+ * - getSimpleValue(): Get dereferenced scalar
+ * - toList(): Convert to list representation
+ *
+ * @see ExecContext.hh for stack usage
+ * @see CommonData/CmplVal.hh for value types
+ */
 
 #ifndef STACKVALUE_HH
 #define STACKVALUE_HH

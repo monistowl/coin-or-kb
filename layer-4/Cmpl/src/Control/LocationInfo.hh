@@ -27,7 +27,29 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Control/LocationInfo.hh
+ * @brief Source position and location tracking for errors
+ *
+ * Tracks file/line/column for error reporting.
+ *
+ * **POSITION_TYPE_* Constants:**
+ * - FILE(0): File with line/column
+ * - STREAM(1), STRING(2): Other input sources
+ * - DESCR(4): Description only
+ * - FIXLOC(5): Fixed reference location
+ *
+ * **PositionInfo Class:**
+ * - _name, _line, _col: Position coordinates
+ * - _inLoc: Nested include location
+ * - addLines()/addCols(): Position arithmetic
+ *
+ * **LocationInfo Class:**
+ * - _begin, _end: Span positions
+ * - step()/columns()/lines(): Span manipulation
+ *
+ * @see ErrorHandler.hh for error reporting
+ */
 
 #ifndef LOCATIONINFO_HH
 #define LOCATIONINFO_HH

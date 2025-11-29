@@ -1,3 +1,17 @@
+/**
+ * @file Modules/SolutionReport/SolutionXml.hh
+ * @brief XML (CmplSolution) solution output
+ *
+ * Writes solver results in CMPL XML format.
+ *
+ * **SolutionXml Class:**
+ * - run(): Generate XML solution report
+ * - solutionReport(): Format Solution to stream
+ * - writeVarValues()/writeConValues(): Format elements
+ *
+ * @see SolutionReport.hh for base interface
+ */
+
 #ifndef SOLUTIONXML_HH
 #define SOLUTIONXML_HH
 

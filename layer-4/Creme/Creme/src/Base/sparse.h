@@ -6,6 +6,16 @@
  * This code is published under the Eclipse Public License (EPL).
  * See http://www.eclipse.org/legal/epl-v10.html
  */
+/**
+ * @file Base/sparse.h
+ * @brief Sparse LP data structures for Creme solver
+ *
+ * Core data structure (sparseLP) for randomized LP solving.
+ * Stores constraint matrix in sparse row format with bounds.
+ *
+ * @see linopt.h for one-opt local search
+ * @see rtr.h for randomized rounding
+ */
 
 #ifndef SPARSE_H
 #define SPARSE_H

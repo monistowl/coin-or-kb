@@ -3,6 +3,13 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file soplex/GamsSoPlex.hpp
+ * @brief GAMS interface to SoPlex LP solver
+ *
+ * Connects GAMS modeling environment to the ZIB SoPlex
+ * simplex-based LP solver.
+ */
 
 #ifndef GAMSSOPLEX_HPP_
 #define GAMSSOPLEX_HPP_

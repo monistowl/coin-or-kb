@@ -27,7 +27,25 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/LinearSos.hh
+ * @brief SOS1/SOS2 constraint handling and linearization
+ *
+ * Special Ordered Sets definition and optional linearization.
+ *
+ * **LinearSos Class:**
+ * - _storeSos: Storage for SOS definitions
+ * - remodelSOS(): Linearize SOS constraint
+ * - linearizeSOSCount(): Enforce at-most-one nonzero
+ * - linearizeSOS2Order(): Enforce consecutive nonzeros (SOS2)
+ *
+ * **SOSStore:** Variable list and metadata for one SOS
+ * **SosFunction:** CMPL function for SOS creation
+ * **SosContFunction*:** Container methods (name, add, as_var, as_string)
+ *
+ * @see RemodelBase.hh for base class
+ * @see OutModelExtDataSOS1/SOS2 for model output
+ */
 
 #ifndef LINEARSOS_HH
 #define LINEARSOS_HH

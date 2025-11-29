@@ -26,7 +26,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Solver/SolverGurobi.hh
+ * @brief Gurobi solver integration
+ *
+ * Calls Gurobi executable for LP/MIP optimization.
+ *
+ * **SolverGurobi Class:**
+ * - run(): Execute Gurobi and parse results
+ * - readSolFile(): Parse Gurobi XML solution format
+ * - generateCmdLine(): Build Gurobi command arguments
+ * - readXmlVal(): Parse XML solution values
+ *
+ * @see Solver.hh for base interface
+ */
 
 #ifndef SOLVERGUROBI_HH
 #define SOLVERGUROBI_HH

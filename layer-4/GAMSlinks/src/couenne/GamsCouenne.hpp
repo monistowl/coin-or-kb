@@ -3,6 +3,13 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file couenne/GamsCouenne.hpp
+ * @brief GAMS interface to Couenne global optimizer
+ *
+ * Connects GAMS to COIN-OR Couenne for global optimization of
+ * non-convex MINLP problems via spatial branch-and-bound.
+ */
 
 #ifndef GAMSCOUENNE_HPP_
 #define GAMSCOUENNE_HPP_

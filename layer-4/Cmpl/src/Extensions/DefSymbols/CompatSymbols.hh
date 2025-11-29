@@ -27,7 +27,19 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DefSymbols/CompatSymbols.hh
+ * @brief Backward compatibility symbol definitions
+ *
+ * Extension to define legacy symbols for CMPL compatibility.
+ *
+ * **CompatSymbols Class:**
+ * - run(): Register compatibility symbols with compiler
+ * - Provides aliases for deprecated syntax
+ *
+ * @see CompatSymbolsMod.hh for module interface
+ * @see Control/ExtensionBase.hh for base class
+ */
 
 #ifndef COMPATSYMBOLS_HH
 #define COMPATSYMBOLS_HH

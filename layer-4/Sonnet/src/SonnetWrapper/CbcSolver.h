@@ -1,5 +1,15 @@
-// Copyright (C) Jan-Willem Goossens 
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file SonnetWrapper/CbcSolver.h
+ * @brief .NET wrapper for CBC solver entry points (CbcMain0/CbcMain1)
+ *
+ * C++/CLI wrapper for CBC solver with callback support.
+ * CbcSolverCallBack delegate for monitoring solve phases.
+ *
+ * @see CbcModel.h for model wrapper
+ * @see CbcEventHandler.h for event handling
+ */
 
 #pragma once
 

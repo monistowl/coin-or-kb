@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/ValSpecial.hh
+ * @brief Special pseudo-symbol values
+ *
+ * Runtime values for special CMPL pseudo-symbols.
+ *
+ * **ValSpecialBase Class:** Base for pseudo-symbol values
+ * **ValSpecialVarByName/No Class:** Variable lookup by name/number
+ * **ValSpecialConByName/No Class:** Constraint lookup by name/number
+ * **ValSpecialCurTuple Class:** Current iteration tuple
+ *
+ * @see Compiler/PredefSymbols.hh for pseudo-symbol definitions
+ * @see ExecContext.hh for special value resolution
+ */
 
 #ifndef VALSPECIAL_HH
 #define VALSPECIAL_HH

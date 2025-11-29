@@ -27,7 +27,32 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file CommonData/OptModel.hh
+ * @brief Optimization model with variables and constraints
+ *
+ * Holds the mathematical programming model built from CMPL source.
+ *
+ * **OptModel Class:**
+ * - cols(): Variables (optimization columns)
+ * - rows(): Constraints and objectives (optimization rows)
+ * - getColModel()/getRowModel(): Export as LinearModel
+ *
+ * **LinearModel/QLinearModel Classes:**
+ * - Column or row-oriented coefficient storage
+ * - Used for MPS/LP file output
+ *
+ * **OptVar Class:**
+ * - Optimization variable with type, bounds
+ * - intVar(): Is integer/binary variable
+ *
+ * **OptCon Class:**
+ * - Constraint or objective formula
+ * - linearConstraint(): Check if linear
+ *
+ * @see CmplVal.hh for value representation
+ * @see ValFormula.hh for constraint formulas
+ */
 
 #ifndef OPTMODEL_HH
 #define OPTMODEL_HH

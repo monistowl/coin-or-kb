@@ -26,6 +26,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
+/**
+ * @file Modules/Solver/SolverScip.hh
+ * @brief SCIP solver integration
+ *
+ * Calls SCIP executable for LP/MIP/MINLP optimization.
+ *
+ * **SolverScip Class:**
+ * - run(): Execute SCIP and parse results
+ * - readSolFile(): Parse SCIP solution format
+ * - generateCmdLine(): Build SCIP command arguments
+ * - writeOptFile(): Generate SCIP settings file
+ *
+ * @see Solver.hh for base interface
+ */
 
 #ifndef SOLVERSCIP_HH
 #define SOLVERSCIP_HH

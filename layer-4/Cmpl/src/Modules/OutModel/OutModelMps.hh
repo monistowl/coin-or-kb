@@ -27,7 +27,23 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/OutModel/OutModelMps.hh
+ * @brief MPS format model output
+ *
+ * Writes optimization model in MPS file format.
+ *
+ * **FormatExtension Enum:**
+ * - Cplex, Gurobi, Scip, HiGHS: Solver-specific MPS variants
+ *
+ * **OutModelMps Class:**
+ * - _standardMps/_freeMps: Output file handles
+ * - writeModel(): Generate MPS content
+ * - writeQuadratics(): QP extension sections
+ * - writeSos(): SOS extension sections
+ *
+ * @see CommonData/OptModel.hh for model data
+ */
 
 #ifndef OUTMODELMPS_HH
 #define OUTMODELMPS_HH

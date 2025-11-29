@@ -27,7 +27,25 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Control/ModulesConf.hh
+ * @brief Module configuration and factory for CMPL pipeline
+ *
+ * Reads module configuration and constructs module instances.
+ *
+ * **MODULE_CONF_ORDER_* Constants:**
+ * - PREP(10) -> PARSE(30) -> EXEC(40) -> LIN(50) -> OPT(70)
+ * - Solver-specific: CBC(200), GLPK(201), CPLEX(202), etc.
+ *
+ * **ModulesConf Class:**
+ * - _modules: Map name -> constructor function
+ * - _modAggr: Module aggregation definitions
+ * - constructModule(): Factory method
+ * - parseCmdLineOptModule(): Parse -m options
+ *
+ * @see MainControl.hh for module execution
+ * @see ModuleBase.hh for module interface
+ */
 
 #ifndef MODULESCONF_HH
 #define MODULESCONF_HH

@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DataImport/ExternXlsDataFileMod.hh
+ * @brief Module for Excel-originated data file import
+ *
+ * Module interface for ExternXlsDataFile extension.
+ *
+ * **ExternXlsDataFileMod Class:**
+ * - createExecObj(): Factory for ExternXlsDataFile
+ * - defaultSrcType(): Returns 2 (Excel data file)
+ * - regExtOptions(): Register extension options
+ *
+ * @see ExternXlsDataFile.hh for execution class
+ * @see DataImportBaseMod.hh for base class
+ */
 
 #ifndef EXTERNXLSDATAFILEMOD_HH
 #define EXTERNXLSDATAFILEMOD_HH

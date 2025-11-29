@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/SolverSel/SolverSelectMod.hh
+ * @brief Module for automatic solver selection
+ *
+ * Module interface for SolverSelect extension.
+ *
+ * **SolverSelectMod Class:**
+ * - defaultConfigFile(): Default config "solversel.opt"
+ * - regExtOptions(): Register command line options
+ * - createFromSerialization(): Factory for SolverSelect
+ *
+ * @see SolverSelect.hh for execution class
+ * @see Control/ExtensionModule.hh for base class
+ */
 
 #ifndef SOLVERSELECTMOD_HH
 #define SOLVERSELECTMOD_HH

@@ -3,6 +3,16 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file osi/GamsMessageHandler.hpp
+ * @brief CoinMessageHandler implementation for GAMS output
+ *
+ * Routes COIN-OR messages through GAMS environment (gev) logging.
+ * Thread-safe via shared mutex for concurrent solver access.
+ *
+ * @see GamsOsi.hpp for OSI solver integration
+ * @see GamsOsiHelper.hpp for problem loading utilities
+ */
 
 #ifndef GAMSMESSAGEHANDLER_HPP_
 #define GAMSMESSAGEHANDLER_HPP_

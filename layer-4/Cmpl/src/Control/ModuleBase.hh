@@ -27,7 +27,28 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Control/ModuleBase.hh
+ * @brief Abstract base class for CMPL processing modules
+ *
+ * Defines the module interface for the pipeline architecture.
+ *
+ * **ModuleBase Class:**
+ * - init(): Initialize with MainControl and data
+ * - run(): Execute module functionality (abstract)
+ * - regModOptions()/parseOption(): Command-line handling
+ *
+ * **Command Line Parsing:**
+ * - CMDLINE_OPT_PARSE_*: Parsing step constants
+ * - REG_CMDL_OPTION macro: Register options
+ *
+ * **Module Registration Macros:**
+ * - MODULE_CLASS_REG: Register in modules.reg
+ * - MODULE_CLASS: Define module constructor
+ *
+ * @see MainControl.hh for module orchestration
+ * @see Modules/ for concrete implementations
+ */
 
 #ifndef MODULEBASE_HH
 #define MODULEBASE_HH

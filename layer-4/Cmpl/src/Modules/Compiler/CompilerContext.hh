@@ -27,7 +27,29 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Compiler/CompilerContext.hh
+ * @brief Parser context and intermediary code generation
+ *
+ * Holds state for flex/bison parser and generates intermediary code.
+ *
+ * **CompilerContext Class:**
+ * - _scanner: Flex scanner context
+ * - _syntaxStructure: AST root element
+ * - _parseScopes: Nested scope stack
+ * - _symbols, _subSymbols: Symbol tables
+ * - parse(): Execute flex/bison parser
+ * - compCmd()/compArg(): Generate IcElem code
+ * - searchInsertSymbol(): Symbol table lookup/insert
+ * - startParseScope()/endParseScope(): Scope management
+ *
+ * **Macros:**
+ * - EXPSTR: Semantic type expression struct
+ * - YY_DECL: Scanner function prototype
+ *
+ * @see CompilerUtil.hh for helper classes
+ * @see _CMPL_Parser.hh for generated parser
+ */
 
 #ifndef COMPILERCONTEXT_HH
 #define COMPILERCONTEXT_HH

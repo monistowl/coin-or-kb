@@ -1,6 +1,17 @@
-// Copyright (C) Jan-Willem Goossens 
+// Copyright (C) Jan-Willem Goossens
 // All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file SonnetWrapper/CbcEventHandler.h
+ * @brief .NET wrapper for CBC event handling
+ *
+ * CbcEvent enum (node, solution, treeStatus, endSearch, etc.) and
+ * CbcAction enum (noAction, stop, restart, killSolution).
+ * CbcDelegateEventHandlerProxy bridges .NET delegates to native callbacks.
+ *
+ * @see CbcModel.h for model wrapper
+ * @see CbcSolver.h for solver entry points
+ */
 
 #pragma once
 

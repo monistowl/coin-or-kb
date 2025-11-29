@@ -27,7 +27,24 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Serialize/Serialize.hh
+ * @brief CMPL data serialization/deserialization
+ *
+ * Writes/reads CMPL data objects to/from files for persistence
+ * and client-server transfer.
+ *
+ * **Serialize Class:**
+ * - _fileTo, _fileFrom: Serialization file names
+ * - _ioCmdLineOpts, _ioModules, _ioExtensions: Content flags
+ * - _ioToServer, _ioFromServer: Transfer mode flags
+ * - _ioDataClasses, _ioDataNoClasses: Class filters
+ * - serializeTo()/deserializeFrom(): Stream I/O
+ * - ioDataSerialize(): Check if data should be serialized
+ *
+ * @see Control/MainData.hh for SerializeInfo
+ * @see Transfer/ for client-server usage
+ */
 
 #ifndef SERIALIZE_HH
 #define SERIALIZE_HH

@@ -27,7 +27,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/CodeBlockContext.hh
+ * @brief Codeblock execution context
+ *
+ * Manages state for codeblock iterations and threading.
+ *
+ * **CodeBlockContext Class:** Main codeblock context
+ * **CodeBlockHeaderBase Class:** Header iteration base
+ * **CBAssignInfoBasis/Tuple Class:** Assignment tracking
+ * **CodeBlockIteration Class:** Single iteration state
+ * **CBThreadInfo Class:** Thread-local iteration data
+ *
+ * @see ExecContext.hh for codeblock execution
+ * @see Control/ThreadHandler.hh for threading
+ */
 
 #ifndef CODEBLOCKCONTEXT_HH
 #define CODEBLOCKCONTEXT_HH

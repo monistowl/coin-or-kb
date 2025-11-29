@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DataImport/ExternXlsDataFile.hh
+ * @brief Import data from Excel-originated CMPL data files
+ *
+ * Extension for .xdat files (Excel export to CMPL format).
+ *
+ * **ExternXlsDataFile Class:**
+ * - Extends ExternDataFile with Excel-specific handling
+ * - cdatStandard(): Returns IO_FILE_STANDARD_XDAT
+ * - readFileAllSymbols(): Overridden for Excel format
+ *
+ * @see ExternDataFile.hh for base class
+ * @see ExternXlsDataFileMod.hh for module interface
+ */
 
 #ifndef EXTERNXLSDATAFILE_HH
 #define EXTERNXLSDATAFILE_HH

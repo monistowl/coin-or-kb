@@ -27,7 +27,24 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/OperationBase.hh
+ * @brief Base class for formula operations
+ *
+ * Implements arithmetic and logical operations for formula values.
+ *
+ * **MatrixMultMode Enum:** None/RowCol/ColRow/RowMatrix/MatrixCol/MatrixMatrix
+ *
+ * **OperationBase Class:**
+ * - Static methods for binary/unary operations
+ * - execBinaryOper(): Execute +, -, *, /, etc.
+ * - execCompOper(): Execute <, <=, ==, !=, etc.
+ * - execLogOper(): Execute and, or, not
+ * - Matrix multiplication detection and execution
+ *
+ * @see CommonData/ValFormula.hh for formula types
+ * @see ExecContext.hh for operation invocation
+ */
 
 #ifndef VALFORMULABASE_HH
 #define VALFORMULABASE_HH

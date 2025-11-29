@@ -27,7 +27,26 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/ExecContext.hh
+ * @brief Execution context for intermediary code
+ *
+ * Holds runtime state during code interpretation.
+ *
+ * **ExecContext Class:**
+ * - _stack: Operand/result stack
+ * - _callStack: Function call stack
+ * - _cbContextStack: Codeblock context stack
+ * - _curTuple: Current iteration tuple
+ * - run(): Main execution loop
+ * - opXxx(): Opcode implementation methods
+ * - pushVal()/popVal(): Stack manipulation
+ *
+ * **CBContextNmPref Struct:** Codeblock context with name prefix
+ *
+ * @see Interpreter.hh for module interface
+ * @see CodeBlockContext.hh for codeblock state
+ */
 
 #ifndef EXECCONTEXT_HH
 #define EXECCONTEXT_HH

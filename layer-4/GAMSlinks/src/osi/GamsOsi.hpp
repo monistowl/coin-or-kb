@@ -3,6 +3,15 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file osi/GamsOsi.hpp
+ * @brief GAMS interface to OSI-compatible solvers
+ *
+ * Connects GAMS to commercial solvers (CPLEX, Gurobi, Mosek, Xpress)
+ * via the COIN-OR Open Solver Interface.
+ *
+ * @see GamsOsiHelper.hpp, GamsMessageHandler.hpp
+ */
 
 #ifndef GAMSOSI_HPP_
 #define GAMSOSI_HPP_

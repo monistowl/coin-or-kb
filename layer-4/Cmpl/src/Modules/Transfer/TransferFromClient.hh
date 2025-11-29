@@ -27,7 +27,19 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Transfer/TransferFromClient.hh
+ * @brief Server initialization from client data
+ *
+ * Runs on server to receive and initialize with client data.
+ *
+ * **TransferFromClient Class:**
+ * - _dataFile: Input file with client data
+ * - run(): Execute data reception
+ * - readDataFromClientCmpl(): Deserialize client request
+ *
+ * @see TransferToClient.hh for result sending
+ */
 
 #ifndef TRANSFERFROMCLIENT_HH
 #define TRANSFERFROMCLIENT_HH

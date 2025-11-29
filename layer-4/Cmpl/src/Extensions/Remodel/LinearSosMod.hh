@@ -27,7 +27,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/LinearSosMod.hh
+ * @brief Module for SOS constraint handling
+ *
+ * Module interface for LinearSos extension.
+ *
+ * **LinearSosMod Class:**
+ * - SosType enum: none/SOS1 only/SOS2 only/both
+ * - _useForSos: SOS type configuration
+ * - _attachNameVarSos/ConSos: Naming postfixes
+ * - create(): Factory for LinearSos
+ *
+ * @see LinearSos.hh for execution class
+ * @see RemodelBaseMod.hh for base class
+ */
 
 #ifndef LINEARSOSMOD_HH
 #define LINEARSOSMOD_HH

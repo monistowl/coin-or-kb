@@ -27,7 +27,22 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Compiler/Compiler.hh
+ * @brief CMPL parser driver module
+ *
+ * Entry point for parsing CMPL source into intermediary code.
+ *
+ * **Compiler Class:**
+ * - _inputFile, _externFile: Source inputs
+ * - _checkOnly, _allowNewPublic, _allowNewConst: Parse mode flags
+ * - _compatLineNamePref, _compatCBSymbols: Backward compatibility
+ * - run(): Execute parser and generate intermediary code
+ * - error(): Multi-signature error reporting
+ *
+ * @see CompilerContext.hh for parser context
+ * @see CommonData/IntCode.hh for output format
+ */
 
 #ifndef COMPILER_HH
 #define COMPILER_HH

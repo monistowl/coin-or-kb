@@ -3,6 +3,16 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file ipopt/GamsJournal.hpp
+ * @brief Ipopt Journal implementation for GAMS output
+ *
+ * Routes Ipopt logging through GAMS environment (gev) routines.
+ * Supports configurable status file output levels.
+ *
+ * @see GamsIpopt.hpp for main GAMS-Ipopt interface
+ * @see GamsNLP.hpp for NLP problem formulation
+ */
 
 #ifndef GAMSJOURNAL_HPP_
 #define GAMSJOURNAL_HPP_

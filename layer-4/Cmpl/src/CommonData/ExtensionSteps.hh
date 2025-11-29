@@ -27,7 +27,26 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file CommonData/ExtensionSteps.hh
+ * @brief Extension registration hooks for CMPL modules
+ *
+ * Defines step IDs where extensions can register callbacks.
+ *
+ * **Precompiler Steps (100-199):**
+ * - EXT_CMDLOPT_PRECOMP_SIMPLE: Command-line option pass-through
+ * - EXT_CMDLOPT_PRECOMP_PROC_DATA: External data import
+ *
+ * **Compiler Steps (200-299):**
+ * - EXT_STEP_COMPILE_PREDEF_SYMBOLS: Register predefined symbols
+ *
+ * **Interpreter Steps (300-399):**
+ * - EXT_STEP_INTERPRET_EXTDATA_IMPORT: Data import execution
+ * - EXT_STEP_INTERPRET_REMODEL: Linearization/remodeling
+ * - EXT_STEP_INTERPRET_SOLVERSEL: Solver selection
+ *
+ * @see Control/ExtensionBase.hh for extension API
+ */
 
 #ifndef EXTENSIONSTEPS_HH
 #define EXTENSIONSTEPS_HH

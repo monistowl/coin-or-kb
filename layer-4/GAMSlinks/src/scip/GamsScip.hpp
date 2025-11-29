@@ -3,6 +3,16 @@
 // This code is published under the Eclipse Public License.
 //
 // Author: Stefan Vigerske
+/**
+ * @file scip/GamsScip.hpp
+ * @brief GAMS interface to SCIP solver
+ *
+ * Connects GAMS to SCIP for constraint integer programming.
+ * Supports LP, MIP, MINLP, and general constraint optimization.
+ *
+ * @see reader_gmo.h for GAMS model reader plugin
+ * @see event_solvetrace.h for solve tracing
+ */
 
 #ifndef GAMSSCIP_HPP_
 #define GAMSSCIP_HPP_

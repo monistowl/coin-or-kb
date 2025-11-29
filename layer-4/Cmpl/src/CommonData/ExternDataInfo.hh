@@ -26,7 +26,26 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file CommonData/ExternDataInfo.hh
+ * @brief Metadata for external data sources and symbols
+ *
+ * Tracks symbols imported from external sources (CSV, files, etc.).
+ *
+ * **EIRecord Struct:**
+ * - intsym: Internal CMPL symbol name
+ * - extsym: External source identifier
+ * - srctype/srcname: Data source type and name
+ * - srcpos: Position within source file
+ *
+ * **ExternDataInfo Class:**
+ * - getExternInfo(): Query symbol source info
+ * - insertExternInfo(): Register external symbol
+ * - getDataFileNames(): List data file dependencies
+ *
+ * @see Modules/Precompiler/ for external data processing
+ * @see IntCode.hh for INTCODE_FETCH_SPECIAL
+ */
 
 #ifndef EXTERNDATAINFO_HH
 #define EXTERNDATAINFO_HH

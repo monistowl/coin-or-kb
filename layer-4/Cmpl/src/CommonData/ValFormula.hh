@@ -27,7 +27,30 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file CommonData/ValFormula.hh
+ * @brief Formula values for constraints and expressions
+ *
+ * Represents linear/nonlinear expressions with optimization variables.
+ *
+ * **ValFormula Abstract Base:**
+ * - isNumeric()/isBool(): Expression type
+ * - isLinear(): Check for linearity
+ * - asSingleBin(): Extract single binary variable
+ *
+ * **Formula Subtypes:**
+ * - ValFormulaLinear: Linear expression (sum of var*coeff)
+ * - ValFormulaCompare: Comparison (<=, >=, ==)
+ * - ValFormulaCond: Conditional expression
+ * - ValFormulaLogCon: Logical connective (and, or)
+ *
+ * **Canonical Form:**
+ * - canonicalForm(): Normalize expression structure
+ * - Used for output and solver interface
+ *
+ * @see OptModel.hh for usage in constraints
+ * @see CmplVal.hh for TP_FORMULA type
+ */
 
 #ifndef VALFORMULA_HH
 #define VALFORMULA_HH

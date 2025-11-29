@@ -27,7 +27,27 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file CommonData/SetBase.hh
+ * @brief Abstract base class for tuple set types
+ *
+ * Sets contain tuples and are used for array indexing domains.
+ *
+ * **SetBase Abstract Class:**
+ * - finite()/cnt(): Query size characteristics
+ * - minRank()/maxRank(): Tuple dimension bounds
+ * - markNF(): Non-free set marking
+ *
+ * **Set Subtypes:**
+ * - SetAlg: Algorithmic range (1..n)
+ * - SetEnum: Enumeration of elements
+ * - SetRecMult: Cartesian product
+ * - SetFinite: General finite set
+ * - SetWithOrder: Set with user-defined ordering
+ *
+ * @see SetIterator.hh for traversing sets
+ * @see Tuple.hh for set elements
+ */
 
 #ifndef SETBASE_HH
 #define SETBASE_HH

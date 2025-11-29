@@ -27,7 +27,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/TupleUtil.hh
+ * @brief Tuple manipulation utilities
+ *
+ * Static helper methods for tuple operations.
+ *
+ * **TupleUtil Class:**
+ * - constructTuple(): Build tuple from stack values
+ * - tupleMatching(): Match tuple against pattern
+ * - toIndexTuple(): Convert value to index tuple
+ * - iterSet(): Create iteration over set tuples
+ *
+ * @see CommonData/Tuple.hh for Tuple class
+ * @see SetUtil.hh for set operations
+ */
 
 #ifndef TUPLEUTIL_HH
 #define TUPLEUTIL_HH

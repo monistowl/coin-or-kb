@@ -27,7 +27,23 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Transfer/TransferToServer.hh
+ * @brief Client-to-server data transfer
+ *
+ * Initiates transfer of CMPL execution to a remote server.
+ *
+ * **TransferToServer Class:**
+ * - _url: Server URL for remote execution
+ * - _clientOnly: Require server mode
+ * - run(): Check and initiate transfer
+ * - executeTransfer(): Perform HTTP request
+ * - writeServerRequest(): Format XML request
+ * - writeDataForServerCmpl(): Serialize client data
+ *
+ * @see TransferFromServer.hh for response handling
+ * @see Serialize.hh for data serialization
+ */
 
 #ifndef TRANSFERTOSERVER_HH
 #define TRANSFERTOSERVER_HH

@@ -1,6 +1,14 @@
-// Copyright (C) Jan-Willem Goossens 
+// Copyright (C) Jan-Willem Goossens
 // All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file SonnetWrapper/CoinPackedMatrix.h
+ * @brief .NET wrapper for CoinPackedMatrix (sparse matrix)
+ *
+ * C++/CLI wrapper exposing CoinUtils sparse matrix to .NET languages.
+ *
+ * @see CoinShallowPackedVector.h for vector wrapper
+ */
 
 #pragma once
 

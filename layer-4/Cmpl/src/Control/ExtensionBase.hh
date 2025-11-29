@@ -27,7 +27,26 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Control/ExtensionBase.hh
+ * @brief Abstract base class for module extension hooks
+ *
+ * Extensions customize behavior at defined execution points.
+ *
+ * **ExtensionBase Class:**
+ * - run(): Execute extension logic (abstract)
+ * - moduleEnd(): Called after module completion
+ * - Inherits DataBase for serialization
+ *
+ * **Hook Mechanism:**
+ * - Registered for specific execution steps
+ * - Called via MainControl::runExtension()
+ * - Can process command-line options
+ *
+ * @see CommonData/ExtensionSteps.hh for step IDs
+ * @see Extensions/ for concrete implementations
+ * @see MainControl.hh for registration API
+ */
 
 #ifndef EXTENSIONBASE_HH
 #define EXTENSIONBASE_HH

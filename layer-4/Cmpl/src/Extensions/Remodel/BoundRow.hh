@@ -27,7 +27,22 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/BoundRow.hh
+ * @brief Convert single-variable rows to bounds
+ *
+ * Replace matrix rows with only one variable by variable bounds.
+ *
+ * **BoundRow Class:**
+ * - _delAllBoundRow: Remove all converted rows
+ * - _delUnnamedBoundRow: Remove only unnamed rows
+ * - checkRemodelBound(): Check if row can become bound
+ * - checkSetBound(): Validate and set bound on variable
+ * - _accessGuardCache: Thread-safe access control
+ *
+ * @see RemodelBase.hh for base class
+ * @see BoundRowMod.hh for module interface
+ */
 
 #ifndef BOUNDROW_HH
 #define BOUNDROW_HH

@@ -1,5 +1,15 @@
-// Copyright (C) Jan-Willem Goossens 
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file SonnetWrapper/OsiClpSolverInterface.h
+ * @brief .NET wrapper for OsiClpSolverInterface (CLP via OSI)
+ *
+ * C++/CLI wrapper exposing CLP solver through OSI interface to .NET.
+ * Includes matrix access methods and optional CPLEX/Gurobi support.
+ *
+ * @see ClpModel.h for direct CLP wrapper
+ * @see OsiSolverInterface.h for base OSI wrapper
+ */
 
 #pragma once
 

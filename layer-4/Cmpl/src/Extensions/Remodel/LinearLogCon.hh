@@ -27,7 +27,23 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/LinearLogCon.hh
+ * @brief Linearization of logical constraints
+ *
+ * Converts logical AND/OR connected constraints to linear form.
+ *
+ * **LinearLogCon Class:**
+ * - linearizeAnd()/linearizeOr(): Logical operator linearization
+ * - linearizeNeg(): Negated comparison linearization
+ * - linearizeCondToBin(): Express condition via binary variable
+ * - _linOrCache: Cache for OR linearizations
+ *
+ * Uses Big-M method for indicator constraints.
+ *
+ * @see RemodelBase.hh for base class
+ * @see LinearConditional.hh for conditional constraints
+ */
 
 #ifndef LINEARLOGCON_HH
 #define LINEARLOGCON_HH

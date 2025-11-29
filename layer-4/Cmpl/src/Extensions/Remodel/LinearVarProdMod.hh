@@ -27,7 +27,21 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/Remodel/LinearVarProdMod.hh
+ * @brief Module for variable product linearization
+ *
+ * Module interface for LinearVarProd extension.
+ *
+ * **LinearVarProdMod Class:**
+ * - _prodLinearLvl: Linearization level configuration
+ * - _prodDecomp, _useBigMBound: Additional options
+ * - _attachNameVarDecomp/Norm: Naming postfixes
+ * - create(): Factory for LinearVarProd
+ *
+ * @see LinearVarProd.hh for execution class
+ * @see RemodelBaseMod.hh for base class
+ */
 
 #ifndef LINEARVARPRODMOD_HH
 #define LINEARVARPRODMOD_HH

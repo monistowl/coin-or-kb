@@ -27,7 +27,30 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Control/MainControl.hh
+ * @brief Main controller orchestrating CMPL module execution
+ *
+ * Entry point that schedules and runs processing modules.
+ *
+ * **MainControl Class:**
+ * - run(): Execute module pipeline with options
+ * - addModule(): Register module for execution
+ * - runExtension(): Execute extension hooks
+ * - errHandler(): Access error handling
+ *
+ * **Module Pipeline:**
+ * - Modules ordered by order number
+ * - Sequential execution with data passing
+ * - Extension points for customization
+ *
+ * **Output Macros:**
+ * - PROTO_OUT/PROTO_OUTL: Protocol output
+ * - ERRHANDLER: Error handler access
+ *
+ * @see ModulesConf.hh for module configuration
+ * @see ExtensionBase.hh for extension system
+ */
 
 #ifndef MAINCONTROL_HH
 #define MAINCONTROL_HH

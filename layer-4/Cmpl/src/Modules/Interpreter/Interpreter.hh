@@ -27,7 +27,24 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/Interpreter/Interpreter.hh
+ * @brief Intermediary code execution module
+ *
+ * Executes compiled CMPL intermediary code to produce optimization model.
+ *
+ * **Interpreter Class:**
+ * - _code, _codeCnt: Intermediary code array
+ * - _symbolInfo: Symbol metadata from compiler
+ * - _globSymbols: Global symbol value storage
+ * - _threadHandler: Parallel execution control
+ * - _dataTypes: Type object registry
+ * - run(): Execute intermediary code
+ *
+ * @see ExecContext.hh for execution state
+ * @see CommonData/IntCode.hh for code format
+ * @see CommonData/OptModel.hh for output
+ */
 
 #ifndef INTERPRETER_HH
 #define INTERPRETER_HH

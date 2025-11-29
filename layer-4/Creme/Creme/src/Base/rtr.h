@@ -5,6 +5,16 @@
  * This code is published under the Eclipse Public License (EPL).
  * See http://www.eclipse.org/legal/epl-v10.html
  */
+/**
+ * @file Base/rtr.h
+ * @brief Randomized rounding algorithm for Creme LP solver
+ *
+ * Implements rtr() to find maximal feasible subsystems (MFS) using
+ * randomized iterative rounding. USE_RTR/USE_LOCSRCH mode selection.
+ *
+ * @see locsrch.h for local search alternative
+ * @see sparse.h for LP data structure
+ */
 
 #ifndef RTR_H
 #define RTR_H

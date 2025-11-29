@@ -27,7 +27,29 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file CommonData/CmplVal.hh
+ * @brief Core tagged-union value type for CMPL language
+ *
+ * All values in CMPL are represented by this universal type.
+ *
+ * **CmplObjBase Class:**
+ * - Reference-counted base for complex values
+ * - incRef()/decRef(): Manual reference management
+ *
+ * **tp_e Enum (60+ type codes):**
+ * - Scalars: TP_INT, TP_REAL, TP_BIN, TP_STR
+ * - Composites: TP_TUPLE, TP_SET_*, TP_INTERVAL
+ * - Optimization: TP_OPT_VAR, TP_OPT_CON, TP_FORMULA
+ *
+ * **CmplVal Class:**
+ * - t: Type code (tp_e enum)
+ * - v: Value union (tp_u - int, real, pointer)
+ * - Type-checking macros: TP_IS_SCALAR_*, TP_IS_SET, TP_IS_TUPLE
+ *
+ * @see Tuple.hh for tuple values
+ * @see SetBase.hh for set values
+ */
 
 #ifndef CMPLVAL_HH
 #define CMPLVAL_HH

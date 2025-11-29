@@ -27,7 +27,25 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DefSymbols/ClassFunctions.hh
+ * @brief OOP container utility functions
+ *
+ * Functions for object-oriented container handling in CMPL.
+ *
+ * **ClassFunctions Class:**
+ * - _namespace: Function namespace parts
+ * - countFunc(): Register class.* functions
+ *
+ * **Function Classes:**
+ * - ClassFunctionRunAt: Execute function in container context
+ * - ClassFunctionConstruct: Create container with constructor
+ * - ClassFunctionCopy/RefCopy: Deep/reference copy containers
+ * - ClassFunctionFinalize: Mark container as finalized
+ *
+ * @see ClassFunctionsMod.hh for module interface
+ * @see Modules/Interpreter/ValContainer.hh for containers
+ */
 
 #ifndef CLASSFUNCTIONS_HH
 #define CLASSFUNCTIONS_HH

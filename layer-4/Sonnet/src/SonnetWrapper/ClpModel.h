@@ -1,5 +1,14 @@
-// Copyright (C) Jan-Willem Goossens 
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file SonnetWrapper/ClpModel.h
+ * @brief .NET wrapper for ClpModel (COIN-OR LP solver)
+ *
+ * C++/CLI wrapper exposing CLP simplex solver to .NET languages.
+ * Supports quadratic objectives via loadQuadraticObjective().
+ *
+ * @see ClpObjective.h, OsiClpSolverInterface.h
+ */
 
 #pragma once
 

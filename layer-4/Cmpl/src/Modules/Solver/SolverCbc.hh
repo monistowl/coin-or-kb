@@ -26,6 +26,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
+/**
+ * @file Modules/Solver/SolverCbc.hh
+ * @brief CBC (COIN-OR Branch and Cut) solver integration
+ *
+ * Calls CBC executable for LP/MIP optimization.
+ *
+ * **SolverCbc Class:**
+ * - run(): Execute CBC and parse results
+ * - readSolFile(): Parse CBC solution format
+ * - generateCmdLine(): Build CBC command arguments
+ *
+ * @see Solver.hh for base interface
+ * @see layer-1/Cbc for CBC solver
+ */
 
 #ifndef SOLVERCBC_HH
 #define SOLVERCBC_HH

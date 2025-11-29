@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DataImport/ExternDataFileMod.hh
+ * @brief Module for CMPL data file import
+ *
+ * Module interface for ExternDataFile extension.
+ *
+ * **ExternDataFileMod Class:**
+ * - createExecObj(): Factory for ExternDataFile
+ * - defaultSrcType(): Returns 1 (CMPL data file)
+ * - regExtOptions(): Register extension options
+ *
+ * @see ExternDataFile.hh for execution class
+ * @see DataImportBaseMod.hh for base class
+ */
 
 #ifndef EXTERNDATAFILEMOD_HH
 #define EXTERNDATAFILEMOD_HH

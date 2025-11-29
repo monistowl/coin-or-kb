@@ -1,5 +1,13 @@
-// Copyright (C) Jan-Willem Goossens 
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file SonnetWrapper/OsiSolverInterface.h
+ * @brief .NET wrapper for OsiSolverInterface (Open Solver Interface)
+ *
+ * C++/CLI wrapper exposing OsiSolverInterface to .NET languages.
+ *
+ * @see ClpModel.h, CbcModel.h for solver wrappers
+ */
 
 #pragma once
 

@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Modules/TestModule/TestModule.hh
+ * @brief Test module for CMPL infrastructure
+ *
+ * Example module demonstrating command-line option handling.
+ *
+ * **TestModule Class:**
+ * - _testA: Boolean option (-a)
+ * - _testB: Integer option (-b)
+ * - _testC: Multi-argument option (-c)
+ * - _outFile: Output file option (-o)
+ *
+ * @see Control/ModuleBase.hh for module interface
+ */
 
 #ifndef TESTMODULE_HH
 #define TESTMODULE_HH

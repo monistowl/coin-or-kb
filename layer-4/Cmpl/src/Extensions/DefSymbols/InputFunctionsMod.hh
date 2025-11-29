@@ -27,7 +27,20 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DefSymbols/InputFunctionsMod.hh
+ * @brief Module for runtime input functions
+ *
+ * Module interface for InputFunctions extension.
+ *
+ * **InputFunctionsMod Class:**
+ * - _namespace: Namespace for input functions
+ * - run(): Create and register InputFunctions extension
+ * - regModOptions(): Register namespace options
+ *
+ * @see InputFunctions.hh for execution class
+ * @see Control/ExtensionModule.hh for base class
+ */
 
 #ifndef INPUTFUNCTIONSMOD_HH
 #define INPUTFUNCTIONSMOD_HH

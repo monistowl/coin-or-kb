@@ -4,7 +4,16 @@
  *
  * This code is published under the Eclipse Public License (EPL).
  * See http://www.eclipse.org/legal/epl-v10.html
+ */
+/**
+ * @file Base/misc.h
+ * @brief Miscellaneous utilities for Creme solver
  *
+ * Memory allocation helpers (reallocate_double/int), bzip2 file I/O,
+ * matrix transpose creation, and vector norm computation.
+ *
+ * @see lpio.h for LP file reading
+ * @see sparse.h for LP data structure
  */
 
 #ifndef MISC_H

@@ -1,5 +1,14 @@
-// Copyright (C) Jan-Willem Goossens 
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file SonnetWrapper/CbcModel.h
+ * @brief .NET wrapper for CbcModel (COIN-OR Branch and Cut)
+ *
+ * C++/CLI wrapper exposing CBC MIP solver to .NET languages.
+ * Wraps branch-and-bound with cut generation capabilities.
+ *
+ * @see CbcEventHandler.h, CbcCutGenerator.h, CbcStrategy.h
+ */
 
 #pragma once
 

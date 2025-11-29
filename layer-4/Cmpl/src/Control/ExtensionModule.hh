@@ -27,7 +27,23 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Control/ExtensionModule.hh
+ * @brief Module base for registering and creating extensions
+ *
+ * Modules that configure extension objects for other modules.
+ *
+ * **ExtensionModule Class:**
+ * - _registerMods: Target modules for extension
+ * - regExtOptions(): Register extension command-line opts
+ * - createFromSerialization(): Deserialize extension
+ *
+ * **Registration Macro:**
+ * - REG_CMDL_OPTION_EXT: Register extension option
+ *
+ * @see ExtensionBase.hh for extension implementation
+ * @see Extensions/ for concrete extension modules
+ */
 
 #ifndef EXTENSIONMODULE_HH
 #define EXTENSIONMODULE_HH

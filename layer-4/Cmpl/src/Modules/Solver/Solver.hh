@@ -26,6 +26,26 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
+/**
+ * @file Modules/Solver/Solver.hh
+ * @brief Base class for external solver integration
+ *
+ * Abstract interface for LP/MIP solver execution.
+ *
+ * **Solver Class:**
+ * - _solverName, _solverBinName: Solver identification
+ * - _solverOpts: Solver-specific options
+ * - isImplemented(): Check solver availability
+ * - solve(): Execute solver as external process
+ * - writeInstanceFile(): Export MPS to temp folder
+ * - readOptFile(): Parse CMPL solver options
+ *
+ * **Subclass Pattern:**
+ * - Override run(), readSolFile(), generateCmdLine()
+ *
+ * @see SolverCbc.hh, SolverGlpk.hh for implementations
+ * @see CommonData/Solution.hh for results
+ */
 
 #ifndef SOLVER_HH
 #define SOLVER_HH

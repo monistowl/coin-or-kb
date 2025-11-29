@@ -4,7 +4,16 @@
  *
  * This code is published under the Eclipse Public License (EPL).
  * See http://www.eclipse.org/legal/epl-v10.html
+ */
+/**
+ * @file Base/cmdline.h
+ * @brief Command-line argument parsing for Creme solver
  *
+ * tpar struct: Defines command-line options (short/long flags, types, defaults).
+ * readargs(): Parse argc/argv against option definitions.
+ * print_help(): Display usage information.
+ *
+ * @see sparse.h for LP data structure
  */
 
 #ifndef PAR_H

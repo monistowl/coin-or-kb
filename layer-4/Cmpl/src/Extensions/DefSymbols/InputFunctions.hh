@@ -27,7 +27,24 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************/
-
+/**
+ * @file Extensions/DefSymbols/InputFunctions.hh
+ * @brief Runtime input functions for CMPL
+ *
+ * Functions to read data at runtime from stdin and files.
+ *
+ * **InputFunctions Class:**
+ * - _namespace: Function namespace parts
+ * - countFunc(): Register input functions
+ *
+ * **Function Classes:**
+ * - InputFunctionBase: Base class for input functions
+ * - InputFunctionReadStdin: Read value from stdin
+ * - InputFunctionReadCSV: Read values from CSV file
+ *
+ * @see InputFunctionsMod.hh for module interface
+ * @see Modules/Interpreter/ValFunction.hh for function base
+ */
 
 #ifndef INPUTFUNCTIONS_HH
 #define INPUTFUNCTIONS_HH
