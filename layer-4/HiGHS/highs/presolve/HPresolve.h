@@ -34,6 +34,56 @@
  * - sparsify(): Reduce matrix density
  * - detectParallelRowsAndCols(): Remove parallel constraints/variables
  *
+ * @algorithm LP/MIP Presolve Main Loop (run → presolve → fastPresolveLoop):
+ *   Iteratively applies reductions until no further progress:
+ *   while (problemSizeReduction() > threshold):
+ *     1. SINGLETONS: Remove singleton rows (free variable bounds), singleton cols
+ *     2. FORCING/DOMINATED: Fix dominated columns, remove redundant constraints
+ *     3. DOUBLETON EQ: Eliminate x from ax + by = c (substitute into other rows)
+ *     4. PARALLEL: Detect parallel rows (combine) and columns (remove duplicates)
+ *     5. PROBING (MIP only): Fix binary variables by logical implications
+ *     6. AGGREGATOR: Aggregate constraints to reduce fill-in
+ *     7. SPARSIFY: Add constraint combinations to create zeros
+ *   Reductions are pushed to postsolve stack for solution recovery.
+ *
+ * @algorithm Implied Bound Propagation (updateColImpliedBounds):
+ *   For constraint: L <= a'x <= U with variable bounds l_j <= x_j <= u_j
+ *   @math Compute implied lower bound on x_k:
+ *     x_k >= (L - sum_{j≠k}(a_j * u_j if a_j>0 else a_j * l_j)) / a_k
+ *   If tighter than current l_k, update and propagate.
+ *   Dual analog: implied dual bounds from reduced cost constraints.
+ *
+ * @algorithm Probing for MIP (runProbing):
+ *   For binary variable x_j:
+ *   1. Tentatively set x_j = 0, propagate implications
+ *   2. Tentatively set x_j = 1, propagate implications
+ *   3. If one assignment infeasible: fix x_j to other value
+ *   4. If both derive same bound on x_k: add to global bounds
+ *   @ref Savelsbergh, M.W.P. (1994). "Preprocessing and probing techniques
+ *        for mixed integer programming problems". ORSA J. Computing 6(4).
+ *
+ * @algorithm Doubleton Equation Elimination (doubletonEq):
+ *   Given ax + by = c (two variables):
+ *   1. Solve for x = (c - by) / a
+ *   2. Substitute into all other rows containing x
+ *   3. Update bounds: l_x <= (c - by)/a <= u_x becomes bounds on y
+ *   4. Column x is eliminated; push to postsolve stack
+ *   @complexity O(nnz_col_x * nnz_col_y) fill-in potential
+ *
+ * @algorithm Sparsification (sparsify):
+ *   Combine rows to create zeros in dense columns:
+ *   For equation row i with coefficient a_ij in column j:
+ *   - For each row k with coefficient a_kj:
+ *     - Add scaled row i to row k: row_k += (−a_kj/a_ij) * row_i
+ *     - If fill-in acceptable, apply permanently
+ *   @ref Achterberg, T. et al. (2020). "Presolve reductions in mixed
+ *        integer programming". INFORMS J. Computing 32(2).
+ *
+ * @complexity Matrix access: O(1) amortized via splay trees (row) and linked lists (col)
+ *   Singleton elimination: O(nnz) per pass
+ *   Probing: O(#binaries * propagation_depth)
+ *   Full presolve: typically O(nnz * #passes), bounded by reductionLimit
+ *
  * @see presolve/HighsPostsolveStack.h for solution recovery
  * @see presolve/HPresolveAnalysis.h for presolve statistics
  */

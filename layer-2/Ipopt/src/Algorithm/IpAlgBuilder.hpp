@@ -22,6 +22,50 @@
  * Customization: Subclass and override virtual Build* methods,
  * or provide custom_solver in constructor.
  *
+ * @algorithm Primal-Dual Interior Point Method (assembled algorithm):
+ *   Solves NLP: min f(x) s.t. c(x)=0, x >= 0
+ *   @math Perturbed KKT system (barrier with parameter μ):
+ *     ∇f - A'y - z = 0  (stationarity)
+ *     c(x) = 0          (primal feasibility)
+ *     XZe = μe          (complementarity)
+ *     x,z >= 0          (bounds)
+ *   Each iteration solves the Newton system for (Δx, Δy, Δz).
+ *
+ * @algorithm Augmented System Formulation (AugSystemSolver):
+ *   Reduce the full (n+m+n) system to symmetric (n+m) system:
+ *   @math [W + Σ  A'] [Δx]   [r_x]
+ *         [A      0 ] [Δy] = [r_c]
+ *   where W = ∇²L (Hessian of Lagrangian), Σ = X⁻¹Z (diagonal),
+ *   A = ∇c(x)' (Jacobian). Solve via sparse symmetric factorization.
+ *   @ref Nocedal, J. and Wright, S.J. (2006). "Numerical Optimization".
+ *        Springer, Chapter 19 (Interior-Point Methods).
+ *
+ * @algorithm Barrier Parameter Update (MuUpdate):
+ *   - Monotone (Fiacco-McCormick): μ_{k+1} = σ * μ_k with σ < 1
+ *   - Adaptive: Quality function or probing oracle to choose μ
+ *   - Mehrotra predictor-corrector: Probe with affine step to set μ
+ *   @ref Fiacco, A.V. and McCormick, G.P. (1968). "Nonlinear Programming:
+ *        Sequential Unconstrained Minimization Techniques". Wiley.
+ *   @ref Mehrotra, S. (1992). "On the implementation of a primal-dual
+ *        interior point method". SIAM J. Optimization 2(4):575-601.
+ *
+ * @algorithm Filter Line Search (LineSearch):
+ *   Globalization via filter method with restoration phase:
+ *   1. Backtrack until (θ, φ) acceptable to filter (θ=infeasibility, φ=objective)
+ *   2. If no acceptable point found, enter restoration phase (minimize θ)
+ *   3. On success, add (θ, φ) to filter to prevent cycling
+ *   @ref Wächter, A. and Biegler, L.T. (2006). "On the implementation
+ *        of an interior-point filter line-search algorithm for large-scale
+ *        nonlinear programming". Math. Programming 106(1):25-57.
+ *
+ * @algorithm Linear Solver Selection (SymLinearSolverFactory):
+ *   HSL solvers (preferred): MA27/57 (multifrontal), MA77/86/97 (out-of-core)
+ *   Alternatives: MUMPS (parallel), Pardiso (MKL/project), WSMP, SPRAL
+ *   Key requirement: handle indefinite symmetric matrices with inertia detection.
+ *
+ * @complexity Per iteration: O(n³) for dense, O(nnz^{1.5-2}) for sparse
+ *   Total: O(iterations × linear_solve_cost) where iterations ~ O(√n) typical
+ *
  * @see IpIpoptAlg.hpp for resulting algorithm
  * @see IpIpoptApplication.hpp for high-level usage
  */

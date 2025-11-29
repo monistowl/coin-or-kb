@@ -31,6 +31,53 @@
  * - MFinish: Minor iteration data for parallel updates
  * - slice_*: Partitioned matrix for parallel PRICE
  *
+ * @algorithm Dual Simplex Main Loop (iterate):
+ *   Starting with a dual-feasible basis (c_B B^{-1}A_N - c_N >= 0):
+ *   while (primal infeasible basic variables exist):
+ *     1. CHUZR (chooseRow): Select leaving variable x_r violating bounds
+ *        Ratio: max{|x_r - bound| / edge_weight} for infeasible basics
+ *     2. PRICE + CHUZC (chooseColumn): Compute pivot row, select entering var
+ *        row_ap = e_r' B^{-1} A_N (sparse BTRAN + SpMV)
+ *        Choose s: alpha_{rs} with best ratio |d_s / alpha_{rs}|
+ *     3. FTRAN (updateFtran): Compute pivot column a_q = B^{-1} A_s
+ *     4. UPDATE: Primal values, dual values, basis, LU factors
+ *   @ref Maros, I. (2003). "Computational Techniques of the Simplex Method".
+ *        Springer, Chapters 9-10.
+ *
+ * @algorithm Dual Steepest Edge Pricing (updatePrimal with DSE):
+ *   @math Edge weight γ_i = ||B^{-1} e_i||² = ||τ_i||²
+ *   After basis change with pivot row r and column s:
+ *   - Compute τ_s = B^{-1} e_s (FTRAN of unit vector)
+ *   - Update weights: γ_i' = γ_i - 2(τ_r · a_q)α_i/α_r + γ_r(α_i/α_r)²
+ *   Cost: one extra FTRAN per iteration, but ~40% fewer iterations.
+ *   @ref Forrest, J.J. and Goldfarb, D. (1992). "Steepest-edge simplex
+ *        algorithms for linear programming". Math. Programming 57:341-374.
+ *
+ * @algorithm Devex Approximate Steepest Edge (initialiseDevexFramework):
+ *   Approximates steepest edge without maintaining exact weights:
+ *   - Reference framework R = current basic variables
+ *   - Weight: γ_i ≈ max(1, Σ_{j∈R} |a_{ij}|²)
+ *   - Reset framework when weights become inaccurate
+ *   ~80% of DSE benefit with ~10% of DSE cost.
+ *   @ref Harris, P.M.J. (1973). "Pivot selection methods of the Devex
+ *        LP code". Math. Programming Study 4:30-57.
+ *
+ * @algorithm PAMI - Parallel Minor Iterations (iterateMulti):
+ *   Exploit parallelism by batching multiple pivots:
+ *   1. majorChooseRow: Select k candidate leaving rows in parallel
+ *   2. majorChooseRowBtran: Parallel BTRAN for all k row_ep vectors
+ *   3. For each minor iteration i = 1..k:
+ *      a. minorChooseRow: Pick best from remaining candidates
+ *      b. chooseColumnSlice: Parallel PRICE across matrix slices
+ *      c. minorUpdate: Update data structures locally
+ *   4. majorUpdate: Apply all k updates to LU factors at once
+ *   @ref Hall, J.A.J. and McKinnon, K.I.M. (2005). "Hyper-sparsity in the
+ *        revised simplex method and how to exploit it". CMS 2(1):21-40.
+ *
+ * @complexity Serial iteration: O(nnz) for BTRAN/FTRAN, O(m) for ratio test
+ *   PAMI: O(k × nnz/p + k² × m) for k pivots on p processors
+ *   Total iterations: typically O(m) to O(2m) for dual simplex
+ *
  * @see simplex/HEkk.h for main simplex class
  * @see simplex/HEkkDualRow.h for pivot row handling
  * @see simplex/HEkkDualRHS.h for RHS management

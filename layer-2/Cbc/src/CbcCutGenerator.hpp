@@ -23,6 +23,43 @@
  * - Tracks cuts at root vs tree
  * - Global cuts and Lagrangean relaxation support
  *
+ * @algorithm Cut Generation Strategy (generateCuts):
+ *   For each active CGL generator during B&C:
+ *   1. SCHEDULING: Decide whether to call based on:
+ *      - Node frequency (whenCutGenerator_): every N nodes
+ *      - Tree depth (depthCutGenerator_): only at certain depths
+ *      - Special events: solution found, infeasibility detected
+ *   2. SEPARATION: Call CglCutGenerator::generateCuts(solver, cuts)
+ *      CGL algorithms include: Gomory, MIR, Clique, Probing, etc.
+ *   3. FILTERING: Discard weak/duplicate cuts, apply CbcCutModifier
+ *   4. POOL MANAGEMENT: Track active vs. inactive cuts for efficiency
+ *
+ * @algorithm Adaptive Cut Control (switches_ flags):
+ *   - Track effectiveness: numberCuts_ / numberTimes_ ratio
+ *   - switchOffIfLessThan_: Disable if < N cuts at root
+ *   - ineffectualCuts: Reduce frequency if cuts don't improve bound
+ *   - globalCuts: Cuts valid for entire tree (vs. local to subtree)
+ *   Goal: balance cut strength vs. computational overhead.
+ *
+ * @algorithm Cut Types Supported (via CGL):
+ *   - Gomory fractional cuts: From LP tableau rows
+ *   - Mixed Integer Rounding (MIR): Strengthen Gomory via MIR procedure
+ *   - Clique cuts: From conflict graph (x_i + x_j <= 1)
+ *   - Probing cuts: Fix variables, derive implications
+ *   - Flow cover, knapsack cover, lift-and-project, etc.
+ *   @ref Cornuejols, G. (2008). "Valid Inequalities for Mixed Integer
+ *        Linear Programs". Math. Programming 112(1):3-44.
+ *
+ * @algorithm Root Node vs. Tree Strategy:
+ *   - Root: Aggressive cuts (high whenCutGenerator_, all generators active)
+ *   - Tree: Selective cuts (numberActiveCutsAtRoot_ guides which to keep)
+ *   - Deep tree: Often disable most generators (computational cost)
+ *   Trade-off: Stronger root LP → fewer nodes vs. more time per node.
+ *
+ * @complexity generateCuts: O(generator_cost × frequency)
+ *   Generator costs vary: Clique O(n), Gomory O(n²), Probing O(n × LP_solve)
+ *   Overall B&C impact: cuts reduce nodes but add per-node overhead
+ *
  * @see CglCutGenerator for cut generation algorithms
  * @see CbcCutModifier for post-generation cut modification
  * @see CbcModel::addCutGenerator()

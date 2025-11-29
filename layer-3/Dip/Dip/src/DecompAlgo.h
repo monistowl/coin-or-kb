@@ -46,6 +46,53 @@
  * - DecompAlgoC: Cutting plane only
  * - DecompAlgoRC: Relax-and-Cut (Lagrangian)
  *
+ * @algorithm Dantzig-Wolfe Decomposition (DecompAlgoPC):
+ *   For structured MIP: min c'x s.t. Ax = b (linking), x ∈ X_k (block k)
+ *   @math Reformulation via convexification of blocks:
+ *     x = Σ_k Σ_j λ_{kj} x^{kj} where x^{kj} are extreme points of conv(X_k)
+ *     Master: min Σ c'x^{kj} λ_{kj} s.t. Σ Ax^{kj} λ_{kj} = b, Σ λ_{kj} = 1
+ *   Pricing subproblem for block k with duals (π, μ_k):
+ *     min (c - A'π)' x - μ_k s.t. x ∈ X_k
+ *   Column with negative reduced cost → add to master.
+ *   @ref Dantzig, G.B. and Wolfe, P. (1960). "Decomposition principle for
+ *        linear programs". Operations Research 8(1):101-111.
+ *
+ * @algorithm Branch-and-Price Framework (processNode):
+ *   At each B&B node:
+ *   1. PHASE_PRICE1: Add artificial columns to ensure feasibility
+ *   2. PHASE_PRICE2: Column generation until no negative reduced cost:
+ *      a. Solve restricted master LP → get duals π
+ *      b. Solve pricing subproblems with modified costs c - A'π
+ *      c. Add columns with negative reduced cost to master
+ *      d. If no improving columns, LP bound is valid
+ *   3. PHASE_CUT: Separate violated cutting planes, add to master
+ *   4. If LP solution integral: update incumbent
+ *   5. Else: branch (respecting block structure)
+ *   @ref Barnhart, C. et al. (1998). "Branch-and-price: Column generation
+ *        for solving huge integer programs". Operations Research 46(3).
+ *
+ * @algorithm Relax-and-Cut / Lagrangian Relaxation (DecompAlgoRC):
+ *   Dualize linking constraints Ax = b with multipliers u:
+ *   @math L(u) = u'b + min_x {(c - A'u)'x : x ∈ X}
+ *   Solve Lagrangian dual: max_u L(u) via subgradient or bundle methods.
+ *   - Subgradient: u^{t+1} = u^t + step * (b - Ax^t)
+ *   - L(u) provides lower bound; project x to get upper bound.
+ *   @ref Held, M. and Karp, R.M. (1971). "The traveling-salesman problem
+ *        and minimum spanning trees: Part II". Math Programming 1(1):6-25.
+ *
+ * @algorithm Price-and-Cut Hybrid (generateVars + generateCuts):
+ *   Interleave column generation and cut separation:
+ *   while (improving):
+ *     1. generateVars(): Solve pricing, add columns
+ *     2. generateCuts(): Separate cuts on current x̂
+ *     3. Update master LP, reoptimize
+ *   Cuts added to master affect dual space and pricing.
+ *   @ref Desaulniers, G. et al. (2005). "Column Generation". Springer.
+ *
+ * @complexity Column generation: O(#iterations × pricing_cost)
+ *   Pricing cost depends on subproblem structure (often NP-hard but small)
+ *   Master LP: O(m × n × simplex_iterations) where n grows with columns
+ *
  * @see DecompAlgoPC.h for Dantzig-Wolfe implementation
  * @see DecompAlgoC.h for cutting plane method
  * @see DecompAlgoRC.h for Lagrangian relaxation
