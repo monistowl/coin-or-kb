@@ -36,6 +36,44 @@
  *
  * @note Default open-source MIP solver, no license required
  * @see Cbc branch-and-cut library
+ *
+ * @algorithm SHOT Outer Approximation via MIP (solveProblem):
+ *   SHOT solves MINLP by iterating between:
+ *   1. Solve MIP relaxation (linearized problem) → dual bound
+ *   2. Evaluate NLP at integer solution → primal bound (if feasible)
+ *   3. Add hyperplane cuts to improve approximation
+ *   This class provides step 1 using CBC branch-and-cut.
+ *   @math For convex MINLP: MIP relaxation provides valid dual bound
+ *         since hyperplanes underestimate convex functions.
+ *   @complexity Each MIP solve is NP-hard; CBC uses B&C with CGL cuts
+ *   @ref Duran & Grossmann (1986) - Outer Approximation for MINLP
+ *   @ref Kronqvist et al. (2019) - SHOT solver description
+ *
+ * @algorithm Hyperplane (Supporting Hyperplane) Addition (createHyperplane):
+ *   For nonlinear constraint g(x) <= 0 at point x̂:
+ *   @math Linearization: g(x̂) + ∇g(x̂)ᵀ(x - x̂) <= 0
+ *   For convex g, this is a valid outer approximation cut.
+ *   Added as linear constraints via addLinearConstraint().
+ *   @ref Kelley's cutting-plane method (1960)
+ *
+ * @algorithm Integer Cut (No-Good Cut) Generation (createIntegerCut):
+ *   Excludes previously found integer solutions:
+ *   @math For binary x with solution x̂ ∈ {0,1}ⁿ:
+ *         ∑(x_j : x̂_j=1) - ∑(x_j : x̂_j=0) <= |{j: x̂_j=1}| - 1
+ *   Prevents cycling when NLP subproblem fails or solution is infeasible.
+ *
+ * @algorithm Dual Bound Computation (getDualObjectiveValue):
+ *   The optimal value of the MIP relaxation provides a dual bound:
+ *   - For minimization: MIP optimum <= true MINLP optimum
+ *   - Quality improves as more hyperplanes are added
+ *   - Convergence guaranteed for convex MINLP (finite # of linearizations)
+ *
+ * @algorithm MIP Solution Pool (getAllVariableSolutions):
+ *   CBC can return multiple feasible integer solutions.
+ *   SHOT uses these as candidate points for NLP evaluation:
+ *   - More solutions = more chances to find primal feasible point
+ *   - Controlled by setSolutionLimit()
+ *   @ref Solution pool heuristics in MIP solvers
  */
 #pragma once
 #include "MIPSolverBase.h"

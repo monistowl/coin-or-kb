@@ -41,6 +41,45 @@
  *
  * @see DualSolver.h for MIP solver orchestration
  * @see IRelaxationStrategy.h for LP relaxation handling
+ *
+ * @algorithm Multi-Tree vs Single-Tree Outer Approximation:
+ *   Multi-Tree (this interface): Solve MIP from scratch each iteration
+ *   @math Iteration k: solve MIP^k = {min cx : Ax <= b, linearizations_1...k}
+ *   - Simpler implementation, uses MIP solver as black box
+ *   - Can exploit MIP warm-starting between iterations
+ *   - Used by default implementations (MIPSolverCbc, MIPSolverCplex)
+ *   Single-Tree (callback-based): Add cuts during single B&B tree
+ *   - More efficient: no tree re-exploration between iterations
+ *   - Requires solver callback API (lazy constraint callbacks)
+ *   @ref Kronqvist et al. (2016) - Extended Supporting Hyperplane Algorithm
+ *
+ * @algorithm Supporting Hyperplane Construction (createHyperplane):
+ *   For convex constraint g(x) <= 0 at linearization point x̂:
+ *   @math g(x̂) + ∇g(x̂)ᵀ(x - x̂) <= 0
+ *        Rearranged: ∇g(x̂)ᵀx <= ∇g(x̂)ᵀx̂ - g(x̂)
+ *   Returns as map<index, coef> and constant for efficient MIP construction.
+ *   @ref Kelley (1960) - Cutting-plane method for convex programming
+ *
+ * @algorithm Cutoff Pruning (setCutOff):
+ *   Prune B&B nodes where LP relaxation >= cutoff:
+ *   - For minimization: cutoff = best primal bound - tolerance
+ *   - Reduces MIP exploration significantly
+ *   @math Prune node n if: LP(n) >= z* (current best solution)
+ *   Can be set as hard cutoff or as objective constraint.
+ *
+ * @algorithm Infeasibility Repair (repairInfeasibility):
+ *   When MIP relaxation becomes infeasible (over-approximation):
+ *   - May indicate numerical issues or strong cutting
+ *   - Attempts to find closest feasible point
+ *   - Solver-specific: uses IIS analysis or feasibility pump
+ *   @ref Achterberg et al. (2007) - Conflict analysis in MIP solving
+ *
+ * @algorithm MIP Start (Warm Starting) (addMIPStart):
+ *   Provide known feasible solution to MIP solver:
+ *   - From NLP subproblem solutions in outer approximation
+ *   - Improves primal bound immediately
+ *   - Guides B&B exploration toward good solutions
+ *   @ref Achterberg (2007) - SCIP: Solving Constraint Integer Programs
  */
 #pragma once
 #include "../Environment.h"

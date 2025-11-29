@@ -38,6 +38,41 @@
  *
  * @note Used for fixed-integer NLP subproblems in primal bound computation
  * @see PrimalSolver.h for NLP subproblem dispatch
+ *
+ * @algorithm Fixed-Integer NLP Subproblem in SHOT:
+ *   Given integer solution x̄_I from MIP relaxation:
+ *   @math min f(x) s.t. g(x) <= 0, x_I = x̄_I (fixed)
+ *   If feasible solution found → updates primal bound.
+ *   Solved via Ipopt interior-point method with reduced space.
+ *   @ref Bonami et al. (2008) - BONMIN algorithm description
+ *
+ * @algorithm Primal-Dual Interior Point (via Ipopt):
+ *   Solves NLP by finding KKT point of barrier problem:
+ *   @math ∇L(x,λ) = 0 where L = f + λᵀg - μ∑log(s)
+ *   - μ: barrier parameter → 0 as solution approaches
+ *   - s: slack variables for inequality constraints
+ *   @complexity Per iteration: O(n³) for Hessian factorization
+ *   @ref Wächter & Biegler (2006) - Ipopt implementation
+ *
+ * @algorithm Sparse Derivative Evaluation (eval_jac_g, eval_h):
+ *   Exploits problem sparsity for efficiency:
+ *   @math Jacobian ∂g_i/∂x_j: sparse triplet format
+ *         Hessian ∇²L: symmetric lower triangle
+ *   jacobianCounterPlacement/lagrangianHessianCounterPlacement
+ *   map (row,col) → position in sparse array.
+ *   @complexity O(nnz) vs O(n²) for dense evaluation
+ *
+ * @algorithm Variable Fixing Strategy (fixVariables):
+ *   For integer-fixed NLP: sets x_I = x̄_I via bound tightening
+ *   @math l_i = u_i = x̄_i for integer variables i ∈ I
+ *   Ipopt solves reduced-space problem over continuous variables.
+ *   Original bounds restored by unfixVariables().
+ *
+ * @algorithm Warm Starting (setStartingPoint):
+ *   Initialize from previous NLP solution or MIP point:
+ *   - Improves convergence for similar subproblems
+ *   - Critical for efficiency in repeated NLP solves
+ *   @ref Nocedal & Wright (2006) - Warm starting in IPM
  */
 #pragma once
 #include "NLPSolverBase.h"

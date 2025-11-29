@@ -389,6 +389,41 @@ Moreover, exceptions may be thrown by the template parameter class itself.
 #undef  MC__TVAR_DEBUG_BERSTEIN
 #define MC__TMODEL_TIGHT_REMAINDER
 
+/**
+ * @file tmodel.hpp
+ * @brief Taylor Model Arithmetic for Rigorous Bound Propagation
+ *
+ * @algorithm Taylor Model Arithmetic (TModel/TVar):
+ *   Represents f(x) as polynomial P(x-x̂) + remainder R where:
+ *   @math f(x) ∈ P(x-x̂) ⊕ R, ∀x ∈ D
+ *   - P: qth-order multivariate Taylor polynomial at expansion point x̂
+ *   - R: interval/McCormick bounds on truncation error
+ *   @complexity Coefficient propagation: O(n^q) for n variables, order q
+ *   @ref Makino & Berz (2003) - Taylor models and validated numerics
+ *   @ref Neumaier (2002) - Taylor forms for global optimization
+ *
+ * @algorithm Polynomial Bound Computation (get_bound):
+ *   Several strategies to bound polynomial range over domain:
+ *   - Naive: bound each monomial independently (fast, conservative)
+ *   - Bernstein: convert to Bernstein form for tighter bounds
+ *   - Eigenvalue: use Hessian eigendecomposition for quadratic terms
+ *   @math For Bernstein: bounds = min/max of Bernstein coefficients
+ *   @complexity Bernstein conversion: O(n^q * 2^n) but provides hull property
+ *   @ref Lin & Rokne (1995) - Bernstein form for polynomial bounds
+ *
+ * @algorithm McCormick-Taylor Models (with mc::McCormick<T>):
+ *   Template T can be McCormick for convex/concave remainder bounds:
+ *   @math Remainder R ∈ [cv(x), cc(x)] (convex underestimator, concave overestimator)
+ *   Tighter than interval bounds; enables factorable relaxations.
+ *   @ref Sahlodin & Chachuat (2011) - McCormick-Taylor models
+ *
+ * @algorithm Convergence Properties:
+ *   @math |R| = O(diam(D)^{q+1}) as domain shrinks
+ *   Higher order q → faster convergence but more coefficients
+ *   Used in global optimization branch-and-bound for bound tightening.
+ *   @ref Bompadre et al. (2012) - Convergence of Taylor models
+ */
+
 namespace mc
 {
 

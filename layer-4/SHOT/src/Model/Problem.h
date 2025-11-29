@@ -39,6 +39,43 @@
  *
  * @see Solver.h for problem loading via setProblem()
  * @see ReformulatedProblem for auxiliary variable introduction
+ *
+ * @algorithm Feasibility-Based Bound Tightening (FBBT) (doFBBT):
+ *   Propagates constraint bounds to tighten variable domains:
+ *   @math For ax + by <= c with bounds [l_x,u_x], [l_y,u_y]:
+ *         x <= (c - b*l_y)/a if a>0, x >= (c - b*u_y)/a if a>0
+ *   Iterates until fixpoint (no further tightening).
+ *   @complexity O(n * m * iterations) for n variables, m constraints
+ *   Effective for convex problems; may miss nonlinear implications.
+ *   @ref Belotti et al. (2009) - Branching and bounds tightening techniques
+ *
+ * @algorithm Constraint Violation Detection (getMostDeviatingNumericConstraint):
+ *   For outer approximation, identifies most violated constraint:
+ *   @math Violation of g(x) <= 0: max(0, g(x))
+ *   Used to select where to add next hyperplane cut.
+ *   @ref ESH (Extended Supporting Hyperplane) uses this for cut generation
+ *
+ * @algorithm Problem Classification (updateProperties):
+ *   Automatic detection of problem structure:
+ *   - LP: all linear, no discrete → simplex/interior point
+ *   - MILP: linear + discrete → branch-and-cut
+ *   - QP/QCQP: quadratic obj/constraints → specialized QP solver
+ *   - MINLP: nonlinear + discrete → outer approximation or B&B
+ *   Classification affects solver selection and algorithm strategy.
+ *
+ * @algorithm Convexity Analysis (updateConvexity):
+ *   Determines if problem is convex (global optimality guarantee):
+ *   - Linear constraints: always convex
+ *   - Quadratic: convex if Q is positive semidefinite
+ *   - General nonlinear: analyzed via factorable functions
+ *   @math Convex MINLP: outer approximation converges finitely
+ *   @ref McCormick (1976) - Convex relaxations via factorable functions
+ *
+ * @algorithm Sparsity Pattern Extraction (getConstraintsJacobianSparsityPattern):
+ *   Identifies nonzero structure for efficient derivative computation:
+ *   @math Jacobian ∂g_i/∂x_j: sparse pattern for AD evaluation
+ *   Used by NLP solvers (Ipopt) and for hyperplane construction.
+ *   @complexity O(nnz) where nnz = number of variable appearances in constraints
  */
 #pragma once
 
