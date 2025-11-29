@@ -7,7 +7,23 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Tasks/TaskCheckPrimalStagnation.h
+ * @brief Detect stalled primal bound improvement
+ *
+ * Triggers NLP solves when primal bound stops improving.
+ *
+ * **TaskCheckPrimalStagnation Class:**
+ * - taskIDIfTrue/False: Branch targets for stagnation state
+ * - run(): Check if primal bound unchanged for N iterations
+ *
+ * **Stagnation Recovery:**
+ * - May trigger fixed-integer NLP to find better solutions
+ * - Indicates MIP solutions aren't improving primal
+ *
+ * @see TaskCheckDualStagnation.h for dual stagnation
+ * @see PrimalSolver.h for primal bound computation
+ */
 #pragma once
 #include "TaskBase.h"
 

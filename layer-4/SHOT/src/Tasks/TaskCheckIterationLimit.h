@@ -7,7 +7,23 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Tasks/TaskCheckIterationLimit.h
+ * @brief Termination check for iteration count limit
+ *
+ * Part of termination check sequence.
+ *
+ * **TaskCheckIterationLimit Class:**
+ * - taskIDIfTrue: Jump target when limit reached
+ * - run(): Compare iteration count vs Settings.IterationLimit
+ *
+ * **Behavior:**
+ * - If exceeded: Jump to termination task
+ * - If not: Continue to next task
+ *
+ * @see TaskCheckTimeLimit.h for time-based termination
+ * @see TaskTerminate.h for termination handling
+ */
 #pragma once
 #include "TaskBase.h"
 

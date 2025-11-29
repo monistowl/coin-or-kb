@@ -7,7 +7,22 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Tasks/TaskSimple.h
+ * @brief Lightweight task wrapper for lambda functions
+ *
+ * Adapts arbitrary callable to task interface.
+ *
+ * **TaskSimple Class:**
+ * - setFunction(fn): Set callable to execute
+ * - run(): Invoke the stored function
+ *
+ * **Usage:**
+ * - Quick inline tasks without subclassing
+ * - Adapts existing functions to task framework
+ *
+ * @see TaskBase.h for task interface
+ */
 #pragma once
 #include "TaskBase.h"
 

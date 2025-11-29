@@ -7,7 +7,24 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Tasks/TaskException.h
+ * @brief Exception types for task framework errors
+ *
+ * Specialized exceptions for task-related failures.
+ *
+ * **Exception Classes:**
+ * - TaskException: General task error
+ * - TaskExceptionFunctionNotDefined: Missing run() implementation
+ * - TaskExceptionNotFound: Invalid task ID in goto/jump
+ *
+ * **Usage:**
+ * - Thrown by TaskHandler and individual tasks
+ * - Caught and handled in main solve loop
+ *
+ * @see TaskHandler.h for exception handling
+ * @see TaskGoto.h for task lookups
+ */
 #pragma once
 #include "../Environment.h"
 

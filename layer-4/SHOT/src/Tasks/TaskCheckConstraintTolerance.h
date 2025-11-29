@@ -7,7 +7,23 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Tasks/TaskCheckConstraintTolerance.h
+ * @brief Termination check for constraint feasibility
+ *
+ * Verifies primal solution satisfies all constraints.
+ *
+ * **TaskCheckConstraintTolerance Class:**
+ * - taskIDIfTrue: Jump target when feasible
+ * - run(): Check max constraint violation < ConstraintTolerance
+ *
+ * **Usage:**
+ * - Validates feasibility of best primal solution
+ * - Required for declaring optimality
+ *
+ * @see Results.h for constraint violation tracking
+ * @see TaskCheckAbsoluteGap.h for gap check
+ */
 #pragma once
 #include "TaskBase.h"
 

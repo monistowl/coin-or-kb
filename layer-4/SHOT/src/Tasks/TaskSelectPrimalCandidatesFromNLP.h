@@ -7,7 +7,29 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Tasks/TaskSelectPrimalCandidatesFromNLP.h
+ * @brief Solve fixed-integer NLP for primal candidates
+ *
+ * Uses NLP solver (Ipopt) with fixed integer variables.
+ *
+ * **TaskSelectPrimalCandidatesFromNLP Class:**
+ * - solveFixedNLP(): Fix integers, solve continuous NLP
+ * - createInfeasibilityCut(): Handle infeasible NLP
+ * - createIntegerCut(): Exclude tested integer assignment
+ *
+ * **Fixed-Integer NLP:**
+ * - Take MIP solution's integer values
+ * - Solve continuous relaxation with fixed integers
+ * - Provides locally optimal primal candidates
+ *
+ * **Usage:**
+ * - Triggered by primal stagnation
+ * - May improve primal bound significantly
+ *
+ * @see NLPSolver/ for Ipopt interface
+ * @see TaskCheckPrimalStagnation.h for trigger
+ */
 #pragma once
 #include "TaskBase.h"
 

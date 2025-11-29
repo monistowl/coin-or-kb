@@ -7,7 +7,24 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Tasks/TaskAddPrimalReductionCut.h
+ * @brief Add objective cutoff based on incumbent
+ *
+ * Uses primal bound to tighten MIP relaxation.
+ *
+ * **TaskAddPrimalReductionCut Class:**
+ * - currentLowerBoundForReductionCut: Current cutoff value
+ * - run(): Update objective bound constraint
+ *
+ * **Cutoff Strategy:**
+ * - Adds constraint: objective <= bestPrimal - epsilon
+ * - Forces MIP to find improving solutions only
+ * - Updated when primal bound improves
+ *
+ * @see Results.h for primal bound tracking
+ * @see TaskCheckMaxNumberOfPrimalReductionCuts.h for limit
+ */
 #pragma once
 #include "TaskBase.h"
 

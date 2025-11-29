@@ -7,7 +7,24 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Tasks/TaskFindInteriorPoint.h
+ * @brief Find strictly feasible interior point for ESH
+ *
+ * Critical for ESH: rootsearch needs interior point endpoint.
+ *
+ * **TaskFindInteriorPoint Class:**
+ * - NLPSolvers: Solvers for finding interior
+ * - run(): Attempt to find strictly feasible point
+ *
+ * **Interior Point Methods:**
+ * - Solve feasibility problem with slack maximization
+ * - Use NLP solver (Ipopt) with modified objective
+ * - Required for ESH rootsearch to work
+ *
+ * @see TaskUpdateInteriorPoint.h for runtime updates
+ * @see RootsearchMethod/ for interior point usage
+ */
 #pragma once
 #include "TaskBase.h"
 

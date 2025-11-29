@@ -7,7 +7,25 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Tasks/TaskSelectHyperplanePointsECP.h
+ * @brief Extended Cutting Plane point selection
+ *
+ * Classic outer approximation: linearize at infeasible points.
+ *
+ * **TaskSelectHyperplanePointsECP Class:**
+ * - run(): Process current MIP solutions
+ * - run(solPoints): Process specific solution points
+ *
+ * **ECP Algorithm:**
+ * - Generate gradient cut at infeasible solution
+ * - Simpler than ESH but may converge slower
+ * - Used as fallback when ESH rootsearch fails
+ *
+ * @algorithm Extended Cutting Plane (Westerlund-Pettersson)
+ * @see TaskSelectHyperplanePointsESH.h for ESH variant
+ * @see TaskAddHyperplanes.h for cut addition
+ */
 #pragma once
 #include "TaskBase.h"
 

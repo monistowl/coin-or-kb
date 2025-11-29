@@ -7,7 +7,30 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Tasks/TaskReformulateProblem.h
+ * @brief Transform problem for efficient outer approximation
+ *
+ * Key preprocessing: converts problem to reformulated form.
+ *
+ * **TaskReformulateProblem Class:**
+ * - reformulateObjectiveFunction(): Handle nonlinear objective
+ * - reformulateConstraint(): Process each constraint type
+ * - createEpigraphConstraint(): Epigraph reformulation
+ *
+ * **Reformulation Techniques:**
+ * - Bilinear terms: McCormick envelopes (addBilinearMcCormickEnvelope)
+ * - Integer products: Binary expansion
+ * - Eigenvalue decomposition: Convexify quadratics
+ * - Term extraction: Separate linear/quadratic/monomial/signomial
+ *
+ * **Auxiliary Variables:**
+ * - Created for bilinear products, squares, absolute values
+ * - Tracked in squareAuxVariables, bilinearAuxVariables maps
+ *
+ * @see AuxiliaryVariables.h for auxiliary variable types
+ * @see Problem.h for reformulated problem storage
+ */
 #pragma once
 #include "TaskBase.h"
 

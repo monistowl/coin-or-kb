@@ -7,7 +7,23 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file Tasks/TaskInitializeIteration.h
+ * @brief Per-iteration setup and housekeeping
+ *
+ * Prepares state for new iteration cycle.
+ *
+ * **TaskInitializeIteration Class:**
+ * - run(): Reset iteration-local state
+ *
+ * **Initialization Steps:**
+ * - Increment iteration counter
+ * - Clear iteration-specific storage
+ * - Update timing information
+ *
+ * @see TaskPrintIterationReport.h for iteration summary
+ * @see Timing.h for time tracking
+ */
 #pragma once
 #include "TaskBase.h"
 
