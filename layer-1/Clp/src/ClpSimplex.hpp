@@ -22,6 +22,23 @@
  * - Factorization: LU factors of the basis matrix (via ClpFactorization)
  * - Pivot selection: choosing entering/leaving variables (pluggable strategies)
  *
+ * @algorithm Simplex Method for Linear Programming:
+ *   Maintains a basic feasible solution (BFS) at a vertex of the polytope.
+ *   Each iteration moves along an edge to an adjacent vertex with better objective.
+ *   - Primal simplex: maintains primal feasibility, achieves dual feasibility
+ *   - Dual simplex: maintains dual feasibility, achieves primal feasibility
+ *   Terminates when both primal and dual feasibility achieved (optimality).
+ *
+ * @complexity O(2^n) worst-case (Klee-Minty), but typically polynomial in practice.
+ *   Per-iteration cost: O(m²) for basis update + O(mn) for pricing.
+ *   Iteration count: typically O(m) to O(3m) for practical problems.
+ *
+ * @ref Dantzig, G.B. (1963). "Linear Programming and Extensions".
+ *   Princeton University Press. [Original simplex method]
+ *
+ * @ref Forrest, J.J. and Goldfarb, D. (1992). "Steepest-edge simplex algorithms
+ *   for linear programming". Math. Programming 57:341-374. [Steepest edge pricing]
+ *
  * @note The algorithm_ member indicates variant: positive=primal, negative=dual
  *
  * @see ClpModel for problem data storage
@@ -356,6 +373,16 @@ public:
          4 - skip as much initialization of work areas as possible
              (based on whatsChanged in clpmodel.hpp) ** work in progress
          maybe other bits later
+
+         @algorithm Dual Simplex:
+           1. Start with dual-feasible basis (reduced costs correct sign)
+           2. Select leaving variable (primal infeasible row) via ratio test
+           3. Compute pivot column, select entering variable (most negative)
+           4. Perform basis change, update factorization
+           5. Repeat until primal feasible (optimal) or unbounded detected
+
+         @complexity Per-iteration: O(m) for BTRAN + O(nnz) for FTRAN + O(n) pricing
+           Typically faster than primal for problems with good initial dual bound.
      */
   int dual(int ifValuesPass = 0, int startFinishOptions = 0);
   // If using Debug
@@ -369,6 +396,17 @@ public:
          4 - skip as much initialization of work areas as possible
              (based on whatsChanged in clpmodel.hpp) ** work in progress
          maybe other bits later
+
+         @algorithm Primal Simplex:
+           1. Start with primal-feasible basis (all bounds satisfied)
+           2. Price: select entering variable with negative reduced cost
+           3. Compute pivot column via FTRAN (solve B·d = a_j)
+           4. Ratio test: select leaving variable to maintain feasibility
+           5. Perform basis change, update factorization
+           6. Repeat until optimal (all reduced costs ≥ 0) or infeasible
+
+         @complexity Per-iteration: O(nnz) for FTRAN + O(m) ratio test
+           Preferred when starting from feasible solution or after crash.
      */
   int primal(int ifValuesPass = 0, int startFinishOptions = 0);
   /** Solves nonlinear problem using SLP - may be used as crash
@@ -386,7 +424,21 @@ public:
     int numberPasses, double deltaTolerance);
   /** Solves using barrier (assumes you have good cholesky factor code).
       Does crossover to simplex if asked.
-      startFinishOptions as dual/primal */
+      startFinishOptions as dual/primal
+
+      @algorithm Interior-Point (Barrier) Method:
+        1. Start from interior point (strictly between bounds)
+        2. Form normal equations: A·D²·Aᵀ·Δy = rhs (D = scaling matrix)
+        3. Solve via Cholesky factorization
+        4. Compute Δx, Δs from Δy; take step with barrier parameter μ
+        5. Reduce μ, repeat until convergence to boundary
+        6. Optional crossover: identify active constraints, switch to simplex
+
+      @complexity O(m³) per iteration for dense Cholesky; O(m·nnz(L)) for sparse.
+        Iteration count: O(√n·log(1/ε)) for well-conditioned problems.
+
+      @ref Wright, S.J. (1997). "Primal-Dual Interior-Point Methods". SIAM.
+     */
   int barrier(bool crossover = true, int startFinishOptions = 0);
   /** Solves non-linear using reduced gradient.  Phase = 0 get feasible,
          =1 use solution */

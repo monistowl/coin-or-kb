@@ -22,6 +22,23 @@
  * 4. Call resolve() after modifications
  * 5. Query solution via getColSolution(), getObjValue()
  *
+ * @algorithm Design Pattern: Abstract Factory + Strategy
+ *   - Factory: concrete implementations (OsiClpSolverInterface, etc.)
+ *     instantiate solver-specific backends
+ *   - Strategy: algorithm choice (simplex vs barrier) delegated to
+ *     underlying solver; OSI provides uniform control interface
+ *   - Bridge: decouples client code from solver implementation details
+ *
+ * @invariant Solution pointers (getColSolution, getRowPrice, etc.) are
+ *   invalidated by any problem modification or subsequent solve call.
+ *   Client code must copy data if needed across modifications.
+ *
+ * @invariant Warm start objects must be compatible with the solver that
+ *   created them. Cross-solver warm starting requires basis translation.
+ *
+ * @ref Lougee-Heimer et al. (2003). "The Common Optimization INterface
+ *   for Operations Research". IBM J. Research & Development 47(1):57-66.
+ *
  * @see OsiClpSolverInterface for Clp implementation
  * @see OsiCuts for cut pool management
  * @see CoinPackedMatrix for constraint matrix format

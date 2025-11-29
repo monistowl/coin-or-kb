@@ -16,6 +16,31 @@
  * - CbcHeuristic: Primal heuristics for finding solutions
  * - CbcBranchingObject: Branching decisions
  *
+ * @algorithm Branch-and-Cut (B&C) for Mixed-Integer Programming:
+ *   1. Solve LP relaxation at root node
+ *   2. While open nodes remain:
+ *      a. Select node from priority queue (best-first or depth-first)
+ *      b. Solve LP relaxation, apply cuts (Gomory, MIR, clique, etc.)
+ *      c. If fractional: branch on integer variable, create child nodes
+ *      d. If integer-feasible: update incumbent if improved
+ *      e. Prune by bound if LP ≥ incumbent
+ *   3. Return optimal solution when tree exhausted
+ *
+ * @complexity Worst-case O(2^n) where n = number of integer variables.
+ *   Practical performance depends heavily on:
+ *   - Strength of LP relaxation and cutting planes
+ *   - Quality of branching variable selection
+ *   - Effectiveness of primal heuristics
+ *   - Problem structure (e.g., total unimodularity)
+ *
+ * @ref Land, A.H. and Doig, A.G. (1960). "An automatic method of solving
+ *   discrete programming problems". Econometrica 28(3):497-520.
+ *   [Original branch-and-bound algorithm]
+ *
+ * @ref Padberg, M. and Rinaldi, G. (1991). "A branch-and-cut algorithm
+ *   for the resolution of large-scale symmetric traveling salesman problems".
+ *   SIAM Review 33(1):60-100. [Branch-and-cut methodology]
+ *
  * @see CbcNode for search tree node representation
  * @see CbcTree for node selection/storage
  * @see CbcCutGenerator for cutting plane management
@@ -265,6 +290,19 @@ public:
       If doStatistics is 1 summary statistics are printed
       if 2 then also the path to best solution (if found by branching)
       if 3 then also one line per node
+
+      @algorithm Main B&C loop:
+        1. Process root: generate cuts, run heuristics, update bounds
+        2. While tree not empty and limits not reached:
+           - Pop best node from CbcTree (configurable: best-bound, depth-first, etc.)
+           - Reconstruct subproblem from node ancestry (bounds, cuts)
+           - Solve LP relaxation via resolve()
+           - If infeasible or dominated: fathom node
+           - Else: generate cuts via solveWithCuts(), branch if fractional
+        3. Return best integer solution found (or prove infeasible)
+
+      @complexity Per-node: O(LP_solve) + O(cut_generation) + O(branching_decision)
+        Total nodes: highly problem-dependent, exponential worst-case
     */
   void branchAndBound(int doStatistics = 0);
 
@@ -275,6 +313,17 @@ private:
       and reoptimises using the solver's native %resolve() method.
       It returns true if the subproblem remains feasible at the end of the
       evaluation.
+
+      @algorithm Cut-and-resolve loop at each node:
+        1. For each cut generator (Gomory, MIR, clique, probing, etc.):
+           - Generate violated cuts for current LP solution
+           - Add cuts to LP relaxation
+        2. Re-solve LP with new cuts
+        3. Run primal heuristics (RINS, feasibility pump, rounding)
+        4. Repeat until: no cuts found, iteration limit, or infeasible
+
+      @complexity O(numberTries × (num_generators × cut_gen_cost + LP_resolve))
+        Cut generation cost varies: Gomory O(m), probing O(n×m)
     */
   bool solveWithCuts(OsiCuts &cuts, int numberTries, CbcNode *node);
   /** Generate one round of cuts - serial mode
@@ -444,6 +493,12 @@ public:
         If the problem is infeasible #numberObjects_ is set to -1.
         A client must use deleteObjects() before a second call to findCliques().
         If priorities exist, clique priority is set to the default.
+
+        @algorithm Scans constraint matrix for set-packing/partitioning rows
+          (all binary variables, ≤1 or =1 RHS). Constructs CbcClique branching
+          objects that enforce "at most one" semantics during branching.
+
+        @complexity O(m × row_density) where m = number of rows
     */
   CbcModel *findCliques(bool makeEquality, int atLeastThisMany,
     int lessThanThis, int defaultValue = 1000);
@@ -452,6 +507,16 @@ public:
 
       Returns the new model, or NULL if feasibility is lost.
       If weak is true then just does a normal presolve
+
+      @algorithm MIP-specific presolve reductions:
+        - Coefficient reduction using integrality
+        - Probing: fix variables by implication analysis
+        - Clique detection and strengthening
+        - Coefficient tightening on GUB constraints
+        - Objective function analysis for bound tightening
+
+      @ref Savelsbergh, M.W.P. (1994). "Preprocessing and probing techniques
+        for mixed integer programming problems". ORSA J. Computing 6(4):445-454.
 
       \todo It remains to work out the cleanest way of getting a solution to
             the original problem at the end. So this is very preliminary.
