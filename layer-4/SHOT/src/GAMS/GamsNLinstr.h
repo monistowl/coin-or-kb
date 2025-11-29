@@ -10,7 +10,25 @@
    after changes in the GAMS I/O libraries as provided by GAMS.
    GAMS is NOT obligated to issue a warning when it changes the NL instructions.
  */
-
+/**
+ * @file GAMS/GamsNLinstr.h
+ * @brief GAMS nonlinear instruction opcodes and function codes
+ *
+ * Defines GAMS bytecode for nonlinear expressions.
+ *
+ * **GamsOpCode Enum:**
+ * - Stack operations: nlPushV, nlPushI, nlStore
+ * - Arithmetic: nlAdd, nlSub, nlMul, nlDiv, nlUMin
+ * - Function calls: nlCallArg1, nlCallArg2, nlCallArgN
+ *
+ * **GamsFuncCode Enum:**
+ * - Math functions: fnexp, fnlog, fnsqrt, fnabs, fnsin, fncos
+ * - Comparison: fnmin, fnmax, fnifthen
+ * - Special: fnpower, fnsignpower, fnentropy
+ *
+ * @warning Bytecode format may change without notice
+ * @see ModelingSystemGAMS.h for bytecode interpretation
+ */
 #ifndef GAMSNLINSTR_H_
 #define GAMSNLINSTR_H_
 

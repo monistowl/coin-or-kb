@@ -7,7 +7,24 @@
    This software is licensed under the Eclipse Public License 2.0.
    Please see the README and LICENSE files for more information.
 */
-
+/**
+ * @file MIPSolver/MIPSolverCplexSingleTreeLegacy.h
+ * @brief Legacy CPLEX callback API for single-tree ESH
+ *
+ * Uses older callback API (pre-CPLEX 12.10 generic callbacks).
+ *
+ * **Legacy Callback Classes:**
+ * - HCallbackI: Heuristic callback for primal solutions
+ * - InfoCallbackI: Progress information callback
+ * - CtCallbackI: Lazy constraint callback for hyperplanes
+ *
+ * **MIPSolverCplexSingleTreeLegacy Class:**
+ * - Inherits MIPSolverCplex for base functionality
+ * - Uses IloCplex::LazyConstraintCallbackI/HeuristicCallbackI
+ *
+ * @deprecated Prefer MIPSolverCplexSingleTree with generic callbacks
+ * @see MIPSolverCplexSingleTree.h for modern callback API
+ */
 #pragma once
 #include "MIPSolverCplex.h"
 #include "MIPSolverCallbackBase.h"
