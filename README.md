@@ -60,15 +60,49 @@ coin-or-kb/
 
 ## Annotation Progress
 
-| Layer | Status | Libraries | Files Annotated |
-|-------|--------|-----------|-----------------|
-| Layer 0 | Pass 1 Complete | CoinUtils, SuiteSparse | 78 / 85 |
-| Layer 1 | Pass 1 Complete | Osi, Clp, CppAD, qpOASES | 105 / 166 |
-| Layer 2 | Pass 1 Complete | Cgl, Cbc, Ipopt, ADOL-C | 275 / 303 |
-| Layer 3 | Pass 1 Complete | 10 libraries | 318 / ~400 |
-| Layer 4 | In Progress | HiGHS + 9 others | 83 / ~900 |
+| Layer | Status | Libraries | Pass 1 | Pass 2 |
+|-------|--------|-----------|--------|--------|
+| Layer 0 | **Pass 2 Complete** | CoinUtils, SuiteSparse | 77 files | 43 files |
+| Layer 1 | Pass 1 Complete | Osi, Clp, CppAD, qpOASES | 105 files | - |
+| Layer 2 | Pass 1 Complete | Cgl, Cbc, Ipopt, ADOL-C | 275 files | - |
+| Layer 3 | Pass 1 Complete | 10 libraries | 318 files | - |
+| Layer 4 | Pass 1 In Progress | HiGHS + 10 others | 422 files | - |
 
-**Total:** ~860 headers annotated across 20+ optimization libraries
+**Total:** 1,197 annotated files across 28 libraries
+
+## JSON API
+
+The knowledge base is available as a machine-readable JSON API for AI agents and MCP servers:
+
+```
+site/static/api/annotations.json      # Full API (1.8 MB, pretty-printed)
+site/static/api/annotations.min.json  # Minified (1.5 MB)
+```
+
+**Structure:**
+```json
+{
+  "version": "1.0",
+  "layers": {
+    "layer-0": {
+      "CoinUtils": {
+        "file_count": 68,
+        "pass2_count": 33,
+        "files": {
+          "src/CoinFactorization.hpp": {
+            "brief": "LU factorization for simplex basis",
+            "algorithm": "LU factorization with Markowitz pivot selection",
+            "math": "B = L·U where L lower triangular, U upper triangular",
+            "complexity": "O(nnz) for sparse solves"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+The API is regenerated on every push via GitHub Actions (takes ~2 seconds).
 
 ## Annotation Schema
 
@@ -142,8 +176,24 @@ Annotations use Doxygen-compatible comment blocks:
 
 ## Usage for AI Agents
 
-### Finding Code
+### Primary: JSON API
+The recommended way to access the knowledge base is via the JSON API:
+
+```python
+import json
+with open('site/static/api/annotations.json') as f:
+    kb = json.load(f)
+
+# Find all LU factorization implementations
+for layer in kb['layers'].values():
+    for lib in layer['libraries'].values():
+        for path, file in lib['files'].items():
+            if 'algorithm' in file and 'LU' in file.get('algorithm', ''):
+                print(f"{lib['name']}/{path}: {file['algorithm']}")
 ```
+
+### Direct Source Search
+```bash
 # Search for algorithm implementations
 grep -r "@algorithm.*Markowitz" layer-*/
 
@@ -152,10 +202,10 @@ grep -r "@see.*HighsDomain" layer-4/HiGHS/
 ```
 
 ### Understanding a Subsystem
-1. Start with the main header's `@brief` and `@see` tags
-2. Follow `@see` references to related components
-3. Look for `@algorithm` tags to identify techniques
-4. Check `@math` for underlying theory
+1. Query the JSON API for the library/file
+2. Check `@brief` for purpose, `@algorithm` for technique
+3. Follow `@see` references to related components
+4. Check `@math` for underlying theory, `@complexity` for performance
 
 ### Contribution Guidelines
 See [AGENTS.md](AGENTS.md) for detailed instructions on:
