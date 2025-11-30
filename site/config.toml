@@ -1,0 +1,31 @@
+# Zola configuration for COIN-OR Knowledge Base
+
+base_url = "https://monistowl.github.io/coin-or-kb"
+title = "COIN-OR Knowledge Base"
+description = "Annotated documentation for optimization solver libraries"
+compile_sass = true
+build_search_index = true
+generate_feeds = false
+
+[markdown]
+highlight_code = true
+highlight_theme = "base16-ocean-dark"
+extra_syntaxes_and_themes = []
+
+[search]
+include_title = true
+include_description = true
+include_path = true
+include_content = true
+
+[extra]
+# For KaTeX math rendering
+katex_enable = true
+
+[[taxonomies]]
+name = "algorithms"
+feed = false
+
+[[taxonomies]]
+name = "layer"
+feed = false

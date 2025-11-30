@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} - {{ config.title }}{% endblock %}
+
+{% block content %}
+<article class="class-documentation">
+    <header class="class-header">
+        <h1>{{ page.title }}</h1>
+        {% if page.description %}
+        <p class="brief">{{ page.description }}</p>
+        {% endif %}
+
+        {% if page.extra.layer is defined %}
+        <div class="class-meta">
+            <span class="layer-badge">Layer {{ page.extra.layer }}</span>
+            {% if page.extra.library %}
+            <span class="library-badge">{{ page.extra.library }}</span>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if page.extra.api_url %}
+        <div class="api-link">
+            <a href="{{ page.extra.api_url }}">JSON API</a>
+        </div>
+        {% endif %}
+    </header>
+
+    <nav class="class-nav">
+        <ul>
+            <li><a href="#description">Description</a></li>
+            <li><a href="#algorithms">Algorithms</a></li>
+            <li><a href="#methods">Methods</a></li>
+            <li><a href="#source">Source</a></li>
+        </ul>
+    </nav>
+
+    <section id="description" class="class-section">
+        {{ page.content | safe }}
+    </section>
+
+    {% if page.extra.header_file %}
+    <section id="source" class="class-section">
+        <h2>Source Location</h2>
+        <p>Header: <code>{{ page.extra.header_file }}</code></p>
+        {% if page.extra.doxygen_url %}
+        <p><a href="{{ page.extra.doxygen_url }}">View in Doxygen</a></p>
+        {% endif %}
+    </section>
+    {% endif %}
+</article>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.class-header {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.class-meta {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.layer-badge, .library-badge {
+    background: var(--accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.library-badge {
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent);
+}
+
+.class-nav {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+    z-index: 100;
+}
+
+.class-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+}
+
+.class-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.class-nav a:hover {
+    color: var(--accent-light);
+}
+
+.class-section {
+    margin: 2rem 0;
+    padding: 1rem 0;
+}
+
+.brief {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+</style>
+{% endblock %}

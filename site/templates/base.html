@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config.title }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <link rel="stylesheet" href="{{ get_url(path='style.css') | safe }}">
+
+    <!-- JSON-LD for AI discoverability -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{ config.title }}",
+        "description": "{{ config.description }}",
+        "url": "{{ config.base_url }}"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ get_url(path='/') }}" class="logo">COIN-OR KB</a>
+            <ul>
+                <li><a href="{{ get_url(path='/libraries/') }}">Libraries</a></li>
+                <li><a href="{{ get_url(path='/algorithms/') }}">Algorithms</a></li>
+                <li><a href="/api/index.json">API (JSON)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>COIN-OR Knowledge Base - Machine-readable optimization solver documentation</p>
+        <p><a href="/api/index.json">JSON API</a> | <a href="https://github.com/monistowl/coin-or-kb">Source</a></p>
+    </footer>
+</body>
+</html>

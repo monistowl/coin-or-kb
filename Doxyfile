@@ -1,0 +1,115 @@
+# Doxyfile for COIN-OR Knowledge Base
+# Generates XML output for transformation to JSON + Markdown
+
+PROJECT_NAME           = "COIN-OR Knowledge Base"
+PROJECT_BRIEF          = "Annotated optimization solver libraries"
+OUTPUT_DIRECTORY       = build/doxygen
+
+# Input sources - all layer directories
+INPUT                  = layer-0 layer-1 layer-2 layer-3 layer-4
+RECURSIVE              = YES
+FILE_PATTERNS          = *.h *.hpp *.cpp *.c
+
+# Extract everything
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_ANON_NSPACES   = YES
+
+# Include source code in output
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+STRIP_CODE_COMMENTS    = NO
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+
+# XML output (primary for our pipeline)
+GENERATE_XML           = YES
+XML_OUTPUT             = xml
+XML_PROGRAMLISTING     = YES
+
+# HTML output with doxygen-awesome-css theme
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_EXTRA_STYLESHEET  = /usr/share/doxygen-awesome-css/doxygen-awesome.css \
+                         /usr/share/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
+                         /usr/share/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css
+HTML_COLORSTYLE        = LIGHT
+HTML_COLORSTYLE_HUE    = 209
+HTML_COLORSTYLE_SAT    = 255
+HTML_COLORSTYLE_GAMMA  = 113
+HTML_DYNAMIC_MENUS     = YES
+HTML_DYNAMIC_SECTIONS  = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = NO
+GENERATE_TREEVIEW      = YES
+TREEVIEW_WIDTH         = 300
+HTML_HEADER            =
+HTML_FOOTER            =
+
+# Math rendering with MathJax (KaTeX-compatible)
+USE_MATHJAX            = YES
+MATHJAX_VERSION        = MathJax_3
+MATHJAX_FORMAT         = HTML-CSS
+MATHJAX_RELPATH        = https://cdn.jsdelivr.net/npm/mathjax@3/es5/
+MATHJAX_EXTENSIONS     =
+
+# Disable other outputs
+GENERATE_LATEX         = NO
+GENERATE_MAN           = NO
+GENERATE_RTF           = NO
+
+# Parsing configuration
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO
+SKIP_FUNCTION_MACROS   = NO
+
+# Handle COIN-OR specific macros
+PREDEFINED             = COINUTILSLIB_EXPORT= \
+                         CLPLIB_EXPORT= \
+                         CBCLIB_EXPORT= \
+                         OSILIB_EXPORT= \
+                         CGLEXPORT= \
+                         IPOPTLIB_EXPORT= \
+                         BONMINLIB_EXPORT= \
+                         COUENNELIB_EXPORT= \
+                         OSLIB_EXPORT=
+
+# Documentation parsing
+JAVADOC_AUTOBRIEF      = YES
+MULTILINE_CPP_IS_BRIEF = YES
+TAB_SIZE               = 4
+ALIASES                = "algorithm=\par Algorithm:\n" \
+                         "complexity=\par Complexity:\n" \
+                         "math=\par Mathematics:\n" \
+                         "ref=\par References:\n" \
+                         "implementation=\par Implementation:\n" \
+                         "prereq=\par Prerequisites:\n" \
+                         "invariant=\par Invariant:\n" \
+                         "postcondition=\par Postcondition:\n" \
+                         "precondition=\par Precondition:\n"
+
+# Include call graphs (useful for understanding code flow)
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+HAVE_DOT               = NO
+
+# Warnings
+WARN_IF_UNDOCUMENTED   = NO
+WARN_NO_PARAMDOC       = NO
+
+# Sorting
+SORT_MEMBER_DOCS       = YES
+SORT_BRIEF_DOCS        = YES
+SORT_MEMBERS_CTORS_1ST = YES
+
+# Class diagrams
+CLASS_DIAGRAMS         = YES
+HIDE_UNDOC_RELATIONS   = NO
+
+# Additional options
+SHOW_INCLUDE_FILES     = YES
+SHOW_USED_FILES        = YES
+VERBATIM_HEADERS       = YES

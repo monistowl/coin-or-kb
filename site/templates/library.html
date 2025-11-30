@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} - {{ config.title }}{% endblock %}
+
+{% block content %}
+<article class="library-documentation">
+    <header class="library-header">
+        <h1>{{ section.title }}</h1>
+        {% if section.description %}
+        <p class="description">{{ section.description }}</p>
+        {% endif %}
+
+        {% if section.extra.layer is defined %}
+        <div class="library-meta">
+            <span class="layer-badge">Layer {{ section.extra.layer }}</span>
+        </div>
+        {% endif %}
+    </header>
+
+    {{ section.content | safe }}
+
+    {% if section.pages %}
+    <section class="classes-section">
+        <h2>Classes</h2>
+        <div class="class-grid">
+        {% for page in section.pages %}
+            <div class="class-card">
+                <a href="{{ page.permalink }}">
+                    <h3>{{ page.title }}</h3>
+                    {% if page.description %}
+                    <p>{{ page.description | truncate(length=120) }}</p>
+                    {% endif %}
+                </a>
+                {% if page.extra.algorithms %}
+                <div class="algorithms-tags">
+                    {% for algo in page.extra.algorithms %}
+                    <span class="algo-tag">{{ algo }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    {% if section.subsections %}
+    <section class="submodules-section">
+        <h2>Submodules</h2>
+        <ul class="subsection-list">
+        {% for subsection_path in section.subsections %}
+            {% set subsection = get_section(path=subsection_path) %}
+            <li>
+                <a href="{{ subsection.permalink }}">{{ subsection.title }}</a>
+                {% if subsection.description %}
+                <p>{{ subsection.description }}</p>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </section>
+    {% endif %}
+</article>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.library-header {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.library-meta {
+    margin-top: 1rem;
+}
+
+.layer-badge {
+    background: var(--accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.class-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.class-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    transition: border-color 0.2s;
+}
+
+.class-card:hover {
+    border-color: var(--accent-light);
+}
+
+.class-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.class-card h3 {
+    color: var(--accent-light);
+    margin: 0 0 0.5rem;
+}
+
+.class-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.algorithms-tags {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.algo-tag {
+    background: var(--code-bg);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.classes-section h2,
+.submodules-section h2 {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+</style>
+{% endblock %}
