@@ -8,9 +8,18 @@ This document provides instructions for AI agents. There are two modes:
 
 ## Part 1: Using the Knowledge Base
 
-### Quick Start
+### Hosted API (Fastest - No Setup)
 
-The fastest way to become an expert on COIN-OR optimization solvers:
+Point any agent at the hosted JSON API:
+
+```
+https://monistowl.github.io/coin-or-kb/api/annotations.json
+```
+
+**Example prompt for any LLM:**
+> Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 1,197 files across 28 libraries.
+
+### Local Clone (For Development)
 
 ```bash
 # Clone and explore
@@ -56,7 +65,7 @@ For persistent access via Claude Desktop or other MCP clients:
 - `search_math(query)` — Find mathematical concepts
 - `get_library(name)` — Library overview with annotated files
 - `get_file(library, file)` — Full annotations for a file
-- `list_algorithms()` — All 87+ documented algorithms
+- `list_algorithms()` — All 100+ documented algorithms
 - `get_stats()` — Knowledge base statistics
 
 ### JSON API
@@ -119,7 +128,9 @@ coin-or-kb/
 └── prompts/          # Context templates
 ```
 
-**Processing order:** Work strictly by layer. Complete all Layer 0 libraries before starting Layer 1. Within a layer, order does not matter.
+**Processing order for Pass 1:** Work strictly by layer. Complete all Layer 0 libraries before starting Layer 1. Within a layer, order does not matter.
+
+**Processing order for Pass 2:** Prioritize high-value algorithmic files across layers. Focus on core algorithm implementations (e.g., simplex pivot selection, IPM iteration, branch-and-bound) before utility classes.
 
 ---
 
@@ -140,7 +151,7 @@ Use Doxygen-compatible comment blocks with the following tags:
 | Tag | When to Use | Description |
 |-----|-------------|-------------|
 | `@algorithm` | Implementing a named algorithm | Standard name of the algorithm |
-| `@math` | Code with mathematical basis | Formulas, theorems, mathematical relationships |
+| `@math` | Code with mathematical basis | Formulas, theorems, mathematical relationships. Use Unicode math symbols (∇, ∈, ≤, Σ, etc.) for readability. |
 | `@complexity` | Algorithms, hot paths | Time and space complexity with brief justification |
 | `@ref` | Citing literature | Full citation: Author (Year). "Title". Journal/Book |
 | `@invariant` | Data structures, stateful code | Conditions that must hold |
@@ -195,6 +206,27 @@ int solve(double* rhs);
  * @see updateBasis(), refactorize()
  */
 PivotInfo selectPivot(const CoinPackedMatrix* matrix, double tolerance);
+```
+
+**Full with matrix notation (IPM example):**
+```cpp
+/**
+ * @brief Solve KKT system for interior point method
+ *
+ * @algorithm Primal-Dual Interior Point Method
+ * @math KKT system solved each iteration:
+ * [W    A^T  -I ] [Δx]   [∇f - A^T y - z    ]
+ * [A    0    0  ] [Δy] = [-c(x)             ]
+ * [Z    0    X  ] [Δz]   [μe - XZe          ]
+ * where W = ∇²L (Hessian), A = ∇c (constraint Jacobian).
+ * Reduced to augmented system via block elimination.
+ *
+ * @complexity O(m²n + m³) per iteration: O(m²n) to form, O(m³) to factor.
+ * @ref Wächter & Biegler (2006). "On the implementation of an interior-point
+ *   filter line-search algorithm". Mathematical Programming 106(1):25-57.
+ *
+ * @see IpBacktrackingLineSearch for globalization
+ */
 ```
 
 ---
