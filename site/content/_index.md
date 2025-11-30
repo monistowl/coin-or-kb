@@ -147,7 +147,29 @@ where $r_i$ is the row count and $c_j$ is the column count for element $a_{ij}$.
 
 This knowledge base is built for machine consumption. Point your agent at it and instantly gain expertise on 28 optimization libraries.
 
-### Quick Start: MCP Server
+### Hosted API (No Setup Required)
+
+Fetch the JSON API directly — works with any agent that can read URLs:
+
+```
+https://monistowl.github.io/coin-or-kb/api/annotations.json
+```
+
+**Example prompt for Claude, GPT, or any LLM:**
+
+> Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 1,197 files across 28 libraries.
+
+**API Endpoints:**
+
+| Endpoint | Description |
+|----------|-------------|
+| [`/api/annotations.json`](api/annotations.json) | Full knowledge base with semantic annotations (1.8 MB) |
+| [`/api/files.json`](api/files.json) | File index with paths and brief descriptions |
+| [`/algorithms/`](algorithms/) | Human-readable algorithm cross-reference (100 algorithms) |
+
+---
+
+### Local MCP Server (For Claude Desktop)
 
 Add to your Claude Desktop `claude_desktop_config.json`:
 

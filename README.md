@@ -11,6 +11,59 @@ This repository contains optimization solver source code enriched with structure
 - Connect code to underlying mathematical theory
 - Cross-reference related components across libraries
 
+## Quick Start for AI Agents
+
+### Option 1: Hosted API (No Setup)
+
+Point any agent at the hosted JSON API:
+
+```
+https://monistowl.github.io/coin-or-kb/api/annotations.json
+```
+
+**Example prompt:**
+
+> Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and help me understand how COIN-OR implements LU factorization for the simplex method.
+
+**Hosted endpoints:**
+- **Full API**: https://monistowl.github.io/coin-or-kb/api/annotations.json (1.8 MB)
+- **File Index**: https://monistowl.github.io/coin-or-kb/api/files.json
+- **Algorithm Reference**: https://monistowl.github.io/coin-or-kb/algorithms/
+
+### Option 2: Local Clone (For Development)
+
+```bash
+git clone https://github.com/monistowl/coin-or-kb.git
+cd coin-or-kb
+
+# CLI queries
+./scripts/kb-query.py algo "Markowitz"      # Search algorithms
+./scripts/kb-query.py lib CoinUtils         # Get library overview
+./scripts/kb-query.py stats                 # Show statistics
+
+# Or load JSON directly
+python3 -c "import json; kb = json.load(open('site/static/api/annotations.json')); print(kb['stats'])"
+```
+
+### Option 3: MCP Server (For Claude Desktop)
+
+Add to `~/.config/Claude/claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "coin-or-kb": {
+      "command": "python",
+      "args": ["/path/to/coin-or-kb/mcp-server/coin_or_kb_server.py"]
+    }
+  }
+}
+```
+
+Then ask Claude: "Use the coin-or-kb tools to find simplex implementations."
+
+---
+
 ## Repository Structure
 
 ```
