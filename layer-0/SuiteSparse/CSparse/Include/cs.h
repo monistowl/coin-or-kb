@@ -13,6 +13,21 @@
  * - Direct solvers: cs_cholsol, cs_lusol, cs_qrsol
  * - Dulmage-Mendelsohn decomposition (cs_dmperm)
  *
+ * @algorithm Sparse Matrix Operations:
+ *   - Compressed-column (CSC): column pointers + row indices + values
+ *   - cs_compress: O(nnz) triplet to CSC conversion
+ *   - cs_multiply: sparse matrix-matrix product using symbolic + numeric phases
+ *   - cs_chol/cs_lu/cs_qr: left-looking factorization algorithms
+ *
+ * @math Sparse formats:
+ *   CSC: A stored as (p, i, x) where p[j]..p[j+1]-1 index column j entries
+ *   Triplet (COO): (row[k], col[k], val[k]) for k = 0..nz-1
+ *
+ * @complexity Space: O(nnz + n) for CSC format
+ *   cs_compress: O(nnz) time for triplet → CSC
+ *   cs_multiply: O(flops) where flops depends on sparsity pattern
+ *   cs_chol/cs_lu: O(nnz(L)²/n) typical for sparse factors
+ *
  * @ref Davis (2006). "Direct Methods for Sparse Linear Systems".
  *      SIAM. ISBN: 978-0-898716-13-9
  *

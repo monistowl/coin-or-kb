@@ -24,6 +24,18 @@
  * - Multi-language support (messages default to US English)
  * - Output to stdout or FILE pointer
  *
+ * @algorithm Message Handling System:
+ *   Message construction: printf-style formatting with type safety
+ *   Severity levels: 0=nothing, 1=fatal, 2=error, 3=warning, 4+=info
+ *   Detail filtering: only print if message detail ≤ handler logLevel
+ *
+ *   Output chain: CoinMessageHandler << value1 << value2 << CoinMessageEol
+ *   Supports: int, double, char, string, and custom precision
+ *
+ * @complexity Message lookup: O(1) by message number
+ *   Formatting: O(message_length)
+ *   Filtering: O(1) severity/detail check before formatting
+ *
  * @see CoinMessage for standard COIN-OR message definitions
  * @see CoinOneMessage for individual message container
  */

@@ -11,10 +11,31 @@
  * - btf_strongcomp: Strongly connected components (block decomposition)
  * - btf_order: Combined BTF ordering (calls both above)
  *
- * @algorithm Maximum Transversal (Duff's Algorithm MC21)
- * @algorithm Tarjan's Strongly Connected Components
+ * @algorithm Maximum Transversal (Duff's Algorithm MC21):
+ *   Find a permutation Q such that A*Q has a zero-free diagonal.
+ *   Uses depth-first search with augmenting paths to build maximum matching.
+ *   1. Cheap matching: greedily match rows with unmatched columns
+ *   2. Augmenting path search: find alternating paths to extend matching
+ *
+ * @algorithm Tarjan's Strongly Connected Components:
+ *   Find permutation P such that P*A*P' is block upper triangular.
+ *   1. Build directed graph: edge i→j if A(i,j) ≠ 0 and i ≠ j
+ *   2. Find SCCs using depth-first search with low-link values
+ *   3. Order SCCs in reverse topological order
+ *
+ * @math Structural rank: max # nonzeros achievable on diagonal = sprank(A)
+ *   If sprank(A) < n, matrix is structurally singular.
+ *   BTF form: P*A*Q = | B_11  B_12 ... | with square diagonal blocks B_ii
+ *                     |  0   B_22 ... |
+ *
+ * @complexity Maximum transversal: O(nnz + n) time and O(n) space
+ *   SCC decomposition: O(nnz + n) time (single DFS pass)
+ *   Total BTF ordering: O(nnz + n) time and space
+ *
  * @ref Duff (1981). "On Algorithms for Obtaining a Maximum Transversal".
  *      ACM Trans. Math. Software 7(3):315-330.
+ * @ref Tarjan (1972). "Depth-first search and linear graph algorithms".
+ *      SIAM J. Computing 1(2):146-160.
  *
  * @see klu.h for sparse LU factorization using BTF
  */

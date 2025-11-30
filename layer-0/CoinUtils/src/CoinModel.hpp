@@ -10,6 +10,19 @@
  * Supports row/column names, string-based expressions, and incremental
  * building. Convert to CoinPackedMatrix for solver use.
  *
+ * @algorithm Model Construction Interface:
+ *   Three building modes:
+ *   1. Row-by-row: addRow(indices, values, lb, ub)
+ *   2. Column-by-column: addCol(indices, values, lb, ub, obj)
+ *   3. Element-by-element: setElement(row, col, value)
+ *
+ *   Name handling: hash tables for row/column name lookup
+ *   Expression parsing: "2 x1 + 3 x2 <= 5" string syntax
+ *
+ * @complexity Insertion: O(1) amortized with dynamic arrays
+ *   Name lookup: O(1) expected with hash tables
+ *   Conversion to CoinPackedMatrix: O(nnz)
+ *
  * @see CoinBuild for simpler row-by-row construction
  * @see CoinPackedMatrix for the final sparse matrix format
  */

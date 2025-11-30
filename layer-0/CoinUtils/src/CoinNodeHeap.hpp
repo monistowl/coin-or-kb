@@ -6,10 +6,29 @@
  * Updates MUST always decrease costs
  *
  * @file CoinNodeHeap.hpp
- * @brief Monotone heap
+ * @brief Monotone min-heap for Dijkstra's algorithm
  * @author Samuel Souza Brito and Haroldo Gambini Santos
  * Contact: samuelbrito@ufop.edu.br and haroldo@ufop.edu.br
  * @date 03/27/2020
+ *
+ * @algorithm Monotone Min-Heap:
+ *   Binary heap with decreasing-key only (no arbitrary updates).
+ *   Heap property: parent.cost ≤ children.cost
+ *   Operations:
+ *   - update(node, newCost): decrease key, bubble up (newCost < oldCost)
+ *   - removeFirst(): extract minimum, bubble down replacement
+ *   - isEmpty(): check if all nodes at infinity
+ *
+ * @math Used in Dijkstra where distances only decrease.
+ *   Monotonicity allows simpler implementation than general heap.
+ *   Position array enables O(1) node lookup for decrease-key.
+ *
+ * @complexity update: O(log n) for bubble-up
+ *   removeFirst: O(log n) for bubble-down
+ *   isEmpty: O(1)
+ *   Space: O(n) for heap + position array
+ *
+ * @see CoinShortestPath for Dijkstra implementation using this heap
  *
  * \copyright{Copyright 2020 Brito, S.S. and Santos, H.G.}
  * \license{This This code is licensed under the terms of the Eclipse Public License (EPL).}

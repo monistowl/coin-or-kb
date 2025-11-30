@@ -7,10 +7,33 @@
  * Specialized for sparse graphs.
  *
  * @file CoinShortestPath.hpp
- * @brief Shortest path algorithm
+ * @brief Dijkstra's algorithm for single-source shortest paths
  * @author Samuel Souza Brito and Haroldo Gambini Santos
  * Contact: samuelbrito@ufop.edu.br and haroldo@ufop.edu.br
  * @date 03/27/2020
+ *
+ * @algorithm Dijkstra's Algorithm (priority queue implementation):
+ *   Input: Graph G=(V,E) with non-negative edge weights w, source s
+ *   1. Initialize: dist[s] = 0, dist[v] = ∞ for v ≠ s
+ *   2. Insert all vertices into priority queue keyed by dist[]
+ *   3. While queue not empty:
+ *      - u := extractMin()
+ *      - For each neighbor v of u:
+ *        if dist[u] + w(u,v) < dist[v]:
+ *          dist[v] := dist[u] + w(u,v)
+ *          prev[v] := u
+ *          decreaseKey(v, dist[v])
+ *
+ * @math Shortest path d(s,v) = min Σw(e) over all s-v paths.
+ *   Optimal substructure: if P is shortest s-v path through u,
+ *   then P[s,u] is shortest s-u path.
+ *
+ * @complexity Time: O((V + E) log V) with binary heap
+ *   Time: O(V² + E) with simple array (dense graphs)
+ *   Space: O(V) for distance/predecessor arrays
+ *
+ * @ref Dijkstra (1959). "A note on two problems in connexion with graphs".
+ *      Numerische Mathematik 1:269-271.
  *
  * \copyright{Copyright 2020 Brito, S.S. and Santos, H.G.}
  * \license{This This code is licensed under the terms of the Eclipse Public License (EPL).}

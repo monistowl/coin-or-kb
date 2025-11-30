@@ -6,10 +6,31 @@
  * Optionally computes occurrence of nodes in cliques.
  *
  * @file CoinCliqueList.hpp
- * @brief List of cliques
+ * @brief Sequential storage for cliques found in conflict graphs
  * @author Samuel Souza Brito and Haroldo Gambini Santos
  * Contact: samuelbrito@ufop.edu.br and haroldo@ufop.edu.br
  * @date 03/27/2020
+ *
+ * @algorithm Clique Storage:
+ *   Stores cliques as variable-length arrays with shared element pool
+ *   Operations:
+ *   - addClique(size, elements[]): append new clique
+ *   - cliqueElements(idx): retrieve clique by index
+ *   - computeNodeOccurrences: build inverse index (node → cliques)
+ *
+ *   Inverse index enables efficient lookup of which cliques contain a node
+ *
+ * @math Clique C ⊆ V is complete subgraph: ∀u,v ∈ C, (u,v) ∈ E
+ *   Used in conflict graphs where edges represent incompatibility
+ *   Clique inequality: Σ_{i∈C} x_i ≤ 1 (at most one var in clique can be 1)
+ *
+ * @complexity addClique: O(clique_size) for copying elements
+ *   cliqueElements/cliqueSize: O(1) random access
+ *   computeNodeOccurrences: O(total_elements) one-time setup
+ *   nNodeOccurrences: O(1) after setup
+ *
+ * @see CoinBronKerbosch for clique enumeration algorithm
+ * @see CoinConflictGraph for the underlying conflict structure
  *
  * \copyright{Copyright 2020 Brito, S.S. and Santos, H.G.}
  * \license{This This code is licensed under the terms of the Eclipse Public License (EPL).}

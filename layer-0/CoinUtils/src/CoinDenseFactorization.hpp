@@ -10,6 +10,21 @@
  * factorization methods, plus CoinDenseFactorization for small dense
  * problems using LAPACK-style LU.
  *
+ * @algorithm Dense LU Factorization (LAPACK-style):
+ *   Computes PA = LU using partial pivoting (row interchanges).
+ *   1. For k = 1 to n: find pivot = max|A(i,k)| for i >= k
+ *   2. Swap rows k and pivot row
+ *   3. Compute L(i,k) = A(i,k) / A(k,k) for i > k
+ *   4. Update A(i,j) -= L(i,k) * A(k,j) for i,j > k
+ *
+ * @math Dense LU: PA = LU where P is permutation, L unit lower triangular,
+ *   U upper triangular. FTRAN solves Lx = b then Ux = y.
+ *   BTRAN solves U'y = b then L'x = y.
+ *
+ * @complexity Time: O(n³/3) for factorization, O(n²) per solve
+ *   Space: O(n²) for dense storage
+ *   Use only for small basis matrices (n < 100-200)
+ *
  * @author John Forrest
  * @see CoinFactorization for sparse factorization
  * @see CoinSimpFactorization for simple implementation

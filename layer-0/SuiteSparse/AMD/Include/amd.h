@@ -8,8 +8,26 @@
  * than A would.
  *
  * @algorithm Approximate Minimum Degree (AMD)
+ *   Repeatedly eliminates the node with minimum approximate external degree:
+ *   1. Select pivot i with minimum approximate degree d̃(i)
+ *   2. Form element e from eliminated node and merge with adjacent elements
+ *   3. Update approximate degrees for remaining nodes
+ *   4. Apply aggressive absorption: absorb element e into element f if
+ *      adj(e) ⊆ adj(f), even when f is not adjacent to current pivot
+ *
+ * @math Approximate external degree:
+ *   d̃(i) ≈ |adj(i) ∪ (∪ adj(e) : e ∈ elements adjacent to i)| - |absorbed|
+ *   The true minimum degree would require d(i) = |L_{*i}| - 1 (column count
+ *   in Cholesky factor), but this is expensive to compute exactly.
+ *
+ * @complexity Time: O(nnz(A)·α(n)) average case with aggressive absorption,
+ *   where α is the inverse Ackermann function. Worst case O(n·nnz).
+ *   Space: O(nnz(A) + n) for the quotient graph representation.
+ *
  * @ref Amestoy, Davis, Duff (1996). "An Approximate Minimum Degree Ordering
  *      Algorithm". SIAM J. Matrix Analysis and Applications 17(4):886-905.
+ * @ref George, Liu (1989). "The Evolution of the Minimum Degree Ordering
+ *      Algorithm". SIAM Review 31(1):1-19.
  *
  * Key features:
  * - Aggressive absorption for better approximate degrees

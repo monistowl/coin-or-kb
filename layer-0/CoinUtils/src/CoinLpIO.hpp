@@ -18,6 +18,21 @@
  * Reads/writes CPLEX LP format with Min/Max objective, constraints,
  * bounds, and integer/binary variable declarations.
  *
+ * @algorithm LP File Parsing:
+ *   Sections: Minimize/Maximize, Subject To, Bounds, Integers/Generals/Binaries, End
+ *   Algebraic format: constraint_name: coeff1*var1 + coeff2*var2 <= rhs
+ *
+ *   Constraint types: <= (L), >= (G), = (E)
+ *   Bound keywords: Free, Inf, -Inf
+ *   Variable types: Integers, Generals (same), Binaries, Semi-Continuous
+ *
+ * @math Reads: min/max c'x s.t. Ax ≤ b, Ax ≥ b, Ax = b
+ *   Bounds: lb ≤ x ≤ ub or x free
+ *   Integrality: x ∈ Z or x ∈ {0,1}
+ *
+ * @complexity Parsing: O(file_size), token-based lexer
+ *   More human-readable than MPS but less standardized
+ *
  * @see CoinMpsIO for MPS file format support
  * @see CoinFileIO for underlying file I/O abstraction
  */

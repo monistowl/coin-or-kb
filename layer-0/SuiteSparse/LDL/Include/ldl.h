@@ -14,8 +14,27 @@
  * Triangular solves (ldl_lsolve, ldl_dsolve, ldl_ltsolve) complete the
  * solution of Ax = b.
  *
+ * @algorithm Sparse LDL' factorization (up-looking):
+ *   1. Symbolic: compute elimination tree and nonzero pattern of L
+ *      - Parent[j] = min{i > j : L(i,j) ≠ 0} defines elimination tree
+ *      - Lnz[j] = # nonzeros in column j of L (excluding diagonal)
+ *   2. Numeric: compute L and D column by column
+ *      - For each column j: gather contributions from columns k < j
+ *      - where k has nonzero in row j (i.e., L(j,k) ≠ 0)
+ *      - D(j,j) = A(j,j) - Σ L(j,k)² D(k,k)
+ *      - L(i,j) = (A(i,j) - Σ L(i,k) L(j,k) D(k,k)) / D(j,j)
+ *
  * @math A = L * D * L' where L is unit lower triangular, D is diagonal.
- *       Unlike Cholesky (A = L*L'), LDL' handles indefinite matrices.
+ *   Unlike Cholesky (A = L*L'), LDL' handles indefinite matrices.
+ *   If A is positive definite, D has all positive entries.
+ *   D may have negative entries for indefinite matrices.
+ *
+ * @complexity Time: O(nnz(L)²/n) average, O(nnz(L)·nnz(A)) worst case
+ *   Space: O(nnz(L) + n) for factors
+ *   Simple implementation - for production use CHOLMOD instead.
+ *
+ * @ref Davis (2005). "Algorithm 849: A Concise Sparse Cholesky Factorization
+ *      Package". ACM Trans. Math. Software 31(4):587-591.
  *
  * @see cholmod.h for more sophisticated Cholesky implementation
  * @see amd.h for fill-reducing orderings to use with LDL

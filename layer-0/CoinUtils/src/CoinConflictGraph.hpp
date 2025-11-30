@@ -2,14 +2,34 @@
  *
  * This file is part of the COIN-OR CBC MIP Solver
  *
- * Abstract class for a Conflict Graph, see CoinStaticConflictGraph and 
+ * Abstract class for a Conflict Graph, see CoinStaticConflictGraph and
  * CoinDynamicConflictGraph for concrete implementations.
  *
  * @file CoinConflictGraph.hpp
- * @brief Abstract class for conflict graph
+ * @brief Conflict graph for binary variable incompatibilities in MIP
  * @author Samuel Souza Brito and Haroldo Gambini Santos
  * Contact: samuelbrito@ufop.edu.br and haroldo@ufop.edu.br
  * @date 03/27/2020
+ *
+ * @algorithm Conflict Graph Construction:
+ *   For binary variables x_i ∈ {0,1}, build graph G where:
+ *   - Nodes: original variables x_i and complements x̄_i = 1 - x_i
+ *   - Edges: (u,v) if u=1 and v=1 simultaneously infeasible
+ *   Sources of conflicts:
+ *   1. Set packing constraints: x_i + x_j ≤ 1 → edge (x_i, x_j)
+ *   2. Variable bounds: x_i ≤ x_j → edge (x_i, x̄_j)
+ *   3. Clique constraints: Σx_i ≤ 1 → complete subgraph
+ *
+ * @math Independent set in conflict graph ↔ feasible partial assignment.
+ *   Clique C in conflict graph → valid inequality Σ_{i∈C} x_i ≤ 1.
+ *   Maximum clique gives strongest clique cut.
+ *
+ * @complexity Space: O(n²) worst case, but typically sparse O(n + m)
+ *   Conflict check: O(1) with adjacency matrix, O(degree) with lists
+ *   Clique storage: large cliques stored explicitly to save space
+ *
+ * @see CoinBronKerbosch for clique enumeration
+ * @see CoinCliqueList for clique storage
  *
  * \copyright{Copyright 2020 Brito, S.S. and Santos, H.G.}
  * \license{This This code is licensed under the terms of the Eclipse Public License (EPL).}

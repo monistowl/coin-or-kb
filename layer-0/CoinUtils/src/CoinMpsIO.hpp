@@ -9,6 +9,22 @@
  * Reads/writes standard MPS format including extensions for quadratic,
  * conic, and SOS constraints. Supports free format and compression.
  *
+ * @algorithm MPS File Parsing:
+ *   Sections: NAME, ROWS, COLUMNS, RHS, RANGES, BOUNDS, ENDATA
+ *   Fixed format: columns 1-2 (type), 5-12 (name1), 15-22 (name2), etc.
+ *   Free format: whitespace-separated fields
+ *
+ *   Row types: N (free/objective), E (equality), L (≤), G (≥)
+ *   Bound types: LO, UP, FX, FR, MI, PL, BV (binary), UI/LI (integer)
+ *   Extensions: QUADOBJ (Hessian), SOS (special ordered sets)
+ *
+ * @math Reads: min c'x s.t. l ≤ Ax ≤ u, lb ≤ x ≤ ub
+ *   RANGES section: row_i has both lower and upper when range specified
+ *   Integer markers: 'MARKER' 'INTORG'/'INTEND' for integer variables
+ *
+ * @complexity Parsing: O(file_size), single pass with hash tables for names
+ *   Supports gzip/bzip2 compression via CoinFileIO abstraction
+ *
  * @see CoinLpIO for LP file format support
  * @see CoinFileIO for underlying file I/O abstraction
  */

@@ -10,7 +10,24 @@
  * on the matrix's structure. Both are related to the minimum degree family
  * of algorithms.
  *
- * @algorithm Column Approximate Minimum Degree (COLAMD)
+ * @algorithm Column Approximate Minimum Degree (COLAMD):
+ *   Minimizes column fill-in for LU factorization of A (or A'A for QR).
+ *   1. Compute column elimination tree from structure of A'A
+ *   2. Use approximate external degree (like AMD) but for columns
+ *   3. Aggressive absorption: merge eliminated columns into supercolumns
+ *   4. Postorder the column elimination tree
+ *
+ * @algorithm SYMAMD (Symmetric AMD using COLAMD):
+ *   For symmetric A, apply COLAMD to A+A' structure to find fill-reducing order.
+ *
+ * @math Approximate column degree for LU:
+ *   deg(j) ≈ # rows in current column's nonzero pattern after elimination
+ *   Aggressive absorption reduces degree overestimates from element merging.
+ *
+ * @complexity Time: O(nnz(A)·α(n)) average with aggressive absorption
+ *   Space: O(nnz(A) + n) for quotient graph representation
+ *   Slightly slower than AMD but better for unsymmetric patterns.
+ *
  * @ref Davis, Gilbert, Larimore, Ng (2004). "A Column Approximate Minimum
  *      Degree Ordering Algorithm". ACM Trans. Math. Software 30(3):353-376.
  *

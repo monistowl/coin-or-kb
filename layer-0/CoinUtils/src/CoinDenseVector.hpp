@@ -12,6 +12,21 @@
  *
  * @tparam T Element type (typically double, float, or int)
  *
+ * @algorithm Dense Vector Storage:
+ *   Contiguous array of size n: elements_[0..n-1]
+ *   All positions allocated, O(1) random access
+ *   Element-wise operations: v3 = v1 + v2 applies to all indices
+ *
+ *   Supported operations: +, -, *, / (element-wise)
+ *   Norms: oneNorm (L1), twoNorm (L2/Euclidean), infNorm (L∞/max)
+ *
+ * @math Dense storage: x[i] stored for all i ∈ {0,...,n-1}
+ *   oneNorm = Σ|x_i|, twoNorm = √(Σx_i²), infNorm = max|x_i|
+ *
+ * @complexity Element access: O(1)
+ *   Vector operations: O(n)
+ *   Space: O(n) always, regardless of sparsity
+ *
  * @see CoinPackedVector for sparse storage
  * @see CoinIndexedVector for sparse with dense backing
  */
