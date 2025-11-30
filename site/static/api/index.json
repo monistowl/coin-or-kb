@@ -1,0 +1,17 @@
+{
+  "name": "COIN-OR Knowledge Base API",
+  "version": "1.0",
+  "description": "Machine-readable documentation for COIN-OR optimization libraries",
+  "libraries": [
+    {
+      "name": "CoinUtils",
+      "layer": 0,
+      "index": "/api/coinutils/index.json",
+      "classes": 122
+    }
+  ],
+  "usage": {
+    "list_classes": "GET /api/{library}/index.json",
+    "get_class": "GET /api/{library}/{ClassName}.json"
+  }
+}
