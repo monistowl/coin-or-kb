@@ -30,6 +30,27 @@
  * - STRONG_BRANCHING: Evaluate candidates via LP/NLP solves
  * - RELIABILITY_BRANCHING: Use pseudo-costs when trusted
  *
+ * @algorithm Branch-and-Bound for MINLP:
+ * Systematic enumeration via tree search with NLP relaxations at nodes.
+ * At each node: solve continuous relaxation, branch on fractional integer
+ * variable if not integer-feasible, prune if relaxation bound ≥ incumbent.
+ *
+ * @math Node selection affects convergence rate:
+ * - Best-bound: Select node with lowest relaxation value (best global bound)
+ * - Depth-first: Minimize memory, find feasible solutions quickly
+ * - Best-estimate: Use pseudo-costs to estimate integer solution quality
+ * Hybrid strategies (DiveFromBest) combine: dive from best-bound node
+ * until leaf, then return to best remaining node.
+ *
+ * @complexity O(2^m) worst case where m = number of binary variables.
+ * In practice, pruning via bounds and cuts dramatically reduces tree size.
+ * Strong branching: O(k · NLP) per node where k = candidates evaluated.
+ *
+ * @ref Belotti et al. (2013). "Mixed-integer nonlinear optimization".
+ *   Acta Numerica 22:1-131. [Comprehensive MINLP survey]
+ * @ref Achterberg, Koch & Martin (2005). "Branching rules revisited".
+ *   Operations Research Letters 33(1):42-54. [Branching strategies]
+ *
  * @see BonminSetup for the concrete Bonmin configuration
  * @see CbcBonmin for the main branch-and-bound driver
  */

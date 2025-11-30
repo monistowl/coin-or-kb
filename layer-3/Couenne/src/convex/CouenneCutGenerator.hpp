@@ -36,6 +36,34 @@
  * - addTangent(): Add tangent at given point
  * - createCut(): Build and validate OsiRowCut
  *
+ * @algorithm Spatial Branch-and-Bound with LP Relaxation:
+ * Global optimization via convex relaxation + branching. At each node:
+ * 1. Solve LP relaxation (convex underestimator of nonconvex MINLP)
+ * 2. If LP infeasible → prune node
+ * 3. If LP solution is MINLP-feasible → update incumbent
+ * 4. Otherwise: add convexification cuts and/or branch
+ *
+ * @math Convex envelope for w = f(x) on [l,u]:
+ * - Convex f: tangent cuts w ≥ f(x̄) + f'(x̄)(x - x̄) at sample points
+ * - Concave f: secant cut w ≤ f(l) + (f(u)-f(l))/(u-l) · (x-l)
+ * - Bilinear w = xy: McCormick envelope
+ *   w ≥ l_y·x + l_x·y - l_x·l_y (underestimator)
+ *   w ≥ u_y·x + u_x·y - u_x·u_y (underestimator)
+ *   w ≤ u_y·x + l_x·y - l_x·u_y (overestimator)
+ *   w ≤ l_y·x + u_x·y - u_x·l_y (overestimator)
+ *
+ * @complexity Cut generation: O(n) per node where n = #auxiliary variables.
+ * Each operator type has constant-time cut generation.
+ * LP solve: O(m³) worst case, typically much faster with warm starts.
+ *
+ * @ref McCormick (1976). "Computability of global solutions to factorable
+ *   nonconvex programs". Mathematical Programming 10:147-175.
+ * @ref Al-Khayyal & Falk (1983). "Jointly constrained biconvex programming".
+ *   Mathematics of Operations Research 8(2):273-286.
+ * @ref Tawarmalani & Sahinidis (2002). "Convexification and Global
+ *   Optimization in Continuous and Mixed-Integer Nonlinear Programming".
+ *   Kluwer Academic Publishers. [Convex envelopes for various operators]
+ *
  * @see CouenneProblem for the symbolic problem representation
  * @see expression::generateCuts() for per-operator cut generation
  */

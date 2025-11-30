@@ -31,6 +31,37 @@
  * - addOnlyViolated_: Only add cuts violated by current solution
  * - maxLocalSearch_: Limit on local search iterations
  *
+ * @algorithm Outer Approximation (OA) Decomposition:
+ * Benders-style decomposition for convex MINLP. Master problem is MILP
+ * containing linearizations of nonlinear constraints. Subproblem is NLP
+ * with integers fixed. Iterate until master and sub agree.
+ *
+ * Key insight: For convex MINLP, linearization at any feasible point
+ * provides valid outer approximation. Accumulating cuts from multiple
+ * NLP solves progressively tightens the MILP approximation.
+ *
+ * @math Given convex MINLP: min f(x,y) s.t. g(x,y) ≤ 0, y ∈ {0,1}
+ *
+ * OA Master (MILP): min η s.t. η ≥ f(x^k) + ∇f(x^k)ᵀ(x-x^k) ∀k
+ *                            0 ≥ g(x^k) + ∇g(x^k)ᵀ(x-x^k) ∀k
+ *
+ * NLP Sub (y=y*): min f(x,y*) s.t. g(x,y*) ≤ 0
+ *
+ * Convergence: For convex problems, finite ε-convergence. Each NLP solve
+ * either provides improving incumbent or cut proving master solution
+ * infeasible. MILP bound increases monotonically.
+ *
+ * @complexity #iterations typically small (tens to hundreds).
+ * Per iteration: O(MILP) + O(NLP). MILP grows with accumulated cuts.
+ * Total: problem-dependent, but often beats pure B&B for structured problems.
+ *
+ * @ref Duran & Grossmann (1986). "An outer-approximation algorithm for
+ *   a class of mixed-integer nonlinear programs". Math. Prog. 36:307-339.
+ * @ref Fletcher & Leyffer (1994). "Solving mixed integer nonlinear programs
+ *   by outer approximation". Math. Prog. 66:327-349.
+ * @ref Quesada & Grossmann (1992). "An LP/NLP based branch and bound
+ *   algorithm for convex MINLP". Comp. & Chem. Eng. 16:937-947.
+ *
  * @see OACutGenerator2 for classical OA implementation
  * @see BonOaNlpOptim for NLP-based OA variant
  * @see CglCutGenerator for the cut generator interface

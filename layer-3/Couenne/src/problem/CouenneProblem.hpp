@@ -36,6 +36,29 @@
  * **Symmetry handling:**
  * Uses nauty library for graph automorphism detection and orbital branching.
  *
+ * @algorithm Factorable Programming / Auxiliary Variable Reformulation:
+ * Transform general nonconvex MINLP into standard form via introduction
+ * of auxiliary variables for each nonlinear operator. Example:
+ *   Original: min x·sin(y²)
+ *   Reformulated: min w₁  s.t. w₁ = x·w₂, w₂ = sin(w₃), w₃ = y²
+ * Each auxiliary w_i = f_i(x) gets individual convexification.
+ *
+ * @math Bound propagation (FBBT) uses interval arithmetic:
+ * Given w = f(x,y) with x ∈ [x_L, x_U], y ∈ [y_L, y_U]:
+ * - Forward: [w_L, w_U] = f([x_L,x_U], [y_L,y_U])
+ * - Backward: [x_L,x_U] ← [x_L,x_U] ∩ f⁻¹([w_L,w_U], [y_L,y_U])
+ * OBBT solves: min/max x_i s.t. LP relaxation ≤ cutoff.
+ * Iterate until fixed point or iteration limit.
+ *
+ * @complexity Reformulation: O(e) where e = expression size.
+ * FBBT: O(n·k) per pass where n = #variables, k = avg. constraint length.
+ * OBBT: O(2n·LP) per round, typically 1-2 rounds effective.
+ *
+ * @ref Belotti et al. (2009). "Branching and bounds tightening techniques
+ *   for non-convex MINLP". Optimization Methods & Software 24(4-5):597-634.
+ * @ref Tawarmalani & Sahinidis (2005). "A polyhedral branch-and-cut approach
+ *   to global optimization". Mathematical Programming 103:225-249.
+ *
  * @see expression for the expression base class
  * @see CouenneCutGenerator for convexification cut generation
  */

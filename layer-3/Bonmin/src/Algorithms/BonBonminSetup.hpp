@@ -26,6 +26,31 @@
  * - initializeBBB(): Pure B&B with NLP at every node
  * - initializeBHyb(): Hybrid with OA cuts + occasional NLP
  *
+ * @algorithm MINLP Solver Framework:
+ * Bonmin implements multiple algorithms for convex MINLP:
+ * min f(x,y) s.t. g(x,y) ≤ 0, x ∈ ℝⁿ, y ∈ {0,1}ᵐ
+ *
+ * B_BB: Solve NLP relaxation at every B&B node. Most robust, slowest.
+ * B_OA: Outer Approximation - alternates MILP master and NLP subproblems.
+ * B_QG: Single-tree OA - generates OA cuts within one B&B tree.
+ * B_Hyb: Hybrid - OA cuts + NLP solves at key nodes (default, often fastest).
+ * B_Ecp: Extended Cutting Plane - linear cuts only, no NLP solves in tree.
+ *
+ * @math Outer Approximation generates cuts from NLP solutions x*:
+ * For convex constraint g(x) ≤ 0 at point x*:
+ *   g(x*) + ∇g(x*)ᵀ(x - x*) ≤ 0
+ * This linearization is valid for convex g. Collect cuts from multiple
+ * NLP solves to approximate the feasible region from outside.
+ *
+ * @complexity Per-node: O(NLP) for B_BB, O(LP) for B_Ecp.
+ * Hybrid reduces total NLP solves while maintaining solution quality.
+ * Total complexity problem-dependent; convex MINLP is NP-hard.
+ *
+ * @ref Bonami et al. (2008). "An algorithmic framework for convex mixed
+ *   integer nonlinear programs". Discrete Optimization 5(2):186-204.
+ * @ref Duran & Grossmann (1986). "An outer-approximation algorithm for
+ *   a class of mixed-integer nonlinear programs". Math. Prog. 36:307-339.
+ *
  * @see BabSetupBase for common configuration
  * @see BonminAmplSetup for AMPL-based initialization
  */

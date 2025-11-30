@@ -23,6 +23,28 @@
  * - Updated after each branching decision using actual results
  * - Used to avoid expensive strong branching after trust is established
  *
+ * @algorithm Reliability Branching with Strong Branching Initialization:
+ * Hybrid strategy combining strong branching accuracy with pseudo-cost speed.
+ * Phase 1: Use strong branching (solve relaxations) until pseudo-costs trusted.
+ * Phase 2: Use pseudo-costs when reliable, strong branch only untrusted vars.
+ *
+ * @math Pseudo-cost for variable x_j with value f_j (fractional part):
+ * - Down branch: P⁻_j = Δz⁻ / f_j (objective change per unit down)
+ * - Up branch: P⁺_j = Δz⁺ / (1 - f_j) (objective change per unit up)
+ * Score function (product): score_j = max(P⁻_j · f_j, ε) · max(P⁺_j · (1-f_j), ε)
+ * Alternatively, weighted sum: score_j = (1-μ) · min + μ · max
+ * where μ varies based on solution status (no incumbent vs have incumbent).
+ *
+ * @complexity Strong branching: O(k · NLP) per node where k = #candidates.
+ * Pseudo-cost only: O(n) per node for n candidates.
+ * Reliability reduces to pseudo-cost after O(η) branches per variable
+ * where η = minReliability parameter (typically 4-8).
+ *
+ * @ref Achterberg, Koch & Martin (2005). "Branching rules revisited".
+ *   Operations Research Letters 33(1):42-54. [Reliability branching]
+ * @ref Benichou et al. (1971). "Experiments in mixed-integer linear
+ *   programming". Mathematical Programming 1:76-94. [Pseudo-costs]
+ *
  * @see OsiChooseVariable for the base class interface
  * @see BonPseudoCosts for pseudo-cost storage and update
  */
