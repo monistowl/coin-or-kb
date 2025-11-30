@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ config.title }}{% endblock %}</title>
-    <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+    <meta name="description" content="{{ config.description }}">
 
     <!-- KaTeX for math rendering -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -12,7 +12,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
 
-    <link rel="stylesheet" href="{{ get_url(path='style.css') | safe }}">
+    <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
 
     <!-- JSON-LD for AI discoverability -->
     <script type="application/ld+json">
@@ -24,26 +24,120 @@
         "url": "{{ config.base_url }}"
     }
     </script>
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
     <header>
         <nav>
-            <a href="{{ get_url(path='/') }}" class="logo">COIN-OR KB</a>
-            <ul>
-                <li><a href="{{ get_url(path='/libraries/') }}">Libraries</a></li>
-                <li><a href="{{ get_url(path='/algorithms/') }}">Algorithms</a></li>
-                <li><a href="/api/index.json">API (JSON)</a></li>
+            <a href="{{ config.base_url }}" class="logo">COIN-OR KB</a>
+            <ul class="nav-links">
+                <li><a href="{{ get_url(path='@/libraries/_index.md') }}">Libraries</a></li>
+                <li><a href="{{ get_url(path='@/algorithms/_index.md') }}">Algorithms</a></li>
+                <li><a href="{{ config.base_url }}/api/index.json">API</a></li>
+                <li><a href="https://github.com/monistowl/coin-or-kb" target="_blank">GitHub</a></li>
             </ul>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search classes..." autocomplete="off">
+                <div id="search-results"></div>
+            </div>
         </nav>
     </header>
+
+    {% block breadcrumbs %}{% endblock %}
 
     <main>
         {% block content %}{% endblock %}
     </main>
 
     <footer>
-        <p>COIN-OR Knowledge Base - Machine-readable optimization solver documentation</p>
-        <p><a href="/api/index.json">JSON API</a> | <a href="https://github.com/monistowl/coin-or-kb">Source</a></p>
+        <div class="footer-content">
+            <p><strong>COIN-OR Knowledge Base</strong> — Annotated optimization solver documentation</p>
+            <p class="footer-links">
+                <a href="{{ config.base_url }}">Home</a> ·
+                <a href="{{ config.base_url }}/api/index.json">JSON API</a> ·
+                <a href="https://github.com/monistowl/coin-or-kb">Source</a> ·
+                <a href="https://www.coin-or.org/">COIN-OR.org</a>
+            </p>
+        </div>
     </footer>
+
+    <!-- Search functionality -->
+    <script src="{{ get_url(path='elasticlunr.min.js') }}"></script>
+    <script>
+    (function() {
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        let index = null;
+
+        function clearResults() {
+            while (searchResults.firstChild) {
+                searchResults.removeChild(searchResults.firstChild);
+            }
+        }
+
+        function createResultElement(ref, title, description) {
+            const link = document.createElement('a');
+            link.href = ref;
+            link.className = 'search-result';
+
+            const titleEl = document.createElement('strong');
+            titleEl.textContent = title;
+            link.appendChild(titleEl);
+
+            if (description) {
+                const descEl = document.createElement('span');
+                descEl.textContent = description;
+                link.appendChild(descEl);
+            }
+
+            return link;
+        }
+
+        searchInput.addEventListener('focus', async function() {
+            if (!index) {
+                try {
+                    const response = await fetch('{{ get_url(path="search_index.en.js") }}');
+                    const text = await response.text();
+                    const jsonStr = text.replace(/^window\.searchIndex\s*=\s*/, '').replace(/;$/, '');
+                    const searchIndex = JSON.parse(jsonStr);
+                    index = elasticlunr.Index.load(searchIndex);
+                } catch (e) {
+                    console.error('Failed to load search index:', e);
+                }
+            }
+        });
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            clearResults();
+
+            if (!query || !index) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            const results = index.search(query, { expand: true }).slice(0, 10);
+            if (results.length === 0) {
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.textContent = 'No results found';
+                searchResults.appendChild(noResults);
+            } else {
+                results.forEach(r => {
+                    const doc = index.documentStore.getDoc(r.ref);
+                    searchResults.appendChild(createResultElement(r.ref, doc.title, doc.description));
+                });
+            }
+            searchResults.style.display = 'block';
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+    })();
+    </script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

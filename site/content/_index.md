@@ -1,44 +1,49 @@
 +++
 title = "COIN-OR Knowledge Base"
-description = "Machine-readable documentation for optimization solver libraries"
+description = "Annotated documentation for optimization solver libraries"
 template = "index.html"
 +++
 
 # COIN-OR Knowledge Base
 
-Annotated documentation for the COIN-OR ecosystem of optimization solvers.
+A semantically annotated documentation project for the [COIN-OR](https://www.coin-or.org/) optimization solver stack. This knowledge base provides:
 
-## For AI Agents
+- **Algorithm Documentation** — Mathematical descriptions, complexity analysis, and academic references for each algorithm
+- **Machine-Readable API** — JSON endpoints for AI agents and tooling
+- **Cross-Reference Index** — Browse by algorithm type across all libraries
 
-Machine-readable JSON API available at [`/api/index.json`](/api/index.json).
+## Libraries
 
-## Libraries by Layer
+<div class="library-grid">
+<div class="library-card">
+<h3><a href="/libraries/coinutils/">CoinUtils</a></h3>
+<span class="layer-badge">Layer 0</span>
+<p>Foundation utilities: sparse matrices, LU factorization, I/O, presolve</p>
+<span class="class-count">122 classes</span>
+</div>
+</div>
 
-### Layer 0 - Foundation
-- **CoinUtils** - Core utilities, sparse matrices, I/O
+## Quick Links
 
-### Layer 1 - Core Solvers
-- **Clp** - Simplex LP solver
-- **Osi** - Open Solver Interface
+**Key Classes:**
+- [CoinFactorization](/libraries/coinutils/coinfactorization/) — Sparse LU with Markowitz pivoting, Forrest-Tomlin updates
+- [CoinPackedMatrix](/libraries/coinutils/coinpackedmatrix/) — Column-major sparse matrix storage
+- [CoinIndexedVector](/libraries/coinutils/coinindexedvector/) — Sparse vector with fast access patterns
+- [CoinPresolveMatrix](/libraries/coinutils/coinpresolvematrix/) — Problem reduction and simplification
 
-### Layer 2 - Advanced
-- **Cbc** - Branch-and-cut MIP solver
-- **Cgl** - Cut generation library
-- **Ipopt** - Interior point NLP solver
+**For Developers:**
+- [JSON API](/api/index.json) — Machine-readable class documentation
+- [GitHub Repository](https://github.com/monistowl/coin-or-kb) — Source and annotations
 
-### Layer 3 - Specialized
-- **Bonmin** - MINLP solver
-- **Couenne** - Global optimization
-- **SYMPHONY** - Parallel MIP
+## About This Project
 
-### Layer 4 - High-Level
-- **HiGHS** - High-performance LP/MIP
-- **SHOT** - Global MINLP
+This knowledge base extracts and enriches documentation from the COIN-OR C++ headers. Each class is annotated with:
 
-## Algorithms Index
+| Tag | Purpose |
+|-----|---------|
+| `@algorithm` | Algorithm name and description |
+| `@math` | Mathematical formulation |
+| `@complexity` | Time/space complexity |
+| `@ref` | Academic references |
 
-Browse implementations by algorithm type:
-- [Simplex Methods](/algorithms/simplex/)
-- [Interior Point](/algorithms/interior-point/)
-- [Branch and Bound](/algorithms/branch-and-bound/)
-- [Presolve](/algorithms/presolve/)
+The annotations flow through Doxygen to produce both human-readable HTML and machine-readable JSON, making the documentation accessible to both researchers and AI coding assistants.
