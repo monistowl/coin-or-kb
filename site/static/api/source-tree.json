@@ -87,12 +87,14 @@
             "config_default",
             "configall_system",
             "configall_system_msc"
-          ]
+          ],
+          "desc": "Foundation utilities: sparse matrices, I/O (MPS/LP), presolve, warm starting"
         },
         {
           "name": "SuiteSparse",
           "id": "layer-0/SuiteSparse",
-          "children": []
+          "children": [],
+          "desc": "Sparse direct solvers (CHOLMOD, UMFPACK, AMD) for linear algebra"
         }
       ]
     },
@@ -212,7 +214,8 @@
             "config_default",
             "configall_system",
             "configall_system_msc"
-          ]
+          ],
+          "desc": "COIN-OR LP solver: dual/primal simplex, interior point methods"
         },
         {
           "name": "CppAD",
@@ -228,7 +231,8 @@
                 "wno_conversion"
               ]
             }
-          ]
+          ],
+          "desc": "C++ algorithmic differentiation for automatic derivatives"
         },
         {
           "name": "Osi",
@@ -315,12 +319,14 @@
                 "OsiXprSolverInterface"
               ]
             }
-          ]
+          ],
+          "desc": "Open Solver Interface: common API for LP/MIP solvers"
         },
         {
           "name": "qpOASES",
           "id": "layer-1/qpOASES",
-          "children": []
+          "children": [],
+          "desc": "Online active set QP solver for model predictive control"
         }
       ]
     },
@@ -332,7 +338,8 @@
         {
           "name": "ADOL-C",
           "id": "layer-2/ADOL-C",
-          "children": []
+          "children": [],
+          "desc": "Automatic differentiation via operator overloading"
         },
         {
           "name": "Cbc",
@@ -448,7 +455,8 @@
             "config_default",
             "configall_system",
             "configall_system_msc"
-          ]
+          ],
+          "desc": "COIN-OR branch-and-cut MIP solver with parallelization"
         },
         {
           "name": "Cgl",
@@ -640,7 +648,8 @@
                 "CglZeroHalf"
               ]
             }
-          ]
+          ],
+          "desc": "Cut Generator Library: Gomory, MIR, lift-and-project cuts"
         },
         {
           "name": "Ipopt",
@@ -787,7 +796,8 @@
                 "IpZeroSymMatrix"
               ]
             }
-          ]
+          ],
+          "desc": "Interior Point OPTimizer for large-scale nonlinear programming"
         }
       ]
     },
@@ -799,7 +809,8 @@
         {
           "name": "Bcp",
           "id": "layer-3/Bcp",
-          "children": []
+          "children": [],
+          "desc": "Branch-Cut-Price framework for column generation"
         },
         {
           "name": "Bonmin",
@@ -859,7 +870,8 @@
                 "configall_system_msc"
               ]
             }
-          ]
+          ],
+          "desc": "Basic Open-source Nonlinear Mixed INteger programming"
         },
         {
           "name": "CHiPPS-ALPS",
@@ -901,7 +913,8 @@
             "AlpsTreeNode",
             "config_alps_default",
             "config_default"
-          ]
+          ],
+          "desc": "Abstract Library for Parallel Search tree algorithms"
         },
         {
           "name": "CHiPPS-BLIS",
@@ -936,7 +949,8 @@
             "BlisVariable",
             "config_blis_default",
             "config_default"
-          ]
+          ],
+          "desc": "Branch-and-cut with Lp-Based Intelligent Search"
         },
         {
           "name": "Couenne",
@@ -1083,12 +1097,14 @@
             "config_default",
             "configall_system",
             "configall_system_msc"
-          ]
+          ],
+          "desc": "Convex Over and Under ENvelopes for MINLP with spatial B&B"
         },
         {
           "name": "Dip",
           "id": "layer-3/Dip",
-          "children": []
+          "children": [],
+          "desc": "Decomposition for Integer Programming (Dantzig-Wolfe, Lagrangean)"
         },
         {
           "name": "DisCO",
@@ -1123,7 +1139,8 @@
             "DcoVariable",
             "config_dco_default",
             "config_default"
-          ]
+          ],
+          "desc": "Distributed Combinatorial Optimization for parallel MIP"
         },
         {
           "name": "SYMPHONY",
@@ -1139,17 +1156,20 @@
                 "SymWarmStart"
               ]
             }
-          ]
+          ],
+          "desc": "Single- or Multi-Process Optimization over Networks (parallel B&C)"
         },
         {
           "name": "Smi",
           "id": "layer-3/Smi",
-          "children": []
+          "children": [],
+          "desc": "Stochastic Modelling Interface for stochastic programming"
         },
         {
           "name": "oBB",
           "id": "layer-3/oBB",
-          "children": []
+          "children": [],
+          "desc": "Optimality-Based Branch-and-Bound for nonconvex MINLP"
         }
       ]
     },
@@ -1161,12 +1181,14 @@
         {
           "name": "Cmpl",
           "id": "layer-4/Cmpl",
-          "children": []
+          "children": [],
+          "desc": "COLIOP Mathematical Programming Language modeling system"
         },
         {
           "name": "Creme",
           "id": "layer-4/Creme",
-          "children": []
+          "children": [],
+          "desc": "Constraint Resource-Bounded Model-Checking"
         },
         {
           "name": "GAMSlinks",
@@ -1250,7 +1272,8 @@
                 "def"
               ]
             }
-          ]
+          ],
+          "desc": "Interfaces to GAMS optimization modeling system"
         },
         {
           "name": "Gravity",
@@ -1259,17 +1282,20 @@
           "files": [
             "MosekProgram",
             "SdpaProg"
-          ]
+          ],
+          "desc": "High-performance optimization modeling in C++"
         },
         {
           "name": "HiGHS",
           "id": "layer-4/HiGHS",
-          "children": []
+          "children": [],
+          "desc": "High-performance LP/MIP solver (simplex, IPM, B&B)"
         },
         {
           "name": "OS",
           "id": "layer-4/OS",
-          "children": []
+          "children": [],
+          "desc": "Optimization Services: Web services for optimization"
         },
         {
           "name": "SHOT",
@@ -1430,7 +1456,8 @@
             "Timer",
             "Timing",
             "Utilities"
-          ]
+          ],
+          "desc": "Supporting Hyperplane Optimization Toolkit for convex MINLP"
         },
         {
           "name": "Sonnet",
@@ -1466,17 +1493,20 @@
                 "OsiSolverParameters"
               ]
             }
-          ]
+          ],
+          "desc": ".NET optimization modeling wrapper"
         },
         {
           "name": "clp-spreadsheet-solver",
           "id": "layer-4/clp-spreadsheet-solver",
-          "children": []
+          "children": [],
+          "desc": "Clp integration for spreadsheets"
         },
         {
           "name": "cuopt",
           "id": "layer-4/cuopt",
-          "children": []
+          "children": [],
+          "desc": "CUDA-accelerated optimization"
         }
       ]
     }

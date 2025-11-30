@@ -219,6 +219,122 @@
     border-left: 2px solid var(--accent-light);
 }
 
+/* Class cards */
+.class-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.15s;
+}
+
+.class-card:hover {
+    border-color: var(--accent-light);
+}
+
+.class-card.expanded {
+    border-color: var(--accent-light);
+}
+
+.class-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.class-card h4 {
+    margin: 0;
+    color: var(--accent-light);
+    font-size: 1rem;
+}
+
+.class-card-brief {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.class-card-meta {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.class-card-meta span {
+    background: var(--bg-secondary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    color: var(--text-muted);
+}
+
+.class-card-meta .has-algorithms {
+    background: var(--accent);
+    color: var(--text);
+}
+
+/* Algorithm section */
+.algorithms-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.algorithm-item {
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.algorithm-name {
+    color: var(--accent-light);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.algorithm-math {
+    background: var(--code-bg);
+    padding: 0.5rem;
+    border-radius: 3px;
+    font-family: monospace;
+    overflow-x: auto;
+    margin: 0.5rem 0;
+}
+
+.algorithm-complexity {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+/* Doc link button */
+.doc-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    transition: background 0.15s;
+}
+
+.doc-button:hover {
+    background: var(--accent-light);
+}
+
+/* Loading state */
+.loading {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
 .child-list {
     display: flex;
     flex-direction: column;
@@ -317,7 +433,9 @@
     const BASE_URL = '{{ config.base_url | safe }}';
     let treeData = null;
     let docsIndex = null;
+    let classBriefs = null;
     let selectedNode = null;
+    let classDataCache = {};
 
     // Icons
     const ICONS = {
@@ -325,7 +443,9 @@
         library: '📚',
         folder: '📁',
         file: '📄',
-        documented: '✓'
+        documented: '✓',
+        algorithm: '⚙️',
+        method: '🔧'
     };
 
     // Safe DOM clear helper
@@ -338,27 +458,36 @@
     // Load data
     async function init() {
         try {
-            const [treeResp, indexResp] = await Promise.all([
+            const [treeResp, indexResp, briefsResp] = await Promise.all([
                 fetch(BASE_URL + '/api/source-tree.json'),
-                fetch(BASE_URL + '/api/coinutils/index.json').catch(() => ({ ok: false }))
+                fetch(BASE_URL + '/api/coinutils/index.json').catch(() => ({ ok: false })),
+                fetch(BASE_URL + '/api/class-briefs.json').catch(() => ({ ok: false }))
             ]);
 
             treeData = await treeResp.json();
 
             if (indexResp.ok) {
                 const indexData = await indexResp.json();
-                docsIndex = new Set(indexData.classes.map(c => c.name));
+                docsIndex = new Set(indexData.classes.map(function(c) {
+                    return typeof c === 'string' ? c : c.name;
+                }));
             } else {
                 docsIndex = new Set();
+            }
+
+            if (briefsResp.ok) {
+                classBriefs = await briefsResp.json();
+            } else {
+                classBriefs = {};
             }
 
             renderTree();
             updateStats();
         } catch (e) {
             console.error('Failed to load tree data:', e);
-            const container = document.getElementById('tree-content');
+            var container = document.getElementById('tree-content');
             clearElement(container);
-            const errorDiv = document.createElement('div');
+            var errorDiv = document.createElement('div');
             errorDiv.className = 'detail-empty';
             errorDiv.textContent = 'Failed to load source tree';
             container.appendChild(errorDiv);
@@ -484,29 +613,29 @@
     }
 
     function renderDetail(data, type) {
-        const panel = document.getElementById('detail-panel');
+        var panel = document.getElementById('detail-panel');
         clearElement(panel);
 
         // Header
-        const header = document.createElement('div');
+        var header = document.createElement('div');
         header.className = 'detail-header';
 
-        const h2 = document.createElement('h2');
-        const iconSpan = document.createElement('span');
+        var h2 = document.createElement('h2');
+        var iconSpan = document.createElement('span');
         iconSpan.textContent = ICONS[type];
         h2.appendChild(iconSpan);
         h2.appendChild(document.createTextNode(data.name));
         header.appendChild(h2);
 
         if (data.id) {
-            const breadcrumb = document.createElement('div');
+            var breadcrumb = document.createElement('div');
             breadcrumb.className = 'breadcrumb';
             breadcrumb.textContent = data.id;
             header.appendChild(breadcrumb);
         }
 
         if (data.desc) {
-            const desc = document.createElement('p');
+            var desc = document.createElement('p');
             desc.className = 'detail-desc';
             desc.textContent = data.desc;
             header.appendChild(desc);
@@ -514,53 +643,56 @@
 
         panel.appendChild(header);
 
-        // For files with docs, add link
-        if (type === 'file' && docsIndex.has(data.name)) {
-            const docLink = document.createElement('div');
-            docLink.className = 'api-link';
-            const link = document.createElement('a');
-            link.href = BASE_URL + '/libraries/coinutils/' + data.name + '/';
-            link.textContent = 'View Documentation →';
-            docLink.appendChild(link);
-            panel.appendChild(docLink);
+        // For files, show classes defined in this file
+        if (type === 'file') {
+            renderFileClasses(panel, data.name);
+            return;
         }
 
-        // Children section
+        // Children section (layers/libraries)
         if (data.children && data.children.length > 0) {
-            const section = document.createElement('div');
+            var section = document.createElement('div');
             section.className = 'detail-section';
 
-            const h3 = document.createElement('h3');
+            var h3 = document.createElement('h3');
             h3.textContent = type === 'layer' ? 'Libraries' : 'Subdirectories';
             section.appendChild(h3);
 
-            const list = document.createElement('div');
+            var list = document.createElement('div');
             list.className = 'child-list';
 
             data.children.forEach(function(child) {
-                const item = document.createElement('div');
+                var item = document.createElement('div');
                 item.className = 'child-item';
 
-                const itemIcon = document.createElement('span');
+                var itemIcon = document.createElement('span');
                 itemIcon.className = 'icon';
                 itemIcon.textContent = type === 'layer' ? ICONS.library : ICONS.folder;
                 item.appendChild(itemIcon);
 
-                const info = document.createElement('div');
+                var info = document.createElement('div');
                 info.className = 'info';
 
-                const name = document.createElement('div');
+                var name = document.createElement('div');
                 name.className = 'name';
                 name.textContent = child.name;
                 info.appendChild(name);
 
-                const count = (child.children ? child.children.length : 0) +
-                             (child.files ? child.files.length : 0);
-                if (count > 0) {
-                    const meta = document.createElement('div');
-                    meta.className = 'meta';
-                    meta.textContent = count + ' items';
-                    info.appendChild(meta);
+                // Show description if available
+                if (child.desc) {
+                    var descDiv = document.createElement('div');
+                    descDiv.className = 'meta';
+                    descDiv.textContent = child.desc;
+                    info.appendChild(descDiv);
+                } else {
+                    var count = (child.children ? child.children.length : 0) +
+                                 (child.files ? child.files.length : 0);
+                    if (count > 0) {
+                        var meta = document.createElement('div');
+                        meta.className = 'meta';
+                        meta.textContent = count + ' items';
+                        info.appendChild(meta);
+                    }
                 }
 
                 item.appendChild(info);
@@ -609,12 +741,9 @@
 
             data.files.forEach(function(file) {
                 var hasDocs = docsIndex.has(file);
-                var item = document.createElement(hasDocs ? 'a' : 'div');
+                var item = document.createElement('div');
                 item.className = 'file-item' + (hasDocs ? ' has-docs' : '');
-
-                if (hasDocs) {
-                    item.href = BASE_URL + '/libraries/coinutils/' + file + '/';
-                }
+                item.style.cursor = 'pointer';
 
                 var fileIcon = document.createElement('span');
                 fileIcon.className = 'icon';
@@ -631,12 +760,231 @@
                     item.appendChild(docIcon);
                 }
 
+                // Click to select file in tree
+                item.addEventListener('click', function() {
+                    var fileId = data.id + '/' + file;
+                    var treeNode = document.querySelector('.tree-node[data-id="' + fileId + '"]');
+                    if (treeNode) {
+                        treeNode.querySelector('.tree-node-header').click();
+                    }
+                });
+
                 grid.appendChild(item);
             });
 
             section.appendChild(grid);
             panel.appendChild(section);
         }
+    }
+
+    // Render classes for a given file
+    function renderFileClasses(panel, fileName) {
+        // Find classes that belong to this file
+        var fileClasses = [];
+        for (var className in classBriefs) {
+            var info = classBriefs[className];
+            if (info.file === fileName) {
+                fileClasses.push({ name: className, info: info });
+            }
+        }
+
+        if (fileClasses.length === 0) {
+            var emptyMsg = document.createElement('p');
+            emptyMsg.className = 'detail-desc';
+            emptyMsg.textContent = 'No documented classes in this file.';
+            panel.appendChild(emptyMsg);
+            return;
+        }
+
+        var section = document.createElement('div');
+        section.className = 'detail-section';
+
+        var h3 = document.createElement('h3');
+        h3.textContent = 'Classes (' + fileClasses.length + ')';
+        section.appendChild(h3);
+
+        fileClasses.forEach(function(cls) {
+            var card = createClassCard(cls.name, cls.info);
+            section.appendChild(card);
+        });
+
+        panel.appendChild(section);
+    }
+
+    // Create an expandable class card
+    function createClassCard(className, info) {
+        var card = document.createElement('div');
+        card.className = 'class-card';
+
+        var header = document.createElement('div');
+        header.className = 'class-card-header';
+
+        var title = document.createElement('h4');
+        title.textContent = className;
+        header.appendChild(title);
+
+        // Link to full docs
+        if (docsIndex.has(className)) {
+            var docLink = document.createElement('a');
+            docLink.href = BASE_URL + '/libraries/coinutils/' + className + '/';
+            docLink.className = 'doc-button';
+            docLink.textContent = 'Docs →';
+            docLink.addEventListener('click', function(e) { e.stopPropagation(); });
+            header.appendChild(docLink);
+        }
+
+        card.appendChild(header);
+
+        // Brief description
+        if (info.brief) {
+            var brief = document.createElement('div');
+            brief.className = 'class-card-brief';
+            brief.textContent = info.brief;
+            card.appendChild(brief);
+        }
+
+        // Metadata badges
+        var meta = document.createElement('div');
+        meta.className = 'class-card-meta';
+
+        if (info.algorithms > 0) {
+            var algBadge = document.createElement('span');
+            algBadge.className = 'has-algorithms';
+            algBadge.textContent = info.algorithms + ' algorithm' + (info.algorithms > 1 ? 's' : '');
+            meta.appendChild(algBadge);
+        }
+
+        if (info.methods > 0) {
+            var methodBadge = document.createElement('span');
+            methodBadge.textContent = info.methods + ' method' + (info.methods > 1 ? 's' : '');
+            meta.appendChild(methodBadge);
+        }
+
+        card.appendChild(meta);
+
+        // Expandable algorithms section
+        var algSection = document.createElement('div');
+        algSection.className = 'algorithms-section';
+        algSection.style.display = 'none';
+        card.appendChild(algSection);
+
+        // Click to expand/load algorithms
+        card.addEventListener('click', function() {
+            if (card.classList.contains('expanded')) {
+                card.classList.remove('expanded');
+                algSection.style.display = 'none';
+            } else {
+                card.classList.add('expanded');
+                algSection.style.display = 'block';
+                loadClassAlgorithms(className, algSection);
+            }
+        });
+
+        return card;
+    }
+
+    // Load and display class algorithms
+    async function loadClassAlgorithms(className, container) {
+        if (container.dataset.loaded) return;
+
+        clearElement(container);
+        var loading = document.createElement('div');
+        loading.className = 'loading';
+        loading.textContent = 'Loading algorithms...';
+        container.appendChild(loading);
+
+        try {
+            var data;
+            if (classDataCache[className]) {
+                data = classDataCache[className];
+            } else {
+                var resp = await fetch(BASE_URL + '/api/coinutils/' + className + '.json');
+                if (!resp.ok) throw new Error('Not found');
+                data = await resp.json();
+                classDataCache[className] = data;
+            }
+
+            clearElement(container);
+            container.dataset.loaded = 'true';
+
+            if (data.algorithms && data.algorithms.length > 0) {
+                data.algorithms.forEach(function(alg) {
+                    var item = document.createElement('div');
+                    item.className = 'algorithm-item';
+
+                    // Parse algorithm annotation
+                    var parts = parseAlgorithm(alg);
+
+                    if (parts.name) {
+                        var nameDiv = document.createElement('div');
+                        nameDiv.className = 'algorithm-name';
+                        nameDiv.textContent = parts.name;
+                        item.appendChild(nameDiv);
+                    }
+
+                    if (parts.math) {
+                        var mathDiv = document.createElement('div');
+                        mathDiv.className = 'algorithm-math';
+                        mathDiv.textContent = parts.math;
+                        item.appendChild(mathDiv);
+                        // Trigger KaTeX rendering if available
+                        if (window.renderMathInElement) {
+                            renderMathInElement(mathDiv, {
+                                delimiters: [
+                                    {left: '$$', right: '$$', display: true},
+                                    {left: '$', right: '$', display: false}
+                                ]
+                            });
+                        }
+                    }
+
+                    if (parts.complexity) {
+                        var compDiv = document.createElement('div');
+                        compDiv.className = 'algorithm-complexity';
+                        compDiv.textContent = 'Complexity: ' + parts.complexity;
+                        item.appendChild(compDiv);
+                        if (window.renderMathInElement) {
+                            renderMathInElement(compDiv, {
+                                delimiters: [{left: '$', right: '$', display: false}]
+                            });
+                        }
+                    }
+
+                    container.appendChild(item);
+                });
+            } else {
+                var noAlg = document.createElement('div');
+                noAlg.className = 'loading';
+                noAlg.textContent = 'No algorithms documented.';
+                container.appendChild(noAlg);
+            }
+
+        } catch (e) {
+            clearElement(container);
+            var errDiv = document.createElement('div');
+            errDiv.className = 'loading';
+            errDiv.textContent = 'Could not load class details.';
+            container.appendChild(errDiv);
+        }
+    }
+
+    // Parse @algorithm annotation string
+    function parseAlgorithm(str) {
+        var result = { name: '', math: '', complexity: '' };
+
+        // Extract @algorithm name
+        var algMatch = str.match(/@algorithm\s+([^@]+)/);
+        if (algMatch) result.name = algMatch[1].trim();
+
+        // Extract @math
+        var mathMatch = str.match(/@math\s+([^@]+)/);
+        if (mathMatch) result.math = mathMatch[1].trim();
+
+        // Extract @complexity
+        var compMatch = str.match(/@complexity\s+([^@]+)/);
+        if (compMatch) result.complexity = compMatch[1].trim();
+
+        return result;
     }
 
     function updateStats() {

@@ -1,0 +1,856 @@
+{
+  "CoinPlainFileInput": {
+    "brief": "This reads plain text files.",
+    "file": "CoinFileIO",
+    "algorithms": 0,
+    "methods": 5,
+    "header": "layer-0/CoinUtils/src/CoinFileIO.hpp"
+  },
+  "drop_empty_rows_action": {
+    "brief": "Physically removes empty rows in presolve, and reinserts empty rows in postsolve.",
+    "file": "CoinPresolveEmpty",
+    "algorithms": 0,
+    "methods": 5,
+    "header": "layer-0/CoinUtils/src/CoinPresolveEmpty.hpp"
+  },
+  "CoinCliqueList": {
+    "brief": "A class to store a sequential list of cliques.",
+    "file": "CoinCliqueList",
+    "algorithms": 0,
+    "methods": 12,
+    "header": "layer-0/CoinUtils/src/CoinCliqueList.hpp"
+  },
+  "CoinFirstAbsGreater_2": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinArbitraryArrayWithLength": {
+    "brief": "arbitrary version",
+    "file": "CoinIndexedVector",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinIndexedVector.hpp"
+  },
+  "CoinSearchTreeCompareBreadth": {
+    "brief": "",
+    "file": "CoinSearchTree",
+    "algorithms": 0,
+    "methods": 2,
+    "header": "layer-0/CoinUtils/src/CoinSearchTree.hpp"
+  },
+  "CoinSearchTreeCompareDepth": {
+    "brief": "Depth First Search.",
+    "file": "CoinSearchTree",
+    "algorithms": 0,
+    "methods": 2,
+    "header": "layer-0/CoinUtils/src/CoinSearchTree.hpp"
+  },
+  "CoinOneMessage": {
+    "brief": "Class for one massaged message.",
+    "file": "CoinMessageHandler",
+    "algorithms": 0,
+    "methods": 12,
+    "header": "layer-0/CoinUtils/src/CoinMessageHandler.hpp"
+  },
+  "CoinWarmStartVectorPairDiff": {
+    "brief": "",
+    "file": "CoinWarmStartVector",
+    "algorithms": 0,
+    "methods": 7,
+    "header": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp"
+  },
+  "CoinPresolveMonitor": {
+    "brief": "Monitor a row or column for modification.",
+    "file": "CoinPresolveMonitor",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp"
+  },
+  "CoinTreeNode": {
+    "brief": "A class from which the real tree nodes should be derived from.",
+    "file": "CoinSearchTree",
+    "algorithms": 0,
+    "methods": 15,
+    "header": "layer-0/CoinUtils/src/CoinSearchTree.hpp"
+  },
+  "CoinRational": {
+    "brief": "Simple rational number class with numerator and denominator.",
+    "file": "CoinRational",
+    "algorithms": 2,
+    "methods": 6,
+    "header": "layer-0/CoinUtils/src/CoinRational.hpp"
+  },
+  "CoinWarmStart": {
+    "brief": "Abstract base class for warm start information.",
+    "file": "CoinWarmStart",
+    "algorithms": 0,
+    "methods": 4,
+    "header": "layer-0/CoinUtils/src/CoinWarmStart.hpp"
+  },
+  "CoinModelLinkedList": {
+    "brief": "",
+    "file": "CoinModelUseful",
+    "algorithms": 0,
+    "methods": 26,
+    "header": "layer-0/CoinUtils/src/CoinModelUseful.hpp"
+  },
+  "CoinWarmStartDual": {
+    "brief": "WarmStart information that is only a dual vector.",
+    "file": "CoinWarmStartDual",
+    "algorithms": 0,
+    "methods": 11,
+    "header": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp"
+  },
+  "CoinModelHashLink": {
+    "brief": "for names and hashing",
+    "file": "CoinModelUseful",
+    "algorithms": 0,
+    "methods": 0,
+    "header": "layer-0/CoinUtils/src/CoinModelUseful.hpp"
+  },
+  "CoinModelLink": {
+    "brief": "This is for various structures/classes needed by CoinModel.",
+    "file": "CoinModelUseful",
+    "algorithms": 0,
+    "methods": 16,
+    "header": "layer-0/CoinUtils/src/CoinModelUseful.hpp"
+  },
+  "CoinMpsIO": {
+    "brief": "MPS IO Interface.",
+    "file": "CoinMpsIO",
+    "algorithms": 0,
+    "methods": 95,
+    "header": "layer-0/CoinUtils/src/CoinMpsIO.hpp"
+  },
+  "CoinArrayWithLength": {
+    "brief": "Pointer with length in bytes.",
+    "file": "CoinIndexedVector",
+    "algorithms": 0,
+    "methods": 27,
+    "header": "layer-0/CoinUtils/src/CoinIndexedVector.hpp"
+  },
+  "doubleton_action": {
+    "brief": "Solve ax+by=c for y and substitute y out of the problem.",
+    "file": "CoinPresolveDoubleton",
+    "algorithms": 0,
+    "methods": 5,
+    "header": "layer-0/CoinUtils/src/CoinPresolveDoubleton.hpp"
+  },
+  "CoinAdjacencyVector": {
+    "brief": "A class to store a (growable) list of neighbors for each node in a conflict graph.",
+    "file": "CoinAdjacencyVector",
+    "algorithms": 0,
+    "methods": 14,
+    "header": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp"
+  },
+  "CoinDynamicConflictGraph": {
+    "brief": "This a a conflict graph where conflicts can be added on the fly, not optimized for memory usage.",
+    "file": "CoinDynamicConflictGraph",
+    "algorithms": 0,
+    "methods": 26,
+    "header": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp"
+  },
+  "CoinModelTriple": {
+    "brief": "for linked lists",
+    "file": "CoinModelUseful",
+    "algorithms": 0,
+    "methods": 0,
+    "header": "layer-0/CoinUtils/src/CoinModelUseful.hpp"
+  },
+  "CoinPresolveMatrix": {
+    "brief": "Augments CoinPrePostsolveMatrix with information about the problem that is only needed during presolve.",
+    "file": "CoinPresolveMatrix",
+    "algorithms": 0,
+    "methods": 66,
+    "header": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp"
+  },
+  "CoinOtherFactorization": {
+    "brief": "Abstract base class which also has some scalars so can be used from Dense or Simp.",
+    "file": "CoinDenseFactorization",
+    "algorithms": 0,
+    "methods": 49,
+    "header": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp"
+  },
+  "CoinFirstGreater_3": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinSearchTreeBase": {
+    "brief": "",
+    "file": "CoinSearchTree",
+    "algorithms": 0,
+    "methods": 16,
+    "header": "layer-0/CoinUtils/src/CoinSearchTree.hpp"
+  },
+  "CoinBigIndexArrayWithLength": {
+    "brief": "CoinBigIndex * version.",
+    "file": "CoinIndexedVector",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinIndexedVector.hpp"
+  },
+  "CoinTreeSiblings": {
+    "brief": "",
+    "file": "CoinSearchTree",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinSearchTree.hpp"
+  },
+  "CoinExternalVectorFirstLess_2": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 3,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinError": {
+    "brief": "Exception class carrying context about where and why an error occurred.",
+    "file": "CoinError",
+    "algorithms": 0,
+    "methods": 11,
+    "header": "layer-0/CoinUtils/src/CoinError.hpp"
+  },
+  "CoinSearchTree": {
+    "brief": "",
+    "file": "CoinSearchTree",
+    "algorithms": 0,
+    "methods": 7,
+    "header": "layer-0/CoinUtils/src/CoinSearchTree.hpp"
+  },
+  "CoinWarmStartVectorPair": {
+    "brief": "",
+    "file": "CoinWarmStartVector",
+    "algorithms": 0,
+    "methods": 16,
+    "header": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp"
+  },
+  "do_tighten_action": {
+    "brief": "",
+    "file": "CoinPresolveTighten",
+    "algorithms": 0,
+    "methods": 8,
+    "header": "layer-0/CoinUtils/src/CoinPresolveTighten.hpp"
+  },
+  "CoinCut": {
+    "brief": "Class for representing a cut.",
+    "file": "CoinCutPool",
+    "algorithms": 0,
+    "methods": 7,
+    "header": "layer-0/CoinUtils/src/CoinCutPool.hpp"
+  },
+  "CoinBuild": {
+    "brief": "In many cases it is natural to build a model by adding one row at a time.",
+    "file": "CoinBuild",
+    "algorithms": 0,
+    "methods": 26,
+    "header": "layer-0/CoinUtils/src/CoinBuild.hpp"
+  },
+  "CoinSearchTreeCompareBest": {
+    "brief": "Best first search.",
+    "file": "CoinSearchTree",
+    "algorithms": 0,
+    "methods": 2,
+    "header": "layer-0/CoinUtils/src/CoinSearchTree.hpp"
+  },
+  "CoinWarmStartPrimalDualDiff": {
+    "brief": "A diff between two CoinWarmStartPrimalDual objects.",
+    "file": "CoinWarmStartPrimalDual",
+    "algorithms": 0,
+    "methods": 6,
+    "header": "layer-0/CoinUtils/src/CoinWarmStartPrimalDual.hpp"
+  },
+  "CoinMpsCardReader": {
+    "brief": "Very simple code for reading MPS data.",
+    "file": "CoinMpsIO",
+    "algorithms": 0,
+    "methods": 26,
+    "header": "layer-0/CoinUtils/src/CoinMpsIO.hpp"
+  },
+  "BKVertex": {
+    "brief": "Struct used to represent a weighted-vertex.",
+    "file": "CoinBronKerbosch",
+    "algorithms": 0,
+    "methods": 0,
+    "header": "layer-0/CoinUtils/src/CoinBronKerbosch.hpp"
+  },
+  "CoinWarmStartVector": {
+    "brief": "WarmStart information that is only a vector.",
+    "file": "CoinWarmStartVector",
+    "algorithms": 0,
+    "methods": 15,
+    "header": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp"
+  },
+  "ampl_info": {
+    "brief": "",
+    "file": "CoinModel",
+    "algorithms": 0,
+    "methods": 0,
+    "header": "layer-0/CoinUtils/src/CoinModel.hpp"
+  },
+  "CoinExternalVectorFirstLess_3": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 3,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinFirstGreater_2": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinIndexedVector": {
+    "brief": "Indexed Vector.",
+    "file": "CoinIndexedVector",
+    "algorithms": 0,
+    "methods": 94,
+    "header": "layer-0/CoinUtils/src/CoinIndexedVector.hpp"
+  },
+  "CoinPackedVector": {
+    "brief": "Sparse Vector.",
+    "file": "CoinPackedVector",
+    "algorithms": 0,
+    "methods": 44,
+    "header": "layer-0/CoinUtils/src/CoinPackedVector.hpp"
+  },
+  "CoinWarmStartBasisDiff": {
+    "brief": "A diff between two CoinWarmStartBasis objects.",
+    "file": "CoinWarmStartBasis",
+    "algorithms": 0,
+    "methods": 7,
+    "header": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp"
+  },
+  "CoinModelHash": {
+    "brief": "",
+    "file": "CoinModelUseful",
+    "algorithms": 0,
+    "methods": 17,
+    "header": "layer-0/CoinUtils/src/CoinModelUseful.hpp"
+  },
+  "BitVector128": {
+    "brief": "",
+    "file": "CoinSearchTree",
+    "algorithms": 0,
+    "methods": 7,
+    "header": "layer-0/CoinUtils/src/CoinSearchTree.hpp"
+  },
+  "CoinExternalVectorFirstGreater_2": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 3,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinYacc": {
+    "brief": "",
+    "file": "CoinModelUseful",
+    "algorithms": 0,
+    "methods": 4,
+    "header": "layer-0/CoinUtils/src/CoinModelUseful.hpp"
+  },
+  "CoinPrePostsolveMatrix": {
+    "brief": "Collects all the information about the problem that is needed in both presolve and postsolve.",
+    "file": "CoinPresolveMatrix",
+    "algorithms": 0,
+    "methods": 63,
+    "header": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp"
+  },
+  "CoinMessages": {
+    "brief": "Class to hold and manipulate an array of massaged messages.",
+    "file": "CoinMessageHandler",
+    "algorithms": 0,
+    "methods": 14,
+    "header": "layer-0/CoinUtils/src/CoinMessageHandler.hpp"
+  },
+  "CoinSet": {
+    "brief": "Very simple class for containing data on set.",
+    "file": "CoinMpsIO",
+    "algorithms": 0,
+    "methods": 13,
+    "header": "layer-0/CoinUtils/src/CoinMpsIO.hpp"
+  },
+  "CoinSearchTreeManager": {
+    "brief": "",
+    "file": "CoinSearchTree",
+    "algorithms": 0,
+    "methods": 18,
+    "header": "layer-0/CoinUtils/src/CoinSearchTree.hpp"
+  },
+  "CoinTriple": {
+    "brief": "",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinParam": {
+    "brief": "A base class for keyword value command line parameters.",
+    "file": "CoinParam",
+    "algorithms": 0,
+    "methods": 88,
+    "header": "layer-0/CoinUtils/src/CoinParam.hpp"
+  },
+  "drop_empty_cols_action": {
+    "brief": "Physically removes empty columns in presolve, and reinserts empty columns in postsolve.",
+    "file": "CoinPresolveEmpty",
+    "algorithms": 0,
+    "methods": 6,
+    "header": "layer-0/CoinUtils/src/CoinPresolveEmpty.hpp"
+  },
+  "coinOwned": {
+    "brief": "To say whether arrays etc are owned by CoinSnapshot.",
+    "file": "CoinSnapshot",
+    "algorithms": 0,
+    "methods": 0,
+    "header": "layer-0/CoinUtils/src/CoinSnapshot.hpp"
+  },
+  "CoinFileIOBase": {
+    "brief": "Base class for FileIO classes.",
+    "file": "CoinFileIO",
+    "algorithms": 0,
+    "methods": 6,
+    "header": "layer-0/CoinUtils/src/CoinFileIO.hpp"
+  },
+  "CoinCutPool": {
+    "brief": "Class for storing a pool of cuts, removing the repeated and dominated ones.",
+    "file": "CoinCutPool",
+    "algorithms": 0,
+    "methods": 14,
+    "header": "layer-0/CoinUtils/src/CoinCutPool.hpp"
+  },
+  "CoinConflictGraph": {
+    "brief": "Base class for Conflict Graph: a conflict graph is a structure that stores conflicts between binary variables.",
+    "file": "CoinConflictGraph",
+    "algorithms": 0,
+    "methods": 31,
+    "header": "layer-0/CoinUtils/src/CoinConflictGraph.hpp"
+  },
+  "CoinDenseFactorization": {
+    "brief": "This deals with Factorization and Updates This is a simple dense version so other people can write a better one.",
+    "file": "CoinDenseFactorization",
+    "algorithms": 0,
+    "methods": 24,
+    "header": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp"
+  },
+  "CoinWarmStartPrimalDual": {
+    "brief": "WarmStart information that is only a dual vector.",
+    "file": "CoinWarmStartPrimalDual",
+    "algorithms": 0,
+    "methods": 15,
+    "header": "layer-0/CoinUtils/src/CoinWarmStartPrimalDual.hpp"
+  },
+  "CoinModelHash2": {
+    "brief": "For int,int hashing.",
+    "file": "CoinModelUseful",
+    "algorithms": 0,
+    "methods": 12,
+    "header": "layer-0/CoinUtils/src/CoinModelUseful.hpp"
+  },
+  "CoinDoubleArrayWithLength": {
+    "brief": "double * version",
+    "file": "CoinIndexedVector",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinIndexedVector.hpp"
+  },
+  "CoinFirstAbsGreater_3": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinVoidStarArrayWithLength": {
+    "brief": "void * version",
+    "file": "CoinIndexedVector",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinIndexedVector.hpp"
+  },
+  "CoinFileOutput": {
+    "brief": "Abstract base class for file output classes.",
+    "file": "CoinFileIO",
+    "algorithms": 0,
+    "methods": 7,
+    "header": "layer-0/CoinUtils/src/CoinFileIO.hpp"
+  },
+  "CoinCliqueExtender": {
+    "brief": "A class to extend cliques.",
+    "file": "CoinCliqueExtender",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp"
+  },
+  "CoinNodeHeap": {
+    "brief": "Monotone heap.",
+    "file": "CoinNodeHeap",
+    "algorithms": 0,
+    "methods": 6,
+    "header": "layer-0/CoinUtils/src/CoinNodeHeap.hpp"
+  },
+  "CoinFirstAbsLess_2": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinIntArrayWithLength": {
+    "brief": "int * version",
+    "file": "CoinIndexedVector",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinIndexedVector.hpp"
+  },
+  "CoinPackedVectorBase": {
+    "brief": "Abstract base class providing read-only access to sparse vectors.",
+    "file": "CoinPackedVectorBase",
+    "algorithms": 0,
+    "methods": 34,
+    "header": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp"
+  },
+  "CoinStaticConflictGraph": {
+    "brief": "Static conflict graph, optimized for memory usage and query speed, not modifiable.",
+    "file": "CoinStaticConflictGraph",
+    "algorithms": 0,
+    "methods": 21,
+    "header": "layer-0/CoinUtils/src/CoinStaticConflictGraph.hpp"
+  },
+  "CoinOddWheelSeparator": {
+    "brief": "Class for separating violated odd-cycles.",
+    "file": "CoinOddWheelSeparator",
+    "algorithms": 0,
+    "methods": 15,
+    "header": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp"
+  },
+  "CoinModel": {
+    "brief": "This is a simple minded model which is stored in a format which makes it easier to construct and modify but not efficient for algorithms.",
+    "file": "CoinModel",
+    "algorithms": 0,
+    "methods": 178,
+    "header": "layer-0/CoinUtils/src/CoinModel.hpp"
+  },
+  "CoinFactorizationLongDoubleArrayWithLength": {
+    "brief": "CoinFactorizationLongDouble * version.",
+    "file": "CoinIndexedVector",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinIndexedVector.hpp"
+  },
+  "CoinSnapshot": {
+    "brief": "NON Abstract Base Class for interfacing with cut generators or branching code or ... It is designed to be snapshot of a problem at a node in tree.",
+    "file": "CoinSnapshot",
+    "algorithms": 0,
+    "methods": 72,
+    "header": "layer-0/CoinUtils/src/CoinSnapshot.hpp"
+  },
+  "CoinSearchTreeComparePreferred": {
+    "brief": "Function objects to compare search tree nodes.",
+    "file": "CoinSearchTree",
+    "algorithms": 0,
+    "methods": 2,
+    "header": "layer-0/CoinUtils/src/CoinSearchTree.hpp"
+  },
+  "CoinCliqueSet": {
+    "brief": "",
+    "file": "CoinCliqueSet",
+    "algorithms": 0,
+    "methods": 5,
+    "header": "layer-0/CoinUtils/src/CoinCliqueSet.hpp"
+  },
+  "CoinFactorization": {
+    "brief": "This deals with Factorization and Updates.",
+    "file": "CoinFactorization",
+    "algorithms": 4,
+    "methods": 156,
+    "header": "layer-0/CoinUtils/src/CoinFactorization.hpp"
+  },
+  "CoinModelHashLink2": {
+    "brief": "",
+    "file": "CoinModelUseful",
+    "algorithms": 0,
+    "methods": 0,
+    "header": "layer-0/CoinUtils/src/CoinModelUseful.hpp"
+  },
+  "CoinFactorizationDoubleArrayWithLength": {
+    "brief": "CoinFactorizationDouble * version.",
+    "file": "CoinIndexedVector",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinIndexedVector.hpp"
+  },
+  "CoinSosSet": {
+    "brief": "Very simple class for containing SOS set.",
+    "file": "CoinMpsIO",
+    "algorithms": 0,
+    "methods": 2,
+    "header": "layer-0/CoinUtils/src/CoinMpsIO.hpp"
+  },
+  "dropped_zero": {
+    "brief": "Tracking information for an explicit zero coefficient.",
+    "file": "CoinPresolveZeros",
+    "algorithms": 0,
+    "methods": 0,
+    "header": "layer-0/CoinUtils/src/CoinPresolveZeros.hpp"
+  },
+  "CoinPartitionedVector": {
+    "brief": "",
+    "file": "CoinIndexedVector",
+    "algorithms": 0,
+    "methods": 28,
+    "header": "layer-0/CoinUtils/src/CoinIndexedVector.hpp"
+  },
+  "CoinModelInfo2": {
+    "brief": "This is a model which is made up of Coin(Structured)Model blocks.",
+    "file": "CoinStructuredModel",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinStructuredModel.hpp"
+  },
+  "CoinPackedMatrix": {
+    "brief": "Sparse Matrix Base Class.",
+    "file": "CoinPackedMatrix",
+    "algorithms": 0,
+    "methods": 115,
+    "header": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp"
+  },
+  "CoinPair": {
+    "brief": "An ordered pair.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinWarmStartVectorDiff": {
+    "brief": "A diff between two CoinWarmStartVector objects.",
+    "file": "CoinWarmStartVector",
+    "algorithms": 0,
+    "methods": 8,
+    "header": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp"
+  },
+  "CoinWarmStartDiff": {
+    "brief": "Abstract base class for warm start diff objects.",
+    "file": "CoinWarmStart",
+    "algorithms": 0,
+    "methods": 2,
+    "header": "layer-0/CoinUtils/src/CoinWarmStart.hpp"
+  },
+  "CoinMessageHandler": {
+    "brief": "Base class for message handling.",
+    "file": "CoinMessageHandler",
+    "algorithms": 0,
+    "methods": 48,
+    "header": "layer-0/CoinUtils/src/CoinMessageHandler.hpp"
+  },
+  "CoinAbsFltEq": {
+    "brief": "Equality to an absolute tolerance.",
+    "file": "CoinFloatEqual",
+    "algorithms": 0,
+    "methods": 6,
+    "header": "layer-0/CoinUtils/src/CoinFloatEqual.hpp"
+  },
+  "CoinOslFactorization": {
+    "brief": "",
+    "file": "CoinOslFactorization",
+    "algorithms": 0,
+    "methods": 37,
+    "header": "layer-0/CoinUtils/src/CoinOslFactorization.hpp"
+  },
+  "CoinRelFltEq": {
+    "brief": "Equality to a scaled (relative) tolerance.",
+    "file": "CoinFloatEqual",
+    "algorithms": 0,
+    "methods": 6,
+    "header": "layer-0/CoinUtils/src/CoinFloatEqual.hpp"
+  },
+  "CoinUnsignedIntArrayWithLength": {
+    "brief": "unsigned int * version",
+    "file": "CoinIndexedVector",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinIndexedVector.hpp"
+  },
+  "CoinWarmStartBasis": {
+    "brief": "The default COIN simplex (basis-oriented) warm start class.",
+    "file": "CoinWarmStartBasis",
+    "algorithms": 0,
+    "methods": 32,
+    "header": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp"
+  },
+  "CoinBaseModel": {
+    "brief": "",
+    "file": "CoinModel",
+    "algorithms": 0,
+    "methods": 22,
+    "header": "layer-0/CoinUtils/src/CoinModel.hpp"
+  },
+  "CoinFileInput": {
+    "brief": "Abstract base class for file input classes.",
+    "file": "CoinFileIO",
+    "algorithms": 0,
+    "methods": 9,
+    "header": "layer-0/CoinUtils/src/CoinFileIO.hpp"
+  },
+  "CoinPresolveAction": {
+    "brief": "Abstract base class of all presolve routines.",
+    "file": "CoinPresolveMatrix",
+    "algorithms": 0,
+    "methods": 6,
+    "header": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp"
+  },
+  "CoinStructuredModel": {
+    "brief": "",
+    "file": "CoinStructuredModel",
+    "algorithms": 0,
+    "methods": 40,
+    "header": "layer-0/CoinUtils/src/CoinStructuredModel.hpp"
+  },
+  "CoinBronKerbosch": {
+    "brief": "Class responsible for finding cliques with weights greater than a certain threshold.",
+    "file": "CoinBronKerbosch",
+    "algorithms": 0,
+    "methods": 14,
+    "header": "layer-0/CoinUtils/src/CoinBronKerbosch.hpp"
+  },
+  "CoinFirstLess_2": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinShallowPackedVector": {
+    "brief": "Shallow Sparse Vector.",
+    "file": "CoinShallowPackedVector",
+    "algorithms": 0,
+    "methods": 13,
+    "header": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp"
+  },
+  "drop_zero_coefficients_action": {
+    "brief": "Removal of explicit zeros.",
+    "file": "CoinPresolveZeros",
+    "algorithms": 0,
+    "methods": 5,
+    "header": "layer-0/CoinUtils/src/CoinPresolveZeros.hpp"
+  },
+  "CoinThreadRandom": {
+    "brief": "Thread-local random number generator.",
+    "file": "CoinHelperFunctions",
+    "algorithms": 0,
+    "methods": 9,
+    "header": "layer-0/CoinUtils/src/CoinHelperFunctions.hpp"
+  },
+  "CoinDenseVector": {
+    "brief": "Dense Vector.",
+    "file": "CoinDenseVector",
+    "algorithms": 0,
+    "methods": 29,
+    "header": "layer-0/CoinUtils/src/CoinDenseVector.hpp"
+  },
+  "CoinExternalVectorFirstGreater_3": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 3,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinWarmStartDualDiff": {
+    "brief": "A diff between two CoinWarmStartDual objects.",
+    "file": "CoinWarmStartDual",
+    "algorithms": 0,
+    "methods": 6,
+    "header": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp"
+  },
+  "CoinFirstLess_3": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinFirstAbsLess_3": {
+    "brief": "Function operator.",
+    "file": "CoinSort",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinSort.hpp"
+  },
+  "CoinLpIO": {
+    "brief": "Class to read and write Lp files.",
+    "file": "CoinLpIO",
+    "algorithms": 0,
+    "methods": 106,
+    "header": "layer-0/CoinUtils/src/CoinLpIO.hpp"
+  },
+  "dupcol_action": {
+    "brief": "Detect and remove duplicate columns.",
+    "file": "CoinPresolveDupcol",
+    "algorithms": 0,
+    "methods": 8,
+    "header": "layer-0/CoinUtils/src/CoinPresolveDupcol.hpp"
+  },
+  "_EKKfactinfo": {
+    "brief": "",
+    "file": "CoinOslFactorization",
+    "algorithms": 0,
+    "methods": 0,
+    "header": "layer-0/CoinUtils/src/CoinOslFactorization.hpp"
+  },
+  "CoinTimer": {
+    "brief": "This class implements a timer that also implements a tracing functionality.",
+    "file": "CoinTime",
+    "algorithms": 0,
+    "methods": 13,
+    "header": "layer-0/CoinUtils/src/CoinTime.hpp"
+  },
+  "CoinHashLink": {
+    "brief": "",
+    "file": "CoinMpsIO",
+    "algorithms": 0,
+    "methods": 0,
+    "header": "layer-0/CoinUtils/src/CoinMpsIO.hpp"
+  },
+  "CoinShortestPath": {
+    "brief": "Class that implements Dijkstra's algorithm for finding the shortest paths between nodes in a graph.",
+    "file": "CoinShortestPath",
+    "algorithms": 0,
+    "methods": 10,
+    "header": "layer-0/CoinUtils/src/CoinShortestPath.hpp"
+  },
+  "CoinSimpFactorization": {
+    "brief": "",
+    "file": "CoinSimpFactorization",
+    "algorithms": 0,
+    "methods": 66,
+    "header": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp"
+  },
+  "CoinPostsolveMatrix": {
+    "brief": "Augments CoinPrePostsolveMatrix with information about the problem that is only needed during postsolve.",
+    "file": "CoinPresolveMatrix",
+    "algorithms": 0,
+    "methods": 17,
+    "header": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp"
+  },
+  "CoinMessage": {
+    "brief": "The standard set of Coin messages.",
+    "file": "CoinMessage",
+    "algorithms": 0,
+    "methods": 1,
+    "header": "layer-0/CoinUtils/src/CoinMessage.hpp"
+  },
+  "action": {
+    "brief": "",
+    "file": "CoinPresolveUseless",
+    "algorithms": 0,
+    "methods": 0,
+    "header": "layer-0/CoinUtils/src/CoinPresolveUseless.hpp"
+  }
+}
