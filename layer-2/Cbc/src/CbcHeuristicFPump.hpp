@@ -4,6 +4,36 @@
  * Copyright (C) 2004, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *
+ * @algorithm Feasibility Pump (FP):
+ * Alternates between LP relaxation and rounding to find feasible MIP solution.
+ *
+ * Basic Algorithm:
+ * 1. x* ← solve LP relaxation
+ * 2. x̄ ← round(x*) (integer point)
+ * 3. While x* ≠ x̄ and iterations < max:
+ *    a. x* ← argmin ||x - x̄|| s.t. Ax = b, l ≤ x ≤ u (LP toward x̄)
+ *    b. x̄ ← round(x*)
+ * 4. If x* = x̄, return feasible solution
+ *
+ * Enhancements:
+ * - Objective blending: min α·c^Tx + (1-α)·||x-x̄|| trades feasibility vs quality
+ * - Cycle detection: Track visited roundings, perturb if cycling
+ * - Randomization: Random flips to escape local minima
+ * - General integers: Auxiliary binary formulation or specialized rounding
+ *
+ * @math Distance LP: min Σ_j |x_j - x̄_j| for integer j
+ * Linearized as: min Σ_j d_j s.t. d_j ≥ x_j - x̄_j, d_j ≥ x̄_j - x_j
+ * Or squared Euclidean: uses modified objective coefficients.
+ *
+ * @complexity Each iteration: one LP solve, O(n_int) rounding.
+ * Typically 10-100 iterations. Very effective for finding first solution.
+ * Success rate ~80% on MIPLIB instances.
+ *
+ * @ref Fischetti, Glover & Lodi, "The feasibility pump",
+ *      Mathematical Programming 104 (2005) 91-104
+ * @ref Achterberg & Berthold, "Improving the feasibility pump",
+ *      Discrete Optimization 4 (2007) 77-86
+ *
  * CbcHeuristicFPump: Implements the Feasibility Pump algorithm
  * (Fischetti, Glover & Lodi, 2005) for finding initial MIP solutions.
  *

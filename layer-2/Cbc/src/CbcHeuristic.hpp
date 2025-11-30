@@ -4,6 +4,35 @@
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *
+ * @algorithm MIP Primal Heuristics Framework:
+ * Primal heuristics find feasible integer solutions during B&C search.
+ * Good solutions improve the upper bound, enabling more pruning.
+ *
+ * Heuristic Categories:
+ * 1. Construction: Build solution from scratch (rounding, greedy)
+ * 2. Improvement: Refine existing solution (local search, RINS)
+ * 3. Diving: Fix variables sequentially toward integrality
+ * 4. Large Neighborhood Search: Fix subset, re-optimize remainder
+ *
+ * Included heuristics:
+ * - CbcRounding: Round LP solution using constraint "locks"
+ *   Lock = coefficient sign × bound direction. Round toward locked side.
+ * - CbcHeuristicPartial: Fix high-priority variables, solve sub-MIP
+ * - CbcSerendipity: Capture solutions found incidentally by solver
+ *
+ * Scheduling via when_/whereFrom_/howOften_ controls invocation frequency
+ * and timing (root vs tree, before/after cuts).
+ *
+ * @math Rounding with locks: For x_j fractional, count constraints where
+ * rounding down vs up would help feasibility. Round toward majority vote.
+ * Quality vs speed tradeoff: quick heuristics often, expensive ones rarely.
+ *
+ * @complexity Rounding: O(nnz). Sub-MIP heuristics: depends on time limit.
+ * Heuristics typically limited to fraction of total solve time.
+ *
+ * @ref Berthold, "Primal heuristics for mixed integer programs", PhD thesis (2006)
+ * @ref Achterberg, "Constraint Integer Programming", TU Berlin (2007), Ch. 7
+ *
  * CbcHeuristic: Abstract base for primal heuristics that find feasible
  * solutions during branch-and-cut search. Key method is solution() which
  * returns 1 if a valid solution is found, 0 otherwise.

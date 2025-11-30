@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated": "2025-11-30T14:50:28.934784",
+  "generated": "2025-11-30T14:57:55.722706",
   "project": "coin-or-knowledge-base",
   "description": "Annotated optimization solver library documentation",
   "layers": {
@@ -3577,7 +3577,7 @@
         "Cbc": {
           "name": "Cbc",
           "file_count": 83,
-          "pass2_count": 4,
+          "pass2_count": 10,
           "files": {
             "src/CbcConsequence.hpp": {
               "path": "layer-2/Cbc/src/CbcConsequence.hpp",
@@ -3606,14 +3606,20 @@
               "path": "layer-2/Cbc/src/CbcBranchDecision.hpp",
               "filename": "CbcBranchDecision.hpp",
               "file": "CbcBranchDecision.hpp",
-              "brief": "Abstract base for branching variable selection\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcBranchDecision defines HOW TO CHOOSE between branching candidates:\n- betterBranch(): Compare two CbcBranchingObjects after strong branching\n- bestBranch(): Compare N candidates and return best index\n\nUsed after strong branching evaluates candidates. Decision considers:\n- changeUp/changeDown: Objective change estimates\n- numInfeasibilitiesUp/Down: Remaining infeasibilities",
+              "brief": "Abstract base for branching variable selection\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+              "algorithm": "Branching Variable Selection Strategies:\nAfter identifying fractional variables, must choose which to branch on.\nDifferent strategies trade off computational cost vs tree size.\n\nCommon Scoring Functions:\n- Most infeasible: max |x_j - round(x_j)| - cheap but often poor\n- Product score: score_j = max(D⁺_j·D⁻_j, ε) where D are degradations\n- Hybrid: (1-μ)·min(D⁺,D⁻) + μ·max(D⁺,D⁻), μ typically 1/6\n- Pseudo-costs: ψ⁺_j·(⌈x_j⌉-x_j) × ψ⁻_j·(x_j-⌊x_j⌋)\n\nStrong branching workflow:\n1. Select k candidates (most fractional or pseudocost-based)\n2. For each candidate, solve LP for both branches (with iteration limit)\n3. Record D⁺_j = z⁺_j - z, D⁻_j = z⁻_j - z (or infeasible/cutoff)\n4. Score candidates, pick best\n5. Update pseudo-costs from observed degradations",
+              "math": "Reliability branching: Use pseudo-costs ψ_j unless branched on\nvariable < η_rel times, then strong branch to improve estimate.\nBalances accuracy vs cost of strong branching.",
+              "complexity": "Strong branching: O(k × LP_iterations) per node.\nPseudo-costs: O(n) after warmup. Reliability: adaptive O(k') where k' ≤ k.",
+              "ref": [
+                "Achterberg, Koch & Martin, \"Branching rules revisited\",\n     Operations Research Letters 33 (2005) 42-54\n\nCbcBranchDecision defines HOW TO CHOOSE between branching candidates:\n- betterBranch(): Compare two CbcBranchingObjects after strong branching\n- bestBranch(): Compare N candidates and return best index\n\nUsed after strong branching evaluates candidates. Decision considers:\n- changeUp/changeDown: Objective change estimates\n- numInfeasibilitiesUp/Down: Remaining infeasibilities"
+              ],
               "see": [
                 "CbcBranchDefaultDecision for simple selection",
                 "CbcBranchDynamicDecision for pseudocost-based selection",
                 "CbcBranchingObject for what gets compared",
                 "OsiChooseVariable for variable selection integration\n\nEdwin 11/12/2009 carved from CbcBranchBase"
               ],
-              "has_pass2": false
+              "has_pass2": true
             },
             "src/CbcHeuristicVND.hpp": {
               "path": "layer-2/Cbc/src/CbcHeuristicVND.hpp",
@@ -3663,14 +3669,21 @@
               "path": "layer-2/Cbc/src/CbcHeuristic.hpp",
               "filename": "CbcHeuristic.hpp",
               "file": "CbcHeuristic.hpp",
-              "brief": "Base class for MIP primal heuristics\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristic: Abstract base for primal heuristics that find feasible\nsolutions during branch-and-cut search. Key method is solution() which\nreturns 1 if a valid solution is found, 0 otherwise.\n\nExecution control:\n- when_: 0=off, 1=root only, 2=non-root, 3=always\n- whereFrom_: Bit field for timing (before/during/after cuts)\n- howOften_: Frequency of invocation\n\nIncludes several concrete heuristics:\n- CbcRounding: Simple rounding with lock-based feasibility\n- CbcHeuristicPartial: Fix priority-based partial solution\n- CbcSerendipity: Capture solver-found solutions\n- CbcHeuristicJustOne: Randomly select one from multiple heuristics\n\nAlso includes CbcHeuristicNode/NodeList for tracking where heuristics\nhave been invoked (distance-based diversification).",
+              "brief": "Base class for MIP primal heuristics\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+              "algorithm": "MIP Primal Heuristics Framework:\nPrimal heuristics find feasible integer solutions during B&C search.\nGood solutions improve the upper bound, enabling more pruning.\n\nHeuristic Categories:\n1. Construction: Build solution from scratch (rounding, greedy)\n2. Improvement: Refine existing solution (local search, RINS)\n3. Diving: Fix variables sequentially toward integrality\n4. Large Neighborhood Search: Fix subset, re-optimize remainder\n\nIncluded heuristics:\n- CbcRounding: Round LP solution using constraint \"locks\"\n  Lock = coefficient sign × bound direction. Round toward locked side.\n- CbcHeuristicPartial: Fix high-priority variables, solve sub-MIP\n- CbcSerendipity: Capture solutions found incidentally by solver\n\nScheduling via when_/whereFrom_/howOften_ controls invocation frequency\nand timing (root vs tree, before/after cuts).",
+              "math": "Rounding with locks: For x_j fractional, count constraints where\nrounding down vs up would help feasibility. Round toward majority vote.\nQuality vs speed tradeoff: quick heuristics often, expensive ones rarely.",
+              "complexity": "Rounding: O(nnz). Sub-MIP heuristics: depends on time limit.\nHeuristics typically limited to fraction of total solve time.",
+              "ref": [
+                "Berthold, \"Primal heuristics for mixed integer programs\", PhD thesis (2006)",
+                "Achterberg, \"Constraint Integer Programming\", TU Berlin (2007), Ch. 7\n\nCbcHeuristic: Abstract base for primal heuristics that find feasible\nsolutions during branch-and-cut search. Key method is solution() which\nreturns 1 if a valid solution is found, 0 otherwise.\n\nExecution control:\n- when_: 0=off, 1=root only, 2=non-root, 3=always\n- whereFrom_: Bit field for timing (before/during/after cuts)\n- howOften_: Frequency of invocation\n\nIncludes several concrete heuristics:\n- CbcRounding: Simple rounding with lock-based feasibility\n- CbcHeuristicPartial: Fix priority-based partial solution\n- CbcSerendipity: Capture solver-found solutions\n- CbcHeuristicJustOne: Randomly select one from multiple heuristics\n\nAlso includes CbcHeuristicNode/NodeList for tracking where heuristics\nhave been invoked (distance-based diversification)."
+              ],
               "see": [
                 "CbcHeuristicFPump for Feasibility Pump",
                 "CbcHeuristicDive for diving heuristics",
                 "CbcHeuristicRINS, CbcHeuristicRENS for neighborhood search",
                 "CbcHeuristicLocal for local search"
               ],
-              "has_pass2": false
+              "has_pass2": true
             },
             "src/CbcGeneralDepth.hpp": {
               "path": "layer-2/Cbc/src/CbcGeneralDepth.hpp",
@@ -3724,12 +3737,18 @@
               "path": "layer-2/Cbc/src/CbcCompareDefault.hpp",
               "filename": "CbcCompareDefault.hpp",
               "file": "CbcCompareDefault.hpp",
-              "brief": "Default adaptive node comparison strategy\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCompareDefault: Sophisticated hybrid search strategy.\nAdapts behavior based on search phase and solution history.\n\nStrategy phases:\n- Before solution: Use depth-first (weight_ < 0) or breadth-first\n- After solution: Weight-based hybrid of objective and infeasibilities\n\nweight_ special values:\n- 0.0: Auto-compute from first solution\n- -1.0: Fewest infeasibilities (before solution)\n- -2.0: Breadth-first for first 1000 nodes\n- -3.0: Depth-first before solution\n\nAdaptive callbacks:\n- newSolution(): Recomputes weight from solution gap\n- every1000Nodes(): Adjusts for tree size, triggers diving\n\nDiving support:\n- startDive()/cleanDive(): Focused depth search from promising node",
+              "brief": "Default adaptive node comparison strategy\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+              "algorithm": "Adaptive Hybrid Node Selection:\nDynamically switches between search strategies based on solve progress.\n\nPhase 1 (Before first solution):\n- weight_ = -1: Fewest infeasibilities (greedy toward integrality)\n- weight_ = -2: Breadth-first for 1000 nodes (explore diversity)\n- weight_ = -3: Depth-first (find solution fast, low memory)\n\nPhase 2 (After solution found):\n- weight_ = 0: Auto-compute from gap to balance exploration/exploitation\n- weight_ > 0: Hybrid score = objective + weight × numInfeasibilities\n  Higher weight emphasizes depth, lower weight emphasizes best-bound\n\nAdaptive adjustments:\n- newSolution(): Recalibrate weight based on improvement\n- every1000Nodes(): Check tree size, possibly switch strategy or dive\n- Diving: Temporary depth-first from promising node to find solution",
+              "math": "Node score: S(n) = z(n) + w × k(n)\nwhere z(n) = LP bound, k(n) = number of infeasibilities, w = weight.\nOptimal w depends on gap: w ≈ (z* - z_LP) / k_avg",
+              "complexity": "Comparison: O(1). Strategy switches: O(n log n) for re-heapify.\nAdaptive strategies typically 20-50% faster than fixed strategies.",
+              "ref": [
+                "Linderoth & Savelsbergh, \"A computational study of search strategies\",\n     INFORMS Journal on Computing 11 (1999) 173-187\n\nCbcCompareDefault: Sophisticated hybrid search strategy.\nAdapts behavior based on search phase and solution history.\n\nStrategy phases:\n- Before solution: Use depth-first (weight_ < 0) or breadth-first\n- After solution: Weight-based hybrid of objective and infeasibilities\n\nweight_ special values:\n- 0.0: Auto-compute from first solution\n- -1.0: Fewest infeasibilities (before solution)\n- -2.0: Breadth-first for first 1000 nodes\n- -3.0: Depth-first before solution\n\nAdaptive callbacks:\n- newSolution(): Recomputes weight from solution gap\n- every1000Nodes(): Adjusts for tree size, triggers diving\n\nDiving support:\n- startDive()/cleanDive(): Focused depth search from promising node"
+              ],
               "see": [
                 "CbcCompareBase for interface",
                 "CbcCompareDepth for simple depth-first\n\nEdwin 11/25/09 carved out of CbcCompareActual"
               ],
-              "has_pass2": false
+              "has_pass2": true
             },
             "src/CbcHeuristicDINS.hpp": {
               "path": "layer-2/Cbc/src/CbcHeuristicDINS.hpp",
@@ -4212,24 +4231,38 @@
               "path": "layer-2/Cbc/src/CbcNode.hpp",
               "filename": "CbcNode.hpp",
               "file": "CbcNode.hpp",
-              "brief": "Search tree node for branch-and-cut\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcNode represents a live subproblem in the B&C search tree.\nContains information needed while the node is active:\n- Depth in tree, objective value, branching state\n- Links to CbcNodeInfo for reconstruction\n\nLifecycle: Created when branching, deleted when all branches evaluated.\nExtends CoinTreeNode for heap-based storage in CbcTree.\n\nKey methods:\n- createInfo(): Create CbcNodeInfo for subproblem storage\n- branch(): Apply branching and create child subproblem\n- chooseBranch(): Select branching variable/object",
+              "brief": "Search tree node for branch-and-cut\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+              "algorithm": "Branch-and-Bound Node Management:\nEach CbcNode represents a subproblem (LP relaxation with additional bounds)\nin the B&B tree. Key operations:\n\n1. Node Creation: When branching on variable x_j with fractional value f:\n   - Down child: add bound x_j ≤ floor(f)\n   - Up child: add bound x_j ≥ ceil(f)\n\n2. Variable Selection (chooseBranch):\n   - Strong branching: solve LP for each candidate, pick best degradation\n   - Pseudo-costs: estimate from historical branching improvements\n   - Reliability branching: strong branch until pseudo-costs reliable\n\n3. Node Processing:\n   - Reconstruct LP from parent using CbcNodeInfo diffs\n   - Solve LP relaxation\n   - Apply cuts, check integrality, branch or fathom",
+              "math": "Strong branching score: score_j = (1-μ)·min(D⁻_j, D⁺_j) + μ·max(D⁻_j, D⁺_j)\nwhere D⁻_j, D⁺_j are objective degradations for down/up branches, μ ∈ [0,1].\nPseudo-cost: ψ⁻_j = ΔZ⁻/(f_j - floor(f_j)), initialized via strong branching.",
+              "complexity": "Strong branching: O(k·LP) where k candidates evaluated.\nPseudo-costs: O(n) for scoring after initialization. Node reconstruction:\nO(depth) to replay bound changes from root.",
+              "ref": [
+                "Land & Doig, \"An automatic method for solving discrete programming problems\",\n     Econometrica 28 (1960) 497-520 (original B&B)",
+                "Achterberg, Koch & Martin, \"Branching rules revisited\",\n     Operations Research Letters 33 (2005) 42-54 (reliability branching)\n\nCbcNode represents a live subproblem in the B&C search tree.\nContains information needed while the node is active:\n- Depth in tree, objective value, branching state\n- Links to CbcNodeInfo for reconstruction\n\nLifecycle: Created when branching, deleted when all branches evaluated.\nExtends CoinTreeNode for heap-based storage in CbcTree.\n\nKey methods:\n- createInfo(): Create CbcNodeInfo for subproblem storage\n- branch(): Apply branching and create child subproblem\n- chooseBranch(): Select branching variable/object"
+              ],
               "see": [
                 "CbcNodeInfo for persistent subproblem information",
                 "CbcTree for node storage and selection",
                 "CbcBranchingObject for branching decisions"
               ],
-              "has_pass2": false
+              "has_pass2": true
             },
             "src/CbcHeuristicFPump.hpp": {
               "path": "layer-2/Cbc/src/CbcHeuristicFPump.hpp",
               "filename": "CbcHeuristicFPump.hpp",
               "file": "CbcHeuristicFPump.hpp",
-              "brief": "Feasibility Pump heuristic (Fischetti, Glover & Lodi)\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicFPump: Implements the Feasibility Pump algorithm\n(Fischetti, Glover & Lodi, 2005) for finding initial MIP solutions.\n\nAlgorithm overview:\n1. Solve LP relaxation, get fractional x*\n2. Round x* to nearest integers -> x_bar\n3. Solve LP with objective: minimize distance to x_bar\n4. If new x* = x_bar, done (integer feasible)\n5. Otherwise round and repeat\n\nKey parameters:\n- maximumPasses_: Max iterations before giving up\n- initialWeight_: Blend original objective with distance\n- defaultRounding_: Threshold for rounding (default 0.5)\n\nHandles cycling through randomization and perturbation.\n\nAlso includes CbcDisasterHandler for Clp solver recovery.",
+              "brief": "Feasibility Pump heuristic (Fischetti, Glover & Lodi)\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+              "algorithm": "Feasibility Pump (FP):\nAlternates between LP relaxation and rounding to find feasible MIP solution.\n\nBasic Algorithm:\n1. x* ← solve LP relaxation\n2. x̄ ← round(x*) (integer point)\n3. While x* ≠ x̄ and iterations < max:\n   a. x* ← argmin ||x - x̄|| s.t. Ax = b, l ≤ x ≤ u (LP toward x̄)\n   b. x̄ ← round(x*)\n4. If x* = x̄, return feasible solution\n\nEnhancements:\n- Objective blending: min α·c^Tx + (1-α)·||x-x̄|| trades feasibility vs quality\n- Cycle detection: Track visited roundings, perturb if cycling\n- Randomization: Random flips to escape local minima\n- General integers: Auxiliary binary formulation or specialized rounding",
+              "math": "Distance LP: min Σ_j |x_j - x̄_j| for integer j\nLinearized as: min Σ_j d_j s.t. d_j ≥ x_j - x̄_j, d_j ≥ x̄_j - x_j\nOr squared Euclidean: uses modified objective coefficients.",
+              "complexity": "Each iteration: one LP solve, O(n_int) rounding.\nTypically 10-100 iterations. Very effective for finding first solution.\nSuccess rate ~80% on MIPLIB instances.",
+              "ref": [
+                "Fischetti, Glover & Lodi, \"The feasibility pump\",\n     Mathematical Programming 104 (2005) 91-104",
+                "Achterberg & Berthold, \"Improving the feasibility pump\",\n     Discrete Optimization 4 (2007) 77-86\n\nCbcHeuristicFPump: Implements the Feasibility Pump algorithm\n(Fischetti, Glover & Lodi, 2005) for finding initial MIP solutions.\n\nAlgorithm overview:\n1. Solve LP relaxation, get fractional x*\n2. Round x* to nearest integers -> x_bar\n3. Solve LP with objective: minimize distance to x_bar\n4. If new x* = x_bar, done (integer feasible)\n5. Otherwise round and repeat\n\nKey parameters:\n- maximumPasses_: Max iterations before giving up\n- initialWeight_: Blend original objective with distance\n- defaultRounding_: Threshold for rounding (default 0.5)\n\nHandles cycling through randomization and perturbation.\n\nAlso includes CbcDisasterHandler for Clp solver recovery."
+              ],
               "see": [
                 "CbcHeuristic for base class",
                 "CbcHeuristicDive for related diving approaches"
               ],
-              "has_pass2": false
+              "has_pass2": true
             },
             "src/CbcBranchToFixLots.hpp": {
               "path": "layer-2/Cbc/src/CbcBranchToFixLots.hpp",
@@ -4338,13 +4371,20 @@
               "path": "layer-2/Cbc/src/CbcTree.hpp",
               "filename": "CbcTree.hpp",
               "file": "CbcTree.hpp",
-              "brief": "Heap-based storage for live search tree nodes\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcTree manages the set of live (unexplored) nodes as a priority heap.\nThe comparison function (CbcCompare) determines node selection strategy:\n- Best-first: Select node with best bound\n- Depth-first: Select deepest node\n- Best-estimate: Use pseudocost estimates\n\nKey methods:\n- push(): Add node to heap\n- top()/pop(): Get and remove best node\n- setComparison(): Change selection strategy (re-heapifies)\n- cleanTree(): Remove nodes worse than cutoff",
+              "brief": "Heap-based storage for live search tree nodes\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+              "algorithm": "Search Tree Management with Priority Heap:\nMaintains live (unexplored) nodes in a binary heap for efficient selection.\n\nNode Selection Strategies (via CbcCompare):\n- Best-first: Select node with best (lowest) LP bound → optimal first solution\n- Depth-first: Select deepest node → memory efficient, finds solutions fast\n- Best-estimate: Use pseudo-cost estimate of integer solution value\n- Hybrid: Switch strategies based on incumbent, gap, or tree size\n\nTree Operations:\n- push(node): Add to heap, O(log n) sift-up\n- pop(): Remove best, O(log n) sift-down\n- cleanTree(cutoff): Prune nodes with bound ≥ cutoff (fathoming)\n- setComparison(): Change strategy, O(n) re-heapify",
+              "math": "Node bound vs incumbent: If LB(node) ≥ UB (best incumbent), fathom node.\nBest-first guarantees: first integer solution found is optimal.\nDepth-first memory: O(depth × branching_factor) vs O(2^depth) for best-first.",
+              "complexity": "push/pop: O(log n). cleanTree: O(n). Space: O(live_nodes).\nTypical MIP: live nodes peaks at thousands to millions depending on strategy.",
+              "ref": [
+                "Linderoth & Savelsbergh, \"A computational study of search strategies\",\n     INFORMS Journal on Computing 11 (1999) 173-187",
+                "Achterberg, \"Constraint Integer Programming\", PhD thesis, TU Berlin (2007)\n\nCbcTree manages the set of live (unexplored) nodes as a priority heap.\nThe comparison function (CbcCompare) determines node selection strategy:\n- Best-first: Select node with best bound\n- Depth-first: Select deepest node\n- Best-estimate: Use pseudocost estimates\n\nKey methods:\n- push(): Add node to heap\n- top()/pop(): Get and remove best node\n- setComparison(): Change selection strategy (re-heapifies)\n- cleanTree(): Remove nodes worse than cutoff"
+              ],
               "see": [
                 "CbcCompareBase for comparison function interface",
                 "CbcNode for node representation",
                 "CbcTreeLocal for local search tree variant"
               ],
-              "has_pass2": false
+              "has_pass2": true
             },
             "src/CbcParameters.hpp": {
               "path": "layer-2/Cbc/src/CbcParameters.hpp",
@@ -18408,6 +18448,6 @@
     "total_layers": 5,
     "total_libraries": 28,
     "total_files": 1197,
-    "total_pass2_files": 96
+    "total_pass2_files": 102
   }
 }

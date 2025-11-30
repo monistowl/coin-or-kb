@@ -4,6 +4,37 @@
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *
+ * @algorithm Branch-and-Bound Node Management:
+ * Each CbcNode represents a subproblem (LP relaxation with additional bounds)
+ * in the B&B tree. Key operations:
+ *
+ * 1. Node Creation: When branching on variable x_j with fractional value f:
+ *    - Down child: add bound x_j ≤ floor(f)
+ *    - Up child: add bound x_j ≥ ceil(f)
+ *
+ * 2. Variable Selection (chooseBranch):
+ *    - Strong branching: solve LP for each candidate, pick best degradation
+ *    - Pseudo-costs: estimate from historical branching improvements
+ *    - Reliability branching: strong branch until pseudo-costs reliable
+ *
+ * 3. Node Processing:
+ *    - Reconstruct LP from parent using CbcNodeInfo diffs
+ *    - Solve LP relaxation
+ *    - Apply cuts, check integrality, branch or fathom
+ *
+ * @math Strong branching score: score_j = (1-μ)·min(D⁻_j, D⁺_j) + μ·max(D⁻_j, D⁺_j)
+ * where D⁻_j, D⁺_j are objective degradations for down/up branches, μ ∈ [0,1].
+ * Pseudo-cost: ψ⁻_j = ΔZ⁻/(f_j - floor(f_j)), initialized via strong branching.
+ *
+ * @complexity Strong branching: O(k·LP) where k candidates evaluated.
+ * Pseudo-costs: O(n) for scoring after initialization. Node reconstruction:
+ * O(depth) to replay bound changes from root.
+ *
+ * @ref Land & Doig, "An automatic method for solving discrete programming problems",
+ *      Econometrica 28 (1960) 497-520 (original B&B)
+ * @ref Achterberg, Koch & Martin, "Branching rules revisited",
+ *      Operations Research Letters 33 (2005) 42-54 (reliability branching)
+ *
  * CbcNode represents a live subproblem in the B&C search tree.
  * Contains information needed while the node is active:
  * - Depth in tree, objective value, branching state

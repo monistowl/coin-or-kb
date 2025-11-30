@@ -4,6 +4,32 @@
  * Copyright (C) 2004, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *
+ * @algorithm Search Tree Management with Priority Heap:
+ * Maintains live (unexplored) nodes in a binary heap for efficient selection.
+ *
+ * Node Selection Strategies (via CbcCompare):
+ * - Best-first: Select node with best (lowest) LP bound → optimal first solution
+ * - Depth-first: Select deepest node → memory efficient, finds solutions fast
+ * - Best-estimate: Use pseudo-cost estimate of integer solution value
+ * - Hybrid: Switch strategies based on incumbent, gap, or tree size
+ *
+ * Tree Operations:
+ * - push(node): Add to heap, O(log n) sift-up
+ * - pop(): Remove best, O(log n) sift-down
+ * - cleanTree(cutoff): Prune nodes with bound ≥ cutoff (fathoming)
+ * - setComparison(): Change strategy, O(n) re-heapify
+ *
+ * @math Node bound vs incumbent: If LB(node) ≥ UB (best incumbent), fathom node.
+ * Best-first guarantees: first integer solution found is optimal.
+ * Depth-first memory: O(depth × branching_factor) vs O(2^depth) for best-first.
+ *
+ * @complexity push/pop: O(log n). cleanTree: O(n). Space: O(live_nodes).
+ * Typical MIP: live nodes peaks at thousands to millions depending on strategy.
+ *
+ * @ref Linderoth & Savelsbergh, "A computational study of search strategies",
+ *      INFORMS Journal on Computing 11 (1999) 173-187
+ * @ref Achterberg, "Constraint Integer Programming", PhD thesis, TU Berlin (2007)
+ *
  * CbcTree manages the set of live (unexplored) nodes as a priority heap.
  * The comparison function (CbcCompare) determines node selection strategy:
  * - Best-first: Select node with best bound

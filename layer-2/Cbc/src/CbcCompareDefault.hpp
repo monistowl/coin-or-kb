@@ -4,6 +4,34 @@
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *
+ * @algorithm Adaptive Hybrid Node Selection:
+ * Dynamically switches between search strategies based on solve progress.
+ *
+ * Phase 1 (Before first solution):
+ * - weight_ = -1: Fewest infeasibilities (greedy toward integrality)
+ * - weight_ = -2: Breadth-first for 1000 nodes (explore diversity)
+ * - weight_ = -3: Depth-first (find solution fast, low memory)
+ *
+ * Phase 2 (After solution found):
+ * - weight_ = 0: Auto-compute from gap to balance exploration/exploitation
+ * - weight_ > 0: Hybrid score = objective + weight × numInfeasibilities
+ *   Higher weight emphasizes depth, lower weight emphasizes best-bound
+ *
+ * Adaptive adjustments:
+ * - newSolution(): Recalibrate weight based on improvement
+ * - every1000Nodes(): Check tree size, possibly switch strategy or dive
+ * - Diving: Temporary depth-first from promising node to find solution
+ *
+ * @math Node score: S(n) = z(n) + w × k(n)
+ * where z(n) = LP bound, k(n) = number of infeasibilities, w = weight.
+ * Optimal w depends on gap: w ≈ (z* - z_LP) / k_avg
+ *
+ * @complexity Comparison: O(1). Strategy switches: O(n log n) for re-heapify.
+ * Adaptive strategies typically 20-50% faster than fixed strategies.
+ *
+ * @ref Linderoth & Savelsbergh, "A computational study of search strategies",
+ *      INFORMS Journal on Computing 11 (1999) 173-187
+ *
  * CbcCompareDefault: Sophisticated hybrid search strategy.
  * Adapts behavior based on search phase and solution history.
  *
