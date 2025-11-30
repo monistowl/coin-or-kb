@@ -37,6 +37,40 @@
  *
  * @see CglOddHole for odd-hole cuts (related conflict graph structure)
  * @see CglProbing for variable fixing from cliques
+ *
+ * @algorithm Clique Inequality (recordClique):
+ *   For conflict graph clique C (all pairs conflict):
+ *   @math ∑_{j∈C} x_j ≤ 1 (at most one variable can be 1)
+ *   Valid for any set packing constraint ∑ x_j ≤ 1.
+ *   @complexity O(1) to add cut once clique found
+ *   @ref Padberg (1973) - On the facial structure of set packing
+ *
+ * @algorithm Star Clique Enumeration (find_scl):
+ *   Center on high-degree node, enumerate cliques in star:
+ *   @math Star(v) = {u : u adjacent to v}
+ *         Enumerate maximal cliques in induced subgraph G[Star(v)]
+ *   @complexity O(2^d) worst case for degree d; threshold limits
+ *   @ref Bron-Kerbosch (1973) - Algorithm for finding all cliques
+ *
+ * @algorithm Row Clique Extension (find_rcl):
+ *   Extend existing set packing row to maximal clique:
+ *   @math Given row ∑_{j∈R} x_j ≤ 1, find superset C ⊇ R
+ *         where C is clique in conflict graph
+ *   Stronger than original row if |C| > |R|.
+ *   @complexity O(|R| * d) for extension, then enumeration
+ *
+ * @algorithm Conflict Graph Construction (createFractionalGraph):
+ *   @math Node i ↔ binary x_i with 0 < x̄_i < 1
+ *         Edge (i,j) ↔ x_i + x_j ≤ 1 in some constraint
+ *   Edge cost = 1 - x̄_i - x̄_j (violation if both selected).
+ *   Only fractional variables: integer ones give no cut violation.
+ *   @complexity O(nnz²) worst case for graph construction
+ *
+ * @algorithm Greedy Maximal Clique (greedy_maximal_clique):
+ *   When candidate list exceeds threshold:
+ *   @math Greedily add highest-degree nodes until no more fit
+ *   Fast but may miss maximum violated clique.
+ *   @complexity O(n² * d) for greedy approach
  */
 
 #ifndef _CglClique_h_

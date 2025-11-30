@@ -34,6 +34,32 @@
  *
  * @see CglCutGenerator for base interface
  * @see ClpFactorization for tableau row computation
+ *
+ * @algorithm Gomory Mixed-Integer Cut (generateCuts):
+ *   From optimal simplex tableau row for basic integer variable x_i:
+ *   @math Tableau: x_i + ∑_j a_ij x_j = b_i (with b_i fractional)
+ *         Define f_0 = b_i - ⌊b_i⌋, f_j = a_ij - ⌊a_ij⌋
+ *         GMI cut: ∑_{f_j≤f_0} (f_j/f_0) x_j + ∑_{f_j>f_0} ((1-f_j)/(1-f_0)) x_j ≥ 1
+ *   For continuous non-basic: use coefficient directly (no floor).
+ *   @complexity O(m) per cut for m nonzeros in tableau row
+ *   @ref Gomory (1958) - Outline of an algorithm for integer solutions
+ *   @ref Cornuéjols (2007) - Revival of GMI cuts in MIP
+ *
+ * @algorithm Cut Sparsification (limit_/limitAtRoot_):
+ *   Dense cuts (many nonzeros) slow LP re-optimization:
+ *   @math Only keep cut if nnz(cut) ≤ limit
+ *   Root gets more aggressive limits (denser cuts OK for root LP).
+ *
+ * @algorithm Numerical Safeguards (conditionNumberMultiplier_):
+ *   Ill-conditioned basis → inaccurate tableau rows → invalid cuts.
+ *   @math RHS relaxation: b' = b - ε where ε = min(10⁻⁴, κ(B)·mult)
+ *   κ(B) = condition number of basis matrix B.
+ *   @ref Cook et al. (2009) - Numerically safe GMI cuts
+ *
+ * @algorithm Integrality Distance Threshold (away_):
+ *   Skip variables near-integer to avoid numerical issues:
+ *   @math Generate cut only if away_ ≤ f_0 ≤ 1 - away_
+ *   Default 0.05; tighter at root for more cuts.
  */
 
 #ifndef CglGomory_H

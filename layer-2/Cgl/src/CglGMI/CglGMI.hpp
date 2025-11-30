@@ -39,6 +39,42 @@
  *
  * @see CglGMIParam for parameter settings
  * @see CglGomory for simpler Gomory implementation
+ *
+ * @algorithm GMI Cut Derivation (generateCuts):
+ *   For fractional basic variable x_i with tableau row:
+ *   @math x_i + ∑_j a_ij x_j = b_i where f_0 = b_i - ⌊b_i⌋ > 0
+ *         GMI: ∑_{j: f_j ≤ f_0} (f_j/f_0) x_j + ∑_{j: f_j > f_0} ((1-f_j)/(1-f_0)) x_j ≥ 1
+ *   Mixed-integer: continuous coefficients handled differently.
+ *   @complexity O(m) per cut for m nonzeros in row
+ *   @ref Gomory (1960) - An algorithm for mixed-integer problems
+ *   @ref Cornuéjols (2008) - Valid inequalities for MIP
+ *
+ * @algorithm Numerical Cleaning (cleanCut):
+ *   Multiple safety checks before accepting cut:
+ *   @math 1. Violation ≥ threshold (cut actually cuts)
+ *         2. max|a_j|/min|a_j| ≤ dynamism (avoid ill-conditioning)
+ *         3. nnz ≤ support limit (avoid dense cuts)
+ *   Small coefficients removed with RHS adjustment.
+ *   @ref Cook, Kannan, Schrijver (1990) - Chvátal closures
+ *
+ * @algorithm Cut Scaling (scaleCut, scaleCutIntegral):
+ *   Three scaling modes:
+ *   @math 0: Scale to integral coefficients via nearestRational()
+ *         1: Norm-based scaling (||cut|| = ncol)
+ *         2: Normalize largest coefficient to 1
+ *   Integral scaling helps numerical stability for repeated cuts.
+ *   @complexity O(nnz * log(maxdenom)) for rational approximation
+ *
+ * @algorithm Nearest Rational Approximation (nearestRational):
+ *   Convert floating-point to rational using continued fractions:
+ *   @math Find p/q with |val - p/q| ≤ maxdelta, q ≤ maxdenom
+ *   Enables integral cut coefficients for stability.
+ *   @ref Continued fraction algorithm for rational approximation
+ *
+ * @algorithm Slack Elimination (eliminateSlack):
+ *   GMI from tableau uses slack variables; convert to original:
+ *   @math Substitute s_i = b_i - a_i'x using original constraint
+ *   Produces cut in terms of structural variables only.
  */
 
 #ifndef CglGMI_H

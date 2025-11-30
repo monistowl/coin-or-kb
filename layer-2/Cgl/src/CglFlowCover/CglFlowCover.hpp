@@ -42,6 +42,34 @@
  *
  * @see CglMixedIntegerRounding for general MIR approach
  * @see CglKnapsackCover for simpler cover cuts
+ *
+ * @algorithm Simple Generalized Flow Cover (generateOneFlowCut):
+ *   For single-node flow constraint with variable bounds:
+ *   @math ∑_j x_j - ∑_k y_k ≤ b, where y_k ≤ u_k d_k (d_k binary)
+ *   Cover C ⊆ {k}: ∑_{k∈C} u_k > b (flow exceeds capacity if all open)
+ *   @math Flow cover cut: ∑_{k∈C} min(y_k, (∑u_k - b)) ≤ ∑u_k - b
+ *   @ref Padberg, Van Roy, Wolsey (1985) - Valid inequalities for 0-1 programs
+ *   @ref Gu, Nemhauser, Savelsbergh (1999) - Lifted flow cover inequalities
+ *
+ * @algorithm Flow Cover Lifting (liftMinus, liftPlus):
+ *   Strengthen cut by computing lifting coefficients:
+ *   @math For j ∉ C: lift coefficient α_j via submodular function
+ *   liftMinus: continuous variables not in cover (L- set)
+ *   liftPlus: binary variables that could join cover
+ *   @complexity O(|C|) per variable lifted
+ *
+ * @algorithm Variable Upper Bound Detection (flowPreprocess):
+ *   Identify rows defining VUBs: x_j ≤ u_j d_j (d_j binary)
+ *   @math VUB enables stronger cuts than simple bounds:
+ *         x_j ≤ u_j vs x_j ≤ u_j d_j gives tighter when d_j = 0
+ *   Stored in vubs_[] array indexed by continuous variable.
+ *
+ * @algorithm Row Classification (determineOneRowType):
+ *   Categories for cut generation:
+ *   - VARUB/VARLB: Two-variable rows defining variable bounds
+ *   - MIXUB/MIXEQ: Main candidates for flow cover generation
+ *   - NOBINUB: No binary → cannot generate flow cuts
+ *   @complexity O(nnz) per row for classification
  */
 
 #ifndef CglFlowCover_H

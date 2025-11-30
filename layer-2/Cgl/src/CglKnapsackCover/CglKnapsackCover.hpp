@@ -35,6 +35,36 @@
  *
  * @see CglProbing for variable implications derived from covers
  * @see CglClique for clique cuts (special case of covers)
+ *
+ * @algorithm Knapsack Cover Inequality (generateCuts):
+ *   For knapsack ∑_j a_j x_j ≤ b with binary x:
+ *   @math Cover C: ∑_{j∈C} a_j > b (simultaneous 1s infeasible)
+ *         Cover inequality: ∑_{j∈C} x_j ≤ |C| - 1
+ *   Minimal cover: removing any element makes it not a cover.
+ *   @complexity Cover finding: O(2^n) exact, O(n log n) heuristic
+ *   @ref Balas & Zemel (1978) - Facets of the knapsack polytope
+ *   @ref Crowder, Johnson, Padberg (1983) - Solving large-scale 0-1 LPs
+ *
+ * @algorithm Lifting (liftCoverCut, seqLiftAndUncomplementAndAdd):
+ *   Strengthen cover cut by adding non-cover variables:
+ *   @math Extended cut: ∑_{j∈C} x_j + ∑_{j∉C} α_j x_j ≤ |C| - 1
+ *   Sequence-independent: α_j = max coefficients from knapsack subproblem
+ *   Sequence-dependent: coefficients depend on lifting order (can be stronger)
+ *   @complexity Sequence-independent: O(|C| * n), Dependent: O(n²)
+ *   @ref Zemel (1989) - Easily computable facets of the knapsack polytope
+ *
+ * @algorithm Horowitz-Sahni Exact Knapsack (exactSolveKnapsack):
+ *   Branch-and-bound with best-first search for exact solution:
+ *   @math Max ∑ p_j x_j s.t. ∑ w_j x_j ≤ c, x ∈ {0,1}
+ *   Uses LP relaxation bound for pruning.
+ *   @complexity O(2^n) worst case, often O(n * c) practical
+ *   @ref Horowitz & Sahni (1974) - Computing partitions
+ *   @ref Martello & Toth (1990) - Knapsack Problems (p. 30)
+ *
+ * @algorithm Greedy Cover Heuristic (findGreedyCover):
+ *   Order variables by a_j/x̄_j ratio (LP solution weighted):
+ *   @math Add variables greedily until ∑_{j∈C} a_j > b
+ *   Fast but may miss most violated cover.
  */
 
 #ifndef CglKnapsackCover_H
