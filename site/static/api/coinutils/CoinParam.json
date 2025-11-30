@@ -1,0 +1,2331 @@
+{
+  "name": "CoinParam",
+  "qualified_name": "CoinParam",
+  "brief": "A base class for keyword value command line parameters.",
+  "detailed": "The underlying paradigm is that a parameter specifies an action to be performed on a target object. The base class provides two function pointers, a push function and a pull function. By convention, a push function will set some value in the target object or perform some action using the target object. A pull function will retrieve some value from the target object. This is only a convention, however; CoinParam and associated utilities make no use of these functions and have no hardcoded notion of how they should be used.\nThe action to be performed, and the target object, will be specific to a particular application. It is expected that users will derive application-specific parameter classes from this base class. A derived class will typically add fields and methods to set/get a code for the action to be performed (often, an enum class) and the target object (often, a pointer or reference).\nFacilities provided by the base class and associated utility routines include: Support for common parameter types with numeric, string, or keyword values.\nSupport for short and long help messages.\nPointers to push and pull functions as described above.\nCommand line parsing and keyword matching.\nAll utility routines are declared in the CoinParamUtils namespace.\nThe base class recognises five types of parameters: actions (which require no value); numeric parameters with integer or real (double) values; keyword parameters, where the value is one of a defined set of value-keywords; and string parameters (where the value is a string). The base class supports the definition of a valid range, a default value, and short and long help messages for a parameter.\nAs defined by the CoinParamFunc typedef, push and pull functions should take a single parameter, a pointer to a CoinParam. Typically this object will actually be a derived class as described above, and the implementation function will have access to all capabilities of CoinParam and of the derived class.\nWhen specified as command line parameters, the expected syntax is -keyword value or -keyword=value. You can also use the Gnu double-dash style, --keyword. Spaces around the = will not work.\nThe keyword (name) for a parameter can be defined with an ! to mark the minimal match point. For example, allow!ableGap will be considered matched by the strings allow, allowa, allowab, etc. Similarly, the value-keyword strings for keyword parameters can be defined with ! to mark the minimal match point. Matching of keywords and value-keywords is not case sensitive.",
+  "header_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinParam",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 149,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinParam",
+      "brief": "Constructor for a parameter with a double value.",
+      "detailed": "The default value is 0.0. Be careful to clearly indicate that `lower` and `upper` are real (double) values to distinguish this constructor from the constructor for an integer parameter.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "help",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lower",
+          "type": "double",
+          "description": "",
+          "default": "-"
+        },
+        {
+          "name": "upper",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "longHelp",
+          "type": "std::string",
+          "description": "",
+          "default": "\"\""
+        },
+        {
+          "name": "displayPriority",
+          "type": "CoinDisplayPriority",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 157,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinParam",
+      "brief": "Constructor for a parameter with an integer value.",
+      "detailed": "The default value is 0.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "help",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lower",
+          "type": "int",
+          "description": "",
+          "default": "-"
+        },
+        {
+          "name": "upper",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "longHelp",
+          "type": "std::string",
+          "description": "",
+          "default": "\"\""
+        },
+        {
+          "name": "displayPriority",
+          "type": "CoinDisplayPriority",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 166,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinParam",
+      "brief": "Constructor for any parameter taking a string (or no) value (all others). Type is not optional to resolve ambiguity.",
+      "detailed": "The default value is \"\" for all such parameter types",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "type",
+          "type": "CoinParamType",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "help",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "longHelp",
+          "type": "std::string",
+          "description": "",
+          "default": "\"\""
+        },
+        {
+          "name": "displayPriority",
+          "type": "CoinDisplayPriority",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 176,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinParam",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "orig",
+          "type": "const CoinParam &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 181,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clone",
+      "brief": "Clone.",
+      "detailed": "",
+      "return_type": "CoinParam *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 184,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment.",
+      "detailed": "",
+      "return_type": "CoinParam &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinParam &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 187,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinParam",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 190,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setup",
+      "brief": "These mirror the constructors with the addition of long help.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "help",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lower",
+          "type": "double",
+          "description": "",
+          "default": "-"
+        },
+        {
+          "name": "upper",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "longHelp",
+          "type": "std::string",
+          "description": "",
+          "default": "\"\""
+        },
+        {
+          "name": "display",
+          "type": "CoinDisplayPriority",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 198,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setup",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "help",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lower",
+          "type": "int",
+          "description": "",
+          "default": "-"
+        },
+        {
+          "name": "upper",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "longHelp",
+          "type": "std::string",
+          "description": "",
+          "default": "\"\""
+        },
+        {
+          "name": "display",
+          "type": "CoinDisplayPriority",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 203,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setup",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "help",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "longHelp",
+          "type": "std::string",
+          "description": "",
+          "default": "\"\""
+        },
+        {
+          "name": "display",
+          "type": "CoinDisplayPriority",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 208,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setVal",
+      "brief": "",
+      "detailed": "Set the value of a parameter of any type",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "pMode",
+          "type": "ParamPushMode",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 216,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setVal",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "pMode",
+          "type": "ParamPushMode",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 218,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setVal",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "pMode",
+          "type": "ParamPushMode",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 220,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDefault",
+      "brief": "",
+      "detailed": "Set the default value of a parameter of any type",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 224,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDefault",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 225,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDefault",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 226,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "restoreDefault",
+      "brief": "",
+      "detailed": "Restore the default value of a parameter of any type",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 229,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getVal",
+      "brief": "",
+      "detailed": "Get the value of a parameter of any type",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "std::string &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 232,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getVal",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 233,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getVal",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 234,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readValue",
+      "brief": "",
+      "detailed": "Try to read the value of a parameter from the input queue",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "inputQueue",
+          "type": "std::deque< std::string > &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "std::string &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 237,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readValue",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "inputQueue",
+          "type": "std::deque< std::string > &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 239,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readValue",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "inputQueue",
+          "type": "std::deque< std::string > &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "double &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 241,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendKwd",
+      "brief": "Add an additional value-keyword to a keyword parameter.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "kwd",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "index",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 245,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendKwd",
+      "brief": "Add an additional value-keyword to a keyword parameter, generating sequential mode values.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "kwd",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 249,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "kwdToMode",
+      "brief": "Return the integer associated with the specified value-keyword.",
+      "detailed": "Returns -1 if no value-keywords match the specified string.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "kwd",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 255,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "kwdVal",
+      "brief": "Return the value-keyword that is the current value of the keyword parameter.",
+      "detailed": "",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 260,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "modeVal",
+      "brief": "Return the integer mode value of the current keyword parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 264,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "modeString",
+      "brief": "Return the string for an integer mode of keyword parameter.",
+      "detailed": "",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 268,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setModeVal",
+      "brief": "Set the value of the keyword parameter using the integer associated with a value-keyword.",
+      "detailed": "If `printIt` is true, the corresponding value-keyword string will be echoed to std::cout.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "pMode",
+          "type": "ParamPushMode",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 276,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setModeValDefault",
+      "brief": "Set the default value of the keyword parameter using the integer associated with a value-keyword.",
+      "detailed": "If `printIt` is true, the corresponding value-keyword string will be echoed to std::cout.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 285,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setKwdVal",
+      "brief": "Set the value of the keyword parameter using a value-keyword string.",
+      "detailed": "The given string will be tested against the set of value-keywords for the parameter using the shortest match rules.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "const std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "pMode",
+          "type": "ParamPushMode",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 293,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setKwdValDefault",
+      "brief": "Set the default value of the keyword parameter using a value-keyword string.",
+      "detailed": "The given string will be tested against the set of value-keywords for the parameter using the shortest match rules.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "const std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 302,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "printKwds",
+      "brief": "Prints the set of value-keywords defined for this keyword parameter.",
+      "detailed": "",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 307,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "definedKwds",
+      "brief": "Set of valid value-keywords for a keyword parameter.",
+      "detailed": "",
+      "return_type": "const std::map< std::string, int > &",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 310,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "definedKwdsSorted",
+      "brief": "Valid value-keywords for a keyword parameter sorted by integer mode.",
+      "detailed": "",
+      "return_type": "std::vector< std::string >",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 316,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setStrVal",
+      "brief": "Set the value of a string parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "pMode",
+          "type": "ParamPushMode",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 319,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setStrValDefault",
+      "brief": "Set the default value of a string parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 323,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "strVal",
+      "brief": "Get the value of a string parameter.",
+      "detailed": "",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 326,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDirName",
+      "brief": "Set the value of a directory parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "pMode",
+          "type": "ParamPushMode",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 329,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDirNameDefault",
+      "brief": "Set the default value of a directory parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 333,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "dirName",
+      "brief": "Get the value of a directory parameter.",
+      "detailed": "",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 336,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setFileName",
+      "brief": "Set the value of a file name parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "pMode",
+          "type": "ParamPushMode",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 339,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setFileNameDefault",
+      "brief": "Set the default value of a file name parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 343,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "fileName",
+      "brief": "Get the value of a file name parameter.",
+      "detailed": "",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 346,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDblVal",
+      "brief": "Set the value of a double parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "pMode",
+          "type": "ParamPushMode",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 349,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDblValDefault",
+      "brief": "Set the default value of a double parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 353,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "dblVal",
+      "brief": "Get the value of a double parameter.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 356,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setLowerDblVal",
+      "brief": "Set the lower value of an double parameter.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 359,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "lowerDblVal",
+      "brief": "Get the lower value of a double parameter.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 362,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setUpperDblVal",
+      "brief": "Set the upper value of a double parameter.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 365,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "upperDblVal",
+      "brief": "Get the upper value of a double parameter.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 368,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setIntVal",
+      "brief": "Set the value of a integer parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "pMode",
+          "type": "ParamPushMode",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 371,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setIntValDefault",
+      "brief": "Set the value of a integer parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 375,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "intVal",
+      "brief": "Get the value of a integer parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 378,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setLowerIntVal",
+      "brief": "Set the lower value of an integer parameter.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 381,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "lowerIntVal",
+      "brief": "Get the lower value of a integer parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 384,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setUpperIntVal",
+      "brief": "Set the upper value of a integer parameter.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 387,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "upperIntVal",
+      "brief": "Get the upper value of a integer parameter.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 390,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "printOptions",
+      "brief": "Print possible options for a keyword parameter.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "std::string *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 393,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setShortHelp",
+      "brief": "Add a short help string to a parameter.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "help",
+          "type": "const std::string",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 396,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "shortHelp",
+      "brief": "Retrieve the short help string.",
+      "detailed": "",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 399,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setLongHelp",
+      "brief": "Add a long help message to a parameter.",
+      "detailed": "See printLongHelp() for a description of how messages are broken into lines.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "help",
+          "type": "const std::string",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 406,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "longHelp",
+      "brief": "Retrieve the long help message.",
+      "detailed": "",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 409,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "printLongHelp",
+      "brief": "Print long help.",
+      "detailed": "Prints the long help string, plus the valid range and/or keywords if appropriate. The routine makes a best effort to break the message into lines appropriate for an 80-character line. Explicit line breaks in the message will be observed. The short help string will be used if long help is not available.",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 419,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "type",
+      "brief": "Return the type of the parameter.",
+      "detailed": "",
+      "return_type": "CoinParamType",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 427,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setType",
+      "brief": "Set the type of the parameter.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "CoinParamType",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 430,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "name",
+      "brief": "Return the parameter keyword (name) string.",
+      "detailed": "",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 433,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setName",
+      "brief": "Set the parameter keyword (name) string.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 436,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "matches",
+      "brief": "Check if the specified string matches the parameter keyword (name) string.",
+      "detailed": "Returns 1 if the string matches and meets the minimum match length, 2 if the string matches but doesn't meet the minimum match length, and 0 if the string doesn't match. Matches are not case-sensitive.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "input",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 449,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "matchName",
+      "brief": "Return the parameter keyword (name) string formatted to show the minimum match length.",
+      "detailed": "For example, if the parameter name was defined as allow!ableGap, the string returned by matchName would be allow(ableGap).",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 457,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "lengthMatchName",
+      "brief": "Return the length of the formatted paramter name for printing.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 460,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDisplayPriority",
+      "brief": "Set visibility of parameter.",
+      "detailed": "Intended to control whether the parameter is shown when a list of parameters is processed. Used by CoinParamUtils::printHelp when printing help messages for a list of parameters.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "display",
+          "type": "CoinDisplayPriority",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 468,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getDisplayPriority",
+      "brief": "Get visibility of parameter.",
+      "detailed": "",
+      "return_type": "CoinDisplayPriority",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 473,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "pushFunc",
+      "brief": "Get push function.",
+      "detailed": "",
+      "return_type": "CoinParamFunc",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 476,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPushFunc",
+      "brief": "Set push function.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "func",
+          "type": "CoinParamFunc",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 479,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "pullFunc",
+      "brief": "Get pull function.",
+      "detailed": "",
+      "return_type": "CoinParamFunc",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 482,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPullFunc",
+      "brief": "Set pull function.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "func",
+          "type": "CoinParamFunc",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 485,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "processName",
+      "brief": "",
+      "detailed": "Process a name for efficient matching",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 494,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "operator<<",
+      "brief": "A stream output function for a CoinParam object.",
+      "detailed": "",
+      "return_type": "COINUTILSLIB_EXPORT std::ostream &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "s",
+          "type": "std::ostream &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "param",
+          "type": "const CoinParam &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 590,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "matchParam",
+      "brief": "Scan a parameter vector for parameters whose keyword (name) string matches `name` using minimal match rules.",
+      "detailed": "`matchNdx` is set to the index of the last parameter that meets the minimal match criteria (but note there should be at most one matching parameter if the parameter vector is properly configured). `shortCnt` is set to the number of short matches (should be zero for a properly configured parameter vector if a minimal match is found). The return value is the number of matches satisfying the minimal match requirement (should be 0 or 1 in a properly configured vector).",
+      "return_type": "COINUTILSLIB_EXPORT int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "paramVec",
+          "type": "const CoinParamVec &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "name",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "matchNdx",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "shortCnt",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 618,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "lookupParam",
+      "brief": "Look up the command keyword (name) in the parameter vector. Print help if requested.",
+      "detailed": "In the most straightforward use, `name` is a string without ?, and the value returned is the index in `paramVec` of the single parameter that matched `name`. One or more '?' characters at the end of `name` is a query for information. The routine prints short (one '?') or long (more than one '?') help messages for a query. Help is also printed in the case where the name is ambiguous (some of the matches did not meet the minimal match length requirement).\nNote that multiple matches meeting the minimal match requirement is a configuration error. The mimimal match length for the parameters involved is too short.\nIf provided as parameters, on return `matchCnt` will be set to the number of matches meeting the minimal match requirement\n`shortCnt` will be set to the number of matches that did not meet the miminal match requirement\n`queryCnt` will be set to the number of '?' characters at the end of the name\nThe return values are: >0: index in `paramVec` of the single unique match for `name`\n-1: a query was detected (one or more '?' characters at the end of `name`\n-2: one or more short matches, not a query\n-3: no matches, not a query\n-4: multiple matches meeting the minimal match requirement (configuration error)",
+      "return_type": "COINUTILSLIB_EXPORT int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "paramVec",
+          "type": "CoinParamVec &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "matchCnt",
+          "type": "int *",
+          "description": "",
+          "default": "0"
+        },
+        {
+          "name": "shortCnt",
+          "type": "int *",
+          "description": "",
+          "default": "0"
+        },
+        {
+          "name": "queryCnt",
+          "type": "int *",
+          "description": "",
+          "default": "0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 659,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "printIt",
+      "brief": "Utility to print a long message as filled lines of text.",
+      "detailed": "The routine makes a best effort to break lines without exceeding the standard 80 character line length. Explicit newlines in `msg` will be obeyed.",
+      "return_type": "COINUTILSLIB_EXPORT void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "msg",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 670,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "shortOrHelpOne",
+      "brief": "Utility routine to print help given a short match or explicit request for help.",
+      "detailed": "The two really are related, in that a query (a string that ends with one or more ? characters) will often result in a short match. The routine expects that `name` matches a single parameter, and does not look for multiple matches.\nIf called with `matchNdx` < 0, the routine will look up `name` in `paramVec` and print the full name from the parameter. If called with `matchNdx` > 0, it just prints the name from the specified parameter. If the name is a query, short (one '?') or long (more than one '?') help is printed.",
+      "return_type": "COINUTILSLIB_EXPORT void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "paramVec",
+          "type": "CoinParamVec &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "matchNdx",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "name",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numQuery",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 689,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "shortOrHelpMany",
+      "brief": "Utility routine to print help given multiple matches.",
+      "detailed": "If the name is not a query, or asks for short help (i.e., contains zero or one '?' characters), the list of matching names is printed. If the name asks for long help (contains two or more '?' characters), short help is printed for each matching name.",
+      "return_type": "COINUTILSLIB_EXPORT void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "paramVec",
+          "type": "CoinParamVec &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "name",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numQuery",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 700,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "printGenericHelp",
+      "brief": "Print a generic how to use the command interface help message.",
+      "detailed": "The message is hard coded to match the behaviour of the parsing utilities.",
+      "return_type": "COINUTILSLIB_EXPORT void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 708,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "printHelp",
+      "brief": "Utility routine to print help messages for one or more parameters.",
+      "detailed": "Intended as a utility to implement explicit help commands. Help will be printed for all parameters in `paramVec` from `firstParam` to `lastParam`, inclusive. If `shortHelp` is true, short help messages will be printed. If `longHelp` is true, long help messages are printed. `shortHelp` overrules `longHelp`. If neither is true, only command keywords are printed. `prefix` is printed before each line; it's an imperfect attempt at indentation.",
+      "return_type": "COINUTILSLIB_EXPORT void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "paramVec",
+          "type": "CoinParamVec &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "firstParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lastParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "prefix",
+          "type": "std::string",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "shortHelp",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "longHelp",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hidden",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinParam.hpp",
+      "source_line": 723,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

@@ -1,0 +1,187 @@
+{
+  "name": "CoinFileOutput",
+  "qualified_name": "CoinFileOutput",
+  "brief": "Abstract base class for file output classes.",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinFileIOBase"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "compressionSupported",
+      "brief": "Returns whether the specified compression method is supported (i.e.",
+      "detailed": "was compiled into COIN).",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "compression",
+          "type": "Compression",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 125,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "create",
+      "brief": "Factory method, that creates a CoinFileOutput (more precisely a subclass of it) for the file specified.",
+      "detailed": "If the compression method is not supported an exception is thrown (so use compressionSupported first, if this is a problem). The reason for not providing direct access to the subclasses (and using such a method instead) is that depending on the build configuration some of the classes are not available (or functional). This way we can handle all required ifdefs here instead of polluting other files.",
+      "return_type": "CoinFileOutput *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "fileName",
+          "type": "const std::string &",
+          "description": "The file that should be read.",
+          "default": ""
+        },
+        {
+          "name": "compression",
+          "type": "Compression",
+          "description": "Compression method used.",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 137,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinFileOutput",
+      "brief": "Constructor (don't use this, use the create method instead).",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "fileName",
+          "type": "const std::string &",
+          "description": "The name of the file used by this object.",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 142,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinFileOutput",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 145,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "write",
+      "brief": "Write a block of data to the file, similar to fwrite.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "Number of bytes written.",
+      "parameters": [
+        {
+          "name": "buffer",
+          "type": "const void *",
+          "description": "Address of a buffer containing the data to be written.",
+          "default": ""
+        },
+        {
+          "name": "size",
+          "type": "int",
+          "description": "Number of bytes to write.",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 151,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "puts",
+      "brief": "Write a string to the file (like fputs).",
+      "detailed": "Just as with fputs no trailing newline is inserted! The terminating '\\0' is not written to the file. The default implementation determines the length of the string and calls write on it.",
+      "return_type": "bool",
+      "return_desc": "true on success, false on error.",
+      "parameters": [
+        {
+          "name": "s",
+          "type": "const char *",
+          "description": "The zero terminated string to be written.",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 160,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "puts",
+      "brief": "Convenience method: just a 'puts(s.c_str())'.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "s",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 163,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

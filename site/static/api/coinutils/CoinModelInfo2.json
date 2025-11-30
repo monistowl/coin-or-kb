@@ -1,0 +1,35 @@
+{
+  "name": "CoinModelInfo2",
+  "qualified_name": "CoinModelInfo2",
+  "brief": "This is a model which is made up of Coin(Structured)Model blocks.",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinModelInfo2",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 30,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

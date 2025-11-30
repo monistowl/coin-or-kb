@@ -1,0 +1,18 @@
+{
+  "name": "dropped_zero",
+  "qualified_name": "dropped_zero",
+  "brief": "Tracking information for an explicit zero coefficient.",
+  "detailed": "TodoWhy isn't this a nested class in drop_zero_coefficients_action? That would match the structure of other presolve classes.",
+  "header_file": "layer-0/CoinUtils/src/CoinPresolveZeros.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinPresolveZeros.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

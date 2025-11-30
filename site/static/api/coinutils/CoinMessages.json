@@ -1,0 +1,350 @@
+{
+  "name": "CoinMessages",
+  "qualified_name": "CoinMessages",
+  "brief": "Class to hold and manipulate an array of massaged messages.",
+  "detailed": "Note that the message index used to reference a message in the array of messages is completely distinct from the external ID number stored with the message.",
+  "header_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [
+    "CoinMessage"
+  ],
+  "methods": [
+    {
+      "name": "CoinMessages",
+      "brief": "Constructor with number of messages.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberMessages",
+          "type": "int",
+          "description": "",
+          "default": "0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 156,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinMessages",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 158,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinMessages",
+      "brief": "The copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinMessages &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 160,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "assignment operator.",
+      "detailed": "",
+      "return_type": "CoinMessages &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinMessages &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 162,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addMessage",
+      "brief": "Installs a new message in the specified index position.",
+      "detailed": "Any existing message is replaced, and a copy of the specified message is installed.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "messageNumber",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "const CoinOneMessage &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 172,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "replaceMessage",
+      "brief": "Replaces the text of the specified message.",
+      "detailed": "Any existing text is deleted and the specified text is copied into the specified message.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "messageNumber",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "message",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 178,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "language",
+      "brief": "Language.",
+      "detailed": "Need to think about iso codes",
+      "return_type": "Language",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 180,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setLanguage",
+      "brief": "Set language.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newlanguage",
+          "type": "Language",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 185,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDetailMessage",
+      "brief": "Change detail level for one message.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newLevel",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "messageNumber",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 190,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDetailMessages",
+      "brief": "Change detail level for several messages.",
+      "detailed": "messageNumbers is expected to contain the indices of the messages to be changed. If numberMessages >= 10000 or messageNumbers is NULL, the detail level is changed on all messages.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newLevel",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberMessages",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "messageNumbers",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 198,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDetailMessages",
+      "brief": "Change detail level for all messages with low <= ID number < high.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newLevel",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "low",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "high",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 201,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getClass",
+      "brief": "Returns class.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 204,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "toCompact",
+      "brief": "Moves to compact format.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 209,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "fromCompact",
+      "brief": "Moves from compact format.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 211,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

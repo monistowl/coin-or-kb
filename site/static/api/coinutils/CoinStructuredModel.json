@@ -1,0 +1,1167 @@
+{
+  "name": "CoinStructuredModel",
+  "qualified_name": "CoinStructuredModel",
+  "brief": "",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinBaseModel"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "addBlock",
+      "brief": "add a block from a CoinModel using names given as parameters returns number of errors (e.g.",
+      "detailed": "both have objectives but not same)",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowBlock",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnBlock",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "block",
+          "type": "const CoinBaseModel &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 51,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addBlock",
+      "brief": "add a block from a CoinModel with names in model returns number of errors (e.g.",
+      "detailed": "both have objectives but not same)",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "block",
+          "type": "const CoinBaseModel &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 57,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addBlock",
+      "brief": "add a block from a CoinModel using names given as parameters returns number of errors (e.g.",
+      "detailed": "both have objectives but not same) This passes in block - structured model takes ownership",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowBlock",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnBlock",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "block",
+          "type": "CoinBaseModel *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 62,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addBlock",
+      "brief": "add a block using names",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowBlock",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnBlock",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowLower",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowUpper",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "objective",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 67,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "writeMps",
+      "brief": "Write the problem in MPS format to a file with the given filename.",
+      "detailed": "not const as may change model e.g. fill in default bounds",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "compression",
+          "type": "int",
+          "description": "can be set to three values to indicate what kind of file should be written 0: plain text (default)\n1: gzip compressed (.gz is appended to `filename`)\n2: bzip2 compressed (.bz2 is appended to `filename`) (TODO)\nIf the library was not compiled with the requested compression then writeMps falls back to writing a plain text file.",
+          "default": "0"
+        },
+        {
+          "name": "formatType",
+          "type": "int",
+          "description": "specifies the precision to used for values in the MPS file 0: normal precision (default)\n1: extra accuracy\n2: IEEE hex",
+          "default": "0"
+        },
+        {
+          "name": "numberAcross",
+          "type": "int",
+          "description": "specifies whether 1 or 2 (default) values should be specified on every data line in the MPS file.",
+          "default": "2"
+        },
+        {
+          "name": "keepStrings",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 99,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readSmps",
+      "brief": "Read SMPS model.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "keepNames",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        },
+        {
+          "name": "ignoreErrors",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 102,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "decompose",
+      "brief": "Decompose a CoinModel 1 - try D-W 2 - try Benders 3 - try Staircase Returns number of blocks or zero if no structure.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "model",
+          "type": "const CoinModel &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "type",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "maxBlocks",
+          "type": "int",
+          "description": "",
+          "default": "50"
+        },
+        {
+          "name": "starts",
+          "type": "const char **",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 112,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "decompose",
+      "brief": "Decompose a model specified as arrays + CoinPackedMatrix 1 - try D-W 2 - try Benders 3 - try Staircase Returns number of blocks or zero if no structure.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowLower",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowUpper",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "objective",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "type",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "maxBlocks",
+          "type": "int",
+          "description": "",
+          "default": "50"
+        },
+        {
+          "name": "starts",
+          "type": "int *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "objectiveOffset",
+          "type": "double",
+          "description": "",
+          "default": "0.0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 120,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberRowBlocks",
+      "brief": "Return number of row blocks.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 132,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberColumnBlocks",
+      "brief": "Return number of column blocks.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 137,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberElementBlocks",
+      "brief": "Return number of elementBlocks.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 142,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberElements",
+      "brief": "Return number of elements.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 147,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowBlock",
+      "brief": "Return the i'th row block name.",
+      "detailed": "",
+      "return_type": "const std::string &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 149,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowBlock",
+      "brief": "Set i'th row block name.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "name",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 154,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addRowBlock",
+      "brief": "Add or check a row block name and number of rows.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "name",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 159,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowBlock",
+      "brief": "Return a row block index given a row block name.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 161,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumnBlock",
+      "brief": "Return i'th the column block name.",
+      "detailed": "",
+      "return_type": "const std::string &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 163,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnBlock",
+      "brief": "Set i'th column block name.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "name",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 168,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addColumnBlock",
+      "brief": "Add or check a column block name and number of columns.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "name",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 173,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnBlock",
+      "brief": "Return a column block index given a column block name.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 175,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "blockType",
+      "brief": "Return i'th block type.",
+      "detailed": "",
+      "return_type": "const CoinModelBlockInfo &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 177,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "block",
+      "brief": "Return i'th block.",
+      "detailed": "",
+      "return_type": "CoinBaseModel *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 182,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "block",
+      "brief": "Return block corresponding to row and column.",
+      "detailed": "",
+      "return_type": "const CoinBaseModel *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 187,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "coinBlock",
+      "brief": "Return i'th block as CoinModel (or NULL)",
+      "detailed": "",
+      "return_type": "CoinModel *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 189,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "coinBlock",
+      "brief": "Return block corresponding to row and column as CoinModel.",
+      "detailed": "",
+      "return_type": "const CoinBaseModel *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 191,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "blockIndex",
+      "brief": "Return block number corresponding to row and column.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 193,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "coinModelBlock",
+      "brief": "Return model as a CoinModel block and fill in info structure and update counts.",
+      "detailed": "",
+      "return_type": "CoinModel *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "info",
+          "type": "CoinModelBlockInfo &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 197,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setCoinModel",
+      "brief": "Sets given block into coinModelBlocks_.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "block",
+          "type": "CoinModel *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "iBlock",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 199,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "refresh",
+      "brief": "Refresh info in blockType_.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "iBlock",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 201,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "block",
+      "brief": "Fill pointers corresponding to row and column.",
+      "detailed": "",
+      "return_type": "CoinModelBlockInfo",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowLower",
+          "type": "const double *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowUpper",
+          "type": "const double *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "const double *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "const double *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "objective",
+          "type": "const double *&",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 204,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "optimizationDirection",
+      "brief": "Direction of optimization (1 - minimize, -1 - maximize, 0 - ignore.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 209,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setOptimizationDirection",
+      "brief": "Set direction of optimization (1 - minimize, -1 - maximize, 0 - ignore.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 214,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinStructuredModel",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 223,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinStructuredModel",
+      "brief": "Read a problem in MPS format from the given filename.",
+      "detailed": "May try and decompose",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "fileName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "decompose",
+          "type": "int",
+          "description": "",
+          "default": "0"
+        },
+        {
+          "name": "maxBlocks",
+          "type": "int",
+          "description": "",
+          "default": "50"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 227,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinStructuredModel",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 230,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinStructuredModel",
+      "brief": "The copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinStructuredModel &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 236,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "=",
+      "detailed": "",
+      "return_type": "CoinStructuredModel &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinStructuredModel &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 238,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clone",
+      "brief": "Clone.",
+      "detailed": "",
+      "return_type": "CoinBaseModel *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 240,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "fillInfo",
+      "brief": "Fill in info structure and update counts Returns number of inconsistencies on border.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "info",
+          "type": "CoinModelBlockInfo &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "block",
+          "type": "const CoinModel *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 247,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "fillInfo",
+      "brief": "Fill in info structure and update counts.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "info",
+          "type": "CoinModelBlockInfo &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "block",
+          "type": "const CoinStructuredModel *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinStructuredModel.hpp",
+      "source_line": 250,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

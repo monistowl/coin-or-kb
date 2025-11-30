@@ -1,0 +1,141 @@
+{
+  "name": "CoinPlainFileInput",
+  "qualified_name": "CoinPlainFileInput",
+  "brief": "This reads plain text files.",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinFileInput"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinPlainFileInput",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "fileName",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 99,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPlainFileInput",
+      "brief": "When already opened.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "fp",
+          "type": "FILE *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 101,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinPlainFileInput",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 102,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "read",
+      "brief": "Read a block of data from the file, similar to fread.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "Number of bytes read.",
+      "parameters": [
+        {
+          "name": "buffer",
+          "type": "void *",
+          "description": "Address of a buffer to store the data into.",
+          "default": ""
+        },
+        {
+          "name": "size",
+          "type": "int",
+          "description": "Number of bytes to read (buffer should be large enough).",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 104,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "gets",
+      "brief": "Reads up to (size-1) characters an stores them into the buffer, similar to fgets.",
+      "detailed": "Reading ends, when EOF or a newline occurs or (size-1) characters have been read. The resulting string is terminated with '\\0'. If reading ends due to an encoutered newline, the '\n' is put into the buffer, before the '\\0' is appended.",
+      "return_type": "char *",
+      "return_desc": "buffer on success, or 0 if no characters have been read.",
+      "parameters": [
+        {
+          "name": "buffer",
+          "type": "char *",
+          "description": "The buffer to put the string into.",
+          "default": ""
+        },
+        {
+          "name": "size",
+          "type": "int",
+          "description": "The size of the buffer in characters.",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 106,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

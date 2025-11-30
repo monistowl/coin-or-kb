@@ -1,0 +1,283 @@
+{
+  "name": "CoinCliqueExtender",
+  "qualified_name": "CoinCliqueExtender",
+  "brief": "A class to extend cliques.",
+  "detailed": "It stores the cliques extended in a clique list.",
+  "header_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinCliqueExtender",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "cgraph",
+          "type": "const CoinConflictGraph *",
+          "description": "conflict graph",
+          "default": ""
+        },
+        {
+          "name": "extMethod",
+          "type": "size_t",
+          "description": "method used to extend cliques (optional). Values: 0 = no extension; 1 = random; 2 = max degree; 3 = max modified degree; 4 = reduced cost (inversely proportional); 5 = reduced cost (inversely proportional) + modified degree.",
+          "default": "4"
+        },
+        {
+          "name": "rc",
+          "type": "const double *",
+          "description": "reduced cost (optional)",
+          "default": "NULL"
+        },
+        {
+          "name": "maxRC",
+          "type": "const double",
+          "description": "",
+          "default": "100.0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+      "source_line": 44,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinCliqueExtender",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+      "source_line": 50,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "extendClique",
+      "brief": "Try to extend a clique.",
+      "detailed": "In case of success, return true and store the clique extended in a clique list.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "clqIdxs",
+          "type": "const size_t *",
+          "description": "indexes of the clique to be extended",
+          "default": ""
+        },
+        {
+          "name": "clqSize",
+          "type": "const size_t",
+          "description": "size of the clique to be extended",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+      "source_line": 60,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "nCliques",
+      "brief": "Return the number of cliques stored in the list of cliques extended.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+      "source_line": 66,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getClique",
+      "brief": "Return the i-th clique extended.",
+      "detailed": "",
+      "return_type": "const size_t *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+      "source_line": 71,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getCliqueSize",
+      "brief": "Return the size of the i-th clique extended.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+      "source_line": 76,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMaxCandidates",
+      "brief": "Set the maximum number of candidates to enter a clique.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "maxCandidates",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+      "source_line": 82,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "fillCandidates",
+      "brief": "Construct a list of candidates to enter the clique.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "clqIdxs",
+          "type": "const size_t *",
+          "description": "indexes of the clique to be extended",
+          "default": ""
+        },
+        {
+          "name": "clqSize",
+          "type": "const size_t",
+          "description": "size of the clique to be extended",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+      "source_line": 91,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "randomExtension",
+      "brief": "Randomly select the vertices to be inserted in the clique.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "clqIdxs",
+          "type": "const size_t *",
+          "description": "size of the clique to be extended",
+          "default": ""
+        },
+        {
+          "name": "clqSize",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+      "source_line": 99,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "greedySelection",
+      "brief": "Select the vertices to be inserted in the clique using a greedy strategy.",
+      "detailed": "Consider the method to extend cliques passed in the constructor.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "clqIdxs",
+          "type": "const size_t *",
+          "description": "size of the clique to be extended",
+          "default": ""
+        },
+        {
+          "name": "clqSize",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "costs",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueExtender.hpp",
+      "source_line": 109,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

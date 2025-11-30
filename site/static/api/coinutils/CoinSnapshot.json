@@ -1,0 +1,1576 @@
+{
+  "name": "CoinSnapshot",
+  "qualified_name": "CoinSnapshot",
+  "brief": "NON Abstract Base Class for interfacing with cut generators or branching code or ... It is designed to be snapshot of a problem at a node in tree.",
+  "detailed": "The class may or may not own the arrays - see owned_\nQuerying a problem that has no data associated with it will result in zeros for the number of rows and columns, and NULL pointers from the methods that return arrays.",
+  "header_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "getNumCols",
+      "brief": "Get number of columns.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 46,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumRows",
+      "brief": "Get number of rows.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 52,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumElements",
+      "brief": "Get number of nonzero elements.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 58,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumIntegers",
+      "brief": "Get number of integer variables.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 64,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColLower",
+      "brief": "Get pointer to array[getNumCols()] of column lower bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 70,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColUpper",
+      "brief": "Get pointer to array[getNumCols()] of column upper bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 76,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowLower",
+      "brief": "Get pointer to array[getNumRows()] of row lower bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 82,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowUpper",
+      "brief": "Get pointer to array[getNumRows()] of row upper bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 88,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRightHandSide",
+      "brief": "Get pointer to array[getNumRows()] of row right-hand sides This gives same results as OsiSolverInterface for useful cases If getRowUpper()[i] != infinity then getRightHandSide()[i] == getRowUpper()[i] else getRightHandSide()[i] == getRowLower()[i].",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 100,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getObjCoefficients",
+      "brief": "Get pointer to array[getNumCols()] of objective function coefficients.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 106,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getObjSense",
+      "brief": "Get objective function sense (1 for min (default), -1 for max)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 112,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isContinuous",
+      "brief": "Return true if variable is continuous.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colIndex",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 118,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isBinary",
+      "brief": "Return true if variable is binary.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colIndex",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 124,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isInteger",
+      "brief": "Return true if column is integer.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colIndex",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 130,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isIntegerNonBinary",
+      "brief": "Return true if variable is general integer.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colIndex",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 136,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isFreeBinary",
+      "brief": "Return true if variable is binary and not fixed at either bound.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colIndex",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 142,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColType",
+      "brief": "Get colType array ('B', 'I', or 'C' for Binary, Integer and Continuous)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 148,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMatrixByRow",
+      "brief": "Get pointer to row-wise copy of current matrix.",
+      "detailed": "",
+      "return_type": "const CoinPackedMatrix *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 154,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMatrixByCol",
+      "brief": "Get pointer to column-wise copy of current matrix.",
+      "detailed": "",
+      "return_type": "const CoinPackedMatrix *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 160,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getOriginalMatrixByRow",
+      "brief": "Get pointer to row-wise copy of \"original\" matrix.",
+      "detailed": "",
+      "return_type": "const CoinPackedMatrix *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 166,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getOriginalMatrixByCol",
+      "brief": "Get pointer to column-wise copy of \"original\" matrix.",
+      "detailed": "",
+      "return_type": "const CoinPackedMatrix *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 172,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColSolution",
+      "brief": "Get pointer to array[getNumCols()] of primal variable values.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 181,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowPrice",
+      "brief": "Get pointer to array[getNumRows()] of dual variable values.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 187,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getReducedCost",
+      "brief": "Get a pointer to array[getNumCols()] of reduced costs.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 193,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowActivity",
+      "brief": "Get pointer to array[getNumRows()] of row activity levels (constraint matrix times the solution vector).",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 199,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getDoNotSeparateThis",
+      "brief": "Get pointer to array[getNumCols()] of primal variable values which should not be separated (for debug)",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 205,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getInfinity",
+      "brief": "Get solver's value for infinity.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 214,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getObjValue",
+      "brief": "Get objective function value - includinbg any offset i.e.",
+      "detailed": "sum c sub j * x subj - objValue = objOffset",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 221,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getObjOffset",
+      "brief": "Get objective offset i.e. sum c sub j * x subj -objValue = objOffset.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 227,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getDualTolerance",
+      "brief": "Get dual tolerance.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 233,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getPrimalTolerance",
+      "brief": "Get primal tolerance.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 239,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getIntegerTolerance",
+      "brief": "Get integer tolerance.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 245,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getIntegerUpperBound",
+      "brief": "Get integer upper bound i.e. best solution * getObjSense.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 251,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getIntegerLowerBound",
+      "brief": "Get integer lower bound i.e. best possible solution * getObjSense.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 257,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "loadProblem",
+      "brief": "Load in an problem by copying the arguments (the constraints on the rows are given by lower and upper bounds).",
+      "detailed": "If a pointer is NULL then the following values are the default: `colub`: all columns have upper bound infinity\n`collb`: all columns have lower bound 0\n`rowub`: all rows have upper bound infinity\n`rowlb`: all rows have lower bound -infinity\n`obj`: all variables have 0 objective coefficient\nAll solution type arrays will be deleted",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "obj",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowlb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "makeRowCopy",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 279,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setNumCols",
+      "brief": "Set number of columns.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 292,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setNumRows",
+      "brief": "Set number of rows.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 298,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setNumElements",
+      "brief": "Set number of nonzero elements.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 304,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setNumIntegers",
+      "brief": "Set number of integer variables.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 310,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColLower",
+      "brief": "Set pointer to array[getNumCols()] of column lower bounds.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 316,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColUpper",
+      "brief": "Set pointer to array[getNumCols()] of column upper bounds.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 319,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowLower",
+      "brief": "Set pointer to array[getNumRows()] of row lower bounds.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 322,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowUpper",
+      "brief": "Set pointer to array[getNumRows()] of row upper bounds.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 325,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRightHandSide",
+      "brief": "Set pointer to array[getNumRows()] of row right-hand sides This gives same results as OsiSolverInterface for useful cases If getRowUpper()[i] != infinity then getRightHandSide()[i] == getRowUpper()[i] else getRightHandSide()[i] == getRowLower()[i].",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 334,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "createRightHandSide",
+      "brief": "Create array[getNumRows()] of row right-hand sides using existing information This gives same results as OsiSolverInterface for useful cases If getRowUpper()[i] != infinity then getRightHandSide()[i] == getRowUpper()[i] else getRightHandSide()[i] == getRowLower()[i].",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 344,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setObjCoefficients",
+      "brief": "Set pointer to array[getNumCols()] of objective function coefficients.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 347,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setObjSense",
+      "brief": "Set objective function sense (1 for min (default), -1 for max)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 350,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColType",
+      "brief": "Set colType array ('B', 'I', or 'C' for Binary, Integer and Continuous)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 356,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMatrixByRow",
+      "brief": "Set pointer to row-wise copy of current matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 359,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "createMatrixByRow",
+      "brief": "Create row-wise copy from MatrixByCol.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 362,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMatrixByCol",
+      "brief": "Set pointer to column-wise copy of current matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 365,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setOriginalMatrixByRow",
+      "brief": "Set pointer to row-wise copy of \"original\" matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 368,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setOriginalMatrixByCol",
+      "brief": "Set pointer to column-wise copy of \"original\" matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 371,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColSolution",
+      "brief": "Set pointer to array[getNumCols()] of primal variable values.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 374,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowPrice",
+      "brief": "Set pointer to array[getNumRows()] of dual variable values.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 377,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setReducedCost",
+      "brief": "Set a pointer to array[getNumCols()] of reduced costs.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 380,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowActivity",
+      "brief": "Set pointer to array[getNumRows()] of row activity levels (constraint matrix times the solution vector).",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 383,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDoNotSeparateThis",
+      "brief": "Set pointer to array[getNumCols()] of primal variable values which should not be separated (for debug)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "copyIn",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 386,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setInfinity",
+      "brief": "Set solver's value for infinity.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 389,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setObjValue",
+      "brief": "Set objective function value (including any rhs offset)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 395,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setObjOffset",
+      "brief": "Set objective offset i.e. sum c sub j * x subj -objValue = objOffset.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 401,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDualTolerance",
+      "brief": "Set dual tolerance.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 407,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPrimalTolerance",
+      "brief": "Set primal tolerance.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 413,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setIntegerTolerance",
+      "brief": "Set integer tolerance.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 419,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setIntegerUpperBound",
+      "brief": "Set integer upper bound i.e. best solution * getObjSense.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 425,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setIntegerLowerBound",
+      "brief": "Set integer lower bound i.e. best possible solution * getObjSense.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 431,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinSnapshot",
+      "brief": "Default Constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 442,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinSnapshot",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinSnapshot &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 445,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment operator.",
+      "detailed": "",
+      "return_type": "CoinSnapshot &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinSnapshot &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 448,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinSnapshot",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 451,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "gutsOfDestructor",
+      "brief": "Does main work of destructor - type (or'ed) 1 - NULLify pointers 2 - delete pointers 4 - initialize scalars (tolerances etc) 8 - initialize scalars (objValue etc0.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 464,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "gutsOfCopy",
+      "brief": "Does main work of copy.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinSnapshot &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSnapshot.hpp",
+      "source_line": 466,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

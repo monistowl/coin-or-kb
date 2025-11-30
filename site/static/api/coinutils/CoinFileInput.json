@@ -1,0 +1,227 @@
+{
+  "name": "CoinFileInput",
+  "qualified_name": "CoinFileInput",
+  "brief": "Abstract base class for file input classes.",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinFileIOBase"
+  ],
+  "derived_classes": [
+    "CoinPlainFileInput"
+  ],
+  "methods": [
+    {
+      "name": "haveGzipSupport",
+      "brief": "indicates whether CoinFileInput supports gzip'ed files",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 58,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "haveBzip2Support",
+      "brief": "indicates whether CoinFileInput supports bzip2'ed files",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 60,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "create",
+      "brief": "Factory method, that creates a CoinFileInput (more precisely a subclass of it) for the file specified.",
+      "detailed": "This method reads the first few bytes of the file and determines if this is a compressed or a plain file and returns the correct subclass to handle it. If the file does not exist or uses a compression not compiled in an exception is thrown.",
+      "return_type": "CoinFileInput *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "fileName",
+          "type": "const std::string &",
+          "description": "The file that should be read.",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 69,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinFileInput",
+      "brief": "Constructor (don't use this, use the create method instead).",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "fileName",
+          "type": "const std::string &",
+          "description": "The name of the file used by this object.",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 73,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinFileInput",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 76,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "read",
+      "brief": "Read a block of data from the file, similar to fread.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "Number of bytes read.",
+      "parameters": [
+        {
+          "name": "buffer",
+          "type": "void *",
+          "description": "Address of a buffer to store the data into.",
+          "default": ""
+        },
+        {
+          "name": "size",
+          "type": "int",
+          "description": "Number of bytes to read (buffer should be large enough).",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 82,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "gets",
+      "brief": "Reads up to (size-1) characters an stores them into the buffer, similar to fgets.",
+      "detailed": "Reading ends, when EOF or a newline occurs or (size-1) characters have been read. The resulting string is terminated with '\\0'. If reading ends due to an encoutered newline, the '\n' is put into the buffer, before the '\\0' is appended.",
+      "return_type": "char *",
+      "return_desc": "buffer on success, or 0 if no characters have been read.",
+      "parameters": [
+        {
+          "name": "buffer",
+          "type": "char *",
+          "description": "The buffer to put the string into.",
+          "default": ""
+        },
+        {
+          "name": "size",
+          "type": "int",
+          "description": "The size of the buffer in characters.",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 93,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "fileAbsPath",
+      "brief": "Test if the given string looks like an absolute file path.",
+      "detailed": "The criteria are:unix: string begins with /windows: string begins with &rsquo; or with drv: (drive specifier)",
+      "return_type": "COINUTILSLIB_EXPORT bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 177,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "fileCoinReadable",
+      "brief": "Test if the file is readable, using likely versions of the file name, and return the name that worked.",
+      "detailed": "The file name is constructed from `name` using the following rules: An absolute path is not modified.\nIf the name begins with ~, an attempt is made to replace ~ with the value of the environment variable HOME.\nIf a default prefix (`dfltPrefix`) is provided, it is prepended to the name.\nIf the constructed file name cannot be opened, and CoinUtils was built with support for compressed files, fileCoinReadable will try any standard extensions for supported compressed files.\nThe value returned in `name` is the file name that actually worked.",
+      "return_type": "COINUTILSLIB_EXPORT bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "std::string &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "dfltPrefix",
+          "type": "const std::string &",
+          "description": "",
+          "default": "std::string(\"\")"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFileIO.hpp",
+      "source_line": 198,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

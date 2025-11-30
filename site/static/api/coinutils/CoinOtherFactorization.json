@@ -1,0 +1,1055 @@
+{
+  "name": "CoinOtherFactorization",
+  "qualified_name": "CoinOtherFactorization",
+  "brief": "Abstract base class which also has some scalars so can be used from Dense or Simp.",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [
+    "CoinDenseFactorization",
+    "CoinOslFactorization",
+    "CoinSimpFactorization"
+  ],
+  "methods": [
+    {
+      "name": "CoinOtherFactorization",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 36,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinOtherFactorization",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "other",
+          "type": "const CoinOtherFactorization &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 38,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinOtherFactorization",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 41,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "= copy",
+      "detailed": "",
+      "return_type": "CoinOtherFactorization &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "other",
+          "type": "const CoinOtherFactorization &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 43,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clone",
+      "brief": "Clone.",
+      "detailed": "",
+      "return_type": "CoinOtherFactorization *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 46,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "status",
+      "brief": "Returns status.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 52,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setStatus",
+      "brief": "Sets status.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 57,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "pivots",
+      "brief": "Returns number of pivots since factorization.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 62,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPivots",
+      "brief": "Sets number of pivots since factorization.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 67,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setNumberRows",
+      "brief": "Set number of Rows after factorization.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 72,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberRows",
+      "brief": "Number of Rows after factorization.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 77,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberColumns",
+      "brief": "Total number of columns in factorization.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 82,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberGoodColumns",
+      "brief": "Number of good columns in factorization.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 87,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "relaxAccuracyCheck",
+      "brief": "Allows change of pivot accuracy check 1.0 == none >1.0 relaxed.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 92,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getAccuracyCheck",
+      "brief": "",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 96,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "maximumPivots",
+      "brief": "Maximum number of pivots between factorizations.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 101,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "maximumPivots",
+      "brief": "Set maximum pivots.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 106,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "pivotTolerance",
+      "brief": "Pivot tolerance.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 109,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "pivotTolerance",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 113,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "zeroTolerance",
+      "brief": "Zero tolerance.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 115,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "zeroTolerance",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 119,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "slackValue",
+      "brief": "Whether slack value is +1 or -1.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 122,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "slackValue",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 126,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "elements",
+      "brief": "Returns array to put basis elements in.",
+      "detailed": "",
+      "return_type": "CoinFactorizationDouble2 *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 129,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "pivotRow",
+      "brief": "Returns pivot row.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 131,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "workArea",
+      "brief": "Returns work area.",
+      "detailed": "",
+      "return_type": "CoinFactorizationDouble2 *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 133,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "intWorkArea",
+      "brief": "Returns int work area.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 135,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberInRow",
+      "brief": "Number of entries in each row.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 137,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberInColumn",
+      "brief": "Number of entries in each column.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 139,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "starts",
+      "brief": "Returns array to put basis starts in.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 141,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "permuteBack",
+      "brief": "Returns permute back.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 143,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "solveMode",
+      "brief": "Get solve mode e.g.",
+      "detailed": "0 C++ code, 1 Lapack, 2 choose If 4 set then values pass if 8 set then has iterated",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 148,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setSolveMode",
+      "brief": "Set solve mode e.g.",
+      "detailed": "0 C++ code, 1 Lapack, 2 choose If 4 set then values pass if 8 set then has iterated",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 156,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "wantsTableauColumn",
+      "brief": "Returns true if wants tableauColumn in replaceColumn.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 161,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setUsefulInformation",
+      "brief": "Useful information for factorization 0 - iteration number whereFrom is 0 for factorize and 1 for replaceColumn.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "info",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "whereFrom",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 166,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clearArrays",
+      "brief": "Get rid of all memory.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 168,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "indices",
+      "brief": "Returns array to put basis indices in.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 173,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "permute",
+      "brief": "Returns permute in.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 175,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberElements",
+      "brief": "Total number of elements in factorization.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 177,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getAreas",
+      "brief": "Gets space for a factorization.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "maximumL",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "maximumU",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 182,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "preProcess",
+      "brief": "PreProcesses column ordered copy of basis.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 189,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "factor",
+      "brief": "Does most of factorization returning status 0 - OK -99 - needs more memory -1 - singular - use numberGoodColumns and redo.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 195,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "postProcess",
+      "brief": "Does post processing on valid factorization - putting variables on correct rows.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sequence",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pivotVariable",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 197,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "makeNonSingular",
+      "brief": "Makes a non-singular basis by replacing variables.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sequence",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 199,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "replaceColumn",
+      "brief": "Replaces one Column to basis, returns 0=OK, 1=Probably OK, 2=singular, 3=no room If checkBeforeModifying is true will do all accuracy checks before modifying factorization.",
+      "detailed": "Whether to set this depends on speed considerations. You could just do this on first iteration after factorization and thereafter re-factorize partial update already in U",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pivotRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pivotCheck",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "checkBeforeModifying",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        },
+        {
+          "name": "acceptablePivot",
+          "type": "double",
+          "description": "",
+          "default": "1.0e-8"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 212,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateColumnFT",
+      "brief": "Updates one column (FTRAN) from regionSparse2 Tries to do FT update number returned is negative if no room regionSparse starts as zero and is zero at end.",
+      "detailed": "Note - if regionSparse2 packed on input - will be packed on output",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse2",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "noPermute",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 229,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateColumn",
+      "brief": "This version has same effect as above with FTUpdate==false so number returned is always >=0.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse2",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "noPermute",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 235,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateTwoColumnsFT",
+      "brief": "does FTRAN on two columns",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse1",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse2",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse3",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "noPermute",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 239,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateColumnTranspose",
+      "brief": "Updates one column (BTRAN) from regionSparse2 regionSparse starts as zero and is zero at end Note - if regionSparse2 packed on input - will be packed on output.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse2",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseFactorization.hpp",
+      "source_line": 248,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

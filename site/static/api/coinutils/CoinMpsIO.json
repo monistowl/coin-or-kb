@@ -1,0 +1,2484 @@
+{
+  "name": "CoinMpsIO",
+  "qualified_name": "CoinMpsIO",
+  "brief": "MPS IO Interface.",
+  "detailed": "This class can be used to read in mps files without a solver. After reading the file, the CoinMpsIO object contains all relevant data, which may be more than a particular OsiSolverInterface allows for. Items may be deleted to allow for flexibility of data storage.\nThe implementation makes the CoinMpsIO object look very like a dummy solver, as the same conventions are used.",
+  "header_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "getNumCols",
+      "brief": "Get number of columns.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 435,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumRows",
+      "brief": "Get number of rows.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 438,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumElements",
+      "brief": "Get number of nonzero elements.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 441,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColLower",
+      "brief": "Get pointer to array[getNumCols()] of column lower bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 444,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColUpper",
+      "brief": "Get pointer to array[getNumCols()] of column upper bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 447,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowSense",
+      "brief": "Get pointer to array[getNumRows()] of constraint senses.",
+      "detailed": "'L': <= constraint\n'E': = constraint\n'G': >= constraint\n'R': ranged constraint\n'N': free constraint",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 458,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRightHandSide",
+      "brief": "Get pointer to array[getNumRows()] of constraint right-hand sides.",
+      "detailed": "Given constraints with upper (rowupper) and/or lower (rowlower) bounds, the constraint right-hand side (rhs) is set as if rowsense()[i] == 'L' then rhs()[i] == rowupper()[i]\nif rowsense()[i] == 'G' then rhs()[i] == rowlower()[i]\nif rowsense()[i] == 'R' then rhs()[i] == rowupper()[i]\nif rowsense()[i] == 'N' then rhs()[i] == 0.0",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 471,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowRange",
+      "brief": "Get pointer to array[getNumRows()] of row ranges.",
+      "detailed": "Given constraints with upper (rowupper) and/or lower (rowlower) bounds, the constraint range (rowrange) is set as if rowsense()[i] == 'R' then rowrange()[i] == rowupper()[i] - rowlower()[i]\nif rowsense()[i] != 'R' then rowrange()[i] is 0.0\nPut another way, only range constraints have a nontrivial value for rowrange.",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 486,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowLower",
+      "brief": "Get pointer to array[getNumRows()] of row lower bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 489,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowUpper",
+      "brief": "Get pointer to array[getNumRows()] of row upper bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 492,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getObjCoefficients",
+      "brief": "Get pointer to array[getNumCols()] of objective function coefficients.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 495,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMatrixByRow",
+      "brief": "Get pointer to row-wise copy of the coefficient matrix.",
+      "detailed": "",
+      "return_type": "const CoinPackedMatrix *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 498,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMatrixByCol",
+      "brief": "Get pointer to column-wise copy of the coefficient matrix.",
+      "detailed": "",
+      "return_type": "const CoinPackedMatrix *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 501,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isContinuous",
+      "brief": "Return true if column is a continuous variable.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colNumber",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 504,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isInteger",
+      "brief": "Return true if a column is an integer variable.",
+      "detailed": "Note: This function returns true if the the column is a binary or general integer variable.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "columnNumber",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 511,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isIntegerOrSemiContinuous",
+      "brief": "Return 1 if a column is an integer variable, 2 if semi-continuous.",
+      "detailed": "Note: This function returns 1 if the the column is a binary or general integer variable.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "columnNumber",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 518,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "integerColumns",
+      "brief": "Returns array[getNumCols()] specifying if a variable is integer.",
+      "detailed": "At present, simply coded as zero (continuous) and non-zero (integer) May be extended at a later date.",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 525,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowName",
+      "brief": "Returns the row name for the specified index.",
+      "detailed": "Returns 0 if the index is out of range.",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 531,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnName",
+      "brief": "Returns the column name for the specified index.",
+      "detailed": "Returns 0 if the index is out of range.",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 537,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowIndex",
+      "brief": "Returns the index for the specified row name.",
+      "detailed": "Returns -1 if the name is not found. Returns numberRows for the objective row and > numberRows for dropped free rows.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 545,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnIndex",
+      "brief": "Returns the index for the specified column name.",
+      "detailed": "Returns -1 if the name is not found.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 551,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "objectiveOffset",
+      "brief": "Returns the (constant) objective offset.",
+      "detailed": "This is the RHS entry for the objective row",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 557,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setObjectiveOffset",
+      "brief": "Set objective offset.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 559,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getProblemName",
+      "brief": "Return the problem name.",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 565,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getObjectiveName",
+      "brief": "Return the objective name.",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 568,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRhsName",
+      "brief": "Return the RHS vector name.",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 571,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRangeName",
+      "brief": "Return the range vector name.",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 574,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getBoundName",
+      "brief": "Return the bound vector name.",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 577,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberStringElements",
+      "brief": "Number of string elements.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 579,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "stringElement",
+      "brief": "String element.",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 584,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMpsData",
+      "brief": "Set the problem data.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "m",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "infinity",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "obj",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "integrality",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowlb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colnames",
+          "type": "char const *const *const",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rownames",
+          "type": "char const *const *const",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 597,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMpsData",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "m",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "infinity",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "obj",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "integrality",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowlb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colnames",
+          "type": "const std::vector< std::string > &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rownames",
+          "type": "const std::vector< std::string > &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 603,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMpsData",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "m",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "infinity",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "obj",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "integrality",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowsen",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowrhs",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowrng",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colnames",
+          "type": "char const *const *const",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rownames",
+          "type": "char const *const *const",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 609,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMpsData",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "m",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "infinity",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "obj",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "integrality",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowsen",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowrhs",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowrng",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colnames",
+          "type": "const std::vector< std::string > &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rownames",
+          "type": "const std::vector< std::string > &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 616,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "copyInIntegerInformation",
+      "brief": "Pass in an array[getNumCols()] specifying if a variable is integer.",
+      "detailed": "At present, simply coded as zero (continuous) and non-zero (integer) May be extended at a later date.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "integerInformation",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 629,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setProblemName",
+      "brief": "Set problem name.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 632,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setObjectiveName",
+      "brief": "Set objective name.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 635,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setInfinity",
+      "brief": "Set infinity.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 646,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getInfinity",
+      "brief": "Get infinity.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 649,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDefaultBound",
+      "brief": "Set default upper bound for integer variables.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 652,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getDefaultBound",
+      "brief": "Get default upper bound for integer variables.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 655,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "allowStringElements",
+      "brief": "Whether to allow string elements.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 657,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setAllowStringElements",
+      "brief": "Whether to allow string elements (0 no, 1 yes, 2 yes and try flip)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "yesNo",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 662,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getSmallElementValue",
+      "brief": "Small element value - elements less than this set to zero on input default is 1.0e-14.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 668,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setSmallElementValue",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 672,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "wasMaximization",
+      "brief": "Return true if maximization problem reformulated as minimization.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 677,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isMaximization",
+      "brief": "Return true if maximization problem and still formulated as maximization.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 682,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setFileName",
+      "brief": "Set the current file name for the CoinMpsIO object.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 708,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getFileName",
+      "brief": "Get the current file name for the CoinMpsIO object.",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 711,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readMps",
+      "brief": "Read a problem in MPS format from the given filename.",
+      "detailed": "Use \"stdin\" or \"-\" to read from stdin.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extension",
+          "type": "const char *",
+          "description": "",
+          "default": "\"mps\""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 717,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readMps",
+      "brief": "Read a problem in MPS format from the given filename.",
+      "detailed": "Use \"stdin\" or \"-\" to read from stdin. But do sets as well",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extension",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberSets",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sets",
+          "type": "CoinSet **&",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 724,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readMps",
+      "brief": "Read a problem in MPS format from a previously opened file.",
+      "detailed": "More precisely, read a problem using a CoinMpsCardReader object already associated with this CoinMpsIO object.\nTodoProvide an interface that will allow a client to associate a CoinMpsCardReader object with a CoinMpsIO object by setting the cardReader_ field.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 737,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readMps",
+      "brief": "and",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberSets",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sets",
+          "type": "CoinSet **&",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 739,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readBasis",
+      "brief": "Read a basis in MPS format from the given filename.",
+      "detailed": "If VALUES on NAME card and solution not NULL fills in solution status values as for CoinWarmStartBasis (but one per char) -1 file error, 0 normal, 1 has solution values\nUse \"stdin\" or \"-\" to read from stdin.\nIf sizes of names incorrect - read without names",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extension",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "solution",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowStatus",
+          "type": "unsigned char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnStatus",
+          "type": "unsigned char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colnames",
+          "type": "const std::vector< std::string > &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rownames",
+          "type": "const std::vector< std::string > &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 749,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readGms",
+      "brief": "Read a problem in GAMS format from the given filename.",
+      "detailed": "Use \"stdin\" or \"-\" to read from stdin. if convertObjective then massages objective column",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extension",
+          "type": "const char *",
+          "description": "",
+          "default": "\"gms\""
+        },
+        {
+          "name": "convertObjective",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 759,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readGms",
+      "brief": "Read a problem in GAMS format from the given filename.",
+      "detailed": "Use \"stdin\" or \"-\" to read from stdin. But do sets as well",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extension",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberSets",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sets",
+          "type": "CoinSet **&",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 766,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readGms",
+      "brief": "Read a problem in GAMS format from a previously opened file.",
+      "detailed": "More precisely, read a problem using a CoinMpsCardReader object already associated with this CoinMpsIO object. and",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberSets",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sets",
+          "type": "CoinSet **&",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 777,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "writeMps",
+      "brief": "Write the problem in MPS format to a file with the given filename.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "compression",
+          "type": "int",
+          "description": "can be set to three values to indicate what kind of file should be written 0: plain text (default)\n1: gzip compressed (.gz is appended to `filename`)\n2: bzip2 compressed (.bz2 is appended to `filename`) (TODO)\nIf the library was not compiled with the requested compression then writeMps falls back to writing a plain text file.",
+          "default": "0"
+        },
+        {
+          "name": "formatType",
+          "type": "int",
+          "description": "specifies the precision to used for values in the MPS file 0: normal precision (default)\n1: extra accuracy\n2: IEEE hex",
+          "default": "0"
+        },
+        {
+          "name": "numberAcross",
+          "type": "int",
+          "description": "specifies whether 1 or 2 (default) values should be specified on every data line in the MPS file.",
+          "default": "2"
+        },
+        {
+          "name": "quadratic",
+          "type": "CoinPackedMatrix *",
+          "description": "specifies quadratic objective to be output",
+          "default": "NULL"
+        },
+        {
+          "name": "numberSOS",
+          "type": "int",
+          "description": "",
+          "default": "0"
+        },
+        {
+          "name": "setInfo",
+          "type": "const CoinSet *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 811,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "reader",
+      "brief": "Return card reader object so can see what last card was e.g. QUADOBJ.",
+      "detailed": "",
+      "return_type": "const CoinMpsCardReader *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 817,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readQuadraticMps",
+      "brief": "Read in a quadratic objective from the given filename.",
+      "detailed": "If filename is NULL (or the same as the currently open file) then reading continues from the current file. If not, the file is closed and the specified file is opened.\nCode should be added to general MPS reader to read this if QSECTION Data is assumed to be Q and objective is c + 1/2 xT Q x No assumption is made for symmetry, positive definite, etc. No check is made for duplicates or non-triangular if checkSymmetry==0. If 1 checks lower triangular (so off diagonal should be 2*Q) if 2 makes lower triangular and assumes full Q (but adds off diagonals)\nArrays should be deleted by delete []\nReturns number of errors: -1: bad file\n-2: no Quadratic section\n-3: an empty section\n+n: then matching errors etc (symmetry forced)\n-4: no matching errors but fails triangular test (triangularity forced)\ncolumnStart is numberColumns+1 long, others numberNonZeros",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnStart",
+          "type": "CoinBigIndex *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "double *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "checkSymmetry",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 849,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "readConicMps",
+      "brief": "Read in a list of cones from the given filename.",
+      "detailed": "If filename is NULL (or the same as the currently open file) then reading continues from the current file. If not, the file is closed and the specified file is opened.\nCode should be added to general MPS reader to read this if CSECTION No checking is done that in unique cone\nArrays should be deleted by delete []\nReturns number of errors, -1 bad file, -2 no conic section, -3 empty section\ncolumnStart is numberCones+1 long, other number of columns in matrix\nconeType is 1 for QUAD, 2 for RQUAD (numberCones long)",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnStart",
+          "type": "int *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "coneType",
+          "type": "int *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberCones",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 872,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setConvertObjective",
+      "brief": "Set whether to move objective from matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "trueFalse",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 875,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "copyStringElements",
+      "brief": "copies in strings from a CoinModel - returns number",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "model",
+          "type": "const CoinModel *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 880,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinMpsIO",
+      "brief": "Default Constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 886,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinMpsIO",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinMpsIO &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 889,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment operator.",
+      "detailed": "",
+      "return_type": "CoinMpsIO &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinMpsIO &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 892,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinMpsIO",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 895,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "passInMessageHandler",
+      "brief": "Pass in Message handler.",
+      "detailed": "Supply a custom message handler. It will not be destroyed when the CoinMpsIO object is destroyed.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "handler",
+          "type": "CoinMessageHandler *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 905,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "newLanguage",
+      "brief": "Set the language for messages.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "language",
+          "type": "CoinMessages::Language",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 908,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setLanguage",
+      "brief": "Set the language for messages.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "language",
+          "type": "CoinMessages::Language",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 911,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "messageHandler",
+      "brief": "Return the message handler.",
+      "detailed": "",
+      "return_type": "CoinMessageHandler *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 914,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "messages",
+      "brief": "Return the messages.",
+      "detailed": "",
+      "return_type": "CoinMessages",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 917,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "messagesPointer",
+      "brief": "Return the messages pointer.",
+      "detailed": "",
+      "return_type": "CoinMessages *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 919,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "releaseRedundantInformation",
+      "brief": "Release all information which can be re-calculated.",
+      "detailed": "E.g., row sense, copies of rows, hash tables for names.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 932,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "releaseRowInformation",
+      "brief": "Release all row information (lower, upper)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 935,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "releaseColumnInformation",
+      "brief": "Release all column information (lower, upper, objective)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 938,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "releaseIntegerInformation",
+      "brief": "Release integer information.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 941,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "releaseRowNames",
+      "brief": "Release row names.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 944,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "releaseColumnNames",
+      "brief": "Release column names.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 947,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "releaseMatrixInformation",
+      "brief": "Release matrix information.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 950,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMpsDataWithoutRowAndColNames",
+      "brief": "Utility method used several times to implement public methods.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "m",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "infinity",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "obj",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "integrality",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowlb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 959,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "setMpsDataColAndRowNames",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colnames",
+          "type": "const std::vector< std::string > &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rownames",
+          "type": "const std::vector< std::string > &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 965,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "setMpsDataColAndRowNames",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colnames",
+          "type": "char const *const *const",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rownames",
+          "type": "char const *const *const",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 969,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "gutsOfDestructor",
+      "brief": "Does the heavy lifting for destruct and assignment.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 974,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "gutsOfCopy",
+      "brief": "Does the heavy lifting for copy and assignment.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinMpsIO &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 977,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "freeAll",
+      "brief": "Clears problem data from the CoinMpsIO object.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 980,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "convertBoundToSense",
+      "brief": "A quick inlined function to convert from lb/ub style constraint definition to sense/rhs/range style.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "lower",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "upper",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sense",
+          "type": "char &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "right",
+          "type": "double &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "range",
+          "type": "double &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 985,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "convertSenseToBound",
+      "brief": "A quick inlined function to convert from sense/rhs/range stryle constraint definition to lb/ub style.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sense",
+          "type": "const char",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "right",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "range",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lower",
+          "type": "double &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "upper",
+          "type": "double &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 990,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "dealWithFileName",
+      "brief": "Deal with a filename.",
+      "detailed": "As the name says. Returns +1 if the file name is new, 0 if it's the same as before (i.e., matches fileName_), and -1 if there's an error and the file can't be opened. Handles automatic append of .gz suffix when compiled with libz.\nTodoAdd automatic append of .bz2 suffix when compiled with libbz.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extension",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "input",
+          "type": "CoinFileInput *&",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 1006,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "addString",
+      "brief": "Add string to list iRow==numberRows is objective, nr+1 is lo, nr+2 is up iColumn==nc is rhs (can't cope with ranges at present)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "iRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "iColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 1012,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "decodeString",
+      "brief": "Decode string.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "iString",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "iRow",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "iColumn",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "const char *&",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 1014,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "startHash",
+      "brief": "Creates hash list for names (section = 0 for rows, 1 columns)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "names",
+          "type": "char **",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "number",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "section",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 1025,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "startHash",
+      "brief": "This one does it when names are already in.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "section",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 1027,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "stopHash",
+      "brief": "Deletes hash storage.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "section",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 1029,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "findHash",
+      "brief": "Finds match using hash, -1 not found.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "section",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMpsIO.hpp",
+      "source_line": 1031,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

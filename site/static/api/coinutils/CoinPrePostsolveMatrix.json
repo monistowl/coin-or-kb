@@ -1,0 +1,1744 @@
+{
+  "name": "CoinPrePostsolveMatrix",
+  "qualified_name": "CoinPrePostsolveMatrix",
+  "brief": "Collects all the information about the problem that is needed in both presolve and postsolve.",
+  "detailed": "In a bit more detail, a column-major representation of the constraint matrix and upper and lower bounds on variables and constraints, plus row and column solutions, reduced costs, and status. There's also a set of arrays holding the original row and column numbers.\nAs presolve and postsolve transform the matrix, it will occasionally be necessary to expand the number of entries in a column. There are two aspects: During postsolve, the constraint system is expected to grow as the smaller presolved system is transformed back to the original system.\nDuring both pre- and postsolve, transforms can increase the number of coefficients in a row or column. (See the variable substitution, doubleton, and tripleton transforms.)\nThe first is addressed by the members ncols0_, nrows0_, and nelems0_. These should be set (via constructor parameters) to values large enough for the largest size taken on by the constraint system. Typically, this will be the size of the original constraint system.\nThe second is addressed by a generous allocation of extra (empty) space for the arrays used to hold coefficients and row indices. When columns must be expanded, they are moved into the empty space. When it is used up, the arrays are compacted. When compaction fails to produce sufficient space, presolve/postsolve will fail.\nCoinPrePostsolveMatrix isn't really intended to be used bare  the expectation is that it'll be used through CoinPresolveMatrix or CoinPostsolveMatrix. Some of the functions needed to load a problem are defined in the derived classes.\nWhen CoinPresolve is applied when reoptimising, we need to be prepared to accept a basis and modify it in step with the presolve actions (otherwise we throw away all the advantages of warm start for reoptimization). But other solution components (acts_, rowduals_, sol_, and rcosts_) are needed only for postsolve, where they're used in places to determine the proper action(s) when restoring rows or columns. If presolve is provided with a solution, it will modify it in step with the presolve actions. Moving the solution components from CoinPrePostsolveMatrix to CoinPostsolveMatrix would break a lot of code. It's not clear that it's worth it, and it would preclude upgrades to the presolve side that might make use of any of these.  lh, 080501",
+  "header_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [
+    "CoinPostsolveMatrix",
+    "CoinPresolveMatrix"
+  ],
+  "methods": [
+    {
+      "name": "CoinPrePostsolveMatrix",
+      "brief": "Native constructor",
+      "detailed": "This constructor creates an empty object which must then be loaded. On the other hand, it doesn't assume that the client is an OsiSolverInterface.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "ncols_alloc",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nrows_alloc",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nelems_alloc",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 297,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinPrePostsolveMatrix",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 301,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "messageHandler",
+      "brief": "Return message handler.",
+      "detailed": "",
+      "return_type": "CoinMessageHandler *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 574,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMessageHandler",
+      "brief": "Set message handler.",
+      "detailed": "The client retains responsibility for the handler  it will not be destroyed with the `` object.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "handler",
+          "type": "CoinMessageHandler *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 583,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "messages",
+      "brief": "Return messages.",
+      "detailed": "",
+      "return_type": "CoinMessages",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 592,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowStatus",
+      "brief": "Set row status (i.e., status of artificial for this row)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sequence",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "status",
+          "type": "Status",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 335,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowStatus",
+      "brief": "Get row status.",
+      "detailed": "",
+      "return_type": "Status",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sequence",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 342,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowIsBasic",
+      "brief": "Check if artificial for this row is basic.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sequence",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 347,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnStatus",
+      "brief": "Set column status (i.e., status of primal variable)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sequence",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "status",
+          "type": "Status",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 352,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumnStatus",
+      "brief": "Get column (structural variable) status.",
+      "detailed": "",
+      "return_type": "Status",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sequence",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 403,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnIsBasic",
+      "brief": "Check if column (structural variable) is basic.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sequence",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 408,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowStatusUsingValue",
+      "brief": "Set status of row (artificial variable) to the correct nonbasic status given bounds and current value.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "iRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 415,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnStatusUsingValue",
+      "brief": "Set status of column (structural variable) to the correct nonbasic status given bounds and current value.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "iColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 419,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setStructuralStatus",
+      "brief": "Set column (structural variable) status vector.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "strucStatus",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 421,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setArtificialStatus",
+      "brief": "Set row (artificial variable) status vector.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "artifStatus",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 423,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setStatus",
+      "brief": "Set the status of all variables from a basis.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "basis",
+          "type": "const CoinWarmStartBasis *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 425,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getStatus",
+      "brief": "Get status in the form of a CoinWarmStartBasis.",
+      "detailed": "",
+      "return_type": "CoinWarmStartBasis *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 427,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnStatusString",
+      "brief": "Return a print string for status of a column (structural variable)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 431,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowStatusString",
+      "brief": "Return a print string for status of a row (artificial variable)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 435,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setObjOffset",
+      "brief": "Set the objective function offset for the original system.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "offset",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 446,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setObjSense",
+      "brief": "Set the objective sense (max/min)",
+      "detailed": "Coded as 1.0 for min, -1.0 for max. Yes, there's a method, and a matching attribute. No, you really don't want to set this to maximise.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "objSense",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 453,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPrimalTolerance",
+      "brief": "Set the primal feasibility tolerance.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "primTol",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 455,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDualTolerance",
+      "brief": "Set the dual feasibility tolerance.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "dualTol",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 457,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColLower",
+      "brief": "Set column lower bounds.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colLower",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 459,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColUpper",
+      "brief": "Set column upper bounds.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colUpper",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 461,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColSolution",
+      "brief": "Set column solution.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colSol",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 463,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setCost",
+      "brief": "Set objective coefficients.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "cost",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 465,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setReducedCost",
+      "brief": "Set reduced costs.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "redCost",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 467,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowLower",
+      "brief": "Set row lower bounds.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowLower",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 469,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowUpper",
+      "brief": "Set row upper bounds.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowUpper",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 471,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowPrice",
+      "brief": "Set row solution.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowSol",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 473,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowActivity",
+      "brief": "Set row activity.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowAct",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 475,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumCols",
+      "brief": "Get current number of columns.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 481,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumRows",
+      "brief": "Get current number of rows.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 486,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumElems",
+      "brief": "Get current number of non-zero coefficients.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 491,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColStarts",
+      "brief": "Get column start vector for column-major packed matrix.",
+      "detailed": "",
+      "return_type": "const CoinBigIndex *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 496,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColLengths",
+      "brief": "Get column length vector for column-major packed matrix.",
+      "detailed": "",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 501,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowIndicesByCol",
+      "brief": "Get vector of row indices for column-major packed matrix.",
+      "detailed": "",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 506,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getElementsByCol",
+      "brief": "Get vector of elements for column-major packed matrix.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 511,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColLower",
+      "brief": "Get column lower bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 516,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColUpper",
+      "brief": "Get column upper bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 521,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getCost",
+      "brief": "Get objective coefficients.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 526,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowLower",
+      "brief": "Get row lower bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 531,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowUpper",
+      "brief": "Get row upper bounds.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 536,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColSolution",
+      "brief": "Get column solution (primal variable values)",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 541,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowActivity",
+      "brief": "Get row activity (constraint lhs values)",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 546,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowPrice",
+      "brief": "Get row solution (dual variables)",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 551,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getReducedCost",
+      "brief": "Get reduced costs.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 556,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "countEmptyCols",
+      "brief": "Count empty columns.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 561,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "statusName",
+      "brief": "Generate a print string for a status code.",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "status",
+          "type": "CoinPrePostsolveMatrix::Status",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 771,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_make_memlists",
+      "brief": "Initialise linked list for major vector order in bulk storage.",
+      "detailed": "",
+      "return_type": "COINUTILSLIB_EXPORT void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "lengths",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "link",
+          "type": "presolvehlink *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "n",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1614,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_expand_major",
+      "brief": "Make sure a major-dimension vector k has room for one more coefficient.",
+      "detailed": "You can use this directly, or use the inline wrappers presolve_expand_col and presolve_expand_row",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "majstrts",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majels",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minndxs",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majlens",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majlinks",
+          "type": "presolvehlink *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nmaj",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "k",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1624,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_expand_col",
+      "brief": "Make sure a column (colx) in a column-major matrix has room for one more coefficient.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "mcstrt",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colels",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hrow",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hincol",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "clink",
+          "type": "presolvehlink *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ncols",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colx",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1633,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_expand_row",
+      "brief": "Make sure a row (rowx) in a row-major matrix has room for one more coefficient.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "mrstrt",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowels",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hcol",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hinrow",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rlink",
+          "type": "presolvehlink *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nrows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowx",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1646,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_find_minor",
+      "brief": "Find position of a minor index in a major vector.",
+      "detailed": "The routine returns the position `k` in `minndxs` for the specified minor index `tgt`. It will abort if the entry does not exist. Can be used directly or via the inline wrappers presolve_find_row and presolve_find_col.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "tgt",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ks",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ke",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minndxs",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1662,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_find_row",
+      "brief": "Find position of a row in a column in a column-major matrix.",
+      "detailed": "The routine returns the position `k` in `hrow` for the specified `row`. It will abort if the entry does not exist.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "kcs",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "kce",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hrow",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1692,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_find_minor1",
+      "brief": "Find position of a minor index in a major vector.",
+      "detailed": "The routine returns the position `k` in `minndxs` for the specified minor index `tgt`. A return value of `ke` means the entry does not exist. Can be used directly or via the inline wrappers presolve_find_row1 and presolve_find_col1.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "tgt",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ks",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ke",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minndxs",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1718,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_find_row1",
+      "brief": "Find position of a row in a column in a column-major matrix.",
+      "detailed": "The routine returns the position `k` in `hrow` for the specified `row`. A return value of `kce` means the entry does not exist.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "kcs",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "kce",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hrow",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1727,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_find_col1",
+      "brief": "Find position of a column in a row in a row-major matrix.",
+      "detailed": "The routine returns the position `k` in `hcol` for the specified `col`. A return value of `kre` means the entry does not exist.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "col",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "krs",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "kre",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hcol",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1739,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_delete_from_major",
+      "brief": "Delete the entry for a minor index from a major vector.",
+      "detailed": "Deletes the entry for `minndx` from the major vector `majndx`. Specifically, the relevant entries are removed from the minor index (`minndxs`) and coefficient (`els`) arrays and the vector length (`majlens`) is decremented. Loose packing is maintained by swapping the last entry in the row into the position occupied by the deleted entry.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "majndx",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minndx",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majstrts",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majlens",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minndxs",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "els",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1806,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_delete_many_from_major",
+      "brief": "Delete marked entries.",
+      "detailed": "Removes the entries specified in `marked`, compressing the major vector to maintain loose packing. `marked` is cleared in the process.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "majndx",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "marked",
+          "type": "char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majstrts",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majlens",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minndxs",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "els",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1828,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_delete_from_col",
+      "brief": "Delete the entry for row `row` from column `col` in a column-major matrix.",
+      "detailed": "Deletes the entry for `row` from the major vector for `col`. Specifically, the relevant entries are removed from the row index (`hrow`) and coefficient (`colels`) arrays and the vector length (`hincol`) is decremented. Loose packing is maintained by swapping the last entry in the row into the position occupied by the deleted entry.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "col",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "mcstrt",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hincol",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hrow",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colels",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1858,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_delete_from_row",
+      "brief": "Delete the entry for column `col` from row `row` in a row-major matrix.",
+      "detailed": "Deletes the entry for `col` from the major vector for `row`. Specifically, the relevant entries are removed from the column index (`hcol`) and coefficient (`rowels`) arrays and the vector length (`hinrow`) is decremented. Loose packing is maintained by swapping the last entry in the column into the position occupied by the deleted entry.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "col",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "mrstrt",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hinrow",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hcol",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowels",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1875,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

@@ -1,0 +1,3194 @@
+{
+  "name": "CoinPackedMatrix",
+  "qualified_name": "CoinPackedMatrix",
+  "brief": "Sparse Matrix Base Class.",
+  "detailed": "This class is intended to represent sparse matrices using row-major or column-major ordering. The representation is very efficient for adding, deleting, or retrieving major-dimension vectors. Adding a minor-dimension vector is less efficient, but can be helped by providing \"extra\" space as described in the next paragraph. Deleting a minor-dimension vector requires inspecting all coefficients in the matrix. Retrieving a minor-dimension vector would incur the same cost and is not supported (except in the sense that you can write a loop to retrieve all coefficients one at a time). Consider physically transposing the matrix, or keeping a second copy with the other major-vector ordering.\nThe sparse represention can be completely compact or it can have \"extra\" space available at the end of each major vector. Incorporating extra space into the sparse matrix representation can improve performance in cases where new data needs to be inserted into the packed matrix against the major-vector orientation (e.g, inserting a row into a matrix stored in column-major order).\nFor example if the matrix: 3  1  0   -2   -1  0  0   -1                 \n   0  2  1.1  0    0  0  0    0                       \n   0  0  1    0    0  1  0    0         \n   0  0  0    2.8  0  0 -1.2  0   \n 5.6  0  0    0    1  0  0    1.9\n\nwas stored by rows (with no extra space) in \nCoinPackedMatrix r then: \n  r.getElements() returns a vector containing: \n    3 1 -2 -1 -1 2 1.1 1 1 2.8 -1.2 5.6 1 1.9 \n  r.getIndices() returns a vector containing: \n    0 1  3  4  7 1 2   2 5 3    6   0   4 7 \n  r.getVectorStarts() returns a vector containing: \n    0 5 7 9 11 14 \n  r.getNumElements() returns 14. \n  r.getMajorDim() returns 5. \n  r.getVectorSize(0) returns 5. \n  r.getVectorSize(1) returns 2. \n  r.getVectorSize(2) returns 2. \n  r.getVectorSize(3) returns 2. \n  r.getVectorSize(4) returns 3. \n\nIf stored by columns (with no extra space) then: \n  c.getElements() returns a vector containing: \n    3 5.6 1 2 1.1 1 -2 2.8 -1 1 1 -1.2 -1 1.9 \n  c.getIndices() returns a vector containing: \n    0  4  0 1 1   2  0 3    0 4 2  3    0 4 \n  c.getVectorStarts() returns a vector containing: \n    0 2 4 6 8 10 11 12 14 \n  c.getNumElements() returns 14. \n  c.getMajorDim() returns 8.\nCompiling this class with CLP_NO_VECTOR defined will excise all methods which use CoinPackedVectorBase, CoinPackedVector, or CoinShallowPackedVector as parameters or return types.\nCompiling this class with COIN_FAST_CODE defined removes index range checks.",
+  "header_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "getExtraGap",
+      "brief": "Return the current setting of the extra gap.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 112,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getExtraMajor",
+      "brief": "Return the current setting of the extra major.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 114,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "reserve",
+      "brief": "Reserve sufficient space for appending major-ordered vectors.",
+      "detailed": "If create is true, empty columns are created (for column generation)",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newMaxMajorDim",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "newMaxSize",
+          "type": "const CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "create",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 118,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clear",
+      "brief": "Clear the data, but do not free any arrays.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 121,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isColOrdered",
+      "brief": "Whether the packed matrix is column major ordered or not.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 124,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "hasGaps",
+      "brief": "Whether the packed matrix has gaps or not.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 127,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumElements",
+      "brief": "Number of entries in the packed matrix.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 130,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumCols",
+      "brief": "Number of columns.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 133,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumRows",
+      "brief": "Number of rows.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 139,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getElements",
+      "brief": "A vector containing the elements in the packed matrix.",
+      "detailed": "Returns #elements_. Note that there might be gaps in this vector, entries that do not belong to any major-dimension vector. To get the actual elements one should look at this vector together with vectorStarts (start_) and vectorLengths (length_).",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 151,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getIndices",
+      "brief": "A vector containing the minor indices of the elements in the packed matrix.",
+      "detailed": "Returns index_. Note that there might be gaps in this list, entries that do not belong to any major-dimension vector. To get the actual elements one should look at this vector together with vectorStarts (start_) and vectorLengths (length_).",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 161,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getSizeVectorStarts",
+      "brief": "The size of the `vectorStarts` array.",
+      "detailed": "See start_.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 167,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getSizeVectorLengths",
+      "brief": "The size of the `vectorLengths` array.",
+      "detailed": "See length_.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 176,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getVectorStarts",
+      "brief": "The positions where the major-dimension vectors start in elements and indices.",
+      "detailed": "See start_.",
+      "return_type": "const CoinBigIndex *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 183,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getVectorLengths",
+      "brief": "The lengths of the major-dimension vectors.",
+      "detailed": "See length_.",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 189,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getVectorFirst",
+      "brief": "The position of the first element in the i'th major-dimension vector.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 193,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getVectorLast",
+      "brief": "The position of the last element (well, one entry past the last) in the i'th major-dimension vector.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 203,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getVectorSize",
+      "brief": "The length of i'th vector.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 212,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getVector",
+      "brief": "Return the i'th vector in matrix.",
+      "detailed": "",
+      "return_type": "const CoinShallowPackedVector",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 222,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMajorIndices",
+      "brief": "Returns an array containing major indices.",
+      "detailed": "The array is getNumElements long and if getVectorStarts() is 0,2,5 then the array would start 0,0,1,1,1,2... This method is provided to go back from a packed format to a triple format. It returns NULL if there are gaps in matrix so user should use removeGaps() if there are any gaps. It does this as this array has to match getElements() and getIndices() and because it makes no sense otherwise. The returned array is allocated with `new int[]`, free it with `delete[]`.",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 244,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDimensions",
+      "brief": "Set the dimensions of the matrix.",
+      "detailed": "The method name is deceptive; the effect is to append empty columns and/or rows to the matrix to reach the specified dimensions. A negative number for either dimension means that that dimension doesn't change. An exception will be thrown if the specified dimensions are smaller than the current dimensions.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numrows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numcols",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 258,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setExtraGap",
+      "brief": "Set the extra gap to be allocated to the specified value.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newGap",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 261,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setExtraMajor",
+      "brief": "Set the extra major to be allocated to the specified value.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newMajor",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 263,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendCol",
+      "brief": "",
+      "detailed": "Append a column to the end of the matrix.\nWhen compiled with COIN_DEBUG defined this method throws an exception if the column vector specifies a nonexistent row index. Otherwise the method assumes that every index fits into the matrix.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "vec",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 271,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendCol",
+      "brief": "",
+      "detailed": "Append a column to the end of the matrix.\nWhen compiled with COIN_DEBUG defined this method throws an exception if the column vector specifies a nonexistent row index. Otherwise the method assumes that every index fits into the matrix.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "vecsize",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "vecind",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "vecelem",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 279,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendCols",
+      "brief": "",
+      "detailed": "Append a set of columns to the end of the matrix.\nWhen compiled with COIN_DEBUG defined this method throws an exception if any of the column vectors specify a nonexistent row index. Otherwise the method assumes that every index fits into the matrix.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numcols",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "cols",
+          "type": "const CoinPackedVectorBase *const *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 288,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendCols",
+      "brief": "",
+      "detailed": "Append a set of columns to the end of the matrix.\nReturns the number of errors (nonexistent or duplicate row index). No error checking is performed if `numberRows` < 0.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numcols",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnStarts",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "row",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberRows",
+          "type": "int",
+          "description": "",
+          "default": "-1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 296,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendRow",
+      "brief": "",
+      "detailed": "Append a row to the end of the matrix.\nWhen compiled with COIN_DEBUG defined this method throws an exception if the row vector specifies a nonexistent column index. Otherwise the method assumes that every index fits into the matrix.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "vec",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 306,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendRow",
+      "brief": "",
+      "detailed": "Append a row to the end of the matrix.\nWhen compiled with COIN_DEBUG defined this method throws an exception if the row vector specifies a nonexistent column index. Otherwise the method assumes that every index fits into the matrix.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "vecsize",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "vecind",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "vecelem",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 314,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendRows",
+      "brief": "",
+      "detailed": "Append a set of rows to the end of the matrix.\nWhen compiled with COIN_DEBUG defined this method throws an exception if any of the row vectors specify a nonexistent column index. Otherwise the method assumes that every index fits into the matrix.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numrows",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rows",
+          "type": "const CoinPackedVectorBase *const *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 323,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendRows",
+      "brief": "",
+      "detailed": "Append a set of rows to the end of the matrix.\nReturns the number of errors (nonexistent or duplicate column index). No error checking is performed if `numberColumns` < 0.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numrows",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowStarts",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": "-1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 331,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rightAppendPackedMatrix",
+      "brief": "Append the argument to the \"right\" of the current matrix.",
+      "detailed": "Imagine this as adding new columns (don't worry about how the matrices are ordered, that is taken care of). An exception is thrown if the number of rows is different in the matrices.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 339,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "bottomAppendPackedMatrix",
+      "brief": "Append the argument to the \"bottom\" of the current matrix.",
+      "detailed": "Imagine this as adding new rows (don't worry about how the matrices are ordered, that is taken care of). An exception is thrown if the number of columns is different in the matrices.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 344,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteCols",
+      "brief": "Delete the columns whose indices are listed in `indDel`.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numDel",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indDel",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 347,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteRows",
+      "brief": "Delete the rows whose indices are listed in `indDel`.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numDel",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indDel",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 349,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "replaceVector",
+      "brief": "Replace the elements of a vector.",
+      "detailed": "The indices remain the same. At most the number specified will be replaced. The index is between 0 and major dimension of matrix",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numReplace",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "newElements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 354,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "modifyCoefficient",
+      "brief": "Modify one element of packed matrix.",
+      "detailed": "An element may be added. This works for either ordering If the new element is zero it will be deleted unless keepZero true",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "newElement",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "keepZero",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 360,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getCoefficient",
+      "brief": "Return one element of packed matrix.",
+      "detailed": "This works for either ordering If it is not present will return 0.0",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 365,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "compress",
+      "brief": "Eliminate all elements in matrix whose absolute value is less than threshold.",
+      "detailed": "The column starts are not affected. Returns number of elements eliminated. Elements eliminated are at end of each vector",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "threshold",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 372,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "eliminateDuplicates",
+      "brief": "Eliminate all duplicate AND small elements in matrix The column starts are not affected.",
+      "detailed": "Returns number of elements eliminated.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "threshold",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 377,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "orderMatrix",
+      "brief": "Sort all columns so indices are increasing.in each column.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 379,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "cleanMatrix",
+      "brief": "Really clean up matrix.",
+      "detailed": "a) eliminate all duplicate AND small elements in matrix b) remove all gaps and set extraGap_ and extraMajor_ to 0.0 c) reallocate arrays and make max lengths equal to lengths d) orders elements returns number of elements eliminated",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "threshold",
+          "type": "double",
+          "description": "",
+          "default": "1.0e-20"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 387,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "removeGaps",
+      "brief": "Remove the gaps from the matrix if there were any Can also remove small elements fabs() <= removeValue.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "removeValue",
+          "type": "double",
+          "description": "",
+          "default": "-1.0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 395,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "submatrixOf",
+      "brief": "Extract a submatrix from matrix.",
+      "detailed": "Those major-dimension vectors of the matrix comprise the submatrix whose indices are given in the arguments. Does not allow duplicates.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numMajor",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indMajor",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 400,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "submatrixOfWithDuplicates",
+      "brief": "Extract a submatrix from matrix.",
+      "detailed": "Those major-dimension vectors of the matrix comprise the submatrix whose indices are given in the arguments. Allows duplicates and keeps order.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numMajor",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indMajor",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 405,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "copyOf",
+      "brief": "Copy method.",
+      "detailed": "This method makes an exact replica of the argument, including the extra space parameters.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 418,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "copyOf",
+      "brief": "Copy the arguments to the matrix.",
+      "detailed": "If `len` is a NULL pointer then the matrix is assumed to have no gaps in it and `len` will be created accordingly.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colordered",
+          "type": "const bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minor",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "major",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numels",
+          "type": "const CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elem",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ind",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "start",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "len",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extraMajor",
+          "type": "const double",
+          "description": "",
+          "default": "0.0"
+        },
+        {
+          "name": "extraGap",
+          "type": "const double",
+          "description": "",
+          "default": "0.0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 422,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "copyReuseArrays",
+      "brief": "Copy method.",
+      "detailed": "This method makes an exact replica of the argument, including the extra space parameters. If there is room it will re-use arrays",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 430,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "reverseOrderedCopyOf",
+      "brief": "Make a reverse-ordered copy.",
+      "detailed": "This method makes an exact replica of the argument with the major vector orientation changed from row (column) to column (row). The extra space parameters are also copied and reversed. (Cf. reverseOrdering, which does the same thing in place.)",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 439,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "assignMatrix",
+      "brief": "Assign the arguments to the matrix.",
+      "detailed": "If `len` is a NULL pointer then the matrix is assumed to have no gaps in it and `len` will be created accordingly. \n NOTE 1: After this method returns the pointers passed to the method will be NULL pointers! \n NOTE 2: When the matrix is eventually destructed the arrays will be deleted by `delete[]`. Hence one should use this method ONLY if all array swere allocated by `new[]`!",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colordered",
+          "type": "const bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minor",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "major",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numels",
+          "type": "const CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elem",
+          "type": "double *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ind",
+          "type": "int *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "start",
+          "type": "CoinBigIndex *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "len",
+          "type": "int *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "maxmajor",
+          "type": "const int",
+          "description": "",
+          "default": "-1"
+        },
+        {
+          "name": "maxsize",
+          "type": "const CoinBigIndex",
+          "description": "",
+          "default": "-1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 449,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment operator.",
+      "detailed": "This copies out the data, but uses the current matrix's extra space parameters.",
+      "return_type": "CoinPackedMatrix &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 458,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "reverseOrdering",
+      "brief": "Reverse the ordering of the packed matrix.",
+      "detailed": "Change the major vector orientation of the matrix data structures from row (column) to column (row). (Cf. reverseOrderedCopyOf, which does the same thing but produces a new matrix.)",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 466,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "transpose",
+      "brief": "Transpose the matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 477,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "swap",
+      "brief": "Swap the content of two packed matrices.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 480,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "times",
+      "brief": "Return `A * x` in `y`.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "y",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 490,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "times",
+      "brief": "Return `A * x` in `y`.",
+      "detailed": "Same as the previous method, just `x` is given in the form of a packed vector.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "y",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 494,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "transposeTimes",
+      "brief": "Return `x * A` in `y`.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "y",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 499,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "transposeTimes",
+      "brief": "Return `x * A` in `y`.",
+      "detailed": "Same as the previous method, just `x` is given in the form of a packed vector.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "y",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 503,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "countOrthoLength",
+      "brief": "Count the number of entries in every minor-dimension vector and return an array containing these lengths.",
+      "detailed": "The returned array is allocated with `new int[]`, free it with `delete[]`.",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 523,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "countOrthoLength",
+      "brief": "Count the number of entries in every minor-dimension vector and fill in an array containing these lengths.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "counts",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 526,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMajorDim",
+      "brief": "Major dimension.",
+      "detailed": "For row ordered matrix this would be the number of rows.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 529,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMajorDim",
+      "brief": "Set major dimension.",
+      "detailed": "For row ordered matrix this would be the number of rows. Use with great care.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 532,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMinorDim",
+      "brief": "Minor dimension.",
+      "detailed": "For row ordered matrix this would be the number of columns.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 535,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMinorDim",
+      "brief": "Set minor dimension.",
+      "detailed": "For row ordered matrix this would be the number of columns. Use with great care.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 538,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMaxMajorDim",
+      "brief": "Current maximum for major dimension.",
+      "detailed": "For row ordered matrix this many rows can be added without reallocating the vector related to the major dimension (`start_` and `length_`).",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 542,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "dumpMatrix",
+      "brief": "Dump the matrix on stdout.",
+      "detailed": "When in dire straits this method can help.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "fname",
+          "type": "const char *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 546,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "printMatrixElement",
+      "brief": "Print a single matrix element.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row_val",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "col_val",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 549,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendMajorVector",
+      "brief": "Append a major-dimension vector to the end of the matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "vec",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 564,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendMajorVector",
+      "brief": "Append a major-dimension vector to the end of the matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "vecsize",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "vecind",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "vecelem",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 567,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendMajorVectors",
+      "brief": "Append several major-dimensonvectors to the end of the matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numvecs",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "vecs",
+          "type": "const CoinPackedVectorBase *const *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 571,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendMinorVector",
+      "brief": "Append a minor-dimension vector to the end of the matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "vec",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 575,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendMinorVector",
+      "brief": "Append a minor-dimension vector to the end of the matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "vecsize",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "vecind",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "vecelem",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 578,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendMinorVectors",
+      "brief": "Append several minor-dimension vectors to the end of the matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numvecs",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "vecs",
+          "type": "const CoinPackedVectorBase *const *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 582,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "appendMinorFast",
+      "brief": "Append a set of rows (columns) to the end of a column (row) ordered matrix.",
+      "detailed": "This case is when we know there are no gaps and majorDim_ will not change.\nTodoThis method really belongs in the group of protected methods with appendMinor; there are no safeties here even with COIN_DEBUG. Apparently this method was needed in ClpPackedMatrix and giving it proper visibility was too much trouble. Should be moved.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "number",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "starts",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "index",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 597,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "majorAppendSameOrdered",
+      "brief": "Append the columns of the argument to the right end of this matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 616,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "minorAppendSameOrdered",
+      "brief": "Append the columns of the argument to the bottom end of this matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 621,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "majorAppendOrthoOrdered",
+      "brief": "Append the rows of the argument to the right end of this matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 627,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "minorAppendOrthoOrdered",
+      "brief": "Append the rows of the argument to the bottom end of this matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 633,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteMajorVectors",
+      "brief": "Delete the major-dimension vectors whose indices are listed in `indDel`.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numDel",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indDel",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 641,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteMinorVectors",
+      "brief": "Delete the minor-dimension vectors whose indices are listed in `indDel`.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numDel",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indDel",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 644,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "timesMajor",
+      "brief": "Return `A * x` (multiplied from the \"right\" direction) in `y`.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "y",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 654,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "timesMajor",
+      "brief": "Return `A * x` (multiplied from the \"right\" direction) in `y`.",
+      "detailed": "Same as the previous method, just `x` is given in the form of a packed vector.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "y",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 659,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "timesMinor",
+      "brief": "Return `A * x` (multiplied from the \"right\" direction) in `y`.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "y",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 665,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "timesMinor",
+      "brief": "Return `A * x` (multiplied from the \"right\" direction) in `y`.",
+      "detailed": "Same as the previous method, just `x` is given in the form of a packed vector.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "y",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 670,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isEquivalent",
+      "brief": "Test for equivalence.",
+      "detailed": "Two matrices are equivalent if they are both row- or column-ordered, they have the same dimensions, and each (major) vector is equivalent. The operator used to test for equality can be specified using the `FloatEqual` template parameter.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "eq",
+          "type": "const FloatEqual &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 688,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isEquivalent2",
+      "brief": "Test for equivalence and report differences.",
+      "detailed": "Equivalence is defined as for isEquivalent. In addition, this method will print differences to std::cerr. Intended for use in unit tests and for debugging.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 709,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isEquivalent",
+      "brief": "Test for equivalence.",
+      "detailed": "The test for element equality is the default CoinRelFltEq operator.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 725,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMutableElements",
+      "brief": "A vector containing the elements in the packed matrix.",
+      "detailed": "Note that there might be gaps in this list, entries that do not belong to any major-dimension vector. To get the actual elements one should look at this vector together with start_ and length_.",
+      "return_type": "double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 738,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMutableIndices",
+      "brief": "A vector containing the minor indices of the elements in the packed matrix.",
+      "detailed": "Note that there might be gaps in this list, entries that do not belong to any major-dimension vector. To get the actual elements one should look at this vector together with start_ and length_.",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 744,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMutableVectorStarts",
+      "brief": "The positions where the major-dimension vectors start in element_ and index_.",
+      "detailed": "",
+      "return_type": "CoinBigIndex *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 748,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMutableVectorLengths",
+      "brief": "The lengths of the major-dimension vectors.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 750,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setNumElements",
+      "brief": "Change the size of the bulk store after modifying - be careful.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 752,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "nullElementArray",
+      "brief": "",
+      "detailed": "NULLify element array\nUsed when space is very tight. Does not free the space!",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 760,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "nullStartArray",
+      "brief": "",
+      "detailed": "NULLify start array\nUsed when space is very tight. Does not free the space!",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 766,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "nullLengthArray",
+      "brief": "",
+      "detailed": "NULLify length array\nUsed when space is very tight. Does not free the space!",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 772,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "nullIndexArray",
+      "brief": "",
+      "detailed": "NULLify index array\nUsed when space is very tight. Does not free the space!",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 778,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPackedMatrix",
+      "brief": "Default Constructor creates an empty column ordered packed matrix.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 785,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPackedMatrix",
+      "brief": "A constructor where the ordering and the gaps are specified.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colordered",
+          "type": "const bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extraMajor",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extraGap",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 788,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPackedMatrix",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colordered",
+          "type": "const bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minor",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "major",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numels",
+          "type": "const CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elem",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ind",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "start",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "len",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extraMajor",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extraGap",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 791,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPackedMatrix",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colordered",
+          "type": "const bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minor",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "major",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numels",
+          "type": "const CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elem",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ind",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "start",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "len",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 797,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPackedMatrix",
+      "brief": "Create packed matrix from triples.",
+      "detailed": "If colordered is true then the created matrix will be column ordered. Duplicate matrix elements are allowed. The created matrix will have the sum of the duplicates. \n For example if: \n rowIndices[0]=2; colIndices[0]=5; elements[0]=2.0 \n rowIndices[1]=2; colIndices[1]=5; elements[1]=0.5 \n then the created matrix will contain a value of 2.5 in row 2 and column 5.\n The matrix is created without gaps.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colordered",
+          "type": "const bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowIndices",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colIndices",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numels",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 812,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPackedMatrix",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "m",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 819,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPackedMatrix",
+      "brief": "Copy constructor with fine tuning.",
+      "detailed": "This constructor allows for the specification of an exact amount of extra space and/or reverse ordering.\n`extraForMajor` is the exact number of spare major vector slots after any possible reverse ordering. If `extraForMajor` < 0, all gaps and small elements will be removed from the copy, otherwise gaps and small elements are preserved.\n`extraElements` is the exact number of spare element entries.\nThe usual multipliers, extraMajor_ and extraGap_, are set to zero.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "m",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extraForMajor",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extraElements",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "reverseOrdering",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 835,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPackedMatrix",
+      "brief": "Subset constructor (without gaps).",
+      "detailed": "Duplicates are allowed and order is as given",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "wholeModel",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "whichRows",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "whichColumns",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 841,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinPackedMatrix",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 846,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "verifyMtx",
+      "brief": "Scan the matrix for anomalies.",
+      "detailed": "Returns the number of anomalies. Scans the structure for gaps, obviously bogus indices and coefficients, and inconsistencies. Gaps are not an error unless hasGaps() says the matrix should be gap-free. Zeroes are not an error unless `zeroesAreError` is set to true.\nValues for verbosity are:0: No messages, just the return value1: Messages about errors2: If there are no errors, a message indicating the matrix was checked is printed (positive confirmation).3: Adds a bit more information about the matrix.4: Prints warnings about zeroes even if they're not considered errors.\nObviously bogus coefficients are coefficients that are NaN or have absolute value greater than 1e50. Zeros have absolute value less than 1e-50.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "verbosity",
+          "type": "int",
+          "description": "",
+          "default": "1"
+        },
+        {
+          "name": "zeroesAreError",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 872,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "gutsOfDestructor",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 877,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "gutsOfCopyOf",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colordered",
+          "type": "const bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minor",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "major",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numels",
+          "type": "const CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elem",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ind",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "start",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "len",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "extraMajor",
+          "type": "const double",
+          "description": "",
+          "default": "0.0"
+        },
+        {
+          "name": "extraGap",
+          "type": "const double",
+          "description": "",
+          "default": "0.0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 878,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "gutsOfCopyOfNoGaps",
+      "brief": "When no gaps we can do faster.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colordered",
+          "type": "const bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minor",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "major",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elem",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ind",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "start",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 884,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "gutsOfOpEqual",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "colordered",
+          "type": "const bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minor",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "major",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numels",
+          "type": "const CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elem",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ind",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "start",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "len",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 888,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "resizeForAddingMajorVectors",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numVec",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lengthVec",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 892,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "resizeForAddingMinorVectors",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "addedEntries",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 893,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "appendMajor",
+      "brief": "Append a set of rows (columns) to the end of a row (colum) ordered matrix.",
+      "detailed": "If `numberOther` > 0 the method will check if any of the new rows (columns) contain duplicate indices or invalid indices and return the number of errors. A valid minor index must satisfy 0<=k<numberOther If `numberOther` < 0 no checking is performed.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "number",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "starts",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "index",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberOther",
+          "type": "int",
+          "description": "",
+          "default": "-1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 904,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "appendMinor",
+      "brief": "Append a set of rows (columns) to the end of a column (row) ordered matrix.",
+      "detailed": "If `numberOther` > 0 the method will check if any of the new rows (columns) contain duplicate indices or indices outside the current range for the major dimension and return the number of violations. If `numberOther` <= 0 the major dimension will be expanded as necessary and there are no checks for duplicate indices.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "number",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "starts",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "index",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberOther",
+          "type": "int",
+          "description": "",
+          "default": "-1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 916,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "getLastStart",
+      "brief": "",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedMatrix.hpp",
+      "source_line": 921,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

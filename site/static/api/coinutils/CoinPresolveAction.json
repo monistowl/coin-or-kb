@@ -1,0 +1,171 @@
+{
+  "name": "CoinPresolveAction",
+  "qualified_name": "CoinPresolveAction",
+  "brief": "Abstract base class of all presolve routines.",
+  "detailed": "The details will make more sense after a quick overview of the grand plan: A presolve object is handed a problem object, which it is expected to modify in some useful way. Assuming that it succeeds, the presolve object should create a postsolve object, i.e., an object that contains instructions for backing out the presolve transform to recover the original problem. These postsolve objects are accumulated in a linked list, with each successive presolve action adding its postsolve action to the head of the list. The end result of all this is a presolved problem object, and a list of postsolve objects. The presolved problem object is then handed to a solver for optimization, and the problem object augmented with the results. The list of postsolve objects is then traversed. Each of them (un)modifies the problem object, with the end result being the original problem, augmented with solution information.\nThe problem object representation is CoinPrePostsolveMatrix and subclasses. Check there for details. The `` class and subclasses represent the presolve and postsolve objects.\nIn spite of the name, the only information held in a `` object is the information needed to postsolve (i.e., the information needed to back out the presolve transformation). This information is not expected to change, so the fields are all `const`.\nA subclass of ``, implementing a specific pre/postsolve action, is expected to declare a static function that attempts to perform a presolve transformation. This function will be handed a CoinPresolveMatrix to transform, and a pointer to the head of the list of postsolve objects. If the transform is successful, the function will create a new `` object, link it at the head of the list of postsolve objects, and return a pointer to the postsolve object it has just created. Otherwise, it should return 0. It is expected that these static functions will be the only things that can create new `` objects; this is expressed by making each subclass' constructor(s) private.\nEvery subclass must also define a `postsolve` method. This function will be handed a CoinPostsolveMatrix to transform.\nIt is the client's responsibility to implement presolve and postsolve driver routines. See OsiPresolve for examples.",
+  "header_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [
+    "do_tighten_action",
+    "doubleton_action",
+    "drop_empty_cols_action",
+    "drop_empty_rows_action",
+    "drop_zero_coefficients_action",
+    "dupcol_action",
+    "duprow3_action",
+    "duprow_action",
+    "forcing_constraint_action",
+    "gubrow_action",
+    "implied_free_action",
+    "isolated_constraint_action",
+    "make_fixed_action",
+    "remove_dual_action",
+    "remove_fixed_action",
+    "slack_doubleton_action",
+    "slack_singleton_action",
+    "subst_constraint_action",
+    "tripleton_action",
+    "twoxtwo_action",
+    "useless_constraint_action"
+  ],
+  "methods": [
+    {
+      "name": "throwCoinError",
+      "brief": "Stub routine to throw exceptions.",
+      "detailed": "Exceptions are inefficient, particularly with g++. Even with xlC, the use of exceptions adds a long prologue to a routine. Therefore, rather than use throw directly in the routine, I use it in a stub routine.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "error",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ps_routine",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 187,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPresolveAction",
+      "brief": "Construct a postsolve object and add it to the transformation list.",
+      "detailed": "This is an add to head operation. This object will point to the one passed as the parameter.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "next",
+          "type": "const CoinPresolveAction *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 203,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setNext",
+      "brief": "modify next (when building rather than passing)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "nextAction",
+          "type": "const CoinPresolveAction *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 208,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "name",
+      "brief": "A name for debug printing.",
+      "detailed": "It is expected that the name is not stored in the transform itself.",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 217,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "postsolve",
+      "brief": "Apply the postsolve transformation for this particular presolve action.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "prob",
+          "type": "CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 222,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinPresolveAction",
+      "brief": "Virtual destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 225,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

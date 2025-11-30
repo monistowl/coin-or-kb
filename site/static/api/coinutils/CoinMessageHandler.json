@@ -1,0 +1,1044 @@
+{
+  "name": "CoinMessageHandler",
+  "qualified_name": "CoinMessageHandler",
+  "brief": "Base class for message handling.",
+  "detailed": "The default behavior is described here: messages are printed, and (if the severity is sufficiently high) execution will be aborted. Inherit and redefine the methods print and checkSeverity to augment the behaviour.\nMessages can be printed with or without a prefix; the prefix will consist of a source string, the external ID number, and a letter code, e.g., Clp6024W. A prefix makes the messages look less nimble but is very useful for \"grep\" etc.\nUsage\nThe general approach to using the COIN messaging facility is as follows: Define your messages. For each message, you must supply an external ID number, a log (detail) level, and a format string. Typically, you define a convenience structure for this, something that's easy to use to create an array of initialised message definitions at compile time.\nCreate a CoinMessages object, sized to accommodate the number of messages you've defined. (Incremental growth will happen if necessary as messages are loaded, but it's inefficient.)\nLoad the messages into the CoinMessages object. Typically this entails creating a CoinOneMessage object for each message and passing it as a parameter to CoinMessages::addMessage(). You specify the message's internal ID as the other parameter to addMessage.\nCreate and use a CoinMessageHandler object to print messages.\nSee, for example, CoinMessage.hpp and CoinMessage.cpp for an example of the first three steps. Format codes below has a simple example of printing a message.\nExternal ID numbers and severity\nCoinMessageHandler assumes the following relationship between the external ID number of a message and the severity of the message: <3000 are informational ('I')\n<6000 warnings ('W')\n<9000 non-fatal errors ('E')\n>=9000 aborts the program (after printing the message) ('S')\nLog (detail) levels\nThe default behaviour is that a message will print if its detail level is less than or equal to the handler's log level. If all you want to do is set a single log level for the handler, use setLogLevel(int).\nIf you want to get fancy, here's how it really works: There's an array, logLevels_, which you can manipulate with setLogLevel(int,int). Each entry logLevels_[i] specifies the log level for messages of class i (see CoinMessages::class_). If logLevels_[0] is set to the magic number -1000 you get the simple behaviour described above, whatever the class of the messages. If logLevels_[0] is set to a valid log level (>= 0), then logLevels_[i] really is the log level for messages of class i.\nFormat codes\nCoinMessageHandler can print integers (normal, long, and long long), doubles, characters, and strings. See the descriptions of the various << operators.\nWhen processing a standard message with a format string, the formatting codes specified in the format string will be passed to the sprintf function, along with the argument. When generating a message with no format string, each << operator uses a simple format code appropriate for its argument. Consult the documentation for the standard printf facility for further information on format codes.\nThe special format code %? provides a hook to enable or disable printing. For each %? code, there must be a corresponding call to printing(bool). This provides a way to define optional parts in messages, delineated by the code %? in the format string. Printing can be suppressed for these optional parts, but any operands must still be supplied. For example, given the message string \"A message with%? an optional integer %d and%? a double %g.\" installed in CoinMessages `exampleMsgs` with index 5, and `` `hdl`, the code hdl.message(5,exampleMsgs);\nhdl.printing(true)<<42;\nhdl.printing(true)<<53.5<<CoinMessageEol; will print A message with an optional integer 42 and a double 53.5. while hdl.message(5,exampleMsgs);\nhdl.printing(false)<<42;\nhdl.printing(true)<<53.5<<CoinMessageEol; will print A message with a double 53.5.\nFor additional examples of usage, see CoinMessageHandlerUnitTest in CoinMessageHandlerTest.cpp.",
+  "header_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "gutsOfCopy",
+      "brief": "The body of the copy constructor and the assignment operator.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinMessageHandler &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 662,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "nextPerCent",
+      "brief": "Internal function to locate next format code.",
+      "detailed": "Intended for internal use. Side effects modify the format string.",
+      "return_type": "char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "initial",
+          "type": "const bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 668,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "internalPrint",
+      "brief": "Internal printing function.",
+      "detailed": "Makes it easier to split up print into clean, print and check severity",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 674,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "calcPrintStatus",
+      "brief": "Decide if this message should print.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "msglvl",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "msgclass",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 677,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "print",
+      "brief": "Print message, return 0 normally.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 353,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "checkSeverity",
+      "brief": "Check message severity - if too bad then abort.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 356,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinMessageHandler",
+      "brief": "Constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 362,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinMessageHandler",
+      "brief": "Constructor to put to file pointer (won't be closed)",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "fp",
+          "type": "FILE *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 364,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinMessageHandler",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 366,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinMessageHandler",
+      "brief": "The copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinMessageHandler &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 368,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment operator.",
+      "detailed": "",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinMessageHandler &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 370,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clone",
+      "brief": "Clone.",
+      "detailed": "",
+      "return_type": "CoinMessageHandler *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 372,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "detail",
+      "brief": "Get detail level of a message.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "messageNumber",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "normalMessage",
+          "type": "const CoinMessages &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 377,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "logLevel",
+      "brief": "Get current log (detail) level.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 382,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setLogLevel",
+      "brief": "Set current log (detail) level.",
+      "detailed": "If the log level is equal or greater than the detail level of a message, the message will be printed. A rough convention for the amount of output expected is0 - none1 - minimal2 - normal low3 - normal high4 - verbose\nPlease assign log levels to messages accordingly. Log levels of 8 and above (8,16,32, etc.) are intended for selective debugging. The logical AND of the log level specified in the message and the current log level is used to determine if the message is printed. (In other words, you're using individual bits to determine which messages are printed.)",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 403,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "logLevel",
+      "brief": "Get alternative log level.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "which",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 405,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setLogLevel",
+      "brief": "Set alternative log level value.",
+      "detailed": "Can be used to store alternative log level information within the handler.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "which",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 413,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPrecision",
+      "brief": "Set the number of significant digits for printing floating point numbers.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "new_precision",
+          "type": "unsigned int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 416,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "precision",
+      "brief": "Current number of significant digits for printing floating point numbers.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 418,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPrefix",
+      "brief": "Switch message prefix on or off.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "yesNo",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 421,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "prefix",
+      "brief": "Current setting for printing message prefix.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 423,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "doubleValue",
+      "brief": "Values of double fields already processed.",
+      "detailed": "As the parameter for a double field is processed, the value is saved and can be retrieved using this function.",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "position",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 429,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberDoubleFields",
+      "brief": "Number of double fields already processed.",
+      "detailed": "Incremented each time a field of type double is processed.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 435,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "intValue",
+      "brief": "Values of integer fields already processed.",
+      "detailed": "As the parameter for a integer field is processed, the value is saved and can be retrieved using this function.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "position",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 442,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberIntFields",
+      "brief": "Number of integer fields already processed.",
+      "detailed": "Incremented each time a field of type integer is processed.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 448,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "charValue",
+      "brief": "Values of char fields already processed.",
+      "detailed": "As the parameter for a char field is processed, the value is saved and can be retrieved using this function.",
+      "return_type": "char",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "position",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 455,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberCharFields",
+      "brief": "Number of char fields already processed.",
+      "detailed": "Incremented each time a field of type char is processed.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 461,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "stringValue",
+      "brief": "Values of string fields already processed.",
+      "detailed": "As the parameter for a string field is processed, the value is saved and can be retrieved using this function.",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "position",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 468,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberStringFields",
+      "brief": "Number of string fields already processed.",
+      "detailed": "Incremented each time a field of type string is processed.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 474,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "currentMessage",
+      "brief": "Current message.",
+      "detailed": "",
+      "return_type": "CoinOneMessage",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 477,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "currentSource",
+      "brief": "Source of current message.",
+      "detailed": "",
+      "return_type": "std::string",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 480,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "messageBuffer",
+      "brief": "Output buffer.",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 483,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "highestNumber",
+      "brief": "Highest message number (indicates any errors)",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 488,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "filePointer",
+      "brief": "Get current file pointer.",
+      "detailed": "",
+      "return_type": "FILE *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 493,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setFilePointer",
+      "brief": "Set new file pointer.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "fp",
+          "type": "FILE *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 498,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "message",
+      "brief": "Start a message.",
+      "detailed": "Look up the specified message. A prefix will be generated if enabled. The message will be printed if the current log level is equal or greater than the log level of the message.",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "messageNumber",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "messages",
+          "type": "const CoinMessages &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 512,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "message",
+      "brief": "Start or continue a message.",
+      "detailed": "With detail = -1 (default), does nothing except return a reference to the handler. (I.e., msghandler.message() << \"foo\" is precisely equivalent to msghandler << \"foo\".) If `msgDetail` is >= 0, is will be used as the detail level to determine whether the message should print (assuming class 0).\nThis can be used with any of the << operators. One use is to start a message which will be constructed entirely from scratch. Another use is continuation of a message after code that interrupts the usual sequence of << operators.",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "detail",
+          "type": "int",
+          "description": "",
+          "default": "-1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 528,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "message",
+      "brief": "Print a complete message.",
+      "detailed": "Generate a standard prefix and append `msg` as is. This is intended as a transition mechanism. The standard prefix is generated (if enabled), and `msg` is appended. The message must be ended with a CoinMessageEol marker. Attempts to add content with << will have no effect.\nThe default value of `detail` will not change printing status. If `detail` is >= 0, it will be used as the detail level to determine whether the message should print (assuming class 0).",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "externalNumber",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "source",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "msg",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "severity",
+          "type": "char",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "detail",
+          "type": "int",
+          "description": "",
+          "default": "-1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 542,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator<<",
+      "brief": "Process an integer parameter value.",
+      "detailed": "The default format code is d.",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "intvalue",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 550,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator<<",
+      "brief": "Process a long integer parameter value.",
+      "detailed": "The default format code is ld.",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "longvalue",
+          "type": "long",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 555,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator<<",
+      "brief": "Process a long long integer parameter value.",
+      "detailed": "The default format code is lld.",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "longvalue",
+          "type": "long long",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 560,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator<<",
+      "brief": "Process a double parameter value.",
+      "detailed": "The default format code is d.",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "doublevalue",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 565,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator<<",
+      "brief": "Process a STL string parameter value.",
+      "detailed": "The default format code is g.",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "stringvalue",
+          "type": "const std::string &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 570,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator<<",
+      "brief": "Process a char parameter value.",
+      "detailed": "The default format code is s.",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "charvalue",
+          "type": "char",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 575,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator<<",
+      "brief": "Process a C-style string parameter value.",
+      "detailed": "The default format code is c.",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "stringvalue",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 580,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator<<",
+      "brief": "Process a marker.",
+      "detailed": "The default format code is s.",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "CoinMessageMarker",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 585,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "finish",
+      "brief": "Finish (and print) the message.",
+      "detailed": "Equivalent to using the CoinMessageEol marker.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 590,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "printing",
+      "brief": "Enable or disable printing of an optional portion of a message.",
+      "detailed": "Optional portions of a message are delimited by %? markers, and printing processes one %? marker. If `onOff` is true, the subsequent portion of the message (to the next %? marker or the end of the format string) will be printed. If `onOff` is false, printing is suppressed. Parameters must still be supplied, whether printing is suppressed or not. See the class documentation for an example.",
+      "return_type": "CoinMessageHandler &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "onOff",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessageHandler.hpp",
+      "source_line": 600,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

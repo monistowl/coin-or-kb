@@ -1,0 +1,709 @@
+{
+  "name": "CoinDynamicConflictGraph",
+  "qualified_name": "CoinDynamicConflictGraph",
+  "brief": "This a a conflict graph where conflicts can be added on the fly, not optimized for memory usage.",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinConflictGraph"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinDynamicConflictGraph",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "_size",
+          "type": "size_t",
+          "description": "number of vertices of the conflict graph",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 47,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinDynamicConflictGraph",
+      "brief": "Creates a conflict graph from a MILP.",
+      "detailed": "This constructor creates a conflict graph detecting conflicts from the MILP structure. After scanning the MILP, new recommended bounds for some variables can be discovered, these suggested bounds can be checked using method updatedBounds.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numCols",
+          "type": "const int",
+          "description": "number of variables",
+          "default": ""
+        },
+        {
+          "name": "colType",
+          "type": "const char *",
+          "description": "column types",
+          "default": ""
+        },
+        {
+          "name": "colLB",
+          "type": "const double *",
+          "description": "column lower bounds",
+          "default": ""
+        },
+        {
+          "name": "colUB",
+          "type": "const double *",
+          "description": "column upper bounds",
+          "default": ""
+        },
+        {
+          "name": "matrixByRow",
+          "type": "const CoinPackedMatrix *",
+          "description": "row-wise constraint matrix",
+          "default": ""
+        },
+        {
+          "name": "sense",
+          "type": "const char *",
+          "description": "row sense",
+          "default": ""
+        },
+        {
+          "name": "rowRHS",
+          "type": "const double *",
+          "description": "row right hand side",
+          "default": ""
+        },
+        {
+          "name": "rowRange",
+          "type": "const double *",
+          "description": "row ranges",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 66,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinDynamicConflictGraph",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 79,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addNodeConflicts",
+      "brief": "Add conflicts to a node to be stored directly (not as cliques).",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "node",
+          "type": "const size_t",
+          "description": "index",
+          "default": ""
+        },
+        {
+          "name": "nodeConflicts",
+          "type": "const size_t",
+          "description": "conflicts to be added",
+          "default": ""
+        },
+        {
+          "name": "nConflicts",
+          "type": "const size_t",
+          "description": "number of conflicts to be added",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 88,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addClique",
+      "brief": "Add a clique (it will be stored explicitly as a clique).",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 93,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "nCliques",
+      "brief": "Return the number of cliques stored explicitly.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 98,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "cliqueElements",
+      "brief": "Return the contents of the i-th clique stored explicitly.",
+      "detailed": "",
+      "return_type": "const size_t *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxClique",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 103,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "cliqueSize",
+      "brief": "Return the size of the i-th clique stored explicitly.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxClique",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 108,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "nNodeCliques",
+      "brief": "Return how many explicit cliques a node appears.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxNode",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 113,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "nodeCliques",
+      "brief": "Return which cliques a node appears.",
+      "detailed": "",
+      "return_type": "const size_t *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxNode",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 118,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "degree",
+      "brief": "Return the degree of a given node.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "node",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 123,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "modifiedDegree",
+      "brief": "Return the modified degree of a given node.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "node",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 128,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "nTotalCliqueElements",
+      "brief": "Total number of clique elements stored.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 133,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "nDirectConflicts",
+      "brief": "Return the number of pairwise conflicts stored for a node.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxNode",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 139,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "directConflicts",
+      "brief": "List of pairwise conflicts (not stored as cliques) for a node.",
+      "detailed": "",
+      "return_type": "const size_t *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxNode",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 145,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "nTotalDirectConflicts",
+      "brief": "Total number of conflicts stored directly.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 150,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addCliqueAsNormalConflicts",
+      "brief": "Add a clique as pairwise conflicts.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxs",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "len",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 155,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updatedBounds",
+      "brief": "Recommended tighter bounds for some variables.",
+      "detailed": "The construction of the conflict graph may discover new tighter bounds for some variables.",
+      "return_type": "const std::vector< std::pair< size_t, std::pair< double, double > > > &",
+      "return_desc": "a vector of updated bounds with the format (idx, (lb, ub))",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 165,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "printInfo",
+      "brief": "Print information about the conflict graph.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 170,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDegree",
+      "brief": "Sets the degree of a node.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxNode",
+          "type": "size_t",
+          "description": "index of the node",
+          "default": ""
+        },
+        {
+          "name": "deg",
+          "type": "size_t",
+          "description": "degree of the node",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 179,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "setModifiedDegree",
+      "brief": "Sets the modified degree of a node.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxNode",
+          "type": "size_t",
+          "description": "index of the node",
+          "default": ""
+        },
+        {
+          "name": "mdegree",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 187,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "getClqSize",
+      "brief": "Return the size of the i-th clique.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxClique",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 192,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "cliqueDetection",
+      "brief": "Try to detect cliques in a constraint.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "columns",
+          "type": "const std::vector< std::pair< size_t, double > > &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nz",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rhs",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 197,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "processClique",
+      "brief": "Add a clique.",
+      "detailed": "It will be stored explicitly or not depending on its size.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxs",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "size",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 203,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "processSmallCliquesNode",
+      "brief": "Process small cliques involving a given node.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "node",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "scn",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nscn",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "smallCliques",
+          "type": "const CoinCliqueList *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "iv",
+          "type": "char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 208,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "addTmpRow",
+      "brief": "Add a row in the temporary space.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "nz",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "",
+          "type": "const std::vector< std::pair< size_t, double > > &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rhs",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDynamicConflictGraph.hpp",
+      "source_line": 218,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

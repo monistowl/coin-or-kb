@@ -1,0 +1,149 @@
+{
+  "name": "CoinRelFltEq",
+  "qualified_name": "CoinRelFltEq",
+  "brief": "Equality to a scaled (relative) tolerance.",
+  "detailed": "Operands are considered equal if their difference is within a scaled epsilon calculated as epsilon_*(1+max(|f1|,|f2|)).\nThis is preferred over absolute tolerance when comparing values that span many orders of magnitude.",
+  "header_file": "layer-0/CoinUtils/src/CoinFloatEqual.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinFloatEqual.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinRelFltEq",
+      "brief": "",
+      "detailed": "Default constructor\nDefault tolerance is 1.0e-10.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinFloatEqual.hpp",
+      "source_line": 158,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinRelFltEq",
+      "brief": "Alternate constructor with epsilon as a parameter.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "epsilon",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFloatEqual.hpp",
+      "source_line": 173,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinRelFltEq",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinFloatEqual.hpp",
+      "source_line": 180,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinRelFltEq",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "src",
+          "type": "const CoinRelFltEq &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFloatEqual.hpp",
+      "source_line": 184,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment.",
+      "detailed": "",
+      "return_type": "CoinRelFltEq &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinRelFltEq &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFloatEqual.hpp",
+      "source_line": 191,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator()",
+      "brief": "Compare function.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "f1",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "f2",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinFloatEqual.hpp",
+      "source_line": 135,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

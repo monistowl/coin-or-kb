@@ -1,0 +1,236 @@
+{
+  "name": "CoinUnsignedIntArrayWithLength",
+  "qualified_name": "CoinUnsignedIntArrayWithLength",
+  "brief": "unsigned int * version",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinArrayWithLength"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "getSize",
+      "brief": "Get the size.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 1080,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "array",
+      "brief": "Get Array.",
+      "detailed": "",
+      "return_type": "unsigned int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 1085,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setSize",
+      "brief": "Set the size.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 1094,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "conditionalNew",
+      "brief": "Conditionally gets new array.",
+      "detailed": "",
+      "return_type": "unsigned int *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sizeWanted",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 1103,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinUnsignedIntArrayWithLength",
+      "brief": "Default constructor - NULL.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 1112,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinUnsignedIntArrayWithLength",
+      "brief": "Alternate Constructor - length in bytes - size_ -1.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 1118,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinUnsignedIntArrayWithLength",
+      "brief": "Alternate Constructor - length in bytes mode - 0 size_ set to size 1 size_ set to size and zeroed.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "mode",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 1127,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinUnsignedIntArrayWithLength",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinUnsignedIntArrayWithLength &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 1132,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinUnsignedIntArrayWithLength",
+      "brief": "Copy constructor.2.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinUnsignedIntArrayWithLength *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 1137,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment operator.",
+      "detailed": "",
+      "return_type": "CoinUnsignedIntArrayWithLength &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinUnsignedIntArrayWithLength &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 1142,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

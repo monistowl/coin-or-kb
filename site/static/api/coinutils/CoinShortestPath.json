@@ -1,0 +1,257 @@
+{
+  "name": "CoinShortestPath",
+  "qualified_name": "CoinShortestPath",
+  "brief": "Class that implements Dijkstra's algorithm for finding the shortest paths between nodes in a graph.",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinShortestPath",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "nodes",
+          "type": "size_t",
+          "description": "number of nodes in the graph",
+          "default": ""
+        },
+        {
+          "name": "arcs",
+          "type": "size_t",
+          "description": "number of arcs in the graph",
+          "default": ""
+        },
+        {
+          "name": "arcStart",
+          "type": "const size_t *",
+          "description": "array containing the start position of the neighbors of each node",
+          "default": ""
+        },
+        {
+          "name": "toNode",
+          "type": "const size_t *",
+          "description": "array containing the neighbors of all nodes",
+          "default": ""
+        },
+        {
+          "name": "dist",
+          "type": "const double *",
+          "description": "array containing the distance between each node and its neighbors.",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+      "source_line": 48,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinShortestPath",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+      "source_line": 53,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "find",
+      "brief": "Execute the shortest path finder using Dijkstra's algorithm.",
+      "detailed": "Find the shortest path from node origin to all the other nodes.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "origin",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+      "source_line": 60,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "find",
+      "brief": "Execute the shortest path finder using the Dijkstra algorithm.",
+      "detailed": "Find the shortest path from node origin to node destination.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "origin",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "destination",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+      "source_line": 66,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "path",
+      "brief": "Fill array indexes with all previous nodes which should be steped to arrive at a given node (this node is not included).",
+      "detailed": "Return how many nodes were filled in indexes.",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "toNode",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indexes",
+          "type": "size_t *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+      "source_line": 73,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numNodes",
+      "brief": "Return the number of nodes in the graph.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+      "source_line": 78,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numArcs",
+      "brief": "Return the number of arcs in the graph.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+      "source_line": 83,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "distance",
+      "brief": "Return the length of the shortest path from the origin node (passed in method find) to node.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "node",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+      "source_line": 90,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "previous",
+      "brief": "Return the previous node of a given node in the shortest path.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "node",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+      "source_line": 96,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "previous",
+      "brief": "Return an array containing the previous nodes which should be steped to arrive at a given node.",
+      "detailed": "",
+      "return_type": "const size_t *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinShortestPath.hpp",
+      "source_line": 103,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

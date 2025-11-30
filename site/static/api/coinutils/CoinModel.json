@@ -1,0 +1,4854 @@
+{
+  "name": "CoinModel",
+  "qualified_name": "CoinModel",
+  "brief": "This is a simple minded model which is stored in a format which makes it easier to construct and modify but not efficient for algorithms.",
+  "detailed": "It has to be passed across to ClpModel or OsiSolverInterface by addRows, addCol(umn)s or loadProblem.\nIt may have up to four parts - 1) A matrix of doubles (or strings - see note A) 2) Column information including integer information and names 3) Row information including names 4) Quadratic objective (not implemented - but see A)\nThis class is meant to make it more efficient to build a model. It is at its most efficient when all additions are done as addRow or as addCol but not mixed. If only 1 and 2 exist then solver.addColumns may be used to pass to solver, if only 1 and 3 exist then solver.addRows may be used. Otherwise solver.loadProblem must be used.\nIf addRows and addColumns are mixed or if individual elements are set then the speed will drop to some extent and more memory will be used.\nIt is also possible to iterate over existing elements and to access columns and rows by name. Again each of these use memory and cpu time. However memory is unlikely to be critical as most algorithms will use much more.\nNotes: A) Although this could be used to pass nonlinear information around the only use at present is to have named values e.g. value1 which can then be set to a value after model is created. I have no idea whether that could be useful but I thought it might be fun. Quadratic terms are allowed in strings! A solver could try and use this if so - the convention is that 0.5* quadratic is stored\nB) This class could be useful for modeling.",
+  "header_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinBaseModel"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "addRow",
+      "brief": "add a row - numberInRow may be zero",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberInRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columns",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowLower",
+          "type": "double",
+          "description": "",
+          "default": "-"
+        },
+        {
+          "name": "rowUpper",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "name",
+          "type": "const char *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 201,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addColumn",
+      "brief": "add a column - numberInColumn may be zero */",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberInColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rows",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "double",
+          "description": "",
+          "default": "0.0"
+        },
+        {
+          "name": "columnUpper",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "objectiveValue",
+          "type": "double",
+          "description": "",
+          "default": "0.0"
+        },
+        {
+          "name": "name",
+          "type": "const char *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "isInteger",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 205,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addCol",
+      "brief": "add a column - numberInColumn may be zero */",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberInColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rows",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "double",
+          "description": "",
+          "default": "0.0"
+        },
+        {
+          "name": "columnUpper",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "objectiveValue",
+          "type": "double",
+          "description": "",
+          "default": "0.0"
+        },
+        {
+          "name": "name",
+          "type": "const char *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "isInteger",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 211,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator()",
+      "brief": "Sets value for row i and column j.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 221,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setElement",
+      "brief": "Sets value for row i and column j.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 226,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRow",
+      "brief": "Gets sorted row - user must provide enough space (easiest is allocate number of columns).",
+      "detailed": "If column or element NULL then just returns number Returns number of elements",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 232,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumn",
+      "brief": "Gets sorted column - user must provide enough space (easiest is allocate number of rows).",
+      "detailed": "If row or element NULL then just returns number Returns number of elements",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 238,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setQuadraticElement",
+      "brief": "Sets quadratic value for column i and j.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 240,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator()",
+      "brief": "Sets value for row i and column j as string.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 242,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setElement",
+      "brief": "Sets value for row i and column j as string.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 247,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "associateElement",
+      "brief": "Associates a string with a value. Returns string id (or -1 if does not exist)",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "stringValue",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 249,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowLower",
+      "brief": "Sets rowLower (if row does not exist then all rows up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowLower",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 253,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowUpper",
+      "brief": "Sets rowUpper (if row does not exist then all rows up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowUpper",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 257,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowBounds",
+      "brief": "Sets rowLower and rowUpper (if row does not exist then all rows up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowLower",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowUpper",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 261,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowName",
+      "brief": "Sets name (if row does not exist then all rows up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 265,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnLower",
+      "brief": "Sets columnLower (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 269,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnUpper",
+      "brief": "Sets columnUpper (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 273,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnBounds",
+      "brief": "Sets columnLower and columnUpper (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 277,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnObjective",
+      "brief": "Sets columnObjective (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnObjective",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 281,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnName",
+      "brief": "Sets name (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 285,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnIsInteger",
+      "brief": "Sets integer state (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnIsInteger",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 289,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setObjective",
+      "brief": "Sets columnObjective (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnObjective",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 293,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setIsInteger",
+      "brief": "Sets integer state (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnIsInteger",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 300,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setInteger",
+      "brief": "Sets integer (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 307,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setContinuous",
+      "brief": "Sets continuous (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 314,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColLower",
+      "brief": "Sets columnLower (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 321,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColUpper",
+      "brief": "Sets columnUpper (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 328,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColBounds",
+      "brief": "Sets columnLower and columnUpper (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 335,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColObjective",
+      "brief": "Sets columnObjective (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnObjective",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 342,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColName",
+      "brief": "Sets name (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 349,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "Coin8CharacterName",
+      "brief": "Create a name in field given a sequence number - allows >10000000.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowColumn",
+          "type": "char",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "number",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "field",
+          "type": "char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 354,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColIsInteger",
+      "brief": "Sets integer (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnIsInteger",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 358,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowLower",
+      "brief": "Sets rowLower (if row does not exist then all rows up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowLower",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 365,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowUpper",
+      "brief": "Sets rowUpper (if row does not exist then all rows up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowUpper",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 369,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnLower",
+      "brief": "Sets columnLower (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 373,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnUpper",
+      "brief": "Sets columnUpper (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 377,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnObjective",
+      "brief": "Sets columnObjective (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnObjective",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 381,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnIsInteger",
+      "brief": "Sets integer (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnIsInteger",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 385,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setObjective",
+      "brief": "Sets columnObjective (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnObjective",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 389,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setIsInteger",
+      "brief": "Sets integer (if column does not exist then all columns up to this are defined with default values and no elements)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnIsInteger",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 396,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteRow",
+      "brief": "Deletes all entries in row and bounds.",
+      "detailed": "Will be ignored by writeMps etc and will be packed down if asked for.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 402,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteColumn",
+      "brief": "Deletes all entries in column and bounds and objective.",
+      "detailed": "Will be ignored by writeMps etc and will be packed down if asked for.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 405,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteCol",
+      "brief": "Deletes all entries in column and bounds.",
+      "detailed": "If last column the number of columns will be decremented and true returned.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 408,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteElement",
+      "brief": "Takes element out of matrix - returning position (<0 if not there);.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 413,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteThisElement",
+      "brief": "Takes element out of matrix when position known.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "position",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 415,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "packRows",
+      "brief": "Packs down all rows i.e.",
+      "detailed": "removes empty rows permanently. Empty rows have no elements and feasible bounds. returns number of rows deleted.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 418,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "packColumns",
+      "brief": "Packs down all columns i.e.",
+      "detailed": "removes empty columns permanently. Empty columns have no elements and no objective. returns number of columns deleted.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 421,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "packCols",
+      "brief": "Packs down all columns i.e.",
+      "detailed": "removes empty columns permanently. Empty columns have no elements and no objective. returns number of columns deleted.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 424,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "pack",
+      "brief": "Packs down all rows and columns.",
+      "detailed": "i.e. removes empty rows and columns permanently. Empty rows have no elements and feasible bounds. Empty columns have no elements and no objective. returns number of rows+columns deleted.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 432,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setObjective",
+      "brief": "Sets columnObjective array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "objective",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 436,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnLower",
+      "brief": "Sets columnLower array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 439,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColLower",
+      "brief": "Sets columnLower array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 442,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColumnUpper",
+      "brief": "Sets columnUpper array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 448,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColUpper",
+      "brief": "Sets columnUpper array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 451,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowLower",
+      "brief": "Sets rowLower array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowLower",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 457,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowUpper",
+      "brief": "Sets rowUpper array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowUpper",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 460,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "writeMps",
+      "brief": "Write the problem in MPS format to a file with the given filename.",
+      "detailed": "not const as may change model e.g. fill in default bounds",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "filename",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "compression",
+          "type": "int",
+          "description": "can be set to three values to indicate what kind of file should be written 0: plain text (default)\n1: gzip compressed (.gz is appended to `filename`)\n2: bzip2 compressed (.bz2 is appended to `filename`) (TODO)\nIf the library was not compiled with the requested compression then writeMps falls back to writing a plain text file.",
+          "default": "0"
+        },
+        {
+          "name": "formatType",
+          "type": "int",
+          "description": "specifies the precision to used for values in the MPS file 0: normal precision (default)\n1: extra accuracy\n2: IEEE hex",
+          "default": "0"
+        },
+        {
+          "name": "numberAcross",
+          "type": "int",
+          "description": "specifies whether 1 or 2 (default) values should be specified on every data line in the MPS file.",
+          "default": "2"
+        },
+        {
+          "name": "keepStrings",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 487,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "differentModel",
+      "brief": "Check two models against each other.",
+      "detailed": "Return nonzero if different. Ignore names if that set. May modify both models by cleaning up",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "other",
+          "type": "CoinModel &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ignoreNames",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 494,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "passInMatrix",
+      "brief": "Pass in CoinPackedMatrix (and switch off element updates)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 500,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "convertMatrix",
+      "brief": "Convert elements to CoinPackedMatrix (and switch off element updates).",
+      "detailed": "Returns number of errors",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 503,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "packedMatrix",
+      "brief": "Return a pointer to CoinPackedMatrix (or NULL)",
+      "detailed": "",
+      "return_type": "const CoinPackedMatrix *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 505,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "originalRows",
+      "brief": "Return pointers to original rows (for decomposition)",
+      "detailed": "",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 510,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "originalColumns",
+      "brief": "Return pointers to original columns (for decomposition)",
+      "detailed": "",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 515,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberElements",
+      "brief": "Return number of elements.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 524,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "elements",
+      "brief": "Return elements as triples.",
+      "detailed": "",
+      "return_type": "const CoinModelTriple *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 529,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator()",
+      "brief": "Returns value for row i and column j.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 534,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getElement",
+      "brief": "Returns value for row i and column j.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 539,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator()",
+      "brief": "Returns value for row rowName and column columnName.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 541,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getElement",
+      "brief": "Returns value for row rowName and column columnName.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 546,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getQuadraticElement",
+      "brief": "Returns quadratic value for columns i and j.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 548,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getElementAsString",
+      "brief": "Returns value for row i and column j as string.",
+      "detailed": "Returns NULL if does not exist. Returns \"Numeric\" if not a string",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 553,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "pointer",
+      "brief": "Returns pointer to element for row i column j.",
+      "detailed": "Only valid until next modification. NULL if element does not exist",
+      "return_type": "double *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 557,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "position",
+      "brief": "Returns position in elements for row i column j.",
+      "detailed": "Only valid until next modification. -1 if element does not exist",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 561,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "firstInRow",
+      "brief": "Returns first element in given row - index is -1 if none.",
+      "detailed": "Index is given by .index and value by .value",
+      "return_type": "CoinModelLink",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 566,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "lastInRow",
+      "brief": "Returns last element in given row - index is -1 if none.",
+      "detailed": "Index is given by .index and value by .value",
+      "return_type": "CoinModelLink",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 570,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "firstInColumn",
+      "brief": "Returns first element in given column - index is -1 if none.",
+      "detailed": "Index is given by .index and value by .value",
+      "return_type": "CoinModelLink",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 574,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "lastInColumn",
+      "brief": "Returns last element in given column - index is -1 if none.",
+      "detailed": "Index is given by .index and value by .value",
+      "return_type": "CoinModelLink",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 578,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "next",
+      "brief": "Returns next element in current row or column - index is -1 if none.",
+      "detailed": "Index is given by .index and value by .value. User could also tell because input.next would be NULL",
+      "return_type": "CoinModelLink",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "current",
+          "type": "CoinModelLink &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 583,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "previous",
+      "brief": "Returns previous element in current row or column - index is -1 if none.",
+      "detailed": "Index is given by .index and value by .value. User could also tell because input.previous would be NULL May not be correct if matrix updated.",
+      "return_type": "CoinModelLink",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "current",
+          "type": "CoinModelLink &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 589,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "firstInQuadraticColumn",
+      "brief": "Returns first element in given quadratic column - index is -1 if none.",
+      "detailed": "Index is given by .index and value by .value May not be correct if matrix updated.",
+      "return_type": "CoinModelLink",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 594,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "lastInQuadraticColumn",
+      "brief": "Returns last element in given quadratic column - index is -1 if none.",
+      "detailed": "Index is given by .index and value by .value",
+      "return_type": "CoinModelLink",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 598,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowLower",
+      "brief": "Gets rowLower (if row does not exist then -COIN_DBL_MAX)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 601,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowUpper",
+      "brief": "Gets rowUpper (if row does not exist then +COIN_DBL_MAX)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 604,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowName",
+      "brief": "Gets name (if row does not exist then NULL)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 607,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowLower",
+      "brief": "",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 608,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowUpper",
+      "brief": "Gets rowUpper (if row does not exist then COIN_DBL_MAX)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 614,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowName",
+      "brief": "Gets name (if row does not exist then NULL)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 620,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumnLower",
+      "brief": "Gets columnLower (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 626,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumnUpper",
+      "brief": "Gets columnUpper (if column does not exist then COIN_DBL_MAX)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 629,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumnObjective",
+      "brief": "Gets columnObjective (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 632,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumnName",
+      "brief": "Gets name (if column does not exist then NULL)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 635,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumnIsInteger",
+      "brief": "Gets if integer (if column does not exist then false)",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 638,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnLower",
+      "brief": "Gets columnLower (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 641,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnUpper",
+      "brief": "Gets columnUpper (if column does not exist then COIN_DBL_MAX)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 647,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnObjective",
+      "brief": "Gets columnObjective (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 653,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "objective",
+      "brief": "Gets columnObjective (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 659,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnName",
+      "brief": "Gets name (if column does not exist then NULL)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 665,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnIsInteger",
+      "brief": "Gets if integer (if column does not exist then false)",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 671,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isInteger",
+      "brief": "Gets if integer (if column does not exist then false)",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 677,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColLower",
+      "brief": "Gets columnLower (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 683,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColUpper",
+      "brief": "Gets columnUpper (if column does not exist then COIN_DBL_MAX)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 689,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColObjective",
+      "brief": "Gets columnObjective (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 695,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColName",
+      "brief": "Gets name (if column does not exist then NULL)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 701,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColIsInteger",
+      "brief": "Gets if integer (if column does not exist then false)",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 707,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowLowerAsString",
+      "brief": "Gets rowLower (if row does not exist then -COIN_DBL_MAX)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 713,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowUpperAsString",
+      "brief": "Gets rowUpper (if row does not exist then +COIN_DBL_MAX)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 716,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowLowerAsString",
+      "brief": "",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 717,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowUpperAsString",
+      "brief": "Gets rowUpper (if row does not exist then COIN_DBL_MAX)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 723,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumnLowerAsString",
+      "brief": "Gets columnLower (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 729,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumnUpperAsString",
+      "brief": "Gets columnUpper (if column does not exist then COIN_DBL_MAX)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 732,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumnObjectiveAsString",
+      "brief": "Gets columnObjective (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 735,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColumnIsIntegerAsString",
+      "brief": "Gets if integer (if column does not exist then false)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 738,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnLowerAsString",
+      "brief": "Gets columnLower (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 741,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnUpperAsString",
+      "brief": "Gets columnUpper (if column does not exist then COIN_DBL_MAX)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 747,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnObjectiveAsString",
+      "brief": "Gets columnObjective (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 753,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "objectiveAsString",
+      "brief": "Gets columnObjective (if column does not exist then 0.0)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 759,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnIsIntegerAsString",
+      "brief": "Gets if integer (if column does not exist then false)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 765,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isIntegerAsString",
+      "brief": "Gets if integer (if column does not exist then false)",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichColumn",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 771,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "row",
+      "brief": "Row index from row name (-1 if no names or no match)",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 776,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "column",
+      "brief": "Column index from column name (-1 if no names or no match)",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "columnName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 778,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "type",
+      "brief": "Returns type.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 780,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "unsetValue",
+      "brief": "returns unset value",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 785,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "createPackedMatrix",
+      "brief": "Creates a packed matrix - return number of errors.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "associated",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 790,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "countPlusMinusOne",
+      "brief": "Fills in startPositive and startNegative with counts for +-1 matrix.",
+      "detailed": "If not +-1 then startPositive[0]==-1 otherwise counts and startPositive[numberColumns]== sizereturn number of errors",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "startPositive",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "startNegative",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "associated",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 797,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "createPlusMinusOne",
+      "brief": "Creates +-1 matrix given startPositive and startNegative counts for +-1 matrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "startPositive",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "startNegative",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indices",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "associated",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 801,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "createArrays",
+      "brief": "Creates copies of various arrays - return number of errors.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowLower",
+          "type": "double *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowUpper",
+          "type": "double *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "double *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "double *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "objective",
+          "type": "double *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "integerType",
+          "type": "int *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "associated",
+          "type": "double *&",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 805,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "stringsExist",
+      "brief": "Says if strings exist.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 810,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "stringArray",
+      "brief": "Return string array.",
+      "detailed": "",
+      "return_type": "const CoinModelHash *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 815,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "associatedArray",
+      "brief": "Returns associated array.",
+      "detailed": "",
+      "return_type": "double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 820,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowLowerArray",
+      "brief": "Return rowLower array.",
+      "detailed": "",
+      "return_type": "double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 825,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowUpperArray",
+      "brief": "Return rowUpper array.",
+      "detailed": "",
+      "return_type": "double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 830,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnLowerArray",
+      "brief": "Return columnLower array.",
+      "detailed": "",
+      "return_type": "double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 835,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnUpperArray",
+      "brief": "Return columnUpper array.",
+      "detailed": "",
+      "return_type": "double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 840,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "objectiveArray",
+      "brief": "Return objective array.",
+      "detailed": "",
+      "return_type": "double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 845,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "integerTypeArray",
+      "brief": "Return integerType array.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 850,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowNames",
+      "brief": "Return row names array.",
+      "detailed": "",
+      "return_type": "const CoinModelHash *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 855,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "columnNames",
+      "brief": "Return column names array.",
+      "detailed": "",
+      "return_type": "const CoinModelHash *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 860,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "zapRowNames",
+      "brief": "Reset row names.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 865,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "zapColumnNames",
+      "brief": "Reset column names.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 870,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "cutMarker",
+      "brief": "Returns array of 0 or nonzero if can be a cut (or returns NULL)",
+      "detailed": "",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 875,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "optimizationDirection",
+      "brief": "Direction of optimization (1 - minimize, -1 - maximize, 0 - ignore.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 880,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setOptimizationDirection",
+      "brief": "Set direction of optimization (1 - minimize, -1 - maximize, 0 - ignore.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 885,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "moreInfo",
+      "brief": "Return pointer to more information.",
+      "detailed": "",
+      "return_type": "void *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 890,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMoreInfo",
+      "brief": "Set pointer to more information.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "info",
+          "type": "void *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 895,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "whatIsSet",
+      "brief": "Returns which parts of model are set 1 - matrix 2 - rhs 4 - row names 8 - column bounds and/or objective 16 - column names 32 - integer types.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 907,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "loadBlock",
+      "brief": "Load in a problem by copying the arguments. The constraints on the rows are given by lower and upper bounds.",
+      "detailed": "If a pointer is 0 then the following values are the default: `colub`: all columns have upper bound infinity\n`collb`: all columns have lower bound 0\n`rowub`: all rows have upper bound infinity\n`rowlb`: all rows have lower bound -infinity\n`obj`: all variables have 0 objective coefficient\nNote that the default values for rowub and rowlb produce the constraint -infty <= ax <= infty. This is probably not what you want.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "obj",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowlb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 927,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "loadBlock",
+      "brief": "Load in a problem by copying the arguments. The constraints on the rows are given by sense/rhs/range triplets.",
+      "detailed": "If a pointer is 0 then the following values are the default: `colub`: all columns have upper bound infinity\n`collb`: all columns have lower bound 0\n`obj`: all variables have 0 objective coefficient\n`rowsen`: all rows are >=\n`rowrhs`: all right hand sides are 0\n`rowrng`: 0 for the ranged rows\nNote that the default values for rowsen, rowrhs, and rowrng produce the constraint ax >= 0.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "obj",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowsen",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowrhs",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowrng",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 947,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "loadBlock",
+      "brief": "Load in a problem by copying the arguments. The constraint matrix is is specified with standard column-major column starts / row indices / coefficients vectors. The constraints on the rows are given by lower and upper bounds.",
+      "detailed": "The matrix vectors must be gap-free. Note that `start` must have `numcols+1` entries so that the length of the last column can be calculated as `start[numcols]-start[numcols-1]`.\nSee the previous loadBlock method using rowlb and rowub for default argument values.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numcols",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numrows",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "start",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "index",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "obj",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowlb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 965,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "loadBlock",
+      "brief": "Load in a problem by copying the arguments. The constraint matrix is is specified with standard column-major column starts / row indices / coefficients vectors. The constraints on the rows are given by sense/rhs/range triplets.",
+      "detailed": "The matrix vectors must be gap-free. Note that `start` must have `numcols+1` entries so that the length of the last column can be calculated as `start[numcols]-start[numcols-1]`.\nSee the previous loadBlock method using sense/rhs/range for default argument values.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numcols",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numrows",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "start",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "index",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collb",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colub",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "obj",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowsen",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowrhs",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowrng",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 984,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinModel",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 997,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinModel",
+      "brief": "Constructor with sizes.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "firstRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "firstColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "firstElements",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "noNames",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 999,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinModel",
+      "brief": "Read a problem in MPS or GAMS format from the given filename.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "fileName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "allowStrings",
+          "type": "int",
+          "description": "",
+          "default": "0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1002,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinModel",
+      "brief": "Read a problem from AMPL nl file, if linked against ASL.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "nonLinear",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "fileName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "info",
+          "type": "const void *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1005,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinModel",
+      "brief": "From arrays.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "matrix",
+          "type": "const CoinPackedMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowLower",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rowUpper",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnLower",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "columnUpper",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "objective",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1007,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clone",
+      "brief": "Clone.",
+      "detailed": "",
+      "return_type": "CoinBaseModel *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1013,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinModel",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1016,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinModel",
+      "brief": "The copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinModel &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1022,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "=",
+      "detailed": "",
+      "return_type": "CoinModel &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinModel &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1024,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "validateLinks",
+      "brief": "Checks that links are consistent.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1030,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "computeAssociated",
+      "brief": "Fills in all associated - returning number of errors.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "associated",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1057,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "quadraticRow",
+      "brief": "Gets correct form for a quadratic row - user to delete If row is not quadratic then returns which other variables are involved with tiny (1.0e-100) elements and count of total number of variables which could not be put in quadratic form.",
+      "detailed": "",
+      "return_type": "CoinPackedMatrix *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowNumber",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "linear",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberBad",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1063,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "replaceQuadraticRow",
+      "brief": "Replaces a quadratic row.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rowNumber",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "linear",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "quadraticPart",
+          "type": "const CoinPackedMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1066,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "reorder",
+      "brief": "If possible return a model where if all variables marked nonzero are fixed the problem will be linear.",
+      "detailed": "At present may only work if quadratic. Returns NULL if not possible",
+      "return_type": "CoinModel *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "mark",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1071,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setCutMarker",
+      "brief": "Sets cut marker array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "marker",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1073,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPriorities",
+      "brief": "Sets priority array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "priorities",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1075,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "priorities",
+      "brief": "priorities (given for all columns (-1 if not integer)",
+      "detailed": "",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1077,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setOriginalIndices",
+      "brief": "For decomposition set original row and column indices.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1082,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "resize",
+      "brief": "Resize.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "maximumRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "maximumColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "maximumElements",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1034,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "fillRows",
+      "brief": "Fill in default row information.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "which",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "forceCreation",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "fromAddRow",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1036,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "fillColumns",
+      "brief": "Fill in default column information.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "which",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "forceCreation",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "fromAddColumn",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1038,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "fillList",
+      "brief": "Fill in default linked list information (1= row, 2 = column) Marked as const as list is mutable.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "which",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "list",
+          "type": "CoinModelLinkedList &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "type",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1041,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "createList",
+      "brief": "Create a linked list and synchronize free type 1 for row 2 for column Marked as const as list is mutable.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1045,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "addString",
+      "brief": "Adds one string, returns index.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "string",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1047,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "getDoubleFromString",
+      "brief": "Gets a double from a string possibly containing named strings, returns unset if not found.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "info",
+          "type": "CoinYacc &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "string",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1051,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "freeStringMemory",
+      "brief": "Frees value memory.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "info",
+          "type": "CoinYacc &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1053,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "gdb",
+      "brief": "Read a problem from AMPL nl file so not constructor so gdb will work.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "nonLinear",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "fileName",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "info",
+          "type": "const void *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1088,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "decodeBit",
+      "brief": "returns jColumn (-2 if linear term, -1 if unknown) and coefficient",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "phrase",
+          "type": "char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nextPhrase",
+          "type": "char *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "coefficient",
+          "type": "double &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ifFirst",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1090,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "badType",
+      "brief": "Aborts with message about packedMatrix.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModel.hpp",
+      "source_line": 1092,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

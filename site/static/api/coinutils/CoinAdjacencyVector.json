@@ -1,0 +1,367 @@
+{
+  "name": "CoinAdjacencyVector",
+  "qualified_name": "CoinAdjacencyVector",
+  "brief": "A class to store a (growable) list of neighbors for each node in a conflict graph.",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinAdjacencyVector",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "_nRows",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "_iniRowSize",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 36,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRow",
+      "brief": "Return the contents of a given row.",
+      "detailed": "",
+      "return_type": "const size_t *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxRow",
+          "type": "size_t",
+          "description": "row index",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 43,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowSize",
+      "brief": "Return the size of a given row.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxRow",
+          "type": "size_t",
+          "description": "row index",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 50,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isNeighbor",
+      "brief": "Check if a node is included as neighbor of another node.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxNode",
+          "type": "size_t",
+          "description": "graph node",
+          "default": ""
+        },
+        {
+          "name": "idxNeigh",
+          "type": "size_t",
+          "description": "neighbor that will be searched",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 58,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addNeighbor",
+      "brief": "Add a new neighbor to a node.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxNode",
+          "type": "size_t",
+          "description": "graph node",
+          "default": ""
+        },
+        {
+          "name": "idxNeigh",
+          "type": "size_t",
+          "description": "neighbor that will be added to idxNode",
+          "default": ""
+        },
+        {
+          "name": "addReverse",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 66,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "fastAddNeighbor",
+      "brief": "Add a new neighbor to a node without checking for repeated entries or sorting.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxNode",
+          "type": "size_t",
+          "description": "graph node",
+          "default": ""
+        },
+        {
+          "name": "idxNeigh",
+          "type": "size_t",
+          "description": "neighbor that will be added to idxNode",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 75,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addNeighborsBuffer",
+      "brief": "Add elements without checking for repeated entries or sorting later.",
+      "detailed": "A method should be called to rearrange things.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxNode",
+          "type": "size_t",
+          "description": "graph node",
+          "default": ""
+        },
+        {
+          "name": "n",
+          "type": "size_t",
+          "description": "number of neighbors that will be added to idxNode",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const size_t",
+          "description": "neighbors that will be added to idxNode",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 86,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "sort",
+      "brief": "Sort all neighbors of all elements.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 91,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "flush",
+      "brief": "Sort all neighbors of all elements and remove duplicates.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 97,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "sort",
+      "brief": "Sort all neighbors of idxRow.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxRow",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 102,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinAdjacencyVector",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 107,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "totalElements",
+      "brief": "Return the total number of elements.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 121,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "tryAddElementSortedVector",
+      "brief": "Try to add an element to a sorted vector, keeping it sorted.",
+      "detailed": "Return `true` if element was added and `false` if it was already there.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "el",
+          "type": "std::vector< size_t > &",
+          "description": "sorted vector",
+          "default": ""
+        },
+        {
+          "name": "newEl",
+          "type": "size_t",
+          "description": "element to be added to the sorted vector",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 116,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "checkCapNode",
+      "brief": "Check if a node can receive a new neighbor.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxNode",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "newEl",
+          "type": "const size_t",
+          "description": "",
+          "default": "1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinAdjacencyVector.hpp",
+      "source_line": 137,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

@@ -1,0 +1,657 @@
+{
+  "name": "CoinDenseVector",
+  "qualified_name": "CoinDenseVector",
+  "brief": "Dense Vector.",
+  "detailed": "Stores a dense (or expanded) vector of floating point values. Type of vector elements is controlled by templating. (Some working quantities such as accumulated sums are explicitly declared of type double). This allows the components of the vector integer, single or double precision.\nHere is a sample usage: const int ne = 4;\n    double el[ne] = { 10., 40., 1., 50. }\n\n    // Create vector and set its value\n    CoinDenseVector<double> r(ne,el);\n\n    // access each element\n    assert( r.getElements()[0]==10. );\n    assert( r.getElements()[1]==40. );\n    assert( r.getElements()[2]== 1. );\n    assert( r.getElements()[3]==50. );\n\n    // Test for equality\n    CoinDenseVector<double> r1;\n    r1=r;\n\n    // Add dense vectors.\n    // Similarly for subtraction, multiplication,\n    // and division.\n    CoinDenseVector<double> add = r + r1;\n    assert( add[0] == 10.+10. );\n    assert( add[1] == 40.+40. );\n    assert( add[2] ==  1.+ 1. );\n    assert( add[3] == 50.+50. );\n\n    assert( r.sum() == 10.+40.+1.+50. );",
+  "header_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "getNumElements",
+      "brief": "Get the size.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 95,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "size",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 96,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getElements",
+      "brief": "Get element values.",
+      "detailed": "",
+      "return_type": "const T *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 98,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getElements",
+      "brief": "Get element values.",
+      "detailed": "",
+      "return_type": "T *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 100,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clear",
+      "brief": "Reset the vector (i.e. set all elemenets to zero)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 109,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment operator.",
+      "detailed": "",
+      "return_type": "CoinDenseVector &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinDenseVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 111,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator[]",
+      "brief": "Member of array operator.",
+      "detailed": "",
+      "return_type": "T &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 113,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator[]",
+      "brief": "Member of array operator.",
+      "detailed": "",
+      "return_type": "const T &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 115,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setVector",
+      "brief": "Set vector size, and elements.",
+      "detailed": "Size is the length of the elements vector. The element vector is copied into this class instance's member data.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "const T *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 121,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setConstant",
+      "brief": "Elements set to have the same scalar value.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "T",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 124,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setElement",
+      "brief": "Set an existing element in the dense vector The first argument is the \"index\" into the elements() array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "T",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 129,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "resize",
+      "brief": "Resize the dense vector to be the first newSize elements.",
+      "detailed": "If length is decreased, vector is truncated. If increased new entries, set to new default element",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newSize",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "fill",
+          "type": "T",
+          "description": "",
+          "default": "T()"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 133,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "append",
+      "brief": "Append a dense vector to this dense vector.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinDenseVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 136,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "oneNorm",
+      "brief": "1-norm of vector",
+      "detailed": "",
+      "return_type": "T",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 142,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "twoNorm",
+      "brief": "2-norm of vector",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 150,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "infNorm",
+      "brief": "infinity-norm of vector",
+      "detailed": "",
+      "return_type": "T",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 160,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "sum",
+      "brief": "sum of vector elements",
+      "detailed": "",
+      "return_type": "T",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 168,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "scale",
+      "brief": "scale vector elements",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "factor",
+          "type": "T",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 173,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator+=",
+      "brief": "add `value` to every entry",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "T",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 184,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator-=",
+      "brief": "subtract `value` from every entry",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "T",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 186,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator*=",
+      "brief": "multiply every entry by `value`",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "T",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 188,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator/=",
+      "brief": "divide every entry by `value`",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "T",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 190,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinDenseVector",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 196,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinDenseVector",
+      "brief": "Alternate Constructors - set elements to vector of Ts.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "const T *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 198,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinDenseVector",
+      "brief": "Alternate Constructors - set elements to same scalar value.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "T",
+          "description": "",
+          "default": "T()"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 200,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinDenseVector",
+      "brief": "Copy constructors.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinDenseVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 202,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinDenseVector",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 205,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "gutsOfSetVector",
+      "brief": "Copy internal data.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "const T *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 212,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "gutsOfSetConstant",
+      "brief": "Set all elements to a given value.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "T",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinDenseVector.hpp",
+      "source_line": 214,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

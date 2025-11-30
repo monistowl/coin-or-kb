@@ -1,0 +1,202 @@
+{
+  "name": "dupcol_action",
+  "qualified_name": "dupcol_action",
+  "brief": "Detect and remove duplicate columns.",
+  "detailed": "The general technique is to sum the coefficients a_(*,j) of each column. Columns with identical sums are duplicates. The obvious problem is that, e.g., [1 0 1 0] and [0 1 0 1] both add to 2. To minimize the chances of false positives, the coefficients of each row are multipled by a random number r_i, so that we sum r_i*a_ij.\nCandidate columns are checked to confirm they are identical. Where the columns have the same objective coefficient, the two are combined. If the columns have different objective coefficients, complications ensue. In order to remove the duplicate, it must be possible to fix the variable at a bound.",
+  "header_file": "layer-0/CoinUtils/src/CoinPresolveDupcol.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinPresolveDupcol.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinPresolveAction"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "dupcol_action",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveDupcol.hpp",
+      "source_line": 40,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "dupcol_action",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const dupcol_action &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveDupcol.hpp",
+      "source_line": 41,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "operator=",
+      "brief": "",
+      "detailed": "",
+      "return_type": "dupcol_action &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const dupcol_action &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveDupcol.hpp",
+      "source_line": 42,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "dupcol_action",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "nactions",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "actions",
+          "type": "const action *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "next",
+          "type": "const CoinPresolveAction *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveDupcol.hpp",
+      "source_line": 60,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "name",
+      "brief": "A name for debug printing.",
+      "detailed": "It is expected that the name is not stored in the transform itself.",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveDupcol.hpp",
+      "source_line": 69,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "postsolve",
+      "brief": "Apply the postsolve transformation for this particular presolve action.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "prob",
+          "type": "CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveDupcol.hpp",
+      "source_line": 74,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~dupcol_action",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveDupcol.hpp",
+      "source_line": 76,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve",
+      "brief": "",
+      "detailed": "",
+      "return_type": "const CoinPresolveAction *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "prob",
+          "type": "CoinPresolveMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "next",
+          "type": "const CoinPresolveAction *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveDupcol.hpp",
+      "source_line": 71,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

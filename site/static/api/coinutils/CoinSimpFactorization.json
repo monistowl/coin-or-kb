@@ -1,0 +1,1844 @@
+{
+  "name": "CoinSimpFactorization",
+  "qualified_name": "CoinSimpFactorization",
+  "brief": "",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinOtherFactorization"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinSimpFactorization",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 51,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinSimpFactorization",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "other",
+          "type": "const CoinSimpFactorization &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 53,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinSimpFactorization",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 56,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "= copy",
+      "detailed": "",
+      "return_type": "CoinSimpFactorization &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "other",
+          "type": "const CoinSimpFactorization &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 58,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clone",
+      "brief": "Clone.",
+      "detailed": "",
+      "return_type": "CoinOtherFactorization *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 60,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getAreas",
+      "brief": "Gets space for a factorization.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "maximumL",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "maximumU",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 66,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "preProcess",
+      "brief": "PreProcesses column ordered copy of basis.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 72,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "factor",
+      "brief": "Does most of factorization returning status 0 - OK -99 - needs more memory -1 - singular - use numberGoodColumns and redo.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 78,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "postProcess",
+      "brief": "Does post processing on valid factorization - putting variables on correct rows.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sequence",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pivotVariable",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 80,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "makeNonSingular",
+      "brief": "Makes a non-singular basis by replacing variables.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sequence",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 82,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberElements",
+      "brief": "Total number of elements in factorization.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 88,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "maximumCoefficient",
+      "brief": "Returns maximum absolute value in factorization.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 93,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "replaceColumn",
+      "brief": "Replaces one Column to basis, returns 0=OK, 1=Probably OK, 2=singular, 3=no room If checkBeforeModifying is true will do all accuracy checks before modifying factorization.",
+      "detailed": "Whether to set this depends on speed considerations. You could just do this on first iteration after factorization and thereafter re-factorize partial update already in U",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pivotRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pivotCheck",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "checkBeforeModifying",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        },
+        {
+          "name": "acceptablePivot",
+          "type": "double",
+          "description": "",
+          "default": "1.0e-8"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 106,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateColumnFT",
+      "brief": "Updates one column (FTRAN) from regionSparse2 Tries to do FT update number returned is negative if no room regionSparse starts as zero and is zero at end.",
+      "detailed": "Note - if regionSparse2 packed on input - will be packed on output",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse2",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "noPermute",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 123,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateColumn",
+      "brief": "This version has same effect as above with FTUpdate==false so number returned is always >=0.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse2",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "noPermute",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 129,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateTwoColumnsFT",
+      "brief": "does FTRAN on two columns",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse1",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse2",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse3",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "noPermute",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 133,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "upColumn",
+      "brief": "does updatecolumn if save==true keeps column for replace column",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse2",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "noPermute",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        },
+        {
+          "name": "save",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 138,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateColumnTranspose",
+      "brief": "Updates one column (BTRAN) from regionSparse2 regionSparse starts as zero and is zero at end Note - if regionSparse2 packed on input - will be packed on output.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse2",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 145,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "upColumnTranspose",
+      "brief": "does updateColumnTranspose, the other is a wrapper",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "regionSparse",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "regionSparse2",
+          "type": "CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 148,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clearArrays",
+      "brief": "Get rid of all memory.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 157,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "indices",
+      "brief": "Returns array to put basis indices in.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 162,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "permute",
+      "brief": "Returns permute in.",
+      "detailed": "",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 167,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "gutsOfDestructor",
+      "brief": "The real work of destructor.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 174,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "gutsOfInitialize",
+      "brief": "The real work of constructor.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 176,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "gutsOfCopy",
+      "brief": "The real work of copy.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "other",
+          "type": "const CoinSimpFactorization &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 178,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "factorize",
+      "brief": "calls factorization",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberOfRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberOfColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "colStarts",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indicesRow",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 181,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "mainLoopFactor",
+      "brief": "main loop of factorization",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 187,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "copyLbyRows",
+      "brief": "copies L by rows",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 189,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "copyUbyColumns",
+      "brief": "copies U by columns",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 191,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "findPivot",
+      "brief": "finds a pivot element using Markowitz count",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "r",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "s",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ifSlack",
+          "type": "bool &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 193,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "findPivotShCol",
+      "brief": "finds a pivot in a shortest column",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "r",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "s",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 195,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "findPivotSimp",
+      "brief": "finds a pivot in the first column available",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "r",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "s",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 197,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "GaussEliminate",
+      "brief": "does Gauss elimination",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "r",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "s",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 199,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "findShortRow",
+      "brief": "finds short row that intersects a given column",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "column",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "length",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minRow",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minRowLength",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 201,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "findShortColumn",
+      "brief": "finds short column that intersects a given row",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "length",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minCol",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minColLength",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 204,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "findMaxInRrow",
+      "brief": "finds maximum absolute value in a row",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 207,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "pivoting",
+      "brief": "does pivoting",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "pivotRow",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pivotColumn",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "invPivot",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 209,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateCurrentRow",
+      "brief": "part of pivoting",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "pivotRow",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "row",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "multiplier",
+          "type": "const double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "newNonZeros",
+          "type": "int &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 212,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "increaseLsize",
+      "brief": "allocates more space for L",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 216,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "increaseRowSize",
+      "brief": "allocates more space for a row of U",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "newSize",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 218,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "increaseColSize",
+      "brief": "allocates more space for a column of U",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "column",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "newSize",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "b",
+          "type": "const bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 220,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "enlargeUrow",
+      "brief": "allocates more space for rows of U",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numNewElements",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 222,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "enlargeUcol",
+      "brief": "allocates more space for columns of U",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numNewElements",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "b",
+          "type": "const bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 224,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "findInRow",
+      "brief": "finds a given row in a column",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "column",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 226,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "findInColumn",
+      "brief": "finds a given column in a row",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "column",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "row",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 228,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "removeRowFromActSet",
+      "brief": "declares a row inactive",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 230,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "removeColumnFromActSet",
+      "brief": "declares a column inactive",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "column",
+          "type": "const int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "pointers",
+          "type": "FactorPointers &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 232,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "allocateSpaceForU",
+      "brief": "allocates space for U",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 234,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "allocateSomeArrays",
+      "brief": "allocates several working arrays",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 236,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "initialSomeNumbers",
+      "brief": "initializes some numbers",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 238,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "Lxeqb",
+      "brief": "solves L x = b",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 240,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "Lxeqb2",
+      "brief": "same as above but with two rhs",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b1",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "b2",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 242,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "Uxeqb",
+      "brief": "solves U x = b",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sol",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 244,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "Uxeqb2",
+      "brief": "same as above but with two rhs",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b1",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sol1",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sol2",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "b2",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 246,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "xLeqb",
+      "brief": "solves x L = b",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 248,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "xUeqb",
+      "brief": "solves x U = b",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sol",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 250,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "LUupdate",
+      "brief": "updates factorization after a Simplex iteration",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newBasicCol",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 252,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "newEta",
+      "brief": "creates a new eta vector",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numNewElements",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 254,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "copyRowPermutations",
+      "brief": "makes a copy of row permutations",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 256,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "Hxeqb",
+      "brief": "solves H x = b, where H is a product of eta matrices",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 258,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "Hxeqb2",
+      "brief": "same as above but with two rhs",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b1",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "b2",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 260,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "xHeqb",
+      "brief": "solves x H = b",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 262,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "ftran",
+      "brief": "does FTRAN",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sol",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "save",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 264,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "ftran2",
+      "brief": "same as above but with two columns",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b1",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sol1",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "b2",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sol2",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 266,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "btran",
+      "brief": "does BTRAN",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sol",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 268,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "checkPivot",
+      "brief": "Returns accuracy status of replaceColumn returns 0=OK, 1=Probably OK, 2=singular.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "saveFromU",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "oldPivot",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinSimpFactorization.hpp",
+      "source_line": 275,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

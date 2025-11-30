@@ -1,0 +1,774 @@
+{
+  "name": "CoinWarmStartBasis",
+  "qualified_name": "CoinWarmStartBasis",
+  "brief": "The default COIN simplex (basis-oriented) warm start class.",
+  "detailed": "CoinWarmStartBasis provides for a warm start object which contains the status of each variable (structural and artificial).\nTodoModify this class so that the number of status entries per byte and bytes per status vector allocation unit are not hardcoded. At the least, collect this into a couple of macros.\nTodoConsider separate fields for allocated capacity and actual basis size. We could avoid some reallocation, at the price of retaining more space than we need. Perhaps more important, we could do much better sanity checks.",
+  "header_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinWarmStart"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "getNumStructural",
+      "brief": "Return the number of structural variables.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 91,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getNumArtificial",
+      "brief": "Return the number of artificial variables.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 94,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberBasicStructurals",
+      "brief": "Return the number of basic structurals.",
+      "detailed": "A fast test for an all-slack basis.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 100,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getStructStatus",
+      "brief": "Return the status of the specified structural variable.",
+      "detailed": "",
+      "return_type": "Status",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 103,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setStructStatus",
+      "brief": "Set the status of the specified structural variable.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "st",
+          "type": "Status",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 110,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getStructuralStatus",
+      "brief": "Return the status array for the structural variables.",
+      "detailed": "The status information is stored using the codes defined in the Status enum, 2 bits per variable, packed 4 variables per byte.",
+      "return_type": "char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 122,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getStructuralStatus",
+      "brief": "`const` overload for getStructuralStatus()",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 129,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getArtificialStatus",
+      "brief": "As for getStructuralStatus , but returns the status array for the artificial variables.",
+      "detailed": "",
+      "return_type": "char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 134,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getArtifStatus",
+      "brief": "Return the status of the specified artificial variable.",
+      "detailed": "",
+      "return_type": "Status",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 137,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setArtifStatus",
+      "brief": "Set the status of the specified artificial variable.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "st",
+          "type": "Status",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 144,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getArtificialStatus",
+      "brief": "`const` overload for getArtificialStatus()",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 156,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "generateDiff",
+      "brief": "Generate a diff that can convert the warm start basis passed as a parameter to the warm start basis specified by `this`.",
+      "detailed": "The capabilities are limited: the basis passed as a parameter can be no larger than the basis pointed to by `this`.",
+      "return_type": "CoinWarmStartDiff *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "oldCWS",
+          "type": "const CoinWarmStart *const",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 170,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "applyDiff",
+      "brief": "Apply `diff` to this basis.",
+      "detailed": "Update this basis by applying `diff`. It's assumed that the allocated capacity of the basis is sufficiently large.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "cwsdDiff",
+          "type": "const CoinWarmStartDiff *const",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 179,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setSize",
+      "brief": "Set basis capacity; existing basis is discarded.",
+      "detailed": "After execution of this routine, the warm start object does not describe a valid basis: all structural and artificial variables have status isFree.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "ns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "na",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 191,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "resize",
+      "brief": "Set basis capacity; existing basis is maintained.",
+      "detailed": "After execution of this routine, the warm start object describes a valid basis: the status of new structural variables (added columns) is set to nonbasic at lower bound, and the status of new artificial variables (added rows) is set to basic. (The basis can be invalid if new structural variables do not have a finite lower bound.)",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newNumberRows",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "newNumberColumns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 201,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "compressRows",
+      "brief": "Delete a set of rows from the basis.",
+      "detailed": "Removal of a tight constraint with a nonbasic logical implies that some basic variable must be made nonbasic. This correction is left to the client.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "tgtCnt",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "tgts",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 219,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteRows",
+      "brief": "Delete a set of rows from the basis.",
+      "detailed": "Removal of a tight constraint with a nonbasic logical implies that some basic variable must be made nonbasic. This correction is left to the client.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rawTgtCnt",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "rawTgts",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 232,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteColumns",
+      "brief": "Delete a set of columns from the basis.",
+      "detailed": "Removal of a basic variable implies that some nonbasic variable must be made basic. This correction is left to the client.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "number",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "which",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 244,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "mergeBasis",
+      "brief": "Merge entries from a source basis into this basis.",
+      "detailed": "The vector xferCols (xferRows) specifies runs of entries to be taken from the source basis and placed in this basis. Each entry is a CoinTriple, with first specifying the starting source index of a run, second specifying the starting destination index, and third specifying the run length.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "src",
+          "type": "const CoinWarmStartBasis *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "xferRows",
+          "type": "const XferVec *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "xferCols",
+          "type": "const XferVec *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 258,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinWarmStartBasis",
+      "brief": "Default constructor.",
+      "detailed": "Creates a warm start object representing an empty basis (0 rows, 0 columns).",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 273,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinWarmStartBasis",
+      "brief": "Constructs a warm start object with the specified status vectors.",
+      "detailed": "The parameters are copied. Consider assignBasisStatus(int,int,char*&,char*&) if the object should assume ownership.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "ns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "na",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sStat",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "aStat",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 284,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinWarmStartBasis",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "ws",
+          "type": "const CoinWarmStartBasis &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 287,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clone",
+      "brief": "Virtual constructor",
+      "detailed": "",
+      "return_type": "CoinWarmStart *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 290,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinWarmStartBasis",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 296,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment.",
+      "detailed": "",
+      "return_type": "CoinWarmStartBasis &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinWarmStartBasis &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 300,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "assignBasisStatus",
+      "brief": "Assign the status vectors to be the warm start information.",
+      "detailed": "In this method the CoinWarmStartBasis object assumes ownership of the pointers and upon return the argument pointers will be NULL. If copying is desirable, use the array constructor  or the assignment operator .",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "ns",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "na",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "sStat",
+          "type": "char *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "aStat",
+          "type": "char *&",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 317,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "print",
+      "brief": "Prints in readable format (for debug)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 324,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "fullBasis",
+      "brief": "Returns true if full basis (for debug)",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 326,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "fixFullBasis",
+      "brief": "Returns true if full basis and fixes up (for debug)",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 328,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getStatus",
+      "brief": "Get the status of the specified variable in the given status array.",
+      "detailed": "",
+      "return_type": "CoinWarmStartBasis::Status",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "const char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 356,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setStatus",
+      "brief": "Set the status of the specified variable in the given status array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "st",
+          "type": "CoinWarmStartBasis::Status",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 366,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "statusName",
+      "brief": "Generate a print string for a status code.",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "status",
+          "type": "CoinWarmStartBasis::Status",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartBasis.hpp",
+      "source_line": 376,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

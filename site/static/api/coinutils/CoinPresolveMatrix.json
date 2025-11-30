@@ -1,0 +1,1496 @@
+{
+  "name": "CoinPresolveMatrix",
+  "qualified_name": "CoinPresolveMatrix",
+  "brief": "Augments CoinPrePostsolveMatrix with information about the problem that is only needed during presolve.",
+  "detailed": "For problem manipulation, this class adds a row-major matrix representation, linked lists that allow for easy manipulation of the matrix when applying presolve transforms, and vectors to track row and column processing status (changed, needs further processing, change prohibited)\nFor problem representation, this class adds information about variable type (integer or continuous), an objective offset, and a feasibility tolerance.\nNOTE that the anyInteger_ and anyProhibited_ flags are independent of the vectors used to track this information for individual variables (integerType_ and rowChanged_ and colChanged_, respectively).\nNOTE also that at the end of presolve the column-major and row-major matrix representations are loosely packed (i.e., there may be gaps between columns in the bulk storage arrays).\nNOTE that while you might think that CoinPresolve is prepared to handle minimisation or maximisation, it's unlikely that this still works. This is a good thing: better to convert objective coefficients and duals once, before starting presolve, rather than doing it over and over in each transform that considers dual variables.",
+  "header_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinPrePostsolveMatrix"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "change_bias",
+      "brief": "Adjust objective function constant offset.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "change_amount",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1038,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "statistics",
+      "brief": "Say we want statistics - also set time.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1078,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "feasibilityTolerance",
+      "brief": "Return feasibility tolerance.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1085,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setFeasibilityTolerance",
+      "brief": "Set feasibility tolerance.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "val",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1090,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "status",
+      "brief": "Returns problem status (0 = feasible, 1 = infeasible, 2 = unbounded)",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1102,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setStatus",
+      "brief": "Set problem status.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "status",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1107,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPass",
+      "brief": "Set pass number.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "pass",
+          "type": "int",
+          "description": "",
+          "default": "0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1121,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMaximumSubstitutionLevel",
+      "brief": "Set Maximum substitution level (normally 3)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1132,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "recomputeSums",
+      "brief": "Recompute row lhs bounds.",
+      "detailed": "Calculate finite contributions to row lhs upper and lower bounds and count infinite contributions. Returns the number of rows found to be infeasible.\nIf `whichRow` < 0, bounds are recomputed for all rows.\nAs of 110611, this seems to be a work in progress in the sense that it's barely used by the existing presolve code.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "whichRow",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1257,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "initializeStuff",
+      "brief": "Allocate scratch arrays.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1260,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteStuff",
+      "brief": "Free scratch arrays.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1262,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setMatrix",
+      "brief": "Load the cofficient matrix.",
+      "detailed": "Load the coefficient matrix before loading the other vectors (bounds, objective, variable type) required to define the problem.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "mtx",
+          "type": "const CoinPackedMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 920,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "countEmptyRows",
+      "brief": "Count number of empty rows.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 923,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setVariableType",
+      "brief": "Set variable type information for a single variable.",
+      "detailed": "Set `variableType` to 0 for continous, 1 for integer. Does not manipulate the anyInteger_ flag.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "variableType",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 937,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setVariableType",
+      "brief": "Set variable type information for all variables.",
+      "detailed": "Set `variableType`[i] to 0 for continuous, 1 for integer. Does not manipulate the anyInteger_ flag.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "variableType",
+          "type": "const unsigned char *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 949,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setVariableType",
+      "brief": "Set the type of all variables.",
+      "detailed": "allIntegers should be true to set the type to integer, false to set the type to continuous.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "allIntegers",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lenParam",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 956,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setAnyInteger",
+      "brief": "Set a flag for presence (true) or absence (false) of integer variables.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "anyInteger",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 959,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getRowStarts",
+      "brief": "Get row start vector for row-major packed matrix.",
+      "detailed": "",
+      "return_type": "const CoinBigIndex *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 970,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getColIndicesByRow",
+      "brief": "Get vector of column indices for row-major packed matrix.",
+      "detailed": "",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 975,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getElementsByRow",
+      "brief": "Get vector of elements for row-major packed matrix.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 980,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isInteger",
+      "brief": "Check for integrality of the specified variable.",
+      "detailed": "Consults the integerType_ vector if present; fallback is the anyInteger_ flag.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 990,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "anyInteger",
+      "brief": "Check if there are any integer variables.",
+      "detailed": "Consults the anyInteger_ flag",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1005,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolveOptions",
+      "brief": "Picks up any special options.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1010,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPresolveOptions",
+      "brief": "Sets any special options (see presolveOptions_)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1015,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "initColsToDo",
+      "brief": "Initialise the column ToDo lists.",
+      "detailed": "Places all columns in the colsToDo_ list except for columns marked as prohibited (viz. colChanged_).",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1272,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "stepColsToDo",
+      "brief": "Step column ToDo lists.",
+      "detailed": "Moves columns on the nextColsToDo_ list to the colsToDo_ list, emptying nextColsToDo_. Returns the number of columns transferred.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1279,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberColsToDo",
+      "brief": "Return the number of columns on the colsToDo_ list.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1282,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "colChanged",
+      "brief": "Has column been changed?",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1288,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "unsetColChanged",
+      "brief": "Mark column as not changed.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1293,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColChanged",
+      "brief": "Mark column as changed.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1298,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addCol",
+      "brief": "Mark column as changed and add to list of columns to process next.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1303,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "colProhibited",
+      "brief": "Test if column is eligible for preprocessing.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1311,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "colProhibited2",
+      "brief": "Test if column is eligible for preprocessing.",
+      "detailed": "The difference between this method and colProhibited() is that this method first tests anyProhibited_ before examining the specific entry for the specified column.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1321,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColProhibited",
+      "brief": "Mark column as ineligible for preprocessing.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1329,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "colUsed",
+      "brief": "Test if column is marked as used.",
+      "detailed": "This is for doing faster lookups to see where two columns have entries in common.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1338,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColUsed",
+      "brief": "Mark column as used.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1343,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "unsetColUsed",
+      "brief": "Mark column as unused.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1348,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "colInfinite",
+      "brief": "Has column infinite ub (originally)",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1353,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "unsetColInfinite",
+      "brief": "Mark column as not infinite ub (originally)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1358,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColInfinite",
+      "brief": "Mark column as infinite ub (originally)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1363,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "colCanTouch",
+      "brief": "Test if column can be touched at all.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1368,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "colCanTouch2",
+      "brief": "Test if column can be touched at all.",
+      "detailed": "The difference between this method and colCanTouch() is that this method first tests anyProhibited_ before examining the specific entry for the specified column.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1378,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setColLeaveTotallyAlone",
+      "brief": "Mark column as totally ineligible for preprocessing.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1386,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "initRowsToDo",
+      "brief": "Initialise the row ToDo lists.",
+      "detailed": "Places all rows in the rowsToDo_ list except for rows marked as prohibited (viz. rowChanged_).",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1396,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "stepRowsToDo",
+      "brief": "Step row ToDo lists.",
+      "detailed": "Moves rows on the nextRowsToDo_ list to the rowsToDo_ list, emptying nextRowsToDo_. Returns the number of rows transferred.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1403,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberRowsToDo",
+      "brief": "Return the number of rows on the rowsToDo_ list.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1406,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowChanged",
+      "brief": "Has row been changed?",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1412,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "unsetRowChanged",
+      "brief": "Mark row as not changed.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1417,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowChanged",
+      "brief": "Mark row as changed.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1422,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addRow",
+      "brief": "Mark row as changed and add to list of rows to process next.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1427,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowProhibited",
+      "brief": "Test if row is eligible for preprocessing.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1435,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowProhibited2",
+      "brief": "Test if row is eligible for preprocessing.",
+      "detailed": "The difference between this method and rowProhibited() is that this method first tests anyProhibited_ before examining the specific entry for the specified row.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1445,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowProhibited",
+      "brief": "Mark row as ineligible for preprocessing.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1453,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rowUsed",
+      "brief": "Test if row is marked as used.",
+      "detailed": "This is for doing faster lookups to see where two rows have entries in common. It can be used anywhere as long as it ends up zeroed out.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1462,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setRowUsed",
+      "brief": "Mark row as used.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1467,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "unsetRowUsed",
+      "brief": "Mark row as unused.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1472,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "anyProhibited",
+      "brief": "Check if there are any prohibited rows or columns.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1478,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setAnyProhibited",
+      "brief": "Set a flag for presence of prohibited rows or columns.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "val",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1483,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPresolveMatrix",
+      "brief": "Native constructor",
+      "detailed": "This constructor creates an empty object which must then be loaded. On the other hand, it doesn't assume that the client is an OsiSolverInterface.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "ncols_alloc",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nrows_alloc",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nelems_alloc",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 898,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinPresolveMatrix",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 902,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_no_dups",
+      "brief": "Check column-major and/or row-major matrices for duplicate entries in the major vectors.",
+      "detailed": "By default, scans both the column- and row-major matrices. Set doCol (doRow) to false to suppress the column (row) scan.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "preObj",
+          "type": "const CoinPresolveMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "doCol",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        },
+        {
+          "name": "doRow",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 66,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_links_ok",
+      "brief": "Check the links which track storage order for major vectors in the bulk storage area.",
+      "detailed": "By default, scans both the column- and row-major matrix. Set doCol = false to suppress the column-major scan. Set doRow = false to suppres the row-major scan.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "preObj",
+          "type": "const CoinPresolveMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "doCol",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        },
+        {
+          "name": "doRow",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 77,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_no_zeros",
+      "brief": "Check for explicit zeros in the column- and/or row-major matrices.",
+      "detailed": "By default, scans both the column- and row-major matrices. Set doCol (doRow) to false to suppress the column (row) scan.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "preObj",
+          "type": "const CoinPresolveMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "doCol",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        },
+        {
+          "name": "doRow",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 86,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_consistent",
+      "brief": "Checks for equivalence of the column- and row-major matrices.",
+      "detailed": "Normally the routine will test for coefficient presence and value. Set `chkvals` to false to suppress the check for equal value.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "preObj",
+          "type": "const CoinPresolveMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "chkvals",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 95,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_check_sol",
+      "brief": "Check primal solution and architectural variable status.",
+      "detailed": "The architectural variables can be checked for bogus values, feasibility, and valid status. The row activity is checked for bogus values, accuracy, and feasibility. By default, row activity is not checked (presolve is sloppy about maintaining it). See the definitions in CoinPresolvePsdebug.cpp for more information.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "preObj",
+          "type": "const CoinPresolveMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "chkColSol",
+          "type": "int",
+          "description": "",
+          "default": "2"
+        },
+        {
+          "name": "chkRowAct",
+          "type": "int",
+          "description": "",
+          "default": "1"
+        },
+        {
+          "name": "chkStatus",
+          "type": "int",
+          "description": "",
+          "default": "1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 146,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_check_nbasic",
+      "brief": "Check for the proper number of basic variables.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "preObj",
+          "type": "const CoinPresolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 165,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

@@ -1,0 +1,189 @@
+{
+  "name": "CoinWarmStartVectorDiff",
+  "qualified_name": "CoinWarmStartVectorDiff",
+  "brief": "A diff between two CoinWarmStartVector objects.",
+  "detailed": "This class exists in order to hide from the world the details of calculating and representing a diff between two CoinWarmStartVector objects. For convenience, assignment, cloning, and deletion are visible to the world, and default and copy constructors are made available to derived classes. Knowledge of the rest of this structure, and of generating and applying diffs, is restricted to the friend functions CoinWarmStartVector::generateDiff() and CoinWarmStartVector::applyDiff().\nThe actual data structure is a pair of vectors, diffNdxs_ and diffVals_.",
+  "header_file": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinWarmStartDiff"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "clone",
+      "brief": "Virtual constructor",
+      "detailed": "",
+      "return_type": "CoinWarmStartDiff *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp",
+      "source_line": 184,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment.",
+      "detailed": "",
+      "return_type": "CoinWarmStartVectorDiff &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinWarmStartVectorDiff< T > &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp",
+      "source_line": 191,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinWarmStartVectorDiff",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp",
+      "source_line": 194,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "swap",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "CoinWarmStartVectorDiff &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp",
+      "source_line": 200,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinWarmStartVectorDiff",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp",
+      "source_line": 211,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinWarmStartVectorDiff",
+      "brief": "Copy constructor.",
+      "detailed": "For convenience when copying objects containing CoinWarmStartVectorDiff objects. But consider whether you should be using clone() to retain polymorphism.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinWarmStartVectorDiff< T > &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp",
+      "source_line": 224,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinWarmStartVectorDiff",
+      "brief": "Standard constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sze",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "diffNdxs",
+          "type": "const unsigned int *const",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "diffVals",
+          "type": "const T *const",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp",
+      "source_line": 227,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clear",
+      "brief": "Clear the data.",
+      "detailed": "Make it appear as if the diff was just created using the default constructor.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartVector.hpp",
+      "source_line": 235,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

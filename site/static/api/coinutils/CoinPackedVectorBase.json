@@ -1,0 +1,703 @@
+{
+  "name": "CoinPackedVectorBase",
+  "qualified_name": "CoinPackedVectorBase",
+  "brief": "Abstract base class providing read-only access to sparse vectors.",
+  "detailed": "Since this class is abstract, no object of this type can be created. The sole purpose is to provide const access to sparse vector data. Sparse vectors store only non-zero elements as parallel arrays of indices and values.",
+  "header_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [
+    "CoinPackedVector",
+    "CoinShallowPackedVector"
+  ],
+  "methods": [
+    {
+      "name": "getNumElements",
+      "brief": "Get the number of stored (non-zero) elements.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "Count of index/value pairs",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 46,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getIndices",
+      "brief": "Get pointer to array of element indices.",
+      "detailed": "",
+      "return_type": "const int *",
+      "return_desc": "Pointer to indices array (may be null if empty)",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 51,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getElements",
+      "brief": "Get pointer to array of element values.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "Pointer to values array (may be null if empty)",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 56,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setTestForDuplicateIndex",
+      "brief": "Set to the argument value whether to test for duplicate indices in the vector whenever they can occur.",
+      "detailed": "Calling this method with `test` set to true will trigger an immediate check for duplicate indices.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "test",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 74,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setTestForDuplicateIndexWhenTrue",
+      "brief": "Set to the argument value whether to test for duplicate indices in the vector whenever they can occur BUT we know that right now the vector has no duplicate indices.",
+      "detailed": "Calling this method with `test` set to true will not trigger an immediate check for duplicate indices; instead, it's assumed that the result of the test will be true.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "test",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 83,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "testForDuplicateIndex",
+      "brief": "Check if duplicate index testing is enabled.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "true if vector will be tested for duplicates when they can occur",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 88,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setTestsOff",
+      "brief": "Disable all duplicate checking without exception handling.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 92,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "denseVector",
+      "brief": "Convert sparse vector to dense format.",
+      "detailed": "",
+      "return_type": "double *",
+      "return_desc": "Newly allocated dense array (caller must delete[])",
+      "parameters": [
+        {
+          "name": "denseSize",
+          "type": "int",
+          "description": "Length of the dense vector to create",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 107,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator[]",
+      "brief": "Access element by dense index.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "Value at index i, or zero if not stored",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "Index in the conceptual dense vector",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 114,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMaxIndex",
+      "brief": "Get the largest index in the sparse vector.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "Maximum index value, or -infinity if empty",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 123,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMinIndex",
+      "brief": "Get the smallest index in the sparse vector.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "Minimum index value, or +infinity if empty",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 128,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "duplicateIndex",
+      "brief": "Throw CoinError if duplicate indices exist.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "methodName",
+          "type": "const char *",
+          "description": "Name of calling method (for error message)",
+          "default": "NULL"
+        },
+        {
+          "name": "className",
+          "type": "const char *",
+          "description": "Name of calling class (for error message)",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 135,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isExistingIndex",
+      "brief": "Check if an index exists in the sparse vector.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "true if index i is stored",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "Index to search for",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 143,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "findIndex",
+      "brief": "Find position of an index in the sparse storage.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "Position in indices/elements arrays, or -1 if not found",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "Index to search for",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 150,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator==",
+      "brief": "Equal.",
+      "detailed": "Returns true if vectors have same length and corresponding element of each vector is equal.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 158,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator!=",
+      "brief": "Not equal.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 160,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "compare",
+      "brief": "This method establishes an ordering on packed vectors.",
+      "detailed": "It is complete ordering, but not the same as lexicographic ordering. However, it is quick and dirty to compute and thus it is useful to keep packed vectors in a heap when all we care is to quickly check whether a particular vector is already in the heap or not. Returns negative/0/positive depending on whether `this` is smaller/equal.greater than `rhs`.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 176,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isEquivalent",
+      "brief": "equivalent - If shallow packed vector A & B are equivalent, then they are still equivalent no matter how they are sorted.",
+      "detailed": "In this method the FloatEqual function operator can be specified. The default equivalence test is that the entries are relatively equal.\n NOTE: This is a relatively expensive method as it sorts the two shallow packed vectors.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "eq",
+          "type": "const FloatEqual &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 187,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isEquivalent",
+      "brief": "",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 222,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "dotProduct",
+      "brief": "Compute dot product with a dense vector.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "Sum of element[i] * dense[index[i]] for all stored elements",
+      "parameters": [
+        {
+          "name": "dense",
+          "type": "const double *",
+          "description": "Pointer to dense vector (must have length >= max index + 1)",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 232,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "oneNorm",
+      "brief": "Compute the 1-norm (sum of absolute values)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "Sum of |element[i]| for all stored elements",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 238,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "normSquare",
+      "brief": "Compute the squared 2-norm.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "Sum of element[i]^2 for all stored elements",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 244,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "twoNorm",
+      "brief": "Compute the 2-norm (Euclidean length)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "Square root of normSquare()",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 250,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "infNorm",
+      "brief": "Compute the infinity-norm (maximum absolute value)",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "Maximum |element[i]| across all stored elements",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 256,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "sum",
+      "brief": "Compute the sum of all elements.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "Sum of element[i] for all stored elements",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 262,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinPackedVectorBase",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 275,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPackedVectorBase",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 271,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "findMaxMinIndices",
+      "brief": "Find Maximum and Minimum Indices.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 297,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "indexSet",
+      "brief": "Return indexSetPtr_ (create it if necessary).",
+      "detailed": "",
+      "return_type": "std::set< int > *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "methodName",
+          "type": "const char *",
+          "description": "",
+          "default": "NULL"
+        },
+        {
+          "name": "className",
+          "type": "const char *",
+          "description": "",
+          "default": "NULL"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 300,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "clearIndexSet",
+      "brief": "Delete the indexSet.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 304,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "clearBase",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 305,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "copyMaxMinIndex",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 306,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "protected"
+    },
+    {
+      "name": "CoinPackedVectorBase",
+      "brief": "The copy constructor.",
+      "detailed": "This must be at least protected, but we make it private. The reason is that when, say, a shallow packed vector is created, first the underlying class, it this one is constructed. However, at that point we don't know how much of the data members of this class we need to copy over. Therefore the copy constructor is not used.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 287,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "operator=",
+      "brief": "This class provides const access to packed vectors, so there's no need to provide an assignment operator.",
+      "detailed": "",
+      "return_type": "CoinPackedVectorBase &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPackedVectorBase.hpp",
+      "source_line": 290,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

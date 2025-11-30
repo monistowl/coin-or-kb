@@ -1,0 +1,314 @@
+{
+  "name": "CoinShallowPackedVector",
+  "qualified_name": "CoinShallowPackedVector",
+  "brief": "Shallow Sparse Vector.",
+  "detailed": "This class is for sparse vectors where the indices and elements are stored elsewhere. This class only maintains pointers to the indices and elements. Since this class does not own the index and element data it provides read only access to to the data. An CoinSparsePackedVector must be used when the sparse vector's data will be altered.\nThis class stores pointers to the vectors. It does not actually contain the vectors.\nHere is a sample usage: const int ne = 4; \n   int inx[ne] =   {  1,   4,  0,   2 }; \n   double el[ne] = { 10., 40., 1., 50. }; \n \n   // Create vector and set its value \n   CoinShallowPackedVector r(ne,inx,el); \n \n   // access each index and element \n   assert( r.indices ()[0]== 1  ); \n   assert( r.elements()[0]==10. ); \n   assert( r.indices ()[1]== 4  ); \n   assert( r.elements()[1]==40. ); \n   assert( r.indices ()[2]== 0  ); \n   assert( r.elements()[2]== 1. ); \n   assert( r.indices ()[3]== 2  ); \n   assert( r.elements()[3]==50. ); \n \n   // access as a full storage vector \n   assert( r[ 0]==1. ); \n   assert( r[ 1]==10.); \n   assert( r[ 2]==50.); \n   assert( r[ 3]==0. ); \n   assert( r[ 4]==40.); \n \n   // Tests for equality and equivalence\n   CoinShallowPackedVector r1; \n   r1=r; \n   assert( r==r1 ); \n   r.sort(CoinIncrElementOrdered()); \n   assert( r!=r1 ); \n \n   // Add packed vectors. \n   // Similarly for subtraction, multiplication, \n   // and division. \n   CoinPackedVector add = r + r1; \n   assert( add[0] ==  1.+ 1. ); \n   assert( add[1] == 10.+10. ); \n   assert( add[2] == 50.+50. ); \n   assert( add[3] ==  0.+ 0. ); \n   assert( add[4] == 40.+40. ); \n   assert( r.sum() == 10.+40.+1.+50. );",
+  "header_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinPackedVectorBase"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "getNumElements",
+      "brief": "Get length of indices and elements vectors.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 92,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getIndices",
+      "brief": "Get indices of elements.",
+      "detailed": "",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 94,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getElements",
+      "brief": "Get element values.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 96,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clear",
+      "brief": "Reset the vector (as if were just created an empty vector)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 102,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment operator.",
+      "detailed": "",
+      "return_type": "CoinShallowPackedVector &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const CoinShallowPackedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 104,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment operator from a CoinPackedVectorBase.",
+      "detailed": "",
+      "return_type": "CoinShallowPackedVector &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 106,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setVector",
+      "brief": "just like the explicit constructor",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indices",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "testForDuplicateIndex",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 108,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinShallowPackedVector",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "testForDuplicateIndex",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 115,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinShallowPackedVector",
+      "brief": "Explicit Constructor.",
+      "detailed": "Set vector size, indices, and elements. Size is the length of both the indices and elements vectors. The indices and elements vectors are not copied into this class instance. The ShallowPackedVector only maintains the pointers to the indices and elements vectors. \n The last argument specifies whether the creator of the object knows in advance that there are no duplicate indices.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indices",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "testForDuplicateIndex",
+          "type": "bool",
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 124,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinShallowPackedVector",
+      "brief": "Copy constructor from the base class.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 128,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinShallowPackedVector",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinShallowPackedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 130,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinShallowPackedVector",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 132,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "print",
+      "brief": "Print vector information.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinShallowPackedVector.hpp",
+      "source_line": 134,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

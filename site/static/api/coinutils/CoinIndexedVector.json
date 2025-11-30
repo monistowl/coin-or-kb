@@ -1,0 +1,2282 @@
+{
+  "name": "CoinIndexedVector",
+  "qualified_name": "CoinIndexedVector",
+  "brief": "Indexed Vector.",
+  "detailed": "This stores values unpacked but apart from that is a bit like CoinPackedVector. It is designed to be lightweight in normal use.\nIt now has a \"packed\" mode when it is even more like CoinPackedVector\nIndices array has capacity_ extra chars which are zeroed and can be used for any purpose - but must be re-zeroed\nStores vector of indices and associated element values. Supports sorting of indices.\nDoes not support negative indices.\nDoes NOT support testing for duplicates getElements is no longer supported Here is a sample usage: const int ne = 4;\n    int inx[ne] =   {  1,   4,  0,   2 }\n    double el[ne] = { 10., 40., 1., 50. }\n\n    // Create vector and set its valuex1\n    CoinIndexedVector r(ne,inx,el);\n\n    // access as a full storage vector\n    assert( r[ 0]==1. );\n    assert( r[ 1]==10.);\n    assert( r[ 2]==50.);\n    assert( r[ 3]==0. );\n    assert( r[ 4]==40.);\n\n    // sort Elements in increasing order\n    r.sortIncrElement();\n\n    // access each index and element\n    assert( r.getIndices ()[0]== 0  );\n    assert( r.getIndices ()[1]== 1  );\n    assert( r.getIndices ()[2]== 4  );\n    assert( r.getIndices ()[3]== 2  );\n\n    // access as a full storage vector\n    assert( r[ 0]==1. );\n    assert( r[ 1]==10.);\n    assert( r[ 2]==50.);\n    assert( r[ 3]==0. );\n    assert( r[ 4]==40.);\n\n    // Tests for equality and equivalence\n    CoinIndexedVector r1;\n    r1=r;\n    assert( r==r1 );\n    assert( r.equivalent(r1) );\n    r.sortIncrElement();\n    assert( r!=r1 );\n    assert( r.equivalent(r1) );\n\n    // Add indexed vectors.\n    // Similarly for subtraction, multiplication,\n    // and division.\n    CoinIndexedVector add = r + r1;\n    assert( add[0] ==  1.+ 1. );\n    assert( add[1] == 10.+10. );\n    assert( add[2] == 50.+50. );\n    assert( add[3] ==  0.+ 0. );\n    assert( add[4] == 40.+40. );\n\n    assert( r.sum() == 10.+40.+1.+50. );",
+  "header_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [
+    "CoinPartitionedVector"
+  ],
+  "methods": [
+    {
+      "name": "getNumElements",
+      "brief": "Get the size.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 133,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getIndices",
+      "brief": "Get indices of elements.",
+      "detailed": "",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 135,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getIndices",
+      "brief": "Get element values.",
+      "detailed": "Get indices of elements",
+      "return_type": "int *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 139,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "denseVector",
+      "brief": "Get the vector as a dense vector.",
+      "detailed": "This is normal storage method. The user should not not delete [] this.",
+      "return_type": "double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 143,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setDenseVector",
+      "brief": "For very temporary use when user needs to borrow a dense vector.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 145,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setIndexVector",
+      "brief": "For very temporary use when user needs to borrow an index vector.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 150,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator[]",
+      "brief": "Access the i'th element of the full storage vector.",
+      "detailed": "",
+      "return_type": "double &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 156,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setNumElements",
+      "brief": "Set the size.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 166,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clear",
+      "brief": "Reset the vector (as if were just created an empty vector). This leaves arrays!",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 173,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "empty",
+      "brief": "Reset the vector (as if were just created an empty vector)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 175,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "reallyClear",
+      "brief": "Clear even if in a bad way.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 177,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment operator.",
+      "detailed": "",
+      "return_type": "CoinIndexedVector &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 179,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment operator from a CoinPackedVectorBase.",
+      "detailed": "NOTE: This assumes no duplicates",
+      "return_type": "CoinIndexedVector &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 183,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "copy",
+      "brief": "Copy the contents of one vector into another.",
+      "detailed": "If multiplier is 1 It is the equivalent of = but if vectors are same size does not re-allocate memory just clears and copies",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "multiplier",
+          "type": "double",
+          "description": "",
+          "default": "1.0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 188,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "borrowVector",
+      "brief": "Borrow ownership of the arguments to this vector.",
+      "detailed": "Size is the length of the unpacked elements vector.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberIndices",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "inds",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 192,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "returnVector",
+      "brief": "Return ownership of the arguments to this vector.",
+      "detailed": "State after is empty .",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 197,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setVector",
+      "brief": "Set vector numberIndices, indices, and elements.",
+      "detailed": "NumberIndices is the length of both the indices and elements vectors. The indices and elements vectors are copied into this class instance's member data. Assumed to have no duplicates",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberIndices",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "inds",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 203,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setVector",
+      "brief": "Set vector size, indices, and elements.",
+      "detailed": "Size is the length of the unpacked elements vector. The indices and elements vectors are copied into this class instance's member data. We do not check for duplicate indices",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberIndices",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "inds",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 209,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setConstant",
+      "brief": "Elements set to have the same scalar value.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "inds",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 212,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setFull",
+      "brief": "Indices are not specified and are taken to be 0,1,...,size-1.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 215,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setElement",
+      "brief": "Set an existing element in the indexed vector The first argument is the \"index\" into the elements() array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 220,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "insert",
+      "brief": "Insert an element into the vector.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 223,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "quickInsert",
+      "brief": "Insert a nonzero element into the vector.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 225,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "add",
+      "brief": "Insert or if exists add an element into the vector Any resulting zero elements will be made tiny.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 234,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "quickAdd",
+      "brief": "Insert or if exists add an element into the vector Any resulting zero elements will be made tiny.",
+      "detailed": "This version does no checking",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 238,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "quickAddNonZero",
+      "brief": "Insert or if exists add an element into the vector Any resulting zero elements will be made tiny.",
+      "detailed": "This knows element is nonzero This version does no checking",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 257,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "zero",
+      "brief": "Makes nonzero tiny.",
+      "detailed": "This version does no checking",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 275,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clean",
+      "brief": "set all small values to zero and return number remaining",
+      "detailed": "< tolerance => 0.0",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "tolerance",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 282,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "cleanAndPack",
+      "brief": "Same but packs down.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "tolerance",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 284,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "cleanAndPackSafe",
+      "brief": "Same but packs down and is safe (i.e. if order is odd)",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "tolerance",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 286,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPacked",
+      "brief": "Mark as packed.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 288,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "checkClear",
+      "brief": "For debug check vector is clear i.e. no elements.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 294,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "checkClean",
+      "brief": "For debug check vector is clean i.e. elements match indices.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 296,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "scan",
+      "brief": "Scan dense region and set up indices (returns number found)",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 302,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "scan",
+      "brief": "Scan dense region from start to < end and set up indices returns number found.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "end",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 306,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "scan",
+      "brief": "Scan dense region and set up indices (returns number found).",
+      "detailed": "Only ones >= tolerance",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "tolerance",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 309,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "scan",
+      "brief": "Scan dense region from start to < end and set up indices returns number found.",
+      "detailed": "Only >= tolerance",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "end",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "tolerance",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 313,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "scanAndPack",
+      "brief": "These are same but pack down.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 315,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "scanAndPack",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "end",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 316,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "scanAndPack",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "tolerance",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 317,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "scanAndPack",
+      "brief": "",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "end",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "tolerance",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 318,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "createPacked",
+      "brief": "Create packed array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "number",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indices",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 320,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "createUnpacked",
+      "brief": "Create unpacked array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "number",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indices",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 323,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "createOneUnpackedElement",
+      "brief": "Create unpacked singleton.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 326,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "expand",
+      "brief": "This is mainly for testing - goes from packed to indexed.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 328,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "append",
+      "brief": "Append a CoinPackedVector to the end.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "caboose",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 331,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "append",
+      "brief": "Append a CoinIndexedVector to the end (with extra space)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "caboose",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 334,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "append",
+      "brief": "Append a CoinIndexedVector to the end and modify indices.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "other",
+          "type": "CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "adjustIndex",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "zapElements",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 336,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "swap",
+      "brief": "Swap values in positions i and j of indices and elements.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 339,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "truncate",
+      "brief": "Throw away all entries in rows >= newSize.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newSize",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 342,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "print",
+      "brief": "Print out.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 344,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator+=",
+      "brief": "add `value` to every entry",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 349,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator-=",
+      "brief": "subtract `value` from every entry",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 351,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator*=",
+      "brief": "multiply every entry by `value`",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 353,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator/=",
+      "brief": "divide every entry by `value` (** 0 vanishes)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 355,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator==",
+      "brief": "Equal.",
+      "detailed": "Returns true if vectors have same length and corresponding element of each vector is equal.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 363,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator!=",
+      "brief": "Not equal.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 365,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator==",
+      "brief": "Equal.",
+      "detailed": "Returns true if vectors have same length and corresponding element of each vector is equal.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 369,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator!=",
+      "brief": "Not equal.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 371,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "isApproximatelyEqual",
+      "brief": "Equal with a tolerance (returns -1 or position of inequality).",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "tolerance",
+          "type": "double",
+          "description": "",
+          "default": "1.0e-8"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 373,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMaxIndex",
+      "brief": "Get value of maximum index.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 379,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getMinIndex",
+      "brief": "Get value of minimum index.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 381,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "sort",
+      "brief": "Sort the indexed storage vector (increasing indices).",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 387,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "sortIncrIndex",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 392,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "sortDecrIndex",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 397,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "sortIncrElement",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 399,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "sortDecrElement",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 401,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "sortPacked",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 402,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator+",
+      "brief": "Return the sum of two indexed vectors.",
+      "detailed": "",
+      "return_type": "CoinIndexedVector",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "op2",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 420,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator-",
+      "brief": "Return the difference of two indexed vectors.",
+      "detailed": "",
+      "return_type": "CoinIndexedVector",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "op2",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 424,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator*",
+      "brief": "Return the element-wise product of two indexed vectors.",
+      "detailed": "",
+      "return_type": "CoinIndexedVector",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "op2",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 428,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator/",
+      "brief": "Return the element-wise ratio of two indexed vectors (0.0/0.0 => 0.0) (0 vanishes)",
+      "detailed": "",
+      "return_type": "CoinIndexedVector",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "op2",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 432,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator+=",
+      "brief": "The sum of two indexed vectors.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "op2",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 435,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator-=",
+      "brief": "The difference of two indexed vectors.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "op2",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 438,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator*=",
+      "brief": "The element-wise product of two indexed vectors.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "op2",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 441,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator/=",
+      "brief": "The element-wise ratio of two indexed vectors (0.0/0.0 => 0.0) (0 vanishes)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "op2",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 444,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "reserve",
+      "brief": "Reserve space.",
+      "detailed": "If one knows the eventual size of the indexed vector, then it may be more efficient to reserve the space.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "n",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 453,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "capacity",
+      "brief": "capacity returns the size which could be accomodated without having to reallocate storage.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 457,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setCapacity",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 458,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPackedMode",
+      "brief": "Sets packed mode.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "yesNo",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 463,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "packedMode",
+      "brief": "Gets packed mode.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 468,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinIndexedVector",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 477,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinIndexedVector",
+      "brief": "Alternate Constructors - set elements to vector of doubles.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "inds",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 479,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinIndexedVector",
+      "brief": "Alternate Constructors - set elements to same scalar value.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "inds",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "element",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 481,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinIndexedVector",
+      "brief": "Alternate Constructors - construct full storage with indices 0 through size-1.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 484,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinIndexedVector",
+      "brief": "Alternate Constructors - just size.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 486,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinIndexedVector",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinIndexedVector &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 488,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinIndexedVector",
+      "brief": "Copy constructor.2.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinIndexedVector *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 490,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinIndexedVector",
+      "brief": "Copy constructor from a PackedVectorBase.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinPackedVectorBase &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 493,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinIndexedVector",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 496,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "gutsOfSetVector",
+      "brief": "Copy internal data.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "inds",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 503,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "gutsOfSetVector",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberIndices",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "inds",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 505,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "gutsOfSetPackedVector",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberIndices",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "inds",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elems",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 507,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "gutsOfSetConstant",
+      "brief": "",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "inds",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "value",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 510,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

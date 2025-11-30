@@ -1,0 +1,359 @@
+{
+  "name": "CoinOddWheelSeparator",
+  "qualified_name": "CoinOddWheelSeparator",
+  "brief": "Class for separating violated odd-cycles.",
+  "detailed": "It contains a lifting module that tries to transform the odd-cycles into odd-wheels.",
+  "header_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinOddWheelSeparator",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "cgraph",
+          "type": "const CoinConflictGraph *",
+          "description": "conflict graph",
+          "default": ""
+        },
+        {
+          "name": "x",
+          "type": "const double *",
+          "description": "current solution of the LP relaxation of the MILP",
+          "default": ""
+        },
+        {
+          "name": "rc",
+          "type": "const double *",
+          "description": "reduced cost of the variables in the LP relaxation of the MILP",
+          "default": ""
+        },
+        {
+          "name": "extMethod",
+          "type": "size_t",
+          "description": "strategy that will be used to lift odd cycles, transforming them into odd wheels: 0 = no lifting, 1 = only one variable as wheel center, 2 = a clique as wheel center.",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 47,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinOddWheelSeparator",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 52,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "searchOddWheels",
+      "brief": "Find odd wheels that correspond to violated cuts.",
+      "detailed": "Odd holes of size 3 are ignored, since they can be separated by a clique cut separator.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 59,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "oddHole",
+      "brief": "Return the elements of the i-th odd hole.",
+      "detailed": "discovered. Indexes returned are related to the original indexes of variables.",
+      "return_type": "const size_t *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxOH",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 66,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "oddHoleSize",
+      "brief": "Return the size of the i-th discovered odd hole.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxOH",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 72,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "oddWheelRHS",
+      "brief": "Return the right-hand side of the i-th violated cut.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxOH",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 78,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numOddWheels",
+      "brief": "Return the number of cuts separated.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 83,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "wheelCenter",
+      "brief": "The inequality for a discovered odd hole may be extended with the addition of wheel centers.",
+      "detailed": "This method returns the elements of the wheel center found for the i-th discovered odd hole.",
+      "return_type": "const size_t *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxOH",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 91,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "wheelCenterSize",
+      "brief": "Return the size of the wheel center found for the i-th discovered odd hole.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxOH",
+          "type": "const size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 97,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "fillActiveColumns",
+      "brief": "Select interesting columns that will be considered in the cut separation.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 104,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "prepareGraph",
+      "brief": "Prepare the graph to run the shortest path algorithm.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 110,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "findOddHolesWithNode",
+      "brief": "Try to find an odd whole (a most violated) that contains a given node.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "node",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 116,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "addOddHole",
+      "brief": "Add a odd hole.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "nz",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "idxs",
+          "type": "const std::vector< size_t > &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 121,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "alreadyInserted",
+      "brief": "Check if the odd hole has already been inserted.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "nz",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "idxs",
+          "type": "const std::vector< size_t > &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 126,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "searchWheelCenter",
+      "brief": "Search an wheel center for the i-th discovered odd hole.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxOH",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinOddWheelSeparator.hpp",
+      "source_line": 132,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

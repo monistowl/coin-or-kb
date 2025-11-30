@@ -1,0 +1,336 @@
+{
+  "name": "CoinCutPool",
+  "qualified_name": "CoinCutPool",
+  "brief": "Class for storing a pool of cuts, removing the repeated and dominated ones.",
+  "detailed": "It also filters the cuts according to their scores.",
+  "header_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinCutPool",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "const double *",
+          "description": "current solution of the LP relaxation of the MILP.",
+          "default": ""
+        },
+        {
+          "name": "numCols",
+          "type": "int",
+          "description": "number of variables of the MILP.",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 112,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinCutPool",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 117,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numCuts",
+      "brief": "Return the number of cuts in the pool.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 122,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "cutIdxs",
+      "brief": "Return the indexes of the variables of the i-th cut in the pool.",
+      "detailed": "",
+      "return_type": "const int *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 128,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "cutCoefs",
+      "brief": "Return the coefficients of the variables of the i-th cut in the pool.",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 134,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "cutSize",
+      "brief": "Return the size of the i-th cut in the pool.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 140,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "cutRHS",
+      "brief": "Return the right-hand side of the i-th cut in the pool.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 146,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "add",
+      "brief": "Try to add a cut in the pool.",
+      "detailed": "Return true if the cut was added.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxs",
+          "type": "const int *",
+          "description": "indexes of the variables of the cut to be added.",
+          "default": ""
+        },
+        {
+          "name": "coefs",
+          "type": "const double *",
+          "description": "coefficients of the variables of the cut to be added.",
+          "default": ""
+        },
+        {
+          "name": "nz",
+          "type": "int",
+          "description": "size of the cut to be added",
+          "default": ""
+        },
+        {
+          "name": "rhs",
+          "type": "double",
+          "description": "right-hand side of the cut to be added",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 159,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "removeDominated",
+      "brief": "Remove dominated cuts.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 164,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "removeNullCuts",
+      "brief": "Remove cuts that are previous deleted.",
+      "detailed": "Must be called before use the cuts in the pool.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 171,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateCutFrequency",
+      "brief": "Compute the number of variables for which the cut has the best score.",
+      "detailed": "Update the structures to reflect this calculation. Return the number of variables for which the cut has the best score.",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "cut",
+          "type": "const CoinCut *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 180,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "calculateFitness",
+      "brief": "Compute the score of the cut.",
+      "detailed": "",
+      "return_type": "double",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "cut",
+          "type": "const CoinCut *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 185,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "checkMemory",
+      "brief": "Check if it is necessary expand the memory allocated for storing the cuts.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 191,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "checkCutDomination",
+      "brief": "Check the dominance relation between two cuts in the pool.",
+      "detailed": "Return 0 if cut idxA dominates cut idxB, 1 if cut idxB dominates cut idxA, or 2 if none is not dominated by the other.",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "idxA",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "idxB",
+          "type": "size_t",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCutPool.hpp",
+      "source_line": 199,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

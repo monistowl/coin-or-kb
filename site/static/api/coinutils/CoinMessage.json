@@ -1,0 +1,44 @@
+{
+  "name": "CoinMessage",
+  "qualified_name": "CoinMessage",
+  "brief": "The standard set of Coin messages.",
+  "detailed": "This class provides convenient access to the standard set of Coin messages. In a nutshell, it's a CoinMessages object with a constructor that preloads the standard Coin messages.",
+  "header_file": "layer-0/CoinUtils/src/CoinMessage.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinMessage.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinMessages"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinMessage",
+      "brief": "Constructor.",
+      "detailed": "Build a CoinMessages object and load it with the standard set of Coin messages.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "language",
+          "type": "Language",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinMessage.hpp",
+      "source_line": 89,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

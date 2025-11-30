@@ -1,0 +1,595 @@
+{
+  "name": "CoinArrayWithLength",
+  "qualified_name": "CoinArrayWithLength",
+  "brief": "Pointer with length in bytes.",
+  "detailed": "This has a pointer to an array and the number of bytes in array. If number of bytes==-1 then CoinConditionalNew deletes existing pointer and returns new pointer of correct size (and number bytes still -1). CoinConditionalDelete deletes existing pointer and NULLs it. So behavior is as normal (apart from New deleting pointer which will have no effect with good coding practices. If number of bytes >=0 then CoinConditionalNew just returns existing pointer if array big enough otherwise deletes existing pointer, allocates array with spare 1%+64 bytes and updates number of bytes CoinConditionalDelete sets number of bytes = -size-2 and then array returns NULL",
+  "header_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [
+    "CoinArbitraryArrayWithLength",
+    "CoinBigIndexArrayWithLength",
+    "CoinDoubleArrayWithLength",
+    "CoinFactorizationDoubleArrayWithLength",
+    "CoinFactorizationLongDoubleArrayWithLength",
+    "CoinIntArrayWithLength",
+    "CoinUnsignedIntArrayWithLength",
+    "CoinVoidStarArrayWithLength"
+  ],
+  "methods": [
+    {
+      "name": "getSize",
+      "brief": "Get the size.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 561,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "rawSize",
+      "brief": "Get the size.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 566,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "switchedOn",
+      "brief": "See if persistence already on.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 571,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "capacity",
+      "brief": "Get the capacity (just read it)",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 576,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setCapacity",
+      "brief": "Set the capacity to >=0 if <=-2.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 581,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "array",
+      "brief": "Get Array.",
+      "detailed": "",
+      "return_type": "const char *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 587,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setSize",
+      "brief": "Set the size.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 596,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "switchOff",
+      "brief": "Set the size to -1.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 601,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "switchOn",
+      "brief": "Set the size to -2 and alignment.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "alignment",
+          "type": "int",
+          "description": "",
+          "default": "3"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 606,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "setPersistence",
+      "brief": "Does what is needed to set persistence.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "flag",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "currentLength",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 612,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clear",
+      "brief": "Zero out array.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 614,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "swap",
+      "brief": "Swaps memory between two members.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "other",
+          "type": "CoinArrayWithLength &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 616,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "extend",
+      "brief": "Extend a persistent array keeping data (size in bytes)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "newSize",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 618,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "conditionalNew",
+      "brief": "Conditionally gets new array.",
+      "detailed": "",
+      "return_type": "char *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "sizeWanted",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 624,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "conditionalDelete",
+      "brief": "Conditionally deletes.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 626,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinArrayWithLength",
+      "brief": "Default constructor - NULL.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 632,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinArrayWithLength",
+      "brief": "Alternate Constructor - length in bytes - size_ -1.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 640,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinArrayWithLength",
+      "brief": "Alternate Constructor - length in bytes mode - 0 size_ set to size mode>0 size_ set to size and zeroed if size<=0 just does alignment If abs(mode) >2 then align on that as power of 2.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "mode",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 653,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinArrayWithLength",
+      "brief": "Copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinArrayWithLength &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 655,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinArrayWithLength",
+      "brief": "Copy constructor.2.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinArrayWithLength *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 657,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "Assignment operator.",
+      "detailed": "",
+      "return_type": "CoinArrayWithLength &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinArrayWithLength &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 659,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "copy",
+      "brief": "Assignment with length (if -1 use internal length)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinArrayWithLength &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberBytes",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": "-1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 661,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "allocate",
+      "brief": "Assignment with length - does not copy.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinArrayWithLength &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberBytes",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 663,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinArrayWithLength",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 665,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getArray",
+      "brief": "Get array with alignment.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 667,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "reallyFreeArray",
+      "brief": "Really get rid of array with alignment.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 669,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "getCapacity",
+      "brief": "Get enough space (if more needed then do at least needed)",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "numberBytes",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberIfNeeded",
+          "type": "CoinByteArray",
+          "description": "",
+          "default": "-1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinIndexedVector.hpp",
+      "source_line": 671,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

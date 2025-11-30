@@ -1,0 +1,727 @@
+{
+  "name": "CoinModelLinkedList",
+  "qualified_name": "CoinModelLinkedList",
+  "brief": "",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinModelLinkedList",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 378,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinModelLinkedList",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 380,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinModelLinkedList",
+      "brief": "The copy constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinModelLinkedList &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 386,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "=",
+      "detailed": "",
+      "return_type": "CoinModelLinkedList &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "",
+          "type": "const CoinModelLinkedList &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 388,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "resize",
+      "brief": "Resize list - for row list maxMajor is maximum rows.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "maxMajor",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "maxElements",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 395,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "create",
+      "brief": "Create list - for row list maxMajor is maximum rows.",
+      "detailed": "type 0 row list, 1 column list",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "maxMajor",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "maxElements",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberMajor",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberMinor",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "type",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberElements",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "triples",
+          "type": "const CoinModelTriple *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 399,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberMajor",
+      "brief": "Number of major items i.e. rows if just row links.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 404,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "maximumMajor",
+      "brief": "Maximum number of major items i.e. rows if just row links.",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 409,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "numberElements",
+      "brief": "Number of elements.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 414,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "maximumElements",
+      "brief": "Maximum number of elements.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 419,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "firstFree",
+      "brief": "First on free chain.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 424,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "lastFree",
+      "brief": "Last on free chain.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 429,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "first",
+      "brief": "First on chain.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "which",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 434,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "last",
+      "brief": "Last on chain.",
+      "detailed": "",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "which",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 439,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "next",
+      "brief": "Next array.",
+      "detailed": "",
+      "return_type": "const CoinBigIndex *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 444,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "previous",
+      "brief": "Previous array.",
+      "detailed": "",
+      "return_type": "const CoinBigIndex *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 449,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addEasy",
+      "brief": "Adds to list - easy case i.e.",
+      "detailed": "add row to row list Returns where chain starts",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "majorIndex",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberOfElements",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indices",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "triples",
+          "type": "CoinModelTriple *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hash",
+          "type": "CoinModelHash2 &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 460,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addHard",
+      "brief": "Adds to list - hard case i.e.",
+      "detailed": "add row to column list",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "minorIndex",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "numberOfElements",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "indices",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "elements",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "triples",
+          "type": "CoinModelTriple *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hash",
+          "type": "CoinModelHash2 &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 465,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "addHard",
+      "brief": "Adds to list - hard case i.e.",
+      "detailed": "add row to column list This is when elements have been added to other copy",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "first",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "triples",
+          "type": "const CoinModelTriple *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "firstFree",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lastFree",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nextOther",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 471,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteSame",
+      "brief": "Deletes from list - same case i.e.",
+      "detailed": "delete row from row list",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "which",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "triples",
+          "type": "CoinModelTriple *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hash",
+          "type": "CoinModelHash2 &",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "zapTriples",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 475,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateDeleted",
+      "brief": "Deletes from list - other case i.e.",
+      "detailed": "delete row from column list This is when elements have been deleted from other copy",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "which",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "triples",
+          "type": "CoinModelTriple *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "otherList",
+          "type": "CoinModelLinkedList &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 480,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "deleteRowOne",
+      "brief": "Deletes one element from Row list.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "position",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "triples",
+          "type": "CoinModelTriple *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hash",
+          "type": "CoinModelHash2 &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 484,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "updateDeletedOne",
+      "brief": "Update column list for one element when one element deleted from row copy.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "position",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "triples",
+          "type": "const CoinModelTriple *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 489,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "fill",
+      "brief": "Fills first,last with -1.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "first",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "last",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 491,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "synchronize",
+      "brief": "Puts in free list from other list.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "other",
+          "type": "CoinModelLinkedList &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 493,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "validateLinks",
+      "brief": "Checks that links are consistent.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "triples",
+          "type": "const CoinModelTriple *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinModelUseful.hpp",
+      "source_line": 495,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

@@ -1,0 +1,302 @@
+{
+  "name": "CoinPresolveMonitor",
+  "qualified_name": "CoinPresolveMonitor",
+  "brief": "Monitor a row or column for modification.",
+  "detailed": "The purpose of this class is to monitor a row or column for modifications during presolve and postsolve. Each object can monitor one row or column. The initial copy of the row or column is loaded by the constructor. Each subsequent call to checkAndTell() compares the current state of the row or column with the stored state and reports any modifications.\nInternally the row or column is held as a CoinPackedVector so that it's possible to follow a row or column through presolve (CoinPresolveMatrix) and postsolve (CoinPostsolveMatrix).\nDo not underestimate the amount of work required here. Extracting a row from the CoinPostsolve matrix requires a scan of every element in the matrix. That's one scan by the constructor and one scan with every call to modify. But that's precisely why it's virtually impossible to debug presolve without aids.\nParameter overloads for CoinPresolveMatrix and CoinPostsolveMatrix are a little clumsy, but not a problem in use. The alternative is to add methods to the CoinPresolveMatrix and CoinPostsolveMatrix classes that will only be used for debugging. That's not too attractive either.",
+  "header_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinPresolveMonitor",
+      "brief": "Default constructor.",
+      "detailed": "Creates an empty monitor.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+      "source_line": 43,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPresolveMonitor",
+      "brief": "Initialise from a CoinPresolveMatrix.",
+      "detailed": "Load the initial row or column from a CoinPresolveMatrix. Set `isRow` true for a row, false for a column.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "mtx",
+          "type": "const CoinPresolveMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "isRow",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "k",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+      "source_line": 50,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPresolveMonitor",
+      "brief": "Initialise from a CoinPostsolveMatrix.",
+      "detailed": "Load the initial row or column from a CoinPostsolveMatrix. Set `isRow` true for a row, false for a column.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "mtx",
+          "type": "const CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "isRow",
+          "type": "bool",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "k",
+          "type": "int",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+      "source_line": 57,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "checkAndTell",
+      "brief": "Compare the present row or column against the stored copy and report differences.",
+      "detailed": "Load the current row or column from a CoinPresolveMatrix and compare. Differences are printed to std::cout.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "mtx",
+          "type": "const CoinPresolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+      "source_line": 65,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "checkAndTell",
+      "brief": "Compare the present row or column against the stored copy and report differences.",
+      "detailed": "Load the current row or column from a CoinPostsolveMatrix and compare. Differences are printed to std::cout.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "mtx",
+          "type": "const CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+      "source_line": 73,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "extractRow",
+      "brief": "Extract a row from a CoinPresolveMatrix.",
+      "detailed": "",
+      "return_type": "CoinPackedVector *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "mtx",
+          "type": "const CoinPresolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+      "source_line": 77,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "extractCol",
+      "brief": "Extract a column from a CoinPresolveMatrix.",
+      "detailed": "",
+      "return_type": "CoinPackedVector *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "mtx",
+          "type": "const CoinPresolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+      "source_line": 80,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "extractRow",
+      "brief": "Extract a row from a CoinPostsolveMatrix.",
+      "detailed": "",
+      "return_type": "CoinPackedVector *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "mtx",
+          "type": "const CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+      "source_line": 83,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "extractCol",
+      "brief": "Extract a column from a CoinPostsolveMatrix.",
+      "detailed": "",
+      "return_type": "CoinPackedVector *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "j",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "mtx",
+          "type": "const CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+      "source_line": 86,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "checkAndTell",
+      "brief": "Worker method underlying the public checkAndTell methods.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "curVec",
+          "type": "CoinPackedVector *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "lb",
+          "type": "double",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ub",
+          "type": "double",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMonitor.hpp",
+      "source_line": 89,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

@@ -1,0 +1,105 @@
+{
+  "name": "CoinWarmStart",
+  "qualified_name": "CoinWarmStart",
+  "brief": "Abstract base class for warm start information.",
+  "detailed": "Provides the interface for warm start objects that store solver state enabling faster re-optimization. Derived classes implement solver-specific storage (e.g., variable/constraint basis status for simplex methods).\nThe class supports a diff mechanism for efficient incremental updates:generateDiff() computes changes from another warm startapplyDiff() applies a diff to update this warm start",
+  "header_file": "layer-0/CoinUtils/src/CoinWarmStart.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinWarmStart.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [],
+  "derived_classes": [
+    "CoinWarmStartVector< double >",
+    "CoinWarmStartVector< U >",
+    "CoinWarmStartBasis",
+    "CoinWarmStartDual",
+    "CoinWarmStartPrimalDual",
+    "CoinWarmStartVector< T >",
+    "CoinWarmStartVectorPair< T, U >"
+  ],
+  "methods": [
+    {
+      "name": "~CoinWarmStart",
+      "brief": "Virtual destructor for proper cleanup of derived classes.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStart.hpp",
+      "source_line": 47,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clone",
+      "brief": "Create a deep copy of this warm start object.",
+      "detailed": "",
+      "return_type": "CoinWarmStart *",
+      "return_desc": "Pointer to newly allocated copy (caller owns memory)",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStart.hpp",
+      "source_line": 53,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "generateDiff",
+      "brief": "Generate a diff representing changes from another warm start.",
+      "detailed": "Computes the difference between this warm start and another, enabling efficient storage of incremental changes.",
+      "return_type": "CoinWarmStartDiff *",
+      "return_desc": "Pointer to diff object (caller owns memory), or nullptr if not supported",
+      "parameters": [
+        {
+          "name": "oldWarmStart",
+          "type": "const CoinWarmStart *const",
+          "description": "The baseline warm start to compare against",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStart.hpp",
+      "source_line": 67,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "applyDiff",
+      "brief": "Apply a diff to update this warm start.",
+      "detailed": "Modifies this warm start by applying changes encoded in the diff object.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "diff",
+          "type": "const CoinWarmStartDiff *const",
+          "description": "The diff to apply",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStart.hpp",
+      "source_line": 79,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

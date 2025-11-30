@@ -1,0 +1,251 @@
+{
+  "name": "CoinWarmStartDual",
+  "qualified_name": "CoinWarmStartDual",
+  "brief": "WarmStart information that is only a dual vector.",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinWarmStart"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "generateDiff",
+      "brief": "Generate a diff that can convert the warm start passed as a parameter to the warm start specified by `this`.",
+      "detailed": "The capabilities are limited: the basis passed as a parameter can be no larger than the basis pointed to by `this`.",
+      "return_type": "CoinWarmStartDiff *",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "oldCWS",
+          "type": "const CoinWarmStart *const",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+      "source_line": 81,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "applyDiff",
+      "brief": "Apply `diff` to this warm start.",
+      "detailed": "Update this warm start by applying `diff`. It's assumed that the allocated capacity of the warm start is sufficiently large.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "cwsdDiff",
+          "type": "const CoinWarmStartDiff *const",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+      "source_line": 89,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "size",
+      "brief": "return the size of the dual vector",
+      "detailed": "",
+      "return_type": "int",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+      "source_line": 30,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "dual",
+      "brief": "return a pointer to the array of duals",
+      "detailed": "",
+      "return_type": "const double *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+      "source_line": 32,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "assignDual",
+      "brief": "Assign the dual vector to be the warmstart information.",
+      "detailed": "In this method the object assumes ownership of the pointer and upon return \"dual\" will be a NULL pointer. If copying is desirable use the constructor.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "dual",
+          "type": "double *&",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+      "source_line": 37,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinWarmStartDual",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+      "source_line": 42,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinWarmStartDual",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "dual",
+          "type": "const double *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+      "source_line": 44,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinWarmStartDual",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinWarmStartDual &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+      "source_line": 49,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "operator=",
+      "brief": "",
+      "detailed": "",
+      "return_type": "CoinWarmStartDual &",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "rhs",
+          "type": "const CoinWarmStartDual &",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+      "source_line": 54,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "clone",
+      "brief": "Virtual constructor",
+      "detailed": "",
+      "return_type": "CoinWarmStart *",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+      "source_line": 63,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinWarmStartDual",
+      "brief": "",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinWarmStartDual.hpp",
+      "source_line": 68,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

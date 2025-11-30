@@ -20,18 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Install Doxygen
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y doxygen graphviz
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
 
       - name: Install Zola
         run: |
@@ -39,30 +27,10 @@ jobs:
           tar -xzf zola.tar.gz
           sudo mv zola /usr/local/bin/
 
-      - name: Run Doxygen
-        run: |
-          mkdir -p build/doxygen
-          doxygen Doxyfile
-
-      - name: Transform Doxygen to JSON + Markdown
-        run: |
-          python3 scripts/transform-doxygen.py \
-            build/doxygen/xml \
-            site/content \
-            site/static/api
-
       - name: Build Zola site
         run: |
           cd site
           zola build
-
-      - name: Copy Doxygen HTML to site
-        run: |
-          mkdir -p site/public/doxygen
-          cp -r build/doxygen/html/* site/public/doxygen/ || true
-
-      - name: Add .nojekyll
-        run: touch site/public/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

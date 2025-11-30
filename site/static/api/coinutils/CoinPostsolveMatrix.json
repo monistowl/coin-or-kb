@@ -1,0 +1,644 @@
+{
+  "name": "CoinPostsolveMatrix",
+  "qualified_name": "CoinPostsolveMatrix",
+  "brief": "Augments CoinPrePostsolveMatrix with information about the problem that is only needed during postsolve.",
+  "detailed": "The notable point is that the matrix representation is threaded. The representation is column-major and starts with the standard two pairs of arrays: one pair to hold the row indices and coefficients, the second pair to hold the column starting positions and lengths. But the row indices and coefficients for a column do not necessarily occupy a contiguous block in their respective arrays. Instead, a link array gives the position of the next (row index,coefficient) pair. If the row index and value of a coefficient a<p,j> occupy position kp in their arrays, then the position of the next coefficient a<q,j> is found as kq = link[kp].\nThis threaded representation allows for efficient expansion of columns as rows are reintroduced during postsolve transformations. The basic packed structures are allocated to the expected size of the postsolved matrix, and as new coefficients are added, their location is simply added to the thread for the column.\nThere is no provision to convert the threaded representation to a packed representation. In the context of postsolve, it's not required. (You did keep a copy of the original matrix, eh?)",
+  "header_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinPrePostsolveMatrix"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "check_nbasic",
+      "brief": "debug",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1598,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "CoinPostsolveMatrix",
+      "brief": "Native constructor",
+      "detailed": "This constructor creates an empty object which must then be loaded. On the other hand, it doesn't assume that the client is an OsiSolverInterface.\nIf provided, parameters `origRL` and `origRU` should be the row lower and upper bound vectors of the original problem. These are not required but if provided are used to improve the presolved system.",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "ncols_alloc",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nrows_alloc",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "nelems_alloc",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "origRL",
+          "type": "const double *",
+          "description": "",
+          "default": "0"
+        },
+        {
+          "name": "origRU",
+          "type": "const double *",
+          "description": "",
+          "default": "0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1528,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "assignPresolveToPostsolve",
+      "brief": "Load an empty CoinPostsolveMatrix from a CoinPresolveMatrix.",
+      "detailed": "This routine transfers the contents of the CoinPrePostsolveMatrix object from the CoinPresolveMatrix object to the CoinPostsolveMatrix object and completes initialisation of the CoinPostsolveMatrix object. The empty shell of the CoinPresolveMatrix object is destroyed.\nAs noted for CoinPostsolveMatrix(), you can supply optional vectors `origRL` and `origRU` for the row lower and upper bounds.\nThe routine expects an empty CoinPostsolveMatrix object. If handed a loaded object, a lot of memory will leak.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "preObj",
+          "type": "CoinPresolveMatrix *&",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "origRL",
+          "type": "const double *",
+          "description": "",
+          "default": "0"
+        },
+        {
+          "name": "origRU",
+          "type": "const double *",
+          "description": "",
+          "default": "0"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1545,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinPostsolveMatrix",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1549,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_find_col",
+      "brief": "Find position of a column in a row in a row-major matrix.",
+      "detailed": "The routine returns the position `k` in `hcol` for the specified `col`. It will abort if the entry does not exist.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "col",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "krs",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "kre",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hcol",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1704,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_find_minor2",
+      "brief": "Find position of a minor index in a major vector in a threaded matrix.",
+      "detailed": "The routine returns the position `k` in `minndxs` for the specified minor index `tgt`. It will abort if the entry does not exist. Can be used directly or via the inline wrapper presolve_find_row2.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "tgt",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ks",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majlen",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minndxs",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majlinks",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1753,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_find_row2",
+      "brief": "Find position of a row in a column in a column-major threaded matrix.",
+      "detailed": "The routine returns the position `k` in `hrow` for the specified `row`. It will abort if the entry does not exist.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "kcs",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collen",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hrow",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "clinks",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1764,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_find_minor3",
+      "brief": "Find position of a minor index in a major vector in a threaded matrix.",
+      "detailed": "The routine returns the position `k` in `minndxs` for the specified minor index `tgt`. It will return -1 if the entry does not exist. Can be used directly or via the inline wrappers presolve_find_row3.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "tgt",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "ks",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majlen",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minndxs",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majlinks",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1779,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_find_row3",
+      "brief": "Find position of a row in a column in a column-major threaded matrix.",
+      "detailed": "The routine returns the position `k` in `hrow` for the specified `row`. It will return -1 if the entry does not exist.",
+      "return_type": "CoinBigIndex",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "kcs",
+          "type": "CoinBigIndex",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "collen",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hrow",
+          "type": "const int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "clinks",
+          "type": "const CoinBigIndex *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1790,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_delete_from_major2",
+      "brief": "Delete the entry for a minor index from a major vector in a threaded matrix.",
+      "detailed": "Deletes the entry for `minndx` from the major vector `majndx`. Specifically, the relevant entries are removed from the minor index (`minndxs`) and coefficient (`els`) arrays and the vector length (`majlens`) is decremented. The thread for the major vector is relinked around the deleted entry and the space is returned to the free list.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "majndx",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minndx",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majstrts",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majlens",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "minndxs",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "majlinks",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "free_listp",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1892,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_delete_from_col2",
+      "brief": "Delete the entry for row `row` from column `col` in a column-major threaded matrix.",
+      "detailed": "Deletes the entry for `row` from the major vector for `col`. Specifically, the relevant entries are removed from the row index (`hrow`) and coefficient (`colels`) arrays and the vector length (`hincol`) is decremented. The thread for the major vector is relinked around the deleted entry and the space is returned to the free list.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "row",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "col",
+          "type": "int",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "mcstrt",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hincol",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "hrow",
+          "type": "int *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "clinks",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "free_listp",
+          "type": "CoinBigIndex *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolveMatrix.hpp",
+      "source_line": 1907,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_check_threads",
+      "brief": "Checks that column threads agree with column lengths.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "const CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 101,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_check_free_list",
+      "brief": "Checks the free list.",
+      "detailed": "Scans the thread of free locations in the bulk store and checks that all entries are reasonable (0 <= index < bulk0_). If chkElemCnt is true, it also checks that the total number of entries in the matrix plus the locations on the free list total to the size of the bulk store. Postsolve routines do not maintain an accurate element count, but this is useful for checking a newly constructed postsolve matrix.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "const CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "chkElemCnt",
+          "type": "bool",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 113,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_check_reduced_costs",
+      "brief": "Check stored reduced costs for accuracy and consistency with variable status.",
+      "detailed": "The routine will check the value of the reduced costs for architectural variables (CoinPrePostsolveMatrix::rcosts_). It performs an accuracy check by recalculating the reduced cost from scratch. It will also check the value for consistency with the status information in CoinPrePostsolveMatrix::colstat_.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "const CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 126,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_check_duals",
+      "brief": "Check the dual variables for consistency with row activity.",
+      "detailed": "The routine checks that the value of the dual variable is consistent with the state of the constraint (loose, tight at lower bound, or tight at upper bound).",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "postObj",
+          "type": "const CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 135,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_check_sol",
+      "brief": "Check primal solution and architectural variable status.",
+      "detailed": "The architectural variables can be checked for bogus values, feasibility, and valid status. The row activity is checked for bogus values, accuracy, and feasibility. See the definitions in CoinPresolvePsdebug.cpp for more information.",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "postObj",
+          "type": "const CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "chkColSol",
+          "type": "int",
+          "description": "",
+          "default": "2"
+        },
+        {
+          "name": "chkRowAct",
+          "type": "int",
+          "description": "",
+          "default": "2"
+        },
+        {
+          "name": "chkStatus",
+          "type": "int",
+          "description": "",
+          "default": "1"
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 158,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "presolve_check_nbasic",
+      "brief": "Check for the proper number of basic variables.",
+      "detailed": "",
+      "return_type": "void",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "postObj",
+          "type": "const CoinPostsolveMatrix *",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinPresolvePsdebug.hpp",
+      "source_line": 170,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}

@@ -1,0 +1,147 @@
+{
+  "name": "CoinCliqueSet",
+  "qualified_name": "CoinCliqueSet",
+  "brief": "",
+  "detailed": "",
+  "header_file": "layer-0/CoinUtils/src/CoinCliqueSet.hpp",
+  "source_file": "layer-0/CoinUtils/src/CoinCliqueSet.hpp",
+  "library": "CoinUtils",
+  "layer": 0,
+  "algorithms": [],
+  "base_classes": [
+    "CoinCliqueList"
+  ],
+  "derived_classes": [],
+  "methods": [
+    {
+      "name": "CoinCliqueSet",
+      "brief": "Default constructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "_iniClqCap",
+          "type": "size_t",
+          "description": "initial capacity to store cliques",
+          "default": ""
+        },
+        {
+          "name": "_iniClqElCap",
+          "type": "size_t",
+          "description": "initial capacity of the elements of the cliques",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueSet.hpp",
+      "source_line": 34,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "~CoinCliqueSet",
+      "brief": "Destructor.",
+      "detailed": "",
+      "return_type": "",
+      "return_desc": "",
+      "parameters": [],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueSet.hpp",
+      "source_line": 39,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "insertIfNotDuplicate",
+      "brief": "Try to insert a clique in the set.",
+      "detailed": "Return true if clique was added and false if it was already there.",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "size",
+          "type": "size_t",
+          "description": "size of the clique to be added",
+          "default": ""
+        },
+        {
+          "name": "els",
+          "type": "const size_t",
+          "description": "indexes of the clique to be added",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueSet.hpp",
+      "source_line": 49,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "public"
+    },
+    {
+      "name": "vectorHashCode",
+      "brief": "Return the hash value of a clique.",
+      "detailed": "",
+      "return_type": "size_t",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "els",
+          "type": "const std::vector< size_t > &",
+          "description": "indexes of the clique",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueSet.hpp",
+      "source_line": 58,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    },
+    {
+      "name": "alreadyInserted",
+      "brief": "Return whether a clique has already been inserted into the clique set.",
+      "detailed": "",
+      "return_type": "bool",
+      "return_desc": "",
+      "parameters": [
+        {
+          "name": "els",
+          "type": "const std::vector< size_t > &",
+          "description": "indexes of the clique",
+          "default": ""
+        },
+        {
+          "name": "hashCode",
+          "type": "size_t",
+          "description": "hash value of the clique (call method vectorHashCode)",
+          "default": ""
+        }
+      ],
+      "source_file": "layer-0/CoinUtils/src/CoinCliqueSet.hpp",
+      "source_line": 69,
+      "source_code": "",
+      "algorithm": "",
+      "complexity": "",
+      "math": "",
+      "refs": [],
+      "access": "private"
+    }
+  ],
+  "members": [],
+  "source_code": "",
+  "_schema_version": "1.0",
+  "_generator": "transform-doxygen.py"
+}
