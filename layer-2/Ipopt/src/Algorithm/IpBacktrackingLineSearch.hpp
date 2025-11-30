@@ -31,6 +31,31 @@
  * - watchdog_trial_iter_max: Watchdog iteration limit
  * - max_soc: Maximum second-order corrections
  *
+ * @algorithm Backtracking Line Search with Filter/Restoration:
+ * Globalization for interior point ensuring convergence from arbitrary starts.
+ * 1. Compute max step α_max from fraction-to-boundary rule: x+α*Δx ≥ τ*x
+ * 2. Try full step α = α_max, check acceptability (filter or merit)
+ * 3. If rejected, backtrack: α ← α * α_red (typically 0.5)
+ * 4. If α < α_min, enter restoration phase (minimize infeasibility)
+ * 5. Second-order correction: if step rejected due to constraints,
+ *    solve for correction Δx_soc to reduce linearization error
+ * Watchdog: temporarily accept steps failing filter to escape local minima.
+ *
+ * @math Fraction-to-boundary: α_max = max{α : x + αΔx ≥ τx, s + αΔs ≥ τs}
+ * where τ ∈ (0,1) keeps iterates strictly interior (typically τ = 0.995).
+ * Armijo-like sufficient decrease: φ(x+αd) ≤ φ(x) + η*α*∇φ^T*d
+ * or filter acceptance: (θ,φ) not dominated by any filter entry.
+ * SOC correction: Δx_soc = -H^{-1}*A^T*(A*Δx - c(x+αΔx))
+ *
+ * @complexity O(1) to O(k) acceptability tests per iteration where k ≤ log(α_max/α_min).
+ * Each test requires O(m) constraint evaluations. SOC adds O(m³) for linear solve.
+ * Restoration phase iterations: O(√m) typically for feasibility restoration.
+ *
+ * @ref Fletcher & Leyffer (2002). "Nonlinear programming without a penalty function".
+ *   Mathematical Programming 91:239-269. [Filter method]
+ * @ref Wächter & Biegler (2005). "Line search filter methods for nonlinear programming".
+ *   SIAM J. Optim. 16(1):1-31. [Filter line search theory]
+ *
  * @see IpLineSearch.hpp for the interface
  * @see IpBacktrackingLSAcceptor.hpp for acceptance test strategies
  * @see IpFilterLSAcceptor.hpp for filter-based acceptance

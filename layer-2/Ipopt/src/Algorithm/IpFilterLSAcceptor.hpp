@@ -37,6 +37,30 @@
  * - Dominated entries removed on filter augmentation
  * - Filter reset heuristic when repeatedly rejected by filter
  *
+ * @algorithm Filter Method for Nonlinear Optimization:
+ * Bi-objective approach replacing traditional merit functions. Track pairs
+ * (θ, φ) where θ = constraint violation, φ = barrier objective.
+ * Accept trial point if:
+ * 1. Sufficient φ decrease (Armijo): φ(x+αd) ≤ φ(x) - η*α*∇φ^T*d, OR
+ * 2. Switching to feasibility: θ sufficient, ∇φ^T*d < 0, AND α*(-∇φ^T*d)^sφ > δ*θ^sθ
+ * 3. Filter acceptable: (θ_new, φ_new) not dominated by any (θ_i, φ_i) in filter
+ * Dominance: (θ,φ) dominates (θ',φ') if θ ≤ (1-γ_θ)θ' AND φ ≤ φ' - γ_φ*θ'
+ *
+ * @math Filter entries F = {(θ_i, φ_i)}. Accept x_new if ∀(θ_i,φ_i) ∈ F:
+ * θ(x_new) ≤ (1-γ_θ)θ_i  OR  φ(x_new) ≤ φ_i - γ_φ*θ_i
+ * Switching condition: if α*(-∇φ^T d)^s_φ > δ*θ^s_θ, prioritize optimality.
+ * Otherwise prioritize feasibility. Prevents Maratos effect via SOC.
+ * Filter augmented when accepting step improving only constraint violation.
+ *
+ * @complexity O(|F|) per acceptance test where |F| = filter size.
+ * Filter size bounded by O(k) where k = iteration count; dominated entries pruned.
+ * SOC: O(m³) per correction for linear solve.
+ *
+ * @ref Fletcher & Leyffer (2002). "Nonlinear programming without a penalty function".
+ *   Mathematical Programming 91:239-269. [Filter method introduction]
+ * @ref Fletcher, Leyffer & Toint (2002). "On the global convergence of a filter-SQP
+ *   algorithm". SIAM J. Optim. 13:44-59. [Global convergence theory]
+ *
  * @see IpBacktrackingLSAcceptor.hpp for the base interface
  * @see IpFilter.hpp for the filter data structure
  * @see IpBacktrackingLineSearch.hpp for usage

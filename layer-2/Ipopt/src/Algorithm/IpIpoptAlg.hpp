@@ -19,8 +19,37 @@
  * Uses Strategy pattern: line search, mu update, convergence check
  * are all pluggable components configured via AlgorithmBuilder.
  *
+ * @algorithm Primal-Dual Interior Point Method for NLP:
+ * Solves min f(x) s.t. c(x)=0, x≥0 by solving perturbed KKT conditions:
+ * ∇f(x) - A^T y - z = 0,  c(x) = 0,  XZe = μe
+ * Newton direction from linearized KKT system (augmented system).
+ * Filter line search ensures global convergence. Barrier μ→0 drives
+ * solution to boundary. Supports exact Hessian or L-BFGS approximation.
+ *
+ * @math KKT system solved each iteration:
+ * [W    A^T  -I ] [Δx]   [∇f - A^T y - z    ]
+ * [A    0    0  ] [Δy] = [-c(x)             ]
+ * [Z    0    X  ] [Δz]   [μe - XZe          ]
+ * where W = ∇²L (Hessian of Lagrangian), A = ∇c (constraint Jacobian).
+ * Reduced to augmented system: [W+Σ  A^T][Δx] = [r_d - X^{-1}(μe-XZe)]
+ *                              [A    0  ][Δy]   [-c(x)                ]
+ * where Σ = X^{-1}Z diagonal. Solved via symmetric indefinite factorization.
+ *
+ * @complexity O(m²n + m³) per iteration: O(mn) to evaluate gradients,
+ * O(m²n) to form augmented matrix, O(m³) for factorization (sparse: O(nnz(L)²)).
+ * Total iterations typically O(√n) to O(n) for well-conditioned problems.
+ * Convergence: locally quadratic near solution with exact Hessian.
+ *
+ * @ref Wächter & Biegler (2006). "On the implementation of an interior-point
+ *   filter line-search algorithm for large-scale nonlinear programming".
+ *   Mathematical Programming 106(1):25-57. [Main Ipopt paper]
+ * @ref Nocedal & Wright (2006). "Numerical Optimization" 2nd ed. Springer.
+ *   Chapter 19. [Interior point methods for NLP]
+ *
  * @see IpAlgBuilder.hpp for algorithm construction
  * @see IpIpoptData.hpp for iteration data storage
+ * @see IpBacktrackingLineSearch.hpp for filter line search
+ * @see IpPDSystemSolver.hpp for KKT system solution
  */
 
 #ifndef __IPIPOPTALG_HPP__
