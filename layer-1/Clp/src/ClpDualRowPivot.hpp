@@ -15,9 +15,35 @@
  * - updateWeights(): Maintain pricing information after pivots
  * - updatePrimalSolution(): Update solution after basis change
  *
+ * @algorithm Dual Simplex Pivot Row Selection (Strategy Pattern):
+ * Chooses which basic variable leaves the basis in dual simplex iteration.
+ * The leaving variable is primal infeasible (violating bounds).
+ * Common strategies:
+ * - Dantzig: Choose most infeasible variable (simple, fast per iteration)
+ * - Steepest edge: Minimize ||B^{-1}e_i|| weighted infeasibility (fewer iterations)
+ * - Partial pricing: Only scan subset of rows (for large problems)
+ *
+ * @math In dual simplex, we maintain dual feasibility (reduced costs correct signs)
+ * and iterate toward primal feasibility. Leaving variable selection:
+ * - Find i where x_B[i] < l_i or x_B[i] > u_i (primal infeasibility)
+ * - Dantzig: max{|x_B[i] - bound_i|}
+ * - Steepest: max{|x_B[i] - bound_i| / ||B^{-1}e_i||}
+ * The ||B^{-1}e_i|| weights are maintained incrementally across iterations.
+ *
+ * @complexity Dantzig: O(m) scan of basic variables per iteration.
+ * Steepest edge: O(m) scan + O(nnz) weight updates per iteration.
+ * Steepest edge typically reduces total iteration count by 2-3x,
+ * outweighing higher per-iteration cost for most problems.
+ *
+ * @ref Goldfarb, D. & Reid, J.K. (1977). "A practicable steepest-edge simplex
+ *   algorithm". Mathematical Programming 12:361-371.
+ * @ref Forrest, J.J. & Goldfarb, D. (1992). "Steepest-edge simplex algorithms
+ *   for linear programming". Mathematical Programming 57:341-374.
+ *
  * @see ClpDualRowDantzig for simple most-infeasible selection
  * @see ClpDualRowSteepest for steepest edge pricing (recommended)
  * @see ClpSimplexDual for the dual simplex algorithm
+ * @see ClpPrimalColumnPivot for the primal simplex equivalent
  */
 
 #ifndef ClpDualRowPivot_H

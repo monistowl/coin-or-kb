@@ -14,6 +14,30 @@
  * steepest edge methods on degenerate or difficult problems. Use
  * ClpPrimalColumnSteepest for better performance on most problems.
  *
+ * @algorithm Dantzig's Rule (Primal Simplex Entering Variable Selection):
+ * Scans all nonbasic variables and selects the one with most negative reduced
+ * cost. This greedy choice maximizes rate of improvement per unit movement.
+ * No weight storage needed - stateless selection based purely on current
+ * reduced costs. Fast per iteration but may cycle on degenerate problems
+ * without anti-cycling rules (handled elsewhere in ClpSimplexPrimal).
+ *
+ * @math For minimization, select entering column j* = argmin{d_j | d_j < 0}
+ * where d_j = c_j - c_B^T B^{-1} A_j is the reduced cost of nonbasic column j.
+ * If d_j >= 0 for all j, current solution is optimal.
+ * The most negative d_j gives steepest descent in objective space,
+ * though not necessarily fewest iterations to optimality.
+ *
+ * @complexity O(n) per iteration to scan all nonbasic reduced costs.
+ * Total work depends heavily on problem structure - may require
+ * O(2^n) iterations worst case (Klee-Minty), but polynomial expected
+ * for random problems. Steepest edge typically 2-3x fewer iterations.
+ *
+ * @ref Dantzig, G.B. (1947). "Maximization of a linear function of variables
+ *   subject to linear inequalities". Activity Analysis of Production and
+ *   Allocation. [Original simplex paper]
+ * @ref Klee, V. & Minty, G.J. (1972). "How good is the simplex algorithm?".
+ *   Inequalities III. [Worst-case exponential example]
+ *
  * @see ClpPrimalColumnPivot for the base interface
  * @see ClpPrimalColumnSteepest for recommended steepest edge variant
  * @see ClpSimplexPrimal for the primal simplex algorithm

@@ -8,11 +8,11 @@
  *
  * Provides Cholesky factorization of the normal equations matrix A*D*A'
  * used in predictor-corrector interior point methods. The factorization
- * can use AMD ordering to reduce fill-in.
+ * uses AMD ordering to reduce fill-in.
  *
  * The base class provides a simple sparse Cholesky implementation with
  * supernodal dense blocks. Derived classes can interface to more
- * sophisticated factorizations (MUMPS, Pardiso, etc.).
+ * sophisticated factorizations (MUMPS, Pardiso, TAUCS, etc.).
  *
  * Key methods:
  * - order(): Compute fill-reducing ordering (AMD by default)
@@ -20,8 +20,32 @@
  * - factorize(): Numeric factorization of A*D*A'
  * - solve(): Solve system using computed factors
  *
+ * @algorithm Sparse Cholesky Factorization for Interior Point Methods:
+ * Computes A*D*A' = L*L' where L is lower triangular. Used to solve the
+ * normal equations in each IPM iteration. Key algorithmic features:
+ * 1. AMD ordering to minimize fill-in (sparse L has fewer nonzeros)
+ * 2. Symbolic factorization: predict sparsity structure before numeric work
+ * 3. Supernodal blocking: dense submatrices within sparse structure
+ * 4. Row dropping: handle rank deficiency by removing dependent rows
+ *
+ * @math Normal equations: A*D*A' * dy = r where D = X^{-1}*S (diagonal scaling).
+ * Factorization: LL' = P(ADA')P' where P is permutation from AMD ordering.
+ * Solution: dy = P' * L'^{-1} * L^{-1} * P * r (forward/back substitution).
+ * Condition number tracked via choleskyCondition_ for numerical stability.
+ *
+ * @complexity Symbolic: O(nnz(L)) to compute structure.
+ * Numeric factorization: O(nnz(L)^2 / n) with supernodal, O(n^3) dense worst case.
+ * Forward/backward solve: O(nnz(L)) per iteration.
+ * With AMD ordering, nnz(L) << n^2 for sparse problems.
+ *
+ * @ref George & Liu (1981). "Computer Solution of Large Sparse Positive
+ *   Definite Systems". Prentice-Hall. [Sparse Cholesky foundations]
+ * @ref Amestoy et al. (1996). "An Approximate Minimum Degree Ordering Algorithm".
+ *   SIAM J. Matrix Anal. Appl. [AMD ordering]
+ *
  * @see ClpInterior for the interior point algorithm
  * @see ClpCholeskyDense for dense Cholesky when A*D*A' becomes dense
+ * @see ClpCholeskyMumps, ClpCholeskyPardiso for advanced factorizations
  * @see CoinFactorization in CoinUtils for simplex LU factorization
  */
 

@@ -15,9 +15,35 @@
  * - updateWeights(): Maintain pricing information after pivots
  * - saveWeights(): Preserve weights across refactorizations
  *
+ * @algorithm Primal Simplex Pivot Column Selection (Strategy Pattern):
+ * Chooses which nonbasic variable enters the basis in primal simplex iteration.
+ * The entering variable has a favorable reduced cost for improving the objective.
+ * Common strategies:
+ * - Dantzig: Choose most negative reduced cost (simple, fast per iteration)
+ * - Steepest edge: Normalize by ||B^{-1}A_j|| (fewer iterations overall)
+ * - Devex: Approximate steepest edge with less overhead
+ * - Partial pricing: Only scan subset of columns (for large problems)
+ *
+ * @math In primal simplex, we maintain primal feasibility and iterate toward
+ * dual feasibility. Reduced cost d_j = c_j - c_B^T B^{-1} A_j.
+ * - Dantzig: Select j with min{d_j | d_j < 0}
+ * - Steepest: Select j with min{d_j / ||B^{-1}A_j||} among d_j < 0
+ * The ||B^{-1}A_j|| norms are maintained incrementally across iterations.
+ *
+ * @complexity Dantzig: O(n) scan of nonbasic variables per iteration.
+ * Steepest edge: O(n) scan + O(m*nnz) weight updates per iteration.
+ * Steepest edge typically reduces total iteration count by 2-3x,
+ * outweighing higher per-iteration cost for most problems.
+ *
+ * @ref Dantzig, G.B. (1963). "Linear Programming and Extensions".
+ *   Princeton University Press. [Original Dantzig rule]
+ * @ref Goldfarb, D. & Reid, J.K. (1977). "A practicable steepest-edge simplex
+ *   algorithm". Mathematical Programming 12:361-371.
+ *
  * @see ClpPrimalColumnDantzig for simple most-negative reduced cost
  * @see ClpPrimalColumnSteepest for steepest edge pricing (recommended)
  * @see ClpSimplexPrimal for the primal simplex algorithm
+ * @see ClpDualRowPivot for the dual simplex equivalent
  */
 
 #ifndef ClpPrimalcolumnPivot_H

@@ -14,6 +14,29 @@
  * This is Dantzig's original 1947 rule applied to dual simplex.
  * Use ClpDualRowSteepest for better performance on most problems.
  *
+ * @algorithm Dantzig's Rule (Dual Simplex Leaving Variable Selection):
+ * Scans all basic variables and selects the one most infeasible w.r.t. bounds.
+ * For variable x_B[i] with bounds [l_i, u_i]:
+ * - If x_B[i] < l_i: infeasibility = l_i - x_B[i] (want to increase)
+ * - If x_B[i] > u_i: infeasibility = x_B[i] - u_i (want to decrease)
+ * Choose the row with maximum infeasibility magnitude.
+ * No weight storage needed - stateless selection on current solution.
+ *
+ * @math In dual simplex, select leaving row i* = argmax{|x_B[i] - bound_i|}
+ * over all basic variables violating their bounds.
+ * The direction of movement (toward lower or upper bound) determines
+ * which reduced costs are candidates for the entering variable.
+ * If all basic variables feasible, current solution is optimal.
+ *
+ * @complexity O(m) per iteration to scan all basic variables.
+ * Same worst-case issues as primal Dantzig (exponential on Klee-Minty
+ * variants). Dual steepest edge typically 2-3x fewer iterations.
+ *
+ * @ref Lemke, C.E. (1954). "The dual method of solving the linear programming
+ *   problem". Naval Research Logistics Quarterly. [Early dual simplex]
+ * @ref Dantzig, G.B. (1963). "Linear Programming and Extensions".
+ *   Princeton University Press. [Comprehensive treatment]
+ *
  * @see ClpDualRowPivot for the base interface
  * @see ClpDualRowSteepest for recommended steepest edge variant
  * @see ClpSimplexDual for the dual simplex algorithm
