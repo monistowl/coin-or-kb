@@ -53,7 +53,17 @@ coin-or-kb/
 ├── .kb/              # Knowledge base metadata
 │   └── status.json   # Annotation progress tracking
 │
-├── scripts/          # Tooling for validation
+├── mcp-server/       # MCP server for AI agents
+│   └── coin_or_kb_server.py
+│
+├── scripts/          # Tooling
+│   ├── extract-annotations.py  # JSON API generator
+│   ├── kb-query.py   # CLI query tool
+│   └── validate.py   # Annotation validator
+│
+├── site/             # Zola static site
+│   └── static/api/   # JSON API output
+│
 ├── prompts/          # Context templates
 └── docs/             # Design documents
 ```
@@ -176,8 +186,65 @@ Annotations use Doxygen-compatible comment blocks:
 
 ## Usage for AI Agents
 
-### Primary: JSON API
-The recommended way to access the knowledge base is via the JSON API:
+### MCP Server
+
+The knowledge base includes an MCP (Model Context Protocol) server for AI agent integration:
+
+```bash
+# Run the MCP server
+python mcp-server/coin_or_kb_server.py
+```
+
+**Available Tools:**
+- `search_algorithms` - Find implementations of algorithms (e.g., "LU factorization", "simplex")
+- `search_math` - Find files with mathematical concepts (e.g., "clique", "Ax=b")
+- `get_library` - Get overview of a library with annotated files
+- `get_file` - Get all annotations for a specific file
+- `list_algorithms` - List all documented algorithms (87+)
+- `get_stats` - Get knowledge base statistics
+
+**Claude Desktop Configuration:**
+```json
+{
+  "mcpServers": {
+    "coin-or-kb": {
+      "command": "python",
+      "args": ["/path/to/coin-or-kb/mcp-server/coin_or_kb_server.py"]
+    }
+  }
+}
+```
+
+### CLI Query Tool
+
+For quick lookups without MCP:
+
+```bash
+# Search algorithms
+./scripts/kb-query.py algo "Markowitz"
+./scripts/kb-query.py algo "branch and bound"
+
+# Search mathematical concepts
+./scripts/kb-query.py math "clique"
+./scripts/kb-query.py math "dual"
+
+# Get library overview
+./scripts/kb-query.py lib CoinUtils
+./scripts/kb-query.py lib HiGHS
+
+# Get file details
+./scripts/kb-query.py file CoinUtils CoinFactorization.hpp
+
+# List all algorithms
+./scripts/kb-query.py list
+
+# Show statistics
+./scripts/kb-query.py stats
+```
+
+### JSON API (Direct Access)
+
+Load the knowledge base directly:
 
 ```python
 import json
@@ -202,7 +269,7 @@ grep -r "@see.*HighsDomain" layer-4/HiGHS/
 ```
 
 ### Understanding a Subsystem
-1. Query the JSON API for the library/file
+1. Query the MCP server or JSON API for the library/file
 2. Check `@brief` for purpose, `@algorithm` for technique
 3. Follow `@see` references to related components
 4. Check `@math` for underlying theory, `@complexity` for performance
