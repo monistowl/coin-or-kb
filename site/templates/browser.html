@@ -823,10 +823,10 @@
         title.textContent = className;
         header.appendChild(title);
 
-        // Link to full docs
+        // Link to full docs (Zola lowercases slugs)
         if (docsIndex.has(className)) {
             var docLink = document.createElement('a');
-            docLink.href = BASE_URL + '/libraries/coinutils/' + className + '/';
+            docLink.href = BASE_URL + '/libraries/coinutils/' + className.toLowerCase() + '/';
             docLink.className = 'doc-button';
             docLink.textContent = 'Docs →';
             docLink.addEventListener('click', function(e) { e.stopPropagation(); });
