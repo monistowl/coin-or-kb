@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} - {{ config.title }}{% endblock %}
+
+{% block extra_head %}
+<style>
+.algorithm-header {
+    margin-bottom: 2rem;
+}
+
+.algorithm-header h1 {
+    margin-bottom: 0.5rem;
+}
+
+.algorithm-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.algorithm-meta .badge {
+    background: var(--accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.algorithm-meta .badge.category {
+    background: var(--accent-light);
+}
+
+.algorithm-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.algorithm-section h2 {
+    color: var(--accent-light);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.algorithm-section h3 {
+    color: var(--text);
+    font-size: 1rem;
+    margin: 1.5rem 0 0.75rem;
+}
+
+.math-block {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-family: 'KaTeX_Main', serif;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.implementation-list {
+    list-style: none;
+    padding: 0;
+}
+
+.implementation-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.implementation-list li:last-child {
+    border-bottom: none;
+}
+
+.implementation-list a {
+    color: var(--accent-light);
+    text-decoration: none;
+}
+
+.implementation-list a:hover {
+    text-decoration: underline;
+}
+
+.implementation-list .brief {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.reference-list {
+    list-style: none;
+    padding: 0;
+}
+
+.reference-list li {
+    padding: 0.75rem;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.complexity-box {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 4px;
+    border-left: 3px solid var(--accent-light);
+}
+
+.nav-breadcrumb {
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.nav-breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.nav-breadcrumb a:hover {
+    color: var(--accent-light);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<article>
+    <nav class="nav-breadcrumb">
+        <a href="{{ config.base_url }}/algorithms/">Algorithms</a> /
+        {% if page.extra.category %}{{ page.extra.category }} /{% endif %}
+        {{ page.title }}
+    </nav>
+
+    <div class="algorithm-header">
+        <h1>{{ page.title }}</h1>
+        <div class="algorithm-meta">
+            {% if page.extra.category %}
+            <span class="badge category">{{ page.extra.category }}</span>
+            {% endif %}
+            {% if page.extra.implementation_count %}
+            <span class="badge">{{ page.extra.implementation_count }} implementation{% if page.extra.implementation_count != 1 %}s{% endif %}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="algorithm-content">
+        {{ page.content | safe }}
+    </div>
+</article>
+{% endblock %}

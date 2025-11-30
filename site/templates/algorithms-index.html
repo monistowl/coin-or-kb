@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} - {{ config.title }}{% endblock %}
+
+{% block extra_head %}
+<style>
+.algorithms-page h2 {
+    color: var(--accent-light);
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.algorithms-page h2:first-of-type {
+    border-top: none;
+    margin-top: 1rem;
+}
+
+.algorithms-page ul {
+    list-style: none;
+    padding: 0;
+}
+
+.algorithms-page ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.algorithms-page ul li:last-child {
+    border-bottom: none;
+}
+
+.algorithms-page ul li a {
+    color: var(--accent-light);
+    text-decoration: none;
+}
+
+.algorithms-page ul li a:hover {
+    text-decoration: underline;
+}
+
+.algorithms-page ul li strong a {
+    font-weight: 600;
+}
+
+.algorithms-intro {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.algorithm-count {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.algorithm-count .stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.algorithm-count .stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-light);
+}
+
+.algorithm-count .stat-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<article class="section algorithms-page">
+    {{ section.content | safe }}
+</article>
+{% endblock %}
