@@ -33,7 +33,7 @@
             <ul class="nav-links">
                 <li><a href="{{ get_url(path='@/libraries/_index.md') }}">Libraries</a></li>
                 <li><a href="{{ get_url(path='@/algorithms/_index.md') }}">Algorithms</a></li>
-                <li><a href="{{ config.base_url }}/api/index.json">API</a></li>
+                <li><a href="{{ get_url(path='api/index.json') }}">API</a></li>
                 <li><a href="https://github.com/monistowl/coin-or-kb" target="_blank">GitHub</a></li>
             </ul>
             <div class="search-container">
@@ -53,8 +53,8 @@
         <div class="footer-content">
             <p><strong>COIN-OR Knowledge Base</strong> — Annotated optimization solver documentation</p>
             <p class="footer-links">
-                <a href="{{ config.base_url }}">Home</a> ·
-                <a href="{{ config.base_url }}/api/index.json">JSON API</a> ·
+                <a href="{{ config.base_url | safe }}">Home</a> ·
+                <a href="{{ get_url(path='api/index.json') }}">JSON API</a> ·
                 <a href="https://github.com/monistowl/coin-or-kb">Source</a> ·
                 <a href="https://www.coin-or.org/">COIN-OR.org</a>
             </p>

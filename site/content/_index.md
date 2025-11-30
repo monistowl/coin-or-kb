@@ -16,7 +16,7 @@ A semantically annotated documentation project for the [COIN-OR](https://www.coi
 
 <div class="library-grid">
 <div class="library-card">
-<h3><a href="/libraries/coinutils/">CoinUtils</a></h3>
+<h3><a href="libraries/coinutils/">CoinUtils</a></h3>
 <span class="layer-badge">Layer 0</span>
 <p>Foundation utilities: sparse matrices, LU factorization, I/O, presolve</p>
 <span class="class-count">122 classes</span>
@@ -26,13 +26,13 @@ A semantically annotated documentation project for the [COIN-OR](https://www.coi
 ## Quick Links
 
 **Key Classes:**
-- [CoinFactorization](/libraries/coinutils/coinfactorization/) — Sparse LU with Markowitz pivoting, Forrest-Tomlin updates
-- [CoinPackedMatrix](/libraries/coinutils/coinpackedmatrix/) — Column-major sparse matrix storage
-- [CoinIndexedVector](/libraries/coinutils/coinindexedvector/) — Sparse vector with fast access patterns
-- [CoinPresolveMatrix](/libraries/coinutils/coinpresolvematrix/) — Problem reduction and simplification
+- [CoinFactorization](@/libraries/coinutils/CoinFactorization.md) — Sparse LU with Markowitz pivoting, Forrest-Tomlin updates
+- [CoinPackedMatrix](@/libraries/coinutils/CoinPackedMatrix.md) — Column-major sparse matrix storage
+- [CoinIndexedVector](@/libraries/coinutils/CoinIndexedVector.md) — Sparse vector with fast access patterns
+- [CoinPresolveMatrix](@/libraries/coinutils/CoinPresolveMatrix.md) — Problem reduction and simplification
 
 **For Developers:**
-- [JSON API](/api/index.json) — Machine-readable class documentation
+- [JSON API](api/index.json) — Machine-readable class documentation
 - [GitHub Repository](https://github.com/monistowl/coin-or-kb) — Source and annotations
 
 ## About This Project
