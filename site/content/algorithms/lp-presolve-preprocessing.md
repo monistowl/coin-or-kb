@@ -45,7 +45,7 @@ O(passes × nnz) with 3-10 passes common. Can reduce problem size 50-90%.
 
 ### Clp
 
-- **[ClpPresolve.hpp](/browser/?library=Clp)** - Clp interface to CoinPresolve for LP preprocessing
+- **[ClpPresolve.hpp](/coin-or-kb/browser/?library=Clp)** - Clp interface to CoinPresolve for LP preprocessing
 
 ## References
 

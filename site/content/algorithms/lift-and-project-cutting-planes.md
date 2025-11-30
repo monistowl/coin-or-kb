@@ -40,7 +40,7 @@ O(pivots × m × n) where pivots typically O(m).
 
 ### Cgl
 
-- **[CglLandPSimplex.hpp](/browser/?library=Cgl)** - Simplex algorithm for Lift-and-Project cut generation
+- **[CglLandPSimplex.hpp](/coin-or-kb/browser/?library=Cgl)** - Simplex algorithm for Lift-and-Project cut generation
 
 ## References
 

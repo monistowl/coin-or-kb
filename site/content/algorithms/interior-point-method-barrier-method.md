@@ -43,7 +43,7 @@ or O(nnz(L)²) for sparse Cholesky. Total typically O(n^{1.5}) to O(n³).
 
 ### Clp
 
-- **[ClpInterior.hpp](/browser/?library=Clp)** - Interior point (barrier) method for LP
+- **[ClpInterior.hpp](/coin-or-kb/browser/?library=Clp)** - Interior point (barrier) method for LP
 
 ## References
 

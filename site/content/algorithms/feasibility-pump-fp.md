@@ -44,7 +44,7 @@ Success rate ~80% on MIPLIB instances.
 
 ### Cbc
 
-- **[CbcHeuristicFPump.hpp](/browser/?library=Cbc)** - Feasibility Pump heuristic (Fischetti, Glover & Lodi)
+- **[CbcHeuristicFPump.hpp](/coin-or-kb/browser/?library=Cbc)** - Feasibility Pump heuristic (Fischetti, Glover & Lodi)
 Copyright (C) 2004, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
 

@@ -16,7 +16,7 @@ O(c·n) where c = cost of function evaluation (typically c ≈ 4-5)
 
 ### ADOL-C
 
-- **[drivers.h](/browser/?library=ADOL-C)** - High-level driver functions for derivative computation
+- **[drivers.h](/coin-or-kb/browser/?library=ADOL-C)** - High-level driver functions for derivative computation
 
 Provides convenient functions for computing common derivative quantities:
 - gradient(): First derivative of scalar function (∇f)

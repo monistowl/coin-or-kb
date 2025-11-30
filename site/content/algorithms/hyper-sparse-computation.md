@@ -21,7 +21,7 @@ Per-iteration: O(nnz(B^{-1}·v)) for FTRAN/BTRAN
 
 ### HiGHS
 
-- **[HEkk.h](/browser/?library=HiGHS)** - Edinburgh simplex kernel - high-performance LP solver core
+- **[HEkk.h](/coin-or-kb/browser/?library=HiGHS)** - Edinburgh simplex kernel - high-performance LP solver core
 
 HEkk (Edinburgh Kernel) is the main simplex implementation in HiGHS,
 supporting both dual and primal simplex methods.

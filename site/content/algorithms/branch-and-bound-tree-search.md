@@ -37,7 +37,7 @@ Node operations: O(log n) insertion, O(log n) extraction
 
 ### CoinUtils
 
-- **[CoinSearchTree.hpp](/browser/?library=CoinUtils)** - Search tree data structures for branch-and-bound
+- **[CoinSearchTree.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Search tree data structures for branch-and-bound
 
 Provides tree node management with various comparison strategies
 (best-first, depth-first, breadth-first).

@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[SolutionStrategyNLP.h](/browser/?library=SHOT)** - Direct NLP solver for continuous problems
+- **[SolutionStrategyNLP.h](/coin-or-kb/browser/?library=SHOT)** - Direct NLP solver for continuous problems
 
 Bypasses ESH for purely continuous NLP problems.
 

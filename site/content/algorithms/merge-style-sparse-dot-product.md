@@ -26,7 +26,7 @@ O(k1 + k2) where k1, k2 are the number of nonzeros
 
 ### CoinUtils
 
-- **[CoinPackedVector.hpp](/browser/?library=CoinUtils)** - Sparse vector that owns its index/value storage
+- **[CoinPackedVector.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Sparse vector that owns its index/value storage
 
 CoinPackedVector stores a sparse vector as parallel arrays of indices
 and values. Unlike CoinShallowPackedVector, this class owns its storage

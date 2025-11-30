@@ -30,7 +30,7 @@ O(nnz) vs O(n²) for dense evaluation
 
 ### SHOT
 
-- **[NLPSolverIpoptBase.h](/browser/?library=SHOT)** - Ipopt implementation of INLPSolver interface
+- **[NLPSolverIpoptBase.h](/coin-or-kb/browser/?library=SHOT)** - Ipopt implementation of INLPSolver interface
 
 Provides NLP solving for SHOT's primal problem using Ipopt interior point.
 

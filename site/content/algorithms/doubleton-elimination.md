@@ -35,4 +35,4 @@ Time: O(nnz(col_y)) per doubleton - updating all rows with y
 
 ### CoinUtils
 
-- **[CoinPresolveDoubleton.hpp](/browser/?library=CoinUtils)** - Doubleton row presolve: substitute y from ax+by=c
+- **[CoinPresolveDoubleton.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Doubleton row presolve: substitute y from ax+by=c

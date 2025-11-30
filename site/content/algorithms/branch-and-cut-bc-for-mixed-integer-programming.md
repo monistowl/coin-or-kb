@@ -30,7 +30,7 @@ Worst-case O(2^n) where n = number of integer variables.
 
 ### Cbc
 
-- **[CbcModel.hpp](/browser/?library=Cbc)** - Main branch-and-cut MIP solver class
+- **[CbcModel.hpp](/coin-or-kb/browser/?library=Cbc)** - Main branch-and-cut MIP solver class
 Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
 

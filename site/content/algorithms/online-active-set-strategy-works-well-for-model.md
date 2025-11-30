@@ -33,7 +33,7 @@ Main classes:
 
 ### qpOASES
 
-- **[qpOASES.hpp](/browser/?library=qpOASES)** - Main include file for qpOASES quadratic programming solver
+- **[qpOASES.hpp](/coin-or-kb/browser/?library=qpOASES)** - Main include file for qpOASES quadratic programming solver
 
 qpOASES solves convex quadratic programs (QPs) of the form:
 

@@ -36,7 +36,7 @@ Matrix access: O(1) amortized via splay trees (row) and linked lists (col)
 
 ### HiGHS
 
-- **[HPresolve.h](/browser/?library=HiGHS)** - LP/MIP presolve engine
+- **[HPresolve.h](/coin-or-kb/browser/?library=HiGHS)** - LP/MIP presolve engine
 
 **HPresolve Class:**
 Reduces problem size and tightens bounds before solving.

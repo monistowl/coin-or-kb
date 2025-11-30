@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[TaskSelectHyperplanePointsECP.h](/browser/?library=SHOT)** - Extended Cutting Plane point selection
+- **[TaskSelectHyperplanePointsECP.h](/coin-or-kb/browser/?library=SHOT)** - Extended Cutting Plane point selection
 
 Classic outer approximation: linearize at infeasible points.
 

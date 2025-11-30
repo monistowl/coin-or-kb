@@ -22,7 +22,7 @@ propagate(): O(nnz × propagation_rounds) amortized
 
 ### HiGHS
 
-- **[HighsDomain.h](/browser/?library=HiGHS)** - Bound tracking, propagation, and conflict analysis for MIP
+- **[HighsDomain.h](/coin-or-kb/browser/?library=HiGHS)** - Bound tracking, propagation, and conflict analysis for MIP
 
 **HighsDomain Class:**
 Manages variable bounds during MIP branch-and-bound with:

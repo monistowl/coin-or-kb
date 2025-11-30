@@ -45,7 +45,7 @@ O(depth) to replay bound changes from root.
 
 ### Cbc
 
-- **[CbcNode.hpp](/browser/?library=Cbc)** - Search tree node for branch-and-cut
+- **[CbcNode.hpp](/coin-or-kb/browser/?library=Cbc)** - Search tree node for branch-and-cut
 Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
 

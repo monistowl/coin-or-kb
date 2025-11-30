@@ -31,7 +31,7 @@ O(nnz) per row for classification
 
 ### Cgl
 
-- **[CglFlowCover.hpp](/browser/?library=Cgl)** - Lifted Simple Generalized Flow Cover cuts
+- **[CglFlowCover.hpp](/coin-or-kb/browser/?library=Cgl)** - Lifted Simple Generalized Flow Cover cuts
 
 ## References
 

@@ -18,7 +18,7 @@ Controls integer preprocessing before B&C:
 
 ### Cbc
 
-- **[CbcParameters.hpp](/browser/?library=Cbc)** - Central parameter collection for Cbc algorithm control
+- **[CbcParameters.hpp](/coin-or-kb/browser/?library=Cbc)** - Central parameter collection for Cbc algorithm control
 Copyright (C) 2007, Lou Hafer, IBM Corporation and others.
 This code is licensed under the terms of the Eclipse Public License (EPL).
 

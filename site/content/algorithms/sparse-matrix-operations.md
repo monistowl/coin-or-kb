@@ -34,7 +34,7 @@ Space: O(nnz + n) for CSC format
 
 ### SuiteSparse
 
-- **[cs.h](/browser/?library=SuiteSparse)** - Concise Sparse matrix library - teaching implementation of sparse algorithms
+- **[cs.h](/coin-or-kb/browser/?library=SuiteSparse)** - Concise Sparse matrix library - teaching implementation of sparse algorithms
 
 CSparse provides a minimal, readable implementation of core sparse matrix
 operations. It serves as both a standalone library and educational reference

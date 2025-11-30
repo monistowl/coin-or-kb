@@ -11,7 +11,23 @@ import re
 import os
 from pathlib import Path
 from collections import defaultdict
+from urllib.parse import urlparse
 import unicodedata
+
+
+def get_base_path(config_path):
+    """Extract base path from Zola config.toml base_url."""
+    with open(config_path) as f:
+        for line in f:
+            if line.startswith('base_url'):
+                # Parse: base_url = "https://domain.com/path"
+                match = re.search(r'=\s*"([^"]+)"', line)
+                if match:
+                    url = match.group(1)
+                    parsed = urlparse(url)
+                    # Return path, ensuring it doesn't end with /
+                    return parsed.path.rstrip('/') or ''
+    return ''
 
 def slugify(text):
     """Convert text to URL-safe slug."""
@@ -127,7 +143,7 @@ def escape_toml_string(s):
     """Escape a string for use in TOML."""
     return s.replace('\\', '\\\\').replace('"', '\\"')
 
-def generate_algorithm_page(slug, alg):
+def generate_algorithm_page(slug, alg, base_path=''):
     """Generate Zola markdown content for an algorithm page."""
     content = []
 
@@ -183,7 +199,7 @@ def generate_algorithm_page(slug, alg):
         content.append(f'### {lib}')
         content.append('')
         for f in files:
-            link = f'/browser/?library={lib}'
+            link = f'{base_path}/browser/?library={lib}'
             content.append(f'- **[{f["filename"]}]({link})** - {f["brief"]}')
         content.append('')
 
@@ -199,7 +215,7 @@ def generate_algorithm_page(slug, alg):
 
     return '\n'.join(content)
 
-def generate_index_page(algorithms):
+def generate_index_page(algorithms, base_path=''):
     """Generate the algorithms index page."""
     content = []
 
@@ -250,7 +266,7 @@ def generate_index_page(algorithms):
             if len(libs) > 3:
                 libs_str += f' +{len(libs)-3}'
 
-            content.append(f'- **[{alg["name"]}](/algorithms/{slug}/)** ({impl_count} impl) - {libs_str}')
+            content.append(f'- **[{alg["name"]}]({base_path}/algorithms/{slug}/)** ({impl_count} impl) - {libs_str}')
         content.append('')
 
     return '\n'.join(content)
@@ -259,6 +275,11 @@ def main():
     base_dir = Path(__file__).parent.parent
     json_path = base_dir / 'site' / 'static' / 'api' / 'files.json'
     output_dir = base_dir / 'site' / 'content' / 'algorithms'
+    config_path = base_dir / 'site' / 'config.toml'
+
+    # Read base path from config for proper link generation
+    base_path = get_base_path(config_path)
+    print(f"Using base path: '{base_path}'")
 
     print(f"Reading from {json_path}")
     algorithms = build_algorithm_index(json_path)
@@ -269,7 +290,7 @@ def main():
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Generate index page
-    index_content = generate_index_page(algorithms)
+    index_content = generate_index_page(algorithms, base_path)
     index_path = output_dir / '_index.md'
     with open(index_path, 'w') as f:
         f.write(index_content)
@@ -277,7 +298,7 @@ def main():
 
     # Generate individual algorithm pages
     for slug, alg in algorithms.items():
-        page_content = generate_algorithm_page(slug, alg)
+        page_content = generate_algorithm_page(slug, alg, base_path)
         page_path = output_dir / f'{slug}.md'
         with open(page_path, 'w') as f:
             f.write(page_content)

@@ -35,7 +35,7 @@ Parsing: O(file_size), single pass with hash tables for names
 
 ### CoinUtils
 
-- **[CoinMpsIO.hpp](/browser/?library=CoinUtils)** - MPS file format reader/writer for LP and MIP problems
+- **[CoinMpsIO.hpp](/coin-or-kb/browser/?library=CoinUtils)** - MPS file format reader/writer for LP and MIP problems
 
 Reads/writes standard MPS format including extensions for quadratic,
 conic, and SOS constraints. Supports free format and compression.

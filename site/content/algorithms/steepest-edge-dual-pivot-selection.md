@@ -40,7 +40,7 @@ Full recomputation O(m²) but rare. Typically 30-50% fewer iterations than Dantz
 
 ### Clp
 
-- **[ClpDualRowSteepest.hpp](/browser/?library=Clp)** - Steepest edge pivot selection for dual simplex
+- **[ClpDualRowSteepest.hpp](/coin-or-kb/browser/?library=Clp)** - Steepest edge pivot selection for dual simplex
 
 ## References
 

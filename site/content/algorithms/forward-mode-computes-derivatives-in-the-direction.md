@@ -16,7 +16,7 @@ Reverse mode computes derivatives from outputs backward.
 
 ### CppAD
 
-- **[ad_fun.hpp](/browser/?library=CppAD)** - ADFun class - function object storing recorded AD operations
+- **[ad_fun.hpp](/coin-or-kb/browser/?library=CppAD)** - ADFun class - function object storing recorded AD operations
 
 ADFun<Base> stores a recorded sequence of operations and provides
 methods to evaluate the function and its derivatives.

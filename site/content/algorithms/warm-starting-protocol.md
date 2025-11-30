@@ -23,7 +23,7 @@ Same as underlying ClpSimplex methods:
 
 ### Clp
 
-- **[Clp_C_Interface.h](/browser/?library=Clp)** - C language interface to Clp solver
+- **[Clp_C_Interface.h](/coin-or-kb/browser/?library=Clp)** - C language interface to Clp solver
 
 Pure C API for embedding Clp in C programs or creating language bindings.
 Design follows OSL V3 conventions for familiarity.

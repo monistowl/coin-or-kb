@@ -32,7 +32,7 @@ Per iteration: O(n³) for dense, O(nnz^{1.5-2}) for sparse
 
 ### Ipopt
 
-- **[IpAlgBuilder.hpp](/browser/?library=Ipopt)** - Builder pattern for constructing configured IpoptAlgorithm
+- **[IpAlgBuilder.hpp](/coin-or-kb/browser/?library=Ipopt)** - Builder pattern for constructing configured IpoptAlgorithm
 
 AlgorithmBuilder assembles a complete IpoptAlgorithm from components
 based on user options. This implements the Builder design pattern,
