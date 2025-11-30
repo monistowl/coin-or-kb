@@ -5,12 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ config.title }}{% endblock %}</title>
     <meta name="description" content="{{ config.description }}">
+    <meta name="theme-color" content="#1a1a2e">
+
+    <!-- PWA manifest -->
+    <link rel="manifest" href="{{ get_url(path='manifest.json') }}">
+
+    <!-- Resource hints for faster CDN loading -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
     <!-- KaTeX for math rendering -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <!-- Prism.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-cpp.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-c.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
 
     <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
 
@@ -27,12 +43,16 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
+    <!-- Skip navigation for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header>
         <nav>
             <a href="{{ config.base_url }}" class="logo">COIN-OR KB</a>
             <ul class="nav-links">
                 <li><a href="{{ get_url(path='@/libraries/_index.md') }}">Libraries</a></li>
                 <li><a href="{{ get_url(path='@/algorithms/_index.md') }}">Algorithms</a></li>
+                <li><a href="{{ get_url(path='@/browser.md') }}">Browse Source</a></li>
                 <li><a href="{{ get_url(path='api/index.json') }}">API</a></li>
                 <li><a href="https://github.com/monistowl/coin-or-kb" target="_blank">GitHub</a></li>
             </ul>
@@ -45,7 +65,7 @@
 
     {% block breadcrumbs %}{% endblock %}
 
-    <main>
+    <main id="main-content">
         {% block content %}{% endblock %}
     </main>
 

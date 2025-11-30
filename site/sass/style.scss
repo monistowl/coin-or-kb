@@ -1,5 +1,27 @@
 // COIN-OR Knowledge Base Styles
 
+// Smooth scrolling
+html {
+    scroll-behavior: smooth;
+}
+
+// Skip link for accessibility
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-light);
+    color: white;
+    padding: 0.5rem 1rem;
+    z-index: 10000;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+
+    &:focus {
+        top: 0;
+    }
+}
+
 :root {
     --bg: #1a1a2e;
     --bg-secondary: #16213e;

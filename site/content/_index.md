@@ -33,7 +33,7 @@ Core sparse data structures used throughout the solver stack.
 | Class | Description |
 |-------|-------------|
 | [CoinPackedMatrix](@/libraries/coinutils/CoinPackedMatrix.md) | Column-major sparse matrix with efficient column operations |
-| [CoinIndexedVector](@/libraries/coinutils/CoinIndexedVector.md) | Sparse vector with O(1) index lookup for basis operations |
+| [CoinIndexedVector](@/libraries/coinutils/CoinIndexedVector.md) | Sparse vector with $O(1)$ index lookup for basis operations |
 | [CoinDenseVector](@/libraries/coinutils/CoinDenseVector.md) | Dense vector for small, frequently-accessed data |
 | [CoinShallowPackedVector](@/libraries/coinutils/CoinShallowPackedVector.md) | Non-owning view into packed vector data |
 
@@ -129,6 +129,20 @@ COIN-OR is organized in dependency layers. Higher layers build on lower ones.
 
 ---
 
+## Mathematical Formulations
+
+The knowledge base captures mathematical formulations from the solver documentation. For example, the standard form LP:
+
+$$\min_{x} \quad c^T x \quad \text{subject to} \quad Ax = b, \quad x \geq 0$$
+
+And the Markowitz pivot selection criterion minimizes fill-in during LU factorization:
+
+$$\text{score}(a_{ij}) = (r_i - 1)(c_j - 1)$$
+
+where $r_i$ is the row count and $c_j$ is the column count for element $a_{ij}$.
+
+---
+
 ## For AI Agents
 
 This documentation is designed for both humans and machines. Every class has a JSON endpoint:
@@ -154,8 +168,8 @@ Each class and method is annotated with semantic tags:
 | Tag | Example |
 |-----|---------|
 | `@algorithm` | Sparse LU with Markowitz pivot selection |
-| `@math` | Chooses pivot minimizing (r_i - 1)(c_j - 1) |
-| `@complexity` | O(m²) worst case, typically O(m · nnz_avg) |
+| `@math` | Chooses pivot minimizing $(r_i - 1)(c_j - 1)$ |
+| `@complexity` | $O(m^2)$ worst case, typically $O(m \cdot \text{nnz})$ |
 | `@ref` | Forrest & Tomlin, "Updating triangular factors" (1972) |
 
 These annotations flow from C++ docblocks → Doxygen → JSON/HTML, making the mathematical content accessible to LLMs and search engines.

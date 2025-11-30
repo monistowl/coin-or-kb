@@ -1,0 +1,1484 @@
+{
+  "name": "COIN-OR",
+  "children": [
+    {
+      "name": "Layer 0: Foundation",
+      "id": "layer-0",
+      "desc": "Core utilities, sparse linear algebra",
+      "children": [
+        {
+          "name": "CoinUtils",
+          "id": "layer-0/CoinUtils",
+          "children": [],
+          "files": [
+            "CoinAdjacencyVector",
+            "CoinAlloc",
+            "CoinBronKerbosch",
+            "CoinBuild",
+            "CoinCliqueExtender",
+            "CoinCliqueList",
+            "CoinCliqueSet",
+            "CoinConflictGraph",
+            "CoinCutPool",
+            "CoinDenseFactorization",
+            "CoinDenseVector",
+            "CoinDistance",
+            "CoinDynamicConflictGraph",
+            "CoinError",
+            "CoinFactorization",
+            "CoinFileIO",
+            "CoinFinite",
+            "CoinFloatEqual",
+            "CoinHelperFunctions",
+            "CoinIndexedVector",
+            "CoinLpIO",
+            "CoinMessage",
+            "CoinMessageHandler",
+            "CoinModel",
+            "CoinModelUseful",
+            "CoinMpsIO",
+            "CoinNodeHeap",
+            "CoinOddWheelSeparator",
+            "CoinOslC",
+            "CoinOslFactorization",
+            "CoinPackedMatrix",
+            "CoinPackedVector",
+            "CoinPackedVectorBase",
+            "CoinParam",
+            "CoinPragma",
+            "CoinPresolveDoubleton",
+            "CoinPresolveDual",
+            "CoinPresolveDupcol",
+            "CoinPresolveEmpty",
+            "CoinPresolveFixed",
+            "CoinPresolveForcing",
+            "CoinPresolveImpliedFree",
+            "CoinPresolveIsolated",
+            "CoinPresolveMatrix",
+            "CoinPresolveMonitor",
+            "CoinPresolvePsdebug",
+            "CoinPresolveSingleton",
+            "CoinPresolveSubst",
+            "CoinPresolveTighten",
+            "CoinPresolveTripleton",
+            "CoinPresolveUseless",
+            "CoinPresolveZeros",
+            "CoinRational",
+            "CoinSearchTree",
+            "CoinShallowPackedVector",
+            "CoinShortestPath",
+            "CoinSignal",
+            "CoinSimpFactorization",
+            "CoinSmartPtr",
+            "CoinSnapshot",
+            "CoinSort",
+            "CoinStaticConflictGraph",
+            "CoinStructuredModel",
+            "CoinTime",
+            "CoinTypes",
+            "CoinUtility",
+            "CoinUtilsConfig",
+            "CoinWarmStart",
+            "CoinWarmStartBasis",
+            "CoinWarmStartDual",
+            "CoinWarmStartPrimalDual",
+            "CoinWarmStartVector",
+            "config_coinutils_default",
+            "config_default",
+            "configall_system",
+            "configall_system_msc"
+          ]
+        },
+        {
+          "name": "SuiteSparse",
+          "id": "layer-0/SuiteSparse",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "Layer 1: LP & Cuts",
+      "id": "layer-1",
+      "desc": "Simplex, solver interface, cut generators",
+      "children": [
+        {
+          "name": "Clp",
+          "id": "layer-1/Clp",
+          "children": [
+            {
+              "name": "Attic",
+              "id": "layer-1/Clp/src/Attic",
+              "files": [
+                "ClpParam"
+              ]
+            },
+            {
+              "name": "OsiClp",
+              "id": "layer-1/Clp/src/OsiClp",
+              "files": [
+                "OsiClpConfig",
+                "OsiClpSolverInterface"
+              ]
+            }
+          ],
+          "files": [
+            "AbcCommon",
+            "AbcDualRowDantzig",
+            "AbcDualRowPivot",
+            "AbcDualRowSteepest",
+            "AbcMatrix",
+            "AbcNonLinearCost",
+            "AbcPrimalColumnDantzig",
+            "AbcPrimalColumnPivot",
+            "AbcPrimalColumnSteepest",
+            "AbcSimplex",
+            "AbcSimplexDual",
+            "AbcSimplexFactorization",
+            "AbcSimplexPrimal",
+            "AbcWarmStart",
+            "CbcOrClpParam",
+            "ClpCholeskyBase",
+            "ClpCholeskyDense",
+            "ClpCholeskyMumps",
+            "ClpCholeskyPardiso",
+            "ClpCholeskyTaucs",
+            "ClpCholeskyUfl",
+            "ClpCholeskyWssmp",
+            "ClpCholeskyWssmpKKT",
+            "ClpConfig",
+            "ClpConstraint",
+            "ClpConstraintLinear",
+            "ClpConstraintQuadratic",
+            "ClpDualRowDantzig",
+            "ClpDualRowPivot",
+            "ClpDualRowSteepest",
+            "ClpDummyMatrix",
+            "ClpDynamicExampleMatrix",
+            "ClpDynamicMatrix",
+            "ClpEventHandler",
+            "ClpFactorization",
+            "ClpGubDynamicMatrix",
+            "ClpGubMatrix",
+            "ClpHelperFunctions",
+            "ClpInterior",
+            "ClpLinearObjective",
+            "ClpLsqr",
+            "ClpMatrixBase",
+            "ClpMessage",
+            "ClpModel",
+            "ClpModelParameters",
+            "ClpNetworkBasis",
+            "ClpNetworkMatrix",
+            "ClpNode",
+            "ClpNonLinearCost",
+            "ClpObjective",
+            "ClpPEDualRowDantzig",
+            "ClpPEDualRowSteepest",
+            "ClpPEPrimalColumnDantzig",
+            "ClpPEPrimalColumnSteepest",
+            "ClpPESimplex",
+            "ClpPackedMatrix",
+            "ClpParam",
+            "ClpParamUtils",
+            "ClpParameters",
+            "ClpPdco",
+            "ClpPdcoBase",
+            "ClpPlusMinusOneMatrix",
+            "ClpPredictorCorrector",
+            "ClpPresolve",
+            "ClpPrimalColumnDantzig",
+            "ClpPrimalColumnPivot",
+            "ClpPrimalColumnSteepest",
+            "ClpPrimalQuadraticDantzig",
+            "ClpQuadraticObjective",
+            "ClpSimplex",
+            "ClpSimplexDual",
+            "ClpSimplexNonlinear",
+            "ClpSimplexOther",
+            "ClpSimplexPrimal",
+            "ClpSolve",
+            "ClpSolver",
+            "Clp_C_Interface",
+            "CoinAbcBaseFactorization",
+            "CoinAbcCommon",
+            "CoinAbcCommonFactorization",
+            "CoinAbcDenseFactorization",
+            "CoinAbcFactorization",
+            "CoinAbcHelperFunctions",
+            "Idiot",
+            "MyEventHandler",
+            "MyMessageHandler",
+            "config_clp_default",
+            "config_default",
+            "configall_system",
+            "configall_system_msc"
+          ]
+        },
+        {
+          "name": "CppAD",
+          "id": "layer-1/CppAD",
+          "children": [
+            {
+              "name": "cppad",
+              "id": "layer-1/CppAD/src/cppad",
+              "files": [
+                "base_require",
+                "cppad",
+                "utility",
+                "wno_conversion"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Osi",
+          "id": "layer-1/Osi",
+          "children": [
+            {
+              "name": "Osi",
+              "id": "layer-1/Osi/src/Osi",
+              "files": [
+                "OsiAuxInfo",
+                "OsiBranchingObject",
+                "OsiChooseVariable",
+                "OsiColCut",
+                "OsiCollections",
+                "OsiConfig",
+                "OsiCut",
+                "OsiCuts",
+                "OsiFeatures",
+                "OsiPresolve",
+                "OsiRowCut",
+                "OsiRowCutDebugger",
+                "OsiSolverBranch",
+                "OsiSolverInterface",
+                "OsiSolverParameters",
+                "config_default",
+                "config_osi_default",
+                "configall_system",
+                "configall_system_msc"
+              ]
+            },
+            {
+              "name": "OsiCommonTest",
+              "id": "layer-1/Osi/src/OsiCommonTest",
+              "files": [
+                "OsiUnitTests",
+                "OsiUnitTestsConfig"
+              ]
+            },
+            {
+              "name": "OsiCpx",
+              "id": "layer-1/Osi/src/OsiCpx",
+              "files": [
+                "OsiCpxConfig",
+                "OsiCpxSolverInterface"
+              ]
+            },
+            {
+              "name": "OsiGlpk",
+              "id": "layer-1/Osi/src/OsiGlpk",
+              "files": [
+                "OsiGlpkConfig",
+                "OsiGlpkSolverInterface"
+              ]
+            },
+            {
+              "name": "OsiGrb",
+              "id": "layer-1/Osi/src/OsiGrb",
+              "files": [
+                "OsiGrbConfig",
+                "OsiGrbSolverInterface"
+              ]
+            },
+            {
+              "name": "OsiMsk",
+              "id": "layer-1/Osi/src/OsiMsk",
+              "files": [
+                "OsiMskConfig",
+                "OsiMskSolverInterface"
+              ]
+            },
+            {
+              "name": "OsiSpx",
+              "id": "layer-1/Osi/src/OsiSpx",
+              "files": [
+                "OsiSpxConfig",
+                "OsiSpxSolverInterface"
+              ]
+            },
+            {
+              "name": "OsiXpr",
+              "id": "layer-1/Osi/src/OsiXpr",
+              "files": [
+                "OsiXprConfig",
+                "OsiXprSolverInterface"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "qpOASES",
+          "id": "layer-1/qpOASES",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "Layer 2: MIP & NLP",
+      "id": "layer-2",
+      "desc": "Branch-and-cut, interior point",
+      "children": [
+        {
+          "name": "ADOL-C",
+          "id": "layer-2/ADOL-C",
+          "children": []
+        },
+        {
+          "name": "Cbc",
+          "id": "layer-2/Cbc",
+          "children": [
+            {
+              "name": "Attic",
+              "id": "layer-2/Cbc/src/Attic",
+              "files": [
+                "CbcGenOsiParam",
+                "CbcModelParam",
+                "CbcSolver",
+                "CbcSolverHeuristics"
+              ]
+            },
+            {
+              "name": "OsiCbc",
+              "id": "layer-2/Cbc/src/OsiCbc",
+              "files": [
+                "OsiCbcConfig",
+                "OsiCbcSolverInterface"
+              ]
+            }
+          ],
+          "files": [
+            "CbcBranchActual",
+            "CbcBranchAllDifferent",
+            "CbcBranchBase",
+            "CbcBranchCut",
+            "CbcBranchDecision",
+            "CbcBranchDefaultDecision",
+            "CbcBranchDynamic",
+            "CbcBranchLotsize",
+            "CbcBranchToFixLots",
+            "CbcBranchingObject",
+            "CbcClique",
+            "CbcCompare",
+            "CbcCompareActual",
+            "CbcCompareBase",
+            "CbcCompareDefault",
+            "CbcCompareDepth",
+            "CbcCompareEstimate",
+            "CbcCompareObjective",
+            "CbcConfig",
+            "CbcConsequence",
+            "CbcCountRowCut",
+            "CbcCutGenerator",
+            "CbcCutModifier",
+            "CbcCutSubsetModifier",
+            "CbcDebug",
+            "CbcDummyBranchingObject",
+            "CbcEventHandler",
+            "CbcFathom",
+            "CbcFathomDynamicProgramming",
+            "CbcFeasibilityBase",
+            "CbcFixVariable",
+            "CbcFollowOn",
+            "CbcFullNodeInfo",
+            "CbcGenConfig",
+            "CbcGenMessages",
+            "CbcGeneral",
+            "CbcGeneralDepth",
+            "CbcHeuristic",
+            "CbcHeuristicDINS",
+            "CbcHeuristicDW",
+            "CbcHeuristicDive",
+            "CbcHeuristicDiveCoefficient",
+            "CbcHeuristicDiveFractional",
+            "CbcHeuristicDiveGuided",
+            "CbcHeuristicDiveLineSearch",
+            "CbcHeuristicDivePseudoCost",
+            "CbcHeuristicDiveVectorLength",
+            "CbcHeuristicFPump",
+            "CbcHeuristicGreedy",
+            "CbcHeuristicLocal",
+            "CbcHeuristicPivotAndFix",
+            "CbcHeuristicRENS",
+            "CbcHeuristicRINS",
+            "CbcHeuristicRandRound",
+            "CbcHeuristicVND",
+            "CbcLinked",
+            "CbcMessage",
+            "CbcMipStartIO",
+            "CbcModel",
+            "CbcNWay",
+            "CbcNode",
+            "CbcNodeInfo",
+            "CbcObject",
+            "CbcObjectUpdateData",
+            "CbcParam",
+            "CbcParamUtils",
+            "CbcParameters",
+            "CbcPartialNodeInfo",
+            "CbcSOS",
+            "CbcSimpleInteger",
+            "CbcSimpleIntegerDynamicPseudoCost",
+            "CbcSimpleIntegerPseudoCost",
+            "CbcSolver",
+            "CbcSolverAnalyze",
+            "CbcSolverExpandKnapsack",
+            "CbcSolverHeuristics",
+            "CbcStatistics",
+            "CbcStrategy",
+            "CbcSubProblem",
+            "CbcSymmetry",
+            "CbcThread",
+            "CbcTree",
+            "CbcTreeLocal",
+            "Cbc_C_Interface",
+            "ClpAmplObjective",
+            "ClpConstraintAmpl",
+            "config_cbc_default",
+            "config_default",
+            "configall_system",
+            "configall_system_msc"
+          ]
+        },
+        {
+          "name": "Cgl",
+          "id": "layer-2/Cgl",
+          "children": [
+            {
+              "name": "CglAllDifferent",
+              "id": "layer-2/Cgl/src/CglAllDifferent",
+              "files": [
+                "CglAllDifferent"
+              ]
+            },
+            {
+              "name": "CglBKClique",
+              "id": "layer-2/Cgl/src/CglBKClique",
+              "files": [
+                "CglBKClique"
+              ]
+            },
+            {
+              "name": "CglClique",
+              "id": "layer-2/Cgl/src/CglClique",
+              "files": [
+                "CglClique"
+              ]
+            },
+            {
+              "name": "CglCliqueStrengthening",
+              "id": "layer-2/Cgl/src/CglCliqueStrengthening",
+              "files": [
+                "CglCliqueStrengthening"
+              ]
+            },
+            {
+              "name": "CglCommon",
+              "id": "layer-2/Cgl/src/CglCommon",
+              "files": [
+                "CglConfig",
+                "CglCutGenerator",
+                "CglMessage",
+                "CglParam",
+                "CglStored",
+                "CglTreeInfo",
+                "config_cgl_default",
+                "config_default",
+                "configall_system",
+                "configall_system_msc"
+              ]
+            },
+            {
+              "name": "CglDuplicateRow",
+              "id": "layer-2/Cgl/src/CglDuplicateRow",
+              "files": [
+                "CglDuplicateRow"
+              ]
+            },
+            {
+              "name": "CglFlowCover",
+              "id": "layer-2/Cgl/src/CglFlowCover",
+              "files": [
+                "CglFlowCover"
+              ]
+            },
+            {
+              "name": "CglGMI",
+              "id": "layer-2/Cgl/src/CglGMI",
+              "files": [
+                "CglGMI",
+                "CglGMIParam"
+              ]
+            },
+            {
+              "name": "CglGomory",
+              "id": "layer-2/Cgl/src/CglGomory",
+              "files": [
+                "CglGomory"
+              ]
+            },
+            {
+              "name": "CglKnapsackCover",
+              "id": "layer-2/Cgl/src/CglKnapsackCover",
+              "files": [
+                "CglKnapsackCover"
+              ]
+            },
+            {
+              "name": "CglLandP",
+              "id": "layer-2/Cgl/src/CglLandP",
+              "files": [
+                "CglLandP",
+                "CglLandPMessages",
+                "CglLandPSimplex",
+                "CglLandPTabRow",
+                "CglLandPUtils",
+                "CglLandPValidator"
+              ]
+            },
+            {
+              "name": "CglLiftAndProject",
+              "id": "layer-2/Cgl/src/CglLiftAndProject",
+              "files": [
+                "CglLiftAndProject"
+              ]
+            },
+            {
+              "name": "CglMixedIntegerRounding",
+              "id": "layer-2/Cgl/src/CglMixedIntegerRounding",
+              "files": [
+                "CglMixedIntegerRounding"
+              ]
+            },
+            {
+              "name": "CglMixedIntegerRounding2",
+              "id": "layer-2/Cgl/src/CglMixedIntegerRounding2",
+              "files": [
+                "CglMixedIntegerRounding2"
+              ]
+            },
+            {
+              "name": "CglOddHole",
+              "id": "layer-2/Cgl/src/CglOddHole",
+              "files": [
+                "CglOddHole"
+              ]
+            },
+            {
+              "name": "CglOddWheel",
+              "id": "layer-2/Cgl/src/CglOddWheel",
+              "files": [
+                "CglOddWheel"
+              ]
+            },
+            {
+              "name": "CglPreProcess",
+              "id": "layer-2/Cgl/src/CglPreProcess",
+              "files": [
+                "CglPreProcess"
+              ]
+            },
+            {
+              "name": "CglProbing",
+              "id": "layer-2/Cgl/src/CglProbing",
+              "files": [
+                "CglProbing"
+              ]
+            },
+            {
+              "name": "CglRedSplit",
+              "id": "layer-2/Cgl/src/CglRedSplit",
+              "files": [
+                "CglRedSplit",
+                "CglRedSplitParam"
+              ]
+            },
+            {
+              "name": "CglRedSplit2",
+              "id": "layer-2/Cgl/src/CglRedSplit2",
+              "files": [
+                "CglRedSplit2",
+                "CglRedSplit2Param"
+              ]
+            },
+            {
+              "name": "CglResidualCapacity",
+              "id": "layer-2/Cgl/src/CglResidualCapacity",
+              "files": [
+                "CglResidualCapacity"
+              ]
+            },
+            {
+              "name": "CglSimpleRounding",
+              "id": "layer-2/Cgl/src/CglSimpleRounding",
+              "files": [
+                "CglSimpleRounding"
+              ]
+            },
+            {
+              "name": "CglTwomir",
+              "id": "layer-2/Cgl/src/CglTwomir",
+              "files": [
+                "CglTwomir"
+              ]
+            },
+            {
+              "name": "CglZeroHalf",
+              "id": "layer-2/Cgl/src/CglZeroHalf",
+              "files": [
+                "Cgl012cut",
+                "CglZeroHalf"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Ipopt",
+          "id": "layer-2/Ipopt",
+          "children": [
+            {
+              "name": "Algorithm",
+              "id": "layer-2/Ipopt/src/Algorithm",
+              "files": [
+                "IpAdaptiveMuUpdate",
+                "IpAlgBuilder",
+                "IpAlgStrategy",
+                "IpAlgorithmRegOp",
+                "IpAugRestoSystemSolver",
+                "IpAugSystemSolver",
+                "IpBacktrackingLSAcceptor",
+                "IpBacktrackingLineSearch",
+                "IpConvCheck",
+                "IpDefaultIterateInitializer",
+                "IpEqMultCalculator",
+                "IpEquilibrationScaling",
+                "IpExactHessianUpdater",
+                "IpFilter",
+                "IpFilterLSAcceptor",
+                "IpGenAugSystemSolver",
+                "IpGradientScaling",
+                "IpHessianUpdater",
+                "IpIpoptAlg",
+                "IpIpoptCalculatedQuantities",
+                "IpIpoptData",
+                "IpIpoptNLP",
+                "IpIterateInitializer",
+                "IpIteratesVector",
+                "IpIterationOutput",
+                "IpLeastSquareMults",
+                "IpLimMemQuasiNewtonUpdater",
+                "IpLineSearch",
+                "IpLoqoMuOracle",
+                "IpLowRankAugSystemSolver",
+                "IpLowRankSSAugSystemSolver",
+                "IpMonotoneMuUpdate",
+                "IpMuOracle",
+                "IpMuUpdate",
+                "IpNLPBoundsRemover",
+                "IpNLPScaling",
+                "IpOptErrorConvCheck",
+                "IpOrigIpoptNLP",
+                "IpOrigIterationOutput",
+                "IpPDFullSpaceSolver",
+                "IpPDPerturbationHandler",
+                "IpPDSearchDirCalc",
+                "IpPDSystemSolver",
+                "IpPenaltyLSAcceptor",
+                "IpProbingMuOracle",
+                "IpQualityFunctionMuOracle",
+                "IpRestoConvCheck",
+                "IpRestoFilterConvCheck",
+                "IpRestoIpoptNLP",
+                "IpRestoIterateInitializer",
+                "IpRestoIterationOutput",
+                "IpRestoMinC_1Nrm",
+                "IpRestoPenaltyConvCheck",
+                "IpRestoPhase",
+                "IpRestoRestoPhase",
+                "IpSearchDirCalculator",
+                "IpStdAugSystemSolver",
+                "IpTimingStatistics",
+                "IpUserScaling",
+                "IpWarmStartIterateInitializer"
+              ]
+            },
+            {
+              "name": "Common",
+              "id": "layer-2/Ipopt/src/Common",
+              "files": [
+                "IpCachedResults",
+                "IpDebug",
+                "IpException",
+                "IpJournalist",
+                "IpLibraryLoader",
+                "IpObserver",
+                "IpOptionsList",
+                "IpReferenced",
+                "IpRegOptions",
+                "IpSmartPtr",
+                "IpTaggedObject",
+                "IpTimedTask",
+                "IpTypes",
+                "IpTypes",
+                "IpUtils",
+                "IpoptConfig",
+                "config_default",
+                "config_ipopt_default",
+                "configall_system",
+                "configall_system_msc"
+              ]
+            },
+            {
+              "name": "Interfaces",
+              "id": "layer-2/Ipopt/src/Interfaces",
+              "files": [
+                "IpAlgTypes",
+                "IpInterfacesRegOp",
+                "IpIpoptApplication",
+                "IpNLP",
+                "IpReturnCodes",
+                "IpReturnCodes",
+                "IpReturnCodes_inc",
+                "IpSolveStatistics",
+                "IpStdCInterface",
+                "IpStdInterfaceTNLP",
+                "IpTNLP",
+                "IpTNLPAdapter",
+                "IpTNLPReducer"
+              ]
+            },
+            {
+              "name": "LinAlg",
+              "id": "layer-2/Ipopt/src/LinAlg",
+              "files": [
+                "IpBlas",
+                "IpCompoundMatrix",
+                "IpCompoundSymMatrix",
+                "IpCompoundVector",
+                "IpDenseGenMatrix",
+                "IpDenseSymMatrix",
+                "IpDenseVector",
+                "IpDiagMatrix",
+                "IpExpandedMultiVectorMatrix",
+                "IpExpansionMatrix",
+                "IpIdentityMatrix",
+                "IpLapack",
+                "IpLowRankUpdateSymMatrix",
+                "IpMatrix",
+                "IpMultiVectorMatrix",
+                "IpScaledMatrix",
+                "IpSumMatrix",
+                "IpSumSymMatrix",
+                "IpSymMatrix",
+                "IpSymScaledMatrix",
+                "IpTransposeMatrix",
+                "IpVector",
+                "IpZeroMatrix",
+                "IpZeroSymMatrix"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Layer 3: MINLP",
+      "id": "layer-3",
+      "desc": "Mixed-integer nonlinear programming",
+      "children": [
+        {
+          "name": "Bcp",
+          "id": "layer-3/Bcp",
+          "children": []
+        },
+        {
+          "name": "Bonmin",
+          "id": "layer-3/Bonmin",
+          "children": [
+            {
+              "name": "Algorithms",
+              "id": "layer-3/Bonmin/src/Algorithms",
+              "files": [
+                "BonBabSetupBase",
+                "BonBonminSetup",
+                "BonCbcLpStrategy",
+                "BonSolverHelp",
+                "BonSubMipSolver"
+              ]
+            },
+            {
+              "name": "CbcBonmin",
+              "id": "layer-3/Bonmin/src/CbcBonmin",
+              "files": [
+                "BonBabInfos",
+                "BonCbc",
+                "BonCbcNlpStrategy",
+                "BonCbcNode",
+                "BonDiver",
+                "BonGuessHeuristic"
+              ]
+            },
+            {
+              "name": "Interfaces",
+              "id": "layer-3/Bonmin/src/Interfaces",
+              "files": [
+                "BonAuxInfos",
+                "BonBoundsReader",
+                "BonBranchingTQP",
+                "BonColReader",
+                "BonCurvatureEstimator",
+                "BonCutStrengthener",
+                "BonExitCodes",
+                "BonMsgUtils",
+                "BonOsiTMINLPInterface",
+                "BonRegisteredOptions",
+                "BonStartPointReader",
+                "BonStdCInterface",
+                "BonStdInterfaceTMINLP",
+                "BonStrongBranchingSolver",
+                "BonTMINLP",
+                "BonTMINLP2OsiLP",
+                "BonTMINLP2TNLP",
+                "BonTNLP2FPNLP",
+                "BonTNLPSolver",
+                "BonTypes",
+                "BonminConfig",
+                "config_bonmin_default",
+                "config_default",
+                "configall_system",
+                "configall_system_msc"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CHiPPS-ALPS",
+          "id": "layer-3/CHiPPS-ALPS",
+          "children": [],
+          "files": [
+            "Alps",
+            "AlpsAix43",
+            "AlpsConfig",
+            "AlpsCygwin",
+            "AlpsEncoded",
+            "AlpsEnumProcessT",
+            "AlpsHelperFunctions",
+            "AlpsKnowledge",
+            "AlpsKnowledgeBroker",
+            "AlpsKnowledgeBrokerMPI",
+            "AlpsKnowledgeBrokerSerial",
+            "AlpsKnowledgePool",
+            "AlpsLicense",
+            "AlpsLinux",
+            "AlpsMACH",
+            "AlpsMessage",
+            "AlpsMessageTag",
+            "AlpsModel",
+            "AlpsNodeDesc",
+            "AlpsNodePool",
+            "AlpsOs",
+            "AlpsParameterBase",
+            "AlpsParams",
+            "AlpsPriorityQueue",
+            "AlpsSearchStrategy",
+            "AlpsSearchStrategyBase",
+            "AlpsSolution",
+            "AlpsSolutionPool",
+            "AlpsSubTree",
+            "AlpsSubTreePool",
+            "AlpsSunos",
+            "AlpsTime",
+            "AlpsTreeNode",
+            "config_alps_default",
+            "config_default"
+          ]
+        },
+        {
+          "name": "CHiPPS-BLIS",
+          "id": "layer-3/CHiPPS-BLIS",
+          "children": [],
+          "files": [
+            "Blis",
+            "BlisBranchObjectBilevel",
+            "BlisBranchObjectInt",
+            "BlisBranchStrategyBilevel",
+            "BlisBranchStrategyMaxInf",
+            "BlisBranchStrategyPseudo",
+            "BlisBranchStrategyRel",
+            "BlisBranchStrategyStrong",
+            "BlisConGenerator",
+            "BlisConfig",
+            "BlisConstraint",
+            "BlisHelp",
+            "BlisHeurRound",
+            "BlisHeuristic",
+            "BlisLicense",
+            "BlisMessage",
+            "BlisModel",
+            "BlisNodeDesc",
+            "BlisObjectInt",
+            "BlisParams",
+            "BlisPresolve",
+            "BlisPseudo",
+            "BlisSolution",
+            "BlisSubTree",
+            "BlisTreeNode",
+            "BlisVariable",
+            "config_blis_default",
+            "config_default"
+          ]
+        },
+        {
+          "name": "Couenne",
+          "id": "layer-3/Couenne",
+          "children": [
+            {
+              "name": "bound_tightening",
+              "id": "layer-3/Couenne/src/bound_tightening",
+              "files": [
+                "CouenneAggrProbing",
+                "CouenneBTPerfIndicator",
+                "CouenneFixPoint",
+                "CouenneInfeasCut",
+                "CouenneMultiVarProbe",
+                "CouenneSparseBndVec"
+              ]
+            },
+            {
+              "name": "branch",
+              "id": "layer-3/Couenne/src/branch",
+              "files": [
+                "CouenneBranchingObject",
+                "CouenneChooseStrong",
+                "CouenneChooseVariable",
+                "CouenneComplBranchingObject",
+                "CouenneComplObject",
+                "CouenneNauty",
+                "CouenneObject",
+                "CouenneOrbitBranchingObj",
+                "CouenneOrbitObj",
+                "CouenneProjections",
+                "CouenneSOSObject",
+                "CouenneThreeWayBranchObj",
+                "CouenneVTObject",
+                "CouenneVarObject"
+              ]
+            },
+            {
+              "name": "convex",
+              "id": "layer-3/Couenne/src/convex",
+              "files": [
+                "CouenneCutGenerator"
+              ]
+            },
+            {
+              "name": "disjunctive",
+              "id": "layer-3/Couenne/src/disjunctive",
+              "files": [
+                "CouenneDisjCuts"
+              ]
+            },
+            {
+              "name": "expression",
+              "id": "layer-3/Couenne/src/expression",
+              "files": [
+                "CouExpr",
+                "CouenneDomain",
+                "CouenneExprAux",
+                "CouenneExprBound",
+                "CouenneExprClone",
+                "CouenneExprConst",
+                "CouenneExprCopy",
+                "CouenneExprIVar",
+                "CouenneExprOp",
+                "CouenneExprStore",
+                "CouenneExprUnary",
+                "CouenneExprVar",
+                "CouenneExpression",
+                "CouennePrecisions",
+                "CouenneTypes"
+              ]
+            },
+            {
+              "name": "heuristics",
+              "id": "layer-3/Couenne/src/heuristics",
+              "files": [
+                "BonInitHeuristic",
+                "BonNlpHeuristic",
+                "CouenneFPpool",
+                "CouenneFeasPump",
+                "CouenneIterativeRounding",
+                "cons_rowcuts"
+              ]
+            },
+            {
+              "name": "interfaces",
+              "id": "layer-3/Couenne/src/interfaces",
+              "files": [
+                "BonCouenneInterface",
+                "CouenneMINLPInterface",
+                "CouenneTNLP",
+                "CouenneUserInterface"
+              ]
+            },
+            {
+              "name": "main",
+              "id": "layer-3/Couenne/src/main",
+              "files": [
+                "BonCouenneInfo",
+                "BonCouenneSetup",
+                "CouenneBab",
+                "CouenneOSInterface"
+              ]
+            },
+            {
+              "name": "problem",
+              "id": "layer-3/Couenne/src/problem",
+              "files": [
+                "CouenneGlobalCutOff",
+                "CouenneJournalist",
+                "CouenneProblem",
+                "CouenneProblemElem",
+                "CouenneRecordBestSol",
+                "CouenneSolverInterface"
+              ]
+            },
+            {
+              "name": "readnl",
+              "id": "layer-3/Couenne/src/readnl",
+              "files": [
+                "CouenneAmplInterface"
+              ]
+            },
+            {
+              "name": "standardize",
+              "id": "layer-3/Couenne/src/standardize",
+              "files": [
+                "CouenneLQelems"
+              ]
+            },
+            {
+              "name": "util",
+              "id": "layer-3/Couenne/src/util",
+              "files": [
+                "CouenneFunTriplets",
+                "CouenneRootQ",
+                "CouenneSparseMatrix"
+              ]
+            }
+          ],
+          "files": [
+            "CouenneConfig",
+            "config_couenne_default",
+            "config_default",
+            "configall_system",
+            "configall_system_msc"
+          ]
+        },
+        {
+          "name": "Dip",
+          "id": "layer-3/Dip",
+          "children": []
+        },
+        {
+          "name": "DisCO",
+          "id": "layer-3/DisCO",
+          "children": [],
+          "files": [
+            "Dco",
+            "DcoBranchObject",
+            "DcoBranchStrategyMaxInf",
+            "DcoBranchStrategyPseudo",
+            "DcoBranchStrategyRel",
+            "DcoBranchStrategyStrong",
+            "DcoCbfIO",
+            "DcoConGenerator",
+            "DcoConfig",
+            "DcoConicConGenerator",
+            "DcoConicConstraint",
+            "DcoConstraint",
+            "DcoHeurRounding",
+            "DcoHeuristic",
+            "DcoLicense",
+            "DcoLinearConGenerator",
+            "DcoLinearConstraint",
+            "DcoMessage",
+            "DcoModel",
+            "DcoNodeDesc",
+            "DcoParams",
+            "DcoPresolve",
+            "DcoSolution",
+            "DcoSubTree",
+            "DcoTreeNode",
+            "DcoVariable",
+            "config_dco_default",
+            "config_default"
+          ]
+        },
+        {
+          "name": "SYMPHONY",
+          "id": "layer-3/SYMPHONY",
+          "children": [
+            {
+              "name": "OsiSym",
+              "id": "layer-3/SYMPHONY/src/OsiSym",
+              "files": [
+                "OsiSymConfig",
+                "OsiSymSolverInterface",
+                "OsiSymSolverParameters",
+                "SymWarmStart"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Smi",
+          "id": "layer-3/Smi",
+          "children": []
+        },
+        {
+          "name": "oBB",
+          "id": "layer-3/oBB",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "Layer 4: Applications",
+      "id": "layer-4",
+      "desc": "Modeling tools, web services",
+      "children": [
+        {
+          "name": "Cmpl",
+          "id": "layer-4/Cmpl",
+          "children": []
+        },
+        {
+          "name": "Creme",
+          "id": "layer-4/Creme",
+          "children": []
+        },
+        {
+          "name": "GAMSlinks",
+          "id": "layer-4/GAMSlinks",
+          "children": [
+            {
+              "name": "amplsolver",
+              "id": "layer-4/GAMSlinks/src/amplsolver",
+              "files": [
+                "convert_nl"
+              ]
+            },
+            {
+              "name": "bonmin",
+              "id": "layer-4/GAMSlinks/src/bonmin",
+              "files": [
+                "GamsBonmin",
+                "GamsMINLP"
+              ]
+            },
+            {
+              "name": "cbc",
+              "id": "layer-4/GAMSlinks/src/cbc",
+              "files": [
+                "GamsCbc",
+                "GamsCbcHeurSolveTrace"
+              ]
+            },
+            {
+              "name": "couenne",
+              "id": "layer-4/GAMSlinks/src/couenne",
+              "files": [
+                "GamsCouenne"
+              ]
+            },
+            {
+              "name": "ipopt",
+              "id": "layer-4/GAMSlinks/src/ipopt",
+              "files": [
+                "GamsIpopt",
+                "GamsJournal",
+                "GamsNLP"
+              ]
+            },
+            {
+              "name": "osi",
+              "id": "layer-4/GAMSlinks/src/osi",
+              "files": [
+                "GamsMessageHandler",
+                "GamsOsi",
+                "GamsOsiHelper"
+              ]
+            },
+            {
+              "name": "scip",
+              "id": "layer-4/GAMSlinks/src/scip",
+              "files": [
+                "GamsScip",
+                "event_solvetrace",
+                "reader_gmo"
+              ]
+            },
+            {
+              "name": "soplex",
+              "id": "layer-4/GAMSlinks/src/soplex",
+              "files": [
+                "GamsSoPlex"
+              ]
+            },
+            {
+              "name": "utils",
+              "id": "layer-4/GAMSlinks/src/utils",
+              "files": [
+                "GamsHelper",
+                "GamsLicensing",
+                "GamsLinksConfig",
+                "GamsNL",
+                "GamsNLinstr",
+                "GamsOptionsSpecWriter",
+                "GamsSolveTrace",
+                "def"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Gravity",
+          "id": "layer-4/Gravity",
+          "children": [],
+          "files": [
+            "MosekProgram",
+            "SdpaProg"
+          ]
+        },
+        {
+          "name": "HiGHS",
+          "id": "layer-4/HiGHS",
+          "children": []
+        },
+        {
+          "name": "OS",
+          "id": "layer-4/OS",
+          "children": []
+        },
+        {
+          "name": "SHOT",
+          "id": "layer-4/SHOT",
+          "children": [
+            {
+              "name": "GAMS",
+              "id": "layer-4/SHOT/src/GAMS",
+              "files": [
+                "GamsNLinstr"
+              ]
+            },
+            {
+              "name": "MIPSolver",
+              "id": "layer-4/SHOT/src/MIPSolver",
+              "files": [
+                "IMIPSolutionLimitStrategy",
+                "IMIPSolver",
+                "IRelaxationStrategy",
+                "MIPSolutionLimitStrategyAdaptive",
+                "MIPSolutionLimitStrategyIncrease",
+                "MIPSolutionLimitStrategyUnlimited",
+                "MIPSolverBase",
+                "MIPSolverCallbackBase",
+                "MIPSolverCbc",
+                "MIPSolverCplex",
+                "MIPSolverCplexSingleTree",
+                "MIPSolverCplexSingleTreeLegacy",
+                "MIPSolverGurobi",
+                "MIPSolverGurobiSingleTree",
+                "RelaxationStrategyBase",
+                "RelaxationStrategyNone",
+                "RelaxationStrategyStandard"
+              ]
+            },
+            {
+              "name": "Model",
+              "id": "layer-4/SHOT/src/Model",
+              "files": [
+                "AuxiliaryVariables",
+                "Constraints",
+                "NonlinearExpressions",
+                "ObjectiveFunction",
+                "Problem",
+                "Simplifications",
+                "Terms",
+                "Variables"
+              ]
+            },
+            {
+              "name": "ModelingSystem",
+              "id": "layer-4/SHOT/src/ModelingSystem",
+              "files": [
+                "IModelingSystem",
+                "ModelingSystemAMPL",
+                "ModelingSystemGAMS",
+                "ModelingSystemOS",
+                "ModelingSystemOSiL"
+              ]
+            },
+            {
+              "name": "NLPSolver",
+              "id": "layer-4/SHOT/src/NLPSolver",
+              "files": [
+                "INLPSolver",
+                "NLPSolverBase",
+                "NLPSolverCuttingPlaneMinimax",
+                "NLPSolverGAMS",
+                "NLPSolverIpoptBase",
+                "NLPSolverIpoptRelaxed",
+                "NLPSolverSHOT"
+              ]
+            },
+            {
+              "name": "RootsearchMethod",
+              "id": "layer-4/SHOT/src/RootsearchMethod",
+              "files": [
+                "IRootsearchMethod",
+                "RootsearchMethodBoost"
+              ]
+            },
+            {
+              "name": "SolutionStrategy",
+              "id": "layer-4/SHOT/src/SolutionStrategy",
+              "files": [
+                "ISolutionStrategy",
+                "SolutionStrategyMIQCQP",
+                "SolutionStrategyMultiTree",
+                "SolutionStrategyNLP",
+                "SolutionStrategySingleTree"
+              ]
+            },
+            {
+              "name": "Tasks",
+              "id": "layer-4/SHOT/src/Tasks",
+              "files": [
+                "TaskAddHyperplanes",
+                "TaskAddIntegerCuts",
+                "TaskAddPrimalReductionCut",
+                "TaskBase",
+                "TaskCalculateSolutionChangeNorm",
+                "TaskCheckAbsoluteGap",
+                "TaskCheckConstraintTolerance",
+                "TaskCheckDualStagnation",
+                "TaskCheckIterationError",
+                "TaskCheckIterationLimit",
+                "TaskCheckMaxNumberOfPrimalReductionCuts",
+                "TaskCheckPrimalStagnation",
+                "TaskCheckRelativeGap",
+                "TaskCheckTimeLimit",
+                "TaskCheckUserTermination",
+                "TaskClearFixedPrimalCandidates",
+                "TaskConditional",
+                "TaskCreateDualProblem",
+                "TaskException",
+                "TaskExecuteRelaxationStrategy",
+                "TaskExecuteSolutionLimitStrategy",
+                "TaskFindInteriorPoint",
+                "TaskGoto",
+                "TaskInitializeDualSolver",
+                "TaskInitializeIteration",
+                "TaskInitializeRootsearch",
+                "TaskPerformBoundTightening",
+                "TaskPresolve",
+                "TaskPrintIterationReport",
+                "TaskReformulateProblem",
+                "TaskRepairInfeasibleDualProblem",
+                "TaskRepairableBase",
+                "TaskSelectHyperplanePointsECP",
+                "TaskSelectHyperplanePointsESH",
+                "TaskSelectHyperplanePointsObjectiveFunction",
+                "TaskSelectPrimalCandidatesFromNLP",
+                "TaskSelectPrimalCandidatesFromRootsearch",
+                "TaskSelectPrimalCandidatesFromSolutionPool",
+                "TaskSelectPrimalFixedNLPPointsFromSolutionPool",
+                "TaskSequential",
+                "TaskSimple",
+                "TaskSolveIteration",
+                "TaskTerminate",
+                "TaskUpdateInteriorPoint"
+              ]
+            }
+          ],
+          "files": [
+            "DualSolver",
+            "Enums",
+            "Environment",
+            "EventHandler",
+            "Iteration",
+            "Output",
+            "PrimalSolver",
+            "Report",
+            "Results",
+            "Settings",
+            "Solver",
+            "Structs",
+            "TaskHandler",
+            "Timer",
+            "Timing",
+            "Utilities"
+          ]
+        },
+        {
+          "name": "Sonnet",
+          "id": "layer-4/Sonnet",
+          "children": [
+            {
+              "name": "SonnetWrapper",
+              "id": "layer-4/Sonnet/src/SonnetWrapper",
+              "files": [
+                "AssemblyInfo",
+                "CbcCutGenerator",
+                "CbcEventHandler",
+                "CbcModel",
+                "CbcSolver",
+                "CbcStrategy",
+                "CglCutGenerator",
+                "CglProbing",
+                "ClpModel",
+                "ClpObjective",
+                "CoinError",
+                "CoinLpIO",
+                "CoinMessageHandler",
+                "CoinMpsIO",
+                "CoinPackedMatrix",
+                "CoinShallowPackedVector",
+                "CoinUtils",
+                "CoinWarmStart",
+                "Helpers",
+                "NativeTests",
+                "OsiCbcSolverInterface",
+                "OsiClpSolverInterface",
+                "OsiSolverInterface",
+                "OsiSolverParameters"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "clp-spreadsheet-solver",
+          "id": "layer-4/clp-spreadsheet-solver",
+          "children": []
+        },
+        {
+          "name": "cuopt",
+          "id": "layer-4/cuopt",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

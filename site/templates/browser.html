@@ -1,0 +1,709 @@
+{% extends "base.html" %}
+
+{% block title %}Source Browser - {{ config.title }}{% endblock %}
+
+{% block extra_head %}
+<style>
+.browser-container {
+    display: flex;
+    gap: 1.5rem;
+    min-height: calc(100vh - 200px);
+}
+
+.tree-panel {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.tree-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+}
+
+.tree-search {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.tree-search:focus {
+    outline: none;
+    border-color: var(--accent-light);
+}
+
+.tree-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+
+.tree-stats {
+    padding: 0.5rem 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: var(--bg);
+}
+
+.detail-panel {
+    flex: 2;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+/* Tree node styles */
+.tree-node {
+    user-select: none;
+}
+
+.tree-node-header {
+    display: flex;
+    align-items: center;
+    padding: 0.35rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    gap: 0.5rem;
+}
+
+.tree-node-header:hover {
+    background: var(--bg);
+}
+
+.tree-node-header.selected {
+    background: var(--accent);
+}
+
+.tree-toggle {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    transition: transform 0.15s;
+}
+
+.tree-toggle.expanded {
+    transform: rotate(90deg);
+}
+
+.tree-toggle.empty {
+    visibility: hidden;
+}
+
+.tree-icon {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.tree-label {
+    flex: 1;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tree-badge {
+    background: var(--accent);
+    padding: 0.1rem 0.4rem;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.tree-children {
+    margin-left: 1.25rem;
+    display: none;
+}
+
+.tree-children.expanded {
+    display: block;
+}
+
+/* Node type colors */
+.node-layer .tree-icon { color: #f39c12; }
+.node-library .tree-icon { color: #3498db; }
+.node-folder .tree-icon { color: #9b59b6; }
+.node-file .tree-icon { color: #2ecc71; }
+
+/* Detail panel styles */
+.detail-empty {
+    color: var(--text-muted);
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.detail-header {
+    margin-bottom: 1.5rem;
+}
+
+.detail-header h2 {
+    color: var(--accent-light);
+    margin: 0 0 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.detail-header .breadcrumb {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.detail-desc {
+    color: var(--text-muted);
+    margin: 0.75rem 0;
+}
+
+.detail-section {
+    margin-top: 1.5rem;
+}
+
+.detail-section h3 {
+    color: var(--text);
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+}
+
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.5rem;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.15s;
+}
+
+.file-item:hover {
+    background: var(--accent);
+}
+
+.file-item .icon {
+    color: #2ecc71;
+}
+
+.file-item.has-docs {
+    border-left: 2px solid var(--accent-light);
+}
+
+.child-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.child-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.child-item:hover {
+    background: var(--accent);
+}
+
+.child-item .icon {
+    font-size: 1.1rem;
+}
+
+.child-item .info {
+    flex: 1;
+}
+
+.child-item .name {
+    font-weight: 500;
+}
+
+.child-item .meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .browser-container {
+        flex-direction: column;
+    }
+    .tree-panel {
+        max-width: none;
+        max-height: 50vh;
+    }
+}
+
+/* Filter highlight */
+.tree-node.filtered-out {
+    display: none;
+}
+
+.tree-label .highlight {
+    background: var(--accent);
+    border-radius: 2px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<article>
+    <h1>Source Browser</h1>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+        Explore 814 header files across 30 libraries in the COIN-OR optimization stack.
+        Click nodes to expand. Files with documentation are highlighted.
+    </p>
+
+    <div class="browser-container">
+        <div class="tree-panel">
+            <div class="tree-header">
+                <input type="text" class="tree-search" id="tree-search" placeholder="Filter files..." autocomplete="off">
+            </div>
+            <div class="tree-content" id="tree-content">
+                <div class="detail-empty">Loading...</div>
+            </div>
+            <div class="tree-stats" id="tree-stats"></div>
+        </div>
+
+        <div class="detail-panel" id="detail-panel">
+            <div class="detail-empty">
+                <p>Select a node from the tree to view details</p>
+                <p style="margin-top: 1rem; font-size: 0.85rem;">
+                    Use the search box to filter by file name
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function() {
+    const BASE_URL = '{{ config.base_url | safe }}';
+    let treeData = null;
+    let docsIndex = null;
+    let selectedNode = null;
+
+    // Icons
+    const ICONS = {
+        layer: '📦',
+        library: '📚',
+        folder: '📁',
+        file: '📄',
+        documented: '✓'
+    };
+
+    // Safe DOM clear helper
+    function clearElement(el) {
+        while (el.firstChild) {
+            el.removeChild(el.firstChild);
+        }
+    }
+
+    // Load data
+    async function init() {
+        try {
+            const [treeResp, indexResp] = await Promise.all([
+                fetch(BASE_URL + '/api/source-tree.json'),
+                fetch(BASE_URL + '/api/coinutils/index.json').catch(() => ({ ok: false }))
+            ]);
+
+            treeData = await treeResp.json();
+
+            if (indexResp.ok) {
+                const indexData = await indexResp.json();
+                docsIndex = new Set(indexData.classes.map(c => c.name));
+            } else {
+                docsIndex = new Set();
+            }
+
+            renderTree();
+            updateStats();
+        } catch (e) {
+            console.error('Failed to load tree data:', e);
+            const container = document.getElementById('tree-content');
+            clearElement(container);
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'detail-empty';
+            errorDiv.textContent = 'Failed to load source tree';
+            container.appendChild(errorDiv);
+        }
+    }
+
+    function renderTree() {
+        const container = document.getElementById('tree-content');
+        clearElement(container);
+
+        treeData.children.forEach(layer => {
+            container.appendChild(createTreeNode(layer, 'layer'));
+        });
+    }
+
+    function createTreeNode(data, type, path) {
+        path = path || [];
+        const node = document.createElement('div');
+        node.className = 'tree-node node-' + type;
+        node.dataset.id = data.id || data.name;
+        node.dataset.type = type;
+
+        const hasChildren = (data.children && data.children.length > 0) ||
+                           (data.files && data.files.length > 0);
+
+        // Header
+        const header = document.createElement('div');
+        header.className = 'tree-node-header';
+
+        // Toggle
+        const toggle = document.createElement('span');
+        toggle.className = 'tree-toggle' + (hasChildren ? '' : ' empty');
+        toggle.textContent = '▶';
+        header.appendChild(toggle);
+
+        // Icon
+        const icon = document.createElement('span');
+        icon.className = 'tree-icon';
+        icon.textContent = ICONS[type];
+        header.appendChild(icon);
+
+        // Label
+        const label = document.createElement('span');
+        label.className = 'tree-label';
+        label.textContent = data.name;
+        header.appendChild(label);
+
+        // Badge (count)
+        if (hasChildren) {
+            const count = (data.children ? data.children.length : 0) +
+                         (data.files ? data.files.length : 0);
+            const badge = document.createElement('span');
+            badge.className = 'tree-badge';
+            badge.textContent = String(count);
+            header.appendChild(badge);
+        }
+
+        // Doc indicator for files
+        if (type === 'file' && docsIndex.has(data.name)) {
+            const docBadge = document.createElement('span');
+            docBadge.className = 'tree-badge';
+            docBadge.style.background = 'var(--accent-light)';
+            docBadge.textContent = 'doc';
+            header.appendChild(docBadge);
+        }
+
+        node.appendChild(header);
+
+        // Children container
+        if (hasChildren) {
+            const childContainer = document.createElement('div');
+            childContainer.className = 'tree-children';
+
+            // Sub-folders
+            if (data.children) {
+                data.children.forEach(child => {
+                    const childType = type === 'layer' ? 'library' : 'folder';
+                    childContainer.appendChild(createTreeNode(child, childType, path.concat([data.name])));
+                });
+            }
+
+            // Files
+            if (data.files) {
+                data.files.forEach(file => {
+                    childContainer.appendChild(createTreeNode(
+                        { name: file, id: data.id + '/' + file },
+                        'file',
+                        path.concat([data.name])
+                    ));
+                });
+            }
+
+            node.appendChild(childContainer);
+        }
+
+        // Click handlers
+        header.addEventListener('click', function(e) {
+            e.stopPropagation();
+
+            // Toggle expansion
+            if (hasChildren) {
+                toggle.classList.toggle('expanded');
+                node.querySelector('.tree-children').classList.toggle('expanded');
+            }
+
+            // Select
+            selectNode(node, data, type);
+        });
+
+        return node;
+    }
+
+    function selectNode(element, data, type) {
+        // Update selection
+        if (selectedNode) {
+            selectedNode.querySelector('.tree-node-header').classList.remove('selected');
+        }
+        element.querySelector('.tree-node-header').classList.add('selected');
+        selectedNode = element;
+
+        // Update detail panel
+        renderDetail(data, type);
+    }
+
+    function renderDetail(data, type) {
+        const panel = document.getElementById('detail-panel');
+        clearElement(panel);
+
+        // Header
+        const header = document.createElement('div');
+        header.className = 'detail-header';
+
+        const h2 = document.createElement('h2');
+        const iconSpan = document.createElement('span');
+        iconSpan.textContent = ICONS[type];
+        h2.appendChild(iconSpan);
+        h2.appendChild(document.createTextNode(data.name));
+        header.appendChild(h2);
+
+        if (data.id) {
+            const breadcrumb = document.createElement('div');
+            breadcrumb.className = 'breadcrumb';
+            breadcrumb.textContent = data.id;
+            header.appendChild(breadcrumb);
+        }
+
+        if (data.desc) {
+            const desc = document.createElement('p');
+            desc.className = 'detail-desc';
+            desc.textContent = data.desc;
+            header.appendChild(desc);
+        }
+
+        panel.appendChild(header);
+
+        // For files with docs, add link
+        if (type === 'file' && docsIndex.has(data.name)) {
+            const docLink = document.createElement('div');
+            docLink.className = 'api-link';
+            const link = document.createElement('a');
+            link.href = BASE_URL + '/libraries/coinutils/' + data.name + '/';
+            link.textContent = 'View Documentation →';
+            docLink.appendChild(link);
+            panel.appendChild(docLink);
+        }
+
+        // Children section
+        if (data.children && data.children.length > 0) {
+            const section = document.createElement('div');
+            section.className = 'detail-section';
+
+            const h3 = document.createElement('h3');
+            h3.textContent = type === 'layer' ? 'Libraries' : 'Subdirectories';
+            section.appendChild(h3);
+
+            const list = document.createElement('div');
+            list.className = 'child-list';
+
+            data.children.forEach(function(child) {
+                const item = document.createElement('div');
+                item.className = 'child-item';
+
+                const itemIcon = document.createElement('span');
+                itemIcon.className = 'icon';
+                itemIcon.textContent = type === 'layer' ? ICONS.library : ICONS.folder;
+                item.appendChild(itemIcon);
+
+                const info = document.createElement('div');
+                info.className = 'info';
+
+                const name = document.createElement('div');
+                name.className = 'name';
+                name.textContent = child.name;
+                info.appendChild(name);
+
+                const count = (child.children ? child.children.length : 0) +
+                             (child.files ? child.files.length : 0);
+                if (count > 0) {
+                    const meta = document.createElement('div');
+                    meta.className = 'meta';
+                    meta.textContent = count + ' items';
+                    info.appendChild(meta);
+                }
+
+                item.appendChild(info);
+
+                // Click to navigate
+                item.addEventListener('click', function() {
+                    var childId = child.id;
+                    var treeNode = document.querySelector('.tree-node[data-id="' + childId + '"]');
+                    if (treeNode) {
+                        // Expand parents
+                        var parent = treeNode.parentElement;
+                        while (parent && parent.classList.contains('tree-children')) {
+                            parent.classList.add('expanded');
+                            var prevSib = parent.previousElementSibling;
+                            if (prevSib) {
+                                var tog = prevSib.querySelector('.tree-toggle');
+                                if (tog) tog.classList.add('expanded');
+                            }
+                            var grandParent = parent.parentElement;
+                            parent = grandParent ? grandParent.parentElement : null;
+                        }
+
+                        treeNode.querySelector('.tree-node-header').click();
+                        treeNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+
+                list.appendChild(item);
+            });
+
+            section.appendChild(list);
+            panel.appendChild(section);
+        }
+
+        // Files section
+        if (data.files && data.files.length > 0) {
+            var section = document.createElement('div');
+            section.className = 'detail-section';
+
+            var h3 = document.createElement('h3');
+            h3.textContent = 'Header Files (' + data.files.length + ')';
+            section.appendChild(h3);
+
+            var grid = document.createElement('div');
+            grid.className = 'file-grid';
+
+            data.files.forEach(function(file) {
+                var hasDocs = docsIndex.has(file);
+                var item = document.createElement(hasDocs ? 'a' : 'div');
+                item.className = 'file-item' + (hasDocs ? ' has-docs' : '');
+
+                if (hasDocs) {
+                    item.href = BASE_URL + '/libraries/coinutils/' + file + '/';
+                }
+
+                var fileIcon = document.createElement('span');
+                fileIcon.className = 'icon';
+                fileIcon.textContent = ICONS.file;
+                item.appendChild(fileIcon);
+
+                item.appendChild(document.createTextNode(file));
+
+                if (hasDocs) {
+                    var docIcon = document.createElement('span');
+                    docIcon.style.marginLeft = 'auto';
+                    docIcon.style.color = 'var(--accent-light)';
+                    docIcon.textContent = ICONS.documented;
+                    item.appendChild(docIcon);
+                }
+
+                grid.appendChild(item);
+            });
+
+            section.appendChild(grid);
+            panel.appendChild(section);
+        }
+    }
+
+    function updateStats() {
+        var stats = document.getElementById('tree-stats');
+        var totalFiles = 0;
+        var totalLibs = 0;
+
+        treeData.children.forEach(function(layer) {
+            totalLibs += layer.children.length;
+            layer.children.forEach(function(lib) {
+                totalFiles += lib.files ? lib.files.length : 0;
+                if (lib.children) {
+                    lib.children.forEach(function(sub) {
+                        totalFiles += sub.files ? sub.files.length : 0;
+                    });
+                }
+            });
+        });
+
+        stats.textContent = totalLibs + ' libraries • ' + totalFiles + ' headers • ' +
+                           docsIndex.size + ' documented';
+    }
+
+    // Search/filter
+    document.getElementById('tree-search').addEventListener('input', function(e) {
+        var query = e.target.value.toLowerCase().trim();
+        var nodes = document.querySelectorAll('.tree-node');
+
+        if (!query) {
+            nodes.forEach(function(n) { n.classList.remove('filtered-out'); });
+            return;
+        }
+
+        nodes.forEach(function(node) {
+            var label = node.querySelector('.tree-label').textContent.toLowerCase();
+            var matches = label.indexOf(query) !== -1;
+            var type = node.dataset.type;
+
+            if (type === 'file') {
+                node.classList.toggle('filtered-out', !matches);
+                // If file matches, ensure parents are visible
+                if (matches) {
+                    var parent = node.parentElement;
+                    while (parent) {
+                        if (parent.classList.contains('tree-children')) {
+                            parent.classList.add('expanded');
+                            var prevSib = parent.previousElementSibling;
+                            if (prevSib) {
+                                var tog = prevSib.querySelector('.tree-toggle');
+                                if (tog) tog.classList.add('expanded');
+                            }
+                        }
+                        if (parent.classList.contains('tree-node')) {
+                            parent.classList.remove('filtered-out');
+                        }
+                        parent = parent.parentElement;
+                    }
+                }
+            } else {
+                // Non-files: show if any child matches
+                var hasVisibleChild = node.querySelector('.tree-node:not(.filtered-out)');
+                node.classList.toggle('filtered-out', !matches && !hasVisibleChild);
+            }
+        });
+    });
+
+    init();
+})();
+</script>
+{% endblock %}
