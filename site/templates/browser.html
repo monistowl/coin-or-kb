@@ -483,6 +483,9 @@
 
             renderTree();
             updateStats();
+
+            // Check for URL parameters to auto-navigate
+            handleUrlParams();
         } catch (e) {
             console.error('Failed to load tree data:', e);
             var container = document.getElementById('tree-content');
@@ -491,6 +494,75 @@
             errorDiv.className = 'detail-empty';
             errorDiv.textContent = 'Failed to load source tree';
             container.appendChild(errorDiv);
+        }
+    }
+
+    // Handle URL parameters for deep linking
+    function handleUrlParams() {
+        var params = new URLSearchParams(window.location.search);
+        var library = params.get('library');
+        var layer = params.get('layer');
+
+        if (library) {
+            // Find and expand to the specified library
+            setTimeout(function() {
+                expandToLibrary(library);
+            }, 100);
+        } else if (layer) {
+            // Just expand the specified layer
+            setTimeout(function() {
+                expandToLayer(layer);
+            }, 100);
+        }
+    }
+
+    // Expand tree to show a specific library
+    function expandToLibrary(libraryName) {
+        var normalizedName = libraryName.toLowerCase();
+        var nodes = document.querySelectorAll('.tree-node.node-library');
+
+        for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i];
+            var label = node.querySelector('.tree-label');
+            if (label && label.textContent.toLowerCase() === normalizedName) {
+                // Expand parent layer first
+                var parentLayer = node.closest('.tree-children');
+                if (parentLayer) {
+                    parentLayer.classList.add('expanded');
+                    var parentToggle = parentLayer.previousElementSibling;
+                    if (parentToggle) {
+                        var toggle = parentToggle.querySelector('.tree-toggle');
+                        if (toggle) toggle.classList.add('expanded');
+                    }
+                }
+
+                // Click the library node to select it and expand
+                var header = node.querySelector('.tree-node-header');
+                if (header) {
+                    header.click();
+                    node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+        }
+    }
+
+    // Expand to a specific layer
+    function expandToLayer(layerNum) {
+        var layerName = 'layer-' + layerNum;
+        var nodes = document.querySelectorAll('.tree-node.node-layer');
+
+        for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i];
+            var id = node.dataset.id;
+            if (id && id.toLowerCase().indexOf(layerName) !== -1) {
+                var header = node.querySelector('.tree-node-header');
+                if (header) {
+                    header.click();
+                    node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
         }
     }
 
