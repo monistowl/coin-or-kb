@@ -323,10 +323,118 @@
     border-radius: 4px;
     font-size: 0.85rem;
     transition: background 0.15s;
+    border: none;
+    cursor: pointer;
 }
 
 .doc-button:hover {
     background: var(--accent-light);
+}
+
+.doc-button.expanded {
+    background: var(--accent-light);
+}
+
+/* Inline documentation panel */
+.inline-docs {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    max-height: 500px;
+    overflow-y: auto;
+    display: none;
+}
+
+.inline-docs.visible {
+    display: block;
+}
+
+.inline-docs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.inline-docs-header h5 {
+    margin: 0;
+    color: var(--accent-light);
+}
+
+.inline-docs-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.25rem;
+}
+
+.inline-docs-close:hover {
+    color: var(--text);
+}
+
+.inline-docs-content {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.inline-docs-content h1,
+.inline-docs-content h2,
+.inline-docs-content h3 {
+    color: var(--accent-light);
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.inline-docs-content h1 { font-size: 1.2rem; }
+.inline-docs-content h2 { font-size: 1.1rem; }
+.inline-docs-content h3 { font-size: 1rem; }
+
+.inline-docs-content pre {
+    background: var(--code-bg);
+    padding: 0.75rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+}
+
+.inline-docs-content code {
+    background: var(--code-bg);
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+    font-size: 0.9em;
+}
+
+.inline-docs-content pre code {
+    background: none;
+    padding: 0;
+}
+
+.inline-docs-content ul, .inline-docs-content ol {
+    padding-left: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.inline-docs-content p {
+    margin: 0.5rem 0;
+}
+
+.inline-docs-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--accent-light);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.inline-docs-link:hover {
+    text-decoration: underline;
 }
 
 /* Loading state */
@@ -895,14 +1003,14 @@
         title.textContent = className;
         header.appendChild(title);
 
-        // Link to full docs (Zola lowercases slugs)
+        // Docs button (loads inline instead of navigating)
+        var docButton = null;
         if (docsIndex.has(className)) {
-            var docLink = document.createElement('a');
-            docLink.href = BASE_URL + '/libraries/coinutils/' + className.toLowerCase() + '/';
-            docLink.className = 'doc-button';
-            docLink.textContent = 'Docs →';
-            docLink.addEventListener('click', function(e) { e.stopPropagation(); });
-            header.appendChild(docLink);
+            docButton = document.createElement('button');
+            docButton.className = 'doc-button';
+            docButton.textContent = 'Docs ▾';
+            docButton.addEventListener('click', function(e) { e.stopPropagation(); });
+            header.appendChild(docButton);
         }
 
         card.appendChild(header);
@@ -934,11 +1042,35 @@
 
         card.appendChild(meta);
 
+        // Inline docs section (for expanding docs in-pane)
+        var inlineDocsSection = document.createElement('div');
+        inlineDocsSection.className = 'inline-docs';
+        card.appendChild(inlineDocsSection);
+
         // Expandable algorithms section
         var algSection = document.createElement('div');
         algSection.className = 'algorithms-section';
         algSection.style.display = 'none';
         card.appendChild(algSection);
+
+        // Handle docs button click - load docs inline
+        if (docButton) {
+            docButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (inlineDocsSection.classList.contains('visible')) {
+                    // Collapse
+                    inlineDocsSection.classList.remove('visible');
+                    docButton.classList.remove('expanded');
+                    docButton.textContent = 'Docs ▾';
+                } else {
+                    // Expand and load
+                    inlineDocsSection.classList.add('visible');
+                    docButton.classList.add('expanded');
+                    docButton.textContent = 'Docs ▴';
+                    loadInlineDocs(className, inlineDocsSection);
+                }
+            });
+        }
 
         // Click to expand/load algorithms
         card.addEventListener('click', function() {
@@ -953,6 +1085,100 @@
         });
 
         return card;
+    }
+
+    // Load and display inline documentation
+    async function loadInlineDocs(className, container) {
+        if (container.dataset.loaded) return;
+
+        clearElement(container);
+
+        // Add header with close button and link to full page
+        var header = document.createElement('div');
+        header.className = 'inline-docs-header';
+
+        var headerTitle = document.createElement('h5');
+        headerTitle.textContent = className + ' Documentation';
+        header.appendChild(headerTitle);
+
+        var headerRight = document.createElement('div');
+
+        var fullPageLink = document.createElement('a');
+        fullPageLink.href = BASE_URL + '/libraries/coinutils/' + className.toLowerCase() + '/';
+        fullPageLink.className = 'inline-docs-link';
+        fullPageLink.textContent = 'Open full page ↗';
+        fullPageLink.style.marginRight = '1rem';
+        headerRight.appendChild(fullPageLink);
+
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'inline-docs-close';
+        closeBtn.textContent = '×';
+        closeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            container.classList.remove('visible');
+            var btn = container.parentElement.querySelector('.doc-button');
+            if (btn) {
+                btn.classList.remove('expanded');
+                btn.textContent = 'Docs ▾';
+            }
+        });
+        headerRight.appendChild(closeBtn);
+
+        header.appendChild(headerRight);
+        container.appendChild(header);
+
+        // Loading indicator
+        var content = document.createElement('div');
+        content.className = 'inline-docs-content';
+        content.innerHTML = '<div class="loading">Loading documentation...</div>';
+        container.appendChild(content);
+
+        try {
+            // Fetch the HTML page
+            var docUrl = BASE_URL + '/libraries/coinutils/' + className.toLowerCase() + '/';
+            var resp = await fetch(docUrl);
+            if (!resp.ok) throw new Error('Not found');
+
+            var html = await resp.text();
+
+            // Parse the HTML and extract main content
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(html, 'text/html');
+            var mainContent = doc.querySelector('main') || doc.querySelector('article') || doc.body;
+
+            if (mainContent) {
+                // Remove the h1 title (we have our own header)
+                var h1 = mainContent.querySelector('h1');
+                if (h1) h1.remove();
+
+                // Remove breadcrumbs if present
+                var breadcrumbs = mainContent.querySelector('.breadcrumbs');
+                if (breadcrumbs) breadcrumbs.remove();
+
+                content.innerHTML = mainContent.innerHTML;
+                container.dataset.loaded = 'true';
+
+                // Re-run syntax highlighting if Prism is available
+                if (window.Prism) {
+                    Prism.highlightAllUnder(content);
+                }
+
+                // Re-run KaTeX if available
+                if (window.renderMathInElement) {
+                    renderMathInElement(content, {
+                        delimiters: [
+                            {left: '$$', right: '$$', display: true},
+                            {left: '$', right: '$', display: false}
+                        ]
+                    });
+                }
+            } else {
+                content.innerHTML = '<div class="loading">Could not parse documentation.</div>';
+            }
+        } catch (e) {
+            console.error('Failed to load docs:', e);
+            content.innerHTML = '<div class="loading">Could not load documentation.</div>';
+        }
     }
 
     // Load and display class algorithms
