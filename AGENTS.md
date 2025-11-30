@@ -1,12 +1,92 @@
 # Agent Instructions: Optimization Solver Knowledge Base
 
-This document provides instructions for AI agents working on the annotated optimization solver knowledge base project. Follow these instructions exactly.
+This document provides instructions for AI agents. There are two modes:
+1. **Using the KB** — Query the knowledge base to understand optimization algorithms
+2. **Contributing to the KB** — Add annotations to expand coverage
 
-## Project Overview
+---
 
-**Goal:** Create a deep, agent-parsable knowledge base that maps both the code structure and mathematical principles of optimization solver libraries (COIN-OR ecosystem, HiGHS, SuiteSparse, etc.).
+## Part 1: Using the Knowledge Base
 
-**Method:** Add structured inline annotations to source code. The annotated code is the source of truth.
+### Quick Start
+
+The fastest way to become an expert on COIN-OR optimization solvers:
+
+```bash
+# Clone and explore
+git clone https://github.com/monistowl/coin-or-kb.git
+cd coin-or-kb
+
+# What algorithms are documented?
+./scripts/kb-query.py list
+
+# Search for specific algorithms
+./scripts/kb-query.py algo "simplex"
+./scripts/kb-query.py algo "branch and bound"
+
+# Search by math concept
+./scripts/kb-query.py math "LU factorization"
+./scripts/kb-query.py math "clique"
+
+# Get library overview
+./scripts/kb-query.py lib CoinUtils
+./scripts/kb-query.py lib Cbc
+
+# Get details on a specific file
+./scripts/kb-query.py file CoinUtils CoinFactorization.hpp
+```
+
+### MCP Server Integration
+
+For persistent access via Claude Desktop or other MCP clients:
+
+```json
+{
+  "mcpServers": {
+    "coin-or-kb": {
+      "command": "python",
+      "args": ["/path/to/coin-or-kb/mcp-server/coin_or_kb_server.py"]
+    }
+  }
+}
+```
+
+**Available Tools:**
+- `search_algorithms(query)` — Find algorithm implementations
+- `search_math(query)` — Find mathematical concepts
+- `get_library(name)` — Library overview with annotated files
+- `get_file(library, file)` — Full annotations for a file
+- `list_algorithms()` — All 87+ documented algorithms
+- `get_stats()` — Knowledge base statistics
+
+### JSON API
+
+Load directly in Python:
+
+```python
+import json
+with open('site/static/api/annotations.json') as f:
+    kb = json.load(f)
+
+# Structure: kb['layers'][layer]['libraries'][lib]['files'][path]
+# Each file has: brief, algorithm, math, complexity, ref, see
+```
+
+### What You Can Learn
+
+The KB documents 1,197 files across 28 libraries covering:
+
+- **Linear Programming**: Simplex method, interior point, presolve
+- **Mixed-Integer Programming**: Branch-and-bound, cutting planes, heuristics
+- **Nonlinear Programming**: Interior point (Ipopt), SQP
+- **Sparse Linear Algebra**: LU factorization, Cholesky, AMD ordering
+- **Automatic Differentiation**: Forward/reverse mode, tape-based
+
+---
+
+## Part 2: Contributing Annotations
+
+**Goal:** Expand the knowledge base by adding structured annotations to source code.
 
 **Constraints:**
 - DO NOT change any functional behavior
@@ -20,16 +100,23 @@ This document provides instructions for AI agents working on the annotated optim
 ## Repository Structure
 
 ```
-vendor/
-├── layer-0/          # Foundation: SuiteSparse, CoinUtils
-├── layer-1/          # Core: Osi, Clp, CppAD
-├── layer-2/          # Advanced: Cgl, Cbc, Ipopt
-├── layer-3/          # Specialized: Bonmin, Couenne, SYMPHONY
-├── layer-4/          # High-level: Gravity, HiGHS, etc.
-├── .kb/              # Generated knowledge base artifacts
+coin-or-kb/
+├── layer-0/          # Foundation: CoinUtils, SuiteSparse
+├── layer-1/          # Core: Osi, Clp, CppAD, qpOASES
+├── layer-2/          # Advanced: Cgl, Cbc, Ipopt, ADOL-C
+├── layer-3/          # Specialized: Bonmin, Couenne, SYMPHONY, etc.
+├── layer-4/          # High-level: HiGHS, Gravity, SHOT, etc.
+├── .kb/              # Knowledge base metadata
+│   └── status.json   # Annotation progress tracking
+├── mcp-server/       # MCP server for AI agents
+│   └── coin_or_kb_server.py
 ├── scripts/          # Tooling
-├── prompts/          # Prompt templates
-└── docs/plans/       # Design documents
+│   ├── extract-annotations.py  # JSON API generator
+│   ├── kb-query.py   # CLI query tool
+│   └── validate.py   # Annotation validator
+├── site/             # Zola static site
+│   └── static/api/   # JSON API output
+└── prompts/          # Context templates
 ```
 
 **Processing order:** Work strictly by layer. Complete all Layer 0 libraries before starting Layer 1. Within a layer, order does not matter.

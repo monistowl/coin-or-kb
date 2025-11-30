@@ -145,25 +145,84 @@ where $r_i$ is the row count and $c_j$ is the column count for element $a_{ij}$.
 
 ## For AI Agents
 
-This documentation is designed for both humans and machines. Every class has a JSON endpoint:
+This knowledge base is built for machine consumption. Point your agent at it and instantly gain expertise on 28 optimization libraries.
 
+### Quick Start: MCP Server
+
+Add to your Claude Desktop `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "coin-or-kb": {
+      "command": "python",
+      "args": ["/path/to/coin-or-kb/mcp-server/coin_or_kb_server.py"]
+    }
+  }
+}
 ```
-GET /api/coinutils/CoinFactorization.json
+
+**Available MCP Tools:**
+
+| Tool | Description |
+|------|-------------|
+| `search_algorithms` | Find implementations by algorithm name ("LU factorization", "simplex") |
+| `search_math` | Find files by mathematical concept ("clique", "Ax=b", "dual") |
+| `get_library` | Overview of a library with all annotated files |
+| `get_file` | Full annotations for a specific file |
+| `list_algorithms` | List all 87+ documented algorithms |
+| `get_stats` | Knowledge base statistics (1,197 files, 89 with semantic annotations) |
+
+### CLI Query Tool
+
+For quick lookups without MCP:
+
+```bash
+# Search by algorithm
+./scripts/kb-query.py algo "Markowitz"          # LU factorization pivot selection
+./scripts/kb-query.py algo "branch and bound"   # MIP tree search
+
+# Search by math concept
+./scripts/kb-query.py math "clique"             # Conflict graph algorithms
+./scripts/kb-query.py math "reduced cost"       # Simplex pricing
+
+# Get library overview
+./scripts/kb-query.py lib CoinUtils             # Foundation library
+./scripts/kb-query.py lib Ipopt                 # NLP solver
+
+# Get specific file details
+./scripts/kb-query.py file CoinUtils CoinFactorization.hpp
+
+# List all documented algorithms
+./scripts/kb-query.py list
 ```
 
-The JSON includes:
-- Class name, brief, and detailed description
-- `algorithms[]` — Named algorithms with math and complexity
-- `methods[]` — All public methods with signatures and parameters
-- `header_file`, `library`, `layer` — Source location metadata
+### JSON API
 
-**API Index:** [/api/index.json](api/index.json)
+Load the entire knowledge base directly:
 
----
+```python
+import json
+with open('site/static/api/annotations.json') as f:
+    kb = json.load(f)
 
-## Annotation Tags
+# Find all simplex-related algorithms
+for layer in kb['layers'].values():
+    for lib in layer['libraries'].values():
+        for path, file in lib['files'].items():
+            algo = file.get('algorithm', '')
+            if 'simplex' in algo.lower():
+                print(f"{lib['name']}/{path}")
+                print(f"  {algo[:100]}...")
+```
 
-Each class and method is annotated with semantic tags:
+**API Endpoints:**
+- [`/api/annotations.json`](api/annotations.json) — Full knowledge base (1.8 MB)
+- [`/api/annotations.min.json`](api/annotations.min.json) — Minified (1.5 MB)
+
+### What's in the Annotations?
+
+Each annotated file can include:
 
 | Tag | Example |
 |-----|---------|
@@ -171,5 +230,7 @@ Each class and method is annotated with semantic tags:
 | `@math` | Chooses pivot minimizing $(r_i - 1)(c_j - 1)$ |
 | `@complexity` | $O(m^2)$ worst case, typically $O(m \cdot \text{nnz})$ |
 | `@ref` | Forrest & Tomlin, "Updating triangular factors" (1972) |
+| `@brief` | One-line summary of the file's purpose |
+| `@see` | Cross-references to related code |
 
-These annotations flow from C++ docblocks → Doxygen → JSON/HTML, making the mathematical content accessible to LLMs and search engines.
+**Coverage:** 1,197 annotated files across 28 libraries. 89 files have deep semantic annotations (`@algorithm`, `@math`, `@complexity`).
