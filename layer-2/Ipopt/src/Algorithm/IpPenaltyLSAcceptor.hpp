@@ -30,6 +30,32 @@
  * - rho_: Parameter for predicted reduction calculation
  * - max_soc_: Maximum second order correction steps
  *
+ * @algorithm Exact Penalty Line Search (Waltz-Morales-Nocedal-Orban):
+ * Globalization using ℓ₁ exact penalty merit function:
+ * 1. Compute merit: φ_ν(x) = f(x) + ν·||c(x)||₁
+ * 2. Compute predicted reduction: pred = -∇f·d - ν·(||c+J·d||₁ - ||c||₁)
+ * 3. Update penalty ν if d is not descent for current ν:
+ *    ν ← max(ν, (∇f·d + ρ·dᵀWd) / ((1-ρ)·(||c||₁ - ||c+Jd||₁)))
+ * 4. Armijo backtracking: accept α if φ_ν(x+αd) ≤ φ_ν(x) + η·α·pred
+ * 5. Optional: Second order correction for constraint violation
+ *
+ * @math Exact penalty merit function:
+ *   φ_ν(x) = f(x) + ν·||c(x)||₁
+ *
+ * Descent condition for direction d:
+ *   D_d φ_ν(x) = ∇f(x)ᵀd - ν·||c(x)||₁ < 0
+ * (if ||c|| > 0 and d reduces linearized constraints)
+ *
+ * Penalty update ensures descent:
+ *   ν ≥ ||∇L(x)||∞ / (1 - ε) for some ε > 0
+ *
+ * @complexity O(n + m) per function evaluation. Backtracking may require
+ * multiple evaluations. Second order correction adds one linear solve.
+ *
+ * @ref Waltz, Morales, Nocedal, Orban (2006). "An interior algorithm for
+ *   nonlinear optimization that combines line search and trust region steps".
+ *   Mathematical Programming 107(3):391-408.
+ *
  * @see IpFilterLSAcceptor.hpp for filter-based alternative
  * @see IpBacktrackingLSAcceptor.hpp for base interface
  */

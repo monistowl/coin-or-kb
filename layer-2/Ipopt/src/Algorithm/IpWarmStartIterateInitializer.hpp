@@ -33,6 +33,27 @@
  * - warm_start_mult_init_max_: Maximum multiplier magnitude
  * - warm_start_target_mu_: Target barrier parameter
  *
+ * @algorithm IPM Warm Start Initialization:
+ * Initialize from previous solution for faster convergence:
+ * 1. Load iterate from GetWarmStartIterate() or stored vectors
+ * 2. Push primals from bounds: x ← max(x_L + κ, min(x, x_U - κ))
+ *    where κ = max(warm_start_bound_push, frac·max(1, |x|))
+ * 3. Push slacks similarly
+ * 4. Clip multipliers: y ← sign(y)·min(|y|, mult_init_max)
+ * 5. Ensure bound multipliers positive: z ← max(z, mult_bound_push)
+ * 6. If target_mu set, adjust (s,z) pairs to achieve s·z ≈ μ_target:
+ *    a. Scale: (s,z) ← √(μ_target/(s·z))·(s,z)
+ *    b. Fine-tune via adapt_to_target_mu()
+ *
+ * @math Target μ adjustment (process_target_mu):
+ * Given (s_i, z_i) with s_i·z_i ≠ μ_target:
+ *   ratio = √(μ_target / (s_i·z_i))
+ *   s_i ← ratio·s_i,  z_i ← ratio·z_i
+ * Preserves sign while achieving s_i·z_i = μ_target.
+ *
+ * @complexity O(n + m) for variable processing. No linear solves.
+ * Warm start typically reduces iterations by 50-90% for related problems.
+ *
  * @see IpIterateInitializer.hpp for the base interface
  * @see IpDefaultIterateInitializer.hpp for cold start
  */

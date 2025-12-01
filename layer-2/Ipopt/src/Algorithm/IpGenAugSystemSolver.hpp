@@ -35,6 +35,26 @@
  * - ProvidesInertia(): Check if solver supports this
  * - IncreaseQuality(): Request better pivoting/tolerance
  *
+ * @algorithm Generic Augmented System Solver (Adapter Pattern):
+ * Adapts AugSystemSolver interface to GenKKTSolverInterface:
+ * 1. Check matrix change via tag comparison (O(1))
+ * 2. If matrices changed:
+ *    a. Extract diagonal values to Number* arrays
+ *    b. Pass matrices to solver_interface_->InitializeStructure()
+ *    c. Update internal tags
+ * 3. For each RHS:
+ *    a. Extract Vector data to Number* arrays
+ *    b. Call solver_interface_->Solve()
+ *    c. Copy solution back to Vector objects
+ *
+ * @math Tag-based caching:
+ * Each matrix/vector has monotonic tag that changes on modification.
+ * Comparison: current_tag != cached_tag → matrix changed.
+ * Avoids redundant matrix assembly/factorization when data unchanged.
+ *
+ * @complexity Tag check: O(1). Matrix update: O(nnz).
+ * Solve dominated by underlying solver: O(nnz·fill) sparse, O(n³) dense.
+ *
  * @see IpAugSystemSolver.hpp for base interface
  * @see IpGenKKTSolverInterface.hpp for the solver interface
  */
