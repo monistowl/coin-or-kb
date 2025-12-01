@@ -8,15 +8,27 @@
  * Implements strong branching by solving LP relaxations enhanced with
  * Extended Cutting Plane (ECP) cuts, avoiding full NLP solves.
  *
- * **Algorithm:**
- * 1. markHotStart(): Extract LP from NLP, generate initial ECP cuts
- * 2. solveFromHotStart(): Re-solve LP with bound changes + new ECP cuts
- * 3. unmarkHotStart(): Clean up LP solver
+ * @algorithm LP-Based Strong Branching for MINLP:
+ * Approximate NLP strong branching using LP + ECP cuts:
+ * 1. markHotStart():
+ *    a. Extract LP relaxation from current NLP solution
+ *    b. Generate initial ECP cuts at NLP solution
+ *    c. Store warm start basis
+ * 2. For each branching candidate i:
+ *    a. Modify bounds: x_i ≥ ⌈x_i⌉ (up) or x_i ≤ ⌊x_i⌋ (down)
+ *    b. solveFromHotStart():
+ *       - Warm start LP from stored basis
+ *       - Run ECP iterations (up to maxCuttingPlaneIterations_)
+ *       - Record objective change Δobj_i
+ * 3. unmarkHotStart(): Restore original bounds, clean up
+ * 4. Select: i* = argmax{score(Δobj_i⁺, Δobj_i⁻)}
  *
- * **Parameters:**
- * - maxCuttingPlaneIterations_: Max ECP iterations per strong branch
- * - abs_ecp_tol_, rel_ecp_tol_: Tolerances for ECP convergence
- * - warm_start_mode_: Basis or Clone warm starting
+ * Warm start modes:
+ * - Basis: Reuse LP basis (faster, less accurate)
+ * - Clone: Clone entire LP solver (slower, more accurate)
+ *
+ * @complexity O(candidates · ECP_iters · LP_solve).
+ * Much faster than O(candidates · NLP_solve) for true strong branching.
  *
  * @see StrongBranchingSolver for base class
  * @see EcpCuts for the cut generator used

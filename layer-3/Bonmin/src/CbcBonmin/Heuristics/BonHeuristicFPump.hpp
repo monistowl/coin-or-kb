@@ -16,15 +16,32 @@
  * 1. Rounding to nearest integer solution
  * 2. Projecting back to feasible continuous space via NLP
  *
- * **Algorithm:**
- * 1. Solve NLP relaxation → get x*
- * 2. Round x* to nearest integers → get x̃
- * 3. Solve NLP minimizing ||x - x̃|| → get new x*
- * 4. If x* = x̃, found feasible solution; else repeat
- *
  * **Classes:**
  * - HeuristicFPump: Main feasibility pump heuristic (CbcHeuristic)
  * - RoundingFPump: Helper for intelligent rounding considering constraints
+ *
+ * @algorithm Feasibility Pump for MINLP:
+ * Find feasible integer solution by alternating rounding and projection:
+ * 1. Solve NLP relaxation: x* = argmin{f(x) : g(x) ≤ 0}
+ * 2. Round integers: x̃_i = round(x*_i) for i ∈ I (integer variables)
+ * 3. Projection NLP: x* = argmin{||x_I - x̃_I||_p : g(x) ≤ 0}
+ *    where p = objective_norm_ (1 or 2)
+ * 4. If x*_I = x̃_I, return feasible solution
+ * 5. Else repeat from step 2 (with cycle detection)
+ *
+ * RoundingFPump provides constraint-aware rounding:
+ * - Considers Jacobian structure for better rounding decisions
+ * - Respects integerTolerance for near-integer values
+ *
+ * @math Projection objective (step 3):
+ *   L₁ norm: min Σᵢ |xᵢ - x̃ᵢ|  (reformulated with auxiliary variables)
+ *   L₂ norm: min Σᵢ (xᵢ - x̃ᵢ)²  (smooth, faster convergence)
+ *
+ * @complexity O(k · NLP_solve) where k = iterations until convergence.
+ * Typically k = 10-100. Each NLP solve is O(n³) worst case for Newton.
+ *
+ * @ref Bonami, Cornuéjols, Lodi, Margot (2009). "A feasibility pump for
+ *   mixed integer nonlinear programs". Mathematical Programming 119(2):331-352.
  *
  * @see CbcHeuristic for the base class
  * @see BonminSetup for configuration

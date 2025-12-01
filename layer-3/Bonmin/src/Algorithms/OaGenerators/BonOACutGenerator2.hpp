@@ -15,16 +15,26 @@
  * MINLP. Generates linearization cuts by Taylor expansion of nonlinear
  * constraints at NLP solutions.
  *
- * **Algorithm:**
- * 1. Solve initial NLP relaxation to get y0
- * 2. Generate OA cuts: g(y0) + ∇g(y0)ᵀ(x - y0) ≤ 0
- * 3. Solve MILP with cuts → integer solution x*
- * 4. Fix integers, solve NLP → new point y*
- * 5. Add cuts at y*, update bounds, repeat
+ * @algorithm Outer Approximation (Duran-Grossmann):
+ * Decomposition method for convex MINLP via MILP master + NLP subproblems:
+ * 1. Solve NLP relaxation: y⁰ = argmin{f(x): g(x) ≤ 0, x ∈ X}
+ * 2. Generate OA cuts for each constraint i:
+ *    gᵢ(y⁰) + ∇gᵢ(y⁰)ᵀ(x - y⁰) ≤ 0  (linearization)
+ * 3. Solve MILP master: min{cᵀx : OA cuts, x_I ∈ Z}
+ * 4. Fix integers at x*: solve NLP(x*_I) → new point y*
+ * 5. Add OA cuts at y*, update upper/lower bounds
+ * 6. Terminate when UB - LB < ε or iteration limit
  *
- * **Convergence:**
- * - For convex problems: finite convergence to global optimum
- * - For nonconvex: heuristic, may find local optima
+ * @math OA cut derivation (convex g):
+ * For convex gᵢ: gᵢ(x) ≥ gᵢ(y) + ∇gᵢ(y)ᵀ(x-y)  (first-order condition)
+ * Cut: ∇gᵢ(y)ᵀx ≤ ∇gᵢ(y)ᵀy - gᵢ(y)  (valid for feasible region)
+ *
+ * @complexity O(k·(MILP + NLP)) where k = iterations.
+ * Finite convergence for convex MINLP. Typically k = O(2^|I|) worst case,
+ * but often polynomial in practice for well-structured problems.
+ *
+ * @ref Duran, Grossmann (1986). "An outer-approximation algorithm for a class
+ *   of mixed-integer nonlinear programs". Mathematical Programming 36:307-339.
  *
  * @see OaDecompositionBase for the base class
  * @see SubMipSolver for MILP subproblem solving

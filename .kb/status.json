@@ -446,12 +446,13 @@
       "status": "pass1_complete",
       "libraries": {
         "Bonmin": {
-          "status": "pass1_complete",
+          "status": "pass2_in_progress",
           "pass1_complete": true,
           "pass2_complete": false,
           "files_total": 78,
           "files_pass1": 45,
-          "notes": "Pass 1 complete! 45+ key headers annotated with @file/@brief/@see tags covering MINLP algorithms",
+          "files_pass2": 9,
+          "notes": "Pass 2 in progress! 9 files with @algorithm/@math/@complexity/@ref tags (FPump, OA, ECP, PseudoCosts, LpBranching, etc.)",
           "key_subsystems_documented": [
             "Core Interfaces: TMINLP, OsiTMINLPInterface, TNLPSolver abstraction",
             "NLP Solvers: IpoptSolver, FilterSolver with warm start support",

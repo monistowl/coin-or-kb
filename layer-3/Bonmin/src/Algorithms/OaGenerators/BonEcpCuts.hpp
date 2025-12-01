@@ -14,17 +14,29 @@
  * Generates OA cuts iteratively at LP solution points, refining the
  * linear approximation without requiring NLP solves at every iteration.
  *
- * **ECP algorithm:**
- * 1. Solve LP relaxation
- * 2. Find most violated nonlinear constraint at LP solution
- * 3. Add OA cut for that constraint
- * 4. Re-solve LP, repeat until tolerance met or max iterations
+ * @algorithm Extended Cutting Plane (ECP) Method:
+ * Iterative linearization without explicit NLP solves:
+ * 1. Solve LP relaxation → x^k
+ * 2. Evaluate nonlinear constraints: vᵢ = gᵢ(x^k) for all i
+ * 3. Find most violated: i* = argmax{vᵢ : vᵢ > 0}
+ * 4. If max violation < abs_violation_tol_: STOP (feasible)
+ * 5. Add OA cut at x^k for constraint i*:
+ *    gᵢ*(x^k) + ∇gᵢ*(x^k)ᵀ(x - x^k) ≤ 0
+ * 6. k ← k+1; if k < numRounds_: goto step 1
  *
- * **Parameters:**
- * - numRounds_: Maximum ECP iterations
- * - abs_violation_tol_: Stop when max violation < tolerance
- * - rel_violation_tol_: Relative violation tolerance
- * - beta_: Probability factor for skipping cuts (randomization)
+ * Randomization via beta_:
+ * - Skip cut with probability (1 - β^violation_count)
+ * - Prevents overgeneration on nearly feasible constraints
+ *
+ * @math Convergence for convex constraints:
+ * LP optimal value z^k → NLP optimal value z* as k → ∞
+ * (since linear underestimators converge to convex envelope)
+ *
+ * @complexity O(k · LP_solve + k · nnz(∇g)) where k = numRounds_.
+ * Much cheaper than OA since no NLP solves during iterations.
+ *
+ * @ref Kelley (1960). "The cutting-plane method for solving convex programs".
+ *   Journal of the SIAM 8(4):703-712.
  *
  * @see OaDecompositionBase for base class
  * @see LpBranchingSolver for use in strong branching

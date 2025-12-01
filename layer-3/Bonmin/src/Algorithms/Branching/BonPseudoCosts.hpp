@@ -15,15 +15,28 @@
  * Pseudo-costs estimate the objective change per unit change in a variable,
  * enabling efficient branching decisions without expensive strong branching.
  *
- * **Pseudo-cost formula:**
- * - upPseudoCost[i] = sum(upChange) / count(upBranches)
- * - downPseudoCost[i] = sum(downChange) / count(downBranches)
- * - Expected change = pseudoCost * distance_to_integer
+ * @algorithm Pseudo-Cost Branching:
+ * Learn branching quality from history to avoid repeated strong branching:
+ * 1. Initialize: ψ⁺ᵢ = ψ⁻ᵢ = default_cost (or from first strong branch)
+ * 2. After branching on xᵢ with fractional part fᵢ:
+ *    - Up branch (xᵢ ≥ ⌈xᵢ⌉): record Δobj⁺, update ψ⁺ᵢ
+ *    - Down branch (xᵢ ≤ ⌊xᵢ⌋): record Δobj⁻, update ψ⁻ᵢ
+ * 3. Update formula:
+ *    ψ⁺ᵢ = (Σ Δobj⁺) / count(up branches)
+ *    ψ⁻ᵢ = (Σ Δobj⁻) / count(down branches)
+ * 4. Score variable: score(i) = w·min(ψ⁺ᵢ·(1-fᵢ), ψ⁻ᵢ·fᵢ)
+ *                              + (1-w)·max(ψ⁺ᵢ·(1-fᵢ), ψ⁻ᵢ·fᵢ)
  *
- * **Update via addInfo():**
- * - Called after each branching decision resolves
- * - Records objective change and infeasibility change
- * - Status indicates: optimal, infeasible, or not finished
+ * @math Pseudo-cost per unit change:
+ *   ψ⁺ᵢ ≈ E[Δobj | branch up on xᵢ] / (1 - fᵢ)
+ *   ψ⁻ᵢ ≈ E[Δobj | branch down on xᵢ] / fᵢ
+ * where fᵢ = xᵢ - ⌊xᵢ⌋ is the fractional part.
+ *
+ * @complexity O(1) per variable selection (no solving needed).
+ * Compare to O(LP_solve) for strong branching per candidate.
+ *
+ * @ref Benichou et al. (1971). "Experiments in mixed-integer linear programming".
+ *   Mathematical Programming 1(1):76-94.
  *
  * @see BonChooseVariable for usage in branching decisions
  * @see OsiPseudoCosts for the base class
