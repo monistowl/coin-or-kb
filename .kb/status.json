@@ -351,8 +351,8 @@
           "pass2_complete": false,
           "files_total": 138,
           "files_pass1": 138,
-          "files_pass2": 16,
-          "notes": "Pass 2 in progress! 16 core algorithm files now have @algorithm/@math/@complexity/@ref tags",
+          "files_pass2": 21,
+          "notes": "Pass 2 in progress! 21 core algorithm files now have @algorithm/@math/@complexity/@ref tags",
           "key_subsystems_documented": [
             "Common (14 files): IpoptConfig, SmartPtr, TaggedObject, ReferenceCountingObject, Observer, Journalist, TimingStatistics, Types, Debug, Exception, CachedResults",
             "Interfaces (10 files): IpoptApplication, IpTNLP, IpStdCInterface, IpIpoptApplication, IpReturnCodes",

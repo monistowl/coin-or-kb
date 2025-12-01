@@ -26,6 +26,31 @@
  * Key parameter:
  * - sigma_max_: Upper bound on sigma to prevent excessive centering
  *
+ * @algorithm Mehrotra Predictor-Corrector (Probing):
+ * Adaptively select centering parameter by probing pure Newton direction:
+ * 1. Solve predictor (affine) system with μ=0 to get Δ_aff
+ * 2. Compute α_aff = max step to boundary for affine direction
+ * 3. Compute μ_aff = complementarity after affine step:
+ *    μ_aff = (x + α_aff·Δx_aff)ᵀ(z + α_aff·Δz_aff) / n
+ * 4. Set centering: σ = (μ_aff / μ)³
+ * 5. Solve corrector with μ_new = σ · μ_aff
+ *
+ * @math Centering parameter derivation (Mehrotra):
+ *   σ = (μ_aff / μ)³
+ *
+ * Intuition:
+ * - Large α_aff → small μ_aff → small σ → aggressive
+ * - Small α_aff → large μ_aff → large σ → centering
+ *
+ * Cube power: empirically good balance across problem classes.
+ * Safeguard: σ ← min(σ, σ_max) prevents excessive centering.
+ *
+ * @complexity One affine solve O(n³) + O(n) for step length and μ_aff.
+ * Total: similar to one Newton iteration.
+ *
+ * @ref Mehrotra (1992). "On the Implementation of a Primal-Dual Interior
+ *   Point Method". SIAM J. Optim. 2(4):575-601.
+ *
  * @see IpMuOracle.hpp for base interface
  * @see IpQualityFunctionMuOracle.hpp for alternative mu strategy
  */

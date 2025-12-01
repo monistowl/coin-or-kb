@@ -30,6 +30,31 @@
  * - Vtilde1_, Utilde2_: MultiVectorMatrix backsolve results
  * - Wdiag_: Diagonal part passed to base solver
  *
+ * @algorithm Sherman-Morrison Low-Rank Augmented System Solver:
+ * Efficiently solve augmented system when Hessian has low-rank update:
+ * 1. Decompose Hessian: W = σI + V·M·Vᵀ (L-BFGS compact form)
+ * 2. Solve 2k auxiliary systems: Ṽ = (A_diag)⁻¹·V
+ *    where A_diag is augmented system with σI Hessian
+ * 3. Form small (2k × 2k) correction matrix: J = M⁻¹ + Vᵀ·Ṽ
+ * 4. Solve base system: x₀ = A_diag⁻¹·b
+ * 5. Solve correction: J·y = Vᵀ·x₀
+ * 6. Return: x = x₀ - Ṽ·y (Sherman-Morrison correction)
+ *
+ * @math Sherman-Morrison-Woodbury formula:
+ * (A + UCV^T)^{-1} = A^{-1} - A^{-1}U(C^{-1} + V^TA^{-1}U)^{-1}V^TA^{-1}
+ *
+ * For L-BFGS: A = augmented(σI), U = V = [S, Y], C = M (2k × 2k).
+ *
+ * Key insight: 2k backsolves with simpler (diagonal Hessian) system
+ * cheaper than one solve with dense/indefinite L-BFGS Hessian.
+ *
+ * @complexity 2k augmented system solves with diagonal W: O(2k·nnz(J)·fill).
+ * Plus O(k³) for small dense correction system.
+ * Total often cheaper than one solve with explicit L-BFGS matrix.
+ *
+ * @ref Nocedal & Wright (2006). Numerical Optimization. Chapter 7: Large-Scale
+ *   Unconstrained Optimization. [Limited-memory quasi-Newton methods]
+ *
  * @see IpLowRankSSAugSystemSolver.hpp for single-backsolve version
  * @see IpLimMemQuasiNewtonUpdater.hpp for L-BFGS Hessian
  */

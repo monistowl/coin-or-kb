@@ -33,6 +33,34 @@
  * - push_variables(): Move point away from bounds
  * - least_square_mults(): Compute y from gradient conditions
  *
+ * @algorithm IPM Iterate Initialization (Default):
+ * Initialize all primal and dual variables for interior point method:
+ * 1. Primal variables (x):
+ *    - Start from user x0 or NLP default
+ *    - Push from bounds: x ← max(x_L + κ, min(x, x_U - κ))
+ *    - where κ = max(bound_push, bound_frac·|x_L|)
+ *    - Optional: least-squares fit to linearized constraints
+ * 2. Slack variables (s):
+ *    - Initialize s = d(x) (constraint body values)
+ *    - Push from bounds similarly to x
+ * 3. Constraint multipliers (y_c, y_d):
+ *    - Least-squares estimate: min ||∇f + Jᵀy - z||
+ *    - Reject if ||y||∞ > constr_mult_init_max (use 0 instead)
+ * 4. Bound multipliers (z_L, z_U, v_L, v_U):
+ *    - B_CONSTANT: z = bound_mult_init_val
+ *    - B_MU_BASED: z = μ_init / slack (complementarity-based)
+ *
+ * @math Push-from-bounds formula:
+ *   x_new = max(x_L + κ_abs, min(x, x_U - κ_abs))
+ *   where κ_abs = max(bound_push, bound_frac · max(1, |x_L|))
+ *
+ * Bound multiplier initialization (μ-based):
+ *   z_L = μ_init / (x - x_L),  z_U = μ_init / (x_U - x)
+ * satisfies complementarity x·z = μ at initialization.
+ *
+ * @complexity O(n + m) for variable initialization.
+ * Plus one least-squares solve O(nnz·fill) if using LS multipliers.
+ *
  * @see IpIterateInitializer.hpp for the base interface
  * @see IpWarmStartIterateInitializer.hpp for warm start
  * @see IpEqMultCalculator.hpp for multiplier computation

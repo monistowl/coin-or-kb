@@ -24,6 +24,26 @@
  * - QualityFunctionMuOracle: Requires 1D optimization
  * - LoqoMuOracle: Direct formula, no extra computation
  *
+ * @algorithm LOQO Barrier Parameter Formula:
+ * Simple centering strategy based on current complementarity:
+ * 1. Compute average complementarity: μ̄ = (xᵀz + sᵀv) / n
+ * 2. Compute centering parameter: σ = min(0.1, 100·μ)
+ * 3. Return: μ_new = σ · μ̄ (scaled complementarity)
+ *
+ * @math LOQO centering heuristic:
+ *   σ = min(σ_max, factor·μ)
+ *   μ_new = σ · μ̄ = σ · (xᵀz + sᵀv) / n
+ *
+ * where σ_max limits centering to prevent excessively slow progress,
+ * and n is the total number of complementarity pairs.
+ *
+ * Intuition: Small μ → aggressive (σ small), large μ → centered (σ larger).
+ *
+ * @complexity O(n) for computing complementarity sum. No linear solves needed.
+ *
+ * @ref Vanderbei (1999). "LOQO: An interior point code for quadratic
+ *   programming". Optimization Methods and Software 11(1-4):451-484.
+ *
  * @see IpMuOracle.hpp for base interface
  * @see IpProbingMuOracle.hpp for Mehrotra's predictor-corrector
  */

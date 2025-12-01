@@ -29,6 +29,28 @@
  * - DefaultIterateInitializer: Initial multiplier estimates
  * - MinC_1NrmRestorationPhase: Post-restoration multiplier reset
  *
+ * @algorithm Least-Squares Multiplier Estimation:
+ * Find y minimizing ||∇_x L(x,y)||² via normal equations:
+ * 1. Form gradient residual: g = ∇f(x) - z_L + z_U (bound multiplier contribution)
+ * 2. Solve augmented system with W=0:
+ *    [0     J_c^T   J_d^T] [r  ]   [g]
+ *    [J_c    0       0   ] [y_c] = [0]
+ *    [J_d    0       0   ] [y_d]   [0]
+ * 3. Discard residual r; extract y_c, y_d as multiplier estimates
+ *
+ * @math Least-squares formulation:
+ * min_y ||∇f + Jᵀy - (z_L - z_U)||²
+ *
+ * Normal equations: (J·Jᵀ)·y = -J·(∇f - z_L + z_U)
+ *
+ * Augmented system form solves this without forming JJᵀ explicitly,
+ * preserving sparsity: Jᵀy = r, Jx = 0 → y = (JJᵀ)⁻¹J·(-g).
+ *
+ * Singular case: If J is rank-deficient, minimum-norm solution is obtained.
+ *
+ * @complexity Same as one augmented system solve: O(nnz(J)·fill) for sparse,
+ * O(n³) for dense factorization.
+ *
  * @see IpEqMultCalculator.hpp for base interface
  * @see IpAugSystemSolver.hpp for the linear solver
  * @see IpDefaultIterateInitializer.hpp for initialization usage
