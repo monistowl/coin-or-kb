@@ -24,6 +24,34 @@
  * by eliminating the bound multiplier equations, then solve via
  * AugSystemSolver. The key implementation is PDFullSpaceSolver.
  *
+ * @algorithm Primal-Dual Interior Point Newton System:
+ * This 8×8 block system represents one Newton step for the perturbed
+ * KKT conditions of the barrier problem. The system encodes:
+ * - Rows 1-2: Gradient of Lagrangian (stationarity)
+ * - Rows 3-4: Constraint feasibility (primal feasibility)
+ * - Rows 5-8: Complementarity conditions (XZe = μe perturbed)
+ *
+ * @math Full KKT system for barrier NLP min f(x) s.t. c(x)=0, x≥0:
+ * [∇²L   -Aᵀ   -I  ] [Δx]   [-∇f + Aᵀλ + μ/x]
+ * [ A     0    0  ] [Δλ] = [-c(x)          ]
+ * [ Z     0    X  ] [Δz]   [-XZe + μe      ]
+ *
+ * where L = f - λᵀc - zᵀx is the Lagrangian, Z = diag(z), X = diag(x).
+ * The 8×8 form handles inequality constraints and slack variables.
+ *
+ * Standard reduction: eliminate Δz = X⁻¹(μe - ZΔx - XZe) to get
+ * augmented system with (∇²L + X⁻¹Z) in the (1,1) block.
+ *
+ * @complexity Per Newton iteration: O(n³) for dense factorization,
+ * O(nnz + n·fill) for sparse factorization where fill depends on
+ * sparsity structure. Typically dominated by matrix factorization.
+ *
+ * @ref Wächter & Biegler (2006). "On the implementation of an interior-point
+ *   filter line-search algorithm for large-scale nonlinear programming".
+ *   Mathematical Programming 106(1):25-57. [Ipopt algorithm paper]
+ * @ref Nocedal & Wright (2006). "Numerical Optimization". 2nd ed. Springer.
+ *   Chapter 19: Interior point methods. [Textbook treatment]
+ *
  * @see IpPDFullSpaceSolver.hpp for the main implementation
  * @see IpAugSystemSolver.hpp for the reduced 4x4 system
  * @see IpIteratesVector.hpp for the rhs/solution structure

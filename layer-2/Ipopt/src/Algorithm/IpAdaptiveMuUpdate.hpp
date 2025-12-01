@@ -37,6 +37,32 @@
  * - refs_red_fact_: Required reduction factor
  * - num_refs_max_: Maximum stored references
  *
+ * @algorithm Adaptive Barrier Parameter Update (Free/Fixed Mode):
+ * Non-monotone strategy allowing temporary μ increases for faster convergence.
+ * - Free mode: Oracle chooses μ (may increase). Globalization checks progress.
+ * - Fixed mode: Enforce μ_{k+1} ≤ κ_μ · μ_k until sufficient progress.
+ * Switch to fixed mode when free mode stalls; return when progress resumes.
+ *
+ * @math Barrier parameter update rules:
+ * Free mode (oracle-based): μ ← oracle(x,λ,z) minimizing quality function
+ *   Q(μ) = ||∇L||/μ + μ·||c|| + ||XZe - μe||
+ *
+ * Fixed mode (monotone): μ_{k+1} = min(κ_μ · μ_k, μ_k^θ_μ) where
+ *   κ_μ ∈ (0,1) is linear decrease, θ_μ > 1 is superlinear power.
+ *
+ * Globalization (KKT_ERROR mode): accept μ if
+ *   E(μ_new) ≤ max{E_j : j recent} · (1 - refs_red_fact_)
+ * where E = ||(∇L, c, XZe-μe)|| is primal-dual error.
+ *
+ * @complexity O(n) per update: computing complementarity and KKT norms.
+ * Oracle evaluation may involve trial solves (quality function search).
+ *
+ * @ref Wächter & Biegler (2006). "On the implementation of an interior-point
+ *   filter line-search algorithm for large-scale nonlinear programming".
+ *   Mathematical Programming 106(1):25-57. [Sections 3.1-3.2: μ update]
+ * @ref Nocedal et al. (2009). "An adaptive barrier update strategy for
+ *   nonlinear interior methods". SIAM J. Optimization 19(4):1674-1693.
+ *
  * @see IpMuUpdate.hpp for the base interface
  * @see IpMuOracle.hpp for oracle interface
  * @see IpQualityFunctionMuOracle.hpp for quality function approach

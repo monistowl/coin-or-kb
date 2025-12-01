@@ -40,6 +40,33 @@
  * MIR function: For f(b)*x integer, MIR creates floor/ceil combination
  * that cuts off fractional solutions while preserving integer feasibility.
  *
+ * @algorithm c-MIR (Complemented Mixed Integer Rounding):
+ * Strengthened Gomory cuts via row aggregation and bound substitution.
+ * Given mixed-integer set S = {(x,y) : Σa_j x_j + Σb_j y_j ≤ β, x ≥ 0, y ∈ Z}:
+ * 1. Aggregate rows to obtain base inequality with good fractionality
+ * 2. Substitute bounds: replace continuous x_j by VUB x_j ≤ d_j z_j
+ * 3. Apply MIR function to derive valid cut
+ *
+ * @math The MIR inequality for a_j x_j + b_j y_j ≤ β where y integer:
+ * Let f = β - ⌊β⌋ (fractional part of RHS), f_j = b_j - ⌊b_j⌋
+ * MIR cut: Σ_{f_j≤f} ⌊b_j⌋y_j + Σ_{f_j>f} (⌊b_j⌋ + (f_j-f)/(1-f))y_j + (1/(1-f))Σa_j x_j ≤ ⌊β⌋
+ *
+ * The G-function used for coefficient strengthening:
+ * G(d,f) = ⌊d⌋ if frac(d) ≤ f, else ⌊d⌋ + (frac(d)-f)/(1-f)
+ *
+ * Bound substitution: For continuous x_j with VUB x_j ≤ d_j z_j,
+ * substitute x_j = d_j z_j - s_j (s_j ≥ 0 slack) to convert to integer.
+ *
+ * @complexity Preprocessing: O(m·n) to classify rows and find VUB/VLBs.
+ * Cut generation: O(m·MAXAGGR + n) per source row where MAXAGGR is small constant.
+ * Total: O(m²·MAXAGGR + m·n) per generateCuts() call.
+ *
+ * @ref Marchand & Wolsey (2001). "Aggregation and Mixed Integer Rounding to
+ *   Solve MIPs". Operations Research 49(3):363-371. [Original c-MIR paper]
+ * @ref Nemhauser & Wolsey (1988). "Integer and Combinatorial Optimization".
+ *   Wiley. Section II.4: MIR inequalities. [Foundation]
+ * @ref Wolsey (1998). "Integer Programming". Wiley. Chapter 8. [Textbook treatment]
+ *
  * @see CglMixedIntegerRounding2 for alternative implementation
  * @see CglGomory for the base Gomory cuts MIR generalizes
  */

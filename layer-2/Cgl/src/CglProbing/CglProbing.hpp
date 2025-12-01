@@ -35,6 +35,34 @@
  * - Generates cuts directly from stored implication info
  * - Uses CglTreeProbingInfo built during probing
  *
+ * @algorithm Probing (Variable Fixing and Implication Analysis):
+ * For each binary variable x_j, temporarily fix to 0 and 1, propagate bounds:
+ * 1. If x_j = 0 infeasible → fix x_j = 1 (column cut)
+ * 2. If x_j = 1 infeasible → fix x_j = 0 (column cut)
+ * 3. If x_j = 0 → y_k fixed AND x_j = 1 → y_k fixed same → fix y_k
+ * 4. If x_j = 0 → y_k = 1 AND x_j = 1 → y_k = 0 → record implication
+ * 5. Coefficient strengthening: if constraint slack increases by c when
+ *    x_j = 1, tighten coefficient from a_j to (a_j + c)
+ *
+ * @math Bound propagation logic for constraint Σ a_i x_i ≤ b:
+ * For each variable x_j: compute min/max contribution from others
+ * - min_j = Σ_{i≠j} min(a_i L_i, a_i U_i)
+ * - max_j = Σ_{i≠j} max(a_i L_i, a_i U_i)
+ * New bounds: x_j ≤ (b - min_j)/a_j if a_j > 0, else x_j ≥ (b - max_j)/a_j
+ *
+ * Disaggregation cuts from implications x_j = 1 → x_k = 0:
+ * Valid cut: x_j + x_k ≤ 1 (clique inequality)
+ *
+ * @complexity Per variable probed: O(nnz) for bound propagation where
+ * nnz = non-zeros in constraints containing the variable.
+ * Total: O(n · nnz · maxPass) where n = integers, maxPass typically 1-3.
+ * Root node: more aggressive (maxProbeRoot_, maxPassRoot_).
+ *
+ * @ref Savelsbergh (1994). "Preprocessing and Probing Techniques for Mixed
+ *   Integer Programming Problems". ORSA J. Computing 6(4):445-454.
+ * @ref Achterberg (2007). "Constraint Integer Programming". PhD thesis,
+ *   TU Berlin. Chapter 3.6: Probing. [Modern treatment]
+ *
  * @see CglTreeProbingInfo for storing probing results
  * @see CglClique for cliques discovered during probing
  * @see CglKnapsackCover which also builds clique info

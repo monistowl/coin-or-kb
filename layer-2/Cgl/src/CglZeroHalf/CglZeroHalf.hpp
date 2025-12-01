@@ -27,6 +27,33 @@
  *
  * Uses Dijkstra shortest path (cglShortestPath) for separation.
  *
+ * @algorithm {0,1/2}-Chvátal-Gomory Cuts via Mod-2 Separation:
+ * Working over GF(2), find row combinations that zero out LHS coefficients:
+ * 1. Scale and round matrix to integers
+ * 2. Reduce all coefficients mod 2 → binary (0-1) matrix A'
+ * 3. Find subset S of rows where Σ_{i∈S} A'_{ij} ≡ 0 (mod 2) for all j
+ * 4. If Σ_{i∈S} b_i is odd → valid cut: (1/2)Σ_{i∈S} (a_i x ≤ b_i)
+ *    becomes Σ_{i∈S} ⌊a_ij/2⌋ x_j ≤ ⌊(Σb_i)/2⌋
+ *
+ * @math The validity comes from Chvátal-Gomory closure theory:
+ * Given Ax ≤ b, x ≥ 0 integer, any combination uᵀA with u ∈ {0, 1/2}ᵐ
+ * where uᵀA is integral gives valid inequality: ⌊uᵀA⌋x ≤ ⌊uᵀb⌋
+ *
+ * The separation problem reduces to finding odd cycles in an auxiliary
+ * graph, solved via shortest-path algorithms. The graph encodes:
+ * - Nodes: variables and their complements
+ * - Edges: constraints linking variable parities
+ *
+ * @complexity Separation via shortest path: O(V + E log V) per source.
+ * Graph construction: O(m·n) where m = rows, n = columns.
+ * Heuristic enumeration may be polynomial in practice.
+ *
+ * @ref Andreello, Caprara & Fischetti (2007). "Embedding Cuts in a Branch
+ *   and Cut Framework: a Computational Study with {0,1/2}-Cuts".
+ *   INFORMS J. Computing 19(2):229-238. [Implementation reference]
+ * @ref Caprara & Fischetti (1996). "{0,1/2}-Chvátal-Gomory Cuts".
+ *   Mathematical Programming 74:221-235. [Theory foundation]
+ *
  * @see Cgl012cut.hpp for internal separation machinery
  * @see CglGomory for related MIP cutting plane approach
  */

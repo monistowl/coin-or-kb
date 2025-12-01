@@ -265,13 +265,13 @@
       "status": "pass1_complete",
       "libraries": {
         "Cgl": {
-          "status": "pass1_complete",
+          "status": "pass2_in_progress",
           "pass1_complete": true,
           "pass2_complete": false,
           "files_total": 38,
           "files_pass1": 38,
-          "files_pass2": 0,
-          "notes": "Pass 1 complete! All cut generator headers annotated with @file/@brief/@see tags",
+          "files_pass2": 9,
+          "notes": "Pass 2 in progress! 9 files with @algorithm/@math/@complexity/@ref tags (Gomory, GMI, Clique, FlowCover, KnapsackCover, LandPSimplex, MIR, Probing, ZeroHalf)",
           "key_subsystems_documented": [
             "Core Framework: CglCutGenerator, CglTreeInfo, CglParam, CglStored, CglMessage",
             "Tableau-based: CglGomory, CglGMI (Gomory Mixed-Integer)",
