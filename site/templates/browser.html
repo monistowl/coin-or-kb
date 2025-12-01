@@ -311,6 +311,67 @@
     font-size: 0.8rem;
 }
 
+/* Methods section */
+.methods-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.methods-section h5 {
+    margin: 0 0 0.75rem;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.method-item {
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    padding: 0.6rem 0.75rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
+}
+
+.method-signature {
+    font-family: monospace;
+    color: var(--accent-light);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    word-break: break-word;
+}
+
+.method-brief {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.method-meta {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.method-meta span {
+    background: var(--bg);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+}
+
+/* Class detailed description */
+.class-detailed {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: var(--bg);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
 /* Doc link button */
 .doc-button {
     display: inline-flex;
@@ -1420,14 +1481,14 @@
         }
     }
 
-    // Load and display class algorithms
+    // Load and display class details (algorithms + methods)
     async function loadClassAlgorithms(className, container) {
         if (container.dataset.loaded) return;
 
         clearElement(container);
         var loading = document.createElement('div');
         loading.className = 'loading';
-        loading.textContent = 'Loading algorithms...';
+        loading.textContent = 'Loading class details...';
         container.appendChild(loading);
 
         try {
@@ -1444,12 +1505,27 @@
             clearElement(container);
             container.dataset.loaded = 'true';
 
+            // Show detailed description if available
+            if (data.detailed && data.detailed.length > 50) {
+                var detailedDiv = document.createElement('div');
+                detailedDiv.className = 'class-detailed';
+                detailedDiv.textContent = data.detailed;
+                container.appendChild(detailedDiv);
+            }
+
+            // Show algorithms if available
             if (data.algorithms && data.algorithms.length > 0) {
+                var algHeader = document.createElement('h5');
+                algHeader.textContent = 'Algorithms (' + data.algorithms.length + ')';
+                algHeader.style.marginTop = '1rem';
+                algHeader.style.marginBottom = '0.5rem';
+                algHeader.style.color = 'var(--accent-light)';
+                container.appendChild(algHeader);
+
                 data.algorithms.forEach(function(alg) {
                     var item = document.createElement('div');
                     item.className = 'algorithm-item';
 
-                    // Parse algorithm annotation
                     var parts = parseAlgorithm(alg);
 
                     if (parts.name) {
@@ -1464,7 +1540,6 @@
                         mathDiv.className = 'algorithm-math';
                         mathDiv.textContent = parts.math;
                         item.appendChild(mathDiv);
-                        // Trigger KaTeX rendering if available
                         if (window.renderMathInElement) {
                             renderMathInElement(mathDiv, {
                                 delimiters: [
@@ -1489,11 +1564,99 @@
 
                     container.appendChild(item);
                 });
-            } else {
-                var noAlg = document.createElement('div');
-                noAlg.className = 'loading';
-                noAlg.textContent = 'No algorithms documented.';
-                container.appendChild(noAlg);
+            }
+
+            // Show methods if available
+            if (data.methods && data.methods.length > 0) {
+                var methodsSection = document.createElement('div');
+                methodsSection.className = 'methods-section';
+
+                var methodsHeader = document.createElement('h5');
+                methodsHeader.textContent = 'Methods (' + data.methods.length + ')';
+                methodsSection.appendChild(methodsHeader);
+
+                // Filter to show only interesting methods (skip constructors, destructors, trivial getters)
+                var interestingMethods = data.methods.filter(function(m) {
+                    // Skip if name starts with ~ (destructor) or operator
+                    if (m.name.startsWith('~') || m.name.startsWith('operator')) return false;
+                    // Skip constructors (name same as class)
+                    if (m.name === className) return false;
+                    // Include if has brief or algorithm
+                    return m.brief || m.algorithm;
+                });
+
+                // If no interesting methods, show first 10 anyway
+                var methodsToShow = interestingMethods.length > 0 ? interestingMethods : data.methods.slice(0, 10);
+
+                methodsToShow.slice(0, 15).forEach(function(method) {
+                    var item = document.createElement('div');
+                    item.className = 'method-item';
+
+                    // Build signature
+                    var sig = document.createElement('div');
+                    sig.className = 'method-signature';
+                    var sigText = '';
+                    if (method.return_type) sigText += method.return_type + ' ';
+                    sigText += method.name;
+                    if (method.parameters && method.parameters.length > 0) {
+                        sigText += '(' + method.parameters.map(function(p) {
+                            return p.type + ' ' + p.name;
+                        }).join(', ') + ')';
+                    } else {
+                        sigText += '()';
+                    }
+                    sig.textContent = sigText;
+                    item.appendChild(sig);
+
+                    // Brief description
+                    if (method.brief) {
+                        var brief = document.createElement('div');
+                        brief.className = 'method-brief';
+                        brief.textContent = method.brief;
+                        item.appendChild(brief);
+                    }
+
+                    // Meta info (line number, algorithm)
+                    if (method.source_line || method.algorithm) {
+                        var meta = document.createElement('div');
+                        meta.className = 'method-meta';
+                        if (method.source_line) {
+                            var lineSpan = document.createElement('span');
+                            lineSpan.textContent = 'L' + method.source_line;
+                            meta.appendChild(lineSpan);
+                        }
+                        if (method.algorithm) {
+                            var algSpan = document.createElement('span');
+                            algSpan.style.background = 'var(--accent)';
+                            algSpan.textContent = '⚙️ has algorithm';
+                            meta.appendChild(algSpan);
+                        }
+                        item.appendChild(meta);
+                    }
+
+                    methodsSection.appendChild(item);
+                });
+
+                // Show "and X more" if truncated
+                if (methodsToShow.length > 15 || (interestingMethods.length === 0 && data.methods.length > 10)) {
+                    var moreDiv = document.createElement('div');
+                    moreDiv.className = 'loading';
+                    var remaining = data.methods.length - 15;
+                    moreDiv.textContent = '... and ' + remaining + ' more methods';
+                    methodsSection.appendChild(moreDiv);
+                }
+
+                container.appendChild(methodsSection);
+            }
+
+            // If nothing to show
+            if ((!data.algorithms || data.algorithms.length === 0) &&
+                (!data.methods || data.methods.length === 0) &&
+                (!data.detailed || data.detailed.length <= 50)) {
+                var emptyDiv = document.createElement('div');
+                emptyDiv.className = 'loading';
+                emptyDiv.textContent = 'No detailed documentation available.';
+                container.appendChild(emptyDiv);
             }
 
         } catch (e) {
