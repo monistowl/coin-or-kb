@@ -1,6 +1,6 @@
 # Zola configuration for COIN-OR Knowledge Base
 
-base_url = "https://monistowl.github.io/coin-or-kb"
+base_url = "https://monistowl.github.io/coinorkb"
 title = "COIN-OR Knowledge Base"
 description = "Annotated documentation for optimization solver libraries"
 compile_sass = true

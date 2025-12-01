@@ -276,6 +276,18 @@
     color: var(--text);
 }
 
+.expand-hint {
+    transition: color 0.15s;
+}
+
+.class-card:hover .expand-hint {
+    color: var(--accent-light) !important;
+}
+
+.class-card.expanded .expand-hint {
+    color: var(--accent-light) !important;
+}
+
 /* Algorithm section */
 .algorithms-section {
     margin-top: 1rem;
@@ -1291,17 +1303,43 @@
         panel.appendChild(section);
     }
 
+    // Get library slug from header path (e.g., "layer-0/CoinUtils/CoinFactorization" -> "coinutils")
+    function getLibrarySlug(info) {
+        if (info && info.header) {
+            var parts = info.header.split('/');
+            if (parts.length >= 2) {
+                return parts[1].toLowerCase();
+            }
+        }
+        return 'coinutils'; // fallback
+    }
+
     // Create an expandable class card
     function createClassCard(className, info) {
         var card = document.createElement('div');
         card.className = 'class-card';
+        var libSlug = getLibrarySlug(info);
 
         var header = document.createElement('div');
         header.className = 'class-card-header';
 
+        var titleArea = document.createElement('div');
         var title = document.createElement('h4');
         title.textContent = className;
-        header.appendChild(title);
+        titleArea.appendChild(title);
+
+        // Add expand hint based on content
+        var hasContent = (info.algorithms > 0) || (info.methods > 0);
+        if (hasContent) {
+            var expandHint = document.createElement('span');
+            expandHint.style.fontSize = '0.75rem';
+            expandHint.style.color = 'var(--text-muted)';
+            expandHint.style.marginLeft = '0.5rem';
+            expandHint.textContent = '▶ click to expand';
+            expandHint.className = 'expand-hint';
+            titleArea.appendChild(expandHint);
+        }
+        header.appendChild(titleArea);
 
         // Docs button (loads inline instead of navigating)
         var docButton = null;
@@ -1367,20 +1405,23 @@
                     inlineDocsSection.classList.add('visible');
                     docButton.classList.add('expanded');
                     docButton.textContent = 'Docs ▴';
-                    loadInlineDocs(className, inlineDocsSection);
+                    loadInlineDocs(className, inlineDocsSection, libSlug);
                 }
             });
         }
 
-        // Click to expand/load algorithms
+        // Click to expand/load algorithms and methods
         card.addEventListener('click', function() {
+            var hint = card.querySelector('.expand-hint');
             if (card.classList.contains('expanded')) {
                 card.classList.remove('expanded');
                 algSection.style.display = 'none';
+                if (hint) hint.textContent = '▶ click to expand';
             } else {
                 card.classList.add('expanded');
                 algSection.style.display = 'block';
-                loadClassAlgorithms(className, algSection);
+                if (hint) hint.textContent = '▼ click to collapse';
+                loadClassAlgorithms(className, algSection, libSlug);
             }
         });
 
@@ -1388,10 +1429,13 @@
     }
 
     // Load and display inline documentation
-    async function loadInlineDocs(className, container) {
+    async function loadInlineDocs(className, container, libSlug) {
         if (container.dataset.loaded) return;
 
         clearElement(container);
+
+        // Use provided libSlug or fall back to coinutils
+        libSlug = libSlug || 'coinutils';
 
         // Add header with close button and link to full page
         var header = document.createElement('div');
@@ -1404,7 +1448,7 @@
         var headerRight = document.createElement('div');
 
         var fullPageLink = document.createElement('a');
-        fullPageLink.href = BASE_URL + '/libraries/coinutils/' + className.toLowerCase() + '/';
+        fullPageLink.href = BASE_URL + '/libraries/' + libSlug + '/' + className.toLowerCase() + '/';
         fullPageLink.className = 'inline-docs-link';
         fullPageLink.textContent = 'Open full page ↗';
         fullPageLink.style.marginRight = '1rem';
@@ -1435,7 +1479,7 @@
 
         try {
             // Fetch the HTML page
-            var docUrl = BASE_URL + '/libraries/coinutils/' + className.toLowerCase() + '/';
+            var docUrl = BASE_URL + '/libraries/' + libSlug + '/' + className.toLowerCase() + '/';
             var resp = await fetch(docUrl);
             if (!resp.ok) throw new Error('Not found');
 
@@ -1482,7 +1526,7 @@
     }
 
     // Load and display class details (algorithms + methods)
-    async function loadClassAlgorithms(className, container) {
+    async function loadClassAlgorithms(className, container, libSlug) {
         if (container.dataset.loaded) return;
 
         clearElement(container);
@@ -1491,15 +1535,19 @@
         loading.textContent = 'Loading class details...';
         container.appendChild(loading);
 
+        // Use provided libSlug or fall back to coinutils
+        libSlug = libSlug || 'coinutils';
+
         try {
             var data;
-            if (classDataCache[className]) {
-                data = classDataCache[className];
+            var cacheKey = libSlug + '/' + className;
+            if (classDataCache[cacheKey]) {
+                data = classDataCache[cacheKey];
             } else {
-                var resp = await fetch(BASE_URL + '/api/coinutils/' + className + '.json');
+                var resp = await fetch(BASE_URL + '/api/' + libSlug + '/' + className + '.json');
                 if (!resp.ok) throw new Error('Not found');
                 data = await resp.json();
-                classDataCache[className] = data;
+                classDataCache[cacheKey] = data;
             }
 
             clearElement(container);
@@ -1649,13 +1697,13 @@
                 container.appendChild(methodsSection);
             }
 
-            // If nothing to show
+            // If nothing to show, provide a helpful message
             if ((!data.algorithms || data.algorithms.length === 0) &&
                 (!data.methods || data.methods.length === 0) &&
                 (!data.detailed || data.detailed.length <= 50)) {
                 var emptyDiv = document.createElement('div');
                 emptyDiv.className = 'loading';
-                emptyDiv.textContent = 'No detailed documentation available.';
+                emptyDiv.textContent = 'No detailed class information available. Click "Docs" button if available for full documentation.';
                 container.appendChild(emptyDiv);
             }
 
