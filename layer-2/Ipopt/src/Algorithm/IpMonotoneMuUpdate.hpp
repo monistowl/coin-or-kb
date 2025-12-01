@@ -34,6 +34,28 @@
  * - Calls linesearch_->Reset() when mu changes
  * - Filter is cleared on barrier parameter update
  *
+ * @algorithm Monotone Barrier Parameter Update (Classical IPM):
+ * Standard approach where μ decreases monotonically each outer iteration:
+ * 1. Solve barrier subproblem: minimize f(x) - μ·Σlog(x_i) to tolerance ε(μ)
+ * 2. When converged (E(μ) ≤ barrier_tol_factor·μ), reduce μ
+ * 3. Repeat until μ < μ_target and KKT conditions satisfied
+ *
+ * @math Barrier parameter update formula:
+ *   μ_{k+1} = max(μ_target, min(κ_μ · μ_k, μ_k^{θ_μ}))
+ * where κ_μ ∈ (0,1) is linear factor, θ_μ > 1 gives superlinear decrease.
+ *
+ * Fraction-to-boundary parameter:
+ *   τ_k = max(τ_min, 1 - μ_k)
+ * ensures iterates stay strictly positive: x_{k+1} ≥ (1-τ_k)·x_k > 0.
+ *
+ * @complexity O(1) per update: simple formula evaluation after convergence
+ * check. The work is in the inner iterations (Newton steps per μ value).
+ *
+ * @ref Fiacco & McCormick (1968). "Nonlinear Programming: Sequential
+ *   Unconstrained Minimization Techniques". Wiley. [Original barrier method]
+ * @ref Wright (1997). "Primal-Dual Interior-Point Methods". SIAM.
+ *   Chapter 6: Practical algorithms. [Modern IPM treatment]
+ *
  * @see IpMuUpdate.hpp for the base interface
  * @see IpAdaptiveMuUpdate.hpp for non-monotone alternative
  */

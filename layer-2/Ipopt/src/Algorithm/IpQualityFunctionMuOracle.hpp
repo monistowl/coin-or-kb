@@ -33,6 +33,34 @@
  * - Tolerances: quality_function_section_sigma_tol_, _qf_tol_
  * - Maximum iterations: quality_function_max_section_steps_
  *
+ * @algorithm Quality Function Barrier Parameter Oracle:
+ * Chooses μ by minimizing predicted error after a predictor-corrector step:
+ * 1. Solve affine direction: Newton step with μ=0 (predictor)
+ * 2. Solve centering direction: pure μ contribution (corrector)
+ * 3. Combined step: Δ = Δ_aff + σ·Δ_cen parameterized by σ ∈ [0,1]
+ * 4. Golden section search minimizes Q(σ) over [σ_min, σ_max]
+ * 5. Return μ = σ* · (average complementarity)
+ *
+ * @math Quality function evaluates predicted iterate quality:
+ *   Q(σ) = ||∇L(x+Δx)||_p + C(x+Δx) + B(x+Δx)
+ * where:
+ *   ||·||_p is configurable norm (1, 2, ∞)
+ *   C(·) = centrality measure: none, Σlog(x_iz_i/μ), or Σ(1/(x_iz_i) - 1/μ)
+ *   B(·) = balancing term penalizing unequal primal/dual progress
+ *
+ * Predictor-corrector interpretation (Mehrotra):
+ *   σ = 0 → pure affine scaling (aggressive)
+ *   σ = 1 → pure centering (conservative)
+ *   σ* ∈ (0,1) → adaptive balance
+ *
+ * @complexity Per oracle call: 2 linear solves (affine + centering) plus
+ * O(n · max_section_steps) quality function evaluations for golden section.
+ *
+ * @ref Nocedal et al. (2009). "Adaptive Barrier Update Strategies for
+ *   Nonlinear Interior Methods". SIAM J. Optim. 19(4):1674-1693.
+ * @ref Mehrotra (1992). "On the Implementation of a Primal-Dual Interior
+ *   Point Method". SIAM J. Optim. 2(4):575-601. [Predictor-corrector]
+ *
  * @see IpMuOracle.hpp for the base interface
  * @see IpAdaptiveMuUpdate.hpp for usage
  */

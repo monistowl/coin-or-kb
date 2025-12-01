@@ -26,6 +26,31 @@
  * Main implementation: RestoIterationOutput minimizes ||c(x)||^2 + ||d(x)-s||^2
  * using the interior point method on a modified feasibility problem.
  *
+ * @algorithm Restoration Phase (Feasibility Recovery):
+ * When line search fails to find acceptable step, switch to minimizing
+ * constraint violation using a modified interior point subproblem:
+ * 1. Detect line search failure (step too small or filter blocking)
+ * 2. Formulate feasibility problem: min Σ(p+n) s.t. c(x) = p-n, p,n ≥ 0
+ * 3. Solve using nested Ipopt with modified NLP (RestoIpoptNLP)
+ * 4. Return to original problem when feasible point found
+ *
+ * @math Restoration problem formulation:
+ *   min_{x,p,n} ρ·(Σp_i + Σn_i) + ζ·||x - x_R||²
+ *   s.t. c(x) - p + n = 0,  p ≥ 0, n ≥ 0
+ * where x_R is reference point, ρ penalizes infeasibility,
+ * ζ prevents wandering far from current iterate.
+ *
+ * For inequality-constrained problems:
+ *   min Σ(p+n) s.t. c(x) = p-n, d_L ≤ d(x) ≤ d_U
+ *
+ * @complexity Same as main Ipopt: O(n³) per iteration for linear algebra.
+ * May require many iterations to find feasible point. Worst case: problem
+ * is infeasible and restoration certifies infeasibility.
+ *
+ * @ref Wächter & Biegler (2006). "On the implementation of an interior-point
+ *   filter line-search algorithm for large-scale nonlinear programming".
+ *   Mathematical Programming 106(1):25-57. [Section 3.3: Restoration phase]
+ *
  * @see IpRestoMinC_1Nrm.hpp for the main implementation
  * @see IpRestoIpoptNLP.hpp for restoration phase NLP formulation
  * @see IpBacktrackingLineSearch.hpp for restoration phase trigger
