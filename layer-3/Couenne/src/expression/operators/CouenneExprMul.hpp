@@ -16,17 +16,31 @@
  * During standardization, n-ary products are decomposed into
  * binary products: w1 = x1*x2, w2 = w1*x3, etc.
  *
- * **McCormick envelope for bilinear w = x*y:**
- * Given bounds [xl,xu] and [yl,yu], adds 4 linear constraints:
- * - w >= xl*y + x*yl - xl*yl (underestimator 1)
- * - w >= xu*y + x*yu - xu*yu (underestimator 2)
- * - w <= xl*y + x*yu - xl*yu (overestimator 1)
- * - w <= xu*y + x*yl - xu*yl (overestimator 2)
+ * @algorithm McCormick Envelope for Bilinear Terms:
+ * Convex relaxation of w = x·y over [xL,xU] × [yL,yU]:
+ * 1. Lower envelope (concave underestimator):
+ *    w ≥ xL·y + x·yL - xL·yL  (tangent at (xL, yL))
+ *    w ≥ xU·y + x·yU - xU·yU  (tangent at (xU, yU))
+ * 2. Upper envelope (convex overestimator):
+ *    w ≤ xL·y + x·yU - xL·yU  (tangent at (xL, yU))
+ *    w ≤ xU·y + x·yL - xU·yL  (tangent at (xU, yL))
+ * 3. These 4 planes form the convex envelope of x·y over the box.
  *
- * **Key functions:**
- * - unifiedProdCuts(): Generate McCormick cuts for products/divisions
- * - upperEnvHull(): Improved cuts using convex hull computation
- * - computeMulBrDist(): Distance to convexification for branching
+ * n-ary standardization:
+ *   x₁·x₂·x₃ → w₁ = x₁·x₂, w₂ = w₁·x₃
+ * introduces O(n-1) auxiliary variables.
+ *
+ * @math McCormick derivation:
+ * For w = x·y, we have:
+ *   (x-xL)(y-yL) ≥ 0 ⟹ xy ≥ xL·y + x·yL - xL·yL
+ * Similarly for other corners.
+ * Envelope is tight at all 4 corners of the box.
+ *
+ * @complexity O(1) to generate 4 cuts. Bound tightening improves
+ * relaxation quality: gap ∝ (xU-xL)·(yU-yL).
+ *
+ * @ref McCormick (1976). "Computability of global solutions to factorable
+ *   nonconvex programs". Mathematical Programming 10(1):147-175.
  *
  * @see CouenneExprDiv for division (uses same convexification)
  * @see CouenneExprBinProd for binary product specialization

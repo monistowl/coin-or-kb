@@ -476,12 +476,13 @@
           "last_updated": "2025-11-28"
         },
         "Couenne": {
-          "status": "pass1_complete",
+          "status": "pass2_in_progress",
           "pass1_complete": true,
           "pass2_complete": false,
           "files_total": 103,
           "files_pass1": 103,
-          "notes": "Pass 1 COMPLETE! All 103 header files annotated with @file/@brief/@see tags. Global optimizer for nonconvex MINLP using spatial B&B with convexification.",
+          "files_pass2": 7,
+          "notes": "Pass 2 in progress! 7 files with @algorithm/@math/@complexity/@ref tags (FBBT, OBBT, FeasPump, McCormick, DisjCuts).",
           "key_subsystems_documented": [
             "Core: CouenneProblem (symbolic MINLP representation with expression DAG)",
             "Expression DAG: expression base, exprVar, exprAux (w=f(x)), exprOp (n-ary operators), exprConst, exprCopy, exprClone, exprStore, exprIVar",

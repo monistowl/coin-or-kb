@@ -15,27 +15,34 @@
  * Generates lift-and-project style disjunctive cuts by solving a
  * Cut-Generating Linear Program (CGLP) for each disjunction.
  *
- * **Algorithm:**
- * For a disjunction (P1 OR P2) where P1, P2 are linear systems:
- * 1. Create CGLP with variables for cut coefficients
- * 2. Add constraints ensuring cut valid for both P1 and P2
- * 3. Solve CGLP to find deepest cut separating current LP solution
+ * @algorithm Disjunctive Cut Generation via CGLP:
+ * Generate valid inequalities from (P₁ ∨ P₂) disjunctions:
+ * 1. For disjunction (Ax ≤ b) ∨ (Cx ≤ d):
+ *    Represent as union: x ∈ conv(P₁ ∪ P₂)
+ * 2. CGLP formulation:
+ *    Variables: (α, β₀) for cut αᵀx ≤ β₀
+ *    Constraints:
+ *    - αᵀx ≤ β₀ valid for P₁: ∃u≥0: α = uᵀA, β₀ ≥ uᵀb
+ *    - αᵀx ≤ β₀ valid for P₂: ∃v≥0: α = vᵀC, β₀ ≥ vᵀd
+ *    Objective: max αᵀx̄ - β₀ (separation depth at LP solution x̄)
+ * 3. Solve CGLP → optimal (α*, β₀*) gives deepest cut
+ * 4. Add cut α*ᵀx ≤ β₀* to LP relaxation
  *
- * **Disjunction sources:**
- * - Integer variable branching: x <= k OR x >= k+1
- * - Bound disjunctions from strong branching candidates
- * - Convexification-based disjunctions
+ * Disjunction sources:
+ * - Simple branching: xᵢ ≤ k ∨ xᵢ ≥ k+1
+ * - Split from strong branching candidates
+ * - Convexification disjunctions from nonlinear terms
  *
- * **Key methods:**
- * - getDisjunctions(): Collect all disjunctions to consider
- * - generateDisjCuts(): Solve CGLP for each disjunction
- * - separateWithDisjunction(): Generate Couenne cuts on both sides
+ * @math Lift-and-project derivation:
+ * For split π x ≤ π₀ ∨ π x ≥ π₀+1:
+ *   Cut: (α - λπ)ᵀx ≤ β₀ - λ(π₀+1) for any α·x ≤ β₀ valid, λ ≥ 0
  *
- * **Parameters:**
- * - initDisjPercentage_/Number_: How many disjunctions to use
- * - depthLevelling_: Depth to reduce number of disjunctions
- * - depthStopSeparate_: Depth to stop separation entirely
- * - activeRows_/Cols_: Only include active constraints in CGLP
+ * @complexity CGLP has O(m₁ + m₂) constraints, O(n) variables.
+ * Total: O(numDisjunctions_ · LP_solve(m,n)).
+ *
+ * @ref Balas (1979). "Disjunctive programming". Annals of Discrete Math 5:3-51.
+ * @ref Ceria, Soares (1999). "Convex programming for disjunctive convex
+ *   optimization". Mathematical Programming 86(3):595-614.
  *
  * @see CglLandP for related lift-and-project cuts
  * @see CouenneCutGenerator for convexification cuts

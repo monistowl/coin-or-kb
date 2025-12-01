@@ -16,26 +16,32 @@
  * probing. Temporarily fixes a variable bound and solves the resulting
  * subproblem to determine if a tighter bound is achievable.
  *
- * **Algorithm for probing variable x_i:**
- * 1. Set objective to minimize (or maximize) x_i
- * 2. Solve resulting NLP/MINLP subproblem
- * 3. Optimal value gives new bound on x_i
- * 4. Restore original objective
+ * @algorithm Optimality-Based Bound Tightening (OBBT):
+ * Tighten bounds by solving auxiliary optimization problems:
+ * For each variable xᵢ with current bounds [lᵢ, uᵢ]:
+ * 1. Lower bound tightening:
+ *    lᵢ' = min{xᵢ : x ∈ P} where P is current relaxation
+ *    If lᵢ' > lᵢ: tighten to lᵢ ← lᵢ'
+ * 2. Upper bound tightening:
+ *    uᵢ' = max{xᵢ : x ∈ P}
+ *    If uᵢ' < uᵢ: tighten to uᵢ ← uᵢ'
+ * 3. Resource limits: maxTime_, maxNodes_ per probe
+ * 4. Early termination: maxFailedSteps_ consecutive non-improvements
  *
- * **Designed for parallelization:**
- * Each variable can be probed independently, making this suitable
- * for parallel execution. User can probe specific variables without
- * using full cut generator interface.
+ * Parallelization: Variables can be probed independently.
+ * probeVariable(index, probeLower) probes single variable.
  *
- * **Parameters:**
- * - maxTime_: Maximum time per variable probe
- * - maxNodes_: Maximum B&B nodes per probe
- * - maxFailedSteps_: Stop after consecutive failures
- * - restoreCutoff_: Whether to restore cutoff after probing
+ * @math OBBT guarantees:
+ * For convex P: l' = optimal is exact lower bound.
+ * For nonconvex: l' from relaxation may not be achievable,
+ * but still provides valid (possibly weak) bound.
  *
- * **Expense:**
- * Very expensive (solves NLP per bound per variable), so use sparingly
- * or in parallel environments.
+ * @complexity O(2n · subproblem_solve) for full OBBT.
+ * Each subproblem: NLP solve O(n³) per Newton iteration.
+ * Very expensive - use sparingly or with time limits.
+ *
+ * @ref Tawarmalani, Sahinidis (2005). "A polyhedral branch-and-cut approach
+ *   to global optimization". Mathematical Programming 103(2):225-249.
  *
  * @see CouenneFixPoint for cheaper FBBT alternative
  * @see CouenneMultiVarProbe for multi-variable probing

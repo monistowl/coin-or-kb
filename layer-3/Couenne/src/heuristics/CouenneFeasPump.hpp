@@ -17,24 +17,32 @@
  * - MILP phase: Find integer point closest to NLP solution
  * - NLP phase: Find NLP-feasible point closest to integer solution
  *
- * **Algorithm:**
- * 1. Solve NLP relaxation → get continuous solution nSol
- * 2. Solve MILP minimizing distance to nSol → get integer iSol
- * 3. Solve NLP minimizing distance to iSol → get new nSol
- * 4. If nSol = iSol, found feasible; else repeat
+ * @algorithm Feasibility Pump for Nonconvex MINLP:
+ * Alternating projection between continuous and integer feasible sets:
+ * 1. Solve NLP relaxation: nSol = argmin{f(x) : g(x) ≤ 0}
+ * 2. MILP phase (milpPhase):
+ *    iSol = argmin{w_D·||x_I - nSol_I|| + w_H·xᵀHx + w_O·cᵀx : Ax ≤ b, x_I ∈ Z}
+ *    where w_D = multDistMILP_, w_H = multHessMILP_, w_O = multObjFMILP_
+ * 3. NLP phase (nlpPhase):
+ *    nSol = argmin{w_D·||x_I - iSol_I|| + w_H·xᵀHx + w_O·f(x) : g(x) ≤ 0}
+ * 4. If ||nSol_I - iSol_I|| < ε: return nSol (feasible found)
+ * 5. Tabu management: If cycling detected, apply tabuMgt_ policy
+ * 6. Fade weights: wᵢ ← fadeMult_·wᵢ, goto step 2
  *
- * **Distance weights (fadingCoeff):**
- * - multDistNLP_/MILP_: Weight on distance from target
- * - multHessNLP_/MILP_: Weight on Hessian (smoothing)
- * - multObjFNLP_/MILP_: Weight on original objective
+ * Distance options (compDistInt_):
+ * - FP_DIST_INT: Only integer variables
+ * - FP_DIST_ALL: All variables
+ * - FP_DIST_POST: Post-process with LP
  *
- * **Tabu management (fpTabuMgtPolicy):**
- * - FP_TABU_POOL: Avoid previously visited solutions
- * - FP_TABU_PERTURB: Random perturbation on cycling
- * - FP_TABU_CUT: Add cuts to forbid solution
+ * @math Weighted objective in MILP phase:
+ *   min α·Σᵢ|xᵢ - nSolᵢ| + β·xᵀHx + γ·cᵀx
+ * where α + β + γ = 1 and coefficients fade toward γ = 1 (original objective).
  *
- * **SCIP integration:**
- * Can use SCIP instead of Cbc for MILP phase (COUENNE_HAS_SCIP).
+ * @complexity O(maxIter_ · (MILP_solve + NLP_solve)).
+ * Each iteration: MILP is O(2^|I|) worst, NLP is O(n³) per Newton step.
+ *
+ * @ref Bonami, Gonçalves (2012). "Heuristics for convex mixed integer nonlinear
+ *   programs". Computational Optimization and Applications 51(2):729-747.
  *
  * @see CouenneTNLP for the NLP interface
  * @see CouenneFPpool for solution pool management
