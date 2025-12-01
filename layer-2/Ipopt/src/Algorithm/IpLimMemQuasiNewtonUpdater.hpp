@@ -34,6 +34,34 @@
  * - Structured update accounting for η*D_r*x quadratic term
  * - Ypart_ stores constraint-only gradient differences
  *
+ * @algorithm Limited-Memory Quasi-Newton (L-BFGS/SR1):
+ * Approximates ∇²L using m most recent (s,y) pairs for O(mn) storage:
+ * 1. Store s_k = x_{k+1} - x_k and y_k = ∇L_{k+1} - ∇L_k
+ * 2. Build compact representation: B_k = σI + V·M⁻¹·Vᵀ
+ * 3. Solve B_k·p = -g via two-loop recursion (BFGS) or Sherman-Morrison
+ *
+ * @math BFGS secant condition: B_{k+1}·s_k = y_k (quasi-Newton equation)
+ * Update formula (compact form for m pairs):
+ *   B_k = σ_k·I + [Y_k  σS_k]·[D_k + σ·SᵀS_k   L_k ]⁻¹·[Y_k  σS_k]ᵀ
+ *                              [L_kᵀ           -σ·SᵀS_k]
+ * where D_k = diag(sᵢᵀyᵢ), L_k is strictly lower triangular with (L_k)_{ij} = sᵢᵀy_j.
+ *
+ * SR1 update: B_{k+1} = B_k + (y-Bs)(y-Bs)ᵀ / (y-Bs)ᵀs
+ * Can capture indefiniteness but may become singular.
+ *
+ * Curvature condition: sᵀy > 0 required for positive definiteness (BFGS).
+ * Skip update if violated; reset after limited_memory_max_skipping_ consecutive skips.
+ *
+ * @complexity Per iteration: O(mn) for update, O(mn) for matrix-vector product.
+ * Two-loop recursion: O(mn) for solving B·p = -g.
+ * Storage: O(mn) for m pairs in n-dimensional space.
+ *
+ * @ref Nocedal (1980). "Updating Quasi-Newton Matrices with Limited Storage".
+ *   Mathematics of Computation 35(151):773-782. [Original L-BFGS]
+ * @ref Byrd et al. (1994). "Representations of quasi-Newton matrices and
+ *   their use in limited memory methods". Mathematical Programming 63:129-156.
+ *   [Compact representation used here]
+ *
  * @see IpHessianUpdater.hpp for base interface
  * @see IpExactHessianUpdater.hpp for exact alternative
  * @see IpLowRankUpdateSymMatrix.hpp for matrix representation

@@ -24,6 +24,33 @@
  * - residual_ratio_max: Acceptable solution quality threshold
  * - neg_curv_test_tol: Tolerance for inertia heuristics
  *
+ * @algorithm Full-Space Primal-Dual System Solver:
+ * Reduces 8×8 KKT system to 4×4 augmented system by variable elimination:
+ * 1. Eliminate bound multipliers: Δz = S⁻¹(r_z - Z·Pᵀ·Δx)
+ * 2. Form augmented system with diagonal Σ = S⁻¹Z in (1,1) block
+ * 3. Factor augmented system (via AugSystemSolver)
+ * 4. Recover full solution by back-substitution
+ *
+ * @math Variable elimination for bound multipliers:
+ * From complementarity rows: Z·Pᵀ·Δx + S·Δz = r_z
+ * Solve: Δz = S⁻¹(r_z - Z·Pᵀ·Δx)
+ *
+ * Augmented system after elimination:
+ * [W + Σ   Aᵀ ] [Δx]   [r_x - Pᵀ·S⁻¹·r_z]
+ * [  A   -δ_c·I] [Δy] = [r_c              ]
+ * where Σ = Pᵀ·S⁻¹·Z·P is diagonal and δ_c is constraint regularization.
+ *
+ * Iterative refinement: solve, compute residual r = b - Ax̂,
+ * solve for correction, repeat until ||r||/||b|| < tol.
+ *
+ * @complexity Dominated by augmented system factorization:
+ * O(n³) dense, O(nnz + n·fill) sparse. Iterative refinement adds
+ * O(n²) per step for residual computation.
+ *
+ * @ref Wächter & Biegler (2006). "On the implementation of an interior-point
+ *   filter line-search algorithm for large-scale nonlinear programming".
+ *   Mathematical Programming 106(1):25-57. [Section 3.1: Linear algebra]
+ *
  * @see IpPDSystemSolver.hpp for the interface
  * @see IpAugSystemSolver.hpp for the reduced system solver
  * @see IpPDPerturbationHandler.hpp for inertia correction
