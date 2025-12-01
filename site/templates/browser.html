@@ -501,6 +501,176 @@
     background: var(--accent);
     border-radius: 2px;
 }
+
+/* Architecture Overview Styles */
+.arch-overview {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.arch-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--accent-light);
+    list-style: none;
+}
+
+.arch-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.arch-toggle-icon {
+    transition: transform 0.2s;
+    font-size: 0.8rem;
+}
+
+.arch-overview:not([open]) .arch-toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.arch-content {
+    padding: 0 1.25rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.layer-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 280px;
+}
+
+.layer-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.layer-card:hover {
+    border-color: var(--accent-light);
+    transform: translateX(4px);
+}
+
+.layer-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.layer-0 .layer-num { background: #3498db; color: white; }
+.layer-1 .layer-num { background: #2ecc71; color: white; }
+.layer-2 .layer-num { background: #9b59b6; color: white; }
+.layer-3 .layer-num { background: #e74c3c; color: white; }
+.layer-4 .layer-num { background: #f39c12; color: white; }
+
+.layer-info {
+    flex: 1;
+}
+
+.layer-title {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.layer-libs {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.layer-arrow {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.arch-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-arrow {
+    opacity: 0.7;
+}
+
+.legend-note {
+    font-style: italic;
+}
+
+.quick-nav {
+    flex: 1;
+    min-width: 280px;
+}
+
+.quick-nav-title {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.quick-nav-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.quick-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.quick-nav-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent-light);
+}
+
+@media (max-width: 600px) {
+    .arch-content {
+        flex-direction: column;
+    }
+    .layer-stack, .quick-nav {
+        min-width: auto;
+    }
+}
 </style>
 {% endblock %}
 
@@ -511,6 +681,75 @@
         Explore 814 header files across 30 libraries in the COIN-OR optimization stack.
         Click nodes to expand. Files with documentation are highlighted.
     </p>
+
+    <!-- Architecture Overview -->
+    <details class="arch-overview" open>
+        <summary class="arch-toggle">
+            <span class="arch-toggle-icon">▼</span>
+            Architecture Overview
+        </summary>
+        <div class="arch-content">
+            <div class="layer-stack">
+                <div class="layer-card layer-4" data-layer="4">
+                    <div class="layer-num">4</div>
+                    <div class="layer-info">
+                        <div class="layer-title">Applications</div>
+                        <div class="layer-libs">OS · DyLP · Vol · SYMPHONY</div>
+                    </div>
+                    <div class="layer-arrow">↑</div>
+                </div>
+                <div class="layer-card layer-3" data-layer="3">
+                    <div class="layer-num">3</div>
+                    <div class="layer-info">
+                        <div class="layer-title">Global Optimization</div>
+                        <div class="layer-libs">Couenne · Bonmin</div>
+                    </div>
+                    <div class="layer-arrow">↑</div>
+                </div>
+                <div class="layer-card layer-2" data-layer="2">
+                    <div class="layer-num">2</div>
+                    <div class="layer-info">
+                        <div class="layer-title">Nonlinear Optimization</div>
+                        <div class="layer-libs">Ipopt</div>
+                    </div>
+                    <div class="layer-arrow">↑</div>
+                </div>
+                <div class="layer-card layer-1" data-layer="1">
+                    <div class="layer-num">1</div>
+                    <div class="layer-info">
+                        <div class="layer-title">Linear/MIP Optimization</div>
+                        <div class="layer-libs">Clp · Cbc · Cgl · Osi</div>
+                    </div>
+                    <div class="layer-arrow">↑</div>
+                </div>
+                <div class="layer-card layer-0" data-layer="0">
+                    <div class="layer-num">0</div>
+                    <div class="layer-info">
+                        <div class="layer-title">Foundation</div>
+                        <div class="layer-libs">CoinUtils · SuiteSparse</div>
+                    </div>
+                </div>
+            </div>
+            <div class="arch-legend">
+                <div class="legend-item">
+                    <span class="legend-arrow">↑</span>
+                    <span>depends on</span>
+                </div>
+                <div class="legend-note">Click any layer to navigate</div>
+            </div>
+            <div class="quick-nav">
+                <div class="quick-nav-title">Quick Navigation</div>
+                <div class="quick-nav-items">
+                    <button class="quick-nav-btn" data-lib="CoinUtils">📦 CoinUtils</button>
+                    <button class="quick-nav-btn" data-lib="Clp">📊 Clp (LP)</button>
+                    <button class="quick-nav-btn" data-lib="Cbc">🌳 Cbc (MIP)</button>
+                    <button class="quick-nav-btn" data-lib="Ipopt">📈 Ipopt (NLP)</button>
+                    <button class="quick-nav-btn" data-lib="Bonmin">🔀 Bonmin (MINLP)</button>
+                    <button class="quick-nav-btn" data-lib="Couenne">🌐 Couenne (Global)</button>
+                </div>
+            </div>
+        </div>
+    </details>
 
     <div class="browser-container">
         <div class="tree-panel">
@@ -1349,7 +1588,77 @@
         });
     });
 
-    init();
+    // Architecture Overview: Setup after tree loads
+    function setupArchOverview() {
+        // Layer card clicks
+        document.querySelectorAll('.layer-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                var layerNum = this.dataset.layer;
+                if (!layerNum) return;
+
+                // Find and click the corresponding layer in the tree
+                var layerId = 'layer-' + layerNum;
+                var nodes = document.querySelectorAll('.tree-node.node-layer');
+
+                for (var i = 0; i < nodes.length; i++) {
+                    var node = nodes[i];
+                    var id = node.dataset.id;
+                    if (id && id.toLowerCase().indexOf(layerId) !== -1) {
+                        var header = node.querySelector('.tree-node-header');
+                        if (header) {
+                            header.click();
+                            node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        break;
+                    }
+                }
+            });
+        });
+
+        // Quick nav button clicks
+        document.querySelectorAll('.quick-nav-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var libName = this.dataset.lib;
+                if (!libName) return;
+
+                var normalizedName = libName.toLowerCase();
+                var nodes = document.querySelectorAll('.tree-node.node-library');
+
+                for (var i = 0; i < nodes.length; i++) {
+                    var node = nodes[i];
+                    var label = node.querySelector('.tree-label');
+                    if (label && label.textContent.toLowerCase() === normalizedName) {
+                        // Expand parent layer first
+                        var parentLayer = node.closest('.tree-children');
+                        if (parentLayer) {
+                            parentLayer.classList.add('expanded');
+                            var parentToggle = parentLayer.previousElementSibling;
+                            if (parentToggle) {
+                                var toggle = parentToggle.querySelector('.tree-toggle');
+                                if (toggle) toggle.classList.add('expanded');
+                            }
+                        }
+
+                        // Click the library node
+                        var header = node.querySelector('.tree-node-header');
+                        if (header) {
+                            header.click();
+                            node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        break;
+                    }
+                }
+            });
+        });
+    }
+
+    // Init then setup arch overview handlers
+    init().then(function() {
+        setupArchOverview();
+    }).catch(function() {
+        // Still setup handlers even if init fails
+        setupArchOverview();
+    });
 })();
 </script>
 {% endblock %}
