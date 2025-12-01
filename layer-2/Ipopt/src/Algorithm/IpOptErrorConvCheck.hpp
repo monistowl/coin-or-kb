@@ -32,6 +32,35 @@
  * - Returns true if acceptable-level tolerances are met
  * - Used by line search to decide on restoration phase
  *
+ * @algorithm KKT Optimality Convergence Check:
+ * Tests first-order optimality conditions (scaled and unscaled):
+ * 1. Optimal convergence (all must hold):
+ *    - ||∇L||∞ ≤ dual_inf_tol (dual feasibility)
+ *    - ||c(x)||∞ ≤ constr_viol_tol (primal feasibility)
+ *    - ||X·Z·e - μ·e||∞ ≤ compl_inf_tol (complementarity)
+ *    - Overall scaled error ≤ tol
+ * 2. Acceptable convergence (fallback after acceptable_iter_ iterations):
+ *    - Same conditions with relaxed tolerances (acceptable_*)
+ *    - Plus objective stagnation check: |f_k - f_{k-1}| ≤ acceptable_obj_change_tol
+ * 3. Failure conditions:
+ *    - iter > max_iterations_
+ *    - time > max_wall_time_ or max_cpu_time_
+ *    - ||x||∞ > diverging_iterates_tol (divergence)
+ *    - μ ≤ mu_target_ (target barrier reached)
+ *
+ * @math First-order KKT conditions:
+ *   ∇f(x) + ∇c(x)ᵀλ + ∇g(x)ᵀν - z = 0  (stationarity)
+ *   c(x) = 0                             (equality constraints)
+ *   g(x) - s = 0, s ≥ 0                  (inequality slacks)
+ *   X·Z·e = μ·e                          (complementarity)
+ *   x ≥ 0, z ≥ 0                         (bounds)
+ *
+ * Scaled error: E_μ(x,λ,z) = max(||∇L||/(s_d+1), ||c||/(s_c+1), ||XZe-μe||/s_c)
+ * where s_d, s_c are scaling factors from NLP scaling.
+ *
+ * @complexity O(n + m) per check for computing norms of residuals.
+ * Called once per iteration.
+ *
  * @see IpConvCheck.hpp for the base interface
  * @see IpRestoConvCheck.hpp for restoration phase convergence
  */

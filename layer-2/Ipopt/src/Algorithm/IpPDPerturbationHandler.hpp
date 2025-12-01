@@ -29,6 +29,37 @@
  * - Increase perturbation exponentially until acceptable
  * - Decrease perturbation when not needed
  *
+ * @algorithm Inertia Correction via Perturbation:
+ * Add regularization to KKT system diagonal for correct eigenvalue signature:
+ * 1. ConsiderNewSystem: Check if structural degeneracy detected
+ *    - If jac_degenerate_: set δ_c = δ_d = δ_cd (constraint regularization)
+ *    - If hess_degenerate_: set δ_x, δ_s > 0 (primal regularization)
+ * 2. PerturbForWrongInertia: Inertia mismatch after factorization
+ *    - First try: δ_x = delta_xs_init_ (small)
+ *    - Retry: δ_x ← δ_x · delta_xs_inc_fact_ (exponential increase)
+ *    - Stop when δ_x > delta_xs_max_ (failure)
+ * 3. PerturbForSingularity: Numerical singularity detected
+ *    - Similar exponential increase strategy
+ * 4. On success: δ_x_last_ ← δ_x · delta_xs_dec_fact_ (reduce for next time)
+ *
+ * @math Perturbed augmented system:
+ * [H + Σ + δ_x·I     Aᵀ        ] [Δx]   [r_x]
+ * [    A        -δ_c·I         ] [Δλ] = [r_λ]
+ *
+ * Required inertia for descent direction:
+ * - n + n_s positive eigenvalues (primal variables + slacks)
+ * - m_eq + m_ineq negative eigenvalues (dual variables)
+ *
+ * Constraint regularization: δ_c = δ_cd_val · μ^{δ_cd_exp}
+ * (decreases with barrier parameter for asymptotic accuracy)
+ *
+ * @complexity O(1) per perturbation decision. Dominated by linear
+ * solver factorization O(nnz(L)·fill) which may be retried multiple times.
+ *
+ * @ref Wächter & Biegler (2006). "On the implementation of an interior-point
+ *   filter line-search algorithm for large-scale nonlinear programming".
+ *   Mathematical Programming 106(1):25-57. [Section 3.1: Inertia correction]
+ *
  * @see IpPDFullSpaceSolver.hpp for usage
  * @see IpAugSystemSolver.hpp for where perturbations are applied
  */

@@ -24,6 +24,30 @@
  * - Tracks matrix tags to avoid unnecessary reassembly
  * - Delegates factorization/solve to SymLinearSolver
  *
+ * @algorithm Augmented System Assembly (Standard):
+ * Builds the 4×4 symmetric indefinite KKT matrix from components:
+ * 1. Create matrix space once (CompoundSymMatrixSpace)
+ * 2. Assemble (1,1) block: H = W·factor + D_x + δ_x·I using SumSymMatrix
+ * 3. Set (2,2) block: D_s + δ_s·I
+ * 4. Set (1,3): J_c^T, (1,4): J_d^T (Jacobians as GenTMatrix)
+ * 5. Set (3,3): -D_c + δ_c·I, (4,4): -D_d + δ_d·I (regularization)
+ * 6. Set (2,4): -I (slack-inequality coupling)
+ * 7. Check matrix tags to avoid reassembly if unchanged
+ * 8. Pass assembled CompoundSymMatrix to SymLinearSolver
+ *
+ * @math Augmented system structure (symmetric indefinite):
+ * [H + Σ    0    Aᵀ   ] [Δx]   [r_x]
+ * [  0    D_s   -Eᵀ   ] [Δs] = [r_s]
+ * [  A    -E   -D_c   ] [Δλ]   [r_λ]
+ *
+ * where Σ = Pᵀ·S⁻¹·Z·P (bound multiplier contribution to diagonal),
+ * A = [J_c; J_d] (equality + inequality Jacobians),
+ * E = [0; I] (slack-inequality identity block).
+ *
+ * @complexity Space: O(nnz(H) + nnz(J)) for sparse assembly.
+ * Time: O(1) for tag checking, O(nnz) for assembly,
+ * dominated by factorization O(nnz(L)·fill) in linear solver.
+ *
  * @see IpAugSystemSolver.hpp for the interface
  * @see IpSymLinearSolver.hpp for the underlying sparse solver
  * @see IpCompoundSymMatrix.hpp for the matrix representation

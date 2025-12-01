@@ -26,6 +26,34 @@
  *
  * Used by FilterLSAcceptor for filter line search acceptance tests.
  *
+ * @algorithm Filter Globalization (Wächter-Biegler):
+ * Multi-objective acceptance mechanism replacing merit function:
+ * 1. Maintain set F of pairs (θ, φ) - constraint violation and objective
+ * 2. Acceptable(θ,φ): return true if ∃(θ_i,φ_i)∈F: θ < θ_i OR φ < φ_i
+ * 3. AddEntry(θ,φ): add (θ-γ_θ·θ, φ-γ_φ·φ) and remove dominated entries
+ * 4. Dominated: entry (θ_i,φ_i) dominated if θ ≤ θ_i AND φ ≤ φ_i
+ *
+ * @math Filter acceptance test (n-dimensional generalization):
+ * Point v = (v₁,...,vₙ) acceptable to filter F iff:
+ *   ∀ e = (e₁,...,eₙ) ∈ F: ∃j: vⱼ ≤ eⱼ
+ *
+ * Sufficient decrease via margins:
+ * Add entry (θ - γ_θ·θ, φ - γ_φ·φ) rather than (θ, φ)
+ * where γ_θ, γ_φ > 0 are margin parameters.
+ *
+ * Dominance pruning:
+ * Entry e dominated by v if vⱼ ≤ eⱼ for all j (remove e from filter).
+ *
+ * @complexity Acceptable: O(|F|·d) for d-dimensional filter.
+ * AddEntry: O(|F|·d) for dominance check and removal.
+ * Filter size typically O(iterations) but bounded by dominated pruning.
+ *
+ * @ref Fletcher & Leyffer (2002). "Nonlinear programming without a
+ *   penalty function". Mathematical Programming 91(2):239-269.
+ * @ref Wächter & Biegler (2006). "On the implementation of an interior-point
+ *   filter line-search algorithm for large-scale nonlinear programming".
+ *   Mathematical Programming 106(1):25-57. [Section 2.3: Filter]
+ *
  * @see IpFilterLSAcceptor.hpp for filter line search usage
  * @see IpBacktrackingLineSearch.hpp for the line search framework
  */

@@ -31,6 +31,39 @@
  * - bound_mult_reset_threshold_: Limits post-restoration bound multipliers
  * - count_restorations_: Tracks restoration phase calls
  *
+ * @algorithm Restoration Phase (ℓ₁ Feasibility Minimization):
+ * Solve modified NLP to find feasible point when main algorithm stuck:
+ * 1. Formulate restoration NLP (RestoIpoptNLP):
+ *    - Add slack pairs (p,n) to each constraint: c(x) = p - n
+ *    - Minimize ρ·(Σp + Σn) (penalized infeasibility)
+ *    - Add proximity term η·||D(x - x_ref)||² (stay near reference)
+ * 2. Run nested Ipopt on restoration NLP:
+ *    - Uses its own filter, barrier parameter, line search
+ *    - Converges when infeasibility sufficiently reduced
+ * 3. Post-processing:
+ *    - Reset constraint multipliers via least-squares (eq_mult_calculator_)
+ *    - Cap bound multipliers at threshold to prevent blow-up
+ *    - Return to main algorithm with new feasible iterate
+ *
+ * @math Restoration NLP (smooth ℓ₁ via slack decomposition):
+ *   min_{x,p,n} ρ·eᵀ(p+n) + (ζ/2)·||D_R·(x - x_R)||²
+ *   s.t. c(x) - p + n = 0
+ *        x_L ≤ x ≤ x_U
+ *        p ≥ 0, n ≥ 0
+ *
+ * where D_R = diag(min(1, 1/|x_R|)) provides scaling,
+ * ρ penalizes constraint violation, ζ prevents wandering.
+ *
+ * ℓ₁ equivalence: At solution, either p_i=0 or n_i=0 for each i,
+ * so ||p+n||₁ = ||c(x)||₁ at optimum (complementarity).
+ *
+ * @complexity Same as main Ipopt: O(n³) per iteration for linear algebra.
+ * Restoration may require many iterations; worst case certifies infeasibility.
+ *
+ * @ref Wächter & Biegler (2006). "On the implementation of an interior-point
+ *   filter line-search algorithm for large-scale nonlinear programming".
+ *   Mathematical Programming 106(1):25-57. [Section 3.3: Restoration phase]
+ *
  * @see IpRestoPhase.hpp for the base interface
  * @see IpRestoIpoptNLP.hpp for the restoration NLP formulation
  * @see IpRestoFilterConvCheck.hpp for restoration convergence criteria
