@@ -10,6 +10,33 @@
  * during primal simplex. When variables move outside their bounds, this class
  * computes the appropriate infeasibility penalty costs.
  *
+ * @algorithm Piecewise Linear Cost Management:
+ *   Handles non-linear costs and bound infeasibilities in primal simplex:
+ *   1. **Region tracking:** Each variable has status (below/feasible/above)
+ *      - CLP_BELOW_LOWER: x_j < l_j, penalty cost applied
+ *      - CLP_FEASIBLE: l_j ≤ x_j ≤ u_j, true cost used
+ *      - CLP_ABOVE_UPPER: x_j > u_j, penalty cost applied
+ *   2. **Cost computation:** At iteration k, effective cost is:
+ *      - Feasible: c_j (true objective coefficient)
+ *      - Infeasible: c_j ± M where M = infeasibilityWeight_
+ *   3. **Breakpoint handling (Method 1):** Full piecewise linear
+ *      - Store breakpoints lower_[range], costs cost_[range]
+ *      - Track current range via whichRange_[], offset_[]
+ *   4. **Big-M handling (Method 2):** Simple penalty
+ *      - Just add ±infeasibilityWeight_ outside bounds
+ *      - Faster, sufficient for standard LP
+ *
+ * @math Two-phase simplex via penalty:
+ *   Phase I objective: min Σ M·max(l_j - x_j, 0) + Σ M·max(x_j - u_j, 0)
+ *   Phase II objective: min c'x (original)
+ *   Combined: min c'x + M·(infeasibility measure)
+ *   As M → ∞, optimal solution minimizes infeasibility first
+ *   Clp uses finite M (default 1e10) with dynamic adjustment
+ *
+ * @complexity O(1) per cost evaluation and region change
+ *   Method 2 is ~2x faster than Method 1 for standard LP
+ *   Total overhead: O(n) per iteration for bound checking
+ *
  * The class supports two methods:
  * - Method 1: Full piecewise linear with explicit breakpoints
  * - Method 2: Simple big-M penalty for bound violations (faster)

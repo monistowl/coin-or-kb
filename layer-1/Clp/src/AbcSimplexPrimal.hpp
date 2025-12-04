@@ -11,6 +11,34 @@
  * Like ClpSimplexPrimal, this is a "mix-in" class - AbcSimplex objects are
  * cast to this type at runtime when running primal simplex.
  *
+ * @algorithm AVX-Optimized Primal Simplex:
+ *   Vectorized primal simplex with partitioned sparse operations:
+ *   1. **Pricing (primalColumn):** Scan reduced costs for entering variable
+ *      - AVX-parallel: Process 4 doubles simultaneously
+ *      - Partitioned: CoinPartitionedVector enables cache-local scans
+ *      - Early termination: Stop when "good enough" candidate found
+ *   2. **FTRAN:** Compute pivot column B⁻¹·a_j
+ *      - Uses AbcSimplex's optimized factorization
+ *      - Exploits sparsity through CoinIndexedVector
+ *   3. **Ratio test (primalRow):** Select leaving variable
+ *      - Harris two-pass: First find θ_max, then select leaving
+ *      - Vectorized bound comparisons
+ *   4. **Update:** Modify basis and solution
+ *      - Minor iterations: Multiple pivots per factorization check
+ *      - Partial BTRAN for cost updates
+ *
+ * @math Primal simplex optimality and feasibility:
+ *   Maintain: x_B = B⁻¹b - B⁻¹N·x_N (primal feasible if x ≥ 0)
+ *   Reduced costs: c̄_N = c_N - N'·π where π = B⁻ᵀc_B
+ *   Optimal when: c̄_N ≥ 0 (minimization) and x_B ≥ 0
+ *   Step: θ* = min{x_Bi/α_i : α_i > 0} (ratio test)
+ *
+ * @complexity Per iteration:
+ *   Pricing: O(n) but ~n/4 with AVX vectorization
+ *   FTRAN: O(nnz(L) + nnz(U)) with sparse factorization
+ *   Ratio test: O(m) worst case, sparse typically
+ *   Minor iterations reduce factorization overhead by k× for k pivots
+ *
  * Key optimizations over ClpSimplexPrimal:
  * - Vectorized column selection in primalColumn()
  * - Optimized ratio test in primalRow()

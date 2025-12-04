@@ -10,6 +10,34 @@
  * most one) must be in the basis. This structure appears in problems like
  * assignment, crew scheduling, and set partitioning.
  *
+ * @algorithm GUB Simplex with Implicit Rows:
+ *   Exploits constraint structure Σ_{j∈S_k} x_j = 1 (or ≤1) for each set S_k:
+ *   1. **Key variable selection:** For each set, designate one "key" variable
+ *      - If any x_j in set is basic, key is basic; others are at bounds
+ *      - Key status determines set's contribution to RHS
+ *   2. **Basis reduction:** k GUB sets reduce basis size by k rows
+ *      - Factor (m-k)×(m-k) matrix instead of m×m
+ *      - Pivot operations proportionally cheaper
+ *   3. **Pricing:** For each set, only key or one bound variable can price
+ *      - Reduced cost of entering variable adjusts for GUB dual
+ *   4. **Ratio test:** Standard but respects set membership constraints
+ *      - Entering non-key forces current key to bound
+ *   5. **Basis update:** Key may change within set during pivot
+ *
+ * @math GUB constraint handling:
+ *   Original: min c'x, Ax = b, Σ_{j∈S_k} x_j = d_k for k=1..K
+ *   GUB stores: d_k - Σ_{j∈S_k, j≠key} x_j = x_key implicitly
+ *   Dual multiplier π_k adjusts reduced costs: c̄_j = c_j - π'A_j - π_k
+ *   Only (m-K) explicit constraints need factorization
+ *
+ * @complexity Basis factorization: O((m-K)³) vs O(m³) for explicit rows
+ *   Pricing: O(n) but faster due to set structure exploitation
+ *   Memory: O(n) for GUB data + standard matrix storage
+ *   Most beneficial when K/m is large (many GUB sets relative to rows)
+ *
+ * @ref Dantzig & Van Slyke (1967). "Generalized Upper Bounding Techniques".
+ *      Journal of Computer and System Sciences 1:213-226.
+ *
  * GUB structure: For each "set" of columns, sum(x_j for j in set) = 1 (or ≤1).
  * Instead of adding these as explicit rows, GUB exploits the structure to:
  * - Reduce basis size (fewer rows to factorize)

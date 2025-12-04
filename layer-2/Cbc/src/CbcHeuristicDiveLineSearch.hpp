@@ -7,6 +7,26 @@
  * CbcHeuristicDiveLineSearch: Geometric diving approach.
  * Selects variables along the line from current point to LP optimum.
  *
+ * @algorithm Line Search Diving:
+ *   Geometric diving that follows ray toward LP optimum:
+ *   1. Compute direction: d = x_LP - x_current (vector to LP optimum)
+ *   2. For each fractional variable x_j:
+ *      - Calculate how rounding affects position along d
+ *      - Score: progress toward LP optimum vs integer violation
+ *   3. Select x_j* that maximizes progress when rounded
+ *   4. Fix x_j* to nearest integer, resolve LP
+ *   5. Repeat until integer feasible or stuck
+ *
+ * @math Selection criterion:
+ *   Let f_j = fraction of x_j, d_j = direction component
+ *   Round down: progress = f_j · |d_j| toward LP optimum
+ *   Round up: progress = (1-f_j) · |d_j| toward LP optimum
+ *   Select: argmax_j {progress_j / violation_j}
+ *
+ * @complexity O(n) per variable selection
+ *   Total: O(k · LP) where k = diving depth
+ *   Typically faster than branching for finding feasible solutions
+ *
  * selectVariableToBranch() considers how rounding affects
  * movement toward the LP optimal solution. Picks variables
  * where rounding makes most progress along this direction.

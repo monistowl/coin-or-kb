@@ -6,6 +6,23 @@
  * @file CoinPresolveIsolated.hpp
  * @brief Handle isolated constraints (connected only by free variables)
  *
+ * @algorithm Isolated Constraint Removal:
+ *   Removes constraints connected to rest of problem only through free variables:
+ *   1. Identify constraint where all variables are free (no bounds) or
+ *      appear only in this constraint
+ *   2. Such constraints can be satisfied independently
+ *   3. Store constraint data for postsolve restoration
+ *   4. Remove row from problem (reduces problem size)
+ *   5. Postsolve: Compute variable values to satisfy stored constraint
+ *
+ * @math Isolated constraint feasibility:
+ *   Constraint: l_i ≤ Σ a_ij·x_j ≤ u_i where all x_j are free
+ *   Since x_j unbounded, can always find values satisfying constraint
+ *   Remove row, set x_j values in postsolve to achieve feasibility
+ *
+ * @complexity O(nnz in row) to detect and remove
+ *   Uncommon but provides clean removal when found
+ *
  * @see CoinPresolveMatrix for the presolve framework
  */
 

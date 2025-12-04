@@ -6,6 +6,26 @@
  * @file CoinPresolveUseless.hpp
  * @brief Remove useless (redundant) constraints
  *
+ * @algorithm Redundant Constraint Identification:
+ *   Greedy algorithm identifying constraints implied by variable bounds:
+ *   1. Initialize column bounds from original variable bounds
+ *   2. For each constraint, compute implied bounds on variables
+ *      - If constraint tightens some bound, mark as "necessary"
+ *      - Update working column bounds with tighter values
+ *   3. After processing all constraints, for non-necessary rows:
+ *      - Compute row activity bounds: L_i = Σ min{a_ij·l_j, a_ij·u_j}
+ *      - If l_i ≤ L_i and U_i ≤ u_i, constraint is redundant
+ *   4. Remove redundant constraints, save for postsolve
+ *
+ * @math Redundancy condition:
+ *   Row i redundant if: l_i ≤ min(a_i'x) and max(a_i'x) ≤ u_i
+ *   where min/max over x ∈ [l, u] (variable bounds)
+ *   No feasible point can violate such a constraint
+ *
+ * @complexity O(m · avg_row_length) for full scan
+ *   Each constraint checked once; bound implications propagated
+ *   Effective at removing slack constraints from reformulations
+ *
  * @see CoinPresolveForcing for related forcing constraint detection
  * @see CoinPresolveMatrix for the presolve framework
  */
