@@ -351,8 +351,8 @@
           "pass2_complete": false,
           "files_total": 138,
           "files_pass1": 138,
-          "files_pass2": 37,
-          "notes": "Pass 2 in progress! 37 files now have @algorithm/@math/@complexity/@ref tags. Latest: 5 LinAlg foundation files (Vector, Matrix, CompoundMatrix, LowRankUpdateSymMatrix, SymTMatrix)",
+          "files_pass2": 39,
+          "notes": "Pass 2 in progress! 39 files now have @algorithm/@math/@complexity/@ref tags. Latest: BLAS/LAPACK wrapper documentation",
           "key_subsystems_documented": [
             "Common (14 files): IpoptConfig, SmartPtr, TaggedObject, ReferenceCountingObject, Observer, Journalist, TimingStatistics, Types, Debug, Exception, CachedResults",
             "Interfaces (10 files): IpoptApplication, IpTNLP, IpStdCInterface, IpIpoptApplication, IpReturnCodes",
@@ -407,7 +407,9 @@
             "IpMatrix.hpp (BLAS-2 ops, Template Method pattern)",
             "IpCompoundMatrix.hpp (block matrix for KKT system)",
             "IpLowRankUpdateSymMatrix.hpp (L-BFGS compact form)",
-            "IpSymTMatrix.hpp (symmetric triplet/COO format)"
+            "IpSymTMatrix.hpp (symmetric triplet/COO format)",
+            "IpBlas.hpp (BLAS Level 1/2/3 wrappers)",
+            "IpLapack.hpp (dense Cholesky/LU/eigenvalue)"
           ],
           "last_updated": "2025-12-04"
         },
