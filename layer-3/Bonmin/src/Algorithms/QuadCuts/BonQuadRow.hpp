@@ -1,11 +1,22 @@
-/// (C) Copyright International Business Machines Corporation 2007
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, International Business Machines Corporation
-//
-// Date : 10/06/2007
+/**
+ * @file BonQuadRow.hpp
+ * @brief Quadratic row storage for NLP solver interface
+ * Copyright (C) International Business Machines Corporation 2007.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * QuadRow: Stores quadratic constraint l < c + ax + x'Qx < u with
+ * efficient gradient and Hessian evaluation. Provides methods for
+ * NLP solver interface: eval_f, eval_grad, eval_hessian.
+ *
+ * Can be initialized from QuadCut or linear OsiRowCut.
+ *
+ * Authors: Pierre Bonami, IBM
+ * Date: October 6, 2007
+ *
+ * @see QuadCut for quadratic cut representation
+ * @see TMat for sparse triangular matrix storage
+ */
 
 #ifndef BonQuadRow_H
 #define BonQuadRow_H

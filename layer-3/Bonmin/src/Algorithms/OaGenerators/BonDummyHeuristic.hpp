@@ -1,11 +1,19 @@
-// (C) Copyright Carnegie Mellon University 2005
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// P. Bonami, Carnegie Mellon University
-//
-// Date :  05/26/2005
+/**
+ * @file BonDummyHeuristic.hpp
+ * @brief Simple placeholder heuristic wrapping NLP solver
+ * Copyright (C) Carnegie Mellon University 2005. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * DummyHeuristic: Minimal heuristic that calls NLP solver to provide
+ * solutions. Used for testing or as template for new heuristics.
+ * Always reports ready to run (shouldHeurRun returns true).
+ *
+ * Authors: Pierre Bonami, Carnegie Mellon University
+ * Date: May 26, 2005
+ *
+ * @see CbcHeuristic for base heuristic interface
+ * @see OsiTMINLPInterface for NLP solver interface
+ */
 
 #ifndef BonDummyHeuristic_HPP
 #define BonDummyHeuristic_HPP

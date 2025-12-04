@@ -1,11 +1,19 @@
-// (C) Copyright Carnegie Mellon University 2005
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, Carnegie Mellon University,
-//
-// Date : 26/05/2005
+/**
+ * @file BonStartPointReader.hpp
+ * @brief Reader for Ipopt initialization point files
+ * Copyright (C) Carnegie Mellon University 2005. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * StartPointReader: Reads .initP files containing starting point
+ * information for Ipopt initialization. File format is: number of
+ * primals, number of duals, then values. Variables ordered as:
+ * primals, dual lower bounds, dual upper bounds, constraint duals.
+ *
+ * Authors: Pierre Bonami, Carnegie Mellon University
+ * Date: May 26, 2005
+ *
+ * @see OsiTMINLPInterface for applying the starting point
+ */
 
 #ifndef _BONSTARTPOINTREADER_H_
 #define _BONSTARTPOINTREADER_H_

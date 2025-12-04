@@ -1,12 +1,20 @@
-// (C) Copyright Carnegie Mellon University 2006
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, Carnegie Mellon University,
-//
-// Date : 03/15/2006
-
+/**
+ * @file BonCbcLpStrategy.hpp
+ * @brief Cbc strategy for configuring cut generators in OA
+ * Copyright (C) Carnegie Mellon University 2006. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * CbcStrategyChooseCuts: Strategy class extending CbcStrategyDefault
+ * to configure cut generators (Gomory, MIR, etc.) for use in Outer
+ * Approximation LP subproblems. Sets generator frequencies based on
+ * BabSetupBase configuration.
+ *
+ * Authors: Pierre Bonami, Carnegie Mellon University
+ * Date: March 15, 2006
+ *
+ * @see CbcStrategyDefault for base strategy
+ * @see BabSetupBase for cut generator configuration
+ */
 
 #ifndef CbcOaStrategy_HPP
 #define CbcOaStrategy_HPP

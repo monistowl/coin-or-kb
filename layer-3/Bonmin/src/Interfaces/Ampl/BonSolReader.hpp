@@ -1,11 +1,18 @@
-// (C) Copyright CNRS 2011
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, LIF, CNRS,
-//
-// Date : 03/01/2011
+/**
+ * @file BonSolReader.hpp
+ * @brief Reader for AMPL .sol solution files
+ * Copyright (C) CNRS 2011. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * SolReader: Reads solution files in AMPL .sol format containing
+ * variable values. Used to load known solutions for warm starting
+ * or comparison with computed solutions.
+ *
+ * Authors: Pierre Bonami, LIF, CNRS
+ * Date: March 1, 2011
+ *
+ * @see NamesReader for corresponding variable name reader
+ */
 
 #ifndef SolReader_HPP
 #define SolReader_HPP

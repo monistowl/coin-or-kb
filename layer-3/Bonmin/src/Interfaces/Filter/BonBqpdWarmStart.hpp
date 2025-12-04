@@ -1,13 +1,20 @@
-// (C) Copyright International Business Machines Corporation 2007
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Andreas Waechter, International Business Machines Corporation
-//                    based on BonFilterWarmStart.hpp
-//
-// Date : 2007-08-03
-
+/**
+ * @file BonBqpdWarmStart.hpp
+ * @brief Warm start information for BQPD solver
+ * Copyright (C) International Business Machines Corporation 2007.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * BqpdWarmStart: Stores warm start information for BQPD QP solver.
+ * Inherits from both CoinWarmStartPrimalDual (actual warm start data)
+ * and CoinWarmStartBasis (for Cbc integration compatibility).
+ *
+ * Authors: Andreas Waechter, IBM (based on BonFilterWarmStart.hpp)
+ * Date: August 3, 2007
+ *
+ * @see BqpdSolver for the solver using this warm start
+ * @see CoinWarmStartPrimalDual for primal/dual storage
+ */
 
 #ifndef BonBqpdWarmStart_H
 #define BonBqpdWarmStart_H

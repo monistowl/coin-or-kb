@@ -1,7 +1,19 @@
-// Copyright (C) 2006, 2007 International Business Machines
-// Corporation and others.  All Rights Reserved.
-//
-//
+/**
+ * @file BonCurvBranchingSolver.hpp
+ * @brief Curvature-based branching solver (DEPRECATED)
+ * Copyright (C) 2006, 2007 International Business Machines Corporation.
+ * All Rights Reserved.
+ *
+ * CurvBranchingSolver: Strong branching solver that uses curvature
+ * estimation to predict bound changes. Uses second-order information
+ * from the Hessian to guide variable selection.
+ *
+ * NOTE: This code is no longer supported.
+ *
+ * @see StrongBranchingSolver for base interface
+ * @see CurvatureEstimator for curvature computation
+ */
+
 #error "BonCurvBranchingSolver not supported anymore"
 #ifndef BonCurvBranchingSolver_H
 #define BonCurvBranchingSolver_H

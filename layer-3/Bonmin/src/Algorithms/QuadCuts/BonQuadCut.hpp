@@ -1,11 +1,22 @@
-// (C) Copyright International Business Machines Corporation 2007
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, International Business Machines Corporation
-//
-// Date : 10/06/2007
+/**
+ * @file BonQuadCut.hpp
+ * @brief Quadratic cutting plane for MINLP
+ * Copyright (C) International Business Machines Corporation 2007.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * QuadCut: Extends OsiRowCut to include quadratic term x'Qx.
+ * Stores c + ax + x'Qx with upper/lower storage modes for Q.
+ *
+ * Cuts: Collection class extending OsiCuts to manage QuadCut objects
+ * alongside standard linear cuts.
+ *
+ * Authors: Pierre Bonami, IBM
+ * Date: October 6, 2007
+ *
+ * @see OsiRowCut for linear cut base class
+ * @see QuadRow for quadratic constraint in NLP format
+ */
 
 #ifndef BonQuadCut_H
 #define BonQuadCut_H

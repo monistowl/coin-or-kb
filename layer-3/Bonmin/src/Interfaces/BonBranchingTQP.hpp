@@ -1,11 +1,22 @@
-// (C) Copyright International Business Machines Corporation and
-// Carnegie Mellon University 2006, 2008
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Andreas Waechter, International Business Machines Corporation
-//                   (derived from BonTMINLP2TNLP.hpp)            12/22/2006
+/**
+ * @file BonBranchingTQP.hpp
+ * @brief QP adapter for strong branching in MINLP
+ * Copyright (C) International Business Machines Corporation and
+ * Carnegie Mellon University 2006, 2008. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * BranchingTQP: Adapter that converts TMINLP2TNLP into a quadratic program
+ * for efficient strong branching. Creates linear-quadratic approximation
+ * at the optimal point and solves QP instead of full NLP during branching.
+ *
+ * Variables represent displacement from the reference point.
+ *
+ * Authors: Andreas Waechter, IBM (derived from BonTMINLP2TNLP.hpp)
+ * Date: December 22, 2006
+ *
+ * @see TMINLP2TNLP for the wrapped MINLP interface
+ * @see BqpdSolver for QP solver used with this adapter
+ */
 
 #ifndef __BONBRANCHINGTQP_HPP__
 #define __BONBRANCHINGTQP_HPP__

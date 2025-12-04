@@ -1,11 +1,18 @@
-// (C) Copyright Carnegie Mellon University 2005
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, Carnegie Mellon University,
-//
-// Date : 26/05/2005
+/**
+ * @file BonColReader.hpp
+ * @brief Reader for AMPL .col and .row name files
+ * Copyright (C) Carnegie Mellon University 2005. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * NamesReader: Reads variable and constraint names from AMPL-generated
+ * .col (column names) and .row (row names) files. Provides bidirectional
+ * lookup between indices and names via hash map.
+ *
+ * Authors: Pierre Bonami, Carnegie Mellon University
+ * Date: May 26, 2005
+ *
+ * @see OsiSolverInterface::OsiNameVec for name storage
+ */
 
 #ifndef NameReader_HPP
 #define NameReader_HPP

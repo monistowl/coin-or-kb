@@ -1,11 +1,19 @@
-// (C) Copyright International Business Machines Corporation 2007
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, International Business Machines Corporation
-//
-// Date : 10/06/2007
+/**
+ * @file BonArraysHelpers.hpp
+ * @brief Array resize and copy utilities for Bonmin
+ * Copyright (C) International Business Machines Corporation 2007.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * Template functions for resizing arrays while preserving content:
+ * - resizeAndCopyArray: Resize and copy up to min(old,new) elements
+ * - resizeAndCopyArray with capacity: Only reallocate if needed
+ *
+ * Authors: Pierre Bonami, IBM
+ * Date: October 6, 2007
+ *
+ * @see TMat for primary user of these utilities
+ */
 
 #include "CoinHelperFunctions.hpp"
 #ifndef BonArraysHelpers_H

@@ -1,11 +1,21 @@
-// (C) Copyright International Business Machines Corporation 2007
-// All Rights Reserved.
-//
-// Authors :
-// Pierre Bonami, International Business Machines Corporation
-//
-// Date : 08/16/2007
-
+/**
+ * @file BonTMINLPLinObj.hpp
+ * @brief TMINLP adapter that linearizes the objective function
+ * Copyright (C) International Business Machines Corporation 2007.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * TMINLPLinObj: Transforms a TMINLP by moving the objective into a
+ * constraint, adding epigraph variable η. Converts min f(x) to
+ * min η s.t. f(x) - η ≤ 0. Useful for algorithms requiring linear
+ * objectives (e.g., some OA variants).
+ *
+ * Authors: Pierre Bonami, IBM
+ * Date: August 16, 2007
+ *
+ * @see TMINLP for base interface
+ * @see OaDecompositionBase for OA algorithms using this transformation
+ */
 
 #ifndef TMINLPLinObj_H
 #define TMINLPLinObj_H

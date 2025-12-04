@@ -1,12 +1,22 @@
-// (C) Copyright International Business Machines Corporation, 2007
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Andreas Waechter, International Business Machines Corporation
-//                    based on BonFilterSolver.cpp
-//
-// Date : 07/09/2007
+/**
+ * @file BonBqpdSolver.hpp
+ * @brief Interface to BQPD quadratic programming solver
+ * Copyright (C) International Business Machines Corporation, 2007.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * BqpdSolver: TNLPSolver implementation wrapping the BQPD Fortran solver
+ * for solving quadratic programs during strong branching. Provides hot
+ * start capability for efficient re-optimization with changed bounds.
+ *
+ * Uses BranchingTQP to create QP approximations of the MINLP.
+ *
+ * Authors: Andreas Waechter, IBM (based on BonFilterSolver.cpp)
+ * Date: July 9, 2007
+ *
+ * @see BranchingTQP for QP problem adapter
+ * @see BqpdWarmStart for warm start information
+ */
 
 #ifndef BonBqpdSolver_H
 #define BonBqpdSolver_H

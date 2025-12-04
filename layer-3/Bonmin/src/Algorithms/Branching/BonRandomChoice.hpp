@@ -1,11 +1,19 @@
-// (C) Copyright CNRS 2008
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, LIF, CNRS-Marseille Universites.
-//
-// Date : 03/17/2008
+/**
+ * @file BonRandomChoice.hpp
+ * @brief Random variable selection for branching
+ * Copyright (C) CNRS 2008. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * BonRandomChoice: Variable selection strategy that randomly picks from
+ * unsatisfied integer variables. Useful for diversification in search
+ * or as baseline for comparison with sophisticated selection rules.
+ *
+ * Authors: Pierre Bonami, LIF, CNRS-Marseille Universites
+ * Date: March 17, 2008
+ *
+ * @see OsiChooseVariable for base variable chooser interface
+ */
+
 #ifndef BonRandomChoice_H
 #define BonRandomChoice_H
 

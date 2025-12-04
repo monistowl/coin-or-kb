@@ -1,15 +1,21 @@
-// (C) Copyright International Business Machines (IBM) 2006
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// P. Bonami, International Business Machines
-//
-// Date :  12/07/2006
+/**
+ * @file BonSolverHelp.hpp
+ * @brief Utility functions for OA and Feasibility Pump algorithms
+ * Copyright (C) International Business Machines (IBM) 2006.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * Helper functions for manipulating solver state during OA decomposition
+ * and Feasibility Pump: checking integer feasibility, fixing/relaxing
+ * integer variables, comparing solutions, and installing cuts.
+ *
+ * Authors: Pierre Bonami, IBM
+ * Date: December 7, 2006
+ *
+ * @see OaDecompositionBase for main OA algorithm
+ * @see MinlpFeasPump for Feasibility Pump using these utilities
+ */
 
-
-// Code separated from BonOaDecBase to try to clarify OAs
-// A number of utility to manipulate models used in OA and FP
 #ifndef BonSolverHelp_H
 #define BonSolverHelp_H
 

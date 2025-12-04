@@ -1,11 +1,19 @@
-// (C) Copyright Carnegie Mellon University 2006
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// P. Bonami, Carnegie Mellon University
-//
-// Date :  07/15/2005
+/**
+ * @file BonOAMessages.hpp
+ * @brief Message definitions for Outer Approximation algorithms
+ * Copyright (C) Carnegie Mellon University 2006. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * Defines message IDs and OaMessages class for output during
+ * Outer Approximation cutting plane algorithms. Messages include
+ * NLP solve status, bound updates, and iteration statistics.
+ *
+ * Authors: Pierre Bonami, Carnegie Mellon University
+ * Date: July 15, 2005
+ *
+ * @see CoinMessages for COIN message framework
+ * @see OaDecompositionBase for OA algorithm using these messages
+ */
 
 #ifndef OaMessages_H
 #define OaMessages_H

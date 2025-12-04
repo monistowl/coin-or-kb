@@ -1,3 +1,17 @@
+/**
+ * @file BonTypes.hpp
+ * @brief Type utilities for Bonmin (vector wrapper, reference counting)
+ * This code is published under the Eclipse Public License.
+ *
+ * Provides:
+ * - Bonmin::vector: std::vector wrapper with pointer access for Fortran
+ * - SimpleReferenced: Wrapper to store objects in Coin::ReferencedObject
+ * - SimpleReferencedPtr: Wrapper to store pointers in ReferencedObject
+ * - make_referenced: Factory functions for creating referenced wrappers
+ *
+ * @see CoinSmartPtr for COIN reference counting framework
+ */
+
 #ifndef __BonTypes_H_
 #define __BonTypes_H_
 #include<vector>

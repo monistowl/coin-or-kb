@@ -1,11 +1,22 @@
-// (C) Copyright International Business Machines Corporation 2007
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, International Business Machines Corporation
-//
-// Date : 10/06/2007
+/**
+ * @file BonTMINLP2Quad.hpp
+ * @brief TMINLP2TNLP extension supporting quadratic cuts
+ * Copyright (C) International Business Machines Corporation 2007.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * TMINLP2TNLPQuadCuts: Extends TMINLP2TNLP to handle quadratic cuts
+ * in the NLP subproblem. Manages adding/removing cuts, updating
+ * Jacobian and Hessian structures, and evaluating cut contributions.
+ *
+ * Supports both linear (OsiRowCut) and quadratic (QuadCut) cuts.
+ *
+ * Authors: Pierre Bonami, IBM
+ * Date: October 6, 2007
+ *
+ * @see TMINLP2TNLP for base NLP adapter
+ * @see QuadRow for quadratic cut evaluation
+ */
 
 #ifndef __TMINLPQuad_HPP__
 #define __TMINLPQuad_HPP__

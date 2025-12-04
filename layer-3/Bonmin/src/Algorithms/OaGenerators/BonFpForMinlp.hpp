@@ -1,11 +1,19 @@
-// (C) Copyright CNRS 2008
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// P. Bonami, CNRS
-//
-// Date : 02/13/2009
+/**
+ * @file BonFpForMinlp.hpp
+ * @brief Feasibility Pump for MINLP via Outer Approximation
+ * Copyright (C) CNRS 2008. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * MinlpFeasPump: Feasibility Pump implementation for MINLP using OA
+ * decomposition. Alternates between solving MIP with distance-to-integer
+ * objective and NLP with fixed integers to find feasible solutions.
+ *
+ * Authors: Pierre Bonami, CNRS
+ * Date: February 13, 2009
+ *
+ * @see OaDecompositionBase for base OA framework
+ * @see PumpForMinlp for alternative FP implementation
+ */
 
 #ifndef BonFpForMinlp_H
 #define BonFpForMinlp_H

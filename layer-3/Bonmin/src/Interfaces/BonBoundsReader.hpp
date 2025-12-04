@@ -1,11 +1,18 @@
-// (C) Copyright Carnegie Mellon University 2005
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, Carnegie Mellon University,
-//
-// Date : 26/05/2005
+/**
+ * @file BonBoundsReader.hpp
+ * @brief Reader for variable bound modification files
+ * Copyright (C) Carnegie Mellon University 2005. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * BoundsReader: Reads files containing variable bound changes in
+ * MPS-like format. Applies bound modifications to OsiTMINLPInterface
+ * for scenario analysis or user-specified bound tightening.
+ *
+ * Authors: Pierre Bonami, Carnegie Mellon University
+ * Date: May 26, 2005
+ *
+ * @see OsiTMINLPInterface for target solver interface
+ */
 
 #ifndef BoundsReader_HPP
 #define BoundsReader_HPP

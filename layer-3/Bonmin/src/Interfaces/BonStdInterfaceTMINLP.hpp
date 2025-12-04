@@ -1,11 +1,19 @@
-// (C) Copyright Shaurya Sharma
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// S. Sharma
-//
-// Date :  07.06.2015
+/**
+ * @file BonStdInterfaceTMINLP.hpp
+ * @brief C-callback based TMINLP implementation for standard interface
+ * Copyright (C) Shaurya Sharma. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * StdInterfaceTMINLP: TMINLP implementation using C function pointers
+ * for callbacks (eval_f, eval_g, eval_grad_f, etc.). Enables use of
+ * Bonmin from C or languages with C FFI. Mirrors Ipopt's StdCInterface.
+ *
+ * Authors: Shaurya Sharma
+ * Date: June 7, 2015
+ *
+ * @see TMINLP for base interface
+ * @see BonStdCInterface.h for C callback type definitions
+ */
 
 #ifndef BONSTDINTERFACETMINLP_HPP
 #define BONSTDINTERFACETMINLP_HPP

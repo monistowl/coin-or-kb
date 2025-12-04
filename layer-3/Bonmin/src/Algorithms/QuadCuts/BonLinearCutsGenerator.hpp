@@ -1,11 +1,21 @@
-// (C) Copyright International Business Machines Corporation 2007
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, International Business Machines Corporation
-//
-// Date : 10/06/2007
+/**
+ * @file BonLinearCutsGenerator.hpp
+ * @brief Composite cut generator managing multiple linear cut generators
+ * Copyright (C) International Business Machines Corporation 2007.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * LinearCutsGenerator: Aggregates multiple CglCutGenerator instances
+ * with frequency and identification. Provides unified interface for
+ * generating cuts from various sources (GMI, MIR, etc.) at specified
+ * frequencies during branch-and-bound.
+ *
+ * Authors: Pierre Bonami, IBM
+ * Date: October 6, 2007
+ *
+ * @see CglCutGenerator for individual cut generator interface
+ * @see BabSetupBase for cut generator configuration
+ */
 
 #ifndef BonLinearCutsGenerator_H
 #define BonLinearCutsGenerator_H

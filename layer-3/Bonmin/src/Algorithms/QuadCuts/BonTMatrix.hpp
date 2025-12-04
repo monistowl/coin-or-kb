@@ -1,11 +1,22 @@
-// (C) Copyright International Business Machines Corporation 2007
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, International Business Machines Corporation
-//
-// Date : 10/06/2007
+/**
+ * @file BonTMatrix.hpp
+ * @brief Sparse triangular matrix storage for quadratic forms
+ * Copyright (C) International Business Machines Corporation 2007.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * TMat: Sparse matrix storage in triplet format (iRow, jCol, value).
+ * Provides ordering by rows/columns, duplicate removal, and conversion
+ * to upper triangular form for quadratic forms x'Qx.
+ *
+ * Used for efficient gradient and Hessian computation in QuadRow.
+ *
+ * Authors: Pierre Bonami, IBM
+ * Date: October 6, 2007
+ *
+ * @see QuadRow for quadratic constraint using TMat
+ * @see CoinPackedMatrix for conversion source
+ */
 
 #ifndef BonTMatrix_H
 #define BonTMatrix_H

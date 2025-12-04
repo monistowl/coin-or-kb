@@ -1,12 +1,19 @@
-// (C) Copyright International Business Machines Corporation and Carnegie Mellon University 2006
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// John J. Forrest, International Business Machines Corporation
-// Pierre Bonami, Carnegie Mellon University,
-//
-// Date : 03/15/2006
+/**
+ * @file BonCbcNlpStrategy.hpp
+ * @brief NLP failure handling strategy for Cbc in MINLP context
+ * Copyright (C) International Business Machines Corporation and
+ * Carnegie Mellon University 2006. All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * CbcNlpStrategy: Strategy class for handling NLP solve failures during
+ * branch-and-bound. Tracks consecutive failures and infeasibilities,
+ * optionally treating failures as infeasible to continue search.
+ *
+ * Authors: John J. Forrest, IBM; Pierre Bonami, CMU
+ * Date: March 15, 2006
+ *
+ * @see CbcStrategy for base strategy interface
+ */
 
 #ifndef BonCbcNlpStrategy_H
 #define BonCbcNlpStrategy_H
