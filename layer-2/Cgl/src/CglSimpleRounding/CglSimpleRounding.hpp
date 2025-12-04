@@ -9,17 +9,28 @@
  * Generates simple rounding cuts using the GCD method from
  * Nemhauser and Wolsey (1988, p.211).
  *
- * Algorithm for each constraint:
- * 1. Derive a <= inequality in all integer variables
- *    (net out continuous variables if possible)
- * 2. Find GCD of all integer coefficients
- * 3. Divide constraint by GCD
- * 4. Round down the RHS
+ * @algorithm Simple Rounding via GCD:
+ *   Strengthens constraints using integer coefficient structure:
+ *   1. For each constraint a'x ≤ b, derive all-integer version:
+ *      - Net out continuous variables if possible
+ *      - Scale to obtain integer coefficients
+ *   2. Compute g = GCD(a_1, a_2, ..., a_n) using Euclid's algorithm
+ *   3. Divide: (a/g)'x ≤ b/g
+ *   4. Round RHS: (a/g)'x ≤ ⌊b/g⌋ (valid since LHS is integer)
  *
- * Example: 6x + 9y <= 20 with x,y integer
- * - GCD(6,9) = 3
- * - Divide: 2x + 3y <= 6.67
- * - Round: 2x + 3y <= 6
+ * @math Example derivation:
+ *   Original: 6x + 9y ≤ 20 with x,y ∈ ℤ
+ *   GCD(6,9) = 3
+ *   Divide: 2x + 3y ≤ 6.67
+ *   Round: 2x + 3y ≤ 6 (strengthened RHS)
+ *   Cut tightens by 0.67, may cut off LP optimum
+ *
+ * @complexity O(n·log(max_coef)) per constraint
+ *   GCD via Euclid's algorithm: O(log(min(a,b))) per pair
+ *   Total: O(m·n·log(max_coef)) for full matrix
+ *
+ * @ref Nemhauser & Wolsey (1988). "Integer and Combinatorial Optimization".
+ *      Wiley, p.211.
  *
  * Helper methods:
  * - gcd(a,b): Euclid's algorithm for two integers
