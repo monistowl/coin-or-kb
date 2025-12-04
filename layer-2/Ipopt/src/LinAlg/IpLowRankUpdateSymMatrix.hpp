@@ -12,6 +12,23 @@
  *   M = P_LR * (D + V*V^T - U*U^T) * P_LR^T  (if reduced_diag)
  *   M = D + P_LR * (V*V^T - U*U^T) * P_LR^T  (otherwise)
  *
+ * @algorithm Limited-Memory Quasi-Newton Representation:
+ *   For L-BFGS with memory m, the inverse Hessian approximation H_k is:
+ *   H_k = (I - ρ_k s_k y_k^T)·H_{k-1}·(I - ρ_k y_k s_k^T) + ρ_k s_k s_k^T
+ *   This class stores the compact form: H = D + V·V^T - U·U^T
+ *   where V, U have at most m columns (typically m ≤ 20).
+ *
+ * @math Efficient matrix-vector product without forming full matrix:
+ *   y = M·x = D·x + V·(V^T·x) - U·(U^T·x)
+ *   Cost: O(n·m) instead of O(n²) for full matrix multiply.
+ *   V^T·x and U^T·x are m-vectors computed first, then scaled.
+ *
+ * @complexity O(n·m) for matvec where n = dimension, m = rank of update.
+ *   Memory: O(n·m) for V, U columns instead of O(n²) for dense matrix.
+ *
+ * @ref Nocedal (1980). "Updating Quasi-Newton Matrices with Limited Storage".
+ *      Mathematics of Computation 35(151):773-782.
+ *
  * Where D is diagonal, V and U are MultiVectorMatrices (few columns),
  * and P_LR is an optional ExpansionMatrix for dimension lifting.
  *

@@ -11,6 +11,17 @@
  * Matrix provides the abstraction for general (non-symmetric) matrices.
  * Primary operations: MultVector (y = α*A*x + β*y) and TransMultVector.
  *
+ * @algorithm Template Method + Abstract Factory Pattern:
+ *   - MultVector/TransMultVector delegate to *_Impl for type-specific code
+ *   - MatrixSpace factories create compatible matrices of same structure
+ *   - Enables uniform interface across dense, sparse, structured matrices
+ *
+ * @math BLAS Level-2 style operations on A ∈ ℝ^{m×n}:
+ *   - MultVector: y ← αAx + βy  (DGEMV with no transpose)
+ *   - TransMultVector: y ← αA^T x + βy  (DGEMV with transpose)
+ *   - AddMSinvZ: X ← X + α(A·S⁻¹·Z)  (specialized for ExpansionMatrix)
+ *   Row/column norms for scaling: ||A_{i,:}||_∞ and ||A_{:,j}||_∞
+ *
  * Key design features:
  * - MatrixSpace factory for creating compatible matrices
  * - Template Method pattern: override *_Impl methods

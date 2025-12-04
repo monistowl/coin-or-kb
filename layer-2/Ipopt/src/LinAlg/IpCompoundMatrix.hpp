@@ -11,9 +11,21 @@
  * CompoundMatrix implements the Composite pattern for matrices,
  * representing a block matrix: M = [M_00, M_01, ...; M_10, ...]
  *
+ * @algorithm Composite Pattern for Block Matrices:
+ *   CompoundMatrix stores a grid of sub-matrices M_{ij}. Operations like
+ *   MultVector are computed block-wise: y_i = Σ_j M_{ij}·x_j.
+ *   This recursive structure allows mixing different matrix types
+ *   (dense, sparse, diagonal) in a single unified representation.
+ *
+ * @math Block matrix-vector multiplication:
+ *   For M = [M_{ij}] with i=0..r-1, j=0..c-1:
+ *   y = M·x computes y_i = Σ_j M_{ij}·x_j for each block row i.
+ *   NULL blocks M_{ij} are treated as zero: 0·x_j = 0.
+ *
  * Used in Ipopt for KKT system structure:
- *   [H    A^T ] [dx]   [r_d]
- *   [A    -D  ] [dy] = [r_p]
+ *   [W + Σ_x   A^T ] [Δx]   [r_d]
+ *   [A        -Σ_c ] [Δλ] = [r_p]
+ *   where W = Hessian, A = Jacobian, Σ = barrier regularization.
  *
  * Null components are treated as zero blocks. Operations recurse
  * to sub-matrices. Each block can be from different MatrixSpace.

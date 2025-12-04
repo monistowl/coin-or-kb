@@ -4,6 +4,33 @@
 //
 // Authors:  Carl Laird, Andreas Waechter     IBM    2004-08-13
 
+/**
+ * @file IpSymTMatrix.hpp
+ * @brief Symmetric sparse matrix in triplet (COO) format
+ *
+ * SymTMatrix stores symmetric sparse matrices using coordinate format:
+ * three arrays (Irn, Jcn, Values) of length nnz representing nonzeros.
+ *
+ * @algorithm Triplet/COO Format for Symmetric Matrices:
+ *   Only lower (or upper) triangle is stored due to symmetry.
+ *   Entry (i,j,v) represents A[i,j] = A[j,i] = v.
+ *   Duplicate entries at same (i,j) are summed - essential for
+ *   finite element assembly where element matrices overlap.
+ *
+ * @math Symmetric matrix-vector product y = A·x:
+ *   For each triplet (i, j, a_ij):
+ *   - y[i] += a_ij · x[j]
+ *   - y[j] += a_ij · x[i]  (if i ≠ j, symmetry contribution)
+ *   Cost: O(nnz), no redundant storage of symmetric entries.
+ *
+ * @complexity O(nnz) for matrix-vector product.
+ *   Memory: O(nnz) for values + O(nnz) for indices.
+ *   Note: 1-based indexing (Fortran-style) for HSL solver compatibility.
+ *
+ * @see IpGenTMatrix.hpp for general (non-symmetric) triplet format
+ * @see IpTripletToCSRConverter.hpp for CSR conversion
+ */
+
 #ifndef __IPSYMTMATRIX_HPP__
 #define __IPSYMTMATRIX_HPP__
 

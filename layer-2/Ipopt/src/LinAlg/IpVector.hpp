@@ -12,6 +12,27 @@
  * Provides BLAS-1 style operations (Copy, Scal, Axpy, Dot, Nrm2, etc.)
  * plus IPM-specific operations (AddOneVector, FracToBound, etc.).
  *
+ * @algorithm Template Method + Abstract Factory Pattern:
+ *   - Public methods (Axpy, Dot, etc.) delegate to protected *_Impl methods
+ *   - VectorSpace factory creates compatible vectors of same type
+ *   - TaggedObject inheritance enables automatic cache invalidation
+ *   This design allows DenseVector and CompoundVector to share interface
+ *   while providing type-specific optimized implementations.
+ *
+ * @math BLAS Level-1 operations on vectors x, y ∈ ℝⁿ:
+ *   - Copy: y ← x
+ *   - Scal: x ← αx
+ *   - Axpy: y ← αx + y
+ *   - Dot: x^T y (inner product)
+ *   - Nrm2: ||x||₂ = √(x^T x)
+ *   - Asum: ||x||₁ = Σ|xᵢ|
+ *   - Amax: ||x||_∞ = max|xᵢ|
+ *
+ * @math IPM-specific operation - FracToBound:
+ *   α = max{ᾱ ∈ (0,1] : x + ᾱΔx ≥ (1-τ)x}
+ *   Computes maximum step length maintaining fraction-to-boundary τ.
+ *   Critical for ensuring positivity of slack variables in interior-point.
+ *
  * Key design features:
  * - Inherits TaggedObject for automatic cache invalidation
  * - Uses VectorSpace factory pattern for creating compatible vectors
