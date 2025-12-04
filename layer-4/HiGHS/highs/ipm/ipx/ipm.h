@@ -1,3 +1,65 @@
+/**
+ * @file ipm/ipx/ipm.h
+ * @brief Mehrotra's Predictor-Corrector Interior Point Method
+ *
+ * Implements an interior point method (IPM) for linear programming using
+ * Mehrotra's predictor-corrector technique with two KKT solves per iteration.
+ *
+ * @algorithm Mehrotra's Predictor-Corrector IPM:
+ * A two-stage Newton method that achieves superlinear convergence in practice.
+ *
+ * PRIMAL-DUAL FORMULATION:
+ * LP: min c'x  s.t. Ax = b, l ≤ x ≤ u
+ * Introducing slacks: xl = x - l, xu = u - x (both ≥ 0)
+ *
+ * KKT conditions with barrier:
+ *   Ax = b                    (primal feasibility)
+ *   A'y + zl - zu = c         (dual feasibility)
+ *   Xl·Zl = μe                (complementarity, xl ∘ zl = μ)
+ *   Xu·Zu = μe                (complementarity, xu ∘ zu = μ)
+ *   xl, xu, zl, zu ≥ 0        (non-negativity)
+ *
+ * PREDICTOR STEP (Affine Scaling):
+ * Solve Newton system with μ = 0 (pure Newton toward boundary):
+ *   [G   A'] [Δx]   [rb - A'Δy - Δzl + Δzu]
+ *   [A   0 ] [Δy] = [rc]
+ *   Δzl = -zl - (Zl/Xl)·Δxl
+ *   Δzu = -zu - (Zu/Xu)·Δxu
+ *
+ * CORRECTOR STEP (Centering + Higher-order):
+ * Based on predictor's step length α_aff, choose target:
+ *   μ_target = σ · μ,  σ = (μ_aff / μ)³
+ * Add correction terms for better centrality:
+ *   sl = σμe - ΔXl_aff · ΔZl_aff
+ *   su = σμe - ΔXu_aff · ΔZu_aff
+ *
+ * STEP SIZE SELECTION:
+ * α_primal = max{α : x + α·Δx ≥ 0} · 0.9995
+ * α_dual   = max{α : z + α·Δz ≥ 0} · 0.9995
+ *
+ * @math Convergence behavior:
+ * - Theoretical: O(√n · log(1/ε)) iterations for ε-optimality
+ * - Practical: 20-60 iterations regardless of problem size
+ * - Superlinear convergence in terminal phase (σ → 0)
+ *
+ * Centering parameter σ ∈ [0,1]:
+ * - σ = 0: Pure Newton (fast but may leave feasible region)
+ * - σ = 1: Pure centering (stays centered but slow)
+ * - Mehrotra: σ = (μ_aff/μ)³ adapts to iterate quality
+ *
+ * @complexity
+ * - Per iteration: O(KKT_solve) = O(m²n) for dense, O(nnz · fill) for sparse
+ * - Two KKT solves per iteration (predictor + corrector)
+ * - Total: O(√n · log(1/ε) · KKT_solve) theoretical, much less in practice
+ *
+ * @ref Mehrotra (1992). "On the Implementation of a Primal-Dual Interior
+ *   Point Method". SIAM Journal on Optimization 2(4):575-601.
+ * @ref Wright (1997). "Primal-Dual Interior-Point Methods". SIAM.
+ *
+ * @see kkt_solver.h for linear system solver interface
+ * @see crossover.h for converting IPM solution to basic solution
+ * @see iterate.h for iterate data structure
+ */
 #ifndef IPX_IPM_H_
 #define IPX_IPM_H_
 
@@ -6,13 +68,6 @@
 #include "ipm/ipx/iterate.h"
 
 namespace ipx {
-
-// IPM implements an interior point method based on KKTSolver and Iterate.
-// The algorithm is a variant of Mehrotra's [1] predictor-corrector method
-// that requires two linear system solves per iteration.
-//
-// [1] S. Mehrotra, "On the implementation of a primal-dual interior point
-//     method", SIAM J. Optim., 2 (1992).
 
 class IPM {
 public:

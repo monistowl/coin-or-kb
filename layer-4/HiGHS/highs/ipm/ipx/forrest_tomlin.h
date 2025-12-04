@@ -1,3 +1,62 @@
+/**
+ * @file ipm/ipx/forrest_tomlin.h
+ * @brief Forrest-Tomlin LU Update for Basis Maintenance
+ *
+ * Implements the Forrest-Tomlin update to maintain LU factorization when
+ * a single column of the basis matrix changes (basis exchange/pivot).
+ *
+ * @algorithm Forrest-Tomlin LU Update:
+ * Efficiently updates LU factors after column replacement without full
+ * refactorization.
+ *
+ * SETUP:
+ * Given factorization: B = L·U with permutations
+ * After replacing column j: B' differs from B in one column
+ *
+ * KEY INSIGHT:
+ * Instead of refactorizing B' = L'·U', compute update matrices:
+ *   B' = L · R₁ · R₂ · ... · Rₖ · U'
+ * where Rᵢ are "row eta" matrices (identity plus one off-diagonal element).
+ *
+ * UPDATE PROCESS:
+ * 1. FTRAN (Forward transformation):
+ *    Compute spike = L⁻¹·b where b is the new column
+ *    Append spike to U
+ *
+ * 2. BTRAN (Backward transformation):
+ *    Compute eta = eₚ'·U⁻¹ where p is position of leaving column
+ *    Append eta to R (row eta matrix)
+ *
+ * 3. Permutation update:
+ *    Track which columns have been replaced
+ *
+ * SOLVE WITH UPDATES:
+ * To solve B'·x = rhs after k updates:
+ *   x = U'⁻¹ · Rₖ⁻¹ · ... · R₁⁻¹ · L⁻¹ · rhs
+ *
+ * @math Fill-in analysis:
+ * - Spike column: O(m) nonzeros worst case
+ * - Row eta: O(m) nonzeros worst case
+ * - After k updates: O(k²) additional work per solve
+ * - Refactorize when k > √m or fill exceeds threshold
+ *
+ * Memory layout optimization:
+ * L, U stored in compressed form with permuted indices for contiguous
+ * memory access during dense solves (unlike BASICLU which needs
+ * re-permutation).
+ *
+ * @complexity
+ * - Single update: O(m²) worst case, O(nnz) typical
+ * - Solve after k updates: O(m·k) additional work
+ * - Trade-off: update cost vs refactorization cost
+ *
+ * @ref Forrest & Tomlin (1972). "Updated Triangular Factors of the Basis
+ *   to Maintain Sparsity in the Product Form Simplex Method".
+ *   Mathematical Programming 2:263-278.
+ *
+ * @see lu_update.h for base class interface
+ * @see basis.h for usage in basis maintenance
+ */
 #ifndef IPX_FORREST_TOMLIN_H_
 #define IPX_FORREST_TOMLIN_H_
 
@@ -8,20 +67,6 @@
 #include "ipm/ipx/lu_update.h"
 
 namespace ipx {
-
-// Generic implementation of the Forrest-Tomlin update [1] that can be used with
-// any LU factorization. The implementation does not exploit hypersparsity,
-// which excludes its use for such problems. For non-hypersparse problems the
-// implementation is better suited than BASICLU, however, because it stores L
-// and U in compressed form with permuted indices; hence solving triangular
-// systems with a dense rhs/lhs accesses memory contiguously. BASICLU could not
-// be implemented in that form due to re-permuting U to triangular form in the
-// updates. Hypersparsity support could be added to the present implementation
-// when required.
-//
-// [1] J.J.H. Forrest and J.A. Tomlin, "Updated triangular factors of the basis
-//     to maintain sparsity in the product form simplex method", Math.
-//     Programming 2 (1972)
 
 class ForrestTomlin : public LuUpdate {
 public:

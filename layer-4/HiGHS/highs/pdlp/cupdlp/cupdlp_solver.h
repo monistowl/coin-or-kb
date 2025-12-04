@@ -1,3 +1,72 @@
+/**
+ * @file pdlp/cupdlp/cupdlp_solver.h
+ * @brief PDHG (Primal-Dual Hybrid Gradient) Solver for Linear Programming
+ *
+ * Implements the PDLP (Primal-Dual Linear Programming) algorithm using
+ * first-order optimization methods instead of traditional simplex or IPM.
+ *
+ * @algorithm PDHG (Primal-Dual Hybrid Gradient) for LP:
+ * A first-order method for solving the saddle-point formulation of LP.
+ *
+ * LP SADDLE-POINT FORMULATION:
+ * min_x max_y  c'x + y'(b - Ax)  s.t. l ≤ x ≤ u
+ *
+ * Equivalent to: min c'x  s.t. Ax = b, l ≤ x ≤ u
+ * The Lagrangian couples primal (x) and dual (y) variables.
+ *
+ * PDHG ITERATION:
+ * Given step sizes τ (primal) and σ (dual):
+ *
+ *   x̄ = x^k - τ·(c - A'y^k)           // primal gradient step
+ *   x^{k+1} = proj_{[l,u]}(x̄)         // project onto bounds
+ *
+ *   ŷ = y^k + σ·(b - A·(2x^{k+1} - x^k))  // dual gradient with extrapolation
+ *   y^{k+1} = ŷ                        // no projection for free dual
+ *
+ * KEY FEATURE: Extrapolation (2x^{k+1} - x^k) accelerates convergence
+ * compared to standard gradient descent.
+ *
+ * STEP SIZE SELECTION:
+ * For convergence: τ·σ·‖A‖² < 1
+ * Typically: τ = σ = 1/(‖A‖_2) or adaptive schemes
+ *
+ * RESTART STRATEGIES:
+ * Periodically restart to accelerate when making progress:
+ * - Fixed frequency restart
+ * - Adaptive restart on normalized duality gap improvement
+ * - Restart on primal-dual distance decrease
+ *
+ * TERMINATION CRITERIA:
+ * Check primal/dual feasibility and duality gap:
+ * - Primal feasibility: ‖Ax - b‖ / (1 + ‖b‖) ≤ ε
+ * - Dual feasibility: ‖c - A'y - zl + zu‖ / (1 + ‖c‖) ≤ ε
+ * - Gap: |c'x - b'y| / (1 + |c'x| + |b'y|) ≤ ε
+ *
+ * @math Convergence rate:
+ * - O(1/k) ergodic convergence for duality gap
+ * - O(1/k²) with acceleration (momentum/restart)
+ * - Not polynomial in problem dimension (unlike IPM)
+ * - But: iteration cost is O(nnz) vs O(n³) for IPM
+ *
+ * Comparison with other LP methods:
+ * - Simplex: exact but exponential worst-case
+ * - IPM: polynomial O(√n·log(1/ε)) but O(n³) per iteration
+ * - PDHG: cheap O(nnz) iterations, good for huge sparse LPs
+ *
+ * @complexity
+ * - Per iteration: O(nnz) for matrix-vector products
+ * - Iterations to ε-accuracy: O(‖A‖/ε) without restart
+ * - Total for moderate accuracy: competitive with IPM on large sparse problems
+ * - Memory: O(n + m) vs O(fill) for factorization methods
+ *
+ * @ref Chambolle & Pock (2011). "A First-Order Primal-Dual Algorithm for
+ *   Convex Problems with Applications to Imaging". J. Math. Imaging Vis.
+ * @ref Applegate et al. (2021). "Practical Large-Scale Linear Programming
+ *   using Primal-Dual Hybrid Gradient". NeurIPS.
+ *
+ * @see cupdlp_step.h for step computation details
+ * @see cupdlp_restart.h for restart strategies
+ */
 //
 // Created by chuwen on 23-11-27.
 //

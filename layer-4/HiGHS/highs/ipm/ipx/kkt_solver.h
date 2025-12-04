@@ -1,3 +1,59 @@
+/**
+ * @file ipm/ipx/kkt_solver.h
+ * @brief KKT System Solver Interface for Interior Point Methods
+ *
+ * Defines the interface for solving the augmented system (KKT system) that
+ * arises in each iteration of primal-dual interior point methods.
+ *
+ * @algorithm KKT System in IPM:
+ * The Newton step in interior point methods requires solving:
+ *
+ *   [ G   A' ] [Δx]   [a]
+ *   [ A   0  ] [Δy] = [b]
+ *
+ * where:
+ * - G = diagonal matrix with G[j,j] = zl[j]/xl[j] + zu[j]/xu[j]
+ * - A = m×(n+m) constraint matrix [A | -I]
+ * - (a,b) = right-hand side from Newton linearization
+ *
+ * SOLUTION APPROACHES:
+ *
+ * 1. AUGMENTED SYSTEM (Direct):
+ *    Factor and solve the full (n+m+m) × (n+m+m) symmetric indefinite system.
+ *    Uses LDL' or similar factorization with pivoting.
+ *
+ * 2. NORMAL EQUATIONS (Direct):
+ *    Eliminate Δx: A·G⁻¹·A'·Δy = b - A·G⁻¹·a
+ *    Smaller system (m×m) but squares condition number.
+ *
+ * 3. ITERATIVE (Krylov):
+ *    Use CG/MINRES with preconditioner. The residual tolerance must satisfy:
+ *    ‖D·res‖_∞ ≤ tol, where D[i,i] = √(1/G[i,i]) or 1 if G[i,i] = 0
+ *
+ * REGULARIZATION:
+ * Near-optimal iterates have G[j,j] → ∞ for variables at bounds, causing
+ * ill-conditioning. Regularization adds small ε to diagonal:
+ * - Primal regularization: G + εP·I
+ * - Dual regularization: zero block becomes -εD·I
+ *
+ * @math Condition number analysis:
+ * - cond(KKT) ≈ max(G)/min(G) · cond(A)
+ * - Near optimum: max(G)/min(G) → ∞ (ill-conditioned)
+ * - Regularization bounds condition: max ≈ 1/ε
+ * - Normal equations: cond(A·G⁻¹·A') ≈ cond(KKT)²
+ *
+ * @complexity
+ * - Direct (augmented): O((n+m)³) dense, O(nnz · fill²) sparse
+ * - Direct (normal): O(m³) dense, O(m · nnz + m² · fill) sparse
+ * - Iterative: O(k · nnz) where k = iterations to convergence
+ *
+ * @ref Benzi, Golub & Liesen (2005). "Numerical Solution of Saddle Point
+ *   Problems". Acta Numerica 14:1-137.
+ * @ref Nocedal & Wright (2006). "Numerical Optimization", Chapter 16.
+ *
+ * @see ipm.h for interior point method using this interface
+ * @see kkt_solver_basis.h for basis-based implementation
+ */
 #ifndef IPX_KKT_SOLVER_H_
 #define IPX_KKT_SOLVER_H_
 
@@ -5,24 +61,6 @@
 #include "ipm/ipx/iterate.h"
 
 namespace ipx {
-
-// Interface to KKT solver implementations. A KKT solver implements a direct or
-// iterative method for solving
-//
-//   [ G   AI' ] (x) = (a) ,                        (1)
-//   [ AI   0  ] (y)   (b)
-//
-// where AI is the m-by-(n+m) matrix defined by a model and G is a positive
-// semidefinite diagonal matrix. The solver may add regularization to G and/or
-// the zero block.
-//
-// An iterative solver must compute an approximate solution of the form
-//
-//   [ G   AI' ] (x) = (a) + (res)                  (2)
-//   [ AI   0  ] (y)   (b)   ( 0 )
-//
-// that satisfies Infnorm(D*res) <= tol, where D is the diagonal matrix with
-// entries D[i,i] = sqrt(1/G[i,i]) if G[i,i] != 0 and D[i,i] = 1 otherwise.
 
 class KKTSolver {
 public:

@@ -1,3 +1,65 @@
+/**
+ * @file ipm/ipx/iterate.h
+ * @brief IPM Iterate Management with Variable States
+ *
+ * Manages the primal-dual iterate for interior point methods, including
+ * variable states (fixed/free/barrier) and convergence monitoring.
+ *
+ * @algorithm Variable State Management in IPM:
+ * Efficiently handles bound constraints by classifying variables into states.
+ *
+ * PRIMAL-DUAL VARIABLES:
+ *   Primal: x[n+m], xl[n+m] = x - lb, xu[n+m] = ub - x
+ *   Dual: y[m] (constraints), zl[n+m], zu[n+m] (bound multipliers)
+ *
+ * VARIABLE STATES:
+ *
+ * 1. BARRIER (actively optimized):
+ *    - Has at least one finite bound
+ *    - Contributes barrier term: -μ·(ln(xl) + ln(xu))
+ *    - Scaling factor: 1/√(zl/xl + zu/xu)
+ *
+ * 2. FREE (no barrier):
+ *    - Treated as if bounds are ±∞
+ *    - xl = xu = ∞, zl = zu = 0
+ *    - Scaling factor: ∞ (special handling needed)
+ *
+ * 3. FIXED (eliminated):
+ *    - Not moved by IPM (effective dimension reduction)
+ *    - Equivalent to reducing b by A[:,j]·x[j]
+ *    - Scaling factor: 0
+ *
+ * IMPLIED BOUNDS (for numerical stability):
+ * Near-optimal variables can be "implied" - treated as free during IPM
+ * but fixed to bounds in postprocessing:
+ * - IMPLIED_LB: x[j] → lb[j], compute zl[j] from dual feasibility
+ * - IMPLIED_UB: x[j] → ub[j], compute zu[j] from dual feasibility
+ * - IMPLIED_EQ: lb = ub, choose sign of multiplier
+ *
+ * RESIDUALS COMPUTED:
+ * - rb = b - A·x (primal constraint)
+ * - rl = lb - x + xl (lower slack)
+ * - ru = ub - x - xu (upper slack)
+ * - rc = c - A'y - zl + zu (dual/reduced cost)
+ *
+ * @math Complementarity measures:
+ * - μ = Σ(xl·zl + xu·zu) / (2·num_barriers)  (average)
+ * - Central path: xl·zl = xu·zu = μ for all barrier vars
+ * - Optimality: μ → 0 as iterate approaches solution
+ *
+ * Termination criterion:
+ * - Primal feasible: ‖rb‖/(1+‖b‖) ≤ ε_feas
+ * - Dual feasible: ‖rc‖/(1+‖c‖) ≤ ε_feas
+ * - Optimal: |pobj - dobj|/(1+|pobj|+|dobj|) ≤ ε_opt
+ *
+ * @complexity
+ * - Update(): O(n+m) for step application
+ * - Evaluate(): O(nnz) for residual computation (lazy evaluation)
+ * - Memory: O(n+m) for all variable vectors
+ *
+ * @see ipm.h for IPM algorithm using this iterate
+ * @see crossover.h for converting iterate to basic solution
+ */
 #ifndef IPX_ITERATE_H_
 #define IPX_ITERATE_H_
 
@@ -5,10 +67,6 @@
 #include "ipm/ipx/model.h"
 
 namespace ipx {
-
-// Iterate manages the IPM iterate consisting of primal variables x[n+m],
-// xl[n+m], xu[n+m] and dual variables y[m], zl[n+m], zu[n+m], where m, n are
-// the # rows and structural columns of the model.
 //
 // Each x[j] is in one of three "states":
 //

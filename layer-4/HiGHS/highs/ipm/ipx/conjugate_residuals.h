@@ -1,14 +1,67 @@
+/**
+ * @file ipm/ipx/conjugate_residuals.h
+ * @brief Conjugate Residuals Method for Symmetric Positive Definite Systems
+ *
+ * Implements preconditioned Conjugate Residuals (CR) for iteratively solving
+ * the KKT system in interior point methods.
+ *
+ * @algorithm Conjugate Residuals (CR):
+ * A Krylov subspace method for solving Cx = b where C is symmetric positive
+ * definite.
+ *
+ * KEY DIFFERENCE FROM CG:
+ * - CG minimizes ‖x - x*‖_C (error in C-norm)
+ * - CR minimizes ‖Cx - b‖₂ (residual in 2-norm)
+ * CR is preferred when monitoring residual convergence directly.
+ *
+ * UNPRECONDITIONED CR:
+ *   r₀ = b - C·x₀
+ *   p₀ = r₀, s₀ = C·r₀
+ *   for k = 0, 1, 2, ...
+ *     α = (rₖ, sₖ) / (sₖ, sₖ)
+ *     xₖ₊₁ = xₖ + α·pₖ
+ *     rₖ₊₁ = rₖ - α·C·pₖ
+ *     sₖ₊₁ = C·rₖ₊₁
+ *     β = (rₖ₊₁, sₖ₊₁) / (rₖ, sₖ)
+ *     pₖ₊₁ = rₖ₊₁ + β·pₖ
+ *
+ * PRECONDITIONED CR (with preconditioner P ≈ C⁻¹):
+ *   Effectively solves: P^{1/2}·C·P^{1/2}·y = P^{1/2}·b, x = P^{1/2}·y
+ *   - Apply P to residual: z = P·r
+ *   - Update formulas modified to use preconditioned vectors
+ *
+ * TERMINATION CRITERION:
+ * - Without scaling: ‖rₖ‖_∞ ≤ tol
+ * - With scaling: ‖D·rₖ‖_∞ ≤ tol where D = diag(resscale)
+ *
+ * The scaled criterion is important for IPM where different components
+ * have vastly different magnitudes.
+ *
+ * @math Convergence analysis:
+ * After k iterations: ‖rₖ‖ ≤ 2·((√κ-1)/(√κ+1))^k·‖r₀‖
+ * where κ = cond(C) = λ_max/λ_min
+ *
+ * Preconditioning reduces effective condition number:
+ * κ_eff = cond(P·C) << κ
+ *
+ * For IPM: C is the reduced KKT system (normal equations form),
+ * P is basis-based preconditioner using approximate LU factors.
+ *
+ * @complexity
+ * - Per iteration: 1 mat-vec with C + 1 preconditioner apply (if used)
+ * - Typical iterations: O(√κ) or O(√κ_eff) with preconditioning
+ * - Total: O(k · nnz) for k iterations
+ *
+ * @ref Saad (2003). "Iterative Methods for Sparse Linear Systems", 2nd ed.
+ *   Algorithm 6.20.
+ * @ref Schork (2018). "Basis Preconditioning in Interior Point Methods".
+ *   PhD thesis, Section 6.3.
+ *
+ * @see kkt_solver.h for iterative KKT solver using this method
+ * @see linear_operator.h for matrix/preconditioner interface
+ */
 #ifndef IPX_CONJUGATE_RESIDUALS_H_
 #define IPX_CONJUGATE_RESIDUALS_H_
-
-// Implementation of the (preconditioned) Conjugate Residuals (CR) method for
-// symmetric positive definite linear systems. Without preconditioning, the
-// method is implemented as in [1, Algorithm 6.20]. The implementation with
-// preconditioning is described in [2, Section 6.3].
-//
-// [1] Y. Saad, "Iterative Methods for Sparse Linear Systems", 2nd (2003)
-// [2] L. Schork, "Basis Preconditioning in Interior Point Methods", PhD thesis
-//     (2018)
 
 #include "ipm/ipx/control.h"
 #include "ipm/ipx/linear_operator.h"

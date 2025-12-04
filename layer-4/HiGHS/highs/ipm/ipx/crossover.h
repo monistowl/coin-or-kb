@@ -1,35 +1,67 @@
+/**
+ * @file ipm/ipx/crossover.h
+ * @brief Crossover from Interior Point to Basic Solution
+ *
+ * Converts an interior point solution (all variables strictly between bounds)
+ * to a vertex (basic) solution required for simplex methods and post-processing.
+ *
+ * @algorithm Crossover (IPM-to-Basis Conversion):
+ * Transforms interior solution to basic solution via two push phases that
+ * systematically eliminate "superbasic" variables.
+ *
+ * DEFINITIONS:
+ * - Basic solution: x[nonbasic] at bounds, z[basic] = 0
+ * - Primal superbasic: nonbasic j with lb[j] < x[j] < ub[j]
+ * - Dual superbasic: basic j with z[j] ≠ 0
+ *
+ * IPM solutions are "superbasic everywhere" - all variables are strictly
+ * interior. Crossover makes them basic by pushing variables to bounds.
+ *
+ * INVARIANTS MAINTAINED:
+ * 1. lb[j] ≤ x[j] ≤ ub[j] for all j
+ * 2. z[j] ≤ 0 if x[j] > lb[j] (complementarity)
+ * 3. z[j] ≥ 0 if x[j] < ub[j] (complementarity)
+ * 4. Ax remains unchanged (primal feasibility)
+ * 5. A'y + z remains unchanged (dual feasibility)
+ *
+ * DUAL PUSH PHASE:
+ * For each dual superbasic jb (basic with z[jb] ≠ 0):
+ * 1. Compute: Δz = -z[jb] · (B⁻¹·a_jb)_N for nonbasic indices
+ * 2. Find blocking: jn = argmax{α : z + α·Δz satisfies sign constraints}
+ * 3. If jb reaches zero: push complete
+ *    Else: basis update swaps jb ↔ jn
+ *
+ * PRIMAL PUSH PHASE:
+ * For each primal superbasic jn (nonbasic with lb < x[jn] < ub):
+ * 1. Choose target bound (nearer, or 0 for free variables)
+ * 2. Compute: Δx_B = -B⁻¹·a_jn · Δx_jn (basic variable update)
+ * 3. Find blocking: jb = argmax{α : x + α·Δx satisfies bounds}
+ * 4. If jn reaches bound: push complete
+ *    Else: basis update swaps jb ↔ jn
+ *
+ * @math Crossover preserves optimality:
+ * Starting from IPM optimal (x,y,z) satisfying KKT conditions with μ → 0,
+ * crossover produces vertex optimal solution because:
+ * - Objective c'x unchanged (same optimal value)
+ * - Feasibility Ax = b, l ≤ x ≤ u maintained
+ * - Complementarity x·z = 0 achieved (not approximately)
+ *
+ * @complexity
+ * - Each push: O(m²) for LU update + FTRAN/BTRAN
+ * - Worst case: O(n+m) pushes needed
+ * - Total: O((n+m) · m²), but usually much faster
+ * - Often O(n+m) total pivots (one per superbasic variable)
+ *
+ * @ref Megiddo (1991). "On Finding Primal- and Dual-Optimal Bases".
+ *   ORSA Journal on Computing 3(1):63-65.
+ * @ref Bixby & Saltzman (1994). "Recovering an Optimal LP Basis from an
+ *   Interior Point Solution". Operations Research Letters 15:169-178.
+ *
+ * @see ipm.h for interior point solver producing input
+ * @see basis.h for basis representation and updates
+ */
 #ifndef IPX_CROSSOVER_H_
 #define IPX_CROSSOVER_H_
-
-// Crossover method
-//
-// Given a basis and (x,y,z) that satisfies
-//
-//   lb[j] <= x[j] <= ub[j],                    (1)
-//    z[j] <= 0    if x[j] > lb[j],             (2a)
-//    z[j] >= 0    if x[j] < ub[j]              (2b)
-//
-// for all j, the crossover method updates the basis and (x,y,z) such that
-// z[j]=0 for all basic variables and x[j]=lb[j] or x[j]=ub[j] for all nonbasic
-// variables (or x[j]=0 if the variable is free). Hereby (1) and (2) are
-// maintained. The textbook method also keeps Ax and A'y+z unchanged.
-//
-// Nonbasic variables for which lb[j]<x[j]<ub[j] are called "primal superbasic"
-// and basic variables for which z[j]!=0 are called "dual superbasic". The
-// crossover algorithm removes superbasic variables in two push phases.
-//
-// Each iteration of the primal push phase chooses a primal superbasic variable
-// jn, moves x[jn] toward a bound (we choose the nearer one if jn has two finite
-// bounds and zero if it has none) and updates x[basic] to keep Ax unchanged. If
-// jn reaches its bound, then the push is complete. Otherwise a basic variable
-// jb reached its bound and blocked the step. In this case a basis update
-// exchanges jb by jn.
-//
-// Each iteration of the dual push phase chooses a dual superbasic variable jb,
-// moves z[jb] toward zero and updates z[nonbasic] to keep A'y+z unchanged. If
-// jb reaches zero, then the push is complete. Otherwise a nonbasic variable jn
-// became zero and blocked the step. In this case a basis update exchanges jb by
-// jn.
 
 #include <vector>
 #include "ipm/ipx/basis.h"
