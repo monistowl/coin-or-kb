@@ -12,6 +12,23 @@
  * via the get_scaling_parameters callback (TNLP) or GetScalingParameters
  * method (NLP).
  *
+ * @algorithm User-Provided Problem Scaling:
+ *   DetermineScalingParameters():
+ *   1. Call NLP::GetScalingParameters(obj_scaling, use_x, x_scaling, use_g, g_scaling).
+ *   2. If use_x_scaling: dx[i] = x_scaling[i] for variable scaling.
+ *   3. If use_g_scaling: dc[i], dd[j] from g_scaling for constraints.
+ *   4. df = obj_scaling for objective function.
+ *   5. If user returns false, use identity scaling (no change).
+ *
+ * @math Scaling transformation:
+ *   Scaled problem: min df·f(D_x⁻¹·x̃) s.t. D_c·c(D_x⁻¹·x̃) = 0.
+ *   User provides: df (scalar), D_x = diag(dx), D_c = diag(dc), D_d = diag(dd).
+ *   Goal: make scaled gradients and constraints O(1) for numerical stability.
+ *   Heuristic: scale so ∂f/∂x̃ᵢ ≈ 1 and constraint residuals ≈ 1.
+ *
+ * @complexity O(n + m) to apply user-provided factors.
+ *   User determines factors offline based on problem knowledge.
+ *
  * This allows users to specify problem-specific scaling based on:
  * - Prior knowledge of variable magnitudes
  * - Physical units of constraints

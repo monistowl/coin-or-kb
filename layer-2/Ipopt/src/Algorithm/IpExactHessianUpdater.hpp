@@ -12,6 +12,23 @@
  * simply retrieves the exact Hessian of the Lagrangian from the NLP
  * at each iteration.
  *
+ * @algorithm Exact Hessian Computation:
+ *   UpdateHessian() at each iteration:
+ *   1. Get current x from IpData::curr()->x().
+ *   2. Get current multipliers y_c, y_d from IpData::curr().
+ *   3. Call IpoptNLP::h(x, obj_factor, y_c, y_d) → W.
+ *   4. Store W in IpData for PDSystemSolver.
+ *   NLP caching handles redundant evaluation avoidance.
+ *
+ * @math Hessian of Lagrangian:
+ *   W = σ·∇²f(x) + Σᵢ (y_c)ᵢ·∇²cᵢ(x) + Σⱼ (y_d)ⱼ·∇²dⱼ(x)
+ *   where σ = obj_factor (typically 1, or barrier-related in restoration).
+ *   Symmetric matrix, stored in lower triangular sparse format.
+ *
+ * @complexity O(nnz_hessian) per evaluation.
+ *   Enables quadratic convergence: ||x_{k+1} - x*|| ≤ C·||x_k - x*||².
+ *   Quasi-Newton: only superlinear ||x_{k+1} - x*|| ≤ C·||x_k - x*||^{1.5-2}.
+ *
  * The Hessian is:
  *   W = ∇²f(x) + Σ y_c[i] * ∇²c_i(x) + Σ y_d[j] * ∇²d_j(x)
  *

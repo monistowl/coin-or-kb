@@ -12,6 +12,22 @@
  * suggested values for the barrier parameter mu in adaptive (non-monotone)
  * barrier updates.
  *
+ * @algorithm Barrier Parameter Oracle Interface:
+ *   CalculateMu(mu_min, mu_max) → new_mu ∈ [mu_min, mu_max]:
+ *   1. Analyze current iterate: complementarity gap, progress, quality.
+ *   2. Compute target mu balancing centrality vs progress toward optimum.
+ *   3. Clamp to [mu_min, mu_max] to respect globalization bounds.
+ *   4. Return false if computation fails (e.g., linear solve needed).
+ *
+ * @math Adaptive vs monotone barrier strategies:
+ *   Monotone: μ_{k+1} = σ·μ_k with fixed σ < 1 (predictable decrease).
+ *   Adaptive: μ chosen per-iteration to balance feasibility and optimality.
+ *   Quality function oracles: min_σ q(σ) where q measures solution quality.
+ *   Probing oracles: try μ candidates, pick best by predicted progress.
+ *
+ * @complexity O(linear_solve) per oracle call for predictor-based methods.
+ *   Simpler oracles (LOQO-style) are O(1) using only current complementarity.
+ *
  * Interface:
  * - CalculateMu(mu_min, mu_max, new_mu): Compute suggested mu in [mu_min, mu_max]
  * - Returns false if suggestion cannot be computed (e.g., linear solve fails)

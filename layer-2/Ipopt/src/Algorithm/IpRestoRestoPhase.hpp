@@ -13,6 +13,23 @@
  * optimal values for the slack variables (n_c, p_c, n_d, p_d) by
  * treating them as separable from x and s.
  *
+ * @algorithm Separable Slack Optimization:
+ *   Given current x (fixed), find optimal n, p for restoration problem:
+ *   1. Compute constraint residuals: r_c = c(x), r_d = d(x) - s.
+ *   2. For each component i, solve: v² + 2aᵢ·v - bᵢ = 0
+ *      where aᵢ, bᵢ derived from residual and complementarity target.
+ *   3. Extract n, p from solution: v = p - n, use sign of residual.
+ *   4. Ensures n ≥ 0, p ≥ 0 with n·p close to target complementarity.
+ *
+ * @math Quadratic subproblem:
+ *   For fixed x: min_{n,p≥0} ρ(||n||₁ + ||p||₁) + barrier(n,p)
+ *   s.t. c(x) + n - p = 0.
+ *   Separable → each component independent quadratic in v = p - n.
+ *   Closed-form: v = -a + √(a² + b) (positive root).
+ *
+ * @complexity O(m) for m constraints, no linear solve needed.
+ *   Much cheaper than full restoration iteration for slack initialization.
+ *
  * The restoration feasibility problem has structure:
  *   min ||p + n||_1  s.t.  c(x) + n - p = 0
  *
