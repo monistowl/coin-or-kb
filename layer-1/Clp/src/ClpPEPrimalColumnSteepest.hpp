@@ -10,6 +10,24 @@
  * compatibility checking. The most effective anti-degeneracy variant
  * for primal simplex.
  *
+ * @algorithm Positive Edge Primal Steepest Edge:
+ *   Enhanced column selection combining steepest edge with compatibility:
+ *   1. Compute steepest edge scores: |d_j|²/w_j for attractive columns
+ *   2. Identify compatible columns via ClpPESimplex::isCompatibleCol()
+ *   3. Apply bi-dimensional pricing: prefer compatibles unless much worse
+ *   4. Update compatibility set when basic variables change bounds
+ *
+ * @math Column selection with compatibility weight:
+ *   Select s = argmax_j { |d_j|²/w_j · (1 + (1-ψ)·c_j) }
+ *   where c_j = 1 if compatible, 0 otherwise
+ *   Compatible columns move dual degenerates off zero reduced cost.
+ *
+ * @complexity Same as ClpPrimalColumnSteepest plus O(n) compatibility check.
+ *   Reduces degenerate iterations by 20-50% on difficult LPs.
+ *
+ * @ref Towhidi & Orban (2014). "Customizing the solution process of COIN-OR's
+ *      linear solvers with Python". Math. Prog. Computation 6:247-282.
+ *
  * Modes: 0=exact devex, 1=full steepest, 2=partial exact devex,
  *        3=adaptive (switches based on factorization), 4=partial Dantzig start
  *

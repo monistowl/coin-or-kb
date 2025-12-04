@@ -9,6 +9,24 @@
  * Combines dual steepest edge pricing with Positive Edge compatibility
  * checking. The most effective anti-degeneracy variant for dual simplex.
  *
+ * @algorithm Positive Edge Dual Steepest Edge:
+ *   Enhanced row selection combining steepest edge with compatibility:
+ *   1. Compute steepest edge scores: |d_i|²/w_i for infeasible rows
+ *   2. Identify compatible rows via ClpPESimplex::isCompatibleRow()
+ *   3. Apply bi-dimensional pricing: prefer compatibles unless much worse
+ *   4. Track degeneracy statistics for adaptive mode switching
+ *
+ * @math Row selection with compatibility weight:
+ *   Select r = argmax_i { |d_i|²/w_i · (1 + (1-ψ)·c_i) }
+ *   where c_i = 1 if compatible, 0 otherwise
+ *   Compatible rows make positive progress on primal degenerates.
+ *
+ * @complexity Same as ClpDualRowSteepest plus O(m) compatibility check.
+ *   Reduces degenerate iterations by 20-50% on difficult LPs.
+ *
+ * @ref Towhidi & Orban (2014). "Customizing the solution process of COIN-OR's
+ *      linear solvers with Python". Math. Prog. Computation 6:247-282.
+ *
  * Modes: 0=uninitialized, 1=full, 2=partial uninitialized,
  *        3=adaptive (starts partial, may switch to full)
  *

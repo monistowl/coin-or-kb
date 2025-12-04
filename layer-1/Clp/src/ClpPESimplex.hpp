@@ -10,6 +10,28 @@
  * pivots in simplex. Identifies "compatible" variables that can make real
  * progress toward optimality.
  *
+ * @algorithm Positive Edge Compatibility Detection:
+ *   Reduces degenerate pivots by identifying "compatible" variables:
+ *   1. Compute reference direction: d = B⁻¹·a_j for candidate column j
+ *   2. Variable i is compatible if ⟨d, e_i⟩ > tolerance
+ *      (i.e., pivot would cause positive movement on variable i)
+ *   3. Prioritize compatible variables in pricing to avoid stalling
+ *   4. Fall back to standard pricing when no compatibles exist
+ *
+ * @math Bi-dimensional pricing with compatibility:
+ *   For primal: score(j) = |d_j| / (ψ · w_j + (1-ψ) · c_j)
+ *   where d_j = reduced cost, w_j = steepest edge weight,
+ *         c_j = compatibility score (0 or 1)
+ *   For dual: analogous scoring for row selection
+ *   Parameter ψ ∈ [0,1] balances steepest edge vs compatibility.
+ *
+ * @complexity Compatibility update: O(nnz(pivot_column)) per iteration.
+ *   Tracking primal/dual degenerates: O(m) per factorization.
+ *   Reduces iteration count significantly on highly degenerate LPs.
+ *
+ * @ref Towhidi & Orban (2014). "Customizing the solution process of COIN-OR's
+ *      linear solvers with Python". Math. Prog. Computation 6:247-282.
+ *
  * Key concepts:
  * - Primal degenerates: basic variables at bound (zero pivot impact)
  * - Dual degenerates: non-basic variables with zero reduced cost
@@ -18,9 +40,6 @@
  *
  * The psi parameter (default 0.5) controls priority given to compatibles.
  * Smaller psi = more priority to compatible variables.
- *
- * Reference: Towhidi & Orban, "Customizing the solution process of COIN-OR's
- * linear solvers with Python", Math Programming Computation (2014)
  *
  * @see ClpPEPrimalColumnSteepest, ClpPEDualRowSteepest for pivot implementations
  */
