@@ -6,7 +6,53 @@
 // ----------------------------------------------------------------------------
 /**
  * @file sparse_hes.hpp
- * @brief Core AD functionality: sparse hes
+ * @brief Sparse Hessian computation using automatic differentiation
+ *
+ * @algorithm Sparse Hessian Computation:
+ * Efficiently compute Hessian exploiting sparsity structure via
+ * graph coloring and reverse-on-forward AD.
+ *
+ * HESSIAN STRUCTURE:
+ *   H(x) = ∇²(w'F(x)) = Σᵢ wᵢ·∇²Fᵢ(x)
+ *   Only compute nonzero entries H[i,j] identified by sparsity pattern
+ *
+ * GRAPH COLORING:
+ *   Group columns by color c₁, c₂, ... where columns in same group
+ *   share no row position (can be computed simultaneously)
+ *   Direction d^(k) = Σⱼ∈cₖ eⱼ (sum of unit vectors in color k)
+ *
+ * COMPRESSED COMPUTATION:
+ *   For each color k:
+ *     1. Forward sweep: compute v = ∇F(x)·d^(k)
+ *     2. Reverse sweep: compute ∇(w'v) = H·d^(k)
+ *   Extract individual H[:,j] from compressed result
+ *
+ * REVERSE-ON-FORWARD (second-order):
+ *   Forward mode: propagate directional derivative
+ *   Reverse mode: compute gradient of directional derivative
+ *   Combined: extracts Hessian-vector product
+ *
+ * @math
+ *   Full Hessian: O(n²) entries
+ *   Sparse Hessian: O(nnz) entries to compute
+ *   With p colors (from coloring): p forward + p reverse sweeps
+ *   Each sweep: O(ops) operations
+ *
+ * Coloring algorithms:
+ * - "cppad.general": Row determination (conservative)
+ * - "cppad.symmetric": Exploits H = H' for half the work
+ *
+ * @complexity
+ * - Sparsity detection: O(ops·nnz_pattern)
+ * - Graph coloring: O(n² + nnz) for greedy coloring
+ * - Hessian computation: O(p·ops) where p = chromatic number
+ * - p ≤ nnz_per_row + 1 typically
+ *
+ * @ref Coleman & Moré (1984). "Estimation of Sparse Hessian Matrices
+ *   and Graph Coloring Problems". Mathematical Programming 28:243-270.
+ *
+ * @see sparse_jac.hpp for sparse Jacobian
+ * @see rev_hes_sparsity.hpp for Hessian sparsity patterns
  */
 
 /*

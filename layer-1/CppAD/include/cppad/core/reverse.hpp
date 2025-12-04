@@ -5,6 +5,54 @@
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
 
+/**
+ * @file core/reverse.hpp
+ * @brief Reverse mode automatic differentiation
+ *
+ * @algorithm Reverse Mode AD (Backpropagation):
+ * Computes gradients by traversing the computation graph backwards.
+ * Key advantage: gradient of scalar function w.r.t. all inputs in O(ops).
+ *
+ * FORWARD SWEEP (already done):
+ *   Compute y = f(x) while recording operation tape
+ *   Store intermediate values at each node
+ *
+ * REVERSE SWEEP:
+ *   Initialize: ȳ = 1 (adjoint of output)
+ *   For each operation v = op(u₁, u₂, ...) in reverse order:
+ *     Compute: ūᵢ += ȳ · ∂v/∂uᵢ (chain rule)
+ *   Final: x̄ = gradient ∂y/∂x
+ *
+ * HIGHER ORDER REVERSE:
+ *   With q-th order forward coefficients stored:
+ *   Computes ∂W/∂x where W = Σₖ wₖ · yₖ
+ *   Returns q Taylor coefficient derivatives per variable
+ *
+ * ADJOINT EQUATIONS:
+ *   For v = u₁ + u₂:  ū₁ += v̄, ū₂ += v̄
+ *   For v = u₁ · u₂:  ū₁ += v̄·u₂, ū₂ += v̄·u₁
+ *   For v = sin(u):   ū += v̄·cos(u)
+ *   For v = exp(u):   ū += v̄·v
+ *
+ * @math Complexity comparison for f: Rⁿ → Rᵐ:
+ *   Forward mode: O(n·ops) for full Jacobian (n forward sweeps)
+ *   Reverse mode: O(m·ops) for full Jacobian (m reverse sweeps)
+ *   For gradient (m=1): reverse is O(ops), forward is O(n·ops)
+ *
+ * Memory: O(ops) to store forward sweep values for reverse
+ *
+ * @complexity
+ * - Single reverse sweep: O(ops) time, O(ops) space
+ * - Gradient of scalar function: O(ops) regardless of input dimension
+ * - Full Jacobian: O(min(n,m)·ops) using appropriate mode
+ *
+ * @ref Griewank & Walther (2008). "Evaluating Derivatives: Principles and
+ *   Techniques of Algorithmic Differentiation". 2nd ed., SIAM.
+ *
+ * @see cppad/core/forward.hpp for forward mode
+ * @see cppad/core/sparse_hes.hpp for sparse Hessian via reverse-on-forward
+ */
+
 # include <algorithm>
 # include <cppad/local/pod_vector.hpp>
 # include <cppad/local/play/sequential_iterator.hpp>
