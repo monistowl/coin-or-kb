@@ -1,3 +1,16 @@
+/**
+ * @file OsiCpxSolverInterface.hpp
+ * @brief Osi interface for IBM ILOG CPLEX optimizer
+ * Author: Tobias Pfender (ZIB Berlin). EPL license.
+ *
+ * OsiCpxSolverInterface wraps CPLEX via the Osi abstraction. Uses CPXLPptr
+ * and CPXENVptr handles for CPLEX Callable Library. Implements initialSolve/
+ * resolve/branchAndBound, row/column manipulation (OsiRowCut, OsiColCut),
+ * warm starts via CoinWarmStartBasis, and CPLEX-specific parameter handling.
+ *
+ * @see OsiSolverInterface for base class
+ */
+
 //-----------------------------------------------------------------------------
 // name:     OSI Interface for CPLEX
 // author:   Tobias Pfender

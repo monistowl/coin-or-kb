@@ -1,3 +1,14 @@
+/**
+ * @file OsiCollections.hpp
+ * @brief STL container typedefs for Osi cut and data collections
+ * Copyright (C) 2000, International Business Machines Corporation.
+ * EPL-1.0 license.
+ *
+ * Standard typedefs: OsiVectorInt, OsiVectorDouble, OsiVectorColCutPtr,
+ * OsiVectorRowCutPtr, OsiVectorCutPtr. Provides cleaner syntax for
+ * frequently-used vector types throughout Osi code.
+ */
+
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

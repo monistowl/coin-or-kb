@@ -1,3 +1,16 @@
+/**
+ * @file OsiTestSolverInterface.hpp
+ * @brief Osi interface for volume algorithm (test solver)
+ * Copyright (C) 2000, International Business Machines Corporation.
+ * EPL license. Renamed copy of OsiVolSolverInterface (trunk rev. 1466).
+ *
+ * OsiTestSolverInterface: volume algorithm solver for Osi unit testing.
+ * Provides Lagrangian bound via subgradient optimization. OsiVolMatrixOneMinusOne_
+ * exploits ±1 coefficients for efficient matrix-vector products. OsiTestInfinity
+ * defines solver's infinity (1e31). Derives from both OsiSolverInterface and
+ * VOL_user_hooks for volume algorithm callbacks.
+ */
+
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This file is licensed under the terms of Eclipse Public License (EPL).

@@ -1,3 +1,16 @@
+/**
+ * @file OsiGrbSolverInterface.hpp
+ * @brief Osi interface for Gurobi optimizer
+ * Author: Stefan Vigerske (HU Berlin), based on Cplex interface by T. Achterberg.
+ * EPL license.
+ *
+ * OsiGrbSolverInterface wraps Gurobi via the Osi abstraction. Uses GRBmodel
+ * and GRBenv handles for Gurobi C API. Implements initialSolve/resolve/
+ * branchAndBound, row/column manipulation, warm starts, and parameter passing.
+ *
+ * @see OsiSolverInterface for base class
+ */
+
 //-----------------------------------------------------------------------------
 // name:     OSI Interface for Gurobi
 // template: OSI Cplex Interface written by T. Achterberg

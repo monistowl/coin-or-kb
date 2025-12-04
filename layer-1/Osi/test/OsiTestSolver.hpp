@@ -1,3 +1,15 @@
+/**
+ * @file OsiTestSolver.hpp
+ * @brief Volume algorithm implementation for Osi unit testing
+ * Copyright (C) 2000, International Business Machines Corporation.
+ * EPL license. Copy of VolVolume (stable/1.1 rev. 233).
+ *
+ * Lagrangian relaxation-based volume algorithm: VOL_dvector/VOL_ivector
+ * (resizable arrays with debug bounds checking), VOL_dual (dual solution),
+ * VOL_primal (primal solution), VOL_problem (subgradient optimization).
+ * VolMax/VolAbs helpers. VOL_user_hooks interface for problem-specific callbacks.
+ */
+
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This file is licensed under the terms of Eclipse Public License (EPL).

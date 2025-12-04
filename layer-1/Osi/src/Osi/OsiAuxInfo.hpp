@@ -1,3 +1,17 @@
+/**
+ * @file OsiAuxInfo.hpp
+ * @brief Auxiliary information for algorithm-specific solver customization
+ * Copyright (C) 2006, International Business Machines Corporation.
+ * EPL-1.0 license.
+ *
+ * OsiAuxInfo: structured replacement for appData_ pointer, enabling algorithm
+ * customization. OsiBabSolver: derived class for exotic solvers (nonlinear,
+ * volume algorithm) in branch-and-bound - tracks solutions, enables
+ * tryCut/tryBranch callbacks, supports soft/hard bounds and priority-based cuts.
+ *
+ * @see OsiSolverInterface for main solver abstraction
+ */
+
 // Copyright (C) 2006, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

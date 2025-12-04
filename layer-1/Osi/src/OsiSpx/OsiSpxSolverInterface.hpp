@@ -1,3 +1,17 @@
+/**
+ * @file OsiSpxSolverInterface.hpp
+ * @brief Osi interface for SoPlex LP solver
+ * Authors: Tobias Pfender, Ambros Gleixner, Wei Huang (ZIB Berlin).
+ * EPL license.
+ *
+ * OsiSpxSolverInterface wraps SoPlex >= 1.4.2c via the Osi abstraction.
+ * Implements initialSolve/resolve/branchAndBound, parameter get/set,
+ * row/column access, warm start via CoinWarmStartBasis. Uses soplex::SoPlex
+ * internally with DVector/DIdxSet for sparse operations.
+ *
+ * @see OsiSolverInterface for base class
+ */
+
 //-----------------------------------------------------------------------------
 // name:     OSI Interface for SoPlex >= 1.4.2c
 // authors:  Tobias Pfender

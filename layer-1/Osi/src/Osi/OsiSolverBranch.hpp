@@ -1,3 +1,17 @@
+/**
+ * @file OsiSolverBranch.hpp
+ * @brief Branch information with tighter bounds for both directions
+ * Copyright (C) 2005, International Business Machines Corporation.
+ * EPL-1.0 license.
+ *
+ * OsiSolverBranch stores branch decisions as bound changes: addBranch creates
+ * floor/ceil branches on integer variables, applyBounds installs bounds for
+ * a given direction (way=-1 first child, +1 second). Compact storage via
+ * start_[5] indices and indices_/bound_ arrays. Supports column or row bounds.
+ *
+ * @see OsiSolverInterface for applying branches during B&B
+ */
+
 // Copyright (C) 2005, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

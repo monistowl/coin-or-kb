@@ -1,3 +1,16 @@
+/**
+ * @file OsiGlpkSolverInterface.hpp
+ * @brief Osi interface for GNU Linear Programming Kit (GLPK)
+ * Copyright (C) 2001, Vivian De Smedt, Braden Hunsaker. EPL license.
+ *
+ * OsiGlpkSolverInterface wraps GLPK via the Osi abstraction. Uses glp_prob
+ * handle (LPX typedef for compatibility). Implements initialSolve/resolve/
+ * branchAndBound, warm starts via CoinWarmStartBasis, and GLPK-specific
+ * parameter handling. Supports both simplex and MIP solving.
+ *
+ * @see OsiSolverInterface for base class
+ */
+
 //-----------------------------------------------------------------------------
 // name:     OSI Interface for GLPK
 //-----------------------------------------------------------------------------

@@ -1,3 +1,14 @@
+/**
+ * @file opbdp_solve.hpp
+ * @brief Optimal pseudo-boolean decision procedure interface for pure 0-1 IPs
+ * Copyright (C) 2006, International Business Machines Corporation.
+ *
+ * solveOpbdp: solves pure 0-1 integer programs with integral coefficients using
+ * the opbdp solver. Returns solution in model, 0 if infeasible, -1 if unsuitable.
+ * Second variant enumerates all solutions as bit vectors. atOne/setAtOne helpers
+ * provide bit array access for solution vectors.
+ */
+
 // Copyright (C) 2006, International Business Machines
 // Corporation and others.  All Rights Reserved.
 #ifndef OsiOpbdpSolve_H

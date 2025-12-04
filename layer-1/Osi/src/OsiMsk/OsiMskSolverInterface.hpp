@@ -1,3 +1,16 @@
+/**
+ * @file OsiMskSolverInterface.hpp
+ * @brief Osi interface for MOSEK optimizer (version 5.0+)
+ * Author: Bo Jensen (MOSEK ApS). EPL license.
+ *
+ * OsiMskSolverInterface wraps MOSEK via the Osi abstraction. Uses MSKtask_t
+ * and MSKenv_t handles (void* for forward declaration without mosek.h).
+ * Implements initialSolve/resolve/branchAndBound, parameter handling, and
+ * supports LP/MIP/QP/conic solving through MOSEK's unified interface.
+ *
+ * @see OsiSolverInterface for base class
+ */
+
 // Osi interface for Mosek ver. 5.0
 // Lower versions are not supported
 //-----------------------------------------------------------------------------

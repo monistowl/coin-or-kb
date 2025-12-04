@@ -1,3 +1,17 @@
+/**
+ * @file OsiSolverParameters.hpp
+ * @brief Parameter enums for cross-solver configuration in Osi
+ * Copyright (C) 2000, International Business Machines Corporation.
+ * EPL-1.0 license.
+ *
+ * Defines OsiIntParam (iteration limits, name discipline), OsiDblParam
+ * (objective limits, tolerances, offset), OsiStrParam (problem/solver names),
+ * OsiHintParam (crash, presolve, scaling, pivoting hints with OsiHintStrength).
+ * Solvers implement these via get/setIntParam, get/setDblParam, etc.
+ *
+ * @see OsiSolverInterface::setIntParam, setDblParam, setHintParam
+ */
+
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

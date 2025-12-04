@@ -1,3 +1,16 @@
+/**
+ * @file OsiXprSolverInterface.hpp
+ * @brief Osi interface for FICO XPRESS-MP solver
+ * Copyright (C) 2000, International Business Machines Corporation.
+ * EPL-1.0 license.
+ *
+ * OsiXprSolverInterface wraps XPRESS-MP via the Osi abstraction. Uses XPRSprob
+ * handle for XPRESS API. Implements initialSolve/resolve/branchAndBound,
+ * row/column access, parameter get/set, and problem loading from MPS/LP files.
+ *
+ * @see OsiSolverInterface for base class
+ */
+
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
