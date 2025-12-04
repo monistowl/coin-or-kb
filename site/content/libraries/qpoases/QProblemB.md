@@ -22,7 +22,7 @@ Solves KKT conditions directly when active set is known.
 
 <div class="math">
 
-s.t. lb <= x <= ub
+$$\text{ s.t. }lb <= x <= ub$$
 
 This is more efficient than QProblem when there are no general
 linear constraints. The active set consists only of bounds.

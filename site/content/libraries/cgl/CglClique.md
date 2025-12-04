@@ -50,11 +50,11 @@ Greedy Maximal Clique (greedy_maximal_clique):
 <div class="math">
 
 Greedily add highest-degree nodes until no more fit
-  Fast but may miss maximum violated clique.
+Fast but may miss maximum violated clique.
 
 </div>
 
-**Complexity:** O(n² * d) for greedy approach
+**Complexity:** $O(n² * d)$ for greedy approach
 
 <div class="refs">
 

@@ -33,7 +33,7 @@ Key methods:
 
 </div>
 
-**Complexity:** O(n^3) worst case per iteration, but typically much
+**Complexity:** $O(n^{3})$ worst case per iteration, but typically much
             faster due to hot-starting and sparse updates.
 
 </div>

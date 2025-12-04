@@ -42,12 +42,12 @@ Update/Downdate (rank-k modification):
 <div class="math">
 
 For A = L·L': L(j,j) = √(A(j,j) - Σ L(j,k)²)
-  L(i,j) = (A(i,j) - Σ L(i,k)·L(j,k)) / L(j,j) for i > j
+$$L(i,j) = (A(i,j) - Σ L(i,k)·L(j,k)) / L(j,j) \text{ for }i > j$$
 
 </div>
 
-**Complexity:** Factorization: O(nnz(L)²/m) with supernodal method
-  Solve: O(nnz(L)) per right-hand side
+**Complexity:** Factorization: $O(nnz(L)$²/m) with supernodal method
+  Solve: $O(nnz(L)$) per right-hand side
   Fill-in (nnz(L)) depends on ordering quality
 
 <div class="refs">

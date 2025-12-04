@@ -49,13 +49,13 @@ Warm Starting (setStartingPoint):
 
 <div class="math">
 
-l_i = u_i = x̄_i for integer variables i ∈ I
-  Ipopt solves reduced-space problem over continuous variables.
-  Original bounds restored by unfixVariables().
+$$l_{i} = u_{i} = x̄_{i} \text{ for }integer variables i ∈ I$$
+Ipopt solves reduced-space problem over continuous variables.
+Original bounds restored by unfixVariables().
 
 </div>
 
-**Complexity:** O(nnz) vs O(n²) for dense evaluation
+**Complexity:** $O(nnz)$ vs $O(n²)$ for dense evaluation
 
 <div class="refs">
 

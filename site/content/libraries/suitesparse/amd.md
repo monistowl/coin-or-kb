@@ -31,15 +31,15 @@ Approximate Minimum Degree (AMD)
 <div class="math">
 
 Approximate external degree:
-  d̃(i) ≈ |adj(i) ∪ (∪ adj(e) : e ∈ elements adjacent to i)| - |absorbed|
-  The true minimum degree would require d(i) = |L_{*i}| - 1 (column count
-  in Cholesky factor), but this is expensive to compute exactly.
+d̃(i) ≈ |adj(i) ∪ (∪ adj(e) : e ∈ elements adjacent to i)| - |absorbed|
+The true minimum degree would require d(i) = |L_{*i}| - 1 (column count
+in Cholesky factor), but this is expensive to compute exactly.
 
 </div>
 
-**Complexity:** Time: O(nnz(A)·α(n)) average case with aggressive absorption,
-  where α is the inverse Ackermann function. Worst case O(n·nnz).
-  Space: O(nnz(A) + n) for the quotient graph representation.
+**Complexity:** Time: $O(nnz(A)$·α(n)) average case with aggressive absorption,
+  where α is the inverse Ackermann function. Worst case $O(n·nnz)$.
+  Space: $O(nnz(A)$ + n) for the quotient graph representation.
 
 <div class="refs">
 

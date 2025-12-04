@@ -49,9 +49,9 @@ Design Pattern: Abstract Factory + Strategy
 @invariant Warm start objects must be compatible with the solver that
   created them. Cross-solver warm starting requires basis translation.
 
-**Complexity:** All query methods (getColSolution, etc.): O(1) pointer return
-  initialSolve/resolve: delegated to solver, typically O(m·n·iterations)
-  applyCuts: O(cuts × row_length) for constraint matrix update
+**Complexity:** All query methods (getColSolution, etc.): $O(1)$ pointer return
+  initialSolve/resolve: delegated to solver, typically $O(m·n·iterations)$
+  applyCuts: $O(cuts × row_length)$ for constraint matrix update
 
 <div class="refs">
 

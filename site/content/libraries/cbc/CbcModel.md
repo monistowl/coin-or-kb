@@ -39,7 +39,7 @@ Branch-and-Cut (B&C) for Mixed-Integer Programming:
      e. Prune by bound if LP ≥ incumbent
   3. Return optimal solution when tree exhausted
 
-**Complexity:** Worst-case O(2^n) where n = number of integer variables.
+**Complexity:** Worst-case $O(2^n)$ where n = number of integer variables.
   Practical performance depends heavily on:
   - Strength of LP relaxation and cutting planes
   - Quality of branching variable selection

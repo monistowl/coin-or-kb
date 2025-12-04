@@ -29,13 +29,13 @@ SYMAMD (Symmetric AMD using COLAMD):
 <div class="math">
 
 Approximate column degree for LU:
-  deg(j) ≈ # rows in current column's nonzero pattern after elimination
-  Aggressive absorption reduces degree overestimates from element merging.
+deg(j) ≈ # rows in current column's nonzero pattern after elimination
+Aggressive absorption reduces degree overestimates from element merging.
 
 </div>
 
-**Complexity:** Time: O(nnz(A)·α(n)) average with aggressive absorption
-  Space: O(nnz(A) + n) for quotient graph representation
+**Complexity:** Time: $O(nnz(A)$·α(n)) average with aggressive absorption
+  Space: $O(nnz(A)$ + n) for quotient graph representation
   Slightly slower than AMD but better for unsymmetric patterns.
 
 <div class="refs">

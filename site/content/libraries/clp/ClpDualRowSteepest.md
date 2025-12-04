@@ -28,15 +28,15 @@ Maintains infeasibility list for efficient scanning of only violated rows.
 
 <div class="math">
 
-Edge weight: γ_i = ||B^{-T}e_i||² = (i-th row of B^{-1})^T(i-th row of B^{-1})
+$$Edge weight: γ_{i} = ||B^{-T}e_{i}||² = (i-th row of B^{-1})^{T}(i-th row of B^{-1})$$
 Normalized ratio: d_i/γ_i where d_i is dual infeasibility of row i.
-Update formula from BTRAN column: v = B^{-T}a_j gives γ_i' = γ_i - 2α_i v_i + α_i² γ_p
-where α_i = r_ip/r_pp is multiplier for row i in elimination.
+$$Update formula from BTRAN column: v = B^{-T}a_{j} gives γ_{i}' = γ_{i} - 2α_{i} v_{i} + α_i² γ_{p}$$
+$$\text{ where }α_{i} = r_ip/r_pp is multiplier \text{ for }row i in elimination.$$
 
 </div>
 
-**Complexity:** O(m) per pivot for weight updates (sparse operations).
-Full recomputation O(m²) but rare. Typically 30-50% fewer iterations than Dantzig.
+**Complexity:** $O(m)$ per pivot for weight updates (sparse operations).
+Full recomputation $O(m²)$ but rare. Typically 30-50% fewer iterations than Dantzig.
 
 <div class="refs">
 

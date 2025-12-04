@@ -21,7 +21,7 @@ Data Layout Optimization:
       - abcLower_/abcUpper_[0..n+m]: variable bounds
 
 **Complexity:** Same asymptotic complexity as ClpSimplex:
-      Per-iteration: O(m²) average for basis update
+      Per-iteration: $O(m²)$ average for basis update
       Practical speedup: 2-4x from SIMD, additional from parallelism
 
 <div class="refs">

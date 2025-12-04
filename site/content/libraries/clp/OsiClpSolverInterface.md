@@ -21,10 +21,10 @@ Hot-Start Optimization for Strong Branching:
   5. unmarkHotStart(): Release saved state
   This avoids full refactorization for each strong branching LP.
 
-**Complexity:** Most operations O(1) delegations to ClpSimplex
-  initialSolve/resolve: O(m·n·iterations) for underlying simplex
-  Hot-start resolve: O(k·m) where k = iterations to re-optimize (typically small)
-  getBInvARow/getBInvACol: O(nnz(B^{-1})) per call
+**Complexity:** Most operations $O(1)$ delegations to ClpSimplex
+  initialSolve/resolve: $O(m·n·iterations)$ for underlying simplex
+  Hot-start resolve: $O(k·m)$ where k = iterations to re-optimize (typically small)
+  getBInvARow/getBInvACol: $O(nnz(B^{-1})$) per call
 
 @invariant basis_ synchronized with modelPtr_->status arrays after each solve
 @invariant fakeMinInSimplex_ == true implies linearObjective_ is negated copy

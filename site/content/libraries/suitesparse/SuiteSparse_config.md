@@ -28,7 +28,7 @@ collection of sparse matrix algorithms. Key features include:
 <div class="math">
 
 Implements the hypot function: sqrt(x^2 + y^2) using a numerically
-      stable algorithm that avoids intermediate overflow/underflow.
+stable algorithm that avoids intermediate overflow/underflow.
 
 </div>
 

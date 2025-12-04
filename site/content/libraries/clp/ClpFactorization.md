@@ -30,14 +30,14 @@ Refactorization triggered when fill-in exceeds threshold or numerical error grow
 Basis matrix B ∈ ℝ^{m×m} where columns are basic column vectors from [A|I].
 LU factorization: PBQ = LU where P,Q are permutation matrices.
 FTRAN solves: d = B^{-1}a_j (pivot column for primal simplex)
-BTRAN solves: π^T = c_B^T B^{-1} (dual prices for reduced cost calculation)
-Update: B_new = B_old + (a_j - Be_i)e_i^T for basis change at position i.
+$$BTRAN solves: π^{T} = c_{B}^{T} B^{-1} (dual prices \text{ for }reduced cost calculation)$$
+$$Update: B_new = B_old + (a_{j} - Be_{i})e_{i}^{T} \text{ for }basis change \text{ at }position i.$$
 
 </div>
 
-**Complexity:** Factorization: O(m^2) to O(m^3) depending on sparsity and fill-in.
-FTRAN/BTRAN: O(nnz(L) + nnz(U)) per solve, typically O(m) for sparse problems.
-Forrest-Tomlin update: O(m) average, refactorization every 100-200 pivots.
+**Complexity:** Factorization: $O(m^{2})$ to $O(m^{3})$ depending on sparsity and fill-in.
+FTRAN/BTRAN: $O(nnz(L)$ + nnz(U)) per solve, typically $O(m)$ for sparse problems.
+Forrest-Tomlin update: $O(m)$ average, refactorization every 100-200 pivots.
 
 <div class="refs">
 

@@ -47,11 +47,11 @@ Integrality Distance Threshold (away_):
 <div class="math">
 
 Generate cut only if away_ ≤ f_0 ≤ 1 - away_
-  Default 0.05; tighter at root for more cuts.
+Default 0.05; tighter at root for more cuts.
 
 </div>
 
-**Complexity:** O(m) per cut for m nonzeros in tableau row
+**Complexity:** $O(m)$ per cut for m nonzeros in tableau row
 
 <div class="refs">
 

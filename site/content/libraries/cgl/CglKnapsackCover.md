@@ -48,11 +48,11 @@ Greedy Cover Heuristic (findGreedyCover):
 <div class="math">
 
 Add variables greedily until ∑_{j∈C} a_j > b
-  Fast but may miss most violated cover.
+Fast but may miss most violated cover.
 
 </div>
 
-**Complexity:** O(2^n) worst case, often O(n * c) practical
+**Complexity:** $O(2^n)$ worst case, often $O(n * c)$ practical
 
 <div class="refs">
 

@@ -31,15 +31,15 @@ inner performs pivots until optimality or unboundedness detected.
 
 <div class="math">
 
-min c^T x s.t. Ax=b, l≤x≤u
-Basic solution: x_B = B^{-1}b - B^{-1}N x_N, with x_N at bounds.
-Reduced cost: s_j = c_j - c_B^T B^{-1} a_j (computed via BTRAN then dot product)
-Ratio test: θ* = min{(x_B[i]-l_i)/d_i, (u_i-x_B[i])/(-d_i)} for feasible step.
+$$\min\;c^{T} x \text{ s.t. }Ax=b, l≤x≤u$$
+$$Basic solution: x_{B} = B^{-1}b - B^{-1}N x_{N}, with x_{N} \text{ at }bounds.$$
+$$\text{Reduced cost: }s_{j} = c_{j} - c_{B}^{T} B^{-1} a_{j} (computed via BTRAN then dot product)$$
+$$\text{Ratio test: }θ* = \min\{(x_{B}[i]-l_{i})/d_{i}, (u_{i}-x_{B}[i])/(-d_{i})} \text{ for }feasible step.$$
 Primal feasible when l ≤ x ≤ u. Optimal when also s_j ≥ 0 for vars at lower bound.
 
 </div>
 
-**Complexity:** O(m^2 n) per iteration typical (dominated by FTRAN/BTRAN).
+**Complexity:** $O(m^{2} n)$ per iteration typical (dominated by FTRAN/BTRAN).
 Iteration count varies widely. Often slower than dual simplex but useful
 when starting from feasible solution or for problems with few constraints.
 

@@ -41,28 +41,142 @@ def escape_markdown(text: str) -> str:
     text = text.replace('|', '\\|')
     return text
 
-def format_math_block(text: str) -> str:
-    """Format a math block for display.
+def is_formula_line(line: str) -> bool:
+    """Detect if a line is primarily a mathematical formula."""
+    line = line.strip()
+    if not line:
+        return False
 
-    Math blocks contain mixed prose and formulas. We preserve them as-is
-    since they're meant to be read as formatted text, not rendered as LaTeX.
-    The HTML wrapper provides visual styling.
+    # Lines starting with math keywords
+    math_starters = ['min', 'max', 'L(', 'Dual:', 'Primal:', 's.t.', 'subject to']
+    for starter in math_starters:
+        if line.lower().startswith(starter.lower()):
+            return True
+
+    # Lines that are mostly equations (have = and math symbols)
+    has_equation = '=' in line and any(c in line for c in ['^', '_', '≤', '≥', '∈', '∑', '∏'])
+
+    # Lines with variable patterns like "x_j = ..." or "γ_i = ..."
+    if re.match(r'^[a-zA-Zα-ωΑ-Ω][_^]', line):
+        return True
+
+    # High density of math symbols suggests formula
+    math_chars = set('^_=≤≥≠∈∉⊆⊇∪∩∑∏∫√±×÷')
+    math_density = sum(1 for c in line if c in math_chars) / max(len(line), 1)
+    if math_density > 0.05 and has_equation:
+        return True
+
+    return False
+
+def ascii_to_latex(text: str) -> str:
+    """Convert ASCII math notation to LaTeX."""
+    # Already has LaTeX delimiters - return as-is
+    if '$$' in text or (text.count('$') >= 2):
+        return text
+
+    # Convert common patterns
+    result = text
+
+    # Transpose: c^T -> c^{T}
+    result = re.sub(r'\^T\b', r'^{T}', result)
+    result = re.sub(r'\^{-T}\b', r'^{-T}', result)
+
+    # Inverse: B^-1 -> B^{-1}
+    result = re.sub(r'\^-1\b', r'^{-1}', result)
+    result = re.sub(r'\^{-1}', r'^{-1}', result)
+
+    # Subscripts: x_j -> x_{j}, but not x_jk (leave multi-char)
+    result = re.sub(r'_([a-zA-Z0-9])\b', r'_{\1}', result)
+
+    # Superscripts with numbers: n^2 -> n^{2}
+    result = re.sub(r'\^(\d+)\b', r'^{\1}', result)
+
+    # Greek letters are already Unicode, no conversion needed
+
+    # Text annotations in formulas with proper spacing
+    result = re.sub(r'\bs\.t\.\s*', r'\\text{ s.t. }', result)
+    result = re.sub(r'\bwhere\s+', r'\\text{ where }', result)
+    result = re.sub(r'\bfor\s+', r'\\text{ for }', result)
+    result = re.sub(r'\bat\s+', r'\\text{ at }', result)
+    result = re.sub(r'\bupper\b', r'\\text{upper}', result)
+    result = re.sub(r'\blower\b', r'\\text{lower}', result)
+    result = re.sub(r'\bdetermines\s+', r'\\text{ determines }', result)
+    result = re.sub(r'\bentering\s+', r'\\text{entering }', result)
+    result = re.sub(r'\bvar\.\s*', r'\\text{var.}', result)
+    result = re.sub(r'\bhas\s+', r'\\text{ has }', result)
+    result = re.sub(r'\bcorrect\s+', r'\\text{correct }', result)
+    result = re.sub(r'\bsign\b', r'\\text{sign}', result)
+
+    # Common math labels
+    result = re.sub(r'^min\s+', r'\\min\\;', result)
+    result = re.sub(r'^max\s+', r'\\max\\;', result)
+    result = re.sub(r'\bmin\{', r'\\min\\{', result)
+    result = re.sub(r'Dual:\s*', r'\\text{Dual: }', result)
+    result = re.sub(r'Reduced cost:\s*', r'\\text{Reduced cost: }', result)
+    result = re.sub(r'Ratio test:\s*', r'\\text{Ratio test: }', result)
+
+    # Parenthetical notes at end: (primal) -> \text{(primal)}
+    result = re.sub(r'\(primal\)', r'\\text{ (primal)}', result)
+    result = re.sub(r'\(dual\)', r'\\text{ (dual)}', result)
+
+    return result
+
+def format_math_block(text: str) -> str:
+    """Format a math block for display with KaTeX rendering.
+
+    Identifies formula lines and wraps them in display math.
+    Prose lines are left as-is for readability.
     """
     if not text:
         return ""
-    # Return as-is - the math div provides styling, content is readable ASCII
-    return text
+
+    # Already has LaTeX delimiters - return as-is
+    if '$$' in text:
+        return text
+
+    lines = text.split('\n')
+    result_lines = []
+
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            result_lines.append('')
+            continue
+
+        if is_formula_line(stripped):
+            # Convert to LaTeX and wrap
+            latex_line = ascii_to_latex(stripped)
+            result_lines.append(f'$${latex_line}$$')
+        else:
+            # Keep as prose, but convert any inline math tokens
+            result_lines.append(stripped)
+
+    return '\n'.join(result_lines)
 
 def format_complexity(text: str) -> str:
-    """Format complexity notation - leave as readable ASCII.
+    """Format complexity notation with proper LaTeX for Big-O.
 
-    Complexity strings like 'O(m^2 n)' are readable without LaTeX rendering.
-    Avoid partial conversion that creates broken delimiters.
+    Wraps O(...) expressions in inline math for proper rendering.
     """
     if not text:
         return ""
-    # Return as-is - ASCII Big-O notation is universally understood
-    return text
+
+    # Already has $ delimiters - return as-is
+    if '$' in text:
+        return text
+
+    def convert_big_o(match):
+        inner = match.group(1)
+        # Convert exponents: n^2 -> n^{2}
+        inner = re.sub(r'\^(\d+)', r'^{\1}', inner)
+        # Convert multiplication implied by space: m^2 n -> m^{2} n
+        inner = re.sub(r'\^(\d+)\s+', r'^{\1} \\cdot ', inner)
+        return f'$O({inner})$'
+
+    # Wrap Big-O notation
+    result = re.sub(r'O\(([^)]+)\)', convert_big_o, text)
+
+    return result
 
 def format_math_for_katex(text: str) -> str:
     """Pass through text without modification.
@@ -173,11 +287,11 @@ header_file = "{file_path}"
 
         if math:
             content += '<div class="math">\n\n'
-            content += f"{format_math_for_katex(math)}\n\n"
+            content += f"{format_math_block(math)}\n\n"
             content += '</div>\n\n'
 
         if complexity:
-            content += f"**Complexity:** {format_math_for_katex(complexity)}\n\n"
+            content += f"**Complexity:** {format_complexity(complexity)}\n\n"
 
         if refs:
             formatted_refs = format_refs(refs)
@@ -193,11 +307,11 @@ header_file = "{file_path}"
 <div class="math">
 
 """
-        content += f"{format_math_for_katex(math)}\n\n"
+        content += f"{format_math_block(math)}\n\n"
         content += '</div>\n\n'
 
         if complexity:
-            content += f"**Complexity:** {format_math_for_katex(complexity)}\n\n"
+            content += f"**Complexity:** {format_complexity(complexity)}\n\n"
 
     # Add see also links
     if see_also:

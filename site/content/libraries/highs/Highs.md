@@ -50,7 +50,7 @@ MIP Solving:
   - Branching: reliability branching with pseudocost initialization
   - Heuristics: RINS, local search, rounding, feasibility pump
 
-**Complexity:** LP: O(m·n·iterations) simplex, O(n³) per IPM iteration
+**Complexity:** LP: $O(m·n·iterations)$ simplex, $O(n³)$ per IPM iteration
   MIP: exponential worst-case, highly structure-dependent
 
 <div class="refs">

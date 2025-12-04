@@ -32,16 +32,16 @@ preserve optimal solution recovery.
 <div class="math">
 
 Presolve operations:
-Singleton row a_j x_j = b: fix x_j = b/a_j, eliminate row
-Doubleton col in a_i x_i + a_j x_j = b with x_j free: x_j = (b - a_i x_i)/a_j
+$$Singleton row a_{j} x_{j} = b: fix x_{j} = b/a_{j}, eliminate row$$
+$$Doubleton col in a_{i} x_{i} + a_{j} x_{j} = b with x_{j} free: x_{j} = (b - a_{i} x_{i})/a_{j}$$
 Forcing: if all coeffs same sign and bound known, may fix variables
 Implied free: if x_j bounded by constraints, can treat as free
-Bound tightening: l_x = max{l_j : a_ij > 0} helps detect fixed vars
+$$Bound tightening: l_{x} = max{l_{j} : a_ij > 0} helps detect fixed vars$$
 
 </div>
 
-**Complexity:** Each pass O(nnz) for most transformations. Total typically
-O(passes × nnz) with 3-10 passes common. Can reduce problem size 50-90%.
+**Complexity:** Each pass $O(nnz)$ for most transformations. Total typically
+$O(passes × nnz)$ with 3-10 passes common. Can reduce problem size 50-90%.
 
 <div class="refs">
 

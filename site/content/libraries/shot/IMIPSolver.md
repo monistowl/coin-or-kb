@@ -52,7 +52,7 @@ MIP Start (Warm Starting) (addMIPStart):
 <div class="math">
 
 Prune node n if: LP(n) >= z* (current best solution)
-  Can be set as hard cutoff or as objective constraint.
+Can be set as hard cutoff or as objective constraint.
 
 </div>
 

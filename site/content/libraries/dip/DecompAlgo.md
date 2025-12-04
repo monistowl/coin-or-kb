@@ -55,16 +55,16 @@ Price-and-Cut Hybrid (generateVars + generateCuts):
 
 <div class="math">
 
-L(u) = u'b + min_x {(c - A'u)'x : x ∈ X}
-  Solve Lagrangian dual: max_u L(u) via subgradient or bundle methods.
-  - Subgradient: u^{t+1} = u^t + step * (b - Ax^t)
-  - L(u) provides lower bound; project x to get upper bound.
+$$L(u) = u'b + min_{x} {(c - A'u)'x : x ∈ X}$$
+Solve Lagrangian dual: max_u L(u) via subgradient or bundle methods.
+$$- Subgradient: u^{t+1} = u^t + step * (b - Ax^t)$$
+- L(u) provides lower bound; project x to get upper bound.
 
 </div>
 
-**Complexity:** Column generation: O(#iterations × pricing_cost)
+**Complexity:** Column generation: $O(#iterations × pricing_cost)$
   Pricing cost depends on subproblem structure (often NP-hard but small)
-  Master LP: O(m × n × simplex_iterations) where n grows with columns
+  Master LP: $O(m × n × simplex_iterations)$ where n grows with columns
 
 <div class="refs">
 

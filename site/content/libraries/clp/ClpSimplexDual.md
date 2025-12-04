@@ -31,15 +31,15 @@ inner performs pivots until optimality or infeasibility detected.
 
 <div class="math">
 
-min c^T x s.t. Ax=b, l≤x≤u (primal)
-Dual: max b^T y s.t. A^T y + s = c, s_j≥0 for x_j at lower, s_j≤0 for x_j at upper
-Reduced cost: s_j = c_j - a_j^T y where y = B^{-T} c_B
+$$\min\;c^{T} x \text{ s.t. }Ax=b, l≤x≤u \text{ (primal)}$$
+$$\text{Dual: }max b^{T} y \text{ s.t. }A^{T} y + s = c, s_{j}≥0 \text{ for }x_{j} \text{ at }\text{lower}, s_{j}≤0 \text{ for }x_{j} \text{ at }\text{upper}$$
+$$\text{Reduced cost: }s_{j} = c_{j} - a_{j}^{T} y \text{ where }y = B^{-T} c_{B}$$
 Dual feasible when reduced costs have correct signs for non-basic variables.
-Ratio test: θ* = min{s_j/r_j : r_j has correct sign} determines entering var.
+$$\text{Ratio test: }θ* = \min\{s_{j}/r_{j} : r_{j} \text{ has }\text{correct }\text{sign}} \text{ determines }\text{entering }\text{var.}$$
 
 </div>
 
-**Complexity:** O(m^2 n) per iteration typical (dominated by BTRAN/FTRAN).
+**Complexity:** $O(m^{2} n)$ per iteration typical (dominated by BTRAN/FTRAN).
 Iteration count highly problem-dependent. Often faster than primal simplex
 for problems with many constraints, especially after adding cuts in B&B.
 

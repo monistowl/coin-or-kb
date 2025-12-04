@@ -35,15 +35,15 @@ Sparse Matrix Operations:
 <div class="math">
 
 Sparse formats:
-  CSC: A stored as (p, i, x) where p[j]..p[j+1]-1 index column j entries
-  Triplet (COO): (row[k], col[k], val[k]) for k = 0..nz-1
+CSC: A stored as (p, i, x) where p[j]..p[j+1]-1 index column j entries
+Triplet (COO): (row[k], col[k], val[k]) for k = 0..nz-1
 
 </div>
 
-**Complexity:** Space: O(nnz + n) for CSC format
-  cs_compress: O(nnz) time for triplet → CSC
-  cs_multiply: O(flops) where flops depends on sparsity pattern
-  cs_chol/cs_lu: O(nnz(L)²/n) typical for sparse factors
+**Complexity:** Space: $O(nnz + n)$ for CSC format
+  cs_compress: $O(nnz)$ time for triplet → CSC
+  cs_multiply: $O(flops)$ where flops depends on sparsity pattern
+  cs_chol/cs_lu: $O(nnz(L)$²/n) typical for sparse factors
 
 <div class="refs">
 

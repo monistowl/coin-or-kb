@@ -49,8 +49,8 @@ MIP Solution Pool (getAllVariableSolutions):
 <div class="math">
 
 For binary x with solution x̂ ∈ {0,1}ⁿ:
-        ∑(x_j : x̂_j=1) - ∑(x_j : x̂_j=0) <= |{j: x̂_j=1}| - 1
-  Prevents cycling when NLP subproblem fails or solution is infeasible.
+$$∑(x_{j} : x̂_{j}=1) - ∑(x_{j} : x̂_{j}=0) <= |{j: x̂_{j}=1}| - 1$$
+Prevents cycling when NLP subproblem fails or solution is infeasible.
 
 </div>
 

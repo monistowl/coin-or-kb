@@ -37,14 +37,14 @@ Linear Solver Selection (SymLinearSolverFactory):
 <div class="math">
 
 [W + Σ  A'] [Δx]   [r_x]
-        [A      0 ] [Δy] = [r_c]
-  where W = ∇²L (Hessian of Lagrangian), Σ = X⁻¹Z (diagonal),
-  A = ∇c(x)' (Jacobian). Solve via sparse symmetric factorization.
+$$[A      0 ] [Δy] = [r_{c}]$$
+where W = ∇²L (Hessian of Lagrangian), Σ = X⁻¹Z (diagonal),
+A = ∇c(x)' (Jacobian). Solve via sparse symmetric factorization.
 
 </div>
 
-**Complexity:** Per iteration: O(n³) for dense, O(nnz^{1.5-2}) for sparse
-  Total: O(iterations × linear_solve_cost) where iterations ~ O(√n) typical
+**Complexity:** Per iteration: $O(n³)$ for dense, $O(nnz^{1.5-2})$ for sparse
+  Total: $O(iterations × linear_solve_cost)$ where iterations ~ $O(√n)$ typical
 
 <div class="refs">
 

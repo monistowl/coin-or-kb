@@ -29,13 +29,13 @@ Lift-and-Project Cutting Planes:
 <div class="math">
 
 For source row i with f_i fractional:
-  Intersection cut: Σ (a_j/f_i if a_j ≥ 0, else a_j/(f_i-1)) x_j ≥ 1
-  L&P strengthens by optimizing choice of disjunction via pivoting.
+Intersection cut: Σ (a_j/f_i if a_j ≥ 0, else a_j/(f_i-1)) x_j ≥ 1
+L&P strengthens by optimizing choice of disjunction via pivoting.
 
 </div>
 
-**Complexity:** O(pivots × m × n) where pivots typically O(m).
-  Each pivot requires tableau row computation O(m) and ratio test O(n).
+**Complexity:** $O(pivots × m × n)$ where pivots typically $O(m)$.
+  Each pivot requires tableau row computation $O(m)$ and ratio test $O(n)$.
   Heuristics limit pivot count to avoid excessive computation.
 
 <div class="refs">
