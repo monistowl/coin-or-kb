@@ -9,6 +9,27 @@
  * Wraps Intel's Pardiso solver from the Math Kernel Library (MKL) for
  * Cholesky factorization of normal equations in interior point methods.
  *
+ * @algorithm Intel MKL Pardiso Sparse Cholesky:
+ *   Highly optimized parallel sparse factorization A = LL':
+ *   1. Reordering phase: Nested dissection or minimum degree ordering
+ *   2. Symbolic factorization: Determine nonzero structure of L
+ *   3. Numerical factorization: Compute L with OpenMP parallelism
+ *      - Supernodal blocking for BLAS-3 efficiency
+ *      - Two-level parallelism: task + loop
+ *   4. Solve: Forward/backward substitution (parallelized)
+ *
+ * @math Supernodal factorization:
+ *   Group consecutive pivots with same sparsity pattern.
+ *   Supernode operations: dense BLAS-3 on column panels.
+ *   L_JI = A_JI · L_II⁻ᵀ where I is supernode, J below.
+ *
+ * @complexity O(nnz(L)·supernode_size) for factorization.
+ *   Parallel efficiency 70-90% with OpenMP on multi-core.
+ *   Out-of-core mode enables problems larger than RAM.
+ *
+ * @ref Schenk & Gärtner (2004). "Solving unsymmetric sparse systems of linear
+ *      equations with PARDISO". Future Generation Computer Systems 20:475-487.
+ *
  * Pardiso provides:
  * - Highly optimized sparse direct solving on Intel CPUs
  * - Parallel factorization using OpenMP

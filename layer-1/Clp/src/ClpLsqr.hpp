@@ -12,14 +12,32 @@
  * - min ||(b) - (A    )x||_2 (damped/regularized)
  *       ||(0)   (damp*I)  ||
  *
+ * @algorithm LSQR (Lanczos Bidiagonalization Least Squares):
+ *   Iterative method building Krylov subspace via bidiagonalization:
+ *   1. Initialize: β₁u₁ = b, α₁v₁ = A'u₁
+ *   2. Bidiagonalization step k:
+ *      β_{k+1}u_{k+1} = Av_k - α_k u_k
+ *      α_{k+1}v_{k+1} = A'u_{k+1} - β_{k+1}v_k
+ *   3. Update QR factorization of bidiagonal matrix B_k
+ *   4. Update solution: x_k = V_k y_k where B_k y_k ≈ β₁e₁
+ *   5. Check convergence: ||r_k|| and ||A'r_k|| tolerances
+ *
+ * @math Bidiagonalization produces:
+ *   A·V_k = U_{k+1}·B_k where B_k is (k+1)×k bidiagonal
+ *   Solution minimizes ||B_k y - β₁e₁|| which equals ||Ax - b||
+ *   Equivalent to CG on normal equations A'Ax = A'b but more stable.
+ *
+ * @complexity O(nnz(A)) per iteration for matrix-vector products.
+ *   Convergence: O(κ(A)) iterations for condition number κ.
+ *   Total: O(nnz(A)·κ(A)) vs O(n³) for direct methods.
+ *
+ * @ref Paige & Saunders (1982). "LSQR: An algorithm for sparse linear equations
+ *      and sparse least squares". ACM TOMS 8(1):43-71.
+ * @ref Saunders (1995). "Solution of sparse rectangular systems using LSQR
+ *      and CRAIG". BIT 35:588-604.
+ *
  * LSQR is a conjugate-gradient-like method based on Lanczos bidiagonalization.
  * Only requires matrix-vector products, not explicit matrix storage.
- *
- * References:
- * - Paige & Saunders, "LSQR: An algorithm for sparse linear equations
- *   and sparse least squares", ACM TOMS 8(1), 1982
- * - Saunders, "Solution of sparse rectangular systems using LSQR and CRAIG",
- *   BIT 35, 1995
  *
  * Used by PDCO for iterative solution of normal equations.
  *

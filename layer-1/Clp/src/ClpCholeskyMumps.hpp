@@ -9,6 +9,28 @@
  * Wraps the MUMPS (MUltifrontal Massively Parallel sparse direct Solver)
  * library for Cholesky factorization of normal equations in interior point.
  *
+ * @algorithm MUMPS Multifrontal Sparse Cholesky:
+ *   Parallel sparse direct factorization A = LL':
+ *   1. Analyze phase: Fill-reducing ordering (AMD/METIS/SCOTCH)
+ *   2. Build elimination tree and allocate frontal matrices
+ *   3. Factor via multifrontal method:
+ *      - Assemble contributions into frontal matrix F_k
+ *      - Factor dense block: F_k = L_k · L_k'
+ *      - Form update matrix (Schur complement) for parent
+ *   4. Solve via forward/backward substitution through tree
+ *
+ * @math Multifrontal factorization:
+ *   Elimination tree defines partial ordering of pivots.
+ *   Frontal matrix F_k contains all fill-in for subtree rooted at k.
+ *   Dense BLAS-3 operations on fronts for efficiency.
+ *
+ * @complexity O(n·f²) where f = max frontal matrix size.
+ *   Parallel: O(n·f²/p) with p MPI processes.
+ *   Memory: O(n·f) for frontal storage.
+ *
+ * @ref Amestoy et al. (2001). "A Fully Asynchronous Multifrontal Solver Using
+ *      Distributed Dynamic Scheduling". SIAM J. Matrix Anal. Appl. 23:15-41.
+ *
  * MUMPS provides:
  * - Multifrontal factorization with supernodes
  * - Distributed memory parallelism (MPI)

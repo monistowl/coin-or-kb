@@ -13,6 +13,26 @@
  * Uses blocked recursive algorithms for cache efficiency and supports
  * parallel execution via ClpCholeskySpawn.
  *
+ * @algorithm Blocked Dense Cholesky Factorization:
+ *   Recursive blocked algorithm for cache-efficient A = LL':
+ *   1. Partition A into blocks: [A₁₁ A₁₂; A₂₁ A₂₂]
+ *   2. Factor diagonal block: L₁₁ = chol(A₁₁)
+ *   3. Solve for off-diagonal: L₂₁ = A₂₁ · L₁₁⁻ᵀ
+ *   4. Update Schur complement: A₂₂' = A₂₂ - L₂₁ · L₂₁'
+ *   5. Recurse on A₂₂'
+ *   Block size chosen for L1/L2 cache efficiency (typically 64-256).
+ *
+ * @math Cholesky factorization of normal equations:
+ *   For LP: factor M = ADA' where D = X²S⁻² (primal-dual scaling)
+ *   Solve: M·Δy = r via L·L'·Δy = r
+ *   Forward: L·z = r, Backward: L'·Δy = z
+ *
+ * @complexity Factorization: O(n³/3) flops, O(n³/(3p)) with p processors.
+ *   Solve: O(n²) per right-hand side.
+ *   Memory: O(n²) for dense storage.
+ *
+ * @ref Golub & Van Loan (2013). "Matrix Computations", 4th ed., Ch. 4.2.
+ *
  * This is used as a fallback from sparse Cholesky when fill-in is excessive,
  * or for problems with inherently dense normal equations.
  *
