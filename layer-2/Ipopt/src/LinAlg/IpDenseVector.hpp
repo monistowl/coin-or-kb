@@ -13,6 +13,21 @@
  * - Heterogeneous: Full array of values (Values() method)
  * - Homogeneous: Single scalar repeated for all elements (Scalar() method)
  *
+ * @algorithm Homogeneous Vector Optimization:
+ *   When all elements have same value (e.g., initialization to 1.0),
+ *   stores only scalar_ instead of n-element array. Transparently
+ *   expands to full storage when heterogeneous access needed.
+ *   Saves O(n) memory and enables O(1) operations on uniform vectors.
+ *
+ * @math BLAS-backed operations for heterogeneous vectors:
+ *   - Axpy: y ← αx + y via DAXPY
+ *   - Dot: x^T·y via DDOT
+ *   - Nrm2: ||x||_2 via DNRM2
+ *   All other operations use optimized element-wise loops.
+ *
+ * @complexity O(n) for most operations on heterogeneous vectors.
+ *   O(1) for operations on homogeneous vectors (scalar multiply, etc.).
+ *
  * Check IsHomogeneous() before accessing values to use appropriate method.
  *
  * Features:

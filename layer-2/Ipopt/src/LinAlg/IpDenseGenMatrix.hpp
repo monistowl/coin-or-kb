@@ -14,6 +14,20 @@
  * - LU factorization with pivoting (for general matrices)
  * - Forward/back substitution solves
  *
+ * @algorithm Dense Matrix Operations via LAPACK:
+ *   - Cholesky: A = L·L^T for SPD matrices (DPOTRF + DPOTRS)
+ *   - LU: A = P·L·U with partial pivoting (DGETRF + DGETRS)
+ *   - Eigendecomp: A = V·Λ·V^T for inertia computation (DSYEV)
+ *   Factorization state tracked to avoid redundant computation.
+ *
+ * @math Column-major storage: A[i,j] at position i + j*nRows.
+ *   Matrix-vector: y ← αA·x + βy via DGEMV.
+ *   Matrix-matrix: C ← αA·B + βC via DGEMM.
+ *   High-rank update: C ← αV₁^T·V₂ + βC for L-BFGS inner products.
+ *
+ * @complexity O(n³) for factorization, O(n²) for solve, O(n²) for matvec.
+ *   Only suitable for small dense subproblems (n ≤ few hundred).
+ *
  * Used in Ipopt for:
  * - Small dense subsystems in limited-memory quasi-Newton
  * - Eigenvalue decomposition for inertia correction

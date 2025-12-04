@@ -11,8 +11,21 @@
  * ScaledMatrix wraps an unscaled matrix M to represent D_r * M * D_c
  * where D_r and D_c are diagonal scaling matrices (stored as vectors).
  *
- * Implements the Decorator pattern - operations transparently apply
- * scaling before/after delegating to the underlying matrix.
+ * @algorithm Scaled Matrix-Vector Multiplication:
+ *   Scaled matrix: M̃ = D_r · M · D_c where D_r, D_c are diagonal.
+ *   MultVector: y ← αM̃·x + βy = α·D_r·(M·(D_c·x)) + βy
+ *   Implementation: (1) z = D_c·x, (2) w = M·z, (3) y = αD_r·w + βy.
+ *   TransMultVector swaps row/column scaling order appropriately.
+ *
+ * @math Scaling for numerical conditioning:
+ *   Row scaling normalizes constraint magnitudes (equilibration).
+ *   Column scaling balances variable contributions.
+ *   Goal: improve condition number κ(M̃) < κ(M).
+ *   Jacobian scaling: J̃ = D_c · J · D_g where D_c=constraint, D_g=gradient.
+ *
+ * @complexity Same as underlying matrix M plus O(n+m) for scaling.
+ *   No additional matrix storage - scaling vectors only.
+ *   Decorator pattern: operations delegate to wrapped matrix.
  *
  * Used in Ipopt for:
  * - NLP scaling (user-provided or automatic gradient-based)

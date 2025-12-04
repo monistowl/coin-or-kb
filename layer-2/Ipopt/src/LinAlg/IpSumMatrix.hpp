@@ -11,8 +11,20 @@
  * SumMatrix represents a matrix as a sum of terms, each with its own
  * scalar factor: M = alpha_0*M_0 + alpha_1*M_1 + ... + alpha_n*M_n
  *
- * Matrix-vector multiply distributes across terms. This avoids forming
- * explicit sums for matrices that are only accessed via matvec.
+ * @algorithm Distributed Matrix-Vector Multiplication:
+ *   M = Σᵢ αᵢMᵢ (weighted sum of k matrices).
+ *   MultVector: y ← α(Σᵢ αᵢMᵢ)x + βy
+ *   Distributes as: y ← βy, then y ← y + α·αᵢ·Mᵢ·x for each term.
+ *   No explicit sum formed - lazy evaluation through matvec.
+ *
+ * @math Linear combination of matrices:
+ *   Each Mᵢ can have different sparsity structure but same dimensions.
+ *   Sum is implicitly represented; (M)ᵢⱼ = Σₖ αₖ(Mₖ)ᵢⱼ never computed.
+ *   Properties (rank, spectrum) not easily derived from components.
+ *
+ * @complexity O(k × matvec cost) where k = number of terms.
+ *   Storage: k matrix pointers + k scalars.
+ *   Avoids O(nnz) memory for explicit sum of sparse matrices.
  *
  * Used in Ipopt for:
  * - Combining multiple contributions to Jacobians or Hessians

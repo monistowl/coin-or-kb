@@ -11,8 +11,21 @@
  * DiagMatrix efficiently represents diagonal matrices by storing only
  * the diagonal elements as a Vector. Matrix-vector multiply is O(n).
  *
+ * @algorithm Diagonal Matrix Representation:
+ *   D = diag(d₁, d₂, ..., dₙ) stored as n-vector.
+ *   Matrix-vector: y ← αD·x + βy computed as y_i = α·d_i·x_i + β·y_i.
+ *   Element-wise multiply avoids explicit matrix storage.
+ *
+ * @math In IPM, diagonal matrices appear in the KKT system:
+ *   Σ_x = Z_L·(X-X_L)⁻¹ + Z_U·(X_U-X)⁻¹  (barrier Hessian contribution)
+ *   where Z_L, Z_U are dual variables and X_L, X_U are bounds.
+ *   These scale as 1/distance-to-bound, becoming large near bounds.
+ *
+ * @complexity O(n) storage, O(n) for matvec, O(n) for row/col norms.
+ *   Far more efficient than storing n² elements for diagonal structure.
+ *
  * Used extensively in Ipopt's KKT system for:
- * - Barrier Hessian contribution: diag(z_L/x - x_L) + diag(z_U/x_U - x)
+ * - Barrier Hessian contribution: diag(z_L/(x - x_L)) + diag(z_U/(x_U - x))
  * - Slack variable Hessians
  * - Scaling matrices
  *

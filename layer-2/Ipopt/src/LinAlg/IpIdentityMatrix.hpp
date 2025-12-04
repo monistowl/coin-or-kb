@@ -12,9 +12,23 @@
  * I is the identity. Stores only the scalar factor - O(1) storage.
  * Matrix-vector multiply is just a scale operation: y = factor*x.
  *
+ * @algorithm Scalar Identity Representation:
+ *   M = σI where σ is a scalar factor.
+ *   MultVector: y ← α(σI)x + βy = ασx + βy (vector scaling).
+ *   No storage of matrix elements - only the scalar factor σ.
+ *
+ * @math Properties of σI:
+ *   - Eigenvalues: all equal to σ (n-fold degeneracy)
+ *   - Determinant: det(σI) = σⁿ
+ *   - Inverse: (σI)⁻¹ = (1/σ)I
+ *   - Commutes with all matrices: (σI)A = A(σI)
+ *
+ * @complexity O(1) storage, O(n) for matvec (single scale operation).
+ *   Most memory-efficient matrix representation possible.
+ *
  * Used in Ipopt for:
- * - Regularization terms (delta_x * I, delta_c * I)
- * - Initial Hessian approximations in quasi-Newton
+ * - Regularization terms (δ_x·I, δ_c·I in augmented system)
+ * - Initial Hessian approximations in quasi-Newton (H₀ = γI)
  * - Trust region constraints
  *
  * @see IpDiagMatrix.hpp for general diagonal matrices

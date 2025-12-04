@@ -12,12 +12,25 @@
  * explicitly forming the transpose. MultVector becomes TransMultVector
  * on the original, and vice versa.
  *
- * Implements the Adapter pattern - provides transposed interface while
- * delegating to the original matrix's operations.
+ * @algorithm Transpose via Operation Swapping:
+ *   Represents M^T by wrapping matrix M.
+ *   MultVector(x): y ← α(M^T)x + βy → calls M.TransMultVector(x).
+ *   TransMultVector(x): y ← α(M^T)^T x = αMx → calls M.MultVector(x).
+ *   ComputeRowAMax ↔ ComputeColAMax swapped similarly.
+ *
+ * @math Transpose properties exploited:
+ *   (M^T)^T = M (involution)
+ *   (M^T)x = M^T x computed as transpose-mult on M
+ *   NRows(M^T) = NCols(M), NCols(M^T) = NRows(M)
+ *
+ * @complexity Zero additional storage beyond pointer to original.
+ *   All operations delegate to original with same complexity.
+ *   Adapter pattern: interface transformation without data copy.
  *
  * Used in Ipopt for:
  * - Accessing Jacobian as J or J^T without storing both
  * - Building KKT system blocks from constraint Jacobian
+ * - Symmetric operations that need both A and A^T
  *
  * @see IpMatrix.hpp for base interface
  */

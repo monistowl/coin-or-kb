@@ -12,13 +12,25 @@
  * - MultVector: Embeds small vector into larger space (zero-fills)
  * - TransMultVector: Projects large vector to smaller space (extracts)
  *
+ * @algorithm Index-Based Expansion/Projection:
+ *   E ∈ {0,1}^{m×n} is a 0-1 matrix with exactly one 1 per column.
+ *   Stored as index array: ExpPos[j] = i means E[i,j] = 1.
+ *   MultVector: y[ExpPos[j]] = x[j] (expand), others zero.
+ *   TransMultVector: y[j] = x[ExpPos[j]] (project/extract).
+ *
+ * @math Mathematical interpretation:
+ *   E·x embeds x ∈ ℝⁿ into y ∈ ℝᵐ (m > n) at specified positions.
+ *   E^T·x extracts components of x ∈ ℝᵐ to y ∈ ℝⁿ.
+ *   E^T·E = I_n (projection property), E·E^T ≠ I_m (not full rank).
+ *
+ * @complexity O(n) storage (index array), O(n) for matvec.
+ *   No explicit m×n matrix stored - perfect for problems with
+ *   many fixed variables or inequality constraints.
+ *
  * Used in Ipopt for:
  * - Mapping slack variables to constraint space
  * - Handling fixed variables (remove from optimization)
  * - Extracting subsets of inequality constraints
- *
- * Stored as index mapping (no explicit matrix storage).
- * Very efficient for large problems with many fixed variables.
  *
  * @see IpMatrix.hpp for base interface
  * @see IpTNLPAdapter.hpp for primary usage
