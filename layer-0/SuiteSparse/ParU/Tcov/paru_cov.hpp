@@ -1,3 +1,15 @@
+/**
+ * @file paru_cov.hpp
+ * @brief Test coverage utilities for ParU sparse LU
+ * Copyright (c) 2022-2025, Mohsen Aznaveh and Timothy A. Davis.
+ * GPL-3.0-or-later license.
+ *
+ * Testing infrastructure: TEST_PASSES (success exit), TEST_ASSERT/TEST_ASSERT_INFO
+ * (abort on failure). paru_backward for residual computation. BRUTAL_ALLOC_TEST
+ * macro: iteratively runs method with increasing malloc failure counts to test
+ * all allocation paths. Enabled by PARU_ALLOC_TESTING define.
+ */
+
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////  paru_cov.hpp ///////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

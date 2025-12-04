@@ -1,3 +1,17 @@
+/**
+ * @file paru_omp.hpp
+ * @brief OpenMP abstraction layer for ParU parallel LU
+ * Copyright (c) 2022-2025, Mohsen Aznaveh and Timothy A. Davis.
+ * GPL-3.0-or-later license.
+ *
+ * Portable OpenMP wrappers: PARU_omp_get_wtime, get_max_threads, get_num_threads,
+ * set_num_threads, get/set_dynamic, get_active_level, get_max_active_levels,
+ * get_thread_num. When _OPENMP undefined, provides stub implementations returning
+ * sequential defaults (1 thread, 0 wtime). Defines PARU_1TASK when no OpenMP.
+ *
+ * @see paru_internal.hpp includes this for parallel factorization
+ */
+
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////  paru_omp.hpp ///////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

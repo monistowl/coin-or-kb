@@ -1,3 +1,20 @@
+/**
+ * @file paru_internal.hpp
+ * @brief Internal data structures and functions for ParU sparse LU
+ * Copyright (c) 2022-2025, Mohsen Aznaveh and Timothy A. Davis.
+ * GPL-3.0-or-later license.
+ *
+ * Core ParU structures: ParU_Symbolic_struct (row-form S, singletons, fronts,
+ * task tree), ParU_Numeric_struct (LU factors, permutations, scaling),
+ * ParU_Control_struct (tolerances, threading). paru_element (contribution
+ * block), paru_work (workspace), paru_tuple (element lists). Internal
+ * functions: front assembly/factorization, heap management, BLAS threading.
+ * Includes UMFPACK SymbolicType/SWType for singleton detection.
+ *
+ * @see ParU.h for public API
+ * @see paru_omp.hpp for OpenMP abstraction
+ */
+
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////  paru_internal.hpp //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
