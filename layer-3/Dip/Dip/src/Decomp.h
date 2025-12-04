@@ -22,6 +22,43 @@
  * Programming). It provides all enums, constants, and conditional solver
  * interface includes.
  *
+ * @algorithm Decomposition Methods for Integer Programming:
+ * Exploit problem structure by partitioning constraints into
+ * "easy" subproblems and "complicating" linking constraints.
+ *
+ * DANTZIG-WOLFE DECOMPOSITION (Price-and-Cut):
+ * Original:  min c'x s.t. A·x ≥ b, D·x ≥ d, x ∈ Z
+ * Master:    min Σₖ (c'sₖ)λₖ s.t. Σₖ (A·sₖ)λₖ ≥ b, Σλₖ = 1
+ * where sₖ are extreme points of P = conv{x: D·x ≥ d, x ∈ Z}
+ *
+ * Pricing subproblem: min (c - π'A)·x over x ∈ P
+ * Column sₖ has negative reduced cost if min_x < π₀
+ *
+ * LAGRANGIAN RELAXATION (Relax-and-Cut):
+ * Relax complicating constraints with multipliers μ:
+ *   L(μ) = min c'x + μ'(b - A·x) s.t. D·x ≥ d
+ *        = μ'b + min (c - A'μ)'x s.t. D·x ≥ d
+ * L(μ) is lower bound; maximize over μ (Lagrangian dual)
+ *
+ * BRANCH-PRICE-CUT:
+ * Combines: B&B tree search + column generation + cut generation
+ * At each node: price columns, add cuts, then branch
+ *
+ * @math Dantzig-Wolfe bound:
+ * z_DW ≥ z_LP (at least as tight as LP relaxation)
+ * Equality when linking constraints have block-angular structure
+ *
+ * Lagrangian bound: z_LR = max_μ L(μ) ≥ z_LP
+ * z_DW = z_LR under mild conditions (no duality gap)
+ *
+ * @complexity
+ * - Pricing: complexity of subproblem (e.g., knapsack = O(nW))
+ * - Master LP: O(iterations × columns × linking_rows)
+ * - Overall: pseudo-polynomial for structured problems
+ *
+ * @ref Vanderbeck & Wolsey (2010). "Reformulation and Decomposition
+ *   of Integer Programs". 50 Years of Integer Programming.
+ *
  * **Algorithm Types (DecompAlgoType):**
  * - CUT: Cutting plane method only
  * - PRICE_AND_CUT: Dantzig-Wolfe column generation with cuts

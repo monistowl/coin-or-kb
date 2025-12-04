@@ -21,6 +21,48 @@
  * - Cut generation (violated inequalities)
  * - Branch-and-bound integration via ALPS
  *
+ * @algorithm Price-and-Cut (Column Generation with Cuts):
+ * Solves reformulated MIP by iterating between pricing and cutting.
+ *
+ * COLUMN GENERATION LOOP:
+ *   while (has_negative_reduced_cost):
+ *     1. Solve restricted master LP → duals π
+ *     2. For each subproblem k:
+ *        Solve: min (c - A'π)·x s.t. x ∈ Pₖ
+ *        If optimal < convexity_dual: add column
+ *     3. If no columns added: optimal for current cut set
+ *
+ * CUT GENERATION:
+ *   After pricing converges:
+ *   1. Compute x = Σₖ sₖλₖ (convex combination)
+ *   2. Search for violated cuts: a'x > b
+ *   3. Add cuts to master, return to pricing
+ *
+ * BRANCHING:
+ *   When both pricing and cutting converge with fractional solution:
+ *   Branch on λ variables or original x variables
+ *
+ * DUAL STABILIZATION (Wentges smoothing):
+ *   Raw duals π_RM from master may oscillate wildly.
+ *   Stabilized: π_stab = α·π_RM + (1-α)·π_prev
+ *   Better subproblem objectives, faster convergence.
+ *
+ * @math Reduced cost for column s from subproblem k:
+ *   r̄ₛ = c'sₖ - π'(A·sₖ) - μₖ
+ *   where μₖ is dual of convexity constraint for block k
+ *
+ * Pricing oracle: min_{x ∈ Pₖ} (c - A'π)'x
+ * Add column if optimal value < μₖ
+ *
+ * @complexity
+ * - Per pricing iteration: k × subproblem_complexity
+ * - Per master solve: O(cols × rows) simplex
+ * - Total: difficult to bound, empirically fast for structured problems
+ *
+ * @ref Barnhart, Johnson, Nemhauser, Savelsbergh & Vance (1998).
+ *   "Branch-and-Price: Column Generation for Solving Huge Integer Programs".
+ *   Operations Research 46(3):316-329.
+ *
  * **Dantzig-Wolfe Reformulation:**
  * Original: min c'x s.t. A''x >= b'', A'x >= b', x integer
  * Reformulated: min sum_s (c's_s)lambda_s s.t. sum_s (A''s_s)lambda_s >= b''
