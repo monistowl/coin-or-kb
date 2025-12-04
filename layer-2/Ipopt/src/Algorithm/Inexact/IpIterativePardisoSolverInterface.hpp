@@ -5,6 +5,37 @@
 // Authors:  Andreas Waechter            IBM    2008-09-18
 //            based on IpPardisoSolverInterface.hpp rev 1119
 
+/**
+ * @file IpIterativePardisoSolverInterface.hpp
+ * @brief Pardiso iterative solver interface for inexact Newton method
+ *
+ * IterativePardisoSolverInterface wraps the Pardiso sparse solver in
+ * iterative (preconditioned Krylov) mode for use with inexact Newton.
+ *
+ * @algorithm Pardiso Iterative Solve:
+ *   MultiSolve(A, b, x):
+ *   1. If new_matrix: SymbolicFactorization(A) → analyze sparsity.
+ *   2. Factorization(A): Compute incomplete LU preconditioner.
+ *      Dropping: factors with |L[i,j]| < drop_tol·||row||₂ dropped.
+ *   3. Solve(b, x): Preconditioned GMRES/BiCGSTAB iteration.
+ *      Iteration controlled by IterativeSolverTerminationTester.
+ *      Callback to TestTermination() after each Krylov iteration.
+ *   4. Return when termination test satisfied (TEST_1/2/3 or MODIFY_HESSIAN).
+ *
+ * @math Preconditioned iterative method:
+ *   Solve Ax = b via x_{k+1} = x_k + M^{-1}·r_k where M ≈ A.
+ *   M = incomplete LU from Pardiso with controlled fill-in.
+ *   Parameters: dropping_factor, dropping_schur, max_row_fill.
+ *   Matching strategy: COMPLETE, COMPLETE2x2, CONSTRAINT for pivoting.
+ *
+ * @complexity Per solve: O(nnz·k) for k Krylov iterations.
+ *   Preconditioner setup: O(nnz·fill) where fill controlled by parameters.
+ *   Much cheaper than direct O(n³) for large sparse systems.
+ *
+ * @see IpPardisoSolverInterface.hpp for direct Pardiso interface
+ * @see IpIterativeSolverTerminationTester.hpp for stopping criteria
+ */
+
 #ifndef __IPITERATIVEPARDISOSOLVERINTERFACE_HPP__
 #define __IPITERATIVEPARDISOSOLVERINTERFACE_HPP__
 

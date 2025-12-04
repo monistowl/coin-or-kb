@@ -4,6 +4,34 @@
 //
 // Authors:  Andreas Waechter           IBM     2008-08-31
 
+/**
+ * @file IpInexactData.hpp
+ * @brief Algorithm-specific data storage for inexact Newton method
+ *
+ * InexactData stores the decomposed step components and algorithm state
+ * required by the inexact Newton / Chen-Goldfarb penalty method.
+ *
+ * @algorithm Inexact Algorithm Data Management:
+ *   AcceptTrialPoint() at end of each iteration:
+ *   1. Transfer trial point to current iterate (base class).
+ *   2. Reset compute_normal flag from next_compute_normal.
+ *   3. Clear normal/tangential step storage for fresh iteration.
+ *   4. Transfer full_step_accepted flag for trust region update.
+ *
+ * @math Data stored:
+ *   Normal step: (normal_x_, normal_s_) = Δx_n toward feasibility.
+ *   Tangential step: (tangential_x_, tangential_s_) = Δx_t toward optimality.
+ *   Penalty parameter: curr_nu_ for ℓ₁ merit function.
+ *   Decomposition flags: compute_normal_, next_compute_normal_.
+ *   Step acceptance: full_step_accepted_ for trust region expansion.
+ *
+ * @complexity O(n) storage for step vectors.
+ *   O(1) for scalar flags and parameters.
+ *
+ * @see IpInexactCq.hpp for computed quantities
+ * @see IpIpoptData.hpp for base algorithm data
+ */
+
 #ifndef __IPINEXACTDATA_HPP__
 #define __IPINEXACTDATA_HPP__
 

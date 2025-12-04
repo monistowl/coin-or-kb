@@ -4,6 +4,35 @@
 //
 // Authors:  Andreas Waechter            IBM    2008-09-19
 
+/**
+ * @file IpInexactPDTerminationTester.hpp
+ * @brief Termination tests for primal-dual iterative solves
+ *
+ * InexactPDTerminationTester implements the termination criteria for
+ * iterative solvers computing the primal-dual (tangential) step.
+ *
+ * @algorithm Primal-Dual Termination Tests:
+ *   TestTermination(sol, resid, iter) evaluates:
+ *   - TEST_1: ||r|| ≤ κ₁·||rhs|| (relative residual tolerance).
+ *   - TEST_2: ||Δy|| ≤ κ₂ + ε₂·||∇φ + A^T·y|| (dual update small).
+ *   - TEST_3: ||r|| ≤ ε₃·||rhs||^exp (superlinear forcing sequence).
+ *   - TCC: ||A·u_t||₂ ≤ ψ·θ·μ^exp (tangential component condition).
+ *   - MODIFY_HESSIAN: Iteration count exceeded without progress.
+ *   Early termination critical for inexact Newton efficiency.
+ *
+ * @math Termination test theory:
+ *   Inexact Newton: solve F'(x)·d = -F(x) with ||r|| ≤ η·||F(x)||.
+ *   Forcing sequence {η_k}: η_k → 0 for superlinear convergence.
+ *   TCC ensures tangential step stays in null(J) approximately.
+ *   Parameters: tcc_psi (ψ), tcc_theta (θ), tt_kappa1/2, tt_eps2/3.
+ *
+ * @complexity O(n) per test (norm computations).
+ *   Precomputes curr_Av_*, curr_tt*_norm for efficiency.
+ *
+ * @see IpIterativeSolverTerminationTester.hpp for base interface
+ * @see IpInexactPDSolver.hpp for the solver using these tests
+ */
+
 #ifndef __IPINEXACTPDTERMINATIONTESTER_HPP__
 #define __IPINEXACTPDTERMINATIONTESTER_HPP__
 

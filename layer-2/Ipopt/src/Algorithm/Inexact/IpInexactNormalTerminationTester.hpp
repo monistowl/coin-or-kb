@@ -4,6 +4,34 @@
 //
 // Authors:  Andreas Waechter            IBM    2008-09-19
 
+/**
+ * @file IpInexactNormalTerminationTester.hpp
+ * @brief Termination tests for normal step iterative solves
+ *
+ * InexactNormalTerminationTester implements termination criteria for
+ * iterative solvers computing the normal (feasibility) step.
+ *
+ * @algorithm Normal Step Termination:
+ *   TestTermination(sol, resid, iter) evaluates:
+ *   1. Iteration limit: iter ≥ inexact_normal_max_iter → terminate.
+ *   2. Residual tolerance: ||c + A·v|| ≤ inexact_normal_tol·||c||.
+ *   3. Dogleg comparison: ||c + A·v|| ≤ c_Avc_norm_cauchy_ (Cauchy).
+ *   Normal step only needs sufficient feasibility reduction.
+ *   Less stringent than primal-dual termination (no optimality).
+ *
+ * @math Normal step objective:
+ *   Minimize ||c(x) + J·Δx||₂² subject to trust region ||Δx|| ≤ ω.
+ *   Termination when linearized infeasibility sufficiently reduced.
+ *   Cauchy point provides fallback: must do at least as well.
+ *   c_Avc_norm_cauchy_ set by dogleg method for comparison.
+ *
+ * @complexity O(n) per test (residual norm computation).
+ *   Typically fewer iterations than PD solve (simpler problem).
+ *
+ * @see IpIterativeSolverTerminationTester.hpp for base interface
+ * @see IpInexactDoglegNormal.hpp for dogleg method using these tests
+ */
+
 #ifndef __IPINEXACTNORMALTERMINATIONTESTER_HPP__
 #define __IPINEXACTNORMALTERMINATIONTESTER_HPP__
 

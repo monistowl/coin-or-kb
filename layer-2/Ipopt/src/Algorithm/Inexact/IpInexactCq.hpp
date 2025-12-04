@@ -5,6 +5,36 @@
 // Authors:  Andreas Waechter           IBM    2008-08-31
 //               derived from IpIpoptCalculatedQuantities.hpp
 
+/**
+ * @file IpInexactCq.hpp
+ * @brief Cached quantities for inexact Newton / Chen-Goldfarb penalty method
+ *
+ * InexactCq provides precomputed and cached quantities specific to the
+ * inexact Newton algorithm, extending IpoptCalculatedQuantities.
+ *
+ * @algorithm Cached Inexact Newton Quantities:
+ *   Each quantity computed on-demand and cached:
+ *   - curr_jac_cdT_times_curr_cdminuss(): J^T·c for gradient of infeasibility.
+ *   - curr_scaling_slacks(): Slack-based scaling factors for conditioning.
+ *   - curr_slack_scaled_d_minus_s(): Scaled inequality residuals.
+ *   - curr_scaled_Ac_norm(): ||J·c||₂ scaled for termination tests.
+ *   - curr_Wu_x/s(): W·u products for tangential step Hessian terms.
+ *   - curr_jac_times_normal_c/d(): J·Δx_n for normal step quality.
+ *   Caching via CachedResults with dependency-based invalidation.
+ *
+ * @math Key quantities:
+ *   Infeasibility gradient: ∇θ = J_c^T·c + J_d^T·(d-s) (gradient of ||c||²).
+ *   Slack scaling: σᵢ = min(slack_scale_max, sᵢ) improves conditioning.
+ *   Scaled residuals: s⁻¹·(d-s) for slack-scaled linear systems.
+ *   W·u: Hessian-tangential product for curvature along step.
+ *
+ * @complexity O(nnz) for each Jacobian-vector product.
+ *   Caching amortizes cost when same quantity needed multiple times.
+ *
+ * @see IpInexactData.hpp for storage of normal/tangential steps
+ * @see IpIpoptCalculatedQuantities.hpp for base cached quantities
+ */
+
 #ifndef __IPINEXACTCQ_HPP__
 #define __IPINEXACTCQ_HPP__
 
