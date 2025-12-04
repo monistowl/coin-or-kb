@@ -4,9 +4,22 @@
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *
- * CbcBranchDefaultDecision: Simple selection algorithm.
- * - Before first solution: Minimize infeasibility count
- * - After first solution: Maximize objective degradation
+ * CbcBranchDefaultDecision: Simple selection algorithm without pseudocosts.
+ *
+ * @algorithm Default Branching Selection (betterBranch):
+ *   Two-phase decision rule:
+ *   Phase 1 (before solution): Select variable minimizing infeasibility count.
+ *     Score = numInfUp + numInfDn (prefer variables that eliminate more)
+ *   Phase 2 (after solution): Select variable maximizing objective degradation.
+ *     Score = changeUp + changeDn (prefer variables that bound objective)
+ *
+ * @math Direction selection within variable:
+ *   Prefer up branch (+1) if numInfUp < numInfDn or changeUp > changeDn.
+ *   Prefer down branch (-1) otherwise.
+ *   Ties broken by direction that constrains solution space more.
+ *
+ * @complexity O(1) per comparison - just evaluates score function.
+ *   No pseudocost tracking or update cost.
  *
  * Returns +1 for up branch preferred, -1 for down branch.
  * Remembers best candidate for comparison chain.
