@@ -8,6 +8,19 @@
  * Exactly one variable at upper bound, all others at lower bound.
  * Creates N children, each fixing one variable to its UB.
  *
+ * @algorithm N-Way Branching for Selection Constraints:
+ *   For constraint Σx_j = 1 where x_j ∈ {0,1} (exactly one selected):
+ *   createCbcBranch() creates N child nodes:
+ *   Child k: x_k = 1 (UB), all other x_j = 0 (LB), j ≠ k.
+ *   applyConsequence() triggers bound propagation when x_k fixed.
+ *   Branch order determined by order_ array in CbcNWayBranchingObject.
+ *
+ * @math N-way vs binary branching tree size:
+ *   Binary: O(2^n) nodes for n variables in selection constraint.
+ *   N-way: O(n) nodes per selection constraint (linear in choices).
+ *   Trade-off: More children per node but shallower tree.
+ *   Optimal for GUB/SOS1 structures where exactly one variable selected.
+ *
  * Differs from binary branching:
  * - Traditional: 2 children (x <= floor vs x >= ceil)
  * - N-way: N children, each selecting a different option

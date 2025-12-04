@@ -7,9 +7,18 @@
  * CbcHeuristicDiveGuided: Uses existing incumbent to guide diving.
  * Requires a feasible solution (canHeuristicRun checks this).
  *
- * selectVariableToBranch() selects fractional variables and
- * rounds toward incumbent solution values. This focuses search
- * in neighborhoods likely to contain good solutions.
+ * @algorithm Guided Dive Variable Selection (Danna, Rothberg, Le Pape):
+ *   selectVariableToBranch() given incumbent x*:
+ *   1. For each fractional integer x_j, compute distance to x*_j.
+ *   2. Select j* with largest discrepancy: |x̄_j - x*_j|.
+ *   3. Round toward incumbent: bestRound = round(x̄_j toward x*_j).
+ *   Requires incumbent: canHeuristicRun() returns false if none.
+ *
+ * @math Incumbent-guided rounding:
+ *   Score_j = |x̄_j - x*_j| for fractional j.
+ *   Intuition: Variables far from incumbent are "wrong"; fix them first.
+ *   Rounds toward x*_j to stay in proven-good neighborhood.
+ *   Similar to RINS but integrated into diving framework.
  *
  * Part of the "Guided Dive" approach from Danna et al.
  *

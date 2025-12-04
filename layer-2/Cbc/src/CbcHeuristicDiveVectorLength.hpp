@@ -7,9 +7,18 @@
  * CbcHeuristicDiveVectorLength: Selects variables by column density.
  * Variables appearing in many constraints are fixed first.
  *
- * selectVariableToBranch() prioritizes variables with longer
- * columns (more nonzeros in constraint matrix). Fixing high-density
- * variables propagates more and reveals feasibility faster.
+ * @algorithm Vector Length Variable Selection:
+ *   selectVariableToBranch() for fractional integer x_j:
+ *   1. Compute column length: len_j = |{i : a_ij ≠ 0}| (nonzeros).
+ *   2. Select j* = argmax{len_j : j ∈ fractional integers}.
+ *   3. Round based on lock counts (from base CbcHeuristicDive).
+ *   Rationale: High-density columns affect many constraints.
+ *
+ * @math Column density propagation:
+ *   Fixing x_j propagates to len_j constraints via bound tightening.
+ *   High len_j → more constraint propagation → faster feasibility detection.
+ *   Similar logic to "most constrained variable" in constraint programming.
+ *   Uses matrix_ from base class for efficient column length lookup.
  *
  * Uses matrix_ from CbcHeuristicDive base class for column lengths.
  *

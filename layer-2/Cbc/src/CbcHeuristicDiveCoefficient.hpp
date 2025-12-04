@@ -7,8 +7,18 @@
  * CbcHeuristicDiveCoefficient: Selects variables based on objective impact.
  * Prioritizes fractional variables with large objective coefficients.
  *
- * selectVariableToBranch() considers objective coefficient magnitude
- * to choose variables whose fixing has greatest objective impact.
+ * @algorithm Objective Coefficient Variable Selection:
+ *   selectVariableToBranch() for fractional integer x_j:
+ *   1. Score each fractional variable: score_j = |c_j| × lock_factor_j.
+ *   2. Select j* = argmax{score_j : j ∈ fractional integers}.
+ *   3. Round to minimize objective (down if c_j > 0 for min).
+ *   Rationale: Large |c_j| = high objective impact = resolve early.
+ *
+ * @math Objective impact heuristic:
+ *   For min c^T x: rounding x_j affects objective by c_j × (round - x̄_j).
+ *   Variables with large |c_j| have most impact on objective.
+ *   Fixing high-impact variables first guides toward good solutions.
+ *
  * Useful when objective-driven rounding is desired.
  *
  * @see CbcHeuristicDive for base class and diving algorithm

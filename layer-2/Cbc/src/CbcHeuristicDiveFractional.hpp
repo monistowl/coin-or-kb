@@ -7,8 +7,17 @@
  * CbcHeuristicDiveFractional: Simplest diving strategy.
  * Selects the variable with value closest to 0.5 (most fractional).
  *
- * selectVariableToBranch() picks variable i maximizing:
- *   min(x[i] - floor(x[i]), ceil(x[i]) - x[i])
+ * @algorithm Most Fractional Variable Selection:
+ *   selectVariableToBranch() for fractional integer x_j:
+ *   1. Compute fractionality: f_j = min(x̄_j - ⌊x̄_j⌋, ⌈x̄_j⌉ - x̄_j).
+ *   2. Select j* = argmax{f_j : j ∈ fractional integers}.
+ *   3. Round toward nearest integer (bestRound from f_j comparison).
+ *   Rationale: Most fractional = hardest to round = fix early.
+ *
+ * @math Fractionality measure:
+ *   f(x) = min(x - floor(x), ceil(x) - x).
+ *   f(x) ∈ [0, 0.5], with f(x) = 0.5 being maximally fractional.
+ *   Breaking hardest decisions first often finds feasibility faster.
  *
  * Simple but effective for breaking ties and finding feasibility.
  *
