@@ -5,6 +5,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file csrc_writer.hpp
+ * @brief Computational graph: csrc_writer
+ */
 
 # include <string>
 # include <cppad/local/graph/cpp_graph_op.hpp>

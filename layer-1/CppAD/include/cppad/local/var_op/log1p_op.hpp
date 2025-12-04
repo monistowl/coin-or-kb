@@ -5,6 +5,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file log1p_op.hpp
+ * @brief Internal implementation: log1p_op
+ */
 
 namespace CppAD { namespace local { namespace var_op {
 

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-23 Bradley M. Bell
 // ---------------------------------------------------------------------------
+/**
+ * @file option.hpp
+ * @brief Value graph: option
+ */
 # include <cppad/local/val_graph/tape.hpp>
 
 namespace CppAD { namespace local { namespace val_graph {

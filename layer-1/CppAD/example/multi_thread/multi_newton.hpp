@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file multi_newton.hpp
+ * @brief Example: multi newton
+ */
 
 bool multi_newton_time(
    double& time_out      ,

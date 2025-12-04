@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file code_gen_fun.hpp
+ * @brief Example: code gen fun
+ */
 // BEGIN C++
 # include <cppad/cg/cppadcg.hpp>
 

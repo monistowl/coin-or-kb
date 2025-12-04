@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file ad_type.hpp
+ * @brief Core AD functionality: ad type
+ */
 
 # include <cppad/local/is_pod.hpp>
 

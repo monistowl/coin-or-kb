@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file is_pod.hpp
+ * @brief Internal implementation: is_pod
+ */
 /*
 {xrst_begin is_pod dev}
 {xrst_spell

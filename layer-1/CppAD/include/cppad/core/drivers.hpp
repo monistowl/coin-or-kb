@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file drivers.hpp
+ * @brief Core AD functionality: drivers
+ */
 
 # include <cppad/core/jacobian.hpp>
 # include <cppad/core/hessian.hpp>

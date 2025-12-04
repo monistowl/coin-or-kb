@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file dependent.hpp
+ * @brief Core AD functionality: dependent
+ */
 /*
 {xrst_begin Dependent}
 

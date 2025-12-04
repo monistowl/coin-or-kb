@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file vector_op.hpp
+ * @brief Value graph: vector_op
+ */
 # include <cppad/local/val_graph/base_op.hpp>
 # include <cppad/local/val_graph/print_op.hpp>
 

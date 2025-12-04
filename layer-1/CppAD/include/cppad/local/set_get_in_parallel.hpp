@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file set_get_in_parallel.hpp
+ * @brief Internal implementation: set_get_in_parallel
+ */
 
 # include <cassert>
 namespace CppAD { namespace local { // BEGIN_CPPAD_LOCAL_NAMESPACE

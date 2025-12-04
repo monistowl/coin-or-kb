@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file for_type.hpp
+ * @brief Example: for type
+ */
 /*
 {xrst_begin atomic_four_lin_ode_for_type.hpp}
 

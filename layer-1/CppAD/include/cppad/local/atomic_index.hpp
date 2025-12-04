@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file atomic_index.hpp
+ * @brief Internal implementation: atomic_index
+ */
 /*!
 {xrst_begin atomic_index dev}
 

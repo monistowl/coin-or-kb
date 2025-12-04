@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file cexp_op.hpp
+ * @brief Value graph: cexp_op
+ */
 # include <cppad/local/val_graph/base_op.hpp>
 
 // define CPPAD_ASSERT_FIRST_CALL_NOT_PARALLEL

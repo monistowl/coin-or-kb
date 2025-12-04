@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file abs_min_linear.hpp
+ * @brief Example: abs min linear
+ */
 /*
 {xrst_begin abs_min_linear}
 {xrst_spell

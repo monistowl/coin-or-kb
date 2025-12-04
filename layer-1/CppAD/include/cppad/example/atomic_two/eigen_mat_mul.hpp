@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file eigen_mat_mul.hpp
+ * @brief Example: eigen mat mul
+ */
 
 /*
 {xrst_begin atomic_two_eigen_mat_mul.hpp app}

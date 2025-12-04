@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file discrete.hpp
+ * @brief Core AD functionality: discrete
+ */
 # include <vector>
 # include <cppad/core/cppad_assert.hpp>
 # include <cppad/local/op_code_dyn.hpp>

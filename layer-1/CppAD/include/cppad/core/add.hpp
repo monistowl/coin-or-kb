@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file add.hpp
+ * @brief Core AD functionality: add
+ */
 
 //  BEGIN CppAD namespace
 namespace CppAD {

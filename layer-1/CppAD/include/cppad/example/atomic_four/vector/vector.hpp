@@ -5,6 +5,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-23 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file vector.hpp
+ * @brief Example: vector
+ */
 /*
 {xrst_begin atomic_four_vector.hpp}
 

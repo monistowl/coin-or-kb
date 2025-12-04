@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file lu_vec_ad.hpp
+ * @brief Example: lu vec ad
+ */
 
 # include <cppad/cppad.hpp>
 

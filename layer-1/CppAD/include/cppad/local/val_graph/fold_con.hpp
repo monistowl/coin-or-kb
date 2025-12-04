@@ -1,5 +1,9 @@
 # ifndef  CPPAD_LOCAL_VAL_GRAPH_FOLD_CON_HPP
 # define  CPPAD_LOCAL_VAL_GRAPH_FOLD_CON_HPP
+/**
+ * @file fold_con.hpp
+ * @brief Value graph: fold_con
+ */
 // SPDX-License-Identifier: EPL-2.0 OR GPL-2.0-or-later
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-25 Bradley M. Bell

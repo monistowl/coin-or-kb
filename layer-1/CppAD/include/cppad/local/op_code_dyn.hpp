@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file op_code_dyn.hpp
+ * @brief Internal implementation: op_code_dyn
+ */
 
 namespace CppAD { namespace local { // BEGIN_CPPAD_LOCAL_NAMESPACE
 /*!

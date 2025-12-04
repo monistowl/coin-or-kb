@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file std_math_11.hpp
+ * @brief Core AD functionality: std math 11
+ */
 /*
 -------------------------------------------------------------------------------
 {xrst_begin acos}

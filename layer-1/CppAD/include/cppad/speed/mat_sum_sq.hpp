@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file mat_sum_sq.hpp
+ * @brief Speed testing: mat_sum_sq
+ */
 /*
 {xrst_begin mat_sum_sq}
 

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-25 Bradley M. Bell
 // ---------------------------------------------------------------------------
+/**
+ * @file op_hash_table.hpp
+ * @brief Value graph: op_hash_table
+ */
 # include <cppad/local/sparse/size_setvec.hpp>
 # include <cppad/local/val_graph/tape.hpp>
 # include <cppad/local/is_pod.hpp>

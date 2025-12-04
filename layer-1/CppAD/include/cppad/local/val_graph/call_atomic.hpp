@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-23 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file call_atomic.hpp
+ * @brief Value graph: call_atomic
+ */
 # include <cppad/local/atomic_index.hpp>
 # include <cppad/core/atomic/two/atomic.hpp>
 # include <cppad/core/atomic/three/atomic.hpp>

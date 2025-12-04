@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file two_var.hpp
+ * @brief Internal implementation: two_var
+ */
 
 // BEGIN_CPPAD_LOCAL_SPARSE_NAMESPACE
 namespace CppAD { namespace local { namespace var_op {

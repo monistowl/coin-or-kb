@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file get_cexp_info.hpp
+ * @brief Tape optimization: get_cexp_info
+ */
 
 # include <cppad/local/optimize/match_op.hpp>
 # include <cppad/local/optimize/cexp_info.hpp>

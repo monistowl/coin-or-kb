@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file put_var_vecad.hpp
+ * @brief Operation recording: put_var_vecad
+ */
 # include <cppad/local/record/recorder.hpp>
 
 namespace CppAD { namespace local { // BEGIN_CPPAD_LOCAL_NAMESPACE

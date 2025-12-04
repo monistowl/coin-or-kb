@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file hessian.hpp
+ * @brief Core AD functionality: hessian
+ */
 
 /*
 {xrst_begin Hessian}

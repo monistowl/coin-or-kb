@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file min_nso_quad.hpp
+ * @brief Example: min nso quad
+ */
 /*
 {xrst_begin min_nso_quad}
 {xrst_spell

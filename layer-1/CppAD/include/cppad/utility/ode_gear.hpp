@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file ode_gear.hpp
+ * @brief CppAD utility: ode gear
+ */
 
 /*
 {xrst_begin OdeGear}

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file cexp_info.hpp
+ * @brief Tape optimization: cexp_info
+ */
 # include <cppad/local/declare_ad.hpp> // defines CompareOp
 # include <cppad/utility/vector.hpp>
 

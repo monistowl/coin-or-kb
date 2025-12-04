@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file subgraph_reverse.hpp
+ * @brief Core AD functionality: subgraph reverse
+ */
 /*
 {xrst_begin subgraph_reverse}
 {xrst_spell

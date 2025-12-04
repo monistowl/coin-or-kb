@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file exp_2.hpp
+ * @brief CppAD: exp 2
+ */
 /*
 {xrst_begin exp_2}
 {xrst_spell

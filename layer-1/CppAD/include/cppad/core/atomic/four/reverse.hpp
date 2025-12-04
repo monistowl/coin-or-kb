@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file reverse.hpp
+ * @brief Core AD functionality: reverse
+ */
 /*
 {xrst_begin atomic_four_reverse}
 {xrst_spell

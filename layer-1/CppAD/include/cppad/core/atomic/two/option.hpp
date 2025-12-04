@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file option.hpp
+ * @brief Core AD functionality: option
+ */
 /*
 {xrst_begin atomic_two_option app}
 {xrst_spell

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file base_std_math.hpp
+ * @brief Core AD functionality: base std math
+ */
 
 /*
 {xrst_begin base_std_math}

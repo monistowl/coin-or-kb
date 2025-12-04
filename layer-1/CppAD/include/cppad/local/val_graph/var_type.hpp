@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file var_type.hpp
+ * @brief Value graph: var_type
+ */
 /*
 -------------------------------------------------------------------------------
 {xrst_begin type_var_op dev}

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file op_code_var.hpp
+ * @brief Internal implementation: op_code_var
+ */
 # include <string>
 # include <sstream>
 # include <iomanip>

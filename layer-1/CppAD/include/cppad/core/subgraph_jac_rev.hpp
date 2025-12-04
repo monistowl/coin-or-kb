@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file subgraph_jac_rev.hpp
+ * @brief Core AD functionality: subgraph jac rev
+ */
 /*
 {xrst_begin subgraph_jac_rev}
 {xrst_spell

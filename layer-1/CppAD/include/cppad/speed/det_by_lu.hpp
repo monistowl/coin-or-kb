@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file det_by_lu.hpp
+ * @brief Speed testing: det_by_lu
+ */
 /*
 {xrst_begin det_by_lu}
 

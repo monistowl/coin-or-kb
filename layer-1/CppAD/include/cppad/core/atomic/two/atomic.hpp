@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file atomic.hpp
+ * @brief Core AD functionality: atomic
+ */
 /*
 {xrst_begin atomic_two app}
 {xrst_spell

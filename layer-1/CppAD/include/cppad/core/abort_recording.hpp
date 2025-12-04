@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file abort_recording.hpp
+ * @brief Core AD functionality: abort recording
+ */
 /*
 {xrst_begin abort_recording}
 

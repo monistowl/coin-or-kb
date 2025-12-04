@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file set.hpp
+ * @brief Example: set
+ */
 /*
 {xrst_begin atomic_four_lin_ode_set.hpp}
 

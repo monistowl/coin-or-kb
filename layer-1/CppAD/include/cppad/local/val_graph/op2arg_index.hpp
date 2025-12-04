@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-23 Bradley M. Bell
 // ---------------------------------------------------------------------------
+/**
+ * @file op2arg_index.hpp
+ * @brief Value graph: op2arg_index
+ */
 # include <cppad/local/val_graph/tape.hpp>
 # include <cppad/local/val_graph/rev_depend.hpp>
 namespace CppAD { namespace local { namespace val_graph {

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file fun_eval.hpp
+ * @brief Core AD functionality: fun eval
+ */
 
 # include <cppad/core/new_dynamic.hpp>
 # include <cppad/core/forward/forward.hpp>

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file create_dll_lib.hpp
+ * @brief CppAD utility: create dll lib
+ */
 /*
 {xrst_begin create_dll_lib}
 {xrst_spell

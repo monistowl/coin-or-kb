@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file record.hpp
+ * @brief Value graph: record
+ */
 # include <cppad/local/val_graph/tape.hpp>
 # include <cppad/local/val_graph/op_enum2class.hpp>
 # include <cppad/core/numeric_limits.hpp>

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file print_op.hpp
+ * @brief Value graph: print_op
+ */
 # include <iostream>
 # include <iomanip>
 /*

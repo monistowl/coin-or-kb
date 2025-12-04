@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file bool_fun.hpp
+ * @brief Core AD functionality: bool fun
+ */
 
 /*
 {xrst_begin bool_fun}

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file sparse_jacobian.hpp
+ * @brief Core AD functionality: sparse jacobian
+ */
 
 // maximum number of sparse directions to compute at the same time
 

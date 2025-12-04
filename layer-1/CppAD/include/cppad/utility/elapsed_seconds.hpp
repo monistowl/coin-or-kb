@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file elapsed_seconds.hpp
+ * @brief CppAD utility: elapsed seconds
+ */
 
 /*
 {xrst_begin elapsed_seconds}

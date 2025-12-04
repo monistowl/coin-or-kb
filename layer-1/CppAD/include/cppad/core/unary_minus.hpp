@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file unary_minus.hpp
+ * @brief Core AD functionality: unary minus
+ */
 
 /*
 {xrst_begin unary_minus}

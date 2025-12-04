@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file old_mat_mul.hpp
+ * @brief CppAD: old mat mul
+ */
 
 /*
 @begin old_mat_mul.hpp@@

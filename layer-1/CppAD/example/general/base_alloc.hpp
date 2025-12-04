@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file base_alloc.hpp
+ * @brief Example: base alloc
+ */
 /*
 {xrst_begin base_alloc.hpp}
 {xrst_spell

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-25 Bradley M. Bell
 // ---------------------------------------------------------------------------
+/**
+ * @file cumulative.hpp
+ * @brief Value graph: cumulative
+ */
 # include <cppad/local/val_graph/tape.hpp>
 namespace CppAD { namespace local { namespace val_graph {
 /*

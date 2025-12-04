@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file rev_hes_sparsity.hpp
+ * @brief Core AD functionality: rev hes sparsity
+ */
 /*
 {xrst_begin rev_hes_sparsity}
 {xrst_spell

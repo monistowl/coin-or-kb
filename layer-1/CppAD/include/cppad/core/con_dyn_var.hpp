@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file con_dyn_var.hpp
+ * @brief Core AD functionality: con dyn var
+ */
 /*
 ---------------------------------------------------------------------------
 

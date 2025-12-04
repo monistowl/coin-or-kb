@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file near_equal.hpp
+ * @brief CppAD utility: near equal
+ */
 
 /*
 {xrst_begin NearEqual}

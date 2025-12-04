@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file link_dll_lib.hpp
+ * @brief CppAD utility: link dll lib
+ */
 /*
 {xrst_begin link_dll_lib}
 {xrst_spell

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file omp_max_thread.hpp
+ * @brief Core AD functionality: omp max thread
+ */
 /*
 {xrst_begin omp_max_thread app}
 {xrst_spell

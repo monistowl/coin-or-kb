@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file runge_45.hpp
+ * @brief CppAD utility: runge 45
+ */
 
 /*
 {xrst_begin Runge45}

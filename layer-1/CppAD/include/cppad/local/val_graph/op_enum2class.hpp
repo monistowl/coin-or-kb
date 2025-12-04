@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-23 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file op_enum2class.hpp
+ * @brief Value graph: op_enum2class
+ */
 // BEGIN_SORT_THIS_LINE_PLUS_1
 # include <cppad/local/val_graph/base_op.hpp>
 # include <cppad/local/val_graph/binary_op.hpp>

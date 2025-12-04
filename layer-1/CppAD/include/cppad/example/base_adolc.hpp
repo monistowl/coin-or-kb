@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file base_adolc.hpp
+ * @brief Example: base adolc
+ */
 /*
 {xrst_begin base_adolc.hpp}
 {xrst_spell

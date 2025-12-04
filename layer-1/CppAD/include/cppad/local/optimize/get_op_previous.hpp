@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file get_op_previous.hpp
+ * @brief Tape optimization: get_op_previous
+ */
 # include <cppad/local/optimize/match_op.hpp>
 # include <cppad/local/optimize/usage.hpp>
 

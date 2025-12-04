@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file atomic_op.hpp
+ * @brief Internal implementation: atomic_op
+ */
 
 // BEGIN_CPPAD_LOCAL_VAR_OP_NAMESPACE
 namespace CppAD { namespace local { namespace var_op {

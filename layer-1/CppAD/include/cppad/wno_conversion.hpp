@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file wno_conversion.hpp
+ * @brief CppAD: wno conversion
+ */
 
 /*
 {xrst_begin wno_conversion}

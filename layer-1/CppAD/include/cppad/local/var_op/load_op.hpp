@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file load_op.hpp
+ * @brief Internal implementation: load_op
+ */
 
 
 namespace CppAD { namespace local { namespace var_op {

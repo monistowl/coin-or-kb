@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file sub_eq.hpp
+ * @brief Core AD functionality: sub eq
+ */
 
 //  BEGIN CppAD namespace
 namespace CppAD {

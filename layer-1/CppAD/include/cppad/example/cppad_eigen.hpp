@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file cppad_eigen.hpp
+ * @brief Example: cppad eigen
+ */
 
 /*
 {xrst_begin cppad_eigen.hpp}

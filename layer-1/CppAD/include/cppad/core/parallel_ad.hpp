@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file parallel_ad.hpp
+ * @brief Core AD functionality: parallel ad
+ */
 /*
 {xrst_begin parallel_ad}
 {xrst_spell

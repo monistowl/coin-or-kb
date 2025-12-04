@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file list_setvec.hpp
+ * @brief Internal implementation: list_setvec
+ */
 # include <cppad/local/define.hpp>
 # include <cppad/local/is_pod.hpp>
 # include <cppad/local/sparse/size_setvec.hpp>

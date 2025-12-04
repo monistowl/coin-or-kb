@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file base_cond_exp.hpp
+ * @brief Core AD functionality: base cond exp
+ */
 
 /*
 {xrst_begin base_cond_exp}

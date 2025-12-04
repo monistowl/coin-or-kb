@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file pod_vector.hpp
+ * @brief Internal implementation: pod_vector
+ */
 
 # if CPPAD_CSTDINT_HAS_8_TO_64
 # include <cstdint>

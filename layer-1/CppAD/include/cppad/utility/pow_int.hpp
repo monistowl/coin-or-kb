@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file pow_int.hpp
+ * @brief CppAD utility: pow int
+ */
 
 /*
 -------------------------------------------------------------------------------

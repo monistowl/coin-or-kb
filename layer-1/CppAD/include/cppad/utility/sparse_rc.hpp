@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file sparse_rc.hpp
+ * @brief CppAD utility: sparse rc
+ */
 
 /*
 {xrst_begin sparse_rc}

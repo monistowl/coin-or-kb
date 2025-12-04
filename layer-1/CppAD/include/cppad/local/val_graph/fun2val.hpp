@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // --------------------------------------------------------------------------
+/**
+ * @file fun2val.hpp
+ * @brief Value graph: fun2val
+ */
 /*
 ------------------------------------------------------------------------------
 {xrst_begin fun2val_graph dev}

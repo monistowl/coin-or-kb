@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file multi_chkpoint_two.hpp
+ * @brief Example: multi chkpoint two
+ */
 
 bool multi_chkpoint_two_time(
    double& time_out, double test_time, size_t num_threads, size_t num_solve

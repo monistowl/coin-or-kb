@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file var_op.hpp
+ * @brief Internal implementation: var_op
+ */
 
 // used by the sparse operators
 # include <cppad/local/sparse/internal.hpp>

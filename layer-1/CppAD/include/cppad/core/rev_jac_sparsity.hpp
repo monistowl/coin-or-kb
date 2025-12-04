@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file rev_jac_sparsity.hpp
+ * @brief Core AD functionality: rev jac sparsity
+ */
 /*
 {xrst_begin rev_jac_sparsity}
 

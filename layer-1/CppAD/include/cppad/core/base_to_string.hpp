@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file base_to_string.hpp
+ * @brief Core AD functionality: base to string
+ */
 /*
 {xrst_begin base_to_string}
 {xrst_spell

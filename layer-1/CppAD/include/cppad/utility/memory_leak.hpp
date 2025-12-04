@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file memory_leak.hpp
+ * @brief CppAD utility: memory leak
+ */
 /*
 {xrst_begin memory_leak app}
 

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file cppad_ipopt_nlp.hpp
+ * @brief Ipopt interface: cppad_ipopt_nlp
+ */
 /*
 {xrst_begin cppad_ipopt_nlp app}
 {xrst_spell

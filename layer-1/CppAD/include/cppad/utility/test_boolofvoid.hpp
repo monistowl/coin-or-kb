@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file test_boolofvoid.hpp
+ * @brief CppAD utility: test boolofvoid
+ */
 /*
 {xrst_begin test_boolofvoid}
 {xrst_spell

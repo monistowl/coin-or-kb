@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file uniform_01.hpp
+ * @brief Speed testing: uniform_01
+ */
 /*
 {xrst_begin uniform_01}
 

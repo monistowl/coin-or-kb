@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file rev_one.hpp
+ * @brief Core AD functionality: rev one
+ */
 
 /*
 {xrst_begin RevOne}

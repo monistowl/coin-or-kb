@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file forward.hpp
+ * @brief Core AD functionality: forward
+ */
 
 // documened after Forward but included here so easy to see
 # include <cppad/core/capacity_order.hpp>

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file track_new_del.hpp
+ * @brief CppAD utility: track new del
+ */
 /*
 {xrst_begin track_new_del app}
 {xrst_spell

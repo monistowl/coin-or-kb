@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ---------------------------------------------------------------------------
+/**
+ * @file compare_op.hpp
+ * @brief Internal implementation: compare_op
+ */
 /*
 {xrst_begin_parent var_compare_op dev}
 {xrst_spell

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file speed_test.hpp
+ * @brief CppAD utility: speed test
+ */
 
 /*
 {xrst_begin speed_test}

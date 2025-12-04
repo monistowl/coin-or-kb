@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file check_for_nan.hpp
+ * @brief Core AD functionality: check for nan
+ */
 /*
 {xrst_begin check_for_nan}
 {xrst_spell

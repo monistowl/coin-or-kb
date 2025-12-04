@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file cpp_graph.hpp
+ * @brief Core AD functionality: cpp graph
+ */
 # include <iomanip>
 # include <string>
 # include <cppad/utility/vector.hpp>

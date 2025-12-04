@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-23 Bradley M. Bell
 // --------------------------------------------------------------------------
+/**
+ * @file val_optimize.hpp
+ * @brief Value graph: val_optimize
+ */
 /*
 ------------------------------------------------------------------------------
 {xrst_begin val_optimize dev}

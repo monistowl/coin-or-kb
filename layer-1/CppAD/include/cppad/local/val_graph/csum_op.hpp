@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file csum_op.hpp
+ * @brief Value graph: csum_op
+ */
 # include <cstdio>
 # include <cppad/local/val_graph/base_op.hpp>
 # include <cppad/local/atomic_index.hpp>

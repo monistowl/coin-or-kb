@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file utility.hpp
+ * @brief CppAD utility: utility
+ */
 // BEGIN_SORT_THIS_LINE_PLUS_1
 # include <cppad/utility/check_numeric_type.hpp>
 # include <cppad/utility/check_simple_vector.hpp>

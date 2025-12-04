@@ -5,6 +5,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file link_sparse_jacobian.hpp
+ * @brief Speed testing: link_sparse_jacobian
+ */
 # include <cppad/utility/vector.hpp>
 // BEGIN PROTOTYPE
 extern bool link_sparse_jacobian(

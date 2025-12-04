@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file reverse.hpp
+ * @brief Example: reverse
+ */
 /*
 {xrst_begin atomic_four_lin_ode_reverse.hpp}
 {xrst_spell

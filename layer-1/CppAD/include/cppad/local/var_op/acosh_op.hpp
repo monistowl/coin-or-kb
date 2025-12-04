@@ -5,6 +5,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file acosh_op.hpp
+ * @brief Internal implementation: acosh_op
+ */
 
 
 namespace CppAD { namespace local { namespace var_op {

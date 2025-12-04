@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file qp_interior.hpp
+ * @brief Example: qp interior
+ */
 /*
 {xrst_begin qp_interior}
 {xrst_spell

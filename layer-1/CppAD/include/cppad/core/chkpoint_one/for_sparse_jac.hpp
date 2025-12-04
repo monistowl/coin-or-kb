@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file for_sparse_jac.hpp
+ * @brief Core AD functionality: for sparse jac
+ */
 
 namespace CppAD { // BEGIN_CPPAD_NAMESPACE
 

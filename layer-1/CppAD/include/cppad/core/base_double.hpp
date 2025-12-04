@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file base_double.hpp
+ * @brief Core AD functionality: base double
+ */
 # include <cppad/configure.hpp>
 # include <limits>
 

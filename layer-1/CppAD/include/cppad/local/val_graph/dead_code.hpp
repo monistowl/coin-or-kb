@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-25 Bradley M. Bell
 // ---------------------------------------------------------------------------
+/**
+ * @file dead_code.hpp
+ * @brief Value graph: dead_code
+ */
 # include <cppad/local/val_graph/tape.hpp>
 # include <cppad/local/val_graph/rev_depend.hpp>
 namespace CppAD { namespace local { namespace val_graph {

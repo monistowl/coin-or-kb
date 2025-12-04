@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file extract_option.hpp
+ * @brief Tape optimization: extract_option
+ */
 
 /*!
 {xrst_begin optimize_extract_option dev}

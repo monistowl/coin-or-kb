@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file comp_op.hpp
+ * @brief Operation recording: comp_op
+ */
 # include <cppad/local/record/recorder.hpp>
 
 namespace CppAD { namespace local { // BEGIN_CPPAD_LOCAL_NAMESPACE

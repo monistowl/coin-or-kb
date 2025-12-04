@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file forward_dir.hpp
+ * @brief Internal sweep implementation: forward_dir
+ */
 
 # include <cppad/local/play/atom_op_info.hpp>
 # include <cppad/local/sweep/call_atomic.hpp>

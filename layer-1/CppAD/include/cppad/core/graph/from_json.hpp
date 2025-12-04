@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file from_json.hpp
+ * @brief Core AD functionality: from json
+ */
 
 # include <cppad/core/ad_fun.hpp>
 # include <cppad/core/ad_type.hpp>

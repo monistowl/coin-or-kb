@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file eigen_plugin.hpp
+ * @brief Example: eigen plugin
+ */
 /*$
 {xrst_begin eigen_plugin.hpp}
 

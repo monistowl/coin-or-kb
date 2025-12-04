@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file call.hpp
+ * @brief Core AD functionality: call
+ */
 /*
 {xrst_begin atomic_four_call}
 

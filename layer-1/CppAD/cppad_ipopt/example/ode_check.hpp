@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file ode_check.hpp
+ * @brief Example: ode check
+ */
 
 extern bool ode_check(const SizeVector& N, const NumberVector& x);
 

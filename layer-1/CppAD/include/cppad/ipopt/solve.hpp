@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file solve.hpp
+ * @brief Ipopt interface: solve
+ */
 /*
 {xrst_begin ipopt_solve}
 {xrst_spell

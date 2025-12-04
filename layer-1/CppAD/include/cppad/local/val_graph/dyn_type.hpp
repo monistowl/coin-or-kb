@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-23 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file dyn_type.hpp
+ * @brief Value graph: dyn_type
+ */
 /*
 -------------------------------------------------------------------------------
 {xrst_begin_parent type_dyn_op dev}

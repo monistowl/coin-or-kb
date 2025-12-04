@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file abs_min_quad.hpp
+ * @brief Example: abs min quad
+ */
 /*
 {xrst_begin abs_min_quad}
 {xrst_spell

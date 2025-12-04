@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file sinh_op.hpp
+ * @brief Internal implementation: sinh_op
+ */
 
 
 namespace CppAD { namespace local { namespace var_op {

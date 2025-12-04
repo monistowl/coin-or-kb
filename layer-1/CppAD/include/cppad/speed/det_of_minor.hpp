@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file det_of_minor.hpp
+ * @brief Speed testing: det_of_minor
+ */
 /*
 {xrst_begin det_of_minor}
 

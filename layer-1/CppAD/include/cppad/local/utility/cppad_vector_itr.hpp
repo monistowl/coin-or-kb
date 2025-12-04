@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file cppad_vector_itr.hpp
+ * @brief CppAD utility: cppad vector itr
+ */
 
 # include <cstddef>
 # include <cppad/core/cppad_assert.hpp>

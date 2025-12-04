@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file rosen_34.hpp
+ * @brief CppAD utility: rosen 34
+ */
 
 /*
 {xrst_begin Rosen34}

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file dyn_recorder.hpp
+ * @brief Operation recording: dyn_recorder
+ */
 # include <cppad/core/hash_code.hpp>
 # include <cppad/local/pod_vector.hpp>
 # include <cppad/core/ad_type.hpp>

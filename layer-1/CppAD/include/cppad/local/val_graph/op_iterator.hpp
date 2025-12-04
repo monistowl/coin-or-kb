@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // --------------------------------------------------------------------------
+/**
+ * @file op_iterator.hpp
+ * @brief Value graph: op_iterator
+ */
 /*
 ------------------------------------------------------------------------------
 {xrst_begin val_op_iterator dev}

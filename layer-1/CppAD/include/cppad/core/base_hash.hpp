@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file base_hash.hpp
+ * @brief Core AD functionality: base hash
+ */
 /*
 {xrst_begin base_hash}
 {xrst_spell

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file romberg_one.hpp
+ * @brief CppAD utility: romberg one
+ */
 /*
 {xrst_begin RombergOne}
 {xrst_spell

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file optimize_run.hpp
+ * @brief Tape optimization: optimize_run
+ */
 
 # include <stack>
 # include <iterator>

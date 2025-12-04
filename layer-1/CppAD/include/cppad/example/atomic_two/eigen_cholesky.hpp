@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file eigen_cholesky.hpp
+ * @brief Example: eigen cholesky
+ */
 
 /*
 {xrst_begin atomic_two_eigen_cholesky.hpp app}

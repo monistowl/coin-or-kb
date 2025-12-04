@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file optimize.hpp
+ * @brief Core AD functionality: optimize
+ */
 
 # define CPPAD_CORE_OPTIMIZE_PRINT_RESULT 0
 

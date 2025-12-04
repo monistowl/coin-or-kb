@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file ode_simple.hpp
+ * @brief Example: ode simple
+ */
 /*
 {xrst_begin ipopt_nlp_ode_simple.hpp dev}
 

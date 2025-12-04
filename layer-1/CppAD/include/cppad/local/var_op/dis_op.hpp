@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file dis_op.hpp
+ * @brief Internal implementation: dis_op
+ */
 /*
 {xrst_begin_parent var_dis_op dev}
 

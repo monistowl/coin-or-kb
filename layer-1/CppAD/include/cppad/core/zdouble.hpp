@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file zdouble.hpp
+ * @brief Core AD functionality: zdouble
+ */
 /*
 {xrst_begin zdouble app}
 zdouble: An AD Base Type With Absolute Zero

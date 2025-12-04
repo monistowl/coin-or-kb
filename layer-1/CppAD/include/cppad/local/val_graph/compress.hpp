@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-25 Bradley M. Bell
 // ---------------------------------------------------------------------------
+/**
+ * @file compress.hpp
+ * @brief Value graph: compress
+ */
 # include <cppad/local/val_graph/tape.hpp>
 # include <cppad/local/val_graph/op_hash_table.hpp>
 # include <cppad/local/val_graph/rev_depend.hpp>

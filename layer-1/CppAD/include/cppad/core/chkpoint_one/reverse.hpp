@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file reverse.hpp
+ * @brief Core AD functionality: reverse
+ */
 
 namespace CppAD { // BEGIN_CPPAD_NAMESPACE
 

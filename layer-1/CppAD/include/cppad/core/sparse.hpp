@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file sparse.hpp
+ * @brief Core AD functionality: sparse
+ */
 
 //
 # include <cppad/core/for_jac_sparsity.hpp>

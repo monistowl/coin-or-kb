@@ -5,6 +5,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file link_sparse_hessian.hpp
+ * @brief Speed testing: link_sparse_hessian
+ */
 # include <cppad/utility/vector.hpp>
 // BEGIN PROTOTYPE
 extern bool link_sparse_hessian(

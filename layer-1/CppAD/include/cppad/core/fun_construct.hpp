@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file fun_construct.hpp
+ * @brief Core AD functionality: fun construct
+ */
 /*
 {xrst_begin fun_construct}
 {xrst_spell

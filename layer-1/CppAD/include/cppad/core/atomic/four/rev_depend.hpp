@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-23 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file rev_depend.hpp
+ * @brief Core AD functionality: rev depend
+ */
 /*
 {xrst_begin atomic_four_rev_depend}
 

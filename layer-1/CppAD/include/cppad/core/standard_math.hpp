@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file standard_math.hpp
+ * @brief Core AD functionality: standard math
+ */
 
 /*
 {xrst_begin unary_standard_math}

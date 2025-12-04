@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file set_hes_sparse_bool.hpp
+ * @brief Core AD functionality: set hes sparse bool
+ */
 
 namespace CppAD { // BEGIN_CPPAD_NAMESPACE
 

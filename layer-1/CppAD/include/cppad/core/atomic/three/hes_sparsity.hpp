@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file hes_sparsity.hpp
+ * @brief Core AD functionality: hes sparsity
+ */
 /*
 {xrst_begin atomic_three_hes_sparsity}
 

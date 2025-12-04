@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file omp_alloc.hpp
+ * @brief CppAD utility: omp alloc
+ */
 # include <cppad/utility/thread_alloc.hpp>
 # ifdef _OPENMP
 # include <omp.h>

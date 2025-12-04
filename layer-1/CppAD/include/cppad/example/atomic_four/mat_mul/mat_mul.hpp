@@ -5,6 +5,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-23 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file mat_mul.hpp
+ * @brief Example: mat mul
+ */
 /*
 {xrst_begin atomic_four_mat_mul.hpp}
 

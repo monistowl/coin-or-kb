@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file independent.hpp
+ * @brief Core AD functionality: independent
+ */
 # include <cppad/local/independent.hpp>
 
 namespace CppAD { // BEGIN_CPPAD_NAMESPACE

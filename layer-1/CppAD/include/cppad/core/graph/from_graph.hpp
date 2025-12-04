@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file from_graph.hpp
+ * @brief Core AD functionality: from graph
+ */
 
 # include <cppad/core/ad_fun.hpp>
 # include <cppad/core/ad_type.hpp>

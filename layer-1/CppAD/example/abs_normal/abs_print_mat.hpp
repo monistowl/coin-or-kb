@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file abs_print_mat.hpp
+ * @brief Example: abs print mat
+ */
 /*
 {xrst_begin abs_print_mat}
 {xrst_spell

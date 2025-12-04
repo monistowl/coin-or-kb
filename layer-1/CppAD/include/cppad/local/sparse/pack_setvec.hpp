@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file pack_setvec.hpp
+ * @brief Internal implementation: pack_setvec
+ */
 # include <cppad/core/cppad_assert.hpp>
 # include <cppad/local/pod_vector.hpp>
 

@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file mat_mul.hpp
+ * @brief CppAD: mat mul
+ */
 
 /*
 @begin atomic_three_mat_mul.hpp@@

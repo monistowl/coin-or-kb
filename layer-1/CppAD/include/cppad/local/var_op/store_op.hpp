@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file store_op.hpp
+ * @brief Internal implementation: store_op
+ */
 
 namespace CppAD { namespace local { namespace var_op {
 /*

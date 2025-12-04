@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file lu_ratio.hpp
+ * @brief Core AD functionality: lu ratio
+ */
 
 /*
 {xrst_begin LuRatio app}

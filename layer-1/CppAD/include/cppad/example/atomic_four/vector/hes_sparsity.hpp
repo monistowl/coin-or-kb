@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file hes_sparsity.hpp
+ * @brief Example: hes sparsity
+ */
 /*
 {xrst_begin atomic_four_vector_hes_sparsity.hpp}
 

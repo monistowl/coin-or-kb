@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-24 Bradley M. Bell
 // -------------------------------------------------------------
+/**
+ * @file val_type.hpp
+ * @brief Value graph: val_type
+ */
 # include <vector>
 # include <cassert>
 # include <cstddef>

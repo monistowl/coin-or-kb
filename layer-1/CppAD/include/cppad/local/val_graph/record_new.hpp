@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2023-25 Bradley M. Bell
 // ---------------------------------------------------------------------------
+/**
+ * @file record_new.hpp
+ * @brief Value graph: record_new
+ */
 # include <cppad/local/val_graph/op_iterator.hpp>
 namespace CppAD { namespace local { namespace val_graph {
 /*

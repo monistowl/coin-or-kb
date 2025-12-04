@@ -5,6 +5,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file json_parser.hpp
+ * @brief Computational graph: json_parser
+ */
 
 # include <string>
 # include <cppad/utility/vector.hpp>

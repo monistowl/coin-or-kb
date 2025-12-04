@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file bender_quad.hpp
+ * @brief Core AD functionality: bender quad
+ */
 /*
 {xrst_begin BenderQuad app}
 {xrst_spell

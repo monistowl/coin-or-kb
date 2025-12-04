@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file for_one.hpp
+ * @brief Core AD functionality: for one
+ */
 
 /*
 {xrst_begin ForOne}

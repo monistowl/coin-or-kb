@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file simplex_method.hpp
+ * @brief Example: simplex method
+ */
 /*
 {xrst_begin simplex_method}
 {xrst_spell

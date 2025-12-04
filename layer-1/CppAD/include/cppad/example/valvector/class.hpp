@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2024 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file class.hpp
+ * @brief Example: class
+ */
 /*
 {xrst_begin_parent valvector}
 {xrst_spell

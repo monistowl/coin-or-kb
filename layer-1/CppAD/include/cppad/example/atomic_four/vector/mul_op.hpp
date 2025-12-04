@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file mul_op.hpp
+ * @brief Example: mul op
+ */
 /*
 {xrst_begin atomic_four_vector_mul_op.hpp}
 

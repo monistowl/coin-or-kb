@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file json_lexer.hpp
+ * @brief Computational graph: json_lexer
+ */
 
 # include <string>
 # include <cppad/core/cppad_assert.hpp>

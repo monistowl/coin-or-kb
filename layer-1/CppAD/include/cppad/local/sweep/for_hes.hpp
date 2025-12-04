@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file for_hes.hpp
+ * @brief Internal sweep implementation: for_hes
+ */
 
 # include <cppad/local/play/atom_op_info.hpp>
 # include <cppad/local/var_op/load_op.hpp>

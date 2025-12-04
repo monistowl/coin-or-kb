@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file adolc_alloc_mat.hpp
+ * @brief Speed testing: adolc_alloc_mat
+ */
 double** adolc_alloc_mat(size_t m, size_t n);
 void adolc_free_mat(double** mat);
 

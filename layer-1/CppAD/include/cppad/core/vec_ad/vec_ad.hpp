@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-25 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file vec_ad.hpp
+ * @brief Core AD functionality: vec ad
+ */
 # include <cppad/local/pod_vector.hpp>
 namespace CppAD { //  BEGIN_CPPAD_NAMESPACE
 /*

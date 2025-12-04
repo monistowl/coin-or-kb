@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file capacity_order.hpp
+ * @brief Core AD functionality: capacity order
+ */
 
 /*
 {xrst_begin capacity_order}

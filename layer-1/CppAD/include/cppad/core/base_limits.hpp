@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-23 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file base_limits.hpp
+ * @brief Core AD functionality: base limits
+ */
 
 /*
 {xrst_begin base_limits}

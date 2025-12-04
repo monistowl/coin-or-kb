@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file sparse_jac_fun.hpp
+ * @brief Speed testing: sparse_jac_fun
+ */
 /*
 {xrst_begin sparse_jac_fun}
 {xrst_spell

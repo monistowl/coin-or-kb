@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-22 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file ad_tape.hpp
+ * @brief Internal implementation: ad_tape
+ */
 # include <cppad/local/define.hpp>
 
 namespace CppAD { namespace local { // BEGIN_CPPAD_LOCAL__NAMESPACE

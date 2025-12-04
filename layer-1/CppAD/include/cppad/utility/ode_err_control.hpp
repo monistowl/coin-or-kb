@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file ode_err_control.hpp
+ * @brief CppAD utility: ode err control
+ */
 
 /*
 {xrst_begin OdeErrControl}

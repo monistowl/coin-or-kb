@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file cpp_graph_itr.hpp
+ * @brief Computational graph: cpp_graph_itr
+ */
 # include <cppad/utility/vector.hpp>
 # include <cppad/local/graph/cpp_graph_op.hpp>
 

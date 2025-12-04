@@ -4,6 +4,10 @@
 // SPDX-FileCopyrightText: Bradley M. Bell <bradbell@seanet.com>
 // SPDX-FileContributor: 2003-24 Bradley M. Bell
 // ----------------------------------------------------------------------------
+/**
+ * @file size_setvec.hpp
+ * @brief Internal implementation: size_setvec
+ */
 # include <cppad/local/pod_vector.hpp>
 /*
 {xrst_begin_parent size_setvec dev}
