@@ -12,16 +12,25 @@
  * barrier parameter mu and fraction-to-boundary parameter tau for
  * each iteration of the interior point method.
  *
- * The barrier parameter controls the tradeoff between optimality
- * and centrality: smaller mu → closer to optimality, larger mu →
- * stays closer to central path.
+ * @algorithm Barrier Parameter Update Strategies:
+ *   Monotone (classical path-following):
+ *     μ_{k+1} = σ·μ_k where σ < 1 (typically σ = 0.1 after good progress).
+ *     Conservative: ensures superlinear convergence near solution.
+ *   Adaptive (LOQO-style / Mehrotra):
+ *     μ = (x^T z / n) · σ where σ from affine direction analysis.
+ *     Can increase μ if needed for centrality, more aggressive reduction.
+ *   Probing: test multiple μ values, select best progress.
  *
- * Implementations:
- * - MonotoneMuUpdate: mu decreases monotonically (classical path-following)
- * - AdaptiveMuUpdate: mu varies non-monotonically (LOQO-style)
- * - QualityFunctionMuOracle: Mehrotra predictor-corrector style
+ * @math Central path and barrier parameter:
+ *   Barrier problem: min f(x) - μ·Σlog(x_i) s.t. c(x) = 0.
+ *   Central path: x(μ)·z(μ) = μe for all μ > 0.
+ *   As μ → 0: x(μ) → x* (optimal), z(μ) → z* (optimal multipliers).
+ *   Complementarity measure: μ_avg = (x^T z + s^T v) / n.
+ *   τ = 1 - μ^θ (θ ≈ 1.5): fraction-to-boundary prevents hitting bounds.
  *
- * Also sets tau = 1 - mu^theta (fraction-to-boundary safeguard).
+ * @complexity O(1) for monotone update.
+ *   O(linear_solve) for predictor-corrector (affine direction needed).
+ *   Adaptive may require multiple KKT solves per iteration.
  *
  * @see IpMonotoneMuUpdate.hpp for monotone strategy
  * @see IpAdaptiveMuUpdate.hpp for adaptive strategy

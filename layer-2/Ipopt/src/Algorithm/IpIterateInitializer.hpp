@@ -12,15 +12,27 @@
  * compute the starting point (x, s, y_c, y_d, z_L, z_U, v_L, v_U)
  * for the interior point algorithm.
  *
- * Initialization tasks:
- * - Project x into bounds (push away from bounds by slack_bound_push)
- * - Initialize slack variables s from d(x)
- * - Compute initial dual estimates (y_c, y_d) via least squares
- * - Initialize bound multipliers (z, v) from complementarity
+ * @algorithm Starting Point Initialization:
+ *   1. Primal variables x:
+ *      - Use user-provided x₀ if available.
+ *      - Project to bounds: x ← max(x_L + κ, min(x, x_U - κ)).
+ *      - Push away from bounds by κ = bound_push·max(1, |x_L|).
+ *   2. Slack variables s: s ← d(x), projected to [d_L + κ, d_U - κ].
+ *   3. Dual variables y_c, y_d:
+ *      - Least squares: min ||∇f - J^T y||² to estimate multipliers.
+ *      - Or use user-provided values if warm starting.
+ *   4. Bound multipliers z_L, z_U, v_L, v_U:
+ *      - From complementarity: z_L = μ/(x - x_L), z_U = μ/(x_U - x).
+ *      - Clamp to [bound_mult_init_val, ∞) for stability.
  *
- * Implementations:
- * - DefaultIterateInitializer: Standard cold-start initialization
- * - WarmStartIterateInitializer: Uses provided starting point
+ * @math Initial complementarity products:
+ *   Want (x - x_L)·z_L ≈ μ, so z_L = μ / (x - x_L).
+ *   Initial μ from average: μ₀ = (x - x_L)^T z_L / n_bounds.
+ *   Slack complementarity: (s - d_L)·v_L ≈ μ similarly.
+ *
+ * @complexity O(n + m) for cold start (vector operations).
+ *   O(m²) for least-squares dual initialization if done explicitly.
+ *   Warm start: O(n + m) using provided values directly.
  *
  * @see IpDefaultIterateInitializer.hpp for standard initialization
  * @see IpWarmStartIterateInitializer.hpp for warm starts

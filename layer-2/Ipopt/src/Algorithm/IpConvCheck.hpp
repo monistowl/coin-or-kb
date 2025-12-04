@@ -12,16 +12,24 @@
  * strategies. Called each iteration to determine if optimization
  * should continue, has converged, or has failed.
  *
- * ConvergenceStatus enum values:
- * - CONTINUE: Keep iterating
- * - CONVERGED: Optimal solution found (tol satisfied)
- * - CONVERGED_TO_ACCEPTABLE_POINT: Acceptable solution (acceptable_tol)
- * - MAXITER_EXCEEDED, CPUTIME_EXCEEDED, WALLTIME_EXCEEDED: Limits hit
- * - DIVERGING: Objective unbounded or iterates diverging
- * - USER_STOP: User callback requested termination
- * - FAILED: Unrecoverable error
+ * @algorithm Convergence Testing for Interior Point Methods:
+ *   Check scaled optimality conditions at each iteration:
+ *   1. Primal feasibility: ||c(x)||∞ / s_c ≤ tol_feas.
+ *   2. Dual feasibility: ||∇f - J^T y - z||∞ / s_d ≤ tol_dual.
+ *   3. Complementarity: ||XZe||∞ / s_c ≤ tol_compl.
+ *   4. Scaling: s_c = max(1, ||c||), s_d = max(1, ||∇f||, ||y||, ||z||).
+ *   Acceptable point: same conditions with looser acceptable_tol.
+ *   After n_acceptable iterations at acceptable level → stop.
  *
- * Also provides CurrentIsAcceptable() for early termination logic.
+ * @math Optimality conditions (KKT) being checked:
+ *   ∇f(x) - J_c^T y_c - J_d^T y_d - z_L + z_U = 0 (stationarity)
+ *   c(x) = 0 (equality constraints)
+ *   d_L ≤ d(x) ≤ d_U (inequality constraints)
+ *   x_L ≤ x ≤ x_U, z_L ≥ 0, z_U ≤ 0 (bounds + sign)
+ *   (x - x_L)·z_L = 0, (x_U - x)·z_U = 0 (complementarity)
+ *
+ * @complexity O(n + m) per convergence check (norms of vectors).
+ *   Called once per iteration, negligible vs. linear solve cost.
  *
  * @see IpOptErrorConvCheck.hpp for the main implementation
  * @see IpRestoConvCheck.hpp for restoration phase convergence

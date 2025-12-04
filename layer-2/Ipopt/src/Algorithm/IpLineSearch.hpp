@@ -12,15 +12,24 @@
  * in Ipopt's globalization framework. Given a search direction
  * (from IpData.delta()), finds an acceptable trial point.
  *
- * Key methods:
- * - FindAcceptableTrialPoint(): Main entry - searches along direction
- * - Reset(): Called when barrier parameter changes
- * - ActivateFallbackMechanism(): Triggers restoration phase
- * - SetRigorousLineSearch(): Controls acceptance strictness
+ * @algorithm Backtracking Line Search with Globalization:
+ *   Given direction Δw from Newton step:
+ *   1. Initialize α = 1 (full Newton step).
+ *   2. Compute trial point: w_trial = w + α·Δw.
+ *   3. Apply fraction-to-boundary: α ← min(α, τ·α_max) to stay positive.
+ *   4. Check acceptance criterion (filter or merit function).
+ *   5. If rejected: α ← ρ·α (backtrack, ρ ≈ 0.5) and goto 3.
+ *   6. If α < α_min: activate fallback (restoration phase).
  *
- * Implementations:
- * - BacktrackingLineSearch: Filter or merit function with backtracking
- * - FilterLineSearch: Filter-based acceptance (Wächter-Biegler)
+ * @math Filter-based acceptance (Wächter-Biegler):
+ *   Accept w_trial if it improves either objective φ(w) OR constraint
+ *   violation θ(w) = ||c(x)||, and is not dominated by filter entries.
+ *   Filter F = {(θ_i, φ_i)}: reject if θ(w_trial) ≥ θ_i AND φ(w_trial) ≥ φ_i.
+ *   Switching condition: use Armijo on φ when θ is small enough.
+ *
+ * @complexity O(n_backtrack · eval_cost) where n_backtrack typically O(1)-O(10).
+ *   Each trial requires function/constraint evaluation.
+ *   Filter operations O(|F|) comparisons, |F| typically small.
  *
  * @see IpBacktrackingLineSearch.hpp for the main implementation
  * @see IpFilterLSAcceptor.hpp for filter-based acceptance

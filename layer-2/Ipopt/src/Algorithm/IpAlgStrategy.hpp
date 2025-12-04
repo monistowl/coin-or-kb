@@ -14,10 +14,23 @@
  * - SearchDirectionCalculator, HessianUpdater
  * - PDSystemSolver, AugSystemSolver
  *
- * Provides:
- * - Initialize() template method with common setup
- * - Access to IpoptNLP, IpoptData, IpoptCalculatedQuantities
- * - Consistent initialization pattern across all strategies
+ * @algorithm Strategy Pattern with Template Method:
+ *   Initialize() = template method with invariant structure:
+ *     1. Store references to shared objects (Journalist, NLP, Data, CQ).
+ *     2. Call InitializeImpl() (subclass-specific hook).
+ *     3. Return success/failure status.
+ *   Ensures consistent initialization across all algorithm components.
+ *   ReducedInitialize() variant for components not requiring full IPM context.
+ *
+ * @math Dependencies injected at runtime:
+ *   - IpoptNLP: problem definition (f, c, d, bounds, Hessian).
+ *   - IpoptData: iterate storage (x, s, y, z) and algorithm state.
+ *   - IpoptCalculatedQuantities: cached derived values (∇f, J, residuals).
+ *   Separation allows testing and alternative problem formulations.
+ *
+ * @complexity O(1) for Initialize() overhead (pointer copies).
+ *   Actual work delegated to InitializeImpl() in each strategy.
+ *   Builder (IpAlgBuilder) composes O(10-20) strategy objects per run.
  *
  * @see IpAlgBuilder.hpp for strategy composition
  * @see IpIpoptAlg.hpp for strategy usage

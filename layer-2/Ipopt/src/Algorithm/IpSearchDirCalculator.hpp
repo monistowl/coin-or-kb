@@ -12,13 +12,22 @@
  * the search direction at each IPM iteration. The computed direction
  * is stored in IpData().delta() (an IteratesVector).
  *
- * Implementations:
- * - PDSearchDirCalculator: Standard primal-dual direction via PDSystemSolver
- * - SensitivityStepCalculator: For parametric sensitivity analysis
+ * @algorithm Newton Search Direction Computation:
+ *   Given current iterate w = (x, s, y_c, y_d, z_L, z_U, v_L, v_U):
+ *   1. Form KKT system with current W (Hessian), J_c, J_d (Jacobians).
+ *   2. Compute RHS from gradient, constraint residuals, complementarity.
+ *   3. Solve KKT system: K·Δw = -r (via PDSystemSolver).
+ *   4. Store Δw in IpData().delta() for line search.
+ *   For predictor-corrector: compute affine direction (μ=0), then corrected.
  *
- * The direction computation involves solving the KKT system with the
- * current Hessian and Jacobians, applying any regularization needed
- * for inertia correction.
+ * @math Newton direction satisfies linearized KKT conditions:
+ *   ∇²L·Δx + A^T·Δy + Δz = -∇L (stationarity)
+ *   A·Δx = -c(x) (feasibility)
+ *   X·Δz + Z·Δx = σμe - XZe (complementarity)
+ *   where σ ∈ (0,1) is centering parameter, μ is barrier parameter.
+ *
+ * @complexity O(n²) to O(n³) per iteration depending on KKT structure.
+ *   Dominated by linear system solve (see PDSystemSolver, AugSystemSolver).
  *
  * @see IpPDSearchDirCalc.hpp for the standard implementation
  * @see IpPDSystemSolver.hpp for the linear system solver

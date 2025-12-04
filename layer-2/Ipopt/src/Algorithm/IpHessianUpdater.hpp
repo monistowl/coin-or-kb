@@ -12,16 +12,22 @@
  * the Hessian of the Lagrangian (or an approximation) to the algorithm.
  * The result is stored in IpData.W().
  *
- * Options:
- * - Exact Hessian: Uses second derivatives from NLP (hessian_approximation=exact)
- * - Limited-memory BFGS: L-BFGS approximation (hessian_approximation=limited-memory)
+ * @algorithm Hessian Approximation Strategies:
+ *   Exact: W = ∇²_xx L(x, y) evaluated via NLP second derivatives.
+ *   L-BFGS: W ≈ D + Σ (yᵢyᵢᵀ/yᵢᵀsᵢ - Bsᵢsᵢᵀ/sᵢᵀBsᵢ) (secant updates).
+ *   L-SR1: W ≈ D + Σ ((y-Bs)(y-Bs)ᵀ/(y-Bs)ᵀs) (symmetric rank-1).
+ *   Store m recent {sₖ, yₖ} pairs where sₖ = xₖ₊₁ - xₖ, yₖ = ∇Lₖ₊₁ - ∇Lₖ.
+ *   Limited memory: O(m·n) storage vs O(n²) for full Hessian.
  *
- * For quasi-Newton methods, the updater maintains history of
- * {s_k, y_k} pairs and computes B_k or H_k approximations.
+ * @math Hessian of Lagrangian:
+ *   L(x,y) = f(x) - y_c^T c(x) - y_d^T d(x) (Lagrangian function).
+ *   W = ∇²f(x) - Σᵢ yc_i·∇²c_i(x) - Σⱼ yd_j·∇²d_j(x).
+ *   Secant equation: B_{k+1}·s_k = y_k (quasi-Newton condition).
+ *   Positive definiteness: BFGS maintains if y^T s > 0; damped BFGS if not.
  *
- * Implementations:
- * - ExactHessianUpdater: Evaluates exact Hessian from NLP
- * - LimMemQuasiNewtonUpdater: L-BFGS or L-SR1 approximation
+ * @complexity Exact: O(eval_hess) user-provided, often O(nnz_H).
+ *   L-BFGS/L-SR1: O(m·n) per update, O(m·n) per matvec via two-loop.
+ *   Trade-off: exact more accurate, L-BFGS cheaper when n >> m pairs.
  *
  * @see IpExactHessianUpdater.hpp for exact Hessian
  * @see IpLimMemQuasiNewtonUpdater.hpp for quasi-Newton
