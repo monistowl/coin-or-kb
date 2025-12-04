@@ -7,10 +7,19 @@
  * CbcHeuristicDivePseudoCost: Most informed diving strategy.
  * Uses pseudocosts to estimate objective change from fixing.
  *
- * selectVariableToBranch() picks variables based on:
- *   score = (1-f)*down_pseudocost + f*up_pseudocost
- * where f is the fractional part. Chooses direction with
- * smaller estimated degradation.
+ * @algorithm Pseudocost-Guided Variable Selection:
+ *   selectVariableToBranch() for fractional integer x_j:
+ *   1. Compute f_j = x̄_j - ⌊x̄_j⌋ (fractional part).
+ *   2. Down estimate: D_j = f_j × ψ_j^- (from downArray_).
+ *   3. Up estimate: U_j = (1-f_j) × ψ_j^+ (from upArray_).
+ *   4. Score_j = product or weighted combination of D_j, U_j.
+ *   5. Select j* = argmax{Score_j}; round toward smaller estimate.
+ *
+ * @math Pseudocost scoring for diving:
+ *   ψ_j^- ≈ (Δobj/Δx̄_j) for down branches on x_j.
+ *   ψ_j^+ ≈ (Δobj/Δx̄_j) for up branches on x_j.
+ *   Score typically: (1-f)·ψ^- + f·ψ^+ or product-based.
+ *   fixOtherVariables() exploits reduced costs: fix if |r̄_j| > gap.
  *
  * initializeData() prepares pseudocost arrays (downArray_, upArray_).
  * fixOtherVariables() uses reduced costs for additional fixing.

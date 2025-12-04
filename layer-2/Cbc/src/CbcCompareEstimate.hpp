@@ -7,6 +7,19 @@
  * CbcCompareEstimate: Node selection using solution estimates.
  * Used during rounding phases where estimated objective matters.
  *
+ * @algorithm Estimate-Based Node Selection:
+ *   test(x, y) comparison for heap ordering:
+ *   Returns true if estimate(y) < estimate(x).
+ *   estimate = guessedObjectiveValue() from pseudocost extrapolation.
+ *   Effect: Explores nodes most likely to yield good solutions first.
+ *   Used during diving/rounding phases when LP bound is less informative.
+ *
+ * @math Pseudocost-based estimation:
+ *   estimate(node) = LP_bound + Σ ψ_j × distance_to_integer(x_j).
+ *   Approximates objective of integer-feasible descendant.
+ *   More predictive than LP bound when many variables fractional.
+ *   Particularly useful early in search before strong bounds available.
+ *
  * test(x,y) compares node estimates (guessedObjectiveValue).
  * Estimates typically come from pseudocost extrapolation or
  * other predictive methods.

@@ -8,6 +8,20 @@
  * Performs simplex pivots to explore nearby basic solutions,
  * then fixes integer variables at their current values.
  *
+ * @algorithm Pivot and Fix Heuristic:
+ *   solution() from LP optimal basis B:
+ *   1. Identify basic integer variables with fractional values.
+ *   2. For each: attempt simplex pivot to move to adjacent BFS.
+ *   3. After pivots, fix integers at current (hopefully integral) values.
+ *   4. Re-optimize continuous variables and check feasibility.
+ *   Exploits LP degeneracy for alternate basic solutions.
+ *
+ * @math Simplex neighborhood exploration:
+ *   Adjacent basic feasible solutions differ by one exchange.
+ *   Pivot: x_B[i] leaves basis, x_N[j] enters (maintaining feasibility).
+ *   May reach integer-feasible BFS via sequence of degenerate pivots.
+ *   Effective when LP has many alternate optima.
+ *
  * Uses the LP optimal basis and pivots to find integer-feasible
  * solutions nearby in the simplex sense.
  *

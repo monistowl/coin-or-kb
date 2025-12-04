@@ -8,6 +8,20 @@
  * Rounds fractional variables randomly with probabilities based on
  * their fractional values (e.g., x=0.7 rounds up with prob 0.7).
  *
+ * @algorithm Randomized Rounding Heuristic:
+ *   solution() from LP solution x̄:
+ *   1. For each fractional integer x_j with f = x̄_j - ⌊x̄_j⌋:
+ *      - Round up with probability f (x̂_j = ⌈x̄_j⌉).
+ *      - Round down with probability 1-f (x̂_j = ⌊x̄_j⌋).
+ *   2. Check feasibility of rounded solution x̂.
+ *   3. If feasible and improving, accept; else retry with new seed.
+ *
+ * @math Expected value preservation:
+ *   E[x̂_j] = f·⌈x̄_j⌉ + (1-f)·⌊x̄_j⌋ = x̄_j.
+ *   Rounded solution is unbiased estimator of LP solution.
+ *   For packing/covering: Pr[constraint satisfied] analyzable.
+ *   Often O(log m) factor from optimal in expectation.
+ *
  * Multiple trials with different random seeds can find diverse solutions.
  * Simple but can be surprisingly effective for certain problem structures.
  *

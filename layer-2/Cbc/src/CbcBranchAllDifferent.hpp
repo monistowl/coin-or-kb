@@ -9,6 +9,21 @@
  * same value, creates branching disjunction:
  *   x_i <= x_j - 1  OR  x_i >= x_j + 1
  *
+ * @algorithm All-Different Branching:
+ *   infeasibility() detects violations:
+ *   1. For each pair (i,j) in set: check if x̄_i ≈ x̄_j (same value).
+ *   2. If collision found, return infeasibility > 0.
+ *   createCbcBranch() creates disjunction:
+ *   - Branch 1: x_i ≤ x_j - 1 (i strictly less than j).
+ *   - Branch 2: x_i ≥ x_j + 1 (i strictly greater than j).
+ *   Iterates until all pairs have distinct values.
+ *
+ * @math All-different constraint in MIP:
+ *   CP: alldifferent(x_1, ..., x_n) enforced by arc consistency.
+ *   MIP: No direct encoding; branch on violations.
+ *   O(n²) pair comparisons per infeasibility check.
+ *   Less efficient than CP propagation but integrates with MIP solver.
+ *
  * Common in constraint programming problems:
  * - Scheduling: No two tasks at same time
  * - Assignment: No two agents assigned same job

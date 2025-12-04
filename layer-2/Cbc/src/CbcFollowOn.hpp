@@ -8,6 +8,23 @@
  * similar set-partitioning problems. When crew can fly in on flight A
  * and out on flight B (or other flights), branch on the connection.
  *
+ * @algorithm Follow-On Branching for Set Partitioning:
+ *   For crew scheduling: constraint rows = flights, columns = pairings.
+ *   gutsOfFollowOn() finds connection (row_A, row_B) where:
+ *   - Some pairings cover both flights A and B.
+ *   - Other pairings cover A but not B (or vice versa).
+ *   createCbcBranch() creates disjunction:
+ *   - Down: Fix all pairings with A->B connection to 0.
+ *   - Up: Fix all pairings WITHOUT A->B connection to 0.
+ *   Effect: Forces decision on whether crew connects A to B.
+ *
+ * @math Set partitioning connection branching:
+ *   Model: min c^T x s.t. Ax = 1, x ∈ {0,1}^n (each row covered exactly once).
+ *   Connection (i,j): columns k where a_ik = a_jk = 1.
+ *   Branch separates columns by connection presence.
+ *   Reduces symmetry in set partitioning structure.
+ *   High priority: apply before standard variable branching.
+ *
  * Branch disjunction:
  * - Down: Fix all pairings using connection A->B to 0
  * - Up: Fix all pairings NOT using A->B to 0
