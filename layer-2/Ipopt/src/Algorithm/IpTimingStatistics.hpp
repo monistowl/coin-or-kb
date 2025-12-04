@@ -29,6 +29,21 @@
  *
  * Each TimedTask tracks CPU time, system time, and wall-clock time.
  *
+ * @algorithm Performance Profiling Infrastructure:
+ * Hierarchical timing collection for identifying bottlenecks:
+ * - OverallAlgorithm: total solve time
+ * - ComputeSearchDirection → PDSystemSolverTotal → LinearSystemFactorization
+ * - NLP evaluations: f, grad_f, c, jac_c, d, jac_d, h
+ *
+ * Typical breakdown for large NLPs:
+ * - 60-80%: LinearSystemFactorization (sparse direct solve)
+ * - 10-20%: NLP evaluations (function/Jacobian/Hessian)
+ * - 5-10%: ComputeAcceptableTrialPoint (line search)
+ * - Remainder: bookkeeping, output, convergence checks
+ *
+ * @complexity O(1) overhead per task start/stop (clock queries).
+ * PrintAllTimingStatistics: O(# tasks) to format output.
+ *
  * @see IpTimedTask.hpp for individual task timing
  * @see IpIpoptAlg.hpp for timing during main loop
  */

@@ -28,6 +28,27 @@
  *
  * The input arrays may be modified internally (working space).
  *
+ * @algorithm Linear Dependency Detection (Rank Deficiency):
+ * Identifies redundant constraint rows to handle degenerate NLPs:
+ * 1. Receive constraint Jacobian J ∈ ℝ^{m×n} in triplet format
+ * 2. Apply numerical rank test (LU or SVD-based)
+ * 3. Return indices of linearly dependent rows
+ * 4. IPM removes these rows from active KKT system
+ *
+ * @math Problem degeneracy: rank(J_c) < m_c creates singular KKT system.
+ * For equality constraints c(x) = 0 with Jacobian J_c = ∇c(x)ᵀ:
+ * - Full rank: m_c independent constraints
+ * - Rank deficient: some rows J_i = ∑_{j≠i} α_j·J_j
+ *
+ * Remove row i if |pivot_i| < tol during factorization, indicating
+ * row i is numerically dependent on rows 1,...,i-1.
+ *
+ * @complexity O(m·n·nnz/n) for sparse LU ≈ O(nnz·m/n).
+ * MA28: O(nnz + fill-in) per factorization attempt.
+ *
+ * @ref Nocedal & Wright (2006). Section 18.4: Degenerate problems.
+ * @ref Duff et al. (1989). "Direct Methods for Sparse Matrices".
+ *
  * @see IpTSymDependencyDetector.hpp for symmetric solver-based detection
  * @see IpMa28TDependencyDetector.hpp for MA28-based detection
  */

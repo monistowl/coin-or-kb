@@ -28,6 +28,29 @@
  * - Mc19TSymScalingMethod: HSL MC19 equilibration
  * - SlackBasedTSymScalingMethod: Simple slack-based scaling
  *
+ * @algorithm Symmetric Matrix Scaling (Row/Column Equilibration):
+ * Computes diagonal D to improve κ(DAD) for better solver accuracy:
+ * 1. Analyze matrix structure in triplet (i, j, a_ij) format
+ * 2. Compute scaling factors d_i (implementation-specific)
+ * 3. Apply: Ā = DAD, x̄ = D⁻¹x, b̄ = Db
+ * Goal: Reduce condition number and improve pivot selection.
+ *
+ * @math Symmetric scaling with D = diag(d₁,...,dₙ):
+ * $$\bar{A}_{ij} = d_i \cdot A_{ij} \cdot d_j$$
+ *
+ * Equilibration goal: make row/column norms approximately equal
+ * $$\|(\bar{A})_i\| \approx \|(\bar{A})_j\| \approx 1$$
+ *
+ * Condition number improvement: κ(DAD) << κ(A) typically.
+ *
+ * @complexity O(nnz) for computing scaling factors.
+ * Single pass through nonzero entries required.
+ *
+ * @ref Duff & Koster (2001). "On algorithms for permuting large entries
+ *   to the diagonal of a sparse matrix". SIAM J. Matrix Anal. Appl. 22(4).
+ * @ref Curtis & Reid (1972). "On the automatic scaling of matrices for
+ *   Gaussian elimination". IMA J. Appl. Math. 10(1):118-124.
+ *
  * @see IpMc19TSymScalingMethod.hpp for MC19 implementation
  * @see IpTSymLinearSolver.hpp for usage
  */

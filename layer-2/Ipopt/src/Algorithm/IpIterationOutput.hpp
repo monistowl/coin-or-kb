@@ -23,6 +23,23 @@
  *
  * Output controlled by print_level option (0-12).
  *
+ * @algorithm Iteration Output Strategy (Observer Pattern):
+ * Strategy interface for algorithm progress reporting:
+ * - WriteOutput() called once per iteration after accept trial point
+ * - Displays convergence metrics: objective, primal/dual infeasibility
+ * - Can adapt output format for different problem phases (normal vs restoration)
+ *
+ * Standard output columns:
+ * - iter: iteration counter
+ * - objective: current f(x) value
+ * - inf_pr: primal constraint violation ‖c(x)‖
+ * - inf_du: dual infeasibility ‖∇L(x,λ,z)‖
+ * - lg(mu): log₁₀ of barrier parameter
+ * - ‖d‖: search direction norm
+ * - lg(rg): log₁₀ of regularization δ_w
+ * - alpha_du, alpha_pr: step sizes for dual and primal
+ * - ls: line search iteration count
+ *
  * @see IpOrigIterationOutput.hpp for standard implementation
  * @see IpRestoIterationOutput.hpp for restoration phase
  * @see IpJournalist.hpp for output channel management

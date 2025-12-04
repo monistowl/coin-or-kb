@@ -26,6 +26,32 @@
  *
  * Used by GenAugSystemSolver to adapt this interface to AugSystemSolver.
  *
+ * @algorithm Generic KKT System Solver Interface:
+ * Defines matrix-free/iterative solver interface for the primal-dual KKT system.
+ * Unlike sparse direct solvers, implementations can use:
+ * - Krylov subspace methods (CG, MINRES, GMRES)
+ * - Matrix-free products via Jacobian/Hessian callbacks
+ * - Preconditioners built from block structure
+ *
+ * @math The regularized symmetric indefinite KKT system:
+ * $$\begin{bmatrix} W + D_x + \delta_x I & 0 & J_c^T & J_d^T \\
+ *                   0 & D_s + \delta_s I & 0 & -I \\
+ *                   J_c & 0 & D_c - \delta_c I & 0 \\
+ *                   J_d & -I & 0 & D_d - \delta_d I \end{bmatrix}
+ * \begin{pmatrix} \Delta x \\ \Delta s \\ \Delta y_c \\ \Delta y_d \end{pmatrix}
+ * = \begin{pmatrix} r_x \\ r_s \\ r_c \\ r_d \end{pmatrix}$$
+ *
+ * Inertia requirement: n_x + n_s positive eigenvalues, n_c + n_d negative.
+ * Regularization δ_x, δ_s, δ_c, δ_d ensures correct inertia.
+ *
+ * @complexity Iterative: O(k·nnz) where k = iterations to convergence.
+ * Typically k << n for well-preconditioned systems.
+ * Storage: O(nnz) vs O(n²) for dense factorizations.
+ *
+ * @ref Benzi et al. (2005). "Numerical solution of saddle point problems".
+ *   Acta Numerica 14:1-137. [Comprehensive survey of iterative methods]
+ * @ref Wächter & Biegler (2006). Section 4: Linear algebra strategies.
+ *
  * @see IpGenAugSystemSolver.hpp for adapter class
  * @see IpSparseSymLinearSolverInterface.hpp for sparse direct solvers
  */

@@ -29,6 +29,16 @@
  * - print_frequency_iter_: Iteration print frequency
  * - print_frequency_time_: Time-based print frequency
  *
+ * @algorithm Restoration Phase Output (Dual View):
+ * Provides visibility into restoration phase while tracking original NLP:
+ * 1. Mark iteration with 'r' prefix to distinguish from normal iterations
+ * 2. Report original NLP objective f(x) (not restoration objective)
+ * 3. Report original constraint violation θ = ‖c(x)‖
+ * 4. Optionally show both restoration and original metrics (dual output)
+ *
+ * User sees: restoration working to reduce infeasibility, with
+ * tracking of how original problem metrics change.
+ *
  * @see IpOrigIterationOutput.hpp for regular iteration output
  * @see IpIterationOutput.hpp for base interface
  */

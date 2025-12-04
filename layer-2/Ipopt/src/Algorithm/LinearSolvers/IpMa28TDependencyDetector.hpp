@@ -22,6 +22,28 @@
  *
  * Used by Ipopt's constraint degeneracy detection mechanism.
  *
+ * @algorithm MA28 Threshold Pivoting Dependency Detection:
+ * Direct LU factorization approach for rectangular matrices:
+ * 1. Factor J = P·L·U·Q (with row/column permutations P, Q)
+ * 2. Use threshold pivoting: accept pivot if |u_ii| ≥ tol·max_row
+ * 3. Rows with |u_ii| < ma28_pivtol_ flagged as dependent
+ * 4. Return list of numerically rank-deficient rows
+ *
+ * @math Sparse LU factorization with threshold pivoting:
+ * Given J ∈ ℝ^{m×n}, compute P·J·Q = L·U where:
+ * - L: unit lower triangular (m×min(m,n))
+ * - U: upper triangular (min(m,n)×n)
+ *
+ * Row i is dependent if during elimination:
+ * $$|u_{ii}| < \text{pivtol} \cdot \max_k |a_{ik}^{(i-1)}|$$
+ * where a^{(i-1)} denotes the matrix after i-1 elimination steps.
+ *
+ * @complexity O(nnz + fill-in) for sparse LU.
+ * Fill-in can be O(n²) worst case, typically O(nnz·log(n)).
+ *
+ * @ref Duff (1977). "MA28 - A set of Fortran subroutines for sparse
+ *   unsymmetric linear equations". AERE Harwell Report R 8730.
+ *
  * @see IpTDependencyDetector.hpp for base interface
  * @see IpTSymDependencyDetector.hpp for symmetric solver approach
  */

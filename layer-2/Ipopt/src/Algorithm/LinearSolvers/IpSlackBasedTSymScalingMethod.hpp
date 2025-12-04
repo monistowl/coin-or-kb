@@ -27,6 +27,24 @@
  * - May not achieve as good conditioning as MC19
  * - Best for problems where slacks dominate scaling needs
  *
+ * @algorithm Slack-Based Scaling Heuristic:
+ * Lightweight scaling using interior-point slack values:
+ * 1. Extract diagonal elements from KKT matrix
+ * 2. Scale based on current slack values s and multipliers
+ * 3. Avoid expensive equilibration when simple scaling suffices
+ * Trade-off: faster but potentially worse conditioning than MC19.
+ *
+ * @math Heuristic scaling for interior-point:
+ * In barrier method, slacks s provide natural scaling information.
+ * For KKT diagonals involving Z·S⁻¹ (where Z = dual slacks):
+ * $$d_i \approx \sqrt{s_i}$$ (simple heuristic)
+ *
+ * Full equilibration (MC19) minimizes max|D·A·D| but costs O(nnz·iter).
+ * Slack-based scaling: O(n) using readily available iterate values.
+ *
+ * @complexity O(n) per call: single pass over slack variables.
+ * No matrix traversal or iterative refinement required.
+ *
  * @see IpTSymScalingMethod.hpp for base interface
  * @see IpMc19TSymScalingMethod.hpp for full equilibration
  */

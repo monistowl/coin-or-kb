@@ -30,6 +30,25 @@
  * This is preferred over MA28-based detection when using a solver
  * that already provides this capability.
  *
+ * @algorithm Symmetric Normal Equations Dependency Detection:
+ * Uses symmetric indefinite factorization for rank detection:
+ * 1. Form normal equations: A = J·Jᵀ (or augmented system)
+ * 2. Attempt LDLᵀ or Bunch-Kaufman factorization
+ * 3. Zero/small diagonal pivots indicate dependent rows
+ * 4. Extract row indices from solver's singularity info
+ *
+ * @math Normal equations approach: A = J·Jᵀ ∈ ℝ^{m×m}
+ * - rank(A) = rank(J·Jᵀ) = rank(J) (assuming full column rank)
+ * - A is symmetric positive semi-definite
+ * - A_{ii} = 0 ⟹ row i of J is zero (trivially dependent)
+ * - Pivot d_i ≈ 0 during LDLᵀ ⟹ row i depends on rows 1,...,i-1
+ *
+ * @complexity O(m³) worst case for dense; O(fill-in) for sparse.
+ * Symmetric factorization typically faster than unsymmetric MA28.
+ *
+ * @ref Duff (2004). "MA57 - a code for the solution of sparse symmetric
+ *   definite and indefinite systems". ACM TOMS 30(2):118-144.
+ *
  * @see IpTDependencyDetector.hpp for base interface
  * @see IpTSymLinearSolver.hpp for symmetric solver
  */
