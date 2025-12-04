@@ -351,8 +351,8 @@
           "pass2_complete": false,
           "files_total": 138,
           "files_pass1": 138,
-          "files_pass2": 32,
-          "notes": "Pass 2 in progress! 32 files now have @algorithm/@math/@complexity/@ref tags. Latest: 8 LinearSolvers interfaces (MA27, MA57, MA97, MUMPS, Pardiso, MC19, CSR converter, base interface)",
+          "files_pass2": 37,
+          "notes": "Pass 2 in progress! 37 files now have @algorithm/@math/@complexity/@ref tags. Latest: 5 LinAlg foundation files (Vector, Matrix, CompoundMatrix, LowRankUpdateSymMatrix, SymTMatrix)",
           "key_subsystems_documented": [
             "Common (14 files): IpoptConfig, SmartPtr, TaggedObject, ReferenceCountingObject, Observer, Journalist, TimingStatistics, Types, Debug, Exception, CachedResults",
             "Interfaces (10 files): IpoptApplication, IpTNLP, IpStdCInterface, IpIpoptApplication, IpReturnCodes",
@@ -402,7 +402,12 @@
             "IpMumpsSolverInterface.hpp (MPI distributed)",
             "IpPardisoSolverInterface.hpp (supernodal with matching)",
             "IpMc19TSymScalingMethod.hpp (row/column equilibration)",
-            "IpTripletToCSRConverter.hpp (sparse format conversion)"
+            "IpTripletToCSRConverter.hpp (sparse format conversion)",
+            "IpVector.hpp (BLAS-1 ops, FracToBound for IPM)",
+            "IpMatrix.hpp (BLAS-2 ops, Template Method pattern)",
+            "IpCompoundMatrix.hpp (block matrix for KKT system)",
+            "IpLowRankUpdateSymMatrix.hpp (L-BFGS compact form)",
+            "IpSymTMatrix.hpp (symmetric triplet/COO format)"
           ],
           "last_updated": "2025-12-04"
         },
