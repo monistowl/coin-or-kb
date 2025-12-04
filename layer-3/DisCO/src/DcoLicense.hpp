@@ -1,3 +1,9 @@
+/**
+ * @file DcoLicense.hpp
+ * @brief DisCO license information
+ *
+ * EPL license text and copyright information.
+ */
 /*===========================================================================*
  * This file is part of the Discrete Conic Optimization (DisCO) Solver.      *
  *                                                                           *

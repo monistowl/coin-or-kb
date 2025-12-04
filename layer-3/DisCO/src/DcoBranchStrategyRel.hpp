@@ -1,3 +1,10 @@
+/**
+ * @file DcoBranchStrategyRel.hpp
+ * @brief DisCO reliability branching
+ *
+ * Reliability branching combining strong branching initialization
+ * with pseudocost-based selection after reliability threshold.
+ */
 /*===========================================================================*
  * This file is part of the Discrete Conic Optimization (DisCO) Solver.      *
  *                                                                           *

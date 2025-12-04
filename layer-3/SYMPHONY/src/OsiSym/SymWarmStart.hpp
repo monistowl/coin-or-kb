@@ -15,6 +15,13 @@
 /* accompanying file for terms.                                              */
 /*                                                                           */
 /*===========================================================================*/
+/**
+ * @file SymWarmStart.hpp
+ * @brief SYMPHONY warm start information
+ *
+ * SymWarmStart: stores basis and tree information for restarting
+ * SYMPHONY MIP solver from previous state. Enables incremental solving.
+ */
 
 #ifndef SymWarmStart_H
 #define SymWarmStart_H

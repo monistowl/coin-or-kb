@@ -15,6 +15,13 @@
 /* accompanying file for terms.                                              */
 /*                                                                           */
 /*===========================================================================*/
+/**
+ * @file OsiSymSolverParameters.hpp
+ * @brief SYMPHONY solver parameter enums
+ *
+ * Parameter type enumerations for OsiSymSolverInterface.
+ * Maps Osi generic parameters to SYMPHONY-specific settings.
+ */
 
 #ifndef OsiSymSolverParameters_hpp
 #define OsiSymSolverParameters_hpp

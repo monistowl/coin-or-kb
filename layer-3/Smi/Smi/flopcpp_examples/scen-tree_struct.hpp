@@ -11,6 +11,13 @@
 	scenario-tree structures.
 **/
 
+/**
+ * @file scen-tree_struct.hpp
+ * @brief Smi scenario tree structure
+ *
+ * Scenario tree data structure for multi-stage stochastic programs.
+ * Defines tree topology, node probabilities, and stage structure.
+ */
 #ifndef SCENTREE_STRUCT_HPP
 #define SCENTREE_STRUCT_HPP
 

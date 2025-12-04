@@ -15,6 +15,14 @@
 /* accompanying file for terms.                                              */
 /*                                                                           */
 /*===========================================================================*/
+/**
+ * @file OsiSymSolverInterface.hpp
+ * @brief Osi interface for SYMPHONY MIP solver
+ *
+ * OsiSymSolverInterface wraps SYMPHONY (parallel MIP solver) with Osi
+ * abstraction. Enables SYMPHONY use with Cbc, Cgl, and other COIN-OR.
+ * Supports parallel branch-and-bound with warm start capability.
+ */
 
 #ifndef OsiSymSolverInterface_hpp
 #define OsiSymSolverInterface_hpp

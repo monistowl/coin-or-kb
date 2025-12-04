@@ -21,6 +21,12 @@
  * files.
  */
 
+/**
+ * @file OsiSymConfig.hpp
+ * @brief SYMPHONY build configuration
+ *
+ * Build configuration macros from autotools/cmake for OsiSym.
+ */
 #ifndef __OSISYMCONFIG_H__
 #define __OSISYMCONFIG_H__
 

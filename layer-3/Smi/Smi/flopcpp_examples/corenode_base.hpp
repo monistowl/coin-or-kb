@@ -17,6 +17,13 @@
 	private and write get/set methods where needed.
 **/
 
+/**
+ * @file corenode_base.hpp
+ * @brief Smi stochastic programming core node
+ *
+ * Core node base class for stochastic programming scenario trees.
+ * Represents a node in multi-stage stochastic optimization.
+ */
 #ifndef CORENODE_BASE_HPP
 #define CORENODE_BASE_HPP
 

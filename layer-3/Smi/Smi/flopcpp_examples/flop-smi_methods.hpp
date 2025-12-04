@@ -11,6 +11,13 @@
 	such as creating the SMI core models or solving the deterministic equivalent.
 **/
 
+/**
+ * @file flop-smi_methods.hpp
+ * @brief FLOPC++ methods for Smi interface
+ *
+ * Helper methods connecting FLOPC++ algebraic modeling language
+ * with Smi stochastic programming interface.
+ */
 #ifndef FLOP_SMI_FUNCTIONS_H
 #define FLOP_SMI_FUNCTIONS_H
 
