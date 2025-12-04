@@ -8,20 +8,31 @@
  * @file IpBlas.hpp
  * @brief C++ wrappers for BLAS (Basic Linear Algebra Subprograms)
  *
- * Provides platform-independent access to BLAS Level 1 and 2 routines:
+ * Provides platform-independent access to BLAS Level 1, 2, and 3 routines.
  *
- * BLAS Level 1 (vector operations):
- * - IpBlasDot: Dot product (DDOT/SDOT)
- * - IpBlasNrm2: Euclidean norm (DNRM2/SNRM2)
- * - IpBlasAsum: Sum of absolute values (DASUM/SASUM)
- * - IpBlasScal: Vector scaling (DSCAL/SSCAL)
- * - IpBlasAxpy: y = α*x + y (DAXPY/SAXPY)
- * - IpBlasCopy: Vector copy (DCOPY/SCOPY)
- * - IpBlasIamax: Index of max element (IDAMAX/ISAMAX)
+ * @math BLAS Level 1 (vector-vector, O(n)):
+ *   - Dot: x^T·y (inner product)
+ *   - Nrm2: ||x||_2 = √(Σx_i²)
+ *   - Asum: ||x||_1 = Σ|x_i|
+ *   - Scal: x ← αx
+ *   - Axpy: y ← αx + y
+ *   - Copy: y ← x
+ *   - Iamax: arg max_i |x_i|
  *
- * BLAS Level 2 (matrix-vector):
- * - IpBlasGemv: General matrix-vector multiply (DGEMV/SGEMV)
- * - IpBlasSymv: Symmetric matrix-vector multiply (DSYMV/SSYMV)
+ * @math BLAS Level 2 (matrix-vector, O(n²)):
+ *   - Gemv: y ← αAx + βy (or A^T)
+ *   - Symv: y ← αAx + βy (A symmetric)
+ *
+ * @math BLAS Level 3 (matrix-matrix, O(n³)):
+ *   - Gemm: C ← αA·B + βC
+ *   - Syrk: C ← αA·A^T + βC (rank-k update)
+ *   - Trsm: B ← α·L⁻¹·B (triangular solve)
+ *
+ * @complexity Level 1: O(n), Level 2: O(n²), Level 3: O(n³)
+ *   All operations are cache-optimized in vendor BLAS libraries.
+ *
+ * @ref Lawson et al. (1979). "Basic Linear Algebra Subprograms for Fortran Usage".
+ *      ACM TOMS 5(3):308-323.
  *
  * @see IpLapack.hpp for higher-level linear algebra (factorization, solve)
  */

@@ -8,20 +8,26 @@
  * @file IpLapack.hpp
  * @brief C++ wrappers for LAPACK (Linear Algebra PACKage) routines
  *
- * Provides platform-independent access to LAPACK for dense matrices:
+ * Provides platform-independent access to LAPACK for dense matrices.
  *
- * Cholesky factorization and solve:
- * - IpLapackPotrf: Factor A = L*L^T (DPOTRF/SPOTRF)
- * - IpLapackPotrs: Solve using Cholesky factor (DPOTRS/SPOTRS)
+ * @algorithm Dense Matrix Factorization Methods:
+ *   - Cholesky: A = L·L^T for symmetric positive definite (SPD)
+ *   - LU: A = P·L·U with partial pivoting for general matrices
+ *   - Symmetric indefinite: A = L·D·L^T with Bunch-Kaufman pivoting
  *
- * LU factorization:
- * - IpLapackSytrf: Symmetric indefinite factorization (DSYTRF/SSYTRF)
- * - IpLapackSytrs: Solve using symmetric factorization
+ * @math Cholesky factorization (Potrf/Potrs):
+ *   For SPD matrix A, compute lower triangular L such that A = L·L^T.
+ *   Solve: L·y = b (forward), L^T·x = y (backward).
+ *   Used for normal equations in least squares.
  *
- * Eigenvalues:
- * - IpLapackSyev: Eigenvalues of symmetric matrix (DSYEV/SSYEV)
+ * @math Eigenvalue decomposition (Syev):
+ *   For symmetric A, compute A = V·Λ·V^T where Λ = diag(λ_1,...,λ_n).
+ *   Returns eigenvalues in ascending order. Eigenvectors in columns of V.
  *
- * Used by dense factorization backends (e.g., ClpCholeskyDense).
+ * @complexity Cholesky: O(n³/3), LU: O(2n³/3), Eigenvalues: O(n³)
+ *   Dense methods - use sparse solvers for large problems.
+ *
+ * @ref Anderson et al. (1999). "LAPACK Users' Guide". 3rd ed. SIAM.
  *
  * @see IpBlas.hpp for lower-level vector operations
  * @see Linear solver interfaces for sparse factorization
