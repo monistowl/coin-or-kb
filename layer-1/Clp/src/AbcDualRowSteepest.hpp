@@ -12,6 +12,25 @@
  * squared norm of the tableau row to select the direction of steepest
  * improvement.
  *
+ * @algorithm Steepest Edge for Dual Simplex Row Selection:
+ *   Choose leaving variable r that maximizes |d_r|/||e_r·B⁻¹·A||:
+ *   1. Maintain weights w_i = ||e_i·B⁻¹·A||² for each basic variable
+ *   2. Select r = argmax_i (d_i²/w_i) where d_i is dual infeasibility
+ *   3. Update weights: w_i ← w_i - 2·(α_i/α_r)·⟨u,a_i⟩ + (α_i/α_r)²·w_r
+ *      where α_i is i-th element of pivot column, u is BTRAN result
+ *
+ * @math Weight update formula (Forrest-Goldfarb):
+ *   Let B be current basis, α = B⁻¹·a_s (pivot column), τ = B⁻ᵀ·e_r (row)
+ *   After pivot, new weights: w_i' = w_i + (α_i/α_r)²·w_r - 2·(α_i/α_r)·γ_i
+ *   where γ_i = ⟨row i of B⁻¹·A, τ⟩. Special case: w_r' = w_s/α_r².
+ *
+ * @complexity O(m) per pivot for weight updates when sparse.
+ *   Full weight recomputation: O(m²) but rarely needed.
+ *   Reduces total iterations by 30-50% vs Dantzig on hard problems.
+ *
+ * @ref Forrest & Goldfarb (1992). "Steepest-edge simplex algorithms for
+ *      linear programming". Mathematical Programming 57:341-374.
+ *
  * Modes (controlled by constructor parameter):
  * - 0: Uninitialized weights
  * - 1: Full steepest edge with maintained weights
@@ -20,7 +39,6 @@
  *
  * The ABC version optimizes weight storage and updates for cache efficiency.
  *
- * @see "Implementing the Dantzig-Wolfe decomposition" by Forrest & Goldfarb
  * @see AbcDualRowPivot for the base interface
  * @see AbcDualRowDantzig for simpler but often slower alternative
  * @see ClpDualRowSteepest for the standard (non-ABC) implementation

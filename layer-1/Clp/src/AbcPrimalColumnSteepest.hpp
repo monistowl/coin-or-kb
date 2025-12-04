@@ -11,6 +11,33 @@
  * - Steepest Edge: Normalizes reduced costs by column norms
  * - Devex: Approximate steepest edge with cheaper updates
  *
+ * @algorithm Steepest Edge for Primal Simplex Column Selection:
+ *   Choose entering column s that maximizes |d_s|/||B⁻¹·a_s||:
+ *   1. Maintain weights w_j = ||B⁻¹·a_j||² for each nonbasic column
+ *   2. Select s = argmax_j (d_j²/w_j) where d_j is reduced cost
+ *   3. Update weights using new FTRAN result when basis changes
+ *   Equivalent to moving along steepest descent in transformed space.
+ *
+ * @algorithm Devex (Approximate Steepest Edge):
+ *   Cheaper alternative maintaining reference framework weights:
+ *   1. Initialize w_j = 1 for all nonbasic columns
+ *   2. After pivot, update only: w_s' = ||B⁻¹·a_s||², w_j' = max(w_j, w_j_hat²)
+ *      where w_j_hat is contribution from pivot column
+ *   3. Reset all weights to 1 periodically (every ~factorization)
+ *   Typically 80-90% as effective as full steepest edge at lower cost.
+ *
+ * @math Steepest edge weight update (Harris, 1973):
+ *   Let α = B⁻¹·a_s (pivot column). After pivot where row r leaves:
+ *   w_j' = w_j - 2·α_j·(a_j^T·τ) + α_j²·w_s where τ = (B⁻ᵀ·e_r)/α_r
+ *   Incoming column: w_s' = 1/α_r² (becomes basic, new row weight)
+ *
+ * @complexity Steepest edge: O(m) per pivot for weight update.
+ *   Devex: O(nnz(pivot_column)) per pivot, much sparser.
+ *   Both reduce iteration count significantly vs Dantzig.
+ *
+ * @ref Harris (1973). "Pivot selection methods of the Devex LP code".
+ *      Mathematical Programming 5:1-28.
+ *
  * Modes (controlled by constructor parameter):
  * - 0: Exact Devex
  * - 1: Full steepest edge
