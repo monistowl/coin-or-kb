@@ -1,6 +1,14 @@
 // (C) Copyright Carnegie Mellon University 2006
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file MyTMINLP.hpp
+ * @brief Example TMINLP implementation for Bonmin
+ *
+ * MyTMINLP: tutorial example implementing TMINLP interface.
+ * Demonstrates MINLP with binary/integer variables, nonlinear
+ * constraints, and how to interface custom problems with Bonmin.
+ */
 //
 // Authors :
 // P. Bonami, Carnegie Mellon University

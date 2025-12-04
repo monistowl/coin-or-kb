@@ -1,5 +1,12 @@
 // Copyright (C) 2006, 2008 International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BonNWayChoose.hpp
+ * @brief Bonmin N-way branching choice
+ *
+ * N-way branching variable selection for robot path planning.
+ * Experimental: selects among multiple branching candidates.
+ */
 #ifndef BonNWayChoose_H
 #define BonNWayChoose_H
 

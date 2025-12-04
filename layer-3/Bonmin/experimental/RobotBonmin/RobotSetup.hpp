@@ -1,6 +1,13 @@
 // (C) Copyright CNRS and others 2010
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file RobotSetup.hpp
+ * @brief Bonmin robot planning setup
+ *
+ * Configuration for robot path planning MINLP application.
+ * Sets up Bonmin solver for robotics optimization problems.
+ */
 //
 // Authors :
 // Pierre Bonami, Université de la Méditérannée

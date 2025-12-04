@@ -1,6 +1,13 @@
 // (C) Copyright CNRS and others 2010
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SepaHeuristicInnerApproximation.hpp
+ * @brief Separable MINLP inner approximation
+ *
+ * Inner approximation heuristic for separable MINLP problems.
+ * Exploits problem structure for better approximations.
+ */
 //
 // Authors :
 // Pierre Bonami, Université de la Méditérannée

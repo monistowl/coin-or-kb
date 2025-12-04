@@ -1,6 +1,13 @@
 // (C) Copyright International Business Machines Corporation and Carnegie Mellon University 2006, 2007
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file BM.hpp
+ * @brief Bonmin BCP main interface
+ *
+ * Main interface for experimental Bonmin-BCP integration.
+ * Combines branch-cut-price parallel framework with MINLP.
+ */
 //
 // Authors :
 // Laszlo Ladanyi, International Business Machines Corporation

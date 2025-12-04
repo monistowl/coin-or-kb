@@ -1,6 +1,13 @@
 // (C) Copyright International Business Machines Corporation 2006, 2007
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file BB_cut.hpp
+ * @brief Bonmin BCP cutting plane interface
+ *
+ * Cutting plane interface for Bonmin integrated with BCP framework.
+ * Experimental: combines branch-cut-price with MINLP solving.
+ */
 //
 // Authors :
 // Laszlo Ladanyi, International Business Machines Corporation

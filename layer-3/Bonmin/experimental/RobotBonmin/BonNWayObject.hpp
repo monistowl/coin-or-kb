@@ -1,6 +1,13 @@
 // Copyright (C) 2002, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file BonNWayObject.hpp
+ * @brief Bonmin N-way branching object
+ *
+ * N-way branching object for robot planning applications.
+ * Creates multi-way branches instead of binary left/right.
+ */
 
 // Pierre Bonami 13/10/2011 copy and modify CbcNWay to adapt to use an OsiObject for Bonmin
 //

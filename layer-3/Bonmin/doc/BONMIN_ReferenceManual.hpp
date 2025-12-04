@@ -1,3 +1,10 @@
+/**
+ * @file BONMIN_ReferenceManual.hpp
+ * @brief Bonmin Doxygen documentation main page
+ *
+ * Main page for Bonmin reference manual. Provides overview of Mixed
+ * Integer Nonlinear Programming solver combining B&B with Ipopt NLP.
+ */
 
 // Main bonmin page
 

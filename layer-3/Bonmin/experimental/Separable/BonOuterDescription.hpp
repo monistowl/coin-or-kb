@@ -1,6 +1,13 @@
 // (C) Copyright CNRS and others 2010
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file BonOuterDescription.hpp
+ * @brief Bonmin outer approximation description
+ *
+ * Outer approximation (OA) cut management for MINLP.
+ * Linearization-based approach for convex MINLP.
+ */
 //
 // Authors :
 // Pierre Bonami, Université de la Méditérannée

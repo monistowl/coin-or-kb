@@ -1,6 +1,13 @@
 // (C) Copyright International Business Machines Corporation 2007
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SepaTMINLP2OsiLP.hpp
+ * @brief Separable MINLP to LP conversion
+ *
+ * Converts separable TMINLP to Osi LP relaxation.
+ * Creates piecewise linear approximations for separable functions.
+ */
 //
 // Authors :
 // Pierre Bonami, International Business Machines Corporation

@@ -1,6 +1,13 @@
 // (C) Copyright CNRS and others 2010
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file BonHeuristicInnerApproximation.hpp
+ * @brief Bonmin inner approximation heuristic
+ *
+ * Primal heuristic using inner approximation of feasible region.
+ * Generates feasible MINLP solutions from LP relaxations.
+ */
 //
 // Authors :
 // Pierre Bonami, Université de la Méditérannée
