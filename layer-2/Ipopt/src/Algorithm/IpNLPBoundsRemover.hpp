@@ -12,6 +12,21 @@
  * linear solvers that require the KKT system to have a specific structure
  * without bound constraints.
  *
+ * @algorithm Bounds-to-Inequality Transformation:
+ *   GetSpaces() transforms NLP structure:
+ *   1. Original: min f(x) s.t. c(x)=0, d_L ≤ d(x) ≤ d_U, x_L ≤ x ≤ x_U.
+ *   2. Remove x bounds: x now unbounded (no z_L, z_U multipliers).
+ *   3. Add new inequalities: d_new(x) = [d_orig(x); x].
+ *   4. New bounds: d_L_new = [d_L_orig; x_L], d_U_new = [d_U_orig; x_U].
+ *   5. Jacobian: J_d_new = [J_d_orig; I] (identity block for x bounds).
+ *   6. Hessian unchanged (new constraints linear in x).
+ *
+ * @math KKT structure change:
+ *   Original: z_L, z_U appear in diagonal of reduced Hessian.
+ *   Transformed: Bound multipliers become v_L, v_U on new inequalities.
+ *   KKT system structure simplified (no variable bounds in main diagonal).
+ *   Cost: Larger J_d matrix, more inequality constraints.
+ *
  * Transformation:
  *   Original: x_L <= x <= x_U
  *   Transformed: d(x) = x with d_L = x_L, d_U = x_U (added inequalities)

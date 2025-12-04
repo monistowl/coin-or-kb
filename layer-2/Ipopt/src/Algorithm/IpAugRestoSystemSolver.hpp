@@ -12,6 +12,19 @@
  * of the restoration phase problem to reduce the augmented system to
  * the original problem size.
  *
+ * @algorithm Restoration Augmented System Reduction:
+ *   Solve() reduces expanded restoration system to original size:
+ *   1. Restoration variables: (x, s, n_c, p_c, n_d, p_d).
+ *   2. n, p have simple structure: diagonal Σ blocks in Hessian.
+ *   3. Elimination: Solve for n, p analytically via:
+ *      n = Σ_n⁻¹·(rhs_n - contributions), p = Σ_p⁻¹·(rhs_p - contributions).
+ *   4. Reduced RHS: rhs_cR, rhs_dR incorporate n, p contributions.
+ *   5. Solve original-sized system, then back-substitute for n, p.
+ *
+ * @math Schur complement structure:
+ *   Full system: [W_full, J_full^T; J_full, -D] [Δ_full; y] = [r_full].
+ *   Σ_n, Σ_p diagonal → closed-form elimination reduces to original (n_x + n_c + n_d) size.
+ *
  * Restoration problem structure:
  * - Variables: (x, s, n_c, p_c, n_d, p_d)
  * - Constraints: c(x) - n_c + p_c = 0, d(x) - s - n_d + p_d = 0

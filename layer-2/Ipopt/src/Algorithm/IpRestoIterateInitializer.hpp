@@ -12,6 +12,21 @@
  * in the restoration phase feasibility problem. This includes the
  * original variables (x, s) and the slack variables (n_c, p_c, n_d, p_d).
  *
+ * @algorithm Restoration Phase Variable Initialization:
+ *   SetInitialIterates() initializes all restoration variables:
+ *   1. Copy x, s from point where main algorithm entered restoration.
+ *   2. Compute n_c, p_c satisfying: c(x) = p_c - n_c (equality residual split).
+ *   3. Compute n_d, p_d satisfying: d(x) - s + n_d - p_d ∈ [d_L, d_U].
+ *   4. solve_quadratic(): Finds n, p with n,p ≥ 0 minimizing ||n||+||p||.
+ *   5. Initialize z, v bound multipliers for n, p bounds (μ/bound).
+ *   6. Optionally: y_c, y_d via resto_eq_mult_calculator_ (least squares).
+ *
+ * @math Slack initialization:
+ *   Given residual r = c(x): need n - p = -r with n, p ≥ 0.
+ *   If r ≥ 0: p = r + ε, n = ε (constraint violation positive).
+ *   If r < 0: n = -r + ε, p = ε (constraint violation negative).
+ *   ε = small positive to stay away from bounds.
+ *
  * Initialization procedure:
  * 1. Take x, s from the point where main algorithm entered restoration
  * 2. Compute n, p slacks to satisfy: c(x) + n - p = 0

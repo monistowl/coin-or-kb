@@ -15,6 +15,19 @@
  * the current restoration point would be acceptable to the original
  * problem's filter.
  *
+ * @algorithm Filter-Based Restoration Termination:
+ *   TestOrigProgress(φ_trial, θ_trial) from restoration iterate:
+ *   1. Query original filter acceptor: IsAcceptableToCurrentFilter(θ, φ).
+ *   2. Check: (θ_trial, φ_trial) not dominated by any filter entry.
+ *   3. Also check: IsAcceptableToCurrentIterate() for Armijo-like decrease.
+ *   4. If acceptable to original → exit restoration with CONVERGED.
+ *   5. Otherwise continue restoration iterations.
+ *
+ * @math Filter acceptance from restoration:
+ *   Let F = {(θ_i, φ_i)} be the original filter.
+ *   Accept if: ∀i: θ_trial < θ_i OR φ_trial < φ_i - γ_φ·θ_i (envelope check).
+ *   Ensures restoration doesn't return to points worse than filter history.
+ *
  * Termination criteria (via TestOrigProgress):
  * 1. Current point acceptable to original filter
  * 2. Current point shows sufficient decrease vs original iterate

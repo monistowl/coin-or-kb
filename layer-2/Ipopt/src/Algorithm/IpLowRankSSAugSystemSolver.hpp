@@ -13,6 +13,20 @@
  * (from L-BFGS) by augmenting the system rather than using
  * Sherman-Morrison. This requires only ONE factorization/backsolve.
  *
+ * @algorithm Single-Solve Low-Rank System Augmentation:
+ *   Solve() handles W = σI + V·M·V^T without multiple backsolves:
+ *   1. L-BFGS gives W = σI + V·M·V^T (compact representation).
+ *   2. Instead of Sherman-Morrison (k backsolves for rank-k update):
+ *   3. Augment KKT: J_c_ext = [J_c; V^T], add k extra "constraint" rows.
+ *   4. Extended system: [σI, J^T, V; J, -D, 0; V^T, 0, M⁻¹] [Δx; y; q] = [r].
+ *   5. Single factorization of larger (n+m+k) system.
+ *   6. Advantage: Iterative solvers like GMRES prefer one larger system.
+ *
+ * @math System equivalence:
+ *   Sherman-Morrison: (A + VCV^T)⁻¹ = A⁻¹ - A⁻¹V(C⁻¹+V^TA⁻¹V)⁻¹V^TA⁻¹.
+ *   Augmented form: Same solution, but via single linear solve.
+ *   Trade-off: Larger system vs multiple backsolves.
+ *
  * L-BFGS Hessian: W = sigma*I + V*M*V^T (compact representation)
  *
  * Standard approach (LowRankAugSystemSolver):

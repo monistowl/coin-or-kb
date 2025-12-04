@@ -12,12 +12,19 @@
  * symmetric indefinite matrix equilibration routine. This produces
  * well-conditioned scaling by analyzing the Jacobian structure.
  *
- * Algorithm:
- * 1. Perturb initial point randomly (point_perturbation_radius_)
- * 2. Evaluate Jacobians at perturbed points
- * 3. Build combined KKT-like matrix structure
- * 4. Apply MC19 to compute row/column scaling
- * 5. Extract scaling for x, c, d from equilibration
+ * @algorithm MC19-Based Matrix Equilibration Scaling:
+ *   DetermineScalingParametersImpl():
+ *   1. Perturb x₀ randomly within bounds (avoid singular points).
+ *   2. Evaluate Jacobians J_c, J_d at perturbed points.
+ *   3. Build "equilibration matrix" combining KKT structure.
+ *   4. Call MC19AD: computes D s.t. ||D·A·D||∞ ≈ 1 per row/col.
+ *   5. Extract dx from variable columns, dc/dd from constraint rows.
+ *   6. df computed separately from objective gradient.
+ *
+ * @math Equilibration principle:
+ *   MC19 minimizes Σ(log|a_ij·d_i·d_j|)² for symmetric indefinite A.
+ *   Result: balanced row/column norms, improved KKT conditioning.
+ *   Better than gradient scaling for problems with structural imbalance.
  *
  * MC19 routine (HSL):
  * - Computes diagonal scaling D such that |D*A*D|_ij ≈ 1

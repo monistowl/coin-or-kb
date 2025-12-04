@@ -13,6 +13,19 @@
  * when the original algorithm uses penalty function globalization
  * (as opposed to filter method).
  *
+ * @algorithm Penalty-Based Restoration Termination:
+ *   TestOrigProgress(φ_trial, θ_trial) from restoration iterate:
+ *   1. Query original penalty acceptor: IsAcceptableToCurrentIterate(θ, φ).
+ *   2. Check Armijo-like decrease: φ_trial ≤ φ_ref - η·Δφ_pred.
+ *   3. Check infeasibility: θ_trial ≤ θ_ref (or sufficient reduction).
+ *   4. If acceptable to original penalty → exit restoration with CONVERGED.
+ *   5. Otherwise continue restoration iterations.
+ *
+ * @math Penalty acceptance from restoration:
+ *   Merit function: ψ(x) = φ(x) + ν·θ(x) where ν = penalty parameter.
+ *   Accept if ψ_trial ≤ ψ_ref - η·α·∇ψ^T·d (Armijo on merit).
+ *   Penalty method has no filter history, simpler acceptance test.
+ *
  * Purpose:
  * During restoration phase, check if current point would be
  * acceptable to the original penalty line search acceptor.
