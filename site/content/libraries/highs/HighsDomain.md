@@ -75,5 +75,5 @@ Objective Propagation:
 
 ## Source
 
-Header file: `highs/mip/HighsDomain.h`
+Header file: [`highs/mip/HighsDomain.h`](/coin-or-kb/browser/?library=HiGHS&file=highs/mip/HighsDomain.h)
 

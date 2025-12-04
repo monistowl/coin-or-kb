@@ -42,9 +42,9 @@ Stored in vubs_[] array indexed by continuous variable.
 ## See Also
 
 - CglMixedIntegerRounding for general MIR approach
-- CglKnapsackCover for simpler cover cuts
+- [CglKnapsackCover](/coin-or-kb/libraries/cgl/cglknapsackcover/) for simpler cover cuts
 
 ## Source
 
-Header file: `src/CglFlowCover/CglFlowCover.hpp`
+Header file: [`src/CglFlowCover/CglFlowCover.hpp`](/coin-or-kb/browser/?library=Cgl&file=src/CglFlowCover/CglFlowCover.hpp)
 

@@ -56,9 +56,9 @@ or $O(nnz(L)$²) for sparse Cholesky. Total typically $O(n^{1.5})$ to $O(n³)$.
 - ClpPredictorCorrector for the predictor-corrector implementation
 - ClpPdco for PDCO variant
 - ClpCholeskyBase for Cholesky factorization interface
-- ClpSimplex for the alternative simplex method
+- [ClpSimplex](/coin-or-kb/libraries/clp/clpsimplex/) for the alternative simplex method
 
 ## Source
 
-Header file: `src/ClpInterior.hpp`
+Header file: [`src/ClpInterior.hpp`](/coin-or-kb/browser/?library=Clp&file=src/ClpInterior.hpp)
 

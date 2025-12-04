@@ -40,10 +40,10 @@ Key methods:
 
 ## See Also
 
-- QProblemB for box-constrained QPs (no A matrix)
+- [QProblemB](/coin-or-kb/libraries/qpoases/qproblemb/) for box-constrained QPs (no A matrix)
 - SQProblem for varying Hessian
 
 ## Source
 
-Header file: `include/qpOASES/QProblem.hpp`
+Header file: [`include/qpOASES/QProblem.hpp`](/coin-or-kb/browser/?library=qpOASES&file=include/qpOASES/QProblem.hpp)
 

@@ -65,5 +65,5 @@ $$BTF form: P*A*Q = | B_11  B_12 ... | with square diagonal blocks B_ii$$
 
 ## Source
 
-Header file: `BTF/Include/btf.h`
+Header file: [`BTF/Include/btf.h`](/coin-or-kb/browser/?library=SuiteSparse&file=BTF/Include/btf.h)
 

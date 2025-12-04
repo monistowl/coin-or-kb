@@ -70,5 +70,5 @@ Used by NLP solvers (Ipopt) and for hyperplane construction.
 
 ## Source
 
-Header file: `src/Model/Problem.h`
+Header file: [`src/Model/Problem.h`](/coin-or-kb/browser/?library=SHOT&file=src/Model/Problem.h)
 

@@ -55,10 +55,10 @@ $O(passes × nnz)$ with 3-10 passes common. Can reduce problem size 50-90%.
 
 ## See Also
 
-- CoinPresolveMatrix in CoinUtils for the transformation framework
-- ClpSimplex::initialSolve() which can invoke presolve automatically
+- [CoinPresolveMatrix](/coin-or-kb/libraries/coinutils/coinpresolvematrix/) in CoinUtils for the transformation framework
+- [ClpSimplex](/coin-or-kb/libraries/clp/clpsimplex/)::initialSolve() which can invoke presolve automatically
 
 ## Source
 
-Header file: `src/ClpPresolve.hpp`
+Header file: [`src/ClpPresolve.hpp`](/coin-or-kb/browser/?library=Clp&file=src/ClpPresolve.hpp)
 

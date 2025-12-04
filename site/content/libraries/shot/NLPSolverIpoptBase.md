@@ -74,5 +74,5 @@ Original bounds restored by unfixVariables().
 
 ## Source
 
-Header file: `src/NLPSolver/NLPSolverIpoptBase.h`
+Header file: [`src/NLPSolver/NLPSolverIpoptBase.h`](/coin-or-kb/browser/?library=SHOT&file=src/NLPSolver/NLPSolverIpoptBase.h)
 

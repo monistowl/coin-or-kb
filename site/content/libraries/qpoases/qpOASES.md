@@ -48,10 +48,10 @@ Main classes:
 
 ## See Also
 
-- QProblem for general QP solving
-- QProblemB for box-constrained QPs (faster)
+- [QProblem](/coin-or-kb/libraries/qpoases/qproblem/) for general QP solving
+- [QProblemB](/coin-or-kb/libraries/qpoases/qproblemb/) for box-constrained QPs (faster)
 
 ## Source
 
-Header file: `include/qpOASES.hpp`
+Header file: [`include/qpOASES.hpp`](/coin-or-kb/browser/?library=qpOASES&file=include/qpOASES.hpp)
 

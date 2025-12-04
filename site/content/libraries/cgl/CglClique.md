@@ -73,5 +73,5 @@ Fast but may miss maximum violated clique.
 
 ## Source
 
-Header file: `src/CglClique/CglClique.hpp`
+Header file: [`src/CglClique/CglClique.hpp`](/coin-or-kb/browser/?library=Cgl&file=src/CglClique/CglClique.hpp)
 

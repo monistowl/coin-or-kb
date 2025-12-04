@@ -66,5 +66,5 @@ in Cholesky factor), but this is expensive to compute exactly.
 
 ## Source
 
-Header file: `AMD/Include/amd.h`
+Header file: [`AMD/Include/amd.h`](/coin-or-kb/browser/?library=SuiteSparse&file=AMD/Include/amd.h)
 

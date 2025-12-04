@@ -84,5 +84,5 @@ Threshold pivoting: select pivot if |a_kk| ≥ τ·max_i|a_ik| (τ ≈ 0.1)
 
 ## Source
 
-Header file: `UMFPACK/Include/umfpack.h`
+Header file: [`UMFPACK/Include/umfpack.h`](/coin-or-kb/browser/?library=SuiteSparse&file=UMFPACK/Include/umfpack.h)
 

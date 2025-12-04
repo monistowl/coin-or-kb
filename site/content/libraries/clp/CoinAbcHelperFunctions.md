@@ -42,9 +42,9 @@ Function Pointer Dispatch (scatterStruct):
 ## See Also
 
 - CoinAbcFactorization which uses these kernels
-- AbcSimplex which uses these for FTRAN/BTRAN
+- [AbcSimplex](/coin-or-kb/libraries/clp/abcsimplex/) which uses these for FTRAN/BTRAN
 
 ## Source
 
-Header file: `src/CoinAbcHelperFunctions.hpp`
+Header file: [`src/CoinAbcHelperFunctions.hpp`](/coin-or-kb/browser/?library=Clp&file=src/CoinAbcHelperFunctions.hpp)
 

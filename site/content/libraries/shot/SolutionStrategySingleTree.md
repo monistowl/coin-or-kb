@@ -47,5 +47,5 @@ Branch-and-cut with lazy ESH constraints
 
 ## Source
 
-Header file: `src/SolutionStrategy/SolutionStrategySingleTree.h`
+Header file: [`src/SolutionStrategy/SolutionStrategySingleTree.h`](/coin-or-kb/browser/?library=SHOT&file=src/SolutionStrategy/SolutionStrategySingleTree.h)
 

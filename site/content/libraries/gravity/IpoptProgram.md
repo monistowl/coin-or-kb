@@ -53,5 +53,5 @@ Interior Point Method via Ipopt
 
 ## Source
 
-Header file: `include/gravity/IpoptProgram.h`
+Header file: [`include/gravity/IpoptProgram.h`](/coin-or-kb/browser/?library=Gravity&file=include/gravity/IpoptProgram.h)
 

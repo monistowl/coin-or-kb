@@ -98,5 +98,5 @@ Off-diagonal blocks solved via triangular solves.
 
 ## Source
 
-Header file: `KLU/Include/klu.h`
+Header file: [`KLU/Include/klu.h`](/coin-or-kb/browser/?library=SuiteSparse&file=KLU/Include/klu.h)
 

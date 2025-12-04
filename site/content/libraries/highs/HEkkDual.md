@@ -81,5 +81,5 @@ Cost: one extra FTRAN per iteration, but ~40% fewer iterations.
 
 ## Source
 
-Header file: `highs/simplex/HEkkDual.h`
+Header file: [`highs/simplex/HEkkDual.h`](/coin-or-kb/browser/?library=HiGHS&file=highs/simplex/HEkkDual.h)
 

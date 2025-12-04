@@ -59,9 +59,9 @@ Preprocessing Pipeline (IPPMode):
 
 - CbcParam for individual parameter definitions
 - CbcParamUtils for parameter push/pull callbacks
-- CbcModel for solver integration
+- [CbcModel](/coin-or-kb/libraries/cbc/cbcmodel/) for solver integration
 
 ## Source
 
-Header file: `src/CbcParameters.hpp`
+Header file: [`src/CbcParameters.hpp`](/coin-or-kb/browser/?library=Cbc&file=src/CbcParameters.hpp)
 

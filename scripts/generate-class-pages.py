@@ -33,6 +33,57 @@ def slugify(name: str) -> str:
     """Convert class name to URL-safe slug."""
     return name.replace('::', '-').replace('<', '').replace('>', '').replace(' ', '-').lower()
 
+
+# Global lookup table: class_name -> (library_name, file_path)
+# Built in main() before generating pages
+CLASS_LOOKUP = {}
+
+
+def format_see_also_ref(ref: str) -> str:
+    """Format a See Also reference, adding hyperlinks for known classes.
+
+    Examples:
+    - "CoinPresolveMatrix for the presolve framework"
+      -> "[CoinPresolveMatrix](/coin-or-kb/libraries/coinutils/coinpresolvematrix/) for the presolve framework"
+    - "CoinIsnan()" -> stays as-is (function, not class)
+    - "ClpSimplex::factorization()" -> "[ClpSimplex](/coin-or-kb/libraries/clp/clpsimplex/)::factorization()"
+    """
+    ref = ref.strip()
+    if not ref:
+        return ""
+
+    # Clean up copyright/license noise that sometimes appears
+    if '\\copyright' in ref or '\\license' in ref:
+        ref = re.sub(r'\\copyright\{[^}]*\}', '', ref)
+        ref = re.sub(r'\\license\{[^}]*\}', '', ref)
+        ref = ref.strip()
+
+    # Extract potential class name
+    # Pattern: ClassName, ClassName::method(), "ClassName for description"
+    match = re.match(r'^([A-Z][a-zA-Z0-9]+(?:::[a-z][a-zA-Z0-9]*)?)', ref)
+    if not match:
+        return ref
+
+    potential_class = match.group(1)
+
+    # Handle ClassName::method() - link just the class
+    if '::' in potential_class:
+        class_name = potential_class.split('::')[0]
+    else:
+        class_name = potential_class
+
+    # Check if we have documentation for this class
+    if class_name in CLASS_LOOKUP:
+        lib_name, _ = CLASS_LOOKUP[class_name]
+        url = f"/coin-or-kb/libraries/{lib_name.lower()}/{class_name.lower()}/"
+
+        # Replace just the class name with a link
+        linked = f"[{class_name}]({url})"
+        return ref.replace(class_name, linked, 1)
+
+    return ref
+
+
 def escape_markdown(text: str) -> str:
     """Escape special markdown characters."""
     if not text:
@@ -323,19 +374,24 @@ header_file = "{file_path}"
         for ref in refs_list:
             ref = ref.strip() if isinstance(ref, str) else str(ref)
             if ref:
-                content += f"- {ref}\n"
+                # Convert class references to hyperlinks where possible
+                formatted_ref = format_see_also_ref(ref)
+                content += f"- {formatted_ref}\n"
         content += "\n"
 
-    # Add source link
+    # Add source link with browser link
+    browser_url = f"/coin-or-kb/browser/?library={library_name}&file={file_path}"
     content += f"""## Source
 
-Header file: `{file_path}`
+Header file: [`{file_path}`]({browser_url})
 
 """
 
     return content
 
 def main():
+    global CLASS_LOOKUP
+
     # Load annotations
     annotations_path = Path('site/static/api/annotations.json')
     if not annotations_path.exists():
@@ -354,7 +410,25 @@ def main():
     # Libraries to skip (already done or not priority)
     skip_libraries = {'CoinUtils'}  # Already has detailed pages
 
-    # Process each layer
+    # First pass: Build CLASS_LOOKUP for cross-referencing See Also links
+    # Also include CoinUtils classes since they have pages
+    for layer_key, layer_data in data.get('layers', {}).items():
+        for lib_name, lib_data in layer_data.get('libraries', {}).items():
+            files = lib_data.get('files', {})
+            for file_path, file_data in files.items():
+                # Only index files that will get pages (have algorithm/math/complexity)
+                has_algorithm = bool(file_data.get('algorithm'))
+                has_math = bool(file_data.get('math'))
+                has_complexity = bool(file_data.get('complexity'))
+
+                if has_algorithm or has_math or has_complexity:
+                    filename = os.path.basename(file_path)
+                    class_name = filename.replace('.hpp', '').replace('.h', '').replace('.cpp', '')
+                    CLASS_LOOKUP[class_name] = (lib_name, file_path)
+
+    print(f"Built class lookup with {len(CLASS_LOOKUP)} entries for See Also linking")
+
+    # Second pass: Generate pages
     for layer_key, layer_data in data.get('layers', {}).items():
         layer_num = int(layer_key.split('-')[1])
 

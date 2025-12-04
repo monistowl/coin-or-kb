@@ -61,5 +61,5 @@ This code is licensed under the terms of the Eclipse Public License (EPL).
 
 ## Source
 
-Header file: `src/CglLandP/CglLandPSimplex.hpp`
+Header file: [`src/CglLandP/CglLandPSimplex.hpp`](/coin-or-kb/browser/?library=Cgl&file=src/CglLandP/CglLandPSimplex.hpp)
 

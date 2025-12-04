@@ -70,10 +70,10 @@ Can be set as hard cutoff or as objective constraint.
 
 ## See Also
 
-- DualSolver.h for MIP solver orchestration
+- [DualSolver](/coin-or-kb/libraries/shot/dualsolver/).h for MIP solver orchestration
 - IRelaxationStrategy.h for LP relaxation handling
 
 ## Source
 
-Header file: `src/MIPSolver/IMIPSolver.h`
+Header file: [`src/MIPSolver/IMIPSolver.h`](/coin-or-kb/browser/?library=SHOT&file=src/MIPSolver/IMIPSolver.h)
 
