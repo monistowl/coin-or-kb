@@ -1,3 +1,17 @@
+/**
+ * @file Mongoose_Logger.hpp
+ * @brief Debug logging and performance timing utilities
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Logger class provides runtime debug level control and tic/toc timing
+ * for algorithm phases: Matching, Coarsening, Refinement, FM, QP, IO.
+ * LogError/Warn/Info/Test macros for conditional output. Timing tracks
+ * cumulative time per phase for profiling.
+ *
+ * @see Mongoose_Debug.hpp for debug assertions and macros
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_Logger.hpp ========================================== */
 /* ========================================================================== */
@@ -9,15 +23,6 @@
  * Mongoose is also available under other licenses; contact authors for details.
  * SPDX-License-Identifier: GPL-3.0-only
  * -------------------------------------------------------------------------- */
-
-/**
- * Centralized debug and timing manager
- *
- * For debug and timing information to be displayed via stdout. This system
- * allows this information to be displayed (or not) without recompilation.
- * Timing inforation for different *portions of the library are also managed
- * here with a tic/toc pattern.
- */
 
 // #pragma once
 #ifndef MONGOOSE_LOGGER_HPP

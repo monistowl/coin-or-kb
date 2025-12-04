@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_GuessCut.hpp
+ * @brief Initial partition generation at coarsest level
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * GuessCut creates initial partition for coarsest graph before refinement
+ * begins. Strategies include QP relaxation, random assignment, or natural
+ * vertex order. Quality of initial guess affects final partition quality
+ * despite refinement. Selected via initial_cut_type option.
+ *
+ * @see Mongoose_EdgeCutOptions.hpp for InitialEdgeCutType selection
+ * @see Mongoose_ImproveQP.hpp for QP-based initial cut
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_GuessCut.hpp ======================================== */
 /* ========================================================================== */

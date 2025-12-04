@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_QPDelta.hpp
+ * @brief QP solver state: solution, gradient, free set, and workspace
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * QPDelta stores iterative QP solver state: current solution x, gradient,
+ * free set (variables not at bounds), balance constraint bounds (lo/hi),
+ * Lagrange multiplier lambda, and workspace arrays. FreeSet_status tracks
+ * whether each x_i is at 0, 1, or strictly between (free).
+ *
+ * @see Mongoose_QPGradProj.hpp for gradient projection using this state
+ * @see Mongoose_QPLinks.hpp for free set management
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_QPDelta.hpp ========================================= */
 /* ========================================================================== */

@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_QPMaxHeap.hpp
+ * @brief Max-heap for QP napsack breakpoint processing
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * QPMaxHeap provides max-heap operations (build, delete, add, heapify)
+ * for efficient breakpoint processing in napsack solver. Extracts
+ * breakpoints in descending order, complementing min-heap for
+ * bidirectional lambda search.
+ *
+ * @see Mongoose_QPNapsack.hpp for napsack solver using heaps
+ * @see Mongoose_QPMinHeap.hpp for complementary min-heap
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_QPMaxHeap.hpp ======================================= */
 /* ========================================================================== */

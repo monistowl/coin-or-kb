@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_QPBoundary.hpp
+ * @brief QP boundary initialization from graph partition
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * QPBoundary initializes QP state from discrete partition, setting
+ * x values based on partition assignment and identifying boundary
+ * vertices (those with neighbors in opposite partition) as the
+ * active set for optimization.
+ *
+ * @see Mongoose_QPDelta.hpp for QP state structure
+ * @see Mongoose_QPGradProj.hpp for subsequent optimization
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_QPBoundary.hpp ====================================== */
 /* ========================================================================== */

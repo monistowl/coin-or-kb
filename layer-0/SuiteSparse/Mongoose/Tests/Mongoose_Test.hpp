@@ -1,3 +1,17 @@
+/**
+ * @file Mongoose_Test.hpp
+ * @brief Test suite entry points for Mongoose library
+ * Copyright (C) 2017-2018, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Test harness functions: runIOTest (file reading), runMemoryTest
+ * (allocation), runTimingTest (performance), runEdgeSeparatorTest
+ * (partition quality), runPerformanceTest (benchmarking). Each takes
+ * Matrix Market input file and validates library functionality.
+ *
+ * @see Mongoose_IO.hpp for file reading under test
+ */
+
 //------------------------------------------------------------------------------
 // Mongoose/Tests/Mongoose_Test.hpp
 //------------------------------------------------------------------------------

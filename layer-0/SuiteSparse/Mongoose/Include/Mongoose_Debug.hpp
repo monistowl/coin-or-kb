@@ -1,3 +1,17 @@
+/**
+ * @file Mongoose_Debug.hpp
+ * @brief Debug macros, assertions, and diagnostic print functions
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Debug infrastructure: ASSERT/DEBUG macros (disabled by NDEBUG),
+ * PR macro for printf debugging, IMPLIES/IFF logic macros. Print
+ * functions for cs matrices, EdgeCutProblem graphs, and QP state.
+ * Enable debugging by uncommenting #undef NDEBUG (very slow).
+ *
+ * @see Mongoose_Logger.hpp for runtime-configurable logging
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_Debug.hpp =========================================== */
 /* ========================================================================== */

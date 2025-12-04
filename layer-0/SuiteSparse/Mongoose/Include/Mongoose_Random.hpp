@@ -1,3 +1,17 @@
+/**
+ * @file Mongoose_Random.hpp
+ * @brief Random number generation for Mongoose algorithms
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Simple random number interface: random() returns Int, setRandomSeed()
+ * initializes generator. Used by random matching, random initial cuts,
+ * and tie-breaking in algorithms. Seed set via EdgeCut_Options::random_seed.
+ *
+ * @see Mongoose_EdgeCutOptions.hpp for random_seed option
+ * @see Mongoose_Matching.hpp for random matching strategy
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_Random.hpp ========================================== */
 /* ========================================================================== */

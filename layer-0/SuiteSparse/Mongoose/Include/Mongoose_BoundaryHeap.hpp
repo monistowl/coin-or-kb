@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_BoundaryHeap.hpp
+ * @brief Boundary vertex heap for FM partition refinement
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Manages heaps of boundary vertices (those with edges crossing cut)
+ * for FM algorithm. Two heaps (one per partition) ordered by vertex
+ * gain. Operations: load, clear, insert, remove, heapifyUp/Down.
+ * Critical for efficient O(n log n) FM refinement.
+ *
+ * @see Mongoose_ImproveFM.hpp for FM algorithm using boundary heaps
+ * @see Mongoose_EdgeCutProblem.hpp for bhHeap storage
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_BoundaryHeap.hpp ==================================== */
 /* ========================================================================== */

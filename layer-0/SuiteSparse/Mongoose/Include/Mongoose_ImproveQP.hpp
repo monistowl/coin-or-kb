@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_ImproveQP.hpp
+ * @brief Quadratic programming partition improvement via continuous relaxation
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * QP improvement relaxes discrete partition to continuous [0,1] variables,
+ * optimizes via gradient projection with balance constraints, then rounds
+ * to discrete partition. Complements FM by exploring continuous solution
+ * space; combined in waterdance for best results.
+ *
+ * @see Mongoose_QPGradProj.hpp for gradient projection solver
+ * @see Mongoose_ImproveFM.hpp for discrete FM alternative
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_ImproveQP.hpp ======================================= */
 /* ========================================================================== */

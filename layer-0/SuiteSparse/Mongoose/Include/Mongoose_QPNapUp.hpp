@@ -1,3 +1,17 @@
+/**
+ * @file Mongoose_QPNapUp.hpp
+ * @brief Upward lambda search in napsack solver
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * QPNapUp searches for lambda in increasing direction when current
+ * solution violates upper balance bound (b > hi). Processes breakpoints
+ * via heaps until constraint is satisfied, returning optimal lambda.
+ *
+ * @see Mongoose_QPNapsack.hpp for main napsack solver
+ * @see Mongoose_QPNapDown.hpp for downward search
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_QPNapUp.hpp ========================================= */
 /* ========================================================================== */

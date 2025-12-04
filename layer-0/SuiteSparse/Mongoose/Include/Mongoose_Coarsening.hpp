@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_Coarsening.hpp
+ * @brief Graph coarsening via vertex matching for multilevel partitioning
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Coarsening reduces graph size while preserving structure by contracting
+ * matched vertices. Given a matching (HEM, random, etc.), creates coarser
+ * graph with merged vertices and aggregated edge weights. Essential for
+ * multilevel partitioning to handle large graphs efficiently.
+ *
+ * @see Mongoose_Matching.hpp for vertex matching algorithms
+ * @see Mongoose_Refinement.hpp for uncoarsening/projection
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_Coarsening.hpp ====================================== */
 /* ========================================================================== */
@@ -9,15 +24,6 @@
  * Mongoose is also available under other licenses; contact authors for details.
  * SPDX-License-Identifier: GPL-3.0-only
  * -------------------------------------------------------------------------- */
-
-/**
- * Coarsening of a graph given a previously determined matching
- *
- * In order to operate on extremely large graphs, a pre-processing is
- * done to reduce the size of the graph while maintaining its overall structure.
- * Given a matching of vertices with other vertices (e.g. heavy edge matching,
- * random, etc.), coarsening constructs the new, coarsened graph.
- */
 
 // #pragma once
 #ifndef MONGOOSE_COARSENING_HPP

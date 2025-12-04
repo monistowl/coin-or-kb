@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_IO.hpp
+ * @brief Matrix Market file I/O for graphs and matrices
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * File I/O for Mongoose: read_graph creates Graph from Matrix Market file,
+ * read_matrix creates cs struct. Handles symmetrization (A+A')/2 for
+ * asymmetric matrices, extracts largest connected component, removes
+ * diagonal. Accepts C string or std::string filenames.
+ *
+ * @see Mongoose_Graph.hpp for Graph class
+ * @see Mongoose_CSparse.hpp for cs matrix struct
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_IO.hpp ============================================== */
 /* ========================================================================== */
@@ -9,15 +24,6 @@
  * Mongoose is also available under other licenses; contact authors for details.
  * SPDX-License-Identifier: GPL-3.0-only
  * -------------------------------------------------------------------------- */
-
-/**
- * Simplified I/O functions for reading matrices and graphs
- *
- * For reading Matrix Market files into Mongoose, read_graph and read_matrix
- * are provided (depending on if a Graph class instance or CSparse matrix
- * instance is needed). The filename can be specified as either a const char*
- * (easier for C programmers) or std::string (easier from C++).
- */
 
 // #pragma once
 #ifndef MONGOOSE_IO_HPP

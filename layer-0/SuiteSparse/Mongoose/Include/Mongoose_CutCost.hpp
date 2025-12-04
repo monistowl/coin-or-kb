@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_CutCost.hpp
+ * @brief Partition quality metrics structure
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * CutCost struct holds partition quality metrics: heuCost (cut + balance
+ * penalty), cutCost (edge weight sum), W[2] (partition weights), and
+ * imbalance (deviation from target split). Used internally to evaluate
+ * and compare partitions during refinement.
+ *
+ * @see Mongoose_EdgeCut.hpp for public partition result
+ * @see Mongoose_ImproveFM.hpp for gain calculations
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_CutCost.hpp ========================================= */
 /* ========================================================================== */

@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_EdgeCut.hpp
+ * @brief Edge cut result structure and partitioning entry points
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * EdgeCut struct holds partitioning results: boolean partition array,
+ * cut_cost (edge weight sum), cut_size (edge count), partition weights
+ * (w0, w1), and imbalance metric. edge_cut() functions are main entry
+ * points for computing graph partitions.
+ *
+ * @see Mongoose_EdgeCutOptions.hpp for algorithm parameters
+ * @see Mongoose_EdgeCutProblem.hpp for internal problem representation
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_EdgeCut.hpp ========================================= */
 /* ========================================================================== */

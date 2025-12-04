@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_QPMinHeap.hpp
+ * @brief Min-heap for QP napsack breakpoint processing
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * QPMinHeap provides min-heap operations (build, delete, add, heapify)
+ * for efficient breakpoint processing in napsack solver. Extracts
+ * breakpoints in ascending order to find optimal lambda for balance
+ * constraint satisfaction.
+ *
+ * @see Mongoose_QPNapsack.hpp for napsack solver using heaps
+ * @see Mongoose_QPMaxHeap.hpp for complementary max-heap
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_QPMinHeap.hpp ======================================= */
 /* ========================================================================== */

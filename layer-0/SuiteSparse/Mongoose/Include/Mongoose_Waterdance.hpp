@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_Waterdance.hpp
+ * @brief Alternating FM/QP refinement passes for partition improvement
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Waterdance alternates between FM (discrete swaps) and QP (continuous
+ * optimization) refinement passes. The interplay ("dance") between methods
+ * escapes local minima that either method alone would get stuck in.
+ * Number of dances controlled by num_dances option.
+ *
+ * @see Mongoose_ImproveFM.hpp for Fiduccia-Mattheyses refinement
+ * @see Mongoose_ImproveQP.hpp for quadratic programming refinement
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_Waterdance.hpp ====================================== */
 /* ========================================================================== */

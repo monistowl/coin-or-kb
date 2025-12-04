@@ -1,3 +1,17 @@
+/**
+ * @file mongoose_mex.hpp
+ * @brief MATLAB MEX interface for Mongoose graph partitioning
+ * Copyright (C) 2017-2018, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * MATLAB interface utilities: conversion between MATLAB sparse matrices
+ * and Mongoose cs/Graph structures, option struct marshalling, result
+ * conversion to MATLAB arrays. Enables 'mongoose' MEX function for
+ * graph partitioning from MATLAB.
+ *
+ * @see Mongoose.hpp for C++ library interface
+ */
+
 //------------------------------------------------------------------------------
 // Mongoose/MATLAB/mongoose_mex.hpp
 //------------------------------------------------------------------------------

@@ -1,3 +1,19 @@
+/**
+ * @file Mongoose_EdgeCutOptions.hpp
+ * @brief Configuration options for edge cut partitioning algorithms
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * EdgeCut_Options controls all algorithm parameters: coarsening (limit,
+ * matching strategy, community detection), initial cut type (QP/random),
+ * Fiduccia-Mattheyses (search depth, refinement count), QP gradient
+ * projection (tolerance, iteration limit), and partition targets
+ * (split ratio, balance tolerance).
+ *
+ * @see Mongoose_ImproveFM.hpp for FM algorithm
+ * @see Mongoose_ImproveQP.hpp for QP refinement
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_EdgeCutOptions.hpp ================================== */
 /* ========================================================================== */

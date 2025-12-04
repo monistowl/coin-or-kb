@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_EdgeCutProblem.hpp
+ * @brief Extended graph with matching and partition state for algorithms
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * EdgeCutProblem extends Graph with algorithm state: partition array,
+ * vertex gains, external degrees, boundary heaps, cut metrics. Also
+ * stores matching data (matchmap, invmatchmap, matchtype) for multilevel
+ * hierarchy. Provides inline helpers for boundary heap and mark array.
+ *
+ * @see Mongoose_Graph.hpp for base graph structure
+ * @see Mongoose_BoundaryHeap.hpp for heap operations
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_EdgeCutProblem.hpp ================================== */
 /* ========================================================================== */
@@ -9,13 +24,6 @@
  * Mongoose is also available under other licenses; contact authors for details.
  * SPDX-License-Identifier: GPL-3.0-only
  * -------------------------------------------------------------------------- */
-
-/**
- * Graph data structure.
- *
- * Stores graph adjacency and weight information. Also used as a container for
- * storing information about matching, coarsening, and partitioning.
- */
 
 // #pragma once
 #ifndef MONGOOSE_EDGECUTPROBLEM_HPP

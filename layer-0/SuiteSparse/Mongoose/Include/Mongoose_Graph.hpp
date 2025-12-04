@@ -1,3 +1,17 @@
+/**
+ * @file Mongoose_Graph.hpp
+ * @brief Graph data structure for Mongoose partitioning
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Graph class stores adjacency in CSC format (p, i arrays) with optional
+ * edge weights (x) and vertex weights (w). Factory methods create from
+ * raw arrays or CSparse matrices. Shallow copy flags track ownership.
+ *
+ * @see Mongoose_EdgeCutProblem.hpp for extended graph with partition state
+ * @see Mongoose_CSparse.hpp for CSparse matrix format
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_Graph.hpp =========================================== */
 /* ========================================================================== */
@@ -9,12 +23,6 @@
  * Mongoose is also available under other licenses; contact authors for details.
  * SPDX-License-Identifier: GPL-3.0-only
  * -------------------------------------------------------------------------- */
-
-/**
- * Graph data structure.
- *
- * Stores graph adjacency and weight information.
- */
 
 // #pragma once
 #ifndef MONGOOSE_GRAPH_HPP

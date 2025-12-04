@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_QPNapsack.hpp
+ * @brief Napsack subproblem solver for QP balance constraint
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * QPNapsack solves the napsack subproblem: find lambda such that the
+ * projected solution satisfies balance constraint lo <= a'x <= hi.
+ * Uses breakpoint method with heaps to efficiently find optimal lambda.
+ * Core subroutine in QP gradient projection.
+ *
+ * @see Mongoose_QPNapUp.hpp for upward lambda search
+ * @see Mongoose_QPNapDown.hpp for downward lambda search
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_QPNapsack.hpp ======================================= */
 /* ========================================================================== */

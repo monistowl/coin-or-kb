@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose.hpp
+ * @brief Main public API for Mongoose graph partitioning library
+ * Copyright (C) 2017-2018, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Mongoose: High-quality graph partitioning via multilevel coarsening
+ * with Fiduccia-Mattheyses and quadratic programming refinement.
+ * Public interface includes Graph, EdgeCut, EdgeCut_Options classes
+ * and read_graph/edge_cut functions for partitioning workflows.
+ *
+ * @see Mongoose_EdgeCut.hpp for partition result structure
+ * @see Mongoose_EdgeCutOptions.hpp for algorithm configuration
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose.hpp ================================================= */
 /* ========================================================================== */

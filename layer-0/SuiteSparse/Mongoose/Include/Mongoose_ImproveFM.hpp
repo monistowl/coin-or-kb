@@ -1,3 +1,19 @@
+/**
+ * @file Mongoose_ImproveFM.hpp
+ * @brief Fiduccia-Mattheyses partition refinement algorithm
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * FM algorithm improves partitions via gain-based vertex swapping.
+ * SwapCandidate tracks vertex, partition side, weight, gain, and heap
+ * position. Algorithm maintains boundary heaps, selects highest-gain
+ * boundary vertex, swaps, and updates neighbor gains. Allows non-positive
+ * moves within search_depth to escape local minima.
+ *
+ * @see Mongoose_BoundaryHeap.hpp for boundary vertex management
+ * @see Mongoose_ImproveQP.hpp for QP-based alternative refinement
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_ImproveFM.hpp ======================================= */
 /* ========================================================================== */

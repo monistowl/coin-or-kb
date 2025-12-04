@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_CSparse.hpp
+ * @brief Sparse matrix operations subset from CSparse library
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Provides CSparse subset for sparse matrix operations: cs struct
+ * (compressed column/triplet format), cs_add (matrix addition),
+ * cs_transpose, cs_compress (triplet to CSC), and allocation.
+ * Uses int64_t (csi) matching Mongoose's Int type.
+ *
+ * @see Mongoose_Graph.hpp for graph representation using cs format
+ * @see Mongoose_IO.hpp for reading matrices from files
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_CSparse.hpp ========================================= */
 /* ========================================================================== */
@@ -9,15 +24,6 @@
  * Mongoose is also available under other licenses; contact authors for details.
  * SPDX-License-Identifier: GPL-3.0-only
  * -------------------------------------------------------------------------- */
-
-/**
- * Fundamental sparse matrix operations.
- *
- * A subset of the CSparse library is used for its sparse matrix data
- * structure and efficient fundamental matrix operations, such as adding,
- * transposing, and converting from triplet to CSC form.  This version
- * uses the same integer (csi or int64_t) as the Int in Mongoose.
- */
 
 // #pragma once
 #ifndef MONGOOSE_CSPARSE_HPP

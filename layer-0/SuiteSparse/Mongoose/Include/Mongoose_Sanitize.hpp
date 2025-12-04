@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_Sanitize.hpp
+ * @brief Matrix preprocessing for graph partitioning
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Matrix sanitization prepares input for partitioning: sanitizeMatrix
+ * handles symmetry and binary weights, removeDiagonal strips self-loops,
+ * mirrorTriangular expands triangular to symmetric. Ensures valid
+ * undirected graph representation for algorithms.
+ *
+ * @see Mongoose_IO.hpp for file input using sanitization
+ * @see Mongoose_CSparse.hpp for cs matrix operations
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_Sanitize.hpp ======================================== */
 /* ========================================================================== */

@@ -1,3 +1,18 @@
+/**
+ * @file Mongoose_Matching.hpp
+ * @brief Vertex matching algorithms for graph coarsening
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Implements matching strategies: Random (random neighbor), HEM (heavy
+ * edge matching), SR/SRdeg (sorted/degree-sorted heavy edge). Matching
+ * pairs vertices for coarsening; heavier edges are preferred to preserve
+ * graph structure. Cleanup handles unmatched (orphan) vertices.
+ *
+ * @see Mongoose_Coarsening.hpp for graph contraction using matches
+ * @see Mongoose_Internal.hpp for MatchingStrategy enum
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_Matching.hpp ======================================== */
 /* ========================================================================== */

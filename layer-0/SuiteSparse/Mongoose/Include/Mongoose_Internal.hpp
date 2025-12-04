@@ -1,3 +1,16 @@
+/**
+ * @file Mongoose_Internal.hpp
+ * @brief Internal type definitions and enumerations for Mongoose
+ * Copyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,
+ * Timothy A. Davis, William W. Hager. GPL-3.0-only license.
+ *
+ * Defines Int type (int64_t), matching strategies (Random, HEM, HEMSR,
+ * HEMSRdeg), initial cut types (QP, Random, NaturalOrder), and match
+ * types (Orphan, Standard, Brotherly, Community) used throughout Mongoose.
+ *
+ * @see Mongoose_Matching.hpp for matching algorithm implementations
+ */
+
 /* ========================================================================== */
 /* === Include/Mongoose_Internal.hpp ======================================== */
 /* ========================================================================== */
