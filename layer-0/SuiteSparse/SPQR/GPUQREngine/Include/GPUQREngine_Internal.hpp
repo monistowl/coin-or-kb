@@ -1,3 +1,17 @@
+/**
+ * @file GPUQREngine_Internal.hpp
+ * @brief Internal API and UberKernel declaration
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * Internal includes (Common, TaskDescriptor, Front, Stats, SuiteSparse).
+ * GPUQREngine_UberKernel: launches GPU kernel on stream with work queue.
+ * GPUQREngine_Internal: main factorization entry with Parent/Child arrays
+ * for multifrontal tree traversal. Returns QREngineResultCode.
+ *
+ * @see GPUQREngine_SuiteSparse.hpp for public API
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine_internal.hpp ============================
 // =============================================================================

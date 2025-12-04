@@ -1,3 +1,19 @@
+/**
+ * @file GPUQREngine_BucketList.hpp
+ * @brief Tile bucket management and GPU task generation
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * BucketList manages LLBundles in doubly-linked lists organized by column
+ * bucket. Tracks idle tiles (head/next/prev), generates Factorize/Apply
+ * tasks. Wavefront advances through buckets. VT block allocation via
+ * wsMongoVT workspace. Methods: Initialize, AdvanceBundles, CreateBundles,
+ * FillWorkQueue. Supports staircase exploitation for sparse factorization.
+ *
+ * @see GPUQREngine_LLBundle.hpp for bundle structure
+ * @see GPUQREngine_TaskDescriptor.hpp for generated tasks
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine_BucketList.hpp ==========================
 // =============================================================================

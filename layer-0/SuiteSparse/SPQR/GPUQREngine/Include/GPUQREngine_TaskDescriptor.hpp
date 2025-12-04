@@ -1,3 +1,18 @@
+/**
+ * @file GPUQREngine_TaskDescriptor.hpp
+ * @brief GPU task types and metadata for QR kernel dispatch
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * TaskType enum: Factorize variants (3x1, 2x1, 1x1, edge cases), Apply
+ * variants (Apply3/2/1), Assembly (SAssembly, PackAssembly). TaskDescriptor
+ * struct contains F pointer, AuxAddress[4] (VT blocks, maps), dimensions,
+ * extra[10] (tile indices, ranges). Used by UberKernel for dispatch.
+ * getFlops/getWeightedFlops for work queue balancing.
+ *
+ * @see GPUQREngine_Internal.hpp for UberKernel declaration
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine_TaskDescriptor.hpp ======================
 // =============================================================================

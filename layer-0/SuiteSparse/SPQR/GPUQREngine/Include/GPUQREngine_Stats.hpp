@@ -1,3 +1,16 @@
+/**
+ * @file GPUQREngine_Stats.hpp
+ * @brief Performance statistics for GPU QR factorization
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * QREngineStats template struct: kernelTime (total GPU kernel time across
+ * launches), numLaunches (kernel invocation count), flopsActual (total
+ * floating-point operations). Optional output parameter for GPUQREngine_Internal.
+ *
+ * @see GPUQREngine_Internal.hpp uses stats parameter
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine_Stats.hpp ===============================
 // =============================================================================

@@ -1,3 +1,17 @@
+/**
+ * @file Kernel/Apply/params_apply.hpp
+ * @brief Apply kernel parameters, macros, and function declarations
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * Constants: MAX_ROW_TILES=3, MAX_COL_TILES=2. Shared memory accessors:
+ * shV, shC, SHV(t,i,j), SHA(i,j), ST(i,j). Global memory: GLVT, GLF,
+ * IFRONT. Thread indexing: iv, jv, VCHUNKSIZE, NVCHUNKS. Device functions:
+ * block_apply_3/2/1, block_apply_3_by_1/2_by_1/1_by_1 variants.
+ *
+ * @see Kernel/sharedMemory.hpp for shared memory union
+ */
+
 //------------------------------------------------------------------------------
 // GPUQREngine/Kernel/Apply/params_apply.hpp
 //------------------------------------------------------------------------------

@@ -1,3 +1,18 @@
+/**
+ * @file GPUQREngine_Scheduler.hpp
+ * @brief Central coordinator for GPU QR factorization tasks
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * Scheduler manages fronts and GPU resources: frontList with numFronts,
+ * bucketLists for task generation, workQueues (double-buffered), CUDA
+ * streams (kernelStreams[2], memoryStreamH2D/D2H). Main loop: fillWorkQueue →
+ * launchKernel → postProcess. Tracks completion via FrontDataPulled events.
+ *
+ * @see GPUQREngine_Front.hpp for front structure
+ * @see GPUQREngine_BucketList.hpp for task generation
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine_Scheduler.hpp ===========================
 // =============================================================================

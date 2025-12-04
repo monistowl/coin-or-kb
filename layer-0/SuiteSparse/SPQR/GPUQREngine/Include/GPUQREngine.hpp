@@ -1,3 +1,13 @@
+/**
+ * @file GPUQREngine.hpp
+ * @brief Version information for GPUQREngine CUDA library
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * Version macros for GPUQREngine GPU-accelerated QR factorization.
+ * Current version 4.3.4 (June 2024). Part of SuiteSparse SPQR.
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine.hpp =====================================
 // =============================================================================

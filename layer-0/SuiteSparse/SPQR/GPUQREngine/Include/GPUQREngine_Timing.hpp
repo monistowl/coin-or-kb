@@ -1,3 +1,15 @@
+/**
+ * @file GPUQREngine_Timing.hpp
+ * @brief CUDA event-based timing macros for kernel profiling
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * Timing macros enabled by TIMING define: TIMER_INIT (create cudaEvents),
+ * TIMER_START (record start), TIMER_STOP (synchronize and get elapsed),
+ * TIMER_FINISH (destroy events). Compiles to no-ops when TIMING undefined.
+ * Used for kernel performance measurement and optimization.
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine_timing.hpp ==============================
 // =============================================================================

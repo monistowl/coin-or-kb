@@ -1,3 +1,18 @@
+/**
+ * @file GPUQREngine_Front.hpp
+ * @brief Frontal matrix class for GPU QR factorization
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * Front class encapsulates frontal matrix metadata: dimensions (fm×fn),
+ * CPU/GPU pointers (F, gpuF, cpuR), factorization state, staircase for
+ * exploiting block zeros. SparseMeta member extends for multifrontal
+ * sparse factorization. State machine tracks: ALLOCATE_WAIT → FACTORIZE → DONE.
+ *
+ * @see GPUQREngine_Scheduler.hpp for front coordination
+ * @see GPUQREngine_FrontState.hpp for state machine definition
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine_Front.hpp ===============================
 // =============================================================================

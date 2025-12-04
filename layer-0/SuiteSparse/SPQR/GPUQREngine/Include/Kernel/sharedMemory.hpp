@@ -1,3 +1,17 @@
+/**
+ * @file Kernel/sharedMemory.hpp
+ * @brief GPU shared memory layout for QR kernel operations
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * SharedMemory union overlays three kernel types: factorize (A, T, Z tiles
+ * for Householder), apply (V, C matrices for block update), packassemble
+ * (Rimap/Rjmap for contribution assembly). Global __shared__ shMemory,
+ * myTask (current task), IsApplyFactorize flag. Sized for PANELSIZE×TILESIZE.
+ *
+ * @see GPUQREngine_Common.hpp for TILESIZE, PANELSIZE constants
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/Kernel/sharedMemory.cu ==============================
 // =============================================================================

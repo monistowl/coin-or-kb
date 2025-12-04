@@ -1,3 +1,18 @@
+/**
+ * @file GPUQREngine_FrontState.hpp
+ * @brief Finite state machine for front factorization lifecycle
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * FrontState enum defines 9-state FSM: ALLOCATE_WAIT (0) → ASSEMBLE_S (1) →
+ * CHILD_WAIT (2) → FACTORIZE (3) → FACTORIZE_COMPLETE (4) → PARENT_WAIT (5) →
+ * PUSH_ASSEMBLE (6) → CLEANUP (7) → DONE (8). Transitions driven by
+ * FillWorkQueue and PostProcessing. Scheduler uses states to coordinate work.
+ *
+ * @see GPUQREngine_Front.hpp uses FrontState
+ * @see GPUQREngine_Scheduler.hpp manages state transitions
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine_FrontState.hpp ==========================
 // =============================================================================

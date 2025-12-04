@@ -1,3 +1,18 @@
+/**
+ * @file GPUQREngine_LLBundle.hpp
+ * @brief Bundle of row tiles for GPU factorization tasks
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * LLBundle groups row tiles for Factorize/Apply tasks. Tracks: First (smallest
+ * rowtile, made triangular), Shadow (memento of factorized First), Last,
+ * Delta (pipelining), Max. VT[2] pointers for Householder vectors. Methods:
+ * AddTileToSlots, Advance, gpuPack. CurrentTask indicates GenericFactorize/Apply.
+ * Managed by BucketList in doubly-linked structure.
+ *
+ * @see GPUQREngine_BucketList.hpp for bundle management
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine_LLBundle.hpp ============================
 // =============================================================================

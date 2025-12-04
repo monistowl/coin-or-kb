@@ -1,3 +1,17 @@
+/**
+ * @file GPUQREngine_Common.hpp
+ * @brief GPU thread geometry, tile constants, and common macros
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * Core constants: TILESIZE=32 (tile dimension), PANELSIZE=3 (tiles per
+ * panel), NUMTHREADS=384 (threads per kernel), PADDING=1 (bank conflicts).
+ * Common macros: CEIL, MIN, MAX, EMPTY sentinel. Optional GPUQRENGINE_RENDER
+ * for GraphViz visualization, experimental GPUQRENGINE_PIPELINING.
+ *
+ * @see GPUQREngine_BucketList.hpp uses these constants
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine_Common.hpp ==============================
 // =============================================================================

@@ -1,3 +1,18 @@
+/**
+ * @file GPUQREngine_SparseMeta.hpp
+ * @brief Sparse multifrontal factorization metadata
+ * Copyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * SparseMeta extends Front for sparse factorization: fp (pivotal columns),
+ * nc (remaining children), isStaged/pushOnly flags for staging. S assembly
+ * metadata (cpuS/gpuS SEntry arrays, Scount). Pack assembly: contribution
+ * block dimensions (cm×cn), parent info (pn, gpuP), row/col maps (gpuRimap/gpuRjmap).
+ *
+ * @see GPUQREngine_Front.hpp for containing class
+ * @see GPUQREngine_SEntry.hpp for SEntry structure
+ */
+
 // =============================================================================
 // === GPUQREngine/Include/GPUQREngine_SparseMeta.hpp ==========================
 // =============================================================================
