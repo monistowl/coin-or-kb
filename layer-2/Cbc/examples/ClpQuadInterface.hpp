@@ -1,3 +1,18 @@
+/**
+ * @file ClpQuadInterface.hpp
+ * @brief OsiClp interface for quadratic objectives in MIP
+ * Copyright (C) 2004, International Business Machines. EPL-1.0 license.
+ *
+ * ClpQuadInterface: extends OsiClpSolverInterface to handle quadratic objectives
+ * with Cbc's branch-and-cut. Stores the true quadratic objective separately
+ * while presenting a linear objective to the MIP solver. Custom getObjValue()
+ * returns the quadratic objective value. initialize() can setup fake linear
+ * objective or read nonlinear info from AMPL .nl files.
+ *
+ * @see OsiClpSolverInterface for base class
+ * @see ClpObjective for quadratic objective
+ */
+
 // Copyright (C) 2004, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

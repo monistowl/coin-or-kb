@@ -1,3 +1,18 @@
+/**
+ * @file CbcSolver2.hpp
+ * @brief Specialized OsiClp interface for long thin MIP problems
+ * Copyright (C) 2005, International Business Machines. EPL-1.0 license.
+ *
+ * CbcSolver2: extends OsiClpSolverInterface with custom initialSolve/resolve
+ * for problems with many rows but unit elements and RHS. Tracks variable usage
+ * by node, allows compression (removing inactive variables) and fixing based
+ * on recency. Memory parameter controls how recently a variable must have been
+ * used. Algorithm modes: 0=nothing, 1=compress and fix, 2=long thin strategy.
+ *
+ * @see OsiClpSolverInterface for base class
+ * @see CbcModel for branch-and-cut integration
+ */
+
 // Copyright (C) 2005, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

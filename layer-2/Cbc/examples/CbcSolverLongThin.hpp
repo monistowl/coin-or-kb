@@ -1,3 +1,18 @@
+/**
+ * @file CbcSolverLongThin.hpp
+ * @brief OsiClp interface optimized for long thin MIP problems
+ * Copyright (C) 2004, International Business Machines. EPL-1.0 license.
+ *
+ * CbcSolverLongThin: extends OsiClpSolverInterface with custom initialSolve/
+ * resolve for problems with many rows (long) but few columns active at once
+ * (thin). Similar to CbcSolver3 with variable usage tracking, nested search
+ * capability, and infeasibility propagation. Tracks node history for variables
+ * to enable efficient subproblem compression and warm-starting.
+ *
+ * @see OsiClpSolverInterface for base class
+ * @see CbcSolver3 for similar implementation
+ */
+
 // Copyright (C) 2004, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

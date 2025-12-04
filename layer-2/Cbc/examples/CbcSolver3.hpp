@@ -1,3 +1,18 @@
+/**
+ * @file CbcSolver3.hpp
+ * @brief OsiClp interface with nested search for MIP
+ * Copyright (C) 2004, International Business Machines. EPL-1.0 license.
+ *
+ * CbcSolver3: extends OsiClpSolverInterface with custom initialSolve/resolve
+ * and nested search capability. When a sufficient fraction of variables are
+ * fixed (set by setNested), triggers a nested MIP search on the subproblem.
+ * believeInfeasible flag determines if infeasibility on subset implies global
+ * infeasibility. Useful for decomposition-based approaches to hard MIPs.
+ *
+ * @see OsiClpSolverInterface for base class
+ * @see CbcModel for branch-and-cut integration
+ */
+
 // Copyright (C) 2004, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

@@ -1,3 +1,18 @@
+/**
+ * @file CbcBranchFollow2.hpp
+ * @brief Follow-on branching for air-crew scheduling problems
+ * Copyright (C) 2004, International Business Machines. EPL-1.0 license.
+ *
+ * CbcFollowOn2: specialized branching for crew scheduling where crew flies in
+ * on flight A and out on flight B or another. Branches by fixing variables
+ * based on crew connections—one side fixes all going out on B to 0, other
+ * side fixes those NOT going out on B to 0. Generates cut-like branches with
+ * sum aij*xj <= bi on each side. Should be used with high priority alongside
+ * normal branching rules. Useful for set partitioning problems with flow.
+ *
+ * @see CbcObject for branching object interface
+ */
+
 // Copyright (C) 2004, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

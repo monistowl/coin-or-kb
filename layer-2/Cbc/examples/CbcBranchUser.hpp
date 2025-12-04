@@ -1,3 +1,18 @@
+/**
+ * @file CbcBranchUser.hpp
+ * @brief User-defined branching decision and fixed integer branching
+ * Copyright (C) 2002, International Business Machines. EPL-1.0 license.
+ *
+ * CbcBranchUserDecision: example of custom branching decision logic after
+ * strong branching—compares candidates using change in objective and
+ * infeasibilities to select best branch. CbcSimpleIntegerFixed: integer
+ * variable that continues branching until fixed (forces repeated branching
+ * on same variable). Both demonstrate extending Cbc's branching framework.
+ *
+ * @see CbcBranchDecision for decision interface
+ * @see CbcSimpleInteger for integer branching
+ */
+
 // Copyright (C) 2002, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

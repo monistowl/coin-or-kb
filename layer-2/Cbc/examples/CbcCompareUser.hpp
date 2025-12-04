@@ -1,3 +1,18 @@
+/**
+ * @file CbcCompareUser.hpp
+ * @brief User-defined node comparison with weighted objective
+ * Copyright (C) 2002, International Business Machines. EPL-1.0 license.
+ *
+ * CbcCompareUser: example node selection strategy combining objective value
+ * with infeasibility weighting. Default after first solution. Weight=0 auto-
+ * computes to hit first solution less 2%. Weight=-1 does depth-first before
+ * solution; -2 does breadth-first for first 1000 nodes. Adapts behavior via
+ * newSolution() callback and every1000Nodes() for tree resorting.
+ *
+ * @see CbcCompareBase for comparison interface
+ * @see CbcNode for B&B tree nodes
+ */
+
 // Copyright (C) 2002, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

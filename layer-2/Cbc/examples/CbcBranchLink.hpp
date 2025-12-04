@@ -1,3 +1,18 @@
+/**
+ * @file CbcBranchLink.hpp
+ * @brief Linked ordered sets (SOS with grouped variables)
+ * Copyright (C) 2005, International Business Machines. EPL-1.0 license.
+ *
+ * CbcLink: special ordered set where variables are grouped—a valid solution
+ * has all zeros except for one contiguous block k*numberLink to (k+1)*numberLink-1.
+ * Useful when variables come in linked groups (e.g., selecting a supplier also
+ * selects associated transport options). CbcLinkBranchingObject handles the
+ * branching by splitting the set at a weighted separator value.
+ *
+ * @see CbcObject for branching object interface
+ * @see CbcBranchingObject for branch execution
+ */
+
 // Copyright (C) 2005, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
