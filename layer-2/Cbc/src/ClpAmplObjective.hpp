@@ -1,6 +1,16 @@
-// Copyright (C) 2007, International Business Machines
-// Corporation and others.  All Rights Reserved.
-// This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file ClpAmplObjective.hpp
+ * @brief AMPL-interface nonlinear objective for Clp
+ * Copyright (C) 2007, International Business Machines Corporation.
+ * This code is licensed under the Eclipse Public License (EPL).
+ *
+ * ClpAmplObjective: Nonlinear objective function using AMPL's ASL
+ * for gradient evaluation. Provides gradient, reduced gradient, and
+ * step length computation for line search in nonlinear Clp.
+ *
+ * @see ClpObjective for base objective interface
+ * @see ClpConstraintAmpl for corresponding constraint class
+ */
 
 #ifndef ClpAmplObjective_H
 #define ClpAmplObjective_H

@@ -1,6 +1,17 @@
-// Copyright (C) 2000, International Business Machines
-// Corporation and others.  All Rights Reserved.
-// This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file OsiCbcSolverInterface.hpp
+ * @brief OSI-compliant solver interface wrapping Cbc
+ * Copyright (C) 2000, International Business Machines Corporation.
+ * This code is licensed under the Eclipse Public License (EPL).
+ *
+ * OsiCbcSolverInterface: Implements OsiSolverInterface by wrapping a
+ * CbcModel. Provides standard OSI methods (initialSolve, resolve,
+ * branchAndBound) that delegate to Cbc's MIP solver. Enables Cbc
+ * to be used as a plug-in solver in OSI-based applications.
+ *
+ * @see OsiSolverInterface for base OSI interface
+ * @see CbcModel for underlying MIP solver
+ */
 
 #ifndef OsiCbcSolverInterface_H
 #define OsiCbcSolverInterface_H

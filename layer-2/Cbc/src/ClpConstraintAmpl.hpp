@@ -1,6 +1,16 @@
-// Copyright (C) 2007, International Business Machines
-// Corporation and others.  All Rights Reserved.
-// This code is licensed under the terms of the Eclipse Public License (EPL).
+/**
+ * @file ClpConstraintAmpl.hpp
+ * @brief AMPL-interface constraint for nonlinear Clp extensions
+ * Copyright (C) 2007, International Business Machines Corporation.
+ * This code is licensed under the Eclipse Public License (EPL).
+ *
+ * ClpConstraintAmpl: Nonlinear constraint class using AMPL's ASL
+ * (Solver Library) for gradient evaluation. Enables nonlinear
+ * constraints in Clp through AMPL model interface.
+ *
+ * @see ClpConstraint for base constraint interface
+ * @see ClpAmplObjective for corresponding objective class
+ */
 
 #ifndef ClpConstraintAmpl_H
 #define ClpConstraintAmpl_H
