@@ -10,6 +10,19 @@
  * test(x,y) returns true if y is deeper than x in the tree.
  * Deepest nodes explored first -> LIFO stack behavior.
  *
+ * @algorithm Depth-First Search (DFS) Node Selection:
+ *   test(x, y) comparison for heap ordering:
+ *   Returns true if depth(y) > depth(x).
+ *   Effect: Deepest nodes processed first (LIFO behavior).
+ *   Memory: O(depth) nodes stored vs O(breadth) for best-first.
+ *   Finds feasible solution quickly; weak bounds until backtrack.
+ *
+ * @math Complexity trade-off:
+ *   DFS memory: O(d) where d = tree depth.
+ *   Best-first memory: O(2^d) worst case.
+ *   DFS bound gap: May be large until substantial backtracking.
+ *   Best-first bound: Optimal LP bound tracked throughout.
+ *
  * Advantages:
  * - Low memory (linear in depth)
  * - Fast to first feasible solution

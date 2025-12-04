@@ -16,6 +16,19 @@
  * - Variables ordered by weights; sum to 1
  * - Represents point between two breakpoints
  *
+ * @algorithm SOS Branching (Beale & Tomlin 1970):
+ *   createCbcBranch() partitions ordered set {x_1,...,x_n}:
+ *   1. Find weighted center: w̄ = Σ(w_j·x_j) / Σx_j.
+ *   2. Choose separator s closest to w̄.
+ *   3. Down branch: x_j = 0 for all w_j > s.
+ *   4. Up branch: x_j = 0 for all w_j ≤ s.
+ *   Binary tree partitions the ordered set.
+ *
+ * @math Infeasibility measure:
+ *   SOS1: inf = min(Σx_j, 1-max(x_j)) - prefer fixing near-integer.
+ *   SOS2: inf based on violation of adjacency (non-consecutive nonzeros).
+ *   separator_ stored in branching object for partition point.
+ *
  * Branching partitions the ordered set at a separator weight,
  * forcing variables on one side to zero.
  *

@@ -11,6 +11,18 @@
  * Pseudocosts are updated during search based on observed
  * objective changes from actual branching decisions.
  *
+ * @algorithm Dynamic Branching Selection (betterBranch):
+ *   Phase 1 (before solution): Score = numInfUp × numInfDn (product score).
+ *   Phase 2 (after solution): Score = (1-λ)·min(Δup,Δdn) + λ·max(Δup,Δdn).
+ *   Where Δup, Δdn = predicted objective changes from pseudocosts.
+ *   Select variable maximizing score.
+ *
+ * @math Pseudocost update:
+ *   After branching on x_j with Δx = |x_j - x̄_j|:
+ *   ψ_j^+ ← (n·ψ_j^+ + Δz^+/Δx) / (n+1) for up branch,
+ *   ψ_j^- ← (n·ψ_j^- + Δz^-/Δx) / (n+1) for down branch.
+ *   n = number of previous observations.
+ *
  * @see CbcBranchDecision for base class
  * @see CbcSimpleIntegerDynamicPseudoCost for dynamic pseudocost objects
  * @see CbcBranchDefaultDecision for simpler selection

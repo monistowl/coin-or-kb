@@ -14,6 +14,18 @@
  * - 1: SOS-style, coefficient +1, strong value is 1
  * - 0: Non-SOS, coefficient -1, strong value is 0
  *
+ * @algorithm Clique Branching:
+ *   createCbcBranch() for clique {x_1,...,x_n} with Σx_j ≤ 1:
+ *   1. Find most fractional variable x_k.
+ *   2. Down branch: Fix x_k to weak value (0 if type=1, 1 if type=0).
+ *   3. Up branch: Fix x_k to strong value, all others to weak.
+ *   Uses bitmask encoding: downMask_, upMask_ indicate fixings.
+ *
+ * @math Clique constraint forms:
+ *   Standard: x_1 + x_2 + ... + x_n ≤ 1 (at most one = 1).
+ *   Negated: -y_1 - y_2 + x_3 ≤ -1 where y_j = 1-x_j.
+ *   RHS implicit = 1 - numberNonSOSMembers_.
+ *
  * Branching: Pick a fractional variable and partition the set.
  * Uses bitmasks for efficient subset representation (up to 64 members
  * with CbcCliqueBranchingObject, unlimited with CbcLongCliqueBranchingObject).

@@ -7,11 +7,18 @@
  * CbcHeuristicRINS: Implements RINS (Danna, Rothberg & Le Pape, 2005).
  * Uses LP relaxation to define a neighborhood around the incumbent solution.
  *
- * Algorithm:
- * 1. Compare current LP solution with best known integer solution
- * 2. Fix variables where LP and incumbent agree
- * 3. Solve restricted MIP on remaining variables
- * 4. Accept if improved, update incumbent
+ * @algorithm RINS - Relaxation Induced Neighborhood Search:
+ *   solution() at node with incumbent x* and LP solution x̄:
+ *   1. For each integer variable j: If x*_j = x̄_j, fix x_j = x*_j.
+ *   2. Solve restricted MIP on free variables (sub-MIP).
+ *   3. If sub-MIP solution z' < z*: Accept as new incumbent.
+ *   4. Otherwise: Continue B&C with original incumbent.
+ *   Triggered periodically (howOften_) or at solution events.
+ *
+ * @math Neighborhood definition:
+ *   N_RINS(x*) = {x : x_j = x*_j ∀j where x*_j = round(x̄_j)}.
+ *   Fixes variables where LP agrees with incumbent.
+ *   Neighborhood size depends on LP-incumbent agreement.
  *
  * Tracks which variables have appeared in solutions (used_ array)
  * to focus search on promising variables.

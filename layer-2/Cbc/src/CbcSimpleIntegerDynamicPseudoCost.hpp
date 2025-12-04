@@ -13,6 +13,19 @@
  * - numberTimesUp_/Down_: Branch count for averaging
  * - numberBeforeTrust_: Initialization threshold before trusting estimates
  *
+ * @algorithm Reliability Branching (Achterberg, Koch, Martin 2005):
+ *   For each integer variable x_j:
+ *   1. If numberTimesDown_ < numberBeforeTrust_: Use strong branching.
+ *   2. Else: Use pseudocost estimate ψ_j^- × (x̄_j - floor(x̄_j)).
+ *   3. Update pseudocost after each branch: ψ_j ← Σ(ΔLP)/Σ(Δx).
+ *   Hybrid of strong branching (accurate) and pseudocosts (fast).
+ *
+ * @math Pseudocost estimation:
+ *   Down estimate: D_j = ψ_j^- × (x̄_j - ⌊x̄_j⌋).
+ *   Up estimate: U_j = ψ_j^+ × (⌈x̄_j⌉ - x̄_j).
+ *   Score: μ·min(D_j,U_j) + (1-μ)·max(D_j,U_j), μ ∈ [0,1].
+ *   WEIGHT_PRODUCT variant: score = D_j^{1-μ} × U_j^{μ}.
+ *
  * Reliability branching concept:
  * - Initially uses strong branching until numberBeforeTrust_ reached
  * - Then relies on accumulated pseudocost estimates

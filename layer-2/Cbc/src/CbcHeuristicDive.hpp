@@ -7,12 +7,20 @@
  * CbcHeuristicDive: Abstract base for diving heuristics that explore
  * the tree greedily by fixing variables and re-solving LPs.
  *
- * Diving process:
- * 1. Solve LP relaxation
- * 2. Select a fractional variable via selectVariableToBranch()
- * 3. Fix variable in direction indicated by bestRound
- * 4. Re-solve LP, repeat until integer feasible or infeasible
- * 5. If infeasible, backtrack (limited depth) or fail
+ * @algorithm Diving Heuristic Framework:
+ *   solution() greedy feasibility search:
+ *   1. Solve LP relaxation at current node.
+ *   2. While fractional variables exist:
+ *      a. selectVariableToBranch() → bestColumn, bestRound.
+ *      b. Fix x[bestColumn] in direction bestRound.
+ *      c. Re-solve LP; if infeasible, backtrack or fail.
+ *   3. If integer feasible: Return solution.
+ *   4. Apply reduced cost fixing during dive for speedup.
+ *
+ * @math Lock counting for variable selection:
+ *   downLocks_[j] = #{constraints where x_j has positive coefficient}.
+ *   upLocks_[j] = #{constraints where x_j has negative coefficient}.
+ *   Variables with fewer locks are easier to round feasibly.
  *
  * Subclasses implement selectVariableToBranch() with different strategies:
  * - Fractional: Most fractional variable

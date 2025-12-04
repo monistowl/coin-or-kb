@@ -12,6 +12,21 @@
  * - All-integer problem with positive integral coefficients
  * - Currently: set partitioning (not general covering)
  *
+ * @algorithm Dynamic Programming Fathoming:
+ *   fathom() for set partitioning with small integral data:
+ *   1. Encode constraint satisfaction as bit pattern (state).
+ *   2. For each column j: tryColumn() updates reachable states.
+ *   3. cost_[state] = minimum cost to reach state.
+ *   4. back_[state] = column that achieved minimum.
+ *   5. Return solution achieving cost_[target_].
+ *   Exact enumeration when state space tractable.
+ *
+ * @math State space size:
+ *   Each constraint with RHS=1 contributes 1 bit → 2× states.
+ *   RHS=b contributes ⌈log₂(b+1)⌉ bits → (b+1)× states.
+ *   Total: Π(RHS_i + 1) states, bounded by maximumSizeAllowed_.
+ *   Type 0 (all RHS=1): 2^m states for m constraints.
+ *
  * State space considerations:
  * - Each RHS=1 doubles state space
  * - RHS=2,3 quadruples; RHS=4-7 multiplies by 8
