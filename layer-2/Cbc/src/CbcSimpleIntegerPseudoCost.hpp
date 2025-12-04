@@ -9,6 +9,21 @@
  * - upPseudoCost_: Estimated objective increase per unit ceiling
  * - downPseudoCost_: Estimated objective increase per unit floor
  *
+ * @algorithm Static Pseudocost Branching:
+ *   infeasibility() and createCbcBranch() for variable x_j:
+ *   1. Compute fractionality: f = x̄_j - floor(x̄_j).
+ *   2. Down estimate: D = downPseudoCost_ × f.
+ *   3. Up estimate: U = upPseudoCost_ × (1-f).
+ *   4. Return infeasibility based on method_:
+ *      0: min(D,U), 1-3: max(D,U) under various conditions.
+ *   5. preferredWay from upDownSeparator_ threshold.
+ *
+ * @math Static vs dynamic pseudocosts:
+ *   Static: ψ_j^+, ψ_j^- fixed from problem structure or user input.
+ *   Dynamic: ψ_j learned from branching history.
+ *   Static faster (no updates) but less accurate.
+ *   Often initialized from constraint matrix analysis.
+ *
  * Unlike CbcSimpleIntegerDynamicPseudoCost, these values are fixed
  * (typically from problem structure or user-provided estimates).
  *

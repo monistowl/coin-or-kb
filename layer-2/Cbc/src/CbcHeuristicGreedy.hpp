@@ -6,20 +6,29 @@
  *
  * Contains greedy heuristics suited for set covering/partitioning models:
  *
- * CbcHeuristicGreedyCover: Classic greedy set cover.
- * Variables fixed at one stay at one. Others initially zero.
- * Iteratively selects variable with best cost/coverage ratio
- * (with randomization for tie-breaking).
+ * @algorithm Greedy Set Cover - CbcHeuristicGreedyCover:
+ *   solution() for min Σc_j·x_j s.t. Ax ≥ 1:
+ *   1. Initialize: Keep x_j=1 from current solution, rest zero.
+ *   2. While uncovered rows exist:
+ *      a. For each x_j=0: ratio_j = c_j / (uncovered rows containing j).
+ *      b. Perturb ratios for tie-breaking randomization.
+ *      c. Set x_j=1 for j with minimum ratio.
+ *   3. Return feasible cover or fail.
  *
- * CbcHeuristicGreedyEquality: Greedy for equality constraints.
- * Similar to cover but handles set partitioning (exact cover).
- * Uses fraction_ parameter to set partial coverage before B&C.
+ * @algorithm Greedy Set Partitioning - CbcHeuristicGreedyEquality:
+ *   solution() for Ax = 1 (exact cover):
+ *   Same as cover but tracks coverage exactly (can't over-cover).
+ *   fraction_ controls partial coverage before invoking B&C.
  *
- * CbcHeuristicGreedySOS: Greedy for SOS and <= constraints.
- * Specialized for models with GUB/SOS structure and positive elements.
- * originalRhs_ = -1 indicates SOS row, otherwise <= constraint.
- * algorithm_ bits control: current vs original model, pure vs
- * solution-guided greedy, merit calculation, dual usage.
+ * @algorithm Greedy SOS/GUB - CbcHeuristicGreedySOS:
+ *   solution() for models with GUB structure:
+ *   Handles SOS constraints (originalRhs_=-1) and <= constraints.
+ *   algorithm_ bits: 1=current model, 2=solution-guided, 4=merit, 8/16=duals.
+ *
+ * @math Greedy ratio with perturbation:
+ *   ratio_j = c_j / coverage_j × (1 + ε·random).
+ *   ε larger with algorithm_ += 10.
+ *   Classic greedy O(n·m) where n=variables, m=constraints.
  *
  * All three use algorithm_ flags:
  * - 0: Use current upper bounds

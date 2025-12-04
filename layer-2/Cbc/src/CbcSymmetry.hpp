@@ -8,6 +8,31 @@
  * CbcSymmetry: Detects problem symmetry and exploits it for faster solving.
  * Uses the nauty library for automorphism group computation.
  *
+ * @algorithm Symmetry Detection and Exploitation:
+ *   setupSymmetry() builds graph G from MIP:
+ *   1. Create nodes for variables (colored by type, bounds, objective).
+ *   2. Create nodes for constraints (colored by type, RHS).
+ *   3. Add edges for nonzero coefficients (a_ij ≠ 0 → edge).
+ *   4. Call nauty: Compute automorphism group Aut(G).
+ *   5. Extract orbits: O_k = {variables symmetric under Aut(G)}.
+ *
+ * @algorithm Orbital Fixing - orbitalFixing():
+ *   When x_j fixed to value v in orbit O:
+ *   1. For each x_i ∈ O with x_i ≠ x_j: If symmetry maps x_j → x_i,
+ *      fix x_i = v (symmetric fixings propagate).
+ *   2. Reduces search space without losing optimal solutions.
+ *
+ * @algorithm Orbital Branching - CbcOrbitalBranchingObject:
+ *   branch() exploits symmetry to avoid symmetric subtrees:
+ *   1. Down branch: Fix x_column = 0, all orbit members = 0.
+ *   2. Up branch: Fix x_column = 1.
+ *   Breaks symmetry: symmetric nodes pruned implicitly.
+ *
+ * @math Automorphism group:
+ *   Aut(G) = {π : V → V | π preserves edges and colors}.
+ *   |Aut(G)| can be exponential; nauty computes generators.
+ *   Orbit O(v) = {π(v) : π ∈ Aut(G)} - equivalence class.
+ *
  * Key concepts:
  * - Orbits: Sets of symmetric variables
  * - Orbital fixing: If one variable in orbit is fixed, fix others by symmetry

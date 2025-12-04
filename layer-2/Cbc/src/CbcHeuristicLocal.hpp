@@ -6,23 +6,31 @@
  *
  * Contains several improvement heuristics for MIP:
  *
- * CbcHeuristicLocal: 2-opt swap-based local search.
- * Starting from incumbent, tries setting variables to better values,
- * then swaps pairs of integer variables. Uses matrix_ for constraint
- * analysis and used_ array to track variable participation in solutions.
+ * @algorithm Local Search (2-opt) - CbcHeuristicLocal:
+ *   solution() from incumbent x*:
+ *   1. Try improving each variable: x_j → x_j ± 1, check feasibility.
+ *   2. If infeasible, try 2-opt swaps: (x_i, x_j) → (x_i±1, x_j∓1).
+ *   3. Accept any improving feasible move; repeat until no improvement.
+ *   swap_=0 normal local search, swap_=1 embedded in B&C.
  *
- * CbcHeuristicProximity: Proximity search (Fischetti & Monaci 2014).
- * Uses Feasibility Pump infrastructure to find solutions close to
- * incumbent. Blends objective with distance minimization.
+ * @algorithm Proximity Search (Fischetti & Monaci 2014) - CbcHeuristicProximity:
+ *   solution() minimizes distance to incumbent:
+ *   1. Add proximity constraint: Σ|x_j - x*_j| ≤ δ (cutoff based).
+ *   2. Optimize c^T x subject to proximity and original constraints.
+ *   3. Progressively tighten δ; use Feasibility Pump infrastructure.
+ *   Blends objective optimization with incumbent neighborhood.
+ *
+ * @algorithm Crossover/Path Relinking - CbcHeuristicCrossover:
+ *   solution() combines multiple solutions:
+ *   1. Fix variables where all useNumber_ solutions agree.
+ *   2. Use random_ for tie-breaking diversification.
+ *   3. Solve restricted MIP on free variables.
+ *   Path relinking through solution pool agreement.
  *
  * CbcHeuristicNaive: Simple construction heuristic.
  * (a) Fix integers close to zero
  * (b) Fix integers with small costs to zero
  * (c) Tighten continuous bounds and optimize
- *
- * CbcHeuristicCrossover: Path relinking / solution combination.
- * Fixes variables that agree across multiple solutions (useNumber_).
- * Uses random_ array for diversification.
  *
  * @see CbcHeuristicFPump for Feasibility Pump
  * @see CbcHeuristicRINS for neighborhood search
