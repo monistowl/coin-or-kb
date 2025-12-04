@@ -11,14 +11,27 @@
  * IpoptNLP abstracts the optimization problem for internal use:
  *   min f(x)  s.t.  c(x) = 0, d_L <= d(x) <= d_U, x_L <= x <= x_U
  *
+ * @algorithm NLP Evaluation with Caching:
+ *   Cache f(x), ∇f(x), c(x), J_c(x), d(x), J_d(x), H(x,λ) keyed by x.
+ *   Invalidate on x change. Recompute only when needed.
+ *   Scaling applied transparently: f̃ = s_f·f, c̃ = D_c·c, etc.
+ *   Expansion matrices map variable bounds to full space.
+ *
+ * @math Internal NLP formulation:
+ *   Variables: x ∈ ℝⁿ (primal), s ∈ ℝᵐᵈ (slacks for inequalities).
+ *   Equality constraints: c(x) = 0 (m_c constraints).
+ *   Inequality constraints: d(x) - s = 0 with d_L ≤ s ≤ d_U.
+ *   Bounds: x_L ≤ x ≤ x_U (handled via multipliers z_L, z_U).
+ *   Hessian: ∇²_xx L = ∇²f + Σᵢ yc_i·∇²c_i + Σⱼ yd_j·∇²d_j.
+ *
+ * @complexity Function evals: O(user-defined).
+ *   Jacobian sparsity: typically O(nnz) << O(n·m).
+ *   Caching avoids redundant evaluations within same iteration.
+ *
  * Provides:
  * - f(), grad_f(), c(), jac_c(), d(), jac_d(), h() - NLP evaluations
- * - Bounds: x_L, x_U, d_L, d_U with expansion matrices Px_L, Px_U, etc.
+ * - Bounds with expansion matrices Px_L, Px_U, Pd_L, Pd_U
  * - Scaling via NLPScalingObject
- * - Caching of evaluated quantities
- * - Barrier-dependent objectives (for restoration phase)
- *
- * Implementations: OrigIpoptNLP (standard), RestoIpoptNLP (restoration)
  *
  * @see IpOrigIpoptNLP.hpp for standard implementation
  * @see IpTNLPAdapter.hpp for user interface adapter

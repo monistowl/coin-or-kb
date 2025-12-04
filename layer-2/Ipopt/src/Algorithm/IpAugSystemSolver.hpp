@@ -16,15 +16,27 @@
  *   [   Jc             0      Dc - δc*I    0    ] [sol_c]   [rhs_c]
  *   [   Jd            -I         0      Dd - δd*I] [sol_d]   [rhs_d]
  *
+ * @algorithm Augmented System Factorization:
+ *   1. Assemble symmetric indefinite matrix K from blocks.
+ *   2. Factor K = P·L·D·L^T·P^T (symmetric indefinite factorization).
+ *   3. Solve K·x = b using forward/back substitution.
+ *   Factorization reused for multiple RHS (predictor-corrector).
+ *   Inertia check: verify (n+, n-, n0) matches expected (nx+ns, nc+nd, 0).
+ *
+ * @math Inertia correction via regularization:
+ *   If inertia incorrect: increase δx (primal reg) or δc,δd (dual reg).
+ *   Primal reg δx > 0 ensures positive inertia on (1,1) block.
+ *   Dual reg δc,δd < 0 controls negative inertia on (2,2),(3,3),(4,4) blocks.
+ *   Target: n+ = nx+ns (primal dim), n- = nc+nd (dual dim), n0 = 0.
+ *
+ * @complexity O(nnz²/n) for sparse Cholesky-like factorization.
+ *   O(n²) worst case for dense submatrices.
+ *   Strategy pattern: different solvers (MA27, MA57, Pardiso, MUMPS).
+ *
  * Key parameters:
  * - W: Hessian of Lagrangian (or approximation)
  * - Dx, Ds: Barrier diagonal contributions (Σx, Σs)
  * - δx, δs, δc, δd: Regularization parameters for inertia control
- * - Jc, Jd: Constraint Jacobians
- *
- * Implementations:
- * - StdAugSystemSolver: Forms explicit matrix, uses SymLinearSolver
- * - GenAugSystemSolver: For general (non-symmetric) matrices
  *
  * @see IpStdAugSystemSolver.hpp for the main implementation
  * @see IpSymLinearSolver.hpp for the underlying sparse solver

@@ -15,11 +15,25 @@
  * - delta_aff_: Affine-scaling step (for Mehrotra predictor-corrector)
  * - W_: Hessian or Hessian approximation
  *
+ * @algorithm IPM Iterate Management:
+ *   Per iteration: curr → trial (via delta + line search) → accept.
+ *   Predictor-corrector: delta_aff (μ=0 step), then delta (corrected).
+ *   Step: trial = curr + α·delta where α from line search.
+ *   AcceptTrialPoint: curr ← trial, reset delta flags.
+ *
+ * @math Primal-dual iterate structure:
+ *   w = (x, s, y_c, y_d, z_L, z_U, v_L, v_U) ∈ ℝⁿ×ℝˢ×ℝᵐ×...
+ *   x: primal variables, s: slack variables
+ *   y_c, y_d: equality/inequality constraint multipliers
+ *   z_L, z_U: bound multipliers (x ≥ x_L, x ≤ x_U)
+ *   v_L, v_U: slack bound multipliers
+ *
+ * @complexity O(1) storage per iterate beyond vectors themselves.
+ *   Smart pointer caching with tags for invalidation tracking.
+ *   Memento pattern: stores algorithm state for rollback.
+ *
  * Also tracks: barrier parameter mu, iteration count, timing stats,
  * convergence tolerance, and iteration output information.
- *
- * IpoptAdditionalData allows algorithm extensions (CG penalty, inexact)
- * to store their specialized data alongside the core data.
  *
  * @see IpIteratesVector.hpp for iterate vector structure
  * @see IpIpoptAlg.hpp for algorithm using this data
