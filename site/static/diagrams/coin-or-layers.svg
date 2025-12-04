@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <style>
+      .layer-box { rx: 8; stroke-width: 2; }
+      .layer-0 { fill: #0f4c75; stroke: #3282b8; }
+      .layer-1 { fill: #16426b; stroke: #3282b8; }
+      .layer-2 { fill: #1c3a60; stroke: #3282b8; }
+      .layer-3 { fill: #223256; stroke: #3282b8; }
+      .layer-4 { fill: #282a4c; stroke: #3282b8; }
+      .lib-box { fill: #16213e; stroke: #4ecdc4; stroke-width: 1.5; rx: 5; }
+      .lib-box:hover { stroke-width: 3; }
+      .text { fill: #eee; font-family: -apple-system, sans-serif; font-size: 12px; text-anchor: middle; }
+      .text-title { fill: #fff; font-family: -apple-system, sans-serif; font-size: 14px; font-weight: bold; text-anchor: start; }
+      .text-desc { fill: #aaa; font-family: -apple-system, sans-serif; font-size: 10px; text-anchor: start; }
+      .arrow { fill: none; stroke: #3282b8; stroke-width: 1.5; marker-end: url(#arrowhead); opacity: 0.7; }
+      .arrow-highlight { fill: none; stroke: #4ecdc4; stroke-width: 2; marker-end: url(#arrowhead-teal); }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3282b8"/>
+    </marker>
+    <marker id="arrowhead-teal" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="#1a1a2e"/>
+
+  <!-- Title -->
+  <text x="400" y="25" class="text" style="font-size: 18px; font-weight: bold; text-anchor: middle;">COIN-OR Library Architecture</text>
+
+  <!-- Layer 4: Applications -->
+  <rect x="20" y="45" width="760" height="70" class="layer-box layer-4"/>
+  <text x="35" y="65" class="text-title">Layer 4: Applications</text>
+  <text x="35" y="80" class="text-desc">End-user tools and web services</text>
+
+  <rect x="300" y="55" width="80" height="40" class="lib-box"/>
+  <text x="340" y="80" class="text">SHOT</text>
+
+  <rect x="400" y="55" width="80" height="40" class="lib-box"/>
+  <text x="440" y="80" class="text">OS</text>
+
+  <!-- Layer 3: MINLP -->
+  <rect x="20" y="125" width="760" height="70" class="layer-box layer-3"/>
+  <text x="35" y="145" class="text-title">Layer 3: MINLP</text>
+  <text x="35" y="160" class="text-desc">Mixed-integer nonlinear programming</text>
+
+  <rect x="200" y="135" width="90" height="45" class="lib-box"/>
+  <text x="245" y="155" class="text">Bonmin</text>
+  <text x="245" y="168" class="text" style="font-size: 9px; fill: #888;">Convex MINLP</text>
+
+  <rect x="310" y="135" width="90" height="45" class="lib-box"/>
+  <text x="355" y="155" class="text">Couenne</text>
+  <text x="355" y="168" class="text" style="font-size: 9px; fill: #888;">Global opt</text>
+
+  <!-- Layer 2: MIP & NLP -->
+  <rect x="20" y="205" width="760" height="80" class="layer-box layer-2"/>
+  <text x="35" y="225" class="text-title">Layer 2: MIP &amp; NLP Solvers</text>
+  <text x="35" y="240" class="text-desc">Core optimization algorithms</text>
+
+  <rect x="150" y="220" width="100" height="55" class="lib-box"/>
+  <text x="200" y="245" class="text" style="font-weight: bold;">Cbc</text>
+  <text x="200" y="260" class="text" style="font-size: 9px; fill: #888;">Branch-and-cut</text>
+
+  <rect x="270" y="220" width="100" height="55" class="lib-box"/>
+  <text x="320" y="245" class="text" style="font-weight: bold;">Ipopt</text>
+  <text x="320" y="260" class="text" style="font-size: 9px; fill: #888;">Interior point NLP</text>
+
+  <rect x="390" y="220" width="100" height="55" class="lib-box"/>
+  <text x="440" y="245" class="text">Dylp</text>
+  <text x="440" y="260" class="text" style="font-size: 9px; fill: #888;">Dynamic LP</text>
+
+  <rect x="510" y="220" width="100" height="55" class="lib-box"/>
+  <text x="560" y="245" class="text">Vol</text>
+  <text x="560" y="260" class="text" style="font-size: 9px; fill: #888;">Volume algorithm</text>
+
+  <!-- Layer 1: LP & Cuts -->
+  <rect x="20" y="295" width="760" height="80" class="layer-box layer-1"/>
+  <text x="35" y="315" class="text-title">Layer 1: LP Solvers &amp; Cut Generators</text>
+  <text x="35" y="330" class="text-desc">Simplex methods and cutting planes</text>
+
+  <rect x="150" y="310" width="100" height="55" class="lib-box"/>
+  <text x="200" y="335" class="text" style="font-weight: bold;">Clp</text>
+  <text x="200" y="350" class="text" style="font-size: 9px; fill: #888;">Simplex LP</text>
+
+  <rect x="270" y="310" width="100" height="55" class="lib-box"/>
+  <text x="320" y="335" class="text" style="font-weight: bold;">Osi</text>
+  <text x="320" y="350" class="text" style="font-size: 9px; fill: #888;">Solver interface</text>
+
+  <rect x="390" y="310" width="100" height="55" class="lib-box"/>
+  <text x="440" y="335" class="text" style="font-weight: bold;">Cgl</text>
+  <text x="440" y="350" class="text" style="font-size: 9px; fill: #888;">Cut generators</text>
+
+  <!-- Layer 0: Foundation -->
+  <rect x="20" y="385" width="760" height="70" class="layer-box layer-0"/>
+  <text x="35" y="405" class="text-title">Layer 0: Foundation</text>
+  <text x="35" y="420" class="text-desc">Core utilities used by all libraries</text>
+
+  <rect x="300" y="395" width="120" height="50" class="lib-box" style="stroke-width: 2.5;"/>
+  <text x="360" y="420" class="text" style="font-weight: bold; font-size: 14px;">CoinUtils</text>
+  <text x="360" y="436" class="text" style="font-size: 9px; fill: #888;">Matrices, I/O, presolve</text>
+
+  <!-- Dependency arrows -->
+  <!-- Cbc depends on Clp, Osi, Cgl, CoinUtils -->
+  <path d="M 200 275 L 200 310" class="arrow-highlight"/>
+  <path d="M 220 275 L 320 310" class="arrow"/>
+  <path d="M 240 275 L 440 310" class="arrow"/>
+
+  <!-- Clp depends on CoinUtils -->
+  <path d="M 200 365 L 330 395" class="arrow-highlight"/>
+
+  <!-- Osi depends on CoinUtils -->
+  <path d="M 320 365 L 350 395" class="arrow"/>
+
+  <!-- Cgl depends on CoinUtils -->
+  <path d="M 440 365 L 390 395" class="arrow"/>
+
+  <!-- Ipopt depends on CoinUtils -->
+  <path d="M 320 275 L 360 395" class="arrow"/>
+
+  <!-- Bonmin depends on Cbc, Ipopt -->
+  <path d="M 245 180 L 200 220" class="arrow"/>
+  <path d="M 265 180 L 320 220" class="arrow"/>
+
+  <!-- Couenne depends on Bonmin, Ipopt -->
+  <path d="M 340 180 L 260 175" class="arrow"/>
+
+  <!-- SHOT depends on Ipopt, Cbc -->
+  <path d="M 340 95 L 320 220" class="arrow"/>
+  <path d="M 320 95 L 200 220" class="arrow"/>
+
+  <!-- Annotations -->
+  <rect x="580" y="300" width="180" height="75" fill="rgba(22, 33, 62, 0.9)" stroke="#4ecdc4" stroke-width="1" rx="5"/>
+  <text x="670" y="320" class="text" style="fill: #4ecdc4; font-weight: bold;">Key Data Flow</text>
+  <text x="670" y="340" class="text" style="font-size: 10px;">CoinUtils provides:</text>
+  <text x="670" y="355" class="text" style="font-size: 10px;">• Sparse matrices</text>
+  <text x="670" y="370" class="text" style="font-size: 10px;">• LU factorization</text>
+
+  <!-- External dependencies note -->
+  <rect x="580" y="130" width="180" height="60" fill="rgba(22, 33, 62, 0.9)" stroke="#888" stroke-width=" 1" rx="5"/>
+  <text x="670" y="150" class="text" style="fill: #aaa; font-weight: bold;">External Deps</text>
+  <text x="670" y="168" class="text" style="font-size: 10px; fill: #888;">BLAS, LAPACK</text>
+  <text x="670" y="183" class="text" style="font-size: 10px; fill: #888;">MUMPS, HSL (optional)</text>
+</svg>

@@ -559,3 +559,121 @@ article h3 + p {
         padding: 1rem;
     }
 }
+
+// Featured nav card
+.quick-nav .nav-card.featured {
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.2), rgba(78, 205, 196, 0.1));
+    border-color: #4ecdc4;
+
+    strong {
+        color: #4ecdc4;
+    }
+
+    &:hover {
+        border-color: #4ecdc4;
+        background: linear-gradient(135deg, rgba(78, 205, 196, 0.3), rgba(78, 205, 196, 0.15));
+    }
+}
+
+// Prerequisites section
+.prereq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.prereq-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+
+    h4 {
+        margin: 0 0 1rem 0;
+        color: var(--accent-light);
+        font-size: 1.1rem;
+    }
+
+    ul, ol {
+        margin: 0;
+        padding-left: 1.25rem;
+
+        li {
+            margin: 0.5rem 0;
+            line-height: 1.5;
+        }
+
+        strong {
+            color: var(--text);
+        }
+    }
+}
+
+.try-interactive {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.05));
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+
+    strong {
+        color: #a855f7;
+    }
+
+    a {
+        color: #a855f7;
+        font-weight: 500;
+    }
+}
+
+// Diagram containers
+.diagram-container {
+    margin: 1.5rem 0;
+    text-align: center;
+    overflow-x: auto;
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .algorithm-diagram {
+        max-width: 600px;
+    }
+
+    .architecture-diagram {
+        max-width: 800px;
+    }
+}
+
+// Details/summary for collapsible sections
+details {
+    margin: 1rem 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+
+    summary {
+        cursor: pointer;
+        font-weight: 500;
+        color: var(--accent-light);
+        user-select: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &::marker {
+            color: var(--accent-light);
+        }
+    }
+
+    &[open] summary {
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border);
+    }
+}

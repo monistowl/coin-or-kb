@@ -8,6 +8,18 @@ category = "Simplex Method"
 implementation_count = 1
 +++
 
+## Why This Matters
+
+Dual simplex is the algorithm that makes modern MIP solvers fast. While primal simplex moves from feasible vertex to feasible vertex, dual simplex moves from *infeasible* vertices with correct pricing. This turns out to be exactly what you need for:
+
+- **Branch-and-bound**: After branching (adding a bound constraint), primal feasibility is lost but dual feasibility often remains. Dual simplex can re-optimize in a few iterations.
+- **Adding cuts**: When you add a violated cut, you're making the current solution infeasible. Dual simplex handles this naturally.
+- **Warm starting**: If you have the optimal basis from a similar problem, dual simplex can verify optimality or find the new optimum quickly.
+
+**The key insight**: Dual simplex treats constraint violations as the "objective" to minimize, while keeping reduced costs feasible. This is often much faster than primal simplex when bounds change.
+
+---
+
 Solves LP by maintaining dual feasibility (reduced costs have correct signs)
 while iterating toward primal feasibility. Each iteration:
 1. Choose leaving variable (pivot row) - infeasible basic variable

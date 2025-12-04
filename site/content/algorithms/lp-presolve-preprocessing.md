@@ -8,6 +8,25 @@ category = "Presolve Reductions"
 implementation_count = 1
 +++
 
+## Why This Matters
+
+Presolve is one of the most underappreciated techniques in optimization. It can reduce problem size by 50-90% in many cases, sometimes turning hours-long solves into seconds. Key benefits:
+
+- **Smaller is faster**: A problem with half the variables and constraints solves much more than twice as fast
+- **Tighter bounds**: Bound tightening catches fixed variables and removes numerical noise
+- **Better LP relaxation**: Removing redundancy often improves the MIP gap
+
+**Example impact**: A 10,000-row LP might presolve to 3,000 rows. That's not just 3x faster — it's potentially 27x faster for simplex (roughly cubic in problem size for dense problems).
+
+**Critical for MIP**: Presolve runs at the root node before branch-and-cut. A smaller, tighter root LP means:
+- Fewer branch-and-bound nodes (better bounds enable more pruning)
+- Faster LP solves at every node
+- Stronger cuts (less degeneracy)
+
+**The catch**: You must postsolve to recover the solution to the original problem. The `CoinPresolveAction` chain stores all transformations in reverse order.
+
+---
+
 Applies reversible transformations to simplify LP before solving:
 - Singleton rows/columns: substitute and eliminate
 - Doubleton: eliminate free column in 2-element row

@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" width="600" height="700">
+  <defs>
+    <style>
+      .box { fill: #16213e; stroke: #3282b8; stroke-width: 2; rx: 8; }
+      .diamond { fill: #16213e; stroke: #3282b8; stroke-width: 2; }
+      .start-end { fill: #0f4c75; stroke: #3282b8; stroke-width: 2; }
+      .text { fill: #eee; font-family: -apple-system, sans-serif; font-size: 14px; text-anchor: middle; }
+      .text-small { fill: #aaa; font-family: -apple-system, sans-serif; font-size: 11px; text-anchor: middle; }
+      .arrow { fill: none; stroke: #3282b8; stroke-width: 2; marker-end: url(#arrowhead); }
+      .label { fill: #4ecdc4; font-family: -apple-system, sans-serif; font-size: 12px; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3282b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="700" fill="#1a1a2e"/>
+
+  <!-- Title -->
+  <text x="300" y="30" class="text" style="font-size: 18px; font-weight: bold;">Primal Simplex Algorithm</text>
+
+  <!-- Start -->
+  <ellipse cx="300" cy="70" rx="80" ry="25" class="start-end"/>
+  <text x="300" y="75" class="text">Initial BFS</text>
+  <text x="300" y="100" class="text-small">Basic feasible solution</text>
+
+  <!-- Arrow to pricing -->
+  <path d="M 300 95 L 300 130" class="arrow"/>
+
+  <!-- Pricing step -->
+  <rect x="175" y="130" width="250" height="60" class="box"/>
+  <text x="300" y="155" class="text">1. Compute Reduced Costs</text>
+  <text x="300" y="175" class="text-small">c&#x0304; = c - c_B B^(-1) A</text>
+
+  <!-- Arrow to optimal check -->
+  <path d="M 300 190 L 300 230" class="arrow"/>
+
+  <!-- Optimal check diamond -->
+  <polygon points="300,230 400,280 300,330 200,280" class="diamond"/>
+  <text x="300" y="275" class="text">All c&#x0304; &gt;= 0?</text>
+  <text x="300" y="295" class="text-small">(Dual feasible?)</text>
+
+  <!-- Yes - optimal -->
+  <path d="M 400 280 L 500 280 L 500 650 L 360 650" class="arrow"/>
+  <text x="440" y="268" class="label">Yes</text>
+
+  <!-- No - continue -->
+  <path d="M 300 330 L 300 370" class="arrow"/>
+  <text x="320" y="355" class="label">No</text>
+
+  <!-- Select entering -->
+  <rect x="175" y="370" width="250" height="60" class="box"/>
+  <text x="300" y="395" class="text">2. Select Entering Variable</text>
+  <text x="300" y="415" class="text-small">Most negative c&#x0304;_j (Dantzig)</text>
+
+  <!-- Arrow to ratio test -->
+  <path d="M 300 430 L 300 470" class="arrow"/>
+
+  <!-- Ratio test -->
+  <rect x="175" y="470" width="250" height="60" class="box"/>
+  <text x="300" y="495" class="text">3. Ratio Test</text>
+  <text x="300" y="515" class="text-small">theta = min(b_i / a_ij) for a_ij > 0</text>
+
+  <!-- Arrow to unbounded check -->
+  <path d="M 300 530 L 300 570" class="arrow"/>
+
+  <!-- Unbounded check -->
+  <polygon points="300,570 380,605 300,640 220,605" class="diamond"/>
+  <text x="300" y="605" class="text">All a_ij &lt;= 0?</text>
+
+  <!-- Yes - unbounded -->
+  <path d="M 380 605 L 500 605 L 500 550" class="arrow"/>
+  <text x="420" y="593" class="label">Yes</text>
+
+  <!-- Unbounded box -->
+  <ellipse cx="500" cy="520" rx="70" ry="25" style="fill: #7d3c3c; stroke: #c94c4c; stroke-width: 2;"/>
+  <text x="500" y="525" class="text">Unbounded</text>
+
+  <!-- No - pivot -->
+  <path d="M 220 605 L 100 605 L 100 310 L 170 310" class="arrow"/>
+  <text x="180" y="593" class="label">No</text>
+
+  <!-- Pivot step -->
+  <rect x="20" y="230" width="150" height="80" class="box"/>
+  <text x="95" y="255" class="text">4. Pivot</text>
+  <text x="95" y="275" class="text-small">Swap entering/</text>
+  <text x="95" y="290" class="text-small">leaving variables</text>
+
+  <!-- Arrow back to pricing -->
+  <path d="M 95 230 L 95 160 L 175 160" class="arrow"/>
+
+  <!-- Optimal -->
+  <ellipse cx="300" cy="650" rx="60" ry="25" class="start-end"/>
+  <text x="300" y="655" class="text">Optimal</text>
+
+  <!-- Iteration counter -->
+  <rect x="20" y="370" width="130" height="50" style="fill: #1a1a2e; stroke: #4ecdc4; stroke-width: 1; stroke-dasharray: 5,5;"/>
+  <text x="85" y="395" class="text-small" style="fill: #4ecdc4;">Typical iterations:</text>
+  <text x="85" y="410" class="text-small" style="fill: #4ecdc4;">O(m) to O(3m)</text>
+</svg>

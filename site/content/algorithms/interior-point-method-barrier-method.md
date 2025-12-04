@@ -8,6 +8,24 @@ category = "Interior Point Methods"
 implementation_count = 1
 +++
 
+## Why This Matters
+
+Interior point methods are the theoretical breakthrough that proved LP could be solved in polynomial time. While simplex has exponential worst-case complexity (though excellent average case), interior point is *guaranteed* to converge quickly.
+
+**When to use interior point**:
+- **Very large problems**: Interior point iteration count grows as $O(\sqrt{n})$, not $O(m)$ like simplex
+- **Dense problems**: When the constraint matrix is dense, interior point's matrix operations are competitive
+- **No warm-start needed**: If you're solving one problem from scratch, interior point may be faster
+
+**When NOT to use interior point**:
+- **Re-optimization**: Interior point can't warm-start from a previous solution the way simplex can
+- **Branch-and-bound**: The inability to warm-start makes interior point impractical for MIP
+- **Vertex solutions needed**: Interior point finds points in the interior; you need crossover to get a vertex
+
+**The key insight**: Interior point replaces the "walk along edges" of simplex with a smooth path through the middle of the feasible region. Mathematically elegant, but the lack of warm-starting limits its applications.
+
+---
+
 Solves LP by following central path through interior of feasible region.
 Main variant is Mehrotra predictor-corrector:
 1. Affine scaling direction: solve Newton system for complementarity

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 550" width="700" height="550">
+  <defs>
+    <style>
+      .node { stroke-width: 2; }
+      .node-active { fill: #16213e; stroke: #3282b8; }
+      .node-pruned { fill: #3d2828; stroke: #8b4040; }
+      .node-optimal { fill: #1e4d2b; stroke: #28a745; }
+      .node-fathomed { fill: #2a2a2a; stroke: #555; }
+      .edge { fill: none; stroke: #3282b8; stroke-width: 2; }
+      .edge-pruned { fill: none; stroke: #8b4040; stroke-width: 2; stroke-dasharray: 5,5; }
+      .text { fill: #eee; font-family: -apple-system, sans-serif; font-size: 12px; text-anchor: middle; }
+      .text-small { fill: #aaa; font-family: -apple-system, sans-serif; font-size: 10px; text-anchor: middle; }
+      .text-bound { fill: #4ecdc4; font-family: -apple-system, sans-serif; font-size: 11px; text-anchor: middle; }
+      .label { fill: #fff; font-family: -apple-system, sans-serif; font-size: 11px; }
+      .legend-text { fill: #eee; font-family: -apple-system, sans-serif; font-size: 12px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="700" height="550" fill="#1a1a2e"/>
+
+  <!-- Title -->
+  <text x="350" y="25" class="text" style="font-size: 16px; font-weight: bold;">Branch-and-Bound Tree</text>
+  <text x="350" y="45" class="text-small">MIP: max 5x + 4y s.t. constraints, x,y integer</text>
+
+  <!-- Legend -->
+  <rect x="520" y="60" width="170" height="120" fill="#16213e" stroke="#333" stroke-width="1" rx="5"/>
+  <text x="605" y="80" class="legend-text" text-anchor="middle" style="font-weight: bold;">Legend</text>
+
+  <rect x="535" y="95" width="20" height="16" class="node node-active" rx="3"/>
+  <text x="625" y="107" class="legend-text" text-anchor="middle">Active node</text>
+
+  <rect x="535" y="120" width="20" height="16" class="node node-pruned" rx="3"/>
+  <text x="625" y="132" class="legend-text" text-anchor="middle">Pruned (bound)</text>
+
+  <rect x="535" y="145" width="20" height="16" class="node node-optimal" rx="3"/>
+  <text x="625" y="157" class="legend-text" text-anchor="middle">Integer solution</text>
+
+  <!-- Root node -->
+  <rect x="310" y="70" width="80" height="50" class="node node-active" rx="5"/>
+  <text x="350" y="90" class="text">Root</text>
+  <text x="350" y="105" class="text-bound">LP = 23.5</text>
+
+  <!-- Level 1 edges -->
+  <path d="M 330 120 L 200 170" class="edge"/>
+  <path d="M 370 120 L 500 170" class="edge"/>
+  <text x="250" y="145" class="label">x ≤ 2</text>
+  <text x="450" y="145" class="label">x ≥ 3</text>
+
+  <!-- Level 1 nodes -->
+  <rect x="160" y="170" width="80" height="50" class="node node-active" rx="5"/>
+  <text x="200" y="190" class="text">Node 1</text>
+  <text x="200" y="205" class="text-bound">LP = 22.0</text>
+
+  <rect x="460" y="170" width="80" height="50" class="node node-pruned" rx="5"/>
+  <text x="500" y="190" class="text">Node 2</text>
+  <text x="500" y="205" class="text-bound">LP = 19.2</text>
+  <text x="500" y="235" class="text-small" style="fill: #c94c4c;">Pruned: bound &lt; 21</text>
+
+  <!-- Level 2 edges -->
+  <path d="M 180 220 L 100 280" class="edge"/>
+  <path d="M 220 220 L 300 280" class="edge"/>
+  <text x="125" y="255" class="label">y ≤ 3</text>
+  <text x="275" y="255" class="label">y ≥ 4</text>
+
+  <!-- Level 2 nodes -->
+  <rect x="60" y="280" width="80" height="50" class="node node-optimal" rx="5"/>
+  <text x="100" y="300" class="text">Node 3</text>
+  <text x="100" y="315" class="text-bound">z* = 21</text>
+  <text x="100" y="345" class="text-small" style="fill: #28a745;">Integer! x=2, y=3</text>
+
+  <rect x="260" y="280" width="80" height="50" class="node node-active" rx="5"/>
+  <text x="300" y="300" class="text">Node 4</text>
+  <text x="300" y="315" class="text-bound">LP = 21.7</text>
+
+  <!-- Level 3 edges -->
+  <path d="M 280 330 L 220 380" class="edge"/>
+  <path d="M 320 330 L 380 380" class="edge"/>
+  <text x="235" y="360" class="label">x ≤ 1</text>
+  <text x="365" y="360" class="label">x ≥ 2</text>
+
+  <!-- Level 3 nodes -->
+  <rect x="180" y="380" width="80" height="50" class="node node-pruned" rx="5"/>
+  <text x="220" y="400" class="text">Node 5</text>
+  <text x="220" y="415" class="text-bound">LP = 20.5</text>
+  <text x="220" y="445" class="text-small" style="fill: #c94c4c;">Pruned: bound &lt; 21</text>
+
+  <rect x="340" y="380" width="80" height="50" class="node node-optimal" rx="5"/>
+  <text x="380" y="400" class="text">Node 6</text>
+  <text x="380" y="415" class="text-bound">z* = 21</text>
+  <text x="380" y="445" class="text-small" style="fill: #28a745;">Integer! x=2, y=4</text>
+
+  <!-- Incumbent tracker -->
+  <rect x="20" y="380" width="130" height="80" fill="#1a1a2e" stroke="#4ecdc4" stroke-width="1" rx="5"/>
+  <text x="85" y="400" class="text" style="fill: #4ecdc4; font-weight: bold;">Best Solution</text>
+  <text x="85" y="420" class="text-small" style="fill: #4ecdc4;">Incumbent = 21</text>
+  <text x="85" y="438" class="text-small" style="fill: #4ecdc4;">Gap = 0%</text>
+  <text x="85" y="456" class="text-small" style="fill: #4ecdc4;">Optimal proven!</text>
+
+  <!-- Annotations -->
+  <rect x="20" y="480" width="660" height="60" fill="rgba(22, 33, 62, 0.8)" stroke="#333" stroke-width="1" rx="5"/>
+  <text x="350" y="500" class="text" text-anchor="middle">Key insight: We only explored 6 nodes instead of 2^n combinations</text>
+  <text x="350" y="520" class="text-small" text-anchor="middle">Pruning Rule: If LP relaxation ≤ best integer solution found, prune the node</text>
+</svg>

@@ -9,6 +9,10 @@ template = "index.html"
 Semantically annotated documentation for the [COIN-OR](https://www.coin-or.org/) open-source optimization stack. Find algorithm details, mathematical formulations, complexity analysis, and academic references — all extracted from annotated C++ headers.
 
 <div class="quick-nav">
+<a href="learning-paths/" class="nav-card featured">
+<strong>Start Learning</strong>
+<span>Guided paths for students</span>
+</a>
 <a href="libraries/coinutils/" class="nav-card">
 <strong>Browse CoinUtils</strong>
 <span>122 foundation classes</span>
@@ -17,10 +21,38 @@ Semantically annotated documentation for the [COIN-OR](https://www.coin-or.org/)
 <strong>JSON API</strong>
 <span>Machine-readable docs</span>
 </a>
-<a href="https://github.com/monistowl/coin-or-kb" class="nav-card">
-<strong>Source Code</strong>
-<span>Annotations on GitHub</span>
-</a>
+</div>
+
+---
+
+## For Students: Getting Started
+
+New to optimization solvers? Here's what you need to dive in.
+
+<div class="prereq-grid">
+
+<div class="prereq-card">
+<h4>Prerequisites</h4>
+<ul>
+<li><strong>Linear Algebra</strong> — Matrices, solving $Ax = b$, rank, null space</li>
+<li><strong>Calculus</strong> — Derivatives, gradients (for nonlinear optimization)</li>
+<li><strong>Programming</strong> — Ability to read C++ (not write it)</li>
+</ul>
+</div>
+
+<div class="prereq-card">
+<h4>Recommended Path</h4>
+<ol>
+<li><a href="learning-paths/lp-fundamentals/">LP Fundamentals</a> — Sparse matrices → LU → Simplex</li>
+<li><a href="learning-paths/mip-journey/">MIP Journey</a> — Branch-and-bound, cuts, heuristics</li>
+<li><a href="browser/">Source Browser</a> — Explore real implementations</li>
+</ol>
+</div>
+
+</div>
+
+<div class="try-interactive">
+<strong>Try it now:</strong> <a href="learning-paths/simplex-example/">Interactive Simplex Example</a> — Step through a complete solve with visualization
 </div>
 
 ---
@@ -104,6 +136,13 @@ Branch-and-bound tree management.
 
 COIN-OR is organized in dependency layers. Higher layers build on lower ones.
 
+<div class="diagram-container">
+<img src="/coin-or-kb/diagrams/coin-or-layers.svg" alt="COIN-OR library architecture" class="architecture-diagram">
+</div>
+
+<details>
+<summary>Text version of layer diagram</summary>
+
 <div class="layer-diagram">
 <div class="layer layer-4">
 <strong>Layer 4: Applications</strong>
@@ -126,6 +165,7 @@ COIN-OR is organized in dependency layers. Higher layers build on lower ones.
 <span>CoinUtils — Matrices, I/O, presolve (122 classes documented)</span>
 </div>
 </div>
+</details>
 
 ---
 

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} - {{ config.title }}{% endblock %}
+
+{% block extra_head %}
+<style>
+.path-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.path-card {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 4px solid var(--accent);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.path-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.path-card h3 {
+    margin: 0 0 0.25rem 0;
+    color: var(--accent-light);
+    font-size: 1.25rem;
+}
+
+.path-tagline {
+    color: var(--text-muted);
+    font-style: italic;
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+}
+
+.path-card p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.path-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+.path-meta span {
+    background: var(--bg);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.path-meta .duration::before {
+    content: "⏱ ";
+}
+
+.path-meta .prereqs::before {
+    content: "📚 ";
+}
+
+.path-start {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.path-start:hover {
+    background: var(--accent-light);
+}
+
+.path-start.coming-soon {
+    background: var(--text-muted);
+    cursor: not-allowed;
+}
+
+/* Path-specific accent colors */
+.path-lp { border-left-color: #4ecdc4; }
+.path-lp h3 { color: #4ecdc4; }
+.path-lp .path-start { background: #4ecdc4; }
+
+.path-mip { border-left-color: #ff6b6b; }
+.path-mip h3 { color: #ff6b6b; }
+.path-mip .path-start { background: #ff6b6b; }
+
+.path-nlp { border-left-color: #a855f7; }
+.path-nlp h3 { color: #a855f7; }
+.path-nlp .path-start { background: #a855f7; }
+
+/* How it works section */
+article ol {
+    padding-left: 1.5rem;
+}
+
+article ol li {
+    margin-bottom: 0.5rem;
+}
+
+article ol li strong {
+    color: var(--accent-light);
+}
+
+/* Prerequisites */
+article ul {
+    list-style: none;
+    padding: 0;
+}
+
+article ul li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+article ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<article>
+    {{ section.content | safe }}
+</article>
+{% endblock %}

@@ -8,6 +8,20 @@ category = "Simplex Method"
 implementation_count = 1
 +++
 
+## Why This Matters
+
+The simplex method is *the* algorithm that made linear programming practical. Almost every commercial and open-source LP solver uses it as the primary algorithm. Understanding simplex is essential because:
+
+- **It's everywhere**: Supply chain optimization, airline scheduling, financial portfolio allocation, and countless other applications depend on it
+- **Modern solvers build on it**: Dual simplex is the workhorse for MIP solvers during branch-and-bound
+- **The concepts transfer**: Basis matrices, reduced costs, and pivot operations appear throughout optimization
+
+When to use simplex vs interior point:
+- **Simplex excels at**: warm-starting (reoptimizing after small changes), sparse problems, problems where you need an optimal vertex
+- **Interior point excels at**: very large problems, dense problems, problems where any optimal point suffices
+
+---
+
 Maintains a basic feasible solution (BFS) at a vertex of the polytope.
   Each iteration moves along an edge to an adjacent vertex with better objective.
   - Primal simplex: maintains primal feasibility, achieves dual feasibility

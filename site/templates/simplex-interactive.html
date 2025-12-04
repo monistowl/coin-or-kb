@@ -1,0 +1,515 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} - {{ config.title }}{% endblock %}
+
+{% block extra_head %}
+<style>
+.simplex-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.problem-statement {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.tableau-container {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.tableau {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.tableau th, .tableau td {
+    border: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    text-align: center;
+}
+
+.tableau th {
+    background: var(--bg-secondary);
+    font-weight: 600;
+}
+
+.tableau .basis-col {
+    background: rgba(78, 205, 196, 0.1);
+    font-weight: 600;
+}
+
+.tableau .pivot-row {
+    background: rgba(255, 107, 107, 0.15);
+}
+
+.tableau .pivot-col {
+    background: rgba(168, 85, 247, 0.15);
+}
+
+.tableau .pivot-element {
+    background: rgba(255, 200, 50, 0.3);
+    font-weight: bold;
+    border: 2px solid #ffc832;
+}
+
+.tableau .reduced-cost-row td {
+    border-top: 2px solid var(--accent);
+}
+
+.tableau .entering {
+    color: #a855f7;
+    font-weight: bold;
+}
+
+.tableau .leaving {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.step-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.step-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.step-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.step-btn.prev {
+    background: var(--bg-secondary);
+    color: var(--text);
+}
+
+.step-btn.next {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.step-btn:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.step-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    transition: all 0.2s;
+}
+
+.step-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.step-dot.completed {
+    background: #22c55e;
+    border-color: #22c55e;
+}
+
+.explanation {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    min-height: 200px;
+}
+
+.explanation h3 {
+    margin: 0 0 1rem 0;
+    color: var(--accent-light);
+}
+
+.explanation .substep {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: var(--bg);
+    border-radius: 6px;
+}
+
+.solution-box {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.solution-box h4 {
+    color: #22c55e;
+    margin: 0 0 0.5rem 0;
+}
+
+.ratio-test {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.ratio-item {
+    background: var(--bg);
+    padding: 0.75rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.ratio-item.winner {
+    border: 2px solid #22c55e;
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.geometric-viz {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<article class="simplex-container">
+    <h1>{{ page.title }}</h1>
+
+    <div class="problem-statement">
+        {{ page.content | safe }}
+    </div>
+
+    <div class="step-indicator" id="step-indicator"></div>
+
+    <div class="tableau-container">
+        <table class="tableau" id="tableau">
+            <thead id="tableau-head"></thead>
+            <tbody id="tableau-body"></tbody>
+        </table>
+    </div>
+
+    <div class="step-controls">
+        <button class="step-btn prev" id="prev-btn" disabled>← Previous</button>
+        <button class="step-btn next" id="next-btn">Next Step →</button>
+    </div>
+
+    <div class="explanation" id="explanation"></div>
+
+    <div class="geometric-viz" id="geometric-viz">
+        <svg id="geometry-svg" width="400" height="300" viewBox="0 0 400 300">
+            <defs>
+                <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#333" stroke-width="0.5"/>
+                </pattern>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#ff6b6b"/>
+                </marker>
+            </defs>
+            <rect width="400" height="300" fill="url(#grid)"/>
+            <line x1="50" y1="250" x2="350" y2="250" stroke="#666" stroke-width="2"/>
+            <line x1="50" y1="250" x2="50" y2="30" stroke="#666" stroke-width="2"/>
+            <text x="340" y="270" fill="#888" font-size="14">x₁</text>
+            <text x="30" y="40" fill="#888" font-size="14">x₂</text>
+            <polygon points="50,250 50,50 150,50 250,150 250,250"
+                     fill="rgba(78, 205, 196, 0.2)" stroke="#4ecdc4" stroke-width="2"/>
+            <text x="90" y="40" fill="#4ecdc4" font-size="12">x₁ + x₂ ≤ 4</text>
+            <text x="220" y="120" fill="#4ecdc4" font-size="12">2x₁ + x₂ ≤ 6</text>
+            <circle id="v0" cx="50" cy="250" r="6" fill="#666"/>
+            <circle id="v1" cx="250" cy="250" r="6" fill="#666"/>
+            <circle id="v2" cx="150" cy="150" r="6" fill="#666"/>
+            <circle id="v3" cx="50" cy="50" r="6" fill="#666"/>
+            <circle id="current-point" cx="50" cy="250" r="10" fill="#ffc832" stroke="#fff" stroke-width="2"/>
+            <text id="point-label" x="65" y="255" fill="#ffc832" font-size="14" font-weight="bold">(0, 0)</text>
+            <line x1="300" y1="220" x2="340" y2="200" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="290" y="240" fill="#ff6b6b" font-size="11">∇z = (3, 2)</text>
+        </svg>
+    </div>
+</article>
+
+<script>
+(function() {
+    'use strict';
+
+    const STEPS = [
+        {
+            name: "Initial Tableau",
+            basis: ["s₁", "s₂"],
+            data: [
+                ["", "x₁", "x₂", "s₁", "s₂", "RHS"],
+                ["s₁", 1, 1, 1, 0, 4],
+                ["s₂", 2, 1, 0, 1, 6],
+                ["z", -3, -2, 0, 0, 0]
+            ],
+            title: "Initial Setup",
+            enteringCol: 1,
+            point: [0, 0]
+        },
+        {
+            name: "Ratio Test",
+            basis: ["s₁", "s₂"],
+            data: [
+                ["", "x₁", "x₂", "s₁", "s₂", "RHS"],
+                ["s₁", 1, 1, 1, 0, 4],
+                ["s₂", 2, 1, 0, 1, 6],
+                ["z", -3, -2, 0, 0, 0]
+            ],
+            title: "Ratio Test: Who Leaves?",
+            pivotCol: 1,
+            leavingRow: 2,
+            pivotElement: [2, 1],
+            point: [0, 0],
+            ratios: [{name: "s₁", value: "4/1 = 4"}, {name: "s₂", value: "6/2 = 3", winner: true}]
+        },
+        {
+            name: "After First Pivot",
+            basis: ["s₁", "x₁"],
+            data: [
+                ["", "x₁", "x₂", "s₁", "s₂", "RHS"],
+                ["s₁", 0, 0.5, 1, -0.5, 1],
+                ["x₁", 1, 0.5, 0, 0.5, 3],
+                ["z", 0, -0.5, 0, 1.5, 9]
+            ],
+            title: "After First Pivot",
+            enteringCol: 2,
+            point: [3, 0]
+        },
+        {
+            name: "Second Ratio Test",
+            basis: ["s₁", "x₁"],
+            data: [
+                ["", "x₁", "x₂", "s₁", "s₂", "RHS"],
+                ["s₁", 0, 0.5, 1, -0.5, 1],
+                ["x₁", 1, 0.5, 0, 0.5, 3],
+                ["z", 0, -0.5, 0, 1.5, 9]
+            ],
+            title: "Second Ratio Test",
+            pivotCol: 2,
+            leavingRow: 1,
+            pivotElement: [1, 2],
+            point: [3, 0],
+            ratios: [{name: "s₁", value: "1/0.5 = 2", winner: true}, {name: "x₁", value: "3/0.5 = 6"}]
+        },
+        {
+            name: "Optimal Solution",
+            basis: ["x₂", "x₁"],
+            data: [
+                ["", "x₁", "x₂", "s₁", "s₂", "RHS"],
+                ["x₂", 0, 1, 2, -1, 2],
+                ["x₁", 1, 0, -1, 1, 2],
+                ["z", 0, 0, 1, 1, 10]
+            ],
+            title: "Optimal Solution Found!",
+            optimal: true,
+            point: [2, 2]
+        }
+    ];
+
+    let currentStep = 0;
+
+    function formatNumber(n) {
+        if (typeof n !== 'number') return n;
+        if (Number.isInteger(n)) return String(n);
+        return n.toFixed(2).replace(/\.?0+$/, '');
+    }
+
+    function clearElement(el) {
+        while (el.firstChild) {
+            el.removeChild(el.firstChild);
+        }
+    }
+
+    function renderTableau(step) {
+        const thead = document.getElementById('tableau-head');
+        const tbody = document.getElementById('tableau-body');
+        clearElement(thead);
+        clearElement(tbody);
+
+        const data = step.data;
+
+        // Header
+        const headerRow = document.createElement('tr');
+        data[0].forEach(function(cell, i) {
+            const th = document.createElement('th');
+            th.textContent = cell;
+            if (step.enteringCol === i) th.classList.add('entering');
+            if (step.pivotCol === i) th.classList.add('pivot-col');
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        // Body rows
+        for (let r = 1; r < data.length; r++) {
+            const row = document.createElement('tr');
+            const isLastRow = r === data.length - 1;
+            const isPivotRow = step.pivotElement && step.pivotElement[0] === r;
+
+            if (isLastRow) row.classList.add('reduced-cost-row');
+            if (isPivotRow) row.classList.add('pivot-row');
+
+            data[r].forEach(function(cell, c) {
+                const td = document.createElement('td');
+                td.textContent = formatNumber(cell);
+
+                if (c === 0) td.classList.add('basis-col');
+                if (step.pivotCol === c && !isLastRow) td.classList.add('pivot-col');
+                if (step.pivotElement && step.pivotElement[0] === r && step.pivotElement[1] === c) {
+                    td.classList.add('pivot-element');
+                }
+                if (step.leavingRow === r && c === 0) td.classList.add('leaving');
+
+                row.appendChild(td);
+            });
+            tbody.appendChild(row);
+        }
+    }
+
+    function renderExplanation(step) {
+        const el = document.getElementById('explanation');
+        clearElement(el);
+
+        const h3 = document.createElement('h3');
+        h3.textContent = step.title;
+        el.appendChild(h3);
+
+        if (step.ratios) {
+            const p = document.createElement('p');
+            p.textContent = 'Ratio test determines which variable leaves the basis:';
+            el.appendChild(p);
+
+            const ratioDiv = document.createElement('div');
+            ratioDiv.className = 'ratio-test';
+            step.ratios.forEach(function(r) {
+                const item = document.createElement('div');
+                item.className = 'ratio-item' + (r.winner ? ' winner' : '');
+                const name = document.createElement('strong');
+                name.textContent = r.name + ' row: ';
+                const val = document.createElement('span');
+                val.textContent = r.value + (r.winner ? ' ✓' : '');
+                item.appendChild(name);
+                item.appendChild(val);
+                ratioDiv.appendChild(item);
+            });
+            el.appendChild(ratioDiv);
+        }
+
+        if (step.optimal) {
+            const box = document.createElement('div');
+            box.className = 'solution-box';
+            const h4 = document.createElement('h4');
+            h4.textContent = 'Optimal Solution';
+            const p1 = document.createElement('p');
+            p1.textContent = 'x₁ = 2, x₂ = 2';
+            const p2 = document.createElement('p');
+            const strong = document.createElement('strong');
+            strong.textContent = 'Maximum z = 10';
+            p2.appendChild(strong);
+            box.appendChild(h4);
+            box.appendChild(p1);
+            box.appendChild(p2);
+            el.appendChild(box);
+
+            const note = document.createElement('p');
+            note.textContent = 'All reduced costs are non-negative, confirming optimality.';
+            el.appendChild(note);
+        } else {
+            const sub = document.createElement('div');
+            sub.className = 'substep';
+            const data = step.data;
+            const rhs = data[data.length - 1][data[0].length - 1];
+            sub.textContent = 'Current objective value: z = ' + formatNumber(rhs);
+            el.appendChild(sub);
+        }
+    }
+
+    function renderStepIndicator() {
+        const el = document.getElementById('step-indicator');
+        clearElement(el);
+        STEPS.forEach(function(step, i) {
+            const dot = document.createElement('div');
+            dot.className = 'step-dot';
+            if (i < currentStep) dot.classList.add('completed');
+            if (i === currentStep) dot.classList.add('active');
+            dot.title = step.name;
+            el.appendChild(dot);
+        });
+    }
+
+    function renderGeometry(step) {
+        const x = step.point[0];
+        const y = step.point[1];
+        const scale = 50;
+        const offsetX = 50;
+        const offsetY = 250;
+
+        const point = document.getElementById('current-point');
+        point.setAttribute('cx', offsetX + x * scale);
+        point.setAttribute('cy', offsetY - y * scale);
+
+        const label = document.getElementById('point-label');
+        label.setAttribute('x', offsetX + x * scale + 15);
+        label.setAttribute('y', offsetY - y * scale + 5);
+        label.textContent = '(' + x + ', ' + y + ')';
+
+        // Highlight active vertex
+        document.getElementById('v0').setAttribute('fill', (x===0 && y===0) ? '#ffc832' : '#666');
+        document.getElementById('v1').setAttribute('fill', (x===3 && y===0) ? '#ffc832' : '#666');
+        document.getElementById('v2').setAttribute('fill', (x===2 && y===2) ? '#ffc832' : '#666');
+    }
+
+    function updateUI() {
+        const step = STEPS[currentStep];
+        renderTableau(step);
+        renderExplanation(step);
+        renderStepIndicator();
+        renderGeometry(step);
+
+        document.getElementById('prev-btn').disabled = currentStep === 0;
+        const nextBtn = document.getElementById('next-btn');
+        nextBtn.disabled = currentStep === STEPS.length - 1;
+        nextBtn.textContent = currentStep === STEPS.length - 1 ? 'Complete!' : 'Next Step →';
+    }
+
+    document.getElementById('prev-btn').addEventListener('click', function() {
+        if (currentStep > 0) {
+            currentStep--;
+            updateUI();
+        }
+    });
+
+    document.getElementById('next-btn').addEventListener('click', function() {
+        if (currentStep < STEPS.length - 1) {
+            currentStep++;
+            updateUI();
+        }
+    });
+
+    updateUI();
+})();
+</script>
+{% endblock %}
