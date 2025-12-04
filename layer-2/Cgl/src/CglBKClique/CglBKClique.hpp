@@ -11,6 +11,31 @@
  * Contact: samuelbrito@ufop.edu.br and haroldo@ufop.edu.br
  * @date 03/27/2020
  *
+ * @algorithm Bron-Kerbosch Clique Separation:
+ *   Enumerates violated maximal cliques in the conflict graph:
+ *   1. Build induced subgraph on fractional variables (x* > minFrac)
+ *   2. BronKerbosch(R, P, X): recursive backtracking
+ *      - R = current clique, P = candidates, X = excluded
+ *      - If P∪X = ∅: R is maximal, check violation Σ_{i∈R} x_i* > 1
+ *      - Choose pivot u ∈ P∪X maximizing |N(u)∩P|
+ *      - For each v ∈ P \ N(u): recurse with R∪{v}, P∩N(v), X∩N(v)
+ *   3. Extend found cliques using selected strategy
+ *   4. Generate cut: Σ_{i∈C} x_i ≤ 1 for violated clique C
+ *
+ * @math Clique inequality validity:
+ *   Conflict graph G: edge (i,j) iff x_i + x_j ≤ 1 implied
+ *   Clique C ⊆ V(G): pairwise conflicts → at most one can be 1
+ *   Cut: Σ_{i∈C} x_i ≤ 1, violated when Σx_i* > 1 + minViol
+ *
+ * @complexity O(3^{n/3}) worst case for all maximal cliques.
+ *   With pivoting: O(d·n·3^{d/3}) where d = degeneracy.
+ *   Controlled by maxCallsBK_ to limit recursive calls.
+ *
+ * @ref Bron & Kerbosch (1973). "Algorithm 457: Finding All Cliques
+ *      of an Undirected Graph". CACM 16:575-577.
+ * @ref Tomita et al. (2006). "The worst-case time complexity for
+ *      generating all maximal cliques". Theoretical Computer Science 363:28-42.
+ *
  * Uses CoinBronKerbosch for maximal clique enumeration on the conflict
  * graph. More efficient than CglClique for large graphs due to the
  * well-known BK algorithm with pivoting.

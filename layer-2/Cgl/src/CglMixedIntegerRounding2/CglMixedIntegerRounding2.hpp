@@ -17,19 +17,36 @@
  * Alternative implementation of MIR cuts with different heuristics
  * than CglMixedIntegerRounding. Uses CoinIndexedVector for efficiency.
  *
+ * @algorithm c-MIR (Complemented Mixed Integer Rounding) Separation:
+ *   Generates MIR cuts with variable bound substitution:
+ *   1. Preprocess: Classify rows, identify VUBs (x ≤ a·y) and VLBs (x ≥ a·y)
+ *   2. For each ROW_MIX row with fractional RHS:
+ *   3. Aggregate: Combine rows to improve cut coefficients
+ *   4. Substitute: Replace continuous vars using VUB/VLB constraints
+ *      c_j ≤ u_j·y_k → substitute c_j = u_j·y_k - s_j, s_j ≥ 0
+ *   5. Apply MIR: round coefficients, derive valid inequality
+ *   6. Complementation: Choose C ⊆ integers to complement
+ *      x_j → u_j - x_j for j ∈ C to maximize violation
+ *
+ * @math MIR function and c-MIR derivation:
+ *   Base inequality: Σ a_j·x_j ≤ b (mixed integer)
+ *   Let f = b - ⌊b⌋ (fractional part of RHS)
+ *   MIR cut: Σ_{j: f_j ≤ f} f_j·x_j + Σ_{j: f_j > f} (f/(1-f))(1-f_j)·x_j
+ *           + continuous terms ≥ f
+ *   c-MIR adds complementation: for each j, choose x_j or (u_j - x_j)
+ *
+ * @complexity O(m²) for aggregation, O(n·2^k) for complementation search
+ *   where k = integer vars (usually limited by MAXAGGR_).
+ *   Aggregation limited by MAXAGGR_ parameter.
+ *
+ * @ref Marchand & Wolsey (2001). "Aggregation and Mixed Integer Rounding to
+ *      Solve MIPs". Operations Research 49:363-371.
+ *
  * Row classification (RowType):
  * - ROW_VARUB/VARLB: Variable bound rows (x <= ay or x >= ay)
  * - ROW_VAREQ: Equality variable bound
  * - ROW_MIX: Mixed continuous/integer
  * - ROW_CONT/ROW_INT: All continuous or all integer
- *
- * Algorithm steps:
- * 1. mixIntRoundPreprocess(): Identify VUBs/VLBs and row types
- * 2. generateMirCuts(): For each ROW_MIX row
- * 3. selectRowToAggregate(): Choose rows to combine
- * 4. aggregateRow(): Combine rows
- * 5. boundSubstitution(): Apply VUB/VLB substitution
- * 6. cMirSeparation(): Generate c-MIR inequality
  *
  * Key classes:
  * - CglMixIntRoundVUB2/VLB2: Variable bound structures

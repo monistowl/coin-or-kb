@@ -10,6 +10,29 @@
  * Creates cuts by "lifting" the problem into higher dimensions where
  * the LP relaxation is tighter, then "projecting" back.
  *
+ * @algorithm Lift-and-Project Cut Generation (Balas):
+ *   Generates cuts from simple disjunctions x_j ∈ {0,1}:
+ *   1. For fractional x_j*, consider disjunction (x_j=0) ∨ (x_j=1)
+ *   2. Lift: Create extended formulation in higher dimension
+ *      - Variables: (x⁰,x¹,λ) where x = λx¹ + (1-λ)x⁰
+ *      - Constraints: Ax⁰ ≤ b, Ax¹ ≤ b, x⁰_j = 0, x¹_j = 1, λ ∈ [0,1]
+ *   3. Optimize: Find deepest cut separating x* from lifted polytope
+ *      max (α'x* - β) s.t. α'x ≤ β valid for lifted set
+ *   4. Project: Cut α'x ≤ β is valid in original space
+ *
+ * @math Lift-and-project formulation (Balas, Ceria, Cornuéjols 1993):
+ *   P = {x : Ax ≤ b, 0 ≤ x ≤ 1}
+ *   Disjunction D_j: (x_j = 0) ∨ (x_j = 1)
+ *   Lifted set: conv(P ∩ D_j) via higher-dimensional representation
+ *   Normalization: β = ±1 (parameter) determines cut family
+ *
+ * @complexity O(n³) per cut for solving the LP in lifted space.
+ *   Each disjunction variable requires a separate LP solve.
+ *   Computationally expensive; typically limited to root node.
+ *
+ * @ref Balas, Ceria, Cornuéjols (1993). "A lift-and-project cutting plane
+ *      algorithm for mixed 0-1 programs". Math. Programming 58:295-324.
+ *
  * For a disjunction x_j = 0 OR x_j = 1:
  * - Create two copies of constraints: one with x_j=0, one with x_j=1
  * - Convexify the union of these two polyhedra

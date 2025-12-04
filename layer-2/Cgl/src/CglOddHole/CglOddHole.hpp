@@ -10,15 +10,34 @@
  * Grotschel, Lovasz, and Schrijver (1988). An odd hole is a
  * chordless cycle of odd length in the conflict graph.
  *
+ * @algorithm Odd Hole Cut Generation:
+ *   Finds violated odd hole inequalities in conflict graph:
+ *   1. Build conflict graph G from set packing rows Σx_i ≤ 1
+ *      (edge (i,j) exists iff x_i + x_j ≤ 1 for some row)
+ *   2. For each fractional variable x_s with x_s* > 0:
+ *   3. Use shortest path to find odd cycle C through s in G
+ *      (weighted by 1 - x_i* to separate current solution)
+ *   4. If cycle C has length 2k+1 with weight < k: violated cut found
+ *   5. Generate cut: Σ_{i∈C} x_i ≤ k = ⌊|C|/2⌋
+ *
+ * @math Odd hole validity and lifting:
+ *   For odd cycle C = (v₁,...,v_{2k+1},v₁) in conflict graph:
+ *   Basic cut: Σ_{i∈C} x_i ≤ k (at most k of 2k+1 mutually conflicting)
+ *   Chvatal-Gomory lift: Sum rows in cycle (RHS = 2k+1, odd)
+ *   Weaken coefficients: ⌊a_j/2⌋·2 for odd a_j
+ *   Divide by 2: Σ ⌊a_j/2⌋·x_j ≤ k (stronger cut)
+ *
+ * @complexity O(n·m) per odd hole search using Dijkstra/Bellman-Ford.
+ *   Total O(f·n·m) where f = fractional variables. Can be slow for
+ *   large f; use createRowList() to filter candidate rows.
+ *
+ * @ref Grötschel, Lovász, Schrijver (1988). "Geometric Algorithms and
+ *      Combinatorial Optimization". Springer, Ch. 9.
+ *
  * For set packing rows sum x_i <= 1 (or == 1):
  * - Build conflict graph where edge (i,j) means x_i + x_j <= 1
  * - Find odd cycles C of length 2k+1
  * - Odd hole inequality: sum_{i in C} x_i <= k
- *
- * Lifting via Chvatal-Gomory:
- * - Sum all rows in cycle (RHS is odd)
- * - Weaken odd coefficients: 1 → 0, 3 → 2, etc.
- * - Divide by 2 for stronger cut: sum (even(j)/2)*x_j <= (odd-1)/2
  *
  * Performance considerations:
  * - Only examines rows with unsatisfied 0-1 variables

@@ -20,17 +20,34 @@
  * - Atamturk, Rajan "On splittable and unsplittable flow capacitated
  *   network design arc-set polyhedra" (Math Programming 92, 2002)
  *
+ * @algorithm Residual Capacity Cut Separation:
+ *   For rows with structure: Σ a_i·c_i - d·Σ z_j ≤ b (c continuous, z integer):
+ *   1. Preprocess: Classify rows as ROW_L/ROW_G/ROW_BOTH/ROW_OTHER
+ *   2. For each suitable row, identify: continuous flows c, integer design z
+ *   3. Compute residual capacity: r = b + d·⌊Σz_j*⌋ - Σ a_i·c_i*
+ *   4. If r < 0, derive cut: Σ a_i·c_i ≤ b + d·⌊Σz_j*⌋
+ *   5. Strengthen using integrality of design variables
+ *
+ * @math Residual capacity inequality derivation:
+ *   Original: Σ_i a_i·c_i ≤ b + d·Σ_j z_j where z_j ∈ {0,1}
+ *   At solution (c*, z*): capacity slack = b + d·Σz_j* - Σa_i·c_i*
+ *   Since Σz_j ∈ ℤ: valid cut uses ⌊Σz_j*⌋ or ⌈Σz_j*⌉
+ *   Residual capacity cut: Σa_i·c_i ≤ b + d·⌊Σz_j*⌋
+ *
+ * @complexity O(m·n) for preprocessing, O(m) per cut separation
+ *   where m = rows, n = columns. Total O(m²) per generateCuts call.
+ *
+ * @ref Magnanti, Mirchandani, Vachani (1993). "The convex hull of two core
+ *      capacitated network design problems". Math Programming 60:233-250.
+ * @ref Atamtürk & Rajan (2002). "On splittable and unsplittable flow
+ *      capacitated network design arc-set polyhedra". Math Programming 92:315-333.
+ *
  * Row types detected:
  * - ROW_L: a_1*c_1 + ... + a_k*c_k - d*z_1 - ... - d*z_p <= b
  *   (continuous c_i, integer z_j with common coefficient d)
  * - ROW_G: Same structure with >= sense
  * - ROW_BOTH: Equations treatable as both
  * - ROW_OTHER: Doesn't fit the pattern
- *
- * Algorithm:
- * 1. resCapPreprocess(): Classify rows by type
- * 2. generateResCapCuts(): For each ROW_L/ROW_G row
- * 3. resCapSeparation(): Apply residual capacity separation
  *
  * Target problems: Capacitated network design where flows are
  * continuous but arc installation decisions are integer.

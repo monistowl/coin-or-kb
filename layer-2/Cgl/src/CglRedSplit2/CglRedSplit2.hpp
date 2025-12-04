@@ -19,6 +19,32 @@
  * - "Practical strategies for generating rank-1 split cuts" (MPC)
  * - "Combining Lift-and-Project and Reduce-and-Split" (INFORMS JOC)
  *
+ * @algorithm Enhanced Reduce-and-Split with Row Selection Strategies:
+ *   Generates strong GMI cuts via systematic row combination:
+ *   1. Select columns for reduction (fill_workNonBasicTab):
+ *      - Strategy 1: All continuous nonbasics
+ *      - Strategy 2: Only those with positive reduced cost
+ *   2. Select rows to combine (get_list_rows_reduction):
+ *      - BRS1: Fewest nonzeros overlapping with target row
+ *      - BRS2: Greedy nonzero coverage minimization
+ *      - BRS3: Maximum |cos(θ)| angle alignment (most effective)
+ *   3. Solve small linear systems to find optimal integer multipliers
+ *   4. Apply reduction, generate GMI cut from combined row
+ *
+ * @math Row selection by cosine (BRS3):
+ *   cos(θ_{ij}) = (a^i · a^j) / (||a^i|| · ||a^j||)
+ *   Rows with |cos(θ)| ≈ 1 are most effective for reduction.
+ *   L&P tilting: λ' = λ + Π·μ where Π = reduction multipliers
+ *
+ * @complexity O(mTab² · max(mTab, nTab)) per row selection strategy.
+ *   Multiple strategies run sequentially: total O(k · mTab² · nTab)
+ *   where k = number of strategies enabled. Time limit available.
+ *
+ * @ref Cornuéjols & Nannicini (2011). "Practical strategies for generating
+ *      rank-1 split cuts". Math. Programming Computation 3:281-318.
+ * @ref Balas, Cornuéjols, Kis, Nannicini (2013). "Combining Lift-and-Project
+ *      and Reduce-and-Split". INFORMS J. Computing 25:475-487.
+ *
  * Enhanced version of CglRedSplit with:
  * - Multiple column selection strategies (fill_workNonBasicTab)
  * - Multiple row selection strategies (get_list_rows_reduction)

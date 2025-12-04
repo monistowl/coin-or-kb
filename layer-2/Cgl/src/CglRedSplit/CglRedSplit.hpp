@@ -19,16 +19,34 @@
  * Based on Anderson, Cornuejols, Li "Reduce-and-Split Cuts: Improving
  * the Performance of Mixed Integer Gomory Cuts" (Management Science, 2005).
  *
+ * @algorithm Reduce-and-Split Cut Generation:
+ *   Strengthens Gomory cuts by reducing continuous variable coefficients:
+ *   1. Extract simplex tableau rows for fractional integer basic vars
+ *   2. Build contNonBasicTab: coefficients for continuous nonbasics
+ *   3. Reduce: For each row pair (r1, r2), find integer k minimizing
+ *      ||row1 + k·row2||, update pi_mat with multipliers
+ *   4. Generate GMI cut from reduced row using Chvatal-Gomory formula
+ *   5. Eliminate slacks by substituting original constraint rows
+ *
+ * @math Reduction operation:
+ *   Let a^i = row i of continuous nonbasic tableau
+ *   Goal: minimize ||a^i + k·a^j||² over k ∈ ℤ
+ *   Optimal k = round(-(a^i·a^j)/(a^j·a^j))
+ *   Accept if ||a^i + k·a^j|| < (1 - minReduc)·||a^i||
+ *
+ *   GMI cut from reduced row: Σ_N f̄_j·x_j ≥ f₀/(1-f₀)
+ *   where f̄_j = f_j if j integer, else max(f_j, (f₀/(1-f₀))(1-f_j))
+ *
+ * @complexity O(mTab² · max(mTab, nTab)) where mTab = fractional integer
+ *   basic vars, nTab = continuous nonbasics. Controlled by maxTab parameter.
+ *   Typically 10-100x slower than basic Gomory but produces stronger cuts.
+ *
+ * @ref Anderson, Cornuéjols, Li (2005). "Reduce-and-Split Cuts: Improving
+ *      the Performance of Mixed Integer Gomory Cuts". Management Science 51:1720-1732.
+ *
  * Key idea: Combine simplex tableau rows to reduce coefficients on
  * continuous non-basic variables before applying Gomory formula.
  * This produces stronger cuts with better numerical properties.
- *
- * Algorithm:
- * 1. Identify fractional integer basic variables (intBasicVar_frac)
- * 2. Build contNonBasicTab: continuous nonbasic coefficients
- * 3. reduce_contNonBasicTab(): Apply row reduction using pi_mat
- * 4. generate_cgcut(): Derive Chvatal-Gomory cut from reduced row
- * 5. eliminate_slacks(): Convert to structural variables only
  *
  * Reduction process:
  * - pi_mat: Integer multipliers for row combinations
