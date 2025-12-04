@@ -8,6 +8,25 @@
  * HEMSRdeg), initial cut types (QP, Random, NaturalOrder), and match
  * types (Orphan, Standard, Brotherly, Community) used throughout Mongoose.
  *
+ * @algorithm Enumeration Definitions:
+ *
+ * MatchingStrategy - How to pair vertices during coarsening:
+ * - Random: Random neighbor selection, O(1) per vertex
+ * - HEM: Heavy Edge Matching, O(degree) per vertex
+ * - HEMSR: HEM with Stall Ratio, retries on mismatch
+ * - HEMSRdeg: HEMSR with degree ordering
+ *
+ * InitialEdgeCutType - How to partition coarsest graph:
+ * - QP: Quadratic programming relaxation (best quality)
+ * - Random: Random assignment (fastest)
+ * - NaturalOrder: First half vs second half
+ *
+ * MatchType - Classification of matched vertices:
+ * - Orphan: Unmatched (creates singleton coarse vertex)
+ * - Standard: Paired with single neighbor
+ * - Brotherly: 3-way match forming cycle
+ * - Community: 4-way match forming clique
+ *
  * @see Mongoose_Matching.hpp for matching algorithm implementations
  */
 

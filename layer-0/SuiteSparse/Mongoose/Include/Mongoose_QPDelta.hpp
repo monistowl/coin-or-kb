@@ -9,6 +9,23 @@
  * Lagrange multiplier lambda, and workspace arrays. FreeSet_status tracks
  * whether each x_i is at 0, 1, or strictly between (free).
  *
+ * @algorithm Active Set Representation for Bound-Constrained QP:
+ * Maintains partition of variables into three sets:
+ * - FreeSet (status = 0): 0 < x_i < 1, can move freely
+ * - LowerBound (status = -1): x_i = 0, held at lower bound
+ * - UpperBound (status = +1): x_i = 1, held at upper bound
+ *
+ * Key invariants:
+ * - Gradient and x always consistent: g = Lx
+ * - Balance constraint tracked: b = a'x ∈ [lo, hi]
+ * - Free set list enables O(|F|) iteration over free variables
+ *
+ * @math Optimality via KKT conditions:
+ * At solution: g_i = λa_i for free variables (gradient aligned with constraint).
+ * For bound variables: sign of (g_i - λa_i) confirms bound is correct.
+ *
+ * @complexity O(n) storage for solution, gradient, and status arrays.
+ *
  * @see Mongoose_QPGradProj.hpp for gradient projection using this state
  * @see Mongoose_QPLinks.hpp for free set management
  */

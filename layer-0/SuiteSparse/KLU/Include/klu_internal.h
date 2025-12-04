@@ -1,3 +1,41 @@
+/**
+ * @file klu_internal.h
+ * @brief Internal definitions for KLU sparse LU factorization
+ * Copyright (c) 2004-2023, University of Florida. LGPL-2.1+ license.
+ *
+ * KLU is a sparse LU factorization package designed for circuit simulation
+ * matrices, which are typically highly sparse with near-diagonal structure.
+ * Uses BTF (Block Triangular Form) permutation to exploit structure.
+ *
+ * @algorithm KLU Sparse LU Factorization:
+ * Efficient sparse LU for circuit matrices via structure exploitation:
+ * 1. BTF PERMUTATION: Find block triangular form P·A·Q = [B_11 B_12 ...]
+ *    - Diagonal blocks factored independently
+ *    - Reduces fill-in by isolating strongly connected components
+ * 2. SYMBOLIC ANALYSIS (per block):
+ *    - AMD ordering within each block
+ *    - Compute elimination tree and column counts
+ *    - Allocate storage for L and U factors
+ * 3. NUMERIC FACTORIZATION:
+ *    - Gilbert-Peierls left-looking algorithm
+ *    - Partial pivoting within supernodes
+ *    - Off-diagonal blocks solved by triangular solves
+ *
+ * @math Block triangular form (BTF):
+ * P·A·Q has diagonal blocks that are irreducible (strongly connected).
+ * Each diagonal block B_kk factored as L_k·U_k = B_kk.
+ * Off-diagonal blocks solved: B_ij·x_j = b_i - L_i·U_i·...
+ *
+ * @complexity O(|L| + |U|) for factorization, where |L|, |U| are
+ * nonzero counts in factors. Circuit matrices typically yield sparse factors.
+ *
+ * @ref Davis & Palamadai (2010). "A column pre-ordering strategy for the
+ *   unsymmetric-pattern multifrontal method". ACM TOMS 30(2):165-195.
+ *
+ * @see BTF library for block triangular form permutation
+ * @see AMD library for fill-reducing ordering
+ */
+
 //------------------------------------------------------------------------------
 // KLU/Include/klu_internal.h: internal include file for KLU
 //------------------------------------------------------------------------------

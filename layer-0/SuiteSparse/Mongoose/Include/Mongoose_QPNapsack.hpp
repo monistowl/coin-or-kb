@@ -9,6 +9,28 @@
  * Uses breakpoint method with heaps to efficiently find optimal lambda.
  * Core subroutine in QP gradient projection.
  *
+ * @algorithm Continuous Knapsack (Breakpoint Search):
+ * Finds Lagrange multiplier λ for balance constraint a'x ∈ [lo, hi]:
+ * 1. Initialize: compute a'y for unconstrained projection y
+ * 2. If a'y ∈ [lo, hi]: done, λ = 0
+ * 3. Otherwise: binary/heap search for breakpoint where constraint binds
+ *    - Breakpoints: λ values where some x_i hits 0 or 1
+ *    - Track a'x as λ changes (piecewise linear in λ)
+ * 4. Return λ such that a'x = lo (or hi)
+ *
+ * @math Projection with balance constraint:
+ * $$x_i = \Pi_{[0,1]}(y_i - \lambda a_i)$$
+ * where λ is chosen so $\sum_i a_i x_i \in [lo, hi]$.
+ *
+ * As λ increases: x_i with positive a_i decrease → a'x decreases.
+ * As λ decreases: x_i with positive a_i increase → a'x increases.
+ *
+ * @complexity O(n log n) due to heap-based breakpoint enumeration.
+ * Dominates each QP iteration when balance constraint is tight.
+ *
+ * @ref Kiwiel (2008). "Breakpoint searching algorithms for the
+ *   continuous quadratic knapsack problem". Math Programming 112(2).
+ *
  * @see Mongoose_QPNapUp.hpp for upward lambda search
  * @see Mongoose_QPNapDown.hpp for downward lambda search
  */

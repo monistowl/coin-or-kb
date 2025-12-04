@@ -9,6 +9,34 @@
  * SuiteSparseQR_factorize, _solve, _min2norm, _symbolic, _numeric for
  * factorization reuse. Supports real/complex, int32/int64.
  *
+ * @algorithm Sparse Multifrontal QR Factorization:
+ * Computes A·P = Q·R where P is fill-reducing permutation:
+ *
+ * 1. Symbolic Analysis (spqr_symbolic):
+ *    - Compute column elimination tree of A'A
+ *    - Find supernodal structure (frontal matrices)
+ *    - Allocate Householder vector storage
+ *
+ * 2. Numeric Factorization (spqr_numeric):
+ *    - Process fronts bottom-up in elimination tree
+ *    - Each front: dense QR via Householder reflections
+ *    - Assemble contribution blocks from children
+ *    - Store R factor and optionally H vectors
+ *
+ * 3. Solve (optional):
+ *    - Q'b via applying H vectors
+ *    - R\(Q'b) via back-substitution
+ *
+ * @math Householder QR at each front:
+ * For front F = [A_rows; C_children], compute F = Q_F · [R_F; 0]
+ * using Householder reflections H_i = I - τ_i v_i v_i'.
+ *
+ * @complexity O(nnz(R)²/n) for sparse QR, where nnz(R) depends on fill-in.
+ * Multifrontal organization enables parallelism across independent fronts.
+ *
+ * @ref Davis (2011). "Algorithm 915: SuiteSparseQR, a multifrontal
+ *   multithreaded sparse QR factorization package". ACM TOMS 38(1).
+ *
  * @see spqr.hpp for internal implementation
  */
 

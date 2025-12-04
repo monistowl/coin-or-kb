@@ -9,6 +9,24 @@
  * imbalance (deviation from target split). Used internally to evaluate
  * and compare partitions during refinement.
  *
+ * @algorithm Partition Quality Evaluation:
+ * Tracks two competing objectives during partitioning:
+ *
+ * Fields:
+ * - cutCost: Σ w_ij for edges (i,j) crossing the partition
+ * - W[0], W[1]: Total vertex weight in each partition
+ * - imbalance: target_split - W[0]/W (deviation from ideal)
+ * - heuCost: Combined cost = cutCost + penalty(imbalance)
+ *
+ * @math Heuristic cost with balance penalty:
+ * $$heuCost = cutCost + \lambda \cdot (imbalance)^2$$
+ *
+ * Penalty term ensures algorithm finds balanced partitions.
+ * λ trades off cut quality vs balance: higher λ → more balanced.
+ *
+ * @complexity O(1) to store and compare; O(|E|) to recompute from scratch.
+ * Incremental updates during FM: O(degree) per vertex move.
+ *
  * @see Mongoose_EdgeCut.hpp for public partition result
  * @see Mongoose_ImproveFM.hpp for gain calculations
  */

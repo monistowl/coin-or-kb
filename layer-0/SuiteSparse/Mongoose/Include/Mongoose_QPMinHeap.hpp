@@ -9,6 +9,24 @@
  * breakpoints in ascending order to find optimal lambda for balance
  * constraint satisfaction.
  *
+ * @algorithm Binary Min-Heap for Breakpoint Processing:
+ * Classic binary heap with minimum element at root:
+ *
+ * Operations:
+ * - build: Floyd's bottom-up O(n) heap construction
+ * - delete: Remove minimum, bubble down replacement, O(log n)
+ * - add: Insert at end, bubble up, O(log n)
+ * - heapify: Restore heap property after modification, O(log n)
+ *
+ * @math Heap property for indices:
+ * heap[i] ≤ heap[2i] and heap[i] ≤ heap[2i+1]
+ * Indices stored in heap, values in external array x.
+ *
+ * Used in QPNapUp: extract breakpoints in increasing λ order.
+ *
+ * @complexity O(n) build, O(log n) per operation.
+ * Total for napsack: O(n log n) worst case.
+ *
  * @see Mongoose_QPNapsack.hpp for napsack solver using heaps
  * @see Mongoose_QPMaxHeap.hpp for complementary max-heap
  */

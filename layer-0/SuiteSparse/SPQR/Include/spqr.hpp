@@ -9,6 +9,30 @@
  * happly, panel, 1colamd, 1fixed. Helper structs: spqr_work, spqr_blob.
  * Macros: FLIP/UNFLIP for marking, INDEX for column-major.
  *
+ * @algorithm Multifrontal QR Implementation:
+ * Internal routines for sparse QR factorization:
+ *
+ * Symbolic phase (spqr_analyze):
+ * - Build S = A(P,Q) in row-oriented form
+ * - Compute supernodal structure: fronts, parent/child
+ * - Allocate task graph for parallel numeric phase
+ *
+ * Numeric phase (spqr_factorize → spqr_kernel):
+ * - Process fronts in parallel via task graph
+ * - spqr_assemble: gather rows and child contributions into front
+ * - spqr_front: dense QR via blocked Householder (LAPACK-style)
+ * - spqr_cpack/rhpack: pack contribution block and R+H for storage
+ *
+ * @math Block Householder transformations:
+ * Apply panels of k reflectors using WY form: Q = I - V·T·V'
+ * where T is k×k upper triangular. Enables BLAS-3 performance.
+ *
+ * spqr_larftb: Apply block reflector to trailing submatrix.
+ * spqr_happly: Apply stored H vectors to dense matrix X.
+ *
+ * @complexity O(flops) where flops dominated by dense BLAS-3 in fronts.
+ * Parallel speedup from independent subtrees in elimination tree.
+ *
  * @see SuiteSparseQR.hpp for public user API
  */
 

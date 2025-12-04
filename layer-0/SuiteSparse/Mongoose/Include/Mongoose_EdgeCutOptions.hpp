@@ -10,6 +10,30 @@
  * projection (tolerance, iteration limit), and partition targets
  * (split ratio, balance tolerance).
  *
+ * @algorithm Configuration Parameter Groups:
+ * Controls algorithm behavior at each phase:
+ *
+ * Coarsening phase:
+ * - coarsen_limit: Stop coarsening at this size (default ~64)
+ * - matching_strategy: HEM, SHEM, or random (HEM usually best)
+ * - do_community_matching: Enable 3-4 vertex community detection
+ *
+ * Initial partition:
+ * - initial_cut_type: QP (best quality) or Random (fast)
+ *
+ * Refinement phase:
+ * - num_dances: FM/QP alternation count (1-3 typical)
+ * - FM_search_depth: Non-improving moves before stopping
+ * - FM_max_num_refinements: FM passes per level
+ * - gradproj_tolerance: QP convergence threshold
+ * - gradproj_iteration_limit: Max QP iterations
+ *
+ * Target metrics:
+ * - target_split: Desired partition ratio (0.5 = balanced)
+ * - soft_split_tolerance: Acceptable imbalance range
+ *
+ * @complexity O(1) to create/access options.
+ *
  * @see Mongoose_ImproveFM.hpp for FM algorithm
  * @see Mongoose_ImproveQP.hpp for QP refinement
  */

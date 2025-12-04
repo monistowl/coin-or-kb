@@ -9,6 +9,27 @@
  * vertex order. Quality of initial guess affects final partition quality
  * despite refinement. Selected via initial_cut_type option.
  *
+ * @algorithm Initial Partition Strategies:
+ * Creates first partition at coarsest level in multilevel hierarchy:
+ *
+ * 1. QP (InitialEdgeCut_QP): Solve QP relaxation, round to {0,1}
+ *    - Best quality but highest cost
+ *    - Recommended for small coarse graphs (<100 vertices)
+ *
+ * 2. Random (InitialEdgeCut_Random): Random assignment respecting balance
+ *    - Fast but may need many FM passes to reach good cut
+ *
+ * 3. Natural (InitialEdgeCut_Natural): First half vs second half
+ *    - Fastest, works well if input has locality
+ *
+ * @math Quality impact on final result:
+ * Good initial cut reduces FM iterations needed during uncoarsening.
+ * With multilevel: even random starts converge to similar quality,
+ * but better starts reduce total work.
+ *
+ * @complexity O(n²) for QP, O(n) for random/natural on coarse graph.
+ * Coarse graph typically has O(√n) vertices, so even QP is cheap.
+ *
  * @see Mongoose_EdgeCutOptions.hpp for InitialEdgeCutType selection
  * @see Mongoose_ImproveQP.hpp for QP-based initial cut
  */

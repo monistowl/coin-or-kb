@@ -9,6 +9,22 @@
  * interface between continuous relaxation and discrete partition
  * representation in the waterdance refinement cycle.
  *
+ * @algorithm QP Solution Rounding:
+ * Converts continuous x ∈ [0,1]^n to discrete partition {0,1}^n:
+ * 1. For each vertex v:
+ *    - If x_v already 0 or 1: keep as is
+ *    - If x_v ∈ (0,1): round to nearest (0 if x_v < 0.5, else 1)
+ * 2. Update partition arrays and cut cost
+ * 3. Identify new boundary vertices (neighbors across cut)
+ * 4. Update free set status for subsequent QP iterations
+ *
+ * @math Rounding preserves cut quality intuition:
+ * QP minimizes ½x'Lx which penalizes edges (i,j) by w_ij·(x_i - x_j)².
+ * Fractional values indicate "uncertain" assignment; rounding to
+ * nearest integer preserves the QP's preference.
+ *
+ * @complexity O(|E|) to scan edges and update cut cost.
+ *
  * @see Mongoose_QPDelta.hpp for QP state representation
  * @see Mongoose_ImproveQP.hpp for QP improvement workflow
  */

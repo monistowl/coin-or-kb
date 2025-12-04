@@ -9,6 +9,18 @@
  * (w0, w1), and imbalance metric. edge_cut() functions are main entry
  * points for computing graph partitions.
  *
+ * @algorithm Edge Cut Computation Entry Point:
+ * Main driver executing multilevel partitioning pipeline:
+ * 1. Build coarsening hierarchy (Mongoose_Coarsening)
+ * 2. Compute initial partition on coarsest graph
+ * 3. Uncoarsen with FM/QP refinement at each level
+ * 4. Return EdgeCut with partition[], cut_cost, imbalance
+ *
+ * @math Cut quality metrics:
+ * - cut_cost = ∑_{(i,j)∈cut} w_{ij} (minimize this)
+ * - imbalance = |0.5 - W₀/W| where W = W₀ + W₁
+ * - Target: imbalance ≤ soft_split_tolerance
+ *
  * @see Mongoose_EdgeCutOptions.hpp for algorithm parameters
  * @see Mongoose_EdgeCutProblem.hpp for internal problem representation
  */

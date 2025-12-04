@@ -9,6 +9,22 @@
  * graph with merged vertices and aggregated edge weights. Essential for
  * multilevel partitioning to handle large graphs efficiently.
  *
+ * @algorithm Graph Coarsening (Vertex Contraction):
+ * Creates smaller graph G' from G by merging matched vertex pairs:
+ * 1. Use matching (match[i] = j means vertices i,j are paired)
+ * 2. Create supervertex for each matched pair (or singleton)
+ * 3. Aggregate vertex weights: w'_k = w_i + w_j
+ * 4. Combine edges: e'(k,l) = e(i,l) + e(j,l) for matched pair (i,j)
+ * 5. Remove self-loops (edges within matched pairs become internal)
+ *
+ * @math Coarsening preserves cut structure:
+ * For partition P of G inducing P' on G':
+ * cut(P) = cut(P') + internal edges (contracted)
+ * Since internal edges can't be cut, optimizing on G' approximates G.
+ *
+ * @complexity O(|E|) per coarsening level.
+ * Total levels: O(log |V|) until |V'| < coarsen_limit.
+ *
  * @see Mongoose_Matching.hpp for vertex matching algorithms
  * @see Mongoose_Refinement.hpp for uncoarsening/projection
  */

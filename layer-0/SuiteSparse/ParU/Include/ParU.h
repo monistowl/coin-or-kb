@@ -1,3 +1,48 @@
+/**
+ * @file ParU.h
+ * @brief Parallel unsymmetric multifrontal sparse LU factorization
+ * Copyright (c) 2022-2025, Mohsen Aznaveh and Timothy A. Davis. GPL-3.0-or-later.
+ *
+ * ParU is a parallel sparse direct solver using OpenMP tasking for task-based
+ * parallelism combined with parallel BLAS (nested parallelism). Solves Ax = b
+ * for sparse A via LU factorization with partial pivoting.
+ *
+ * @algorithm Parallel Multifrontal LU Factorization:
+ * Sparse unsymmetric LU with task-parallel numeric phase:
+ * 1. SYMBOLIC ANALYSIS (via UMFPACK):
+ *    - Compute fill-reducing permutation (AMD, COLAMD, METIS)
+ *    - Build elimination/assembly tree
+ *    - Identify singleton rows/columns for special handling
+ * 2. FRONTAL MATRIX FACTORIZATION:
+ *    - Process fronts in topological (child-before-parent) order
+ *    - Each front: dense LU with partial pivoting via BLAS
+ *    - Assemble contributions from children (extend-add)
+ *    - Task parallelism: independent fronts processed concurrently
+ * 3. SOLVE PHASE:
+ *    - Forward solve: L·y = P·b
+ *    - Backward solve: U·x = y
+ *    - Apply permutations
+ *
+ * @math Multifrontal LU factorization:
+ * P·A·Q = L·U where P,Q are permutation matrices.
+ * Each frontal matrix F_k ∈ ℝ^(m_k × n_k) factored densely:
+ * F_k = [L_k 0; L_21 I] · [U_k U_12; 0 S_k]
+ * Schur complement S_k assembled to parent front.
+ *
+ * Singleton handling: rows/columns with single nonzero factored trivially,
+ * removed before main factorization for efficiency.
+ *
+ * @complexity O(n + symbolic) for analysis, O(flops) for factorization.
+ * Flop count depends on matrix structure and fill-reducing ordering quality.
+ * Typically O(n^1.5) to O(n^2) for 2D/3D mesh problems.
+ *
+ * @ref Aznaveh & Davis (2024). "ParU: A Parallel Unsymmetric Multifrontal
+ *   Sparse LU Factorization". ACM Trans. Math. Software.
+ *
+ * @see UMFPACK for sequential sparse LU (used for symbolic analysis)
+ * @see CHOLMOD for sparse matrix data structures
+ */
+
 // ============================================================================/
 // ======================= ParU.h =============================================/
 // ============================================================================/

@@ -8,6 +8,23 @@
  * solution violates lower balance bound (b < lo). Processes breakpoints
  * via heaps until constraint is satisfied, returning optimal lambda.
  *
+ * @algorithm Downward Breakpoint Search:
+ * Decreases λ to increase a'x (currently b < lo, need b ≥ lo):
+ * 1. Build heaps of breakpoints: λ values where variables hit bounds
+ *    - bound_heap: λ where free x_i hits 1 (upper bound)
+ *    - free_heap: λ where bound x_i = 0 becomes free
+ * 2. Process breakpoints in decreasing λ order:
+ *    - At each breakpoint, variable changes status (free↔bound)
+ *    - Update b = a'x incrementally
+ *    - Stop when b ≥ lo
+ * 3. Interpolate final λ if stopping between breakpoints
+ *
+ * @math Symmetric to QPNapUp but decreasing λ:
+ * For free variable i: Δx_i = -a_i·δ (δ < 0) → Δb > 0 for a_i > 0
+ * Decreasing λ increases x values, increasing a'x.
+ *
+ * @complexity O(n log n) for heap operations over n variables.
+ *
  * @see Mongoose_QPNapsack.hpp for main napsack solver
  * @see Mongoose_QPNapUp.hpp for upward search
  */

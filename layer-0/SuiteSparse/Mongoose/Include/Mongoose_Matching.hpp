@@ -9,6 +9,26 @@
  * pairs vertices for coarsening; heavier edges are preferred to preserve
  * graph structure. Cleanup handles unmatched (orphan) vertices.
  *
+ * @algorithm Heavy Edge Matching (HEM):
+ * Pairs vertices connected by heaviest edges to preserve structure:
+ * 1. Visit vertices in random order (for randomization)
+ * 2. For unmatched vertex v, find heaviest edge to unmatched neighbor u
+ * 3. Match v with u: match[v] = u, match[u] = v
+ * 4. Continue until all vertices matched or isolated
+ * 5. Cleanup: handle orphan vertices (no valid matches)
+ *
+ * @math Heavy edge principle: prefer matching (i,j) if w_ij is large.
+ * Rationale: heavy edges likely internal to optimal partition,
+ * so collapsing them preserves cut structure on coarser graph.
+ *
+ * Variants:
+ * - Random: match with random neighbor (fastest)
+ * - HEM: match with heaviest-edge neighbor
+ * - HEMSR: sorted random ordering for HEM
+ * - HEMSRdeg: degree-sorted ordering (low-degree first)
+ *
+ * @complexity O(|E|) for all variants (single pass through edges).
+ *
  * @see Mongoose_Coarsening.hpp for graph contraction using matches
  * @see Mongoose_Internal.hpp for MatchingStrategy enum
  */

@@ -9,6 +9,24 @@
  * asymmetric matrices, extracts largest connected component, removes
  * diagonal. Accepts C string or std::string filenames.
  *
+ * @algorithm Matrix Market Import Pipeline:
+ * Reads standard sparse matrix format into Mongoose graph:
+ *
+ * 1. Parse Matrix Market header (format, type, symmetry)
+ * 2. Read coordinate entries into triplet form
+ * 3. Convert triplet to CSC via cs_compress
+ * 4. Symmetrize if needed: A = (A + A^T)/2
+ * 5. Remove diagonal (self-loops)
+ * 6. Extract largest connected component (via BFS)
+ * 7. Return Graph or cs struct
+ *
+ * @math Connected component extraction:
+ * BFS from arbitrary vertex marks reachable set.
+ * If not all vertices reached, restart BFS from unmarked vertex.
+ * Keep only largest component for partitioning.
+ *
+ * @complexity O(n + nz) for parsing and preprocessing.
+ *
  * @see Mongoose_Graph.hpp for Graph class
  * @see Mongoose_CSparse.hpp for cs matrix struct
  */

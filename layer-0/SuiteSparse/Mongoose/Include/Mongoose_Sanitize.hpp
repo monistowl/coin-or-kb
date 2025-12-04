@@ -9,6 +9,25 @@
  * mirrorTriangular expands triangular to symmetric. Ensures valid
  * undirected graph representation for algorithms.
  *
+ * @algorithm Graph Preprocessing Pipeline:
+ * Transforms arbitrary sparse matrix into valid undirected graph:
+ *
+ * sanitizeMatrix steps:
+ * 1. Remove diagonal entries (self-loops invalid for partitioning)
+ * 2. If triangular: mirror to create symmetric matrix A + A^T
+ * 3. If binary requested: set all edge weights to 1
+ * 4. Return cleaned CSC matrix
+ *
+ * @math Symmetry requirement:
+ * Graph partitioning requires undirected graphs: A = A^T.
+ * If input is lower triangular L, compute A = L + L^T.
+ * Diagonal removal: A = A - diag(A).
+ *
+ * Binary weights useful when only topology matters, not edge strengths.
+ *
+ * @complexity O(n + nz) for all operations.
+ * mirrorTriangular doubles storage to 2×nz.
+ *
  * @see Mongoose_IO.hpp for file input using sanitization
  * @see Mongoose_CSparse.hpp for cs matrix operations
  */

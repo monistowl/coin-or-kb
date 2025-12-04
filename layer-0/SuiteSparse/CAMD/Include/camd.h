@@ -1,3 +1,43 @@
+/**
+ * @file camd.h
+ * @brief Constrained Approximate Minimum Degree ordering for symmetric matrices
+ * Copyright (c) 1996-2024, Timothy A. Davis, Yanqing Chen,
+ * Patrick R. Amestoy, and Iain S. Duff. BSD-3-clause license.
+ *
+ * CAMD computes fill-reducing orderings for sparse Cholesky factorization
+ * with user-specified constraints. Extends AMD to support constraint sets
+ * that force certain nodes to be ordered before others.
+ *
+ * @algorithm Constrained Approximate Minimum Degree (CAMD):
+ * AMD ordering with constraint satisfaction for symmetric matrices:
+ * 1. CONSTRAINT PROCESSING:
+ *    - User specifies C[i] = k meaning vertex i in constraint set k
+ *    - All vertices in set k ordered before any vertex in set k+1
+ *    - Within each set, AMD heuristic orders vertices freely
+ * 2. AMD ORDERING (per constraint set):
+ *    - Quotient graph maintains elimination graph implicitly
+ *    - Select vertex with approximate minimum degree
+ *    - Eliminate, update quotient graph, absorb indistinguishable vertices
+ * 3. OUTPUT: Permutation P such that P·A·P' has reduced fill
+ *
+ * @math Constrained ordering for Cholesky:
+ * L·L' = P·A·P' where P respects constraints C[·].
+ * Fill(L) depends on elimination order of A+A' (symmetrized pattern).
+ * Constraint sets useful for:
+ * - Nested dissection separators (must be ordered last)
+ * - Known dense rows/columns (order last to limit fill)
+ * - Hierarchical structures
+ *
+ * @complexity O(n·m) worst case, typically O(n·m/log(n)) for sparse matrices.
+ * Constraint overhead: O(n) additional work.
+ *
+ * @ref Amestoy, Davis & Duff (1996). "An Approximate Minimum Degree Ordering
+ *   Algorithm". SIAM J. Matrix Anal. Appl. 17(4):886-905.
+ *
+ * @see AMD for unconstrained approximate minimum degree
+ * @see CHOLMOD for sparse Cholesky using CAMD ordering
+ */
+
 //------------------------------------------------------------------------------
 // CAMD/Include/camd.h:  constrained approximate minimum degree ordering
 //------------------------------------------------------------------------------

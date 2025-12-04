@@ -1,3 +1,41 @@
+/**
+ * @file ccolamd.h
+ * @brief Constrained Column Approximate Minimum Degree ordering
+ * Copyright (c) 1996-2024, Timothy A. Davis, Sivasankaran Rajamanickam,
+ * and Stefan Larimore. BSD-3-clause license.
+ *
+ * CCOLAMD computes column orderings for sparse QR and LU factorization with
+ * user-specified constraints. Extends COLAMD with constraint sets that force
+ * certain columns to appear before or after others in the ordering.
+ *
+ * @algorithm Constrained Column AMD (CCOLAMD):
+ * COLAMD with constraint satisfaction for column ordering:
+ * 1. CONSTRAINT PROCESSING:
+ *    - User specifies groups: columns in group k ordered before group k+1
+ *    - Columns within same group ordered freely by COLAMD heuristic
+ * 2. COLAMD WITHIN GROUPS:
+ *    - Column elimination on A'A pattern (without forming A'A)
+ *    - Approximate minimum degree with aggressive absorption
+ *    - Supercolumn detection for efficiency
+ * 3. POSTORDERING: Optional elimination tree postorder for supernodes
+ *
+ * @math Fill reduction for unsymmetric matrices:
+ * For A ∈ ℝ^(m×n), ordering columns of A affects fill in A'A
+ * (Cholesky factor of normal equations) or R factor (QR of A).
+ * Degree of column j in A'A graph = |{i : A_ij ≠ 0}| - 1 + indegree.
+ *
+ * Constraint sets: cmember[j] = k means column j is in group k.
+ * All group-0 columns ordered first, then group-1, etc.
+ *
+ * @complexity O(n + nz) for ordering, where nz = nnz(A).
+ *
+ * @ref Davis, Gilbert, Larimore, Ng (2004). "A Column Approximate Minimum
+ *   Degree Ordering Algorithm". ACM TOMS 30(3):353-376.
+ *
+ * @see COLAMD for unconstrained column ordering
+ * @see SPQR, UMFPACK for sparse factorization using CCOLAMD
+ */
+
 //------------------------------------------------------------------------------
 // CCOLAMD/Include/ccolamd.h:  constrained column approx. min. degree ordering
 //------------------------------------------------------------------------------

@@ -9,6 +9,24 @@
  * matchmap, then applies FM/QP improvement (waterdance) at each level
  * for high-quality final partition.
  *
+ * @algorithm Uncoarsening with Refinement (V-cycle):
+ * Projects and refines partition through coarsening hierarchy:
+ * 1. Start with partition on coarsest graph G_L
+ * 2. For each level l = L-1 down to 0:
+ *    a. Project partition: P(v) = P(coarse_map[v]) for fine v
+ *    b. Apply waterdance refinement (FM + QP)
+ *    c. Continue to next finer level
+ * 3. Return refined partition on original graph G_0
+ *
+ * @math Partition inheritance via matching map:
+ * If vertex v in G_i was matched to form supervertex S in G_{i+1}:
+ * P_i(v) = P_{i+1}(S)
+ *
+ * Cut can only improve during refinement (waterdance finds better cuts).
+ *
+ * @complexity O(|E|) per level for projection + O(|E|) for refinement.
+ * Total: O(|E| log |V|) across all levels.
+ *
  * @see Mongoose_Coarsening.hpp for forward coarsening phase
  * @see Mongoose_Waterdance.hpp for partition improvement at each level
  */

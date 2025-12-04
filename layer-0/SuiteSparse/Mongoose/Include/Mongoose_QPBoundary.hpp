@@ -9,6 +9,23 @@
  * vertices (those with neighbors in opposite partition) as the
  * active set for optimization.
  *
+ * @algorithm QP Initialization from Discrete Partition:
+ * Converts binary partition to QP starting point:
+ * 1. Set x_v = 0 for vertices in partition A, x_v = 1 for partition B
+ * 2. Compute initial gradient g = Lx (graph Laplacian times x)
+ * 3. Identify boundary vertices: those with edges crossing cut
+ * 4. Add boundary vertices to free set (can move in [0,1])
+ * 5. Mark interior vertices as bound (fixed at 0 or 1)
+ *
+ * @math Boundary-only optimization:
+ * Interior vertices have all neighbors in same partition, so
+ * moving them always increases cut. Only boundary vertices can
+ * improve cut, so we optimize only over them (free set).
+ *
+ * Reduces effective problem size from n to |boundary| << n.
+ *
+ * @complexity O(|E|) to identify boundary vertices via edge scan.
+ *
  * @see Mongoose_QPDelta.hpp for QP state structure
  * @see Mongoose_QPGradProj.hpp for subsequent optimization
  */

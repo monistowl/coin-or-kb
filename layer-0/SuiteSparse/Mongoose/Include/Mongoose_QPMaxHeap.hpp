@@ -9,6 +9,24 @@
  * breakpoints in descending order, complementing min-heap for
  * bidirectional lambda search.
  *
+ * @algorithm Binary Max-Heap for Breakpoint Processing:
+ * Classic binary heap with maximum element at root:
+ *
+ * Operations (symmetric to min-heap):
+ * - build: Floyd's bottom-up O(n) heap construction
+ * - delete: Remove maximum, bubble down replacement, O(log n)
+ * - add: Insert at end, bubble up, O(log n)
+ * - heapify: Restore heap property after modification, O(log n)
+ *
+ * @math Heap property for indices:
+ * heap[i] ≥ heap[2i] and heap[i] ≥ heap[2i+1]
+ * Indices stored in heap, values in external array x.
+ *
+ * Used in QPNapDown: extract breakpoints in decreasing λ order.
+ *
+ * @complexity O(n) build, O(log n) per operation.
+ * Total for napsack: O(n log n) worst case.
+ *
  * @see Mongoose_QPNapsack.hpp for napsack solver using heaps
  * @see Mongoose_QPMinHeap.hpp for complementary min-heap
  */

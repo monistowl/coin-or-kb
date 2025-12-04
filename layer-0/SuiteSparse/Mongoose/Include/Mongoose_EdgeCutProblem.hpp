@@ -9,6 +9,29 @@
  * stores matching data (matchmap, invmatchmap, matchtype) for multilevel
  * hierarchy. Provides inline helpers for boundary heap and mark array.
  *
+ * @algorithm Multilevel Algorithm State Management:
+ * Encapsulates all mutable state for partition algorithms:
+ *
+ * Partition state:
+ * - partition[v]: Boolean, which side vertex v is on
+ * - vertexGains[v]: Current FM gain for moving v
+ * - externalDegree[v]: # edges crossing cut from v
+ * - bhHeap[2], bhSize[2]: Boundary heaps for each partition
+ *
+ * Matching state (for coarsening):
+ * - matchmap[v]: Coarse vertex ID that v maps to
+ * - invmatchmap[c]: Fine vertex that coarse c came from
+ * - matchtype[v]: How v was matched (standard, brotherly, community)
+ *
+ * @math Mark array with O(1) amortized clear:
+ * Instead of clearing n elements, increment markValue.
+ * mark(v): markArray[v] = markValue
+ * isMarked(v): markArray[v] == markValue
+ * Amortized O(1) clear by incrementing markValue.
+ *
+ * @complexity O(n) storage for all per-vertex arrays.
+ * Total memory: ~10n integers + 5n doubles for n-vertex graph.
+ *
  * @see Mongoose_Graph.hpp for base graph structure
  * @see Mongoose_BoundaryHeap.hpp for heap operations
  */

@@ -9,6 +9,27 @@
  * Public interface includes Graph, EdgeCut, EdgeCut_Options classes
  * and read_graph/edge_cut functions for partitioning workflows.
  *
+ * @algorithm Multilevel Graph Partitioning (Mongoose):
+ * Partitions graph into two balanced sets minimizing edge cut:
+ * 1. COARSEN: Repeatedly match vertices (HEM) and contract
+ * 2. INITIAL CUT: Partition coarsest graph (QP or random)
+ * 3. UNCOARSEN: Project partition up, refine at each level
+ * 4. REFINE: Waterdance interleaving FM and QP improvement
+ *
+ * @math Edge cut minimization with balance constraint:
+ * $$\min \sum_{(i,j)\in E} w_{ij} \cdot |x_i - x_j|$$
+ * subject to: $$|W_0 - W_1| \leq \epsilon \cdot W$$
+ * where x_i ∈ {0,1} is partition assignment, W_k = ∑_{x_i=k} w_i.
+ *
+ * @complexity O(|E| log |V|) for multilevel algorithm.
+ * Coarsening: O(|E|) per level, O(log |V|) levels.
+ * FM refinement: O(|E|) per pass.
+ *
+ * @ref Davis et al. (2020). "Algorithm 1003: Mongoose, a graph coarsening
+ *   and partitioning library". ACM Trans. Math. Software 46(1):7.
+ * @ref Karypis & Kumar (1998). "A fast and high quality multilevel scheme
+ *   for partitioning irregular graphs". SIAM J. Sci. Comput. 20(1):359-392.
+ *
  * @see Mongoose_EdgeCut.hpp for partition result structure
  * @see Mongoose_EdgeCutOptions.hpp for algorithm configuration
  */

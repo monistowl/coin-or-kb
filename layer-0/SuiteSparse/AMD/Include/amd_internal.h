@@ -1,3 +1,42 @@
+/**
+ * @file amd_internal.h
+ * @brief Internal definitions for AMD (Approximate Minimum Degree) ordering
+ * Copyright (c) 1996-2023, Timothy A. Davis, Patrick R. Amestoy,
+ * and Iain S. Duff. BSD-3-clause license.
+ *
+ * AMD computes fill-reducing orderings for sparse matrix factorization.
+ * Uses approximate minimum degree heuristic with quotient graph representation
+ * for efficient O(|A|) ordering of symmetric matrices (or A'A for unsymmetric).
+ *
+ * @algorithm Approximate Minimum Degree (AMD):
+ * Fill-reducing ordering using quotient graph compression:
+ * 1. Build quotient graph G representing remaining elimination graph
+ * 2. For i = 1 to n:
+ *    a. Find vertex v with approximate minimum degree
+ *    b. Eliminate v: add v to ordering, update quotient graph
+ *    c. Absorb indistinguishable nodes (mass elimination)
+ *    d. Supervariable detection for compression
+ *
+ * @math Quotient graph compression:
+ * After eliminating vertex v, neighbors become clique (fill-in).
+ * Instead of storing clique explicitly, store "element" e_v.
+ * adj(u) = original_adj(u) ∪ ⋃{elements containing u}.
+ * Degree approximation: |adj(u)| ≤ |original_adj(u)| + Σ|element sizes|.
+ *
+ * Supervariables: vertices with identical adjacency merged for O(1) updates.
+ *
+ * @complexity O(n·m) worst case, O(n·m/log(n)) typical for sparse matrices.
+ * Near-optimal fill for many practical matrices (within 5-20% of MMD).
+ *
+ * @ref Amestoy, Davis & Duff (1996). "An Approximate Minimum Degree Ordering
+ *   Algorithm". SIAM J. Matrix Anal. Appl. 17(4):886-905.
+ * @ref Amestoy, Davis & Duff (2004). "Algorithm 837: AMD, An Approximate
+ *   Minimum Degree Ordering Algorithm". ACM TOMS 30(3):381-388.
+ *
+ * @see COLAMD for column ordering of unsymmetric matrices
+ * @see CHOLMOD for sparse Cholesky using AMD ordering
+ */
+
 //------------------------------------------------------------------------------
 // AMD/Include/amd_internal.h: internal definitions for AMD
 //------------------------------------------------------------------------------

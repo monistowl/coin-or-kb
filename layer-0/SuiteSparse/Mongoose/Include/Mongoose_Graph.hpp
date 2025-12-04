@@ -8,6 +8,26 @@
  * edge weights (x) and vertex weights (w). Factory methods create from
  * raw arrays or CSparse matrices. Shallow copy flags track ownership.
  *
+ * @algorithm Compressed Sparse Column (CSC) Graph Representation:
+ * Standard sparse matrix format optimized for column access:
+ *
+ * Arrays:
+ * - p[n+1]: Column pointers. Neighbors of vertex j are at i[p[j]..p[j+1]-1]
+ * - i[nz]: Row indices (neighbor IDs for each edge)
+ * - x[nz]: Edge weights (optional, default 1)
+ * - w[n]: Vertex weights (optional, default 1)
+ *
+ * @math CSC interpretation for graphs:
+ * For undirected graph, store symmetric adjacency matrix A:
+ * A[i,j] = edge weight between i and j (0 if no edge).
+ * p[j+1] - p[j] = degree of vertex j.
+ *
+ * Memory ownership: shallow_* flags indicate borrowed vs owned arrays.
+ * Factory methods from CSparse matrices share data when possible.
+ *
+ * @complexity O(n + nz) storage.
+ * Neighbor iteration: O(degree) per vertex.
+ *
  * @see Mongoose_EdgeCutProblem.hpp for extended graph with partition state
  * @see Mongoose_CSparse.hpp for CSparse matrix format
  */

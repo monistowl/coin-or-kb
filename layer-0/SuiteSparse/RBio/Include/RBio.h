@@ -1,3 +1,43 @@
+/**
+ * @file RBio.h
+ * @brief Rutherford-Boeing sparse matrix I/O library
+ * Copyright (c) 2009-2023, Timothy A. Davis. GPL-2.0+ license.
+ *
+ * RBio reads and writes sparse matrices in Rutherford-Boeing format,
+ * a standard format for exchanging sparse matrices. Supports real, complex,
+ * integer, and pattern-only matrices in assembled or elemental forms.
+ *
+ * @algorithm Rutherford-Boeing I/O:
+ * Parse and write standardized sparse matrix format:
+ *
+ * READ OPERATION:
+ * 1. Parse 4-line header: title, key, dimensions, format specifiers
+ * 2. Read column pointers (Fortran-style Harwell format)
+ * 3. Read row indices for each column
+ * 4. Read numerical values (if present)
+ * 5. Convert to CSC (0-indexed C arrays)
+ *
+ * WRITE OPERATION:
+ * 1. Generate header with matrix properties (type: RUA/RSA/PSA/etc.)
+ * 2. Write column pointers in fixed-width Fortran format
+ * 3. Write row indices
+ * 4. Write values (with appropriate precision)
+ *
+ * @math Matrix types in RB format:
+ * First 3 characters encode: R=real, C=complex, P=pattern, I=integer
+ *                           U=unsymmetric, S=symmetric, H=Hermitian
+ *                           A=assembled, E=elemental (FEM)
+ * Example: RUA = Real Unsymmetric Assembled
+ *
+ * @complexity O(nnz) for reading/writing, where nnz = number of nonzeros.
+ *
+ * @ref Duff, Grimes & Lewis (1992). "Users' Guide for the Harwell-Boeing
+ *   Sparse Matrix Collection". Technical Report RAL-92-086.
+ *
+ * @see SuiteSparse Matrix Collection (https://sparse.tamu.edu)
+ * @see CHOLMOD for using matrices read via RBio
+ */
+
 //------------------------------------------------------------------------------
 // RBio/Include/RBio.h: include file for RBio
 //------------------------------------------------------------------------------

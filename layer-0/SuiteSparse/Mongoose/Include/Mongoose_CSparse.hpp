@@ -9,6 +9,28 @@
  * cs_transpose, cs_compress (triplet to CSC), and allocation.
  * Uses int64_t (csi) matching Mongoose's Int type.
  *
+ * @algorithm CSparse Subset for Graph I/O:
+ * Minimal CSparse operations needed for graph construction:
+ *
+ * Data structure (cs):
+ * - CSC mode (nz == -1): p[n+1] column pointers, i[nzmax] row indices
+ * - Triplet mode (nz >= 0): p[nzmax] col indices, i[nzmax] row indices
+ *
+ * Operations:
+ * - cs_compress: Convert triplet to CSC, O(n + nz)
+ * - cs_transpose: Compute A^T, O(n + nz)
+ * - cs_add: Compute αA + βB, O(nnz(A) + nnz(B))
+ *
+ * @math Triplet to CSC conversion:
+ * 1. Count column lengths: O(nz)
+ * 2. Cumulative sum → column pointers: O(n)
+ * 3. Scatter entries into CSC: O(nz)
+ *
+ * @complexity All operations O(n + nz) time and space.
+ *
+ * @ref Davis (2006). "Direct Methods for Sparse Linear Systems".
+ *   SIAM, Chapters 1-2 for CSparse design.
+ *
  * @see Mongoose_Graph.hpp for graph representation using cs format
  * @see Mongoose_IO.hpp for reading matrices from files
  */

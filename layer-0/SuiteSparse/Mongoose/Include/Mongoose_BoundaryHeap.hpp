@@ -9,6 +9,27 @@
  * gain. Operations: load, clear, insert, remove, heapifyUp/Down.
  * Critical for efficient O(n log n) FM refinement.
  *
+ * @algorithm Boundary Heap for FM Refinement:
+ * Max-heap of boundary vertices ordered by move gain:
+ *
+ * Structure: Two heaps, one per partition (A and B).
+ * - Only boundary vertices (with edges to other partition) are in heap
+ * - Interior vertices excluded (moving them always hurts cut)
+ *
+ * Operations:
+ * - bhLoad: Initialize heaps with all boundary vertices, O(n)
+ * - bhInsert: Add vertex to appropriate heap, O(log n)
+ * - bhRemove: Remove vertex (after move), O(log n)
+ * - heapifyUp/Down: Restore heap property after gain update, O(log n)
+ *
+ * @math Gain ordering enables greedy selection:
+ * FM always moves vertex with maximum gain (heap top).
+ * gain(v) = external_edges(v) - internal_edges(v)
+ * Positive gain → moving v reduces cut.
+ *
+ * @complexity Each FM pass: O(n log n) for n heap operations.
+ * Heap property ensures O(1) access to best move.
+ *
  * @see Mongoose_ImproveFM.hpp for FM algorithm using boundary heaps
  * @see Mongoose_EdgeCutProblem.hpp for bhHeap storage
  */

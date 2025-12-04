@@ -1,3 +1,47 @@
+/**
+ * @file umf_internal.h
+ * @brief Internal definitions for UMFPACK sparse LU factorization
+ * Copyright (c) 2005-2023, Timothy A. Davis. GPL-2.0+ license.
+ *
+ * UMFPACK is an unsymmetric multifrontal sparse LU factorization package.
+ * Computes P·A·Q = L·U via supernodal factorization with partial pivoting.
+ * Handles real and complex matrices in single and double precision.
+ *
+ * @algorithm Unsymmetric Multifrontal LU (UMFPACK):
+ * Sparse LU with supernodal assembly tree:
+ * 1. SYMBOLIC ANALYSIS:
+ *    - Column preordering via COLAMD or AMD(A'A)
+ *    - Build column elimination tree
+ *    - Compute upper bounds on L and U nonzero counts
+ * 2. NUMERIC FACTORIZATION:
+ *    - Process columns in elimination tree order
+ *    - Frontal matrices: dense submatrices during elimination
+ *    - Partial pivoting with threshold (for numerical stability)
+ *    - Extend-add operation for child contributions
+ * 3. SOLVE: Forward/backward substitution with L, U factors
+ *
+ * @math Frontal matrix factorization:
+ * Each front F ∈ ℝ^(m×n) corresponds to columns with similar structure.
+ * F = L_F · U_F via dense partial-pivoted LU (BLAS-3 for performance).
+ * Schur complement S = F_22 - L_21·U_12 assembled to parent front.
+ *
+ * Key optimizations:
+ * - Supernodes: columns with identical structure factored together
+ * - BLAS-3: dense operations within frontal matrices
+ * - Symbolic reuse: same pattern → reuse symbolic analysis
+ *
+ * @complexity O(flops) for numeric factorization.
+ * Flop count highly dependent on sparsity pattern and ordering quality.
+ *
+ * @ref Davis (2004). "A column pre-ordering strategy for the unsymmetric-
+ *   pattern multifrontal method". ACM TOMS 30(2):165-195.
+ * @ref Davis (2004). "Algorithm 832: UMFPACK V4.3—an unsymmetric-pattern
+ *   multifrontal method". ACM TOMS 30(2):196-199.
+ *
+ * @see COLAMD for column ordering (used by default)
+ * @see KLU for circuit matrices (alternative with BTF)
+ */
+
 //------------------------------------------------------------------------------
 // UMFPACK/Source/umf_internal.h: internal definitions for UMFPACK
 //------------------------------------------------------------------------------

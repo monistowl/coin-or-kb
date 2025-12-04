@@ -11,6 +11,34 @@
  * functions: front assembly/factorization, heap management, BLAS threading.
  * Includes UMFPACK SymbolicType/SWType for singleton detection.
  *
+ * @algorithm Parallel Unsymmetric Sparse LU Factorization:
+ * Multifrontal LU with task-based parallelism:
+ *
+ * 1. Symbolic Analysis (uses UMFPACK):
+ *    - Detect singletons (rows/cols with single nonzero)
+ *    - Build elimination tree for remaining submatrix S
+ *    - Create task tree for parallel numeric phase
+ *
+ * 2. Numeric Factorization:
+ *    - Process fronts in parallel via task tree
+ *    - Each front: dense partial pivoting LU
+ *    - Assemble contribution blocks from children
+ *    - Store L and U factors separately
+ *
+ * @math Frontal matrix factorization:
+ * Front F = [pivots | non-pivots] factored as F = P·L·U
+ * Partial pivoting within front for numerical stability.
+ * Contribution block C = Schur complement passed to parent.
+ *
+ * Singleton handling: Extract trivial 1×1 pivots first,
+ * reducing problem size before expensive multifrontal phase.
+ *
+ * @complexity O(flops) dominated by dense BLAS-3 in fronts.
+ * Parallel speedup via task tree scheduling with OpenMP.
+ *
+ * @ref Aznaveh & Davis (2024). "ParU: A Parallel Unsymmetric
+ *   Multifrontal Sparse LU Factorization Method".
+ *
  * @see ParU.h for public API
  * @see paru_omp.hpp for OpenMP abstraction
  */
