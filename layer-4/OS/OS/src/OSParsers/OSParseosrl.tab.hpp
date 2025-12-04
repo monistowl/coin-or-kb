@@ -16,6 +16,13 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+/**
+ * @file OSParseosrl.tab.hpp
+ * @brief OSrL XML parser (bison-generated)
+ *
+ * Bison-generated parser for OS Result Language (OSrL).
+ * Parses optimization results in XML format.
+ */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work

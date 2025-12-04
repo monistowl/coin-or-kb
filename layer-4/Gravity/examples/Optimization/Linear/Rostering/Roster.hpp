@@ -3,6 +3,13 @@
 //
 //  Created by Hassan on March 07 2023.
 
+/**
+ * @file Roster.hpp
+ * @brief Gravity rostering example model
+ *
+ * Staff rostering optimization model using Gravity framework.
+ * Demonstrates LP/MIP modeling with Gravity C++ DSL.
+ */
 #ifndef Roster_hpp
 #define Roster_hpp
 

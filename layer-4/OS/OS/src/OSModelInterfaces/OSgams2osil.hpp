@@ -6,6 +6,13 @@
 //
 // Author: Stefan Vigerske
 
+/**
+ * @file OSgams2osil.hpp
+ * @brief GAMS to OSiL model converter
+ *
+ * Converts GAMS optimization models to OS Instance Language (OSiL).
+ * Reads GAMS .gms files and produces XML-based OSiL representation.
+ */
 #ifndef OSGAMS2OSIL_HPP_
 #define OSGAMS2OSIL_HPP_
 

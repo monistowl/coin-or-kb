@@ -6,6 +6,13 @@
 //
 // Authors: Stefan Vigerske
 
+/**
+ * @file OSosrl2gams.hpp
+ * @brief OSrL to GAMS solution converter
+ *
+ * Converts OS Result Language (OSrL) to GAMS solution format.
+ * Writes solution back to GAMS for post-processing.
+ */
 #ifndef OSRL2GAMS_HPP_
 #define OSRL2GAMS_HPP_
 

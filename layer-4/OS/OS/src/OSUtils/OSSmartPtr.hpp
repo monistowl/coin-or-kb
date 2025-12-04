@@ -9,6 +9,13 @@
 // copied from IpReferenced.hpp so as to allow OS to be compiled
 // stand-alone (without the Fortran implications inherent in Ipopt)
 
+/**
+ * @file OSSmartPtr.hpp
+ * @brief OS smart pointer implementation
+ *
+ * Intrusive smart pointer for OSReferenced objects.
+ * Similar to Ipopt SmartPtr for reference counting.
+ */
 #ifndef OSSMARTPTR_HPP
 #define OSSMARTPTR_HPP
 

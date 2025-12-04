@@ -9,6 +9,13 @@
 // copied from IpReferenced.hpp so as to allow OS to be compiled
 // stand-alone (without the Fortran implications inherent in Ipopt)
 
+/**
+ * @file OSReferenced.hpp
+ * @brief OS reference counting base class
+ *
+ * Reference-counted base class for OS objects.
+ * Enables automatic memory management via smart pointers.
+ */
 #ifndef OSREFERENCED_HPP
 #define OSREFERENCED_HPP
 
