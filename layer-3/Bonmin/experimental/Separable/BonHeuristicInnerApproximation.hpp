@@ -3,10 +3,33 @@
 // This code is published under the Eclipse Public License.
 /**
  * @file BonHeuristicInnerApproximation.hpp
- * @brief Bonmin inner approximation heuristic
+ * @brief Bonmin inner approximation heuristic for MINLP
  *
  * Primal heuristic using inner approximation of feasible region.
  * Generates feasible MINLP solutions from LP relaxations.
+ *
+ * @algorithm Inner Approximation Heuristic:
+ *   Constructs feasible MINLP solutions by solving restricted MILPs:
+ *   1. Build polyhedral inner approximation of nonlinear feasible region
+ *   2. Sample points on convex hull of nonlinear constraints
+ *   3. Solve MILP on inner approximation to get integer-feasible point
+ *   4. Project MILP solution to NLP feasible region via local NLP solve
+ *   5. Return best feasible solution found
+ *
+ * @math Inner approximation construction:
+ *   For convex g(x) ≤ 0: sample boundary points x_1,...,x_k with g(x_i) = 0
+ *   Inner approx: conv{x_1,...,x_k} ⊆ {x : g(x) ≤ 0}
+ *   MILP feasible → can project to NLP feasible (convexity)
+ *
+ * @complexity O(MILP_solve + k·NLP_project) per heuristic call.
+ *   k = number of sample points for inner approximation.
+ *   Typically called at root node and periodically during B&B.
+ *
+ * @ref Bonami et al. (2008). "An algorithmic framework for convex mixed integer
+ *      nonlinear programs". Discrete Optimization 5(2):186-204.
+ *
+ * @see HeuristicInnerApproximation::solution for main heuristic method
+ * @see BonOuterDescription for complementary outer approximation
  */
 //
 // Authors :
