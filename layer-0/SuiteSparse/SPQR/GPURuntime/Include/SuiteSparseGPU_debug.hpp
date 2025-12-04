@@ -1,3 +1,15 @@
+/**
+ * @file SuiteSparseGPU_debug.hpp
+ * @brief Debug verbosity levels for SuiteSparse GPU runtime
+ * Copyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * Debug levels: OFF (0), ERRORONLY (1), CASUAL (2), VERBOSE (3), EXTREME (4).
+ * GPURUNTIME_DLEVEL set based on NDEBUG: CASUAL when debugging, OFF otherwise.
+ * Convenience macros: DEBUG_ATLEAST_ERRORONLY/CASUAL/VERBOSE/EXTREME.
+ * GPURUNTIME_LOGFILE_PATH defaults to "SuiteSparse_GPURuntime-logfile.txt".
+ */
+
 // =============================================================================
 // === SuiteSparse_GPURuntime/Include/SuiteSparseGPU_debug.hpp =================
 // =============================================================================

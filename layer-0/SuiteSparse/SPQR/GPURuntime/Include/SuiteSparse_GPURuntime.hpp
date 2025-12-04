@@ -1,3 +1,14 @@
+/**
+ * @file SuiteSparse_GPURuntime.hpp
+ * @brief Version information for SuiteSparse GPU runtime library
+ * Copyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * Version macros for SuiteSparse_GPURuntime shared GPU infrastructure.
+ * Current version 4.3.4 (June 2024). Provides common GPU utilities used
+ * by GPUQREngine and other SuiteSparse GPU components.
+ */
+
 // =============================================================================
 // === SuiteSparse_GPURuntime/Include/SuiteSparse_GPURuntime.hpp ===============
 // =============================================================================

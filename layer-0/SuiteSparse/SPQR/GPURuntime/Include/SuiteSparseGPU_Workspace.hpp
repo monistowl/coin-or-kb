@@ -1,3 +1,17 @@
+/**
+ * @file SuiteSparseGPU_Workspace.hpp
+ * @brief Unified CPU/GPU memory workspace management class
+ * Copyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,
+ * and Sanjay Ranka. GPL-2.0+ license.
+ *
+ * Workspace class manages paired CPU/GPU memory allocations: nitems × size_of_item
+ * bytes on both devices. Static methods: cpu_malloc/calloc/free, gpu_malloc/calloc/free.
+ * Instance methods: allocate (with cpu/gpu/pageLocked flags), destroy, transfer
+ * (cudaMemcpyKind with sync option). Accessors: cpu(), gpu(), getCount(), getStride().
+ *
+ * @see GPUQREngine_BucketList.hpp uses Workspace for VT blocks
+ */
+
 // =============================================================================
 // === SuiteSparse_GPURuntime/Include/SuiteSparseGPU_Workspace.hpp =============
 // =============================================================================
