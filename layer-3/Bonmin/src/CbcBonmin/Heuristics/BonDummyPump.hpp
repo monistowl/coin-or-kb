@@ -1,10 +1,20 @@
-// (C) Copyright CNRS
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami, LIF Université de la Méditérannée-CNRS
-//
-// Date : 06/18/2008
+/**
+ * @file BonDummyPump.hpp
+ * @brief Placeholder/testing heuristic for feasibility pump
+ * Copyright (C) CNRS
+ * This code is published under the Eclipse Public License.
+ *
+ * DummyPump: Simple placeholder heuristic extending LocalSolverBasedHeuristic.
+ * Used for testing or as template for new heuristics.
+ *
+ * Provides minimal implementation of solution() method.
+ *
+ * Authors: Pierre Bonami, LIF Université de la Méditerranée-CNRS
+ * Date: 06/18/2008
+ *
+ * @see LocalSolverBasedHeuristic for base class
+ * @see PumpForMinlp for full feasibility pump implementation
+ */
 
 #ifndef BonDummyPump_H
 #define BonDummyPump_H

@@ -1,11 +1,22 @@
-// Copyright (C) 2010, International Business Machines Corporation and others. 
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Pierre Bonami CNRS
-//
-// Date : May, 26 2010
+/**
+ * @file BonMilpRounding.hpp
+ * @brief MILP-based rounding heuristic for MINLP
+ * Copyright (C) 2010, International Business Machines Corporation and others.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * MilpRounding: Heuristic that constructs a MIP approximation of the MINLP,
+ * solves it, and uses the solution as a starting point for NLP refinement.
+ *
+ * Uses SubMipSolver (mip_) for the linear approximation and maintains
+ * noGoods cuts to avoid revisiting previously explored regions.
+ *
+ * Authors: Pierre Bonami, CNRS
+ * Date: May 26, 2010
+ *
+ * @see SubMipSolver for MIP subproblem solver
+ * @see HeuristicDiveMIP for diving-based approach
+ */
 
 #ifndef BonMilpRounding_HPP
 #define BonMilpRounding_HPP

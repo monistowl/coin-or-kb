@@ -1,11 +1,23 @@
-// Copyright (C) 2007, International Business Machines Corporation and others. 
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Joao P. Goncalves, International Business Machines Corporation
-//
-// Date : November 12, 2007
+/**
+ * @file BonHeuristicDiveMIPVectorLength.hpp
+ * @brief MIP-based diving heuristic selecting by constraint participation
+ * Copyright (C) 2007, International Business Machines Corporation and others.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * HeuristicDiveMIPVectorLength: Diving heuristic for MINLP that solves
+ * MIP subproblems during diving. Variable selection based on column
+ * length (number of constraints containing the variable).
+ *
+ * Prioritizes high-density columns for faster constraint propagation.
+ * Uses columnLength_ array for efficient lookup.
+ *
+ * Authors: Joao P. Goncalves, IBM
+ * Date: November 12, 2007
+ *
+ * @see HeuristicDiveMIP for base MIP-diving class
+ * @see HeuristicDiveVectorLength for NLP-based variant
+ */
 
 #ifndef BonHeuristicDiveMIPVectorLength_H
 #define BonHeuristicDiveMIPVectorLength_H

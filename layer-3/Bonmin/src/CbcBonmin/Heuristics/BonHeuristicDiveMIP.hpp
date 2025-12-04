@@ -1,11 +1,27 @@
-// Copyright (C) 2007, International Business Machines Corporation and others. 
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Joao P. Goncalves, International Business Machines Corporation
-//
-// Date : November 12, 2007
+/**
+ * @file BonHeuristicDiveMIP.hpp
+ * @brief Base class for MIP-based diving heuristics in MINLP
+ * Copyright (C) 2007, International Business Machines Corporation and others.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * HeuristicDiveMIP: Abstract base class for diving heuristics that solve
+ * MIP subproblems during the dive. Unlike pure NLP-based diving, this
+ * uses a SubMipSolver (mip_) to handle integer feasibility more robustly.
+ *
+ * Derived classes implement:
+ * - setInternalVariables(): Setup for variable selection
+ * - selectVariableToBranch(): Variable and rounding direction choice
+ *
+ * Uses BonminSetup for configuration and TMINLP2TNLP for problem access.
+ *
+ * Authors: Joao P. Goncalves, IBM
+ * Date: November 12, 2007
+ *
+ * @see HeuristicDiveMIPFractional for fractional selection
+ * @see HeuristicDiveMIPVectorLength for column-density selection
+ * @see HeuristicDive for NLP-only base class
+ */
 
 #ifndef BonHeuristicDiveMIP_HPP
 #define BonHeuristicDiveMIP_HPP

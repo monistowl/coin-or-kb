@@ -1,11 +1,23 @@
-// Copyright (C) 2007, International Business Machines Corporation and others. 
-// All Rights Reserved.
-// This code is published under the Eclipse Public License.
-//
-// Authors :
-// Joao P. Goncalves, International Business Machines Corporation
-//
-// Date : November 12, 2007
+/**
+ * @file BonHeuristicDiveFractional.hpp
+ * @brief NLP-based diving heuristic selecting most fractional variable
+ * Copyright (C) 2007, International Business Machines Corporation and others.
+ * All Rights Reserved.
+ * This code is published under the Eclipse Public License.
+ *
+ * HeuristicDiveFractional: Diving heuristic for MINLP that solves
+ * NLP subproblems during diving. Variable selection based on
+ * fractionality - picks integer variable closest to 0.5.
+ *
+ * Extends HeuristicDive with most-fractional variable selection.
+ * Simpler than MIP variant but may require more NLP solves.
+ *
+ * Authors: Joao P. Goncalves, IBM
+ * Date: November 12, 2007
+ *
+ * @see HeuristicDive for base NLP-diving class
+ * @see HeuristicDiveMIPFractional for MIP-based variant
+ */
 
 #ifndef BonHeuristicDiveFractional_H
 #define BonHeuristicDiveFractional_H
