@@ -10,6 +10,27 @@
  * recursively with different scaling factors. More general than
  * simple Gomory or MIR cuts.
  *
+ * @algorithm Two-Step Mixed Integer Rounding (2-MIR):
+ *   Derives cuts by repeated MIR application with scaling:
+ *   1. Start with base inequality: Σ a_j x_j ≤ b (from tableau or formulation)
+ *   2. First MIR: Scale by t, apply MIR function, get inequality with floor(tb)
+ *   3. Second MIR: Scale result by q, apply MIR again
+ *   4. For each (t,q) in [t_min,t_max]×[q_min,q_max], generate candidate cut
+ *   5. Select cuts meeting quality thresholds (steepness, violation)
+ *
+ * @math MIR function derivation:
+ *   For Σ a_j x_j ≤ b with x_j ∈ [0,u_j], x_j integer for j ∈ I:
+ *   Let f = b - floor(b), f_j = a_j - floor(a_j)
+ *   MIR: Σ_{j:f_j≤f} floor(a_j)x_j + Σ_{j:f_j>f} (f_j-f)/(1-f)·x_j ≤ floor(b)
+ *   Scaling by t before MIR: multiplies a_j, b by t → different f values.
+ *   Two-step: Apply MIR, then scale and apply again for stronger cuts.
+ *
+ * @complexity O(m·n·|T|·|Q|) where m=rows, n=cols, |T|, |Q| = scaling ranges.
+ *   Typical: t ∈ [1,4], q ∈ [1,2] with step 1 → 8 cuts per source row.
+ *
+ * @ref Dash & Günlük (2006). "Valid inequalities based on simple mixed-integer
+ *      sets". Math. Programming 105:29-53.
+ *
  * Cut types generated (controlled by do_mir_, do_2mir_, do_tab_, do_form_):
  * - tMIR: Apply MIR with scaling t (t_min_ to t_max_)
  * - 2-step MIR: Apply MIR twice with scaling q (q_min_ to q_max_)

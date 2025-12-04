@@ -17,6 +17,29 @@
  * pivoting in the extended (lifted) space. More sophisticated than
  * CglLiftAndProject.
  *
+ * @algorithm Lift-and-Project Cut Generation via Pivoting:
+ *   Generates disjunctive cuts by solving auxiliary optimization in lifted space:
+ *   1. For fractional x_j with disjunction (x_j ≤ k ∨ x_j ≥ k+1):
+ *   2. Lift to extended space: introduce y¹, y² copies for each disjunct
+ *      x = λy¹ + (1-λ)y², λ ∈ [0,1], y¹ feasible for x_j ≤ k, y² for x_j ≥ k+1
+ *   3. Pivot in lifted space to optimize cut depth (separation)
+ *   4. Project: Extract cut α'x ≤ β valid for original space
+ *   5. Apply strengthening: modularization, coefficient tightening
+ *
+ * @math Lift-and-Project formulation (Balas, 1979):
+ *   Original: P = {x : Ax ≤ b, 0 ≤ x ≤ u}
+ *   Disjunction: D = (π'x ≤ π₀) ∨ (π'x ≥ π₀ + 1)
+ *   Lifted LP: max α'x̄ - β s.t. valid for P ∩ D
+ *   Optimal (α*, β*) gives deepest cut separating x̄ from conv(P ∩ D).
+ *
+ * @complexity O(pivotLimit · n) per cut where n = variables.
+ *   Total: O(|fractional| · pivotLimit · n) per call to generateCuts.
+ *   Pivoting typically converges in 10-50 iterations.
+ *
+ * @ref Balas & Perregaard (2003). "A precise correspondence between lift-and-
+ *      project cuts, simple disjunctive cuts, and mixed integer Gomory cuts
+ *      for 0-1 programming". Math. Programming 94:221-245.
+ *
  * Algorithm: For each fractional integer variable:
  * 1. Lift problem to higher dimension with disjunction
  * 2. Pivot in lifted space using CglLandPSimplex
