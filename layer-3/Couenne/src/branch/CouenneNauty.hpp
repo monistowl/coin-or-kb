@@ -16,26 +16,34 @@
  * in MINLP problems. Symmetry information enables orbital branching
  * and isomorphism pruning to reduce the search space.
  *
- * **Nauty integration:**
- * The problem is represented as a graph where:
- * - Nodes: Variables and constraints
- * - Edges: Connections based on problem structure
- * Nauty computes the automorphism group of this graph.
+ * @algorithm Graph-Based Symmetry Detection (nauty):
+ *   Detects problem symmetries by computing graph automorphisms:
+ *   1. **Graph construction:** Build colored graph G from MINLP:
+ *      - Nodes: Variables (colored by type/bounds) + constraints (colored by type)
+ *      - Edges: Variable i appears in constraint j → edge (v_i, c_j)
+ *   2. **Partition refinement:** color_node() partitions by variable status
+ *      - Fixed variables form singleton cells
+ *      - Free variables may be permuted within same orbit
+ *   3. **Automorphism computation:** nauty computes Aut(G)
+ *      - Returns generators of symmetry group
+ *      - Orbits = equivalence classes of variables under Aut(G)
+ *   4. **Application:** Orbits enable orbital branching and pruning
  *
- * **Key methods:**
- * - addElement(): Add edge to graph
- * - computeAuto(): Compute automorphism group
- * - getOrbits(): Get variable orbits (symmetry equivalence classes)
- * - getGroupSize(): Size of symmetry group
- * - getNumGenerators(): Number of group generators
+ * @math Automorphism group:
+ *   Aut(G) = {π : V → V | π(E) = E and π preserves colors}
+ *   Orbit of v: Orb(v) = {π(v) : π ∈ Aut(G)}
+ *   |Aut(G)| can be exponentially large, stored via generators
+ *
+ * @complexity O(n!) worst case, but practical: O(n²) for most graphs.
+ *   nauty uses canonical labeling with partition backtracking.
+ *   Preprocessing: Build graph O(nnz). Memory: O(n² + |generators|).
+ *
+ * @ref McKay & Piperno (2014). "Practical graph isomorphism, II".
+ *      J. Symbolic Computation 60:94-112.
  *
  * **Coloring (VarStatus):**
  * - FIX_AT_ZERO, FIX_AT_ONE, FREE: Variable status for partitioning
  * - color_node(): Assign color to node for refined symmetry
- *
- * **Performance tracking:**
- * - nautyCalls_: Number of calls to nauty
- * - nautyTime_: Time spent in nauty computations
  *
  * @see CouenneOrbitObj for orbital branching objects
  * @see CouenneOrbitBranchingObj for orbital branch execution

@@ -4,22 +4,40 @@
  * Copyright (C) 2004, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *
- * Implements local branching neighborhood search:
- * 1. Start with feasible solution
- * 2. Add cut: sum |x_i - x*_i| <= k (Hamming distance)
- * 3. Search k-neighborhood for improvements
- * 4. If optimal in neighborhood, reverse cut and widen (k+1)
- * 5. Repeat with new solution center
+ * @algorithm Local Branching (Fischetti-Lodi):
+ *   Neighborhood search around incumbent using Hamming distance cuts:
+ *   1. **Initialize:** Obtain feasible solution x*
+ *   2. **Local search:** Add cut Σ |x_i - x*_i| ≤ k (k-neighborhood)
+ *      - For 0-1: Σ_{i:x*=1}(1-x_i) + Σ_{i:x*=0}x_i ≤ k
+ *   3. **Solve subproblem:** B&C in restricted region (time/node limits)
+ *   4. **Improvement found:** Update x* = new solution, goto 2
+ *   5. **No improvement (optimal in neighborhood):**
+ *      - Reverse cut: Σ |x_i - x*_i| ≥ k+1 (exclude region)
+ *      - Widen search: increase k (diversification_++)
+ *   6. **Termination:** maxDiversification reached or global optimum proved
  *
- * Parameters:
- * - range: Initial neighborhood radius k
- * - typeCuts: 0 = 0-1 only, 1 = general integer
- * - maxDiversification: Max radius increases
- * - timeLimit/nodeLimit: Sub-tree limits
+ * @math Local branching cut for binary variables:
+ *   Let S = {i : x*_i = 1}. The k-neighborhood constraint is:
+ *   Σ_{i∈S} (1-x_i) + Σ_{i∉S} x_i ≤ k
+ *   ⟺ |S| - Σ_{i∈S} x_i + Σ_{i∉S} x_i ≤ k
+ *   This limits Hamming distance from x* to at most k.
+ *
+ * @complexity Each subproblem bounded by timeLimit_/nodeLimit_.
+ *   Total: O(maxDiversification_ × subproblem_limit).
+ *   Effective when incumbent is near-optimal.
+ *
+ * @ref Fischetti & Lodi (2003). "Local Branching". Mathematical
+ *      Programming 98:23-47.
+ *
+ * **Parameters:**
+ * - range_: Initial neighborhood radius k
+ * - typeCuts_: 0 = 0-1 only, 1 = general integer (weaker cuts)
+ * - maxDiversification_: Max radius increases before giving up
+ * - timeLimit_/nodeLimit_: Sub-tree resource limits
+ * - refine_: Whether to prove optimality fixing 0-1 vars
  *
  * @see CbcTree for base tree class
  * @see CbcHeuristicLocal for related local search heuristic
- * @see "Local Branching" Fischetti & Lodi, Math. Prog. 2003
  */
 
 #ifndef CbcTreeLocal_H

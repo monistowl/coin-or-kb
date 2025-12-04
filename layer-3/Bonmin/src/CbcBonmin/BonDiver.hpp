@@ -14,20 +14,39 @@
  * Implements tree traversal strategies that "dive" down branches before
  * backtracking, often finding feasible solutions faster than pure best-bound.
  *
- * **Tree traversal classes:**
+ * @algorithm Diving Tree Search:
+ *   Depth-first exploration with controlled backtracking:
+ *   1. **Dive phase:** Follow current branch down (one child per node)
+ *      - CbcDiver: Always take first child
+ *      - CbcProbedDiver: Evaluate both children, take better one
+ *      - CbcDfsDiver: Follow DFS with backtrack limits
+ *   2. **Termination conditions:**
+ *      - Hit leaf (feasible solution or pruned)
+ *      - maxDiveDepth_ exceeded
+ *      - maxDiveBacktracks_ exhausted
+ *      - Guessed objective ≥ incumbent (stop_diving_on_cutoff_)
+ *   3. **Backtrack phase:** Pop from dive stack or return to best-bound heap
+ *   4. **Mode switching (CbcDfsDiver):**
+ *      - Enlarge: Build initial tree (BFS-like)
+ *      - FindSolutions: Aggressive diving
+ *      - CloseBound: Best-bound focus
+ *      - LimitTreeSize: Depth-first to control memory
+ *
+ * @math Diving vs best-bound trade-off:
+ *   Best-bound: guarantees smallest gap but may miss feasible solutions
+ *   Diving: finds incumbents fast, enables early pruning
+ *   Hybrid: start diving, switch to best-bound after n solutions found
+ *   DiverCompare.newSolution() triggers mode transitions
+ *
+ * @complexity Diving: O(depth) memory for dive stack.
+ *   Hybrid manages heap of O(nodes) with dive stack overlay.
+ *   Mode switches trigger O(dive_stack) heap insertions.
+ *
+ * **Strategies:**
  * - CbcDiver: Simple diving to leaves before returning to heap
- * - CbcProbedDiver: Evaluates both children before choosing dive direction
- * - CbcDfsDiver: Depth-first diving with configurable backtracking
- *
- * **CbcDfsDiver modes (ComparisonModes):**
- * - Enlarge: Initial tree exploration
- * - FindSolutions: Prioritize finding feasible solutions
- * - CloseBound: Prioritize closing optimality gap
- * - LimitTreeSize: Control memory usage
- *
- * **DiverCompare:**
- * Node comparison strategy that adapts based on solve progress,
- * switching modes as solutions are found or node count grows.
+ * - CbcProbedDiver: Two-child look-ahead for dive direction
+ * - CbcDfsDiver: Configurable DFS with mode-based behavior
+ * - DiverCompare: Adaptive comparison switching modes on events
  *
  * @see CbcTree for the base tree class
  * @see BabSetupBase for tree traversal configuration
