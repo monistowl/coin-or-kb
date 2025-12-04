@@ -8,11 +8,18 @@
  * Maintains a pool of solutions and fixes variables based on
  * agreement across the solution pool (Ghosh 2007).
  *
- * Algorithm:
- * 1. Maintain pool of recent integer solutions (values_ array)
- * 2. Fix variables that have same value across solutions
- * 3. Add constraint on distance from solutions (localSpace_)
- * 4. Solve restricted MIP
+ * @algorithm DINS - Distance-Induced Neighborhood Search (Ghosh 2007):
+ *   solution() with solution pool {x^1,...,x^k}:
+ *   1. Fix variable j if x^1_j = x^2_j = ... = x^k_j (unanimous).
+ *   2. Add distance constraint: Σ|x_j - x^best_j| ≤ localSpace_.
+ *   3. Solve restricted MIP with distance bound.
+ *   4. If improved, add to pool; maintain maximumKeepSolutions_.
+ *   Uses multiple solutions for more informed fixing.
+ *
+ * @math Distance neighborhood:
+ *   N_DINS = {x : x_j = v_j ∀j unanimous, dist(x, x^best) ≤ r}.
+ *   dist(x, y) = Σ_j |x_j - y_j| (Hamming for binary, L1 for general).
+ *   Pool-based: More robust than two-solution RINS.
  *
  * Key parameters:
  * - maximumKeepSolutions_: Size of solution pool

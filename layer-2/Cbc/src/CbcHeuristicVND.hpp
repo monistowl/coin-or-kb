@@ -7,11 +7,20 @@
  * CbcHeuristicVND: Variable Neighborhood Descent metaheuristic.
  * Systematically explores neighborhoods of increasing size.
  *
- * Algorithm (Hansen & Mladenovic):
- * 1. Start from baseSolution_
- * 2. Search in neighborhood k (stepSize_ variables)
- * 3. If improved, reset k=1; otherwise k++
- * 4. Repeat until k > kmax_
+ * @algorithm VND - Variable Neighborhood Descent (Hansen & Mladenovic):
+ *   solution() systematic neighborhood exploration:
+ *   1. k ← 1; x ← baseSolution_.
+ *   2. Search N_k(x) using solutionFix() (restrict k·stepSize_ vars).
+ *   3. If improved: x ← x', k ← 1 (restart from smallest).
+ *   4. Else: k ← k + 1 (expand neighborhood).
+ *   5. Repeat until k > kmax_.
+ *   Systematic intensification with dynamic neighborhood sizing.
+ *
+ * @math Neighborhood structure:
+ *   N_k(x) = {x' : |{j : x'_j ≠ x_j}| ≤ k·stepSize_}.
+ *   Size increases as k increases: |N_1| ⊆ |N_2| ⊆ ... ⊆ |N_kmax|.
+ *   On improvement: restart with small neighborhood (intensify).
+ *   On failure: expand neighborhood (diversify).
  *
  * Parameters:
  * - stepSize_: Base neighborhood size

@@ -10,6 +10,19 @@
  * test(x,y) returns true if y has smaller objective than x.
  * Prioritizes most promising nodes for optimality proof.
  *
+ * @algorithm Best-First Search (BFS) Node Selection:
+ *   test(x, y) comparison for heap ordering:
+ *   Returns true if objective(y) < objective(x).
+ *   Effect: Node with smallest LP bound processed first.
+ *   Global bound: Always equals objective of next node to process.
+ *   Optimal for proving optimality (fewest nodes theoretically).
+ *
+ * @math Optimality proof efficiency:
+ *   Best-first guarantees: global_bound = min{LP(node) : node open}.
+ *   Gap = (incumbent - global_bound) / |incumbent|.
+ *   Minimizes gap at each step → optimal for gap closure.
+ *   Memory: May store O(2^d) nodes; gap improves slowly until near proof.
+ *
  * Advantages:
  * - Optimal search order for proving optimality
  * - Best global bound progression
