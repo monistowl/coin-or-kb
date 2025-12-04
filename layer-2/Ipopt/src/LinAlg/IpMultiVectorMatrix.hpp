@@ -13,9 +13,21 @@
  * - Limited-memory quasi-Newton: store recent gradient differences
  * - Low-rank updates: V*V^T matvec via two sequential operations
  *
- * Key methods:
- * - LRMultVector: computes y = alpha*V*V^T*x + beta*y
- * - AddRightMultMatrix: V = alpha*U*C + beta*V for small dense C
+ * @algorithm Low-Rank Matrix-Vector Product:
+ *   V ∈ ℝ^{m×k} stored as k column vectors.
+ *   MultVector: y ← αVx + βy where x ∈ ℝᵏ (linear combination of cols).
+ *   TransMultVector: y ← αV^T x + βy where x ∈ ℝᵐ (k dot products).
+ *   LRMultVector: y ← αVV^T x + βy = α·V·(V^T·x) + βy (two-stage).
+ *
+ * @math Limited-memory quasi-Newton storage:
+ *   L-BFGS: stores {sᵢ, yᵢ} pairs for i = k-m+1,...,k.
+ *   sᵢ = xᵢ₊₁ - xᵢ (step), yᵢ = ∇f(xᵢ₊₁) - ∇f(xᵢ) (gradient diff).
+ *   Compact form: B = B₀ - [B₀S Y][R⁻^T(D+Y^T B₀Y)R⁻ ...][...]^T.
+ *   Inner products V^T W computed via MultiVectorMatrix ops.
+ *
+ * @complexity O(mk) storage for m×k matrix.
+ *   O(mk) for MultVector, O(mk) for TransMultVector.
+ *   O(m·k²) for high-rank update forming k×k inner product matrix.
  *
  * Used in Ipopt for:
  * - L-BFGS/L-SR1 Hessian approximations

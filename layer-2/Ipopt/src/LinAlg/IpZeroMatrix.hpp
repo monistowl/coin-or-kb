@@ -11,6 +11,20 @@
  * ZeroMatrix represents a matrix of zeros with given dimensions.
  * No storage required. Matrix-vector multiply just scales y by beta.
  *
+ * @algorithm Zero Matrix Operations:
+ *   Z = 0 ∈ ℝ^{m×n} (all elements zero).
+ *   MultVector: y ← α·0·x + βy = βy (just scaling).
+ *   Row/ColNorms: no-op (norms are already zero or don't change).
+ *   No storage or computation proportional to dimensions.
+ *
+ * @math Null Space Representation:
+ *   Z·v = 0 for all v (annihilator property).
+ *   rank(Z) = 0, null space = ℝⁿ.
+ *   Used as structural placeholder, not computed.
+ *
+ * @complexity O(1) storage, O(n) for matvec (just scaling output).
+ *   Null Object pattern: provides interface without real computation.
+ *
  * Used in Ipopt for:
  * - Placeholder in CompoundMatrix for absent blocks
  * - Problems with no constraints (zero Jacobian)

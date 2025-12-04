@@ -11,13 +11,24 @@
  * CompoundVector implements the Composite pattern for vectors,
  * representing: x_compound = [x_0; x_1; ...; x_{n-1}]
  *
- * Used in Ipopt for structured iterate vectors combining:
- * - Primal variables x
- * - Slack variables s
- * - Dual variables (y_c, y_d, z_L, z_U)
+ * @algorithm Recursive Vector Operations:
+ *   Dot product: x^T y = Σᵢ xᵢ^T yᵢ (sum over components).
+ *   Axpy: y ← αx + y applied component-wise: yᵢ ← αxᵢ + yᵢ.
+ *   FracToBound: returns min over components (for step length).
+ *   All ops delegate to typed component implementations.
  *
- * Operations recurse to components. Each component can be from
- * a different VectorSpace (heterogeneous composition).
+ * @math IPM iterate structure:
+ *   Primal-dual iterate: w = (x, s, y_c, y_d, z_L, z_U, v_L, v_U).
+ *   Search direction: Δw computed by KKT system solve.
+ *   Step length: α = min{1, τ·FracToBound} for bound constraints.
+ *
+ * @complexity O(n) for n = total dimension across all components.
+ *   Storage: k pointers for k components.
+ *   Heterogeneous: each component can use different VectorSpace.
+ *
+ * Used in Ipopt for structured iterate vectors combining:
+ * - Primal variables x, slack variables s
+ * - Dual variables (y_c, y_d, z_L, z_U)
  *
  * @see IpVector.hpp for base interface
  * @see IpCompoundMatrix.hpp for matrix counterpart

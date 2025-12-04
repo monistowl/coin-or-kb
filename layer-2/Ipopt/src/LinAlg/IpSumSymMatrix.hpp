@@ -11,6 +11,21 @@
  * SumSymMatrix represents a symmetric matrix as a sum of symmetric terms,
  * each with its own scalar factor. Preserves symmetry of components.
  *
+ * @algorithm Symmetric Sum Matrix-Vector Product:
+ *   M = Σᵢ αᵢMᵢ where each Mᵢ is symmetric.
+ *   MultVector: y ← α(Σᵢ αᵢMᵢ)x + βy.
+ *   Computed as: y ← βy, then y += α·αᵢ·Mᵢ·x for each term.
+ *   Sum preserves symmetry: (Σᵢ αᵢMᵢ)^T = Σᵢ αᵢMᵢ^T = Σᵢ αᵢMᵢ.
+ *
+ * @math Hessian of Lagrangian decomposition:
+ *   W = ∇²_xx L = ∇²f + Σᵢ λᵢ∇²gᵢ + Σⱼ νⱼ∇²hⱼ.
+ *   With barrier: W + μΣ_x where Σ_x = diag terms from bounds.
+ *   Each term can be different matrix type (dense, sparse, diagonal).
+ *
+ * @complexity O(k × component matvec) for k terms.
+ *   Type-safe: all components must be SymMatrix.
+ *   Lazy evaluation: explicit sum never formed.
+ *
  * Used in Ipopt for KKT Hessian structure:
  * - W + sum of barrier contributions + regularization
  * - Combining user Hessian with barrier terms without explicit formation

@@ -11,9 +11,19 @@
  * DenseSymMatrix stores only the lower triangle in column-major format,
  * following BLAS/LAPACK conventions for symmetric matrices.
  *
- * Key operations:
- * - HighRankUpdate: M = alpha*V*V^T + beta*M (for quasi-Newton updates)
- * - SpecialAddForLMSR1: Specialized update for limited-memory SR1
+ * @algorithm Lower-Triangular Symmetric Storage:
+ *   Only A[i,j] for j ≤ i stored (lower triangle).
+ *   Column-major: A[i,j] at position i + j*ldim in array.
+ *   BLAS routines (DSYMV, DSYRK) access symmetric structure.
+ *   Half storage: n(n+1)/2 effective elements in n×n array.
+ *
+ * @math Quasi-Newton update operations:
+ *   HighRankUpdate: B ← αVV^T + βB (BFGS outer product form).
+ *   SpecialAddForLMSR1: B ← B + D + L + L^T for SR1 representation.
+ *   SR1: Bₖ₊₁ = Bₖ + (y-Bs)(y-Bs)^T / (y-Bs)^T s (rank-1 update).
+ *
+ * @complexity O(n²) storage (half of general n×n).
+ *   O(n²) for matvec via DSYMV. O(n²k) for rank-k update via DSYRK.
  *
  * Used in Ipopt for:
  * - Limited-memory quasi-Newton Hessian approximations (L-BFGS, L-SR1)

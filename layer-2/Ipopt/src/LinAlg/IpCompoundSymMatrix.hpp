@@ -12,12 +12,22 @@
  * the lower triangular blocks are stored: M[i][j] with j <= i.
  * Diagonal blocks must themselves be SymMatrix types.
  *
- * Used in Ipopt for the full symmetric KKT system:
- *   [W + Sigma_x    J_c^T    J_d^T ]
- *   [    J_c       -delta_c    0   ]
- *   [    J_d          0    -Sigma_s]
+ * @algorithm Block Symmetric Matrix-Vector Multiply:
+ *   M = [M₀₀          ]    (symmetric block structure)
+ *       [M₁₀  M₁₁     ]
+ *       [M₂₀  M₂₁  M₂₂]
+ *   MultVector computes y_i = Σⱼ≤ᵢ Mᵢⱼ·xⱼ + Σⱼ>ᵢ Mⱼᵢ^T·xⱼ.
+ *   Lower blocks and their transposes both contribute.
  *
- * Null blocks are treated as zeros. Operations recurse to components.
+ * @math KKT system structure in Ipopt:
+ *   K = [W + Σ_x   A^T] where W = ∇²L (Hessian of Lagrangian)
+ *       [  A      -D  ] where A = [J_c; J_d] (constraint Jacobians)
+ *   Σ_x = barrier Hessian diagonal, D = regularization diagonal.
+ *   Symmetric indefinite system requiring inertia-correcting factorization.
+ *
+ * @complexity O(sum of block costs) for matvec.
+ *   Storage: pointers to block matrices only.
+ *   Null blocks treated as zero (no storage or computation).
  *
  * @see IpCompoundMatrix.hpp for non-symmetric version
  * @see IpSymMatrix.hpp for base class

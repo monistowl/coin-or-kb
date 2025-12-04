@@ -11,6 +11,19 @@
  * ZeroSymMatrix represents a symmetric zero matrix (n x n).
  * No storage required. Inherits from SymMatrix for type safety.
  *
+ * @algorithm Zero Symmetric Matrix:
+ *   Z = 0 ∈ ℝ^{n×n}, Z = Z^T trivially satisfied.
+ *   MultVector: y ← βy (no α term contributes).
+ *   Type-safe placeholder preserving symmetry structure.
+ *
+ * @math Linear objective functions:
+ *   f(x) = c^T x has ∇²f = 0 (zero Hessian).
+ *   Hessian of Lagrangian: W = ∇²f + Σᵢ λᵢ∇²gᵢ.
+ *   When f linear and constraints linear: W = 0.
+ *
+ * @complexity O(1) storage and O(n) for matvec scaling.
+ *   Null Object pattern for symmetric matrices.
+ *
  * Used in Ipopt for:
  * - Problems with linear objectives (zero Hessian of objective)
  * - Placeholder in CompoundSymMatrix for zero blocks

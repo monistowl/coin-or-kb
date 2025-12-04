@@ -12,8 +12,21 @@
  * where D is a diagonal scaling matrix. Unlike ScaledMatrix which has
  * separate row/column scaling, symmetric scaling uses the same vector.
  *
- * Preserves symmetry: if M is symmetric, D * M * D is also symmetric.
- * Decorator pattern - operations transparently apply scaling.
+ * @algorithm Symmetric Congruent Scaling:
+ *   M̃ = D · M · D where D = diag(d) and M = M^T.
+ *   MultVector: y ← αM̃x + βy = α·D·(M·(D·x)) + βy.
+ *   Implementation: (1) z = D·x, (2) w = M·z, (3) y = αD·w + βy.
+ *   Same diagonal for row and column ensures M̃ = M̃^T.
+ *
+ * @math Congruence transformation properties:
+ *   Preserves symmetry: (DMD)^T = D^T M^T D^T = DMD.
+ *   Preserves definiteness: x^T(DMD)x = (Dx)^T M(Dx) ≥ 0 iff M ≥ 0.
+ *   Eigenvalues scaled: λ(DMD) related to λ(M) but not simple scaling.
+ *   Condition number: κ(M̃) can be much better than κ(M) with good D.
+ *
+ * @complexity Same as underlying M plus O(n) for scaling.
+ *   Single scaling vector (not separate row/column).
+ *   Decorator pattern preserving SymMatrix type.
  *
  * Used in Ipopt for:
  * - Scaled Hessian of Lagrangian

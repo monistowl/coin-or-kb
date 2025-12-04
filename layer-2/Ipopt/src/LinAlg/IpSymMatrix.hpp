@@ -12,13 +12,21 @@
  * TransMultVector automatically delegates to MultVector since
  * transpose is a no-op for symmetric matrices.
  *
- * Used for:
- * - Hessian of Lagrangian
- * - KKT system matrix blocks
- * - Quasi-Newton approximations (BFGS, SR1)
+ * @algorithm Symmetry Exploitation:
+ *   A = A^T implies TransMultVector ≡ MultVector.
+ *   ComputeColAMax ≡ ComputeRowAMax (row/col norms identical).
+ *   Subclasses only implement MultVector; transpose is automatic.
+ *
+ * @math Symmetric matrices in optimization:
+ *   Hessian ∇²f symmetric by Schwarz's theorem (∂²f/∂xᵢ∂xⱼ = ∂²f/∂xⱼ∂xᵢ).
+ *   KKT matrix: indefinite symmetric (positive and negative eigenvalues).
+ *   Inertia (n₊, n₋, n₀): counts of positive/negative/zero eigenvalues.
+ *
+ * @complexity Subclass-dependent. Symmetry halves storage for dense.
+ *   Template Method pattern: base provides transpose, subclass provides mult.
  *
  * Implementations include:
- * - DenseSymMatrix: Full dense storage
+ * - DenseSymMatrix: Full dense lower-triangular storage
  * - CompoundSymMatrix, SumSymMatrix: Structured composites
  * - LowRankUpdateSymMatrix: Limited-memory representations
  *
