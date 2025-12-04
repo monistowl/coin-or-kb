@@ -12,6 +12,22 @@
  * solvers used in Ipopt's augmented system. The solver must handle
  * symmetric indefinite matrices and optionally provide inertia.
  *
+ * @algorithm Symmetric Indefinite Linear Solve Interface:
+ *   MultiSolve(A, rhs, sol) factorizes and solves A·x = b:
+ *   1. If matrix structure changed: Re-analyze sparsity pattern.
+ *   2. Factorize: A = L·D·L^T (symmetric indefinite factorization).
+ *   3. Solve: x = L^{-T}·D^{-1}·L^{-1}·b for each right-hand side.
+ *   4. Check inertia: Count negative eigenvalues (diagonal of D).
+ *   5. Return status: SUCCESS, SINGULAR, WRONG_INERTIA, CALL_AGAIN.
+ *
+ * @math Inertia and indefiniteness:
+ *   KKT system is symmetric indefinite: [W, J^T; J, 0] with W≻0, J Jacobian.
+ *   Correct inertia: n positive, m negative eigenvalues (for m constraints).
+ *   Wrong inertia → singular Hessian or constraint degeneracy.
+ *   IncreaseQuality() → tighten pivot tolerance for accuracy.
+ *
+ * @complexity Sparse LDL^T: O(nnz·fill) where fill depends on ordering.
+ *
  * Return codes (ESymSolverStatus):
  * - SYMSOLVER_SUCCESS: Solve completed successfully
  * - SYMSOLVER_SINGULAR: Matrix detected as singular

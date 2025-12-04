@@ -22,6 +22,20 @@
  * - Detect linear dependencies in constraints
  * - Map between TNLP multipliers and internal dual variables
  *
+ * @algorithm TNLP to NLP Adaptation:
+ *   GetSpaces() performs constraint classification:
+ *   1. Scan g_L, g_U: E = {i: g_L[i] = g_U[i]}, I = complement.
+ *   2. Create c(x) = g_E(x) - g_L[E] (equalities, shifted to zero RHS).
+ *   3. Create d(x) = g_I(x) with d_L = g_L[I], d_U = g_U[I].
+ *   4. Build permutation matrices P_c_g, P_d_g for index mapping.
+ *   5. Handle fixed vars: MAKE_PARAMETER (remove), MAKE_CONSTRAINT (add c).
+ *
+ * @math Index mapping:
+ *   P_c_g: c indices → g indices (equalities in g).
+ *   P_d_g: d indices → g indices (inequalities in g).
+ *   P_x_full_x: internal x → full x (when fixed vars removed).
+ *   Jacobians split: J_c from rows of J_g in E, J_d from rows in I.
+ *
  * @see IpTNLP.hpp for user problem definition
  * @see IpNLP.hpp for internal representation
  */

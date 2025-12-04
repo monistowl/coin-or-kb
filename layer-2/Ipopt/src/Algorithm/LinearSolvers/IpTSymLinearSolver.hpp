@@ -14,6 +14,20 @@
  * - Optional matrix scaling
  * - Delegation to SparseSymLinearSolverInterface implementations
  *
+ * @algorithm Triplet Linear Solver Driver:
+ *   MultiSolve(A, rhs, sol):
+ *   1. Check if structure changed via atag_ (TaggedObject comparison).
+ *   2. If new structure: InitializeStructure() extracts triplet indices.
+ *   3. GiveMatrixToSolver(): Copy values, apply scaling if enabled.
+ *   4. Call solver_interface_->MultiSolve() for factorization + solve.
+ *   5. Unscale solution: x = D·x_scaled where D = diag(scaling_factors_).
+ *   On IncreaseQuality(): Enable scaling if linear_scaling_on_demand_.
+ *
+ * @math Matrix scaling for conditioning:
+ *   Scaled system: D·A·D·(D^{-1}·x) = D·b where D = diag(d_i).
+ *   Goal: equilibrate rows/columns so max|A_scaled[i,j]| ≈ 1.
+ *   Improves numerical stability and convergence of iterative refinement.
+ *
  * Format handling:
  * - Queries solver's MatrixFormat() preference
  * - Uses TripletToCSRConverter if solver needs CSR format

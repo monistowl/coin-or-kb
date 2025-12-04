@@ -18,6 +18,22 @@
  * Unlike TNLP (user interface with arrays), NLP uses Vector and Matrix
  * objects for all operations. TNLPAdapter converts TNLP to this form.
  *
+ * @algorithm NLP Evaluation Interface:
+ *   Ipopt calls these methods during optimization:
+ *   - GetSpaces(): Create VectorSpace/MatrixSpace for problem dimensions.
+ *   - GetBoundsInformation(): Fill bound vectors x_L, x_U, d_L, d_U.
+ *   - GetStartingPoint(): Provide initial x (optionally y, z).
+ *   - Eval_f(x): Return objective value f(x).
+ *   - Eval_grad_f(x): Return gradient ∇f(x).
+ *   - Eval_c(x), Eval_d(x): Return constraint values.
+ *   - Eval_jac_c(x), Eval_jac_d(x): Return constraint Jacobians.
+ *   - Eval_h(x, obj_factor, yc, yd): Return Hessian of Lagrangian.
+ *
+ * @math Problem transformation from TNLP:
+ *   TNLP: g_L ≤ g(x) ≤ g_U mixed constraints.
+ *   NLP: c(x) = 0 (equalities where g_L = g_U),
+ *        d(x) (inequalities where g_L ≠ g_U).
+ *
  * Key methods provide:
  * - Problem dimensions and bounds
  * - Function/gradient/Jacobian/Hessian evaluation
