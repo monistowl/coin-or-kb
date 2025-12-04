@@ -12,6 +12,21 @@
  * (COO) format to Compressed Sparse Row (CSR) format. Handles both
  * upper-triangular-only and full-matrix storage.
  *
+ * @algorithm Triplet-to-CSR Conversion with Duplicate Summation:
+ *   1. Sort triplet entries by (row, col) lexicographically
+ *   2. Scan sorted entries, merging duplicates to same CSR position
+ *   3. Build ia (row pointers) and ja (column indices) arrays
+ *   4. Record mapping for value conversion (ipos_first_, ipos_double_*)
+ *   Conversion separates structure (once) from values (each solve).
+ *
+ * @math Duplicate handling: If triplet has entries (i,j,a_1), (i,j,a_2),...
+ *   the CSR value at (i,j) is sum: a_1 + a_2 + ... This is essential for
+ *   finite element assembly where element matrices overlap.
+ *
+ * @complexity InitializeConverter: O(nnz·log(nnz)) for sort + O(nnz) scan.
+ *   ConvertValues: O(nnz) to copy and sum values.
+ *   Memory: O(nnz) for mapping arrays.
+ *
  * Triplet format: (row[k], col[k], val[k]) for k=0..nnz-1
  * - May contain duplicates (summed during conversion)
  * - May have entries in either triangle (normalized to upper)

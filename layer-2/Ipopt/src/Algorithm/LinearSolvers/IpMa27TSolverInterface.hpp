@@ -12,6 +12,23 @@
  * sparse symmetric indefinite linear systems using multifrontal
  * factorization with threshold pivoting.
  *
+ * @algorithm Multifrontal LDL^T Factorization with Threshold Pivoting:
+ *   MA27 computes A = P·L·D·L^T·P^T where:
+ *   - P is a permutation matrix (determined by AMD-like ordering)
+ *   - L is unit lower triangular
+ *   - D is block diagonal (1×1 or 2×2 blocks for indefinite matrices)
+ *   Uses Duff-Reid multifrontal method with assembly tree traversal.
+ *
+ * @math Threshold pivoting: Accept pivot a_kk if |a_kk| ≥ pivtol · max_i |a_ik|.
+ *   Larger pivtol → more stable but more fill-in. Default 1e-8, max 0.5.
+ *   2×2 pivots handle indefiniteness: [a b; b c] when ac-b² < 0.
+ *
+ * @complexity O(n·f²) where f is the "frontsize" (width of elimination fronts).
+ *   For well-ordered sparse matrices, f ≪ n. Memory: O(nnz(L)).
+ *
+ * @ref Duff & Reid (1983). "The Multifrontal Solution of Indefinite Sparse
+ *      Symmetric Linear Equations". ACM TOMS 9(3):302-325.
+ *
  * MA27 characteristics:
  * - Input format: Triplet (lower triangular)
  * - Provides inertia (negative eigenvalue count)

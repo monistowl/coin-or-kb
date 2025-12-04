@@ -11,6 +11,18 @@
  * SparseSymLinearSolverInterface defines the interface that concrete
  * linear solvers (MA27, MA57, MUMPS, Pardiso, etc.) must implement.
  *
+ * @algorithm Strategy Pattern for Sparse Symmetric Indefinite Solvers:
+ *   All Ipopt linear solvers implement this interface for the KKT system:
+ *   [W + Σ_x    A^T   ] [Δx]   [r_d]
+ *   [A          -Σ_c  ] [Δλ] = [r_p]
+ *   where W is the Hessian, A is the Jacobian, and Σ are regularization.
+ *   The system is symmetric but indefinite (n positive, m negative eigenvalues
+ *   at a local minimum).
+ *
+ * @math Inertia requirement: At a local minimum, the KKT matrix must have
+ *   inertia (n, m, 0) where n = number of variables, m = number of constraints.
+ *   If wrong inertia is detected, Ipopt adds regularization to correct it.
+ *
  * Matrix formats (EMatrixFormat):
  * - Triplet_Format: (row, col, val) triplets, lower triangular (MA27 style)
  * - CSR_Format_0_Offset: CSR with 0-based indexing (C-style)
@@ -26,6 +38,14 @@
  *
  * Duplicate entries in triplet format are summed. Warm start support
  * allows reusing symbolic factorization across optimizations.
+ *
+ * @complexity Typical sparse direct solver complexity:
+ *   - Symbolic factorization: O(nnz) to O(n²) depending on fill-in
+ *   - Numerical factorization: O(nnz(L)²/n) for multifrontal methods
+ *   - Solve: O(nnz(L)) for triangular solves
+ *
+ * @ref Duff, Erisman & Reid (1986). "Direct Methods for Sparse Matrices".
+ *      Oxford University Press. [Foundational text on sparse direct methods]
  *
  * @see IpMa27TSolverInterface.hpp for Harwell MA27
  * @see IpMumpsSolverInterface.hpp for MUMPS

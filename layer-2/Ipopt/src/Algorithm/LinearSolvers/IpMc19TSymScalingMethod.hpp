@@ -11,9 +11,26 @@
  * Mc19TSymScalingMethod uses the HSL subroutine MC19 to compute
  * equilibration scaling factors for symmetric matrices.
  *
- * MC19 computes scaling to make row/column norms approximately equal,
- * improving the condition number for factorization. The algorithm
- * is based on iterative refinement of scaling factors.
+ * @algorithm MC19 Iterative Row/Column Equilibration:
+ *   MC19 computes diagonal scaling D such that ||D·A·D||_∞ ≈ 1.
+ *   Algorithm iteratively updates scaling factors:
+ *   1. Compute r_i = max_j |a_ij| (row infinity norms)
+ *   2. Update D_i = D_i / sqrt(r_i)
+ *   3. Repeat until convergence (typically 3-5 iterations)
+ *   Result: scaled matrix has row/column norms near 1.
+ *
+ * @math Equilibration reduces condition number κ(A):
+ *   For sparse symmetric A, equilibration typically reduces κ by factor
+ *   of 10-1000. Better conditioning → fewer delayed pivots, more accurate
+ *   factorization, better convergence of iterative refinement.
+ *   D returned as exp(R) where R is in single precision.
+ *
+ * @complexity O(nnz) per iteration, typically 3-5 iterations = O(nnz).
+ *   Memory: O(n) for scaling factors.
+ *
+ * @ref Duff & Koster (1999). "The design and use of algorithms for
+ *      permuting large entries to the diagonal of sparse matrices".
+ *      SIAM J. Matrix Anal. Appl. 20(4):889-901.
  *
  * MC19 interface (Fortran):
  *   MC19A(N, NZ, A, IRN, ICN, R, C, W)

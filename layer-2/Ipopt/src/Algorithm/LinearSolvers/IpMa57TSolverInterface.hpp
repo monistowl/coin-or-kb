@@ -13,6 +13,26 @@
  * multifrontal solver over MA27 with better memory management and
  * numerical stability.
  *
+ * @algorithm Improved Multifrontal LDL^T with Advanced Pivoting:
+ *   MA57 computes A = P·L·D·L^T·P^T using an improved multifrontal
+ *   method with better pivot handling than MA27:
+ *   - Static pivoting: pre-determined pivots from symbolic phase
+ *   - Dynamic pivoting: adjustment during numerical factorization
+ *   - 2×2 pivots for indefinite blocks with Bunch-Kaufman strategy
+ *
+ * @math Stability improvements over MA27:
+ *   - Lookahead pivoting: examines future columns for better pivots
+ *   - Delayed pivots: postpones problematic pivots to later stages
+ *   - Pivot perturbation: adds ε to tiny pivots instead of failing
+ *   Solve modes: Ax=b, PLPTx=b, PDPTx=b, PLTPT x=b
+ *
+ * @complexity Same asymptotic as MA27: O(n·f²) factorization, O(nnz(L)) solve.
+ *   Typically 2-3× faster than MA27 due to better memory access patterns
+ *   and BLAS-3 dense operations within frontal matrices.
+ *
+ * @ref Duff (2004). "MA57 - A Code for the Solution of Sparse Symmetric
+ *      Definite and Indefinite Systems". ACM TOMS 30(2):118-144.
+ *
  * MA57 improvements over MA27:
  * - Better pivot selection for numerical stability
  * - More efficient memory management

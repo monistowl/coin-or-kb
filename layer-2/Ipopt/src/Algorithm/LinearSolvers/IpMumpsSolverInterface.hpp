@@ -18,6 +18,27 @@
  * sparse direct Solver), a freely available solver supporting MPI
  * parallelism for distributed memory systems.
  *
+ * @algorithm Distributed-Memory Multifrontal LDL^T Factorization:
+ *   MUMPS computes A = P·L·D·L^T·P^T using multifrontal method with:
+ *   - MPI parallelism: distributes frontal matrices across processes
+ *   - Hybrid mode: MPI between nodes + OpenMP within nodes
+ *   - Out-of-core: stores factors on disk for very large problems
+ *   Supports both symmetric indefinite and positive definite modes.
+ *
+ * @math Distributed factorization strategy:
+ *   - Master process coordinates analysis and distribution
+ *   - Worker processes hold portions of L and D factors
+ *   - Frontal matrices assembled from child contributions via MPI
+ *   - Parallel triangular solves with pipelined communication
+ *   Degeneracy detection: identifies nearly-zero pivots for constraint deletion.
+ *
+ * @complexity O(n·f²/p) with p MPI processes. Communication: O(f²·log(p)).
+ *   Scales to hundreds of cores for large problems (n > 100,000).
+ *
+ * @ref Amestoy, Duff, L'Excellent & Koster (2001). "A Fully Asynchronous
+ *      Multifrontal Solver Using Distributed Dynamic Scheduling".
+ *      SIAM J. Matrix Anal. Appl. 23(1):15-41.
+ *
  * MUMPS characteristics:
  * - Parallel: MPI-based (also sequential mode)
  * - Input format: Triplet_Format (lower triangular)

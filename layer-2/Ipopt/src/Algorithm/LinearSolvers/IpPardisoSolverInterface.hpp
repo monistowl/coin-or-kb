@@ -13,6 +13,28 @@
  * PARDISO is a high-performance parallel direct solver for sparse
  * symmetric indefinite systems.
  *
+ * @algorithm Parallel Supernodal LDL^T with Weighted Matching:
+ *   PARDISO computes A = P·S·L·D·L^T·S·P^T using:
+ *   - Supernodal factorization: groups columns into dense supernode blocks
+ *   - Level-3 BLAS operations within supernodes for cache efficiency
+ *   - OpenMP parallelism over independent supernode subtrees
+ *   - Weighted matching preprocessing for indefinite stability
+ *
+ * @math Matching strategies for saddle point systems:
+ *   - COMPLETE: Maximum weighted matching on |A|, produces permutation P
+ *     such that |P*A| has large diagonal entries
+ *   - COMPLETE2x2: 2×2 pivot matching for symmetric indefinite systems,
+ *     identifies pairs (i,j) where A[i,j] forms stable 2×2 pivot block
+ *   - CONSTRAINT: Preserves constraint structure in optimization problems
+ *
+ * @complexity O(n·f²/p) with p threads, O(nnz(L)) memory.
+ *   Very efficient for medium-sized dense fronts (supernodes).
+ *   Iterative refinement: 1-2 iterations to reach working precision.
+ *
+ * @ref Schenk & Gärtner (2004). "Solving Unsymmetric Sparse Systems of
+ *      Linear Equations with PARDISO". Future Generation Computer Systems
+ *      20(3):475-487.
+ *
  * PARDISO characteristics:
  * - Parallel: Multi-threaded with OpenMP
  * - Input format: CSR_Format_1_Offset (upper triangular)

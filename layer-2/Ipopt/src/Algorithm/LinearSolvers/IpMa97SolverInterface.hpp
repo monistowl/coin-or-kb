@@ -16,6 +16,26 @@
  * HSL solver for symmetric indefinite systems with advanced
  * parallelism and scaling strategies.
  *
+ * @algorithm Parallel Multifrontal LDL^T with DAG-based Scheduling:
+ *   MA97 computes A = P·S·L·D·L^T·S·P^T where S is diagonal scaling.
+ *   Uses directed acyclic graph (DAG) task scheduling for parallelism:
+ *   - Assembly tree decomposed into independent subtrees
+ *   - OpenMP task parallelism within and across fronts
+ *   - Out-of-core capability for very large problems
+ *
+ * @math Scaling strategies for improved numerical stability:
+ *   - Hungarian matching + MC64 for row/column equilibration
+ *   - Ruiz scaling for matrix balancing: ||A_scaled||_∞ ≈ 1
+ *   - Dynamic scaling: recompute when delayed pivots exceed threshold
+ *   Ordering options: AMD (fast), METIS (better fill), matched variants.
+ *
+ * @complexity O(n·f²/p) parallel factorization with p threads.
+ *   Scales well up to ~8-16 cores for typical optimization problems.
+ *   Memory: O(nnz(L)) with optional out-of-core for factors.
+ *
+ * @ref Hogg & Scott (2013). "New parallel sparse direct solvers for
+ *      multicore architectures". Algorithms 6(4):702-725.
+ *
  * MA97 characteristics:
  * - Modern parallel implementation using OpenMP
  * - Advanced scaling options (dynamic, reuse, on-demand)
