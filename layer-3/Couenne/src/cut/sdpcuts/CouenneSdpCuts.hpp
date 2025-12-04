@@ -16,27 +16,36 @@
  * must be positive semidefinite. These cuts strengthen the LP relaxation beyond
  * what McCormick envelopes provide.
  *
- * **Theory:**
- * For X ⪰ 0 (positive semidefinite), we have a'Xa >= 0 for any vector a.
- * If current LP solution X* violates this (a'X*a < 0), then a'Xa >= 0 is a
- * valid cut. The most violated cut corresponds to eigenvector of minimum
- * negative eigenvalue of X*.
+ * @algorithm SDP Cut Generation (Qualizza-Belotti-Margot):
+ *   Eigenvalue-based separation for PSD constraint X ⪰ 0:
+ *   1. **Matrix construction:** Build X* from current LP (x_ij = w_ij values)
+ *   2. **Eigendecomposition:** Compute X* = VΛV' (symmetric EVD)
+ *   3. **Violation detection:** Find λ_min < 0 (X* not PSD)
+ *   4. **Cut generation:** For eigenvector v with λ < 0:
+ *      - Cut: v'Xv ≥ 0 (linear in original variables)
+ *      - Translates to: Σ v_i·v_j·x_ij ≥ 0
+ *   5. **Sparsification:** Remove small coefficients for stability
+ *   6. Add cuts to LP, iterate
  *
- * **Algorithm (Qualizza-Belotti-Margot):**
- * 1. Build matrix X* from current LP solution (auxiliary products)
- * 2. Compute eigenvalue decomposition of X*
- * 3. For negative eigenvalues, generate cuts a'Xa >= 0
- * 4. Sparsify cuts for numerical stability
+ * @math PSD relaxation theory:
+ *   For X ⪰ 0: v'Xv ≥ 0 for all v (infinite constraints)
+ *   Current X* violates PSD if min eigenvalue λ < 0
+ *   Corresponding v gives most violated constraint v'Xv ≥ 0
+ *   These cuts are valid because X ⪰ 0 implies all v'Xv ≥ 0
+ *
+ * @complexity O(n³) per eigendecomposition (n = matrix dimension)
+ *   Each minor generates up to numEigVec_ cuts
+ *   Sparsification is O(n²) but improves cut quality
+ *
+ * @ref Qualizza, Belotti, Margot (2012). "Linear Programming Relaxations
+ *      of Quadratically Constrained Quadratic Programs". Mixed Integer
+ *      Nonlinear Programming, Springer.
  *
  * **Parameters:**
  * - numEigVec_: Number of eigenvectors to use (default: all)
  * - onlyNegEV_: Only use negative eigenvalues (default: yes)
  * - useSparsity_: Sparsify eigenvalues (default: no)
  * - fillMissingTerms_: Add fictitious aux vars for denser minors
- *
- * **References:**
- * - Sherali-Fraticelli: Original RLT-based SDP strengthening
- * - Qualizza, Belotti, Margot: Efficient implementation used here
  *
  * @see CouennePSDcon for explicit PSD constraints
  * @see CouenneExprMatrix for sparse matrix representation

@@ -14,6 +14,25 @@
  * Checks if MILP solution is feasible for original MINLP by evaluating
  * nonlinear constraints and generating OA/Benders cuts if infeasible.
  *
+ * @algorithm OA Feasibility Checking:
+ *   Validates MILP solution against nonlinear MINLP constraints:
+ *   1. Receive integer solution x̄ from MILP relaxation
+ *   2. Evaluate g(x̄) for all nonlinear constraints g(x) ≤ 0
+ *   3. If g_i(x̄) > ε (constraint violated):
+ *      - Generate OA cut: g_i(x̄) + ∇g_i(x̄)'(x - x̄) ≤ 0
+ *      - Or Benders cut (alternative formulation)
+ *   4. Add cuts to MILP, continue B&B
+ *   5. Cycle detection prevents infinite OA loops
+ *
+ * @math OA cut validity:
+ *   For convex g: g(x) ≥ g(x̄) + ∇g(x̄)'(x - x̄) (supporting hyperplane)
+ *   Cut separates infeasible x̄ without excluding feasible region
+ *   Benders alternative uses optimality cut formulation
+ *
+ * @complexity O(m·n) per feasibility check
+ *   m = nonlinear constraints, n = variables
+ *   Gradient evaluation dominates; cut generation O(n)
+ *
  * **Cut types (CutsTypes):**
  * - OA: Standard outer approximation cuts (gradient-based)
  * - Benders: Benders optimality/feasibility cuts
