@@ -4,6 +4,40 @@
 //
 // Authors:  Carl Laird, Andreas Waechter     IBM    2004-08-13
 
+/**
+ * @file IpTripletHelper.hpp
+ * @brief Recursive conversion of abstract matrices to triplet format
+ *
+ * TripletHelper provides static methods for extracting COO (Coordinate)
+ * sparse format from Ipopt's abstract Matrix hierarchy. Used to interface
+ * with external linear solvers expecting triplet format.
+ *
+ * @algorithm Recursive Triplet Extraction:
+ *   GetNumberEntries(M): Recursively count nonzeros by matrix type.
+ *   FillRowCol(M, iRow, jCol): Fill structure arrays via type dispatch.
+ *   FillValues(M, values): Fill values array via type dispatch.
+ *
+ *   Supported types (polymorphic dispatch):
+ *   - GenTMatrix, SymTMatrix: Direct triplet access.
+ *   - DiagMatrix, IdentityMatrix: Generate diagonal entries.
+ *   - ExpansionMatrix: Permutation/selection entries.
+ *   - CompoundMatrix, CompoundSymMatrix: Recurse on blocks.
+ *   - SumMatrix, SumSymMatrix: Concatenate component entries.
+ *   - ScaledMatrix, SymScaledMatrix: Recurse with scaling.
+ *   - TransposeMatrix: Swap row/col in recursion.
+ *
+ * @math COO (Coordinate) sparse format:
+ *   Matrix A stored as (iRow[k], jCol[k], values[k]) for k = 0..nnz-1.
+ *   A[iRow[k], jCol[k]] += values[k] (duplicate entries summed).
+ *   1-based indexing for Fortran compatibility (HSL solvers).
+ *
+ * @complexity O(nnz) per traversal, where nnz = total nonzeros.
+ *   Type dispatch via overloaded private methods (compile-time).
+ *
+ * @see IpGenTMatrix.hpp for general triplet storage
+ * @see IpSymTMatrix.hpp for symmetric triplet storage
+ */
+
 #ifndef __IPTRIPLETHELPER_HPP__
 #define __IPTRIPLETHELPER_HPP__
 

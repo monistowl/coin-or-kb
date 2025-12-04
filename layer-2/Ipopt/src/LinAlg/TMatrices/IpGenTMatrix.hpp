@@ -4,6 +4,38 @@
 //
 // Authors:  Carl Laird, Andreas Waechter     IBM    2004-08-13
 
+/**
+ * @file IpGenTMatrix.hpp
+ * @brief General sparse matrix in triplet (COO) format
+ *
+ * GenTMatrix stores a general (non-symmetric) sparse matrix using
+ * triplet/coordinate format: three arrays for row indices, column
+ * indices, and values.
+ *
+ * @algorithm Triplet Matrix-Vector Multiplication:
+ *   y ← αAx + βy computed as:
+ *   1. If β ≠ 1: y ← β·y (scale).
+ *   2. For each triplet (i, j, v): y[i] += α·v·x[j].
+ *   Transpose: swap roles of i and j.
+ *   Duplicate entries: values are implicitly summed.
+ *
+ * @math COO sparse format properties:
+ *   Storage: O(3·nnz) (iRow, jCol, values arrays).
+ *   No ordering requirements (unlike CSR/CSC).
+ *   1-based indexing: iRow[k], jCol[k] ∈ {1, ..., n} (HSL convention).
+ *   Duplicates allowed: A[i,j] = Σ{v : (i,j,v) in triplets}.
+ *
+ * @complexity MultVector: O(nnz) for nnz nonzeros.
+ *   SetValues: O(nnz) copy from user array.
+ *   Structure fixed at creation; only values change.
+ *
+ * Used for Jacobians (J_c, J_d) in Ipopt's internal representation.
+ * Structure (sparsity pattern) is fixed; values updated per iteration.
+ *
+ * @see IpSymTMatrix.hpp for symmetric triplet storage
+ * @see IpTripletHelper.hpp for triplet extraction utilities
+ */
+
 #ifndef __IPGENTMATRIX_HPP__
 #define __IPGENTMATRIX_HPP__
 
