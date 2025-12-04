@@ -11,6 +11,27 @@
  * This representation requires only O(n) storage for row indices vs O(2n) for
  * a general sparse matrix.
  *
+ * @algorithm Network Matrix Operations:
+ *   Exploits +1/-1 structure for O(1) element access:
+ *   1. Storage: indices_[2j] = tail, indices_[2j+1] = head for arc j
+ *   2. Column j: A[tail,j] = -1, A[head,j] = +1 (flow conservation)
+ *   3. Matrix-vector: y = Ax requires only n additions (no multiplies)
+ *      For each arc j: y[head] += x[j], y[tail] -= x[j]
+ *   4. Transpose: x = A'y similarly O(n) additions
+ *
+ * @math Network flow structure:
+ *   Column j represents arc from node tail to node head
+ *   A_j = e_{head} - e_{tail} (unit vectors)
+ *   For min-cost flow: min c'x s.t. Ax = b, 0 ≤ x ≤ u
+ *   Basis is spanning tree → O(n) pivot operations
+ *
+ * @complexity Storage: O(2n) integers vs O(nnz) for general sparse
+ *   Matrix-vector: O(n) vs O(nnz) for general (no multiplications)
+ *   Enables network simplex with O(n) pivots vs O(n²) general
+ *
+ * @ref Ahuja, Magnanti, Orlin (1993). "Network Flows: Theory, Algorithms,
+ *      and Applications". Prentice Hall, Ch. 11.
+ *
  * Network problems have special structure that allows very fast simplex pivots
  * and specialized algorithms. This class exploits that structure while
  * presenting the standard ClpMatrixBase interface.

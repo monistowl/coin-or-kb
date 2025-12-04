@@ -15,16 +15,22 @@
  * Geometric utilities for projecting points onto line segments,
  * used in convexification cut generation and branching point selection.
  *
- * **project():**
- * Projects point (x₀, y₀) onto the segment defined by:
- * - Line: ax + by + c ≥ 0 (or ≤ 0 based on sign)
- * - Bounds: x ∈ [lb, ub]
- * Returns distance to segment, 0 if point satisfies constraint.
- * Optionally returns projection coordinates (xp, yp).
+ * @algorithm Point-to-Segment Projection:
+ *   Projects point p = (x₀,y₀) onto line segment S:
+ *   1. Compute foot of perpendicular to line: ax + by + c = 0
+ *      q = p - [(ap + c)/(a² + b²)]·(a,b)ᵀ (orthogonal projection)
+ *   2. If q_x ∈ [lb, ub]: projection is q (on segment interior)
+ *   3. Else: projection is nearest endpoint (lb,y(lb)) or (ub,y(ub))
+ *   4. Return Euclidean distance ||p - projection||
  *
- * **projectSeg():**
- * Projects point (x₀, y₀) onto segment between (x₁,y₁) and (x₂,y₂).
- * Used when segment is defined by endpoints rather than coefficients.
+ * @math Projection formula:
+ *   Line L: ax + by + c = 0, point p = (x₀,y₀)
+ *   Distance to line: d = |ax₀ + by₀ + c|/√(a² + b²)
+ *   Projection: (xp,yp) = (x₀,y₀) - d·(a,b)/||(a,b)||
+ *   Segment clipping: xp = max(lb, min(ub, xp))
+ *
+ * @complexity O(1) per projection - constant time operations
+ *   Used extensively in convexification and branching heuristics
  *
  * **Usage in branching:**
  * Helps compute optimal branching points by finding closest

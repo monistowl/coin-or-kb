@@ -9,6 +9,28 @@
  * Wraps Sivan Toledo's TAUCS library for Cholesky factorization of normal
  * equations in interior point methods.
  *
+ * @algorithm TAUCS Left-Looking Supernodal Cholesky:
+ *   Left-looking factorization with supernodal blocking:
+ *   1. Ordering: AMD, METIS, or GENMMD fill-reducing permutation
+ *   2. Symbolic: Build elimination tree, identify supernodes
+ *   3. Numeric left-looking: For each supernode j:
+ *      - Assemble: Gather column j from A and previous L updates
+ *      - Factor: Dense Cholesky on diagonal block
+ *      - Scatter: Distribute updates to later columns
+ *   4. Store L in CCS format with supernode structure
+ *
+ * @math Left-looking vs right-looking:
+ *   Left-looking: L_j computed from A_j and L_{<j} (memory efficient)
+ *   Right-looking: Updates distributed immediately (more parallelism)
+ *   TAUCS uses left-looking for lower memory footprint
+ *
+ * @complexity O(nnz(L)·f̄) where f̄ = average supernode front size
+ *   Memory: O(nnz(L)) for factor storage
+ *   Well-suited for medium-size interior point problems
+ *
+ * @ref Toledo (2003). "TAUCS: A Library of Sparse Linear Solvers".
+ *      Tel-Aviv University. http://www.tau.ac.il/~stoledo/taucs/
+ *
  * TAUCS provides:
  * - Left-looking supernodal factorization
  * - Multiple ordering methods (AMD, METIS, GENMMD)

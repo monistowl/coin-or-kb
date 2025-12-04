@@ -9,6 +9,27 @@
  * Wraps the CHOLMOD library from SuiteSparse (University of Florida) for
  * Cholesky factorization of normal equations in interior point methods.
  *
+ * @algorithm CHOLMOD Supernodal Sparse Cholesky:
+ *   Hybrid supernodal/simplicial factorization A = LL':
+ *   1. Ordering: Fill-reducing permutation via AMD, COLAMD, or METIS
+ *   2. Symbolic: Analyze sparsity of L, allocate memory
+ *   3. Numeric: Factor using supernodal method (large fronts) or
+ *      simplicial (small problems) - automatically selected
+ *   4. Solve: Forward L·z = b, backward L'·x = z
+ *
+ * @math Supernodal vs simplicial:
+ *   Supernodal: Groups consecutive pivots with same sparsity pattern
+ *   Uses dense BLAS-3 on column panels for cache efficiency
+ *   Simplicial: Classical left-looking algorithm for small/sparse problems
+ *   CHOLMOD auto-selects based on estimated flop count
+ *
+ * @complexity Supernodal: O(nnz(L)·f̄) where f̄ = average supernode size
+ *   Typically 5-10x faster than simplicial for large problems
+ *   Memory: O(nnz(L)) with efficient compressed storage
+ *
+ * @ref Davis & Hager (2009). "Dynamic Supernodes in Sparse Cholesky Update/
+ *      Downdate and Triangular Solves". ACM TOMS 35:27.
+ *
  * CHOLMOD provides:
  * - Supernodal and simplicial Cholesky modes
  * - Automatic fill-reducing ordering (AMD, METIS)

@@ -15,19 +15,28 @@
  * Extends Bonmin's strong branching to handle nonconvex constraints
  * by evaluating actual LP bound improvement from branching.
  *
- * **doStrongBranching():**
- * For each candidate variable:
- * 1. Tentatively branch both ways (simulateBranch)
- * 2. Re-solve LP relaxations
- * 3. Record bound improvement
- * 4. Select best candidate
+ * @algorithm Strong Branching for Nonconvex MINLP:
+ *   Selects branching variable by evaluating actual bound improvement:
+ *   1. Build candidate list from fractional/violated variables
+ *   2. For each candidate x_j in list (up to limit):
+ *      a. simulateBranch(down): Solve LP with x_j ≤ ⌊x_j*⌋
+ *      b. simulateBranch(up): Solve LP with x_j ≥ ⌈x_j*⌉
+ *      c. Record Δ_down, Δ_up = bound improvements
+ *   3. Score: s_j = (1-μ)·min(Δ_down,Δ_up) + μ·max(Δ_down,Δ_up)
+ *      or product: s_j = (ε + Δ_down)·Δ_up (reliability-like)
+ *   4. Select j* = argmax s_j, prune if both branches infeasible
  *
- * Return codes:
- * - -1: Both branches infeasible
- * - 0: All inspected, nothing fixable
- * - 1: Some variables can be fixed
- * - 2: Returning early with one fixable
- * - 3: Time limit reached
+ * @math Pseudocost updates from strong branching:
+ *   If pseudoUpdateLP_: update pseudocosts from LP improvement
+ *   ψ_j^- = Δ_down/(x_j* - ⌊x_j*⌋), ψ_j^+ = Δ_up/(⌈x_j*⌉ - x_j*)
+ *   These improve future branching decisions without strong branching
+ *
+ * @complexity O(k · LP) where k = candidates evaluated
+ *   Expensive but critical for global optimization bound quality
+ *   Trade-off: evaluation cost vs. tree size reduction
+ *
+ * @ref Achterberg, Koch, Martin (2005). "Branching rules revisited".
+ *      Operations Research Letters 33:42-54.
  *
  * **Selection criteria (estimateProduct_):**
  * - false: Convex combination of min/max estimates (classic)
