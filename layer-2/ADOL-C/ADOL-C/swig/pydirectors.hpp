@@ -1,3 +1,7 @@
+/**
+ * @file pydirectors.hpp
+ * @brief Python director classes for external differentiated functions
+ */
 /*----------------------------------------------------------------------------
  ADOL-C -- Automatic Differentiation by Overloading in C++
  File:     pydirectors.hpp

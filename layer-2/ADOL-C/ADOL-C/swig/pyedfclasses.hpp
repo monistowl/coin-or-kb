@@ -1,3 +1,7 @@
+/**
+ * @file pyedfclasses.hpp
+ * @brief Python wrapper classes for external differentiated functions
+ */
 /*----------------------------------------------------------------------------
  ADOL-C -- Automatic Differentiation by Overloading in C++
  File:     pyedfclasses.h

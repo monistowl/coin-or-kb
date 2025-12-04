@@ -1,3 +1,7 @@
+/**
+ * @file ADOL-C_NLP.hpp
+ * @brief ADOL-C/Ipopt interface for Mittelmann distributed control problem
+ */
 /*----------------------------------------------------------------------------
  ADOL-C -- Automatic Differentiation by Overloading in C++
  File:     ADOL-C_NLP.hpp

@@ -1,3 +1,7 @@
+/**
+ * @file matrixmemory.hpp
+ * @brief C-style multi-dimensional array allocation for SWIG
+ */
 /*----------------------------------------------------------------------------
  ADOL-C -- Automatic Differentiation by Overloading in C++
  File:     matrixmemory.hpp

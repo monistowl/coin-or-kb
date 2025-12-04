@@ -1,3 +1,7 @@
+/**
+ * @file ADOL-C_sparseNLP.hpp
+ * @brief Sparse ADOL-C/Ipopt interface for Mittelmann distributed control
+ */
 /*----------------------------------------------------------------------------
  ADOL-C -- Automatic Differentiation by Overloading in C++
  File:     ADOL-C_sparseNLP.hpp

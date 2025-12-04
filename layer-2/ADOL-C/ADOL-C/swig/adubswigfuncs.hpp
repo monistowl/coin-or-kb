@@ -1,3 +1,7 @@
+/**
+ * @file adubswigfuncs.hpp
+ * @brief SWIG operator overloads for badouble/adub types
+ */
 /*----------------------------------------------------------------------------
  ADOL-C -- Automatic Differentiation by Overloading in C++
  File:     adubswigfuncs.h

@@ -1,3 +1,7 @@
+/**
+ * @file ADOL-C_NLP.hpp
+ * @brief ADOL-C/Ipopt interface for Luksan-Vlcek test problem 1
+ */
 /*----------------------------------------------------------------------------
  ADOL-C -- Automatic Differentiation by Overloading in C++
  File:     ADOL-C_NLP.hpp

@@ -1,3 +1,7 @@
+/**
+ * @file adolc_all_in.hpp
+ * @brief Unified ADOL-C header for SWIG bindings
+ */
 /*----------------------------------------------------------------------------
  ADOL-C -- Automatic Differentiation by Overloading in C++
  File:     adolc_all_in.h
