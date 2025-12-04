@@ -9,6 +9,48 @@
  * - Coefficient reduction
  * - Duplicate row/column detection
  *
+ * @algorithm Presolve Transformations:
+ * Problem reductions that simplify LP/MIP while preserving optimality.
+ * Each transform has a postsolve reverse to recover original solution.
+ *
+ * SINGLETON ROW (doubleton elimination):
+ * Row with single variable: aⱼxⱼ = b → fix xⱼ = b/aⱼ
+ * Removes row and substitutes variable throughout
+ *
+ * SINGLETON COLUMN:
+ * Variable appears in one constraint only:
+ * Compute implied bounds from that constraint, fix if possible
+ *
+ * FORCED ROW:
+ * Row bounds force all variables to their bounds:
+ * If lb = ub for a constraint, all variables are determined
+ *
+ * DOMINATED COLUMN:
+ * Variable dominated by another with better objective:
+ * xⱼ can be set to bound if another variable is always better
+ *
+ * BOUND TIGHTENING:
+ * Derive tighter bounds from constraints:
+ * From Σaᵢⱼxⱼ ≤ b with known bounds, improve variable bounds
+ *
+ * PROBING:
+ * Temporarily fix binary to 0/1, propagate implications:
+ * May discover fixed variables, tightened bounds, or cuts
+ *
+ * @math Bound propagation:
+ * For constraint Σⱼ aⱼxⱼ ≤ b:
+ *   xᵢ ≤ (b - Σⱼ≠ᵢ min(aⱼlⱼ, aⱼuⱼ)) / aᵢ when aᵢ > 0
+ *
+ * Problem reduction: typically 10-50% smaller after presolve
+ *
+ * @complexity
+ * - Single pass: O(nnz) scan of matrix
+ * - Full presolve: O(k·nnz) for k iterations until fixpoint
+ * - Postsolve: O(transforms) reverse order application
+ *
+ * @ref Andersen & Andersen (1995). "Presolving in Linear Programming".
+ *   Mathematical Programming 71:221-245.
+ *
  * Workflow:
  * 1. presolvedModel() creates simplified problem
  * 2. Solve the simplified problem

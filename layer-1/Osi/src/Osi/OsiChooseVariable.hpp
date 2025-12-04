@@ -8,11 +8,48 @@
  * - OsiChooseVariable: Base class for branching variable selection
  * - OsiChooseStrong: Strong branching (evaluates candidates by solving LPs)
  *
- * Common selection strategies:
- * - Most infeasible (furthest from integer)
- * - Pseudo-cost (estimated objective change)
- * - Strong branching (actual objective change from LP solves)
- * - Reliability branching (strong branching with pseudo-cost fallback)
+ * @algorithm Branching Variable Selection:
+ * Critical decision in branch-and-bound affecting tree size by orders
+ * of magnitude.
+ *
+ * MOST INFEASIBLE:
+ *   score(j) = min(fⱼ, 1-fⱼ) where fⱼ = xⱼ - ⌊xⱼ⌋
+ *   Select j* = argmax{score(j)}
+ *   Simple but often poor - ignores objective impact
+ *
+ * PSEUDO-COST BRANCHING:
+ *   Estimate objective change from historical data:
+ *   Δ⁻ⱼ ≈ σ⁻ⱼ · fⱼ,  Δ⁺ⱼ ≈ σ⁺ⱼ · (1-fⱼ)
+ *   where σ⁻ⱼ, σ⁺ⱼ are per-unit degradation estimates
+ *   Requires initialization (unreliable for unobserved variables)
+ *
+ * STRONG BRANCHING:
+ *   Solve LP relaxations for both child problems:
+ *   - Fix xⱼ ≤ ⌊xⱼ⌋, solve LP → objective zⱼ⁻
+ *   - Fix xⱼ ≥ ⌈xⱼ⌉, solve LP → objective zⱼ⁺
+ *   Actual degradation: Δ⁻ⱼ = zⱼ⁻ - z, Δ⁺ⱼ = zⱼ⁺ - z
+ *   Accurate but expensive (2 LP solves per candidate)
+ *
+ * RELIABILITY BRANCHING:
+ *   Use strong branching until variable has k observations,
+ *   then switch to pseudo-costs. Typically k = 4-8.
+ *   Balances accuracy with efficiency.
+ *
+ * @math Variable selection scoring:
+ *   Product score: score(j) = max(ε, Δ⁻ⱼ) · max(ε, Δ⁺ⱼ)
+ *   Weighted score: score(j) = (1-μ)·min(Δ⁻ⱼ,Δ⁺ⱼ) + μ·max(Δ⁻ⱼ,Δ⁺ⱼ)
+ *   Select j* = argmax{score(j)}
+ *
+ * Pseudo-cost update: σ⁻ⱼ = (1/k)·Σᵢ(Δᵢ⁻/fᵢ) over k observations
+ *
+ * @complexity
+ * - Most infeasible: O(n) scan of fractional variables
+ * - Pseudo-cost: O(n) with O(1) per variable
+ * - Strong branching: O(k·LP_solve) for k candidates
+ * - Reliability: amortizes strong branching cost over time
+ *
+ * @ref Achterberg, Koch & Martin (2005). "Branching rules revisited".
+ *   Operations Research Letters 33(1):42-54.
  *
  * @see OsiBranchingObject for branch execution
  * @see Cbc for more sophisticated variable selection

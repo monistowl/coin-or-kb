@@ -5,14 +5,40 @@
  * Row cuts are the most common form of cutting planes, representing
  * a linear inequality constraint: lb <= a'x <= ub
  *
- * Common cut families that produce row cuts:
- * - Gomory cuts (from LP tableau)
- * - Mixed-integer rounding (MIR)
- * - Knapsack covers
- * - Clique cuts
- * - Flow covers
+ * @algorithm Cutting Planes in MIP:
+ * Linear inequalities that cut off fractional LP solutions without
+ * removing any integer-feasible points.
  *
- * @math lb <= sum(a[i] * x[i]) <= ub
+ * CUT VALIDITY:
+ * A cut a'x ≤ b is valid if it satisfies all integer solutions:
+ *   ∀x ∈ S_I : a'x ≤ b (where S_I is feasible integer set)
+ *
+ * CUT EFFECTIVENESS:
+ * - Violated: a'x* > b for current LP solution x*
+ * - Depth: (a'x* - b) / ‖a‖ (normalized distance from hyperplane)
+ * - Efficacy: violation per unit norm, used for ranking cuts
+ *
+ * COMMON CUT FAMILIES:
+ * - Gomory cuts: From LP simplex tableau non-integrality
+ * - MIR (Mixed-Integer Rounding): Round coefficients to strengthen
+ * - Knapsack covers: From single-row knapsack structure
+ * - Clique/odd-cycle: From conflict graph analysis
+ * - Flow covers: From network flow structure
+ * - Lift-and-project: From disjunctive arguments
+ *
+ * @math Cut inequality:
+ * lb ≤ Σᵢ aᵢ·xᵢ ≤ ub
+ *
+ * Violation at LP solution x*: v = max(lb - a'x*, a'x* - ub, 0)
+ * Efficacy: e = v / ‖a‖₂
+ *
+ * @complexity
+ * - Violation check: O(nnz) where nnz = nonzeros in cut
+ * - Add to LP: O(nnz) for coefficient insertion
+ * - Storage: O(nnz) sparse representation
+ *
+ * @ref Nemhauser & Wolsey (1988). "Integer and Combinatorial Optimization".
+ *   Chapter II.1 on valid inequalities.
  *
  * @see OsiCut for base class
  * @see OsiCuts for cut pool management
