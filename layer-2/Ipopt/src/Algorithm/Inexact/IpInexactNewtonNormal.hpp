@@ -4,6 +4,34 @@
 //
 // Authors:  Andreas Waechter            IBM    2008-09-05
 
+/**
+ * @file IpInexactNewtonNormal.hpp
+ * @brief Newton normal step from slack-scaled augmented system
+ *
+ * InexactNewtonNormalStep computes the normal step component by
+ * solving a reduced system derived from the slack-scaled KKT system.
+ *
+ * @algorithm Newton Normal Step:
+ *   ComputeNewtonNormalStep(newton_x, newton_s):
+ *   1. Form reduced system in slack-scaled space:
+ *      [0, J_c^T, J_d^T; J_c, 0, 0; J_d, 0, -I] [Δx; Δy_c; Δy_d] = -[0; c; d-s].
+ *   2. Solve via AugSystemSolver (may be iterative).
+ *   3. Return slack-scaled step (caller transforms back).
+ *   Note: W=0 in normal step—only feasibility, no optimality.
+ *
+ * @math Minimum-norm feasibility step:
+ *   Normal step minimizes ||Δx||² subject to J·Δx + c = 0 (linearized).
+ *   Closed form: Δx_n = -J^T·(J·J^T)^{-1}·c = -J^†·c.
+ *   Augmented system equivalent to computing pseudo-inverse times residual.
+ *   Slack scaling: Δs̃ = S^{-1}·Δs for better conditioning.
+ *
+ * @complexity O(nnz·k) for iterative solve, O(m²n) worst-case direct.
+ *   Typically k iterations where k depends on preconditioner quality.
+ *
+ * @see IpInexactDoglegNormal.hpp for dogleg wrapper using this
+ * @see IpAugSystemSolver.hpp for the underlying solver interface
+ */
+
 #ifndef __IPINEXACTNEWTONNORMAL_HPP__
 #define __IPINEXACTNEWTONNORMAL_HPP__
 

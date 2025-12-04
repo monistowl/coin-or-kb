@@ -4,6 +4,32 @@
 //
 // Authors:  Andreas Waechter            IBM    2008-08-31
 
+/**
+ * @file IpInexactNormalStepCalc.hpp
+ * @brief Abstract base class for normal step computation
+ *
+ * InexactNormalStepCalculator defines the interface for computing
+ * the normal step component in the inexact Newton decomposition.
+ *
+ * @algorithm Normal Step Interface:
+ *   ComputeNormalStep(normal_x, normal_s):
+ *   1. Compute step toward constraint feasibility.
+ *   2. Return (Δx_n, Δs_n) satisfying feasibility reduction target.
+ *   3. Target: ||c(x) + J·Δx_n|| ≤ κ·||c(x)|| for some κ < 1.
+ *   Implementations: dogleg (trust region), Newton (direct solve).
+ *
+ * @math Normal step goal:
+ *   Minimize ||Δx_n||² subject to linearized feasibility improvement.
+ *   Δx_n = argmin ||Δx||² s.t. ||J·Δx + c|| ≤ κ·||c|| (trust region).
+ *   Or: Δx_n = -J^†·c(x) (minimum norm, pseudo-inverse solution).
+ *   Normal step lies in range(J^T), orthogonal to null(J).
+ *
+ * @complexity Implementation-dependent: O(nnz·k) for iterative.
+ *
+ * @see IpInexactDoglegNormal.hpp for dogleg trust-region implementation
+ * @see IpInexactNewtonNormal.hpp for Newton-based implementation
+ */
+
 #ifndef __IPINEXACTNORMALSTEPCALC_HPP__
 #define __IPINEXACTNORMALSTEPCALC_HPP__
 

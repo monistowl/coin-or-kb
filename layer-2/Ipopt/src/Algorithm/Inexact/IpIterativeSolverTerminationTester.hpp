@@ -4,6 +4,36 @@
 //
 // Authors:  Andreas Waechter            IBM    2008-09-19
 
+/**
+ * @file IpIterativeSolverTerminationTester.hpp
+ * @brief Termination criteria for iterative linear solvers
+ *
+ * IterativeSolverTerminationTester provides the interface for
+ * determining when an iterative solver (GMRES, CG, etc.) has
+ * reached an acceptable solution for the inexact Newton method.
+ *
+ * @algorithm Iterative Solver Termination Tests:
+ *   TestTermination(sol, resid, iter) checks multiple criteria:
+ *   - TEST_1: Residual sufficiently small: ||r|| ≤ tol₁.
+ *   - TEST_2: Tangential component condition satisfied.
+ *   - TEST_3: Sufficient decrease achieved for inexact method.
+ *   - MODIFY_HESSIAN: Iteration stagnating, need regularization.
+ *   - CONTINUE: Keep iterating, not yet converged.
+ *   Early termination allows inexact solves (key for efficiency).
+ *
+ * @math Inexact Newton termination:
+ *   Classical Newton: solve Ax = b exactly.
+ *   Inexact Newton: find x such that ||Ax - b|| ≤ η·||b|| (forcing sequence η).
+ *   η_k → 0 as k → ∞ ensures superlinear convergence.
+ *   Termination tests encode problem-specific accuracy requirements.
+ *
+ * @complexity O(n) per termination test (compute norms).
+ *   Called each iterative solver iteration, so must be fast.
+ *
+ * @see IpInexactPDSolver.hpp for usage in primal-dual solves
+ * @see IpInexactNormalTerminationTester.hpp for normal step variant
+ */
+
 #ifndef __IPITERATIVESOLVERTERMINATIONTESTER_HPP__
 #define __IPITERATIVESOLVERTERMINATIONTESTER_HPP__
 

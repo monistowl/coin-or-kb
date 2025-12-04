@@ -5,6 +5,36 @@
 // Authors:  Andreas Waechter                 IBM    2008-09-11
 //               derived file from IpPenaltyLSAcceptor.hpp (rev 019)
 
+/**
+ * @file IpInexactLSAcceptor.hpp
+ * @brief Penalty function line search for inexact step algorithm
+ *
+ * InexactLSAcceptor implements backtracking line search using an
+ * exact penalty function, adapted for inexact Newton steps that
+ * don't fully satisfy the linearized KKT conditions.
+ *
+ * @algorithm Penalty Function Line Search:
+ *   CheckAcceptabilityOfTrialPoint(α):
+ *   1. Evaluate merit: φ(x+αΔx) = f(x+αΔx) + ν·||c(x+αΔx)||₁.
+ *   2. Compute predicted reduction: pred = -α·(∇f^T·Δx + ν·||c||₁).
+ *   3. Armijo condition: φ(x+αΔx) ≤ φ(x) - η·pred.
+ *   4. If not accepted: α ← ρ·α (backtrack), retry.
+ *   5. Update penalty ν if step rejected due to constraint violation.
+ *
+ * @math Exact penalty function:
+ *   φ_ν(x) = f(x) + ν·||c(x)||₁ (ℓ₁ penalty on constraints).
+ *   ν updated adaptively: ν ← max(ν, ν_low + increment).
+ *   ν_low provides lower bound for penalty (Curtis-Nocedal flexible penalty).
+ *   Watchdog: stores reference point for non-monotone acceptance.
+ *
+ * @complexity O(m) per merit evaluation (constraint norm).
+ *   No second-order correction (SOC) for inexact—too expensive.
+ *   Line search typically O(1) to O(log(1/α_min)) backtracks.
+ *
+ * @see IpBacktrackingLSAcceptor.hpp for base backtracking interface
+ * @see IpInexactSearchDirCalc.hpp for search direction computation
+ */
+
 #ifndef __IPINEXACTLSACCEPTOR_HPP__
 #define __IPINEXACTLSACCEPTOR_HPP__
 

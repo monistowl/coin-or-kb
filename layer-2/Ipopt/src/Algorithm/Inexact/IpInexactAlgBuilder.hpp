@@ -5,6 +5,36 @@
 // Authors:  Andreas Waechter     IBM                  2008-09-05
 //            based on IpAlgBuilder.hpp (rev 913)
 
+/**
+ * @file IpInexactAlgBuilder.hpp
+ * @brief Builder for inexact step computation algorithm variant
+ *
+ * InexactAlgorithmBuilder constructs the complete IpoptAlgorithm
+ * configured for inexact Newton methods using iterative linear solvers.
+ *
+ * @algorithm Inexact Algorithm Construction:
+ *   BuildBasicAlgorithm():
+ *   1. Create InexactData and InexactCq for algorithm-specific storage.
+ *   2. Configure iterative linear solver (Pardiso iterative, GMRES).
+ *   3. Build InexactNormalStepCalculator (dogleg or Newton).
+ *   4. Build InexactPDSolver for tangential step.
+ *   5. Build InexactSearchDirCalculator combining normal + tangential.
+ *   6. Build InexactLSAcceptor for penalty line search.
+ *   7. Assemble into IpoptAlgorithm with inexact components.
+ *
+ * @math Inexact vs standard Ipopt:
+ *   Standard: Direct LDL^T factorization, O(n³) per iteration.
+ *   Inexact: Iterative solves, O(nnz·k) per iteration, k << n.
+ *   Trade-off: Fewer flops per iteration, but possibly more iterations.
+ *   Best for: Large-scale problems where factorization is prohibitive.
+ *
+ * @complexity Algorithm build: O(1) (just object construction).
+ *   Per-iteration: O(nnz·k) instead of O(n³) for direct methods.
+ *
+ * @see IpAlgBuilder.hpp for standard algorithm builder
+ * @see IpInexactSearchDirCalc.hpp for search direction component
+ */
+
 #ifndef __IPINEXACTALGBUILDER_HPP__
 #define __IPINEXACTALGBUILDER_HPP__
 

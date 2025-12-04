@@ -4,6 +4,38 @@
 //
 // Authors:  Andreas Waechter            IBM    2008-08-31
 
+/**
+ * @file IpInexactSearchDirCalc.hpp
+ * @brief Search direction via normal-tangential decomposition
+ *
+ * InexactSearchDirCalculator computes the search direction using
+ * iterative linear solvers by decomposing into normal and tangential
+ * components, enabling inexact Newton methods.
+ *
+ * @algorithm Normal-Tangential Step Decomposition:
+ *   ComputeSearchDirection():
+ *   1. Compute normal step Δx_n via InexactNormalStepCalculator:
+ *      - Solves: min ||Δx_n||² s.t. ||A·Δx_n + c|| ≤ κ·||c|| (feasibility).
+ *   2. Compute tangential step Δx_t via InexactPDSolver:
+ *      - Solves primal-dual system with modified RHS.
+ *      - Δx_t ∈ null(A) approximately (tangent to constraints).
+ *   3. Combine: Δx = Δx_n + Δx_t, store in InexactData.
+ *   4. Check local infeasibility: ||A·Δx_n||₂ ≤ local_inf_Ac_tol.
+ *
+ * @math Decomposition strategy:
+ *   Normal step: Δx_n = -A^†·c(x) (minimum norm solution toward feasibility).
+ *   Tangential step: Δx_t = (I - A^†A)·d (projects optimality onto null(A)).
+ *   Full step: Δx = Δx_n + Δx_t achieves both feasibility and optimality.
+ *   Decomposition modes: ALWAYS, ADAPTIVE, SWITCH_ONCE (based on progress).
+ *
+ * @complexity Normal step: O(nnz·k_n) for iterative solve.
+ *   Tangential step: O(nnz·k_t) for primal-dual solve.
+ *   Total: O(nnz·(k_n + k_t)), typically k_n, k_t << n.
+ *
+ * @see IpInexactNormalStepCalc.hpp for normal step interface
+ * @see IpInexactPDSolver.hpp for tangential step solver
+ */
+
 #ifndef __IPINEXACTSEARCHDIRCALC_HPP__
 #define __IPINEXACTSEARCHDIRCALC_HPP__
 

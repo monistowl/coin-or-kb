@@ -4,6 +4,38 @@
 //
 // Authors:  Andreas Waechter            IBM    2008-08-31
 
+/**
+ * @file IpInexactDoglegNormal.hpp
+ * @brief Dogleg trust region method for normal step computation
+ *
+ * InexactDoglegNormalStep computes the normal step using a dogleg
+ * approach that combines steepest descent and Newton directions
+ * within a trust region.
+ *
+ * @algorithm Dogleg Normal Step:
+ *   ComputeNormalStep():
+ *   1. Compute Cauchy point: x_c = x - α_c·A^T·c (steepest descent).
+ *      α_c = ||A^T·c||² / ||A·A^T·c||² (optimal step along gradient).
+ *   2. Compute Newton point: x_n via InexactNewtonNormalStep.
+ *   3. If ||x_c - x|| ≥ ω (trust region): return scaled Cauchy step.
+ *   4. If ||x_n - x|| ≤ ω: return Newton step (inside trust region).
+ *   5. Else: interpolate on dogleg path between Cauchy and Newton.
+ *      x = x_c + τ·(x_n - x_c) where τ chosen so ||x - x₀|| = ω.
+ *
+ * @math Dogleg path geometry:
+ *   Dogleg: piecewise linear path from 0 → Cauchy → Newton.
+ *   Trust region: ||Δx|| ≤ ω (current trust radius).
+ *   ω updated based on ratio: ρ = actual_reduction / predicted_reduction.
+ *   If ρ high → expand ω; if ρ low → contract ω.
+ *
+ * @complexity Cauchy point: O(nnz) for A^T·c and A·(A^T·c).
+ *   Newton point: O(nnz·k) for iterative solve.
+ *   Interpolation: O(n) for linear combination.
+ *
+ * @see IpInexactNewtonNormal.hpp for Newton step computation
+ * @see IpInexactNormalStepCalc.hpp for base normal step interface
+ */
+
 #ifndef __IPINEXACTDOGLEGNORMAL_HPP__
 #define __IPINEXACTDOGLEGNORMAL_HPP__
 

@@ -4,6 +4,37 @@
 //
 // Authors:  Andreas Waechter            IBM    2008-09-09
 
+/**
+ * @file IpInexactPDSolver.hpp
+ * @brief Primal-dual system solver for inexact Newton methods
+ *
+ * InexactPDSolver solves the primal-dual system using iterative linear
+ * solvers, allowing for inexact solutions that don't fully satisfy
+ * the linearized KKT conditions.
+ *
+ * @algorithm Inexact Primal-Dual System Solution:
+ *   Solve(rhs, sol) for the tangential step:
+ *   1. Form augmented system: [W + δI, J^T; J, -δI] [Δx; Δy] = rhs.
+ *   2. Call iterative solver (e.g., GMRES, Pardiso iterative mode).
+ *   3. Check tangential component condition (TCC):
+ *      ||J·Δx_t||₂ ≤ ψ·θ·μ^θ_exp (controls constraint linearization error).
+ *   4. If TCC violated → increase regularization δ, retry.
+ *   5. Compute residual: resid = rhs - A·sol, verify acceptable accuracy.
+ *
+ * @math Tangential Component Condition (TCC):
+ *   For step Δx = Δx_n + Δx_t (normal + tangential decomposition):
+ *   ||A_c·Δx_t||₂ ≤ ψ·θ·μ^exp ensures tangential step stays near null(J).
+ *   Parameters: tcc_psi (ψ), tcc_theta (θ), tcc_theta_mu_exponent (exp).
+ *   Allows inexact linear solves while maintaining convergence theory.
+ *
+ * @complexity Per solve: O(nnz·k) for k iterative solver iterations.
+ *   k depends on conditioning and preconditioner quality.
+ *   Direct methods: O(n³), iterative: O(n·k) where k << n typically.
+ *
+ * @see IpInexactSearchDirCalc.hpp for search direction computation
+ * @see IpAugSystemSolver.hpp for base augmented system interface
+ */
+
 #ifndef __IPINEXACTPDSOLVER_HPP__
 #define __IPINEXACTPDSOLVER_HPP__
 
