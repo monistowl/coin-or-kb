@@ -1,6 +1,14 @@
 // Copyright (C) 2004, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file MyNLP.hpp
+ * @brief Simple example NLP implementation
+ *
+ * MyNLP: basic example demonstrating TNLP interface implementation.
+ * Simple problem showing minimal required TNLP methods.
+ * Starting point for learning Ipopt C++ interface.
+ */
 //
 // Authors:  Carl Laird, Andreas Waechter     IBM    2004-11-05
 

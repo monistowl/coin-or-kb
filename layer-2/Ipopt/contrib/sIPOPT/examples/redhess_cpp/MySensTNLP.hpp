@@ -1,6 +1,14 @@
 // Copyright 2009 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file MySensTNLP.hpp
+ * @brief Example reduced Hessian TNLP for sIPOPT
+ *
+ * MySensTNLP: example for computing reduced Hessian via sIPOPT.
+ * Demonstrates reduced Hessian extraction at optimal solution.
+ * Tests second-order sensitivity information computation.
+ */
 //
 // Date   : 2010-10-04
 

@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensMetadataMeasurement.hpp
+ * @brief sIPOPT metadata-based measurement
+ *
+ * SensMetadataMeasurement: reads parameter perturbations from NLP metadata.
+ * Extracts sensitivity parameters from AMPL suffixes or TNLP metadata.
+ * Enables automatic parameter identification from problem definition.
+ */
 //
 // Date   : 2009-07-10
 

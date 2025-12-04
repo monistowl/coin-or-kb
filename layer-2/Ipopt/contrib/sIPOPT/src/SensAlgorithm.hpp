@@ -1,6 +1,15 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensAlgorithm.hpp
+ * @brief sIPOPT sensitivity analysis main algorithm
+ *
+ * SensAlgorithm: controller for parametric sensitivity analysis in Ipopt.
+ * Computes directional derivatives and sensitivity matrices for solution
+ * w.r.t. parameter perturbations. Uses Schur complement decomposition
+ * to efficiently compute sensitivities after optimal solution found.
+ */
 //
 // Date   : 2009-05-06
 

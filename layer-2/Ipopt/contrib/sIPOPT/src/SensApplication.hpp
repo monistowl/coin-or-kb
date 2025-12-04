@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensApplication.hpp
+ * @brief sIPOPT application wrapper for sensitivity analysis
+ *
+ * SensApplication wraps IpoptApplication with sensitivity extensions.
+ * Entry point for sIPOPT: runs optimization then sensitivity analysis.
+ * Manages parameter perturbations and extracts sensitivity information.
+ */
 //
 // Date   : 2009-05-06
 

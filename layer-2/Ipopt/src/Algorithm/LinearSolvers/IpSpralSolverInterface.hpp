@@ -3,6 +3,15 @@
 // Copyright (C) 2004, 2007 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file IpSpralSolverInterface.hpp
+ * @brief Interface to SPRAL sparse direct solver
+ *
+ * SpralSolverInterface wraps SPRAL (Sparse Parallel Robust Algorithms
+ * Library) for Ipopt. OpenMP-parallel multifrontal solver for symmetric
+ * indefinite systems. Open-source alternative to HSL MA57/MA97.
+ * Provides inertia and supports degeneracy detection.
+ */
 //
 // Authors: Byron Tasseff                    LANL   2020-03-21
 //          Jonathan Hogg                    STFC   2012-12-21

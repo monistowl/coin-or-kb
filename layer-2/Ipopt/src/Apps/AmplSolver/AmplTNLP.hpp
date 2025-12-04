@@ -1,6 +1,15 @@
 // Copyright (C) 2004, 2009 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file AmplTNLP.hpp
+ * @brief AMPL interface for Ipopt via .nl files
+ *
+ * AmplTNLP: TNLP implementation reading AMPL .nl files via ASL library.
+ * Handles variable bounds, constraint types, sparse Jacobian/Hessian.
+ * Supports warm starting, dual initialization, and AMPL suffixes.
+ * Primary interface for AMPL-based optimization models.
+ */
 //
 // Authors:  Carl Laird, Andreas Waechter     IBM    2004-08-13
 

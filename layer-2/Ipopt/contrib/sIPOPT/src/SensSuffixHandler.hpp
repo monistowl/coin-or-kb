@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensSuffixHandler.hpp
+ * @brief sIPOPT AMPL suffix handler
+ *
+ * SensSuffixHandler: processes AMPL suffixes for sensitivity analysis.
+ * Reads parameter indices and perturbation values from .row/.col suffixes.
+ * Enables AMPL-based sensitivity specification.
+ */
 //
 // Date   : 2009-08-01
 

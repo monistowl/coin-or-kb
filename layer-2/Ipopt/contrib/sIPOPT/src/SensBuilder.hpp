@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensBuilder.hpp
+ * @brief sIPOPT builder for sensitivity analysis components
+ *
+ * SensBuilder: factory for creating sIPOPT algorithm components.
+ * Assembles SchurDriver, StepCalculator, and Measurement objects
+ * based on options. Configures sensitivity computation pipeline.
+ */
 //
 // Date   : 2009-05-10
 

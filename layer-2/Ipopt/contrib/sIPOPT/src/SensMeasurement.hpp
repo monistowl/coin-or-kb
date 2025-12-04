@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensMeasurement.hpp
+ * @brief sIPOPT measurement interface for parameter values
+ *
+ * SensMeasurement: abstract interface for providing parameter values.
+ * Measurement objects supply perturbed parameter values to sensitivity
+ * analysis. Enables real-time or batch parameter updates.
+ */
 //
 // Date   : 2009-05-16
 

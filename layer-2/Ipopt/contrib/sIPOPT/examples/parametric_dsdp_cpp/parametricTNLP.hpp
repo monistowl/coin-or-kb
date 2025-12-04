@@ -1,6 +1,14 @@
 // Copyright 2010 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file parametricTNLP.hpp
+ * @brief Example parametric NLP for sIPOPT
+ *
+ * parametricTNLP: example problem demonstrating sIPOPT sensitivity analysis.
+ * Simple parameterized NLP where solution depends on parameter values.
+ * Used to verify sensitivity computation correctness.
+ */
 //
 // Date   : 2010-01-05
 

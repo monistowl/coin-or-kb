@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensDenseGenSchurDriver.hpp
+ * @brief sIPOPT dense Schur complement driver
+ *
+ * SensDenseGenSchurDriver: dense matrix implementation of SchurDriver.
+ * Computes Schur complement S = C - B*K^{-1}*A for sensitivity analysis.
+ * Suitable for problems with moderate numbers of sensitivity parameters.
+ */
 //
 // Date   : 2009-11-19
 

@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensSchurDriver.hpp
+ * @brief sIPOPT Schur complement driver interface
+ *
+ * SensSchurDriver: abstract interface for Schur complement operations.
+ * Manages factorization and solve phases for sensitivity analysis.
+ * Implementations handle dense, sparse, or iterative approaches.
+ */
 //
 // Date   : 2009-05-06
 

@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensReducedHessianCalculator.hpp
+ * @brief sIPOPT reduced Hessian computation
+ *
+ * SensReducedHessianCalculator: computes reduced Hessian of Lagrangian.
+ * Projects full Hessian onto null space of active constraints.
+ * Used for computing second-order sensitivity information.
+ */
 //
 // Date   : 2009-08-01
 

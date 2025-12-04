@@ -1,6 +1,13 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file LuksanVlcek7.hpp
+ * @brief Luksan-Vlcek scalable test problem 7
+ *
+ * LuksanVlcek7: augmented Lagrangian test, scalable problem.
+ * Final problem in Luksan-Vlcek suite for comprehensive testing.
+ */
 //
 // Authors:  Andreas Waechter              IBM    2005-10-127
 

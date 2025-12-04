@@ -1,6 +1,14 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file LuksanVlcek2.hpp
+ * @brief Luksan-Vlcek scalable test problem 2
+ *
+ * LuksanVlcek2: chained Cragg-Levy function, scalable nonlinear test.
+ * More challenging than LV1 with cubic and quartic terms.
+ * Tests solver robustness on highly nonlinear objectives.
+ */
 //
 // Authors:  Andreas Waechter              IBM    2005-10-127
 

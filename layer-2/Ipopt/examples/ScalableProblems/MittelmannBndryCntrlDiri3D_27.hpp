@@ -1,6 +1,14 @@
 // Copyright (C) 2005, 2007 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file MittelmannBndryCntrlDiri3D_27.hpp
+ * @brief Mittelmann 3D boundary control 27-point stencil
+ *
+ * MittelmannBndryCntrlDiri3D_27: 3D boundary control with 27-point stencil.
+ * Higher-order discretization of 3D Laplacian operator.
+ * More accurate but denser Hessian than 7-point version.
+ */
 //
 // Authors:  Olaf Schenk   (Univ. of Basel)      2007-08-01
 //              modified MittelmannBndryCntrlDiri.hpp for 3-dim problem

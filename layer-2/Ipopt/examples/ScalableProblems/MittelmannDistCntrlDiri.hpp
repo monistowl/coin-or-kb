@@ -1,6 +1,14 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file MittelmannDistCntrlDiri.hpp
+ * @brief Mittelmann distributed control Dirichlet
+ *
+ * MittelmannDistCntrlDiri: distributed control of elliptic PDE.
+ * Control acts throughout domain rather than just boundary.
+ * Typically larger control space than boundary control.
+ */
 //
 // Authors:  Andreas Waechter           IBM    2005-10-18
 //                  based on MyNLP.hpp

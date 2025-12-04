@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensIndexPCalculator.hpp
+ * @brief sIPOPT index-based perturbation calculator
+ *
+ * SensIndexPCalculator: calculates perturbations for indexed parameters.
+ * Identifies which variables/constraints are perturbed and computes
+ * corresponding right-hand sides for sensitivity linear systems.
+ */
 //
 // Date   : 2009-05-06
 

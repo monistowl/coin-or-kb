@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensUtils.hpp
+ * @brief sIPOPT utility functions and enums
+ *
+ * SensUtils: utility types for sIPOPT sensitivity analysis.
+ * Defines SensAlgorithmExitStatus enum for return codes.
+ * Common helper functions used across sIPOPT components.
+ */
 //
 // Date   : 2009-05-14
 

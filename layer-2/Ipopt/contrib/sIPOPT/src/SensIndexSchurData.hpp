@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensIndexSchurData.hpp
+ * @brief sIPOPT index-based Schur data storage
+ *
+ * SensIndexSchurData: stores index-based data for Schur complement.
+ * Tracks which rows/columns of KKT system correspond to parameters.
+ * Manages sparse structure for efficient Schur complement computation.
+ */
 //
 // Date   : 2009-05-08
 

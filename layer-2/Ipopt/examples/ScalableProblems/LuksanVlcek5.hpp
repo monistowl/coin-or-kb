@@ -1,6 +1,13 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file LuksanVlcek5.hpp
+ * @brief Luksan-Vlcek scalable test problem 5
+ *
+ * LuksanVlcek5: generalized Brown function, scalable test.
+ * High curvature near solution tests line search and trust region.
+ */
 //
 // Authors:  Andreas Waechter              IBM    2005-10-127
 

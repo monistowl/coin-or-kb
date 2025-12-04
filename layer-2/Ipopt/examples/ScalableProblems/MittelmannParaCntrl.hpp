@@ -1,6 +1,14 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file MittelmannParaCntrl.hpp
+ * @brief Mittelmann parabolic control problem
+ *
+ * MittelmannParaCntrl: time-dependent PDE-constrained optimization.
+ * Parabolic (heat equation) control problem benchmark.
+ * Tests solver on time-discretized optimal control.
+ */
 //
 // Authors:  Andreas Waechter           IBM    2005-10-18
 

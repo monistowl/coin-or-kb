@@ -1,6 +1,14 @@
 // Copyright (C) 2009 International Business Machines.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file TutorialCpp_nlp.hpp
+ * @brief Ipopt C++ tutorial exercise NLP
+ *
+ * TutorialCpp_nlp: tutorial exercise for learning TNLP interface.
+ * Step-by-step guide to implementing optimization problems.
+ * Three versions: skeleton (to fill in), mistake (to debug), solution.
+ */
 //
 // Author:  Andreas Waechter               IBM    2009-04-02
 

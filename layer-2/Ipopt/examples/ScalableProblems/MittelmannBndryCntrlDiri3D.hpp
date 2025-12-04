@@ -1,6 +1,14 @@
 // Copyright (C) 2005, 2007 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file MittelmannBndryCntrlDiri3D.hpp
+ * @brief Mittelmann 3D boundary control Dirichlet
+ *
+ * MittelmannBndryCntrlDiri3D: 3D version of boundary control problem.
+ * Much larger than 2D version, tests solver scalability.
+ * 3D finite difference discretization of Laplacian.
+ */
 //
 // Authors:  Andreas Waechter             IBM    2005-10-18
 //           Olaf Schenk   (Univ. of Basel)      2007-08-01

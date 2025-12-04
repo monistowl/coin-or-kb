@@ -1,6 +1,14 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file RegisteredTNLP.hpp
+ * @brief Registration system for scalable test problems
+ *
+ * RegisteredTNLP: factory pattern for creating test problem instances.
+ * Allows selecting test problems by name with configurable size.
+ * Manages Luksan-Vlcek and Mittelmann problem instantiation.
+ */
 //
 // Authors:  Andreas Waechter            IBM    2005-10-20
 

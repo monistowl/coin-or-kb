@@ -1,6 +1,14 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file MittelmannBndryCntrlNeum.hpp
+ * @brief Mittelmann boundary control Neumann problem
+ *
+ * MittelmannBndryCntrlNeum: boundary control with Neumann conditions.
+ * Natural boundary conditions instead of Dirichlet.
+ * Different constraint structure than Dirichlet version.
+ */
 //
 // Authors:  Andreas Waechter           IBM    2005-10-18
 //                  based on MyNLP.hpp

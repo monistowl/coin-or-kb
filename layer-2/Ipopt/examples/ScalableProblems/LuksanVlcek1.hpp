@@ -1,6 +1,14 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file LuksanVlcek1.hpp
+ * @brief Luksan-Vlcek scalable test problem 1
+ *
+ * LuksanVlcek1: chained Rosenbrock function, scalable nonlinear test.
+ * min sum(100*(x[i+1]-x[i]^2)^2 + (1-x[i])^2) with bounds and constraints.
+ * Tests NLP solver on ill-conditioned problems with many local minima.
+ */
 //
 // Authors:  Andreas Waechter              IBM    2005-10-127
 

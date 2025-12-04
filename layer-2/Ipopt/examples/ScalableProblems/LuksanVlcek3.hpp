@@ -1,6 +1,14 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file LuksanVlcek3.hpp
+ * @brief Luksan-Vlcek scalable test problem 3
+ *
+ * LuksanVlcek3: chained Brown-Dennis function, scalable test.
+ * Stiff problem with exponential and trigonometric terms.
+ * Challenging for step computation and Hessian approximation.
+ */
 //
 // Authors:  Andreas Waechter              IBM    2005-10-127
 

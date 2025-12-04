@@ -1,6 +1,14 @@
 // Copyright 2009 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensAmplTNLP.hpp
+ * @brief sIPOPT AMPL interface with sensitivity support
+ *
+ * SensAmplTNLP extends AmplTNLP with sensitivity parameter handling.
+ * Reads sens_init_constr suffix for constraint parameter indices.
+ * Enables parametric sensitivity analysis for AMPL models.
+ */
 //
 // Date   : 2009-05-11
 

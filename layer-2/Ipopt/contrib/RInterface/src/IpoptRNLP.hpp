@@ -13,6 +13,16 @@
  * Methods and Practice (CeMMAP) is gratefully acknowledged.
  */
 
+/**
+ * @file IpoptRNLP.hpp
+ * @brief R language interface for Ipopt TNLP
+ *
+ * IpoptRNLP derives from TNLP to bridge Ipopt with R. Handles callback
+ * to R functions for objective (eval_f), gradient (eval_grad_f),
+ * constraints (eval_g), Jacobian (eval_jac_g), and Hessian (eval_h).
+ * Manages R SEXP objects for environment, bounds, and sparse structures.
+ * Supports Hessian approximation mode. Part of ipoptr R package.
+ */
 #ifndef __IpoptRNLP_HPP__
 #define __IpoptRNLP_HPP__
 

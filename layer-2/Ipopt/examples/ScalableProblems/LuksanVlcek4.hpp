@@ -1,6 +1,13 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file LuksanVlcek4.hpp
+ * @brief Luksan-Vlcek scalable test problem 4
+ *
+ * LuksanVlcek4: chained function with eigenvalue-like structure.
+ * Tests solver on problems with clustered eigenvalues in Hessian.
+ */
 //
 // Authors:  Andreas Waechter              IBM    2005-10-127
 

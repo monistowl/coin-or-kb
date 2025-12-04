@@ -1,6 +1,13 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file LuksanVlcek6.hpp
+ * @brief Luksan-Vlcek scalable test problem 6
+ *
+ * LuksanVlcek6: penalty function formulation, scalable test.
+ * Tests handling of penalty-type objective structure.
+ */
 //
 // Authors:  Andreas Waechter              IBM    2005-10-127
 

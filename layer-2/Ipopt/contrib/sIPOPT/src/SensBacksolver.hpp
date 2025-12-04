@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensBacksolver.hpp
+ * @brief sIPOPT backsolver interface for linear systems
+ *
+ * SensBacksolver: abstract interface for solving linear systems in sIPOPT.
+ * Used for Schur complement right-hand side solutions. Implementations
+ * leverage existing Ipopt linear solvers for efficient back-substitution.
+ */
 //
 // Date   : 2009-05-14
 

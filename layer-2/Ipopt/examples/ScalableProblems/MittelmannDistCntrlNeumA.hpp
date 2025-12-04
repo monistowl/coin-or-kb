@@ -1,6 +1,14 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file MittelmannDistCntrlNeumA.hpp
+ * @brief Mittelmann distributed control Neumann variant A
+ *
+ * MittelmannDistCntrlNeumA: distributed control with Neumann conditions.
+ * Variant A of the distributed control Neumann problem.
+ * Tests different regularization and constraint structures.
+ */
 //
 // Authors:  Andreas Waechter           IBM    2005-10-18
 //                  based on MyNLP.hpp

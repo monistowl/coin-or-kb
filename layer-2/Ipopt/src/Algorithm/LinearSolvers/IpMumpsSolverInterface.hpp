@@ -1,6 +1,15 @@
 // Copyright (C) 2006, 2007 Damien Hocking, KBC Advanced Technologies
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file IpMumpsSolverInterface.hpp
+ * @brief Interface to MUMPS parallel sparse direct solver
+ *
+ * MumpsSolverInterface wraps MUMPS (MUltifrontal Massively Parallel
+ * sparse direct Solver) for Ipopt. Supports MPI parallelism, hybrid
+ * MPI+OpenMP mode, and out-of-core factorization for large problems.
+ * Default open-source solver when HSL unavailable.
+ */
 //
 // Authors: Damien Hocking                 KBC    2006-03-20
 //        (included his original contribution into Ipopt package on 2006-03-25)

@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensSimpleBacksolver.hpp
+ * @brief sIPOPT simple backsolver implementation
+ *
+ * SensSimpleBacksolver: basic implementation using Ipopt linear solver.
+ * Wraps existing factorized KKT system for back-substitution.
+ * Reuses factorization from optimization for sensitivity solves.
+ */
 //
 // Date    : 2009-04-06
 //

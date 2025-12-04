@@ -1,6 +1,13 @@
 // Copyright (C) 2005, 2007 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file MittelmannBndryCntrlDiri3Dsin.hpp
+ * @brief Mittelmann 3D boundary control sinusoidal
+ *
+ * MittelmannBndryCntrlDiri3Dsin: 3D boundary control with sinusoidal target.
+ * Variant with oscillatory desired state for tracking control.
+ */
 //
 // Authors:  Andreas Waechter             IBM    2005-10-18
 //           Olaf Schenk   (Univ. of Basel)      2007-08-01

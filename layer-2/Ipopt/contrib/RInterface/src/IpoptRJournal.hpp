@@ -13,6 +13,14 @@
  * Methods and Practice (CeMMAP) is gratefully acknowledged.
  */
 
+/**
+ * @file IpoptRJournal.hpp
+ * @brief R output journal for Ipopt progress messages
+ *
+ * IpoptRJournal derives from Journal to redirect Ipopt output to R.
+ * Sends iteration progress and solver messages to R console via Rprintf.
+ * Allows R users to monitor optimization progress interactively.
+ */
 #ifndef __IpoptRJournal_HPP__
 #define __IpoptRJournal_HPP__
 

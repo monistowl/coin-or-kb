@@ -1,6 +1,15 @@
 // Copyright (C) 2005, 2007 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file hs071_nlp.hpp
+ * @brief Hock-Schittkowski problem 71 example
+ *
+ * HS071_NLP: tutorial example implementing Hock-Schittkowski test problem 71.
+ * min x1*x4*(x1+x2+x3) + x3 s.t. x1*x2*x3*x4 >= 25, sum(xi^2) = 40.
+ * Demonstrates complete TNLP interface: bounds, objective, gradient,
+ * constraints, Jacobian, Hessian, and finalize_solution callback.
+ */
 //
 // Authors:  Carl Laird, Andreas Waechter     IBM    2005-08-09
 

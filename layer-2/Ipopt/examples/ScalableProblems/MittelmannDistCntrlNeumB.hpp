@@ -1,6 +1,14 @@
 // Copyright (C) 2005, 2006 International Business Machines and others.
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file MittelmannDistCntrlNeumB.hpp
+ * @brief Mittelmann distributed control Neumann variant B
+ *
+ * MittelmannDistCntrlNeumB: distributed control with Neumann conditions.
+ * Variant B with alternative problem parameters.
+ * Complements variant A for comprehensive benchmarking.
+ */
 //
 // Authors:  Andreas Waechter           IBM    2005-10-18
 //                  based on MyNLP.hpp

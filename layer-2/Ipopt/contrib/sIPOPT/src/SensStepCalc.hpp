@@ -1,6 +1,14 @@
 // Copyright 2009, 2011 Hans Pirnay
 // All Rights Reserved.
 // This code is published under the Eclipse Public License.
+/**
+ * @file SensStepCalc.hpp
+ * @brief sIPOPT sensitivity step calculator interface
+ *
+ * SensStepCalc: abstract interface for computing sensitivity steps.
+ * Given parameter perturbation, computes resulting change in solution.
+ * Core component of sIPOPT sensitivity analysis pipeline.
+ */
 //
 // Date   : 2009-05-14
 
