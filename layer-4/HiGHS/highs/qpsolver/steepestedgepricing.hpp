@@ -7,10 +7,32 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /**
  * @file steepestedgepricing.hpp
- * @brief HiGHS steepest edge pricing
+ * @brief HiGHS steepest edge pricing for QP active set method
  *
  * Steepest edge pricing for QP active set. Exact edge weights
  * for optimal variable selection (more expensive than Devex).
+ *
+ * @algorithm Steepest Edge Pricing for QP Active Set:
+ *   Selects constraint to drop/activate based on normalized multipliers:
+ *   1. Maintain exact weights: w_i = ||∇_i h(x)||² for each active constraint
+ *   2. Select constraint s = argmax_i { λ_i² / w_i } with λ_i > threshold
+ *   3. Only consider constraints that can be dropped (sign-correct multipliers)
+ *   4. Update weights when active set changes using basis factor information
+ *
+ * @math Steepest edge selection criterion:
+ *   For active constraint i with multiplier λ_i:
+ *   score_i = λ_i² / w_i where w_i = ||gradient||² in reduced space
+ *   This normalizes multipliers by constraint "difficulty" to move.
+ *
+ * @complexity O(|active_set|) per pricing operation.
+ *   Weight maintenance: O(m²) per active set update for exact weights.
+ *   More expensive than Devex but typically fewer iterations.
+ *
+ * @ref Harris (1973). "Pivot selection methods of the Devex LP code".
+ *      Mathematical Programming 5:1-28.
+ *
+ * @see Pricing for the base pricing interface
+ * @see DevexPricing for approximate steepest edge (faster per iteration)
  */
 #ifndef __SRC_LIB_PRICING_STEEPESTEDGEPRICING_HPP__
 #define __SRC_LIB_PRICING_STEEPESTEDGEPRICING_HPP__

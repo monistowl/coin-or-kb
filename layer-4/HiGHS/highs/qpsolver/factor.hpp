@@ -7,10 +7,31 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /**
  * @file factor.hpp
- * @brief HiGHS QP basis factorization
+ * @brief HiGHS QP reduced Hessian Cholesky factorization
  *
- * Basis factorization for QP solver. LU or Cholesky decomposition
- * of working set matrix for efficient solve operations.
+ * Basis factorization for QP solver. Cholesky decomposition
+ * of reduced Hessian Z'QZ for efficient direction computation.
+ *
+ * @algorithm Cholesky Factorization for Reduced Hessian:
+ *   Maintains L L' = Z'QZ for null-space QP direction computation:
+ *   1. Factor reduced Hessian: Z'QZ = LL' (dense Cholesky)
+ *   2. Solve for direction: LL'p_Z = -Z'g → p_Z
+ *   3. Update L when active set changes (rank-1 updates)
+ *   4. Detect negative eigenvalues (non-convex warning)
+ *
+ * @math Cholesky update formulas:
+ *   Adding constraint: Delete row/col from L, shift remaining
+ *   Dropping constraint: Rank-1 update L'L' = L'L + vv' via Givens rotations
+ *   Solve: Forward solve Ly = b, backward solve L'x = y
+ *
+ * @complexity Factor: O(k³) for k = n - |active_set| (null-space dimension)
+ *   Solve: O(k²)
+ *   Update: O(k²) per constraint change
+ *
+ * @ref Nocedal & Wright, "Numerical Optimization", Ch. 16.5 (active set)
+ *
+ * @see Basis for active set tracking
+ * @see HFactor for constraint matrix factorization
  */
 #ifndef __SRC_LIB_NEWFACTOR_HPP__
 #define __SRC_LIB_NEWFACTOR_HPP__

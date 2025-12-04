@@ -7,10 +7,30 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /**
  * @file basis.hpp
- * @brief HiGHS QP basis management
+ * @brief HiGHS QP basis management for active set method
  *
  * Working set (active set) management for QP solver.
  * Tracks which constraints are currently active.
+ *
+ * @algorithm QP Working Set (Active Set) Management:
+ *   Maintains active constraint set W and provides efficient operations:
+ *   1. Track constraint status: inactive, active at lower, active at upper
+ *   2. Null-space operations: Z'p products for reduced Hessian
+ *   3. Range-space operations: Y'b products for constraint restoration
+ *   4. Basis updates when constraints added/removed (HFactor integration)
+ *
+ * @math Null-space basis decomposition:
+ *   For active constraints A_W x = b_W, decompose:
+ *   A_W = [Y | Z] where Y spans range(A_W'), Z spans null(A_W)
+ *   Direction p = Zp_Z + Yp_Y with p_Z from reduced problem
+ *   Z'QZ is the reduced Hessian for null-space direction computation.
+ *
+ * @complexity Active set update: O(m²) for basis refactorization.
+ *   Z'v product: O(m·k) where k = |active set|.
+ *   Uses HFactor for efficient LU updates.
+ *
+ * @see HFactor for the underlying LU factorization
+ * @see CholeskyFactor for reduced Hessian factorization
  */
 #pragma once
 #ifndef __SRC_LIB_BASIS_HPP__
