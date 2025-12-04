@@ -14,18 +14,25 @@
  *
  *   min s_f·f(S_x^{-1}·x̃)  s.t.  s_c·c(S_x^{-1}·x̃)=0, ...
  *
- * Responsibilities:
- * - Initialize vector/matrix spaces from NLP structure
- * - Evaluate f, grad_f, c, d, jac_c, jac_d, h with caching
- * - Apply/unapply scaling via NLPScalingObject
- * - Handle bound relaxation (bound_relax_factor)
- * - Track function evaluation counts
- * - Call intermediate callback and finalize solution
+ * @algorithm NLP Adapter with Scaling and Caching:
+ *   1. Initialize: Create vector/matrix spaces from NLP structure info.
+ *   2. Evaluate with caching: f, ∇f, c, d, J_c, J_d, H via CachedResults.
+ *   3. Apply scaling: x̃ = S_x·x, f̃ = s_f·f, c̃ = S_c·c, etc.
+ *   4. Relax bounds: x_L → x_L - ε, x_U → x_U + ε for numerical safety.
+ *   5. Unscale solution: Convert internal x̃, ỹ back to user space.
+ *   Hessian modes: EXACT (user provides) or LIMITED_MEMORY (L-BFGS).
  *
- * Key options:
- * - hessian_approximation: EXACT or LIMITED_MEMORY
- * - bound_relax_factor: Relax bounds for numerical safety
- * - honor_original_bounds: Project solution to original bounds
+ * @math Scaling transformation (improves conditioning):
+ *   Scaled problem: min s_o·f(S_x⁻¹·x̃) s.t. S_c·c(S_x⁻¹·x̃) = 0.
+ *   Variable scaling: x = S_x⁻¹·x̃ where S_x = diag(s_x).
+ *   Objective scaling: f̃ = s_o·f (single scalar).
+ *   Constraint scaling: c̃ = S_c·c, d̃ = S_d·d (diagonal matrices).
+ *   Bound scaling: x̃_L = S_x·x_L, x̃_U = S_x·x_U.
+ *   Multiplier transformation: y_c = s_o⁻¹·S_c·ỹ_c, z_L = s_o⁻¹·S_x·z̃_L.
+ *
+ * @complexity O(n + m_c + m_d) to apply/unapply scaling (diagonal operations).
+ *   NLP evaluations: O(user-defined), cached to avoid redundant calls.
+ *   Space allocation: O(n + m) for vector/matrix space objects.
  *
  * @see IpIpoptNLP.hpp for the abstract interface
  * @see IpRestoIpoptNLP.hpp for restoration phase variant

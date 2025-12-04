@@ -19,8 +19,27 @@
  * - Errors: primal/dual infeasibility, complementarity, nlp_error
  * - Line search: frac_to_bound, sigma matrices
  *
- * All methods check dependencies via CachedResults and recompute
- * only when inputs have changed (tracked via TaggedObject tags).
+ * @algorithm Memoization Pattern for NLP Evaluation Caching:
+ *   Each computed quantity is cached with dependency tracking:
+ *   1. Check if inputs (x, s, y, z, μ) have changed via TaggedObject tags.
+ *   2. If unchanged, return cached result immediately.
+ *   3. If changed, recompute, cache result, update dependency tags.
+ *   Curr/Trial duality: curr_* uses IpData.curr(), trial_* uses IpData.trial().
+ *   Dependencies propagate: grad_lag depends on grad_f, jac_c, jac_d.
+ *
+ * @math Key computed quantities for IPM:
+ *   Slacks: slack_x_L = x - x_L, slack_x_U = x_U - x (distance to bounds).
+ *   Barrier objective: φ_μ(x) = f(x) - μ·Σlog(slack_i).
+ *   Gradient of Lagrangian: ∇_x L = ∇f - J_c^T y_c - J_d^T y_d - z_L + z_U.
+ *   Complementarity: compl_x_L = slack_x_L ⊙ z_L (should → μe).
+ *   Primal infeasibility: ||c(x)||, ||d(x) - s||.
+ *   Dual infeasibility: ||∇_x L||, ||∇_s L||.
+ *   Fraction-to-boundary: max α s.t. x + α·Δx ≥ (1-τ)·x_L.
+ *
+ * @complexity O(n+m) per quantity computation (vector operations).
+ *   Caching reduces redundant NLP evaluations within each iteration.
+ *   Typical iteration accesses same quantity multiple times (search dir,
+ *   line search, convergence check) → caching gives 3-10x speedup.
  *
  * @see IpIpoptData.hpp for the raw iterate storage
  * @see IpIpoptNLP.hpp for NLP function evaluations
