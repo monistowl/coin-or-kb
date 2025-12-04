@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MKC_optim.hpp
+ * @brief MKC optimization routines
+ *
+ * Core optimization algorithms for MKC application.
+ */
 #ifndef _MKC_OPTIM_H
 #define _MKC_OPTIM_H
 

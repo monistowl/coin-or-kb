@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_vector_general.hpp
+ * @brief BCP vector container
+ *
+ * Dynamic array container for BCP data structures.
+ */
 
 //##############################################################################
 

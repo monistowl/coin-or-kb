@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MC_lp.hpp
+ * @brief Max-cut LP relaxation for BCP
+ *
+ * LP process implementation for max-cut branch-and-cut.
+ */
 #ifndef _MC_LP_H
 #define _MC_LP_H
 

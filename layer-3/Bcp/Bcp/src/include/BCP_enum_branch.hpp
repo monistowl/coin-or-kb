@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_enum_branch.hpp
+ * @brief BCP enumerations
+ *
+ * Enum definitions for BCP status codes and options.
+ */
 #ifndef _BCP_ENUM_BRANCH_H
 #define _BCP_ENUM_BRANCH_H
 

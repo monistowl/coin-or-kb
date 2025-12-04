@@ -1,5 +1,11 @@
 // Copyright (C) 2005, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file CSP_var.hpp
+ * @brief CSP variable/pattern definitions
+ *
+ * Cutting pattern representation as BCP variables.
+ */
 #ifndef _CSP_VAR_H
 #define _CSP_VAR_H
 

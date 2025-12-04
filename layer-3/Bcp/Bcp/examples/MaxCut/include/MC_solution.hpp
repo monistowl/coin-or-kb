@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MC_solution.hpp
+ * @brief Max-cut solution representation
+ *
+ * Stores max-cut solution: node partition and objective value.
+ */
 #ifndef _MC_SOLUTION_H
 #define _MC_SOLUTION_H
 

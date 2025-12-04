@@ -9,6 +9,12 @@
 //-----------------------------------------------------------------------------
 // Copyright (C) 2003, Francois Margot, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BB_lp.hpp
+ * @brief BCP LP process
+ *
+ * LP relaxation process: solves node relaxations, generates cuts.
+ */
 
 #ifndef _BB_LP_H
 #define _BB_LP_H

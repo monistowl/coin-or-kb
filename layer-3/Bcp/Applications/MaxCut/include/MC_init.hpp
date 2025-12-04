@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MC_init.hpp
+ * @brief Max-cut BCP initialization
+ *
+ * Initialization routines for max-cut branch-and-cut application.
+ */
 #ifndef _MC_INIT_H
 #define _MC_INIT_H
 

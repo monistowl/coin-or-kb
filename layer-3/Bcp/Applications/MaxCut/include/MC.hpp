@@ -1,5 +1,13 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MC.hpp
+ * @brief Max-cut problem data structures
+ *
+ * MC_problem: graph representation for max-cut optimization.
+ * Stores nodes, edges, adjacency lists. Supports Ising problem variant
+ * with four-cycles and triangles. MC_feas_sol stores cut solutions.
+ */
 #ifndef _MC_H
 #define _MC_H
 

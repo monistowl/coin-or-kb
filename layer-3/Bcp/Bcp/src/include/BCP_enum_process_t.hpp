@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_enum_process_t.hpp
+ * @brief BCP process base
+ *
+ * Base class for BCP parallel processes.
+ */
 #ifndef _BCP_ENUM_PROCESS_T_H
 #define _BCP_ENUM_PROCESS_T_H
 

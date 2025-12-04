@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MC_tm_param.hpp
+ * @brief Max-cut tree manager for BCP
+ *
+ * Tree manager process for coordinating max-cut search tree.
+ */
 #ifndef _MC_TM_PARAM_H
 #define _MC_TM_PARAM_H
 

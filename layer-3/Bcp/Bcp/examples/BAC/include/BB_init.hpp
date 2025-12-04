@@ -1,5 +1,11 @@
 // Copyright (C) 2003, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BB_init.hpp
+ * @brief BCP framework component
+ *
+ * Part of Branch-Cut-Price parallel optimization framework.
+ */
 
 #ifndef _BB_INIT_H
 #define _BB_INIT_H

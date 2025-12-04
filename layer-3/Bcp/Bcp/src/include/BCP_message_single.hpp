@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_message_single.hpp
+ * @brief BCP messaging
+ *
+ * Message passing interface for parallel BCP.
+ */
 #ifndef _BCP_MESSAGE_SINGLE_H
 #define _BCP_MESSAGE_SINGLE_H
 

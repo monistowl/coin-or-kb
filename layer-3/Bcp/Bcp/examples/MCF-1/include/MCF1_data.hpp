@@ -1,3 +1,9 @@
+/**
+ * @file MCF1_data.hpp
+ * @brief MCF problem data
+ *
+ * Network and demand data for multi-commodity flow.
+ */
 #ifndef MCF1_data_hpp
 #define MCF1_data_hpp
 

@@ -1,5 +1,11 @@
 // Copyright (C) 2005, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file KS.hpp
+ * @brief Knapsack solver for CSP column generation
+ *
+ * Knapsack subproblem solver for generating cutting patterns.
+ */
 #ifndef _KS_HPP
 #define _KS_HPP
 

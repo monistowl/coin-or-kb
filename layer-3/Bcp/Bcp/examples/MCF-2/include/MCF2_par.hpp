@@ -1,3 +1,9 @@
+/**
+ * @file MCF2_par.hpp
+ * @brief MCF parameters
+ *
+ * Parameters for multi-commodity flow BCP application.
+ */
 #ifndef MCF2_par_hpp
 #define MCF2_par_hpp
 

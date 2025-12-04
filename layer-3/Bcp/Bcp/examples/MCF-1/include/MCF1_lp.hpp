@@ -1,3 +1,9 @@
+/**
+ * @file MCF1_lp.hpp
+ * @brief MCF LP relaxation for BCP
+ *
+ * LP process for multi-commodity flow branch-and-cut.
+ */
 #ifndef MCF1_lp_hpp
 #define MCF1_lp_hpp
 

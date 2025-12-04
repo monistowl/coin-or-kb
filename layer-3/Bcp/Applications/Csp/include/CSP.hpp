@@ -1,5 +1,12 @@
 // Copyright (C) 2005, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file CSP.hpp
+ * @brief Cutting stock problem definitions
+ *
+ * CSP_problem: cutting stock data with stock widths and patterns.
+ * Stores demands, pattern costs, column generation state.
+ */
 #ifndef CSP_H
 #define CSP_H
 

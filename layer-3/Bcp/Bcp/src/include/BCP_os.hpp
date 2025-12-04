@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_os.hpp
+ * @brief BCP framework component
+ *
+ * Part of Branch-Cut-Price parallel optimization framework.
+ */
 #ifndef _BCP_OS_H
 #define _BCP_OS_H
 

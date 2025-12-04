@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MKC_init.hpp
+ * @brief MKC BCP initialization
+ *
+ * Initialization for multi-dimensional knapsack application.
+ */
 #ifndef _MKC_INIT_H
 #define _MKC_INIT_H
 

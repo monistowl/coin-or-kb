@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_process.hpp
+ * @brief BCP process base
+ *
+ * Base class for BCP parallel processes.
+ */
 #ifndef _BCP_PROCESS_H
 #define _BCP_PROCESS_H
 

@@ -1,5 +1,11 @@
 // Copyright (C) 2005, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file CSP_lp_param.hpp
+ * @brief CSP LP relaxation for BCP
+ *
+ * LP process for cutting stock branch-and-cut-price.
+ */
 #ifndef _CSP_LP_PARAM_H
 #define _CSP_LP_PARAM_H
 

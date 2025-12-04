@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_warmstart_primaldual.hpp
+ * @brief BCP warm start
+ *
+ * Warm start information for restarting from previous state.
+ */
 #ifndef _BCP_WARMSTART_PRIMALDUAL_H
 #define _BCP_WARMSTART_PRIMALDUAL_H
 

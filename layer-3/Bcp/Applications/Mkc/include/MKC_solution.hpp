@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MKC_solution.hpp
+ * @brief MKC solution representation
+ *
+ * Solution storage for multi-dimensional knapsack.
+ */
 #ifndef _MKC_SOLUTION_H
 #define _MKC_SOLUTION_H
 

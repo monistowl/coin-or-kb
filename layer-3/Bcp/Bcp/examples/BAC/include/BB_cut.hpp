@@ -1,5 +1,11 @@
 // Copyright (C) 2003, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BB_cut.hpp
+ * @brief BCP cut base class
+ *
+ * Base class for cutting planes in branch-cut-price.
+ */
 
 #ifndef _BB_CUT_H
 #define _BB_CUT_H

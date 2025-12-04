@@ -1,5 +1,11 @@
 // Copyright (C) 2005, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file CSP_userexits.hpp
+ * @brief CSP user exit callbacks
+ *
+ * Custom callbacks for cutting stock application.
+ */
 #ifndef CSP_USEREXITS_H
 #define CSP_USEREXITS_H
 

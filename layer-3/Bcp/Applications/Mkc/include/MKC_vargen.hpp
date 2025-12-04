@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MKC_vargen.hpp
+ * @brief MKC variable definitions
+ *
+ * Column/variable classes for multi-dimensional knapsack BCP.
+ */
 #ifndef _MKC_VARGEN_H
 #define _MKC_VARGEN_H
 

@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_lp_pool.hpp
+ * @brief BCP LP process
+ *
+ * LP relaxation process: solves node relaxations, generates cuts.
+ */
 #ifndef _BCP_LP_POOL_H
 #define _BCP_LP_POOL_H
 

@@ -1,5 +1,11 @@
 // Copyright (C) 2005, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file CSP_colgen.hpp
+ * @brief CSP column generation
+ *
+ * Pattern generation for cutting stock via knapsack pricing.
+ */
 #ifndef _CSP_COLGEN_H
 #define _CSP_COLGEN_H
 

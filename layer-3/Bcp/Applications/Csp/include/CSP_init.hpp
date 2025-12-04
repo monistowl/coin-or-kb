@@ -1,5 +1,11 @@
 // Copyright (C) 2005, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file CSP_init.hpp
+ * @brief CSP BCP initialization
+ *
+ * Initialization for cutting stock application.
+ */
 #ifndef _CSP_INIT_H
 #define _CSP_INIT_H
 

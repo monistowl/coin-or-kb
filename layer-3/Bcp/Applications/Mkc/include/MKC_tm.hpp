@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MKC_tm.hpp
+ * @brief MKC tree manager for BCP
+ *
+ * Tree manager for multi-dimensional knapsack search.
+ */
 #ifndef _MKC_TM_H
 #define _MKC_TM_H
 

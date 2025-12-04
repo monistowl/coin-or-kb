@@ -1,5 +1,11 @@
 // Copyright (C) 2007, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_tmstorage.hpp
+ * @brief BCP tree manager
+ *
+ * Tree manager process: coordinates B&B tree across processes.
+ */
 #ifndef _BCP_TMSTORAGE_H
 #define _BCP_TMSTORAGE_H
 

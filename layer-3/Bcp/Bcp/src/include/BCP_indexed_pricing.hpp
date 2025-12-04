@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_indexed_pricing.hpp
+ * @brief BCP framework component
+ *
+ * Part of Branch-Cut-Price parallel optimization framework.
+ */
 #ifndef _BCP_INDEXED_PRICING_H
 #define _BCP_INDEXED_PRICING_H
 

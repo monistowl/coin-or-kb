@@ -1,5 +1,11 @@
 // Copyright (C) 2005, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file CSP_tm_param.hpp
+ * @brief CSP tree manager for BCP
+ *
+ * Tree manager for cutting stock search tree.
+ */
 #ifndef _CSP_TM_PARAM_H
 #define _CSP_TM_PARAM_H
 

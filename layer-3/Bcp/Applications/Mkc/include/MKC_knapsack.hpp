@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MKC_knapsack.hpp
+ * @brief MKC knapsack subproblem
+ *
+ * Knapsack subproblem solver for column generation.
+ */
 #ifndef _MKC_KNAPSACK_H
 #define _MKC_KNAPSACK_H
 

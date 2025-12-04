@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MKC_lp_param.hpp
+ * @brief MKC LP relaxation for BCP
+ *
+ * LP process for multi-dimensional knapsack branch-and-cut.
+ */
 #ifndef _MKC_LP_PARAM_H
 #define _MKC_LP_PARAM_H
 

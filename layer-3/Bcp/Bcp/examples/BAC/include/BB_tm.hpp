@@ -9,6 +9,12 @@
 //-----------------------------------------------------------------------------
 // Copyright (C) 2003, Francois Margot, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BB_tm.hpp
+ * @brief BCP tree manager
+ *
+ * Tree manager process: coordinates B&B tree across processes.
+ */
 
 #ifndef _BB_TM_H
 #define _BB_TM_H

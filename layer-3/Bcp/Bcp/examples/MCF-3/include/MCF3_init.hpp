@@ -1,3 +1,9 @@
+/**
+ * @file MCF3_init.hpp
+ * @brief MCF BCP initialization
+ *
+ * Initialization for multi-commodity flow application.
+ */
 #ifndef MCF3_init_hpp
 #define MCF3_init_hpp
 

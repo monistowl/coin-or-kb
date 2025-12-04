@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file MC_cut.hpp
+ * @brief Max-cut cutting planes
+ *
+ * Cut generation for max-cut: cycle inequalities, odd-wheel cuts.
+ */
 #ifndef _MC_CUT_H
 #define _MC_CUT_H
 

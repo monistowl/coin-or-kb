@@ -1,3 +1,9 @@
+/**
+ * @file MCF1_var.hpp
+ * @brief MCF variable definitions
+ *
+ * Flow variables for multi-commodity network flow.
+ */
 #ifndef MCF1_var_hpp
 #define MCF1_var_hpp
 

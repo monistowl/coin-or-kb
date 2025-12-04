@@ -2,6 +2,12 @@
 // Sonya Marcarelli & Igor Vasil'ev (vil@icc.ru)
 // All Rights Reserved.
 
+/**
+ * @file BCP_message_mpi.hpp
+ * @brief BCP messaging
+ *
+ * Message passing interface for parallel BCP.
+ */
 #ifndef _BCP_MESSAGE_MPI_H
 #define _BCP_MESSAGE_MPI_H
 

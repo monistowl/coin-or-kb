@@ -8,6 +8,12 @@
 // Date:     5/18/07
 //-----------------------------------------------------------------------------
 // Copyright (C) 2007, Francois Margot, IBM and others. All Rights Reserved.
+/**
+ * @file BB_packer.hpp
+ * @brief BCP framework component
+ *
+ * Part of Branch-Cut-Price parallel optimization framework.
+ */
 
 #ifndef _BB_PACKER_H
 #define _BB_PACKER_H

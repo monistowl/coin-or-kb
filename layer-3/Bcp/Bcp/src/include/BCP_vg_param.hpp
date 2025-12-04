@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_vg_param.hpp
+ * @brief BCP parameters
+ *
+ * Parameter handling for BCP framework configuration.
+ */
 #ifndef _BCP_VG_PARAM_H
 #define _BCP_VG_PARAM_H
 

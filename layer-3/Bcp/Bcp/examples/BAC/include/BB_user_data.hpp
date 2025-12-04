@@ -8,6 +8,12 @@
 // Date:     12/28/03
 //-----------------------------------------------------------------------------
 // Copyright (C) 2003, Francois Margot. All Rights Reserved.
+/**
+ * @file BB_user_data.hpp
+ * @brief BCP user interface
+ *
+ * User-defined callbacks for customizing BCP behavior.
+ */
 
 #ifndef _BB_UD_H
 #define _BB_UD_H

@@ -1,3 +1,9 @@
+/**
+ * @file MCF2_tm.hpp
+ * @brief MCF tree manager for BCP
+ *
+ * Tree manager for multi-commodity flow search.
+ */
 #ifndef MCF2_tm_hpp
 #define MCF2_tm_hpp
 

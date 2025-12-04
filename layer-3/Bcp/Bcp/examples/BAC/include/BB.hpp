@@ -9,6 +9,12 @@
 //-----------------------------------------------------------------------------
 // Copyright (C) 2003, Francois Margot, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BB.hpp
+ * @brief BCP framework component
+ *
+ * Part of Branch-Cut-Price parallel optimization framework.
+ */
 
 #ifndef _BB_H
 #define _BB_H

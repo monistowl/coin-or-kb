@@ -1,5 +1,11 @@
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
+/**
+ * @file BCP_enum_tm.hpp
+ * @brief BCP tree manager
+ *
+ * Tree manager process: coordinates B&B tree across processes.
+ */
 #ifndef _BCP_ENUM_TM_H
 #define _BCP_ENUM_TM_H
 
