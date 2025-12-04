@@ -18,12 +18,12 @@ Slack Elimination (eliminateSlack):
 
 <div class="math">
 
-Substitute $s_{i}$ = $b_{i}$ - $a_{i}$'x using original constraint
+Substitute s_i = b_i - a_i'x using original constraint
   Produces cut in terms of structural variables only.
 
 </div>
 
-**Complexity:** $O(nnz * log(maxdenom)$) for rational approximation
+**Complexity:** O(nnz * log(maxdenom)) for rational approximation
 
 <div class="refs">
 

@@ -17,13 +17,13 @@ Convergence Properties:
 
 <div class="math">
 
-|R| = $O(diam(D)$^{q+1}) as domain shrinks
+|R| = O(diam(D)^{q+1}) as domain shrinks
   Higher order q → faster convergence but more coefficients
   Used in global optimization branch-and-bound for bound tightening.
 
 </div>
 
-**Complexity:** Bernstein conversion: $O($n^{q}$ * $2^{n}$)$ but provides hull property
+**Complexity:** Bernstein conversion: O(n^q * 2^n) but provides hull property
 
 <div class="refs">
 

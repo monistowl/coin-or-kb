@@ -29,14 +29,14 @@ Devex: weight_k := max(weight_k, (d_k/d_p)² * weight_p) for columns in ref set.
 
 <div class="math">
 
-Column weight: $γ_{j}$ = ||B^{-1}$a_{j}$||² = $$d_{j}$^{T}$ $d_{j}$ where $d_{j}$ is FTRAN of $a_{j}$.
-Normalized ratio: |c̄_j|/√$γ_{j}$ gives steepest descent direction in primal space.
-Devex approximation: track reference set R, update $γ_{j}$ ≈ max over iterations.
+Column weight: γ_j = ||B^{-1}a_j||² = d_j^T d_j where d_j is FTRAN of a_j.
+Normalized ratio: |c̄_j|/√γ_j gives steepest descent direction in primal space.
+Devex approximation: track reference set R, update γ_j ≈ max over iterations.
 
 </div>
 
-**Complexity:** Steepest: $O(m²)$ per iteration (FTRAN for each candidate column).
-Devex: $O(m)$ per pivot with reference framework. Typically 30-50% fewer
+**Complexity:** Steepest: O(m²) per iteration (FTRAN for each candidate column).
+Devex: O(m) per pivot with reference framework. Typically 30-50% fewer
 iterations than Dantzig at modest extra cost per iteration.
 
 <div class="refs">

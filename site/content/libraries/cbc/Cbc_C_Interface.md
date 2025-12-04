@@ -20,7 +20,7 @@ LP Method Selection (LPMethod enum):
   - LPM_BarrierNoCross: IPM without crossover (for large LPs)
 
 **Complexity:** MIP: Exponential worst-case, highly structure-dependent
-  Each LP solve: $O(m·n·iterations)$ for simplex
+  Each LP solve: O(m·n·iterations) for simplex
 
 <div class="refs">
 

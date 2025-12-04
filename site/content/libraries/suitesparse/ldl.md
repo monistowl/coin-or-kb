@@ -46,8 +46,8 @@ A = L * D * L' where L is unit lower triangular, D is diagonal.
 
 </div>
 
-**Complexity:** Time: $O(nnz(L)$²/n) average, $O(nnz(L)$·nnz(A)) worst case
-  Space: $O(nnz(L)$ + n) for factors
+**Complexity:** Time: O(nnz(L)²/n) average, O(nnz(L)·nnz(A)) worst case
+  Space: O(nnz(L) + n) for factors
   Simple implementation - for production use CHOLMOD instead.
 
 <div class="refs">

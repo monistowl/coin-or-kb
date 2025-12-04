@@ -41,25 +41,37 @@ def escape_markdown(text: str) -> str:
     text = text.replace('|', '\\|')
     return text
 
-def format_math_for_katex(text: str) -> str:
-    """Format math expressions for KaTeX rendering."""
+def format_math_block(text: str) -> str:
+    """Format a math block for display.
+
+    Math blocks contain mixed prose and formulas. We preserve them as-is
+    since they're meant to be read as formatted text, not rendered as LaTeX.
+    The HTML wrapper provides visual styling.
+    """
     if not text:
         return ""
+    # Return as-is - the math div provides styling, content is readable ASCII
+    return text
 
-    # Already has LaTeX delimiters
-    if '$$' in text or '$' in text:
-        return text
+def format_complexity(text: str) -> str:
+    """Format complexity notation - leave as readable ASCII.
 
-    # Wrap common math patterns
-    patterns = [
-        (r'O\(([^)]+)\)', r'$O(\1)$'),  # Big-O notation
-        (r'(\w+)\^(\w+)', r'$\1^{\2}$'),  # Superscripts
-        (r'(\w+)_(\w+)', r'$\1_{\2}$'),  # Subscripts
-    ]
+    Complexity strings like 'O(m^2 n)' are readable without LaTeX rendering.
+    Avoid partial conversion that creates broken delimiters.
+    """
+    if not text:
+        return ""
+    # Return as-is - ASCII Big-O notation is universally understood
+    return text
 
-    for pattern, replacement in patterns:
-        text = re.sub(pattern, replacement, text)
+def format_math_for_katex(text: str) -> str:
+    """Pass through text without modification.
 
+    Previously tried to auto-convert ASCII math to LaTeX which created
+    broken nested delimiters. Now we preserve source text as-is.
+    """
+    if not text:
+        return ""
     return text
 
 def generate_library_index(library_name: str, library_data: dict, layer: int) -> str:

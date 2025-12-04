@@ -45,12 +45,12 @@ Sparsity Pattern Extraction (getConstraintsJacobianSparsityPattern):
 
 <div class="math">
 
-Jacobian ∂$g_{i}$/∂$x_{j}$: sparse pattern for AD evaluation
+Jacobian ∂g_i/∂x_j: sparse pattern for AD evaluation
   Used by NLP solvers (Ipopt) and for hyperplane construction.
 
 </div>
 
-**Complexity:** $O(nnz)$ where nnz = number of variable appearances in constraints
+**Complexity:** O(nnz) where nnz = number of variable appearances in constraints
 
 <div class="refs">
 

@@ -37,9 +37,9 @@ Approximate external degree:
 
 </div>
 
-**Complexity:** Time: $O(nnz(A)$·α(n)) average case with aggressive absorption,
-  where α is the inverse Ackermann function. Worst case $O(n·nnz)$.
-  Space: $O(nnz(A)$ + n) for the quotient graph representation.
+**Complexity:** Time: O(nnz(A)·α(n)) average case with aggressive absorption,
+  where α is the inverse Ackermann function. Worst case O(n·nnz).
+  Space: O(nnz(A) + n) for the quotient graph representation.
 
 <div class="refs">
 

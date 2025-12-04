@@ -55,9 +55,9 @@ Objective Propagation:
   For each variable, derive bound from c'x < z* constraint.
   Particularly effective when objective has large coefficients.
 
-**Complexity:** propagate(): $O(nnz × $propagation_{rounds}$)$ amortized
-  conflictAnalysis(): $O($conflict_clause_{length}$ × $reason_chain_{depth}$)$
-  backtrack(): $O($number_of_bound_changes_to_{undo}$)$
+**Complexity:** propagate(): O(nnz × propagation_rounds) amortized
+  conflictAnalysis(): O(conflict_clause_length × reason_chain_depth)
+  backtrack(): O(number_of_bound_changes_to_undo)
 
 <div class="refs">
 

@@ -40,10 +40,10 @@ Sparse formats:
 
 </div>
 
-**Complexity:** Space: $O(nnz + n)$ for CSC format
-  $cs_{compress}$: $O(nnz)$ time for triplet → CSC
-  $cs_{multiply}$: $O(flops)$ where flops depends on sparsity pattern
-  $cs_{chol}$/$cs_{lu}$: $O(nnz(L)$²/n) typical for sparse factors
+**Complexity:** Space: O(nnz + n) for CSC format
+  cs_compress: O(nnz) time for triplet → CSC
+  cs_multiply: O(flops) where flops depends on sparsity pattern
+  cs_chol/cs_lu: O(nnz(L)²/n) typical for sparse factors
 
 <div class="refs">
 

@@ -20,9 +20,9 @@ Simplex Method for Linear Programming:
   - Dual simplex: maintains dual feasibility, achieves primal feasibility
   Terminates when both primal and dual feasibility achieved (optimality).
 
-**Complexity:** $O($2^{n}$)$ worst-case (Klee-Minty), but typically polynomial in practice.
-  Per-iteration cost: $O(m²)$ for basis update + $O(mn)$ for pricing.
-  Iteration count: typically $O(m)$ to $O(3m)$ for practical problems.
+**Complexity:** O(2^n) worst-case (Klee-Minty), but typically polynomial in practice.
+  Per-iteration cost: O(m²) for basis update + O(mn) for pricing.
+  Iteration count: typically O(m) to O(3m) for practical problems.
 
 <div class="refs">
 

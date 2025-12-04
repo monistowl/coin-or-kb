@@ -49,17 +49,17 @@ Sparsification (sparsify):
 
 <div class="math">
 
-Compute implied lower bound on $x_{k}$:
-    $x_{k}$ >= (L - sum_{j≠k}($a_{j}$ * $u_{j}$ if $a_{j}$>0 else $a_{j}$ * $l_{j}$)) / $a_{k}$
-  If tighter than current $l_{k}$, update and propagate.
+Compute implied lower bound on x_k:
+    x_k >= (L - sum_{j≠k}(a_j * u_j if a_j>0 else a_j * l_j)) / a_k
+  If tighter than current l_k, update and propagate.
   Dual analog: implied dual bounds from reduced cost constraints.
 
 </div>
 
-**Complexity:** Matrix access: $O(1)$ amortized via splay trees (row) and linked lists (col)
-  Singleton elimination: $O(nnz)$ per pass
-  Probing: $O(#binaries * $propagation_{depth}$)$
-  Full presolve: typically $O(nnz * #passes)$, bounded by reductionLimit
+**Complexity:** Matrix access: O(1) amortized via splay trees (row) and linked lists (col)
+  Singleton elimination: O(nnz) per pass
+  Probing: O(#binaries * propagation_depth)
+  Full presolve: typically O(nnz * #passes), bounded by reductionLimit
 
 <div class="refs">
 

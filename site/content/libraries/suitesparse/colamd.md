@@ -34,8 +34,8 @@ Approximate column degree for LU:
 
 </div>
 
-**Complexity:** Time: $O(nnz(A)$·α(n)) average with aggressive absorption
-  Space: $O(nnz(A)$ + n) for quotient graph representation
+**Complexity:** Time: O(nnz(A)·α(n)) average with aggressive absorption
+  Space: O(nnz(A) + n) for quotient graph representation
   Slightly slower than AMD but better for unsymmetric patterns.
 
 <div class="refs">

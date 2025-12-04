@@ -49,17 +49,17 @@ PAMI - Parallel Minor Iterations (iterateMulti):
 
 <div class="math">
 
-Edge weight $γ_{i}$ = ||B^{-1} $e_{i}$||² = ||$τ_{i}$||²
+Edge weight γ_i = ||B^{-1} e_i||² = ||τ_i||²
   After basis change with pivot row r and column s:
-  - Compute $τ_{s}$ = B^{-1} $e_{s}$ (FTRAN of unit vector)
-  - Update weights: $γ_{i}$' = $γ_{i}$ - 2($τ_{r}$ · $a_{q}$)$α_{i}$/$α_{r}$ + $γ_{r}$($α_{i}$/$α_{r}$)²
+  - Compute τ_s = B^{-1} e_s (FTRAN of unit vector)
+  - Update weights: γ_i' = γ_i - 2(τ_r · a_q)α_i/α_r + γ_r(α_i/α_r)²
   Cost: one extra FTRAN per iteration, but ~40% fewer iterations.
 
 </div>
 
-**Complexity:** Serial iteration: $O(nnz)$ for BTRAN/FTRAN, $O(m)$ for ratio test
-  PAMI: $O(k × nnz/p + k² × m)$ for k pivots on p processors
-  Total iterations: typically $O(m)$ to $O(2m)$ for dual simplex
+**Complexity:** Serial iteration: O(nnz) for BTRAN/FTRAN, O(m) for ratio test
+  PAMI: O(k × nnz/p + k² × m) for k pivots on p processors
+  Total iterations: typically O(m) to O(2m) for dual simplex
 
 <div class="refs">
 

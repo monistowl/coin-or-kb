@@ -43,8 +43,8 @@ Warm-Starting Protocol:
   Warm start typically requires O(k) iterations where k << m+n.
 
 **Complexity:** Same as underlying ClpSimplex methods:
-  Per-iteration: $O(m²)$ average, $O(m³)$ worst-case for factorization
-  Total: $O(m·n·iterations)$ for complete solve
+  Per-iteration: O(m²) average, O(m³) worst-case for factorization
+  Total: O(m·n·iterations) for complete solve
 
 </div>
 

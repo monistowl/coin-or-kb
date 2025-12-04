@@ -29,7 +29,7 @@ a pre-recorded tape (via trace_on/trace_off).
 
 Reverse mode automatic differentiation
 
-**Complexity:** $O(c·n)$ where c = cost of function evaluation (typically c ≈ 4-5)
+**Complexity:** O(c·n) where c = cost of function evaluation (typically c ≈ 4-5)
 
 </div>
 

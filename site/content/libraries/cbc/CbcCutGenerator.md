@@ -42,8 +42,8 @@ Root Node vs. Tree Strategy:
   - Deep tree: Often disable most generators (computational cost)
   Trade-off: Stronger root LP → fewer nodes vs. more time per node.
 
-**Complexity:** generateCuts: $O($generator_{cost}$ × frequency)$
-  Generator costs vary: Clique $O(n)$, Gomory $O(n²)$, Probing $O(n × $LP_{solve}$)$
+**Complexity:** generateCuts: O(generator_cost × frequency)
+  Generator costs vary: Clique O(n), Gomory O(n²), Probing O(n × LP_solve)
   Overall B&C impact: cuts reduce nodes but add per-node overhead
 
 <div class="refs">

@@ -42,19 +42,19 @@ Left-looking LU with BTF preprocessing and partial pivoting:
 <div class="math">
 
 Block Triangular Form: P·A·Q has structure
-  | $B_{11}$  $B_{12}$  ...  $B_{1m}$ |
-  |   0   $B_{22}$  ...  $B_{2m}$ |
+  | B_11  B_12  ...  B_1m |
+  |   0   B_22  ...  B_2m |
   |   ⋮     ⋱    ⋱    ⋮  |
-  |   0    0   ...  $B_{mm}$ |
-  Each $B_{ii}$ is factored as $P_{i}$·$B_{ii}$ = $L_{i}$·$U_{i}$ independently.
+  |   0    0   ...  B_mm |
+  Each B_ii is factored as P_i·B_ii = L_i·U_i independently.
   Off-diagonal blocks solved via triangular solves.
 
 </div>
 
-**Complexity:** Time: $O(Σ nnz($L_{i}$)$·nnz($U_{i}$)/$n_{i}$ + off-diagonal work)
-  For circuit matrices: typically $O(n)$ to $O(n log n)$ due to BTF structure
+**Complexity:** Time: O(Σ nnz(L_i)·nnz(U_i)/n_i + off-diagonal work)
+  For circuit matrices: typically O(n) to O(n log n) due to BTF structure
   Much faster than UMFPACK for matrices with many small diagonal blocks.
-  Space: $O(nnz(L+U)$) for factors, $O(maxblock)$ workspace per block.
+  Space: O(nnz(L+U)) for factors, O(maxblock) workspace per block.
 
 <div class="refs">
 

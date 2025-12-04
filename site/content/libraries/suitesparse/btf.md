@@ -34,14 +34,14 @@ Tarjan's Strongly Connected Components:
 
 Structural rank: max # nonzeros achievable on diagonal = sprank(A)
   If sprank(A) < n, matrix is structurally singular.
-  BTF form: P*A*Q = | $B_{11}$  $B_{12}$ ... | with square diagonal blocks $B_{ii}$
-                    |  0   $B_{22}$ ... |
+  BTF form: P*A*Q = | B_11  B_12 ... | with square diagonal blocks B_ii
+                    |  0   B_22 ... |
 
 </div>
 
-**Complexity:** Maximum transversal: $O(nnz + n)$ time and $O(n)$ space
-  SCC decomposition: $O(nnz + n)$ time (single DFS pass)
-  Total BTF ordering: $O(nnz + n)$ time and space
+**Complexity:** Maximum transversal: O(nnz + n) time and O(n) space
+  SCC decomposition: O(nnz + n) time (single DFS pass)
+  Total BTF ordering: O(nnz + n) time and space
 
 <div class="refs">
 

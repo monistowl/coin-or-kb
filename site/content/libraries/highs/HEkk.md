@@ -46,8 +46,8 @@ Hyper-sparse Computation:
   Exploits sparsity in FTRAN/BTRAN when < 10% of elements nonzero.
   Uses specialized scatter/gather for cache efficiency.
 
-**Complexity:** Per-iteration: $O(nnz(B^{-1}·v)$) for FTRAN/BTRAN
-  Hyper-sparse: $O(nnz(result)$) when exploiting sparsity
+**Complexity:** Per-iteration: O(nnz(B^{-1}·v)) for FTRAN/BTRAN
+  Hyper-sparse: O(nnz(result)) when exploiting sparsity
   Parallelization: independent FTRAN/BTRAN across columns
 
 <div class="refs">

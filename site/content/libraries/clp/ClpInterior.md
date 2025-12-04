@@ -30,16 +30,16 @@ Each iteration O(m²n + m³) for forming/factoring normal equations.
 
 <div class="math">
 
-Barrier problem: min $c^{Tx}$ - μ∑log($x_{j}$-$l_{j}$) - μ∑log($u_{j}$-$x_{j}$)
-KKT conditions: Ax=b, $A^{Ty}$+s=c, XSe=μe (complementarity)
-Normal equations: ($ADA^{T}$)Δy = A(D*$r_{c}$ - X^{-1}$r_{xs}$) + $r_{b}$
-where D = X/S diagonal, $r_{b}$, $r_{c}$, $r_{xs}$ are residuals.
+Barrier problem: min c^Tx - μ∑log(x_j-l_j) - μ∑log(u_j-x_j)
+KKT conditions: Ax=b, A^Ty+s=c, XSe=μe (complementarity)
+Normal equations: (ADA^T)Δy = A(D*r_c - X^{-1}r_xs) + r_b
+where D = X/S diagonal, r_b, r_c, r_xs are residuals.
 
 </div>
 
-**Complexity:** $O(√n log(1/ε)$) iterations for ε-optimality.
-Per iteration: $O(nnz(A)$m) to form $ADA^{T}$, $O(m³)$ for dense Cholesky,
-or $O(nnz(L)$²) for sparse Cholesky. Total typically $O(n^{1.5})$ to $O(n³)$.
+**Complexity:** O(√n log(1/ε)) iterations for ε-optimality.
+Per iteration: O(nnz(A)m) to form ADA^T, O(m³) for dense Cholesky,
+or O(nnz(L)²) for sparse Cholesky. Total typically O(n^{1.5}) to O(n³).
 
 <div class="refs">
 

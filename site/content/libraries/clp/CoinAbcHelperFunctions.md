@@ -33,7 +33,7 @@ Function Pointer Dispatch (scatterStruct):
   Precomputed table of specialized ScatterUpdate{1..8,4N} functions
   avoids branch misprediction in small-column cases.
 
-**Complexity:** $O(nnz)$ per scatter/gather operation
+**Complexity:** O(nnz) per scatter/gather operation
   With SIMD: ~4x speedup on vectorizable sections
   With Cilk: ~Kx speedup on K cores for large columns
 

@@ -51,13 +51,13 @@ Factorization: P·R·A·Q = L·U where:
   - P, Q are permutation matrices (row/column reordering)
   - R is diagonal scaling matrix (row equilibration)
   - L is unit lower triangular, U is upper triangular
-  Threshold pivoting: select pivot if |$a_{kk}$| ≥ τ·$max_{i}$|$a_{ik}$| (τ ≈ 0.1)
+  Threshold pivoting: select pivot if |a_kk| ≥ τ·max_i|a_ik| (τ ≈ 0.1)
 
 </div>
 
-**Complexity:** Time: $O(nnz(L+U)$·f̄) where f̄ is average front size
-  Typically $O($n^{1}$.5)$ to $O($n^{2}$)$ for 2D problems, $O($n^{2}$)$ for 3D
-  Space: $O(nnz(L+U)$ + $front_{stack}$) where $front_{stack}$ depends on ordering
+**Complexity:** Time: O(nnz(L+U)·f̄) where f̄ is average front size
+  Typically O(n^1.5) to O(n^2) for 2D problems, O(n^2) for 3D
+  Space: O(nnz(L+U) + front_stack) where front_stack depends on ordering
 
 <div class="refs">
 

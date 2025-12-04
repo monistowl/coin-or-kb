@@ -25,15 +25,15 @@ ABC (Alternative Basis Code) LU Factorization:
 
 B = L·U with row/column permutations P, Q:
   P·B·Q = L·U, where L unit lower triangular, U upper triangular
-  Markowitz criterion: select pivot minimizing ($r_{i}$ - 1)($c_{j}$ - 1)
+  Markowitz criterion: select pivot minimizing (r_i - 1)(c_j - 1)
 
 Note: 32 bits assumed sufficient for row/column counts,
 but CoinBigIndex can be 64-bit for element indices.
 
 </div>
 
-**Complexity:** Factorization: $O(nnz × fill-in)$, highly structure-dependent
-  FTRAN/BTRAN: $O(nnz(L)$ + nnz(U)) with SIMD acceleration
+**Complexity:** Factorization: O(nnz × fill-in), highly structure-dependent
+  FTRAN/BTRAN: O(nnz(L) + nnz(U)) with SIMD acceleration
   SIMD speedup: 2-4x for dense column operations
 
 </div>

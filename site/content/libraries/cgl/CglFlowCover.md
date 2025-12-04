@@ -22,12 +22,12 @@ Row Classification (determineOneRowType):
 <div class="math">
 
 VUB enables stronger cuts than simple bounds:
-        $x_{j}$ ≤ $u_{j}$ vs $x_{j}$ ≤ $u_{j}$ $d_{j}$ gives tighter when $d_{j}$ = 0
+        x_j ≤ u_j vs x_j ≤ u_j d_j gives tighter when d_j = 0
   Stored in vubs_[] array indexed by continuous variable.
 
 </div>
 
-**Complexity:** $O(nnz)$ per row for classification
+**Complexity:** O(nnz) per row for classification
 
 <div class="refs">
 

@@ -54,7 +54,7 @@ Greedily add highest-degree nodes until no more fit
 
 </div>
 
-**Complexity:** $O(n² * d)$ for greedy approach
+**Complexity:** O(n² * d) for greedy approach
 
 <div class="refs">
 
