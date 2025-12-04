@@ -11,6 +11,24 @@
  * OrigIterationOutput displays the per-iteration summary line
  * for the original (non-restoration) NLP problem.
  *
+ * @algorithm Iteration Summary Output:
+ *   WriteOutput() at each iteration:
+ *   1. Check print frequency: skip if not due (by iter or time).
+ *   2. Format iteration data into fixed-width columns.
+ *   3. Append info string suffix if enabled (e.g., 'r' for resto).
+ *   4. Write to Journalist at J_ITERSUMMARY level.
+ *   First iteration writes header line with column names.
+ *
+ * @math Iteration metrics displayed:
+ *   inf_pr = ||c(x)||∞ or ||r||₁/n (primal feasibility measure).
+ *   inf_du = ||∇L||∞ scaled (dual feasibility / optimality).
+ *   lg(mu) = log₁₀(μ) (barrier parameter in log scale).
+ *   lg(rg) = log₁₀(δx) (regularization for inertia control).
+ *   alpha_pr, alpha_du = primal/dual step lengths ∈ (0,1].
+ *
+ * @complexity O(1) per iteration (just formatting and printing).
+ *   Controlled by print_frequency_iter and print_frequency_time options.
+ *
  * Output format (one line per iteration):
  *   iter  objective  inf_pr  inf_du  lg(mu)  ||d||  lg(rg)  alpha_du  alpha_pr  ls
  *
