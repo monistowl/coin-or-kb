@@ -20,6 +20,48 @@
  * Mixed Integer Linear Programs (MILPs). Supports both shared-memory
  * and distributed-memory (MPI) parallelism.
  *
+ * @algorithm Branch-Cut-Price Framework:
+ * SYMPHONY implements a parallel branch-cut-price algorithm combining
+ * three techniques for solving MILPs.
+ *
+ * BRANCH-AND-BOUND:
+ * - Divide problem by branching on integer variables
+ * - Maintain tree of subproblems with LP relaxation bounds
+ * - Prune nodes where LB ≥ best known UB (incumbent)
+ *
+ * CUTTING PLANES:
+ * - Strengthen LP relaxation at nodes via valid inequalities
+ * - Supports Gomory cuts, CGL cuts, and user-defined cuts
+ * - Cut pools allow reuse of cuts across subtrees
+ *
+ * COLUMN GENERATION (PRICE):
+ * - Dynamically add variables with negative reduced cost
+ * - Enables huge implicit formulations (e.g., set covering)
+ * - User callback interface for pricing subproblems
+ *
+ * PARALLELISM:
+ * - Master-worker architecture for distributed B&B
+ * - Multiple tree managers can run concurrently
+ * - Load balancing via dynamic work stealing
+ *
+ * @math Convergence guarantee:
+ * At termination: lb ≤ z* ≤ ub, where:
+ * - lb = best lower bound (max LP bound over open nodes)
+ * - ub = objective of best feasible solution (incumbent)
+ * - Gap = (ub - lb) / |ub| → 0 proves optimality
+ *
+ * Node selection affects performance:
+ * - BEST_FIRST: Minimizes total nodes but uses more memory
+ * - DEPTH_FIRST: Low memory, finds feasible solutions fast
+ * - LOWEST_LP_FIRST: Good lower bound improvement
+ *
+ * @complexity
+ * - Worst case: O(2^n) nodes for n binary variables
+ * - Practice: Strong cuts and branching reduce tree dramatically
+ * - LP solve: O(m²n) per node with basis warm-start
+ *
+ * @ref Ralphs & Ladányi (2001). "SYMPHONY: A Framework for Branch and Cut".
+ *
  * **Core API workflow:**
  * ```c
  * sym_environment *env = sym_open_environment();

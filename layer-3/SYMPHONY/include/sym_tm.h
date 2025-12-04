@@ -19,6 +19,48 @@
  * The Tree Manager (TM) maintains the branch-and-cut search tree,
  * dispatches nodes to LP workers, and coordinates cut generation.
  *
+ * @algorithm Tree Management for Branch-and-Cut:
+ * Maintains B&B tree data structure and orchestrates parallel node processing.
+ *
+ * TREE DATA STRUCTURE:
+ * - Binary tree of bc_node structures linked by parent/child pointers
+ * - Each node stores: bounds, branching decision, LP basis, active cuts
+ * - Candidate lists maintain nodes awaiting processing
+ *
+ * NODE SELECTION STRATEGIES:
+ * - LOWEST_LP_FIRST (best-bound): Minimizes total nodes explored
+ *   Best for proving optimality; high memory usage
+ * - DEPTH_FIRST_SEARCH: Minimal memory, finds feasible solutions fast
+ *   May explore many suboptimal nodes
+ * - BEST_FIRST_SEARCH: Uses LP estimate + pseudo-cost prediction
+ * - DEPTH_FIRST_THEN_BEST_FIRST: Hybrid approach
+ *
+ * DIVING STRATEGY (shall_we_dive):
+ * After processing a node, decide:
+ * - Continue diving: Process a child immediately (depth-first locally)
+ * - Backtrack: Select best node from candidate list
+ * Diving maintains LP basis warmth but may miss better nodes.
+ *
+ * PRUNING (install_new_ub):
+ * When new incumbent found:
+ * 1. Update global upper bound
+ * 2. Scan candidate lists, prune nodes with lb ≥ ub
+ * 3. Mark active nodes for potential pruning
+ *
+ * TWO-PHASE ALGORITHM:
+ * Phase 1: Explore with minimal cutting (fast but weak bounds)
+ * Phase 2: Add aggressive cuts to promising nodes
+ * Balances exploration speed with bound quality.
+ *
+ * @math Node ordering:
+ * Best-bound: Select n* = argmin{lb(n) : n ∈ candidates}
+ * Depth-first: Select n* = argmax{depth(n) : n ∈ candidates}
+ *
+ * @complexity
+ * - Insert node: O(log |candidates|) with heap
+ * - Select best: O(log |candidates|)
+ * - Pruning: O(|candidates|) per new incumbent
+ *
  * **tm_prob structure:**
  * - rootnode: Root of the B&C tree
  * - active_nodes: Nodes currently being processed

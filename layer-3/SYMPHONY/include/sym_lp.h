@@ -19,6 +19,63 @@
  * The LP process solves LP relaxations at each B&C node, manages
  * cuts, and performs branching decisions.
  *
+ * @algorithm LP Process in Branch-and-Cut:
+ * Core solver process that handles LP relaxations and cut management
+ * at each node of the branch-and-bound tree.
+ *
+ * CUT LOOP (process_chain):
+ * The heart of branch-and-cut is the cutting plane loop:
+ *   while (not_converged):
+ *     1. Solve LP relaxation (warm start from parent)
+ *     2. If LP infeasible → prune node (infeasibility)
+ *     3. If LP ≥ incumbent → prune node (bound)
+ *     4. If solution integer → update incumbent, prune
+ *     5. Generate cuts from CGL and user callbacks
+ *     6. Filter cuts by violation and orthogonality
+ *     7. Add best cuts to LP, re-solve
+ *     8. Check tail-off: if bound improvement < threshold, branch
+ *
+ * CUT MANAGEMENT:
+ * - waiting_rows: Cuts generated but not yet added
+ * - slack_cuts: Cuts removed due to zero slack (may re-add later)
+ * - Cut filtering: Avoid adding near-parallel cuts
+ * - Cut aging: Remove cuts inactive for several iterations
+ *
+ * STRONG BRANCHING:
+ * Evaluate candidate variables by temporarily fixing and re-solving:
+ *   For each candidate variable xⱼ with fractional value f:
+ *     1. Create two subproblems: xⱼ ≤ ⌊f⌋ and xⱼ ≥ ⌈f⌉
+ *     2. Solve LP relaxations (limited iterations)
+ *     3. Record objective degradation: Δ⁻ = obj(down) - obj, Δ⁺ = obj(up) - obj
+ *     4. Update pseudo-costs from observed degradation
+ *   Select variable maximizing: score = (1-μ)·min(Δ⁻,Δ⁺) + μ·max(Δ⁻,Δ⁺)
+ *   Typically μ = 1/6 (emphasizes weaker branch)
+ *
+ * PSEUDO-COST BRANCHING:
+ * After enough observations, use historical data instead of solving:
+ *   Estimated Δ⁻ = pcost_down[j] · (f - ⌊f⌋)
+ *   Estimated Δ⁺ = pcost_up[j] · (⌈f⌉ - f)
+ * Reliability: require k observations before trusting pseudo-cost
+ *
+ * @math Cut effectiveness:
+ * For cut a'x ≤ b with current solution x*:
+ *   Violation: v = a'x* - b (positive if violated)
+ *   Efficacy: v / ‖a‖₂ (normalized violation)
+ *   Orthogonality: cuts should be linearly independent
+ *
+ * Strong branching score:
+ *   score(j) = (1-μ)·min(Δ⁻ⱼ, Δ⁺ⱼ) + μ·max(Δ⁻ⱼ, Δ⁺ⱼ)
+ *
+ * @complexity
+ * - Cut loop iteration: O(nnz · simplex_iters)
+ * - Strong branching: O(k · simplex_iters) for k candidates
+ * - Cut generation: O(m·n) for some generators, varies by type
+ *
+ * @ref Achterberg (2007). "Constraint Integer Programming". PhD thesis.
+ *   Chapters 5-6 on branching and cutting.
+ * @ref Balas & Ceria & Cornuéjols (1996). "Mixed 0-1 Programming by
+ *   Lift-and-Project in a Branch-and-Cut Framework".
+ *
  * **lp_prob structure:**
  * - lp_data: Underlying LP solver interface (LPdata)
  * - desc: Current node description

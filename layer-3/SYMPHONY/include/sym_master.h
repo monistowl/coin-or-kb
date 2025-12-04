@@ -19,6 +19,45 @@
  * The master process coordinates the overall solve, managing problem
  * data, solution bounds, and communication with worker processes.
  *
+ * @algorithm Master Process Coordination:
+ * Central coordinator for distributed branch-and-cut execution.
+ *
+ * RESPONSIBILITIES:
+ * 1. Problem management: Load, presolve, distribute problem data
+ * 2. Bound tracking: Maintain global upper bound (incumbent)
+ * 3. Termination detection: Monitor gap, time limits, node limits
+ * 4. Solution collection: Gather feasible solutions from workers
+ *
+ * INITIALIZATION FLOW:
+ * 1. sym_open_environment(): Allocate sym_environment
+ * 2. sym_read_mps/lp/gmpl(): Parse problem file
+ * 3. Presolve (if enabled): Reduce problem size
+ * 4. initialize_root_node_u(): Set up root B&B node
+ * 5. start_heurs_u(): Run primal heuristics for initial UB
+ *
+ * SOLVE ORCHESTRATION:
+ * Master spawns tree manager(s) that:
+ * - Maintain B&B tree with candidate lists
+ * - Dispatch nodes to LP workers
+ * - Collect bounds and solutions
+ * - Coordinate cut pool access
+ *
+ * WARM START:
+ * For re-solving with modified problem:
+ * - Save B&B tree structure with node descriptions
+ * - Store cut pool and incumbent
+ * - On restart: Prune invalid nodes, update bounds
+ *
+ * @math Sensitivity analysis:
+ * get_lb_for_new_rhs(): Given RHS changes, compute valid lower bound
+ * by re-evaluating nodes with modified constraints without re-solving LP.
+ * Uses dual information from solved nodes.
+ *
+ * @complexity
+ * - Initialization: O(nnz) for problem setup
+ * - Bound tracking: O(1) per update
+ * - Warm start: O(tree_size) for tree traversal
+ *
  * **sym_environment structure:**
  * - mip: Current MIP description (possibly presolved)
  * - orig_mip: Original problem before presolve
