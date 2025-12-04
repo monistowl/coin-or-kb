@@ -6,24 +6,6 @@
  * @brief Interface to MUMPS parallel sparse direct solver
  *
  * MumpsSolverInterface wraps MUMPS (MUltifrontal Massively Parallel
- * sparse direct Solver) for Ipopt. Supports MPI parallelism, hybrid
- * MPI+OpenMP mode, and out-of-core factorization for large problems.
- * Default open-source solver when HSL unavailable.
- */
-//
-// Authors: Damien Hocking                 KBC    2006-03-20
-//        (included his original contribution into Ipopt package on 2006-03-25)
-//          Andreas Waechter               IBM    2006-03-25
-//           (minor changes and corrections)
-//          Scott Turnberg                 CMU    2006-05-12
-//           (major revision)
-//           (incorporated by AW on 2006-11-11 into Ipopt package)
-
-/**
- * @file IpMumpsSolverInterface.hpp
- * @brief Interface to MUMPS parallel sparse direct solver
- *
- * MumpsSolverInterface wraps MUMPS (MUltifrontal Massively Parallel
  * sparse direct Solver), a freely available solver supporting MPI
  * parallelism for distributed memory systems.
  *
@@ -71,6 +53,14 @@
  * @see IpMa57TSolverInterface.hpp for HSL alternative
  * @see IpMa97SolverInterface.hpp for parallel HSL solver
  */
+//
+// Authors: Damien Hocking                 KBC    2006-03-20
+//        (included his original contribution into Ipopt package on 2006-03-25)
+//          Andreas Waechter               IBM    2006-03-25
+//           (minor changes and corrections)
+//          Scott Turnberg                 CMU    2006-05-12
+//           (major revision)
+//           (incorporated by AW on 2006-11-11 into Ipopt package)
 
 #ifndef __IPMUMPSSOLVERINTERFACE_HPP__
 #define __IPMUMPSSOLVERINTERFACE_HPP__

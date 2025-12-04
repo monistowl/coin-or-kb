@@ -14,6 +14,27 @@
  * Ma77SolverInterface wraps the HSL MA77 solver, designed for
  * large-scale problems that may not fit entirely in memory.
  *
+ * @algorithm Out-of-Core Multifrontal LDL^T Factorization:
+ *   MA77 uses multifrontal method with disk-based factor storage:
+ *   - Elimination tree computed from sparsity pattern (MC68 ordering)
+ *   - Frontal matrices assembled and factored sequentially
+ *   - Factors written to 4 disk files to minimize memory footprint
+ *   - Solve phase streams factors back from disk as needed
+ *   Enables solving problems where L factor exceeds available RAM.
+ *
+ * @math Computes A = P·L·D·L^T·P^T where:
+ *   - P = permutation from MC68 (AMD/METIS fill-reducing order)
+ *   - L = unit lower triangular
+ *   - D = block diagonal (1×1 and 2×2 blocks for indefinite systems)
+ *   Inertia (positive/negative eigenvalue counts) from D block signs.
+ *
+ * @complexity O(n·f²) factorization where f = front size (fill-dependent).
+ *   I/O cost: O(nnz(L)) disk reads/writes. Suitable for n > 10^6 when
+ *   in-core solvers run out of memory.
+ *
+ * @ref Reid & Scott (2009). "An Out-of-Core Sparse Cholesky Solver".
+ *      RAL Technical Report RAL-TR-2009-004.
+ *
  * MA77 characteristics:
  * - Out-of-core capability: Uses files for factor storage
  * - Input format: CSR_Full_Format_1_Offset (both triangles)

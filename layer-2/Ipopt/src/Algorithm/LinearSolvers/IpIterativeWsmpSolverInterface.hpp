@@ -13,6 +13,26 @@
  * (called WISMP), which uses incomplete LU factorization as a
  * preconditioner for iterative refinement.
  *
+ * @algorithm Preconditioned Iterative Solver with Incomplete LDL^T:
+ *   WISMP uses incomplete factorization as preconditioner for iterative solve:
+ *   - ILU(k) or ILUT: incomplete factorization with level-k fill or threshold
+ *   - Drop tolerance controls fill-in vs preconditioner quality tradeoff
+ *   - Preconditioned conjugate gradient or GMRES iteration
+ *   - Memory-efficient for very large problems where exact factors don't fit
+ *
+ * @math Incomplete factorization A ≈ L̃·D̃·L̃^T where:
+ *   - L̃ = unit lower triangular, entries dropped if |l_ij| < droptol
+ *   - Fill-in limited by fillin_limit factor relative to original nnz
+ *   - Preconditioner M = L̃·D̃·L̃^T applied in each iteration
+ *   - No inertia information available (pivots may be altered by dropping)
+ *
+ * @complexity O(nnz(L̃)) per iteration, typically O(k·nnz(A)) total
+ *   where k = iteration count. Memory: O(fillin_limit × nnz(A)).
+ *   Suitable when direct factorization exceeds memory.
+ *
+ * @ref Gupta (2000). "WSMP: Watson Sparse Matrix Package".
+ *      IBM Research Technical Report RC 21886.
+ *
  * Key characteristics:
  * - ProvidesInertia: false (unlike direct WSMP)
  * - Input format: CSR_Format_1_Offset (upper triangular)

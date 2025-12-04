@@ -12,6 +12,26 @@
  * While sharing the same API as pardiso-project.org's version, Intel MKL
  * PARDISO has some differences in features and behavior.
  *
+ * @algorithm Intel MKL PARDISO LDL^T Factorization:
+ *   Multi-level nested dissection with supernodal blocking:
+ *   - Phase 11: Analysis - symbolic factorization, ordering
+ *   - Phase 22: Numerical factorization with threshold pivoting
+ *   - Phase 33: Forward/backward substitution
+ *   Automatic parallelism via Intel Threading Building Blocks (TBB).
+ *
+ * @math Computes A = P·L·D·L^T·P^T for MTYPE=-2 (symmetric indefinite):
+ *   - P = METIS nested dissection + constrained AMD refinement
+ *   - L = unit lower triangular with supernodal blocking
+ *   - D = block diagonal (1×1 and 2×2 Bunch-Kaufman pivots)
+ *   Weighted matching preprocessor improves pivot stability.
+ *
+ * @complexity O(n·f²/p) with p threads. Intel MKL provides highly
+ *   optimized BLAS3 kernels for dense supernode operations.
+ *   Typically 10-30% faster than HSL solvers on Intel CPUs.
+ *
+ * @ref Schenk & Gärtner (2004). "Solving Unsymmetric Sparse Systems
+ *      of Linear Equations with PARDISO". J. Future Gen. Comp. Sys.
+ *
  * Key differences from pardiso-project.org version:
  * - Linked directly with Intel MKL (no dynamic loading)
  * - No DPARM array (only IPARM for parameters)

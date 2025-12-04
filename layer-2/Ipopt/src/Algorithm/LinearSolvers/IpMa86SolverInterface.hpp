@@ -15,6 +15,27 @@
  * Ma86SolverInterface wraps the HSL MA86 solver, a DAG-based
  * parallel direct solver for symmetric indefinite systems.
  *
+ * @algorithm DAG-Based Parallel Multifrontal LDL^T:
+ *   MA86 exploits task parallelism via directed acyclic graph (DAG):
+ *   - Elimination tree converted to task dependency graph
+ *   - Independent frontal matrices factored in parallel (OpenMP)
+ *   - Dynamic scheduling balances load across cores
+ *   - Supernodal blocking for BLAS3 efficiency
+ *   Scales well on shared-memory multi-core systems.
+ *
+ * @math Computes A = P·L·D·L^T·P^T where:
+ *   - P = permutation from MC68 (AMD/METIS/automatic selection)
+ *   - L = unit lower triangular, stored by supernodes
+ *   - D = block diagonal (1×1 and 2×2 pivots)
+ *   Threshold pivoting ensures stability for indefinite systems.
+ *
+ * @complexity O(n·f²/p) with p OpenMP threads. Parallel speedup limited
+ *   by critical path in elimination tree. Best for medium-large problems
+ *   (n ~ 10^4 to 10^6) on 4-32 cores.
+ *
+ * @ref Hogg, Reid & Scott (2010). "Design of a Multicore Sparse
+ *      Cholesky Factorization Using DAGs". SIAM J. Sci. Comput.
+ *
  * MA86 characteristics:
  * - Parallel: Uses OpenMP for multi-core parallelism
  * - DAG-based scheduling for load balancing

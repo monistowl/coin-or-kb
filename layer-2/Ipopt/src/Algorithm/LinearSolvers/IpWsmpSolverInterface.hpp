@@ -9,7 +9,29 @@
  * @brief Interface to IBM WSMP sparse symmetric direct solver
  *
  * WsmpSolverInterface wraps the Watson Sparse Matrix Package (WSMP),
- * a high-performance parallel direct solver developed at IBM.
+ * a high-performance parallel direct solver developed at IBM for
+ * sparse symmetric indefinite linear systems.
+ *
+ * @algorithm Parallel Sparse LDL^T with Multifrontal Method:
+ *   WSMP computes A = P·L·D·L^T·P^T using parallel multifrontal:
+ *   - Fill-reducing ordering: automatic selection of AMD/METIS/nested dissection
+ *   - Supernodal factorization with BLAS-3 dense operations
+ *   - Shared-memory parallelism via pthreads/OpenMP hybrid
+ *   - Optional positive-definite mode for faster factorization
+ *   Designed for shared-memory multi-processor systems.
+ *
+ * @math Symmetric indefinite factorization with threshold pivoting:
+ *   - Static pivoting determines stable 1×1 and 2×2 pivot blocks
+ *   - Pivtol threshold: accept pivot if |d_kk| ≥ pivtol × ||A_:,k||
+ *   - Scaling options: equilibration, Hungarian matching, Ruiz iteration
+ *   - Singularity detection via threshold on pivot magnitudes
+ *
+ * @complexity O(n·f²/p) with p threads for factorization.
+ *   Optimized for Intel architectures with cache-aware blocking.
+ *   WSMP often achieves 10-15% of peak FLOPS on dense supernodes.
+ *
+ * @ref Gupta (2002). "Recent Advances in Direct Methods for Solving
+ *      Unsymmetric Sparse Systems of Linear Equations". ACM TOMS 28(3).
  *
  * WSMP characteristics:
  * - Parallel: Multi-threaded with shared memory
