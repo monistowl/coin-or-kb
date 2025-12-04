@@ -12,6 +12,21 @@
  * implementation that computes the Newton step by solving the
  * primal-dual KKT system.
  *
+ * @algorithm Primal-Dual Newton Direction:
+ *   ComputeSearchDirection():
+ *   1. Assemble RHS from current residuals: r = (r_x, r_s, r_c, r_d, r_zL, ...).
+ *   2. Call PDSystemSolver::Solve(KKT, rhs) → delta.
+ *   3. Store result: IpData::delta() = (Δx, Δs, Δy_c, Δy_d, Δz_L, ...).
+ *   4. If mehrotra_algorithm_: Use predictor-corrector centering.
+ *   5. If fast_step_computation_: Skip residual verification.
+ *
+ * @math KKT system solved:
+ *   [W + Σ,  0, J_c^T, J_d^T] [Δx  ]   [r_x]
+ *   [  0,    Σ_s,  0,   -I  ] [Δs  ] = [r_s]
+ *   [ J_c,   0,    0,    0  ] [Δy_c]   [r_c]
+ *   [ J_d,  -I,    0,    0  ] [Δy_d]   [r_d]
+ *   Where Σ, Σ_s are barrier/bound terms.
+ *
  * ComputeSearchDirection():
  * 1. Assembles right-hand side from current residuals
  * 2. Calls PDSystemSolver::Solve() to get direction

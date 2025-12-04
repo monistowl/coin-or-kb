@@ -14,6 +14,20 @@
  * tests used by BacktrackingLineSearch. Implementations decide whether
  * a trial point should be accepted based on various criteria.
  *
+ * @algorithm Backtracking Step Acceptance Interface:
+ *   CheckAcceptabilityOfTrialPoint(α) tests if x + α·Δx is acceptable:
+ *   1. Evaluate merit function φ(x+α·Δx) or filter (θ,φ) pair.
+ *   2. Compare to reference value (Armijo) or filter (envelope check).
+ *   3. If rejected: caller backtracks α ← ρ·α and retries.
+ *   4. TrySecondOrderCorrection(): If rejected, improve c(x+α·Δx).
+ *   5. PrepareRestoPhaseStart(): Augment filter before restoration.
+ *
+ * @math Acceptance criteria options:
+ *   Filter: Accept if (θ,φ) not dominated by any filter entry.
+ *   Armijo: Accept if φ(x+α·Δx) ≤ φ(x) - η·α·(∇φ^T·Δx).
+ *   Penalty: Accept if merit l(x+α·Δx) ≤ l(x) - η·pred.
+ *   Watchdog: Non-monotone acceptance allowing temporary increases.
+ *
  * Key responsibilities:
  * - CheckAcceptabilityOfTrialPoint(): Main acceptance test
  * - CalculateAlphaMin(): Minimum step size before restoration phase

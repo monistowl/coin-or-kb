@@ -11,6 +11,19 @@
  * IteratesVector is a specialized CompoundVector with fixed 8 components
  * representing the complete primal-dual iterate of the interior point method:
  *
+ * @algorithm Primal-Dual Iterate Storage:
+ *   IteratesVector stores the complete IPM iterate:
+ *   - Primal: x (variables), s (inequality slacks).
+ *   - Constraint multipliers: y_c (equality), y_d (inequality).
+ *   - Bound multipliers: z_L, z_U (on x), v_L, v_U (on s).
+ *   Used for curr_, trial_, delta_ in IpoptData.
+ *   Inherits Vector ops: Norm(), Axpy(), Copy() operate on full iterate.
+ *
+ * @math KKT system variables:
+ *   Primal feasibility: c(x) = 0, d(x) - s = 0.
+ *   Dual feasibility: ∇f + J_c^T·y_c + J_d^T·y_d - z_L + z_U = 0.
+ *   Complementarity: z_L·(x-x_L) = μe, z_U·(x_U-x) = μe, etc.
+ *
  * Components (indices 0-7):
  * - x (0): Primal variables
  * - s (1): Inequality slacks

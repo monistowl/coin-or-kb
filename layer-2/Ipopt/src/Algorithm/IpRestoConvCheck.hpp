@@ -15,6 +15,20 @@
  * the restoration phase, adding termination criteria based on
  * acceptability to the original problem's globalization mechanism.
  *
+ * @algorithm Restoration Phase Termination:
+ *   CheckConvergence() tests (in order):
+ *   1. Standard KKT convergence on restoration problem (inherited).
+ *   2. TestOrigProgress(): Is current (θ, φ) acceptable to original filter?
+ *   3. Sufficient infeasibility reduction: θ_new ≤ κ_resto·θ_start.
+ *   4. Iteration limits: iter ≤ maximum_iters_, resto_iter ≤ maximum_resto_iters_.
+ *   Returns CONVERGED if restoration found point acceptable to original.
+ *
+ * @math Restoration exit conditions:
+ *   θ = ||c(x)||₁ (constraint violation / infeasibility).
+ *   φ = f(x) + barrier terms (merit / objective).
+ *   Accept if (θ, φ) not dominated by original filter AND θ sufficiently small.
+ *   kappa_resto_ controls required infeasibility reduction fraction.
+ *
  * Termination conditions (checked in order):
  * 1. Standard optimality error convergence (inherited)
  * 2. Acceptable to original problem (via TestOrigProgress)

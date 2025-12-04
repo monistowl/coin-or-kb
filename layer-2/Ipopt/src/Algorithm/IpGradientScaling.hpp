@@ -13,6 +13,19 @@
  * improves problem conditioning by normalizing objective and constraint
  * magnitudes.
  *
+ * @algorithm Gradient-Based Automatic Scaling:
+ *   DetermineScalingParametersImpl() at x₀:
+ *   1. Evaluate ∇f(x₀), J_c(x₀), J_d(x₀) at starting point.
+ *   2. For objective: df = min(1, target_grad / ||∇f||∞).
+ *   3. For each constraint i: dc[i] = min(1, target_grad / ||J_c[i,:]||∞).
+ *   4. Apply minimum: df, dc, dd ≥ scaling_min_value.
+ *   5. Skip if ||∇f||∞ < scaling_max_gradient (already well-scaled).
+ *
+ * @math Scaling rationale:
+ *   Goal: ||∇f̃||∞ ≈ target_grad, ||J̃[i,:]||∞ ≈ target_grad.
+ *   Makes Newton step components comparable magnitude.
+ *   Improves convergence for poorly scaled problems.
+ *
  * Scaling computation:
  * - Evaluate gradients at x0
  * - s_f = 1 / max(1, ||∇f||_∞ / target_grad)

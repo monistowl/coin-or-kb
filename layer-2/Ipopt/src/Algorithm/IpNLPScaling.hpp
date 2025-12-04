@@ -12,6 +12,20 @@
  * to the NLP to improve numerical conditioning. Transforms:
  *   min s_f*f(S_x^{-1}*x̃)  s.t.  s_c*c(S_x^{-1}*x̃)=0, ...
  *
+ * @algorithm NLP Diagonal Scaling:
+ *   DetermineScaling() computes scaling factors:
+ *   1. df: Objective scalar (scale f by df).
+ *   2. dx: Variable scaling D_x = diag(dx), x̃ = D_x·x.
+ *   3. dc, dd: Constraint scaling D_c, D_d.
+ *   Scaled problem: min df·f(D_x^{-1}·x̃) s.t. D_c·c(D_x^{-1}·x̃) = 0.
+ *   Applied automatically to all evaluations and derivatives.
+ *
+ * @math Scaling transformations:
+ *   Gradient: ∇f̃ = df·D_x^{-1}·∇f (scaled gradient in x̃ space).
+ *   Jacobian: J̃ = D_c·J·D_x^{-1} (row and column scaling).
+ *   Hessian: W̃ = D_x^{-1}·W·D_x^{-1} (similarity transform).
+ *   Goal: Make ||∇f̃||, ||c̃||, ||J̃|| all O(1) for stability.
+ *
  * Provides methods to:
  * - apply_obj_scaling / unapply_obj_scaling: Scale objective
  * - apply_vector_scaling_x/c/d: Scale primal/constraint vectors

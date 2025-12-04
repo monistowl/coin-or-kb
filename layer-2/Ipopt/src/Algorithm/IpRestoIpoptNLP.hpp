@@ -12,6 +12,21 @@
  * for the restoration phase. It introduces slack variables to allow
  * constraint violations and penalizes them in the objective.
  *
+ * @algorithm Restoration Phase Problem Formulation:
+ *   Original: min f(x) s.t. c(x)=0, d_L ≤ d(x) ≤ d_U.
+ *   Restoration: min ρ·(||p||₁ + ||n||₁) + (η/2)·||D_r(x-x_ref)||₂²
+ *                s.t. c(x) - p_c + n_c = 0, d(x) - p_d + n_d ∈ [d_L, d_U]
+ *                     p_c, n_c, p_d, n_d ≥ 0.
+ *   Where: ρ = resto_penalty_parameter (default 1000).
+ *          η = η_factor·μ^η_exp (proximity weight, depends on barrier μ).
+ *          D_r = diag(1/max(1, |x_ref_i|)) for scaling.
+ *
+ * @math Restoration NLP structure:
+ *   Variables: (x, p_c, n_c, p_d, n_d) ∈ ℝⁿ × ℝ₊^{m_c} × ℝ₊^{m_c} × ...
+ *   Gradient: ∇f = (η·D_r²·(x-x_ref), ρ·e, ρ·e, ρ·e, ρ·e).
+ *   Jacobian: Block structure [J_c, -I, I, 0, 0; J_d, 0, 0, -I, I].
+ *   Hessian: Block diag(W + η·D_r², 0, 0, 0, 0).
+ *
  * Variable structure (CompoundVector):
  * - x: Original primal variables
  * - p_c, n_c: Positive/negative slacks for equality constraints

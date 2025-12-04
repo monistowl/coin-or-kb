@@ -11,6 +11,18 @@
  * EqMultiplierCalculator is the abstract base for computing estimates
  * of the equality constraint multipliers y_c and y_d. These estimates
  * are used for:
+ *
+ * @algorithm Multiplier Estimation Interface:
+ *   CalculateMultipliers(y_c, y_d):
+ *   1. Compute multiplier estimates satisfying dual feasibility.
+ *   2. Implementations: LeastSquareMultipliers solves:
+ *      min ||y||² s.t. J^T·y = -∇f (dual feasibility).
+ *   3. Used for: initialization, recalc_y option, feasibility problems.
+ *   4. Return false if singular (e.g., rank-deficient Jacobian).
+ *
+ * @math Least-squares multipliers:
+ *   Solve: [W, J^T; J, 0] [d; y] = [-∇f; 0] with W=0 (simplified).
+ *   Gives: y = -(J·J^T)^{-1}·J·∇f (minimum norm dual estimate).
  * - Initial multiplier estimation in DefaultIterateInitializer
  * - Multiplier recalculation when recalc_y option is set
  * - Computing multipliers for feasibility problems
