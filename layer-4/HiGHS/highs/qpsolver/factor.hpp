@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file factor.hpp
+ * @brief HiGHS QP basis factorization
+ *
+ * Basis factorization for QP solver. LU or Cholesky decomposition
+ * of working set matrix for efficient solve operations.
+ */
 #ifndef __SRC_LIB_NEWFACTOR_HPP__
 #define __SRC_LIB_NEWFACTOR_HPP__
 

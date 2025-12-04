@@ -5,6 +5,12 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file qpconst.hpp
+ * @brief HiGHS QP solver component
+ *
+ * Part of HiGHS quadratic programming active set solver.
+ */
 #pragma once
 #ifndef __SRC_LIB_QPCONST_HPP__
 #define __SRC_LIB_QPCONST_HPP__

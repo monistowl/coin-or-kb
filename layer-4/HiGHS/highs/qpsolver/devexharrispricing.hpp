@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file devexharrispricing.hpp
+ * @brief HiGHS Devex-Harris hybrid pricing
+ *
+ * Combined Devex and Harris ratio test for QP pricing.
+ * Balances accuracy and numerical stability.
+ */
 #ifndef __SRC_LIB_PRICING_DEVEXHARRISPRICING_HPP__
 #define __SRC_LIB_PRICING_DEVEXHARRISPRICING_HPP__
 

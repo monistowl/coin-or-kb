@@ -5,6 +5,12 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file a_asm.hpp
+ * @brief HiGHS QP solver component
+ *
+ * Part of HiGHS quadratic programming active set solver.
+ */
 #ifndef __SRC_LIB_QPSOLVER_ASM_HPP__
 #define __SRC_LIB_QPSOLVER_ASM_HPP__
 

@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file a_quass.hpp
+ * @brief HiGHS QUASS QP algorithm
+ *
+ * QUASS (QUadratic Active Set Solver) main algorithm.
+ * Primal active set method for convex QP.
+ */
 #ifndef __SRC_LIB_QPSOLVER_QUASS_HPP__
 #define __SRC_LIB_QPSOLVER_QUASS_HPP__
 

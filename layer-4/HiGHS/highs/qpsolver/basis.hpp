@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file basis.hpp
+ * @brief HiGHS QP basis management
+ *
+ * Working set (active set) management for QP solver.
+ * Tracks which constraints are currently active.
+ */
 #pragma once
 #ifndef __SRC_LIB_BASIS_HPP__
 #define __SRC_LIB_BASIS_HPP__

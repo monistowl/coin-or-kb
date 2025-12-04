@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file feasibility_bounded.hpp
+ * @brief HiGHS QP bounded feasibility
+ *
+ * Bounded feasibility subroutine for QP.
+ * Handles box constraints during active set updates.
+ */
 #ifndef __SRC_LIB_FEASIBILITYBOUNDED_HPP__
 #define __SRC_LIB_FEASIBILITYBOUNDED_HPP__
 

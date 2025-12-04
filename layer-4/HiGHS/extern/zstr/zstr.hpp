@@ -2,6 +2,12 @@
 // Copyright 2015 Ontario Institute for Cancer Research
 // Written by Matei David (matei@cs.toronto.edu)
 //---------------------------------------------------------
+/**
+ * @file zstr.hpp
+ * @brief HiGHS QP solver component
+ *
+ * Part of HiGHS quadratic programming active set solver.
+ */
 
 // Reference:
 // http://stackoverflow.com/questions/14086417/how-to-write-custom-input-stream-in-c

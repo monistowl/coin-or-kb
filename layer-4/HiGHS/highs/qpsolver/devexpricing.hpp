@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file devexpricing.hpp
+ * @brief HiGHS Devex pricing for QP
+ *
+ * Devex pricing strategy: approximate steepest edge using
+ * reference framework with periodic weight updates.
+ */
 #ifndef __SRC_LIB_PRICING_DEVEXPRICING_HPP__
 #define __SRC_LIB_PRICING_DEVEXPRICING_HPP__
 

@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file steepestedgepricing.hpp
+ * @brief HiGHS steepest edge pricing
+ *
+ * Steepest edge pricing for QP active set. Exact edge weights
+ * for optimal variable selection (more expensive than Devex).
+ */
 #ifndef __SRC_LIB_PRICING_STEEPESTEDGEPRICING_HPP__
 #define __SRC_LIB_PRICING_STEEPESTEDGEPRICING_HPP__
 

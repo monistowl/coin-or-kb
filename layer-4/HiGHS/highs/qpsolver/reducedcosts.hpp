@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file reducedcosts.hpp
+ * @brief HiGHS QP reduced costs
+ *
+ * Reduced cost computation for QP active set algorithm.
+ * Manages gradient projection onto feasible directions.
+ */
 #ifndef __SRC_LIB_REDUCEDCOSTS_HPP__
 #define __SRC_LIB_REDUCEDCOSTS_HPP__
 

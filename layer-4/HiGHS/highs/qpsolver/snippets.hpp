@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file snippets.hpp
+ * @brief HiGHS QP code snippets
+ *
+ * Utility code snippets for QP solver implementation.
+ * Common patterns and helper macros.
+ */
 #ifndef __SRC_LIB_SNIPPETS_HPP__
 #define __SRC_LIB_SNIPPETS_HPP__
 

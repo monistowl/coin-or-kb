@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file eventhandler.hpp
+ * @brief HiGHS QP event handler
+ *
+ * Callback interface for QP solver events. Iteration callbacks,
+ * logging, and early termination hooks.
+ */
 #ifndef __SRC_LIB_EVENTHANDLER_HPP__
 #define __SRC_LIB_EVENTHANDLER_HPP__
 

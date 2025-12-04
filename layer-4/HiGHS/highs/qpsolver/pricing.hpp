@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file pricing.hpp
+ * @brief HiGHS QP pricing base class
+ *
+ * Abstract pricing strategy interface for QP active set method.
+ * Selects entering variable for basis change.
+ */
 #ifndef __SRC_LIB_PRICING_HPP__
 #define __SRC_LIB_PRICING_HPP__
 

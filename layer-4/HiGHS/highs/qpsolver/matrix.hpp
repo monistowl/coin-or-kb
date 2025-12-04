@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file matrix.hpp
+ * @brief HiGHS QP matrix operations
+ *
+ * Sparse matrix utilities for QP solver. Row/column access,
+ * products, and basis matrix maintenance.
+ */
 #ifndef __SRC_LIB_MATRIX_HPP__
 #define __SRC_LIB_MATRIX_HPP__
 

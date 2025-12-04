@@ -1,3 +1,9 @@
+/**
+ * @file def.hpp
+ * @brief HiGHS QP solver component
+ *
+ * Part of HiGHS quadratic programming active set solver.
+ */
 #ifndef __READERLP_DEF_HPP__
 #define __READERLP_DEF_HPP__
 

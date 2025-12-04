@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file feasibility_highs.hpp
+ * @brief HiGHS QP feasibility restoration
+ *
+ * Feasibility restoration using HiGHS LP solver.
+ * Handles infeasible iterates during QP solving.
+ */
 #ifndef __SRC_LIB_FEASIBILITYHIGHS_HPP__
 #define __SRC_LIB_FEASIBILITYHIGHS_HPP__
 

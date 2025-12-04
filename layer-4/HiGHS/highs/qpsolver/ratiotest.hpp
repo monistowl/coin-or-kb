@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file ratiotest.hpp
+ * @brief HiGHS QP ratio test
+ *
+ * Ratio test for QP active set step length.
+ * Determines how far to move before hitting a constraint.
+ */
 #ifndef __SRC_LIB_RATIOTEST_HPP__
 #define __SRC_LIB_RATIOTEST_HPP__
 

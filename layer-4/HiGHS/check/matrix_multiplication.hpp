@@ -1,3 +1,9 @@
+/**
+ * @file matrix_multiplication.hpp
+ * @brief HiGHS QP solver component
+ *
+ * Part of HiGHS quadratic programming active set solver.
+ */
 #include <algorithm>
 #include <atomic>
 #include <cassert>

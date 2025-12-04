@@ -1,3 +1,9 @@
+/**
+ * @file CLI11.hpp
+ * @brief HiGHS QP solver component
+ *
+ * Part of HiGHS quadratic programming active set solver.
+ */
 // CLI11: Version 2.5.0
 // Originally designed by Henry Schreiner
 // https://github.com/CLIUtils/CLI11

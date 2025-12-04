@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file qpvector.hpp
+ * @brief HiGHS QP vector utilities
+ *
+ * Dense vector operations for QP solver.
+ * Basic linear algebra with QP-specific optimizations.
+ */
 #ifndef __SRC_LIB_VECTOR_HPP__
 #define __SRC_LIB_VECTOR_HPP__
 

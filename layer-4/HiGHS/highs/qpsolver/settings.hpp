@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file settings.hpp
+ * @brief HiGHS QP solver settings
+ *
+ * Parameter settings for QUASS QP solver.
+ * Tolerances, iteration limits, and algorithm options.
+ */
 #ifndef __SRC_LIB_SETTINGS_HPP__
 #define __SRC_LIB_SETTINGS_HPP__
 

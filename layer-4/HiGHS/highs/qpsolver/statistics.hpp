@@ -5,6 +5,12 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file statistics.hpp
+ * @brief HiGHS QP solver component
+ *
+ * Part of HiGHS quadratic programming active set solver.
+ */
 #ifndef __SRC_LIB_STATISTICS_HPP__
 #define __SRC_LIB_STATISTICS_HPP__
 

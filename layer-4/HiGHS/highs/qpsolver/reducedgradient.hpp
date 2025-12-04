@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file reducedgradient.hpp
+ * @brief HiGHS QP reduced gradient
+ *
+ * Reduced gradient computation for active set method.
+ * Projects objective gradient onto null space of active constraints.
+ */
 #ifndef __SRC_LIB_REDUCEDGRADIENT_HPP__
 #define __SRC_LIB_REDUCEDGRADIENT_HPP__
 

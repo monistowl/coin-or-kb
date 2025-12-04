@@ -5,6 +5,13 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file runtime.hpp
+ * @brief HiGHS QP runtime data
+ *
+ * Runtime state for QUASS algorithm.
+ * Stores iteration counts, timers, and status.
+ */
 #ifndef __SRC_LIB_RUNTIME_HPP__
 #define __SRC_LIB_RUNTIME_HPP__
 
