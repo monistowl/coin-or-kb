@@ -10,6 +10,25 @@
  * and dynamically adding promising ones to the active working matrix.
  * Built on GUB structure where each "set" can generate multiple columns.
  *
+ * @algorithm Column Generation with Dynamic Matrix:
+ *   Delayed column generation for large-scale LPs:
+ *   1. **Restricted Master:** Solve LP with subset of columns
+ *   2. **Pricing:** Use duals π to find column with c̄_j = c_j - π'A_j < 0
+ *      - createVariable() generates and adds promising column
+ *   3. **Pool Management:** Columns enter "small" working matrix from pool
+ *      - If working matrix too large: compress (remove non-basic columns)
+ *   4. **Re-optimize:** Solve updated master problem
+ *   5. **Termination:** No more negative reduced cost columns
+ *
+ * @math Reduced cost pricing:
+ *   For column j in pool: c̄_j = c_j - Σ_i π_i · a_ij
+ *   If c̄_j < 0 for minimization: column can improve objective
+ *   GUB structure: Σ_{j∈S_k} x_j = 1 adds dual π_k to pricing
+ *
+ * @complexity Per pricing: O(pool_size · column_length) to evaluate all
+ *   Compression: O(working_matrix_nnz) when triggered
+ *   Total: O(iterations · pricing) + O(simplex_pivots)
+ *
  * Column generation workflow:
  * 1. Solve restricted master problem with current columns
  * 2. Use dual prices to identify promising new columns (pricing subproblem)

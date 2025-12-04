@@ -9,6 +9,30 @@
  *
  * Mix-in class providing operations beyond basic primal/dual simplex:
  *
+ * @algorithm Dual Ranging (Sensitivity Analysis):
+ *   Compute how much objective coefficients can change:
+ *   1. For basic variable x_B[i]: compute ∆c range maintaining optimality
+ *      - Ratio test on tableau row: ∆c_max = min_j {-c̄_j/α_ij : α_ij > 0}
+ *   2. For non-basic variable: range is simply (-∞, -c̄_j] or [-c̄_j, ∞)
+ *   3. Return [c - ∆c_down, c + ∆c_up] and which variable enters if exceeded
+ *
+ * @algorithm Parametric Programming:
+ *   Solve family of LPs as bounds/costs vary: min c(θ)'x s.t. l(θ) ≤ x ≤ u(θ)
+ *   1. Start with optimal basis at θ = θ_start
+ *   2. Increase θ continuously, monitoring optimality/feasibility
+ *   3. When condition violated: perform ratio test to find θ* and pivot
+ *   4. Continue until θ = θ_end or infeasible/unbounded
+ *   Reports solution at each breakpoint where basis changes
+ *
+ * @math Parametric optimality:
+ *   Bounds: l(θ) = l₀ + θ·∆l, u(θ) = u₀ + θ·∆u
+ *   Costs: c(θ) = c₀ + θ·∆c
+ *   Optimal basis changes when: x_B(θ) hits bound or c̄_j(θ) changes sign
+ *
+ * @complexity Ranging: O(m·n) per variable queried
+ *   Parametric: O(k·(m²+mn)) where k = number of basis changes
+ *   Each breakpoint requires refactorization
+ *
  * Sensitivity Analysis (Ranging):
  * - dualRanging(): How much can objective coefficients change?
  * - primalRanging(): How much can variable bounds change?

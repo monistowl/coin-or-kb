@@ -11,6 +11,28 @@
  * No element values are stored - only row indices, with separate start arrays
  * for positive and negative entries in each column.
  *
+ * @algorithm Plus-Minus-One Matrix Operations:
+ *   Exploits binary coefficient structure for multiplication-free operations:
+ *   1. **Storage:** Only row indices stored, no element values
+ *      - startPositive_[j] to startNegative_[j]-1: rows with +1
+ *      - startNegative_[j] to startPositive_[j+1]-1: rows with -1
+ *   2. **Column j unpacking:** Direct index lookup, no multiplication
+ *   3. **Matrix-vector y = Ax:**
+ *      For each column j with x_j ≠ 0:
+ *        For i in +1 region: y[i] += x_j
+ *        For i in -1 region: y[i] -= x_j
+ *   4. **Transpose x = A'y:** Similar, accumulate ±y[i] into x[j]
+ *
+ * @math Coefficient structure:
+ *   A_ij ∈ {-1, 0, +1} for all entries
+ *   No floating-point multiplications needed in SpMV
+ *   Perfect for set partitioning: Σ_j x_j = 1 (each row)
+ *   And covering: Σ_j x_j ≥ 1 (each row)
+ *
+ * @complexity Storage: O(nnz) integers vs O(2·nnz) for general sparse
+ *   Matrix-vector: O(nnz) additions only (no multiplications)
+ *   ~2x faster than general sparse for these problem classes
+ *
  * Storage: For each column, startPositive_[j] to startNegative_[j]-1 are +1s,
  * and startNegative_[j] to startPositive_[j+1]-1 are -1s.
  *
