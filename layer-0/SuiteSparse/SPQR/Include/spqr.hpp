@@ -1,3 +1,17 @@
+/**
+ * @file spqr.hpp
+ * @brief Internal SPQR implementation functions and data structures
+ * Copyright (c) 2008-2023, Timothy A Davis. GPL-2.0+ license.
+ *
+ * Non-user-callable routines: spqr_analyze (symbolic), spqr_factorize (numeric),
+ * spqr_kernel (parallel front factorization), spqr_assemble/cpack/rhpack (front
+ * assembly). Support: spqr_tol, stranspose1/2, larftb (block reflectors),
+ * happly, panel, 1colamd, 1fixed. Helper structs: spqr_work, spqr_blob.
+ * Macros: FLIP/UNFLIP for marking, INDEX for column-major.
+ *
+ * @see SuiteSparseQR.hpp for public user API
+ */
+
 // =============================================================================
 // === spqr.hpp ================================================================
 // =============================================================================

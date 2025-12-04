@@ -1,3 +1,18 @@
+/**
+ * @file spqr_cholmod_wrappers.hpp
+ * @brief Template wrappers for CHOLMOD functions with int32/int64 support
+ * Copyright (c) 2008-2023, Timothy A Davis. GPL-2.0+ license.
+ *
+ * Template wrappers enabling SPQR to use CHOLMOD with either int32_t or int64_t
+ * indices. Functions: spqr_start/finish (init), memory (malloc/calloc/free/realloc),
+ * sparse matrix ops (allocate_sparse, free_sparse, transpose, copy), dense
+ * (allocate_dense, zeros, ones), ordering (amd, metis, colamd, postorder),
+ * utility (norm_sparse/dense, sdmult, ssmult, ssadd). Each has explicit
+ * template specializations for int32_t and int64_t.
+ *
+ * @see spqr.hpp includes this header
+ */
+
 //------------------------------------------------------------------------------
 // SPQR/Include/spqr_cholmod_wrappers.hpp
 //------------------------------------------------------------------------------

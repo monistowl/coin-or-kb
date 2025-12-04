@@ -1,3 +1,17 @@
+/**
+ * @file SuiteSparseQR.hpp
+ * @brief User C++ API for sparse multifrontal QR factorization
+ * Copyright (c) 2008-2023, Timothy A Davis. GPL-2.0+ license.
+ *
+ * Main user interface for SPQR: SuiteSparseQR overloads for [Q,R,E]=qr(A),
+ * X=A\B, qmult. Structures: spqr_symbolic (pattern analysis), spqr_numeric
+ * (R values, Householder H), spqr_gpu (GPU staging). Expert functions:
+ * SuiteSparseQR_factorize, _solve, _min2norm, _symbolic, _numeric for
+ * factorization reuse. Supports real/complex, int32/int64.
+ *
+ * @see spqr.hpp for internal implementation
+ */
+
 // =============================================================================
 // === SuiteSparseQR.hpp =======================================================
 // =============================================================================
