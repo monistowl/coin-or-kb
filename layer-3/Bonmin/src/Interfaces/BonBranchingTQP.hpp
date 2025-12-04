@@ -5,11 +5,26 @@
  * Carnegie Mellon University 2006, 2008. All Rights Reserved.
  * This code is published under the Eclipse Public License.
  *
- * BranchingTQP: Adapter that converts TMINLP2TNLP into a quadratic program
- * for efficient strong branching. Creates linear-quadratic approximation
- * at the optimal point and solves QP instead of full NLP during branching.
+ * @algorithm QP-Based Strong Branching for MINLP:
+ *   Accelerates strong branching by solving QP approximations:
+ *   1. **Reference point:** Store NLP solution x* with gradient g, Hessian H
+ *   2. **QP formulation:** For displacement d = x - x*:
+ *      min  g'd + ½d'Hd  (quadratic Taylor approximation)
+ *      s.t. J·d ≤ b - g(x*)  (linearized constraints at x*)
+ *   3. **Strong branching:** For each candidate variable x_i:
+ *      - Fix x_i at floor/ceil bounds
+ *      - Solve QP (much faster than full NLP)
+ *      - Estimate objective degradation
+ *   4. **Selection:** Branch on variable with best degradation estimate
  *
- * Variables represent displacement from the reference point.
+ * @math Taylor approximation:
+ *   f(x) ≈ f(x*) + ∇f(x*)'(x-x*) + ½(x-x*)'∇²f(x*)(x-x*)
+ *   Constraints: g(x) ≈ g(x*) + J(x*)(x-x*) ≤ 0
+ *   Variables d represent displacement: d = x - x*
+ *
+ * @complexity O(n³) for QP solve vs O(NLP iterations × n³) for full NLP.
+ *   Typically 10-100× faster per strong branching evaluation.
+ *   Accuracy degrades far from x*.
  *
  * Authors: Andreas Waechter, IBM (derived from BonTMINLP2TNLP.hpp)
  * Date: December 22, 2006

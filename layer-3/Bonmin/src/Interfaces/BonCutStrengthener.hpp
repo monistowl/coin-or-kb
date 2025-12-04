@@ -12,16 +12,29 @@
  * Improves outer approximation cuts by solving auxiliary NLPs to find
  * tighter bounds on linearizations. Also supports disjunctive cuts.
  *
- * **Cut strengthening types (CutStrengtheningType):**
+ * @algorithm OA Cut Strengthening via NLP:
+ *   Tightens outer approximation cuts by optimizing linearization RHS:
+ *   1. **Initial OA cut:** ∇g(x*)ᵀx ≤ ∇g(x*)ᵀx* - g(x*) (linearization at x*)
+ *   2. **Strengthening NLP:** min {∇g(x*)ᵀx : g(x) ≤ 0, l ≤ x ≤ u}
+ *      - Finds point minimizing LHS over original feasible region
+ *   3. **Tightened cut:** ∇g(x*)ᵀx ≤ optimal_value (strictly tighter RHS)
+ *   4. **Disjunctive option:** Generate cuts for branching disjunction
+ *      - Split on most fractional integer, strengthen each branch
+ *
+ * @math Strengthening validity:
+ *   If x' solves min{∇g(x*)ᵀx : g(x) ≤ 0, x ∈ bounds}, then
+ *   ∇g(x*)ᵀx ≥ ∇g(x*)ᵀx' for all feasible x
+ *   The strengthened RHS = ∇g(x*)ᵀx' cuts off more infeasible region.
+ *
+ * @complexity O(NLP solve) per cut strengthened.
+ *   Trade-off: tighter LP vs NLP overhead.
+ *   Most effective for cuts active at optimum.
+ *
+ * **Cut strengthening types:**
  * - CS_None: No strengthening
  * - CS_StrengthenedGlobal: Strengthen cuts globally
  * - CS_UnstrengthenedGlobal_StrengthenedLocal: Global weak, local strong
  * - CS_StrengthenedGlobal_StrengthenedLocal: Both global and local strong
- *
- * **Strengthening algorithm:**
- * Given OA cut: g(x*) + nabla g(x*)^T (x - x*) <= 0
- * Solve: min {nabla g(x*)^T x : g(x) <= 0, x in bounds}
- * to find tighter RHS for the linearization.
  *
  * @see BonOaDecBase for OA cut generation
  * @see StrengtheningTNLP for the internal NLP formulation
