@@ -23,15 +23,59 @@
 
 
 /**
- *	\file include/qpOASES/SQProblemSchur.hpp
- *	\author Andreas Waechter and Dennis Janka, based on QProblem.hpp by Hans Joachim Ferreau, Andreas Potschka, Christian Kirches
- *	\version 3.2
- *	\date 2012-2017
+ * @file SQProblemSchur.hpp
+ * @brief Sparse QP solver using Schur complement for active-set updates
  *
- *	Declaration of the SQProblemSchur class which is able to use the newly
- *	developed online active set strategy for parametric quadratic programming
- *	with varying matrices and uses a Schur Complement approach to solve
- *	the linear systems.
+ * @algorithm Schur Complement Active-Set Method:
+ * Exploits sparsity in QPs with changing active sets using Schur complement
+ * updates instead of full refactorization.
+ *
+ * KKT SYSTEM STRUCTURE:
+ * At each iteration, solve:
+ *   [H   Aₐ'] [x]   [-g ]
+ *   [Aₐ  0  ] [λ] = [bₐ ]
+ * where Aₐ is the active constraint matrix.
+ *
+ * SCHUR COMPLEMENT APPROACH:
+ * Factor H once (sparse Cholesky/LDL): H = LDL'
+ * When active set changes by adding/removing constraint i:
+ *
+ * Adding constraint (rank-1 update):
+ *   New KKT = Old KKT + [0; aᵢ][0; aᵢ]'
+ *   Schur complement: S_new = S + aᵢ'H⁻¹aᵢ
+ *   Update S via low-rank formula (no refactor of H)
+ *
+ * Removing constraint:
+ *   Downdate Schur complement analogously
+ *
+ * SOLVE WITH SCHUR:
+ *   1. Solve H·y = g (using fixed factorization)
+ *   2. Solve S·λ = Aₐy - bₐ (small dense system)
+ *   3. Solve H·x = g - Aₐ'λ (reuse factorization)
+ *
+ * @math Schur complement:
+ *   S = Aₐ·H⁻¹·Aₐ'
+ *   dim(S) = |active_set| << n (typically small)
+ *
+ * When active set changes by ±1:
+ *   S_new = S ± (H⁻¹aᵢ)(H⁻¹aᵢ)' / (aᵢ'H⁻¹aᵢ)
+ *
+ * @complexity
+ * - Initial H factorization: O(nnz(H)^{3/2}) sparse Cholesky
+ * - Schur update per active-set change: O(|A|²) dense operations
+ * - Total per QP: O(nnz + |A|²·k) for k iterations
+ * - Advantage: avoids O(n³) refactorization each iteration
+ *
+ * @ref Waechter & Biegler (2006). "On the Implementation of an Interior-Point
+ *   Filter Line-Search Algorithm for Large-Scale Nonlinear Programming".
+ *   Mathematical Programming 106(1):25-57.
+ *
+ * @author Andreas Waechter, Dennis Janka
+ * @version 3.2
+ * @date 2012-2017
+ *
+ * @see SQProblem for dense version
+ * @see SparseSolver for underlying sparse factorization
  */
 
 

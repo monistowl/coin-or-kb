@@ -32,8 +32,40 @@
  * - Sequential Quadratic Programming (SQP) for NLP
  * - Moving horizon estimation
  *
- * The hotstart method accepts new H and A matrices, efficiently
- * updating internal factorizations.
+ * @algorithm Sequential QP with Matrix Updates:
+ * Efficiently solves sequences of related QPs where both H and A change.
+ *
+ * HOTSTART WITH MATRIX CHANGES:
+ * Given previous optimal active set W*, when H, A change:
+ * 1. Update factorization of reduced Hessian Z'HZ
+ * 2. Recompute KKT system factors with new matrices
+ * 3. Use W* as initial working set (likely still optimal or close)
+ * 4. Apply standard active-set iterations if needed
+ *
+ * MATRIX UPDATE STRATEGY:
+ * - Small changes: Rank-k updates to existing factorization
+ * - Large changes: Full refactorization (still faster than cold start)
+ * - Sparse matrices: Use SQProblemSchur for Schur complement approach
+ *
+ * SQP APPLICATION:
+ * For min f(x) s.t. c(x)=0, g(x)≤0:
+ *   At iterate xₖ, solve QP subproblem:
+ *   min ∇f'p + ½p'∇²Lp  s.t. ∇c'p + c = 0, ∇g'p + g ≤ 0
+ *   where L is Lagrangian, H = ∇²L changes each iteration
+ *
+ * @math QP subproblem at SQP iteration k:
+ *   Hₖ = ∇²ₓₓL(xₖ, λₖ)  (Hessian of Lagrangian)
+ *   Aₖ = [∇c(xₖ)'; ∇g(xₖ)']  (Jacobian of constraints)
+ *   Both vary with xₖ, requiring matrix updates each iteration
+ *
+ * @complexity
+ * - Hotstart with matrix update: O(n³) for factorization update
+ * - Typically 1-5 active-set iterations after matrix change
+ * - Much faster than cold-start from scratch
+ *
+ * @ref Ferreau, Bock & Diehl (2008). "An online active set strategy to
+ *   overcome the limitations of explicit MPC". Int. J. Robust Nonlinear
+ *   Control 18(8):816-830.
  *
  * @see QProblem for fixed H and A
  * @see Ipopt for full NLP solving that uses QP subproblems
