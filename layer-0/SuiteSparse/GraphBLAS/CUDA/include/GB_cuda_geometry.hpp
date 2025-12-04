@@ -1,3 +1,15 @@
+/**
+ * @file GB_cuda_geometry.hpp
+ * @brief CUDA kernel launch geometry constants
+ * Copyright (c) 2017-2025, Timothy A. Davis.
+ *
+ * Block and chunk size constants for CUDA kernels, used by host and JIT.
+ * Select sparse: BLOCKDIM1=512, CHUNKSIZE1=4096; BLOCKDIM2=256, CHUNKSIZE2=1024.
+ * Select bitmap: BLOCKDIM=512. Includes log2 variants for bit shifts.
+ *
+ * @see GB_cuda_select.hpp uses these constants
+ */
+
 //------------------------------------------------------------------------------
 // GraphBLAS/CUDA/include/GB_cuda_geometry.hpp
 //------------------------------------------------------------------------------

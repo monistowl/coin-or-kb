@@ -1,3 +1,15 @@
+/**
+ * @file GB_cuda_reduce.hpp
+ * @brief CUDA JIT kernel launcher for GraphBLAS reductions
+ * Copyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.
+ *
+ * GB_cuda_reduce_to_scalar_jit: GPU reduction of matrix A to scalar z using
+ * monoid. Output to z (scalar) or V (1×1 matrix) based on has_cheeseburger
+ * flag. Takes stream/grid/block parameters for kernel launch.
+ *
+ * @see GB_cuda.hpp for common CUDA utilities
+ */
+
 //------------------------------------------------------------------------------
 // GB_cuda_reduce.hpp: CPU definitions for CUDA reductions
 //------------------------------------------------------------------------------

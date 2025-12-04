@@ -1,3 +1,14 @@
+/**
+ * @file GB_cuda_timer.hpp
+ * @brief CUDA event-based GPU timer class
+ * Copyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.
+ * NVIDIA CORPORATION contributions (c) 2024-2025.
+ *
+ * GpuTimer class: Start() records start event, Stop() records stop event,
+ * Elapsed() synchronizes and returns milliseconds between. Uses cudaEvent_t
+ * for precise GPU timing. Useful for kernel performance measurement.
+ */
+
 //------------------------------------------------------------------------------
 // GraphBLAS/CUDA/test/GB_cuda_timer.hpp
 //------------------------------------------------------------------------------

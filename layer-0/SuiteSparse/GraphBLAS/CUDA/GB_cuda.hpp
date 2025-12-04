@@ -1,3 +1,17 @@
+/**
+ * @file GB_cuda.hpp
+ * @brief Host-side CUDA utilities for GraphBLAS GPU operations
+ * Copyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.
+ * NVIDIA CORPORATION contributions (c) 2024-2025.
+ *
+ * Host CUDA includes and utilities (not for JIT kernels). Matrix prefetch
+ * functions with component flags (P/H/Y/B/I/X for pointers/hyperstart/y/bitmap/
+ * indices/values). GB_cuda_upscale_identity for monoid identity. Stream pool
+ * acquire/release for CUDA stream management.
+ *
+ * @see GB_cuda_apply.hpp, GB_cuda_ewise.hpp for operation-specific headers
+ */
+
 //------------------------------------------------------------------------------
 // GraphBLAS/CUDA/GB_cuda.hpp: include file for host CUDA methods (not for JIT)
 //------------------------------------------------------------------------------

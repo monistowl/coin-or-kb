@@ -1,3 +1,16 @@
+/**
+ * @file rmm_wrap.hpp
+ * @brief RMM (RAPIDS Memory Manager) wrapper types for GraphBLAS GPU memory
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Type aliases for RMM memory resources: host_mr (new/delete), pinned_mr
+ * (pinned host), device_mr (CUDA malloc), managed_mr (unified memory).
+ * Pool variants: host_pool_mr, host_pinned_pool_mr, device_pool_mr,
+ * managed_pool_mr. Stream types: cuda_stream_pool, cuda_stream_view.
+ *
+ * @see GB_cuda.hpp uses RMM for GPU memory management
+ */
+
 //------------------------------------------------------------------------------
 // rmm_wrap/rmm_wrap.hpp
 //------------------------------------------------------------------------------

@@ -1,3 +1,15 @@
+/**
+ * @file GB_cuda_error.hpp
+ * @brief CUDA error checking macro for GraphBLAS GPU operations
+ * Copyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.
+ *
+ * CUDA_OK macro: wraps CUDA API calls with error checking. On failure,
+ * maps cudaErrorMemoryAllocation to GrB_OUT_OF_MEMORY, other errors to
+ * GxB_GPU_ERROR. Prints error info via printf and GBURBLE, calls GB_FREE_ALL.
+ *
+ * @see GB_cuda.hpp for CUDA utilities using this macro
+ */
+
 //------------------------------------------------------------------------------
 // GraphBLAS/CUDA/GB_cuda_error.hpp: call a cuda method and check its result
 //------------------------------------------------------------------------------

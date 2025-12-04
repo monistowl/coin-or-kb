@@ -1,3 +1,16 @@
+/**
+ * @file GraphBLAS_cuda.hpp
+ * @brief Main GraphBLAS CUDA include with C++ complex type definitions
+ * Copyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.
+ *
+ * CUDA-compatible GraphBLAS header. Defines C++ complex types: GxB_FC32_t
+ * (std::complex<float>), GxB_FC64_t (std::complex<double>). Macros GxB_CMPLXF,
+ * GxB_CMPLX for construction. Includes GB_cuda_geometry.hpp. Used by JIT
+ * kernels requiring complex arithmetic.
+ *
+ * @see GB_cuda.hpp for host-side CUDA utilities
+ */
+
 //------------------------------------------------------------------------------
 // GraphBLAS/CUDA/GraphBLAS_cuda.hpp
 //------------------------------------------------------------------------------

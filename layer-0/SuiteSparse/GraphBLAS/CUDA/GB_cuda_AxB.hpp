@@ -1,3 +1,15 @@
+/**
+ * @file GB_cuda_AxB.hpp
+ * @brief CUDA JIT kernel launcher for GraphBLAS matrix multiplication
+ * Copyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.
+ *
+ * GB_cuda_AxB_dot3_jit: GPU sparse matrix-matrix multiply C=A*B using dot
+ * product method (dot3). Supports masked operation (M, Mask_struct), semiring
+ * selection, and flipxy. Takes device and number_of_sms for launch config.
+ *
+ * @see GB_cuda.hpp for common CUDA utilities
+ */
+
 //------------------------------------------------------------------------------
 // GraphBLAS/CUDA/GB_cuda_AxB.hpp
 //------------------------------------------------------------------------------

@@ -1,3 +1,16 @@
+/**
+ * @file GB_cuda_select.hpp
+ * @brief CUDA JIT kernel launchers for GraphBLAS select operations
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * GPU select operations: GB_cuda_select_bitmap_jit (bitmap format input),
+ * GB_cuda_select_sparse_jit (sparse format input). Both apply IndexUnaryOp
+ * with optional flipij and ythunk scalar. Returns selected entries in C.
+ *
+ * @see GB_cuda.hpp for common CUDA utilities
+ * @see GB_select_iso.h for iso matrix handling
+ */
+
 //------------------------------------------------------------------------------
 // GB_cuda_select.hpp: CPU definitions for CUDA select operations
 //------------------------------------------------------------------------------

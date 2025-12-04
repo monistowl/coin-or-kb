@@ -1,3 +1,15 @@
+/**
+ * @file GB_cuda_ewise.hpp
+ * @brief CUDA JIT kernel launchers for GraphBLAS element-wise operations
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * GPU element-wise scaling: GB_cuda_rowscale_jit (C = D.*B row scaling),
+ * GB_cuda_colscale_jit (C = A.*D column scaling). Both support flipxy for
+ * operand order and take stream/grid/block parameters.
+ *
+ * @see GB_cuda.hpp for common CUDA utilities
+ */
+
 //------------------------------------------------------------------------------
 // GB_cuda_ewise.hpp: CPU definitions for CUDA ewise operations
 //------------------------------------------------------------------------------
