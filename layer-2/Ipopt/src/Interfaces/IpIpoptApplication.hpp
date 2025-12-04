@@ -11,6 +11,27 @@
  * IpoptApplication is the entry point for C++ applications using Ipopt.
  * Provides methods for initialization, option handling, and solving.
  *
+ * @algorithm Application Lifecycle and Solve Flow:
+ *   1. Create: IpoptApplicationFactory() → configured app instance.
+ *   2. Initialize(params_file): Parse ipopt.opt, set up Journalist.
+ *   3. Configure: app->Options()->SetNumericValue("tol", 1e-8), etc.
+ *   4. OptimizeTNLP(tnlp):
+ *      a. TNLPAdapter wraps user TNLP → internal NLP interface.
+ *      b. AlgorithmBuilder creates strategy objects per options.
+ *      c. IpoptAlgorithm::Optimize() runs interior-point iterations.
+ *      d. Return status + populate Statistics().
+ *   5. ReOptimizeTNLP(tnlp): Warm-start from previous solution.
+ *      Reuses factorizations, starting point close to optimum.
+ *
+ * @math Warm-start considerations:
+ *   Cold start: x₀ user-provided, multipliers from least-squares.
+ *   Warm start: x₀, λ₀, z₀ from previous solve, μ₀ from complementarity.
+ *   ReOptimize skips rebuilding algorithm objects for efficiency.
+ *
+ * @complexity OptimizeTNLP: O(iterations × per_iteration_cost).
+ *   Per iteration: O(nnz²/n) for sparse factorization.
+ *   ReOptimize: Fewer iterations when problem is similar.
+ *
  * Typical usage:
  *   SmartPtr<IpoptApplication> app = IpoptApplicationFactory();
  *   app->Initialize();

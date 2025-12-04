@@ -13,6 +13,23 @@
  * the object's internal state is modified. Consumers compare stored tags
  * to detect changes and avoid redundant recalculation.
  *
+ * @algorithm Change-Tracking via Versioning Tags:
+ *   Each TaggedObject maintains a monotonically increasing tag (version):
+ *   1. On creation: tag ← next_unique_id++ (global counter).
+ *   2. On modification: ObjectChanged() → tag ← next_unique_id++.
+ *   3. Consumer stores last_seen_tag after using object.
+ *   4. Before recomputation: if (obj.GetTag() != last_seen_tag) recompute.
+ *   Avoids redundant NLP evaluations when iterate hasn't changed.
+ *
+ * @math Correctness invariant:
+ *   ∀ objects A, B: A.tag == B.tag ⟹ A and B are the same object instance
+ *   with identical state (since tags are globally unique and monotonic).
+ *   Tag comparison is equality-based: O(1) check, no deep comparison.
+ *
+ * @complexity O(1) for GetTag(), HasChanged(), ObjectChanged().
+ *   Memory: single integer per object.
+ *   Combined with Observer pattern for automatic cache invalidation.
+ *
  * Usage pattern:
  * 1. Store last-used tag locally
  * 2. Before computation, call HasChanged(stored_tag)

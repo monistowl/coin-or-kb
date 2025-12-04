@@ -11,6 +11,29 @@
  * TNLP (Templated NLP) is the primary user-facing class for defining
  * optimization problems. Users inherit from TNLP and implement:
  *
+ * @algorithm User NLP Callback Interface:
+ *   Ipopt calls user methods in this order during optimization:
+ *   1. get_nlp_info() - once: dimensions n, m, nnz_jac_g, nnz_h_lag.
+ *   2. get_bounds_info() - once: fill x_L, x_U, g_L, g_U arrays.
+ *   3. get_starting_point() - once: initial x (and optionally z, λ).
+ *   4. Per iteration (possibly multiple times):
+ *      - eval_f(x) → f(x): scalar objective value.
+ *      - eval_grad_f(x) → ∇f(x): n-vector.
+ *      - eval_g(x) → g(x): m-vector of constraint values.
+ *      - eval_jac_g(x) → J_g(x): sparse Jacobian (triplet format).
+ *      - eval_h(x, σ, λ) → H: sparse Hessian of Lagrangian.
+ *   5. finalize_solution() - once: receive final x*, λ*, z* and status.
+ *
+ * @math Standard NLP formulation:
+ *   min  f(x)  subject to  g_L ≤ g(x) ≤ g_U,  x_L ≤ x ≤ x_U.
+ *   Equality: set g_L[i] = g_U[i].  No bound: ±nlp_lower/upper_bound_inf.
+ *   Hessian: H = σ·∇²f + Σᵢ λᵢ·∇²gᵢ (lower triangle in triplet format).
+ *
+ * @complexity User-defined. Ipopt benefits from:
+ *   - Exploiting sparsity: provide true nnz counts, not dense.
+ *   - new_x flag: cache intermediate results when x unchanged.
+ *   - Exact Hessian: superlinear convergence vs quasi-Newton.
+ *
  * Required methods:
  * - get_nlp_info(): Problem dimensions and sparsity
  * - get_bounds_info(): Variable and constraint bounds

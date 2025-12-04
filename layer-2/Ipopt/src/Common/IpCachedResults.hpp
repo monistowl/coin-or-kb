@@ -12,6 +12,31 @@
  * (TaggedObjects and scalar parameters). Results are automatically
  * invalidated when any dependency changes via the Observer pattern.
  *
+ * @algorithm LRU Cache with Observer-Based Invalidation:
+ *   AddCachedResult(result, deps, scalars):
+ *     1. Create DependentResult with result and dependency tags.
+ *     2. Subscribe to NT_Changed notifications from each dependency.
+ *     3. Push to front of cache list.
+ *     4. If size > max_cache_size: evict oldest (LRU policy).
+ *
+ *   GetCachedResult(deps, scalars):
+ *     1. Clean up stale results (marked by Observer notifications).
+ *     2. Linear scan: find entry where all tags match current deps.
+ *     3. If found: return cached result; else: return false (cache miss).
+ *
+ *   DependentResult::ReceiveNotification(NT_Changed):
+ *     Mark result as stale → will be removed on next access.
+ *
+ * @math Memoization correctness:
+ *   Result R cached with dependencies D = {d₁, ..., dₖ} and scalars S.
+ *   R is valid iff ∀i: dᵢ.GetTag() == stored_tag[i] ∧ S unchanged.
+ *   Tag monotonicity ensures no ABA problem (tag never reused).
+ *
+ * @complexity O(k) per Add/Get for k cached entries.
+ *   Tag comparison: O(d) for d dependencies.
+ *   Observer notification: O(1) invalidation per dependency change.
+ *   Typical max_cache_size ≈ 3-5 (current, trial, backup iterates).
+ *
  * Key features:
  * - LRU-style cache with configurable maximum size
  * - Automatic staleness detection via TaggedObject notifications
