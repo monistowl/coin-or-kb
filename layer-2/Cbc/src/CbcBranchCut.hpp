@@ -8,6 +8,22 @@
  * rather than tightening variable bounds. Implements split disjunctions
  * where each branch arm adds a different cut to the LP.
  *
+ * @algorithm Cut-Based Branching (Disjunctive Programming):
+ *   Instead of x ≤ k vs x ≥ k+1 (bound changes):
+ *   createCbcBranch() creates cut disjunction:
+ *   - Down branch: Add cut down_ to LP.
+ *   - Up branch: Add cut up_ to LP.
+ *   CbcCutBranchingObject::branch() adds appropriate OsiRowCut.
+ *   Cuts remain in LP for all descendants of that branch.
+ *   canFix_ indicates if one branch can fix variables.
+ *
+ * @math Split disjunctions and Gomory cuts:
+ *   Split cut: π^T x ≤ ⌊π_0⌋ OR π^T x ≥ ⌈π_0⌉ for integer π.
+ *   Derived from tableau row with fractional RHS.
+ *   Branching on cuts generalizes variable branching.
+ *   Each Gomory cut implicitly branches on slack integrality.
+ *   Enables disjunctive programming within B&C framework.
+ *
  * Use cases:
  * - Gomory cuts can be viewed as branching on row slack integrality
  * - Split cuts: ax <= b OR ax >= b+1 for integer a, fractional b

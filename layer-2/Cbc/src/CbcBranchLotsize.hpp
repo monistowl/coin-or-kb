@@ -8,6 +8,22 @@
  * Unlike integers (any value in range), lot-sizing variables can only
  * take values from a predefined set: {v1, v2, ..., vn}.
  *
+ * @algorithm Lot-Size Branching:
+ *   For variable x restricted to values V = {v_1, ..., v_n}:
+ *   infeasibility(): findRange() locates current value in V.
+ *   If x̄ ∉ V, compute distance to nearest valid values.
+ *   createCbcBranch() partitions V:
+ *   - Down: x ∈ {v_1, ..., v_k} (values ≤ floor)
+ *   - Up: x ∈ {v_{k+1}, ..., v_n} (values ≥ ceiling)
+ *   floorCeiling() returns nearest valid values below/above x̄.
+ *
+ * @math Semi-continuous and lot-size variables:
+ *   Standard integer: x ∈ {0, 1, 2, ..., u}.
+ *   Lot-size: x ∈ V where V is arbitrary finite set.
+ *   MIP formulation: x = Σv_i·y_i, Σy_i = 1, y binary (SOS1).
+ *   Direct handling avoids |V| binary variables.
+ *   Range mode: union of intervals, useful for batch sizes.
+ *
  * Two modes:
  * - Points mode (rangeType_=1): Discrete set of valid values
  * - Range mode (rangeType_=2): Valid intervals [lo_i, hi_i]

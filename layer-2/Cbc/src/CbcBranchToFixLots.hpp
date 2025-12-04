@@ -8,6 +8,23 @@
  * in one branch, cutting off the current solution in the other. Useful
  * for reducing problem size when reduced costs indicate fixable variables.
  *
+ * @algorithm Reduced Cost Fixing Branch:
+ *   shallWe() decides whether to activate:
+ *   1. Count variables at bound with |dj| ≥ djTolerance_.
+ *   2. Check if count ≥ fractionFixed_ × total_integers.
+ *   3. Also check numberClean_ equality constraints satisfied.
+ *   createCbcBranch() creates asymmetric disjunction:
+ *   - Fix branch: Set all qualifying variables to bounds permanently.
+ *   - Cut branch: Add cut excluding current fractional solution.
+ *   Effect: One arm reduces problem size; other explores alternatives.
+ *
+ * @math Reduced cost fixing in branch-and-bound:
+ *   If x_j at lower bound and r̄_j ≥ (incumbent - LP_bound):
+ *     x_j = lb_j in any improving solution.
+ *   Mass fixing: Apply to all such variables simultaneously.
+ *   Trade-off: Aggressive fixing may cut off optimal, but reduces problem.
+ *   depth_ controls frequency (every depth_ levels).
+ *
  * Triggering conditions:
  * - Variables at bounds with large reduced costs (dj >= djTolerance_)
  * - Sufficient fraction of variables fixable (fractionFixed_)

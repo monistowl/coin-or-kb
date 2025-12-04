@@ -8,6 +8,24 @@
  * Very compute-intensive - detects and exploits Dantzig-Wolfe
  * decomposable structure in the constraint matrix.
  *
+ * @algorithm Dantzig-Wolfe Decomposition Heuristic:
+ *   solution() exploits block-angular structure:
+ *   1. findStructure(): Detect blocks via matrix analysis.
+ *   2. setupDWStructures(): Create master + subproblem structure.
+ *   3. For each block k: Solve MIP subproblem for proposals.
+ *   4. addDW(): Add block solutions as columns to master.
+ *   5. Solve master (convexity + linking constraints).
+ *   6. If fractional, apply heuristics; iterate via callback.
+ *   fingerPrint_ tracks integer patterns for diversity.
+ *
+ * @math Dantzig-Wolfe reformulation:
+ *   Original: min c^T x, Ax ≤ b, D_k x_k ≤ d_k (block constraints).
+ *   Master: min Σλ_j (c^T x^j), Σλ_j (Ax^j) ≤ b, Σλ_j = 1 per block.
+ *   x^j are extreme points of block polyhedra.
+ *   Subproblems: min (c - π^T A) x_k s.t. D_k x_k ≤ d_k.
+ *   Column generation adds proposals dynamically.
+ *   affinity_ guides block solution combination.
+ *
  * Algorithm:
  * 1. findStructure() detects block-angular structure
  * 2. setupDWStructures() prepares decomposition data
