@@ -8,6 +8,26 @@
  * decomposition. Alternates between solving MIP with distance-to-integer
  * objective and NLP with fixed integers to find feasible solutions.
  *
+ * @algorithm Feasibility Pump for MINLP (OA-based):
+ *   Heuristic to find MINLP-feasible solutions via alternating projections:
+ *   1. Solve NLP relaxation → get (x*, y*) with y* fractional integers
+ *   2. Set MIP objective: min Σ_j |y_j - round(y_j*)| (distance to integrality)
+ *   3. Solve MIP with OA cuts → get integer ŷ
+ *   4. Fix integers: y = ŷ, solve NLP(y) for continuous x
+ *   5. If feasible: done. Else: add OA cuts, goto 2
+ *   6. Perturb objective if cycling detected
+ *
+ * @math Distance-to-integer objective:
+ *   Δ(y, ŷ) = Σ_j (y_j - ŷ_j)² or L1 norm Σ_j |y_j - ŷ_j|
+ *   For binary: Δ = Σ_{ŷ_j=0} y_j + Σ_{ŷ_j=1} (1 - y_j)
+ *   OA linearization: g(x*) + ∇g(x*)ᵀ(x - x*) ≤ 0
+ *
+ * @complexity O(k · (MIP + NLP)) where k = iterations until feasible.
+ *   Typically 5-50 iterations. Each MIP uses OA approximation.
+ *
+ * @ref Bonami, Cornuéjols, Lodi, Margot (2009). "A Feasibility Pump for
+ *      Mixed Integer Nonlinear Programs". Math. Programming 119:331-352.
+ *
  * Authors: Pierre Bonami, CNRS
  * Date: February 13, 2009
  *

@@ -15,10 +15,25 @@
  * at integer feasible points (as in classical OA). More expensive per cut,
  * but can improve bounds at fractional nodes.
  *
- * **Algorithm:**
- * 1. At each B&B node (up to maxDepth_), solve NLP relaxation
- * 2. Generate linearization cuts at NLP solution
- * 3. Add cuts to strengthen LP relaxation
+ * @algorithm NLP-based OA Cut Generation:
+ *   Strengthens LP relaxation by solving NLP at fractional B&B nodes:
+ *   1. At B&B node (depth ≤ maxDepth_): get LP solution x_LP
+ *   2. Solve continuous NLP relaxation: min f(x) s.t. g(x) ≤ 0
+ *   3. At NLP solution x*: generate OA cuts g(x*) + ∇g(x*)ᵀ(x-x*) ≤ 0
+ *   4. Filter: keep only cuts violated by x_LP (if addOnlyViolated_)
+ *   5. Add cuts as global (valid in subtree) or local
+ *
+ * @math Cut validity:
+ *   For convex g: linearization at any x* gives valid cut
+ *   Not restricted to integer points like classical OA
+ *   More cuts = tighter LP relaxation, but more NLP solves
+ *
+ * @complexity O(NLP) per node up to maxDepth_ levels.
+ *   Trade-off: expensive per-node work vs. fewer total nodes.
+ *   Controlled by maxDepth_ and solves_per_level_.
+ *
+ * @ref Bonami et al. (2008). "An algorithmic framework for convex MINLP".
+ *      Discrete Optimization 5:186-204.
  *
  * **Parameters:**
  * - maxDepth_: Maximum tree depth for NLP solves (default 10)

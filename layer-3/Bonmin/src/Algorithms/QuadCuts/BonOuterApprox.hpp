@@ -14,9 +14,25 @@
  * Builds linear outer approximations of nonlinear constraints by
  * linearizing at a given point (typically NLP solution).
  *
- * **Linearization formula:**
- * For constraint g(x) <= 0 at point x*:
- * g(x*) + nabla g(x*)^T (x - x*) <= 0
+ * @algorithm Outer Approximation Linearization:
+ *   Constructs LP relaxation of convex MINLP via first-order Taylor:
+ *   1. At point x*, evaluate nonlinear constraint g(x)
+ *   2. Compute gradient ∇g(x*) via automatic differentiation
+ *   3. Add linearization: g(x*) + ∇g(x*)ᵀ(x - x*) ≤ 0
+ *   4. Clean coefficients: remove tiny coefficients, absorb into bounds
+ *   5. Repeat for each nonlinear constraint
+ *
+ * @math First-order Taylor approximation:
+ *   For convex g: g(x) ≥ g(x*) + ∇g(x*)ᵀ(x - x*) (supporting hyperplane)
+ *   Linearization is valid cut: {x : g(x*) + ∇g(x*)ᵀ(x-x*) ≤ 0} ⊇ {x : g(x) ≤ 0}
+ *   For non-convex: linearization is relaxation, not exact
+ *
+ * @complexity O(n) per constraint linearization where n = variables.
+ *   Gradient computation via AD is O(n) for each constraint.
+ *   Total O(m·n) for m constraints.
+ *
+ * @ref Duran & Grossmann (1986). "An outer-approximation algorithm for a
+ *      class of mixed-integer nonlinear programs". Math. Programming 36:307-339.
  *
  * **Coefficient cleaning (cleanNnz):**
  * Small coefficients are handled to avoid numerical issues:
