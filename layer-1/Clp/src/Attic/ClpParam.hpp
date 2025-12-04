@@ -1,3 +1,16 @@
+/**
+ * @file ClpParam.hpp
+ * @brief Parameter type enums for Clp and CBC command-line interface (legacy)
+ * Copyright (C) 2002, International Business Machines Corporation.
+ * EPL-1.0 license.
+ *
+ * ClpParameterType enum: ranges 1-100 (double), 101-200 (int), 201-300
+ * (Clp string), 301-400 (Cbc string), 401-500 (Clp actions), 501-600 (Cbc
+ * actions). Parameters for tolerances, limits, scaling, algorithms, output.
+ * This file is in Attic (deprecated) - see ClpParameters.hpp for current version.
+ *
+ * @deprecated Replaced by ClpParameters.hpp
+ */
 
 // Copyright (C) 2002, International Business Machines
 // Corporation and others.  All Rights Reserved.

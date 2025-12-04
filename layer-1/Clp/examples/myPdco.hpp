@@ -1,3 +1,18 @@
+/**
+ * @file myPdco.hpp
+ * @brief Example PDCO (primal-dual convex optimization) implementation
+ * Copyright (C) 2003, International Business Machines Corporation.
+ * EPL-1.0 license.
+ *
+ * myPdco: example network matrix for primal-dual interior point method.
+ * Implements ClpPdcoBase interface: matVecMult (A*x, A'*y), getGrad/getHessian
+ * (objective derivatives), getObj (function value), matPrecon (preconditioner).
+ * Designed for simple network optimization problems.
+ *
+ * @see ClpPdcoBase for abstract interface
+ * @see ClpInterior for interior point solver
+ */
+
 // Copyright (C) 2003, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

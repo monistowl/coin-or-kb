@@ -1,3 +1,18 @@
+/**
+ * @file OsiClpSolverInterface.hpp
+ * @brief Osi interface for CLP simplex solver
+ * Copyright (C) 2000, International Business Machines Corporation.
+ * EPL-1.0 license.
+ *
+ * OsiClpSolverInterface wraps ClpSimplex via the Osi abstraction, enabling
+ * Clp use within CBC and with Cgl cut generators. Key features: hot-starting
+ * for strong branching (markHotStart/solveFromHotStart), simplex tableau
+ * access (getBInvARow/getBInvACol), disaster recovery for numerical issues.
+ *
+ * @see ClpSimplex for underlying solver implementation
+ * @see OsiSolverInterface for base abstraction class
+ */
+
 // Copyright (C) 2000, International Business Machines
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
