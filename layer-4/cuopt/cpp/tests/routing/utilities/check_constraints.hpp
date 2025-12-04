@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file check_constraints.hpp
+ * @brief cuOpt VRP constraint handling
+ *
+ * Constraint evaluation for routing solutions.
+ */
 #pragma once
 
 #include <routing/solver.hpp>

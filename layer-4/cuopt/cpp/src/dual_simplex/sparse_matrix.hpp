@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file sparse_matrix.hpp
+ * @brief cuOpt GPU dual simplex component
+ *
+ * Part of CUDA-accelerated dual simplex LP solver.
+ */
 #pragma once
 
 #include <dual_simplex/types.hpp>

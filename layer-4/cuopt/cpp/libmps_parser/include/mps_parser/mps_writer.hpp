@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file mps_writer.hpp
+ * @brief cuOpt public API header
+ *
+ * Public interface for NVIDIA cuOpt optimization library.
+ */
 #pragma once
 
 #include <mps_parser/data_model_view.hpp>

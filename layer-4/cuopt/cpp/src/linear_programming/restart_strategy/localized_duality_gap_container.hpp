@@ -14,6 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @file localized_duality_gap_container.hpp
+ * @brief cuOpt linear programming component
+ *
+ * Part of GPU-accelerated LP solver.
+ */
 #pragma once
 
 #include <raft/core/handle.hpp>

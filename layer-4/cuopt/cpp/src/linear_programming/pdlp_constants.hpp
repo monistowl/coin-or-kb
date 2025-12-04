@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file pdlp_constants.hpp
+ * @brief cuOpt linear programming component
+ *
+ * Part of GPU-accelerated LP solver.
+ */
 #pragma once
 
 #include <raft/util/cuda_utils.cuh>

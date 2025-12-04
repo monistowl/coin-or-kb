@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file cython_solve.hpp
+ * @brief cuOpt public API header
+ *
+ * Public interface for NVIDIA cuOpt optimization library.
+ */
 #pragma once
 
 #include <cuopt/linear_programming/mip/solver_solution.hpp>

@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file local_search_config.hpp
+ * @brief cuOpt MIP solver component
+ *
+ * Part of GPU-accelerated mixed-integer solver.
+ */
 #pragma once
 
 namespace cuopt::linear_programming::detail {

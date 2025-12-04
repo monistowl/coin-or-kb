@@ -14,6 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @file mip_test_instances.hpp
+ * @brief cuOpt linear programming component
+ *
+ * Part of GPU-accelerated LP solver.
+ */
 #pragma once
 #include <string>
 #include <vector>

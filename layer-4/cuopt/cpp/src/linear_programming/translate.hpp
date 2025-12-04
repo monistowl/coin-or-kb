@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file translate.hpp
+ * @brief cuOpt linear programming component
+ *
+ * Part of GPU-accelerated LP solver.
+ */
 #pragma once
 
 #include <cuopt/linear_programming/optimization_problem.hpp>

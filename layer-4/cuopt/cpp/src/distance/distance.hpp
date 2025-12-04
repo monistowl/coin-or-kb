@@ -15,6 +15,13 @@
  * limitations under the License.
  */
 
+/**
+ * @file distance.hpp
+ * @brief cuOpt distance computation
+ *
+ * Distance/time matrix computation for routing.
+ * Haversine, Euclidean, and graph-based distances.
+ */
 #pragma once
 
 #include <routing/routing_details.hpp>

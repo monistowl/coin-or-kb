@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file double_buffer.hpp
+ * @brief cuOpt utility functions
+ *
+ * Common utilities for cuOpt library.
+ */
 #pragma once
 
 #include <rmm/device_uvector.hpp>

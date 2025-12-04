@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file high_res_timer.hpp
+ * @brief cuOpt timing utilities
+ *
+ * Performance timing and profiling.
+ */
 #pragma once
 
 #include <ctime>

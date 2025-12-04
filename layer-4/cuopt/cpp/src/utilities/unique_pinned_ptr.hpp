@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file unique_pinned_ptr.hpp
+ * @brief cuOpt utility functions
+ *
+ * Common utilities for cuOpt library.
+ */
 #pragma once
 
 #include <memory>

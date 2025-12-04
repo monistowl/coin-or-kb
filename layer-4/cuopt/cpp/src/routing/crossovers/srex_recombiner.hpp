@@ -15,6 +15,13 @@
  * limitations under the License.
  */
 
+/**
+ * @file srex_recombiner.hpp
+ * @brief cuOpt VRP genetic crossover
+ *
+ * Crossover operators for evolutionary VRP algorithm.
+ * EAX (edge assembly), OX (order crossover), etc.
+ */
 #pragma once
 
 #include "../diversity/helpers.hpp"

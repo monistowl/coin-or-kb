@@ -1,3 +1,9 @@
+/**
+ * @file initial_problem_check.hpp
+ * @brief cuOpt LP problem representation
+ *
+ * Sparse matrix storage for LP constraints.
+ */
 /*
  * SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
  * SPDX-License-Identifier: Apache-2.0

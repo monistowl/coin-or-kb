@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file hyper_params.hpp
+ * @brief cuOpt vehicle routing component
+ *
+ * Part of GPU-accelerated VRP solver.
+ */
 #pragma once
 
 #include <routing/utilities/constants.hpp>

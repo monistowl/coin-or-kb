@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file pdhg.hpp
+ * @brief cuOpt linear programming component
+ *
+ * Part of GPU-accelerated LP solver.
+ */
 #pragma once
 #include <linear_programming/cusparse_view.hpp>
 #include <linear_programming/saddle_point.hpp>

@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file logger.hpp
+ * @brief cuOpt GPU dual simplex component
+ *
+ * Part of CUDA-accelerated dual simplex LP solver.
+ */
 #pragma once
 
 #ifdef CUOPT_LOG_ACTIVE_LEVEL

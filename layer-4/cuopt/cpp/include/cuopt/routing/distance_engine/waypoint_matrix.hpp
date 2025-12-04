@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file waypoint_matrix.hpp
+ * @brief cuOpt public API header
+ *
+ * Public interface for NVIDIA cuOpt optimization library.
+ */
 #pragma once
 
 #include <raft/core/handle.hpp>

@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file scope_guard.hpp
+ * @brief cuOpt utility functions
+ *
+ * Common utilities for cuOpt library.
+ */
 #pragma once
 
 #include <utility>

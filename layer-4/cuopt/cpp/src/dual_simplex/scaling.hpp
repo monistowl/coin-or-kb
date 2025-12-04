@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file scaling.hpp
+ * @brief cuOpt matrix preprocessing
+ *
+ * Scaling and permutation for numerical stability.
+ */
 #pragma once
 
 #include <dual_simplex/presolve.hpp>

@@ -14,6 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @file solver_stats.hpp
+ * @brief cuOpt public API header
+ *
+ * Public interface for NVIDIA cuOpt optimization library.
+ */
 #pragma once
 namespace cuopt::linear_programming {
 

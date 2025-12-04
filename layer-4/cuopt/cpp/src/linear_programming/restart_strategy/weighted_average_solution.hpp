@@ -14,6 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @file weighted_average_solution.hpp
+ * @brief cuOpt LP solution storage
+ *
+ * Primal/dual solution and basis information.
+ */
 #pragma once
 
 #include <linear_programming/saddle_point.hpp>

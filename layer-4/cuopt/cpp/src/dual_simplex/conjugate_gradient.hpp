@@ -14,6 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @file conjugate_gradient.hpp
+ * @brief cuOpt GPU dual simplex component
+ *
+ * Part of CUDA-accelerated dual simplex LP solver.
+ */
 #pragma once
 
 #include "dual_simplex/dense_vector.hpp"

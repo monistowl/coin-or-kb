@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file basis_updates.hpp
+ * @brief cuOpt dual simplex basis management
+ *
+ * LU factorization and basis updates for GPU simplex.
+ */
 #pragma once
 
 #include <dual_simplex/sparse_matrix.hpp>

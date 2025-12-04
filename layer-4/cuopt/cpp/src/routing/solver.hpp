@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file solver.hpp
+ * @brief cuOpt VRP solver
+ *
+ * Main VRP solver orchestrating metaheuristics.
+ */
 #pragma once
 
 #include <cuopt/routing/assignment.hpp>

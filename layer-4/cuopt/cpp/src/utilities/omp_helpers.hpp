@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file omp_helpers.hpp
+ * @brief cuOpt utility functions
+ *
+ * Common utilities for cuOpt library.
+ */
 #pragma once
 
 #ifdef _OPENMP

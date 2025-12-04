@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file generator.hpp
+ * @brief cuOpt VRP solution generator
+ *
+ * Initial solution construction for VRP.
+ */
 #pragma once
 
 #include <cuopt/routing/cython/generator.hpp>

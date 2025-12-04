@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file gf2_presolve.hpp
+ * @brief cuOpt MIP solver component
+ *
+ * Part of GPU-accelerated mixed-integer solver.
+ */
 #pragma once
 
 #pragma GCC diagnostic push

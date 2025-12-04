@@ -19,6 +19,12 @@
 #include <dual_simplex/sparse_matrix.hpp>
 #include <dual_simplex/types.hpp>
 
+/**
+ * @file dense_matrix.hpp
+ * @brief cuOpt GPU dual simplex component
+ *
+ * Part of CUDA-accelerated dual simplex LP solver.
+ */
 #pragma once
 
 namespace cuopt::linear_programming::dual_simplex {

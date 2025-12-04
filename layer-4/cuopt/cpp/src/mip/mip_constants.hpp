@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file mip_constants.hpp
+ * @brief cuOpt MIP solver component
+ *
+ * Part of GPU-accelerated mixed-integer solver.
+ */
 #pragma once
 
 #include <cuopt/linear_programming/constants.h>

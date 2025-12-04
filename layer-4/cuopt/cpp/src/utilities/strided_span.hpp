@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file strided_span.hpp
+ * @brief cuOpt utility functions
+ *
+ * Common utilities for cuOpt library.
+ */
 #pragma once
 
 #include <utilities/cuda_helpers.cuh>

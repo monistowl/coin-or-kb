@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file solution_writer.hpp
+ * @brief cuOpt optimization utilities
+ *
+ * Common utilities for mathematical optimization.
+ */
 #pragma once
 
 #include <string>

@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file solver_settings.hpp
+ * @brief cuOpt public API header
+ *
+ * Public interface for NVIDIA cuOpt optimization library.
+ */
 #pragma once
 
 #include <cuopt/linear_programming/pdlp/pdlp_warm_start_data.hpp>

@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file folding.hpp
+ * @brief cuOpt GPU dual simplex component
+ *
+ * Part of CUDA-accelerated dual simplex LP solver.
+ */
 #pragma once
 
 #include <dual_simplex/presolve.hpp>

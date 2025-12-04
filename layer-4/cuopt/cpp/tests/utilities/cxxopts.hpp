@@ -24,6 +24,12 @@ THE SOFTWARE.
 
 // vim: ts=2:sw=2:expandtab
 
+/**
+ * @file cxxopts.hpp
+ * @brief Command-line option parsing (cxxopts)
+ *
+ * Third-party command-line parsing library.
+ */
 #ifndef CXXOPTS_HPP_INCLUDED
 #define CXXOPTS_HPP_INCLUDED
 

@@ -14,6 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @file timer.hpp
+ * @brief cuOpt timing utilities
+ *
+ * Performance timing and profiling.
+ */
 #pragma once
 
 #include <chrono>

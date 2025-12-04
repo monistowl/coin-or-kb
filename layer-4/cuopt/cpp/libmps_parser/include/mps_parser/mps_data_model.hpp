@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file mps_data_model.hpp
+ * @brief cuOpt public API header
+ *
+ * Public interface for NVIDIA cuOpt optimization library.
+ */
 #pragma once
 
 #include <cstdint>

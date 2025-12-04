@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file constants.hpp
+ * @brief cuOpt vehicle routing component
+ *
+ * Part of GPU-accelerated VRP solver.
+ */
 #pragma once
 namespace cuopt {
 namespace routing {

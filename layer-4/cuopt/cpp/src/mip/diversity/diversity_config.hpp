@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file diversity_config.hpp
+ * @brief cuOpt MIP solver component
+ *
+ * Part of GPU-accelerated mixed-integer solver.
+ */
 #pragma once
 
 #include <cstddef>

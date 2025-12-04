@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file waypoint_matrix_test.hpp
+ * @brief cuOpt test component
+ *
+ * Testing infrastructure for cuOpt.
+ */
 #pragma once
 
 #include <cuopt/routing/distance_engine/waypoint_matrix.hpp>

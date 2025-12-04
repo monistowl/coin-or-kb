@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file order_info.hpp
+ * @brief cuOpt vehicle routing component
+ *
+ * Part of GPU-accelerated VRP solver.
+ */
 #pragma once
 
 #include <raft/core/device_span.hpp>

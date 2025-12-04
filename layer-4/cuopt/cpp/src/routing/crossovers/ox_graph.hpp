@@ -15,6 +15,13 @@
  * limitations under the License.
  */
 
+/**
+ * @file ox_graph.hpp
+ * @brief cuOpt VRP genetic crossover
+ *
+ * Crossover operators for evolutionary VRP algorithm.
+ * EAX (edge assembly), OX (order crossover), etc.
+ */
 #pragma once
 
 namespace cuopt {

@@ -15,6 +15,13 @@
  * limitations under the License.
  */
 
+/**
+ * @file common_utils.hpp
+ * @brief cuOpt MPS file parser
+ *
+ * Reads LP/MIP problems in MPS format.
+ * Handles fixed and free format MPS files.
+ */
 #pragma once
 
 #include <string>

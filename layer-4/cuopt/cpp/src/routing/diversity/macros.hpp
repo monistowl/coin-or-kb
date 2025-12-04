@@ -15,6 +15,13 @@
  * limitations under the License.
  */
 
+/**
+ * @file macros.hpp
+ * @brief cuOpt VRP diversity management
+ *
+ * Population diversity for evolutionary VRP.
+ * Prevents premature convergence.
+ */
 #pragma once
 
 #include "../routing_helpers.cuh"

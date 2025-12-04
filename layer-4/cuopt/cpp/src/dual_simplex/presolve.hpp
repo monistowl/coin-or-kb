@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file presolve.hpp
+ * @brief cuOpt LP presolve
+ *
+ * Bound tightening and constraint reduction for LP.
+ */
 #pragma once
 
 #include <dual_simplex/simplex_solver_settings.hpp>

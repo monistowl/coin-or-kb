@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file logger.hpp
+ * @brief cuOpt MIP solver component
+ *
+ * Part of GPU-accelerated mixed-integer solver.
+ */
 #pragma once
 
 #include <cuopt/logger.hpp>

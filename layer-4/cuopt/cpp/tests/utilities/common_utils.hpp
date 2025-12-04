@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file common_utils.hpp
+ * @brief cuOpt test utilities
+ *
+ * Helper functions for testing.
+ */
 #pragma once
 
 #include <cuopt/error.hpp>

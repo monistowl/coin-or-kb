@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file saddle_point.hpp
+ * @brief cuOpt linear programming component
+ *
+ * Part of GPU-accelerated LP solver.
+ */
 #pragma once
 
 #include <raft/core/handle.hpp>

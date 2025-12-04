@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file arc_value.hpp
+ * @brief cuOpt vehicle routing component
+ *
+ * Part of GPU-accelerated VRP solver.
+ */
 #pragma once
 
 #include <cuopt/error.hpp>

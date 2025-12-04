@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file recombiner_configs.hpp
+ * @brief cuOpt MIP solver component
+ *
+ * Part of GPU-accelerated mixed-integer solver.
+ */
 #pragma once
 
 namespace cuopt::linear_programming::detail {

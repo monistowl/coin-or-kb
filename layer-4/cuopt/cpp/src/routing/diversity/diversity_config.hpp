@@ -1,3 +1,10 @@
+/**
+ * @file diversity_config.hpp
+ * @brief cuOpt VRP diversity management
+ *
+ * Population diversity for evolutionary VRP.
+ * Prevents premature convergence.
+ */
 /*
  * SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
  * SPDX-License-Identifier: Apache-2.0

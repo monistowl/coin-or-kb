@@ -1,3 +1,9 @@
+/**
+ * @file initial_solution_reader.hpp
+ * @brief cuOpt LP solution storage
+ *
+ * Primal/dual solution and basis information.
+ */
 /*
  * SPDX-FileCopyrightText: Copyright (c) 2022-2025, NVIDIA CORPORATION & AFFILIATES. All rights
  * reserved. SPDX-License-Identifier: Apache-2.0

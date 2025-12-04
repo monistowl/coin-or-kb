@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file third_party_presolve.hpp
+ * @brief cuOpt MIP solver component
+ *
+ * Part of GPU-accelerated mixed-integer solver.
+ */
 #pragma once
 
 #include <cuopt/linear_programming/optimization_problem.hpp>

@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file copy_helpers.hpp
+ * @brief cuOpt utility functions
+ *
+ * Common utilities for cuOpt library.
+ */
 #pragma once
 
 #include <raft/core/device_span.hpp>

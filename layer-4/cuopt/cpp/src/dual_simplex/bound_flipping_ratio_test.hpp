@@ -14,6 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @file bound_flipping_ratio_test.hpp
+ * @brief cuOpt dual simplex ratio test
+ *
+ * Leaving variable selection via ratio test.
+ */
 #pragma once
 
 #include <dual_simplex/initial_basis.hpp>

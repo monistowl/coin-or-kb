@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file base_fixture.hpp
+ * @brief cuOpt test fixture
+ *
+ * Base test class and fixtures for unit testing.
+ */
 #pragma once
 
 #include <utilities/error.hpp>

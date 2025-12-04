@@ -15,6 +15,13 @@
  * limitations under the License.
  */
 
+/**
+ * @file device_bitset.hpp
+ * @brief cuOpt VRP local search
+ *
+ * Local search moves for route improvement.
+ * 2-opt, Or-opt, swap, relocate operators.
+ */
 #pragma once
 
 #include <cstring>

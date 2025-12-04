@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file initial_basis.hpp
+ * @brief cuOpt dual simplex basis management
+ *
+ * LU factorization and basis updates for GPU simplex.
+ */
 #pragma once
 
 #include <dual_simplex/presolve.hpp>

@@ -15,6 +15,13 @@
  * limitations under the License.
  */
 
+/**
+ * @file cycle.hpp
+ * @brief cuOpt VRP local search
+ *
+ * Local search moves for route improvement.
+ * 2-opt, Or-opt, swap, relocate operators.
+ */
 #pragma once
 
 #include <utilities/copy_helpers.hpp>

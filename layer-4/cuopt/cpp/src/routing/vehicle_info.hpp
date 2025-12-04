@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file vehicle_info.hpp
+ * @brief cuOpt VRP vehicle/fleet model
+ *
+ * Vehicle capacity, time windows, and fleet constraints.
+ */
 #pragma once
 
 #include <routing/routing_details.hpp>

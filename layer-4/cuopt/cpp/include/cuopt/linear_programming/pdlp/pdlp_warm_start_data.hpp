@@ -15,6 +15,13 @@
  * limitations under the License.
  */
 
+/**
+ * @file pdlp_warm_start_data.hpp
+ * @brief cuOpt GPU linear programming API
+ *
+ * Public API for GPU-accelerated linear programming.
+ * CUDA-based simplex and interior point methods.
+ */
 #pragma once
 
 #include <rmm/device_uvector.hpp>

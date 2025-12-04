@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file generator.hpp
+ * @brief cuOpt public API header
+ *
+ * Public interface for NVIDIA cuOpt optimization library.
+ */
 #pragma once
 
 #include <cuopt/routing/data_model_view.hpp>

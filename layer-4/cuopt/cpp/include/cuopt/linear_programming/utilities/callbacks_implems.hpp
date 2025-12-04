@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * @file callbacks_implems.hpp
+ * @brief cuOpt public API header
+ *
+ * Public interface for NVIDIA cuOpt optimization library.
+ */
 #pragma once
 
 #include <Python.h>

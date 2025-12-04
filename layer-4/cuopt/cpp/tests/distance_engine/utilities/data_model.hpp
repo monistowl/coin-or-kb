@@ -14,6 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @file data_model.hpp
+ * @brief cuOpt test data model
+ *
+ * Test problem data structures.
+ */
 #pragma once
 
 #include <vector>
