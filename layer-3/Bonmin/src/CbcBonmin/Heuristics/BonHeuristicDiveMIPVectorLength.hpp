@@ -5,12 +5,24 @@
  * All Rights Reserved.
  * This code is published under the Eclipse Public License.
  *
+ * @algorithm MIP-Guided Vector Length Diving
+ * @math Combines MIP guidance with column-density selection:
+ *       score(x_j) = min(f_j, 1-f_j) · columnLength_j
+ *       Select variable with maximum impact score, use MIP for rounding.
+ *
  * HeuristicDiveMIPVectorLength: Diving heuristic for MINLP that solves
  * MIP subproblems during diving. Variable selection based on column
  * length (number of constraints containing the variable).
  *
- * Prioritizes high-density columns for faster constraint propagation.
- * Uses columnLength_ array for efficient lookup.
+ * **Hybrid approach:** Uses MIP solver's insight combined with structural
+ * information (constraint participation). Variables in many constraints
+ * propagate more information when fixed.
+ *
+ * Uses columnLength_ array for O(1) lookup after O(nnz) preprocessing.
+ *
+ * @complexity O(MIP) + O(n) per step; O(nnz) setup for column lengths
+ * @ref Achterberg, T. (2007). "Constraint Integer Programming".
+ *      PhD thesis, TU Berlin. Section 7.4.
  *
  * Authors: Joao P. Goncalves, IBM
  * Date: November 12, 2007

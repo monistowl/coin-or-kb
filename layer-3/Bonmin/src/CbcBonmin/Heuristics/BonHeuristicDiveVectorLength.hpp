@@ -5,12 +5,29 @@
  * All Rights Reserved.
  * This code is published under the Eclipse Public License.
  *
+ * @algorithm Vector Length Diving Heuristic
+ * @math Variable selection combines fractionality and column density:
+ *       score(x_j) = min(f_j, 1-f_j) · columnLength_j
+ *       where columnLength_j = number of constraints containing x_j.
+ *       Selects variable with maximum score (fractional AND high-impact).
+ *
  * HeuristicDiveVectorLength: Diving heuristic for MINLP that solves
  * NLP subproblems during diving. Variable selection based on column
  * length (number of constraints containing the variable).
  *
- * Prioritizes high-density columns for faster constraint propagation.
- * Uses columnLength_ array for efficient lookup.
+ * **Rationale:** Variables appearing in many constraints have higher
+ * impact when fixed. By weighting fractionality by column length,
+ * we prioritize fixing variables that propagate more information.
+ *
+ * **Algorithm:**
+ * 1. Precompute columnLength_j for all integer variables
+ * 2. For each fractional x_j, compute score = min(f_j, 1-f_j) · columnLength_j
+ * 3. Select j* = argmax_j score(x_j)
+ * 4. Round towards nearest integer
+ *
+ * @complexity O(n) per diving step; O(nnz) one-time setup for column lengths
+ * @ref Achterberg, T. (2007). "Constraint Integer Programming".
+ *      PhD thesis, TU Berlin. Section 7.4.
  *
  * Authors: Joao P. Goncalves, IBM
  * Date: November 12, 2007

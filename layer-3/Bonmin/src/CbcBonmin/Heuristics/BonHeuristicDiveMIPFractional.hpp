@@ -5,11 +5,23 @@
  * All Rights Reserved.
  * This code is published under the Eclipse Public License.
  *
+ * @algorithm MIP-Guided Most Fractional Diving
+ * @math Combines MIP guidance with fractional selection:
+ *       1. Solve MIP subproblem to get candidate integer assignment
+ *       2. Among unfixed variables, select j* = argmax min(f_j, 1-f_j)
+ *       3. Rounding uses MIP solution when available, else nearest integer
+ *
  * HeuristicDiveMIPFractional: Diving heuristic for MINLP that solves
  * MIP subproblems during diving. Variable selection based on
  * fractionality - picks variable closest to 0.5.
  *
- * Extends HeuristicDiveMIP with most-fractional variable selection.
+ * **Hybrid approach:** Uses MIP solver's insight into integer feasibility
+ * combined with simple fractional selection. More robust than pure NLP
+ * diving when MIP relaxation provides good guidance.
+ *
+ * @complexity O(MIP) + O(n) per step; MIP dominates
+ * @ref Bonami, P. et al. (2008). "An algorithmic framework for convex
+ *      mixed integer nonlinear programs". Discrete Optimization 5(2):186-204.
  *
  * Authors: Joao P. Goncalves, IBM
  * Date: November 12, 2007

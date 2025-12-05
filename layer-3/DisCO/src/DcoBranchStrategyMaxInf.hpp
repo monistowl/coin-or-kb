@@ -18,6 +18,11 @@
  * @file DcoBranchStrategyMaxInf.hpp
  * @brief Maximum infeasibility branching strategy
  *
+ * @algorithm Maximum Infeasibility Branching (Most Fractional)
+ * @math Variable selection: j* = argmax_j min(f_j, 1-f_j)
+ *       where f_j = x_j - ⌊x_j⌋ is fractional part.
+ *       Equivalent to selecting variable closest to 0.5.
+ *
  * Maximum infeasibility branching selects the variable with the
  * largest integrality violation (closest to 0.5 fractional part).
  *
@@ -35,6 +40,10 @@
  * **Trade-offs:**
  * - Pro: Simple, fast, no historical data needed
  * - Con: Often poor branching decisions, larger trees
+ *
+ * @complexity O(n) per node, no storage overhead
+ * @ref Land, A.H. & Doig, A.G. (1960). "An Automatic Method of
+ *      Solving Discrete Programming Problems". Econometrica 28(3):497-520.
  *
  * @see DcoBranchStrategyPseudo.hpp for pseudocost (smarter)
  * @see DcoBranchStrategyStrong.hpp for strong (best but slow)

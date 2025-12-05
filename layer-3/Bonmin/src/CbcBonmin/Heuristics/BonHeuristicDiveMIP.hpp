@@ -5,15 +5,31 @@
  * All Rights Reserved.
  * This code is published under the Eclipse Public License.
  *
+ * @algorithm MIP-Guided Diving Heuristic Framework
+ * @math Uses MIP subproblem to guide diving in MINLP:
+ *       Given MINLP relaxation solution x*, solve MIP:
+ *         min ||x - x*||  s.t. Ax ≤ b, x_j ∈ Z (integer vars)
+ *       MIP solution suggests which integers to fix and their values.
+ *
  * HeuristicDiveMIP: Abstract base class for diving heuristics that solve
  * MIP subproblems during the dive. Unlike pure NLP-based diving, this
  * uses a SubMipSolver (mip_) to handle integer feasibility more robustly.
+ *
+ * **Key advantage over NLP diving:**
+ * - MIP solver handles combinatorial structure better
+ * - Can find feasible integer assignments that NLP diving misses
+ * - Useful when NLP relaxation is far from integer feasible
+ *
+ * **Trade-off:** More expensive per iteration (MIP solve vs O(n) selection)
+ * but may require fewer total iterations.
  *
  * Derived classes implement:
  * - setInternalVariables(): Setup for variable selection
  * - selectVariableToBranch(): Variable and rounding direction choice
  *
- * Uses BonminSetup for configuration and TMINLP2TNLP for problem access.
+ * @complexity O(MIP) per diving step; MIP complexity depends on formulation
+ * @ref Bonami, P. et al. (2008). "An algorithmic framework for convex
+ *      mixed integer nonlinear programs". Discrete Optimization 5(2):186-204.
  *
  * Authors: Joao P. Goncalves, IBM
  * Date: November 12, 2007

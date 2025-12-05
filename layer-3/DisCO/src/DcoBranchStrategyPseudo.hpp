@@ -18,6 +18,13 @@
  * @file DcoBranchStrategyPseudo.hpp
  * @brief Pseudocost branching variable selection
  *
+ * @algorithm Pseudocost Branching
+ * @math Pseudocost φ_j estimates objective gain per unit fractionality:
+ *       φ_j^- = avg(Δ_j^- / f_j^-), φ_j^+ = avg(Δ_j^+ / f_j^+)
+ *       where f_j^- = x_j - ⌊x_j⌋, f_j^+ = ⌈x_j⌉ - x_j
+ *       Weighted score: s = (1-μ)·min(φ^-, φ^+) + μ·max(φ^-, φ^+), μ=1/6
+ *       Select j* = argmax_j s(φ_j^-, φ_j^+)
+ *
  * Pseudocost branching uses historical data about variable branching
  * performance to estimate which variable will improve bounds most.
  *
@@ -34,6 +41,10 @@
  * **Statistics Tracked:**
  * - down_num_/up_num_: Observation counts per variable
  * - down_derivative_/up_derivative_: phi values
+ *
+ * @complexity O(n) per node; O(n) storage for statistics
+ * @ref Achterberg, T. (2007). "Constraint Integer Programming".
+ *      PhD thesis, TU Berlin. Section 7.2.
  *
  * @see DcoBranchStrategyStrong.hpp for initial pseudocost estimation
  * @see DcoBranchStrategyRel.hpp for reliability branching (hybrid)

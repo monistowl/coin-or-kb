@@ -18,6 +18,12 @@
  * @file DcoBranchStrategyStrong.hpp
  * @brief Strong branching variable selection strategy
  *
+ * @algorithm Strong Branching
+ * @math For each candidate j, temporarily fix x_j to floor/ceil and solve:
+ *       Δ_j^- = obj(x_j ≤ ⌊x_j⌋) - obj_current  (down branch degradation)
+ *       Δ_j^+ = obj(x_j ≥ ⌈x_j⌉) - obj_current  (up branch degradation)
+ *       Score = Δ_j^- · Δ_j^+  (product rule favors balanced branches)
+ *
  * Strong branching evaluates candidate variables by actually solving
  * the LP/conic relaxation for both branches before deciding.
  *
@@ -35,6 +41,10 @@
  * **Trade-offs:**
  * - Pro: Best branching decisions, smaller trees
  * - Con: Expensive, many LP/conic solves per node
+ *
+ * @complexity O(N · LP) per node, where N = strongCandSize candidates
+ * @ref Applegate, D. et al. (1995). "Finding Cuts in the TSP".
+ *      DIMACS Series in Discrete Mathematics 47:91-107.
  *
  * @see DcoBranchStrategyPseudo.hpp for pseudocost (cheaper)
  * @see DcoBranchStrategyRel.hpp for reliability (hybrid)

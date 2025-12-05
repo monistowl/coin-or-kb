@@ -13,10 +13,16 @@
  * @brief Cuts from redundant relationships between auxiliary variables
  *
  * @algorithm Cross-Convexification via Algebraic Identities
+ * @math Exploits algebraic identities among auxiliary variables:
+ *       - Product chain: x_k = x_i·x_j, x_l = x_i·x_p ⟹ x_k·x_p = x_l·x_j
+ *       - Log sum: log(x_1) + log(x_2) = log(x_1·x_2)
+ *       - Power: x^α, x^β ⟹ x^β = (x^α)^(β/α)
  *
  * Identifies and exploits algebraic relationships between auxiliary
  * variables that arise from the reformulation. These give valid
  * equalities or inequalities that strengthen the relaxation.
+ *
+ * @complexity O(n²) to identify relationships; O(1) per cut
  *
  * **Example relationships (commented out but informative):**
  *
