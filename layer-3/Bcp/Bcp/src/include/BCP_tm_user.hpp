@@ -5,6 +5,8 @@
  * @file BCP_tm_user.hpp
  * @brief User customization interface for Tree Manager process
  *
+ * @algorithm Tree Manager User Interface for Problem-Specific B&B
+ *
  * BCP_tm_user is the base class for user-defined Tree Manager behavior.
  * Users derive their own class and override virtual methods.
  *

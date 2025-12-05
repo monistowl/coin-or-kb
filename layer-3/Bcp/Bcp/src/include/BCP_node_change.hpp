@@ -5,6 +5,8 @@
  * @file BCP_node_change.hpp
  * @brief Complete node delta encoding for tree storage
  *
+ * @algorithm Node Delta Encoding: Compact Tree Storage via Parent Diffs
+ *
  * BCP_node_change aggregates all changes between parent and child nodes
  * for compact tree storage.
  *

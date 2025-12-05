@@ -5,6 +5,8 @@
  * @file BCP_lp.hpp
  * @brief LP process for BCP Branch-Cut-Price framework
  *
+ * @algorithm LP Worker: Relaxation Solving with Cut/Column Generation
+ *
  * The LP process is the workhorse that actually solves subproblems:
  * - Solves LP relaxations via OsiSolverInterface
  * - Generates cuts locally or receives from Cut Generator

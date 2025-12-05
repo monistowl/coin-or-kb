@@ -5,6 +5,8 @@
  * @file BCP_vg.hpp
  * @brief Variable Generator process for BCP Branch-Cut-Price (pricing)
  *
+ * @algorithm Variable Generator: Column Generation via Pricing Subproblems
+ *
  * The Variable Generator (VG) performs column generation:
  * generates variables with negative reduced cost from dual solutions.
  *

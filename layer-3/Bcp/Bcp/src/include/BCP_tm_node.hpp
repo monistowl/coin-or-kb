@@ -5,6 +5,8 @@
  * @file BCP_tm_node.hpp
  * @brief Search tree node representation in Tree Manager
  *
+ * @algorithm Search Tree Management: Delta Encoding & Distributed Storage
+ *
  * Defines how the TM represents and manages the branch-and-bound tree.
  *
  * **BCP_tm_node_status:**

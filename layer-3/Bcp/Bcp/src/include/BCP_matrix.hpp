@@ -5,6 +5,8 @@
  * @file BCP_matrix.hpp
  * @brief Matrix and vector representations for BCP LP relaxation
  *
+ * @algorithm LP Relaxation Matrix with Dynamic Column/Row Addition
+ *
  * Extends CoinPackedVector/Matrix with bounds for LP formulation:
  *
  * **BCP_col (extends CoinPackedVector):**

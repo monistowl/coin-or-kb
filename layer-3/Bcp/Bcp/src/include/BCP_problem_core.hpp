@@ -5,6 +5,8 @@
  * @file BCP_problem_core.hpp
  * @brief Core problem formulation for BCP Branch-Cut-Price
  *
+ * @algorithm Core Formulation: Immutable Base with Delta Tracking
+ *
  * Defines the permanent part of the MIP formulation that never changes.
  *
  * **BCP_problem_core:**

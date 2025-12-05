@@ -5,6 +5,8 @@
  * @file BCP_var.hpp
  * @brief Variable representation for BCP Branch-Cut-Price
  *
+ * @algorithm Variable Classes for Column Generation and B&B
+ *
  * Defines variable classes used throughout BCP:
  *
  * **Class hierarchy:**

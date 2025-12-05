@@ -5,6 +5,8 @@
  * @file BCP_solution.hpp
  * @brief Solution representation for BCP Branch-Cut-Price
  *
+ * @algorithm MIP Solution Storage and Upper Bound Tracking
+ *
  * Defines how MIP feasible solutions are stored and transmitted:
  *
  * **Class hierarchy:**

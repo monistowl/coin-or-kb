@@ -5,6 +5,8 @@
  * @file BCP_lp_result.hpp
  * @brief LP solve results for BCP Branch-Cut-Price
  *
+ * @algorithm LP Result Capture: Primal/Dual Solutions and Termination
+ *
  * BCP_lp_result stores the output from solving an LP relaxation.
  * Used throughout BCP for accessing LP solution data.
  *

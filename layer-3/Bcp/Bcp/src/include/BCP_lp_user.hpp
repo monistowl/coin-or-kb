@@ -5,6 +5,8 @@
  * @file BCP_lp_user.hpp
  * @brief User customization interface for LP process
  *
+ * @algorithm LP User Hooks: Cuts, Branching, Feasibility, Heuristics
+ *
  * BCP_lp_user is the main interface for user-defined LP behavior.
  * Most BCP customization happens here.
  *

@@ -5,6 +5,8 @@
  * @file BCP_branch.hpp
  * @brief Internal branching object for BCP Branch-Cut-Price
  *
+ * @algorithm Internal Branching Representation: Bound Changes per Child
+ *
  * Represents the result of a branching decision as bound changes
  * on variables and cuts across children nodes.
  *

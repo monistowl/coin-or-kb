@@ -5,6 +5,8 @@
  * @file BCP_message.hpp
  * @brief Abstract message passing interface for BCP parallelism
  *
+ * @algorithm Message Passing: PVM/MPI/Single Process Abstraction
+ *
  * BCP_message_environment is the base class for all message passing
  * implementations. Derived classes implement the protocol:
  *

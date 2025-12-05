@@ -2,9 +2,19 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_lp_node.hpp
- * @brief BCP LP process
+ * @brief LP process node representation
  *
- * LP relaxation process: solves node relaxations, generates cuts.
+ * @algorithm LP Node: Parent Info and Storage Strategy Tracking
+ *
+ * Tracks node information within LP process including parent
+ * description and storage strategies for tree reconstruction.
+ *
+ * **BCP_node_storage_in_tm:** How each piece is stored (explicit vs delta).
+ * **BCP_lp_parent:** Parent node info (bounds, user data, diving info).
+ * **BCP_lp_node:** Current node being processed.
+ *
+ * @see BCP_tm_node.hpp for Tree Manager side node representation
+ * @see BCP_node_change.hpp for delta encoding
  */
 #ifndef _BCP_LP_NODE_H
 #define _BCP_LP_NODE_H

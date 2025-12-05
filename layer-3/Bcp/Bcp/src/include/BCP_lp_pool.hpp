@@ -2,9 +2,21 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_lp_pool.hpp
- * @brief BCP LP process
+ * @brief Cut and variable pools for LP process
  *
- * LP relaxation process: solves node relaxations, generates cuts.
+ * @algorithm Cut/Variable Pooling: Violation Ranking and Selection
+ *
+ * Manages waiting cuts and variables for addition to LP relaxation.
+ * Tracks violation/reduced cost and supports ranked selection.
+ *
+ * **BCP_lp_waiting_row:** Pair of (BCP_cut, BCP_row) with violation.
+ * **BCP_lp_cut_pool:** Pool of waiting rows sorted by violation.
+ * **BCP_lp_var_pool:** Pool of waiting columns (variables).
+ *
+ * **Usage:** Generated cuts/vars queued here, then best ones added to LP.
+ *
+ * @see BCP_lp_user::select_cuts() for cut selection policy
+ * @see BCP_lp_user::select_vars() for variable selection policy
  */
 #ifndef _BCP_LP_POOL_H
 #define _BCP_LP_POOL_H

@@ -5,6 +5,8 @@
  * @file BCP_vg_user.hpp
  * @brief User customization interface for Variable Generator process
  *
+ * @algorithm Variable Generator User Interface for Custom Pricing
+ *
  * BCP_vg_user is the base class for user-defined column generation
  * (pricing) in a separate process. Users derive and override virtual methods.
  *

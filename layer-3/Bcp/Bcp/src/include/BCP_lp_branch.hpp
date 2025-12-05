@@ -5,6 +5,8 @@
  * @file BCP_lp_branch.hpp
  * @brief LP-side branching objects for BCP Branch-Cut-Price
  *
+ * @algorithm Strong Branching with Presolved Candidates
+ *
  * User-facing branching object classes used during strong branching
  * and branch selection in the LP process.
  *

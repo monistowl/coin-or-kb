@@ -5,6 +5,8 @@
  * @file BCP_tm.hpp
  * @brief Tree Manager process for BCP Branch-Cut-Price framework
  *
+ * @algorithm Tree Manager: Parallel B&B Coordinator with Distributed Scheduling
+ *
  * The Tree Manager (TM) coordinates the entire BCP algorithm:
  * - Manages the search tree and candidate node selection
  * - Tracks global upper/lower bounds

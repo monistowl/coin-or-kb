@@ -5,6 +5,8 @@
  * @file BCP_cut.hpp
  * @brief Cut (constraint) representation for BCP Branch-Cut-Price
  *
+ * @algorithm Cut Classes for Cutting Plane Generation in B&B
+ *
  * Defines cut classes used throughout BCP:
  *
  * **Class hierarchy:**

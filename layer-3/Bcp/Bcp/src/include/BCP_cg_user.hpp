@@ -5,6 +5,8 @@
  * @file BCP_cg_user.hpp
  * @brief User customization interface for Cut Generator process
  *
+ * @algorithm Cut Generator User Interface for Custom Separation
+ *
  * BCP_cg_user is the base class for user-defined cut generation in
  * a separate process. Users derive and override virtual methods.
  *

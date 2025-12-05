@@ -5,6 +5,8 @@
  * @file BCP_cg.hpp
  * @brief Cut Generator process for BCP Branch-Cut-Price framework
  *
+ * @algorithm Cut Generator: Distributed Separation in Branch-Cut-Price
+ *
  * The Cut Generator (CG) runs as a separate process that generates
  * cutting planes from LP solutions sent by the LP process.
  *
