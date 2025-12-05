@@ -9,10 +9,29 @@
  * Wraps IBM's Watson Sparse Matrix Package (WSSMP) for Cholesky factorization
  * of normal equations in interior point methods.
  *
- * WSSMP provides high-performance sparse direct solving with:
- * - Multifrontal factorization
- * - Shared memory parallelism
- * - Dense column threshold for hybrid sparse/dense
+ * @algorithm Normal Equations Factorization:
+ * For interior point, need to solve the system at each iteration.
+ * This class factors the normal equations matrix M = A·D·A'.
+ *
+ * @math NORMAL EQUATIONS:
+ * Given step direction system:  [D  A'] [Δx]   [r₁]
+ *                               [A  0 ] [Δy] = [r₂]
+ *
+ * Eliminate Δx: (A·D⁻¹·A')·Δy = r₂ - A·D⁻¹·r₁
+ *               M·Δy = rhs  where M = A·D⁻¹·A'
+ *
+ * Then: Δx = D⁻¹·(r₁ - A'·Δy)
+ *
+ * @algorithm WSSMP Features:
+ * - Multifrontal sparse Cholesky: O(n^1.5 to n^2) for 2D/3D problems
+ * - Shared memory parallelism (OpenMP)
+ * - Dense column handling: columns with >threshold nonzeros
+ *   treated as dense for cache efficiency
+ * - Symbolic factorization reuse: factor pattern once, update numerics
+ *
+ * @complexity Symbolic: O(nnz²/n) typical for sparse
+ * Numeric: O(nnz(L)·n_ops) where L is Cholesky factor
+ * Solve: O(nnz(L)) triangular solves
  *
  * Requires WSSMP library to be installed and linked.
  *

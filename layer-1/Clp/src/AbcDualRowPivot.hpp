@@ -10,14 +10,32 @@
  * Defines the interface for choosing which row (basic variable) should
  * leave the basis in dual simplex iterations within the ABC framework.
  *
- * Key virtual methods:
- * - pivotRow(): Select row with largest infeasibility (returns -1 if optimal)
- * - updateWeights(): Update edge norms after pivot and do FT update
- * - updatePrimalSolution(): Update solution after pivot
- * - saveWeights(): Persist weights across factorizations
+ * @algorithm Dual Simplex Row Selection Interface:
+ * In dual simplex, we first choose the LEAVING variable (row), then
+ * perform ratio test to find ENTERING variable (column).
  *
- * The ABC version differs from ClpDualRowPivot in using CoinIndexedVector
- * references (not pointers) for better cache behavior.
+ * @algorithm Row Selection Strategies:
+ *
+ * 1. DANTZIG (AbcDualRowDantzig):
+ *    i* = argmax_i |violation_i|
+ *    O(k) where k = infeasible rows. Simple, no state to maintain.
+ *
+ * 2. STEEPEST EDGE (AbcDualRowSteepest):
+ *    i* = argmax_i (violation_i)² / ||β_i||²
+ *    where β_i = B⁻¹·eᵢ is the i-th row of B⁻¹.
+ *    Normalizes by edge length for better geometric progress.
+ *
+ * @algorithm Weight Update Protocol:
+ *   updateWeights1(): Compute tableau column, partial FT update
+ *   updateWeightsOnly(): Just update norms (no FT)
+ *   updateWeights2(): Finish weight updates after pivot
+ *
+ * This split allows pipelining with other operations.
+ *
+ * @algorithm ABC Optimizations:
+ * - CoinIndexedVector references (not pointers) for cache locality
+ * - Weights computed in chunks for vectorization
+ * - FT update integrated with weight maintenance
  *
  * @see AbcDualRowDantzig for simple largest-infeasibility selection
  * @see AbcDualRowSteepest for steepest edge variant

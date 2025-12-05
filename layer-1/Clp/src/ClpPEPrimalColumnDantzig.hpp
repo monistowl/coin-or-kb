@@ -7,8 +7,33 @@
  * Positive Edge compatibility checking. Prioritizes compatible columns
  * that can make real progress on degenerate problems.
  *
- * Uses bi-dimensional pricing: candidates are scored by both reduced cost
- * and compatibility, weighted by psi parameter (default 0.5).
+ * @algorithm Positive Edge Primal Pricing:
+ * Addresses degeneracy by preferring "compatible" entering variables.
+ *
+ * @math DEGENERACY PROBLEM:
+ * When basic variables are at bounds, ratio test gives θ = 0.
+ * Pivot changes basis but x, z unchanged → no progress.
+ * Degenerate pivots can cycle or stall for many iterations.
+ *
+ * @algorithm Compatibility Definition:
+ * Column j is compatible if entering it would DECREASE some infeasibility:
+ *   Compatible_j = ∃i : (x_Bi at bound) ∧ (α_ij ≠ 0) ∧ (sign gives progress)
+ *
+ * Intuition: Compatible columns can "unlock" degenerate basic variables.
+ *
+ * @algorithm Bi-Dimensional Pricing:
+ * Score(j) = |c̄_j|^(1-ψ) × Compat(j)^ψ
+ *
+ * Where ψ ∈ [0,1] controls priority (default 0.5):
+ *   ψ = 0: Pure Dantzig (ignore compatibility)
+ *   ψ = 1: Pure compatibility (ignore reduced cost)
+ *   ψ = 0.5: Balanced - good default
+ *
+ * @complexity O(n) per pricing like Dantzig, but with compatibility
+ * check overhead. Compatibility set updated periodically, not every iter.
+ *
+ * @ref Towhidi, Desrosiers, Soumis (2014): "The positive edge criterion
+ *      within COIN-OR's CLP"
  *
  * @see ClpPESimplex for the compatibility framework
  * @see ClpPrimalColumnDantzig for the base pricing rule

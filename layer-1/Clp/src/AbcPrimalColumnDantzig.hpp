@@ -11,10 +11,33 @@
  * with most negative reduced cost. This is Dantzig's original 1947 rule
  * adapted for the ABC optimized simplex framework.
  *
- * As the comments note, this "lumbers over all columns - slow" but is
- * useful for debugging or when steepest edge overhead isn't worthwhile.
+ * @algorithm Dantzig's Original Pivot Rule (1947):
+ * Select entering variable j* = argmin_{j} { c̄_j : c̄_j < 0 }
  *
- * Use AbcPrimalColumnSteepest for better performance on most problems.
+ * @math REDUCED COST:
+ * c̄_j = c_j - π'A_j  where π = c_B'·B⁻¹ are dual variables
+ *
+ * c̄_j < 0 means increasing x_j will decrease objective.
+ * Choose most negative = steepest descent in reduced cost space.
+ *
+ * @algorithm FULL PRICING:
+ * Must examine all n-m nonbasic variables to find minimum.
+ * "Lumbers over all columns" - no sophisticated screening.
+ *
+ * @complexity O(n) per pricing iteration.
+ * Simple but can be slow on large problems.
+ *
+ * WHEN TO USE:
+ * - Debugging: Simplest rule, easiest to verify
+ * - Small problems: Overhead of steepest edge not worth it
+ * - Dense problems: Steepest edge weight updates expensive
+ *
+ * WHEN TO AVOID:
+ * - Large sparse problems: Use partial pricing or steepest edge
+ * - Degenerate problems: Dantzig can cycle; steepest edge more stable
+ *
+ * ABC optimization: Uses CoinPartitionedVector for cache-friendly
+ * scanning of reduced costs.
  *
  * @see AbcPrimalColumnPivot for the base interface
  * @see AbcPrimalColumnSteepest for recommended steepest edge variant

@@ -9,15 +9,37 @@
  * Variant of ClpCholeskyWssmp that solves the KKT/augmented system directly
  * instead of forming and factoring the normal equations A*D*A'.
  *
- * The KKT system has the form:
- *   [ -D   A' ] [ dx ]   [ r1 ]
- *   [  A   0  ] [ dy ] = [ r2 ]
+ * @algorithm Augmented System vs Normal Equations:
+ * Two approaches to solve interior point step directions.
  *
- * Solving this 2x2 block system avoids forming A*D*A' explicitly, which
- * can be beneficial when A*D*A' would be very dense but the augmented
- * system remains sparse.
+ * @math KKT SYSTEM (Augmented):
+ *   [ -D   A' ] [ Δx ]   [ r₁ ]
+ *   [  A   0  ] [ Δy ] = [ r₂ ]
  *
- * Adds solveKKT() method for direct augmented system solves.
+ * This is an indefinite symmetric system (saddle point).
+ *
+ * @math NORMAL EQUATIONS (Alternative):
+ *   (A·D⁻¹·A')·Δy = r₂ - A·D⁻¹·r₁
+ *
+ * @algorithm When to Use KKT vs Normal:
+ *
+ * PREFER KKT when:
+ *   - A has dense columns → A·D·A' fills in heavily
+ *   - m ≈ n (square-ish) → KKT not much larger
+ *   - Need regularization → add δI to (2,2) block
+ *   - A already sparse structured
+ *
+ * PREFER NORMAL when:
+ *   - m << n (many more variables than constraints)
+ *   - A·D·A' stays sparse
+ *   - Want positive definite factorization
+ *
+ * @algorithm Indefinite Factorization:
+ * KKT matrix is symmetric indefinite → use LDL' with pivoting.
+ * WSSMP handles this with Bunch-Kaufman pivoting.
+ *
+ * @complexity KKT: O((m+n)^α) where α depends on sparsity
+ * Often better constant than forming A·D·A' explicitly.
  *
  * @see ClpCholeskyWssmp for the normal equations variant
  * @see ClpCholeskyBase for the abstract interface

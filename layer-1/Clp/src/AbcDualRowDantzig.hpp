@@ -11,11 +11,31 @@
  * largest primal infeasibility. This is Dantzig's original 1947 rule
  * adapted for the ABC optimized simplex framework.
  *
+ * @algorithm Dantzig Dual Row Selection:
+ * Choose leaving variable i* = argmax_i |violation_i|
+ *
+ * @math PRIMAL INFEASIBILITY:
+ * violation_i = max(l_i - x_Bi, 0) + max(x_Bi - u_i, 0)
+ *
+ * @algorithm Selection Rule:
+ * Among rows where x_Bi is outside its bounds [l_i, u_i]:
+ *   - Pick the one with largest violation magnitude
+ *   - This row's basic variable will leave the basis
+ *   - Ties broken arbitrarily
+ *
+ * PRIMAL FEASIBILITY TRACKING:
+ * infeasible_ vector stores indices of rows currently violating bounds.
+ * Only these are scanned, not all m rows.
+ *
+ * @complexity O(k) where k = number of infeasible rows.
+ * Best case O(1) when few infeasibilities, worst case O(m).
+ *
+ * @algorithm Weight Updates (trivial):
+ * Dantzig rule has no weights to maintain.
+ * updateWeights() just tracks which rows become feasible/infeasible.
+ *
  * Fast per iteration but may require more iterations than steepest edge.
  * Use AbcDualRowSteepest for better performance on most problems.
- *
- * The implementation maintains an infeasible_ vector for efficient
- * tracking of which rows are currently infeasible.
  *
  * @see AbcDualRowPivot for the base interface
  * @see AbcDualRowSteepest for recommended steepest edge variant
