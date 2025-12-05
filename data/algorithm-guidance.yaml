@@ -323,6 +323,209 @@ algorithms:
       - "Need optimal solution"
       - "Problem structure enables better heuristics"
 
+  # Additional algorithms (completing the set)
+
+  primal_simplex:
+    complexity:
+      typical: "O(n) to O(n²) pivots"
+      per_iteration: "O(n²) for basis update"
+
+    strengths:
+      - "Classic, well-understood algorithm"
+      - "Maintains primal feasibility throughout"
+      - "Good for problems starting feasible"
+      - "Natural for constraint deletion"
+
+    weaknesses:
+      - "May struggle with infeasibility detection"
+      - "Dual simplex often faster for B&B"
+      - "Same scaling limits as dual"
+
+    when_to_use:
+      - "Starting from known feasible point"
+      - "Removing constraints from solution"
+      - "Educational/debugging purposes"
+
+    when_to_avoid:
+      - "Branch-and-bound node solving (use dual)"
+      - "Adding cuts (use dual)"
+
+    examples:
+      - name: "Initial LP solve from scratch"
+        description: |
+          First solve of an LP with no prior information. Phase I finds
+          a feasible vertex, Phase II optimizes from there. Each iteration
+          maintains feasibility while improving objective.
+        key_insight: "Two-phase method: feasibility then optimality"
+
+  newton_method:
+    complexity:
+      worst_case: "Depends on line search/trust region"
+      typical: "5-20 iterations for well-conditioned problems"
+      per_iteration: "O(n³) for Hessian factorization"
+
+    strengths:
+      - "Quadratic convergence near optimum"
+      - "Few iterations needed"
+      - "Natural for equality-constrained problems"
+      - "Foundation for interior point methods"
+
+    weaknesses:
+      - "Requires second derivatives (Hessian)"
+      - "Each iteration expensive"
+      - "May not converge from bad starting point"
+      - "Hessian may be indefinite (need modification)"
+
+    when_to_use:
+      - "Smooth unconstrained optimization"
+      - "Good starting point available"
+      - "High accuracy needed"
+      - "Within interior point or SQP framework"
+
+    when_to_avoid:
+      - "Non-smooth objectives"
+      - "Hessian unavailable or expensive"
+      - "Very large problems (quasi-Newton better)"
+
+    examples:
+      - name: "Interior point Newton step"
+        description: |
+          IPM reduces to solving Newton system for KKT conditions at each
+          iteration. The symmetric indefinite system [H A^T; A 0] is
+          factored and solved. This gives the search direction for primal
+          and dual variables together.
+        key_insight: "IPM = barrier + Newton on KKT system"
+
+      - name: "Nonlinear least squares"
+        description: |
+          Gauss-Newton approximates Hessian as J^T J (dropping second-order
+          terms). For least squares, this is often positive definite and
+          cheaper than full Newton. Used in curve fitting, calibration.
+        key_insight: "Gauss-Newton = cheap positive-definite Hessian approx"
+
+  active_set_method:
+    complexity:
+      worst_case: "Exponential (combinatorial)"
+      typical: "Polynomial for convex QP in practice"
+      per_iteration: "O(n²) for working set update"
+
+    strengths:
+      - "Exact solutions (no barrier parameter)"
+      - "Warm starting from nearby QP"
+      - "Identifies active constraints explicitly"
+      - "Finite convergence for convex QP"
+
+    weaknesses:
+      - "Combinatorial in theory"
+      - "Sensitive to constraint degeneracy"
+      - "Each iteration may be expensive"
+
+    when_to_use:
+      - "Small to medium convex QP"
+      - "Re-solving similar QPs (warm start)"
+      - "Need to know active constraint set"
+      - "Model predictive control"
+
+    when_to_avoid:
+      - "Large QPs (interior point better)"
+      - "Nonconvex QP (may cycle)"
+      - "One-shot solves"
+
+    examples:
+      - name: "Model Predictive Control (MPC)"
+        description: |
+          At each time step, solve QP to find optimal control action.
+          Problem changes slightly each step. Active set warm starts
+          from previous solution - often converges in 1-3 iterations.
+        key_insight: "qpOASES designed for real-time MPC with warm starts"
+
+      - name: "Support Vector Machine training"
+        description: |
+          SVM dual is a box-constrained QP. Active set tracks which
+          constraints are at bounds (support vectors). SMO algorithm
+          is a specialized active-set variant updating 2 variables at a time.
+        key_insight: "Active set naturally identifies support vectors"
+
+  Gomory_cuts:
+    complexity:
+      per_cut: "O(n) to derive from tableau row"
+      rounds: "5-20 rounds typical at root"
+
+    strengths:
+      - "Theoretically complete (finite algorithm)"
+      - "Derived from current optimal basis"
+      - "No problem-specific structure needed"
+      - "Foundation for modern MIP cuts"
+
+    weaknesses:
+      - "Can be numerically unstable"
+      - "Many cuts needed for tightening"
+      - "Raw Gomory cuts less effective than structured cuts"
+
+    when_to_use:
+      - "General-purpose MIP cutting"
+      - "No better structure available"
+      - "Part of cut portfolio"
+
+    when_to_avoid:
+      - "When problem has exploitable structure (use knapsack, clique)"
+      - "Numerical issues (ill-conditioned basis)"
+
+    examples:
+      - name: "Fractional basic variable cut"
+        description: |
+          If x_j has fractional value f_j in optimal LP, the tableau row
+          gives: x_j + Σ a_ij x_i = b_j. Rounding the continuous coefficients
+          a_ij gives a valid inequality violated by current solution.
+        key_insight: "Read cut directly from optimal simplex tableau"
+
+      - name: "Cgl implementation"
+        description: |
+          CglGomory in Cgl generates Gomory mixed-integer cuts automatically.
+          It examines each fractional basic integer variable and derives
+          a cut. Modern solvers limit cuts per round to avoid LP blowup.
+        key_insight: "Cgl automates cut generation - just call the generator"
+
+  MIR_cuts:
+    complexity:
+      per_cut: "O(n) coefficient operations"
+      rounds: "Applied in cut generation loop"
+
+    strengths:
+      - "More numerically stable than Gomory"
+      - "Generalizes to mixed-integer constraints"
+      - "Effective on knapsack-type constraints"
+      - "Foundation for many advanced cuts"
+
+    weaknesses:
+      - "Requires constraint in correct form"
+      - "May not be as tight as structure-specific cuts"
+      - "Selection of base constraint matters"
+
+    when_to_use:
+      - "Mixed-integer constraints with continuous variables"
+      - "General-purpose MIP cutting"
+      - "When Gomory cuts are too weak"
+
+    when_to_avoid:
+      - "Pure integer problems (other cuts may be better)"
+      - "Problem has special structure (use that instead)"
+
+    examples:
+      - name: "Single-row MIR cut"
+        description: |
+          Given constraint Σ a_i x_i ≤ b with some x_i integer, split
+          into integer part (floor) and fractional part. The fractional
+          remainder gives a valid rounding inequality.
+        key_insight: "MIR = careful rounding of mixed-integer constraints"
+
+      - name: "Flow cover cuts"
+        description: |
+          For network flow with capacities, MIR applied to flow balance
+          gives flow cover cuts. These are among the most effective cuts
+          for capacitated problems in supply chain optimization.
+        key_insight: "Many strong cuts are MIR applied to specific structures"
+
 # Problem characteristic rules for suggest_approach
 problem_characteristics:
 

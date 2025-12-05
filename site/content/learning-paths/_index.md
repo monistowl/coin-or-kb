@@ -46,6 +46,17 @@ Welcome! These guided paths will take you from foundational concepts to understa
 <a href="nonlinear-optimization/" class="path-start">Start Learning →</a>
 </div>
 
+<div class="path-card path-global">
+<h3>Global Optimization</h3>
+<p class="path-tagline">From convex to nonconvex: spatial branch-and-bound</p>
+<p>Learn how to find global optima in nonconvex problems. Master spatial branch-and-bound, convexification techniques, and MINLP solvers Bonmin and Couenne.</p>
+<div class="path-meta">
+<span class="duration">~5 hours</span>
+<span class="prereqs">MIP Journey, NLP path</span>
+</div>
+<a href="global-optimization/" class="path-start">Start Learning →</a>
+</div>
+
 </div>
 
 ## How These Paths Work

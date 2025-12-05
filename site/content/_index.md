@@ -13,6 +13,10 @@ Semantically annotated documentation for the [COIN-OR](https://www.coin-or.org/)
 <strong>Start Learning</strong>
 <span>Guided paths for students</span>
 </a>
+<a href="derivations/" class="nav-card">
+<strong>Derivations</strong>
+<span>Step-by-step proofs</span>
+</a>
 <a href="libraries/coinutils/" class="nav-card">
 <strong>Browse CoinUtils</strong>
 <span>122 foundation classes</span>
