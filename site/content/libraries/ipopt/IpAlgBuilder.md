@@ -65,5 +65,5 @@ A = ∇c(x)' (Jacobian). Solve via sparse symmetric factorization.
 
 ## Source
 
-Header file: [`src/Algorithm/IpAlgBuilder.hpp`](/browser/?library=Ipopt&file=src/Algorithm/IpAlgBuilder.hpp)
+Header file: {{ link(path="/browser/?library=Ipopt&file=src/Algorithm/IpAlgBuilder.hpp", text="`src/Algorithm/IpAlgBuilder.hpp`") }}
 

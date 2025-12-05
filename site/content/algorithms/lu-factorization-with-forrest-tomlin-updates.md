@@ -55,7 +55,7 @@ Forrest-Tomlin update: O(m) average, refactorization every 100-200 pivots.
 
 ### Clp
 
-- **[ClpFactorization.hpp](/browser/?library=Clp)** - Wrapper around CoinFactorization for use within Clp simplex
+- **{{ link(path="/browser/?library=Clp", text="ClpFactorization.hpp") }}** - Wrapper around CoinFactorization for use within Clp simplex
 
 ## References
 

@@ -54,12 +54,12 @@ when starting from feasible solution or for problems with few constraints.
 
 ## See Also
 
-- [ClpSimplex](/libraries/clp/clpsimplex/) for the base simplex class
-- [ClpSimplexDual](/libraries/clp/clpsimplexdual/) for dual simplex variant (often faster)
+- [ClpSimplex](@/libraries/clp/ClpSimplex.md) for the base simplex class
+- [ClpSimplexDual](@/libraries/clp/ClpSimplexDual.md) for dual simplex variant (often faster)
 - ClpPrimalColumnPivot for pivot column selection strategies
-- [ClpPrimalColumnSteepest](/libraries/clp/clpprimalcolumnsteepest/), ClpPrimalColumnDantzig for specific strategies
+- [ClpPrimalColumnSteepest](@/libraries/clp/ClpPrimalColumnSteepest.md), ClpPrimalColumnDantzig for specific strategies
 
 ## Source
 
-Header file: [`src/ClpSimplexPrimal.hpp`](/browser/?library=Clp&file=src/ClpSimplexPrimal.hpp)
+Header file: {{ link(path="/browser/?library=Clp&file=src/ClpSimplexPrimal.hpp", text="`src/ClpSimplexPrimal.hpp`") }}
 

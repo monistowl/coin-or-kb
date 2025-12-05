@@ -50,7 +50,7 @@ CoinRelFltEq follows the same pattern.
 
 ### CoinUtils
 
-- **[CoinFloatEqual.hpp](/browser/?library=CoinUtils)** - Function objects for testing equality of real numbers
+- **{{ link(path="/browser/?library=CoinUtils", text="CoinFloatEqual.hpp") }}** - Function objects for testing equality of real numbers
 
 Two objects are provided; one tests for equality to an absolute tolerance,
 one to a scaled tolerance. The tests will handle IEEE floating point, but

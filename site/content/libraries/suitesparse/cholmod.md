@@ -86,5 +86,5 @@ $$L(i,j) = (A(i,j) - Σ L(i,k)·L(j,k)) / L(j,j) \text{ for }i > j$$
 
 ## Source
 
-Header file: [`CHOLMOD/Include/cholmod.h`](/browser/?library=SuiteSparse&file=CHOLMOD/Include/cholmod.h)
+Header file: {{ link(path="/browser/?library=SuiteSparse&file=CHOLMOD/Include/cholmod.h", text="`CHOLMOD/Include/cholmod.h`") }}
 

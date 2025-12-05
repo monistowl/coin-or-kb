@@ -41,5 +41,5 @@ Hot-Start Optimization for Strong Branching:
 
 ## Source
 
-Header file: [`src/OsiClp/OsiClpSolverInterface.hpp`](/browser/?library=Clp&file=src/OsiClp/OsiClpSolverInterface.hpp)
+Header file: {{ link(path="/browser/?library=Clp&file=src/OsiClp/OsiClpSolverInterface.hpp", text="`src/OsiClp/OsiClpSolverInterface.hpp`") }}
 

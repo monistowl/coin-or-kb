@@ -18,7 +18,7 @@ Controls integer preprocessing before B&C:
 
 ### Cbc
 
-- **[CbcParameters.hpp](/browser/?library=Cbc)** - Central parameter collection for Cbc algorithm control
+- **{{ link(path="/browser/?library=Cbc", text="CbcParameters.hpp") }}** - Central parameter collection for Cbc algorithm control
 Copyright (C) 2007, Lou Hafer, IBM Corporation and others.
 This code is licensed under the terms of the Eclipse Public License (EPL).
 

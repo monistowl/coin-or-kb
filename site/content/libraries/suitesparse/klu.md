@@ -98,5 +98,5 @@ Off-diagonal blocks solved via triangular solves.
 
 ## Source
 
-Header file: [`KLU/Include/klu.h`](/browser/?library=SuiteSparse&file=KLU/Include/klu.h)
+Header file: {{ link(path="/browser/?library=SuiteSparse&file=KLU/Include/klu.h", text="`KLU/Include/klu.h`") }}
 

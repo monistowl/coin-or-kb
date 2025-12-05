@@ -38,13 +38,13 @@ Simplex Method for Linear Programming:
 ## See Also
 
 - ClpModel for problem data storage
-- [ClpSimplexDual](/libraries/clp/clpsimplexdual/) for dual simplex implementation
-- [ClpSimplexPrimal](/libraries/clp/clpsimplexprimal/) for primal simplex implementation
-- [ClpFactorization](/libraries/clp/clpfactorization/) for basis factorization
+- [ClpSimplexDual](@/libraries/clp/ClpSimplexDual.md) for dual simplex implementation
+- [ClpSimplexPrimal](@/libraries/clp/ClpSimplexPrimal.md) for primal simplex implementation
+- [ClpFactorization](@/libraries/clp/ClpFactorization.md) for basis factorization
 - ClpDualRowPivot, ClpPrimalColumnPivot for pivot selection strategies
-- [CoinFactorization](/libraries/coinutils/coinfactorization/) in CoinUtils for the underlying LU factorization
+- [CoinFactorization](@/libraries/coinutils/CoinFactorization.md) in CoinUtils for the underlying LU factorization
 
 ## Source
 
-Header file: [`src/ClpSimplex.hpp`](/browser/?library=Clp&file=src/ClpSimplex.hpp)
+Header file: {{ link(path="/browser/?library=Clp&file=src/ClpSimplex.hpp", text="`src/ClpSimplex.hpp`") }}
 

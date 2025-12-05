@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[IRootsearchMethod.h](/browser/?library=SHOT)** - Interface for constraint boundary rootsearch algorithms
+- **{{ link(path="/browser/?library=SHOT", text="IRootsearchMethod.h") }}** - Interface for constraint boundary rootsearch algorithms
 
 Finds points on constraint boundaries for ESH hyperplane generation.
 

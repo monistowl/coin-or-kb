@@ -40,5 +40,5 @@ Direct interior point NLP solve
 
 ## Source
 
-Header file: [`src/SolutionStrategy/SolutionStrategyNLP.h`](/browser/?library=SHOT&file=src/SolutionStrategy/SolutionStrategyNLP.h)
+Header file: {{ link(path="/browser/?library=SHOT&file=src/SolutionStrategy/SolutionStrategyNLP.h", text="`src/SolutionStrategy/SolutionStrategyNLP.h`") }}
 

@@ -27,8 +27,8 @@ This path brings together MIP and NLP to tackle the hardest class of optimizatio
 ## Prerequisites
 
 You should have completed:
-- [MIP Journey](/learning-paths/mip-journey/) — Branch-and-bound, cutting planes, LP relaxations
-- [Nonlinear Optimization](/learning-paths/nonlinear-optimization/) — Newton's method, interior point, KKT conditions
+- [MIP Journey](@/learning-paths/mip-journey.md) — Branch-and-bound, cutting planes, LP relaxations
+- [Nonlinear Optimization](@/learning-paths/nonlinear-optimization.md) — Newton's method, interior point, KKT conditions
 
 Or be comfortable with:
 - Branch-and-bound trees and bounding
@@ -408,6 +408,6 @@ Global optimization is computationally expensive but sometimes necessary — whe
 
 ## Next Steps
 
-- Explore [Couenne source](/browser/?library=Couenne) in the browser
+- Explore {{ link(path="/browser/?library=Couenne", text="Couenne source") }} in the browser
 - Try the [derivation of branch-and-bound correctness](/derivations/branch-and-bound-correctness/)
-- Read about [McCormick envelopes](/algorithms/mccormick-envelopes/) in detail
+- Read about {{ link(path="/algorithms/mccormick-envelopes/", text="McCormick envelopes") }} in detail

@@ -36,4 +36,4 @@ Time: O(nnz(row)) per candidate variable
 
 ### CoinUtils
 
-- **[CoinPresolveImpliedFree.hpp](/browser/?library=CoinUtils)** - Detect and process implied free variables
+- **{{ link(path="/browser/?library=CoinUtils", text="CoinPresolveImpliedFree.hpp") }}** - Detect and process implied free variables

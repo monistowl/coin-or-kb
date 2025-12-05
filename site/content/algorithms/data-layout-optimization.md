@@ -24,7 +24,7 @@ Same asymptotic complexity as ClpSimplex:
 
 ### Clp
 
-- **[AbcSimplex.hpp](/browser/?library=Clp)** - AVX/SIMD-optimized simplex solver ("A Better Clp")
+- **{{ link(path="/browser/?library=Clp", text="AbcSimplex.hpp") }}** - AVX/SIMD-optimized simplex solver ("A Better Clp")
 
 ## References
 

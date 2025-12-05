@@ -38,7 +38,7 @@ Time: O(nnz(L)²/n) average, O(nnz(L)·nnz(A)) worst case
 
 ### SuiteSparse
 
-- **[ldl.h](/browser/?library=SuiteSparse)** - Simple sparse LDL' factorization for symmetric matrices
+- **{{ link(path="/browser/?library=SuiteSparse", text="ldl.h") }}** - Simple sparse LDL' factorization for symmetric matrices
 
 LDL computes a sparse LDL' factorization of a symmetric matrix A:
   A = L * D * L'

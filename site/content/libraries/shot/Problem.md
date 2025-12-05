@@ -70,5 +70,5 @@ Used by NLP solvers (Ipopt) and for hyperplane construction.
 
 ## Source
 
-Header file: [`src/Model/Problem.h`](/browser/?library=SHOT&file=src/Model/Problem.h)
+Header file: {{ link(path="/browser/?library=SHOT&file=src/Model/Problem.h", text="`src/Model/Problem.h`") }}
 

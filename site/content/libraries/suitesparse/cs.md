@@ -70,5 +70,5 @@ Triplet (COO): (row[k], col[k], val[k]) for k = 0..nz-1
 
 ## Source
 
-Header file: [`CSparse/Include/cs.h`](/browser/?library=SuiteSparse&file=CSparse/Include/cs.h)
+Header file: {{ link(path="/browser/?library=SuiteSparse&file=CSparse/Include/cs.h", text="`CSparse/Include/cs.h`") }}
 

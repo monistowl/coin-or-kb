@@ -288,28 +288,28 @@ int main() {
 ### Core Infrastructure
 | File | Description |
 |------|-------------|
-| [CouenneProblem.hpp](/browser/?library=Couenne&path=src/problem/CouenneProblem.hpp) | Problem representation |
-| [CouenneExprAux.hpp](/browser/?library=Couenne&path=src/expression/CouenneExprAux.hpp) | Auxiliary variables |
-| [CouenneExpression.hpp](/browser/?library=Couenne&path=src/expression/CouenneExpression.hpp) | Expression base class |
+| {{ link(path="/browser/?library=Couenne&path=src/problem/CouenneProblem.hpp", text="CouenneProblem.hpp") }} | Problem representation |
+| {{ link(path="/browser/?library=Couenne&path=src/expression/CouenneExprAux.hpp", text="CouenneExprAux.hpp") }} | Auxiliary variables |
+| {{ link(path="/browser/?library=Couenne&path=src/expression/CouenneExpression.hpp", text="CouenneExpression.hpp") }} | Expression base class |
 
 ### Branching
 | File | Description |
 |------|-------------|
-| [CouenneObject.hpp](/browser/?library=Couenne&path=src/branch/CouenneObject.hpp) | Spatial branching objects |
-| [CouenneChooseVariable.hpp](/browser/?library=Couenne&path=src/branch/CouenneChooseVariable.hpp) | Variable selection |
-| [CouenneVarObject.hpp](/browser/?library=Couenne&path=src/branch/CouenneVarObject.hpp) | Variable-based branching |
+| {{ link(path="/browser/?library=Couenne&path=src/branch/CouenneObject.hpp", text="CouenneObject.hpp") }} | Spatial branching objects |
+| {{ link(path="/browser/?library=Couenne&path=src/branch/CouenneChooseVariable.hpp", text="CouenneChooseVariable.hpp") }} | Variable selection |
+| {{ link(path="/browser/?library=Couenne&path=src/branch/CouenneVarObject.hpp", text="CouenneVarObject.hpp") }} | Variable-based branching |
 
 ### Bound Tightening
 | File | Description |
 |------|-------------|
-| [CouenneTwoImplied.hpp](/browser/?library=Couenne&path=src/bound_tightening/twoImpliedBT/CouenneTwoImplied.hpp) | Two-constraint FBBT |
-| [CouenneMultiVarProbe.hpp](/browser/?library=Couenne&path=src/bound_tightening/CouenneMultiVarProbe.hpp) | Multi-variable probing |
+| {{ link(path="/browser/?library=Couenne&path=src/bound_tightening/twoImpliedBT/CouenneTwoImplied.hpp", text="CouenneTwoImplied.hpp") }} | Two-constraint FBBT |
+| {{ link(path="/browser/?library=Couenne&path=src/bound_tightening/CouenneMultiVarProbe.hpp", text="CouenneMultiVarProbe.hpp") }} | Multi-variable probing |
 
 ### Cuts
 | File | Description |
 |------|-------------|
-| [CouenneCrossConv.hpp](/browser/?library=Couenne&path=src/cut/crossconv/CouenneCrossConv.hpp) | Cross-convexification cuts |
-| [CouenneDisjCuts.hpp](/browser/?library=Couenne&path=src/disjunctive/CouenneDisjCuts.hpp) | Disjunctive cuts |
+| {{ link(path="/browser/?library=Couenne&path=src/cut/crossconv/CouenneCrossConv.hpp", text="CouenneCrossConv.hpp") }} | Cross-convexification cuts |
+| {{ link(path="/browser/?library=Couenne&path=src/disjunctive/CouenneDisjCuts.hpp", text="CouenneDisjCuts.hpp") }} | Disjunctive cuts |
 
 ---
 

@@ -44,9 +44,9 @@ Essential for Extended Supporting Hyperplane (ESH) method
 
 ## See Also
 
-- [DualSolver](/libraries/shot/dualsolver/).h for hyperplane generation workflow
+- [DualSolver](@/libraries/shot/DualSolver.md).h for hyperplane generation workflow
 
 ## Source
 
-Header file: [`src/RootsearchMethod/IRootsearchMethod.h`](/browser/?library=SHOT&file=src/RootsearchMethod/IRootsearchMethod.h)
+Header file: {{ link(path="/browser/?library=SHOT&file=src/RootsearchMethod/IRootsearchMethod.h", text="`src/RootsearchMethod/IRootsearchMethod.h`") }}
 

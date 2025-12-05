@@ -78,5 +78,5 @@ Dual analog: implied dual bounds from reduced cost constraints.
 
 ## Source
 
-Header file: [`highs/presolve/HPresolve.h`](/browser/?library=HiGHS&file=highs/presolve/HPresolve.h)
+Header file: {{ link(path="/browser/?library=HiGHS&file=highs/presolve/HPresolve.h", text="`highs/presolve/HPresolve.h`") }}
 

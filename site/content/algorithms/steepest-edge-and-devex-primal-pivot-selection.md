@@ -41,7 +41,7 @@ iterations than Dantzig at modest extra cost per iteration.
 
 ### Clp
 
-- **[ClpPrimalColumnSteepest.hpp](/browser/?library=Clp)** - Steepest edge and Devex pivot selection for primal simplex
+- **{{ link(path="/browser/?library=Clp", text="ClpPrimalColumnSteepest.hpp") }}** - Steepest edge and Devex pivot selection for primal simplex
 
 ## References
 

@@ -35,10 +35,10 @@ Large optimization problems are **sparse** — most entries are zero. CoinUtils 
 
 | Class | Purpose |
 |-------|---------|
-| [CoinPackedMatrix](/libraries/coinutils/CoinPackedMatrix/) | Column-major sparse matrix |
-| [CoinPackedVector](/libraries/coinutils/CoinPackedVector/) | Sparse vector with indices |
-| [CoinIndexedVector](/libraries/coinutils/CoinIndexedVector/) | Sparse vector with O(1) index lookup |
-| [CoinShallowPackedVector](/libraries/coinutils/CoinShallowPackedVector/) | Non-owning view into packed data |
+| [CoinPackedMatrix](@/libraries/coinutils/CoinPackedMatrix.md) | Column-major sparse matrix |
+| [CoinPackedVector](@/libraries/coinutils/CoinPackedVector.md) | Sparse vector with indices |
+| [CoinIndexedVector](@/libraries/coinutils/CoinIndexedVector.md) | Sparse vector with O(1) index lookup |
+| [CoinShallowPackedVector](@/libraries/coinutils/CoinShallowPackedVector.md) | Non-owning view into packed data |
 
 **Why column-major?** LP constraints $Ax \leq b$ are naturally column-oriented: each column is a variable's coefficients in all constraints. Column access is $O(1)$, critical for pricing in simplex.
 
@@ -48,9 +48,9 @@ The basis matrix $B$ changes by one column per simplex iteration. Rather than re
 
 | Class | Purpose |
 |-------|---------|
-| [CoinFactorization](/libraries/coinutils/CoinFactorization/) | Sparse LU with Markowitz pivoting |
-| [CoinOslFactorization](/libraries/coinutils/CoinOslFactorization/) | OSL-derived factorization |
-| [CoinDenseFactorization](/libraries/coinutils/CoinDenseFactorization/) | Dense fallback for small bases |
+| [CoinFactorization](@/libraries/coinutils/CoinFactorization.md) | Sparse LU with Markowitz pivoting |
+| [CoinOslFactorization](@/libraries/coinutils/CoinOslFactorization.md) | OSL-derived factorization |
+| [CoinDenseFactorization](@/libraries/coinutils/CoinDenseFactorization.md) | Dense fallback for small bases |
 
 **Key algorithms**:
 - **Markowitz pivoting**: Minimize fill-in during factorization
@@ -63,10 +63,10 @@ Read and write standard optimization file formats:
 
 | Class | Format |
 |-------|--------|
-| [CoinMpsIO](/libraries/coinutils/CoinMpsIO/) | MPS (industry standard) |
-| [CoinLpIO](/libraries/coinutils/CoinLpIO/) | LP (CPLEX-style) |
-| [CoinFileInput](/libraries/coinutils/CoinFileInput/) | Compressed files (gzip) |
-| [CoinModel](/libraries/coinutils/CoinModel/) | In-memory problem builder |
+| [CoinMpsIO](@/libraries/coinutils/CoinMpsIO.md) | MPS (industry standard) |
+| [CoinLpIO](@/libraries/coinutils/CoinLpIO.md) | LP (CPLEX-style) |
+| [CoinFileInput](@/libraries/coinutils/CoinFileInput.md) | Compressed files (gzip) |
+| [CoinModel](@/libraries/coinutils/CoinModel.md) | In-memory problem builder |
 
 ### Presolve
 
@@ -74,10 +74,10 @@ Simplify problems before solving to reduce size and improve numerics:
 
 | Class | Operation |
 |-------|-----------|
-| [CoinPresolveMatrix](/libraries/coinutils/CoinPresolveMatrix/) | Presolve state management |
-| [CoinPostsolveMatrix](/libraries/coinutils/CoinPostsolveMatrix/) | Restore original solution |
-| [doubleton_action](/libraries/coinutils/doubleton_action/) | Eliminate doubleton rows |
-| [dupcol_action](/libraries/coinutils/dupcol_action/) | Remove duplicate columns |
+| [CoinPresolveMatrix](@/libraries/coinutils/CoinPresolveMatrix.md) | Presolve state management |
+| [CoinPostsolveMatrix](@/libraries/coinutils/CoinPostsolveMatrix.md) | Restore original solution |
+| [doubleton_action](@/libraries/coinutils/doubleton_action.md) | Eliminate doubleton rows |
+| [dupcol_action](@/libraries/coinutils/dupcol_action.md) | Remove duplicate columns |
 
 **Common reductions**:
 - Remove fixed variables
@@ -91,10 +91,10 @@ For MIP cut generation, CoinUtils includes conflict graph structures:
 
 | Class | Purpose |
 |-------|---------|
-| [CoinConflictGraph](/libraries/coinutils/CoinConflictGraph/) | Variable conflict relationships |
-| [CoinBronKerbosch](/libraries/coinutils/CoinBronKerbosch/) | Maximal clique enumeration |
-| [CoinCliqueList](/libraries/coinutils/CoinCliqueList/) | Clique storage for cuts |
-| [CoinShortestPath](/libraries/coinutils/CoinShortestPath/) | Shortest path algorithms |
+| [CoinConflictGraph](@/libraries/coinutils/CoinConflictGraph.md) | Variable conflict relationships |
+| [CoinBronKerbosch](@/libraries/coinutils/CoinBronKerbosch.md) | Maximal clique enumeration |
+| [CoinCliqueList](@/libraries/coinutils/CoinCliqueList.md) | Clique storage for cuts |
+| [CoinShortestPath](@/libraries/coinutils/CoinShortestPath.md) | Shortest path algorithms |
 
 ### Search Trees
 
@@ -102,9 +102,9 @@ For branch-and-bound tree management:
 
 | Class | Purpose |
 |-------|---------|
-| [CoinSearchTree](/libraries/coinutils/CoinSearchTree/) | Generic search tree |
-| [CoinSearchTreeCompareBest](/libraries/coinutils/CoinSearchTreeCompareBest/) | Best-first selection |
-| [CoinSearchTreeCompareDepth](/libraries/coinutils/CoinSearchTreeCompareDepth/) | Depth-first selection |
+| [CoinSearchTree](@/libraries/coinutils/CoinSearchTree.md) | Generic search tree |
+| [CoinSearchTreeCompareBest](@/libraries/coinutils/CoinSearchTreeCompareBest.md) | Best-first selection |
+| [CoinSearchTreeCompareDepth](@/libraries/coinutils/CoinSearchTreeCompareDepth.md) | Depth-first selection |
 
 ---
 
@@ -165,7 +165,7 @@ $$\text{score}(a_{ij}) = (r_i - 1)(c_j - 1)$$
 
 where $r_i$ = row count, $c_j$ = column count. Lower score = less fill-in.
 
-See [CoinFactorization](/libraries/coinutils/CoinFactorization/) for implementation.
+See [CoinFactorization](@/libraries/coinutils/CoinFactorization.md) for implementation.
 
 ### Forrest-Tomlin Update
 
@@ -198,7 +198,7 @@ Memory: $O(\text{nnz} + n)$ instead of $O(mn)$ for dense.
 
 ## Related Resources
 
-- [LP Fundamentals Learning Path](/learning-paths/lp-fundamentals/) — Start here
-- [LU Factorization Algorithm](/algorithms/lu-factorization-with-markowitz-pivot-selection/) — Detailed algorithm
-- [Sparse Matrix Operations](/algorithms/sparse-matrix-operations/) — CSC format
+- [LP Fundamentals Learning Path](@/learning-paths/lp-fundamentals.md) — Start here
+- [LU Factorization Algorithm](@/algorithms/lu-factorization-with-markowitz-pivot-selection.md) — Detailed algorithm
+- [Sparse Matrix Operations](@/algorithms/sparse-matrix-operations.md) — CSC format
 - [Simplex Convergence Derivation](/derivations/simplex-convergence/) — Why simplex works

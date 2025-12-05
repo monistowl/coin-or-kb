@@ -75,5 +75,5 @@ Objective Propagation:
 
 ## Source
 
-Header file: [`highs/mip/HighsDomain.h`](/browser/?library=HiGHS&file=highs/mip/HighsDomain.h)
+Header file: {{ link(path="/browser/?library=HiGHS&file=highs/mip/HighsDomain.h", text="`highs/mip/HighsDomain.h`") }}
 

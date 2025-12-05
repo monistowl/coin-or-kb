@@ -35,12 +35,12 @@ Data Layout Optimization:
 
 ## See Also
 
-- [ClpSimplex](/libraries/clp/clpsimplex/) for the standard (non-AVX) implementation
+- [ClpSimplex](@/libraries/clp/ClpSimplex.md) for the standard (non-AVX) implementation
 - AbcSimplexDual for AVX-optimized dual simplex
 - AbcSimplexPrimal for AVX-optimized primal simplex
 - AbcMatrix for the optimized matrix class
 
 ## Source
 
-Header file: [`src/AbcSimplex.hpp`](/browser/?library=Clp&file=src/AbcSimplex.hpp)
+Header file: {{ link(path="/browser/?library=Clp&file=src/AbcSimplex.hpp", text="`src/AbcSimplex.hpp`") }}
 

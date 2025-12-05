@@ -45,7 +45,7 @@ Heuristics typically limited to fraction of total solve time.
 
 ### Cbc
 
-- **[CbcHeuristic.hpp](/browser/?library=Cbc)** - Base class for MIP primal heuristics
+- **{{ link(path="/browser/?library=Cbc", text="CbcHeuristic.hpp") }}** - Base class for MIP primal heuristics
 Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
 

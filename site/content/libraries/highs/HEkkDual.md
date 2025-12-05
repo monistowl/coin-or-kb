@@ -81,5 +81,5 @@ Cost: one extra FTRAN per iteration, but ~40% fewer iterations.
 
 ## Source
 
-Header file: [`highs/simplex/HEkkDual.h`](/browser/?library=HiGHS&file=highs/simplex/HEkkDual.h)
+Header file: {{ link(path="/browser/?library=HiGHS&file=highs/simplex/HEkkDual.h", text="`highs/simplex/HEkkDual.h`") }}
 

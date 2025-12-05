@@ -37,4 +37,4 @@ Time: O(1) per singleton processed
 
 ### CoinUtils
 
-- **[CoinPresolveSingleton.hpp](/browser/?library=CoinUtils)** - Singleton row/column presolve transforms
+- **{{ link(path="/browser/?library=CoinUtils", text="CoinPresolveSingleton.hpp") }}** - Singleton row/column presolve transforms

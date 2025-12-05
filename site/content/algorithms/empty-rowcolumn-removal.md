@@ -37,6 +37,6 @@ Time: O(m + n) for scanning and renumbering
 
 ### CoinUtils
 
-- **[CoinPresolveEmpty.hpp](/browser/?library=CoinUtils)** - Drop and reinsert empty rows/columns
+- **{{ link(path="/browser/?library=CoinUtils", text="CoinPresolveEmpty.hpp") }}** - Drop and reinsert empty rows/columns
 
 Should be last presolve step. Physical removal of empty entities.

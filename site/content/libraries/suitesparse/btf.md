@@ -65,5 +65,5 @@ $$BTF form: P*A*Q = | B_11  B_12 ... | with square diagonal blocks B_ii$$
 
 ## Source
 
-Header file: [`BTF/Include/btf.h`](/browser/?library=SuiteSparse&file=BTF/Include/btf.h)
+Header file: {{ link(path="/browser/?library=SuiteSparse&file=BTF/Include/btf.h", text="`BTF/Include/btf.h`") }}
 

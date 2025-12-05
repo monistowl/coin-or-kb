@@ -54,9 +54,9 @@ iterations than Dantzig at modest extra cost per iteration.
 - "Implementing the Dantzig-Wolfe decomposition" by Forrest & Goldfarb
 - ClpPrimalColumnPivot for the base interface
 - ClpPrimalColumnDantzig for simpler Dantzig rule
-- [ClpSimplexPrimal](/libraries/clp/clpsimplexprimal/) for the primal simplex algorithm
+- [ClpSimplexPrimal](@/libraries/clp/ClpSimplexPrimal.md) for the primal simplex algorithm
 
 ## Source
 
-Header file: [`src/ClpPrimalColumnSteepest.hpp`](/browser/?library=Clp&file=src/ClpPrimalColumnSteepest.hpp)
+Header file: {{ link(path="/browser/?library=Clp&file=src/ClpPrimalColumnSteepest.hpp", text="`src/ClpPrimalColumnSteepest.hpp`") }}
 

@@ -27,7 +27,7 @@ O(nnz * log(maxdenom)) for rational approximation
 
 ### Cgl
 
-- **[CglGMI.hpp](/browser/?library=Cgl)** - Gomory Mixed-Integer cuts with numerical safety testing
+- **{{ link(path="/browser/?library=Cgl", text="CglGMI.hpp") }}** - Gomory Mixed-Integer cuts with numerical safety testing
 
 ## References
 

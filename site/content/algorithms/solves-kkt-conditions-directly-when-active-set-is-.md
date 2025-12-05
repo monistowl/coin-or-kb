@@ -29,6 +29,6 @@ Key methods:
 
 ### qpOASES
 
-- **[QProblemB.hpp](/browser/?library=qpOASES)** - Box-constrained QP solver (bounds only, no linear constraints)
+- **{{ link(path="/browser/?library=qpOASES", text="QProblemB.hpp") }}** - Box-constrained QP solver (bounds only, no linear constraints)
 
 Solves QPs with only variable bounds (no constraint matrix A):

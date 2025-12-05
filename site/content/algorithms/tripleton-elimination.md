@@ -35,4 +35,4 @@ Time: O(nnz(col_y) × avg_row_length) per tripleton
 
 ### CoinUtils
 
-- **[CoinPresolveTripleton.hpp](/browser/?library=CoinUtils)** - Tripleton row presolve: three-variable equation substitution
+- **{{ link(path="/browser/?library=CoinUtils", text="CoinPresolveTripleton.hpp") }}** - Tripleton row presolve: three-variable equation substitution

@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[NLPSolverCuttingPlaneMinimax.h](/browser/?library=SHOT)** - Cutting-plane solver for minimax LP problems
+- **{{ link(path="/browser/?library=SHOT", text="NLPSolverCuttingPlaneMinimax.h") }}** - Cutting-plane solver for minimax LP problems
 
 Built-in LP-based solver for simple minimax problems.
 

@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[SolutionStrategyNLP.h](/browser/?library=SHOT)** - Direct NLP solver for continuous problems
+- **{{ link(path="/browser/?library=SHOT", text="SolutionStrategyNLP.h") }}** - Direct NLP solver for continuous problems
 
 Bypasses ESH for purely continuous NLP problems.
 

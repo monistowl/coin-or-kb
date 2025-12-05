@@ -73,5 +73,5 @@ Fast but may miss maximum violated clique.
 
 ## Source
 
-Header file: [`src/CglClique/CglClique.hpp`](/browser/?library=Cgl&file=src/CglClique/CglClique.hpp)
+Header file: {{ link(path="/browser/?library=Cgl&file=src/CglClique/CglClique.hpp", text="`src/CglClique/CglClique.hpp`") }}
 

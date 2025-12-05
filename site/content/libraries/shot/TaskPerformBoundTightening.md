@@ -33,9 +33,9 @@ Optimization-Based Bound Tightening
 ## See Also
 
 - NLPSolverSHOT.h for POA solver
-- [Problem](/libraries/shot/problem/).h for bound storage
+- [Problem](@/libraries/shot/Problem.md).h for bound storage
 
 ## Source
 
-Header file: [`src/Tasks/TaskPerformBoundTightening.h`](/browser/?library=SHOT&file=src/Tasks/TaskPerformBoundTightening.h)
+Header file: {{ link(path="/browser/?library=SHOT&file=src/Tasks/TaskPerformBoundTightening.h", text="`src/Tasks/TaskPerformBoundTightening.h`") }}
 

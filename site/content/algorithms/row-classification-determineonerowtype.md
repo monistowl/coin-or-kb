@@ -31,7 +31,7 @@ O(nnz) per row for classification
 
 ### Cgl
 
-- **[CglFlowCover.hpp](/browser/?library=Cgl)** - Lifted Simple Generalized Flow Cover cuts
+- **{{ link(path="/browser/?library=Cgl", text="CglFlowCover.hpp") }}** - Lifted Simple Generalized Flow Cover cuts
 
 ## References
 

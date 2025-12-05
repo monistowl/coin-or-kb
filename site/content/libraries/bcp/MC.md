@@ -139,11 +139,11 @@ For Ising problems on regular grids:
 
 | File | Description |
 |------|-------------|
-| [MC.hpp](/browser/?library=Bcp&path=Applications/MaxCut/include/MC.hpp) | Problem data structures |
-| [MC_cut.hpp](/browser/?library=Bcp&path=Applications/MaxCut/include/MC_cut.hpp) | Cycle inequalities and separation |
-| [MC_solution.hpp](/browser/?library=Bcp&path=Applications/MaxCut/include/MC_solution.hpp) | Solution with local search |
-| [MC_lp.hpp](/browser/?library=Bcp&path=Applications/MaxCut/include/MC_lp.hpp) | LP process with cut generation |
-| [MC_tm.hpp](/browser/?library=Bcp&path=Applications/MaxCut/include/MC_tm.hpp) | Tree manager setup |
+| {{ link(path="/browser/?library=Bcp&path=Applications/MaxCut/include/MC.hpp", text="MC.hpp") }} | Problem data structures |
+| {{ link(path="/browser/?library=Bcp&path=Applications/MaxCut/include/MC_cut.hpp", text="MC_cut.hpp") }} | Cycle inequalities and separation |
+| {{ link(path="/browser/?library=Bcp&path=Applications/MaxCut/include/MC_solution.hpp", text="MC_solution.hpp") }} | Solution with local search |
+| {{ link(path="/browser/?library=Bcp&path=Applications/MaxCut/include/MC_lp.hpp", text="MC_lp.hpp") }} | LP process with cut generation |
+| {{ link(path="/browser/?library=Bcp&path=Applications/MaxCut/include/MC_tm.hpp", text="MC_tm.hpp") }} | Tree manager setup |
 
 ---
 

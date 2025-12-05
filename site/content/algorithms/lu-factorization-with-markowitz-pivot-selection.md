@@ -30,7 +30,7 @@ Factorization: O(nnz * fill) where fill depends on pivot order
 
 ### CoinUtils
 
-- **[CoinFactorization.hpp](/browser/?library=CoinUtils)** - LU factorization of sparse basis matrix for simplex
+- **{{ link(path="/browser/?library=CoinUtils", text="CoinFactorization.hpp") }}** - LU factorization of sparse basis matrix for simplex
 
 Implements LU factorization with hyper-sparse handling for efficient
 FTRAN/BTRAN operations. Supports rank-one updates during pivoting.

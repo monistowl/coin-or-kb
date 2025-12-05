@@ -63,5 +63,5 @@ Aggressive absorption reduces degree overestimates from element merging.
 
 ## Source
 
-Header file: [`COLAMD/Include/colamd.h`](/browser/?library=SuiteSparse&file=COLAMD/Include/colamd.h)
+Header file: {{ link(path="/browser/?library=SuiteSparse&file=COLAMD/Include/colamd.h", text="`COLAMD/Include/colamd.h`") }}
 

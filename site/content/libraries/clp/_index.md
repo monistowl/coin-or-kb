@@ -62,12 +62,12 @@ Alternative to simplex for very large or dense problems:
 
 | Class | Purpose |
 |-------|---------|
-| [ClpSimplex](/browser/?library=Clp) | Main simplex solver class |
-| [ClpSimplexDual](/browser/?library=Clp) | Dual simplex implementation |
-| [ClpSimplexPrimal](/browser/?library=Clp) | Primal simplex implementation |
-| [ClpInterior](/browser/?library=Clp) | Interior point (barrier) solver |
-| [ClpModel](/browser/?library=Clp) | LP model storage |
-| [ClpFactorization](/browser/?library=Clp) | Basis factorization (wraps CoinFactorization) |
+| {{ link(path="/browser/?library=Clp", text="ClpSimplex") }} | Main simplex solver class |
+| {{ link(path="/browser/?library=Clp", text="ClpSimplexDual") }} | Dual simplex implementation |
+| {{ link(path="/browser/?library=Clp", text="ClpSimplexPrimal") }} | Primal simplex implementation |
+| {{ link(path="/browser/?library=Clp", text="ClpInterior") }} | Interior point (barrier) solver |
+| {{ link(path="/browser/?library=Clp", text="ClpModel") }} | LP model storage |
+| {{ link(path="/browser/?library=Clp", text="ClpFactorization") }} | Basis factorization (wraps CoinFactorization) |
 
 ---
 
@@ -140,7 +140,7 @@ double objectiveValue = model.objectiveValue();
 
 ## Related Resources
 
-- [LP Fundamentals Learning Path](/learning-paths/lp-fundamentals/) — Learn simplex from scratch
-- [Dual Simplex Algorithm](/algorithms/dual-simplex-method/) — Detailed algorithm page
+- [LP Fundamentals Learning Path](@/learning-paths/lp-fundamentals.md) — Learn simplex from scratch
+- [Dual Simplex Algorithm](@/algorithms/dual-simplex-method.md) — Detailed algorithm page
 - [Simplex Convergence Derivation](/derivations/simplex-convergence/) — Why simplex terminates
 - [LP Duality Derivation](/derivations/lp-duality/) — Strong duality and complementary slackness

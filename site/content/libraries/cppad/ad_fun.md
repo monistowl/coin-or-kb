@@ -38,5 +38,5 @@ Forward mode computes derivatives in the direction of inputs.
 
 ## Source
 
-Header file: [`include/cppad/core/ad_fun.hpp`](/browser/?library=CppAD&file=include/cppad/core/ad_fun.hpp)
+Header file: {{ link(path="/browser/?library=CppAD&file=include/cppad/core/ad_fun.hpp", text="`include/cppad/core/ad_fun.hpp`") }}
 

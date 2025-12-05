@@ -57,7 +57,7 @@ for problems with many constraints, especially after adding cuts in B&B.
 
 ### Clp
 
-- **[ClpSimplexDual.hpp](/browser/?library=Clp)** - Dual simplex algorithm implementation
+- **{{ link(path="/browser/?library=Clp", text="ClpSimplexDual.hpp") }}** - Dual simplex algorithm implementation
 
 ## References
 

@@ -61,11 +61,11 @@ Branch-and-Cut (B&C) for Mixed-Integer Programming:
 
 - CbcNode for search tree node representation
 - CbcTree for node selection/storage
-- [CbcCutGenerator](/libraries/cbc/cbccutgenerator/) for cutting plane management
+- [CbcCutGenerator](@/libraries/cbc/CbcCutGenerator.md) for cutting plane management
 - CbcHeuristic for primal heuristics
-- [OsiSolverInterface](/libraries/osi/osisolverinterface/) for underlying LP solver
+- [OsiSolverInterface](@/libraries/osi/OsiSolverInterface.md) for underlying LP solver
 
 ## Source
 
-Header file: [`src/CbcModel.hpp`](/browser/?library=Cbc&file=src/CbcModel.hpp)
+Header file: {{ link(path="/browser/?library=Cbc&file=src/CbcModel.hpp", text="`src/CbcModel.hpp`") }}
 

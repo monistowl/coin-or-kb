@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[SolutionStrategySingleTree.h](/browser/?library=SHOT)** - Lazy constraint callback strategy (single-tree)
+- **{{ link(path="/browser/?library=SHOT", text="SolutionStrategySingleTree.h") }}** - Lazy constraint callback strategy (single-tree)
 
 Callback-based outer approximation within single B&B tree.
 

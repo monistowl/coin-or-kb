@@ -68,12 +68,12 @@ Reduce $\mu$ when the current subproblem is solved sufficiently well, following 
 
 | Class | Purpose |
 |-------|---------|
-| [IpIpoptApplication](/browser/?library=Ipopt) | Main application interface |
-| [IpIpoptAlg](/browser/?library=Ipopt) | Core algorithm implementation |
-| [IpOrigIpoptNLP](/browser/?library=Ipopt) | NLP problem representation |
-| [IpFilterLSAcceptor](/browser/?library=Ipopt) | Filter line search |
-| [SymLinearSolver](/browser/?library=Ipopt) | Linear solver interface |
-| [IpTNLPAdapter](/browser/?library=Ipopt) | Adapter for TNLP interface |
+| {{ link(path="/browser/?library=Ipopt", text="IpIpoptApplication") }} | Main application interface |
+| {{ link(path="/browser/?library=Ipopt", text="IpIpoptAlg") }} | Core algorithm implementation |
+| {{ link(path="/browser/?library=Ipopt", text="IpOrigIpoptNLP") }} | NLP problem representation |
+| {{ link(path="/browser/?library=Ipopt", text="IpFilterLSAcceptor") }} | Filter line search |
+| {{ link(path="/browser/?library=Ipopt", text="SymLinearSolver") }} | Linear solver interface |
+| {{ link(path="/browser/?library=Ipopt", text="IpTNLPAdapter") }} | Adapter for TNLP interface |
 
 ---
 
@@ -186,7 +186,7 @@ Ipopt needs first and second derivatives for efficiency:
 
 ## Related Resources
 
-- [Nonlinear Optimization Learning Path](/learning-paths/nonlinear-optimization/) — NLP from scratch
+- [Nonlinear Optimization Learning Path](@/learning-paths/nonlinear-optimization.md) — NLP from scratch
 - [Interior Point Central Path Derivation](/derivations/interior-point-central-path/) — Barrier method theory
 - [KKT Conditions Derivation](/derivations/kkt-conditions/) — Optimality conditions
-- [Global Optimization Learning Path](/learning-paths/global-optimization/) — Beyond local optima
+- [Global Optimization Learning Path](@/learning-paths/global-optimization.md) — Beyond local optima

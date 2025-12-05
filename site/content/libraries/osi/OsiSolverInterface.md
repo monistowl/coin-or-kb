@@ -64,11 +64,11 @@ Design Pattern: Abstract Factory + Strategy
 
 ## See Also
 
-- [OsiClpSolverInterface](/libraries/clp/osiclpsolverinterface/) for Clp implementation
+- [OsiClpSolverInterface](@/libraries/clp/OsiClpSolverInterface.md) for Clp implementation
 - OsiCuts for cut pool management
-- [CoinPackedMatrix](/libraries/coinutils/coinpackedmatrix/) for constraint matrix format
+- [CoinPackedMatrix](@/libraries/coinutils/CoinPackedMatrix.md) for constraint matrix format
 
 ## Source
 
-Header file: [`src/Osi/OsiSolverInterface.hpp`](/browser/?library=Osi&file=src/Osi/OsiSolverInterface.hpp)
+Header file: {{ link(path="/browser/?library=Osi&file=src/Osi/OsiSolverInterface.hpp", text="`src/Osi/OsiSolverInterface.hpp`") }}
 

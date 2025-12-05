@@ -40,9 +40,9 @@ Produces cut in terms of structural variables only.
 ## See Also
 
 - CglGMIParam for parameter settings
-- [CglGomory](/libraries/cgl/cglgomory/) for simpler Gomory implementation
+- [CglGomory](@/libraries/cgl/CglGomory.md) for simpler Gomory implementation
 
 ## Source
 
-Header file: [`src/CglGMI/CglGMI.hpp`](/browser/?library=Cgl&file=src/CglGMI/CglGMI.hpp)
+Header file: {{ link(path="/browser/?library=Cgl&file=src/CglGMI/CglGMI.hpp", text="`src/CglGMI/CglGMI.hpp`") }}
 

@@ -27,7 +27,7 @@ This path builds on LP Fundamentals to show how MIP solvers handle integer varia
 
 ## Prerequisites
 
-You should have completed [LP Fundamentals](/learning-paths/lp-fundamentals/) or be comfortable with:
+You should have completed [LP Fundamentals](@/learning-paths/lp-fundamentals.md) or be comfortable with:
 - The simplex method (primal and dual)
 - LP duality and reduced costs
 - Why LP can be solved efficiently
@@ -77,7 +77,7 @@ We can't enumerate. We need to be clever.
 
 <div class="code-connection">
 
-In COIN-OR, MIP is solved by [Cbc](/libraries/cbc/) (COIN-OR Branch and Cut). It uses [Clp](/libraries/clp/) for LP relaxations and [Cgl](/libraries/cgl/) for cut generation.
+In COIN-OR, MIP is solved by [Cbc](@/libraries/cbc/_index.md) (COIN-OR Branch and Cut). It uses [Clp](@/libraries/clp/_index.md) for LP relaxations and [Cgl](@/libraries/cgl/_index.md) for cut generation.
 
 </div>
 
@@ -211,7 +211,7 @@ Choose which unexplored node to process next (see node selection strategies belo
 
 <div class="code-connection">
 
-`CbcModel` manages the tree. `CbcNode` represents nodes. Tree traversal strategies are in `CbcTree` and `CbcCompare*` classes. See [branch-and-bound tree search](/algorithms/branch-and-bound-tree-search/).
+`CbcModel` manages the tree. `CbcNode` represents nodes. Tree traversal strategies are in `CbcTree` and `CbcCompare*` classes. See [branch-and-bound tree search](@/algorithms/branch-and-bound-tree-search.md).
 
 </div>
 
@@ -266,7 +266,7 @@ Adding too many cuts can slow down the LP. Solvers manage cuts by:
 
 <div class="code-connection">
 
-The [Cgl library](/libraries/cgl/) provides cut generators. `CbcModel` calls them via `CglCutGenerator`. See the [lift-and-project algorithm](/algorithms/lift-and-project-cutting-planes/).
+The [Cgl library](@/libraries/cgl/_index.md) provides cut generators. `CbcModel` calls them via `CglCutGenerator`. See the [lift-and-project algorithm](@/algorithms/lift-and-project-cutting-planes.md).
 
 </div>
 
@@ -311,7 +311,7 @@ Hybrid: use strong branching until pseudo-costs are "reliable" (enough observati
 
 <div class="code-connection">
 
-Cbc's branching strategies are in `CbcBranch*` classes. `CbcBranchDynamic` implements reliability branching. See [branching variable selection](/algorithms/branching-variable-selection-strategies/).
+Cbc's branching strategies are in `CbcBranch*` classes. `CbcBranchDynamic` implements reliability branching. See [branching variable selection](@/algorithms/branching-variable-selection-strategies.md).
 
 </div>
 
@@ -373,7 +373,7 @@ Greedily round variables one at a time, re-solving LP after each. If infeasible,
 
 <div class="code-connection">
 
-Cbc heuristics inherit from `CbcHeuristic`. See `CbcHeuristicFPump` for feasibility pump and `CbcHeuristicRINS` for RINS. The [primal heuristics framework](/algorithms/mip-primal-heuristics-framework/) documents the design.
+Cbc heuristics inherit from `CbcHeuristic`. See `CbcHeuristicFPump` for feasibility pump and `CbcHeuristicRINS` for RINS. The [primal heuristics framework](@/algorithms/mip-primal-heuristics-framework.md) documents the design.
 
 </div>
 
@@ -450,7 +450,7 @@ When gap reaches tolerance (often 0.01%), solver declares optimal.
 
 <div class="code-connection">
 
-The main loop is in `CbcModel::branchAndBound()`. See [branch-and-cut algorithm](/algorithms/branch-and-cut-bc-for-mixed-integer-programming/).
+The main loop is in `CbcModel::branchAndBound()`. See [branch-and-cut algorithm](@/algorithms/branch-and-cut-bc-for-mixed-integer-programming.md).
 
 </div>
 
@@ -460,8 +460,8 @@ The main loop is in `CbcModel::branchAndBound()`. See [branch-and-cut algorithm]
 
 You now understand the core MIP algorithms! Next steps:
 
-- **[Browse Cbc source](/browser/?library=Cbc)** - See the implementation
-- **[Cutting plane algorithms](/algorithms/?category=cutting-planes)** - Deep dive on specific cuts
+- **{{ link(path="/browser/?library=Cbc", text="Browse Cbc source") }}** - See the implementation
+- **{{ link(path="/algorithms/?category=cutting-planes", text="Cutting plane algorithms") }}** - Deep dive on specific cuts
 - **Try it:** Solve a MIP with Cbc and watch the log output. Match what you see to the concepts here.
 
 <div class="key-insight">

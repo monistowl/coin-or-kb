@@ -32,10 +32,10 @@ Extended Cutting Plane (Westerlund-Pettersson)
 
 ## See Also
 
-- [TaskSelectHyperplanePointsESH](/libraries/shot/taskselecthyperplanepointsesh/).h for ESH variant
+- [TaskSelectHyperplanePointsESH](@/libraries/shot/TaskSelectHyperplanePointsESH.md).h for ESH variant
 - TaskAddHyperplanes.h for cut addition
 
 ## Source
 
-Header file: [`src/Tasks/TaskSelectHyperplanePointsECP.h`](/browser/?library=SHOT&file=src/Tasks/TaskSelectHyperplanePointsECP.h)
+Header file: {{ link(path="/browser/?library=SHOT&file=src/Tasks/TaskSelectHyperplanePointsECP.h", text="`src/Tasks/TaskSelectHyperplanePointsECP.h`") }}
 

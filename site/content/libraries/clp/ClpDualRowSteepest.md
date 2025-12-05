@@ -53,9 +53,9 @@ Full recomputation $O(m²)$ but rare. Typically 30-50% fewer iterations than Dan
      for the steepest edge algorithm
 - ClpDualRowPivot for the base interface
 - ClpDualRowDantzig for simpler but often slower alternative
-- [ClpSimplexDual](/libraries/clp/clpsimplexdual/) for the dual simplex algorithm
+- [ClpSimplexDual](@/libraries/clp/ClpSimplexDual.md) for the dual simplex algorithm
 
 ## Source
 
-Header file: [`src/ClpDualRowSteepest.hpp`](/browser/?library=Clp&file=src/ClpDualRowSteepest.hpp)
+Header file: {{ link(path="/browser/?library=Clp&file=src/ClpDualRowSteepest.hpp", text="`src/ClpDualRowSteepest.hpp`") }}
 

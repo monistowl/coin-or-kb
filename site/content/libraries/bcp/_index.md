@@ -151,22 +151,22 @@ Two ways to represent variables and cuts:
 
 | File | Description |
 |------|-------------|
-| [BCP_tm.hpp](/browser/?library=Bcp&path=Bcp/src/include/BCP_tm.hpp) | Tree Manager: parallel B&B coordinator |
-| [BCP_lp.hpp](/browser/?library=Bcp&path=Bcp/src/include/BCP_lp.hpp) | LP Worker: relaxation solving |
-| [BCP_cg.hpp](/browser/?library=Bcp&path=Bcp/src/include/BCP_cg.hpp) | Cut Generator process |
-| [BCP_vg.hpp](/browser/?library=Bcp&path=Bcp/src/include/BCP_vg.hpp) | Variable Generator process |
-| [BCP_branch.hpp](/browser/?library=Bcp&path=Bcp/src/include/BCP_branch.hpp) | Branching decision structures |
-| [BCP_cut.hpp](/browser/?library=Bcp&path=Bcp/src/include/BCP_cut.hpp) | Cut representation (core/indexed/algo) |
-| [BCP_var.hpp](/browser/?library=Bcp&path=Bcp/src/include/BCP_var.hpp) | Variable representation |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/src/include/BCP_tm.hpp", text="BCP_tm.hpp") }} | Tree Manager: parallel B&B coordinator |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/src/include/BCP_lp.hpp", text="BCP_lp.hpp") }} | LP Worker: relaxation solving |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/src/include/BCP_cg.hpp", text="BCP_cg.hpp") }} | Cut Generator process |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/src/include/BCP_vg.hpp", text="BCP_vg.hpp") }} | Variable Generator process |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/src/include/BCP_branch.hpp", text="BCP_branch.hpp") }} | Branching decision structures |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/src/include/BCP_cut.hpp", text="BCP_cut.hpp") }} | Cut representation (core/indexed/algo) |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/src/include/BCP_var.hpp", text="BCP_var.hpp") }} | Variable representation |
 
 ### User Interface Classes
 
 | File | Description |
 |------|-------------|
-| [BCP_tm_user.hpp](/browser/?library=Bcp&path=Bcp/src/include/BCP_tm_user.hpp) | TM customization hooks |
-| [BCP_lp_user.hpp](/browser/?library=Bcp&path=Bcp/src/include/BCP_lp_user.hpp) | LP customization hooks |
-| [BCP_cg_user.hpp](/browser/?library=Bcp&path=Bcp/src/include/BCP_cg_user.hpp) | Cut generator hooks |
-| [BCP_vg_user.hpp](/browser/?library=Bcp&path=Bcp/src/include/BCP_vg_user.hpp) | Variable generator hooks |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/src/include/BCP_tm_user.hpp", text="BCP_tm_user.hpp") }} | TM customization hooks |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/src/include/BCP_lp_user.hpp", text="BCP_lp_user.hpp") }} | LP customization hooks |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/src/include/BCP_cg_user.hpp", text="BCP_cg_user.hpp") }} | Cut generator hooks |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/src/include/BCP_vg_user.hpp", text="BCP_vg_user.hpp") }} | Variable generator hooks |
 
 ---
 

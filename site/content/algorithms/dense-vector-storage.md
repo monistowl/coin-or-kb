@@ -34,7 +34,7 @@ Element access: O(1)
 
 ### CoinUtils
 
-- **[CoinDenseVector.hpp](/browser/?library=CoinUtils)** - Dense vector template with element-wise arithmetic operations
+- **{{ link(path="/browser/?library=CoinUtils", text="CoinDenseVector.hpp") }}** - Dense vector template with element-wise arithmetic operations
 
 CoinDenseVector<T> stores all elements in a contiguous array.
 Unlike sparse vectors, every position has storage. Supports

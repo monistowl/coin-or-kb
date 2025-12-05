@@ -98,12 +98,12 @@ Generate cuts by solving auxiliary LPs for each disjunction. Most general but ex
 
 | Class | Purpose |
 |-------|---------|
-| [CglCutGenerator](/browser/?library=Cgl) | Base class for all cut generators |
-| [CglGomory](/browser/?library=Cgl) | Gomory fractional cuts |
-| [CglMixedIntegerRounding](/browser/?library=Cgl) | MIR cuts |
-| [CglClique](/browser/?library=Cgl) | Clique cuts from conflict graph |
-| [CglKnapsackCover](/browser/?library=Cgl) | Knapsack cover cuts |
-| [CglProbing](/browser/?library=Cgl) | Probing-based cuts |
+| {{ link(path="/browser/?library=Cgl", text="CglCutGenerator") }} | Base class for all cut generators |
+| {{ link(path="/browser/?library=Cgl", text="CglGomory") }} | Gomory fractional cuts |
+| {{ link(path="/browser/?library=Cgl", text="CglMixedIntegerRounding") }} | MIR cuts |
+| {{ link(path="/browser/?library=Cgl", text="CglClique") }} | Clique cuts from conflict graph |
+| {{ link(path="/browser/?library=Cgl", text="CglKnapsackCover") }} | Knapsack cover cuts |
+| {{ link(path="/browser/?library=Cgl", text="CglProbing") }} | Probing-based cuts |
 
 ---
 
@@ -202,7 +202,7 @@ Not all generated cuts are useful. Selection criteria:
 
 ## Related Resources
 
-- [MIP Journey Learning Path](/learning-paths/mip-journey/) — Branch-and-cut from scratch
-- [Cutting Planes Algorithm](/algorithms/cutting-planes/) — How cuts work
-- [Gomory Cuts](/algorithms/gomory-cuts/) — Tableau-derived cuts
+- [MIP Journey Learning Path](@/learning-paths/mip-journey.md) — Branch-and-cut from scratch
+- {{ link(path="/algorithms/cutting-planes/", text="Cutting Planes Algorithm") }} — How cuts work
+- {{ link(path="/algorithms/gomory-cuts/", text="Gomory Cuts") }} — Tableau-derived cuts
 - [Branch and Bound Correctness](/derivations/branch-and-bound-correctness/) — Why pruning works

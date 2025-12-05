@@ -33,7 +33,7 @@ Major vector access: O(1) to get start, O(nnz_j) to iterate
 
 ### CoinUtils
 
-- **[CoinPackedMatrix.hpp](/browser/?library=CoinUtils)** - Sparse matrix stored in compressed row or column format
+- **{{ link(path="/browser/?library=CoinUtils", text="CoinPackedMatrix.hpp") }}** - Sparse matrix stored in compressed row or column format
 
 CoinPackedMatrix represents a sparse matrix using compressed storage.
 Can be stored row-major or column-major. Efficient for major-dimension

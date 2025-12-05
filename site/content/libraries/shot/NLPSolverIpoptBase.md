@@ -74,5 +74,5 @@ Original bounds restored by unfixVariables().
 
 ## Source
 
-Header file: [`src/NLPSolver/NLPSolverIpoptBase.h`](/browser/?library=SHOT&file=src/NLPSolver/NLPSolverIpoptBase.h)
+Header file: {{ link(path="/browser/?library=SHOT&file=src/NLPSolver/NLPSolverIpoptBase.h", text="`src/NLPSolver/NLPSolverIpoptBase.h`") }}
 

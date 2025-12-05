@@ -72,5 +72,5 @@ MIP Solving:
 
 ## Source
 
-Header file: [`highs/Highs.h`](/browser/?library=HiGHS&file=highs/Highs.h)
+Header file: {{ link(path="/browser/?library=HiGHS&file=highs/Highs.h", text="`highs/Highs.h`") }}
 

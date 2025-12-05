@@ -57,7 +57,7 @@ Pseudo-costs: O(n) after warmup. Reliability: adaptive O(k') where k' ≤ k.
 
 ### Cbc
 
-- **[CbcBranchDecision.hpp](/browser/?library=Cbc)** - Abstract base for branching variable selection
+- **{{ link(path="/browser/?library=Cbc", text="CbcBranchDecision.hpp") }}** - Abstract base for branching variable selection
 Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
 

@@ -23,7 +23,7 @@ generateCuts: O(generator_cost × frequency)
 
 ### Cbc
 
-- **[CbcCutGenerator.hpp](/browser/?library=Cbc)** - Interface between Cbc and Cut Generation Library (CGL)
+- **{{ link(path="/browser/?library=Cbc", text="CbcCutGenerator.hpp") }}** - Interface between Cbc and Cut Generation Library (CGL)
 Copyright (C) 2003, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
 

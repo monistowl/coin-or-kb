@@ -62,12 +62,12 @@ Hyper-sparse Computation:
 
 ## See Also
 
-- [HEkkDual](/libraries/highs/hekkdual/).h for dual simplex implementation
+- [HEkkDual](@/libraries/highs/HEkkDual.md).h for dual simplex implementation
 - HEkkPrimal.h for primal simplex implementation
 - HSimplexNla.h for basis factorization
 - SimplexStruct.h for SimplexBasis, HighsSimplexStatus
 
 ## Source
 
-Header file: [`highs/simplex/HEkk.h`](/browser/?library=HiGHS&file=highs/simplex/HEkk.h)
+Header file: {{ link(path="/browser/?library=HiGHS&file=highs/simplex/HEkk.h", text="`highs/simplex/HEkk.h`") }}
 

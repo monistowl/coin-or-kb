@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[SolutionStrategyMultiTree.h](/browser/?library=SHOT)** - Iterative outer approximation strategy (multi-tree)
+- **{{ link(path="/browser/?library=SHOT", text="SolutionStrategyMultiTree.h") }}** - Iterative outer approximation strategy (multi-tree)
 
 Classic outer approximation loop for convex MINLP.
 

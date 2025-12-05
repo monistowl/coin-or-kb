@@ -27,7 +27,7 @@ O(2^n) worst case, often O(n * c) practical
 
 ### Cgl
 
-- **[CglKnapsackCover.hpp](/browser/?library=Cgl)** - Knapsack cover cuts for binary packing constraints
+- **{{ link(path="/browser/?library=Cgl", text="CglKnapsackCover.hpp") }}** - Knapsack cover cuts for binary packing constraints
 
 Generates cover inequalities for knapsack constraints of the form
 sum_j a_j * x_j <= b where x_j are binary. A cover C is a subset

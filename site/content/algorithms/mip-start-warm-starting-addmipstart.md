@@ -26,7 +26,7 @@ Prune node n if: LP(n) >= z* (current best solution)
 
 ### SHOT
 
-- **[IMIPSolver.h](/browser/?library=SHOT)** - Abstract interface for MIP solver backends
+- **{{ link(path="/browser/?library=SHOT", text="IMIPSolver.h") }}** - Abstract interface for MIP solver backends
 
 Pure virtual interface for dual problem MIP solvers.
 

@@ -1,0 +1,5 @@
+{#
+  Shortcode for creating links with base_url.
+  Usage: {{ link(path="/browser/?library=X", text="Link Text") }}
+#}
+<a href="{{ config.base_url ~ path }}">{{ text }}</a>

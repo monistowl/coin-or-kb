@@ -51,11 +51,11 @@ Forrest-Tomlin update: $O(m)$ average, refactorization every 100-200 pivots.
 
 ## See Also
 
-- [CoinFactorization](/libraries/coinutils/coinfactorization/) in CoinUtils for the underlying LU implementation
+- [CoinFactorization](@/libraries/coinutils/CoinFactorization.md) in CoinUtils for the underlying LU implementation
 - ClpNetworkBasis for special network structure handling
-- [ClpSimplex](/libraries/clp/clpsimplex/) for how factorization integrates with simplex iterations
+- [ClpSimplex](@/libraries/clp/ClpSimplex.md) for how factorization integrates with simplex iterations
 
 ## Source
 
-Header file: [`src/ClpFactorization.hpp`](/browser/?library=Clp&file=src/ClpFactorization.hpp)
+Header file: {{ link(path="/browser/?library=Clp&file=src/ClpFactorization.hpp", text="`src/ClpFactorization.hpp`") }}
 

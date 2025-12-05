@@ -451,7 +451,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 
 ## Using the Source Browser
 
-All 30 libraries are indexed in the [Source Browser](/browser/), which provides:
+All 30 libraries are indexed in the [Source Browser](@/browser.md), which provides:
 
 - **File tree navigation** across all layers
 - **Header listings** with class information

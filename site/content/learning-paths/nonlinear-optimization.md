@@ -84,9 +84,9 @@ Convex:                          Nonconvex:
 
 | Library | Problem Class | What It Guarantees |
 |---------|---------------|-------------------|
-| [Ipopt](/libraries/ipopt/) | Continuous NLP | Local optimum |
-| [Bonmin](/libraries/bonmin/) | Convex MINLP | Global optimum |
-| [Couenne](/libraries/couenne/) | General MINLP | Global optimum |
+| [Ipopt](@/libraries/ipopt/_index.md) | Continuous NLP | Local optimum |
+| [Bonmin](@/libraries/bonmin/_index.md) | Convex MINLP | Global optimum |
+| [Couenne](@/libraries/couenne/_index.md) | General MINLP | Global optimum |
 
 ---
 
@@ -165,7 +165,7 @@ At the optimum:
 
 <div class="code-connection">
 
-In Ipopt, the KKT conditions are tracked throughout the algorithm. The **optimality error** measures how close we are to satisfying them. See [IpIpoptNLP.hpp](/browser/?library=Ipopt&path=src/Interfaces/IpIpoptNLP.hpp).
+In Ipopt, the KKT conditions are tracked throughout the algorithm. The **optimality error** measures how close we are to satisfying them. See {{ link(path="/browser/?library=Ipopt&path=src/Interfaces/IpIpoptNLP.hpp", text="IpIpoptNLP.hpp") }}.
 
 </div>
 
@@ -219,7 +219,7 @@ Computing $\nabla^2 f(x)$ can be expensive:
 
 <div class="code-connection">
 
-See [IpRestorationPhase.hpp](/browser/?library=Ipopt&path=src/Algorithm/IpRestorationPhase.hpp) for Newton-based restoration and [IpLowRankAugSystemSolver.hpp](/browser/?library=Ipopt&path=src/Algorithm/LinearSolvers/IpLowRankAugSystemSolver.hpp) for efficient linear system solving.
+See {{ link(path="/browser/?library=Ipopt&path=src/Algorithm/IpRestorationPhase.hpp", text="IpRestorationPhase.hpp") }} for Newton-based restoration and {{ link(path="/browser/?library=Ipopt&path=src/Algorithm/LinearSolvers/IpLowRankAugSystemSolver.hpp", text="IpLowRankAugSystemSolver.hpp") }} for efficient linear system solving.
 
 </div>
 
@@ -286,7 +286,7 @@ As $\mu \to 0$, we get true complementarity: $s_j \mu_j = 0$.
 
 <div class="code-connection">
 
-Ipopt implements a primal-dual interior point method. The barrier parameter management is in [IpAdaptiveMuUpdate.hpp](/browser/?library=Ipopt&path=src/Algorithm/IpAdaptiveMuUpdate.hpp).
+Ipopt implements a primal-dual interior point method. The barrier parameter management is in {{ link(path="/browser/?library=Ipopt&path=src/Algorithm/IpAdaptiveMuUpdate.hpp", text="IpAdaptiveMuUpdate.hpp") }}.
 
 </div>
 
@@ -294,7 +294,7 @@ Ipopt implements a primal-dual interior point method. The barrier parameter mana
 
 <h2 id="ipopt-algorithm">5. Inside Ipopt</h2>
 
-[Ipopt](/libraries/ipopt/) (Interior Point OPTimizer) is COIN-OR's flagship NLP solver. Let's trace through how it works.
+[Ipopt](@/libraries/ipopt/_index.md) (Interior Point OPTimizer) is COIN-OR's flagship NLP solver. Let's trace through how it works.
 
 ### The Primal-Dual System
 
@@ -393,7 +393,7 @@ Ipopt uses a **filter method** instead of a merit function:
 
 <div class="code-connection">
 
-The main algorithm loop is in [IpIpoptAlg.cpp](/browser/?library=Ipopt&path=src/Algorithm/IpIpoptAlg.cpp). Filter line search is in [IpFilterLSAcceptor.hpp](/browser/?library=Ipopt&path=src/Algorithm/IpFilterLSAcceptor.hpp).
+The main algorithm loop is in {{ link(path="/browser/?library=Ipopt&path=src/Algorithm/IpIpoptAlg.cpp", text="IpIpoptAlg.cpp") }}. Filter line search is in {{ link(path="/browser/?library=Ipopt&path=src/Algorithm/IpFilterLSAcceptor.hpp", text="IpFilterLSAcceptor.hpp") }}.
 
 </div>
 
@@ -422,12 +422,12 @@ We lose the "nice" LP relaxation of MIP and must solve NLPs instead.
 
 ### Approaches in COIN-OR
 
-**[Bonmin](/libraries/bonmin/):** For **convex** MINLP
+**[Bonmin](@/libraries/bonmin/_index.md):** For **convex** MINLP
 - NLP-based branch-and-bound
 - Outer approximation
 - Hybrid methods
 
-**[Couenne](/libraries/couenne/):** For **nonconvex** MINLP
+**[Couenne](@/libraries/couenne/_index.md):** For **nonconvex** MINLP
 - Spatial branch-and-bound
 - Convex relaxations
 - Global optimality guarantee
@@ -451,7 +451,7 @@ The quadratic term makes this MINLP.
 
 <div class="code-connection">
 
-Bonmin's algorithm selection is controlled in [BonBonminSetup.hpp](/browser/?library=Bonmin&path=src/Algorithms/BonBonminSetup.hpp). The B-Hyb algorithm (hybrid) is often fastest.
+Bonmin's algorithm selection is controlled in {{ link(path="/browser/?library=Bonmin&path=src/Algorithms/BonBonminSetup.hpp", text="BonBonminSetup.hpp") }}. The B-Hyb algorithm (hybrid) is often fastest.
 
 </div>
 
@@ -553,7 +553,7 @@ Where to split matters:
 
 <div class="code-connection">
 
-Couenne's spatial branching is in [CouenneObject.hpp](/browser/?library=Couenne&path=src/branch/CouenneObject.hpp). Bound tightening is in [CouenneTwoImplied.hpp](/browser/?library=Couenne&path=src/bound_tightening/twoImpliedBT/CouenneTwoImplied.hpp).
+Couenne's spatial branching is in {{ link(path="/browser/?library=Couenne&path=src/branch/CouenneObject.hpp", text="CouenneObject.hpp") }}. Bound tightening is in {{ link(path="/browser/?library=Couenne&path=src/bound_tightening/twoImpliedBT/CouenneTwoImplied.hpp", text="CouenneTwoImplied.hpp") }}.
 
 </div>
 
@@ -563,10 +563,10 @@ Couenne's spatial branching is in [CouenneObject.hpp](/browser/?library=Couenne&
 
 You now understand the algorithmic foundations of nonlinear optimization! Next steps:
 
-- **[Browse Ipopt source](/browser/?library=Ipopt)** - See the interior point implementation
-- **[Browse Bonmin source](/browser/?library=Bonmin)** - Explore MINLP algorithms
-- **[Browse Couenne source](/browser/?library=Couenne)** - Understand global optimization
-- **[Algorithm index](/algorithms/)** - Deep-dive into specific algorithms
+- **{{ link(path="/browser/?library=Ipopt", text="Browse Ipopt source") }}** - See the interior point implementation
+- **{{ link(path="/browser/?library=Bonmin", text="Browse Bonmin source") }}** - Explore MINLP algorithms
+- **{{ link(path="/browser/?library=Couenne", text="Browse Couenne source") }}** - Understand global optimization
+- **[Algorithm index](@/algorithms/_index.md)** - Deep-dive into specific algorithms
 
 <div class="key-insight">
 

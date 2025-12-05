@@ -59,9 +59,9 @@ Root Node vs. Tree Strategy:
 
 - CglCutGenerator for cut generation algorithms
 - CbcCutModifier for post-generation cut modification
-- [CbcModel](/libraries/cbc/cbcmodel/)::addCutGenerator()
+- [CbcModel](@/libraries/cbc/CbcModel.md)::addCutGenerator()
 
 ## Source
 
-Header file: [`src/CbcCutGenerator.hpp`](/browser/?library=Cbc&file=src/CbcCutGenerator.hpp)
+Header file: {{ link(path="/browser/?library=Cbc&file=src/CbcCutGenerator.hpp", text="`src/CbcCutGenerator.hpp`") }}
 

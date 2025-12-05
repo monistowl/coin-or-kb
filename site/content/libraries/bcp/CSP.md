@@ -176,11 +176,11 @@ void generate_vars_in_lp(const BCP_lp_result& lpres,
 
 | File | Description |
 |------|-------------|
-| [CSP.hpp](/browser/?library=Bcp&path=Applications/Csp/include/CSP.hpp) | Problem and pattern data structures |
-| [KS.hpp](/browser/?library=Bcp&path=Applications/Csp/include/KS.hpp) | Horowitz-Sahni knapsack solver |
-| [CSP_colgen.hpp](/browser/?library=Bcp&path=Applications/Csp/include/CSP_colgen.hpp) | Column generation with perturbation |
-| [CSP_lp.hpp](/browser/?library=Bcp&path=Applications/Csp/include/CSP_lp.hpp) | LP process with pricing |
-| [CSP_var.hpp](/browser/?library=Bcp&path=Applications/Csp/include/CSP_var.hpp) | Pattern variable definition |
+| {{ link(path="/browser/?library=Bcp&path=Applications/Csp/include/CSP.hpp", text="CSP.hpp") }} | Problem and pattern data structures |
+| {{ link(path="/browser/?library=Bcp&path=Applications/Csp/include/KS.hpp", text="KS.hpp") }} | Horowitz-Sahni knapsack solver |
+| {{ link(path="/browser/?library=Bcp&path=Applications/Csp/include/CSP_colgen.hpp", text="CSP_colgen.hpp") }} | Column generation with perturbation |
+| {{ link(path="/browser/?library=Bcp&path=Applications/Csp/include/CSP_lp.hpp", text="CSP_lp.hpp") }} | LP process with pricing |
+| {{ link(path="/browser/?library=Bcp&path=Applications/Csp/include/CSP_var.hpp", text="CSP_var.hpp") }} | Pattern variable definition |
 
 ---
 

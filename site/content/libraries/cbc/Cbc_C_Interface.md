@@ -33,5 +33,5 @@ LP Method Selection (LPMethod enum):
 
 ## Source
 
-Header file: [`src/Cbc_C_Interface.h`](/browser/?library=Cbc&file=src/Cbc_C_Interface.h)
+Header file: {{ link(path="/browser/?library=Cbc&file=src/Cbc_C_Interface.h", text="`src/Cbc_C_Interface.h`") }}
 

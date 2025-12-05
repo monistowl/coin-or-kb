@@ -41,5 +41,5 @@ Extended Supporting Hyperplane (Kronqvist 2016)
 
 ## Source
 
-Header file: [`src/Tasks/TaskSelectHyperplanePointsESH.h`](/browser/?library=SHOT&file=src/Tasks/TaskSelectHyperplanePointsESH.h)
+Header file: {{ link(path="/browser/?library=SHOT&file=src/Tasks/TaskSelectHyperplanePointsESH.h", text="`src/Tasks/TaskSelectHyperplanePointsESH.h`") }}
 

@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[TaskPerformBoundTightening.h](/browser/?library=SHOT)** - Tighten variable bounds via optimization
+- **{{ link(path="/browser/?library=SHOT", text="TaskPerformBoundTightening.h") }}** - Tighten variable bounds via optimization
 
 Uses optimization-based bound tightening (OBBT).
 

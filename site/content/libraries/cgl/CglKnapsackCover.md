@@ -70,9 +70,9 @@ Fast but may miss most violated cover.
 ## See Also
 
 - CglProbing for variable implications derived from covers
-- [CglClique](/libraries/cgl/cglclique/) for clique cuts (special case of covers)
+- [CglClique](@/libraries/cgl/CglClique.md) for clique cuts (special case of covers)
 
 ## Source
 
-Header file: [`src/CglKnapsackCover/CglKnapsackCover.hpp`](/browser/?library=Cgl&file=src/CglKnapsackCover/CglKnapsackCover.hpp)
+Header file: {{ link(path="/browser/?library=Cgl&file=src/CglKnapsackCover/CglKnapsackCover.hpp", text="`src/CglKnapsackCover/CglKnapsackCover.hpp`") }}
 

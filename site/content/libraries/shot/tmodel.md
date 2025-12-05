@@ -40,5 +40,5 @@ Used in global optimization branch-and-bound for bound tightening.
 
 ## Source
 
-Header file: [`ThirdParty/mc++/include/tmodel.hpp`](/browser/?library=SHOT&file=ThirdParty/mc++/include/tmodel.hpp)
+Header file: {{ link(path="/browser/?library=SHOT&file=ThirdParty/mc++/include/tmodel.hpp", text="`ThirdParty/mc++/include/tmodel.hpp`") }}
 

@@ -208,22 +208,22 @@ void generate_vars_in_lp(...) {
 ### MCF-1 (Basic)
 | File | Description |
 |------|-------------|
-| [MCF1_data.hpp](/browser/?library=Bcp&path=Bcp/examples/MCF-1/include/MCF1_data.hpp) | Network and commodity data |
-| [MCF1_lp.hpp](/browser/?library=Bcp&path=Bcp/examples/MCF-1/include/MCF1_lp.hpp) | LP process with global history |
-| [MCF1_var.hpp](/browser/?library=Bcp&path=Bcp/examples/MCF-1/include/MCF1_var.hpp) | Flow variables |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/examples/MCF-1/include/MCF1_data.hpp", text="MCF1_data.hpp") }} | Network and commodity data |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/examples/MCF-1/include/MCF1_lp.hpp", text="MCF1_lp.hpp") }} | LP process with global history |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/examples/MCF-1/include/MCF1_var.hpp", text="MCF1_var.hpp") }} | Flow variables |
 
 ### MCF-2 (Delta)
 | File | Description |
 |------|-------------|
-| [MCF2_data.hpp](/browser/?library=Bcp&path=Bcp/examples/MCF-2/include/MCF2_data.hpp) | Network data |
-| [MCF2_lp.hpp](/browser/?library=Bcp&path=Bcp/examples/MCF-2/include/MCF2_lp.hpp) | LP with delta encoding |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/examples/MCF-2/include/MCF2_data.hpp", text="MCF2_data.hpp") }} | Network data |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/examples/MCF-2/include/MCF2_lp.hpp", text="MCF2_lp.hpp") }} | LP with delta encoding |
 
 ### MCF-3 (User Data)
 | File | Description |
 |------|-------------|
-| [MCF3_data.hpp](/browser/?library=Bcp&path=Bcp/examples/MCF-3/include/MCF3_data.hpp) | Network data |
-| [MCF3_lp.hpp](/browser/?library=Bcp&path=Bcp/examples/MCF-3/include/MCF3_lp.hpp) | LP with user_data pattern |
-| [MCF3_var.hpp](/browser/?library=Bcp&path=Bcp/examples/MCF-3/include/MCF3_var.hpp) | Path variables |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/examples/MCF-3/include/MCF3_data.hpp", text="MCF3_data.hpp") }} | Network data |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/examples/MCF-3/include/MCF3_lp.hpp", text="MCF3_lp.hpp") }} | LP with user_data pattern |
+| {{ link(path="/browser/?library=Bcp&path=Bcp/examples/MCF-3/include/MCF3_var.hpp", text="MCF3_var.hpp") }} | Path variables |
 
 ---
 

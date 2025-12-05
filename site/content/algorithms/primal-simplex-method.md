@@ -58,7 +58,7 @@ when starting from feasible solution or for problems with few constraints.
 
 ### Clp
 
-- **[ClpSimplexPrimal.hpp](/browser/?library=Clp)** - Primal simplex algorithm implementation
+- **{{ link(path="/browser/?library=Clp", text="ClpSimplexPrimal.hpp") }}** - Primal simplex algorithm implementation
 
 ## References
 

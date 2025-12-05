@@ -36,4 +36,4 @@ Space: O(n²) worst case, but typically sparse O(n + m)
 
 ### CoinUtils
 
-- **[CoinConflictGraph.hpp](/browser/?library=CoinUtils)** - Conflict graph for binary variable incompatibilities in MIP
+- **{{ link(path="/browser/?library=CoinUtils", text="CoinConflictGraph.hpp") }}** - Conflict graph for binary variable incompatibilities in MIP

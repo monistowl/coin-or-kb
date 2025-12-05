@@ -37,5 +37,5 @@ Operator overloading records a "tape" of operations.
 
 ## Source
 
-Header file: [`include/cppad/cppad.hpp`](/browser/?library=CppAD&file=include/cppad/cppad.hpp)
+Header file: {{ link(path="/browser/?library=CppAD&file=include/cppad/cppad.hpp", text="`include/cppad/cppad.hpp`") }}
 

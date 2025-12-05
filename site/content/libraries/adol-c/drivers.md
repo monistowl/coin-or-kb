@@ -57,5 +57,5 @@ Reverse mode automatic differentiation
 
 ## Source
 
-Header file: [`ADOL-C/include/adolc/drivers/drivers.h`](/browser/?library=ADOL-C&file=ADOL-C/include/adolc/drivers/drivers.h)
+Header file: {{ link(path="/browser/?library=ADOL-C&file=ADOL-C/include/adolc/drivers/drivers.h", text="`ADOL-C/include/adolc/drivers/drivers.h`") }}
 

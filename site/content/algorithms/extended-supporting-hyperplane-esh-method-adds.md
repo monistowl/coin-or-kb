@@ -14,7 +14,7 @@ linearizations at boundary and interior points
 
 ### SHOT
 
-- **[DualSolver.h](/browser/?library=SHOT)** - MIP-based dual bound computation via supporting hyperplanes
+- **{{ link(path="/browser/?library=SHOT", text="DualSolver.h") }}** - MIP-based dual bound computation via supporting hyperplanes
 
 Manages the linearization-based dual problem.
 

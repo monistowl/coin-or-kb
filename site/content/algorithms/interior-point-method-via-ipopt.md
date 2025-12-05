@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### Gravity
 
-- **[IpoptProgram.h](/browser/?library=Gravity)** - Ipopt solver interface implementing TNLP callbacks
+- **{{ link(path="/browser/?library=Gravity", text="IpoptProgram.h") }}** - Ipopt solver interface implementing TNLP callbacks
 
 Adapts Gravity models to Ipopt's TNLP (Templated NLP) interface.
 

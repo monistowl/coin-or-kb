@@ -23,7 +23,7 @@ Same as underlying ClpSimplex methods:
 
 ### Clp
 
-- **[Clp_C_Interface.h](/browser/?library=Clp)** - C language interface to Clp solver
+- **{{ link(path="/browser/?library=Clp", text="Clp_C_Interface.h") }}** - C language interface to Clp solver
 
 Pure C API for embedding Clp in C programs or creating language bindings.
 Design follows OSL V3 conventions for familiarity.

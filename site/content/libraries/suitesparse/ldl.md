@@ -66,5 +66,5 @@ D may have negative entries for indefinite matrices.
 
 ## Source
 
-Header file: [`LDL/Include/ldl.h`](/browser/?library=SuiteSparse&file=LDL/Include/ldl.h)
+Header file: {{ link(path="/browser/?library=SuiteSparse&file=LDL/Include/ldl.h", text="`LDL/Include/ldl.h`") }}
 

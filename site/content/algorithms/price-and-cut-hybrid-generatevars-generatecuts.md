@@ -36,7 +36,7 @@ Column generation: O(#iterations × pricing_cost)
 
 ### Dip
 
-- **[DecompAlgo.h](/browser/?library=Dip)** - Base class for all DIP decomposition algorithms
+- **{{ link(path="/browser/?library=Dip", text="DecompAlgo.h") }}** - Base class for all DIP decomposition algorithms
 
 DecompAlgo is the algorithmic engine that orchestrates:
 - Master problem management (LP relaxation)

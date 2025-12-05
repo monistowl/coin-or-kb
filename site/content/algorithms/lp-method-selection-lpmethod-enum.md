@@ -22,7 +22,7 @@ MIP: Exponential worst-case, highly structure-dependent
 
 ### Cbc
 
-- **[Cbc_C_Interface.h](/browser/?library=Cbc)** - Creates an empty problem
+- **{{ link(path="/browser/?library=Cbc", text="Cbc_C_Interface.h") }}** - Creates an empty problem
 
 ## References
 

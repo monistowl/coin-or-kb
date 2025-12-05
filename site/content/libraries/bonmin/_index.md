@@ -30,7 +30,7 @@ Where $f$ and $g$ are **convex** functions.
 
 <div class="key-insight">
 
-**Convexity requirement:** Bonmin assumes the continuous relaxation is convex. For nonconvex problems, use [Couenne](/libraries/couenne/) instead. Violating convexity may cause Bonmin to find suboptimal solutions or miss feasible regions.
+**Convexity requirement:** Bonmin assumes the continuous relaxation is convex. For nonconvex problems, use [Couenne](@/libraries/couenne/_index.md) instead. Violating convexity may cause Bonmin to find suboptimal solutions or miss feasible regions.
 
 </div>
 
@@ -200,23 +200,23 @@ int main() {
 ### Core Setup
 | File | Description |
 |------|-------------|
-| [BonBonminSetup.hpp](/browser/?library=Bonmin&path=src/Algorithms/BonBonminSetup.hpp) | Algorithm selection and initialization |
-| [BonBabSetupBase.hpp](/browser/?library=Bonmin&path=src/Algorithms/BonBabSetupBase.hpp) | Base B&B configuration |
-| [BonTMINLP.hpp](/browser/?library=Bonmin&path=src/Interfaces/BonTMINLP.hpp) | Problem interface |
+| {{ link(path="/browser/?library=Bonmin&path=src/Algorithms/BonBonminSetup.hpp", text="BonBonminSetup.hpp") }} | Algorithm selection and initialization |
+| {{ link(path="/browser/?library=Bonmin&path=src/Algorithms/BonBabSetupBase.hpp", text="BonBabSetupBase.hpp") }} | Base B&B configuration |
+| {{ link(path="/browser/?library=Bonmin&path=src/Interfaces/BonTMINLP.hpp", text="BonTMINLP.hpp") }} | Problem interface |
 
 ### Algorithms
 | File | Description |
 |------|-------------|
-| [BonOACutGenerator2.hpp](/browser/?library=Bonmin&path=src/Algorithms/OaGenerators/BonOACutGenerator2.hpp) | Outer approximation cuts |
-| [BonEcpCuts.hpp](/browser/?library=Bonmin&path=src/Algorithms/OaGenerators/BonEcpCuts.hpp) | Extended cutting plane |
-| [BonOuterApprox.hpp](/browser/?library=Bonmin&path=src/Algorithms/QuadCuts/BonOuterApprox.hpp) | Quadratic OA |
+| {{ link(path="/browser/?library=Bonmin&path=src/Algorithms/OaGenerators/BonOACutGenerator2.hpp", text="BonOACutGenerator2.hpp") }} | Outer approximation cuts |
+| {{ link(path="/browser/?library=Bonmin&path=src/Algorithms/OaGenerators/BonEcpCuts.hpp", text="BonEcpCuts.hpp") }} | Extended cutting plane |
+| {{ link(path="/browser/?library=Bonmin&path=src/Algorithms/QuadCuts/BonOuterApprox.hpp", text="BonOuterApprox.hpp") }} | Quadratic OA |
 
 ### Heuristics
 | File | Description |
 |------|-------------|
-| [BonHeuristicFPump.hpp](/browser/?library=Bonmin&path=src/CbcBonmin/Heuristics/BonHeuristicFPump.hpp) | Feasibility pump |
-| [BonHeuristicDive.hpp](/browser/?library=Bonmin&path=src/CbcBonmin/Heuristics/BonHeuristicDive.hpp) | Diving heuristics |
-| [BonHeuristicRINS.hpp](/browser/?library=Bonmin&path=src/CbcBonmin/Heuristics/BonHeuristicRINS.hpp) | RINS heuristic |
+| {{ link(path="/browser/?library=Bonmin&path=src/CbcBonmin/Heuristics/BonHeuristicFPump.hpp", text="BonHeuristicFPump.hpp") }} | Feasibility pump |
+| {{ link(path="/browser/?library=Bonmin&path=src/CbcBonmin/Heuristics/BonHeuristicDive.hpp", text="BonHeuristicDive.hpp") }} | Diving heuristics |
+| {{ link(path="/browser/?library=Bonmin&path=src/CbcBonmin/Heuristics/BonHeuristicRINS.hpp", text="BonHeuristicRINS.hpp") }} | RINS heuristic |
 
 ---
 

@@ -47,5 +47,5 @@ Extended Supporting Hyperplane (ESH) method adds
 
 ## Source
 
-Header file: [`src/DualSolver.h`](/browser/?library=SHOT&file=src/DualSolver.h)
+Header file: {{ link(path="/browser/?library=SHOT&file=src/DualSolver.h", text="`src/DualSolver.h`") }}
 

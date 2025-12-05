@@ -53,5 +53,5 @@ Interior Point Method via Ipopt
 
 ## Source
 
-Header file: [`include/gravity/IpoptProgram.h`](/browser/?library=Gravity&file=include/gravity/IpoptProgram.h)
+Header file: {{ link(path="/browser/?library=Gravity&file=include/gravity/IpoptProgram.h", text="`include/gravity/IpoptProgram.h`") }}
 

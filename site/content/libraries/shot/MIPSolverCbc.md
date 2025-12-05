@@ -74,5 +74,5 @@ Prevents cycling when NLP subproblem fails or solution is infeasible.
 
 ## Source
 
-Header file: [`src/MIPSolver/MIPSolverCbc.h`](/browser/?library=SHOT&file=src/MIPSolver/MIPSolverCbc.h)
+Header file: {{ link(path="/browser/?library=SHOT&file=src/MIPSolver/MIPSolverCbc.h", text="`src/MIPSolver/MIPSolverCbc.h`") }}
 

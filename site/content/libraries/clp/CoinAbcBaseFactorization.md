@@ -41,9 +41,9 @@ but CoinBigIndex can be 64-bit for element indices.
 ## See Also
 
 - CoinAbcFactorization.hpp for instantiation
-- [CoinAbcHelperFunctions](/libraries/clp/coinabchelperfunctions/).hpp for SIMD kernels
+- [CoinAbcHelperFunctions](@/libraries/clp/CoinAbcHelperFunctions.md).hpp for SIMD kernels
 
 ## Source
 
-Header file: [`src/CoinAbcBaseFactorization.hpp`](/browser/?library=Clp&file=src/CoinAbcBaseFactorization.hpp)
+Header file: {{ link(path="/browser/?library=Clp&file=src/CoinAbcBaseFactorization.hpp", text="`src/CoinAbcBaseFactorization.hpp`") }}
 

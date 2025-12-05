@@ -47,5 +47,5 @@ Branch-and-cut with lazy ESH constraints
 
 ## Source
 
-Header file: [`src/SolutionStrategy/SolutionStrategySingleTree.h`](/browser/?library=SHOT&file=src/SolutionStrategy/SolutionStrategySingleTree.h)
+Header file: {{ link(path="/browser/?library=SHOT&file=src/SolutionStrategy/SolutionStrategySingleTree.h", text="`src/SolutionStrategy/SolutionStrategySingleTree.h`") }}
 

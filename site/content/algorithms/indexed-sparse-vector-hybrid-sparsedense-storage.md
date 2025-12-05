@@ -33,7 +33,7 @@ Element access: O(1) via dense array
 
 ### CoinUtils
 
-- **[CoinIndexedVector.hpp](/browser/?library=CoinUtils)** - Sparse vector with dense backing array for O(1) element access
+- **{{ link(path="/browser/?library=CoinUtils", text="CoinIndexedVector.hpp") }}** - Sparse vector with dense backing array for O(1) element access
 
 CoinIndexedVector combines sparse index storage with a dense values array,
 enabling O(1) random access while tracking which positions are non-zero.

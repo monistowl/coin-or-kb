@@ -30,7 +30,7 @@ Most operations O(1) delegations to ClpSimplex
 
 ### Clp
 
-- **[OsiClpSolverInterface.hpp](/browser/?library=Clp)** - 
+- **{{ link(path="/browser/?library=Clp", text="OsiClpSolverInterface.hpp") }}** - 
 
 ## References
 

@@ -24,7 +24,7 @@ Summary of major functions:
 
 ### CoinUtils
 
-- **[CoinHelperFunctions.hpp](/browser/?library=CoinUtils)** - Low-level utility functions for array manipulation, copying, and comparison
+- **{{ link(path="/browser/?library=CoinUtils", text="CoinHelperFunctions.hpp") }}** - Low-level utility functions for array manipulation, copying, and comparison
 
 Provides optimized template functions for common array operations used throughout
 COIN-OR: copying (with Duff's device optimization), filling, zeroing, sorting checks,

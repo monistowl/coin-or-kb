@@ -59,9 +59,9 @@ Preprocessing Pipeline (IPPMode):
 
 - CbcParam for individual parameter definitions
 - CbcParamUtils for parameter push/pull callbacks
-- [CbcModel](/libraries/cbc/cbcmodel/) for solver integration
+- [CbcModel](@/libraries/cbc/CbcModel.md) for solver integration
 
 ## Source
 
-Header file: [`src/CbcParameters.hpp`](/browser/?library=Cbc&file=src/CbcParameters.hpp)
+Header file: {{ link(path="/browser/?library=Cbc&file=src/CbcParameters.hpp", text="`src/CbcParameters.hpp`") }}
 
