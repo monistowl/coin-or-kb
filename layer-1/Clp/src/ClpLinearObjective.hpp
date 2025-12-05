@@ -6,6 +6,7 @@
  * @file ClpLinearObjective.hpp
  * @brief Standard linear objective function (c'x)
  *
+ * @algorithm Linear Objective c'x with Gradient Access
  * Implements the standard LP objective: minimize c'x. This is a thin wrapper
  * around a coefficient vector that implements the ClpObjective interface.
  *

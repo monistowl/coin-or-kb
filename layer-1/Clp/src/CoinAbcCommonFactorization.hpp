@@ -6,6 +6,7 @@
  * @file CoinAbcCommonFactorization.hpp
  * @brief Common infrastructure for ABC SIMD-optimized factorization
  *
+ * @algorithm ABC Factorization Infrastructure (LAPACK LU, Blocking)
  * Shared definitions, statistics tracking, and LAPACK interfaces for
  * ABC factorization variants. Provides:
  *

@@ -9,6 +9,7 @@
  * @brief Extended warm start with factorization caching for ABC
  * @author John Forrest (FasterCoin, 2012)
  *
+ * @algorithm Extended Warm Start with Cached Factorization
  * Extends CoinWarmStartBasis to store additional information for efficient
  * restart of ABC simplex. Beyond basic/nonbasic status, can store:
  *

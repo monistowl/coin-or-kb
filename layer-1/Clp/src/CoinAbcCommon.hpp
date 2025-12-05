@@ -6,6 +6,7 @@
  * @file CoinAbcCommon.hpp
  * @brief Common definitions for ABC (A Better Coin) optimized simplex
  *
+ * @algorithm ABC SIMD Foundation (Types, Tolerances, IEEE Zero Tests)
  * Core type definitions and macros for the FasterCoin 2012 SIMD-optimized
  * simplex implementation. Provides:
  * - Type aliases: CoinSimplexDouble, CoinSimplexInt

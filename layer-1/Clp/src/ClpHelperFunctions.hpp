@@ -6,6 +6,7 @@
  * @file ClpHelperFunctions.hpp
  * @brief BLAS-1 style dense vector operations for Clp
  *
+ * @algorithm Dense BLAS-1 Operations (AXPY, Dot, Norms)
  * Non-templated dense array operations optimized for LP use. These exist
  * separately from CoinDenseVector to enable architecture-specific optimization
  * without template overhead (per JJF's design note).

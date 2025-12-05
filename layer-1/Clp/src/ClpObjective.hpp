@@ -6,6 +6,7 @@
  * @file ClpObjective.hpp
  * @brief Abstract base class for objective functions
  *
+ * @algorithm Objective Function Interface (Gradient, Reduced Gradient, Step Length)
  * Defines the interface for objective functions in Clp. Derived classes
  * implement specific objective types (linear, quadratic, etc.).
  *

@@ -7,6 +7,7 @@
  * @brief Configuration macros for ABC (A Better Clp) build modes
  * @author John Forrest (FasterCoin, 2012)
  *
+ * @algorithm ABC Build Configuration (Serial/Parallel/Cilk Modes)
  * Controls how the ABC optimized simplex code is built and integrated.
  *
  * CLP_HAS_ABC values:

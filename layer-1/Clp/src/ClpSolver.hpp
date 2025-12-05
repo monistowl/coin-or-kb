@@ -6,6 +6,7 @@
  * @file ClpSolver.hpp
  * @brief Standalone Clp solver driver and command-line interface
  *
+ * @algorithm Clp Main Driver with ABC Dispatch
  * Provides the main entry points for running Clp as a standalone solver:
  * - ClpMain0(): Initialize model with default settings
  * - ClpMain1(): Process command queue or command-line arguments
