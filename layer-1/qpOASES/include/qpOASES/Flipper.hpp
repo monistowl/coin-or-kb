@@ -28,8 +28,34 @@
  *	\version 3.2
  *	\date 2007-2017
  *
- *	Declaration of the Options class designed to manage user-specified
- *	options for solving a QProblem.
+ *	Auxiliary class for storing matrix factorization snapshots.
+ *
+ * @algorithm Flipping Bounds Recovery:
+ * Store factorization state for fast recovery from bound changes.
+ *
+ *   PROBLEM:
+ *     When bound moves to opposite side (l → u or u → l),
+ *     factorization update can be numerically unstable.
+ *     "Flipping" refers to this sudden direction change.
+ *
+ *   SOLUTION:
+ *     Before potentially problematic step:
+ *       1. Store R, Q, T factorizations in Flipper
+ *       2. Store working set (Bounds, Constraints)
+ *       3. Attempt active set change
+ *       4. If numerical trouble: restore from Flipper
+ *
+ *   STORAGE:
+ *     - R_: Cholesky factor of reduced Hessian
+ *     - Q_: Orthogonal factor
+ *     - T_: Schur complement factor (for constraints)
+ *     - bounds_/constraints_: working set snapshot
+ *
+ *   USE CASE:
+ *     Online QP in MPC: parameters change between solves
+ *     Hot-starting may flip bounds, needing recovery option
+ *
+ * @complexity O(n² + nC·n) memory for snapshot
  */
 
 

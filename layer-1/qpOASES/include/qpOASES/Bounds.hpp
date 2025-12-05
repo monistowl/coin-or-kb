@@ -30,6 +30,29 @@
  *
  *	Declaration of the Bounds class designed to manage working sets of
  *	bounds within a QProblem.
+ *
+ * @algorithm Working Set Management for Bounds:
+ * Track which box constraints are active in active-set QP.
+ *
+ *   @math QP with bounds: min ½x'Hx + g'x  s.t. l ≤ x ≤ u
+ *
+ *   WORKING SET PARTITION:
+ *     For each bound i ∈ {1,...,n}:
+ *       - INACTIVE (ST_INACTIVE): l_i < x_i < u_i
+ *       - LOWER (ST_LOWER): x_i = l_i (active at lower)
+ *       - UPPER (ST_UPPER): x_i = u_i (active at upper)
+ *       - FIXED (ST_EQUALITY): l_i = u_i (equality)
+ *
+ *   INDEX SETS:
+ *     - free: indices where bound is inactive
+ *     - fixed: indices where bound is active
+ *     - freeFreezer/fixedFreezer: frozen during QP iteration
+ *
+ *   ACTIVE SET CHANGES:
+ *     moveActiveToInactive(i): x_i leaves boundary
+ *     moveInactiveToActive(i, bound): x_i hits boundary
+ *
+ * @complexity O(1) per bound status query/change
  */
 
 
