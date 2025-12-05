@@ -2,8 +2,28 @@
  *
  * This file is part of the COIN-OR CBC MIP Solver
  *
+ * @algorithm Static Conflict Graph with Compact Storage
+ *
  * CoinConflictGraph implementation which supports fast queries
- * but doesn't supports modifications.
+ * but doesn't support modifications.
+ *
+ * **Compact representation:**
+ * After conflict detection is complete, converts to static structure
+ * with contiguous memory layout for cache-efficient queries.
+ *
+ * **Clique storage:**
+ * Large cliques stored explicitly rather than as O(k²) edges.
+ * Node-to-clique index allows efficient iteration over conflicts.
+ *
+ * **Induced subgraphs:**
+ * Can create subgraph induced by subset of nodes for focused
+ * separation or probing operations.
+ *
+ * @complexity O(1) degree lookup; O(degree) adjacency iteration
+ * @complexity Memory: O(n + m) where m = edges + clique elements
+ *
+ * @ref Atamtürk, Nemhauser & Savelsbergh, "Conflict graphs in solving
+ *      integer programming problems", EJOR 121(1), 2000
  *
  * @file CoinStaticConflictGraph.hpp
  * @brief static CoinConflictGraph implementation with fast queries

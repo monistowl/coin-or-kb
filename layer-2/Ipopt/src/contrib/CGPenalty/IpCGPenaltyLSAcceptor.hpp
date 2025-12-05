@@ -8,22 +8,28 @@
  * @file IpCGPenaltyLSAcceptor.hpp
  * @brief Chen-Goldfarb penalty function line search acceptor
  *
+ * @algorithm Chen-Goldfarb Penalty Line Search
+ *
  * CGPenaltyLSAcceptor implements the backtracking line search acceptor
  * based on the Chen-Goldfarb penalty function approach, providing an
  * alternative to the standard filter method.
  *
- * The penalty function merit is:
- *   phi_rho(x) = f(x) + rho * ||c(x)||_1
+ * **Merit Function:**
+ * @math φ_ρ(x) = f(x) + ρ · ‖c(x)‖₁
  *
- * Acceptance criteria:
- * 1. Armijo condition on the penalty function
+ * **Acceptance criteria:**
+ * 1. Armijo condition: φ_ρ(x + αd) ≤ φ_ρ(x) + η·α·∇φ_ρ(x)'d
  * 2. Piecewise linear penalty function (PLPF) acceptability
  *
- * The PLPF maintains a list of (penalty_parameter, objective, infeasibility)
- * triples to avoid the Maratos effect while ensuring global convergence.
+ * **PLPF Non-monotone Acceptance:**
+ * Maintains envelope of (ρ, f, ‖c‖) triples defining acceptable region.
+ * Allows steps rejected by Armijo if they make progress toward feasibility,
+ * avoiding the Maratos effect while ensuring global convergence.
  *
- * Supports second-order correction steps and watchdog procedure
- * similar to the standard filter line search.
+ * @complexity O(1) per acceptance check; O(k) PLPF update where k = breakpoints
+ *
+ * @ref Chen & Goldfarb, "Interior-point l2-penalty methods for nonlinear
+ *      programming with strong global convergence properties", Math. Prog., 2006
  *
  * @see IpPiecewisePenalty.hpp for the PLPF data structure
  * @see IpCGSearchDirCalc.hpp for direction computation

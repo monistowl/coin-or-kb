@@ -2,9 +2,33 @@
  *
  * This file is part of the COIN-OR CBC MIP Solver
  *
+ * @algorithm Odd-Wheel Separation via Shortest Paths
+ *
  * Class for separating violated odd-cycles. It contains
  * a lifting module that tries to transform the odd-cycles
  * into odd-wheels.
+ *
+ * **Odd-Hole Inequalities:**
+ * For an odd cycle C = {v₁,...,v₂ₖ₊₁} in the conflict graph:
+ * Σᵢ xᵢ ≤ k is valid (at most k of 2k+1 mutually conflicting vars can be 1)
+ *
+ * **Odd-Wheel Extension:**
+ * If variable w conflicts with all cycle vertices, strengthen to:
+ * Σᵢ xᵢ + x_w ≤ k (wheel center w tightens the inequality)
+ *
+ * **Separation Algorithm:**
+ * Uses shortest path in auxiliary graph where edge weights are
+ * 1 - x_i - x_j. Violated odd holes correspond to negative-cost
+ * odd-length paths.
+ *
+ * @math Odd-hole: Σᵢ∈C xᵢ ≤ ⌊|C|/2⌋ for odd cycle C
+ * @math Odd-wheel: Σᵢ∈C xᵢ + |C| × x_w ≤ ⌊|C|/2⌋ with wheel center w
+ * @complexity O(n² log n) per separation round using Dijkstra
+ *
+ * @ref Grotschel, Lovasz & Schrijver, "Geometric Algorithms and
+ *      Combinatorial Optimization", Springer, 1988
+ * @ref Brito & Santos, "Conflict graph based procedures for the
+ *      weight constrained minimum spanning tree problem", 2020
  *
  * @file CoinOddWheelSeparator.hpp
  * @brief Odd-wheel cut separator

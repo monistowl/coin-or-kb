@@ -23,13 +23,43 @@
 
 
 /**
- *	\file include/qpOASES/SubjectTo.hpp
- *	\author Hans Joachim Ferreau, Andreas Potschka, Christian Kirches
- *	\version 3.2
- *	\date 2007-2017
+ * @file include/qpOASES/SubjectTo.hpp
+ * @brief Base class for working set management in active-set QP
  *
- *	Declaration of the SubjectTo class designed to manage working sets of
- *	constraints and bounds within a QProblem.
+ * @algorithm Working Set Index Management
+ *
+ * SubjectTo is the base class for managing bounds (Bounds) and constraints
+ * (Constraints) in qpOASES's parametric active-set algorithm.
+ *
+ * **Type classification:**
+ * - ST_UNBOUNDED: No bounds (-∞, +∞)
+ * - ST_BOUNDED: Both bounds finite [l, u]
+ * - ST_EQUALITY: Fixed value (l = u)
+ * - ST_DISABLED: Temporarily ignored
+ *
+ * **Status tracking:**
+ * - ST_LOWER: Active at lower bound
+ * - ST_UPPER: Active at upper bound
+ * - ST_INACTIVE: Currently not binding
+ * - ST_INFEASIBLE_LOWER/UPPER: Violated (restoration needed)
+ *
+ * **Index list operations:**
+ * - addIndex(): Add to active/inactive list on setup
+ * - removeIndex(): Remove during working set change
+ * - swapIndex(): Reorder for numerical stability
+ *
+ * **Online MPC support:**
+ * - shift(): For receding horizon control (discard old data)
+ * - rotate(): For periodic problems (circular reordering)
+ *
+ * @complexity O(1) type/status access, O(n) for list modifications
+ *
+ * @author Hans Joachim Ferreau, Andreas Potschka, Christian Kirches
+ * @version 3.2
+ * @date 2007-2017
+ *
+ * @see Bounds.hpp, Constraints.hpp for derived classes
+ * @see Indexlist.hpp for index set implementation
  */
 
 

@@ -23,13 +23,42 @@
 
 
 /**
- *	\file include/qpOASES/Constraints.hpp
- *	\author Hans Joachim Ferreau, Andreas Potschka, Christian Kirches
- *	\version 3.2
- *	\date 2007-2017
+ * @file include/qpOASES/Constraints.hpp
+ * @brief Working set management for general constraints in active-set QP
  *
- *	Declaration of the Constraints class designed to manage working sets of
- *	constraints within a QProblem.
+ * @algorithm Active Set Working Set Management
+ *
+ * Constraints manages the working set of general linear constraints
+ * (Ax ≤ b) in the active-set QP algorithm. It tracks which constraints
+ * are currently active (binding) vs inactive.
+ *
+ * **Working set partitioning:**
+ * - Active: Constraints treated as equalities at current iterate
+ * - Inactive: Constraints with slack (not binding)
+ *
+ * **Status tracking:**
+ * - ST_LOWER: Active at lower bound (Aᵢx = lᵢ)
+ * - ST_UPPER: Active at upper bound (Aᵢx = uᵢ)
+ * - ST_INACTIVE: Strictly satisfied (lᵢ < Aᵢx < uᵢ)
+ * - ST_DISABLED: Temporarily removed from consideration
+ *
+ * **Active-set transitions:**
+ * - moveActiveToInactive(): Constraint leaves working set (ratio test)
+ * - moveInactiveToActive(): Constraint enters working set (blocking)
+ * - flipFixed(): Switch between lower/upper bound activity
+ *
+ * **MPC support:**
+ * - shift(): Hot-start for receding horizon (drop old, replicate new)
+ * - rotate(): Circular buffer for periodic problems
+ *
+ * @complexity O(1) for status queries, O(n) for index list operations
+ *
+ * @author Hans Joachim Ferreau, Andreas Potschka, Christian Kirches
+ * @version 3.2
+ * @date 2007-2017
+ *
+ * @see SubjectTo.hpp for base class
+ * @see Bounds.hpp for simple bound management
  */
 
 

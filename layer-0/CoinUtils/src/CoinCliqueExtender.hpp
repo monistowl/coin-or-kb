@@ -2,7 +2,32 @@
  *
  * This file is part of the COIN-OR CBC MIP Solver
  *
- * Class responsible for extending cliques
+ * @algorithm Greedy Clique Extension for Cutting Planes
+ *
+ * Class responsible for extending cliques to strengthen cuts.
+ *
+ * **Why extend cliques:**
+ * Larger cliques give tighter cuts. A clique {v₁,...,vₖ} yields
+ * cut Σxᵢ ≤ 1. Extending to {v₁,...,vₖ,vₖ₊₁} strengthens the cut
+ * by adding another variable to the LHS.
+ *
+ * **Extension methods:**
+ * - 0: No extension
+ * - 1: Random selection from candidates
+ * - 2: Max degree (prefer high-degree nodes)
+ * - 3: Max modified degree (counts clique containment)
+ * - 4: Reduced cost (prefer low RC variables)
+ * - 5: Reduced cost + modified degree hybrid
+ *
+ * **Algorithm:**
+ * 1. Build candidate set: nodes adjacent to all clique members
+ * 2. Greedily select from candidates using chosen method
+ * 3. Update candidate set after each addition
+ * 4. Stop when no candidates remain
+ *
+ * @complexity O(k × d) per extension where k = clique size, d = avg degree
+ *
+ * @ref Brito & Santos, "Conflict-based cut separation for MIP", 2020
  *
  * @file CoinCliqueExtender.hpp
  * @brief Clique extender

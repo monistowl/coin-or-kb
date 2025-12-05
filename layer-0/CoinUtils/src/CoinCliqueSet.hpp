@@ -2,8 +2,23 @@
  *
  * This file is part of the COIN-OR CBC MIP Solver
  *
+ * @algorithm Hash-Based Clique Set with Deduplication
+ *
  * A class to store a set of cliques. It is an
  * extension of class CoinCliqueList.
+ *
+ * **Deduplication:**
+ * Uses polynomial rolling hash to detect duplicate cliques.
+ * Cliques are sorted before hashing to ensure canonical form.
+ * Hash collisions resolved via bucket chains with exact comparison.
+ *
+ * **Use case:**
+ * During clique enumeration and separation, same clique may be
+ * generated multiple times. This class efficiently filters duplicates.
+ *
+ * @math Hash: h(C) = Σᵢ (C[i] × sequence_[i mod n]) mod nBuckets_
+ * @complexity O(k) insertion/lookup where k = clique size
+ * @complexity O(1) amortized with good hash distribution
  *
  * @file CoinCliqueSet.hpp
  * @brief Set of cliques

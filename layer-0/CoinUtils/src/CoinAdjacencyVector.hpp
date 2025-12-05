@@ -2,8 +2,28 @@
  *
  * This file is part of the COIN-OR CBC MIP Solver
  *
+ * @algorithm Dynamic Adjacency List with Deferred Sorting
+ *
  * Class to store a (growable) list of neighbors for each node
  * Initially implemented to be used in the Conflict Graph
+ *
+ * **Design:**
+ * Each node has a dynamic vector of neighbors. Supports both
+ * immediate sorted insertion and batch insertion with deferred sort.
+ *
+ * **Batch mode:**
+ * During graph construction, use addNeighborsBuffer() for bulk additions
+ * without maintaining sorted order. Call flush() once construction is
+ * complete to sort all adjacency lists and remove duplicates.
+ *
+ * **Sorted mode:**
+ * Use addNeighbor() for incremental updates to a constructed graph.
+ * Maintains sorted order via binary search insertion.
+ *
+ * @complexity addNeighbor: O(d) where d = current degree (shift elements)
+ * @complexity fastAddNeighbor/addNeighborsBuffer: O(1) amortized
+ * @complexity flush: O(n × d log d) for sorting all adjacency lists
+ * @complexity isNeighbor: O(log d) via binary search
  *
  * @file CoinAdjacencyVector.hpp
  * @brief Vector of growable vectors

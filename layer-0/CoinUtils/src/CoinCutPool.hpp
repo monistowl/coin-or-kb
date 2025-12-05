@@ -2,17 +2,34 @@
  *
  * This file is part of the COIN-OR CBC MIP Solver
  *
+ * @algorithm Cut Pool with Fitness-Based Filtering
+ *
  * Class for storing a pool of cuts, removing
  * the repeated and dominated ones. It also filters the cuts
- * according to their scores. Given a solution x* of the LP
- * relaxation of a MILP, the score of a cut C is calculated as
- * S(C) = viol(C) / actv(C), where viol(C) is the violation
- * of the cut with respect to x* and actv(C) is the
- * number of variables in C whose values x* are greater than
- * zero. An auxiliary array is used to identify, for each variable,
- * the cut in the pool with the best score that contains this variable.
- * A cut is only inserted into the cut pool if it has the best score for
- * at least one variable.
+ * according to their scores.
+ *
+ * **Scoring function:**
+ * Given LP solution x*, score S(C) = viol(C) / actv(C) where:
+ * - viol(C) = violation of cut C by x*
+ * - actv(C) = number of variables in C with x* > 0
+ *
+ * **Admission criterion:**
+ * A cut enters the pool only if it has the best score for at least
+ * one of its variables. This filters out cuts that are unlikely to
+ * be useful (every variable already has a better cut).
+ *
+ * **Dominance removal:**
+ * Cut A dominates cut B if A is at least as tight as B for all
+ * feasible integer points. Dominated cuts are periodically purged.
+ *
+ * @math Score: S(C) = viol(C) / actv(C)
+ * @math Dominance: A dominates B if A ⊆ B and rhs(A) ≤ rhs(B)
+ *
+ * @complexity O(nz) per cut insertion where nz = cut size
+ * @complexity O(n × k²) for dominance check where k = cuts per variable
+ *
+ * @ref Andreello, Caprara, Fischetti, "Embedding cuts in a B&C framework",
+ *      Annals of Operations Research, 2007
  *
  * @file CoinCutPool.hpp
  * @brief Class for storing a pool of cuts

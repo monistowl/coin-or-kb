@@ -8,21 +8,27 @@
  * @file IpPiecewisePenalty.hpp
  * @brief Piecewise linear penalty function (PLPF) data structure
  *
+ * @algorithm Piecewise Linear Penalty Function (PLPF)
+ *
  * PiecewisePenalty maintains a list of break points for the piecewise
  * linear penalty function used in the Chen-Goldfarb globalization.
  *
- * Each entry (PiecewisePenEntry) stores:
+ * **Entry structure (PiecewisePenEntry):**
  * - pen_r: Penalty parameter value at this break point
  * - barrier_obj: Barrier objective function value
  * - infeasi: Constraint violation (infeasibility)
  *
- * The PLPF defines an envelope of acceptable points. A trial point
- * is acceptable if it lies below the piecewise linear function
- * defined by these break points.
+ * **Acceptability test:**
+ * Trial point (f_trial, θ_trial) is acceptable if it lies below the
+ * envelope defined by existing breakpoints. This creates a non-monotone
+ * acceptance criterion similar to the filter method but using penalty.
  *
- * This approach provides non-monotone globalization that can accept
- * steps rejected by simple Armijo, avoiding the Maratos effect
- * while maintaining global convergence guarantees.
+ * @math PLPF: P(θ) = min_k {f_k + ρ_k · (θ - θ_k)} over breakpoints k
+ * @math Accept if: f_trial ≤ P(θ_trial) - γ_f · θ_trial
+ *
+ * @complexity O(k) acceptability check where k = number of breakpoints
+ *
+ * @ref Chen & Goldfarb, "Interior-point l2-penalty methods", Math. Prog., 2006
  *
  * @see IpCGPenaltyLSAcceptor.hpp for usage in line search
  * @see IpFilterLSAcceptor.hpp for filter-based alternative

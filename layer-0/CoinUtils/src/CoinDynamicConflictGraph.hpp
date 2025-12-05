@@ -2,12 +2,34 @@
  *
  * This file is part of the COIN-OR CBC MIP Solver
  *
- * CoinConflictGraph implementation which supports modifications. 
- * For a static conflict graph implemenation with faster queries
+ * @algorithm Dynamic Conflict Graph for MIP
+ *
+ * CoinConflictGraph implementation which supports modifications.
+ * For a static conflict graph implementation with faster queries
  * check CoinStaticConflictGraph.
  *
+ * **Conflict Detection:**
+ * Two binary variables x_i and x_j conflict if they cannot both be 1.
+ * Detected from constraints like: a_i x_i + a_j x_j ≤ b where
+ * a_i + a_j > b (both coefficients exceed RHS).
+ *
+ * **Clique Detection:**
+ * Groups of mutually conflicting variables form cliques. Large cliques
+ * stored explicitly to save memory; small cliques expanded to edges.
+ *
+ * **Bound Tightening:**
+ * During construction, may discover tighter variable bounds from
+ * constraint analysis. Access via updatedBounds().
+ *
+ * @math Conflict: x_i + x_j ≤ 1 implies x_i and x_j cannot both be 1
+ * @complexity Construction O(m × d²) where m = rows, d = avg row density
+ * @complexity Query O(degree) for adjacency lists
+ *
+ * @ref Atamtürk, Nemhauser & Savelsbergh, "Conflict graphs in solving
+ *      integer programming problems", EJOR 121(1), 2000
+ *
  * @file CoinDynamicConflictGraph.hpp
- * @brief CoinConflictGraph implementation which supports modifications. 
+ * @brief CoinConflictGraph implementation which supports modifications.
  * @author Samuel Souza Brito and Haroldo Gambini Santos
  * Contact: samuelbrito@ufop.edu.br and haroldo@ufop.edu.br
  * @date 03/27/2020

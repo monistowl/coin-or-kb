@@ -23,13 +23,42 @@
 
 
 /**
- *	\file include/qpOASES/SparseSolver.hpp
- *	\author Andreas Waechter, Dennis Janka
- *	\version 3.2
- *	\date 2012-2017
+ * @file include/qpOASES/SparseSolver.hpp
+ * @brief Sparse linear solver interfaces for Schur-complement QP method
  *
- *	Interfaces to sparse linear solvers that are used in a Schur-complement
- *	implementation in qpOASES.
+ * @algorithm Sparse Symmetric Indefinite Factorization Interface
+ *
+ * SparseSolver provides an abstract interface to sparse symmetric
+ * indefinite factorization codes used in qpOASES's Schur-complement
+ * approach for large-scale QP.
+ *
+ * **Supported backends:**
+ * - MA27: Harwell multifrontal solver (classic, robust)
+ * - MA57: Harwell multifrontal with pivoting improvements
+ * - MUMPS: Parallel multifrontal solver
+ *
+ * **Schur complement context:**
+ * For QPs with many simple bounds but few general constraints,
+ * the KKT system can be solved efficiently via:
+ * @math K = [H  A'] with Schur complement S = -A·H⁻¹·A'
+ * @math     [A  0 ]
+ *
+ * The sparse solver handles the reduced system on active constraints
+ * after eliminating variables at simple bounds.
+ *
+ * **Key operations:**
+ * - setMatrixData(): Set lower-triangular Harwell-Boeing format
+ * - factorize(): Compute LDL' factorization with pivoting
+ * - solve(): Forward/backward substitution
+ * - getNegativeEigenvalues(): Inertia for optimality verification
+ *
+ * @complexity O(n³) worst case, O(n·nnz) typical for sparse systems
+ *
+ * @author Andreas Waechter, Dennis Janka
+ * @version 3.2
+ * @date 2012-2017
+ *
+ * @see SQProblemSchur.hpp for Schur-complement QP implementation
  */
 
 #ifndef QPOASES_SPARSESOLVER_HPP

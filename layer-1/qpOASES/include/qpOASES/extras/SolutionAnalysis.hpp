@@ -23,13 +23,41 @@
 
 
 /**
- *	\file include/qpOASES/extras/SolutionAnalysis.hpp
- *	\author Hans Joachim Ferreau (thanks to Boris Houska)
- *	\version 3.2
- *	\date 2008-2017
+ * @file include/qpOASES/extras/SolutionAnalysis.hpp
+ * @brief Post-optimality analysis: KKT verification and sensitivity
  *
- *	Declaration of the SolutionAnalysis class designed to perform
- *	additional analysis after solving a QP with qpOASES.
+ * @algorithm QP Solution Analysis and Sensitivity
+ *
+ * SolutionAnalysis provides tools for verifying QP solutions and
+ * computing sensitivity information for uncertain problem data.
+ *
+ * **KKT violation analysis:**
+ * Computes maximum violation of optimality conditions:
+ * @math Stationarity: ‖Hx* + g - A'λ* - z*‖∞
+ * @math Primal feasibility: max(Ax* - u, l - Ax*, x* - ub, lb - x*)
+ * @math Complementarity: |zᵢ*(xᵢ* - bᵢ)|
+ *
+ * **Variance-covariance propagation:**
+ * Given uncertainty in (g, lb, ub, lbA, ubA), computes variance
+ * of optimal primal-dual solution (x*, λ*, z*) via:
+ * @math Var(x*, λ*, z*) = J · Var(g, b) · J'
+ * where J is the sensitivity Jacobian at the solution.
+ *
+ * **Curvature analysis:**
+ * checkCurvatureOnStronglyActiveConstraints() verifies positive
+ * definiteness of reduced Hessian on strongly active constraints,
+ * detecting potential negative curvature directions.
+ *
+ * @complexity O(n²) for KKT check, O(n³) for variance-covariance
+ *
+ * @ref Ferreau et al., "qpOASES: A parametric active-set algorithm
+ *      for quadratic programming", Math. Prog. Comp., 2014
+ *
+ * @author Hans Joachim Ferreau (thanks to Boris Houska)
+ * @version 3.2
+ * @date 2008-2017
+ *
+ * @see QProblem.hpp, SQProblem.hpp for QP solvers
  */
 
 

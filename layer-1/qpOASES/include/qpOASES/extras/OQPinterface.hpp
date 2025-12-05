@@ -23,15 +23,43 @@
 
 
 /**
- *	\file include/qpOASES/extras/OQPinterface.hpp
- *	\author Hans Joachim Ferreau, Andreas Potschka, Christian Kirches
- *	\version 3.2
- *	\date 2007-2017
+ * @file include/qpOASES/extras/OQPinterface.hpp
+ * @brief Online QP Benchmark Collection interface
  *
- *	Declaration of an interface comprising several utility functions
- *	for solving test problems from the Online QP Benchmark Collection
- *	(This collection is no longer maintained, see 
- *	http://www.qpOASES.org/onlineQP for a backup).
+ * @algorithm Online QP Benchmark Execution and Validation
+ *
+ * OQPinterface provides utilities for running parametric QP sequences
+ * from the Online QP Benchmark Collection, testing hot-starting
+ * performance on MPC-style problem sequences.
+ *
+ * **Benchmark structure:**
+ * Each benchmark contains a sequence of nQP related QPs with:
+ * - Fixed H (Hessian) and A (constraint matrix)
+ * - Varying g (gradient), lb/ub (bounds), lbA/ubA (constraint bounds)
+ * - Optional reference solutions (xOpt, yOpt, objOpt)
+ *
+ * **Key functions:**
+ * - readOqpDimensions(): Parse problem size from files
+ * - readOqpData(): Load full benchmark data
+ * - solveOqpBenchmark(): Solve sequence, measure performance
+ * - runOqpBenchmark(): End-to-end benchmark execution
+ *
+ * **Performance metrics:**
+ * - maxNWSR/avgNWSR: Working set recalculations (iterations)
+ * - maxCPUtime/avgCPUtime: Solve time per QP
+ * - maxStationarity/Feasibility/Complementarity: KKT residuals
+ *
+ * **Hot-start evaluation:**
+ * With useHotstarts=true, each QP initializes from previous solution,
+ * testing the parametric active-set method's online performance.
+ *
+ * @complexity O(nQP × solve_time) for benchmark sequence
+ *
+ * @author Hans Joachim Ferreau, Andreas Potschka, Christian Kirches
+ * @version 3.2
+ * @date 2007-2017
+ *
+ * @see http://www.qpOASES.org/onlineQP (archived)
  */
 
 

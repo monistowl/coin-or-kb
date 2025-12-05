@@ -23,13 +23,39 @@
 
 
 /**
- *	\file include/qpOASES/Matrices.hpp
- *	\author Andreas Potschka, Hans Joachim Ferreau, Christian Kirches
- *	\version 3.2
- *	\date 2009-2017
+ * @file include/qpOASES/Matrices.hpp
+ * @brief Matrix classes for QP data with working-set-aware operations
  *
- *  Various matrix classes: Abstract base matrix class, dense and sparse matrices,
- *  including symmetry exploiting specializations.
+ * @algorithm Matrix-Vector Operations for Active-Set QP
+ *
+ * Provides matrix abstractions optimized for active-set QP solving,
+ * supporting efficient submatrix operations based on working sets.
+ *
+ * **Class hierarchy:**
+ * - Matrix: Abstract base with times(), transTimes(), getRow(), getCol()
+ * - SymmetricMatrix: Adds bilinear form x'Hx computation
+ * - DenseMatrix / SymDenseMat: Row-major dense storage
+ * - SparseMatrix / SymSparseMat: Column-compressed sparse (CSC)
+ * - SparseMatrixRow: Row-compressed sparse (CSR)
+ *
+ * **Key QP operations:**
+ * - times(irows, icols, ...): A[irows,icols] * x for working set
+ * - transTimes(irows, icols, ...): A[irows,icols]' * x
+ * - bilinear(icols, x): x'·H[icols,icols]·x for reduced Hessian
+ * - getSparseSubmatrix(): Extract in Harwell-Boeing format
+ *
+ * **Storage formats:**
+ * - Dense: val[i*leaDim + j] row-major
+ * - CSC: jc[col] to jc[col+1] gives row indices in ir[], values in val[]
+ * - CSR: jr[row] to jr[row+1] gives col indices in ic[], values in val[]
+ *
+ * @complexity Dense O(mn), Sparse O(nnz) for matrix-vector products
+ *
+ * @author Andreas Potschka, Christian Kirches, Hans Joachim Ferreau
+ * @version 3.2
+ * @date 2009-2017
+ *
+ * @see QProblem.hpp for usage in active-set algorithm
  */
 
 

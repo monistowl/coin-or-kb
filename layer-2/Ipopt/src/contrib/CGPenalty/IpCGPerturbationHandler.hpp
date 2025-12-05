@@ -8,22 +8,27 @@
  * @file IpCGPerturbationHandler.hpp
  * @brief Perturbation handler for Chen-Goldfarb penalty method
  *
- * CGPerturbationHandler manages the diagonal perturbations (delta_x,
- * delta_s, delta_c, delta_d) for the KKT system when using the
+ * @algorithm KKT Perturbation for Chen-Goldfarb Method
+ *
+ * CGPerturbationHandler manages the diagonal perturbations (δ_x,
+ * δ_s, δ_c, δ_d) for the KKT system when using the
  * Chen-Goldfarb penalty function approach.
  *
- * The perturbations are added to handle:
- * - Singular or nearly singular KKT matrices
- * - Wrong inertia in the factorization
- * - Pure Newton vs penalty-regularized steps
+ * **Perturbation purposes:**
+ * - Handle singular or nearly singular KKT matrices
+ * - Correct wrong inertia in factorization
+ * - Switch between pure Newton and penalty-regularized steps
  *
- * Key methods:
- * - ConsiderNewSystem(): Returns initial perturbations for new matrix
- * - PerturbForSingularity(): Increases perturbations when singular
+ * **Regularized KKT system:**
+ * @math [H + δ_x I    0      A'    ] [Δx]   [r_x]
+ * @math [   0     Σ + δ_s I  -I    ] [Δs] = [r_s]
+ * @math [   A       -I    -δ_c I  ] [Δy]   [r_c]
  *
- * The handler coordinates with CGPenaltyData to track whether pure
- * Newton steps should be attempted or if penalty regularization is
- * needed throughout the optimization.
+ * **Adaptive strategy:**
+ * Start with δ = 0 for pure Newton. If factorization fails or has
+ * wrong inertia, increase perturbations geometrically until success.
+ *
+ * @complexity O(1) per perturbation decision
  *
  * @see IpPDPerturbationHandler.hpp for base class
  * @see IpCGSearchDirCalc.hpp for direction computation

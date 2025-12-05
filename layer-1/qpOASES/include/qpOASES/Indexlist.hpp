@@ -23,13 +23,39 @@
 
 
 /**
- *	\file include/qpOASES/Indexlist.hpp
- *	\author Hans Joachim Ferreau, Andreas Potschka, Christian Kirches
- *	\version 3.2
- *	\date 2007-2017
+ * @file include/qpOASES/Indexlist.hpp
+ * @brief Sorted index lists for efficient working set operations
  *
- *	Declaration of the Indexlist class designed to manage index lists of
- *	constraints and bounds within a SubjectTo object.
+ * @algorithm Sorted Index List with Binary Search
+ *
+ * Indexlist maintains sorted lists of variable/constraint indices for
+ * the active-set QP algorithm, enabling O(log n) membership tests and
+ * efficient submatrix extraction.
+ *
+ * **Data structure:**
+ * - number[]: Stores indices in insertion order
+ * - iSort[]: Maintains sorted order for binary search
+ * - Doubly-linked via first/last for O(1) append/prepend
+ *
+ * **Key operations:**
+ * - addNumber(): Insert index, update sorted array
+ * - removeNumber(): Delete index, compact arrays
+ * - getIndex(): O(log n) lookup via binary search (findInsert)
+ * - isMember(): O(log n) membership test
+ * - getNumberArray(): O(1) access to raw index array
+ *
+ * **Usage in QP:**
+ * - Active bounds/constraints index sets
+ * - Free variable indices for null-space computation
+ * - Submatrix row/column selection for working set
+ *
+ * @complexity O(log n) lookup, O(n) insertion/deletion
+ *
+ * @author Hans Joachim Ferreau, Andreas Potschka, Christian Kirches
+ * @version 3.2
+ * @date 2007-2017
+ *
+ * @see SubjectTo.hpp for working set management using index lists
  */
 
 
