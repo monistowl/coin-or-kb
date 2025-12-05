@@ -196,20 +196,20 @@ This knowledge base is built for machine consumption. Point your agent at it and
 Fetch the JSON API directly — works with any agent that can read URLs:
 
 ```
-https://monistowl.github.io/api/annotations.json
+https://monistowl.github.io/coin-or-kb/api/annotations.json
 ```
 
 **Example prompt for Claude, GPT, or any LLM:**
 
-> Fetch https://monistowl.github.io/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 1,197 files across 28 libraries.
+> Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 1,902 files across 28 libraries (688 with semantic annotations).
 
 **API Endpoints:**
 
 | Endpoint | Description |
 |----------|-------------|
-| [`/api/annotations.json`](api/annotations.json) | Full knowledge base with semantic annotations (1.8 MB) |
-| [`/api/files.json`](api/files.json) | File index with paths and brief descriptions |
-| [`/algorithms/`](algorithms/) | Human-readable algorithm cross-reference (100 algorithms) |
+| [`/api/annotations.json`](api/annotations.json) | Full knowledge base with semantic annotations (2.1 MB) |
+| [`/api/knowledge-graph/`](api/knowledge-graph/) | Concept graph with 41 concepts, 1,471 relationships |
+| [`/algorithms/`](algorithms/) | Human-readable algorithm cross-reference |
 
 ---
 
@@ -236,8 +236,10 @@ Add to your Claude Desktop `claude_desktop_config.json`:
 | `search_math` | Find files by mathematical concept ("clique", "Ax=b", "dual") |
 | `get_library` | Overview of a library with all annotated files |
 | `get_file` | Full annotations for a specific file |
-| `list_algorithms` | List all 87+ documented algorithms |
-| `get_stats` | Knowledge base statistics (1,197 files, 89 with semantic annotations) |
+| `list_algorithms` | List all documented algorithms |
+| `query_concepts` | Search the knowledge graph (41 concepts, 1,471 relationships) |
+| `get_algorithm_guidance` | Detailed guidance for 13 key algorithms |
+| `get_stats` | Knowledge base statistics |
 
 ### CLI Query Tool
 
@@ -283,8 +285,8 @@ for layer in kb['layers'].values():
 ```
 
 **API Endpoints:**
-- [`/api/annotations.json`](api/annotations.json) — Full knowledge base (1.8 MB)
-- [`/api/annotations.min.json`](api/annotations.min.json) — Minified (1.5 MB)
+- [`/api/annotations.json`](api/annotations.json) — Full knowledge base (2.1 MB)
+- [`/api/knowledge-graph/`](api/knowledge-graph/) — Concept graph and relationships
 
 ### What's in the Annotations?
 
@@ -299,4 +301,4 @@ Each annotated file can include:
 | `@brief` | One-line summary of the file's purpose |
 | `@see` | Cross-references to related code |
 
-**Coverage:** 1,197 annotated files across 28 libraries. 89 files have deep semantic annotations (`@algorithm`, `@math`, `@complexity`).
+**Coverage:** 1,902 annotated files across 28 libraries. 688 files have deep semantic annotations (`@algorithm`, `@math`, `@complexity`).
