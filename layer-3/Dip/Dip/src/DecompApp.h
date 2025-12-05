@@ -21,31 +21,69 @@
  * - Subproblem solvers
  * - Problem-specific heuristics
  *
- * **Model Decomposition:**
- * - m_modelCore: Core constraints A'' (linking/complicating constraints)
- * - m_modelRelax: Map of relaxed models by block index
- * - m_modelRelaxNest: Nested relaxations for multi-level decomposition
+ * @algorithm Model Decomposition for Branch-and-Price:
+ * Partition constraints into linking (core) and block (relaxed) sets.
  *
- * **Key Virtual Methods:**
- * - createModels(): Define core/relax structure (REQUIRED)
- * - solveRelaxed(): Custom subproblem solver (optional)
- * - generateInitVars(): Initial columns for Phase 1
- * - APPisUserFeasible(): Application-specific feasibility check
- * - APPheuristics(): Primal heuristics for incumbent solutions
+ * PROBLEM STRUCTURE:
+ *   Original MIP: min c'x s.t. A''x ≥ b'' (linking), A'x ≥ b' (block)
  *
- * **Automatic Blocking:**
- * Can use hMETIS (COIN_HAS_METIS) for automatic constraint partitioning
- * into blocks for parallel column generation.
+ *   If A' has block-angular structure:
+ *     A' = diag(A'_1, A'_2, ..., A'_K)  (K independent blocks)
  *
- * **Typical Usage:**
- * ```cpp
- * class MyApp : public DecompApp {
- *    void createModels() {
- *       // Define m_modelCore with linking constraints
- *       // Define m_modelRelax[b] for each block b
- *    }
- * };
- * ```
+ *   User defines:
+ *     m_modelCore: The A'' constraints (linking/complicating)
+ *     m_modelRelax[k]: The A'_k constraints for block k
+ *
+ * DECOMPOSITION BENEFITS:
+ *   - Subproblems (blocks) solved independently
+ *   - Parallel pricing across blocks
+ *   - Exploits special structure (knapsack, shortest path, etc.)
+ *
+ * @algorithm Subproblem Oracle (solveRelaxed):
+ * User-provided solver for pricing subproblems.
+ *
+ *   INPUT: Modified costs (c - A''^T π), target reduced cost
+ *   OUTPUT: Columns s ∈ P_k with negative reduced cost
+ *
+ *   ORACLE OPTIONS:
+ *     1. Default: DIP solves as MIP using m_modelRelax[k]
+ *     2. Custom: Override solveRelaxed() for specialized solver
+ *        - Knapsack → dynamic programming
+ *        - Shortest path → Dijkstra/Bellman-Ford
+ *        - Matching → polynomial algorithm
+ *        - Any structure → exploit it!
+ *
+ * @algorithm Initial Column Generation (generateInitVars):
+ * Provide starting columns for Phase 1 feasibility.
+ *
+ *   PURPOSE: Restricted master needs initial columns
+ *   Without columns: Master is infeasible or unbounded
+ *
+ *   STRATEGIES:
+ *     - Heuristic solutions from problem knowledge
+ *     - Artificial columns (with penalty cost)
+ *     - Previous solution warmstart
+ *
+ * @algorithm Application Feasibility (APPisUserFeasible):
+ * Check problem-specific constraints not in LP.
+ *
+ *   USE CASES:
+ *     - Implicitly defined constraints (e.g., TSP subtours)
+ *     - Side constraints not in decomposition
+ *     - Integrality beyond variable bounds
+ *
+ *   DIP calls this on candidate integer solutions.
+ *
+ * @algorithm Primal Heuristics (APPheuristics):
+ * Generate feasible solutions during branch-and-price.
+ *
+ *   INPUT: Current fractional solution x̂
+ *   OUTPUT: Feasible integer solutions (incumbents)
+ *
+ *   Good incumbents:
+ *     - Improve global upper bound
+ *     - Enable more pruning in B&B tree
+ *     - Guide branching decisions
  *
  * @see DecompModel.h for model container classes
  * @see DecompAlgo.h for algorithm that uses this app

@@ -20,26 +20,62 @@
  * added to strengthen the formulation. Cuts are defined in original
  * x-space and expanded to the master problem.
  *
- * **Key Data Members:**
- * - m_lb, m_ub: Row bounds (lb <= ax <= ub)
- * - m_violation: How much current solution violates this cut
- * - m_effCnt: Effectiveness counter for cut management
- * - m_strHash: Hash string for duplicate detection
+ * @algorithm Valid Inequalities in Column Generation:
+ * Cuts tighten the LP relaxation to improve bounds.
  *
- * **User-Defined Cuts:**
- * Users can derive from DecompCut and override expandCutToRow()
- * to provide compact storage. Example: TSP subtour elimination
- * stores only the customer set S, then expandCutToRow() generates
- * the full row sum_{i,j in S} x_ij >= |S| - 1.
+ * CUT DEFINITION:
+ *   A cut is a valid inequality: a'x ≥ β (or lb ≤ a'x ≤ ub)
+ *   Valid means: satisfied by all x in conv(feasible region)
+ *   Violated at x*: a'x* < β (separates x* from feasible)
  *
- * **Cut Management:**
- * - Cuts with low effectiveness (m_effCnt) may be removed
- * - Duplicate cuts detected via hash string
- * - DecompCutPool manages active cuts
+ * CUT IN MASTER PROBLEM:
+ *   Original space: a'x ≥ β
+ *   Reformulated: Σ_s (a's) λ_s ≥ β
+ *   Each column s gets coefficient a's
  *
- * **CGL Integration:**
- * Standard cuts can come from CGL generators. User cuts
- * supplement or replace CGL cuts via DecompApp::generateCuts().
+ * @algorithm Cut Effectiveness Management:
+ * Balance cut pool size against separation quality.
+ *
+ *   m_effCnt tracks cut usefulness:
+ *     > 0: Cut currently tight/active (in LP basis)
+ *     < 0: Cut slack (not contributing to bound)
+ *
+ *   LIFECYCLE:
+ *     Add cut: effCnt = 0
+ *     Each iter cut is tight: increaseEffCnt()
+ *     Each iter cut is slack: decreaseEffCnt()
+ *     If effCnt < threshold: remove cut
+ *
+ * @math Why remove ineffective cuts:
+ *   - Slack cuts don't affect LP solution
+ *   - Large LPs slow down simplex iterations
+ *   - Memory overhead for storing coefficients
+ *   - Better to add fresh violated cuts
+ *
+ * @algorithm Compact Cut Storage:
+ * User-defined cuts can store data compactly.
+ *
+ *   Example: TSP subtour elimination
+ *     Compact storage: Set S of customers
+ *     Full cut: Σ_{i,j ∈ S} x_ij ≥ |S| - 1
+ *     expandCutToRow(): Generates full row on demand
+ *
+ *   Benefits:
+ *     - Exponential number of cuts stored compactly
+ *     - Easy to check duplicate (compare sets)
+ *     - Lazy expansion saves memory
+ *
+ * @algorithm Duplicate Detection via Hash:
+ * Avoid adding same cut multiple times.
+ *
+ *   m_strHash = string encoding of (indices, coeffs, sense, rhs)
+ *   setStringHash(): Called after expandCutToRow()
+ *   Comparison: O(1) hash equality check
+ *
+ * @complexity
+ *   calcViolation: O(nnz(cut))
+ *   expandCutToRow: User-defined, typically O(cut_size)
+ *   setStringHash: O(nnz(cut))
  *
  * @see DecompCutPool.h for cut pool management
  * @see DecompAlgoCGL.h for CGL integration

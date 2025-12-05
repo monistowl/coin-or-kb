@@ -20,23 +20,53 @@
  * Each lambda_s corresponds to an extreme point s of a subproblem
  * polyhedron: conv{x : A'x >= b', x integer}.
  *
- * **Key Data Members:**
- * - m_s: CoinPackedVector storing the x-space representation
- * - m_origCost: c's (original objective contribution)
- * - m_redCost: (c - u*A'')s - alpha (reduced cost for pricing)
- * - m_blockId: Which block generated this column
- * - m_effCnt: Effectiveness counter for column management
- * - m_strHash: Hash for duplicate detection
+ * @algorithm Dantzig-Wolfe Column Representation:
+ * Each column encodes an extreme point of a subproblem polyhedron.
  *
- * **Column Interpretation:**
- * In master problem: lambda_s in {0,1}
- * Convexity constraint: sum_s lambda_s = 1 (per block)
- * Original solution: x = sum_s s * lambda_s
+ * REFORMULATION:
+ *   Original: min c'x s.t. A''x ≥ b'' (linking), x ∈ P_k (block k)
+ *   Let {s^k_j} = extreme points of conv(P_k)
+ *   Reformulated master:
+ *     min Σ_k Σ_j (c's^k_j) λ^k_j
+ *     s.t. Σ_k Σ_j (A''s^k_j) λ^k_j ≥ b''  (linking)
+ *          Σ_j λ^k_j = 1 for each k       (convexity)
+ *          λ^k_j ≥ 0
  *
- * **Reduced Cost Calculation:**
- * rc(s) = c's - u'(A''s) - alpha_block
- * where u = dual of linking constraints,
- * alpha_block = dual of convexity constraint for block
+ * COLUMN DATA (m_s):
+ *   Stores s^k_j as sparse vector in x-space
+ *   Master column = [A''·s | 1_k]' where 1_k is convexity row
+ *
+ * @algorithm Reduced Cost for Column Generation:
+ * Determines which columns to add to master.
+ *
+ * @math Let (π, μ_k) be duals of (linking rows, convexity row k):
+ *   r̄(s) = c's - π'(A''s) - μ_k
+ *        = (c - A''^T π)'s - μ_k
+ *
+ * PRICING ORACLE:
+ *   For block k: min_{s ∈ P_k} (c - A''^T π)'s
+ *   Add column if optimal value - μ_k < 0
+ *
+ * ECONOMIC INTERPRETATION:
+ *   c's = original cost contribution
+ *   π'(A''s) = "payment" from linking constraint duals
+ *   μ_k = threshold (convexity dual, one per block)
+ *   Column profitable if cost < payment + threshold
+ *
+ * @algorithm Column Effectiveness Counter:
+ * Track column usefulness for pool management.
+ *
+ *   m_effCnt > 0: Column in basis (positive = good)
+ *   m_effCnt < 0: Column out of basis (negative = candidate for removal)
+ *   increaseEffCnt(): When column enters basis
+ *   decreaseEffCnt(): When column leaves basis
+ *
+ * Low effectiveness columns may be removed to control master size.
+ *
+ * @complexity
+ *   fillDenseArr: O(nnz(s))
+ *   isDuplicate: O(vars.size()) hash comparisons
+ *   calcNorm: O(nnz(s))
  *
  * @see DecompVarPool.h for column pool management
  * @see DecompAlgoPC.h for pricing/column generation

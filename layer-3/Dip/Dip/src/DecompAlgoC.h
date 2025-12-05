@@ -22,26 +22,35 @@
  * - Add cuts and resolve
  * - Repeat until integer or no cuts found
  *
- * **When to Use:**
- * - Problems where LP relaxation is strong
- * - No natural block structure for decomposition
- * - Simpler than PC when pricing isn't needed
+ * @algorithm Cutting Plane Method (CPM):
+ * Iteratively tighten LP relaxation with valid inequalities.
  *
- * **Algorithm Flow:**
- * 1. Solve initial LP relaxation
- * 2. Start in PHASE_CUT (no pricing phases)
- * 3. Generate cuts via CGL or user methods
- * 4. Re-solve LP with new cuts
- * 5. Branch if no cuts found and not integer
+ * ALGORITHM:
+ *   1. Solve LP relaxation: min c'x s.t. Ax ≥ b
+ *   2. if x* is integer-feasible: STOP (optimal)
+ *   3. Search for violated cut: a'x ≥ β with a'x* < β
+ *   4. if cut found: add to LP, goto 1
+ *   5. else: BRANCH on fractional variable
  *
- * **Key Differences from DecompAlgoPC:**
- * - No pricing/column generation
- * - No Phase 1/Phase 2 distinction
- * - Master problem contains original variables (not lambdas)
- * - Simpler master structure, faster per-iteration
+ * MASTER PROBLEM STRUCTURE:
+ *   Original variables x (not Dantzig-Wolfe lambdas)
+ *   Rows grow as cuts are added
+ *   Columns remain fixed
  *
- * **Cut Generation:**
- * Uses same cut pool and CGL integration as PC variant.
+ * @math Convergence for polyhedra:
+ *   If conv(X) = {x : Ax ≥ b} (LP = IP), CPM finds optimum.
+ *   In general, CPM finds optimum over intersection of
+ *   LP relaxation with all generated cuts.
+ *
+ * WHEN TO USE:
+ * - LP relaxation is naturally strong
+ * - No obvious block structure for decomposition
+ * - Want simplicity over Dantzig-Wolfe
+ *
+ * @complexity Per iteration: O(LP_solve) + O(cut_generation)
+ * Iterations bounded by number of extreme points cut off.
+ *
+ * @ref Kelley (1960). "The Cutting-Plane Method for Solving Convex Programs".
  *
  * @see DecompAlgo.h for base class
  * @see DecompAlgoPC.h for full Price-and-Cut

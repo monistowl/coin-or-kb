@@ -22,25 +22,44 @@
  * - Update multipliers via subgradient optimization
  * - Add cuts to improve bounds
  *
- * **Key Data Members:**
- * - m_u: Lagrangian multiplier vector
- * - m_step: Subgradient step size
- * - m_LB/m_UB: Current Lagrangian bounds
- * - m_shatVar: Solution from subproblem
+ * @algorithm Lagrangian Relaxation with Subgradient Optimization:
+ * Dualize complicating constraints to decompose the problem.
  *
- * **Subgradient Update:**
- * u_{k+1} = max(0, u_k + step * (b'' - A''x_k))
- * Step size adjusted based on bound improvement.
+ * PROBLEM STRUCTURE:
+ *   Original: min c'x s.t. A'x ≥ b' (easy), A''x ≥ b'' (complicating)
  *
- * **When to Use:**
- * - Very large problems where LP is expensive
- * - Natural decomposition into easy subproblems
- * - When approximate bounds suffice
+ *   Lagrangian: L(u) = min c'x - u'(A''x - b'')  s.t. A'x ≥ b'
+ *                    = min (c - u'A'')x + u'b''  s.t. A'x ≥ b'
  *
- * **Key Differences from PC:**
- * - No LP solver needed for master (just subgradient)
- * - Faster per-iteration but slower convergence
- * - Bounds may not be as tight as LP-based methods
+ *   Lagrangian Dual: max_u L(u)  (u ≥ 0 for ≥ constraints)
+ *
+ * SUBGRADIENT OPTIMIZATION:
+ *   Given x_k solving L(u_k):
+ *     g_k = b'' - A''x_k  (subgradient of -L at u_k)
+ *     u_{k+1} = max(0, u_k + α_k · g_k)
+ *
+ *   Step size rule (Held-Karp):
+ *     α_k = λ_k · (UB - L(u_k)) / ||g_k||²
+ *     λ_k ∈ (0, 2], typically start at 2, halve when stalled
+ *
+ * @math Weak duality: L(u) ≤ z* for all u ≥ 0
+ * Strong duality (linear case): max_u L(u) = LP relaxation value
+ * Integrality gap: z* - max_u L(u) (may be positive for IP)
+ *
+ * @algorithm Relax-and-Cut Enhancement:
+ * Add cuts to tighten Lagrangian bound.
+ *
+ *   During subgradient iterations:
+ *     1. Solve Lagrangian subproblem → x_k
+ *     2. Check for violated cuts at x_k
+ *     3. Add cuts to subproblem (not dualized)
+ *     4. Continue until convergence or cut limit
+ *
+ * @complexity Per iteration: O(subproblem) + O(subgradient update)
+ * Convergence: O(1/ε²) iterations for ε-optimal multipliers
+ *
+ * @ref Held & Karp (1970,1971). "The Traveling Salesman Problem and
+ *   Minimum Spanning Trees". Operations Research.
  *
  * @see DecompAlgo.h for base class
  * @see DecompAlgoPC.h for LP-based alternative

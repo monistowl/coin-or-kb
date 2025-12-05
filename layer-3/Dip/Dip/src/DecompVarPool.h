@@ -19,26 +19,50 @@
  * DecompVarPool manages columns waiting to enter the master problem.
  * Inherits from std::vector<DecompWaitingCol> for storage.
  *
- * **Key Functions:**
- * - isDuplicate(): Check if column already exists (via hash)
- * - isParallel(): Check angular distance between columns
- * - setReducedCosts(): Update reduced costs with new duals
- * - reExpand(): Regenerate column coefficients after master changes
+ * @algorithm Column Pool Management in Branch-and-Price:
+ * Efficiently manage generated columns across pricing iterations.
  *
- * **Column Selection:**
- * - is_less_thanD comparator sorts by reduced cost
- * - Most negative reduced cost columns enter master first
- * - Parallel/duplicate columns filtered out
+ * COLUMN LIFECYCLE:
+ *   1. Subproblem oracle generates column s with rc < 0
+ *   2. Column enters pool as DecompWaitingCol
+ *   3. Pool sorted by reduced cost (most negative first)
+ *   4. Duplicate/parallel columns filtered
+ *   5. Best columns added to restricted master
+ *   6. Column may persist in pool for future iterations
  *
- * **Validity Flag:**
- * - m_colsAreValid: Track if columns need re-expansion
- * - Set false when master constraint set changes
- * - reExpand() regenerates coefficients
+ * COLUMN SELECTION CRITERIA:
+ *   Primary: Reduced cost r̄(s) = c's - π'(As) - μ_block
+ *   Filter 1: Duplicates (hash-based detection)
+ *   Filter 2: Near-parallel columns (cosine similarity > threshold)
  *
- * **Integration with DecompAlgo:**
- * - Subproblem solutions become DecompWaitingCol entries
- * - Pool sorted, filtered, best columns added to master
- * - Columns may be kept for future iterations
+ * @algorithm Duplicate and Parallel Column Detection:
+ * Avoid redundant columns that slow convergence.
+ *
+ *   isDuplicate(): Hash comparison O(1) per column
+ *     Two columns equivalent if m_strHash matches
+ *
+ *   isParallel(): Cosine similarity check
+ *     cos(s1, s2) = (s1·s2)/(||s1||·||s2||)
+ *     If cos > maxCosine threshold, columns too similar
+ *
+ * @math Why filter parallel columns:
+ *   Near-parallel columns provide marginal improvement
+ *   Adding both increases master LP size without benefit
+ *   Better to diversify column set for faster convergence
+ *
+ * @algorithm Column Re-expansion (reExpand):
+ * When master constraints change, column coefficients may be stale.
+ *
+ *   m_colsAreValid flag tracks validity
+ *   When cuts added: setColsAreValid(false)
+ *   Before pricing: if !colsAreValid, call reExpand()
+ *   reExpand(): Recompute As for each stored s
+ *
+ * @complexity
+ *   isDuplicate: O(pool_size) hash comparisons
+ *   isParallel: O(pool_size × column_nnz) for dot products
+ *   setReducedCosts: O(pool_size × num_duals)
+ *   reExpand: O(pool_size × nnz(A))
  *
  * @see DecompVar.h for column representation
  * @see DecompWaitingCol.h for pool entry wrapper
