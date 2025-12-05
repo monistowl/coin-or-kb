@@ -1,0 +1,675 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} - {{ config.title }}{% endblock %}
+
+{% block extra_head %}
+<style>
+.bb-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.problem-statement {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.tree-container {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+}
+
+.tree-svg {
+    display: block;
+    margin: 0 auto;
+}
+
+.node {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.node rect {
+    fill: var(--bg);
+    stroke: var(--border);
+    stroke-width: 2;
+    rx: 6;
+}
+
+.node.active rect {
+    stroke: #ffc832;
+    stroke-width: 3;
+    fill: rgba(255, 200, 50, 0.1);
+}
+
+.node.pruned rect {
+    fill: rgba(239, 68, 68, 0.1);
+    stroke: #ef4444;
+}
+
+.node.integer rect {
+    fill: rgba(34, 197, 94, 0.1);
+    stroke: #22c55e;
+}
+
+.node.optimal rect {
+    fill: rgba(34, 197, 94, 0.2);
+    stroke: #22c55e;
+    stroke-width: 3;
+}
+
+.node.unexplored rect {
+    fill: var(--bg-secondary);
+    stroke: var(--border);
+    stroke-dasharray: 4;
+    opacity: 0.6;
+}
+
+.node-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    fill: var(--text);
+}
+
+.node-obj {
+    font-weight: bold;
+    fill: var(--accent-light);
+}
+
+.branch-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    fill: var(--text-muted);
+}
+
+.edge {
+    stroke: var(--border);
+    stroke-width: 2;
+    fill: none;
+}
+
+.edge.active {
+    stroke: #ffc832;
+    stroke-width: 2.5;
+}
+
+.step-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.step-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.step-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.step-btn.prev {
+    background: var(--bg-secondary);
+    color: var(--text);
+}
+
+.step-btn.next {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.step-btn:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.step-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    transition: all 0.2s;
+}
+
+.step-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.step-dot.completed {
+    background: #22c55e;
+    border-color: #22c55e;
+}
+
+.explanation {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    min-height: 180px;
+}
+
+.explanation h3 {
+    margin: 0 0 1rem 0;
+    color: var(--accent-light);
+}
+
+.status-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.status-item {
+    background: var(--bg);
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.status-item .label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+}
+
+.status-item .value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.status-item.best .value {
+    color: #22c55e;
+}
+
+.status-item.bound .value {
+    color: var(--accent-light);
+}
+
+.node-detail {
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.node-detail h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--accent-light);
+}
+
+.solution-box {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.solution-box h4 {
+    color: #22c55e;
+    margin: 0 0 0.5rem 0;
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-box {
+    width: 20px;
+    height: 14px;
+    border-radius: 3px;
+    border: 2px solid;
+}
+
+.legend-box.active {
+    background: rgba(255, 200, 50, 0.1);
+    border-color: #ffc832;
+}
+
+.legend-box.pruned {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+}
+
+.legend-box.integer {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: #22c55e;
+}
+
+.legend-box.unexplored {
+    background: var(--bg-secondary);
+    border-color: var(--border);
+    border-style: dashed;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<article class="bb-container">
+    <h1>{{ page.title }}</h1>
+
+    <div class="problem-statement">
+        {{ page.content | safe }}
+    </div>
+
+    <div class="status-bar">
+        <div class="status-item best">
+            <div class="label">Best Integer Solution</div>
+            <div class="value" id="best-value">—</div>
+        </div>
+        <div class="status-item bound">
+            <div class="label">Global Upper Bound</div>
+            <div class="value" id="global-bound">∞</div>
+        </div>
+        <div class="status-item">
+            <div class="label">Nodes Explored</div>
+            <div class="value" id="nodes-explored">0</div>
+        </div>
+    </div>
+
+    <div class="step-indicator" id="step-indicator"></div>
+
+    <div class="tree-container">
+        <svg class="tree-svg" id="tree-svg" width="800" height="420" viewBox="0 0 800 420">
+        </svg>
+    </div>
+
+    <div class="legend">
+        <div class="legend-item"><div class="legend-box active"></div> Current Node</div>
+        <div class="legend-item"><div class="legend-box integer"></div> Integer Solution</div>
+        <div class="legend-item"><div class="legend-box pruned"></div> Pruned</div>
+        <div class="legend-item"><div class="legend-box unexplored"></div> Unexplored</div>
+    </div>
+
+    <div class="step-controls">
+        <button class="step-btn prev" id="prev-btn" disabled>← Previous</button>
+        <button class="step-btn next" id="next-btn">Next Step →</button>
+    </div>
+
+    <div class="explanation" id="explanation"></div>
+</article>
+
+<script>
+(function() {
+    'use strict';
+
+    // Node positions in the tree (x, y, width, height)
+    const NODE_W = 130;
+    const NODE_H = 55;
+    const POSITIONS = {
+        0: [335, 10],   // Root
+        1: [160, 110],  // Left child of root
+        2: [510, 110],  // Right child of root
+        3: [60, 220],   // Left-left
+        4: [260, 220],  // Left-right
+        5: [410, 320],  // Right-left (child of node 2)
+        6: [610, 320],  // Right-right (child of node 2)
+    };
+
+    // Edge connections [from, to]
+    const EDGES = [
+        [0, 1], [0, 2],
+        [1, 3], [1, 4],
+        [2, 5], [2, 6]
+    ];
+
+    // Branch labels for edges
+    const BRANCH_LABELS = {
+        '0-1': 'x₁ ≤ 2',
+        '0-2': 'x₁ ≥ 3',
+        '1-3': 'x₂ ≤ 2',
+        '1-4': 'x₂ ≥ 3',
+        '2-5': 'x₂ ≤ 1',
+        '2-6': 'x₂ ≥ 2'
+    };
+
+    // Node data for each step
+    const NODES_DATA = {
+        0: { id: 0, x1: 2.5, x2: 2.5, obj: 22.5, status: 'fractional', bounds: '' },
+        1: { id: 1, x1: 2, x2: 2.5, obj: 20, status: 'fractional', bounds: 'x₁ ≤ 2' },
+        2: { id: 2, x1: 3, x2: 2.5, obj: 25, status: 'fractional', bounds: 'x₁ ≥ 3' },
+        3: { id: 3, x1: 2, x2: 2, obj: 18, status: 'integer', bounds: 'x₁ ≤ 2, x₂ ≤ 2' },
+        4: { id: 4, x1: 1.5, x2: 3, obj: 19.5, status: 'fractional', bounds: 'x₁ ≤ 2, x₂ ≥ 3' },
+        5: { id: 5, x1: 3, x2: 1, obj: 19, status: 'integer', bounds: 'x₁ ≥ 3, x₂ ≤ 1' },
+        6: { id: 6, x1: null, x2: null, obj: null, status: 'infeasible', bounds: 'x₁ ≥ 3, x₂ ≥ 2' }
+    };
+
+    const STEPS = [
+        {
+            title: "Solve Root Node (LP Relaxation)",
+            activeNode: 0,
+            visibleNodes: [0],
+            exploredEdges: [],
+            bestInt: null,
+            globalBound: 22.5,
+            nodesExplored: 1,
+            explanation: "Solve the LP relaxation (ignoring integrality). Solution: x₁ = 2.5, x₂ = 2.5 with objective 22.5. Both variables are fractional, so we must branch."
+        },
+        {
+            title: "Branch on x₁ (Most Fractional)",
+            activeNode: 0,
+            visibleNodes: [0, 1, 2],
+            exploredEdges: [],
+            bestInt: null,
+            globalBound: 22.5,
+            nodesExplored: 1,
+            explanation: "Branch on x₁ = 2.5 (fractional). Create two child nodes: x₁ ≤ 2 (left) and x₁ ≥ 3 (right). Use best-first search to select the most promising node."
+        },
+        {
+            title: "Solve Node 2 (x₁ ≥ 3)",
+            activeNode: 2,
+            visibleNodes: [0, 1, 2],
+            exploredEdges: [[0, 2]],
+            bestInt: null,
+            globalBound: 25,
+            nodesExplored: 2,
+            explanation: "Node 2 has higher bound potential. LP solution: x₁ = 3, x₂ = 2.5, obj = 25. Still fractional (x₂), so add to queue. This becomes the new global upper bound."
+        },
+        {
+            title: "Solve Node 1 (x₁ ≤ 2)",
+            activeNode: 1,
+            visibleNodes: [0, 1, 2],
+            exploredEdges: [[0, 1], [0, 2]],
+            bestInt: null,
+            globalBound: 25,
+            nodesExplored: 3,
+            explanation: "LP solution: x₁ = 2, x₂ = 2.5, obj = 20. Fractional x₂, continue branching. Bound 20 < global bound 25, keep exploring."
+        },
+        {
+            title: "Branch on x₂ from Node 1",
+            activeNode: 1,
+            visibleNodes: [0, 1, 2, 3, 4],
+            exploredEdges: [[0, 1], [0, 2]],
+            bestInt: null,
+            globalBound: 25,
+            nodesExplored: 3,
+            explanation: "Branch on x₂ = 2.5 from Node 1. Create: x₂ ≤ 2 (Node 3) and x₂ ≥ 3 (Node 4). Continue exploring."
+        },
+        {
+            title: "Solve Node 3 — Integer Solution!",
+            activeNode: 3,
+            visibleNodes: [0, 1, 2, 3, 4],
+            exploredEdges: [[0, 1], [0, 2], [1, 3]],
+            bestInt: 18,
+            globalBound: 25,
+            nodesExplored: 4,
+            nodeState: { 3: 'integer' },
+            explanation: "LP solution: x₁ = 2, x₂ = 2, obj = 18. This is INTEGER! First feasible solution found. Update incumbent to 18."
+        },
+        {
+            title: "Solve Node 4 — Fractional",
+            activeNode: 4,
+            visibleNodes: [0, 1, 2, 3, 4],
+            exploredEdges: [[0, 1], [0, 2], [1, 3], [1, 4]],
+            bestInt: 18,
+            globalBound: 25,
+            nodesExplored: 5,
+            nodeState: { 3: 'integer', 4: 'pruned' },
+            explanation: "LP solution: x₁ = 1.5, x₂ = 3, obj = 19.5. Fractional, but bound 19.5 > incumbent 18. However, branching would only yield worse solutions. Prune by bound."
+        },
+        {
+            title: "Return to Node 2 — Branch on x₂",
+            activeNode: 2,
+            visibleNodes: [0, 1, 2, 3, 4, 5, 6],
+            exploredEdges: [[0, 1], [0, 2], [1, 3], [1, 4]],
+            bestInt: 18,
+            globalBound: 25,
+            nodesExplored: 5,
+            nodeState: { 3: 'integer', 4: 'pruned' },
+            explanation: "Return to Node 2 (bound 25 still promising). Branch on x₂ = 2.5: create x₂ ≤ 1 (Node 5) and x₂ ≥ 2 (Node 6)."
+        },
+        {
+            title: "Solve Node 5 — Integer Solution!",
+            activeNode: 5,
+            visibleNodes: [0, 1, 2, 3, 4, 5, 6],
+            exploredEdges: [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5]],
+            bestInt: 19,
+            globalBound: 25,
+            nodesExplored: 6,
+            nodeState: { 3: 'integer', 4: 'pruned', 5: 'integer' },
+            explanation: "LP solution: x₁ = 3, x₂ = 1, obj = 19. INTEGER and better than incumbent! Update incumbent to 19."
+        },
+        {
+            title: "Solve Node 6 — Infeasible",
+            activeNode: 6,
+            visibleNodes: [0, 1, 2, 3, 4, 5, 6],
+            exploredEdges: [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [2, 6]],
+            bestInt: 19,
+            globalBound: 19,
+            nodesExplored: 7,
+            nodeState: { 3: 'integer', 4: 'pruned', 5: 'integer', 6: 'pruned' },
+            explanation: "Node 6 is INFEASIBLE (x₁ ≥ 3 and x₂ ≥ 2 violates 10x₁ + 6x₂ ≤ 45). Prune by infeasibility."
+        },
+        {
+            title: "Optimal Solution Found!",
+            activeNode: 5,
+            visibleNodes: [0, 1, 2, 3, 4, 5, 6],
+            exploredEdges: [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [2, 6]],
+            bestInt: 19,
+            globalBound: 19,
+            nodesExplored: 7,
+            nodeState: { 3: 'integer', 4: 'pruned', 5: 'optimal', 6: 'pruned' },
+            optimal: true,
+            explanation: "All nodes explored or pruned. Optimal integer solution: x₁ = 3, x₂ = 1, z* = 19. Gap closed (bound = incumbent)."
+        }
+    ];
+
+    let currentStep = 0;
+
+    function clearElement(el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+    }
+
+    function renderTree(step) {
+        const svg = document.getElementById('tree-svg');
+        clearElement(svg);
+
+        // Draw edges first
+        EDGES.forEach(function([from, to]) {
+            if (!step.visibleNodes.includes(from) || !step.visibleNodes.includes(to)) return;
+
+            const [x1, y1] = POSITIONS[from];
+            const [x2, y2] = POSITIONS[to];
+
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            const midX = (x1 + NODE_W/2 + x2 + NODE_W/2) / 2;
+            const path = `M${x1 + NODE_W/2},${y1 + NODE_H} Q${midX},${y1 + NODE_H + 30} ${x2 + NODE_W/2},${y2}`;
+            line.setAttribute('d', path);
+            line.setAttribute('class', 'edge' + (step.exploredEdges.some(e => e[0] === from && e[1] === to) ? ' active' : ''));
+            svg.appendChild(line);
+
+            // Branch label
+            const labelKey = `${from}-${to}`;
+            if (BRANCH_LABELS[labelKey]) {
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                const labelX = (x1 + NODE_W/2 + x2 + NODE_W/2) / 2 + (to < from ? 10 : -10);
+                const labelY = (y1 + NODE_H + y2) / 2;
+                text.setAttribute('x', to === 1 || to === 3 || to === 5 ? labelX - 30 : labelX + 10);
+                text.setAttribute('y', labelY + 5);
+                text.setAttribute('class', 'branch-label');
+                text.textContent = BRANCH_LABELS[labelKey];
+                svg.appendChild(text);
+            }
+        });
+
+        // Draw nodes
+        step.visibleNodes.forEach(function(nodeId) {
+            const [x, y] = POSITIONS[nodeId];
+            const nodeData = NODES_DATA[nodeId];
+            const nodeState = step.nodeState || {};
+
+            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            g.setAttribute('class', 'node');
+            g.setAttribute('transform', `translate(${x}, ${y})`);
+
+            // Determine node styling
+            let nodeClass = 'node';
+            if (step.activeNode === nodeId) nodeClass += ' active';
+            if (nodeState[nodeId] === 'pruned') nodeClass += ' pruned';
+            else if (nodeState[nodeId] === 'integer') nodeClass += ' integer';
+            else if (nodeState[nodeId] === 'optimal') nodeClass += ' optimal';
+            else if (!step.exploredEdges.some(e => e[1] === nodeId) && nodeId !== 0 && nodeId !== step.activeNode) {
+                nodeClass += ' unexplored';
+            }
+            g.setAttribute('class', nodeClass);
+
+            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('width', NODE_W);
+            rect.setAttribute('height', NODE_H);
+            g.appendChild(rect);
+
+            // Node content
+            const nodeLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            nodeLabel.setAttribute('x', NODE_W / 2);
+            nodeLabel.setAttribute('y', 15);
+            nodeLabel.setAttribute('text-anchor', 'middle');
+            nodeLabel.setAttribute('class', 'node-label');
+            nodeLabel.textContent = `Node ${nodeId}`;
+            g.appendChild(nodeLabel);
+
+            if (nodeData.obj !== null) {
+                const solText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                solText.setAttribute('x', NODE_W / 2);
+                solText.setAttribute('y', 32);
+                solText.setAttribute('text-anchor', 'middle');
+                solText.setAttribute('class', 'node-label');
+                solText.textContent = `x=(${nodeData.x1}, ${nodeData.x2})`;
+                g.appendChild(solText);
+
+                const objText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                objText.setAttribute('x', NODE_W / 2);
+                objText.setAttribute('y', 48);
+                objText.setAttribute('text-anchor', 'middle');
+                objText.setAttribute('class', 'node-label node-obj');
+                objText.textContent = `z = ${nodeData.obj}`;
+                g.appendChild(objText);
+            } else if (nodeData.status === 'infeasible') {
+                const infText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                infText.setAttribute('x', NODE_W / 2);
+                infText.setAttribute('y', 38);
+                infText.setAttribute('text-anchor', 'middle');
+                infText.setAttribute('class', 'node-label');
+                infText.setAttribute('fill', '#ef4444');
+                infText.textContent = 'Infeasible';
+                g.appendChild(infText);
+            }
+
+            svg.appendChild(g);
+        });
+    }
+
+    function renderExplanation(step) {
+        const el = document.getElementById('explanation');
+        clearElement(el);
+
+        const h3 = document.createElement('h3');
+        h3.textContent = step.title;
+        el.appendChild(h3);
+
+        const p = document.createElement('p');
+        p.textContent = step.explanation;
+        el.appendChild(p);
+
+        if (step.optimal) {
+            const box = document.createElement('div');
+            box.className = 'solution-box';
+            const h4 = document.createElement('h4');
+            h4.textContent = 'Optimal Integer Solution';
+            const p1 = document.createElement('p');
+            const strong1 = document.createElement('strong');
+            strong1.textContent = 'x₁ = 3, x₂ = 1';
+            p1.appendChild(strong1);
+            const p2 = document.createElement('p');
+            const strong2 = document.createElement('strong');
+            strong2.style.fontSize = '1.2em';
+            strong2.textContent = 'Maximum z* = 19';
+            p2.appendChild(strong2);
+            box.appendChild(h4);
+            box.appendChild(p1);
+            box.appendChild(p2);
+            el.appendChild(box);
+        }
+    }
+
+    function renderStepIndicator() {
+        const el = document.getElementById('step-indicator');
+        clearElement(el);
+        STEPS.forEach(function(_, i) {
+            const dot = document.createElement('div');
+            dot.className = 'step-dot';
+            if (i < currentStep) dot.classList.add('completed');
+            if (i === currentStep) dot.classList.add('active');
+            el.appendChild(dot);
+        });
+    }
+
+    function updateStatusBar(step) {
+        document.getElementById('best-value').textContent = step.bestInt !== null ? step.bestInt : '—';
+        document.getElementById('global-bound').textContent = step.globalBound !== null ? step.globalBound : '∞';
+        document.getElementById('nodes-explored').textContent = step.nodesExplored;
+    }
+
+    function updateUI() {
+        const step = STEPS[currentStep];
+        renderTree(step);
+        renderExplanation(step);
+        renderStepIndicator();
+        updateStatusBar(step);
+
+        document.getElementById('prev-btn').disabled = currentStep === 0;
+        const nextBtn = document.getElementById('next-btn');
+        nextBtn.disabled = currentStep === STEPS.length - 1;
+        nextBtn.textContent = currentStep === STEPS.length - 1 ? 'Complete!' : 'Next Step →';
+    }
+
+    document.getElementById('prev-btn').addEventListener('click', function() {
+        if (currentStep > 0) {
+            currentStep--;
+            updateUI();
+        }
+    });
+
+    document.getElementById('next-btn').addEventListener('click', function() {
+        if (currentStep < STEPS.length - 1) {
+            currentStep++;
+            updateUI();
+        }
+    });
+
+    updateUI();
+})();
+</script>
+{% endblock %}

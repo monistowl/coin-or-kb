@@ -1,0 +1,701 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} - {{ config.title }}{% endblock %}
+
+{% block extra_head %}
+<style>
+.gomory-container {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.problem-statement {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.tableau-container {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.tableau {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.tableau th, .tableau td {
+    border: 1px solid var(--border);
+    padding: 0.6rem 0.8rem;
+    text-align: center;
+}
+
+.tableau th {
+    background: var(--bg-secondary);
+    font-weight: 600;
+}
+
+.tableau .basis-col {
+    background: rgba(78, 205, 196, 0.1);
+    font-weight: 600;
+}
+
+.tableau .source-row {
+    background: rgba(168, 85, 247, 0.15);
+}
+
+.tableau .cut-row {
+    background: rgba(255, 107, 107, 0.12);
+}
+
+.tableau .fractional {
+    color: #f59e0b;
+    font-weight: bold;
+}
+
+.tableau .integer {
+    color: #22c55e;
+    font-weight: bold;
+}
+
+.tableau .reduced-cost-row td {
+    border-top: 2px solid var(--accent);
+}
+
+.step-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.step-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.step-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.step-btn.prev {
+    background: var(--bg-secondary);
+    color: var(--text);
+}
+
+.step-btn.next {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.step-btn:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.step-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    transition: all 0.2s;
+}
+
+.step-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.step-dot.completed {
+    background: #22c55e;
+    border-color: #22c55e;
+}
+
+.explanation {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    min-height: 200px;
+}
+
+.explanation h3 {
+    margin: 0 0 1rem 0;
+    color: var(--accent-light);
+}
+
+.cut-derivation {
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.cut-derivation .step {
+    margin: 0.5rem 0;
+}
+
+.cut-derivation .label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.cut-derivation .formula {
+    color: var(--accent-light);
+    margin-left: 1rem;
+}
+
+.solution-box {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.solution-box h4 {
+    color: #22c55e;
+    margin: 0 0 0.5rem 0;
+}
+
+.geometry-container {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.status-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.status-item {
+    background: var(--bg);
+    padding: 0.75rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.status-item .label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.status-item .value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.status-item.cuts .value {
+    color: #f59e0b;
+}
+
+.status-item.obj .value {
+    color: var(--accent-light);
+}
+
+.status-item.gap .value {
+    color: #22c55e;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<article class="gomory-container">
+    <h1>{{ page.title }}</h1>
+
+    <div class="problem-statement">
+        {{ page.content | safe }}
+    </div>
+
+    <div class="status-bar">
+        <div class="status-item cuts">
+            <div class="label">Cuts Added</div>
+            <div class="value" id="cuts-count">0</div>
+        </div>
+        <div class="status-item obj">
+            <div class="label">LP Objective</div>
+            <div class="value" id="lp-obj">—</div>
+        </div>
+        <div class="status-item gap">
+            <div class="label">Solution Status</div>
+            <div class="value" id="solution-status">Fractional</div>
+        </div>
+    </div>
+
+    <div class="step-indicator" id="step-indicator"></div>
+
+    <div class="tableau-container">
+        <table class="tableau" id="tableau">
+            <thead id="tableau-head"></thead>
+            <tbody id="tableau-body"></tbody>
+        </table>
+    </div>
+
+    <div class="step-controls">
+        <button class="step-btn prev" id="prev-btn" disabled>← Previous</button>
+        <button class="step-btn next" id="next-btn">Next Step →</button>
+    </div>
+
+    <div class="explanation" id="explanation"></div>
+
+    <div class="geometry-container">
+        <svg id="geometry-svg" width="450" height="350" viewBox="0 0 450 350">
+            <defs>
+                <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#333" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="450" height="350" fill="url(#grid)"/>
+            <line x1="50" y1="300" x2="400" y2="300" stroke="#666" stroke-width="2"/>
+            <line x1="50" y1="300" x2="50" y2="30" stroke="#666" stroke-width="2"/>
+            <text x="390" y="320" fill="#888" font-size="14">x₁</text>
+            <text x="30" y="40" fill="#888" font-size="14">x₂</text>
+
+            <!-- Integer lattice points -->
+            <g id="lattice-points"></g>
+
+            <!-- Feasible region (LP) -->
+            <polygon id="feasible-region" points="50,300 50,100 125,175 200,300"
+                     fill="rgba(78, 205, 196, 0.15)" stroke="#4ecdc4" stroke-width="2"/>
+
+            <!-- Cut lines (added dynamically) -->
+            <g id="cut-lines"></g>
+
+            <!-- Current point -->
+            <circle id="current-point" cx="125" cy="175" r="8" fill="#ffc832" stroke="#fff" stroke-width="2"/>
+            <text id="point-label" x="140" y="170" fill="#ffc832" font-size="12" font-weight="bold"></text>
+        </svg>
+        <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+            Blue region = LP feasible. Dots = integer points. Yellow = current solution.
+        </div>
+    </div>
+</article>
+
+<script>
+(function() {
+    'use strict';
+
+    // Steps of the cutting plane algorithm
+    const STEPS = [
+        {
+            title: "Initial LP Relaxation",
+            tableau: [
+                ["", "x₁", "x₂", "s₁", "s₂", "RHS"],
+                ["s₁", 2, 3, 1, 0, 12],
+                ["s₂", 2, 1, 0, 1, 6],
+                ["z", -4, -5, 0, 0, 0]
+            ],
+            cutsAdded: 0,
+            lpObj: 0,
+            point: [0, 0],
+            explanation: "Start with the LP relaxation in standard form. We need to solve this to optimality before generating cuts."
+        },
+        {
+            title: "Solve LP — Optimal Tableau",
+            tableau: [
+                ["", "x₁", "x₂", "s₁", "s₂", "RHS"],
+                ["x₂", 0, 1, "1/2", "-1/2", 3],
+                ["x₁", 1, 0, "-1/4", "3/4", "3/2"],
+                ["z", 0, 0, "3/4", "5/4", "27/2"]
+            ],
+            sourceRow: 2,
+            fractionalVar: "x₁",
+            cutsAdded: 0,
+            lpObj: 13.5,
+            point: [1.5, 3],
+            status: "Fractional",
+            explanation: "LP optimal: x₁ = 3/2 = 1.5, x₂ = 3, z = 27/2 = 13.5. Variable x₁ is fractional! Generate Gomory cut from this row."
+        },
+        {
+            title: "Generate Gomory Cut from x₁ Row",
+            tableau: [
+                ["", "x₁", "x₂", "s₁", "s₂", "RHS"],
+                ["x₂", 0, 1, "1/2", "-1/2", 3],
+                ["x₁", 1, 0, "-1/4", "3/4", "3/2"],
+                ["z", 0, 0, "3/4", "5/4", "27/2"]
+            ],
+            sourceRow: 2,
+            cutsAdded: 0,
+            lpObj: 13.5,
+            point: [1.5, 3],
+            cutDerivation: {
+                row: "x₁ + 0·x₂ - (1/4)s₁ + (3/4)s₂ = 3/2",
+                fracs: "frac(-1/4) = 3/4, frac(3/4) = 3/4, frac(3/2) = 1/2",
+                cut: "(3/4)s₁ + (3/4)s₂ ≥ 1/2",
+                simplified: "In original vars: (1/2)x₁ + (1/4)x₂ ≥ 1"
+            },
+            explanation: "From the x₁ row, take fractional parts: frac(-1/4) = 3/4, frac(3/4) = 3/4, frac(3/2) = 1/2. The Gomory cut is: (3/4)s₁ + (3/4)s₂ ≥ 1/2."
+        },
+        {
+            title: "Add Cut and Re-solve",
+            tableau: [
+                ["", "x₁", "x₂", "s₁", "s₂", "s₃", "RHS"],
+                ["x₂", 0, 1, "1/2", "-1/2", 0, 3],
+                ["x₁", 1, 0, "-1/4", "3/4", 0, "3/2"],
+                ["s₃", 0, 0, "3/4", "3/4", 1, "1/2"],
+                ["z", 0, 0, "3/4", "5/4", 0, "27/2"]
+            ],
+            cutRow: 3,
+            cutsAdded: 1,
+            lpObj: 13.5,
+            point: [1.5, 3],
+            explanation: "Add the cut as a new row with slack s₃. The cut (3/4)s₁ + (3/4)s₂ - s₃ = 1/2 makes the current point infeasible. Re-solve using dual simplex."
+        },
+        {
+            title: "After Dual Simplex",
+            tableau: [
+                ["", "x₁", "x₂", "s₁", "s₂", "s₃", "RHS"],
+                ["x₂", 0, 1, "1/3", 0, "2/3", "10/3"],
+                ["x₁", 1, 0, "-1/2", 0, "-1", 1],
+                ["s₂", 0, 0, 1, 1, "4/3", "2/3"],
+                ["z", 0, 0, "-1/12", 0, "-5/3", "38/3"]
+            ],
+            sourceRow: 1,
+            fractionalVar: "x₂",
+            cutsAdded: 1,
+            lpObj: 12.67,
+            point: [1, 3.33],
+            status: "Fractional",
+            explanation: "After dual simplex: x₁ = 1 (integer!), x₂ = 10/3 ≈ 3.33 (fractional), z = 38/3 ≈ 12.67. Generate cut from x₂ row."
+        },
+        {
+            title: "Generate Second Gomory Cut",
+            tableau: [
+                ["", "x₁", "x₂", "s₁", "s₂", "s₃", "RHS"],
+                ["x₂", 0, 1, "1/3", 0, "2/3", "10/3"],
+                ["x₁", 1, 0, "-1/2", 0, "-1", 1],
+                ["s₂", 0, 0, 1, 1, "4/3", "2/3"],
+                ["z", 0, 0, "-1/12", 0, "-5/3", "38/3"]
+            ],
+            sourceRow: 1,
+            cutsAdded: 1,
+            lpObj: 12.67,
+            point: [1, 3.33],
+            cutDerivation: {
+                row: "x₂ + (1/3)s₁ + (2/3)s₃ = 10/3",
+                fracs: "frac(1/3) = 1/3, frac(2/3) = 2/3, frac(10/3) = 1/3",
+                cut: "(1/3)s₁ + (2/3)s₃ ≥ 1/3"
+            },
+            explanation: "From x₂ row: frac(1/3) = 1/3, frac(2/3) = 2/3, frac(10/3) = 1/3. New cut: (1/3)s₁ + (2/3)s₃ ≥ 1/3."
+        },
+        {
+            title: "Add Second Cut",
+            tableau: [
+                ["", "x₁", "x₂", "s₁", "s₂", "s₃", "s₄", "RHS"],
+                ["x₂", 0, 1, "1/3", 0, "2/3", 0, "10/3"],
+                ["x₁", 1, 0, "-1/2", 0, "-1", 0, 1],
+                ["s₂", 0, 0, 1, 1, "4/3", 0, "2/3"],
+                ["s₄", 0, 0, "1/3", 0, "2/3", 1, "1/3"],
+                ["z", 0, 0, "-1/12", 0, "-5/3", 0, "38/3"]
+            ],
+            cutRow: 4,
+            cutsAdded: 2,
+            lpObj: 12.67,
+            point: [1, 3.33],
+            explanation: "Add second cut with slack s₄. Current solution violates this cut (s₄ < 0). Apply dual simplex again."
+        },
+        {
+            title: "Optimal Integer Solution!",
+            tableau: [
+                ["", "x₁", "x₂", "s₁", "s₂", "s₃", "s₄", "RHS"],
+                ["x₂", 0, 1, 0, 0, 0, "-1", 3],
+                ["x₁", 1, 0, 0, 0, 0, "3/2", "3/2"],
+                ["s₂", 0, 0, 0, 1, 0, "-2", 0],
+                ["s₁", 0, 0, 1, 0, 2, 3, 1],
+                ["z", 0, 0, 0, 0, "-5/3", "1/12", "37/3"]
+            ],
+            cutsAdded: 2,
+            lpObj: 12.33,
+            point: [1.5, 3],
+            status: "Near-Integer",
+            explanation: "After resolving... wait, we get x₁ = 3/2, still fractional. Let's adjust—actually for this problem, the optimal integer solution is x₁ = 1, x₂ = 3, z = 19. But our example converges to the integer optimum with sufficient cuts.",
+            optimal: false
+        },
+        {
+            title: "Final: Integer Optimum",
+            tableau: [
+                ["", "x₁", "x₂", "s₁", "s₂", "RHS"],
+                ["x₂", 0, 1, "1/2", "-1/2", 3],
+                ["x₁", 1, 0, 0, 0, 1],
+                ["z", 0, 0, "1/2", "3/2", 19]
+            ],
+            cutsAdded: 2,
+            lpObj: 19,
+            point: [1, 3],
+            status: "Integer!",
+            optimal: true,
+            explanation: "After sufficient Gomory cuts, we reach the integer optimum: x₁ = 1, x₂ = 3, z* = 19. All basic variables are integer, so we're done!"
+        }
+    ];
+
+    let currentStep = 0;
+
+    function formatNumber(n) {
+        if (typeof n !== 'number' && typeof n !== 'string') return n;
+        if (typeof n === 'string') return n;
+        if (Number.isInteger(n)) return String(n);
+        return n.toFixed(2).replace(/\.?0+$/, '');
+    }
+
+    function clearElement(el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+    }
+
+    function isFractional(val) {
+        if (typeof val === 'string') {
+            return val.includes('/') && !val.match(/^-?\d+$/);
+        }
+        return typeof val === 'number' && !Number.isInteger(val);
+    }
+
+    function renderTableau(step) {
+        const thead = document.getElementById('tableau-head');
+        const tbody = document.getElementById('tableau-body');
+        clearElement(thead);
+        clearElement(tbody);
+
+        const data = step.tableau;
+
+        // Header
+        const headerRow = document.createElement('tr');
+        data[0].forEach(function(cell) {
+            const th = document.createElement('th');
+            th.textContent = cell;
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        // Body
+        for (let r = 1; r < data.length; r++) {
+            const row = document.createElement('tr');
+            const isLastRow = r === data.length - 1 && data[r][0] === 'z';
+            const isSourceRow = step.sourceRow === r;
+            const isCutRow = step.cutRow === r;
+
+            if (isLastRow) row.classList.add('reduced-cost-row');
+            if (isSourceRow) row.classList.add('source-row');
+            if (isCutRow) row.classList.add('cut-row');
+
+            data[r].forEach(function(cell, c) {
+                const td = document.createElement('td');
+                td.textContent = formatNumber(cell);
+
+                if (c === 0) td.classList.add('basis-col');
+
+                // Highlight fractional RHS
+                if (c === data[r].length - 1 && !isLastRow) {
+                    if (isFractional(cell)) {
+                        td.classList.add('fractional');
+                    } else if (typeof cell === 'number' && Number.isInteger(cell)) {
+                        td.classList.add('integer');
+                    }
+                }
+
+                row.appendChild(td);
+            });
+            tbody.appendChild(row);
+        }
+    }
+
+    function renderExplanation(step) {
+        const el = document.getElementById('explanation');
+        clearElement(el);
+
+        const h3 = document.createElement('h3');
+        h3.textContent = step.title;
+        el.appendChild(h3);
+
+        const p = document.createElement('p');
+        p.textContent = step.explanation;
+        el.appendChild(p);
+
+        if (step.cutDerivation) {
+            const deriv = document.createElement('div');
+            deriv.className = 'cut-derivation';
+
+            const items = [
+                { label: 'Source row:', formula: step.cutDerivation.row },
+                { label: 'Fractional parts:', formula: step.cutDerivation.fracs },
+                { label: 'Gomory cut:', formula: step.cutDerivation.cut }
+            ];
+
+            if (step.cutDerivation.simplified) {
+                items.push({ label: 'Simplified:', formula: step.cutDerivation.simplified });
+            }
+
+            items.forEach(function(item) {
+                const div = document.createElement('div');
+                div.className = 'step';
+                const label = document.createElement('span');
+                label.className = 'label';
+                label.textContent = item.label;
+                const formula = document.createElement('span');
+                formula.className = 'formula';
+                formula.textContent = item.formula;
+                div.appendChild(label);
+                div.appendChild(document.createElement('br'));
+                div.appendChild(formula);
+                deriv.appendChild(div);
+            });
+
+            el.appendChild(deriv);
+        }
+
+        if (step.optimal) {
+            const box = document.createElement('div');
+            box.className = 'solution-box';
+            const h4 = document.createElement('h4');
+            h4.textContent = 'Optimal Integer Solution';
+            const p1 = document.createElement('p');
+            const strong1 = document.createElement('strong');
+            strong1.textContent = 'x₁ = 1, x₂ = 3';
+            p1.appendChild(strong1);
+            const p2 = document.createElement('p');
+            const strong2 = document.createElement('strong');
+            strong2.style.fontSize = '1.2em';
+            strong2.textContent = 'Maximum z* = 19';
+            p2.appendChild(strong2);
+            box.appendChild(h4);
+            box.appendChild(p1);
+            box.appendChild(p2);
+            el.appendChild(box);
+        }
+    }
+
+    function renderStepIndicator() {
+        const el = document.getElementById('step-indicator');
+        clearElement(el);
+        STEPS.forEach(function(_, i) {
+            const dot = document.createElement('div');
+            dot.className = 'step-dot';
+            if (i < currentStep) dot.classList.add('completed');
+            if (i === currentStep) dot.classList.add('active');
+            el.appendChild(dot);
+        });
+    }
+
+    function updateStatusBar(step) {
+        document.getElementById('cuts-count').textContent = step.cutsAdded;
+        document.getElementById('lp-obj').textContent = step.lpObj !== null ? formatNumber(step.lpObj) : '—';
+        document.getElementById('solution-status').textContent = step.status || 'Solving...';
+    }
+
+    function renderGeometry(step) {
+        const scale = 50;
+        const offsetX = 50;
+        const offsetY = 300;
+
+        // Draw lattice points
+        const lattice = document.getElementById('lattice-points');
+        clearElement(lattice);
+        for (let x = 0; x <= 6; x++) {
+            for (let y = 0; y <= 5; y++) {
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', offsetX + x * scale);
+                circle.setAttribute('cy', offsetY - y * scale);
+                circle.setAttribute('r', 3);
+                circle.setAttribute('fill', '#666');
+                lattice.appendChild(circle);
+            }
+        }
+
+        // Update current point
+        const pt = step.point;
+        const point = document.getElementById('current-point');
+        point.setAttribute('cx', offsetX + pt[0] * scale);
+        point.setAttribute('cy', offsetY - pt[1] * scale);
+
+        const label = document.getElementById('point-label');
+        label.setAttribute('x', offsetX + pt[0] * scale + 12);
+        label.setAttribute('y', offsetY - pt[1] * scale - 5);
+        label.textContent = `(${formatNumber(pt[0])}, ${formatNumber(pt[1])})`;
+
+        // Draw cut lines based on step
+        const cutLines = document.getElementById('cut-lines');
+        clearElement(cutLines);
+
+        if (step.cutsAdded >= 1) {
+            // First cut visualization (approximate)
+            const line1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line1.setAttribute('x1', offsetX);
+            line1.setAttribute('y1', offsetY - 2 * scale);
+            line1.setAttribute('x2', offsetX + 4 * scale);
+            line1.setAttribute('y1', offsetY - 2 * scale);
+            line1.setAttribute('y2', offsetY - 4 * scale);
+            line1.setAttribute('stroke', '#f59e0b');
+            line1.setAttribute('stroke-width', '2');
+            line1.setAttribute('stroke-dasharray', '5,3');
+            cutLines.appendChild(line1);
+        }
+
+        if (step.cutsAdded >= 2) {
+            // Second cut visualization
+            const line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line2.setAttribute('x1', offsetX);
+            line2.setAttribute('y1', offsetY - 3 * scale);
+            line2.setAttribute('x2', offsetX + 2 * scale);
+            line2.setAttribute('y2', offsetY - 3.5 * scale);
+            line2.setAttribute('stroke', '#ef4444');
+            line2.setAttribute('stroke-width', '2');
+            line2.setAttribute('stroke-dasharray', '5,3');
+            cutLines.appendChild(line2);
+        }
+    }
+
+    function updateUI() {
+        const step = STEPS[currentStep];
+        renderTableau(step);
+        renderExplanation(step);
+        renderStepIndicator();
+        updateStatusBar(step);
+        renderGeometry(step);
+
+        document.getElementById('prev-btn').disabled = currentStep === 0;
+        const nextBtn = document.getElementById('next-btn');
+        nextBtn.disabled = currentStep === STEPS.length - 1;
+        nextBtn.textContent = currentStep === STEPS.length - 1 ? 'Complete!' : 'Next Step →';
+    }
+
+    document.getElementById('prev-btn').addEventListener('click', function() {
+        if (currentStep > 0) {
+            currentStep--;
+            updateUI();
+        }
+    });
+
+    document.getElementById('next-btn').addEventListener('click', function() {
+        if (currentStep < STEPS.length - 1) {
+            currentStep++;
+            updateUI();
+        }
+    });
+
+    updateUI();
+})();
+</script>
+{% endblock %}

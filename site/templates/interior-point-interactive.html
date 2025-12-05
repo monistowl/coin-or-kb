@@ -1,0 +1,631 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} - {{ config.title }}{% endblock %}
+
+{% block extra_head %}
+<style>
+.ipm-container {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.problem-statement {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.viz-container {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.status-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.status-item {
+    background: var(--bg);
+    padding: 0.75rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.status-item .label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.status-item .value {
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.status-item.mu .value {
+    color: #f59e0b;
+}
+
+.status-item.obj .value {
+    color: var(--accent-light);
+}
+
+.status-item.gap .value {
+    color: #22c55e;
+}
+
+.step-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.step-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.step-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.step-btn.prev {
+    background: var(--bg-secondary);
+    color: var(--text);
+}
+
+.step-btn.next {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.step-btn:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.step-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    transition: all 0.2s;
+}
+
+.step-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.step-dot.completed {
+    background: #22c55e;
+    border-color: #22c55e;
+}
+
+.explanation {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    min-height: 180px;
+}
+
+.explanation h3 {
+    margin: 0 0 1rem 0;
+    color: var(--accent-light);
+}
+
+.kkt-box {
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.kkt-box .title {
+    color: var(--accent-light);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.iteration-data {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.data-card {
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.data-card h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--accent-light);
+}
+
+.data-card .values {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+}
+
+.solution-box {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.solution-box h4 {
+    color: #22c55e;
+    margin: 0 0 0.5rem 0;
+}
+
+.central-path {
+    stroke: rgba(255, 200, 50, 0.4);
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 4,2;
+}
+
+.iterate-point {
+    transition: all 0.3s ease-out;
+}
+
+.iterate-trail {
+    fill: none;
+    stroke: #ffc832;
+    stroke-width: 2;
+}
+
+.newton-direction {
+    stroke: #a855f7;
+    stroke-width: 2;
+    marker-end: url(#arrow);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<article class="ipm-container">
+    <h1>{{ page.title }}</h1>
+
+    <div class="problem-statement">
+        {{ page.content | safe }}
+    </div>
+
+    <div class="status-bar">
+        <div class="status-item">
+            <div class="label">Iteration</div>
+            <div class="value" id="iteration">0</div>
+        </div>
+        <div class="status-item mu">
+            <div class="label">Barrier μ</div>
+            <div class="value" id="mu-value">1.00</div>
+        </div>
+        <div class="status-item obj">
+            <div class="label">Objective</div>
+            <div class="value" id="obj-value">—</div>
+        </div>
+        <div class="status-item gap">
+            <div class="label">Duality Gap</div>
+            <div class="value" id="gap-value">—</div>
+        </div>
+    </div>
+
+    <div class="step-indicator" id="step-indicator"></div>
+
+    <div class="viz-container">
+        <svg id="viz-svg" width="500" height="400" viewBox="0 0 500 400">
+            <defs>
+                <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#333" stroke-width="0.5"/>
+                </pattern>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#a855f7"/>
+                </marker>
+                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffc832" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="#22c55e" stop-opacity="0.8"/>
+                </linearGradient>
+            </defs>
+
+            <!-- Grid -->
+            <rect width="500" height="400" fill="url(#grid)"/>
+
+            <!-- Axes -->
+            <line x1="50" y1="350" x2="450" y2="350" stroke="#666" stroke-width="2"/>
+            <line x1="50" y1="350" x2="50" y2="30" stroke="#666" stroke-width="2"/>
+            <text x="440" y="370" fill="#888" font-size="14">x₁</text>
+            <text x="30" y="40" fill="#888" font-size="14">x₂</text>
+
+            <!-- Axis labels -->
+            <text x="150" y="370" fill="#666" font-size="11">2</text>
+            <text x="250" y="370" fill="#666" font-size="11">4</text>
+            <text x="350" y="370" fill="#666" font-size="11">6</text>
+            <text x="35" y="255" fill="#666" font-size="11">2</text>
+            <text x="35" y="155" fill="#666" font-size="11">4</text>
+
+            <!-- Feasible region -->
+            <polygon id="feasible-region"
+                     points="50,350 50,150 150,150 250,250 250,350"
+                     fill="rgba(78, 205, 196, 0.15)" stroke="#4ecdc4" stroke-width="2"/>
+
+            <!-- Constraint labels -->
+            <text x="85" y="140" fill="#4ecdc4" font-size="11">x₁ + x₂ ≤ 4</text>
+            <text x="230" y="220" fill="#4ecdc4" font-size="11">2x₁ + x₂ ≤ 6</text>
+
+            <!-- Central path (approximate) -->
+            <path id="central-path" class="central-path"
+                  d="M 100,300 Q 120,270 140,240 Q 160,210 180,190 Q 195,175 200,165 Q 145,165 150,150"/>
+
+            <!-- Iterate trail -->
+            <polyline id="iterate-trail" class="iterate-trail" points=""/>
+
+            <!-- Newton direction (shown during steps) -->
+            <line id="newton-dir" class="newton-direction" x1="0" y1="0" x2="0" y2="0" visibility="hidden"/>
+
+            <!-- Previous iterates (shown as smaller dots) -->
+            <g id="previous-iterates"></g>
+
+            <!-- Current iterate -->
+            <circle id="current-point" class="iterate-point" cx="100" cy="300" r="10"
+                    fill="#ffc832" stroke="#fff" stroke-width="2"/>
+            <text id="point-label" x="115" y="295" fill="#ffc832" font-size="12" font-weight="bold"></text>
+
+            <!-- Optimal point marker -->
+            <circle id="optimal-marker" cx="150" cy="150" r="6" fill="none" stroke="#22c55e" stroke-width="2" stroke-dasharray="3,2"/>
+            <text x="165" y="145" fill="#22c55e" font-size="10">optimal</text>
+
+            <!-- Legend -->
+            <g transform="translate(320, 30)">
+                <rect x="0" y="0" width="150" height="70" fill="var(--bg-secondary)" rx="4" opacity="0.9"/>
+                <circle cx="15" cy="20" r="6" fill="#ffc832"/>
+                <text x="30" y="24" fill="var(--text)" font-size="11">Current iterate</text>
+                <line x1="8" y1="42" x2="22" y2="42" stroke="rgba(255, 200, 50, 0.4)" stroke-width="2" stroke-dasharray="4,2"/>
+                <text x="30" y="46" fill="var(--text)" font-size="11">Central path</text>
+                <line x1="8" y1="60" x2="22" y2="60" stroke="#a855f7" stroke-width="2"/>
+                <text x="30" y="64" fill="var(--text)" font-size="11">Newton direction</text>
+            </g>
+        </svg>
+    </div>
+
+    <div class="step-controls">
+        <button class="step-btn prev" id="prev-btn" disabled>← Previous</button>
+        <button class="step-btn next" id="next-btn">Next Step →</button>
+    </div>
+
+    <div class="explanation" id="explanation"></div>
+</article>
+
+<script>
+(function() {
+    'use strict';
+
+    // Coordinate transformation
+    const SCALE = 50;
+    const OFFSET_X = 50;
+    const OFFSET_Y = 350;
+
+    function toSvg(x, y) {
+        return [OFFSET_X + x * SCALE, OFFSET_Y - y * SCALE];
+    }
+
+    // Interior point iterations (simplified for visualization)
+    const STEPS = [
+        {
+            title: "Initialize Interior Point",
+            iter: 0,
+            x: [1, 1],          // Starting interior point
+            s: [2, 3],          // Slack values (s = b - Ax)
+            y: [0.5, 0.5],      // Dual variables (approximate)
+            mu: 2.0,
+            obj: 5,             // 3*1 + 2*1
+            gap: 4.0,
+            showNewton: false,
+            explanation: "Start with an interior point (x₁, x₂) = (1, 1). This point is strictly inside the feasible region. Initialize barrier parameter μ = 2.0."
+        },
+        {
+            title: "Compute Newton Direction",
+            iter: 1,
+            x: [1, 1],
+            s: [2, 3],
+            y: [0.5, 0.5],
+            mu: 2.0,
+            obj: 5,
+            gap: 4.0,
+            newtonDir: [0.8, 0.6],
+            showNewton: true,
+            explanation: "Solve the KKT system to find Newton direction. The direction points toward the central path while improving the objective. Δx = (0.8, 0.6)."
+        },
+        {
+            title: "Take Step (Iteration 1)",
+            iter: 1,
+            x: [1.8, 1.6],
+            s: [0.6, 1.0],
+            y: [1.0, 0.8],
+            mu: 1.0,
+            obj: 8.6,           // 3*1.8 + 2*1.6
+            gap: 2.0,
+            showNewton: false,
+            trail: [[1, 1]],
+            explanation: "Step along Newton direction with step length α = 1.0. New point (1.8, 1.6) with objective 8.6. Reduce barrier: μ = 1.0. Duality gap cut in half!"
+        },
+        {
+            title: "Iteration 2 — Newton Step",
+            iter: 2,
+            x: [1.8, 1.6],
+            s: [0.6, 1.0],
+            mu: 1.0,
+            obj: 8.6,
+            gap: 2.0,
+            newtonDir: [0.15, 0.35],
+            showNewton: true,
+            explanation: "Compute new Newton direction from (1.8, 1.6). As μ decreases, the direction points more directly toward the optimal vertex."
+        },
+        {
+            title: "Take Step (Iteration 2)",
+            iter: 2,
+            x: [1.95, 1.95],
+            s: [0.1, 0.15],
+            mu: 0.3,
+            obj: 9.75,
+            gap: 0.5,
+            showNewton: false,
+            trail: [[1, 1], [1.8, 1.6]],
+            explanation: "Step to (1.95, 1.95). Objective now 9.75, approaching optimal 10. Barrier μ = 0.3, gap = 0.5. We're getting close to the boundary."
+        },
+        {
+            title: "Iteration 3 — Final Approach",
+            iter: 3,
+            x: [1.95, 1.95],
+            mu: 0.3,
+            obj: 9.75,
+            gap: 0.5,
+            newtonDir: [0.04, 0.04],
+            showNewton: true,
+            explanation: "Final Newton step computed. The direction is small — we're near the optimum. The central path converges to the optimal vertex (2, 2)."
+        },
+        {
+            title: "Convergence!",
+            iter: 3,
+            x: [1.99, 1.99],
+            mu: 0.01,
+            obj: 9.95,
+            gap: 0.02,
+            showNewton: false,
+            trail: [[1, 1], [1.8, 1.6], [1.95, 1.95]],
+            explanation: "After a few more iterations: (x₁, x₂) ≈ (2, 2), objective ≈ 10. Duality gap < ε. The interior point method has converged!"
+        },
+        {
+            title: "Optimal Solution",
+            iter: 4,
+            x: [2, 2],
+            mu: 0,
+            obj: 10,
+            gap: 0,
+            showNewton: false,
+            trail: [[1, 1], [1.8, 1.6], [1.95, 1.95], [1.99, 1.99]],
+            optimal: true,
+            explanation: "Optimal solution: x₁ = 2, x₂ = 2, z* = 10. The interior point method found the same optimum as simplex, but by following the central path through the interior rather than along edges."
+        }
+    ];
+
+    let currentStep = 0;
+
+    function clearElement(el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+    }
+
+    function formatNum(n, decimals) {
+        if (typeof n !== 'number') return n;
+        return n.toFixed(decimals || 2);
+    }
+
+    function renderVisualization(step) {
+        const svg = document.getElementById('viz-svg');
+
+        // Update trail
+        const trail = document.getElementById('iterate-trail');
+        if (step.trail && step.trail.length > 0) {
+            let points = step.trail.map(p => toSvg(p[0], p[1]).join(',')).join(' ');
+            const current = toSvg(step.x[0], step.x[1]);
+            points += ' ' + current.join(',');
+            trail.setAttribute('points', points);
+        } else {
+            trail.setAttribute('points', '');
+        }
+
+        // Update previous iterates
+        const prevGroup = document.getElementById('previous-iterates');
+        clearElement(prevGroup);
+        if (step.trail) {
+            step.trail.forEach(function(p, i) {
+                const [sx, sy] = toSvg(p[0], p[1]);
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', sx);
+                circle.setAttribute('cy', sy);
+                circle.setAttribute('r', 5);
+                circle.setAttribute('fill', 'rgba(255, 200, 50, 0.5)');
+                prevGroup.appendChild(circle);
+            });
+        }
+
+        // Update current point
+        const [px, py] = toSvg(step.x[0], step.x[1]);
+        const point = document.getElementById('current-point');
+        point.setAttribute('cx', px);
+        point.setAttribute('cy', py);
+
+        if (step.optimal) {
+            point.setAttribute('fill', '#22c55e');
+        } else {
+            point.setAttribute('fill', '#ffc832');
+        }
+
+        // Update point label
+        const label = document.getElementById('point-label');
+        label.setAttribute('x', px + 15);
+        label.setAttribute('y', py - 5);
+        label.textContent = `(${formatNum(step.x[0], 2)}, ${formatNum(step.x[1], 2)})`;
+
+        // Update Newton direction
+        const newtonLine = document.getElementById('newton-dir');
+        if (step.showNewton && step.newtonDir) {
+            const [dx, dy] = step.newtonDir;
+            const scale = 80; // Visual scale for direction
+            newtonLine.setAttribute('x1', px);
+            newtonLine.setAttribute('y1', py);
+            newtonLine.setAttribute('x2', px + dx * scale);
+            newtonLine.setAttribute('y2', py - dy * scale);
+            newtonLine.setAttribute('visibility', 'visible');
+        } else {
+            newtonLine.setAttribute('visibility', 'hidden');
+        }
+    }
+
+    function renderExplanation(step) {
+        const el = document.getElementById('explanation');
+        clearElement(el);
+
+        const h3 = document.createElement('h3');
+        h3.textContent = step.title;
+        el.appendChild(h3);
+
+        const p = document.createElement('p');
+        p.textContent = step.explanation;
+        el.appendChild(p);
+
+        // Show iteration data
+        if (!step.optimal) {
+            const dataDiv = document.createElement('div');
+            dataDiv.className = 'iteration-data';
+
+            const primalCard = document.createElement('div');
+            primalCard.className = 'data-card';
+            const primalH4 = document.createElement('h4');
+            primalH4.textContent = 'Primal Variables';
+            const primalVals = document.createElement('div');
+            primalVals.className = 'values';
+            primalVals.textContent = `x₁ = ${formatNum(step.x[0], 3)}, x₂ = ${formatNum(step.x[1], 3)}`;
+            primalCard.appendChild(primalH4);
+            primalCard.appendChild(primalVals);
+
+            const barrierCard = document.createElement('div');
+            barrierCard.className = 'data-card';
+            const barrierH4 = document.createElement('h4');
+            barrierH4.textContent = 'Barrier Parameter';
+            const barrierVals = document.createElement('div');
+            barrierVals.className = 'values';
+            barrierVals.textContent = `μ = ${formatNum(step.mu, 3)}`;
+            barrierCard.appendChild(barrierH4);
+            barrierCard.appendChild(barrierVals);
+
+            dataDiv.appendChild(primalCard);
+            dataDiv.appendChild(barrierCard);
+            el.appendChild(dataDiv);
+        }
+
+        if (step.optimal) {
+            const box = document.createElement('div');
+            box.className = 'solution-box';
+            const h4 = document.createElement('h4');
+            h4.textContent = 'Optimal Solution Found';
+            const p1 = document.createElement('p');
+            const strong1 = document.createElement('strong');
+            strong1.textContent = 'x₁ = 2, x₂ = 2';
+            p1.appendChild(strong1);
+            const p2 = document.createElement('p');
+            const strong2 = document.createElement('strong');
+            strong2.style.fontSize = '1.2em';
+            strong2.textContent = 'Maximum z* = 10';
+            p2.appendChild(strong2);
+            const p3 = document.createElement('p');
+            p3.style.color = 'var(--text-muted)';
+            p3.textContent = 'Same answer as simplex, different path!';
+            box.appendChild(h4);
+            box.appendChild(p1);
+            box.appendChild(p2);
+            box.appendChild(p3);
+            el.appendChild(box);
+        }
+    }
+
+    function renderStepIndicator() {
+        const el = document.getElementById('step-indicator');
+        clearElement(el);
+        STEPS.forEach(function(_, i) {
+            const dot = document.createElement('div');
+            dot.className = 'step-dot';
+            if (i < currentStep) dot.classList.add('completed');
+            if (i === currentStep) dot.classList.add('active');
+            el.appendChild(dot);
+        });
+    }
+
+    function updateStatusBar(step) {
+        document.getElementById('iteration').textContent = step.iter;
+        document.getElementById('mu-value').textContent = formatNum(step.mu, 3);
+        document.getElementById('obj-value').textContent = formatNum(step.obj, 2);
+        document.getElementById('gap-value').textContent = step.gap < 0.01 ? '< 0.01' : formatNum(step.gap, 2);
+    }
+
+    function updateUI() {
+        const step = STEPS[currentStep];
+        renderVisualization(step);
+        renderExplanation(step);
+        renderStepIndicator();
+        updateStatusBar(step);
+
+        document.getElementById('prev-btn').disabled = currentStep === 0;
+        const nextBtn = document.getElementById('next-btn');
+        nextBtn.disabled = currentStep === STEPS.length - 1;
+        nextBtn.textContent = currentStep === STEPS.length - 1 ? 'Complete!' : 'Next Step →';
+    }
+
+    document.getElementById('prev-btn').addEventListener('click', function() {
+        if (currentStep > 0) {
+            currentStep--;
+            updateUI();
+        }
+    });
+
+    document.getElementById('next-btn').addEventListener('click', function() {
+        if (currentStep < STEPS.length - 1) {
+            currentStep++;
+            updateUI();
+        }
+    });
+
+    updateUI();
+})();
+</script>
+{% endblock %}
