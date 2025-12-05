@@ -11,6 +11,60 @@
  *
  * Implements depth-first search with backtracking and node evaluation.
  *
+ * @algorithm Depth-First Search with Plunging:
+ * Explores tree deeply before backtracking for memory efficiency.
+ *
+ * DIVING STRATEGY:
+ *   dive():
+ *     while (not_pruned):
+ *       Solve LP relaxation
+ *       if (LP infeasible or bound_exceeds_cutoff): prune, backtrack
+ *       if (integer_feasible): update incumbent, backtrack
+ *       Select branching variable
+ *       Create down and up children
+ *       Choose child (direction selection rule)
+ *       Push other child to queue
+ *       Descend to chosen child
+ *
+ * BACKTRACKING:
+ *   backtrackPlunge():
+ *     Pop node from stack (return to parent)
+ *     If unexplored sibling exists: continue diving there
+ *     If nodequeue has better node: jump to it (best-first switch)
+ *     Else continue backtracking
+ *
+ * @algorithm Branching Variable Selection:
+ * Combines reliability branching with hybrid scores.
+ *
+ * RELIABILITY BRANCHING:
+ *   For each fractional variable x_j:
+ *     If pseudocost reliable (seen >= threshold times):
+ *       score_j = combine(pc_down_j, pc_up_j)
+ *     Else:
+ *       Perform strong branching (solve LP after fixing x_j)
+ *       Update pseudocosts from actual bound changes
+ *
+ * SCORING FUNCTIONS:
+ *   Product: score = pc_down * pc_up
+ *   Hybrid:  score = (1-mu)*min(d,u) + mu*max(d,u)  [mu ~ 0.1-0.2]
+ *
+ * @algorithm Pseudocost Estimation:
+ * Predicts bound change from branching on variable x_j.
+ *
+ *   pc_down_j = avg over k of: (z_parent - z_down_k) / f_j
+ *   pc_up_j   = avg over k of: (z_parent - z_up_k) / (1 - f_j)
+ *
+ *   where f_j = fractional part of x_j at LP solution
+ *         z = LP objective value
+ *
+ * @algorithm Child Selection Direction:
+ * Determines which child to explore first at each branch.
+ *
+ *   kRootSol:  Direction toward LP relaxation solution
+ *   kBestCost: Direction with lower pseudocost estimate
+ *   kObj:      Direction that doesn't worsen objective
+ *   kHybrid:   Weighted combination of inference and cost
+ *
  * **Node Management:**
  * - nodestack[]: Stack of NodeData for current branch
  * - NodeData: {lower_bound, estimate, branchingdecision, nodeBasis, etc.}
@@ -40,6 +94,11 @@
  * **Heuristic Support:**
  * - setRINSNeighbourhood(): Fix variables from incumbent
  * - setRENSNeighbourhood(): Round LP solution
+ *
+ * @complexity
+ * - Node evaluation: O(LP_solve) = O(m^2 * n) worst case
+ * - Strong branching: O(candidates * LP_iterations)
+ * - Pseudocost lookup: O(1)
  *
  * @see mip/HighsNodeQueue.h for best-first node storage
  * @see mip/HighsPseudocost.h for branching scores

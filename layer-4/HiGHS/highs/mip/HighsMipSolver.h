@@ -9,6 +9,47 @@
  * @file mip/HighsMipSolver.h
  * @brief Branch-and-cut MIP solver
  *
+ * @algorithm Branch-and-Cut for Mixed-Integer Programming:
+ * Combines branch-and-bound with cutting planes for MIP.
+ *
+ * OVERALL FLOW:
+ *   1. PRESOLVE: Reduce problem size and tighten formulation
+ *   2. ROOT NODE: Solve LP relaxation, add cuts, find initial solutions
+ *   3. BRANCH-AND-BOUND: Explore tree until proven optimal
+ *   4. POSTSOLVE: Restore original solution space
+ *
+ * ROOT NODE PROCESSING:
+ *   while (progress):
+ *     Solve LP relaxation
+ *     Add violated cuts (Gomory, MIR, clique, cover)
+ *     Run primal heuristics (diving, RINS, RENS)
+ *     Update bounds
+ *
+ * BRANCH-AND-BOUND TREE:
+ *   Initialize: dual_bound = root_LP_obj, primal_bound = +inf
+ *   while (open_nodes and gap > tolerance):
+ *     Select node (best-first, depth-first, hybrid)
+ *     Solve LP relaxation
+ *     if (LP_infeasible or LP_obj >= primal_bound):
+ *       Prune node
+ *     elif (solution is integer):
+ *       Update primal_bound if better
+ *       Prune node
+ *     else:
+ *       Add cuts if violated
+ *       Branch on fractional integer variable
+ *
+ * @math Optimality gap: gap = (primal_bound - dual_bound) / |primal_bound|
+ *   Termination when gap <= mip_rel_gap tolerance (default 0.01%)
+ *
+ * @complexity
+ * - Worst case: exponential in number of integer variables
+ * - Practice: often polynomial due to pruning and cuts
+ * - Root processing: O(cuts * LP_iterations)
+ *
+ * @ref Achterberg, Bixby, Gu, Rothberg & Weninger (2020).
+ *   "Presolve Reductions in Mixed Integer Programming". INFORMS J. Computing.
+ *
  * **HighsMipSolver Class:**
  * Main MIP solver using branch-and-cut with LP relaxations.
  *
