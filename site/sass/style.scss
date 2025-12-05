@@ -84,6 +84,12 @@ header {
                 text-decoration: none;
                 &:hover { color: var(--accent-light); }
             }
+
+            .donate-link {
+                color: #f5a623;
+                font-weight: 500;
+                &:hover { color: #ffd700; }
+            }
         }
 
         .search-container {
