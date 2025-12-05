@@ -160,7 +160,7 @@ concepts:
     relationships:
       - { type: requires, target: simplex_method }
       - { type: requires, target: LP_duality }
-      - { type: implemented_in, target: "Clp/ClpDualRowSteepest.hpp" }
+      - { type: implemented_in, target: "Clp/src/ClpDualRowSteepest.hpp" }
 
   - id: primal_simplex
     name: Primal Simplex Method
@@ -172,7 +172,7 @@ concepts:
       Start with feasible solution, pivot to improve objective.
     relationships:
       - { type: requires, target: simplex_method }
-      - { type: implemented_in, target: "Clp/ClpPrimalColumnSteepest.hpp" }
+      - { type: implemented_in, target: "Clp/src/ClpPrimalColumnSteepest.hpp" }
 
   - id: interior_point_method
     name: Interior Point Method
@@ -194,7 +194,7 @@ concepts:
       - { type: requires, target: barrier_function }
       - { type: requires, target: KKT_conditions }
       - { type: alternative_to, target: simplex_method }
-      - { type: implemented_in, target: "Ipopt/IpIpoptAlg.hpp" }
+      - { type: implemented_in, target: "Ipopt/src/Algorithm/IpIpoptAlg.hpp" }
 
   - id: newton_method
     name: Newton's Method
@@ -230,7 +230,7 @@ concepts:
       - { type: requires, target: LP_relaxation }
       - { type: requires, target: branching }
       - { type: requires, target: node_selection }
-      - { type: implemented_in, target: "Cbc/CbcModel.hpp" }
+      - { type: implemented_in, target: "Cbc/src/CbcModel.hpp" }
 
   - id: spatial_branch_and_bound
     name: Spatial Branch and Bound
@@ -246,7 +246,7 @@ concepts:
       - { type: requires, target: convexification }
       - { type: requires, target: bound_tightening }
       - { type: solves, target: nonconvex_optimization }
-      - { type: implemented_in, target: "Couenne/CouenneObject.hpp" }
+      - { type: implemented_in, target: "Couenne/src/branch/CouenneObject.hpp" }
 
   - id: outer_approximation
     name: Outer Approximation
@@ -263,7 +263,7 @@ concepts:
       - { type: solves, target: mixed_integer_nonlinear_programming }
       - { type: requires, target: convexity }
       - { type: requires, target: linear_programming }
-      - { type: implemented_in, target: "Bonmin/BonOACutGenerator2.hpp" }
+      - { type: implemented_in, target: "Bonmin/src/Algorithms/OaGenerators/BonOACutGenerator2.hpp" }
 
   - id: cutting_planes
     name: Cutting Planes
@@ -294,7 +294,7 @@ concepts:
     relationships:
       - { type: requires, target: cutting_planes }
       - { type: requires, target: basis }
-      - { type: implemented_in, target: "Cgl/CglGomory.hpp" }
+      - { type: implemented_in, target: "Cgl/src/CglGomory/CglGomory.hpp" }
 
   - id: MIR_cuts
     name: Mixed-Integer Rounding Cuts
@@ -306,7 +306,7 @@ concepts:
       If x + y ≤ 2.7 and y is integer, then we can derive x + y ≤ 2.
     relationships:
       - { type: requires, target: cutting_planes }
-      - { type: implemented_in, target: "Cgl/CglMixedIntegerRounding.hpp" }
+      - { type: implemented_in, target: "Cgl/src/CglMixedIntegerRounding/CglMixedIntegerRounding.hpp" }
 
   - id: active_set_method
     name: Active Set Method
@@ -331,7 +331,7 @@ concepts:
       Round fractional solution to integers, then find closest LP-feasible point. Repeat until integer-feasible.
     relationships:
       - { type: solves, target: mixed_integer_programming }
-      - { type: implemented_in, target: "Bonmin/BonHeuristicFPump.hpp" }
+      - { type: implemented_in, target: "Bonmin/src/CbcBonmin/Heuristics/BonHeuristicFPump.hpp" }
 
   # ============================================================================
   # OPTIMALITY CONDITIONS & THEORY
@@ -478,7 +478,7 @@ concepts:
       A vertex of the polytope corresponds to a basis. Simplex moves between bases.
     relationships:
       - { type: required_by, target: simplex_method }
-      - { type: implemented_in, target: "CoinUtils/CoinFactorization.hpp" }
+      - { type: implemented_in, target: "CoinUtils/src/CoinFactorization.hpp" }
 
   # ============================================================================
   # TECHNIQUES
@@ -499,7 +499,7 @@ concepts:
     relationships:
       - { type: required_by, target: simplex_method }
       - { type: requires, target: sparsity }
-      - { type: implemented_in, target: "CoinUtils/CoinFactorization.hpp" }
+      - { type: implemented_in, target: "CoinUtils/src/CoinFactorization.hpp" }
 
   - id: presolve
     name: Presolve
@@ -511,8 +511,8 @@ concepts:
     intuition: >
       Clean up the problem first. Often dramatically reduces size and improves conditioning.
     relationships:
-      - { type: implemented_in, target: "CoinUtils/CoinPresolveMatrix.hpp" }
-      - { type: implemented_in, target: "Clp/ClpPresolve.hpp" }
+      - { type: implemented_in, target: "CoinUtils/src/CoinPresolveMatrix.hpp" }
+      - { type: implemented_in, target: "Clp/src/ClpPresolve.hpp" }
 
   - id: warm_start
     name: Warm Start
@@ -524,8 +524,8 @@ concepts:
     intuition: >
       Don't start from scratch. Use the old answer as a starting point for the modified problem.
     relationships:
-      - { type: implemented_in, target: "CoinUtils/CoinWarmStart.hpp" }
-      - { type: implemented_in, target: "Clp/ClpSimplex.hpp" }
+      - { type: implemented_in, target: "CoinUtils/src/CoinWarmStart.hpp" }
+      - { type: implemented_in, target: "Clp/src/ClpSimplex.hpp" }
 
   - id: bound_tightening
     name: Bound Tightening
@@ -539,7 +539,7 @@ concepts:
     relationships:
       - { type: required_by, target: spatial_branch_and_bound }
       - { type: contains, target: FBBT }
-      - { type: implemented_in, target: "Couenne/CouenneFixPoint.hpp" }
+      - { type: implemented_in, target: "Couenne/src/bound_tightening/CouenneFixPoint.hpp" }
 
   - id: FBBT
     name: Feasibility-Based Bound Tightening
@@ -551,7 +551,7 @@ concepts:
       Local constraint propagation—what can I infer about each variable from its immediate constraints?
     relationships:
       - { type: requires, target: bound_tightening }
-      - { type: implemented_in, target: "Couenne/CouenneFixPoint.hpp" }
+      - { type: implemented_in, target: "Couenne/src/bound_tightening/CouenneFixPoint.hpp" }
 
   - id: branching
     name: Branching
@@ -564,7 +564,7 @@ concepts:
       Which split will help most? Try a few candidates (expensive) or use past experience (cheap).
     relationships:
       - { type: required_by, target: branch_and_bound }
-      - { type: implemented_in, target: "Cbc/CbcBranchActual.hpp" }
+      - { type: implemented_in, target: "Cbc/src/CbcBranchActual.hpp" }
 
   - id: node_selection
     name: Node Selection
@@ -576,7 +576,7 @@ concepts:
       Explore the tree strategically. Best-bound proves optimality; depth-first finds solutions.
     relationships:
       - { type: required_by, target: branch_and_bound }
-      - { type: implemented_in, target: "Cbc/CbcCompareActual.hpp" }
+      - { type: implemented_in, target: "Cbc/src/CbcCompareActual.hpp" }
 
   - id: linear_system_solve
     name: Linear System Solve
