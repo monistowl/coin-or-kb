@@ -11,19 +11,36 @@
  * AbcSimplex. Handles basis factorization and FTRAN/BTRAN operations
  * with ABC's optimized data structures.
  *
- * Key operations:
- * - factorize(): Factor the basis matrix from AbcSimplex
- * - updateColumnFT(): Forward transformation with FT update
- * - updateColumnTranspose(): Backward transformation (BTRAN)
- * - checkReplacePart1/2, replaceColumnPart3(): Basis updates
+ * @algorithm ABC Basis Factorization:
+ * Maintains B = LU decomposition for efficient simplex operations.
  *
- * Factorization type selection:
- * - goDenseThreshold_: Use dense factorization below this size
- * - goSmallThreshold_: Use small/optimized factorization
- * - goLongThreshold_: Use long/ordered factorization above this
+ * @algorithm Core Operations:
  *
- * The implementation can delegate to either CoinAbcAnyFactorization
- * (ABC-optimized) or standard CoinFactorization based on build config.
+ * 1. FACTORIZE: B → LU with partial pivoting
+ *    Called when basis changes too much or numerical errors accumulate.
+ *    Threshold-based: maximumPivots_ controls refactorization frequency.
+ *
+ * 2. FTRAN (Forward Transformation): Solve Bx = b
+ *    updateColumn(): L⁻¹b, then U⁻¹(L⁻¹b)
+ *    Used to compute: entering column in tableau = B⁻¹·A_j
+ *
+ * 3. BTRAN (Backward Transformation): Solve B'y = c
+ *    updateColumnTranspose(): U⁻ᵀc, then L⁻ᵀ(U⁻ᵀc)
+ *    Used to compute: dual variables π = c_B'·B⁻¹
+ *
+ * 4. BASIS UPDATE: Replace column in B (Forrest-Tomlin)
+ *    checkReplacePart1/2, replaceColumnPart3(): Rank-1 update of LU
+ *    Avoids full refactorization after each pivot.
+ *
+ * @algorithm Factorization Type Selection:
+ *   - Dense (goDenseThreshold_): For small m, use LAPACK-style
+ *   - Small (goSmallThreshold_): Optimized for cache efficiency
+ *   - Standard: General sparse LU
+ *   - Long (goLongThreshold_): Ordered for very large problems
+ *
+ * @complexity Factorization: O(nnz(L)·nnz(U)) depends on fill-in
+ * FTRAN/BTRAN: O(nnz(L)+nnz(U)) per solve
+ * Update: O(nnz(eta)) per rank-1 update
  *
  * @see AbcSimplex which uses this factorization
  * @see ClpFactorization for the standard (non-ABC) wrapper

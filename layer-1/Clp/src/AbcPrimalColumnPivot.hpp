@@ -10,13 +10,35 @@
  * Defines the interface for choosing which column (nonbasic variable)
  * should enter the basis in primal simplex iterations within ABC.
  *
- * Key virtual methods:
- * - pivotColumn(): Select column with best (most negative) reduced cost
- * - updateWeights(): Update edge norms after pivot
- * - saveWeights(): Persist weights across factorizations
+ * @algorithm Primal Simplex Column Selection Interface:
+ * In primal simplex, we first choose the ENTERING variable (column),
+ * then perform ratio test to find LEAVING variable (row).
  *
- * Uses CoinPartitionedVector for parallel-safe operations across
- * multiple column blocks.
+ * @algorithm Column Selection Strategies:
+ *
+ * 1. DANTZIG (AbcPrimalColumnDantzig):
+ *    j* = argmin_j { c̄_j }
+ *    O(n) scan, simple, no weights to maintain.
+ *
+ * 2. STEEPEST EDGE (AbcPrimalColumnSteepest):
+ *    j* = argmin_j { c̄_j / ||ā_j||² }
+ *    where ā_j = B⁻¹·A_j is the tableau column.
+ *    Normalizes by "edge length" for better geometric progress.
+ *    Requires O(m) weight update per iteration.
+ *
+ * 3. DEVEX (AbcPrimalColumnSteepest with mode):
+ *    Approximate steepest edge using reference framework.
+ *    Cheaper updates than full steepest edge.
+ *
+ * @algorithm ABC Partitioning:
+ * CoinPartitionedVector splits columns into blocks for:
+ *   - Parallel scanning of reduced costs
+ *   - Cache-friendly memory access
+ *   - SIMD vectorization within blocks
+ *
+ * @algorithm Weight Update Protocol:
+ *   updateWeights(): After pivot, update ||ā_j||² estimates
+ *   saveWeights(): Preserve weights across refactorizations
  *
  * @see AbcPrimalColumnDantzig for simple most-negative reduced cost
  * @see AbcPrimalColumnSteepest for steepest edge/Devex variants

@@ -8,15 +8,34 @@
  * @author John Forrest
  *
  * Template-instantiation header that creates multiple factorization variants
- * from CoinAbcBaseFactorization using preprocessor macros:
+ * from CoinAbcBaseFactorization using preprocessor macros.
  *
- * - CoinAbcFactorization: Standard double precision
- * - CoinAbcLongFactorization: Long double for extra precision (COIN_BIG_DOUBLE=1)
- * - CoinAbcSmallFactorization: Optimized for small matrices (ABC_SMALL=4)
- * - CoinAbcOrderedFactorization: Ordered variant
+ * @algorithm ABC Factorization Variants:
+ * Different precision/optimization trade-offs for different problem sizes.
  *
- * All inherit the same SIMD-optimized scatter/gather operations and
- * parallelized factorization from CoinAbcBaseFactorization.
+ * @algorithm VARIANTS:
+ *
+ * 1. CoinAbcFactorization: Standard double precision (64-bit)
+ *    Default choice for most problems.
+ *
+ * 2. CoinAbcLongFactorization: Extended precision (80-bit on x86)
+ *    COIN_BIG_DOUBLE=1 enables long double arithmetic.
+ *    Use when: Ill-conditioned bases cause numerical instability.
+ *    Cost: ~2× slower than standard double.
+ *
+ * 3. CoinAbcSmallFactorization: Cache-optimized for small m
+ *    ABC_SMALL=4 enables dense-like storage patterns.
+ *    Use when: m < ~200 rows, dense or nearly dense.
+ *    Benefit: Better cache utilization than sparse format.
+ *
+ * 4. CoinAbcOrderedFactorization: For large ordered problems
+ *    Maintains column ordering for better parallelism.
+ *    Use when: Very large sparse problems with structure.
+ *
+ * @algorithm SIMD Optimizations (all variants):
+ * - Vectorized scatter/gather for L and U updates
+ * - Aligned memory for AVX operations
+ * - Parallel factorization via ABC_PARALLEL
  *
  * @see CoinAbcBaseFactorization for the actual implementation
  * @see CoinAbcHelperFunctions for SIMD kernels

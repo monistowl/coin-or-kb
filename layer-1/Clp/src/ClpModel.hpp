@@ -11,6 +11,27 @@
  * This is the base class inherited by ClpSimplex and ClpInterior - it knows about
  * problem data but nothing about solution algorithms.
  *
+ * @algorithm Matrix Scaling for Numerical Stability:
+ * Before solving, scale rows and columns to improve conditioning.
+ *
+ * @algorithm SCALING MODES (scalingMode parameter):
+ *   0: Off - no scaling
+ *   1: Equilibrium - scale so max |a_ij| = 1 in each row/col
+ *   2: Geometric - row×col scaling to balance row/col norms
+ *   3: Auto - Clp chooses based on matrix properties
+ *   4: Auto for B&B - like 3 but preserves integrality
+ *
+ * @math EQUILIBRIUM SCALING:
+ *   r_i = 1 / max_j |a_ij|  (row scales)
+ *   c_j = 1 / max_i |a_ij|  (column scales)
+ *   Scaled problem: min c̃'x̃  s.t. Ãx̃ = b̃
+ *   where: ã_ij = r_i · a_ij · c_j
+ *
+ * Scaling improves:
+ *   - Basis condition number → fewer numerical errors
+ *   - Reduced cost computation accuracy
+ *   - Interior point convergence
+ *
  * Key responsibilities:
  * - Problem loading from various formats (MPS, GMPL, CoinModel, raw arrays)
  * - Row/column manipulation (add, delete, modify bounds)
