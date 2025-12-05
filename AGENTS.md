@@ -17,7 +17,7 @@ https://monistowl.github.io/coin-or-kb/api/annotations.json
 ```
 
 **Example prompt for any LLM:**
-> Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 1,197 files across 28 libraries.
+> Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 1,902 files across 28 libraries (679 with semantic annotations).
 
 ### Local Clone (For Development)
 
@@ -65,7 +65,9 @@ For persistent access via Claude Desktop or other MCP clients:
 - `search_math(query)` — Find mathematical concepts
 - `get_library(name)` — Library overview with annotated files
 - `get_file(library, file)` — Full annotations for a file
-- `list_algorithms()` — All 100+ documented algorithms
+- `list_algorithms()` — All documented algorithms
+- `query_concepts(query)` — Search the knowledge graph (41 concepts, 1,471 relationships)
+- `get_algorithm_guidance(name)` — Detailed guidance for 13 key algorithms
 - `get_stats()` — Knowledge base statistics
 
 ### JSON API
@@ -83,7 +85,7 @@ with open('site/static/api/annotations.json') as f:
 
 ### What You Can Learn
 
-The KB documents 1,197 files across 28 libraries covering:
+The KB documents 1,902 files across 28 libraries (679 with semantic annotations) covering:
 
 - **Linear Programming**: Simplex method, interior point, presolve
 - **Mixed-Integer Programming**: Branch-and-bound, cutting planes, heuristics

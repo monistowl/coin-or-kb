@@ -26,9 +26,11 @@ https://monistowl.github.io/coin-or-kb/api/annotations.json
 > Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and help me understand how COIN-OR implements LU factorization for the simplex method.
 
 **Hosted endpoints:**
-- **Full API**: https://monistowl.github.io/coin-or-kb/api/annotations.json (1.8 MB)
-- **File Index**: https://monistowl.github.io/coin-or-kb/api/files.json
-- **Algorithm Reference**: https://monistowl.github.io/coin-or-kb/algorithms/
+- **Full API**: https://monistowl.github.io/coin-or-kb/api/annotations.json (2.1 MB)
+- **Knowledge Graph**: https://monistowl.github.io/coin-or-kb/api/knowledge-graph/index.json
+- **Learning Paths**: https://monistowl.github.io/coin-or-kb/learning-paths/
+- **Source Browser**: https://monistowl.github.io/coin-or-kb/browser/
+- **Derivations**: https://monistowl.github.io/coin-or-kb/derivations/
 
 ### Option 2: Local Clone (For Development)
 
@@ -123,23 +125,35 @@ coin-or-kb/
 
 ## Annotation Progress
 
-| Layer | Status | Libraries | Pass 1 | Pass 2 |
-|-------|--------|-----------|--------|--------|
-| Layer 0 | **Pass 2 Complete** | CoinUtils, SuiteSparse | 77 files | 43 files |
-| Layer 1 | Pass 1 Complete | Osi, Clp, CppAD, qpOASES | 105 files | - |
-| Layer 2 | Pass 1 Complete | Cgl, Cbc, Ipopt, ADOL-C | 275 files | - |
-| Layer 3 | Pass 1 Complete | 10 libraries | 318 files | - |
-| Layer 4 | Pass 1 In Progress | HiGHS + 10 others | 422 files | - |
+| Layer | Status | Libraries | Files | Pass 2 |
+|-------|--------|-----------|-------|--------|
+| Layer 0 | **Pass 2 In Progress** | CoinUtils, SuiteSparse | 77 | 43 |
+| Layer 1 | **Pass 2 In Progress** | Osi, Clp, CppAD, qpOASES | 207 | 87 |
+| Layer 2 | **Pass 2 In Progress** | Cgl, Cbc, Ipopt, ADOL-C | 536 | 213 |
+| Layer 3 | Pass 2 In Progress | 10 libraries | 572 | 254 |
+| Layer 4 | Pass 1 Complete | HiGHS + 10 others | 510 | 82 |
 
-**Total:** 1,197 annotated files across 28 libraries
+**Total:** 1,902 annotated files, 679 with semantic (Pass 2) annotations across 28 libraries
+
+## Knowledge Graph
+
+The knowledge base includes a **concept graph** connecting algorithms, problem classes, and implementations:
+
+- **41 concepts** (LP, MIP, NLP, simplex, interior point, branch-and-bound, etc.)
+- **1,471 relationships** (requires, solves, implemented_in, etc.)
+- **Algorithm guidance** for 13 key algorithms with when-to-use, gotchas, and references
+
+**Endpoints:**
+- `api/knowledge-graph/index.json` - Full graph with concepts and relationships
+- `api/knowledge-graph/categories.json` - Concepts by category
 
 ## JSON API
 
 The knowledge base is available as a machine-readable JSON API for AI agents and MCP servers:
 
 ```
-site/static/api/annotations.json      # Full API (1.8 MB, pretty-printed)
-site/static/api/annotations.min.json  # Minified (1.5 MB)
+site/static/api/annotations.json      # Full API (2.1 MB, pretty-printed)
+site/static/api/knowledge-graph/      # Concept graph and relationships
 ```
 
 **Structure:**
