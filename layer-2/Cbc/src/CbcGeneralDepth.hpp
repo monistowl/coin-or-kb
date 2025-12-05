@@ -1,6 +1,8 @@
 /**
  * @file CbcGeneralDepth.hpp
  * @brief Depth-limited partial evaluation branching
+ *
+ * @algorithm Lookahead Branching with Partial Evaluation
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

@@ -1,6 +1,8 @@
 /**
  * @file CbcSolver.hpp
  * @brief Top-level driver class for standalone CBC solver
+ *
+ * @algorithm Command-Line Driver with Scripting Support
  * Copyright (C) 2007, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

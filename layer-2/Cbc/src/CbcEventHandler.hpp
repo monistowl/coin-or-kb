@@ -1,6 +1,8 @@
 /**
  * @file CbcEventHandler.hpp
  * @brief Event handling and callbacks for Cbc
+ *
+ * @algorithm Callback Mechanism for B&C Control
  * Copyright (C) 2006, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

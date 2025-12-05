@@ -1,6 +1,8 @@
 /**
  * @file CbcStrategy.hpp
  * @brief Strategy pattern for configuring CbcModel components
+ *
+ * @algorithm Strategy Pattern for B&C Configuration
  * Copyright (C) 2005, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

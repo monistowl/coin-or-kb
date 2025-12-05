@@ -1,6 +1,8 @@
 /**
  * @file CbcFathom.hpp
  * @brief Fathoming methods to complete subproblems
+ *
+ * @algorithm Specialized Fathoming for Small Subproblems
  * Copyright (C) 2004, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

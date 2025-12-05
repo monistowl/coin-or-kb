@@ -1,6 +1,8 @@
 /**
  * @file CbcFullNodeInfo.hpp
  * @brief Complete subproblem state storage (typically for root node)
+ *
+ * @algorithm Full State Storage for Root Node
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

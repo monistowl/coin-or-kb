@@ -1,6 +1,8 @@
 /**
  * @file CbcNodeInfo.hpp
  * @brief Persistent information for recreating search tree nodes
+ *
+ * @algorithm Search Tree Node Reconstruction with Reference Counting
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

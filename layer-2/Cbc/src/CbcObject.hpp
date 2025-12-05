@@ -1,6 +1,8 @@
 /**
  * @file CbcObject.hpp
  * @brief Abstract base for branching entities (variables, SOS, etc.)
+ *
+ * @algorithm Branch-and-Bound: Branching Entity Interface
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

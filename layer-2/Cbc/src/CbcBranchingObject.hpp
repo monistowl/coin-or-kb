@@ -1,6 +1,8 @@
 /**
  * @file CbcBranchingObject.hpp
  * @brief Abstract base for branching actions
+ *
+ * @algorithm Branch-and-Bound: Branching Action Interface
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

@@ -1,6 +1,8 @@
 /**
  * @file CbcSubProblem.hpp
  * @brief Compact subproblem state for diving heuristics
+ *
+ * @algorithm Lightweight Subproblem State for Diving
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *
