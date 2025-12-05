@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinDenseVector.json"
 
 Dense Vector.
 
-<div class="api-link"><a href="/api/coinutils/CoinDenseVector.json">JSON API</a></div>
 
 ## Description
 

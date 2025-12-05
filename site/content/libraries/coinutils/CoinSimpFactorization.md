@@ -9,7 +9,6 @@ header_file = "layer-0/CoinUtils/src/CoinSimpFactorization.hpp"
 api_url = "/api/coinutils/CoinSimpFactorization.json"
 +++
 
-<div class="api-link"><a href="/api/coinutils/CoinSimpFactorization.json">JSON API</a></div>
 
 ## Inheritance
 

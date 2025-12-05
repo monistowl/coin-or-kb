@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinCliqueExtender.json"
 
 A class to extend cliques.
 
-<div class="api-link"><a href="/api/coinutils/CoinCliqueExtender.json">JSON API</a></div>
 
 ## Description
 

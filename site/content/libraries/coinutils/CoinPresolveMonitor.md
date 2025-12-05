@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinPresolveMonitor.json"
 
 Monitor a row or column for modification.
 
-<div class="api-link"><a href="/api/coinutils/CoinPresolveMonitor.json">JSON API</a></div>
 
 ## Description
 

@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinFileOutput.json"
 
 Abstract base class for file output classes.
 
-<div class="api-link"><a href="/api/coinutils/CoinFileOutput.json">JSON API</a></div>
 
 ## Inheritance
 

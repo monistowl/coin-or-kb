@@ -9,7 +9,6 @@ header_file = "layer-0/CoinUtils/src/CoinSort.hpp"
 api_url = "/api/coinutils/CoinTriple.json"
 +++
 
-<div class="api-link"><a href="/api/coinutils/CoinTriple.json">JSON API</a></div>
 
 ## Public Methods
 

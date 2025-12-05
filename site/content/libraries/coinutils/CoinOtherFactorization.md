@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinOtherFactorization.json"
 
 Abstract base class which also has some scalars so can be used from Dense or Simp.
 
-<div class="api-link"><a href="/api/coinutils/CoinOtherFactorization.json">JSON API</a></div>
 
 Derived classes: `CoinDenseFactorization`, `CoinOslFactorization`, `CoinSimpFactorization`
 

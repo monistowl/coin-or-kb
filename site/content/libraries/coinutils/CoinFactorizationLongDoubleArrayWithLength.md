@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinFactorizationLongDoubleArrayWithLength.json"
 
 CoinFactorizationLongDouble * version.
 
-<div class="api-link"><a href="/api/coinutils/CoinFactorizationLongDoubleArrayWithLength.json">JSON API</a></div>
 
 ## Inheritance
 

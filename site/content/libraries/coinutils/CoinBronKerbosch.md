@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinBronKerbosch.json"
 
 Class responsible for finding cliques with weights greater than a certain threshold.
 
-<div class="api-link"><a href="/api/coinutils/CoinBronKerbosch.json">JSON API</a></div>
 
 ## Description
 

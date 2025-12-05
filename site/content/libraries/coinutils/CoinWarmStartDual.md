@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinWarmStartDual.json"
 
 WarmStart information that is only a dual vector.
 
-<div class="api-link"><a href="/api/coinutils/CoinWarmStartDual.json">JSON API</a></div>
 
 ## Inheritance
 

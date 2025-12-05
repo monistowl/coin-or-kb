@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinBuild.json"
 
 In many cases it is natural to build a model by adding one row at a time.
 
-<div class="api-link"><a href="/api/coinutils/CoinBuild.json">JSON API</a></div>
 
 ## Description
 

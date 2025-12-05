@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinConflictGraph.json"
 
 Base class for Conflict Graph: a conflict graph is a structure that stores conflicts between binary variables.
 
-<div class="api-link"><a href="/api/coinutils/CoinConflictGraph.json">JSON API</a></div>
 
 Derived classes: `CoinDynamicConflictGraph`, `CoinStaticConflictGraph`
 

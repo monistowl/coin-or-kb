@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinFirstAbsLess_2.json"
 
 Function operator.
 
-<div class="api-link"><a href="/api/coinutils/CoinFirstAbsLess_2.json">JSON API</a></div>
 
 ## Description
 

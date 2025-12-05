@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinMessage.json"
 
 The standard set of Coin messages.
 
-<div class="api-link"><a href="/api/coinutils/CoinMessage.json">JSON API</a></div>
 
 ## Inheritance
 

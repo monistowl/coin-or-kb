@@ -9,7 +9,6 @@ header_file = "layer-0/CoinUtils/src/CoinModelUseful.hpp"
 api_url = "/api/coinutils/CoinYacc.json"
 +++
 
-<div class="api-link"><a href="/api/coinutils/CoinYacc.json">JSON API</a></div>
 
 ## Public Methods
 

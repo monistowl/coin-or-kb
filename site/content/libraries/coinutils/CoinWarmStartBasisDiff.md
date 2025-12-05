@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinWarmStartBasisDiff.json"
 
 A diff between two CoinWarmStartBasis objects.
 
-<div class="api-link"><a href="/api/coinutils/CoinWarmStartBasisDiff.json">JSON API</a></div>
 
 ## Inheritance
 

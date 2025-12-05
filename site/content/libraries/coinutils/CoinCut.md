@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinCut.json"
 
 Class for representing a cut.
 
-<div class="api-link"><a href="/api/coinutils/CoinCut.json">JSON API</a></div>
 
 ## Public Methods
 

@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinFileIOBase.json"
 
 Base class for FileIO classes.
 
-<div class="api-link"><a href="/api/coinutils/CoinFileIOBase.json">JSON API</a></div>
 
 Derived classes: `CoinFileInput`, `CoinFileOutput`
 

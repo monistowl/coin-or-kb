@@ -9,7 +9,6 @@ header_file = "layer-0/CoinUtils/src/CoinOslFactorization.hpp"
 api_url = "/api/coinutils/_EKKfactinfo.json"
 +++
 
-<div class="api-link"><a href="/api/coinutils/_EKKfactinfo.json">JSON API</a></div>
 
 ## Source
 

@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinModelTriple.json"
 
 for linked lists
 
-<div class="api-link"><a href="/api/coinutils/CoinModelTriple.json">JSON API</a></div>
 
 ## Source
 

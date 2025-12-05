@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinTimer.json"
 
 This class implements a timer that also implements a tracing functionality.
 
-<div class="api-link"><a href="/api/coinutils/CoinTimer.json">JSON API</a></div>
 
 ## Description
 

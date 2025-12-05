@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinBigIndexArrayWithLength.json"
 
 CoinBigIndex * version.
 
-<div class="api-link"><a href="/api/coinutils/CoinBigIndexArrayWithLength.json">JSON API</a></div>
 
 ## Inheritance
 

@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinPackedMatrix.json"
 
 Sparse Matrix Base Class.
 
-<div class="api-link"><a href="/api/coinutils/CoinPackedMatrix.json">JSON API</a></div>
 
 ## Description
 

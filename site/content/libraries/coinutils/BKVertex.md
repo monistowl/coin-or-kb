@@ -11,7 +11,6 @@ api_url = "/api/coinutils/BKVertex.json"
 
 Struct used to represent a weighted-vertex.
 
-<div class="api-link"><a href="/api/coinutils/BKVertex.json">JSON API</a></div>
 
 ## Source
 

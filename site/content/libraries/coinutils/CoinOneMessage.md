@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinOneMessage.json"
 
 Class for one massaged message.
 
-<div class="api-link"><a href="/api/coinutils/CoinOneMessage.json">JSON API</a></div>
 
 ## Description
 

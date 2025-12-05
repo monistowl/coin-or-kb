@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinOddWheelSeparator.json"
 
 Class for separating violated odd-cycles.
 
-<div class="api-link"><a href="/api/coinutils/CoinOddWheelSeparator.json">JSON API</a></div>
 
 ## Description
 

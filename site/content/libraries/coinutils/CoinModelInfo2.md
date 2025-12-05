@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinModelInfo2.json"
 
 This is a model which is made up of Coin(Structured)Model blocks.
 
-<div class="api-link"><a href="/api/coinutils/CoinModelInfo2.json">JSON API</a></div>
 
 ## Public Methods
 

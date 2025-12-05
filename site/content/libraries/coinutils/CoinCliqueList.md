@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinCliqueList.json"
 
 A class to store a sequential list of cliques.
 
-<div class="api-link"><a href="/api/coinutils/CoinCliqueList.json">JSON API</a></div>
 
 Derived classes: `CoinCliqueSet`
 

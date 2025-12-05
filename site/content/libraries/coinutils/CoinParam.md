@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinParam.json"
 
 A base class for keyword value command line parameters.
 
-<div class="api-link"><a href="/api/coinutils/CoinParam.json">JSON API</a></div>
 
 ## Description
 

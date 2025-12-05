@@ -11,7 +11,6 @@ api_url = "/api/coinutils/dropped_zero.json"
 
 Tracking information for an explicit zero coefficient.
 
-<div class="api-link"><a href="/api/coinutils/dropped_zero.json">JSON API</a></div>
 
 ## Description
 

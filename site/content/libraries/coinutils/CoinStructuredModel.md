@@ -9,7 +9,6 @@ header_file = "layer-0/CoinUtils/src/CoinStructuredModel.hpp"
 api_url = "/api/coinutils/CoinStructuredModel.json"
 +++
 
-<div class="api-link"><a href="/api/coinutils/CoinStructuredModel.json">JSON API</a></div>
 
 ## Inheritance
 

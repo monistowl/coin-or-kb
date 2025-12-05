@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinWarmStart.json"
 
 Abstract base class for warm start information.
 
-<div class="api-link"><a href="/api/coinutils/CoinWarmStart.json">JSON API</a></div>
 
 Derived classes: `CoinWarmStartVector< double >`, `CoinWarmStartVector< U >`, `CoinWarmStartBasis`, `CoinWarmStartDual`, `CoinWarmStartPrimalDual`, `CoinWarmStartVector< T >`, `CoinWarmStartVectorPair< T, U >`
 

@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinSearchTreeCompareDepth.json"
 
 Depth First Search.
 
-<div class="api-link"><a href="/api/coinutils/CoinSearchTreeCompareDepth.json">JSON API</a></div>
 
 ## Public Methods
 

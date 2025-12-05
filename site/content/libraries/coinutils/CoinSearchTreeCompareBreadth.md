@@ -9,7 +9,6 @@ header_file = "layer-0/CoinUtils/src/CoinSearchTree.hpp"
 api_url = "/api/coinutils/CoinSearchTreeCompareBreadth.json"
 +++
 
-<div class="api-link"><a href="/api/coinutils/CoinSearchTreeCompareBreadth.json">JSON API</a></div>
 
 ## Public Methods
 

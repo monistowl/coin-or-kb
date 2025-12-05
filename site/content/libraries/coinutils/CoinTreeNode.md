@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinTreeNode.json"
 
 A class from which the real tree nodes should be derived from.
 
-<div class="api-link"><a href="/api/coinutils/CoinTreeNode.json">JSON API</a></div>
 
 ## Description
 

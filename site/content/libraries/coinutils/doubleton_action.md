@@ -11,7 +11,6 @@ api_url = "/api/coinutils/doubleton_action.json"
 
 Solve ax+by=c for y and substitute y out of the problem.
 
-<div class="api-link"><a href="/api/coinutils/doubleton_action.json">JSON API</a></div>
 
 ## Inheritance
 

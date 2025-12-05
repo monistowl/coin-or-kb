@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinCutPool.json"
 
 Class for storing a pool of cuts, removing the repeated and dominated ones.
 
-<div class="api-link"><a href="/api/coinutils/CoinCutPool.json">JSON API</a></div>
 
 ## Description
 

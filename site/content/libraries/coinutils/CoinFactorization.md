@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinFactorization.json"
 
 This deals with Factorization and Updates.
 
-<div class="api-link"><a href="/api/coinutils/CoinFactorization.json">JSON API</a></div>
 
 ## Description
 

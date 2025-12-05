@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinMessages.json"
 
 Class to hold and manipulate an array of massaged messages.
 
-<div class="api-link"><a href="/api/coinutils/CoinMessages.json">JSON API</a></div>
 
 Derived classes: `CoinMessage`
 

@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinModelHash2.json"
 
 For int,int hashing.
 
-<div class="api-link"><a href="/api/coinutils/CoinModelHash2.json">JSON API</a></div>
 
 ## Public Methods
 

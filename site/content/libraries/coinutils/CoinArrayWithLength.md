@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinArrayWithLength.json"
 
 Pointer with length in bytes.
 
-<div class="api-link"><a href="/api/coinutils/CoinArrayWithLength.json">JSON API</a></div>
 
 Derived classes: `CoinArbitraryArrayWithLength`, `CoinBigIndexArrayWithLength`, `CoinDoubleArrayWithLength`, `CoinFactorizationDoubleArrayWithLength`, `CoinFactorizationLongDoubleArrayWithLength`, `CoinIntArrayWithLength`, `CoinUnsignedIntArrayWithLength`, `CoinVoidStarArrayWithLength`
 

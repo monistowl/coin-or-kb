@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinWarmStartBasis.json"
 
 The default COIN simplex (basis-oriented) warm start class.
 
-<div class="api-link"><a href="/api/coinutils/CoinWarmStartBasis.json">JSON API</a></div>
 
 ## Inheritance
 

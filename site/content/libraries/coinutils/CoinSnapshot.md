@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinSnapshot.json"
 
 NON Abstract Base Class for interfacing with cut generators or branching code or ... It is designed to be snapshot of a problem at a node in tree.
 
-<div class="api-link"><a href="/api/coinutils/CoinSnapshot.json">JSON API</a></div>
 
 ## Description
 

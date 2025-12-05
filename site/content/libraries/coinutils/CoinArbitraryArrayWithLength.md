@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinArbitraryArrayWithLength.json"
 
 arbitrary version
 
-<div class="api-link"><a href="/api/coinutils/CoinArbitraryArrayWithLength.json">JSON API</a></div>
 
 ## Inheritance
 

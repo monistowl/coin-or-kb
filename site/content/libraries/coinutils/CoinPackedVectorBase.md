@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinPackedVectorBase.json"
 
 Abstract base class providing read-only access to sparse vectors.
 
-<div class="api-link"><a href="/api/coinutils/CoinPackedVectorBase.json">JSON API</a></div>
 
 Derived classes: `CoinPackedVector`, `CoinShallowPackedVector`
 

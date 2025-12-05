@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinUnsignedIntArrayWithLength.json"
 
 unsigned int * version
 
-<div class="api-link"><a href="/api/coinutils/CoinUnsignedIntArrayWithLength.json">JSON API</a></div>
 
 ## Inheritance
 

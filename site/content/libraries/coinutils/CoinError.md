@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinError.json"
 
 Exception class carrying context about where and why an error occurred.
 
-<div class="api-link"><a href="/api/coinutils/CoinError.json">JSON API</a></div>
 
 ## Description
 

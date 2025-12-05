@@ -11,7 +11,6 @@ api_url = "/api/coinutils/drop_zero_coefficients_action.json"
 
 Removal of explicit zeros.
 
-<div class="api-link"><a href="/api/coinutils/drop_zero_coefficients_action.json">JSON API</a></div>
 
 ## Inheritance
 

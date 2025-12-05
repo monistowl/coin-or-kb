@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinModel.json"
 
 This is a simple minded model which is stored in a format which makes it easier to construct and modify but not efficient for algorithms.
 
-<div class="api-link"><a href="/api/coinutils/CoinModel.json">JSON API</a></div>
 
 ## Inheritance
 

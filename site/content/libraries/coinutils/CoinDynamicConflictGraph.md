@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinDynamicConflictGraph.json"
 
 This a a conflict graph where conflicts can be added on the fly, not optimized for memory usage.
 
-<div class="api-link"><a href="/api/coinutils/CoinDynamicConflictGraph.json">JSON API</a></div>
 
 ## Inheritance
 

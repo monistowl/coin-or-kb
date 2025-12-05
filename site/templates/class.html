@@ -21,7 +21,7 @@
 
         {% if page.extra.api_url %}
         <div class="api-link">
-            <a href="{{ page.extra.api_url }}">JSON API</a>
+            <a href="{{ get_url(path=page.extra.api_url) }}">JSON API</a>
         </div>
         {% endif %}
     </header>

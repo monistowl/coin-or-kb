@@ -11,7 +11,6 @@ api_url = "/api/coinutils/coinOwned.json"
 
 To say whether arrays etc are owned by CoinSnapshot.
 
-<div class="api-link"><a href="/api/coinutils/coinOwned.json">JSON API</a></div>
 
 ## Source
 

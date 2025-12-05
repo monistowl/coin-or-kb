@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinPresolveMatrix.json"
 
 Augments CoinPrePostsolveMatrix with information about the problem that is only needed during presolve.
 
-<div class="api-link"><a href="/api/coinutils/CoinPresolveMatrix.json">JSON API</a></div>
 
 ## Inheritance
 

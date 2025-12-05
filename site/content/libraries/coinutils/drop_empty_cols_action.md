@@ -11,7 +11,6 @@ api_url = "/api/coinutils/drop_empty_cols_action.json"
 
 Physically removes empty columns in presolve, and reinserts empty columns in postsolve.
 
-<div class="api-link"><a href="/api/coinutils/drop_empty_cols_action.json">JSON API</a></div>
 
 ## Inheritance
 

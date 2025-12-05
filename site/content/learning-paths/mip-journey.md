@@ -135,7 +135,7 @@ Cbc tracks bounds in `CbcModel`. The method `getBestPossibleObjValue()` returns 
 Branch-and-bound systematically explores the solution space by dividing it into smaller subproblems.
 
 <div class="diagram-container">
-<img src="/diagrams/branch-and-bound-tree.svg" alt="Branch-and-bound tree example" class="algorithm-diagram">
+<img src="../diagrams/branch-and-bound-tree.svg" alt="Branch-and-bound tree example" class="algorithm-diagram">
 </div>
 
 ### The Algorithm

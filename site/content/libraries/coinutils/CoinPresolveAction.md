@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinPresolveAction.json"
 
 Abstract base class of all presolve routines.
 
-<div class="api-link"><a href="/api/coinutils/CoinPresolveAction.json">JSON API</a></div>
 
 Derived classes: `do_tighten_action`, `doubleton_action`, `drop_empty_cols_action`, `drop_empty_rows_action`, `drop_zero_coefficients_action`, `dupcol_action`, `duprow3_action`, `duprow_action`, `forcing_constraint_action`, `gubrow_action`, `implied_free_action`, `isolated_constraint_action`, `make_fixed_action`, `remove_dual_action`, `remove_fixed_action`, `slack_doubleton_action`, `slack_singleton_action`, `subst_constraint_action`, `tripleton_action`, `twoxtwo_action`, `useless_constraint_action`
 

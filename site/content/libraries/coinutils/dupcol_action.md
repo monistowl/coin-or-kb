@@ -11,7 +11,6 @@ api_url = "/api/coinutils/dupcol_action.json"
 
 Detect and remove duplicate columns.
 
-<div class="api-link"><a href="/api/coinutils/dupcol_action.json">JSON API</a></div>
 
 ## Inheritance
 

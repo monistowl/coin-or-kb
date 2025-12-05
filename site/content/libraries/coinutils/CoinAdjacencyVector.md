@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinAdjacencyVector.json"
 
 A class to store a (growable) list of neighbors for each node in a conflict graph.
 
-<div class="api-link"><a href="/api/coinutils/CoinAdjacencyVector.json">JSON API</a></div>
 
 ## Public Methods
 

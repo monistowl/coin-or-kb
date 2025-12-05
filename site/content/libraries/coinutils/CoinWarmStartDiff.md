@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinWarmStartDiff.json"
 
 Abstract base class for warm start diff objects.
 
-<div class="api-link"><a href="/api/coinutils/CoinWarmStartDiff.json">JSON API</a></div>
 
 Derived classes: `CoinWarmStartVectorDiff< double >`, `CoinWarmStartVectorDiff< U >`, `CoinWarmStartBasisDiff`, `CoinWarmStartDualDiff`, `CoinWarmStartPrimalDualDiff`, `CoinWarmStartVectorDiff< T >`, `CoinWarmStartVectorPairDiff< T, U >`
 

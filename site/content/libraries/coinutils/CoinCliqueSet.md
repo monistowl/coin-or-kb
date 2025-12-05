@@ -9,7 +9,6 @@ header_file = "layer-0/CoinUtils/src/CoinCliqueSet.hpp"
 api_url = "/api/coinutils/CoinCliqueSet.json"
 +++
 
-<div class="api-link"><a href="/api/coinutils/CoinCliqueSet.json">JSON API</a></div>
 
 ## Inheritance
 

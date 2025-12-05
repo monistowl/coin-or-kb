@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinPrePostsolveMatrix.json"
 
 Collects all the information about the problem that is needed in both presolve and postsolve.
 
-<div class="api-link"><a href="/api/coinutils/CoinPrePostsolveMatrix.json">JSON API</a></div>
 
 Derived classes: `CoinPostsolveMatrix`, `CoinPresolveMatrix`
 

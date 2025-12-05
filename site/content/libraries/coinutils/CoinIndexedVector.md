@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinIndexedVector.json"
 
 Indexed Vector.
 
-<div class="api-link"><a href="/api/coinutils/CoinIndexedVector.json">JSON API</a></div>
 
 Derived classes: `CoinPartitionedVector`
 

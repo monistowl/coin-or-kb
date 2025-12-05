@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinAbsFltEq.json"
 
 Equality to an absolute tolerance.
 
-<div class="api-link"><a href="/api/coinutils/CoinAbsFltEq.json">JSON API</a></div>
 
 ## Description
 

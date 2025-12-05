@@ -141,7 +141,7 @@ Branch-and-bound tree management.
 COIN-OR is organized in dependency layers. Higher layers build on lower ones.
 
 <div class="diagram-container">
-<img src="/diagrams/coin-or-layers.svg" alt="COIN-OR library architecture" class="architecture-diagram">
+<img src="diagrams/coin-or-layers.svg" alt="COIN-OR library architecture" class="architecture-diagram">
 </div>
 
 <details>

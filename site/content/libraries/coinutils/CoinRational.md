@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinRational.json"
 
 Simple rational number class with numerator and denominator.
 
-<div class="api-link"><a href="/api/coinutils/CoinRational.json">JSON API</a></div>
 
 ## Description
 

@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinPackedVector.json"
 
 Sparse Vector.
 
-<div class="api-link"><a href="/api/coinutils/CoinPackedVector.json">JSON API</a></div>
 
 ## Inheritance
 

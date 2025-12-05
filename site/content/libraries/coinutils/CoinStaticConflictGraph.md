@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinStaticConflictGraph.json"
 
 Static conflict graph, optimized for memory usage and query speed, not modifiable.
 
-<div class="api-link"><a href="/api/coinutils/CoinStaticConflictGraph.json">JSON API</a></div>
 
 ## Inheritance
 

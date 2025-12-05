@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinDoubleArrayWithLength.json"
 
 double * version
 
-<div class="api-link"><a href="/api/coinutils/CoinDoubleArrayWithLength.json">JSON API</a></div>
 
 ## Inheritance
 

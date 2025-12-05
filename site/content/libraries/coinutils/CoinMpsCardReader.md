@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinMpsCardReader.json"
 
 Very simple code for reading MPS data.
 
-<div class="api-link"><a href="/api/coinutils/CoinMpsCardReader.json">JSON API</a></div>
 
 ## Public Methods
 

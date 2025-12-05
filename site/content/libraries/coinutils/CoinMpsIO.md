@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinMpsIO.json"
 
 MPS IO Interface.
 
-<div class="api-link"><a href="/api/coinutils/CoinMpsIO.json">JSON API</a></div>
 
 ## Description
 

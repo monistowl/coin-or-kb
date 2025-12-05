@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinSearchTreeCompareBest.json"
 
 Best first search.
 
-<div class="api-link"><a href="/api/coinutils/CoinSearchTreeCompareBest.json">JSON API</a></div>
 
 ## Public Methods
 

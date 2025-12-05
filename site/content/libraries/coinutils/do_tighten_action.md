@@ -9,7 +9,6 @@ header_file = "layer-0/CoinUtils/src/CoinPresolveTighten.hpp"
 api_url = "/api/coinutils/do_tighten_action.json"
 +++
 
-<div class="api-link"><a href="/api/coinutils/do_tighten_action.json">JSON API</a></div>
 
 ## Inheritance
 

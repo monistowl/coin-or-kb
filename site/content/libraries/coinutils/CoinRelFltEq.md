@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinRelFltEq.json"
 
 Equality to a scaled (relative) tolerance.
 
-<div class="api-link"><a href="/api/coinutils/CoinRelFltEq.json">JSON API</a></div>
 
 ## Description
 

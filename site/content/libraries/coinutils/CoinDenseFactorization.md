@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinDenseFactorization.json"
 
 This deals with Factorization and Updates This is a simple dense version so other people can write a better one.
 
-<div class="api-link"><a href="/api/coinutils/CoinDenseFactorization.json">JSON API</a></div>
 
 ## Inheritance
 

@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinModelHashLink.json"
 
 for names and hashing
 
-<div class="api-link"><a href="/api/coinutils/CoinModelHashLink.json">JSON API</a></div>
 
 ## Source
 

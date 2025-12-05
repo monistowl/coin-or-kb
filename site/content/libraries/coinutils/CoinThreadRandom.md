@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinThreadRandom.json"
 
 Thread-local random number generator.
 
-<div class="api-link"><a href="/api/coinutils/CoinThreadRandom.json">JSON API</a></div>
 
 ## Description
 

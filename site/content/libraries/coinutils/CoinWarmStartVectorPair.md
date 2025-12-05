@@ -9,7 +9,6 @@ header_file = "layer-0/CoinUtils/src/CoinWarmStartVector.hpp"
 api_url = "/api/coinutils/CoinWarmStartVectorPair.json"
 +++
 
-<div class="api-link"><a href="/api/coinutils/CoinWarmStartVectorPair.json">JSON API</a></div>
 
 ## Inheritance
 

@@ -11,7 +11,6 @@ api_url = "/api/coinutils/drop_empty_rows_action.json"
 
 Physically removes empty rows in presolve, and reinserts empty rows in postsolve.
 
-<div class="api-link"><a href="/api/coinutils/drop_empty_rows_action.json">JSON API</a></div>
 
 ## Inheritance
 

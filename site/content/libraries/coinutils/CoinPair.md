@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinPair.json"
 
 An ordered pair.
 
-<div class="api-link"><a href="/api/coinutils/CoinPair.json">JSON API</a></div>
 
 ## Description
 

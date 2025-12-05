@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinShortestPath.json"
 
 Class that implements Dijkstra's algorithm for finding the shortest paths between nodes in a graph.
 
-<div class="api-link"><a href="/api/coinutils/CoinShortestPath.json">JSON API</a></div>
 
 ## Public Methods
 

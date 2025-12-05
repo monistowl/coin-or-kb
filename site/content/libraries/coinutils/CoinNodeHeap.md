@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinNodeHeap.json"
 
 Monotone heap.
 
-<div class="api-link"><a href="/api/coinutils/CoinNodeHeap.json">JSON API</a></div>
 
 ## Description
 

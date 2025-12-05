@@ -206,7 +206,7 @@ If all $\bar{c}_j \geq 0$ for minimization, we're optimal.
 ### The Primal Simplex Algorithm
 
 <div class="diagram-container">
-<img src="/diagrams/simplex-flowchart.svg" alt="Simplex algorithm flowchart" class="algorithm-diagram">
+<img src="../diagrams/simplex-flowchart.svg" alt="Simplex algorithm flowchart" class="algorithm-diagram">
 </div>
 
 <div class="step-by-step">

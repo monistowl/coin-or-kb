@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinMessageHandler.json"
 
 Base class for message handling.
 
-<div class="api-link"><a href="/api/coinutils/CoinMessageHandler.json">JSON API</a></div>
 
 ## Description
 

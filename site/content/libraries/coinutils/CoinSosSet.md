@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinSosSet.json"
 
 Very simple class for containing SOS set.
 
-<div class="api-link"><a href="/api/coinutils/CoinSosSet.json">JSON API</a></div>
 
 ## Inheritance
 

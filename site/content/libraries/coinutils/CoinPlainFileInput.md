@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinPlainFileInput.json"
 
 This reads plain text files.
 
-<div class="api-link"><a href="/api/coinutils/CoinPlainFileInput.json">JSON API</a></div>
 
 ## Inheritance
 

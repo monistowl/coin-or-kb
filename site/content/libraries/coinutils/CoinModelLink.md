@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinModelLink.json"
 
 This is for various structures/classes needed by CoinModel.
 
-<div class="api-link"><a href="/api/coinutils/CoinModelLink.json">JSON API</a></div>
 
 ## Description
 

@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinLpIO.json"
 
 Class to read and write Lp files.
 
-<div class="api-link"><a href="/api/coinutils/CoinLpIO.json">JSON API</a></div>
 
 ## Description
 

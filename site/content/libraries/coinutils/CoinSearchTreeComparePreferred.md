@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinSearchTreeComparePreferred.json"
 
 Function objects to compare search tree nodes.
 
-<div class="api-link"><a href="/api/coinutils/CoinSearchTreeComparePreferred.json">JSON API</a></div>
 
 ## Description
 

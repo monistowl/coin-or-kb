@@ -9,7 +9,6 @@ header_file = "layer-0/CoinUtils/src/CoinMpsIO.hpp"
 api_url = "/api/coinutils/CoinHashLink.json"
 +++
 
-<div class="api-link"><a href="/api/coinutils/CoinHashLink.json">JSON API</a></div>
 
 ## Source
 

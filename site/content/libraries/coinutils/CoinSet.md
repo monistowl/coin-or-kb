@@ -11,7 +11,6 @@ api_url = "/api/coinutils/CoinSet.json"
 
 Very simple class for containing data on set.
 
-<div class="api-link"><a href="/api/coinutils/CoinSet.json">JSON API</a></div>
 
 Derived classes: `CoinSosSet`
 
