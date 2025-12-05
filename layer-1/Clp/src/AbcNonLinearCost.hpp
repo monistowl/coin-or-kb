@@ -11,18 +11,38 @@
  * Tracks whether each variable is below lower, feasible, or above upper bound,
  * and computes appropriate penalty costs.
  *
- * Status encoding (4 bits original, 4 bits current):
- * - CLP_BELOW_LOWER (0): Below lower bound, stored bound is upper
- * - CLP_FEASIBLE (1): Within bounds
- * - CLP_ABOVE_UPPER (2): Above upper bound, stored bound is lower
- * - CLP_SAME (4): Current status same as original
+ * @algorithm Two-Phase Primal Simplex via Piecewise Linear Cost:
+ * Instead of explicit Phase I/II, use a continuous penalty formulation.
  *
- * Key methods:
- * - checkInfeasibilities(): Update costs based on current solution
- * - setOne()/setOneBasic(): Update bounds and cost for a variable
- * - changeInCost(): Cost change when moving through a bound
+ * @math PIECEWISE LINEAR COST:
  *
- * This enables two-phase simplex where Phase I minimizes infeasibility.
+ *        cost
+ *          │      /
+ *    w·(l-x)     /  w·(x-u)
+ *          │    /
+ *          │   /│
+ *    ──────┼──/─┼────────→ x
+ *          l    u
+ *           \  /
+ *            \/  original cost c·x (feasible region)
+ *
+ * Total cost = c'x + w·Σ(violations)
+ *
+ * @algorithm Infeasibility Weight:
+ * infeasibilityWeight_ (w) penalizes constraint violations.
+ * Large w → prioritize feasibility over optimality.
+ * As solution becomes feasible, effective problem is original LP.
+ *
+ * @algorithm Status Tracking:
+ * 4-bit encoding per variable:
+ *   CLP_BELOW_LOWER (0): x < l, incur penalty w(l-x)
+ *   CLP_FEASIBLE (1): l ≤ x ≤ u, use original cost c_j
+ *   CLP_ABOVE_UPPER (2): x > u, incur penalty w(x-u)
+ *   CLP_SAME (4): Status unchanged from original
+ *
+ * @algorithm Cost Change Computation:
+ * changeInCost(i, α): When x_i changes by θ in direction α,
+ * cost changes by ±w depending on crossing a bound.
  *
  * @see AbcSimplexPrimal which uses this for infeasibility tracking
  * @see ClpNonLinearCost for the standard (non-ABC) implementation

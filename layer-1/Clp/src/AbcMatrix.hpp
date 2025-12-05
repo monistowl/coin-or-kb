@@ -8,19 +8,39 @@
  * @author John Forrest (FasterCoin, 2012)
  *
  * Implements a scaled matrix wrapper optimized for ABC's data layout.
- * May maintain up to THREE copies for different access patterns:
- * 1. Scaled CoinPackedMatrix without gaps (column-major)
- * 2. Row copy partitioned by: non-basic, basic, fixed
- * 3. Vector copy for specific operations
+ * May maintain up to THREE copies for different access patterns.
  *
- * Key optimizations:
- * - Block partitioning: NUMBER_ROW_BLOCKS/NUMBER_COLUMN_BLOCKS for parallelism
- * - Row copy organized for efficient dual pricing (dualColumn1)
- * - Primal column operations with CoinPartitionedVector
+ * @algorithm Multiple Matrix Copies for Access Patterns:
+ * Different simplex operations access A differently. Maintaining
+ * specialized copies trades memory for speed.
  *
- * Also defines helper classes:
- * - AbcMatrix2: Row-oriented copy for fast transpose operations
- * - AbcMatrix3: Column-oriented with block structure for parallel pricing
+ * @algorithm THREE COPIES:
+ *
+ * 1. COLUMN-MAJOR (CoinPackedMatrix):
+ *    - Primary storage, scaled, no gaps
+ *    - Used for: FTRAN column extraction, primal pricing
+ *    - Access: Sequential within columns
+ *
+ * 2. ROW-MAJOR PARTITIONED (AbcMatrix2):
+ *    - Rows grouped by variable status: nonbasic | basic | fixed
+ *    - Used for: BTRAN (sparse π × A), dual pricing
+ *    - Optimization: Only multiply against nonbasic columns
+ *
+ * 3. BLOCK-STRUCTURED (AbcMatrix3):
+ *    - NUMBER_ROW_BLOCKS × NUMBER_COLUMN_BLOCKS partitioning
+ *    - Used for: Parallel dual pricing with multiple threads
+ *    - Each block fits in L2 cache
+ *
+ * @algorithm Block Partitioning Benefits:
+ *   - Parallel: Each thread works on independent blocks
+ *   - Cache: Blocks sized to fit L2 (256KB typical)
+ *   - SIMD: Aligned data within blocks for vectorization
+ *
+ * @algorithm Row Copy Organization:
+ * For dual simplex ratio test (dualColumn1):
+ *   1. Compute π = c_B'·B⁻¹ (BTRAN)
+ *   2. For each nonbasic j: compute π·A_j using row copy
+ *   3. Partitioned row copy skips basic columns
  *
  * @see AbcSimplex which uses this matrix
  * @see ClpPackedMatrix for the standard (non-ABC) matrix

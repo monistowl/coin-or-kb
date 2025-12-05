@@ -8,21 +8,39 @@
  * @author John Forrest
  *
  * Defines CoinAbcAnyFactorization, the abstract interface for all ABC
- * factorization variants. Key responsibilities:
+ * factorization variants, plus CoinAbcDenseFactorization for small/dense bases.
  *
- * - Status management (factorization state, pivot count)
- * - Numeric parameters (pivot tolerance, zero tolerance)
- * - Dense column handling for Schur complement
- * - FTRAN/BTRAN interface (forward/backward triangular solves)
- * - Update interface (Forrest-Tomlin rank-one updates)
+ * @algorithm Dense LU Factorization:
+ * For small bases (m < 200), dense LU beats sparse due to BLAS efficiency.
  *
- * Design pattern:
- * - Abstract base providing common interface and scalar state
- * - CoinAbcBaseFactorization adds full sparse LU implementation
- * - Specialized variants (Small, Long, Ordered) instantiate with different settings
+ * @math LU WITH PARTIAL PIVOTING:
+ * Factor B = PLU where:
+ *   P = permutation matrix (row interchanges for stability)
+ *   L = unit lower triangular
+ *   U = upper triangular
  *
- * The dense factorization handles the Schur complement that forms when
- * many columns become dense during sparse LU factorization.
+ * @algorithm Pivot Selection:
+ * pivotTolerance_ controls partial pivoting threshold.
+ * Choose pivot |a_ij| ≥ pivotTolerance_ × max|a_kj| in column j.
+ * Default 1e-3 is a balance between stability and sparsity.
+ *
+ * @algorithm DENSE FTRAN (solve Bx = b):
+ * 1. Apply row permutation: b̃ = Pb
+ * 2. Forward substitution: Ly = b̃
+ * 3. Back substitution: Ux = y
+ *
+ * @algorithm DENSE BTRAN (solve B'y = c):
+ * 1. Forward substitution in U': U'z = c
+ * 2. Back substitution in L': L'w = z
+ * 3. Apply column permutation: y = P'w
+ *
+ * @complexity Dense factorization: O(m³)
+ * Dense FTRAN/BTRAN: O(m²)
+ *
+ * @algorithm When Dense Beats Sparse:
+ * - Small m (< 200): BLAS-3 efficiency dominates
+ * - Nearly dense basis: Sparse overhead not worth it
+ * - Numerical difficulty: Dense more stable
  *
  * @see CoinAbcBaseFactorization for sparse LU implementation
  * @see CoinAbcFactorization for template-instantiated variants
