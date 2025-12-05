@@ -18,6 +18,12 @@
  * @file DcoHeurRounding.hpp
  * @brief Simple rounding heuristic for finding feasible solutions
  *
+ * @algorithm Simple Rounding Heuristic for MICO
+ * @math Given LP relaxation x*, round integer variables:
+ *       x̃_j = round(x*_j) for all j ∈ I (integer set)
+ *       x̃_j = x*_j for j ∉ I (continuous variables)
+ *       Accept if x̃ is feasible: Ax̃ ≤ b, x̃ ∈ K (conic constraints)
+ *
  * DcoHeurRounding implements a simple rounding heuristic based on
  * Achterberg's dissertation to find integer feasible solutions.
  *
@@ -34,6 +40,9 @@
  *
  * **searchSolution2():**
  * Alternative rounding strategy considering constraint types.
+ *
+ * @complexity O(n + m) for rounding and feasibility check
+ * @ref Achterberg, T. (2007). "Constraint Integer Programming". PhD thesis, TU Berlin.
  *
  * @see DcoHeuristic.hpp for base class
  * @see DcoModel.hpp::feasibleSolution() for feasibility checking

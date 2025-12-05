@@ -18,6 +18,11 @@
  * @file DcoHeuristic.hpp
  * @brief Abstract base class for primal heuristics
  *
+ * @algorithm Primal Heuristic Framework for Mixed-Integer Conic Optimization
+ * @math Heuristics find feasible solutions x̃ satisfying:
+ *       Ax̃ ≤ b, x̃_j ∈ Z for j ∈ I, x̃ ∈ K (conic constraints)
+ *       Good incumbents enable pruning: nodes with LB ≥ UB(x̃) are pruned.
+ *
  * DcoHeuristic provides the interface for heuristics that search
  * for feasible solutions during branch-and-bound.
  *
@@ -39,6 +44,8 @@
  *
  * **Pure Virtual:**
  * - searchSolution(): Find and return feasible solution or NULL
+ *
+ * @complexity Varies by heuristic: O(n) for rounding to O(solve) for sub-MIP
  *
  * @see DcoHeurRounding.hpp for simple rounding heuristic
  * @see DcoTreeNode.hpp::callHeuristics() for invocation

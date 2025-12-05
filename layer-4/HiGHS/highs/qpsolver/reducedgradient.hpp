@@ -9,8 +9,23 @@
  * @file reducedgradient.hpp
  * @brief HiGHS QP reduced gradient
  *
+ * @algorithm Reduced Gradient for QP Active Set
+ * @math For active constraints Ax_A = b, compute gradient in null space:
+ *       ∇_Z f(x) = Z'∇f(x) where Z spans null(A) for active constraints.
+ *       When ∇_Z f(x) = 0, KKT conditions satisfied for current active set.
+ *       Non-zero reduced gradient → direction of descent exists.
+ *
  * Reduced gradient computation for active set method.
  * Projects objective gradient onto null space of active constraints.
+ *
+ * **Key operations:**
+ * - recompute(): Full Z'∇f computation via basis
+ * - reduce(): Update when constraint added to active set
+ * - expand(): Update when constraint dropped from active set
+ * - update(): Scale after step (minor) or invalidate (major)
+ *
+ * @complexity O(n × |inactive|) for full computation.
+ * Incremental updates: O(|inactive|) per active set change.
  */
 #ifndef __SRC_LIB_REDUCEDGRADIENT_HPP__
 #define __SRC_LIB_REDUCEDGRADIENT_HPP__
