@@ -22,6 +22,11 @@
  * - Respects cut limit per iteration
  * - May trigger lazy vs pool constraint handling
  *
+ * @algorithm Hyperplane Pool Management
+ * @math Add linearizations π·x ≤ π₀ to MIP relaxation.
+ *       Each cut derived from gradient: π = ∇g(x*), π₀ = ∇g(x*)·x* - g(x*).
+ *       Filters dominated cuts and enforces per-iteration limits.
+ * @complexity O(cuts × m) for dominance checking. Pool size bounded.
  * @see DualSolver.h for MIP constraint addition
  * @see TaskSelectHyperplanePointsESH.h for cut generation
  */

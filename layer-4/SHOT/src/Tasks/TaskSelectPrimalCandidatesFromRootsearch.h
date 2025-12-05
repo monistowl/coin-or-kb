@@ -22,6 +22,11 @@
  * - Intermediate points may be feasible primal candidates
  * - Cheap way to discover feasible solutions
  *
+ * @algorithm Primal Extraction from ESH Rootsearch
+ * @math During rootsearch from interior x° to infeasible x̂:
+ *       Check intermediate points x(λ) = λx° + (1-λ)x̂.
+ *       Points with g(x(λ)) ≤ 0 and integer feasibility → primal candidates.
+ * @complexity O(rootsearch iterations). No additional NLP solves required.
  * @see RootsearchMethod/ for boundary finding
  * @see TaskSelectHyperplanePointsESH.h for ESH main task
  */

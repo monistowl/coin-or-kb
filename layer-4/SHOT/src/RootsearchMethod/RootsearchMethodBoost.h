@@ -27,6 +27,13 @@
  * - Bisection: Fallback for difficult cases
  * - Returns boundary point for hyperplane generation
  *
+ * @algorithm TOMS 748 / Bisection Rootfinding
+ * @math Find λ* ∈ [0,1] such that max_i g_i(λ*x° + (1-λ*)x̂) = 0.
+ *       TOMS 748: 4th-order bracketing, optimal among bracketing methods.
+ *       Bisection fallback: halve interval each step, guaranteed O(log(1/ε)).
+ * @complexity TOMS 748: superlinear convergence. Bisection: O(log₂(1/ε)) evals.
+ * @ref Alefeld, Potra, Shi (1995). "TOMS 748: Enclosing zeros of continuous
+ *      functions". ACM Trans. Math. Software.
  * @see IRootsearchMethod.h for interface contract
  * @see Boost.Math TOMS 748 documentation
  */

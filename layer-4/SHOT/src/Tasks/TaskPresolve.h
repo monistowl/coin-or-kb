@@ -23,6 +23,11 @@
  * - Redundant constraint detection
  * - Expression simplification
  *
+ * @algorithm MINLP Presolve
+ * @math Apply bound propagation: infer l'_j ≥ l_j, u'_j ≤ u_j from constraints.
+ *       Remove fixed variables (l_j = u_j), detect infeasibility/redundancy.
+ *       Simplify nonlinear expressions via constant folding.
+ * @complexity O(constraints × passes). Typically few passes needed.
  * @see TaskReformulateProblem.h for reformulation
  * @see Simplifications.h for expression simplification
  */

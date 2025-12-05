@@ -22,6 +22,12 @@
  * - Decrease when solver is struggling
  * - Balances exploration vs speed
  *
+ * @algorithm Adaptive MIP Solution Limit Control
+ * @math Adjust solution limit L_k dynamically:
+ *       - If finding good solutions (gap improving): L_{k+1} = L_k + δ
+ *       - If stagnating (gap unchanged): L_{k+1} = max(L_min, L_k - δ)
+ *       Balances cut generation speed vs MIP solver exploration.
+ * @complexity O(1) per limit update. Heuristic based on solver feedback.
  * @see IMIPSolutionLimitStrategy.h for interface
  * @see MIPSolutionLimitStrategyIncrease.h for simpler strategy
  */

@@ -26,6 +26,12 @@
  * - MIP solver returns infeasible
  * - May indicate numerical issues with cuts
  *
+ * @algorithm MIP Relaxation Repair
+ * @math When cuts render MIP infeasible (numerical issues):
+ *       1. Identify recent cuts: {π_k·x ≤ π₀_k} from last iterations
+ *       2. Remove or relax: try π_k·x ≤ π₀_k + ε for small ε
+ *       3. Re-solve and verify feasibility restored
+ * @complexity O(recent cuts × MIP solve). Limited repair attempts.
  * @see DualSolver.h for MIP status
  * @see TaskAddHyperplanes.h for cut management
  */

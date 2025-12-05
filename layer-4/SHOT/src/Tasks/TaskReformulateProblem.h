@@ -28,6 +28,15 @@
  * - Created for bilinear products, squares, absolute values
  * - Tracked in squareAuxVariables, bilinearAuxVariables maps
  *
+ * @algorithm MINLP Reformulation via Auxiliary Variables
+ * @math Key transformations:
+ *       - Bilinear xy: McCormick envelopes w ≥ xL_y + yL_x - L_xL_y, etc.
+ *       - Squares x²: w = x², with 2D outer approximation
+ *       - Indefinite quadratics: Eigenvalue decomposition Q = Q₊ - Q₋
+ *       - Integer products: Binary expansion z = Σ 2ⁱbᵢ
+ * @complexity O(terms × reformulation cost). McCormick: O(1) per bilinear.
+ * @ref McCormick (1976). "Computability of global solutions to factorable
+ *      nonconvex programs". Math. Program.
  * @see AuxiliaryVariables.h for auxiliary variable types
  * @see Problem.h for reformulated problem storage
  */

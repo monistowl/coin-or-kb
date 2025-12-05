@@ -22,6 +22,11 @@
  * - Use NLP solver (Ipopt) with modified objective
  * - Required for ESH rootsearch to work
  *
+ * @algorithm Interior Point Finding via Slack Maximization
+ * @math Solve: max s subject to g_i(x) ≤ -s for all constraints i.
+ *       If s* > 0, point x* is strictly interior (all constraints slack).
+ *       Required for ESH rootsearch: interpolates interior → exterior.
+ * @complexity O(NLP solve). Uses Ipopt or minimax cutting-plane.
  * @see TaskUpdateInteriorPoint.h for runtime updates
  * @see RootsearchMethod/ for interior point usage
  */

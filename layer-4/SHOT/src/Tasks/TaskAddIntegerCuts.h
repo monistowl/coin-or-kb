@@ -24,6 +24,12 @@
  * - Multi-tree strategy uses these extensively
  * - Prevents cycling through same MIP solutions
  *
+ * @algorithm No-Good Cuts (Integer Exclusion)
+ * @math Given binary solution x̄, add cut:
+ *       Σ_{j: x̄_j=1} (1-x_j) + Σ_{j: x̄_j=0} x_j ≥ 1
+ *       Requires Hamming distance ≥ 1 from x̄. Excludes exactly this solution.
+ * @complexity O(|binary variables|) per cut generation.
+ * @ref Balas & Jeroslow (1972). "Canonical cuts on the unit hypercube".
  * @see DualSolver.h for cut addition
  * @see SolutionStrategy/ for multi-tree workflow
  */

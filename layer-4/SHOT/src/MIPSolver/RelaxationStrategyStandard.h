@@ -29,6 +29,12 @@
  * - Switch to MIP after LP phase completion
  * - LPFinished flag tracks phase transition
  *
+ * @algorithm LP-to-MIP Phase Transition Strategy
+ * @math LP phase: Solve LP relaxation (fast) to generate hyperplanes quickly.
+ *       Transition to MIP when: iteration limit reached, time budget exceeded,
+ *       or dual bound improvement stagnates (|z^LP_k - z^LP_{k-1}| < ε).
+ *       MIP phase: Solve full MILP for valid dual bounds.
+ * @complexity O(phase detection). LP phase typically 10-100 iterations.
  * @see IRelaxationStrategy.h for interface
  */
 #pragma once
