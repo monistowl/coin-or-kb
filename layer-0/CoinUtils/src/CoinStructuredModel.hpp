@@ -6,6 +6,11 @@
  * @file CoinStructuredModel.hpp
  * @brief Block-structured model composed of CoinModel blocks
  *
+ * @algorithm Block Decomposition Detection (Dantzig-Wolfe, Benders, Staircase)
+ * Automatically detects and decomposes LP/MIP structure for specialized
+ * algorithms. decompose() identifies linking constraints and creates block
+ * structure suitable for D-W decomposition, Benders cuts, or staircase LP.
+ *
  * @see CoinModel for individual block representation
  */
 

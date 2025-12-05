@@ -6,10 +6,10 @@
  * @file CoinWarmStart.hpp
  * @brief Abstract interfaces for warm start information in optimization solvers
  *
- * Defines abstract base classes for storing and manipulating warm start
- * information. Warm starts allow solvers to resume from a previous solution
- * state, potentially reducing solution time significantly. The diff mechanism
- * allows efficient incremental updates to warm start information.
+ * @algorithm Warm Start with Delta-Encoded Diffs for B&B
+ * Abstract base for solver state that enables fast re-optimization.
+ * The diff mechanism (generateDiff/applyDiff) compresses incremental changes
+ * between B&B nodes - critical for memory-efficient branch-and-bound.
  *
  * Derived classes implement solver-specific warm start data (e.g., basis
  * status for simplex, barrier iterates for interior point methods).
