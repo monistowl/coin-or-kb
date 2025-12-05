@@ -10,24 +10,42 @@
  * choosing from a stored set of candidate columns. Intended as a template
  * for implementing problem-specific generators (e.g., shortest path).
  *
- * Architecture (three-level hierarchy):
- * 1. ClpDynamicExampleMatrix: Stores all candidate columns (Gen_ suffix)
- * 2. ClpDynamicMatrix: Manages active column subset with GUB structure
- * 3. CoinPackedMatrix: Current working matrix for factorization
+ * @algorithm Column Generation Framework Example:
+ * Demonstrates how to implement delayed column generation in Clp.
  *
- * Key methods:
- * - partialPricing(): Evaluates candidates, selects most negative reduced cost
- * - createVariable(): Adds selected column to working matrix
- * - packDown(): Handles column removal during reoptimization
+ * @algorithm Three-Level Matrix Hierarchy:
+ *   Level 1: ClpDynamicExampleMatrix (this class)
+ *            - Stores ALL candidate columns (potentially millions)
+ *            - Provides partialPricing() to evaluate subsets
+ *            - createVariable() adds promising columns to Level 2
  *
- * Data members (Gen_ suffix = generator's copy):
- * - startColumnGen_, rowGen_, elementGen_: Sparse column storage
- * - costGen_: Objective coefficients
- * - idGen_: Maps to parent ClpDynamicMatrix columns
- * - dynamicStatusGen_: Tracks which columns are active
+ *   Level 2: ClpDynamicMatrix (parent class)
+ *            - Manages "active" column subset with GUB structure
+ *            - Handles column aging/removal via packDown()
+ *            - Maintains mapping between levels
  *
- * Note: Simpler than real column generation which computes columns on-demand.
- * This just selects from pre-stored columns.
+ *   Level 3: CoinPackedMatrix
+ *            - Current working matrix in factorization
+ *            - Only contains columns in current basis + candidates
+ *
+ * @algorithm Partial Pricing Protocol:
+ *   1. partialPricing(start, end) scans candidates in [start, end)
+ *   2. For each candidate, compute reduced cost using current duals
+ *   3. Track most attractive (most negative for min) column
+ *   4. createVariable() adds winner to working problem
+ *   5. Simplex pivots, then repeat pricing
+ *
+ * COLUMN STATES (dynamicStatusGen_):
+ *   inSmall: Currently in working LP
+ *   atLowerBound/atUpperBound: Out of working LP, at bound
+ *   flagged: Temporarily blocked from entering
+ *
+ * @algorithm Template for Real Column Generation:
+ * Real implementations would replace stored columns with:
+ *   - Shortest path solver (vehicle routing)
+ *   - Knapsack solver (cutting stock)
+ *   - Pattern generator (bin packing)
+ * The pricing subproblem produces columns with negative reduced cost.
  *
  * @see ClpDynamicMatrix for the dynamic pricing infrastructure
  * @see ClpGubDynamicMatrix for the GUB-aware variant

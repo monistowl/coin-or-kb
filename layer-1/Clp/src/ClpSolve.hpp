@@ -11,21 +11,41 @@
  * It specifies the algorithm (dual/primal simplex, barrier), presolve settings,
  * crash procedures, and various solver options.
  *
- * Solve types available:
- * - useDual: Dual simplex (default, usually fastest)
- * - usePrimal: Primal simplex
- * - usePrimalorSprint: Primal with sprint heuristic for large problems
- * - useBarrier: Interior point method (requires Cholesky factorization)
- * - automatic: Let solver choose based on problem characteristics
+ * @algorithm Solver Strategy Selection:
+ * Encapsulates algorithm choices for solving LP problems.
  *
- * Crash options for initial basis:
- * - Idiot: Heuristic crash using pseudo-interior point ideas
- * - Sprint: Column generation-like approach for large sparse problems
- * - All slack: Simple but safe starting point
+ * SOLVE TYPES:
+ *   useDual: Dual simplex - default choice, best for most LPs
+ *   usePrimal: Primal simplex - better when dual infeasible
+ *   usePrimalorSprint: Primal with Sprint for large sparse problems
+ *   useBarrier: Interior point - good for very large dense problems
+ *   automatic: Analyze problem structure to choose algorithm
+ *
+ * @algorithm Crash Procedures (Finding Initial Basis):
+ *   All slack: Start with identity basis (safe, O(1) setup)
+ *   Crash: Heuristic to find good triangular basis (faster iterations)
+ *   Idiot: Pseudo-interior point to find primal-feasible start
+ *   Sprint: Column subset approach for large sparse problems
+ *
+ * @algorithm Presolve Options:
+ * Controls problem reduction before solving:
+ *   - Singleton: Remove rows/cols with single nonzero
+ *   - Doubleton: Substitute variables appearing in 2 rows
+ *   - Tripleton: Handle 3-row patterns
+ *   - Forcing: Detect implied bound constraints
+ *   - ImpliedFree: Find unbounded variables that are implicitly bounded
+ *   - Dupcol: Remove duplicate columns
+ *   - Duprow: Remove duplicate rows
+ *   - Tighten: Strengthen variable bounds
+ *
+ * numberPasses controls how many presolve passes to run.
+ *
+ * Also contains ClpSimplexProgress for detecting cycling during iteration.
  *
  * @see ClpSimplex::initialSolve() which uses this class
  * @see ClpInterior for barrier/interior point implementation
  * @see Idiot.hpp for the Idiot crash procedure
+ * @see ClpPresolve for the presolve implementation
  */
 
 #ifndef ClpSolve_H

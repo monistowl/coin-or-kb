@@ -10,13 +10,35 @@
  * process. Users derive from ClpEventHandler and override event() to handle
  * events like end of iteration, factorization, or presolve stages.
  *
+ * @algorithm Event-Driven Optimization Control:
+ * Observer pattern for monitoring and controlling solver execution.
+ *
+ * EVENT TYPES (key ones):
+ *   endOfIteration: After each simplex pivot
+ *   endOfFactorization: After basis refactorization
+ *   endOfValuesPass: After dual phase 1 or primal phase 1
+ *   presolveStart/End: Presolve entry/exit points
+ *   noCandidateInPrimal/Dual: Tentative optimality
+ *   looksEndInPrimal/Dual: About to declare optimal
+ *
+ * RETURN VALUES from event():
+ *   -1: Continue normally
+ *    0: Stop optimization (sets status=5 "stopped by event")
+ *   >0: Currently same as 0
+ *
+ * @algorithm Disaster Recovery (ClpDisasterHandler):
+ * For numerical difficulties that would cause simplex to abort:
+ *   intoSimplex(): Called at start
+ *   check(): Returns true if disaster detected
+ *   saveInfo(): Preserve state for retry
+ *   typeOfDisaster(): 0=can fix, 1=must abort
+ *
  * Common uses:
  * - Handling Ctrl-C to gracefully stop optimization
  * - Logging progress or updating a GUI
  * - Implementing custom termination criteria
  * - Monitoring solution quality during solve
- *
- * Also defines ClpDisasterHandler for recovery from numerical difficulties.
+ * - Recovery from numerical instability
  *
  * @see ClpSimplex::setEventHandler() to install a handler
  * @see ClpModel::secondaryStatus() for event-based status codes
