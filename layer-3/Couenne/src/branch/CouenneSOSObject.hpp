@@ -12,6 +12,8 @@
  * @file CouenneSOSObject.hpp
  * @brief Special Ordered Set (SOS) branching for Couenne
  *
+ * @algorithm Special Ordered Set Branching with Bound Tightening
+ *
  * Extends OsiSOS to include Couenne-specific functionality like
  * bound tightening and convexification cut generation at branching.
  *
@@ -33,6 +35,14 @@
  * **TODO in code:**
  * Notes extension to handle Σxᵢ ≤ k constraints with small k
  * using SOS-like branching instead of individual variable branching.
+ *
+ * @math SOS1: at most 1 of {x₁,...,xₙ} nonzero
+ * @math SOS2: at most 2 adjacent of {x₁,...,xₙ} nonzero
+ * @complexity O(n log n) for initial ordering; O(log n) per branch
+ *
+ * @ref Beale & Tomlin, "Special Facilities in a General Mathematical
+ *      Programming System for Non-convex Problems Using Ordered Sets
+ *      of Variables", 1970
  *
  * @see OsiSOS base class
  * @see CbcSOS for CBC's SOS implementation

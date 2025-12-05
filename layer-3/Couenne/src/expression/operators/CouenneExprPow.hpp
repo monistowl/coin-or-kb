@@ -13,6 +13,8 @@
  * @file CouenneExprPow.hpp
  * @brief Power expression w = x^k with convexification
  *
+ * @algorithm Power Convexification with Newton Tangent Points
+ *
  * Handles power functions with constant exponents. Special cases
  * (odd/even integer powers) have specialized implementations.
  *

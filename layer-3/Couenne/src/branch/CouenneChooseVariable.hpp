@@ -13,6 +13,8 @@
  * @file CouenneChooseVariable.hpp
  * @brief Variable selection for branching in global optimization
  *
+ * @algorithm Variable Selection for Global Optimization
+ *
  * Extends OsiChooseVariable to select branching variables based on
  * nonconvexity-specific criteria. The goal is to choose variables
  * that most effectively reduce the relaxation gap.
@@ -31,6 +33,12 @@
  * **Selection criteria:**
  * Unlike MIP (which branches on integer violations), MINLP must
  * also consider nonconvex constraint violations.
+ *
+ * @math Infeasibility measure: |w - f(x)| for auxiliary w = f(x)
+ * @complexity O(n × m) where n = variables, m = auxiliaries per variable
+ *
+ * @ref Belotti et al., "Branching and bounds tightening techniques
+ *      for non-convex MINLP", Optimization Methods & Software, 2009
  *
  * @see CouenneChooseStrong for strong branching variant
  * @see CouenneObject for infeasibility computation

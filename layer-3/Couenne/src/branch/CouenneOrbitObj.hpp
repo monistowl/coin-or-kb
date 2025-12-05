@@ -12,6 +12,8 @@
  * @file CouenneOrbitObj.hpp
  * @brief Orbital branching using symmetry detection (DISABLED)
  *
+ * @algorithm Orbital Branching via Nauty Symmetry Detection
+ *
  * NOTE: This code is currently commented out/disabled.
  *
  * Implements orbital branching which exploits problem symmetry to

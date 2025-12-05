@@ -12,6 +12,8 @@
  * @file CouenneComplObject.hpp
  * @brief Branching object for complementarity constraints
  *
+ * @algorithm Complementarity Object for MPEC Branching
+ *
  * Handles branching on complementarity conditions x₁ · x₂ ≤ 0,
  * x₁ · x₂ ≥ 0, or x₁ · x₂ = 0. Common in equilibrium problems,
  * KKT conditions, and MPECs (Mathematical Programs with
@@ -30,6 +32,12 @@
  * **Infeasibility:**
  * Measures how much the complementarity is violated
  * to determine branching priority.
+ *
+ * @math inf(x₁,x₂) = max(0, sign_ × x₁ × x₂) for sign_ ∈ {-1,0,+1}
+ * @complexity O(1) infeasibility check; creates CouenneComplBranchingObject
+ *
+ * @ref Ferris & Pang, "Engineering and Economic Applications of
+ *      Complementarity Problems", SIAM Review, 1997
  *
  * @see CouenneObject base class
  * @see CouenneComplBranchingObject for the branching execution

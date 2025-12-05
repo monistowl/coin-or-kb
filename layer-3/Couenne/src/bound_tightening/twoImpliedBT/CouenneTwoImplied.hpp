@@ -12,6 +12,8 @@
  * @file CouenneTwoImplied.hpp
  * @brief Bound tightening from pairs of linear constraints
  *
+ * @algorithm Two-Implied Bound Tightening via Convex Combinations
+ *
  * Derives implied bounds by combining two linear inequalities via
  * convex combinations. Standard FBBT uses single constraints; this
  * extends to pairs for tighter bounds.

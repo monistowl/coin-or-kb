@@ -13,6 +13,8 @@
  * @file CouenneThreeWayBranchObj.hpp
  * @brief Three-way spatial branching for continuous variables
  *
+ * @algorithm Three-Way Spatial Branching
+ *
  * Divides a variable's domain into three parts instead of two,
  * which can provide better convexification around the current
  * LP solution point.
@@ -39,6 +41,11 @@
  * **Comparison to two-way:**
  * Three-way creates more nodes but can reduce overall tree size
  * by getting better bounds faster near the current solution.
+ *
+ * @math Split: [l,u] → [l,lcrop_] ∪ [lcrop_,rcrop_] ∪ [rcrop_,u]
+ * @complexity O(1) per branch operation; increases node count by 50%
+ *
+ * @ref Belotti, "Couenne: a user's manual", 2009
  *
  * @see CouenneBranchingObject for standard two-way branching
  * @see CouenneVarObject which can create three-way branches

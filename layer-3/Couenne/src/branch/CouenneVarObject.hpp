@@ -12,6 +12,8 @@
  * @file CouenneVarObject.hpp
  * @brief Variable-based branching object for MINLP
  *
+ * @algorithm Variable-Based Branching for Global Optimization
+ *
  * Branching object that focuses on original problem variables rather
  * than auxiliary variables. Computes infeasibility by aggregating
  * across all auxiliaries that depend on this variable.
@@ -33,6 +35,12 @@
  * **isCuttable():**
  * Returns whether we're on the "bad" side where cuts would help.
  * If not cuttable, branching is more likely to help.
+ *
+ * @math inf(x) = aggregate_{w=f(...,x,...)} |w - f(...,x,...)|
+ * @complexity O(deg(x)) where deg(x) = number of auxiliaries depending on x
+ *
+ * @ref Belotti et al., "Branching and bounds tightening techniques
+ *      for non-convex MINLP", Optimization Methods & Software, 2009
  *
  * @see CouenneObject base class for auxiliary-based branching
  * @see CouenneBranchingObject for branch execution

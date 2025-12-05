@@ -12,6 +12,8 @@
  * @file CouenneOrbitBranchingObj.hpp
  * @brief Orbital branching object using symmetry
  *
+ * @algorithm Orbital Branching for Symmetry Exploitation
+ *
  * Spatial branching object that exploits problem symmetry via
  * orbital branching to prune symmetric subtrees.
  *

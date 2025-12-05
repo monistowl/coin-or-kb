@@ -11,6 +11,8 @@
  * @file CouenneIterativeRounding.hpp
  * @brief Iterative rounding heuristic for nonconvex MINLP
  *
+ * @algorithm Iterative Rounding Heuristic (F-IR / I-IR)
+ *
  * Alternates between MILP and NLP solves to find feasible solutions:
  * 1. Solve MILP relaxation to get integer assignment
  * 2. Fix integers, solve NLP for continuous variables

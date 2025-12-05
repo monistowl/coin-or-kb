@@ -12,6 +12,8 @@
  * @file CouenneComplBranchingObject.hpp
  * @brief Branching object for complementarity constraints
  *
+ * @algorithm Complementarity Branching for MPEC
+ *
  * Handles branching on complementarity conditions x₁·x₂ = 0
  * (or ≤ 0, ≥ 0 variants) arising in MPEC problems.
  *
@@ -29,6 +31,13 @@
  * Mathematical Programs with Equilibrium Constraints often have
  * complementarity conditions like x ⊥ (Ax - b) ≥ 0, meaning
  * x ≥ 0, Ax - b ≥ 0, and x·(Ax - b) = 0.
+ *
+ * @math x₁ ⊥ x₂ ⟺ x₁ ≥ 0, x₂ ≥ 0, x₁·x₂ = 0
+ * @complexity O(1) per branch operation
+ *
+ * @ref Bard, "Practical Bilevel Optimization", 1998
+ * @ref Ferris & Pang, "Engineering and Economic Applications of
+ *      Complementarity Problems", SIAM Review, 1997
  *
  * @see CouenneComplObject which creates these branching objects
  * @see CouenneBranchingObject base class

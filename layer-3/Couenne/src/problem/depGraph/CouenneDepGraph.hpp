@@ -12,6 +12,8 @@
  * @file CouenneDepGraph.hpp
  * @brief Dependency graph between auxiliary and original variables
  *
+ * @algorithm Dependency Graph with Topological Sort
+ *
  * Tracks which variables depend on which others, enabling:
  * - Correct evaluation order (topological sort)
  * - Cycle detection (would indicate model error)

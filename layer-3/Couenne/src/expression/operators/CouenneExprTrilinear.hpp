@@ -11,6 +11,8 @@
  * @file CouenneExprTrilinear.hpp
  * @brief Trilinear product expression w = x*y*z
  *
+ * @algorithm Trilinear Polyhedral Relaxation
+ *
  * Specialized handling for products of exactly three terms.
  * Trilinear terms are common in pooling problems and arise
  * from reformulation of bilinear products with parameters.

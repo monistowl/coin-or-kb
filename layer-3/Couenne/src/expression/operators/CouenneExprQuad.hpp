@@ -13,6 +13,8 @@
  * @file CouenneExprQuad.hpp
  * @brief Quadratic expression with alpha-convexification
  *
+ * @algorithm Alpha-Convexification via Eigenvalue Analysis
+ *
  * Represents expressions of the form:
  *   w = a0 + a'x + x'Qx + sum(nonlinear_terms)
  *

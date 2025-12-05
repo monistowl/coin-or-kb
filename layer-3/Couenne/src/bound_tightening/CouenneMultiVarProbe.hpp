@@ -12,6 +12,8 @@
  * @file CouenneMultiVarProbe.hpp
  * @brief Multi-variable probing for bound tightening
  *
+ * @algorithm Multi-Variable Probing for OBBT
+ *
  * Extension of single-variable probing that considers multiple
  * variables simultaneously for bound tightening. Can detect
  * implications that single-variable probing would miss.

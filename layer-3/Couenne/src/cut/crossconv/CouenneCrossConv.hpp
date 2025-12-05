@@ -12,6 +12,8 @@
  * @file CouenneCrossConv.hpp
  * @brief Cuts from redundant relationships between auxiliary variables
  *
+ * @algorithm Cross-Convexification via Algebraic Identities
+ *
  * Identifies and exploits algebraic relationships between auxiliary
  * variables that arise from the reformulation. These give valid
  * equalities or inequalities that strengthen the relaxation.

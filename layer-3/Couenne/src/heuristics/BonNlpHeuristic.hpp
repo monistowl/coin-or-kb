@@ -12,6 +12,8 @@
  * @file BonNlpHeuristic.hpp
  * @brief NLP heuristic for near-integer B&B nodes
  *
+ * @algorithm Near-Feasibility NLP Heuristic
+ *
  * Calls NLP solver when CouenneObjects are nearly satisfied to
  * find MINLP feasible solutions during branch-and-bound.
  *

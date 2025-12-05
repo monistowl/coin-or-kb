@@ -12,6 +12,8 @@
  * @file CouenneVTObject.hpp
  * @brief Violation transfer branching for MINLP variables
  *
+ * @algorithm Violation Transfer Branching
+ *
  * Computes variable infeasibility by aggregating violations from
  * all auxiliary variables whose definitions depend on this variable.
  *
@@ -28,6 +30,12 @@
  * **Comparison to CouenneVarObject:**
  * - CouenneVarObject: Direct integrality/bound violation
  * - CouenneVTObject: Aggregated auxiliary violations
+ *
+ * @math VT_score(x) = Σ_{w: w=f(...,x,...)} |w - f(...,x,...)|
+ * @complexity O(deg(x)) per variable where deg(x) = auxiliaries depending on x
+ *
+ * @ref Belotti et al., "Branching and bounds tightening techniques
+ *      for non-convex MINLP", Optimization Methods & Software, 2009
  *
  * @see CouenneVarObject base class
  * @see CouenneDepGraph for variable dependencies
