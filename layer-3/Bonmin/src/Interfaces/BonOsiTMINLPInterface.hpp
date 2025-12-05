@@ -13,6 +13,8 @@
  * @file BonOsiTMINLPInterface.hpp
  * @brief OsiSolverInterface wrapper for TMINLP problems
  *
+ * @algorithm NLP-Based OsiSolverInterface with Outer Approximation
+ *
  * Provides an OsiSolverInterface that wraps a TMINLP problem, enabling
  * Bonmin to use Cbc's branch-and-bound framework. The continuous relaxations
  * are solved by an NLP solver (Ipopt or FilterSQP) rather than LP.

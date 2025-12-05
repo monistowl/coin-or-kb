@@ -15,6 +15,8 @@
  * @file BonTMINLP.hpp
  * @brief Base class for Mixed-Integer Nonlinear Programs (MINLP)
  *
+ * @algorithm MINLP Problem Interface (Binary/Integer Variables with NLP Structure)
+ *
  * Defines the TMINLP interface for specifying optimization problems of the form:
  * @f[
  * \begin{array}{rl}

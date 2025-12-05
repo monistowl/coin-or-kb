@@ -11,6 +11,8 @@
  * @file BonFilterSolver.hpp
  * @brief FilterSQP implementation of TNLPSolver for NLP subproblems
  *
+ * @algorithm FilterSQP Sequential Quadratic Programming for MINLP Nodes
+ *
  * Wraps the FilterSQP solver (Fortran library) to solve continuous NLP
  * relaxations as an alternative to Ipopt. FilterSQP uses sequential quadratic
  * programming with a filter-based trust region.

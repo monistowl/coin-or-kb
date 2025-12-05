@@ -8,6 +8,8 @@
  * @file BonStrongBranchingSolver.hpp
  * @brief Abstract base class for strong branching NLP solves
  *
+ * @algorithm Hot-Start Strong Branching for MINLP (LP/QP/Curvature Methods)
+ *
  * Provides interface for efficiently solving modified NLPs during strong
  * branching evaluation. Supports hot-start capability to reuse factorizations.
  *

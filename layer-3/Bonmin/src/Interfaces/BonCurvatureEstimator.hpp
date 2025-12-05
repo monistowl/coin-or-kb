@@ -9,6 +9,8 @@
  * @file BonCurvatureEstimator.hpp
  * @brief Curvature estimation for branching decisions (NOT SUPPORTED)
  *
+ * @algorithm Null-Space Curvature for Branching (d^T H_Lag d Projection)
+ *
  * @warning This file is not currently supported (#error directive).
  *
  * Would compute null-space curvature (d^T H_Lag d) for branching variable

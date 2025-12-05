@@ -11,6 +11,8 @@
  * @file BonTNLPSolver.hpp
  * @brief Abstract interface for NLP solvers used in branch-and-bound
  *
+ * @algorithm NLP Solver Abstraction for B&B (Ipopt/FilterSQP Backend)
+ *
  * Provides a generic interface for calling NLP solvers to solve continuous
  * relaxations of MINLPs. This abstraction allows Bonmin to use different
  * NLP solvers (Ipopt, FilterSQP) interchangeably.

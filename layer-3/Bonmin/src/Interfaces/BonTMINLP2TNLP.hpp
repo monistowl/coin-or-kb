@@ -13,6 +13,8 @@
  * @file BonTMINLP2TNLP.hpp
  * @brief Adapter converting TMINLP (MINLP) to TNLP (NLP) for Ipopt
  *
+ * @algorithm MINLP→NLP Adapter for B&B Node Processing
+ *
  * This adapter pattern allows an external caller to modify variable bounds,
  * enabling treatment of binary/integer variables as either relaxed (continuous)
  * or fixed. Essential for branch-and-bound where each node fixes or bounds

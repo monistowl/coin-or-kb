@@ -11,6 +11,8 @@
  * @file BonIpoptSolver.hpp
  * @brief Ipopt implementation of TNLPSolver for NLP subproblems
  *
+ * @algorithm Ipopt Interior Point Solver for MINLP Node Relaxations
+ *
  * Wraps Ipopt's IpoptApplication to solve continuous NLP relaxations within
  * Bonmin's branch-and-bound framework. Provides warm starting capabilities
  * essential for efficient node processing.
