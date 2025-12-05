@@ -1,6 +1,8 @@
 /**
  * @file OsiAuxInfo.hpp
  * @brief Auxiliary information for algorithm-specific solver customization
+ *
+ * @algorithm B&B Solver Customization Interface (Soft/Hard Bounds, Callbacks)
  * Copyright (C) 2006, International Business Machines Corporation.
  * EPL-1.0 license.
  *

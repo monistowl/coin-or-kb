@@ -1,6 +1,8 @@
 /**
  * @file OsiSolverBranch.hpp
  * @brief Branch information with tighter bounds for both directions
+ *
+ * @algorithm Floor/Ceiling Branch Storage with Bound Arrays
  * Copyright (C) 2005, International Business Machines Corporation.
  * EPL-1.0 license.
  *

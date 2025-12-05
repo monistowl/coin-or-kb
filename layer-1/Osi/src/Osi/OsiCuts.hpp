@@ -2,6 +2,7 @@
  * @file OsiCuts.hpp
  * @brief Container for collections of row cuts and column cuts
  *
+ * @algorithm Cut Pool Container for B&C
  * OsiCuts serves as a cut pool for branch-and-cut algorithms:
  * - Stores both row cuts (linear inequalities) and column cuts (bound changes)
  * - Provides iteration over all cuts

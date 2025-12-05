@@ -2,6 +2,13 @@
 // Corporation and others.  All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 
+/**
+ * @file OsiRowCutDebugger.hpp
+ * @brief Validate cuts against known optimal solutions
+ *
+ * @algorithm Cut Validity Checking Against Known Solutions (MIPLIB)
+ */
+
 #ifndef OsiRowCutDebugger_H
 #define OsiRowCutDebugger_H
 #define CHECK_KNOWN_SOLUTION
