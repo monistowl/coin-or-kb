@@ -2,9 +2,15 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file MKC_lp_param.hpp
- * @brief MKC LP relaxation for BCP
+ * @brief MKC LP parameters
  *
- * LP process for multi-dimensional knapsack branch-and-cut.
+ * @algorithm MKC LP Params: Pricing and Solver Options
+ *
+ * Parameters for LP process:
+ * - CheckForTailoff: Detect slow progress
+ * - DoLogicalFixing: Implied variable fixing
+ * - ExactFallbackAtVargen: Use exact pricing when heuristic fails
+ * - UseVolume/UseClp: Solver selection
  */
 #ifndef _MKC_LP_PARAM_H
 #define _MKC_LP_PARAM_H

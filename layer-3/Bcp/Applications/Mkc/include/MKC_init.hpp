@@ -4,7 +4,10 @@
  * @file MKC_init.hpp
  * @brief MKC BCP initialization
  *
- * Initialization for multi-dimensional knapsack application.
+ * @algorithm MKC Init: Process Factory Methods
+ *
+ * USER_initialize subclass for MKC application.
+ * Creates MKC_tm and MKC_lp instances when BCP spawns processes.
  */
 #ifndef _MKC_INIT_H
 #define _MKC_INIT_H

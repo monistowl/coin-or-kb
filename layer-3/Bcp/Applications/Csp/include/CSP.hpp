@@ -4,8 +4,23 @@
  * @file CSP.hpp
  * @brief Cutting stock problem definitions
  *
+ * @algorithm Cutting Stock: One-Dimensional Bin Packing
+ *
  * CSP_problem: cutting stock data with stock widths and patterns.
  * Stores demands, pattern costs, column generation state.
+ *
+ * **Problem:** Cut standard-width stock into demanded pieces,
+ * minimizing number of stock pieces used (minimizing waste).
+ *
+ * **Column generation approach:**
+ * - Master: Select patterns to cover all demands
+ * - Pricing: Solve bounded knapsack to find improving patterns
+ * - PATTERN: Specifies how many of each piece width to cut from one stock
+ *
+ * **CSP_packedVector:** Sparse representation for patterns
+ * (most patterns use few piece types from many available).
+ *
+ * @complexity Weakly NP-hard; solved well by column generation + branching
  */
 #ifndef CSP_H
 #define CSP_H

@@ -2,9 +2,17 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file MC_tm_param.hpp
- * @brief Max-cut tree manager for BCP
+ * @brief Max-cut TM parameters
  *
- * Tree manager process for coordinating max-cut search tree.
+ * @algorithm Max-Cut TM Params: Input/Output Configuration
+ *
+ * MC_tm_par defines parameters for max-cut Tree Manager:
+ *
+ * - DisplaySolutionSignature: Show partition signs in output
+ * - DigitsToLose: Numerical precision control
+ * - InputFile: Problem instance file
+ * - FeasSolFile: Initial solution file
+ * - SolutionFile: Output solution file
  */
 #ifndef _MC_TM_PARAM_H
 #define _MC_TM_PARAM_H

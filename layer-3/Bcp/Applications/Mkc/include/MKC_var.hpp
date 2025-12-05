@@ -2,9 +2,21 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file MKC_var.hpp
- * @brief MKC variable definitions
+ * @brief MKC variable/column definitions
  *
- * Column/variable classes for multi-dimensional knapsack BCP.
+ * @algorithm MKC Variable: Knapsack Packing Column
+ *
+ * MKC_var represents a column in the set covering formulation:
+ * a feasible packing of orders into a single knapsack.
+ *
+ * **Data:**
+ * - cost: Column coefficient in objective
+ * - entries: First entry = knapsack index, rest = order indices packed
+ * - color[2]: For branching on color combinations
+ *
+ * **Types:**
+ * - MKC_RegularVar: Generated via pricing
+ * - MKC_BranchingVar: Created during branching
  */
 #ifndef _MKC_VAR_H
 #define _MKC_VAR_H

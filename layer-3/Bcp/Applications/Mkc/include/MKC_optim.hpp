@@ -4,7 +4,13 @@
  * @file MKC_optim.hpp
  * @brief MKC optimization routines
  *
- * Core optimization algorithms for MKC application.
+ * @algorithm Greedy Knapsack: Fast Packing Heuristic
+ *
+ * MKC_greedy_knapsack: Greedy packing algorithm for knapsack
+ * subproblems. Sorts items by cost/weight ratio, adds greedily.
+ *
+ * Used for generating initial columns and as heuristic bound
+ * during pricing.
  */
 #ifndef _MKC_OPTIM_H
 #define _MKC_OPTIM_H

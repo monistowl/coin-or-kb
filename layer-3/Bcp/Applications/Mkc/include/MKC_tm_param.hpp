@@ -2,9 +2,12 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file MKC_tm_param.hpp
- * @brief MKC tree manager for BCP
+ * @brief MKC TM parameters
  *
- * Tree manager for multi-dimensional knapsack search.
+ * @algorithm MKC TM Params: Solution and Input Configuration
+ *
+ * Parameters: DetailedFeasibleSolution, SolveLpForLB,
+ * CreateRootFromInputVars, ReadFromVarFile, etc.
  */
 #ifndef _MKC_TM_PARAM_H
 #define _MKC_TM_PARAM_H

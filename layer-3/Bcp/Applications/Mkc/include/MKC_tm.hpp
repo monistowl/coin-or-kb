@@ -4,7 +4,16 @@
  * @file MKC_tm.hpp
  * @brief MKC tree manager for BCP
  *
- * Tree manager for multi-dimensional knapsack search.
+ * @algorithm MKC TM: Search Tree Coordination
+ *
+ * Tree manager for multi-knapsack cover branch-and-price.
+ *
+ * **State:**
+ * - kss: Knapsack set (problem definition)
+ * - input_vars: Initial columns (greedy or heuristic)
+ * - clp: CLP instance for root processing
+ *
+ * Coordinates LP processes, manages incumbent solution.
  */
 #ifndef _MKC_TM_H
 #define _MKC_TM_H

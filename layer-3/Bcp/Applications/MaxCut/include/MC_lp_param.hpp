@@ -2,9 +2,23 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file MC_lp_param.hpp
- * @brief Max-cut LP relaxation for BCP
+ * @brief Max-cut LP parameters
  *
- * LP process implementation for max-cut branch-and-cut.
+ * @algorithm Max-Cut LP Params: Solver and Cut Configuration
+ *
+ * MC_lp_par defines parameters for max-cut LP process:
+ *
+ * **Solver selection:**
+ * - MC_UseVol: Volume algorithm (Lagrangean)
+ * - MC_UseClp: CLP simplex solver
+ *
+ * **Cycle cut generation:**
+ * - MC_SPCycleCutGen: Shortest-path cycle cuts (never/last resort/always)
+ * - MC_MstCycleCutGen: MST-based cycle cuts (never/last resort/always)
+ *
+ * **Heuristics:**
+ * - DoEdgeSwitchHeur: Edge swap local search
+ * - StructSwitchHeur: Structure-based improvement
  */
 #ifndef _MC_LP_PARAM_H
 #define _MC_LP_PARAM_H

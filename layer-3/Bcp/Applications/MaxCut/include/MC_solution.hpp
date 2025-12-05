@@ -4,7 +4,17 @@
  * @file MC_solution.hpp
  * @brief Max-cut solution representation
  *
- * Stores max-cut solution: node partition and objective value.
+ * @algorithm Max-Cut Solution: Partition and Heuristic Improvement
+ *
+ * Stores max-cut solution: node partition (sig vector) and cut value.
+ *
+ * **sig vector:** Sign assignment (+1 or -1) for each node.
+ * Two nodes with different signs are on opposite sides of the cut.
+ *
+ * **Local search:** Constructor can apply edge-switch and structure-switch
+ * heuristics to improve initial partition.
+ *
+ * @see MC.hpp for MC_problem definition
  */
 #ifndef _MC_SOLUTION_H
 #define _MC_SOLUTION_H

@@ -4,7 +4,20 @@
  * @file MC_cut.hpp
  * @brief Max-cut cutting planes
  *
+ * @algorithm Cycle Inequalities: Max-Cut Valid Cuts
+ *
  * Cut generation for max-cut: cycle inequalities, odd-wheel cuts.
+ *
+ * **Cycle inequality:** For any cycle in the graph, at most k-1 edges
+ * can be in the cut if the cycle has k edges. This is violated when
+ * fractional LP solution assigns >k-1 total to cycle edges.
+ *
+ * **MC_cycle_cut:** Stores cycle as edge list with memory pooling.
+ *
+ * **MC_EdgeOrdering:** MST-based cycle finding with different tie-breaking
+ * for edge selection (prefer 0, prefer 1, prefer extreme).
+ *
+ * @complexity Separation via shortest path in auxiliary graph
  */
 #ifndef _MC_CUT_H
 #define _MC_CUT_H

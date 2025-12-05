@@ -4,7 +4,10 @@
  * @file MKC_solution.hpp
  * @brief MKC solution representation
  *
- * Solution storage for multi-dimensional knapsack.
+ * @algorithm MKC Solution: Selected Column Set
+ *
+ * Stores integer solution: set of selected MKC_var columns
+ * that cover all orders exactly once.
  */
 #ifndef _MKC_SOLUTION_H
 #define _MKC_SOLUTION_H

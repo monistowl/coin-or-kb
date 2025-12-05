@@ -2,9 +2,21 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file MKC_vargen.hpp
- * @brief MKC variable definitions
+ * @brief MKC variable generation (pricing)
  *
- * Column/variable classes for multi-dimensional knapsack BCP.
+ * @algorithm MKC Pricing: Column Generation via Knapsack
+ *
+ * Functions for generating improving columns:
+ *
+ * **MKC_compute_ks_upper_bound:**
+ * Compute upper bound on reduced cost for early termination.
+ * Uses knapsack relaxation with modified costs from duals.
+ *
+ * **MKC_generate_variables:**
+ * Solve pricing subproblems to find negative reduced cost columns.
+ * Can enumerate small knapsacks exactly or use heuristics.
+ *
+ * @see MKC_knapsack.hpp for knapsack data structures
  */
 #ifndef _MKC_VARGEN_H
 #define _MKC_VARGEN_H

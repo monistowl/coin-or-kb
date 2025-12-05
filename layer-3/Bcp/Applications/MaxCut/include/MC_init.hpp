@@ -4,7 +4,16 @@
  * @file MC_init.hpp
  * @brief Max-cut BCP initialization
  *
- * Initialization routines for max-cut branch-and-cut application.
+ * @algorithm Max-Cut Init: Process Factory Methods
+ *
+ * USER_initialize subclass for max-cut application.
+ * Creates MC_tm and MC_lp instances when BCP spawns processes.
+ *
+ * **Factory methods:**
+ * - tm_init(): Creates MC_tm, reads problem file
+ * - lp_init(): Creates MC_lp for node processing
+ *
+ * @see BCP_USER.hpp for initialization interface
  */
 #ifndef _MC_INIT_H
 #define _MC_INIT_H

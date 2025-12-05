@@ -4,7 +4,18 @@
  * @file MKC_lp.hpp
  * @brief MKC LP relaxation for BCP
  *
- * LP process for multi-dimensional knapsack branch-and-cut.
+ * @algorithm MKC LP: Set Covering with Column Generation
+ *
+ * LP process for multi-knapsack cover branch-and-price.
+ *
+ * **Components:**
+ * - kss: Knapsack set defining problem structure
+ * - ks_fixings: Variable fixing from branching
+ * - enumerated_ks: Pre-enumerated small knapsack solutions
+ * - generated_vars: Columns from pricing in this node
+ *
+ * **Role:** Solve LP relaxation, call MKC_generate_variables
+ * when pricing needed, apply branching decisions.
  */
 #ifndef _MKC_LP_H
 #define _MKC_LP_H

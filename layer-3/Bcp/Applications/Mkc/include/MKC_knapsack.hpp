@@ -2,9 +2,24 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file MKC_knapsack.hpp
- * @brief MKC knapsack subproblem
+ * @brief MKC knapsack subproblem for column generation
  *
- * Knapsack subproblem solver for column generation.
+ * @algorithm Knapsack Pricing: Column Generation Subproblem
+ *
+ * Knapsack subproblem solver for Multi-Knapsack Cover problem.
+ *
+ * **Role in column generation:**
+ * Master problem has covering constraints (each item covered at least once).
+ * Pricing subproblem finds knapsack packings with negative reduced cost.
+ *
+ * **MKC_knapsack_entry:**
+ * - orig_cost: Original item value
+ * - cost: Modified cost using dual values from master
+ * - ratio: cost/weight for greedy/DP ordering
+ *
+ * **Sorting functions:** Support greedy heuristics and DP bounds.
+ *
+ * @see MKC_vargen.hpp for variable generation implementation
  */
 #ifndef _MKC_KNAPSACK_H
 #define _MKC_KNAPSACK_H

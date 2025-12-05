@@ -4,7 +4,17 @@
  * @file MC_tm.hpp
  * @brief Max-cut tree manager for BCP
  *
+ * @algorithm Max-Cut TM: Search Tree Coordination
+ *
  * Tree manager process for coordinating max-cut search tree.
+ * Inherits from BCP_tm_user to customize tree management.
+ *
+ * **Responsibilities:**
+ * - Pack/unpack MC_problem graph to LP processes
+ * - Manage best known solution (MC_solution)
+ * - Serialize/deserialize cycle cuts between processes
+ *
+ * @see MC_lp.hpp for LP node processing
  */
 #ifndef _MC_TM_H
 #define _MC_TM_H
