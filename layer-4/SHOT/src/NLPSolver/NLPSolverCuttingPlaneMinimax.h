@@ -26,7 +26,11 @@
  * - Finding interior points when Ipopt unavailable
  * - Solving auxiliary minimax subproblems
  *
- * @algorithm Iterative cutting plane for convex minimax
+ * @algorithm Iterative Cutting Plane for Convex Minimax
+ * @math Solve minimax LP: min t s.t. f_i(x) ≤ t for i = 1,...,k.
+ *       Iteratively linearize: f_i(x) ≈ f_i(x^j) + ∇f_i(x^j)·(x - x^j).
+ *       Add cuts until |t - max_i f_i(x*)| < ε.
+ * @complexity O(iterations × LP solve). Converges for convex f_i.
  */
 #pragma once
 

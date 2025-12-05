@@ -22,7 +22,13 @@
  * - Simpler than ESH but may converge slower
  * - Used as fallback when ESH rootsearch fails
  *
- * @algorithm Extended Cutting Plane (Westerlund-Pettersson)
+ * @algorithm Extended Cutting Plane (ECP)
+ * @math Given infeasible point x̂ with g(x̂) > 0, generate linearization:
+ *       g(x̂) + ∇g(x̂)·(x - x̂) ≤ 0
+ *       Valid for convex g. Cut separates x̂ from feasible region.
+ * @complexity O(gradient evaluation) per cut. Simpler than ESH.
+ * @ref Westerlund & Pettersson (1995). "An extended cutting plane method
+ *      for solving convex MINLP problems". Computers Chem. Engng.
  * @see TaskSelectHyperplanePointsESH.h for ESH variant
  * @see TaskAddHyperplanes.h for cut addition
  */

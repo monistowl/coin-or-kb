@@ -26,7 +26,14 @@
  * - ESH uses interior point + rootsearch
  * - ECP generates cuts at infeasible point directly
  *
- * @algorithm Extended Supporting Hyperplane (Kronqvist 2016)
+ * @algorithm Extended Supporting Hyperplane (ESH)
+ * @math Given infeasible x̂ and interior x°, find boundary point x* via:
+ *       x* = argmin_{0≤λ≤1} {λ : g(λx° + (1-λ)x̂) ≤ 0}
+ *       Generate cut: ∇g(x*)·(x - x*) ≤ 0 (supporting hyperplane)
+ *       Tighter than ECP cuts generated at x̂.
+ * @complexity O(rootsearch iterations × gradient eval) per cut.
+ * @ref Kronqvist et al. (2016). "The extended supporting hyperplane algorithm
+ *      for convex mixed-integer nonlinear programming". J. Global Optim.
  * @see RootsearchMethod/ for boundary finding
  * @see TaskAddHyperplanes.h for cut addition
  */

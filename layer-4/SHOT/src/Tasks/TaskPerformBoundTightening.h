@@ -22,7 +22,12 @@
  * - Tightens bounds beyond constraint propagation
  * - Improves relaxation quality
  *
- * @algorithm Optimization-Based Bound Tightening
+ * @algorithm Optimization-Based Bound Tightening (OBBT)
+ * @math For each variable x_i with bounds [l_i, u_i]:
+ *       Solve l_i' = min{x_i : x ∈ POA(f)}, u_i' = max{x_i : x ∈ POA(f)}
+ *       where POA(f) is polyhedral outer approximation.
+ *       Tighter bounds reduce relaxation gap.
+ * @complexity O(2n × LP solve). Use selectively on important variables.
  * @see NLPSolverSHOT.h for POA solver
  * @see Problem.h for bound storage
  */
