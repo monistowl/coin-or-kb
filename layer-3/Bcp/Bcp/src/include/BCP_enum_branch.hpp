@@ -2,9 +2,37 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_enum_branch.hpp
- * @brief BCP enumerations
+ * @brief Branching-related enumerations for BCP
  *
- * Enum definitions for BCP status codes and options.
+ * @algorithm Branching Enums: Child Selection and Diving Control
+ *
+ * Enumerations controlling branching decisions and child management:
+ *
+ * **BCP_child_preference:**
+ * Child selection criteria for diving: LowBound, HighBound,
+ * MoreFractional, LessFractional, PreferDiveDown, PreferDiveUp.
+ *
+ * **BCP_branching_result:**
+ * Outcomes: FathomedThisNode, DivedIntoNewNode, ContinueThisNode.
+ *
+ * **BCP_branching_decision:**
+ * User decisions: DoNotBranch_Fathomed, DoNotBranch, DoBranch.
+ *
+ * **BCP_branching_object_relation:**
+ * Strong branching comparison: OldPresolvedIsBetter,
+ * NewPresolvedIsBetter, NewPresolvedIsBetter_BranchOnIt.
+ *
+ * **BCP_branching_object_comparison:**
+ * Comparison criteria using objective bounds and averages.
+ *
+ * **BCP_child_action:**
+ * Per-child: FathomChild, ReturnChild, KeepChild.
+ *
+ * **BCP_diving_status:**
+ * Diving control: DoNotDive, DoDive, TestBeforeDive.
+ *
+ * @see BCP_lp_user.hpp for branching hooks
+ * @see BCP_lp_branch.hpp for branching objects
  */
 #ifndef _BCP_ENUM_BRANCH_H
 #define _BCP_ENUM_BRANCH_H

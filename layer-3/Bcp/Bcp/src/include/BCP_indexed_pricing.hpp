@@ -2,9 +2,16 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_indexed_pricing.hpp
- * @brief BCP framework component
+ * @brief Indexed pricing list for column generation
  *
- * Part of Branch-Cut-Price parallel optimization framework.
+ * @algorithm Indexed Pricing: Partial Column Selection for VG
+ *
+ * BCP_indexed_pricing_list tracks which variable indices to price.
+ * Allows selective pricing rather than full pricing each iteration.
+ *
+ * **Note:** Currently disabled (#if 0) - placeholder for future use.
+ *
+ * @see BCP_vg.hpp for Variable Generator process
  */
 #ifndef _BCP_INDEXED_PRICING_H
 #define _BCP_INDEXED_PRICING_H

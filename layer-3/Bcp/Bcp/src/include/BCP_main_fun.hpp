@@ -2,9 +2,31 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_main_fun.hpp
- * @brief BCP framework component
+ * @brief Process entry point functions for BCP
  *
- * Part of Branch-Cut-Price parallel optimization framework.
+ * @algorithm Process Entry Points: Main Functions per Process Type
+ *
+ * Entry point functions for each BCP process type. Called by message
+ * environment when spawning workers:
+ *
+ * - BCP_tm_main(): Tree Manager (coordinator, command line parsing)
+ * - BCP_tmstorage_main(): Tree Storage (external node storage)
+ * - BCP_lp_main(): LP worker (relaxation solving)
+ * - BCP_cg_main(): Cut Generator (separation)
+ * - BCP_vg_main(): Variable Generator (pricing)
+ *
+ * **Parameters:**
+ * - msg_env: Message passing environment
+ * - user_init: User's initialization object
+ * - my_id: Process identifier
+ * - parent: Parent process ID
+ * - ub: Initial upper bound
+ *
+ * **Return:**
+ * BCP_process_t indicating process type or termination reason.
+ *
+ * @see BCP_USER.hpp for USER_initialize
+ * @see bcp_main() for top-level entry
  */
 #ifndef _BCP_MAIN_FUN_H
 #define _BCP_MAIN_FUN_H

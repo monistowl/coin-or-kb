@@ -2,9 +2,30 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_tmstorage.hpp
- * @brief BCP tree manager
+ * @brief BCP tree storage process
  *
- * Tree manager process: coordinates B&B tree across processes.
+ * @algorithm Tree Storage: External Memory for Large Search Trees
+ *
+ * Tree Storage (TS) process for storing search tree nodes externally.
+ *
+ * **BCP_ts_prob:**
+ * The TS process manages external storage of tree nodes, variables,
+ * and cuts to allow the TM to handle trees larger than fit in memory.
+ *
+ * **Data structures:**
+ * - nodes: Map from node ID to BCP_ts_node_data (desc + user_data)
+ * - vars: Map from variable ID to BCP_var_algo*
+ * - cuts: Map from cut ID to BCP_cut_algo*
+ *
+ * **Usage:**
+ * TM sends storage/retrieval requests via messages. TS maintains
+ * the mappings and serializes data to/from the message buffer.
+ *
+ * **Memory management:**
+ * MaxHeapSize parameter controls TS memory usage for cache decisions.
+ *
+ * @see BCP_tm.hpp for Tree Manager
+ * @see BCP_node_change.hpp for node delta encoding
  */
 #ifndef _BCP_TMSTORAGE_H
 #define _BCP_TMSTORAGE_H

@@ -5,6 +5,8 @@
  * @file BCP_obj_change.hpp
  * @brief Delta encoding for variable/cut bound changes
  *
+ * @algorithm Object Set Delta: Compact Var/Cut Change Encoding
+ *
  * Provides compact representation of how objects (vars/cuts) change
  * between parent and child nodes in the search tree.
  *

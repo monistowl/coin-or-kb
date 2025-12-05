@@ -2,9 +2,24 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_warmstart_basis.hpp
- * @brief BCP warm start
+ * @brief BCP warm start basis implementation
  *
- * Warm start information for restarting from previous state.
+ * @algorithm Simplex Basis Warm Start: 2-Bit Status Encoding
+ *
+ * BCP_warmstart_basis stores LP basis information (basic/on_upper/on_lower)
+ * using 2 bits per variable/cut for compact storage.
+ *
+ * **Storage:**
+ * - _var_stat: BCP_vec_change<char> for variable statuses
+ * - _cut_stat: BCP_vec_change<char> for cut statuses
+ *
+ * **Features:**
+ * - convert_to_CoinWarmStart(): Creates CoinWarmStartBasis for OSI
+ * - as_change(): Compute delta from previous basis
+ * - Supports Explicit and WrtParent storage modes
+ *
+ * @see BCP_warmstart.hpp for base class
+ * @see CoinWarmStartBasis for OSI compatibility
  */
 #ifndef _BCP_WARMSTART_BASIS_H
 #define _BCP_WARMSTART_BASIS_H

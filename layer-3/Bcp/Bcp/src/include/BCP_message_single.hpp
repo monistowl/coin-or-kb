@@ -2,9 +2,27 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_message_single.hpp
- * @brief BCP messaging
+ * @brief Single-process message passing for BCP
  *
- * Message passing interface for parallel BCP.
+ * @algorithm Single-Process Messaging: Sequential BCP Execution
+ *
+ * BCP_single_environment implements BCP_message_environment for
+ * single-process (non-parallel) execution. All processes run
+ * sequentially in one address space.
+ *
+ * **Features:**
+ * - Simulates message passing with direct function calls
+ * - Maintains process ID map for logical process identification
+ * - Useful for debugging and small problem instances
+ *
+ * **Process management:**
+ * - register_process(): Assign unique ID
+ * - start_process(): Fork logical process (no actual parallelism)
+ * - send()/receive(): Direct buffer passing
+ *
+ * @see BCP_message.hpp for abstract interface
+ * @see BCP_message_pvm.hpp for PVM implementation
+ * @see BCP_message_mpi.hpp for MPI implementation
  */
 #ifndef _BCP_MESSAGE_SINGLE_H
 #define _BCP_MESSAGE_SINGLE_H

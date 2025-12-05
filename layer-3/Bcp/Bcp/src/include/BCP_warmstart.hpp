@@ -5,6 +5,8 @@
  * @file BCP_warmstart.hpp
  * @brief LP warm start information for BCP Branch-Cut-Price
  *
+ * @algorithm Warm Start: Delta-Encoded LP Basis for Fast Resolves
+ *
  * BCP_warmstart is the abstract base for storing LP warm start data.
  * Enables efficient LP resolves when moving between tree nodes.
  *

@@ -2,9 +2,35 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_tm_functions.hpp
- * @brief BCP tree manager
+ * @brief Tree Manager internal function declarations
  *
- * Tree manager process: coordinates B&B tree across processes.
+ * @algorithm TM Internal Functions: Process and Tree Management
+ *
+ * Function declarations for Tree Manager internals organized by module:
+ *
+ * **Initialization (BCP_tm_main.cpp):**
+ * - BCP_tm_do_one_phase(): Execute one phase of B&B
+ * - BCP_tm_create_core(): Initialize core problem
+ * - BCP_tm_create_root(): Create root node
+ *
+ * **Tree trimming (BCP_tm_trimming.cpp):**
+ * - BCP_tm_trim_tree_wrapper(): Prune dominated subtrees
+ * - BCP_tm_remove_explored(): Cleanup explored nodes
+ *
+ * **Process management (BCP_tm_msgproc.cpp):**
+ * - BCP_tm_start_processes(): Spawn LP/CG/VG processes
+ * - BCP_tm_stop_processes(): Shutdown workers
+ * - BCP_tm_remove_lp/cg/vg(): Handle worker failures
+ *
+ * **Node dispatch (BCP_tm_functions.cpp):**
+ * - BCP_tm_assign_processes(): Allocate workers to nodes
+ * - BCP_tm_start_new_nodes(): Dispatch ready nodes
+ *
+ * **Messaging (BCP_tm_msg_node_*.cpp):**
+ * - BCP_tm_send_node(): Pack and send node to LP
+ * - BCP_tm_unpack_node_*(): Receive processed nodes
+ *
+ * @see BCP_tm.hpp for Tree Manager process class
  */
 #ifndef _BCP_TM_FUNCTIONS_H
 #define _BCP_TM_FUNCTIONS_H

@@ -2,9 +2,33 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_process.hpp
- * @brief BCP process base
+ * @brief BCP process base class and scheduler
  *
- * Base class for BCP parallel processes.
+ * @algorithm Process Management: Base Class and Load Scheduler
+ *
+ * **BCP_process:**
+ * Abstract base for all BCP processes (TM, LP, CG, VG, TS).
+ * - get_process_id(): Unique process identifier
+ * - get_parent(): Parent process that spawned this one
+ * - get_message_buffer(): Buffer for IPC
+ * - process_message(): Handle incoming messages
+ *
+ * **BCP_scheduler:**
+ * Dynamic load balancer for allocating LP and strong-branching IDs.
+ * Uses rate-based allocation when many processes are busy, static
+ * overestimation otherwise.
+ *
+ * **Scheduling strategies:**
+ * - Static: Allocate rho_static_ * requested IDs
+ * - Rate-based: Track request/release rates over time horizon
+ * - Switch when busy count exceeds switch_thresh_ * total
+ *
+ * **ID types:**
+ * - Node IDs: For processing search tree nodes
+ * - SB IDs: For strong branching evaluations
+ *
+ * @see BCP_tm.hpp for Tree Manager process
+ * @see BCP_lp.hpp for LP process
  */
 #ifndef _BCP_PROCESS_H
 #define _BCP_PROCESS_H

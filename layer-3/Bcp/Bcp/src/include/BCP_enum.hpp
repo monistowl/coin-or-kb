@@ -5,6 +5,8 @@
  * @file BCP_enum.hpp
  * @brief Core enumerations for BCP Branch-Cut-Price framework
  *
+ * @algorithm BCP Enumerations: Algorithm Control Types
+ *
  * Defines fundamental types controlling BCP algorithm behavior:
  *
  * **Object types:**

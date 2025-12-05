@@ -2,9 +2,38 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_lp_functions.hpp
- * @brief BCP LP process
+ * @brief LP process internal function declarations
  *
- * LP relaxation process: solves node relaxations, generates cuts.
+ * @algorithm LP Internal Functions: Node Processing Pipeline
+ *
+ * Function declarations for LP process internals organized by module:
+ *
+ * **Main loop (BCP_lp_main_loop.cpp):**
+ * - BCP_lp_main_loop(): Core solve-cut-branch iteration
+ *
+ * **Fathoming (BCP_lp_fathom.cpp):**
+ * - BCP_lp_fathom(): Node pruning by bound
+ * - BCP_price_vars(): Variable pricing for column generation
+ * - BCP_restore_feasibility(): Handle dual infeasibility
+ *
+ * **Cut/Column generation:**
+ * - BCP_lp_generate_cuts(): Invoke separation routines
+ * - BCP_lp_generate_vars(): Invoke pricing routines
+ *
+ * **Matrix management (BCP_lp_colrow.cpp):**
+ * - BCP_lp_fix_vars(): Variable fixing by reduced costs
+ * - BCP_lp_delete_cols_and_rows(): Matrix cleanup
+ * - BCP_lp_add_from_local_*_pool(): Pool management
+ *
+ * **Branching (BCP_lp_branch.cpp):**
+ * - BCP_lp_branch(): Execute branching decision
+ *
+ * **Messaging (BCP_lp_msgproc.cpp):**
+ * - BCP_lp_check_ub(): Process upper bound updates
+ * - BCP_lp_send_cuts_to_cp(): Communicate with cut pool
+ *
+ * @see BCP_lp.hpp for LP process class
+ * @see BCP_lp_user.hpp for user customization
  */
 #ifndef _BCP_LP_FUNCTIONS_H
 #define _BCP_LP_FUNCTIONS_H

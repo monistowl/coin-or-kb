@@ -5,6 +5,8 @@
  * @file BCP_USER.hpp
  * @brief User initialization and packing interface for BCP
  *
+ * @algorithm User Entry Point: Initialization and Serialization
+ *
  * Defines the entry points and serialization interfaces users must implement.
  *
  * **BCP_user_data:**

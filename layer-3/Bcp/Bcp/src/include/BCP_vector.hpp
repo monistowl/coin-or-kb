@@ -5,6 +5,8 @@
  * @file BCP_vector.hpp
  * @brief Custom vector class for BCP with performance optimizations
  *
+ * @algorithm BCP Vector: Contiguous Array with Bulk Operations
+ *
  * BCP_vec<T> is BCP's custom vector, similar to std::vector but
  * guaranteed to be a contiguous memory array with extra methods.
  *

@@ -5,6 +5,8 @@
  * @file BCP_buffer.hpp
  * @brief Message buffer for BCP inter-process communication
  *
+ * @algorithm Message Serialization: Pack/Unpack Buffer for IPC
+ *
  * BCP_buffer is the serialization mechanism for all BCP messages.
  * Each process uses a single buffer for both incoming and outgoing messages.
  *

@@ -4,7 +4,25 @@
  * @file BCP_parameters.hpp
  * @brief BCP parameters
  *
+ * @algorithm Parameter Management: Type-Safe Configuration System
+ *
  * Parameter handling for BCP framework configuration.
+ *
+ * **BCP_parameter_set<Par>:**
+ * Template class holding char, int, double, string, and string-array parameters.
+ * Each parameter type has its own typed array for efficient access.
+ *
+ * **Key features:**
+ * - Keyword-value file parsing with environment variable expansion
+ * - Type-safe entry() and set_entry() accessors
+ * - pack()/unpack() for inter-process parameter transfer
+ * - Support for ParamFile directive to include nested files
+ *
+ * **Usage:**
+ * Define a struct with parameter enums, then instantiate BCP_parameter_set<>.
+ * Implement create_keyword_list() and set_default_entries() for the struct.
+ *
+ * @see BCP_tm_param.hpp, BCP_lp_param.hpp for TM/LP parameters
  */
 #ifndef _BCP_PARAMETERS_H
 #define _BCP_PARAMETERS_H
