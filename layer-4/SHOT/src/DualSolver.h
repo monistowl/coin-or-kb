@@ -13,6 +13,46 @@
  *
  * Manages the linearization-based dual problem.
  *
+ * @algorithm Supporting Hyperplane Generation:
+ * Creates linear approximations of convex constraint set.
+ *
+ * LINEARIZATION AT POINT x_k:
+ *   For constraint g(x) <= 0 (convex):
+ *     Cut: g(x_k) + nabla g(x_k)'(x - x_k) <= 0
+ *
+ *   Rearranged: nabla g(x_k)' x <= nabla g(x_k)' x_k - g(x_k)
+ *
+ * CUT GENERATION POINTS:
+ *   1. MIP solutions (infeasible for NLP)
+ *   2. LP relaxation solutions
+ *   3. Interior points (for ESH)
+ *   4. Root relaxation solutions
+ *
+ * @algorithm Extended Supporting Hyperplane (ESH):
+ * Adds cuts at interior points for tighter approximation.
+ *
+ * INTERIOR POINT PROJECTION:
+ *   Given interior point x_int (g(x_int) < 0):
+ *   - Draw line from x_int to infeasible point x_inf
+ *   - Find boundary point x_bnd where g(x_bnd) = 0
+ *   - Add hyperplane at x_bnd
+ *
+ *   This creates cuts that better approximate the boundary
+ *   than cuts at infeasible points alone.
+ *
+ * @algorithm Integer Cuts (No-Good Cuts):
+ * Exclude previously found integer solutions.
+ *
+ *   For integer solution y*:
+ *     sum_{j: y*_j=1} (1-y_j) + sum_{j: y*_j=0} y_j >= 1
+ *
+ *   Forces at least one integer variable to change.
+ *   Used when NLP subproblem is infeasible.
+ *
+ * @math Dual bound at iteration k:
+ *   z_D^k = optimal value of MIP with k hyperplanes
+ *   z_D^k <= z_D^(k+1) <= z* (monotone non-decreasing)
+ *
  * **DualSolver Class:**
  * - MIPSolver: Backend MIP solver (CPLEX/Gurobi/CBC/HiGHS)
  * - generatedHyperplanes: All cutting planes added
@@ -31,8 +71,10 @@
  * - interiorPointCandidates: Candidate interior points
  * - interiorPts: Verified interior points for ESH
  *
- * @algorithm Extended Supporting Hyperplane (ESH) method adds
- *            linearizations at boundary and interior points
+ * @complexity
+ * - Hyperplane addition: O(n) per cut (n = variables)
+ * - Duplicate check: O(1) via hash
+ * - MIP solve: depends on backend solver
  *
  * @see PrimalSolver.h for primal bound computation
  * @see MIPSolver/ for backend implementations

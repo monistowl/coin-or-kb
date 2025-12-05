@@ -13,6 +13,64 @@
  *
  * Primary entry point for the SHOT optimizer.
  *
+ * @algorithm SHOT (Supporting Hyperplane Optimization Toolkit):
+ * Global optimization for convex MINLP via outer approximation.
+ *
+ * PROBLEM CLASS:
+ *   min  f(x,y)
+ *   s.t. g_i(x,y) <= 0     (convex constraints)
+ *        x in X            (linear constraints)
+ *        y in {0,1}^p      (binary variables)
+ *
+ * OUTER APPROXIMATION PRINCIPLE:
+ *   Replace convex constraints g(x) <= 0 with linear approximations:
+ *     g(x_k) + nabla g(x_k)'(x - x_k) <= 0
+ *
+ *   The linearization is a supporting hyperplane at x_k.
+ *   For convex g: g(x) >= g(x_k) + nabla g(x_k)'(x - x_k)
+ *   So the linear approx is a valid relaxation.
+ *
+ * DUAL BOUND (lower bound):
+ *   Solve MIP with accumulated linear cuts.
+ *   Solution may violate nonlinear constraints.
+ *
+ * PRIMAL BOUND (upper bound):
+ *   Fix integers from MIP solution, solve NLP.
+ *   If feasible: valid upper bound on optimal value.
+ *
+ * CONVERGENCE:
+ *   For convex MINLP: dual bound -> optimal as cuts accumulate.
+ *   Gap = (primal - dual) / |primal| -> 0
+ *
+ * @algorithm Solution Strategies:
+ * MULTI-TREE (traditional):
+ *   - Solve MIP to optimality
+ *   - Add cuts at solution
+ *   - Re-solve MIP
+ *   - Iterate until gap closed
+ *
+ * SINGLE-TREE (lazy constraints):
+ *   - One MIP solve with callback
+ *   - At integer nodes: add lazy cuts
+ *   - More efficient for large problems
+ *
+ * ECP (Extended Cutting Plane):
+ *   - Add cuts at LP solutions too
+ *   - Faster convergence but more cuts
+ *
+ * ESH (Extended Supporting Hyperplane):
+ *   - Add cuts at interior points
+ *   - Better approximation quality
+ *
+ * @complexity
+ * - Each iteration: O(MIP) + O(NLP) for primal heuristic
+ * - Convergence: finite for convex MINLP, exponential worst case
+ * - Practice: often fast due to warm starts and cut reuse
+ *
+ * @ref Kronqvist, Lundell & Westerlund (2016). "The Extended Supporting
+ *   Hyperplane Algorithm for Convex Mixed-Integer Nonlinear Programming".
+ *   J. Global Optimization 64(2):249-272.
+ *
  * **Solver Class:**
  * - setProblem(): Load GAMS/AMPL/OSiL problem file
  * - solveProblem(): Execute the selected solution strategy
