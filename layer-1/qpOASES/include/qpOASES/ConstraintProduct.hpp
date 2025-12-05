@@ -23,15 +23,17 @@
 
 
 /**
- *	\file include/qpOASES/ConstraintProduct.hpp
- *	\author Hans Joachim Ferreau, Andreas Potschka, Christian Kirches
- *	\version 3.2
- *	\date 2009-2017
+ * @file ConstraintProduct.hpp
+ * @brief User-defined constraint evaluation interface for structured matrices
  *
- *	Declaration of the ConstraintProduct class which allows to specify a
- *	user-defined function for evaluating the constraint product at the 
- *	current iterate to speed-up QP solution in case of a specially structured
- *	constraint matrix.
+ * @algorithm User-Defined Constraint Product for Structured QPs
+ * Allows exploiting constraint matrix structure (banded, sparse patterns,
+ * network flows) by providing custom Ax evaluation instead of dense GEMV.
+ * Critical for MPC applications with predictable sparsity.
+ *
+ * @author Hans Joachim Ferreau, Andreas Potschka, Christian Kirches
+ * @version 3.2
+ * @date 2009-2017
  */
 
 

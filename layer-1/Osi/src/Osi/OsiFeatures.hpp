@@ -1,3 +1,24 @@
+/**
+ * @file OsiFeatures.hpp
+ * @brief MIP problem features for algorithm selection and parameter tuning
+ *
+ * @algorithm MIP Feature Extraction for Algorithm Selection (207 Features, O(nz))
+ * Copyright (C) 2020, COIN-OR Foundation. EPL-1.0 license.
+ *
+ * Extracts 207 structural features from MIP models for algorithm recommendation:
+ * - Matrix statistics: density, nz distribution, coefficient ranges
+ * - Variable types: binary, general integer, continuous, unbounded counts
+ * - Constraint patterns: partitioning, packing, covering, cardinality,
+ *   knapsack (integer, invariant, bin-packing), singleton, aggregation,
+ *   precedence, variable bound, flow (binary, mixed)
+ * - Objective/RHS statistics: min, max, avg, stddev, integrality
+ *
+ * All features computed in O(nz) time. Used for ML-based algorithm selection.
+ *
+ * @ref Vilas Boas et al. "Optimal Decision Trees for Algorithm Selection"
+ *      Int. Trans. Oper. Res. (2019) DOI:10.1111/itor.12724
+ */
+
 // Copyright (C) 2020, COIN-OR Foundation
 // All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).

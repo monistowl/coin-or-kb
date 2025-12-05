@@ -23,12 +23,18 @@
 
 
 /**
- *	\file include/qpOASES/LapackBlasReplacement.hpp
- *	\author Andreas Potschka, Hans Joachim Ferreau, Christian Kirches
- *	\version 3.2
- *	\date 2009-2017
+ * @file LapackBlasReplacement.hpp
+ * @brief LAPACK/BLAS interface declarations for qpOASES linear algebra
  *
- *  Declarations for external LAPACK/BLAS functions.
+ * @algorithm BLAS-3/LAPACK Interface (GEMM, POTRF, TRTRS, TRCON)
+ * External declarations for core linear algebra: matrix multiplication (GEMM),
+ * Cholesky factorization (POTRF), triangular solves (TRTRS), and condition
+ * number estimation (TRCON). Supports single/double precision and optional
+ * namespace prefixing to avoid symbol conflicts.
+ *
+ * @author Andreas Potschka, Hans Joachim Ferreau, Christian Kirches
+ * @version 3.2
+ * @date 2009-2017
  */
 
 
