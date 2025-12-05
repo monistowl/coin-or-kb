@@ -10,10 +10,38 @@
  * CoinPackedMatrix for sparse storage. This is appropriate for general
  * sparse LP matrices without special structure.
  *
- * Adds Clp-specific functionality on top of CoinPackedMatrix:
- * - Scaling integration with the solver
- * - Optimized matrix-vector products for simplex
- * - Row copy management for efficient BTRAN
+ * @algorithm Sparse Matrix for LP Simplex:
+ * Efficient column and row access for simplex operations.
+ *
+ * STORAGE (Compressed Sparse Column - CSC):
+ *   vectorStarts_[j]: Index where column j begins
+ *   indices_[k]: Row index of element k
+ *   elements_[k]: Value of element k
+ *
+ * @algorithm Key Operations for Simplex:
+ *
+ * FTRAN (compute column of B⁻¹A):
+ *   unpack(j) extracts column A_j as sparse vector
+ *   times(x, y) computes y += A·x
+ *
+ * BTRAN (compute π'A for pricing):
+ *   transposeTimes(π, d) computes d = A'·π
+ *   Can use column copy or row copy depending on sparsity
+ *
+ * @algorithm Row Copy Optimization:
+ * For BTRAN when π is sparse, row copy (CSR format) is faster:
+ *   - Column form: Must touch all columns
+ *   - Row form: Only touch rows where π_i ≠ 0
+ *
+ * ClpPackedMatrix2/3 provide specialized row copies with:
+ *   - Block structure for parallelization
+ *   - Status-aware skipping (ignore basic/fixed variables)
+ *   - Combined pricing + steepest edge update
+ *
+ * @algorithm Scaling Integration:
+ * Row/column scaling applied on-the-fly in times()/transposeTimes():
+ *   scaled_A[i,j] = rowScale[i] * A[i,j] * columnScale[j]
+ * Avoids storing scaled copy.
  *
  * @see ClpMatrixBase for the abstract interface
  * @see CoinPackedMatrix in CoinUtils for underlying storage

@@ -10,15 +10,27 @@
  * but no actual matrix data. Used primarily with ClpPdco where the user
  * provides custom matrix-vector products via callbacks.
  *
- * All matrix operations are valid but return empty/zero results:
- * - times()/transposeTimes(): No-op (multiply by empty matrix)
- * - getElements()/getIndices(): Return NULL
- * - unpack(): Produces empty sparse vector
+ * @algorithm Matrix-Free Optimization:
+ * For problems where A is too large to store or has special structure
+ * (e.g., discretizations, FFT-based), represent matrix implicitly.
  *
- * Use case: PDCO interior point with user-defined operators
- * When the constraint matrix is too large to store explicitly or has
- * special structure (e.g., arising from discretization), the user
- * implements matrix-vector products directly instead of storing A.
+ * INTERFACE PATTERN:
+ *   User provides: matVecMult(mode, x, y)
+ *     mode=1: y := y + A·x
+ *     mode=2: x := x + A'·y
+ *
+ *   ClpDummyMatrix provides: dimensions for size checking
+ *     getNumRows(), getNumCols(), getNumElements()
+ *
+ * All matrix operations return empty/zero results:
+ *   times()/transposeTimes(): No-op (matrix is empty)
+ *   getElements()/getIndices(): Return NULL
+ *   unpack(): Produces empty sparse vector
+ *
+ * USE CASES:
+ *   - PDCO interior point: User implements matrix products in ClpPdcoBase
+ *   - Large-scale problems: Matrix arises from operator, not explicit data
+ *   - Testing: Mock matrix object for algorithm development
  *
  * @see ClpPdco for the interior point method using this
  * @see ClpPdcoBase for user-defined objective/matrix interface

@@ -9,13 +9,32 @@
  * Extends ClpPrimalColumnPivot for QP problems where the reduced cost
  * depends on the current solution (due to the quadratic objective).
  *
- * Dantzig's rule: Choose the variable with largest reduced cost violation.
- * For QP, the reduced cost c̄_j = c_j + (Qx)_j - π'A_j changes as x changes.
+ * @algorithm Dantzig Pricing for Quadratic Programs:
+ * Simple but robust variable selection for QP simplex.
  *
- * This is the simplest QP pricing rule - it examines all non-basic variables
- * to find the most attractive one. Slow but robust.
+ * @math REDUCED COST FOR QP:
+ * For LP: c̄_j = c_j - π'A_j (constant during iteration)
+ * For QP: c̄_j = c_j + (Qx)_j - π'A_j (changes with x!)
  *
- * quadraticInfo_: Holds current quadratic gradient Qx and related state.
+ * @algorithm Selection Rule:
+ * Choose entering variable j* = argmax |c̄_j| among:
+ *   - Variables at lower bound with c̄_j < 0 (can increase)
+ *   - Variables at upper bound with c̄_j > 0 (can decrease)
+ *
+ * @complexity O(n) per pricing: examines all nonbasic variables.
+ * No sophisticated structures like steepest edge or Devex.
+ *
+ * WHY REDUCED COST CHANGES IN QP:
+ *   ∇f(x) = c + Qx
+ *   When basic variables change → x changes → Qx changes → c̄ changes
+ *   Must recompute all reduced costs each iteration (expensive!)
+ *
+ * quadraticInfo_ stores:
+ *   - Current Qx product
+ *   - Solution state for gradient updates
+ *
+ * Use when: Starting out with QP, need robust method.
+ * Avoid when: Large problems (use steepest edge variants).
  *
  * @see ClpPrimalColumnPivot for the abstract pivot interface
  * @see ClpQuadraticObjective for the QP objective representation
