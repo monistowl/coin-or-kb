@@ -17,18 +17,44 @@
  * enabling generation of convex relaxations. If w = f(x), then cuts
  * are generated for the relation between w and f(x).
  *
+ * @algorithm Expression Standardization via Auxiliary Variables:
+ * Transform arbitrary nonlinear expressions into simple form.
+ *
+ * REFORMULATION PROCESS:
+ *   Original: min f(g(h(x)))
+ *   Introduce auxiliaries:
+ *     w1 = h(x)   (innermost)
+ *     w2 = g(w1)
+ *     w3 = f(w2)  (outermost)
+ *   Reformulated: min w3 s.t. w1=h(x), w2=g(w1), w3=f(w2)
+ *
+ * BENEFIT:
+ *   Each auxiliary w_i = f_i(...) is a simple expression
+ *   Convex relaxation cuts are easier to derive for simple forms
+ *   Bound propagation through DAG becomes straightforward
+ *
+ * @algorithm Auxiliary Variable Ranking:
+ * Depth in expression DAG guides branching priority.
+ *
+ *   rank(original_var) = 1
+ *   rank(w = f(x)) = rank(x) + 1
+ *   rank(w = f(x1,...,xk)) = 1 + max{rank(xi)}
+ *
+ * Higher rank = deeper in DAG = affects more constraints
+ * Branching on high-rank variables has more propagation impact.
+ *
+ * @algorithm Multiplicity-Based Selection:
+ * Variables appearing more often have higher branching value.
+ *
+ *   multiplicity_ counts occurrences in reformulated problem
+ *   Higher multiplicity → branching affects more constraints
+ *   Used to break ties in branching variable selection
+ *
  * **Key attributes:**
  * - image_: The expression f(x) this auxiliary represents
  * - sign_: Relation type (AUX_LEQ: w <= f(x), AUX_EQ: w = f(x), AUX_GEQ)
  * - rank_: Depth in expression DAG (used for branching priority)
  * - multiplicity_: How many times this aux appears in reformulation
- *
- * **Bound expressions:**
- * - lb_/ub_: Expressions computing bounds from child variable bounds
- *
- * **compExpr functor:**
- * Enables set-based lookup of auxiliary variables, avoiding duplicates
- * when the same expression appears multiple times.
  *
  * @see exprVar for base class
  * @see CouenneProblem::standardize() for auxiliary creation

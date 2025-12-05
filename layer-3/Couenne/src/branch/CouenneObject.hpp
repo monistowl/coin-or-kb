@@ -16,23 +16,46 @@
  * Defines branching for auxiliary variables based on their infeasibility
  * |w - f(x)|. Creates branches to restore feasibility of the relation.
  *
- * **Infeasibility measure:**
- * For w = f(x), infeasibility = |current_w - f(current_x)|
+ * @algorithm Infeasibility for Auxiliary Variables:
+ * Measure violation of defining constraint w = f(x).
  *
- * **Branching strategies (brSelStrat):**
- * - MID_INTERVAL: Branch at interval midpoint
- * - MIN_AREA: Minimize area between convex relaxation and function
- * - BALANCED: Balance improvement on both branches
- * - LP_CENTRAL: Use LP solution as branching point
- * - LP_CLAMPED: LP solution clamped to safe region
+ *   infeasibility(w) = |w_current - f(x_current)|
  *
- * **Branching modes:**
- * - TWO_LEFT/RIGHT/RAND: Two-way branching
- * - THREE_LEFT/CENTER/RIGHT/RAND: Three-way branching
+ * For nonconvex MINLP, auxiliary may violate its definition even when
+ * the convex relaxation is satisfied. This is the "spatial" infeasibility
+ * that spatial branching aims to reduce.
  *
- * **Pseudocost estimation:**
- * - downEstimate_/upEstimate_: Predicted improvement for each branch
- * - pseudocostMult: Method for computing estimates
+ * CONVEXITY GAP:
+ *   For nonconvex f, convex envelope conv(f) may be loose
+ *   Even if w satisfies conv(f), w may violate w = f(x)
+ *   Infeasibility measures this gap
+ *
+ * @algorithm Branching Point Selection Strategies:
+ * Where to branch affects convergence significantly.
+ *
+ *   MID_INTERVAL: brpt = α·l + (1-α)·x* + α·u
+ *     - Default safe choice, always creates meaningful subproblems
+ *     - α parameter controls how much to pull toward midpoint
+ *
+ *   MIN_AREA: argmin_b Area(convenv on [l,b]) + Area(convenv on [b,u])
+ *     - Minimizes total relaxation gap over both children
+ *     - Requires knowledge of convex envelope structure
+ *
+ *   BALANCED: Balance improvement on both branches
+ *     - Aims for similar dual bound increase on both sides
+ *
+ *   LP_CENTRAL: brpt = x* (current LP solution value)
+ *     - Often good since LP suggests where "action" is
+ *
+ *   LP_CLAMPED: x* clamped to [l + ε(u-l), u - ε(u-l)]
+ *     - LP_CENTRAL but avoiding tiny subproblems near bounds
+ *
+ * @math For convex envelope gap:
+ *   Area = integral_l^u |f(x) - convenv(x)| dx
+ *   MIN_AREA minimizes sum of child areas
+ *
+ * @complexity infeasibility(): O(expression evaluation)
+ * getBrPoint(): O(1) to O(envelope computation) depending on strategy
  *
  * @see CouenneBranchingObject for the actual branch creation
  * @see CouenneChooseVariable for variable selection

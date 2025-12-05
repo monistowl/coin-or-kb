@@ -15,15 +15,43 @@
  * Cbc (via OsiClpSolverInterface) or CPLEX (via OsiCpxSolverInterface).
  * Used by OA decomposition algorithms to solve the linearized master problem.
  *
- * **Solve strategies (MILP_solve_strategy):**
- * - FindGoodSolution: Quickly find a feasible integer solution
- * - GetOptimum: Solve to optimality (slower but provides bounds)
+ * @algorithm MILP Master Problem Solving:
+ * Role of master problem in Outer Approximation decomposition.
  *
- * **Key methods:**
- * - solve(): Dispatch to find_good_sol() or optimize() based on strategy
- * - optimize_with_lazy_constraints(): CPLEX lazy cuts for OA
- * - getLastSolution(): Retrieve integer solution found
- * - lowBound(): Lower bound from MILP solve
+ * OA CONTEXT:
+ *   Original MINLP: min f(x,y) s.t. g(x,y) ≤ 0, y ∈ {0,1}
+ *
+ *   Master MILP (this solver): min η
+ *     s.t. η ≥ f(x^k) + ∇f(x^k)ᵀ(x-x^k)  for k=1..K (linearizations)
+ *          0 ≥ g(x^k) + ∇g(x^k)ᵀ(x-x^k)  for k=1..K
+ *          y ∈ {0,1}
+ *
+ *   Master provides: integer solution y* and lower bound
+ *   Subproblem uses y* to generate next linearization
+ *
+ * @algorithm Solve Strategy Selection:
+ * Trade-off between solution quality and speed.
+ *
+ *   FindGoodSolution:
+ *     - find_good_sol(): Quick feasibility heuristics
+ *     - Used in early OA iterations
+ *     - Goal: Get integer point fast for NLP subproblem
+ *
+ *   GetOptimum:
+ *     - optimize(): Full B&B to optimality
+ *     - Used when bound quality matters
+ *     - Provides valid lower bound for convergence check
+ *
+ * @algorithm Lazy Constraint Callback (CPLEX):
+ * Generate OA cuts on-the-fly during MILP solve.
+ *
+ *   optimize_with_lazy_constraints():
+ *     CPLEX calls back when integer solution found
+ *     Check NLP feasibility, add OA cut if violated
+ *     More efficient than iterative OA for some problems
+ *
+ * @complexity MILP solve dominates. Branch-and-cut complexity depends
+ * on problem structure. Master grows with accumulated linearizations.
  *
  * @see OaDecompositionBase for OA algorithm using this solver
  * @see OACutGenerator2 for classical OA implementation

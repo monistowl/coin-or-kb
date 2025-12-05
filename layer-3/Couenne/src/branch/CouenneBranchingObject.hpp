@@ -16,25 +16,47 @@
  * Executes branching on a variable (which may be continuous) to
  * partition the domain and tighten the convex relaxation.
  *
- * **Spatial branching:**
- * Unlike MIP where branching only on integers, Couenne branches on
- * continuous variables to reduce the gap between the convex relaxation
- * and the original nonconvex function.
+ * @algorithm Spatial Branching for Nonconvex MINLP:
+ * Branch on continuous variables to tighten convex relaxations.
  *
- * **branch() method:**
- * 1. Restrict variable bounds based on branch direction
- * 2. Optionally run FBBT (doFBBT_) to propagate new bounds
- * 3. Optionally add convexification cuts (doConvCuts_)
- * 4. Return estimated objective change
+ * MOTIVATION:
+ *   Standard MIP: Branch only on integer variables
+ *   Nonconvex NLP: Convex relaxation can be arbitrarily loose
  *
- * **Bound cropping:**
- * - COUENNE_CROP: Minimum bound tightening threshold
- * - COUENNE_LARGE_INTERVAL: Threshold for "large" variable domains
- * - COUENNE_NEAR_BOUND: Threshold for being "near" a bound
+ *   Spatial branching: Subdivide continuous variable domains to
+ *   reduce relaxation gap. Key insight: convex envelopes tighten
+ *   as variable bounds get closer.
  *
- * **Simulation mode:**
- * simulate_ flag indicates strong branching evaluation without
- * actually committing the branch.
+ * BRANCH EXECUTION (branch() method):
+ *   1. Restrict bounds: [l, u] → [l, brpoint] or [brpoint, u]
+ *   2. if (doFBBT_): Run feasibility-based bound tightening
+ *      - Propagate new bounds through expression DAG
+ *      - May detect infeasibility or further tighten bounds
+ *   3. if (doConvCuts_): Add convexification cuts
+ *      - Tighter linearizations with narrower domains
+ *   4. Return estimated objective change for node selection
+ *
+ * @algorithm Branching Point Selection:
+ * Where to split the variable domain matters significantly.
+ *
+ *   Common strategies:
+ *   - Midpoint: brpoint = (l + u) / 2
+ *   - LP solution: brpoint = x*_j (current relaxation value)
+ *   - Violation-based: Split where convexification error largest
+ *
+ *   Near-bound cropping (COUENNE_NEAR_BOUND):
+ *   - If brpoint near l or u, shift away to ensure meaningful split
+ *   - Prevents tiny subproblems that don't help convergence
+ *
+ * @math For a convex envelope of f(x) on [l, u]:
+ *   Gap ≤ max_{x ∈ [l,u]} |f(x) - convenv(x)|
+ *   As (u - l) → 0, gap → 0 (envelope tightens)
+ *
+ * @complexity O(propagation) + O(cut generation) per branch
+ * FBBT propagation is O(|expressions|), cut generation varies.
+ *
+ * @ref Belotti et al. (2009). "Branching and bounds tightening techniques
+ *   for non-convex MINLP". Optimization Methods & Software 24(4-5):597-634.
  *
  * @see CouenneObject for infeasibility computation
  * @see CouenneChooseStrong for strong branching
