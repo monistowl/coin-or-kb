@@ -1,6 +1,8 @@
 /**
  * @file CbcLinked.hpp
  * @brief Extended solver for nonlinear and bilinear problems
+ *
+ * @algorithm Bilinear Term Linearization (4-Lambda SOS2)
  * Copyright (C) 2006, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

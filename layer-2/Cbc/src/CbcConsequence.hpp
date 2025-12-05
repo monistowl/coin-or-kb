@@ -1,6 +1,8 @@
 /**
  * @file CbcConsequence.hpp
  * @brief Abstract base for bound implications from branching
+ *
+ * @algorithm Branch Consequence Interface for Implied Bounds
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

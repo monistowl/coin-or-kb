@@ -1,6 +1,8 @@
 /**
  * @file CbcDummyBranchingObject.hpp
  * @brief No-op branching object for special cases
+ *
+ * @algorithm Placeholder One-Way Branch (No-Op)
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

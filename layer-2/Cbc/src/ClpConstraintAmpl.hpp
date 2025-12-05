@@ -1,6 +1,8 @@
 /**
  * @file ClpConstraintAmpl.hpp
  * @brief AMPL-interface constraint for nonlinear Clp extensions
+ *
+ * @algorithm AMPL ASL Nonlinear Constraint Gradient
  * Copyright (C) 2007, International Business Machines Corporation.
  * This code is licensed under the Eclipse Public License (EPL).
  *

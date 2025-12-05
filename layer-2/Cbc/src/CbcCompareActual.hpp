@@ -1,6 +1,8 @@
 /**
  * @file CbcCompareActual.hpp
  * @brief Aggregator header for concrete comparison classes
+ *
+ * @algorithm Node Comparison Strategy Collection
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

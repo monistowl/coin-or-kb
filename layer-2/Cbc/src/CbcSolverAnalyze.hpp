@@ -1,6 +1,8 @@
 /**
  * @file CbcSolverAnalyze.hpp
  * @brief Problem analysis for integer constraint detection
+ *
+ * @algorithm Integer Structure Detection and Strengthening
  * Copyright (C) 2007, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

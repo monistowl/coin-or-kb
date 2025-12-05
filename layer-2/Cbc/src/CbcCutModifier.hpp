@@ -1,6 +1,8 @@
 /**
  * @file CbcCutModifier.hpp
  * @brief Abstract base class for cut modification
+ *
+ * @algorithm Cut Post-Processing Interface
  * Copyright (C) 2003, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

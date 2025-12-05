@@ -1,6 +1,8 @@
 /**
  * @file CbcSolverExpandKnapsack.hpp
  * @brief Knapsack constraint expansion for tighter formulations
+ *
+ * @algorithm Knapsack Enumeration Reformulation
  * Copyright (C) 2007, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

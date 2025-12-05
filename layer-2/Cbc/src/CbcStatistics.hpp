@@ -1,6 +1,8 @@
 /**
  * @file CbcStatistics.hpp
  * @brief Statistics gathering for node processing
+ *
+ * @algorithm B&C Performance Statistics Collection
  * Copyright (C) 2005, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

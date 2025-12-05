@@ -1,6 +1,8 @@
 /**
  * @file CbcObjectUpdateData.hpp
  * @brief Data carrier for updating branching objects after branching
+ *
+ * @algorithm Feedback Carrier for Dynamic Pseudocost Learning
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

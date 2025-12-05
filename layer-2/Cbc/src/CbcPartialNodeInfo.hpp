@@ -1,6 +1,8 @@
 /**
  * @file CbcPartialNodeInfo.hpp
  * @brief Incremental subproblem storage as differences from parent
+ *
+ * @algorithm Delta-Encoded Node State for Memory Efficiency
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

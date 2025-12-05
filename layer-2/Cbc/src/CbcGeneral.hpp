@@ -1,6 +1,8 @@
 /**
  * @file CbcGeneral.hpp
  * @brief Abstract base for general multi-way branching
+ *
+ * @algorithm Abstract Base for Multi-Way/Lookahead Branching
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

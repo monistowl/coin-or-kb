@@ -1,6 +1,8 @@
 /**
  * @file CbcBranchActual.hpp
  * @brief Aggregator for concrete branching classes
+ *
+ * @algorithm Branching Object Implementation Collection
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

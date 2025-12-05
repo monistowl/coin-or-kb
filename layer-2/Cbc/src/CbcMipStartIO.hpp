@@ -2,6 +2,7 @@
  * @file CbcMipStartIO.hpp
  * @brief Read MIP starting solutions from files
  *
+ * @algorithm MIP Warm-Start Solution I/O
  * CbcMipStartIO: Utilities for reading partial or complete MIP solutions.
  * Warm-starting B&C with a known solution can dramatically speed up solving.
  *

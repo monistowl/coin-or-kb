@@ -1,6 +1,8 @@
 /**
  * @file CbcCompareBase.hpp
  * @brief Abstract base class for node comparison/selection
+ *
+ * @algorithm Search Tree Node Priority Strategy Interface
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

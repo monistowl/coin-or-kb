@@ -1,6 +1,8 @@
 /**
  * @file CbcThread.hpp
  * @brief Multi-threaded parallel B&C support
+ *
+ * @algorithm Parallel B&C with Deterministic and Opportunistic Modes
  * Copyright (C) 2009, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

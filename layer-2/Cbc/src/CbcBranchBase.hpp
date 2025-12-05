@@ -1,6 +1,8 @@
 /**
  * @file CbcBranchBase.hpp
  * @brief Base includes for CBC branching model
+ *
+ * @algorithm Three-Class Branching Model (Object/BranchingObject/Decision)
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

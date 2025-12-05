@@ -1,6 +1,8 @@
 /**
  * @file CbcFixVariable.hpp
  * @brief Fix variable bounds as branching consequence
+ *
+ * @algorithm State-Based Variable Fixing from Branch Decisions
  * Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

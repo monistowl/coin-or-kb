@@ -1,6 +1,8 @@
 /**
  * @file CbcSolverHeuristics.hpp
  * @brief Heuristic setup and execution routines for cbc-generic
+ *
+ * @algorithm VUB Fixing and Heuristic Orchestration
  * Copyright (C) 2007, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

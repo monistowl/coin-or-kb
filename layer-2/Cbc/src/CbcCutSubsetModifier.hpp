@@ -1,6 +1,8 @@
 /**
  * @file CbcCutSubsetModifier.hpp
  * @brief Cut modifier that filters cuts based on variable indices
+ *
+ * @algorithm Variable-Index Cut Filtering for Decomposition
  * Copyright (C) 2003, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *

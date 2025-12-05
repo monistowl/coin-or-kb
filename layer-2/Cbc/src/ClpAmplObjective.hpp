@@ -1,6 +1,8 @@
 /**
  * @file ClpAmplObjective.hpp
  * @brief AMPL-interface nonlinear objective for Clp
+ *
+ * @algorithm AMPL ASL Nonlinear Objective Gradient
  * Copyright (C) 2007, International Business Machines Corporation.
  * This code is licensed under the Eclipse Public License (EPL).
  *
