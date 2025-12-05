@@ -12,6 +12,13 @@
  * Authors: John J. Forrest, IBM; Pierre Bonami, CMU
  * Date: March 15, 2006
  *
+ * @algorithm NLP Failure Handling Strategy for MINLP
+ * @math Track consecutive NLP failures during branch-and-bound:
+ *       - hasFailed_: current solve status
+ *       - maxFailure_: threshold for abandoning branch
+ *       - pretendFailIsInfeasible_: treat failures as infeasible nodes
+ *       Enables robust B&B search despite numerical difficulties.
+ * @complexity O(1) per status check. Bounds failure tolerance.
  * @see CbcStrategy for base strategy interface
  */
 

@@ -12,6 +12,12 @@
  * Authors: Pierre Bonami, Carnegie Mellon University
  * Date: March 15, 2006
  *
+ * @algorithm Cut Generator Strategy for OA LP Subproblems
+ * @math Configure which cutting planes to use in LP relaxations:
+ *       - Gomory cuts: fractional variables → valid inequalities
+ *       - MIR (Mixed Integer Rounding): based on rounding fractional coefs
+ *       Generator frequencies balance cut quality vs overhead.
+ * @complexity O(strategy setup). Cut costs vary by generator type.
  * @see CbcStrategyDefault for base strategy
  * @see BabSetupBase for cut generator configuration
  */

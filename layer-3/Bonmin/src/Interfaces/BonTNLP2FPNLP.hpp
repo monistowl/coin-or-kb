@@ -25,6 +25,13 @@
  * - sigma_: Scaling for original objective
  * - norm_: L1 or L2 distance metric
  *
+ * @algorithm Feasibility Pump NLP Objective Transformation
+ * @math Transform NLP objective for feasibility pump:
+ *       f_FP(x) = λ·||x_I - x̃_I||_p + (1-λ)·σ·f(x)
+ *       where x̃_I is target integer solution, p ∈ {1,2} is norm.
+ *       Optional: cutoff f(x) ≤ z*, local branching Σ|x_i - x̃_i| ≤ rhs.
+ * @complexity O(|integers|) for objective/gradient evaluation.
+ * @ref Fischetti et al. (2005). "Feasibility pump". Math. Program.
  * @see HeuristicFPump for the Feasibility Pump driver
  * @see HeuristicLocalBranching for local branching heuristic
  */
