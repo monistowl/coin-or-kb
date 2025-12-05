@@ -9,6 +9,8 @@
  * @file simplex/HEkkPrimal.h
  * @brief Phase 2 primal simplex solver for HiGHS
  *
+ * @algorithm Primal Simplex with Hyper-Sparse CHUZC
+ *
  * Implements primal simplex with column selection (CHUZC) and row
  * selection (CHUZR). Primarily used for Phase 1 when dual is infeasible.
  *

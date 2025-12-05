@@ -9,6 +9,8 @@
  * @file mip/HighsCliqueTable.h
  * @brief Clique detection and storage for MIP solver
  *
+ * @algorithm Conflict Graph with Bron-Kerbosch Clique Separation
+ *
  * Maintains cliques (sets of binary variables where at most one can be 1).
  *
  * **CliqueVar:**

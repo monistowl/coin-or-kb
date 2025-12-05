@@ -9,6 +9,8 @@
  * @file mip/HighsSeparation.h
  * @brief Cut generation orchestration for MIP solver
  *
+ * @algorithm Cut Separation Manager (Rounds-Based)
+ *
  * Coordinates multiple separators to generate cutting planes.
  *
  * **Separation Management:**

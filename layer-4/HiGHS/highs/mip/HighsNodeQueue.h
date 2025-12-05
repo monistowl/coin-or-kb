@@ -9,6 +9,8 @@
  * @file mip/HighsNodeQueue.h
  * @brief Priority queue for branch-and-bound nodes
  *
+ * @algorithm Best-First Search Node Management with Red-Black Trees
+ *
  * Manages open nodes for best-first search with efficient memory allocation.
  *
  * **OpenNode Structure:**

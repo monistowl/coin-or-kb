@@ -9,6 +9,8 @@
  * @file mip/HighsPathSeparator.h
  * @brief Path aggregation cuts from network structure
  *
+ * @algorithm Network Path Aggregation Cuts
+ *
  * Heuristically identifies network paths and generates flow-based cuts.
  *
  * **Network Path Detection:**

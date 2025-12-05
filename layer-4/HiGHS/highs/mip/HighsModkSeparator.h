@@ -6,7 +6,9 @@
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /**@file mip/HighsModkSeparator.h
- * @brief Class for separating maximally violated mod-k MIR cuts.
+ * @brief Class for separating maximally violated mod-k MIR cuts
+ *
+ * @algorithm Mod-k MIR Cuts via Congruence System
  *
  * Contrary to mod-k CG cuts as described in the literature, continuous
  * variables are allowed to appear in the rows used for separation. In case an

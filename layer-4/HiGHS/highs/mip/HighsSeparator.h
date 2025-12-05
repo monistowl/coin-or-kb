@@ -9,6 +9,8 @@
  * @file mip/HighsSeparator.h
  * @brief Abstract base class for cut separators
  *
+ * @algorithm Cut Separator Interface
+ *
  * Defines interface for generating cutting planes from LP relaxation.
  *
  * **Separator Types (string constants):**

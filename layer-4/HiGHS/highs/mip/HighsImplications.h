@@ -9,6 +9,8 @@
  * @file mip/HighsImplications.h
  * @brief Implication graphs and variable bound relationships for MIP
  *
+ * @algorithm Probing and Variable Bound Propagation
+ *
  * **HighsImplications Class:**
  * Tracks logical implications and variable bounds derived from binary variables.
  *
