@@ -10,14 +10,45 @@
  * The quadratic term is stored as a CoinPackedMatrix Q, supporting
  * both full symmetric and half (lower triangular) storage.
  *
- * The objective is: minimize (1/2)x'Qx + c'x
- * where Q must be positive semi-definite for convexity.
+ * @algorithm Convex Quadratic Programming:
+ * Extends LP to handle quadratic objectives while preserving convexity.
  *
- * For pure linear objectives, use ClpLinearObjective instead.
+ * @math PROBLEM FORMULATION:
+ *   minimize    (1/2)x'Qx + c'x
+ *   subject to  Ax = b, l ≤ x ≤ u
+ *
+ * where Q ∈ ℝⁿˣⁿ is symmetric positive semi-definite (PSD).
+ * Q PSD ⟺ x'Qx ≥ 0 for all x ⟺ all eigenvalues ≥ 0.
+ *
+ * @algorithm Gradient and Hessian:
+ *   ∇f(x) = Qx + c     (gradient)
+ *   ∇²f(x) = Q         (Hessian, constant)
+ *
+ * @algorithm Reduced Gradient for Simplex:
+ * For basic/nonbasic partition with B = basic indices:
+ *   Reduced cost of nonbasic j: d_j = c_j + (Qx)_j - π'A_j
+ *   where π = (A_B)⁻ᵀ(c_B + (Qx)_B)
+ *
+ * @algorithm Line Search for QP:
+ * Given direction Δx, find θ* = argmin_{θ≥0} f(x + θΔx):
+ *   f(x + θΔx) = f(x) + θ·∇f(x)'Δx + (θ²/2)·Δx'Q·Δx
+ *
+ * If Δx'QΔx > 0 (descent in strictly convex direction):
+ *   θ* = -∇f(x)'Δx / (Δx'QΔx)
+ * Else (linear along Δx):
+ *   θ* = maximumTheta (go to bound)
+ *
+ * MATRIX STORAGE:
+ *   fullMatrix_ = false: Lower triangular only (Q_ij stored for i ≥ j)
+ *   fullMatrix_ = true: Full symmetric (both Q_ij and Q_ji stored)
+ *
+ * @complexity Gradient evaluation: O(nnz(Q)) per iteration
+ *   Line search: O(nnz(Q)) for computing Δx'QΔx
  *
  * @see ClpObjective for the abstract objective interface
  * @see ClpLinearObjective for linear-only objectives
- * @see ClpSimplex::loadQuadraticObjective() for loading QP problems
+ * @see ClpSimplexNonlinear for QP simplex variants
+ * @see ClpInterior for interior point QP solving
  */
 
 #ifndef ClpQuadraticObjective_H

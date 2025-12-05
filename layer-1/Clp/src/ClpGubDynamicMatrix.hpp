@@ -9,26 +9,55 @@
  * Combines GUB constraints with dynamic column generation. Columns are
  * partitioned into GUB sets where at most one column per set can be basic.
  *
- * GUB structure: sum_{j in S_k} x_j <= u_k for each set S_k
+ * @algorithm GUB Column Generation:
+ * Solves large LPs with GUB structure by generating columns dynamically.
  *
- * Key features:
- * - Dynamic: Columns added/removed during optimization
- * - GUB-aware: Pricing respects set membership
- * - Efficient RHS: Avoids explicit GUB row representation
+ * @math GUB STRUCTURE:
+ *   Variables partitioned into sets S₁, S₂, ..., Sₖ
+ *   GUB constraint for set k: Σ_{j∈Sₖ} xⱼ ≤ uₖ (or = uₖ)
  *
- * Synchronization modes:
- * - 0: Status good, update internal state
- * - 1: Variable flagged, prevent from entering
- * - 2: Unflag all variables
- * - 3: Reset costs (primal)
- * - 4: Correct dual infeasibility count
- * - 5: Check if re-factorization needed
- * - 8: Clean up set
- * - 9: Adjust bounds for incoming column
+ * Key property: At most ONE variable from each GUB set can be basic.
+ * This reduces effective basis size and enables implicit handling.
  *
- * Status tracking:
- * - DynamicStatus: inSmall (active), atUpperBound, atLowerBound
- * - flagged(): Prevented from entering basis
+ * @algorithm Dynamic Column Management:
+ * Instead of explicit matrix with all columns:
+ *   - "Small" working set: Columns currently active in LP
+ *   - "Large" full set: All potential columns
+ *   - Columns move between sets based on pricing
+ *
+ * COLUMN STATES (DynamicStatus):
+ *   inSmall (0x01): Active in current working LP
+ *   atUpperBound (0x02): Nonbasic at upper bound
+ *   atLowerBound (0x03): Nonbasic at lower bound
+ *   flagged (0x08): Temporarily prevented from entering
+ *
+ * @algorithm Partial Pricing:
+ * For large column pools, price only a subset each iteration:
+ *   1. Scan columns in [start, end) range
+ *   2. For each column not in small problem:
+ *      - Compute reduced cost using current duals
+ *      - If attractive (negative for min), add to candidates
+ *   3. Add most attractive column(s) to working LP
+ *
+ * @algorithm Synchronization Modes:
+ *   mode=0: After successful pivot, update internal state
+ *   mode=1: Flag variable (prevent re-entry after cycling)
+ *   mode=2: Unflag all variables (new phase)
+ *   mode=3: Reset costs for primal feasibility
+ *   mode=4: Correct dual infeasibility count
+ *   mode=5: Check if refactorization needed
+ *   mode=8: Clean up GUB set consistency
+ *   mode=9: Adjust bounds when column enters set
+ *
+ * @algorithm Effective RHS:
+ * Instead of explicit GUB rows, track effective RHS implicitly:
+ *   effectiveRHS_k = u_k - Σ_{j∈Sₖ, j nonbasic} x_j
+ * This avoids adding m_gub rows to the constraint matrix.
+ *
+ * APPLICATIONS:
+ * - Cutting stock: patterns as columns, roll types as GUB sets
+ * - Vehicle routing: routes as columns, vehicles as GUB sets
+ * - Crew scheduling: pairings as columns, days as GUB sets
  *
  * @see ClpGubMatrix for static GUB handling
  * @see ClpDynamicMatrix for non-GUB dynamic columns

@@ -9,17 +9,38 @@
  * Implements ClpConstraint for quadratic constraints. The constraint
  * function is: 0.5 * sum_{ij}(Q_ij * x_i * x_j) + sum_j(c_j * x_j) ≤ b
  *
- * Storage (sparse symmetric Q):
- * - start_[i]: Column i's entries start at this index
- * - column_[k]: Column index j for Q_ij (or -1 for linear term c_i)
- * - coefficient_[k]: Value Q_ij or c_i
+ * @algorithm Quadratic Constraints for QCQP:
+ * Handles constraints that are quadratic in the decision variables.
  *
- * Key methods:
- * - gradient(): Returns Qx + c (linear in x, unlike the quadratic function)
- * - markNonlinear(): Returns columns appearing in quadratic terms
+ * @math CONSTRAINT FORM:
+ *   g(x) = (1/2)x'Qx + c'x - b ≤ 0
  *
- * Used in quadratically constrained quadratic programs (QCQP) with
- * ClpSimplexNonlinear's SLP (sequential linear programming) approach.
+ * where Q is symmetric (but not necessarily PSD for constraints).
+ *
+ * @algorithm Gradient Computation:
+ *   ∇g(x) = Qx + c
+ *
+ * Unlike linear constraints, gradient depends on current point x.
+ * Must recompute each time solution changes.
+ *
+ * @algorithm Function Value:
+ *   g(x) = (1/2)Σᵢⱼ Qᵢⱼxᵢxⱼ + Σⱼ cⱼxⱼ - b
+ *
+ * Storage encodes both quadratic and linear terms:
+ *   column[k] = -1: Linear coefficient for variable in position
+ *   column[k] ≥ 0: Quadratic coefficient Q_{row,col}
+ *
+ * SPARSITY MARKING:
+ *   markNonzero(): All variables with non-zero gradient coefficient
+ *   markNonlinear(): Variables appearing in quadratic terms (Q entries)
+ *
+ * @algorithm Use in SLP (Sequential Linear Programming):
+ * At point x̄, linearize: g(x) ≈ g(x̄) + ∇g(x̄)'(x - x̄)
+ * Constraint becomes: ∇g(x̄)'x ≤ -g(x̄) + ∇g(x̄)'x̄
+ *
+ * Trust region limits step size to control linearization error.
+ * For convex constraints (Q PSD), linearization underestimates
+ * true constraint, maintaining feasibility.
  *
  * @see ClpConstraint for the abstract interface
  * @see ClpConstraintLinear for purely linear constraints

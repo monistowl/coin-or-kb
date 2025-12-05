@@ -7,15 +7,37 @@
  * @brief Abstract base class for PDCO problem customization
  *
  * Strategy pattern interface for defining custom convex objectives in PDCO.
- * Derived classes provide:
- * - matVecMult(): Matrix-vector products with A and A'
- * - getGrad(): Gradient of the objective function
- * - getHessian(): Diagonal Hessian approximation
- * - getObj(): Objective function value
- * - matPrecon(): Preconditioner application
  *
- * The d1, d2 scalars are regularization parameters that make the
- * augmented system nonsingular (d1 for primal, d2 for dual regularization).
+ * @algorithm User-Defined Convex Objectives:
+ * Allows PDCO to solve problems with custom separable convex objectives
+ * φ(x) = Σᵢ φᵢ(xᵢ) by providing function/gradient/Hessian callbacks.
+ *
+ * @math Required Callbacks:
+ *   getObj(x):      Returns φ(x) = Σᵢ φᵢ(xᵢ)
+ *   getGrad(x):     Returns ∇φ(x) = [φ₁'(x₁), ..., φₙ'(xₙ)]
+ *   getHessian(x):  Returns diag(H) = [φ₁''(x₁), ..., φₙ''(xₙ)]
+ *
+ * @algorithm Matrix Operations:
+ *   matVecMult(mode=1, x, y): y := y + A·x
+ *   matVecMult(mode=2, x, y): x := x + A'·y
+ *
+ * @algorithm Preconditioning:
+ *   matPrecon(delta, x, y): Apply preconditioner
+ *   Typically diagonal scaling based on (A·D²·A' + δ²I)
+ *
+ * REGULARIZATION PARAMETERS:
+ *   d1 (primal): Adds ||d₁·x||²/2 to objective, ensures D² > 0
+ *   d2 (dual): Adds δ²I to (2,2) block of augmented system
+ *
+ * @math Effect on KKT system:
+ *   Without regularization: A·(H⁻¹)·A' may be singular if H has zeros
+ *   With regularization: A·(H + d₁²I)⁻¹·A' + d₂²I always invertible
+ *
+ * Common objective functions that can be implemented:
+ * - Entropy: φ(x) = Σ xᵢ·log(xᵢ)  → H = diag(1/xᵢ)
+ * - Barrier: φ(x) = -Σ log(xᵢ)    → H = diag(1/xᵢ²)
+ * - Quadratic: φ(x) = x'Qx/2      → H = Q (if diagonal)
+ * - Huber: φ(x) = Σ huber(xᵢ)     → H = piecewise
  *
  * @see ClpPdco which uses this interface
  * @see ClpLsqr for the iterative solver

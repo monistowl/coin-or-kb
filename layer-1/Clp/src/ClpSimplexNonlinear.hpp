@@ -8,27 +8,57 @@
  * @author John Forrest
  *
  * Extends ClpSimplexPrimal to handle nonlinear objectives and constraints.
- * Two main algorithms available:
  *
- * 1. Reduced Gradient (primal()):
- *    - For nonlinear objectives with linear constraints
- *    - Computes gradient at current point
- *    - Uses simplex-style basis changes
+ * @algorithm Reduced Gradient Method:
+ * For problems with nonlinear objective but LINEAR constraints.
  *
- * 2. Sequential Linear Programming (primalSLP()):
- *    - Linearizes nonlinear constraints at current point
- *    - Solves LP approximation with trust region
- *    - Iterates until convergence
- *    - deltaTolerance controls trust region size
+ * @math PROBLEM: minimize f(x) subject to Ax = b, l ≤ x ≤ u
+ *
+ * Partition variables: B (basic), N (nonbasic)
+ *   x_B = B⁻¹(b - N·x_N)  (basic expressed via nonbasic)
+ *
+ * @algorithm Reduced Gradient Computation:
+ *   Full gradient: ∇f(x) = [∇f_B, ∇f_N]
+ *   Reduced gradient: r = ∇f_N - N'B⁻ᵀ∇f_B
+ *
+ * r[j] < 0 and x_j at lower bound → can improve by increasing x_j
+ * r[j] > 0 and x_j at upper bound → can improve by decreasing x_j
+ *
+ * @algorithm SLP (Sequential Linear Programming):
+ * For problems with NONLINEAR constraints.
+ *
+ * @math PROBLEM: minimize f(x) subject to g(x) ≤ 0, Ax = b
+ *
+ * ITERATION:
+ *   1. At current point x̄, linearize constraints:
+ *      g(x) ≈ g(x̄) + ∇g(x̄)'(x - x̄)
+ *
+ *   2. Solve LP subproblem with trust region:
+ *      minimize ∇f(x̄)'x
+ *      subject to ∇g(x̄)'x ≤ -g(x̄) + ∇g(x̄)'x̄
+ *                 |x - x̄| ≤ Δ (trust region)
+ *
+ *   3. Update: x̄ ← solution of LP
+ *   4. Adjust trust region Δ based on actual vs predicted improvement
+ *
+ * @algorithm Trust Region Management:
+ *   deltaTolerance parameter controls initial trust region size.
+ *   Expands when LP solution improves nonlinear objective.
+ *   Contracts when linearization gives poor approximation.
+ *
+ * @algorithm Pivot Modes:
+ *   mode=0: Consider all dual infeasible variables
+ *   mode=1: Select only largest reduced cost
+ *   mode≥10: Startup phase (finding initial feasible point)
+ *
+ * RETURN CODES from pivotColumn:
+ *   0: Normal iteration (basis change)
+ *   1: No basis change (line search)
+ *   2: Singleton pivot
+ *   3: Refactorization needed
  *
  * Implementation note: This class has no data members - it's a "behavior"
- * class that is cast from ClpSimplexPrimal at algorithm time. This avoids
- * object slicing but requires careful use.
- *
- * Key methods:
- * - directionVector(): Computes search direction from reduced costs
- * - whileIterating(): Main iteration loop with pivot mode control
- * - pivotColumn(): Selects entering variable considering nonlinearity
+ * class that is cast from ClpSimplexPrimal at algorithm time.
  *
  * @see ClpSimplexPrimal for the base primal simplex
  * @see ClpConstraint for nonlinear constraint interface

@@ -10,16 +10,27 @@
  * Used with ClpSimplexNonlinear when linear constraints appear alongside
  * nonlinear objective or other nonlinear constraints.
  *
- * Storage:
- * - Sparse representation: parallel column_ and coefficient_ arrays
- * - numberCoefficients_: number of nonzeros in the constraint
+ * @algorithm Linear Constraint for NLP Framework:
+ * Provides unified interface for linear constraints within NLP solver.
  *
- * Key methods:
- * - gradient(): Returns constant gradient (the a_j coefficients)
- * - markNonlinear(): Returns 0 (no nonlinear terms)
+ * @math CONSTRAINT FORM:
+ *   g(x) = Σⱼ aⱼxⱼ - b = 0 (equality) or ≤ 0 (inequality)
  *
- * This is the simplest constraint type - the gradient is constant
- * and independent of the solution point.
+ * @algorithm Gradient Computation (constant):
+ *   ∇g(x) = [a₁, a₂, ..., aₙ]  (independent of x)
+ *
+ * SPARSITY:
+ *   markNonzero(): Returns {j : aⱼ ≠ 0}
+ *   markNonlinear(): Returns {} (empty - no nonlinear terms)
+ *
+ * @algorithm Use in SLP (Sequential Linear Programming):
+ * For mixed linear/nonlinear problems, linear constraints provide exact
+ * linearization (no approximation error) at any point. This allows SLP
+ * to handle them without trust region restrictions.
+ *
+ * Storage is sparse: parallel column_ and coefficient_ arrays store
+ * only non-zero coefficients. This is efficient when linear constraints
+ * are embedded within larger nonlinear models.
  *
  * @see ClpConstraint for the abstract interface
  * @see ClpConstraintQuadratic for quadratic constraints

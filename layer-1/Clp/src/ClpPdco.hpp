@@ -10,14 +10,55 @@
  * Implements the PDCO algorithm for convex optimization problems, an
  * alternative to Mehrotra's predictor-corrector method.
  *
- * PDCO characteristics:
- * - Uses iterative LSQR for linear systems (vs. direct Cholesky)
- * - Better for poorly conditioned normal equations
- * - Supports user-defined objective via ClpPdcoBase
- * - Regularization parameters d1, d2 for numerical stability
+ * @algorithm PDCO - Primal-Dual Interior Point for Convex Objectives:
+ * Solves separable convex programs using iterative linear algebra.
+ *
+ * @math PROBLEM FORMULATION:
+ *   minimize    φ(x) + (1/2)||D₁x||² + c'x
+ *   subject to  Ax = b
+ *               l ≤ x ≤ u
+ *
+ * where φ(x) = Σᵢ φᵢ(xᵢ) is separable convex (diagonal Hessian).
+ * Regularization terms ||D₁x||², ||D₂y||² make system nonsingular.
+ *
+ * @algorithm Augmented System Formulation:
+ * Instead of normal equations (A·D²·A')Δy = rhs, PDCO solves:
+ *
+ *   | -D²  A' | | Δx |   | r₁ |
+ *   |  A   δI | | Δy | = | r₂ |
+ *
+ * where D² = diag(H(x) + d₁²) with H(x) = diagonal Hessian of φ.
+ * The δI term (d₂²·I) regularizes the (2,2) block.
+ *
+ * @algorithm LSQR Iterative Solver:
+ * For large sparse problems, direct Cholesky may be expensive.
+ * PDCO uses LSQR (iterative least squares) to solve the augmented system:
+ *   - Handles ill-conditioned matrices better than Cholesky
+ *   - Convergence controlled by tolerance and iteration limits
+ *   - Preconditioned by diagonal scaling
+ *
+ * @math Matrix-Vector Products:
+ *   mode=1: y = y + A·x   (multiply by A)
+ *   mode=2: x = x + A'·y  (multiply by A transpose)
+ *
+ * @algorithm Preconditioning:
+ * Diagonal preconditioner improves LSQR convergence:
+ *   M = diag(A·D²·A' + d₂²I)^{-1/2}
+ *
+ * @complexity LSQR per iteration: O(nnz(A)) for sparse A.
+ *   Number of LSQR iterations depends on condition number.
+ *   Total: O(IPM_iters × LSQR_iters × nnz(A))
+ *
+ * Advantages over Mehrotra predictor-corrector:
+ * - Better for ill-conditioned normal equations
+ * - Handles dense columns without fill-in
+ * - Natural for separable convex objectives
  *
  * This is a mix-in class - ClpInterior objects are cast to this type at
  * algorithm time. No additional data is stored.
+ *
+ * @ref Saunders (2003). "PDCO: A primal-dual interior method for convex
+ *   objectives". http://stanford.edu/group/SOL/software/pdco/
  *
  * @see ClpPdcoBase for user-customizable objective/Hessian
  * @see ClpLsqr for the iterative linear solver
