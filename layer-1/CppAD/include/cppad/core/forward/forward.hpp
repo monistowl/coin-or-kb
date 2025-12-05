@@ -6,7 +6,45 @@
 // ----------------------------------------------------------------------------
 /**
  * @file forward.hpp
- * @brief Core AD functionality: forward
+ * @brief Core AD functionality: forward mode differentiation
+ *
+ * @algorithm Forward Mode AD (Tangent Linear):
+ * Compute derivatives by propagating Taylor coefficients forward.
+ *
+ *   @math Forward mode computes:
+ *     y^(q) = ∂^q y / ∂t^q |_{t=0}  where x(t) = x^(0) + t·x^(1) + ...
+ *
+ *   TAYLOR SERIES:
+ *     Each variable v stores coefficients: v^(0), v^(1), ..., v^(q)
+ *     v(t) = v^(0) + t·v^(1) + t²/2!·v^(2) + ... + t^q/q!·v^(q)
+ *
+ *   FORWARD SWEEP (order q):
+ *     For each operation v = op(u, w) in tape order:
+ *       Compute v^(q) from {u^(0),...,u^(q)} and {w^(0),...,w^(q)}
+ *
+ *   EXAMPLE (multiplication v = u * w):
+ *     v^(q) = Σ_{k=0}^{q} u^(k) · w^(q-k)  (convolution)
+ *
+ * @algorithm Multiple Orders in One Pass:
+ * Compute Taylor coefficients for orders p through q simultaneously.
+ *
+ *   xq INPUT:
+ *     x^(p), x^(p+1), ..., x^(q) for independent variables
+ *     Previous orders x^(0),...,x^(p-1) already stored
+ *
+ *   yq OUTPUT:
+ *     y^(p), y^(p+1), ..., y^(q) for dependent variables
+ *
+ *   USE CASE:
+ *     Order 0: function evaluation  y = f(x)
+ *     Order 1: Jacobian-vector product  y' = f'(x)·v
+ *     Order 2: Hessian-vector-vector  y'' = v'·f''(x)·v
+ *
+ * @complexity O(tape_ops × order) per forward sweep
+ * Cost is similar to function evaluation for order 1
+ *
+ * @see reverse.hpp for reverse mode (adjoint)
+ * @see sparse_jac.hpp for sparse Jacobian computation
  */
 
 // documened after Forward but included here so easy to see

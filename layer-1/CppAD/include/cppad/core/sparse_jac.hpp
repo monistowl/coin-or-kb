@@ -6,7 +6,54 @@
 // ----------------------------------------------------------------------------
 /**
  * @file sparse_jac.hpp
- * @brief Core AD functionality: sparse jac
+ * @brief Sparse Jacobian computation using graph coloring
+ *
+ * @algorithm Sparse Jacobian via Graph Coloring:
+ * Compute sparse J(x) = F'(x) efficiently using structure.
+ *
+ *   @math Jacobian: J_{ij} = ∂F_i/∂x_j
+ *
+ *   KEY INSIGHT:
+ *     If columns j and k have disjoint row sparsity patterns,
+ *     they can be computed simultaneously in one forward sweep.
+ *
+ *   GRAPH COLORING:
+ *     Column intersection graph: edge (j,k) if some row i has
+ *     both J_{ij} ≠ 0 and J_{ik} ≠ 0
+ *     Color columns so adjacent columns get different colors
+ *     #forward_sweeps = #colors (much less than n for sparse J)
+ *
+ * @algorithm Forward Mode Sparse Jacobian (sparse_jac_for):
+ * Compute multiple columns per sweep using coloring.
+ *
+ *   For each color c:
+ *     1. Set direction seed: v_j = 1 if color[j]==c, else 0
+ *     2. Forward sweep: w = J·v
+ *     3. Extract: J_{ij} = w_i for columns j with color c
+ *
+ *   COMPRESSION:
+ *     One sweep computes all columns of same color
+ *     Total sweeps = chromatic_number(column_graph)
+ *
+ * @algorithm Reverse Mode Sparse Jacobian (sparse_jac_rev):
+ * Compute multiple rows per sweep using row coloring.
+ *
+ *   For each color c:
+ *     1. Set adjoint seed: u_i = 1 if color[i]==c, else 0
+ *     2. Reverse sweep: v = J'·u
+ *     3. Extract: J_{ij} = v_j for rows i with color c
+ *
+ *   CHOICE:
+ *     sparse_jac_for better when n << m (tall Jacobian)
+ *     sparse_jac_rev better when m << n (wide Jacobian)
+ *
+ * @complexity
+ *   Graph coloring: O(nnz + n) for greedy
+ *   Jacobian: O(colors × tape_ops)
+ *   For many NLP problems: colors ≈ 5-20 regardless of n
+ *
+ * @see sparse_hes.hpp for sparse Hessian
+ * @see coloring algorithms in local/color_*.hpp
  */
 
 /*

@@ -12,10 +12,46 @@
  * Operations on AD<Base> values are recorded on a "tape" which can
  * later be used to compute derivatives.
  *
+ * @algorithm Operator Overloading AD (OOAD):
+ * Automatic differentiation via C++ operator overloading.
+ *
+ *   RECORDING PHASE:
+ *     1. Declare independent variables: Independent(x)
+ *     2. Execute function f(x) using AD<Base> arithmetic
+ *     3. Each operation (+,-,*,/,sin,cos,...) recorded on tape
+ *     4. Create ADFun object: fun(x, y) seals the tape
+ *
+ *   TAPE STRUCTURE:
+ *     - Sequence of operations: op_code + operand addresses
+ *     - Taylor coefficient storage for each variable
+ *     - Enables forward/reverse mode sweeps
+ *
+ * @algorithm AD Type Classification:
+ * Three types of AD values with different recording behavior.
+ *
+ *   CONSTANT (ad_type_ = constant_enum):
+ *     - Value known at tape creation time
+ *     - Not recorded (optimizes tape size)
+ *     - Example: AD<double> c = 3.14;
+ *
+ *   PARAMETER (ad_type_ = dynamic_enum):
+ *     - Value can change between derivative computations
+ *     - Recorded as "dynamic parameter"
+ *     - Useful for problem data that varies
+ *
+ *   VARIABLE (ad_type_ = variable_enum):
+ *     - Depends on independent variables
+ *     - Always recorded on tape
+ *     - Derivatives computed w.r.t. these
+ *
  * AD types:
  * - **Constant**: Value known, not recorded on tape
  * - **Parameter**: Value known, may be recorded for dynamic parameters
  * - **Variable**: Value depends on independent variables, recorded on tape
+ *
+ * @complexity
+ *   Recording: O(1) per operation
+ *   Memory: O(tape_length × coefficient_order)
  *
  * @see Independent() to declare independent variables
  * @see ADFun to create a function from recorded operations
