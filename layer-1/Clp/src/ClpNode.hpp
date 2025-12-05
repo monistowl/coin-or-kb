@@ -9,6 +9,37 @@
  * Support classes for Clp's fathom capability - solving subproblems
  * in a branch-and-bound tree. Used when Clp is embedded in CBC.
  *
+ * @algorithm Branch-and-Bound Node State Management:
+ * Maintains complete LP state at each node to enable efficient warm-starting.
+ *
+ * NODE STATE COMPONENTS:
+ *   - Branching decision: which variable, direction (up/down), value
+ *   - Basis: status_ array (basic/nonbasic at LB/UB for each variable)
+ *   - Factorization: reusable LU factors for warm-starting
+ *   - Bounds: modified lower_/upper_ from branching constraints
+ *   - Solution: primal/dual values for feasibility checking
+ *   - Weights: steepest edge weights for pricing
+ *
+ * @algorithm Reduced Cost Fixing:
+ * Tighten bounds using optimality information:
+ *
+ * @math For minimization with best incumbent z_best:
+ *   If x_j at lower bound with reduced cost d_j > 0:
+ *     Gap to force x_j=1 exceeds (z_best - z_LP) / d_j
+ *     If this exceeds (u_j - l_j), can fix x_j = l_j permanently
+ *   Similarly for variables at upper bound with d_j < 0
+ *
+ * @algorithm Pseudocost Branching:
+ * Learn branching effectiveness from history:
+ *
+ *   pseudocost_down[j] = avg(LP_degradation / fraction_cut) when branching down
+ *   pseudocost_up[j] = avg(LP_degradation / fraction_raised) when branching up
+ *
+ * Variable selection heuristics:
+ *   - Strong branching: actually solve children, use real degradation
+ *   - Pseudocost: use predicted degradation from history
+ *   - Hybrid: strong branching initially, pseudocosts after "trust" threshold
+ *
  * Classes:
  * - ClpNode: State of a B&B node (bounds, basis, factorization, pseudocosts)
  * - ClpNodeStuff: Shared data across nodes (pseudocosts, solver options)

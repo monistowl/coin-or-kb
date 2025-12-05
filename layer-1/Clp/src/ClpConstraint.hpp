@@ -11,6 +11,31 @@
  * (Ax ≤ b) are handled directly by ClpModel; this class is for more
  * general constraint forms g(x) ≤ 0.
  *
+ * @algorithm Nonlinear Constraint Interface for NLP/SQP:
+ * Provides function value and gradient evaluation for nonlinear constraints.
+ *
+ * CONSTRAINT FORMS:
+ *   Linear: a'x ≤ b (handled directly by ClpModel)
+ *   Nonlinear: g(x) ≤ 0 where g may be quadratic or general nonlinear
+ *
+ * @math Gradient computation:
+ *   For constraint g(x) ≤ 0:
+ *     - functionValue() returns g(x) at current point
+ *     - gradient() returns ∇g(x) = [∂g/∂x₁, ..., ∂g/∂xₙ]
+ *
+ * SPARSITY PATTERN:
+ *   - markNonzero(): identifies which variables have non-zero gradient entries
+ *   - markNonlinear(): identifies which variables appear nonlinearly
+ *
+ * @algorithm Constraint Linearization (for SQP/LP-based NLP):
+ *   At current point x̄, linearize g(x) ≈ g(x̄) + ∇g(x̄)'(x - x̄)
+ *   Constraint g(x) ≤ 0 becomes: ∇g(x̄)'x ≤ -g(x̄) + ∇g(x̄)'x̄
+ *
+ * CACHING:
+ *   - lastGradient_: cached gradient from last evaluation
+ *   - functionValue_: cached function value
+ *   - refresh parameter controls whether to recompute
+ *
  * Key methods that derived classes must implement:
  * - gradient(): Compute constraint gradient and function value
  * - markNonlinear(): Identify which variables appear nonlinearly

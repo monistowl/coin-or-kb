@@ -11,6 +11,56 @@
  * Network LPs have constraint matrices that are node-arc incidence matrices
  * of directed graphs - each column has exactly one +1 and one -1.
  *
+ * @algorithm Network Simplex Basis Factorization:
+ * For pure network LPs, the basis matrix corresponds to a spanning tree,
+ * enabling O(m) factorization and O(m) solve instead of O(m²-m³).
+ *
+ * NETWORK LP STRUCTURE:
+ * @math Constraint matrix A is node-arc incidence of digraph G=(V,E):
+ *   A[i,j] = +1 if arc j leaves node i
+ *   A[i,j] = -1 if arc j enters node i
+ *   A[i,j] = 0 otherwise
+ *
+ * Each column (arc) has exactly one +1 and one -1.
+ * Examples: transportation, assignment, shortest path, max flow problems.
+ *
+ * @algorithm Spanning Tree Basis:
+ * Key insight: Any basis B of a network matrix corresponds to a spanning tree T:
+ *   - m basic variables = m-1 tree arcs + 1 slack (or m tree arcs with root removed)
+ *   - Non-basic arcs either at lower or upper bound
+ *
+ * TREE REPRESENTATION (rooted at artificial root):
+ *   - parent_[i]: parent node of node i in tree
+ *   - descendant_[i]: first child of node i
+ *   - rightSibling_[i]: next sibling of node i
+ *   - leftSibling_[i]: previous sibling of node i
+ *   - depth_[i]: distance from root to node i
+ *
+ * @algorithm FTRAN (Forward Transformation: solve Bx = b):
+ * For network, reduces to tree path accumulation:
+ *   1. Start with x = b
+ *   2. For each node i (bottom-up from leaves to root):
+ *      x[parent[i]] += sign[i] * x[i]
+ * @complexity O(m) operations
+ *
+ * @algorithm BTRAN (Backward Transformation: solve B'y = c):
+ * Tree path accumulation in opposite direction:
+ *   1. Start with y = c
+ *   2. For each node i (top-down from root to leaves):
+ *      y[i] += sign[i] * y[parent[i]]
+ * @complexity O(m) operations
+ *
+ * @algorithm Basis Update (pivot operation):
+ * When arc (u,v) enters basis replacing arc (p,q):
+ *   - Create cycle by adding (u,v) to tree
+ *   - Remove (p,q) from cycle → new tree
+ *   - Update parent/child/sibling pointers along affected path
+ * @complexity O(diameter of tree), typically O(√m) for sparse networks
+ *
+ * @complexity Factorization: O(m) vs O(m²) for general LU
+ *   FTRAN/BTRAN: O(m) vs O(m²) for general
+ *   Update: O(path length) vs O(m²) for general
+ *
  * Uses spanning tree representation:
  * - parent/descendant/sibling arrays encode tree structure
  * - FTRAN/BTRAN reduce to tree traversal operations

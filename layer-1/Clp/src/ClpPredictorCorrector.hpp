@@ -10,14 +10,55 @@
  * Implements the primal-dual interior point method for LP/QP using
  * Mehrotra's predictor-corrector with Gondzio's multiple centrality corrections.
  *
- * References:
- * - Mehrotra, "On the implementation of a primal-dual interior point method",
- *   SIAM Journal on Optimization, 2 (1992)
- * - Gondzio, "Multiple centrality corrections in a primal-dual method",
- *   Computational Optimization and Applications, 6 (1996)
+ * @algorithm Mehrotra Predictor-Corrector Interior Point Method:
+ * Solves LP/QP by following central path to optimum with predictor-corrector steps.
  *
- * This is a mix-in class - ClpInterior objects are cast to this type at
- * algorithm time. No additional data is stored.
+ * @math KKT CONDITIONS for LP (primal min c'x s.t. Ax=b, x≥0):
+ *   Primal feasibility:   Ax = b
+ *   Dual feasibility:     A'y + s = c
+ *   Complementarity:      X·S·e = 0 (component-wise x_i·s_i = 0)
+ *   Non-negativity:       x ≥ 0, s ≥ 0
+ *
+ * @algorithm Newton System for Central Path:
+ * Instead of XSe=0, follow parameterized central path XSe = μe where μ→0:
+ *
+ *   | 0   A'  I  | | Δx |   |   c - A'y - s   |
+ *   | A   0   0  | | Δy | = |     b - Ax      |
+ *   | S   0   X  | | Δs |   | μe - X·S·e      |
+ *
+ * After eliminating Δs = X⁻¹(μe - S·Δx - XSe), reduces to "normal equations":
+ *   (A·D²·A') Δy = rhs    where D² = X·S⁻¹
+ *
+ * PREDICTOR STEP (Affine Scaling):
+ *   1. Set μ=0 in Newton system → pure Newton toward optimum
+ *   2. Solve for (Δx_aff, Δy_aff, Δs_aff)
+ *   3. Find max step α_aff maintaining x+αΔx≥0, s+αΔs≥0
+ *
+ * CENTERING PARAMETER:
+ *   σ = (μ_aff / μ)³ where μ_aff = gap after affine step
+ *   Small σ: aggressive (toward optimum)
+ *   Large σ: conservative (toward central path)
+ *
+ * CORRECTOR STEP:
+ *   1. Modify RHS: μe → σμe - Δx_aff·Δs_aff (Mehrotra correction)
+ *   2. Solve corrected system
+ *   3. Combine for final direction
+ *
+ * @algorithm Gondzio's Multiple Centrality Corrections:
+ * After corrector, additional corrections keep iterates well-centered:
+ *   - If any (x+Δx)(s+Δs) too small: push toward center
+ *   - If any (x+Δx)(s+Δs) too large: no correction needed
+ *   - Typically 1-3 corrections improve robustness
+ *
+ * @complexity Per iteration: O(m²n + m³) dominated by Cholesky factorization
+ *   of m×m normal equations (m=rows, n=cols).
+ *   Total iterations: O(√n·log(1/ε)) for ε-optimality (polynomial).
+ *
+ * @ref Mehrotra (1992). "On the implementation of a primal-dual interior
+ *   point method". SIAM J. Optimization 2(4):575-601.
+ * @ref Gondzio (1996). "Multiple centrality corrections in a primal-dual
+ *   method for LP". Comput. Optim. Appl. 6:137-156.
+ * @ref Wright (1997). "Primal-Dual Interior-Point Methods". SIAM.
  *
  * Key methods:
  * - solve(): Main predictor-corrector iteration loop

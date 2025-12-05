@@ -11,6 +11,50 @@
  * exploit structure (network, GUB, ±1 matrices) while providing a uniform
  * interface to the simplex solver.
  *
+ * @algorithm Matrix Abstraction for Specialized LP Structures:
+ * Polymorphic matrix interface enables algorithm-independent simplex code
+ * while exploiting problem-specific structure for efficiency.
+ *
+ * INTERFACE DESIGN:
+ * The simplex method only needs these matrix operations:
+ *   - times(x, y): y += A·x (FTRAN direction)
+ *   - transposeTimes(x, y): y += A'·x (BTRAN for pricing)
+ *   - unpack(col): extract single column for pivot
+ *   - subsetTransposeTimes(): partial BTRAN for steepest edge
+ *
+ * Any class implementing these can be used without algorithm modification.
+ *
+ * @algorithm Specialized Matrix Types:
+ *
+ * ClpPackedMatrix (type=1): General sparse matrix
+ *   - Wraps CoinPackedMatrix (CSC format)
+ *   - O(nnz) matrix-vector operations
+ *
+ * ClpNetworkMatrix (type=11): Node-arc incidence matrix
+ *   - Each column has exactly one +1 and one -1
+ *   - times/transposeTimes in O(n) with implicit storage
+ *   - Enables O(n) network basis factorization
+ *
+ * ClpPlusMinusOneMatrix (type=12): ±1 coefficient matrix
+ *   - Elements only ±1 (no scaling needed)
+ *   - Faster multiply without floating-point coefficient access
+ *   - Common in set covering/packing problems
+ *
+ * ClpGubMatrix: Generalized Upper Bound structure
+ *   - Variables partitioned into disjoint GUB sets
+ *   - Each set sums to ≤1 (SOS type 1 structure)
+ *   - Enables implicit pricing of exponentially many columns
+ *
+ * @algorithm Partial Pricing Support:
+ * For very large problems, pricing all columns is expensive.
+ * Matrix provides partial pricing interface:
+ *   - partialPricing(start, end): Price subset of columns
+ *   - startFraction_/endFraction_: Current search window
+ *   - savedBestDj_: Best reduced cost found so far
+ *
+ * @complexity Matrix-vector products: O(nnz) for general sparse,
+ *   O(n) for network, O(nnz) but faster constant for ±1.
+ *
  * Key virtual methods:
  * - times(), transposeTimes(): Matrix-vector multiplication (y = A*x, y = A'*x)
  * - subsetTransposeTimes(): Partial BTRAN for steepest edge pricing
