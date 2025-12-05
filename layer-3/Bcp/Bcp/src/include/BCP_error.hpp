@@ -2,9 +2,22 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_error.hpp
- * @brief BCP framework component
+ * @brief Fatal error handling for BCP
  *
- * Part of Branch-Cut-Price parallel optimization framework.
+ * @algorithm Error Handling: BCP_fatal_error Class
+ *
+ * Simple error handling via BCP_fatal_error exception-like class.
+ * Construction triggers error message output and optional abort().
+ *
+ * **Behavior:**
+ * - Prints formatted error message to stdout
+ * - Flushes all buffers
+ * - Calls abort() if abort_on_error is true (creates core dump)
+ *
+ * **Control:**
+ * - BCP_fatal_error::abort_on_error: Static flag to enable/disable abort
+ *
+ * @note Not a proper C++ exception - uses abort() for distributed debugging.
  */
 #ifndef _BCP_ERROR_H
 #define _BCP_ERROR_H

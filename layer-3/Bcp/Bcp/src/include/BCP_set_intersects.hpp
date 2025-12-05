@@ -2,9 +2,23 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_set_intersects.hpp
- * @brief BCP framework component
+ * @brief Set intersection test utility
  *
- * Part of Branch-Cut-Price parallel optimization framework.
+ * @algorithm Sorted Set Intersection: Linear Scan Test
+ *
+ * Template function `intersects()` tests whether two sorted ranges
+ * have any common elements without computing the full intersection.
+ *
+ * **Algorithm:**
+ * Dual-pointer linear scan - advance smaller element's pointer.
+ * Returns true immediately when match found.
+ *
+ * **Variants:**
+ * - operator< version: Uses default comparison
+ * - Comparator version: Custom ordering via function object
+ *
+ * @complexity O(n + m) where n, m are range sizes
+ * @note Input ranges must be sorted in same order as comparator
  */
 #ifndef _BCP_SET_INTERSECTS_H
 #define _BCP_SET_INTERSECTS_H

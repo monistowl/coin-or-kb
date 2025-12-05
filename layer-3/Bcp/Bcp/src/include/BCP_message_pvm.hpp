@@ -2,9 +2,26 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_message_pvm.hpp
- * @brief BCP messaging
+ * @brief PVM message passing for BCP
  *
- * Message passing interface for parallel BCP.
+ * @algorithm PVM Backend: BCP_pvm_environment Implementation
+ *
+ * Parallel Virtual Machine (PVM) implementation of BCP_message_environment.
+ * Requires COIN_HAS_PVM to be defined.
+ *
+ * **Key methods:**
+ * - send/receive(): Point-to-point messaging with tags
+ * - multicast(): Broadcast to multiple targets
+ * - start_processes(): Spawn workers on machines
+ * - probe(): Non-blocking message check
+ * - alive(): Check remote process liveness
+ *
+ * **PVM specifics:**
+ * Uses PVM's task spawning and heterogeneous network support.
+ * Suitable for clusters without MPI infrastructure.
+ *
+ * @see BCP_message.hpp for abstract interface
+ * @see BCP_message_mpi.hpp for MPI backend
  */
 #ifndef _BCP_MESSAGE_PVM_H
 #define _BCP_MESSAGE_PVM_H

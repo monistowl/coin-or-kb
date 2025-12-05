@@ -2,9 +2,24 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_vg_param.hpp
- * @brief BCP parameters
+ * @brief Variable Generator parameters for BCP
  *
- * Parameter handling for BCP framework configuration.
+ * @algorithm VG Parameters: Process Priority and Logging
+ *
+ * BCP_vg_par defines parameters for Variable Generator processes:
+ *
+ * **Character parameters:**
+ * - MessagePassingIsSerial: Single-process vs. distributed mode
+ * - ReportWhenDefaultIsExecuted: Debug overridable methods
+ *
+ * **Integer parameters:**
+ * - NiceLevel: OS scheduling priority (-20 to 20)
+ *
+ * **String parameters:**
+ * - LogFileName: Per-process logging
+ *
+ * @see BCP_vg.hpp for Variable Generator process
+ * @see BCP_vg_user.hpp for user overridable methods
  */
 #ifndef _BCP_VG_PARAM_H
 #define _BCP_VG_PARAM_H

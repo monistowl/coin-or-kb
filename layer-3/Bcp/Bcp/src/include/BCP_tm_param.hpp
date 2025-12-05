@@ -5,6 +5,8 @@
  * @file BCP_tm_param.hpp
  * @brief Tree Manager parameters for BCP Branch-Cut-Price
  *
+ * @algorithm TM Parameters: Search Strategy and Resource Limits
+ *
  * BCP_tm_par defines all configurable parameters for the Tree Manager.
  * Set via parameter file: BCP_{param_name} {value}
  *

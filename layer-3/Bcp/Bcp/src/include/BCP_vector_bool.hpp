@@ -2,9 +2,13 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_vector_bool.hpp
- * @brief BCP vector container
+ * @brief BCP_vec<bool> specialization
  *
- * Dynamic array container for BCP data structures.
+ * @algorithm POD Vector Specialization: bool
+ *
+ * Template specializations for BCP_vec<bool> that skip
+ * construct/destroy overhead since bool is a POD type.
+ * Same optimization pattern as BCP_vector_double.hpp.
  */
 
 #include <cstring>

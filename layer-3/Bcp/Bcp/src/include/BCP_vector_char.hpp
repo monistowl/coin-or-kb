@@ -2,9 +2,13 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_vector_char.hpp
- * @brief BCP vector container
+ * @brief BCP_vec<char> specialization
  *
- * Dynamic array container for BCP data structures.
+ * @algorithm POD Vector Specialization: char
+ *
+ * Template specializations for BCP_vec<char> that skip
+ * construct/destroy overhead since char is a POD type.
+ * Same optimization pattern as BCP_vector_double.hpp.
  */
 
 #include <cstring>

@@ -2,9 +2,24 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_cg_param.hpp
- * @brief BCP parameters
+ * @brief Cut Generator parameters for BCP
  *
- * Parameter handling for BCP framework configuration.
+ * @algorithm CG Parameters: Process Priority and Logging
+ *
+ * BCP_cg_par defines parameters for Cut Generator processes:
+ *
+ * **Character parameters:**
+ * - MessagePassingIsSerial: Single-process vs. distributed mode
+ * - ReportWhenDefaultIsExecuted: Debug overridable methods
+ *
+ * **Integer parameters:**
+ * - NiceLevel: OS scheduling priority (-20 to 20)
+ *
+ * **String parameters:**
+ * - LogFileName: Per-process logging with "-cg-<id>" suffix
+ *
+ * @see BCP_cg.hpp for Cut Generator process
+ * @see BCP_cg_user.hpp for user overridable methods
  */
 #ifndef _BCP_CG_PARAM_H
 #define _BCP_CG_PARAM_H

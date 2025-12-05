@@ -2,9 +2,13 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_vector_int.hpp
- * @brief BCP vector container
+ * @brief BCP_vec<int> specialization
  *
- * Dynamic array container for BCP data structures.
+ * @algorithm POD Vector Specialization: int
+ *
+ * Template specializations for BCP_vec<int> that skip
+ * construct/destroy overhead since int is a POD type.
+ * Same optimization pattern as BCP_vector_double.hpp.
  */
 
 //##############################################################################

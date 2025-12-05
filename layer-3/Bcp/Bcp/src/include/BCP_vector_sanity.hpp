@@ -2,9 +2,19 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_vector_sanity.hpp
- * @brief BCP vector container
+ * @brief Position vector validation utility
  *
- * Dynamic array container for BCP data structures.
+ * @algorithm Index Validation: BCP_vec_sanity_check
+ *
+ * Validates position vectors used in delta operations:
+ * - Positions must be strictly increasing (sorted, no duplicates)
+ * - No negative indices
+ * - All indices < maxsize
+ *
+ * Throws BCP_fatal_error on invalid input.
+ * Used to catch programming errors in delta encoding early.
+ *
+ * @see BCP_vector_change.hpp for delta vector operations
  */
 #ifndef _BCP_VECTOR_SANITY_H
 #define _BCP_VECTOR_SANITY_H

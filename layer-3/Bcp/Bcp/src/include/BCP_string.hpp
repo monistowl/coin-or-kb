@@ -2,9 +2,21 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_string.hpp
- * @brief BCP framework component
+ * @brief Simple string class for BCP
  *
- * Part of Branch-Cut-Price parallel optimization framework.
+ * @algorithm BCP_string: Safe Fixed-Length String
+ *
+ * Minimal string class avoiding std::string ABI issues across
+ * compilers and avoiding C-string buffer overflow risks.
+ *
+ * **Features:**
+ * - Owns memory (RAII cleanup)
+ * - Copy construction/assignment
+ * - C-string interoperability via c_str()
+ * - Equality comparison operators
+ *
+ * Used for executable names, machine names, and log file paths
+ * in message passing configuration.
  */
 #ifndef _BCP_STRING_H
 #define _BCP_STRING_H

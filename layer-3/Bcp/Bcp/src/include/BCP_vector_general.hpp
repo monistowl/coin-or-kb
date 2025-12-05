@@ -2,9 +2,25 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_vector_general.hpp
- * @brief BCP vector container
+ * @brief Generic BCP_vec<T> method implementations
  *
- * Dynamic array container for BCP data structures.
+ * @algorithm Generic Vector: Template Methods for Non-POD Types
+ *
+ * Default implementations of BCP_vec<T> methods using explicit
+ * construct/destroy via placement new and destructor calls.
+ *
+ * **Core operations:**
+ * - construct(): Placement new for default or copy construction
+ * - destroy(): Explicit destructor call
+ * - destroy_range(): Destructor calls in reverse order
+ * - allocate/deallocate(): Raw memory management via operator new/delete
+ * - insert_aux(): Growth with 2x+256 expansion strategy
+ *
+ * Specialized versions exist for POD types (int, double, etc.) that
+ * skip construct/destroy overhead and use memcpy/memset.
+ *
+ * @see BCP_vector.hpp for class declaration
+ * @see BCP_vector_double.hpp for double specialization
  */
 
 //##############################################################################

@@ -2,9 +2,13 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_vector_short.hpp
- * @brief BCP vector container
+ * @brief BCP_vec<short> specialization
  *
- * Dynamic array container for BCP data structures.
+ * @algorithm POD Vector Specialization: short
+ *
+ * Template specializations for BCP_vec<short> that skip
+ * construct/destroy overhead since short is a POD type.
+ * Same optimization pattern as BCP_vector_double.hpp.
  */
 
 #include <cstring>

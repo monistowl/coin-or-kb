@@ -2,9 +2,23 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_os.hpp
- * @brief BCP framework component
+ * @brief OS abstraction layer for BCP
  *
- * Part of Branch-Cut-Price parallel optimization framework.
+ * @algorithm OS Utilities: Memory and Process Info
+ *
+ * Cross-platform wrappers for system-level operations:
+ *
+ * **Process management:**
+ * - setpriority(): Process scheduling priority (Unix)
+ * - gethostname(): Machine identification
+ * - GETPID macro: Process ID abstraction
+ *
+ * **Memory monitoring:**
+ * - BCP_free_mem(): System free RAM via sysinfo()
+ * - BCP_used_heap(): Heap usage via mallinfo()
+ *
+ * Returns -1 on platforms without required APIs.
+ * Used for dynamic load balancing and memory-aware scheduling.
  */
 #ifndef _BCP_OS_H
 #define _BCP_OS_H

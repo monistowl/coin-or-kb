@@ -2,9 +2,27 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_vector_change.hpp
- * @brief BCP vector container
+ * @brief Delta-encoded vector storage for BCP
  *
- * Dynamic array container for BCP data structures.
+ * @algorithm Delta Vector: Explicit or Relative Storage
+ *
+ * BCP_vec_change<T> stores vectors either explicitly or as deltas
+ * from a parent vector. This is the core of BCP's compact tree storage.
+ *
+ * **Storage modes:**
+ * - Explicit: Full vector stored in _values
+ * - WrtParent: Delta encoding via:
+ *   - _del_pos: Positions to delete from parent
+ *   - _change_pos: Positions to modify after deletions
+ *   - _values: New values (changes first, then additions)
+ *
+ * **Key operations:**
+ * - update(): Apply delta to reconstruct explicit vector
+ * - as_change(): Compute delta between two vectors
+ * - pack/unpack(): Serialization for message passing
+ *
+ * @complexity Delta update is O(n) where n = vector size
+ * @see BCP_warmstart.hpp for warmstart using delta vectors
  */
 #ifndef _BCP_VECTOR_CHANGE_H
 #define _BCP_VECTOR_CHANGE_H

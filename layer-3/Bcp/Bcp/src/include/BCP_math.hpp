@@ -2,9 +2,13 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_math.hpp
- * @brief BCP framework component
+ * @brief Mathematical constants for BCP
  *
- * Part of Branch-Cut-Price parallel optimization framework.
+ * @algorithm Math Constants: BCP_DBL_MAX
+ *
+ * Defines BCP_DBL_MAX = 1e100 as "infinity" for optimization bounds.
+ * Used instead of DBL_MAX to avoid numerical issues with infinity
+ * arithmetic in LP solvers.
  */
 #ifndef _BCP_MATH_H
 #define _BCP_MATH_H

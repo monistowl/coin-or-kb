@@ -4,9 +4,26 @@
 
 /**
  * @file BCP_message_mpi.hpp
- * @brief BCP messaging
+ * @brief MPI message passing for BCP
  *
- * Message passing interface for parallel BCP.
+ * @algorithm MPI Backend: BCP_mpi_environment Implementation
+ *
+ * MPI implementation of BCP_message_environment interface.
+ * Requires COIN_HAS_MPI to be defined.
+ *
+ * **Key methods:**
+ * - is_mpi(): Detects MPI environment and process count
+ * - send/receive(): Point-to-point messaging with tags
+ * - multicast(): Broadcast to multiple targets
+ * - start_processes(): Spawn workers on machines
+ * - probe(): Non-blocking message check
+ *
+ * **Process management:**
+ * Tracks process IDs, handles initialization/finalization,
+ * checks liveness of remote processes.
+ *
+ * @see BCP_message.hpp for abstract interface
+ * @see BCP_message_pvm.hpp for PVM backend
  */
 #ifndef _BCP_MESSAGE_MPI_H
 #define _BCP_MESSAGE_MPI_H

@@ -2,9 +2,24 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_mempool.hpp
- * @brief BCP framework component
+ * @brief Memory pool allocator for BCP
  *
- * Part of Branch-Cut-Price parallel optimization framework.
+ * @algorithm Free-List Allocator: Pooled Object Allocation
+ *
+ * BCP_MemPool implements a free-list memory pool for fixed-size objects.
+ * Reduces malloc/free overhead for frequently created/destroyed objects.
+ *
+ * **Design:**
+ * - Pre-allocates blocks of BLOCK_SIZE entries
+ * - Maintains linked list of free entries (pointer embedded in unused space)
+ * - Falls back to ::operator new for wrong-sized allocations
+ *
+ * **Usage:**
+ * - alloc(n): Get memory (from pool if size matches, else new)
+ * - free(p, n): Return memory (to pool if size matches, else delete)
+ *
+ * @complexity O(1) allocation when pool has free entries
+ * @see BCP_var.hpp, BCP_cut.hpp for pooled object classes
  */
 #ifndef _BCP_MEMPOOL_H
 #define _BCP_MEMPOOL_H

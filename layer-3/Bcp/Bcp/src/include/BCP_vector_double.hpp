@@ -2,9 +2,20 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_vector_double.hpp
- * @brief BCP vector container
+ * @brief BCP_vec<double> specialization
  *
- * Dynamic array container for BCP data structures.
+ * @algorithm POD Vector Specialization: double
+ *
+ * Template specializations for BCP_vec<double> that skip
+ * construct/destroy overhead since double is a POD type.
+ *
+ * **Optimizations:**
+ * - destroy(): No-op (no destructor needed)
+ * - construct(): Direct assignment instead of placement new
+ * - Uses memcpy for bulk operations where applicable
+ *
+ * Same pattern applies to BCP_vector_int.hpp, BCP_vector_short.hpp, etc.
+ * for all primitive types.
  */
 
 #include <cstring>

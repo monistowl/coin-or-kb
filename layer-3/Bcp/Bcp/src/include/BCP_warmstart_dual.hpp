@@ -2,9 +2,23 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_warmstart_dual.hpp
- * @brief BCP warm start
+ * @brief Dual-only warm start for BCP
  *
- * Warm start information for restarting from previous state.
+ * @algorithm Dual Warmstart: LP Restart from Dual Vector
+ *
+ * BCP_warmstart_dual stores just dual (row) values for LP warmstart.
+ * Uses BCP_vec_change<double> for delta encoding (WrtParent/Explicit).
+ *
+ * **Operations:**
+ * - convert_to_CoinWarmStart(): Creates CoinWarmStartDual for LP solver
+ * - as_change(): Computes delta vs. parent (for tree storage)
+ * - update(): Applies delta to reconstruct full warmstart
+ *
+ * **Use case:** Problems where primal solution changes significantly
+ * but dual solution is stable (constraint-focused problems).
+ *
+ * @see BCP_warmstart_basis.hpp for full basis warmstart
+ * @see BCP_warmstart_primaldual.hpp for primal+dual warmstart
  */
 #ifndef _BCP_WARMSTART_DUAL_H
 #define _BCP_WARMSTART_DUAL_H
