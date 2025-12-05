@@ -36,7 +36,7 @@ Space: O((m+n)/4) bytes using 2-bit packing (4 vars per byte)
 
 ### CoinUtils
 
-- **[CoinWarmStartBasis.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Simplex basis warm start with variable status (basic/nonbasic)
+- **[CoinWarmStartBasis.hpp](/browser/?library=CoinUtils)** - Simplex basis warm start with variable status (basic/nonbasic)
 
 Stores status of each variable (structural and artificial) using
 2 bits per variable. Includes diff capability for branch-and-bound.

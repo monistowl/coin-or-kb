@@ -72,5 +72,5 @@ MIP Solving:
 
 ## Source
 
-Header file: [`highs/Highs.h`](/coin-or-kb/browser/?library=HiGHS&file=highs/Highs.h)
+Header file: [`highs/Highs.h`](/browser/?library=HiGHS&file=highs/Highs.h)
 

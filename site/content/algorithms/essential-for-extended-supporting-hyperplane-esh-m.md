@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[IRootsearchMethod.h](/coin-or-kb/browser/?library=SHOT)** - Interface for constraint boundary rootsearch algorithms
+- **[IRootsearchMethod.h](/browser/?library=SHOT)** - Interface for constraint boundary rootsearch algorithms
 
 Finds points on constraint boundaries for ESH hyperplane generation.
 

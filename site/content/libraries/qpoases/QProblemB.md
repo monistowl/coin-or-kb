@@ -37,9 +37,9 @@ Key methods:
 
 ## See Also
 
-- [QProblem](/coin-or-kb/libraries/qpoases/qproblem/) for QPs with general linear constraints
+- [QProblem](/libraries/qpoases/qproblem/) for QPs with general linear constraints
 
 ## Source
 
-Header file: [`include/qpOASES/QProblemB.hpp`](/coin-or-kb/browser/?library=qpOASES&file=include/qpOASES/QProblemB.hpp)
+Header file: [`include/qpOASES/QProblemB.hpp`](/browser/?library=qpOASES&file=include/qpOASES/QProblemB.hpp)
 

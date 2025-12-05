@@ -27,7 +27,7 @@ O(nnz) where nnz = number of variable appearances in constraints
 
 ### SHOT
 
-- **[Problem.h](/coin-or-kb/browser/?library=SHOT)** - Core problem representation with variables, constraints, and objective
+- **[Problem.h](/browser/?library=SHOT)** - Core problem representation with variables, constraints, and objective
 
 Central data structure holding the optimization problem definition.
 

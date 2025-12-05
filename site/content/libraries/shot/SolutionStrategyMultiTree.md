@@ -42,9 +42,9 @@ Standard ESH outer approximation
 
 ## See Also
 
-- [SolutionStrategySingleTree](/coin-or-kb/libraries/shot/solutionstrategysingletree/) for callback-based variant
+- [SolutionStrategySingleTree](/libraries/shot/solutionstrategysingletree/) for callback-based variant
 
 ## Source
 
-Header file: [`src/SolutionStrategy/SolutionStrategyMultiTree.h`](/coin-or-kb/browser/?library=SHOT&file=src/SolutionStrategy/SolutionStrategyMultiTree.h)
+Header file: [`src/SolutionStrategy/SolutionStrategyMultiTree.h`](/browser/?library=SHOT&file=src/SolutionStrategy/SolutionStrategyMultiTree.h)
 

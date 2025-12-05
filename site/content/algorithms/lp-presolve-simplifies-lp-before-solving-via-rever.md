@@ -24,7 +24,7 @@ Presolve applies a sequence of transformations T_k to original LP:
 
 ### CoinUtils
 
-- **[CoinPresolveMatrix.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Core presolve data structures and action base class
+- **[CoinPresolveMatrix.hpp](/browser/?library=CoinUtils)** - Core presolve data structures and action base class
 
 Defines CoinPrePostsolveMatrix (common base), CoinPresolveMatrix (for
 presolve), CoinPostsolveMatrix (for postsolve), and CoinPresolveAction

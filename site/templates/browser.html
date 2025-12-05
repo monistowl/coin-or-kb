@@ -1951,62 +1951,62 @@
         'CoinPackedMatrix': {
             title: 'Sparse Matrix Storage',
             text: 'This is the fundamental data structure for constraint matrices. LP problems have sparse matrices (mostly zeros), and this stores only the nonzeros efficiently using CSC format.',
-            link: '/coin-or-kb/learning-paths/lp-fundamentals/#sparse-matrices'
+            link: '/learning-paths/lp-fundamentals/#sparse-matrices'
         },
         'CoinFactorization': {
             title: 'LU Factorization Engine',
             text: 'The computational heart of simplex! Every iteration solves Bx=b using this factorization. Markowitz pivoting keeps it sparse.',
-            link: '/coin-or-kb/learning-paths/lp-fundamentals/#lu-factorization'
+            link: '/learning-paths/lp-fundamentals/#lu-factorization'
         },
         'CoinIndexedVector': {
             title: 'Hybrid Sparse Vector',
             text: 'A clever data structure that combines array indexing with sparse storage. Used for basis operations where you need both O(1) access and sparsity.',
-            link: '/coin-or-kb/learning-paths/lp-fundamentals/#sparse-matrices'
+            link: '/learning-paths/lp-fundamentals/#sparse-matrices'
         },
         'CoinPresolveAction': {
             title: 'Presolve Transformations',
             text: 'Each presolve reduction is a reversible transformation. After solving the simplified problem, postsolve applies them in reverse to recover the original solution.',
-            link: '/coin-or-kb/learning-paths/lp-fundamentals/#presolve'
+            link: '/learning-paths/lp-fundamentals/#presolve'
         },
         'ClpSimplex': {
             title: 'The LP Solver',
             text: 'This is the main simplex solver class. It orchestrates primal and dual simplex, manages the basis, and handles warm-starting.',
-            link: '/coin-or-kb/learning-paths/lp-fundamentals/#simplex-overview'
+            link: '/learning-paths/lp-fundamentals/#simplex-overview'
         },
         'ClpSimplexDual': {
             title: 'Dual Simplex Algorithm',
             text: 'Dual simplex maintains pricing feasibility while working toward primal feasibility. It is preferred for branch-and-bound because adding constraints keeps the dual feasible.',
-            link: '/coin-or-kb/learning-paths/lp-fundamentals/#dual-simplex'
+            link: '/learning-paths/lp-fundamentals/#dual-simplex'
         },
         'CbcModel': {
             title: 'Branch-and-Cut Framework',
             text: 'The central class for MIP solving. It manages the search tree, calls cut generators, and coordinates with Clp for LP relaxations.',
-            link: '/coin-or-kb/learning-paths/mip-journey/#branch-and-bound'
+            link: '/learning-paths/mip-journey/#branch-and-bound'
         },
         'CbcNode': {
             title: 'B&B Tree Node',
             text: 'Each node represents a subproblem in branch-and-bound. It stores bounds, branching decisions, and warm-start information.',
-            link: '/coin-or-kb/learning-paths/mip-journey/#branch-and-bound'
+            link: '/learning-paths/mip-journey/#branch-and-bound'
         },
         'CoinSearchTree': {
             title: 'Search Tree Management',
             text: 'Manages the priority queue of open nodes. Different comparison functions give best-first, depth-first, or hybrid strategies.',
-            link: '/coin-or-kb/learning-paths/mip-journey/#branch-and-bound'
+            link: '/learning-paths/mip-journey/#branch-and-bound'
         },
         'CoinWarmStart': {
             title: 'Warm Starting',
             text: 'Stores basis status to quickly restart optimization. Critical for branch-and-bound where you solve thousands of similar LPs.',
-            link: '/coin-or-kb/learning-paths/lp-fundamentals/#dual-simplex'
+            link: '/learning-paths/lp-fundamentals/#dual-simplex'
         },
         'CoinBronKerbosch': {
             title: 'Clique Detection',
             text: 'Finds maximal cliques in conflict graphs. Used to generate clique cuts that strengthen the LP relaxation in MIP.',
-            link: '/coin-or-kb/learning-paths/mip-journey/#cutting-planes'
+            link: '/learning-paths/mip-journey/#cutting-planes'
         },
         'IpoptCalculatedQuantities': {
             title: 'Interior Point Calculations',
             text: 'Manages the computed quantities (residuals, step sizes) in the interior point algorithm. These guide the search through the central path.',
-            link: '/coin-or-kb/algorithms/interior-point-method-barrier-method/'
+            link: '/algorithms/interior-point-method-barrier-method/'
         }
     };
 

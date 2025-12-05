@@ -29,7 +29,7 @@ CoinSort_2/3: O(n log n) average, O(n²) worst
 
 ### CoinUtils
 
-- **[CoinSort.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Sorting utilities for pairs, triples, and parallel arrays
+- **[CoinSort.hpp](/browser/?library=CoinUtils)** - Sorting utilities for pairs, triples, and parallel arrays
 
 Provides CoinPair, CoinTriple, and sort functions for sorting
 multiple related arrays together (e.g., indices and values).

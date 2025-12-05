@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[NLPSolverCuttingPlaneMinimax.h](/coin-or-kb/browser/?library=SHOT)** - Cutting-plane solver for minimax LP problems
+- **[NLPSolverCuttingPlaneMinimax.h](/browser/?library=SHOT)** - Cutting-plane solver for minimax LP problems
 
 Built-in LP-based solver for simple minimax problems.
 

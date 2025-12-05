@@ -36,4 +36,4 @@ Time: O(iterations × nnz) for propagation
 
 ### CoinUtils
 
-- **[CoinPresolveTighten.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Tighten variable bounds using constraint propagation
+- **[CoinPresolveTighten.hpp](/browser/?library=CoinUtils)** - Tighten variable bounds using constraint propagation

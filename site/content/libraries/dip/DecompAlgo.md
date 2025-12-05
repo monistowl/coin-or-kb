@@ -87,5 +87,5 @@ $$- Subgradient: u^{t+1} = u^t + step * (b - Ax^t)$$
 
 ## Source
 
-Header file: [`Dip/src/DecompAlgo.h`](/coin-or-kb/browser/?library=Dip&file=Dip/src/DecompAlgo.h)
+Header file: [`Dip/src/DecompAlgo.h`](/browser/?library=Dip&file=Dip/src/DecompAlgo.h)
 

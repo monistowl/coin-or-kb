@@ -50,10 +50,10 @@ Warm-Starting Protocol:
 
 ## See Also
 
-- [ClpSimplex](/coin-or-kb/libraries/clp/clpsimplex/) for the C++ class being wrapped
+- [ClpSimplex](/libraries/clp/clpsimplex/) for the C++ class being wrapped
 - ClpSolve for solve options
 
 ## Source
 
-Header file: [`src/Clp_C_Interface.h`](/coin-or-kb/browser/?library=Clp&file=src/Clp_C_Interface.h)
+Header file: [`src/Clp_C_Interface.h`](/browser/?library=Clp&file=src/Clp_C_Interface.h)
 

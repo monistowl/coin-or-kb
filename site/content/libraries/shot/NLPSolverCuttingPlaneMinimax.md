@@ -36,5 +36,5 @@ Iterative cutting plane for convex minimax
 
 ## Source
 
-Header file: [`src/NLPSolver/NLPSolverCuttingPlaneMinimax.h`](/coin-or-kb/browser/?library=SHOT&file=src/NLPSolver/NLPSolverCuttingPlaneMinimax.h)
+Header file: [`src/NLPSolver/NLPSolverCuttingPlaneMinimax.h`](/browser/?library=SHOT&file=src/NLPSolver/NLPSolverCuttingPlaneMinimax.h)
 

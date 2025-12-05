@@ -47,5 +47,5 @@ Extended Supporting Hyperplane (ESH) method adds
 
 ## Source
 
-Header file: [`src/DualSolver.h`](/coin-or-kb/browser/?library=SHOT&file=src/DualSolver.h)
+Header file: [`src/DualSolver.h`](/browser/?library=SHOT&file=src/DualSolver.h)
 

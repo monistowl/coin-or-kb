@@ -38,4 +38,4 @@ Factorization: O(nnz × fill-in), highly structure-dependent
 
 ### Clp
 
-- **[CoinAbcBaseFactorization.hpp](/coin-or-kb/browser/?library=Clp)** - Core ABC SIMD-optimized LU factorization implementation
+- **[CoinAbcBaseFactorization.hpp](/browser/?library=Clp)** - Core ABC SIMD-optimized LU factorization implementation

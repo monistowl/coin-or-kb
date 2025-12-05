@@ -34,9 +34,9 @@ lb <= sum(a[i] * x[i]) <= ub
 - OsiCut for base class
 - OsiCuts for cut pool management
 - Cgl (Cut Generation Library) for cut generators
-- [CoinPackedVector](/coin-or-kb/libraries/coinutils/coinpackedvector/) for sparse row representation
+- [CoinPackedVector](/libraries/coinutils/coinpackedvector/) for sparse row representation
 
 ## Source
 
-Header file: [`src/Osi/OsiRowCut.hpp`](/coin-or-kb/browser/?library=Osi&file=src/Osi/OsiRowCut.hpp)
+Header file: [`src/Osi/OsiRowCut.hpp`](/browser/?library=Osi&file=src/Osi/OsiRowCut.hpp)
 

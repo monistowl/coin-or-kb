@@ -22,7 +22,7 @@ MIP: Exponential worst-case, highly structure-dependent
 
 ### Cbc
 
-- **[Cbc_C_Interface.h](/coin-or-kb/browser/?library=Cbc)** - Creates an empty problem
+- **[Cbc_C_Interface.h](/browser/?library=Cbc)** - Creates an empty problem
 
 ## References
 

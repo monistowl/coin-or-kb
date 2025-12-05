@@ -30,7 +30,7 @@ Time: O(nnz(A)·α(n)) average with aggressive absorption
 
 ### SuiteSparse
 
-- **[colamd.h](/coin-or-kb/browser/?library=SuiteSparse)** - Column Approximate Minimum Degree ordering for sparse LU factorization
+- **[colamd.h](/browser/?library=SuiteSparse)** - Column Approximate Minimum Degree ordering for sparse LU factorization
 
 COLAMD computes a column permutation Q that reduces fill-in during LU
 factorization of an unsymmetric matrix A. The ordering minimizes the

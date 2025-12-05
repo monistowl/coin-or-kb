@@ -8,6 +8,20 @@ category = "Simplex Method"
 implementation_count = 1
 +++
 
+## Why This Matters
+
+Steepest edge is a **pivoting strategy** that dramatically reduces the number of simplex iterations—typically 30-50% fewer than the naive Dantzig rule. On degenerate problems (where many pivots make zero progress), the improvement can be even larger.
+
+- **Fewer iterations = faster solves**: Each simplex iteration has a fixed cost (FTRAN, BTRAN, ratio test). Cutting iteration count by 30% is a direct 30% speedup.
+- **Degeneracy resistance**: Degenerate pivots (θ = 0) are the bane of simplex. Steepest edge's normalized selection helps escape degenerate cycles faster.
+- **Modern default**: Virtually all production LP solvers (Clp, CPLEX, Gurobi, Xpress) use steepest edge or its approximation (Devex) as the default pivot rule.
+
+**The key insight**: Dantzig rule picks the "most infeasible" row, but this ignores *geometry*. A row might be highly infeasible but also "steep" in the sense that fixing it doesn't improve the objective much. Steepest edge normalizes by the squared length of the tableau row (||B⁻¹eᵢ||²), picking the direction of steepest *improvement* in the dual objective.
+
+**The cost tradeoff**: Maintaining edge weights requires O(m) work per pivot. This is worth it because it typically saves many more pivots than the overhead costs. Devex is a cheaper approximation that recomputes weights periodically.
+
+---
+
 Selects leaving variable (pivot row) by normalizing infeasibility by edge weight.
 Instead of choosing most infeasible basic variable (Dantzig), computes:
   score_i = (infeasibility_i)² / weight_i
@@ -40,7 +54,7 @@ Full recomputation O(m²) but rare. Typically 30-50% fewer iterations than Dantz
 
 ### Clp
 
-- **[ClpDualRowSteepest.hpp](/coin-or-kb/browser/?library=Clp)** - Steepest edge pivot selection for dual simplex
+- **[ClpDualRowSteepest.hpp](/browser/?library=Clp)** - Steepest edge pivot selection for dual simplex
 
 ## References
 

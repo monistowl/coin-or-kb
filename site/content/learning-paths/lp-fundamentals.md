@@ -80,7 +80,7 @@ LP solvers handle problems with millions of variables. They're used for:
 
 <div class="code-connection">
 
-In COIN-OR, LP problems are represented by the `ClpSimplex` class in [Clp](/coin-or-kb/libraries/clp/). The constraint matrix $A$ is stored as a `CoinPackedMatrix` in [CoinUtils](/coin-or-kb/libraries/coinutils/).
+In COIN-OR, LP problems are represented by the `ClpSimplex` class in [Clp](/libraries/clp/). The constraint matrix $A$ is stored as a `CoinPackedMatrix` in [CoinUtils](/libraries/coinutils/).
 
 </div>
 
@@ -126,7 +126,7 @@ For a 10,000×10,000 matrix with 50,000 nonzeros, that's 50,000 vs 100,000,000 o
 
 <div class="code-connection">
 
-See `CoinPackedMatrix` in [CoinUtils](/coin-or-kb/browser/?library=CoinUtils). The `getVectorStarts()`, `getIndices()`, and `getElements()` methods give you the CSC arrays.
+See `CoinPackedMatrix` in [CoinUtils](/browser/?library=CoinUtils). The `getVectorStarts()`, `getIndices()`, and `getElements()` methods give you the CSC arrays.
 
 </div>
 
@@ -171,7 +171,7 @@ COIN-OR uses **Forrest-Tomlin updates**: maintain $L$ and modify $U$ by eliminat
 
 <div class="code-connection">
 
-The `CoinFactorization` class in [CoinUtils](/coin-or-kb/libraries/coinutils/CoinFactorization/) implements LU with Markowitz pivoting. Key methods:
+The `CoinFactorization` class in [CoinUtils](/libraries/coinutils/CoinFactorization/) implements LU with Markowitz pivoting. Key methods:
 - `factorize()` - Initial factorization
 - `updateColumnFT()` - FTRAN (solve $Bx=b$)
 - `updateColumnTranspose()` - BTRAN (solve $B^Ty=c$)
@@ -206,7 +206,7 @@ If all $\bar{c}_j \geq 0$ for minimization, we're optimal.
 ### The Primal Simplex Algorithm
 
 <div class="diagram-container">
-<img src="/coin-or-kb/diagrams/simplex-flowchart.svg" alt="Simplex algorithm flowchart" class="algorithm-diagram">
+<img src="/diagrams/simplex-flowchart.svg" alt="Simplex algorithm flowchart" class="algorithm-diagram">
 </div>
 
 <div class="step-by-step">
@@ -259,7 +259,7 @@ $x_B \leftarrow x_B - \theta \cdot d$ and $x_j \leftarrow \theta$.
 
 <div class="code-connection">
 
-The primal simplex is implemented in `ClpSimplexPrimal` in [Clp](/coin-or-kb/libraries/clp/). The main iteration loop is in `whileIterating()`.
+The primal simplex is implemented in `ClpSimplexPrimal` in [Clp](/libraries/clp/). The main iteration loop is in `whileIterating()`.
 
 </div>
 
@@ -392,7 +392,7 @@ Swap variables and update factorization.
 
 <div class="code-connection">
 
-See `ClpSimplexDual` in [Clp](/coin-or-kb/browser/?library=Clp). The [dual simplex algorithm page](/coin-or-kb/algorithms/dual-simplex-method/) has the full algorithm documentation.
+See `ClpSimplexDual` in [Clp](/browser/?library=Clp). The [dual simplex algorithm page](/algorithms/dual-simplex-method/) has the full algorithm documentation.
 
 </div>
 
@@ -428,7 +428,7 @@ A good presolve can reduce solve time by 10-100x on real problems!
 
 <div class="code-connection">
 
-CoinUtils provides `CoinPresolveAction` and its subclasses for each reduction type. Clp's `ClpPresolve` orchestrates multiple passes. See [presolve algorithms](/coin-or-kb/algorithms/lp-presolve-preprocessing/).
+CoinUtils provides `CoinPresolveAction` and its subclasses for each reduction type. Clp's `ClpPresolve` orchestrates multiple passes. See [presolve algorithms](/algorithms/lp-presolve-preprocessing/).
 
 </div>
 
@@ -438,9 +438,9 @@ CoinUtils provides `CoinPresolveAction` and its subclasses for each reduction ty
 
 You now understand the core LP algorithms! Next steps:
 
-- **[MIP Journey](/coin-or-kb/learning-paths/mip-journey/)** - Add integer variables and learn branch-and-bound
-- **[Browse the source](/coin-or-kb/browser/)** - Explore the actual implementations
-- **[Algorithm index](/coin-or-kb/algorithms/)** - Deep-dive into specific algorithms
+- **[MIP Journey](/learning-paths/mip-journey/)** - Add integer variables and learn branch-and-bound
+- **[Browse the source](/browser/)** - Explore the actual implementations
+- **[Algorithm index](/algorithms/)** - Deep-dive into specific algorithms
 
 <div class="key-insight">
 

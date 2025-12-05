@@ -38,7 +38,7 @@ O(2^n) worst-case (Klee-Minty), but typically polynomial in practice.
 
 ### Clp
 
-- **[ClpSimplex.hpp](/coin-or-kb/browser/?library=Clp)** - Main simplex solver class - orchestrates primal and dual simplex algorithms
+- **[ClpSimplex.hpp](/browser/?library=Clp)** - Main simplex solver class - orchestrates primal and dual simplex algorithms
 
 ## References
 

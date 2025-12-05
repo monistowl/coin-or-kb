@@ -30,7 +30,7 @@ Most operations O(1) delegations to ClpSimplex
 
 ### Clp
 
-- **[OsiClpSolverInterface.hpp](/coin-or-kb/browser/?library=Clp)** - 
+- **[OsiClpSolverInterface.hpp](/browser/?library=Clp)** - 
 
 ## References
 

@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[TaskPerformBoundTightening.h](/coin-or-kb/browser/?library=SHOT)** - Tighten variable bounds via optimization
+- **[TaskPerformBoundTightening.h](/browser/?library=SHOT)** - Tighten variable bounds via optimization
 
 Uses optimization-based bound tightening (OBBT).
 

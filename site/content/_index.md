@@ -137,7 +137,7 @@ Branch-and-bound tree management.
 COIN-OR is organized in dependency layers. Higher layers build on lower ones.
 
 <div class="diagram-container">
-<img src="/coin-or-kb/diagrams/coin-or-layers.svg" alt="COIN-OR library architecture" class="architecture-diagram">
+<img src="/diagrams/coin-or-layers.svg" alt="COIN-OR library architecture" class="architecture-diagram">
 </div>
 
 <details>
@@ -192,12 +192,12 @@ This knowledge base is built for machine consumption. Point your agent at it and
 Fetch the JSON API directly — works with any agent that can read URLs:
 
 ```
-https://monistowl.github.io/coin-or-kb/api/annotations.json
+https://monistowl.github.io/api/annotations.json
 ```
 
 **Example prompt for Claude, GPT, or any LLM:**
 
-> Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 1,197 files across 28 libraries.
+> Fetch https://monistowl.github.io/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 1,197 files across 28 libraries.
 
 **API Endpoints:**
 
@@ -218,7 +218,7 @@ Add to your Claude Desktop `claude_desktop_config.json`:
   "mcpServers": {
     "coin-or-kb": {
       "command": "python",
-      "args": ["/path/to/coin-or-kb/mcp-server/coin_or_kb_server.py"]
+      "args": ["/path/to/mcp-server/coin_or_kb_server.py"]
     }
   }
 }

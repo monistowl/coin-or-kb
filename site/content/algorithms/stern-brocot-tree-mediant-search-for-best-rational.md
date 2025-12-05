@@ -26,7 +26,7 @@ O(log(maxdnom)) iterations
 
 ### CoinUtils
 
-- **[CoinRational.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Rational number representation with double-to-rational conversion
+- **[CoinRational.hpp](/browser/?library=CoinUtils)** - Rational number representation with double-to-rational conversion
 
 Provides a simple rational number class that can convert floating-point
 values to rational approximations. Useful in optimization for converting

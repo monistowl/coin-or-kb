@@ -40,5 +40,5 @@ Direct interior point NLP solve
 
 ## Source
 
-Header file: [`src/SolutionStrategy/SolutionStrategyNLP.h`](/coin-or-kb/browser/?library=SHOT&file=src/SolutionStrategy/SolutionStrategyNLP.h)
+Header file: [`src/SolutionStrategy/SolutionStrategyNLP.h`](/browser/?library=SHOT&file=src/SolutionStrategy/SolutionStrategyNLP.h)
 

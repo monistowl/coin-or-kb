@@ -34,7 +34,7 @@ Maximum transversal: O(nnz + n) time and O(n) space
 
 ### SuiteSparse
 
-- **[btf.h](/coin-or-kb/browser/?library=SuiteSparse)** - Block Triangular Form permutation for sparse matrices
+- **[btf.h](/browser/?library=SuiteSparse)** - Block Triangular Form permutation for sparse matrices
 
 BTF computes permutations to transform a sparse matrix into block upper
 triangular form (BTF). This decomposes the matrix into independent blocks

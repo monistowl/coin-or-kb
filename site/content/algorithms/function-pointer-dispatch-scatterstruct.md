@@ -21,7 +21,7 @@ O(nnz) per scatter/gather operation
 
 ### Clp
 
-- **[CoinAbcHelperFunctions.hpp](/coin-or-kb/browser/?library=Clp)** - SIMD-optimized scatter/gather operations for ABC factorization
+- **[CoinAbcHelperFunctions.hpp](/browser/?library=Clp)** - SIMD-optimized scatter/gather operations for ABC factorization
 
 High-performance kernels for sparse matrix operations using:
 - Manual loop unrolling (UNROLL_SCATTER, UNROLL_GATHER)

@@ -35,4 +35,4 @@ Time: O(iterations × nnz) for bound propagation
 
 ### CoinUtils
 
-- **[CoinPresolveDual.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Fix variables using dual bounds and reduced cost analysis
+- **[CoinPresolveDual.hpp](/browser/?library=CoinUtils)** - Fix variables using dual bounds and reduced cost analysis

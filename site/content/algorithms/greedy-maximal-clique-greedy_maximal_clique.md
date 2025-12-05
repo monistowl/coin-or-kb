@@ -27,7 +27,7 @@ O(n² * d) for greedy approach
 
 ### Cgl
 
-- **[CglClique.hpp](/coin-or-kb/browser/?library=Cgl)** - Clique cuts from set packing structure
+- **[CglClique.hpp](/browser/?library=Cgl)** - Clique cuts from set packing structure
 
 Generates clique inequalities by finding maximal cliques in the
 conflict graph of binary variables. Two binaries conflict if they

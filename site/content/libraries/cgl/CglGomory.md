@@ -67,9 +67,9 @@ Default 0.05; tighter at root for more cuts.
 ## See Also
 
 - CglCutGenerator for base interface
-- [ClpFactorization](/coin-or-kb/libraries/clp/clpfactorization/) for tableau row computation
+- [ClpFactorization](/libraries/clp/clpfactorization/) for tableau row computation
 
 ## Source
 
-Header file: [`src/CglGomory/CglGomory.hpp`](/coin-or-kb/browser/?library=Cgl&file=src/CglGomory/CglGomory.hpp)
+Header file: [`src/CglGomory/CglGomory.hpp`](/browser/?library=Cgl&file=src/CglGomory/CglGomory.hpp)
 

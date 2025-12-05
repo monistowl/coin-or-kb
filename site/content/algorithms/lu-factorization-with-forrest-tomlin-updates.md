@@ -8,6 +8,20 @@ category = "Matrix Factorization"
 implementation_count = 1
 +++
 
+## Why This Matters
+
+LU factorization is the **computational engine** of the simplex method. Every simplex iteration needs to solve two linear systems with the basis matrix B. Without efficient factorization and updates, simplex would be impractical for anything beyond toy problems.
+
+- **Speed**: Modern LP solvers perform thousands to millions of simplex pivots. Each pivot requires FTRAN (forward solve) and BTRAN (backward solve). The LU factorization makes these O(nnz) instead of O(m³).
+- **Memory**: Storing B⁻¹ explicitly would require O(m²) memory. LU factors are typically much sparser, often O(m) for well-structured problems.
+- **Updates matter most**: The Forrest-Tomlin update allows updating the factorization in O(m) time when a single column changes. Without this, you'd need to refactorize (O(m²) or worse) every pivot.
+
+**The key insight**: Rather than inverting the basis matrix or refactoring from scratch, Forrest-Tomlin keeps L fixed and updates U with a "spike" column. After many pivots, fill-in accumulates and you refactorize—but this happens every 100-200 iterations, not every single one.
+
+**Why this specific implementation**: Clp's ClpFactorization wraps CoinFactorization and adds solver-specific logic: switching between sparse, dense, and network factorizations based on problem structure, and handling the warm-start workflow that MIP solvers depend on.
+
+---
+
 Maintains factorization B = LU of the basis matrix for simplex operations.
 Core operations:
 - factorize(): Compute B = LU from scratch using Markowitz pivoting
@@ -41,7 +55,7 @@ Forrest-Tomlin update: O(m) average, refactorization every 100-200 pivots.
 
 ### Clp
 
-- **[ClpFactorization.hpp](/coin-or-kb/browser/?library=Clp)** - Wrapper around CoinFactorization for use within Clp simplex
+- **[ClpFactorization.hpp](/browser/?library=Clp)** - Wrapper around CoinFactorization for use within Clp simplex
 
 ## References
 

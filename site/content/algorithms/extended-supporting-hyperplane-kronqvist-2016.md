@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[TaskSelectHyperplanePointsESH.h](/coin-or-kb/browser/?library=SHOT)** - Extended Supporting Hyperplane point selection
+- **[TaskSelectHyperplanePointsESH.h](/browser/?library=SHOT)** - Extended Supporting Hyperplane point selection
 
 Core ESH algorithm: finds boundary points for hyperplane generation.
 

@@ -16,7 +16,7 @@ Forward mode: propagates derivatives from inputs to outputs.
 
 ### CppAD
 
-- **[cppad.hpp](/coin-or-kb/browser/?library=CppAD)** - Contains all variables and functions defined by CppAD package
+- **[cppad.hpp](/browser/?library=CppAD)** - Contains all variables and functions defined by CppAD package
 
 ## References
 

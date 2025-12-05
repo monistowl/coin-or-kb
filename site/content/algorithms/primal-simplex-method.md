@@ -8,6 +8,19 @@ category = "Simplex Method"
 implementation_count = 1
 +++
 
+## Why This Matters
+
+Primal simplex is the **original** simplex algorithm that launched the field of linear programming. While modern solvers often default to dual simplex (faster for cutting planes and branching), primal simplex remains essential in specific scenarios:
+
+- **Network flow problems**: Specialized network simplex variants achieve near-linear time complexity, dramatically outperforming general-purpose methods.
+- **Starting from a known feasible point**: If you have a feasible solution from a previous solve or warm start, primal simplex can leverage it directly.
+- **Pricing-heavy problems**: When the constraint matrix has special structure (e.g., column generation), primal simplex's column selection can exploit it.
+- **Debugging and education**: The intuitive "walk along vertices" interpretation makes primal simplex ideal for understanding how LP solving works.
+
+**The key insight**: Primal simplex maintains *feasibility* while improving *optimality*. You always have a legal solution, and it gets better each iteration. This is conceptually cleaner than dual simplex, where you have an "optimal" solution that isn't feasible until the end.
+
+---
+
 Solves LP by maintaining primal feasibility (variables within bounds)
 while iterating toward dual feasibility (optimality). Each iteration:
 1. Choose entering variable (pivot column) - with negative reduced cost
@@ -45,7 +58,7 @@ when starting from feasible solution or for problems with few constraints.
 
 ### Clp
 
-- **[ClpSimplexPrimal.hpp](/coin-or-kb/browser/?library=Clp)** - Primal simplex algorithm implementation
+- **[ClpSimplexPrimal.hpp](/browser/?library=Clp)** - Primal simplex algorithm implementation
 
 ## References
 

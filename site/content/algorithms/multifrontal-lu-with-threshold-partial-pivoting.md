@@ -40,7 +40,7 @@ Time: O(nnz(L+U)·f̄) where f̄ is average front size
 
 ### SuiteSparse
 
-- **[umfpack.h](/coin-or-kb/browser/?library=SuiteSparse)** - Multifrontal sparse LU factorization for unsymmetric matrices
+- **[umfpack.h](/browser/?library=SuiteSparse)** - Multifrontal sparse LU factorization for unsymmetric matrices
 
 UMFPACK computes a sparse LU factorization of a general (unsymmetric)
 square matrix A:

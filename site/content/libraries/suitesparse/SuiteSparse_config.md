@@ -46,5 +46,5 @@ stable algorithm that avoids intermediate overflow/underflow.
 
 ## Source
 
-Header file: [`SuiteSparse_config/SuiteSparse_config.h`](/coin-or-kb/browser/?library=SuiteSparse&file=SuiteSparse_config/SuiteSparse_config.h)
+Header file: [`SuiteSparse_config/SuiteSparse_config.h`](/browser/?library=SuiteSparse&file=SuiteSparse_config/SuiteSparse_config.h)
 

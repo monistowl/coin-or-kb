@@ -38,4 +38,4 @@ Time: O(nnz) to compute activity bounds for all rows
 
 ### CoinUtils
 
-- **[CoinPresolveForcing.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Forcing and useless constraint detection
+- **[CoinPresolveForcing.hpp](/browser/?library=CoinUtils)** - Forcing and useless constraint detection

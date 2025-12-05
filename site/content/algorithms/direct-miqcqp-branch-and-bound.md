@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **[SolutionStrategyMIQCQP.h](/coin-or-kb/browser/?library=SHOT)** - Direct MIQCQP solver for convex quadratic problems
+- **[SolutionStrategyMIQCQP.h](/browser/?library=SHOT)** - Direct MIQCQP solver for convex quadratic problems
 
 Bypasses ESH for problems solvable by CPLEX/Gurobi MIQCQP.
 

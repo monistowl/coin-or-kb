@@ -33,5 +33,5 @@ LP Method Selection (LPMethod enum):
 
 ## Source
 
-Header file: [`src/Cbc_C_Interface.h`](/coin-or-kb/browser/?library=Cbc&file=src/Cbc_C_Interface.h)
+Header file: [`src/Cbc_C_Interface.h`](/browser/?library=Cbc&file=src/Cbc_C_Interface.h)
 

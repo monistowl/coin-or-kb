@@ -8,6 +8,20 @@ category = "Branch and Bound"
 implementation_count = 1
 +++
 
+## Why This Matters
+
+Branching variable selection is arguably the **most impactful algorithmic choice** in MIP solving. The difference between good and bad branching can be exponential: the same problem might require 100 nodes or 1,000,000 nodes depending on branching strategy.
+
+- **Tree size is exponential**: With n binary variables, the full tree has 2ⁿ nodes. Smart branching keeps the explored portion tiny.
+- **Early pruning is everything**: If branching on variable x immediately proves both children infeasible or worse than the incumbent, you've eliminated half the remaining tree.
+- **Pseudocosts predict well**: After observing how branching on x_j affects the objective a few times, you can predict future branching quality. These "pseudocosts" guide selection without expensive strong branching.
+
+**The key insight**: "Most fractional" (Dantzig-style) branching is cheap but often terrible. Variables close to 0.5 might be easy to fix either way, while variables at 0.99 might be the critical constraint. Strong branching actually solves the LP for both branches, measuring the true degradation—expensive, but it gives you the information to build good pseudocosts.
+
+**Reliability branching**: The practical sweet spot. Use pseudocosts when you trust them (variable has been branched on ≥η times), strong-branch otherwise. This gets you strong branching's accuracy with pseudocosts' speed, after an initial learning phase.
+
+---
+
 After identifying fractional variables, must choose which to branch on.
 Different strategies trade off computational cost vs tree size.
 
@@ -43,7 +57,7 @@ Pseudo-costs: O(n) after warmup. Reliability: adaptive O(k') where k' ≤ k.
 
 ### Cbc
 
-- **[CbcBranchDecision.hpp](/coin-or-kb/browser/?library=Cbc)** - Abstract base for branching variable selection
+- **[CbcBranchDecision.hpp](/browser/?library=Cbc)** - Abstract base for branching variable selection
 Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
 

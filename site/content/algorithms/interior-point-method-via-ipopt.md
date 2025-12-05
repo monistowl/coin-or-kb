@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### Gravity
 
-- **[IpoptProgram.h](/coin-or-kb/browser/?library=Gravity)** - Ipopt solver interface implementing TNLP callbacks
+- **[IpoptProgram.h](/browser/?library=Gravity)** - Ipopt solver interface implementing TNLP callbacks
 
 Adapts Gravity models to Ipopt's TNLP (Templated NLP) interface.
 

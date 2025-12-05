@@ -50,7 +50,7 @@ Factorization: O(n³) worst, typically O(n·nnz) with good pivoting
 
 ### CoinUtils
 
-- **[CoinSimpFactorization.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Simple LU factorization for LP basis matrices
+- **[CoinSimpFactorization.hpp](/browser/?library=CoinUtils)** - Simple LU factorization for LP basis matrices
 
 Straightforward LU factorization implementation. Less optimized than
 CoinFactorization but simpler and useful as reference implementation.

@@ -18,7 +18,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 <div class="library-grid">
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/coinutils/">CoinUtils</a></h3>
+<h3><a href="/libraries/coinutils/">CoinUtils</a></h3>
 <p class="brief">Foundation utilities: sparse matrices, I/O (MPS/LP), presolve, warm starting</p>
 <div class="meta">
 <span class="badge documented">122 classes documented</span>
@@ -34,7 +34,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/suitesparse/">SuiteSparse</a></h3>
+<h3><a href="/libraries/suitesparse/">SuiteSparse</a></h3>
 <p class="brief">Sparse direct solvers (CHOLMOD, UMFPACK, AMD) for linear algebra</p>
 <div class="meta">
 <span class="badge documented">9 classes documented</span>
@@ -56,7 +56,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 <div class="library-grid">
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/clp/">Clp</a></h3>
+<h3><a href="/libraries/clp/">Clp</a></h3>
 <p class="brief">COIN-OR LP solver: dual/primal simplex, interior point methods</p>
 <div class="meta">
 <span class="badge documented">13 classes documented</span>
@@ -71,7 +71,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/osi/">Osi</a></h3>
+<h3><a href="/libraries/osi/">Osi</a></h3>
 <p class="brief">Open Solver Interface: common API for LP/MIP solvers</p>
 <div class="meta">
 <span class="badge documented">2 classes documented</span>
@@ -85,7 +85,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/cppad/">CppAD</a></h3>
+<h3><a href="/libraries/cppad/">CppAD</a></h3>
 <p class="brief">C++ algorithmic differentiation for automatic derivatives</p>
 <div class="meta">
 <span class="badge documented">2 classes documented</span>
@@ -99,7 +99,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/qpoases/">qpOASES</a></h3>
+<h3><a href="/libraries/qpoases/">qpOASES</a></h3>
 <p class="brief">Online active set QP solver for model predictive control</p>
 <div class="meta">
 <span class="badge documented">3 classes documented</span>
@@ -121,7 +121,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 <div class="library-grid">
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/cbc/">Cbc</a></h3>
+<h3><a href="/libraries/cbc/">Cbc</a></h3>
 <p class="brief">COIN-OR branch-and-cut MIP solver with parallelization</p>
 <div class="meta">
 <span class="badge documented">4 classes documented</span>
@@ -136,7 +136,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/cgl/">Cgl</a></h3>
+<h3><a href="/libraries/cgl/">Cgl</a></h3>
 <p class="brief">Cut Generator Library: Gomory, MIR, lift-and-project cuts</p>
 <div class="meta">
 <span class="badge documented">6 classes documented</span>
@@ -151,7 +151,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/ipopt/">Ipopt</a></h3>
+<h3><a href="/libraries/ipopt/">Ipopt</a></h3>
 <p class="brief">Interior Point OPTimizer for large-scale nonlinear programming</p>
 <div class="meta">
 <span class="badge documented">1 class documented</span>
@@ -166,7 +166,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/adol-c/">ADOL-C</a></h3>
+<h3><a href="/libraries/adol-c/">ADOL-C</a></h3>
 <p class="brief">Automatic differentiation via operator overloading</p>
 <div class="meta">
 <span class="badge documented">1 class documented</span>
@@ -187,7 +187,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 <div class="library-grid">
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=Bonmin">Bonmin</a></h3>
+<h3><a href="/browser/?library=Bonmin">Bonmin</a></h3>
 <p class="brief">Basic Open-source Nonlinear Mixed INteger programming</p>
 <div class="meta">
 <span class="badge headers">45 headers</span>
@@ -200,7 +200,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=Couenne">Couenne</a></h3>
+<h3><a href="/browser/?library=Couenne">Couenne</a></h3>
 <p class="brief">Convex Over and Under ENvelopes for MINLP with spatial B&B</p>
 <div class="meta">
 <span class="badge headers">70 headers</span>
@@ -213,7 +213,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=SYMPHONY">SYMPHONY</a></h3>
+<h3><a href="/browser/?library=SYMPHONY">SYMPHONY</a></h3>
 <p class="brief">Single- or Multi-Process Optimization over Networks (parallel B&C)</p>
 <div class="meta">
 <span class="badge headers">4 headers</span>
@@ -225,7 +225,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=Alps">CHiPPS-ALPS</a></h3>
+<h3><a href="/browser/?library=Alps">CHiPPS-ALPS</a></h3>
 <p class="brief">Abstract Library for Parallel Search tree algorithms</p>
 <div class="meta">
 <span class="badge headers">35 headers</span>
@@ -238,7 +238,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=Blis">CHiPPS-BLIS</a></h3>
+<h3><a href="/browser/?library=Blis">CHiPPS-BLIS</a></h3>
 <p class="brief">Branch-and-cut with Lp-Based Intelligent Search</p>
 <div class="meta">
 <span class="badge headers">27 headers</span>
@@ -250,7 +250,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=DisCO">DisCO</a></h3>
+<h3><a href="/browser/?library=DisCO">DisCO</a></h3>
 <p class="brief">Distributed Combinatorial Optimization for parallel MIP</p>
 <div class="meta">
 <span class="badge headers">27 headers</span>
@@ -263,7 +263,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=Bcp">Bcp</a></h3>
+<h3><a href="/browser/?library=Bcp">Bcp</a></h3>
 <p class="brief">Branch-Cut-Price framework for column generation</p>
 <div class="meta">
 <span class="badge headers">Headers only</span>
@@ -275,7 +275,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/dip/">Dip</a></h3>
+<h3><a href="/libraries/dip/">Dip</a></h3>
 <p class="brief">Decomposition for Integer Programming (Dantzig-Wolfe, Lagrangean)</p>
 <div class="meta">
 <span class="badge documented">1 class documented</span>
@@ -287,7 +287,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=Smi">Smi</a></h3>
+<h3><a href="/browser/?library=Smi">Smi</a></h3>
 <p class="brief">Stochastic Modelling Interface for stochastic programming</p>
 <div class="meta">
 <span class="badge headers">Headers only</span>
@@ -299,7 +299,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=oBB">oBB</a></h3>
+<h3><a href="/browser/?library=oBB">oBB</a></h3>
 <p class="brief">Optimality-Based Branch-and-Bound for nonconvex MINLP</p>
 <div class="meta">
 <span class="badge headers">Headers only</span>
@@ -320,7 +320,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 <div class="library-grid">
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/shot/">SHOT</a></h3>
+<h3><a href="/libraries/shot/">SHOT</a></h3>
 <p class="brief">Supporting Hyperplane Optimization Toolkit for convex MINLP</p>
 <div class="meta">
 <span class="badge documented">15 classes documented</span>
@@ -334,7 +334,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/highs/">HiGHS</a></h3>
+<h3><a href="/libraries/highs/">HiGHS</a></h3>
 <p class="brief">High-performance LP/MIP solver (simplex, IPM, B&B)</p>
 <div class="meta">
 <span class="badge documented">5 classes documented</span>
@@ -347,7 +347,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=GAMSlinks">GAMSlinks</a></h3>
+<h3><a href="/browser/?library=GAMSlinks">GAMSlinks</a></h3>
 <p class="brief">Interfaces to GAMS optimization modeling system</p>
 <div class="meta">
 <span class="badge headers">25 headers</span>
@@ -360,7 +360,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card documented">
-<h3><a href="/coin-or-kb/libraries/gravity/">Gravity</a></h3>
+<h3><a href="/libraries/gravity/">Gravity</a></h3>
 <p class="brief">High-performance optimization modeling in C++</p>
 <div class="meta">
 <span class="badge documented">1 class documented</span>
@@ -374,7 +374,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=Sonnet">Sonnet</a></h3>
+<h3><a href="/browser/?library=Sonnet">Sonnet</a></h3>
 <p class="brief">.NET optimization modeling wrapper</p>
 <div class="meta">
 <span class="badge headers">24 headers</span>
@@ -387,7 +387,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=Cmpl">Cmpl</a></h3>
+<h3><a href="/browser/?library=Cmpl">Cmpl</a></h3>
 <p class="brief">COLIOP Mathematical Programming Language modeling system</p>
 <div class="meta">
 <span class="badge headers">Headers only</span>
@@ -399,7 +399,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=OS">OS</a></h3>
+<h3><a href="/browser/?library=OS">OS</a></h3>
 <p class="brief">Optimization Services: Web services for optimization</p>
 <div class="meta">
 <span class="badge headers">Headers only</span>
@@ -411,7 +411,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 
 <div class="library-card">
-<h3><a href="/coin-or-kb/browser/?library=cuopt">cuopt</a></h3>
+<h3><a href="/browser/?library=cuopt">cuopt</a></h3>
 <p class="brief">CUDA-accelerated optimization</p>
 <div class="meta">
 <span class="badge headers">Headers only</span>
@@ -444,7 +444,7 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 
 ## Using the Source Browser
 
-All 30 libraries are indexed in the [Source Browser](/coin-or-kb/browser/), which provides:
+All 30 libraries are indexed in the [Source Browser](/browser/), which provides:
 
 - **File tree navigation** across all layers
 - **Header listings** with class information

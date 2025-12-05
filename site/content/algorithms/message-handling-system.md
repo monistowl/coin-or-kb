@@ -25,7 +25,7 @@ Message lookup: O(1) by message number
 
 ### CoinUtils
 
-- **[CoinMessageHandler.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Flexible message handling with severity levels and i18n support
+- **[CoinMessageHandler.hpp](/browser/?library=CoinUtils)** - Flexible message handling with severity levels and i18n support
 
 Provides CoinMessageHandler for formatted output with:
 - Severity-based filtering (warnings, errors, info)

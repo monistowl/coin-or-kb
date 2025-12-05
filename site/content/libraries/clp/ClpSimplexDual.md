@@ -54,12 +54,12 @@ for problems with many constraints, especially after adding cuts in B&B.
 
 ## See Also
 
-- [ClpSimplex](/coin-or-kb/libraries/clp/clpsimplex/) for the base simplex class
-- [ClpSimplexPrimal](/coin-or-kb/libraries/clp/clpsimplexprimal/) for primal simplex variant
+- [ClpSimplex](/libraries/clp/clpsimplex/) for the base simplex class
+- [ClpSimplexPrimal](/libraries/clp/clpsimplexprimal/) for primal simplex variant
 - ClpDualRowPivot for pivot row selection strategies
-- [ClpDualRowSteepest](/coin-or-kb/libraries/clp/clpdualrowsteepest/), ClpDualRowDantzig for specific strategies
+- [ClpDualRowSteepest](/libraries/clp/clpdualrowsteepest/), ClpDualRowDantzig for specific strategies
 
 ## Source
 
-Header file: [`src/ClpSimplexDual.hpp`](/coin-or-kb/browser/?library=Clp&file=src/ClpSimplexDual.hpp)
+Header file: [`src/ClpSimplexDual.hpp`](/browser/?library=Clp&file=src/ClpSimplexDual.hpp)
 

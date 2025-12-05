@@ -44,7 +44,7 @@ Time: O(Σ nnz(L_i)·nnz(U_i)/n_i + off-diagonal work)
 
 ### SuiteSparse
 
-- **[klu.h](/coin-or-kb/browser/?library=SuiteSparse)** - Sparse LU factorization optimized for circuit simulation matrices
+- **[klu.h](/browser/?library=SuiteSparse)** - Sparse LU factorization optimized for circuit simulation matrices
 
 KLU computes a sparse LU factorization of a square matrix A:
   P*A*Q = L*U

@@ -36,9 +36,9 @@ Direct MIQCQP branch-and-bound
 
 ## See Also
 
-- [SolutionStrategyMultiTree](/coin-or-kb/libraries/shot/solutionstrategymultitree/).h for general MINLP
+- [SolutionStrategyMultiTree](/libraries/shot/solutionstrategymultitree/).h for general MINLP
 
 ## Source
 
-Header file: [`src/SolutionStrategy/SolutionStrategyMIQCQP.h`](/coin-or-kb/browser/?library=SHOT&file=src/SolutionStrategy/SolutionStrategyMIQCQP.h)
+Header file: [`src/SolutionStrategy/SolutionStrategyMIQCQP.h`](/browser/?library=SHOT&file=src/SolutionStrategy/SolutionStrategyMIQCQP.h)
 

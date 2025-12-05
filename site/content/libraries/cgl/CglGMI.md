@@ -40,9 +40,9 @@ Produces cut in terms of structural variables only.
 ## See Also
 
 - CglGMIParam for parameter settings
-- [CglGomory](/coin-or-kb/libraries/cgl/cglgomory/) for simpler Gomory implementation
+- [CglGomory](/libraries/cgl/cglgomory/) for simpler Gomory implementation
 
 ## Source
 
-Header file: [`src/CglGMI/CglGMI.hpp`](/coin-or-kb/browser/?library=Cgl&file=src/CglGMI/CglGMI.hpp)
+Header file: [`src/CglGMI/CglGMI.hpp`](/browser/?library=Cgl&file=src/CglGMI/CglGMI.hpp)
 

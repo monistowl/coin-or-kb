@@ -31,7 +31,7 @@ All query methods (getColSolution, etc.): O(1) pointer return
 
 ### Osi
 
-- **[OsiSolverInterface.hpp](/coin-or-kb/browser/?library=Osi)** - Abstract base class defining the Open Solver Interface (OSI)
+- **[OsiSolverInterface.hpp](/browser/?library=Osi)** - Abstract base class defining the Open Solver Interface (OSI)
 
 OSI provides a uniform API for accessing different LP/MIP solvers
 (Clp, CPLEX, Gurobi, GLPK, etc.) through a common interface. This
