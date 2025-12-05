@@ -11,6 +11,49 @@
  *
  * Expressions are the building blocks for functions and constraints.
  *
+ * @algorithm Expression Tree Representation:
+ * DAG-based symbolic algebra for optimization modeling.
+ *
+ *   TREE STRUCTURE:
+ *     - Leaf nodes: variables (var<>) and parameters (param<>)
+ *     - Unary nodes: f(child) where f ∈ {sin, cos, exp, log, sqrt, abs}
+ *     - Binary nodes: (left ⊕ right) where ⊕ ∈ {+, -, *, /, ^}
+ *
+ *   EXAMPLE: sin(x*y) + exp(z)
+ *                  [+]
+ *                 /   \
+ *            [sin]     [exp]
+ *              |         |
+ *             [*]       [z]
+ *            /   \
+ *          [x]   [y]
+ *
+ * @algorithm Convexity Propagation:
+ * Track function convexity through expression tree.
+ *
+ *   @math Composition rules:
+ *     f(g(x)) convex if: f convex increasing, g convex
+ *                     or: f convex decreasing, g concave
+ *     f + g convex if: both f, g convex
+ *     α·f convex if: f convex, α > 0
+ *
+ *   PROPAGATION:
+ *     - Leaf: linear (unless nonlinear param)
+ *     - Unary: lookup table for each operator
+ *     - Binary: combine based on operator rules
+ *     - Result: linear_, convex_, concave_, or undet_
+ *
+ * @algorithm Sign Analysis:
+ * Track sign of expressions for bound tightening.
+ *
+ *   SIGN TYPES: pos_ (≥0), neg_ (≤0), zero_, unknown_
+ *
+ *   RULES:
+ *     x² → pos_ (always non-negative)
+ *     exp(x) → pos_
+ *     x*y: pos_*pos_ → pos_, neg_*neg_ → pos_
+ *          pos_*neg_ → neg_, otherwise unknown_
+ *
  * **expr<type> Base Class:**
  * - _coef: Coefficient multiplying expression
  * - _all_convexity: Convexity type (linear, convex, concave, undet)
@@ -32,6 +75,11 @@
  * - Trees are built via operator overloading
  * - Convexity propagates through operations
  * - Sign analysis for bound tightening
+ *
+ * @complexity
+ *   Tree construction: O(1) per operator
+ *   Evaluation: O(nodes) with memoization
+ *   Convexity analysis: O(nodes) single pass
  *
  * @see gravity/func.h for complete function class
  * @see gravity/types.h for OperatorType enum

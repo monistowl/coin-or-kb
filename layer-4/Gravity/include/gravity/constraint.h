@@ -11,6 +11,47 @@
  *
  * Constraints are functions with a constraint type (<=, >=, ==) and bounds.
  *
+ * @algorithm Lazy Constraint Separation:
+ * Add constraints only when violated (cutting plane style).
+ *
+ *   LAZY CONSTRAINT WORKFLOW:
+ *     1. Mark constraint as lazy: c.make_lazy()
+ *     2. Initially, constraint not in LP
+ *     3. After each LP solve, check violated(solution)
+ *     4. If violated: add to LP, re-solve
+ *     5. Repeat until no lazy constraints violated
+ *
+ *   @math Violation check:
+ *     For g(x) ≤ 0: violated if g(x*) > ε
+ *     For g(x) ≥ 0: violated if g(x*) < -ε
+ *     For g(x) = 0: violated if |g(x*)| > ε
+ *
+ *   USE CASES:
+ *     - Exponentially many constraints (TSP subtours)
+ *     - Cutting planes in branch-and-cut
+ *     - User cuts in callbacks
+ *
+ * @algorithm Convexity Classification:
+ * Determine if constraint defines a convex feasible region.
+ *
+ *   CONVEX CONSTRAINT:
+ *     g(x) ≤ 0 is convex if g is convex function
+ *     g(x) ≥ 0 is convex if g is concave function
+ *     g(x) = 0 is convex only if g is affine (linear)
+ *
+ *   is_convex() checks: _all_convexity combined with _ctype
+ *
+ * @algorithm Dual Recovery:
+ * Store Lagrange multipliers from KKT conditions.
+ *
+ *   @math KKT conditions at optimal x*:
+ *     ∇f(x*) + Σ_i λ_i ∇g_i(x*) = 0
+ *     λ_i ≥ 0 for g_i(x) ≤ 0 (inequality)
+ *     λ_i unrestricted for h_i(x) = 0 (equality)
+ *
+ *   _dual[i] stores λ for constraint instance i
+ *   Retrieved via finalize_solution() callback
+ *
  * **Constraint_ Base Class:**
  * - _id: Unique constraint identifier
  * - _ctype: ConstraintType (leq, geq, eq)
@@ -38,6 +79,11 @@
  * auto c = (sum(x) <= 10);  // Creates leq constraint
  * auto c = (y == 5);         // Creates eq constraint
  * ```
+ *
+ * @complexity
+ *   Constraint evaluation: O(nnz in expression)
+ *   Violation check: O(1) after evaluation
+ *   Lazy separation: O(nb_lazy × eval_cost)
  *
  * @see gravity/func.h for expression functionality
  * @see gravity/model.h for adding constraints to models

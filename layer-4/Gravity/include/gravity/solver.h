@@ -9,6 +9,48 @@
  *
  * Dispatches Gravity models to various solver implementations.
  *
+ * @algorithm Solver Selection by Problem Type:
+ * Automatic routing to appropriate solver based on model characteristics.
+ *
+ *   MODEL CLASSIFICATION:
+ *     lin_m  (LP/MIP):    All linear constraints and objective
+ *     quad_m (QP/MIQP):   Quadratic, max degree 2
+ *     pol_m  (polynomial): Higher degree polynomials
+ *     nlin_m (NLP/MINLP): Transcendental functions
+ *
+ *   SOLVER ROUTING:
+ *     lin_m  → CLP (simplex), Gurobi, CPLEX, HiGHS
+ *     quad_m → Gurobi QP, CPLEX QP, MOSEK
+ *     nlin_m → Ipopt (interior point), Bonmin (with integers)
+ *
+ * @algorithm Adapter Pattern for Solver Integration:
+ * Translate Gravity model to solver-specific API.
+ *
+ *   GRAVITY MODEL              SOLVER API
+ *   ──────────────              ─────────
+ *   Model._vars      ────────→  Variable arrays
+ *   Model._cons      ────────→  Constraint rows
+ *   Model._obj       ────────→  Objective function
+ *   fill_in_jac()    ────────→  Jacobian callback
+ *   fill_in_hess()   ────────→  Hessian callback
+ *
+ *   Each XxxProgram.h implements the solver's callback interface:
+ *     - IpoptProgram: TNLP callbacks
+ *     - GurobiProgram: GRBCallback
+ *     - CplexProgram: IloCplex callbacks
+ *
+ * @algorithm Warm Starting:
+ * Reuse previous solution for faster convergence.
+ *
+ *   For NLP (Ipopt):
+ *     - Primal: x_init = previous x*
+ *     - Dual: lambda_init = previous lambda*
+ *     - Bound multipliers: z_L, z_U from previous solve
+ *
+ *   For LP/MIP:
+ *     - Basis information (if available)
+ *     - MIP start from previous incumbent
+ *
  * **Supported Solvers (via SolverType enum):**
  * - ipopt: Interior point NLP (nonlinear)
  * - gurobi: Commercial LP/QP/MIP
