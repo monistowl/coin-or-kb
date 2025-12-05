@@ -10,20 +10,48 @@
  * take different integer values. Common in constraint satisfaction
  * problems (CSP) mapped to MIP.
  *
+ * @algorithm All-Different Constraint Propagation:
+ * Domain filtering based on value exclusion.
+ *
+ * CONSTRAINT SEMANTICS:
+ *   AllDifferent(x_1, x_2, ..., x_k) means:
+ *     x_i != x_j for all pairs i != j
+ *
+ * VALUE EXCLUSION:
+ *   When variable x_i is fixed to value v:
+ *     For all j != i in same set:
+ *       Remove v from domain(x_j)
+ *
+ *   If domain(x_j) becomes {v}: fix x_j = v
+ *   If domain(x_j) becomes empty: infeasible
+ *
+ * PROPAGATION LOOP:
+ *   queue = all_fixed_variables
+ *   while (queue not empty):
+ *     x_i = dequeue()
+ *     v = value(x_i)
+ *     for each x_j in same AllDiff set:
+ *       if v in domain(x_j):
+ *         remove v from domain(x_j)
+ *         if |domain(x_j)| == 1: enqueue(x_j)
+ *         if |domain(x_j)| == 0: return INFEASIBLE
+ *
+ * @math Hall's theorem gives stronger propagation (not implemented here):
+ *   If |{x_i : domain(x_i) subset S}| > |S|, infeasible.
+ *
  * This is a column cut generator (fixes/tightens variable bounds),
  * not a row cut generator. mayGenerateRowCutsInTree() returns false.
  *
  * Each set defines: x_i != x_j for all i,j in the set.
  *
- * Algorithm: Simple propagation (primitive compared to CSP):
- * - If variable is fixed, remove its value from others' domains
- * - If domain shrinks to one value, fix that variable
- * - Continue until no more propagation possible
- *
  * Constructor takes:
  * - numberSets: How many all-different sets
  * - starts: Start indices into which array (size numberSets+1)
  * - which: Variable indices for all sets (referenced via starts)
+ *
+ * @complexity O(k^2 * d) per propagation where k = set size, d = domain size
+ *
+ * @ref van Hoeve (2001). "The alldifferent Constraint: A Survey".
  *
  * @see CglProbing for more general variable fixing via implications
  */

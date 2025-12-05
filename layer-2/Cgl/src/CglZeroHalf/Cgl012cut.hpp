@@ -4,6 +4,42 @@
  * Copyright (C) 2010, IBM Corporation and others. All Rights Reserved.
  * This code is licensed under the terms of the Eclipse Public License (EPL).
  *
+ * @algorithm {0,1/2}-Cuts (Zero-Half Cuts):
+ * Derive cuts from mod-2 combinations of constraint rows.
+ *
+ * DERIVATION:
+ *   Given inequalities a_i'x <= b_i with a_i integer:
+ *   Take subset S with |S| odd
+ *   Sum: (sum_{i in S} a_i)'x <= sum_{i in S} b_i
+ *   Divide by 2: (1/2)(sum a_i)'x <= (1/2)(sum b_i)
+ *   Round down RHS: (1/2)(sum a_i)'x <= floor((1/2)(sum b_i))
+ *
+ *   The rounding is valid because LHS is half-integral.
+ *
+ * SEPARATION PROBLEM:
+ *   Find S such that the derived cut is violated by current LP solution x*.
+ *   Violation = (1/2)(sum_{i in S} a_i)'x* - floor((1/2)(sum_{i in S} b_i))
+ *
+ * MOD-2 FORMULATION:
+ *   Work in GF(2) (binary field):
+ *   - Coefficients: a_ij mod 2
+ *   - RHS: b_i mod 2
+ *   - Find odd cycle in auxiliary graph
+ *
+ * AUXILIARY GRAPH:
+ *   Node for each row, edge weight = slack contribution
+ *   Find shortest odd cycle = most violated cut
+ *
+ * CAPRARA-FISCHETTI ALGORITHM:
+ *   1. Build parity matrix (mod-2)
+ *   2. Construct separation graph
+ *   3. Find shortest paths between node pairs
+ *   4. Combine paths to form odd cycles
+ *   5. Extract violated cuts from cycles
+ *
+ * @math Cut validity: sum_{i in S} (a_i'x <= b_i) implies
+ *   floor((sum a_i)/2)'x <= floor((sum b_i)/2) when |S| odd and a_i integral
+ *
  * Core data structures for mod-2 arithmetic based separation:
  * - ilp: Original ILP matrix in row format
  * - parity_ilp: Parity (mod-2) representation with weakening info
@@ -16,6 +52,11 @@
  * - tabu_012(): Tabu search for violated cuts
  *
  * Uses local search with scoring to find good {0,1/2}-cuts.
+ *
+ * @complexity O(m^2 * n) for full separation where m = rows, n = columns
+ *
+ * @ref Caprara & Fischetti (1996). "{0,1/2}-Chvatal-Gomory Cuts".
+ *   Math. Programming 74(3):221-235.
  *
  * @see CglZeroHalf for the OO wrapper around this implementation
  * @see CglOddHole for related odd-cycle based cuts

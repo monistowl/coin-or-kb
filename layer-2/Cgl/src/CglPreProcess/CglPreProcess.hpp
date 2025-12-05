@@ -10,6 +10,44 @@
  * cut generators to strengthen the formulation before branch-and-cut.
  * Unlike simple presolve, can add cuts that replace/strengthen constraints.
  *
+ * @algorithm MIP Preprocessing Pipeline:
+ * Multi-pass preprocessing with cut-based strengthening.
+ *
+ * PREPROCESSING PIPELINE:
+ *   for pass = 1 to numberPasses:
+ *     1. OsiPresolve: Standard LP/MIP reductions
+ *     2. Probing: Fix variables via implications
+ *     3. Clique detection: Find x + y <= 1 structures
+ *     4. Cut generation: Add strengthening cuts
+ *     5. Row replacement: Substitute stronger constraints
+ *     6. Bound propagation: Tighten variable bounds
+ *
+ * @algorithm Clique Lifting:
+ * Strengthen clique inequalities when possible.
+ *
+ *   Original: x_1 + x_2 + ... + x_k <= 1
+ *   If LP shows equality always active:
+ *   Strengthened: x_1 + x_2 + ... + x_k = 1
+ *
+ *   This removes fractional solutions where sum < 1.
+ *
+ * @algorithm Bron-Kerbosch Clique Finding:
+ * Find maximal cliques in conflict graph (CglBK helper).
+ *
+ *   BK(R, P, X):  // R = current clique, P = candidates, X = excluded
+ *     if P and X empty: report R as maximal clique
+ *     for each v in P:
+ *       BK(R + {v}, P intersect N(v), X intersect N(v))
+ *       P = P - {v}
+ *       X = X + {v}
+ *
+ * @algorithm Coefficient Strengthening:
+ * Tighten constraint coefficients.
+ *
+ *   Given: sum_j a_j x_j <= b with x_j in {0,1}
+ *   For variable x_k with a_k > b - sum_{j != k} max(a_j, 0):
+ *     Can reduce a_k without changing feasible region
+ *
  * Main operations:
  * - preProcess(): Default strategy preprocessing
  * - preProcessNonDefault(): User-configured cut generators
@@ -19,7 +57,7 @@
  * Preprocessing features:
  * - Variable fixing from reduced costs
  * - Bound tightening propagation
- * - Clique detection and strengthening (x + y <= 1 → x + y == 1)
+ * - Clique detection and strengthening (x + y <= 1 -> x + y == 1)
  * - SOS (Special Ordered Set) detection
  * - Constraint row replacement with stronger versions
  * - Duplicate row elimination
@@ -35,6 +73,14 @@
  * - 4: Don't do duplicate rows
  * - 8: Don't do cliques
  * - 16/64: Heavy probing options
+ *
+ * @complexity
+ * - Presolve pass: O(nnz) per pass
+ * - Clique finding: O(3^(n/3)) worst case, fast in practice
+ * - Total: O(passes * (nnz + probing_work))
+ *
+ * @ref Savelsbergh (1994). "Preprocessing and Probing Techniques for MIP".
+ *   ORSA J. Computing 6(4):445-454.
  *
  * @see OsiPresolve for basic LP presolve
  * @see CglProbing for variable fixing cuts

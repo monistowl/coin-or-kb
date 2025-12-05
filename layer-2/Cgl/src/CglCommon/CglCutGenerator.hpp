@@ -10,6 +10,48 @@
  * branch-and-cut, cutting planes tighten the LP relaxation to cut off
  * fractional solutions while keeping all integer-feasible points.
  *
+ * @algorithm Cutting Plane Separation:
+ * Find violated inequalities that cut off the current LP solution.
+ *
+ * SEPARATION PROBLEM:
+ *   Given: LP solution x* (fractional)
+ *   Find: Valid inequality a'x <= b such that a'x* > b
+ *
+ *   The inequality must be valid (satisfied by all integer solutions)
+ *   but violated by x*.
+ *
+ * VALIDITY REQUIREMENT:
+ *   A cut a'x <= b is valid for MIP {min c'x : Ax <= b, x_j integer}
+ *   if every integer-feasible point satisfies a'x <= b.
+ *
+ * CUT-AND-BRANCH FRAMEWORK:
+ *   1. Solve LP relaxation -> x*
+ *   2. if x* integer-feasible: DONE (optimal)
+ *   3. Call cut generators: generateCuts(x*, cs)
+ *   4. if violated cuts found:
+ *        Add to LP, goto 1
+ *   5. else: Branch on fractional variable
+ *
+ * @algorithm Global vs Local Cuts:
+ * Cuts can have different validity scopes.
+ *
+ * GLOBAL CUTS:
+ *   - Valid throughout entire B&B tree
+ *   - Derived from original problem structure
+ *   - canDoGlobalCuts_ = true
+ *
+ * LOCAL CUTS:
+ *   - Valid only in current subtree (depend on branching decisions)
+ *   - Often stronger but must be managed carefully
+ *   - Example: Gomory cuts from current LP basis
+ *
+ * @algorithm Aggressiveness Control:
+ * Balance cut quality vs. generation cost.
+ *
+ *   aggressive_ = 0:   Minimal cuts (fastest)
+ *   aggressive_ = 50:  Normal effort
+ *   aggressive_ = 100: Root node intensive search
+ *
  * Pure virtual interface:
  * - generateCuts(): Main entry point - examines LP solution and adds violated cuts
  * - clone(): Deep copy for use in parallel B&C
@@ -28,6 +70,12 @@
  * - Gomory, MIR, knapsack covers (general MIP)
  * - Clique, odd hole, zero-half (0-1 structure)
  * - Flow cover, lift-and-project (specialized)
+ *
+ * @complexity Separation is typically NP-hard in general, but polynomial
+ *   heuristics work well in practice.
+ *
+ * @ref Cornuejols (2008). "Valid Inequalities for Mixed Integer Linear Programs".
+ *   Math. Programming 112(1):3-44.
  *
  * @see OsiCuts for the cut collection interface
  * @see CglTreeInfo for branch-and-cut context
