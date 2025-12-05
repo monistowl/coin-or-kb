@@ -1,6 +1,9 @@
 /**
  * @file BonMilpRounding.hpp
  * @brief MILP-based rounding heuristic for MINLP
+ *
+ * @algorithm MILP Rounding with No-Good Cuts
+ *
  * Copyright (C) 2010, International Business Machines Corporation and others.
  * All Rights Reserved.
  * This code is published under the Eclipse Public License.

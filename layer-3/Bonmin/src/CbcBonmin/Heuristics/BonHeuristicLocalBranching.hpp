@@ -12,6 +12,8 @@
  * @file BonHeuristicLocalBranching.hpp
  * @brief Local Branching heuristic for MINLP improvement
  *
+ * @algorithm Local Branching via Hamming Distance (Fischetti-Lodi)
+ *
  * Searches for improved solutions in a Hamming distance neighborhood
  * of the current incumbent by adding a local branching constraint.
  *

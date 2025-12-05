@@ -11,6 +11,8 @@
  * @file BonHeuristicDive.hpp
  * @brief Base class for diving heuristics in MINLP
  *
+ * @algorithm NLP Diving Heuristic Framework
+ *
  * Implements diving heuristics that repeatedly fix integer variables and solve
  * NLP relaxations until a feasible integer solution is found or infeasibility.
  *

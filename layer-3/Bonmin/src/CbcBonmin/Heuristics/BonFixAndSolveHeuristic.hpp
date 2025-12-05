@@ -10,6 +10,8 @@
  * @file BonFixAndSolveHeuristic.hpp
  * @brief Fix-and-Solve heuristic for MINLP
  *
+ * @algorithm Fix-and-Solve MINLP Heuristic
+ *
  * Simple heuristic that fixes some integer variables to their current
  * values and solves the resulting smaller MINLP subproblem.
  *

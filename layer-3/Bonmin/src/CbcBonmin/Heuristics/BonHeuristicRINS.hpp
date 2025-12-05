@@ -12,6 +12,8 @@
  * @file BonHeuristicRINS.hpp
  * @brief Relaxation Induced Neighborhood Search (RINS) heuristic for MINLP
  *
+ * @algorithm RINS Neighborhood Search (Danna-Rothberg-LePape)
+ *
  * RINS finds improving solutions by solving restricted MINLP subproblems
  * where variables agreeing between LP relaxation and incumbent are fixed.
  *

@@ -10,6 +10,8 @@
  * @file BonLocalSolverBasedHeuristic.hpp
  * @brief Base class for heuristics using local NLP/MINLP solves
  *
+ * @algorithm Local Search Heuristic Framework
+ *
  * Provides infrastructure for heuristics that find feasible solutions by
  * solving restricted MINLP subproblems (local searches) in a neighborhood
  * of the current solution.
