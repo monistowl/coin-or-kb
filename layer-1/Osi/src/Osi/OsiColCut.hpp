@@ -8,6 +8,51 @@
  * - Implication-based bound strengthening
  * - Reduced cost fixing
  *
+ * @algorithm Bound Cuts vs Row Cuts:
+ * Two paradigms for strengthening LP relaxation.
+ *
+ *   ROW CUTS (OsiRowCut):
+ *     Add new constraint a'x ≥ β
+ *     Increases LP rows
+ *     General-purpose tightening
+ *
+ *   COLUMN CUTS (OsiColCut):
+ *     Tighten existing bounds: l'_j ≤ x_j ≤ u'_j
+ *     No new rows, just bound changes
+ *     More efficient when applicable
+ *
+ * @algorithm Sources of Column Cuts:
+ * Various techniques derive tighter bounds.
+ *
+ *   REDUCED COST FIXING:
+ *     If reduced_cost(x_j) > gap to cutoff:
+ *       x_j can be fixed at its bound
+ *
+ *   @math For minimization with UB = cutoff:
+ *     If r̄_j > 0 and c'x_LP + r̄_j(u_j - x*_j) > UB:
+ *       Can fix x_j = l_j
+ *
+ *   PROBING:
+ *     Tentatively fix x_j, propagate implications
+ *     If leads to infeasibility: opposite fixing valid
+ *     If leads to bound changes: valid column cuts
+ *
+ *   IMPLICATION:
+ *     From logical relationships (e.g., cliques)
+ *     x_i = 1 implies x_j = 0 → bound tightening
+ *
+ * @algorithm Column Cut Application:
+ * Efficient bound update procedure.
+ *
+ *   For each (index, newLb) in lbs_:
+ *     solver.setColLower(index, max(oldLb, newLb))
+ *
+ *   For each (index, newUb) in ubs_:
+ *     solver.setColUpper(index, min(oldUb, newUb))
+ *
+ * @complexity O(nnz in cut) for application
+ * More efficient than row cuts when bounds suffice.
+ *
  * @see OsiRowCut for linear inequality cuts
  * @see OsiCut for base class
  */

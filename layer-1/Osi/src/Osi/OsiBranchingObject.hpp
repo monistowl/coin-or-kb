@@ -9,10 +9,52 @@
  * - **OsiBranchingObject**: Describes how to perform a specific branch
  * - **OsiBranchingInformation**: Solver state passed to branching decisions
  *
- * The branching model:
- * 1. OsiObject::infeasibility() measures how far from feasible
- * 2. OsiObject::createBranch() creates an OsiBranchingObject
- * 3. OsiBranchingObject::branch() modifies solver bounds
+ * @algorithm Object-Oriented Branching Framework:
+ * Separate "what to branch on" from "how to branch".
+ *
+ * DESIGN PATTERN:
+ *   OsiObject (abstract)
+ *     - infeasibility(): How far from feasible?
+ *     - createBranch(): Factory for branching objects
+ *     - feasibleRegion(): Fix at feasible value
+ *
+ *   OsiBranchingObject (abstract)
+ *     - branch(): Execute one arm of the branch
+ *     - numberBranchesLeft(): How many arms remain?
+ *
+ * @algorithm Infeasibility Measurement:
+ * Guides branching variable selection.
+ *
+ * @math For integer variable x with value x*:
+ *   infeasibility = min(x* - floor(x*), ceil(x*) - x*)
+ *   Maximum infeasibility is 0.5 (exactly midway)
+ *   Infeasibility 0 means integer-feasible
+ *
+ * SELECTION STRATEGIES (use infeasibility):
+ *   - Most infeasible: Branch on max infeasibility
+ *   - Most fractional: Same as most infeasible
+ *   - Priority-weighted: priority × infeasibility
+ *
+ * @algorithm Special Ordered Sets (SOS):
+ * Branching on variable groups with special structure.
+ *
+ *   SOS Type 1: At most one variable nonzero
+ *     Branch: Split set into two disjoint subsets
+ *     Both children: Fix one subset to zero
+ *
+ *   SOS Type 2: At most two adjacent variables nonzero
+ *     Branch: Choose breakpoint in ordered set
+ *     Children: One side of breakpoint fixed to zero
+ *
+ * @algorithm Two-Way vs N-Way Branching:
+ * Standard is two-way (down/up), but extensible.
+ *
+ *   Two-way on integer x at value x*:
+ *     Down: x ≤ floor(x*)
+ *     Up: x ≥ ceil(x*)
+ *
+ *   N-way (e.g., for SOS):
+ *     Multiple children from single branch point
  *
  * @see OsiSolverInterface::branchAndBound for MIP solving
  * @see Cbc for full branch-and-cut implementation

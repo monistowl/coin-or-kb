@@ -6,10 +6,43 @@
  * relaxation to tighten the formulation without cutting off any
  * integer-feasible solutions.
  *
- * The OsiCut hierarchy:
- * - OsiCut: Abstract base with effectiveness measure
- * - OsiRowCut: Row-based cut (a'x >= b or a'x <= b)
- * - OsiColCut: Column-based cut (bound tightening)
+ * @algorithm Cutting Planes in Integer Programming:
+ * Tighten LP relaxation without removing integer solutions.
+ *
+ * @math A valid inequality (cut) a'x ≥ β satisfies:
+ *   - a'x* ≥ β for all x* ∈ conv(feasible integer solutions)
+ *   - May be violated by LP optimum x_LP: a'x_LP < β
+ *
+ * CUTTING PLANE METHOD:
+ *   1. Solve LP relaxation → x_LP
+ *   2. If x_LP integer: DONE (optimal)
+ *   3. Find violated cut: a'x ≥ β with a'x_LP < β
+ *   4. Add cut to LP, goto 1
+ *
+ * @algorithm Cut Effectiveness Scoring:
+ * Rank cuts for selection and management.
+ *
+ *   effectiveness = violation at separation point
+ *                 = β - a'x_LP  (for a'x ≥ β)
+ *
+ *   Higher effectiveness → cut removes more of LP polyhedron
+ *   Used for:
+ *     - Cut selection (add most violated first)
+ *     - Cut pool management (remove ineffective cuts)
+ *     - Comparison operators (sorting cuts)
+ *
+ * @algorithm Global vs Local Cuts:
+ * Scope of cut validity in B&B tree.
+ *
+ *   GLOBAL (globallyValid_ = true):
+ *     Valid throughout entire B&B tree
+ *     Can be added at any node
+ *     Example: Gomory cuts from root LP
+ *
+ *   LOCAL (globallyValid_ = false):
+ *     Valid only in subtree where generated
+ *     Must track node of origin
+ *     Example: Cuts using branching bounds
  *
  * @see OsiRowCut for linear inequality cuts
  * @see OsiColCut for variable bound cuts
