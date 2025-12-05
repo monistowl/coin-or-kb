@@ -1,0 +1,9 @@
+{
+  "name": "csrc_writer",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/graph/csrc_writer.hpp",
+  "brief": "Computational graph: csrc_writer",
+  "algorithms": [],
+  "methods": []
+}

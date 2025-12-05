@@ -1,0 +1,16 @@
+{
+  "name": "CSP_lp_param",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Csp/include/CSP_lp_param.hpp",
+  "brief": "CSP LP parameters",
+  "algorithms": [
+    {
+      "name": "CSP LP Params: Solver and Heuristic Options\n\nParameters: LpSolver (Simplex/Volume), BranchingStrategy,\nHeurIpFrequency, PerturbFactor/PerturbNum for pricing diversity.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

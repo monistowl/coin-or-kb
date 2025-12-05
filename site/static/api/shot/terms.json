@@ -1,0 +1,12 @@
+{
+  "name": "Terms",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Model/Terms.h",
+  "brief": "Term hierarchy for linear, quadratic, monomial, and signomial expressions\n\nBuilding blocks for constraint and objective function representation.\n\n**Term Base Class:**\n- coefficient: Scaling factor\n- calculate(): Evaluate at point or interval\n- getConvexity(): Linear, Convex, Concave, Nonconvex\n- getMonotonicity(): Nondecreasing, Nonincreasing, Constant\n\n**LinearTerm:** coeff * x\n- Always linear convexity\n- Monotonicity depends on coefficient sign\n\n**QuadraticTerm:** coeff * x1 * x2\n- isSquare: x1 == x2 (convex if coeff > 0)\n- isBilinear: x1 != x2 (nonconvex)\n- isBinary, isInteger: Type detection for reformulation\n\n**QuadraticTerms Collection:**\n- Eigenvalue analysis via Eigen for convexity\n- allSquares, allPositive flags for structure detection\n\n**MonomialTerm:** coeff * x1 * x2 * ... * xn\n- isBinary: All variables binary (linearizable)\n- Generally nonconvex\n\n**SignomialTerm:** coeff * x1^p1 * x2^p2 * ... * xn^pn\n- SignomialElement: (variable, power) pair\n- Convexity rules based on power signs and sums\n\n**Gradient/Hessian Methods:**\n- calculateGradient(): Sparse first derivatives\n- calculateHessian(): Upper triangular second derivatives",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Constraints.h, ObjectiveFunction.h for term usage"
+  ]
+}

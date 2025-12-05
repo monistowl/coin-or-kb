@@ -1,0 +1,9 @@
+{
+  "name": "sparse_hes_fun",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/speed/sparse_hes_fun.hpp",
+  "brief": "Speed testing: sparse_hes_fun",
+  "algorithms": [],
+  "methods": []
+}

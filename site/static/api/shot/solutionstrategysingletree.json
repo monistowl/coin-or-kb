@@ -1,0 +1,19 @@
+{
+  "name": "SolutionStrategySingleTree",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/SolutionStrategy/SolutionStrategySingleTree.h",
+  "brief": "Lazy constraint callback strategy (single-tree)\n\nCallback-based outer approximation within single B&B tree.\n\n**Algorithm Pattern:**\n1. Solve MIP with lazy constraint callback\n2. Callback checks integer solutions for feasibility\n3. Generate hyperplanes for violated constraints\n4. Add as lazy constraints, solver continues\n\n**Task Flow (initializeStrategy):**\n- CreateDualProblem \u2192 ConfigureCallback \u2192 SolveProblem\n- (cuts added via callback during solve)\n\n**Advantages:**\n- Single B&B tree exploration\n- Potentially fewer node evaluations\n- Better integration with MIP solver\n\n**Disadvantages:**\n- Requires solver callback support\n- Limited to CPLEX/Gurobi\n- More complex debugging",
+  "algorithms": [
+    {
+      "name": "Branch-and-cut with lazy ESH constraints",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "MIPSolverCplexSingleTree, MIPSolverGurobiSingleTree"
+  ]
+}

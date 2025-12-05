@@ -1,0 +1,9 @@
+{
+  "name": "internals",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/include/cuopt/linear_programming/utilities/internals.hpp",
+  "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,14 @@
+{
+  "name": "CouenneBab",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/main/CouenneBab.hpp",
+  "brief": "Main Branch-and-Bound driver for Couenne\n\nExtends Bonmin::Bab to add Couenne-specific functionality\nfor spatial branch-and-bound on nonconvex MINLPs.\n\n**Inheritance:**\nCouenneBab \u2192 Bonmin::Bab \u2192 CbcModel\n\n**Key additions over Bonmin::Bab:**\n- Stores CouenneProblem pointer for access to expression DAG\n- Overrides bestSolution() and bestObj() for proper handling\n- bestBound() returns min of parent bound and best objective\n\n**Usage:**\nCalled from BonCouenneSetup after problem setup.\nThe branchAndBound() method runs the full spatial B&B algorithm,\nusing Couenne's convexification, bound tightening, and\nbranching strategies.\n\n**Solution retrieval:**\n- bestSolution(): Optimal variable values (or best known)\n- bestObj(): Objective value at best solution\n- bestBound(): Lower bound on optimal value",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BonCouenneSetup which configures and launches this",
+    "Bonmin::Bab base class",
+    "CouenneProblem for the problem representation"
+  ]
+}

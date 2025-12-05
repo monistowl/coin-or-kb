@@ -1,0 +1,14 @@
+{
+  "name": "DcoVariable",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoVariable.hpp",
+  "brief": "Variable representation for MISOCP\n\nDcoVariable represents a decision variable in the optimization problem,\nstoring bounds, integrality type, and branching information.\n\n**Inheritance:** DcoVariable -> BcpsVariable -> BcpsObject -> AlpsKnowledge\n\n**BcpsObject Fields (inherited):**\n- lbHard_/ubHard_: Original bounds\n- lbSoft_/ubSoft_: Current bounds (may be tighter from branching)\n- intType_: Integer ('I'), binary ('B'), or continuous ('C')\n- objectIndex_: Position in model's variable array\n\n**Key Methods:**\n- infeasibility(): Returns integrality violation (for integer variables)\n- createBranchObject(): Create DcoBranchObject for branching on this\n- clone(): Deep copy for node differencing\n\n**Storage:**\nVariables are stored in BcpsModel::variables_ (inherited by DcoModel).\nInteger variable indices are tracked in DcoModel::integerCols_.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoBranchObject.hpp for branching on variables",
+    "DcoModel.hpp for variable storage",
+    "BcpsObject (BCPS) for base class fields"
+  ]
+}

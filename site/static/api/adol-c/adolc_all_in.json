@@ -1,0 +1,9 @@
+{
+  "name": "adolc_all_in",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/swig/adolc_all_in.hpp",
+  "brief": "Unified ADOL-C header for SWIG bindings",
+  "algorithms": [],
+  "methods": []
+}

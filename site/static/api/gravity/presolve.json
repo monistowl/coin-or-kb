@@ -1,0 +1,9 @@
+{
+  "name": "presolve",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "thirdparty/mp/presolve.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

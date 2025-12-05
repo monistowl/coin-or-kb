@@ -1,0 +1,21 @@
+{
+  "name": "BCP_vg_param",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_vg_param.hpp",
+  "brief": "Variable Generator parameters for BCP",
+  "algorithms": [
+    {
+      "name": "VG Parameters: Process Priority and Logging\n\nBCP_vg_par defines parameters for Variable Generator processes:\n\n**Character parameters:**\n- MessagePassingIsSerial: Single-process vs. distributed mode\n- ReportWhenDefaultIsExecuted: Debug overridable methods\n\n**Integer parameters:**\n- NiceLevel: OS scheduling priority (-20 to 20)\n\n**String parameters:**\n- LogFileName: Per-process logging",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_vg.hpp for Variable Generator process",
+    "BCP_vg_user.hpp for user overridable methods",
+    "the man page of the <code>setpriority</code> system function."
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "GamsCbc",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/cbc/GamsCbc.hpp",
+  "brief": "GAMS interface to CBC MIP solver\n\nConnects GAMS modeling environment to COIN-OR CBC.\n\n**GamsCbc Class:**\n- gmo/gev: GAMS modeling object and environment handles\n- setupProblem()/setupParameters(): Configure CBC from GAMS\n- Solve trace support for performance analysis",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GamsCbcHeurSolveTrace.hpp for MIP heuristic callback"
+  ]
+}

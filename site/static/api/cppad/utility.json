@@ -1,0 +1,9 @@
+{
+  "name": "utility",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility.hpp",
+  "brief": "CppAD utility: utility",
+  "algorithms": [],
+  "methods": []
+}

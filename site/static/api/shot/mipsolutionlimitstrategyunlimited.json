@@ -1,0 +1,13 @@
+{
+  "name": "MIPSolutionLimitStrategyUnlimited",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/MIPSolutionLimitStrategyUnlimited.h",
+  "brief": "No limit on MIP solution pool size\n\nAllows solver to collect all feasible solutions.\n\n**MIPSolutionLimitStrategyUnlimited Class:**\n- getInitialLimit(): Returns maximum integer\n- updateLimit(): No-op (always unlimited)\n\n**Use Case:**\n- Thorough exploration of solution space\n- May slow down iterations",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IMIPSolutionLimitStrategy.h for interface",
+    "MIPSolutionLimitStrategyIncrease.h for gradual increase"
+  ]
+}

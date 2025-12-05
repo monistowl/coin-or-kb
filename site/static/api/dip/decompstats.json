@@ -1,0 +1,13 @@
+{
+  "name": "DecompStats",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompStats.h",
+  "brief": "Statistics tracking for DIP algorithm performance\n\nProvides classes for recording and reporting algorithm statistics.\n\n**DecompObjBound:**\nRecords bound history at checkpoints:\n- phase, cutPass, pricePass: Algorithm state\n- timeStamp: Wall clock from start\n- thisBound/thisBoundUB: Current node bounds\n- bestBound: Global lower bound\n- thisBoundIP: Best integer solution\n\n**DecompStats:**\nAggregate statistics for the algorithm:\n- objHistoryBound: Vector of DecompObjBound snapshots\n- Various timers for profiling subsystems\n- Counts of cuts/columns generated\n\n**Usage:**\n- DecompAlgo creates and updates stats during execution\n- Bound history enables convergence analysis\n- Timers help identify bottlenecks",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompAlgo.h where stats are collected",
+    "UtilTimer.h for timer implementation"
+  ]
+}

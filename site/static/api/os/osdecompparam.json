@@ -1,0 +1,9 @@
+{
+  "name": "OSDecompParam",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/applications/columnGen/code/OSDecompParam.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

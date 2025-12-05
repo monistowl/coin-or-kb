@@ -1,0 +1,9 @@
+{
+  "name": "high_res_timer",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/utilities/high_res_timer.hpp",
+  "brief": "cuOpt timing utilities\n\nPerformance timing and profiling.",
+  "algorithms": [],
+  "methods": []
+}

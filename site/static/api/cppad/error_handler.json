@@ -1,0 +1,9 @@
+{
+  "name": "error_handler",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/error_handler.hpp",
+  "brief": "CppAD utility: error handler",
+  "algorithms": [],
+  "methods": []
+}

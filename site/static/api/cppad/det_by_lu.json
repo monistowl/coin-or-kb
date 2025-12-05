@@ -1,0 +1,9 @@
+{
+  "name": "det_by_lu",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/speed/det_by_lu.hpp",
+  "brief": "Speed testing: det_by_lu",
+  "algorithms": [],
+  "methods": []
+}

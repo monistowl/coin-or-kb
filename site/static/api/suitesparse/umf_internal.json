@@ -1,0 +1,23 @@
+{
+  "name": "umf_internal",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "UMFPACK/Source/umf_internal.h",
+  "brief": "Internal definitions for UMFPACK sparse LU factorization\nCopyright (c) 2005-2023, Timothy A. Davis. GPL-2.0+ license.\n\nUMFPACK is an unsymmetric multifrontal sparse LU factorization package.\nComputes P\u00b7A\u00b7Q = L\u00b7U via supernodal factorization with partial pivoting.\nHandles real and complex matrices in single and double precision.",
+  "algorithms": [
+    {
+      "name": "Unsymmetric Multifrontal LU (UMFPACK):\nSparse LU with supernodal assembly tree:\n1. SYMBOLIC ANALYSIS:\n   - Column preordering via COLAMD or AMD(A'A)\n   - Build column elimination tree\n   - Compute upper bounds on L and U nonzero counts\n2. NUMERIC FACTORIZATION:\n   - Process columns in elimination tree order\n   - Frontal matrices: dense submatrices during elimination\n   - Partial pivoting with threshold (for numerical stability)\n   - Extend-add operation for child contributions\n3. SOLVE: Forward/backward substitution with L, U factors",
+      "math": "Frontal matrix factorization:\nEach front F \u2208 \u211d^(m\u00d7n) corresponds to columns with similar structure.\nF = L_F \u00b7 U_F via dense partial-pivoted LU (BLAS-3 for performance).\nSchur complement S = F_22 - L_21\u00b7U_12 assembled to parent front.\n\nKey optimizations:\n- Supernodes: columns with identical structure factored together\n- BLAS-3: dense operations within frontal matrices\n- Symbolic reuse: same pattern \u2192 reuse symbolic analysis",
+      "complexity": "O(flops) for numeric factorization.\nFlop count highly dependent on sparsity pattern and ordering quality.",
+      "ref": [
+        "Davis (2004). \"A column pre-ordering strategy for the unsymmetric-\n  pattern multifrontal method\". ACM TOMS 30(2):165-195.",
+        "Davis (2004). \"Algorithm 832: UMFPACK V4.3\u2014an unsymmetric-pattern\n  multifrontal method\". ACM TOMS 30(2):196-199."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "COLAMD for column ordering (used by default)",
+    "KLU for circuit matrices (alternative with BTF)"
+  ]
+}

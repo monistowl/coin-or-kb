@@ -1,0 +1,13 @@
+{
+  "name": "DcoParams",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoParams.hpp",
+  "brief": "DisCO algorithm parameters and configuration\n\nDcoParams extends AlpsParameterSet to provide MISOCP-specific\nparameters for controlling the branch-and-cut algorithm.\n\n**Parameter Categories:**\n\n**Boolean (chrParams):**\n- cutRampUp, presolve, shareConstraints/Variables\n- sharePseudocostRampUp/Search\n\n**Integer (intParams):**\n- branchStrategy: 0=MaxInf, 1=Pseudo, 2=Reliability, 3=Strong, 4=Bilevel\n- Cut strategies: cutCliqueStrategy, cutGomoryStrategy, etc.\n- Cut frequencies: cutCliqueFreq, cutGomoryFreq, etc.\n- Conic cuts: cutIpmStrategy, cutOaStrategy\n- heurStrategy, heurRoundStrategy\n- lookAhead, pseudoReliability, strongCandSize\n\n**Double (dblParams):**\n- cutFactor, cutoff, objTol, integerTol, coneTol\n- optimalRelGap, optimalAbsGap\n- pseudoWeight, tailOff\n- OA parameters: cutOaBeta, cutOaSlack1/2\n\n**Serialization:**\n- pack()/unpack(): Encode for parallel distribution",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoModel.hpp for parameter usage",
+    "AlpsParameterSet (ALPS) for base class"
+  ]
+}

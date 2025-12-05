@@ -1,0 +1,22 @@
+{
+  "name": "Mongoose_QPGradProj",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_QPGradProj.hpp",
+  "brief": "Projected gradient descent for QP partition optimization\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPGradProj implements gradient projection for bound-constrained QP:\nminimizes quadratic cut objective subject to box constraints [0,1]\nand balance constraint (lo <= a'x <= hi). Projects gradient onto\nfeasible region, iterates until convergence or iteration limit.",
+  "algorithms": [
+    {
+      "name": "Gradient Projection for Bound-Constrained QP:\nProjected gradient descent with active set management:\n1. Compute gradient: g = Lx (graph Laplacian times current x)\n2. Identify active constraints (x_i = 0 or x_i = 1)\n3. Project gradient onto feasible region (box + balance)\n4. Line search along projected direction\n5. Update x, repeat until ||projected_grad|| < tolerance",
+      "math": "Gradient projection iteration:\n$$x_{k+1} = P_C(x_k - \\alpha_k \\nabla f(x_k))$$\nwhere P_C projects onto feasible set C = {x : 0\u2264x\u22641, lo\u2264a'x\u2264hi}.\n\nBalance constraint projection uses continuous knapsack solver.",
+      "complexity": "O(|E|) per iteration for gradient Lx.\nTypically O(10-100) iterations for convergence.",
+      "ref": [
+        "Hager & Zhang (2006). \"Algorithm 851: CG_DESCENT, a conjugate\n  gradient method with guaranteed descent\". ACM TOMS 32(1):113-137."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_QPDelta.hpp for QP state (x, gradient, free set)",
+    "Mongoose_QPNapsack.hpp for napsack subproblem solver"
+  ]
+}

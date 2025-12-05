@@ -1,0 +1,13 @@
+{
+  "name": "HSimplex",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/HSimplex.h",
+  "brief": "Simplex utility functions\n\nStandalone functions for simplex basis and scaling operations.\n\n**Basis Extension:**\n- appendNonbasicColsToBasis(): Add new columns as nonbasic\n- appendBasicRowsToBasis(): Add new rows as basic (slack variables)\nWorks with both HighsBasis and SimplexBasis.\n\n**Solution Status:**\n- getUnscaledInfeasibilities(): Compute infeasibilities in original space\n- setSolutionStatus(): Set primal/dual solution status in HighsInfo\n\n**Scaling:**\n- scaleSimplexCost(): Scale objective coefficients\n- unscaleSimplexCost(): Reverse objective scaling\n\n**Validation:**\n- isBasisRightSize(): Check SimplexBasis dimensions match LP",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "simplex/HEkk.h for main simplex solver class",
+    "simplex/SimplexStruct.h for SimplexBasis definition"
+  ]
+}

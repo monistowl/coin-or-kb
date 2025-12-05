@@ -1,0 +1,9 @@
+{
+  "name": "sparse_jacobian",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/sparse_jacobian.hpp",
+  "brief": "Core AD functionality: sparse jacobian",
+  "algorithms": [],
+  "methods": []
+}

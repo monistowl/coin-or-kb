@@ -1,0 +1,13 @@
+{
+  "name": "Constraints",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Model/Constraints.h",
+  "brief": "Constraint hierarchy: linear, quadratic, and nonlinear\n\nConstraint classes forming an inheritance hierarchy.\n\n**Constraint Properties:**\n- classification: Linear, Quadratic, Signomial, Nonlinear\n- convexity: Linear, Convex, Concave, Nonconvex, Unknown\n- type: Equality, LessThan, GreaterThan\n\n**NumericConstraintValue Struct:**\n- functionValue: f(x) at evaluation point\n- normalizedLHSValue: L - f(x), normalizedRHSValue: f(x) - U\n- error: max(0, max(L - f(x), f(x) - U))\n\n**Constraint Class Hierarchy:**\n- Constraint (abstract): Base with index, name, properties\n- NumericConstraint: LHS/RHS bounds, gradient/Hessian computation\n- LinearConstraint: linearTerms, sparse gradient\n- QuadraticConstraint: + quadraticTerms, Hessian\n- NonlinearConstraint: + monomials, signomials, nonlinearExpression\n\n**Derivative Computation:**\n- calculateGradient(): Sparse first derivatives\n- calculateHessian(): Upper triangular second derivatives\n- Sparsity patterns for efficient NLP solver interfaces",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Terms.h for LinearTerm, QuadraticTerm definitions",
+    "NonlinearExpressions.h for expression tree evaluation"
+  ]
+}

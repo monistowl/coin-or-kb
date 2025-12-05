@@ -1,0 +1,22 @@
+{
+  "name": "CouenneAggrProbing",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/bound_tightening/CouenneAggrProbing.hpp",
+  "brief": "Aggressive probing for bound tightening\n\nImplements Optimality-Based Bound Tightening (OBBT) through aggressive\nprobing. Temporarily fixes a variable bound and solves the resulting\nsubproblem to determine if a tighter bound is achievable.",
+  "algorithms": [
+    {
+      "name": "Optimality-Based Bound Tightening (OBBT):\nTighten bounds by solving auxiliary optimization problems:\nFor each variable x\u1d62 with current bounds [l\u1d62, u\u1d62]:\n1. Lower bound tightening:\n   l\u1d62' = min{x\u1d62 : x \u2208 P} where P is current relaxation\n   If l\u1d62' > l\u1d62: tighten to l\u1d62 \u2190 l\u1d62'\n2. Upper bound tightening:\n   u\u1d62' = max{x\u1d62 : x \u2208 P}\n   If u\u1d62' < u\u1d62: tighten to u\u1d62 \u2190 u\u1d62'\n3. Resource limits: maxTime_, maxNodes_ per probe\n4. Early termination: maxFailedSteps_ consecutive non-improvements\n\nParallelization: Variables can be probed independently.\nprobeVariable(index, probeLower) probes single variable.",
+      "math": "OBBT guarantees:\nFor convex P: l' = optimal is exact lower bound.\nFor nonconvex: l' from relaxation may not be achievable,\nbut still provides valid (possibly weak) bound.",
+      "complexity": "O(2n \u00b7 subproblem_solve) for full OBBT.\nEach subproblem: NLP solve O(n\u00b3) per Newton iteration.\nVery expensive - use sparingly or with time limits.",
+      "ref": [
+        "Tawarmalani, Sahinidis (2005). \"A polyhedral branch-and-cut approach\n  to global optimization\". Mathematical Programming 103(2):225-249."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneFixPoint for cheaper FBBT alternative",
+    "CouenneMultiVarProbe for multi-variable probing"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "SmiScenarioTree",
+  "library": "Smi",
+  "layer": "layer-3",
+  "header": "Smi/src/SmiScenarioTree.hpp",
+  "brief": "Scenario tree data structure for stochastic programming\n\nSmiScenarioTree is a template class for storing and navigating scenario\ntrees. Each root-to-leaf path represents one complete scenario.\n\n**SmiTreeNode<T> Template:**\nGeneric tree node with navigation:\n- parent_, child_, sibling_: Tree structure pointers\n- depth_: Distance from root (root = 0)\n- scen_: Scenario index for leaf nodes\n- child_labels_: Map for label-based child lookup\n\n**SmiScenarioTree<T> Template:**\nTree container with:\n- root_: Root node pointer\n- leaf_: Vector of leaf node pointers (one per scenario)\n- node_data: All node data in tree traversal order\n- scen_data: Temporary buffer for scenario path extraction\n\n**Key Operations:**\n- addPathtoLeaf(): Add new scenario path from branch point\n- find(scenario, stage): Get node at specific (scenario, stage)\n- find(labels): Get node by following label sequence\n- getScenario(s): Get vector of data along scenario s path\n\n**Tree Structure:**\n```\n      root (stage 0)\n     /    \\\n  node    node (stage 1)\n  / \\      |\nleaf leaf leaf (scenarios 0,1,2)\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SmiScnModel.hpp for scenario model using this tree",
+    "SmiScnData.hpp for SmiNodeData stored in tree nodes"
+  ]
+}

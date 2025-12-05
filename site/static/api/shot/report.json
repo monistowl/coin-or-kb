@@ -1,0 +1,12 @@
+{
+  "name": "Report",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Report.h",
+  "brief": "Formatted console output for solver progress\n\nGenerates iteration tables and summary reports.\n\n**Report Class:**\n- outputSolverHeader(): Version and license info\n- outputOptionsReport(): Active settings summary\n- outputProblemInstanceReport(): Problem statistics\n\n**Iteration Reporting:**\n- outputIterationDetailHeader(): Column headers\n- outputIterationDetail(): Per-iteration progress line\n- Shows: iteration, time, cuts, bounds, gap\n\n**Solution Reporting:**\n- outputSolutionReport(): Final summary\n- outputPrimalSolutionDetailedReport(): Full solution\n\n**Output Control:**\n- Tracks last values to avoid redundant output\n- Respects ES_IterationOutputDetail setting",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Output.h for underlying logging"
+  ]
+}

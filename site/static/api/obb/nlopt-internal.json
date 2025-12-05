@@ -1,0 +1,13 @@
+{
+  "name": "nlopt-internal",
+  "library": "oBB",
+  "layer": "layer-3",
+  "header": "nlopt/nlopt-internal.h",
+  "brief": "NLopt internal optimizer structure - bundled with oBB\n\nInternal header defining the nlopt_opt_s structure (opaque nlopt_opt).\nNot part of public API - used by algorithm implementations.\n\n**struct nlopt_opt_s (nlopt_opt):**\nComplete optimizer state:\n- algorithm, n: Algorithm type and dimension (immutable)\n- f, f_data: Objective function and user data\n- pre: Optional preconditioner\n- maximize: Nonzero if maximizing\n- lb, ub: Variable bounds (length n)\n- m, fc: Inequality constraints (m constraints)\n- p, h: Equality constraints (p constraints)\n- Stopping criteria: stopval, ftol_rel, ftol_abs, xtol_rel, xtol_abs, maxeval, maxtime\n- force_stop: External stop flag\n- local_opt: Nested local optimizer (for hybrid algorithms)\n- dx: Initial step sizes for derivative-free algorithms\n- work: Algorithm-specific workspace\n- errmsg: Error message buffer\n\n**Global Defaults (deprecated):**\n- nlopt_local_search_alg_deriv/nonderiv\n- nlopt_local_search_maxeval\n- nlopt_stochastic_population",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "nlopt.h for public API",
+    "nlopt-util.h for stopping criteria helpers"
+  ]
+}

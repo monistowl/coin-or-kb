@@ -1,0 +1,13 @@
+{
+  "name": "EventHandler",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/EventHandler.h",
+  "brief": "Observer pattern for algorithm events and callbacks\n\nAllows external code to respond to solver events.\n\n**Event Types (E_EventType):**\n- NewPrimalSolution: New feasible solution found\n- UserTerminationCheck: Allow user to request termination\n\n**Callback Registration:**\n- registerCallback(event, callback): Register handler\n- Callback signature: void()\n- Multiple callbacks per event supported\n\n**Event Notification:**\n- notify(event): Invoke all registered callbacks\n- Called by solver at appropriate points\n\n**Usage Example:**\n```cpp\neventHandler->registerCallback(E_EventType::NewPrimalSolution,\n    [&]() { std::cout << \"New solution found!\" << std::endl; });\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Solver.h for event handler access",
+    "Enums.h for E_EventType definition"
+  ]
+}

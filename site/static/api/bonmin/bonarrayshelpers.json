@@ -1,0 +1,12 @@
+{
+  "name": "BonArraysHelpers",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/QuadCuts/BonArraysHelpers.hpp",
+  "brief": "Array resize and copy utilities for Bonmin\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nTemplate functions for resizing arrays while preserving content:\n- resizeAndCopyArray: Resize and copy up to min(old,new) elements\n- resizeAndCopyArray with capacity: Only reallocate if needed\n\nAuthors: Pierre Bonami, IBM\nDate: October 6, 2007",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TMat for primary user of these utilities"
+  ]
+}

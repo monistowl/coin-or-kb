@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprOddPow",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprOddPow.hpp",
+  "brief": "Odd integer power w = x^k where k is odd\n\nHandles x^1, x^3, x^5, etc. These have special structure:\n- Bijective (one-to-one) over all reals\n- Pass through origin with same sign as x\n- No symmetry about y-axis (unlike even powers)\n\n**Convexity structure:**\n- x^3: convex for x > 0, concave for x < 0 (S-shaped)\n- x^5, x^7, ...: similar S-shape, steeper for higher k\n- Inflection point at x = 0\n\n**Bound propagation:**\nSince bijective: lb(w) = lb(x)^k, ub(w) = ub(x)^k (sign preserved)\n\n**Implied bounds (inverse):**\nFrom w = x^k: x = sign(w) * |w|^(1/k)\n- lb(x) = sign(lb(w)) * |lb(w)|^(1/k)\n- ub(x) = sign(ub(w)) * |ub(w)|^(1/k)\n\n**Convexification:**\nFor w = x^k on [a, b]:\n- If both same sign: secant overestimator, tangent underestimators (or vice versa)\n- If spans zero: use separate relaxations for positive and negative parts",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprEvenPow for even powers (x^2, x^4, ...)",
+    "exprSignPow for non-integer signed powers"
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "classes": [
+    {
+      "name": "adolc",
+      "brief": "Master include file for ADOL-C automatic differentiation library\n\nADOL-C (Automatic Differentiation by Overloading in C++) computes derivatives\nof mathematical functions via operator overloading and tape-based recording.\nRecords computation as a \"tape\" then replays in forward/reverse mode.",
+      "has_algorithm": true
+    },
+    {
+      "name": "adolc_all_in",
+      "brief": "Unified ADOL-C header for SWIG bindings",
+      "has_algorithm": false
+    },
+    {
+      "name": "adolc_sparse",
+      "brief": "Convenience header for sparse derivative computation\n\nInclude this file to access all sparse derivative functionality:\n- sparse_jac(): Sparse Jacobian computation\n- sparse_hess(): Sparse Hessian computation\n- jac_pat() / hess_pat(): Sparsity pattern detection\n- Bit-pattern forward/reverse modes",
+      "has_algorithm": false
+    },
+    {
+      "name": "adolcerror",
+      "brief": "Exception class for ADOL-C errors with source location tracking.\n\nThis exception captures the error message and the source location (file,\nline, column) where it was thrown. Integrates with the C++ standard exception\nhierarchy through std::runtime_error.\n\n@example\nThrow example:\n@code\nthrow ADOLCError(\"wrong number of independents\");  // Auto-captures source\nlocation\n@endcode\n\nHandle example:\n@code\ntry {\n  // ADOL-C operations...\n}\ncatch (ADOLCError& e) {\n  std::cerr << e.what() << std::endl;         // Formatted message\n  std::cerr << \"Error occurred at: \"\n            << e.where().file() << \":\"\n            << e.where().func() << \":\"\n            << e.where().line() << std::endl; // Direct source location\naccess\n}\n@endcode",
+      "has_algorithm": false
+    },
+    {
+      "name": "adtb_types",
+      "brief": "Core AD types: adouble, pdouble, and tape_location\n\nDefines the fundamental types for tape-based automatic differentiation:\n\n- **adouble**: Active double that records operations on the tape.\n  Use for variables whose derivatives you want to compute.\n\n- **pdouble**: Parameter double for non-differentiable constants that\n  can be changed without re-taping. Use for parameters you want to\n  vary across multiple derivative evaluations.\n\n- **tape_location<T>**: RAII wrapper managing tape location allocation\n  and deallocation for adouble/pdouble.",
+      "has_algorithm": true
+    },
+    {
+      "name": "adtl",
+      "brief": "Tape-less (traceless) forward-mode automatic differentiation\n\nProvides the adtl::adouble class for direct forward-mode AD without\ntape recording. Each adouble carries both its value and directional\nderivatives, which are propagated immediately through operations.",
+      "has_algorithm": true
+    },
+    {
+      "name": "adubswigfuncs",
+      "brief": "SWIG operator overloads for badouble/adub types",
+      "has_algorithm": false
+    },
+    {
+      "name": "advector",
+      "brief": "Traceable vector with differentiable subscript operations\n\nProvides advector, a vector of adoubles that can trace subscripting\nwith adouble indices. This enables automatic differentiation through\narray lookups where the index itself depends on independent variables.\n\n**Key classes:**\n- advector: Vector container with contiguous tape locations\n- adubref: Reference type returned when indexing with adouble (lvalue case)\n\n**Use case example:**\n@code\nadvector table(n);        // Create table of adoubles\nadouble index = ...;      // Index depends on independent variables\nadouble result = table[index];  // Differentiation tracks index dependency\n@endcode\n\n@note This is only for taped (not tapeless) ADOL-C mode",
+      "has_algorithm": false
+    },
+    {
+      "name": "checkpointing",
+      "brief": "Checkpointing support for memory-efficient reverse mode AD\n\nImplements checkpointing (also known as \"time-stepping\" or \"revolve\")\nfor computing adjoints of long time-stepping computations with bounded\nmemory. Instead of storing all intermediate states, only selected\n\"checkpoints\" are stored, and segments are recomputed as needed.",
+      "has_algorithm": true
+    },
+    {
+      "name": "drivers",
+      "brief": "High-level driver functions for derivative computation\n\nProvides convenient functions for computing common derivative quantities:\n- gradient(): First derivative of scalar function (\u2207f)\n- jacobian(): First derivative of vector function (\u2202F/\u2202x)\n- hessian(): Second derivative of scalar function (\u2207\u00b2f)\n- hess_vec(): Hessian-vector product (\u2207\u00b2f \u00b7 v)\n- jac_vec(): Jacobian-vector product (J \u00b7 v)\n- vec_jac(): Vector-Jacobian product (u^T \u00b7 J)\n\nThese drivers wrap the lower-level forward/reverse interfaces and handle\nmemory allocation and mode selection automatically. All functions require\na pre-recorded tape (via trace_on/trace_off).",
+      "has_algorithm": true
+    },
+    {
+      "name": "drivers",
+      "brief": "Lie derivative computation for nonlinear control systems\n\nComputes Lie derivatives used in nonlinear control theory for:\n- Observability analysis (lie_scalar, lie_gradient)\n- Controllability analysis (lie_covector, lie_bracket)\n\n**Mathematical background:**\nGiven vector field f(x) and scalar function h(x), the Lie derivative is:\n  L_f h = \u2207h \u00b7 f = \u03a3 (\u2202h/\u2202x_i) f_i(x)\n\nHigher-order Lie derivatives (L_f^k h) reveal observability structure.\nLie brackets [f,g] = \u2202g/\u2202x\u00b7f - \u2202f/\u2202x\u00b7g reveal controllability structure.\n\n**Functions:**\n- lie_scalar(): Compute L_f^k h (scalar Lie derivatives)\n- lie_gradient(): Compute \u2207(L_f^k h) (gradients of Lie derivatives)\n- lie_covector(): Compute covector fields\n- lie_bracket(): Compute Lie bracket [f,g]",
+      "has_algorithm": false
+    },
+    {
+      "name": "edfclasses",
+      "brief": "Object-oriented interface for external differentiated functions\n\nProvides C++ class-based wrappers for external functions with user-supplied\nderivatives. Inherit from these base classes to integrate external code\n(e.g., legacy Fortran, optimized BLAS, specialized solvers) into AD.\n\n**Classes:**\n- EDFobject: Basic external function with fixed array sizes\n- EDFobject_iArr: External function with integer array parameters\n- EDFobject_v2: Version 2 interface with variable-size arrays and context\n\n**Required overrides:**\n- function(): Evaluate the external function\n- zos_forward(): Zero-order scalar (function evaluation during taping)\n- fos_forward(): First-order scalar forward mode\n- fov_forward(): First-order vector forward mode\n- fos_reverse(): First-order scalar reverse mode\n- fov_reverse(): First-order vector reverse mode",
+      "has_algorithm": false
+    },
+    {
+      "name": "externfcts",
+      "brief": "Support for externally differentiated functions in ADOL-C tapes\n\nProvides mechanisms to incorporate user-supplied derivative code for\nfunctions that cannot or should not be traced (e.g., library calls,\nspecialized solvers, discontinuous functions). The user registers\ncallback functions for forward and reverse mode evaluation.\n\nUse cases:\n- Integrating external solvers (linear algebra, sparse systems)\n- Hand-coded derivatives for performance-critical sections\n- Functions from non-ADOL-C libraries\n- Discontinuous or non-differentiable operations with custom handling\n\nCallback modes:\n- zos_forward: zero-order scalar (function evaluation only)\n- fos_forward/fos_reverse: first-order scalar\n- fov_forward/fov_reverse: first-order vector\n- hos_forward/hos_reverse: higher-order scalar\n- hov_forward/hov_reverse: higher-order vector",
+      "has_algorithm": false
+    },
+    {
+      "name": "fixpoint",
+      "brief": "Differentiation through fixed-point iterations\n\nEnables automatic differentiation of implicit functions defined as\nfixed points x* = G(x*, u), where u are parameters.\n\n**Problem:** Many numerical methods involve iterative solvers:\n- Newton's method: x_{k+1} = x_k - f(x_k)/f'(x_k)\n- Nonlinear system solvers\n- Implicit time integrators\n\n**Solution:** fp_iteration() differentiates through the converged result\nwithout differentiating through all iteration steps, using the implicit\nfunction theorem: dx",
+      "has_algorithm": false
+    },
+    {
+      "name": "interfaces",
+      "brief": "Low-level forward and reverse mode interfaces for tape evaluation\n\nProvides the core differentiation routines that evaluate recorded tapes\nin forward mode (computing directional derivatives) and reverse mode\n(computing adjoints/gradients). These are the building blocks used by\nhigher-level drivers like gradient() and hessian().",
+      "has_algorithm": true
+    },
+    {
+      "name": "matrixmemory",
+      "brief": "C-style multi-dimensional array allocation for SWIG",
+      "has_algorithm": false
+    },
+    {
+      "name": "odedrivers",
+      "brief": "Taylor-based ODE integration drivers\n\nProvides drivers for solving and differentiating ODEs of the form\nx' = f(x) using Taylor series expansion. The tape records f(x),\nthen these drivers compute higher-order Taylor coefficients.",
+      "has_algorithm": true
+    },
+    {
+      "name": "psdrivers",
+      "brief": "Drivers for piecewise smooth (PS) functions with abs-normal form\n\nProvides differentiation tools for functions containing absolute values\nand other piecewise linear operations. These functions are not classically\ndifferentiable at kink points, but have well-defined generalized derivatives.",
+      "has_algorithm": true
+    },
+    {
+      "name": "pydirectors",
+      "brief": "Python director classes for external differentiated functions",
+      "has_algorithm": false
+    },
+    {
+      "name": "pyedfclasses",
+      "brief": "Python wrapper classes for external differentiated functions",
+      "has_algorithm": false
+    },
+    {
+      "name": "revolve",
+      "brief": "Optimal binomial checkpointing for memory-efficient reverse mode\n\nImplements the revolve algorithm (Griewank & Walther) for optimal\ncheckpoint placement in reverse mode automatic differentiation.",
+      "has_algorithm": true
+    },
+    {
+      "name": "sparse_fo_rev",
+      "brief": "Bit-pattern propagation for sparsity detection\n\nProvides forward and reverse mode interfaces that propagate bit patterns\ninstead of numerical values. Used to efficiently determine the sparsity\nstructure of Jacobian and Hessian matrices.\n\nBit patterns are packed into size_t words for efficiency. For n independent\nvariables, the seed matrix X[n][p] uses p = ceil(n / bits_per_long) words\nper row, where bits_per_long = 8 * sizeof(size_t).\n\nTwo modes:\n- **Tight**: Uses actual values x[] during propagation (more accurate)\n- **Safe**: Uses only bit patterns (faster, may overestimate sparsity)",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparsedrivers",
+      "brief": "High-level drivers for sparse Jacobian and Hessian computation\n\nProvides efficient computation of sparse derivatives by exploiting\nsparsity structure using graph coloring and compressed computation.",
+      "has_algorithm": true
+    },
+    {
+      "name": "tape_interface",
+      "brief": "Tape management interface for ADOL-C automatic differentiation\n\nProvides functions for managing the \"tape\" - a recorded sequence of\noperations that can be replayed in forward or reverse mode to compute\nderivatives.",
+      "has_algorithm": true
+    },
+    {
+      "name": "taylor",
+      "brief": "Higher-order derivative tensors and implicit function differentiation\n\nProvides drivers for computing higher-order derivative tensors and\ndifferentiating through implicit/inverse functions.",
+      "has_algorithm": true
+    }
+  ]
+}

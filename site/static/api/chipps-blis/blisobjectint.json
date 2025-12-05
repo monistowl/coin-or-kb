@@ -1,0 +1,14 @@
+{
+  "name": "BlisObjectInt",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisObjectInt.h",
+  "brief": "Integer variable object for branching decisions\n\nRepresents an integer-constrained variable in the MILP model.\nStores original bounds, breakeven point, and pseudo-costs.\n\n**Key attributes:**\n- columnIndex_: LP column index for this integer variable\n- originalLower_/Upper_: Bounds before any branching\n- breakEven_: Threshold for up vs. down preference (default 0.5)\n- pseudocost_: BlisPseudocost for branching decisions\n\n**Key methods:**\n- infeasibility(): Returns fractionality in [0.0, 0.5]\n- createBranchObject(): Creates BlisBranchObjectInt for branching\n- feasibleRegion(): Fixes variable to nearest integer\n- preferredNewFeasible(): Direction based on reduced cost\n\n**Pseudo-costs:**\nEach integer object maintains its own pseudo-cost history,\nenabling per-variable learning for branching decisions.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisBranchObjectInt for the branching action",
+    "BlisPseudocost for pseudo-cost data structure",
+    "BlisBranchStrategyPseudo for pseudo-cost branching"
+  ]
+}

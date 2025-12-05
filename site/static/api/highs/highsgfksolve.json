@@ -1,0 +1,12 @@
+{
+  "name": "HighsGFkSolve",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsGFkSolve.h",
+  "brief": "Linear system solver over finite field GF(k)\n\nSolves congruence systems for mod-k cut generation.\n\n**HighsGFk<k> Template:**\nCompile-time multiplicative inverse via Fermat's little theorem:\n- inverse(a) = a^(k-2) mod k (when k prime)\n- powk(): Recursive repeated squaring for a^k\n- Specializations for k=2,3 (trivial inverses)\n\n**HighsGFkSolve Class:**\nSparse LU factorization in GF(k):\n\n**Storage:**\n- Triplet format: Arow[], Acol[], Avalue[] (mod k)\n- Column-wise linked list: colhead, Anext, Aprev\n- Row-wise splay tree: rowroot, ARleft, ARright\n\n**Factorization:**\n- Markowitz-style pivot selection (min row \u00d7 col size)\n- factorColPerm/factorRowPerm: Pivot order recording\n- colBasisStatus/rowUsed: Track basic columns and used rows\n\n**Solution:**\n- solve<k>(): Enumerate basic solutions\n- SolutionEntry: (index, weight) for solution vector\n- Reports multiple solutions via basis swapping\n\n**Usage:**\n1. fromCSC<k>(): Load constraint matrix modulo k\n2. setRhs<k>(): Set right-hand side (k-1 for mod-k MIR)\n3. solve<k>(): Find row weights yielding maximally violated cuts",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsModkSeparator.h for mod-k cut generation using this solver"
+  ]
+}

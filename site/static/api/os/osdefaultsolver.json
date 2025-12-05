@@ -1,0 +1,9 @@
+{
+  "name": "OSDefaultSolver",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSSolverInterfaces/OSDefaultSolver.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

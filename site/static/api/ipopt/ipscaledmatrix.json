@@ -1,0 +1,20 @@
+{
+  "name": "IpScaledMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpScaledMatrix.hpp",
+  "brief": "Matrix decorator applying row and column scaling\n\nScaledMatrix wraps an unscaled matrix M to represent D_r * M * D_c\nwhere D_r and D_c are diagonal scaling matrices (stored as vectors).",
+  "algorithms": [
+    {
+      "name": "Scaled Matrix-Vector Multiplication:\n  Scaled matrix: M\u0303 = D_r \u00b7 M \u00b7 D_c where D_r, D_c are diagonal.\n  MultVector: y \u2190 \u03b1M\u0303\u00b7x + \u03b2y = \u03b1\u00b7D_r\u00b7(M\u00b7(D_c\u00b7x)) + \u03b2y\n  Implementation: (1) z = D_c\u00b7x, (2) w = M\u00b7z, (3) y = \u03b1D_r\u00b7w + \u03b2y.\n  TransMultVector swaps row/column scaling order appropriately.",
+      "math": "Scaling for numerical conditioning:\n  Row scaling normalizes constraint magnitudes (equilibration).\n  Column scaling balances variable contributions.\n  Goal: improve condition number \u03ba(M\u0303) < \u03ba(M).\n  Jacobian scaling: J\u0303 = D_c \u00b7 J \u00b7 D_g where D_c=constraint, D_g=gradient.",
+      "complexity": "Same as underlying matrix M plus O(n+m) for scaling.\n  No additional matrix storage - scaling vectors only.\n  Decorator pattern: operations delegate to wrapped matrix.\n\nUsed in Ipopt for:\n- NLP scaling (user-provided or automatic gradient-based)\n- Constraint Jacobian scaling\n- Hessian scaling for numerical stability",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpSymScaledMatrix.hpp for symmetric version",
+    "IpMatrix.hpp for base interface"
+  ]
+}

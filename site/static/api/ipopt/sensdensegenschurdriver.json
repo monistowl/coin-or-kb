@@ -1,0 +1,9 @@
+{
+  "name": "SensDenseGenSchurDriver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensDenseGenSchurDriver.hpp",
+  "brief": "sIPOPT dense Schur complement driver\n\nSensDenseGenSchurDriver: dense matrix implementation of SchurDriver.\nComputes Schur complement S = C - B*K^{-1}*A for sensitivity analysis.\nSuitable for problems with moderate numbers of sensitivity parameters.",
+  "algorithms": [],
+  "methods": []
+}

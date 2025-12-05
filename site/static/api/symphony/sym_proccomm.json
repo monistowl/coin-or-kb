@@ -1,0 +1,13 @@
+{
+  "name": "sym_proccomm",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_proccomm.h",
+  "brief": "Process communication abstraction for parallel SYMPHONY\n\nWrapper functions for PVM (Parallel Virtual Machine) communication.\nProvides portable inter-process communication in distributed mode.\n\n**PVM integration:**\n- __PVM__ flag enables PVM3 library\n- DataInPlace = PvmDataRaw for efficient packing\n- PROCESS_OK = PvmOk for status checks\n\n**Process management:**\n- register_process(): Join PVM\n- spawn(): Start remote processes\n- pstat(): Check process status\n- kill_proc(): Terminate process\n- comm_exit(): Leave PVM\n\n**Message sending:**\n- init_send(): Initialize send buffer\n- send_char/int/dbl/float_array(): Pack arrays\n- send_str(): Pack string\n- send_msg(): Send to one recipient\n- msend_msg(): Multicast to multiple recipients\n\n**Message receiving:**\n- receive_msg(): Blocking receive\n- treceive_msg(): Timed receive\n- nreceive_msg(): Non-blocking receive\n- receive_char/int/dbl/float_array(): Unpack arrays\n- receive_str(): Unpack string\n\n**Buffer management:**\n- bufinfo(): Get buffer metadata\n- freebuf(): Release buffer\n- setsbuf(), setrbuf(): Set active buffers",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_messages.h for message tags",
+    "sym_tm.h for tree manager using communication"
+  ]
+}

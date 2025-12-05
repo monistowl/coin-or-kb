@@ -1,0 +1,13 @@
+{
+  "name": "TaskSelectPrimalFixedNLPPointsFromSolutionPool",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskSelectPrimalFixedNLPPointsFromSolutionPool.h",
+  "brief": "Select MIP solutions for fixed-integer NLP solving\n\nChooses promising candidates for NLP refinement.\n\n**TaskSelectPrimalFixedNLPPointsFromSolutionPool Class:**\n- run(): Select best candidates from solution pool\n\n**Selection Criteria:**\n- Prioritize solutions close to feasibility\n- Avoid already-tested integer assignments\n- Respect NLP solve budget",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskSelectPrimalCandidatesFromNLP.h for NLP solving",
+    "DualSolver.h for solution pool access"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "TaskClearFixedPrimalCandidates",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskClearFixedPrimalCandidates.h",
+  "brief": "Clear pending fixed-integer NLP candidates\n\nResets candidate queue between iterations.\n\n**TaskClearFixedPrimalCandidates Class:**\n- run(): Empty the fixed-NLP candidate list\n\n**Usage:**\n- Called at start of each iteration\n- Ensures fresh candidate selection each cycle",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskSelectPrimalFixedNLPPointsFromSolutionPool.h for selection",
+    "TaskSelectPrimalCandidatesFromNLP.h for NLP solving"
+  ]
+}

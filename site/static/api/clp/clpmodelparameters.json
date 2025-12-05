@@ -1,0 +1,12 @@
+{
+  "name": "ClpModelParameters",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpModelParameters.hpp",
+  "brief": "Enumeration types for ClpModel parameter access\n\nDefines typed parameter indices for ClpModel's get/set methods:\n\nClpIntParam - Integer parameters:\n- ClpMaxNumIteration: Maximum simplex iterations\n- ClpMaxNumIterationHotStart: Hot start iteration limit\n- ClpNameDiscipline: Row/column naming mode (0=auto, 1=lazy, 2=full)\n\nClpDblParam - Double parameters:\n- ClpDualObjectiveLimit: Stop when dual objective exceeds\n- ClpPrimalObjectiveLimit: Stop when primal objective exceeds\n- ClpDualTolerance: Dual feasibility tolerance\n- ClpPrimalTolerance: Primal feasibility tolerance\n- ClpObjOffset: Constant term in objective\n- ClpMaxSeconds/ClpMaxWallSeconds: Time limits\n- ClpPresolveTolerance: Presolve zero tolerance\n\nClpStrParam - String parameters:\n- ClpProbName: Problem name from MPS file\n\nUtility templates for array operations:\n- ClpDisjointCopyN(), ClpFillN(), ClpCopyOfArray(): Non-COIN versions\n\nClpTrustedData: Opaque structure for passing user data to trusted code.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ClpModel for parameter getter/setter methods"
+  ]
+}

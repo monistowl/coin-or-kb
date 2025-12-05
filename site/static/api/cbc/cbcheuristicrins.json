@@ -1,0 +1,21 @@
+{
+  "name": "CbcHeuristicRINS",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicRINS.hpp",
+  "brief": "RINS - Relaxation Induced Neighborhood Search (Danna et al.)\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicRINS: Implements RINS (Danna, Rothberg & Le Pape, 2005).\nUses LP relaxation to define a neighborhood around the incumbent solution.",
+  "algorithms": [
+    {
+      "name": "RINS - Relaxation Induced Neighborhood Search:\n  solution() at node with incumbent x* and LP solution x\u0304:\n  1. For each integer variable j: If x*_j = x\u0304_j, fix x_j = x*_j.\n  2. Solve restricted MIP on free variables (sub-MIP).\n  3. If sub-MIP solution z' < z*: Accept as new incumbent.\n  4. Otherwise: Continue B&C with original incumbent.\n  Triggered periodically (howOften_) or at solution events.",
+      "math": "Neighborhood definition:\n  N_RINS(x*) = {x : x_j = x*_j \u2200j where x*_j = round(x\u0304_j)}.\n  Fixes variables where LP agrees with incumbent.\n  Neighborhood size depends on LP-incumbent agreement.\n\nTracks which variables have appeared in solutions (used_ array)\nto focus search on promising variables.\n\nAlso includes (via headers) related neighborhood searches:\n- RENS: Relaxation Enforced Neighborhood Search\n- DINS: Distance-Induced Neighborhood Search\n- VND: Variable Neighborhood Descent",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for base class",
+    "CbcHeuristicRENS, CbcHeuristicDINS, CbcHeuristicVND",
+    "CbcHeuristicLocal for pure local search"
+  ]
+}

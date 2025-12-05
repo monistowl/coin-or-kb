@@ -1,0 +1,23 @@
+{
+  "name": "BonBonminSetup",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/BonBonminSetup.hpp",
+  "brief": "Main Bonmin algorithm configuration and initialization\n\nExtends BabSetupBase with Bonmin-specific algorithm selection and\ninitialization for all MINLP algorithms.\n\n**Algorithm enum:**\n- B_BB (0): NLP-based branch-and-bound\n- B_OA (1): Pure Outer Approximation decomposition\n- B_QG (2): Quesada-Grossmann branch-and-cut\n- B_Hyb (3): Hybrid OA with NLP at nodes (default)\n- B_Ecp (4): Extended Cutting Plane (FilMINT-style)\n- B_IFP (5): Iterated Feasibility Pump\n\n**Initialization:**\n- initializeBBB(): Pure B&B with NLP at every node\n- initializeBHyb(): Hybrid with OA cuts + occasional NLP",
+  "algorithms": [
+    {
+      "name": "MINLP Solver Framework:\nBonmin implements multiple algorithms for convex MINLP:\nmin f(x,y) s.t. g(x,y) \u2264 0, x \u2208 \u211d\u207f, y \u2208 {0,1}\u1d50\n\nB_BB: Solve NLP relaxation at every B&B node. Most robust, slowest.\nB_OA: Outer Approximation - alternates MILP master and NLP subproblems.\nB_QG: Single-tree OA - generates OA cuts within one B&B tree.\nB_Hyb: Hybrid - OA cuts + NLP solves at key nodes (default, often fastest).\nB_Ecp: Extended Cutting Plane - linear cuts only, no NLP solves in tree.",
+      "math": "Outer Approximation generates cuts from NLP solutions x*:\nFor convex constraint g(x) \u2264 0 at point x*:\n  g(x*) + \u2207g(x*)\u1d40(x - x*) \u2264 0\nThis linearization is valid for convex g. Collect cuts from multiple\nNLP solves to approximate the feasible region from outside.",
+      "complexity": "Per-node: O(NLP) for B_BB, O(LP) for B_Ecp.\nHybrid reduces total NLP solves while maintaining solution quality.\nTotal complexity problem-dependent; convex MINLP is NP-hard.",
+      "ref": [
+        "Bonami et al. (2008). \"An algorithmic framework for convex mixed\n  integer nonlinear programs\". Discrete Optimization 5(2):186-204.",
+        "Duran & Grossmann (1986). \"An outer-approximation algorithm for\n  a class of mixed-integer nonlinear programs\". Math. Prog. 36:307-339."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BabSetupBase for common configuration",
+    "BonminAmplSetup for AMPL-based initialization"
+  ]
+}

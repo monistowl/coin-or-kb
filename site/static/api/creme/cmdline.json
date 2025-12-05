@@ -1,0 +1,12 @@
+{
+  "name": "cmdline",
+  "library": "Creme",
+  "layer": "layer-4",
+  "header": "Creme/src/Base/cmdline.h",
+  "brief": "Command-line argument parsing for Creme solver\n\ntpar struct: Defines command-line options (short/long flags, types, defaults).\nreadargs(): Parse argc/argv against option definitions.\nprint_help(): Display usage information.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sparse.h for LP data structure"
+  ]
+}

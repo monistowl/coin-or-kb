@@ -1,0 +1,18 @@
+{
+  "name": "CoinCutPool",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinCutPool.hpp",
+  "brief": "Class for storing a pool of cuts",
+  "algorithms": [
+    {
+      "name": "Cut Pool with Fitness-Based Filtering\n\nClass for storing a pool of cuts, removing\nthe repeated and dominated ones. It also filters the cuts\naccording to their scores.\n\n**Scoring function:**\nGiven LP solution x*, score S(C) = viol(C) / actv(C) where:\n- viol(C) = violation of cut C by x*\n- actv(C) = number of variables in C with x* > 0\n\n**Admission criterion:**\nA cut enters the pool only if it has the best score for at least\none of its variables. This filters out cuts that are unlikely to\nbe useful (every variable already has a better cut).\n\n**Dominance removal:**\nCut A dominates cut B if A is at least as tight as B for all\nfeasible integer points. Dominated cuts are periodically purged.",
+      "math": "Dominance: A dominates B if A \u2286 B and rhs(A) \u2264 rhs(B)",
+      "complexity": "O(n \u00d7 k\u00b2) for dominance check where k = cuts per variable",
+      "ref": [
+        "Andreello, Caprara, Fischetti, \"Embedding cuts in a B&C framework\",\n     Annals of Operations Research, 2007"
+      ]
+    }
+  ],
+  "methods": []
+}

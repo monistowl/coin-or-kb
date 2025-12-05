@@ -1,0 +1,21 @@
+{
+  "name": "CbcCompareActual",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcCompareActual.hpp",
+  "brief": "Aggregator header for concrete comparison classes",
+  "algorithms": [
+    {
+      "name": "Node Comparison Strategy Collection\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nConvenience header including all concrete node comparison strategies.\nSimilar pattern to CbcBranchActual.hpp.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcCompareBase for abstract interface",
+    "CbcCompareDepth for depth-first",
+    "CbcCompareDefault for adaptive hybrid"
+  ]
+}

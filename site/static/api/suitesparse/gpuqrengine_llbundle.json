@@ -1,0 +1,12 @@
+{
+  "name": "GPUQREngine_LLBundle",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_LLBundle.hpp",
+  "brief": "Bundle of row tiles for GPU factorization tasks\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nLLBundle groups row tiles for Factorize/Apply tasks. Tracks: First (smallest\nrowtile, made triangular), Shadow (memento of factorized First), Last,\nDelta (pipelining), Max. VT[2] pointers for Householder vectors. Methods:\nAddTileToSlots, Advance, gpuPack. CurrentTask indicates GenericFactorize/Apply.\nManaged by BucketList in doubly-linked structure.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_BucketList.hpp for bundle management"
+  ]
+}

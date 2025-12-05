@@ -1,0 +1,22 @@
+{
+  "name": "CglCutGenerator",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglCommon/CglCutGenerator.hpp",
+  "brief": "Abstract base class for all CGL cutting plane generators\n\nDefines the interface that all cut generators must implement. In MIP\nbranch-and-cut, cutting planes tighten the LP relaxation to cut off\nfractional solutions while keeping all integer-feasible points.",
+  "algorithms": [
+    {
+      "name": "Aggressiveness Control:\nBalance cut quality vs. generation cost.\n\n  aggressive_ = 0:   Minimal cuts (fastest)\n  aggressive_ = 50:  Normal effort\n  aggressive_ = 100: Root node intensive search\n\nPure virtual interface:\n- generateCuts(): Main entry point - examines LP solution and adds violated cuts\n- clone(): Deep copy for use in parallel B&C\n\nConfiguration:\n- aggressive_: Hint for cut generation intensity (0=minimal, 100=root node default)\n- canDoGlobalCuts_: Whether cuts are valid globally (requires no general integers)\n- originalSolver_: Some generators need unpreprocessed model\n\nIntegration with branch-and-cut:\n- mayGenerateRowCutsInTree(): Whether to call at tree nodes (affects matrix structure)\n- needsOptimalBasis(): Whether LP must be solved to optimality first\n- maximumLengthOfCutInTree(): Limits cut density for efficiency\n\nDerived classes implement specific separation algorithms:\n- Gomory, MIR, knapsack covers (general MIP)\n- Clique, odd hole, zero-half (0-1 structure)\n- Flow cover, lift-and-project (specialized)",
+      "math": "",
+      "complexity": "Separation is typically NP-hard in general, but polynomial\n  heuristics work well in practice.",
+      "ref": [
+        "Cornuejols (2008). \"Valid Inequalities for Mixed Integer Linear Programs\".\n  Math. Programming 112(1):3-44."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiCuts for the cut collection interface",
+    "CglTreeInfo for branch-and-cut context"
+  ]
+}

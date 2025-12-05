@@ -1,0 +1,12 @@
+{
+  "name": "CouenneExprCeil",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprCeil.hpp",
+  "brief": "Ceiling function w = ceil(x)\n\nReturns the smallest integer not less than x. Piecewise constant\nfunction with jump discontinuities at each integer.\n\n**Convexification challenge:**\nceil(x) is neither convex nor concave nor continuous. The function\nis constant on intervals (n-1, n] with value n.\n\n**Bound propagation:**\n- lb(w) = ceil(lb(x))\n- ub(w) = ceil(ub(x))\n\n**Integrality:**\nResult is always integer-valued. Can be used in MINLP constraints\nthat round up quantities.\n\n**Relationship to floor:**\nceil(x) = -floor(-x), so implementations can share code.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprFloor for the complementary floor function"
+  ]
+}

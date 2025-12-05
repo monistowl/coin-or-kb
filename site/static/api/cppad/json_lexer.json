@@ -1,0 +1,9 @@
+{
+  "name": "json_lexer",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/graph/json_lexer.hpp",
+  "brief": "Computational graph: json_lexer",
+  "algorithms": [],
+  "methods": []
+}

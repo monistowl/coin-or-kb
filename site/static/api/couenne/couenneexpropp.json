@@ -1,0 +1,12 @@
+{
+  "name": "CouenneExprOpp",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprOpp.hpp",
+  "brief": "Negation operator w = -x\n\nLinear operator that returns the opposite of an expression.\nPreserves linearity of the argument.\n\n**Convexification:**\n- Affine function: requires no convexification\n- Convex relaxation is exact\n- Linearity() returns same as argument's Linearity()\n\n**Bound propagation:**\n- lb(w) = -ub(x)\n- ub(w) = -lb(x)\nNote: bounds are swapped!\n\n**Implied bounds:**\nFrom w = -x: if w >= a then x <= -a, if w <= b then x >= -b\n\n**Integrality preservation:**\nIf x is integer, -x is also integer.\n\n**Simplification:**\n-(-x) simplifies to x (double negation elimination)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprSub for subtraction x - y = x + (-y)"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Timing",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Timing.h",
+  "brief": "Named timer registry for profiling solver phases\n\nCollection of named timers for performance analysis.\n\n**Timing Class:**\n- createTimer(): Register new timer with name/description\n- startTimer()/stopTimer(): Control by name\n- getElapsedTime(): Query accumulated time\n\n**Typical Timers:**\n- \"Total\": Overall solve time\n- \"DualMIP\": MIP solver calls\n- \"PrimalNLP\": NLP subproblem solves\n- \"Reformulation\": Problem transformation\n\n**Thread Safety:**\n- Timers are not thread-safe\n- Use in single-threaded solver context",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Timer.h for individual timer class",
+    "Environment.h for accessing via env->timing"
+  ]
+}

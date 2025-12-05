@@ -1,0 +1,9 @@
+{
+  "name": "set_hes_sparse_set",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/chkpoint_one/set_hes_sparse_set.hpp",
+  "brief": "Core AD functionality: set hes sparse set",
+  "algorithms": [],
+  "methods": []
+}

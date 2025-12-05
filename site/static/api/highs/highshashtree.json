@@ -1,0 +1,13 @@
+{
+  "name": "HighsHashTree",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsHashTree.h",
+  "brief": "Adaptive hash-array mapped trie (HAMT) container\n\nCache-efficient hash map using trie structure with occupation bitmaps.\n\n**Node Types:**\n- InnerLeaf<SizeClass>: Leaf with 6-54 entries (4 size classes)\n- BranchNode: Internal node with 64-way branching via hash chunks\n- ListLeaf: Collision list at maximum depth (rare)\n\n**Hash Structure:**\n- 6 bits per level \u2192 64-way branching (kBranchFactor)\n- Up to 9 depth levels (54 bits of 64-bit hash)\n- Occupation bitmap tracks which children exist\n\n**InnerLeaf Features:**\n- Linear probing within leaf for hash collisions\n- 16-bit hash prefix for fast filtering\n- Size class promotion/demotion on insert/erase\n\n**Burst Behavior:**\n- Leaf bursts to branch when exceeding kLeafBurstThreshold (54)\n- Branch merges back to leaf when children fit in threshold\n\n**Key Methods:**\n- insert/insert_or_get(): Add entry, return value pointer\n- find(): Lookup by key\n- erase(): Remove entry\n- find_common(): Find intersection with another tree\n- for_each(): Iterate all entries\n\n**Usage:**\nUsed for lifting opportunities in presolve (HPresolve.liftingOpportunities)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "util/HighsHash.h for hash functions",
+    "presolve/HPresolve.h for usage in presolve"
+  ]
+}

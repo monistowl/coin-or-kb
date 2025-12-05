@@ -1,0 +1,25 @@
+{
+  "name": "IpBacktrackingLineSearch",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpBacktrackingLineSearch.hpp",
+  "brief": "General backtracking line search with filter/restoration support\n\nBacktrackingLineSearch is the main LineSearch implementation,\nproviding a flexible framework for globalization strategies:\n\nCore algorithm:\n1. Start with full step alpha = alpha_max (fraction-to-boundary)\n2. Test acceptability via BacktrackingLSAcceptor\n3. If rejected, reduce alpha *= alpha_red_factor and retry\n4. If alpha becomes too small, trigger restoration phase\n\nAdvanced features:\n- Watchdog mechanism: Accept poor steps temporarily to escape local minima\n- Second-order correction (SOC): Improve constraint satisfaction\n- Soft restoration phase: Accept steps that reduce primal-dual error\n- Magic steps: Improve slack/bound multiplier pairing\n- Corrector steps: Improve local convergence rate\n\nKey parameters:\n- alpha_for_y: How to step in equality multipliers\n- watchdog_trial_iter_max: Watchdog iteration limit\n- max_soc: Maximum second-order corrections",
+  "algorithms": [
+    {
+      "name": "Backtracking Line Search with Filter/Restoration:\nGlobalization for interior point ensuring convergence from arbitrary starts.\n1. Compute max step \u03b1_max from fraction-to-boundary rule: x+\u03b1*\u0394x \u2265 \u03c4*x\n2. Try full step \u03b1 = \u03b1_max, check acceptability (filter or merit)\n3. If rejected, backtrack: \u03b1 \u2190 \u03b1 * \u03b1_red (typically 0.5)\n4. If \u03b1 < \u03b1_min, enter restoration phase (minimize infeasibility)\n5. Second-order correction: if step rejected due to constraints,\n   solve for correction \u0394x_soc to reduce linearization error\nWatchdog: temporarily accept steps failing filter to escape local minima.",
+      "math": "Fraction-to-boundary: \u03b1_max = max{\u03b1 : x + \u03b1\u0394x \u2265 \u03c4x, s + \u03b1\u0394s \u2265 \u03c4s}\nwhere \u03c4 \u2208 (0,1) keeps iterates strictly interior (typically \u03c4 = 0.995).\nArmijo-like sufficient decrease: \u03c6(x+\u03b1d) \u2264 \u03c6(x) + \u03b7*\u03b1*\u2207\u03c6^T*d\nor filter acceptance: (\u03b8,\u03c6) not dominated by any filter entry.\nSOC correction: \u0394x_soc = -H^{-1}*A^T*(A*\u0394x - c(x+\u03b1\u0394x))",
+      "complexity": "O(1) to O(k) acceptability tests per iteration where k \u2264 log(\u03b1_max/\u03b1_min).\nEach test requires O(m) constraint evaluations. SOC adds O(m\u00b3) for linear solve.\nRestoration phase iterations: O(\u221am) typically for feasibility restoration.",
+      "ref": [
+        "Fletcher & Leyffer (2002). \"Nonlinear programming without a penalty function\".\n  Mathematical Programming 91:239-269. [Filter method]",
+        "W\u00e4chter & Biegler (2005). \"Line search filter methods for nonlinear programming\".\n  SIAM J. Optim. 16(1):1-31. [Filter line search theory]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpLineSearch.hpp for the interface",
+    "IpBacktrackingLSAcceptor.hpp for acceptance test strategies",
+    "IpFilterLSAcceptor.hpp for filter-based acceptance",
+    "IpRestoPhase.hpp for restoration phase"
+  ]
+}

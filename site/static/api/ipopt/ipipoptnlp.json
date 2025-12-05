@@ -1,0 +1,21 @@
+{
+  "name": "IpIpoptNLP",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpIpoptNLP.hpp",
+  "brief": "Internal NLP interface with caching and scaling\n\nIpoptNLP abstracts the optimization problem for internal use:\n  min f(x)  s.t.  c(x) = 0, d_L <= d(x) <= d_U, x_L <= x <= x_U",
+  "algorithms": [
+    {
+      "name": "NLP Evaluation with Caching:\n  Cache f(x), \u2207f(x), c(x), J_c(x), d(x), J_d(x), H(x,\u03bb) keyed by x.\n  Invalidate on x change. Recompute only when needed.\n  Scaling applied transparently: f\u0303 = s_f\u00b7f, c\u0303 = D_c\u00b7c, etc.\n  Expansion matrices map variable bounds to full space.",
+      "math": "Internal NLP formulation:\n  Variables: x \u2208 \u211d\u207f (primal), s \u2208 \u211d\u1d50\u1d48 (slacks for inequalities).\n  Equality constraints: c(x) = 0 (m_c constraints).\n  Inequality constraints: d(x) - s = 0 with d_L \u2264 s \u2264 d_U.\n  Bounds: x_L \u2264 x \u2264 x_U (handled via multipliers z_L, z_U).\n  Hessian: \u2207\u00b2_xx L = \u2207\u00b2f + \u03a3\u1d62 yc_i\u00b7\u2207\u00b2c_i + \u03a3\u2c7c yd_j\u00b7\u2207\u00b2d_j.",
+      "complexity": "Function evals: O(user-defined).\n  Jacobian sparsity: typically O(nnz) << O(n\u00b7m).\n  Caching avoids redundant evaluations within same iteration.\n\nProvides:\n- f(), grad_f(), c(), jac_c(), d(), jac_d(), h() - NLP evaluations\n- Bounds with expansion matrices Px_L, Px_U, Pd_L, Pd_U\n- Scaling via NLPScalingObject",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpOrigIpoptNLP.hpp for standard implementation",
+    "IpTNLPAdapter.hpp for user interface adapter",
+    "IpNLPScaling.hpp for scaling strategies"
+  ]
+}

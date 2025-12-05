@@ -1,0 +1,22 @@
+{
+  "name": "klu_internal",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "KLU/Include/klu_internal.h",
+  "brief": "Internal definitions for KLU sparse LU factorization\nCopyright (c) 2004-2023, University of Florida. LGPL-2.1+ license.\n\nKLU is a sparse LU factorization package designed for circuit simulation\nmatrices, which are typically highly sparse with near-diagonal structure.\nUses BTF (Block Triangular Form) permutation to exploit structure.",
+  "algorithms": [
+    {
+      "name": "KLU Sparse LU Factorization:\nEfficient sparse LU for circuit matrices via structure exploitation:\n1. BTF PERMUTATION: Find block triangular form P\u00b7A\u00b7Q = [B_11 B_12 ...]\n   - Diagonal blocks factored independently\n   - Reduces fill-in by isolating strongly connected components\n2. SYMBOLIC ANALYSIS (per block):\n   - AMD ordering within each block\n   - Compute elimination tree and column counts\n   - Allocate storage for L and U factors\n3. NUMERIC FACTORIZATION:\n   - Gilbert-Peierls left-looking algorithm\n   - Partial pivoting within supernodes\n   - Off-diagonal blocks solved by triangular solves",
+      "math": "Block triangular form (BTF):\nP\u00b7A\u00b7Q has diagonal blocks that are irreducible (strongly connected).\nEach diagonal block B_kk factored as L_k\u00b7U_k = B_kk.\nOff-diagonal blocks solved: B_ij\u00b7x_j = b_i - L_i\u00b7U_i\u00b7...",
+      "complexity": "O(|L| + |U|) for factorization, where |L|, |U| are\nnonzero counts in factors. Circuit matrices typically yield sparse factors.",
+      "ref": [
+        "Davis & Palamadai (2010). \"A column pre-ordering strategy for the\n  unsymmetric-pattern multifrontal method\". ACM TOMS 30(2):165-195."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BTF library for block triangular form permutation",
+    "AMD library for fill-reducing ordering"
+  ]
+}

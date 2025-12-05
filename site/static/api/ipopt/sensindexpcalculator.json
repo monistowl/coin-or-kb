@@ -1,0 +1,9 @@
+{
+  "name": "SensIndexPCalculator",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensIndexPCalculator.hpp",
+  "brief": "sIPOPT index-based perturbation calculator\n\nSensIndexPCalculator: calculates perturbations for indexed parameters.\nIdentifies which variables/constraints are perturbed and computes\ncorresponding right-hand sides for sensitivity linear systems.",
+  "algorithms": [],
+  "methods": []
+}

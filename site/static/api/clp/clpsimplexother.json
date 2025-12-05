@@ -1,0 +1,21 @@
+{
+  "name": "ClpSimplexOther",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpSimplexOther.hpp",
+  "brief": "Auxiliary simplex operations: ranging, parametrics, and utilities",
+  "algorithms": [
+    {
+      "name": "Parametric Programming:\n  Solve family of LPs as bounds/costs vary: min c(\u03b8)'x s.t. l(\u03b8) \u2264 x \u2264 u(\u03b8)\n  1. Start with optimal basis at \u03b8 = \u03b8_start\n  2. Increase \u03b8 continuously, monitoring optimality/feasibility\n  3. When condition violated: perform ratio test to find \u03b8* and pivot\n  4. Continue until \u03b8 = \u03b8_end or infeasible/unbounded\n  Reports solution at each breakpoint where basis changes",
+      "math": "Parametric optimality:\n  Bounds: l(\u03b8) = l\u2080 + \u03b8\u00b7\u2206l, u(\u03b8) = u\u2080 + \u03b8\u00b7\u2206u\n  Costs: c(\u03b8) = c\u2080 + \u03b8\u00b7\u2206c\n  Optimal basis changes when: x_B(\u03b8) hits bound or c\u0304_j(\u03b8) changes sign",
+      "complexity": "Ranging: O(m\u00b7n) per variable queried\n  Parametric: O(k\u00b7(m\u00b2+mn)) where k = number of basis changes\n  Each breakpoint requires refactorization\n\nSensitivity Analysis (Ranging):\n- dualRanging(): How much can objective coefficients change?\n- primalRanging(): How much can variable bounds change?\n\nParametric Programming:\n- parametrics(): Solve family of LPs as parameters vary continuously\n- Trace optimal solution as bounds/costs change from start to end theta\n\nModel Manipulation:\n- dualOfModel(): Create dual formulation of the LP\n- crunch(): Quick presolve for subproblem extraction\n- gubVersion(): Convert to GUB-structured model\n\nI/O:\n- writeBasis()/readBasis(): MPS format basis files\n\nLike ClpSimplexDual/Primal, this is a mix-in - objects are cast at runtime.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpSimplex which this extends",
+    "ClpSimplexDual for dual simplex algorithm",
+    "ClpSimplexPrimal for primal simplex algorithm"
+  ]
+}

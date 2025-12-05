@@ -1,0 +1,9 @@
+{
+  "name": "json_parser",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/graph/json_parser.hpp",
+  "brief": "Computational graph: json_parser",
+  "algorithms": [],
+  "methods": []
+}

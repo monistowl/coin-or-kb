@@ -1,0 +1,12 @@
+{
+  "name": "Options",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/Options.hpp",
+  "brief": "Configuration options for qpOASES QP solver\n\nThe Options class controls solver behavior including:\n- Termination criteria (tolerances, iteration limits)\n- Numerical parameters (regularization, pivoting)\n- Output/printing verbosity\n- Initial homotopy and scaling options\n\nPreset configurations:\n- setToDefault(): Balanced defaults\n- setToReliable(): Maximum robustness\n- setToMPC(): Fast for model predictive control\n- setToFast(): Maximum speed, less robust",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "QProblem::setOptions for applying options"
+  ]
+}

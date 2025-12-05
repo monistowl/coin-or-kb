@@ -1,0 +1,13 @@
+{
+  "name": "BonBqpdWarmStart",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/Filter/BonBqpdWarmStart.hpp",
+  "brief": "Warm start information for BQPD solver\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nBqpdWarmStart: Stores warm start information for BQPD QP solver.\nInherits from both CoinWarmStartPrimalDual (actual warm start data)\nand CoinWarmStartBasis (for Cbc integration compatibility).\n\nAuthors: Andreas Waechter, IBM (based on BonFilterWarmStart.hpp)\nDate: August 3, 2007",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BqpdSolver for the solver using this warm start",
+    "CoinWarmStartPrimalDual for primal/dual storage"
+  ]
+}

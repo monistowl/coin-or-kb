@@ -1,0 +1,21 @@
+{
+  "name": "IpBacktrackingLSAcceptor",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpBacktrackingLSAcceptor.hpp",
+  "brief": "Strategy interface for step acceptance in backtracking line search\n\nBacktrackingLSAcceptor defines the interface for step acceptance\ntests used by BacktrackingLineSearch. Implementations decide whether\na trial point should be accepted based on various criteria.",
+  "algorithms": [
+    {
+      "name": "Backtracking Step Acceptance Interface:\n  CheckAcceptabilityOfTrialPoint(\u03b1) tests if x + \u03b1\u00b7\u0394x is acceptable:\n  1. Evaluate merit function \u03c6(x+\u03b1\u00b7\u0394x) or filter (\u03b8,\u03c6) pair.\n  2. Compare to reference value (Armijo) or filter (envelope check).\n  3. If rejected: caller backtracks \u03b1 \u2190 \u03c1\u00b7\u03b1 and retries.\n  4. TrySecondOrderCorrection(): If rejected, improve c(x+\u03b1\u00b7\u0394x).\n  5. PrepareRestoPhaseStart(): Augment filter before restoration.",
+      "math": "Acceptance criteria options:\n  Filter: Accept if (\u03b8,\u03c6) not dominated by any filter entry.\n  Armijo: Accept if \u03c6(x+\u03b1\u00b7\u0394x) \u2264 \u03c6(x) - \u03b7\u00b7\u03b1\u00b7(\u2207\u03c6^T\u00b7\u0394x).\n  Penalty: Accept if merit l(x+\u03b1\u00b7\u0394x) \u2264 l(x) - \u03b7\u00b7pred.\n  Watchdog: Non-monotone acceptance allowing temporary increases.\n\nKey responsibilities:\n- CheckAcceptabilityOfTrialPoint(): Main acceptance test\n- CalculateAlphaMin(): Minimum step size before restoration phase\n- TrySecondOrderCorrection(): Improve constraint satisfaction\n- TryCorrector(): Higher-order corrector for fast local convergence\n- PrepareRestoPhaseStart(): Augment filter before restoration\n\nImplementations:\n- FilterLSAcceptor: W\u00e4chter-Biegler filter method\n- PenaltyLSAcceptor: Penalty function approach\n\nWatchdog support:\n- StartWatchDog()/StopWatchDog(): Store/restore acceptor state\n- InitThisLineSearch(): Called at start of each line search",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpBacktrackingLineSearch.hpp for the line search framework",
+    "IpFilterLSAcceptor.hpp for filter-based implementation",
+    "IpFilter.hpp for filter data structure"
+  ]
+}

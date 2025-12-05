@@ -1,0 +1,9 @@
+{
+  "name": "for_one",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/for_one.hpp",
+  "brief": "Core AD functionality: for one",
+  "algorithms": [],
+  "methods": []
+}

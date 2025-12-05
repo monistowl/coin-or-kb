@@ -1,0 +1,22 @@
+{
+  "name": "IpLoqoMuOracle",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpLoqoMuOracle.hpp",
+  "brief": "LOQO formula for barrier parameter selection\n\nLoqoMuOracle computes the barrier parameter using the heuristic\nfrom the LOQO solver (Vanderbei). This provides a simple formula\nbased on current complementarity.\n\nThe LOQO formula typically uses:\n  sigma = min(0.1, 100*mu)\n  mu_new = sigma * (current_complementarity / n)\n\nThis is a simple, stateless oracle that doesn't require solving\nan additional linear system (unlike probing or quality function).\n\nCompared to other strategies:\n- ProbingMuOracle: Requires affine step computation\n- QualityFunctionMuOracle: Requires 1D optimization\n- LoqoMuOracle: Direct formula, no extra computation",
+  "algorithms": [
+    {
+      "name": "LOQO Barrier Parameter Formula:\nSimple centering strategy based on current complementarity:\n1. Compute average complementarity: \u03bc\u0304 = (x\u1d40z + s\u1d40v) / n\n2. Compute centering parameter: \u03c3 = min(0.1, 100\u00b7\u03bc)\n3. Return: \u03bc_new = \u03c3 \u00b7 \u03bc\u0304 (scaled complementarity)",
+      "math": "LOQO centering heuristic:\n  \u03c3 = min(\u03c3_max, factor\u00b7\u03bc)\n  \u03bc_new = \u03c3 \u00b7 \u03bc\u0304 = \u03c3 \u00b7 (x\u1d40z + s\u1d40v) / n\n\nwhere \u03c3_max limits centering to prevent excessively slow progress,\nand n is the total number of complementarity pairs.\n\nIntuition: Small \u03bc \u2192 aggressive (\u03c3 small), large \u03bc \u2192 centered (\u03c3 larger).",
+      "complexity": "O(n) for computing complementarity sum. No linear solves needed.",
+      "ref": [
+        "Vanderbei (1999). \"LOQO: An interior point code for quadratic\n  programming\". Optimization Methods and Software 11(1-4):451-484."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMuOracle.hpp for base interface",
+    "IpProbingMuOracle.hpp for Mehrotra's predictor-corrector"
+  ]
+}

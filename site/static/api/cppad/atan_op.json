@@ -1,0 +1,9 @@
+{
+  "name": "atan_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/atan_op.hpp",
+  "brief": "Internal implementation: atan_op",
+  "algorithms": [],
+  "methods": []
+}

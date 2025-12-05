@@ -1,0 +1,20 @@
+{
+  "name": "BCP_tm_param",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_tm_param.hpp",
+  "brief": "Tree Manager parameters for BCP Branch-Cut-Price",
+  "algorithms": [
+    {
+      "name": "TM Parameters: Search Strategy and Resource Limits\n\nBCP_tm_par defines all configurable parameters for the Tree Manager.\nSet via parameter file: BCP_{param_name} {value}\n\n**Character (boolean) parameters:**\n- Debug*Processes: Enable debugging for LP/CG/VG/CP/VP\n- GenerateVars: Enable variable generation\n- MessagePassingIsSerial: Single-process mode\n- TrimTreeBeforeNewPhase: Clean tree between phases\n- RemoveExploredBranches: Free completed subtrees\n- TmVerb_*: Verbosity flags for various events\n\n**Integer parameters:**\n- WarmstartInfo: How to store warm start (None/Root/Parent)\n- MaxHeapSize: Memory limit in MB\n- TreeSearchStrategy: Best-first(0), Breadth-first(1), Depth-first(2)\n- LpProcessNum, CgProcessNum, etc.: Process counts\n- LPscheduler_*: Node scheduling parameters\n\n**Double parameters:**\n- UnconditionalDiveProbability: Dive vs. backtrack randomization\n- QualityRatioToAllowDiving_*: When diving is permitted\n- Granularity: Objective function discretization\n- MaxRunTime: Time limit\n- TerminationGap_*: Optimality gap tolerances\n- UpperBound: Initial upper bound\n\n**String parameters:**\n- SaveRootCutsTo/ReadRootCutsFrom: Root cut persistence\n- ExecutableName: Spawned process executable\n- *Machines: Machine lists for each process type",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm.hpp for Tree Manager process",
+    "BCP_lp_param.hpp for LP parameters"
+  ]
+}

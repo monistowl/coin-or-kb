@@ -1,0 +1,13 @@
+{
+  "name": "sym_cp_u",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_cp_u.h",
+  "brief": "User callbacks for cut pool process\n\nDefines callbacks for custom cut checking in the cut pool.\nCut pool stores cuts for reuse across B&C nodes.\n\n**User callbacks:**\n- user_receive_cp_data(): Receive problem-specific data\n- user_free_cp(): Clean up user data\n- user_receive_lp_solution_cp(): Custom solution handling\n\n**Cut checking protocol (three-phase):**\n1. user_prepare_to_check_cuts(): Initialize with LP solution\n2. user_check_cut(): Check single cut for violation\n   - Sets is_violated flag\n   - Optionally computes quality score\n3. user_finished_checking_cuts(): Cleanup after checking\n\n**Default behavior:**\nReturns USER_DEFAULT for built-in EXPLICIT_ROW handling.\nUser cuts need custom checking implementation.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_cp.h for cut pool process",
+    "sym_cg_u.h for cut generation callbacks"
+  ]
+}

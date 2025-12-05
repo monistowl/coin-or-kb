@@ -1,0 +1,23 @@
+{
+  "name": "BonBabSetupBase",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/BonBabSetupBase.hpp",
+  "brief": "Base configuration class for branch-and-bound MINLP solvers\n\nAggregates all components needed to run branch-and-bound: NLP solver,\ncut generators, heuristics, branching rules, and tree traversal strategy.\nServes as the central configuration point for Bonmin algorithms.\n\n**Key components:**\n- nonlinearSolver_: OsiTMINLPInterface for NLP subproblems\n- cutGenerators_: List of CglCutGenerator (OA, ECP, Gomory, etc.)\n- heuristics_: List of CbcHeuristic (feasibility pump, rounding, etc.)\n- branchingMethod_: OsiChooseVariable for variable selection\n\n**Tree search strategies:**\n- NodeComparison: bestBound, DFS, BFS, dynamic, bestGuess\n- TreeTraversal: HeapOnly, DiveFromBest, ProbedDive, DfsDiveFromBest\n\n**Branching strategies (VarSelectStra_Enum):**\n- MOST_FRACTIONAL: Simple, fast, often poor\n- STRONG_BRANCHING: Evaluate candidates via LP/NLP solves\n- RELIABILITY_BRANCHING: Use pseudo-costs when trusted",
+  "algorithms": [
+    {
+      "name": "Branch-and-Bound for MINLP:\nSystematic enumeration via tree search with NLP relaxations at nodes.\nAt each node: solve continuous relaxation, branch on fractional integer\nvariable if not integer-feasible, prune if relaxation bound \u2265 incumbent.",
+      "math": "Node selection affects convergence rate:\n- Best-bound: Select node with lowest relaxation value (best global bound)\n- Depth-first: Minimize memory, find feasible solutions quickly\n- Best-estimate: Use pseudo-costs to estimate integer solution quality\nHybrid strategies (DiveFromBest) combine: dive from best-bound node\nuntil leaf, then return to best remaining node.",
+      "complexity": "O(2^m) worst case where m = number of binary variables.\nIn practice, pruning via bounds and cuts dramatically reduces tree size.\nStrong branching: O(k \u00b7 NLP) per node where k = candidates evaluated.",
+      "ref": [
+        "Belotti et al. (2013). \"Mixed-integer nonlinear optimization\".\n  Acta Numerica 22:1-131. [Comprehensive MINLP survey]",
+        "Achterberg, Koch & Martin (2005). \"Branching rules revisited\".\n  Operations Research Letters 33(1):42-54. [Branching strategies]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BonminSetup for the concrete Bonmin configuration",
+    "CbcBonmin for the main branch-and-bound driver"
+  ]
+}

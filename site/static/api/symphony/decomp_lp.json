@@ -1,0 +1,13 @@
+{
+  "name": "decomp_lp",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/decomp/decomp_lp.h",
+  "brief": "LP interface for decomposition master problem\n\nLoad/unload functions for the restricted master LP.\n\n**Functions:**\n- load_decomp_lp(): Initialize master LP with initial columns\n- unload_decomp_lp(): Cleanup master LP",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "decomp.h for column generation algorithm",
+    "sym_lp_solver.h for LPdata structure"
+  ]
+}

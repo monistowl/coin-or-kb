@@ -1,0 +1,13 @@
+{
+  "name": "HStruct",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HStruct.h",
+  "brief": "Core data structures for HiGHS solver\n\nDefines fundamental structs used throughout HiGHS.\n\n**Solution/Basis Structs:**\n- HighsSolution: Primal values (col_value, row_value) and duals (col_dual, row_dual)\n- HighsBasis: Column/row basis status (Lower, Basic, Upper, Zero, Nonbasic)\n- HighsObjectiveSolution: Objective value with column values (for MIP solutions)\n\n**Scaling Structs:**\n- HighsScale: Row/column scaling factors (strategy, col[], row[], cost)\n- HighsUserScaleData: User-specified objective/bound scaling parameters\n\n**Model Modification Structs:**\n- HighsLpMods: Tracks modifications for semi-variables and infinite costs\n- HighsLinearObjective: Multi-objective support (weight, offset, coefficients, priority)\n\n**Utility Structs:**\n- HighsFiles: File paths for reading/writing solutions, bases, models\n- HighsNameHash: Hash table for name-to-index lookup\n- RefactorInfo/HotStart: Basis refactorization data (deprecated HotStart)\n\n**Logging/Statistics:**\n- HighsPresolveRuleLog/HighsPresolveLog: Presolve rule application counts\n- HighsSimplexStats: Iteration count, invert frequency, density statistics\n- HighsIllConditioning: Records for ill-conditioned basis detection\n- HighsSubSolverCallTime: Sub-solver timing breakdown",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "HighsLp.h for LP model structure",
+    "HConst.h for HighsBasisStatus, HighsVarType enums"
+  ]
+}

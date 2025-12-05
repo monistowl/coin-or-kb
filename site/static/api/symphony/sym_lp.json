@@ -1,0 +1,24 @@
+{
+  "name": "sym_lp",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_lp.h",
+  "brief": "LP solver process for SYMPHONY's branch-and-cut\n\nThe LP process solves LP relaxations at each B&C node, manages\ncuts, and performs branching decisions.",
+  "algorithms": [
+    {
+      "name": "LP Process in Branch-and-Cut:\nCore solver process that handles LP relaxations and cut management\nat each node of the branch-and-bound tree.\n\nCUT LOOP (process_chain):\nThe heart of branch-and-cut is the cutting plane loop:\n  while (not_converged):\n    1. Solve LP relaxation (warm start from parent)\n    2. If LP infeasible \u2192 prune node (infeasibility)\n    3. If LP \u2265 incumbent \u2192 prune node (bound)\n    4. If solution integer \u2192 update incumbent, prune\n    5. Generate cuts from CGL and user callbacks\n    6. Filter cuts by violation and orthogonality\n    7. Add best cuts to LP, re-solve\n    8. Check tail-off: if bound improvement < threshold, branch\n\nCUT MANAGEMENT:\n- waiting_rows: Cuts generated but not yet added\n- slack_cuts: Cuts removed due to zero slack (may re-add later)\n- Cut filtering: Avoid adding near-parallel cuts\n- Cut aging: Remove cuts inactive for several iterations\n\nSTRONG BRANCHING:\nEvaluate candidate variables by temporarily fixing and re-solving:\n  For each candidate variable x\u2c7c with fractional value f:\n    1. Create two subproblems: x\u2c7c \u2264 \u230af\u230b and x\u2c7c \u2265 \u2308f\u2309\n    2. Solve LP relaxations (limited iterations)\n    3. Record objective degradation: \u0394\u207b = obj(down) - obj, \u0394\u207a = obj(up) - obj\n    4. Update pseudo-costs from observed degradation\n  Select variable maximizing: score = (1-\u03bc)\u00b7min(\u0394\u207b,\u0394\u207a) + \u03bc\u00b7max(\u0394\u207b,\u0394\u207a)\n  Typically \u03bc = 1/6 (emphasizes weaker branch)\n\nPSEUDO-COST BRANCHING:\nAfter enough observations, use historical data instead of solving:\n  Estimated \u0394\u207b = pcost_down[j] \u00b7 (f - \u230af\u230b)\n  Estimated \u0394\u207a = pcost_up[j] \u00b7 (\u2308f\u2309 - f)\nReliability: require k observations before trusting pseudo-cost",
+      "math": "Cut effectiveness:\nFor cut a'x \u2264 b with current solution x*:\n  Violation: v = a'x* - b (positive if violated)\n  Efficacy: v / \u2016a\u2016\u2082 (normalized violation)\n  Orthogonality: cuts should be linearly independent\n\nStrong branching score:\n  score(j) = (1-\u03bc)\u00b7min(\u0394\u207b\u2c7c, \u0394\u207a\u2c7c) + \u03bc\u00b7max(\u0394\u207b\u2c7c, \u0394\u207a\u2c7c)",
+      "complexity": "- Cut loop iteration: O(nnz \u00b7 simplex_iters)\n- Strong branching: O(k \u00b7 simplex_iters) for k candidates\n- Cut generation: O(m\u00b7n) for some generators, varies by type",
+      "ref": [
+        "Achterberg (2007). \"Constraint Integer Programming\". PhD thesis.\n  Chapters 5-6 on branching and cutting.",
+        "Balas & Ceria & Cornu\u00e9jols (1996). \"Mixed 0-1 Programming by\n  Lift-and-Project in a Branch-and-Cut Framework\".\n\n**lp_prob structure:**\n- lp_data: Underlying LP solver interface (LPdata)\n- desc: Current node description\n- waiting_rows: Cuts ready to be added\n- slack_cuts: Cuts that became slack\n- pcost_down/up: Pseudo-costs for branching\n- bdesc: Branch descriptions along path from root\n\n**Main processing loop (process_chain):**\n1. Solve LP relaxation\n2. Check feasibility, update bounds\n3. Generate cuts (CGL cuts + user cuts)\n4. Add best cuts, resolve LP\n5. Check tail-off, decide to branch\n6. Select branching variable (strong branching)\n7. Create children, send to tree manager\n\n**Cut generation (generate_cgl_cuts_new):**\nIntegrates CGL cut generators: Gomory, knapsack, clique,\nprobing, MIR, flow cover, lift-and-project, etc.\n\n**Branching functions:**\n- select_branching_object(): Variable selection\n- strong_branch(): Evaluate branching by LP re-solve\n- branch(): Create child nodes\n\n**User callbacks (_u functions):**\n- is_feasible_u(): Check integer feasibility\n- select_candidates_u(): Custom branching candidates\n- generate_cuts_in_lp_u(): User-defined cuts"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sym_tm.h for tree manager",
+    "sym_cg.h for cut generator process",
+    "sym_lp_solver.h for LP solver interface"
+  ]
+}

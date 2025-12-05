@@ -1,0 +1,13 @@
+{
+  "name": "BonTMINLPLinObj",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/QuadCuts/BonTMINLPLinObj.hpp",
+  "brief": "TMINLP adapter that linearizes the objective function\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nTMINLPLinObj: Transforms a TMINLP by moving the objective into a\nconstraint, adding epigraph variable \u03b7. Converts min f(x) to\nmin \u03b7 s.t. f(x) - \u03b7 \u2264 0. Useful for algorithms requiring linear\nobjectives (e.g., some OA variants).\n\nAuthors: Pierre Bonami, IBM\nDate: August 16, 2007",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TMINLP for base interface",
+    "OaDecompositionBase for OA algorithms using this transformation"
+  ]
+}

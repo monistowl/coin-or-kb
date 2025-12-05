@@ -1,0 +1,22 @@
+{
+  "name": "CouenneNauty",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneNauty.hpp",
+  "brief": "Interface to nauty library for symmetry detection\n\nWraps the nauty graph automorphism library to detect symmetries\nin MINLP problems. Symmetry information enables orbital branching\nand isomorphism pruning to reduce the search space.",
+  "algorithms": [
+    {
+      "name": "Graph-Based Symmetry Detection (nauty):\n  Detects problem symmetries by computing graph automorphisms:\n  1. **Graph construction:** Build colored graph G from MINLP:\n     - Nodes: Variables (colored by type/bounds) + constraints (colored by type)\n     - Edges: Variable i appears in constraint j \u2192 edge (v_i, c_j)\n  2. **Partition refinement:** color_node() partitions by variable status\n     - Fixed variables form singleton cells\n     - Free variables may be permuted within same orbit\n  3. **Automorphism computation:** nauty computes Aut(G)\n     - Returns generators of symmetry group\n     - Orbits = equivalence classes of variables under Aut(G)\n  4. **Application:** Orbits enable orbital branching and pruning",
+      "math": "Automorphism group:\n  Aut(G) = {\u03c0 : V \u2192 V | \u03c0(E) = E and \u03c0 preserves colors}\n  Orbit of v: Orb(v) = {\u03c0(v) : \u03c0 \u2208 Aut(G)}\n  |Aut(G)| can be exponentially large, stored via generators",
+      "complexity": "O(n!) worst case, but practical: O(n\u00b2) for most graphs.\n  nauty uses canonical labeling with partition backtracking.\n  Preprocessing: Build graph O(nnz). Memory: O(n\u00b2 + |generators|).",
+      "ref": [
+        "McKay & Piperno (2014). \"Practical graph isomorphism, II\".\n     J. Symbolic Computation 60:94-112.\n\n**Coloring (VarStatus):**\n- FIX_AT_ZERO, FIX_AT_ONE, FREE: Variable status for partitioning\n- color_node(): Assign color to node for refined symmetry"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneOrbitObj for orbital branching objects",
+    "CouenneOrbitBranchingObj for orbital branch execution"
+  ]
+}

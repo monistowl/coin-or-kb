@@ -1,0 +1,9 @@
+{
+  "name": "FactorTimer",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/FactorTimer.h",
+  "brief": "Indices of factor iClocks",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,14 @@
+{
+  "name": "BlisConGenerator",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisConGenerator.h",
+  "brief": "Interface between BLIS and CGL cut generators\n\nWraps a CglCutGenerator with configuration controlling when and how\ncutting planes are generated during branch-and-cut.\n\n**Strategy options (BlisCutStrategy):**\n- None: Cut generator disabled\n- Root: Generate cuts only at root node\n- Auto: BLIS decides based on effectiveness\n- Periodic: Generate every cutGenerationFrequency_ nodes\n\n**Trigger conditions:**\n- normal_: Call in standard cut generation loop\n- atSolution_: Call when integer solution found\n- whenInfeasible_: Call when LP becomes infeasible\n\n**Statistics tracked:**\n- numConsGenerated_/numConsUsed_: Cut effectiveness\n- time_: CPU time spent in generator\n- calls_/noConsCalls_: Call frequency tracking\n\n**Usage:**\n1. Create: BlisConGenerator(model, new CglGomory(), \"Gomory\")\n2. Register: model->addCutGenerator(generator)\n3. BLIS calls generateConstraints() based on strategy",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisConstraint for the constraint representation",
+    "CglCutGenerator for the CGL base class",
+    "BlisModel::addCutGenerator() for registration"
+  ]
+}

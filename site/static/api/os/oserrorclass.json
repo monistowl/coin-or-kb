@@ -1,0 +1,9 @@
+{
+  "name": "OSErrorClass",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSUtils/OSErrorClass.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

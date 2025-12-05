@@ -1,0 +1,20 @@
+{
+  "name": "SubjectTo",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/SubjectTo.hpp",
+  "brief": "Base class for working set management in active-set QP",
+  "algorithms": [
+    {
+      "name": "Working Set Index Management\n\nSubjectTo is the base class for managing bounds (Bounds) and constraints\n(Constraints) in qpOASES's parametric active-set algorithm.\n\n**Type classification:**\n- ST_UNBOUNDED: No bounds (-\u221e, +\u221e)\n- ST_BOUNDED: Both bounds finite [l, u]\n- ST_EQUALITY: Fixed value (l = u)\n- ST_DISABLED: Temporarily ignored\n\n**Status tracking:**\n- ST_LOWER: Active at lower bound\n- ST_UPPER: Active at upper bound\n- ST_INACTIVE: Currently not binding\n- ST_INFEASIBLE_LOWER/UPPER: Violated (restoration needed)\n\n**Index list operations:**\n- addIndex(): Add to active/inactive list on setup\n- removeIndex(): Remove during working set change\n- swapIndex(): Reorder for numerical stability\n\n**Online MPC support:**\n- shift(): For receding horizon control (discard old data)\n- rotate(): For periodic problems (circular reordering)",
+      "math": "",
+      "complexity": "O(1) type/status access, O(n) for list modifications",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Bounds.hpp, Constraints.hpp for derived classes",
+    "Indexlist.hpp for index set implementation"
+  ]
+}

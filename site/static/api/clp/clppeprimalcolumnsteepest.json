@@ -1,0 +1,23 @@
+{
+  "name": "ClpPEPrimalColumnSteepest",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPEPrimalColumnSteepest.hpp",
+  "brief": "Positive Edge enhanced steepest edge for primal simplex",
+  "algorithms": [
+    {
+      "name": "Positive Edge Primal Steepest Edge:\n  Enhanced column selection combining steepest edge with compatibility:\n  1. Compute steepest edge scores: |d_j|\u00b2/w_j for attractive columns\n  2. Identify compatible columns via ClpPESimplex::isCompatibleCol()\n  3. Apply bi-dimensional pricing: prefer compatibles unless much worse\n  4. Update compatibility set when basic variables change bounds",
+      "math": "Column selection with compatibility weight:\n  Select s = argmax_j { |d_j|\u00b2/w_j \u00b7 (1 + (1-\u03c8)\u00b7c_j) }\n  where c_j = 1 if compatible, 0 otherwise\n  Compatible columns move dual degenerates off zero reduced cost.",
+      "complexity": "Same as ClpPrimalColumnSteepest plus O(n) compatibility check.\n  Reduces degenerate iterations by 20-50% on difficult LPs.",
+      "ref": [
+        "Towhidi & Orban (2014). \"Customizing the solution process of COIN-OR's\n     linear solvers with Python\". Math. Prog. Computation 6:247-282.\n\nModes: 0=exact devex, 1=full steepest, 2=partial exact devex,\n       3=adaptive (switches based on factorization), 4=partial Dantzig start\n\nUses bi-dimensional pricing: candidates scored by steepest edge weight\nand compatibility, weighted by psi parameter."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPESimplex for the compatibility framework",
+    "ClpPrimalColumnSteepest for the base pricing rule",
+    "ClpPEPrimalColumnDantzig for Dantzig variant"
+  ]
+}

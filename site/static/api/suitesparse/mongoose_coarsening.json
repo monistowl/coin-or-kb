@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_Coarsening",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_Coarsening.hpp",
+  "brief": "Graph coarsening via vertex matching for multilevel partitioning\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nCoarsening reduces graph size while preserving structure by contracting\nmatched vertices. Given a matching (HEM, random, etc.), creates coarser\ngraph with merged vertices and aggregated edge weights. Essential for\nmultilevel partitioning to handle large graphs efficiently.",
+  "algorithms": [
+    {
+      "name": "Graph Coarsening (Vertex Contraction):\nCreates smaller graph G' from G by merging matched vertex pairs:\n1. Use matching (match[i] = j means vertices i,j are paired)\n2. Create supervertex for each matched pair (or singleton)\n3. Aggregate vertex weights: w'_k = w_i + w_j\n4. Combine edges: e'(k,l) = e(i,l) + e(j,l) for matched pair (i,j)\n5. Remove self-loops (edges within matched pairs become internal)",
+      "math": "Coarsening preserves cut structure:\nFor partition P of G inducing P' on G':\ncut(P) = cut(P') + internal edges (contracted)\nSince internal edges can't be cut, optimizing on G' approximates G.",
+      "complexity": "O(|E|) per coarsening level.\nTotal levels: O(log |V|) until |V'| < coarsen_limit.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_Matching.hpp for vertex matching algorithms",
+    "Mongoose_Refinement.hpp for uncoarsening/projection"
+  ]
+}

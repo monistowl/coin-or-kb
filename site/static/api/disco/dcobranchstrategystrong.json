@@ -1,0 +1,23 @@
+{
+  "name": "DcoBranchStrategyStrong",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoBranchStrategyStrong.hpp",
+  "brief": "Strong branching variable selection strategy",
+  "algorithms": [
+    {
+      "name": "Strong Branching",
+      "math": "For each candidate j, temporarily fix x_j to floor/ceil and solve:\n      \u0394_j^- = obj(x_j \u2264 \u230ax_j\u230b) - obj_current  (down branch degradation)\n      \u0394_j^+ = obj(x_j \u2265 \u2308x_j\u2309) - obj_current  (up branch degradation)\n      Score = \u0394_j^- \u00b7 \u0394_j^+  (product rule favors balanced branches)\n\nStrong branching evaluates candidate variables by actually solving\nthe LP/conic relaxation for both branches before deciding.\n\n**Algorithm:**\n1. Select top N candidates (strongCandSize parameter)\n2. For each candidate, temporarily apply up/down bounds\n3. Solve relaxation and record objective change\n4. Score = product rule (down_change * up_change)\n5. Choose variable with best score\n\n**Scoring (updateScore):**\nUses product scoring: score = down_degradation * up_degradation\nThis favors variables where both branches improve the bound.\n\n**Trade-offs:**\n- Pro: Best branching decisions, smaller trees\n- Con: Expensive, many LP/conic solves per node",
+      "complexity": "O(N \u00b7 LP) per node, where N = strongCandSize candidates",
+      "ref": [
+        "Applegate, D. et al. (1995). \"Finding Cuts in the TSP\".\n     DIMACS Series in Discrete Mathematics 47:91-107."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DcoBranchStrategyPseudo.hpp for pseudocost (cheaper)",
+    "DcoBranchStrategyRel.hpp for reliability (hybrid)",
+    "DcoParams.hpp::strongCandSize for candidate count"
+  ]
+}

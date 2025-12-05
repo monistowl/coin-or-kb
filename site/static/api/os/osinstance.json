@@ -1,0 +1,15 @@
+{
+  "name": "OSInstance",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSCommonInterfaces/OSInstance.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "org.optimizationservices.oscommon.datastructure.SparseVector",
+    "org.optimizationservices.oscommon.datastructure.SparseMatrix",
+    "org.optimizationservices.oscommon.datastructure.SparseMatrix",
+    "org.optimizationservices.oscommon.datastructure.QuadraticTerms"
+  ]
+}

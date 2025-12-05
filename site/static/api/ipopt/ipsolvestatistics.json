@@ -1,0 +1,13 @@
+{
+  "name": "IpSolveStatistics",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Interfaces/IpSolveStatistics.hpp",
+  "brief": "Statistics collected during optimization run\n\nSolveStatistics provides post-solve information accessible via\nIpoptApplication::Statistics(). Captures optimization outcomes\nat the time of construction from internal Ipopt objects.\n\nAvailable statistics:\n- Iteration count\n- Final objective value\n- Final constraint violation (primal infeasibility)\n- Final optimality error (dual infeasibility)\n- Final complementarity\n- Timing information",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpIpoptApplication.hpp for accessing statistics after solve",
+    "TNLP::finalize_solution() for receiving solution data"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "CoinMessageHandler",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinMessageHandler.hpp",
+  "brief": "Flexible message handling with severity levels and i18n support\n\nProvides CoinMessageHandler for formatted output with:\n- Severity-based filtering (warnings, errors, info)\n- Detail/logging levels\n- Multi-language support (messages default to US English)\n- Output to stdout or FILE pointer",
+  "algorithms": [
+    {
+      "name": "Message Handling System:\n  Message construction: printf-style formatting with type safety\n  Severity levels: 0=nothing, 1=fatal, 2=error, 3=warning, 4+=info\n  Detail filtering: only print if message detail \u2264 handler logLevel\n\n  Output chain: CoinMessageHandler << value1 << value2 << CoinMessageEol\n  Supports: int, double, char, string, and custom precision",
+      "math": "",
+      "complexity": "Message lookup: O(1) by message number\n  Formatting: O(message_length)\n  Filtering: O(1) severity/detail check before formatting",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinMessage for standard COIN-OR message definitions",
+    "CoinOneMessage for individual message container"
+  ]
+}

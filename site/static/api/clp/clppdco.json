@@ -1,0 +1,23 @@
+{
+  "name": "ClpPdco",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPdco.hpp",
+  "brief": "PDCO (Primal-Dual interior point for Convex Objectives) algorithm",
+  "algorithms": [
+    {
+      "name": "Preconditioning:\nDiagonal preconditioner improves LSQR convergence:\n  M = diag(A\u00b7D\u00b2\u00b7A' + d\u2082\u00b2I)^{-1/2}",
+      "math": "Matrix-Vector Products:\n  mode=1: y = y + A\u00b7x   (multiply by A)\n  mode=2: x = x + A'\u00b7y  (multiply by A transpose)",
+      "complexity": "LSQR per iteration: O(nnz(A)) for sparse A.\n  Number of LSQR iterations depends on condition number.\n  Total: O(IPM_iters \u00d7 LSQR_iters \u00d7 nnz(A))\n\nAdvantages over Mehrotra predictor-corrector:\n- Better for ill-conditioned normal equations\n- Handles dense columns without fill-in\n- Natural for separable convex objectives\n\nThis is a mix-in class - ClpInterior objects are cast to this type at\nalgorithm time. No additional data is stored.",
+      "ref": [
+        "Saunders (2003). \"PDCO: A primal-dual interior method for convex\n  objectives\". http://stanford.edu/group/SOL/software/pdco/"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPdcoBase for user-customizable objective/Hessian",
+    "ClpLsqr for the iterative linear solver",
+    "ClpPredictorCorrector for the alternative direct method"
+  ]
+}

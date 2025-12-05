@@ -1,0 +1,9 @@
+{
+  "name": "hes_sparsity",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/atomic/four/devel/hes_sparsity.hpp",
+  "brief": "Core AD functionality: hes sparsity",
+  "algorithms": [],
+  "methods": []
+}

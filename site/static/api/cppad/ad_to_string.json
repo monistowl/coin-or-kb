@@ -1,0 +1,9 @@
+{
+  "name": "ad_to_string",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/ad_to_string.hpp",
+  "brief": "Core AD functionality: ad to string",
+  "algorithms": [],
+  "methods": []
+}

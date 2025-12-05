@@ -1,0 +1,20 @@
+{
+  "name": "CoinModel",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinModel.hpp",
+  "brief": "High-level model building with string names and expressions\n\nCoinModel provides a flexible interface for constructing LP/MIP models.\nSupports row/column names, string-based expressions, and incremental\nbuilding. Convert to CoinPackedMatrix for solver use.",
+  "algorithms": [
+    {
+      "name": "Model Construction Interface:\n  Three building modes:\n  1. Row-by-row: addRow(indices, values, lb, ub)\n  2. Column-by-column: addCol(indices, values, lb, ub, obj)\n  3. Element-by-element: setElement(row, col, value)\n\n  Name handling: hash tables for row/column name lookup\n  Expression parsing: \"2 x1 + 3 x2 <= 5\" string syntax",
+      "math": "",
+      "complexity": "Insertion: O(1) amortized with dynamic arrays\n  Name lookup: O(1) expected with hash tables\n  Conversion to CoinPackedMatrix: O(nnz)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinBuild for simpler row-by-row construction",
+    "CoinPackedMatrix for the final sparse matrix format"
+  ]
+}

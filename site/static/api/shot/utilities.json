@@ -1,0 +1,12 @@
+{
+  "name": "Utilities",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Utilities.h",
+  "brief": "Helper functions for vectors, hashing, and I/O\n\nStandalone utility functions in SHOT::Utilities namespace.\n\n**Vector Operations:**\n- L2Norm(): Euclidean distance between points\n- calculateCenterPoint(): Centroid of point set\n- displayVector(): Debug output for vectors\n\n**Hashing:**\n- calculateHash(): Hash function for duplicate detection\n- Used by hyperplane/integer cut deduplication\n\n**File I/O:**\n- writeStringToFile(), getFileAsString()\n- saveVariablePointVectorToFile(): Solution output\n\n**Numeric:**\n- isAlmostEqual(), isAlmostZero(): Tolerance comparisons\n- isInteger(): Check for integer values\n\n**Sparse Containers:**\n- SparseVariableVector: Variable\u2192coefficient map\n- SparseVariableMatrix: (Variable,Variable)\u2192coefficient\n- combineSparseVariable*(): Merge operations",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Structs.h for type definitions"
+  ]
+}

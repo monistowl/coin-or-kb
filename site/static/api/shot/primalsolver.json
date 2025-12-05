@@ -1,0 +1,20 @@
+{
+  "name": "PrimalSolver",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/PrimalSolver.h",
+  "brief": "NLP-based primal bound computation and solution repair\n\nFinds feasible solutions and improves the primal bound.",
+  "algorithms": [
+    {
+      "name": "Solution Validation:\nVerify candidate satisfies all constraints to tolerance.\n\n  For each constraint g_i(x) <= 0:\n    violation_i = max(0, g_i(x))\n\n  max_violation = max_i(violation_i)\n\n  Point is feasible if max_violation <= tolerance",
+      "math": "Primal bound update:\n  If x is feasible and f(x) < z_P: z_P = f(x)\n  Gap = (z_P - z_D) / |z_P|\n\n**PrimalSolver Class:**\n- primalSolutionCandidates: Points to check for feasibility\n- fixedPrimalNLPCandidates: Integer-fixed NLP subproblems\n\n**Primal Solution Sources:**\n- MIP solution pool points\n- NLP local search from MIP solutions\n- Rounding heuristics\n\n**Solution Validation:**\n- addPrimalSolutionCandidate(): Submit candidate point\n- checkPrimalSolutionCandidates(): Verify feasibility\n- checkPrimalSolutionPoint(): Full constraint check\n\n**Fixed-Integer NLP:**\n- addFixedNLPCandidate(): Queue NLP subproblem\n- hasFixedNLPCandidateBeenTested(): Avoid re-solving",
+      "complexity": "- Solution validation: O(m * nnz_constraint) per candidate\n- Fixed NLP: depends on Ipopt (typically polynomial for convex)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DualSolver.h for dual bound computation",
+    "NLPSolver/ for backend NLP solvers (Ipopt)"
+  ]
+}

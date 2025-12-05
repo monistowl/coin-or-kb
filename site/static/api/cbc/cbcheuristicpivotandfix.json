@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicPivotAndFix",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicPivotAndFix.hpp",
+  "brief": "Pivot and Fix heuristic using simplex pivots\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicPivotAndFix: Exploits LP basis structure.\nPerforms simplex pivots to explore nearby basic solutions,\nthen fixes integer variables at their current values.",
+  "algorithms": [
+    {
+      "name": "Pivot and Fix Heuristic:\n  solution() from LP optimal basis B:\n  1. Identify basic integer variables with fractional values.\n  2. For each: attempt simplex pivot to move to adjacent BFS.\n  3. After pivots, fix integers at current (hopefully integral) values.\n  4. Re-optimize continuous variables and check feasibility.\n  Exploits LP degeneracy for alternate basic solutions.",
+      "math": "Simplex neighborhood exploration:\n  Adjacent basic feasible solutions differ by one exchange.\n  Pivot: x_B[i] leaves basis, x_N[j] enters (maintaining feasibility).\n  May reach integer-feasible BFS via sequence of degenerate pivots.\n  Effective when LP has many alternate optima.\n\nUses the LP optimal basis and pivots to find integer-feasible\nsolutions nearby in the simplex sense.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for base class",
+    "CbcHeuristicRandRound for randomized rounding"
+  ]
+}

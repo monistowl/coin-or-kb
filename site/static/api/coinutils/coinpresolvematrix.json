@@ -1,0 +1,21 @@
+{
+  "name": "CoinPresolveMatrix",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveMatrix.hpp",
+  "brief": "Core presolve data structures and action base class\n\nDefines CoinPrePostsolveMatrix (common base), CoinPresolveMatrix (for\npresolve), CoinPostsolveMatrix (for postsolve), and CoinPresolveAction\n(base class for all presolve transformations).",
+  "algorithms": [
+    {
+      "name": "LP Presolve - simplifies LP before solving via reversible transforms",
+      "math": "Presolve applies a sequence of transformations T_k to original LP:\n      min c'x s.t. Ax = b, l <= x <= u  -->  min c'x' s.t. A'x' = b', l' <= x' <= u'\n      Each T_k is recorded to enable postsolve recovery of original solution.\n\n@note Presolve typically reduces problem size 30-90%, dramatically speeding solve",
+      "complexity": "",
+      "ref": [
+        "Andersen, E., Andersen, K. (1995). \"Presolving in Linear Programming\".\n     Mathematical Programming 71:221-245."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveDoubleton, CoinPresolveForcing, etc. for specific transforms"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "a_asm",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/a_asm.hpp",
+  "brief": "HiGHS QP solver component\n\nPart of HiGHS quadratic programming active set solver.",
+  "algorithms": [],
+  "methods": []
+}

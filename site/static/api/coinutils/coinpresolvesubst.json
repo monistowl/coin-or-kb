@@ -1,0 +1,20 @@
+{
+  "name": "CoinPresolveSubst",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveSubst.hpp",
+  "brief": "Variable substitution from equality constraints",
+  "algorithms": [
+    {
+      "name": "Variable Substitution (Non-Singleton):\n  For implied free variable x_j in equality constraint i:\n  1. Solve constraint i for x_j: x_j = (b_i - \u03a3_{k\u2260j} a_ik x_k) / a_ij\n  2. Substitute x_j expression into all other rows containing x_j\n  3. After substitution, x_j becomes column singleton\n  4. Apply implied_free_action to remove x_j and row i\n\n  Fill-in control: only substitute if total nnz doesn't increase too much",
+      "math": "Substitution creates fill-in: originally empty positions become nonzero\n  Fill estimate: (nnz(col_j) - 1) \u00d7 (nnz(row_i) - 1) new elements\n  Controlled by fill_level parameter to prevent explosion",
+      "complexity": "Time: O(nnz(col_j) \u00d7 nnz(row_i)) per substitution\n  Can significantly reduce problem when fill-in is controlled\n  Postsolve must undo all substitutions in reverse order",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveImpliedFree for singleton case",
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

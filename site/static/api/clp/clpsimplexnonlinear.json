@@ -1,0 +1,21 @@
+{
+  "name": "ClpSimplexNonlinear",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpSimplexNonlinear.hpp",
+  "brief": "Nonlinear LP solver using reduced gradient and SLP methods",
+  "algorithms": [
+    {
+      "name": "Pivot Modes:\n  mode=0: Consider all dual infeasible variables\n  mode=1: Select only largest reduced cost\n  mode\u226510: Startup phase (finding initial feasible point)\n\nRETURN CODES from pivotColumn:\n  0: Normal iteration (basis change)\n  1: No basis change (line search)\n  2: Singleton pivot\n  3: Refactorization needed\n\nImplementation note: This class has no data members - it's a \"behavior\"\nclass that is cast from ClpSimplexPrimal at algorithm time.",
+      "math": "PROBLEM: minimize f(x) subject to g(x) \u2264 0, Ax = b\n\nITERATION:\n  1. At current point x\u0304, linearize constraints:\n     g(x) \u2248 g(x\u0304) + \u2207g(x\u0304)'(x - x\u0304)\n\n  2. Solve LP subproblem with trust region:\n     minimize \u2207f(x\u0304)'x\n     subject to \u2207g(x\u0304)'x \u2264 -g(x\u0304) + \u2207g(x\u0304)'x\u0304\n                |x - x\u0304| \u2264 \u0394 (trust region)\n\n  3. Update: x\u0304 \u2190 solution of LP\n  4. Adjust trust region \u0394 based on actual vs predicted improvement",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpSimplexPrimal for the base primal simplex",
+    "ClpConstraint for nonlinear constraint interface",
+    "ClpQuadraticObjective for quadratic objectives"
+  ]
+}

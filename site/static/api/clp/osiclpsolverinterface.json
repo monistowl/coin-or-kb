@@ -1,0 +1,22 @@
+{
+  "name": "OsiClpSolverInterface",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/OsiClp/OsiClpSolverInterface.hpp",
+  "brief": "Osi interface for CLP simplex solver\nCopyright (C) 2000, International Business Machines Corporation.\nEPL-1.0 license.\n\nOsiClpSolverInterface wraps ClpSimplex via the Osi abstraction, enabling\nClp use within CBC and with Cgl cut generators. Key features: hot-starting\nfor strong branching (markHotStart/solveFromHotStart), simplex tableau\naccess (getBInvARow/getBInvACol), disaster recovery for numerical issues.",
+  "algorithms": [
+    {
+      "name": "Hot-Start Optimization for Strong Branching:\n  1. markHotStart(): Save current basis, factorization, solution\n  2. Modify bounds (single variable typically)\n  3. solveFromHotStart(): Resolve with warm start (few iterations)\n  4. Repeat steps 2-3 for each branching candidate\n  5. unmarkHotStart(): Release saved state\n  This avoids full refactorization for each strong branching LP.",
+      "math": "",
+      "complexity": "Most operations O(1) delegations to ClpSimplex\n  initialSolve/resolve: O(m\u00b7n\u00b7iterations) for underlying simplex\n  Hot-start resolve: O(k\u00b7m) where k = iterations to re-optimize (typically small)\n  getBInvARow/getBInvACol: O(nnz(B^{-1})) per call\n\n@invariant basis_ synchronized with modelPtr_->status arrays after each solve\n@invariant fakeMinInSimplex_ == true implies linearObjective_ is negated copy\n@invariant smallModel_ != NULL implies hot-start state is active",
+      "ref": [
+        "Lougee-Heimer, R., et al. (2003). \"The Common Optimization INterface for\n  Operations Research: Promoting open-source software in the operations\n  research community\". IBM J. Res. Dev. 47(1):57-66."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpSimplex for underlying solver implementation",
+    "OsiSolverInterface for base abstraction class"
+  ]
+}

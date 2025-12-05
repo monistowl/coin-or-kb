@@ -1,0 +1,31 @@
+{
+  "name": "umfpack",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "UMFPACK/Include/umfpack.h",
+  "brief": "Multifrontal sparse LU factorization for unsymmetric matrices\n\nUMFPACK computes a sparse LU factorization of a general (unsymmetric)\nsquare matrix A:\n  P*R*A*Q = L*U\nwhere P and Q are permutation matrices, R is diagonal scaling, L is\nunit lower triangular, and U is upper triangular.\n\nKey features:\n- Multifrontal algorithm with BLAS-3 dense kernels\n- Automatic strategy selection (symmetric vs unsymmetric)\n- Fill-reducing orderings: AMD (symmetric), COLAMD (unsymmetric)\n- Real and complex matrices (double precision)\n- Row scaling for numerical stability\n\nTypical workflow:\n1. umfpack_di_symbolic: Symbolic analysis (ordering, memory estimates)\n2. umfpack_di_numeric: Numerical LU factorization\n3. umfpack_di_solve: Solve Ax = b, A'x = b, etc.\n4. umfpack_di_free_symbolic, umfpack_di_free_numeric: Free memory",
+  "algorithms": [
+    {
+      "name": "Multifrontal LU with threshold partial pivoting:\n  1. Symbolic analysis: compute column elimination tree and frontal matrices\n     - COLAMD ordering for unsymmetric, AMD for symmetric patterns\n     - Identify supernodes: columns with identical nonzero patterns\n  2. Numerical factorization (multifrontal):\n     - Process columns in elimination tree postorder\n     - For each frontal matrix: dense partial LU with threshold pivoting\n     - Assemble child contributions (extend-add operation)\n     - Extract L and U columns, pass remainder to parent front\n  3. Solve phase: forward/back substitution through frontal matrices",
+      "math": "Factorization: P\u00b7R\u00b7A\u00b7Q = L\u00b7U where:\n  - P, Q are permutation matrices (row/column reordering)\n  - R is diagonal scaling matrix (row equilibration)\n  - L is unit lower triangular, U is upper triangular\n  Threshold pivoting: select pivot if |a_kk| \u2265 \u03c4\u00b7max_i|a_ik| (\u03c4 \u2248 0.1)",
+      "complexity": "Time: O(nnz(L+U)\u00b7f\u0304) where f\u0304 is average front size\n  Typically O(n^1.5) to O(n^2) for 2D problems, O(n^2) for 3D\n  Space: O(nnz(L+U) + front_stack) where front_stack depends on ordering",
+      "ref": [
+        "Davis (2004). \"Algorithm 832: UMFPACK V4.3 - An unsymmetric-pattern\n     multifrontal method\". ACM Trans. Math. Software 30(2):196-199.",
+        "Davis (2004). \"A column pre-ordering strategy for the unsymmetric-pattern\n     multifrontal method\". ACM Trans. Math. Software 30(2):165-195.",
+        "Duff, Reid (1983). \"The Multifrontal Solution of Indefinite Sparse\n     Symmetric Linear Equations\". ACM Trans. Math. Software 9(3):302-325."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "klu.h for circuit simulation matrices (often faster for this case)",
+    "cholmod.h for symmetric positive definite matrices",
+    "umfpack_di_numeric() for numerical factorization",
+    "umfpack_di_free_symbolic() to free returned object",
+    "umfpack_di_symbolic() for symbolic analysis",
+    "umfpack_di_solve() to solve using the factorization",
+    "umfpack_di_numeric() for computing the factorization",
+    "UMFPACK_CONTROL_* defines for parameter indices",
+    "cs_compress in CSparse for similar functionality"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "IpMumpsSolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpMumpsSolverInterface.hpp",
+  "brief": "Interface to MUMPS parallel sparse direct solver\n\nMumpsSolverInterface wraps MUMPS (MUltifrontal Massively Parallel\nsparse direct Solver), a freely available solver supporting MPI\nparallelism for distributed memory systems.",
+  "algorithms": [
+    {
+      "name": "Distributed-Memory Multifrontal LDL^T Factorization:\n  MUMPS computes A = P\u00b7L\u00b7D\u00b7L^T\u00b7P^T using multifrontal method with:\n  - MPI parallelism: distributes frontal matrices across processes\n  - Hybrid mode: MPI between nodes + OpenMP within nodes\n  - Out-of-core: stores factors on disk for very large problems\n  Supports both symmetric indefinite and positive definite modes.",
+      "math": "Distributed factorization strategy:\n  - Master process coordinates analysis and distribution\n  - Worker processes hold portions of L and D factors\n  - Frontal matrices assembled from child contributions via MPI\n  - Parallel triangular solves with pipelined communication\n  Degeneracy detection: identifies nearly-zero pivots for constraint deletion.",
+      "complexity": "O(n\u00b7f\u00b2/p) with p MPI processes. Communication: O(f\u00b2\u00b7log(p)).\n  Scales to hundreds of cores for large problems (n > 100,000).",
+      "ref": [
+        "Amestoy, Duff, L'Excellent & Koster (2001). \"A Fully Asynchronous\n     Multifrontal Solver Using Distributed Dynamic Scheduling\".\n     SIAM J. Matrix Anal. Appl. 23(1):15-41.\n\nMUMPS characteristics:\n- Parallel: MPI-based (also sequential mode)\n- Input format: Triplet_Format (lower triangular)\n- Provides inertia\n- Provides degeneracy detection (ProvidesDegeneracyDetection)\n- Open source (CeCILL-C license)\n\nJob codes in MUMPS:\n- Job 1: Analysis (symbolic factorization)\n- Job 2: Numerical factorization\n- Job 3: Solve phase\n\nKey parameters:\n- mumps_permuting_scaling_: Permutation and scaling method\n- mumps_pivot_order_: Pivot ordering (AMD, METIS, etc.)\n- mumps_scaling_: Additional scaling options\n- mumps_dep_tol_: Threshold for dependency detection\n\nOften the default linear solver for Ipopt when HSL is unavailable."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMa57TSolverInterface.hpp for HSL alternative",
+    "IpMa97SolverInterface.hpp for parallel HSL solver"
+  ]
+}

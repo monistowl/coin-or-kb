@@ -1,0 +1,12 @@
+{
+  "name": "sym_proto",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_proto.h",
+  "brief": "Function prototype and path length macros\n\nDefines the PROTO macro for ANSI C function prototypes\nand standard path/line length constants.\n\n**Length constants:**\n- MAX_FILE_NAME_LENGTH (255): File path buffer size\n- MACH_NAME_LENGTH (255): Machine name buffer size\n- MAX_LINE_LENGTH (255): Line buffer size\n\n**PROTO macro:**\n- PROTO(x) expands to x for ANSI C prototypes\n- Allows: `int foo PROTO((int a, int b));`\n- Legacy support for K&R C compilers (commented out)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_types.h for data types"
+  ]
+}

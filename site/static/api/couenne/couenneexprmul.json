@@ -1,0 +1,22 @@
+{
+  "name": "CouenneExprMul",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprMul.hpp",
+  "brief": "N-ary multiplication expression with McCormick convexification\n\nRepresents products of the form w = x1 * x2 * ... * xn.\nDuring standardization, n-ary products are decomposed into\nbinary products: w1 = x1*x2, w2 = w1*x3, etc.",
+  "algorithms": [
+    {
+      "name": "McCormick Envelope for Bilinear Terms:\nConvex relaxation of w = x\u00b7y over [xL,xU] \u00d7 [yL,yU]:\n1. Lower envelope (concave underestimator):\n   w \u2265 xL\u00b7y + x\u00b7yL - xL\u00b7yL  (tangent at (xL, yL))\n   w \u2265 xU\u00b7y + x\u00b7yU - xU\u00b7yU  (tangent at (xU, yU))\n2. Upper envelope (convex overestimator):\n   w \u2264 xL\u00b7y + x\u00b7yU - xL\u00b7yU  (tangent at (xL, yU))\n   w \u2264 xU\u00b7y + x\u00b7yL - xU\u00b7yL  (tangent at (xU, yL))\n3. These 4 planes form the convex envelope of x\u00b7y over the box.\n\nn-ary standardization:\n  x\u2081\u00b7x\u2082\u00b7x\u2083 \u2192 w\u2081 = x\u2081\u00b7x\u2082, w\u2082 = w\u2081\u00b7x\u2083\nintroduces O(n-1) auxiliary variables.",
+      "math": "McCormick derivation:\nFor w = x\u00b7y, we have:\n  (x-xL)(y-yL) \u2265 0 \u27f9 xy \u2265 xL\u00b7y + x\u00b7yL - xL\u00b7yL\nSimilarly for other corners.\nEnvelope is tight at all 4 corners of the box.",
+      "complexity": "O(1) to generate 4 cuts. Bound tightening improves\nrelaxation quality: gap \u221d (xU-xL)\u00b7(yU-yL).",
+      "ref": [
+        "McCormick (1976). \"Computability of global solutions to factorable\n  nonconvex programs\". Mathematical Programming 10(1):147-175."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneExprDiv for division (uses same convexification)",
+    "CouenneExprBinProd for binary product specialization"
+  ]
+}

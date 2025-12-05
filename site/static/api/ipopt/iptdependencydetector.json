@@ -1,0 +1,23 @@
+{
+  "name": "IpTDependencyDetector",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpTDependencyDetector.hpp",
+  "brief": "Base class for detecting linearly dependent constraint rows\n\nTDependencyDetector is the abstract base class for algorithms that\ndetect linearly dependent rows in the constraint Jacobian. This is\nneeded to handle degenerate problems where some constraints are\nredundant.\n\nPurpose:\nIf rank(J_c) < m_c, the KKT system is singular. Detecting and\nremoving dependent rows allows the solver to proceed.\n\nInterface:\n- DetermineDependentRows(): Takes Jacobian in triplet format,\n  returns list of dependent row indices in c_deps\n\nInput format (MA28 style triplet):\n- n_rows, n_cols: Jacobian dimensions\n- n_jac_nz: Number of nonzeros\n- jac_c_vals, jac_c_iRow, jac_c_jCol: Values and indices\n\nThe input arrays may be modified internally (working space).",
+  "algorithms": [
+    {
+      "name": "Linear Dependency Detection (Rank Deficiency):\nIdentifies redundant constraint rows to handle degenerate NLPs:\n1. Receive constraint Jacobian J \u2208 \u211d^{m\u00d7n} in triplet format\n2. Apply numerical rank test (LU or SVD-based)\n3. Return indices of linearly dependent rows\n4. IPM removes these rows from active KKT system",
+      "math": "Problem degeneracy: rank(J_c) < m_c creates singular KKT system.\nFor equality constraints c(x) = 0 with Jacobian J_c = \u2207c(x)\u1d40:\n- Full rank: m_c independent constraints\n- Rank deficient: some rows J_i = \u2211_{j\u2260i} \u03b1_j\u00b7J_j\n\nRemove row i if |pivot_i| < tol during factorization, indicating\nrow i is numerically dependent on rows 1,...,i-1.",
+      "complexity": "O(m\u00b7n\u00b7nnz/n) for sparse LU \u2248 O(nnz\u00b7m/n).\nMA28: O(nnz + fill-in) per factorization attempt.",
+      "ref": [
+        "Nocedal & Wright (2006). Section 18.4: Degenerate problems.",
+        "Duff et al. (1989). \"Direct Methods for Sparse Matrices\"."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTSymDependencyDetector.hpp for symmetric solver-based detection",
+    "IpMa28TDependencyDetector.hpp for MA28-based detection"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "IpInterfacesRegOp",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Interfaces/IpInterfacesRegOp.hpp",
+  "brief": "Option registration for Interfaces subsystem\n\nDeclares RegisterOptions_Interfaces() which registers all options\nspecific to the Interfaces module with the RegisteredOptions object.\n\nCalled during IpoptApplication initialization to register options\nlike fixed_variable_treatment, dependency_detection_with_rhs, etc.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpRegOptions.hpp for the registration framework"
+  ]
+}

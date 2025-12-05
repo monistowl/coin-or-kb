@@ -1,0 +1,13 @@
+{
+  "name": "BonSolverHelp",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/BonSolverHelp.hpp",
+  "brief": "Utility functions for OA and Feasibility Pump algorithms\nCopyright (C) International Business Machines (IBM) 2006.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nHelper functions for manipulating solver state during OA decomposition\nand Feasibility Pump: checking integer feasibility, fixing/relaxing\ninteger variables, comparing solutions, and installing cuts.\n\nAuthors: Pierre Bonami, IBM\nDate: December 7, 2006",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OaDecompositionBase for main OA algorithm",
+    "MinlpFeasPump for Feasibility Pump using these utilities"
+  ]
+}

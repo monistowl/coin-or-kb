@@ -1,0 +1,20 @@
+{
+  "name": "BonSubMipSolver",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/BonSubMipSolver.hpp",
+  "brief": "Unified interface for solving MILP subproblems in OA decomposition\n\nProvides a common interface for solving MILP subproblems using either\nCbc (via OsiClpSolverInterface) or CPLEX (via OsiCpxSolverInterface).\nUsed by OA decomposition algorithms to solve the linearized master problem.",
+  "algorithms": [
+    {
+      "name": "Lazy Constraint Callback (CPLEX):\nGenerate OA cuts on-the-fly during MILP solve.\n\n  optimize_with_lazy_constraints():\n    CPLEX calls back when integer solution found\n    Check NLP feasibility, add OA cut if violated\n    More efficient than iterative OA for some problems",
+      "math": "",
+      "complexity": "MILP solve dominates. Branch-and-cut complexity depends\non problem structure. Master grows with accumulated linearizations.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OaDecompositionBase for OA algorithm using this solver",
+    "OACutGenerator2 for classical OA implementation"
+  ]
+}

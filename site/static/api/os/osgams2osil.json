@@ -1,0 +1,9 @@
+{
+  "name": "OSgams2osil",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSModelInterfaces/OSgams2osil.hpp",
+  "brief": "GAMS to OSiL model converter\n\nConverts GAMS optimization models to OS Instance Language (OSiL).\nReads GAMS .gms files and produces XML-based OSiL representation.",
+  "algorithms": [],
+  "methods": []
+}

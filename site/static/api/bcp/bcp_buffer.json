@@ -1,0 +1,20 @@
+{
+  "name": "BCP_buffer",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_buffer.hpp",
+  "brief": "Message buffer for BCP inter-process communication",
+  "algorithms": [
+    {
+      "name": "Message Serialization: Pack/Unpack Buffer for IPC\n\nBCP_buffer is the serialization mechanism for all BCP messages.\nEach process uses a single buffer for both incoming and outgoing messages.\n\n**Packable types:**\n- POD types copyable via memcpy (int, double, etc.)\n- Structs of POD types\n- BCP_vec<T> of the above\n- BCP_string\n- Objects with pack(BCP_buffer&) method\n\n**Buffer structure:**\n- _data: Raw character array\n- _size: Current message size\n- _pos: Read position (incoming) or write position (outgoing)\n- _max_size: Allocated capacity (grows as needed, never shrinks)\n- _msgtag: Message type (for received messages)\n- _sender: Sender process ID (for received messages)\n\n**Usage pattern:**\n- pack(): Append data to buffer, advances _size\n- unpack(): Read data from buffer, advances _pos\n- clear(): Reset for new message",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_message.hpp for message passing interface",
+    "BCP_message_tag.hpp for message type tags"
+  ]
+}

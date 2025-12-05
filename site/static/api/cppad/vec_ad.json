@@ -1,0 +1,9 @@
+{
+  "name": "vec_ad",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/vec_ad/vec_ad.hpp",
+  "brief": "Core AD functionality: vec ad",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprBDiv",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/bounds/CouenneExprBDiv.hpp",
+  "brief": "Bound operators for division expressions\n\nComputes tight bounds for n/d given bounds [n, N] on numerator\nand [d, D] on denominator. Handles singularity at d = 0.\n\n**safeDiv():**\nUtility for safe division avoiding NaN:\n- Returns 0 if numerator is ~0\n- Returns \u00b1\u221e if denominator is ~0 (sign-aware)\n- Otherwise returns a/b\n\n**exprLBDiv (lower bound):**\nCase analysis on signs:\n- d > 0: positive denominator \u2192 lb = n/D or n/d\n- d \u2264 0, D > 0: crosses zero \u2192 -\u221e (unbounded)\n- d \u2264 0, D \u2264 0: negative denominator \u2192 lb = N/D or N/d\n\n**exprUBDiv (upper bound):**\nSymmetric case analysis:\n- d > 0: ub = N/D or N/d\n- d \u2264 0, D > 0: crosses zero \u2192 +\u221e\n- d \u2264 0, D \u2264 0: ub = n/D or n/d",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprDiv for the division expression",
+    "CouenneExprBMul for multiplication bounds"
+  ]
+}

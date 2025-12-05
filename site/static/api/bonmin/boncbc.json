@@ -1,0 +1,13 @@
+{
+  "name": "BonCbc",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/BonCbc.hpp",
+  "brief": "Main branch-and-bound driver for Bonmin using Cbc\n\nThe Bab class is the entry point for solving MINLPs with Bonmin. It wraps\nCbcModel to provide branch-and-bound with NLP solvers for subproblems.\n\n**Key method:**\n- branchAndBound(BabSetupBase&): Main solve routine\n\n**Return statuses (MipStatuses):**\n- FeasibleOptimal: Optimal solution found and proven\n- ProvenInfeasible: Problem proven infeasible\n- Feasible: Integer solution found (not proven optimal)\n- UnboundedOrInfeasible: Continuous relaxation unbounded\n- NoSolutionKnown: No feasible solution found\n\n**Solution access:**\n- bestSolution(): Primal solution vector\n- bestObj(): Objective value of best solution\n- bestBound(): Best known lower bound",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BabSetupBase for algorithm configuration",
+    "CbcModel for the underlying MIP framework"
+  ]
+}

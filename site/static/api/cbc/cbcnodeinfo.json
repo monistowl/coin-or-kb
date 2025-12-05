@@ -1,0 +1,21 @@
+{
+  "name": "CbcNodeInfo",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcNodeInfo.hpp",
+  "brief": "Persistent information for recreating search tree nodes",
+  "algorithms": [
+    {
+      "name": "Search Tree Node Reconstruction with Reference Counting\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcNodeInfo stores information to reconstruct a subproblem:\n- Warm start basis\n- Variable bound changes\n- Cutting planes added at this node\n- Parent linkage and reference counting\n\nTwo flavors:\n- CbcFullNodeInfo: Complete state (used at root)\n- CbcPartialNodeInfo: Differences from parent (saves memory)\n\nReference counting: Sum of potential + actual children.\nNode deleted when count reaches zero (subtree pruned).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcNode for live node information",
+    "CbcFullNodeInfo for complete state storage",
+    "CbcPartialNodeInfo for incremental storage\n\nEdwin 11/24/09 carved from CbcNode"
+  ]
+}

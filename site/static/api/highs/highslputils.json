@@ -1,0 +1,14 @@
+{
+  "name": "HighsLpUtils",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsLpUtils.h",
+  "brief": "Utility functions for LP manipulation, I/O, and validation\n\nCollection of free functions operating on HighsLp and related structures.\n\n**Basis I/O:**\n- writeBasisFile(): Export basis to file\n- readBasisFile()/readBasisStream(): Import basis from file/stream\n\n**Index/Name Lookup:**\n- getIndexFromName(): Resolve variable/constraint name to index\n\n**LP Assessment:**\n- assessLp(): Validate LP data consistency\n- lpDimensionsOk(): Check matrix dimensions\n- assessCosts(): Validate objective coefficients\n- assessBounds(): Validate variable/constraint bounds\n- applyScalingToLp()/applyScalingToLpCol/Row(): Apply scaling factors\n\n**LP Modification:**\n- appendColsToLp(), appendRowsToLp(): Extend LP\n- transformIntoEqualityProblem(): Convert to standard form\n\n**Solution Utilities:**\n- getLpCosts(), analyseObjective(): Cost analysis\n- writeSolution(): Export solution to file",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lp_data/HighsLp.h for LP data structure",
+    "lp_data/HighsSolution.h for solution structure",
+    "lp_data/HighsModelUtils.h for model-level utilities"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "IpMa97SolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpMa97SolverInterface.hpp",
+  "brief": "Interface to HSL MA97 modern parallel sparse symmetric solver\n\nMa97SolverInterface wraps the HSL MA97 solver, the most modern\nHSL solver for symmetric indefinite systems with advanced\nparallelism and scaling strategies.",
+  "algorithms": [
+    {
+      "name": "Parallel Multifrontal LDL^T with DAG-based Scheduling:\n  MA97 computes A = P\u00b7S\u00b7L\u00b7D\u00b7L^T\u00b7S\u00b7P^T where S is diagonal scaling.\n  Uses directed acyclic graph (DAG) task scheduling for parallelism:\n  - Assembly tree decomposed into independent subtrees\n  - OpenMP task parallelism within and across fronts\n  - Out-of-core capability for very large problems",
+      "math": "Scaling strategies for improved numerical stability:\n  - Hungarian matching + MC64 for row/column equilibration\n  - Ruiz scaling for matrix balancing: ||A_scaled||_\u221e \u2248 1\n  - Dynamic scaling: recompute when delayed pivots exceed threshold\n  Ordering options: AMD (fast), METIS (better fill), matched variants.",
+      "complexity": "O(n\u00b7f\u00b2/p) parallel factorization with p threads.\n  Scales well up to ~8-16 cores for typical optimization problems.\n  Memory: O(nnz(L)) with optional out-of-core for factors.",
+      "ref": [
+        "Hogg & Scott (2013). \"New parallel sparse direct solvers for\n     multicore architectures\". Algorithms 6(4):702-725.\n\nMA97 characteristics:\n- Modern parallel implementation using OpenMP\n- Advanced scaling options (dynamic, reuse, on-demand)\n- Input format: CSR_Format_1_Offset (upper triangular)\n- Provides inertia\n\nOrdering options: AUTO, BEST, AMD, METIS, MATCHED_*\n\nScaling strategies (scale_opts):\n- SWITCH_NEVER: No dynamic scaling\n- SWITCH_AT_START: Scale on first factorization\n- SWITCH_ON_DEMAND: Scale when needed\n- SWITCH_NDELAY: Scale based on delayed pivots\n\nKeeps separate akeep (analysis) and fkeep (factorization) pointers\nto efficiently handle re-factorization with unchanged structure.\n\nRecommended as default HSL solver for parallel systems."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMa86SolverInterface.hpp for older parallel solver",
+    "IpMa57TSolverInterface.hpp for serial solver"
+  ]
+}

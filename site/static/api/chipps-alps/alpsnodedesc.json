@@ -1,0 +1,13 @@
+{
+  "name": "AlpsNodeDesc",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsNodeDesc.h",
+  "brief": "Node description holding subproblem-specific data\n\nAlpsNodeDesc holds problem data for a tree node separate from tree\nstructure data. Users inherit this class for application-specific data.\n\n**Design rationale:**\n- AlpsTreeNode: Tree structure (parent, children, status)\n- AlpsNodeDesc: Subproblem data (bounds, constraints, etc.)\n\nThis separation simplifies parallel communication: only the\ndescription needs to be encoded for node transfer.\n\n**Representation modes:**\n- Explicit: Full problem data stored\n- Relative: Differences from parent node",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsTreeNode for tree structure",
+    "AlpsKnowledge for serialization interface"
+  ]
+}

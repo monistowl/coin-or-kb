@@ -1,0 +1,9 @@
+{
+  "name": "atan2",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/atan2.hpp",
+  "brief": "Core AD functionality: atan2",
+  "algorithms": [],
+  "methods": []
+}

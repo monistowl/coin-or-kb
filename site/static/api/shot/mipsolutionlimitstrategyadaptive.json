@@ -1,0 +1,20 @@
+{
+  "name": "MIPSolutionLimitStrategyAdaptive",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/MIPSolutionLimitStrategyAdaptive.h",
+  "brief": "Adaptive solution limit based on solver progress\n\nAdjusts limit based on optimization state.\n\n**MIPSolutionLimitStrategyAdaptive Class:**\n- lastIterSolLimIncreased: Track when limit changed\n- numSolLimIncremented: Count of increases\n\n**Adaptive Logic:**\n- Increase when finding good solutions\n- Decrease when solver is struggling\n- Balances exploration vs speed",
+  "algorithms": [
+    {
+      "name": "Adaptive MIP Solution Limit Control",
+      "math": "Adjust solution limit L_k dynamically:\n      - If finding good solutions (gap improving): L_{k+1} = L_k + \u03b4\n      - If stagnating (gap unchanged): L_{k+1} = max(L_min, L_k - \u03b4)\n      Balances cut generation speed vs MIP solver exploration.",
+      "complexity": "O(1) per limit update. Heuristic based on solver feedback.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IMIPSolutionLimitStrategy.h for interface",
+    "MIPSolutionLimitStrategyIncrease.h for simpler strategy"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "RootsearchMethodBoost",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/RootsearchMethod/RootsearchMethodBoost.h",
+  "brief": "Boost.Math rootfinding for constraint boundaries\n\nFinds constraint boundary points using TOMS 748 or bisection.\n\n**RootsearchMethodBoost Class:**\n- findZero(ptA, ptB, constraints): Find boundary between points\n- findZero(pt, objLB, objUB, objective): Objective rootsearch\n\n**Helper Classes:**\n- Test: Functor for constraint max-violation evaluation\n- TestObjective: Functor for objective function evaluation\n- TerminationCondition: Convergence criterion\n\n**Algorithm:**\n- TOMS 748: Optimal bracketing algorithm (4th order)\n- Bisection: Fallback for difficult cases\n- Returns boundary point for hyperplane generation",
+  "algorithms": [
+    {
+      "name": "TOMS 748 / Bisection Rootfinding",
+      "math": "Find \u03bb* \u2208 [0,1] such that max_i g_i(\u03bb*x\u00b0 + (1-\u03bb*)x\u0302) = 0.\n      TOMS 748: 4th-order bracketing, optimal among bracketing methods.\n      Bisection fallback: halve interval each step, guaranteed O(log(1/\u03b5)).",
+      "complexity": "TOMS 748: superlinear convergence. Bisection: O(log\u2082(1/\u03b5)) evals.",
+      "ref": [
+        "Alefeld, Potra, Shi (1995). \"TOMS 748: Enclosing zeros of continuous\n     functions\". ACM Trans. Math. Software."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IRootsearchMethod.h for interface contract",
+    "Boost.Math TOMS 748 documentation"
+  ]
+}

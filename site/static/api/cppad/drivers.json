@@ -1,0 +1,9 @@
+{
+  "name": "drivers",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/drivers.hpp",
+  "brief": "Core AD functionality: drivers",
+  "algorithms": [],
+  "methods": []
+}

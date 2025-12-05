@@ -1,0 +1,20 @@
+{
+  "name": "IpDenseVector",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpDenseVector.hpp",
+  "brief": "Dense vector implementation storing contiguous Number arrays\n\nDenseVector is the primary Vector implementation in Ipopt.\nTwo storage modes:\n- Heterogeneous: Full array of values (Values() method)\n- Homogeneous: Single scalar repeated for all elements (Scalar() method)",
+  "algorithms": [
+    {
+      "name": "Homogeneous Vector Optimization:\n  When all elements have same value (e.g., initialization to 1.0),\n  stores only scalar_ instead of n-element array. Transparently\n  expands to full storage when heterogeneous access needed.\n  Saves O(n) memory and enables O(1) operations on uniform vectors.",
+      "math": "BLAS-backed operations for heterogeneous vectors:\n  - Axpy: y \u2190 \u03b1x + y via DAXPY\n  - Dot: x^T\u00b7y via DDOT\n  - Nrm2: ||x||_2 via DNRM2\n  All other operations use optimized element-wise loops.",
+      "complexity": "O(n) for most operations on heterogeneous vectors.\n  O(1) for operations on homogeneous vectors (scalar multiply, etc.).\n\nCheck IsHomogeneous() before accessing values to use appropriate method.\n\nFeatures:\n- Efficient BLAS operations via IpBlas wrappers\n- Metadata support for debugging (variable names)\n- DenseVectorSpace factory for creating compatible vectors\n\nOperations delegate to BLAS for performance when heterogeneous.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpVector.hpp for abstract interface",
+    "IpCompoundVector.hpp for composite vectors"
+  ]
+}

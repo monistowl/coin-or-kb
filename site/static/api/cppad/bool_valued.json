@@ -1,0 +1,9 @@
+{
+  "name": "bool_valued",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/bool_valued.hpp",
+  "brief": "Core AD functionality: bool valued",
+  "algorithms": [],
+  "methods": []
+}

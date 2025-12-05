@@ -1,0 +1,12 @@
+{
+  "name": "MIPSolutionLimitStrategyIncrease",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/MIPSolutionLimitStrategyIncrease.h",
+  "brief": "Solution limit strategy with gradual increase\n\nIncreases MIP solution pool limit over iterations.\n\n**MIPSolutionLimitStrategyIncrease Class:**\n- updateLimit(): Increase limit when MIP finds optimal\n- getNewLimit()/getInitialLimit(): Current and start values\n\n**State Tracking:**\n- lastIterSolLimIncreased: When limit was last raised\n- numSolLimIncremented: Total increases performed\n- lastIterOptimal: Last iteration with optimal MIP\n\n**Algorithm:**\n- Start with low limit for fast initial iterations\n- Increase when solver proves optimality\n- More solutions = more hyperplane generation points",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IMIPSolutionLimitStrategy.h for interface"
+  ]
+}

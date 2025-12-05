@@ -1,0 +1,13 @@
+{
+  "name": "BonTMatrix",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/QuadCuts/BonTMatrix.hpp",
+  "brief": "Sparse triangular matrix storage for quadratic forms\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nTMat: Sparse matrix storage in triplet format (iRow, jCol, value).\nProvides ordering by rows/columns, duplicate removal, and conversion\nto upper triangular form for quadratic forms x'Qx.\n\nUsed for efficient gradient and Hessian computation in QuadRow.\n\nAuthors: Pierre Bonami, IBM\nDate: October 6, 2007",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "QuadRow for quadratic constraint using TMat",
+    "CoinPackedMatrix for conversion source"
+  ]
+}

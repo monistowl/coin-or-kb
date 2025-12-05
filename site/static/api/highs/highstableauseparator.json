@@ -1,0 +1,14 @@
+{
+  "name": "HighsTableauSeparator",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsTableauSeparator.h",
+  "brief": "Gomory mixed-integer cuts from LP tableau\n\nGenerates cuts by applying MIR procedure to simplex tableau rows.\n\n**Gomory Cut Generation:**\nFor each fractional basic integer variable:\n1. Extract tableau row: x_B[i] = f_0 - sum(a_j * x_N[j])\n2. Apply mixed-integer rounding (MIR)\n3. Produce cut: sum(floor(a_j) * x_j) \u2264 floor(f_0) (simplified)\n\n**Separation Flow:**\n1. Get fractional integer variables from LP relaxation\n2. For each candidate, extract tableau row via BTRAN\n3. Transform using HighsTransformedLp (bound substitution)\n4. Apply MIR strengthening\n5. Add valid cuts to cut pool\n\n**Implementation:**\n- numTries: Counter for separation attempts (controls effort)\n- Uses kTableauSepaString identifier for statistics\n- Inherits run() timing from HighsSeparator base class",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsSeparator.h for base class interface",
+    "mip/HighsTransformedLp.h for bound substitution",
+    "mip/HighsSeparation.h for separator orchestration"
+  ]
+}

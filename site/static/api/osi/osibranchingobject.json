@@ -1,0 +1,20 @@
+{
+  "name": "OsiBranchingObject",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiBranchingObject.hpp",
+  "brief": "Branch-and-bound objects and branching decisions\n\nThis file defines the object-oriented framework for branching in MIP:\n\n- **OsiObject**: Abstract base for anything that can be branched on\n  (integer variables, SOS constraints, etc.)\n- **OsiBranchingObject**: Describes how to perform a specific branch\n- **OsiBranchingInformation**: Solver state passed to branching decisions",
+  "algorithms": [
+    {
+      "name": "Two-Way vs N-Way Branching:\nStandard is two-way (down/up), but extensible.\n\n  Two-way on integer x at value x*:\n    Down: x \u2264 floor(x*)\n    Up: x \u2265 ceil(x*)\n\n  N-way (e.g., for SOS):\n    Multiple children from single branch point",
+      "math": "For integer variable x with value x*:\n  infeasibility = min(x* - floor(x*), ceil(x*) - x*)\n  Maximum infeasibility is 0.5 (exactly midway)\n  Infeasibility 0 means integer-feasible\n\nSELECTION STRATEGIES (use infeasibility):\n  - Most infeasible: Branch on max infeasibility\n  - Most fractional: Same as most infeasible\n  - Priority-weighted: priority \u00d7 infeasibility",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiSolverInterface::branchAndBound for MIP solving",
+    "Cbc for full branch-and-cut implementation"
+  ]
+}

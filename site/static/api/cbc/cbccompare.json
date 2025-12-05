@@ -1,0 +1,20 @@
+{
+  "name": "CbcCompare",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcCompare.hpp",
+  "brief": "Functor wrapper for node comparison",
+  "algorithms": [
+    {
+      "name": "Node Priority Functor Wrapper\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCompare: Thin wrapper making CbcCompareBase usable as functor.\nUsed by standard heap algorithms for node priority queue.\n\nHolds pointer to CbcCompareBase strategy object (test_).\noperator() delegates to test_->test(x,y).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcCompareBase for strategy interface",
+    "CbcTree for usage in node management"
+  ]
+}

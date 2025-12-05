@@ -1,0 +1,21 @@
+{
+  "name": "tape_interface",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/tape_interface.h",
+  "brief": "Tape management interface for ADOL-C automatic differentiation\n\nProvides functions for managing the \"tape\" - a recorded sequence of\noperations that can be replayed in forward or reverse mode to compute\nderivatives.",
+  "algorithms": [
+    {
+      "name": "Tape-Based Operation Recording:\nADOL-C implements automatic differentiation by recording a \"tape\" of\nelementary operations during function evaluation:\n\nRECORDING PHASE (trace_on to trace_off):\n1. Each adouble gets a unique location on the tape\n2. Operations (+, -, *, /, sin, exp, etc.) record:\n   - Operation code (opcode)\n   - Input locations\n   - Output location\n   - Primal value (for reverse mode)\n3. Result: Directed acyclic graph (DAG) of operations\n\nTAPE STRUCTURE:\n- Operations buffer: sequence of opcodes\n- Locations buffer: tape indices for operands/results\n- Values buffer: constant values embedded in computation\n- Taylor buffer: intermediate values for forward/reverse\n\nTHREAD SAFETY:\nEach thread has its own tape buffer (thread_local storage).\nTapes are identified by short integer IDs (0-32767).",
+      "math": "Tape interpretation:\nA tape represents a function F: \u211d\u207f \u2192 \u211d\u1d50 as composition of elementary ops:\n  v_{-n+1}, ..., v_0           = x (inputs)\n  v_i = \u03c6_i(v_{j(i)}, v_{k(i)})  for i = 1, ..., p (intermediates)\n  y = (v_{p-m+1}, ..., v_p)    = F(x) (outputs)\n\nForward mode propagates tangents: v\u0307_i = (\u2202\u03c6_i/\u2202v_j)\u00b7v\u0307_j + (\u2202\u03c6_i/\u2202v_k)\u00b7v\u0307_k\nReverse mode propagates adjoints: v\u0304_j += (\u2202\u03c6_i/\u2202v_j)\u00b7v\u0304_i (in reverse order)",
+      "complexity": "Recording: O(ops) time and space\nForward evaluation: O(ops) per direction\nReverse evaluation: O(ops) per adjoint",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "adolc.h for main include",
+    "interfaces.h for forward/reverse mode API",
+    "adtb_types.h for adouble/pdouble types"
+  ]
+}

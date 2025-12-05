@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_Refinement",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_Refinement.hpp",
+  "brief": "Partition projection during uncoarsening phase\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nRefinement projects partition from coarse to fine graph during\nuncoarsening. Maps coarse partition to fine vertices via inverse\nmatchmap, then applies FM/QP improvement (waterdance) at each level\nfor high-quality final partition.",
+  "algorithms": [
+    {
+      "name": "Uncoarsening with Refinement (V-cycle):\nProjects and refines partition through coarsening hierarchy:\n1. Start with partition on coarsest graph G_L\n2. For each level l = L-1 down to 0:\n   a. Project partition: P(v) = P(coarse_map[v]) for fine v\n   b. Apply waterdance refinement (FM + QP)\n   c. Continue to next finer level\n3. Return refined partition on original graph G_0",
+      "math": "Partition inheritance via matching map:\nIf vertex v in G_i was matched to form supervertex S in G_{i+1}:\nP_i(v) = P_{i+1}(S)\n\nCut can only improve during refinement (waterdance finds better cuts).",
+      "complexity": "O(|E|) per level for projection + O(|E|) for refinement.\nTotal: O(|E| log |V|) across all levels.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_Coarsening.hpp for forward coarsening phase",
+    "Mongoose_Waterdance.hpp for partition improvement at each level"
+  ]
+}

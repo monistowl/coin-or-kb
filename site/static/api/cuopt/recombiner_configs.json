@@ -1,0 +1,9 @@
+{
+  "name": "recombiner_configs",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/mip/diversity/recombiners/recombiner_configs.hpp",
+  "brief": "cuOpt MIP solver component\n\nPart of GPU-accelerated mixed-integer solver.",
+  "algorithms": [],
+  "methods": []
+}

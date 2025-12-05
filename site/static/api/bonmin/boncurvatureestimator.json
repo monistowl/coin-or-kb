@@ -1,0 +1,19 @@
+{
+  "name": "BonCurvatureEstimator",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonCurvatureEstimator.hpp",
+  "brief": "Curvature estimation for branching decisions (NOT SUPPORTED)",
+  "algorithms": [
+    {
+      "name": "Null-Space Curvature for Branching (d^T H_Lag d Projection)\n\n@warning This file is not currently supported (#error directive).\n\nWould compute null-space curvature (d^T H_Lag d) for branching variable\nselection, projecting directions onto constraint null space.\n\n**Intended functionality:**\n- ComputeNullSpaceCurvature(): Project direction, compute Hessian product\n- Handle active bound and constraint detection\n- Use linear solvers for projection systems",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CurvBranchingSolver for curvature-based branching (if enabled)"
+  ]
+}

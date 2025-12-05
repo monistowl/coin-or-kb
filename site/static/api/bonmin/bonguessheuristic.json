@@ -1,0 +1,19 @@
+{
+  "name": "BonGuessHeuristic",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/BonGuessHeuristic.hpp",
+  "brief": "Pseudocost-based initial guess heuristic for MINLP\nCopyright (C) International Business Machines 2007. All Rights Reserved.\nThis code is published under the Eclipse Public License.",
+  "algorithms": [
+    {
+      "name": "Pseudocost-Guided Initial Guess Heuristic",
+      "math": "Uses accumulated pseudocost information to guess integer values:\n      For each fractional integer variable x_j with value v:\n        If \u03c8_j^- < \u03c8_j^+: guess x\u0303_j = \u230av\u230b (round down is cheaper)\n        If \u03c8_j^+ < \u03c8_j^-: guess x\u0303_j = \u2308v\u2309 (round up is cheaper)\n      where \u03c8_j^-/\u03c8_j^+ are pseudocosts for down/up branches.\n\nGuessHeuristic: Generates initial feasible solution guesses based on\npseudocost information. Used early in the branch-and-bound process\nto provide good starting points.",
+      "complexity": "O(n) for generating guess from pseudocosts\n\nAuthors: Andreas Waechter, IBM\nDate: September 1, 2007",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for base heuristic interface"
+  ]
+}

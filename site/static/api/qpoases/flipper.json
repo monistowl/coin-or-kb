@@ -1,0 +1,16 @@
+{
+  "name": "Flipper",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/Flipper.hpp",
+  "brief": "",
+  "algorithms": [
+    {
+      "name": "Flipping Bounds Recovery:\nStore factorization state for fast recovery from bound changes.\n\n  PROBLEM:\n    When bound moves to opposite side (l \u2192 u or u \u2192 l),\n    factorization update can be numerically unstable.\n    \"Flipping\" refers to this sudden direction change.\n\n  SOLUTION:\n    Before potentially problematic step:\n      1. Store R, Q, T factorizations in Flipper\n      2. Store working set (Bounds, Constraints)\n      3. Attempt active set change\n      4. If numerical trouble: restore from Flipper\n\n  STORAGE:\n    - R_: Cholesky factor of reduced Hessian\n    - Q_: Orthogonal factor\n    - T_: Schur complement factor (for constraints)\n    - bounds_/constraints_: working set snapshot\n\n  USE CASE:\n    Online QP in MPC: parameters change between solves\n    Hot-starting may flip bounds, needing recovery option",
+      "math": "",
+      "complexity": "O(n\u00b2 + nC\u00b7n) memory for snapshot",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

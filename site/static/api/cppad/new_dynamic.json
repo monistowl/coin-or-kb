@@ -1,0 +1,9 @@
+{
+  "name": "new_dynamic",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/new_dynamic.hpp",
+  "brief": "Core AD functionality: new dynamic",
+  "algorithms": [],
+  "methods": []
+}

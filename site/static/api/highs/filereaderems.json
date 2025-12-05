@@ -1,0 +1,13 @@
+{
+  "name": "FilereaderEms",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/io/FilereaderEms.h",
+  "brief": "EMS format file reader/writer (internal HiGHS format)\n\nImplements Filereader interface for EMS format.\n\n**EMS Format:**\nHiGHS internal text format for model serialization:\n- Compact representation of LP/MIP data\n- Preserves all model metadata\n- Used for debugging and testing\n\n**FilereaderEms Class:**\n- readModelFromFile(): Parse EMS file into HighsModel\n- writeModelToFile(): Export HighsModel to EMS format\n\n**Compared to MPS/LP:**\n- Less standardized but more compact\n- Primarily for internal use\n- Full round-trip fidelity with HighsModel",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "io/Filereader.h for base class interface",
+    "io/FilereaderMps.h for standard MPS format"
+  ]
+}

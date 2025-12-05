@@ -1,0 +1,22 @@
+{
+  "name": "Solver",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Solver.h",
+  "brief": "Main solver interface for convex MINLP problems\n\nPrimary entry point for the SHOT optimizer.",
+  "algorithms": [
+    {
+      "name": "Solution Strategies:\nMULTI-TREE (traditional):\n  - Solve MIP to optimality\n  - Add cuts at solution\n  - Re-solve MIP\n  - Iterate until gap closed\n\nSINGLE-TREE (lazy constraints):\n  - One MIP solve with callback\n  - At integer nodes: add lazy cuts\n  - More efficient for large problems\n\nECP (Extended Cutting Plane):\n  - Add cuts at LP solutions too\n  - Faster convergence but more cuts\n\nESH (Extended Supporting Hyperplane):\n  - Add cuts at interior points\n  - Better approximation quality",
+      "math": "",
+      "complexity": "- Each iteration: O(MIP) + O(NLP) for primal heuristic\n- Convergence: finite for convex MINLP, exponential worst case\n- Practice: often fast due to warm starts and cut reuse",
+      "ref": [
+        "Kronqvist, Lundell & Westerlund (2016). \"The Extended Supporting\n  Hyperplane Algorithm for Convex Mixed-Integer Nonlinear Programming\".\n  J. Global Optimization 64(2):249-272.\n\n**Solver Class:**\n- setProblem(): Load GAMS/AMPL/OSiL problem file\n- solveProblem(): Execute the selected solution strategy\n- getPrimalSolution(): Retrieve best incumbent solution\n\n**Solution Workflow:**\n1. Initialize settings (setOptionsFromFile/String)\n2. Load problem (setProblem)\n3. Solve (solveProblem)\n4. Retrieve results (getResultsOSrL, getPrimalSolution)\n\n**Callbacks:**\n- registerCallback(): Monitor NewPrimalSolution, UserTerminationCheck\n\n**Results Access:**\n- getCurrentDualBound(): Best lower bound\n- getPrimalBound(): Best upper bound (incumbent)\n- getAbsoluteObjectiveGap(): |primal - dual|\n- getRelativeObjectiveGap(): |primal - dual| / |primal|"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Environment.h for shared state container",
+    "SolutionStrategy/ISolutionStrategy.h for algorithm implementations"
+  ]
+}

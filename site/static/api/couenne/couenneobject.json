@@ -1,0 +1,20 @@
+{
+  "name": "CouenneObject",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneObject.hpp",
+  "brief": "Branching object for auxiliary variables w = f(x)\n\nDefines branching for auxiliary variables based on their infeasibility\n|w - f(x)|. Creates branches to restore feasibility of the relation.",
+  "algorithms": [
+    {
+      "name": "Branching Point Selection Strategies:\nWhere to branch affects convergence significantly.\n\n  MID_INTERVAL: brpt = \u03b1\u00b7l + (1-\u03b1)\u00b7x* + \u03b1\u00b7u\n    - Default safe choice, always creates meaningful subproblems\n    - \u03b1 parameter controls how much to pull toward midpoint\n\n  MIN_AREA: argmin_b Area(convenv on [l,b]) + Area(convenv on [b,u])\n    - Minimizes total relaxation gap over both children\n    - Requires knowledge of convex envelope structure\n\n  BALANCED: Balance improvement on both branches\n    - Aims for similar dual bound increase on both sides\n\n  LP_CENTRAL: brpt = x* (current LP solution value)\n    - Often good since LP suggests where \"action\" is\n\n  LP_CLAMPED: x* clamped to [l + \u03b5(u-l), u - \u03b5(u-l)]\n    - LP_CENTRAL but avoiding tiny subproblems near bounds",
+      "math": "For convex envelope gap:\n  Area = integral_l^u |f(x) - convenv(x)| dx\n  MIN_AREA minimizes sum of child areas",
+      "complexity": "infeasibility(): O(expression evaluation)\ngetBrPoint(): O(1) to O(envelope computation) depending on strategy",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneBranchingObject for the actual branch creation",
+    "CouenneChooseVariable for variable selection"
+  ]
+}

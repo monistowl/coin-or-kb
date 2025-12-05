@@ -1,0 +1,20 @@
+{
+  "name": "BonLinearCutsGenerator",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/QuadCuts/BonLinearCutsGenerator.hpp",
+  "brief": "Composite cut generator managing multiple linear cut generators\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.",
+  "algorithms": [
+    {
+      "name": "Frequency Control:\nBalance cut generation cost vs. bound improvement.\n\n  frequency = 1: Every node (expensive, tight bounds)\n  frequency = 10: Every 10 nodes (cheaper, weaker bounds)\n  frequency = 0: Disabled\n  frequency = -1: Root node only\n\nCommon frequency settings:\n  GMI cuts: frequent (usually 1-5)\n  MIR cuts: moderate (5-10)\n  Lift-and-project: rare (10-100, expensive)",
+      "math": "",
+      "complexity": "O(sum over generators of per-generator complexity)\nTotal work bounded by sum of individual generator complexities\nat their respective frequencies.\n\nAuthors: Pierre Bonami, IBM\nDate: October 6, 2007",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglCutGenerator for individual cut generator interface",
+    "BabSetupBase for cut generator configuration"
+  ]
+}

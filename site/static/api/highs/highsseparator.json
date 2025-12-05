@@ -1,0 +1,20 @@
+{
+  "name": "HighsSeparator",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsSeparator.h",
+  "brief": "Abstract base class for cut separators",
+  "algorithms": [
+    {
+      "name": "Cut Separator Interface\n\nDefines interface for generating cutting planes from LP relaxation.\n\n**Separator Types (string constants):**\n- kImplboundSepaString: Implied bound cuts from VUB/VLB\n- kCliqueSepaString: Clique cuts from conflict graph\n- kTableauSepaString: Tableau-based cuts (Gomory)\n- kPathAggrSepaString: Path aggregation cuts\n- kModKSepaString: Mod-k cuts\n\n**Abstract Interface:**\n- separateLpSolution(): Generate cuts from current LP solution\n  - lpRelaxation: Access to LP solution and basis\n  - lpAggregator: Row aggregation helper\n  - transLp: Transformed LP with bound substitutions\n  - cutpool: Destination for generated cuts\n\n**Statistics:**\n- numCutsFound: Total cuts generated\n- numCalls: Times separator was invoked\n- clockIndex: Timer index for profiling\n\n**Usage:**\n- run(): Wrapper that times and counts separateLpSolution()\n- Subclasses implement specific cut types",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "mip/HighsSeparation.h for separator orchestration",
+    "mip/HighsCutPool.h for cut storage"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "HighsSpinMutex",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/parallel/HighsSpinMutex.h",
+  "brief": "Lightweight spin lock for short critical sections\n\nBusy-waits instead of blocking, ideal for short-held locks.\n\n**HighsSpinMutex Class:**\nSimple test-and-set spin lock:\n- flag: Atomic bool (false = unlocked)\n- try_lock(): Non-blocking lock attempt\n- lock(): Spin until acquired\n- unlock(): Release with release semantics\n\n**Spinning Strategy:**\n- yieldProcessor(): CPU hint during spin wait\n  - x86: _mm_pause() (reduces power, prevents pipeline stalls)\n  - Others: std::this_thread::yield()\n\n**TTAS Pattern:**\nTest-and-Test-and-Set for reduced bus traffic:\n1. Exchange to try acquiring\n2. If failed, spin on load (cache-local)\n3. Only retry exchange when flag appears free\n\n**When to Use:**\nPrefer over std::mutex when critical sections are very short\nand contention is low. Avoids syscall overhead.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "parallel/HighsTaskExecutor.h for task queue locking"
+  ]
+}

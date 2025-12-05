@@ -1,0 +1,13 @@
+{
+  "name": "HSimplexNla",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/HSimplexNla.h",
+  "brief": "Numerical linear algebra interface for simplex\n\nWraps HFactor with scaling, product-form updates, and iterate storage.\n\n**ProductFormUpdate:**\nStores basis updates as explicit \u03b7-vectors when HFactor update fails:\n- pivot_index/value[]: Pivot positions and values\n- start/index/value[]: Eta-file sparse storage\n- btran/ftran(): Apply product form to vectors\n- Allows continued solve after HFactor becomes unstable\n\n**SimplexIterate:**\nCheckpoint storage for basis state:\n- basis_: Basis column indices and status\n- invert_: Factorization representation\n- dual_edge_weight_[]: DSE weights for restoration\n\n**Scaling Operations:**\n- btranInScaledSpace/ftranInScaledSpace(): Solve in scaled coordinates\n- applyBasisMatrixColScale/RowScale(): Transform vectors\n- variableScaleFactor(): Individual column/row scales\n\n**Key Methods:**\n- invert(): Refactorize basis via HFactor\n- btran(): B^(-T) * rhs (row pricing)\n- ftran(): B^(-1) * rhs (column evaluation)\n- update(): Basis update with pivot\n- putInvert/getInvert(): Save/restore iterate state\n\n**Debug Support:**\n- debugCheckInvert(): Verify factorization accuracy\n- debugInvertResidualError(): Measure solution error",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "util/HFactor.h for LU factorization",
+    "simplex/HEkk.h for simplex kernel using HSimplexNla"
+  ]
+}

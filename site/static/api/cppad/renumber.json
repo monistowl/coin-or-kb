@@ -1,0 +1,9 @@
+{
+  "name": "renumber",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/renumber.hpp",
+  "brief": "Value graph: renumber",
+  "algorithms": [],
+  "methods": []
+}

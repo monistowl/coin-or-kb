@@ -1,0 +1,14 @@
+{
+  "name": "CglStored",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglCommon/CglStored.hpp",
+  "brief": "Cut generator that stores and replays previously found cuts\n\nInstead of computing cuts, CglStored maintains a collection of cuts\nfrom prior solves or other sources, and adds violated ones to the LP.\n\nUse cases:\n- Warm-starting branch-and-cut with cuts from a similar problem\n- Cut pool management across nodes in the search tree\n- Importing cuts computed externally or in a preprocessing phase\n- Debugging by replaying a known cut sequence\n\nCut selection:\n- Only adds cuts violated by more than requiredViolation_ (default 1e-5)\n- Violation = constraint LHS evaluated at current LP solution\n- Avoids adding nearly-satisfied cuts that waste basis updates\n\nCan also store:\n- Best known solution (for primal bounds)\n- Tight variable bounds (from probing/preprocessing)\n- Probing implication information (CglTreeProbingInfo)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglCutGenerator for the base interface",
+    "CglTreeProbingInfo for implication data from probing",
+    "OsiCuts for the cut collection interface"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "DualSolver",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/DualSolver.h",
+  "brief": "MIP-based dual bound computation via supporting hyperplanes\n\nManages the linearization-based dual problem.",
+  "algorithms": [
+    {
+      "name": "Integer Cuts (No-Good Cuts):\nExclude previously found integer solutions.\n\n  For integer solution y*:\n    sum_{j: y*_j=1} (1-y_j) + sum_{j: y*_j=0} y_j >= 1\n\n  Forces at least one integer variable to change.\n  Used when NLP subproblem is infeasible.",
+      "math": "Dual bound at iteration k:\n  z_D^k = optimal value of MIP with k hyperplanes\n  z_D^k <= z_D^(k+1) <= z* (monotone non-decreasing)\n\n**DualSolver Class:**\n- MIPSolver: Backend MIP solver (CPLEX/Gurobi/CBC/HiGHS)\n- generatedHyperplanes: All cutting planes added\n- hyperplaneWaitingList: Pending cuts to add\n\n**Hyperplane Management:**\n- addHyperplane(): Add supporting hyperplane cut\n- addGeneratedHyperplane(): Record a hyperplane\n- hasHyperplaneBeenAdded(): Avoid duplicate cuts\n\n**Integer Cuts:**\n- addIntegerCut(): Add no-good cuts for MINLP\n- generatedIntegerCuts: All integer cuts\n\n**Interior Points:**\n- interiorPointCandidates: Candidate interior points\n- interiorPts: Verified interior points for ESH",
+      "complexity": "- Hyperplane addition: O(n) per cut (n = variables)\n- Duplicate check: O(1) via hash\n- MIP solve: depends on backend solver",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "PrimalSolver.h for primal bound computation",
+    "MIPSolver/ for backend implementations"
+  ]
+}

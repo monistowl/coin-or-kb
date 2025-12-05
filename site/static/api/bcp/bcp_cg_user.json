@@ -1,0 +1,21 @@
+{
+  "name": "BCP_cg_user",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_cg_user.hpp",
+  "brief": "User customization interface for Cut Generator process",
+  "algorithms": [
+    {
+      "name": "Cut Generator User Interface for Custom Separation\n\nBCP_cg_user is the base class for user-defined cut generation in\na separate process. Users derive and override virtual methods.\n\n**Key methods to override:**\n- unpack_module_data(): Receive initialization from TM\n- unpack_primal_solution(): Receive LP solution\n- generate_cuts(): Main cut generation logic\n\n**Usage pattern:**\n1. LP sends primal solution to CG process\n2. CG unpacks solution via unpack_primal_solution()\n3. generate_cuts() finds violated inequalities\n4. For each cut found, call send_cut() to send to LP\n\n**Informational methods:**\n- upper_bound(): Current best solution value\n- current_phase/level/index/iteration(): Search position\n- get_param()/set_param(): BCP_cg_par parameters\n\n**When to use CG process:**\nUse when cut generation is computationally expensive and\nbenefits from separate process or distributed computation.\nFor cheap cuts, generate locally in BCP_lp_user instead.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_cg.hpp for Cut Generator process internals",
+    "BCP_lp_user for LP-side cut generation",
+    "BCP_cg_param.hpp for CG parameters"
+  ]
+}

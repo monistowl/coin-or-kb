@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicDW",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicDW.hpp",
+  "brief": "Dantzig-Wolfe decomposition based heuristic\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDW: Advanced heuristic exploiting block structure.\nVery compute-intensive - detects and exploits Dantzig-Wolfe\ndecomposable structure in the constraint matrix.",
+  "algorithms": [
+    {
+      "name": "Dantzig-Wolfe Decomposition Heuristic:\n  solution() exploits block-angular structure:\n  1. findStructure(): Detect blocks via matrix analysis.\n  2. setupDWStructures(): Create master + subproblem structure.\n  3. For each block k: Solve MIP subproblem for proposals.\n  4. addDW(): Add block solutions as columns to master.\n  5. Solve master (convexity + linking constraints).\n  6. If fractional, apply heuristics; iterate via callback.\n  fingerPrint_ tracks integer patterns for diversity.",
+      "math": "Dantzig-Wolfe reformulation:\n  Original: min c^T x, Ax \u2264 b, D_k x_k \u2264 d_k (block constraints).\n  Master: min \u03a3\u03bb_j (c^T x^j), \u03a3\u03bb_j (Ax^j) \u2264 b, \u03a3\u03bb_j = 1 per block.\n  x^j are extreme points of block polyhedra.\n  Subproblems: min (c - \u03c0^T A) x_k s.t. D_k x_k \u2264 d_k.\n  Column generation adds proposals dynamically.\n  affinity_ guides block solution combination.\n\nAlgorithm:\n1. findStructure() detects block-angular structure\n2. setupDWStructures() prepares decomposition data\n3. Solves subproblems by block (numberBlocks_)\n4. Combines block solutions via master problem\n5. Callback mechanism for customization (functionPointer_)\n\nKey data structures:\n- whichRowBlock_/whichColumnBlock_: Block membership\n- fingerPrint_: Bitmask for integer patterns per block\n- affinity_: Block similarity for combination\n- dwSolver_: DW master problem solver\n\nParameters controllable via setters:\n- nNeeded_/nNodes_: Search intensity\n- numberPasses_/numberBadPasses_: Iteration limits",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for base class",
+    "CbcHeuristicRINS for simpler neighborhood search"
+  ]
+}

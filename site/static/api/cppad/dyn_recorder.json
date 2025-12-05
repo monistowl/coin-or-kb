@@ -1,0 +1,9 @@
+{
+  "name": "dyn_recorder",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/record/dyn_recorder.hpp",
+  "brief": "Operation recording: dyn_recorder",
+  "algorithms": [],
+  "methods": []
+}

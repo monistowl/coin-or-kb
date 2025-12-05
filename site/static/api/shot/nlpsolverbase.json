@@ -1,0 +1,13 @@
+{
+  "name": "NLPSolverBase",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/NLPSolver/NLPSolverBase.h",
+  "brief": "Base implementation for NLP solver interface\n\nProvides shared solve logic for all NLP solvers.\n\n**NLPSolverBase Class:**\n- solveProblem(): Template method calling solveProblemInstance()\n- Derived classes implement solveProblemInstance() hook\n\n**Inheritance:**\n- Virtually inherits from INLPSolver\n- Used with multiple inheritance (NLPSolverIpoptRelaxed)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "INLPSolver.h for interface contract",
+    "NLPSolverIpoptBase.h for Ipopt implementation"
+  ]
+}

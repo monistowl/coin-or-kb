@@ -1,0 +1,9 @@
+{
+  "name": "IpIpoptApplication",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "thirdparty/Ipopt/include/coin/IpIpoptApplication.hpp",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

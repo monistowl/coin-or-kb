@@ -1,0 +1,9 @@
+{
+  "name": "to_json",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/graph/to_json.hpp",
+  "brief": "Core AD functionality: to json",
+  "algorithms": [],
+  "methods": []
+}

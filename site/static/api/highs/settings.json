@@ -1,0 +1,9 @@
+{
+  "name": "settings",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/settings.hpp",
+  "brief": "HiGHS QP solver settings\n\nParameter settings for QUASS QP solver.\nTolerances, iteration limits, and algorithm options.",
+  "algorithms": [],
+  "methods": []
+}

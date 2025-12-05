@@ -1,0 +1,24 @@
+{
+  "name": "CglMixedIntegerRounding",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglMixedIntegerRounding/CglMixedIntegerRounding.hpp",
+  "brief": "Mixed Integer Rounding (MIR) cuts via Marchand-Wolsey procedure",
+  "algorithms": [
+    {
+      "name": "c-MIR (Complemented Mixed Integer Rounding):\nStrengthened Gomory cuts via row aggregation and bound substitution.\nGiven mixed-integer set S = {(x,y) : \u03a3a_j x_j + \u03a3b_j y_j \u2264 \u03b2, x \u2265 0, y \u2208 Z}:\n1. Aggregate rows to obtain base inequality with good fractionality\n2. Substitute bounds: replace continuous x_j by VUB x_j \u2264 d_j z_j\n3. Apply MIR function to derive valid cut",
+      "math": "The MIR inequality for a_j x_j + b_j y_j \u2264 \u03b2 where y integer:\nLet f = \u03b2 - \u230a\u03b2\u230b (fractional part of RHS), f_j = b_j - \u230ab_j\u230b\nMIR cut: \u03a3_{f_j\u2264f} \u230ab_j\u230by_j + \u03a3_{f_j>f} (\u230ab_j\u230b + (f_j-f)/(1-f))y_j + (1/(1-f))\u03a3a_j x_j \u2264 \u230a\u03b2\u230b\n\nThe G-function used for coefficient strengthening:\nG(d,f) = \u230ad\u230b if frac(d) \u2264 f, else \u230ad\u230b + (frac(d)-f)/(1-f)\n\nBound substitution: For continuous x_j with VUB x_j \u2264 d_j z_j,\nsubstitute x_j = d_j z_j - s_j (s_j \u2265 0 slack) to convert to integer.",
+      "complexity": "Preprocessing: O(m\u00b7n) to classify rows and find VUB/VLBs.\nCut generation: O(m\u00b7MAXAGGR + n) per source row where MAXAGGR is small constant.\nTotal: O(m\u00b2\u00b7MAXAGGR + m\u00b7n) per generateCuts() call.",
+      "ref": [
+        "Marchand & Wolsey (2001). \"Aggregation and Mixed Integer Rounding to\n  Solve MIPs\". Operations Research 49(3):363-371. [Original c-MIR paper]",
+        "Nemhauser & Wolsey (1988). \"Integer and Combinatorial Optimization\".\n  Wiley. Section II.4: MIR inequalities. [Foundation]",
+        "Wolsey (1998). \"Integer Programming\". Wiley. Chapter 8. [Textbook treatment]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglMixedIntegerRounding2 for alternative implementation",
+    "CglGomory for the base Gomory cuts MIR generalizes"
+  ]
+}

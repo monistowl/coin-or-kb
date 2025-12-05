@@ -1,0 +1,13 @@
+{
+  "name": "CplexProgram",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/CplexProgram.h",
+  "brief": "IBM CPLEX solver interface for LP/MIP/QP problems\n\nAdapts Gravity models to the IBM ILOG CPLEX C++ API.\n\n**CplexProgram Class:**\n- _cplex_env: IloEnv (CPLEX environment)\n- _cplex_model: IloModel (CPLEX model)\n- _cplex_vars: Mapping from Gravity vars to IloNumVarArray\n\n**Model Building:**\n- prepare_model(): Initial conversion from Gravity\n- fill_in_cplex_vars(): Create IloNumVar for each variable\n- create_cplex_constraints(): Add constraints\n- set_cplex_objective(): Set objective function\n\n**Solving:**\n- solve(relax, mipgap): Optimize with optional LP relaxation\n- warm_start(): Initialize from current solution\n- relax_model(): Remove integrality constraints\n\n**Callback Support:**\n- _cplex_contextmask: Context for callback location\n- create_callback(): Set up user callbacks",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/solver.h for unified solver dispatch",
+    "gravity/model.h for Gravity model definition"
+  ]
+}

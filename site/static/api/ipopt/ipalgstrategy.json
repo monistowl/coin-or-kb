@@ -1,0 +1,20 @@
+{
+  "name": "IpAlgStrategy",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpAlgStrategy.hpp",
+  "brief": "Base class for all pluggable algorithm components\n\nAlgorithmStrategyObject is the abstract base for Ipopt's Strategy pattern\nimplementation. All pluggable algorithm components inherit from this:\n- LineSearch, MuUpdate, ConvergenceCheck\n- SearchDirectionCalculator, HessianUpdater\n- PDSystemSolver, AugSystemSolver",
+  "algorithms": [
+    {
+      "name": "Strategy Pattern with Template Method:\n  Initialize() = template method with invariant structure:\n    1. Store references to shared objects (Journalist, NLP, Data, CQ).\n    2. Call InitializeImpl() (subclass-specific hook).\n    3. Return success/failure status.\n  Ensures consistent initialization across all algorithm components.\n  ReducedInitialize() variant for components not requiring full IPM context.",
+      "math": "Dependencies injected at runtime:\n  - IpoptNLP: problem definition (f, c, d, bounds, Hessian).\n  - IpoptData: iterate storage (x, s, y, z) and algorithm state.\n  - IpoptCalculatedQuantities: cached derived values (\u2207f, J, residuals).\n  Separation allows testing and alternative problem formulations.",
+      "complexity": "O(1) for Initialize() overhead (pointer copies).\n  Actual work delegated to InitializeImpl() in each strategy.\n  Builder (IpAlgBuilder) composes O(10-20) strategy objects per run.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpAlgBuilder.hpp for strategy composition",
+    "IpIpoptAlg.hpp for strategy usage"
+  ]
+}

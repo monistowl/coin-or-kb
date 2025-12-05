@@ -1,0 +1,13 @@
+{
+  "name": "edfclasses",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/edfclasses.h",
+  "brief": "Object-oriented interface for external differentiated functions\n\nProvides C++ class-based wrappers for external functions with user-supplied\nderivatives. Inherit from these base classes to integrate external code\n(e.g., legacy Fortran, optimized BLAS, specialized solvers) into AD.\n\n**Classes:**\n- EDFobject: Basic external function with fixed array sizes\n- EDFobject_iArr: External function with integer array parameters\n- EDFobject_v2: Version 2 interface with variable-size arrays and context\n\n**Required overrides:**\n- function(): Evaluate the external function\n- zos_forward(): Zero-order scalar (function evaluation during taping)\n- fos_forward(): First-order scalar forward mode\n- fov_forward(): First-order vector forward mode\n- fos_reverse(): First-order scalar reverse mode\n- fov_reverse(): First-order vector reverse mode",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "externfcts.h for C-style external function interface",
+    "externfcts2.h for v2 C-style interface"
+  ]
+}

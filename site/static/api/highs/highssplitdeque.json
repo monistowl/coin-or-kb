@@ -1,0 +1,13 @@
+{
+  "name": "HighsSplitDeque",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/parallel/HighsSplitDeque.h",
+  "brief": "Chase-Lev work-stealing deque with split point optimization\n\nLock-free concurrent deque enabling efficient task-parallel execution.\n\n**Chase-Lev Deque:**\n- Owner pushes/pops from head (LIFO for locality)\n- Thieves steal from tail (FIFO for load balancing)\n- Single-word CAS for conflict resolution\n\n**Split Point Optimization:**\n- tail/split packed in 64-bit atomic (ts)\n- Split divides deque: [tail, split) available for stealing\n- Owner controls split growth via growShared()/shrinkShared()\n- Reduces contention when deque not fully shared\n\n**Memory Layout (Cache-Aligned):**\n- OwnerData (64B): head, split copy, workers, RNG\n- splitRequest (64B): Flag for thieves requesting more work\n- StealerData (64B): semaphore, injectedTask, ts atomic\n- WorkerBunkData (64B): nextSleeper for sleep stack\n- taskArray: 8192 task slots\n\n**WorkerBunk:**\n- Global sleep/wake coordination across workers\n- Lock-free sleeper stack with ABA-safe CAS\n- publishWork(): Wake sleepers when work available\n\n**Pop Status:**\n- kEmpty: No tasks\n- kStolen: Task was stolen, need sync\n- kWork: Task available for execution\n- kOverflown: Queue full, task executed inline",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "parallel/HighsTaskExecutor.h for executor using this deque",
+    "parallel/HighsTask.h for task representation"
+  ]
+}

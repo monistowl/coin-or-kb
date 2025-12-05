@@ -1,0 +1,9 @@
+{
+  "name": "OSnLNode",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSCommonInterfaces/OSnLNode.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

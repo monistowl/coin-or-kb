@@ -1,0 +1,24 @@
+{
+  "name": "OsiRowCut",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiRowCut.hpp",
+  "brief": "Row-based cutting plane (linear inequality)\n\nRow cuts are the most common form of cutting planes, representing\na linear inequality constraint: lb <= a'x <= ub",
+  "algorithms": [
+    {
+      "name": "Cutting Planes in MIP:\nLinear inequalities that cut off fractional LP solutions without\nremoving any integer-feasible points.\n\nCUT VALIDITY:\nA cut a'x \u2264 b is valid if it satisfies all integer solutions:\n  \u2200x \u2208 S_I : a'x \u2264 b (where S_I is feasible integer set)\n\nCUT EFFECTIVENESS:\n- Violated: a'x* > b for current LP solution x*\n- Depth: (a'x* - b) / \u2016a\u2016 (normalized distance from hyperplane)\n- Efficacy: violation per unit norm, used for ranking cuts\n\nCOMMON CUT FAMILIES:\n- Gomory cuts: From LP simplex tableau non-integrality\n- MIR (Mixed-Integer Rounding): Round coefficients to strengthen\n- Knapsack covers: From single-row knapsack structure\n- Clique/odd-cycle: From conflict graph analysis\n- Flow covers: From network flow structure\n- Lift-and-project: From disjunctive arguments",
+      "math": "Cut inequality:\nlb \u2264 \u03a3\u1d62 a\u1d62\u00b7x\u1d62 \u2264 ub\n\nViolation at LP solution x*: v = max(lb - a'x*, a'x* - ub, 0)\nEfficacy: e = v / \u2016a\u2016\u2082",
+      "complexity": "- Violation check: O(nnz) where nnz = nonzeros in cut\n- Add to LP: O(nnz) for coefficient insertion\n- Storage: O(nnz) sparse representation",
+      "ref": [
+        "Nemhauser & Wolsey (1988). \"Integer and Combinatorial Optimization\".\n  Chapter II.1 on valid inequalities."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiCut for base class",
+    "OsiCuts for cut pool management",
+    "Cgl (Cut Generation Library) for cut generators",
+    "CoinPackedVector for sparse row representation"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "HighsMemoryAllocation",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsMemoryAllocation.h",
+  "brief": "Utilities for memory allocation that return true if successful",
+  "algorithms": [],
+  "methods": []
+}

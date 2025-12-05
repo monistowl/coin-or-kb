@@ -1,0 +1,13 @@
+{
+  "name": "TaskTerminate",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskTerminate.h",
+  "brief": "Signals end of optimization algorithm\n\nFinal task that stops the main loop.\n\n**TaskTerminate Class:**\n- run(): Set termination flag in TaskHandler\n\n**Called When:**\n- Optimal solution found (gap closed)\n- Resource limit exceeded (time, iteration)\n- Infeasibility proven",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskGoto.h for jump to termination",
+    "TaskHandler.h for loop control"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "op2arg_index",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/op2arg_index.hpp",
+  "brief": "Value graph: op2arg_index",
+  "algorithms": [],
+  "methods": []
+}

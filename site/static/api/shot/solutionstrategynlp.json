@@ -1,0 +1,19 @@
+{
+  "name": "SolutionStrategyNLP",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/SolutionStrategy/SolutionStrategyNLP.h",
+  "brief": "Direct NLP solver for continuous problems\n\nBypasses ESH for purely continuous NLP problems.\n\n**SolutionStrategyNLP Class:**\n- initializeStrategy(): Configure for direct NLP solve\n- solveProblem(): Single NLP solver call (Ipopt)\n\n**Use Case:**\n- Problems with no integer variables\n- Convex NLP where outer approximation is unnecessary\n- Falls back to standard NLP solvers (Ipopt)\n\n**When Selected:**\n- Problem type is NLP (no discrete variables)\n- Simpler than ESH for continuous problems",
+  "algorithms": [
+    {
+      "name": "Direct interior point NLP solve",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "NLPSolver/NLPSolverIpoptBase.h for Ipopt wrapper"
+  ]
+}

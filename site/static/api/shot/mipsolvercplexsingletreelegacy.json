@@ -1,0 +1,12 @@
+{
+  "name": "MIPSolverCplexSingleTreeLegacy",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/MIPSolverCplexSingleTreeLegacy.h",
+  "brief": "Legacy CPLEX callback API for single-tree ESH\n\nUses older callback API (pre-CPLEX 12.10 generic callbacks).\n\n**Legacy Callback Classes:**\n- HCallbackI: Heuristic callback for primal solutions\n- InfoCallbackI: Progress information callback\n- CtCallbackI: Lazy constraint callback for hyperplanes\n\n**MIPSolverCplexSingleTreeLegacy Class:**\n- Inherits MIPSolverCplex for base functionality\n- Uses IloCplex::LazyConstraintCallbackI/HeuristicCallbackI\n\n@deprecated Prefer MIPSolverCplexSingleTree with generic callbacks",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "MIPSolverCplexSingleTree.h for modern callback API"
+  ]
+}

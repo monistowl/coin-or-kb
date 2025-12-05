@@ -1,0 +1,22 @@
+{
+  "name": "ClpQuadraticObjective",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpQuadraticObjective.hpp",
+  "brief": "Quadratic objective function for convex QP (x'Qx/2 + c'x)\n\nImplements convex quadratic objectives for quadratic programming.\nThe quadratic term is stored as a CoinPackedMatrix Q, supporting\nboth full symmetric and half (lower triangular) storage.",
+  "algorithms": [
+    {
+      "name": "Line Search for QP:\nGiven direction \u0394x, find \u03b8* = argmin_{\u03b8\u22650} f(x + \u03b8\u0394x):\n  f(x + \u03b8\u0394x) = f(x) + \u03b8\u00b7\u2207f(x)'\u0394x + (\u03b8\u00b2/2)\u00b7\u0394x'Q\u00b7\u0394x\n\nIf \u0394x'Q\u0394x > 0 (descent in strictly convex direction):\n  \u03b8* = -\u2207f(x)'\u0394x / (\u0394x'Q\u0394x)\nElse (linear along \u0394x):\n  \u03b8* = maximumTheta (go to bound)\n\nMATRIX STORAGE:\n  fullMatrix_ = false: Lower triangular only (Q_ij stored for i \u2265 j)\n  fullMatrix_ = true: Full symmetric (both Q_ij and Q_ji stored)",
+      "math": "PROBLEM FORMULATION:\n  minimize    (1/2)x'Qx + c'x\n  subject to  Ax = b, l \u2264 x \u2264 u\n\nwhere Q \u2208 \u211d\u207f\u02e3\u207f is symmetric positive semi-definite (PSD).\nQ PSD \u27fa x'Qx \u2265 0 for all x \u27fa all eigenvalues \u2265 0.",
+      "complexity": "Gradient evaluation: O(nnz(Q)) per iteration\n  Line search: O(nnz(Q)) for computing \u0394x'Q\u0394x",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpObjective for the abstract objective interface",
+    "ClpLinearObjective for linear-only objectives",
+    "ClpSimplexNonlinear for QP simplex variants",
+    "ClpInterior for interior point QP solving"
+  ]
+}

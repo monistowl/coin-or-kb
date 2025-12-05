@@ -1,0 +1,13 @@
+{
+  "name": "HighsTaskExecutor",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/parallel/HighsTaskExecutor.h",
+  "brief": "Work-stealing thread pool for task parallelism\n\nManages worker threads and coordinates task execution via work stealing.\n\n**Thread Pool:**\n- Main thread (worker 0) + N-1 spawned workers\n- Each worker has own HighsSplitDeque for local tasks\n- Thread-local storage for current worker's deque\n\n**Work Stealing Loop:**\n- random_steal_loop(): Try stealing from random victims\n  - Exponential backoff with microsecond timing\n  - Falls back to global sync after timeout\n- Workers sleep when no work available (WorkerBunk)\n\n**Stolen Task Sync:**\n- sync_stolen_task(): Wait for task stolen by another worker\n  - Leapfrog stealing: steal from the stealer\n  - Spin wait with exponential backoff\n  - Sleep with notification when timeout exceeded\n\n**Lifecycle:**\n- initialize(): Create executor singleton\n- shutdown(): Stop all workers, join or detach threads\n- ExecutorHandle: RAII cleanup on thread exit",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "parallel/HighsSplitDeque.h for deque implementation",
+    "parallel/HighsParallel.h for high-level API"
+  ]
+}

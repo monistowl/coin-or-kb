@@ -1,0 +1,14 @@
+{
+  "name": "DcoConGenerator",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoConGenerator.hpp",
+  "brief": "Abstract base class for constraint/cut generators\n\nDcoConGenerator provides the interface for generating cutting planes\n(constraints) during the branch-and-cut algorithm.\n\n**Generator Hierarchy:**\n- DcoConGenerator (ABC)\n  - DcoLinearConGenerator: Wraps CglCutGenerator (MILP cuts)\n  - DcoConicConGenerator: Wraps CglConicCutGenerator (OA cuts)\n\n**Statistics (DcoConGeneratorStats):**\n- numConsGenerated_: Total cuts generated\n- numConsUsed_: Cuts that were actually added\n- time_: CPU time consumed\n- numCalls_: Times generator was invoked\n- numNoConsCalls_: Calls producing no cuts\n\n**Control Parameters:**\n- strategy_: None, Root, Auto, Periodic\n- frequency_: How often to call (1 = every node)\n\n**Pure Virtual:**\n- generateConstraints(): Populate BcpsConstraintPool",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoLinearConGenerator.hpp for MILP cuts",
+    "DcoConicConGenerator.hpp for conic OA cuts",
+    "DcoModel.hpp::conGenerators_ for storage"
+  ]
+}

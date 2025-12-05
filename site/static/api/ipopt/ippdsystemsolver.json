@@ -1,0 +1,24 @@
+{
+  "name": "IpPDSystemSolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpPDSystemSolver.hpp",
+  "brief": "Abstract interface for solving the full primal-dual KKT system\n\nPDSystemSolver defines the interface for solving the 8x8 block\nprimal-dual linear system that arises at each Newton iteration:\n\n  [W    0   Jc^T  Jd^T  -Px_L  Px_U   0     0   ] [dx  ]   [rx  ]\n  [0    0    0    -I     0     0    -Pd_L  Pd_U ] [ds  ]   [rs  ]\n  [Jc   0    0     0     0     0     0     0   ] [dyc ] = [rc  ]\n  [Jd  -I    0     0     0     0     0     0   ] [dyd ]   [rd  ]\n  [Zl  Px_L^T ...                              ] [dzL ]   [rzL ]\n  [...]                                          [dzU ]   [rzU ]\n  [...]                                          [dvL ]   [rvL ]\n  [...]                                          [dvU ]   [rvU ]\n\nImplementations typically reduce this to the 4x4 augmented system\nby eliminating the bound multiplier equations, then solve via\nAugSystemSolver. The key implementation is PDFullSpaceSolver.",
+  "algorithms": [
+    {
+      "name": "Primal-Dual Interior Point Newton System:\nThis 8\u00d78 block system represents one Newton step for the perturbed\nKKT conditions of the barrier problem. The system encodes:\n- Rows 1-2: Gradient of Lagrangian (stationarity)\n- Rows 3-4: Constraint feasibility (primal feasibility)\n- Rows 5-8: Complementarity conditions (XZe = \u03bce perturbed)",
+      "math": "Full KKT system for barrier NLP min f(x) s.t. c(x)=0, x\u22650:\n[\u2207\u00b2L   -A\u1d40   -I  ] [\u0394x]   [-\u2207f + A\u1d40\u03bb + \u03bc/x]\n[ A     0    0  ] [\u0394\u03bb] = [-c(x)          ]\n[ Z     0    X  ] [\u0394z]   [-XZe + \u03bce      ]\n\nwhere L = f - \u03bb\u1d40c - z\u1d40x is the Lagrangian, Z = diag(z), X = diag(x).\nThe 8\u00d78 form handles inequality constraints and slack variables.\n\nStandard reduction: eliminate \u0394z = X\u207b\u00b9(\u03bce - Z\u0394x - XZe) to get\naugmented system with (\u2207\u00b2L + X\u207b\u00b9Z) in the (1,1) block.",
+      "complexity": "Per Newton iteration: O(n\u00b3) for dense factorization,\nO(nnz + n\u00b7fill) for sparse factorization where fill depends on\nsparsity structure. Typically dominated by matrix factorization.",
+      "ref": [
+        "W\u00e4chter & Biegler (2006). \"On the implementation of an interior-point\n  filter line-search algorithm for large-scale nonlinear programming\".\n  Mathematical Programming 106(1):25-57. [Ipopt algorithm paper]",
+        "Nocedal & Wright (2006). \"Numerical Optimization\". 2nd ed. Springer.\n  Chapter 19: Interior point methods. [Textbook treatment]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpPDFullSpaceSolver.hpp for the main implementation",
+    "IpAugSystemSolver.hpp for the reduced 4x4 system",
+    "IpIteratesVector.hpp for the rhs/solution structure"
+  ]
+}

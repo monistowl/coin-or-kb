@@ -1,0 +1,9 @@
+{
+  "name": "CoinSignal",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinSignal.hpp",
+  "brief": "Cross-platform signal handler typedef (CoinSighandler_t)",
+  "algorithms": [],
+  "methods": []
+}

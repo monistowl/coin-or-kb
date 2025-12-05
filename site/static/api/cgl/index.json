@@ -1,0 +1,191 @@
+{
+  "library": "Cgl",
+  "layer": "layer-2",
+  "classes": [
+    {
+      "name": "Cgl012cut",
+      "brief": "Low-level C-style implementation for {0,1/2}-cut separation\nCopyright (C) 2010, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglAllDifferent",
+      "brief": "All-different constraint propagation for CSP-style constraints\n\nPropagates all-different constraints: variables in a set must all\ntake different integer values. Common in constraint satisfaction\nproblems (CSP) mapped to MIP.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglBKClique",
+      "brief": "Clique cut separator using Bron-Kerbosch algorithm",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglClique",
+      "brief": "Clique cuts from set packing structure\n\nGenerates clique inequalities by finding maximal cliques in the\nconflict graph of binary variables. Two binaries conflict if they\ncannot both be 1 in any feasible solution.\n\nClique inequality: sum_{j in C} x_j <= 1 (or = 1 if equality)\n\nGraph construction (frac_graph):\n- Nodes: Binary variables at fractional LP values\n- Edges: Variables that conflict (appear in same set packing row)\n- Edge costs: 1 - x_i - x_j (for odd hole detection)\n\nTwo clique-finding methods:\n1. Star clique (do_star_clique):\n   - Pick a center node, find all neighbors (star)\n   - Enumerate maximal cliques in the star\n   - SCL_MIN_DEGREE/MAX_DEGREE/MAX_XJ_MAX_DEG selection rules\n2. Row clique (do_row_clique):\n   - Start from existing set packing row\n   - Extend to larger clique using adjacent variables\n\nThresholds:\n- scl_candidate_length_threshold: Max size for exact enumeration\n- rcl_candidate_length_threshold: Same for row clique method\n- Beyond threshold: use greedy heuristic\n\nCglFakeClique (derived class):\n- Works on \"fake\" solver with invented rows from probing\n- Integrates with CglProbing for stronger implications",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglCliqueStrengthening",
+      "brief": "Preprocessing to extend and merge clique constraints",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglCutGenerator",
+      "brief": "Abstract base class for all CGL cutting plane generators\n\nDefines the interface that all cut generators must implement. In MIP\nbranch-and-cut, cutting planes tighten the LP relaxation to cut off\nfractional solutions while keeping all integer-feasible points.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglDuplicateRow",
+      "brief": "Detect and eliminate duplicate/dominated rows\n\nPreprocessing generator that identifies:\n- Duplicate rows (identical constraints)\n- Dominated rows (one implies another)\n- Variables fixable due to coefficient > effective RHS\n\nDesigned for problems with few rows, many integer variables,\n<= or == constraints, and small integer coefficients/RHS.\n\nduplicate_ array interpretation:\n- -1: Row still active\n- -2: Row removed (all variables fixed)\n- k >= 0: Row is same as row k\n\nModes (mode_):\n- 1: Process rows only\n- 2: Process columns only (dominated columns)\n- 3: Process both rows and columns\n- 4/8: Alternative algorithms\n\nAlgorithm for duplicate detection:\n- If row A is subset of row B with same effective RHS\n- Can fix variables in B not in A\n- Then rows become identical\n\nShould be called before first solve (preprocessing phase).",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglFlowCover",
+      "brief": "Lifted Simple Generalized Flow Cover cuts",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglGMI",
+      "brief": "Gomory Mixed-Integer cuts with numerical safety testing",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglGMIParam",
+      "brief": "Parameters for the GMI (Gomory Mixed-Integer) cut generator",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglGomory",
+      "brief": "Gomory mixed-integer cuts from optimal LP basis\n\nGenerates Gomory fractional cuts, the classic MIP cutting planes\nderived by Ralph Gomory in the 1950s-60s. For each fractional basic\nvariable, derives a valid inequality from the simplex tableau row.\n\nAlgorithm:\n1. Requires optimal LP basis (needsOptimalBasis() = true)\n2. For each basic integer variable with fractional value:\n   - Get tableau row: x_i + sum_j a_ij * x_j = b_i\n   - Apply fractional parts: sum_j f(a_ij)*x_j >= f(b_i)\n   - For mixed-integer: separate continuous/integer coefficients\n3. Strengthen using integrality of non-basic integers\n\nKey parameters:\n- limit_/limitAtRoot_: Max nonzeros in cut (dense cuts are expensive)\n- away_/awayAtRoot_: Min distance from integrality to generate cut\n- conditionNumberMultiplier_: Relax cut if basis is ill-conditioned\n- gomoryType_: 0=normal, 1=add original, 2=replace with original matrix\n\nNumerical considerations:\n- Basis condition number affects cut reliability\n- largestFactorMultiplier_ controls cut relaxation for stability\n- alternateFactorization_ uses different factorization for accuracy\n\nGomory cuts are finite and can solve pure integer programs in theory,\nbut numerically fragile. Modern solvers combine with other cuts.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglKnapsackCover",
+      "brief": "Knapsack cover cuts for binary packing constraints\n\nGenerates cover inequalities for knapsack constraints of the form\nsum_j a_j * x_j <= b where x_j are binary. A cover C is a subset\nwhere sum_{j in C} a_j > b, making x_j = 1 for all j in C infeasible.\n\nCover inequality: sum_{j in C} x_j <= |C| - 1\n\nAlgorithm phases:\n1. deriveAKnapsack(): Convert constraint to canonical binary knapsack\n2. Find minimal violated cover using:\n   - findExactMostViolatedMinCover(): Exact via Horowitz-Sahni\n   - findLPMostViolatedMinCover(): LP relaxation heuristic\n   - findGreedyCover(): Simple greedy heuristic\n3. Lifting: Strengthen cover to full-dimensional inequality\n   - liftCoverCut(): Sequence-independent lifting\n   - seqLiftAndUncomplementAndAdd(): Sequence-dependent lifting\n   - liftUpDownAndUncomplementAndAdd(): Up/down lifting for binaries\n\nAdditional features:\n- createCliques(): Build clique structure for probing\n- Horowitz-Sahni algorithm for exact knapsack solving\n- John-Ellis cover finding from OSL (IBM's solver)\n\nKey parameters:\n- maxInKnapsack_: Maximum variables in processed knapsack\n- expensiveCuts_: Enable/disable costly exact methods\n- rowsToCheck_: Restrict which rows to examine",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglLandP",
+      "brief": "Lift-and-Project cuts via simplex pivoting",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglLandPMessages",
+      "brief": "Message handler for Lift-and-Project simplex",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglLandPSimplex",
+      "brief": "Simplex algorithm for Lift-and-Project cut generation",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglLandPTabRow",
+      "brief": "Tableau row structure for Lift-and-Project simplex",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglLandPUtils",
+      "brief": "Utility functions for Lift-and-Project cut generation",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglLandPValidator",
+      "brief": "Cut validation and cleaning for Lift-and-Project",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglLiftAndProject",
+      "brief": "Lift-and-project cuts for 0-1 programming\n\nImplements lift-and-project cuts based on Balas, Ceria, and Cornuejols.\nCreates cuts by \"lifting\" the problem into higher dimensions where\nthe LP relaxation is tighter, then \"projecting\" back.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglMessage",
+      "brief": "Message definitions for CGL cut generators\n\nDefines CGL_Message enum codes and CglMessage class for\ninternationalized message output through CoinMessageHandler.\n\nMessage categories:\n- Infeasibility detection: CGL_INFEASIBLE, CGL_UNBOUNDED\n- Preprocessing results: CGL_FIXED, CGL_MADE_INTEGER, CGL_ADDED_INTEGERS\n- Statistics: CGL_PROCESS_STATS, CGL_PROCESS_STATS2\n- Clique processing: CGL_CLIQUES, CGL_PROCESS_CLQSTR, CGL_WARNING_CLQSTR\n- SOS handling: CGL_PROCESS_SOS1, CGL_PROCESS_SOS2\n- Postsolve: CGL_POST_INFEASIBLE, CGL_POST_CHANGED\n- Matrix changes: CGL_ELEMENTS_CHANGED1, CGL_ELEMENTS_CHANGED2",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglMixedIntegerRounding",
+      "brief": "Mixed Integer Rounding (MIR) cuts via Marchand-Wolsey procedure",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglMixedIntegerRounding2",
+      "brief": "Enhanced MIR (Mixed Integer Rounding) cut generator",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglOddHole",
+      "brief": "Odd hole cuts from conflict graphs\n\nGenerates odd hole inequalities based on the method from\nGrotschel, Lovasz, and Schrijver (1988). An odd hole is a\nchordless cycle of odd length in the conflict graph.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglOddWheel",
+      "brief": "Odd-wheel cut separator (odd cycles with lifting)",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglParam",
+      "brief": "Base parameter class for cut generator configuration",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglPreProcess",
+      "brief": "MIP preprocessing with cut generator integration\n\nComprehensive MIP preprocessing that combines OsiPresolve with\ncut generators to strengthen the formulation before branch-and-cut.\nUnlike simple presolve, can add cuts that replace/strengthen constraints.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglProbing",
+      "brief": "Probing cut generator - variable fixing and implications\n\nProbing systematically tests setting integer variables to bounds,\npropagating implications to derive:\n- Variable fixings (column cuts)\n- Bound tightenings\n- Disaggregation cuts (row cuts)\n- Coefficient strengthening\n- Clique structures\n\nProbing outcomes when testing x_j = 0 vs x_j = 1:\n1. One direction infeasible \u2192 fix variable (column cut)\n2. Both infeasible \u2192 problem infeasible\n3. Both feasible, y fixed same way \u2192 y can be fixed\n4. Both feasible, y fixed opposite \u2192 can substitute y = 1-x_j\n5. Constraint went slack by c \u2192 strengthen coefficient\n\nKey structures:\n- disaggregationAction: What gets fixed when probing a variable\n- cutVector_: Stores implications for each integer\n- Clique arrays: oneFixStart_, zeroFixStart_ for clique membership\n\nModes:\n- mode_ 0: Only unsatisfied integers, use snapshot (fast, global)\n- mode_ 1: Unsatisfied integers with current bounds\n- mode_ 2: All integers with current bounds\n\nCglImplication (separate class):\n- Generates cuts directly from stored implication info\n- Uses CglTreeProbingInfo built during probing",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglRedSplit",
+      "brief": "Reduce-and-Split cuts for enhanced Gomory generation",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglRedSplit2",
+      "brief": "Enhanced Reduce-and-Split cuts with multiple strategies",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglRedSplit2Param",
+      "brief": "Parameters for the enhanced Reduce-and-Split cut generator",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglRedSplitParam",
+      "brief": "Parameters for the Reduce-and-Split cut generator",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglResidualCapacity",
+      "brief": "Residual capacity cuts for network design",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglSimpleRounding",
+      "brief": "Simple rounding cuts via GCD (greatest common divisor)\n\nGenerates simple rounding cuts using the GCD method from\nNemhauser and Wolsey (1988, p.211).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglStored",
+      "brief": "Cut generator that stores and replays previously found cuts\n\nInstead of computing cuts, CglStored maintains a collection of cuts\nfrom prior solves or other sources, and adds violated ones to the LP.\n\nUse cases:\n- Warm-starting branch-and-cut with cuts from a similar problem\n- Cut pool management across nodes in the search tree\n- Importing cuts computed externally or in a preprocessing phase\n- Debugging by replaying a known cut sequence\n\nCut selection:\n- Only adds cuts violated by more than requiredViolation_ (default 1e-5)\n- Violation = constraint LHS evaluated at current LP solution\n- Avoids adding nearly-satisfied cuts that waste basis updates\n\nCan also store:\n- Best known solution (for primal bounds)\n- Tight variable bounds (from probing/preprocessing)\n- Probing implication information (CglTreeProbingInfo)",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglTreeInfo",
+      "brief": "Context information for cut generation in branch-and-cut\n\nPasses branch-and-cut tree state to cut generators so they can adapt\ntheir behavior based on tree depth, pass number, and other factors.\n\nCglTreeInfo fields:\n- level: Search tree depth (0 = root)\n- pass: Which cut generation round at this node\n- formulation_rows: Original row count (before generated cuts)\n- inTree: True after first branch\n- options: Bit flags for various modes (see below)\n\nOption flags (can be combined):\n- 1: Treat costed integers as important\n- 4/8: Set global cut flag at root\n- 16: Make cuts globally valid\n- 32: Last round ineffective - be more aggressive\n- 64: In preprocessing stage\n- 128: Looks like we found a solution\n- 8192: Problem is infeasible\n\nCglTreeProbingInfo (derived class):\nExtends CglTreeInfo with variable fixing implications from probing.\n- fixEntries_: What gets fixed when a variable is set\n- toZero_/toOne_: Starts of implication lists\n- Supports analyze() to derive implied bounds",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglTwomir",
+      "brief": "Two-step MIR (TMIR) cut generator\n\nGenerates tMIR and 2-step MIR cuts by applying the MIR inequality\nrecursively with different scaling factors. More general than\nsimple Gomory or MIR cuts.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CglZeroHalf",
+      "brief": "Zero-half ({0,1/2}) cutting planes\n\nGenerates {0,1/2}-cuts by taking mod-2 combinations of constraint rows.\nBased on Andreello, Caprara, Fischetti (INFORMS J. Computing, 2007).\n\nTheory: If we combine constraints with {0, 1/2} multipliers such that\nall LHS coefficients become even, we get a valid cut by dividing by 2\nand rounding down the RHS.\n\nAlgorithm outline:\n1. Convert constraint matrix to integers (scaling)\n2. Reduce coefficients mod 2 (0-1 matrix)\n3. Find combinations where LHS sums to 0 mod 2 per column\n4. These yield valid {0,1/2}-cuts when RHS is odd\n\nInternal representation:\n- mr_, mc_, mnz_: Matrix dimensions and nonzeros\n- mtbeg_, mtcnt_, mtind_, mtval_: Sparse row storage\n- vlb_, vub_: Variable bounds (integer scaled)\n- Cgl012Cut cutInfo_: Separation algorithm state\n\nUses Dijkstra shortest path (cglShortestPath) for separation.",
+      "has_algorithm": true
+    }
+  ]
+}

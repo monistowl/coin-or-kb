@@ -1,0 +1,16 @@
+{
+  "name": "CSP_userexits",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Csp/include/CSP_userexits.hpp",
+  "brief": "CSP user exit callbacks",
+  "algorithms": [
+    {
+      "name": "CSP User Data: Solution Pool\n\nUserData maintains pool of diverse solutions found during pricing:\n- denseSols: Solution vectors\n- addSol: Deduplicates based on objective and full vector comparison",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

@@ -1,0 +1,19 @@
+{
+  "name": "ad_fun",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/ad_fun.hpp",
+  "brief": "ADFun class - function object storing recorded AD operations\n\nADFun<Base> stores a recorded sequence of operations and provides\nmethods to evaluate the function and its derivatives.\n\nKey methods:\n- **Forward(p, x)**: p-th order forward mode Taylor coefficient\n- **Reverse(q, w)**: q-th order reverse mode derivative\n- **Jacobian(x)**: Full Jacobian matrix\n- **Hessian(x, w)**: Weighted Hessian matrix\n- **SparseJacobian/SparseHessian**: Sparse derivative computation",
+  "algorithms": [
+    {
+      "name": "Forward mode computes derivatives in the direction of inputs.\n           Reverse mode computes derivatives from outputs backward.\n           Forward: O(n) per direction, Reverse: O(m) per output.\n           Use forward when n < m, reverse when n > m.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AD<Base> for the scalar type that records operations"
+  ]
+}

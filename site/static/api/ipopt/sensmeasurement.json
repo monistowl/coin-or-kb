@@ -1,0 +1,9 @@
+{
+  "name": "SensMeasurement",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensMeasurement.hpp",
+  "brief": "sIPOPT measurement interface for parameter values\n\nSensMeasurement: abstract interface for providing parameter values.\nMeasurement objects supply perturbed parameter values to sensitivity\nanalysis. Enables real-time or batch parameter updates.",
+  "algorithms": [],
+  "methods": []
+}

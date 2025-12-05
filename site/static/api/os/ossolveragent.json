@@ -1,0 +1,9 @@
+{
+  "name": "OSSolverAgent",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSAgent/OSSolverAgent.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

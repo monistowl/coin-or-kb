@@ -1,0 +1,9 @@
+{
+  "name": "vector",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/vector.hpp",
+  "brief": "CppAD utility: vector",
+  "algorithms": [],
+  "methods": []
+}

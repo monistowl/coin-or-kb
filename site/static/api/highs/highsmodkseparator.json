@@ -1,0 +1,16 @@
+{
+  "name": "HighsModkSeparator",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsModkSeparator.h",
+  "brief": "Class for separating maximally violated mod-k MIR cuts",
+  "algorithms": [
+    {
+      "name": "Mod-k MIR Cuts via Congruence System\n\nContrary to mod-k CG cuts as described in the literature, continuous\nvariables are allowed to appear in the rows used for separation. In case an\nLP row is already an integral row it is included into the congruence system\nin the same way as for mod-k CG cuts. Should the LP row contain continuous\nvariables that have a non-zero solution value after bound substitution, then\nit is discarded, as it can not participate in a maximally violated mod-K MIR\ncut.\n\nIf a row contains continuous variables that sit at zero after bound\nsubstitution, then those rows are included in the congruence system, as the\npresence of such variables does not reduce the cuts violation when applying\nthe MIR procedure. In order to handle their presence the row must simply be\nscaled, such that all integer variables that have a non-zero solution value\nafter bound substitution, as well as the right hand side value, attain an\nintegral value. If we succeed in finding such a scale that is not too large,\nthe resulting row might get a non-zero weight in the solution of the\ncongruence system. The aggregated row therefore can contain continuous\nvariables. These variables, however, all sit at zero in the current LP\nsolution. Using the weights from the solution of the congruence system all\ninteger variables with non-zero solution value will attain a coefficient that\nis divisible by k, and the integral right hand side value will have a\nremainder of k - 1 when dividing by k. All other variables do not contribute\nto the activity of the cut in this LP solution, hence applying the MIR\nprocedure will yield a cut that is violated by (k-1)/k. However, we prefer to\ngenerate inequalities with superadditive lifting from the aggregated row\nwhenever all integer variables are bounded.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

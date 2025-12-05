@@ -1,0 +1,13 @@
+{
+  "name": "BonStdInterfaceTMINLP",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonStdInterfaceTMINLP.hpp",
+  "brief": "C-callback based TMINLP implementation for standard interface\nCopyright (C) Shaurya Sharma. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nStdInterfaceTMINLP: TMINLP implementation using C function pointers\nfor callbacks (eval_f, eval_g, eval_grad_f, etc.). Enables use of\nBonmin from C or languages with C FFI. Mirrors Ipopt's StdCInterface.\n\nAuthors: Shaurya Sharma\nDate: June 7, 2015",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TMINLP for base interface",
+    "BonStdCInterface.h for C callback type definitions"
+  ]
+}

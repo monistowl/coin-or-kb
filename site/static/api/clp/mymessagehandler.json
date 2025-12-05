@@ -1,0 +1,14 @@
+{
+  "name": "MyMessageHandler",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/MyMessageHandler.hpp",
+  "brief": "Example message handler demonstrating custom logging\n\nSample implementation of CoinMessageHandler showing how users can\ncustomize message output. Used in unit tests to demonstrate\ncapturing solver progress and collecting feasible extreme points.\n\nFeatures demonstrated:\n- Override print() to intercept all solver messages\n- Access to model_ for querying current solution\n- Collection of feasible extreme points during solve\n- Custom file output via FILE* pointer\n\nUse case - Feasible point enumeration:\nDuring optimization, each time the solver finds a new feasible\nextreme point (basic feasible solution), the handler captures it.\nUseful for problems where alternative optima matter.\n\nTo create your own handler:\n1. Inherit from CoinMessageHandler\n2. Override print() method\n3. Attach via ClpSimplex::passInMessageHandler()",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMessageHandler for the base interface",
+    "ClpMessage for Clp message definitions",
+    "ClpSimplex::passInMessageHandler() to install"
+  ]
+}

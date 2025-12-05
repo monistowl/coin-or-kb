@@ -1,0 +1,14 @@
+{
+  "name": "Arc",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/Arc.h",
+  "brief": "Directed arc/edge for network optimization models\n\nRepresents an arc (edge) connecting two nodes in a graph.\n\n**Arc Class:**\n- _id: Numeric identifier\n- _name: String name\n- _src, _dest: Source and destination Node pointers\n- _weight: Arc weight/cost\n- _len: Arc length\n\n**Power System Attributes:**\n- _is_transformer: True if arc represents a transformer\n- _phases: Set of phases (for 3-phase systems)\n- _parallel: True if parallel arc exists\n\n**Planning Attributes:**\n- _active: Whether arc is active in model\n- _expansion: True if potential expansion arc\n- _imaginary: Imaginary arc for algorithm use\n\n**Graph Algorithm Support:**\n- in_cycle: True if arc is in a cycle\n- horton_path: Pointer to Horton path through this arc\n- _intersection: Common neighbors of src and dest\n- _intersection_clique: For clique tree algorithms\n\n**Methods:**\n- neighbour(Node* n): Get other endpoint\n- clone(): Deep copy arc",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/Node.h for node data",
+    "gravity/Path.h for paths/cycles",
+    "gravity/Net.h for graph container"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "adtl",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adtl.h",
+  "brief": "Tape-less (traceless) forward-mode automatic differentiation\n\nProvides the adtl::adouble class for direct forward-mode AD without\ntape recording. Each adouble carries both its value and directional\nderivatives, which are propagated immediately through operations.",
+  "algorithms": [
+    {
+      "name": "Memory Trade-off:\nTapeless vs. tape-based comparison.\n\n  TAPELESS:\n    Memory: O(n_active \u00b7 p) where n_active = live variables, p = #directions\n    No tape overhead, no storage of operation sequence\n    Best for: few directions, simple control flow\n\n  TAPE-BASED:\n    Memory: O(operations) for tape + O(n) per evaluation\n    Supports reverse mode: O(1) directions for gradient\n    Best for: many directions, need reverse mode",
+      "math": "For function y = f(x) with seed vectors s_i:\n  adval[i] = \u2207f(x)\u1d40 s_i (directional derivative in direction s_i)\n  With s_i = e_i (standard basis), get \u2207f component-wise.",
+      "complexity": "Per operation: O(p) for p directions\nTotal function evaluation: O(operations \u00b7 p)\nGradient via p=n directions: O(n \u00b7 operations)\n\nAdvantages over tape-based mode:\n- No memory overhead from tape storage\n- Lower per-operation cost for simple functions\n- Simpler for computing few directional derivatives\n\nLimitations:\n- Only forward mode (no reverse/adjoint mode)\n- Memory scales as O(n\u00b7p) for n variables and p directions\n- Must set numDir before creating adoubles via setNumDir(p)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "adtb_types.h for tape-based adouble (supports reverse mode)",
+    "interfaces.h for tape evaluation routines"
+  ]
+}

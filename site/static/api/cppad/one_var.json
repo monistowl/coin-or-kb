@@ -1,0 +1,9 @@
+{
+  "name": "one_var",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/one_var.hpp",
+  "brief": "Internal implementation: one_var",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_Waterdance",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_Waterdance.hpp",
+  "brief": "Alternating FM/QP refinement passes for partition improvement\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nWaterdance alternates between FM (discrete swaps) and QP (continuous\noptimization) refinement passes. The interplay (\"dance\") between methods\nescapes local minima that either method alone would get stuck in.\nNumber of dances controlled by num_dances option.",
+  "algorithms": [
+    {
+      "name": "Waterdance (Hybrid FM/QP Refinement):\nAlternates discrete and continuous optimization to escape local minima:\nfor i = 1 to num_dances:\n  1. Run QP gradient projection (continuous relaxation)\n  2. Round QP solution to discrete partition\n  3. Run FM passes (discrete vertex swaps)\n  4. If no improvement in both, terminate early",
+      "math": "Intuition for hybrid approach:\n- FM: fast local moves, explores discrete neighborhood\n- QP: smooth objective, can \"jump over\" discrete barriers\n- Alternating: FM finds local minimum \u2192 QP perturbs \u2192 FM refines\n\nThe \"waterdance\" metaphor: like water finding lowest point via\ndifferent flow patterns (discrete drops vs continuous flow).",
+      "complexity": "O(num_dances \u00d7 |E|) per coarsening level.\nDefault num_dances = 1-2; more for difficult graphs.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_ImproveFM.hpp for Fiduccia-Mattheyses refinement",
+    "Mongoose_ImproveQP.hpp for quadratic programming refinement"
+  ]
+}

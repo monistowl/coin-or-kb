@@ -1,0 +1,20 @@
+{
+  "name": "iterate",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/iterate.h",
+  "brief": "IPM Iterate Management with Variable States\n\nManages the primal-dual iterate for interior point methods, including\nvariable states (fixed/free/barrier) and convergence monitoring.",
+  "algorithms": [
+    {
+      "name": "Variable State Management in IPM:\nEfficiently handles bound constraints by classifying variables into states.\n\nPRIMAL-DUAL VARIABLES:\n  Primal: x[n+m], xl[n+m] = x - lb, xu[n+m] = ub - x\n  Dual: y[m] (constraints), zl[n+m], zu[n+m] (bound multipliers)\n\nVARIABLE STATES:\n\n1. BARRIER (actively optimized):\n   - Has at least one finite bound\n   - Contributes barrier term: -\u03bc\u00b7(ln(xl) + ln(xu))\n   - Scaling factor: 1/\u221a(zl/xl + zu/xu)\n\n2. FREE (no barrier):\n   - Treated as if bounds are \u00b1\u221e\n   - xl = xu = \u221e, zl = zu = 0\n   - Scaling factor: \u221e (special handling needed)\n\n3. FIXED (eliminated):\n   - Not moved by IPM (effective dimension reduction)\n   - Equivalent to reducing b by A[:,j]\u00b7x[j]\n   - Scaling factor: 0\n\nIMPLIED BOUNDS (for numerical stability):\nNear-optimal variables can be \"implied\" - treated as free during IPM\nbut fixed to bounds in postprocessing:\n- IMPLIED_LB: x[j] \u2192 lb[j], compute zl[j] from dual feasibility\n- IMPLIED_UB: x[j] \u2192 ub[j], compute zu[j] from dual feasibility\n- IMPLIED_EQ: lb = ub, choose sign of multiplier\n\nRESIDUALS COMPUTED:\n- rb = b - A\u00b7x (primal constraint)\n- rl = lb - x + xl (lower slack)\n- ru = ub - x - xu (upper slack)\n- rc = c - A'y - zl + zu (dual/reduced cost)",
+      "math": "Complementarity measures:\n- \u03bc = \u03a3(xl\u00b7zl + xu\u00b7zu) / (2\u00b7num_barriers)  (average)\n- Central path: xl\u00b7zl = xu\u00b7zu = \u03bc for all barrier vars\n- Optimality: \u03bc \u2192 0 as iterate approaches solution\n\nTermination criterion:\n- Primal feasible: \u2016rb\u2016/(1+\u2016b\u2016) \u2264 \u03b5_feas\n- Dual feasible: \u2016rc\u2016/(1+\u2016c\u2016) \u2264 \u03b5_feas\n- Optimal: |pobj - dobj|/(1+|pobj|+|dobj|) \u2264 \u03b5_opt",
+      "complexity": "- Update(): O(n+m) for step application\n- Evaluate(): O(nnz) for residual computation (lazy evaluation)\n- Memory: O(n+m) for all variable vectors",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ipm.h for IPM algorithm using this iterate",
+    "crossover.h for converting iterate to basic solution"
+  ]
+}

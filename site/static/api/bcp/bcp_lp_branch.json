@@ -1,0 +1,21 @@
+{
+  "name": "BCP_lp_branch",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_lp_branch.hpp",
+  "brief": "LP-side branching objects for BCP Branch-Cut-Price",
+  "algorithms": [
+    {
+      "name": "Strong Branching with Presolved Candidates\n\nUser-facing branching object classes used during strong branching\nand branch selection in the LP process.\n\n**BCP_lp_branching_object:**\n- child_num: Number of children (usually 2)\n- vars_to_add, cuts_to_add: New objects for children\n- forced_var_pos/bd: Variable bounds changed by branching\n- forced_cut_pos/bd: Cut bounds changed by branching\n- implied_var_pos/bd: Additional fixings from logical implications\n- implied_cut_pos/bd: Additional cut bound changes\n\n**Position encoding:**\n- Non-negative: Index in current LP formulation\n- Negative (-i): Index (i-1) in added vars/cuts\n\n**BCP_presolved_lp_brobj:**\nWraps a branching object with strong branching results:\n- _lpres: LP results for each child after presolving\n- _child_action: What to do with each child\n  (BCP_ReturnChild, BCP_KeepChild, BCP_FathomChild)\n- _user_data: User data for child nodes\n\n**Strong branching flow:**\n1. User creates BCP_lp_branching_object candidates\n2. BCP wraps in BCP_presolved_lp_brobj\n3. Each child presolved, results stored in _lpres\n4. Best candidate selected based on results",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_branch.hpp for internal branching representation",
+    "BCP_lp_user::select_branching_candidates()",
+    "OsiBranchingObject for OSI branching interface"
+  ]
+}

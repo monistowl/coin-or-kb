@@ -1,0 +1,13 @@
+{
+  "name": "IpOptionsList",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpOptionsList.hpp",
+  "brief": "Container for user-specified algorithmic options\n\nOptionsList stores runtime-configurable parameters as string key-value\npairs. Supports integer, numeric, and string option types with automatic\nconversion. Tracks how many times each option has been accessed (useful\nfor detecting unused options).\n\nOptions are case-insensitive. Values can be set via:\n- SetNumericValue(), SetIntegerValue(), SetStringValue()\n- ReadFromStream() for ipopt.opt format files\n\nIntegrates with RegisteredOptions for validation and default values.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpRegOptions.hpp for option registration and validation",
+    "IpIpoptApplication.hpp for initialization from files"
+  ]
+}

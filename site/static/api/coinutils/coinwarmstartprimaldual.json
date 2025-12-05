@@ -1,0 +1,13 @@
+{
+  "name": "CoinWarmStartPrimalDual",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinWarmStartPrimalDual.hpp",
+  "brief": "Warm start using both primal and dual variable values\n\nStores both primal (column) and dual (row) solution vectors.\nUseful for interior point methods. Includes diff capability.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinWarmStart for the abstract base class",
+    "CoinWarmStartDual for dual-only warm start"
+  ]
+}

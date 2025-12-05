@@ -1,0 +1,12 @@
+{
+  "name": "HighsIO",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/io/HighsIO.h",
+  "brief": "Logging and output utilities for HiGHS\n\nProvides structured logging with log levels and callbacks.\n\n**Log Levels (LogDevLevel):**\n- kHighsLogDevLevelNone: No output\n- kHighsLogDevLevelInfo: Standard progress info\n- kHighsLogDevLevelDetailed: More detailed info\n- kHighsLogDevLevelVerbose: Maximum detail\n\n**Log Types (HighsLogType):**\nTagged output: WARNING, ERROR, etc. (see HighsLogTypeTag[])\n\n**HighsLogOptions:**\nConfiguration for logging destination and callbacks:\n- log_stream: FILE* for output (nullptr = stdout)\n- output_flag/log_to_console: Enable/disable flags\n- user_log_callback: Custom logging callback\n- user_callback: Full callback with HighsCallbackOutput\n\n**Logging Functions:**\n- highsLogUser(): Single-line user messages with type tag\n- highsLogDev(): Development logging (respects log_dev_level)\n- highsLogHeader(): Print version and copyright\n- highsReportDevInfo(): Development info (accepts null log_options)\n\n**File Types (HighsFileType):**\nkMinimal, kFull, kMps, kLp, kMd for output format selection.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lp_data/HighsCallback.h for callback structures"
+  ]
+}

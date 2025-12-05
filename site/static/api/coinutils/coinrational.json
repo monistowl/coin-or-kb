@@ -1,0 +1,18 @@
+{
+  "name": "CoinRational",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinRational.hpp",
+  "brief": "Rational number representation with double-to-rational conversion\n\nProvides a simple rational number class that can convert floating-point\nvalues to rational approximations. Useful in optimization for converting\nfloating-point coefficients to exact rational form when needed.",
+  "algorithms": [
+    {
+      "name": "Stern-Brocot tree / mediant search for best rational approximation",
+      "math": "Given lower bound a/b and upper bound c/d, the mediant (a+c)/(b+d)\n      is the simplest rational between them. Binary search narrows to\n      the best approximation within tolerance.",
+      "complexity": "O(log(maxdnom)) iterations",
+      "ref": [
+        "Stern (1858), Brocot (1861). See also: Graham, Knuth, Patashnik\n     \"Concrete Mathematics\" Ch. 4.5 for Stern-Brocot tree theory."
+      ]
+    }
+  ],
+  "methods": []
+}

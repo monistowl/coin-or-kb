@@ -1,0 +1,16 @@
+{
+  "name": "dantzigpricing",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/dantzigpricing.hpp",
+  "brief": "HiGHS QP Dantzig pricing rule\n\nClassic Dantzig pricing: select constraint with largest dual infeasibility.",
+  "algorithms": [
+    {
+      "name": "Dantzig Pricing for QP Active Set",
+      "math": "Select constraint to drop: p = argmax_i |\u03bb_i| where \u03bb_i violates sign.\n      For constraint active at lower bound: drop if \u03bb_i < 0.\n      For constraint active at upper bound: drop if \u03bb_i > 0.\n      Simplest pivot rule but may cycle without perturbation.",
+      "complexity": "O(|active set|) per pricing. No weight maintenance.",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

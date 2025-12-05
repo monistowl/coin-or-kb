@@ -1,0 +1,12 @@
+{
+  "name": "sym_messages",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_messages.h",
+  "brief": "PVM message tags for parallel SYMPHONY\n\nDefines message types for inter-process communication in parallel mode.\nUsed with PVM (Parallel Virtual Machine) for distributed solving.\n\n**Message numbering scheme:**\n- 1xx: General messages (lifecycle, bounds)\n- 2xx: Master process messages (data requests)\n- 3xx: Tree manager \u2194 LP messages\n- 4xx: LP process outgoing messages\n- 5xx: Cut/solution pool messages\n- 6xx: Cut packing messages\n- 7xx: Column packing messages\n\n**Lifecycle messages (1xx):**\n- YOU_CAN_DIE (100): Permission to terminate\n- I_AM_DEAD (101): Termination acknowledgment\n- UPPER_BOUND (103): New incumbent found\n- WRITE_LOG_FILE (105): Checkpoint request\n\n**Data request messages (2xx):**\n- REQUEST_FOR_LP_DATA/LP_DATA: LP worker setup\n- REQUEST_FOR_CG_DATA/CG_DATA: Cut generator setup\n- REQUEST_FOR_CP_DATA/CP_DATA: Cut pool setup\n- TM_DATA (210): Tree manager startup\n\n**Tree manager \u2194 LP (3xx):**\n- LP__NODE_DESCRIPTION (300): Node state to TM\n- LP__BRANCHING_INFO (301): Branching decision\n- LP__IS_FREE (302): Ready for new node\n- LP__ACTIVE_NODE_DATA (306): Node assignment\n- LP__DIVING_INFO (307): Dive/backtrack instruction\n\n**Solution messages (4xx):**\n- FEASIBLE_SOLUTION_NONZEROS (410): Sparse solution\n- LP_SOLUTION_NONZEROS (420): LP solution for cuts\n\n**Pool messages (5xx-6xx):**\n- POOL_YOU_ARE_USELESS (501): Pool shutdown\n- PACKED_CUT (600): Single cut\n- PACKED_CUTS_TO_CP (601): Cuts to pool\n- NO_MORE_CUTS (605): End of cut stream",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_proccomm.h for communication functions"
+  ]
+}

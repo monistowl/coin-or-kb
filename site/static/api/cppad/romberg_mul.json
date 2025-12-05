@@ -1,0 +1,9 @@
+{
+  "name": "romberg_mul",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/romberg_mul.hpp",
+  "brief": "CppAD utility: romberg mul",
+  "algorithms": [],
+  "methods": []
+}

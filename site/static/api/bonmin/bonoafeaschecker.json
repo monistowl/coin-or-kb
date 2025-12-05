@@ -1,0 +1,20 @@
+{
+  "name": "BonOaFeasChecker",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/OaGenerators/BonOaFeasChecker.hpp",
+  "brief": "OA-based feasibility checker for MILP solutions\n\nChecks if MILP solution is feasible for original MINLP by evaluating\nnonlinear constraints and generating OA/Benders cuts if infeasible.",
+  "algorithms": [
+    {
+      "name": "OA Feasibility Checking:\n  Validates MILP solution against nonlinear MINLP constraints:\n  1. Receive integer solution x\u0304 from MILP relaxation\n  2. Evaluate g(x\u0304) for all nonlinear constraints g(x) \u2264 0\n  3. If g_i(x\u0304) > \u03b5 (constraint violated):\n     - Generate OA cut: g_i(x\u0304) + \u2207g_i(x\u0304)'(x - x\u0304) \u2264 0\n     - Or Benders cut (alternative formulation)\n  4. Add cuts to MILP, continue B&B\n  5. Cycle detection prevents infinite OA loops",
+      "math": "OA cut validity:\n  For convex g: g(x) \u2265 g(x\u0304) + \u2207g(x\u0304)'(x - x\u0304) (supporting hyperplane)\n  Cut separates infeasible x\u0304 without excluding feasible region\n  Benders alternative uses optimality cut formulation",
+      "complexity": "O(m\u00b7n) per feasibility check\n  m = nonlinear constraints, n = variables\n  Gradient evaluation dominates; cut generation O(n)\n\n**Cut types (CutsTypes):**\n- OA: Standard outer approximation cuts (gradient-based)\n- Benders: Benders optimality/feasibility cuts\n\n**Cut discard policies (CutsPolicies):**\n- DetectCycles: Detect and handle cycling\n- KeepAll: Keep all generated cuts\n- TreatAsNormal: Standard cut management",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OaDecompositionBase for base class",
+    "OACutGenerator2 for main OA cut generator"
+  ]
+}

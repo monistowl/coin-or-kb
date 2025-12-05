@@ -1,0 +1,12 @@
+{
+  "name": "sym_macros",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_macros.h",
+  "brief": "Utility macros for SYMPHONY\n\nCommon macros for memory management, parameter parsing,\nPVM communication, and utility operations.\n\n**Random number generation:**\n- SRANDOM(seed): Seed generator (srand/srandom)\n- RANDOM(): Get random number (rand/random)\n\n**Memory allocation:**\n- REMALLOC(ptr, type, old, new, block): Realloc with free first\n- REALLOC(ptr, type, old, new, block): Standard realloc\n- FREE(p): Safe free with NULL check\n\n**PVM communication (parallel mode):**\n- READ_INT_DESC(): Read integer array descriptor\n- READ_CHAR_ARRAY_WITH_SIZE(): Read sized char array\n- READ_STR_LIST(): Read string list\n\n**Parameter file parsing:**\n- READ_INT_PAR(par): Parse integer parameter\n- READ_DBL_PAR(par): Parse double parameter\n- READ_STR_PAR(par): Parse string parameter\n- READ_STRINT_PAR(): Parse string-to-int mapping\n- READPAR_ERROR(x): Report parse error\n\n**Data copying:**\n- COPY_DBL_ARRAY_DESC(): Copy double array descriptor\n- COPY_ARRAY_DESC(): Copy integer array descriptor\n- COPY_STAT(): Copy status array\n\n**User function handling:**\n- CALL_USER_FUNCTION(f): Check USER_ERROR return\n- CALL_WRAPPER_FUNCTION(f): Check wrapper return\n\n**Standard utilities:**\n- PRINT(verb, thresh, args): Conditional print\n- MIN(a,b), MAX(a,b): Comparisons\n- isset(a,i), setbit(a,i): Bit array operations\n\n**OpenMP atomics:**\n- OPENMP_ATOMIC_WRITE: Thread-safe write\n- OPENMP_ATOMIC_UPDATE: Thread-safe update",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_proto.h for PROTO macro"
+  ]
+}

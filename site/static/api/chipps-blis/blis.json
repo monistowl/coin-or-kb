@@ -1,0 +1,14 @@
+{
+  "name": "Blis",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/Blis.h",
+  "brief": "Core enumerations and constants for BLIS (BiCePS Linear Integer Solver)\n\nBLIS is a concrete implementation of the CHiPPS framework for MILP.\nHierarchy: ALPS (parallel search) \u2192 BiCePS (branch-cut-price) \u2192 BLIS (MILP).\n\n**BlisLpStatus enum:**\nLP relaxation solve outcomes (Optimal, Infeasible, IterLim, etc.)\n\n**BlisReturnStatus enum:**\nNode processing outcomes (Ok, ErrLp, Feasible, Branch, etc.)\n\n**BlisCutStrategy enum:**\n- NotSet, None: No cut generation\n- Root: Generate cuts only at root node\n- Auto: Automatic frequency selection\n- Periodic: Generate every cutGenerationFrequency_ nodes\n\n**BlisHeurStrategy enum:**\nSame as cut strategy plus BeforeRoot (e.g., feasibility pump)\n\n**BlisBranchingStrategy enum:**\n- MaxInfeasibility: Branch on most fractional variable\n- PseudoCost: Use pseudo-costs from LP degradation\n- Reliability: Pseudo-costs with strong branching fallback\n- Strong: Full strong branching (solve child LPs)\n- Bilevel: For bilevel programming problems\n\n**BlisBranchingObjectType enum:**\nInteger variables, SOS constraints, bilevel variables",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisModel for the MILP model class",
+    "BlisTreeNode for node processing",
+    "BlisParams for parameter configuration"
+  ]
+}

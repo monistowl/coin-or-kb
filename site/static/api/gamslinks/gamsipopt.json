@@ -1,0 +1,13 @@
+{
+  "name": "GamsIpopt",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/ipopt/GamsIpopt.hpp",
+  "brief": "GAMS interface to Ipopt NLP solver\n\nConnects GAMS modeling environment to COIN-OR Ipopt.\n\n**GamsIpopt Class:**\n- ipopt: SmartPtr to IpoptApplication\n- nlp: GamsNLP problem representation\n- Warmstart support for sequential solves",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GamsNLP.hpp for NLP problem representation",
+    "GamsJournal.hpp for message handling"
+  ]
+}

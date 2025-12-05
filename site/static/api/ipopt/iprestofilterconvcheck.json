@@ -1,0 +1,21 @@
+{
+  "name": "IpRestoFilterConvCheck",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpRestoFilterConvCheck.hpp",
+  "brief": "Restoration phase convergence check for filter line search\n\nRestoFilterConvergenceCheck specializes restoration phase termination\nfor use with the filter globalization mechanism. It checks whether\nthe current restoration point would be acceptable to the original\nproblem's filter.",
+  "algorithms": [
+    {
+      "name": "Filter-Based Restoration Termination:\n  TestOrigProgress(\u03c6_trial, \u03b8_trial) from restoration iterate:\n  1. Query original filter acceptor: IsAcceptableToCurrentFilter(\u03b8, \u03c6).\n  2. Check: (\u03b8_trial, \u03c6_trial) not dominated by any filter entry.\n  3. Also check: IsAcceptableToCurrentIterate() for Armijo-like decrease.\n  4. If acceptable to original \u2192 exit restoration with CONVERGED.\n  5. Otherwise continue restoration iterations.",
+      "math": "Filter acceptance from restoration:\n  Let F = {(\u03b8_i, \u03c6_i)} be the original filter.\n  Accept if: \u2200i: \u03b8_trial < \u03b8_i OR \u03c6_trial < \u03c6_i - \u03b3_\u03c6\u00b7\u03b8_i (envelope check).\n  Ensures restoration doesn't return to points worse than filter history.\n\nTermination criteria (via TestOrigProgress):\n1. Current point acceptable to original filter\n2. Current point shows sufficient decrease vs original iterate\n3. Constraint violation reduced below tolerance\n\nThe orig_filter_ls_acceptor_ reference is used to query:\n- IsAcceptableToCurrentIterate(): Armijo or \u03b8-type improvement\n- IsAcceptableToCurrentFilter(): Point not dominated by filter\n\nImportant: SetOrigLSAcceptor() must be called before Initialize()\nto establish the link to the original problem's filter.\n\nNote: Uses raw pointer to avoid circular reference with line search.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpRestoConvCheck.hpp for the base restoration convergence class",
+    "IpFilterLSAcceptor.hpp for filter acceptance methods",
+    "IpRestoMinC_1Nrm.hpp for the restoration phase algorithm"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "OSMatrix",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSCommonInterfaces/OSMatrix.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

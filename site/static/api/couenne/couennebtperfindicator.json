@@ -1,0 +1,13 @@
+{
+  "name": "CouenneBTPerfIndicator",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/bound_tightening/CouenneBTPerfIndicator.hpp",
+  "brief": "Performance metrics for bound tightening\n\nTracks effectiveness of bound tightening methods (FBBT, OBBT, etc.)\nby measuring how much bounds are reduced and how many variables are fixed.\n\n**Metrics tracked:**\n- nFixed_: Number of variables fixed (lb == ub)\n- boundRatio_: Average bound width shrinkage ratio\n- shrunkInf_: Bounds that became finite from infinite\n- shrunkDoubleInf_: [-inf,inf] that became [a,inf] or [-inf,b]\n- nProvedInfeas_: Number of infeasibility proofs\n\n**Usage:**\n1. Call setOldBounds() before bound tightening\n2. Run bound tightening\n3. Call update() with new bounds\n4. Metrics accumulated for end-of-run summary\n\n**Timing:**\n- totalTime_: CPU time spent in this bound tightener\n- nRuns_: Number of invocations",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneFixPoint which uses this for FBBT stats",
+    "CouenneAggrProbing which uses this for OBBT stats"
+  ]
+}

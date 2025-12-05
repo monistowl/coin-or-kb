@@ -1,0 +1,9 @@
+{
+  "name": "val2fun",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/val2fun.hpp",
+  "brief": "Value graph: val2fun",
+  "algorithms": [],
+  "methods": []
+}

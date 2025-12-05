@@ -1,0 +1,13 @@
+{
+  "name": "CouenneAmplInterface",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/readnl/CouenneAmplInterface.hpp",
+  "brief": "AMPL .nl file reader for Couenne\n\nReads optimization problems from AMPL Solver Library (ASL)\nformat and converts to Couenne's expression DAG representation.\n\n**Key methods:**\n- getCouenneProblem(): Parse .nl file \u2192 CouenneProblem\n- getTMINLP(): Wrap as Bonmin TMINLP for NLP solves\n- writeSolution(): Write .sol file back to AMPL\n\n**Internal conversion:**\n- readASLfg(): Read using ASL fg (function/gradient) reader\n- readnl(): Alternative .nl parsing\n- nl2e(): Convert ASL expr* to Couenne expression*\n\n**ASL integration:**\nUses the AMPL Solver Library (ASL) C structures to parse\nthe binary .nl format. The nl2e() method recursively converts\nASL expression trees to Couenne expression nodes.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneUserInterface base class",
+    "CouenneProblem the target representation"
+  ]
+}

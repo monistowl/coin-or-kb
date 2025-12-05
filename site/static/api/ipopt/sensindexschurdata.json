@@ -1,0 +1,9 @@
+{
+  "name": "SensIndexSchurData",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensIndexSchurData.hpp",
+  "brief": "sIPOPT index-based Schur data storage\n\nSensIndexSchurData: stores index-based data for Schur complement.\nTracks which rows/columns of KKT system correspond to parameters.\nManages sparse structure for efficient Schur complement computation.",
+  "algorithms": [],
+  "methods": []
+}

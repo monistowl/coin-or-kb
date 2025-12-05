@@ -1,0 +1,12 @@
+{
+  "name": "utils",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/utils.h",
+  "brief": "Utility functions for timing, printing, and sign operations\n\nGeneral utilities used throughout the Gravity library.\n\n**Timing:**\n- get_wall_time(): Wall clock time in seconds\n- get_cpu_time(): CPU time in seconds\n\n**Printing:**\n- clean_print(): Format value with sign for display\n- RESET macro: Terminal color reset code\n\n**Parallelism:**\n- bounds(parts, mem): Split memory/indices into chunks\n  for parallel processing\n\n**Sign Arithmetic:**\n- reverse(Sign): Negate sign\n- sign_add(s1, s2): Result sign of sum\n- sign_product(s1, s2): Result sign of product\n\n**Time Indexing:**\n- time(p1, p2): Create time-indexed set [p1, p2]\n- time(idx1, ...): Variadic time index construction\n\n**Complex Number Support:**\n- Comparison operators for Cpx type",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/types.h for Sign enum"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "HighsRandom",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsRandom.h",
+  "brief": "Deterministic random number generator for HiGHS\n\nXorshift-based PRNG with strongly universal hash output functions.\n\n**State Management:**\n- 64-bit state with xorshift advance\n- initialise(): Seed with mixing to avoid weak states\n- Deterministic for reproducible optimization\n\n**Output Methods:**\n- integer(): Random in [0, 2^31-1] or [0, sup) or [min, sup)\n- fraction(): Open interval (0, 1)\n- closedFraction(): Closed interval [0, 1]\n- real(a, b): Uniform in [a, b]\n- bit(): Random boolean\n- shuffle(): Fisher-Yates shuffle\n\n**Uniform Range Algorithm:**\nUses rejection sampling with hash function outputs:\n- Multiple hash outputs per state (up to 32)\n- Minimizes state advances for bounded integers\n\n**Hash-Based Mixing:**\nApplies HighsHashHelpers::pair_hash to state for high-quality output\nin both high and low bits (unlike raw xorshift).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "util/HighsHash.h for hash functions",
+    "mip/HighsPathSeparator.h for randomized cut selection"
+  ]
+}

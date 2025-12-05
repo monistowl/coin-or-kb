@@ -1,0 +1,12 @@
+{
+  "name": "IpLibraryLoader",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpLibraryLoader.hpp",
+  "brief": "Dynamic library loading for runtime solver selection\n\nLibraryLoader provides platform-independent dynamic library loading:\n- dlopen()/dlsym() on POSIX systems\n- LoadLibrary()/GetProcAddress() on Windows\n\nUsed to load linear solver libraries (HSL, Pardiso, etc.) at runtime\nwithout compile-time linkage. Allows users to provide proprietary\nsolvers without recompiling Ipopt.\n\nIPOPT_SHAREDLIBEXT defined to \"so\", \"dylib\", or \"dll\" per platform.\n\n@since 3.14.0",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Linear solver interface files for usage examples"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "OsiSpxSolverInterface",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/OsiSpx/OsiSpxSolverInterface.hpp",
+  "brief": "Osi interface for SoPlex LP solver\nAuthors: Tobias Pfender, Ambros Gleixner, Wei Huang (ZIB Berlin).\nEPL license.\n\nOsiSpxSolverInterface wraps SoPlex >= 1.4.2c via the Osi abstraction.\nImplements initialSolve/resolve/branchAndBound, parameter get/set,\nrow/column access, warm start via CoinWarmStartBasis. Uses soplex::SoPlex\ninternally with DVector/DIdxSet for sparse operations.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiSolverInterface for base class"
+  ]
+}

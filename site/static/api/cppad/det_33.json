@@ -1,0 +1,9 @@
+{
+  "name": "det_33",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/speed/det_33.hpp",
+  "brief": "Speed testing: det_33",
+  "algorithms": [],
+  "methods": []
+}

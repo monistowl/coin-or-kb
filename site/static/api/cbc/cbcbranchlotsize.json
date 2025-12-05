@@ -1,0 +1,20 @@
+{
+  "name": "CbcBranchLotsize",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcBranchLotsize.hpp",
+  "brief": "Lot-sizing variable with discrete valid values\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcLotsize: Variable restricted to specific discrete values (lot sizes).\nUnlike integers (any value in range), lot-sizing variables can only\ntake values from a predefined set: {v1, v2, ..., vn}.",
+  "algorithms": [
+    {
+      "name": "Lot-Size Branching:\n  For variable x restricted to values V = {v_1, ..., v_n}:\n  infeasibility(): findRange() locates current value in V.\n  If x\u0304 \u2209 V, compute distance to nearest valid values.\n  createCbcBranch() partitions V:\n  - Down: x \u2208 {v_1, ..., v_k} (values \u2264 floor)\n  - Up: x \u2208 {v_{k+1}, ..., v_n} (values \u2265 ceiling)\n  floorCeiling() returns nearest valid values below/above x\u0304.",
+      "math": "Semi-continuous and lot-size variables:\n  Standard integer: x \u2208 {0, 1, 2, ..., u}.\n  Lot-size: x \u2208 V where V is arbitrary finite set.\n  MIP formulation: x = \u03a3v_i\u00b7y_i, \u03a3y_i = 1, y binary (SOS1).\n  Direct handling avoids |V| binary variables.\n  Range mode: union of intervals, useful for batch sizes.\n\nTwo modes:\n- Points mode (rangeType_=1): Discrete set of valid values\n- Range mode (rangeType_=2): Valid intervals [lo_i, hi_i]\n\nExample: Order quantity must be 0, 100, 250, or 500 units.\n\nBranching creates children that partition the valid value set,\nsimilar to SOS branching but for a single variable.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcLotsizeBranchingObject for branching action",
+    "CbcSOS for set-based branching on multiple variables"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "IpAugRestoSystemSolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpAugRestoSystemSolver.hpp",
+  "brief": "Augmented system solver exploiting restoration phase structure\n\nAugRestoSystemSolver is a decorator that exploits the known structure\nof the restoration phase problem to reduce the augmented system to\nthe original problem size.",
+  "algorithms": [
+    {
+      "name": "Restoration Augmented System Reduction:\n  Solve() reduces expanded restoration system to original size:\n  1. Restoration variables: (x, s, n_c, p_c, n_d, p_d).\n  2. n, p have simple structure: diagonal \u03a3 blocks in Hessian.\n  3. Elimination: Solve for n, p analytically via:\n     n = \u03a3_n\u207b\u00b9\u00b7(rhs_n - contributions), p = \u03a3_p\u207b\u00b9\u00b7(rhs_p - contributions).\n  4. Reduced RHS: rhs_cR, rhs_dR incorporate n, p contributions.\n  5. Solve original-sized system, then back-substitute for n, p.",
+      "math": "Schur complement structure:\n  Full system: [W_full, J_full^T; J_full, -D] [\u0394_full; y] = [r_full].\n  \u03a3_n, \u03a3_p diagonal \u2192 closed-form elimination reduces to original (n_x + n_c + n_d) size.\n\nRestoration problem structure:\n- Variables: (x, s, n_c, p_c, n_d, p_d)\n- Constraints: c(x) - n_c + p_c = 0, d(x) - s - n_d + p_d = 0\n- Objective: penalty on ||n|| + ||p||\n\nThe Hessian and Jacobian have special structure that allows the\nn, p variables to be eliminated analytically. The resulting system\nhas the same dimension as the original problem.\n\nKey quantities computed and cached:\n- sigma_tilde_*_inv_: Inverse of perturbed bound multiplier ratios\n- Neg_Omega_*_plus_D_*: Combined diagonal terms\n- Rhs_*R: Reduced right-hand sides\n\nThe skip_orig_aug_solver_init flag allows reusing symbolic\nfactorization from the main algorithm.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpRestoIpoptNLP.hpp for restoration problem formulation",
+    "IpAugSystemSolver.hpp for base interface"
+  ]
+}

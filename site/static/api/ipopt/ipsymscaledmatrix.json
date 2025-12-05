@@ -1,0 +1,20 @@
+{
+  "name": "IpSymScaledMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpSymScaledMatrix.hpp",
+  "brief": "Symmetric matrix with symmetric (congruent) scaling\n\nSymScaledMatrix wraps a symmetric matrix M to represent D * M * D\nwhere D is a diagonal scaling matrix. Unlike ScaledMatrix which has\nseparate row/column scaling, symmetric scaling uses the same vector.",
+  "algorithms": [
+    {
+      "name": "Symmetric Congruent Scaling:\n  M\u0303 = D \u00b7 M \u00b7 D where D = diag(d) and M = M^T.\n  MultVector: y \u2190 \u03b1M\u0303x + \u03b2y = \u03b1\u00b7D\u00b7(M\u00b7(D\u00b7x)) + \u03b2y.\n  Implementation: (1) z = D\u00b7x, (2) w = M\u00b7z, (3) y = \u03b1D\u00b7w + \u03b2y.\n  Same diagonal for row and column ensures M\u0303 = M\u0303^T.",
+      "math": "Congruence transformation properties:\n  Preserves symmetry: (DMD)^T = D^T M^T D^T = DMD.\n  Preserves definiteness: x^T(DMD)x = (Dx)^T M(Dx) \u2265 0 iff M \u2265 0.\n  Eigenvalues scaled: \u03bb(DMD) related to \u03bb(M) but not simple scaling.\n  Condition number: \u03ba(M\u0303) can be much better than \u03ba(M) with good D.",
+      "complexity": "Same as underlying M plus O(n) for scaling.\n  Single scaling vector (not separate row/column).\n  Decorator pattern preserving SymMatrix type.\n\nUsed in Ipopt for:\n- Scaled Hessian of Lagrangian\n- Symmetrically scaled KKT system",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpScaledMatrix.hpp for non-symmetric version",
+    "IpSymMatrix.hpp for base class"
+  ]
+}

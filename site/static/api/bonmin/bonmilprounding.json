@@ -1,0 +1,20 @@
+{
+  "name": "BonMilpRounding",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonMilpRounding.hpp",
+  "brief": "MILP-based rounding heuristic for MINLP",
+  "algorithms": [
+    {
+      "name": "MILP Rounding with No-Good Cuts\n\nCopyright (C) 2010, International Business Machines Corporation and others.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nMilpRounding: Heuristic that constructs a MIP approximation of the MINLP,\nsolves it, and uses the solution as a starting point for NLP refinement.\n\nUses SubMipSolver (mip_) for the linear approximation and maintains\nnoGoods cuts to avoid revisiting previously explored regions.\n\nAuthors: Pierre Bonami, CNRS\nDate: May 26, 2010",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "SubMipSolver for MIP subproblem solver",
+    "HeuristicDiveMIP for diving-based approach"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "MC_cut",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/MaxCut/include/MC_cut.hpp",
+  "brief": "Max-cut cutting planes",
+  "algorithms": [
+    {
+      "name": "Cycle Inequalities: Max-Cut Valid Cuts\n\nCut generation for max-cut: cycle inequalities, odd-wheel cuts.\n\n**Cycle inequality:** For any cycle in the graph, at most k-1 edges\ncan be in the cut if the cycle has k edges. This is violated when\nfractional LP solution assigns >k-1 total to cycle edges.\n\n**MC_cycle_cut:** Stores cycle as edge list with memory pooling.\n\n**MC_EdgeOrdering:** MST-based cycle finding with different tie-breaking\nfor edge selection (prefer 0, prefer 1, prefer extreme).",
+      "math": "",
+      "complexity": "Separation via shortest path in auxiliary graph",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprMax",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprMax.hpp",
+  "brief": "N-ary maximum operator w = max(x1, x2, ..., xn)\n\nRepresents the maximum of multiple expressions. The max function is\nconvex (pointwise supremum of linear functions) but nonsmooth.\n\n**Convexification:**\nmax is convex, so underestimators are straightforward:\n- w >= xi for all i (linear underestimators)\n\nOverestimators require disjunction:\n- w <= x_k for some k (one of the arguments achieves the max)\n\n**Bound propagation:**\n- lb(w) = max(lb(x1), ..., lb(xn))\n- ub(w) = max(ub(x1), ..., ub(xn))\n\n**Subgradient at nondifferentiable points:**\nAt kinks where multiple arguments are equal to max, any convex\ncombination of their gradients is a valid subgradient.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprMin for the dual operation",
+    "exprAbs which can be expressed as max(x, -x)"
+  ]
+}

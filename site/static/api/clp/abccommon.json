@@ -1,0 +1,20 @@
+{
+  "name": "AbcCommon",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcCommon.hpp",
+  "brief": "Configuration macros for ABC (A Better Clp) build modes",
+  "algorithms": [
+    {
+      "name": "ABC Build Configuration (Serial/Parallel/Cilk Modes)\nControls how the ABC optimized simplex code is built and integrated.\n\nCLP_HAS_ABC values:\n- 0: ABC disabled (use standard ClpSimplex only)\n- 1: Serial ABC, standalone (no inheritance into ClpSimplex)\n- 2: Serial ABC with inheritance (ClpSimplex can delegate to ABC)\n- 3: Cilk parallel ABC, standalone\n- 4: Cilk parallel ABC with inheritance\n\nABC_PARALLEL values:\n- 0: No parallelization\n- 1: Use pthreads for parallelization\n- 2: Use Intel Cilk Plus for parallelization\n\nABC_INHERIT: When defined, ClpSimplex::initialSolve() can automatically\nuse AbcSimplex when beneficial.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcSimplex for the optimized simplex implementation",
+    "ClpSimplex for the standard implementation"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "CbcSubProblem",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcSubProblem.hpp",
+  "brief": "Compact subproblem state for diving heuristics",
+  "algorithms": [
+    {
+      "name": "Lightweight Subproblem State for Diving\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcSubProblem stores a lightweight subproblem state:\n- objectiveValue_, sumInfeasibilities_\n- Variable bound changes\n- Basis status changes\n\nUsed by diving heuristics to backtrack efficiently.\napply() restores state to solver (bounds, basis, or both).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicDive for diving heuristics using this",
+    "CbcNodeInfo for full search tree node storage",
+    "ClpNode for Clp-specific node representation\n\nEdwin 11/10/2009 carved out of CbcBranchActual"
+  ]
+}

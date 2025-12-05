@@ -1,0 +1,20 @@
+{
+  "name": "IpInexactPDSolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/Inexact/IpInexactPDSolver.hpp",
+  "brief": "Primal-dual system solver for inexact Newton methods\n\nInexactPDSolver solves the primal-dual system using iterative linear\nsolvers, allowing for inexact solutions that don't fully satisfy\nthe linearized KKT conditions.",
+  "algorithms": [
+    {
+      "name": "Inexact Primal-Dual System Solution:\n  Solve(rhs, sol) for the tangential step:\n  1. Form augmented system: [W + \u03b4I, J^T; J, -\u03b4I] [\u0394x; \u0394y] = rhs.\n  2. Call iterative solver (e.g., GMRES, Pardiso iterative mode).\n  3. Check tangential component condition (TCC):\n     ||J\u00b7\u0394x_t||\u2082 \u2264 \u03c8\u00b7\u03b8\u00b7\u03bc^\u03b8_exp (controls constraint linearization error).\n  4. If TCC violated \u2192 increase regularization \u03b4, retry.\n  5. Compute residual: resid = rhs - A\u00b7sol, verify acceptable accuracy.",
+      "math": "Tangential Component Condition (TCC):\n  For step \u0394x = \u0394x_n + \u0394x_t (normal + tangential decomposition):\n  ||A_c\u00b7\u0394x_t||\u2082 \u2264 \u03c8\u00b7\u03b8\u00b7\u03bc^exp ensures tangential step stays near null(J).\n  Parameters: tcc_psi (\u03c8), tcc_theta (\u03b8), tcc_theta_mu_exponent (exp).\n  Allows inexact linear solves while maintaining convergence theory.",
+      "complexity": "Per solve: O(nnz\u00b7k) for k iterative solver iterations.\n  k depends on conditioning and preconditioner quality.\n  Direct methods: O(n\u00b3), iterative: O(n\u00b7k) where k << n typically.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpInexactSearchDirCalc.hpp for search direction computation",
+    "IpAugSystemSolver.hpp for base augmented system interface"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "BlisHeurRound",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisHeurRound.h",
+  "brief": "Simple rounding heuristic for MILP\n\nAttempts to find an integer-feasible solution by rounding\nfractional variables from the LP solution.\n\n**Algorithm:**\n1. Start with LP relaxation solution\n2. Round each integer variable to nearest integer\n3. Check if resulting solution is feasible\n4. If not, try to fix infeasibilities\n\n**Matrix storage:**\nMaintains both column-major (matrix_) and row-major (matrixByRow_)\nrepresentations for efficient access during rounding.\n\n**seed_:** Random seed for tie-breaking decisions.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisHeuristic for the base class interface",
+    "BlisModel::callHeuristics() for heuristic invocation"
+  ]
+}

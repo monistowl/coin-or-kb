@@ -1,0 +1,22 @@
+{
+  "name": "func",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/func.h",
+  "brief": "Expression functions with automatic differentiation and convexity tracking\n\nThe func class represents mathematical expressions with symbolic analysis.",
+  "algorithms": [
+    {
+      "name": "Convexity Analysis (DCP Rules):\nDisciplined Convex Programming rules propagate convexity through expressions.\n\nATOMIC CONVEXITIES:\n  linear: ax + b                     \u2192 linear\n  convex: x\u00b2, |x|, exp(x), -log(x)   \u2192 convex\n  concave: log(x), sqrt(x), -x\u00b2      \u2192 concave\n\nCOMPOSITION RULES:\n  convex(linear)   \u2192 convex         exp(ax+b) is convex\n  concave(linear)  \u2192 concave        log(ax+b) is concave (a>0)\n  convex(convex)   \u2192 convex         exp(x\u00b2) is convex\n  convex(concave)  \u2192 unknown        exp(log(x)) needs analysis\n\nSIGN PROPAGATION (for multiplication):\n  pos \u00d7 convex   \u2192 convex\n  neg \u00d7 convex   \u2192 concave\n  pos \u00d7 concave  \u2192 concave\n  neg \u00d7 concave  \u2192 convex\n\nQUADRATIC ANALYSIS:\n  \u03a3\u1d62\u2c7c a\u1d62\u2c7cx\u1d62x\u2c7c is convex iff matrix A is positive semidefinite\n  For single variable: ax\u00b2 convex iff a \u2265 0",
+      "math": "For multivariate f(x), convexity requires \u2207\u00b2f(x) \u227d 0 (PSD Hessian).\n  Gravity uses composition rules to determine convexity without computing Hessian.\n\n**func_ Base Class:**\n- _ftype: Function type (const_, lin_, quad_, pol_, nlin_)\n- _return_type: Numeric type (double_, integer_, binary_, complex_)\n- _all_convexity: Convexity of all instances (linear_, convex_, concave_, undet_)\n- _all_sign: Sign of all instances (pos_, neg_, zero_, unknown_)\n\n**Expression Components:**\n- _cst: Constant term\n- _lterms: Linear terms (map<string, lterm>)\n- _qterms: Quadratic terms (map<string, qterm>)\n- _pterms: Polynomial terms (map<string, pterm>)\n- _vars: Variables appearing in expression\n- _params: Parameters appearing in expression\n\n**Derivative Information:**\n- Symbolic differentiation via get_stored_derivative()\n- _hess_link: Sparsity pattern of Hessian\n- _nnz_j, _nnz_h: Jacobian/Hessian nonzeros\n\n**Operator Overloading:**\n- Arithmetic: +, -, *, /, ^\n- Transcendental: sin, cos, exp, log, sqrt\n- Comparison: <, <=, ==, >=, > (for constraints)\n\n**Convexity Rules:**\n- sum(linear) \u2192 linear\n- x\u00b2 \u2192 convex, -x\u00b2 \u2192 concave\n- exp(linear) \u2192 convex, log(linear) \u2192 concave\n- Composition rules applied automatically",
+      "complexity": "- Derivative computation: O(expression_size) per variable\n- Sparsity detection: O(vars \u00d7 expression_depth)\n- Convexity analysis: O(expression_size)",
+      "ref": [
+        "Grant, Boyd & Ye (2006). \"Disciplined Convex Programming\".\n  Global Optimization: From Theory to Implementation, pp. 155-210."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "gravity/expr.h for expression tree nodes",
+    "gravity/constraint.h for constraints built from functions"
+  ]
+}

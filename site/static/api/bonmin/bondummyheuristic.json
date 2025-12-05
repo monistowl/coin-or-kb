@@ -1,0 +1,13 @@
+{
+  "name": "BonDummyHeuristic",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/OaGenerators/BonDummyHeuristic.hpp",
+  "brief": "Simple placeholder heuristic wrapping NLP solver\nCopyright (C) Carnegie Mellon University 2005. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nDummyHeuristic: Minimal heuristic that calls NLP solver to provide\nsolutions. Used for testing or as template for new heuristics.\nAlways reports ready to run (shouldHeurRun returns true).\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: May 26, 2005",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for base heuristic interface",
+    "OsiTMINLPInterface for NLP solver interface"
+  ]
+}

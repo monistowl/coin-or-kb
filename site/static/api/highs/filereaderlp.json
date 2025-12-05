@@ -1,0 +1,13 @@
+{
+  "name": "FilereaderLp",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/io/FilereaderLp.h",
+  "brief": "CPLEX LP format file reader/writer\n\nImplements Filereader interface for LP format (human-readable).\n\n**LP Format:**\nCPLEX-style format with sections:\n- Minimize/Maximize: Objective function\n- Subject To: Linear constraints\n- Bounds: Variable bounds\n- General/Binary: Integer/binary declarations\n- End: File terminator\n\n**FilereaderLp Class:**\n- readModelFromFile(): Parse LP file into HighsModel\n- writeModelToFile(): Export HighsModel to LP format\n\n**Writing Utilities:**\n- writeToFile(): Buffered output with line-length management\n- writeToFileValue(): Format numeric coefficients\n- writeToFileVar(): Output variable names (quotes if needed)\n- writeToFileMatrixRow(): Output constraint row\n\n**Constants:**\n- LP_MAX_LINE_LENGTH (560): Maximum line length\n- LP_MAX_NAME_LENGTH (255): Maximum identifier length",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "io/Filereader.h for base class interface",
+    "io/HMpsFF.h for MPS format alternative"
+  ]
+}

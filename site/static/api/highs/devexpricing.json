@@ -1,0 +1,22 @@
+{
+  "name": "devexpricing",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/devexpricing.hpp",
+  "brief": "HiGHS Devex pricing for QP active set method\n\nDevex pricing strategy: approximate steepest edge using\nreference framework with periodic weight updates.",
+  "algorithms": [
+    {
+      "name": "Devex (Approximate Steepest Edge) for QP:\n  Maintains approximate edge weights for efficient pricing:\n  1. Initialize weights w_i = 1 for all constraints\n  2. Select constraint s = argmax_i { \u03bb_i\u00b2 / w_i } with \u03bb_i > threshold\n  3. After active set change, update: w_s' = actual weight, w_i' = max(w_i, update\u00b2)\n  4. Periodically reset weights to 1 (reference framework restart)",
+      "math": "Devex weight update (Harris, 1973):\n  Entering constraint gets exact weight: w_s' = ||\u2207_s h(x)||\u00b2\n  Other active: w_i' = max(w_i, (\u03b3_i/\u03b3_s)\u00b2 \u00b7 w_s')\n  where \u03b3 is the pivot element contribution.\n  Approximate weights converge to exact weights over iterations.",
+      "complexity": "O(|active_set|) per pricing operation.\n  Weight update: O(|active_set|) per iteration (vs O(m\u00b2) for exact).\n  Typically 80-90% as effective as steepest edge at lower cost.",
+      "ref": [
+        "Harris (1973). \"Pivot selection methods of the Devex LP code\".\n     Mathematical Programming 5:1-28."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Pricing for the base pricing interface",
+    "SteepestEdgePricing for exact weights (fewer iterations but more expensive)"
+  ]
+}

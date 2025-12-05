@@ -1,0 +1,19 @@
+{
+  "name": "Mongoose_Internal",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_Internal.hpp",
+  "brief": "Internal type definitions and enumerations for Mongoose\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nDefines Int type (int64_t), matching strategies (Random, HEM, HEMSR,\nHEMSRdeg), initial cut types (QP, Random, NaturalOrder), and match\ntypes (Orphan, Standard, Brotherly, Community) used throughout Mongoose.",
+  "algorithms": [
+    {
+      "name": "Enumeration Definitions:\n\nMatchingStrategy - How to pair vertices during coarsening:\n- Random: Random neighbor selection, O(1) per vertex\n- HEM: Heavy Edge Matching, O(degree) per vertex\n- HEMSR: HEM with Stall Ratio, retries on mismatch\n- HEMSRdeg: HEMSR with degree ordering\n\nInitialEdgeCutType - How to partition coarsest graph:\n- QP: Quadratic programming relaxation (best quality)\n- Random: Random assignment (fastest)\n- NaturalOrder: First half vs second half\n\nMatchType - Classification of matched vertices:\n- Orphan: Unmatched (creates singleton coarse vertex)\n- Standard: Paired with single neighbor\n- Brotherly: 3-way match forming cycle\n- Community: 4-way match forming clique",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_Matching.hpp for matching algorithm implementations"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "CglOddHole",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglOddHole/CglOddHole.hpp",
+  "brief": "Odd hole cuts from conflict graphs\n\nGenerates odd hole inequalities based on the method from\nGrotschel, Lovasz, and Schrijver (1988). An odd hole is a\nchordless cycle of odd length in the conflict graph.",
+  "algorithms": [
+    {
+      "name": "Odd Hole Cut Generation:\n  Finds violated odd hole inequalities in conflict graph:\n  1. Build conflict graph G from set packing rows \u03a3x_i \u2264 1\n     (edge (i,j) exists iff x_i + x_j \u2264 1 for some row)\n  2. For each fractional variable x_s with x_s* > 0:\n  3. Use shortest path to find odd cycle C through s in G\n     (weighted by 1 - x_i* to separate current solution)\n  4. If cycle C has length 2k+1 with weight < k: violated cut found\n  5. Generate cut: \u03a3_{i\u2208C} x_i \u2264 k = \u230a|C|/2\u230b",
+      "math": "Odd hole validity and lifting:\n  For odd cycle C = (v\u2081,...,v_{2k+1},v\u2081) in conflict graph:\n  Basic cut: \u03a3_{i\u2208C} x_i \u2264 k (at most k of 2k+1 mutually conflicting)\n  Chvatal-Gomory lift: Sum rows in cycle (RHS = 2k+1, odd)\n  Weaken coefficients: \u230aa_j/2\u230b\u00b72 for odd a_j\n  Divide by 2: \u03a3 \u230aa_j/2\u230b\u00b7x_j \u2264 k (stronger cut)",
+      "complexity": "O(n\u00b7m) per odd hole search using Dijkstra/Bellman-Ford.\n  Total O(f\u00b7n\u00b7m) where f = fractional variables. Can be slow for\n  large f; use createRowList() to filter candidate rows.",
+      "ref": [
+        "Gr\u00f6tschel, Lov\u00e1sz, Schrijver (1988). \"Geometric Algorithms and\n     Combinatorial Optimization\". Springer, Ch. 9.\n\nFor set packing rows sum x_i <= 1 (or == 1):\n- Build conflict graph where edge (i,j) means x_i + x_j <= 1\n- Find odd cycles C of length 2k+1\n- Odd hole inequality: sum_{i in C} x_i <= k\n\nPerformance considerations:\n- Only examines rows with unsatisfied 0-1 variables\n- Can be slow with many fractional variables\n- Uses shortest path algorithm (could be improved)\n- createRowList() to prefilter candidate rows\n- createCliqueList() for external clique information"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglClique for clique cuts (simpler structure)",
+    "CglOddWheel for related odd wheel cuts"
+  ]
+}

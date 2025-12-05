@@ -1,0 +1,23 @@
+{
+  "name": "ClpPEDualRowSteepest",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPEDualRowSteepest.hpp",
+  "brief": "Positive Edge enhanced steepest edge for dual simplex",
+  "algorithms": [
+    {
+      "name": "Positive Edge Dual Steepest Edge:\n  Enhanced row selection combining steepest edge with compatibility:\n  1. Compute steepest edge scores: |d_i|\u00b2/w_i for infeasible rows\n  2. Identify compatible rows via ClpPESimplex::isCompatibleRow()\n  3. Apply bi-dimensional pricing: prefer compatibles unless much worse\n  4. Track degeneracy statistics for adaptive mode switching",
+      "math": "Row selection with compatibility weight:\n  Select r = argmax_i { |d_i|\u00b2/w_i \u00b7 (1 + (1-\u03c8)\u00b7c_i) }\n  where c_i = 1 if compatible, 0 otherwise\n  Compatible rows make positive progress on primal degenerates.",
+      "complexity": "Same as ClpDualRowSteepest plus O(m) compatibility check.\n  Reduces degenerate iterations by 20-50% on difficult LPs.",
+      "ref": [
+        "Towhidi & Orban (2014). \"Customizing the solution process of COIN-OR's\n     linear solvers with Python\". Math. Prog. Computation 6:247-282.\n\nModes: 0=uninitialized, 1=full, 2=partial uninitialized,\n       3=adaptive (starts partial, may switch to full)\n\nUses bi-dimensional pricing: candidates scored by steepest edge weight\nand compatibility, weighted by psi parameter."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPESimplex for the compatibility framework",
+    "ClpDualRowSteepest for the base pricing rule",
+    "ClpPEDualRowDantzig for Dantzig variant"
+  ]
+}

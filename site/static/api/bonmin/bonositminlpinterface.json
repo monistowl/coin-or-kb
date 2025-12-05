@@ -1,0 +1,21 @@
+{
+  "name": "BonOsiTMINLPInterface",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonOsiTMINLPInterface.hpp",
+  "brief": "OsiSolverInterface wrapper for TMINLP problems",
+  "algorithms": [
+    {
+      "name": "NLP-Based OsiSolverInterface with Outer Approximation\n\nProvides an OsiSolverInterface that wraps a TMINLP problem, enabling\nBonmin to use Cbc's branch-and-bound framework. The continuous relaxations\nare solved by an NLP solver (Ipopt or FilterSQP) rather than LP.\n\n**Key functionality:**\n- initialSolve()/resolve(): Solve NLP relaxation via TNLPSolver\n- extractLinearRelaxation(): Build LP outer approximation (OA)\n- getOuterApproximation(): Generate OA cuts at current point\n- solveFeasibilityProblem(): Find nearest feasible point\n\n**Outer Approximation (OA) support:**\n- Linearizes nonlinear constraints at solution points\n- Generates cutting planes for MIP approximation\n- Enables hybrid NLP-BB / OA-BB algorithms\n\n**Warm starting:**\n- Supports warm starts from previous NLP solutions\n- Multiple retry strategies for failed NLP solves\n\n@note Many OsiSolverInterface methods throw since an NLP lacks an LP matrix",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BonTMINLP.hpp for the underlying MINLP problem interface",
+    "BonTNLPSolver.hpp for the NLP solver abstraction",
+    "OsiSolverInterface for the base class interface"
+  ]
+}

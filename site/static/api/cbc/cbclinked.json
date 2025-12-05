@@ -1,0 +1,20 @@
+{
+  "name": "CbcLinked",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcLinked.hpp",
+  "brief": "Extended solver for nonlinear and bilinear problems",
+  "algorithms": [
+    {
+      "name": "Bilinear Term Linearization (4-Lambda SOS2)\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nThis file contains classes for handling nonlinear/bilinear optimization:\n\nOsiSolverLink: Extended OsiSolver that handles coefficient updates.\n- Nonlinear SLP (Successive Linear Programming)\n- Quadratic objective linearization\n- Bilinear term handling via lambda formulations\n\nOsiLinkedBound: Tracks bounds that depend on other bounds.\n- Coefficient updates when bounds change\n- Used for McCormick-style relaxations\n\nOsiBiLinear: Represents x*y bilinear terms.\n- Constructs 4-lambda SOS2 formulation\n- Handles mesh refinement for tighter bounds\n- Supports branching on either x or y\n\nOsiLink/OsiOldLink: Linked ordered sets for structured problems.\n- Models y and x*f(y) relationships\n- SOS-style branching with linked variables\n\nCbcHeuristicDynamic3: Heuristic for picking up feasible solutions.\nCglTemporary: Temporary cut storage (destroyed after first use).\nOsiSolverLinearizedQuadratic: Solver with linearized quadratic objective.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcOsiSolver for base solver-model link",
+    "OsiBranchingObject for branching interface"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Constraints",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/Constraints.hpp",
+  "brief": "Working set management for general constraints in active-set QP",
+  "algorithms": [
+    {
+      "name": "Active Set Working Set Management\n\nConstraints manages the working set of general linear constraints\n(Ax \u2264 b) in the active-set QP algorithm. It tracks which constraints\nare currently active (binding) vs inactive.\n\n**Working set partitioning:**\n- Active: Constraints treated as equalities at current iterate\n- Inactive: Constraints with slack (not binding)\n\n**Status tracking:**\n- ST_LOWER: Active at lower bound (A\u1d62x = l\u1d62)\n- ST_UPPER: Active at upper bound (A\u1d62x = u\u1d62)\n- ST_INACTIVE: Strictly satisfied (l\u1d62 < A\u1d62x < u\u1d62)\n- ST_DISABLED: Temporarily removed from consideration\n\n**Active-set transitions:**\n- moveActiveToInactive(): Constraint leaves working set (ratio test)\n- moveInactiveToActive(): Constraint enters working set (blocking)\n- flipFixed(): Switch between lower/upper bound activity\n\n**MPC support:**\n- shift(): Hot-start for receding horizon (drop old, replicate new)\n- rotate(): Circular buffer for periodic problems",
+      "math": "",
+      "complexity": "O(1) for status queries, O(n) for index list operations",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "SubjectTo.hpp for base class",
+    "Bounds.hpp for simple bound management"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "OSFileUtil",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSUtils/OSFileUtil.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

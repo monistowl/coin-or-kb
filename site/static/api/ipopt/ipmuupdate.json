@@ -1,0 +1,21 @@
+{
+  "name": "IpMuUpdate",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpMuUpdate.hpp",
+  "brief": "Strategy interface for updating barrier parameter mu\n\nMuUpdate is the abstract base for strategies that determine the\nbarrier parameter mu and fraction-to-boundary parameter tau for\neach iteration of the interior point method.",
+  "algorithms": [
+    {
+      "name": "Barrier Parameter Update Strategies:\n  Monotone (classical path-following):\n    \u03bc_{k+1} = \u03c3\u00b7\u03bc_k where \u03c3 < 1 (typically \u03c3 = 0.1 after good progress).\n    Conservative: ensures superlinear convergence near solution.\n  Adaptive (LOQO-style / Mehrotra):\n    \u03bc = (x^T z / n) \u00b7 \u03c3 where \u03c3 from affine direction analysis.\n    Can increase \u03bc if needed for centrality, more aggressive reduction.\n  Probing: test multiple \u03bc values, select best progress.",
+      "math": "Central path and barrier parameter:\n  Barrier problem: min f(x) - \u03bc\u00b7\u03a3log(x_i) s.t. c(x) = 0.\n  Central path: x(\u03bc)\u00b7z(\u03bc) = \u03bce for all \u03bc > 0.\n  As \u03bc \u2192 0: x(\u03bc) \u2192 x* (optimal), z(\u03bc) \u2192 z* (optimal multipliers).\n  Complementarity measure: \u03bc_avg = (x^T z + s^T v) / n.\n  \u03c4 = 1 - \u03bc^\u03b8 (\u03b8 \u2248 1.5): fraction-to-boundary prevents hitting bounds.",
+      "complexity": "O(1) for monotone update.\n  O(linear_solve) for predictor-corrector (affine direction needed).\n  Adaptive may require multiple KKT solves per iteration.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMonotoneMuUpdate.hpp for monotone strategy",
+    "IpAdaptiveMuUpdate.hpp for adaptive strategy",
+    "IpMuOracle.hpp for mu computation oracles"
+  ]
+}

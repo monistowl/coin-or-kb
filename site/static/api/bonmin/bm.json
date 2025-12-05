@@ -1,0 +1,9 @@
+{
+  "name": "BM",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "experimental/Bcp/BM.hpp",
+  "brief": "Bonmin BCP main interface\n\nMain interface for experimental Bonmin-BCP integration.\nCombines branch-cut-price parallel framework with MINLP.",
+  "algorithms": [],
+  "methods": []
+}

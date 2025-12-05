@@ -1,0 +1,13 @@
+{
+  "name": "HighsModel",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/model/HighsModel.h",
+  "brief": "Combined LP/QP model container\n\n**HighsModel Class:**\nCombines HighsLp (linear constraints/objective) with HighsHessian (quadratic terms).\n\n**Data Members:**\n- lp_: Linear program data (constraints, bounds, linear objective)\n- hessian_: Quadratic objective term Q for QP: min 0.5*x'Qx + c'x\n\n**Model Type Detection:**\n- isQp(): Returns true if hessian_.dim_ != 0\n- isMip(): Delegates to lp_.isMip() (checks integrality constraints)\n- isEmpty(): True if num_col_ == 0 and num_row_ == 0\n\n**Objective Evaluation:**\n- objectiveValue(): Compute c'x + 0.5*x'Qx\n- objectiveGradient(): Compute c + Qx",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "HighsLp.h for LP data structure",
+    "HighsHessian.h for Hessian matrix"
+  ]
+}

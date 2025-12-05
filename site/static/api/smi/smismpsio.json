@@ -1,0 +1,14 @@
+{
+  "name": "SmiSmpsIO",
+  "library": "Smi",
+  "layer": "layer-3",
+  "header": "Smi/src/SmiSmpsIO.hpp",
+  "brief": "SMPS (Stochastic MPS) file format reader and writer\n\nSmiSmpsIO extends CoinMpsIO to read/write the industry-standard SMPS\nformat for stochastic programming problems.\n\n**SMPS File Format (3 files):**\n- {name}.core: Core LP in MPS format (deterministic base problem)\n- {name}.time: Stage assignments (PERIODS section maps rows/cols to stages)\n- {name}.stoch: Stochastic data (SCENARIOS or INDEP sections)\n\n**SmiSectionType Enum:**\n- SMI_TIME_SECTION: PERIODS in time file\n- SMI_SCENARIOS_SECTION: SCENARIOS in stoch file\n- SMI_INDEPENDENT_SECTION: INDEP in stoch file\n\n**SmiSmpsType Enum:**\n- SMI_SC_CARD: SC card (scenario definition)\n- SMI_BL_CARD: BL card (branch location)\n- SMI_SMPS_COMBINE_ADD/REPLACE: Data combination rules\n\n**SmiSmpsCardReader Class:**\nExtends CoinMpsCardReader for SMPS-specific parsing:\n- periodName(): Stage name from time file\n- scenarioNew/Anc(): Scenario branching info\n- getProb(): Scenario probability\n\n**Key Methods:**\n- readTimeFile(): Parse stage assignments\n- readStochFile(): Parse stochastic data\n- writeSmps(): Output SMPS files",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SmiScnModel.hpp::readSmps() for high-level interface",
+    "SmiScnData.hpp for SmiCoreData created from core file",
+    "CoinMpsIO (CoinUtils) for MPS parsing base"
+  ]
+}

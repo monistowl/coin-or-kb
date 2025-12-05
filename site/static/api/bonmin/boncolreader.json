@@ -1,0 +1,12 @@
+{
+  "name": "BonColReader",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonColReader.hpp",
+  "brief": "Reader for AMPL .col and .row name files\nCopyright (C) Carnegie Mellon University 2005. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nNamesReader: Reads variable and constraint names from AMPL-generated\n.col (column names) and .row (row names) files. Provides bidirectional\nlookup between indices and names via hash map.\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: May 26, 2005",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiSolverInterface::OsiNameVec for name storage"
+  ]
+}

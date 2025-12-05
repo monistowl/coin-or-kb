@@ -1,0 +1,9 @@
+{
+  "name": "scaling",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/dual_simplex/scaling.hpp",
+  "brief": "cuOpt matrix preprocessing\n\nScaling and permutation for numerical stability.",
+  "algorithms": [],
+  "methods": []
+}

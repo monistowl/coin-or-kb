@@ -1,0 +1,25 @@
+{
+  "name": "ClpDualRowSteepest",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpDualRowSteepest.hpp",
+  "brief": "Steepest edge pivot selection for dual simplex",
+  "algorithms": [
+    {
+      "name": "Steepest Edge Dual Pivot Selection:\nSelects leaving variable (pivot row) by normalizing infeasibility by edge weight.\nInstead of choosing most infeasible basic variable (Dantzig), computes:\n  score_i = (infeasibility_i)\u00b2 / weight_i\nwhere weight_i = ||r_i||\u00b2 = ||e_i^T B^{-1}||\u00b2 is squared norm of i-th row of B^{-1}.\n\nWeight update after pivot in row p with column entering:\n  weight_i := weight_i - 2*(r_ip/r_pp)*v_i + (r_ip/r_pp)\u00b2*weight_p\nwhere r is pivot row and v is BTRAN of pivot column. This preserves sparsity.\n\nThree modes: uninitialized (1s), full (exact weights), partial (sparse scan).\nMaintains infeasibility list for efficient scanning of only violated rows.",
+      "math": "Edge weight: \u03b3_i = ||B^{-T}e_i||\u00b2 = (i-th row of B^{-1})^T(i-th row of B^{-1})\nNormalized ratio: d_i/\u03b3_i where d_i is dual infeasibility of row i.\nUpdate formula from BTRAN column: v = B^{-T}a_j gives \u03b3_i' = \u03b3_i - 2\u03b1_i v_i + \u03b1_i\u00b2 \u03b3_p\nwhere \u03b1_i = r_ip/r_pp is multiplier for row i in elimination.",
+      "complexity": "O(m) per pivot for weight updates (sparse operations).\nFull recomputation O(m\u00b2) but rare. Typically 30-50% fewer iterations than Dantzig.",
+      "ref": [
+        "Forrest & Goldfarb, \"Steepest-edge simplex algorithms for LP\",\n     Mathematical Programming 57 (1992) 341-374",
+        "Harris, \"Pivot selection methods of the Devex LP code\",\n     Mathematical Programming 5 (1973) 1-28\n\nImplements the steepest edge algorithm for choosing the leaving variable\nin dual simplex. Instead of choosing the most infeasible row (Dantzig),\nsteepest edge normalizes by the squared norm of the tableau row, selecting\nthe direction of steepest improvement in the dual objective.\n\nThis is the recommended pivot strategy - it typically requires fewer\niterations than Dantzig, especially on degenerate problems."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "\"Implementing the Dantzig-Wolfe decomposition\" by Forrest & Goldfarb\n     for the steepest edge algorithm",
+    "ClpDualRowPivot for the base interface",
+    "ClpDualRowDantzig for simpler but often slower alternative",
+    "ClpSimplexDual for the dual simplex algorithm"
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "library": "Dip",
+  "layer": "layer-3",
+  "classes": [
+    {
+      "name": "AlpsDecompModel",
+      "brief": "ALPS integration - model class bridging DIP and ALPS B&B\n\nAlpsDecompModel derives from AlpsModel to integrate DIP's decomposition\nalgorithms with ALPS's branch-and-bound framework.\n\n**Key Responsibilities:**\n- Hold pointer to active DecompAlgo\n- Create root node (AlpsDecompTreeNode)\n- Manage solution pool and incumbent\n- Handle ALPS callbacks and parameters\n\n**ALPS Hierarchy:**\nAlpsKnowledge -> AlpsModel -> AlpsDecompModel\n\n**Key Methods:**\n- createRoot(): Create initial tree node\n- setupSelf(): Initialize from parameters\n- registerKnowledge(): Register solution types\n\n**Data Flow:**\n1. User creates DecompApp and DecompAlgo\n2. AlpsDecompModel wraps the algorithm\n3. ALPS drives B&B, calling process() on nodes\n4. Nodes delegate to DecompAlgo for bounding",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsDecompNodeDesc",
+      "brief": "ALPS node descriptor storing branching bounds\n\nAlpsDecompNodeDesc derives from AlpsNodeDesc to store the\ndescription of a tree node for serialization and reconstruction.\n\n**Storage:**\nDIP doesn't use full differencing (delta encoding), so node\ndescriptions primarily store bound changes from branching:\n- Variable lower/upper bound modifications\n- Warm start basis (optional)\n\n**Key Methods:**\n- encode(): Serialize to AlpsEncoded for transmission\n- decode(): Reconstruct from encoded form\n\n**ALPS Integration:**\n- Each AlpsDecompTreeNode has an AlpsDecompNodeDesc\n- Used for checkpointing and parallel distribution\n- Compact representation for tree storage",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsDecompSolution",
+      "brief": "ALPS solution wrapper for DIP incumbent solutions\n\nAlpsDecompSolution derives from AlpsSolution to integrate DIP\nsolutions with ALPS's solution management and reporting.\n\n**Data Members:**\n- m_size: Number of variables\n- m_values: Solution vector\n- m_quality: Objective value\n- m_app: Pointer to DecompApp for printing\n\n**ALPS Integration:**\n- Stored in ALPS solution pool\n- Used for incumbent tracking\n- Supports encode/decode for parallelism\n\n**Lifecycle:**\n- Created when DIP finds integer-feasible solution\n- Passed to ALPS via registerKnowledge()\n- Best solution reported at termination",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsDecompTreeNode",
+      "brief": "ALPS tree node for DIP branch-and-bound\n\nAlpsDecompTreeNode represents a node in the B&B tree, deriving from\nAlpsTreeNode to integrate with ALPS's tree management.\n\n**Key Responsibilities:**\n- Store branching decisions (bound changes from parent)\n- Implement process() to solve node via DecompAlgo\n- Implement branch() to create child nodes\n- Check for new incumbents\n\n**Branching Storage:**\n- downBranchLB_, downBranchUB_: Bounds for down branch\n- upBranchLB_, upBranchUB_: Bounds for up branch\nStored as (var_index, bound_value) pairs.\n\n**Key Methods:**\n- process(): Main bounding - calls DecompAlgo::processNode()\n- branch(): Create children with new bounds\n- checkIncumbent(): Test if solution improves best known\n- createNewTreeNode(): Factory for child nodes\n\n**Node Processing Flow:**\n1. ALPS selects node from tree\n2. Calls process() which invokes DecompAlgo\n3. DecompAlgo returns bound and status\n4. If fractional, branch() creates children",
+      "has_algorithm": false
+    },
+    {
+      "name": "Decomp",
+      "brief": "Central header with enums, constants, and solver interfaces for DIP\n\nThis is the foundational include for DIP (Decomposition for Integer\nProgramming). It provides all enums, constants, and conditional solver\ninterface includes.",
+      "has_algorithm": true
+    },
+    {
+      "name": "DecompAlgo",
+      "brief": "Base class for all DIP decomposition algorithms\n\nDecompAlgo is the algorithmic engine that orchestrates:\n- Master problem management (LP relaxation)\n- Subproblem solving (pricing/column generation)\n- Cut generation and management\n- Phase transitions and convergence\n\n**Key Data Members:**\n- m_masterSI: Master LP solver interface\n- m_app: Pointer to user's DecompApp\n- m_modelCore/m_modelRelax: Problem decomposition\n- m_vars/m_cuts: Generated columns and cuts\n- m_xhat: Current LP solution in original x-space\n\n**Algorithm Phases:**\n- PHASE_PRICE1: Feasibility with artificial variables\n- PHASE_PRICE2: Optimizing with generated columns\n- PHASE_CUT: Adding violated inequalities\n\n**Virtual Methods for Subclasses:**\n- createMasterProblem(): Build initial restricted master\n- processNode(): Main node processing loop\n- generateVars(): Column generation (pricing)\n- generateCuts(): Cut separation\n- getMasterDualSolution(): Dual values for pricing\n\n**Derived Classes:**\n- DecompAlgoPC: Price-and-Cut (Dantzig-Wolfe)\n- DecompAlgoC: Cutting plane only\n- DecompAlgoRC: Relax-and-Cut (Lagrangian)",
+      "has_algorithm": true
+    },
+    {
+      "name": "DecompAlgoC",
+      "brief": "Cutting Plane Method algorithm (no column generation)\n\nDecompAlgoC implements classic cutting plane method:\n- Solve LP relaxation\n- Find violated cuts\n- Add cuts and resolve\n- Repeat until integer or no cuts found",
+      "has_algorithm": true
+    },
+    {
+      "name": "DecompAlgoCGL",
+      "brief": "Interface to CGL (COIN-OR Cut Generation Library)\n\nDecompAlgoCGL wraps CGL cut generators for use in DIP algorithms.\nProvides automatic generation of standard MIP cuts.\n\n**Available CGL Generators:**\n- CglClique: Clique cuts from conflict graph\n- CglOddHole: Odd hole inequalities\n- CglFlowCover: Flow cover cuts\n- CglKnapsackCover: Knapsack cover cuts\n- CglMixedIntegerRounding2: MIR cuts\n- CglGomory: Gomory mixed-integer cuts\n\n**Usage:**\n- Created by DecompAlgo during initialization\n- Called during PHASE_CUT to generate cuts\n- Returns cuts via DecompCutOsi wrapper\n\n**Configuration:**\n- Generators enabled/disabled via DecompParam\n- Per-generator parameters can be set\n- Different strategies for PC vs C algorithms\n\n**Integration:**\nCGL generates cuts in x-space. For Price-and-Cut, these are\nreformulated to lambda-space before adding to master.",
+      "has_algorithm": false
+    },
+    {
+      "name": "DecompAlgoPC",
+      "brief": "Price-and-Cut algorithm (Dantzig-Wolfe decomposition with cuts)\n\nDecompAlgoPC implements the most powerful DIP algorithm combining:\n- Column generation (pricing subproblems)\n- Cut generation (violated inequalities)\n- Branch-and-bound integration via ALPS",
+      "has_algorithm": true
+    },
+    {
+      "name": "DecompAlgoRC",
+      "brief": "Relax-and-Cut algorithm (Lagrangian relaxation with cuts)\n\nDecompAlgoRC implements Lagrangian relaxation:\n- Dualize complicating constraints with multipliers u\n- Solve Lagrangian subproblem: min (c - u'A'')x s.t. A'x >= b'\n- Update multipliers via subgradient optimization\n- Add cuts to improve bounds",
+      "has_algorithm": true
+    },
+    {
+      "name": "DecompApp",
+      "brief": "User application interface - derive to define your decomposition\n\nDecompApp is the main user-facing class. Derive from it to define:\n- Model decomposition (core vs relaxed constraints)\n- Subproblem solvers\n- Problem-specific heuristics",
+      "has_algorithm": true
+    },
+    {
+      "name": "DecompConstraintSet",
+      "brief": "Storage for constraint matrix and bounds (A, b, l, u)\n\nDecompConstraintSet stores the full specification of a constraint set\nused in decomposition: matrix, row/column bounds, integrality markers.\n\n**Matrix Storage:**\n- M: CoinPackedMatrix (row-major or column-major)\n- rowLB, rowUB: Row bounds (rowLB <= Ax <= rowUB)\n- colLB, colUB: Variable bounds\n- rowSense, rowRhs: Alternative row format ('L', 'G', 'E', 'R')\n\n**Variable Information:**\n- integerVars: Indices of integer variables\n- integerMark: 'I' for integer, 'C' for continuous\n- colNames, rowNames: Human-readable names\n\n**Block Structure:**\n- activeColumns: Which columns appear in this block\n- activeColumnsS: Set version for O(1) lookup\n- masterOnlyCols: Columns that only appear in master\n\n**Sparse Representation:**\nFor blocks with few active columns:\n- m_isSparse: Enable sparse mode\n- m_origToSparse, m_sparseToOrig: Column mappings\nReduces memory for blocks with disjoint variable sets.",
+      "has_algorithm": false
+    },
+    {
+      "name": "DecompCut",
+      "brief": "Cut representation in original x-space\n\nDecompCut represents a cutting plane (valid inequality) that can be\nadded to strengthen the formulation. Cuts are defined in original\nx-space and expanded to the master problem.",
+      "has_algorithm": true
+    },
+    {
+      "name": "DecompCutPool",
+      "brief": "Pool of generated cuts (DecompCut) for cut management\n\nDecompCutPool manages cuts waiting to enter the master problem.\nInherits from std::vector<DecompWaitingRow> for storage.\n\n**Key Functions:**\n- reExpand(): Regenerate row coefficients when columns change\n- createRowReform(): Transform x-space cut to lambda-space\n- setViolations(): Calculate cut violations vs current solution\n\n**Cut Selection:**\n- is_greater_thanD comparator sorts by violation\n- Most violated cuts enter master first\n- Duplicate cuts filtered via hash\n\n**Reformulation:**\nCuts in x-space must be reformulated to lambda-space for\nDantzig-Wolfe master: a'x >= b becomes a'(sum_s s*lambda_s) >= b\ncreateRowReform() handles this transformation.\n\n**Validity Flag:**\n- m_rowsAreValid: Track if cuts need re-expansion\n- Set false when column set changes\n- reExpand() regenerates coefficients",
+      "has_algorithm": false
+    },
+    {
+      "name": "DecompMemPool",
+      "brief": "Pre-allocated memory arrays for performance\n\nDecompMemPool provides reusable scratch arrays to avoid repeated\nallocations during the inner loops of the algorithm.\n\n**Pre-allocated Arrays:**\n- dblArrNCoreCols: Double array sized for core columns\n- dblArrNCoreRows: Double array sized for core rows\n\n**Usage:**\nRather than allocating temporary arrays in hot paths like\nreduced cost calculation or constraint evaluation, use these\npre-allocated buffers for better cache performance.\n\n**Memory Management:**\n- allocateMemory(): Size arrays based on problem dimensions\n- Destructor frees all allocated memory\n- Single allocation at algorithm start",
+      "has_algorithm": false
+    },
+    {
+      "name": "DecompModel",
+      "brief": "Wrapper classes for constraint sets used in decomposition\n\nProvides model containers that wrap DecompConstraintSet with\nmetadata and optional solver interfaces.\n\n**DecompModel:**\nBasic wrapper for a constraint set (A'x >= b' or A''x >= b'')\n- m_model: Pointer to the constraint set\n- m_modelName: Human-readable name for debugging\n- m_blockId: Which block this belongs to (-1 for core)\n\n**DecompSubModel:**\nExtended model with OsiSolverInterface for subproblem solving\n- m_osi: Solver interface (Clp, Cpx, Grb, etc.)\n- solveAsMIP(): Solve subproblem as MIP\n- Used when user doesn't provide custom solveRelaxed()\n\n**Usage in Decomposition:**\n- Core model (A''): Linking constraints kept in master\n- Relax models (A'): Block constraints for subproblems\n- Each block b has m_modelRelax[b] in DecompApp",
+      "has_algorithm": false
+    },
+    {
+      "name": "DecompParam",
+      "brief": "Comprehensive parameter class for DIP algorithm configuration\n\nDecompParam contains 100+ parameters controlling all aspects of DIP\ndecomposition algorithms. Parameters read from file via UtilParameters.\n\n**Logging Parameters:**\n- LogLevel: Verbosity (0=silent to 5=debug)\n- LogDumpModel: When to dump LP models (0=never, 2=always)\n- LogObjHistory: Print objective progress\n\n**Algorithm Limits:**\n- TotalCutItersLimit, TotalPriceItersLimit: Iteration caps\n- RoundCutItersLimit, RoundPriceItersLimit: Per-round limits\n- TimeLimit: Wall clock limit\n- NodeLimit: Max B&B nodes\n\n**Subproblem Control:**\n- SubProbTimeLimitExact: Time for exact subproblem solves\n- SubProbTimeLimitHeur: Time for heuristic solves\n- SubProbNumSolLimit: Max solutions per subproblem\n- SubProbParallelType: OpenMP scheduling strategy\n\n**Dual Stabilization:**\n- DualStab: Enable Wentges stabilization\n- DualStabAlpha: Smoothing parameter [0,1]\n\n**Branching:**\n- BranchEnforceInSubProb: Branch on x in subproblems\n- BranchEnforceInMaster: Branch on lambda in master\n\n**Strategy:**\n- PCStrategy: Balance pricing vs cutting\n- CutCglStrategy: Which CGL cuts to use",
+      "has_algorithm": false
+    },
+    {
+      "name": "DecompSolution",
+      "brief": "Solution storage for feasible/incumbent solutions\n\nDecompSolution stores primal solutions found during decomposition\n(from heuristics, subproblems, or node processing).\n\n**Key Data Members:**\n- m_size: Number of variables (columns)\n- m_values: Solution vector x*\n- m_quality: Objective value c'x* (for incumbent tracking)\n\n**Solution Sources:**\n- Subproblem solutions (during pricing)\n- User heuristics (DecompApp::APPheuristics)\n- Rounding/diving heuristics\n- Integer LP solutions\n\n**Output Methods:**\n- print(): Display solution with specified precision\n- printMIPLIB(): Output in MIPLIB solution format\n\n**Integration:**\nSolutions are passed to ALPS via AlpsDecompModel for\nincumbent tracking and solution reporting.",
+      "has_algorithm": false
+    },
+    {
+      "name": "DecompSolverResult",
+      "brief": "Container for subproblem/LP solver results\n\nDecompSolverResult captures all outputs from solving a subproblem\nor LP relaxation, including status, bounds, and solutions.\n\n**Status Information:**\n- m_solStatus: Solver-specific status code\n- m_isOptimal: True if proven optimal\n- m_isUnbounded: True if unbounded detected\n- m_isCutoff: True if cutoff by bound\n\n**Bounds:**\n- m_objLB: Lower bound on optimal value\n- m_objUB: Upper bound / incumbent value\n\n**Solutions:**\n- m_nSolutions: Number of solutions found\n- m_solution: Vector of solution vectors (for solution pools)\n\n**Usage:**\nReturned by subproblem solvers to DecompAlgo. Used for:\n- Generating new columns (m_solution contains extreme points)\n- Checking feasibility (m_isOptimal, m_solStatus)\n- Updating bounds (m_objLB, m_objUB)",
+      "has_algorithm": false
+    },
+    {
+      "name": "DecompStats",
+      "brief": "Statistics tracking for DIP algorithm performance\n\nProvides classes for recording and reporting algorithm statistics.\n\n**DecompObjBound:**\nRecords bound history at checkpoints:\n- phase, cutPass, pricePass: Algorithm state\n- timeStamp: Wall clock from start\n- thisBound/thisBoundUB: Current node bounds\n- bestBound: Global lower bound\n- thisBoundIP: Best integer solution\n\n**DecompStats:**\nAggregate statistics for the algorithm:\n- objHistoryBound: Vector of DecompObjBound snapshots\n- Various timers for profiling subsystems\n- Counts of cuts/columns generated\n\n**Usage:**\n- DecompAlgo creates and updates stats during execution\n- Bound history enables convergence analysis\n- Timers help identify bottlenecks",
+      "has_algorithm": false
+    },
+    {
+      "name": "DecompVar",
+      "brief": "Column generation variable (lambda) representation\n\nDecompVar represents a column in the Dantzig-Wolfe reformulation.\nEach lambda_s corresponds to an extreme point s of a subproblem\npolyhedron: conv{x : A'x >= b', x integer}.",
+      "has_algorithm": true
+    },
+    {
+      "name": "DecompVarPool",
+      "brief": "Pool of generated columns (DecompVar) for column generation\n\nDecompVarPool manages columns waiting to enter the master problem.\nInherits from std::vector<DecompWaitingCol> for storage.",
+      "has_algorithm": true
+    },
+    {
+      "name": "DecompWaitingCol",
+      "brief": "Wrapper pairing DecompVar with its master column coefficients\n\nDecompWaitingCol bundles a DecompVar (the x-space representation)\nwith its expanded column (A''s) for the master problem.\n\n**Data Members:**\n- m_var: The variable in x-space (extreme point s)\n- m_col: CoinPackedVector of (A''s) master coefficients\n\n**Purpose:**\nWhen pricing generates a new column s, we need both:\n1. The x-space representation for solution reconstruction\n2. The master coefficients for LP updates\nThis class keeps them paired.\n\n**Lifecycle:**\n- Created during pricing when subproblem returns solution\n- Stored in DecompVarPool\n- m_col regenerated via reExpand() when master changes\n- Eventually transferred to master LP",
+      "has_algorithm": false
+    },
+    {
+      "name": "DecompWaitingRow",
+      "brief": "Wrapper pairing DecompCut with its row coefficients\n\nDecompWaitingRow bundles a DecompCut with both its x-space row\nand reformulated lambda-space row for the master problem.\n\n**Data Members:**\n- m_cut: The cut object with bounds and metadata\n- m_row: CoinPackedVector in original x-space\n- m_rowReform: CoinPackedVector in lambda-space for master\n\n**Reformulation:**\nOriginal cut: a'x >= b\nIn master: sum_s (a's)lambda_s >= b\nm_rowReform stores coefficients (a's) for each lambda variable.\n\n**Lifecycle:**\n- Created during cut generation\n- Stored in DecompCutPool\n- m_rowReform computed via createRowReform()\n- Eventually added to master LP",
+      "has_algorithm": false
+    },
+    {
+      "name": "DippyDecompAlgo",
+      "brief": "",
+      "has_algorithm": false
+    }
+  ]
+}

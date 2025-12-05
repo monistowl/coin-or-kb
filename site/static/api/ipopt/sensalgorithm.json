@@ -1,0 +1,9 @@
+{
+  "name": "SensAlgorithm",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensAlgorithm.hpp",
+  "brief": "sIPOPT sensitivity analysis main algorithm\n\nSensAlgorithm: controller for parametric sensitivity analysis in Ipopt.\nComputes directional derivatives and sensitivity matrices for solution\nw.r.t. parameter perturbations. Uses Schur complement decomposition\nto efficiently compute sensitivities after optimal solution found.",
+  "algorithms": [],
+  "methods": []
+}

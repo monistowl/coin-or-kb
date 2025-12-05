@@ -1,0 +1,13 @@
+{
+  "name": "CbcParamUtils",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcParamUtils.hpp",
+  "brief": "Utility functions for parameter handling in cbc-generic\nCopyright (C) 2007, Lou Hafer, IBM Corporation and others.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcParamUtils namespace: Callback functions for parameter processing.\nThese are invoked when parameters are set via the command line.\n\nSolution I/O:\n- saveSolution(): Write solution to file\n- readSolution(): Load solution from file\n\nAction handlers (doXxxParam):\n- doBaCParam(): Execute branch-and-cut solve\n- doImportParam(): Load problem from file\n- doSolutionParam(): Write/print solution\n- doHelpParam(): Display help information\n- doExitParam(): Exit the program\n\nPush functions (pushCbcSolverXxxParam):\n- Transfer parameter values to solver/model\n- Separate handlers for Dbl, Int, Kwd, Str, Bool types\n- Special handlers for Cut and Heur parameters\n\nModel parameter handlers:\n- pushCbcModelDblParam/IntParam(): Set CbcModel parameters\n- setCbcModelDefaults(): Initialize model with default values",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CbcParam for parameter definitions",
+    "CbcParameters for parameter storage"
+  ]
+}

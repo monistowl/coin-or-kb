@@ -1,0 +1,19 @@
+{
+  "name": "SparseSolver",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/SparseSolver.hpp",
+  "brief": "Sparse linear solver interfaces for Schur-complement QP method",
+  "algorithms": [
+    {
+      "name": "Sparse Symmetric Indefinite Factorization Interface\n\nSparseSolver provides an abstract interface to sparse symmetric\nindefinite factorization codes used in qpOASES's Schur-complement\napproach for large-scale QP.\n\n**Supported backends:**\n- MA27: Harwell multifrontal solver (classic, robust)\n- MA57: Harwell multifrontal with pivoting improvements\n- MUMPS: Parallel multifrontal solver\n\n**Schur complement context:**\nFor QPs with many simple bounds but few general constraints,\nthe KKT system can be solved efficiently via:",
+      "math": "[A  0 ]\n\nThe sparse solver handles the reduced system on active constraints\nafter eliminating variables at simple bounds.\n\n**Key operations:**\n- setMatrixData(): Set lower-triangular Harwell-Boeing format\n- factorize(): Compute LDL' factorization with pivoting\n- solve(): Forward/backward substitution\n- getNegativeEigenvalues(): Inertia for optimality verification",
+      "complexity": "O(n\u00b3) worst case, O(n\u00b7nnz) typical for sparse systems",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "SQProblemSchur.hpp for Schur-complement QP implementation"
+  ]
+}

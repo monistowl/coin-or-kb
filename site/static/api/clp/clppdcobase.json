@@ -1,0 +1,20 @@
+{
+  "name": "ClpPdcoBase",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPdcoBase.hpp",
+  "brief": "Abstract base class for PDCO problem customization\n\nStrategy pattern interface for defining custom convex objectives in PDCO.",
+  "algorithms": [
+    {
+      "name": "Preconditioning:\n  matPrecon(delta, x, y): Apply preconditioner\n  Typically diagonal scaling based on (A\u00b7D\u00b2\u00b7A' + \u03b4\u00b2I)\n\nREGULARIZATION PARAMETERS:\n  d1 (primal): Adds ||d\u2081\u00b7x||\u00b2/2 to objective, ensures D\u00b2 > 0\n  d2 (dual): Adds \u03b4\u00b2I to (2,2) block of augmented system",
+      "math": "Effect on KKT system:\n  Without regularization: A\u00b7(H\u207b\u00b9)\u00b7A' may be singular if H has zeros\n  With regularization: A\u00b7(H + d\u2081\u00b2I)\u207b\u00b9\u00b7A' + d\u2082\u00b2I always invertible\n\nCommon objective functions that can be implemented:\n- Entropy: \u03c6(x) = \u03a3 x\u1d62\u00b7log(x\u1d62)  \u2192 H = diag(1/x\u1d62)\n- Barrier: \u03c6(x) = -\u03a3 log(x\u1d62)    \u2192 H = diag(1/x\u1d62\u00b2)\n- Quadratic: \u03c6(x) = x'Qx/2      \u2192 H = Q (if diagonal)\n- Huber: \u03c6(x) = \u03a3 huber(x\u1d62)     \u2192 H = piecewise",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPdco which uses this interface",
+    "ClpLsqr for the iterative solver"
+  ]
+}

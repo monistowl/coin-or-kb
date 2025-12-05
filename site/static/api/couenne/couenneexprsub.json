@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprSub",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprSub.hpp",
+  "brief": "Binary subtraction operator w = x - y\n\nLinear operator for computing the difference of two expressions.\nLinearity is the maximum of the two arguments' linearity.\n\n**Convexification:**\n- Affine in both arguments: no convexification needed\n- Linearity() = max(Linearity(x), Linearity(y))\n\n**Bound propagation:**\n- lb(w) = lb(x) - ub(y)\n- ub(w) = ub(x) - lb(y)\n\n**Implied bounds:**\nFrom w = x - y:\n- x >= lb(w) + lb(y)\n- x <= ub(w) + ub(y)\n- y >= lb(x) - ub(w)\n- y <= ub(x) - lb(w)\n\n**Standardization:**\nMay be rewritten as x + (-1)*y using exprSum and exprOpp\nduring problem transformation.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprSum for addition",
+    "exprOpp for negation"
+  ]
+}

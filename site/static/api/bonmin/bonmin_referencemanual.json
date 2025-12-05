@@ -1,0 +1,9 @@
+{
+  "name": "BONMIN_ReferenceManual",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "doc/BONMIN_ReferenceManual.hpp",
+  "brief": "Bonmin Doxygen documentation main page\n\nMain page for Bonmin reference manual. Provides overview of Mixed\nInteger Nonlinear Programming solver combining B&B with Ipopt NLP.",
+  "algorithms": [],
+  "methods": []
+}

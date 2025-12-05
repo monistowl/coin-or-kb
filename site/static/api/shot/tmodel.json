@@ -1,0 +1,22 @@
+{
+  "name": "tmodel",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "ThirdParty/mc++/include/tmodel.hpp",
+  "brief": "Taylor Model Arithmetic for Rigorous Bound Propagation",
+  "algorithms": [
+    {
+      "name": "Convergence Properties:",
+      "math": "|R| = O(diam(D)^{q+1}) as domain shrinks\n  Higher order q \u2192 faster convergence but more coefficients\n  Used in global optimization branch-and-bound for bound tightening.",
+      "complexity": "Bernstein conversion: O(n^q * 2^n) but provides hull property",
+      "ref": [
+        "Makino & Berz (2003) - Taylor models and validated numerics",
+        "Neumaier (2002) - Taylor forms for global optimization",
+        "Lin & Rokne (1995) - Bernstein form for polynomial bounds",
+        "Sahlodin & Chachuat (2011) - McCormick-Taylor models",
+        "Bompadre et al. (2012) - Convergence of Taylor models"
+      ]
+    }
+  ],
+  "methods": []
+}

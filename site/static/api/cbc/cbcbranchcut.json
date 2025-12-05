@@ -1,0 +1,21 @@
+{
+  "name": "CbcBranchCut",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcBranchCut.hpp",
+  "brief": "Branching by adding cuts (split disjunctions)\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcBranchCut and CbcCutBranchingObject: Branch by adding cuts\nrather than tightening variable bounds. Implements split disjunctions\nwhere each branch arm adds a different cut to the LP.",
+  "algorithms": [
+    {
+      "name": "Cut-Based Branching (Disjunctive Programming):\n  Instead of x \u2264 k vs x \u2265 k+1 (bound changes):\n  createCbcBranch() creates cut disjunction:\n  - Down branch: Add cut down_ to LP.\n  - Up branch: Add cut up_ to LP.\n  CbcCutBranchingObject::branch() adds appropriate OsiRowCut.\n  Cuts remain in LP for all descendants of that branch.\n  canFix_ indicates if one branch can fix variables.",
+      "math": "Split disjunctions and Gomory cuts:\n  Split cut: \u03c0^T x \u2264 \u230a\u03c0_0\u230b OR \u03c0^T x \u2265 \u2308\u03c0_0\u2309 for integer \u03c0.\n  Derived from tableau row with fractional RHS.\n  Branching on cuts generalizes variable branching.\n  Each Gomory cut implicitly branches on slack integrality.\n  Enables disjunctive programming within B&C framework.\n\nUse cases:\n- Gomory cuts can be viewed as branching on row slack integrality\n- Split cuts: ax <= b OR ax >= b+1 for integer a, fractional b\n- General disjunctive programming branches\n\nCbcCutBranchingObject stores two OsiRowCut objects:\n- down_: Cut added when way_ = -1\n- up_: Cut added when way_ = 1\n\nBase class for CbcBranchToFixLots and CbcBranchAllDifferent.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcBranchToFixLots for reduced-cost-based fixing",
+    "CbcBranchAllDifferent for all-different constraint",
+    "OsiRowCut for cut representation"
+  ]
+}

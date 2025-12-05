@@ -1,0 +1,12 @@
+{
+  "name": "HighsIis",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsIis.h",
+  "brief": "Irreducible Infeasible Set (IIS) computation for infeasible LPs\n\nIdentifies minimal subset of constraints that cannot be satisfied.\n\n**IIS Definition:**\n- Minimal infeasible subsystem: removing any constraint makes it feasible\n- Helps diagnose why an LP is infeasible\n- Also identifies which variable bounds participate\n\n**IisBoundStatus:**\n- kDropped: Bound removed from IIS\n- kNull: Not yet classified\n- kFree: Variable is free (not in IIS)\n- kLower/kUpper/kBoxed: Which bound(s) are in IIS\n\n**Algorithm:**\n- compute(): Main IIS computation using simplex iterations\n- trivial(): Check for obviously infeasible (single row/col)\n- rowValueBounds(): Check row activity vs bounds\n\n**Strategy:**\n- kIisStrategyMin: Minimize IIS size (more iterations)\n- Iteratively removes constraints until minimal set remains\n\n**Output:**\n- col_index_/row_index_: Variables/constraints in IIS\n- col_bound_/row_bound_: Which bounds contribute\n- info_: Simplex stats per iteration",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Highs.h for getIis() API"
+  ]
+}

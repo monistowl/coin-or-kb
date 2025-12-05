@@ -1,0 +1,13 @@
+{
+  "name": "TaskExecuteRelaxationStrategy",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskExecuteRelaxationStrategy.h",
+  "brief": "Execute LP/MIP relaxation strategy step\n\nControls transition from LP to MIP solving.\n\n**TaskExecuteRelaxationStrategy Class:**\n- run(): Invoke current relaxation strategy\n\n**Strategy Control:**\n- Calls IRelaxationStrategy to decide LP vs MIP\n- May enable/disable integer constraints\n- Affects DualSolver solve behavior",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IRelaxationStrategy.h for strategy interface",
+    "RelaxationStrategyStandard.h for default strategy"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "ObjectiveFunction",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Model/ObjectiveFunction.h",
+  "brief": "Objective function hierarchy with derivative computation\n\nObjective function classes mirroring the constraint hierarchy.\n\n**ObjectiveFunctionProperties:**\n- direction: Minimize or Maximize\n- classification: Linear, Quadratic, Signomial, Nonlinear\n- convexity: Convex, Concave, Linear, Nonconvex\n- Term presence flags for structure detection\n\n**ObjectiveFunction Base:**\n- calculateValue(): Evaluate at point or interval\n- calculateGradient(), calculateHessian(): Derivatives\n- getGradientSparsityPattern(): Nonzero structure\n\n**LinearObjectiveFunction:**\n- linearTerms + constant\n- isDualUnbounded(): Unboundedness detection\n\n**QuadraticObjectiveFunction:**\n- + quadraticTerms\n- Inherits from LinearObjectiveFunction\n\n**NonlinearObjectiveFunction:**\n- + monomialTerms, signomialTerms, nonlinearExpression\n- factorableFunction: CppAD automatic differentiation\n- Inherits from QuadraticObjectiveFunction\n\n@note For minimization with nonlinear objective, SHOT uses\n      epigraph reformulation: min t s.t. f(x) <= t",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DualSolver.h for objective cut generation"
+  ]
+}

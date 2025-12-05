@@ -1,0 +1,431 @@
+{
+  "library": "Cbc",
+  "layer": "layer-2",
+  "classes": [
+    {
+      "name": "CbcBranchActual",
+      "brief": "Aggregator for concrete branching classes",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcBranchAllDifferent",
+      "brief": "All-different constraint for integer variables\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcBranchAllDifferent: Enforces that a set of integer variables\nmust all have different values. When two variables i,j have the\nsame value, creates branching disjunction:\n  x_i <= x_j - 1  OR  x_i >= x_j + 1",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcBranchBase",
+      "brief": "Base includes for CBC branching model",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcBranchCut",
+      "brief": "Branching by adding cuts (split disjunctions)\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcBranchCut and CbcCutBranchingObject: Branch by adding cuts\nrather than tightening variable bounds. Implements split disjunctions\nwhere each branch arm adds a different cut to the LP.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcBranchDecision",
+      "brief": "Abstract base for branching variable selection\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcBranchDefaultDecision",
+      "brief": "Default branching variable selection\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcBranchDefaultDecision: Simple selection algorithm without pseudocosts.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcBranchDynamic",
+      "brief": "Dynamic pseudocost-based branching decision\nCopyright (C) 2005, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcBranchDynamicDecision: Selects branches using dynamic pseudocosts.\n- Before first solution: Uses infeasibility counts\n- After first solution: Uses objective change estimates\n\nPseudocosts are updated during search based on observed\nobjective changes from actual branching decisions.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcBranchLotsize",
+      "brief": "Lot-sizing variable with discrete valid values\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcLotsize: Variable restricted to specific discrete values (lot sizes).\nUnlike integers (any value in range), lot-sizing variables can only\ntake values from a predefined set: {v1, v2, ..., vn}.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcBranchToFixLots",
+      "brief": "Branch to fix many variables simultaneously\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcBranchToFixLots: Heuristic branching that fixes multiple variables\nin one branch, cutting off the current solution in the other. Useful\nfor reducing problem size when reduced costs indicate fixable variables.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcBranchingObject",
+      "brief": "Abstract base for branching actions",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcClique",
+      "brief": "Clique branching for binary variable sets\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcClique: Branching for cliques (sets of binary variables with\nat most one at its \"strong\" value). Generalizes binary SOS1.\n\nStandard form: x1 + x2 + ... + xn <= 1 (all strong at 1)\nGeneral form allows negated variables (y_j = 1 - x_j).\n\nMember types (type_[i]):\n- 1: SOS-style, coefficient +1, strong value is 1\n- 0: Non-SOS, coefficient -1, strong value is 0",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcCompare",
+      "brief": "Functor wrapper for node comparison",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcCompareActual",
+      "brief": "Aggregator header for concrete comparison classes",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcCompareBase",
+      "brief": "Abstract base class for node comparison/selection",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcCompareDefault",
+      "brief": "Default adaptive node comparison strategy\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcCompareDepth",
+      "brief": "Depth-first node selection strategy\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCompareDepth: Implements depth-first search (DFS).\nDefault strategy before first solution is found.\n\ntest(x,y) returns true if y is deeper than x in the tree.\nDeepest nodes explored first -> LIFO stack behavior.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcCompareEstimate",
+      "brief": "Estimate-based node selection strategy\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCompareEstimate: Node selection using solution estimates.\nUsed during rounding phases where estimated objective matters.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcCompareObjective",
+      "brief": "Best-bound (objective-based) node selection\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCompareObjective: Implements best-first search.\nAlways explores node with best (lowest for min) LP bound.\n\ntest(x,y) returns true if y has smaller objective than x.\nPrioritizes most promising nodes for optimality proof.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcConsequence",
+      "brief": "Abstract base for bound implications from branching",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcCountRowCut",
+      "brief": "Reference-counted row cuts with ownership tracking",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcCutGenerator",
+      "brief": "Interface between Cbc and Cut Generation Library (CGL)\nCopyright (C) 2003, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCutGenerator: Wraps a CglCutGenerator with Cbc-specific controls.\nManages when and how cut generation is called during B&C search.\n\nKey control parameters:\n- whenCutGenerator_: Frequency (every N nodes, -100=disabled, -99=root only)\n- depthCutGenerator_: Depth-based triggering\n- switches_: Bit flags for various options (normal, atSolution, timing, etc.)\n\nStatistics tracked:\n- numberTimes_: Times generator was called\n- numberCuts_: Total cuts generated\n- numberCutsActive_: Cuts still binding at end\n- timeInCutGenerator_: CPU time spent\n\nSupports adaptive behavior:\n- Can be switched off if ineffective\n- Tracks cuts at root vs tree\n- Global cuts and Lagrangean relaxation support",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcCutModifier",
+      "brief": "Abstract base class for cut modification",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcCutSubsetModifier",
+      "brief": "Cut modifier that filters cuts based on variable indices",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcDebug",
+      "brief": "Debugging utilities and test message handlers\n\nCbcDebug: Contains debug memory allocation routines and test message handlers.\n\nFeatures when CLP_DEBUG_MALLOC defined:\n- clp_memory(): Memory debugging\n- clp_malloc()/clp_free(): Custom allocation with tracking\n\nFeatures when TEST_MESSAGE_HANDLER defined:\n- MyMessageHandler2: Example custom message handler\n- Demonstrates trapping and customizing Cbc messages\n- Prefixes messages with \"==\" for identification\n\nThis file is primarily for testing and debugging purposes.\nProduction builds typically have neither macro defined.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CbcDummyBranchingObject",
+      "brief": "No-op branching object for special cases",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcEventHandler",
+      "brief": "Event handling and callbacks for Cbc",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcFathom",
+      "brief": "Fathoming methods to complete subproblems",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcFathomDynamicProgramming",
+      "brief": "Dynamic programming fathoming for special problem structures\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcFathomDynamicProgramming: Exact enumeration via DP for small subproblems.\nAfter branching reduces the problem sufficiently, DP may be faster than B&C.\n\nRequirements for DP applicability:\n- Small integral RHS values\n- All-integer problem with positive integral coefficients\n- Currently: set partitioning (not general covering)",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcFeasibilityBase",
+      "brief": "User-defined feasibility checking",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcFixVariable",
+      "brief": "Fix variable bounds as branching consequence",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcFollowOn",
+      "brief": "Follow-on branching for crew scheduling problems\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcFollowOn: Specialized branching for air-crew scheduling and\nsimilar set-partitioning problems. When crew can fly in on flight A\nand out on flight B (or other flights), branch on the connection.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcFullNodeInfo",
+      "brief": "Complete subproblem state storage (typically for root node)",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcGenMessages",
+      "brief": "Message IDs for cbc-generic standalone solver\nCopyright (C) 2007, Lou Hafer, IBM Corporation and others.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcGenMsgCode: Enum of message IDs for the cbc-generic application.\nThese are distinct from CbcMessage (library messages) and are used\nonly by the standalone command-line solver.\n\nMessage codes:\n- CBCGEN_TEST_MSG: Test/debug message\n- CBCGEN_NEW_SOLVER: Solver change notification\n- CBCGEN_CONFUSION: Error/confusion state\n\nThe actual message text is defined in CbcGenMessages.cpp.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CbcGeneral",
+      "brief": "Abstract base for general multi-way branching",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcGeneralDepth",
+      "brief": "Depth-limited partial evaluation branching",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristic",
+      "brief": "Base class for MIP primal heuristics\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicDINS",
+      "brief": "DINS - Distance-Induced Neighborhood Search\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDINS: Uses multiple solutions to define neighborhoods.\nMaintains a pool of solutions and fixes variables based on\nagreement across the solution pool (Ghosh 2007).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicDW",
+      "brief": "Dantzig-Wolfe decomposition based heuristic\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDW: Advanced heuristic exploiting block structure.\nVery compute-intensive - detects and exploits Dantzig-Wolfe\ndecomposable structure in the constraint matrix.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicDive",
+      "brief": "Abstract base for diving heuristics\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDive: Abstract base for diving heuristics that explore\nthe tree greedily by fixing variables and re-solving LPs.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicDiveCoefficient",
+      "brief": "Dive heuristic based on objective coefficients\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDiveCoefficient: Selects variables based on objective impact.\nPrioritizes fractional variables with large objective coefficients.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicDiveFractional",
+      "brief": "Dive heuristic selecting most fractional variable\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDiveFractional: Simplest diving strategy.\nSelects the variable with value closest to 0.5 (most fractional).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicDiveGuided",
+      "brief": "Dive heuristic guided by incumbent solution\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDiveGuided: Uses existing incumbent to guide diving.\nRequires a feasible solution (canHeuristicRun checks this).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicDiveLineSearch",
+      "brief": "Dive heuristic along line to LP optimum\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDiveLineSearch: Geometric diving approach.\nSelects variables along the line from current point to LP optimum.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicDivePseudoCost",
+      "brief": "Dive heuristic using pseudocost estimates\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDivePseudoCost: Most informed diving strategy.\nUses pseudocosts to estimate objective change from fixing.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicDiveVectorLength",
+      "brief": "Dive heuristic based on constraint participation\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDiveVectorLength: Selects variables by column density.\nVariables appearing in many constraints are fixed first.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicFPump",
+      "brief": "Feasibility Pump heuristic (Fischetti, Glover & Lodi)\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicGreedy",
+      "brief": "Greedy construction heuristics for set covering/partitioning\nCopyright (C) 2005, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nContains greedy heuristics suited for set covering/partitioning models:",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicLocal",
+      "brief": "Local search and related improvement heuristics\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nContains several improvement heuristics for MIP:",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicPivotAndFix",
+      "brief": "Pivot and Fix heuristic using simplex pivots\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicPivotAndFix: Exploits LP basis structure.\nPerforms simplex pivots to explore nearby basic solutions,\nthen fixes integer variables at their current values.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicRENS",
+      "brief": "RENS - Relaxation Enforced Neighborhood Search\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicRENS: Fixes variables based on LP relaxation solution.\nUnlike RINS (which needs an incumbent), RENS works from LP alone.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicRINS",
+      "brief": "RINS - Relaxation Induced Neighborhood Search (Danna et al.)\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicRINS: Implements RINS (Danna, Rothberg & Le Pape, 2005).\nUses LP relaxation to define a neighborhood around the incumbent solution.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicRandRound",
+      "brief": "Randomized rounding heuristic\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicRandRound: Probabilistic rounding of LP solution.\nRounds fractional variables randomly with probabilities based on\ntheir fractional values (e.g., x=0.7 rounds up with prob 0.7).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcHeuristicVND",
+      "brief": "VND - Variable Neighborhood Descent\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicVND: Variable Neighborhood Descent metaheuristic.\nSystematically explores neighborhoods of increasing size.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcLinked",
+      "brief": "Extended solver for nonlinear and bilinear problems",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcMessage",
+      "brief": "Message IDs and handler for Cbc output\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcMessage: Defines message IDs (CBC_Message enum) for Cbc logging.\nUses COIN message handling framework (CoinMessageHandler).\n\nKey message categories:\n- CBC_SOLUTION: Integer solution found\n- CBC_STATUS/CBC_STATUS2/CBC_STATUS3: Progress reports\n- CBC_GAP: Optimality gap information\n- CBC_ROOT: Root node summary\n- CBC_GENERATOR: Cut generator statistics\n- CBC_BRANCH: Branching decisions\n- CBC_THREAD_STATS: Parallel statistics\n\nText in CbcMessage.cpp supports multiple languages (default: us_en).",
+      "has_algorithm": false
+    },
+    {
+      "name": "CbcMipStartIO",
+      "brief": "Read MIP starting solutions from files",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcModel",
+      "brief": "Main branch-and-cut MIP solver class\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcModel is the central class for COIN-OR branch-and-cut MIP solving.\nKey methods:\n- initialSolve(): Solve LP relaxation\n- branchAndBound(): Run B&C algorithm to optimality\n\nArchitecture:\n- CbcNode/CbcNodeInfo: Subproblem representation in search tree\n- CbcTree: Priority queue of live nodes (heap)\n- CbcCutGenerator: Wrapper for CGL cut generators\n- CbcHeuristic: Primal heuristics for finding solutions\n- CbcBranchingObject: Branching decisions",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcNWay",
+      "brief": "N-way branching (exactly one variable at upper bound)\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcNWay: Multi-way (N-ary) branching for selection constraints.\nExactly one variable at upper bound, all others at lower bound.\nCreates N children, each fixing one variable to its UB.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcNode",
+      "brief": "Search tree node for branch-and-cut\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcNodeInfo",
+      "brief": "Persistent information for recreating search tree nodes",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcObject",
+      "brief": "Abstract base for branching entities (variables, SOS, etc.)",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcObjectUpdateData",
+      "brief": "Data carrier for updating branching objects after branching",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcParam",
+      "brief": "Individual parameter definitions for cbc-generic\nCopyright (C) 2007, Lou Hafer, IBM Corporation and others.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcParam: Extends CoinParam with Cbc-specific parameter codes.\nUsed by the standalone cbc-generic solver for command-line processing.\n\nParameter categories (CbcParamCode enum):\n- Help: GENERALQUERY, HELP\n- Action: BAB, IMPORT, EXPORT, PRINTSOL, READMIPSTART\n- File: IMPORTFILE, EXPORTFILE, SOLUTIONFILE, MIPSTARTFILE\n- Cut: GOMORYCUTS, MIRCUTS, PROBINGCUTS, KNAPSACKCUTS, etc.\n- Heuristic: FPUMP, RINS, RENS, DIVINGC, GREEDY, etc.\n- Boolean: CPX, DOHEURISTIC, SOS, USESOLUTION\n- Keyword: STRATEGY, PREPROCESS, NODESTRATEGY, ORBITAL\n- Integer: LOGLEVEL, THREADS, CUTDEPTH, MAXNODES, etc.\n- Double: CUTOFF, ALLOWABLEGAP, TIMELIMIT, INCREMENT, etc.\n\nEach parameter links to:\n- parameters_: Parent CbcParameters collection\n- model_: Associated CbcModel (for model parameters)",
+      "has_algorithm": false
+    },
+    {
+      "name": "CbcParamUtils",
+      "brief": "Utility functions for parameter handling in cbc-generic\nCopyright (C) 2007, Lou Hafer, IBM Corporation and others.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcParamUtils namespace: Callback functions for parameter processing.\nThese are invoked when parameters are set via the command line.\n\nSolution I/O:\n- saveSolution(): Write solution to file\n- readSolution(): Load solution from file\n\nAction handlers (doXxxParam):\n- doBaCParam(): Execute branch-and-cut solve\n- doImportParam(): Load problem from file\n- doSolutionParam(): Write/print solution\n- doHelpParam(): Display help information\n- doExitParam(): Exit the program\n\nPush functions (pushCbcSolverXxxParam):\n- Transfer parameter values to solver/model\n- Separate handlers for Dbl, Int, Kwd, Str, Bool types\n- Special handlers for Cut and Heur parameters\n\nModel parameter handlers:\n- pushCbcModelDblParam/IntParam(): Set CbcModel parameters\n- setCbcModelDefaults(): Initialize model with default values",
+      "has_algorithm": false
+    },
+    {
+      "name": "CbcParameters",
+      "brief": "Central parameter collection for Cbc algorithm control\nCopyright (C) 2007, Lou Hafer, IBM Corporation and others.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcParameters: Master class holding all Cbc solver parameters.\nUsed by cbc-generic to configure and control the MIP solver.\n\nMajor subsystems configured:\n- Cut generators: Gomory, MIR, Probing, Clique, FlowCover, etc.\n- Heuristics: FPump, RINS, RENS, DINS, Diving variants, VND, etc.\n- Search strategy: Node selection, preprocessing, orbital branching\n- Limits: Time, nodes, gap tolerance, solution count\n\nIncludes instances of CGL cut generators and Cbc heuristics.\nLinks to ClpParameters for underlying LP solver control.\n\nKey methods:\n- init(): Initialize with strategy preset\n- setModel(): Associate with CbcModel\n- Various getters/setters for each parameter category\n\nStrategy presets provide common configurations:\n- Default aggressive cutting at root\n- Balanced cut/heuristic emphasis\n- Heuristic-focused for quick solutions",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcPartialNodeInfo",
+      "brief": "Incremental subproblem storage as differences from parent",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcSOS",
+      "brief": "Special Ordered Sets (SOS) Type 1 and Type 2 branching\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcSOS: Branching for Special Ordered Sets (Beale & Tomlin, 1970):\n\nSOS Type 1: At most ONE variable can be nonzero\n- Common for selection between alternatives (choose one option)\n- SUM x_i <= 1 (or = 1 for exactly one)\n- Binary SOS1 is a special case of clique\n\nSOS Type 2: At most TWO CONSECUTIVE variables can be nonzero\n- Used for piecewise linear approximation (interpolation)\n- Variables ordered by weights; sum to 1\n- Represents point between two breakpoints",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcSimpleInteger",
+      "brief": "Integer variable branching object",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcSimpleIntegerDynamicPseudoCost",
+      "brief": "Integer variable with dynamic (learning) pseudocosts\nCopyright (C) 2005, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcSimpleIntegerDynamicPseudoCost: Implements reliability branching\nbased on Achterberg, Koch & Martin's work. Pseudocosts are learned\nfrom actual branching history rather than being static estimates.\n\nKey statistics tracked per variable:\n- sumUpCost_/sumDownCost_: Cumulative objective changes\n- numberTimesUp_/Down_: Branch count for averaging\n- numberBeforeTrust_: Initialization threshold before trusting estimates",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcSimpleIntegerPseudoCost",
+      "brief": "Integer variable with static pseudocosts\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcSimpleIntegerPseudoCost: Extends CbcSimpleInteger with static\npseudocost estimates for branch direction preference:\n- upPseudoCost_: Estimated objective increase per unit ceiling\n- downPseudoCost_: Estimated objective increase per unit floor",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcSolver",
+      "brief": "Top-level driver class for standalone CBC solver",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcSolverAnalyze",
+      "brief": "Problem analysis for integer constraint detection",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcSolverExpandKnapsack",
+      "brief": "Knapsack constraint expansion for tighter formulations",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcSolverHeuristics",
+      "brief": "Heuristic setup and execution routines for cbc-generic",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcStatistics",
+      "brief": "Statistics gathering for node processing",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcStrategy",
+      "brief": "Strategy pattern for configuring CbcModel components",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcSubProblem",
+      "brief": "Compact subproblem state for diving heuristics",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcSymmetry",
+      "brief": "Symmetry detection and orbital branching using nauty\nAuthors: Pietro Belotti (Lehigh), Andreas Waechter (IBM)\nAdapted from Couenne (Carnegie-Mellon University, 2006-11)\nThis file is licensed under the Eclipse Public License (EPL)\n\nCbcSymmetry: Detects problem symmetry and exploits it for faster solving.\nUses the nauty library for automorphism group computation.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcThread",
+      "brief": "Multi-threaded parallel B&C support",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcTree",
+      "brief": "Heap-based storage for live search tree nodes\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcTreeLocal",
+      "brief": "Local branching search tree (Fischetti-Lodi 2002)\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+      "has_algorithm": true
+    },
+    {
+      "name": "Cbc_C_Interface",
+      "brief": "Creates an empty problem",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpAmplObjective",
+      "brief": "AMPL-interface nonlinear objective for Clp",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpConstraintAmpl",
+      "brief": "AMPL-interface constraint for nonlinear Clp extensions",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiCbcSolverInterface",
+      "brief": "OSI-compliant solver interface wrapping Cbc\nCopyright (C) 2000, International Business Machines Corporation.\nThis code is licensed under the Eclipse Public License (EPL).\n\nOsiCbcSolverInterface: Implements OsiSolverInterface by wrapping a\nCbcModel. Provides standard OSI methods (initialSolve, resolve,\nbranchAndBound) that delegate to Cbc's MIP solver. Enables Cbc\nto be used as a plug-in solver in OSI-based applications.",
+      "has_algorithm": false
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "IpNLP",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Interfaces/IpNLP.hpp",
+  "brief": "Internal NLP representation using Vector/Matrix abstractions\n\nNLP is Ipopt's internal problem representation with equality constraints\nseparated from inequalities:\n  min  f(x)\n  s.t. c(x) = 0           (equality constraints)\n       d_L <= d(x) <= d_U (inequality constraints)\n       x_L <= x <= x_U    (variable bounds)\n\nUnlike TNLP (user interface with arrays), NLP uses Vector and Matrix\nobjects for all operations. TNLPAdapter converts TNLP to this form.",
+  "algorithms": [
+    {
+      "name": "NLP Evaluation Interface:\n  Ipopt calls these methods during optimization:\n  - GetSpaces(): Create VectorSpace/MatrixSpace for problem dimensions.\n  - GetBoundsInformation(): Fill bound vectors x_L, x_U, d_L, d_U.\n  - GetStartingPoint(): Provide initial x (optionally y, z).\n  - Eval_f(x): Return objective value f(x).\n  - Eval_grad_f(x): Return gradient \u2207f(x).\n  - Eval_c(x), Eval_d(x): Return constraint values.\n  - Eval_jac_c(x), Eval_jac_d(x): Return constraint Jacobians.\n  - Eval_h(x, obj_factor, yc, yd): Return Hessian of Lagrangian.",
+      "math": "Problem transformation from TNLP:\n  TNLP: g_L \u2264 g(x) \u2264 g_U mixed constraints.\n  NLP: c(x) = 0 (equalities where g_L = g_U),\n       d(x) (inequalities where g_L \u2260 g_U).\n\nKey methods provide:\n- Problem dimensions and bounds\n- Function/gradient/Jacobian/Hessian evaluation\n- Space factories for creating appropriately-sized vectors",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTNLP.hpp for user-facing problem definition",
+    "IpTNLPAdapter.hpp for TNLP-to-NLP conversion"
+  ]
+}

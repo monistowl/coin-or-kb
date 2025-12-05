@@ -1,0 +1,9 @@
+{
+  "name": "OSnLParserData",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSParsers/OSnLParserData.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

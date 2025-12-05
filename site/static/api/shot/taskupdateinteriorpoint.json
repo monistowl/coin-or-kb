@@ -1,0 +1,13 @@
+{
+  "name": "TaskUpdateInteriorPoint",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskUpdateInteriorPoint.h",
+  "brief": "Update interior point during optimization\n\nImproves ESH quality by updating interior point.\n\n**TaskUpdateInteriorPoint Class:**\n- run(): Recompute or update interior point\n\n**Update Strategy:**\n- Use new primal solutions as interior candidates\n- Average with existing interior point\n- Improves cut quality as algorithm progresses",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskFindInteriorPoint.h for initial computation",
+    "TaskSelectHyperplanePointsESH.h for usage"
+  ]
+}

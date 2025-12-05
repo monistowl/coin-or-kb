@@ -1,0 +1,13 @@
+{
+  "name": "TaskCheckIterationLimit",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskCheckIterationLimit.h",
+  "brief": "Termination check for iteration count limit\n\nPart of termination check sequence.\n\n**TaskCheckIterationLimit Class:**\n- taskIDIfTrue: Jump target when limit reached\n- run(): Compare iteration count vs Settings.IterationLimit\n\n**Behavior:**\n- If exceeded: Jump to termination task\n- If not: Continue to next task",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskCheckTimeLimit.h for time-based termination",
+    "TaskTerminate.h for termination handling"
+  ]
+}

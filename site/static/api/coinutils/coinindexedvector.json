@@ -1,0 +1,20 @@
+{
+  "name": "CoinIndexedVector",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinIndexedVector.hpp",
+  "brief": "Sparse vector with dense backing array for O(1) element access\n\nCoinIndexedVector combines sparse index storage with a dense values array,\nenabling O(1) random access while tracking which positions are non-zero.\nDesigned for simplex operations where sparse updates need fast access.\nHas optional \"packed\" mode that behaves more like CoinPackedVector.",
+  "algorithms": [
+    {
+      "name": "Indexed sparse vector - hybrid sparse/dense storage",
+      "math": "Storage for n-dimensional vector with k nonzeros:\n      - elements[n]: dense array storing values (zeros at unused positions)\n      - indices[k]: list of positions with nonzero values\n      Random access: elements[i] gives value directly\n      Sparse iteration: for j in indices, access elements[indices[j]]",
+      "complexity": "Element access: O(1) via dense array\n            Sparse iteration: O(k) where k = number of nonzeros\n            Insert: O(1) amortized\n            Clear: O(k) - must zero out nonzero positions in dense array\n\n@note Does NOT support negative indices or duplicate checking",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPackedVector for pure sparse storage",
+    "CoinDenseVector for pure dense storage"
+  ]
+}

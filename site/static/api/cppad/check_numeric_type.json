@@ -1,0 +1,9 @@
+{
+  "name": "check_numeric_type",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/check_numeric_type.hpp",
+  "brief": "CppAD utility: check numeric type",
+  "algorithms": [],
+  "methods": []
+}

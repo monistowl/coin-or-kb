@@ -1,0 +1,13 @@
+{
+  "name": "IpCGPenaltyData",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/contrib/CGPenalty/IpCGPenaltyData.hpp",
+  "brief": "Algorithm state data for Chen-Goldfarb penalty method\n\nCGPenaltyData extends IpoptAdditionalData to store all state\nspecific to the Chen-Goldfarb penalty function algorithm.\n\nStored directions:\n- delta_cgpen_: Standard Chen-Goldfarb search direction\n- delta_cgfast_: Fast (pure Newton) direction when near solution\n\nPenalty parameters:\n- curr_penalty_: Current line search penalty parameter (rho)\n- curr_kkt_penalty_: Penalty for KKT system scaling\n- curr_penalty_pert_: Current perturbation factor\n\nAlgorithm control:\n- never_try_pure_Newton_: Flag to disable fast direction\n- restor_iter_: Iteration count for restoration tracking\n- max_alpha_x_: Recorded primal step size\n\nThe data is accessed via IpData().AdditionalData() and cast\nto CGPenaltyData using the CGPenData() accessor pattern.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpIpoptData.hpp for base iteration data",
+    "IpCGPenaltyCq.hpp for computed quantities"
+  ]
+}

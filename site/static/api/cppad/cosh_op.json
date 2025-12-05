@@ -1,0 +1,9 @@
+{
+  "name": "cosh_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/cosh_op.hpp",
+  "brief": "Internal implementation: cosh_op",
+  "algorithms": [],
+  "methods": []
+}

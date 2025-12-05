@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprSin",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprSin.hpp",
+  "brief": "Sine expression w = sin(x)\n\nRepresents the sine function. Sine is challenging for global optimization\ndue to its oscillatory nature - alternates between convex and concave\nregions every pi interval.\n\n**Convexification challenges:**\n- Convex on [2k*pi - pi, 2k*pi] for integer k\n- Concave on [2k*pi, 2k*pi + pi]\n- Multiple local optima on unbounded domains\n- Special handling needed when domain spans multiple periods\n\n**Implied bounds:**\n- w in [-1, 1] always\n- Given w bounds, x bounds via arcsin with period handling\n- trigImpliedBound(): Generalized procedure for sin/cos\n\n**Branching:**\ntrigSelBranch(): Selects branching points based on convexity regions\nand current LP solution position relative to sin curve.\n\n**Not cuttable:** Due to alternating convexity, cutting planes\nare less effective than branching.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprCos for cosine (uses same procedures)",
+    "CouenneExprUnary for base class"
+  ]
+}

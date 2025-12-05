@@ -1,0 +1,22 @@
+{
+  "name": "steepestedgepricing",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/steepestedgepricing.hpp",
+  "brief": "HiGHS steepest edge pricing for QP active set method\n\nSteepest edge pricing for QP active set. Exact edge weights\nfor optimal variable selection (more expensive than Devex).",
+  "algorithms": [
+    {
+      "name": "Steepest Edge Pricing for QP Active Set:\n  Selects constraint to drop/activate based on normalized multipliers:\n  1. Maintain exact weights: w_i = ||\u2207_i h(x)||\u00b2 for each active constraint\n  2. Select constraint s = argmax_i { \u03bb_i\u00b2 / w_i } with \u03bb_i > threshold\n  3. Only consider constraints that can be dropped (sign-correct multipliers)\n  4. Update weights when active set changes using basis factor information",
+      "math": "Steepest edge selection criterion:\n  For active constraint i with multiplier \u03bb_i:\n  score_i = \u03bb_i\u00b2 / w_i where w_i = ||gradient||\u00b2 in reduced space\n  This normalizes multipliers by constraint \"difficulty\" to move.",
+      "complexity": "O(|active_set|) per pricing operation.\n  Weight maintenance: O(m\u00b2) per active set update for exact weights.\n  More expensive than Devex but typically fewer iterations.",
+      "ref": [
+        "Harris (1973). \"Pivot selection methods of the Devex LP code\".\n     Mathematical Programming 5:1-28."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Pricing for the base pricing interface",
+    "DevexPricing for approximate steepest edge (faster per iteration)"
+  ]
+}

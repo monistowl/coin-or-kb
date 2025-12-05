@@ -1,0 +1,13 @@
+{
+  "name": "adolc_sparse",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adolc_sparse.h",
+  "brief": "Convenience header for sparse derivative computation\n\nInclude this file to access all sparse derivative functionality:\n- sparse_jac(): Sparse Jacobian computation\n- sparse_hess(): Sparse Hessian computation\n- jac_pat() / hess_pat(): Sparsity pattern detection\n- Bit-pattern forward/reverse modes",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "adolc.h for main ADOL-C include (does not include sparse by default)",
+    "sparse/sparsedrivers.h for detailed sparse driver documentation"
+  ]
+}

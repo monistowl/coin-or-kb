@@ -1,0 +1,9 @@
+{
+  "name": "cycle_graph",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/routing/local_search/cycle_finder/cycle_graph.hpp",
+  "brief": "cuOpt VRP local search\n\nLocal search moves for route improvement.\n2-opt, Or-opt, swap, relocate operators.",
+  "algorithms": [],
+  "methods": []
+}

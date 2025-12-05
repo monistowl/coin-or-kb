@@ -1,0 +1,13 @@
+{
+  "name": "sym_tm_params",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_tm_params.h",
+  "brief": "Tree manager parameters for SYMPHONY\n\nParameters controlling the branch-and-cut search tree exploration.\n\n**Process configuration:**\n- lp_exe, cg_exe, cp_exe: Worker executables\n- lp/cg/cp_mach_num: Number of machines per type\n- lp/cg/cp_machs: Machine name arrays\n- max_active_nodes: Parallelism limit\n- max_cp_num: Maximum cut pools\n\n**Node selection (node_selection_rule):**\n- LOWEST_LP_FIRST: Best-bound search\n- DEPTH_FIRST_SEARCH: Deep diving\n- BREADTH_FIRST_SEARCH: Level-by-level\n- BEST_FIRST_SEARCH: Estimate-based\n\n**Diving strategy:**\n- unconditional_dive_frac: Always dive this fraction\n- diving_strategy: How to choose dive vs backtrack\n- diving_k, diving_threshold: Diving parameters\n\n**Termination criteria:**\n- time_limit: Maximum solve time\n- gap_limit: Optimality tolerance\n- node_limit: Maximum nodes to explore\n- find_first_feasible: Stop at first solution\n\n**Logging and warm start:**\n- logging, logging_interval: Progress logging\n- warm_start: Resume from saved state\n- warm_start_node_limit: Nodes to load\n- tree_log_file_name, cut_log_file_name: State files\n- vbc_emulation: Visualization output\n\n**Column generation:**\n- colgen_strat[2]: Strategy for two phases\n- price_in_root: Column generation at root\n\n**Solution pool:**\n- max_sp_size: Maximum solutions to keep",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_tm.h for tree manager process",
+    "sym_constants.h for selection rule values"
+  ]
+}

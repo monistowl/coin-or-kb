@@ -1,0 +1,13 @@
+{
+  "name": "DcoMessage",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoMessage.hpp",
+  "brief": "Message codes and handler for DisCO logging\n\nDcoMessage extends CoinMessages to provide structured logging\nwith configurable verbosity and debug levels.\n\n**Message Categories (DISCO_Message):**\n- Gap/Cutoff: DISCO_CUTOFF_INC, DISCO_GAP_YES/NO\n- Cut stats: DISCO_CUT_STATS_FINAL, DISCO_CUT_GENERATED\n- Node logging: DISCO_NODE_LOG, DISCO_NODE_BRANCH\n- Input: DISCO_READ_NOINTS, DISCO_READ_NOCONES, DISCO_READ_MPSERROR\n- Solver: DISCO_SOLVER_STATUS, DISCO_SOLVER_FAILED\n- Heuristics: DISCO_HEUR_SOL_FOUND, DISCO_HEUR_STATS_FINAL\n- Branching: DISCO_PSEUDO_REPORT, DISCO_STRONG_REPORT\n\n**Debug Levels (DISCO_Debug_Level):**\n- DISCO_DLOG_BRANCH: Branching decisions\n- DISCO_DLOG_CUT: Cut generation\n- DISCO_DLOG_PROCESS: Node processing\n- DISCO_DLOG_GRUMPY: Visualization output",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoModel.hpp::dcoMessageHandler_ for message handling",
+    "CoinMessages (CoinUtils) for base class"
+  ]
+}

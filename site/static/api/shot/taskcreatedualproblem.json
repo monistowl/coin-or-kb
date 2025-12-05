@@ -1,0 +1,13 @@
+{
+  "name": "TaskCreateDualProblem",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskCreateDualProblem.h",
+  "brief": "Build MIP relaxation from reformulated problem\n\nTranslates SHOT's problem representation to MIP solver format.\n\n**TaskCreateDualProblem Class:**\n- run(): Create initial MIP in DualSolver\n- createProblem(): Transfer variables, constraints, objective\n\n**MIP Construction:**\n- Linear constraints: Added directly\n- Quadratic constraints: Added if solver supports MIQCQP\n- Nonlinear constraints: Omitted (handled via hyperplanes)\n- Integer variables: Marked as such in MIP",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DualSolver.h for MIP solver interface",
+    "Problem.h for source representation"
+  ]
+}

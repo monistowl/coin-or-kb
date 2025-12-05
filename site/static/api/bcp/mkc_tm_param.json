@@ -1,0 +1,16 @@
+{
+  "name": "MKC_tm_param",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Mkc/include/MKC_tm_param.hpp",
+  "brief": "MKC TM parameters",
+  "algorithms": [
+    {
+      "name": "MKC TM Params: Solution and Input Configuration\n\nParameters: DetailedFeasibleSolution, SolveLpForLB,\nCreateRootFromInputVars, ReadFromVarFile, etc.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

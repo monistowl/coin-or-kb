@@ -1,0 +1,13 @@
+{
+  "name": "IpAlgorithmRegOp",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpAlgorithmRegOp.hpp",
+  "brief": "Registration function for all Algorithm module options\n\nDeclares RegisterOptions_Algorithm() which registers all options\nfor the Ipopt algorithm components with the RegisteredOptions system.\n\nThis function is called during IpoptApplication initialization to\nmake all algorithm options available. It aggregates option registration\nfrom numerous strategy classes.\n\nRegistered option categories include:\n- Main algorithm options (IpoptAlgorithm)\n- Line search options (BacktrackingLineSearch, FilterLSAcceptor)\n- Barrier parameter options (MonotoneMuUpdate, AdaptiveMuUpdate)\n- Linear solver options (PDFullSpaceSolver, AugSystemSolver)\n- Initialization options (DefaultIterateInitializer)\n- Scaling options (NLPScaling, GradientScaling)\n- Convergence options (OptimalityErrorConvergenceCheck)\n- Output options (OrigIterationOutput)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpRegOptions.hpp for the options registration framework",
+    "IpoptApplication::RegisterAllOptions"
+  ]
+}

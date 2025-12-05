@@ -1,0 +1,13 @@
+{
+  "name": "ClpParameters",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpParameters.hpp",
+  "brief": "Command-line and runtime parameter management",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ClpParam for individual parameter definitions",
+    "CoinParam for the underlying parameter framework"
+  ]
+}

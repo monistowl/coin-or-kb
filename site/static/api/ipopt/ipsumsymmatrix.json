@@ -1,0 +1,20 @@
+{
+  "name": "IpSumSymMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpSumSymMatrix.hpp",
+  "brief": "Symmetric matrix as weighted sum: M = sum(alpha_i * M_i)\n\nSumSymMatrix represents a symmetric matrix as a sum of symmetric terms,\neach with its own scalar factor. Preserves symmetry of components.",
+  "algorithms": [
+    {
+      "name": "Symmetric Sum Matrix-Vector Product:\n  M = \u03a3\u1d62 \u03b1\u1d62M\u1d62 where each M\u1d62 is symmetric.\n  MultVector: y \u2190 \u03b1(\u03a3\u1d62 \u03b1\u1d62M\u1d62)x + \u03b2y.\n  Computed as: y \u2190 \u03b2y, then y += \u03b1\u00b7\u03b1\u1d62\u00b7M\u1d62\u00b7x for each term.\n  Sum preserves symmetry: (\u03a3\u1d62 \u03b1\u1d62M\u1d62)^T = \u03a3\u1d62 \u03b1\u1d62M\u1d62^T = \u03a3\u1d62 \u03b1\u1d62M\u1d62.",
+      "math": "Hessian of Lagrangian decomposition:\n  W = \u2207\u00b2_xx L = \u2207\u00b2f + \u03a3\u1d62 \u03bb\u1d62\u2207\u00b2g\u1d62 + \u03a3\u2c7c \u03bd\u2c7c\u2207\u00b2h\u2c7c.\n  With barrier: W + \u03bc\u03a3_x where \u03a3_x = diag terms from bounds.\n  Each term can be different matrix type (dense, sparse, diagonal).",
+      "complexity": "O(k \u00d7 component matvec) for k terms.\n  Type-safe: all components must be SymMatrix.\n  Lazy evaluation: explicit sum never formed.\n\nUsed in Ipopt for KKT Hessian structure:\n- W + sum of barrier contributions + regularization\n- Combining user Hessian with barrier terms without explicit formation",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpSumMatrix.hpp for non-symmetric version",
+    "IpSymMatrix.hpp for base class"
+  ]
+}

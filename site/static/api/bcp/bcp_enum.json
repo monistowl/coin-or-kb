@@ -1,0 +1,20 @@
+{
+  "name": "BCP_enum",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_enum.hpp",
+  "brief": "Core enumerations for BCP Branch-Cut-Price framework",
+  "algorithms": [
+    {
+      "name": "BCP Enumerations: Algorithm Control Types\n\nDefines fundamental types controlling BCP algorithm behavior:\n\n**Object types:**\n- BCP_object_t: Core vs. Algorithmic objects\n- BCP_obj_status: Object status flags (removable, inactive, etc.)\n- BCP_var_t: Variable integrality (Binary, Integer, Continuous)\n\n**Algorithm control:**\n- BCP_column_generation: Fathom, Send, or GenerateColumns\n- BCP_storage_t: NoData, Explicit, WrtParent, WrtCore\n- BCP_warmstart_info: None, Root, Parent inheritance\n\n**Feasibility:**\n- BCP_feasibility: NotFeasible, Feasible, HeuristicFeasible\n- BCP_feasibility_test: Binary, Integral, FullTest\n\n**Cut management:**\n- BCP_slack_cut_discarding: AtNewNode, AtNewIteration\n- BCP_CutViolationNorm: Plain, Distance, Directional\n- BCP_IneffectiveConstraints: None, NonzeroSlack, ZeroDualValue",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm.hpp for Tree Manager process",
+    "BCP_lp.hpp for LP process using these enums"
+  ]
+}

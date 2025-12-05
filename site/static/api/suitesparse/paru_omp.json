@@ -1,0 +1,12 @@
+{
+  "name": "paru_omp",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "ParU/Source/paru_omp.hpp",
+  "brief": "OpenMP abstraction layer for ParU parallel LU\nCopyright (c) 2022-2025, Mohsen Aznaveh and Timothy A. Davis.\nGPL-3.0-or-later license.\n\nPortable OpenMP wrappers: PARU_omp_get_wtime, get_max_threads, get_num_threads,\nset_num_threads, get/set_dynamic, get_active_level, get_max_active_levels,\nget_thread_num. When _OPENMP undefined, provides stub implementations returning\nsequential defaults (1 thread, 0 wtime). Defines PARU_1TASK when no OpenMP.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "paru_internal.hpp includes this for parallel factorization"
+  ]
+}

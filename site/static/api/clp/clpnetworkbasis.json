@@ -1,0 +1,20 @@
+{
+  "name": "ClpNetworkBasis",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpNetworkBasis.hpp",
+  "brief": "Specialized factorization for pure network problems",
+  "algorithms": [
+    {
+      "name": "Basis Update (pivot operation):\nWhen arc (u,v) enters basis replacing arc (p,q):\n  - Create cycle by adding (u,v) to tree\n  - Remove (p,q) from cycle \u2192 new tree\n  - Update parent/child/sibling pointers along affected path",
+      "math": "Constraint matrix A is node-arc incidence of digraph G=(V,E):\n  A[i,j] = +1 if arc j leaves node i\n  A[i,j] = -1 if arc j enters node i\n  A[i,j] = 0 otherwise\n\nEach column (arc) has exactly one +1 and one -1.\nExamples: transportation, assignment, shortest path, max flow problems.",
+      "complexity": "Factorization: O(m) vs O(m\u00b2) for general LU\n  FTRAN/BTRAN: O(m) vs O(m\u00b2) for general\n  Update: O(path length) vs O(m\u00b2) for general\n\nUses spanning tree representation:\n- parent/descendant/sibling arrays encode tree structure\n- FTRAN/BTRAN reduce to tree traversal operations\n- Updates are simple tree modifications\n\nRequires ClpNetworkMatrix to detect network structure.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpNetworkMatrix for the network matrix representation",
+    "ClpFactorization for the general factorization interface"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "GB_cuda_select",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/CUDA/GB_cuda_select.hpp",
+  "brief": "CUDA JIT kernel launchers for GraphBLAS select operations\nSPDX-License-Identifier: Apache-2.0\n\nGPU select operations: GB_cuda_select_bitmap_jit (bitmap format input),\nGB_cuda_select_sparse_jit (sparse format input). Both apply IndexUnaryOp\nwith optional flipij and ythunk scalar. Returns selected entries in C.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GB_cuda.hpp for common CUDA utilities",
+    "GB_select_iso.h for iso matrix handling"
+  ]
+}

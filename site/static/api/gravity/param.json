@@ -1,0 +1,13 @@
+{
+  "name": "param",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/param.h",
+  "brief": "Parameters (data constants) indexed over sets\n\nParameters hold fixed data values used in optimization models.\n\n**param_ Base Class:**\n- _name: Parameter name\n- _id: Unique identifier\n- _indices: Index set this parameter is defined over\n- _intype: Internal storage type (double_, integer_, etc.)\n\n**Complex Number Support:**\n- _is_conjugate: Complex conjugate flag\n- _is_sqrmag: Magnitude squared\n- _is_angle: Phase angle\n- _real, _imag: Real/imaginary part pointers\n- _mag, _ang: Magnitude/angle pointers\n\n**Ipopt Integration:**\n- _l_dual, _u_dual: Dual values for bound constraints\n- _off: On/off flags per instance\n\n**param<type> Template Class:**\n- _val: Vector of values\n- _range: Min/max bounds\n- Indexed access via operator()\n\n**Usage:**\n```cpp\nparam<> cost(\"cost\");\ncost.in(Nodes);                    // Index over Nodes\ncost.set_val(node_costs);          // Set values\ncost(\"node1\");                     // Access by key\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/var.h for variables (params with bounds)",
+    "gravity/constant.h for scalar constants"
+  ]
+}

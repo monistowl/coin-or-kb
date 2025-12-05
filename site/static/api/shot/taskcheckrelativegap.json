@@ -1,0 +1,13 @@
+{
+  "name": "TaskCheckRelativeGap",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskCheckRelativeGap.h",
+  "brief": "Termination check for relative optimality gap\n\nTerminates when |primal - dual| / |primal| < tolerance.\n\n**TaskCheckRelativeGap Class:**\n- taskIDIfTrue: Jump target when gap closed\n- run(): Check (|bestPrimal - bestDual| / max(1, |bestPrimal|)) < RelativeGapTol\n\n**Usage:**\n- More common than absolute gap for practical problems\n- Scales with solution magnitude",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskCheckAbsoluteGap.h for absolute gap check",
+    "Results.h for bound storage"
+  ]
+}

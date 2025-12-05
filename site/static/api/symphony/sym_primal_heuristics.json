@@ -1,0 +1,22 @@
+{
+  "name": "sym_primal_heuristics",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_primal_heuristics.h",
+  "brief": "Primal heuristics for finding feasible solutions\n\nCollection of heuristics to find feasible MIP solutions quickly.\nCalled during B&C to improve incumbent and provide bounds.",
+  "algorithms": [
+    {
+      "name": "RINS (Danna, Rothberg, Le Pape 2005):\nRelaxation Induced Neighborhood Search.\n\nrestricted_search() with fr_force_feasible():\n  Fix variables where LP = incumbent\n  Free variables where LP \u2260 incumbent\n  Solve resulting smaller MIP",
+      "math": "Local branching cut:\n  \u03a3_{i: x*_i=0} x_i + \u03a3_{i: x*_i=1} (1-x_i) \u2264 k\n  Hamming distance from x* at most k\n\nAdd cut to MIP and solve restricted sub-problem.",
+      "complexity": "Feasibility pump: O(iterations \u00d7 LP_solve)\n  Diving: O(n \u00d7 LP_solve) worst case\n  Local branching: O(sub-MIP solve)",
+      "ref": [
+        "Fischetti, M., Glover, F., & Lodi, A. (2005).\n  \"The feasibility pump\". Math Programming 104:91-104."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sym_lp_params.h for heuristic parameters (fp_*, fr_*, rs_*, lb_*, ds_*)",
+    "sym_lp.h for LP process calling heuristics"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "DecompVarPool",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompVarPool.h",
+  "brief": "Pool of generated columns (DecompVar) for column generation\n\nDecompVarPool manages columns waiting to enter the master problem.\nInherits from std::vector<DecompWaitingCol> for storage.",
+  "algorithms": [
+    {
+      "name": "Column Re-expansion (reExpand):\nWhen master constraints change, column coefficients may be stale.\n\n  m_colsAreValid flag tracks validity\n  When cuts added: setColsAreValid(false)\n  Before pricing: if !colsAreValid, call reExpand()\n  reExpand(): Recompute As for each stored s",
+      "math": "Why filter parallel columns:\n  Near-parallel columns provide marginal improvement\n  Adding both increases master LP size without benefit\n  Better to diversify column set for faster convergence",
+      "complexity": "isDuplicate: O(pool_size) hash comparisons\n  isParallel: O(pool_size \u00d7 column_nnz) for dot products\n  setReducedCosts: O(pool_size \u00d7 num_duals)\n  reExpand: O(pool_size \u00d7 nnz(A))",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DecompVar.h for column representation",
+    "DecompWaitingCol.h for pool entry wrapper",
+    "DecompAlgoPC.h for column generation driver"
+  ]
+}

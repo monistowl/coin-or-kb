@@ -1,0 +1,22 @@
+{
+  "name": "CouenneBranchingObject",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneBranchingObject.hpp",
+  "brief": "Spatial branching object for continuous and integer variables\n\nExecutes branching on a variable (which may be continuous) to\npartition the domain and tighten the convex relaxation.",
+  "algorithms": [
+    {
+      "name": "Branching Point Selection:\nWhere to split the variable domain matters significantly.\n\n  Common strategies:\n  - Midpoint: brpoint = (l + u) / 2\n  - LP solution: brpoint = x*_j (current relaxation value)\n  - Violation-based: Split where convexification error largest\n\n  Near-bound cropping (COUENNE_NEAR_BOUND):\n  - If brpoint near l or u, shift away to ensure meaningful split\n  - Prevents tiny subproblems that don't help convergence",
+      "math": "For a convex envelope of f(x) on [l, u]:\n  Gap \u2264 max_{x \u2208 [l,u]} |f(x) - convenv(x)|\n  As (u - l) \u2192 0, gap \u2192 0 (envelope tightens)",
+      "complexity": "O(propagation) + O(cut generation) per branch\nFBBT propagation is O(|expressions|), cut generation varies.",
+      "ref": [
+        "Belotti et al. (2009). \"Branching and bounds tightening techniques\n  for non-convex MINLP\". Optimization Methods & Software 24(4-5):597-634."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneObject for infeasibility computation",
+    "CouenneChooseStrong for strong branching"
+  ]
+}

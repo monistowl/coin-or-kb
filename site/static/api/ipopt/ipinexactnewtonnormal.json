@@ -1,0 +1,20 @@
+{
+  "name": "IpInexactNewtonNormal",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/Inexact/IpInexactNewtonNormal.hpp",
+  "brief": "Newton normal step from slack-scaled augmented system\n\nInexactNewtonNormalStep computes the normal step component by\nsolving a reduced system derived from the slack-scaled KKT system.",
+  "algorithms": [
+    {
+      "name": "Newton Normal Step:\n  ComputeNewtonNormalStep(newton_x, newton_s):\n  1. Form reduced system in slack-scaled space:\n     [0, J_c^T, J_d^T; J_c, 0, 0; J_d, 0, -I] [\u0394x; \u0394y_c; \u0394y_d] = -[0; c; d-s].\n  2. Solve via AugSystemSolver (may be iterative).\n  3. Return slack-scaled step (caller transforms back).\n  Note: W=0 in normal step\u2014only feasibility, no optimality.",
+      "math": "Minimum-norm feasibility step:\n  Normal step minimizes ||\u0394x||\u00b2 subject to J\u00b7\u0394x + c = 0 (linearized).\n  Closed form: \u0394x_n = -J^T\u00b7(J\u00b7J^T)^{-1}\u00b7c = -J^\u2020\u00b7c.\n  Augmented system equivalent to computing pseudo-inverse times residual.\n  Slack scaling: \u0394s\u0303 = S^{-1}\u00b7\u0394s for better conditioning.",
+      "complexity": "O(nnz\u00b7k) for iterative solve, O(m\u00b2n) worst-case direct.\n  Typically k iterations where k depends on preconditioner quality.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpInexactDoglegNormal.hpp for dogleg wrapper using this",
+    "IpAugSystemSolver.hpp for the underlying solver interface"
+  ]
+}

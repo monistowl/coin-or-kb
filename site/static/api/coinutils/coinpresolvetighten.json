@@ -1,0 +1,19 @@
+{
+  "name": "CoinPresolveTighten",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveTighten.hpp",
+  "brief": "Tighten variable bounds using constraint propagation",
+  "algorithms": [
+    {
+      "name": "Bound Tightening:\n  For each constraint \u03a3 a_ij x_j \u2264 b_i:\n  1. Compute max activity without x_k: M_k = \u03a3_{j\u2260k} max(a_ij l_j, a_ij u_j)\n  2. New upper bound: x_k \u2264 (b_i - M_k) / a_ik (if a_ik > 0)\n  3. New lower bound: x_k \u2265 (b_i - M_k) / a_ik (if a_ik < 0)\n  4. Iterate until no bound changes or fixed point reached\n\n  tighten_zero_cost: fix variables with zero objective at bounds",
+      "math": "Implied bound: given \u03a3a_j x_j \u2264 b and x_j \u2208 [l_j, u_j]\n  x_k \u2264 (b - \u03a3_{j\u2260k} a_j l_j) / a_k when a_k > 0\n  Dual bound tightening uses similar logic from reduced costs",
+      "complexity": "Time: O(iterations \u00d7 nnz) for propagation\n  Very effective for tightly constrained problems\n  May prove infeasibility or fix variables",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "ClpNode",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpNode.hpp",
+  "brief": "Node representation for branch-and-bound fathoming\n\nSupport classes for Clp's fathom capability - solving subproblems\nin a branch-and-bound tree. Used when Clp is embedded in CBC.",
+  "algorithms": [
+    {
+      "name": "Pseudocost Branching:\nLearn branching effectiveness from history:\n\n  pseudocost_down[j] = avg(LP_degradation / fraction_cut) when branching down\n  pseudocost_up[j] = avg(LP_degradation / fraction_raised) when branching up\n\nVariable selection heuristics:\n  - Strong branching: actually solve children, use real degradation\n  - Pseudocost: use predicted degradation from history\n  - Hybrid: strong branching initially, pseudocosts after \"trust\" threshold\n\nClasses:\n- ClpNode: State of a B&B node (bounds, basis, factorization, pseudocosts)\n- ClpNodeStuff: Shared data across nodes (pseudocosts, solver options)\n- ClpHashValue: Hash table for deduplicating values\n\nKey methods:\n- applyNode(): Restore node state to model\n- chooseVariable(): Select branching variable\n- fixOnReducedCosts(): Tighten bounds using reduced cost fixing",
+      "math": "For minimization with best incumbent z_best:\n  If x_j at lower bound with reduced cost d_j > 0:\n    Gap to force x_j=1 exceeds (z_best - z_LP) / d_j\n    If this exceeds (u_j - l_j), can fix x_j = l_j permanently\n  Similarly for variables at upper bound with d_j < 0",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Cbc for the full branch-and-bound solver",
+    "ClpSimplex which solves individual nodes"
+  ]
+}

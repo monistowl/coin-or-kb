@@ -1,0 +1,19 @@
+{
+  "name": "Matrices",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/Matrices.hpp",
+  "brief": "Matrix classes for QP data with working-set-aware operations",
+  "algorithms": [
+    {
+      "name": "Matrix-Vector Operations for Active-Set QP\n\nProvides matrix abstractions optimized for active-set QP solving,\nsupporting efficient submatrix operations based on working sets.\n\n**Class hierarchy:**\n- Matrix: Abstract base with times(), transTimes(), getRow(), getCol()\n- SymmetricMatrix: Adds bilinear form x'Hx computation\n- DenseMatrix / SymDenseMat: Row-major dense storage\n- SparseMatrix / SymSparseMat: Column-compressed sparse (CSC)\n- SparseMatrixRow: Row-compressed sparse (CSR)\n\n**Key QP operations:**\n- times(irows, icols, ...): A[irows,icols] * x for working set\n- transTimes(irows, icols, ...): A[irows,icols]' * x\n- bilinear(icols, x): x'\u00b7H[icols,icols]\u00b7x for reduced Hessian\n- getSparseSubmatrix(): Extract in Harwell-Boeing format\n\n**Storage formats:**\n- Dense: val[i*leaDim + j] row-major\n- CSC: jc[col] to jc[col+1] gives row indices in ir[], values in val[]\n- CSR: jr[row] to jr[row+1] gives col indices in ic[], values in val[]",
+      "math": "",
+      "complexity": "Dense O(mn), Sparse O(nnz) for matrix-vector products",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "QProblem.hpp for usage in active-set algorithm"
+  ]
+}

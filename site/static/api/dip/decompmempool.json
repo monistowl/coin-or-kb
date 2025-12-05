@@ -1,0 +1,12 @@
+{
+  "name": "DecompMemPool",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompMemPool.h",
+  "brief": "Pre-allocated memory arrays for performance\n\nDecompMemPool provides reusable scratch arrays to avoid repeated\nallocations during the inner loops of the algorithm.\n\n**Pre-allocated Arrays:**\n- dblArrNCoreCols: Double array sized for core columns\n- dblArrNCoreRows: Double array sized for core rows\n\n**Usage:**\nRather than allocating temporary arrays in hot paths like\nreduced cost calculation or constraint evaluation, use these\npre-allocated buffers for better cache performance.\n\n**Memory Management:**\n- allocateMemory(): Size arrays based on problem dimensions\n- Destructor frees all allocated memory\n- Single allocation at algorithm start",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompAlgo.h where memory pool is used"
+  ]
+}

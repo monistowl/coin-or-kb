@@ -1,0 +1,9 @@
+{
+  "name": "summation",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/summation.hpp",
+  "brief": "Value graph: summation",
+  "algorithms": [],
+  "methods": []
+}

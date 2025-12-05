@@ -1,0 +1,13 @@
+{
+  "name": "IpReturnCodes",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Interfaces/IpReturnCodes.hpp",
+  "brief": "C++ namespace wrapper for Ipopt return codes\n\nWraps IpReturnCodes_inc.h in Ipopt namespace for C++ usage.\nDefines ApplicationReturnStatus enum used by IpoptApplication:\n\n- Solve_Succeeded: Optimal solution found\n- Solved_To_Acceptable_Level: Acceptable tolerance met\n- Infeasible_Problem_Detected: Locally infeasible\n- Maximum_Iterations_Exceeded, Maximum_CpuTime_Exceeded\n- Restoration_Failed, Error_In_Step_Computation\n- Invalid_Option, Invalid_Number_Detected\n- Not_Enough_Degrees_Of_Freedom, Internal_Error",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpReturnCodes_inc.h for actual enum definitions",
+    "IpIpoptApplication.hpp for usage context"
+  ]
+}

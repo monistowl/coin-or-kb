@@ -1,0 +1,9 @@
+{
+  "name": "SensStepCalc",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensStepCalc.hpp",
+  "brief": "sIPOPT sensitivity step calculator interface\n\nSensStepCalc: abstract interface for computing sensitivity steps.\nGiven parameter perturbation, computes resulting change in solution.\nCore component of sIPOPT sensitivity analysis pipeline.",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "zstd_compress_internal",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/zstd/zstd_subset/compress/zstd_compress_internal.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

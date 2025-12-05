@@ -1,0 +1,16 @@
+{
+  "name": "Bounds",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/Bounds.hpp",
+  "brief": "",
+  "algorithms": [
+    {
+      "name": "Working Set Management for Bounds:\nTrack which box constraints are active in active-set QP.",
+      "math": "QP with bounds: min \u00bdx'Hx + g'x  s.t. l \u2264 x \u2264 u\n\n  WORKING SET PARTITION:\n    For each bound i \u2208 {1,...,n}:\n      - INACTIVE (ST_INACTIVE): l_i < x_i < u_i\n      - LOWER (ST_LOWER): x_i = l_i (active at lower)\n      - UPPER (ST_UPPER): x_i = u_i (active at upper)\n      - FIXED (ST_EQUALITY): l_i = u_i (equality)\n\n  INDEX SETS:\n    - free: indices where bound is inactive\n    - fixed: indices where bound is active\n    - freeFreezer/fixedFreezer: frozen during QP iteration\n\n  ACTIVE SET CHANGES:\n    moveActiveToInactive(i): x_i leaves boundary\n    moveInactiveToActive(i, bound): x_i hits boundary",
+      "complexity": "O(1) per bound status query/change",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

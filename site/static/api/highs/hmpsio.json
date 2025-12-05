@@ -1,0 +1,13 @@
+{
+  "name": "HMPSIO",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/io/HMPSIO.h",
+  "brief": "Fixed-format MPS file parser (legacy format)\n\nParses classic fixed-column MPS format from IBM's MP/360.\n\n**Fixed-Format Layout:**\nColumns are at fixed character positions:\n- field_1_start (1): Indicator field (row type, bound type)\n- field_2_start (4): Name field (8 chars)\n- field_3_start (14): Name field 2 (8 chars)\n- field_4_start (24): Value field (12 chars)\n- field_5_start (39): Name field 3 (8 chars)\n- field_6_start (49): Value field 2 (12 chars)\n\n**Row Type Constants:**\n- MPS_ROW_TY_N: Free row (objective)\n- MPS_ROW_TY_E: Equality constraint\n- MPS_ROW_TY_L: Less-than-or-equal\n- MPS_ROW_TY_G: Greater-than-or-equal\n\n**readMps():**\nMain parsing function extracting:\n- Constraint matrix (Astart, Aindex, Avalue)\n- Bounds and costs\n- Integrality constraints\n- Quadratic terms (Qstart, Qindex, Qvalue)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "io/HMpsFF.h for free-format parser (preferred)",
+    "io/FilereaderMps.h for unified MPS interface"
+  ]
+}

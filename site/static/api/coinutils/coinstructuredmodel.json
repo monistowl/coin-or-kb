@@ -1,0 +1,19 @@
+{
+  "name": "CoinStructuredModel",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinStructuredModel.hpp",
+  "brief": "Block-structured model composed of CoinModel blocks",
+  "algorithms": [
+    {
+      "name": "Block Decomposition Detection (Dantzig-Wolfe, Benders, Staircase)\nAutomatically detects and decomposes LP/MIP structure for specialized\nalgorithms. decompose() identifies linking constraints and creates block\nstructure suitable for D-W decomposition, Benders cuts, or staircase LP.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinModel for individual block representation"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "SyclMemoryModel",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "ThirdParty/eigen/Eigen/src/Core/arch/SYCL/SyclMemoryModel.h",
+  "brief": "Returns an accessor to the buffer of the given virtual pointer",
+  "algorithms": [],
+  "methods": []
+}

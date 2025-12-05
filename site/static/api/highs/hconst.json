@@ -1,0 +1,13 @@
+{
+  "name": "HConst",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HConst.h",
+  "brief": "Constants, enums, and type definitions for HiGHS\n\nCentral definitions for HiGHS types and enumerations.\n\n**Numeric Constants:**\n- kHighsInf: Infinity value (std::numeric_limits<double>::infinity())\n- kHighsIInf: Integer infinity (max HighsInt)\n- kHighsTiny, kHighsMacheps, kHighsZero: Numerical tolerances\n\n**Core Enums:**\n- HighsModelStatus: Optimization result (kOptimal, kInfeasible, kUnbounded, etc.)\n- HighsVarType: Variable types (kContinuous, kInteger, kSemiContinuous, etc.)\n- HighsBasisStatus: Basis state (kLower, kBasic, kUpper, kZero, kNonbasic)\n- ObjSense: Minimize (+1) or Maximize (-1)\n\n**Format Enums:**\n- MatrixFormat: kColwise (CSC), kRowwise (CSR), kRowwisePartitioned\n- HessianFormat: kTriangular, kSquare\n\n**Status Enums:**\n- HighsPresolveStatus: Presolve outcomes\n- SolutionStatus: kNone, kInfeasible, kFeasible\n- BasisValidity: kInvalid, kValid\n\n**Callback Types:**\n- HighsCallbackType: Logging, interrupt, MIP solution events\n\n**Presolve Rules:**\n- PresolveRuleType: EmptyRow, SingletonRow, FixedCol, ForcingRow, etc.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "HighsStatus.h for function return codes",
+    "HighsOptions.h for option types"
+  ]
+}

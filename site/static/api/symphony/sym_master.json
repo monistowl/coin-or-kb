@@ -1,0 +1,20 @@
+{
+  "name": "sym_master",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_master.h",
+  "brief": "Master process for SYMPHONY's parallel branch-and-cut\n\nThe master process coordinates the overall solve, managing problem\ndata, solution bounds, and communication with worker processes.",
+  "algorithms": [
+    {
+      "name": "Master Process Coordination:\nCentral coordinator for distributed branch-and-cut execution.\n\nRESPONSIBILITIES:\n1. Problem management: Load, presolve, distribute problem data\n2. Bound tracking: Maintain global upper bound (incumbent)\n3. Termination detection: Monitor gap, time limits, node limits\n4. Solution collection: Gather feasible solutions from workers\n\nINITIALIZATION FLOW:\n1. sym_open_environment(): Allocate sym_environment\n2. sym_read_mps/lp/gmpl(): Parse problem file\n3. Presolve (if enabled): Reduce problem size\n4. initialize_root_node_u(): Set up root B&B node\n5. start_heurs_u(): Run primal heuristics for initial UB\n\nSOLVE ORCHESTRATION:\nMaster spawns tree manager(s) that:\n- Maintain B&B tree with candidate lists\n- Dispatch nodes to LP workers\n- Collect bounds and solutions\n- Coordinate cut pool access\n\nWARM START:\nFor re-solving with modified problem:\n- Save B&B tree structure with node descriptions\n- Store cut pool and incumbent\n- On restart: Prune invalid nodes, update bounds",
+      "math": "Sensitivity analysis:\nget_lb_for_new_rhs(): Given RHS changes, compute valid lower bound\nby re-evaluating nodes with modified constraints without re-solving LP.\nUses dual information from solved nodes.",
+      "complexity": "- Initialization: O(nnz) for problem setup\n- Bound tracking: O(1) per update\n- Warm start: O(tree_size) for tree traversal\n\n**sym_environment structure:**\n- mip: Current MIP description (possibly presolved)\n- orig_mip: Original problem before presolve\n- prep_mip: Presolved problem description\n- par: Solver parameters\n- ub/lb: Best upper/lower bounds\n- best_sol: Best feasible solution found\n- warm_start: Warm start data for re-solving\n- tm: Tree manager (when compiled in)\n- cp: Cut pools (when compiled in)\n\n**User callback functions (_u suffix):**\n- initialize_u(): User initialization\n- io_u(): Custom problem I/O\n- start_heurs_u(): Run initial heuristics\n- display_solution_u(): Custom solution display\n- initialize_root_node_u(): Set up root node\n\n**Warm start operations:**\n- create_copy_warm_start(): Clone warm start data\n- get_lb_for_new_rhs(): Sensitivity analysis\n- get_ub_for_new_rhs(): Upper bound for modified RHS",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "symphony.h for the public API",
+    "sym_tm.h for tree manager details"
+  ]
+}

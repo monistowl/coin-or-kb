@@ -1,0 +1,9 @@
+{
+  "name": "sub_eq",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/sub_eq.hpp",
+  "brief": "Core AD functionality: sub eq",
+  "algorithms": [],
+  "methods": []
+}

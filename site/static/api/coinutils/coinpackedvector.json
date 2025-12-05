@@ -1,0 +1,21 @@
+{
+  "name": "CoinPackedVector",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPackedVector.hpp",
+  "brief": "Sparse vector that owns its index/value storage\n\nCoinPackedVector stores a sparse vector as parallel arrays of indices\nand values. Unlike CoinShallowPackedVector, this class owns its storage\nand supports modification operations.",
+  "algorithms": [
+    {
+      "name": "Merge-style sparse dot product",
+      "math": "Computes x\u00b7y = \u03a3 x_i * y_i where x and y share index i\n      Uses sorted merge to find common indices in linear time.",
+      "complexity": "O(k1 + k2) where k1, k2 are the number of nonzeros\n@pre Both vectors must be sorted by increasing index",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPackedVectorBase for the read-only interface",
+    "CoinShallowPackedVector for non-owning sparse vector reference",
+    "CoinIndexedVector for sparse vector with dense backing array"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "sym_prep",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_prep.h",
+  "brief": "MIP preprocessing (presolve) for SYMPHONY\n\nPreprocessing reduces problem size before B&C by fixing variables,\nremoving redundant constraints, and tightening bounds.",
+  "algorithms": [
+    {
+      "name": "Implication Analysis (impl_*):\nDerive logical consequences of fixing variables.\n\n  If x_k = 0 implies x_j = 1 (from constraints):\n    Record in implication list\n    Use during probing and fixing",
+      "math": "Row i is redundant if:\n  max \u03a3_j a_ij x_j \u2264 b_i (row never binding)\n  Compute row activity bounds to verify",
+      "complexity": "prep_basic iteration: O(nnz) for bound propagation\n  prep_delete_duplicate: O(m log m + n log n) with sorting\n  sr_solve: O(n log n) per row\n  Total: O(iterations \u00d7 nnz), typically few iterations",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sym_prep_params.h for preprocessing parameters",
+    "sym_types.h for ROWinfo, COLinfo structures"
+  ]
+}

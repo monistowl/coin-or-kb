@@ -1,0 +1,14 @@
+{
+  "name": "DcoLinearConstraint",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoLinearConstraint.hpp",
+  "brief": "Linear constraint (row) representation\n\nDcoLinearConstraint stores a linear constraint in sparse form:\nlb <= sum(values[i] * x[indices[i]]) <= ub\n\n**Data Members:**\n- size_: Number of nonzero coefficients\n- indices_: Variable indices with nonzero coefficients\n- values_: Coefficient values\n- Bounds inherited from DcoConstraint/BcpsObject\n\n**Usage:**\n- Core constraints from the original problem\n- MILP cutting planes (Gomory, MIR, etc.)\n- OA supports approximating conic constraints\n\n**Conversion:**\n- createOsiRowCut(): Convert to OsiRowCut for solver\n\n**Feasibility:**\n- infeasibility(): Returns constraint violation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoConstraint.hpp for base class",
+    "DcoConicConstraint.hpp::supports_ uses these",
+    "OsiRowCut (Osi) for solver representation"
+  ]
+}

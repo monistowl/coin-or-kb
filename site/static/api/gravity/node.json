@@ -1,0 +1,13 @@
+{
+  "name": "Node",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/Node.h",
+  "brief": "Graph node/vertex for network optimization models\n\nRepresents a node in network graphs (power systems, transportation, etc.).\n\n**Node Class:**\n- _name: Unique string identifier\n- _id: Numeric ID within container\n- _type_name: \"Nodes\" (for indexing)\n- _active: Whether node is active in model\n\n**Connectivity:**\n- branches: Vector of incident Arc pointers\n- degree(): Number of incident arcs\n- addArc(), removeArc(): Modify adjacency\n\n**Graph Algorithms:**\n- explored: BFS/DFS traversal flag\n- cycle: True if node is in a cycle\n- predecessor: Parent in BFS tree\n- distance: Distance from source in BFS\n- fill_in: Edges needed to make neighbors a clique\n\n**Power System Extensions:**\n- _phases: Set of phases (for 3-phase systems)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/Arc.h for edge/arc data",
+    "gravity/Net.h for graph container"
+  ]
+}

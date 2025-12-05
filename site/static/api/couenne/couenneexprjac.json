@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprJac",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/partial/CouenneExprJac.hpp",
+  "brief": "Symbolic Jacobian of constraints via expression DAG\n\nStores the constraint Jacobian as a sparse matrix of expression\npointers. Each nonzero \u2202g_i/\u2202x_j is an expression node that can\nbe evaluated at any point.\n\n**Sparse structure:**\n- nnz_: Number of structural nonzeros\n- iRow_[], jCol_[]: COO format indices\n- expr_[k]: Expression for the k-th nonzero entry\n\n**Construction:**\nBuilt from CouenneProblem by differentiating each constraint\nbody expression with respect to each variable it depends on.\n\n**Usage:**\nCalled by Ipopt's eval_jac_g() callback to provide the\nconstraint Jacobian. Expression-based representation allows\nexact derivatives without finite differences.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ExprHess for the Lagrangian Hessian",
+    "CouenneTNLP which uses ExprJac for NLP solves"
+  ]
+}

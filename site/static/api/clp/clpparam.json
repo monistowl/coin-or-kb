@@ -1,0 +1,9 @@
+{
+  "name": "ClpParam",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/Attic/ClpParam.hpp",
+  "brief": "Parameter type enums for Clp and CBC command-line interface (legacy)\nCopyright (C) 2002, International Business Machines Corporation.\nEPL-1.0 license.\n\nClpParameterType enum: ranges 1-100 (double), 101-200 (int), 201-300\n(Clp string), 301-400 (Cbc string), 401-500 (Clp actions), 501-600 (Cbc\nactions). Parameters for tolerances, limits, scaling, algorithms, output.\nThis file is in Attic (deprecated) - see ClpParameters.hpp for current version.\n\n@deprecated Replaced by ClpParameters.hpp",
+  "algorithms": [],
+  "methods": []
+}

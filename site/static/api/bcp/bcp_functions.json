@@ -1,0 +1,20 @@
+{
+  "name": "BCP_functions",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_functions.hpp",
+  "brief": "Warmstart serialization utilities",
+  "algorithms": [
+    {
+      "name": "Warmstart Pack/Unpack: Polymorphic Serialization\n\nFunctions for serializing BCP_warmstart objects:\n\n- BCP_pack_warmstart(): Writes warmstart type tag + data to buffer\n- BCP_unpack_warmstart(): Reads type tag, creates correct subclass\n\nHandles polymorphism: packs type indicator so unpack creates\nthe correct BCP_warmstart subclass (basis, dual, primaldual).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_warmstart.hpp for base class",
+    "BCP_buffer.hpp for serialization buffer"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "add_eq",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/add_eq.hpp",
+  "brief": "Core AD functionality: add eq",
+  "algorithms": [],
+  "methods": []
+}

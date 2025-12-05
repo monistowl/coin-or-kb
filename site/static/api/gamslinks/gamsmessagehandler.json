@@ -1,0 +1,13 @@
+{
+  "name": "GamsMessageHandler",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/osi/GamsMessageHandler.hpp",
+  "brief": "CoinMessageHandler implementation for GAMS output\n\nRoutes COIN-OR messages through GAMS environment (gev) logging.\nThread-safe via shared mutex for concurrent solver access.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GamsOsi.hpp for OSI solver integration",
+    "GamsOsiHelper.hpp for problem loading utilities"
+  ]
+}

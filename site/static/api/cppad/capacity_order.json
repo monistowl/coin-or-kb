@@ -1,0 +1,9 @@
+{
+  "name": "capacity_order",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/capacity_order.hpp",
+  "brief": "Core AD functionality: capacity order",
+  "algorithms": [],
+  "methods": []
+}

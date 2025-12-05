@@ -1,0 +1,9 @@
+{
+  "name": "print_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/print_op.hpp",
+  "brief": "Value graph: print_op",
+  "algorithms": [],
+  "methods": []
+}

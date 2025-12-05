@@ -1,0 +1,9 @@
+{
+  "name": "PardisoLoader",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "thirdparty/Ipopt/include/coin/PardisoLoader.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

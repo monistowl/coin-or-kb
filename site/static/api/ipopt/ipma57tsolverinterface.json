@@ -1,0 +1,22 @@
+{
+  "name": "IpMa57TSolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpMa57TSolverInterface.hpp",
+  "brief": "Interface to HSL MA57 sparse symmetric indefinite solver\n\nMa57TSolverInterface wraps the Harwell MA57 subroutine, an improved\nmultifrontal solver over MA27 with better memory management and\nnumerical stability.",
+  "algorithms": [
+    {
+      "name": "Improved Multifrontal LDL^T with Advanced Pivoting:\n  MA57 computes A = P\u00b7L\u00b7D\u00b7L^T\u00b7P^T using an improved multifrontal\n  method with better pivot handling than MA27:\n  - Static pivoting: pre-determined pivots from symbolic phase\n  - Dynamic pivoting: adjustment during numerical factorization\n  - 2\u00d72 pivots for indefinite blocks with Bunch-Kaufman strategy",
+      "math": "Stability improvements over MA27:\n  - Lookahead pivoting: examines future columns for better pivots\n  - Delayed pivots: postpones problematic pivots to later stages\n  - Pivot perturbation: adds \u03b5 to tiny pivots instead of failing\n  Solve modes: Ax=b, PLPTx=b, PDPTx=b, PLTPT x=b",
+      "complexity": "Same asymptotic as MA27: O(n\u00b7f\u00b2) factorization, O(nnz(L)) solve.\n  Typically 2-3\u00d7 faster than MA27 due to better memory access patterns\n  and BLAS-3 dense operations within frontal matrices.",
+      "ref": [
+        "Duff (2004). \"MA57 - A Code for the Solution of Sparse Symmetric\n     Definite and Indefinite Systems\". ACM TOMS 30(2):118-144.\n\nMA57 improvements over MA27:\n- Better pivot selection for numerical stability\n- More efficient memory management\n- Support for multiple right-hand sides\n- Better handling of dense row detection\n\nInput format: Triplet (lower triangular), same as MA27\n\nPhases (MA57A/B/C/E/I):\n- MA57I: Initialize control parameters\n- MA57A: Symbolic factorization\n- MA57B: Numerical factorization\n- MA57C: Solve (job selects A, PLP^T, PDP^T, or PL^T P^T)\n- MA57E: Copy/resize factor arrays\n\nKey parameters:\n- pivtol_/pivtolmax_: Threshold pivoting tolerance\n- ma57_pre_alloc_: Factor for initial workspace allocation"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMa27TSolverInterface.hpp for simpler MA27",
+    "IpMa97SolverInterface.hpp for modern parallel solver"
+  ]
+}

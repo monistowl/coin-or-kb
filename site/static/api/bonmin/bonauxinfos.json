@@ -1,0 +1,13 @@
+{
+  "name": "BonAuxInfos",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonAuxInfos.hpp",
+  "brief": "Auxiliary information passing between Bonmin B&B components\n\nExtends OsiBabSolver to pass solver-specific information during\nbranch-and-cut, including NLP solutions found by heuristics.\n\n**Key functionality:**\n- nlpSolution_: Store solutions from NLP solves/heuristics\n- infeasibleNode_: Flag for cut generator detected infeasibility\n- bestSolution2_: Alternate objective tracking (for bi-objective)\n\n**Usage pattern:**\nCut generators and heuristics store found solutions here;\nthe B&B framework queries for incumbents.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BabInfo for extended version with Bab pointer",
+    "OsiBabSolver for the base class interface"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "HighsInfo",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsInfo.h",
+  "brief": "Solver output information and statistics\n\nProvides typed info records for solver statistics accessible via API.\n\n**InfoRecord Hierarchy:**\n- InfoRecord: Base class (type, name, description, advanced)\n- InfoRecordInt64: 64-bit integer info (mip_node_count)\n- InfoRecordInt: Integer info (iteration counts, status codes)\n- InfoRecordDouble: Double info (objective, infeasibilities)\n\n**HighsInfoStruct/HighsInfo:**\n- Iteration counts: simplex, ipm, crossover, pdlp, qp\n- Solution status: primal_solution_status, dual_solution_status\n- Objective: objective_function_value\n- MIP statistics: mip_node_count, mip_dual_bound, mip_gap\n- Infeasibility metrics: num/max/sum primal/dual infeasibilities\n- Residuals: primal/dual residual errors (absolute and relative)\n- Complementarity: violation counts and max violation\n\n**Functions:**\n- getInfoIndex(): Look up info by name\n- getLocalInfoValue(): Retrieve int/int64/double values\n- writeInfoToFile()/reportInfo(): Output info records",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "HConst.h for HighsInfoType enum",
+    "HighsOptions.h for solver configuration"
+  ]
+}

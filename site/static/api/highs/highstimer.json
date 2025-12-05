@@ -1,0 +1,13 @@
+{
+  "name": "HighsTimer",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsTimer.h",
+  "brief": "Profiling facility for HiGHS computational components\n\n**HighsTimer Class:**\nWall-clock timing with named clocks for performance profiling.\n\n**Clock Management:**\n- clock_def(): Define a named clock, returns clock index\n- start()/stop(): Start/stop a clock (asserts proper pairing)\n- read(): Get elapsed time (handles running clocks)\n- running(): Check if clock is running\n- numCall(): Get number of times clock was stopped\n\n**Built-in Clocks:**\n- Clock 0: \"Run HiGHS\" (total time)\n- presolve_clock, solve_clock, postsolve_clock: Phase timings\n\n**Reporting:**\n- report(): Print timing breakdown for clock list (grep-friendly format)\n- reportOnTolerance(): Only report clocks above percentage threshold\n- writeAllClocks(): Dump all clock times\n\n**Implementation:**\nUses std::chrono::high_resolution_clock. Clock start stores negative\nwall time; positive indicates stopped. This enables running/stopped detection.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "simplex/SimplexTimer.h for simplex-specific clocks",
+    "mip/HighsMipAnalysis.h for MIP timing"
+  ]
+}

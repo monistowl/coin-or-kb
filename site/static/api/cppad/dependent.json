@@ -1,0 +1,9 @@
+{
+  "name": "dependent",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/dependent.hpp",
+  "brief": "Core AD functionality: dependent",
+  "algorithms": [],
+  "methods": []
+}

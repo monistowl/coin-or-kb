@@ -1,0 +1,14 @@
+{
+  "name": "BlisNodeDesc",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisNodeDesc.h",
+  "brief": "Node description storing LP basis and branching info\n\nExtends BcpsNodeDesc with simplex warm start and pseudo-cost data.\nContains the state needed to reconstruct a search tree node.\n\n**Warm start data:**\n- basis_: CoinWarmStartBasis for LP hot-starting\n- Stores structural and artificial variable status (basic/nonbasic)\n\n**Branching history (for pseudo-cost updates):**\n- branchedDir_: Direction of branch that created this node (-1/+1)\n- branchedInd_: Object index that was branched on\n- branchedVal_: Value at branching point (used in pseudo-cost update)\n\n**Serialization:**\nencode()/decode() serialize basis and branching info for MPI.\nUses BlisEncodeWarmStart/BlisDecodeWarmStart helpers.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisTreeNode for the node using this description",
+    "CoinWarmStartBasis for LP basis representation",
+    "BlisPseudocost::update() which uses branching history"
+  ]
+}

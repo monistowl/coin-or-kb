@@ -1,0 +1,9 @@
+{
+  "name": "snippets",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/snippets.hpp",
+  "brief": "HiGHS QP code snippets\n\nUtility code snippets for QP solver implementation.\nCommon patterns and helper macros.",
+  "algorithms": [],
+  "methods": []
+}

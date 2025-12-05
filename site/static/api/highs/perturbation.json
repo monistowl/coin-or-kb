@@ -1,0 +1,9 @@
+{
+  "name": "perturbation",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/perturbation.hpp",
+  "brief": "HiGHS QP perturbation\n\nPerturbation for handling degeneracy in QP.\nAdds small shifts to ensure unique optima.",
+  "algorithms": [],
+  "methods": []
+}

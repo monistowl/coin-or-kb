@@ -1,0 +1,20 @@
+{
+  "name": "BCP_solution",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_solution.hpp",
+  "brief": "Solution representation for BCP Branch-Cut-Price",
+  "algorithms": [
+    {
+      "name": "MIP Solution Storage and Upper Bound Tracking\n\nDefines how MIP feasible solutions are stored and transmitted:\n\n**Class hierarchy:**\n- BCP_solution: Abstract base with objective_value() pure virtual\n- BCP_solution_generic: Default implementation storing (var, value) pairs\n\n**BCP_solution_generic:**\n- _objective: Objective function value\n- _vars: Vector of variables at nonzero level\n- _values: Corresponding values\n- _delete_vars: Whether to delete vars on destruction\n\n**Usage flow:**\n1. LP process finds integer feasible solution\n2. BCP_lp_user::pack_feasible_solution() serializes it\n3. Sent to Tree Manager\n4. BCP_tm_user::unpack_feasible_solution() deserializes\n5. Best solution tracked for upper bound\n\nUsers can derive from BCP_solution for custom solution\nstorage (e.g., to include dual values).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_lp_user for packing interface",
+    "BCP_tm_user for unpacking interface"
+  ]
+}

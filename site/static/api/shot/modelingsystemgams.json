@@ -1,0 +1,12 @@
+{
+  "name": "ModelingSystemGAMS",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/ModelingSystem/ModelingSystemGAMS.h",
+  "brief": "GAMS interface for optimization problem input\n\nReads GAMS models via GMO/GEV API.\n\n**ModelingSystemGAMS Class:**\n- setModelingObject(): Accept gmoHandle_t from GAMS\n- createProblem(): Convert GMO model to SHOT Problem\n- finalizeSolution(): Return solution to GAMS\n\n**GAMS Integration:**\n- gmoHandle_t: GAMS Model Object (GMO)\n- gevHandle_t: GAMS Environment (GEV)\n- palHandle_t: GAMS Audit Licensing (PAL)\n\n**Model Conversion:**\n- copyVariables/Constraints/ObjectiveFunction()\n- parseGamsInstructions(): Bytecode to expression conversion\n\n**GamsOutputSink:**\n- spdlog sink routing to GAMS log\n- gevLogPChar() for normal messages\n- gevLogStatPChar() for warnings/errors",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GMO API documentation (gams.com)"
+  ]
+}

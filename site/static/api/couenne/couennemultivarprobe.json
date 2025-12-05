@@ -1,0 +1,20 @@
+{
+  "name": "CouenneMultiVarProbe",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/bound_tightening/CouenneMultiVarProbe.hpp",
+  "brief": "Multi-variable probing for bound tightening",
+  "algorithms": [
+    {
+      "name": "Multi-Variable Probing for OBBT\n\nExtension of single-variable probing that considers multiple\nvariables simultaneously for bound tightening. Can detect\nimplications that single-variable probing would miss.\n\n**Multi-variable probing:**\nInstead of fixing one variable at a time, considers combinations\nof variable settings to derive stronger implied bounds.\n\n**Example:**\nSingle-variable probing on x1 and x2 separately might not tighten bounds,\nbut probing x1=lb AND x2=ub together might prove infeasibility or\nderive new bounds.\n\n**Parameters:**\n- maxTime_: Maximum time for probing\n- numCols_: Number of columns to consider",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneAggrProbing for single-variable OBBT",
+    "CouenneFixPoint for FBBT"
+  ]
+}

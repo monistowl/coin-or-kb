@@ -1,0 +1,13 @@
+{
+  "name": "HighsSparseVectorSum",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsSparseVectorSum.h",
+  "brief": "Accumulator for sparse vector linear combinations\n\nEfficient accumulation of multiple sparse vectors with quad precision.\n\n**Hybrid Storage:**\n- values[]: Full-length HighsCDouble array for accumulation\n- nonzeroinds[]: Packed indices of nonzero entries\n- O(nnz) iteration with O(1) random access\n\n**Key Operations:**\n- add(): Accumulate value at index, track new nonzeros\n  - Uses DBL_MIN sentinel to distinguish zero from never-set\n- getNonzeros(): Return accumulated nonzero indices\n- getValue(): Extract accumulated value at index\n- clear(): Reset (O(nnz) or O(n) based on density)\n\n**Template Methods:**\n- partition(): Partition nonzeros by predicate\n- cleanup(): Remove entries satisfying isZero predicate\n\n**Usage:**\nRow aggregation for cut generation (HighsLpAggregator uses this)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsLpAggregator.h for row aggregation",
+    "util/HighsCDouble.h for quad precision arithmetic"
+  ]
+}

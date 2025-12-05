@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprUnary",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneExprUnary.hpp",
+  "brief": "Base class for univariate function expressions\n\nProvides common framework for all single-argument functions like\nsin, cos, log, exp, sqrt, etc. Derived classes override F() to\ndefine the actual function.\n\n**Key virtual methods for derived classes:**\n- F(): Return the unary_function pointer for evaluation\n- generateCuts(): Create convexification cuts for w = f(x)\n- impliedBound(): Backward propagation (w bounds \u2192 x bounds)\n\n**Convexification approach:**\nUnivariate functions use tangent cuts (supporting hyperplanes) on\nconvex regions and secant cuts on concave regions.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprLog, exprExp, exprSin, exprCos for concrete implementations",
+    "exprOp for n-ary operators"
+  ]
+}

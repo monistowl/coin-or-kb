@@ -1,0 +1,12 @@
+{
+  "name": "CouenneFunTriplets",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/util/CouenneFunTriplets.hpp",
+  "brief": "Function triplets: f(x), f'(x), f''(x), and (f')\u207b\u00b9\n\nBundles a univariate function with its first two derivatives and\nthe inverse of the first derivative. Used in convexification to\ncompute tangent points and envelope parameters.\n\n**Abstract base: funtriplet**\n- F(x): Main function value\n- Fp(x): First derivative f'(x)\n- Fpp(x): Second derivative f''(x)\n- FpInv(x): Inverse of first derivative (f')\u207b\u00b9(x)\n\n**simpletriplet:**\nStores function pointers for each operation. Suitable for\nstandard functions like exp, log, sin, cos.\n\n**powertriplet:**\nSpecialized for x\u1d4f with analytical derivatives:\n- F(x) = x\u1d4f\n- Fp(x) = k\u00b7x\u1d4f\u207b\u00b9\n- Fpp(x) = k(k-1)\u00b7x\u1d4f\u207b\u00b2\n- FpInv(y) = (y/k)^(1/(k-1))\n\n**kpowertriplet:**\nExtension for c\u00b7x\u1d4f with scalar multiplier.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprPow which uses these for convexification"
+  ]
+}

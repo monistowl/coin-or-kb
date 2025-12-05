@@ -1,0 +1,14 @@
+{
+  "name": "AlpsDecompTreeNode",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/AlpsDecompTreeNode.h",
+  "brief": "ALPS tree node for DIP branch-and-bound\n\nAlpsDecompTreeNode represents a node in the B&B tree, deriving from\nAlpsTreeNode to integrate with ALPS's tree management.\n\n**Key Responsibilities:**\n- Store branching decisions (bound changes from parent)\n- Implement process() to solve node via DecompAlgo\n- Implement branch() to create child nodes\n- Check for new incumbents\n\n**Branching Storage:**\n- downBranchLB_, downBranchUB_: Bounds for down branch\n- upBranchLB_, upBranchUB_: Bounds for up branch\nStored as (var_index, bound_value) pairs.\n\n**Key Methods:**\n- process(): Main bounding - calls DecompAlgo::processNode()\n- branch(): Create children with new bounds\n- checkIncumbent(): Test if solution improves best known\n- createNewTreeNode(): Factory for child nodes\n\n**Node Processing Flow:**\n1. ALPS selects node from tree\n2. Calls process() which invokes DecompAlgo\n3. DecompAlgo returns bound and status\n4. If fractional, branch() creates children",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsDecompModel.h for parent model",
+    "DecompAlgo.h for node processing logic",
+    "AlpsTreeNode (ALPS) for base class"
+  ]
+}

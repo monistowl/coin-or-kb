@@ -1,0 +1,9 @@
+{
+  "name": "put_dyn_atomic",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/record/put_dyn_atomic.hpp",
+  "brief": "Operation recording: put_dyn_atomic",
+  "algorithms": [],
+  "methods": []
+}

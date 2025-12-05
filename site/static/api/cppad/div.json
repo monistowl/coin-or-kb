@@ -1,0 +1,9 @@
+{
+  "name": "div",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/div.hpp",
+  "brief": "Core AD functionality: div",
+  "algorithms": [],
+  "methods": []
+}

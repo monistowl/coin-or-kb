@@ -1,0 +1,21 @@
+{
+  "name": "IpVector",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpVector.hpp",
+  "brief": "Abstract base class for all vector types in Ipopt\n\nVector is the foundation of Ipopt's linear algebra abstraction.\nProvides BLAS-1 style operations (Copy, Scal, Axpy, Dot, Nrm2, etc.)\nplus IPM-specific operations (AddOneVector, FracToBound, etc.).",
+  "algorithms": [
+    {
+      "name": "Template Method + Abstract Factory Pattern:\n  - Public methods (Axpy, Dot, etc.) delegate to protected *_Impl methods\n  - VectorSpace factory creates compatible vectors of same type\n  - TaggedObject inheritance enables automatic cache invalidation\n  This design allows DenseVector and CompoundVector to share interface\n  while providing type-specific optimized implementations.",
+      "math": "IPM-specific operation - FracToBound:\n  \u03b1 = max{\u1fb1 \u2208 (0,1] : x + \u1fb1\u0394x \u2265 (1-\u03c4)x}\n  Computes maximum step length maintaining fraction-to-boundary \u03c4.\n  Critical for ensuring positivity of slack variables in interior-point.\n\nKey design features:\n- Inherits TaggedObject for automatic cache invalidation\n- Uses VectorSpace factory pattern for creating compatible vectors\n- Template Method pattern: public methods call protected *_Impl methods\n- Implementations: DenseVector, CompoundVector\n\nDerived classes override protected *_Impl methods to provide\nactual computation (e.g., CopyImpl, AxpyImpl, DotImpl).",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpDenseVector.hpp for primary implementation",
+    "IpCompoundVector.hpp for composite vectors",
+    "IpMatrix.hpp for matrix abstraction"
+  ]
+}

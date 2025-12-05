@@ -1,0 +1,9 @@
+{
+  "name": "OSLindoSolver",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSSolverInterfaces/OSLindoSolver.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

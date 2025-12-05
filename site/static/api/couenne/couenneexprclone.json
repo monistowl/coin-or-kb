@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprClone",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneExprClone.hpp",
+  "brief": "Non-owning reference to another expression\n\nPoints to another expression but does NOT own it - the destructor\nsets copy_ = NULL to prevent exprCopy's destructor from deleting it.\n\n**Key difference from exprCopy:**\n- exprCopy: Owns copy_, deletes it in destructor\n- exprClone: Does NOT own copy_, just references it\n\n**Usage:**\nUse exprClone when you need multiple references to the same\nexpression without duplicating memory or ownership.\n\n**getOriginal():**\nUsed in constructor to skip through chains of clones/copies\nto find the actual underlying expression.\n\n**Evaluation:**\noperator() calls (*copy_)() which evaluates the pointed-to\nexpression and returns its result.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprCopy which owns its referenced expression",
+    "exprStore for storing computed values"
+  ]
+}

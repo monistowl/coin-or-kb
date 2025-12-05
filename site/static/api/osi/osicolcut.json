@@ -1,0 +1,20 @@
+{
+  "name": "OsiColCut",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiColCut.hpp",
+  "brief": "Column-based cuts for variable bound tightening\n\nColumn cuts represent bound changes on variables rather than\nadding new constraints. They are used for:\n- Bound tightening from probing\n- Implication-based bound strengthening\n- Reduced cost fixing",
+  "algorithms": [
+    {
+      "name": "Column Cut Application:\nEfficient bound update procedure.\n\n  For each (index, newLb) in lbs_:\n    solver.setColLower(index, max(oldLb, newLb))\n\n  For each (index, newUb) in ubs_:\n    solver.setColUpper(index, min(oldUb, newUb))",
+      "math": "For minimization with UB = cutoff:\n    If r\u0304_j > 0 and c'x_LP + r\u0304_j(u_j - x*_j) > UB:\n      Can fix x_j = l_j\n\n  PROBING:\n    Tentatively fix x_j, propagate implications\n    If leads to infeasibility: opposite fixing valid\n    If leads to bound changes: valid column cuts\n\n  IMPLICATION:\n    From logical relationships (e.g., cliques)\n    x_i = 1 implies x_j = 0 \u2192 bound tightening",
+      "complexity": "O(nnz in cut) for application\nMore efficient than row cuts when bounds suffice.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiRowCut for linear inequality cuts",
+    "OsiCut for base class"
+  ]
+}

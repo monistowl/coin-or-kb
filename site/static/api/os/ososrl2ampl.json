@@ -1,0 +1,9 @@
+{
+  "name": "OSosrl2ampl",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSModelInterfaces/OSosrl2ampl.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,23 @@
+{
+  "name": "IpPDFullSpaceSolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpPDFullSpaceSolver.hpp",
+  "brief": "Full-space primal-dual system solver with inertia correction\n\nPDFullSpaceSolver is the main implementation of PDSystemSolver.\nIt reduces the 8x8 primal-dual system to the 4x4 augmented system\nby eliminating bound multiplier equations:\n  d_z = S^{-1}(rhs_z - Z*P^T*d_x)\n\nKey features:\n- Iterative refinement with quality monitoring (residual_ratio)\n- Inertia correction via PDPerturbationHandler (adds delta_x, delta_c)\n- Automatic retries with increased pivot tolerance\n- Handles singular systems by adding regularization\n\nParameters:\n- min/max_refinement_steps: Iterative refinement bounds\n- residual_ratio_max: Acceptable solution quality threshold\n- neg_curv_test_tol: Tolerance for inertia heuristics",
+  "algorithms": [
+    {
+      "name": "Full-Space Primal-Dual System Solver:\nReduces 8\u00d78 KKT system to 4\u00d74 augmented system by variable elimination:\n1. Eliminate bound multipliers: \u0394z = S\u207b\u00b9(r_z - Z\u00b7P\u1d40\u00b7\u0394x)\n2. Form augmented system with diagonal \u03a3 = S\u207b\u00b9Z in (1,1) block\n3. Factor augmented system (via AugSystemSolver)\n4. Recover full solution by back-substitution",
+      "math": "Variable elimination for bound multipliers:\nFrom complementarity rows: Z\u00b7P\u1d40\u00b7\u0394x + S\u00b7\u0394z = r_z\nSolve: \u0394z = S\u207b\u00b9(r_z - Z\u00b7P\u1d40\u00b7\u0394x)\n\nAugmented system after elimination:\n[W + \u03a3   A\u1d40 ] [\u0394x]   [r_x - P\u1d40\u00b7S\u207b\u00b9\u00b7r_z]\n[  A   -\u03b4_c\u00b7I] [\u0394y] = [r_c              ]\nwhere \u03a3 = P\u1d40\u00b7S\u207b\u00b9\u00b7Z\u00b7P is diagonal and \u03b4_c is constraint regularization.\n\nIterative refinement: solve, compute residual r = b - Ax\u0302,\nsolve for correction, repeat until ||r||/||b|| < tol.",
+      "complexity": "Dominated by augmented system factorization:\nO(n\u00b3) dense, O(nnz + n\u00b7fill) sparse. Iterative refinement adds\nO(n\u00b2) per step for residual computation.",
+      "ref": [
+        "W\u00e4chter & Biegler (2006). \"On the implementation of an interior-point\n  filter line-search algorithm for large-scale nonlinear programming\".\n  Mathematical Programming 106(1):25-57. [Section 3.1: Linear algebra]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpPDSystemSolver.hpp for the interface",
+    "IpAugSystemSolver.hpp for the reduced system solver",
+    "IpPDPerturbationHandler.hpp for inertia correction"
+  ]
+}

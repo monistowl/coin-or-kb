@@ -1,0 +1,21 @@
+{
+  "name": "AbcSimplexFactorization",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcSimplexFactorization.hpp",
+  "brief": "LU factorization wrapper for ABC simplex",
+  "algorithms": [
+    {
+      "name": "Factorization Type Selection:\n  - Dense (goDenseThreshold_): For small m, use LAPACK-style\n  - Small (goSmallThreshold_): Optimized for cache efficiency\n  - Standard: General sparse LU\n  - Long (goLongThreshold_): Ordered for very large problems",
+      "math": "",
+      "complexity": "Factorization: O(nnz(L)\u00b7nnz(U)) depends on fill-in\nFTRAN/BTRAN: O(nnz(L)+nnz(U)) per solve\nUpdate: O(nnz(eta)) per rank-1 update",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcSimplex which uses this factorization",
+    "ClpFactorization for the standard (non-ABC) wrapper",
+    "CoinAbcFactorization in CoinUtils for ABC factorization"
+  ]
+}

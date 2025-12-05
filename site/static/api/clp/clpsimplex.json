@@ -1,0 +1,28 @@
+{
+  "name": "ClpSimplex",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpSimplex.hpp",
+  "brief": "Main simplex solver class - orchestrates primal and dual simplex algorithms",
+  "algorithms": [
+    {
+      "name": "Simplex Method for Linear Programming:\n  Maintains a basic feasible solution (BFS) at a vertex of the polytope.\n  Each iteration moves along an edge to an adjacent vertex with better objective.\n  - Primal simplex: maintains primal feasibility, achieves dual feasibility\n  - Dual simplex: maintains dual feasibility, achieves primal feasibility\n  Terminates when both primal and dual feasibility achieved (optimality).",
+      "math": "",
+      "complexity": "O(2^n) worst-case (Klee-Minty), but typically polynomial in practice.\n  Per-iteration cost: O(m\u00b2) for basis update + O(mn) for pricing.\n  Iteration count: typically O(m) to O(3m) for practical problems.",
+      "ref": [
+        "Dantzig, G.B. (1963). \"Linear Programming and Extensions\".\n  Princeton University Press. [Original simplex method]",
+        "Forrest, J.J. and Goldfarb, D. (1992). \"Steepest-edge simplex algorithms\n  for linear programming\". Math. Programming 57:341-374. [Steepest edge pricing]\n\n@note The algorithm_ member indicates variant: positive=primal, negative=dual",
+        "Wright, S.J. (1997). \"Primal-Dual Interior-Point Methods\". SIAM."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpModel for problem data storage",
+    "ClpSimplexDual for dual simplex implementation",
+    "ClpSimplexPrimal for primal simplex implementation",
+    "ClpFactorization for basis factorization",
+    "ClpDualRowPivot, ClpPrimalColumnPivot for pivot selection strategies",
+    "CoinFactorization in CoinUtils for the underlying LU factorization"
+  ]
+}

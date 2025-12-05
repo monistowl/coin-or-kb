@@ -1,0 +1,21 @@
+{
+  "name": "ClpPESimplex",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPESimplex.hpp",
+  "brief": "Positive Edge anti-degeneracy framework for simplex",
+  "algorithms": [
+    {
+      "name": "Positive Edge Compatibility Detection:\n  Reduces degenerate pivots by identifying \"compatible\" variables:\n  1. Compute reference direction: d = B\u207b\u00b9\u00b7a_j for candidate column j\n  2. Variable i is compatible if \u27e8d, e_i\u27e9 > tolerance\n     (i.e., pivot would cause positive movement on variable i)\n  3. Prioritize compatible variables in pricing to avoid stalling\n  4. Fall back to standard pricing when no compatibles exist",
+      "math": "Bi-dimensional pricing with compatibility:\n  For primal: score(j) = |d_j| / (\u03c8 \u00b7 w_j + (1-\u03c8) \u00b7 c_j)\n  where d_j = reduced cost, w_j = steepest edge weight,\n        c_j = compatibility score (0 or 1)\n  For dual: analogous scoring for row selection\n  Parameter \u03c8 \u2208 [0,1] balances steepest edge vs compatibility.",
+      "complexity": "Compatibility update: O(nnz(pivot_column)) per iteration.\n  Tracking primal/dual degenerates: O(m) per factorization.\n  Reduces iteration count significantly on highly degenerate LPs.",
+      "ref": [
+        "Towhidi & Orban (2014). \"Customizing the solution process of COIN-OR's\n     linear solvers with Python\". Math. Prog. Computation 6:247-282.\n\nKey concepts:\n- Primal degenerates: basic variables at bound (zero pivot impact)\n- Dual degenerates: non-basic variables with zero reduced cost\n- Compatible columns/rows: can make positive improvement\n- Bi-dimensional pricing: balances reduced cost vs. compatibility\n\nThe psi parameter (default 0.5) controls priority given to compatibles.\nSmaller psi = more priority to compatible variables."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPEPrimalColumnSteepest, ClpPEDualRowSteepest for pivot implementations"
+  ]
+}

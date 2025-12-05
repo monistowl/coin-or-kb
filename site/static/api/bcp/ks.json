@@ -1,0 +1,18 @@
+{
+  "name": "KS",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Csp/include/KS.hpp",
+  "brief": "Knapsack solver for CSP column generation",
+  "algorithms": [
+    {
+      "name": "Horowitz-Sahni: Exact Knapsack Solver\n\nBranch-and-bound algorithm for 0-1 knapsack problems.\n\n**Method:**\n1. Sort items by profit/weight ratio (Dantzig ordering)\n2. Compute LP upper bound via greedy fractional solution\n3. Forward step: greedily add items while capacity permits\n4. Backtrack when bound proves no improvement possible",
+      "math": "",
+      "complexity": "O(2^n) worst case, but efficient with good bounds",
+      "ref": [
+        "Martello & Toth, \"Knapsack Problems\" (1990), pp. 30-31"
+      ]
+    }
+  ],
+  "methods": []
+}

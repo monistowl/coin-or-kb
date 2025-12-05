@@ -1,0 +1,12 @@
+{
+  "name": "MIPSolverBase",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/MIPSolverBase.h",
+  "brief": "Common base class for MIP solver implementations\n\nShared functionality for CPLEX, Gurobi, and Cbc backends.\n\n**Problem State:**\n- numberOfVariables, numberOfConstraints: Problem size\n- variableTypes, variableLowerBounds, variableUpperBounds\n- isMinimizationProblem, isProblemDiscrete\n\n**Hyperplane Creation:**\n- createHyperplane(): Add supporting hyperplane cut\n- createInteriorHyperplane(): Interior point cut\n- createHyperplaneTerms(): Compute cut coefficients\n- getConstraintIdentifier(): Named constraint IDs\n\n**Variable Fixing:**\n- fixVariable(), fixVariables(): Fix for NLP subproblem\n- unfixVariables(): Restore original bounds\n- updateVariableBound(): Dynamic bound update\n\n**Relaxation Strategy:**\n- relaxationStrategy: LP relaxation handling\n- executeRelaxationStrategy(): Apply relaxation\n\n**Dual Auxiliary Variable:**\n- Tracks epigraph variable for nonlinear objective\n- hasDualAuxiliaryObjectiveVariable(), getDualAuxiliaryObjectiveVariableIndex()",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "MIPSolverCplex, MIPSolverGurobi, MIPSolverCbc"
+  ]
+}

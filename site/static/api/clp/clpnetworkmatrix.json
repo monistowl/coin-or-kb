@@ -1,0 +1,23 @@
+{
+  "name": "ClpNetworkMatrix",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpNetworkMatrix.hpp",
+  "brief": "Specialized matrix for pure network LP problems\n\nImplements efficient storage for network flow problems where each column\n(arc) has exactly two nonzeros: +1 at the head node and -1 at the tail node.\nThis representation requires only O(n) storage for row indices vs O(2n) for\na general sparse matrix.",
+  "algorithms": [
+    {
+      "name": "Network Matrix Operations:\n  Exploits +1/-1 structure for O(1) element access:\n  1. Storage: indices_[2j] = tail, indices_[2j+1] = head for arc j\n  2. Column j: A[tail,j] = -1, A[head,j] = +1 (flow conservation)\n  3. Matrix-vector: y = Ax requires only n additions (no multiplies)\n     For each arc j: y[head] += x[j], y[tail] -= x[j]\n  4. Transpose: x = A'y similarly O(n) additions",
+      "math": "Network flow structure:\n  Column j represents arc from node tail to node head\n  A_j = e_{head} - e_{tail} (unit vectors)\n  For min-cost flow: min c'x s.t. Ax = b, 0 \u2264 x \u2264 u\n  Basis is spanning tree \u2192 O(n) pivot operations",
+      "complexity": "Storage: O(2n) integers vs O(nnz) for general sparse\n  Matrix-vector: O(n) vs O(nnz) for general (no multiplications)\n  Enables network simplex with O(n) pivots vs O(n\u00b2) general",
+      "ref": [
+        "Ahuja, Magnanti, Orlin (1993). \"Network Flows: Theory, Algorithms,\n     and Applications\". Prentice Hall, Ch. 11.\n\nNetwork problems have special structure that allows very fast simplex pivots\nand specialized algorithms. This class exploits that structure while\npresenting the standard ClpMatrixBase interface.\n\nStorage: indices_ stores pairs of row indices (tail, head) for each column.\nA row index of -1 indicates a slack arc with only one endpoint."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpMatrixBase for the abstract matrix interface",
+    "ClpPackedMatrix for general sparse matrix storage",
+    "CoinPackedMatrix in CoinUtils for underlying sparse format"
+  ]
+}

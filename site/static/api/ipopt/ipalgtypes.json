@@ -1,0 +1,12 @@
+{
+  "name": "IpAlgTypes",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Interfaces/IpAlgTypes.hpp",
+  "brief": "Algorithm-level return codes and exception types\n\nDefines SolverReturn enum for internal algorithm status:\n- SUCCESS: Converged to optimality tolerances\n- MAXITER_EXCEEDED, CPUTIME_EXCEEDED, WALLTIME_EXCEEDED\n- STOP_AT_ACCEPTABLE_POINT: Met acceptable (looser) tolerances\n- LOCAL_INFEASIBILITY: Problem appears locally infeasible\n- USER_REQUESTED_STOP: Callback requested termination\n- RESTORATION_FAILURE: Feasibility restoration failed\n- DIVERGING_ITERATES, INVALID_NUMBER_DETECTED\n\nAlso declares standard exceptions thrown during solve:\nLOCALLY_INFEASIBLE, TOO_FEW_DOF, TINY_STEP_DETECTED, etc.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpReturnCodes.hpp for application-level return codes"
+  ]
+}

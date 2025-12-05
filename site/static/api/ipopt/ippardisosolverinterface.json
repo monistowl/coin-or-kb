@@ -1,0 +1,22 @@
+{
+  "name": "IpPardisoSolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpPardisoSolverInterface.hpp",
+  "brief": "Interface to PARDISO sparse solver from pardiso-project.org\n\nPardisoSolverInterface wraps the PARDISO solver distributed by\npardiso-project.org (not to be confused with Intel MKL's PARDISO).\nPARDISO is a high-performance parallel direct solver for sparse\nsymmetric indefinite systems.",
+  "algorithms": [
+    {
+      "name": "Parallel Supernodal LDL^T with Weighted Matching:\n  PARDISO computes A = P\u00b7S\u00b7L\u00b7D\u00b7L^T\u00b7S\u00b7P^T using:\n  - Supernodal factorization: groups columns into dense supernode blocks\n  - Level-3 BLAS operations within supernodes for cache efficiency\n  - OpenMP parallelism over independent supernode subtrees\n  - Weighted matching preprocessing for indefinite stability",
+      "math": "Matching strategies for saddle point systems:\n  - COMPLETE: Maximum weighted matching on |A|, produces permutation P\n    such that |P*A| has large diagonal entries\n  - COMPLETE2x2: 2\u00d72 pivot matching for symmetric indefinite systems,\n    identifies pairs (i,j) where A[i,j] forms stable 2\u00d72 pivot block\n  - CONSTRAINT: Preserves constraint structure in optimization problems",
+      "complexity": "O(n\u00b7f\u00b2/p) with p threads, O(nnz(L)) memory.\n  Very efficient for medium-sized dense fronts (supernodes).\n  Iterative refinement: 1-2 iterations to reach working precision.",
+      "ref": [
+        "Schenk & G\u00e4rtner (2004). \"Solving Unsymmetric Sparse Systems of\n     Linear Equations with PARDISO\". Future Generation Computer Systems\n     20(3):475-487.\n\nPARDISO characteristics:\n- Parallel: Multi-threaded with OpenMP\n- Input format: CSR_Format_1_Offset (upper triangular)\n- Provides inertia\n- Supports iterative refinement\n\nMatching strategies (match_strat_):\n- COMPLETE: Full weighted matching\n- COMPLETE2x2: 2x2 matching for saddle point systems\n- CONSTRAINT: Constraint-preserving matching\n\nPhases (controlled by PHASE parameter):\n- Phase 11: Analysis (reordering, symbolic factorization)\n- Phase 22: Numerical factorization\n- Phase 33: Forward/backward solve\n- Phase -1: Release memory\n\nMTYPE=-2 indicates real symmetric indefinite matrix."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpPardisoMKLSolverInterface.hpp for Intel MKL version",
+    "IpMa97SolverInterface.hpp for alternative parallel solver"
+  ]
+}

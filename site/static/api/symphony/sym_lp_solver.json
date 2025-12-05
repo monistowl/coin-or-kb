@@ -1,0 +1,13 @@
+{
+  "name": "sym_lp_solver",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_lp_solver.h",
+  "brief": "LP solver abstraction layer for SYMPHONY\n\nProvides uniform interface to multiple LP solvers via OSI\n(Open Solver Interface) or native APIs.\n\n**Supported solvers (via compile flags):**\n- __OSI_CLP__: COIN-OR CLP (default, open source)\n- __OSI_CPLEX__: IBM CPLEX\n- __OSI_XPRESS__: FICO Xpress\n- __OSI_GLPK__: GNU Linear Programming Kit\n- __CPLEX__: Native CPLEX API\n- __OSL__: IBM OSL (legacy)\n\n**LPdata structure:**\n- si: OsiSolverInterface pointer (OSI mode)\n- lp: Native solver object (CPLEX/OSL mode)\n- n, m, nz: Columns, rows, nonzeros\n- x, dj, dualsol, slacks: Solution vectors\n- vars: Variable descriptors with bounds/status\n- mip: Original problem description\n- cgl: CGL cut generation parameters\n\n**Core LP operations:**\n- open/close_lp_solver(): Initialize/cleanup\n- load_lp_prob(): Load problem into solver\n- initial_lp_solve(): First solve from scratch\n- dual_simplex(): Resolve after modifications\n- solve_hotstart(): Quick re-solve with basis\n\n**Matrix modification:**\n- add_rows(), add_cols(): Extend problem\n- delete_rows(), delete_cols(): Remove elements\n- change_bounds(), change_rhs(): Modify constraints\n\n**Solution access:**\n- get_x(), get_dj_pi(), get_slacks(): Retrieve solutions\n- get_basis(), load_basis(): Basis manipulation\n\n**CGL cut generation:**\n- generate_cgl_cuts(): Call CGL generators\n- Supports: Gomory, MIR, Probing, Knapsack, Clique, etc.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_lp.h for LP process using this interface",
+    "CoinUtils for OSI documentation"
+  ]
+}

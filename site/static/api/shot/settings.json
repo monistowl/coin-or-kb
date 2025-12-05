@@ -1,0 +1,12 @@
+{
+  "name": "Settings",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Settings.h",
+  "brief": "Solver configuration and option management\n\nHierarchical settings system for SHOT algorithm parameters.\n\n**Settings Categories:**\n- Termination: TimeLimit, IterationLimit, ObjectiveGap\n- Subsolver: MIP backend, NLP backend\n- Algorithm: Cut generation, reformulation options\n- Output: Verbosity, logging levels\n\n**Exception Classes:**\n- SettingKeyNotFoundException: Unknown setting key\n- SettingSetWrongTypeException: Type mismatch on set\n- SettingGetWrongTypeException: Type mismatch on get\n\n**Settings Types:**\n- E_SettingType: Integer, Double, String, Boolean, Enum\n\n**File Formats:**\n- OSoL XML format (Options Service Language)\n- Simple key=value format",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Solver.h for setOptionsFromFile/String methods"
+  ]
+}

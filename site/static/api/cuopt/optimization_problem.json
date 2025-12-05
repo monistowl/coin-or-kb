@@ -1,0 +1,12 @@
+{
+  "name": "optimization_problem",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/include/cuopt/linear_programming/optimization_problem.hpp",
+  "brief": "GPU-resident linear/integer programming problem representation\n\nContainer for LP/MIP optimization problems stored in GPU memory.\n\n**optimization_problem_t Class:**\n- Represents: min/max c'x s.t. Ax \u2264/=/\u2265 b, l \u2264 x \u2264 u\n- Constraint matrix A in CSR (Compressed Sparse Row) format\n- GPU device memory via rmm::device_uvector\n\n**Problem Components:**\n- set_csr_constraint_matrix(): Sparse constraint matrix\n- set_constraint_bounds(): RHS values (b)\n- set_objective_coefficients(): Cost vector (c)\n- set_variable_lower/upper_bounds(): Variable bounds\n- set_variable_types(): CONTINUOUS or INTEGER\n\n**Variable Types:**\n- var_t::CONTINUOUS: Real-valued variable\n- var_t::INTEGER: Integer-valued variable\n\n**Problem Categories:**\n- LP: All continuous variables\n- MIP: Mixed integer and continuous\n- IP: All integer variables",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cuopt/linear_programming/solve.hpp for solve functions"
+  ]
+}

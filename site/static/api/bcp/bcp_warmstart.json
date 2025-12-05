@@ -1,0 +1,20 @@
+{
+  "name": "BCP_warmstart",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_warmstart.hpp",
+  "brief": "LP warm start information for BCP Branch-Cut-Price",
+  "algorithms": [
+    {
+      "name": "Warm Start: Delta-Encoded LP Basis for Fast Resolves\n\nBCP_warmstart is the abstract base for storing LP warm start data.\nEnables efficient LP resolves when moving between tree nodes.\n\n**Storage modes (BCP_storage_t):**\n- Explicit: Full warm start data\n- WrtParent: Changes relative to parent node\n- WrtCore: Changes relative to core formulation\n\n**Key methods:**\n- convert_to_CoinWarmStart(): Get Osi-compatible warm start\n- storage(): Query how data is stored\n- update(): Apply incremental changes\n- as_change(): Compute delta from previous warm start\n- clone(): Deep copy\n- storage_size(): Memory footprint for storage decisions\n\n**Node transitions:**\nWhen LP dives from parent to child, warm start may be stored\nas delta to save space. When backtracking, explicit form needed.\n\nImplementations: BCP_warmstart_basis (simplex basis),\nBCP_warmstart_primaldual (interior point)",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_lp.hpp for LP process using warm starts",
+    "CoinWarmStart for underlying OSI interface"
+  ]
+}

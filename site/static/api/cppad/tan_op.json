@@ -1,0 +1,9 @@
+{
+  "name": "tan_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/tan_op.hpp",
+  "brief": "Internal implementation: tan_op",
+  "algorithms": [],
+  "methods": []
+}

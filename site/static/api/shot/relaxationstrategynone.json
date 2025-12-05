@@ -1,0 +1,12 @@
+{
+  "name": "RelaxationStrategyNone",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/RelaxationStrategyNone.h",
+  "brief": "No-op relaxation strategy (always MIP)\n\nDisables LP relaxation phase, always solves full MIP.\n\n**RelaxationStrategyNone Class:**\n- executeStrategy(): No-op (MIP always active)\n- setActive()/setInactive()/setInitial(): State management\n\n**Use Case:**\n- Problems where LP phase doesn't help\n- When integer solutions are needed immediately\n- Benchmarking MIP-only performance\n\n**Behavior:**\n- Every iteration solves full MIP problem\n- No LP warm-start phase for hyperplane generation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "RelaxationStrategyStandard.h for LP-then-MIP"
+  ]
+}

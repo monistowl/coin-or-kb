@@ -1,0 +1,13 @@
+{
+  "name": "CouExpr",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouExpr.hpp",
+  "brief": "Expression container with operator overloading for algebraic construction\n\nProvides a user-friendly wrapper around the expression DAG with\noverloaded operators for building mathematical expressions in\nnatural algebraic notation.\n\n**CouExpr container:**\n- Wraps an expression* with value semantics (cloning on copy)\n- Allows algebraic expression construction: e1 + e2, sin(e), etc.\n\n**Supported operations:**\n- Arithmetic: +, -, *, /, %, ^ (power)\n- Trigonometric: sin, cos\n- Other: log, exp\n\n**Operand types:**\n- CouExpr & CouExpr \u2192 CouExpr\n- CouNumber & CouExpr \u2192 CouExpr\n- CouExpr & CouNumber \u2192 CouExpr\n\n**Example:**\n```cpp\nCouExpr x(exprVar), y(exprVar);\nCouExpr f = sin(x) + x*y + exp(y);\nexpression* e = f.Expression();\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "expression which is the underlying representation",
+    "CouenneProblem for high-level model construction"
+  ]
+}

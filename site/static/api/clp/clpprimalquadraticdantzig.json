@@ -1,0 +1,21 @@
+{
+  "name": "ClpPrimalQuadraticDantzig",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPrimalQuadraticDantzig.hpp",
+  "brief": "Dantzig-style pricing for quadratic programming\n\nExtends ClpPrimalColumnPivot for QP problems where the reduced cost\ndepends on the current solution (due to the quadratic objective).",
+  "algorithms": [
+    {
+      "name": "Selection Rule:\nChoose entering variable j* = argmax |c\u0304_j| among:\n  - Variables at lower bound with c\u0304_j < 0 (can increase)\n  - Variables at upper bound with c\u0304_j > 0 (can decrease)",
+      "math": "REDUCED COST FOR QP:\nFor LP: c\u0304_j = c_j - \u03c0'A_j (constant during iteration)\nFor QP: c\u0304_j = c_j + (Qx)_j - \u03c0'A_j (changes with x!)",
+      "complexity": "O(n) per pricing: examines all nonbasic variables.\nNo sophisticated structures like steepest edge or Devex.\n\nWHY REDUCED COST CHANGES IN QP:\n  \u2207f(x) = c + Qx\n  When basic variables change \u2192 x changes \u2192 Qx changes \u2192 c\u0304 changes\n  Must recompute all reduced costs each iteration (expensive!)\n\nquadraticInfo_ stores:\n  - Current Qx product\n  - Solution state for gradient updates\n\nUse when: Starting out with QP, need robust method.\nAvoid when: Large problems (use steepest edge variants).",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPrimalColumnPivot for the abstract pivot interface",
+    "ClpQuadraticObjective for the QP objective representation",
+    "ClpSimplexPrimalQuadratic for the QP simplex solver"
+  ]
+}

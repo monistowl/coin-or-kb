@@ -1,0 +1,9 @@
+{
+  "name": "zdouble",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/zdouble.hpp",
+  "brief": "Core AD functionality: zdouble",
+  "algorithms": [],
+  "methods": []
+}

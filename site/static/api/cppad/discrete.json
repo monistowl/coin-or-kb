@@ -1,0 +1,9 @@
+{
+  "name": "discrete",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/discrete/discrete.hpp",
+  "brief": "Core AD functionality: discrete",
+  "algorithms": [],
+  "methods": []
+}

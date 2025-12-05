@@ -1,0 +1,22 @@
+{
+  "name": "IpWsmpSolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpWsmpSolverInterface.hpp",
+  "brief": "Interface to IBM WSMP sparse symmetric direct solver\n\nWsmpSolverInterface wraps the Watson Sparse Matrix Package (WSMP),\na high-performance parallel direct solver developed at IBM for\nsparse symmetric indefinite linear systems.",
+  "algorithms": [
+    {
+      "name": "Parallel Sparse LDL^T with Multifrontal Method:\n  WSMP computes A = P\u00b7L\u00b7D\u00b7L^T\u00b7P^T using parallel multifrontal:\n  - Fill-reducing ordering: automatic selection of AMD/METIS/nested dissection\n  - Supernodal factorization with BLAS-3 dense operations\n  - Shared-memory parallelism via pthreads/OpenMP hybrid\n  - Optional positive-definite mode for faster factorization\n  Designed for shared-memory multi-processor systems.",
+      "math": "Symmetric indefinite factorization with threshold pivoting:\n  - Static pivoting determines stable 1\u00d71 and 2\u00d72 pivot blocks\n  - Pivtol threshold: accept pivot if |d_kk| \u2265 pivtol \u00d7 ||A_:,k||\n  - Scaling options: equilibration, Hungarian matching, Ruiz iteration\n  - Singularity detection via threshold on pivot magnitudes",
+      "complexity": "O(n\u00b7f\u00b2/p) with p threads for factorization.\n  Optimized for Intel architectures with cache-aware blocking.\n  WSMP often achieves 10-15% of peak FLOPS on dense supernodes.",
+      "ref": [
+        "Gupta (2002). \"Recent Advances in Direct Methods for Solving\n     Unsymmetric Sparse Systems of Linear Equations\". ACM TOMS 28(3).\n\nWSMP characteristics:\n- Parallel: Multi-threaded with shared memory\n- Input format: CSR_Format_1_Offset (upper triangular)\n- Provides inertia\n- Provides degeneracy detection\n- Supports both direct and iterative modes\n\nKey parameters:\n- wsmp_num_threads_: Number of threads for parallel execution\n- wsmp_pivtol_/wsmp_pivtolmax_: Pivot tolerance bounds\n- wsmp_scaling_: Scaling method selection\n- wsmp_singularity_threshold_: Singularity detection threshold\n- wsmp_no_pivoting_: Use positive definite mode (faster but unsafe)\n\nUses IPARM and DPARM arrays for parameter control, similar to PARDISO.\nPERM/INVP arrays store the fill-reducing ordering.\n\nCan optionally use PARDISO preprocessing for matching."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpIterativeWsmpSolverInterface.hpp for iterative mode",
+    "IpPardisoSolverInterface.hpp for similar direct solver"
+  ]
+}

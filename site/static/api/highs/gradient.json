@@ -1,0 +1,16 @@
+{
+  "name": "gradient",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/gradient.hpp",
+  "brief": "HiGHS QP gradient maintenance\n\nIncremental gradient updates for QP active set method.",
+  "algorithms": [
+    {
+      "name": "Incremental QP Gradient Update",
+      "math": "Gradient \u2207f(x) = Qx + c. After step x \u2192 x + \u03b1p:\n      \u2207f(x+\u03b1p) = Q(x+\u03b1p) + c = \u2207f(x) + \u03b1Qp.\n      Update via SAXPY: gradient \u2190 gradient + \u03b1\u00b7(Qp).\n      Recompute periodically to prevent numerical drift.",
+      "complexity": "O(nnz(Q)) for full recompute. O(nnz(Qp)) per update.",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

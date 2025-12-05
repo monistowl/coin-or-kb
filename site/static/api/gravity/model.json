@@ -1,0 +1,20 @@
+{
+  "name": "model",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/model.h",
+  "brief": "Main optimization model class combining variables, constraints, objective\n\nThe Model class is the central container for building optimization problems.",
+  "algorithms": [
+    {
+      "name": "Automatic Model Classification:\nProblem type determined by analyzing expressions:\n\n  MType = lin_m   iff all constraints/objective are linear\n  MType = quad_m  iff max degree = 2 (quadratic)\n  MType = pol_m   iff polynomial with degree > 2\n  MType = nlin_m  iff contains transcendental functions\n\nSolver selection based on MType:\n  lin_m  -> CLP, Gurobi LP, CPLEX LP, HiGHS\n  quad_m -> Gurobi QP, CPLEX QP, MOSEK\n  nlin_m -> Ipopt, Bonmin (with integers)\n\n**Model<type> Template Class:**\n- type: Numeric type (default double)\n- _vars: Map of all variables\n- _cons: Map of all constraints\n- _obj: Objective function\n- _objt: Objective type (minimize/maximize)\n\n**Building a Model:**\n```cpp\nModel<> m(\"MyModel\");\nvar<> x(\"x\", 0, 10);              // Variable x in [0,10]\nm.add(x.in(Nodes));                // Add indexed variable\nm.add(sum(x) <= 100);              // Add constraint\nm.min(sum(cost*x));                // Set objective\n```\n\n**Constraint Handling:**\n- Indexed constraints: one func<> generates multiple rows\n- Lazy constraints via _lazy vector\n- Parallel constraint evaluation (compute_constrs)\n- Parallel Jacobian computation (compute_jac)\n\n**Derivative Computation:**\n- Automatic symbolic differentiation\n- Jacobian sparsity pattern (_jac_cstr_idx)\n- Hessian sparsity pattern (_hess_link)\n\n**Model Types (MType):**\n- lin_m: Linear (LP/MIP)\n- quad_m: Quadratic (QP/MIQP)\n- pol_m: Polynomial\n- nlin_m: General nonlinear (NLP/MINLP)\n\n**I/O Support:**\n- MPS format (via CoinUtils)\n- NL format (AMPL, via mp library)",
+      "math": "",
+      "complexity": "- Constraint evaluation: O(nnz_constraints / num_threads)\n- Jacobian evaluation: O(nnz_jacobian / num_threads)\n- Hessian evaluation: O(nnz_hessian / num_threads)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "gravity/solver.h for solving models",
+    "gravity/constraint.h for constraint types"
+  ]
+}

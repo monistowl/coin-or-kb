@@ -1,0 +1,22 @@
+{
+  "name": "BonHeuristicDiveVectorLength",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonHeuristicDiveVectorLength.hpp",
+  "brief": "NLP-based diving heuristic selecting by constraint participation\nCopyright (C) 2007, International Business Machines Corporation and others.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.",
+  "algorithms": [
+    {
+      "name": "Vector Length Diving Heuristic",
+      "math": "Variable selection combines fractionality and column density:\n      score(x_j) = min(f_j, 1-f_j) \u00b7 columnLength_j\n      where columnLength_j = number of constraints containing x_j.\n      Selects variable with maximum score (fractional AND high-impact).\n\nHeuristicDiveVectorLength: Diving heuristic for MINLP that solves\nNLP subproblems during diving. Variable selection based on column\nlength (number of constraints containing the variable).\n\n**Rationale:** Variables appearing in many constraints have higher\nimpact when fixed. By weighting fractionality by column length,\nwe prioritize fixing variables that propagate more information.\n\n**Algorithm:**\n1. Precompute columnLength_j for all integer variables\n2. For each fractional x_j, compute score = min(f_j, 1-f_j) \u00b7 columnLength_j\n3. Select j* = argmax_j score(x_j)\n4. Round towards nearest integer",
+      "complexity": "O(n) per diving step; O(nnz) one-time setup for column lengths",
+      "ref": [
+        "Achterberg, T. (2007). \"Constraint Integer Programming\".\n     PhD thesis, TU Berlin. Section 7.4.\n\nAuthors: Joao P. Goncalves, IBM\nDate: November 12, 2007"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "HeuristicDive for base NLP-diving class",
+    "HeuristicDiveMIPVectorLength for MIP-based variant"
+  ]
+}

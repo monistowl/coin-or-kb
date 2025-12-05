@@ -1,0 +1,9 @@
+{
+  "name": "num_skip",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/num_skip.hpp",
+  "brief": "Core AD functionality: num skip",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,12 @@
+{
+  "name": "drivers",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/lie/drivers.h",
+  "brief": "Lie derivative computation for nonlinear control systems\n\nComputes Lie derivatives used in nonlinear control theory for:\n- Observability analysis (lie_scalar, lie_gradient)\n- Controllability analysis (lie_covector, lie_bracket)\n\n**Mathematical background:**\nGiven vector field f(x) and scalar function h(x), the Lie derivative is:\n  L_f h = \u2207h \u00b7 f = \u03a3 (\u2202h/\u2202x_i) f_i(x)\n\nHigher-order Lie derivatives (L_f^k h) reveal observability structure.\nLie brackets [f,g] = \u2202g/\u2202x\u00b7f - \u2202f/\u2202x\u00b7g reveal controllability structure.\n\n**Functions:**\n- lie_scalar(): Compute L_f^k h (scalar Lie derivatives)\n- lie_gradient(): Compute \u2207(L_f^k h) (gradients of Lie derivatives)\n- lie_covector(): Compute covector fields\n- lie_bracket(): Compute Lie bracket [f,g]",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "drivers/drivers.h for standard derivative computation"
+  ]
+}

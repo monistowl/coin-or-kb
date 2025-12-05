@@ -1,0 +1,22 @@
+{
+  "name": "taylor",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/drivers/taylor.h",
+  "brief": "Higher-order derivative tensors and implicit function differentiation\n\nProvides drivers for computing higher-order derivative tensors and\ndifferentiating through implicit/inverse functions.",
+  "algorithms": [
+    {
+      "name": "Higher-Order Taylor Propagation:\nComputes arbitrary-order derivative tensors via univariate Taylor arithmetic.\n\nTENSOR COMPUTATION:\nGiven f: \u211d\u207f \u2192 \u211d\u1d50 and p seed directions S \u2208 \u211d\u207f\u02e3\u1d56, compute the d-th order\nderivative tensor containing all mixed partials up to order d:\n\n1. Evaluate f along each direction: f(x + t\u00b7S[:,j]) as Taylor series\n2. Extract coefficients: [f]_k = (1/k!) \u00b7 (d^k f/dt^k)|_{t=0}\n3. Combine to form symmetric tensor with C(p+d,d) entries per output\n\nINVERSE FUNCTION DIFFERENTIATION:\nGiven tape computing y = F(x), compute derivatives of x = F\u207b\u00b9(y):\n\nFor implicit function G(x,y) = F(x) - y = 0:\n- Jacobian: \u2202x/\u2202y = -(\u2202G/\u2202x)\u207b\u00b9 \u00b7 (\u2202G/\u2202y) = (\u2202F/\u2202x)\u207b\u00b9\n- Higher orders: Propagate Taylor series through linear solve\n\ninverse_Taylor_prop(tag, n, d, Y, X):\nGiven Y[i][k] = (1/k!) \u00b7 y^(k), computes X[i][k] = (1/k!) \u00b7 x^(k)\nwhere x(t) = F\u207b\u00b9(y(t)) as Taylor series in parameter t.",
+      "math": "Tensor dimensions:\nFor d-th order tensor with p directions:\n- Number of entries: C(p+d, d) = (p+d)! / (p! \u00b7 d!)\n- Storage: tensor[m][C(p+d,d)] where m = number of outputs\n\nMulti-index notation: tensor[i][\u03b1] = (1/\u03b1!) \u00b7 \u2202^|\u03b1| f_i / \u2202s^\u03b1\nwhere \u03b1 = (\u03b1\u2081,...,\u03b1_p) is multi-index with |\u03b1| = \u03a3\u03b1_j \u2264 d",
+      "complexity": "- tensor_eval: O(C(p+d,d) \u00b7 ops) where ops = tape operations\n- inverse_tensor_eval: O(C(p+d,d) \u00b7 n\u00b3) includes linear solves\n- jac_solv: O(n\u00b3) for dense LU factorization",
+      "ref": [
+        "Griewank, Utke & Walther (2000). \"Evaluating Higher Derivative\n  Tensors by Forward Propagation of Univariate Taylor Series\".\n  Mathematics of Computation 69(231):1117-1130.\n\n@note These are advanced drivers for specialized applications"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "drivers/drivers.h for standard gradient/Jacobian/Hessian",
+    "drivers/odedrivers.h for ODE-specific Taylor propagation"
+  ]
+}

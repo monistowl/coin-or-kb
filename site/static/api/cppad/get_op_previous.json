@@ -1,0 +1,9 @@
+{
+  "name": "get_op_previous",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/optimize/get_op_previous.hpp",
+  "brief": "Tape optimization: get_op_previous",
+  "algorithms": [],
+  "methods": []
+}

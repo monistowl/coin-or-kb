@@ -1,0 +1,14 @@
+{
+  "name": "DcoSolution",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoSolution.hpp",
+  "brief": "Incumbent solution for MISOCP\n\nDcoSolution stores a feasible solution found during branch-and-bound,\nincluding the variable values and objective quality.\n\n**Inheritance:** DcoSolution -> BcpsSolution -> AlpsSolution -> AlpsKnowledge\n\n**From BcpsSolution (inherited):**\n- size_: Number of variables\n- values_: Solution vector\n- quality_: Objective value\n\n**Selection Methods:**\n- selectNonzeros(): Return solution with only non-zero entries\n- selectFractional(): Return entries with fractional values\n\n**Solution Sources:**\n- DcoSolutionTypeBounding: From node relaxation\n- DcoSolutionTypeHeuristic: From primal heuristics\n- DcoSolutionTypeStrong: From strong branching",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoModel.hpp::feasibleSolution() for feasibility checking",
+    "DcoHeuristic.hpp for primal heuristics",
+    "BcpsSolution (BCPS) for base class"
+  ]
+}

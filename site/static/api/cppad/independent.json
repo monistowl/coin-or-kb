@@ -1,0 +1,9 @@
+{
+  "name": "independent",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/independent/independent.hpp",
+  "brief": "Core AD functionality: independent",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,12 @@
+{
+  "name": "BonBoundsReader",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonBoundsReader.hpp",
+  "brief": "Reader for variable bound modification files\nCopyright (C) Carnegie Mellon University 2005. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nBoundsReader: Reads files containing variable bound changes in\nMPS-like format. Applies bound modifications to OsiTMINLPInterface\nfor scenario analysis or user-specified bound tightening.\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: May 26, 2005",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiTMINLPInterface for target solver interface"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "TaskPrintIterationReport",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskPrintIterationReport.h",
+  "brief": "Output iteration progress to console\n\nFormatted progress line for each iteration.\n\n**TaskPrintIterationReport Class:**\n- lastNumHyperplane: Track hyperplanes added\n- run(): Format and print iteration status\n\n**Report Contents:**\n- Iteration number, elapsed time\n- Primal bound, dual bound, gap\n- Number of hyperplanes added",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Report.h for output formatting",
+    "Results.h for bound information"
+  ]
+}

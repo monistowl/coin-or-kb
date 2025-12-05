@@ -1,0 +1,9 @@
+{
+  "name": "asin_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/asin_op.hpp",
+  "brief": "Internal implementation: asin_op",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "hessian",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/hessian.hpp",
+  "brief": "Core AD functionality: hessian",
+  "algorithms": [],
+  "methods": []
+}

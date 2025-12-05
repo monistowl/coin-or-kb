@@ -1,0 +1,22 @@
+{
+  "name": "a_quass",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/a_quass.hpp",
+  "brief": "HiGHS QUASS QP algorithm\n\nQUASS (QUadratic Active Set Solver) main algorithm.\nPrimal active set method for convex QP.",
+  "algorithms": [
+    {
+      "name": "QUASS (Quadratic Active Set Solver):\n  Solves convex QP: min \u00bdx'Qx + c'x s.t. Ax \u2264 b using active set method:\n  1. Start with feasible point and initial active set (working set)\n  2. Solve equality-constrained QP on current active set for direction p\n  3. If p = 0: compute Lagrange multipliers \u03bb\n     - If all \u03bb correct sign: optimal\n     - Else: drop constraint with most negative \u03bb, goto 2\n  4. If p \u2260 0: ratio test to find step length \u03b1\n     - If \u03b1 = \u221e: unbounded\n     - Else: x \u2190 x + \u03b1\u00b7p, add blocking constraint to active set, goto 2",
+      "math": "KKT system for active set A:\n  [Q  A'] [p ]   [-g]\n  [A  0 ] [\u03bb ] = [0 ]\n  where g = Qx + c is gradient. Solve via basis factorization.",
+      "complexity": "O(m\u00b7n\u00b2) per iteration for dense problems.\n  Iteration count varies widely; finite for convex QP.\n  Warm start from LP basis dramatically reduces iterations.",
+      "ref": [
+        "Goldfarb & Idnani (1983). \"A numerically stable dual method for solving\n     strictly convex quadratic programs\". Math. Programming 27:1-33."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Settings for algorithm parameters",
+    "Statistics for performance metrics"
+  ]
+}

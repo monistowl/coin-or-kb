@@ -1,0 +1,12 @@
+{
+  "name": "CoinPackedMatrix",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CoinPackedMatrix.h",
+  "brief": ".NET wrapper for CoinPackedMatrix (sparse matrix)\n\nC++/CLI wrapper exposing CoinUtils sparse matrix to .NET languages.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinShallowPackedVector.h for vector wrapper"
+  ]
+}

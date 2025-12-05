@@ -1,0 +1,19 @@
+{
+  "name": "QProblemB",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/QProblemB.hpp",
+  "brief": "Box-constrained QP solver (bounds only, no linear constraints)\n\nSolves QPs with only variable bounds (no constraint matrix A):",
+  "algorithms": [
+    {
+      "name": "Solves KKT conditions directly when active set is known.\n           Uses Cholesky factorization of reduced Hessian.",
+      "math": "s.t. lb <= x <= ub\n\nThis is more efficient than QProblem when there are no general\nlinear constraints. The active set consists only of bounds.\n\nKey methods:\n- init(): First QP solve (cold start)\n- hotstart(): Subsequent solves with modified g, lb, ub",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "QProblem for QPs with general linear constraints"
+  ]
+}

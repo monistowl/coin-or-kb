@@ -1,0 +1,20 @@
+{
+  "name": "CbcFollowOn",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcFollowOn.hpp",
+  "brief": "Follow-on branching for crew scheduling problems\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcFollowOn: Specialized branching for air-crew scheduling and\nsimilar set-partitioning problems. When crew can fly in on flight A\nand out on flight B (or other flights), branch on the connection.",
+  "algorithms": [
+    {
+      "name": "Follow-On Branching for Set Partitioning:\n  For crew scheduling: constraint rows = flights, columns = pairings.\n  gutsOfFollowOn() finds connection (row_A, row_B) where:\n  - Some pairings cover both flights A and B.\n  - Other pairings cover A but not B (or vice versa).\n  createCbcBranch() creates disjunction:\n  - Down: Fix all pairings with A->B connection to 0.\n  - Up: Fix all pairings WITHOUT A->B connection to 0.\n  Effect: Forces decision on whether crew connects A to B.",
+      "math": "Set partitioning connection branching:\n  Model: min c^T x s.t. Ax = 1, x \u2208 {0,1}^n (each row covered exactly once).\n  Connection (i,j): columns k where a_ik = a_jk = 1.\n  Branch separates columns by connection presence.\n  Reduces symmetry in set partitioning structure.\n  High priority: apply before standard variable branching.\n\nBranch disjunction:\n- Down: Fix all pairings using connection A->B to 0\n- Up: Fix all pairings NOT using A->B to 0\n\nAlso includes:\n- CbcFixingBranchingObject: Fix lists of variables to bounds\n- CbcIdiotBranch: Experimental random-sum branching\n\nShould be used as a supplementary branching rule with high priority,\nbefore standard variable branching.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcFixingBranchingObject for bulk variable fixing",
+    "CbcBranchCut for related cut-based branching\n\nEdwin 11/10/2009 carved out of CbcBranchActual"
+  ]
+}

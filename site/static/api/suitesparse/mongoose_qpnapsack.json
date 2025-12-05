@@ -1,0 +1,22 @@
+{
+  "name": "Mongoose_QPNapsack",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_QPNapsack.hpp",
+  "brief": "Napsack subproblem solver for QP balance constraint\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPNapsack solves the napsack subproblem: find lambda such that the\nprojected solution satisfies balance constraint lo <= a'x <= hi.\nUses breakpoint method with heaps to efficiently find optimal lambda.\nCore subroutine in QP gradient projection.",
+  "algorithms": [
+    {
+      "name": "Continuous Knapsack (Breakpoint Search):\nFinds Lagrange multiplier \u03bb for balance constraint a'x \u2208 [lo, hi]:\n1. Initialize: compute a'y for unconstrained projection y\n2. If a'y \u2208 [lo, hi]: done, \u03bb = 0\n3. Otherwise: binary/heap search for breakpoint where constraint binds\n   - Breakpoints: \u03bb values where some x_i hits 0 or 1\n   - Track a'x as \u03bb changes (piecewise linear in \u03bb)\n4. Return \u03bb such that a'x = lo (or hi)",
+      "math": "Projection with balance constraint:\n$$x_i = \\Pi_{[0,1]}(y_i - \\lambda a_i)$$\nwhere \u03bb is chosen so $\\sum_i a_i x_i \\in [lo, hi]$.\n\nAs \u03bb increases: x_i with positive a_i decrease \u2192 a'x decreases.\nAs \u03bb decreases: x_i with positive a_i increase \u2192 a'x increases.",
+      "complexity": "O(n log n) due to heap-based breakpoint enumeration.\nDominates each QP iteration when balance constraint is tight.",
+      "ref": [
+        "Kiwiel (2008). \"Breakpoint searching algorithms for the\n  continuous quadratic knapsack problem\". Math Programming 112(2)."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_QPNapUp.hpp for upward lambda search",
+    "Mongoose_QPNapDown.hpp for downward lambda search"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "BonOaNlpOptim",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/OaGenerators/BonOaNlpOptim.hpp",
+  "brief": "NLP-based outer approximation cut generator\n\nGenerates OA cuts by solving NLP relaxations at B&B nodes, rather than\nat integer feasible points (as in classical OA). More expensive per cut,\nbut can improve bounds at fractional nodes.",
+  "algorithms": [
+    {
+      "name": "NLP-based OA Cut Generation:\n  Strengthens LP relaxation by solving NLP at fractional B&B nodes:\n  1. At B&B node (depth \u2264 maxDepth_): get LP solution x_LP\n  2. Solve continuous NLP relaxation: min f(x) s.t. g(x) \u2264 0\n  3. At NLP solution x*: generate OA cuts g(x*) + \u2207g(x*)\u1d40(x-x*) \u2264 0\n  4. Filter: keep only cuts violated by x_LP (if addOnlyViolated_)\n  5. Add cuts as global (valid in subtree) or local",
+      "math": "Cut validity:\n  For convex g: linearization at any x* gives valid cut\n  Not restricted to integer points like classical OA\n  More cuts = tighter LP relaxation, but more NLP solves",
+      "complexity": "O(NLP) per node up to maxDepth_ levels.\n  Trade-off: expensive per-node work vs. fewer total nodes.\n  Controlled by maxDepth_ and solves_per_level_.",
+      "ref": [
+        "Bonami et al. (2008). \"An algorithmic framework for convex MINLP\".\n     Discrete Optimization 5:186-204.\n\n**Parameters:**\n- maxDepth_: Maximum tree depth for NLP solves (default 10)\n- addOnlyViolated_: Only add cuts violated by LP solution\n- global_: Add cuts globally (valid throughout tree)\n- solves_per_level_: Control NLP solve frequency"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OaDecompositionBase for the classical OA algorithm",
+    "CglCutGenerator for the cut generator interface"
+  ]
+}

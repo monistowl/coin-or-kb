@@ -1,0 +1,9 @@
+{
+  "name": "for_jac_sparsity",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/for_jac_sparsity.hpp",
+  "brief": "Core AD functionality: for jac sparsity",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,21 @@
+{
+  "name": "IpDefaultIterateInitializer",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpDefaultIterateInitializer.hpp",
+  "brief": "Standard initialization procedure for IPM iterates\n\nDefaultIterateInitializer computes starting points for all primal\nand dual variables based on user options and problem bounds.\n\nPrimal initialization (x, s):\n- Start from user-provided x0 or NLP default\n- Push away from bounds: x_new = max(x_L + \u03b5, min(x, x_U - \u03b5))\n- bound_push_, bound_frac_: Absolute/relative push parameters\n- least_square_init_primal_: Fit linearized constraints\n\nDual initialization:\n- Equality multipliers (y_c, y_d): Least-squares or zero\n- eq_mult_calculator_: Computes min ||y|| s.t. KKT gradient\n- constr_mult_init_max_: Reject large multiplier estimates\n- Bound multipliers (z_L, z_U, v_L, v_U):\n  - B_CONSTANT: bound_mult_init_val_\n  - B_MU_BASED: mu_init_ / slack\n\nWarm start:\n- warm_start_init_point_: Use warm_start_initializer_ instead\n- Delegates to WarmStartIterateInitializer\n\nStatic utilities:\n- push_variables(): Move point away from bounds\n- least_square_mults(): Compute y from gradient conditions",
+  "algorithms": [
+    {
+      "name": "IPM Iterate Initialization (Default):\nInitialize all primal and dual variables for interior point method:\n1. Primal variables (x):\n   - Start from user x0 or NLP default\n   - Push from bounds: x \u2190 max(x_L + \u03ba, min(x, x_U - \u03ba))\n   - where \u03ba = max(bound_push, bound_frac\u00b7|x_L|)\n   - Optional: least-squares fit to linearized constraints\n2. Slack variables (s):\n   - Initialize s = d(x) (constraint body values)\n   - Push from bounds similarly to x\n3. Constraint multipliers (y_c, y_d):\n   - Least-squares estimate: min ||\u2207f + J\u1d40y - z||\n   - Reject if ||y||\u221e > constr_mult_init_max (use 0 instead)\n4. Bound multipliers (z_L, z_U, v_L, v_U):\n   - B_CONSTANT: z = bound_mult_init_val\n   - B_MU_BASED: z = \u03bc_init / slack (complementarity-based)",
+      "math": "Push-from-bounds formula:\n  x_new = max(x_L + \u03ba_abs, min(x, x_U - \u03ba_abs))\n  where \u03ba_abs = max(bound_push, bound_frac \u00b7 max(1, |x_L|))\n\nBound multiplier initialization (\u03bc-based):\n  z_L = \u03bc_init / (x - x_L),  z_U = \u03bc_init / (x_U - x)\nsatisfies complementarity x\u00b7z = \u03bc at initialization.",
+      "complexity": "O(n + m) for variable initialization.\nPlus one least-squares solve O(nnz\u00b7fill) if using LS multipliers.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpIterateInitializer.hpp for the base interface",
+    "IpWarmStartIterateInitializer.hpp for warm start",
+    "IpEqMultCalculator.hpp for multiplier computation"
+  ]
+}

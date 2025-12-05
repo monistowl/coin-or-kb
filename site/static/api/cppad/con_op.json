@@ -1,0 +1,9 @@
+{
+  "name": "con_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/con_op.hpp",
+  "brief": "Value graph: con_op",
+  "algorithms": [],
+  "methods": []
+}

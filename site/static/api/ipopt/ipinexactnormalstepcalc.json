@@ -1,0 +1,20 @@
+{
+  "name": "IpInexactNormalStepCalc",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/Inexact/IpInexactNormalStepCalc.hpp",
+  "brief": "Abstract base class for normal step computation\n\nInexactNormalStepCalculator defines the interface for computing\nthe normal step component in the inexact Newton decomposition.",
+  "algorithms": [
+    {
+      "name": "Normal Step Interface:\n  ComputeNormalStep(normal_x, normal_s):\n  1. Compute step toward constraint feasibility.\n  2. Return (\u0394x_n, \u0394s_n) satisfying feasibility reduction target.\n  3. Target: ||c(x) + J\u00b7\u0394x_n|| \u2264 \u03ba\u00b7||c(x)|| for some \u03ba < 1.\n  Implementations: dogleg (trust region), Newton (direct solve).",
+      "math": "Normal step goal:\n  Minimize ||\u0394x_n||\u00b2 subject to linearized feasibility improvement.\n  \u0394x_n = argmin ||\u0394x||\u00b2 s.t. ||J\u00b7\u0394x + c|| \u2264 \u03ba\u00b7||c|| (trust region).\n  Or: \u0394x_n = -J^\u2020\u00b7c(x) (minimum norm, pseudo-inverse solution).\n  Normal step lies in range(J^T), orthogonal to null(J).",
+      "complexity": "Implementation-dependent: O(nnz\u00b7k) for iterative.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpInexactDoglegNormal.hpp for dogleg trust-region implementation",
+    "IpInexactNewtonNormal.hpp for Newton-based implementation"
+  ]
+}

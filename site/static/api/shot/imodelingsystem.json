@@ -1,0 +1,13 @@
+{
+  "name": "IModelingSystem",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/ModelingSystem/IModelingSystem.h",
+  "brief": "Abstract interface for problem input formats\n\nBase interface for parsing optimization problem files.\n\n**E_ProblemCreationStatus Enum:**\n- NormalCompletion: Problem loaded successfully\n- FileDoesNotExist, ErrorInFile: I/O errors\n- ErrorInVariables/Constraints/Objective: Parse errors\n- CapabilityProblem: Unsupported problem features\n\n**IModelingSystem Interface:**\n- augmentSettings(): Add format-specific settings\n- updateSettings(): Extract settings from problem file\n- finalizeSolution(): Write solution back to format\n\n**Implementations:**\n- ModelingSystemOSiL: XML OSiL format (Optimization Services)\n- ModelingSystemAMPL: .nl format from AMPL\n- ModelingSystemGAMS: GAMS interface\n- ModelingSystemOS: Optimization Services framework",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Solver.h for setProblem() to load problems",
+    "Results.h for solution output"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "BCP_set_intersects",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_set_intersects.hpp",
+  "brief": "Set intersection test utility",
+  "algorithms": [
+    {
+      "name": "Sorted Set Intersection: Linear Scan Test\n\nTemplate function `intersects()` tests whether two sorted ranges\nhave any common elements without computing the full intersection.\n\n**Algorithm:**\nDual-pointer linear scan - advance smaller element's pointer.\nReturns true immediately when match found.\n\n**Variants:**\n- operator< version: Uses default comparison\n- Comparator version: Custom ordering via function object",
+      "math": "",
+      "complexity": "O(n + m) where n, m are range sizes\n@note Input ranges must be sorted in same order as comparator",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

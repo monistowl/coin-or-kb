@@ -1,0 +1,19 @@
+{
+  "name": "BCP_vector_sanity",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_vector_sanity.hpp",
+  "brief": "Position vector validation utility",
+  "algorithms": [
+    {
+      "name": "Index Validation: BCP_vec_sanity_check\n\nValidates position vectors used in delta operations:\n- Positions must be strictly increasing (sorted, no duplicates)\n- No negative indices\n- All indices < maxsize\n\nThrows BCP_fatal_error on invalid input.\nUsed to catch programming errors in delta encoding early.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_vector_change.hpp for delta vector operations"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "SensUtils",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensUtils.hpp",
+  "brief": "sIPOPT utility functions and enums\n\nSensUtils: utility types for sIPOPT sensitivity analysis.\nDefines SensAlgorithmExitStatus enum for return codes.\nCommon helper functions used across sIPOPT components.",
+  "algorithms": [],
+  "methods": []
+}

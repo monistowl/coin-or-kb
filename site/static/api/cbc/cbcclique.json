@@ -1,0 +1,21 @@
+{
+  "name": "CbcClique",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcClique.hpp",
+  "brief": "Clique branching for binary variable sets\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcClique: Branching for cliques (sets of binary variables with\nat most one at its \"strong\" value). Generalizes binary SOS1.\n\nStandard form: x1 + x2 + ... + xn <= 1 (all strong at 1)\nGeneral form allows negated variables (y_j = 1 - x_j).\n\nMember types (type_[i]):\n- 1: SOS-style, coefficient +1, strong value is 1\n- 0: Non-SOS, coefficient -1, strong value is 0",
+  "algorithms": [
+    {
+      "name": "Clique Branching:\n  createCbcBranch() for clique {x_1,...,x_n} with \u03a3x_j \u2264 1:\n  1. Find most fractional variable x_k.\n  2. Down branch: Fix x_k to weak value (0 if type=1, 1 if type=0).\n  3. Up branch: Fix x_k to strong value, all others to weak.\n  Uses bitmask encoding: downMask_, upMask_ indicate fixings.",
+      "math": "Clique constraint forms:\n  Standard: x_1 + x_2 + ... + x_n \u2264 1 (at most one = 1).\n  Negated: -y_1 - y_2 + x_3 \u2264 -1 where y_j = 1-x_j.\n  RHS implicit = 1 - numberNonSOSMembers_.\n\nBranching: Pick a fractional variable and partition the set.\nUses bitmasks for efficient subset representation (up to 64 members\nwith CbcCliqueBranchingObject, unlimited with CbcLongCliqueBranchingObject).",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcCliqueBranchingObject for sets <= 64 members",
+    "CbcLongCliqueBranchingObject for larger sets",
+    "CbcSOS for ordered set branching\n\nEdwin 11/9/2009 carved out of CbcBranchActual"
+  ]
+}

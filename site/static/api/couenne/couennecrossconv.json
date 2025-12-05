@@ -1,0 +1,20 @@
+{
+  "name": "CouenneCrossConv",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/cut/crossconv/CouenneCrossConv.hpp",
+  "brief": "Cuts from redundant relationships between auxiliary variables",
+  "algorithms": [
+    {
+      "name": "Cross-Convexification via Algebraic Identities",
+      "math": "Exploits algebraic identities among auxiliary variables:\n      - Product chain: x_k = x_i\u00b7x_j, x_l = x_i\u00b7x_p \u27f9 x_k\u00b7x_p = x_l\u00b7x_j\n      - Log sum: log(x_1) + log(x_2) = log(x_1\u00b7x_2)\n      - Power: x^\u03b1, x^\u03b2 \u27f9 x^\u03b2 = (x^\u03b1)^(\u03b2/\u03b1)\n\nIdentifies and exploits algebraic relationships between auxiliary\nvariables that arise from the reformulation. These give valid\nequalities or inequalities that strengthen the relaxation.",
+      "complexity": "O(n\u00b2) to identify relationships; O(1) per cut\n\n**Example relationships (commented out but informative):**\n\n1. **SumLogAuxRel**: x3 = log(x1), x4 = log(x2), x5 = x1*x2\n   Implies: x3 + x4 = log(x5), giving a valid cut.\n\n2. **MultiProdRel**: If x_k = x_i*x_j, x_l = x_i*x_p, x_q = x_k*x_p, x_r = x_l*x_j\n   Then x_q = x_r (both equal x_i*x_j*x_p).\n\n3. **BiProdDivRel**: Division chains that should be consistent.\n\n4. **PowRel**: If x_j = x_i^\u03b1 and x_p = x_i^\u03b2, then x_p = x_j^(\u03b2/\u03b1).\n\n**How it works:**\n1. Analyze auxiliary variable definitions\n2. Detect patterns that imply redundant relationships\n3. Generate cuts enforcing these relationships\n\nThese cuts are \"free\" in the sense that they come from algebraic\nidentities, not from convexification of specific expressions.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneCutGenerator for standard convexification cuts",
+    "CouenneDisjCuts for disjunctive cuts"
+  ]
+}

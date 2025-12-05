@@ -1,0 +1,14 @@
+{
+  "name": "AlpsTreeNode",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsTreeNode.h",
+  "brief": "Search tree node abstraction for ALPS parallel tree search\n\nAlpsTreeNode represents a single node in the search tree. Users inherit\nthis class to implement application-specific node processing.\n\n**Node status lifecycle (AlpsNodeStatus):**\n- Candidate: Waiting in pool for processing\n- Evaluated: Processed, waiting for branching decision\n- Pregnant: Ready to branch, has child descriptions\n- Branched: Children created and added to pool\n- Fathomed: Pruned (by bound, infeasibility, or solution)\n\n**Key virtual methods:**\n- process(): Perform bounding operation (e.g., LP solve)\n- branch(): Create child nodes from pregnant node\n- createNewTreeNode(): Factory for child node creation\n\n**Node data:**\n- quality_: Node quality for selection (lower = better)\n- solEstimate_: Estimated solution quality\n- desc_: AlpsNodeDesc holding problem-specific data\n- explicit_: 1=full description, 0=relative/diff",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsNodeDesc for node description",
+    "AlpsSubTree for subtree management",
+    "AlpsNodePool for node storage"
+  ]
+}

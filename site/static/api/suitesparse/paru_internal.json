@@ -1,0 +1,22 @@
+{
+  "name": "paru_internal",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "ParU/Source/paru_internal.hpp",
+  "brief": "Internal data structures and functions for ParU sparse LU\nCopyright (c) 2022-2025, Mohsen Aznaveh and Timothy A. Davis.\nGPL-3.0-or-later license.\n\nCore ParU structures: ParU_Symbolic_struct (row-form S, singletons, fronts,\ntask tree), ParU_Numeric_struct (LU factors, permutations, scaling),\nParU_Control_struct (tolerances, threading). paru_element (contribution\nblock), paru_work (workspace), paru_tuple (element lists). Internal\nfunctions: front assembly/factorization, heap management, BLAS threading.\nIncludes UMFPACK SymbolicType/SWType for singleton detection.",
+  "algorithms": [
+    {
+      "name": "Parallel Unsymmetric Sparse LU Factorization:\nMultifrontal LU with task-based parallelism:\n\n1. Symbolic Analysis (uses UMFPACK):\n   - Detect singletons (rows/cols with single nonzero)\n   - Build elimination tree for remaining submatrix S\n   - Create task tree for parallel numeric phase\n\n2. Numeric Factorization:\n   - Process fronts in parallel via task tree\n   - Each front: dense partial pivoting LU\n   - Assemble contribution blocks from children\n   - Store L and U factors separately",
+      "math": "Frontal matrix factorization:\nFront F = [pivots | non-pivots] factored as F = P\u00b7L\u00b7U\nPartial pivoting within front for numerical stability.\nContribution block C = Schur complement passed to parent.\n\nSingleton handling: Extract trivial 1\u00d71 pivots first,\nreducing problem size before expensive multifrontal phase.",
+      "complexity": "O(flops) dominated by dense BLAS-3 in fronts.\nParallel speedup via task tree scheduling with OpenMP.",
+      "ref": [
+        "Aznaveh & Davis (2024). \"ParU: A Parallel Unsymmetric\n  Multifrontal Sparse LU Factorization Method\"."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ParU.h for public API",
+    "paru_omp.hpp for OpenMP abstraction"
+  ]
+}

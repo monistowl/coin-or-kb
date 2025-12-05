@@ -1,0 +1,13 @@
+{
+  "name": "CouenneTypes",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneTypes.hpp",
+  "brief": "Core type definitions and enumerations for Couenne\n\nCentral header defining enums, types, and small classes used\nthroughout the Couenne codebase.\n\n**Key enumerations:**\n- nodeType: CONST, VAR, UNARY, N_ARY, COPY, AUX, EMPTY\n- linearity_type: ZERO, CONSTANT, LINEAR, QUADRATIC, NONLINEAR\n- convexity: CONVEX, CONCAVE, AFFINE, NONCONVEX\n- expr_type: Codes for each expression class (COU_EXPRSUM, etc.)\n- monotonicity: INCREAS, DECREAS, NONMONOTONE\n\n**t_chg_bounds class:**\nTracks whether lower/upper bounds have been:\n- UNCHANGED: No modification\n- CHANGED: Modified during bound tightening\n- EXACT: Bound is tight (equality holds)\n\n**CouNumber:**\ntypedef double CouNumber - the main floating-point type.\n\n**unary_function:**\nFunction pointer type for unary operators: CouNumber \u2192 CouNumber",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "expression which uses these types",
+    "CouenneProblem which uses t_chg_bounds"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "OsiGlpkSolverInterface",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/OsiGlpk/OsiGlpkSolverInterface.hpp",
+  "brief": "Osi interface for GNU Linear Programming Kit (GLPK)\nCopyright (C) 2001, Vivian De Smedt, Braden Hunsaker. EPL license.\n\nOsiGlpkSolverInterface wraps GLPK via the Osi abstraction. Uses glp_prob\nhandle (LPX typedef for compatibility). Implements initialSolve/resolve/\nbranchAndBound, warm starts via CoinWarmStartBasis, and GLPK-specific\nparameter handling. Supports both simplex and MIP solving.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiSolverInterface for base class"
+  ]
+}

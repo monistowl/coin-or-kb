@@ -1,0 +1,16 @@
+{
+  "name": "LapackBlasReplacement",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/LapackBlasReplacement.hpp",
+  "brief": "LAPACK/BLAS interface declarations for qpOASES linear algebra",
+  "algorithms": [
+    {
+      "name": "BLAS-3/LAPACK Interface (GEMM, POTRF, TRTRS, TRCON)\nExternal declarations for core linear algebra: matrix multiplication (GEMM),\nCholesky factorization (POTRF), triangular solves (TRTRS), and condition\nnumber estimation (TRCON). Supports single/double precision and optional\nnamespace prefixing to avoid symbol conflicts.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

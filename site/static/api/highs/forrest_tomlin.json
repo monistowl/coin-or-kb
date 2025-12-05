@@ -1,0 +1,22 @@
+{
+  "name": "forrest_tomlin",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/forrest_tomlin.h",
+  "brief": "Forrest-Tomlin LU Update for Basis Maintenance\n\nImplements the Forrest-Tomlin update to maintain LU factorization when\na single column of the basis matrix changes (basis exchange/pivot).",
+  "algorithms": [
+    {
+      "name": "Forrest-Tomlin LU Update:\nEfficiently updates LU factors after column replacement without full\nrefactorization.\n\nSETUP:\nGiven factorization: B = L\u00b7U with permutations\nAfter replacing column j: B' differs from B in one column\n\nKEY INSIGHT:\nInstead of refactorizing B' = L'\u00b7U', compute update matrices:\n  B' = L \u00b7 R\u2081 \u00b7 R\u2082 \u00b7 ... \u00b7 R\u2096 \u00b7 U'\nwhere R\u1d62 are \"row eta\" matrices (identity plus one off-diagonal element).\n\nUPDATE PROCESS:\n1. FTRAN (Forward transformation):\n   Compute spike = L\u207b\u00b9\u00b7b where b is the new column\n   Append spike to U\n\n2. BTRAN (Backward transformation):\n   Compute eta = e\u209a'\u00b7U\u207b\u00b9 where p is position of leaving column\n   Append eta to R (row eta matrix)\n\n3. Permutation update:\n   Track which columns have been replaced\n\nSOLVE WITH UPDATES:\nTo solve B'\u00b7x = rhs after k updates:\n  x = U'\u207b\u00b9 \u00b7 R\u2096\u207b\u00b9 \u00b7 ... \u00b7 R\u2081\u207b\u00b9 \u00b7 L\u207b\u00b9 \u00b7 rhs",
+      "math": "Fill-in analysis:\n- Spike column: O(m) nonzeros worst case\n- Row eta: O(m) nonzeros worst case\n- After k updates: O(k\u00b2) additional work per solve\n- Refactorize when k > \u221am or fill exceeds threshold\n\nMemory layout optimization:\nL, U stored in compressed form with permuted indices for contiguous\nmemory access during dense solves (unlike BASICLU which needs\nre-permutation).",
+      "complexity": "- Single update: O(m\u00b2) worst case, O(nnz) typical\n- Solve after k updates: O(m\u00b7k) additional work\n- Trade-off: update cost vs refactorization cost",
+      "ref": [
+        "Forrest & Tomlin (1972). \"Updated Triangular Factors of the Basis\n  to Maintain Sparsity in the Product Form Simplex Method\".\n  Mathematical Programming 2:263-278."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "lu_update.h for base class interface",
+    "basis.h for usage in basis maintenance"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "CouenneMatrix",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/cut/sdpcuts/CouenneMatrix.hpp",
+  "brief": "Sparse matrix and vector of expressions\n\nData structures for representing matrices of Couenne expressions,\nused primarily for SDP cuts and PSD constraints.\n\n**Classes:**\n- CouenneScalar: Single indexed expression element\n- CouenneSparseVector: Sparse vector of expressions (ordered set)\n- CouenneExprMatrix: Sparse matrix with row and column major storage\n\n**Storage:**\nUses std::set with custom comparators for O(log n) lookup.\nBoth row-major and column-major views maintained for efficient\nmatrix-vector and matrix-matrix operations.\n\n**Usage in SDP cuts:**\nX = (x_ij) where x_ij is the auxiliary for product x_i * x_j.\nvarIndices_ stores the original variables x_i used in products.\n\n**Operations:**\n- Vector dot product: v1 * v2\n- Matrix-vector product: M * v\n- Matrix-matrix product: M1 * M2\n- Threshold multiplication (early termination)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneSdpCuts which uses these for cut generation",
+    "CouennePSDcon for PSD constraint using this matrix"
+  ]
+}

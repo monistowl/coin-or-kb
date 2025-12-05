@@ -1,0 +1,9 @@
+{
+  "name": "atom_state",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/atom_state.hpp",
+  "brief": "Internal implementation: atom_state",
+  "algorithms": [],
+  "methods": []
+}

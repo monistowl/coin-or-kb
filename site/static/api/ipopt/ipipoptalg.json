@@ -1,0 +1,25 @@
+{
+  "name": "IpIpoptAlg",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpIpoptAlg.hpp",
+  "brief": "Main Ipopt algorithm orchestrating the interior point method\n\nIpoptAlgorithm is the central class implementing the primal-dual\ninterior point method. Each iteration:\n1. UpdateHessian() - Evaluate or update Hessian approximation\n2. UpdateBarrierParameter() - Adjust mu using chosen strategy\n3. ComputeSearchDirection() - Solve KKT system for Newton step\n4. ComputeAcceptableTrialPoint() - Line search with filter/merit\n5. AcceptTrialPoint() - Update current iterate\n\nUses Strategy pattern: line search, mu update, convergence check\nare all pluggable components configured via AlgorithmBuilder.",
+  "algorithms": [
+    {
+      "name": "Primal-Dual Interior Point Method for NLP:\nSolves min f(x) s.t. c(x)=0, x\u22650 by solving perturbed KKT conditions:\n\u2207f(x) - A^T y - z = 0,  c(x) = 0,  XZe = \u03bce\nNewton direction from linearized KKT system (augmented system).\nFilter line search ensures global convergence. Barrier \u03bc\u21920 drives\nsolution to boundary. Supports exact Hessian or L-BFGS approximation.",
+      "math": "KKT system solved each iteration:\n[W    A^T  -I ] [\u0394x]   [\u2207f - A^T y - z    ]\n[A    0    0  ] [\u0394y] = [-c(x)             ]\n[Z    0    X  ] [\u0394z]   [\u03bce - XZe          ]\nwhere W = \u2207\u00b2L (Hessian of Lagrangian), A = \u2207c (constraint Jacobian).\nReduced to augmented system: [W+\u03a3  A^T][\u0394x] = [r_d - X^{-1}(\u03bce-XZe)]\n                             [A    0  ][\u0394y]   [-c(x)                ]\nwhere \u03a3 = X^{-1}Z diagonal. Solved via symmetric indefinite factorization.",
+      "complexity": "O(m\u00b2n + m\u00b3) per iteration: O(mn) to evaluate gradients,\nO(m\u00b2n) to form augmented matrix, O(m\u00b3) for factorization (sparse: O(nnz(L)\u00b2)).\nTotal iterations typically O(\u221an) to O(n) for well-conditioned problems.\nConvergence: locally quadratic near solution with exact Hessian.",
+      "ref": [
+        "W\u00e4chter & Biegler (2006). \"On the implementation of an interior-point\n  filter line-search algorithm for large-scale nonlinear programming\".\n  Mathematical Programming 106(1):25-57. [Main Ipopt paper]",
+        "Nocedal & Wright (2006). \"Numerical Optimization\" 2nd ed. Springer.\n  Chapter 19. [Interior point methods for NLP]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpAlgBuilder.hpp for algorithm construction",
+    "IpIpoptData.hpp for iteration data storage",
+    "IpBacktrackingLineSearch.hpp for filter line search",
+    "IpPDSystemSolver.hpp for KKT system solution"
+  ]
+}

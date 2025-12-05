@@ -1,0 +1,12 @@
+{
+  "name": "spqr_cholmod_wrappers",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/Include/spqr_cholmod_wrappers.hpp",
+  "brief": "Template wrappers for CHOLMOD functions with int32/int64 support\nCopyright (c) 2008-2023, Timothy A Davis. GPL-2.0+ license.\n\nTemplate wrappers enabling SPQR to use CHOLMOD with either int32_t or int64_t\nindices. Functions: spqr_start/finish (init), memory (malloc/calloc/free/realloc),\nsparse matrix ops (allocate_sparse, free_sparse, transpose, copy), dense\n(allocate_dense, zeros, ones), ordering (amd, metis, colamd, postorder),\nutility (norm_sparse/dense, sdmult, ssmult, ssadd). Each has explicit\ntemplate specializations for int32_t and int64_t.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "spqr.hpp includes this header"
+  ]
+}

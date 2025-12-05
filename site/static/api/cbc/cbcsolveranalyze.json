@@ -1,0 +1,20 @@
+{
+  "name": "CbcSolverAnalyze",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcSolverAnalyze.hpp",
+  "brief": "Problem analysis for integer constraint detection",
+  "algorithms": [
+    {
+      "name": "Integer Structure Detection and Strengthening\nCopyright (C) 2007, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nanalyze(): Examines model to detect integer structure.\n\nLooks for constraints where:\n- All variables are integer\n- All coefficients are integer\n- RHS is integer\n\nSuch constraints can be strengthened or exploited specially.\nIf changeInt is true, may change continuous variables to integer\nwhen they only appear in integer-coefficient constraints.\n\nReturns array of changed variable indices.\nSets numberChanged to count of modifications.\nSets increment to objective coefficient GCD for integer solutions.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcModel for problem analysis during solve",
+    "CoinPackedMatrix for constraint access"
+  ]
+}

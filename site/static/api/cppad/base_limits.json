@@ -1,0 +1,9 @@
+{
+  "name": "base_limits",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/base_limits.hpp",
+  "brief": "Core AD functionality: base limits",
+  "algorithms": [],
+  "methods": []
+}

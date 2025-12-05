@@ -1,0 +1,21 @@
+{
+  "name": "CglAllDifferent",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglAllDifferent/CglAllDifferent.hpp",
+  "brief": "All-different constraint propagation for CSP-style constraints\n\nPropagates all-different constraints: variables in a set must all\ntake different integer values. Common in constraint satisfaction\nproblems (CSP) mapped to MIP.",
+  "algorithms": [
+    {
+      "name": "All-Different Constraint Propagation:\nDomain filtering based on value exclusion.\n\nCONSTRAINT SEMANTICS:\n  AllDifferent(x_1, x_2, ..., x_k) means:\n    x_i != x_j for all pairs i != j\n\nVALUE EXCLUSION:\n  When variable x_i is fixed to value v:\n    For all j != i in same set:\n      Remove v from domain(x_j)\n\n  If domain(x_j) becomes {v}: fix x_j = v\n  If domain(x_j) becomes empty: infeasible\n\nPROPAGATION LOOP:\n  queue = all_fixed_variables\n  while (queue not empty):\n    x_i = dequeue()\n    v = value(x_i)\n    for each x_j in same AllDiff set:\n      if v in domain(x_j):\n        remove v from domain(x_j)\n        if |domain(x_j)| == 1: enqueue(x_j)\n        if |domain(x_j)| == 0: return INFEASIBLE",
+      "math": "Hall's theorem gives stronger propagation (not implemented here):\n  If |{x_i : domain(x_i) subset S}| > |S|, infeasible.\n\nThis is a column cut generator (fixes/tightens variable bounds),\nnot a row cut generator. mayGenerateRowCutsInTree() returns false.\n\nEach set defines: x_i != x_j for all i,j in the set.\n\nConstructor takes:\n- numberSets: How many all-different sets\n- starts: Start indices into which array (size numberSets+1)\n- which: Variable indices for all sets (referenced via starts)",
+      "complexity": "O(k^2 * d) per propagation where k = set size, d = domain size",
+      "ref": [
+        "van Hoeve (2001). \"The alldifferent Constraint: A Survey\"."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglProbing for more general variable fixing via implications"
+  ]
+}

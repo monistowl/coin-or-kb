@@ -1,0 +1,9 @@
+{
+  "name": "ref",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "ThirdParty/boost/boost/core/ref.hpp",
+  "brief": "Contains a reference to an object of type `T`.\n\n `reference_wrapper` is primarily used to \"feed\" references to\n function templates (algorithms) that take their parameter by\n value. It provides an implicit conversion to `T&`, which\n usually allows the function templates to work on references\n unmodified.",
+  "algorithms": [],
+  "methods": []
+}

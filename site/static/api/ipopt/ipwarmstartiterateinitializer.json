@@ -1,0 +1,20 @@
+{
+  "name": "IpWarmStartIterateInitializer",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpWarmStartIterateInitializer.hpp",
+  "brief": "Warm start initialization from previous solution\n\nWarmStartIterateInitializer initializes IPM iterates from a\npreviously computed solution, enabling faster convergence for\nrelated problems (e.g., MPC, parametric optimization).\n\nWarm start sources:\n- warm_start_entire_iterate_: Use GetWarmStartIterate() from NLP\n- Otherwise: Use initialization vectors from NLP\n\nProcessing steps:\n1. Push primals away from bounds (warm_start_bound_push/frac_)\n2. Push slacks (warm_start_slack_bound_push/frac_)\n3. Clip multipliers (warm_start_mult_init_max_)\n4. Ensure bound multipliers positive (warm_start_mult_bound_push_)\n\nTarget mu adjustment (warm_start_target_mu_):\n- Adjusts slack/multiplier pairs toward target complementarity\n- process_target_mu(): Scales to achieve s*z \u2248 target_mu\n- adapt_to_target_mu(): Fine-tunes pairing\n\nKey parameters:\n- warm_start_bound_push_: Absolute bound push\n- warm_start_bound_frac_: Relative bound push\n- warm_start_mult_init_max_: Maximum multiplier magnitude\n- warm_start_target_mu_: Target barrier parameter",
+  "algorithms": [
+    {
+      "name": "IPM Warm Start Initialization:\nInitialize from previous solution for faster convergence:\n1. Load iterate from GetWarmStartIterate() or stored vectors\n2. Push primals from bounds: x \u2190 max(x_L + \u03ba, min(x, x_U - \u03ba))\n   where \u03ba = max(warm_start_bound_push, frac\u00b7max(1, |x|))\n3. Push slacks similarly\n4. Clip multipliers: y \u2190 sign(y)\u00b7min(|y|, mult_init_max)\n5. Ensure bound multipliers positive: z \u2190 max(z, mult_bound_push)\n6. If target_mu set, adjust (s,z) pairs to achieve s\u00b7z \u2248 \u03bc_target:\n   a. Scale: (s,z) \u2190 \u221a(\u03bc_target/(s\u00b7z))\u00b7(s,z)\n   b. Fine-tune via adapt_to_target_mu()",
+      "math": "Target \u03bc adjustment (process_target_mu):\nGiven (s_i, z_i) with s_i\u00b7z_i \u2260 \u03bc_target:\n  ratio = \u221a(\u03bc_target / (s_i\u00b7z_i))\n  s_i \u2190 ratio\u00b7s_i,  z_i \u2190 ratio\u00b7z_i\nPreserves sign while achieving s_i\u00b7z_i = \u03bc_target.",
+      "complexity": "O(n + m) for variable processing. No linear solves.\nWarm start typically reduces iterations by 50-90% for related problems.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpIterateInitializer.hpp for the base interface",
+    "IpDefaultIterateInitializer.hpp for cold start"
+  ]
+}

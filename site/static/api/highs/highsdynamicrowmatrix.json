@@ -1,0 +1,13 @@
+{
+  "name": "HighsDynamicRowMatrix",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsDynamicRowMatrix.h",
+  "brief": "Dynamic row matrix with efficient column-sign iteration\n\nSparse row-wise matrix supporting efficient row add/remove with\nseparate iteration over positive and negative column entries.\n\n**Row Storage:**\n- ARrange_[row]: (start, end) range in ARindex_/ARvalue_\n- ARindex_[]/ARvalue_[]: Column indices and values\n- ARrowindex_[]: Row index for each nonzero position\n\n**Column Iteration by Sign:**\nSeparate doubly-linked lists for positive and negative entries:\n- AheadPos_[col], AnextPos_[], AprevPos_[]: Positive entry list\n- AheadNeg_[col], AnextNeg_[], AprevNeg_[]: Negative entry list\n\n**Template Iterators:**\n- forEachPositiveColumnEntry(): Iterate positive entries in column\n- forEachNegativeColumnEntry(): Iterate negative entries in column\n- Useful for implication detection (sign determines bound type)\n\n**Dynamic Operations:**\n- addRow(): Insert row, reusing deleted space from freespaces_ set\n- removeRow(): Remove row, add index to deletedrows_ for reuse\n- unlinkColumns(): Disconnect row from column lists",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsDomain.h for domain propagation using sign iteration",
+    "mip/HighsCutPool.h for similar dynamic cut storage"
+  ]
+}

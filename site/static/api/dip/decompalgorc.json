@@ -1,0 +1,22 @@
+{
+  "name": "DecompAlgoRC",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompAlgoRC.h",
+  "brief": "Relax-and-Cut algorithm (Lagrangian relaxation with cuts)\n\nDecompAlgoRC implements Lagrangian relaxation:\n- Dualize complicating constraints with multipliers u\n- Solve Lagrangian subproblem: min (c - u'A'')x s.t. A'x >= b'\n- Update multipliers via subgradient optimization\n- Add cuts to improve bounds",
+  "algorithms": [
+    {
+      "name": "Relax-and-Cut Enhancement:\nAdd cuts to tighten Lagrangian bound.\n\n  During subgradient iterations:\n    1. Solve Lagrangian subproblem \u2192 x_k\n    2. Check for violated cuts at x_k\n    3. Add cuts to subproblem (not dualized)\n    4. Continue until convergence or cut limit",
+      "math": "Weak duality: L(u) \u2264 z* for all u \u2265 0\nStrong duality (linear case): max_u L(u) = LP relaxation value\nIntegrality gap: z* - max_u L(u) (may be positive for IP)",
+      "complexity": "Per iteration: O(subproblem) + O(subgradient update)\nConvergence: O(1/\u03b5\u00b2) iterations for \u03b5-optimal multipliers",
+      "ref": [
+        "Held & Karp (1970,1971). \"The Traveling Salesman Problem and\n  Minimum Spanning Trees\". Operations Research."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DecompAlgo.h for base class",
+    "DecompAlgoPC.h for LP-based alternative"
+  ]
+}

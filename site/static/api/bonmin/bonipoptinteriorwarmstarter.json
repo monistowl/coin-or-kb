@@ -1,0 +1,13 @@
+{
+  "name": "BonIpoptInteriorWarmStarter",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/Ipopt/BonIpoptInteriorWarmStarter.hpp",
+  "brief": "Interior point warm start for Ipopt in branch-and-bound\n\nStores interior point iterates from a solved NLP for warm starting child\nnodes. Unlike simple optimal-point warm start, this preserves barrier\nparameter (mu) and interior structure, enabling faster convergence.\n\n**Key methods:**\n- UpdateStoredIterates(): Called during optimization to save promising iterates\n- WarmStartIterate(): Computes initial point for new problem from stored data\n- Finalize(): Post-processing after parent NLP solve completes\n\n**Stored data per iterate:**\n- Primal/dual iterate vectors\n- Barrier parameter mu\n- NLP error, primal/dual infeasibility, complementarity",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpoptWarmStart for simpler primal-dual warm start",
+    "IpoptSolver for the solver that uses this warm starter"
+  ]
+}

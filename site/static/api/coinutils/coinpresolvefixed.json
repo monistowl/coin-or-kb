@@ -1,0 +1,19 @@
+{
+  "name": "CoinPresolveFixed",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveFixed.hpp",
+  "brief": "Remove fixed variables and make variables fixed",
+  "algorithms": [
+    {
+      "name": "Fixed Variable Removal:\n  For variable x_j with l_j = u_j = v (fixed):\n  1. Substitute x_j = v into all constraints: b_i := b_i - a_ij\u00b7v\n  2. Remove column j from constraint matrix\n  3. Adjust objective constant: z += c_j\u00b7v\n  4. Store column for postsolve restoration\n\n  make_fixed_action: Force bounds equal to fix variable\n  remove_fixed_action: Remove already-fixed variable from matrix",
+      "math": "Substitution: Ax = b with x_j = v becomes A'x' = b - a_j\u00b7v\n  where A' is A without column j, x' is x without x_j\n  Postsolve: restore x_j = v in solution",
+      "complexity": "Time: O(nnz(column_j)) per fixed variable\n  Reduces problem dimension, may create new singletons or empty rows\n  Very common in practical models (constants, derived bounds)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

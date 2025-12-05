@@ -1,0 +1,14 @@
+{
+  "name": "CglGMIParam",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglGMI/CglGMIParam.hpp",
+  "brief": "Parameters for the GMI (Gomory Mixed-Integer) cut generator",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglGMI for the generator using these parameters",
+    "CglGomory for the classic Gomory generator",
+    "CglParam for base parameter class\n\nDate:     11/17/09\n-----------------------------------------------------------------------------\nCopyright (C) 2009, Giacomo Nannicini and others.  All Rights Reserved."
+  ]
+}

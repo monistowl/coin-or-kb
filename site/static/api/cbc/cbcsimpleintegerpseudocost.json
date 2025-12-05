@@ -1,0 +1,20 @@
+{
+  "name": "CbcSimpleIntegerPseudoCost",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcSimpleIntegerPseudoCost.hpp",
+  "brief": "Integer variable with static pseudocosts\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcSimpleIntegerPseudoCost: Extends CbcSimpleInteger with static\npseudocost estimates for branch direction preference:\n- upPseudoCost_: Estimated objective increase per unit ceiling\n- downPseudoCost_: Estimated objective increase per unit floor",
+  "algorithms": [
+    {
+      "name": "Static Pseudocost Branching:\n  infeasibility() and createCbcBranch() for variable x_j:\n  1. Compute fractionality: f = x\u0304_j - floor(x\u0304_j).\n  2. Down estimate: D = downPseudoCost_ \u00d7 f.\n  3. Up estimate: U = upPseudoCost_ \u00d7 (1-f).\n  4. Return infeasibility based on method_:\n     0: min(D,U), 1-3: max(D,U) under various conditions.\n  5. preferredWay from upDownSeparator_ threshold.",
+      "math": "Static vs dynamic pseudocosts:\n  Static: \u03c8_j^+, \u03c8_j^- fixed from problem structure or user input.\n  Dynamic: \u03c8_j learned from branching history.\n  Static faster (no updates) but less accurate.\n  Often initialized from constraint matrix analysis.\n\nUnlike CbcSimpleIntegerDynamicPseudoCost, these values are fixed\n(typically from problem structure or user-provided estimates).\n\nMethod modes for infeasibility calculation:\n- 0: Return min(up, down) - conservative\n- 1: Return max before any solution\n- 2: Return max before branched solution\n- 3: Always return max - aggressive",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcSimpleInteger for base class",
+    "CbcSimpleIntegerDynamicPseudoCost for learning-based version\n\nEdwin 11/10/2009 carved out of CbcBranchActual"
+  ]
+}

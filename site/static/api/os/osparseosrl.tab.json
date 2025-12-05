@@ -1,0 +1,9 @@
+{
+  "name": "OSParseosrl.tab",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSParsers/OSParseosrl.tab.hpp",
+  "brief": "OSrL XML parser (bison-generated)\n\nBison-generated parser for OS Result Language (OSrL).\nParses optimization results in XML format.",
+  "algorithms": [],
+  "methods": []
+}

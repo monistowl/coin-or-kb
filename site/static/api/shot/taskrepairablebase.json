@@ -1,0 +1,12 @@
+{
+  "name": "TaskRepairableBase",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskRepairableBase.h",
+  "brief": "Base class for tasks that can repair failures\n\nExtension point for failure recovery logic.\n\n**TaskRepairableBase Class:**\n- repair(): Attempt to fix failed task\n\n**Usage:**\n- Subclassed by tasks that can recover from errors\n- Called when initial run() fails",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskRepairInfeasibleDualProblem.h for example"
+  ]
+}

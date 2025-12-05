@@ -1,0 +1,23 @@
+{
+  "name": "BonQpBranchingSolver",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/Branching/BonQpBranchingSolver.hpp",
+  "brief": "QP-based strong branching solver\n\nImplements strong branching by solving QP approximations of the NLP\nsubproblems. Faster than full NLP but more accurate than LP.",
+  "algorithms": [
+    {
+      "name": "QP Strong Branching for MINLP:\nUse second-order approximation to estimate branching impact.\n\nMOTIVATION:\n  Full NLP strong branching: accurate but O(k \u00b7 NLP_solve) per node\n  LP strong branching: fast but ignores nonlinearity\n  QP strong branching: balance accuracy and speed\n\nAPPROXIMATION:\n  At current NLP solution x*, build QP:\n    min  f(x*) + \u2207f(x*)\u1d40(x-x*) + \u00bd(x-x*)\u1d40H(x-x*)\n    s.t. g(x*) + \u2207g(x*)\u1d40(x-x*) \u2264 0\n         l \u2264 x \u2264 u\n\n  where H = \u2207\u00b2L(x*, \u03bb*) is the Hessian of the Lagrangian\n\nSTRONG BRANCHING PROCEDURE:\n  markHotStart(): Build BranchingTQP from current NLP point\n  For each candidate variable x_j:\n    solveFromHotStart(x_j \u2264 \u230ax*_j\u230b): Get \u0394z\u207b_j\n    solveFromHotStart(x_j \u2265 \u2308x*_j\u2309): Get \u0394z\u207a_j\n  unmarkHotStart(): Clean up\n  Select j* = argmax score(\u0394z\u207b_j, \u0394z\u207a_j)",
+      "math": "QP provides second-order Taylor approximation:\n  Error is O(||x - x*||\u00b3) vs O(||x - x*||\u00b2) for LP\n  Captures curvature that LP misses",
+      "complexity": "O(k \u00b7 QP) per node where k = #candidates.\nQP solve is O(n\u00b2) to O(n\u00b3) depending on structure (n = variables).\nMuch faster than O(k \u00b7 NLP) for full NLP strong branching.",
+      "ref": [
+        "Requires FilterSQP or BQPD QP solver (BONMIN_HAS_FILTERSQP)"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "StrongBranchingSolver for base class",
+    "BranchingTQP for the QP subproblem formulation",
+    "BqpdSolver for the underlying QP solver"
+  ]
+}

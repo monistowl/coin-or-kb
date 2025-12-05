@@ -1,0 +1,23 @@
+{
+  "name": "CbcCutGenerator",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcCutGenerator.hpp",
+  "brief": "Interface between Cbc and Cut Generation Library (CGL)\nCopyright (C) 2003, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCutGenerator: Wraps a CglCutGenerator with Cbc-specific controls.\nManages when and how cut generation is called during B&C search.\n\nKey control parameters:\n- whenCutGenerator_: Frequency (every N nodes, -100=disabled, -99=root only)\n- depthCutGenerator_: Depth-based triggering\n- switches_: Bit flags for various options (normal, atSolution, timing, etc.)\n\nStatistics tracked:\n- numberTimes_: Times generator was called\n- numberCuts_: Total cuts generated\n- numberCutsActive_: Cuts still binding at end\n- timeInCutGenerator_: CPU time spent\n\nSupports adaptive behavior:\n- Can be switched off if ineffective\n- Tracks cuts at root vs tree\n- Global cuts and Lagrangean relaxation support",
+  "algorithms": [
+    {
+      "name": "Root Node vs. Tree Strategy:\n  - Root: Aggressive cuts (high whenCutGenerator_, all generators active)\n  - Tree: Selective cuts (numberActiveCutsAtRoot_ guides which to keep)\n  - Deep tree: Often disable most generators (computational cost)\n  Trade-off: Stronger root LP \u2192 fewer nodes vs. more time per node.",
+      "math": "",
+      "complexity": "generateCuts: O(generator_cost \u00d7 frequency)\n  Generator costs vary: Clique O(n), Gomory O(n\u00b2), Probing O(n \u00d7 LP_solve)\n  Overall B&C impact: cuts reduce nodes but add per-node overhead",
+      "ref": [
+        "Cornuejols, G. (2008). \"Valid Inequalities for Mixed Integer\n       Linear Programs\". Math. Programming 112(1):3-44."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglCutGenerator for cut generation algorithms",
+    "CbcCutModifier for post-generation cut modification",
+    "CbcModel::addCutGenerator()"
+  ]
+}

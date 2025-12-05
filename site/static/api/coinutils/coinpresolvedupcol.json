@@ -1,0 +1,19 @@
+{
+  "name": "CoinPresolveDupcol",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveDupcol.hpp",
+  "brief": "Detect and remove duplicate columns and rows",
+  "algorithms": [
+    {
+      "name": "Duplicate Detection via Random Hashing:\n  To find duplicate columns efficiently:\n  1. Assign random weight r_i to each row\n  2. Compute column hash: h_j = \u03a3_i r_i \u00b7 a_ij\n  3. Columns with same hash are candidates (verify exactly)\n\n  Duplicate columns (same cost): combine bounds\n  - x_j and x_k identical \u2192 replace with x_new, l_new = l_j + l_k\n\n  Duplicate rows: keep tighter constraint, remove redundant\n  - If row_i \u2286 row_k (interval containment), remove row_k",
+      "math": "Column equivalence: a_*j = a_*k (element-wise)\n  Combined variable: x_new = x_j + x_k\n  Postsolve: split x_new* back to feasible (x_j*, x_k*)",
+      "complexity": "Time: O(nnz) for hashing, O(candidates \u00d7 nnz) for verification\n  Random hashing minimizes false positives\n  Common in models with symmetry or copy-paste construction",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

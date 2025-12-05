@@ -1,0 +1,12 @@
+{
+  "name": "CoinPresolveMonitor",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveMonitor.hpp",
+  "brief": "Monitor rows/columns for debugging presolve transforms",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

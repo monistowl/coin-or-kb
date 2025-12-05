@@ -1,0 +1,9 @@
+{
+  "name": "vector_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/vector_op.hpp",
+  "brief": "Value graph: vector_op",
+  "algorithms": [],
+  "methods": []
+}

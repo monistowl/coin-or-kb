@@ -1,0 +1,12 @@
+{
+  "name": "IpRegOptions",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpRegOptions.hpp",
+  "brief": "Option registration, validation, and documentation system\n\nProvides infrastructure for declaring algorithm options with:\n- Type information (OT_Number, OT_Integer, OT_String)\n- Valid ranges (bounds for numerics, allowed values for strings)\n- Default values\n- Documentation strings for help generation\n- Categories for organizing options in documentation\n\nRegisteredOptions aggregates all RegisteredOption instances and\nprovides lookup, validation, and documentation generation.\n\nEach Ipopt component registers its options in RegisterAllOptions()\nduring initialization.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpOptionsList.hpp for runtime option storage"
+  ]
+}

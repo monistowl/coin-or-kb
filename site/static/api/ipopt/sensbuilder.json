@@ -1,0 +1,9 @@
+{
+  "name": "SensBuilder",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensBuilder.hpp",
+  "brief": "sIPOPT builder for sensitivity analysis components\n\nSensBuilder: factory for creating sIPOPT algorithm components.\nAssembles SchurDriver, StepCalculator, and Measurement objects\nbased on options. Configures sensitivity computation pipeline.",
+  "algorithms": [],
+  "methods": []
+}

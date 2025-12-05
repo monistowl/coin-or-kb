@@ -1,0 +1,9 @@
+{
+  "name": "HFactorConst",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HFactorConst.h",
+  "brief": "Constants for basis matrix factorization, update and solves for HiGHS",
+  "algorithms": [],
+  "methods": []
+}

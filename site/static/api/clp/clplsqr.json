@@ -1,0 +1,23 @@
+{
+  "name": "ClpLsqr",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpLsqr.hpp",
+  "brief": "LSQR iterative solver for sparse least-squares problems\n\nImplements the LSQR algorithm of Paige and Saunders (1982) for solving:\n- Ax = b (exact solve)\n- min ||b - Ax||_2 (least squares)\n- min ||(b) - (A    )x||_2 (damped/regularized)\n      ||(0)   (damp*I)  ||",
+  "algorithms": [
+    {
+      "name": "LSQR (Lanczos Bidiagonalization Least Squares):\n  Iterative method building Krylov subspace via bidiagonalization:\n  1. Initialize: \u03b2\u2081u\u2081 = b, \u03b1\u2081v\u2081 = A'u\u2081\n  2. Bidiagonalization step k:\n     \u03b2_{k+1}u_{k+1} = Av_k - \u03b1_k u_k\n     \u03b1_{k+1}v_{k+1} = A'u_{k+1} - \u03b2_{k+1}v_k\n  3. Update QR factorization of bidiagonal matrix B_k\n  4. Update solution: x_k = V_k y_k where B_k y_k \u2248 \u03b2\u2081e\u2081\n  5. Check convergence: ||r_k|| and ||A'r_k|| tolerances",
+      "math": "Bidiagonalization produces:\n  A\u00b7V_k = U_{k+1}\u00b7B_k where B_k is (k+1)\u00d7k bidiagonal\n  Solution minimizes ||B_k y - \u03b2\u2081e\u2081|| which equals ||Ax - b||\n  Equivalent to CG on normal equations A'Ax = A'b but more stable.",
+      "complexity": "O(nnz(A)) per iteration for matrix-vector products.\n  Convergence: O(\u03ba(A)) iterations for condition number \u03ba.\n  Total: O(nnz(A)\u00b7\u03ba(A)) vs O(n\u00b3) for direct methods.",
+      "ref": [
+        "Paige & Saunders (1982). \"LSQR: An algorithm for sparse linear equations\n     and sparse least squares\". ACM TOMS 8(1):43-71.",
+        "Saunders (1995). \"Solution of sparse rectangular systems using LSQR\n     and CRAIG\". BIT 35:588-604.\n\nLSQR is a conjugate-gradient-like method based on Lanczos bidiagonalization.\nOnly requires matrix-vector products, not explicit matrix storage.\n\nUsed by PDCO for iterative solution of normal equations."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPdco which uses LSQR for linear solves",
+    "ClpPdcoBase for the problem interface"
+  ]
+}

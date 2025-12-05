@@ -1,0 +1,9 @@
+{
+  "name": "print_for",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/print_for.hpp",
+  "brief": "Core AD functionality: print for",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Highs",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/Highs.h",
+  "brief": "Main HiGHS solver class - high-performance LP/MIP/QP optimization\n\nHiGHS (High-performance Interior point and Gradient descent Solvers) is\nan open-source solver for LP, MIP, and convex QP problems.\n\n**Highs Class (Main API):**\nPrimary interface for model input, solving, and solution retrieval:\n- passModel(): Load LP/QP/MIP from HighsModel, HighsLp, or raw arrays\n- run(): Solve the incumbent model\n- getSolution(), getBasis(): Retrieve solution and basis\n- getModelStatus(): Check optimization result\n\n**Solving Capabilities:**\n- LP: Dual/primal simplex (HEkk) or interior point (IPX)\n- MIP: Branch-and-cut with presolve, cuts, and heuristics\n- QP: Convex quadratic programming via interior point or active set\n\n**Model Modification:**\n- addCol/addRow, deleteCols/deleteRows: Incremental model building\n- changeColBounds, changeRowBounds, changeColCost: Hot-start friendly\n- changeCoeff: Modify individual matrix coefficients\n\n**Basis Operations:**\n- getBasisInverseRow/Col: Access B^{-1} for advanced use\n- getBasisSolve/getBasisTransposeSolve: Solve B*x=b or B'*x=b\n- getReducedRow/Col: Compute B^{-1}*A columns\n\n**Options and Info:**\n- setOptionValue/getOptionValue: Configure solver behavior\n- getInfo: Retrieve solve statistics (iterations, time, etc.)",
+  "algorithms": [
+    {
+      "name": "MIP Solving:\n  - Presolve: probing, clique detection, coefficient strengthening\n  - Cuts: Gomory, MIR, clique, zero-half, knapsack cover\n  - Branching: reliability branching with pseudocost initialization\n  - Heuristics: RINS, local search, rounding, feasibility pump",
+      "math": "",
+      "complexity": "LP: O(m\u00b7n\u00b7iterations) simplex, O(n\u00b3) per IPM iteration\n  MIP: exponential worst-case, highly structure-dependent",
+      "ref": [
+        "Huangfu, Q. and Hall, J.A.J. (2018). \"Parallelizing the dual revised\n  simplex method\". Math. Prog. Computation 10:119-142."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "lp_data/HighsLp.h for LP data structure",
+    "lp_data/HighsOptions.h for configuration options",
+    "simplex/HEkk.h for simplex implementation",
+    "ipm/ipx/lp_solver.h for interior point solver",
+    "mip/HighsMipSolver.h for MIP solver"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprGroup",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprGroup.hpp",
+  "brief": "Mixed expression: constant + linear + nonlinear terms\n\nRepresents expressions of the form:\n  w = c0 + sum(a_i * x_i) + sum(f_j(x))\nwhere c0 is constant, a_i*x_i are linear terms, and f_j are nonlinear.\n\n**Data structures:**\n- c0_: Constant term\n- lcoeff_: Vector of (variable, coefficient) pairs for linear part\n- Inherits arglist_ from exprSum for nonlinear terms\n\n**Factory pattern:**\ngenExprGroup() checks parameters and returns:\n- exprConst if only constant\n- exprVar if single variable with coefficient 1\n- exprGroup otherwise\n\n**Evaluation:**\noperator() = c0 + sum(coefficient * variable_value) + sum(nonlinear)\n\n**Base for exprQuad:**\nexprQuad extends this to add x'Qx quadratic terms.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprSum for pure sum of expressions",
+    "CouenneExprQuad for quadratic extension"
+  ]
+}

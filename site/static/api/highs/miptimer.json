@@ -1,0 +1,9 @@
+{
+  "name": "MipTimer",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/MipTimer.h",
+  "brief": "Indices of mip iClocks",
+  "algorithms": [],
+  "methods": []
+}

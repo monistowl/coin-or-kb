@@ -1,0 +1,21 @@
+{
+  "name": "CbcPartialNodeInfo",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcPartialNodeInfo.hpp",
+  "brief": "Incremental subproblem storage as differences from parent",
+  "algorithms": [
+    {
+      "name": "Delta-Encoded Node State for Memory Efficiency\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcPartialNodeInfo stores subproblem state as changes from parent:\n- CoinWarmStartDiff for basis changes\n- Only modified variable bounds\n- New cuts added at this node\n\nMemory-efficient: Stores only differences, reconstructs via parent chain.\napplyToModel() walks ancestor chain to rebuild complete state.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcNodeInfo for base class",
+    "CbcFullNodeInfo for complete state storage",
+    "CoinWarmStartDiff for basis difference representation\n\nEdwin 11/24/09 carved from CbcNode"
+  ]
+}

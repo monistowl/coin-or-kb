@@ -1,0 +1,14 @@
+{
+  "name": "AlpsKnowledgeBrokerMPI",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsKnowledgeBrokerMPI.h",
+  "brief": "MPI-based parallel implementation of ALPS knowledge broker\n\nAlpsKnowledgeBrokerMPI provides scalable parallel tree search using MPI.\nImplements hierarchical Master-Hub-Worker architecture.\n\n**Process hierarchy:**\n- Master (rank 0): Inter-cluster load balancing, termination detection\n- Hubs: Manage worker clusters, intra-cluster load balancing\n- Workers: Process subtrees, report status to hub\n\n**Core methods per process type:**\n- masterMain(): Balance hubs, check termination\n- hubMain(): Balance workers, report to master\n- workerMain(): Explore subtrees, request work\n\n**Load balancing:**\n- Inter-cluster: Master moves work between hubs\n- Intra-cluster: Hub moves work between workers\n- Work donation: Split subtrees when requested\n\n**Static initialization schemes:**\n- Root initialization: Master generates nodes, distributes\n- Spiral: Distribute initial work in spiral pattern\n\n**MPI communicators:**\n- MPI_COMM_WORLD: All processes\n- clusterComm_: Hub and its workers\n- hubComm_: Master and all hubs",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsKnowledgeBroker for base class",
+    "AlpsKnowledgeBrokerSerial for single-process version",
+    "AlpsParams for parallel parameters (hubNum, etc.)"
+  ]
+}

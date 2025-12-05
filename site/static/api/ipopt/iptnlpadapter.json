@@ -1,0 +1,20 @@
+{
+  "name": "IpTNLPAdapter",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Interfaces/IpTNLPAdapter.hpp",
+  "brief": "Adapter converting user TNLP interface to internal NLP\n\nTNLPAdapter is a Design Pattern Adapter that converts from the\nuser-facing TNLP format to Ipopt's internal NLP representation:\n\nTNLP (user):           NLP (internal):\n  g_L <= g(x) <= g_U  ->  c(x) = 0           (equalities)\n                          d_L <= d(x) <= d_U (inequalities)\n\nKey responsibilities:\n- Separate mixed constraints into equalities and inequalities\n- Handle fixed variables (as parameters or relaxed bounds)\n- Convert sparse triplet (i,j,val) to internal matrix format\n- Detect linear dependencies in constraints\n- Map between TNLP multipliers and internal dual variables",
+  "algorithms": [
+    {
+      "name": "TNLP to NLP Adaptation:\n  GetSpaces() performs constraint classification:\n  1. Scan g_L, g_U: E = {i: g_L[i] = g_U[i]}, I = complement.\n  2. Create c(x) = g_E(x) - g_L[E] (equalities, shifted to zero RHS).\n  3. Create d(x) = g_I(x) with d_L = g_L[I], d_U = g_U[I].\n  4. Build permutation matrices P_c_g, P_d_g for index mapping.\n  5. Handle fixed vars: MAKE_PARAMETER (remove), MAKE_CONSTRAINT (add c).",
+      "math": "Index mapping:\n  P_c_g: c indices \u2192 g indices (equalities in g).\n  P_d_g: d indices \u2192 g indices (inequalities in g).\n  P_x_full_x: internal x \u2192 full x (when fixed vars removed).\n  Jacobians split: J_c from rows of J_g in E, J_d from rows in I.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTNLP.hpp for user problem definition",
+    "IpNLP.hpp for internal representation"
+  ]
+}

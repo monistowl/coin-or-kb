@@ -1,0 +1,9 @@
+{
+  "name": "base_hash",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/base_hash.hpp",
+  "brief": "Core AD functionality: base hash",
+  "algorithms": [],
+  "methods": []
+}

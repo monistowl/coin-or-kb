@@ -1,0 +1,9 @@
+{
+  "name": "infeasibility_information",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/linear_programming/termination_strategy/infeasibility_information.hpp",
+  "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+  "algorithms": [],
+  "methods": []
+}

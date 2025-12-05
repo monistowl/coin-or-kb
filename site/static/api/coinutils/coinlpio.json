@@ -1,0 +1,20 @@
+{
+  "name": "CoinLpIO",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinLpIO.hpp",
+  "brief": "LP file format reader/writer for linear programming problems\n\nReads/writes CPLEX LP format with Min/Max objective, constraints,\nbounds, and integer/binary variable declarations.",
+  "algorithms": [
+    {
+      "name": "LP File Parsing:\n  Sections: Minimize/Maximize, Subject To, Bounds, Integers/Generals/Binaries, End\n  Algebraic format: constraint_name: coeff1*var1 + coeff2*var2 <= rhs\n\n  Constraint types: <= (L), >= (G), = (E)\n  Bound keywords: Free, Inf, -Inf\n  Variable types: Integers, Generals (same), Binaries, Semi-Continuous",
+      "math": "Reads: min/max c'x s.t. Ax \u2264 b, Ax \u2265 b, Ax = b\n  Bounds: lb \u2264 x \u2264 ub or x free\n  Integrality: x \u2208 Z or x \u2208 {0,1}",
+      "complexity": "Parsing: O(file_size), token-based lexer\n  More human-readable than MPS but less standardized",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinMpsIO for MPS file format support",
+    "CoinFileIO for underlying file I/O abstraction"
+  ]
+}

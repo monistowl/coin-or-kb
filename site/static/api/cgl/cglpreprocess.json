@@ -1,0 +1,23 @@
+{
+  "name": "CglPreProcess",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglPreProcess/CglPreProcess.hpp",
+  "brief": "MIP preprocessing with cut generator integration\n\nComprehensive MIP preprocessing that combines OsiPresolve with\ncut generators to strengthen the formulation before branch-and-cut.\nUnlike simple presolve, can add cuts that replace/strengthen constraints.",
+  "algorithms": [
+    {
+      "name": "Coefficient Strengthening:\nTighten constraint coefficients.\n\n  Given: sum_j a_j x_j <= b with x_j in {0,1}\n  For variable x_k with a_k > b - sum_{j != k} max(a_j, 0):\n    Can reduce a_k without changing feasible region\n\nMain operations:\n- preProcess(): Default strategy preprocessing\n- preProcessNonDefault(): User-configured cut generators\n- postProcess(): Reconstruct solution in original space\n- tightenPrimalBounds(): Bound tightening for faster dual\n\nPreprocessing features:\n- Variable fixing from reduced costs\n- Bound tightening propagation\n- Clique detection and strengthening (x + y <= 1 -> x + y == 1)\n- SOS (Special Ordered Set) detection\n- Constraint row replacement with stronger versions\n- Duplicate row elimination\n\nHelper classes:\n- CglBK: Bron-Kerbosch algorithm for maximal clique finding\n- CglUniqueRowCuts: Hash-based duplicate cut detection\n- CglHashLink: Hash table support structure\n\nOption flags (options_):\n- 1: Original had integer bounds\n- 2: Don't do probing\n- 4: Don't do duplicate rows\n- 8: Don't do cliques\n- 16/64: Heavy probing options",
+      "math": "",
+      "complexity": "- Presolve pass: O(nnz) per pass\n- Clique finding: O(3^(n/3)) worst case, fast in practice\n- Total: O(passes * (nnz + probing_work))",
+      "ref": [
+        "Savelsbergh (1994). \"Preprocessing and Probing Techniques for MIP\".\n  ORSA J. Computing 6(4):445-454."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiPresolve for basic LP presolve",
+    "CglProbing for variable fixing cuts",
+    "CglClique for clique cut generation"
+  ]
+}

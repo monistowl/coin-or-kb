@@ -1,0 +1,9 @@
+{
+  "name": "ClpConfig",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpConfig.h",
+  "brief": "Clp configuration and platform detection\n\nHandles build configuration for cross-platform compatibility:\n- HAVE_CONFIG_H: Uses autoconf-generated config.h\n- CLPLIB_BUILD: Building the library vs. using it\n- DLL_EXPORT: Windows DLL export declarations\n- GCC visibility: Hidden visibility with explicit exports\n\nDefines CLPLIB_EXPORT macro for public API symbols.\n\nConfiguration precedence:\n1. config.h (autoconf) when HAVE_CONFIG_H defined\n2. config_clp.h for configured installations\n3. config_clp_default.h for manual builds",
+  "algorithms": [],
+  "methods": []
+}

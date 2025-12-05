@@ -1,0 +1,21 @@
+{
+  "name": "HighsPathSeparator",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsPathSeparator.h",
+  "brief": "Path aggregation cuts from network structure",
+  "algorithms": [
+    {
+      "name": "Network Path Aggregation Cuts\n\nHeuristically identifies network paths and generates flow-based cuts.\n\n**Network Path Detection:**\n1. Find rows with network structure (\u00b11 coefficients)\n2. Aggregate rows to form source-sink paths\n3. Resulting aggregation gives flow conservation cuts\n\n**Separation Heuristic:**\n- Start from fractional integer variables\n- Follow flow through network-like constraints\n- Randomized selection (HighsRandom) for diverse cuts\n\n**Cut Generation:**\n- Aggregated row passed to MIR procedure\n- Path structure often yields strong cuts\n- Effective on transportation/assignment problems",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "mip/HighsSeparator.h for base class interface",
+    "mip/HighsModkSeparator.h for related mod-k aggregation",
+    "util/HighsRandom.h for randomization"
+  ]
+}

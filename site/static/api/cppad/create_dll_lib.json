@@ -1,0 +1,9 @@
+{
+  "name": "create_dll_lib",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/create_dll_lib.hpp",
+  "brief": "CppAD utility: create dll lib",
+  "algorithms": [],
+  "methods": []
+}

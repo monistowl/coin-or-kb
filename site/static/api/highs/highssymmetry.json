@@ -1,0 +1,13 @@
+{
+  "name": "HighsSymmetry",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/presolve/HighsSymmetry.h",
+  "brief": "Symmetry detection and orbital fixing for MIP",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsDomain.h for orbital fixing application",
+    "mip/HighsMipSolverData.h for symmetry integration"
+  ]
+}

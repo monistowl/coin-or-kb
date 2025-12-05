@@ -1,0 +1,9 @@
+{
+  "name": "RobotSetup",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "experimental/RobotBonmin/RobotSetup.hpp",
+  "brief": "Bonmin robot planning setup\n\nConfiguration for robot path planning MINLP application.\nSets up Bonmin solver for robotics optimization problems.",
+  "algorithms": [],
+  "methods": []
+}

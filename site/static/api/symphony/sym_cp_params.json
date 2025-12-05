@@ -1,0 +1,13 @@
+{
+  "name": "sym_cp_params",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_cp_params.h",
+  "brief": "Cut pool process parameters\n\nParameters for managing the global cut pool storage.\n\n**cp_params structure:**\n- verbosity: Output level\n- warm_start: Load cuts from file at start\n- warm_start_file_name: Saved cut pool file\n- logging: Save cut pool during solve\n- log_file_name: Cut pool log file\n\n**Size management:**\n- block_size: Allocation granularity\n- max_size: Maximum memory for cuts\n- max_number_of_cuts: Hard limit on cut count\n\n**Quality control:**\n- cuts_to_check: How many cuts to check for violations\n- delete_which: Deletion strategy (quality/touches)\n- touches_until_deletion: Inactivity threshold\n- min_to_delete: Minimum cuts to remove at once\n- check_which: Which cuts to check (level/touches)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_cp.h for cut pool process",
+    "sym_constants.h for CHECK_* and DELETE_* values"
+  ]
+}

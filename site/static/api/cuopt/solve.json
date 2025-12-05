@@ -1,0 +1,14 @@
+{
+  "name": "solve",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/include/cuopt/linear_programming/solve.hpp",
+  "brief": "GPU-accelerated LP and MIP solving functions\n\nMain entry points for linear programming optimization on GPU.\n\n**LP Solving (PDLP):**\n- solve_lp(): GPU-accelerated first-order LP solver\n- Uses Primal-Dual Hybrid Gradient (PDHG) algorithm\n- Supports warm starting from previous solutions\n\n**MIP Solving:**\n- solve_mip(): Mixed-integer programming with GPU B&B\n- Branch-and-bound with LP relaxations\n\n**Input Formats:**\n- optimization_problem_t: Native cuOpt problem representation\n- mps_data_model_t: MPS file format parser output",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cuopt/linear_programming/optimization_problem.hpp for problem definition",
+    "cuopt/linear_programming/pdlp/solver_settings.hpp for LP settings",
+    "cuopt/linear_programming/mip/solver_settings.hpp for MIP settings"
+  ]
+}

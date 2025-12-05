@@ -1,0 +1,12 @@
+{
+  "name": "GB_cuda_apply",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/CUDA/GB_cuda_apply.hpp",
+  "brief": "CUDA JIT kernel launchers for GraphBLAS apply operations\nSPDX-License-Identifier: Apache-2.0\n\nGPU apply operations: GB_cuda_apply_unop_jit (unary operator with optional\nflipij), GB_cuda_apply_bind1st_jit (binary op with scalar bound to first),\nGB_cuda_apply_bind2nd_jit (scalar bound to second). All take stream, grid\nand block size parameters for kernel launch.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GB_cuda.hpp for common CUDA utilities"
+  ]
+}

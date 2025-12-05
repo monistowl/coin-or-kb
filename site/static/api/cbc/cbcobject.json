@@ -1,0 +1,22 @@
+{
+  "name": "CbcObject",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcObject.hpp",
+  "brief": "Abstract base for branching entities (variables, SOS, etc.)",
+  "algorithms": [
+    {
+      "name": "Branch-and-Bound: Branching Entity Interface\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcObject defines WHAT can be branched on:\n- infeasibility(): Measure of violation (0 = feasible)\n- feasibleRegion(): Bound tightening without branching\n- createCbcBranch(): Create CbcBranchingObject for this entity\n\nDerived classes: CbcSimpleInteger, CbcSOS, CbcClique, CbcNWay, etc.\n\nCbcStrongInfo struct holds strong branching results:\nup/down movement, infeasibilities, solver status.\n\nNote: Current implementation assumes binary branching (2 arms).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcSimpleInteger for integer variable objects",
+    "CbcSOS for SOS Type 1/2 constraints",
+    "CbcBranchingObject for branching actions",
+    "OsiObject for OSI-level base class\n\nEdwin 11/12/2009 carved from CbcBranchBase"
+  ]
+}

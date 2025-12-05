@@ -1,0 +1,22 @@
+{
+  "name": "OsiChooseVariable",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiChooseVariable.hpp",
+  "brief": "Variable selection strategies for branch-and-bound\n\nIn MIP solving, choosing which variable to branch on significantly\naffects tree size and solve time. This file provides:\n\n- OsiChooseVariable: Base class for branching variable selection\n- OsiChooseStrong: Strong branching (evaluates candidates by solving LPs)",
+  "algorithms": [
+    {
+      "name": "Branching Variable Selection:\nCritical decision in branch-and-bound affecting tree size by orders\nof magnitude.\n\nMOST INFEASIBLE:\n  score(j) = min(f\u2c7c, 1-f\u2c7c) where f\u2c7c = x\u2c7c - \u230ax\u2c7c\u230b\n  Select j* = argmax{score(j)}\n  Simple but often poor - ignores objective impact\n\nPSEUDO-COST BRANCHING:\n  Estimate objective change from historical data:\n  \u0394\u207b\u2c7c \u2248 \u03c3\u207b\u2c7c \u00b7 f\u2c7c,  \u0394\u207a\u2c7c \u2248 \u03c3\u207a\u2c7c \u00b7 (1-f\u2c7c)\n  where \u03c3\u207b\u2c7c, \u03c3\u207a\u2c7c are per-unit degradation estimates\n  Requires initialization (unreliable for unobserved variables)\n\nSTRONG BRANCHING:\n  Solve LP relaxations for both child problems:\n  - Fix x\u2c7c \u2264 \u230ax\u2c7c\u230b, solve LP \u2192 objective z\u2c7c\u207b\n  - Fix x\u2c7c \u2265 \u2308x\u2c7c\u2309, solve LP \u2192 objective z\u2c7c\u207a\n  Actual degradation: \u0394\u207b\u2c7c = z\u2c7c\u207b - z, \u0394\u207a\u2c7c = z\u2c7c\u207a - z\n  Accurate but expensive (2 LP solves per candidate)\n\nRELIABILITY BRANCHING:\n  Use strong branching until variable has k observations,\n  then switch to pseudo-costs. Typically k = 4-8.\n  Balances accuracy with efficiency.",
+      "math": "Variable selection scoring:\n  Product score: score(j) = max(\u03b5, \u0394\u207b\u2c7c) \u00b7 max(\u03b5, \u0394\u207a\u2c7c)\n  Weighted score: score(j) = (1-\u03bc)\u00b7min(\u0394\u207b\u2c7c,\u0394\u207a\u2c7c) + \u03bc\u00b7max(\u0394\u207b\u2c7c,\u0394\u207a\u2c7c)\n  Select j* = argmax{score(j)}\n\nPseudo-cost update: \u03c3\u207b\u2c7c = (1/k)\u00b7\u03a3\u1d62(\u0394\u1d62\u207b/f\u1d62) over k observations",
+      "complexity": "- Most infeasible: O(n) scan of fractional variables\n- Pseudo-cost: O(n) with O(1) per variable\n- Strong branching: O(k\u00b7LP_solve) for k candidates\n- Reliability: amortizes strong branching cost over time",
+      "ref": [
+        "Achterberg, Koch & Martin (2005). \"Branching rules revisited\".\n  Operations Research Letters 33(1):42-54."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiBranchingObject for branch execution",
+    "Cbc for more sophisticated variable selection"
+  ]
+}

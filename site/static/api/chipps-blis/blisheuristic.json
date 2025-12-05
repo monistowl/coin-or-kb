@@ -1,0 +1,14 @@
+{
+  "name": "BlisHeuristic",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisHeuristic.h",
+  "brief": "Base class for primal heuristics in BLIS\n\nPrimal heuristics search for integer-feasible solutions during\nbranch-and-cut. Good solutions improve the cutoff for pruning.\n\n**Strategy options (BlisHeurStrategy):**\n- None: Heuristic disabled\n- Root: Run only at root node\n- Auto: BLIS decides based on effectiveness\n- Periodic: Run every heurCallFrequency_ nodes\n- BeforeRoot: Run before solving first LP (e.g., feasibility pump)\n\n**Key virtual method:**\n- searchSolution(): Try to find a solution improving objectiveValue\n  Returns true if solution found, fills newSolution array\n\n**Statistics tracked:**\n- numSolutions_: Solutions found by this heuristic\n- time_: CPU time spent\n- calls_/noSolsCalls_: Success rate tracking",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisHeurRound for simple rounding heuristic",
+    "BlisModel::addHeuristic() for registration",
+    "BlisModel::callHeuristics() for invocation"
+  ]
+}

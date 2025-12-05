@@ -1,0 +1,13 @@
+{
+  "name": "BonFilterWarmStart",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/Filter/BonFilterWarmStart.hpp",
+  "brief": "Warm start storage for FilterSQP solver\n\nStores warm start information for FilterSQP, including primal/dual values\nand FilterSQP's internal lws (integer working set) array. Inherits from both\nCoinWarmStartPrimalDual and CoinWarmStartBasis for Cbc compatibility.\n\n**Data stored:**\n- x: Primal variables (from CoinWarmStartPrimalDual)\n- lam: Dual multipliers (from CoinWarmStartPrimalDual)\n- lws: FilterSQP's integer working set array (active set info)\n- istat[14]: FilterSQP status array\n\n**Classes:**\n- FilterWarmStart: Main warm start container\n- FilterWarmStartDiff: Differential update for tree traversal",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "FilterSolver for the solver that uses this warm start",
+    "IpoptWarmStart for the Ipopt equivalent"
+  ]
+}

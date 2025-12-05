@@ -1,0 +1,14 @@
+{
+  "name": "AlpsDecompSolution",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/AlpsDecompSolution.h",
+  "brief": "ALPS solution wrapper for DIP incumbent solutions\n\nAlpsDecompSolution derives from AlpsSolution to integrate DIP\nsolutions with ALPS's solution management and reporting.\n\n**Data Members:**\n- m_size: Number of variables\n- m_values: Solution vector\n- m_quality: Objective value\n- m_app: Pointer to DecompApp for printing\n\n**ALPS Integration:**\n- Stored in ALPS solution pool\n- Used for incumbent tracking\n- Supports encode/decode for parallelism\n\n**Lifecycle:**\n- Created when DIP finds integer-feasible solution\n- Passed to ALPS via registerKnowledge()\n- Best solution reported at termination",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompSolution.h for base solution class",
+    "AlpsDecompModel.h for model integration",
+    "AlpsSolution (ALPS) for base class"
+  ]
+}

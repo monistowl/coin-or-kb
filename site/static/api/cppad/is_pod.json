@@ -1,0 +1,9 @@
+{
+  "name": "is_pod",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/is_pod.hpp",
+  "brief": "Internal implementation: is_pod",
+  "algorithms": [],
+  "methods": []
+}

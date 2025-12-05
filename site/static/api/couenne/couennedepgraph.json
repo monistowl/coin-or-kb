@@ -1,0 +1,20 @@
+{
+  "name": "CouenneDepGraph",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/problem/depGraph/CouenneDepGraph.hpp",
+  "brief": "Dependency graph between auxiliary and original variables",
+  "algorithms": [
+    {
+      "name": "Dependency Graph with Topological Sort\n\nTracks which variables depend on which others, enabling:\n- Correct evaluation order (topological sort)\n- Cycle detection (would indicate model error)\n- Dependency analysis for bound propagation\n\n**DepNode:**\nA vertex in the dependency graph:\n- index_: Variable index\n- depList_: Forward star (variables this one depends on)\n- order_: Evaluation order from topological sort\n- color_: For DFS cycle detection (white/gray/black)\n\n**DepGraph:**\nThe full dependency DAG:\n- vertices_: Set of DepNodes\n- createOrder(): Topological sort for evaluation order\n- checkCycles(): Detect circular dependencies\n- depends(w, x): Check if w depends on x\n\n**Usage:**\nWhen w = f(x, y), node for w has edges to nodes for x and y.\nEvaluation must process x, y before w. Bound propagation\nfollows the reverse order.\n\n**replaceIndex():**\nUsed when redundant auxiliary w := x is found and w is\nreplaced by x throughout.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "exprAux which uses this for evaluation ordering",
+    "CouenneProblem which owns the dependency graph"
+  ]
+}

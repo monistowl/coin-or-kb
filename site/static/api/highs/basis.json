@@ -1,0 +1,13 @@
+{
+  "name": "basis",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/basis.h",
+  "brief": "Basis management for IPX interior point solver\n\nManages simplex-style basis for IPM preconditioning and crossover.\n\n**BasicStatus Enum:**\n- NONBASIC_FIXED: Fixed at bound, never enters basis\n- NONBASIC: At bound, may enter basis\n- BASIC: In basis, may leave\n- BASIC_FREE: In basis, never leaves\n\n**Basis Storage:**\n- basis_[p]: Column index at position p (0 <= p < m)\n- map2basis_[j]: Position of variable j, or -1/-2 if nonbasic\n- StatusOf(), PositionOf(), IsBasic(): Query methods\n\n**Linear Algebra Operations:**\n- Factorize(): LU factorization with stability check\n- SolveDense(): FTRAN/BTRAN for dense RHS\n- SolveForUpdate(): Prepare for basis exchange\n- TableauRow(): Compute simplex tableau row\n- ExchangeIfStable(): Pivot with stability check\n\n**Basis Construction:**\n- SetToSlackBasis(): Initialize to identity\n- Load(): Load user-provided basis\n- ConstructBasisFromWeights(): Crash procedure\n- CrashBasis(): Fast weighted crash\n- Repair(): Fix singularities with slack columns\n\n**Statistics:**\n- factorizations(), updates_total(): Counts\n- frac_ftran_sparse(), frac_btran_sparse(): Sparsity metrics\n- mean_fill(), max_fill(): LU fill factors",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipm/ipx/lu_update.h for LU factorization",
+    "ipm/ipx/lp_solver.h for usage context"
+  ]
+}

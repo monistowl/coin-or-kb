@@ -1,0 +1,16 @@
+{
+  "name": "CSP_tm",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Csp/include/CSP_tm.hpp",
+  "brief": "CSP tree manager for BCP",
+  "algorithms": [
+    {
+      "name": "CSP Tree Manager: Search Coordination\n\nCoordinates branch-and-price search for cutting stock:\n- initialize_core: Set packing constraints (each demand met)\n- create_root: Initial patterns from enumeration\n- compare_tree_nodes: Best-first search by lower bound",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

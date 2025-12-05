@@ -1,0 +1,9 @@
+{
+  "name": "det_by_minor",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/speed/det_by_minor.hpp",
+  "brief": "Speed testing: det_by_minor",
+  "algorithms": [],
+  "methods": []
+}

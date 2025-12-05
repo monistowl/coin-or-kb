@@ -1,0 +1,13 @@
+{
+  "name": "HMpsFF",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/io/HMpsFF.h",
+  "brief": "Free-format MPS file parser with full section support\n\nComprehensive MPS reader supporting LP, QP, MIP, and extensions.\n\n**MPS Sections Parsed:**\n- NAME, OBJSENSE: Problem metadata and optimization direction\n- ROWS: Constraint types (N=free, L/G/E=bounds)\n- COLUMNS: Variable coefficients, integrality markers\n- RHS: Right-hand sides for constraints\n- RANGES: Two-sided constraint bounds\n- BOUNDS: Variable bounds (LO/UP/FX/FR/MI/PL/BV/LI/UI)\n\n**Quadratic Extensions:**\n- QSECTION, QMATRIX, QUADOBJ: Objective Hessian\n- QCMATRIX: Quadratic constraints (per-row)\n\n**Additional Sections:**\n- SOS: Special ordered sets (Type 1, Type 2)\n- CSECTION: Conic constraints (MOSEK format)\n- INDICATORS: Indicator constraints (ignored)\n\n**Parsing Features:**\n- Triplet matrix accumulation, then CSC conversion\n- Duplicate row/column name detection\n- Timeout support for large files\n- Fixed-format detection and fallback\n\n**Data Flow:**\n- loadProblem() \u2192 parse() \u2192 fillMatrix()/fillHessian()\n- Populates HighsModel with LP/QP/MIP data",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "io/FilereaderMps.h for Filereader wrapper",
+    "io/HMPSIO.h for fixed-format legacy parser"
+  ]
+}

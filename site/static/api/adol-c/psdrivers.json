@@ -1,0 +1,23 @@
+{
+  "name": "psdrivers",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/drivers/psdrivers.h",
+  "brief": "Drivers for piecewise smooth (PS) functions with abs-normal form\n\nProvides differentiation tools for functions containing absolute values\nand other piecewise linear operations. These functions are not classically\ndifferentiable at kink points, but have well-defined generalized derivatives.",
+  "algorithms": [
+    {
+      "name": "Abs-Normal Form for Piecewise Smooth Functions:\nRepresents piecewise linear functions in a canonical form enabling\nalgorithmic computation of generalized derivatives.\n\nREPRESENTATION:\nA function f: \u211d\u207f \u2192 \u211d\u1d50 containing s absolute value operations can be\nwritten in abs-normal form:\n\n  z = cz + Z\u00b7x + L\u00b7|z|    (switching equation)\n  y = cy + Y\u00b7x + J\u00b7z      (output equation)\n\nwhere:\n- z \u2208 \u211d\u02e2 are \"switching variables\" (arguments to |\u00b7|)\n- cz \u2208 \u211d\u02e2, cy \u2208 \u211d\u1d50 are constant offsets\n- Z \u2208 \u211d\u02e2\u02e3\u207f, Y \u2208 \u211d\u1d50\u02e3\u207f are input Jacobians\n- L \u2208 \u211d\u02e2\u02e3\u02e2 is strictly lower triangular (coupling between switches)\n- J \u2208 \u211d\u1d50\u02e3\u02e2 maps switching variables to outputs\n\nKEY PROPERTY: L being strictly lower triangular ensures the implicit\nequation for z has a unique solution (can be solved by forward substitution).\n\nGENERALIZED DERIVATIVES:\nAt a kink (where some z\u1d62 = 0), classical derivative doesn't exist.\nInstead, compute directional derivative along direction d:\n\n  \u03c3 = sign(Z\u00b7d + L\u00b7\u03c3\u00b7|Z\u00b7d + L\u00b7\u03c3|)  (signature equation)\n  \u2207_d f = Y + J\u00b7diag(\u03c3)\u00b7(I - L\u00b7diag(\u03c3))\u207b\u00b9\u00b7Z\n\nwhere \u03c3 \u2208 {-1, 0, +1}\u02e2 encodes which branch of each |\u00b7| is active.",
+      "math": "Bouligand subdifferential:\nThe set of all limiting Jacobians as we approach a kink from different\ndirections forms the Bouligand subdifferential \u2202_B f. For piecewise\nlinear f, this is a finite set with at most 2\u02e2 elements (one per sign\ncombination of the s switching variables).\n\nClarke generalized gradient: conv(\u2202_B f) - convex hull",
+      "complexity": "- abs_normal: O(ops) to extract form, where ops = tape operations\n- directional_active_gradient: O(s\u00b2) for forward substitution\n- Space: O(s\u00b2) for L matrix, O(s\u00b7n) for Z matrix",
+      "ref": [
+        "Griewank (2013). \"On Stable Piecewise Linearization and Generalized\n  Algorithmic Differentiation\". Optimization Methods and Software.",
+        "Griewank & Walther (2016). \"First- and Second-Order Optimality\n  Conditions for Piecewise Smooth Objective Functions\"."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "drivers/drivers.h for smooth function derivatives",
+    "interfaces.h for underlying forward/reverse modes"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "IpIpoptCalculatedQuantities",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpIpoptCalculatedQuantities.hpp",
+  "brief": "Cached computation of all derived quantities from iterates\n\nIpoptCalculatedQuantities is the central caching layer for computed\nvalues derived from the current/trial iterates in IpoptData:\n\nCached quantities include:\n- Slacks: slack_x_L, slack_x_U, slack_s_L, slack_s_U\n- Objective: f, grad_f, barrier_obj, grad_barrier_obj\n- Constraints: c, d, d-s, jac_c, jac_d, J^T*y products\n- Primal-dual: grad_lag_x/s, complementarity, relaxed_compl\n- Errors: primal/dual infeasibility, complementarity, nlp_error\n- Line search: frac_to_bound, sigma matrices",
+  "algorithms": [
+    {
+      "name": "Memoization Pattern for NLP Evaluation Caching:\n  Each computed quantity is cached with dependency tracking:\n  1. Check if inputs (x, s, y, z, \u03bc) have changed via TaggedObject tags.\n  2. If unchanged, return cached result immediately.\n  3. If changed, recompute, cache result, update dependency tags.\n  Curr/Trial duality: curr_* uses IpData.curr(), trial_* uses IpData.trial().\n  Dependencies propagate: grad_lag depends on grad_f, jac_c, jac_d.",
+      "math": "Key computed quantities for IPM:\n  Slacks: slack_x_L = x - x_L, slack_x_U = x_U - x (distance to bounds).\n  Barrier objective: \u03c6_\u03bc(x) = f(x) - \u03bc\u00b7\u03a3log(slack_i).\n  Gradient of Lagrangian: \u2207_x L = \u2207f - J_c^T y_c - J_d^T y_d - z_L + z_U.\n  Complementarity: compl_x_L = slack_x_L \u2299 z_L (should \u2192 \u03bce).\n  Primal infeasibility: ||c(x)||, ||d(x) - s||.\n  Dual infeasibility: ||\u2207_x L||, ||\u2207_s L||.\n  Fraction-to-boundary: max \u03b1 s.t. x + \u03b1\u00b7\u0394x \u2265 (1-\u03c4)\u00b7x_L.",
+      "complexity": "O(n+m) per quantity computation (vector operations).\n  Caching reduces redundant NLP evaluations within each iteration.\n  Typical iteration accesses same quantity multiple times (search dir,\n  line search, convergence check) \u2192 caching gives 3-10x speedup.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpIpoptData.hpp for the raw iterate storage",
+    "IpIpoptNLP.hpp for NLP function evaluations",
+    "IpCachedResults.hpp for the caching mechanism"
+  ]
+}

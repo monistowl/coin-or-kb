@@ -1,0 +1,20 @@
+{
+  "name": "IpSymLinearSolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpSymLinearSolver.hpp",
+  "brief": "Base class for symmetric indefinite linear solvers\n\nSymLinearSolver is the abstract base class for all symmetric linear\nsolvers used in Ipopt's augmented system. The solver must handle\nsymmetric indefinite matrices and optionally provide inertia.",
+  "algorithms": [
+    {
+      "name": "Symmetric Indefinite Linear Solve Interface:\n  MultiSolve(A, rhs, sol) factorizes and solves A\u00b7x = b:\n  1. If matrix structure changed: Re-analyze sparsity pattern.\n  2. Factorize: A = L\u00b7D\u00b7L^T (symmetric indefinite factorization).\n  3. Solve: x = L^{-T}\u00b7D^{-1}\u00b7L^{-1}\u00b7b for each right-hand side.\n  4. Check inertia: Count negative eigenvalues (diagonal of D).\n  5. Return status: SUCCESS, SINGULAR, WRONG_INERTIA, CALL_AGAIN.",
+      "math": "Inertia and indefiniteness:\n  KKT system is symmetric indefinite: [W, J^T; J, 0] with W\u227b0, J Jacobian.\n  Correct inertia: n positive, m negative eigenvalues (for m constraints).\n  Wrong inertia \u2192 singular Hessian or constraint degeneracy.\n  IncreaseQuality() \u2192 tighten pivot tolerance for accuracy.",
+      "complexity": "Sparse LDL^T: O(nnz\u00b7fill) where fill depends on ordering.\n\nReturn codes (ESymSolverStatus):\n- SYMSOLVER_SUCCESS: Solve completed successfully\n- SYMSOLVER_SINGULAR: Matrix detected as singular\n- SYMSOLVER_WRONG_INERTIA: Negative eigenvalue count doesn't match\n- SYMSOLVER_CALL_AGAIN: Solver needs reallocation (retry with new values)\n- SYMSOLVER_FATAL_ERROR: Unrecoverable error\n\nKey interface methods:\n- MultiSolve(): Factorize and solve for multiple RHS\n- NumberOfNegEVals(): Query inertia after factorization\n- ProvidesInertia(): Check if solver computes inertia\n- IncreaseQuality(): Request higher accuracy (e.g., larger pivots)\n\nThe matrix structure must remain fixed between Initialize and solve calls.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpSparseSymLinearSolverInterface.hpp for sparse format interface",
+    "IpTSymLinearSolver.hpp for triplet format driver"
+  ]
+}

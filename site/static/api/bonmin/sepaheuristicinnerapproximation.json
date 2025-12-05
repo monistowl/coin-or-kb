@@ -1,0 +1,9 @@
+{
+  "name": "SepaHeuristicInnerApproximation",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "experimental/Separable/SepaHeuristicInnerApproximation.hpp",
+  "brief": "Separable MINLP inner approximation\n\nInner approximation heuristic for separable MINLP problems.\nExploits problem structure for better approximations.",
+  "algorithms": [],
+  "methods": []
+}

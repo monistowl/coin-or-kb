@@ -1,0 +1,13 @@
+{
+  "name": "ICrashUtil",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/presolve/ICrashUtil.h",
+  "brief": "Low-level utilities for ICrash algorithms",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "presolve/ICrash.h for main crash interface",
+    "presolve/ICrashX.h for crossover support"
+  ]
+}

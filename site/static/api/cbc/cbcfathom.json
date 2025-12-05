@@ -1,0 +1,20 @@
+{
+  "name": "CbcFathom",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcFathom.hpp",
+  "brief": "Fathoming methods to complete subproblems",
+  "algorithms": [
+    {
+      "name": "Specialized Fathoming for Small Subproblems\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcFathom: Abstract base for specialized fathoming techniques.\nAfter branching, the subproblem may be small enough for specialized\nexact methods faster than general B&C.\n\nfathom() return codes:\n- 0: No fathoming attempted\n- 1: Fully fathomed (optimal for subtree)\n- 2: Incomplete search\n- 3: Incomplete but treat as complete\n\nExample implementations:\n- Presolve to smaller problem, then B&C\n- Dynamic programming for special structure\n\nAlso contains CbcOsiSolver: OsiClpSolverInterface that knows about\nCbcModel (base class for CbcLinked).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcFathomDynamicProgramming for DP fathoming",
+    "CbcLinked for linked solver interface"
+  ]
+}

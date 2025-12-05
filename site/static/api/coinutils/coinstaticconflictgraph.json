@@ -1,0 +1,18 @@
+{
+  "name": "CoinStaticConflictGraph",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinStaticConflictGraph.hpp",
+  "brief": "static CoinConflictGraph implementation with fast queries",
+  "algorithms": [
+    {
+      "name": "Static Conflict Graph with Compact Storage\n\nCoinConflictGraph implementation which supports fast queries\nbut doesn't support modifications.\n\n**Compact representation:**\nAfter conflict detection is complete, converts to static structure\nwith contiguous memory layout for cache-efficient queries.\n\n**Clique storage:**\nLarge cliques stored explicitly rather than as O(k\u00b2) edges.\nNode-to-clique index allows efficient iteration over conflicts.\n\n**Induced subgraphs:**\nCan create subgraph induced by subset of nodes for focused\nseparation or probing operations.",
+      "math": "",
+      "complexity": "Memory: O(n + m) where m = edges + clique elements",
+      "ref": [
+        "Atamt\u00fcrk, Nemhauser & Savelsbergh, \"Conflict graphs in solving\n     integer programming problems\", EJOR 121(1), 2000"
+      ]
+    }
+  ],
+  "methods": []
+}

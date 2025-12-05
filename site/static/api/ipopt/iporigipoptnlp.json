@@ -1,0 +1,21 @@
+{
+  "name": "IpOrigIpoptNLP",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpOrigIpoptNLP.hpp",
+  "brief": "Standard IpoptNLP implementation wrapping user's NLP\n\nOrigIpoptNLP is the concrete implementation of IpoptNLP for standard\noptimization problems. It wraps the user's NLP (via TNLP/TNLPAdapter)\nand applies scaling transformations:\n\n  min s_f\u00b7f(S_x^{-1}\u00b7x\u0303)  s.t.  s_c\u00b7c(S_x^{-1}\u00b7x\u0303)=0, ...",
+  "algorithms": [
+    {
+      "name": "NLP Adapter with Scaling and Caching:\n  1. Initialize: Create vector/matrix spaces from NLP structure info.\n  2. Evaluate with caching: f, \u2207f, c, d, J_c, J_d, H via CachedResults.\n  3. Apply scaling: x\u0303 = S_x\u00b7x, f\u0303 = s_f\u00b7f, c\u0303 = S_c\u00b7c, etc.\n  4. Relax bounds: x_L \u2192 x_L - \u03b5, x_U \u2192 x_U + \u03b5 for numerical safety.\n  5. Unscale solution: Convert internal x\u0303, \u1ef9 back to user space.\n  Hessian modes: EXACT (user provides) or LIMITED_MEMORY (L-BFGS).",
+      "math": "Scaling transformation (improves conditioning):\n  Scaled problem: min s_o\u00b7f(S_x\u207b\u00b9\u00b7x\u0303) s.t. S_c\u00b7c(S_x\u207b\u00b9\u00b7x\u0303) = 0.\n  Variable scaling: x = S_x\u207b\u00b9\u00b7x\u0303 where S_x = diag(s_x).\n  Objective scaling: f\u0303 = s_o\u00b7f (single scalar).\n  Constraint scaling: c\u0303 = S_c\u00b7c, d\u0303 = S_d\u00b7d (diagonal matrices).\n  Bound scaling: x\u0303_L = S_x\u00b7x_L, x\u0303_U = S_x\u00b7x_U.\n  Multiplier transformation: y_c = s_o\u207b\u00b9\u00b7S_c\u00b7\u1ef9_c, z_L = s_o\u207b\u00b9\u00b7S_x\u00b7z\u0303_L.",
+      "complexity": "O(n + m_c + m_d) to apply/unapply scaling (diagonal operations).\n  NLP evaluations: O(user-defined), cached to avoid redundant calls.\n  Space allocation: O(n + m) for vector/matrix space objects.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpIpoptNLP.hpp for the abstract interface",
+    "IpRestoIpoptNLP.hpp for restoration phase variant",
+    "IpNLPScaling.hpp for scaling strategies"
+  ]
+}

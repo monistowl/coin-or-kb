@@ -1,0 +1,31 @@
+{
+  "name": "colamd",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "COLAMD/Include/colamd.h",
+  "brief": "Column Approximate Minimum Degree ordering for sparse LU factorization\n\nCOLAMD computes a column permutation Q that reduces fill-in during LU\nfactorization of an unsymmetric matrix A. The ordering minimizes the\nfill-in of A*Q when factored as LU.\n\nSYMAMD computes a symmetric ordering for a symmetric matrix, using COLAMD\non the matrix's structure. Both are related to the minimum degree family\nof algorithms.",
+  "algorithms": [
+    {
+      "name": "SYMAMD (Symmetric AMD using COLAMD):\n  For symmetric A, apply COLAMD to A+A' structure to find fill-reducing order.",
+      "math": "Approximate column degree for LU:\n  deg(j) \u2248 # rows in current column's nonzero pattern after elimination\n  Aggressive absorption reduces degree overestimates from element merging.",
+      "complexity": "Time: O(nnz(A)\u00b7\u03b1(n)) average with aggressive absorption\n  Space: O(nnz(A) + n) for quotient graph representation\n  Slightly slower than AMD but better for unsymmetric patterns.",
+      "ref": [
+        "Davis, Gilbert, Larimore, Ng (2004). \"A Column Approximate Minimum\n     Degree Ordering Algorithm\". ACM Trans. Math. Software 30(3):353-376."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "amd.h for symmetric matrix ordering",
+    "umfpack.h for sparse LU factorization using COLAMD",
+    "colamd()",
+    "colamd_recommended()",
+    "colamd_set_defaults()",
+    "colamd_recommended(), colamd_set_defaults()",
+    "colamd()",
+    "amd_order() for alternative symmetric ordering",
+    "symamd()",
+    "colamd_report()",
+    "symamd_report()"
+  ]
+}

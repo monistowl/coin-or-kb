@@ -1,0 +1,9 @@
+{
+  "name": "unary_plus",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/unary_plus.hpp",
+  "brief": "Core AD functionality: unary plus",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,22 @@
+{
+  "name": "CglTwomir",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglTwomir/CglTwomir.hpp",
+  "brief": "Two-step MIR (TMIR) cut generator\n\nGenerates tMIR and 2-step MIR cuts by applying the MIR inequality\nrecursively with different scaling factors. More general than\nsimple Gomory or MIR cuts.",
+  "algorithms": [
+    {
+      "name": "Two-Step Mixed Integer Rounding (2-MIR):\n  Derives cuts by repeated MIR application with scaling:\n  1. Start with base inequality: \u03a3 a_j x_j \u2264 b (from tableau or formulation)\n  2. First MIR: Scale by t, apply MIR function, get inequality with floor(tb)\n  3. Second MIR: Scale result by q, apply MIR again\n  4. For each (t,q) in [t_min,t_max]\u00d7[q_min,q_max], generate candidate cut\n  5. Select cuts meeting quality thresholds (steepness, violation)",
+      "math": "MIR function derivation:\n  For \u03a3 a_j x_j \u2264 b with x_j \u2208 [0,u_j], x_j integer for j \u2208 I:\n  Let f = b - floor(b), f_j = a_j - floor(a_j)\n  MIR: \u03a3_{j:f_j\u2264f} floor(a_j)x_j + \u03a3_{j:f_j>f} (f_j-f)/(1-f)\u00b7x_j \u2264 floor(b)\n  Scaling by t before MIR: multiplies a_j, b by t \u2192 different f values.\n  Two-step: Apply MIR, then scale and apply again for stronger cuts.",
+      "complexity": "O(m\u00b7n\u00b7|T|\u00b7|Q|) where m=rows, n=cols, |T|, |Q| = scaling ranges.\n  Typical: t \u2208 [1,4], q \u2208 [1,2] with step 1 \u2192 8 cuts per source row.",
+      "ref": [
+        "Dash & G\u00fcnl\u00fck (2006). \"Valid inequalities based on simple mixed-integer\n     sets\". Math. Programming 105:29-53.\n\nCut types generated (controlled by do_mir_, do_2mir_, do_tab_, do_form_):\n- tMIR: Apply MIR with scaling t (t_min_ to t_max_)\n- 2-step MIR: Apply MIR twice with scaling q (q_min_ to q_max_)\n- Tableau cuts: From simplex tableau rows\n- Formulation cuts: From original constraint rows\n\nKey data structures:\n- DGG_data_t: Problem data including bounds, solution, basis info\n- DGG_constraint_t: Sparse constraint representation\n- DGG_list_t: Collection of generated cuts\n\nAlgorithm flow:\n1. DGG_getData(): Extract LP data from solver\n2. DGG_generateTabRowCuts()/DGG_generateFormulationCuts(): Build base rows\n3. DGG_transformConstraint(): Shift/complement variables\n4. DGG_buildMir()/DGG_build2step(): Apply MIR function\n5. DGG_unTransformConstraint(): Restore original variables\n\nNumerical precision:\n- DGG_GOMORY_THRESH: Min fractionality for cut generation (0.005)\n- DGG_MIN_TABLEAU_COEFFICIENT: Zero threshold (1e-12)\n- DGG_MIN_STEEPNESS: Cut quality threshold"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglMixedIntegerRounding for simpler single-step MIR",
+    "CglGomory for basic Gomory cuts"
+  ]
+}

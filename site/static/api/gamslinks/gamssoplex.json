@@ -1,0 +1,9 @@
+{
+  "name": "GamsSoPlex",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/soplex/GamsSoPlex.hpp",
+  "brief": "GAMS interface to SoPlex LP solver\n\nConnects GAMS modeling environment to the ZIB SoPlex\nsimplex-based LP solver.",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "presolve",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/dual_simplex/presolve.hpp",
+  "brief": "cuOpt LP presolve\n\nBound tightening and constraint reduction for LP.",
+  "algorithms": [],
+  "methods": []
+}

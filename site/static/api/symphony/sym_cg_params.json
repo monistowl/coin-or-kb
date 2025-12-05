@@ -1,0 +1,13 @@
+{
+  "name": "sym_cg_params",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_cg_params.h",
+  "brief": "Cut generator process parameters\n\nMinimal parameter structure for the cut generator process.\nMost cut generation parameters are in sym_lp_params.h (cgl_params).\n\n**cg_params:**\n- verbosity: Output level for cut generation\n- do_findcuts: Enable/disable user cut generation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_cg.h for cut generator process",
+    "sym_lp_params.h for CGL cut parameters"
+  ]
+}

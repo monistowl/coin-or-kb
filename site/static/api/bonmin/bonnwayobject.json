@@ -1,0 +1,9 @@
+{
+  "name": "BonNWayObject",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "experimental/RobotBonmin/BonNWayObject.hpp",
+  "brief": "Bonmin N-way branching object\n\nN-way branching object for robot planning applications.\nCreates multi-way branches instead of binary left/right.",
+  "algorithms": [],
+  "methods": []
+}

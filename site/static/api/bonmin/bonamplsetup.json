@@ -1,0 +1,13 @@
+{
+  "name": "BonAmplSetup",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/Ampl/BonAmplSetup.hpp",
+  "brief": "AMPL-specific Bonmin setup and initialization\n\nExtends BonminSetup to initialize from AMPL command-line arguments\nand .nl files. Handles reading options and model from AMPL.\n\n**Initialization methods:**\n- initialize(argv): Read from command line and files\n- initialize(argv, opt_content, nl_content): Read from strings (for Bcp)\n- fillOsiInterface(): Initialize existing interface from strings",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BonminSetup for algorithm configuration",
+    "AmplInterface for the solver interface"
+  ]
+}

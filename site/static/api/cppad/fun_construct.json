@@ -1,0 +1,9 @@
+{
+  "name": "fun_construct",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/fun_construct.hpp",
+  "brief": "Core AD functionality: fun construct",
+  "algorithms": [],
+  "methods": []
+}

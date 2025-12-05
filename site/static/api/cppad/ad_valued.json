@@ -1,0 +1,9 @@
+{
+  "name": "ad_valued",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/ad_valued.hpp",
+  "brief": "Core AD functionality: ad valued",
+  "algorithms": [],
+  "methods": []
+}

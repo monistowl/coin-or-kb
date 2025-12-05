@@ -1,0 +1,20 @@
+{
+  "name": "CbcBranchAllDifferent",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcBranchAllDifferent.hpp",
+  "brief": "All-different constraint for integer variables\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcBranchAllDifferent: Enforces that a set of integer variables\nmust all have different values. When two variables i,j have the\nsame value, creates branching disjunction:\n  x_i <= x_j - 1  OR  x_i >= x_j + 1",
+  "algorithms": [
+    {
+      "name": "All-Different Branching:\n  infeasibility() detects violations:\n  1. For each pair (i,j) in set: check if x\u0304_i \u2248 x\u0304_j (same value).\n  2. If collision found, return infeasibility > 0.\n  createCbcBranch() creates disjunction:\n  - Branch 1: x_i \u2264 x_j - 1 (i strictly less than j).\n  - Branch 2: x_i \u2265 x_j + 1 (i strictly greater than j).\n  Iterates until all pairs have distinct values.",
+      "math": "All-different constraint in MIP:\n  CP: alldifferent(x_1, ..., x_n) enforced by arc consistency.\n  MIP: No direct encoding; branch on violations.\n  O(n\u00b2) pair comparisons per infeasibility check.\n  Less efficient than CP propagation but integrates with MIP solver.\n\nCommon in constraint programming problems:\n- Scheduling: No two tasks at same time\n- Assignment: No two agents assigned same job\n- Sudoku: No repeated digits in row/column/box\n\nNot as efficient as specialized CP propagation but integrates\nwith MIP framework for hybrid approaches.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcBranchCut for base class",
+    "CbcClique for related set constraints\n\nEdwin 11/13/2009 carved out of CbcBranchCut"
+  ]
+}

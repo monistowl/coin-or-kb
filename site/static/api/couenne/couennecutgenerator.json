@@ -1,0 +1,24 @@
+{
+  "name": "CouenneCutGenerator",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/convex/CouenneCutGenerator.hpp",
+  "brief": "Main convexification cut generator for global MINLP optimization\n\nGenerates linear outer approximation cuts to build convex relaxations\nof nonconvex MINLPs. Works with the symbolic CouenneProblem representation.\n\n**Cut generation (generateCuts):**\n1. For each auxiliary variable w = f(x), generate linearization cuts\n2. Cuts are based on expression type (convex envelope, secants, tangents)\n3. Uses current LP solution as linearization point\n\n**Convexification types (conv_type):**\n- Current-point linearization (most common)\n- Multi-point sampling for tighter relaxations\n\n**Cut types generated:**\n- Tangent cuts for convex functions\n- Secant cuts for concave functions\n- McCormick envelope cuts for bilinear terms\n- Specialized cuts for sin, cos, exp, log, etc.\n\n**Helper methods:**\n- addEnvelope(): Generate convex/concave envelope for univariate function\n- addSegment(): Add secant line between two points\n- addTangent(): Add tangent at given point\n- createCut(): Build and validate OsiRowCut",
+  "algorithms": [
+    {
+      "name": "Spatial Branch-and-Bound with LP Relaxation:\nGlobal optimization via convex relaxation + branching. At each node:\n1. Solve LP relaxation (convex underestimator of nonconvex MINLP)\n2. If LP infeasible \u2192 prune node\n3. If LP solution is MINLP-feasible \u2192 update incumbent\n4. Otherwise: add convexification cuts and/or branch",
+      "math": "Convex envelope for w = f(x) on [l,u]:\n- Convex f: tangent cuts w \u2265 f(x\u0304) + f'(x\u0304)(x - x\u0304) at sample points\n- Concave f: secant cut w \u2264 f(l) + (f(u)-f(l))/(u-l) \u00b7 (x-l)\n- Bilinear w = xy: McCormick envelope\n  w \u2265 l_y\u00b7x + l_x\u00b7y - l_x\u00b7l_y (underestimator)\n  w \u2265 u_y\u00b7x + u_x\u00b7y - u_x\u00b7u_y (underestimator)\n  w \u2264 u_y\u00b7x + l_x\u00b7y - l_x\u00b7u_y (overestimator)\n  w \u2264 l_y\u00b7x + u_x\u00b7y - u_x\u00b7l_y (overestimator)",
+      "complexity": "Cut generation: O(n) per node where n = #auxiliary variables.\nEach operator type has constant-time cut generation.\nLP solve: O(m\u00b3) worst case, typically much faster with warm starts.",
+      "ref": [
+        "McCormick (1976). \"Computability of global solutions to factorable\n  nonconvex programs\". Mathematical Programming 10:147-175.",
+        "Al-Khayyal & Falk (1983). \"Jointly constrained biconvex programming\".\n  Mathematics of Operations Research 8(2):273-286.",
+        "Tawarmalani & Sahinidis (2002). \"Convexification and Global\n  Optimization in Continuous and Mixed-Integer Nonlinear Programming\".\n  Kluwer Academic Publishers. [Convex envelopes for various operators]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneProblem for the symbolic problem representation",
+    "expression::generateCuts() for per-operator cut generation"
+  ]
+}

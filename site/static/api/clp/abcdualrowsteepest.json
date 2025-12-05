@@ -1,0 +1,23 @@
+{
+  "name": "AbcDualRowSteepest",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcDualRowSteepest.hpp",
+  "brief": "Steepest edge pivot selection for ABC dual simplex",
+  "algorithms": [
+    {
+      "name": "Steepest Edge for Dual Simplex Row Selection:\n  Choose leaving variable r that maximizes |d_r|/||e_r\u00b7B\u207b\u00b9\u00b7A||:\n  1. Maintain weights w_i = ||e_i\u00b7B\u207b\u00b9\u00b7A||\u00b2 for each basic variable\n  2. Select r = argmax_i (d_i\u00b2/w_i) where d_i is dual infeasibility\n  3. Update weights: w_i \u2190 w_i - 2\u00b7(\u03b1_i/\u03b1_r)\u00b7\u27e8u,a_i\u27e9 + (\u03b1_i/\u03b1_r)\u00b2\u00b7w_r\n     where \u03b1_i is i-th element of pivot column, u is BTRAN result",
+      "math": "Weight update formula (Forrest-Goldfarb):\n  Let B be current basis, \u03b1 = B\u207b\u00b9\u00b7a_s (pivot column), \u03c4 = B\u207b\u1d40\u00b7e_r (row)\n  After pivot, new weights: w_i' = w_i + (\u03b1_i/\u03b1_r)\u00b2\u00b7w_r - 2\u00b7(\u03b1_i/\u03b1_r)\u00b7\u03b3_i\n  where \u03b3_i = \u27e8row i of B\u207b\u00b9\u00b7A, \u03c4\u27e9. Special case: w_r' = w_s/\u03b1_r\u00b2.",
+      "complexity": "O(m) per pivot for weight updates when sparse.\n  Full weight recomputation: O(m\u00b2) but rarely needed.\n  Reduces total iterations by 30-50% vs Dantzig on hard problems.",
+      "ref": [
+        "Forrest & Goldfarb (1992). \"Steepest-edge simplex algorithms for\n     linear programming\". Mathematical Programming 57:341-374.\n\nModes (controlled by constructor parameter):\n- 0: Uninitialized weights\n- 1: Full steepest edge with maintained weights\n- 2: Partial uninitialized (only scan some infeasible rows)\n- 3: Starts partial, may switch to full (default, recommended)\n\nThe ABC version optimizes weight storage and updates for cache efficiency."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcDualRowPivot for the base interface",
+    "AbcDualRowDantzig for simpler but often slower alternative",
+    "ClpDualRowSteepest for the standard (non-ABC) implementation"
+  ]
+}

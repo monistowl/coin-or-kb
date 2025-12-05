@@ -1,0 +1,20 @@
+{
+  "name": "HighsCutGeneration",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsCutGeneration.h",
+  "brief": "Class that generates cuts from single row relaxations",
+  "algorithms": [
+    {
+      "name": "Mixed-Integer Rounding (MIR) Cut Generation\n\nGenerates violated cutting planes from single-row relaxations using\nMIR and lifted cover inequalities.\n\n**Cut Generation Pipeline:**\n1. Complement variables to ensure non-negative solution values\n2. Substitute bounds to create single-row relaxation\n3. Try CMIR (complemented MIR) with varying scale factors\n4. If integer support, try lifted knapsack cover cuts\n\n**Key Algorithms:**\n- cmirCutGenerationHeuristic(): Scale row for best MIR violation\n- separateLiftedKnapsackCover(): Knapsack cover lifting (Gu-Nemhauser-Savelsbergh)\n- separateLiftedMixedBinaryCover(): Mixed-binary cover cuts\n- separateLiftedMixedIntegerCover(): General integer cover lifting\n\n**Parameters:**\n- minEfficacy: Minimum cut violation required\n- feastol: Feasibility tolerance\n- initialScale: Starting scale factor for MIR procedure",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "mip/HighsSeparation.h for separation orchestration",
+    "mip/HighsTransformedLp.h for bound substitution"
+  ]
+}

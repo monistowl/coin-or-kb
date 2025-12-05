@@ -1,0 +1,13 @@
+{
+  "name": "CbcEventHandler",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CbcEventHandler.h",
+  "brief": ".NET wrapper for CBC event handling\n\nCbcEvent enum (node, solution, treeStatus, endSearch, etc.) and\nCbcAction enum (noAction, stop, restart, killSolution).\nCbcDelegateEventHandlerProxy bridges .NET delegates to native callbacks.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CbcModel.h for model wrapper",
+    "CbcSolver.h for solver entry points"
+  ]
+}

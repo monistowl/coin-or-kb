@@ -1,0 +1,13 @@
+{
+  "name": "CouenneUserInterface",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/interfaces/CouenneUserInterface.hpp",
+  "brief": "Abstract base class for Couenne user interfaces\n\nDefines the interface contract for problem input sources.\nConcrete implementations read from AMPL, OSInstance, or custom formats.\n\n**Required methods (pure virtual):**\n- getCouenneProblem(): Return symbolic problem representation\n- getTMINLP(): Return Bonmin TMINLP interface for NLP solves\n\n**Optional hooks:**\n- setupJournals(): Configure output streams (default: stdout)\n- addBabPlugins(): Add cut generators, heuristics, bound tighteners\n- writeSolution(): Output final solution\n\n**Usage pattern:**\n```cpp\nCouenneAmplInterface interface(options, journalist);\nCouenneProblem* prob = interface.getCouenneProblem();\n// ... solve ...\ninterface.writeSolution(bab);\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneAmplInterface for AMPL .nl file input",
+    "CouenneOSInterface for Optimization Services input"
+  ]
+}

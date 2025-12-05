@@ -1,0 +1,9 @@
+{
+  "name": "cumulative",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/cumulative.hpp",
+  "brief": "Value graph: cumulative",
+  "algorithms": [],
+  "methods": []
+}

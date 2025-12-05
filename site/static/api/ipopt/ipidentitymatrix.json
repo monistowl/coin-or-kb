@@ -1,0 +1,20 @@
+{
+  "name": "IpIdentityMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpIdentityMatrix.hpp",
+  "brief": "Scalar multiple of the identity matrix (factor * I)\n\nIdentityMatrix represents matrices of the form factor*I where\nI is the identity. Stores only the scalar factor - O(1) storage.\nMatrix-vector multiply is just a scale operation: y = factor*x.",
+  "algorithms": [
+    {
+      "name": "Scalar Identity Representation:\n  M = \u03c3I where \u03c3 is a scalar factor.\n  MultVector: y \u2190 \u03b1(\u03c3I)x + \u03b2y = \u03b1\u03c3x + \u03b2y (vector scaling).\n  No storage of matrix elements - only the scalar factor \u03c3.",
+      "math": "Properties of \u03c3I:\n  - Eigenvalues: all equal to \u03c3 (n-fold degeneracy)\n  - Determinant: det(\u03c3I) = \u03c3\u207f\n  - Inverse: (\u03c3I)\u207b\u00b9 = (1/\u03c3)I\n  - Commutes with all matrices: (\u03c3I)A = A(\u03c3I)",
+      "complexity": "O(1) storage, O(n) for matvec (single scale operation).\n  Most memory-efficient matrix representation possible.\n\nUsed in Ipopt for:\n- Regularization terms (\u03b4_x\u00b7I, \u03b4_c\u00b7I in augmented system)\n- Initial Hessian approximations in quasi-Newton (H\u2080 = \u03b3I)\n- Trust region constraints",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpDiagMatrix.hpp for general diagonal matrices",
+    "IpSymMatrix.hpp for base class"
+  ]
+}

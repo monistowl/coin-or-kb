@@ -1,0 +1,20 @@
+{
+  "name": "TaskRepairInfeasibleDualProblem",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskRepairInfeasibleDualProblem.h",
+  "brief": "Recover from infeasible MIP relaxation\n\nAttempts to restore feasibility when cuts cause infeasibility.\n\n**TaskRepairInfeasibleDualProblem Class:**\n- mainRepairTries, totRepairTries: Repair attempt counters\n- run(): Attempt repair strategies\n\n**Repair Strategies:**\n- Remove recently added cuts\n- Relax cut coefficients\n- Remove dominated cuts\n\n**When Called:**\n- MIP solver returns infeasible\n- May indicate numerical issues with cuts",
+  "algorithms": [
+    {
+      "name": "MIP Relaxation Repair",
+      "math": "When cuts render MIP infeasible (numerical issues):\n      1. Identify recent cuts: {\u03c0_k\u00b7x \u2264 \u03c0\u2080_k} from last iterations\n      2. Remove or relax: try \u03c0_k\u00b7x \u2264 \u03c0\u2080_k + \u03b5 for small \u03b5\n      3. Re-solve and verify feasibility restored",
+      "complexity": "O(recent cuts \u00d7 MIP solve). Limited repair attempts.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DualSolver.h for MIP status",
+    "TaskAddHyperplanes.h for cut management"
+  ]
+}

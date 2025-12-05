@@ -1,0 +1,9 @@
+{
+  "name": "poly",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/poly.hpp",
+  "brief": "CppAD utility: poly",
+  "algorithms": [],
+  "methods": []
+}

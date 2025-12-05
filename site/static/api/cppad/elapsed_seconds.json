@@ -1,0 +1,9 @@
+{
+  "name": "elapsed_seconds",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/elapsed_seconds.hpp",
+  "brief": "CppAD utility: elapsed seconds",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_Graph",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_Graph.hpp",
+  "brief": "Graph data structure for Mongoose partitioning\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nGraph class stores adjacency in CSC format (p, i arrays) with optional\nedge weights (x) and vertex weights (w). Factory methods create from\nraw arrays or CSparse matrices. Shallow copy flags track ownership.",
+  "algorithms": [
+    {
+      "name": "Compressed Sparse Column (CSC) Graph Representation:\nStandard sparse matrix format optimized for column access:\n\nArrays:\n- p[n+1]: Column pointers. Neighbors of vertex j are at i[p[j]..p[j+1]-1]\n- i[nz]: Row indices (neighbor IDs for each edge)\n- x[nz]: Edge weights (optional, default 1)\n- w[n]: Vertex weights (optional, default 1)",
+      "math": "CSC interpretation for graphs:\nFor undirected graph, store symmetric adjacency matrix A:\nA[i,j] = edge weight between i and j (0 if no edge).\np[j+1] - p[j] = degree of vertex j.\n\nMemory ownership: shallow_* flags indicate borrowed vs owned arrays.\nFactory methods from CSparse matrices share data when possible.",
+      "complexity": "O(n + nz) storage.\nNeighbor iteration: O(degree) per vertex.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_EdgeCutProblem.hpp for extended graph with partition state",
+    "Mongoose_CSparse.hpp for CSparse matrix format"
+  ]
+}

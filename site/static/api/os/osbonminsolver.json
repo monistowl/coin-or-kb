@@ -1,0 +1,9 @@
+{
+  "name": "OSBonminSolver",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSSolverInterfaces/OSBonminSolver.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

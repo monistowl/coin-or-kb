@@ -1,0 +1,9 @@
+{
+  "name": "for_type",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/atomic/four/for_type.hpp",
+  "brief": "Core AD functionality: for type",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,25 @@
+{
+  "name": "HEkk",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/HEkk.h",
+  "brief": "Edinburgh simplex kernel - high-performance LP solver core\n\nHEkk (Edinburgh Kernel) is the main simplex implementation in HiGHS,\nsupporting both dual and primal simplex methods.\n\n**HEkk Class:**\nCentral simplex solver managing LP data, basis, and solve state:\n- solve(): Run simplex algorithm (auto-selects dual/primal)\n- setBasis(): Initialize from HighsBasis\n- getSolution(): Extract primal/dual solution\n\n**Key Components:**\n- lp_: The LP being solved (may be scaled/dualized copy)\n- basis_: SimplexBasis with basic variable indices and status\n- simplex_nla_: Numeric linear algebra (factorization)\n- dual_edge_weight_: Steepest edge or Devex weights\n\n**Simplex Operations:**\n- btran/ftran: Backward/forward transformation with basis\n- pivotColumnFtran: Compute pivot column for ratio test\n- unitBtran: Compute row of B^{-1}\n\n**Transformations:**\n- dualize/undualize: Convert LP to/from dual form\n- permute/unpermute: Reorder LP for efficiency\n\n**Parallelism:**\n- chooseSimplexStrategyThreads(): Configure parallel strategy",
+  "algorithms": [
+    {
+      "name": "Hyper-sparse Computation:\n  Exploits sparsity in FTRAN/BTRAN when < 10% of elements nonzero.\n  Uses specialized scatter/gather for cache efficiency.",
+      "math": "",
+      "complexity": "Per-iteration: O(nnz(B^{-1}\u00b7v)) for FTRAN/BTRAN\n  Hyper-sparse: O(nnz(result)) when exploiting sparsity\n  Parallelization: independent FTRAN/BTRAN across columns",
+      "ref": [
+        "Huangfu, Q. and Hall, J.A.J. (2018). \"Parallelizing the dual revised\n  simplex method\". Math. Prog. Computation 10:119-142.",
+        "Hall, J.A.J. and McKinnon, K.I.M. (2005). \"Hyper-sparsity in the\n  revised simplex method and how to exploit it\". Comp. Opt. Appl. 32:259-283."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "HEkkDual.h for dual simplex implementation",
+    "HEkkPrimal.h for primal simplex implementation",
+    "HSimplexNla.h for basis factorization",
+    "SimplexStruct.h for SimplexBasis, HighsSimplexStatus"
+  ]
+}

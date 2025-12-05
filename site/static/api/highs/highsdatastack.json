@@ -1,0 +1,13 @@
+{
+  "name": "HighsDataStack",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsDataStack.h",
+  "brief": "Type-erased byte stack for presolve reduction storage\n\nLIFO storage for heterogeneous data with compile-time type safety.\n\n**Design:**\n- Stores arbitrary trivially-copyable types as raw bytes\n- push<T>(): Append value to stack\n- pop<T>(): Remove and return value from top\n- Vectors stored with trailing size for self-describing pops\n\n**Presolve Integration:**\n- HighsPostsolveStack uses this for reduction storage\n- Each presolve reduction pushes undo data\n- Postsolve pops in reverse order to restore solution\n- Compact binary format (no per-element overhead)\n\n**Memory Layout:**\n- Scalar: |--value bytes--|\n- Vector: |--element bytes--|--size_t count--|\n- Position tracks pop location; data.size() for push\n\n**Type Safety:**\n- IS_TRIVIALLY_COPYABLE enforces memcpy-safe types\n- Compatible with GCC < 5 via __has_trivial_copy",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "presolve/HighsPostsolveStack.h for reduction undo storage",
+    "presolve/HPresolve.h for presolve reductions"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "CbcBranchDefaultDecision",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcBranchDefaultDecision.hpp",
+  "brief": "Default branching variable selection\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcBranchDefaultDecision: Simple selection algorithm without pseudocosts.",
+  "algorithms": [
+    {
+      "name": "Default Branching Selection (betterBranch):\n  Two-phase decision rule:\n  Phase 1 (before solution): Select variable minimizing infeasibility count.\n    Score = numInfUp + numInfDn (prefer variables that eliminate more)\n  Phase 2 (after solution): Select variable maximizing objective degradation.\n    Score = changeUp + changeDn (prefer variables that bound objective)",
+      "math": "Direction selection within variable:\n  Prefer up branch (+1) if numInfUp < numInfDn or changeUp > changeDn.\n  Prefer down branch (-1) otherwise.\n  Ties broken by direction that constrains solution space more.",
+      "complexity": "O(1) per comparison - just evaluates score function.\n  No pseudocost tracking or update cost.\n\nReturns +1 for up branch preferred, -1 for down branch.\nRemembers best candidate for comparison chain.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcBranchDecision for base class",
+    "CbcBranchDynamicDecision for pseudocost-based selection",
+    "CbcBranchingObject for what gets compared\n\nEdwin 11/10/2009 carved out of CbcBranchActual"
+  ]
+}

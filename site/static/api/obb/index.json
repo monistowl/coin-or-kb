@@ -1,0 +1,31 @@
+{
+  "library": "oBB",
+  "layer": "layer-3",
+  "classes": [
+    {
+      "name": "nlopt",
+      "brief": "C++ wrapper around NLopt C API - bundled with oBB\n\nProvides an object-oriented C++ interface to NLopt with RAII,\nexception handling, and std::vector support.\n\n**nlopt::opt Class:**\nMain optimizer class wrapping nlopt_opt:\n- Constructor: opt(algorithm, n) creates n-dimensional optimizer\n- set_min/max_objective(): Set objective (func or vfunc)\n- set_lower/upper_bounds(): Variable bounds\n- add_inequality/equality_constraint(): Add constraints\n- set_ftol_rel/abs(), set_xtol_rel/abs(): Tolerances\n- optimize(x, opt_f): Run optimization, returns nlopt::result\n\n**Function Types:**\n- nlopt::func: C-style callback (same as nlopt_func)\n- nlopt::vfunc: C++ style with std::vector<double> args\n\n**Exception Types:**\n- nlopt::roundoff_limited: Roundoff prevented progress\n- nlopt::forced_stop: Optimization was force-stopped\n- std::bad_alloc, std::invalid_argument: Standard exceptions\n\n**Usage Example:**\n```cpp\nnlopt::opt opt(nlopt::LD_SLSQP, 2);\nopt.set_min_objective(myFunc, NULL);\nopt.set_lower_bounds(lb);\nstd::vector<double> x = {1.0, 1.0};\ndouble minf;\nnlopt::result res = opt.optimize(x, minf);\n```",
+      "has_algorithm": false
+    },
+    {
+      "name": "nlopt",
+      "brief": "NLopt (Nonlinear Optimization) C API - bundled with oBB\n\nNLopt is a library for nonlinear optimization providing a common\ninterface to many algorithms. This is a subset bundled with oBB.\n\n**nlopt_algorithm Enum (in this subset):**\n- NLOPT_LD_SLSQP: Sequential Least Squares Programming (local, derivative)\n\n**nlopt_result Enum:**\n- NLOPT_SUCCESS: Generic success\n- NLOPT_STOPVAL_REACHED, FTOL_REACHED, XTOL_REACHED: Convergence\n- NLOPT_MAXEVAL_REACHED, MAXTIME_REACHED: Limits hit\n- NLOPT_FAILURE, INVALID_ARGS, OUT_OF_MEMORY: Errors\n\n**Object-Oriented API:**\n- nlopt_create(algorithm, n): Create optimizer for n dimensions\n- nlopt_set_min/max_objective(): Set objective function\n- nlopt_set_lower/upper_bounds(): Set variable bounds\n- nlopt_add_inequality/equality_constraint(): Add constraints\n- nlopt_set_ftol_rel/abs(), xtol_rel/abs(): Set tolerances\n- nlopt_optimize(opt, x, &f): Run optimization\n- nlopt_destroy(opt): Clean up\n\n**Function Types:**\n- nlopt_func: double f(n, x, grad, data) - objective/constraint\n- nlopt_mfunc: void f(m, result, n, x, grad, data) - vector constraint",
+      "has_algorithm": false
+    },
+    {
+      "name": "nlopt-internal",
+      "brief": "NLopt internal optimizer structure - bundled with oBB\n\nInternal header defining the nlopt_opt_s structure (opaque nlopt_opt).\nNot part of public API - used by algorithm implementations.\n\n**struct nlopt_opt_s (nlopt_opt):**\nComplete optimizer state:\n- algorithm, n: Algorithm type and dimension (immutable)\n- f, f_data: Objective function and user data\n- pre: Optional preconditioner\n- maximize: Nonzero if maximizing\n- lb, ub: Variable bounds (length n)\n- m, fc: Inequality constraints (m constraints)\n- p, h: Equality constraints (p constraints)\n- Stopping criteria: stopval, ftol_rel, ftol_abs, xtol_rel, xtol_abs, maxeval, maxtime\n- force_stop: External stop flag\n- local_opt: Nested local optimizer (for hybrid algorithms)\n- dx: Initial step sizes for derivative-free algorithms\n- work: Algorithm-specific workspace\n- errmsg: Error message buffer\n\n**Global Defaults (deprecated):**\n- nlopt_local_search_alg_deriv/nonderiv\n- nlopt_local_search_maxeval\n- nlopt_stochastic_population",
+      "has_algorithm": false
+    },
+    {
+      "name": "nlopt-util",
+      "brief": "NLopt utility functions and stopping criteria - bundled with oBB\n\nInternal utilities for NLopt algorithms including floating-point\nhelpers, timing, stopping criteria, and constraint handling.\n\n**Floating-Point Helpers:**\n- nlopt_isinf(), nlopt_isfinite(), nlopt_istiny(), nlopt_isnan()\n\n**Timing:**\n- nlopt_seconds(): Current time in seconds\n- nlopt_time_seed(): Seed based on current time\n\n**nlopt_stopping Struct:**\nStopping criteria state:\n- n: Problem dimension\n- minf_max: Stop if f <= minf_max\n- ftol_rel, ftol_abs: Function tolerance (relative/absolute)\n- xtol_rel, xtol_abs: Variable tolerance\n- nevals, maxeval: Evaluation count/limit\n- maxtime, start: Time limit and start time\n- force_stop: External stop signal\n\n**Stopping Tests:**\n- nlopt_stop_f(): Check function value convergence\n- nlopt_stop_x(), nlopt_stop_dx(): Check variable convergence\n- nlopt_stop_evals(), nlopt_stop_time(): Check limits\n\n**nlopt_constraint Struct:**\nConstraint representation (f <= 0 or f = 0):\n- m: Constraint dimension\n- f/mf: Scalar or vector constraint function\n- tol: Feasibility tolerance",
+      "has_algorithm": false
+    },
+    {
+      "name": "slsqp",
+      "brief": "SLSQP (Sequential Least Squares Programming) algorithm - bundled with oBB\n\nSLSQP is a gradient-based algorithm for constrained nonlinear optimization\nusing sequential quadratic programming with BFGS updates.\n\n**Algorithm (Kraft, 1988):**\n1. Solve QP subproblem: min (1/2)d'Bd + g'd s.t. linearized constraints\n2. Line search along direction d\n3. Update Hessian approximation B using BFGS\n4. Repeat until convergence\n\n**nlopt_slsqp() Parameters:**\n- n: Number of variables\n- f, f_data: Objective function (with gradient)\n- m, fc: Inequality constraints (m constraints, c(x) <= 0)\n- p, h: Equality constraints (p constraints, h(x) = 0)\n- lb, ub: Variable bounds\n- x: Initial point (modified in place)\n- minf: Output - optimal objective value\n- stop: Stopping criteria (nlopt_stopping struct)\n\n**Characteristics:**\n- Local, derivative-based optimization\n- Handles nonlinear equality and inequality constraints\n- Efficient for smooth, medium-scale problems\n- Used by oBB for local refinement in global optimization",
+      "has_algorithm": false
+    }
+  ]
+}

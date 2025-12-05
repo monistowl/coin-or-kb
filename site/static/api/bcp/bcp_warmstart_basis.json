@@ -1,0 +1,20 @@
+{
+  "name": "BCP_warmstart_basis",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_warmstart_basis.hpp",
+  "brief": "BCP warm start basis implementation",
+  "algorithms": [
+    {
+      "name": "Simplex Basis Warm Start: 2-Bit Status Encoding\n\nBCP_warmstart_basis stores LP basis information (basic/on_upper/on_lower)\nusing 2 bits per variable/cut for compact storage.\n\n**Storage:**\n- _var_stat: BCP_vec_change<char> for variable statuses\n- _cut_stat: BCP_vec_change<char> for cut statuses\n\n**Features:**\n- convert_to_CoinWarmStart(): Creates CoinWarmStartBasis for OSI\n- as_change(): Compute delta from previous basis\n- Supports Explicit and WrtParent storage modes",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_warmstart.hpp for base class",
+    "CoinWarmStartBasis for OSI compatibility"
+  ]
+}

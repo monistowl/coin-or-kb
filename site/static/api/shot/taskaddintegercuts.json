@@ -1,0 +1,22 @@
+{
+  "name": "TaskAddIntegerCuts",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskAddIntegerCuts.h",
+  "brief": "Add integer cuts to exclude visited solutions\n\nPrevents revisiting same integer assignment.\n\n**TaskAddIntegerCuts Class:**\n- run(): Generate cut excluding current integer solution\n\n**Integer Cut Types:**\n- No-good cuts: Exclude exact binary assignment\n- Local branching: Limit Hamming distance\n\n**Usage:**\n- Multi-tree strategy uses these extensively\n- Prevents cycling through same MIP solutions",
+  "algorithms": [
+    {
+      "name": "No-Good Cuts (Integer Exclusion)",
+      "math": "Given binary solution x\u0304, add cut:\n      \u03a3_{j: x\u0304_j=1} (1-x_j) + \u03a3_{j: x\u0304_j=0} x_j \u2265 1\n      Requires Hamming distance \u2265 1 from x\u0304. Excludes exactly this solution.",
+      "complexity": "O(|binary variables|) per cut generation.",
+      "ref": [
+        "Balas & Jeroslow (1972). \"Canonical cuts on the unit hypercube\"."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DualSolver.h for cut addition",
+    "SolutionStrategy/ for multi-tree workflow"
+  ]
+}

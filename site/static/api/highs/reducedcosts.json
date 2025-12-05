@@ -1,0 +1,9 @@
+{
+  "name": "reducedcosts",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/reducedcosts.hpp",
+  "brief": "HiGHS QP reduced costs\n\nReduced cost computation for QP active set algorithm.\nManages gradient projection onto feasible directions.",
+  "algorithms": [],
+  "methods": []
+}

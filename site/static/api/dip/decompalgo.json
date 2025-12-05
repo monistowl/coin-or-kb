@@ -1,0 +1,27 @@
+{
+  "name": "DecompAlgo",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompAlgo.h",
+  "brief": "Base class for all DIP decomposition algorithms\n\nDecompAlgo is the algorithmic engine that orchestrates:\n- Master problem management (LP relaxation)\n- Subproblem solving (pricing/column generation)\n- Cut generation and management\n- Phase transitions and convergence\n\n**Key Data Members:**\n- m_masterSI: Master LP solver interface\n- m_app: Pointer to user's DecompApp\n- m_modelCore/m_modelRelax: Problem decomposition\n- m_vars/m_cuts: Generated columns and cuts\n- m_xhat: Current LP solution in original x-space\n\n**Algorithm Phases:**\n- PHASE_PRICE1: Feasibility with artificial variables\n- PHASE_PRICE2: Optimizing with generated columns\n- PHASE_CUT: Adding violated inequalities\n\n**Virtual Methods for Subclasses:**\n- createMasterProblem(): Build initial restricted master\n- processNode(): Main node processing loop\n- generateVars(): Column generation (pricing)\n- generateCuts(): Cut separation\n- getMasterDualSolution(): Dual values for pricing\n\n**Derived Classes:**\n- DecompAlgoPC: Price-and-Cut (Dantzig-Wolfe)\n- DecompAlgoC: Cutting plane only\n- DecompAlgoRC: Relax-and-Cut (Lagrangian)",
+  "algorithms": [
+    {
+      "name": "Price-and-Cut Hybrid (generateVars + generateCuts):\n  Interleave column generation and cut separation:\n  while (improving):\n    1. generateVars(): Solve pricing, add columns\n    2. generateCuts(): Separate cuts on current x\u0302\n    3. Update master LP, reoptimize\n  Cuts added to master affect dual space and pricing.",
+      "math": "L(u) = u'b + min_x {(c - A'u)'x : x \u2208 X}\n  Solve Lagrangian dual: max_u L(u) via subgradient or bundle methods.\n  - Subgradient: u^{t+1} = u^t + step * (b - Ax^t)\n  - L(u) provides lower bound; project x to get upper bound.",
+      "complexity": "Column generation: O(#iterations \u00d7 pricing_cost)\n  Pricing cost depends on subproblem structure (often NP-hard but small)\n  Master LP: O(m \u00d7 n \u00d7 simplex_iterations) where n grows with columns",
+      "ref": [
+        "Dantzig, G.B. and Wolfe, P. (1960). \"Decomposition principle for\n       linear programs\". Operations Research 8(1):101-111.",
+        "Barnhart, C. et al. (1998). \"Branch-and-price: Column generation\n       for solving huge integer programs\". Operations Research 46(3).",
+        "Held, M. and Karp, R.M. (1971). \"The traveling-salesman problem\n       and minimum spanning trees: Part II\". Math Programming 1(1):6-25.",
+        "Desaulniers, G. et al. (2005). \"Column Generation\". Springer."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DecompAlgoPC.h for Dantzig-Wolfe implementation",
+    "DecompAlgoC.h for cutting plane method",
+    "DecompAlgoRC.h for Lagrangian relaxation",
+    "DecompApp.h for user model definition"
+  ]
+}

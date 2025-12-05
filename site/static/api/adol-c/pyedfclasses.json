@@ -1,0 +1,9 @@
+{
+  "name": "pyedfclasses",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/swig/pyedfclasses.hpp",
+  "brief": "Python wrapper classes for external differentiated functions",
+  "algorithms": [],
+  "methods": []
+}

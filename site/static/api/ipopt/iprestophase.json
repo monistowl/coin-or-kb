@@ -1,0 +1,23 @@
+{
+  "name": "IpRestoPhase",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpRestoPhase.hpp",
+  "brief": "Strategy interface for restoration phase fallback\n\nRestorationPhase is the abstract base for the fallback mechanism\nwhen the line search cannot make progress. The restoration phase\nminimizes constraint violation to find a feasible point.\n\nTriggered when:\n- Line search step size becomes too small\n- No search direction can be computed (singular KKT system)\n- Algorithm explicitly requests fallback (ActivateFallbackMechanism)\n\nExceptions thrown on restoration failure:\n- RESTORATION_CONVERGED_TO_FEASIBLE_POINT: Success, found feasible point\n- RESTORATION_FAILED: Could not reduce infeasibility\n- RESTORATION_MAXITER_EXCEEDED: Hit iteration limit\n- RESTORATION_USER_STOP: User callback requested stop\n\nMain implementation: RestoIterationOutput minimizes ||c(x)||^2 + ||d(x)-s||^2\nusing the interior point method on a modified feasibility problem.",
+  "algorithms": [
+    {
+      "name": "Restoration Phase (Feasibility Recovery):\nWhen line search fails to find acceptable step, switch to minimizing\nconstraint violation using a modified interior point subproblem:\n1. Detect line search failure (step too small or filter blocking)\n2. Formulate feasibility problem: min \u03a3(p+n) s.t. c(x) = p-n, p,n \u2265 0\n3. Solve using nested Ipopt with modified NLP (RestoIpoptNLP)\n4. Return to original problem when feasible point found",
+      "math": "Restoration problem formulation:\n  min_{x,p,n} \u03c1\u00b7(\u03a3p_i + \u03a3n_i) + \u03b6\u00b7||x - x_R||\u00b2\n  s.t. c(x) - p + n = 0,  p \u2265 0, n \u2265 0\nwhere x_R is reference point, \u03c1 penalizes infeasibility,\n\u03b6 prevents wandering far from current iterate.\n\nFor inequality-constrained problems:\n  min \u03a3(p+n) s.t. c(x) = p-n, d_L \u2264 d(x) \u2264 d_U",
+      "complexity": "Same as main Ipopt: O(n\u00b3) per iteration for linear algebra.\nMay require many iterations to find feasible point. Worst case: problem\nis infeasible and restoration certifies infeasibility.",
+      "ref": [
+        "W\u00e4chter & Biegler (2006). \"On the implementation of an interior-point\n  filter line-search algorithm for large-scale nonlinear programming\".\n  Mathematical Programming 106(1):25-57. [Section 3.3: Restoration phase]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpRestoMinC_1Nrm.hpp for the main implementation",
+    "IpRestoIpoptNLP.hpp for restoration phase NLP formulation",
+    "IpBacktrackingLineSearch.hpp for restoration phase trigger"
+  ]
+}

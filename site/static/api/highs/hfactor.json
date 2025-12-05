@@ -1,0 +1,9 @@
+{
+  "name": "HFactor",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HFactor.h",
+  "brief": "Basis matrix factorization, update and solves for HiGHS",
+  "algorithms": [],
+  "methods": []
+}

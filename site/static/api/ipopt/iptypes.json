@@ -1,0 +1,13 @@
+{
+  "name": "IpTypes",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpTypes.hpp",
+  "brief": "Fundamental type definitions for Ipopt (C++ namespace wrapper)\n\nWraps the C type definitions from IpTypes.h in the Ipopt namespace:\n- Number (ipnumber): floating-point type for all numerical values\n- Index (ipindex): integer type for array indices and dimensions\n\nActual types depend on compile-time configuration (IPOPT_SINGLE,\nIPOPT_INT64). Default is double for Number and int for Index.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpTypes.h for underlying C definitions",
+    "IpoptConfig.h for configuration macros"
+  ]
+}

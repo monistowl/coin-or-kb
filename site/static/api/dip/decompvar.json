@@ -1,0 +1,20 @@
+{
+  "name": "DecompVar",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompVar.h",
+  "brief": "Column generation variable (lambda) representation\n\nDecompVar represents a column in the Dantzig-Wolfe reformulation.\nEach lambda_s corresponds to an extreme point s of a subproblem\npolyhedron: conv{x : A'x >= b', x integer}.",
+  "algorithms": [
+    {
+      "name": "Column Effectiveness Counter:\nTrack column usefulness for pool management.\n\n  m_effCnt > 0: Column in basis (positive = good)\n  m_effCnt < 0: Column out of basis (negative = candidate for removal)\n  increaseEffCnt(): When column enters basis\n  decreaseEffCnt(): When column leaves basis\n\nLow effectiveness columns may be removed to control master size.",
+      "math": "Let (\u03c0, \u03bc_k) be duals of (linking rows, convexity row k):\n  r\u0304(s) = c's - \u03c0'(A''s) - \u03bc_k\n       = (c - A''^T \u03c0)'s - \u03bc_k\n\nPRICING ORACLE:\n  For block k: min_{s \u2208 P_k} (c - A''^T \u03c0)'s\n  Add column if optimal value - \u03bc_k < 0\n\nECONOMIC INTERPRETATION:\n  c's = original cost contribution\n  \u03c0'(A''s) = \"payment\" from linking constraint duals\n  \u03bc_k = threshold (convexity dual, one per block)\n  Column profitable if cost < payment + threshold",
+      "complexity": "fillDenseArr: O(nnz(s))\n  isDuplicate: O(vars.size()) hash comparisons\n  calcNorm: O(nnz(s))",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DecompVarPool.h for column pool management",
+    "DecompAlgoPC.h for pricing/column generation"
+  ]
+}

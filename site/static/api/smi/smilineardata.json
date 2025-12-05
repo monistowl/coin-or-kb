@@ -1,0 +1,14 @@
+{
+  "name": "SmiLinearData",
+  "library": "Smi",
+  "layer": "layer-3",
+  "header": "Smi/src/SmiLinearData.hpp",
+  "brief": "Container for linear programming data (matrix + bounds + objective)\n\nSmiLinearData bundles all LP data needed to define a linear subproblem\nor modification in stochastic programming.\n\n**Data Members:**\n- matrix_: Constraint matrix (CoinPackedMatrix)\n- dclo_, dcup_: Column (variable) bounds\n- drlo_, drup_: Row (constraint) bounds\n- dobj_: Objective coefficients\n\n**Constructors:**\n- Default: Empty data\n- Copy: From another SmiLinearData\n- From components: matrix + 5 sparse vectors\n- From OSI: Extract from OsiSolverInterface\n\n**Accessors:**\n- getMatrix(), getColLower(), etc.: Const references\n- getMutableMatrix(), etc.: Non-const for modification\n\n**Usage:**\nUsed as base class for SmiDiscreteEvent and as a data container\nfor passing LP modifications around the Smi system.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SmiDiscreteDistribution.hpp::SmiDiscreteEvent for subclass",
+    "SmiScnData.hpp::SmiNodeData for related node storage",
+    "CoinPackedVector, CoinPackedMatrix (CoinUtils) for sparse data"
+  ]
+}

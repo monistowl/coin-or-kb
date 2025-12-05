@@ -1,0 +1,20 @@
+{
+  "name": "IpInexactDoglegNormal",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/Inexact/IpInexactDoglegNormal.hpp",
+  "brief": "Dogleg trust region method for normal step computation\n\nInexactDoglegNormalStep computes the normal step using a dogleg\napproach that combines steepest descent and Newton directions\nwithin a trust region.",
+  "algorithms": [
+    {
+      "name": "Dogleg Normal Step:\n  ComputeNormalStep():\n  1. Compute Cauchy point: x_c = x - \u03b1_c\u00b7A^T\u00b7c (steepest descent).\n     \u03b1_c = ||A^T\u00b7c||\u00b2 / ||A\u00b7A^T\u00b7c||\u00b2 (optimal step along gradient).\n  2. Compute Newton point: x_n via InexactNewtonNormalStep.\n  3. If ||x_c - x|| \u2265 \u03c9 (trust region): return scaled Cauchy step.\n  4. If ||x_n - x|| \u2264 \u03c9: return Newton step (inside trust region).\n  5. Else: interpolate on dogleg path between Cauchy and Newton.\n     x = x_c + \u03c4\u00b7(x_n - x_c) where \u03c4 chosen so ||x - x\u2080|| = \u03c9.",
+      "math": "Dogleg path geometry:\n  Dogleg: piecewise linear path from 0 \u2192 Cauchy \u2192 Newton.\n  Trust region: ||\u0394x|| \u2264 \u03c9 (current trust radius).\n  \u03c9 updated based on ratio: \u03c1 = actual_reduction / predicted_reduction.\n  If \u03c1 high \u2192 expand \u03c9; if \u03c1 low \u2192 contract \u03c9.",
+      "complexity": "Cauchy point: O(nnz) for A^T\u00b7c and A\u00b7(A^T\u00b7c).\n  Newton point: O(nnz\u00b7k) for iterative solve.\n  Interpolation: O(n) for linear combination.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpInexactNewtonNormal.hpp for Newton step computation",
+    "IpInexactNormalStepCalc.hpp for base normal step interface"
+  ]
+}

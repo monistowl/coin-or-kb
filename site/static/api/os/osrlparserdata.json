@@ -1,0 +1,9 @@
+{
+  "name": "OSrLParserData",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSParsers/OSrLParserData.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,19 @@
+{
+  "name": "BCP_enum_tm",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_enum_tm.hpp",
+  "brief": "Tree Manager enumerations for BCP",
+  "algorithms": [
+    {
+      "name": "TM Enums: Search Strategy and Node Dispatch\n\n**BCP_tree_search_method:**\nSearch order for tree exploration:\n- BestFirstSearch: Best bound first (minimize gap)\n- BreadthFirstSearch: Level-by-level\n- DepthFirstSearch: Dive to leaves (finds solutions fast)\n- PreferredFirstSearch: User-defined comparison\n\n**BCP_node_start_result:**\nOutcome of attempting to dispatch a node:\n- NoNode: No nodes available\n- Error: Dispatch failed\n- OK: Node successfully sent to LP",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm.hpp for Tree Manager"
+  ]
+}

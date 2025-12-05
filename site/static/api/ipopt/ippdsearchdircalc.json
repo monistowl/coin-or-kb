@@ -1,0 +1,21 @@
+{
+  "name": "IpPDSearchDirCalc",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpPDSearchDirCalc.hpp",
+  "brief": "Newton search direction computation via primal-dual system\n\nPDSearchDirCalculator is the standard SearchDirectionCalculator\nimplementation that computes the Newton step by solving the\nprimal-dual KKT system.",
+  "algorithms": [
+    {
+      "name": "Primal-Dual Newton Direction:\n  ComputeSearchDirection():\n  1. Assemble RHS from current residuals: r = (r_x, r_s, r_c, r_d, r_zL, ...).\n  2. Call PDSystemSolver::Solve(KKT, rhs) \u2192 delta.\n  3. Store result: IpData::delta() = (\u0394x, \u0394s, \u0394y_c, \u0394y_d, \u0394z_L, ...).\n  4. If mehrotra_algorithm_: Use predictor-corrector centering.\n  5. If fast_step_computation_: Skip residual verification.",
+      "math": "KKT system solved:\n  [W + \u03a3,  0, J_c^T, J_d^T] [\u0394x  ]   [r_x]\n  [  0,    \u03a3_s,  0,   -I  ] [\u0394s  ] = [r_s]\n  [ J_c,   0,    0,    0  ] [\u0394y_c]   [r_c]\n  [ J_d,  -I,    0,    0  ] [\u0394y_d]   [r_d]\n  Where \u03a3, \u03a3_s are barrier/bound terms.\n\nComputeSearchDirection():\n1. Assembles right-hand side from current residuals\n2. Calls PDSystemSolver::Solve() to get direction\n3. Stores result in IpData::delta()\n\nAlgorithm options:\n- fast_step_computation_: Skip residual verification (trust solver)\n- mehrotra_algorithm_: Mehrotra predictor-corrector mode\n  - Forces specific settings for adaptive mu\n  - Disables various globalization features\n\nThe PDSolver() accessor allows other components (e.g., second-order\ncorrection in line search) to compute additional Newton solves.\n\nDirection stored in delta:\n- delta_x, delta_s: Primal steps\n- delta_y_c, delta_y_d: Equality multiplier steps\n- delta_z_L, delta_z_U, delta_v_L, delta_v_U: Bound multiplier steps",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpSearchDirCalculator.hpp for base interface",
+    "IpPDSystemSolver.hpp for the system solver interface",
+    "IpPDFullSpaceSolver.hpp for full-space implementation"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "CoinAbcHelperFunctions",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/CoinAbcHelperFunctions.hpp",
+  "brief": "SIMD-optimized scatter/gather operations for ABC factorization\n\nHigh-performance kernels for sparse matrix operations using:\n- Manual loop unrolling (UNROLL_SCATTER, UNROLL_GATHER)\n- AVX/AVX2 intrinsics when available\n- Cilk parallel loops with configurable grainsize\n- Prefetching hints (coin_prefetch macros)\n\nKey operations:\n- CoinAbcScatterUpdate: region[index[j]] -= value[j] * pivot\n- CoinAbcGatherUpdate: dot product over sparse indices\n- Memory utilities: CoinAbcMemcpyLong, CoinAbcMemset0Long\n\nIncludes specialized ScatterUpdateN functions for N=1..8 and 4N variants\nusing function pointer dispatch (scatterStruct) for optimal performance.",
+  "algorithms": [
+    {
+      "name": "Function Pointer Dispatch (scatterStruct):\n  Precomputed table of specialized ScatterUpdate{1..8,4N} functions\n  avoids branch misprediction in small-column cases.",
+      "math": "",
+      "complexity": "O(nnz) per scatter/gather operation\n  With SIMD: ~4x speedup on vectorizable sections\n  With Cilk: ~Kx speedup on K cores for large columns",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinAbcFactorization which uses these kernels",
+    "AbcSimplex which uses these for FTRAN/BTRAN"
+  ]
+}

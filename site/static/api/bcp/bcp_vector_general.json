@@ -1,0 +1,20 @@
+{
+  "name": "BCP_vector_general",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_vector_general.hpp",
+  "brief": "Generic BCP_vec<T> method implementations",
+  "algorithms": [
+    {
+      "name": "Generic Vector: Template Methods for Non-POD Types\n\nDefault implementations of BCP_vec<T> methods using explicit\nconstruct/destroy via placement new and destructor calls.\n\n**Core operations:**\n- construct(): Placement new for default or copy construction\n- destroy(): Explicit destructor call\n- destroy_range(): Destructor calls in reverse order\n- allocate/deallocate(): Raw memory management via operator new/delete\n- insert_aux(): Growth with 2x+256 expansion strategy\n\nSpecialized versions exist for POD types (int, double, etc.) that\nskip construct/destroy overhead and use memcpy/memset.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_vector.hpp for class declaration",
+    "BCP_vector_double.hpp for double specialization"
+  ]
+}

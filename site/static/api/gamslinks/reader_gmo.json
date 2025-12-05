@@ -1,0 +1,9 @@
+{
+  "name": "reader_gmo",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/scip/reader_gmo.h",
+  "brief": "GMO file reader",
+  "algorithms": [],
+  "methods": []
+}

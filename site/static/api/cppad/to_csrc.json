@@ -1,0 +1,9 @@
+{
+  "name": "to_csrc",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/to_csrc.hpp",
+  "brief": "Core AD functionality: to csrc",
+  "algorithms": [],
+  "methods": []
+}

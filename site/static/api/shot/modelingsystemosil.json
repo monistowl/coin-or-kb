@@ -1,0 +1,12 @@
+{
+  "name": "ModelingSystemOSiL",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/ModelingSystem/ModelingSystemOSiL.h",
+  "brief": "OSiL XML format reader for optimization problems\n\nReads Optimization Services instance Language (OSiL) files.\n\n**ModelingSystemOSiL Class:**\n- createProblem(): Parse OSiL XML into Problem\n- augmentSettings(): Add OSiL-specific options\n- finalizeSolution(): Write OSrL result format\n\n**OSiL Format:**\n- XML-based optimization instance representation\n- <instanceData> contains variables, objectives, constraints\n- <nonlinearExpressions> for NLP terms (OSnL format)\n\n**XML Parsing:**\n- Uses tinyxml2 for XML processing\n- convertNonlinearNode(): OSnL to SHOT expression conversion\n\n@note OSiL is part of COIN-OR Optimization Services",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ModelingSystemOS.h for OS library integration"
+  ]
+}

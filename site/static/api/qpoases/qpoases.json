@@ -1,0 +1,22 @@
+{
+  "name": "qpOASES",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES.hpp",
+  "brief": "Main include file for qpOASES quadratic programming solver\n\nqpOASES solves convex quadratic programs (QPs) of the form:",
+  "algorithms": [
+    {
+      "name": "Online Active Set Strategy - works well for model\n           predictive control (MPC) where QPs are solved in sequence",
+      "math": "lbx <= x <= ubx    (bounds)\n\nKey features:\n- Online active set strategy (efficient for parametric QPs)\n- Hot-starting from previous solutions\n- Handles dense and sparse problems\n- Real-time capable (bounded iteration counts)\n\nMain classes:\n- QProblemB: QP with only box constraints (no A matrix)\n- QProblem: Full QP with linear constraints\n- SQProblem: Sequential QP with varying Hessian",
+      "complexity": "",
+      "ref": [
+        "Ferreau et al. (2014). \"qpOASES: A parametric active-set algorithm\n     for quadratic programming\". Math. Prog. Comp. 6(4):327-363."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "QProblem for general QP solving",
+    "QProblemB for box-constrained QPs (faster)"
+  ]
+}

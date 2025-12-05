@@ -1,0 +1,9 @@
+{
+  "name": "md_utils",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/routing/utilities/md_utils.hpp",
+  "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+  "algorithms": [],
+  "methods": []
+}

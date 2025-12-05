@@ -1,0 +1,22 @@
+{
+  "name": "BonPseudoCosts",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/Branching/BonPseudoCosts.hpp",
+  "brief": "Pseudo-cost storage and update for MINLP branching\n\nExtends OsiPseudoCosts to track branching history for integer variables.\nPseudo-costs estimate the objective change per unit change in a variable,\nenabling efficient branching decisions without expensive strong branching.",
+  "algorithms": [
+    {
+      "name": "Pseudo-Cost Branching:\nLearn branching quality from history to avoid repeated strong branching:\n1. Initialize: \u03c8\u207a\u1d62 = \u03c8\u207b\u1d62 = default_cost (or from first strong branch)\n2. After branching on x\u1d62 with fractional part f\u1d62:\n   - Up branch (x\u1d62 \u2265 \u2308x\u1d62\u2309): record \u0394obj\u207a, update \u03c8\u207a\u1d62\n   - Down branch (x\u1d62 \u2264 \u230ax\u1d62\u230b): record \u0394obj\u207b, update \u03c8\u207b\u1d62\n3. Update formula:\n   \u03c8\u207a\u1d62 = (\u03a3 \u0394obj\u207a) / count(up branches)\n   \u03c8\u207b\u1d62 = (\u03a3 \u0394obj\u207b) / count(down branches)\n4. Score variable: score(i) = w\u00b7min(\u03c8\u207a\u1d62\u00b7(1-f\u1d62), \u03c8\u207b\u1d62\u00b7f\u1d62)\n                             + (1-w)\u00b7max(\u03c8\u207a\u1d62\u00b7(1-f\u1d62), \u03c8\u207b\u1d62\u00b7f\u1d62)",
+      "math": "Pseudo-cost per unit change:\n  \u03c8\u207a\u1d62 \u2248 E[\u0394obj | branch up on x\u1d62] / (1 - f\u1d62)\n  \u03c8\u207b\u1d62 \u2248 E[\u0394obj | branch down on x\u1d62] / f\u1d62\nwhere f\u1d62 = x\u1d62 - \u230ax\u1d62\u230b is the fractional part.",
+      "complexity": "O(1) per variable selection (no solving needed).\nCompare to O(LP_solve) for strong branching per candidate.",
+      "ref": [
+        "Benichou et al. (1971). \"Experiments in mixed-integer linear programming\".\n  Mathematical Programming 1(1):76-94."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BonChooseVariable for usage in branching decisions",
+    "OsiPseudoCosts for the base class"
+  ]
+}

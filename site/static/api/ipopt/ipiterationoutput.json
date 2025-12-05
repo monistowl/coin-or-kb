@@ -1,0 +1,21 @@
+{
+  "name": "IpIterationOutput",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpIterationOutput.hpp",
+  "brief": "Strategy interface for per-iteration output display\n\nIterationOutput is the abstract base for strategies that produce\nthe iteration summary line and optional detailed output.\n\nStandard output line (from OrigIterationOutput):\n  iter  objective   inf_pr   inf_du   lg(mu)  ||d||  lg(rg) alpha_du alpha_pr ls\n\nInfPrOutput enum controls whether inf_pr shows internal (with slacks)\nor original NLP constraint violation.\n\nImplementations:\n- OrigIterationOutput: Standard one-line summary for original problem\n- RestoIterationOutput: Output during restoration phase\n\nOutput controlled by print_level option (0-12).",
+  "algorithms": [
+    {
+      "name": "Iteration Output Strategy (Observer Pattern):\nStrategy interface for algorithm progress reporting:\n- WriteOutput() called once per iteration after accept trial point\n- Displays convergence metrics: objective, primal/dual infeasibility\n- Can adapt output format for different problem phases (normal vs restoration)\n\nStandard output columns:\n- iter: iteration counter\n- objective: current f(x) value\n- inf_pr: primal constraint violation \u2016c(x)\u2016\n- inf_du: dual infeasibility \u2016\u2207L(x,\u03bb,z)\u2016\n- lg(mu): log\u2081\u2080 of barrier parameter\n- \u2016d\u2016: search direction norm\n- lg(rg): log\u2081\u2080 of regularization \u03b4_w\n- alpha_du, alpha_pr: step sizes for dual and primal\n- ls: line search iteration count",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpOrigIterationOutput.hpp for standard implementation",
+    "IpRestoIterationOutput.hpp for restoration phase",
+    "IpJournalist.hpp for output channel management"
+  ]
+}

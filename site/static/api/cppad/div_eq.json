@@ -1,0 +1,9 @@
+{
+  "name": "div_eq",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/div_eq.hpp",
+  "brief": "Core AD functionality: div eq",
+  "algorithms": [],
+  "methods": []
+}

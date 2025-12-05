@@ -1,0 +1,21 @@
+{
+  "name": "adtb_types",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adtb_types.h",
+  "brief": "Core AD types: adouble, pdouble, and tape_location\n\nDefines the fundamental types for tape-based automatic differentiation:\n\n- **adouble**: Active double that records operations on the tape.\n  Use for variables whose derivatives you want to compute.\n\n- **pdouble**: Parameter double for non-differentiable constants that\n  can be changed without re-taping. Use for parameters you want to\n  vary across multiple derivative evaluations.\n\n- **tape_location<T>**: RAII wrapper managing tape location allocation\n  and deallocation for adouble/pdouble.",
+  "algorithms": [
+    {
+      "name": "Operator Overloading for AD:\nADOL-C uses C++ operator overloading to transparently record operations:\n\nADOUBLE SEMANTICS:\nEach adouble a has:\n- Value: a.value() = current numerical value (for function evaluation)\n- Location: a.loc() = index on tape where derivatives are tracked\n\nWhen operations are performed on adoubles:\n1. Compute primal result normally (same as double arithmetic)\n2. Record operation to tape: {opcode, input_locs, output_loc, value}\n3. Return new adouble with result value and new tape location\n\nExample: c = a * b records:\n- opcode: mult_a_a (adouble * adouble)\n- inputs: a.loc(), b.loc()\n- output: c.loc() (newly allocated)\n- value: a.value() * b.value()\n\nPDOUBLE FOR PARAMETERS:\npdouble values are stored separately and can be changed between derivative\nevaluations without re-recording the tape. This enables efficient sensitivity\nanalysis with respect to parameters.",
+      "math": "Derivative propagation through operators:\nFor each operation c = \u03c6(a,b), the chain rule gives:\n- Forward: \u010b = (\u2202\u03c6/\u2202a)\u00b7\u0227 + (\u2202\u03c6/\u2202b)\u00b7\u1e03\n- Reverse: \u0101 += (\u2202\u03c6/\u2202a)\u00b7c\u0304, b\u0304 += (\u2202\u03c6/\u2202b)\u00b7c\u0304\n\nPartial derivatives for common operations:\n- Addition c = a + b: \u2202c/\u2202a = 1, \u2202c/\u2202b = 1\n- Multiplication c = a * b: \u2202c/\u2202a = b, \u2202c/\u2202b = a\n- sin(a): \u2202/\u2202a = cos(a)\n- exp(a): \u2202/\u2202a = exp(a)",
+      "complexity": "Each operation: O(1) time to record, O(1) space on tape.\nDerivative propagation: O(1) per operation in forward/reverse sweep.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "adolc.h for main include",
+    "interfaces.h for derivative computation functions",
+    "adtl.h for tape-less forward mode alternative"
+  ]
+}

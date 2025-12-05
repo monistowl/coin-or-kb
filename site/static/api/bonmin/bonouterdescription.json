@@ -1,0 +1,22 @@
+{
+  "name": "BonOuterDescription",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "experimental/Separable/BonOuterDescription.hpp",
+  "brief": "Bonmin outer approximation description for convex MINLP\n\nOuter approximation (OA) cut management for MINLP.\nLinearization-based approach for convex MINLP.",
+  "algorithms": [
+    {
+      "name": "Outer Approximation (OA) Cut Generation:\n  Linearizes nonlinear constraints at solution points:\n  1. Given NLP solution x*, for each nonlinear constraint g_i(x) \u2264 0:\n     Generate gradient cut: g_i(x*) + \u2207g_i(x*)\u1d40(x - x*) \u2264 0\n  2. For objective f(x): linearize as f(x*) + \u2207f(x*)\u1d40(x - x*) \u2264 \u03b8\n  3. Add cuts to MILP relaxation and resolve\n  4. Iterate until convergence (gap < tolerance)",
+      "math": "OA cut validity (convexity required):\n  For convex g_i: g_i(x) \u2265 g_i(x*) + \u2207g_i(x*)\u1d40(x - x*) for all x\n  Cut is valid: any x violating g_i(x) \u2264 0 also violates linearization.\n  Multiple linearization points \u2192 polyhedral outer approximation.",
+      "complexity": "O(m\u00b7n) per cut generation where m = constraints, n = variables.\n  Total iterations: typically O(log(1/\u03b5)) for \u03b5-optimal solution.",
+      "ref": [
+        "Duran & Grossmann (1986). \"An outer-approximation algorithm for a class\n     of mixed-integer nonlinear programs\". Math. Programming 36:307-339."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiTMINLPInterface for NLP interface",
+    "BonCutStrengthener for cut improvement"
+  ]
+}

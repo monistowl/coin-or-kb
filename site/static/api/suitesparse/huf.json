@@ -1,0 +1,9 @@
+{
+  "name": "huf",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/zstd/zstd_subset/common/huf.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

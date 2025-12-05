@@ -1,0 +1,12 @@
+{
+  "name": "CglParam",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglCommon/CglParam.hpp",
+  "brief": "Base parameter class for cut generator configuration",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglGMIParam, CglRedSplitParam for extended parameter classes"
+  ]
+}

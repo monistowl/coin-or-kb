@@ -1,0 +1,9 @@
+{
+  "name": "log_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/log_op.hpp",
+  "brief": "Internal implementation: log_op",
+  "algorithms": [],
+  "methods": []
+}

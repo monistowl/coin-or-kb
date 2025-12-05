@@ -1,0 +1,9 @@
+{
+  "name": "fun_check",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/fun_check.hpp",
+  "brief": "Core AD functionality: fun check",
+  "algorithms": [],
+  "methods": []
+}

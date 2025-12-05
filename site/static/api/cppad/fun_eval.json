@@ -1,0 +1,9 @@
+{
+  "name": "fun_eval",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/fun_eval.hpp",
+  "brief": "Core AD functionality: fun eval",
+  "algorithms": [],
+  "methods": []
+}

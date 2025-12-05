@@ -1,0 +1,13 @@
+{
+  "name": "BonAmplInterface",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/Ampl/BonAmplInterface.hpp",
+  "brief": "OsiSolverInterface for AMPL .nl file input\n\nExtends OsiTMINLPInterface to read problems from AMPL .nl files.\nProvides convenient entry point for AMPL-based modeling.\n\n**Usage:**\n@code\nAmplInterface solver;\nsolver.readAmplNlFile(argv, roptions, options, journalist);\n@endcode\n\n**Additional features:**\n- readNames(): Read variable/row names from .col/.row files\n- amplModel(): Access underlying AmplTMINLP",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AmplTMINLP for the TMINLP implementation",
+    "OsiTMINLPInterface for the base class"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "BCP_vector_double",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_vector_double.hpp",
+  "brief": "BCP_vec<double> specialization",
+  "algorithms": [
+    {
+      "name": "POD Vector Specialization: double\n\nTemplate specializations for BCP_vec<double> that skip\nconstruct/destroy overhead since double is a POD type.\n\n**Optimizations:**\n- destroy(): No-op (no destructor needed)\n- construct(): Direct assignment instead of placement new\n- Uses memcpy for bulk operations where applicable\n\nSame pattern applies to BCP_vector_int.hpp, BCP_vector_short.hpp, etc.\nfor all primitive types.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

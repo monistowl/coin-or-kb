@@ -1,0 +1,20 @@
+{
+  "name": "CbcCutModifier",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcCutModifier.hpp",
+  "brief": "Abstract base class for cut modification",
+  "algorithms": [
+    {
+      "name": "Cut Post-Processing Interface\nCopyright (C) 2003, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCutModifier: Allows post-processing of generated cuts.\nCalled after cut generation to strengthen, weaken, or remove cuts.\n\nmodify() return codes:\n- 0: Unchanged\n- 1: Strengthened (tightened)\n- 2: Weakened (loosened)\n- 3: Deleted (should be discarded)\n\nUse cases:\n- Strengthen cuts using problem-specific knowledge\n- Remove cuts that are too dense or weak\n- Apply numerical cleanup",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcCutGenerator for cut generation framework",
+    "CbcCutSubsetModifier for subset-specific modification\n\nEdwin 11/25/09 carved out of CbcCutGenerator"
+  ]
+}

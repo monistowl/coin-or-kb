@@ -1,0 +1,13 @@
+{
+  "name": "CoinShallowPackedVector",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinShallowPackedVector.hpp",
+  "brief": "Non-owning sparse vector reference (view into external storage)\n\nCoinShallowPackedVector provides read-only access to sparse vector data\nstored elsewhere. It maintains only pointers, not copies. Use when you\nneed a lightweight view into a row/column of a CoinPackedMatrix.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinPackedVectorBase for the interface",
+    "CoinPackedVector for an owning sparse vector"
+  ]
+}

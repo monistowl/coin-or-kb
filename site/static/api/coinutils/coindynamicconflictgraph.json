@@ -1,0 +1,18 @@
+{
+  "name": "CoinDynamicConflictGraph",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinDynamicConflictGraph.hpp",
+  "brief": "CoinConflictGraph implementation which supports modifications.",
+  "algorithms": [
+    {
+      "name": "Dynamic Conflict Graph for MIP\n\nCoinConflictGraph implementation which supports modifications.\nFor a static conflict graph implementation with faster queries\ncheck CoinStaticConflictGraph.\n\n**Conflict Detection:**\nTwo binary variables x_i and x_j conflict if they cannot both be 1.\nDetected from constraints like: a_i x_i + a_j x_j \u2264 b where\na_i + a_j > b (both coefficients exceed RHS).\n\n**Clique Detection:**\nGroups of mutually conflicting variables form cliques. Large cliques\nstored explicitly to save memory; small cliques expanded to edges.\n\n**Bound Tightening:**\nDuring construction, may discover tighter variable bounds from\nconstraint analysis. Access via updatedBounds().",
+      "math": "Conflict: x_i + x_j \u2264 1 implies x_i and x_j cannot both be 1",
+      "complexity": "Query O(degree) for adjacency lists",
+      "ref": [
+        "Atamt\u00fcrk, Nemhauser & Savelsbergh, \"Conflict graphs in solving\n     integer programming problems\", EJOR 121(1), 2000"
+      ]
+    }
+  ],
+  "methods": []
+}

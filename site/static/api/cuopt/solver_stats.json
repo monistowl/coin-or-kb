@@ -1,0 +1,9 @@
+{
+  "name": "solver_stats",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/include/cuopt/linear_programming/mip/solver_stats.hpp",
+  "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "OSiLReader",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSCommonInterfaces/OSiLReader.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

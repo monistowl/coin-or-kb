@@ -1,0 +1,19 @@
+{
+  "name": "MC_init",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/MaxCut/include/MC_init.hpp",
+  "brief": "Max-cut BCP initialization",
+  "algorithms": [
+    {
+      "name": "Max-Cut Init: Process Factory Methods\n\nUSER_initialize subclass for max-cut application.\nCreates MC_tm and MC_lp instances when BCP spawns processes.\n\n**Factory methods:**\n- tm_init(): Creates MC_tm, reads problem file\n- lp_init(): Creates MC_lp for node processing",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_USER.hpp for initialization interface"
+  ]
+}

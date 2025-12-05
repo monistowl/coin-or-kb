@@ -1,0 +1,18 @@
+{
+  "name": "CoinCliqueExtender",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinCliqueExtender.hpp",
+  "brief": "Clique extender",
+  "algorithms": [
+    {
+      "name": "Greedy Clique Extension for Cutting Planes\n\nClass responsible for extending cliques to strengthen cuts.\n\n**Why extend cliques:**\nLarger cliques give tighter cuts. A clique {v\u2081,...,v\u2096} yields\ncut \u03a3x\u1d62 \u2264 1. Extending to {v\u2081,...,v\u2096,v\u2096\u208a\u2081} strengthens the cut\nby adding another variable to the LHS.\n\n**Extension methods:**\n- 0: No extension\n- 1: Random selection from candidates\n- 2: Max degree (prefer high-degree nodes)\n- 3: Max modified degree (counts clique containment)\n- 4: Reduced cost (prefer low RC variables)\n- 5: Reduced cost + modified degree hybrid\n\n**Algorithm:**\n1. Build candidate set: nodes adjacent to all clique members\n2. Greedily select from candidates using chosen method\n3. Update candidate set after each addition\n4. Stop when no candidates remain",
+      "math": "",
+      "complexity": "O(k \u00d7 d) per extension where k = clique size, d = avg degree",
+      "ref": [
+        "Brito & Santos, \"Conflict-based cut separation for MIP\", 2020"
+      ]
+    }
+  ],
+  "methods": []
+}

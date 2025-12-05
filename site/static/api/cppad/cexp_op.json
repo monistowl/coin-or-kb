@@ -1,0 +1,9 @@
+{
+  "name": "cexp_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/cexp_op.hpp",
+  "brief": "Internal implementation: cexp_op",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "TaskAddHyperplanes",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskAddHyperplanes.h",
+  "brief": "Add generated hyperplanes to MIP relaxation\n\nTransfers cuts from hyperplane pool to MIP solver.\n\n**TaskAddHyperplanes Class:**\n- run(): Add pending hyperplanes to dual problem\n- itersWithoutAddedHPs: Track stagnation\n\n**Cut Management:**\n- Filters duplicate/dominated cuts\n- Respects cut limit per iteration\n- May trigger lazy vs pool constraint handling",
+  "algorithms": [
+    {
+      "name": "Hyperplane Pool Management",
+      "math": "Add linearizations \u03c0\u00b7x \u2264 \u03c0\u2080 to MIP relaxation.\n      Each cut derived from gradient: \u03c0 = \u2207g(x*), \u03c0\u2080 = \u2207g(x*)\u00b7x* - g(x*).\n      Filters dominated cuts and enforces per-iteration limits.",
+      "complexity": "O(cuts \u00d7 m) for dominance checking. Pool size bounded.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DualSolver.h for MIP constraint addition",
+    "TaskSelectHyperplanePointsESH.h for cut generation"
+  ]
+}

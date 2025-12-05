@@ -1,0 +1,20 @@
+{
+  "name": "interfaces",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/interfaces.h",
+  "brief": "Low-level forward and reverse mode interfaces for tape evaluation\n\nProvides the core differentiation routines that evaluate recorded tapes\nin forward mode (computing directional derivatives) and reverse mode\n(computing adjoints/gradients). These are the building blocks used by\nhigher-level drivers like gradient() and hessian().",
+  "algorithms": [
+    {
+      "name": "Forward and Reverse Mode Tape Evaluation:\n\nFORWARD MODE (propagate tangents \u1e8b \u2192 \u1e8f):\n- zos_forward(tag, m, n, x, y): Function value only, y = f(x)\n- fos_forward(tag, m, n, x, xdot, y, ydot): First derivative, \u1e8f = f'(x)\u00b7\u1e8b\n- hos_forward(tag, m, n, d, x, X, y, Y): Taylor to order d\n- fov_forward(tag, m, n, p, x, X, y, Y): p directions simultaneously\n- hov_forward(tag, m, n, d, p, x, X, y, Y): p Taylor series to order d\n\nREVERSE MODE (propagate adjoints \u0233 \u2192 x\u0304):\n- fos_reverse(tag, m, n, ybar, xbar): Gradient, x\u0304 = f'(x)\u1d40\u00b7\u0233\n- hos_reverse(tag, m, n, d, ybar, Z): Higher-order adjoints\n- hov_reverse(tag, m, n, d, q, U, Z, nz): q adjoints for d-order Taylor",
+      "math": "Key complexity insight:\nFor f: \u211d\u207f \u2192 \u211d (scalar output), one reverse sweep computes \u2207f \u2208 \u211d\u207f.\nCost: ~4\u00d7 forward evaluation, independent of n.\nThis is why reverse mode dominates in optimization (gradients are cheap).\n\nMode naming conventions:\n- zos: zero-order-scalar (function value only)\n- fos: first-order-scalar (single direction/adjoint)\n- hos: higher-order-scalar (Taylor series to order d)\n- fov: first-order-vector (p directions simultaneously)\n- hov: higher-order-vector (p Taylor series to order d)\n- wk: with keep (retain intermediates for subsequent reverse)\n- ti: Taylor input (provide input Taylor coefficients)",
+      "complexity": "Forward: O(d\u00b7p\u00b7ops) for d-order, p directions.\nReverse: O(d\u00b7q\u00b7ops) for d-order, q adjoints.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "drivers/drivers.h for easy-to-use wrapper functions",
+    "tape_interface.h for tape management (trace_on, trace_off)"
+  ]
+}

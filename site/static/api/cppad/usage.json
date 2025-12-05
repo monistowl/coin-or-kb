@@ -1,0 +1,9 @@
+{
+  "name": "usage",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/optimize/usage.hpp",
+  "brief": "Tape optimization: usage",
+  "algorithms": [],
+  "methods": []
+}

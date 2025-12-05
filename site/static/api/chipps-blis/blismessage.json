@@ -1,0 +1,13 @@
+{
+  "name": "BlisMessage",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisMessage.h",
+  "brief": "Log messages for BLIS MILP solver events\n\nDefines BLIS_Message enum for CoinMessageHandler logging.\nSimilar to CoinMessages but specialized for BLIS output.\n\n**Message types:**\n- BLIS_CUTOFF_INC: Cutoff improvement\n- BLIS_CUT_STAT_*: Cut generation statistics\n- BLIS_GAP_*: Optimality gap status\n- BLIS_HEUR_*: Heuristic events and statistics\n- BLIS_ROOT_*: Root node processing info",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMessageHandler for message output control",
+    "BlisParams for verbosity settings"
+  ]
+}

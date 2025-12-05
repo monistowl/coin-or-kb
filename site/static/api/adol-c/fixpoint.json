@@ -1,0 +1,9 @@
+{
+  "name": "fixpoint",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/fixpoint.h",
+  "brief": "Differentiation through fixed-point iterations\n\nEnables automatic differentiation of implicit functions defined as\nfixed points x* = G(x*, u), where u are parameters.\n\n**Problem:** Many numerical methods involve iterative solvers:\n- Newton's method: x_{k+1} = x_k - f(x_k)/f'(x_k)\n- Nonlinear system solvers\n- Implicit time integrators\n\n**Solution:** fp_iteration() differentiates through the converged result\nwithout differentiating through all iteration steps, using the implicit\nfunction theorem: dx",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Mongoose_Logger",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_Logger.hpp",
+  "brief": "Debug logging and performance timing utilities\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nLogger class provides runtime debug level control and tic/toc timing\nfor algorithm phases: Matching, Coarsening, Refinement, FM, QP, IO.\nLogError/Warn/Info/Test macros for conditional output. Timing tracks\ncumulative time per phase for profiling.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Mongoose_Debug.hpp for debug assertions and macros"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "cskip_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/cskip_op.hpp",
+  "brief": "Internal implementation: cskip_op",
+  "algorithms": [],
+  "methods": []
+}

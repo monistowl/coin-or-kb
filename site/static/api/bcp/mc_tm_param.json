@@ -1,0 +1,16 @@
+{
+  "name": "MC_tm_param",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/MaxCut/include/MC_tm_param.hpp",
+  "brief": "Max-cut TM parameters",
+  "algorithms": [
+    {
+      "name": "Max-Cut TM Params: Input/Output Configuration\n\nMC_tm_par defines parameters for max-cut Tree Manager:\n\n- DisplaySolutionSignature: Show partition signs in output\n- DigitsToLose: Numerical precision control\n- InputFile: Problem instance file\n- FeasSolFile: Initial solution file\n- SolutionFile: Output solution file",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

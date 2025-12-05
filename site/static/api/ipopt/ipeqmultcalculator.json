@@ -1,0 +1,21 @@
+{
+  "name": "IpEqMultCalculator",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpEqMultCalculator.hpp",
+  "brief": "Strategy interface for computing equality constraint multipliers\n\nEqMultiplierCalculator is the abstract base for computing estimates\nof the equality constraint multipliers y_c and y_d. These estimates\nare used for:",
+  "algorithms": [
+    {
+      "name": "Multiplier Estimation Interface:\n  CalculateMultipliers(y_c, y_d):\n  1. Compute multiplier estimates satisfying dual feasibility.\n  2. Implementations: LeastSquareMultipliers solves:\n     min ||y||\u00b2 s.t. J^T\u00b7y = -\u2207f (dual feasibility).\n  3. Used for: initialization, recalc_y option, feasibility problems.\n  4. Return false if singular (e.g., rank-deficient Jacobian).",
+      "math": "Least-squares multipliers:\n  Solve: [W, J^T; J, 0] [d; y] = [-\u2207f; 0] with W=0 (simplified).\n  Gives: y = -(J\u00b7J^T)^{-1}\u00b7J\u00b7\u2207f (minimum norm dual estimate).\n- Initial multiplier estimation in DefaultIterateInitializer\n- Multiplier recalculation when recalc_y option is set\n- Computing multipliers for feasibility problems\n\nImplementations:\n- LeastSquareMultipliers: Solves min ||y||^2 s.t. KKT conditions\n  (requires solving augmented system)",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpLeastSquareMults.hpp for the main implementation",
+    "IpDefaultIterateInitializer.hpp for usage in initialization",
+    "IpIpoptAlg.hpp for recalc_y usage"
+  ]
+}

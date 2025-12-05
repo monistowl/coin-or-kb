@@ -1,0 +1,13 @@
+{
+  "name": "BonQuadRow",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/QuadCuts/BonQuadRow.hpp",
+  "brief": "Quadratic row storage for NLP solver interface\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nQuadRow: Stores quadratic constraint l < c + ax + x'Qx < u with\nefficient gradient and Hessian evaluation. Provides methods for\nNLP solver interface: eval_f, eval_grad, eval_hessian.\n\nCan be initialized from QuadCut or linear OsiRowCut.\n\nAuthors: Pierre Bonami, IBM\nDate: October 6, 2007",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "QuadCut for quadratic cut representation",
+    "TMat for sparse triangular matrix storage"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "BCP_message_pvm",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_message_pvm.hpp",
+  "brief": "PVM message passing for BCP",
+  "algorithms": [
+    {
+      "name": "PVM Backend: BCP_pvm_environment Implementation\n\nParallel Virtual Machine (PVM) implementation of BCP_message_environment.\nRequires COIN_HAS_PVM to be defined.\n\n**Key methods:**\n- send/receive(): Point-to-point messaging with tags\n- multicast(): Broadcast to multiple targets\n- start_processes(): Spawn workers on machines\n- probe(): Non-blocking message check\n- alive(): Check remote process liveness\n\n**PVM specifics:**\nUses PVM's task spawning and heterogeneous network support.\nSuitable for clusters without MPI infrastructure.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_message.hpp for abstract interface",
+    "BCP_message_mpi.hpp for MPI backend"
+  ]
+}

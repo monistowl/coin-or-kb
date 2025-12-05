@@ -1,0 +1,9 @@
+{
+  "name": "forward_any",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/sweep/forward_any.hpp",
+  "brief": "Internal sweep implementation: forward_any",
+  "algorithms": [],
+  "methods": []
+}

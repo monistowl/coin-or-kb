@@ -1,0 +1,25 @@
+{
+  "name": "ClpDualRowPivot",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpDualRowPivot.hpp",
+  "brief": "Abstract base class for dual simplex pivot row selection\n\nIn dual simplex, the pivot row (leaving variable) is chosen based on\nprimal infeasibility. This class defines the interface for different\nselection strategies. Derived classes implement specific rules.\n\nKey methods:\n- pivotRow(): Select which row (basic variable) leaves the basis\n- updateWeights(): Maintain pricing information after pivots\n- updatePrimalSolution(): Update solution after basis change",
+  "algorithms": [
+    {
+      "name": "Dual Simplex Pivot Row Selection (Strategy Pattern):\nChooses which basic variable leaves the basis in dual simplex iteration.\nThe leaving variable is primal infeasible (violating bounds).\nCommon strategies:\n- Dantzig: Choose most infeasible variable (simple, fast per iteration)\n- Steepest edge: Minimize ||B^{-1}e_i|| weighted infeasibility (fewer iterations)\n- Partial pricing: Only scan subset of rows (for large problems)",
+      "math": "In dual simplex, we maintain dual feasibility (reduced costs correct signs)\nand iterate toward primal feasibility. Leaving variable selection:\n- Find i where x_B[i] < l_i or x_B[i] > u_i (primal infeasibility)\n- Dantzig: max{|x_B[i] - bound_i|}\n- Steepest: max{|x_B[i] - bound_i| / ||B^{-1}e_i||}\nThe ||B^{-1}e_i|| weights are maintained incrementally across iterations.",
+      "complexity": "Dantzig: O(m) scan of basic variables per iteration.\nSteepest edge: O(m) scan + O(nnz) weight updates per iteration.\nSteepest edge typically reduces total iteration count by 2-3x,\noutweighing higher per-iteration cost for most problems.",
+      "ref": [
+        "Goldfarb, D. & Reid, J.K. (1977). \"A practicable steepest-edge simplex\n  algorithm\". Mathematical Programming 12:361-371.",
+        "Forrest, J.J. & Goldfarb, D. (1992). \"Steepest-edge simplex algorithms\n  for linear programming\". Mathematical Programming 57:341-374."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpDualRowDantzig for simple most-infeasible selection",
+    "ClpDualRowSteepest for steepest edge pricing (recommended)",
+    "ClpSimplexDual for the dual simplex algorithm",
+    "ClpPrimalColumnPivot for the primal simplex equivalent"
+  ]
+}

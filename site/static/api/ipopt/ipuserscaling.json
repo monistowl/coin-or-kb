@@ -1,0 +1,20 @@
+{
+  "name": "IpUserScaling",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpUserScaling.hpp",
+  "brief": "NLP scaling using user-provided scaling factors\n\nUserScaling obtains scaling factors directly from the NLP interface\nvia the get_scaling_parameters callback (TNLP) or GetScalingParameters\nmethod (NLP).",
+  "algorithms": [
+    {
+      "name": "User-Provided Problem Scaling:\n  DetermineScalingParameters():\n  1. Call NLP::GetScalingParameters(obj_scaling, use_x, x_scaling, use_g, g_scaling).\n  2. If use_x_scaling: dx[i] = x_scaling[i] for variable scaling.\n  3. If use_g_scaling: dc[i], dd[j] from g_scaling for constraints.\n  4. df = obj_scaling for objective function.\n  5. If user returns false, use identity scaling (no change).",
+      "math": "Scaling transformation:\n  Scaled problem: min df\u00b7f(D_x\u207b\u00b9\u00b7x\u0303) s.t. D_c\u00b7c(D_x\u207b\u00b9\u00b7x\u0303) = 0.\n  User provides: df (scalar), D_x = diag(dx), D_c = diag(dc), D_d = diag(dd).\n  Goal: make scaled gradients and constraints O(1) for numerical stability.\n  Heuristic: scale so \u2202f/\u2202x\u0303\u1d62 \u2248 1 and constraint residuals \u2248 1.",
+      "complexity": "O(n + m) to apply user-provided factors.\n  User determines factors offline based on problem knowledge.\n\nThis allows users to specify problem-specific scaling based on:\n- Prior knowledge of variable magnitudes\n- Physical units of constraints\n- Problem structure\n\nScaling factors:\n- df: Objective function scaling\n- dx: Variable scaling (per-variable)\n- dc: Equality constraint scaling (per-constraint)\n- dd: Inequality constraint scaling (per-constraint)\n\nThe NLP should implement get_scaling_parameters() returning:\n- use_x_scaling, use_g_scaling flags\n- obj_scaling factor\n- x_scaling array (length n)\n- g_scaling array (length m)\n\nNote: If user doesn't provide scaling, falls back to no scaling.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpNLPScaling.hpp for scaling framework",
+    "IpGradientScaling.hpp for automatic scaling"
+  ]
+}

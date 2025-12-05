@@ -1,0 +1,21 @@
+{
+  "name": "CbcSolver",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcSolver.hpp",
+  "brief": "Top-level driver class for standalone CBC solver",
+  "algorithms": [
+    {
+      "name": "Command-Line Driver with Scripting Support\nCopyright (C) 2007, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcSolver wraps CbcModel with command-line parsing and scripting:\n- solve(): Execute command sequence (argc/argv interface)\n- fillParameters(): Centralized parameter initialization\n- Supports CbcUser callbacks for extensibility\n- Supports CbcStopNow for termination control\n\nNote: This class is designed to wrap CbcMain0/CbcMain1 functionality.\nFor direct API usage, prefer CbcModel directly.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcModel for the core B&C solver",
+    "CbcParameters for parameter definitions",
+    "Cbc_C_Interface.h for C language bindings"
+  ]
+}

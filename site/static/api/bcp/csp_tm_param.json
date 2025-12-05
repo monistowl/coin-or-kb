@@ -1,0 +1,16 @@
+{
+  "name": "CSP_tm_param",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Csp/include/CSP_tm_param.hpp",
+  "brief": "CSP tree manager parameters",
+  "algorithms": [
+    {
+      "name": "CSP TM Params: Cutting Strategy Options\n\nParameters: combineExclusionConstraints, addKnapsackMirConstraints,\naddKnifeMirConstraints for strengthening the formulation.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

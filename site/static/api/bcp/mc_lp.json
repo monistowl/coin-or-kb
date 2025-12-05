@@ -1,0 +1,19 @@
+{
+  "name": "MC_lp",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/MaxCut/include/MC_lp.hpp",
+  "brief": "Max-cut LP relaxation for BCP",
+  "algorithms": [
+    {
+      "name": "Max-Cut LP: Relaxation and Cut Generation\n\nLP process implementation for max-cut branch-and-cut.\nInherits from BCP_lp_user to customize node processing.\n\n**Key components:**\n- Volume algorithm option for Lagrangean relaxation\n- Tailing off detection via objective history\n- Heuristic solution generation during cut separation\n- Adaptive cut generation (easy \u2192 hard cuts)",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "MC_cut.hpp for cycle inequality separation"
+  ]
+}

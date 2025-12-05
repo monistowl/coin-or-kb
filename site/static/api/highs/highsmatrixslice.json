@@ -1,0 +1,13 @@
+{
+  "name": "HighsMatrixSlice",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsMatrixSlice.h",
+  "brief": "Polymorphic iterators for sparse matrix storage formats\n\nSTL-compatible iterators over matrix rows/columns regardless of storage.\n\n**Storage Format Specializations:**\n- HighsEmptySlice: Zero nonzeros (null iterators)\n- HighsCompressedSlice: CSC/CSR format (index[], value[], len)\n- HighsIndexedSlice: Sparse index + dense values (hybrid storage)\n- HighsTripletListSlice: Linked list via next[] array\n- HighsTripletTreeSliceInOrder: BST traversal (sorted iteration)\n- HighsTripletTreeSlicePreOrder: BST pre-order (fast iteration)\n- HighsTripletPositionSlice: Position array indirection\n\n**Iterator Interface:**\n- HighsSliceNonzero: (index, value) pair via index()/value()\n- Forward iterator with begin()/end()\n- Compatible with range-based for loops\n\n**Usage Pattern:**\n```cpp\nfor (auto nz : HighsCompressedSlice(idx, val, len)) {\n  process(nz.index(), nz.value());\n}\n```\n\n**Usage in HiGHS:**\n- HPresolve: Unified iteration over row/column storage\n- Generic algorithms independent of underlying format\n- Splay tree and linked list iteration in presolve",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "presolve/HPresolve.h for row-wise splay tree iteration",
+    "util/HighsSparseMatrix.h for CSC matrix storage"
+  ]
+}

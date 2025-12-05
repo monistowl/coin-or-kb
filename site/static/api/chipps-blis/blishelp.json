@@ -1,0 +1,14 @@
+{
+  "name": "BlisHelp",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisHelp.h",
+  "brief": "Utility functions for BLIS solver operations\n\nHelper functions for common BLIS operations including cut conversion,\nstrong branching, warm start serialization, and parallel cut detection.\n\n**Cut conversion:**\n- BlisOsiCutToConstraint(): Convert OsiRowCut to BlisConstraint\n\n**Strong branching:**\n- BlisStrongBranch(): Evaluate branching on a single variable\n  Returns degradation estimates for up/down branches\n\n**Warm start serialization:**\n- BlisEncodeWarmStart(): Pack CoinWarmStartBasis to AlpsEncoded\n- BlisDecodeWarmStart(): Unpack CoinWarmStartBasis from AlpsEncoded\n\n**Cut management:**\n- BlisHashingOsiRowCut(): Compute hash for duplicate detection\n- BlisParallelCutCut(): Check if two cuts are parallel\n- BlisParallelCutCon(): Check cut vs. constraint parallelism\n- BlisParallelConCon(): Check constraint vs. constraint parallelism",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisConstraint for constraint representation",
+    "BlisNodeDesc for warm start storage",
+    "BlisBranchStrategyStrong for strong branching usage"
+  ]
+}

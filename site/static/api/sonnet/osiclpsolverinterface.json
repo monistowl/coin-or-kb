@@ -1,0 +1,13 @@
+{
+  "name": "OsiClpSolverInterface",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/OsiClpSolverInterface.h",
+  "brief": ".NET wrapper for OsiClpSolverInterface (CLP via OSI)\n\nC++/CLI wrapper exposing CLP solver through OSI interface to .NET.\nIncludes matrix access methods and optional CPLEX/Gurobi support.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ClpModel.h for direct CLP wrapper",
+    "OsiSolverInterface.h for base OSI wrapper"
+  ]
+}

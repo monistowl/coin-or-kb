@@ -1,0 +1,21 @@
+{
+  "name": "HighsSeparation",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsSeparation.h",
+  "brief": "Cut generation orchestration for MIP solver",
+  "algorithms": [
+    {
+      "name": "Cut Separation Manager (Rounds-Based)\n\nCoordinates multiple separators to generate cutting planes.\n\n**Separation Management:**\n- separators[]: Collection of HighsSeparator instances\n- cutset: HighsCutSet accumulating generated cuts\n- implBoundClock, cliqueClock: Timing for specific separator types\n\n**Key Methods:**\n- separationRound(): Run all separators once\n- separate(): Multiple rounds until no more cuts found\n- setLpRelaxation(): Bind to LP for solution access\n\n**Separator Types (via HighsSeparator subclasses):**\n- Gomory cuts from optimal basis\n- MIR (mixed-integer rounding)\n- Clique cuts from conflict graph\n- Implied bound cuts from VUB/VLB\n- Flow cover cuts",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "mip/HighsSeparator.h for separator base class",
+    "mip/HighsCutPool.h for cut storage",
+    "mip/HighsLpRelaxation.h for LP interface"
+  ]
+}

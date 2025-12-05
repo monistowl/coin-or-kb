@@ -1,0 +1,12 @@
+{
+  "name": "GB_cuda_ewise",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/CUDA/GB_cuda_ewise.hpp",
+  "brief": "CUDA JIT kernel launchers for GraphBLAS element-wise operations\nSPDX-License-Identifier: Apache-2.0\n\nGPU element-wise scaling: GB_cuda_rowscale_jit (C = D.*B row scaling),\nGB_cuda_colscale_jit (C = A.*D column scaling). Both support flipxy for\noperand order and take stream/grid/block parameters.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GB_cuda.hpp for common CUDA utilities"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "slsqp",
+  "library": "oBB",
+  "layer": "layer-3",
+  "header": "slsqp/slsqp.h",
+  "brief": "SLSQP (Sequential Least Squares Programming) algorithm - bundled with oBB\n\nSLSQP is a gradient-based algorithm for constrained nonlinear optimization\nusing sequential quadratic programming with BFGS updates.\n\n**Algorithm (Kraft, 1988):**\n1. Solve QP subproblem: min (1/2)d'Bd + g'd s.t. linearized constraints\n2. Line search along direction d\n3. Update Hessian approximation B using BFGS\n4. Repeat until convergence\n\n**nlopt_slsqp() Parameters:**\n- n: Number of variables\n- f, f_data: Objective function (with gradient)\n- m, fc: Inequality constraints (m constraints, c(x) <= 0)\n- p, h: Equality constraints (p constraints, h(x) = 0)\n- lb, ub: Variable bounds\n- x: Initial point (modified in place)\n- minf: Output - optimal objective value\n- stop: Stopping criteria (nlopt_stopping struct)\n\n**Characteristics:**\n- Local, derivative-based optimization\n- Handles nonlinear equality and inequality constraints\n- Efficient for smooth, medium-scale problems\n- Used by oBB for local refinement in global optimization",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "nlopt.h for nlopt_constraint structure",
+    "nlopt-util.h for nlopt_stopping structure",
+    "oBB for global optimization framework"
+  ]
+}

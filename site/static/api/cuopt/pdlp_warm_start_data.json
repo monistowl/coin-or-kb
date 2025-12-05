@@ -1,0 +1,9 @@
+{
+  "name": "pdlp_warm_start_data",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/include/cuopt/linear_programming/pdlp/pdlp_warm_start_data.hpp",
+  "brief": "cuOpt GPU linear programming API\n\nPublic API for GPU-accelerated linear programming.\nCUDA-based simplex and interior point methods.",
+  "algorithms": [],
+  "methods": []
+}

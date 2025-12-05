@@ -1,0 +1,22 @@
+{
+  "name": "OsiCuts",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiCuts.hpp",
+  "brief": "Container for collections of row cuts and column cuts",
+  "algorithms": [
+    {
+      "name": "Cut Pool Container for B&C\nOsiCuts serves as a cut pool for branch-and-cut algorithms:\n- Stores both row cuts (linear inequalities) and column cuts (bound changes)\n- Provides iteration over all cuts\n- Supports insertion, removal, and transfer of cuts\n\nTypical usage in cut generation:\n1. Cut generator creates OsiCuts object\n2. Generator adds cuts via insert()\n3. Solver applies cuts via OsiSolverInterface::applyCuts()",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiRowCut for linear inequality cuts",
+    "OsiColCut for variable bound cuts",
+    "OsiSolverInterface::applyCuts for adding cuts to solver",
+    "OsiSolverInterface::applyCuts for applying cuts to a model"
+  ]
+}

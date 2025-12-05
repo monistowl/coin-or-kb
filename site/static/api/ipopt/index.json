@@ -1,0 +1,906 @@
+{
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "classes": [
+    {
+      "name": "AmplTNLP",
+      "brief": "AMPL interface for Ipopt via .nl files\n\nAmplTNLP: TNLP implementation reading AMPL .nl files via ASL library.\nHandles variable bounds, constraint types, sparse Jacobian/Hessian.\nSupports warm starting, dual initialization, and AMPL suffixes.\nPrimary interface for AMPL-based optimization models.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpAdaptiveMuUpdate",
+      "brief": "Adaptive (non-monotone) barrier parameter update strategy\n\nAdaptiveMuUpdate implements the free-mode/fixed-mode approach for\nbarrier parameter updates. In free mode, mu is computed adaptively\neach iteration. In fixed mode, monotone decrease is enforced.\n\nTwo operating modes:\n- Free mode: MuOracle suggests mu (e.g., Mehrotra predictor-corrector\n  or quality function minimization). Allows temporary mu increases.\n- Fixed mode: Monotone decrease enforced. Triggered when free mode\n  fails to make sufficient progress.\n\nGlobalization strategies (adaptive_mu_globalization_):\n- KKT_ERROR: Track reduction in primal-dual KKT error\n- FILTER_OBJ_CONSTR: Use filter on (theta, phi)\n- NEVER_MONOTONE_MODE: Always stay in free mode\n\nFree mode oracles (via MuOracle):\n- QualityFunctionMuOracle: Minimize quality function\n- ProbingMuOracle: Try candidate mu values\n- LoqoMuOracle: LOQO-style adaptive rule\n\nFixed mode behavior:\n- Uses fix_mu_oracle_ or average complementarity\n- restore_accepted_iterate_: Can restore last good free-mode point\n\nReference value tracking:\n- refs_vals_: List of recent KKT error values\n- refs_red_fact_: Required reduction factor\n- num_refs_max_: Maximum stored references",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpAlgBuilder",
+      "brief": "Builder pattern for constructing configured IpoptAlgorithm\n\nAlgorithmBuilder assembles a complete IpoptAlgorithm from components\nbased on user options. This implements the Builder design pattern,\ncentralizing the complex construction logic.\n\nBuild order (with dependency chain):\n1. SymLinearSolver (MA27/57/77/86/97, MUMPS, Pardiso, WSMP, etc.)\n2. AugSystemSolver (wraps SymLinearSolver for augmented system)\n3. PDSystemSolver (solves full primal-dual system)\n4. SearchDirectionCalculator, EqMultiplierCalculator\n5. IterateInitializer, LineSearch, MuUpdate, ConvergenceCheck\n\nCustomization: Subclass and override virtual Build* methods,\nor provide custom_solver in constructor.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpAlgStrategy",
+      "brief": "Base class for all pluggable algorithm components\n\nAlgorithmStrategyObject is the abstract base for Ipopt's Strategy pattern\nimplementation. All pluggable algorithm components inherit from this:\n- LineSearch, MuUpdate, ConvergenceCheck\n- SearchDirectionCalculator, HessianUpdater\n- PDSystemSolver, AugSystemSolver",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpAlgTypes",
+      "brief": "Algorithm-level return codes and exception types\n\nDefines SolverReturn enum for internal algorithm status:\n- SUCCESS: Converged to optimality tolerances\n- MAXITER_EXCEEDED, CPUTIME_EXCEEDED, WALLTIME_EXCEEDED\n- STOP_AT_ACCEPTABLE_POINT: Met acceptable (looser) tolerances\n- LOCAL_INFEASIBILITY: Problem appears locally infeasible\n- USER_REQUESTED_STOP: Callback requested termination\n- RESTORATION_FAILURE: Feasibility restoration failed\n- DIVERGING_ITERATES, INVALID_NUMBER_DETECTED\n\nAlso declares standard exceptions thrown during solve:\nLOCALLY_INFEASIBLE, TOO_FEW_DOF, TINY_STEP_DETECTED, etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpAlgorithmRegOp",
+      "brief": "Registration function for all Algorithm module options\n\nDeclares RegisterOptions_Algorithm() which registers all options\nfor the Ipopt algorithm components with the RegisteredOptions system.\n\nThis function is called during IpoptApplication initialization to\nmake all algorithm options available. It aggregates option registration\nfrom numerous strategy classes.\n\nRegistered option categories include:\n- Main algorithm options (IpoptAlgorithm)\n- Line search options (BacktrackingLineSearch, FilterLSAcceptor)\n- Barrier parameter options (MonotoneMuUpdate, AdaptiveMuUpdate)\n- Linear solver options (PDFullSpaceSolver, AugSystemSolver)\n- Initialization options (DefaultIterateInitializer)\n- Scaling options (NLPScaling, GradientScaling)\n- Convergence options (OptimalityErrorConvergenceCheck)\n- Output options (OrigIterationOutput)",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpAugRestoSystemSolver",
+      "brief": "Augmented system solver exploiting restoration phase structure\n\nAugRestoSystemSolver is a decorator that exploits the known structure\nof the restoration phase problem to reduce the augmented system to\nthe original problem size.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpAugSystemSolver",
+      "brief": "Abstract interface for solving the 4x4 augmented KKT system\n\nAugSystemSolver defines the interface for solving the reduced\naugmented system obtained by eliminating bound multiplier equations:\n\n  [W + Dx + \u03b4x*I      0        Jc^T      Jd^T  ] [sol_x]   [rhs_x]\n  [    0         Ds + \u03b4s*I     0         -I   ] [sol_s] = [rhs_s]\n  [   Jc             0      Dc - \u03b4c*I    0    ] [sol_c]   [rhs_c]\n  [   Jd            -I         0      Dd - \u03b4d*I] [sol_d]   [rhs_d]",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpBacktrackingLSAcceptor",
+      "brief": "Strategy interface for step acceptance in backtracking line search\n\nBacktrackingLSAcceptor defines the interface for step acceptance\ntests used by BacktrackingLineSearch. Implementations decide whether\na trial point should be accepted based on various criteria.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpBacktrackingLineSearch",
+      "brief": "General backtracking line search with filter/restoration support\n\nBacktrackingLineSearch is the main LineSearch implementation,\nproviding a flexible framework for globalization strategies:\n\nCore algorithm:\n1. Start with full step alpha = alpha_max (fraction-to-boundary)\n2. Test acceptability via BacktrackingLSAcceptor\n3. If rejected, reduce alpha *= alpha_red_factor and retry\n4. If alpha becomes too small, trigger restoration phase\n\nAdvanced features:\n- Watchdog mechanism: Accept poor steps temporarily to escape local minima\n- Second-order correction (SOC): Improve constraint satisfaction\n- Soft restoration phase: Accept steps that reduce primal-dual error\n- Magic steps: Improve slack/bound multiplier pairing\n- Corrector steps: Improve local convergence rate\n\nKey parameters:\n- alpha_for_y: How to step in equality multipliers\n- watchdog_trial_iter_max: Watchdog iteration limit\n- max_soc: Maximum second-order corrections",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpBlas",
+      "brief": "C++ wrappers for BLAS (Basic Linear Algebra Subprograms)\n\nProvides platform-independent access to BLAS Level 1, 2, and 3 routines.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpCGPenaltyCq",
+      "brief": "Calculated quantities for Chen-Goldfarb penalty method\n\nCGPenaltyCq provides cached computation of quantities specific to\nthe Chen-Goldfarb penalty function algorithm, extending the base\nIpoptCalculatedQuantities.\n\nKey computed quantities:\n- curr/trial_penalty_function(): phi_rho(x) = f(x) + rho*||c(x)||\n- curr_direct_deriv_penalty_function(): Directional derivative\n- curr_fast_direct_deriv_penalty_function(): For fast CG direction\n- curr_cg_pert_fact(): Perturbation factor for KKT regularization\n- compute_curr_cg_penalty(): Line search penalty parameter\n- compute_curr_cg_penalty_scale(): KKT scaling penalty\n\nAlso computes Jacobian norms and multiplier scaling factors\nneeded for the penalty parameter update rules.\n\nAll quantities use CachedResults for efficiency.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpCGPenaltyData",
+      "brief": "Algorithm state data for Chen-Goldfarb penalty method\n\nCGPenaltyData extends IpoptAdditionalData to store all state\nspecific to the Chen-Goldfarb penalty function algorithm.\n\nStored directions:\n- delta_cgpen_: Standard Chen-Goldfarb search direction\n- delta_cgfast_: Fast (pure Newton) direction when near solution\n\nPenalty parameters:\n- curr_penalty_: Current line search penalty parameter (rho)\n- curr_kkt_penalty_: Penalty for KKT system scaling\n- curr_penalty_pert_: Current perturbation factor\n\nAlgorithm control:\n- never_try_pure_Newton_: Flag to disable fast direction\n- restor_iter_: Iteration count for restoration tracking\n- max_alpha_x_: Recorded primal step size\n\nThe data is accessed via IpData().AdditionalData() and cast\nto CGPenaltyData using the CGPenData() accessor pattern.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpCGPenaltyLSAcceptor",
+      "brief": "Chen-Goldfarb penalty function line search acceptor",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpCGPenaltyRegOp",
+      "brief": "Registration of Chen-Goldfarb penalty method options\n\nDeclares RegisterOptions_CGPenalty(), which registers all options\nspecific to the Chen-Goldfarb penalty function globalization\nstrategy.\n\nOptions include:\n- Penalty parameter initialization and bounds\n- PLPF (piecewise linear penalty function) parameters\n- Fast direction control parameters\n- Armijo and sufficient decrease factors\n- Perturbation handling parameters\n\nCalled when Ipopt is configured to use the CG penalty method\ninstead of the default filter line search.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpCGPerturbationHandler",
+      "brief": "Perturbation handler for Chen-Goldfarb penalty method",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpCGSearchDirCalc",
+      "brief": "Search direction calculator for Chen-Goldfarb penalty method",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpCachedResults",
+      "brief": "Template class for caching computed results with dependency tracking\n\nCachedResults<T> stores computed values along with their dependencies\n(TaggedObjects and scalar parameters). Results are automatically\ninvalidated when any dependency changes via the Observer pattern.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpCompoundMatrix",
+      "brief": "Block-structured matrix composed of sub-matrices\n\nCompoundMatrix implements the Composite pattern for matrices,\nrepresenting a block matrix: M = [M_00, M_01, ...; M_10, ...]",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpCompoundSymMatrix",
+      "brief": "Block-structured symmetric matrix (lower triangle storage)\n\nCompoundSymMatrix implements a symmetric block matrix where only\nthe lower triangular blocks are stored: M[i][j] with j <= i.\nDiagonal blocks must themselves be SymMatrix types.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpCompoundVector",
+      "brief": "Composite vector stacking multiple sub-vectors\n\nCompoundVector implements the Composite pattern for vectors,\nrepresenting: x_compound = [x_0; x_1; ...; x_{n-1}]",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpConvCheck",
+      "brief": "Strategy interface for checking algorithm termination\n\nConvergenceCheck is the abstract base for convergence testing\nstrategies. Called each iteration to determine if optimization\nshould continue, has converged, or has failed.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpDebug",
+      "brief": "Debug assertion and verbose tracing macros\n\nProvides compile-time controlled debugging facilities:\n\nIPOPT_CHECKLEVEL > 0 enables:\n- DBG_ASSERT(cond): Runtime assertions\n- DBG_ASSERT_EXCEPTION(cond, type, msg): Conditional exceptions\n- DBG_DO(cmd): Execute only in debug mode\n\nIPOPT_VERBOSITY >= 1 enables tracing:\n- DBG_START_FUN/DBG_START_METH: Trace function entry/exit\n- DBG_PRINT: Printf-style debug output with indentation\n- DBG_EXEC: Conditional execution based on verbosity\n\nAll macros compile to nothing when disabled (zero overhead).",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpDefaultIterateInitializer",
+      "brief": "Standard initialization procedure for IPM iterates\n\nDefaultIterateInitializer computes starting points for all primal\nand dual variables based on user options and problem bounds.\n\nPrimal initialization (x, s):\n- Start from user-provided x0 or NLP default\n- Push away from bounds: x_new = max(x_L + \u03b5, min(x, x_U - \u03b5))\n- bound_push_, bound_frac_: Absolute/relative push parameters\n- least_square_init_primal_: Fit linearized constraints\n\nDual initialization:\n- Equality multipliers (y_c, y_d): Least-squares or zero\n- eq_mult_calculator_: Computes min ||y|| s.t. KKT gradient\n- constr_mult_init_max_: Reject large multiplier estimates\n- Bound multipliers (z_L, z_U, v_L, v_U):\n  - B_CONSTANT: bound_mult_init_val_\n  - B_MU_BASED: mu_init_ / slack\n\nWarm start:\n- warm_start_init_point_: Use warm_start_initializer_ instead\n- Delegates to WarmStartIterateInitializer\n\nStatic utilities:\n- push_variables(): Move point away from bounds\n- least_square_mults(): Compute y from gradient conditions",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpDenseGenMatrix",
+      "brief": "Dense general (non-symmetric) matrix with linear algebra operations\n\nDenseGenMatrix stores elements in column-major (Fortran) format\nand provides direct factorization capabilities:\n- Cholesky factorization (for positive definite matrices)\n- LU factorization with pivoting (for general matrices)\n- Forward/back substitution solves",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpDenseSymMatrix",
+      "brief": "Dense symmetric matrix in BLAS lower-triangular storage\n\nDenseSymMatrix stores only the lower triangle in column-major format,\nfollowing BLAS/LAPACK conventions for symmetric matrices.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpDenseVector",
+      "brief": "Dense vector implementation storing contiguous Number arrays\n\nDenseVector is the primary Vector implementation in Ipopt.\nTwo storage modes:\n- Heterogeneous: Full array of values (Values() method)\n- Homogeneous: Single scalar repeated for all elements (Scalar() method)",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpDiagMatrix",
+      "brief": "Diagonal matrix stored as a vector\n\nDiagMatrix efficiently represents diagonal matrices by storing only\nthe diagonal elements as a Vector. Matrix-vector multiply is O(n).",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpEqMultCalculator",
+      "brief": "Strategy interface for computing equality constraint multipliers\n\nEqMultiplierCalculator is the abstract base for computing estimates\nof the equality constraint multipliers y_c and y_d. These estimates\nare used for:",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpEquilibrationScaling",
+      "brief": "NLP scaling using MC19 matrix equilibration\n\nEquilibrationScaling computes scaling factors using the HSL MC19\nsymmetric indefinite matrix equilibration routine. This produces\nwell-conditioned scaling by analyzing the Jacobian structure.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpExactHessianUpdater",
+      "brief": "Hessian updater using exact second derivatives from NLP\n\nExactHessianUpdater is a trivial HessianUpdater implementation that\nsimply retrieves the exact Hessian of the Lagrangian from the NLP\nat each iteration.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpException",
+      "brief": "Exception base class and macros for Ipopt error handling\n\nProvides IpoptException base class and convenience macros:\n- DECLARE_STD_EXCEPTION(Type): Define new exception class\n- THROW_EXCEPTION(Type, msg): Throw with file/line info\n- ASSERT_EXCEPTION(cond, Type, msg): Conditional throw\n\nExceptions carry source location (file, line) and message for\ndebugging. Can be reported via Journalist::ReportException().\n\nUses special visibility attributes on macOS to ensure exceptions\ncan be caught across shared library boundaries.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpExpandedMultiVectorMatrix",
+      "brief": "Short-fat matrix V^T*P^T with expansion for KKT construction\n\nExpandedMultiVectorMatrix represents a k x n matrix (k << n) as\nV^T * P^T where V is a MultiVectorMatrix-like collection of row\nvectors and P is an optional ExpansionMatrix.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpExpansionMatrix",
+      "brief": "Expansion/projection matrices for dimension mapping\n\nExpansionMatrix maps between vectors of different sizes:\n- MultVector: Embeds small vector into larger space (zero-fills)\n- TransMultVector: Projects large vector to smaller space (extracts)",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpFilter",
+      "brief": "Multi-dimensional filter for globalization (W\u00e4chter-Biegler)\n\nThe Filter implements the filter globalization mechanism where a\npoint is acceptable if it improves in at least one of multiple\nobjectives (typically constraint violation \u03b8 and objective \u03c6).\n\nFilter acceptance rule: A point (\u03b8, \u03c6) is acceptable to the filter\nif for every entry (\u03b8_i, \u03c6_i) in the filter, either \u03b8 < \u03b8_i or \u03c6 < \u03c6_i.\n\nKey concepts:\n- FilterEntry: Single entry storing coordinates and iteration number\n- Dominated entries are removed when new entries are added\n- Margin parameters (gamma_theta, gamma_phi) provide sufficient decrease\n\nClasses:\n- FilterEntry: Single point in the filter with coordinates\n- Filter: Container managing list of entries with add/query operations\n\nUsed by FilterLSAcceptor for filter line search acceptance tests.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpFilterLSAcceptor",
+      "brief": "Filter line search acceptor using W\u00e4chter-Biegler method\n\nFilterLSAcceptor implements the filter globalization strategy where\nstep acceptance is based on improvement in either constraint violation\n(theta) or barrier objective (phi).\n\nAcceptance criteria:\n- Armijo sufficient decrease in barrier function, OR\n- Sufficient reduction in constraint violation (switching condition)\n- Point must be acceptable to current filter\n\nKey parameters:\n- theta_max_fact_: Upper bound factor on infeasibility\n- gamma_phi_, gamma_theta_: Margin parameters for filter\n- eta_phi_: Armijo parameter\n- s_phi_, s_theta_: Exponents in switching condition\n\nSecond-order correction (SOC):\n- When step is rejected, solves for constraint linearization error\n- Up to max_soc_ corrections tried\n- kappa_soc_ controls required constraint reduction between SOCs\n\nCorrector steps:\n- Affine or primal-dual corrector for fast local convergence\n- Applied even when step is acceptable\n\nFilter management:\n- Dominated entries removed on filter augmentation\n- Filter reset heuristic when repeatedly rejected by filter",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpGenAugSystemSolver",
+      "brief": "Augmented system solver using GenKKTSolverInterface\n\nGenAugSystemSolver adapts the AugSystemSolver interface to use\nGenKKTSolverInterface, which provides a more generic linear solver\ninterface supporting iterative methods.\n\nThis class:\n- Extracts raw Number* arrays from Vector objects\n- Passes Matrix objects directly from the NLP\n- Manages caching to avoid redundant matrix updates\n\nMultiSolve() implementation:\n1. Check if augmented system matrices have changed (via tags)\n2. If changed, update solver_interface_ with new matrices\n3. Extract RHS vectors to raw arrays\n4. Call solver_interface_->Solve()\n5. Copy solutions back to Vector objects\n\nTag-based caching tracks:\n- W matrix and W_factor\n- Diagonal matrices D_x, D_s, D_c, D_d\n- Jacobians J_c, J_d\n- Regularization deltas\n\nInertia and quality:\n- NumberOfNegEVals(): Query solver for eigenvalue count\n- ProvidesInertia(): Check if solver supports this\n- IncreaseQuality(): Request better pivoting/tolerance",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpGenKKTSolverInterface",
+      "brief": "Generic interface for iterative/matrix-free KKT solvers\n\nGenKKTSolverInterface provides an alternative to\nSparseSymLinearSolverInterface for solvers that work with the\nfull KKT structure rather than requiring explicit sparse matrices.\n\nThe 4x4 block KKT system:\n  [W + D_x + delta_x*I,  0,         J_c^T,  J_d^T ] [sol_x]   [rhs_x]\n  [0,          D_s + delta_s*I,   0,     -I     ] [sol_s] = [rhs_s]\n  [J_c,        0,         D_c - delta_c*I,  0  ] [sol_c]   [rhs_c]\n  [J_d,       -I,         0,    D_d - delta_d*I] [sol_d]   [rhs_d]\n\nInterface differences from SparseSymLinearSolverInterface:\n- Receives Matrix/SymMatrix objects directly (not sparse arrays)\n- Diagonal arrays (D_x, D_s, D_c, D_d) as Number* pointers\n- Better suited for iterative solvers (Krylov, GMRES)\n- Can use matrix-vector products without explicit assembly\n\nUsed by GenAugSystemSolver to adapt this interface to AugSystemSolver.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpGenTMatrix",
+      "brief": "General sparse matrix in triplet (COO) format\n\nGenTMatrix stores a general (non-symmetric) sparse matrix using\ntriplet/coordinate format: three arrays for row indices, column\nindices, and values.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpGradientScaling",
+      "brief": "NLP scaling based on gradient magnitudes at initial point\n\nGradientScaling computes scaling factors for the NLP based on the\nmaximum gradient norms at the user-provided starting point. This\nimproves problem conditioning by normalizing objective and constraint\nmagnitudes.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpHessianUpdater",
+      "brief": "Strategy interface for Hessian computation/approximation\n\nHessianUpdater is the abstract base for strategies that provide\nthe Hessian of the Lagrangian (or an approximation) to the algorithm.\nThe result is stored in IpData.W().",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpIdentityMatrix",
+      "brief": "Scalar multiple of the identity matrix (factor * I)\n\nIdentityMatrix represents matrices of the form factor*I where\nI is the identity. Stores only the scalar factor - O(1) storage.\nMatrix-vector multiply is just a scale operation: y = factor*x.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInexactAlgBuilder",
+      "brief": "Builder for inexact step computation algorithm variant\n\nInexactAlgorithmBuilder constructs the complete IpoptAlgorithm\nconfigured for inexact Newton methods using iterative linear solvers.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInexactCq",
+      "brief": "Cached quantities for inexact Newton / Chen-Goldfarb penalty method\n\nInexactCq provides precomputed and cached quantities specific to the\ninexact Newton algorithm, extending IpoptCalculatedQuantities.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInexactData",
+      "brief": "Algorithm-specific data storage for inexact Newton method\n\nInexactData stores the decomposed step components and algorithm state\nrequired by the inexact Newton / Chen-Goldfarb penalty method.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInexactDoglegNormal",
+      "brief": "Dogleg trust region method for normal step computation\n\nInexactDoglegNormalStep computes the normal step using a dogleg\napproach that combines steepest descent and Newton directions\nwithin a trust region.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInexactLSAcceptor",
+      "brief": "Penalty function line search for inexact step algorithm\n\nInexactLSAcceptor implements backtracking line search using an\nexact penalty function, adapted for inexact Newton steps that\ndon't fully satisfy the linearized KKT conditions.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInexactNewtonNormal",
+      "brief": "Newton normal step from slack-scaled augmented system\n\nInexactNewtonNormalStep computes the normal step component by\nsolving a reduced system derived from the slack-scaled KKT system.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInexactNormalStepCalc",
+      "brief": "Abstract base class for normal step computation\n\nInexactNormalStepCalculator defines the interface for computing\nthe normal step component in the inexact Newton decomposition.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInexactPDSolver",
+      "brief": "Primal-dual system solver for inexact Newton methods\n\nInexactPDSolver solves the primal-dual system using iterative linear\nsolvers, allowing for inexact solutions that don't fully satisfy\nthe linearized KKT conditions.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInexactRegOp",
+      "brief": "Registration function for all inexact algorithm options\n\nRegisterOptions_Inexact() registers all configurable parameters\nfor the inexact Newton algorithm variant with the options system.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInexactSearchDirCalc",
+      "brief": "Search direction via normal-tangential decomposition\n\nInexactSearchDirCalculator computes the search direction using\niterative linear solvers by decomposing into normal and tangential\ncomponents, enabling inexact Newton methods.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInexactTSymScalingMethod",
+      "brief": "Slack-based matrix scaling for inexact algorithm\n\nInexactTSymScalingMethod computes symmetric scaling factors for the\naugmented system, using current slack values for the inexact algorithm.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpInterfacesRegOp",
+      "brief": "Option registration for Interfaces subsystem\n\nDeclares RegisterOptions_Interfaces() which registers all options\nspecific to the Interfaces module with the RegisteredOptions object.\n\nCalled during IpoptApplication initialization to register options\nlike fixed_variable_treatment, dependency_detection_with_rhs, etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpIpoptAlg",
+      "brief": "Main Ipopt algorithm orchestrating the interior point method\n\nIpoptAlgorithm is the central class implementing the primal-dual\ninterior point method. Each iteration:\n1. UpdateHessian() - Evaluate or update Hessian approximation\n2. UpdateBarrierParameter() - Adjust mu using chosen strategy\n3. ComputeSearchDirection() - Solve KKT system for Newton step\n4. ComputeAcceptableTrialPoint() - Line search with filter/merit\n5. AcceptTrialPoint() - Update current iterate\n\nUses Strategy pattern: line search, mu update, convergence check\nare all pluggable components configured via AlgorithmBuilder.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpIpoptApplication",
+      "brief": "Main application class for calling Ipopt from C++\n\nIpoptApplication is the entry point for C++ applications using Ipopt.\nProvides methods for initialization, option handling, and solving.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpIpoptCalculatedQuantities",
+      "brief": "Cached computation of all derived quantities from iterates\n\nIpoptCalculatedQuantities is the central caching layer for computed\nvalues derived from the current/trial iterates in IpoptData:\n\nCached quantities include:\n- Slacks: slack_x_L, slack_x_U, slack_s_L, slack_s_U\n- Objective: f, grad_f, barrier_obj, grad_barrier_obj\n- Constraints: c, d, d-s, jac_c, jac_d, J^T*y products\n- Primal-dual: grad_lag_x/s, complementarity, relaxed_compl\n- Errors: primal/dual infeasibility, complementarity, nlp_error\n- Line search: frac_to_bound, sigma matrices",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpIpoptData",
+      "brief": "Central storage for all iteration data in Ipopt\n\nIpoptData holds the algorithmic state across iterations:\n- curr_: Current iterate (x, s, y_c, y_d, z_L, z_U, v_L, v_U)\n- trial_: Trial point from line search\n- delta_: Search direction from KKT solve\n- delta_aff_: Affine-scaling step (for Mehrotra predictor-corrector)\n- W_: Hessian or Hessian approximation",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpIpoptNLP",
+      "brief": "Internal NLP interface with caching and scaling\n\nIpoptNLP abstracts the optimization problem for internal use:\n  min f(x)  s.t.  c(x) = 0, d_L <= d(x) <= d_U, x_L <= x <= x_U",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpIterateInitializer",
+      "brief": "Strategy interface for computing initial iterates\n\nIterateInitializer is the abstract base for strategies that\ncompute the starting point (x, s, y_c, y_d, z_L, z_U, v_L, v_U)\nfor the interior point algorithm.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpIteratesVector",
+      "brief": "Combined primal-dual iterate vector for IPM algorithm\n\nIteratesVector is a specialized CompoundVector with fixed 8 components\nrepresenting the complete primal-dual iterate of the interior point method:",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpIterationOutput",
+      "brief": "Strategy interface for per-iteration output display\n\nIterationOutput is the abstract base for strategies that produce\nthe iteration summary line and optional detailed output.\n\nStandard output line (from OrigIterationOutput):\n  iter  objective   inf_pr   inf_du   lg(mu)  ||d||  lg(rg) alpha_du alpha_pr ls\n\nInfPrOutput enum controls whether inf_pr shows internal (with slacks)\nor original NLP constraint violation.\n\nImplementations:\n- OrigIterationOutput: Standard one-line summary for original problem\n- RestoIterationOutput: Output during restoration phase\n\nOutput controlled by print_level option (0-12).",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpIterativePardisoSolverInterface",
+      "brief": "Pardiso iterative solver interface for inexact Newton method\n\nIterativePardisoSolverInterface wraps the Pardiso sparse solver in\niterative (preconditioned Krylov) mode for use with inexact Newton.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpIterativeWsmpSolverInterface",
+      "brief": "Interface to IBM WSMP iterative (WISMP) solver\n\nIterativeWsmpSolverInterface wraps the iterative variant of WSMP\n(called WISMP), which uses incomplete LU factorization as a\npreconditioner for iterative refinement.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpJournalist",
+      "brief": "Logging and output management system for Ipopt\n\nImplements a flexible logging framework with multiple output destinations\n(Journals) and fine-grained control over verbosity by category.\n\nPrint levels (EJournalLevel): J_NONE < J_ERROR < J_WARNING < J_SUMMARY\n  < J_ITERSUMMARY < J_DETAILED < J_VECTOR < J_MATRIX < J_ALL\n\nCategories (EJournalCategory): J_MAIN, J_LINE_SEARCH, J_LINEAR_ALGEBRA,\n  J_BARRIER_UPDATE, J_SOLVE_PD_SYSTEM, etc. plus J_USER1-J_USER17 for apps.\n\nEach Journal (console, file, stream) can have independent level settings\nper category. Printf-style and stream-style output both supported.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpLapack",
+      "brief": "C++ wrappers for LAPACK (Linear Algebra PACKage) routines\n\nProvides platform-independent access to LAPACK for dense matrices.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpLeastSquareMults",
+      "brief": "Least-squares estimation of equality constraint multipliers\n\nLeastSquareMultipliers computes initial estimates for the equality\nconstraint multipliers y_c and y_d by solving a least-squares problem.\n\nFormulation: Find y minimizing ||\u2207_x L(x,y)||^2 where\n  \u2207_x L = \u2207f(x) + J_c^T y_c + J_d^T y_d - z_L + z_U\n\nThis is equivalent to solving the normal equations:\n  [J_c J_c^T    0    ] [y_c]   [-J_c (\u2207f - z_L + z_U)]\n  [   0     J_d J_d^T] [y_d] = [-J_d (\u2207f - z_L + z_U)]\n\nActually solved via augmented system:\n  [0  J_c^T  J_d^T] [r  ]   [\u2207f - z_L + z_U]\n  [J_c  0     0   ] [y_c] = [     0        ]\n  [J_d  0     0   ] [y_d]   [     0        ]\n\nUses AugSystemSolver to solve the linear system with W=0.\n\nUsage:\n- DefaultIterateInitializer: Initial multiplier estimates\n- MinC_1NrmRestorationPhase: Post-restoration multiplier reset",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpLibraryLoader",
+      "brief": "Dynamic library loading for runtime solver selection\n\nLibraryLoader provides platform-independent dynamic library loading:\n- dlopen()/dlsym() on POSIX systems\n- LoadLibrary()/GetProcAddress() on Windows\n\nUsed to load linear solver libraries (HSL, Pardiso, etc.) at runtime\nwithout compile-time linkage. Allows users to provide proprietary\nsolvers without recompiling Ipopt.\n\nIPOPT_SHAREDLIBEXT defined to \"so\", \"dylib\", or \"dll\" per platform.\n\n@since 3.14.0",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpLimMemQuasiNewtonUpdater",
+      "brief": "Limited-memory quasi-Newton Hessian approximation (L-BFGS/SR1)\n\nLimMemQuasiNewtonUpdater maintains a low-rank approximation of the\nLagrangian Hessian using limited-memory BFGS or SR1 updates.\n\nCompact representation: W = \u03c3I + V*M^(-1)*V^T where\n- \u03c3: Scalar initialization factor (B0_ if diagonal)\n- V, U: Low-rank update matrices derived from S, Y history\n- S_: Matrix of step vectors s_k = x_{k+1} - x_k\n- Y_: Matrix of gradient differences y_k = \u2207L_{k+1} - \u2207L_k\n\nUpdate types (limited_memory_update_type_):\n- BFGS: Positive definite secant update, may skip if s'y <= 0\n- SR1: Symmetric rank-1, can capture negative curvature\n\nInitialization (limited_memory_initialization_):\n- SCALAR1-4: Various heuristics for \u03c3 based on y'y/s'y\n- CONSTANT: Fixed \u03c3 = limited_memory_init_val_\n\nKey parameters:\n- limited_memory_max_history_: Maximum stored (s,y) pairs\n- limited_memory_max_skipping_: Reset after N consecutive skips\n- sigma_safe_min/max_: Safeguards for initialization factor\n\nRestoration phase (update_for_resto_):\n- Structured update accounting for \u03b7*D_r*x quadratic term\n- Ypart_ stores constraint-only gradient differences",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpLineSearch",
+      "brief": "Strategy interface for globalization via line search\n\nLineSearch is the abstract base for all line search strategies\nin Ipopt's globalization framework. Given a search direction\n(from IpData.delta()), finds an acceptable trial point.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpLinearSolversRegOp",
+      "brief": "Registration of all linear solver options\n\nDeclares RegisterOptions_LinearSolvers(), which registers options\nfor all available linear solvers (MA27, MA57, MA77, MA86, MA97,\nMUMPS, Pardiso, WSMP, SPRAL, etc.).\n\nCalled during Ipopt initialization to make solver-specific options\navailable through the OptionsList mechanism. Each solver interface\nhas its own RegisterOptions() method that is invoked here.\n\nOptions typically include:\n- Pivot tolerance bounds\n- Ordering method selection\n- Scaling options\n- Memory allocation factors\n- Parallelism settings (thread counts)",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpLoqoMuOracle",
+      "brief": "LOQO formula for barrier parameter selection\n\nLoqoMuOracle computes the barrier parameter using the heuristic\nfrom the LOQO solver (Vanderbei). This provides a simple formula\nbased on current complementarity.\n\nThe LOQO formula typically uses:\n  sigma = min(0.1, 100*mu)\n  mu_new = sigma * (current_complementarity / n)\n\nThis is a simple, stateless oracle that doesn't require solving\nan additional linear system (unlike probing or quality function).\n\nCompared to other strategies:\n- ProbingMuOracle: Requires affine step computation\n- QualityFunctionMuOracle: Requires 1D optimization\n- LoqoMuOracle: Direct formula, no extra computation",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpLowRankAugSystemSolver",
+      "brief": "Low-rank Hessian handling via Sherman-Morrison (multiple backsolves)\n\nLowRankAugSystemSolver handles LowRankUpdateSymMatrix Hessians\n(from L-BFGS quasi-Newton) using the Sherman-Morrison formula.\n\nL-BFGS Hessian: W = sigma*I + V*M*V^T (compact representation)\n- V: n x 2k matrix of gradient/step differences\n- M: 2k x 2k small dense matrix\n- k: number of stored corrections (limited memory)\n\nSherman-Morrison approach:\n(A + UV^T)^{-1} = A^{-1} - A^{-1}U(I + V^TA^{-1}U)^{-1}V^TA^{-1}\n\nImplementation:\n1. Solve diagonal system: Vtilde = A^{-1}*V (2k backsolves)\n2. Form small dense matrix: J = I + V^T*Vtilde\n3. Solve J*y = V^T*A^{-1}*rhs (small dense solve)\n4. Correct: x = A^{-1}*rhs - Vtilde*y\n\nStorage:\n- J1_, J2_: Dense matrices for correction\n- Vtilde1_, Utilde2_: MultiVectorMatrix backsolve results\n- Wdiag_: Diagonal part passed to base solver",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpLowRankSSAugSystemSolver",
+      "brief": "Low-rank Hessian handling via single backsolve (iterative solver friendly)\n\nLowRankSSAugSystemSolver handles LowRankUpdateSymMatrix Hessians\n(from L-BFGS) by augmenting the system rather than using\nSherman-Morrison. This requires only ONE factorization/backsolve.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpLowRankUpdateSymMatrix",
+      "brief": "Symmetric matrix as low-rank update: M = D + V*V^T - U*U^T\n\nLowRankUpdateSymMatrix represents matrices in factored form:\n  M = P_LR * (D + V*V^T - U*U^T) * P_LR^T  (if reduced_diag)\n  M = D + P_LR * (V*V^T - U*U^T) * P_LR^T  (otherwise)",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMa27TSolverInterface",
+      "brief": "Interface to HSL MA27 sparse symmetric indefinite solver\n\nMa27TSolverInterface wraps the Harwell MA27 subroutine for solving\nsparse symmetric indefinite linear systems using multifrontal\nfactorization with threshold pivoting.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMa28TDependencyDetector",
+      "brief": "Dependency detector using HSL MA28 unsymmetric solver\n\nMa28TDependencyDetector uses the unsymmetric sparse solver MA28\nto detect linearly dependent rows in the constraint Jacobian.\nUnlike the symmetric solvers, MA28 handles general rectangular\nmatrices, making it suitable for analyzing the constraint Jacobian\ndirectly.\n\nThe detection works by attempting LU factorization with threshold\npivoting. When a pivot falls below tolerance (ma28_pivtol_), the\ncorresponding row is flagged as linearly dependent.\n\nInput format: Triplet (row, col, val) for general matrices\n\nUsed by Ipopt's constraint degeneracy detection mechanism.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMa57TSolverInterface",
+      "brief": "Interface to HSL MA57 sparse symmetric indefinite solver\n\nMa57TSolverInterface wraps the Harwell MA57 subroutine, an improved\nmultifrontal solver over MA27 with better memory management and\nnumerical stability.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMa77SolverInterface",
+      "brief": "Interface to HSL MA77 out-of-core sparse symmetric solver\n\nMa77SolverInterface wraps the HSL MA77 solver, designed for\nlarge-scale problems that may not fit entirely in memory.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMa86SolverInterface",
+      "brief": "Interface to HSL MA86 parallel sparse symmetric solver\n\nMa86SolverInterface wraps the HSL MA86 solver, a DAG-based\nparallel direct solver for symmetric indefinite systems.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMa97SolverInterface",
+      "brief": "Interface to HSL MA97 modern parallel sparse symmetric solver\n\nMa97SolverInterface wraps the HSL MA97 solver, the most modern\nHSL solver for symmetric indefinite systems with advanced\nparallelism and scaling strategies.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMatrix",
+      "brief": "Abstract base class for all (unsymmetric) matrix types\n\nMatrix provides the abstraction for general (non-symmetric) matrices.\nPrimary operations: MultVector (y = \u03b1*A*x + \u03b2*y) and TransMultVector.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMc19TSymScalingMethod",
+      "brief": "Matrix scaling using HSL MC19 equilibration\n\nMc19TSymScalingMethod uses the HSL subroutine MC19 to compute\nequilibration scaling factors for symmetric matrices.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMonotoneMuUpdate",
+      "brief": "Standard monotone barrier parameter update strategy\n\nMonotoneMuUpdate implements the classical IPM approach where the\nbarrier parameter mu is reduced monotonically as the subproblem\nconverges.\n\nUpdate rule:\n1. Solve barrier subproblem to tolerance barrier_tol_factor_ * mu\n2. Reduce mu: new_mu = max(mu_target_, min(kappa_mu * mu, mu^theta_mu))\n   where kappa_mu = mu_linear_decrease_factor_\n   and theta_mu = mu_superlinear_decrease_power_\n3. Update tau (fraction-to-boundary): tau = max(tau_min_, 1 - mu)\n\nKey parameters:\n- mu_init_: Initial barrier parameter\n- mu_linear_decrease_factor_: Linear decrease factor kappa_mu\n- mu_superlinear_decrease_power_: Superlinear power theta_mu\n- tau_min_: Minimum fraction-to-boundary parameter\n- mu_target_: Target mu for termination\n\nFast decrease heuristic:\n- mu_allow_fast_monotone_decrease_: Allow faster decrease when\n  complementarity is already small\n\nInteractions:\n- Calls linesearch_->Reset() when mu changes\n- Filter is cleared on barrier parameter update",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMuOracle",
+      "brief": "Strategy interface for suggesting barrier parameter values\n\nMuOracle is the abstract interface for components that compute\nsuggested values for the barrier parameter mu in adaptive (non-monotone)\nbarrier updates.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMuUpdate",
+      "brief": "Strategy interface for updating barrier parameter mu\n\nMuUpdate is the abstract base for strategies that determine the\nbarrier parameter mu and fraction-to-boundary parameter tau for\neach iteration of the interior point method.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMultiVectorMatrix",
+      "brief": "Tall-skinny matrix stored as collection of column Vectors\n\nMultiVectorMatrix represents an m x k matrix (k << m) where each\ncolumn is stored as a separate Vector. Efficient for:\n- Limited-memory quasi-Newton: store recent gradient differences\n- Low-rank updates: V*V^T matvec via two sequential operations",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpMumpsSolverInterface",
+      "brief": "Interface to MUMPS parallel sparse direct solver\n\nMumpsSolverInterface wraps MUMPS (MUltifrontal Massively Parallel\nsparse direct Solver), a freely available solver supporting MPI\nparallelism for distributed memory systems.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpNLP",
+      "brief": "Internal NLP representation using Vector/Matrix abstractions\n\nNLP is Ipopt's internal problem representation with equality constraints\nseparated from inequalities:\n  min  f(x)\n  s.t. c(x) = 0           (equality constraints)\n       d_L <= d(x) <= d_U (inequality constraints)\n       x_L <= x <= x_U    (variable bounds)\n\nUnlike TNLP (user interface with arrays), NLP uses Vector and Matrix\nobjects for all operations. TNLPAdapter converts TNLP to this form.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpNLPBoundsRemover",
+      "brief": "NLP adapter that converts variable bounds to inequality constraints\n\nNLPBoundsRemover is an NLP adapter primarily used for inexact/iterative\nlinear solvers that require the KKT system to have a specific structure\nwithout bound constraints.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpNLPScaling",
+      "brief": "NLP scaling framework for problem conditioning\n\nNLPScalingObject is the abstract base for applying diagonal scaling\nto the NLP to improve numerical conditioning. Transforms:\n  min s_f*f(S_x^{-1}*x\u0303)  s.t.  s_c*c(S_x^{-1}*x\u0303)=0, ...",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpObserver",
+      "brief": "Observer design pattern implementation for change notification\n\nImplements Subject/Observer pattern for automatic cache invalidation.\nTaggedObjects (vectors, matrices) act as Subjects; dependent computed\nquantities (CachedResults) act as Observers. When a Subject changes,\nall attached Observers are notified to invalidate their cached values.\n\nNotification types:\n- NT_Changed: Subject data has been modified\n- NT_BeingDestroyed: Subject is being deleted\n- NT_All: Receive all notification types",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpOptErrorConvCheck",
+      "brief": "Standard convergence check based on optimality error tolerances\n\nOptimalityErrorConvergenceCheck implements the standard termination\ncriteria for Ipopt based on KKT optimality conditions.\n\nOptimal convergence (tol):\n- Dual infeasibility <= dual_inf_tol_\n- Constraint violation <= constr_viol_tol_\n- Complementarity <= compl_inf_tol_\n- Overall scaled error <= tol\n\nAcceptable convergence (acceptable_tol):\n- Less stringent tolerances applied for acceptable_iter_ iterations\n- Terminates early if stuck near acceptable solution\n- acceptable_obj_change_tol_: Detects stagnation in objective\n\nFailure conditions:\n- max_iterations_: Iteration limit exceeded\n- max_wall_time_, max_cpu_time_: Time limits\n- diverging_iterates_tol_: Primal variables diverging\n- mu_target_: Target barrier parameter reached\n\nCurrentIsAcceptable():\n- Returns true if acceptable-level tolerances are met\n- Used by line search to decide on restoration phase",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpOptionsList",
+      "brief": "Container for user-specified algorithmic options\n\nOptionsList stores runtime-configurable parameters as string key-value\npairs. Supports integer, numeric, and string option types with automatic\nconversion. Tracks how many times each option has been accessed (useful\nfor detecting unused options).\n\nOptions are case-insensitive. Values can be set via:\n- SetNumericValue(), SetIntegerValue(), SetStringValue()\n- ReadFromStream() for ipopt.opt format files\n\nIntegrates with RegisteredOptions for validation and default values.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpOrigIpoptNLP",
+      "brief": "Standard IpoptNLP implementation wrapping user's NLP\n\nOrigIpoptNLP is the concrete implementation of IpoptNLP for standard\noptimization problems. It wraps the user's NLP (via TNLP/TNLPAdapter)\nand applies scaling transformations:\n\n  min s_f\u00b7f(S_x^{-1}\u00b7x\u0303)  s.t.  s_c\u00b7c(S_x^{-1}\u00b7x\u0303)=0, ...",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpOrigIterationOutput",
+      "brief": "Standard iteration output for original NLP problem\n\nOrigIterationOutput displays the per-iteration summary line\nfor the original (non-restoration) NLP problem.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpPDFullSpaceSolver",
+      "brief": "Full-space primal-dual system solver with inertia correction\n\nPDFullSpaceSolver is the main implementation of PDSystemSolver.\nIt reduces the 8x8 primal-dual system to the 4x4 augmented system\nby eliminating bound multiplier equations:\n  d_z = S^{-1}(rhs_z - Z*P^T*d_x)\n\nKey features:\n- Iterative refinement with quality monitoring (residual_ratio)\n- Inertia correction via PDPerturbationHandler (adds delta_x, delta_c)\n- Automatic retries with increased pivot tolerance\n- Handles singular systems by adding regularization\n\nParameters:\n- min/max_refinement_steps: Iterative refinement bounds\n- residual_ratio_max: Acceptable solution quality threshold\n- neg_curv_test_tol: Tolerance for inertia heuristics",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpPDPerturbationHandler",
+      "brief": "Inertia correction via primal-dual perturbation (regularization)\n\nPDPerturbationHandler manages the regularization parameters\n(delta_x, delta_s, delta_c, delta_d) added to the KKT system to\nensure correct inertia (n positive, m+p negative eigenvalues).\n\nThe perturbed augmented system is:\n  [W + D_x + \u03b4_x I   ...  ]\n  [  ...   D_s + \u03b4_s I  ...]\n  [  ...   ... D_c - \u03b4_c I]\n  [  ...   ...   D_d - \u03b4_d I]\n\nPerturbation strategies:\n- ConsiderNewSystem(): Called for each new matrix, may add \u03b4_c, \u03b4_d\n  if structurally singular Jacobian is detected\n- PerturbForSingularity(): Handle numerically singular system\n- PerturbForWrongInertia(): Correct incorrect eigenvalue count\n\nHeuristics:\n- Track structural degeneracy (hess_degenerate_, jac_degenerate_)\n- Increase perturbation exponentially until acceptable\n- Decrease perturbation when not needed",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpPDSearchDirCalc",
+      "brief": "Newton search direction computation via primal-dual system\n\nPDSearchDirCalculator is the standard SearchDirectionCalculator\nimplementation that computes the Newton step by solving the\nprimal-dual KKT system.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpPDSystemSolver",
+      "brief": "Abstract interface for solving the full primal-dual KKT system\n\nPDSystemSolver defines the interface for solving the 8x8 block\nprimal-dual linear system that arises at each Newton iteration:\n\n  [W    0   Jc^T  Jd^T  -Px_L  Px_U   0     0   ] [dx  ]   [rx  ]\n  [0    0    0    -I     0     0    -Pd_L  Pd_U ] [ds  ]   [rs  ]\n  [Jc   0    0     0     0     0     0     0   ] [dyc ] = [rc  ]\n  [Jd  -I    0     0     0     0     0     0   ] [dyd ]   [rd  ]\n  [Zl  Px_L^T ...                              ] [dzL ]   [rzL ]\n  [...]                                          [dzU ]   [rzU ]\n  [...]                                          [dvL ]   [rvL ]\n  [...]                                          [dvU ]   [rvU ]\n\nImplementations typically reduce this to the 4x4 augmented system\nby eliminating the bound multiplier equations, then solve via\nAugSystemSolver. The key implementation is PDFullSpaceSolver.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpPardisoMKLSolverInterface",
+      "brief": "Interface to Intel MKL PARDISO sparse solver\n\nPardisoMKLSolverInterface wraps Intel's MKL implementation of PARDISO.\nWhile sharing the same API as pardiso-project.org's version, Intel MKL\nPARDISO has some differences in features and behavior.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpPardisoSolverInterface",
+      "brief": "Interface to PARDISO sparse solver from pardiso-project.org\n\nPardisoSolverInterface wraps the PARDISO solver distributed by\npardiso-project.org (not to be confused with Intel MKL's PARDISO).\nPARDISO is a high-performance parallel direct solver for sparse\nsymmetric indefinite systems.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpPenaltyLSAcceptor",
+      "brief": "Penalty function line search using Waltz-Morales-Nocedal-Orban method\n\nPenaltyLSAcceptor implements exact penalty function globalization\nas an alternative to filter line search. Based on the paper by\nWaltz, Morales, Nocedal, and Orban.\n\nMerit function: phi_nu(x) = f(x) + nu * ||c(x)||_1\n\nAcceptance criterion:\n  phi_nu(x + alpha*d) <= phi_nu(x) + eta * alpha * pred\nwhere pred is the predicted reduction.\n\nPenalty parameter nu:\n- Automatically updated to ensure descent direction\n- Increased by nu_inc_ when direction is not descent\n- nu_init_ provides starting value\n\nKey parameters:\n- nu_init_, nu_inc_: Penalty parameter initialization/increment\n- eta_: Sufficient decrease parameter (Armijo)\n- rho_: Parameter for predicted reduction calculation\n- max_soc_: Maximum second order correction steps",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpPiecewisePenalty",
+      "brief": "Piecewise linear penalty function (PLPF) data structure",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpProbingMuOracle",
+      "brief": "Mehrotra's probing heuristic for barrier parameter selection\n\nProbingMuOracle implements Mehrotra's predictor-corrector approach\nto compute the barrier parameter mu. This is the strategy used in\nmany interior point codes like LOQO and PCx.\n\nAlgorithm:\n1. Compute affine scaling direction (predictor step) with sigma=0\n2. Find maximum step to boundary (alpha_aff)\n3. Compute complementarity after affine step: mu_aff\n4. Compute centering parameter: sigma = (mu_aff/mu)^3\n5. Use sigma in corrector step\n\nThe centering parameter sigma controls the balance between:\n- sigma=0: Pure affine scaling (aggressive, may overshoot)\n- sigma=1: Pure centering (conservative, slow progress)\n\nKey parameter:\n- sigma_max_: Upper bound on sigma to prevent excessive centering",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpQualityFunctionMuOracle",
+      "brief": "Barrier parameter selection via quality function minimization\n\nQualityFunctionMuOracle computes the barrier parameter by minimizing\na quality function that measures how close the predictor-corrector\nstep brings the iterate to optimality.\n\nAlgorithm:\n1. Compute affine scaling direction (mu = 0)\n2. Compute centering direction (pure mu term)\n3. For combined step (sigma * centering + affine), find optimal sigma\n4. Convert optimal sigma to mu = sigma * average_complementarity\n\nQuality function Q(sigma) measures (configurable):\n- Primal-dual error norm after step\n- Centrality deviation from mu-centered path\n- Balancing term for primal/dual progress\n\nConfiguration options:\n- quality_function_norm_: NM_NORM_1, NM_NORM_2, NM_NORM_MAX\n- quality_function_centrality_: CEN_NONE, CEN_LOG, CEN_RECIPROCAL\n- quality_function_balancing_term_: BT_NONE, BT_CUBIC\n\nGolden section search:\n- Finds optimal sigma in [sigma_min_, sigma_max_]\n- Tolerances: quality_function_section_sigma_tol_, _qf_tol_\n- Maximum iterations: quality_function_max_section_steps_",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpReferenced",
+      "brief": "Reference counting base class for SmartPtr management\n\nDefines ReferencedObject - the base class that any object must inherit\nfrom to be managed by SmartPtr<T>. Implements intrusive reference counting\nwhere the count is stored in the object itself rather than externally.\n\nAlso defines Referencer pseudo-class used to track which SmartPtr\ninstances hold references (useful for debugging circular references).",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpRegOptions",
+      "brief": "Option registration, validation, and documentation system\n\nProvides infrastructure for declaring algorithm options with:\n- Type information (OT_Number, OT_Integer, OT_String)\n- Valid ranges (bounds for numerics, allowed values for strings)\n- Default values\n- Documentation strings for help generation\n- Categories for organizing options in documentation\n\nRegisteredOptions aggregates all RegisteredOption instances and\nprovides lookup, validation, and documentation generation.\n\nEach Ipopt component registers its options in RegisterAllOptions()\nduring initialization.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpRestoConvCheck",
+      "brief": "Base class for restoration phase convergence checking\n\nRestoConvergenceCheck extends OptimalityErrorConvergenceCheck for\nthe restoration phase, adding termination criteria based on\nacceptability to the original problem's globalization mechanism.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpRestoFilterConvCheck",
+      "brief": "Restoration phase convergence check for filter line search\n\nRestoFilterConvergenceCheck specializes restoration phase termination\nfor use with the filter globalization mechanism. It checks whether\nthe current restoration point would be acceptable to the original\nproblem's filter.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpRestoIpoptNLP",
+      "brief": "IpoptNLP adapter for restoration phase feasibility problem\n\nRestoIpoptNLP transforms the original NLP into a feasibility problem\nfor the restoration phase. It introduces slack variables to allow\nconstraint violations and penalizes them in the objective.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpRestoIterateInitializer",
+      "brief": "Iterate initialization for restoration phase\n\nRestoIterateInitializer computes starting values for all variables\nin the restoration phase feasibility problem. This includes the\noriginal variables (x, s) and the slack variables (n_c, p_c, n_d, p_d).",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpRestoIterationOutput",
+      "brief": "Iteration output during restoration phase\n\nRestoIterationOutput provides per-iteration summary output while\nthe algorithm is in restoration phase. It displays metrics for the\nORIGINAL NLP (not the restoration feasibility problem).\n\nOutput format:\n- Iteration number marked with 'r' prefix to indicate restoration\n- Objective value from original NLP\n- Constraint violation (theta) for original constraints\n- Dual infeasibility for original problem\n\nDual output mode:\nIf resto_orig_iteration_output is provided, produces two lines:\n1. Restoration phase problem metrics\n2. Original NLP metrics (using original scaling)\n\nConfiguration:\n- print_info_string_: Whether to print info at end of line\n- inf_pr_output_: What to show in inf_pr column\n- print_frequency_iter_: Iteration print frequency\n- print_frequency_time_: Time-based print frequency",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpRestoMinC_1Nrm",
+      "brief": "Restoration phase minimizing 1-norm of constraint violation\n\nMinC_1NrmRestorationPhase is the main restoration phase implementation.\nWhen the line search cannot make progress, it minimizes constraint\nviolation to find a feasible point from which optimization can continue.\n\nRestoration NLP formulation:\n  min  \u03c1 * ||[p_c; n_c; p_d; n_d]||_1 + (\u03b7/2) * ||D_r(x - x_ref)||_2^2\n  s.t. c(x) - p_c + n_c = 0\n       d_L <= d(x) - p_d + n_d <= d_U\n       x_L <= x <= x_U\n       p_c, n_c, p_d, n_d >= 0\n\nWhere:\n- \u03c1: Penalty on infeasibility (resto_penalty_parameter)\n- \u03b7: Proximity weight (resto_proximity_weight * sqrt(mu))\n- D_r: Diagonal scaling based on reference point\n- x_ref: Starting point for restoration\n\nKey behaviors:\n- Uses nested IpoptAlgorithm to solve restoration NLP\n- eq_mult_calculator_ reinitializes multipliers after restoration\n- bound_mult_reset_threshold_: Limits post-restoration bound multipliers\n- count_restorations_: Tracks restoration phase calls",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpRestoPenaltyConvCheck",
+      "brief": "Restoration phase convergence for penalty line search\n\nRestoPenaltyConvergenceCheck extends RestoConvergenceCheck for use\nwhen the original algorithm uses penalty function globalization\n(as opposed to filter method).",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpRestoPhase",
+      "brief": "Strategy interface for restoration phase fallback\n\nRestorationPhase is the abstract base for the fallback mechanism\nwhen the line search cannot make progress. The restoration phase\nminimizes constraint violation to find a feasible point.\n\nTriggered when:\n- Line search step size becomes too small\n- No search direction can be computed (singular KKT system)\n- Algorithm explicitly requests fallback (ActivateFallbackMechanism)\n\nExceptions thrown on restoration failure:\n- RESTORATION_CONVERGED_TO_FEASIBLE_POINT: Success, found feasible point\n- RESTORATION_FAILED: Could not reduce infeasibility\n- RESTORATION_MAXITER_EXCEEDED: Hit iteration limit\n- RESTORATION_USER_STOP: User callback requested stop\n\nMain implementation: RestoIterationOutput minimizes ||c(x)||^2 + ||d(x)-s||^2\nusing the interior point method on a modified feasibility problem.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpRestoRestoPhase",
+      "brief": "Recursive restoration for separable n,p variable initialization\n\nRestoRestorationPhase provides a specialized \"restoration within\nrestoration\" procedure for the MinC_1NrmRestorationPhase. It computes\noptimal values for the slack variables (n_c, p_c, n_d, p_d) by\ntreating them as separable from x and s.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpReturnCodes",
+      "brief": "C++ namespace wrapper for Ipopt return codes\n\nWraps IpReturnCodes_inc.h in Ipopt namespace for C++ usage.\nDefines ApplicationReturnStatus enum used by IpoptApplication:\n\n- Solve_Succeeded: Optimal solution found\n- Solved_To_Acceptable_Level: Acceptable tolerance met\n- Infeasible_Problem_Detected: Locally infeasible\n- Maximum_Iterations_Exceeded, Maximum_CpuTime_Exceeded\n- Restoration_Failed, Error_In_Step_Computation\n- Invalid_Option, Invalid_Number_Detected\n- Not_Enough_Degrees_Of_Freedom, Internal_Error",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpScaledMatrix",
+      "brief": "Matrix decorator applying row and column scaling\n\nScaledMatrix wraps an unscaled matrix M to represent D_r * M * D_c\nwhere D_r and D_c are diagonal scaling matrices (stored as vectors).",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpSearchDirCalculator",
+      "brief": "Strategy interface for computing the Newton search direction\n\nSearchDirectionCalculator is the strategy interface for computing\nthe search direction at each IPM iteration. The computed direction\nis stored in IpData().delta() (an IteratesVector).",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpSlackBasedTSymScalingMethod",
+      "brief": "Simple scaling based on current slack values\n\nSlackBasedTSymScalingMethod computes scaling factors using only\nthe current slack values, without requiring external HSL routines.\nDesigned for use with inexact/iterative linear solvers.\n\nUnlike MC19 which performs full equilibration, this method uses\na simpler heuristic based on:\n- Current slack variable values s\n- Diagonal elements of the KKT system\n\nBenefits:\n- No external library dependencies\n- Lightweight computation\n- Suitable when full equilibration is unnecessary\n\nLimitations:\n- May not achieve as good conditioning as MC19\n- Best for problems where slacks dominate scaling needs",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpSmartPtr",
+      "brief": "Intrusive reference-counting smart pointer for Ipopt\n\nProvides SmartPtr<T> template class implementing automatic memory\nmanagement via reference counting. All managed objects must inherit\nfrom ReferencedObject. Used throughout Ipopt for safe object lifetime\nmanagement without manual delete calls.\n\nKey design: intrusive (count stored in object) vs non-intrusive\n(count stored externally). Intrusive chosen to avoid double-counting\nwhen raw pointers are passed between SmartPtr instances.\n\n@note Does NOT handle circular references - use weak pointers or\nexplicit release methods for bidirectional object graphs.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpSolveStatistics",
+      "brief": "Statistics collected during optimization run\n\nSolveStatistics provides post-solve information accessible via\nIpoptApplication::Statistics(). Captures optimization outcomes\nat the time of construction from internal Ipopt objects.\n\nAvailable statistics:\n- Iteration count\n- Final objective value\n- Final constraint violation (primal infeasibility)\n- Final optimality error (dual infeasibility)\n- Final complementarity\n- Timing information",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpSparseSymLinearSolverInterface",
+      "brief": "Interface for sparse symmetric indefinite linear solvers\n\nSparseSymLinearSolverInterface defines the interface that concrete\nlinear solvers (MA27, MA57, MUMPS, Pardiso, etc.) must implement.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpSpralSolverInterface",
+      "brief": "Interface to SPRAL SSIDS sparse symmetric solver\n\nSpralSolverInterface wraps SPRAL (Sparse Parallel Robust Algorithms\nLibrary), an open-source alternative to HSL solvers developed by\nSTFC RAL. SSIDS is SPRAL's symmetric indefinite direct solver.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpStdAugSystemSolver",
+      "brief": "Standard augmented system solver forming explicit matrix\n\nStdAugSystemSolver is the main implementation of AugSystemSolver\nfor sparse triple-format matrices (SymTMatrix). It explicitly\nassembles the 4x4 augmented system as a CompoundSymMatrix:\n\n  [W + D_x + \u03b4_x I      0         J_c^T      J_d^T  ]\n  [     0          D_s + \u03b4_s I    0          -I    ]\n  [    J_c             0       D_c - \u03b4_c I    0     ]\n  [    J_d            -I          0       D_d - \u03b4_d I]\n\nImplementation details:\n- Uses CompoundSymMatrixSpace with SumSymMatrix for (1,1) block\n- DiagMatrix for D_x, D_s, D_c, D_d contributions\n- IdentityMatrix for scalar delta regularization\n- Tracks matrix tags to avoid unnecessary reassembly\n- Delegates factorization/solve to SymLinearSolver",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpStdCInterface",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpStdInterfaceTNLP",
+      "brief": "TNLP implementation wrapping C function pointer interface\n\nStdInterfaceTNLP implements TNLP by delegating to C function pointers\nprovided through IpStdCInterface.h. This enables C programs to use\nIpopt without C++ inheritance.\n\nThe C interface passes:\n- Problem dimensions (n_var, n_con, nele_jac, nele_hess)\n- Bounds arrays (x_L, x_U, g_L, g_U)\n- Starting points (start_x, start_lam, start_z_L, start_z_U)\n- Function pointers for eval_f, eval_g, eval_grad_f, eval_jac_g, eval_h\n\nStdInterfaceTNLP converts C callbacks to TNLP virtual method calls.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpSumMatrix",
+      "brief": "Matrix representing weighted sum of matrices: M = sum(alpha_i * M_i)\n\nSumMatrix represents a matrix as a sum of terms, each with its own\nscalar factor: M = alpha_0*M_0 + alpha_1*M_1 + ... + alpha_n*M_n",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpSumSymMatrix",
+      "brief": "Symmetric matrix as weighted sum: M = sum(alpha_i * M_i)\n\nSumSymMatrix represents a symmetric matrix as a sum of symmetric terms,\neach with its own scalar factor. Preserves symmetry of components.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpSymLinearSolver",
+      "brief": "Base class for symmetric indefinite linear solvers\n\nSymLinearSolver is the abstract base class for all symmetric linear\nsolvers used in Ipopt's augmented system. The solver must handle\nsymmetric indefinite matrices and optionally provide inertia.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpSymMatrix",
+      "brief": "Abstract base class for symmetric matrices\n\nSymMatrix extends Matrix for symmetric matrices (A = A^T).\nTransMultVector automatically delegates to MultVector since\ntranspose is a no-op for symmetric matrices.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpSymScaledMatrix",
+      "brief": "Symmetric matrix with symmetric (congruent) scaling\n\nSymScaledMatrix wraps a symmetric matrix M to represent D * M * D\nwhere D is a diagonal scaling matrix. Unlike ScaledMatrix which has\nseparate row/column scaling, symmetric scaling uses the same vector.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpSymTMatrix",
+      "brief": "Symmetric sparse matrix in triplet (COO) format\n\nSymTMatrix stores symmetric sparse matrices using coordinate format:\nthree arrays (Irn, Jcn, Values) of length nnz representing nonzeros.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTDependencyDetector",
+      "brief": "Base class for detecting linearly dependent constraint rows\n\nTDependencyDetector is the abstract base class for algorithms that\ndetect linearly dependent rows in the constraint Jacobian. This is\nneeded to handle degenerate problems where some constraints are\nredundant.\n\nPurpose:\nIf rank(J_c) < m_c, the KKT system is singular. Detecting and\nremoving dependent rows allows the solver to proceed.\n\nInterface:\n- DetermineDependentRows(): Takes Jacobian in triplet format,\n  returns list of dependent row indices in c_deps\n\nInput format (MA28 style triplet):\n- n_rows, n_cols: Jacobian dimensions\n- n_jac_nz: Number of nonzeros\n- jac_c_vals, jac_c_iRow, jac_c_jCol: Values and indices\n\nThe input arrays may be modified internally (working space).",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTNLP",
+      "brief": "User interface for defining NLP problems in standard form\n\nTNLP (Templated NLP) is the primary user-facing class for defining\noptimization problems. Users inherit from TNLP and implement:",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTNLPAdapter",
+      "brief": "Adapter converting user TNLP interface to internal NLP\n\nTNLPAdapter is a Design Pattern Adapter that converts from the\nuser-facing TNLP format to Ipopt's internal NLP representation:\n\nTNLP (user):           NLP (internal):\n  g_L <= g(x) <= g_U  ->  c(x) = 0           (equalities)\n                          d_L <= d(x) <= d_U (inequalities)\n\nKey responsibilities:\n- Separate mixed constraints into equalities and inequalities\n- Handle fixed variables (as parameters or relaxed bounds)\n- Convert sparse triplet (i,j,val) to internal matrix format\n- Detect linear dependencies in constraints\n- Map between TNLP multipliers and internal dual variables",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTNLPReducer",
+      "brief": "Wrapper to solve subproblems with fewer constraints\n\nTNLPReducer wraps an existing TNLP and presents a reduced problem\nwith specified constraints, lower bounds, and upper bounds removed.\nUseful for experimentation with constraint subsets.\n\nCan skip:\n- Constraints (by index)\n- Lower bounds on variables\n- Upper bounds on variables\n- Fix certain variables\n\n@note Not efficient - still evaluates full problem internally.\nPrimarily for debugging and experimentation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpTSymDependencyDetector",
+      "brief": "Dependency detection using symmetric linear solver\n\nTSymDependencyDetector detects linearly dependent constraint rows\nby using a TSymLinearSolver that provides degeneracy detection.\n\nMethod:\nSome symmetric linear solvers (e.g., MA57 via ProvidesDegeneracyDetection)\ncan identify dependent rows during factorization. This class\nleverages that capability.\n\nAlgorithm:\n1. Form symmetric matrix J*J^T (or equivalent structure)\n2. Attempt factorization with the TSymLinearSolver\n3. If solver detects singularity, query dependent row indices\n4. Return list of dependent rows in c_deps\n\nRequirements:\n- The underlying linear solver must implement\n  ProvidesDegeneracyDetection() returning true\n- Must implement DetermineDependentRows() for the sparse format\n\nThis is preferred over MA28-based detection when using a solver\nthat already provides this capability.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTSymLinearSolver",
+      "brief": "Driver connecting SymMatrix to sparse linear solver interfaces\n\nTSymLinearSolver is the main driver that connects Ipopt's SymMatrix\nobjects to concrete sparse linear solvers. It handles:\n- Matrix format conversion (SymMatrix to triplet/CSR)\n- Optional matrix scaling\n- Delegation to SparseSymLinearSolverInterface implementations",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTSymScalingMethod",
+      "brief": "Base class for matrix scaling in triplet format\n\nTSymScalingMethod is the abstract base class for computing diagonal\nscaling factors for symmetric matrices. Scaling improves numerical\nconditioning of the linear system.\n\nScaling transformation:\n  Original: A * x = b\n  Scaled:   (D*A*D) * (D^{-1}*x) = D*b\nwhere D = diag(scaling_factors).\n\nThe ComputeSymTScalingFactors method takes:\n- n: matrix dimension\n- nnz: number of nonzeros\n- airn, ajcn: row/column indices (triplet format)\n- a: matrix values\n- scaling_factors: output array of length n\n\nImplementations:\n- Mc19TSymScalingMethod: HSL MC19 equilibration\n- SlackBasedTSymScalingMethod: Simple slack-based scaling",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTaggedObject",
+      "brief": "Base class for objects with change-tracking tags\n\nTaggedObject provides efficient change detection for expensive\ncomputations. Each object maintains a unique tag that changes whenever\nthe object's internal state is modified. Consumers compare stored tags\nto detect changes and avoid redundant recalculation.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTimedTask",
+      "brief": "Timer class for profiling algorithm components\n\nTimedTask provides RAII-style timing measurement for code blocks.\nTracks CPU time, system time, and wall clock time. Multiple\nStart()/End() pairs accumulate total time across invocations.\n\nUsage:\n  TimedTask timer;\n  timer.Start();\n  // ... expensive operation ...\n  timer.End();\n  double elapsed = timer.TotalCpuTime();\n\nUsed throughout Ipopt to report timing breakdown by category\n(function evaluation, linear solve, line search, etc.).",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpTimingStatistics",
+      "brief": "Collection of timing statistics for algorithm profiling\n\nTimingStatistics aggregates TimedTask objects for all major\nalgorithm components, enabling performance profiling and\nbottleneck identification.\n\nTiming categories:\n- Algorithm phases: InitializeIterates, UpdateHessian, OutputIteration,\n  UpdateBarrierParameter, ComputeSearchDirection, etc.\n- Linear system: PDSystemSolverTotal, LinearSystemFactorization,\n  LinearSystemBackSolve, LinearSystemScaling\n- NLP evaluations: f_eval_time, grad_f_eval_time, c_eval_time,\n  jac_c_eval_time, d_eval_time, jac_d_eval_time, h_eval_time\n- Auxiliary: Task1-Task6 for ad-hoc profiling\n\nKey methods:\n- ResetTimes(): Clear all accumulated times\n- EnableTimes()/DisableTimes(): Control timing overhead\n- PrintAllTimingStatistics(): Output formatted timing report\n- TotalFunctionEvaluationCpuTime(): Sum of NLP evaluation times\n\nEach TimedTask tracks CPU time, system time, and wall-clock time.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTransposeMatrix",
+      "brief": "Matrix wrapper representing transpose of another matrix\n\nTransposeMatrix wraps an existing matrix M to represent M^T without\nexplicitly forming the transpose. MultVector becomes TransMultVector\non the original, and vice versa.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTripletHelper",
+      "brief": "Recursive conversion of abstract matrices to triplet format\n\nTripletHelper provides static methods for extracting COO (Coordinate)\nsparse format from Ipopt's abstract Matrix hierarchy. Used to interface\nwith external linear solvers expecting triplet format.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTripletToCSRConverter",
+      "brief": "Convert sparse matrix from triplet to CSR format\n\nTripletToCSRConverter converts symmetric matrices from triplet\n(COO) format to Compressed Sparse Row (CSR) format. Handles both\nupper-triangular-only and full-matrix storage.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpTypes",
+      "brief": "Fundamental type definitions for Ipopt (C++ namespace wrapper)\n\nWraps the C type definitions from IpTypes.h in the Ipopt namespace:\n- Number (ipnumber): floating-point type for all numerical values\n- Index (ipindex): integer type for array indices and dimensions\n\nActual types depend on compile-time configuration (IPOPT_SINGLE,\nIPOPT_INT64). Default is double for Number and int for Index.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpUserScaling",
+      "brief": "NLP scaling using user-provided scaling factors\n\nUserScaling obtains scaling factors directly from the NLP interface\nvia the get_scaling_parameters callback (TNLP) or GetScalingParameters\nmethod (NLP).",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpUtils",
+      "brief": "General utility functions for Ipopt\n\nProvides platform-independent utility functions:\n- Min/Max template functions for up to 4 arguments\n- IsFiniteNumber() for NaN/Inf detection\n- CpuTime(), SysTime(), WallclockTime() for profiling\n- IpRandom01() for random number generation\n- Snprintf() for safe formatted output\n- Compare_le() for numerical comparison with tolerance\n- Signal handling for graceful interrupt",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpVector",
+      "brief": "Abstract base class for all vector types in Ipopt\n\nVector is the foundation of Ipopt's linear algebra abstraction.\nProvides BLAS-1 style operations (Copy, Scal, Axpy, Dot, Nrm2, etc.)\nplus IPM-specific operations (AddOneVector, FracToBound, etc.).",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpWarmStartIterateInitializer",
+      "brief": "Warm start initialization from previous solution\n\nWarmStartIterateInitializer initializes IPM iterates from a\npreviously computed solution, enabling faster convergence for\nrelated problems (e.g., MPC, parametric optimization).\n\nWarm start sources:\n- warm_start_entire_iterate_: Use GetWarmStartIterate() from NLP\n- Otherwise: Use initialization vectors from NLP\n\nProcessing steps:\n1. Push primals away from bounds (warm_start_bound_push/frac_)\n2. Push slacks (warm_start_slack_bound_push/frac_)\n3. Clip multipliers (warm_start_mult_init_max_)\n4. Ensure bound multipliers positive (warm_start_mult_bound_push_)\n\nTarget mu adjustment (warm_start_target_mu_):\n- Adjusts slack/multiplier pairs toward target complementarity\n- process_target_mu(): Scales to achieve s*z \u2248 target_mu\n- adapt_to_target_mu(): Fine-tunes pairing\n\nKey parameters:\n- warm_start_bound_push_: Absolute bound push\n- warm_start_bound_frac_: Relative bound push\n- warm_start_mult_init_max_: Maximum multiplier magnitude\n- warm_start_target_mu_: Target barrier parameter",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpWsmpSolverInterface",
+      "brief": "Interface to IBM WSMP sparse symmetric direct solver\n\nWsmpSolverInterface wraps the Watson Sparse Matrix Package (WSMP),\na high-performance parallel direct solver developed at IBM for\nsparse symmetric indefinite linear systems.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpZeroMatrix",
+      "brief": "Matrix with all zero entries (null matrix)\n\nZeroMatrix represents a matrix of zeros with given dimensions.\nNo storage required. Matrix-vector multiply just scales y by beta.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpZeroSymMatrix",
+      "brief": "Symmetric matrix with all zero entries\n\nZeroSymMatrix represents a symmetric zero matrix (n x n).\nNo storage required. Inherits from SymMatrix for type safety.",
+      "has_algorithm": true
+    },
+    {
+      "name": "IpoptRJournal",
+      "brief": "R output journal for Ipopt progress messages\n\nIpoptRJournal derives from Journal to redirect Ipopt output to R.\nSends iteration progress and solver messages to R console via Rprintf.\nAllows R users to monitor optimization progress interactively.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpoptRNLP",
+      "brief": "R language interface for Ipopt TNLP\n\nIpoptRNLP derives from TNLP to bridge Ipopt with R. Handles callback\nto R functions for objective (eval_f), gradient (eval_grad_f),\nconstraints (eval_g), Jacobian (eval_jac_g), and Hessian (eval_h).\nManages R SEXP objects for environment, bounds, and sparse structures.\nSupports Hessian approximation mode. Part of ipoptr R package.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensAlgorithm",
+      "brief": "sIPOPT sensitivity analysis main algorithm\n\nSensAlgorithm: controller for parametric sensitivity analysis in Ipopt.\nComputes directional derivatives and sensitivity matrices for solution\nw.r.t. parameter perturbations. Uses Schur complement decomposition\nto efficiently compute sensitivities after optimal solution found.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensAmplTNLP",
+      "brief": "sIPOPT AMPL interface with sensitivity support\n\nSensAmplTNLP extends AmplTNLP with sensitivity parameter handling.\nReads sens_init_constr suffix for constraint parameter indices.\nEnables parametric sensitivity analysis for AMPL models.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensApplication",
+      "brief": "sIPOPT application wrapper for sensitivity analysis\n\nSensApplication wraps IpoptApplication with sensitivity extensions.\nEntry point for sIPOPT: runs optimization then sensitivity analysis.\nManages parameter perturbations and extracts sensitivity information.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensBacksolver",
+      "brief": "sIPOPT backsolver interface for linear systems\n\nSensBacksolver: abstract interface for solving linear systems in sIPOPT.\nUsed for Schur complement right-hand side solutions. Implementations\nleverage existing Ipopt linear solvers for efficient back-substitution.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensBuilder",
+      "brief": "sIPOPT builder for sensitivity analysis components\n\nSensBuilder: factory for creating sIPOPT algorithm components.\nAssembles SchurDriver, StepCalculator, and Measurement objects\nbased on options. Configures sensitivity computation pipeline.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensDenseGenSchurDriver",
+      "brief": "sIPOPT dense Schur complement driver\n\nSensDenseGenSchurDriver: dense matrix implementation of SchurDriver.\nComputes Schur complement S = C - B*K^{-1}*A for sensitivity analysis.\nSuitable for problems with moderate numbers of sensitivity parameters.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensIndexPCalculator",
+      "brief": "sIPOPT index-based perturbation calculator\n\nSensIndexPCalculator: calculates perturbations for indexed parameters.\nIdentifies which variables/constraints are perturbed and computes\ncorresponding right-hand sides for sensitivity linear systems.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensIndexSchurData",
+      "brief": "sIPOPT index-based Schur data storage\n\nSensIndexSchurData: stores index-based data for Schur complement.\nTracks which rows/columns of KKT system correspond to parameters.\nManages sparse structure for efficient Schur complement computation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensMeasurement",
+      "brief": "sIPOPT measurement interface for parameter values\n\nSensMeasurement: abstract interface for providing parameter values.\nMeasurement objects supply perturbed parameter values to sensitivity\nanalysis. Enables real-time or batch parameter updates.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensMetadataMeasurement",
+      "brief": "sIPOPT metadata-based measurement\n\nSensMetadataMeasurement: reads parameter perturbations from NLP metadata.\nExtracts sensitivity parameters from AMPL suffixes or TNLP metadata.\nEnables automatic parameter identification from problem definition.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensPCalculator",
+      "brief": "sIPOPT perturbation calculator interface\n\nSensPCalculator: abstract interface for computing perturbations.\nCalculates right-hand sides for sensitivity linear systems based\non how parameters affect KKT conditions.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensReducedHessianCalculator",
+      "brief": "sIPOPT reduced Hessian computation\n\nSensReducedHessianCalculator: computes reduced Hessian of Lagrangian.\nProjects full Hessian onto null space of active constraints.\nUsed for computing second-order sensitivity information.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensRegOp",
+      "brief": "sIPOPT registration operations for options\n\nSensRegOp: registers sIPOPT-specific options with Ipopt.\nAdds sensitivity analysis parameters like n_sens_steps, sens_prefix,\nand computation modes to Ipopt option system.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensSchurData",
+      "brief": "sIPOPT Schur complement data structures\n\nSensSchurData: abstract base for Schur complement data storage.\nDefines interface for storing and accessing matrix blocks needed\nfor Schur complement S = C - B*K^{-1}*A computation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensSchurDriver",
+      "brief": "sIPOPT Schur complement driver interface\n\nSensSchurDriver: abstract interface for Schur complement operations.\nManages factorization and solve phases for sensitivity analysis.\nImplementations handle dense, sparse, or iterative approaches.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensSimpleBacksolver",
+      "brief": "sIPOPT simple backsolver implementation\n\nSensSimpleBacksolver: basic implementation using Ipopt linear solver.\nWraps existing factorized KKT system for back-substitution.\nReuses factorization from optimization for sensitivity solves.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensStdStepCalc",
+      "brief": "sIPOPT standard sensitivity step calculator\n\nSensStdStepCalc: standard implementation of SensitivityStepCalculator.\nComputes sensitivity steps using Schur complement and back-solves.\nHandles bound corrections for perturbed solutions.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensStepCalc",
+      "brief": "sIPOPT sensitivity step calculator interface\n\nSensStepCalc: abstract interface for computing sensitivity steps.\nGiven parameter perturbation, computes resulting change in solution.\nCore component of sIPOPT sensitivity analysis pipeline.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensSuffixHandler",
+      "brief": "sIPOPT AMPL suffix handler\n\nSensSuffixHandler: processes AMPL suffixes for sensitivity analysis.\nReads parameter indices and perturbation values from .row/.col suffixes.\nEnables AMPL-based sensitivity specification.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SensUtils",
+      "brief": "sIPOPT utility functions and enums\n\nSensUtils: utility types for sIPOPT sensitivity analysis.\nDefines SensAlgorithmExitStatus enum for return codes.\nCommon helper functions used across sIPOPT components.",
+      "has_algorithm": false
+    },
+    {
+      "name": "TutorialCpp_nlp",
+      "brief": "Ipopt C++ tutorial exercise NLP\n\nTutorialCpp_nlp: tutorial exercise for learning TNLP interface.\nStep-by-step guide to implementing optimization problems.\nThree versions: skeleton (to fill in), mistake (to debug), solution.",
+      "has_algorithm": false
+    },
+    {
+      "name": "TutorialCpp_nlp",
+      "brief": "Ipopt C++ tutorial exercise NLP\n\nTutorialCpp_nlp: tutorial exercise for learning TNLP interface.\nStep-by-step guide to implementing optimization problems.\nThree versions: skeleton (to fill in), mistake (to debug), solution.",
+      "has_algorithm": false
+    },
+    {
+      "name": "TutorialCpp_nlp",
+      "brief": "Ipopt C++ tutorial exercise NLP\n\nTutorialCpp_nlp: tutorial exercise for learning TNLP interface.\nStep-by-step guide to implementing optimization problems.\nThree versions: skeleton (to fill in), mistake (to debug), solution.",
+      "has_algorithm": false
+    }
+  ]
+}

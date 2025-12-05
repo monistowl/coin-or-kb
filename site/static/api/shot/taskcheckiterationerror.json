@@ -1,0 +1,13 @@
+{
+  "name": "TaskCheckIterationError",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskCheckIterationError.h",
+  "brief": "Detect errors during iteration\n\nHandles solver failures and numerical issues.\n\n**TaskCheckIterationError Class:**\n- taskIDIfTrue: Jump target when error detected\n- run(): Check for MIP solver errors, infeasibility, etc.\n\n**Error Types:**\n- MIP solver failure or timeout\n- Numerical issues in cut generation\n- Unexpected infeasibility",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskTerminate.h for error termination",
+    "DualSolver.h for MIP solve status"
+  ]
+}

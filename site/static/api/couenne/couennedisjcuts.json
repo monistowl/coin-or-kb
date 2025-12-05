@@ -1,0 +1,23 @@
+{
+  "name": "CouenneDisjCuts",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/disjunctive/CouenneDisjCuts.hpp",
+  "brief": "Disjunctive cut generator for nonconvex MINLP\n\nGenerates lift-and-project style disjunctive cuts by solving a\nCut-Generating Linear Program (CGLP) for each disjunction.",
+  "algorithms": [
+    {
+      "name": "Disjunctive Cut Generation via CGLP:\nGenerate valid inequalities from (P\u2081 \u2228 P\u2082) disjunctions:\n1. For disjunction (Ax \u2264 b) \u2228 (Cx \u2264 d):\n   Represent as union: x \u2208 conv(P\u2081 \u222a P\u2082)\n2. CGLP formulation:\n   Variables: (\u03b1, \u03b2\u2080) for cut \u03b1\u1d40x \u2264 \u03b2\u2080\n   Constraints:\n   - \u03b1\u1d40x \u2264 \u03b2\u2080 valid for P\u2081: \u2203u\u22650: \u03b1 = u\u1d40A, \u03b2\u2080 \u2265 u\u1d40b\n   - \u03b1\u1d40x \u2264 \u03b2\u2080 valid for P\u2082: \u2203v\u22650: \u03b1 = v\u1d40C, \u03b2\u2080 \u2265 v\u1d40d\n   Objective: max \u03b1\u1d40x\u0304 - \u03b2\u2080 (separation depth at LP solution x\u0304)\n3. Solve CGLP \u2192 optimal (\u03b1*, \u03b2\u2080*) gives deepest cut\n4. Add cut \u03b1*\u1d40x \u2264 \u03b2\u2080* to LP relaxation\n\nDisjunction sources:\n- Simple branching: x\u1d62 \u2264 k \u2228 x\u1d62 \u2265 k+1\n- Split from strong branching candidates\n- Convexification disjunctions from nonlinear terms",
+      "math": "Lift-and-project derivation:\nFor split \u03c0 x \u2264 \u03c0\u2080 \u2228 \u03c0 x \u2265 \u03c0\u2080+1:\n  Cut: (\u03b1 - \u03bb\u03c0)\u1d40x \u2264 \u03b2\u2080 - \u03bb(\u03c0\u2080+1) for any \u03b1\u00b7x \u2264 \u03b2\u2080 valid, \u03bb \u2265 0",
+      "complexity": "CGLP has O(m\u2081 + m\u2082) constraints, O(n) variables.\nTotal: O(numDisjunctions_ \u00b7 LP_solve(m,n)).",
+      "ref": [
+        "Balas (1979). \"Disjunctive programming\". Annals of Discrete Math 5:3-51.",
+        "Ceria, Soares (1999). \"Convex programming for disjunctive convex\n  optimization\". Mathematical Programming 86(3):595-614."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglLandP for related lift-and-project cuts",
+    "CouenneCutGenerator for convexification cuts"
+  ]
+}

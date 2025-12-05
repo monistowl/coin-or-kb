@@ -1,0 +1,9 @@
+{
+  "name": "mul_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/mul_op.hpp",
+  "brief": "Internal implementation: mul_op",
+  "algorithms": [],
+  "methods": []
+}

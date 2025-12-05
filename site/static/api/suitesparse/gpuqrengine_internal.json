@@ -1,0 +1,12 @@
+{
+  "name": "GPUQREngine_Internal",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_Internal.hpp",
+  "brief": "Internal API and UberKernel declaration\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nInternal includes (Common, TaskDescriptor, Front, Stats, SuiteSparse).\nGPUQREngine_UberKernel: launches GPU kernel on stream with work queue.\nGPUQREngine_Internal: main factorization entry with Parent/Child arrays\nfor multifrontal tree traversal. Returns QREngineResultCode.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_SuiteSparse.hpp for public API"
+  ]
+}

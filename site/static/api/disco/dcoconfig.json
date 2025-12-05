@@ -1,0 +1,12 @@
+{
+  "name": "DcoConfig",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoConfig.hpp",
+  "brief": "Build configuration header for DisCO\n\nStandard COIN-OR configuration pattern that selects appropriate\nconfig files based on build system and context.\n\n**Configuration Selection:**\n- With autotools (HAVE_CONFIG_H defined):\n  - Library build (DISCO_BUILD): uses config.h\n  - Client code: uses config_dco.h\n- Without autotools (e.g., Visual Studio):\n  - Library build: uses config_default.h\n  - Client code: uses config_dco_default.h",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoModel.hpp for main solver interface"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "highs_c_api",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/interfaces/highs_c_api.h",
+  "brief": "Pure C interface to HiGHS solver\n\nProvides C-compatible API for LP/MIP/QP solving without C++ dependencies.\n\n**Quick-Start Functions:**\n- Highs_lpCall(): Solve LP in one call with solution returned\n- Highs_mipCall(): Solve MIP in one call\n- Highs_qpCall(): Solve QP in one call\n\n**Full API (via Highs pointer):**\n- Highs_create()/Highs_destroy(): Instance management\n- Highs_passLp()/Highs_passMip(): Pass model data\n- Highs_run(): Solve current model\n- Highs_getSolution()/Highs_getBasis(): Retrieve results\n- Highs_setOption*(): Configure solver options\n- Highs_getInfo*(): Query solver statistics\n\n**Status Constants:**\n- kHighsStatus{Ok,Warning,Error}: Return codes\n- kHighsModelStatus*: Optimal, Infeasible, Unbounded, etc.\n- kHighsBasisStatus*: Lower, Basic, Upper, Zero, Nonbasic\n\n**Type Constants:**\n- kHighsVarType*: Continuous, Integer, SemiContinuous, etc.\n- kHighsOptionType*: Bool, Int, Double, String\n- kHighsMatrixFormat*: Colwise, Rowwise",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Highs.h for C++ API",
+    "lp_data/HConst.h for C++ enum definitions"
+  ]
+}

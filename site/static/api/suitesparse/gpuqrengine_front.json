@@ -1,0 +1,13 @@
+{
+  "name": "GPUQREngine_Front",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_Front.hpp",
+  "brief": "Frontal matrix class for GPU QR factorization\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nFront class encapsulates frontal matrix metadata: dimensions (fm\u00d7fn),\nCPU/GPU pointers (F, gpuF, cpuR), factorization state, staircase for\nexploiting block zeros. SparseMeta member extends for multifrontal\nsparse factorization. State machine tracks: ALLOCATE_WAIT \u2192 FACTORIZE \u2192 DONE.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_Scheduler.hpp for front coordination",
+    "GPUQREngine_FrontState.hpp for state machine definition"
+  ]
+}

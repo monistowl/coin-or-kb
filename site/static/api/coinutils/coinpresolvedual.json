@@ -1,0 +1,19 @@
+{
+  "name": "CoinPresolveDual",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveDual.hpp",
+  "brief": "Fix variables using dual bounds and reduced cost analysis",
+  "algorithms": [
+    {
+      "name": "Dual Bound Propagation:\n  Use dual feasibility to fix primal variables:\n  1. For slacks s_i: d_{n+i} = -y_i, bound y_i from slack bounds\n  2. For singletons x_j: d_j = c_j - y_i\u00b7a_ij, bound y_i from d_j sign\n  3. Propagate bounds through reduced cost equation d_j = c_j - y'a_j\n  4. If d_j > 0 at optimality: x_j at lower bound (minimization)\n  5. If d_j < 0 at optimality: x_j at upper bound",
+      "math": "Reduced cost: d_j = c_j - \u03a3_i y_i a_ij\n  Dual feasibility (min): d_j \u2265 0 if x_j at lower, d_j \u2264 0 if at upper\n  Bound propagation: y_i^L \u2264 y_i \u2264 y_i^U \u2192 d_j^L \u2264 d_j \u2264 d_j^U",
+      "complexity": "Time: O(iterations \u00d7 nnz) for bound propagation\n  Very powerful for detecting fixed variables without solving LP\n  Can prove unboundedness when required bound is missing",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

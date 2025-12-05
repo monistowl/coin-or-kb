@@ -1,0 +1,16 @@
+{
+  "name": "MKC_var",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Mkc/include/MKC_var.hpp",
+  "brief": "MKC variable/column definitions",
+  "algorithms": [
+    {
+      "name": "MKC Variable: Knapsack Packing Column\n\nMKC_var represents a column in the set covering formulation:\na feasible packing of orders into a single knapsack.\n\n**Data:**\n- cost: Column coefficient in objective\n- entries: First entry = knapsack index, rest = order indices packed\n- color[2]: For branching on color combinations\n\n**Types:**\n- MKC_RegularVar: Generated via pricing\n- MKC_BranchingVar: Created during branching",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

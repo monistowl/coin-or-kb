@@ -1,0 +1,19 @@
+{
+  "name": "MC_solution",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/MaxCut/include/MC_solution.hpp",
+  "brief": "Max-cut solution representation",
+  "algorithms": [
+    {
+      "name": "Max-Cut Solution: Partition and Heuristic Improvement\n\nStores max-cut solution: node partition (sig vector) and cut value.\n\n**sig vector:** Sign assignment (+1 or -1) for each node.\nTwo nodes with different signs are on opposite sides of the cut.\n\n**Local search:** Constructor can apply edge-switch and structure-switch\nheuristics to improve initial partition.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "MC.hpp for MC_problem definition"
+  ]
+}

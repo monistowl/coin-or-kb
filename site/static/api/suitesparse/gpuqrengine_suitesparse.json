@@ -1,0 +1,12 @@
+{
+  "name": "GPUQREngine_SuiteSparse",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_SuiteSparse.hpp",
+  "brief": "Public SuiteSparse API for GPU QR factorization\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nMain entry point for SPQR GPU support. QREngineResultCode enum: SUCCESS,\nOUTOFMEMORY, GPUERROR. GPUQREngine template functions: dense (fronts only)\nand sparse (with Parent/Childp/Child tree). GPUQREngine_FindStaircase\ncomputes staircase for block zero exploitation.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_Internal.hpp for implementation details"
+  ]
+}

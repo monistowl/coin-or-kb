@@ -1,0 +1,22 @@
+{
+  "name": "IpPDPerturbationHandler",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpPDPerturbationHandler.hpp",
+  "brief": "Inertia correction via primal-dual perturbation (regularization)\n\nPDPerturbationHandler manages the regularization parameters\n(delta_x, delta_s, delta_c, delta_d) added to the KKT system to\nensure correct inertia (n positive, m+p negative eigenvalues).\n\nThe perturbed augmented system is:\n  [W + D_x + \u03b4_x I   ...  ]\n  [  ...   D_s + \u03b4_s I  ...]\n  [  ...   ... D_c - \u03b4_c I]\n  [  ...   ...   D_d - \u03b4_d I]\n\nPerturbation strategies:\n- ConsiderNewSystem(): Called for each new matrix, may add \u03b4_c, \u03b4_d\n  if structurally singular Jacobian is detected\n- PerturbForSingularity(): Handle numerically singular system\n- PerturbForWrongInertia(): Correct incorrect eigenvalue count\n\nHeuristics:\n- Track structural degeneracy (hess_degenerate_, jac_degenerate_)\n- Increase perturbation exponentially until acceptable\n- Decrease perturbation when not needed",
+  "algorithms": [
+    {
+      "name": "Inertia Correction via Perturbation:\nAdd regularization to KKT system diagonal for correct eigenvalue signature:\n1. ConsiderNewSystem: Check if structural degeneracy detected\n   - If jac_degenerate_: set \u03b4_c = \u03b4_d = \u03b4_cd (constraint regularization)\n   - If hess_degenerate_: set \u03b4_x, \u03b4_s > 0 (primal regularization)\n2. PerturbForWrongInertia: Inertia mismatch after factorization\n   - First try: \u03b4_x = delta_xs_init_ (small)\n   - Retry: \u03b4_x \u2190 \u03b4_x \u00b7 delta_xs_inc_fact_ (exponential increase)\n   - Stop when \u03b4_x > delta_xs_max_ (failure)\n3. PerturbForSingularity: Numerical singularity detected\n   - Similar exponential increase strategy\n4. On success: \u03b4_x_last_ \u2190 \u03b4_x \u00b7 delta_xs_dec_fact_ (reduce for next time)",
+      "math": "Perturbed augmented system:\n[H + \u03a3 + \u03b4_x\u00b7I     A\u1d40        ] [\u0394x]   [r_x]\n[    A        -\u03b4_c\u00b7I         ] [\u0394\u03bb] = [r_\u03bb]\n\nRequired inertia for descent direction:\n- n + n_s positive eigenvalues (primal variables + slacks)\n- m_eq + m_ineq negative eigenvalues (dual variables)\n\nConstraint regularization: \u03b4_c = \u03b4_cd_val \u00b7 \u03bc^{\u03b4_cd_exp}\n(decreases with barrier parameter for asymptotic accuracy)",
+      "complexity": "O(1) per perturbation decision. Dominated by linear\nsolver factorization O(nnz(L)\u00b7fill) which may be retried multiple times.",
+      "ref": [
+        "W\u00e4chter & Biegler (2006). \"On the implementation of an interior-point\n  filter line-search algorithm for large-scale nonlinear programming\".\n  Mathematical Programming 106(1):25-57. [Section 3.1: Inertia correction]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpPDFullSpaceSolver.hpp for usage",
+    "IpAugSystemSolver.hpp for where perturbations are applied"
+  ]
+}

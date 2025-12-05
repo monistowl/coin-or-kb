@@ -1,0 +1,14 @@
+{
+  "name": "HighsLpAggregator",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsLpAggregator.h",
+  "brief": "Row aggregation for cut generation\n\nCombines LP rows with weights to create mixed-integer Gomory source rows.\n\n**Core Operations:**\n- addRow(): Add weighted LP row to current aggregation\n- getCurrentAggregation(): Extract combined row as sparse vector\n- clear(): Reset for next aggregation\n\n**Aggregation Format:**\nResult includes slack variables making it an equation with RHS = 0:\n  sum(a_ij * x_j) + s_i = b_i  \u2192  aggregated as equality\n\n**Implementation:**\n- Uses HighsSparseVectorSum for efficient sparse combination\n- Tracks nonzero indices incrementally\n- negate parameter for sign flip (row sense conversion)\n\n**Cut Generation Context:**\n1. Start from LP tableau row (basis row)\n2. Aggregate additional rows to eliminate non-integer variables\n3. Pass to HighsTransformedLp for bound substitution\n4. Generate Gomory mixed-integer cuts",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsTransformedLp.h for bound transformation",
+    "mip/HighsSeparation.h for cut orchestration",
+    "util/HighsSparseVectorSum.h for sparse vector arithmetic"
+  ]
+}

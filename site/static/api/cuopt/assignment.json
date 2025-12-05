@@ -1,0 +1,13 @@
+{
+  "name": "assignment",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/include/cuopt/routing/assignment.hpp",
+  "brief": "VRP solution output container with routes and timing\n\nContainer for Vehicle Routing Problem solver output.\n\n**assignment_t Class:**\n- Optimized routes stored in GPU device memory\n- Arrival times, truck assignments, node types\n- Objective values and solution status\n\n**Solution Data:**\n- get_route(): Ordered sequence of node IDs\n- get_truck_id(): Vehicle assignment per stop\n- get_arrival_stamp(): Arrival time at each stop\n- get_unserviced_nodes(): Orders not serviced (if any)\n\n**Solution Status (solution_status_t):**\n- SUCCESS: Feasible solution found\n- INFEASIBLE: No feasible solution exists\n- TIMEOUT: Time limit reached\n- EMPTY: Solver did not run\n- ERROR: Runtime error occurred\n\n**host_assignment_t:**\n- Host-side copy for CPU access\n- std::vector storage for routes and stamps",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cuopt/routing/solve.hpp for generating solutions",
+    "cuopt/routing/data_model_view.hpp for problem input"
+  ]
+}

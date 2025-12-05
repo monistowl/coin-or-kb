@@ -1,0 +1,23 @@
+{
+  "name": "OsiSolverInterface",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiSolverInterface.hpp",
+  "brief": "Abstract base class defining the Open Solver Interface (OSI)\n\nOSI provides a uniform API for accessing different LP/MIP solvers\n(Clp, CPLEX, Gurobi, GLPK, etc.) through a common interface. This\nallows solver-independent application code.\n\nKey capabilities:\n- LP relaxation solving (initialSolve, resolve)\n- Model query (getColLower, getRowUpper, getObjCoefficients)\n- Solution query (getColSolution, getRowPrice, getReducedCost)\n- Problem modification (setColBounds, addRow, addCol)\n- Warm starting (getWarmStart, setWarmStart)\n- Cut management (applyCuts, applyRowCuts)\n- MIP support (setInteger, branchAndBound)\n\nTypical workflow:\n1. Create solver-specific instance (e.g., OsiClpSolverInterface)\n2. Load problem via loadProblem() or readMps()\n3. Call initialSolve() for first LP solution\n4. Call resolve() after modifications\n5. Query solution via getColSolution(), getObjValue()",
+  "algorithms": [
+    {
+      "name": "Design Pattern: Abstract Factory + Strategy\n  - Factory: concrete implementations (OsiClpSolverInterface, etc.)\n    instantiate solver-specific backends\n  - Strategy: algorithm choice (simplex vs barrier) delegated to\n    underlying solver; OSI provides uniform control interface\n  - Bridge: decouples client code from solver implementation details\n\n@invariant Solution pointers (getColSolution, getRowPrice, etc.) are\n  invalidated by any problem modification or subsequent solve call.\n  Client code must copy data if needed across modifications.\n\n@invariant Warm start objects must be compatible with the solver that\n  created them. Cross-solver warm starting requires basis translation.",
+      "math": "",
+      "complexity": "All query methods (getColSolution, etc.): O(1) pointer return\n  initialSolve/resolve: delegated to solver, typically O(m\u00b7n\u00b7iterations)\n  applyCuts: O(cuts \u00d7 row_length) for constraint matrix update",
+      "ref": [
+        "Lougee-Heimer et al. (2003). \"The Common Optimization INterface\n  for Operations Research\". IBM J. Research & Development 47(1):57-66."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiClpSolverInterface for Clp implementation",
+    "OsiCuts for cut pool management",
+    "CoinPackedMatrix for constraint matrix format"
+  ]
+}

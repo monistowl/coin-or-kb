@@ -1,0 +1,9 @@
+{
+  "name": "size_setvec",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/sparse/size_setvec.hpp",
+  "brief": "Internal implementation: size_setvec",
+  "algorithms": [],
+  "methods": []
+}

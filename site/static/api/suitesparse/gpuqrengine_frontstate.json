@@ -1,0 +1,13 @@
+{
+  "name": "GPUQREngine_FrontState",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_FrontState.hpp",
+  "brief": "Finite state machine for front factorization lifecycle\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nFrontState enum defines 9-state FSM: ALLOCATE_WAIT (0) \u2192 ASSEMBLE_S (1) \u2192\nCHILD_WAIT (2) \u2192 FACTORIZE (3) \u2192 FACTORIZE_COMPLETE (4) \u2192 PARENT_WAIT (5) \u2192\nPUSH_ASSEMBLE (6) \u2192 CLEANUP (7) \u2192 DONE (8). Transitions driven by\nFillWorkQueue and PostProcessing. Scheduler uses states to coordinate work.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_Front.hpp uses FrontState",
+    "GPUQREngine_Scheduler.hpp manages state transitions"
+  ]
+}

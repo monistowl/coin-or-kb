@@ -1,0 +1,22 @@
+{
+  "name": "Idiot",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/Idiot.hpp",
+  "brief": "Heuristic crash procedure for finding initial LP solutions\n\nThe \"Idiot\" algorithm is a simple heuristic that finds approximate primal\nsolutions quickly. Despite its self-deprecating name (which is copylefted!),\nit serves as an effective \"crash\" procedure to warm-start the simplex method.",
+  "algorithms": [
+    {
+      "name": "Idiot Crash Heuristic:\n  Iterative relaxation method for approximate LP solutions:\n  1. Start with x = 0 or weighted column averages\n  2. For each iteration:\n     a. Compute constraint violations: v = Ax - b\n     b. For each row i with violation: adjust x_j proportionally\n        \u0394x_j \u221d a_ij \u00b7 v_i / (\u03a3_k a_ik\u00b2 + \u03bc) weighted by reduced cost\n     c. Project x onto bounds [l, u]\n  3. Reduce penalty \u03bc geometrically each major iteration\n  4. Stop when sufficiently feasible or iteration limit reached",
+      "math": "Weighted adjustment formula:\n  \u0394x_j = -w_j \u00b7 \u03a3_i (a_ij \u00b7 v_i / row_weight_i)\n  where w_j = 1/(c_j + penalty) prioritizes cheap variables\n  Row weights based on ||a_i||\u00b2 for normalization.",
+      "complexity": "O(nnz(A)) per iteration, typically 50-200 iterations.\n  Much cheaper than simplex iteration but only approximate.\n  Good crash reduces simplex iterations by 30-70%.",
+      "ref": [
+        "Forrest (1992). Internal IBM documentation on crash heuristics.\n\nThe algorithm works well on problems where the volume algorithm succeeds,\noften finding better primal solutions, though it produces no dual solution.\nIt's particularly useful for:\n- Getting a starting basis before simplex (crash mode)\n- Homogeneous problems with similar constraint structure\n\nKey methods:\n- crash(): Lightweight initialization (2-5 passes typical)\n- solve(): Full approximate solution (50-100 iterations)\n- crossOver(): Transition to simplex for exact solution"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpSimplex::initialSolve() which may call Idiot automatically",
+    "ClpSimplexPrimal for the simplex algorithm that uses the crash solution"
+  ]
+}

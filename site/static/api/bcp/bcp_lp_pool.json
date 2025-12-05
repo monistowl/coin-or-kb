@@ -1,0 +1,20 @@
+{
+  "name": "BCP_lp_pool",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_lp_pool.hpp",
+  "brief": "Cut and variable pools for LP process",
+  "algorithms": [
+    {
+      "name": "Cut/Variable Pooling: Violation Ranking and Selection\n\nManages waiting cuts and variables for addition to LP relaxation.\nTracks violation/reduced cost and supports ranked selection.\n\n**BCP_lp_waiting_row:** Pair of (BCP_cut, BCP_row) with violation.\n**BCP_lp_cut_pool:** Pool of waiting rows sorted by violation.\n**BCP_lp_var_pool:** Pool of waiting columns (variables).\n\n**Usage:** Generated cuts/vars queued here, then best ones added to LP.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_lp_user::select_cuts() for cut selection policy",
+    "BCP_lp_user::select_vars() for variable selection policy"
+  ]
+}

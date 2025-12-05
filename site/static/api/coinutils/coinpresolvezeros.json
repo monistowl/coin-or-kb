@@ -1,0 +1,19 @@
+{
+  "name": "CoinPresolveZeros",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveZeros.hpp",
+  "brief": "Drop and reintroduce explicit zero coefficients",
+  "algorithms": [
+    {
+      "name": "Explicit Zero Removal:\n  Cleans matrix by removing zero coefficients:\n  1. Scan specified columns for zero coefficients (|a_ij| < tolerance)\n  2. Record (row, col) positions of zeros for postsolve\n  3. Remove zeros from sparse storage\n  4. Update row/column counts and pointers\n  5. Postsolve: Reinsert explicit zeros at recorded positions",
+      "math": "Why explicit zeros exist:\n  From numerical cancellation during presolve transformations\n  Or from user input with sparse format containing zeros\n  Removing improves efficiency of subsequent operations",
+      "complexity": "O(nnz in checked columns) to scan and remove\n  Memory: O(nzeros) to store positions for postsolve\n  Called after transformations that may introduce zeros",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

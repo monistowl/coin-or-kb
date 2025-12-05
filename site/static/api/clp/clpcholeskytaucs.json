@@ -1,0 +1,23 @@
+{
+  "name": "ClpCholeskyTaucs",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpCholeskyTaucs.hpp",
+  "brief": "TAUCS sparse solver interface for Cholesky factorization\n\nWraps Sivan Toledo's TAUCS library for Cholesky factorization of normal\nequations in interior point methods.",
+  "algorithms": [
+    {
+      "name": "TAUCS Left-Looking Supernodal Cholesky:\n  Left-looking factorization with supernodal blocking:\n  1. Ordering: AMD, METIS, or GENMMD fill-reducing permutation\n  2. Symbolic: Build elimination tree, identify supernodes\n  3. Numeric left-looking: For each supernode j:\n     - Assemble: Gather column j from A and previous L updates\n     - Factor: Dense Cholesky on diagonal block\n     - Scatter: Distribute updates to later columns\n  4. Store L in CCS format with supernode structure",
+      "math": "Left-looking vs right-looking:\n  Left-looking: L_j computed from A_j and L_{<j} (memory efficient)\n  Right-looking: Updates distributed immediately (more parallelism)\n  TAUCS uses left-looking for lower memory footprint",
+      "complexity": "O(nnz(L)\u00b7f\u0304) where f\u0304 = average supernode front size\n  Memory: O(nnz(L)) for factor storage\n  Well-suited for medium-size interior point problems",
+      "ref": [
+        "Toledo (2003). \"TAUCS: A Library of Sparse Linear Solvers\".\n     Tel-Aviv University. http://www.tau.ac.il/~stoledo/taucs/\n\nTAUCS provides:\n- Left-looking supernodal factorization\n- Multiple ordering methods (AMD, METIS, GENMMD)\n- Research-quality implementation with educational focus\n\nNote: Requires modifications to taucs.h for C++ linkage and LAPACK\ndpotf2.f for singularity handling (see class documentation)."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpCholeskyBase for the abstract interface",
+    "ClpInterior which uses this factorization",
+    "http://www.tau.ac.il/~stoledo/taucs/"
+  ]
+}

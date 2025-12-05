@@ -1,0 +1,19 @@
+{
+  "name": "IRootsearchMethod",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/RootsearchMethod/IRootsearchMethod.h",
+  "brief": "Interface for constraint boundary rootsearch algorithms\n\nFinds points on constraint boundaries for ESH hyperplane generation.\n\n**Purpose:**\nGiven interior point A and exterior point B, find point on boundary\nwhere constraint function equals zero (feasibility boundary).\n\n**Constraint Rootsearch:**\n- findZero(ptA, ptB, ...): Search along line segment A\u2192B\n- Returns (boundary point, exterior point) pair\n- lambdaTol: Tolerance on line parameter\n- constrTol: Tolerance on constraint violation\n\n**Objective Rootsearch:**\n- findZero(pt, objLB, objUB, ...): Find objective level set\n- Used for objective function cuts\n\n**Algorithm:**\n- Uses bisection or hybrid methods (TOMS 748)\n- Requires f(A) < 0 (feasible) and f(B) > 0 (infeasible)\n\n**Implementations:**\n- RootsearchMethodBoost: Boost.Math TOMS 748 or bisection",
+  "algorithms": [
+    {
+      "name": "Essential for Extended Supporting Hyperplane (ESH) method",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DualSolver.h for hyperplane generation workflow"
+  ]
+}

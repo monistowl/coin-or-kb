@@ -1,0 +1,20 @@
+{
+  "name": "IpInexactLSAcceptor",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/Inexact/IpInexactLSAcceptor.hpp",
+  "brief": "Penalty function line search for inexact step algorithm\n\nInexactLSAcceptor implements backtracking line search using an\nexact penalty function, adapted for inexact Newton steps that\ndon't fully satisfy the linearized KKT conditions.",
+  "algorithms": [
+    {
+      "name": "Penalty Function Line Search:\n  CheckAcceptabilityOfTrialPoint(\u03b1):\n  1. Evaluate merit: \u03c6(x+\u03b1\u0394x) = f(x+\u03b1\u0394x) + \u03bd\u00b7||c(x+\u03b1\u0394x)||\u2081.\n  2. Compute predicted reduction: pred = -\u03b1\u00b7(\u2207f^T\u00b7\u0394x + \u03bd\u00b7||c||\u2081).\n  3. Armijo condition: \u03c6(x+\u03b1\u0394x) \u2264 \u03c6(x) - \u03b7\u00b7pred.\n  4. If not accepted: \u03b1 \u2190 \u03c1\u00b7\u03b1 (backtrack), retry.\n  5. Update penalty \u03bd if step rejected due to constraint violation.",
+      "math": "Exact penalty function:\n  \u03c6_\u03bd(x) = f(x) + \u03bd\u00b7||c(x)||\u2081 (\u2113\u2081 penalty on constraints).\n  \u03bd updated adaptively: \u03bd \u2190 max(\u03bd, \u03bd_low + increment).\n  \u03bd_low provides lower bound for penalty (Curtis-Nocedal flexible penalty).\n  Watchdog: stores reference point for non-monotone acceptance.",
+      "complexity": "O(m) per merit evaluation (constraint norm).\n  No second-order correction (SOC) for inexact\u2014too expensive.\n  Line search typically O(1) to O(log(1/\u03b1_min)) backtracks.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpBacktrackingLSAcceptor.hpp for base backtracking interface",
+    "IpInexactSearchDirCalc.hpp for search direction computation"
+  ]
+}

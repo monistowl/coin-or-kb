@@ -1,0 +1,16 @@
+{
+  "name": "BCP_os",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_os.hpp",
+  "brief": "OS abstraction layer for BCP",
+  "algorithms": [
+    {
+      "name": "OS Utilities: Memory and Process Info\n\nCross-platform wrappers for system-level operations:\n\n**Process management:**\n- setpriority(): Process scheduling priority (Unix)\n- gethostname(): Machine identification\n- GETPID macro: Process ID abstraction\n\n**Memory monitoring:**\n- BCP_free_mem(): System free RAM via sysinfo()\n- BCP_used_heap(): Heap usage via mallinfo()\n\nReturns -1 on platforms without required APIs.\nUsed for dynamic load balancing and memory-aware scheduling.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

@@ -1,0 +1,19 @@
+{
+  "name": "CoinPresolveSingleton",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveSingleton.hpp",
+  "brief": "Singleton row/column presolve transforms",
+  "algorithms": [
+    {
+      "name": "Singleton Column/Row Elimination:\n  Singleton column (one nonzero): variable x_j appears in one constraint\n  - Compute x_j bounds from constraint bounds and coefficient sign\n  - If bounds tighter than variable bounds, update variable bounds\n  - If bounds prove infeasibility, detect and report\n\n  Slack doubleton: row ax \u2264 b with single variable, explicit bound\n  - Convert to column bound: x \u2264 b/a (adjust for sign)\n  - Remove the constraint, tighten column bound",
+      "math": "For singleton row ax_j = b: x_j = b/a (fixed value)\n  For singleton column in ax_j \u2264 b with a > 0: x_j \u2264 b/a\n  For singleton column in ax_j \u2265 b with a > 0: x_j \u2265 b/a",
+      "complexity": "Time: O(1) per singleton processed\n  Very effective: singletons common in practical LP/MIP models\n  Cascading: removing singletons may create new singletons",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

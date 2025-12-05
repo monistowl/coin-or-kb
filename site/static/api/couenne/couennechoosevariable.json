@@ -1,0 +1,22 @@
+{
+  "name": "CouenneChooseVariable",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneChooseVariable.hpp",
+  "brief": "Variable selection for branching in global optimization",
+  "algorithms": [
+    {
+      "name": "Variable Selection for Global Optimization\n\nExtends OsiChooseVariable to select branching variables based on\nnonconvexity-specific criteria. The goal is to choose variables\nthat most effectively reduce the relaxation gap.\n\n**setupList():**\nBuilds list of candidate branching objects, filtering by:\n- Infeasibility threshold (|w - f(x)| > tol)\n- Variable type and importance\n- Depth-based filtering\nReturns -1 if node is proven infeasible during setup.\n\n**feasibleSolution():**\nChecks if current solution satisfies all constraints including\nauxiliary variable definitions w = f(x) within tolerance.\n\n**Selection criteria:**\nUnlike MIP (which branches on integer violations), MINLP must\nalso consider nonconvex constraint violations.",
+      "math": "Infeasibility measure: |w - f(x)| for auxiliary w = f(x)",
+      "complexity": "O(n \u00d7 m) where n = variables, m = auxiliaries per variable",
+      "ref": [
+        "Belotti et al., \"Branching and bounds tightening techniques\n     for non-convex MINLP\", Optimization Methods & Software, 2009"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneChooseStrong for strong branching variant",
+    "CouenneObject for infeasibility computation"
+  ]
+}

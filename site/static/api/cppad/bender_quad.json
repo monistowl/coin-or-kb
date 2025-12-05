@@ -1,0 +1,9 @@
+{
+  "name": "bender_quad",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/bender_quad.hpp",
+  "brief": "Core AD functionality: bender quad",
+  "algorithms": [],
+  "methods": []
+}

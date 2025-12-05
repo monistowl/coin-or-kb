@@ -1,0 +1,9 @@
+{
+  "name": "add_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/add_op.hpp",
+  "brief": "Internal implementation: add_op",
+  "algorithms": [],
+  "methods": []
+}

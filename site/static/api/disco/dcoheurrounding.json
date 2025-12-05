@@ -1,0 +1,23 @@
+{
+  "name": "DcoHeurRounding",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoHeurRounding.hpp",
+  "brief": "Simple rounding heuristic for finding feasible solutions",
+  "algorithms": [
+    {
+      "name": "Simple Rounding Heuristic for MICO",
+      "math": "Given LP relaxation x*, round integer variables:\n      x\u0303_j = round(x*_j) for all j \u2208 I (integer set)\n      x\u0303_j = x*_j for j \u2209 I (continuous variables)\n      Accept if x\u0303 is feasible: Ax\u0303 \u2264 b, x\u0303 \u2208 K (conic constraints)\n\nDcoHeurRounding implements a simple rounding heuristic based on\nAchterberg's dissertation to find integer feasible solutions.\n\n**Algorithm (searchSolution):**\n1. Take fractional LP/conic solution\n2. Round each integer variable to nearest integer\n3. Check feasibility (constraints and cones)\n4. Return solution if feasible, NULL otherwise\n\n**Bound Fixing (bound_fix):**\nUses constraint structure to determine safe rounding directions:\n- down_fix[i]: Variable i can be safely rounded down\n- up_fix[i]: Variable i can be safely rounded up\n\n**searchSolution2():**\nAlternative rounding strategy considering constraint types.",
+      "complexity": "O(n + m) for rounding and feasibility check",
+      "ref": [
+        "Achterberg, T. (2007). \"Constraint Integer Programming\". PhD thesis, TU Berlin."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DcoHeuristic.hpp for base class",
+    "DcoModel.hpp::feasibleSolution() for feasibility checking",
+    "DcoSolution.hpp for solution storage"
+  ]
+}

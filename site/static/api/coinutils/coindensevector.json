@@ -1,0 +1,20 @@
+{
+  "name": "CoinDenseVector",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinDenseVector.hpp",
+  "brief": "Dense vector template with element-wise arithmetic operations\n\nCoinDenseVector<T> stores all elements in a contiguous array.\nUnlike sparse vectors, every position has storage. Supports\narithmetic operators (+, -, *, /) with other dense vectors.",
+  "algorithms": [
+    {
+      "name": "Dense Vector Storage:\n  Contiguous array of size n: elements_[0..n-1]\n  All positions allocated, O(1) random access\n  Element-wise operations: v3 = v1 + v2 applies to all indices\n\n  Supported operations: +, -, *, / (element-wise)\n  Norms: oneNorm (L1), twoNorm (L2/Euclidean), infNorm (L\u221e/max)",
+      "math": "Dense storage: x[i] stored for all i \u2208 {0,...,n-1}\n  oneNorm = \u03a3|x_i|, twoNorm = \u221a(\u03a3x_i\u00b2), infNorm = max|x_i|",
+      "complexity": "Element access: O(1)\n  Vector operations: O(n)\n  Space: O(n) always, regardless of sparsity",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPackedVector for sparse storage",
+    "CoinIndexedVector for sparse with dense backing"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "OSOptionsStruc",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSParsers/OSOptionsStruc.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

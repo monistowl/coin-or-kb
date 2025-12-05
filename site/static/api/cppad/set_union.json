@@ -1,0 +1,9 @@
+{
+  "name": "set_union",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/set_union.hpp",
+  "brief": "CppAD utility: set union",
+  "algorithms": [],
+  "methods": []
+}

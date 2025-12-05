@@ -1,0 +1,9 @@
+{
+  "name": "var_type",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/var_type.hpp",
+  "brief": "Value graph: var_type",
+  "algorithms": [],
+  "methods": []
+}

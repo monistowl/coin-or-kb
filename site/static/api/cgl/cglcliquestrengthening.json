@@ -1,0 +1,14 @@
+{
+  "name": "CglCliqueStrengthening",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglCliqueStrengthening/CglCliqueStrengthening.hpp",
+  "brief": "Preprocessing to extend and merge clique constraints",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglBKClique for cut generation (vs preprocessing)",
+    "CoinCliqueSet for clique storage",
+    "CglPreProcess which may call this\n\n\\copyright{Copyright 2020 Brito, S.S. and Santos, H.G.}\n\\license{This This code is licensed under the terms of the Eclipse Public License (EPL).}"
+  ]
+}

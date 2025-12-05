@@ -1,0 +1,9 @@
+{
+  "name": "abs_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/abs_op.hpp",
+  "brief": "Internal implementation: abs_op",
+  "algorithms": [],
+  "methods": []
+}

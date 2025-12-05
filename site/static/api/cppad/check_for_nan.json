@@ -1,0 +1,9 @@
+{
+  "name": "check_for_nan",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/check_for_nan.hpp",
+  "brief": "Core AD functionality: check for nan",
+  "algorithms": [],
+  "methods": []
+}

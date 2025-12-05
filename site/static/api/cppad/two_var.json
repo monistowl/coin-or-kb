@@ -1,0 +1,9 @@
+{
+  "name": "two_var",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/two_var.hpp",
+  "brief": "Internal implementation: two_var",
+  "algorithms": [],
+  "methods": []
+}

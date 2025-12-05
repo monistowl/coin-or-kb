@@ -1,0 +1,16 @@
+{
+  "name": "MKC_lp",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Mkc/include/MKC_lp.hpp",
+  "brief": "MKC LP relaxation for BCP",
+  "algorithms": [
+    {
+      "name": "MKC LP: Set Covering with Column Generation\n\nLP process for multi-knapsack cover branch-and-price.\n\n**Components:**\n- kss: Knapsack set defining problem structure\n- ks_fixings: Variable fixing from branching\n- enumerated_ks: Pre-enumerated small knapsack solutions\n- generated_vars: Columns from pricing in this node\n\n**Role:** Solve LP relaxation, call MKC_generate_variables\nwhen pricing needed, apply branching decisions.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

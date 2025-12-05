@@ -1,0 +1,23 @@
+{
+  "name": "amd_internal",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "AMD/Include/amd_internal.h",
+  "brief": "Internal definitions for AMD (Approximate Minimum Degree) ordering\nCopyright (c) 1996-2023, Timothy A. Davis, Patrick R. Amestoy,\nand Iain S. Duff. BSD-3-clause license.\n\nAMD computes fill-reducing orderings for sparse matrix factorization.\nUses approximate minimum degree heuristic with quotient graph representation\nfor efficient O(|A|) ordering of symmetric matrices (or A'A for unsymmetric).",
+  "algorithms": [
+    {
+      "name": "Approximate Minimum Degree (AMD):\nFill-reducing ordering using quotient graph compression:\n1. Build quotient graph G representing remaining elimination graph\n2. For i = 1 to n:\n   a. Find vertex v with approximate minimum degree\n   b. Eliminate v: add v to ordering, update quotient graph\n   c. Absorb indistinguishable nodes (mass elimination)\n   d. Supervariable detection for compression",
+      "math": "Quotient graph compression:\nAfter eliminating vertex v, neighbors become clique (fill-in).\nInstead of storing clique explicitly, store \"element\" e_v.\nadj(u) = original_adj(u) \u222a \u22c3{elements containing u}.\nDegree approximation: |adj(u)| \u2264 |original_adj(u)| + \u03a3|element sizes|.\n\nSupervariables: vertices with identical adjacency merged for O(1) updates.",
+      "complexity": "O(n\u00b7m) worst case, O(n\u00b7m/log(n)) typical for sparse matrices.\nNear-optimal fill for many practical matrices (within 5-20% of MMD).",
+      "ref": [
+        "Amestoy, Davis & Duff (1996). \"An Approximate Minimum Degree Ordering\n  Algorithm\". SIAM J. Matrix Anal. Appl. 17(4):886-905.",
+        "Amestoy, Davis & Duff (2004). \"Algorithm 837: AMD, An Approximate\n  Minimum Degree Ordering Algorithm\". ACM TOMS 30(3):381-388."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "COLAMD for column ordering of unsymmetric matrices",
+    "CHOLMOD for sparse Cholesky using AMD ordering"
+  ]
+}

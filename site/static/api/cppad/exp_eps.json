@@ -1,0 +1,9 @@
+{
+  "name": "exp_eps",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "introduction/exp_eps.hpp",
+  "brief": "CppAD: exp eps",
+  "algorithms": [],
+  "methods": []
+}

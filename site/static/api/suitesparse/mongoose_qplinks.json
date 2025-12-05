@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_QPLinks",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_QPLinks.hpp",
+  "brief": "QP free set rounding and partition conversion\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPLinks converts continuous QP solution to discrete partition by\nrounding fractional variables and updating free set. Handles the\ninterface between continuous relaxation and discrete partition\nrepresentation in the waterdance refinement cycle.",
+  "algorithms": [
+    {
+      "name": "QP Solution Rounding:\nConverts continuous x \u2208 [0,1]^n to discrete partition {0,1}^n:\n1. For each vertex v:\n   - If x_v already 0 or 1: keep as is\n   - If x_v \u2208 (0,1): round to nearest (0 if x_v < 0.5, else 1)\n2. Update partition arrays and cut cost\n3. Identify new boundary vertices (neighbors across cut)\n4. Update free set status for subsequent QP iterations",
+      "math": "Rounding preserves cut quality intuition:\nQP minimizes \u00bdx'Lx which penalizes edges (i,j) by w_ij\u00b7(x_i - x_j)\u00b2.\nFractional values indicate \"uncertain\" assignment; rounding to\nnearest integer preserves the QP's preference.",
+      "complexity": "O(|E|) to scan edges and update cut cost.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_QPDelta.hpp for QP state representation",
+    "Mongoose_ImproveQP.hpp for QP improvement workflow"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "IpRestoIterateInitializer",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpRestoIterateInitializer.hpp",
+  "brief": "Iterate initialization for restoration phase\n\nRestoIterateInitializer computes starting values for all variables\nin the restoration phase feasibility problem. This includes the\noriginal variables (x, s) and the slack variables (n_c, p_c, n_d, p_d).",
+  "algorithms": [
+    {
+      "name": "Restoration Phase Variable Initialization:\n  SetInitialIterates() initializes all restoration variables:\n  1. Copy x, s from point where main algorithm entered restoration.\n  2. Compute n_c, p_c satisfying: c(x) = p_c - n_c (equality residual split).\n  3. Compute n_d, p_d satisfying: d(x) - s + n_d - p_d \u2208 [d_L, d_U].\n  4. solve_quadratic(): Finds n, p with n,p \u2265 0 minimizing ||n||+||p||.\n  5. Initialize z, v bound multipliers for n, p bounds (\u03bc/bound).\n  6. Optionally: y_c, y_d via resto_eq_mult_calculator_ (least squares).",
+      "math": "Slack initialization:\n  Given residual r = c(x): need n - p = -r with n, p \u2265 0.\n  If r \u2265 0: p = r + \u03b5, n = \u03b5 (constraint violation positive).\n  If r < 0: n = -r + \u03b5, p = \u03b5 (constraint violation negative).\n  \u03b5 = small positive to stay away from bounds.\n\nInitialization procedure:\n1. Take x, s from the point where main algorithm entered restoration\n2. Compute n, p slacks to satisfy: c(x) + n - p = 0\n3. Initialize bound multipliers (z, v) for new bounds\n4. Optionally compute equality multipliers via least squares\n\nThe slack computation solves quadratic equation v^2 + 2a*v - b = 0\nto find feasible n, p values.\n\nKey parameter:\n- constr_mult_init_max_: If initial multiplier estimate exceeds\n  this, reset to zero to avoid ill-conditioning",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpDefaultIterateInitializer.hpp for standard cold start",
+    "IpRestoIpoptNLP.hpp for restoration problem structure"
+  ]
+}

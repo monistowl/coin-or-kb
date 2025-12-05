@@ -1,0 +1,13 @@
+{
+  "name": "sym_lp_params",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_lp_params.h",
+  "brief": "LP solver process parameters for SYMPHONY\n\nParameters controlling LP relaxation solving, cut generation,\nbranching, and primal heuristics in each B&C node.\n\n**cgl_params (CGL cut generation):**\n- generate_cgl_*_cuts: Enable specific cut families\n- generate_cgl_*_cuts_freq: How often to generate (1=every node)\n- *_max_depth: Tree depth limit for each cut type\n- use_chain_strategy: Smart cut generation chain\n\n**lp_params structure sections:**\n\n**Matrix growth control:**\n- max_non_dual_feas_to_add_*: Limits on violated cuts added\n- mat_row/col_compress_*: When to compress matrix\n\n**Tailing off detection:**\n- tailoff_gap_backsteps/frac: Detect stalling LP progress\n- tailoff_obj_backsteps/frac: Objective improvement threshold\n\n**Branching control:**\n- strong_branching_cand_num_*: Candidates for strong branching\n- rel_br_threshold: Reliability branching parameters\n- use_sos_branching: Special ordered sets support\n\n**Primal heuristics:**\n- fp_*: Feasibility pump parameters\n- fr_*: Feasibility-based restricted search\n- rs_*: RINS (Relaxation Induced Neighborhood Search)\n- lb_*: Local branching\n- ds_*: Diving heuristics (fractional, guided, etc.)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_lp.h for LP process using these parameters",
+    "sym_cg.h for cut generation"
+  ]
+}

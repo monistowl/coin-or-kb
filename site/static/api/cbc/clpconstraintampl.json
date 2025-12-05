@@ -1,0 +1,20 @@
+{
+  "name": "ClpConstraintAmpl",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/ClpConstraintAmpl.hpp",
+  "brief": "AMPL-interface constraint for nonlinear Clp extensions",
+  "algorithms": [
+    {
+      "name": "AMPL ASL Nonlinear Constraint Gradient\nCopyright (C) 2007, International Business Machines Corporation.\nThis code is licensed under the Eclipse Public License (EPL).\n\nClpConstraintAmpl: Nonlinear constraint class using AMPL's ASL\n(Solver Library) for gradient evaluation. Enables nonlinear\nconstraints in Clp through AMPL model interface.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpConstraint for base constraint interface",
+    "ClpAmplObjective for corresponding objective class"
+  ]
+}

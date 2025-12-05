@@ -1,0 +1,16 @@
+{
+  "name": "BCP_vector_char",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_vector_char.hpp",
+  "brief": "BCP_vec<char> specialization",
+  "algorithms": [
+    {
+      "name": "POD Vector Specialization: char\n\nTemplate specializations for BCP_vec<char> that skip\nconstruct/destroy overhead since char is a POD type.\nSame optimization pattern as BCP_vector_double.hpp.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

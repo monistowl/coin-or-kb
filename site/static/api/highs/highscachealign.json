@@ -1,0 +1,13 @@
+{
+  "name": "HighsCacheAlign",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/parallel/HighsCacheAlign.h",
+  "brief": "Cache-line aligned memory allocation for parallel performance\n\nPrevents false sharing by ensuring separate objects reside on different cache lines.\n\n**cache_aligned Struct:**\nStatic utilities for aligned allocation:\n- alignment() \u2192 64 bytes (typical cache line size)\n- alloc(size): Allocate with 64-byte alignment\n- free(ptr): Deallocate aligned memory\n\n**Implementation:**\n- Over-allocates by alignment bytes\n- Stores original pointer before aligned address\n- Retrieves original pointer for deallocation\n\n**Smart Pointer Support:**\n- Deleter<T>: Custom deleter calling destructor + free\n- unique_ptr<T>: Alias with custom deleter\n- make_unique<T>(): Factory function\n- make_unique_array<T>(n): Array allocation\n\n**Usage:**\nWrap thread-local data in cache_aligned::unique_ptr to prevent\nperformance degradation from false sharing in parallel algorithms.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "parallel/HighsCombinable.h for thread-local storage",
+    "parallel/HighsSplitDeque.h for aligned worker data"
+  ]
+}

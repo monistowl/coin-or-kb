@@ -1,0 +1,526 @@
+{
+  "library": "Couenne",
+  "layer": "layer-3",
+  "classes": [
+    {
+      "name": "BonCouenneInfo",
+      "brief": "Information passing between B&B components\n\nExtends Bonmin's BabInfo with Couenne-specific information,\nparticularly storage of NLP solutions found during search.\n\n**NlpSolution class:**\nReference-counted storage for NLP solutions:\n- n_: Number of variables\n- sol_[]: Variable values\n- objVal_: Objective function value\n\n**CouenneInfo:**\n- nlpSols_: List of all NLP solutions found\n- addSolution(): Record a new NLP solution\n- NlpSolutions(): Access stored solutions\n\n**Usage:**\nWhen Couenne finds feasible NLP solutions (from heuristics\nor at B&B nodes), they are stored here for incumbent tracking\nand warm-starting purposes.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonCouenneInterface",
+      "brief": "Couenne's interface to Bonmin/AMPL\n\nExtends Bonmin's AmplInterface to read AMPL models and build\nCouenne's symbolic problem representation with convex relaxations.\n\n**Key methods:**\n- readAmplNlFile(): Read AMPL .nl file into Couenne structures\n- extractLinearRelaxation(): Build initial LP relaxation with OA cuts\n\n**Linear relaxation extraction:**\n1. Solve continuous NLP relaxation\n2. Generate linearization cuts at NLP optimum\n3. Load cuts into OsiSolverInterface for B&B",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonCouenneSetup",
+      "brief": "Main setup class for Couenne global optimizer\n\nExtends Bonmin's setup to configure Couenne's global optimization\ncomponents including cut generators, bound tightening, and heuristics.\n\n**Initialization (InitializeCouenne):**\n1. Read AMPL model and options\n2. Create CouenneProblem representation\n3. Standardize problem (create auxiliary variables)\n4. Register cut generators (convexification, bound tightening)\n5. Configure branching and heuristics\n\n**Key components configured:**\n- CouenneCutGenerator: Convexification cuts\n- CouenneFixPoint: FBBT bound tightening\n- CouenneFeasPump: Feasibility pump heuristic\n- CouenneChooseVariable: Branching variable selection\n\n**SmartAsl:**\nReference-counted wrapper for ASL pointer (AMPL Solver Library).",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonInitHeuristic",
+      "brief": "Heuristic to inject initial NLP solution into Cbc\n\nCommunicates the initial NLP solution (computed before B&B starts)\nto Cbc as a known feasible solution.\n\n**Purpose:**\nWhen Couenne solves the root node NLP and finds a feasible MINLP\nsolution, this heuristic stores it so Cbc can use it as the\ninitial incumbent.\n\n**Usage:**\n```cpp\n// After initial NLP solve\nInitHeuristic heur(objValue, solution, problem);\ncbcModel.addHeuristic(&heur);\n```\n\n**solution() method:**\nReturns the stored initial solution on first call. Subsequent\ncalls return 0 (no new solution) since the initial solution\nhas already been provided.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonNlpHeuristic",
+      "brief": "NLP heuristic for near-integer B&B nodes",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouExpr",
+      "brief": "Expression container with operator overloading for algebraic construction\n\nProvides a user-friendly wrapper around the expression DAG with\noverloaded operators for building mathematical expressions in\nnatural algebraic notation.\n\n**CouExpr container:**\n- Wraps an expression* with value semantics (cloning on copy)\n- Allows algebraic expression construction: e1 + e2, sin(e), etc.\n\n**Supported operations:**\n- Arithmetic: +, -, *, /, %, ^ (power)\n- Trigonometric: sin, cos\n- Other: log, exp\n\n**Operand types:**\n- CouExpr & CouExpr \u2192 CouExpr\n- CouNumber & CouExpr \u2192 CouExpr\n- CouExpr & CouNumber \u2192 CouExpr\n\n**Example:**\n```cpp\nCouExpr x(exprVar), y(exprVar);\nCouExpr f = sin(x) + x*y + exp(y);\nexpression* e = f.Expression();\n```",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneAggrProbing",
+      "brief": "Aggressive probing for bound tightening\n\nImplements Optimality-Based Bound Tightening (OBBT) through aggressive\nprobing. Temporarily fixes a variable bound and solves the resulting\nsubproblem to determine if a tighter bound is achievable.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneAmplInterface",
+      "brief": "AMPL .nl file reader for Couenne\n\nReads optimization problems from AMPL Solver Library (ASL)\nformat and converts to Couenne's expression DAG representation.\n\n**Key methods:**\n- getCouenneProblem(): Parse .nl file \u2192 CouenneProblem\n- getTMINLP(): Wrap as Bonmin TMINLP for NLP solves\n- writeSolution(): Write .sol file back to AMPL\n\n**Internal conversion:**\n- readASLfg(): Read using ASL fg (function/gradient) reader\n- readnl(): Alternative .nl parsing\n- nl2e(): Convert ASL expr* to Couenne expression*\n\n**ASL integration:**\nUses the AMPL Solver Library (ASL) C structures to parse\nthe binary .nl format. The nl2e() method recursively converts\nASL expression trees to Couenne expression nodes.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneBTPerfIndicator",
+      "brief": "Performance metrics for bound tightening\n\nTracks effectiveness of bound tightening methods (FBBT, OBBT, etc.)\nby measuring how much bounds are reduced and how many variables are fixed.\n\n**Metrics tracked:**\n- nFixed_: Number of variables fixed (lb == ub)\n- boundRatio_: Average bound width shrinkage ratio\n- shrunkInf_: Bounds that became finite from infinite\n- shrunkDoubleInf_: [-inf,inf] that became [a,inf] or [-inf,b]\n- nProvedInfeas_: Number of infeasibility proofs\n\n**Usage:**\n1. Call setOldBounds() before bound tightening\n2. Run bound tightening\n3. Call update() with new bounds\n4. Metrics accumulated for end-of-run summary\n\n**Timing:**\n- totalTime_: CPU time spent in this bound tightener\n- nRuns_: Number of invocations",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneBab",
+      "brief": "Main Branch-and-Bound driver for Couenne\n\nExtends Bonmin::Bab to add Couenne-specific functionality\nfor spatial branch-and-bound on nonconvex MINLPs.\n\n**Inheritance:**\nCouenneBab \u2192 Bonmin::Bab \u2192 CbcModel\n\n**Key additions over Bonmin::Bab:**\n- Stores CouenneProblem pointer for access to expression DAG\n- Overrides bestSolution() and bestObj() for proper handling\n- bestBound() returns min of parent bound and best objective\n\n**Usage:**\nCalled from BonCouenneSetup after problem setup.\nThe branchAndBound() method runs the full spatial B&B algorithm,\nusing Couenne's convexification, bound tightening, and\nbranching strategies.\n\n**Solution retrieval:**\n- bestSolution(): Optimal variable values (or best known)\n- bestObj(): Objective value at best solution\n- bestBound(): Lower bound on optimal value",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneBranchingObject",
+      "brief": "Spatial branching object for continuous and integer variables\n\nExecutes branching on a variable (which may be continuous) to\npartition the domain and tighten the convex relaxation.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneChooseStrong",
+      "brief": "Strong branching for global MINLP optimization\n\nExtends Bonmin's strong branching to handle nonconvex constraints\nby evaluating actual LP bound improvement from branching.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneChooseVariable",
+      "brief": "Variable selection for branching in global optimization",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneComplBranchingObject",
+      "brief": "Branching object for complementarity constraints",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneComplObject",
+      "brief": "Branching object for complementarity constraints",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneCrossConv",
+      "brief": "Cuts from redundant relationships between auxiliary variables",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneCutGenerator",
+      "brief": "Main convexification cut generator for global MINLP optimization\n\nGenerates linear outer approximation cuts to build convex relaxations\nof nonconvex MINLPs. Works with the symbolic CouenneProblem representation.\n\n**Cut generation (generateCuts):**\n1. For each auxiliary variable w = f(x), generate linearization cuts\n2. Cuts are based on expression type (convex envelope, secants, tangents)\n3. Uses current LP solution as linearization point\n\n**Convexification types (conv_type):**\n- Current-point linearization (most common)\n- Multi-point sampling for tighter relaxations\n\n**Cut types generated:**\n- Tangent cuts for convex functions\n- Secant cuts for concave functions\n- McCormick envelope cuts for bilinear terms\n- Specialized cuts for sin, cos, exp, log, etc.\n\n**Helper methods:**\n- addEnvelope(): Generate convex/concave envelope for univariate function\n- addSegment(): Add secant line between two points\n- addTangent(): Add tangent at given point\n- createCut(): Build and validate OsiRowCut",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneDepGraph",
+      "brief": "Dependency graph between auxiliary and original variables",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneDisjCuts",
+      "brief": "Disjunctive cut generator for nonconvex MINLP\n\nGenerates lift-and-project style disjunctive cuts by solving a\nCut-Generating Linear Program (CGLP) for each disjunction.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneDomain",
+      "brief": "Point and bounding box with save/restore stack\n\nManages the current solution point and variable bounds during\nexpression evaluation and bound tightening. Provides LIFO\nsave/restore functionality for backtracking.\n\n**DomainPoint:**\n- x_[]: Current variable values\n- lb_[]: Lower bounds\n- ub_[]: Upper bounds\n- copied_: True if data is owned (must free on destruction)\n- isNlp_: True if point came from NLP solver (feasible)\n\n**Domain:**\n- point_: Current active point\n- domStack_: Stack of saved points for restore\n\n**push()/pop() pattern:**\n```cpp\ndomain.push(newPoint);  // Save current, use new\n// ... work with new bounds ...\ndomain.pop();           // Restore previous\n```\n\n**Usage:**\nDuring B&B, each node has different bounds. push() saves the\nparent's bounds before processing a child; pop() restores them\nwhen backtracking.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneEllipCuts",
+      "brief": "Ellipsoidal cuts for nonconvex quadratic constraints\n\nPlaceholder for ellipsoidal cutting planes derived from\nthe geometry of quadratic constraints.\n\n**Concept (not yet implemented):**\nFor a quadratic constraint x\u1d40Qx + b\u1d40x \u2264 c, the feasible\nregion forms an ellipsoid (if Q \u227b 0). Ellipsoidal cuts\nexploit this structure for tighter relaxations.\n\n@note Currently empty - functionality may be in development\n      or handled elsewhere (e.g., CouenneSdpCuts).",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprAbs",
+      "brief": "Absolute value expression w = |x|\n\nRepresents the absolute value function. This is a convex function\nwith a non-differentiable point at x = 0.\n\n**Convexification for w = |x| on [l,u]:**\n- If l >= 0: w = x (identity)\n- If u <= 0: w = -x (negation)\n- If l < 0 < u: convex envelope is\n  - w >= x (right branch)\n  - w >= -x (left branch)\n  - w <= ((u+l)*x + u*(-l) - l*u) / (u - l) (secant from (l,-l) to (u,u))\n\n**Implied bounds:**\n- w >= 0 always\n- Given w in [0, wu]: x in [-wu, wu] \u2229 [l, u]\n- Given x in [l, u]: w in [min(|l|,|u|)?, max(|l|,|u|)]\n\n**Integer preservation:**\nIf argument is integer, |x| is also integer.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprAux",
+      "brief": "Auxiliary variable class for reformulated nonlinear expressions\n\nAuxiliary variables replace nonlinear terms during standardization,\nenabling generation of convex relaxations. If w = f(x), then cuts\nare generated for the relation between w and f(x).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneExprBCos",
+      "brief": "Bound operators for cosine expressions\n\nComputes tight bounds for cos(x) given bounds [l, u] on x.\nUsed by FBBT (feasibility-based bound tightening) to propagate\nbounds through trigonometric expressions.\n\n**exprLBCos (lower bound):**\n- Returns -1 if interval spans full period (u - l >= 2\u03c0)\n- Returns -1 if interval contains \u03c0 + 2k\u03c0 (minimum of cos)\n- Otherwise returns min(cos(l), cos(u))\n\n**exprUBCos (upper bound):**\n- Returns +1 if interval spans full period\n- Returns +1 if interval contains 2k\u03c0 (maximum of cos)\n- Otherwise returns max(cos(l), cos(u))\n\n**Period handling:**\nUses floor(l/2\u03c0 - offset) < floor(u/2\u03c0 - offset) to detect\nif critical points lie within [l, u].",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprBDiv",
+      "brief": "Bound operators for division expressions\n\nComputes tight bounds for n/d given bounds [n, N] on numerator\nand [d, D] on denominator. Handles singularity at d = 0.\n\n**safeDiv():**\nUtility for safe division avoiding NaN:\n- Returns 0 if numerator is ~0\n- Returns \u00b1\u221e if denominator is ~0 (sign-aware)\n- Otherwise returns a/b\n\n**exprLBDiv (lower bound):**\nCase analysis on signs:\n- d > 0: positive denominator \u2192 lb = n/D or n/d\n- d \u2264 0, D > 0: crosses zero \u2192 -\u221e (unbounded)\n- d \u2264 0, D \u2264 0: negative denominator \u2192 lb = N/D or N/d\n\n**exprUBDiv (upper bound):**\nSymmetric case analysis:\n- d > 0: ub = N/D or N/d\n- d \u2264 0, D > 0: crosses zero \u2192 +\u221e\n- d \u2264 0, D \u2264 0: ub = n/D or n/d",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprBMul",
+      "brief": "Bound operators for bilinear product expressions\n\nComputes tight bounds for x * y given bounds [n, N] on x\nand [d, D] on y. Used by FBBT for bound propagation.\n\n**safeProd():**\nUtility for safe multiplication avoiding overflow:\n- Handles \u00b1\u221e * 0 \u2192 0\n- Handles \u00b1\u221e * finite \u2192 \u00b1\u221e (sign-aware)\n- Otherwise returns a * b\n\n**exprLBMul (lower bound):**\nFor bounds [n, N] \u00d7 [d, D]:\n- d \u2265 0, n \u2265 0: lb = n * d\n- d \u2265 0, n < 0: lb = n * D\n- d < 0, N > 0: lb = min(N * d, n * D)\n- d < 0, N \u2264 0, D > 0: lb = n * D\n- d < 0, N \u2264 0, D \u2264 0: lb = N * D\n\n**exprUBMul (upper bound):**\nSymmetric case analysis yielding max of corner products.\n\n**Note:** The four corners {n, N} \u00d7 {d, D} contain the\nextrema for bilinear functions over boxes.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprBQuad",
+      "brief": "Bound expressions for quadratic forms\n\nExpression classes that compute bounds on quadratic forms\n\u2211 q\u1d62\u2c7c\u00b7x\u1d62\u00b7x\u2c7c + \u2211 b\u1d62\u00b7x\u1d62 + c given variable bounds.\n\n**exprLBQuad:**\nReturns lower bound on the quadratic form by calling\ncomputeQBound(-1) on the referenced exprQuad.\n\n**exprUBQuad:**\nReturns upper bound on the quadratic form by calling\ncomputeQBound(+1) on the referenced exprQuad.\n\n**Bound computation (in exprQuad):**\nUses eigenvalue-based approach when Q is indefinite:\n- Decompose Q = \u2211 \u03bb\u1d62\u00b7v\u1d62\u00b7v\u1d62\u1d40\n- Bound each eigenterm using variable bounds\n- Sum contributions accounting for sign of \u03bb\u1d62\n\n**Usage in FBBT:**\nThese expressions enable bound tightening on quadratic\nconstraints without explicitly enumerating all bilinear terms.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprBSin",
+      "brief": "Bound operators for sine expressions\n\nComputes tight bounds for sin(x) given bounds [l, u] on x.\nUsed by FBBT (feasibility-based bound tightening) to propagate\nbounds through trigonometric expressions.\n\n**exprLBSin (lower bound):**\n- Returns -1 if interval spans full period (u - l >= 2\u03c0)\n- Returns -1 if interval contains 3\u03c0/2 + 2k\u03c0 (minimum of sin)\n- Otherwise returns min(sin(l), sin(u))\n\n**exprUBSin (upper bound):**\n- Returns +1 if interval spans full period\n- Returns +1 if interval contains \u03c0/2 + 2k\u03c0 (maximum of sin)\n- Otherwise returns max(sin(l), sin(u))\n\n**Period handling:**\nUses floor(l/2\u03c0 - offset) < floor(u/2\u03c0 - offset) to detect\nif critical points lie within [l, u]:\n- offset = 0.75 for min (3\u03c0/2)\n- offset = 0.25 for max (\u03c0/2)",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprBinProd",
+      "brief": "Product of binary variables (specialized multilinear)\n\nRepresents products of binary (0-1) variables: w = x\u2081 * x\u2082 * ... * x\u2099\nwhere each x\u1d62 \u2208 {0, 1}. Inherits from exprMul but exploits the\nbinary domain for tighter cuts.\n\n**Key simplification:**\nFor binary variables, w = 1 iff all x\u1d62 = 1, otherwise w = 0.\nThis is equivalent to logical AND.\n\n**Linearization (standard form):**\nFor n binaries, the product can be linearized exactly with:\n- w \u2264 x\u1d62 for all i (w = 0 if any x\u1d62 = 0)\n- w \u2265 \u03a3x\u1d62 - (n-1) (w = 1 if all x\u1d62 = 1)\n\n**Bounds:**\n- Lower bound: 0 always (product of non-negative)\n- Upper bound: 1 always (product of binaries \u2264 1)\n\n**isCuttable():**\nReturns false - binary products are fully linearizable,\nno convexification cuts beyond the standard form needed.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprBound",
+      "brief": "Expressions representing variable bounds (l_i, u_i)\n\nExpression nodes that evaluate to the current lower/upper bound\nof a variable. Used in parametric convexification to express\nbound-dependent cuts.\n\n**exprLowerBound:**\n- Evaluates to domain_->lb(varIndex_)\n- Prints as \"l_i\" where i is variable index\n- Derivative is 0 (bounds are parameters, not variables)\n\n**exprUpperBound:**\n- Evaluates to domain_->ub(varIndex_)\n- Prints as \"u_i\" where i is variable index\n- Derivative is 0\n\n**Usage example:**\nFor convexification cut on f(x) with x \u2208 [l, u]:\nThe secant line passes through (l, f(l)) and (u, f(u)).\nThe cut coefficients depend on l and u, represented\nas exprLowerBound and exprUpperBound.\n\n**Note:**\nThese behave like constants for differentiation purposes\nbut their values change during B&B as bounds tighten.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprCeil",
+      "brief": "Ceiling function w = ceil(x)\n\nReturns the smallest integer not less than x. Piecewise constant\nfunction with jump discontinuities at each integer.\n\n**Convexification challenge:**\nceil(x) is neither convex nor concave nor continuous. The function\nis constant on intervals (n-1, n] with value n.\n\n**Bound propagation:**\n- lb(w) = ceil(lb(x))\n- ub(w) = ceil(ub(x))\n\n**Integrality:**\nResult is always integer-valued. Can be used in MINLP constraints\nthat round up quantities.\n\n**Relationship to floor:**\nceil(x) = -floor(-x), so implementations can share code.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprClone",
+      "brief": "Non-owning reference to another expression\n\nPoints to another expression but does NOT own it - the destructor\nsets copy_ = NULL to prevent exprCopy's destructor from deleting it.\n\n**Key difference from exprCopy:**\n- exprCopy: Owns copy_, deletes it in destructor\n- exprClone: Does NOT own copy_, just references it\n\n**Usage:**\nUse exprClone when you need multiple references to the same\nexpression without duplicating memory or ownership.\n\n**getOriginal():**\nUsed in constructor to skip through chains of clones/copies\nto find the actual underlying expression.\n\n**Evaluation:**\noperator() calls (*copy_)() which evaluates the pointed-to\nexpression and returns its result.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprConst",
+      "brief": "Constant expression node\n\nRepresents a constant value in the expression DAG.\nLeaf node with fixed value that never changes.\n\n**Properties:**\n- Type: CONST (leaf node)\n- Linearity: ZERO if |value| < \u03b5, else CONSTANT\n- Bounds: [value, value] (trivial)\n- Differentiation: Always returns 0\n- Rank: 0 (lowest priority for branching)\n\n**isInteger():**\nChecks if the constant value is an integer (within tolerance).\nUsed for determining integrality of expressions.\n\n**Usage:**\n- Constant terms in objective/constraints\n- Right-hand sides of constraints\n- Exponents in power expressions",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprCopy",
+      "brief": "Reference copy of an expression\n\nPoints to another expression and delegates all operations to it.\nUsed to share expressions without duplicating the entire subtree.\n\n**Key concept:**\nexprCopy owns its copy_ pointer and destroys it in destructor.\nThis is the \"owning\" copy - use exprClone for non-owning.\n\n**Delegation pattern:**\nAll methods (evaluate, differentiate, bounds, etc.) forward\nto the underlying copy_ expression.\n\n**Original():**\nReturns the ultimate underlying expression, chasing through\nany chain of copies to find the actual expr.\n\n**value_:**\nCaches the last computed value for use by exprStore expressions.\n\n**Important warning:**\nThis destructor deletes copy_, unlike exprClone and exprStore.\nBe careful about ownership when using expression copies.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprCos",
+      "brief": "Cosine function w = cos(x)\n\nBounded periodic function in [-1, 1]. Convexification follows the\nsame approach as exprSin with a phase shift.\n\n**Convexification (depends on bound interval):**\n- If interval < \u03c0: tangent line is overestimator on convex part,\n  underestimator on concave part\n- Secant line connects interval endpoints\n- Newton iteration (trigNewton) finds optimal tangent points\n\n**Implied bounds:**\nSince cos is bounded, w \u2208 [-1, 1] always. Uses trigImpliedBound()\nfor reverse propagation when w bounds are known.\n\n**Derivative:**\nd(cos(x))/dx = -sin(x), used for gradient computations.\n\n**Period handling:**\nIf bound interval spans multiple periods, relaxation becomes\ntrivial: -1 <= w <= 1.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprDiv",
+      "brief": "Division expression w = x / y\n\nRepresents division of two expressions. Division is reformulated as\nmultiplication: w = x/y becomes w*y = x, using bilinear convexification.\n\n**Standardization:**\nDivision x/y is converted to x * (1/y), where 1/y is handled by exprInv.\nThis allows reuse of McCormick envelope cuts for the product.\n\n**Linearity check:**\nIf denominator is constant, expression inherits linearity of numerator.\nOtherwise, expression is nonlinear.\n\n**Bound safety:**\n- is_boundbox_regular(): Checks if bounds are suitable for convexification\n- SAFE_COEFFICIENT (1e9): Maximum coefficient for OsiRowCut\n- BR_NEXT_ZERO: Safety margin near zero denominator\n\n**Not cuttable:**\nLike products, division is concave on both sides and cannot be\nfurther linearized - only bound tightening helps.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprEvenPow",
+      "brief": "Even integer power w = x^k where k is even\n\nHandles x^2, x^4, x^6, etc. These have special structure:\n- Always non-negative: w >= 0\n- Symmetric about y-axis: f(x) = f(-x)\n- NOT bijective: x and -x give same w\n\n**Convexity:**\nEven powers are convex everywhere (sum of squares is convex).\nThis greatly simplifies the convex relaxation.\n\n**Bound propagation:**\n- lb(w) = 0 if [lb(x), ub(x)] contains 0\n- lb(w) = min(lb(x)^k, ub(x)^k) otherwise\n- ub(w) = max(lb(x)^k, ub(x)^k)\n\n**Implied bounds (non-bijective!):**\nFrom w = x^k where k even:\n- |x| <= w^(1/k), so -w^(1/k) <= x <= w^(1/k)\n- Cannot determine sign of x from w alone\n\n**Convexification:**\nSince convex: tangent line underestimators everywhere.\nSecant line is the overestimator.\n\n**Special case x^2:**\nMost common even power, often handled separately for efficiency.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprExp",
+      "brief": "Exponential expression w = exp(x)\n\nRepresents the exponential function e^x. This is a convex function\nover all of R, so convexification uses secant cuts for overestimation\nand tangent cuts for underestimation.\n\n**Convexification for w = exp(x) on [l,u]:**\n- Underestimator (tangent): w >= exp(x0) + exp(x0)*(x - x0) at any x0 in [l,u]\n- Overestimator (secant): w <= exp(l) + (exp(u) - exp(l))/(u - l) * (x - l)\n\n**Implied bounds:**\n- Given w in [wl, wu] with wl > 0: x in [log(wl), log(wu)]\n- Given x in [xl, xu]: w in [exp(xl), exp(xu)]\n\n**Bijective property:**\nExp is bijective with inverse log(), enabling tighter bound propagation.\n\n**Convexity:** Convex everywhere, simplifying global optimization.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprFloor",
+      "brief": "Floor function w = floor(x)\n\nReturns the largest integer not exceeding x. Piecewise constant\nfunction with jump discontinuities at each integer.\n\n**Convexification challenge:**\nfloor(x) is neither convex nor concave nor continuous. The function\nis constant on intervals [n, n+1) with value n.\n\n**Bound propagation:**\n- lb(w) = floor(lb(x))\n- ub(w) = floor(ub(x))\n\n**Integrality:**\nResult is always integer-valued, even when argument is continuous.\nThis can introduce implicit integrality constraints.\n\n**Not cuttable:**\nNo convex relaxation exists for piecewise constant functions.\nMust rely on branching to handle.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprGroup",
+      "brief": "Mixed expression: constant + linear + nonlinear terms\n\nRepresents expressions of the form:\n  w = c0 + sum(a_i * x_i) + sum(f_j(x))\nwhere c0 is constant, a_i*x_i are linear terms, and f_j are nonlinear.\n\n**Data structures:**\n- c0_: Constant term\n- lcoeff_: Vector of (variable, coefficient) pairs for linear part\n- Inherits arglist_ from exprSum for nonlinear terms\n\n**Factory pattern:**\ngenExprGroup() checks parameters and returns:\n- exprConst if only constant\n- exprVar if single variable with coefficient 1\n- exprGroup otherwise\n\n**Evaluation:**\noperator() = c0 + sum(coefficient * variable_value) + sum(nonlinear)\n\n**Base for exprQuad:**\nexprQuad extends this to add x'Qx quadratic terms.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprHess",
+      "brief": "Symbolic Hessian of Lagrangian via expression DAG\n\nStores the Hessian of the Lagrangian:\n\u2207\u00b2L(x,\u03bb) = \u2207\u00b2f(x) + \u03a3\u1d62 \u03bb\u1d62 \u2207\u00b2g\u1d62(x)\n\n**Sparse structure:**\n- nnz_: Number of structural nonzeros (lower triangle)\n- iRow_[], jCol_[]: COO format indices\n- numL_[k]: How many \u03bb\u1d62 contribute to position k\n- lamI_[k][]: Indices of contributing \u03bb\u1d62\n- expr_[k][j]: Expression for \u2202\u00b2g\u2c7c/\u2202x_iRow[k]\u2202x_jCol[k]\n\n**Evaluation:**\nFor each nonzero position (i,j), sum over all constraints:\nH[i,j] = expr_obj[i,j] + \u03a3\u2096 \u03bb[lamI[k]] * expr[k][...]\n\n**Feasibility pump extension:**\nCan be extended with gg' term for feasibility pump objectives\nby augmenting the objective with ||x - x\u0304||\u00b2 + gradient terms.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprIVar",
+      "brief": "Integer variable expression node\n\nRepresents an integer-restricted decision variable in the\nexpression DAG. Inherits from exprVar with additional\nintegrality information.\n\n**Integer markers:**\n- isInteger(): Always returns true (variable is integer-valued)\n- isDefinedInteger(): Always returns true (defined as integer)\n\n**Printed notation:**\nPrints as \"y_i\" where i is the variable index, distinguishing\nfrom continuous variables which print as \"x_i\".\n\n**Usage:**\nInteger variables require special handling in:\n- Branch-and-bound (must branch to enforce integrality)\n- Feasibility checking (must satisfy x \u2208 \u2124)\n- Solution rounding in heuristics",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprIf",
+      "brief": "Conditional (if-then-else) expression operator\n\nImplements the AMPL ifnl() operator:\n  if (condition) then expr1 else expr2\n\n**Status:** This is a placeholder/stub class. Full implementation\nwould require handling disjunctive convexification.\n\n**Convexification challenge:**\nConditional expressions create disjunctive feasible regions.\nStandard approach would use big-M formulations or disjunctive\nprogramming techniques to handle the branching logic.\n\n**Usage in AMPL:**\nModels with if-then-else create nonsmooth, potentially\ndiscontinuous functions that are difficult to convexify.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprInv",
+      "brief": "Reciprocal function w = 1/x\n\nHyperbolic function that is convex on (0, \u221e) and (-\u221e, 0) separately.\nSingular at x = 0, so domain handling is critical.\n\n**Convexification by domain:**\n- x > 0: 1/x is convex, use secant overestimator and tangent underestimators\n- x < 0: 1/x is convex, same approach\n- If x can cross zero: must handle carefully, possible branching\n\n**Tangent line at x = a:**\nw = 1/a - (x - a)/a\u00b2 = 2/a - x/a\u00b2\n\n**Secant between (a, 1/a) and (b, 1/b):**\nw = 1/a + (1/b - 1/a)/(b - a) * (x - a) = 1/a - (x - a)/(ab)\n\n**Properties:**\n- Bijective: inverse of 1/x is 1/x (self-inverse)\n- Used in division: x/y reformulated as x * (1/y)\n- Derivatives: d(1/x)/dx = -1/x\u00b2, d\u00b2(1/x)/dx\u00b2 = 2/x\u00b3",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprJac",
+      "brief": "Symbolic Jacobian of constraints via expression DAG\n\nStores the constraint Jacobian as a sparse matrix of expression\npointers. Each nonzero \u2202g_i/\u2202x_j is an expression node that can\nbe evaluated at any point.\n\n**Sparse structure:**\n- nnz_: Number of structural nonzeros\n- iRow_[], jCol_[]: COO format indices\n- expr_[k]: Expression for the k-th nonzero entry\n\n**Construction:**\nBuilt from CouenneProblem by differentiating each constraint\nbody expression with respect to each variable it depends on.\n\n**Usage:**\nCalled by Ipopt's eval_jac_g() callback to provide the\nconstraint Jacobian. Expression-based representation allows\nexact derivatives without finite differences.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprLog",
+      "brief": "Natural logarithm expression w = log(x)\n\nRepresents the natural logarithm function. This is a concave function\non its domain (x > 0), so convexification uses tangent cuts for\noverestimation and secant cuts for underestimation.\n\n**Convexification for w = log(x) on [l,u]:**\n- Overestimator (tangent): w <= log(x0) + (x - x0)/x0 at any x0 in (l,u)\n- Underestimator (secant): w >= log(l) + (log(u) - log(l))/(u - l) * (x - l)\n\n**Implied bounds:**\n- Given w in [wl, wu]: x in [exp(wl), exp(wu)]\n- Given x in [xl, xu] with xl > 0: w in [log(xl), log(xu)]\n\n**Bijective property:**\nLog is bijective with inverse exp(), enabling tighter bound propagation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprMax",
+      "brief": "N-ary maximum operator w = max(x1, x2, ..., xn)\n\nRepresents the maximum of multiple expressions. The max function is\nconvex (pointwise supremum of linear functions) but nonsmooth.\n\n**Convexification:**\nmax is convex, so underestimators are straightforward:\n- w >= xi for all i (linear underestimators)\n\nOverestimators require disjunction:\n- w <= x_k for some k (one of the arguments achieves the max)\n\n**Bound propagation:**\n- lb(w) = max(lb(x1), ..., lb(xn))\n- ub(w) = max(ub(x1), ..., ub(xn))\n\n**Subgradient at nondifferentiable points:**\nAt kinks where multiple arguments are equal to max, any convex\ncombination of their gradients is a valid subgradient.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprMin",
+      "brief": "N-ary minimum operator w = min(x1, x2, ..., xn)\n\nRepresents the minimum of multiple expressions. The min function is\ncontinuous but nonsmooth (non-differentiable at kinks where arguments\nare equal).\n\n**Convexification challenge:**\nmin is neither convex nor concave. Standard approach:\n- Introduce auxiliary variables: w = min(x1,...,xn)\n- Add constraints: w <= xi for all i (overestimators)\n- Underestimator requires disjunction: w >= x_k for some k\n\n**Bound propagation:**\n- lb(w) = min(lb(x1), ..., lb(xn))\n- ub(w) = min(ub(x1), ..., ub(xn))\n\n**Implementation note:**\nUses copy/store pattern with 2n arguments: copies for evaluation,\nstores for caching evaluated values.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprMul",
+      "brief": "N-ary multiplication expression with McCormick convexification\n\nRepresents products of the form w = x1 * x2 * ... * xn.\nDuring standardization, n-ary products are decomposed into\nbinary products: w1 = x1*x2, w2 = w1*x3, etc.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneExprMultiLin",
+      "brief": "Multilinear product w = x1 * x2 * ... * xn\n\nProduct of n expressions. Generalizes bilinear (n=2) and trilinear (n=3)\nto arbitrary number of factors.\n\n**Standardization approaches:**\n1. Recursive bilinear: w = ((x1*x2)*x3)*... using nested aux variables\n2. Trilinear grouping: group into triplets when n >= 3\n3. Direct multilinear relaxation (more complex cuts)\n\n**Convexification complexity:**\n- Bilinear (n=2): 4 McCormick cuts\n- Trilinear (n=3): 8 Meyer-Floudas cuts\n- n-linear: 2^n cuts (exponential in n)\n\nFor large n, recursive bilinear decomposition is preferred despite\nintroducing auxiliary variables.\n\n**Bound propagation:**\nProduct of intervals requires considering all 2^n corner combinations\nto find the true bounds. Simplified by interval arithmetic.\n\n**Implied bounds (impliedBoundMul):**\nFrom w = x1*x2*...*xn and bounds on w, derive bounds on factors.\nMore complex than bilinear case.\n\n**Branching:**\nbalancedMul() selects branching point to balance the relaxation\nimprovement across all factors.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprNorm",
+      "brief": "p-norm expression: ||f(x)||_p\n\nRepresents the \u2113\u209a norm: ||f(x)||_p = (\u03a3\u1d62 |f\u1d62(x)|^p)^(1/p)\n\n**Status:** This is a placeholder/stub class.\n\n**Special cases:**\n- p = 1: Sum of absolute values (piecewise linear)\n- p = 2: Euclidean norm (convex, smooth except at origin)\n- p = \u221e: Maximum absolute value (convex, nonsmooth)\n\n**Convexity:**\nAll \u2113\u209a norms with p \u2265 1 are convex functions.\nThis makes overestimation straightforward (tangent planes),\nbut underestimation requires handling the non-negativity\nand norm structure.\n\n**Common usage:**\n- Distance constraints: ||x - a||\u2082 \u2264 r\n- Regularization: minimize f(x) + \u03bb||x||\u2081",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprOddPow",
+      "brief": "Odd integer power w = x^k where k is odd\n\nHandles x^1, x^3, x^5, etc. These have special structure:\n- Bijective (one-to-one) over all reals\n- Pass through origin with same sign as x\n- No symmetry about y-axis (unlike even powers)\n\n**Convexity structure:**\n- x^3: convex for x > 0, concave for x < 0 (S-shaped)\n- x^5, x^7, ...: similar S-shape, steeper for higher k\n- Inflection point at x = 0\n\n**Bound propagation:**\nSince bijective: lb(w) = lb(x)^k, ub(w) = ub(x)^k (sign preserved)\n\n**Implied bounds (inverse):**\nFrom w = x^k: x = sign(w) * |w|^(1/k)\n- lb(x) = sign(lb(w)) * |lb(w)|^(1/k)\n- ub(x) = sign(ub(w)) * |ub(w)|^(1/k)\n\n**Convexification:**\nFor w = x^k on [a, b]:\n- If both same sign: secant overestimator, tangent underestimators (or vice versa)\n- If spans zero: use separate relaxations for positive and negative parts",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprOp",
+      "brief": "Base class for n-ary operators in expression DAG\n\nBase for all non-leaf operators (sum, mul, pow, div, etc.).\nProvides argument list management and common functionality.\n\n**Key attributes:**\n- arglist_: Array of pointers to child expressions\n- nargs_: Number of arguments\n\n**Derived operator classes:**\n- exprSum, exprSub: Addition and subtraction\n- exprMul, exprDiv: Multiplication and division\n- exprPow: Power function x^k\n- exprLog, exprExp: Logarithm and exponential\n- exprSin, exprCos: Trigonometric functions\n- exprMin, exprMax: Min/max functions\n- exprAbs: Absolute value\n\n**Methods:**\n- standardize(): Replace with auxiliary variable w = f(x)\n- clonearglist(): Deep copy argument list for cloning\n- rank(): Maximum rank of arguments + 1",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprOpp",
+      "brief": "Negation operator w = -x\n\nLinear operator that returns the opposite of an expression.\nPreserves linearity of the argument.\n\n**Convexification:**\n- Affine function: requires no convexification\n- Convex relaxation is exact\n- Linearity() returns same as argument's Linearity()\n\n**Bound propagation:**\n- lb(w) = -ub(x)\n- ub(w) = -lb(x)\nNote: bounds are swapped!\n\n**Implied bounds:**\nFrom w = -x: if w >= a then x <= -a, if w <= b then x >= -b\n\n**Integrality preservation:**\nIf x is integer, -x is also integer.\n\n**Simplification:**\n-(-x) simplifies to x (double negation elimination)",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprPWLinear",
+      "brief": "Piecewise linear function expression\n\nRepresents piecewise linear (PWL) functions defined by breakpoints\nand slopes or by point sequences.\n\n**Status:** This is a placeholder/stub class.\n\n**Mathematical form:**\nf(x) = a\u1d62 * x + b\u1d62  for  x\u1d62 \u2264 x < x\u1d62\u208a\u2081\n\n**Convexification:**\n- If convex (slopes increasing): trivial envelope\n- If concave (slopes decreasing): trivial envelope\n- If neither: requires disjunctive handling\n\n**Standard MIP formulation:**\nUses binary variables to select active segment:\n- \u03bb\u1d62 \u2208 [0,1], \u03a3\u03bb\u1d62 = 1, at most 2 adjacent \u03bb\u1d62 positive (SOS2)\n- x = \u03a3\u03bb\u1d62x\u1d62, y = \u03a3\u03bb\u1d62y\u1d62\n\n**Usage:**\nCommon in approximating nonlinear functions or modeling\ncosts with quantity discounts.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprPow",
+      "brief": "Power expression w = x^k with convexification",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneExprQuad",
+      "brief": "Quadratic expression with alpha-convexification",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneExprSignPow",
+      "brief": "Signed power function w = x * |x|^(k-1) = sign(x) * |x|^k\n\nGeneralizes power to handle negative arguments while preserving\nsign, creating a bijective function for any real k.\n\n**Definition:**\nsignpow(x, k) = x * |x|^(k-1) = sign(x) * |x|^k\n- For x >= 0: same as x^k\n- For x < 0: -|x|^k (preserves sign)\n\n**Key property:**\nUnlike standard power x^k which is undefined for x < 0 when k is\nnon-integer, signpow is defined and continuous for all x.\n\n**Convexification:**\n- For k > 1: convex for x > 0, concave for x < 0\n- For 0 < k < 1: concave for x > 0, convex for x < 0\n- Point x = 0 is an inflection point\n\n**Bijectivity:**\nInverse is sign(y) * |y|^(1/k), enabling exact reverse propagation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprSin",
+      "brief": "Sine expression w = sin(x)\n\nRepresents the sine function. Sine is challenging for global optimization\ndue to its oscillatory nature - alternates between convex and concave\nregions every pi interval.\n\n**Convexification challenges:**\n- Convex on [2k*pi - pi, 2k*pi] for integer k\n- Concave on [2k*pi, 2k*pi + pi]\n- Multiple local optima on unbounded domains\n- Special handling needed when domain spans multiple periods\n\n**Implied bounds:**\n- w in [-1, 1] always\n- Given w bounds, x bounds via arcsin with period handling\n- trigImpliedBound(): Generalized procedure for sin/cos\n\n**Branching:**\ntrigSelBranch(): Selects branching points based on convexity regions\nand current LP solution position relative to sin curve.\n\n**Not cuttable:** Due to alternating convexity, cutting planes\nare less effective than branching.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprStore",
+      "brief": "Expression that returns previously stored value\n\nReturns the Value() of the pointed-to expression rather than\nre-evaluating it. Used for efficiency when an expression has\nalready been evaluated and the value cached.\n\n**Key difference from exprCopy/exprClone:**\n- exprCopy: Calls (*copy_)() to evaluate\n- exprClone: Calls (*copy_)() to evaluate\n- exprStore: Calls copy_->Value() to get cached value\n\n**Usage pattern:**\nWhen an expression tree is evaluated top-down, intermediate\nresults can be stored in value_ fields. exprStore allows\nretrieval of these stored values without re-computation.\n\n**Destructor:**\nLike exprClone, sets copy_ = NULL to prevent deletion.\nDoes NOT own the pointed-to expression.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprSub",
+      "brief": "Binary subtraction operator w = x - y\n\nLinear operator for computing the difference of two expressions.\nLinearity is the maximum of the two arguments' linearity.\n\n**Convexification:**\n- Affine in both arguments: no convexification needed\n- Linearity() = max(Linearity(x), Linearity(y))\n\n**Bound propagation:**\n- lb(w) = lb(x) - ub(y)\n- ub(w) = ub(x) - lb(y)\n\n**Implied bounds:**\nFrom w = x - y:\n- x >= lb(w) + lb(y)\n- x <= ub(w) + ub(y)\n- y >= lb(x) - ub(w)\n- y <= ub(x) - lb(w)\n\n**Standardization:**\nMay be rewritten as x + (-1)*y using exprSum and exprOpp\nduring problem transformation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprSum",
+      "brief": "N-ary sum expression w = sum(f_i(x))\n\nRepresents sum of multiple expressions. Sums are linear in their\narguments if all arguments are linear.\n\n**Implied bounds for w = a0 + sum(a_i * x_i):**\nGiven bounds w in [l,u] and coefficients partitioned by sign:\n- I1: indices where a_i > 0\n- I2: indices where a_i < 0\n\nFor i in I1:\n- x_i >= (l - a0 - sum_{j!=i,j in I1}(a_j*u_j) - sum_{j in I2}(a_j*l_j)) / a_i\n- x_i <= (u - a0 - sum_{j!=i,j in I1}(a_j*l_j) - sum_{j in I2}(a_j*u_j)) / a_i\n\n**Quadratic detection:**\ncreateQuadratic() scans sum terms for products and creates exprQuad\nif enough quadratic terms exist for alpha-convexification.\n\n**Linearity:**\nReturns maximum linearity level among all arguments.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprTrilinear",
+      "brief": "Trilinear product expression w = x*y*z",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneExprUnary",
+      "brief": "Base class for univariate function expressions\n\nProvides common framework for all single-argument functions like\nsin, cos, log, exp, sqrt, etc. Derived classes override F() to\ndefine the actual function.\n\n**Key virtual methods for derived classes:**\n- F(): Return the unary_function pointer for evaluation\n- generateCuts(): Create convexification cuts for w = f(x)\n- impliedBound(): Backward propagation (w bounds \u2192 x bounds)\n\n**Convexification approach:**\nUnivariate functions use tangent cuts (supporting hyperplanes) on\nconvex regions and secant cuts on concave regions.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExprVar",
+      "brief": "Variable expression class for original decision variables\n\nRepresents decision variables in the expression DAG. All problem\nvariables (original and auxiliary) derive from this class.\n\n**Key attributes:**\n- varIndex_: Index in the problem's variable vector\n- domain_: Pointer to current point and bounds\n\n**Methods:**\n- operator()(): Return current variable value from domain\n- lb()/ub(): Access current lower/upper bounds\n- differentiate(): Returns 1 if differentiating w.r.t. this variable\n- impliedBound(): Propagate bounds from auxiliary to original variables\n\n**Linearity:**\nOriginal variables have Linearity() = LINEAR (affine in themselves).",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneExpression",
+      "brief": "Base class for expression DAG nodes in Couenne\n\nDefines the abstract interface for all expression types (constants,\nvariables, operators). Each expression can evaluate itself, generate\nconvex relaxation cuts, and participate in bound propagation.\n\n**Expression hierarchy:**\n- exprConst: Constant values\n- exprVar/exprAux: Original and auxiliary variables\n- exprOp: Operators (unary, binary, n-ary)\n- exprCopy/exprClone: References to other expressions\n\n**Key virtual methods:**\n- operator()(): Evaluate expression at current point\n- generateCuts(): Generate OA-style convexification cuts for w = f(x)\n- impliedBound(): Backward bound propagation (w bounds \u2192 x bounds)\n- getBounds(): Forward bound propagation (x bounds \u2192 w bounds)\n- standardize(): Convert to auxiliary variable form\n\n**auxSign enum:**\nDefines how auxiliary w relates to its expression f(x):\n- AUX_LEQ: w <= f(x) (under-estimator)\n- AUX_EQ: w = f(x) (equality definition)\n- AUX_GEQ: w >= f(x) (over-estimator)",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneFPpool",
+      "brief": "Solution pool and tabu list for Feasibility Pump\n\nManages collections of solutions found during FP iterations,\nproviding restart points and avoiding revisiting similar solutions.\n\n**CouenneFPsolution:**\nWrapper for a solution with cached infeasibility metrics:\n- nNLinf_: Count of nonlinear infeasibilities\n- nIinf_: Count of integer infeasibilities\n- maxNLinf_/maxIinf_: Maximum violations\n- objVal_: Objective function value\n\n**Comparison modes (what_to_compare):**\n- SUM_NINF: Compare by sum of infeasibility counts\n- SUM_INF: Compare by sum of infeasibility magnitudes\n- OBJVAL: Compare by objective value\n- ALL_VARS: Compare all variable values (for tabu)\n- INTEGER_VARS: Compare only integer variables (for tabu)\n\n**CouenneFPpool:**\nSet of solutions with custom comparator. Used to:\n- Store good MILP solutions for NLP restarts\n- Implement tabu list to avoid cycling\n- Find closest solution in pool (findClosestAndReplace)",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneFeasPump",
+      "brief": "Feasibility Pump heuristic for nonconvex MINLP\n\nAlternates between NLP and MILP solves to find feasible solutions:\n- MILP phase: Find integer point closest to NLP solution\n- NLP phase: Find NLP-feasible point closest to integer solution",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneFixPoint",
+      "brief": "Fixpoint-based bound tightening via constraint propagation\n\nImplements Feasibility-Based Bound Tightening (FBBT) using fixpoint\niteration. Propagates bounds through expression DAG until no further\ntightening is possible.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneFunTriplets",
+      "brief": "Function triplets: f(x), f'(x), f''(x), and (f')\u207b\u00b9\n\nBundles a univariate function with its first two derivatives and\nthe inverse of the first derivative. Used in convexification to\ncompute tangent points and envelope parameters.\n\n**Abstract base: funtriplet**\n- F(x): Main function value\n- Fp(x): First derivative f'(x)\n- Fpp(x): Second derivative f''(x)\n- FpInv(x): Inverse of first derivative (f')\u207b\u00b9(x)\n\n**simpletriplet:**\nStores function pointers for each operation. Suitable for\nstandard functions like exp, log, sin, cos.\n\n**powertriplet:**\nSpecialized for x\u1d4f with analytical derivatives:\n- F(x) = x\u1d4f\n- Fp(x) = k\u00b7x\u1d4f\u207b\u00b9\n- Fpp(x) = k(k-1)\u00b7x\u1d4f\u207b\u00b2\n- FpInv(y) = (y/k)^(1/(k-1))\n\n**kpowertriplet:**\nExtension for c\u00b7x\u1d4f with scalar multiplier.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneGlobalCutOff",
+      "brief": "Global best solution and cutoff value storage\n\nManages the incumbent (best known feasible solution) and its\nobjective value across the entire B&B search.\n\n**Role in B&B:**\n- Provides cutoff value for pruning nodes\n- Stores best solution found so far\n- Updated when heuristics or B&B find improvements\n\n**Members:**\n- cutoff_: Objective value of best solution (upper bound for min)\n- sol_: Variable values of best solution\n- valid_: Whether stored solution corresponds to cutoff\n\n**Thread safety note:**\nIn parallel environments, this would need synchronization.\nCurrently assumes sequential access.\n\n**setCutOff():**\nUpdates cutoff and optionally stores the solution vector.\nRequires CouenneProblem pointer for size information.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneInfeasCut",
+      "brief": "Signal infeasibility via fictitious cut\n\nMechanism for bound tighteners to signal detected infeasibility\nto the node solver without early termination.\n\n**WipeMakeInfeas():**\nAdds a fictitious cut 1 \u2264 x\u2080 \u2264 -1 to the cut set. This\nimpossible constraint signals to subsequent components that\nthe node is infeasible.\n\n**isWiped():**\nChecks whether the cut set contains the infeasibility signal.\nCut generators should check this before expensive operations.\n\n**Why needed:**\nIn Cgl's cut generator framework, generators cannot directly\nprune nodes. This sentinel cut mechanism allows bound tighteners\nto signal infeasibility discovered during FBBT/OBBT.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneIterativeRounding",
+      "brief": "Iterative rounding heuristic for nonconvex MINLP",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneJournalist",
+      "brief": "Couenne-specific logging categories using Ipopt's Journalist\n\nExtends Ipopt's Journalist logging facility with Couenne-specific\ncategories for selective debug output.\n\n**Log categories defined:**\n- J_BRANCHING: Branch-and-bound variable selection\n- J_BOUNDTIGHTENING: FBBT and OBBT progress\n- J_CONVEXIFYING: Cut generation and convexification\n- J_PROBLEM: Problem construction and reformulation\n- J_NLPHEURISTIC: NLP solve heuristics\n- J_DISJCUTS: Disjunctive cut generation (CGLP)\n- J_REFORMULATE: Expression reformulation\n- J_COUENNE: General Couenne messages\n\n**Usage:**\n```cpp\njnlst->Printf(J_SUMMARY, J_BRANCHING,\n              \"Selected var %d with score %.2f\\n\", idx, score);\n```\n\n**Verbosity levels (from Ipopt):**\n- J_NONE, J_ERROR, J_WARNING, J_SUMMARY, J_DETAILED, ...",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneLQelems",
+      "brief": "Linear and quadratic term storage for standardization\n\nData structures for collecting linear and quadratic terms during\nexpression standardization (conversion to auxiliary variable form).\n\n**quadElem:**\nSingle quadratic term c\u00b7x\u1d62\u00b7x\u2c7c:\n- varI_, varJ_: Variable pointers\n- coeff_: Coefficient c\n\n**LinMap:**\nSparse map of linear terms: index \u2192 coefficient\n- insert(index, coe): Add/accumulate coefficient\n- Auto-removes zero entries\n\n**QuadMap:**\nSparse map of quadratic terms: (i,j) \u2192 coefficient\n- insert(indI, indJ, coe): Add/accumulate coefficient\n- Auto-removes zero entries\n\n**Usage:**\nDuring standardization, expressions like x\u00b2 + 2xy + 3x + 4\nare decomposed into LinMap (3x + 4 constant) and QuadMap\n(x\u00b2 + 2xy). These are then converted to auxiliary form.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneMINLPInterface",
+      "brief": "OsiSolverInterface for MINLP via Couenne expressions\n\nProvides an Osi-compatible interface for solving MINLP continuous\nrelaxations using NLP solvers (Ipopt or FilterSQP). Gradients and\nJacobians are computed from the expression DAG.\n\n**Solver enum:**\n- EIpopt: Interior-point via Ipopt\n- EFilterSQP: Sequential quadratic programming\n- EAll: Use multiple solvers for robustness\n\n**Key methods:**\n- initialSolve(): Solve initial continuous relaxation\n- resolve(): Re-solve after bound changes\n- getOuterApproximation(): Generate OA cuts at current point\n- extractLinearRelaxation(): Build LP relaxation from NLP\n\n**Outer approximation support:**\n- getOuterApproximation(): Generate linearizations at solution\n- getConstraintOuterApproximation(): Single constraint OA\n- getBendersCut(): Benders decomposition cut\n- getFeasibilityOuterApproximation(): Cuts for feasibility pump\n\n**Strong branching:**\nUses StrongBranchingSolver for approximate LP-based evaluation\nduring variable selection.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneMatrix",
+      "brief": "Sparse matrix and vector of expressions\n\nData structures for representing matrices of Couenne expressions,\nused primarily for SDP cuts and PSD constraints.\n\n**Classes:**\n- CouenneScalar: Single indexed expression element\n- CouenneSparseVector: Sparse vector of expressions (ordered set)\n- CouenneExprMatrix: Sparse matrix with row and column major storage\n\n**Storage:**\nUses std::set with custom comparators for O(log n) lookup.\nBoth row-major and column-major views maintained for efficient\nmatrix-vector and matrix-matrix operations.\n\n**Usage in SDP cuts:**\nX = (x_ij) where x_ij is the auxiliary for product x_i * x_j.\nvarIndices_ stores the original variables x_i used in products.\n\n**Operations:**\n- Vector dot product: v1 * v2\n- Matrix-vector product: M * v\n- Matrix-matrix product: M1 * M2\n- Threshold multiplication (early termination)",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneMultiVarProbe",
+      "brief": "Multi-variable probing for bound tightening",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneNauty",
+      "brief": "Interface to nauty library for symmetry detection\n\nWraps the nauty graph automorphism library to detect symmetries\nin MINLP problems. Symmetry information enables orbital branching\nand isomorphism pruning to reduce the search space.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneOSInterface",
+      "brief": "Optimization Services (OS) interface for Couenne\n\nReads optimization problems from OSInstance format (COIN-OR\nOptimization Services) and converts to Couenne representation.\n\n**OSInstance format:**\nXML-based representation for optimization problems defined by\nthe Optimization Services project. Supports linear, quadratic,\nand nonlinear constraints with expression trees.\n\n**Key methods:**\n- getCouenneProblem(): Convert OSInstance \u2192 CouenneProblem\n- getTMINLP(): Wrap as Bonmin TMINLP\n- writeSolution(): Output in OS solution format\n\n**Usage:**\nAlternative to AMPL interface for problems defined via\nOptimization Services XML or programmatic APIs.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneObject",
+      "brief": "Branching object for auxiliary variables w = f(x)\n\nDefines branching for auxiliary variables based on their infeasibility\n|w - f(x)|. Creates branches to restore feasibility of the relation.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneOrbitBranchingObj",
+      "brief": "Orbital branching object using symmetry",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneOrbitObj",
+      "brief": "Orbital branching using symmetry detection (DISABLED)",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouennePSDcon",
+      "brief": "Positive semidefinite constraint X \u2ab0 0\n\nRepresents a constraint that a matrix of expressions must be\npositive semidefinite (all eigenvalues non-negative).\n\n**Mathematical meaning:**\nX \u2ab0 0 is equivalent to:\n- All eigenvalues of X are non-negative\n- v'Xv >= 0 for all vectors v\n- X can be written as X = A'A for some matrix A\n\n**Common usage:**\n- Product matrices: X_ij = x_i * x_j must be PSD\n- Covariance matrices in statistics\n- Second-order cone constraints (via PSD embedding)\n\n**Handling in Couenne:**\nPSD constraints are not directly enforceable in MILP/NLP.\nInstead, they are enforced via:\n1. SDP cuts (see CouenneSdpCuts)\n2. Eigenvalue constraints (expensive)\n3. Principal minor constraints",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouennePrecisions",
+      "brief": "Numerical tolerances and constants for Couenne\n\nCentral definition of numerical tolerances used throughout\nCouenne for comparisons, cut generation, and bound handling.\n\n**General tolerances:**\n- COUENNE_EPS (1e-7): General numerical tolerance\n- COUENNE_BOUND_PREC (1e-5): Looser tolerance for bounds\n- COUENNE_EPS_INT (1e-9): Integrality check tolerance\n- COUENNE_EPS_SIMPL (1e-20): Simplification zero threshold\n\n**Infinity and bounds:**\n- COUENNE_INFINITY (1e50): Represents \u00b1\u221e in bounds\n- MAX_BOUND (1e45): Practical bound maximum\n- Couenne_large_bound (9.999e12): LP unbounded threshold\n\n**Cut coefficients:**\n- COU_MAX_COEFF (1e9): Maximum cut coefficient\n- COU_MIN_COEFF (1e-9): Minimum cut coefficient\n(Ensures numerical stability in LP solver)\n\n**Utility macros:**\n- COUENNE_round(x): Round to nearest integer\n- COUENNE_sign(x): Return +1 or -1",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneProblem",
+      "brief": "Central MINLP problem representation with expression DAG\n\nThe heart of Couenne's global optimization approach. Represents MINLPs\nsymbolically as expression trees, enabling automatic convexification,\nbound propagation, and reformulation.\n\n**Key data structures:**\n- variables_: Original, auxiliary, and defined variables\n- objectives_/constraints_: Symbolic expressions\n- graph_: Dependency graph for evaluation ordering\n- auxSet_: Set of auxiliary variables w = f(x) for linearization\n\n**Bound tightening methods:**\n- FBBT (doFBBT_): Feasibility-based bound tightening via constraint propagation\n- OBBT (doOBBT_): Optimality-based bound tightening via LP solves\n- RCBT (doRCBT_): Reduced-cost bound tightening\n- ABT (doABT_): Aggressive bound tightening via domain partitioning\n\n**Reformulation (standardize()):**\nConverts nonlinear expressions into auxiliary variable definitions\nw = f(x), enabling generation of convex relaxations for each operator.\n\n**Symmetry handling:**\nUses nauty library for graph automorphism detection and orbital branching.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneProblemElem",
+      "brief": "Constraint and objective classes for Couenne problems\n\nDefines the building blocks for optimization problems:\nconstraints with expression bounds and objective functions.\n\n**CouenneConstraint:**\nRepresents lb_ <= body_ <= ub_ where all three are expressions:\n- body_: The constraint expression (e.g., exp(x1+x2))\n- lb_: Lower bound expression (defaults to 0 or -INFINITY)\n- ub_: Upper bound expression (defaults to 0 or +INFINITY)\n\n**Default bound handling:**\n- Both NULL \u2192 equality constraint (lb = ub = 0)\n- lb NULL, ub set \u2192 lb = -INFINITY (one-sided upper)\n- ub NULL, lb set \u2192 ub = +INFINITY (one-sided lower)\n\n**CouenneObjective:**\nMinimization objective wrapper. Maximization problems are\nconverted by negating the objective during problem input.\n\n**standardize():**\nDecomposes complex expressions into auxiliary variable\ndefinitions for reformulation-linearization.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneProjections",
+      "brief": "Point-to-segment projection utilities\n\nGeometric utilities for projecting points onto line segments,\nused in convexification cut generation and branching point selection.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneRecordBestSol",
+      "brief": "Best solution recording with feasibility tracking\n\nMaintains the best feasible solution found during optimization,\nwith detailed violation tracking for debugging and reporting.\n\n**Initial domain info:**\n- cardInitDom: Problem dimension\n- initIsInt[]: Integer variable flags\n- listInt: Indices of integer variables\n- initDomLb[], initDomUb[]: Original bounds (for feasibility check)\n\n**Best solution state:**\n- hasSol: True if any solution has been recorded\n- sol[]: Current best solution vector\n- val: Objective value of best solution\n- maxViol: Maximum violation (bound, integrality, or constraint)\n\n**Modified solution workspace:**\n- modSol[], modSolVal, modSolMaxViol: Temporary storage for\n  checkNLP2 and update operations before committing\n\n**update() methods:**\n- update(sol, card, val, viol): Update if val < current val\n- update(): Commit modSol if modSolVal < current val\n\n**compareAndSave():**\nCompare two solutions, keep better one with finite value (<1e49).\nReturns: -1 if both infinite, 0 if solA saved, 1 if solB saved.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneRootQ",
+      "brief": "Root finding for Q^k(x) polynomials in power convexification\n\nFinds roots of the polynomial Q^k(x) = \u03a3\u1d62\u208c\u2081^{2k} i\u00b7x^{i-1} used in\nconvexification of odd powers. Based on Liberti & Pantelides (2003).\n\n**Mathematical background:**\nFor odd power expressions w = x^k, the convex/concave envelope\nrequires finding specific points where tangent lines from the\nboundary touch the curve. The Q^k polynomial characterizes these.\n\n**Usage:**\n- rootQ(k): Computes root for exponent 2k+1\n- Qroot class: Caches computed roots in static map for efficiency\n\n**Implementation:**\n- Odd k: Computed via Newton's method, cached in Qmap\n- Even k (2,4,6,8,10): Hardcoded analytical values\n  - k=2: -(\u221a2 - 1) \u2248 -0.414\n  - k=4: \u2248 -0.560\n  - k=6: \u2248 -0.641\n  - etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneSOSObject",
+      "brief": "Special Ordered Set (SOS) branching for Couenne",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneSdpCuts",
+      "brief": "SDP-based cutting planes using matrix positive semidefiniteness\n\nGenerates cuts exploiting that product matrices X = (x_ij) where x_ij = x_i*x_j\nmust be positive semidefinite. These cuts strengthen the LP relaxation beyond\nwhat McCormick envelopes provide.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneSolverInterface",
+      "brief": "OsiSolverInterface wrapper with bound tightening integration\n\nTemplate class wrapping any OsiSolverInterface (typically OsiClpSolverInterface)\nwith Couenne-specific enhancements for spatial B&B.\n\n**Key features:**\n1. Applies FBBT before resolve() to tighten bounds\n2. Uses expression-based isInteger() for auxiliary variables\n3. Integrates NLP solutions into branching decisions\n\n**Bound tightening integration:**\n- tightenBounds(): Apply FBBT before LP solve\n- tightenBoundsCLP(): Clp-specific variable bound analysis\n- tightenBoundsCLP_Light(): Lightweight version for hot starts\n\n**Infeasibility tracking:**\n- knowInfeasible_: Detected during bound tightening\n- knowDualInfeasible_: Continuous relaxation is unbounded\n- isProvenPrimalInfeasible(): May detect before LP solve\n\n**Template usage:**\nCouenneSolverInterface<OsiClpSolverInterface> wraps Clp\nwith Couenne's bound tightening infrastructure.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneSparseBndVec",
+      "brief": "Sparse vector with O(1) initialization for bound tracking\n\nEfficient sparse+dense hybrid data structure for tracking which\nvariables had bounds tightened. Avoids O(n) initialization cost.\n\n**Data structure (Briggs-Torczon):**\n- dInd_[0..n_-1]: Dense list of assigned indices\n- sInd_[i]: Position of index i in dense list (garbage if unset)\n- data_[i]: Value at index i (garbage if unset)\n\n**Key operations:**\n- operator[](i): O(1) access, auto-initializes new entries\n- reset(): O(1) clear (just set n_ = 0)\n- nElements(): Number of assigned entries\n- indices()/data(): Access for iteration\n\n**Why useful in FBBT:**\nIn bound tightening, typically k << n variables have bounds\ntightened. This structure allows O(k) iteration over tightened\nbounds without O(n) initialization/cleanup overhead.\n\n**Note:**\nValgrind will complain about uninitialized reads - this is expected\ndue to the lazy initialization design.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneSparseMatrix",
+      "brief": "Sparse matrix storage for Feasibility Pump distance\n\nSimple COO (coordinate) format sparse matrix used to store\nthe Hessian of the Lagrangian at optimum for later use in\nmodified distance computations.\n\n**Storage format:**\nCOO (Coordinate list):\n- val_[k]: Value of k-th nonzero\n- row_[k]: Row index of k-th nonzero\n- col_[k]: Column index of k-th nonzero\n- num_: Total number of nonzeros\n\n**Usage in Feasibility Pump:**\nThe Hessian from an NLP solve can be saved and used to modify\nthe distance metric in subsequent MILP solves, biasing the\nsearch toward regions where the NLP objective improves.\n\n**Note:** This is a simple storage class, not a full sparse\nmatrix implementation. For operations, use CoinPackedMatrix.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneTNLP",
+      "brief": "Ipopt TNLP interface for Couenne problems\n\nWraps CouenneProblem as an Ipopt::TNLP for NLP solving.\nComputes derivatives using Couenne's symbolic expression DAG.\n\n**Purpose:**\nAllows Ipopt to solve the continuous relaxation or NLP\nsubproblems arising during Couenne's spatial B&B.\n\n**Derivative computation:**\n- Gradient: Via expression differentiation (gradient_ vector)\n- Jacobian: Via ExprJac symbolic Jacobian structure\n- Hessian: Via ExprHess symbolic Hessian of Lagrangian\n\n**Key methods (Ipopt callbacks):**\n- get_nlp_info(): Returns dimensions and sparsity info\n- get_bounds_info(): Variable/constraint bounds\n- eval_f(), eval_grad_f(): Objective and gradient\n- eval_g(), eval_jac_g(): Constraints and Jacobian\n- eval_h(): Hessian of Lagrangian\n- finalize_solution(): Store optimal solution\n\n**Hessian storage:**\noptHessian_ can store the optimal Hessian for later use\n(e.g., in distance computations for Feasibility Pump).",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneThreeWayBranchObj",
+      "brief": "Three-way spatial branching for continuous variables",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneTwoImplied",
+      "brief": "Bound tightening from pairs of linear constraints",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneTypes",
+      "brief": "Core type definitions and enumerations for Couenne\n\nCentral header defining enums, types, and small classes used\nthroughout the Couenne codebase.\n\n**Key enumerations:**\n- nodeType: CONST, VAR, UNARY, N_ARY, COPY, AUX, EMPTY\n- linearity_type: ZERO, CONSTANT, LINEAR, QUADRATIC, NONLINEAR\n- convexity: CONVEX, CONCAVE, AFFINE, NONCONVEX\n- expr_type: Codes for each expression class (COU_EXPRSUM, etc.)\n- monotonicity: INCREAS, DECREAS, NONMONOTONE\n\n**t_chg_bounds class:**\nTracks whether lower/upper bounds have been:\n- UNCHANGED: No modification\n- CHANGED: Modified during bound tightening\n- EXACT: Bound is tight (equality holds)\n\n**CouNumber:**\ntypedef double CouNumber - the main floating-point type.\n\n**unary_function:**\nFunction pointer type for unary operators: CouNumber \u2192 CouNumber",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneUserInterface",
+      "brief": "Abstract base class for Couenne user interfaces\n\nDefines the interface contract for problem input sources.\nConcrete implementations read from AMPL, OSInstance, or custom formats.\n\n**Required methods (pure virtual):**\n- getCouenneProblem(): Return symbolic problem representation\n- getTMINLP(): Return Bonmin TMINLP interface for NLP solves\n\n**Optional hooks:**\n- setupJournals(): Configure output streams (default: stdout)\n- addBabPlugins(): Add cut generators, heuristics, bound tighteners\n- writeSolution(): Output final solution\n\n**Usage pattern:**\n```cpp\nCouenneAmplInterface interface(options, journalist);\nCouenneProblem* prob = interface.getCouenneProblem();\n// ... solve ...\ninterface.writeSolution(bab);\n```",
+      "has_algorithm": false
+    },
+    {
+      "name": "CouenneVTObject",
+      "brief": "Violation transfer branching for MINLP variables",
+      "has_algorithm": true
+    },
+    {
+      "name": "CouenneVarObject",
+      "brief": "Variable-based branching object for MINLP",
+      "has_algorithm": true
+    },
+    {
+      "name": "cons_rowcuts",
+      "brief": "constraint handler for rowcuts constraints\n        enables separation of convexification cuts during SCIP solution procedure",
+      "has_algorithm": false
+    },
+    {
+      "name": "dsyevx_wrapper",
+      "brief": "LAPACK dsyevx wrapper for symmetric eigenvalue computation\n\nC++ interface to LAPACK's dsyevx routine for computing selected\neigenvalues and eigenvectors of a real symmetric matrix.\n\n**dsyevx_interface parameters:**\n- n: Matrix dimension\n- A: Input symmetric matrix (upper or lower triangle)\n- m: [out] Number of eigenvalues found\n- w: [out] Eigenvalues in ascending order\n- z: [out] Eigenvectors (column-wise)\n- tolerance: Relative accuracy for eigenvalues\n- lb_ev, ub_ev: Eigenvalue range to compute (RANGE='V')\n- firstidx, lastidx: Index range to compute (RANGE='I')\n\n**Usage in Couenne:**\nUsed by CouenneSdpCuts to compute negative eigenvalues of the\nlifted matrix X - xx\u1d40, where violations indicate cuts.\n\n**Algorithm:**\nDSYEVX uses bisection followed by inverse iteration for\nselected eigenvalues, more efficient than full diagonalization.",
+      "has_algorithm": false
+    }
+  ]
+}

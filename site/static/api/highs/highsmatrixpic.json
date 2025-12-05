@@ -1,0 +1,9 @@
+{
+  "name": "HighsMatrixPic",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsMatrixPic.h",
+  "brief": "Class-independent utilities for HiGHS",
+  "algorithms": [],
+  "methods": []
+}

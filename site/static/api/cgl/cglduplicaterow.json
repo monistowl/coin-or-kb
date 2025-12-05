@@ -1,0 +1,13 @@
+{
+  "name": "CglDuplicateRow",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglDuplicateRow/CglDuplicateRow.hpp",
+  "brief": "Detect and eliminate duplicate/dominated rows\n\nPreprocessing generator that identifies:\n- Duplicate rows (identical constraints)\n- Dominated rows (one implies another)\n- Variables fixable due to coefficient > effective RHS\n\nDesigned for problems with few rows, many integer variables,\n<= or == constraints, and small integer coefficients/RHS.\n\nduplicate_ array interpretation:\n- -1: Row still active\n- -2: Row removed (all variables fixed)\n- k >= 0: Row is same as row k\n\nModes (mode_):\n- 1: Process rows only\n- 2: Process columns only (dominated columns)\n- 3: Process both rows and columns\n- 4/8: Alternative algorithms\n\nAlgorithm for duplicate detection:\n- If row A is subset of row B with same effective RHS\n- Can fix variables in B not in A\n- Then rows become identical\n\nShould be called before first solve (preprocessing phase).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglPreProcess which uses this for preprocessing",
+    "CglStored for storing cuts from dominated columns"
+  ]
+}

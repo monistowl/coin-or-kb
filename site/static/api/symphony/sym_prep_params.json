@@ -1,0 +1,12 @@
+{
+  "name": "sym_prep_params",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_prep_params.h",
+  "brief": "Preprocessing parameters for SYMPHONY\n\nParameters controlling MIP presolve operations.\n\n**prep_params structure:**\n- level: Preprocessing aggressiveness (0=off)\n- dive_level: Bound propagation depth\n- impl_dive_level: Implication chain depth\n- impl_limit: Max implications to explore\n- do_probe: Enable probing\n- verbosity: Output detail level\n- reduce_mip: Enable full problem reduction\n\n**Probing control:**\n- probe_verbosity: Probing output level\n- probe_level: Probing aggressiveness\n\n**Single-row relaxation:**\n- do_single_row_rlx: Enable SR bounds\n- single_row_rlx_ratio: Sparsity threshold\n- max_sr_cnt: Max rows to analyze\n\n**Aggregated row relaxation:**\n- do_aggregate_row_rlx: Combine rows for bounds\n- max_aggr_row_ratio: Density limit\n- max_aggr_row_cnt: Max aggregations\n\n**Resource limits:**\n- iteration_limit: Max preprocessing passes\n- time_limit: Preprocessing time budget\n- etol: Numerical tolerance\n\n**Output:**\n- display_stats: Show preprocessing summary\n- write_mps/write_lp: Save preprocessed problem",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_prep.h for preprocessing functions"
+  ]
+}

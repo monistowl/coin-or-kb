@@ -1,0 +1,9 @@
+{
+  "name": "SpecialLps",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "check/SpecialLps.h",
+  "brief": "Utilities for tests with special LPs",
+  "algorithms": [],
+  "methods": []
+}

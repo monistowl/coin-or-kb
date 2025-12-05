@@ -1,0 +1,9 @@
+{
+  "name": "acosh_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/acosh_op.hpp",
+  "brief": "Internal implementation: acosh_op",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "HSimplexReport",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/HSimplexReport.h",
+  "brief": "Simplex iteration progress reporting\n\nFunctions for logging simplex solve progress.\n\n**reportSimplexPhaseIterations():**\nReports iteration counts and phase transitions:\n- iteration_count: Total simplex iterations\n- info: HighsSimplexInfo with infeasibility counts\n- initialise: Reset counters for new phase\n\n**Output Includes:**\n- Phase 1/2 transition points\n- Iteration milestones\n- Infeasibility reduction progress",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "simplex/HEkk.h for simplex solver using this",
+    "simplex/HighsSimplexAnalysis.h for detailed analysis"
+  ]
+}

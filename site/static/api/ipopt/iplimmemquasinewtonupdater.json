@@ -1,0 +1,24 @@
+{
+  "name": "IpLimMemQuasiNewtonUpdater",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpLimMemQuasiNewtonUpdater.hpp",
+  "brief": "Limited-memory quasi-Newton Hessian approximation (L-BFGS/SR1)\n\nLimMemQuasiNewtonUpdater maintains a low-rank approximation of the\nLagrangian Hessian using limited-memory BFGS or SR1 updates.\n\nCompact representation: W = \u03c3I + V*M^(-1)*V^T where\n- \u03c3: Scalar initialization factor (B0_ if diagonal)\n- V, U: Low-rank update matrices derived from S, Y history\n- S_: Matrix of step vectors s_k = x_{k+1} - x_k\n- Y_: Matrix of gradient differences y_k = \u2207L_{k+1} - \u2207L_k\n\nUpdate types (limited_memory_update_type_):\n- BFGS: Positive definite secant update, may skip if s'y <= 0\n- SR1: Symmetric rank-1, can capture negative curvature\n\nInitialization (limited_memory_initialization_):\n- SCALAR1-4: Various heuristics for \u03c3 based on y'y/s'y\n- CONSTANT: Fixed \u03c3 = limited_memory_init_val_\n\nKey parameters:\n- limited_memory_max_history_: Maximum stored (s,y) pairs\n- limited_memory_max_skipping_: Reset after N consecutive skips\n- sigma_safe_min/max_: Safeguards for initialization factor\n\nRestoration phase (update_for_resto_):\n- Structured update accounting for \u03b7*D_r*x quadratic term\n- Ypart_ stores constraint-only gradient differences",
+  "algorithms": [
+    {
+      "name": "Limited-Memory Quasi-Newton (L-BFGS/SR1):\nApproximates \u2207\u00b2L using m most recent (s,y) pairs for O(mn) storage:\n1. Store s_k = x_{k+1} - x_k and y_k = \u2207L_{k+1} - \u2207L_k\n2. Build compact representation: B_k = \u03c3I + V\u00b7M\u207b\u00b9\u00b7V\u1d40\n3. Solve B_k\u00b7p = -g via two-loop recursion (BFGS) or Sherman-Morrison",
+      "math": "BFGS secant condition: B_{k+1}\u00b7s_k = y_k (quasi-Newton equation)\nUpdate formula (compact form for m pairs):\n  B_k = \u03c3_k\u00b7I + [Y_k  \u03c3S_k]\u00b7[D_k + \u03c3\u00b7S\u1d40S_k   L_k ]\u207b\u00b9\u00b7[Y_k  \u03c3S_k]\u1d40\n                             [L_k\u1d40           -\u03c3\u00b7S\u1d40S_k]\nwhere D_k = diag(s\u1d62\u1d40y\u1d62), L_k is strictly lower triangular with (L_k)_{ij} = s\u1d62\u1d40y_j.\n\nSR1 update: B_{k+1} = B_k + (y-Bs)(y-Bs)\u1d40 / (y-Bs)\u1d40s\nCan capture indefiniteness but may become singular.\n\nCurvature condition: s\u1d40y > 0 required for positive definiteness (BFGS).\nSkip update if violated; reset after limited_memory_max_skipping_ consecutive skips.",
+      "complexity": "Per iteration: O(mn) for update, O(mn) for matrix-vector product.\nTwo-loop recursion: O(mn) for solving B\u00b7p = -g.\nStorage: O(mn) for m pairs in n-dimensional space.",
+      "ref": [
+        "Nocedal (1980). \"Updating Quasi-Newton Matrices with Limited Storage\".\n  Mathematics of Computation 35(151):773-782. [Original L-BFGS]",
+        "Byrd et al. (1994). \"Representations of quasi-Newton matrices and\n  their use in limited memory methods\". Mathematical Programming 63:129-156.\n  [Compact representation used here]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpHessianUpdater.hpp for base interface",
+    "IpExactHessianUpdater.hpp for exact alternative",
+    "IpLowRankUpdateSymMatrix.hpp for matrix representation"
+  ]
+}

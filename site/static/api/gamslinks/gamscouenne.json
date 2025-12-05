@@ -1,0 +1,9 @@
+{
+  "name": "GamsCouenne",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/couenne/GamsCouenne.hpp",
+  "brief": "GAMS interface to Couenne global optimizer\n\nConnects GAMS to COIN-OR Couenne for global optimization of\nnon-convex MINLP problems via spatial branch-and-bound.",
+  "algorithms": [],
+  "methods": []
+}

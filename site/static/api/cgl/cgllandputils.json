@@ -1,0 +1,14 @@
+{
+  "name": "CglLandPUtils",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglLandP/CglLandPUtils.hpp",
+  "brief": "Utility functions for Lift-and-Project cut generation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglLandPSimplex for the algorithm using these utilities",
+    "CglLandPTabRow for tableau row structure",
+    "CglLandP for the main cut generator\n\nDate:     02/23/08\n\nCopyright (C) 2005-2009, Pierre Bonami and others.  All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL)."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "CoinAbcFactorization",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/CoinAbcFactorization.hpp",
+  "brief": "ABC optimized LU factorization variants",
+  "algorithms": [
+    {
+      "name": "SIMD Optimizations (all variants):\n- Vectorized scatter/gather for L and U updates\n- Aligned memory for AVX operations\n- Parallel factorization via ABC_PARALLEL",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinAbcBaseFactorization for the actual implementation",
+    "CoinAbcHelperFunctions for SIMD kernels"
+  ]
+}

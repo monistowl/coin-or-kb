@@ -1,0 +1,13 @@
+{
+  "name": "TaskSequential",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskSequential.h",
+  "brief": "Container task that runs subtasks in sequence\n\nComposite pattern for building task workflows.\n\n**TaskSequential Class:**\n- addTask()/addTasks(): Build task list\n- run(): Execute all subtasks in order\n\n**Usage in SHOT:**\n- Main iteration loop as sequential task chain\n- Groups related operations (all termination checks)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskBase.h for task interface",
+    "TaskConditional.h for branching logic"
+  ]
+}

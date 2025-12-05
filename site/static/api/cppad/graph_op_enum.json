@@ -1,0 +1,9 @@
+{
+  "name": "graph_op_enum",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/graph/graph_op_enum.hpp",
+  "brief": "Core AD functionality: graph op enum",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "record",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/record.hpp",
+  "brief": "Value graph: record",
+  "algorithms": [],
+  "methods": []
+}

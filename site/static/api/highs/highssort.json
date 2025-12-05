@@ -1,0 +1,12 @@
+{
+  "name": "HighsSort",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsSort.h",
+  "brief": "Heap-based sorting routines for HiGHS\n\nIn-place heapsort implementations for indices and value-index pairs.\n\n**Algorithm:**\n- Build max-heap in O(n) via buildMaxheap()\n- Extract elements in O(n log n) via maxHeapsort()\n- Result: increasing order (max-heap yields ascending sort)\n\n**Functions:**\n- maxheapsort(): Combined build + sort\n- buildMaxheap() + maxHeapsort(): Separate phases\n- maxHeapify(): Sift-down operation\n\n**Overloads:**\n- (HighsInt*): Sort indices only\n- (double*, HighsInt*): Sort values with corresponding indices\n- (HighsInt*, HighsInt*): Sort HighsInt values with indices\n\n**Decreasing Heap Utilities:**\n- addToDecreasingHeap(): Insert into bounded min-heap\n- sortDecreasingHeap(): Extract in decreasing order\n\n**Validation:**\n- increasingSetOk(): Check sorted order and bounds\n- sortSetData(): Sort indices and reorder associated data arrays\n\n@note Arrays use 1-based indexing: heap[1..n]",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "simplex/HEkkDual.h for CHUZC ratio test using heaps"
+  ]
+}

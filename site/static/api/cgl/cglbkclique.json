@@ -1,0 +1,25 @@
+{
+  "name": "CglBKClique",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglBKClique/CglBKClique.hpp",
+  "brief": "Clique cut separator using Bron-Kerbosch algorithm",
+  "algorithms": [
+    {
+      "name": "Bron-Kerbosch Clique Separation:\n  Enumerates violated maximal cliques in the conflict graph:\n  1. Build induced subgraph on fractional variables (x* > minFrac)\n  2. BronKerbosch(R, P, X): recursive backtracking\n     - R = current clique, P = candidates, X = excluded\n     - If P\u222aX = \u2205: R is maximal, check violation \u03a3_{i\u2208R} x_i* > 1\n     - Choose pivot u \u2208 P\u222aX maximizing |N(u)\u2229P|\n     - For each v \u2208 P \\ N(u): recurse with R\u222a{v}, P\u2229N(v), X\u2229N(v)\n  3. Extend found cliques using selected strategy\n  4. Generate cut: \u03a3_{i\u2208C} x_i \u2264 1 for violated clique C",
+      "math": "Clique inequality validity:\n  Conflict graph G: edge (i,j) iff x_i + x_j \u2264 1 implied\n  Clique C \u2286 V(G): pairwise conflicts \u2192 at most one can be 1\n  Cut: \u03a3_{i\u2208C} x_i \u2264 1, violated when \u03a3x_i* > 1 + minViol",
+      "complexity": "O(3^{n/3}) worst case for all maximal cliques.\n  With pivoting: O(d\u00b7n\u00b73^{d/3}) where d = degeneracy.\n  Controlled by maxCallsBK_ to limit recursive calls.",
+      "ref": [
+        "Bron & Kerbosch (1973). \"Algorithm 457: Finding All Cliques\n     of an Undirected Graph\". CACM 16:575-577.",
+        "Tomita et al. (2006). \"The worst-case time complexity for\n     generating all maximal cliques\". Theoretical Computer Science 363:28-42.\n\nUses CoinBronKerbosch for maximal clique enumeration on the conflict\ngraph. More efficient than CglClique for large graphs due to the\nwell-known BK algorithm with pivoting.\n\nExtension methods (extMethod_):\n- 0: No extension\n- 1: Random extension\n- 2: Max degree extension\n- 3: Max modified degree\n- 4: Reduced cost (inversely proportional)\n- 5: Reduced cost + modified degree\n\nPivoting strategies delegate to CoinBronKerbosch::PivotingStrategy."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinBronKerbosch for the BK algorithm implementation",
+    "CoinConflictGraph for the graph data structure",
+    "CglClique for alternative clique separator",
+    "CglCliqueStrengthening for preprocessing with cliques\n\n\\copyright{Copyright 2020 Brito, S.S. and Santos, H.G.}\n\\license{This This code is licensed under the terms of the Eclipse Public License (EPL).}"
+  ]
+}

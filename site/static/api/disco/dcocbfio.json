@@ -1,0 +1,13 @@
+{
+  "name": "DcoCbfIO",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoCbfIO.hpp",
+  "brief": "CBF (Conic Benchmark Format) file reader for DisCO\n\nDcoCbfIO reads and writes conic problems in the standard CBF format,\nwhich is a text-based format for conic optimization problems.\n\n**CONES Enum (CBF domain types):**\n- FREE_RANGE: Free variables (F)\n- POSITIVE_ORT: Nonnegative orthant (L+)\n- NEGATIVE_ORT: Nonpositive orthant (L-)\n- FIXPOINT_ZERO: Fixed to zero (L=)\n- QUAD_CONE: Lorentz/quadratic cone (Q): ||x_{2:n}|| <= x_1\n- RQUAD_CONE: Rotated quadratic cone (QR): 2*x_1*x_2 >= ||x_{3:n}||^2\n\n**File Structure (CBF format):**\n- VER: Version number\n- OBJSENSE: MIN or MAX\n- VAR: Number of variables and domains\n- INT: Integer variables\n- CON: Number of constraints and domains\n- OBJACOORD: Objective coefficients\n- ACOORD: Constraint matrix in coordinate format\n- BCOORD: Constraint bounds/fixed terms\n\n**Key Methods:**\n- readCbf(): Parse CBF file into internal structures\n- writeCbf(): Output problem in CBF format\n- getProblem(): Convert to standard form (colLB, colUB, rowLB, rowUB, matrix, cones)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoModel.hpp::readInstance() for usage",
+    "http://cblib.zib.de/ for CBF format specification"
+  ]
+}

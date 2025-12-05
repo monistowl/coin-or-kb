@@ -1,0 +1,23 @@
+{
+  "name": "ClpModel",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpModel.hpp",
+  "brief": "Base class for LP/QP models - stores problem data without algorithm logic\n\nClpModel holds the complete representation of a linear or quadratic program:\nconstraint matrix, variable bounds, objective coefficients, and solution vectors.\nThis is the base class inherited by ClpSimplex and ClpInterior - it knows about\nproblem data but nothing about solution algorithms.",
+  "algorithms": [
+    {
+      "name": "SCALING MODES (scalingMode parameter):\n  0: Off - no scaling\n  1: Equilibrium - scale so max |a_ij| = 1 in each row/col\n  2: Geometric - row\u00d7col scaling to balance row/col norms\n  3: Auto - Clp chooses based on matrix properties\n  4: Auto for B&B - like 3 but preserves integrality",
+      "math": "EQUILIBRIUM SCALING:\n  r_i = 1 / max_j |a_ij|  (row scales)\n  c_j = 1 / max_i |a_ij|  (column scales)\n  Scaled problem: min c\u0303'x\u0303  s.t. \u00c3x\u0303 = b\u0303\n  where: \u00e3_ij = r_i \u00b7 a_ij \u00b7 c_j\n\nScaling improves:\n  - Basis condition number \u2192 fewer numerical errors\n  - Reduced cost computation accuracy\n  - Interior point convergence\n\nKey responsibilities:\n- Problem loading from various formats (MPS, GMPL, CoinModel, raw arrays)\n- Row/column manipulation (add, delete, modify bounds)\n- Matrix scaling for numerical stability\n- Solution and status storage\n- Name management for rows and columns",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpSimplex for simplex algorithm implementation",
+    "ClpInterior for interior point algorithm",
+    "ClpMatrixBase for the constraint matrix interface",
+    "ClpObjective for objective function handling",
+    "CoinPackedMatrix in CoinUtils for sparse matrix storage"
+  ]
+}

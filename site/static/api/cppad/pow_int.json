@@ -1,0 +1,9 @@
+{
+  "name": "pow_int",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/pow_int.hpp",
+  "brief": "CppAD utility: pow int",
+  "algorithms": [],
+  "methods": []
+}

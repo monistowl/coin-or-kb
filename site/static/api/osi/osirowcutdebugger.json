@@ -1,0 +1,16 @@
+{
+  "name": "OsiRowCutDebugger",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiRowCutDebugger.hpp",
+  "brief": "Validate cuts against known optimal solutions",
+  "algorithms": [
+    {
+      "name": "Cut Validity Checking Against Known Solutions (MIPLIB)",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

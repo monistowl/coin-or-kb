@@ -1,0 +1,12 @@
+{
+  "name": "BonFilterTypes",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/Filter/BonFilterTypes.hpp",
+  "brief": "Fortran type definitions for FilterSQP interface\n\nDefines type aliases for interfacing with the Fortran FilterSQP library.\nUses FORTRAN_INTEGER_TYPE from Ipopt's configuration for portability\nacross different Fortran compilers (32-bit vs 64-bit integers).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BonFilterSolver.hpp for the FilterSQP wrapper"
+  ]
+}

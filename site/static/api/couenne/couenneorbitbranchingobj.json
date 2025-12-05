@@ -1,0 +1,21 @@
+{
+  "name": "CouenneOrbitBranchingObj",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneOrbitBranchingObj.hpp",
+  "brief": "Orbital branching object using symmetry",
+  "algorithms": [
+    {
+      "name": "Orbital Branching for Symmetry Exploitation\n\nSpatial branching object that exploits problem symmetry via\norbital branching to prune symmetric subtrees.\n\n**Orbital branching:**\nWhen symmetry is detected (via nauty), branching on one variable\nin an orbit implicitly covers all symmetric variables in that orbit.\nThis avoids exploring symmetric portions of the search tree.\n\n**Key features:**\n- boundBranch(): Returns true if only bound changes (no cuts)\n- simulate_: Flag for simulating branch without execution\n- Integrates with CouenneNauty symmetry detection\n\n**Branch execution:**\nbranch() applies bound changes and optionally generates\nconvexification cuts, with symmetry-aware pruning.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneNauty for symmetry detection",
+    "CouenneOrbitObj which creates these branching objects",
+    "CouenneBranchingObject base class"
+  ]
+}

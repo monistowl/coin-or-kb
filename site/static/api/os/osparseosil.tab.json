@@ -1,0 +1,9 @@
+{
+  "name": "OSParseosil.tab",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSParsers/OSParseosil.tab.hpp",
+  "brief": "OSiL XML parser (bison-generated)\n\nBison-generated parser for OS Instance Language (OSiL).\nParses XML optimization problem instances.",
+  "algorithms": [],
+  "methods": []
+}

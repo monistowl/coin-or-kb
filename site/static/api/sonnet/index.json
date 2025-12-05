@@ -1,0 +1,66 @@
+{
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "classes": [
+    {
+      "name": "CbcEventHandler",
+      "brief": ".NET wrapper for CBC event handling\n\nCbcEvent enum (node, solution, treeStatus, endSearch, etc.) and\nCbcAction enum (noAction, stop, restart, killSolution).\nCbcDelegateEventHandlerProxy bridges .NET delegates to native callbacks.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CbcModel",
+      "brief": ".NET wrapper for CbcModel (COIN-OR Branch and Cut)\n\nC++/CLI wrapper exposing CBC MIP solver to .NET languages.\nWraps branch-and-bound with cut generation capabilities.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CbcSolver",
+      "brief": ".NET wrapper for CBC solver entry points (CbcMain0/CbcMain1)\n\nC++/CLI wrapper for CBC solver with callback support.\nCbcSolverCallBack delegate for monitoring solve phases.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CglCutGenerator",
+      "brief": ".NET wrapper for CglCutGenerator (cut generator base class)\n\nC++/CLI wrapper exposing CGL cut generators to .NET languages.\nGeneric template CglCutGeneratorGeneric<T> for derived generators.",
+      "has_algorithm": false
+    },
+    {
+      "name": "ClpModel",
+      "brief": ".NET wrapper for ClpModel (COIN-OR LP solver)\n\nC++/CLI wrapper exposing CLP simplex solver to .NET languages.\nSupports quadratic objectives via loadQuadraticObjective().",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinMessageHandler",
+      "brief": ".NET wrapper for CoinMessageHandler (logging)\n\nC++/CLI wrapper for COIN-OR logging infrastructure.\nCoinMessageHandlerProxy bridges .NET virtual methods to native callbacks.\nCoinOneMessage and CoinMessages for custom message definitions.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinMpsIO",
+      "brief": ".NET wrapper for CoinMpsIO (MPS file I/O)\n\nC++/CLI wrapper for reading LP problems from MPS format files.\nExposes row/column bounds, objective coefficients, and matrix data.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinPackedMatrix",
+      "brief": ".NET wrapper for CoinPackedMatrix (sparse matrix)\n\nC++/CLI wrapper exposing CoinUtils sparse matrix to .NET languages.",
+      "has_algorithm": false
+    },
+    {
+      "name": "Helpers",
+      "brief": "Core wrapper infrastructure for Sonnet .NET bindings\n\nTemplate base classes for C++/CLI wrappers around native COIN-OR objects.\nWrapperAbstractBase<T> and WrapperBase<T> handle ownership and lifetime.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiCbcSolverInterface",
+      "brief": ".NET wrapper for OsiCbcSolverInterface (CBC via OSI)\n\nC++/CLI wrapper exposing CBC MIP solver through OSI interface.\nProvides access to CbcModel for node count, strategy, and solution.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiClpSolverInterface",
+      "brief": ".NET wrapper for OsiClpSolverInterface (CLP via OSI)\n\nC++/CLI wrapper exposing CLP solver through OSI interface to .NET.\nIncludes matrix access methods and optional CPLEX/Gurobi support.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiSolverInterface",
+      "brief": ".NET wrapper for OsiSolverInterface (Open Solver Interface)\n\nC++/CLI wrapper exposing OsiSolverInterface to .NET languages.",
+      "has_algorithm": false
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "ClpMatrixBase",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpMatrixBase.hpp",
+  "brief": "Abstract base class for constraint matrices in Clp\n\nDefines the interface that all matrix types must implement for use with\nClp algorithms. The abstraction allows specialized matrix formats that\nexploit structure (network, GUB, \u00b11 matrices) while providing a uniform\ninterface to the simplex solver.",
+  "algorithms": [
+    {
+      "name": "Partial Pricing Support:\nFor very large problems, pricing all columns is expensive.\nMatrix provides partial pricing interface:\n  - partialPricing(start, end): Price subset of columns\n  - startFraction_/endFraction_: Current search window\n  - savedBestDj_: Best reduced cost found so far",
+      "math": "",
+      "complexity": "Matrix-vector products: O(nnz) for general sparse,\n  O(n) for network, O(nnz) but faster constant for \u00b11.\n\nKey virtual methods:\n- times(), transposeTimes(): Matrix-vector multiplication (y = A*x, y = A'*x)\n- subsetTransposeTimes(): Partial BTRAN for steepest edge pricing\n- getPackedMatrix(): Access underlying CoinPackedMatrix\n- scale(): Apply row/column scaling",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPackedMatrix for standard sparse matrix (wraps CoinPackedMatrix)",
+    "ClpNetworkMatrix for pure network structure",
+    "ClpPlusMinusOneMatrix for \u00b11 coefficient matrices",
+    "ClpGubMatrix for generalized upper bound structure",
+    "CoinPackedMatrix in CoinUtils for sparse storage format"
+  ]
+}

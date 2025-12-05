@@ -1,0 +1,12 @@
+{
+  "name": "CouennePrecisions",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouennePrecisions.hpp",
+  "brief": "Numerical tolerances and constants for Couenne\n\nCentral definition of numerical tolerances used throughout\nCouenne for comparisons, cut generation, and bound handling.\n\n**General tolerances:**\n- COUENNE_EPS (1e-7): General numerical tolerance\n- COUENNE_BOUND_PREC (1e-5): Looser tolerance for bounds\n- COUENNE_EPS_INT (1e-9): Integrality check tolerance\n- COUENNE_EPS_SIMPL (1e-20): Simplification zero threshold\n\n**Infinity and bounds:**\n- COUENNE_INFINITY (1e50): Represents \u00b1\u221e in bounds\n- MAX_BOUND (1e45): Practical bound maximum\n- Couenne_large_bound (9.999e12): LP unbounded threshold\n\n**Cut coefficients:**\n- COU_MAX_COEFF (1e9): Maximum cut coefficient\n- COU_MIN_COEFF (1e-9): Minimum cut coefficient\n(Ensures numerical stability in LP solver)\n\n**Utility macros:**\n- COUENNE_round(x): Round to nearest integer\n- COUENNE_sign(x): Return +1 or -1",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneCutGenerator which uses these tolerances"
+  ]
+}

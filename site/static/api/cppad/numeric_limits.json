@@ -1,0 +1,9 @@
+{
+  "name": "numeric_limits",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/numeric_limits.hpp",
+  "brief": "Core AD functionality: numeric limits",
+  "algorithms": [],
+  "methods": []
+}

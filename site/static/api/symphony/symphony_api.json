@@ -1,0 +1,12 @@
+{
+  "name": "symphony_api",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/symphony_api.h",
+  "brief": "Internal API header (legacy, includes sym_master.h)\n\nThis header provides the internal API declarations using the\nPROTO() macro for K&R C compatibility. Modern code should use\nsymphony.h which provides the same functions with standard\nANSI C prototypes.\n\n**Included headers:**\n- sym_proto.h: PROTO() macro definition\n- sym_master.h: Master process data structures\n- sym_messages.h: Message type definitions\n\n@note Prefer using symphony.h for new code",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "symphony.h for the modern public API"
+  ]
+}

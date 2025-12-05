@@ -1,0 +1,13 @@
+{
+  "name": "CglCutGenerator",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CglCutGenerator.h",
+  "brief": ".NET wrapper for CglCutGenerator (cut generator base class)\n\nC++/CLI wrapper exposing CGL cut generators to .NET languages.\nGeneric template CglCutGeneratorGeneric<T> for derived generators.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglProbing.h for probing cut generator",
+    "CbcCutGenerator.h for CBC integration"
+  ]
+}

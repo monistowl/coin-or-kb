@@ -1,0 +1,20 @@
+{
+  "name": "IpMultiVectorMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpMultiVectorMatrix.hpp",
+  "brief": "Tall-skinny matrix stored as collection of column Vectors\n\nMultiVectorMatrix represents an m x k matrix (k << m) where each\ncolumn is stored as a separate Vector. Efficient for:\n- Limited-memory quasi-Newton: store recent gradient differences\n- Low-rank updates: V*V^T matvec via two sequential operations",
+  "algorithms": [
+    {
+      "name": "Low-Rank Matrix-Vector Product:\n  V \u2208 \u211d^{m\u00d7k} stored as k column vectors.\n  MultVector: y \u2190 \u03b1Vx + \u03b2y where x \u2208 \u211d\u1d4f (linear combination of cols).\n  TransMultVector: y \u2190 \u03b1V^T x + \u03b2y where x \u2208 \u211d\u1d50 (k dot products).\n  LRMultVector: y \u2190 \u03b1VV^T x + \u03b2y = \u03b1\u00b7V\u00b7(V^T\u00b7x) + \u03b2y (two-stage).",
+      "math": "Limited-memory quasi-Newton storage:\n  L-BFGS: stores {s\u1d62, y\u1d62} pairs for i = k-m+1,...,k.\n  s\u1d62 = x\u1d62\u208a\u2081 - x\u1d62 (step), y\u1d62 = \u2207f(x\u1d62\u208a\u2081) - \u2207f(x\u1d62) (gradient diff).\n  Compact form: B = B\u2080 - [B\u2080S Y][R\u207b^T(D+Y^T B\u2080Y)R\u207b ...][...]^T.\n  Inner products V^T W computed via MultiVectorMatrix ops.",
+      "complexity": "O(mk) storage for m\u00d7k matrix.\n  O(mk) for MultVector, O(mk) for TransMultVector.\n  O(m\u00b7k\u00b2) for high-rank update forming k\u00d7k inner product matrix.\n\nUsed in Ipopt for:\n- L-BFGS/L-SR1 Hessian approximations\n- Storing {s_i, y_i} pairs for quasi-Newton",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpLowRankUpdateSymMatrix.hpp for matrix using this",
+    "IpExpandedMultiVectorMatrix.hpp for row-vector variant"
+  ]
+}

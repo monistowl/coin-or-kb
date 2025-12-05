@@ -1,0 +1,22 @@
+{
+  "name": "Mongoose_ImproveFM",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_ImproveFM.hpp",
+  "brief": "Fiduccia-Mattheyses partition refinement algorithm\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nFM algorithm improves partitions via gain-based vertex swapping.\nSwapCandidate tracks vertex, partition side, weight, gain, and heap\nposition. Algorithm maintains boundary heaps, selects highest-gain\nboundary vertex, swaps, and updates neighbor gains. Allows non-positive\nmoves within search_depth to escape local minima.",
+  "algorithms": [
+    {
+      "name": "Fiduccia-Mattheyses (FM) Partition Refinement:\nLocal search improving edge cut via gain-based vertex moves:\n1. Initialize boundary heaps (vertices with cross-partition edges)\n2. Select vertex v with maximum gain = external_deg - internal_deg\n3. Move v to other partition, lock it (can't move again this pass)\n4. Update gains of v's neighbors\n5. Repeat until all vertices locked\n6. Roll back to best partition seen during pass\n7. Iterate until no improvement or max_refinements reached",
+      "math": "Gain of moving vertex v from partition A to B:\n$$gain(v) = \\sum_{u \\in N(v) \\cap B} w_{uv} - \\sum_{u \\in N(v) \\cap A} w_{uv}$$\n= (edges to B) - (edges to A) = benefit of moving v.\n\nNon-positive moves allowed within search_depth to escape local minima.\nBalance constraint: |W_A - W_B| \u2264 tolerance enforced during moves.",
+      "complexity": "O(|E|) per pass: each vertex moved once, gains updated in O(deg).\nTypically 2-5 passes needed for convergence.",
+      "ref": [
+        "Fiduccia & Mattheyses (1982). \"A Linear-Time Heuristic for Improving\n  Network Partitions\". DAC '82, pp. 175-181. [Original FM algorithm]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_BoundaryHeap.hpp for boundary vertex management",
+    "Mongoose_ImproveQP.hpp for QP-based alternative refinement"
+  ]
+}

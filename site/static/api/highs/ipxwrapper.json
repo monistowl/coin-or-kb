@@ -1,0 +1,14 @@
+{
+  "name": "IpxWrapper",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/IpxWrapper.h",
+  "brief": "Wrapper for IPX interior point solver\n\nProvides interface between HiGHS and the IPX interior point solver.\n\n**Main Functions:**\n- solveLpIpx(): Solve LP using IPX with optional crossover to basis\n- fillInIpxData(): Convert HighsLp to IPX's input format\n- getHighsNonVertexSolution(): Extract non-vertex (interior) solution\n\n**Status Reporting:**\n- reportIpxSolveStatus(): Convert IPX status to HighsStatus\n- reportIpxIpmCrossoverStatus(): Report IPM/crossover termination\n- ipxStatusError(): Handle IPX error conditions\n- reportIpmNoProgress(): Log stalled IPM iterations\n\n**HIPO Support (optional):**\nParallel interior point variant (compile-time flag HIPO):\n- solveLpHipo(): High-performance IPM solver\n- getHipoNonVertexSolution(): Extract HIPO solution",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipm/ipx/lp_solver.h for IPX solver class",
+    "ipm/IpxSolution.h for IPX solution struct",
+    "lp_data/HighsSolution.h for solution conversion utilities"
+  ]
+}

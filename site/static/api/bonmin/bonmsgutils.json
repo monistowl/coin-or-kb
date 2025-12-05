@@ -1,0 +1,12 @@
+{
+  "name": "BonMsgUtils",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonMsgUtils.hpp",
+  "brief": "Message utilities and macros for Bonmin\nThis code is published under the Eclipse Public License.\n\nProvides ADD_MSG macro and message ID functions for standard,\nwarning, and error messages in the COIN message system.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMessages for the COIN messaging framework"
+  ]
+}

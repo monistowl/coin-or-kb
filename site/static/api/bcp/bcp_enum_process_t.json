@@ -1,0 +1,19 @@
+{
+  "name": "BCP_enum_process_t",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_enum_process_t.hpp",
+  "brief": "Process type enumeration for BCP",
+  "algorithms": [
+    {
+      "name": "Process Type Enum: TM, LP, CG, VG, TS Identifiers\n\nBCP_process_t enumerates all BCP process types:\n- Any: Wildcard for message receiving\n- TM: Tree Manager (coordinator)\n- TS: Tree Storage (external node storage)\n- LP: Linear Programming worker\n- CG: Cut Generator\n- VG: Variable Generator\n- CP: Cut Pool (future)\n- VP: Variable Pool (future)\n- EndProcess: Termination indicator",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_process.hpp for process base class"
+  ]
+}

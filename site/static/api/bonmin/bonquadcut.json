@@ -1,0 +1,13 @@
+{
+  "name": "BonQuadCut",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/QuadCuts/BonQuadCut.hpp",
+  "brief": "Quadratic cutting plane for MINLP\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nQuadCut: Extends OsiRowCut to include quadratic term x'Qx.\nStores c + ax + x'Qx with upper/lower storage modes for Q.\n\nCuts: Collection class extending OsiCuts to manage QuadCut objects\nalongside standard linear cuts.\n\nAuthors: Pierre Bonami, IBM\nDate: October 6, 2007",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiRowCut for linear cut base class",
+    "QuadRow for quadratic constraint in NLP format"
+  ]
+}

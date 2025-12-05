@@ -1,0 +1,14 @@
+{
+  "name": "AlpsKnowledgePool",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsKnowledgePool.h",
+  "brief": "Abstract base class for knowledge storage pools\n\nAlpsKnowledgePool defines the API for all pool types in ALPS.\nKnowledge is stored with associated priority values for ordering.\n\n**Pool types (AlpsKnowledgePoolType):**\n- NodePool: Stores tree nodes awaiting processing\n- SolutionPool: Stores feasible solutions found\n- SubTreePool: Stores subtrees for parallel distribution\n\n**Core API:**\n- addKnowledge(kl, priority): Add with ordering priority\n- getKnowledge(): Peek at highest-priority item\n- popKnowledge(): Remove highest-priority item\n- getBestKnowledge(): Get best quality item\n- hasKnowledge(): Check if pool is non-empty",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsNodePool for node storage",
+    "AlpsSolutionPool for solution storage",
+    "AlpsSubTreePool for subtree storage"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "IRelaxationStrategy",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/IRelaxationStrategy.h",
+  "brief": "Interface for LP relaxation control strategies\n\nManages when to solve LP relaxation vs full MIP.\n\n**IRelaxationStrategy Interface:**\n- executeStrategy(): Apply relaxation decision\n- setActive()/setInactive(): Enable/disable strategy\n- setInitial(): Reset to initial state\n\n**Implementations:**\n- RelaxationStrategyStandard: Periodic LP solves\n- RelaxationStrategyNone: Always solve full MIP\n\n**Use Case:**\n- LP relaxations generate more hyperplanes quickly\n- MIP solves provide better candidate points\n- Strategy balances cut generation vs exploration",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "RelaxationStrategyBase.h for base implementation"
+  ]
+}

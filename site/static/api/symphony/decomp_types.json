@@ -1,0 +1,12 @@
+{
+  "name": "decomp_types",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/decomp/decomp_types.h",
+  "brief": "Data structures for decomposition column generation\n\nTypes for representing columns in Dantzig-Wolfe decomposition.\n\n**col_data (packed column):**\n- size: Size of coef array\n- coef: Packed column data\n- level: Tree level where generated\n- touches: Inactivity counter for deletion\n\n**dcmp_col_set (column batch):**\n- lb, ub, obj: Column bounds and costs\n- matbeg, matind, matval: CSC format matrix\n- num_cols, nzcnt: Dimensions\n- bd_type, ubnd: Bound type info",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "decomp.h for column generation functions"
+  ]
+}

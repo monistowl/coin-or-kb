@@ -1,0 +1,23 @@
+{
+  "name": "CbcParameters",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcParameters.hpp",
+  "brief": "Central parameter collection for Cbc algorithm control\nCopyright (C) 2007, Lou Hafer, IBM Corporation and others.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcParameters: Master class holding all Cbc solver parameters.\nUsed by cbc-generic to configure and control the MIP solver.\n\nMajor subsystems configured:\n- Cut generators: Gomory, MIR, Probing, Clique, FlowCover, etc.\n- Heuristics: FPump, RINS, RENS, DINS, Diving variants, VND, etc.\n- Search strategy: Node selection, preprocessing, orbital branching\n- Limits: Time, nodes, gap tolerance, solution count\n\nIncludes instances of CGL cut generators and Cbc heuristics.\nLinks to ClpParameters for underlying LP solver control.\n\nKey methods:\n- init(): Initialize with strategy preset\n- setModel(): Associate with CbcModel\n- Various getters/setters for each parameter category\n\nStrategy presets provide common configurations:\n- Default aggressive cutting at root\n- Balanced cut/heuristic emphasis\n- Heuristic-focused for quick solutions",
+  "algorithms": [
+    {
+      "name": "Preprocessing Pipeline (IPPMode):\n    Controls integer preprocessing before B&C:\n    - Probing: fix variables by logical implication\n    - Clique detection: identify mutual exclusion constraints\n    - Coefficient strengthening: tighten constraint coefficients\n    - SOS extraction: identify special ordered sets from structure",
+      "math": "",
+      "complexity": "",
+      "ref": [
+        "Margot, F. (2002). \"Pruning by isomorphism in branch-and-cut\".\n    Math. Programming 94:71-90. (Orbital branching foundations)"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcParam for individual parameter definitions",
+    "CbcParamUtils for parameter push/pull callbacks",
+    "CbcModel for solver integration"
+  ]
+}

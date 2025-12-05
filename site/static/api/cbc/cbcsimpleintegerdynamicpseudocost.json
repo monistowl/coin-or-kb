@@ -1,0 +1,20 @@
+{
+  "name": "CbcSimpleIntegerDynamicPseudoCost",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcSimpleIntegerDynamicPseudoCost.hpp",
+  "brief": "Integer variable with dynamic (learning) pseudocosts\nCopyright (C) 2005, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcSimpleIntegerDynamicPseudoCost: Implements reliability branching\nbased on Achterberg, Koch & Martin's work. Pseudocosts are learned\nfrom actual branching history rather than being static estimates.\n\nKey statistics tracked per variable:\n- sumUpCost_/sumDownCost_: Cumulative objective changes\n- numberTimesUp_/Down_: Branch count for averaging\n- numberBeforeTrust_: Initialization threshold before trusting estimates",
+  "algorithms": [
+    {
+      "name": "Reliability Branching (Achterberg, Koch, Martin 2005):\n  For each integer variable x_j:\n  1. If numberTimesDown_ < numberBeforeTrust_: Use strong branching.\n  2. Else: Use pseudocost estimate \u03c8_j^- \u00d7 (x\u0304_j - floor(x\u0304_j)).\n  3. Update pseudocost after each branch: \u03c8_j \u2190 \u03a3(\u0394LP)/\u03a3(\u0394x).\n  Hybrid of strong branching (accurate) and pseudocosts (fast).",
+      "math": "Pseudocost estimation:\n  Down estimate: D_j = \u03c8_j^- \u00d7 (x\u0304_j - \u230ax\u0304_j\u230b).\n  Up estimate: U_j = \u03c8_j^+ \u00d7 (\u2308x\u0304_j\u2309 - x\u0304_j).\n  Score: \u03bc\u00b7min(D_j,U_j) + (1-\u03bc)\u00b7max(D_j,U_j), \u03bc \u2208 [0,1].\n  WEIGHT_PRODUCT variant: score = D_j^{1-\u03bc} \u00d7 U_j^{\u03bc}.\n\nReliability branching concept:\n- Initially uses strong branching until numberBeforeTrust_ reached\n- Then relies on accumulated pseudocost estimates\n- Balances exploration (strong branching) vs exploitation (estimates)\n\nAlso includes CbcIntegerPseudoCostBranchingObject and optionally\nCbcSwitchingBinary for coupled binary/continuous variables.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcSimpleIntegerPseudoCost for static pseudocost version",
+    "CbcBranchDynamicDecision for decision making with dynamic costs\n\nEdwin 11/17/2009 carved out of CbcBranchDynamic"
+  ]
+}

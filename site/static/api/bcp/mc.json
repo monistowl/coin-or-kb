@@ -1,0 +1,16 @@
+{
+  "name": "MC",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/MaxCut/include/MC.hpp",
+  "brief": "Max-cut problem data structures",
+  "algorithms": [
+    {
+      "name": "Max-Cut: Graph Partitioning Optimization\n\nMC_problem: graph representation for max-cut optimization.\nStores nodes, edges, adjacency lists. Supports Ising problem variant\nwith four-cycles and triangles. MC_feas_sol stores cut solutions.\n\n**Problem:** Partition nodes into two sets S and T to maximize\ntotal weight of edges crossing the cut (one endpoint in S, one in T).\n\n**Data structures:**\n- MC_graph_node/edge: Graph topology and edge weights\n- MC_adjacency_entry: Neighbor list for efficient enumeration\n- MC_switch_structure: Local search move support",
+      "math": "",
+      "complexity": "NP-hard; solved via branch-and-cut with cycle inequalities",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

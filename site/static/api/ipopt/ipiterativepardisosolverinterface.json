@@ -1,0 +1,20 @@
+{
+  "name": "IpIterativePardisoSolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/Inexact/IpIterativePardisoSolverInterface.hpp",
+  "brief": "Pardiso iterative solver interface for inexact Newton method\n\nIterativePardisoSolverInterface wraps the Pardiso sparse solver in\niterative (preconditioned Krylov) mode for use with inexact Newton.",
+  "algorithms": [
+    {
+      "name": "Pardiso Iterative Solve:\n  MultiSolve(A, b, x):\n  1. If new_matrix: SymbolicFactorization(A) \u2192 analyze sparsity.\n  2. Factorization(A): Compute incomplete LU preconditioner.\n     Dropping: factors with |L[i,j]| < drop_tol\u00b7||row||\u2082 dropped.\n  3. Solve(b, x): Preconditioned GMRES/BiCGSTAB iteration.\n     Iteration controlled by IterativeSolverTerminationTester.\n     Callback to TestTermination() after each Krylov iteration.\n  4. Return when termination test satisfied (TEST_1/2/3 or MODIFY_HESSIAN).",
+      "math": "Preconditioned iterative method:\n  Solve Ax = b via x_{k+1} = x_k + M^{-1}\u00b7r_k where M \u2248 A.\n  M = incomplete LU from Pardiso with controlled fill-in.\n  Parameters: dropping_factor, dropping_schur, max_row_fill.\n  Matching strategy: COMPLETE, COMPLETE2x2, CONSTRAINT for pivoting.",
+      "complexity": "Per solve: O(nnz\u00b7k) for k Krylov iterations.\n  Preconditioner setup: O(nnz\u00b7fill) where fill controlled by parameters.\n  Much cheaper than direct O(n\u00b3) for large sparse systems.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpPardisoSolverInterface.hpp for direct Pardiso interface",
+    "IpIterativeSolverTerminationTester.hpp for stopping criteria"
+  ]
+}

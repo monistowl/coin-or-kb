@@ -1,0 +1,13 @@
+{
+  "name": "HighsRedcostFixing",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsRedcostFixing.h",
+  "brief": "Reduced cost fixing and lurking bounds for MIP\n\nUses LP reduced costs to fix variable bounds based on cutoff.\n\n**Reduced Cost Fixing:**\nIf fixing variable j to its bound would increase objective beyond cutoff,\nthe opposite bound becomes valid. For minimization:\n- If reduced_cost[j] > 0 and x[j] = lb: fixing to ub proves lb valid\n- If reduced_cost[j] < 0 and x[j] = ub: fixing to lb proves ub valid\n\n**Lurking Bounds:**\nBounds that become valid at specific objective values:\n- lurkingColUpper[col]: (objective_threshold, bound_value) pairs\n- lurkingColLower[col]: Maps threshold to tighter bound\n- getLurkingBounds(): Extract bounds valid at current cutoff\n\n**Propagation Methods:**\n- propagateRootRedcost(): Apply fixings at root using stored costs\n- propagateRedCost(): Apply fixings at any node using LP reduced costs\n- addRootRedcost(): Store root LP reduced costs for later use\n\n**Integration:**\n- Called when incumbent improves (new cutoff enables more fixings)\n- Provides global domain tightening from LP dual information",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsDomain.h for bound propagation",
+    "mip/HighsLpRelaxation.h for LP solution access"
+  ]
+}

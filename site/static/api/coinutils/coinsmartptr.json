@@ -1,0 +1,9 @@
+{
+  "name": "CoinSmartPtr",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinSmartPtr.hpp",
+  "brief": "Intrusive reference-counted smart pointer",
+  "algorithms": [],
+  "methods": []
+}

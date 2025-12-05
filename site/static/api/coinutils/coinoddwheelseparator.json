@@ -1,0 +1,19 @@
+{
+  "name": "CoinOddWheelSeparator",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinOddWheelSeparator.hpp",
+  "brief": "Odd-wheel cut separator",
+  "algorithms": [
+    {
+      "name": "Odd-Wheel Separation via Shortest Paths\n\nClass for separating violated odd-cycles. It contains\na lifting module that tries to transform the odd-cycles\ninto odd-wheels.\n\n**Odd-Hole Inequalities:**\nFor an odd cycle C = {v\u2081,...,v\u2082\u2096\u208a\u2081} in the conflict graph:\n\u03a3\u1d62 x\u1d62 \u2264 k is valid (at most k of 2k+1 mutually conflicting vars can be 1)\n\n**Odd-Wheel Extension:**\nIf variable w conflicts with all cycle vertices, strengthen to:\n\u03a3\u1d62 x\u1d62 + x_w \u2264 k (wheel center w tightens the inequality)\n\n**Separation Algorithm:**\nUses shortest path in auxiliary graph where edge weights are\n1 - x_i - x_j. Violated odd holes correspond to negative-cost\nodd-length paths.",
+      "math": "Odd-wheel: \u03a3\u1d62\u2208C x\u1d62 + |C| \u00d7 x_w \u2264 \u230a|C|/2\u230b with wheel center w",
+      "complexity": "O(n\u00b2 log n) per separation round using Dijkstra",
+      "ref": [
+        "Grotschel, Lovasz & Schrijver, \"Geometric Algorithms and\n     Combinatorial Optimization\", Springer, 1988",
+        "Brito & Santos, \"Conflict graph based procedures for the\n     weight constrained minimum spanning tree problem\", 2020"
+      ]
+    }
+  ],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "from_graph",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/graph/from_graph.hpp",
+  "brief": "Core AD functionality: from graph",
+  "algorithms": [],
+  "methods": []
+}

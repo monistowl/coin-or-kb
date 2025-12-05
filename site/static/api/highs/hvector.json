@@ -1,0 +1,13 @@
+{
+  "name": "HVector",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HVector.h",
+  "brief": "Sparse vector types for HiGHS simplex operations\n\nType aliases for HVectorBase with different precision.\n\n**Types:**\n- HVector: HVectorBase<double> - Standard precision sparse vector\n- HVectorQuad: HVectorBase<HighsCDouble> - Quad precision for accuracy\n- HVector_ptr, HVectorQuad_ptr: Pointer types for array storage\n\n**HVectorBase Features (from HVectorBase.h):**\n- Sparse representation: index[] + array[] with count\n- Dense operations: clear(), setup(), collectDense()\n- SAXPY: Add scalar multiple of another vector\n- Packed format for BLAS-style operations",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "util/HVectorBase.h for implementation details",
+    "util/HighsCDouble.h for quad precision type"
+  ]
+}

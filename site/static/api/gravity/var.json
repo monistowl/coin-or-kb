@@ -1,0 +1,13 @@
+{
+  "name": "var",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/var.h",
+  "brief": "Decision variables with bounds for optimization models\n\nVariables are parameters with lower and upper bounds that the solver optimizes.\n\n**var<type> Template Class:**\n- Inherits from param<type> (shares indexing, values storage)\n- Adds _lb, _ub as func<type> (bounds can be expressions)\n- Supports: double, int, bool (binary), complex<double>\n\n**Bound Types:**\n- Unbounded: var(\"x\") - uses numeric_limits\n- Non-negative: var(\"x\", non_neg_)\n- Non-positive: var(\"x\", non_pos_)\n- Bounded: var(\"x\", lb, ub)\n- Indexed bounds: var(\"x\", lb_param, ub_param) over indices\n\n**Lifted Variables:**\n- _lift flag for McCormick/RLT linearization\n- _original_vars: pointers to variables being lifted\n- _lift_lb, _lift_ub: whether lifted var needs bounding functions\n\n**Mosek/SDP Support:**\n- _in_q_cone: variable in quadratic cone\n- _psd: positive semidefinite matrix variable\n\n**Usage Example:**\n```cpp\nvar<> x(\"x\", 0, 1);           // x in [0,1]\nvar<int> y(\"y\", 0, 10);       // integer y in [0,10]\nvar<bool> z(\"z\");             // binary z\nx.in(Nodes);                   // x indexed over Nodes\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/param.h for base parameter class",
+    "gravity/model.h for adding variables to models"
+  ]
+}

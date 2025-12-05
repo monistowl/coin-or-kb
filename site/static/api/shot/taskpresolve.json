@@ -1,0 +1,20 @@
+{
+  "name": "TaskPresolve",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskPresolve.h",
+  "brief": "Initial problem simplification\n\nApplies presolve techniques before main algorithm.\n\n**TaskPresolve Class:**\n- isPresolved: Track if presolve completed\n- run(): Apply presolve routines\n\n**Presolve Techniques:**\n- Bound propagation\n- Fixed variable removal\n- Redundant constraint detection\n- Expression simplification",
+  "algorithms": [
+    {
+      "name": "MINLP Presolve",
+      "math": "Apply bound propagation: infer l'_j \u2265 l_j, u'_j \u2264 u_j from constraints.\n      Remove fixed variables (l_j = u_j), detect infeasibility/redundancy.\n      Simplify nonlinear expressions via constant folding.",
+      "complexity": "O(constraints \u00d7 passes). Typically few passes needed.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "TaskReformulateProblem.h for reformulation",
+    "Simplifications.h for expression simplification"
+  ]
+}

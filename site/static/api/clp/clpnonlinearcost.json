@@ -1,0 +1,20 @@
+{
+  "name": "ClpNonLinearCost",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpNonLinearCost.hpp",
+  "brief": "Piecewise linear cost handling and bound infeasibility tracking\n\nManages piecewise linear objective functions and tracks bound violations\nduring primal simplex. When variables move outside their bounds, this class\ncomputes the appropriate infeasibility penalty costs.",
+  "algorithms": [
+    {
+      "name": "Piecewise Linear Cost Management:\n  Handles non-linear costs and bound infeasibilities in primal simplex:\n  1. **Region tracking:** Each variable has status (below/feasible/above)\n     - CLP_BELOW_LOWER: x_j < l_j, penalty cost applied\n     - CLP_FEASIBLE: l_j \u2264 x_j \u2264 u_j, true cost used\n     - CLP_ABOVE_UPPER: x_j > u_j, penalty cost applied\n  2. **Cost computation:** At iteration k, effective cost is:\n     - Feasible: c_j (true objective coefficient)\n     - Infeasible: c_j \u00b1 M where M = infeasibilityWeight_\n  3. **Breakpoint handling (Method 1):** Full piecewise linear\n     - Store breakpoints lower_[range], costs cost_[range]\n     - Track current range via whichRange_[], offset_[]\n  4. **Big-M handling (Method 2):** Simple penalty\n     - Just add \u00b1infeasibilityWeight_ outside bounds\n     - Faster, sufficient for standard LP",
+      "math": "Two-phase simplex via penalty:\n  Phase I objective: min \u03a3 M\u00b7max(l_j - x_j, 0) + \u03a3 M\u00b7max(x_j - u_j, 0)\n  Phase II objective: min c'x (original)\n  Combined: min c'x + M\u00b7(infeasibility measure)\n  As M \u2192 \u221e, optimal solution minimizes infeasibility first\n  Clp uses finite M (default 1e10) with dynamic adjustment",
+      "complexity": "O(1) per cost evaluation and region change\n  Method 2 is ~2x faster than Method 1 for standard LP\n  Total overhead: O(n) per iteration for bound checking\n\nThe class supports two methods:\n- Method 1: Full piecewise linear with explicit breakpoints\n- Method 2: Simple big-M penalty for bound violations (faster)\n\nKey functionality:\n- Tracks which variables are below lower, feasible, or above upper bound\n- Computes infeasibility-weighted costs during Phase I\n- Updates costs efficiently as variables move between regions\n\nThis enables the two-phase simplex method where Phase I minimizes\ninfeasibility before Phase II minimizes the true objective.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpSimplexPrimal for how this is used in primal simplex",
+    "ClpSimplex::infeasibilityCost() for the penalty weight"
+  ]
+}

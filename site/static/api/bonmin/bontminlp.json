@@ -1,0 +1,21 @@
+{
+  "name": "BonTMINLP",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonTMINLP.hpp",
+  "brief": "Base class for Mixed-Integer Nonlinear Programs (MINLP)",
+  "algorithms": [
+    {
+      "name": "MINLP Problem Interface (Binary/Integer Variables with NLP Structure)\n\nDefines the TMINLP interface for specifying optimization problems of the form:\n@f[\n\\begin{array}{rl}\n  \\min & f(x) \\\\\n  \\text{s.t.} & g^L \\le g(x) \\le g^U \\\\\n              & x^L \\le x \\le x^U \\\\\n              & x_i \\in \\{0,1\\} \\text{ for } i \\in \\mathcal{B} \\\\\n              & x_i \\in \\mathbb{Z} \\text{ for } i \\in \\mathcal{I}\n\\end{array}\n@f]\n\nUsers implement this interface to define their MINLP problem. Key methods:\n- get_nlp_info(): Problem dimensions and sparsity\n- get_variables_types(): Identify binary/integer/continuous variables\n- get_bounds_info(): Variable and constraint bounds\n- eval_f(), eval_grad_f(): Objective and gradient\n- eval_g(), eval_jac_g(): Constraints and Jacobian\n- eval_h(): Hessian of the Lagrangian\n\nThe TMINLP2TNLP adapter converts this to an Ipopt-solvable TNLP by\nrelaxing or fixing integer variables.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BonTMINLP2TNLP.hpp for TMINLP to TNLP conversion",
+    "BonOsiTMINLPInterface.hpp for OsiSolverInterface wrapper",
+    "IpTNLP.hpp for Ipopt's NLP interface (parent of continuous relaxation)"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "DecompCutPool",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompCutPool.h",
+  "brief": "Pool of generated cuts (DecompCut) for cut management\n\nDecompCutPool manages cuts waiting to enter the master problem.\nInherits from std::vector<DecompWaitingRow> for storage.\n\n**Key Functions:**\n- reExpand(): Regenerate row coefficients when columns change\n- createRowReform(): Transform x-space cut to lambda-space\n- setViolations(): Calculate cut violations vs current solution\n\n**Cut Selection:**\n- is_greater_thanD comparator sorts by violation\n- Most violated cuts enter master first\n- Duplicate cuts filtered via hash\n\n**Reformulation:**\nCuts in x-space must be reformulated to lambda-space for\nDantzig-Wolfe master: a'x >= b becomes a'(sum_s s*lambda_s) >= b\ncreateRowReform() handles this transformation.\n\n**Validity Flag:**\n- m_rowsAreValid: Track if cuts need re-expansion\n- Set false when column set changes\n- reExpand() regenerates coefficients",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompCut.h for cut representation",
+    "DecompWaitingRow.h for pool entry wrapper",
+    "DecompAlgoCGL.h for CGL cut generators"
+  ]
+}

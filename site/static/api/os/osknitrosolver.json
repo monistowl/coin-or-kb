@@ -1,0 +1,9 @@
+{
+  "name": "OSKnitroSolver",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSSolverInterfaces/OSKnitroSolver.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

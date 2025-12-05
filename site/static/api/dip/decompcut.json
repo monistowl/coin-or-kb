@@ -1,0 +1,20 @@
+{
+  "name": "DecompCut",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompCut.h",
+  "brief": "Cut representation in original x-space\n\nDecompCut represents a cutting plane (valid inequality) that can be\nadded to strengthen the formulation. Cuts are defined in original\nx-space and expanded to the master problem.",
+  "algorithms": [
+    {
+      "name": "Duplicate Detection via Hash:\nAvoid adding same cut multiple times.\n\n  m_strHash = string encoding of (indices, coeffs, sense, rhs)\n  setStringHash(): Called after expandCutToRow()\n  Comparison: O(1) hash equality check",
+      "math": "Why remove ineffective cuts:\n  - Slack cuts don't affect LP solution\n  - Large LPs slow down simplex iterations\n  - Memory overhead for storing coefficients\n  - Better to add fresh violated cuts",
+      "complexity": "calcViolation: O(nnz(cut))\n  expandCutToRow: User-defined, typically O(cut_size)\n  setStringHash: O(nnz(cut))",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DecompCutPool.h for cut pool management",
+    "DecompAlgoCGL.h for CGL integration"
+  ]
+}

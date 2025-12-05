@@ -1,0 +1,9 @@
+{
+  "name": "OSosrl2gams",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSModelInterfaces/OSosrl2gams.hpp",
+  "brief": "OSrL to GAMS solution converter\n\nConverts OS Result Language (OSrL) to GAMS solution format.\nWrites solution back to GAMS for post-processing.",
+  "algorithms": [],
+  "methods": []
+}

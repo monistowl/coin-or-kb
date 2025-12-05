@@ -1,0 +1,27 @@
+{
+  "name": "CbcModel",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcModel.hpp",
+  "brief": "Main branch-and-cut MIP solver class\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcModel is the central class for COIN-OR branch-and-cut MIP solving.\nKey methods:\n- initialSolve(): Solve LP relaxation\n- branchAndBound(): Run B&C algorithm to optimality\n\nArchitecture:\n- CbcNode/CbcNodeInfo: Subproblem representation in search tree\n- CbcTree: Priority queue of live nodes (heap)\n- CbcCutGenerator: Wrapper for CGL cut generators\n- CbcHeuristic: Primal heuristics for finding solutions\n- CbcBranchingObject: Branching decisions",
+  "algorithms": [
+    {
+      "name": "Branch-and-Cut (B&C) for Mixed-Integer Programming:\n  1. Solve LP relaxation at root node\n  2. While open nodes remain:\n     a. Select node from priority queue (best-first or depth-first)\n     b. Solve LP relaxation, apply cuts (Gomory, MIR, clique, etc.)\n     c. If fractional: branch on integer variable, create child nodes\n     d. If integer-feasible: update incumbent if improved\n     e. Prune by bound if LP \u2265 incumbent\n  3. Return optimal solution when tree exhausted",
+      "math": "",
+      "complexity": "Worst-case O(2^n) where n = number of integer variables.\n  Practical performance depends heavily on:\n  - Strength of LP relaxation and cutting planes\n  - Quality of branching variable selection\n  - Effectiveness of primal heuristics\n  - Problem structure (e.g., total unimodularity)",
+      "ref": [
+        "Land, A.H. and Doig, A.G. (1960). \"An automatic method of solving\n  discrete programming problems\". Econometrica 28(3):497-520.\n  [Original branch-and-bound algorithm]",
+        "Padberg, M. and Rinaldi, G. (1991). \"A branch-and-cut algorithm\n  for the resolution of large-scale symmetric traveling salesman problems\".\n  SIAM Review 33(1):60-100. [Branch-and-cut methodology]",
+        "Savelsbergh, M.W.P. (1994). \"Preprocessing and probing techniques\n        for mixed integer programming problems\". ORSA J. Computing 6(4):445-454.\n\n      \\todo It remains to work out the cleanest way of getting a solution to\n            the original problem at the end. So this is very preliminary."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcNode for search tree node representation",
+    "CbcTree for node selection/storage",
+    "CbcCutGenerator for cutting plane management",
+    "CbcHeuristic for primal heuristics",
+    "OsiSolverInterface for underlying LP solver"
+  ]
+}

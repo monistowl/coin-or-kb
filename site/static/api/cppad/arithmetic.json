@@ -1,0 +1,9 @@
+{
+  "name": "arithmetic",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/arithmetic.hpp",
+  "brief": "Core AD functionality: arithmetic",
+  "algorithms": [],
+  "methods": []
+}

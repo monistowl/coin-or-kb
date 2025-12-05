@@ -1,0 +1,12 @@
+{
+  "name": "HiGHSProgram",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/HiGHSProgram.h",
+  "brief": "HiGHS solver interface for LP/MIP problems\n\nAdapts Gravity models to the HiGHS open-source LP/MIP solver.\n\n**HiGHSProgram Class:**\n- Highs_mod: HighsModel (HiGHS model container)\n- Highs_inst: Highs solver instance\n\n**Model Building:**\n- prepare_model(): Initial conversion from Gravity\n- fill_in_var_map(): Create variable mappings\n- create_constraints(): Add linear constraints\n- set_objective(): Set linear objective\n\n**Solving:**\n- solve(relax, mipgap): Optimize with optional LP relaxation\n- update_solution(): Copy solution back to Gravity model\n- relax_model(): Remove integrality constraints\n\n**Supported Problem Types:**\n- LP: Linear programming\n- MIP: Mixed-integer programming\n\n@note HiGHS is an open-source solver that excels at large-scale LP\n      and MIP problems with state-of-the-art performance.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/solver.h for unified solver dispatch"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "sparse",
+  "library": "Creme",
+  "layer": "layer-4",
+  "header": "Creme/src/Base/sparse.h",
+  "brief": "Sparse LP data structures for Creme solver\n\nCore data structure (sparseLP) for randomized LP solving.\nStores constraint matrix in sparse row format with bounds.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "linopt.h for one-opt local search",
+    "rtr.h for randomized rounding"
+  ]
+}

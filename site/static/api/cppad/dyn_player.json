@@ -1,0 +1,9 @@
+{
+  "name": "dyn_player",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/play/dyn_player.hpp",
+  "brief": "Tape playback: dyn_player",
+  "algorithms": [],
+  "methods": []
+}

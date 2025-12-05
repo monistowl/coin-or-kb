@@ -1,0 +1,14 @@
+{
+  "name": "AlpsKnowledge",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsKnowledge.h",
+  "brief": "Base class for all ALPS knowledge types (Model, Node, Solution, SubTree)\n\nAlpsKnowledge is the abstract base for all sharable data in parallel search.\nDerived classes must implement encode()/decode() for serialization.\n\n**Knowledge types (AlpsKnowledgeType):**\n- Model: Problem data shared at initialization\n- Node: Search tree nodes processed by workers\n- Solution: Feasible solutions found during search\n- SubTree: Collections of nodes for work distribution\n\n**Serialization for parallel execution:**\n- encode(): Pack object into AlpsEncoded buffer\n- decode(): Create new object from AlpsEncoded\n- decodeToSelf(): Unpack into existing object\n\nSimple contiguous classes can use default encode/decode.\nClasses with pointers or STL containers must override.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsEncoded for serialization buffer",
+    "AlpsKnowledgeBroker for knowledge management",
+    "AlpsModel, AlpsTreeNode, AlpsSolution for concrete types"
+  ]
+}

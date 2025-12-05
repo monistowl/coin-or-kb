@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicDiveFractional",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicDiveFractional.hpp",
+  "brief": "Dive heuristic selecting most fractional variable\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDiveFractional: Simplest diving strategy.\nSelects the variable with value closest to 0.5 (most fractional).",
+  "algorithms": [
+    {
+      "name": "Most Fractional Variable Selection:\n  selectVariableToBranch() for fractional integer x_j:\n  1. Compute fractionality: f_j = min(x\u0304_j - \u230ax\u0304_j\u230b, \u2308x\u0304_j\u2309 - x\u0304_j).\n  2. Select j* = argmax{f_j : j \u2208 fractional integers}.\n  3. Round toward nearest integer (bestRound from f_j comparison).\n  Rationale: Most fractional = hardest to round = fix early.",
+      "math": "Fractionality measure:\n  f(x) = min(x - floor(x), ceil(x) - x).\n  f(x) \u2208 [0, 0.5], with f(x) = 0.5 being maximally fractional.\n  Breaking hardest decisions first often finds feasibility faster.\n\nSimple but effective for breaking ties and finding feasibility.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicDive for base class and diving algorithm",
+    "CbcHeuristicDivePseudoCost for pseudocost-guided variant"
+  ]
+}

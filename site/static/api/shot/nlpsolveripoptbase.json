@@ -1,0 +1,23 @@
+{
+  "name": "NLPSolverIpoptBase",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/NLPSolver/NLPSolverIpoptBase.h",
+  "brief": "Ipopt implementation of INLPSolver interface\n\nProvides NLP solving for SHOT's primal problem using Ipopt interior point.\n\n**IpoptProblem Class (Ipopt::TNLP):**\n- Implements Ipopt's TNLP interface\n- Provides callbacks for function/gradient/Hessian evaluation\n- Sparse Jacobian/Hessian via index placement maps\n\n**TNLP Callbacks:**\n- get_nlp_info(): Problem dimensions and sparsity\n- get_bounds_info(): Variable and constraint bounds\n- eval_f(): Objective function value\n- eval_grad_f(): Objective gradient\n- eval_g(): Constraint function values\n- eval_jac_g(): Constraint Jacobian (sparse)\n- eval_h(): Lagrangian Hessian (sparse)\n- finalize_solution(): Store optimal point\n\n**NLPSolverIpoptBase Class:**\n- Wraps IpoptApplication for solve control\n- Variable fixing for integer-fixed NLP subproblems\n- Starting point management\n\n**IpoptJournal:**\n- Routes Ipopt output through SHOT logging system\n\n@note Used for fixed-integer NLP subproblems in primal bound computation",
+  "algorithms": [
+    {
+      "name": "Warm Starting (setStartingPoint):\n  Initialize from previous NLP solution or MIP point:\n  - Improves convergence for similar subproblems\n  - Critical for efficiency in repeated NLP solves",
+      "math": "l_i = u_i = x\u0304_i for integer variables i \u2208 I\n  Ipopt solves reduced-space problem over continuous variables.\n  Original bounds restored by unfixVariables().",
+      "complexity": "O(nnz) vs O(n\u00b2) for dense evaluation",
+      "ref": [
+        "Bonami et al. (2008) - BONMIN algorithm description",
+        "W\u00e4chter & Biegler (2006) - Ipopt implementation",
+        "Nocedal & Wright (2006) - Warm starting in IPM"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "PrimalSolver.h for NLP subproblem dispatch"
+  ]
+}

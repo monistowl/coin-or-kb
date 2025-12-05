@@ -1,0 +1,12 @@
+{
+  "name": "MosekProgram",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/MosekProgram.h",
+  "brief": "Mosek Fusion API interface for conic optimization\n\nAdapts Gravity models to Mosek's Fusion API for conic programming.\n\n**MosekProgram Class:**\n- _mosek_model: Mosek Fusion Model\n- _mosek_vars: Vector of Mosek Variable::t handles\n\n**Conic Capabilities:**\n- Second-order cone (SOCP)\n- Semidefinite programming (SDP)\n- Exponential cone\n\n**Expression Building:**\n- form_Fx(qterms): Build quadratic matrix form F*x\n- create_lin_expr(lterms, cst): Linear expression construction\n\n**Model Building:**\n- fill_in_mosek_vars(): Create Mosek variables\n- create_mosek_constraints(): Add conic constraints\n- set_mosek_objective(): Set objective\n\n@note Mosek Fusion is designed specifically for conic optimization,\n      making it ideal for SOCP and SDP problems in power systems.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/solver.h for unified solver dispatch"
+  ]
+}

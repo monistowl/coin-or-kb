@@ -1,0 +1,19 @@
+{
+  "name": "BCP_mempool",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_mempool.hpp",
+  "brief": "Memory pool allocator for BCP",
+  "algorithms": [
+    {
+      "name": "Free-List Allocator: Pooled Object Allocation\n\nBCP_MemPool implements a free-list memory pool for fixed-size objects.\nReduces malloc/free overhead for frequently created/destroyed objects.\n\n**Design:**\n- Pre-allocates blocks of BLOCK_SIZE entries\n- Maintains linked list of free entries (pointer embedded in unused space)\n- Falls back to ::operator new for wrong-sized allocations\n\n**Usage:**\n- alloc(n): Get memory (from pool if size matches, else new)\n- free(p, n): Return memory (to pool if size matches, else delete)",
+      "math": "",
+      "complexity": "O(1) allocation when pool has free entries",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_var.hpp, BCP_cut.hpp for pooled object classes"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "SmiScnData",
+  "library": "Smi",
+  "layer": "layer-3",
+  "header": "Smi/src/SmiScnData.hpp",
+  "brief": "Core and node data classes for stochastic models\n\nContains SmiCoreData (deterministic base LP) and SmiNodeData (scenario\nmodifications) that together define stochastic linear programs.\n\n**SmiCoreData Class:**\nStores the deterministic \"core\" LP problem with stage structure:\n- nrow_, ncol_: Total rows/columns in core problem\n- nstag_: Number of stages (periods)\n- stageRowPtr_[t], stageColPtr_[t]: Row/col offsets for stage t\n- nRowInStage_[t], nColInStage_[t]: Counts per stage\n- nodes_[t]: Core SmiNodeData for each stage\n- Dense bound arrays: cdrlo_, cdrup_, cdclo_, cdcup_, cdobj_\n\n**SmiNodeData Class:**\nStores LP modifications for a tree node (scenario/stage):\n- Sparse delta data: matrix rows, bounds, objective\n- combineRule_: How to merge with core (replace/add)\n- Stage membership and core linkage\n- Dense row map for efficient access\n\n**SMPS Data Flow:**\n1. Core MPS \u2192 SmiCoreData (base LP with stage assignments)\n2. Stoch file \u2192 SmiNodeData (per-scenario modifications)\n3. Combine with rule \u2192 Full scenario LP data\n\n**Type Aliases:**\n- SmiCoreIndex, SmiScenarioIndex, SmiStageIndex: int aliases",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SmiCoreCombineRule.hpp for combination rules",
+    "SmiScnModel.hpp for scenario model using these classes",
+    "SmiSmpsIO.hpp for SMPS file parsing"
+  ]
+}

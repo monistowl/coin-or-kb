@@ -1,0 +1,22 @@
+{
+  "name": "BonHeuristicDiveFractional",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonHeuristicDiveFractional.hpp",
+  "brief": "NLP-based diving heuristic selecting most fractional variable\nCopyright (C) 2007, International Business Machines Corporation and others.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.",
+  "algorithms": [
+    {
+      "name": "Most Fractional Diving Heuristic",
+      "math": "Variable selection score: s(x_j) = min(f_j, 1-f_j) where f_j = x_j - \u230ax_j\u230b\n      The variable with largest s(x_j) (closest to 0.5) is selected.\n      Rounding direction: ceil if f_j \u2265 0.5, floor otherwise.\n\nHeuristicDiveFractional: Diving heuristic for MINLP that solves\nNLP subproblems during diving. Variable selection based on\nfractionality - picks integer variable closest to 0.5.\n\n**Algorithm:**\n1. Compute fractional part f_j = x_j - \u230ax_j\u230b for each integer variable\n2. Select j* = argmax_j min(f_j, 1-f_j)\n3. Round towards nearest integer (ceil if f_j \u2265 0.5)\n4. Fix variable and resolve NLP",
+      "complexity": "O(n) per diving step for variable selection",
+      "ref": [
+        "Berthold, T. (2006). \"Primal Heuristics for Mixed Integer Programs\".\n     Diploma thesis, TU Berlin.\n\nAuthors: Joao P. Goncalves, IBM\nDate: November 12, 2007"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "HeuristicDive for base NLP-diving class",
+    "HeuristicDiveMIPFractional for MIP-based variant"
+  ]
+}

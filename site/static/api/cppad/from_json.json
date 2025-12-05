@@ -1,0 +1,9 @@
+{
+  "name": "from_json",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/graph/from_json.hpp",
+  "brief": "Core AD functionality: from json",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "epsilon",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/epsilon.hpp",
+  "brief": "Core AD functionality: epsilon",
+  "algorithms": [],
+  "methods": []
+}

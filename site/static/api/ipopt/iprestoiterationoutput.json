@@ -1,0 +1,20 @@
+{
+  "name": "IpRestoIterationOutput",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpRestoIterationOutput.hpp",
+  "brief": "Iteration output during restoration phase\n\nRestoIterationOutput provides per-iteration summary output while\nthe algorithm is in restoration phase. It displays metrics for the\nORIGINAL NLP (not the restoration feasibility problem).\n\nOutput format:\n- Iteration number marked with 'r' prefix to indicate restoration\n- Objective value from original NLP\n- Constraint violation (theta) for original constraints\n- Dual infeasibility for original problem\n\nDual output mode:\nIf resto_orig_iteration_output is provided, produces two lines:\n1. Restoration phase problem metrics\n2. Original NLP metrics (using original scaling)\n\nConfiguration:\n- print_info_string_: Whether to print info at end of line\n- inf_pr_output_: What to show in inf_pr column\n- print_frequency_iter_: Iteration print frequency\n- print_frequency_time_: Time-based print frequency",
+  "algorithms": [
+    {
+      "name": "Restoration Phase Output (Dual View):\nProvides visibility into restoration phase while tracking original NLP:\n1. Mark iteration with 'r' prefix to distinguish from normal iterations\n2. Report original NLP objective f(x) (not restoration objective)\n3. Report original constraint violation \u03b8 = \u2016c(x)\u2016\n4. Optionally show both restoration and original metrics (dual output)\n\nUser sees: restoration working to reduce infeasibility, with\ntracking of how original problem metrics change.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpOrigIterationOutput.hpp for regular iteration output",
+    "IpIterationOutput.hpp for base interface"
+  ]
+}

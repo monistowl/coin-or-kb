@@ -1,0 +1,12 @@
+{
+  "name": "sym_qsort",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_qsort.h",
+  "brief": "Quicksort variants and utility functions\n\nSpecialized quicksort implementations for common data patterns.\n\n**Quicksort variants:**\n- qsort_i(): Sort integer array\n- qsort_id(): Sort int array, permute double array\n- qsort_ic(): Sort int array, permute char array\n- qsort_ii(): Sort int array, permute second int array\n- qsort_di(): Sort double array, permute int array\n\n**Utility functions:**\n- sym_gcd(): Greatest common divisor\n- d_gap(): Compute optimality gap percentage",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_lp.h for LP process using sort functions"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "CouenneFPpool",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/heuristics/CouenneFPpool.hpp",
+  "brief": "Solution pool and tabu list for Feasibility Pump\n\nManages collections of solutions found during FP iterations,\nproviding restart points and avoiding revisiting similar solutions.\n\n**CouenneFPsolution:**\nWrapper for a solution with cached infeasibility metrics:\n- nNLinf_: Count of nonlinear infeasibilities\n- nIinf_: Count of integer infeasibilities\n- maxNLinf_/maxIinf_: Maximum violations\n- objVal_: Objective function value\n\n**Comparison modes (what_to_compare):**\n- SUM_NINF: Compare by sum of infeasibility counts\n- SUM_INF: Compare by sum of infeasibility magnitudes\n- OBJVAL: Compare by objective value\n- ALL_VARS: Compare all variable values (for tabu)\n- INTEGER_VARS: Compare only integer variables (for tabu)\n\n**CouenneFPpool:**\nSet of solutions with custom comparator. Used to:\n- Store good MILP solutions for NLP restarts\n- Implement tabu list to avoid cycling\n- Find closest solution in pool (findClosestAndReplace)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneFeasPump which uses this pool",
+    "CouenneIterativeRounding for another heuristic"
+  ]
+}

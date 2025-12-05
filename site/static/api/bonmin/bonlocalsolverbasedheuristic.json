@@ -1,0 +1,20 @@
+{
+  "name": "BonLocalSolverBasedHeuristic",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonLocalSolverBasedHeuristic.hpp",
+  "brief": "Base class for heuristics using local NLP/MINLP solves",
+  "algorithms": [
+    {
+      "name": "Local Search Heuristic Framework\n\nProvides infrastructure for heuristics that find feasible solutions by\nsolving restricted MINLP subproblems (local searches) in a neighborhood\nof the current solution.\n\n**Key method:**\n- doLocalSearch(): Solve MINLP subproblem with modified bounds/cutoff\n\n**Parameters:**\n- time_limit_: Maximum time for local search\n- max_number_nodes_: Node limit for local search\n- max_number_solutions_: Stop after finding this many solutions\n\n**Subclasses:**\n- FixAndSolveHeuristic: Fix some variables, solve remaining MINLP\n- HeuristicRINS: Relaxation Induced Neighborhood Search\n- HeuristicLocalBranching: Local branching cuts",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for the base class",
+    "BonminSetup for local search configuration"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "BCP_vector_bool",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_vector_bool.hpp",
+  "brief": "BCP_vec<bool> specialization",
+  "algorithms": [
+    {
+      "name": "POD Vector Specialization: bool\n\nTemplate specializations for BCP_vec<bool> that skip\nconstruct/destroy overhead since bool is a POD type.\nSame optimization pattern as BCP_vector_double.hpp.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

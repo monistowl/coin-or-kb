@@ -1,0 +1,12 @@
+{
+  "name": "CouenneLQelems",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/standardize/CouenneLQelems.hpp",
+  "brief": "Linear and quadratic term storage for standardization\n\nData structures for collecting linear and quadratic terms during\nexpression standardization (conversion to auxiliary variable form).\n\n**quadElem:**\nSingle quadratic term c\u00b7x\u1d62\u00b7x\u2c7c:\n- varI_, varJ_: Variable pointers\n- coeff_: Coefficient c\n\n**LinMap:**\nSparse map of linear terms: index \u2192 coefficient\n- insert(index, coe): Add/accumulate coefficient\n- Auto-removes zero entries\n\n**QuadMap:**\nSparse map of quadratic terms: (i,j) \u2192 coefficient\n- insert(indI, indJ, coe): Add/accumulate coefficient\n- Auto-removes zero entries\n\n**Usage:**\nDuring standardization, expressions like x\u00b2 + 2xy + 3x + 4\nare decomposed into LinMap (3x + 4 constant) and QuadMap\n(x\u00b2 + 2xy). These are then converted to auxiliary form.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneProblem::standardize() which uses these structures"
+  ]
+}

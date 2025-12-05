@@ -1,0 +1,12 @@
+{
+  "name": "CouenneExprFloor",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprFloor.hpp",
+  "brief": "Floor function w = floor(x)\n\nReturns the largest integer not exceeding x. Piecewise constant\nfunction with jump discontinuities at each integer.\n\n**Convexification challenge:**\nfloor(x) is neither convex nor concave nor continuous. The function\nis constant on intervals [n, n+1) with value n.\n\n**Bound propagation:**\n- lb(w) = floor(lb(x))\n- ub(w) = floor(ub(x))\n\n**Integrality:**\nResult is always integer-valued, even when argument is continuous.\nThis can introduce implicit integrality constraints.\n\n**Not cuttable:**\nNo convex relaxation exists for piecewise constant functions.\nMust rely on branching to handle.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprCeil for the complementary ceiling function"
+  ]
+}

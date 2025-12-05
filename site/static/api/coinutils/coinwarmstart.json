@@ -1,0 +1,23 @@
+{
+  "name": "CoinWarmStart",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinWarmStart.hpp",
+  "brief": "Abstract interfaces for warm start information in optimization solvers",
+  "algorithms": [
+    {
+      "name": "Warm Start with Delta-Encoded Diffs for B&B\nAbstract base for solver state that enables fast re-optimization.\nThe diff mechanism (generateDiff/applyDiff) compresses incremental changes\nbetween B&B nodes - critical for memory-efficient branch-and-bound.\n\nDerived classes implement solver-specific warm start data (e.g., basis\nstatus for simplex, barrier iterates for interior point methods).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinWarmStartBasis for a common implementation (simplex basis)",
+    "CoinWarmStartDiff, CoinWarmStartBasis",
+    "applyDiff()",
+    "generateDiff()",
+    "CoinWarmStart::generateDiff(), CoinWarmStart::applyDiff()"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "BonChooseVariable",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/Branching/BonChooseVariable.hpp",
+  "brief": "Strong branching and pseudo-cost based variable selection for MINLP\n\nImplements branching variable selection for nonlinear branch-and-bound.\nCombines strong branching (solving LP/NLP relaxations) with pseudo-costs\n(estimates from historical branching information).\n\n**Key classes:**\n- BonChooseVariable: Main branching decision maker (extends OsiChooseVariable)\n- HotInfo: Stores strong branching results for a candidate\n\n**Branching decision process:**\n1. setupList(): Identify fractional variables, rank by pseudo-costs\n2. doStrongBranching(): Evaluate top candidates via LP/NLP solves\n3. chooseVariable(): Select best candidate based on objective change\n\n**Pseudo-cost computation:**\n- Estimates objective change per unit change in variable value\n- Updated after each branching decision using actual results\n- Used to avoid expensive strong branching after trust is established",
+  "algorithms": [
+    {
+      "name": "Reliability Branching with Strong Branching Initialization:\nHybrid strategy combining strong branching accuracy with pseudo-cost speed.\nPhase 1: Use strong branching (solve relaxations) until pseudo-costs trusted.\nPhase 2: Use pseudo-costs when reliable, strong branch only untrusted vars.",
+      "math": "Pseudo-cost for variable x_j with value f_j (fractional part):\n- Down branch: P\u207b_j = \u0394z\u207b / f_j (objective change per unit down)\n- Up branch: P\u207a_j = \u0394z\u207a / (1 - f_j) (objective change per unit up)\nScore function (product): score_j = max(P\u207b_j \u00b7 f_j, \u03b5) \u00b7 max(P\u207a_j \u00b7 (1-f_j), \u03b5)\nAlternatively, weighted sum: score_j = (1-\u03bc) \u00b7 min + \u03bc \u00b7 max\nwhere \u03bc varies based on solution status (no incumbent vs have incumbent).",
+      "complexity": "Strong branching: O(k \u00b7 NLP) per node where k = #candidates.\nPseudo-cost only: O(n) per node for n candidates.\nReliability reduces to pseudo-cost after O(\u03b7) branches per variable\nwhere \u03b7 = minReliability parameter (typically 4-8).",
+      "ref": [
+        "Achterberg, Koch & Martin (2005). \"Branching rules revisited\".\n  Operations Research Letters 33(1):42-54. [Reliability branching]",
+        "Benichou et al. (1971). \"Experiments in mixed-integer linear\n  programming\". Mathematical Programming 1:76-94. [Pseudo-costs]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiChooseVariable for the base class interface",
+    "BonPseudoCosts for pseudo-cost storage and update"
+  ]
+}

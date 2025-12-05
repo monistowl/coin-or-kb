@@ -1,0 +1,16 @@
+{
+  "name": "CoinCliqueSet",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinCliqueSet.hpp",
+  "brief": "Set of cliques",
+  "algorithms": [
+    {
+      "name": "Hash-Based Clique Set with Deduplication\n\nA class to store a set of cliques. It is an\nextension of class CoinCliqueList.\n\n**Deduplication:**\nUses polynomial rolling hash to detect duplicate cliques.\nCliques are sorted before hashing to ensure canonical form.\nHash collisions resolved via bucket chains with exact comparison.\n\n**Use case:**\nDuring clique enumeration and separation, same clique may be\ngenerated multiple times. This class efficiently filters duplicates.",
+      "math": "Hash: h(C) = \u03a3\u1d62 (C[i] \u00d7 sequence_[i mod n]) mod nBuckets_",
+      "complexity": "O(1) amortized with good hash distribution",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

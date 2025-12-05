@@ -1,0 +1,13 @@
+{
+  "name": "HighsCutPool",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsCutPool.h",
+  "brief": "Cutting plane storage and separation for MIP solver\n\n**HighsCutSet:**\nContainer for cuts to add to LP relaxation:\n- cutindices: Indices into cut pool\n- ARstart_/ARindex_/ARvalue_: CSR storage for cut coefficients\n- lower_/upper_: Cut bounds (typically -inf, rhs)\n\n**HighsCutPool:**\nManages all generated cutting planes:\n- matrix_: HighsDynamicRowMatrix storing all cuts\n- rhs_[]: Right-hand sides\n- ages_[]: Cut age (incremented when not binding, reset when used)\n- hashToCutMap: Duplicate detection via row hashing\n\n**Cut Lifecycle:**\n- addCut(): Add new cut with duplicate detection and clique extraction\n- separate(): Select violated cuts for LP (scoring + density limits)\n- performAging(): Increment ages, remove old cuts (age > agelim_)\n- lpCutRemoved(): Called when cut leaves LP\n\n**Cut Propagation:**\n- propagationDomains: Registered domains for cut-based bound tightening\n- propRows: Active propagation rows",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsDynamicRowMatrix.h for cut storage",
+    "mip/HighsDomain.h for domain propagation"
+  ]
+}

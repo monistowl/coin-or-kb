@@ -1,0 +1,21 @@
+{
+  "name": "IpLowRankSSAugSystemSolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpLowRankSSAugSystemSolver.hpp",
+  "brief": "Low-rank Hessian handling via single backsolve (iterative solver friendly)\n\nLowRankSSAugSystemSolver handles LowRankUpdateSymMatrix Hessians\n(from L-BFGS) by augmenting the system rather than using\nSherman-Morrison. This requires only ONE factorization/backsolve.",
+  "algorithms": [
+    {
+      "name": "Single-Solve Low-Rank System Augmentation:\n  Solve() handles W = \u03c3I + V\u00b7M\u00b7V^T without multiple backsolves:\n  1. L-BFGS gives W = \u03c3I + V\u00b7M\u00b7V^T (compact representation).\n  2. Instead of Sherman-Morrison (k backsolves for rank-k update):\n  3. Augment KKT: J_c_ext = [J_c; V^T], add k extra \"constraint\" rows.\n  4. Extended system: [\u03c3I, J^T, V; J, -D, 0; V^T, 0, M\u207b\u00b9] [\u0394x; y; q] = [r].\n  5. Single factorization of larger (n+m+k) system.\n  6. Advantage: Iterative solvers like GMRES prefer one larger system.",
+      "math": "System equivalence:\n  Sherman-Morrison: (A + VCV^T)\u207b\u00b9 = A\u207b\u00b9 - A\u207b\u00b9V(C\u207b\u00b9+V^TA\u207b\u00b9V)\u207b\u00b9V^TA\u207b\u00b9.\n  Augmented form: Same solution, but via single linear solve.\n  Trade-off: Larger system vs multiple backsolves.\n\nL-BFGS Hessian: W = sigma*I + V*M*V^T (compact representation)\n\nStandard approach (LowRankAugSystemSolver):\n- Uses Sherman-Morrison formula\n- Requires multiple backsolves (one per rank)\n- Better for direct solvers\n\nThis approach (LowRankSSAugSystemSolver):\n- Augments the KKT system with V columns\n- Extends J_c with ExpandedMultiVectorMatrix rows\n- Single larger factorization\n- Better for iterative solvers\n\nSystem augmentation:\n- J_c_ext_ = [J_c; V^T] (extended constraint Jacobian)\n- D_c_ext_ includes regularization for V rows\n- y_c_ext_space_ for extended multiplier space",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpLowRankAugSystemSolver.hpp for Sherman-Morrison version",
+    "IpLimMemQuasiNewtonUpdater.hpp for L-BFGS Hessian",
+    "ProvidesInertia)."
+  ]
+}

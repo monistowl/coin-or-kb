@@ -1,0 +1,20 @@
+{
+  "name": "BonNlpHeuristic",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/heuristics/BonNlpHeuristic.hpp",
+  "brief": "NLP heuristic for near-integer B&B nodes",
+  "algorithms": [
+    {
+      "name": "Near-Feasibility NLP Heuristic\n\nCalls NLP solver when CouenneObjects are nearly satisfied to\nfind MINLP feasible solutions during branch-and-bound.\n\n**Triggering conditions:**\n- All CouenneObjects within maxNlpInf_ tolerance\n- Integer variables are rounded\n- No violated SOS constraints\n\n**Key parameters:**\n- maxNlpInf_ (default 1e-5): Max auxiliary violation to trigger\n- numberSolvePerLevel_: NLP calls allowed per tree level\n\n**Algorithm:**\n1. Check if current LP solution is nearly MINLP-feasible\n2. Round integer variables to nearest integer\n3. Call Ipopt to find local NLP solution\n4. If feasible, return as candidate incumbent\n\n**Comparison to FeasibilityPump:**\n- FeasPump: Alternates MILP/NLP from any point\n- NlpHeuristic: Only triggers when already near-feasible",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneFeasPump for feasibility pump heuristic",
+    "InitHeuristic for initial solution injection"
+  ]
+}

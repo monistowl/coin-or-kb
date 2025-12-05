@@ -1,0 +1,21 @@
+{
+  "name": "CbcNWay",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcNWay.hpp",
+  "brief": "N-way branching (exactly one variable at upper bound)\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcNWay: Multi-way (N-ary) branching for selection constraints.\nExactly one variable at upper bound, all others at lower bound.\nCreates N children, each fixing one variable to its UB.",
+  "algorithms": [
+    {
+      "name": "N-Way Branching for Selection Constraints:\n  For constraint \u03a3x_j = 1 where x_j \u2208 {0,1} (exactly one selected):\n  createCbcBranch() creates N child nodes:\n  Child k: x_k = 1 (UB), all other x_j = 0 (LB), j \u2260 k.\n  applyConsequence() triggers bound propagation when x_k fixed.\n  Branch order determined by order_ array in CbcNWayBranchingObject.",
+      "math": "N-way vs binary branching tree size:\n  Binary: O(2^n) nodes for n variables in selection constraint.\n  N-way: O(n) nodes per selection constraint (linear in choices).\n  Trade-off: More children per node but shallower tree.\n  Optimal for GUB/SOS1 structures where exactly one variable selected.\n\nDiffers from binary branching:\n- Traditional: 2 children (x <= floor vs x >= ceil)\n- N-way: N children, each selecting a different option\n\nSupports CbcConsequence for each member - when a variable\nis selected (fixed to UB), additional bound changes can be applied.\n\nExample: Facility location with 5 candidate sites.\nN-way branch creates 5 children, each opening a different site.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcNWayBranchingObject for branching action",
+    "CbcConsequence for side effects",
+    "CbcClique for clique-based (2-way) branching\n\nEdwin 11/9/2009 carved out of CbcBranchActual"
+  ]
+}

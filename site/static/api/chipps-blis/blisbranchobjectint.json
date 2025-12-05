@@ -1,0 +1,14 @@
+{
+  "name": "BlisBranchObjectInt",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisBranchObjectInt.h",
+  "brief": "Branching object for integer variable dichotomy\n\nRepresents a two-way branch on an integer variable.\nCreated when branching decisions are made at a tree node.\n\n**Branch structure:**\nFor variable x\u2c7c with fractional value v*:\n- Down branch: down_[0] \u2264 x\u2c7c \u2264 down_[1] = floor(v*)\n- Up branch: up_[0] = ceil(v*) \u2264 x\u2c7c \u2264 up_[1]\n\n**Direction semantics:**\n- direction_ = -1: Down branch executed first\n- direction_ = +1: Up branch executed first\n\n**Key methods:**\n- branch(): Apply bounds for current arm, advance to next\n- getDown()/getUp(): Access bound arrays\n\n**Serialization:**\nencode()/decode() for MPI transmission of branch decisions.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisObjectInt for the integer variable object",
+    "BlisBranchStrategy* for variable selection",
+    "BlisTreeNode::branch() for branching implementation"
+  ]
+}

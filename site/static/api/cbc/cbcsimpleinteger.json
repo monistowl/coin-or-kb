@@ -1,0 +1,22 @@
+{
+  "name": "CbcSimpleInteger",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcSimpleInteger.hpp",
+  "brief": "Integer variable branching object",
+  "algorithms": [
+    {
+      "name": "Floor/Ceiling Integer Branching\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcIntegerBranchingObject: Standard floor/ceiling branch on integer x:\n- Down arm: lb <= x <= floor(x*)\n- Up arm: ceil(x*) <= x <= ub\n\nCbcSimpleInteger: CbcObject for integer variables.\nCreates CbcIntegerBranchingObject instances.\n\nAlso supports one-way branching for fixing variables.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcObject for base class",
+    "CbcSimpleIntegerPseudoCost for pseudocost variant",
+    "CbcSimpleIntegerDynamicPseudoCost for dynamic pseudocosts",
+    "CbcBranchingObject for branching action base\n\nEdwin 11/9/2009 carved out of CbcBranchActual"
+  ]
+}

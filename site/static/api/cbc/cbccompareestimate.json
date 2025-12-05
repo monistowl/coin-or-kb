@@ -1,0 +1,21 @@
+{
+  "name": "CbcCompareEstimate",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcCompareEstimate.hpp",
+  "brief": "Estimate-based node selection strategy\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCompareEstimate: Node selection using solution estimates.\nUsed during rounding phases where estimated objective matters.",
+  "algorithms": [
+    {
+      "name": "Estimate-Based Node Selection:\n  test(x, y) comparison for heap ordering:\n  Returns true if estimate(y) < estimate(x).\n  estimate = guessedObjectiveValue() from pseudocost extrapolation.\n  Effect: Explores nodes most likely to yield good solutions first.\n  Used during diving/rounding phases when LP bound is less informative.",
+      "math": "Pseudocost-based estimation:\n  estimate(node) = LP_bound + \u03a3 \u03c8_j \u00d7 distance_to_integer(x_j).\n  Approximates objective of integer-feasible descendant.\n  More predictive than LP bound when many variables fractional.\n  Particularly useful early in search before strong bounds available.\n\ntest(x,y) compares node estimates (guessedObjectiveValue).\nEstimates typically come from pseudocost extrapolation or\nother predictive methods.\n\nUseful when LP relaxation bound is weak but estimates\nfrom branching information are more informative.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcCompareObjective for LP bound comparison",
+    "CbcCompareDefault for adaptive strategy",
+    "CbcNode::guessedObjectiveValue() for estimate source\n\nEdwin 11/25/09 carved out of CbcCompareActual"
+  ]
+}

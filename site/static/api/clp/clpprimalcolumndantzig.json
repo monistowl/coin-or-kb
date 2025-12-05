@@ -1,0 +1,24 @@
+{
+  "name": "ClpPrimalColumnDantzig",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPrimalColumnDantzig.hpp",
+  "brief": "Dantzig's rule for primal simplex pivot selection\n\nImplements the simplest pivot column selection: choose the nonbasic variable\nwith the most negative reduced cost (for minimization). This is Dantzig's\noriginal 1947 rule.\n\nSimple and fast per iteration, but typically requires more iterations than\nsteepest edge methods on degenerate or difficult problems. Use\nClpPrimalColumnSteepest for better performance on most problems.",
+  "algorithms": [
+    {
+      "name": "Dantzig's Rule (Primal Simplex Entering Variable Selection):\nScans all nonbasic variables and selects the one with most negative reduced\ncost. This greedy choice maximizes rate of improvement per unit movement.\nNo weight storage needed - stateless selection based purely on current\nreduced costs. Fast per iteration but may cycle on degenerate problems\nwithout anti-cycling rules (handled elsewhere in ClpSimplexPrimal).",
+      "math": "For minimization, select entering column j* = argmin{d_j | d_j < 0}\nwhere d_j = c_j - c_B^T B^{-1} A_j is the reduced cost of nonbasic column j.\nIf d_j >= 0 for all j, current solution is optimal.\nThe most negative d_j gives steepest descent in objective space,\nthough not necessarily fewest iterations to optimality.",
+      "complexity": "O(n) per iteration to scan all nonbasic reduced costs.\nTotal work depends heavily on problem structure - may require\nO(2^n) iterations worst case (Klee-Minty), but polynomial expected\nfor random problems. Steepest edge typically 2-3x fewer iterations.",
+      "ref": [
+        "Dantzig, G.B. (1947). \"Maximization of a linear function of variables\n  subject to linear inequalities\". Activity Analysis of Production and\n  Allocation. [Original simplex paper]",
+        "Klee, V. & Minty, G.J. (1972). \"How good is the simplex algorithm?\".\n  Inequalities III. [Worst-case exponential example]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPrimalColumnPivot for the base interface",
+    "ClpPrimalColumnSteepest for recommended steepest edge variant",
+    "ClpSimplexPrimal for the primal simplex algorithm"
+  ]
+}

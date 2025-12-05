@@ -1,0 +1,22 @@
+{
+  "name": "IpCGSearchDirCalc",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/contrib/CGPenalty/IpCGSearchDirCalc.hpp",
+  "brief": "Search direction calculator for Chen-Goldfarb penalty method",
+  "algorithms": [
+    {
+      "name": "Chen-Goldfarb Search Direction Computation\n\nCGSearchDirCalculator computes the search direction for the\nChen-Goldfarb penalty function algorithm. It produces two types\nof directions stored in CGPenaltyData:\n\n**Direction types:**\n1. delta_cgpen: Standard CG direction with penalty regularization\n2. delta_cgfast: \"Fast\" direction attempting pure Newton steps\n\n**Fast direction strategy:**\nWhen close to solution (measured by \u03ba_x, \u03ba_y criteria), attempt\npure Newton step for superlinear convergence. Fall back to\npenalty-regularized direction if Newton step fails quality tests.\n\n**Penalty parameter management:**",
+      "math": "\u03c1 updated: ensure sufficient descent in penalty function",
+      "complexity": "Same as PDSystemSolver: O(n\u00b3) direct, O(n\u00b7k) iterative",
+      "ref": [
+        "Chen & Goldfarb, \"Interior-point l2-penalty methods\", Math. Prog., 2006"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpSearchDirCalculator.hpp for base interface",
+    "IpCGPenaltyLSAcceptor.hpp for line search using these directions"
+  ]
+}

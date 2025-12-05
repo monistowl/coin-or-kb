@@ -1,0 +1,12 @@
+{
+  "name": "GPUQREngine_GraphVizHelper",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_GraphVizHelper.hpp",
+  "brief": "Debug visualization for bucket list state\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nGPUQREngine_RenderBuckets function generates GraphViz output for\nBucketList visualization. Only compiled when GPUQRENGINE_RENDER defined.\nUsed for debugging factorization scheduling and tile progression.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_BucketList.hpp for rendered data structure"
+  ]
+}

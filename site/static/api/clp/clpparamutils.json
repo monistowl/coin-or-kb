@@ -1,0 +1,13 @@
+{
+  "name": "ClpParamUtils",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpParamUtils.hpp",
+  "brief": "Parameter handler callback functions for ClpParam",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ClpParam for the parameter definition class",
+    "ClpParameters for the parameter container"
+  ]
+}

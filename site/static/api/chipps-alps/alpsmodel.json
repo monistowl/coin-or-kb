@@ -1,0 +1,14 @@
+{
+  "name": "AlpsModel",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsModel.h",
+  "brief": "Abstract base class for user problem data in ALPS tree search\n\nAlpsModel holds problem-specific data (constraints, objectives, variables).\nUsers inherit this class and implement virtual methods for their application.\n\n**Key virtual methods to implement:**\n- readInstance(): Read problem from file (master process only)\n- setupSelf(): Initialize model after data loaded/received\n- preprocess(): Preprocessing before search\n- createRoot(): Create the root tree node\n- encode()/decodeToSelf(): Serialize for parallel distribution\n\n**Parallel execution flow:**\n1. Master: readInstance() \u2192 setupSelf() \u2192 preprocess() \u2192 createRoot()\n2. Master: encode() model and send to workers\n3. Workers: decodeToSelf() \u2192 setupSelf() \u2192 begin processing nodes\n4. All: postprocess() after search completes",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsKnowledge for serialization interface",
+    "AlpsTreeNode for node processing",
+    "AlpsKnowledgeBroker for search orchestration"
+  ]
+}

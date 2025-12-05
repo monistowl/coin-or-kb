@@ -1,0 +1,21 @@
+{
+  "name": "IpEquilibrationScaling",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpEquilibrationScaling.hpp",
+  "brief": "NLP scaling using MC19 matrix equilibration\n\nEquilibrationScaling computes scaling factors using the HSL MC19\nsymmetric indefinite matrix equilibration routine. This produces\nwell-conditioned scaling by analyzing the Jacobian structure.",
+  "algorithms": [
+    {
+      "name": "MC19-Based Matrix Equilibration Scaling:\n  DetermineScalingParametersImpl():\n  1. Perturb x\u2080 randomly within bounds (avoid singular points).\n  2. Evaluate Jacobians J_c, J_d at perturbed points.\n  3. Build \"equilibration matrix\" combining KKT structure.\n  4. Call MC19AD: computes D s.t. ||D\u00b7A\u00b7D||\u221e \u2248 1 per row/col.\n  5. Extract dx from variable columns, dc/dd from constraint rows.\n  6. df computed separately from objective gradient.",
+      "math": "Equilibration principle:\n  MC19 minimizes \u03a3(log|a_ij\u00b7d_i\u00b7d_j|)\u00b2 for symmetric indefinite A.\n  Result: balanced row/column norms, improved KKT conditioning.\n  Better than gradient scaling for problems with structural imbalance.\n\nMC19 routine (HSL):\n- Computes diagonal scaling D such that |D*A*D|_ij \u2248 1\n- Uses infinity-norm equilibration\n- Loaded dynamically via LibraryLoader\n\nPointPerturber helper class:\n- Generates random perturbations within bounds\n- Used to avoid evaluating at singular points\n- MakeNewPerturbedPoint(): Returns randomly perturbed x",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpNLPScaling.hpp for the scaling framework",
+    "IpGradientScaling.hpp for gradient-based alternative",
+    "IpMc19TSymScalingMethod.hpp for MC19 interface"
+  ]
+}

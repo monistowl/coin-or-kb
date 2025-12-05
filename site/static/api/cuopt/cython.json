@@ -1,0 +1,9 @@
+{
+  "name": "cython",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/include/cuopt/routing/cython/cython.hpp",
+  "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+  "algorithms": [],
+  "methods": []
+}

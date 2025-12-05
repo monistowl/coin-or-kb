@@ -1,0 +1,14 @@
+{
+  "name": "decomp",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/decomp/decomp.h",
+  "brief": "Decomposition-based column generation for SYMPHONY\n\nImplements column generation via Dantzig-Wolfe decomposition\nfor problems with special structure.\n\n**Core functions:**\n- decomp(): Main decomposition algorithm\n- create_initial_lp(): Build restricted master problem\n- generate_new_cols(): Solve pricing subproblem\n- generate_cuts(): Cut generation in master\n- add_dcmp_cols(): Add columns to master LP\n\n**Column management:**\n- receive_cols(): Receive columns from subproblems\n- get_cols_from_pool(): Retrieve from column pool\n- free_dcmp_col_set(): Cleanup column set\n\n**User callbacks:**\n- user_generate_new_cols(): Custom pricing routine\n- user_unpack_col(): Expand packed column\n- user_pack_col(): Compress column for storage\n- user_check_col(): Verify column validity\n- user_set_rhs(): Define subproblem RHS\n- user_send_to_sol_pool(): Store promising columns",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "decomp_types.h for col_data, dcmp_col_set",
+    "decomp_lp.h for LP interface",
+    "sp_params.h for column pool parameters"
+  ]
+}

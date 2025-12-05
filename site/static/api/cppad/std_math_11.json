@@ -1,0 +1,9 @@
+{
+  "name": "std_math_11",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/std_math_11.hpp",
+  "brief": "Core AD functionality: std math 11",
+  "algorithms": [],
+  "methods": []
+}

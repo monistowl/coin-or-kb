@@ -1,0 +1,9 @@
+{
+  "name": "par_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/par_op.hpp",
+  "brief": "Internal implementation: par_op",
+  "algorithms": [],
+  "methods": []
+}

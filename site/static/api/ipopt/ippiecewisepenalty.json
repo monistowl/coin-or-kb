@@ -1,0 +1,22 @@
+{
+  "name": "IpPiecewisePenalty",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/contrib/CGPenalty/IpPiecewisePenalty.hpp",
+  "brief": "Piecewise linear penalty function (PLPF) data structure",
+  "algorithms": [
+    {
+      "name": "Piecewise Linear Penalty Function (PLPF)\n\nPiecewisePenalty maintains a list of break points for the piecewise\nlinear penalty function used in the Chen-Goldfarb globalization.\n\n**Entry structure (PiecewisePenEntry):**\n- pen_r: Penalty parameter value at this break point\n- barrier_obj: Barrier objective function value\n- infeasi: Constraint violation (infeasibility)\n\n**Acceptability test:**\nTrial point (f_trial, \u03b8_trial) is acceptable if it lies below the\nenvelope defined by existing breakpoints. This creates a non-monotone\nacceptance criterion similar to the filter method but using penalty.",
+      "math": "Accept if: f_trial \u2264 P(\u03b8_trial) - \u03b3_f \u00b7 \u03b8_trial",
+      "complexity": "O(k) acceptability check where k = number of breakpoints",
+      "ref": [
+        "Chen & Goldfarb, \"Interior-point l2-penalty methods\", Math. Prog., 2006"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpCGPenaltyLSAcceptor.hpp for usage in line search",
+    "IpFilterLSAcceptor.hpp for filter-based alternative"
+  ]
+}

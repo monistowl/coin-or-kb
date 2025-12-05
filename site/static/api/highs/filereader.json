@@ -1,0 +1,14 @@
+{
+  "name": "Filereader",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/io/Filereader.h",
+  "brief": "Abstract file reader/writer interface for optimization models\n\nPolymorphic I/O with format detection from file extension.\n\n**Supported Formats:**\n- MPS: Mathematical Programming System (fixed/free format)\n- LP: CPLEX LP format (human-readable)\n- EMS: HiGHS extended model format\n\n**Factory Pattern:**\n- getFilereader(): Returns appropriate reader for extension\n  - \".mps\", \".mps.gz\" \u2192 FilereaderMps\n  - \".lp\" \u2192 FilereaderLp\n  - \".ems\" \u2192 FilereaderEms\n\n**Return Codes:**\n- kOk: Success\n- kFileNotFound: File doesn't exist\n- kParserError: Malformed input\n- kNotImplemented: Format not supported for operation\n- kTimeout: Read exceeded time limit",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "io/FilereaderMps.h for MPS format",
+    "io/FilereaderLp.h for LP format",
+    "io/HMpsFF.h for free-format MPS parser"
+  ]
+}

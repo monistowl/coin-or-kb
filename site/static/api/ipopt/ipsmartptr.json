@@ -1,0 +1,13 @@
+{
+  "name": "IpSmartPtr",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpSmartPtr.hpp",
+  "brief": "Intrusive reference-counting smart pointer for Ipopt\n\nProvides SmartPtr<T> template class implementing automatic memory\nmanagement via reference counting. All managed objects must inherit\nfrom ReferencedObject. Used throughout Ipopt for safe object lifetime\nmanagement without manual delete calls.\n\nKey design: intrusive (count stored in object) vs non-intrusive\n(count stored externally). Intrusive chosen to avoid double-counting\nwhen raw pointers are passed between SmartPtr instances.\n\n@note Does NOT handle circular references - use weak pointers or\nexplicit release methods for bidirectional object graphs.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpReferenced.hpp for ReferencedObject base class",
+    "IpObserver.hpp for observer pattern using SmartPtr"
+  ]
+}

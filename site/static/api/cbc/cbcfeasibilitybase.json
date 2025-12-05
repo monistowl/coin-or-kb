@@ -1,0 +1,19 @@
+{
+  "name": "CbcFeasibilityBase",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcFeasibilityBase.hpp",
+  "brief": "User-defined feasibility checking",
+  "algorithms": [
+    {
+      "name": "User-Defined Feasibility Override Interface\nCopyright (C) 2005, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcFeasibilityBase: Allows user to override default feasibility tests.\nCalled after LP solve to let user examine solution and declare status.\n\nfeasible() return values:\n- 0: Use default determination\n- 1: Pretend solution is integer feasible\n- -1: Pretend problem is infeasible\n\nmode parameter:\n- 0: Called after solve, before cuts\n- -1: Called after strong branching\n\nUse cases:\n- Accept near-integer solutions as integer\n- Reject solutions violating problem-specific constraints\n- Implement custom tolerances",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcModel::setFeasibilityTest()"
+  ]
+}

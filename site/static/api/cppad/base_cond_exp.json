@@ -1,0 +1,9 @@
+{
+  "name": "base_cond_exp",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/base_cond_exp.hpp",
+  "brief": "Core AD functionality: base cond exp",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,16 @@
+{
+  "name": "BCP_math",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_math.hpp",
+  "brief": "Mathematical constants for BCP",
+  "algorithms": [
+    {
+      "name": "Math Constants: BCP_DBL_MAX\n\nDefines BCP_DBL_MAX = 1e100 as \"infinity\" for optimization bounds.\nUsed instead of DBL_MAX to avoid numerical issues with infinity\narithmetic in LP solvers.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

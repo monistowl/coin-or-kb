@@ -1,0 +1,9 @@
+{
+  "name": "OSDataStructures",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSUtils/OSDataStructures.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

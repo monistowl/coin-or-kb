@@ -1,0 +1,9 @@
+{
+  "name": "cpp_graph_itr",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/graph/cpp_graph_itr.hpp",
+  "brief": "Computational graph: cpp_graph_itr",
+  "algorithms": [],
+  "methods": []
+}

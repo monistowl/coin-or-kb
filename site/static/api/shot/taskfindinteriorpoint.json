@@ -1,0 +1,20 @@
+{
+  "name": "TaskFindInteriorPoint",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskFindInteriorPoint.h",
+  "brief": "Find strictly feasible interior point for ESH\n\nCritical for ESH: rootsearch needs interior point endpoint.\n\n**TaskFindInteriorPoint Class:**\n- NLPSolvers: Solvers for finding interior\n- run(): Attempt to find strictly feasible point\n\n**Interior Point Methods:**\n- Solve feasibility problem with slack maximization\n- Use NLP solver (Ipopt) with modified objective\n- Required for ESH rootsearch to work",
+  "algorithms": [
+    {
+      "name": "Interior Point Finding via Slack Maximization",
+      "math": "Solve: max s subject to g_i(x) \u2264 -s for all constraints i.\n      If s* > 0, point x* is strictly interior (all constraints slack).\n      Required for ESH rootsearch: interpolates interior \u2192 exterior.",
+      "complexity": "O(NLP solve). Uses Ipopt or minimax cutting-plane.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "TaskUpdateInteriorPoint.h for runtime updates",
+    "RootsearchMethod/ for interior point usage"
+  ]
+}

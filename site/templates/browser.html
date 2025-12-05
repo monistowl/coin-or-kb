@@ -958,27 +958,20 @@
     // Load data
     async function init() {
         try {
-            const [treeResp, indexResp, briefsResp] = await Promise.all([
+            const [treeResp, briefsResp] = await Promise.all([
                 fetch(BASE_URL + '/api/source-tree.json'),
-                fetch(BASE_URL + '/api/coinutils/index.json').catch(() => ({ ok: false })),
                 fetch(BASE_URL + '/api/class-briefs.json').catch(() => ({ ok: false }))
             ]);
 
             treeData = await treeResp.json();
 
-            if (indexResp.ok) {
-                const indexData = await indexResp.json();
-                docsIndex = new Set(indexData.classes.map(function(c) {
-                    return typeof c === 'string' ? c : c.name;
-                }));
-            } else {
-                docsIndex = new Set();
-            }
-
             if (briefsResp.ok) {
                 classBriefs = await briefsResp.json();
+                // Build docsIndex from all documented classes
+                docsIndex = new Set(Object.keys(classBriefs));
             } else {
                 classBriefs = {};
+                docsIndex = new Set();
             }
 
             renderTree();

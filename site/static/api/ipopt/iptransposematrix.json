@@ -1,0 +1,19 @@
+{
+  "name": "IpTransposeMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpTransposeMatrix.hpp",
+  "brief": "Matrix wrapper representing transpose of another matrix\n\nTransposeMatrix wraps an existing matrix M to represent M^T without\nexplicitly forming the transpose. MultVector becomes TransMultVector\non the original, and vice versa.",
+  "algorithms": [
+    {
+      "name": "Transpose via Operation Swapping:\n  Represents M^T by wrapping matrix M.\n  MultVector(x): y \u2190 \u03b1(M^T)x + \u03b2y \u2192 calls M.TransMultVector(x).\n  TransMultVector(x): y \u2190 \u03b1(M^T)^T x = \u03b1Mx \u2192 calls M.MultVector(x).\n  ComputeRowAMax \u2194 ComputeColAMax swapped similarly.",
+      "math": "Transpose properties exploited:\n  (M^T)^T = M (involution)\n  (M^T)x = M^T x computed as transpose-mult on M\n  NRows(M^T) = NCols(M), NCols(M^T) = NRows(M)",
+      "complexity": "Zero additional storage beyond pointer to original.\n  All operations delegate to original with same complexity.\n  Adapter pattern: interface transformation without data copy.\n\nUsed in Ipopt for:\n- Accessing Jacobian as J or J^T without storing both\n- Building KKT system blocks from constraint Jacobian\n- Symmetric operations that need both A and A^T",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMatrix.hpp for base interface"
+  ]
+}

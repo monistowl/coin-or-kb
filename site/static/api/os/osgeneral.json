@@ -1,0 +1,9 @@
+{
+  "name": "OSGeneral",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSCommonInterfaces/OSGeneral.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

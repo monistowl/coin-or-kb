@@ -1,0 +1,21 @@
+{
+  "name": "BonIpoptSolver",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/Ipopt/BonIpoptSolver.hpp",
+  "brief": "Ipopt implementation of TNLPSolver for NLP subproblems",
+  "algorithms": [
+    {
+      "name": "Ipopt Interior Point Solver for MINLP Node Relaxations\n\nWraps Ipopt's IpoptApplication to solve continuous NLP relaxations within\nBonmin's branch-and-bound framework. Provides warm starting capabilities\nessential for efficient node processing.\n\n**Key features:**\n- OptimizeTNLP()/ReOptimizeTNLP(): Solve NLPs via Ipopt\n- Warm start strategies: none, optimal point, interior point\n- Status translation: Maps Ipopt return codes to TNLPSolver::ReturnStatus\n\n**Warm start strategies (warmStartStrategy_):**\n- 0: No warm start\n- 1: Simple warm start from optimal point\n- 2: Interior point warm start (preserves barrier info)",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "TNLPSolver for the abstract interface",
+    "IpoptWarmStart for warm start data storage",
+    "IpoptInteriorWarmStarter for advanced interior point warm start"
+  ]
+}

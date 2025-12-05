@@ -1,0 +1,12 @@
+{
+  "name": "CbcModel",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CbcModel.h",
+  "brief": ".NET wrapper for CbcModel (COIN-OR Branch and Cut)\n\nC++/CLI wrapper exposing CBC MIP solver to .NET languages.\nWraps branch-and-bound with cut generation capabilities.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CbcEventHandler.h, CbcCutGenerator.h, CbcStrategy.h"
+  ]
+}

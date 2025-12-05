@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_Random",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_Random.hpp",
+  "brief": "Random number generation for Mongoose algorithms\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nSimple random number interface: random() returns Int, setRandomSeed()\ninitializes generator. Used by random matching, random initial cuts,\nand tie-breaking in algorithms. Seed set via EdgeCut_Options::random_seed.",
+  "algorithms": [
+    {
+      "name": "Reproducible Randomization:\nProvides deterministic pseudo-random sequence for algorithm reproducibility:\n\nUsage in Mongoose:\n- Random matching: select random neighbor when ties occur\n- Random initial cut: assign vertices randomly at coarsest level\n- Tie-breaking: deterministic choice when gains are equal\n\nReproducibility: Same seed \u2192 same random sequence \u2192 identical partitions.\nSet via EdgeCut_Options::random_seed to enable reproducible experiments.",
+      "math": "",
+      "complexity": "O(1) per random number generation.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_EdgeCutOptions.hpp for random_seed option",
+    "Mongoose_Matching.hpp for random matching strategy"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "HighsMipSolver",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsMipSolver.h",
+  "brief": "Branch-and-cut MIP solver",
+  "algorithms": [
+    {
+      "name": "Branch-and-Cut for Mixed-Integer Programming:\nCombines branch-and-bound with cutting planes for MIP.\n\nOVERALL FLOW:\n  1. PRESOLVE: Reduce problem size and tighten formulation\n  2. ROOT NODE: Solve LP relaxation, add cuts, find initial solutions\n  3. BRANCH-AND-BOUND: Explore tree until proven optimal\n  4. POSTSOLVE: Restore original solution space\n\nROOT NODE PROCESSING:\n  while (progress):\n    Solve LP relaxation\n    Add violated cuts (Gomory, MIR, clique, cover)\n    Run primal heuristics (diving, RINS, RENS)\n    Update bounds\n\nBRANCH-AND-BOUND TREE:\n  Initialize: dual_bound = root_LP_obj, primal_bound = +inf\n  while (open_nodes and gap > tolerance):\n    Select node (best-first, depth-first, hybrid)\n    Solve LP relaxation\n    if (LP_infeasible or LP_obj >= primal_bound):\n      Prune node\n    elif (solution is integer):\n      Update primal_bound if better\n      Prune node\n    else:\n      Add cuts if violated\n      Branch on fractional integer variable",
+      "math": "Optimality gap: gap = (primal_bound - dual_bound) / |primal_bound|\n  Termination when gap <= mip_rel_gap tolerance (default 0.01%)",
+      "complexity": "- Worst case: exponential in number of integer variables\n- Practice: often polynomial due to pruning and cuts\n- Root processing: O(cuts * LP_iterations)",
+      "ref": [
+        "Achterberg, Bixby, Gu, Rothberg & Weninger (2020).\n  \"Presolve Reductions in Mixed Integer Programming\". INFORMS J. Computing.\n\n**HighsMipSolver Class:**\nMain MIP solver using branch-and-cut with LP relaxations.\n\n**Key State:**\n- model_/orig_model_: Problem LP with integrality constraints\n- solution_: Best incumbent solution found\n- dual_bound_/primal_bound_: Bounds on optimal value\n- gap_: Optimality gap (primal_bound - dual_bound) / primal_bound\n- node_count_: Number of B&B nodes explored\n\n**Sub-MIP Support:**\n- submip/submip_level: For recursive sub-MIP solves (e.g., in heuristics)\n- rootbasis: Starting basis from parent MIP\n- pscostinit: Warm-start pseudocosts\n- clqtableinit/implicinit: Warm-start conflict graph structures\n\n**HighsTerminator:**\nParallel termination coordination for concurrent MIP instances.\n\n**Main Entry:**\n- run(): Execute MIP solve (presolve, root LP, branch-and-cut)\n- runMipPresolve(): Standalone presolve for warm-start scenarios"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "mip/HighsMipSolverData.h for internal B&B data",
+    "mip/HighsCutPool.h for cutting plane management",
+    "mip/HighsCliqueTable.h for clique detection"
+  ]
+}

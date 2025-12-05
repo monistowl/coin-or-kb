@@ -1,0 +1,20 @@
+{
+  "name": "IpConvCheck",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpConvCheck.hpp",
+  "brief": "Strategy interface for checking algorithm termination\n\nConvergenceCheck is the abstract base for convergence testing\nstrategies. Called each iteration to determine if optimization\nshould continue, has converged, or has failed.",
+  "algorithms": [
+    {
+      "name": "Convergence Testing for Interior Point Methods:\n  Check scaled optimality conditions at each iteration:\n  1. Primal feasibility: ||c(x)||\u221e / s_c \u2264 tol_feas.\n  2. Dual feasibility: ||\u2207f - J^T y - z||\u221e / s_d \u2264 tol_dual.\n  3. Complementarity: ||XZe||\u221e / s_c \u2264 tol_compl.\n  4. Scaling: s_c = max(1, ||c||), s_d = max(1, ||\u2207f||, ||y||, ||z||).\n  Acceptable point: same conditions with looser acceptable_tol.\n  After n_acceptable iterations at acceptable level \u2192 stop.",
+      "math": "Optimality conditions (KKT) being checked:\n  \u2207f(x) - J_c^T y_c - J_d^T y_d - z_L + z_U = 0 (stationarity)\n  c(x) = 0 (equality constraints)\n  d_L \u2264 d(x) \u2264 d_U (inequality constraints)\n  x_L \u2264 x \u2264 x_U, z_L \u2265 0, z_U \u2264 0 (bounds + sign)\n  (x - x_L)\u00b7z_L = 0, (x_U - x)\u00b7z_U = 0 (complementarity)",
+      "complexity": "O(n + m) per convergence check (norms of vectors).\n  Called once per iteration, negligible vs. linear solve cost.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpOptErrorConvCheck.hpp for the main implementation",
+    "IpRestoConvCheck.hpp for restoration phase convergence"
+  ]
+}

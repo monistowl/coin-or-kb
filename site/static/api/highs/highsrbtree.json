@@ -1,0 +1,13 @@
+{
+  "name": "HighsRbTree",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsRbTree.h",
+  "brief": "Array-based Red-Black tree with CRTP interface\n\nSelf-balancing BST using indices instead of pointers for cache efficiency.\n\n**CRTP Pattern:**\n- RbTreeTraits<Impl>: Define KeyType and LinkType\n- Impl::getRbTreeLinks(): Return reference to RbTreeLinks\n- Impl::getKey(): Return comparable key value\n\n**RbTreeLinks Structure:**\n- child[2]: Left/right child indices\n- parentAndColor: Parent packed with color bit (saves storage)\n- Works with both integer and pointer LinkTypes\n\n**Tree Operations:**\n- link(): Insert node, rebalance via red-black rotations\n- unlink(): Remove node with transplant and fixup\n- find(): Search returning (node, exact_match) pair\n- first()/last(): Minimum/maximum in subtree\n- successor()/predecessor(): In-order traversal\n\n**CacheMinRbTree Variant:**\n- Maintains cached pointer to minimum element\n- O(1) access to first() for priority queue usage\n\n**Usage in HiGHS:**\n- HighsNodeQueue: Priority queue for B&B nodes by bound\n- Efficient ordered containers with O(log n) operations",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsNodeQueue.h for node selection",
+    "util/HighsSplay.h for alternative tree structure"
+  ]
+}

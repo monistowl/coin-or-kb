@@ -1,0 +1,20 @@
+{
+  "name": "BCP_lp",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_lp.hpp",
+  "brief": "LP process for BCP Branch-Cut-Price framework",
+  "algorithms": [
+    {
+      "name": "LP Worker: Relaxation Solving with Cut/Column Generation\n\nThe LP process is the workhorse that actually solves subproblems:\n- Solves LP relaxations via OsiSolverInterface\n- Generates cuts locally or receives from Cut Generator\n- Generates variables locally or receives from Variable Generator\n- Tests feasibility and applies heuristics\n- Performs branching when stuck\n\n**Key classes:**\n- BCP_lp_prob: Central LP state (solver, pools, current node)\n- BCP_lp_statistics: Timing for feas/cut/var/heuristics/LP/branching\n\n**Problem structure:**\n- core: Variables/cuts that always stay in formulation\n- node/parent: Current search tree node and its parent\n- local_var_pool, local_cut_pool: Generated vars/cuts pending addition\n- slack_pool: Removed cuts kept for potential branching\n\n**LP solving:**\n- master_lp: Original LP solver (template)\n- lp_solver: Working LP solver for current node\n- lp_result: Most recent LP optimization result\n- warmstartRoot: Optional warm start from root for all nodes",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_lp_user for user customization hooks",
+    "BCP_tm.hpp for Tree Manager that assigns work"
+  ]
+}

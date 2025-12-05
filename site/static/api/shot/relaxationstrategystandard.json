@@ -1,0 +1,19 @@
+{
+  "name": "RelaxationStrategyStandard",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/RelaxationStrategyStandard.h",
+  "brief": "Standard LP-to-MIP relaxation strategy\n\nImplements the default relaxation phase behavior.\n\n**RelaxationStrategyStandard Class:**\n- executeStrategy(): Decide LP vs MIP solve\n- setActive()/setInactive(): Control strategy state\n- setInitial(): Reset for new problem\n\n**LP Phase Termination:**\n- isIterationLimitReached(): Max LP iterations\n- isTimeLimitReached(): LP time budget\n- isLPStepFinished(): Convergence detection\n- isObjectiveStagnant(): No bound improvement\n\n**Algorithm:**\n- Initial iterations solve LP for fast hyperplanes\n- Switch to MIP after LP phase completion\n- LPFinished flag tracks phase transition",
+  "algorithms": [
+    {
+      "name": "LP-to-MIP Phase Transition Strategy",
+      "math": "LP phase: Solve LP relaxation (fast) to generate hyperplanes quickly.\n      Transition to MIP when: iteration limit reached, time budget exceeded,\n      or dual bound improvement stagnates (|z^LP_k - z^LP_{k-1}| < \u03b5).\n      MIP phase: Solve full MILP for valid dual bounds.",
+      "complexity": "O(phase detection). LP phase typically 10-100 iterations.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IRelaxationStrategy.h for interface"
+  ]
+}

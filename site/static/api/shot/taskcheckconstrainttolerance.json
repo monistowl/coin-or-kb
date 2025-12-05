@@ -1,0 +1,13 @@
+{
+  "name": "TaskCheckConstraintTolerance",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskCheckConstraintTolerance.h",
+  "brief": "Termination check for constraint feasibility\n\nVerifies primal solution satisfies all constraints.\n\n**TaskCheckConstraintTolerance Class:**\n- taskIDIfTrue: Jump target when feasible\n- run(): Check max constraint violation < ConstraintTolerance\n\n**Usage:**\n- Validates feasibility of best primal solution\n- Required for declaring optimality",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Results.h for constraint violation tracking",
+    "TaskCheckAbsoluteGap.h for gap check"
+  ]
+}

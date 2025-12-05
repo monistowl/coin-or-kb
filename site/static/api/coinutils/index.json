@@ -1,130 +1,346 @@
 {
   "library": "CoinUtils",
-  "layer": 0,
-  "base_url": "/api/coinutils",
+  "layer": "layer-0",
   "classes": [
-    "BKVertex",
-    "BitVector128",
-    "CoinAbsFltEq",
-    "CoinAdjacencyVector",
-    "CoinArbitraryArrayWithLength",
-    "CoinArrayWithLength",
-    "CoinBaseModel",
-    "CoinBigIndexArrayWithLength",
-    "CoinBronKerbosch",
-    "CoinBuild",
-    "CoinCliqueExtender",
-    "CoinCliqueList",
-    "CoinCliqueSet",
-    "CoinConflictGraph",
-    "CoinCut",
-    "CoinCutPool",
-    "CoinDenseFactorization",
-    "CoinDenseVector",
-    "CoinDoubleArrayWithLength",
-    "CoinDynamicConflictGraph",
-    "CoinError",
-    "CoinExternalVectorFirstGreater_2",
-    "CoinExternalVectorFirstGreater_3",
-    "CoinExternalVectorFirstLess_2",
-    "CoinExternalVectorFirstLess_3",
-    "CoinFactorization",
-    "CoinFactorizationDoubleArrayWithLength",
-    "CoinFactorizationLongDoubleArrayWithLength",
-    "CoinFileIOBase",
-    "CoinFileInput",
-    "CoinFileOutput",
-    "CoinFirstAbsGreater_2",
-    "CoinFirstAbsGreater_3",
-    "CoinFirstAbsLess_2",
-    "CoinFirstAbsLess_3",
-    "CoinFirstGreater_2",
-    "CoinFirstGreater_3",
-    "CoinFirstLess_2",
-    "CoinFirstLess_3",
-    "CoinHashLink",
-    "CoinIndexedVector",
-    "CoinIntArrayWithLength",
-    "CoinLpIO",
-    "CoinMessage",
-    "CoinMessageHandler",
-    "CoinMessages",
-    "CoinModel",
-    "CoinModelHash",
-    "CoinModelHash2",
-    "CoinModelHashLink",
-    "CoinModelHashLink2",
-    "CoinModelInfo2",
-    "CoinModelLink",
-    "CoinModelLinkedList",
-    "CoinModelTriple",
-    "CoinMpsCardReader",
-    "CoinMpsIO",
-    "CoinNodeHeap",
-    "CoinOddWheelSeparator",
-    "CoinOneMessage",
-    "CoinOslFactorization",
-    "CoinOtherFactorization",
-    "CoinPackedMatrix",
-    "CoinPackedVector",
-    "CoinPackedVectorBase",
-    "CoinPair",
-    "CoinParam",
-    "CoinPartitionedVector",
-    "CoinPlainFileInput",
-    "CoinPostsolveMatrix",
-    "CoinPrePostsolveMatrix",
-    "CoinPresolveAction",
-    "CoinPresolveMatrix",
-    "CoinPresolveMonitor",
-    "CoinRational",
-    "CoinRelFltEq",
-    "CoinSearchTree",
-    "CoinSearchTreeBase",
-    "CoinSearchTreeCompareBest",
-    "CoinSearchTreeCompareBreadth",
-    "CoinSearchTreeCompareDepth",
-    "CoinSearchTreeComparePreferred",
-    "CoinSearchTreeManager",
-    "CoinSet",
-    "CoinShallowPackedVector",
-    "CoinShortestPath",
-    "CoinSimpFactorization",
-    "CoinSnapshot",
-    "CoinSosSet",
-    "CoinStaticConflictGraph",
-    "CoinStructuredModel",
-    "CoinThreadRandom",
-    "CoinTimer",
-    "CoinTreeNode",
-    "CoinTreeSiblings",
-    "CoinTriple",
-    "CoinUnsignedIntArrayWithLength",
-    "CoinVoidStarArrayWithLength",
-    "CoinWarmStart",
-    "CoinWarmStartBasis",
-    "CoinWarmStartBasisDiff",
-    "CoinWarmStartDiff",
-    "CoinWarmStartDual",
-    "CoinWarmStartDualDiff",
-    "CoinWarmStartPrimalDual",
-    "CoinWarmStartPrimalDualDiff",
-    "CoinWarmStartVector",
-    "CoinWarmStartVectorDiff",
-    "CoinWarmStartVectorPair",
-    "CoinWarmStartVectorPairDiff",
-    "CoinYacc",
-    "_EKKfactinfo",
-    "action",
-    "ampl_info",
-    "coinOwned",
-    "do_tighten_action",
-    "doubleton_action",
-    "drop_empty_cols_action",
-    "drop_empty_rows_action",
-    "drop_zero_coefficients_action",
-    "dropped_zero",
-    "dupcol_action"
-  ],
-  "count": 122
+    {
+      "name": "CoinAdjacencyVector",
+      "brief": "Vector of growable vectors",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinAlloc",
+      "brief": "Memory pool allocator for small fixed-size blocks\n\nOptional memory pool that reduces malloc overhead for small allocations.\nConfigure with COINUTILS_MEMPOOL_MAXPOOLED and COINUTILS_MEMPOOL_ALIGNMENT.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinBronKerbosch",
+      "brief": "Bron-Kerbosch Algorithm for maximal clique enumeration",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinBuild",
+      "brief": "Efficient row-by-row or column-by-column model construction\n\nCoinBuild accumulates rows or columns for batch addition to a model.\nMore efficient than adding one row/column at a time to CoinPackedMatrix.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinCliqueExtender",
+      "brief": "Clique extender",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinCliqueList",
+      "brief": "Sequential storage for cliques found in conflict graphs",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinCliqueSet",
+      "brief": "Set of cliques",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinConflictGraph",
+      "brief": "Conflict graph for binary variable incompatibilities in MIP",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinCutPool",
+      "brief": "Class for storing a pool of cuts",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinDenseFactorization",
+      "brief": "Dense matrix factorization and CoinOtherFactorization base class\n\nProvides CoinOtherFactorization abstract base class for alternative\nfactorization methods, plus CoinDenseFactorization for small dense\nproblems using LAPACK-style LU.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinDenseVector",
+      "brief": "Dense vector template with element-wise arithmetic operations\n\nCoinDenseVector<T> stores all elements in a contiguous array.\nUnlike sparse vectors, every position has storage. Supports\narithmetic operators (+, -, *, /) with other dense vectors.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinDistance",
+      "brief": "Platform-independent iterator distance utilities\n\nProvides wrapper functions around std::distance to ensure consistent\nbehavior across different compilers and platforms. These utilities are\nused throughout COIN-OR for iterator-based calculations.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinDynamicConflictGraph",
+      "brief": "CoinConflictGraph implementation which supports modifications.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinError",
+      "brief": "Exception class and assertion macros for COIN-OR error handling\n\nProvides CoinError, a rich exception class that captures context about\nwhere and why an error occurred, plus assertion macros that can optionally\nthrow CoinError instead of calling abort().",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinFactorization",
+      "brief": "LU factorization of sparse basis matrix for simplex\n\nImplements LU factorization with hyper-sparse handling for efficient\nFTRAN/BTRAN operations. Supports rank-one updates during pivoting.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinFileIO",
+      "brief": "Abstract file I/O with automatic compression detection\n\nProvides CoinFileInput and CoinFileOutput base classes with factory\nmethods that auto-detect gzip/bzip2 compression. Used by CoinMpsIO\nand CoinLpIO for reading/writing problem files.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinFinite",
+      "brief": "Numeric limit constants and floating-point validation functions\n\nProvides platform-independent definitions for numeric limits (COIN_DBL_MAX,\nCOIN_INT_MAX, etc.) and functions to check for special floating-point values\n(infinity, NaN). These are fundamental utilities used throughout COIN-OR\nfor bounds checking and numerical validation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinFloatEqual",
+      "brief": "Function objects for testing equality of real numbers\n\nTwo objects are provided; one tests for equality to an absolute tolerance,\none to a scaled tolerance. The tests will handle IEEE floating point, but\nnote that infinity == infinity. Mathematicians are rolling in their graves,\nbut this matches the behaviour for the common practice of using\n<code>DBL_MAX</code> (<code>numeric_limits<double>::max()</code>, or similar\nlarge finite number) as infinity.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinHelperFunctions",
+      "brief": "Low-level utility functions for array manipulation, copying, and comparison\n\nProvides optimized template functions for common array operations used throughout\nCOIN-OR: copying (with Duff's device optimization), filling, zeroing, sorting checks,\niota generation, and element deletion. Also includes random number generation and\nfile I/O utilities.\n\nMany functions offer ~2x speedup over naive loops via loop unrolling and\nDuff's device techniques.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinIndexedVector",
+      "brief": "Sparse vector with dense backing array for O(1) element access\n\nCoinIndexedVector combines sparse index storage with a dense values array,\nenabling O(1) random access while tracking which positions are non-zero.\nDesigned for simplex operations where sparse updates need fast access.\nHas optional \"packed\" mode that behaves more like CoinPackedVector.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinLpIO",
+      "brief": "LP file format reader/writer for linear programming problems\n\nReads/writes CPLEX LP format with Min/Max objective, constraints,\nbounds, and integer/binary variable declarations.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinMessage",
+      "brief": "Standard COIN-OR message definitions (enum and preloaded set)\n\nDefines COIN_Message enum for standard messages (MPS errors, presolve\ninfo, etc.) and CoinMessage class that preloads these into a handler.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinMessageHandler",
+      "brief": "Flexible message handling with severity levels and i18n support\n\nProvides CoinMessageHandler for formatted output with:\n- Severity-based filtering (warnings, errors, info)\n- Detail/logging levels\n- Multi-language support (messages default to US English)\n- Output to stdout or FILE pointer",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinModel",
+      "brief": "High-level model building with string names and expressions\n\nCoinModel provides a flexible interface for constructing LP/MIP models.\nSupports row/column names, string-based expressions, and incremental\nbuilding. Convert to CoinPackedMatrix for solver use.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinModelUseful",
+      "brief": "Helper classes for CoinModel (Link, LinkedList, Hash)",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinMpsIO",
+      "brief": "MPS file format reader/writer for LP and MIP problems\n\nReads/writes standard MPS format including extensions for quadratic,\nconic, and SOS constraints. Supports free format and compression.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinNodeHeap",
+      "brief": "Monotone min-heap for Dijkstra's algorithm",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinOddWheelSeparator",
+      "brief": "Odd-wheel cut separator",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinOslFactorization",
+      "brief": "LU factorization derived from IBM OSL (Optimization Subroutine Library)\n\nPort of OSL's factorization code. Provides alternative to CoinFactorization\nwith different numerical characteristics and update strategies.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPackedMatrix",
+      "brief": "Sparse matrix stored in compressed row or column format\n\nCoinPackedMatrix represents a sparse matrix using compressed storage.\nCan be stored row-major or column-major. Efficient for major-dimension\noperations (accessing rows in row-major, columns in column-major).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPackedVector",
+      "brief": "Sparse vector that owns its index/value storage\n\nCoinPackedVector stores a sparse vector as parallel arrays of indices\nand values. Unlike CoinShallowPackedVector, this class owns its storage\nand supports modification operations.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPackedVectorBase",
+      "brief": "Abstract base class for read-only sparse vector access\n\nProvides the read-only interface for sparse vectors stored as parallel\nindex/value arrays. This is the base class for CoinPackedVector (owning)\nand CoinShallowPackedVector (non-owning reference).",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinParam",
+      "brief": "Command line parameter parsing with keyword matching\n\nProvides base class for 'keyword value' parameters with support for\ninteger, double, string, and keyword-set values. Includes partial\nkeyword matching, range validation, and help text.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinPragma",
+      "brief": "Compiler-specific pragma settings (mainly MSVC warnings)",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinPresolveDoubleton",
+      "brief": "Doubleton row presolve: substitute y from ax+by=c",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveDual",
+      "brief": "Fix variables using dual bounds and reduced cost analysis",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveDupcol",
+      "brief": "Detect and remove duplicate columns and rows",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveEmpty",
+      "brief": "Drop and reinsert empty rows/columns\n\nShould be last presolve step. Physical removal of empty entities.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveFixed",
+      "brief": "Remove fixed variables and make variables fixed",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveForcing",
+      "brief": "Forcing and useless constraint detection",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveImpliedFree",
+      "brief": "Detect and process implied free variables",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveIsolated",
+      "brief": "Handle isolated constraints (connected only by free variables)",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveMatrix",
+      "brief": "Core presolve data structures and action base class\n\nDefines CoinPrePostsolveMatrix (common base), CoinPresolveMatrix (for\npresolve), CoinPostsolveMatrix (for postsolve), and CoinPresolveAction\n(base class for all presolve transformations).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveMonitor",
+      "brief": "Monitor rows/columns for debugging presolve transforms",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinPresolvePsdebug",
+      "brief": "Debug and consistency checking for presolve\n\nEnable with PRESOLVE_DEBUG and PRESOLVE_CONSISTENCY defines.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinPresolveSingleton",
+      "brief": "Singleton row/column presolve transforms",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveSubst",
+      "brief": "Variable substitution from equality constraints",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveTighten",
+      "brief": "Tighten variable bounds using constraint propagation",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveTripleton",
+      "brief": "Tripleton row presolve: three-variable equation substitution",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveUseless",
+      "brief": "Remove useless (redundant) constraints",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinPresolveZeros",
+      "brief": "Drop and reintroduce explicit zero coefficients",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinRational",
+      "brief": "Rational number representation with double-to-rational conversion\n\nProvides a simple rational number class that can convert floating-point\nvalues to rational approximations. Useful in optimization for converting\nfloating-point coefficients to exact rational form when needed.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinSearchTree",
+      "brief": "Search tree data structures for branch-and-bound\n\nProvides tree node management with various comparison strategies\n(best-first, depth-first, breadth-first).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinShallowPackedVector",
+      "brief": "Non-owning sparse vector reference (view into external storage)\n\nCoinShallowPackedVector provides read-only access to sparse vector data\nstored elsewhere. It maintains only pointers, not copies. Use when you\nneed a lightweight view into a row/column of a CoinPackedMatrix.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinSignal",
+      "brief": "Cross-platform signal handler typedef (CoinSighandler_t)",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinSimpFactorization",
+      "brief": "Simple LU factorization for LP basis matrices\n\nStraightforward LU factorization implementation. Less optimized than\nCoinFactorization but simpler and useful as reference implementation.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinSmartPtr",
+      "brief": "Intrusive reference-counted smart pointer",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinSnapshot",
+      "brief": "Lightweight read-only snapshot of problem state at a B&B node\n\nCoinSnapshot captures problem data for cut generators and branching code.\nMay own or reference external arrays (see owned_ flag). Designed for\npassing problem state without copying full solver structures.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinSort",
+      "brief": "Sorting utilities for pairs, triples, and parallel arrays\n\nProvides CoinPair, CoinTriple, and sort functions for sorting\nmultiple related arrays together (e.g., indices and values).",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinStaticConflictGraph",
+      "brief": "static CoinConflictGraph implementation with fast queries",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinStructuredModel",
+      "brief": "Block-structured model composed of CoinModel blocks",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinTime",
+      "brief": "Cross-platform timing utilities (CPU and wall clock)\n\nProvides CoinCpuTime() and CoinWallclockTime() that work on\nWindows, Mac, and Unix/Linux platforms.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinUtility",
+      "brief": "Factory functions for CoinPair and CoinTriple\n\nProvides convenience functions for creating CoinPair and CoinTriple objects\nwith automatic template argument deduction, similar to std::make_pair.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinWarmStart",
+      "brief": "Abstract interfaces for warm start information in optimization solvers",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinWarmStartBasis",
+      "brief": "Simplex basis warm start with variable status (basic/nonbasic)\n\nStores status of each variable (structural and artificial) using\n2 bits per variable. Includes diff capability for branch-and-bound.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinWarmStartDual",
+      "brief": "Warm start using dual variable values only\n\nStores dual solution vector for warm starting interior point methods\nor dual simplex. Includes diff capability for branch-and-bound.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinWarmStartPrimalDual",
+      "brief": "Warm start using both primal and dual variable values\n\nStores both primal (column) and dual (row) solution vectors.\nUseful for interior point methods. Includes diff capability.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinWarmStartVector",
+      "brief": "Template warm start storing a single typed vector",
+      "has_algorithm": false
+    }
+  ]
 }

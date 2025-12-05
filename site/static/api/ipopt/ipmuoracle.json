@@ -1,0 +1,20 @@
+{
+  "name": "IpMuOracle",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpMuOracle.hpp",
+  "brief": "Strategy interface for suggesting barrier parameter values\n\nMuOracle is the abstract interface for components that compute\nsuggested values for the barrier parameter mu in adaptive (non-monotone)\nbarrier updates.",
+  "algorithms": [
+    {
+      "name": "Barrier Parameter Oracle Interface:\n  CalculateMu(mu_min, mu_max) \u2192 new_mu \u2208 [mu_min, mu_max]:\n  1. Analyze current iterate: complementarity gap, progress, quality.\n  2. Compute target mu balancing centrality vs progress toward optimum.\n  3. Clamp to [mu_min, mu_max] to respect globalization bounds.\n  4. Return false if computation fails (e.g., linear solve needed).",
+      "math": "Adaptive vs monotone barrier strategies:\n  Monotone: \u03bc_{k+1} = \u03c3\u00b7\u03bc_k with fixed \u03c3 < 1 (predictable decrease).\n  Adaptive: \u03bc chosen per-iteration to balance feasibility and optimality.\n  Quality function oracles: min_\u03c3 q(\u03c3) where q measures solution quality.\n  Probing oracles: try \u03bc candidates, pick best by predicted progress.",
+      "complexity": "O(linear_solve) per oracle call for predictor-based methods.\n  Simpler oracles (LOQO-style) are O(1) using only current complementarity.\n\nInterface:\n- CalculateMu(mu_min, mu_max, new_mu): Compute suggested mu in [mu_min, mu_max]\n- Returns false if suggestion cannot be computed (e.g., linear solve fails)\n\nImplementations:\n- QualityFunctionMuOracle: Minimize quality function over sigma\n- ProbingMuOracle: Try candidate mu values and select best\n- LoqoMuOracle: LOQO-style adaptive rule\n\nUsage in AdaptiveMuUpdate:\n- free_mu_oracle_: Computes mu in free (non-monotone) mode\n- fix_mu_oracle_: Optional, computes mu when switching to fixed mode\n\nThe oracle is called each iteration in free mode. If it returns\nfalse or the suggested mu doesn't satisfy globalization, the\nalgorithm may switch to fixed (monotone) mode.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpAdaptiveMuUpdate.hpp for usage",
+    "IpQualityFunctionMuOracle.hpp for quality function approach"
+  ]
+}

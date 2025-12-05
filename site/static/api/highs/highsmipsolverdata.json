@@ -1,0 +1,13 @@
+{
+  "name": "HighsMipSolverData",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsMipSolverData.h",
+  "brief": "Central data container for MIP solver state\n\nAggregates all MIP solver components and statistics.\n\n**MipSolutionSource enum:**\nTracks origin of solutions for statistics:\n- B: Branching, C: CentralRounding, F: FeasibilityPump\n- H: Heuristic, J: FeasibilityJump, L: SubMip\n- R: RandomizedRounding, S: SolveLp, X: UserSolution, Z: ZiRound\n\n**HighsPrimaDualIntegral:**\nTracks primal-dual gap integral for solution quality metric.\n\n**HighsMipSolverData Components:**\n\n*Core Structures:*\n- cutpool: Global cut storage\n- conflictPool: Learned conflict constraints\n- domain: Global domain with bounds and propagation\n- lp: LP relaxation solver\n- nodequeue: B&B tree node priority queue\n\n*Inference:*\n- cliquetable: Binary variable cliques\n- implications: Variable implications (VUB/VLB)\n- pseudocost: Branching score history\n- redcostfixing: Reduced cost-based bound fixing\n\n*Heuristics:*\n- heuristics: Primal heuristic controller\n- objectiveFunction: Objective analysis for probing\n\n*Symmetry:*\n- symmetries/globalOrbits: Symmetry detection/handling\n- SymmetryDetectionData: Async symmetry computation\n\n*Statistics:*\n- num_nodes/num_leaves: Tree exploration counts\n- total_lp_iterations: LP iteration counters by type\n- lower_bound/upper_bound: Best bounds\n- incumbent: Best solution vector\n\n**Key Methods:**\n- init/runSetup(): Initialize solver state\n- evaluateRootNode(): Root node processing\n- trySolution/addIncumbent(): Solution handling\n- performRestart(): Restart MIP search",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsMipSolver.h for solver interface",
+    "mip/HighsSearch.h for tree search"
+  ]
+}

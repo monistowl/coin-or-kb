@@ -1,0 +1,9 @@
+{
+  "name": "cons_rowcuts",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/heuristics/cons_rowcuts.h",
+  "brief": "constraint handler for rowcuts constraints\n        enables separation of convexification cuts during SCIP solution procedure",
+  "algorithms": [],
+  "methods": []
+}

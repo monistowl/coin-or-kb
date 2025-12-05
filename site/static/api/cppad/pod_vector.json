@@ -1,0 +1,9 @@
+{
+  "name": "pod_vector",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/pod_vector.hpp",
+  "brief": "Internal implementation: pod_vector",
+  "algorithms": [],
+  "methods": []
+}

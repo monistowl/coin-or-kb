@@ -1,0 +1,9 @@
+{
+  "name": "compare",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/compare.hpp",
+  "brief": "Core AD functionality: compare",
+  "algorithms": [],
+  "methods": []
+}

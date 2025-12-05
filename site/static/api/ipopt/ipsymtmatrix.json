@@ -1,0 +1,20 @@
+{
+  "name": "IpSymTMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/TMatrices/IpSymTMatrix.hpp",
+  "brief": "Symmetric sparse matrix in triplet (COO) format\n\nSymTMatrix stores symmetric sparse matrices using coordinate format:\nthree arrays (Irn, Jcn, Values) of length nnz representing nonzeros.",
+  "algorithms": [
+    {
+      "name": "Triplet/COO Format for Symmetric Matrices:\n  Only lower (or upper) triangle is stored due to symmetry.\n  Entry (i,j,v) represents A[i,j] = A[j,i] = v.\n  Duplicate entries at same (i,j) are summed - essential for\n  finite element assembly where element matrices overlap.",
+      "math": "Symmetric matrix-vector product y = A\u00b7x:\n  For each triplet (i, j, a_ij):\n  - y[i] += a_ij \u00b7 x[j]\n  - y[j] += a_ij \u00b7 x[i]  (if i \u2260 j, symmetry contribution)\n  Cost: O(nnz), no redundant storage of symmetric entries.",
+      "complexity": "O(nnz) for matrix-vector product.\n  Memory: O(nnz) for values + O(nnz) for indices.\n  Note: 1-based indexing (Fortran-style) for HSL solver compatibility.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpGenTMatrix.hpp for general (non-symmetric) triplet format",
+    "IpTripletToCSRConverter.hpp for CSR conversion"
+  ]
+}

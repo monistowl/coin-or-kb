@@ -1,0 +1,14 @@
+{
+  "name": "CoinError",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinError.hpp",
+  "brief": "Exception class and assertion macros for COIN-OR error handling\n\nProvides CoinError, a rich exception class that captures context about\nwhere and why an error occurred, plus assertion macros that can optionally\nthrow CoinError instead of calling abort().",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMessage.hpp for message handling without exceptions",
+    "CoinAssert macros for assertion-based error reporting",
+    "CoinError"
+  ]
+}

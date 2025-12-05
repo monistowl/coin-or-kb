@@ -1,0 +1,9 @@
+{
+  "name": "constants",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/routing/utilities/constants.hpp",
+  "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+  "algorithms": [],
+  "methods": []
+}

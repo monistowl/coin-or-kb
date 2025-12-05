@@ -1,0 +1,12 @@
+{
+  "name": "Mongoose_Debug",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_Debug.hpp",
+  "brief": "Debug macros, assertions, and diagnostic print functions\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nDebug infrastructure: ASSERT/DEBUG macros (disabled by NDEBUG),\nPR macro for printf debugging, IMPLIES/IFF logic macros. Print\nfunctions for cs matrices, EdgeCutProblem graphs, and QP state.\nEnable debugging by uncommenting #undef NDEBUG (very slow).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Mongoose_Logger.hpp for runtime-configurable logging"
+  ]
+}

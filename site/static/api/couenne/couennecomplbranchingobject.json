@@ -1,0 +1,23 @@
+{
+  "name": "CouenneComplBranchingObject",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneComplBranchingObject.hpp",
+  "brief": "Branching object for complementarity constraints",
+  "algorithms": [
+    {
+      "name": "Complementarity Branching for MPEC\n\nHandles branching on complementarity conditions x\u2081\u00b7x\u2082 = 0\n(or \u2264 0, \u2265 0 variants) arising in MPEC problems.\n\n**Branching strategy:**\nFor x\u2081\u00b7x\u2082 = 0, creates two children:\n- Left child: x\u2081 = 0 (fix first variable)\n- Right child: x\u2082 = 0 (fix second variable)\n\n**Sign variants:**\n- sign_ = 0: Classical x\u2081\u00b7x\u2082 = 0\n- sign_ = -1: x\u2081\u00b7x\u2082 \u2264 0 (opposite signs allowed)\n- sign_ = +1: x\u2081\u00b7x\u2082 \u2265 0 (same signs required)\n\n**MPEC context:**\nMathematical Programs with Equilibrium Constraints often have\ncomplementarity conditions like x \u22a5 (Ax - b) \u2265 0, meaning\nx \u2265 0, Ax - b \u2265 0, and x\u00b7(Ax - b) = 0.",
+      "math": "x\u2081 \u22a5 x\u2082 \u27fa x\u2081 \u2265 0, x\u2082 \u2265 0, x\u2081\u00b7x\u2082 = 0",
+      "complexity": "O(1) per branch operation",
+      "ref": [
+        "Bard, \"Practical Bilevel Optimization\", 1998",
+        "Ferris & Pang, \"Engineering and Economic Applications of\n     Complementarity Problems\", SIAM Review, 1997"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneComplObject which creates these branching objects",
+    "CouenneBranchingObject base class"
+  ]
+}

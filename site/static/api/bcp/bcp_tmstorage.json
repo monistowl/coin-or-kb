@@ -1,0 +1,20 @@
+{
+  "name": "BCP_tmstorage",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_tmstorage.hpp",
+  "brief": "BCP tree storage process",
+  "algorithms": [
+    {
+      "name": "Tree Storage: External Memory for Large Search Trees\n\nTree Storage (TS) process for storing search tree nodes externally.\n\n**BCP_ts_prob:**\nThe TS process manages external storage of tree nodes, variables,\nand cuts to allow the TM to handle trees larger than fit in memory.\n\n**Data structures:**\n- nodes: Map from node ID to BCP_ts_node_data (desc + user_data)\n- vars: Map from variable ID to BCP_var_algo*\n- cuts: Map from cut ID to BCP_cut_algo*\n\n**Usage:**\nTM sends storage/retrieval requests via messages. TS maintains\nthe mappings and serializes data to/from the message buffer.\n\n**Memory management:**\nMaxHeapSize parameter controls TS memory usage for cache decisions.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm.hpp for Tree Manager",
+    "BCP_node_change.hpp for node delta encoding"
+  ]
+}

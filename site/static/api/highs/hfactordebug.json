@@ -1,0 +1,9 @@
+{
+  "name": "HFactorDebug",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HFactorDebug.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

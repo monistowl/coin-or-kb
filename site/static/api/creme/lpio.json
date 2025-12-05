@@ -1,0 +1,12 @@
+{
+  "name": "lpio",
+  "library": "Creme",
+  "layer": "layer-4",
+  "header": "Creme/src/Base/lpio.h",
+  "brief": "LP file I/O functions for Creme solver\n\nread_problem(): Parse LP problem from file into sparseLP structure.\nprintLP(): Display LP problem contents.\nclearLP(): Deallocate LP memory.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sparse.h for sparseLP data structure"
+  ]
+}

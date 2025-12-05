@@ -1,0 +1,14 @@
+{
+  "name": "AlpsSearchStrategy",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsSearchStrategy.h",
+  "brief": "Node and subtree selection strategies for ALPS tree search\n\nDefines comparison classes for selecting which node or subtree to explore next.\ncompare(x,y) returns true if y should be processed before x.\n\n**Subtree selection (AlpsTreeSelection):**\n- AlpsTreeSelectionBest: Best quality subtree first\n- AlpsTreeSelectionBreadth: Shallowest root first\n- AlpsTreeSelectionDepth: Deepest root first\n- AlpsTreeSelectionEstimate: Best estimated solution first\n\n**Node selection (AlpsNodeSelection):**\n- AlpsNodeSelectionBest: Best bound first (minimize dual gap)\n- AlpsNodeSelectionBreadth: BFS (shallowest first)\n- AlpsNodeSelectionDepth: DFS (deepest first, finds solutions fast)\n- AlpsNodeSelectionEstimate: Best estimated solution first\n- AlpsNodeSelectionHybrid: Combination strategy\n\n**Hybrid strategy:**\nCombines best-first selection with diving for solution finding.\nselectNextNode() and createNewNodes() can be overridden.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsSearchStrategyBase for template base class",
+    "AlpsKnowledgeBroker::setNodeSelection() for configuration",
+    "AlpsSubTree::setNodeSelection() for per-subtree override"
+  ]
+}

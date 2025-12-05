@@ -1,0 +1,18 @@
+{
+  "name": "devexharrispricing",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/devexharrispricing.hpp",
+  "brief": "HiGHS Devex-Harris hybrid pricing\n\nCombined Devex and Harris ratio test for QP pricing.\nBalances accuracy and numerical stability.",
+  "algorithms": [
+    {
+      "name": "Devex-Harris Pricing for QP",
+      "math": "Select leaving variable: p = argmax_i \u03bb_i\u00b2/w_i (weighted DSE-like).\n      Weight update: w_i \u2190 max(w_i, (a_q[i]/a_q[p])\u00b2 \u00b7 w_p\u00b2).\n      Approximates steepest edge without full recomputation.\n      Reset weights when they grow too large (> 10\u2077).",
+      "complexity": "O(|active set|) per pricing. O(n) per weight update.",
+      "ref": [
+        "Harris (1973). Devex pricing for numerical stability."
+      ]
+    }
+  ],
+  "methods": []
+}

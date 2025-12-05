@@ -1,0 +1,13 @@
+{
+  "name": "TaskSelectHyperplanePointsObjectiveFunction",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskSelectHyperplanePointsObjectiveFunction.h",
+  "brief": "Hyperplane selection for nonlinear objective\n\nGenerates cuts for epigraph of nonlinear objective.\n\n**TaskSelectHyperplanePointsObjectiveFunction Class:**\n- run(): Process objective at current solutions\n- run(solPoints): Process specific solution points\n\n**Epigraph Linearization:**\n- Nonlinear objective reformulated as: min t, f(x) <= t\n- Generates cuts to approximate f(x) <= t constraint",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AuxiliaryVariables.h for epigraph variable",
+    "TaskSelectHyperplanePointsESH.h for constraint cuts"
+  ]
+}

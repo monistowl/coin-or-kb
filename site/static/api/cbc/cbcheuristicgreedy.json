@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicGreedy",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicGreedy.hpp",
+  "brief": "Greedy construction heuristics for set covering/partitioning\nCopyright (C) 2005, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nContains greedy heuristics suited for set covering/partitioning models:",
+  "algorithms": [
+    {
+      "name": "Greedy SOS/GUB - CbcHeuristicGreedySOS:\n  solution() for models with GUB structure:\n  Handles SOS constraints (originalRhs_=-1) and <= constraints.\n  algorithm_ bits: 1=current model, 2=solution-guided, 4=merit, 8/16=duals.",
+      "math": "Greedy ratio with perturbation:\n  ratio_j = c_j / coverage_j \u00d7 (1 + \u03b5\u00b7random).\n  \u03b5 larger with algorithm_ += 10.\n  Classic greedy O(n\u00b7m) where n=variables, m=constraints.\n\nAll three use algorithm_ flags:\n- 0: Use current upper bounds\n- 1: Use original upper bounds\n- +10: More perturbation in ratios\n- +100: Round up all >= 0.5",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for base class",
+    "CbcSOS for SOS constraint branching"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "CoinPresolveForcing",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveForcing.hpp",
+  "brief": "Forcing and useless constraint detection",
+  "algorithms": [
+    {
+      "name": "Forcing Constraint Detection:\n  Compute implied bounds on row activity: LB_i \u2264 \u03a3 a_ij x_j \u2264 UB_i\n  using variable bounds l_j \u2264 x_j \u2264 u_j\n\n  Useless constraint: LB_i \u2265 row_lb and UB_i \u2264 row_ub\n  - Constraint can never be violated \u2192 remove it\n\n  Forcing constraint: LB_i = row_ub or UB_i = row_lb\n  - All variables forced to bounds that achieve the activity limit\n  - Fix variables, remove constraint",
+      "math": "Activity bounds: LB_i = \u03a3_{a_ij>0} a_ij l_j + \u03a3_{a_ij<0} a_ij u_j\n  UB_i = \u03a3_{a_ij>0} a_ij u_j + \u03a3_{a_ij<0} a_ij l_j\n  Forcing: if UB_i = row_lb, then each term must achieve its min",
+      "complexity": "Time: O(nnz) to compute activity bounds for all rows\n  Very effective for tightly bounded problems\n  Can fix many variables simultaneously",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

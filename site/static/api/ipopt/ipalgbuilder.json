@@ -1,0 +1,25 @@
+{
+  "name": "IpAlgBuilder",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpAlgBuilder.hpp",
+  "brief": "Builder pattern for constructing configured IpoptAlgorithm\n\nAlgorithmBuilder assembles a complete IpoptAlgorithm from components\nbased on user options. This implements the Builder design pattern,\ncentralizing the complex construction logic.\n\nBuild order (with dependency chain):\n1. SymLinearSolver (MA27/57/77/86/97, MUMPS, Pardiso, WSMP, etc.)\n2. AugSystemSolver (wraps SymLinearSolver for augmented system)\n3. PDSystemSolver (solves full primal-dual system)\n4. SearchDirectionCalculator, EqMultiplierCalculator\n5. IterateInitializer, LineSearch, MuUpdate, ConvergenceCheck\n\nCustomization: Subclass and override virtual Build* methods,\nor provide custom_solver in constructor.",
+  "algorithms": [
+    {
+      "name": "Linear Solver Selection (SymLinearSolverFactory):\n  HSL solvers (preferred): MA27/57 (multifrontal), MA77/86/97 (out-of-core)\n  Alternatives: MUMPS (parallel), Pardiso (MKL/project), WSMP, SPRAL\n  Key requirement: handle indefinite symmetric matrices with inertia detection.",
+      "math": "[W + \u03a3  A'] [\u0394x]   [r_x]\n        [A      0 ] [\u0394y] = [r_c]\n  where W = \u2207\u00b2L (Hessian of Lagrangian), \u03a3 = X\u207b\u00b9Z (diagonal),\n  A = \u2207c(x)' (Jacobian). Solve via sparse symmetric factorization.",
+      "complexity": "Per iteration: O(n\u00b3) for dense, O(nnz^{1.5-2}) for sparse\n  Total: O(iterations \u00d7 linear_solve_cost) where iterations ~ O(\u221an) typical",
+      "ref": [
+        "Nocedal, J. and Wright, S.J. (2006). \"Numerical Optimization\".\n       Springer, Chapter 19 (Interior-Point Methods).",
+        "Fiacco, A.V. and McCormick, G.P. (1968). \"Nonlinear Programming:\n       Sequential Unconstrained Minimization Techniques\". Wiley.",
+        "Mehrotra, S. (1992). \"On the implementation of a primal-dual\n       interior point method\". SIAM J. Optimization 2(4):575-601.",
+        "W\u00e4chter, A. and Biegler, L.T. (2006). \"On the implementation\n       of an interior-point filter line-search algorithm for large-scale\n       nonlinear programming\". Math. Programming 106(1):25-57."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpIpoptAlg.hpp for resulting algorithm",
+    "IpIpoptApplication.hpp for high-level usage"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "IpPardisoMKLSolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpPardisoMKLSolverInterface.hpp",
+  "brief": "Interface to Intel MKL PARDISO sparse solver\n\nPardisoMKLSolverInterface wraps Intel's MKL implementation of PARDISO.\nWhile sharing the same API as pardiso-project.org's version, Intel MKL\nPARDISO has some differences in features and behavior.",
+  "algorithms": [
+    {
+      "name": "Intel MKL PARDISO LDL^T Factorization:\n  Multi-level nested dissection with supernodal blocking:\n  - Phase 11: Analysis - symbolic factorization, ordering\n  - Phase 22: Numerical factorization with threshold pivoting\n  - Phase 33: Forward/backward substitution\n  Automatic parallelism via Intel Threading Building Blocks (TBB).",
+      "math": "Computes A = P\u00b7L\u00b7D\u00b7L^T\u00b7P^T for MTYPE=-2 (symmetric indefinite):\n  - P = METIS nested dissection + constrained AMD refinement\n  - L = unit lower triangular with supernodal blocking\n  - D = block diagonal (1\u00d71 and 2\u00d72 Bunch-Kaufman pivots)\n  Weighted matching preprocessor improves pivot stability.",
+      "complexity": "O(n\u00b7f\u00b2/p) with p threads. Intel MKL provides highly\n  optimized BLAS3 kernels for dense supernode operations.\n  Typically 10-30% faster than HSL solvers on Intel CPUs.",
+      "ref": [
+        "Schenk & G\u00e4rtner (2004). \"Solving Unsymmetric Sparse Systems\n     of Linear Equations with PARDISO\". J. Future Gen. Comp. Sys.\n\nKey differences from pardiso-project.org version:\n- Linked directly with Intel MKL (no dynamic loading)\n- No DPARM array (only IPARM for parameters)\n- No iterative solver mode\n- Different default parameters in some cases\n\nInput format: CSR_Format_1_Offset (upper triangular)\nProvides inertia: Yes\nMTYPE=-2: Real symmetric indefinite\n\nMatching strategies same as pardiso-project.org version:\nCOMPLETE, COMPLETE2x2, CONSTRAINT\n\nIntroduced in Ipopt 3.14.0 as a distinct interface from the\npardiso-project.org version."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpPardisoSolverInterface.hpp for pardiso-project.org version",
+    "IpMa97SolverInterface.hpp for HSL alternative"
+  ]
+}

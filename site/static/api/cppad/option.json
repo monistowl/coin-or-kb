@@ -1,0 +1,9 @@
+{
+  "name": "option",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/atomic/two/option.hpp",
+  "brief": "Core AD functionality: option",
+  "algorithms": [],
+  "methods": []
+}

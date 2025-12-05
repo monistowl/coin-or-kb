@@ -1,0 +1,12 @@
+{
+  "name": "ClpModel",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/ClpModel.h",
+  "brief": ".NET wrapper for ClpModel (COIN-OR LP solver)\n\nC++/CLI wrapper exposing CLP simplex solver to .NET languages.\nSupports quadratic objectives via loadQuadraticObjective().",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ClpObjective.h, OsiClpSolverInterface.h"
+  ]
+}

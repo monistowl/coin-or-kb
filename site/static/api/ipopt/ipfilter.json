@@ -1,0 +1,23 @@
+{
+  "name": "IpFilter",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpFilter.hpp",
+  "brief": "Multi-dimensional filter for globalization (W\u00e4chter-Biegler)\n\nThe Filter implements the filter globalization mechanism where a\npoint is acceptable if it improves in at least one of multiple\nobjectives (typically constraint violation \u03b8 and objective \u03c6).\n\nFilter acceptance rule: A point (\u03b8, \u03c6) is acceptable to the filter\nif for every entry (\u03b8_i, \u03c6_i) in the filter, either \u03b8 < \u03b8_i or \u03c6 < \u03c6_i.\n\nKey concepts:\n- FilterEntry: Single entry storing coordinates and iteration number\n- Dominated entries are removed when new entries are added\n- Margin parameters (gamma_theta, gamma_phi) provide sufficient decrease\n\nClasses:\n- FilterEntry: Single point in the filter with coordinates\n- Filter: Container managing list of entries with add/query operations\n\nUsed by FilterLSAcceptor for filter line search acceptance tests.",
+  "algorithms": [
+    {
+      "name": "Filter Globalization (W\u00e4chter-Biegler):\nMulti-objective acceptance mechanism replacing merit function:\n1. Maintain set F of pairs (\u03b8, \u03c6) - constraint violation and objective\n2. Acceptable(\u03b8,\u03c6): return true if \u2203(\u03b8_i,\u03c6_i)\u2208F: \u03b8 < \u03b8_i OR \u03c6 < \u03c6_i\n3. AddEntry(\u03b8,\u03c6): add (\u03b8-\u03b3_\u03b8\u00b7\u03b8, \u03c6-\u03b3_\u03c6\u00b7\u03c6) and remove dominated entries\n4. Dominated: entry (\u03b8_i,\u03c6_i) dominated if \u03b8 \u2264 \u03b8_i AND \u03c6 \u2264 \u03c6_i",
+      "math": "Filter acceptance test (n-dimensional generalization):\nPoint v = (v\u2081,...,v\u2099) acceptable to filter F iff:\n  \u2200 e = (e\u2081,...,e\u2099) \u2208 F: \u2203j: v\u2c7c \u2264 e\u2c7c\n\nSufficient decrease via margins:\nAdd entry (\u03b8 - \u03b3_\u03b8\u00b7\u03b8, \u03c6 - \u03b3_\u03c6\u00b7\u03c6) rather than (\u03b8, \u03c6)\nwhere \u03b3_\u03b8, \u03b3_\u03c6 > 0 are margin parameters.\n\nDominance pruning:\nEntry e dominated by v if v\u2c7c \u2264 e\u2c7c for all j (remove e from filter).",
+      "complexity": "Acceptable: O(|F|\u00b7d) for d-dimensional filter.\nAddEntry: O(|F|\u00b7d) for dominance check and removal.\nFilter size typically O(iterations) but bounded by dominated pruning.",
+      "ref": [
+        "Fletcher & Leyffer (2002). \"Nonlinear programming without a\n  penalty function\". Mathematical Programming 91(2):239-269.",
+        "W\u00e4chter & Biegler (2006). \"On the implementation of an interior-point\n  filter line-search algorithm for large-scale nonlinear programming\".\n  Mathematical Programming 106(1):25-57. [Section 2.3: Filter]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpFilterLSAcceptor.hpp for filter line search usage",
+    "IpBacktrackingLineSearch.hpp for the line search framework"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_QPMaxHeap",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_QPMaxHeap.hpp",
+  "brief": "Max-heap for QP napsack breakpoint processing\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPMaxHeap provides max-heap operations (build, delete, add, heapify)\nfor efficient breakpoint processing in napsack solver. Extracts\nbreakpoints in descending order, complementing min-heap for\nbidirectional lambda search.",
+  "algorithms": [
+    {
+      "name": "Binary Max-Heap for Breakpoint Processing:\nClassic binary heap with maximum element at root:\n\nOperations (symmetric to min-heap):\n- build: Floyd's bottom-up O(n) heap construction\n- delete: Remove maximum, bubble down replacement, O(log n)\n- add: Insert at end, bubble up, O(log n)\n- heapify: Restore heap property after modification, O(log n)",
+      "math": "Heap property for indices:\nheap[i] \u2265 heap[2i] and heap[i] \u2265 heap[2i+1]\nIndices stored in heap, values in external array x.\n\nUsed in QPNapDown: extract breakpoints in decreasing \u03bb order.",
+      "complexity": "O(n) build, O(log n) per operation.\nTotal for napsack: O(n log n) worst case.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_QPNapsack.hpp for napsack solver using heaps",
+    "Mongoose_QPMinHeap.hpp for complementary min-heap"
+  ]
+}

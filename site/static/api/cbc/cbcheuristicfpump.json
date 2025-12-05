@@ -1,0 +1,23 @@
+{
+  "name": "CbcHeuristicFPump",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicFPump.hpp",
+  "brief": "Feasibility Pump heuristic (Fischetti, Glover & Lodi)\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+  "algorithms": [
+    {
+      "name": "Feasibility Pump (FP):\nAlternates between LP relaxation and rounding to find feasible MIP solution.\n\nBasic Algorithm:\n1. x* \u2190 solve LP relaxation\n2. x\u0304 \u2190 round(x*) (integer point)\n3. While x* \u2260 x\u0304 and iterations < max:\n   a. x* \u2190 argmin ||x - x\u0304|| s.t. Ax = b, l \u2264 x \u2264 u (LP toward x\u0304)\n   b. x\u0304 \u2190 round(x*)\n4. If x* = x\u0304, return feasible solution\n\nEnhancements:\n- Objective blending: min \u03b1\u00b7c^Tx + (1-\u03b1)\u00b7||x-x\u0304|| trades feasibility vs quality\n- Cycle detection: Track visited roundings, perturb if cycling\n- Randomization: Random flips to escape local minima\n- General integers: Auxiliary binary formulation or specialized rounding",
+      "math": "Distance LP: min \u03a3_j |x_j - x\u0304_j| for integer j\nLinearized as: min \u03a3_j d_j s.t. d_j \u2265 x_j - x\u0304_j, d_j \u2265 x\u0304_j - x_j\nOr squared Euclidean: uses modified objective coefficients.",
+      "complexity": "Each iteration: one LP solve, O(n_int) rounding.\nTypically 10-100 iterations. Very effective for finding first solution.\nSuccess rate ~80% on MIPLIB instances.",
+      "ref": [
+        "Fischetti, Glover & Lodi, \"The feasibility pump\",\n     Mathematical Programming 104 (2005) 91-104",
+        "Achterberg & Berthold, \"Improving the feasibility pump\",\n     Discrete Optimization 4 (2007) 77-86\n\nCbcHeuristicFPump: Implements the Feasibility Pump algorithm\n(Fischetti, Glover & Lodi, 2005) for finding initial MIP solutions.\n\nAlgorithm overview:\n1. Solve LP relaxation, get fractional x*\n2. Round x* to nearest integers -> x_bar\n3. Solve LP with objective: minimize distance to x_bar\n4. If new x* = x_bar, done (integer feasible)\n5. Otherwise round and repeat\n\nKey parameters:\n- maximumPasses_: Max iterations before giving up\n- initialWeight_: Blend original objective with distance\n- defaultRounding_: Threshold for rounding (default 0.5)\n\nHandles cycling through randomization and perturbation.\n\nAlso includes CbcDisasterHandler for Clp solver recovery."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for base class",
+    "CbcHeuristicDive for related diving approaches"
+  ]
+}

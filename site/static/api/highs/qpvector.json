@@ -1,0 +1,9 @@
+{
+  "name": "qpvector",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/qpvector.hpp",
+  "brief": "HiGHS QP vector utilities\n\nDense vector operations for QP solver.\nBasic linear algebra with QP-specific optimizations.",
+  "algorithms": [],
+  "methods": []
+}

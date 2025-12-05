@@ -1,0 +1,13 @@
+{
+  "name": "sym_lp_u",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_lp_u.h",
+  "brief": "User callbacks for LP solver process\n\nDefines callbacks that users implement to customize LP solving.\nReturn USER_DEFAULT to use built-in behavior.\n\n**Data transfer:**\n- user_receive_lp_data(): Receive problem-specific data\n- user_free_lp(): Clean up user data\n\n**Feasibility checking:**\n- user_is_feasible(): Custom integrality check\n- user_send_feasible_solution(): Pack solution for master\n- user_display_lp_solution(): Custom solution display\n\n**Branching callbacks:**\n- user_shall_we_branch(): Decide whether to branch\n- user_select_candidates(): Choose branching candidates\n- user_compare_candidates(): Rank two candidates\n- user_select_child(): Choose child node to explore\n\n**Cut handling:**\n- user_unpack_cuts(): Convert packed cuts to rows\n- user_generate_cuts_in_lp(): Generate cuts in LP process\n- user_same_cuts(): Compare two cuts for equality\n\n**Column generation:**\n- user_generate_column(): Create new variables dynamically\n- user_create_subproblem(): Build restricted LP\n\n**Built-in selection rules:**\n- branch_close_to_half(): Fractional variables near 0.5\n- branch_close_to_half_and_expensive(): Combine with objective\n- branch_close_to_one_and_cheap(): Variables near 1 with low cost",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_lp.h for LP process",
+    "sym_cg_u.h for cut generator callbacks"
+  ]
+}

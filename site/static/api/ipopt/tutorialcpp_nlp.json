@@ -1,0 +1,9 @@
+{
+  "name": "TutorialCpp_nlp",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "tutorial/CodingExercise/Cpp/3-solution/TutorialCpp_nlp.hpp",
+  "brief": "Ipopt C++ tutorial exercise NLP\n\nTutorialCpp_nlp: tutorial exercise for learning TNLP interface.\nStep-by-step guide to implementing optimization problems.\nThree versions: skeleton (to fill in), mistake (to debug), solution.",
+  "algorithms": [],
+  "methods": []
+}

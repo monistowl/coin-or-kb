@@ -1,0 +1,21 @@
+{
+  "name": "BCP_vg",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_vg.hpp",
+  "brief": "Variable Generator process for BCP Branch-Cut-Price (pricing)",
+  "algorithms": [
+    {
+      "name": "Variable Generator: Column Generation via Pricing Subproblems\n\nThe Variable Generator (VG) performs column generation:\ngenerates variables with negative reduced cost from dual solutions.\n\n**Column generation workflow:**\n1. LP process packs dual solution (cut duals, reduced costs)\n2. VG solves pricing subproblem to find negative reduced cost columns\n3. VG sends new variables back to LP for addition\n\n**BCP_vg_prob members:**\n- cuts, pi: Cuts and their dual values from LP\n- sender: Process ID of requesting LP\n- phase, node_level, node_index, node_iteration: Context info\n- upper_bound: Current best known solution\n- core: Problem core description\n\n**User customization:**\nOverride BCP_vg_user methods to implement pricing:\n- unpack_dual_solution(): Unpack dual values\n- generate_vars(): Main pricing subproblem logic\n- pack_var(): Send variables back to LP\n\n**Relation to LP process:**\nWhen LP becomes primal infeasible during column generation,\nit sends duals to VG. New columns restore feasibility.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_vg_user for user override points",
+    "BCP_lp.hpp for LP process that requests columns",
+    "BCP_var.hpp for variable representation"
+  ]
+}

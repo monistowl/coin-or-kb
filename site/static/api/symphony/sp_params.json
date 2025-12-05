@@ -1,0 +1,12 @@
+{
+  "name": "sp_params",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/decomp/sp_params.h",
+  "brief": "Solution/column pool parameters for decomposition\n\nParameters controlling column storage and management.\n\n**sp_params structure:**\n- verbosity: Output level\n- etol: Numerical tolerance\n- block_size: Allocation granularity\n- max_size: Maximum pool memory\n- max_number_of_sols: Hard limit on columns\n- min_to_delete: Minimum batch deletion size\n- touches_until_deletion: Inactivity threshold\n- compress_num/ratio: When to compress pool\n\n**Check strategies (check_which):**\n- CHECK_ALL_COLS: Check everything\n- CHECK_COL_LEVEL: By tree depth\n- CHECK_COL_TOUCHES: By activity\n- CHECK_COL_LEVEL_AND_TOUCHES: Combined\n\n**Delete strategies (delete_which):**\n- DELETE_DUPLICATE_COLS: Only duplicates\n- DELETE_DUPLICATE_AND_INEFFECTIVE_COLS: Also inactive",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "decomp.h for column generation using pool"
+  ]
+}

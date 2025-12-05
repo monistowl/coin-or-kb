@@ -1,0 +1,20 @@
+{
+  "name": "IpExpansionMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpExpansionMatrix.hpp",
+  "brief": "Expansion/projection matrices for dimension mapping\n\nExpansionMatrix maps between vectors of different sizes:\n- MultVector: Embeds small vector into larger space (zero-fills)\n- TransMultVector: Projects large vector to smaller space (extracts)",
+  "algorithms": [
+    {
+      "name": "Index-Based Expansion/Projection:\n  E \u2208 {0,1}^{m\u00d7n} is a 0-1 matrix with exactly one 1 per column.\n  Stored as index array: ExpPos[j] = i means E[i,j] = 1.\n  MultVector: y[ExpPos[j]] = x[j] (expand), others zero.\n  TransMultVector: y[j] = x[ExpPos[j]] (project/extract).",
+      "math": "Mathematical interpretation:\n  E\u00b7x embeds x \u2208 \u211d\u207f into y \u2208 \u211d\u1d50 (m > n) at specified positions.\n  E^T\u00b7x extracts components of x \u2208 \u211d\u1d50 to y \u2208 \u211d\u207f.\n  E^T\u00b7E = I_n (projection property), E\u00b7E^T \u2260 I_m (not full rank).",
+      "complexity": "O(n) storage (index array), O(n) for matvec.\n  No explicit m\u00d7n matrix stored - perfect for problems with\n  many fixed variables or inequality constraints.\n\nUsed in Ipopt for:\n- Mapping slack variables to constraint space\n- Handling fixed variables (remove from optimization)\n- Extracting subsets of inequality constraints",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMatrix.hpp for base interface",
+    "IpTNLPAdapter.hpp for primary usage"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "compound_assign",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/compound_assign.hpp",
+  "brief": "Core AD functionality: compound assign",
+  "algorithms": [],
+  "methods": []
+}

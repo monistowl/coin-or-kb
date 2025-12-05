@@ -1,0 +1,20 @@
+{
+  "name": "IpInexactData",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/Inexact/IpInexactData.hpp",
+  "brief": "Algorithm-specific data storage for inexact Newton method\n\nInexactData stores the decomposed step components and algorithm state\nrequired by the inexact Newton / Chen-Goldfarb penalty method.",
+  "algorithms": [
+    {
+      "name": "Inexact Algorithm Data Management:\n  AcceptTrialPoint() at end of each iteration:\n  1. Transfer trial point to current iterate (base class).\n  2. Reset compute_normal flag from next_compute_normal.\n  3. Clear normal/tangential step storage for fresh iteration.\n  4. Transfer full_step_accepted flag for trust region update.",
+      "math": "Data stored:\n  Normal step: (normal_x_, normal_s_) = \u0394x_n toward feasibility.\n  Tangential step: (tangential_x_, tangential_s_) = \u0394x_t toward optimality.\n  Penalty parameter: curr_nu_ for \u2113\u2081 merit function.\n  Decomposition flags: compute_normal_, next_compute_normal_.\n  Step acceptance: full_step_accepted_ for trust region expansion.",
+      "complexity": "O(n) storage for step vectors.\n  O(1) for scalar flags and parameters.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpInexactCq.hpp for computed quantities",
+    "IpIpoptData.hpp for base algorithm data"
+  ]
+}

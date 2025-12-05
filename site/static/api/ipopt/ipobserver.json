@@ -1,0 +1,13 @@
+{
+  "name": "IpObserver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpObserver.hpp",
+  "brief": "Observer design pattern implementation for change notification\n\nImplements Subject/Observer pattern for automatic cache invalidation.\nTaggedObjects (vectors, matrices) act as Subjects; dependent computed\nquantities (CachedResults) act as Observers. When a Subject changes,\nall attached Observers are notified to invalidate their cached values.\n\nNotification types:\n- NT_Changed: Subject data has been modified\n- NT_BeingDestroyed: Subject is being deleted\n- NT_All: Receive all notification types",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpTaggedObject.hpp for tagged subjects",
+    "IpCachedResults.hpp for cached observers"
+  ]
+}

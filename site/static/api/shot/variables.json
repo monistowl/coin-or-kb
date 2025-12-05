@@ -1,0 +1,13 @@
+{
+  "name": "Variables",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Model/Variables.h",
+  "brief": "Decision variable representation with bounds and types\n\nVariable classes for MINLP problem modeling.\n\n**VariableProperties Struct:**\n- type: Real, Binary, Integer, Semicontinuous, Semiinteger\n- auxiliaryType: Tracks origin of reformulation variables\n- Context flags: inObjectiveFunction, inLinearConstraints, etc.\n- Bound tightening status\n\n**Variable Class:**\n- index, name: Problem identifier\n- lowerBound, upperBound: Variable domain\n- semiBound: For semicontinuous/semiinteger types\n- calculate(): Evaluate at a point\n- getBound(): Interval arithmetic bounds\n- tightenBounds(): FBBT bound update\n\n**Variables Collection:**\n- Vector wrapper with ownership tracking\n- sortByIndex(): Reorder for solver compatibility\n\n**Interval Arithmetic (CppAD):**\n- Uses mc::Interval for bound propagation\n- FactorableFunction for automatic differentiation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Constraints.h for variable usage in constraints",
+    "AuxiliaryVariables.h for reformulation-generated variables"
+  ]
+}

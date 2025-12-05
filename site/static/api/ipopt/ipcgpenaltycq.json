@@ -1,0 +1,13 @@
+{
+  "name": "IpCGPenaltyCq",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/contrib/CGPenalty/IpCGPenaltyCq.hpp",
+  "brief": "Calculated quantities for Chen-Goldfarb penalty method\n\nCGPenaltyCq provides cached computation of quantities specific to\nthe Chen-Goldfarb penalty function algorithm, extending the base\nIpoptCalculatedQuantities.\n\nKey computed quantities:\n- curr/trial_penalty_function(): phi_rho(x) = f(x) + rho*||c(x)||\n- curr_direct_deriv_penalty_function(): Directional derivative\n- curr_fast_direct_deriv_penalty_function(): For fast CG direction\n- curr_cg_pert_fact(): Perturbation factor for KKT regularization\n- compute_curr_cg_penalty(): Line search penalty parameter\n- compute_curr_cg_penalty_scale(): KKT scaling penalty\n\nAlso computes Jacobian norms and multiplier scaling factors\nneeded for the penalty parameter update rules.\n\nAll quantities use CachedResults for efficiency.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpIpoptCalculatedQuantities.hpp for base class",
+    "IpCGPenaltyData.hpp for algorithm state"
+  ]
+}

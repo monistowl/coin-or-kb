@@ -1,0 +1,13 @@
+{
+  "name": "ClpMessage",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpMessage.hpp",
+  "brief": "Message codes and localization for Clp solver output\n\nDefines the CLP_Message enum with all status and diagnostic message codes\nused by Clp during optimization. Messages are organized by solver phase:\n- CLP_SIMPLEX_*: General simplex status (finished, infeasible, etc.)\n- CLP_DUAL_*: Dual simplex specific messages\n- CLP_PRIMAL_*: Primal simplex specific messages\n- CLP_BARRIER_*: Interior point method messages\n\nClpMessage inherits from CoinMessages to provide localized message text.\nControl output verbosity via ClpSimplex::setLogLevel().",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMessageHandler in CoinUtils for the messaging infrastructure",
+    "ClpSimplex::setLogLevel() to control output verbosity"
+  ]
+}

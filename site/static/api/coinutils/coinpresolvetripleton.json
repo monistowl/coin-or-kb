@@ -1,0 +1,20 @@
+{
+  "name": "CoinPresolveTripleton",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveTripleton.hpp",
+  "brief": "Tripleton row presolve: three-variable equation substitution",
+  "algorithms": [
+    {
+      "name": "Tripleton Elimination:\n  Given equality constraint ax + by + cz = d with three variables:\n  1. Solve for y: y = (d - ax - cz) / b\n  2. Substitute y into objective and all constraints containing y\n  3. Eliminate the constraint row and variable y\n  Only applied if substitution doesn't increase total nonzeros",
+      "math": "Original: ax + by + cz = d\n  Substitution: y = (d - ax - cz) / b\n  Objective: c_y\u00b7y = c_y\u00b7d/b - (c_y\u00b7a/b)x - (c_y\u00b7c/b)z\n  Postsolve recovers y from optimal (x*, z*)",
+      "complexity": "Time: O(nnz(col_y) \u00d7 avg_row_length) per tripleton\n  Fill-in check prevents growth: only apply if beneficial\n  Less common than doubleton but can still reduce problem size",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveDoubleton for two-variable case",
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

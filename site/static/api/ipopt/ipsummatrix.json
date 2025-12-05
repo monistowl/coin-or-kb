@@ -1,0 +1,20 @@
+{
+  "name": "IpSumMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpSumMatrix.hpp",
+  "brief": "Matrix representing weighted sum of matrices: M = sum(alpha_i * M_i)\n\nSumMatrix represents a matrix as a sum of terms, each with its own\nscalar factor: M = alpha_0*M_0 + alpha_1*M_1 + ... + alpha_n*M_n",
+  "algorithms": [
+    {
+      "name": "Distributed Matrix-Vector Multiplication:\n  M = \u03a3\u1d62 \u03b1\u1d62M\u1d62 (weighted sum of k matrices).\n  MultVector: y \u2190 \u03b1(\u03a3\u1d62 \u03b1\u1d62M\u1d62)x + \u03b2y\n  Distributes as: y \u2190 \u03b2y, then y \u2190 y + \u03b1\u00b7\u03b1\u1d62\u00b7M\u1d62\u00b7x for each term.\n  No explicit sum formed - lazy evaluation through matvec.",
+      "math": "Linear combination of matrices:\n  Each M\u1d62 can have different sparsity structure but same dimensions.\n  Sum is implicitly represented; (M)\u1d62\u2c7c = \u03a3\u2096 \u03b1\u2096(M\u2096)\u1d62\u2c7c never computed.\n  Properties (rank, spectrum) not easily derived from components.",
+      "complexity": "O(k \u00d7 matvec cost) where k = number of terms.\n  Storage: k matrix pointers + k scalars.\n  Avoids O(nnz) memory for explicit sum of sparse matrices.\n\nUsed in Ipopt for:\n- Combining multiple contributions to Jacobians or Hessians\n- Building composite matrix structures lazily",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpSumSymMatrix.hpp for symmetric version",
+    "IpCompoundMatrix.hpp for block structure (vs linear combination)"
+  ]
+}

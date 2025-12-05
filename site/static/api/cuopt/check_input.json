@@ -1,0 +1,9 @@
+{
+  "name": "check_input",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/routing/utilities/check_input.hpp",
+  "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+  "algorithms": [],
+  "methods": []
+}

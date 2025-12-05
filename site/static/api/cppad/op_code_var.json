@@ -1,0 +1,9 @@
+{
+  "name": "op_code_var",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/op_code_var.hpp",
+  "brief": "Internal implementation: op_code_var",
+  "algorithms": [],
+  "methods": []
+}

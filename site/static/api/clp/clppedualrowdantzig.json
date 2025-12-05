@@ -1,0 +1,23 @@
+{
+  "name": "ClpPEDualRowDantzig",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPEDualRowDantzig.hpp",
+  "brief": "Positive Edge enhanced Dantzig pricing for dual simplex",
+  "algorithms": [
+    {
+      "name": "Bi-Dimensional Dual Pricing:\nScore(i) = |violation_i|^(1-\u03c8) \u00d7 Compat(i)^\u03c8\n\nWhere violation_i = max(l_i - x_Bi, x_Bi - u_i, 0) measures\nhow far basic variable i is from feasibility.\n\n\u03c8 parameter (default 0.5):\n  \u03c8 = 0: Pure Dantzig (most infeasible)\n  \u03c8 = 1: Pure compatibility\n  \u03c8 = 0.5: Balanced",
+      "math": "DUAL DEGENERACY:\nOccurs when nonbasic variables have c\u0304_j = 0 (multiple optimal bases).\nRatio test may give \u03b8 = 0 \u2192 basis change but no dual improvement.",
+      "complexity": "O(m) per selection like standard Dantzig.\nCompatibility updates amortized over multiple iterations.",
+      "ref": [
+        "Towhidi, Desrosiers, Soumis (2014): \"The positive edge criterion\""
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPESimplex for the compatibility framework",
+    "ClpDualRowDantzig for the base pricing rule",
+    "ClpPEDualRowSteepest for steepest edge variant"
+  ]
+}

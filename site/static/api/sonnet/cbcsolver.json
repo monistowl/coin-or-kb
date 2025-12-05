@@ -1,0 +1,13 @@
+{
+  "name": "CbcSolver",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CbcSolver.h",
+  "brief": ".NET wrapper for CBC solver entry points (CbcMain0/CbcMain1)\n\nC++/CLI wrapper for CBC solver with callback support.\nCbcSolverCallBack delegate for monitoring solve phases.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CbcModel.h for model wrapper",
+    "CbcEventHandler.h for event handling"
+  ]
+}

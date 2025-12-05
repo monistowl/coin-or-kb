@@ -1,0 +1,12 @@
+{
+  "name": "RelaxationStrategyBase",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/RelaxationStrategyBase.h",
+  "brief": "Shared helper methods for relaxation strategies\n\nCommon termination checks for LP/MIP relaxation control.\n\n**RelaxationStrategyBase Class:**\n- isRelaxedSolutionInterior(): Check if LP solution is interior\n- isConstraintToleranceReached(): Feasibility achieved\n- isGapReached(): Optimality gap tolerance met\n\n**Use Case:**\n- Determines when to stop LP phase and switch to MIP\n- Checks convergence criteria during relaxation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "RelaxationStrategyStandard.h for concrete implementation"
+  ]
+}

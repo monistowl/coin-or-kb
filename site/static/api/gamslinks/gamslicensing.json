@@ -1,0 +1,9 @@
+{
+  "name": "GamsLicensing",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/utils/GamsLicensing.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

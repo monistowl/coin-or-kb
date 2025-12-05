@@ -1,0 +1,22 @@
+{
+  "name": "btf_internal",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "BTF/Include/btf_internal.h",
+  "brief": "Internal definitions for BTF (Block Triangular Form) permutation\nCopyright (c) 2004-2023, University of Florida. LGPL-2.1+ license.\n\nBTF finds permutation matrices P and Q such that P\u00b7A\u00b7Q has block upper\ntriangular form with square diagonal blocks that are irreducible\n(strongly connected components). Essential preprocessing for sparse LU.",
+  "algorithms": [
+    {
+      "name": "Block Triangular Form (BTF/Dulmage-Mendelsohn):\nDecomposes sparse matrix into block upper triangular structure:\n1. MAXIMUM TRANSVERSAL: Find maximum matching in bipartite graph\n   - Row i matched to column j if A(i,j) nonzero and selected\n   - Hopcroft-Karp or DFS-based augmenting path algorithm\n2. STRONGLY CONNECTED COMPONENTS:\n   - Build directed graph from A with matched edges\n   - Tarjan's algorithm finds SCCs (diagonal blocks)\n3. TOPOLOGICAL SORT: Order SCCs so dependencies flow downward",
+      "math": "Dulmage-Mendelsohn decomposition:\nP\u00b7A\u00b7Q = [A_11  A_12  ...  A_1k]\n        [0     A_22  ...  A_2k]\n        [\u22ee      \u22f1    \u22f1    \u22ee  ]\n        [0     0    ...  A_kk]\nEach A_ii is square and structurally nonsingular (irreducible).\nSingular matrices have zero diagonal blocks (structural rank deficiency).",
+      "complexity": "O(n + nz) for finding BTF permutation.\nMatching: O(n\u00b7\u221anz) using Hopcroft-Karp.",
+      "ref": [
+        "Duff & Reid (1978). \"Algorithm 529: Permutations to Block Triangular\n  Form\". ACM TOMS 4(2):189-192."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "KLU for sparse LU using BTF preprocessing",
+    "AMD for ordering within diagonal blocks"
+  ]
+}

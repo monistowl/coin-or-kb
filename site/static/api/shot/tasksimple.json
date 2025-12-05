@@ -1,0 +1,12 @@
+{
+  "name": "TaskSimple",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskSimple.h",
+  "brief": "Lightweight task wrapper for lambda functions\n\nAdapts arbitrary callable to task interface.\n\n**TaskSimple Class:**\n- setFunction(fn): Set callable to execute\n- run(): Invoke the stored function\n\n**Usage:**\n- Quick inline tasks without subclassing\n- Adapts existing functions to task framework",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskBase.h for task interface"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "runge_45",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/runge_45.hpp",
+  "brief": "CppAD utility: runge 45",
+  "algorithms": [],
+  "methods": []
+}

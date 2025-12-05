@@ -1,0 +1,20 @@
+{
+  "name": "CoinPresolveUseless",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveUseless.hpp",
+  "brief": "Remove useless (redundant) constraints",
+  "algorithms": [
+    {
+      "name": "Redundant Constraint Identification:\n  Greedy algorithm identifying constraints implied by variable bounds:\n  1. Initialize column bounds from original variable bounds\n  2. For each constraint, compute implied bounds on variables\n     - If constraint tightens some bound, mark as \"necessary\"\n     - Update working column bounds with tighter values\n  3. After processing all constraints, for non-necessary rows:\n     - Compute row activity bounds: L_i = \u03a3 min{a_ij\u00b7l_j, a_ij\u00b7u_j}\n     - If l_i \u2264 L_i and U_i \u2264 u_i, constraint is redundant\n  4. Remove redundant constraints, save for postsolve",
+      "math": "Redundancy condition:\n  Row i redundant if: l_i \u2264 min(a_i'x) and max(a_i'x) \u2264 u_i\n  where min/max over x \u2208 [l, u] (variable bounds)\n  No feasible point can violate such a constraint",
+      "complexity": "O(m \u00b7 avg_row_length) for full scan\n  Each constraint checked once; bound implications propagated\n  Effective at removing slack constraints from reformulations",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveForcing for related forcing constraint detection",
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

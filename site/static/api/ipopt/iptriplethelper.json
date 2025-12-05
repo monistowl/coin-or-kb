@@ -1,0 +1,20 @@
+{
+  "name": "IpTripletHelper",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/TMatrices/IpTripletHelper.hpp",
+  "brief": "Recursive conversion of abstract matrices to triplet format\n\nTripletHelper provides static methods for extracting COO (Coordinate)\nsparse format from Ipopt's abstract Matrix hierarchy. Used to interface\nwith external linear solvers expecting triplet format.",
+  "algorithms": [
+    {
+      "name": "Recursive Triplet Extraction:\n  GetNumberEntries(M): Recursively count nonzeros by matrix type.\n  FillRowCol(M, iRow, jCol): Fill structure arrays via type dispatch.\n  FillValues(M, values): Fill values array via type dispatch.\n\n  Supported types (polymorphic dispatch):\n  - GenTMatrix, SymTMatrix: Direct triplet access.\n  - DiagMatrix, IdentityMatrix: Generate diagonal entries.\n  - ExpansionMatrix: Permutation/selection entries.\n  - CompoundMatrix, CompoundSymMatrix: Recurse on blocks.\n  - SumMatrix, SumSymMatrix: Concatenate component entries.\n  - ScaledMatrix, SymScaledMatrix: Recurse with scaling.\n  - TransposeMatrix: Swap row/col in recursion.",
+      "math": "COO (Coordinate) sparse format:\n  Matrix A stored as (iRow[k], jCol[k], values[k]) for k = 0..nnz-1.\n  A[iRow[k], jCol[k]] += values[k] (duplicate entries summed).\n  1-based indexing for Fortran compatibility (HSL solvers).",
+      "complexity": "O(nnz) per traversal, where nnz = total nonzeros.\n  Type dispatch via overloaded private methods (compile-time).",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpGenTMatrix.hpp for general triplet storage",
+    "IpSymTMatrix.hpp for symmetric triplet storage"
+  ]
+}

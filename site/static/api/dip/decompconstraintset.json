@@ -1,0 +1,13 @@
+{
+  "name": "DecompConstraintSet",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompConstraintSet.h",
+  "brief": "Storage for constraint matrix and bounds (A, b, l, u)\n\nDecompConstraintSet stores the full specification of a constraint set\nused in decomposition: matrix, row/column bounds, integrality markers.\n\n**Matrix Storage:**\n- M: CoinPackedMatrix (row-major or column-major)\n- rowLB, rowUB: Row bounds (rowLB <= Ax <= rowUB)\n- colLB, colUB: Variable bounds\n- rowSense, rowRhs: Alternative row format ('L', 'G', 'E', 'R')\n\n**Variable Information:**\n- integerVars: Indices of integer variables\n- integerMark: 'I' for integer, 'C' for continuous\n- colNames, rowNames: Human-readable names\n\n**Block Structure:**\n- activeColumns: Which columns appear in this block\n- activeColumnsS: Set version for O(1) lookup\n- masterOnlyCols: Columns that only appear in master\n\n**Sparse Representation:**\nFor blocks with few active columns:\n- m_isSparse: Enable sparse mode\n- m_origToSparse, m_sparseToOrig: Column mappings\nReduces memory for blocks with disjoint variable sets.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompModel.h for wrapper with metadata",
+    "DecompApp.h where constraint sets are defined"
+  ]
+}

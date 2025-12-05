@@ -1,0 +1,12 @@
+{
+  "name": "SuiteSparseGPU_workspace_macros",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPURuntime/Include/SuiteSparseGPU_workspace_macros.hpp",
+  "brief": "Convenience macros for accessing Workspace CPU/GPU pointers\nCopyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nGPU_REFERENCE(ws, TYPE): safely get GPU pointer from Workspace with NULL check.\nCPU_REFERENCE(ws, TYPE): safely get CPU pointer from Workspace with NULL check.\nBoth cast to TYPE and handle NULL workspace gracefully.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SuiteSparseGPU_Workspace.hpp for Workspace class"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "distance",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/distance/distance.hpp",
+  "brief": "cuOpt distance computation\n\nDistance/time matrix computation for routing.\nHaversine, Euclidean, and graph-based distances.",
+  "algorithms": [],
+  "methods": []
+}

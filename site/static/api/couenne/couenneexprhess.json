@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprHess",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/partial/CouenneExprHess.hpp",
+  "brief": "Symbolic Hessian of Lagrangian via expression DAG\n\nStores the Hessian of the Lagrangian:\n\u2207\u00b2L(x,\u03bb) = \u2207\u00b2f(x) + \u03a3\u1d62 \u03bb\u1d62 \u2207\u00b2g\u1d62(x)\n\n**Sparse structure:**\n- nnz_: Number of structural nonzeros (lower triangle)\n- iRow_[], jCol_[]: COO format indices\n- numL_[k]: How many \u03bb\u1d62 contribute to position k\n- lamI_[k][]: Indices of contributing \u03bb\u1d62\n- expr_[k][j]: Expression for \u2202\u00b2g\u2c7c/\u2202x_iRow[k]\u2202x_jCol[k]\n\n**Evaluation:**\nFor each nonzero position (i,j), sum over all constraints:\nH[i,j] = expr_obj[i,j] + \u03a3\u2096 \u03bb[lamI[k]] * expr[k][...]\n\n**Feasibility pump extension:**\nCan be extended with gg' term for feasibility pump objectives\nby augmenting the objective with ||x - x\u0304||\u00b2 + gradient terms.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ExprJac for the constraint Jacobian",
+    "CouenneTNLP which uses ExprHess for NLP solves"
+  ]
+}

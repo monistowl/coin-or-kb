@@ -1,0 +1,21 @@
+{
+  "name": "CoinPresolveDoubleton",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveDoubleton.hpp",
+  "brief": "Doubleton row presolve: substitute y from ax+by=c",
+  "algorithms": [
+    {
+      "name": "Doubleton Elimination:\n  Given equality constraint ax + by = c with two variables:\n  1. Solve for y: y = (c - ax) / b\n  2. Substitute y in objective: c_x x + c_y y \u2192 c_x x + c_y(c-ax)/b\n  3. Substitute y in all constraints containing y\n  4. Transfer bounds: l_y \u2264 y \u2264 u_y becomes bounds on x\n  5. Remove row and column y from problem",
+      "math": "Original: min c_x\u00b7x + c_y\u00b7y s.t. ax + by = c, bounds\n  After: min (c_x - c_y\u00b7a/b)x + c_y\u00b7c/b, modified bounds on x\n  Postsolve recovers y = (c - ax)/b from optimal x*",
+      "complexity": "Time: O(nnz(col_y)) per doubleton - updating all rows with y\n  Typically reduces problem size significantly when equality rows exist\n  Cascading effect: may create new singletons or doubletons",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework",
+    "CoinPresolveTripleton for three-variable equations",
+    "CoinPresolveSingleton for single-variable equations"
+  ]
+}

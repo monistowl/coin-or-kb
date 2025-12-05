@@ -1,0 +1,21 @@
+{
+  "name": "AbcDualRowDantzig",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcDualRowDantzig.hpp",
+  "brief": "Dantzig's rule for ABC dual simplex pivot selection",
+  "algorithms": [
+    {
+      "name": "Weight Updates (trivial):\nDantzig rule has no weights to maintain.\nupdateWeights() just tracks which rows become feasible/infeasible.\n\nFast per iteration but may require more iterations than steepest edge.\nUse AbcDualRowSteepest for better performance on most problems.",
+      "math": "PRIMAL INFEASIBILITY:\nviolation_i = max(l_i - x_Bi, 0) + max(x_Bi - u_i, 0)",
+      "complexity": "O(k) where k = number of infeasible rows.\nBest case O(1) when few infeasibilities, worst case O(m).",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcDualRowPivot for the base interface",
+    "AbcDualRowSteepest for recommended steepest edge variant",
+    "ClpDualRowDantzig for the standard (non-ABC) implementation"
+  ]
+}

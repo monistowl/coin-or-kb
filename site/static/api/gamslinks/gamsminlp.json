@@ -1,0 +1,13 @@
+{
+  "name": "GamsMINLP",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/bonmin/GamsMINLP.hpp",
+  "brief": "Bonmin TMINLP implementation for GAMS models\n\nGamsMINLP: Implements Bonmin::TMINLP using GMO for MINLP evaluation.\nHandles variable types, SOS constraints, and branching priorities.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GamsBonmin.hpp for Bonmin driver",
+    "GamsCouenne.hpp for Couenne MINLP solver"
+  ]
+}

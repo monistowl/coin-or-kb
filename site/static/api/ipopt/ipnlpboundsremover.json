@@ -1,0 +1,19 @@
+{
+  "name": "IpNLPBoundsRemover",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpNLPBoundsRemover.hpp",
+  "brief": "NLP adapter that converts variable bounds to inequality constraints\n\nNLPBoundsRemover is an NLP adapter primarily used for inexact/iterative\nlinear solvers that require the KKT system to have a specific structure\nwithout bound constraints.",
+  "algorithms": [
+    {
+      "name": "Bounds-to-Inequality Transformation:\n  GetSpaces() transforms NLP structure:\n  1. Original: min f(x) s.t. c(x)=0, d_L \u2264 d(x) \u2264 d_U, x_L \u2264 x \u2264 x_U.\n  2. Remove x bounds: x now unbounded (no z_L, z_U multipliers).\n  3. Add new inequalities: d_new(x) = [d_orig(x); x].\n  4. New bounds: d_L_new = [d_L_orig; x_L], d_U_new = [d_U_orig; x_U].\n  5. Jacobian: J_d_new = [J_d_orig; I] (identity block for x bounds).\n  6. Hessian unchanged (new constraints linear in x).",
+      "math": "KKT structure change:\n  Original: z_L, z_U appear in diagonal of reduced Hessian.\n  Transformed: Bound multipliers become v_L, v_U on new inequalities.\n  KKT system structure simplified (no variable bounds in main diagonal).\n  Cost: Larger J_d matrix, more inequality constraints.\n\nTransformation:\n  Original: x_L <= x <= x_U\n  Transformed: d(x) = x with d_L = x_L, d_U = x_U (added inequalities)\n  Result: No bounds on x, but equivalent inequality constraints\n\nThe resulting NLP has:\n- No variable bounds (x unbounded)\n- Additional inequality constraints d(x) = x\n- Corresponding d_L, d_U bounds\n\nKey restrictions:\n- Original inequalities must be one-sided (unless allow_twosided_inequalities_)\n- Jacobian structure changes (identity blocks added)\n\nMatrix structure modification:\n- J_d becomes [J_d_orig; I] (stacked)\n- Hessian unchanged (d=x is linear)\n\nUses:\n- Inexact Newton methods requiring bound-free formulation\n- Research into alternative KKT structures",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpNLP.hpp for the base NLP interface"
+  ]
+}

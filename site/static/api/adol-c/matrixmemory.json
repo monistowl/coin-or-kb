@@ -1,0 +1,9 @@
+{
+  "name": "matrixmemory",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/swig/matrixmemory.hpp",
+  "brief": "C-style multi-dimensional array allocation for SWIG",
+  "algorithms": [],
+  "methods": []
+}

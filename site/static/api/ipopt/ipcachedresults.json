@@ -1,0 +1,20 @@
+{
+  "name": "IpCachedResults",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpCachedResults.hpp",
+  "brief": "Template class for caching computed results with dependency tracking\n\nCachedResults<T> stores computed values along with their dependencies\n(TaggedObjects and scalar parameters). Results are automatically\ninvalidated when any dependency changes via the Observer pattern.",
+  "algorithms": [
+    {
+      "name": "LRU Cache with Observer-Based Invalidation:\n  AddCachedResult(result, deps, scalars):\n    1. Create DependentResult with result and dependency tags.\n    2. Subscribe to NT_Changed notifications from each dependency.\n    3. Push to front of cache list.\n    4. If size > max_cache_size: evict oldest (LRU policy).\n\n  GetCachedResult(deps, scalars):\n    1. Clean up stale results (marked by Observer notifications).\n    2. Linear scan: find entry where all tags match current deps.\n    3. If found: return cached result; else: return false (cache miss).\n\n  DependentResult::ReceiveNotification(NT_Changed):\n    Mark result as stale \u2192 will be removed on next access.",
+      "math": "Memoization correctness:\n  Result R cached with dependencies D = {d\u2081, ..., d\u2096} and scalars S.\n  R is valid iff \u2200i: d\u1d62.GetTag() == stored_tag[i] \u2227 S unchanged.\n  Tag monotonicity ensures no ABA problem (tag never reused).",
+      "complexity": "O(k) per Add/Get for k cached entries.\n  Tag comparison: O(d) for d dependencies.\n  Observer notification: O(1) invalidation per dependency change.\n  Typical max_cache_size \u2248 3-5 (current, trial, backup iterates).\n\nKey features:\n- LRU-style cache with configurable maximum size\n- Automatic staleness detection via TaggedObject notifications\n- Support for multiple dependency types (objects, scalars)\n- Thread-safe invalidation of dependent results\n\nTypical usage: IpoptCalculatedQuantities stores gradients, Hessians,\nand constraint values, recomputing only when the iterate changes.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTaggedObject.hpp for change-tracking base class",
+    "IpIpoptCalculatedQuantities.hpp for primary user of this class"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "BCP_USER",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_USER.hpp",
+  "brief": "User initialization and packing interface for BCP",
+  "algorithms": [
+    {
+      "name": "User Entry Point: Initialization and Serialization\n\nDefines the entry points and serialization interfaces users must implement.\n\n**BCP_user_data:**\nBase class for user-defined data attached to tree nodes.\nDerive to store problem-specific information per node.\n\n**BCP_user_class:**\nEmpty base for all *_user classes (BCP_tm_user, BCP_lp_user, etc.).\n\n**BCP_user_pack:**\nSerialization interface for user-defined objects:\n- pack/unpack_warmstart(): Warm start information\n- pack/unpack_var_algo(): Algorithmic variables\n- pack/unpack_cut_algo(): Algorithmic cuts\n- pack/unpack_user_data(): Node-attached user data\n\n**USER_initialize:**\nMain entry point users must implement. Called by bcp_main():\n- msgenv_init(): Create message passing environment\n- tm_init(): Create Tree Manager user object\n- lp_init(): Create LP user object\n- cg_init(), vg_init(): Create CG/VG user objects\n- packer_init(): Create serialization object\n\n**bcp_main(argc, argv, user_init):**\nCall this from main() to start BCP with your USER_initialize.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm_user.hpp, BCP_lp_user.hpp for user hook classes"
+  ]
+}

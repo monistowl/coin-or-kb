@@ -1,0 +1,22 @@
+{
+  "name": "IpMa28TDependencyDetector",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpMa28TDependencyDetector.hpp",
+  "brief": "Dependency detector using HSL MA28 unsymmetric solver\n\nMa28TDependencyDetector uses the unsymmetric sparse solver MA28\nto detect linearly dependent rows in the constraint Jacobian.\nUnlike the symmetric solvers, MA28 handles general rectangular\nmatrices, making it suitable for analyzing the constraint Jacobian\ndirectly.\n\nThe detection works by attempting LU factorization with threshold\npivoting. When a pivot falls below tolerance (ma28_pivtol_), the\ncorresponding row is flagged as linearly dependent.\n\nInput format: Triplet (row, col, val) for general matrices\n\nUsed by Ipopt's constraint degeneracy detection mechanism.",
+  "algorithms": [
+    {
+      "name": "MA28 Threshold Pivoting Dependency Detection:\nDirect LU factorization approach for rectangular matrices:\n1. Factor J = P\u00b7L\u00b7U\u00b7Q (with row/column permutations P, Q)\n2. Use threshold pivoting: accept pivot if |u_ii| \u2265 tol\u00b7max_row\n3. Rows with |u_ii| < ma28_pivtol_ flagged as dependent\n4. Return list of numerically rank-deficient rows",
+      "math": "Sparse LU factorization with threshold pivoting:\nGiven J \u2208 \u211d^{m\u00d7n}, compute P\u00b7J\u00b7Q = L\u00b7U where:\n- L: unit lower triangular (m\u00d7min(m,n))\n- U: upper triangular (min(m,n)\u00d7n)\n\nRow i is dependent if during elimination:\n$$|u_{ii}| < \\text{pivtol} \\cdot \\max_k |a_{ik}^{(i-1)}|$$\nwhere a^{(i-1)} denotes the matrix after i-1 elimination steps.",
+      "complexity": "O(nnz + fill-in) for sparse LU.\nFill-in can be O(n\u00b2) worst case, typically O(nnz\u00b7log(n)).",
+      "ref": [
+        "Duff (1977). \"MA28 - A set of Fortran subroutines for sparse\n  unsymmetric linear equations\". AERE Harwell Report R 8730."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTDependencyDetector.hpp for base interface",
+    "IpTSymDependencyDetector.hpp for symmetric solver approach"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "BCP_cg",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_cg.hpp",
+  "brief": "Cut Generator process for BCP Branch-Cut-Price framework",
+  "algorithms": [
+    {
+      "name": "Cut Generator: Distributed Separation in Branch-Cut-Price\n\nThe Cut Generator (CG) runs as a separate process that generates\ncutting planes from LP solutions sent by the LP process.\n\n**Workflow:**\n1. LP process packs primal solution (fractional variables)\n2. CG unpacks and generates violated cuts\n3. CG sends cuts back to LP for addition to formulation\n\n**BCP_cg_prob members:**\n- vars, x: Variables and their primal values from LP\n- sender: Process ID of requesting LP\n- phase, node_level, node_index, node_iteration: Context info\n- upper_bound: Current best known solution\n- core: Problem core description\n\n**User customization:**\nOverride BCP_cg_user methods to implement cut generation:\n- unpack_primal_solution(): Unpack LP solution\n- generate_cuts(): Main cut generation logic\n- pack_cut(): Send cuts back to LP",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_cg_user for user override points",
+    "BCP_lp.hpp for LP process that requests cuts",
+    "BCP_cut.hpp for cut representation"
+  ]
+}

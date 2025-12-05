@@ -1,0 +1,9 @@
+{
+  "name": "set_jac_sparse_set",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/chkpoint_one/set_jac_sparse_set.hpp",
+  "brief": "Core AD functionality: set jac sparse set",
+  "algorithms": [],
+  "methods": []
+}

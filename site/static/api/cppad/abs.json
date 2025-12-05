@@ -1,0 +1,9 @@
+{
+  "name": "abs",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/abs.hpp",
+  "brief": "Core AD functionality: abs",
+  "algorithms": [],
+  "methods": []
+}

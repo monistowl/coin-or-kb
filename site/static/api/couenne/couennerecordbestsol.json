@@ -1,0 +1,13 @@
+{
+  "name": "CouenneRecordBestSol",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/problem/CouenneRecordBestSol.hpp",
+  "brief": "Best solution recording with feasibility tracking\n\nMaintains the best feasible solution found during optimization,\nwith detailed violation tracking for debugging and reporting.\n\n**Initial domain info:**\n- cardInitDom: Problem dimension\n- initIsInt[]: Integer variable flags\n- listInt: Indices of integer variables\n- initDomLb[], initDomUb[]: Original bounds (for feasibility check)\n\n**Best solution state:**\n- hasSol: True if any solution has been recorded\n- sol[]: Current best solution vector\n- val: Objective value of best solution\n- maxViol: Maximum violation (bound, integrality, or constraint)\n\n**Modified solution workspace:**\n- modSol[], modSolVal, modSolMaxViol: Temporary storage for\n  checkNLP2 and update operations before committing\n\n**update() methods:**\n- update(sol, card, val, viol): Update if val < current val\n- update(): Commit modSol if modSolVal < current val\n\n**compareAndSave():**\nCompare two solutions, keep better one with finite value (<1e49).\nReturns: -1 if both infinite, 0 if solA saved, 1 if solB saved.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneProblem which owns the CouenneRecordBestSol",
+    "checkNLP2 which uses modSol for temporary evaluation"
+  ]
+}

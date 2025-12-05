@@ -1,0 +1,13 @@
+{
+  "name": "GPUQREngine_BucketList",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_BucketList.hpp",
+  "brief": "Tile bucket management and GPU task generation\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nBucketList manages LLBundles in doubly-linked lists organized by column\nbucket. Tracks idle tiles (head/next/prev), generates Factorize/Apply\ntasks. Wavefront advances through buckets. VT block allocation via\nwsMongoVT workspace. Methods: Initialize, AdvanceBundles, CreateBundles,\nFillWorkQueue. Supports staircase exploitation for sparse factorization.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_LLBundle.hpp for bundle structure",
+    "GPUQREngine_TaskDescriptor.hpp for generated tasks"
+  ]
+}

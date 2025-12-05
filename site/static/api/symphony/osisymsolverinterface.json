@@ -1,0 +1,9 @@
+{
+  "name": "OsiSymSolverInterface",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "src/OsiSym/OsiSymSolverInterface.hpp",
+  "brief": "Osi interface for SYMPHONY MIP solver\n\nOsiSymSolverInterface wraps SYMPHONY (parallel MIP solver) with Osi\nabstraction. Enables SYMPHONY use with Cbc, Cgl, and other COIN-OR.\nSupports parallel branch-and-bound with warm start capability.",
+  "algorithms": [],
+  "methods": []
+}

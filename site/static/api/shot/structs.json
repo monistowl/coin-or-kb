@@ -1,0 +1,12 @@
+{
+  "name": "Structs",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Structs.h",
+  "brief": "Core data structures and type definitions for SHOT\n\nFundamental types, forward declarations, and helper structures.\n\n**Constants:**\n- SHOT_DBL_MIN/MAX/INF/EPS: Double precision limits\n- SHOT_INT_MAX, SHOT_LONG_MAX: Integer limits\n\n**Smart Pointer Typedefs:**\n- ProblemPtr, SettingsPtr, ResultsPtr, etc.\n- Shared ownership via std::shared_ptr\n\n**Solution Structures:**\n- PrimalSolution: Variable values + objective + source\n- DualSolution: Dual bound + iteration + source\n- SolutionPoint: Point with constraint deviation\n\n**Hyperplane Structures:**\n- Hyperplane: Supporting hyperplane cut\n- GeneratedHyperplane: Hyperplane with metadata\n- IntegerCut: No-good cut for integer variables\n\n**Utility Types:**\n- VectorDouble, VectorInteger, VectorString\n- PairIndexValue: (index, value) pair",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Environment.h for component composition"
+  ]
+}

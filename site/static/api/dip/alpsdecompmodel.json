@@ -1,0 +1,14 @@
+{
+  "name": "AlpsDecompModel",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/AlpsDecompModel.h",
+  "brief": "ALPS integration - model class bridging DIP and ALPS B&B\n\nAlpsDecompModel derives from AlpsModel to integrate DIP's decomposition\nalgorithms with ALPS's branch-and-bound framework.\n\n**Key Responsibilities:**\n- Hold pointer to active DecompAlgo\n- Create root node (AlpsDecompTreeNode)\n- Manage solution pool and incumbent\n- Handle ALPS callbacks and parameters\n\n**ALPS Hierarchy:**\nAlpsKnowledge -> AlpsModel -> AlpsDecompModel\n\n**Key Methods:**\n- createRoot(): Create initial tree node\n- setupSelf(): Initialize from parameters\n- registerKnowledge(): Register solution types\n\n**Data Flow:**\n1. User creates DecompApp and DecompAlgo\n2. AlpsDecompModel wraps the algorithm\n3. ALPS drives B&B, calling process() on nodes\n4. Nodes delegate to DecompAlgo for bounding",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsDecompTreeNode.h for B&B tree nodes",
+    "DecompAlgo.h for the algorithm being integrated",
+    "AlpsModel (ALPS) for base class interface"
+  ]
+}

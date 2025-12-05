@@ -1,0 +1,9 @@
+{
+  "name": "get_cexp_info",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/optimize/get_cexp_info.hpp",
+  "brief": "Tape optimization: get_cexp_info",
+  "algorithms": [],
+  "methods": []
+}

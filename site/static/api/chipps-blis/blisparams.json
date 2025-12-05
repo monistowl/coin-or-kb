@@ -1,0 +1,13 @@
+{
+  "name": "BlisParams",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisParams.h",
+  "brief": "BLIS-specific parameter set for MILP solver configuration\n\nExtends AlpsParameterSet with parameters controlling branching,\ncut generation, heuristics, and optimality tolerances.\n\n**Parameter categories:**\n\n**chrParams (bool):**\n- cutRampUp: Generate cuts during parallel ramp-up\n- presolve: Apply presolve transformations\n- shareConstraints/Variables: Parallel knowledge sharing\n- sharePseudocostRampUp/Search: Share branching data\n\n**intParams:**\n- branchStrategy: 0=MaxInf, 1=Pseudo, 2=Reliability, 3=Strong, 4=Bilevel\n- cutStrategy, cut*Strategy: Cut generator control (-2=root, -1=auto, 0=off)\n- heurStrategy, heur*Strategy: Heuristic control\n- strongCandSize: Candidates for strong branching\n- pseudoRelibility: Observations before trusting pseudo-costs\n\n**dblParams:**\n- cutoff: Upper bound for pruning\n- cutoffInc: Cutoff increment for fathoming\n- integerTol: Tolerance for integrality\n- optimalRelGap/AbsGap: Termination gaps\n- pseudoWeight: Score formula weighting",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsParameterSet for base class",
+    "BlisModel which holds this parameter set"
+  ]
+}

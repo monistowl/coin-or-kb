@@ -1,0 +1,21 @@
+{
+  "name": "CouenneExprPow",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprPow.hpp",
+  "brief": "Power expression w = x^k with convexification",
+  "algorithms": [
+    {
+      "name": "Power Convexification with Newton Tangent Points\n\nHandles power functions with constant exponents. Special cases\n(odd/even integer powers) have specialized implementations.\n\n**Signed power (issignpower_):**\nsignpower(x,k) = sign(x) * |x|^k - useful for odd fractional powers\nof potentially negative bases.\n\n**Convexification depends on exponent k:**\n- k > 1: Convex on x > 0, tangent cuts below, secant above\n- 0 < k < 1: Concave on x > 0, secant cuts below, tangent above\n- k < 0: Convex on x > 0 (inverse), requires x > 0\n\n**Key functions:**\n- safe_pow(): Handles negative bases with odd/even exponent check\n- addPowEnvelope(): Generate envelope cuts for power functions\n- powNewton(): Find optimal tangent point using Newton's method",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneExprEvenPow for x^(2k) - always convex, symmetric",
+    "CouenneExprOddPow for x^(2k+1) - S-shaped, inflection at 0",
+    "CouenneExprSignPow for signed power variant"
+  ]
+}

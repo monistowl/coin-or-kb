@@ -1,0 +1,9 @@
+{
+  "name": "dis_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/dis_op.hpp",
+  "brief": "Internal implementation: dis_op",
+  "algorithms": [],
+  "methods": []
+}

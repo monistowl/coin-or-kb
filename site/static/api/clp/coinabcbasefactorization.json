@@ -1,0 +1,20 @@
+{
+  "name": "CoinAbcBaseFactorization",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/CoinAbcBaseFactorization.hpp",
+  "brief": "Core ABC SIMD-optimized LU factorization implementation",
+  "algorithms": [
+    {
+      "name": "ABC (Alternative Basis Code) LU Factorization:\n  Enhanced sparse LU with modern CPU optimizations:\n  1. Markowitz pivot selection with singleton detection\n  2. SIMD-vectorized scatter/gather for column updates\n  3. Cache-blocking (BLOCKING8) for L2/L3 efficiency\n  4. Parallel elimination using Cilk (when ABC_PARALLEL=2)\n  5. Hyper-sparse mode for very sparse intermediate results",
+      "math": "B = L\u00b7U with row/column permutations P, Q:\n  P\u00b7B\u00b7Q = L\u00b7U, where L unit lower triangular, U upper triangular\n  Markowitz criterion: select pivot minimizing (r_i - 1)(c_j - 1)\n\nNote: 32 bits assumed sufficient for row/column counts,\nbut CoinBigIndex can be 64-bit for element indices.",
+      "complexity": "Factorization: O(nnz \u00d7 fill-in), highly structure-dependent\n  FTRAN/BTRAN: O(nnz(L) + nnz(U)) with SIMD acceleration\n  SIMD speedup: 2-4x for dense column operations",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinAbcFactorization.hpp for instantiation",
+    "CoinAbcHelperFunctions.hpp for SIMD kernels"
+  ]
+}

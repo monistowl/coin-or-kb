@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprNorm",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprNorm.hpp",
+  "brief": "p-norm expression: ||f(x)||_p\n\nRepresents the \u2113\u209a norm: ||f(x)||_p = (\u03a3\u1d62 |f\u1d62(x)|^p)^(1/p)\n\n**Status:** This is a placeholder/stub class.\n\n**Special cases:**\n- p = 1: Sum of absolute values (piecewise linear)\n- p = 2: Euclidean norm (convex, smooth except at origin)\n- p = \u221e: Maximum absolute value (convex, nonsmooth)\n\n**Convexity:**\nAll \u2113\u209a norms with p \u2265 1 are convex functions.\nThis makes overestimation straightforward (tangent planes),\nbut underestimation requires handling the non-negativity\nand norm structure.\n\n**Common usage:**\n- Distance constraints: ||x - a||\u2082 \u2264 r\n- Regularization: minimize f(x) + \u03bb||x||\u2081",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprAbs for absolute value (used in p=1 norm)",
+    "exprOp base class"
+  ]
+}

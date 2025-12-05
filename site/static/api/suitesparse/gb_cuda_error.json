@@ -1,0 +1,12 @@
+{
+  "name": "GB_cuda_error",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/CUDA/include/GB_cuda_error.hpp",
+  "brief": "CUDA error checking macro for GraphBLAS GPU operations\nCopyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.\n\nCUDA_OK macro: wraps CUDA API calls with error checking. On failure,\nmaps cudaErrorMemoryAllocation to GrB_OUT_OF_MEMORY, other errors to\nGxB_GPU_ERROR. Prints error info via printf and GBURBLE, calls GB_FREE_ALL.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GB_cuda.hpp for CUDA utilities using this macro"
+  ]
+}

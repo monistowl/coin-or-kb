@@ -1,0 +1,13 @@
+{
+  "name": "sym_master_params",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_master_params.h",
+  "brief": "Master process parameters aggregating all component params\n\nTop-level parameter structure containing parameters for all\nSYMPHONY processes: master, TM, LP, CG, CP, DG, and preprocessing.\n\n**params structure contains:**\n- cp_par: Cut pool parameters\n- cg_par: Cut generator parameters\n- lp_par: LP solver parameters\n- tm_par: Tree manager parameters\n- dg_par: Draw graph parameters (visualization)\n- prep_par: Preprocessing parameters\n\n**Execution control:**\n- warm_start: Resume from saved state\n- verbosity: Global output level\n- random_seed: For reproducibility\n- do_branch_and_cut: Enable B&C algorithm\n- do_draw_graph: Enable visualization\n- use_permanent_cut_pools: Persistent cut storage\n\n**Input/output:**\n- infile: Problem file (MPS/LP/GMPL)\n- file_type: MPS_FORMAT, LP_FORMAT, GMPL_FORMAT\n- datafile: GMPL data file if needed\n- test_dir: Directory for test problems\n- obj_offset: Constant added to objective\n\n**Multi-criteria optimization:**\n- multi_criteria: Enable bi-objective mode\n- mc_search_order: Search strategy\n- mc_compare_solution_tolerance: Pareto comparison\n- mc_warm_start: Reuse solutions across objectives\n\n**Parallel configuration:**\n- tm_exe, dg_exe: Process executables\n- tm_machine, dg_machine: Machine assignments\n- pvm_trace: PVM debugging",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_master.h for master process",
+    "symphony.h for API using these parameters"
+  ]
+}

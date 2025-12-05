@@ -1,0 +1,9 @@
+{
+  "name": "subgraph_jac_rev",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/subgraph_jac_rev.hpp",
+  "brief": "Core AD functionality: subgraph jac rev",
+  "algorithms": [],
+  "methods": []
+}

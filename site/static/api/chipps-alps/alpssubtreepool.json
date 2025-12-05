@@ -1,0 +1,14 @@
+{
+  "name": "AlpsSubTreePool",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsSubTreePool.h",
+  "brief": "Pool of subtrees for work distribution in parallel search\n\nAlpsSubTreePool stores subtrees for load balancing between processes.\nKey component for parallel scalability in ALPS.\n\n**Storage:**\n- subTreeList_: Priority queue of AlpsSubTree pointers\n- Ordering by subtree quality for work distribution\n\n**Key operations:**\n- addKnowledge(): Add subtree from work donation\n- getKnowledge()/popKnowledge(): Get subtree for processing\n- setComparison(): Set subtree selection strategy\n- getBestQuality(): Get quality of best subtree\n\n**Parallel use:**\n- Serial: Single subtree in pool\n- Parallel: Multiple subtrees for load balancing\n- Subtrees split/merged for work sharing",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsSubTree for subtree structure",
+    "AlpsKnowledgePool for base interface",
+    "AlpsKnowledgeBroker::subTreePool_ for broker's pool"
+  ]
+}

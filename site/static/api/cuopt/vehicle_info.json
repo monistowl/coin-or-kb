@@ -1,0 +1,9 @@
+{
+  "name": "vehicle_info",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/routing/vehicle_info.hpp",
+  "brief": "cuOpt VRP vehicle/fleet model\n\nVehicle capacity, time windows, and fleet constraints.",
+  "algorithms": [],
+  "methods": []
+}

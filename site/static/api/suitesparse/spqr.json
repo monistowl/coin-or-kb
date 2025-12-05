@@ -1,0 +1,19 @@
+{
+  "name": "spqr",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/Include/spqr.hpp",
+  "brief": "Internal SPQR implementation functions and data structures\nCopyright (c) 2008-2023, Timothy A Davis. GPL-2.0+ license.\n\nNon-user-callable routines: spqr_analyze (symbolic), spqr_factorize (numeric),\nspqr_kernel (parallel front factorization), spqr_assemble/cpack/rhpack (front\nassembly). Support: spqr_tol, stranspose1/2, larftb (block reflectors),\nhapply, panel, 1colamd, 1fixed. Helper structs: spqr_work, spqr_blob.\nMacros: FLIP/UNFLIP for marking, INDEX for column-major.",
+  "algorithms": [
+    {
+      "name": "Multifrontal QR Implementation:\nInternal routines for sparse QR factorization:\n\nSymbolic phase (spqr_analyze):\n- Build S = A(P,Q) in row-oriented form\n- Compute supernodal structure: fronts, parent/child\n- Allocate task graph for parallel numeric phase\n\nNumeric phase (spqr_factorize \u2192 spqr_kernel):\n- Process fronts in parallel via task graph\n- spqr_assemble: gather rows and child contributions into front\n- spqr_front: dense QR via blocked Householder (LAPACK-style)\n- spqr_cpack/rhpack: pack contribution block and R+H for storage",
+      "math": "Block Householder transformations:\nApply panels of k reflectors using WY form: Q = I - V\u00b7T\u00b7V'\nwhere T is k\u00d7k upper triangular. Enables BLAS-3 performance.\n\nspqr_larftb: Apply block reflector to trailing submatrix.\nspqr_happly: Apply stored H vectors to dense matrix X.",
+      "complexity": "O(flops) where flops dominated by dense BLAS-3 in fronts.\nParallel speedup from independent subtrees in elimination tree.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "SuiteSparseQR.hpp for public user API"
+  ]
+}

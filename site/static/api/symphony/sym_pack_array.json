@@ -1,0 +1,13 @@
+{
+  "name": "sym_pack_array",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_pack_array.h",
+  "brief": "Array serialization for PVM communication\n\nPack/unpack functions for SYMPHONY data structures in parallel mode.\n\n**Array packing:**\n- pack_array_desc(): Serialize array_desc (int list)\n- unpack_array_desc(): Deserialize array_desc\n- pack_double_array_desc(): Serialize with double stats\n- unpack_double_array_desc(): Deserialize double array\n\n**Basis packing:**\n- pack_basis(): Serialize basis_desc for warm start\n- unpack_basis(): Deserialize basis_desc",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_proccomm.h for communication functions",
+    "sym_types.h for array_desc, basis_desc"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "BonTNLP2FPNLP",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonTNLP2FPNLP.hpp",
+  "brief": "Adapter for Feasibility Pump NLP formulation\n\nWraps a TNLP to create Feasibility Pump subproblems by modifying the\nobjective to minimize distance to a target integer point.\n\n**Modified objective:**\nf_FP(x) = lambda * ||x_I - x\u0303_I||_p + (1-lambda) * sigma * f(x)\nwhere x\u0303_I is the target integer point, p is norm (1 or 2).\n\n**Optional constraints:**\n- Cutoff constraint: f(x) <= cutoff (improve on incumbent)\n- Local branching: sum |x_i - x\u0303_i| <= rhs (neighborhood search)\n\n**Key parameters:**\n- lambda_: Weight on distance (vs original objective)\n- sigma_: Scaling for original objective\n- norm_: L1 or L2 distance metric",
+  "algorithms": [
+    {
+      "name": "Feasibility Pump NLP Objective Transformation",
+      "math": "Transform NLP objective for feasibility pump:\n      f_FP(x) = \u03bb\u00b7||x_I - x\u0303_I||_p + (1-\u03bb)\u00b7\u03c3\u00b7f(x)\n      where x\u0303_I is target integer solution, p \u2208 {1,2} is norm.\n      Optional: cutoff f(x) \u2264 z*, local branching \u03a3|x_i - x\u0303_i| \u2264 rhs.",
+      "complexity": "O(|integers|) for objective/gradient evaluation.",
+      "ref": [
+        "Fischetti et al. (2005). \"Feasibility pump\". Math. Program."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "HeuristicFPump for the Feasibility Pump driver",
+    "HeuristicLocalBranching for local branching heuristic"
+  ]
+}

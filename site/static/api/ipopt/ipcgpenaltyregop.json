@@ -1,0 +1,13 @@
+{
+  "name": "IpCGPenaltyRegOp",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/contrib/CGPenalty/IpCGPenaltyRegOp.hpp",
+  "brief": "Registration of Chen-Goldfarb penalty method options\n\nDeclares RegisterOptions_CGPenalty(), which registers all options\nspecific to the Chen-Goldfarb penalty function globalization\nstrategy.\n\nOptions include:\n- Penalty parameter initialization and bounds\n- PLPF (piecewise linear penalty function) parameters\n- Fast direction control parameters\n- Armijo and sufficient decrease factors\n- Perturbation handling parameters\n\nCalled when Ipopt is configured to use the CG penalty method\ninstead of the default filter line search.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpAlgRegOp.hpp for main algorithm options",
+    "IpCGPenaltyLSAcceptor.hpp for option usage"
+  ]
+}

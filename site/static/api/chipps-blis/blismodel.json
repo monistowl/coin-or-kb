@@ -1,0 +1,15 @@
+{
+  "name": "BlisModel",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisModel.h",
+  "brief": "MILP model class extending BiCePS for branch-and-cut\n\nBlisModel is the main model class for the BLIS MILP solver.\nExtends BcpsModel with LP solver, cut generators, heuristics, and branching.\n\n**Initialization workflow:**\n1. readInstance() or importModel(): Load problem data\n2. readParameters(): Configure solver behavior\n3. setupSelf(): Initialize LP solver, objects, strategies\n4. preprocess(): Apply presolve transformations\n5. createRoot(): Create initial search tree node\n\n**LP Solver integration:**\n- origLpSolver_: User-provided OsiSolverInterface\n- presolvedLpSolver_: After presolve transformations\n- lpSolver_: Active solver (presolved or original)\n\n**Cut generation:**\n- addCutGenerator(): Register CglCutGenerator or BlisConGenerator\n- cutStrategy_: When to generate (Root, Auto, Periodic)\n- constraintPool_: Store generated cuts\n\n**Branching:**\n- branchStrategy_: BcpsBranchStrategy for variable selection\n- objects_: BcpsObject array (integer variables, SOS, etc.)\n- priority_: Branching priorities per object\n\n**Heuristics:**\n- addHeuristic(): Register BlisHeuristic instances\n- heurStrategy_: When to call (Root, Auto, Periodic, BeforeRoot)\n\n**Solution management:**\n- incumbent_: Best integer solution found\n- cutoff_: Objective bound for pruning\n- storeSolution(): Record new solutions\n\n**Parallel support:**\n- encode()/decodeToSelf(): Serialize model for MPI\n- packSharedKnowledge(): Share pseudo-costs, cuts, variables",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisTreeNode for node processing using this model",
+    "BlisBranchStrategy* for branching strategies",
+    "BlisConGenerator for cut generation wrapper",
+    "BlisHeuristic for heuristic interface"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Indexlist",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/Indexlist.hpp",
+  "brief": "Sorted index lists for efficient working set operations",
+  "algorithms": [
+    {
+      "name": "Sorted Index List with Binary Search\n\nIndexlist maintains sorted lists of variable/constraint indices for\nthe active-set QP algorithm, enabling O(log n) membership tests and\nefficient submatrix extraction.\n\n**Data structure:**\n- number[]: Stores indices in insertion order\n- iSort[]: Maintains sorted order for binary search\n- Doubly-linked via first/last for O(1) append/prepend\n\n**Key operations:**\n- addNumber(): Insert index, update sorted array\n- removeNumber(): Delete index, compact arrays\n- getIndex(): O(log n) lookup via binary search (findInsert)\n- isMember(): O(log n) membership test\n- getNumberArray(): O(1) access to raw index array\n\n**Usage in QP:**\n- Active bounds/constraints index sets\n- Free variable indices for null-space computation\n- Submatrix row/column selection for working set",
+      "math": "",
+      "complexity": "O(log n) lookup, O(n) insertion/deletion",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "SubjectTo.hpp for working set management using index lists"
+  ]
+}

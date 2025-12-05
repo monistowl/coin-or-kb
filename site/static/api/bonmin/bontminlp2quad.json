@@ -1,0 +1,13 @@
+{
+  "name": "BonTMINLP2Quad",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/QuadCuts/BonTMINLP2Quad.hpp",
+  "brief": "TMINLP2TNLP extension supporting quadratic cuts\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nTMINLP2TNLPQuadCuts: Extends TMINLP2TNLP to handle quadratic cuts\nin the NLP subproblem. Manages adding/removing cuts, updating\nJacobian and Hessian structures, and evaluating cut contributions.\n\nSupports both linear (OsiRowCut) and quadratic (QuadCut) cuts.\n\nAuthors: Pierre Bonami, IBM\nDate: October 6, 2007",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TMINLP2TNLP for base NLP adapter",
+    "QuadRow for quadratic cut evaluation"
+  ]
+}

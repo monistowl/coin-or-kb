@@ -1,0 +1,9 @@
+{
+  "name": "initial_problem_check",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "benchmarks/linear_programming/cuopt/initial_problem_check.hpp",
+  "brief": "cuOpt LP problem representation\n\nSparse matrix storage for LP constraints.",
+  "algorithms": [],
+  "methods": []
+}

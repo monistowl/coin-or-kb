@@ -1,0 +1,12 @@
+{
+  "name": "BonSolReader",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/Ampl/BonSolReader.hpp",
+  "brief": "Reader for AMPL .sol solution files\nCopyright (C) CNRS 2011. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nSolReader: Reads solution files in AMPL .sol format containing\nvariable values. Used to load known solutions for warm starting\nor comparison with computed solutions.\n\nAuthors: Pierre Bonami, LIF, CNRS\nDate: March 1, 2011",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "NamesReader for corresponding variable name reader"
+  ]
+}

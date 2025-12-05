@@ -1,0 +1,13 @@
+{
+  "name": "HighsDebugSol",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsDebugSol.h",
+  "brief": "Debug solution tracking for MIP solver validation\n\nConditionally compiled (HIGHS_DEBUGSOL) facility to verify MIP solver\ncorrectness against a known optimal solution.\n\n**When HIGHS_DEBUGSOL Defined:**\n- debugSolution[]: Known optimal solution values\n- debugSolObjective: Optimal objective value\n- conflictingBounds: Tracks domain changes inconsistent with debug solution\n\n**Validation Methods:**\n- checkCut(): Verify cut doesn't exclude debug solution\n- checkRow(): Verify row bounds contain debug solution\n- checkClique(): Verify clique is satisfied by debug solution\n- checkVub/Vlb(): Verify variable bounds contain debug solution\n- nodePruned(): Alert if node containing debug solution is pruned\n\n**Domain Tracking:**\n- registerDomain(): Track a HighsDomain instance\n- boundChangeAdded/Removed(): Monitor bound changes\n- resetDomain(): Clear domain tracking\n\n**Conflict Analysis:**\n- checkConflictReasonFrontier(): Verify conflict derivation\n- checkConflictReconvergenceFrontier(): Verify reconvergence\n\n**When HIGHS_DEBUGSOL Not Defined:**\nAll methods become empty stubs with zero overhead.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsDomain.h for domain propagation",
+    "mip/HighsConflictPool.h for conflict constraints"
+  ]
+}

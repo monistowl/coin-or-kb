@@ -1,0 +1,9 @@
+{
+  "name": "OSNode",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/applications/columnGen/code/OSNode.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

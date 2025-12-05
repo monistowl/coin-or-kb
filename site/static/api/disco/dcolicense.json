@@ -1,0 +1,9 @@
+{
+  "name": "DcoLicense",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoLicense.hpp",
+  "brief": "DisCO license information\n\nEPL license text and copyright information.",
+  "algorithms": [],
+  "methods": []
+}

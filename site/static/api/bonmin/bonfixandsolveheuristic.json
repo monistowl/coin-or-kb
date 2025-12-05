@@ -1,0 +1,20 @@
+{
+  "name": "BonFixAndSolveHeuristic",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonFixAndSolveHeuristic.hpp",
+  "brief": "Fix-and-Solve heuristic for MINLP",
+  "algorithms": [
+    {
+      "name": "Fix-and-Solve MINLP Heuristic\n\nSimple heuristic that fixes some integer variables to their current\nvalues and solves the resulting smaller MINLP subproblem.\n\n**Algorithm:**\n1. Select subset of integer variables to fix (based on LP solution)\n2. Fix selected variables to their current integer values\n3. Solve reduced MINLP with remaining variables\n4. If feasible and improved, update incumbent\n\nSimpler than RINS (doesn't require incumbent for comparison).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "LocalSolverBasedHeuristic for base class",
+    "HeuristicRINS for more sophisticated fixing strategy"
+  ]
+}

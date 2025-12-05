@@ -1,0 +1,12 @@
+{
+  "name": "HSet",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HSet.h",
+  "brief": "O(1) integer set with fast membership test and removal\n\nUnordered set of distinct non-negative integers with O(1) operations.\n\n**Data Structure:**\n- entry_[]: Dense array of current entries\n- pointer_[]: Sparse array mapping entry \u2192 position in entry_[]\n- count_: Number of elements\n\n**Operations (all O(1)):**\n- add(entry): Append to entry_[], record position in pointer_[]\n- remove(entry): Swap with last, update swapped entry's pointer\n- in(entry): Check pointer_[] for valid position\n\n**Design:**\n- Similar to \"swap and pop\" deletion pattern\n- pointer_[i] = no_pointer (-1) means i not in set\n- Trades O(max_entry) space for O(1) operations\n\n**Usage:**\n- Track active row/column indices in simplex\n- Maintain sets of candidates during pricing",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "simplex/HEkkDual.h for dual pricing candidate sets"
+  ]
+}

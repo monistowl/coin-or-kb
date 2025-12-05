@@ -1,0 +1,9 @@
+{
+  "name": "HighsMipAnalysis",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsMipAnalysis.h",
+  "brief": "Analyse MIP iterations, both for run-time control and data\ngathering",
+  "algorithms": [],
+  "methods": []
+}

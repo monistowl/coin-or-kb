@@ -1,0 +1,23 @@
+{
+  "name": "CouenneProblem",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/problem/CouenneProblem.hpp",
+  "brief": "Central MINLP problem representation with expression DAG\n\nThe heart of Couenne's global optimization approach. Represents MINLPs\nsymbolically as expression trees, enabling automatic convexification,\nbound propagation, and reformulation.\n\n**Key data structures:**\n- variables_: Original, auxiliary, and defined variables\n- objectives_/constraints_: Symbolic expressions\n- graph_: Dependency graph for evaluation ordering\n- auxSet_: Set of auxiliary variables w = f(x) for linearization\n\n**Bound tightening methods:**\n- FBBT (doFBBT_): Feasibility-based bound tightening via constraint propagation\n- OBBT (doOBBT_): Optimality-based bound tightening via LP solves\n- RCBT (doRCBT_): Reduced-cost bound tightening\n- ABT (doABT_): Aggressive bound tightening via domain partitioning\n\n**Reformulation (standardize()):**\nConverts nonlinear expressions into auxiliary variable definitions\nw = f(x), enabling generation of convex relaxations for each operator.\n\n**Symmetry handling:**\nUses nauty library for graph automorphism detection and orbital branching.",
+  "algorithms": [
+    {
+      "name": "Factorable Programming / Auxiliary Variable Reformulation:\nTransform general nonconvex MINLP into standard form via introduction\nof auxiliary variables for each nonlinear operator. Example:\n  Original: min x\u00b7sin(y\u00b2)\n  Reformulated: min w\u2081  s.t. w\u2081 = x\u00b7w\u2082, w\u2082 = sin(w\u2083), w\u2083 = y\u00b2\nEach auxiliary w_i = f_i(x) gets individual convexification.",
+      "math": "Bound propagation (FBBT) uses interval arithmetic:\nGiven w = f(x,y) with x \u2208 [x_L, x_U], y \u2208 [y_L, y_U]:\n- Forward: [w_L, w_U] = f([x_L,x_U], [y_L,y_U])\n- Backward: [x_L,x_U] \u2190 [x_L,x_U] \u2229 f\u207b\u00b9([w_L,w_U], [y_L,y_U])\nOBBT solves: min/max x_i s.t. LP relaxation \u2264 cutoff.\nIterate until fixed point or iteration limit.",
+      "complexity": "Reformulation: O(e) where e = expression size.\nFBBT: O(n\u00b7k) per pass where n = #variables, k = avg. constraint length.\nOBBT: O(2n\u00b7LP) per round, typically 1-2 rounds effective.",
+      "ref": [
+        "Belotti et al. (2009). \"Branching and bounds tightening techniques\n  for non-convex MINLP\". Optimization Methods & Software 24(4-5):597-634.",
+        "Tawarmalani & Sahinidis (2005). \"A polyhedral branch-and-cut approach\n  to global optimization\". Mathematical Programming 103:225-249."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "expression for the expression base class",
+    "CouenneCutGenerator for convexification cut generation"
+  ]
+}

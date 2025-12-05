@@ -1,0 +1,13 @@
+{
+  "name": "AlpsDecompNodeDesc",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/AlpsDecompNodeDesc.h",
+  "brief": "ALPS node descriptor storing branching bounds\n\nAlpsDecompNodeDesc derives from AlpsNodeDesc to store the\ndescription of a tree node for serialization and reconstruction.\n\n**Storage:**\nDIP doesn't use full differencing (delta encoding), so node\ndescriptions primarily store bound changes from branching:\n- Variable lower/upper bound modifications\n- Warm start basis (optional)\n\n**Key Methods:**\n- encode(): Serialize to AlpsEncoded for transmission\n- decode(): Reconstruct from encoded form\n\n**ALPS Integration:**\n- Each AlpsDecompTreeNode has an AlpsDecompNodeDesc\n- Used for checkpointing and parallel distribution\n- Compact representation for tree storage",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsDecompTreeNode.h for the tree node using this",
+    "AlpsNodeDesc (ALPS) for base class interface"
+  ]
+}

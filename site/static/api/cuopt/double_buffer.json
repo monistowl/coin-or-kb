@@ -1,0 +1,9 @@
+{
+  "name": "double_buffer",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/utilities/double_buffer.hpp",
+  "brief": "cuOpt utility functions\n\nCommon utilities for cuOpt library.",
+  "algorithms": [],
+  "methods": []
+}

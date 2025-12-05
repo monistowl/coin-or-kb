@@ -1,0 +1,9 @@
+{
+  "name": "SymWarmStart",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "src/OsiSym/SymWarmStart.hpp",
+  "brief": "SYMPHONY warm start information\n\nSymWarmStart: stores basis and tree information for restarting\nSYMPHONY MIP solver from previous state. Enables incremental solving.",
+  "algorithms": [],
+  "methods": []
+}

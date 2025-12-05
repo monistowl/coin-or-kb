@@ -1,0 +1,24 @@
+{
+  "name": "CbcNode",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcNode.hpp",
+  "brief": "Search tree node for branch-and-cut\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+  "algorithms": [
+    {
+      "name": "Branch-and-Bound Node Management:\nEach CbcNode represents a subproblem (LP relaxation with additional bounds)\nin the B&B tree. Key operations:\n\n1. Node Creation: When branching on variable x_j with fractional value f:\n   - Down child: add bound x_j \u2264 floor(f)\n   - Up child: add bound x_j \u2265 ceil(f)\n\n2. Variable Selection (chooseBranch):\n   - Strong branching: solve LP for each candidate, pick best degradation\n   - Pseudo-costs: estimate from historical branching improvements\n   - Reliability branching: strong branch until pseudo-costs reliable\n\n3. Node Processing:\n   - Reconstruct LP from parent using CbcNodeInfo diffs\n   - Solve LP relaxation\n   - Apply cuts, check integrality, branch or fathom",
+      "math": "Strong branching score: score_j = (1-\u03bc)\u00b7min(D\u207b_j, D\u207a_j) + \u03bc\u00b7max(D\u207b_j, D\u207a_j)\nwhere D\u207b_j, D\u207a_j are objective degradations for down/up branches, \u03bc \u2208 [0,1].\nPseudo-cost: \u03c8\u207b_j = \u0394Z\u207b/(f_j - floor(f_j)), initialized via strong branching.",
+      "complexity": "Strong branching: O(k\u00b7LP) where k candidates evaluated.\nPseudo-costs: O(n) for scoring after initialization. Node reconstruction:\nO(depth) to replay bound changes from root.",
+      "ref": [
+        "Land & Doig, \"An automatic method for solving discrete programming problems\",\n     Econometrica 28 (1960) 497-520 (original B&B)",
+        "Achterberg, Koch & Martin, \"Branching rules revisited\",\n     Operations Research Letters 33 (2005) 42-54 (reliability branching)\n\nCbcNode represents a live subproblem in the B&C search tree.\nContains information needed while the node is active:\n- Depth in tree, objective value, branching state\n- Links to CbcNodeInfo for reconstruction\n\nLifecycle: Created when branching, deleted when all branches evaluated.\nExtends CoinTreeNode for heap-based storage in CbcTree.\n\nKey methods:\n- createInfo(): Create CbcNodeInfo for subproblem storage\n- branch(): Apply branching and create child subproblem\n- chooseBranch(): Select branching variable/object"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcNodeInfo for persistent subproblem information",
+    "CbcTree for node storage and selection",
+    "CbcBranchingObject for branching decisions"
+  ]
+}

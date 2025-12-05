@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprCos",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprCos.hpp",
+  "brief": "Cosine function w = cos(x)\n\nBounded periodic function in [-1, 1]. Convexification follows the\nsame approach as exprSin with a phase shift.\n\n**Convexification (depends on bound interval):**\n- If interval < \u03c0: tangent line is overestimator on convex part,\n  underestimator on concave part\n- Secant line connects interval endpoints\n- Newton iteration (trigNewton) finds optimal tangent points\n\n**Implied bounds:**\nSince cos is bounded, w \u2208 [-1, 1] always. Uses trigImpliedBound()\nfor reverse propagation when w bounds are known.\n\n**Derivative:**\nd(cos(x))/dx = -sin(x), used for gradient computations.\n\n**Period handling:**\nIf bound interval spans multiple periods, relaxation becomes\ntrivial: -1 <= w <= 1.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprSin for detailed convexification algorithm",
+    "CouenneExprBCos for bound computation"
+  ]
+}

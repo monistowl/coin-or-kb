@@ -1,0 +1,22 @@
+{
+  "name": "IpMa86SolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpMa86SolverInterface.hpp",
+  "brief": "Interface to HSL MA86 parallel sparse symmetric solver\n\nMa86SolverInterface wraps the HSL MA86 solver, a DAG-based\nparallel direct solver for symmetric indefinite systems.",
+  "algorithms": [
+    {
+      "name": "DAG-Based Parallel Multifrontal LDL^T:\n  MA86 exploits task parallelism via directed acyclic graph (DAG):\n  - Elimination tree converted to task dependency graph\n  - Independent frontal matrices factored in parallel (OpenMP)\n  - Dynamic scheduling balances load across cores\n  - Supernodal blocking for BLAS3 efficiency\n  Scales well on shared-memory multi-core systems.",
+      "math": "Computes A = P\u00b7L\u00b7D\u00b7L^T\u00b7P^T where:\n  - P = permutation from MC68 (AMD/METIS/automatic selection)\n  - L = unit lower triangular, stored by supernodes\n  - D = block diagonal (1\u00d71 and 2\u00d72 pivots)\n  Threshold pivoting ensures stability for indefinite systems.",
+      "complexity": "O(n\u00b7f\u00b2/p) with p OpenMP threads. Parallel speedup limited\n  by critical path in elimination tree. Best for medium-large problems\n  (n ~ 10^4 to 10^6) on 4-32 cores.",
+      "ref": [
+        "Hogg, Reid & Scott (2010). \"Design of a Multicore Sparse\n     Cholesky Factorization Using DAGs\". SIAM J. Sci. Comput.\n\nMA86 characteristics:\n- Parallel: Uses OpenMP for multi-core parallelism\n- DAG-based scheduling for load balancing\n- Input format: CSR_Format_1_Offset (upper triangular)\n- Provides inertia\n\nUses MC68 for fill-reducing ordering (AUTO, AMD, or METIS).\n\nOperations:\n- ma86_analyse: Symbolic factorization with ordering\n- ma86_factor: Parallel numerical factorization\n- ma86_factor_solve: Combined factorization and solve\n- ma86_solve: Forward/backward solve\n- ma86_finalise: Release memory\n\nThe order_ array stores the fill-reducing permutation reused\nacross factorizations with the same sparsity pattern."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMa77SolverInterface.hpp for out-of-core solver",
+    "IpMa97SolverInterface.hpp for newer parallel solver"
+  ]
+}

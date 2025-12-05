@@ -1,0 +1,9 @@
+{
+  "name": "SepaTMINLP2OsiLP",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "experimental/Separable/SepaTMINLP2OsiLP.hpp",
+  "brief": "Separable MINLP to LP conversion\n\nConverts separable TMINLP to Osi LP relaxation.\nCreates piecewise linear approximations for separable functions.",
+  "algorithms": [],
+  "methods": []
+}

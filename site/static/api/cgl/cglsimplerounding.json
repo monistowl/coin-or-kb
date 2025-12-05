@@ -1,0 +1,21 @@
+{
+  "name": "CglSimpleRounding",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglSimpleRounding/CglSimpleRounding.hpp",
+  "brief": "Simple rounding cuts via GCD (greatest common divisor)\n\nGenerates simple rounding cuts using the GCD method from\nNemhauser and Wolsey (1988, p.211).",
+  "algorithms": [
+    {
+      "name": "Simple Rounding via GCD:\n  Strengthens constraints using integer coefficient structure:\n  1. For each constraint a'x \u2264 b, derive all-integer version:\n     - Net out continuous variables if possible\n     - Scale to obtain integer coefficients\n  2. Compute g = GCD(a_1, a_2, ..., a_n) using Euclid's algorithm\n  3. Divide: (a/g)'x \u2264 b/g\n  4. Round RHS: (a/g)'x \u2264 \u230ab/g\u230b (valid since LHS is integer)",
+      "math": "Example derivation:\n  Original: 6x + 9y \u2264 20 with x,y \u2208 \u2124\n  GCD(6,9) = 3\n  Divide: 2x + 3y \u2264 6.67\n  Round: 2x + 3y \u2264 6 (strengthened RHS)\n  Cut tightens by 0.67, may cut off LP optimum",
+      "complexity": "O(n\u00b7log(max_coef)) per constraint\n  GCD via Euclid's algorithm: O(log(min(a,b))) per pair\n  Total: O(m\u00b7n\u00b7log(max_coef)) for full matrix",
+      "ref": [
+        "Nemhauser & Wolsey (1988). \"Integer and Combinatorial Optimization\".\n     Wiley, p.211.\n\nHelper methods:\n- gcd(a,b): Euclid's algorithm for two integers\n- gcdv(n,vi): GCD of integer vector\n- power10ToMakeDoubleAnInt(): Scale coefficients to integers\n- deriveAnIntegerRow(): Create integer-only version of constraint\n\nWarning: Sensitive to numerical precision. The power10 scaling\nmust not overflow 32-bit integers."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglGomory for more sophisticated cut generation"
+  ]
+}

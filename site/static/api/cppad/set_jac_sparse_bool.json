@@ -1,0 +1,9 @@
+{
+  "name": "set_jac_sparse_bool",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/chkpoint_one/set_jac_sparse_bool.hpp",
+  "brief": "Core AD functionality: set jac sparse bool",
+  "algorithms": [],
+  "methods": []
+}

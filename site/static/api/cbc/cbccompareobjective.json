@@ -1,0 +1,20 @@
+{
+  "name": "CbcCompareObjective",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcCompareObjective.hpp",
+  "brief": "Best-bound (objective-based) node selection\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCompareObjective: Implements best-first search.\nAlways explores node with best (lowest for min) LP bound.\n\ntest(x,y) returns true if y has smaller objective than x.\nPrioritizes most promising nodes for optimality proof.",
+  "algorithms": [
+    {
+      "name": "Best-First Search (BFS) Node Selection:\n  test(x, y) comparison for heap ordering:\n  Returns true if objective(y) < objective(x).\n  Effect: Node with smallest LP bound processed first.\n  Global bound: Always equals objective of next node to process.\n  Optimal for proving optimality (fewest nodes theoretically).",
+      "math": "Optimality proof efficiency:\n  Best-first guarantees: global_bound = min{LP(node) : node open}.\n  Gap = (incumbent - global_bound) / |incumbent|.\n  Minimizes gap at each step \u2192 optimal for gap closure.\n  Memory: May store O(2^d) nodes; gap improves slowly until near proof.\n\nAdvantages:\n- Optimal search order for proving optimality\n- Best global bound progression\n- Minimizes total nodes for proof (in theory)\n\nDisadvantages:\n- Can use exponential memory\n- May take long to find first feasible solution\n- Poor anytime behavior",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcCompareDepth for depth-first alternative",
+    "CbcCompareDefault for practical hybrid\n\nEdwin 11/25/09 carved out of CbcCompareActual"
+  ]
+}

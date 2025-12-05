@@ -1,0 +1,13 @@
+{
+  "name": "SmiMessage",
+  "library": "Smi",
+  "layer": "layer-3",
+  "header": "Smi/src/SmiMessage.hpp",
+  "brief": "Message handler and codes for Smi logging\n\nSmiMessage extends CoinMessages to provide structured logging\nfor the stochastic programming interface.\n\n**SMI_Message Enum:**\n- SMI_SCENARIO_FINISHED: Scenario processing complete\n- SMI_DUMMY_END: End marker\n\n**SmiMessage Class:**\nCoinMessages-based message handler:\n- Constructor sets up message text templates\n- Supports multiple languages (default us_en)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SmiScnModel.hpp for message handler usage",
+    "CoinMessages, CoinMessageHandler (CoinUtils) for base classes"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "DecompWaitingCol",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompWaitingCol.h",
+  "brief": "Wrapper pairing DecompVar with its master column coefficients\n\nDecompWaitingCol bundles a DecompVar (the x-space representation)\nwith its expanded column (A''s) for the master problem.\n\n**Data Members:**\n- m_var: The variable in x-space (extreme point s)\n- m_col: CoinPackedVector of (A''s) master coefficients\n\n**Purpose:**\nWhen pricing generates a new column s, we need both:\n1. The x-space representation for solution reconstruction\n2. The master coefficients for LP updates\nThis class keeps them paired.\n\n**Lifecycle:**\n- Created during pricing when subproblem returns solution\n- Stored in DecompVarPool\n- m_col regenerated via reExpand() when master changes\n- Eventually transferred to master LP",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompVar.h for the variable itself",
+    "DecompVarPool.h for column pool management"
+  ]
+}

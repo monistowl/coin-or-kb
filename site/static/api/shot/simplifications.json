@@ -1,0 +1,12 @@
+{
+  "name": "Simplifications",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Model/Simplifications.h",
+  "brief": "Expression tree simplification and term extraction\n\nAlgebraic simplification and structured term extraction.\n\n**Simplification Functions:**\n- simplify(): Recursive expression simplification\n- simplifyExpression(ExprType): Type-specific handlers\n- Constant folding, negation cancellation, identity removal\n\n**Term Extraction:**\n- extractTermsAndConstant(): Decompose expression into:\n  LinearTerms, QuadraticTerms, MonomialTerms, SignomialTerms,\n  NonlinearExpression remainder, and constant\n\n**Conversion Functions:**\n- convertProductToLinearTerm/QuadraticTerm/MonomialTerm()\n- convertPowerToLinearTerm/QuadraticTerm()\n- convertToSignomialTerm(): Extract signomial structure\n\n**Use Case:**\n- Problem reformulation for better convexity analysis\n- Extract quadratics for QCQP solvers\n- Identify linear/quadratic substructure in NLP",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "NonlinearExpressions.h for expression tree nodes"
+  ]
+}

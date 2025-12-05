@@ -1,0 +1,14 @@
+{
+  "name": "BlisBranchStrategyRel",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisBranchStrategyRel.h",
+  "brief": "Reliability branching strategy (strong + pseudo-cost hybrid)\n\nReliability branching combines the accuracy of strong branching with\nthe efficiency of pseudo-costs. It uses strong branching until\npseudo-cost estimates become \"reliable\" (observed enough times).\n\n**Algorithm:**\n1. For each fractional integer variable x\u2c7c:\n   - If pseudo-costs for x\u2c7c are reliable (count \u2265 relibility_):\n     Use pseudo-cost estimate for score\n   - Else:\n     Perform strong branching (solve child LPs)\n     Update pseudo-costs with observed degradation\n2. Select variable with highest score\n\n**relibility_ parameter:**\nNumber of observations required before trusting pseudo-costs.\nHigher values \u2192 more strong branching (accurate but slow)\nLower values \u2192 more pseudo-cost usage (fast but less accurate)\n\n**Advantages:**\n- Best of both worlds: accurate early, fast later\n- Pseudo-costs improve as search progresses\n- Default strategy in many modern MILP solvers",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisBranchStrategyStrong for pure strong branching",
+    "BlisBranchStrategyPseudo for pure pseudo-cost branching",
+    "BlisPseudo for pseudo-cost data structure"
+  ]
+}

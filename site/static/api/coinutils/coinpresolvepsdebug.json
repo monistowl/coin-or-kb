@@ -1,0 +1,12 @@
+{
+  "name": "CoinPresolvePsdebug",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolvePsdebug.hpp",
+  "brief": "Debug and consistency checking for presolve\n\nEnable with PRESOLVE_DEBUG and PRESOLVE_CONSISTENCY defines.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

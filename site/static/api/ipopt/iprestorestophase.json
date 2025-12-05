@@ -1,0 +1,20 @@
+{
+  "name": "IpRestoRestoPhase",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpRestoRestoPhase.hpp",
+  "brief": "Recursive restoration for separable n,p variable initialization\n\nRestoRestorationPhase provides a specialized \"restoration within\nrestoration\" procedure for the MinC_1NrmRestorationPhase. It computes\noptimal values for the slack variables (n_c, p_c, n_d, p_d) by\ntreating them as separable from x and s.",
+  "algorithms": [
+    {
+      "name": "Separable Slack Optimization:\n  Given current x (fixed), find optimal n, p for restoration problem:\n  1. Compute constraint residuals: r_c = c(x), r_d = d(x) - s.\n  2. For each component i, solve: v\u00b2 + 2a\u1d62\u00b7v - b\u1d62 = 0\n     where a\u1d62, b\u1d62 derived from residual and complementarity target.\n  3. Extract n, p from solution: v = p - n, use sign of residual.\n  4. Ensures n \u2265 0, p \u2265 0 with n\u00b7p close to target complementarity.",
+      "math": "Quadratic subproblem:\n  For fixed x: min_{n,p\u22650} \u03c1(||n||\u2081 + ||p||\u2081) + barrier(n,p)\n  s.t. c(x) + n - p = 0.\n  Separable \u2192 each component independent quadratic in v = p - n.\n  Closed-form: v = -a + \u221a(a\u00b2 + b) (positive root).",
+      "complexity": "O(m) for m constraints, no linear solve needed.\n  Much cheaper than full restoration iteration for slack initialization.\n\nThe restoration feasibility problem has structure:\n  min ||p + n||_1  s.t.  c(x) + n - p = 0\n\nFor fixed x, optimal n and p can be computed by solving a quadratic\nequation v^2 + 2a*v - b = 0 element-wise, where:\n- a relates to constraint values\n- b relates to complementarity conditions\n\nThis avoids full nested optimization when only n,p need updating.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpRestoMinC_1Nrm.hpp for main restoration phase",
+    "IpRestoPhase.hpp for base restoration interface"
+  ]
+}

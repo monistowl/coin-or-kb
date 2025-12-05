@@ -1,0 +1,19 @@
+{
+  "name": "OQPinterface",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/extras/OQPinterface.hpp",
+  "brief": "Online QP Benchmark Collection interface",
+  "algorithms": [
+    {
+      "name": "Online QP Benchmark Execution and Validation\n\nOQPinterface provides utilities for running parametric QP sequences\nfrom the Online QP Benchmark Collection, testing hot-starting\nperformance on MPC-style problem sequences.\n\n**Benchmark structure:**\nEach benchmark contains a sequence of nQP related QPs with:\n- Fixed H (Hessian) and A (constraint matrix)\n- Varying g (gradient), lb/ub (bounds), lbA/ubA (constraint bounds)\n- Optional reference solutions (xOpt, yOpt, objOpt)\n\n**Key functions:**\n- readOqpDimensions(): Parse problem size from files\n- readOqpData(): Load full benchmark data\n- solveOqpBenchmark(): Solve sequence, measure performance\n- runOqpBenchmark(): End-to-end benchmark execution\n\n**Performance metrics:**\n- maxNWSR/avgNWSR: Working set recalculations (iterations)\n- maxCPUtime/avgCPUtime: Solve time per QP\n- maxStationarity/Feasibility/Complementarity: KKT residuals\n\n**Hot-start evaluation:**\nWith useHotstarts=true, each QP initializes from previous solution,\ntesting the parametric active-set method's online performance.",
+      "math": "",
+      "complexity": "O(nQP \u00d7 solve_time) for benchmark sequence",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "http://www.qpOASES.org/onlineQP (archived)"
+  ]
+}

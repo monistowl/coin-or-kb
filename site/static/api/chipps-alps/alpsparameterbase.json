@@ -1,0 +1,13 @@
+{
+  "name": "AlpsParameterBase",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsParameterBase.h",
+  "brief": "Generic parameter management infrastructure for ALPS\n\nBase classes for defining and parsing typed parameter sets.\nDerived from BCP_parameters.hpp design.\n\n**AlpsParameterT enum:**\n- AlpsBoolPar, AlpsIntPar, AlpsDoublePar, AlpsStringPar\n- AlpsStringArrayPar: Multiple values per key\n\n**AlpsParameter class:**\nIdentifies a single parameter by type and index within type.\n\n**AlpsParameterSet class:**\nContainer for typed parameter arrays with file parsing.\nSubclasses must implement:\n- createKeywordList(): Define keyword\u2192parameter mappings\n- setDefaultEntries(): Set default values\n\n**Reading parameters:**\n- readFromFile(): Parse parameter file\n- readFromStream(): Parse from istream\n- readFromArglist(): Parse command-line args",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsParams for ALPS-specific parameter set",
+    "BcpsParams, BlisParams for higher-level parameters"
+  ]
+}

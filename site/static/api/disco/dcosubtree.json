@@ -1,0 +1,14 @@
+{
+  "name": "DcoSubTree",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoSubTree.hpp",
+  "brief": "Subtree representation for parallel search\n\nDcoSubTree extends BcpsSubTree to represent a portion of the\nbranch-and-bound tree for parallel distribution.\n\n**Inheritance:** DcoSubTree -> BcpsSubTree -> AlpsSubTree\n\n**Usage in Parallel:**\n- Subtrees are work units distributed to workers\n- Contains subset of tree nodes for processing\n- Supports encode/decode for network transmission\n\nNote: Currently minimal implementation - most logic in base class.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoTreeNode.hpp for tree node implementation",
+    "BcpsSubTree (BCPS) for base class",
+    "AlpsSubTree (ALPS) for parallel infrastructure"
+  ]
+}

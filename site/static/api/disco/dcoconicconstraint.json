@@ -1,0 +1,14 @@
+{
+  "name": "DcoConicConstraint",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoConicConstraint.hpp",
+  "brief": "Second-order cone (Lorentz cone) constraint representation\n\nDcoConicConstraint represents conic constraints of two types:\n- Lorentz cone: ||x_1...x_{n-1}|| <= x_n\n- Rotated Lorentz cone: 2*x_1*x_2 >= ||x_3...x_n||^2\n\n**Data Members:**\n- coneType_: DcoLorentzCone or DcoRotatedLorentzCone\n- coneSize_: Number of variables in cone\n- members_: Variable indices forming the cone\n- supports_: Linear constraints approximating the cone (OA)\n- activeSupports_: Which supports are binding\n\n**OA (Outer Approximation):**\nWhen using linear solvers, conic constraints are approximated by\nlinear supporting hyperplanes. The supports_ array stores these\ncuts, and activeSupports_ tracks which are currently tight.\n\n**Feasibility:**\ninfeasibility() returns the cone violation at the current solution,\nused to decide if more OA cuts are needed.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoConstraint.hpp for base class",
+    "DcoLinearConstraint.hpp for linear supports",
+    "Dco.hpp for DcoLorentzConeType enum"
+  ]
+}

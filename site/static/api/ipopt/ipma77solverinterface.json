@@ -1,0 +1,22 @@
+{
+  "name": "IpMa77SolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpMa77SolverInterface.hpp",
+  "brief": "Interface to HSL MA77 out-of-core sparse symmetric solver\n\nMa77SolverInterface wraps the HSL MA77 solver, designed for\nlarge-scale problems that may not fit entirely in memory.",
+  "algorithms": [
+    {
+      "name": "Out-of-Core Multifrontal LDL^T Factorization:\n  MA77 uses multifrontal method with disk-based factor storage:\n  - Elimination tree computed from sparsity pattern (MC68 ordering)\n  - Frontal matrices assembled and factored sequentially\n  - Factors written to 4 disk files to minimize memory footprint\n  - Solve phase streams factors back from disk as needed\n  Enables solving problems where L factor exceeds available RAM.",
+      "math": "Computes A = P\u00b7L\u00b7D\u00b7L^T\u00b7P^T where:\n  - P = permutation from MC68 (AMD/METIS fill-reducing order)\n  - L = unit lower triangular\n  - D = block diagonal (1\u00d71 and 2\u00d72 blocks for indefinite systems)\n  Inertia (positive/negative eigenvalue counts) from D block signs.",
+      "complexity": "O(n\u00b7f\u00b2) factorization where f = front size (fill-dependent).\n  I/O cost: O(nnz(L)) disk reads/writes. Suitable for n > 10^6 when\n  in-core solvers run out of memory.",
+      "ref": [
+        "Reid & Scott (2009). \"An Out-of-Core Sparse Cholesky Solver\".\n     RAL Technical Report RAL-TR-2009-004.\n\nMA77 characteristics:\n- Out-of-core capability: Uses files for factor storage\n- Input format: CSR_Full_Format_1_Offset (both triangles)\n- Provides inertia\n- Supports element-by-element assembly\n\nUses MC68 for fill-reducing ordering (AMD or METIS).\n\nMain operations:\n- ma77_open: Initialize solver and create temporary files\n- ma77_input_vars/reals: Provide matrix structure/values\n- ma77_analyse: Symbolic factorization with MC68 ordering\n- ma77_factor: Numerical factorization\n- ma77_solve: Forward/backward solve\n- ma77_finalise: Cleanup and delete files\n\nThe solver creates 4 temporary files (fname1-4) for factor storage."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMa86SolverInterface.hpp for in-core parallel solver",
+    "IpMa97SolverInterface.hpp for modern in-core solver"
+  ]
+}

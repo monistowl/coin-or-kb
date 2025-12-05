@@ -1,0 +1,9 @@
+{
+  "name": "AmplTNLP",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "thirdparty/Ipopt/include/coin/AmplTNLP.hpp",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

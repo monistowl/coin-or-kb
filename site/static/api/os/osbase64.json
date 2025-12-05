@@ -1,0 +1,9 @@
+{
+  "name": "OSBase64",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSUtils/OSBase64.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "BonTMINLP2OsiLP",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonTMINLP2OsiLP.hpp",
+  "brief": "Abstract transformer from MINLP to LP outer approximation\n\nBase class for building linear outer approximations of nonlinear problems.\nUsed to create MILP relaxations for OA-based algorithms.\n\n**Key methods:**\n- extract(): Build initial OA in an OsiSolverInterface\n- get_oas(): Generate OA cuts at a given point\n- get_refined_oa(): Get refined OA cuts\n\n**Coefficient cleaning (cleanNnz):**\nSmall coefficients are handled specially to avoid numerical issues:\n- Values < very_tiny_: Ignored completely\n- Values < tiny_: Try to absorb into RHS if bounds allow",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BonOaDecBase for OA algorithm driver",
+    "BonOuterApprox for concrete implementation"
+  ]
+}

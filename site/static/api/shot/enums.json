@@ -1,0 +1,12 @@
+{
+  "name": "Enums",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Enums.h",
+  "brief": "Enumeration types for SHOT solver states and options\n\nComprehensive enums for algorithm configuration and status tracking.\n\n**Problem Classification:**\n- E_Convexity: Linear, Convex, Concave, Nonconvex, Unknown\n- E_DualProblemClass: LP, QP, QCQP, MIP, MIQP, MIQCQP\n\n**Auxiliary Variable Types:**\n- E_AuxiliaryVariableType: NonlinearObjectiveFunction (epigraph),\n  BilinearTerms, MonomialPartitioning, etc.\n\n**Hyperplane Sources (E_HyperplaneSource):**\n- MIPOptimalRootsearch, MIPSolutionPoolRootsearch\n- LPRelaxedRootsearch, InteriorPointSearch\n- PrimalSolutionSearch, ObjectiveCuttingPlane\n\n**Event Types (E_EventType):**\n- NewPrimalSolution: New incumbent found\n- UserTerminationCheck: Allow user termination\n\n**Termination Reasons (E_TerminationReason):**\n- Optimal, ObjectiveGapTolerance, TimeLimit\n- IterationLimit, InfeasibleProblem, NoDualCutsAdded",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Solver.h for using these enums"
+  ]
+}

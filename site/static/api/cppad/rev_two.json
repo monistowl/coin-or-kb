@@ -1,0 +1,9 @@
+{
+  "name": "rev_two",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/rev_two.hpp",
+  "brief": "Core AD functionality: rev two",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "CouenneSparseMatrix",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/util/CouenneSparseMatrix.hpp",
+  "brief": "Sparse matrix storage for Feasibility Pump distance\n\nSimple COO (coordinate) format sparse matrix used to store\nthe Hessian of the Lagrangian at optimum for later use in\nmodified distance computations.\n\n**Storage format:**\nCOO (Coordinate list):\n- val_[k]: Value of k-th nonzero\n- row_[k]: Row index of k-th nonzero\n- col_[k]: Column index of k-th nonzero\n- num_: Total number of nonzeros\n\n**Usage in Feasibility Pump:**\nThe Hessian from an NLP solve can be saved and used to modify\nthe distance metric in subsequent MILP solves, biasing the\nsearch toward regions where the NLP objective improves.\n\n**Note:** This is a simple storage class, not a full sparse\nmatrix implementation. For operations, use CoinPackedMatrix.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneTNLP::optHessian_ which stores this",
+    "CouenneFeasPump which uses modified distances"
+  ]
+}

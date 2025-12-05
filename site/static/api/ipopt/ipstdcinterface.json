@@ -1,0 +1,9 @@
+{
+  "name": "IpStdCInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Interfaces/IpStdCInterface.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,22 @@
+{
+  "name": "sparse_hes",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/sparse_hes.hpp",
+  "brief": "Sparse Hessian computation using automatic differentiation",
+  "algorithms": [
+    {
+      "name": "Sparse Hessian Computation:\nEfficiently compute Hessian exploiting sparsity structure via\ngraph coloring and reverse-on-forward AD.\n\nHESSIAN STRUCTURE:\n  H(x) = \u2207\u00b2(w'F(x)) = \u03a3\u1d62 w\u1d62\u00b7\u2207\u00b2F\u1d62(x)\n  Only compute nonzero entries H[i,j] identified by sparsity pattern\n\nGRAPH COLORING:\n  Group columns by color c\u2081, c\u2082, ... where columns in same group\n  share no row position (can be computed simultaneously)\n  Direction d^(k) = \u03a3\u2c7c\u2208c\u2096 e\u2c7c (sum of unit vectors in color k)\n\nCOMPRESSED COMPUTATION:\n  For each color k:\n    1. Forward sweep: compute v = \u2207F(x)\u00b7d^(k)\n    2. Reverse sweep: compute \u2207(w'v) = H\u00b7d^(k)\n  Extract individual H[:,j] from compressed result\n\nREVERSE-ON-FORWARD (second-order):\n  Forward mode: propagate directional derivative\n  Reverse mode: compute gradient of directional derivative\n  Combined: extracts Hessian-vector product",
+      "math": "Full Hessian: O(n\u00b2) entries\n  Sparse Hessian: O(nnz) entries to compute\n  With p colors (from coloring): p forward + p reverse sweeps\n  Each sweep: O(ops) operations\n\nColoring algorithms:\n- \"cppad.general\": Row determination (conservative)\n- \"cppad.symmetric\": Exploits H = H' for half the work",
+      "complexity": "- Sparsity detection: O(ops\u00b7nnz_pattern)\n- Graph coloring: O(n\u00b2 + nnz) for greedy coloring\n- Hessian computation: O(p\u00b7ops) where p = chromatic number\n- p \u2264 nnz_per_row + 1 typically",
+      "ref": [
+        "Coleman & Mor\u00e9 (1984). \"Estimation of Sparse Hessian Matrices\n  and Graph Coloring Problems\". Mathematical Programming 28:243-270."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sparse_jac.hpp for sparse Jacobian",
+    "rev_hes_sparsity.hpp for Hessian sparsity patterns"
+  ]
+}

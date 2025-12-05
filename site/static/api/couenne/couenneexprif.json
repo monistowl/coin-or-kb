@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprIf",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprIf.hpp",
+  "brief": "Conditional (if-then-else) expression operator\n\nImplements the AMPL ifnl() operator:\n  if (condition) then expr1 else expr2\n\n**Status:** This is a placeholder/stub class. Full implementation\nwould require handling disjunctive convexification.\n\n**Convexification challenge:**\nConditional expressions create disjunctive feasible regions.\nStandard approach would use big-M formulations or disjunctive\nprogramming techniques to handle the branching logic.\n\n**Usage in AMPL:**\nModels with if-then-else create nonsmooth, potentially\ndiscontinuous functions that are difficult to convexify.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneDisjCuts for disjunctive cut generation",
+    "exprOp base class"
+  ]
+}

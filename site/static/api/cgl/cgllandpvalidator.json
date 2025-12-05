@@ -1,0 +1,14 @@
+{
+  "name": "CglLandPValidator",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglLandP/CglLandPValidator.hpp",
+  "brief": "Cut validation and cleaning for Lift-and-Project",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglLandPSimplex which uses this validator",
+    "CglLandP for the main cut generator",
+    "CglGMIParam for similar validation parameters\n\nDate:     11/22/05\n\nCopyright (C) 2005-2009, Pierre Bonami and others.  All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL)."
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "solution_reader",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/math_optimization/solution_reader.hpp",
+  "brief": "cuOpt optimization utilities\n\nCommon utilities for mathematical optimization.",
+  "algorithms": [],
+  "methods": []
+}

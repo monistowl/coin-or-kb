@@ -1,0 +1,13 @@
+{
+  "name": "CouenneMINLPInterface",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/interfaces/CouenneMINLPInterface.hpp",
+  "brief": "OsiSolverInterface for MINLP via Couenne expressions\n\nProvides an Osi-compatible interface for solving MINLP continuous\nrelaxations using NLP solvers (Ipopt or FilterSQP). Gradients and\nJacobians are computed from the expression DAG.\n\n**Solver enum:**\n- EIpopt: Interior-point via Ipopt\n- EFilterSQP: Sequential quadratic programming\n- EAll: Use multiple solvers for robustness\n\n**Key methods:**\n- initialSolve(): Solve initial continuous relaxation\n- resolve(): Re-solve after bound changes\n- getOuterApproximation(): Generate OA cuts at current point\n- extractLinearRelaxation(): Build LP relaxation from NLP\n\n**Outer approximation support:**\n- getOuterApproximation(): Generate linearizations at solution\n- getConstraintOuterApproximation(): Single constraint OA\n- getBendersCut(): Benders decomposition cut\n- getFeasibilityOuterApproximation(): Cuts for feasibility pump\n\n**Strong branching:**\nUses StrongBranchingSolver for approximate LP-based evaluation\nduring variable selection.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneProblem for the symbolic representation",
+    "CouenneTNLP for the Ipopt TNLP adapter"
+  ]
+}

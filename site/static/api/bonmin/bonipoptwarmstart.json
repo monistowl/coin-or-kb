@@ -1,0 +1,13 @@
+{
+  "name": "BonIpoptWarmStart",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/Ipopt/BonIpoptWarmStart.hpp",
+  "brief": "Warm start storage for Ipopt within branch-and-bound\n\nStores primal and dual solution values for warm starting subsequent NLP\nsolves. Inherits from both CoinWarmStartPrimalDual (for actual data) and\nCoinWarmStartBasis (for Cbc integration compatibility).\n\n**Data layout (dual part has 2*n + m values):**\n- [0, n): Dual multipliers for lower bounds (z_L for x >= l)\n- [n, 2n): Dual multipliers for upper bounds (z_U for x <= u)\n- [2n, 2n+m): Dual multipliers for constraints (lambda for g(x))\n\n**Classes:**\n- IpoptWarmStart: Main warm start container\n- IpoptWarmStartDiff: Differential update for tree traversal",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpoptInteriorWarmStarter for interior point specific warm start",
+    "CoinWarmStartPrimalDual for base class data storage"
+  ]
+}

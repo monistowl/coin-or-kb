@@ -1,0 +1,24 @@
+{
+  "name": "CbcTree",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcTree.hpp",
+  "brief": "Heap-based storage for live search tree nodes\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+  "algorithms": [
+    {
+      "name": "Search Tree Management with Priority Heap:\nMaintains live (unexplored) nodes in a binary heap for efficient selection.\n\nNode Selection Strategies (via CbcCompare):\n- Best-first: Select node with best (lowest) LP bound \u2192 optimal first solution\n- Depth-first: Select deepest node \u2192 memory efficient, finds solutions fast\n- Best-estimate: Use pseudo-cost estimate of integer solution value\n- Hybrid: Switch strategies based on incumbent, gap, or tree size\n\nTree Operations:\n- push(node): Add to heap, O(log n) sift-up\n- pop(): Remove best, O(log n) sift-down\n- cleanTree(cutoff): Prune nodes with bound \u2265 cutoff (fathoming)\n- setComparison(): Change strategy, O(n) re-heapify",
+      "math": "Node bound vs incumbent: If LB(node) \u2265 UB (best incumbent), fathom node.\nBest-first guarantees: first integer solution found is optimal.\nDepth-first memory: O(depth \u00d7 branching_factor) vs O(2^depth) for best-first.",
+      "complexity": "push/pop: O(log n). cleanTree: O(n). Space: O(live_nodes).\nTypical MIP: live nodes peaks at thousands to millions depending on strategy.",
+      "ref": [
+        "Linderoth & Savelsbergh, \"A computational study of search strategies\",\n     INFORMS Journal on Computing 11 (1999) 173-187",
+        "Achterberg, \"Constraint Integer Programming\", PhD thesis, TU Berlin (2007)\n\nCbcTree manages the set of live (unexplored) nodes as a priority heap.\nThe comparison function (CbcCompare) determines node selection strategy:\n- Best-first: Select node with best bound\n- Depth-first: Select deepest node\n- Best-estimate: Use pseudocost estimates\n\nKey methods:\n- push(): Add node to heap\n- top()/pop(): Get and remove best node\n- setComparison(): Change selection strategy (re-heapifies)\n- cleanTree(): Remove nodes worse than cutoff"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcCompareBase for comparison function interface",
+    "CbcNode for node representation",
+    "CbcTreeLocal for local search tree variant"
+  ]
+}

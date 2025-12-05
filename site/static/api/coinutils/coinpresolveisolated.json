@@ -1,0 +1,19 @@
+{
+  "name": "CoinPresolveIsolated",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveIsolated.hpp",
+  "brief": "Handle isolated constraints (connected only by free variables)",
+  "algorithms": [
+    {
+      "name": "Isolated Constraint Removal:\n  Removes constraints connected to rest of problem only through free variables:\n  1. Identify constraint where all variables are free (no bounds) or\n     appear only in this constraint\n  2. Such constraints can be satisfied independently\n  3. Store constraint data for postsolve restoration\n  4. Remove row from problem (reduces problem size)\n  5. Postsolve: Compute variable values to satisfy stored constraint",
+      "math": "Isolated constraint feasibility:\n  Constraint: l_i \u2264 \u03a3 a_ij\u00b7x_j \u2264 u_i where all x_j are free\n  Since x_j unbounded, can always find values satisfying constraint\n  Remove row, set x_j values in postsolve to achieve feasibility",
+      "complexity": "O(nnz in row) to detect and remove\n  Uncommon but provides clean removal when found",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

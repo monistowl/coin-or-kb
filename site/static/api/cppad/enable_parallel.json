@@ -1,0 +1,9 @@
+{
+  "name": "enable_parallel",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/enable_parallel.hpp",
+  "brief": "Value graph: enable_parallel",
+  "algorithms": [],
+  "methods": []
+}

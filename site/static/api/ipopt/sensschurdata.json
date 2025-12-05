@@ -1,0 +1,9 @@
+{
+  "name": "SensSchurData",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensSchurData.hpp",
+  "brief": "sIPOPT Schur complement data structures\n\nSensSchurData: abstract base for Schur complement data storage.\nDefines interface for storing and accessing matrix blocks needed\nfor Schur complement S = C - B*K^{-1}*A computation.",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Cgl012cut",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglZeroHalf/Cgl012cut.hpp",
+  "brief": "Low-level C-style implementation for {0,1/2}-cut separation\nCopyright (C) 2010, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+  "algorithms": [
+    {
+      "name": "{0,1/2}-Cuts (Zero-Half Cuts):\nDerive cuts from mod-2 combinations of constraint rows.\n\nDERIVATION:\n  Given inequalities a_i'x <= b_i with a_i integer:\n  Take subset S with |S| odd\n  Sum: (sum_{i in S} a_i)'x <= sum_{i in S} b_i\n  Divide by 2: (1/2)(sum a_i)'x <= (1/2)(sum b_i)\n  Round down RHS: (1/2)(sum a_i)'x <= floor((1/2)(sum b_i))\n\n  The rounding is valid because LHS is half-integral.\n\nSEPARATION PROBLEM:\n  Find S such that the derived cut is violated by current LP solution x*.\n  Violation = (1/2)(sum_{i in S} a_i)'x* - floor((1/2)(sum_{i in S} b_i))\n\nMOD-2 FORMULATION:\n  Work in GF(2) (binary field):\n  - Coefficients: a_ij mod 2\n  - RHS: b_i mod 2\n  - Find odd cycle in auxiliary graph\n\nAUXILIARY GRAPH:\n  Node for each row, edge weight = slack contribution\n  Find shortest odd cycle = most violated cut\n\nCAPRARA-FISCHETTI ALGORITHM:\n  1. Build parity matrix (mod-2)\n  2. Construct separation graph\n  3. Find shortest paths between node pairs\n  4. Combine paths to form odd cycles\n  5. Extract violated cuts from cycles",
+      "math": "Cut validity: sum_{i in S} (a_i'x <= b_i) implies\n  floor((sum a_i)/2)'x <= floor((sum b_i)/2) when |S| odd and a_i integral\n\nCore data structures for mod-2 arithmetic based separation:\n- ilp: Original ILP matrix in row format\n- parity_ilp: Parity (mod-2) representation with weakening info\n- separation_graph: Graph for finding odd cycles\n- auxiliary_graph, cgl_graph: Shortest path computation\n\nCgl012Cut class provides:\n- sep_012_cut(): Main separation routine (Caprara-Fischetti method)\n- basic_separation(): Original MP paper algorithm\n- tabu_012(): Tabu search for violated cuts\n\nUses local search with scoring to find good {0,1/2}-cuts.",
+      "complexity": "O(m^2 * n) for full separation where m = rows, n = columns",
+      "ref": [
+        "Caprara & Fischetti (1996). \"{0,1/2}-Chvatal-Gomory Cuts\".\n  Math. Programming 74(3):221-235."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglZeroHalf for the OO wrapper around this implementation",
+    "CglOddHole for related odd-cycle based cuts"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "AlpsSearchStrategyBase",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsSearchStrategyBase.h",
+  "brief": "Template base class for search strategy comparison functions\n\nDefines the template interface for node and subtree comparison.\nUsed in priority queues to order items for selection.\n\n**AlpsSearchStrategy<T> template:**\n- compare(x, y): Return true if y preferred over x\n- operator(): Calls compare() for STL compatibility\n- weight_: Optional parameter for tuning\n- type_: Strategy identifier (BestFirst, DFS, etc.)\n\n**Virtual methods for advanced strategies:**\n- selectNextNode(): Custom node selection logic\n- createNewNodes(): Custom branching logic\n\n**AlpsCompare<T> wrapper:**\nAdapter holding strategy pointer for use with std::priority_queue.\nUsed in AlpsPriorityQueue.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsSearchStrategy.h for concrete implementations",
+    "AlpsNodePool for node selection usage",
+    "AlpsSubTreePool for subtree selection usage"
+  ]
+}

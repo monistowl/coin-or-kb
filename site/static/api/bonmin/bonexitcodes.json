@@ -1,0 +1,9 @@
+{
+  "name": "BonExitCodes",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonExitCodes.hpp",
+  "brief": "Error codes for uncatchable errors in Bonmin\n\nDefines error codes for fatal errors that cannot be handled via exceptions.\n\n**Error codes:**\n- ERROR_IN_AMPL_SUFFIXES (111): Invalid AMPL suffix specification\n- UNSUPPORTED_CBC_OBJECT: CbcObject type not supported by Bonmin",
+  "algorithms": [],
+  "methods": []
+}

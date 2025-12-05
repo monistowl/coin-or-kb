@@ -1,0 +1,20 @@
+{
+  "name": "IpDiagMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpDiagMatrix.hpp",
+  "brief": "Diagonal matrix stored as a vector\n\nDiagMatrix efficiently represents diagonal matrices by storing only\nthe diagonal elements as a Vector. Matrix-vector multiply is O(n).",
+  "algorithms": [
+    {
+      "name": "Diagonal Matrix Representation:\n  D = diag(d\u2081, d\u2082, ..., d\u2099) stored as n-vector.\n  Matrix-vector: y \u2190 \u03b1D\u00b7x + \u03b2y computed as y_i = \u03b1\u00b7d_i\u00b7x_i + \u03b2\u00b7y_i.\n  Element-wise multiply avoids explicit matrix storage.",
+      "math": "In IPM, diagonal matrices appear in the KKT system:\n  \u03a3_x = Z_L\u00b7(X-X_L)\u207b\u00b9 + Z_U\u00b7(X_U-X)\u207b\u00b9  (barrier Hessian contribution)\n  where Z_L, Z_U are dual variables and X_L, X_U are bounds.\n  These scale as 1/distance-to-bound, becoming large near bounds.",
+      "complexity": "O(n) storage, O(n) for matvec, O(n) for row/col norms.\n  Far more efficient than storing n\u00b2 elements for diagonal structure.\n\nUsed extensively in Ipopt's KKT system for:\n- Barrier Hessian contribution: diag(z_L/(x - x_L)) + diag(z_U/(x_U - x))\n- Slack variable Hessians\n- Scaling matrices",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpIdentityMatrix.hpp for scalar multiple of identity",
+    "IpSymMatrix.hpp for base class"
+  ]
+}

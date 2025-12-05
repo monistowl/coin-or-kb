@@ -1,0 +1,9 @@
+{
+  "name": "cpp_graph",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/graph/cpp_graph.hpp",
+  "brief": "Core AD functionality: cpp graph",
+  "algorithms": [],
+  "methods": []
+}

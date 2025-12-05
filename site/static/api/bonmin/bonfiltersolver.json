@@ -1,0 +1,21 @@
+{
+  "name": "BonFilterSolver",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/Filter/BonFilterSolver.hpp",
+  "brief": "FilterSQP implementation of TNLPSolver for NLP subproblems",
+  "algorithms": [
+    {
+      "name": "FilterSQP Sequential Quadratic Programming for MINLP Nodes\n\nWraps the FilterSQP solver (Fortran library) to solve continuous NLP\nrelaxations as an alternative to Ipopt. FilterSQP uses sequential quadratic\nprogramming with a filter-based trust region.\n\n**Key features:**\n- OptimizeTNLP()/ReOptimizeTNLP(): Solve NLPs via FilterSQP\n- cachedInfo: Caches problem structure for efficient re-optimization\n- TMat2RowPMat(): Converts sparse matrix formats for Fortran interface\n\n**Filter algorithm:**\nThe \"filter\" maintains pairs (constraint violation, objective value) and\naccepts steps that improve either measure - more robust than merit functions.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "TNLPSolver for the abstract interface",
+    "FilterWarmStart for warm start data",
+    "BqpdSolver for the QP subproblem solver used by FilterSQP"
+  ]
+}

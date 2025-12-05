@@ -1,0 +1,12 @@
+{
+  "name": "SuiteSparseGPU_macros",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPURuntime/Include/SuiteSparseGPU_macros.hpp",
+  "brief": "Common macros for SuiteSparse GPU components\nCopyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nIMPLIES(p,q) logical implication macro: true unless p is true and q is false.\nIncludes debug level macros and workspace accessor macros. Used throughout\nGPURuntime and GPUQREngine.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SuiteSparseGPU_debug.hpp for debug level definitions"
+  ]
+}

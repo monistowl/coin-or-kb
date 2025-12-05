@@ -1,0 +1,24 @@
+{
+  "name": "CglGomory",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglGomory/CglGomory.hpp",
+  "brief": "Gomory mixed-integer cuts from optimal LP basis\n\nGenerates Gomory fractional cuts, the classic MIP cutting planes\nderived by Ralph Gomory in the 1950s-60s. For each fractional basic\nvariable, derives a valid inequality from the simplex tableau row.\n\nAlgorithm:\n1. Requires optimal LP basis (needsOptimalBasis() = true)\n2. For each basic integer variable with fractional value:\n   - Get tableau row: x_i + sum_j a_ij * x_j = b_i\n   - Apply fractional parts: sum_j f(a_ij)*x_j >= f(b_i)\n   - For mixed-integer: separate continuous/integer coefficients\n3. Strengthen using integrality of non-basic integers\n\nKey parameters:\n- limit_/limitAtRoot_: Max nonzeros in cut (dense cuts are expensive)\n- away_/awayAtRoot_: Min distance from integrality to generate cut\n- conditionNumberMultiplier_: Relax cut if basis is ill-conditioned\n- gomoryType_: 0=normal, 1=add original, 2=replace with original matrix\n\nNumerical considerations:\n- Basis condition number affects cut reliability\n- largestFactorMultiplier_ controls cut relaxation for stability\n- alternateFactorization_ uses different factorization for accuracy\n\nGomory cuts are finite and can solve pure integer programs in theory,\nbut numerically fragile. Modern solvers combine with other cuts.",
+  "algorithms": [
+    {
+      "name": "Integrality Distance Threshold (away_):\n  Skip variables near-integer to avoid numerical issues:",
+      "math": "Generate cut only if away_ \u2264 f_0 \u2264 1 - away_\n  Default 0.05; tighter at root for more cuts.",
+      "complexity": "O(m) per cut for m nonzeros in tableau row",
+      "ref": [
+        "Gomory (1958) - Outline of an algorithm for integer solutions",
+        "Cornu\u00e9jols (2007) - Revival of GMI cuts in MIP",
+        "Cook et al. (2009) - Numerically safe GMI cuts"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglCutGenerator for base interface",
+    "ClpFactorization for tableau row computation"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "IpIpoptApplication",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Interfaces/IpIpoptApplication.hpp",
+  "brief": "Main application class for calling Ipopt from C++\n\nIpoptApplication is the entry point for C++ applications using Ipopt.\nProvides methods for initialization, option handling, and solving.",
+  "algorithms": [
+    {
+      "name": "Application Lifecycle and Solve Flow:\n  1. Create: IpoptApplicationFactory() \u2192 configured app instance.\n  2. Initialize(params_file): Parse ipopt.opt, set up Journalist.\n  3. Configure: app->Options()->SetNumericValue(\"tol\", 1e-8), etc.\n  4. OptimizeTNLP(tnlp):\n     a. TNLPAdapter wraps user TNLP \u2192 internal NLP interface.\n     b. AlgorithmBuilder creates strategy objects per options.\n     c. IpoptAlgorithm::Optimize() runs interior-point iterations.\n     d. Return status + populate Statistics().\n  5. ReOptimizeTNLP(tnlp): Warm-start from previous solution.\n     Reuses factorizations, starting point close to optimum.",
+      "math": "Warm-start considerations:\n  Cold start: x\u2080 user-provided, multipliers from least-squares.\n  Warm start: x\u2080, \u03bb\u2080, z\u2080 from previous solve, \u03bc\u2080 from complementarity.\n  ReOptimize skips rebuilding algorithm objects for efficiency.",
+      "complexity": "OptimizeTNLP: O(iterations \u00d7 per_iteration_cost).\n  Per iteration: O(nnz\u00b2/n) for sparse factorization.\n  ReOptimize: Fewer iterations when problem is similar.\n\nTypical usage:\n  SmartPtr<IpoptApplication> app = IpoptApplicationFactory();\n  app->Initialize();\n  app->Options()->SetStringValue(\"linear_solver\", \"ma57\");\n  ApplicationReturnStatus status = app->OptimizeTNLP(mynlp);\n\nKey methods:\n- Initialize(): Read options from ipopt.opt file\n- OptimizeTNLP(): Solve a TNLP problem\n- ReOptimizeTNLP(): Warm-start solve (reuses algorithm state)\n- Options(): Access OptionsList for setting parameters\n- Statistics(): Get solve statistics after optimization",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTNLP.hpp for defining optimization problems",
+    "IpReturnCodes.hpp for ApplicationReturnStatus values"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "sparse_rc",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/sparse_rc.hpp",
+  "brief": "CppAD utility: sparse rc",
+  "algorithms": [],
+  "methods": []
+}

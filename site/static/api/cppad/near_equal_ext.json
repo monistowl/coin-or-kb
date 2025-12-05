@@ -1,0 +1,9 @@
+{
+  "name": "near_equal_ext",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/near_equal_ext.hpp",
+  "brief": "Core AD functionality: near equal ext",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "ad",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/ad.hpp",
+  "brief": "Core AD<Base> automatic differentiation scalar type\n\nAD<Base> is the fundamental type for automatic differentiation.\nOperations on AD<Base> values are recorded on a \"tape\" which can\nlater be used to compute derivatives.",
+  "algorithms": [
+    {
+      "name": "AD Type Classification:\nThree types of AD values with different recording behavior.\n\n  CONSTANT (ad_type_ = constant_enum):\n    - Value known at tape creation time\n    - Not recorded (optimizes tape size)\n    - Example: AD<double> c = 3.14;\n\n  PARAMETER (ad_type_ = dynamic_enum):\n    - Value can change between derivative computations\n    - Recorded as \"dynamic parameter\"\n    - Useful for problem data that varies\n\n  VARIABLE (ad_type_ = variable_enum):\n    - Depends on independent variables\n    - Always recorded on tape\n    - Derivatives computed w.r.t. these\n\nAD types:\n- **Constant**: Value known, not recorded on tape\n- **Parameter**: Value known, may be recorded for dynamic parameters\n- **Variable**: Value depends on independent variables, recorded on tape",
+      "math": "",
+      "complexity": "Recording: O(1) per operation\n  Memory: O(tape_length \u00d7 coefficient_order)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Independent() to declare independent variables",
+    "ADFun to create a function from recorded operations"
+  ]
+}

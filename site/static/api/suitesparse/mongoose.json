@@ -1,0 +1,23 @@
+{
+  "name": "Mongoose",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose.hpp",
+  "brief": "Main public API for Mongoose graph partitioning library\nCopyright (C) 2017-2018, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nMongoose: High-quality graph partitioning via multilevel coarsening\nwith Fiduccia-Mattheyses and quadratic programming refinement.\nPublic interface includes Graph, EdgeCut, EdgeCut_Options classes\nand read_graph/edge_cut functions for partitioning workflows.",
+  "algorithms": [
+    {
+      "name": "Multilevel Graph Partitioning (Mongoose):\nPartitions graph into two balanced sets minimizing edge cut:\n1. COARSEN: Repeatedly match vertices (HEM) and contract\n2. INITIAL CUT: Partition coarsest graph (QP or random)\n3. UNCOARSEN: Project partition up, refine at each level\n4. REFINE: Waterdance interleaving FM and QP improvement",
+      "math": "Edge cut minimization with balance constraint:\n$$\\min \\sum_{(i,j)\\in E} w_{ij} \\cdot |x_i - x_j|$$\nsubject to: $$|W_0 - W_1| \\leq \\epsilon \\cdot W$$\nwhere x_i \u2208 {0,1} is partition assignment, W_k = \u2211_{x_i=k} w_i.",
+      "complexity": "O(|E| log |V|) for multilevel algorithm.\nCoarsening: O(|E|) per level, O(log |V|) levels.\nFM refinement: O(|E|) per pass.",
+      "ref": [
+        "Davis et al. (2020). \"Algorithm 1003: Mongoose, a graph coarsening\n  and partitioning library\". ACM Trans. Math. Software 46(1):7.",
+        "Karypis & Kumar (1998). \"A fast and high quality multilevel scheme\n  for partitioning irregular graphs\". SIAM J. Sci. Comput. 20(1):359-392."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_EdgeCut.hpp for partition result structure",
+    "Mongoose_EdgeCutOptions.hpp for algorithm configuration"
+  ]
+}

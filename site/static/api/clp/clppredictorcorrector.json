@@ -1,0 +1,25 @@
+{
+  "name": "ClpPredictorCorrector",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPredictorCorrector.hpp",
+  "brief": "Mehrotra's predictor-corrector interior point algorithm",
+  "algorithms": [
+    {
+      "name": "Gondzio's Multiple Centrality Corrections:\nAfter corrector, additional corrections keep iterates well-centered:\n  - If any (x+\u0394x)(s+\u0394s) too small: push toward center\n  - If any (x+\u0394x)(s+\u0394s) too large: no correction needed\n  - Typically 1-3 corrections improve robustness",
+      "math": "KKT CONDITIONS for LP (primal min c'x s.t. Ax=b, x\u22650):\n  Primal feasibility:   Ax = b\n  Dual feasibility:     A'y + s = c\n  Complementarity:      X\u00b7S\u00b7e = 0 (component-wise x_i\u00b7s_i = 0)\n  Non-negativity:       x \u2265 0, s \u2265 0",
+      "complexity": "Per iteration: O(m\u00b2n + m\u00b3) dominated by Cholesky factorization\n  of m\u00d7m normal equations (m=rows, n=cols).\n  Total iterations: O(\u221an\u00b7log(1/\u03b5)) for \u03b5-optimality (polynomial).",
+      "ref": [
+        "Mehrotra (1992). \"On the implementation of a primal-dual interior\n  point method\". SIAM J. Optimization 2(4):575-601.",
+        "Gondzio (1996). \"Multiple centrality corrections in a primal-dual\n  method for LP\". Comput. Optim. Appl. 6:137-156.",
+        "Wright (1997). \"Primal-Dual Interior-Point Methods\". SIAM.\n\nKey methods:\n- solve(): Main predictor-corrector iteration loop\n- findStepLength(): Compute max step maintaining positivity\n- complementarityGap(): Measure of optimality (should \u2192 0)"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpInterior for the base interior point class",
+    "ClpCholeskyBase for the linear system solver",
+    "ClpPdco for PDCO alternative algorithm"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "recorder",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/record/recorder.hpp",
+  "brief": "Operation recording: recorder",
+  "algorithms": [],
+  "methods": []
+}

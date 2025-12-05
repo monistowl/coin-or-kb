@@ -1,0 +1,9 @@
+{
+  "name": "cos_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/cos_op.hpp",
+  "brief": "Internal implementation: cos_op",
+  "algorithms": [],
+  "methods": []
+}

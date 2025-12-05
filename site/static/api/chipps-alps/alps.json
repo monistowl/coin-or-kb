@@ -1,0 +1,14 @@
+{
+  "name": "Alps",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/Alps.h",
+  "brief": "Core definitions for ALPS parallel tree search framework\n\nCentral header defining enumerations, constants, and types for the\nAbstract Library for Parallel Search (ALPS).\n\n**Core enumerations:**\n- AlpsNodeStatus: Node states (Candidate, Evaluated, Pregnant, Branched, Fathomed)\n- AlpsSearchType: Search strategies (BestFirst, BreadthFirst, DepthFirst, Hybrid)\n- AlpsKnowledgeType: Knowledge categories (Model, Node, Solution, SubTree)\n- AlpsExitStatus: Termination status (Optimal, TimeLimit, NodeLimit, etc.)\n- AlpsPhase: Execution phase (Rampup, Search, Rampdown)\n\n**Key constants:**\n- ALPS_OBJ_MAX, ALPS_BND_MAX: Numerical bounds\n- ALPS_ZERO, ALPS_GEN_TOL: Numerical tolerances\n\n**Design philosophy:**\n- Subtree is the basic unit of work in parallel execution\n- Workers process subtrees autonomously\n- Hub brokers coordinate work distribution",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsKnowledgeBroker for central search management",
+    "AlpsTreeNode for node abstraction",
+    "AlpsModel for problem definition"
+  ]
+}

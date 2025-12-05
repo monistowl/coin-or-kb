@@ -1,0 +1,23 @@
+{
+  "name": "DecompAlgoC",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompAlgoC.h",
+  "brief": "Cutting Plane Method algorithm (no column generation)\n\nDecompAlgoC implements classic cutting plane method:\n- Solve LP relaxation\n- Find violated cuts\n- Add cuts and resolve\n- Repeat until integer or no cuts found",
+  "algorithms": [
+    {
+      "name": "Cutting Plane Method (CPM):\nIteratively tighten LP relaxation with valid inequalities.\n\nALGORITHM:\n  1. Solve LP relaxation: min c'x s.t. Ax \u2265 b\n  2. if x* is integer-feasible: STOP (optimal)\n  3. Search for violated cut: a'x \u2265 \u03b2 with a'x* < \u03b2\n  4. if cut found: add to LP, goto 1\n  5. else: BRANCH on fractional variable\n\nMASTER PROBLEM STRUCTURE:\n  Original variables x (not Dantzig-Wolfe lambdas)\n  Rows grow as cuts are added\n  Columns remain fixed",
+      "math": "Convergence for polyhedra:\n  If conv(X) = {x : Ax \u2265 b} (LP = IP), CPM finds optimum.\n  In general, CPM finds optimum over intersection of\n  LP relaxation with all generated cuts.\n\nWHEN TO USE:\n- LP relaxation is naturally strong\n- No obvious block structure for decomposition\n- Want simplicity over Dantzig-Wolfe",
+      "complexity": "Per iteration: O(LP_solve) + O(cut_generation)\nIterations bounded by number of extreme points cut off.",
+      "ref": [
+        "Kelley (1960). \"The Cutting-Plane Method for Solving Convex Programs\"."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DecompAlgo.h for base class",
+    "DecompAlgoPC.h for full Price-and-Cut",
+    "DecompAlgoCGL.h for CGL cut integration"
+  ]
+}

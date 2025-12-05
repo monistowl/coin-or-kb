@@ -1,0 +1,22 @@
+{
+  "name": "RBio",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "RBio/Include/RBio.h",
+  "brief": "Rutherford-Boeing sparse matrix I/O library\nCopyright (c) 2009-2023, Timothy A. Davis. GPL-2.0+ license.\n\nRBio reads and writes sparse matrices in Rutherford-Boeing format,\na standard format for exchanging sparse matrices. Supports real, complex,\ninteger, and pattern-only matrices in assembled or elemental forms.",
+  "algorithms": [
+    {
+      "name": "Rutherford-Boeing I/O:\nParse and write standardized sparse matrix format:\n\nREAD OPERATION:\n1. Parse 4-line header: title, key, dimensions, format specifiers\n2. Read column pointers (Fortran-style Harwell format)\n3. Read row indices for each column\n4. Read numerical values (if present)\n5. Convert to CSC (0-indexed C arrays)\n\nWRITE OPERATION:\n1. Generate header with matrix properties (type: RUA/RSA/PSA/etc.)\n2. Write column pointers in fixed-width Fortran format\n3. Write row indices\n4. Write values (with appropriate precision)",
+      "math": "Matrix types in RB format:\nFirst 3 characters encode: R=real, C=complex, P=pattern, I=integer\n                          U=unsymmetric, S=symmetric, H=Hermitian\n                          A=assembled, E=elemental (FEM)\nExample: RUA = Real Unsymmetric Assembled",
+      "complexity": "O(nnz) for reading/writing, where nnz = number of nonzeros.",
+      "ref": [
+        "Duff, Grimes & Lewis (1992). \"Users' Guide for the Harwell-Boeing\n  Sparse Matrix Collection\". Technical Report RAL-92-086."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "SuiteSparse Matrix Collection (https://sparse.tamu.edu)",
+    "CHOLMOD for using matrices read via RBio"
+  ]
+}

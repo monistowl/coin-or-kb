@@ -1,0 +1,13 @@
+{
+  "name": "BonDummyPump",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonDummyPump.hpp",
+  "brief": "Placeholder/testing heuristic for feasibility pump\nCopyright (C) CNRS\nThis code is published under the Eclipse Public License.\n\nDummyPump: Simple placeholder heuristic extending LocalSolverBasedHeuristic.\nUsed for testing or as template for new heuristics.\n\nProvides minimal implementation of solution() method.\n\nAuthors: Pierre Bonami, LIF Universit\u00e9 de la M\u00e9diterran\u00e9e-CNRS\nDate: 06/18/2008",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "LocalSolverBasedHeuristic for base class",
+    "PumpForMinlp for full feasibility pump implementation"
+  ]
+}

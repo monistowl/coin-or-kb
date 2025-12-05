@@ -1,0 +1,9 @@
+{
+  "name": "wno_conversion",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/wno_conversion.hpp",
+  "brief": "CppAD: wno conversion",
+  "algorithms": [],
+  "methods": []
+}

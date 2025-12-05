@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicDiveCoefficient",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicDiveCoefficient.hpp",
+  "brief": "Dive heuristic based on objective coefficients\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDiveCoefficient: Selects variables based on objective impact.\nPrioritizes fractional variables with large objective coefficients.",
+  "algorithms": [
+    {
+      "name": "Objective Coefficient Variable Selection:\n  selectVariableToBranch() for fractional integer x_j:\n  1. Score each fractional variable: score_j = |c_j| \u00d7 lock_factor_j.\n  2. Select j* = argmax{score_j : j \u2208 fractional integers}.\n  3. Round to minimize objective (down if c_j > 0 for min).\n  Rationale: Large |c_j| = high objective impact = resolve early.",
+      "math": "Objective impact heuristic:\n  For min c^T x: rounding x_j affects objective by c_j \u00d7 (round - x\u0304_j).\n  Variables with large |c_j| have most impact on objective.\n  Fixing high-impact variables first guides toward good solutions.\n\nUseful when objective-driven rounding is desired.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicDive for base class and diving algorithm",
+    "CbcHeuristicDivePseudoCost for estimate-based variant"
+  ]
+}

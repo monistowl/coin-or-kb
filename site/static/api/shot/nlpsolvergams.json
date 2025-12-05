@@ -1,0 +1,12 @@
+{
+  "name": "NLPSolverGAMS",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/NLPSolver/NLPSolverGAMS.h",
+  "brief": "GAMS-based NLP solver for fixed-integer subproblems\n\nUses GAMS modeling system to call NLP solvers.\n\n**NLPSolverGAMS Class:**\n- Uses gmoHandle_t from GAMS modeling system\n- Calls user-selected NLP solver (CONOPT, IPOPT, etc.)\n- Manages variable bounds and starting points\n\n**GAMS Handles:**\n- modelingObject: GMO for problem data\n- modelingEnvironment: GEV for GAMS environment\n\n**Solver Configuration:**\n- nlpsolver: Solver name (e.g., \"CONOPT\", \"IPOPT\")\n- timelimit, iterlimit: Resource limits\n- solvelink: Execution mode\n\n@note Requires GAMS license for commercial NLP solvers",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ModelingSystemGAMS.h for GAMS input processing"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "OSoLReader",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSCommonInterfaces/OSoLReader.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

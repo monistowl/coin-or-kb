@@ -1,0 +1,20 @@
+{
+  "name": "BCP_lp_user",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_lp_user.hpp",
+  "brief": "User customization interface for LP process",
+  "algorithms": [
+    {
+      "name": "LP User Hooks: Cuts, Branching, Feasibility, Heuristics\n\nBCP_lp_user is the main interface for user-defined LP behavior.\nMost BCP customization happens here.\n\n**Initialization:**\n- initialize_solver_interface(): Create OsiSolverInterface\n- initialize_int_and_sos_list(): Define branching objects\n- initialize_new_search_tree_node(): Preprocess before node\n- load_problem(): Load problem into solver\n\n**LP iteration:**\n- process_lp_result(): Main iteration callback (or use individual)\n- test_feasibility(): Check if solution is integer-feasible\n- generate_heuristic_solution(): Run primal heuristics\n- compute_lower_bound(): True lower bound for column generation\n\n**Cut/variable generation:**\n- generate_cuts_in_lp(): Local cut generation\n- generate_vars_in_lp(): Local column generation (pricing)\n- cuts_to_rows(): Convert BCP_cut to matrix rows\n- vars_to_cols(): Convert BCP_var to matrix columns\n\n**Branching:**\n- select_branching_candidates(): Choose branching objects\n- compare_branching_candidates(): Select best candidate\n- set_actions_for_children(): Fathom/Return/Keep decisions\n\n**Packing:**\n- pack_primal_solution(): Send LP solution to CG\n- pack_dual_solution(): Send duals to VG\n- pack_feasible_solution(): Send solution to TM",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_lp.hpp for LP process",
+    "BCP_tm_user for Tree Manager user interface"
+  ]
+}

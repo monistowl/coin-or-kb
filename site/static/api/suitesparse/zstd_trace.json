@@ -1,0 +1,9 @@
+{
+  "name": "zstd_trace",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/zstd/zstd_subset/common/zstd_trace.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

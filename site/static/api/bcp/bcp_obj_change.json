@@ -1,0 +1,20 @@
+{
+  "name": "BCP_obj_change",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_obj_change.hpp",
+  "brief": "Delta encoding for variable/cut bound changes",
+  "algorithms": [
+    {
+      "name": "Object Set Delta: Compact Var/Cut Change Encoding\n\nProvides compact representation of how objects (vars/cuts) change\nbetween parent and child nodes in the search tree.\n\n**BCP_obj_change:**\nSingle object's bound change:\n- lb, ub: New lower/upper bounds\n- stat: New BCP_obj_status\n\n**BCP_obj_set_change:**\nEncodes all changes to a set of objects (vars or cuts):\n- _storage: BCP_Storage_Explicit or BCP_Storage_WrtParent\n- _deleted_num: Count of deleted objects\n- _del_change_pos: Indices of deleted/changed objects\n- _change: New (lb, ub, status) for changed objects\n- _new_objs: bcpind values of added objects\n\n**Storage modes:**\n- Explicit: Full list of all objects (for root or checkpoints)\n- WrtParent: Delta from parent - deletions, changes, additions\n\n**Methods:**\n- update(): Apply delta to reconstruct full object set\n- pack()/unpack(): Serialization for inter-process transfer\n- pack_size(): Estimate serialized size\n\nSpace-efficient encoding crucial for large trees where\neach node may have thousands of variables/cuts.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_node_change.hpp for full node delta encoding",
+    "BCP_var.hpp, BCP_cut.hpp for object types"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "GB_cuda",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/CUDA/GB_cuda.hpp",
+  "brief": "Host-side CUDA utilities for GraphBLAS GPU operations\nCopyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.\nNVIDIA CORPORATION contributions (c) 2024-2025.\n\nHost CUDA includes and utilities (not for JIT kernels). Matrix prefetch\nfunctions with component flags (P/H/Y/B/I/X for pointers/hyperstart/y/bitmap/\nindices/values). GB_cuda_upscale_identity for monoid identity. Stream pool\nacquire/release for CUDA stream management.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GB_cuda_apply.hpp, GB_cuda_ewise.hpp for operation-specific headers"
+  ]
+}

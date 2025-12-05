@@ -1,0 +1,13 @@
+{
+  "name": "CupdlpWrapper",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/pdlp/CupdlpWrapper.h",
+  "brief": "Wrapper for CUPDLP first-order LP solver\n\nIntegrates CUPDLP (CUDA/CPU Primal-Dual LP) solver into HiGHS.\nCUPDLP uses first-order methods (PDHG) for LP solving without pivoting.\n\n**Main Functions:**\n- solveLpCupdlp(): Solve LP using CUPDLP algorithm\n- formulateLP_highs(): Convert HighsLp to CUPDLP format (CSC, rhs, bounds)\n- getCupdlpLogLevel(): Map HiGHS verbosity to CUPDLP log level\n\n**Problem Setup:**\n- problem_create()/problem_alloc(): Allocate CUPDLP problem structure\n- data_alloc(): Allocate matrix data (supports GPU if CUPDLP_GPU defined)\n\n**Memory Macros:**\n- cupdlp_init_*: Allocation helpers for int, double, work, problem, data\n- cupdlp_copy_vec: CPU vector copy (GPU uses CUDA memcpy)\n\n**GPU Support:**\nCompile with CUPDLP_GPU for CUDA acceleration via cuPDLP backend.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "pdlp/cupdlp/cupdlp.h for CUPDLP algorithm implementation",
+    "ipm/IpxWrapper.h for alternative interior point method"
+  ]
+}

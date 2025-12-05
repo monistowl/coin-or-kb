@@ -1,0 +1,20 @@
+{
+  "name": "BonHeuristicRINS",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonHeuristicRINS.hpp",
+  "brief": "Relaxation Induced Neighborhood Search (RINS) heuristic for MINLP",
+  "algorithms": [
+    {
+      "name": "RINS Neighborhood Search (Danna-Rothberg-LePape)\n\nRINS finds improving solutions by solving restricted MINLP subproblems\nwhere variables agreeing between LP relaxation and incumbent are fixed.\n\n**Algorithm:**\n1. Compare current LP solution with incumbent\n2. Fix integer variables where both solutions agree\n3. Solve restricted MINLP with remaining variables free\n4. If solution improves incumbent, update\n\n**Parameters:**\n- howOften_: Frequency of heuristic application\n- numberSolutions_: Track solution count for triggering",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "LocalSolverBasedHeuristic for base class",
+    "HeuristicLocalBranching for related neighborhood search"
+  ]
+}

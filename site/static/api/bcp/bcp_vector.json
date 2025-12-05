@@ -1,0 +1,19 @@
+{
+  "name": "BCP_vector",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_vector.hpp",
+  "brief": "Custom vector class for BCP with performance optimizations",
+  "algorithms": [
+    {
+      "name": "BCP Vector: Contiguous Array with Bulk Operations\n\nBCP_vec<T> is BCP's custom vector, similar to std::vector but\nguaranteed to be a contiguous memory array with extra methods.\n\n**Key advantages:**\n- Guaranteed contiguous memory (std::vector only \"likely\")\n- unchecked_* methods skip bounds checking for speed\n- Bulk operations: keep_by_index, erase_by_index, update\n- Direct memory access for serialization\n\n**Core interface:**\n- begin()/end(): Iterators (raw T* pointers)\n- size()/capacity()/empty(): Standard queries\n- operator[]: Element access\n- push_back()/pop_back(): End modification\n- insert()/erase(): Position modification\n- reserve()/swap(): Memory management\n\n**BCP-specific methods:**\n- entry(i): Get iterator to i-th element\n- unchecked_push_back(): Skip capacity check\n- keep_by_index(): Keep only specified indices\n- erase_by_index(): Erase specified indices\n- update(): Bulk update at positions\n\n**Helper functions:**\n- purge_ptr_vector(): Delete pointers and clear vector\n- keep_ptr_vector_by_index(): Keep selected, delete rest\n\nSpecializations included for bool, char, short, int, double.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "std::vector for standard interface reference"
+  ]
+}

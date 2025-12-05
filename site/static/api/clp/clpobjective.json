@@ -1,0 +1,21 @@
+{
+  "name": "ClpObjective",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpObjective.hpp",
+  "brief": "Abstract base class for objective functions",
+  "algorithms": [
+    {
+      "name": "Objective Function Interface (Gradient, Reduced Gradient, Step Length)\nDefines the interface for objective functions in Clp. Derived classes\nimplement specific objective types (linear, quadratic, etc.).\n\nKey methods that derived classes must implement:\n- gradient(): Returns objective gradient at current solution\n- reducedGradient(): Gradient accounting for basic/nonbasic structure\n- stepLength(): Optimal step size in a given direction\n- objectiveValue(): Evaluate objective at a point\n\nThe type_ member indicates the objective type: 1=linear, 2=quadratic.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpLinearObjective for standard LP objective (c'x)",
+    "ClpQuadraticObjective for QP objective (x'Qx/2 + c'x)",
+    "ClpModel for how objectives are used in models"
+  ]
+}

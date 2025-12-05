@@ -1,0 +1,22 @@
+{
+  "name": "Mongoose_CSparse",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_CSparse.hpp",
+  "brief": "Sparse matrix operations subset from CSparse library\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nProvides CSparse subset for sparse matrix operations: cs struct\n(compressed column/triplet format), cs_add (matrix addition),\ncs_transpose, cs_compress (triplet to CSC), and allocation.\nUses int64_t (csi) matching Mongoose's Int type.",
+  "algorithms": [
+    {
+      "name": "CSparse Subset for Graph I/O:\nMinimal CSparse operations needed for graph construction:\n\nData structure (cs):\n- CSC mode (nz == -1): p[n+1] column pointers, i[nzmax] row indices\n- Triplet mode (nz >= 0): p[nzmax] col indices, i[nzmax] row indices\n\nOperations:\n- cs_compress: Convert triplet to CSC, O(n + nz)\n- cs_transpose: Compute A^T, O(n + nz)\n- cs_add: Compute \u03b1A + \u03b2B, O(nnz(A) + nnz(B))",
+      "math": "Triplet to CSC conversion:\n1. Count column lengths: O(nz)\n2. Cumulative sum \u2192 column pointers: O(n)\n3. Scatter entries into CSC: O(nz)",
+      "complexity": "All operations O(n + nz) time and space.",
+      "ref": [
+        "Davis (2006). \"Direct Methods for Sparse Linear Systems\".\n  SIAM, Chapters 1-2 for CSparse design."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_Graph.hpp for graph representation using cs format",
+    "Mongoose_IO.hpp for reading matrices from files"
+  ]
+}

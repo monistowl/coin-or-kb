@@ -1,0 +1,20 @@
+{
+  "name": "CbcStatistics",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcStatistics.hpp",
+  "brief": "Statistics gathering for node processing",
+  "algorithms": [
+    {
+      "name": "B&C Performance Statistics Collection\nCopyright (C) 2005, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcStatistics: Captures detailed data about each branching operation.\nUsed for analysis and debugging of B&C search behavior.\n\nPer-node data:\n- id_/parentId_: Node identification\n- depth_: Tree depth\n- way_: Branch direction (-1/+1 first, -10/+10 second)\n- sequence_: Variable branched on\n\nObjective tracking:\n- startingObjective_/endingObjective_: LP values\n- startingInfeasibility_/endingInfeasibility_: Integer violations\n- numberIterations_: LP iterations used\n\nUseful for performance tuning and understanding B&C behavior.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcModel for statistics collection",
+    "CbcNode for node data"
+  ]
+}

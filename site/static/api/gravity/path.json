@@ -1,0 +1,13 @@
+{
+  "name": "Path",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/Path.h",
+  "brief": "Graph path/cycle representation for network algorithms\n\nRepresents a sequence of nodes forming a path or cycle in a network.\n\n**Path Class:**\n- nodes: List of Node pointers in sequence\n\n**Methods:**\n- source_dest(n1, n2): Check if path connects n1 to n2\n- length(): Number of edges in path\n- cycle(): True if path is a closed cycle\n- clone(): Deep copy path\n- to_str(): String representation\n\n**Usage in Gravity:**\n- cycle_basis in Net: Fundamental cycles for Kirchhoff constraints\n- horton_path in Arc: Horton algorithm shortest paths\n- Power flow loop constraints",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/Net.h for graph container",
+    "gravity/Arc.h for arc/edge data"
+  ]
+}

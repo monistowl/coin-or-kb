@@ -1,0 +1,12 @@
+{
+  "name": "GamsNLinstr",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/GAMS/GamsNLinstr.h",
+  "brief": "GAMS nonlinear instruction opcodes and function codes\n\nDefines GAMS bytecode for nonlinear expressions.\n\n**GamsOpCode Enum:**\n- Stack operations: nlPushV, nlPushI, nlStore\n- Arithmetic: nlAdd, nlSub, nlMul, nlDiv, nlUMin\n- Function calls: nlCallArg1, nlCallArg2, nlCallArgN\n\n**GamsFuncCode Enum:**\n- Math functions: fnexp, fnlog, fnsqrt, fnabs, fnsin, fncos\n- Comparison: fnmin, fnmax, fnifthen\n- Special: fnpower, fnsignpower, fnentropy\n\n@warning Bytecode format may change without notice",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ModelingSystemGAMS.h for bytecode interpretation"
+  ]
+}

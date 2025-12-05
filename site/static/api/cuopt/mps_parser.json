@@ -1,0 +1,9 @@
+{
+  "name": "mps_parser",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/libmps_parser/src/mps_parser.hpp",
+  "brief": "cuOpt MPS file parser\n\nReads LP/MIP problems in MPS format.\nHandles fixed and free format MPS files.",
+  "algorithms": [],
+  "methods": []
+}

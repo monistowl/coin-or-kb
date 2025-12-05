@@ -1,0 +1,22 @@
+{
+  "name": "CouenneVarObject",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneVarObject.hpp",
+  "brief": "Variable-based branching object for MINLP",
+  "algorithms": [
+    {
+      "name": "Variable-Based Branching for Global Optimization\n\nBranching object that focuses on original problem variables rather\nthan auxiliary variables. Computes infeasibility by aggregating\nacross all auxiliaries that depend on this variable.\n\n**Infeasibility computation:**\nFor variable x, sum/min/max over all auxiliaries w = f(...,x,...)\nthe violation |w - f(...,x,...)|. This captures how much branching\non x could help close all related gaps.\n\n**Variable selection modes:**\n- OSI_SIMPLE: Use LP solution value directly\n- OSI_STRONG: Use strong branching estimate\n\n**Branch creation:**\nCan create either:\n- CouenneBranchingObject: standard two-way branch\n- CouenneThreeWayBranchObj: three-way spatial branch\n\n**isCuttable():**\nReturns whether we're on the \"bad\" side where cuts would help.\nIf not cuttable, branching is more likely to help.",
+      "math": "inf(x) = aggregate_{w=f(...,x,...)} |w - f(...,x,...)|",
+      "complexity": "O(deg(x)) where deg(x) = number of auxiliaries depending on x",
+      "ref": [
+        "Belotti et al., \"Branching and bounds tightening techniques\n     for non-convex MINLP\", Optimization Methods & Software, 2009"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneObject base class for auxiliary-based branching",
+    "CouenneBranchingObject for branch execution"
+  ]
+}

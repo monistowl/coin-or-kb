@@ -1,0 +1,9 @@
+{
+  "name": "base_require",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/base_require.hpp",
+  "brief": "CppAD: base require",
+  "algorithms": [],
+  "methods": []
+}

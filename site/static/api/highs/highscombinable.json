@@ -1,0 +1,13 @@
+{
+  "name": "HighsCombinable",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/parallel/HighsCombinable.h",
+  "brief": "Thread-local storage with reduction for parallel algorithms\n\nPer-thread copies that are lazily initialized and can be combined.\n\n**Design (similar to TBB combinable):**\n- One T instance per worker thread\n- Cache-line aligned to prevent false sharing\n- Lazy initialization on first access\n\n**Construction:**\n- Default: T() for each thread's copy\n- Custom: Callable returning T for each thread\n\n**Access:**\n- local(): Get/create this thread's copy\n- Thread ID from HighsTaskExecutor::getThisWorkerDeque()\n\n**Reduction:**\n- combine_each(f): Apply f to each initialized copy\n- combine(f): Reduce all copies with binary operation f\n  - Returns combined result by move\n\n**Usage Pattern:**\n```cpp\nHighsCombinable<int> sum;\nparallel::for_each([&](int i, int j) {\n  sum.local() += compute(i, j);\n});\nint total = sum.combine(std::plus<int>());\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "parallel/HighsTaskExecutor.h for worker identification",
+    "parallel/HighsParallel.h for parallel algorithms"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "IpLowRankUpdateSymMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpLowRankUpdateSymMatrix.hpp",
+  "brief": "Symmetric matrix as low-rank update: M = D + V*V^T - U*U^T\n\nLowRankUpdateSymMatrix represents matrices in factored form:\n  M = P_LR * (D + V*V^T - U*U^T) * P_LR^T  (if reduced_diag)\n  M = D + P_LR * (V*V^T - U*U^T) * P_LR^T  (otherwise)",
+  "algorithms": [
+    {
+      "name": "Limited-Memory Quasi-Newton Representation:\n  For L-BFGS with memory m, the inverse Hessian approximation H_k is:\n  H_k = (I - \u03c1_k s_k y_k^T)\u00b7H_{k-1}\u00b7(I - \u03c1_k y_k s_k^T) + \u03c1_k s_k s_k^T\n  This class stores the compact form: H = D + V\u00b7V^T - U\u00b7U^T\n  where V, U have at most m columns (typically m \u2264 20).",
+      "math": "Efficient matrix-vector product without forming full matrix:\n  y = M\u00b7x = D\u00b7x + V\u00b7(V^T\u00b7x) - U\u00b7(U^T\u00b7x)\n  Cost: O(n\u00b7m) instead of O(n\u00b2) for full matrix multiply.\n  V^T\u00b7x and U^T\u00b7x are m-vectors computed first, then scaled.",
+      "complexity": "O(n\u00b7m) for matvec where n = dimension, m = rank of update.\n  Memory: O(n\u00b7m) for V, U columns instead of O(n\u00b2) for dense matrix.",
+      "ref": [
+        "Nocedal (1980). \"Updating Quasi-Newton Matrices with Limited Storage\".\n     Mathematics of Computation 35(151):773-782.\n\nWhere D is diagonal, V and U are MultiVectorMatrices (few columns),\nand P_LR is an optional ExpansionMatrix for dimension lifting.\n\nThis representation is fundamental for limited-memory quasi-Newton:\n- L-BFGS: Hessian approximation as low-rank updates\n- L-SR1: Symmetric rank-1 updates\n- Efficient matvec without forming full matrix"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMultiVectorMatrix.hpp for V, U storage",
+    "IpExpansionMatrix.hpp for P_LR"
+  ]
+}

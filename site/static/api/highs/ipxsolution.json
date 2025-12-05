@@ -1,0 +1,13 @@
+{
+  "name": "IpxSolution",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/IpxSolution.h",
+  "brief": "IPX interior point solution container\n\nStores primal/dual solution and basis status from IPX solver.\n\n**IpxSolution Struct:**\nSolution data in IPX's native format for transfer to HiGHS:\n- num_col, num_row: Problem dimensions\n- ipx_col_value[], ipx_row_value[]: Primal solution (x, slacks)\n- ipx_col_dual[], ipx_row_dual[]: Dual solution (reduced costs, duals)\n- ipx_col_status[], ipx_row_status[]: Basis status for crossover\n\n**Status Values:**\nIPX uses its own status encoding (see ipx_status.h):\n- Basic, AtLower, AtUpper, Free for variables\n- Converted to HighsBasisStatus in IpxWrapper\n\n**Usage:**\n1. IPX populates after solve\n2. IpxWrapper extracts to HighsSolution/HighsBasis\n3. Crossover uses basis status for simplex warm start",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipm/IpxWrapper.h for solution extraction",
+    "lp_data/HighsSolution.h for HiGHS solution format"
+  ]
+}

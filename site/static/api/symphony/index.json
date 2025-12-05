@@ -1,0 +1,221 @@
+{
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "classes": [
+    {
+      "name": "OsiSymConfig",
+      "brief": "SYMPHONY build configuration\n\nBuild configuration macros from autotools/cmake for OsiSym.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiSymSolverInterface",
+      "brief": "Osi interface for SYMPHONY MIP solver\n\nOsiSymSolverInterface wraps SYMPHONY (parallel MIP solver) with Osi\nabstraction. Enables SYMPHONY use with Cbc, Cgl, and other COIN-OR.\nSupports parallel branch-and-bound with warm start capability.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiSymSolverParameters",
+      "brief": "SYMPHONY solver parameter enums\n\nParameter type enumerations for OsiSymSolverInterface.\nMaps Osi generic parameters to SYMPHONY-specific settings.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SymConfig",
+      "brief": "Build configuration for SYMPHONY\n\nManages platform-specific configuration and symbol visibility.\n\n**Configuration modes:**\n- HAVE_CONFIG_H: Uses autoconf-generated config.h\n- Otherwise: Uses config_default.h / config_sym_default.h\n\n**Symbol visibility:**\n- SYMPHONYLIB_EXPORT: DLL export on Windows\n- __visibility__(\"default\"): GCC visibility for -fvisibility=hidden\n\n**Include hierarchy:**\n- SYMPHONYLIB_BUILD + HAVE_CONFIG_H \u2192 config.h\n- Client + HAVE_CONFIG_H \u2192 config_sym.h\n- SYMPHONYLIB_BUILD no autoconf \u2192 config_default.h\n- Client no autoconf \u2192 config_sym_default.h",
+      "has_algorithm": false
+    },
+    {
+      "name": "SymWarmStart",
+      "brief": "SYMPHONY warm start information\n\nSymWarmStart: stores basis and tree information for restarting\nSYMPHONY MIP solver from previous state. Enables incremental solving.",
+      "has_algorithm": false
+    },
+    {
+      "name": "config_default",
+      "brief": "Default build configuration for SYMPHONY library\n\nDefines package dependencies when not using autoconf.\nEdit this file to enable/disable optional solver backends.\n\n**Required packages (always enabled):**\n- COIN_HAS_CGL: CGL cut generators\n- COIN_HAS_CLP: CLP linear solver\n- COIN_HAS_COINUTILS: CoinUtils foundation\n- COIN_HAS_OSI: OSI solver interface\n\n**Optional packages (commented by default):**\n- COIN_HAS_CBC: Cbc MIP solver\n- COIN_HAS_VOL: Volume algorithm\n- COIN_HAS_CPX: CPLEX\n- COIN_HAS_GLPK: GLPK\n- COIN_HAS_MSK: Mosek\n- COIN_HAS_XPR: Xpress\n- COIN_DEBUG: Runtime sanity checks",
+      "has_algorithm": false
+    },
+    {
+      "name": "decomp",
+      "brief": "Decomposition-based column generation for SYMPHONY\n\nImplements column generation via Dantzig-Wolfe decomposition\nfor problems with special structure.\n\n**Core functions:**\n- decomp(): Main decomposition algorithm\n- create_initial_lp(): Build restricted master problem\n- generate_new_cols(): Solve pricing subproblem\n- generate_cuts(): Cut generation in master\n- add_dcmp_cols(): Add columns to master LP\n\n**Column management:**\n- receive_cols(): Receive columns from subproblems\n- get_cols_from_pool(): Retrieve from column pool\n- free_dcmp_col_set(): Cleanup column set\n\n**User callbacks:**\n- user_generate_new_cols(): Custom pricing routine\n- user_unpack_col(): Expand packed column\n- user_pack_col(): Compress column for storage\n- user_check_col(): Verify column validity\n- user_set_rhs(): Define subproblem RHS\n- user_send_to_sol_pool(): Store promising columns",
+      "has_algorithm": false
+    },
+    {
+      "name": "decomp_lp",
+      "brief": "LP interface for decomposition master problem\n\nLoad/unload functions for the restricted master LP.\n\n**Functions:**\n- load_decomp_lp(): Initialize master LP with initial columns\n- unload_decomp_lp(): Cleanup master LP",
+      "has_algorithm": false
+    },
+    {
+      "name": "decomp_types",
+      "brief": "Data structures for decomposition column generation\n\nTypes for representing columns in Dantzig-Wolfe decomposition.\n\n**col_data (packed column):**\n- size: Size of coef array\n- coef: Packed column data\n- level: Tree level where generated\n- touches: Inactivity counter for deletion\n\n**dcmp_col_set (column batch):**\n- lb, ub, obj: Column bounds and costs\n- matbeg, matind, matval: CSC format matrix\n- num_cols, nzcnt: Dimensions\n- bd_type, ubnd: Bound type info",
+      "has_algorithm": false
+    },
+    {
+      "name": "sp_params",
+      "brief": "Solution/column pool parameters for decomposition\n\nParameters controlling column storage and management.\n\n**sp_params structure:**\n- verbosity: Output level\n- etol: Numerical tolerance\n- block_size: Allocation granularity\n- max_size: Maximum pool memory\n- max_number_of_sols: Hard limit on columns\n- min_to_delete: Minimum batch deletion size\n- touches_until_deletion: Inactivity threshold\n- compress_num/ratio: When to compress pool\n\n**Check strategies (check_which):**\n- CHECK_ALL_COLS: Check everything\n- CHECK_COL_LEVEL: By tree depth\n- CHECK_COL_TOUCHES: By activity\n- CHECK_COL_LEVEL_AND_TOUCHES: Combined\n\n**Delete strategies (delete_which):**\n- DELETE_DUPLICATE_COLS: Only duplicates\n- DELETE_DUPLICATE_AND_INEFFECTIVE_COLS: Also inactive",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_cg",
+      "brief": "Cut Generator process for SYMPHONY\n\nThe Cut Generator (CG) receives LP solutions and generates\nviolated cutting planes. Can run as separate process or\ncompiled into LP process (SYM_COMPILE_IN_CG).",
+      "has_algorithm": true
+    },
+    {
+      "name": "sym_cg_params",
+      "brief": "Cut generator process parameters\n\nMinimal parameter structure for the cut generator process.\nMost cut generation parameters are in sym_lp_params.h (cgl_params).\n\n**cg_params:**\n- verbosity: Output level for cut generation\n- do_findcuts: Enable/disable user cut generation",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_cg_u",
+      "brief": "User callbacks for cut generator process\n\nDefines callbacks for custom cut generation in SYMPHONY.\nUsers implement problem-specific separation routines here.\n\n**Cut addition helpers (non-user):**\n- cg_add_explicit_cut(): Add cut with explicit coefficients\n- cg_add_user_cut(): Add packed user-defined cut\n- cg_send_cut(): Send cut to LP (internal)\n\n**User callbacks:**\n- user_receive_cg_data(): Receive problem-specific data\n- user_free_cg(): Clean up user data\n- user_find_cuts(): Main separation routine\n  - Called with LP solution (indices, values, objval)\n  - Populates cuts array via cg_add_* helpers\n- user_receive_lp_solution_cg(): Custom solution handling\n- user_check_validity_of_cut(): Debug validation (ifdef)\n\n**Example user_find_cuts implementation:**\n```c\nint user_find_cuts(void *user, int varnum, ...) {\n    // Check for violated inequalities\n    for (each inequality class) {\n        if (is_violated(values, ...)) {\n            cg_add_explicit_cut(nz, ind, val, rhs, 0.0,\n                                'L', TRUE, num_cuts, ...);\n        }\n    }\n    return USER_SUCCESS;\n}\n```",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_constants",
+      "brief": "Core constants and status codes for SYMPHONY\n\nDefines all numeric constants used throughout SYMPHONY including\nerror codes, status values, algorithm modes, and return codes.\n\n**Error codes (process_chain):**\n- ERROR__NO_BRANCHING_CANDIDATE, ERROR__ILLEGAL_RETURN_CODE\n- ERROR__NUMERICAL_INSTABILITY, ERROR__COMM_ERROR\n\n**Problem types:**\n- ZERO_ONE_PROBLEM, INTEGER_PROBLEM, MIXED_INTEGER_PROBLEM\n\n**Node status (NODE_STATUS__*):**\n- CANDIDATE, BRANCHED_ON, HELD, ROOT, PRUNED\n- TIME_LIMIT, ITERATION_LIMIT, WARM_STARTED\n\n**LP solver status:**\n- LP_OPTIMAL, LP_D_INFEASIBLE, LP_D_UNBOUNDED\n- LP_D_ITLIM, LP_D_OBJLIM, LP_TIME_LIMIT\n\n**Basis status:**\n- VAR_AT_LB, VAR_BASIC, VAR_AT_UB, VAR_FREE, VAR_FIXED\n\n**Cut source:**\n- INTERNAL_CUT_POOL, EXTERNAL_CUT_POOL\n- INTERNAL_CUT_GEN, EXTERNAL_CUT_GEN\n\n**CGL generators (CGL_*_GENERATOR):**\n- PROBING, KNAPSACK, CLIQUE, GOMORY, TWOMIR, FLOWCOVER, MIR\n\n**Branching actions:**\n- DO_BRANCH, DO_NOT_BRANCH, DO_NOT_BRANCH__FATHOMED\n- PRUNE_THIS_CHILD, RETURN_THIS_CHILD, KEEP_THIS_CHILD\n\n**Variable status flags:**\n- NOT_FIXED, TEMP_FIXED_TO_LB, PERM_FIXED_TO_LB\n- BASE_VARIABLE, VARIABLE_BRANCHED_ON, NOT_REMOVABLE\n\n**Column generation strategies:**\n- FATHOM__DO_NOT_GENERATE_COLS__DISCARD\n- FATHOM__GENERATE_COLS__RESOLVE\n- BEFORE_BRANCH__GENERATE_COLS__RESOLVE\n\n**VBC visualization (VBC_*):**\n- INTERIOR_NODE, PRUNED, ACTIVE_NODE, CAND_NODE, FEAS_SOL_FOUND\n\n**Diving heuristics:**\n- VLENGTH_DIVING, GUIDED_DIVING, CROSSOVER_DIVING\n- EUC_DIVING, RANK_DIVING, FRAC_DIVING\n\n**Presolve return codes:**\n- PREP_UNMODIFIED, PREP_MODIFIED, PREP_INFEAS, PREP_SOLVED",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_cp",
+      "brief": "Cut Pool process for SYMPHONY\n\nThe Cut Pool (CP) stores generated cuts for potential reuse\nacross multiple B&C nodes. Manages cut quality and deduplication.",
+      "has_algorithm": true
+    },
+    {
+      "name": "sym_cp_params",
+      "brief": "Cut pool process parameters\n\nParameters for managing the global cut pool storage.\n\n**cp_params structure:**\n- verbosity: Output level\n- warm_start: Load cuts from file at start\n- warm_start_file_name: Saved cut pool file\n- logging: Save cut pool during solve\n- log_file_name: Cut pool log file\n\n**Size management:**\n- block_size: Allocation granularity\n- max_size: Maximum memory for cuts\n- max_number_of_cuts: Hard limit on cut count\n\n**Quality control:**\n- cuts_to_check: How many cuts to check for violations\n- delete_which: Deletion strategy (quality/touches)\n- touches_until_deletion: Inactivity threshold\n- min_to_delete: Minimum cuts to remove at once\n- check_which: Which cuts to check (level/touches)",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_cp_u",
+      "brief": "User callbacks for cut pool process\n\nDefines callbacks for custom cut checking in the cut pool.\nCut pool stores cuts for reuse across B&C nodes.\n\n**User callbacks:**\n- user_receive_cp_data(): Receive problem-specific data\n- user_free_cp(): Clean up user data\n- user_receive_lp_solution_cp(): Custom solution handling\n\n**Cut checking protocol (three-phase):**\n1. user_prepare_to_check_cuts(): Initialize with LP solution\n2. user_check_cut(): Check single cut for violation\n   - Sets is_violated flag\n   - Optionally computes quality score\n3. user_finished_checking_cuts(): Cleanup after checking\n\n**Default behavior:**\nReturns USER_DEFAULT for built-in EXPLICIT_ROW handling.\nUser cuts need custom checking implementation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_dg",
+      "brief": "Draw Graph (DG) process for SYMPHONY visualization\n\nInteractive graphical display of solutions and search progress.\nCommunicates with Tcl/Tk-based GUI via pipes.\n\n**dg_prob structure:**\n- windows: Array of display windows\n- par: Visualization parameters\n- master: Master process tid\n\n**Window management:**\n- win_desc: Window display settings (size, fonts, scale)\n- dg_graph: Graph data (nodes, edges)\n- buf_fifo: Message buffer queue\n\n**dg_node:**\n- node_id, posx, posy: Identifier and position\n- radius, label, weight: Display properties\n- dash: Line pattern for node border\n\n**dg_edge:**\n- edge_id, tail, head: Identifier and endpoints\n- weight, dash: Display properties\n\n**Main functions:**\n- init_dgwin(): Create new window\n- display_graph_on_canvas(): Render graph\n- copy_window_structure(): Clone window\n- find_node(), find_edge(): Lookup elements\n- compress_graph(): Remove deleted elements\n\n**Communication:**\n- spprint(): Printf to pipe\n- start_child(): Launch GUI process\n- wait_for_you_can_die(): Graceful shutdown",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_dg_params",
+      "brief": "Draw Graph parameters and message constants\n\nParameters for visualization and GUI communication constants.\n\n**dg_params structure:**\n- canvas_width/height: Drawing area size\n- viewable_width/height: Visible window size\n- disp_nodelabels/nodeweights/edgeweights: Show labels\n- node_radius: Default node size\n- scale_factor: Zoom level\n- *_font: Font specifications\n- interactive_mode: Enable user interaction\n- mouse_tracking: Track mouse position\n\n**Message protocols (CTOI_* = Client to Intermediary):**\n- CTOI_INITIALIZE_WINDOW: Create new window\n- CTOI_SET_GRAPH: Load graph data\n- CTOI_DRAW_GRAPH: Render current graph\n- CTOI_MODIFY_GRAPH: Update graph elements\n- CTOI_WAIT_FOR_CLICK_*: User interaction\n\n**Messages (ITOC_* = Intermediary to Client):**\n- ITOC_CLICK_HAPPENED: User clicked\n- ITOC_WINDOW_*: Window status responses\n\n**Modification types (MODIFY_*):**\n- ADD_NODES, DELETE_NODES: Node operations\n- ADD_EDGES, DELETE_EDGES: Edge operations\n- CHANGE_WEIGHTS_*: Update labels\n- CHANGE_DASH_*: Update line styles",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_dg_u",
+      "brief": "User callbacks for Draw Graph visualization\n\nDefines callbacks for custom visualization behavior.\n\n**User callbacks:**\n- user_initialize_dg(): Global DG initialization\n- user_free_dg(): Global DG cleanup\n- user_dg_init_window(): Per-window setup\n- user_dg_free_window(): Per-window cleanup\n- user_dg_process_message(): Handle custom messages\n- user_interpret_text(): Process text input",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_lp",
+      "brief": "LP solver process for SYMPHONY's branch-and-cut\n\nThe LP process solves LP relaxations at each B&C node, manages\ncuts, and performs branching decisions.",
+      "has_algorithm": true
+    },
+    {
+      "name": "sym_lp_params",
+      "brief": "LP solver process parameters for SYMPHONY\n\nParameters controlling LP relaxation solving, cut generation,\nbranching, and primal heuristics in each B&C node.\n\n**cgl_params (CGL cut generation):**\n- generate_cgl_*_cuts: Enable specific cut families\n- generate_cgl_*_cuts_freq: How often to generate (1=every node)\n- *_max_depth: Tree depth limit for each cut type\n- use_chain_strategy: Smart cut generation chain\n\n**lp_params structure sections:**\n\n**Matrix growth control:**\n- max_non_dual_feas_to_add_*: Limits on violated cuts added\n- mat_row/col_compress_*: When to compress matrix\n\n**Tailing off detection:**\n- tailoff_gap_backsteps/frac: Detect stalling LP progress\n- tailoff_obj_backsteps/frac: Objective improvement threshold\n\n**Branching control:**\n- strong_branching_cand_num_*: Candidates for strong branching\n- rel_br_threshold: Reliability branching parameters\n- use_sos_branching: Special ordered sets support\n\n**Primal heuristics:**\n- fp_*: Feasibility pump parameters\n- fr_*: Feasibility-based restricted search\n- rs_*: RINS (Relaxation Induced Neighborhood Search)\n- lb_*: Local branching\n- ds_*: Diving heuristics (fractional, guided, etc.)",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_lp_solver",
+      "brief": "LP solver abstraction layer for SYMPHONY\n\nProvides uniform interface to multiple LP solvers via OSI\n(Open Solver Interface) or native APIs.\n\n**Supported solvers (via compile flags):**\n- __OSI_CLP__: COIN-OR CLP (default, open source)\n- __OSI_CPLEX__: IBM CPLEX\n- __OSI_XPRESS__: FICO Xpress\n- __OSI_GLPK__: GNU Linear Programming Kit\n- __CPLEX__: Native CPLEX API\n- __OSL__: IBM OSL (legacy)\n\n**LPdata structure:**\n- si: OsiSolverInterface pointer (OSI mode)\n- lp: Native solver object (CPLEX/OSL mode)\n- n, m, nz: Columns, rows, nonzeros\n- x, dj, dualsol, slacks: Solution vectors\n- vars: Variable descriptors with bounds/status\n- mip: Original problem description\n- cgl: CGL cut generation parameters\n\n**Core LP operations:**\n- open/close_lp_solver(): Initialize/cleanup\n- load_lp_prob(): Load problem into solver\n- initial_lp_solve(): First solve from scratch\n- dual_simplex(): Resolve after modifications\n- solve_hotstart(): Quick re-solve with basis\n\n**Matrix modification:**\n- add_rows(), add_cols(): Extend problem\n- delete_rows(), delete_cols(): Remove elements\n- change_bounds(), change_rhs(): Modify constraints\n\n**Solution access:**\n- get_x(), get_dj_pi(), get_slacks(): Retrieve solutions\n- get_basis(), load_basis(): Basis manipulation\n\n**CGL cut generation:**\n- generate_cgl_cuts(): Call CGL generators\n- Supports: Gomory, MIR, Probing, Knapsack, Clique, etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_lp_u",
+      "brief": "User callbacks for LP solver process\n\nDefines callbacks that users implement to customize LP solving.\nReturn USER_DEFAULT to use built-in behavior.\n\n**Data transfer:**\n- user_receive_lp_data(): Receive problem-specific data\n- user_free_lp(): Clean up user data\n\n**Feasibility checking:**\n- user_is_feasible(): Custom integrality check\n- user_send_feasible_solution(): Pack solution for master\n- user_display_lp_solution(): Custom solution display\n\n**Branching callbacks:**\n- user_shall_we_branch(): Decide whether to branch\n- user_select_candidates(): Choose branching candidates\n- user_compare_candidates(): Rank two candidates\n- user_select_child(): Choose child node to explore\n\n**Cut handling:**\n- user_unpack_cuts(): Convert packed cuts to rows\n- user_generate_cuts_in_lp(): Generate cuts in LP process\n- user_same_cuts(): Compare two cuts for equality\n\n**Column generation:**\n- user_generate_column(): Create new variables dynamically\n- user_create_subproblem(): Build restricted LP\n\n**Built-in selection rules:**\n- branch_close_to_half(): Fractional variables near 0.5\n- branch_close_to_half_and_expensive(): Combine with objective\n- branch_close_to_one_and_cheap(): Variables near 1 with low cost",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_macros",
+      "brief": "Utility macros for SYMPHONY\n\nCommon macros for memory management, parameter parsing,\nPVM communication, and utility operations.\n\n**Random number generation:**\n- SRANDOM(seed): Seed generator (srand/srandom)\n- RANDOM(): Get random number (rand/random)\n\n**Memory allocation:**\n- REMALLOC(ptr, type, old, new, block): Realloc with free first\n- REALLOC(ptr, type, old, new, block): Standard realloc\n- FREE(p): Safe free with NULL check\n\n**PVM communication (parallel mode):**\n- READ_INT_DESC(): Read integer array descriptor\n- READ_CHAR_ARRAY_WITH_SIZE(): Read sized char array\n- READ_STR_LIST(): Read string list\n\n**Parameter file parsing:**\n- READ_INT_PAR(par): Parse integer parameter\n- READ_DBL_PAR(par): Parse double parameter\n- READ_STR_PAR(par): Parse string parameter\n- READ_STRINT_PAR(): Parse string-to-int mapping\n- READPAR_ERROR(x): Report parse error\n\n**Data copying:**\n- COPY_DBL_ARRAY_DESC(): Copy double array descriptor\n- COPY_ARRAY_DESC(): Copy integer array descriptor\n- COPY_STAT(): Copy status array\n\n**User function handling:**\n- CALL_USER_FUNCTION(f): Check USER_ERROR return\n- CALL_WRAPPER_FUNCTION(f): Check wrapper return\n\n**Standard utilities:**\n- PRINT(verb, thresh, args): Conditional print\n- MIN(a,b), MAX(a,b): Comparisons\n- isset(a,i), setbit(a,i): Bit array operations\n\n**OpenMP atomics:**\n- OPENMP_ATOMIC_WRITE: Thread-safe write\n- OPENMP_ATOMIC_UPDATE: Thread-safe update",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_master",
+      "brief": "Master process for SYMPHONY's parallel branch-and-cut\n\nThe master process coordinates the overall solve, managing problem\ndata, solution bounds, and communication with worker processes.",
+      "has_algorithm": true
+    },
+    {
+      "name": "sym_master_params",
+      "brief": "Master process parameters aggregating all component params\n\nTop-level parameter structure containing parameters for all\nSYMPHONY processes: master, TM, LP, CG, CP, DG, and preprocessing.\n\n**params structure contains:**\n- cp_par: Cut pool parameters\n- cg_par: Cut generator parameters\n- lp_par: LP solver parameters\n- tm_par: Tree manager parameters\n- dg_par: Draw graph parameters (visualization)\n- prep_par: Preprocessing parameters\n\n**Execution control:**\n- warm_start: Resume from saved state\n- verbosity: Global output level\n- random_seed: For reproducibility\n- do_branch_and_cut: Enable B&C algorithm\n- do_draw_graph: Enable visualization\n- use_permanent_cut_pools: Persistent cut storage\n\n**Input/output:**\n- infile: Problem file (MPS/LP/GMPL)\n- file_type: MPS_FORMAT, LP_FORMAT, GMPL_FORMAT\n- datafile: GMPL data file if needed\n- test_dir: Directory for test problems\n- obj_offset: Constant added to objective\n\n**Multi-criteria optimization:**\n- multi_criteria: Enable bi-objective mode\n- mc_search_order: Search strategy\n- mc_compare_solution_tolerance: Pareto comparison\n- mc_warm_start: Reuse solutions across objectives\n\n**Parallel configuration:**\n- tm_exe, dg_exe: Process executables\n- tm_machine, dg_machine: Machine assignments\n- pvm_trace: PVM debugging",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_master_u",
+      "brief": "User callbacks for master process\n\nDefines callbacks for customizing problem setup and solution handling.\nReturn USER_DEFAULT to use built-in behavior for standard MIP solving.\n\n**Initialization callbacks:**\n- user_usage(): Print custom command-line help\n- user_initialize(): Allocate user data structure\n- user_free_master(): Clean up user data\n- user_readparams(): Read custom parameters\n- user_io(): Custom problem input\n\n**Problem setup:**\n- user_initialize_root_node(): Define base problem\n  - Set base variables, base cuts, column gen strategy\n  - This is the main hook for problem definition\n- user_start_heurs(): Run initial heuristics for bounds\n- user_init_draw_graph(): Setup visualization\n\n**Solution handling:**\n- user_receive_feasible_solution(): Process new incumbent\n- user_display_solution(): Custom solution output\n- user_send_feas_sol(): Known feasible solution for warm start\n\n**Data distribution (parallel mode):**\n- user_send_lp_data(): Send data to LP workers\n- user_send_cg_data(): Send data to cut generators\n- user_send_cp_data(): Send data to cut pools\n\n**Warm start support:**\n- user_ws_update_cuts(): Update cuts for modified problem\n- user_process_own_messages(): Custom message handling",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_messages",
+      "brief": "PVM message tags for parallel SYMPHONY\n\nDefines message types for inter-process communication in parallel mode.\nUsed with PVM (Parallel Virtual Machine) for distributed solving.\n\n**Message numbering scheme:**\n- 1xx: General messages (lifecycle, bounds)\n- 2xx: Master process messages (data requests)\n- 3xx: Tree manager \u2194 LP messages\n- 4xx: LP process outgoing messages\n- 5xx: Cut/solution pool messages\n- 6xx: Cut packing messages\n- 7xx: Column packing messages\n\n**Lifecycle messages (1xx):**\n- YOU_CAN_DIE (100): Permission to terminate\n- I_AM_DEAD (101): Termination acknowledgment\n- UPPER_BOUND (103): New incumbent found\n- WRITE_LOG_FILE (105): Checkpoint request\n\n**Data request messages (2xx):**\n- REQUEST_FOR_LP_DATA/LP_DATA: LP worker setup\n- REQUEST_FOR_CG_DATA/CG_DATA: Cut generator setup\n- REQUEST_FOR_CP_DATA/CP_DATA: Cut pool setup\n- TM_DATA (210): Tree manager startup\n\n**Tree manager \u2194 LP (3xx):**\n- LP__NODE_DESCRIPTION (300): Node state to TM\n- LP__BRANCHING_INFO (301): Branching decision\n- LP__IS_FREE (302): Ready for new node\n- LP__ACTIVE_NODE_DATA (306): Node assignment\n- LP__DIVING_INFO (307): Dive/backtrack instruction\n\n**Solution messages (4xx):**\n- FEASIBLE_SOLUTION_NONZEROS (410): Sparse solution\n- LP_SOLUTION_NONZEROS (420): LP solution for cuts\n\n**Pool messages (5xx-6xx):**\n- POOL_YOU_ARE_USELESS (501): Pool shutdown\n- PACKED_CUT (600): Single cut\n- PACKED_CUTS_TO_CP (601): Cuts to pool\n- NO_MORE_CUTS (605): End of cut stream",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_pack_array",
+      "brief": "Array serialization for PVM communication\n\nPack/unpack functions for SYMPHONY data structures in parallel mode.\n\n**Array packing:**\n- pack_array_desc(): Serialize array_desc (int list)\n- unpack_array_desc(): Deserialize array_desc\n- pack_double_array_desc(): Serialize with double stats\n- unpack_double_array_desc(): Deserialize double array\n\n**Basis packing:**\n- pack_basis(): Serialize basis_desc for warm start\n- unpack_basis(): Deserialize basis_desc",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_pack_cut",
+      "brief": "Cut serialization for PVM communication\n\nPack/unpack functions for cut_data in parallel mode.\n\n**Cut packing:**\n- pack_cut(): Serialize cut_data for transmission\n- unpack_cut(): Deserialize received cut_data",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_prep",
+      "brief": "MIP preprocessing (presolve) for SYMPHONY\n\nPreprocessing reduces problem size before B&C by fixing variables,\nremoving redundant constraints, and tightening bounds.",
+      "has_algorithm": true
+    },
+    {
+      "name": "sym_prep_params",
+      "brief": "Preprocessing parameters for SYMPHONY\n\nParameters controlling MIP presolve operations.\n\n**prep_params structure:**\n- level: Preprocessing aggressiveness (0=off)\n- dive_level: Bound propagation depth\n- impl_dive_level: Implication chain depth\n- impl_limit: Max implications to explore\n- do_probe: Enable probing\n- verbosity: Output detail level\n- reduce_mip: Enable full problem reduction\n\n**Probing control:**\n- probe_verbosity: Probing output level\n- probe_level: Probing aggressiveness\n\n**Single-row relaxation:**\n- do_single_row_rlx: Enable SR bounds\n- single_row_rlx_ratio: Sparsity threshold\n- max_sr_cnt: Max rows to analyze\n\n**Aggregated row relaxation:**\n- do_aggregate_row_rlx: Combine rows for bounds\n- max_aggr_row_ratio: Density limit\n- max_aggr_row_cnt: Max aggregations\n\n**Resource limits:**\n- iteration_limit: Max preprocessing passes\n- time_limit: Preprocessing time budget\n- etol: Numerical tolerance\n\n**Output:**\n- display_stats: Show preprocessing summary\n- write_mps/write_lp: Save preprocessed problem",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_primal_heuristics",
+      "brief": "Primal heuristics for finding feasible solutions\n\nCollection of heuristics to find feasible MIP solutions quickly.\nCalled during B&C to improve incumbent and provide bounds.",
+      "has_algorithm": true
+    },
+    {
+      "name": "sym_proccomm",
+      "brief": "Process communication abstraction for parallel SYMPHONY\n\nWrapper functions for PVM (Parallel Virtual Machine) communication.\nProvides portable inter-process communication in distributed mode.\n\n**PVM integration:**\n- __PVM__ flag enables PVM3 library\n- DataInPlace = PvmDataRaw for efficient packing\n- PROCESS_OK = PvmOk for status checks\n\n**Process management:**\n- register_process(): Join PVM\n- spawn(): Start remote processes\n- pstat(): Check process status\n- kill_proc(): Terminate process\n- comm_exit(): Leave PVM\n\n**Message sending:**\n- init_send(): Initialize send buffer\n- send_char/int/dbl/float_array(): Pack arrays\n- send_str(): Pack string\n- send_msg(): Send to one recipient\n- msend_msg(): Multicast to multiple recipients\n\n**Message receiving:**\n- receive_msg(): Blocking receive\n- treceive_msg(): Timed receive\n- nreceive_msg(): Non-blocking receive\n- receive_char/int/dbl/float_array(): Unpack arrays\n- receive_str(): Unpack string\n\n**Buffer management:**\n- bufinfo(): Get buffer metadata\n- freebuf(): Release buffer\n- setsbuf(), setrbuf(): Set active buffers",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_proto",
+      "brief": "Function prototype and path length macros\n\nDefines the PROTO macro for ANSI C function prototypes\nand standard path/line length constants.\n\n**Length constants:**\n- MAX_FILE_NAME_LENGTH (255): File path buffer size\n- MACH_NAME_LENGTH (255): Machine name buffer size\n- MAX_LINE_LENGTH (255): Line buffer size\n\n**PROTO macro:**\n- PROTO(x) expands to x for ANSI C prototypes\n- Allows: `int foo PROTO((int a, int b));`\n- Legacy support for K&R C compilers (commented out)",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_qsort",
+      "brief": "Quicksort variants and utility functions\n\nSpecialized quicksort implementations for common data patterns.\n\n**Quicksort variants:**\n- qsort_i(): Sort integer array\n- qsort_id(): Sort int array, permute double array\n- qsort_ic(): Sort int array, permute char array\n- qsort_ii(): Sort int array, permute second int array\n- qsort_di(): Sort double array, permute int array\n\n**Utility functions:**\n- sym_gcd(): Greatest common divisor\n- d_gap(): Compute optimality gap percentage",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_timemeas",
+      "brief": "Time measurement utilities for SYMPHONY\n\nPortable timing functions and timeval manipulation macros.\nUses Windows time on MSVC, sys/time.h otherwise.\n\n**Timing functions:**\n- start_time(): Start timer\n- used_time(): CPU time since last call\n- wall_clock(): Wall-clock elapsed time\n\n**timeval manipulation macros:**\n- TVCLEAR(tv): Zero a timeval\n- TVISSET(tv): Check if timeval is non-zero\n- TVXLTY(x,y): Compare x < y\n- TVXADDY(z,x,y): z = x + y\n- TVXSUBY(z,x,y): z = x - y\n- TVTODBL(tv): Convert to double seconds\n- DBLTOTV(d,tv): Convert double to timeval\n\n**VBC output macros:**\n- PRINT_TIME(tm, f): Print HH:MM:SS:MS format\n- PRINT_TIME2(tm, f): Print decimal seconds",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_tm",
+      "brief": "Tree Manager for SYMPHONY's parallel B&C\n\nThe Tree Manager (TM) maintains the branch-and-cut search tree,\ndispatches nodes to LP workers, and coordinates cut generation.",
+      "has_algorithm": true
+    },
+    {
+      "name": "sym_tm_params",
+      "brief": "Tree manager parameters for SYMPHONY\n\nParameters controlling the branch-and-cut search tree exploration.\n\n**Process configuration:**\n- lp_exe, cg_exe, cp_exe: Worker executables\n- lp/cg/cp_mach_num: Number of machines per type\n- lp/cg/cp_machs: Machine name arrays\n- max_active_nodes: Parallelism limit\n- max_cp_num: Maximum cut pools\n\n**Node selection (node_selection_rule):**\n- LOWEST_LP_FIRST: Best-bound search\n- DEPTH_FIRST_SEARCH: Deep diving\n- BREADTH_FIRST_SEARCH: Level-by-level\n- BEST_FIRST_SEARCH: Estimate-based\n\n**Diving strategy:**\n- unconditional_dive_frac: Always dive this fraction\n- diving_strategy: How to choose dive vs backtrack\n- diving_k, diving_threshold: Diving parameters\n\n**Termination criteria:**\n- time_limit: Maximum solve time\n- gap_limit: Optimality tolerance\n- node_limit: Maximum nodes to explore\n- find_first_feasible: Stop at first solution\n\n**Logging and warm start:**\n- logging, logging_interval: Progress logging\n- warm_start: Resume from saved state\n- warm_start_node_limit: Nodes to load\n- tree_log_file_name, cut_log_file_name: State files\n- vbc_emulation: Visualization output\n\n**Column generation:**\n- colgen_strat[2]: Strategy for two phases\n- price_in_root: Column generation at root\n\n**Solution pool:**\n- max_sp_size: Maximum solutions to keep",
+      "has_algorithm": false
+    },
+    {
+      "name": "sym_types",
+      "brief": "Core data structures for SYMPHONY's branch-and-cut\n\nDefines the fundamental data structures used throughout SYMPHONY\nfor representing problems, solutions, tree nodes, and cuts.\n\n**Problem representation:**\n- MIPdesc: Complete MIP in CSC format (matbeg, matind, matval)\n- MIPinfo: Problem statistics (var types, row types, density)\n\n**Tree node structures:**\n- bc_node: B&C tree node with bounds, solution, children\n- node_desc: Node description (basis, cuts, variables)\n- branch_obj: Branching decision (variable, children, bounds)\n- branch_desc: Single branch description (sense, rhs)\n\n**Cut structures:**\n- cut_data: Cut coefficients and metadata\n- row_data: Cut with effectiveness tracking\n- waiting_row: Pending cut with violation info\n\n**Solution structures:**\n- lp_sol: LP solution (sparse xind/xval format)\n- sp_solution: Solution pool entry\n- warm_start_desc: Complete warm start state\n\n**Statistics:**\n- problem_stat: Tree size, depth, diving stats\n- lp_stat_desc: LP calls, cuts generated by type\n- node_times: Timing breakdown per node\n\n**Presolve support:**\n- COLinfo: Column statistics and implications\n- ROWinfo: Row bounds, types, redundancy\n- IMPvar/IMPlist: Variable implication lists",
+      "has_algorithm": false
+    },
+    {
+      "name": "symphony",
+      "brief": "Main public API for SYMPHONY MILP solver\n\nSYMPHONY is a parallel branch-cut-price framework for solving\nMixed Integer Linear Programs (MILPs). Supports both shared-memory\nand distributed-memory (MPI) parallelism.",
+      "has_algorithm": true
+    },
+    {
+      "name": "symphony_api",
+      "brief": "Internal API header (legacy, includes sym_master.h)\n\nThis header provides the internal API declarations using the\nPROTO() macro for K&R C compatibility. Modern code should use\nsymphony.h which provides the same functions with standard\nANSI C prototypes.\n\n**Included headers:**\n- sym_proto.h: PROTO() macro definition\n- sym_master.h: Master process data structures\n- sym_messages.h: Message type definitions\n\n@note Prefer using symphony.h for new code",
+      "has_algorithm": false
+    }
+  ]
+}

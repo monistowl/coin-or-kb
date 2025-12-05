@@ -1,0 +1,13 @@
+{
+  "name": "ICrashX",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/presolve/ICrashX.h",
+  "brief": "Crossover from interior point to basic solution\n\nProvides simplex crossover after IPM solve to obtain vertex solution.\n\n**callCrossover():**\nConverts interior point solution to basic feasible solution:\n- Input: IPM solution (may be interior to polytope)\n- Output: Basis + vertex solution for post-processing\n\n**Why Crossover:**\n- IPM returns interior solutions, not vertices\n- Basic solutions needed for warm-starting, sensitivity analysis\n- Crossover pushes solution to vertex via simplex pivots\n\n**Process:**\n1. Identify near-bound variables\n2. Construct initial basis from binding constraints\n3. Run simplex cleanup to reach vertex",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipm/IpxWrapper.h for IPM solver calling crossover",
+    "simplex/HEkk.h for simplex cleanup phase"
+  ]
+}

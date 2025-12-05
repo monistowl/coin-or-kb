@@ -1,0 +1,9 @@
+{
+  "name": "BB_cut",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "experimental/Bcp/BB_cut.hpp",
+  "brief": "Bonmin BCP cutting plane interface\n\nCutting plane interface for Bonmin integrated with BCP framework.\nExperimental: combines branch-cut-price with MINLP solving.",
+  "algorithms": [],
+  "methods": []
+}

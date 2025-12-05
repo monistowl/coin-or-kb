@@ -1,0 +1,16 @@
+{
+  "name": "BCP_vector_short",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_vector_short.hpp",
+  "brief": "BCP_vec<short> specialization",
+  "algorithms": [
+    {
+      "name": "POD Vector Specialization: short\n\nTemplate specializations for BCP_vec<short> that skip\nconstruct/destroy overhead since short is a POD type.\nSame optimization pattern as BCP_vector_double.hpp.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

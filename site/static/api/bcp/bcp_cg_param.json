@@ -1,0 +1,21 @@
+{
+  "name": "BCP_cg_param",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_cg_param.hpp",
+  "brief": "Cut Generator parameters for BCP",
+  "algorithms": [
+    {
+      "name": "CG Parameters: Process Priority and Logging\n\nBCP_cg_par defines parameters for Cut Generator processes:\n\n**Character parameters:**\n- MessagePassingIsSerial: Single-process vs. distributed mode\n- ReportWhenDefaultIsExecuted: Debug overridable methods\n\n**Integer parameters:**\n- NiceLevel: OS scheduling priority (-20 to 20)\n\n**String parameters:**\n- LogFileName: Per-process logging with \"-cg-<id>\" suffix",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_cg.hpp for Cut Generator process",
+    "BCP_cg_user.hpp for user overridable methods",
+    "the man page of the <code>setpriority</code> system function."
+  ]
+}

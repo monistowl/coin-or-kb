@@ -1,0 +1,20 @@
+{
+  "name": "CouenneExprTrilinear",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprTrilinear.hpp",
+  "brief": "Trilinear product expression w = x*y*z",
+  "algorithms": [
+    {
+      "name": "Trilinear Polyhedral Relaxation\n\nSpecialized handling for products of exactly three terms.\nTrilinear terms are common in pooling problems and arise\nfrom reformulation of bilinear products with parameters.\n\n**Standardization options:**\nA trilinear term x*y*z can be reformulated as:\n1. w1 = x*y, w = w1*z (two bilinear terms)\n2. Direct trilinear relaxation\n\n**Convexification:**\nUses direct trilinear relaxation when available, which can\nprovide tighter bounds than cascaded bilinear products.\nGenerates 8 linear constraints forming a polyhedral relaxation.\n\n**Implied bounds:**\nGiven w in [wl,wu] and bounds on x,y,z, tightens bounds\nby considering all 8 corners of the 3D box.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneExprMul for general n-ary products",
+    "CouenneExprBinProd for binary products"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "solver",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/routing/solver.hpp",
+  "brief": "cuOpt VRP solver\n\nMain VRP solver orchestrating metaheuristics.",
+  "algorithms": [],
+  "methods": []
+}

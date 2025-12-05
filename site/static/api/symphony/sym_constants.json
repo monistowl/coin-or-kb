@@ -1,0 +1,13 @@
+{
+  "name": "sym_constants",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_constants.h",
+  "brief": "Core constants and status codes for SYMPHONY\n\nDefines all numeric constants used throughout SYMPHONY including\nerror codes, status values, algorithm modes, and return codes.\n\n**Error codes (process_chain):**\n- ERROR__NO_BRANCHING_CANDIDATE, ERROR__ILLEGAL_RETURN_CODE\n- ERROR__NUMERICAL_INSTABILITY, ERROR__COMM_ERROR\n\n**Problem types:**\n- ZERO_ONE_PROBLEM, INTEGER_PROBLEM, MIXED_INTEGER_PROBLEM\n\n**Node status (NODE_STATUS__*):**\n- CANDIDATE, BRANCHED_ON, HELD, ROOT, PRUNED\n- TIME_LIMIT, ITERATION_LIMIT, WARM_STARTED\n\n**LP solver status:**\n- LP_OPTIMAL, LP_D_INFEASIBLE, LP_D_UNBOUNDED\n- LP_D_ITLIM, LP_D_OBJLIM, LP_TIME_LIMIT\n\n**Basis status:**\n- VAR_AT_LB, VAR_BASIC, VAR_AT_UB, VAR_FREE, VAR_FIXED\n\n**Cut source:**\n- INTERNAL_CUT_POOL, EXTERNAL_CUT_POOL\n- INTERNAL_CUT_GEN, EXTERNAL_CUT_GEN\n\n**CGL generators (CGL_*_GENERATOR):**\n- PROBING, KNAPSACK, CLIQUE, GOMORY, TWOMIR, FLOWCOVER, MIR\n\n**Branching actions:**\n- DO_BRANCH, DO_NOT_BRANCH, DO_NOT_BRANCH__FATHOMED\n- PRUNE_THIS_CHILD, RETURN_THIS_CHILD, KEEP_THIS_CHILD\n\n**Variable status flags:**\n- NOT_FIXED, TEMP_FIXED_TO_LB, PERM_FIXED_TO_LB\n- BASE_VARIABLE, VARIABLE_BRANCHED_ON, NOT_REMOVABLE\n\n**Column generation strategies:**\n- FATHOM__DO_NOT_GENERATE_COLS__DISCARD\n- FATHOM__GENERATE_COLS__RESOLVE\n- BEFORE_BRANCH__GENERATE_COLS__RESOLVE\n\n**VBC visualization (VBC_*):**\n- INTERIOR_NODE, PRUNED, ACTIVE_NODE, CAND_NODE, FEAS_SOL_FOUND\n\n**Diving heuristics:**\n- VLENGTH_DIVING, GUIDED_DIVING, CROSSOVER_DIVING\n- EUC_DIVING, RANK_DIVING, FRAC_DIVING\n\n**Presolve return codes:**\n- PREP_UNMODIFIED, PREP_MODIFIED, PREP_INFEAS, PREP_SOLVED",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_types.h for data structures using these constants",
+    "sym_lp.h for LP process using these codes"
+  ]
+}

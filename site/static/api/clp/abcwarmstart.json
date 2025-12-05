@@ -1,0 +1,21 @@
+{
+  "name": "AbcWarmStart",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcWarmStart.hpp",
+  "brief": "Extended warm start with factorization caching for ABC",
+  "algorithms": [
+    {
+      "name": "Extended Warm Start with Cached Factorization\nExtends CoinWarmStartBasis to store additional information for efficient\nrestart of ABC simplex. Beyond basic/nonbasic status, can store:\n\nType encoding:\n- 0: Standard basis (as CoinWarmStartBasis)\n- 1,2: Plus factor order as shorts/ints (high bit = column)\n- 3,4: Plus compact saved factorization\n- +8: Steepest edge weights stored (as floats)\n\nAlso defines AbcWarmStartOrganizer for managing multiple warm starts\nin tree search (branch and bound) scenarios.\n\nKey features:\n- deleteRows()/deleteColumns(): Maintain valid basis after problem changes\n- createBasis0/12/34(): Create warm starts of different types\n- Support for incremental factorization updates",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinWarmStartBasis in CoinUtils for the base class",
+    "AbcSimplex which uses warm starts",
+    "ClpSimplex::getWarmStart() for standard warm start creation"
+  ]
+}

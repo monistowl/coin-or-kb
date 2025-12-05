@@ -1,0 +1,9 @@
+{
+  "name": "link_sparse_jacobian",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "speed/src/link_sparse_jacobian.hpp",
+  "brief": "Speed testing: link_sparse_jacobian",
+  "algorithms": [],
+  "methods": []
+}

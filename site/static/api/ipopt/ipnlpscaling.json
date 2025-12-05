@@ -1,0 +1,21 @@
+{
+  "name": "IpNLPScaling",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpNLPScaling.hpp",
+  "brief": "NLP scaling framework for problem conditioning\n\nNLPScalingObject is the abstract base for applying diagonal scaling\nto the NLP to improve numerical conditioning. Transforms:\n  min s_f*f(S_x^{-1}*x\u0303)  s.t.  s_c*c(S_x^{-1}*x\u0303)=0, ...",
+  "algorithms": [
+    {
+      "name": "NLP Diagonal Scaling:\n  DetermineScaling() computes scaling factors:\n  1. df: Objective scalar (scale f by df).\n  2. dx: Variable scaling D_x = diag(dx), x\u0303 = D_x\u00b7x.\n  3. dc, dd: Constraint scaling D_c, D_d.\n  Scaled problem: min df\u00b7f(D_x^{-1}\u00b7x\u0303) s.t. D_c\u00b7c(D_x^{-1}\u00b7x\u0303) = 0.\n  Applied automatically to all evaluations and derivatives.",
+      "math": "Scaling transformations:\n  Gradient: \u2207f\u0303 = df\u00b7D_x^{-1}\u00b7\u2207f (scaled gradient in x\u0303 space).\n  Jacobian: J\u0303 = D_c\u00b7J\u00b7D_x^{-1} (row and column scaling).\n  Hessian: W\u0303 = D_x^{-1}\u00b7W\u00b7D_x^{-1} (similarity transform).\n  Goal: Make ||\u2207f\u0303||, ||c\u0303||, ||J\u0303|| all O(1) for stability.\n\nProvides methods to:\n- apply_obj_scaling / unapply_obj_scaling: Scale objective\n- apply_vector_scaling_x/c/d: Scale primal/constraint vectors\n- apply_jac_c/d_scaling: Scale Jacobians (row/col scaling)\n- apply_hessian_scaling: Scale Hessian\n\nClass hierarchy:\n- NLPScalingObject: Abstract interface\n- StandardScalingBase: Common implementation with scaling vectors\n- NoNLPScalingObject: Identity (no scaling)\n- GradientScaling: Scale by gradient norm (nlp_scaling_method=gradient-based)\n- EquilibrationScaling: Row/column equilibration\n\nScaling matrices are represented via ScaledMatrix/SymScaledMatrix.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpGradientScaling.hpp for gradient-based implementation",
+    "IpEquilibrationScaling.hpp for equilibration",
+    "IpScaledMatrix.hpp for scaled matrix representation"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "ClpConstraint",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpConstraint.hpp",
+  "brief": "Abstract base class for nonlinear constraints\n\nDefines the interface for general (potentially nonlinear) constraints\nused in nonlinear programming extensions. The standard LP constraints\n(Ax \u2264 b) are handled directly by ClpModel; this class is for more\ngeneral constraint forms g(x) \u2264 0.",
+  "algorithms": [
+    {
+      "name": "Constraint Linearization (for SQP/LP-based NLP):\n  At current point x\u0304, linearize g(x) \u2248 g(x\u0304) + \u2207g(x\u0304)'(x - x\u0304)\n  Constraint g(x) \u2264 0 becomes: \u2207g(x\u0304)'x \u2264 -g(x\u0304) + \u2207g(x\u0304)'x\u0304\n\nCACHING:\n  - lastGradient_: cached gradient from last evaluation\n  - functionValue_: cached function value\n  - refresh parameter controls whether to recompute\n\nKey methods that derived classes must implement:\n- gradient(): Compute constraint gradient and function value\n- markNonlinear(): Identify which variables appear nonlinearly\n- markNonzero(): Identify sparsity pattern of gradient\n\nThe type_ member indicates constraint type: 0=linear, 1=nonlinear.\nRow number -1 indicates this is an objective function, not a constraint.",
+      "math": "Gradient computation:\n  For constraint g(x) \u2264 0:\n    - functionValue() returns g(x) at current point\n    - gradient() returns \u2207g(x) = [\u2202g/\u2202x\u2081, ..., \u2202g/\u2202x\u2099]\n\nSPARSITY PATTERN:\n  - markNonzero(): identifies which variables have non-zero gradient entries\n  - markNonlinear(): identifies which variables appear nonlinearly",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpObjective for objective function handling (similar interface)",
+    "ClpModel for standard linear constraint handling"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "link_dll_lib",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/link_dll_lib.hpp",
+  "brief": "CppAD utility: link dll lib",
+  "algorithms": [],
+  "methods": []
+}

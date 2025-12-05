@@ -1,0 +1,13 @@
+{
+  "name": "DecompSolution",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompSolution.h",
+  "brief": "Solution storage for feasible/incumbent solutions\n\nDecompSolution stores primal solutions found during decomposition\n(from heuristics, subproblems, or node processing).\n\n**Key Data Members:**\n- m_size: Number of variables (columns)\n- m_values: Solution vector x*\n- m_quality: Objective value c'x* (for incumbent tracking)\n\n**Solution Sources:**\n- Subproblem solutions (during pricing)\n- User heuristics (DecompApp::APPheuristics)\n- Rounding/diving heuristics\n- Integer LP solutions\n\n**Output Methods:**\n- print(): Display solution with specified precision\n- printMIPLIB(): Output in MIPLIB solution format\n\n**Integration:**\nSolutions are passed to ALPS via AlpsDecompModel for\nincumbent tracking and solution reporting.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompApp.h for heuristic callbacks",
+    "AlpsDecompModel.h for ALPS integration"
+  ]
+}

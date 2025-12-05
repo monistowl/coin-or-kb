@@ -1,0 +1,14 @@
+{
+  "name": "BlisSolution",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisSolution.h",
+  "brief": "Integer solution representation for BLIS\n\nExtends BcpsSolution with BLIS-specific solution handling.\nStores variable values and objective for integer-feasible solutions.\n\n**Key methods:**\n- print(): Output solution, showing near-integer values as integers\n- encode()/decode(): Serialization for parallel solution sharing\n\n**Usage:**\nCreated by heuristics or when LP solution is integer-feasible.\nStored in AlpsSolutionPool, shared across processes in parallel.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BcpsSolution for base class with size_, values_, quality_",
+    "AlpsSolutionPool for solution storage",
+    "BlisHeuristic::searchSolution() which returns these"
+  ]
+}

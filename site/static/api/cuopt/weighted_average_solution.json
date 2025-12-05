@@ -1,0 +1,9 @@
+{
+  "name": "weighted_average_solution",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/linear_programming/restart_strategy/weighted_average_solution.hpp",
+  "brief": "cuOpt LP solution storage\n\nPrimal/dual solution and basis information.",
+  "algorithms": [],
+  "methods": []
+}

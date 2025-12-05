@@ -1,0 +1,9 @@
+{
+  "name": "OSCommandLine",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSCommonInterfaces/OSCommandLine.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

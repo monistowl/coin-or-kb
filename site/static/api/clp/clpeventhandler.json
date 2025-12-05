@@ -1,0 +1,20 @@
+{
+  "name": "ClpEventHandler",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpEventHandler.hpp",
+  "brief": "Callback interface for handling solver events during optimization\n\nProvides a mechanism for user code to receive callbacks during the solve\nprocess. Users derive from ClpEventHandler and override event() to handle\nevents like end of iteration, factorization, or presolve stages.",
+  "algorithms": [
+    {
+      "name": "Disaster Recovery (ClpDisasterHandler):\nFor numerical difficulties that would cause simplex to abort:\n  intoSimplex(): Called at start\n  check(): Returns true if disaster detected\n  saveInfo(): Preserve state for retry\n  typeOfDisaster(): 0=can fix, 1=must abort\n\nCommon uses:\n- Handling Ctrl-C to gracefully stop optimization\n- Logging progress or updating a GUI\n- Implementing custom termination criteria\n- Monitoring solution quality during solve\n- Recovery from numerical instability",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpSimplex::setEventHandler() to install a handler",
+    "ClpModel::secondaryStatus() for event-based status codes"
+  ]
+}

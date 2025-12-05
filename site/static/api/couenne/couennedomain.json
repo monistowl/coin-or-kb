@@ -1,0 +1,13 @@
+{
+  "name": "CouenneDomain",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneDomain.hpp",
+  "brief": "Point and bounding box with save/restore stack\n\nManages the current solution point and variable bounds during\nexpression evaluation and bound tightening. Provides LIFO\nsave/restore functionality for backtracking.\n\n**DomainPoint:**\n- x_[]: Current variable values\n- lb_[]: Lower bounds\n- ub_[]: Upper bounds\n- copied_: True if data is owned (must free on destruction)\n- isNlp_: True if point came from NLP solver (feasible)\n\n**Domain:**\n- point_: Current active point\n- domStack_: Stack of saved points for restore\n\n**push()/pop() pattern:**\n```cpp\ndomain.push(newPoint);  // Save current, use new\n// ... work with new bounds ...\ndomain.pop();           // Restore previous\n```\n\n**Usage:**\nDuring B&B, each node has different bounds. push() saves the\nparent's bounds before processing a child; pop() restores them\nwhen backtracking.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneProblem which owns the Domain",
+    "expression::domain_ pointer in each expression"
+  ]
+}

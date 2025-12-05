@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprMin",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprMin.hpp",
+  "brief": "N-ary minimum operator w = min(x1, x2, ..., xn)\n\nRepresents the minimum of multiple expressions. The min function is\ncontinuous but nonsmooth (non-differentiable at kinks where arguments\nare equal).\n\n**Convexification challenge:**\nmin is neither convex nor concave. Standard approach:\n- Introduce auxiliary variables: w = min(x1,...,xn)\n- Add constraints: w <= xi for all i (overestimators)\n- Underestimator requires disjunction: w >= x_k for some k\n\n**Bound propagation:**\n- lb(w) = min(lb(x1), ..., lb(xn))\n- ub(w) = min(ub(x1), ..., ub(xn))\n\n**Implementation note:**\nUses copy/store pattern with 2n arguments: copies for evaluation,\nstores for caching evaluated values.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprMax for the dual operation",
+    "CouenneExprAbs for another nonsmooth operator"
+  ]
+}

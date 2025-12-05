@@ -1,0 +1,21 @@
+{
+  "name": "BCP_var",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_var.hpp",
+  "brief": "Variable representation for BCP Branch-Cut-Price",
+  "algorithms": [
+    {
+      "name": "Variable Classes for Column Generation and B&B\n\nDefines variable classes used throughout BCP:\n\n**Class hierarchy:**\n- BCP_var: Abstract base with obj, lb, ub, type, status, bcpind\n- BCP_var_core: Core variables that always stay in LP\n- BCP_var_algo: Algorithmic variables from column generation\n- BCP_var_set: Collection with bulk operations\n\n**Variable types (BCP_var_t):**\n- BCP_BinaryVar: 0-1 variable\n- BCP_IntegerVar: General integer\n- BCP_ContinuousVar: Continuous\n\n**Status flags (BCP_obj_status):**\n- BCP_ObjInactive: Fixed to a bound\n- BCP_ObjNotRemovable: Cannot be removed (e.g., branched on)\n- BCP_ObjToBeRemoved: Marked for deletion\n- BCP_ObjDoNotSendToPool: Skip variable pool\n\n**Internal index (bcpind):**\nUnique global identifier assigned by TM. Negative bcpind indicates\nthe variable was deleted and should not be referenced.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_cut.hpp for symmetric cut representation",
+    "BCP_vg.hpp for Variable Generator process",
+    "BCP_lp.hpp for LP process using variables"
+  ]
+}

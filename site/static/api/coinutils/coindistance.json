@@ -1,0 +1,13 @@
+{
+  "name": "CoinDistance",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinDistance.hpp",
+  "brief": "Platform-independent iterator distance utilities\n\nProvides wrapper functions around std::distance to ensure consistent\nbehavior across different compilers and platforms. These utilities are\nused throughout COIN-OR for iterator-based calculations.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "coinDistance(ForwardIterator, ForwardIterator)",
+    "coinDistance(ForwardIterator, ForwardIterator, Distance&)"
+  ]
+}

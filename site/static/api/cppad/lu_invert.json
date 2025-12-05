@@ -1,0 +1,9 @@
+{
+  "name": "lu_invert",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/lu_invert.hpp",
+  "brief": "CppAD utility: lu invert",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,21 @@
+{
+  "name": "CbcSOS",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcSOS.hpp",
+  "brief": "Special Ordered Sets (SOS) Type 1 and Type 2 branching\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcSOS: Branching for Special Ordered Sets (Beale & Tomlin, 1970):\n\nSOS Type 1: At most ONE variable can be nonzero\n- Common for selection between alternatives (choose one option)\n- SUM x_i <= 1 (or = 1 for exactly one)\n- Binary SOS1 is a special case of clique\n\nSOS Type 2: At most TWO CONSECUTIVE variables can be nonzero\n- Used for piecewise linear approximation (interpolation)\n- Variables ordered by weights; sum to 1\n- Represents point between two breakpoints",
+  "algorithms": [
+    {
+      "name": "SOS Branching (Beale & Tomlin 1970):\n  createCbcBranch() partitions ordered set {x_1,...,x_n}:\n  1. Find weighted center: w\u0304 = \u03a3(w_j\u00b7x_j) / \u03a3x_j.\n  2. Choose separator s closest to w\u0304.\n  3. Down branch: x_j = 0 for all w_j > s.\n  4. Up branch: x_j = 0 for all w_j \u2264 s.\n  Binary tree partitions the ordered set.",
+      "math": "Infeasibility measure:\n  SOS1: inf = min(\u03a3x_j, 1-max(x_j)) - prefer fixing near-integer.\n  SOS2: inf based on violation of adjacency (non-consecutive nonzeros).\n  separator_ stored in branching object for partition point.\n\nBranching partitions the ordered set at a separator weight,\nforcing variables on one side to zero.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcSOSBranchingObject for branching action",
+    "CbcClique for related binary set branching",
+    "OsiSOS for OSI-level representation\n\nEdwin 11/9/2009 carved out of CbcBranchActual"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "BonLpBranchingSolver",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/Branching/BonLpBranchingSolver.hpp",
+  "brief": "LP-based strong branching solver using ECP cuts\n\nImplements strong branching by solving LP relaxations enhanced with\nExtended Cutting Plane (ECP) cuts, avoiding full NLP solves.",
+  "algorithms": [
+    {
+      "name": "LP-Based Strong Branching for MINLP:\nApproximate NLP strong branching using LP + ECP cuts:\n1. markHotStart():\n   a. Extract LP relaxation from current NLP solution\n   b. Generate initial ECP cuts at NLP solution\n   c. Store warm start basis\n2. For each branching candidate i:\n   a. Modify bounds: x_i \u2265 \u2308x_i\u2309 (up) or x_i \u2264 \u230ax_i\u230b (down)\n   b. solveFromHotStart():\n      - Warm start LP from stored basis\n      - Run ECP iterations (up to maxCuttingPlaneIterations_)\n      - Record objective change \u0394obj_i\n3. unmarkHotStart(): Restore original bounds, clean up\n4. Select: i* = argmax{score(\u0394obj_i\u207a, \u0394obj_i\u207b)}\n\nWarm start modes:\n- Basis: Reuse LP basis (faster, less accurate)\n- Clone: Clone entire LP solver (slower, more accurate)",
+      "math": "",
+      "complexity": "O(candidates \u00b7 ECP_iters \u00b7 LP_solve).\nMuch faster than O(candidates \u00b7 NLP_solve) for true strong branching.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "StrongBranchingSolver for base class",
+    "EcpCuts for the cut generator used"
+  ]
+}

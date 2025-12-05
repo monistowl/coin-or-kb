@@ -1,0 +1,21 @@
+{
+  "name": "BCP_cut",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_cut.hpp",
+  "brief": "Cut (constraint) representation for BCP Branch-Cut-Price",
+  "algorithms": [
+    {
+      "name": "Cut Classes for Cutting Plane Generation in B&B\n\nDefines cut classes used throughout BCP:\n\n**Class hierarchy:**\n- BCP_cut: Abstract base with lb, ub, status, bcpind, effective_count\n- BCP_cut_core: Core cuts that always stay in LP (original constraints)\n- BCP_cut_algo: Algorithmic cuts from cut generation\n- BCP_cut_set: Collection with bulk operations\n\n**Effectiveness tracking:**\n- _eff_cnt: Positive = consecutive iterations cut was tight\n- Negative = consecutive iterations cut was slack\n- Cuts with low effectiveness may be removed from LP\n\n**Cut bounds:**\n- lb, ub: Constraint lb \u2264 ax \u2264 ub\n- Inactive cut: lb = -\u221e, ub = +\u221e (free constraint)\n\n**Status flags (BCP_obj_status):**\n- BCP_ObjInactive: Cut is free (not binding)\n- BCP_ObjNotRemovable: Cannot be removed (e.g., branching cut)\n- BCP_ObjToBeRemoved: Marked for deletion\n- BCP_ObjDoNotSendToPool: Skip cut pool\n\n**Slack pool:**\nIneffective cuts are moved to slack_pool for potential\nbranching later (branching on cuts).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_var.hpp for symmetric variable representation",
+    "BCP_cg.hpp for Cut Generator process",
+    "BCP_lp.hpp for LP process using cuts"
+  ]
+}

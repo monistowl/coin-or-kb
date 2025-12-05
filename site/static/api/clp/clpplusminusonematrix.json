@@ -1,0 +1,21 @@
+{
+  "name": "ClpPlusMinusOneMatrix",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPlusMinusOneMatrix.hpp",
+  "brief": "Specialized matrix where all nonzeros are +1 or -1\n\nEfficient storage for constraint matrices where every coefficient is either\n+1 or -1. Common in set partitioning, covering, and assignment problems.\nNo element values are stored - only row indices, with separate start arrays\nfor positive and negative entries in each column.",
+  "algorithms": [
+    {
+      "name": "Plus-Minus-One Matrix Operations:\n  Exploits binary coefficient structure for multiplication-free operations:\n  1. **Storage:** Only row indices stored, no element values\n     - startPositive_[j] to startNegative_[j]-1: rows with +1\n     - startNegative_[j] to startPositive_[j+1]-1: rows with -1\n  2. **Column j unpacking:** Direct index lookup, no multiplication\n  3. **Matrix-vector y = Ax:**\n     For each column j with x_j \u2260 0:\n       For i in +1 region: y[i] += x_j\n       For i in -1 region: y[i] -= x_j\n  4. **Transpose x = A'y:** Similar, accumulate \u00b1y[i] into x[j]",
+      "math": "Coefficient structure:\n  A_ij \u2208 {-1, 0, +1} for all entries\n  No floating-point multiplications needed in SpMV\n  Perfect for set partitioning: \u03a3_j x_j = 1 (each row)\n  And covering: \u03a3_j x_j \u2265 1 (each row)",
+      "complexity": "Storage: O(nnz) integers vs O(2\u00b7nnz) for general sparse\n  Matrix-vector: O(nnz) additions only (no multiplications)\n  ~2x faster than general sparse for these problem classes\n\nStorage: For each column, startPositive_[j] to startNegative_[j]-1 are +1s,\nand startNegative_[j] to startPositive_[j+1]-1 are -1s.\n\nAlso defines ClpPoolMatrix (when CLP_POOL_MATRIX is set) for matrices with\nfew distinct coefficient values, using a pool of unique elements.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpMatrixBase for the abstract matrix interface",
+    "ClpNetworkMatrix for pure network structure (+1/-1 with 2 per column)",
+    "ClpPackedMatrix for general sparse storage"
+  ]
+}

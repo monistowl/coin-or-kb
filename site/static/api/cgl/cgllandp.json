@@ -1,0 +1,23 @@
+{
+  "name": "CglLandP",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglLandP/CglLandP.hpp",
+  "brief": "Lift-and-Project cuts via simplex pivoting",
+  "algorithms": [
+    {
+      "name": "Lift-and-Project Cut Generation via Pivoting:\n  Generates disjunctive cuts by solving auxiliary optimization in lifted space:\n  1. For fractional x_j with disjunction (x_j \u2264 k \u2228 x_j \u2265 k+1):\n  2. Lift to extended space: introduce y\u00b9, y\u00b2 copies for each disjunct\n     x = \u03bby\u00b9 + (1-\u03bb)y\u00b2, \u03bb \u2208 [0,1], y\u00b9 feasible for x_j \u2264 k, y\u00b2 for x_j \u2265 k+1\n  3. Pivot in lifted space to optimize cut depth (separation)\n  4. Project: Extract cut \u03b1'x \u2264 \u03b2 valid for original space\n  5. Apply strengthening: modularization, coefficient tightening",
+      "math": "Lift-and-Project formulation (Balas, 1979):\n  Original: P = {x : Ax \u2264 b, 0 \u2264 x \u2264 u}\n  Disjunction: D = (\u03c0'x \u2264 \u03c0\u2080) \u2228 (\u03c0'x \u2265 \u03c0\u2080 + 1)\n  Lifted LP: max \u03b1'x\u0304 - \u03b2 s.t. valid for P \u2229 D\n  Optimal (\u03b1*, \u03b2*) gives deepest cut separating x\u0304 from conv(P \u2229 D).",
+      "complexity": "O(pivotLimit \u00b7 n) per cut where n = variables.\n  Total: O(|fractional| \u00b7 pivotLimit \u00b7 n) per call to generateCuts.\n  Pivoting typically converges in 10-50 iterations.",
+      "ref": [
+        "Balas & Perregaard (2003). \"A precise correspondence between lift-and-\n     project cuts, simple disjunctive cuts, and mixed integer Gomory cuts\n     for 0-1 programming\". Math. Programming 94:221-245.\n\nAlgorithm: For each fractional integer variable:\n1. Lift problem to higher dimension with disjunction\n2. Pivot in lifted space using CglLandPSimplex\n3. Project resulting constraint back to original space\n\nPivot strategies (SelectionRules):\n- mostNegativeRc: Most negative reduced cost (Dantzig-like)\n- bestPivot: Best possible pivot element\n- initialReducedCosts: Only rows with initially zero reduced cost\n\nCut generation modes (ExtraCutsMode):\n- none: Just primary L&P cuts\n- AtOptimalBasis: Also generate from optimal lifted basis\n- WhenEnteringBasis: Generate as structurals enter basis\n- AllViolatedMigs: Generate all violated GMI cuts during optimization\n\nNormalization options:\n- Unweighted, WeightRHS, WeightLHS, WeightBoth\n- LHS norms: L1, L2, Infinity, Average, Uniform, SupportSize\n\nKey parameters (Parameters class):\n- pivotLimit/pivotLimitInTree: Max pivots before generating cut\n- degeneratePivotLimit: Handle degenerate pivots\n- modularize/strengthen: Cut strengthening options\n\nRequires optimal basis."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "LAP::CglLandPSimplex for pivoting implementation",
+    "LAP::Validator for cut validation",
+    "CglLiftAndProject for simpler implementation"
+  ]
+}

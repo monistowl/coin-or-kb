@@ -1,0 +1,9 @@
+{
+  "name": "local_search_config",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/mip/local_search/local_search_config.hpp",
+  "brief": "cuOpt MIP solver component\n\nPart of GPU-accelerated mixed-integer solver.",
+  "algorithms": [],
+  "methods": []
+}

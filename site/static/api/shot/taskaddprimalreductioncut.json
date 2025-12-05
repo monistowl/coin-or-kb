@@ -1,0 +1,13 @@
+{
+  "name": "TaskAddPrimalReductionCut",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskAddPrimalReductionCut.h",
+  "brief": "Add objective cutoff based on incumbent\n\nUses primal bound to tighten MIP relaxation.\n\n**TaskAddPrimalReductionCut Class:**\n- currentLowerBoundForReductionCut: Current cutoff value\n- run(): Update objective bound constraint\n\n**Cutoff Strategy:**\n- Adds constraint: objective <= bestPrimal - epsilon\n- Forces MIP to find improving solutions only\n- Updated when primal bound improves",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Results.h for primal bound tracking",
+    "TaskCheckMaxNumberOfPrimalReductionCuts.h for limit"
+  ]
+}

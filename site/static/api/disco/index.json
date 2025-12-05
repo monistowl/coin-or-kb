@@ -1,0 +1,136 @@
+{
+  "library": "DisCO",
+  "layer": "layer-3",
+  "classes": [
+    {
+      "name": "Dco",
+      "brief": "Central header defining DisCO enums, types, and constants\n\nThis header defines all enumeration types used throughout DisCO\n(Discrete Conic Optimization), a Mixed-Integer Second-Order Cone\nProgramming (MISOCP) solver.\n\n**Constraint Types (DcoConstraintType):**\n- Core constraints from the original problem\n- MILP cuts: Clique, FlowCover, Gomory, Knapsack, MIR, OddHole, Probe, TwoMIR\n- Conic cuts: IPM, IPMint, OA (Outer Approximation), CMIR, GD1\n\n**Cone Types (DcoLorentzConeType):**\n- DcoLorentzCone: Standard ||x|| <= t\n- DcoRotatedLorentzCone: 2*x1*x2 >= ||x_rest||^2\n\n**Cut Strategies (DcoCutStrategy):**\n- None, Root only, Auto, Periodic\n\n**Branching Strategies (DcoBranchingStrategy):**\n- MaxInfeasibility, PseudoCost, Reliability, Strong, Bilevel",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoBranchObject",
+      "brief": "Branching decision for integer variable dichotomy\n\nDcoBranchObject stores the information needed to create two child\nnodes by branching on a fractional integer variable.\n\n**Branching Dichotomy:**\nFor variable x_i with fractional value v:\n- Down branch: x_i <= floor(v) (ubDownBranch_)\n- Up branch: x_i >= ceil(v) (lbUpBranch_)\n\n**Inherited from BcpsBranchObject:**\n- objectIndex_: Variable index being branched\n- score_: Branching score (from strategy)\n- value_: Current fractional value\n- direction_: Which branch to explore next\n\n**Key Methods:**\n- numBranches(): Returns 2 (binary branching)\n- branch(): Apply bound change to solver, return new bound",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoBranchStrategyMaxInf",
+      "brief": "Maximum infeasibility branching strategy",
+      "has_algorithm": true
+    },
+    {
+      "name": "DcoBranchStrategyPseudo",
+      "brief": "Pseudocost branching variable selection",
+      "has_algorithm": true
+    },
+    {
+      "name": "DcoBranchStrategyRel",
+      "brief": "DisCO reliability branching",
+      "has_algorithm": true
+    },
+    {
+      "name": "DcoBranchStrategyStrong",
+      "brief": "Strong branching variable selection strategy",
+      "has_algorithm": true
+    },
+    {
+      "name": "DcoCbfIO",
+      "brief": "CBF (Conic Benchmark Format) file reader for DisCO\n\nDcoCbfIO reads and writes conic problems in the standard CBF format,\nwhich is a text-based format for conic optimization problems.\n\n**CONES Enum (CBF domain types):**\n- FREE_RANGE: Free variables (F)\n- POSITIVE_ORT: Nonnegative orthant (L+)\n- NEGATIVE_ORT: Nonpositive orthant (L-)\n- FIXPOINT_ZERO: Fixed to zero (L=)\n- QUAD_CONE: Lorentz/quadratic cone (Q): ||x_{2:n}|| <= x_1\n- RQUAD_CONE: Rotated quadratic cone (QR): 2*x_1*x_2 >= ||x_{3:n}||^2\n\n**File Structure (CBF format):**\n- VER: Version number\n- OBJSENSE: MIN or MAX\n- VAR: Number of variables and domains\n- INT: Integer variables\n- CON: Number of constraints and domains\n- OBJACOORD: Objective coefficients\n- ACOORD: Constraint matrix in coordinate format\n- BCOORD: Constraint bounds/fixed terms\n\n**Key Methods:**\n- readCbf(): Parse CBF file into internal structures\n- writeCbf(): Output problem in CBF format\n- getProblem(): Convert to standard form (colLB, colUB, rowLB, rowUB, matrix, cones)",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoConGenerator",
+      "brief": "Abstract base class for constraint/cut generators\n\nDcoConGenerator provides the interface for generating cutting planes\n(constraints) during the branch-and-cut algorithm.\n\n**Generator Hierarchy:**\n- DcoConGenerator (ABC)\n  - DcoLinearConGenerator: Wraps CglCutGenerator (MILP cuts)\n  - DcoConicConGenerator: Wraps CglConicCutGenerator (OA cuts)\n\n**Statistics (DcoConGeneratorStats):**\n- numConsGenerated_: Total cuts generated\n- numConsUsed_: Cuts that were actually added\n- time_: CPU time consumed\n- numCalls_: Times generator was invoked\n- numNoConsCalls_: Calls producing no cuts\n\n**Control Parameters:**\n- strategy_: None, Root, Auto, Periodic\n- frequency_: How often to call (1 = every node)\n\n**Pure Virtual:**\n- generateConstraints(): Populate BcpsConstraintPool",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoConfig",
+      "brief": "Build configuration header for DisCO\n\nStandard COIN-OR configuration pattern that selects appropriate\nconfig files based on build system and context.\n\n**Configuration Selection:**\n- With autotools (HAVE_CONFIG_H defined):\n  - Library build (DISCO_BUILD): uses config.h\n  - Client code: uses config_dco.h\n- Without autotools (e.g., Visual Studio):\n  - Library build: uses config_default.h\n  - Client code: uses config_dco_default.h",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoConicConGenerator",
+      "brief": "Wrapper for conic outer approximation cut generators\n\nDcoConicConGenerator wraps CglConicCutGenerator to generate linear\ncuts that approximate conic constraints (Outer Approximation).\n\n**Conic Cut Types (DcoConicCutType):**\n- IPM: Interior point method based\n- IPMInt: Integer-aware IPM cuts\n- OA: Standard outer approximation\n- MIR: Conic MIR cuts\n- GD1: Gradient descent cuts\n\n**OA Algorithm:**\nFor a Lorentz cone ||x|| <= t, generate linear supports:\n- At current solution point x*, generate tangent hyperplane\n- a'x <= b where (a,b) defines supporting hyperplane\n\n**generateConstraints() Flow:**\n1. Call CglConicCutGenerator::generateCuts()\n2. Convert OsiConicCuts to DcoLinearConstraint objects\n3. Add to BcpsConstraintPool",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoConicConstraint",
+      "brief": "Second-order cone (Lorentz cone) constraint representation\n\nDcoConicConstraint represents conic constraints of two types:\n- Lorentz cone: ||x_1...x_{n-1}|| <= x_n\n- Rotated Lorentz cone: 2*x_1*x_2 >= ||x_3...x_n||^2\n\n**Data Members:**\n- coneType_: DcoLorentzCone or DcoRotatedLorentzCone\n- coneSize_: Number of variables in cone\n- members_: Variable indices forming the cone\n- supports_: Linear constraints approximating the cone (OA)\n- activeSupports_: Which supports are binding\n\n**OA (Outer Approximation):**\nWhen using linear solvers, conic constraints are approximated by\nlinear supporting hyperplanes. The supports_ array stores these\ncuts, and activeSupports_ tracks which are currently tight.\n\n**Feasibility:**\ninfeasibility() returns the cone violation at the current solution,\nused to decide if more OA cuts are needed.",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoConstraint",
+      "brief": "Abstract base class for DisCO constraints\n\nDcoConstraint is the base class for all constraints in DisCO,\nsupporting both linear and conic constraint types.\n\n**Inheritance:** DcoConstraint -> BcpsConstraint -> BcpsObject -> AlpsKnowledge\n\n**Constraint Hierarchy:**\n- DcoConstraint (ABC)\n  - DcoLinearConstraint: Linear row with coefficients\n  - DcoConicConstraint: Lorentz or rotated Lorentz cone\n\n**Type Field (DcoConstraintType):**\n- Core: Original problem constraints\n- MILP cuts: Clique, Gomory, MIR, etc.\n- Conic cuts: IPM, OA approximations\n\n**Key Methods:**\n- createOsiRowCut(): Convert to OsiRowCut (returns NULL for conic)\n- constraintType(): Get/set the constraint source type",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoHeurRounding",
+      "brief": "Simple rounding heuristic for finding feasible solutions",
+      "has_algorithm": true
+    },
+    {
+      "name": "DcoHeuristic",
+      "brief": "Abstract base class for primal heuristics",
+      "has_algorithm": true
+    },
+    {
+      "name": "DcoLicense",
+      "brief": "DisCO license information\n\nEPL license text and copyright information.",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoLinearConGenerator",
+      "brief": "Wrapper for CGL linear cut generators\n\nDcoLinearConGenerator wraps CglCutGenerator objects to integrate\nstandard MILP cutting planes into DisCO's branch-and-cut.\n\n**Available CGL Generators:**\n- CglClique: Clique cuts\n- CglOddHole: Odd hole cuts\n- CglFlowCover: Flow cover cuts\n- CglKnapsackCover: Knapsack cover cuts\n- CglMixedIntegerRounding: MIR cuts\n- CglGomory: Gomory cuts\n- CglProbing: Probing cuts\n- CglTwomir: Two-MIR cuts\n\n**generateConstraints() Flow:**\n1. Call CglCutGenerator::generateCuts()\n2. Convert OsiCuts to DcoLinearConstraint objects\n3. Add to BcpsConstraintPool\n4. Update statistics",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoLinearConstraint",
+      "brief": "Linear constraint (row) representation\n\nDcoLinearConstraint stores a linear constraint in sparse form:\nlb <= sum(values[i] * x[indices[i]]) <= ub\n\n**Data Members:**\n- size_: Number of nonzero coefficients\n- indices_: Variable indices with nonzero coefficients\n- values_: Coefficient values\n- Bounds inherited from DcoConstraint/BcpsObject\n\n**Usage:**\n- Core constraints from the original problem\n- MILP cutting planes (Gomory, MIR, etc.)\n- OA supports approximating conic constraints\n\n**Conversion:**\n- createOsiRowCut(): Convert to OsiRowCut for solver\n\n**Feasibility:**\n- infeasibility(): Returns constraint violation",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoMessage",
+      "brief": "Message codes and handler for DisCO logging\n\nDcoMessage extends CoinMessages to provide structured logging\nwith configurable verbosity and debug levels.\n\n**Message Categories (DISCO_Message):**\n- Gap/Cutoff: DISCO_CUTOFF_INC, DISCO_GAP_YES/NO\n- Cut stats: DISCO_CUT_STATS_FINAL, DISCO_CUT_GENERATED\n- Node logging: DISCO_NODE_LOG, DISCO_NODE_BRANCH\n- Input: DISCO_READ_NOINTS, DISCO_READ_NOCONES, DISCO_READ_MPSERROR\n- Solver: DISCO_SOLVER_STATUS, DISCO_SOLVER_FAILED\n- Heuristics: DISCO_HEUR_SOL_FOUND, DISCO_HEUR_STATS_FINAL\n- Branching: DISCO_PSEUDO_REPORT, DISCO_STRONG_REPORT\n\n**Debug Levels (DISCO_Debug_Level):**\n- DISCO_DLOG_BRANCH: Branching decisions\n- DISCO_DLOG_CUT: Cut generation\n- DISCO_DLOG_PROCESS: Node processing\n- DISCO_DLOG_GRUMPY: Visualization output",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoModel",
+      "brief": "Main model class for Mixed-Integer Conic Optimization\n\nDcoModel derives from BcpsModel and represents the master MISOCP problem.\nIt manages problem data, solver interfaces, and algorithm configuration.\n\n**Two Solving Modes:**\n- Direct conic: Uses OsiConicSolverInterface (CPLEX, Mosek)\n- OA (Outer Approximation): Uses OsiSolverInterface with linear cuts\n\n**Problem Structure:**\n- matrix_: Linear constraint matrix (CoinPackedMatrix)\n- coneStart_, coneMembers_, coneType_: Conic constraints\n- integerCols_: Indices of integer variables\n- relaxedCols_, relaxedRows_: Objects with relaxed integrality/cone\n\n**Algorithm Components:**\n- branchStrategy_: Variable selection (MaxInf, Pseudo, Strong, Reliability)\n- conGenerators_: Map of constraint generators (MILP + conic cuts)\n- heuristics_: Primal heuristics (rounding)\n\n**Key Virtual Methods:**\n- readInstance(): Load MPS or CBF files\n- setupSelf(): Initialize solver, cuts, heuristics\n- createRoot(): Create root DcoTreeNode\n- feasibleSolution(): Check integer and cone feasibility",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoNodeDesc",
+      "brief": "Tree node description storing branching and warm-start data\n\nDcoNodeDesc stores the information that distinguishes a tree node\nfrom its parent, enabling node reconstruction and pseudocost updates.\n\n**Inheritance:** DcoNodeDesc -> BcpsNodeDesc -> AlpsNodeDesc\n\n**Branching Data (for pseudocost updates):**\n- branchedDir_: Up or down branch direction\n- branchedInd_: Index of variable branched on\n- branchedVal_: Value at which branching occurred\n\n**Warm Start:**\n- basis_: CoinWarmStartBasis for LP warm-starting\n\n**From BcpsNodeDesc (inherited):**\n- vars_: Variable bound modifications (BcpsObjectListMod)\n- cons_: Constraint modifications (BcpsObjectListMod)\n\n**Serialization:**\nencode()/decode() for parallel tree distribution.",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoParams",
+      "brief": "DisCO algorithm parameters and configuration\n\nDcoParams extends AlpsParameterSet to provide MISOCP-specific\nparameters for controlling the branch-and-cut algorithm.\n\n**Parameter Categories:**\n\n**Boolean (chrParams):**\n- cutRampUp, presolve, shareConstraints/Variables\n- sharePseudocostRampUp/Search\n\n**Integer (intParams):**\n- branchStrategy: 0=MaxInf, 1=Pseudo, 2=Reliability, 3=Strong, 4=Bilevel\n- Cut strategies: cutCliqueStrategy, cutGomoryStrategy, etc.\n- Cut frequencies: cutCliqueFreq, cutGomoryFreq, etc.\n- Conic cuts: cutIpmStrategy, cutOaStrategy\n- heurStrategy, heurRoundStrategy\n- lookAhead, pseudoReliability, strongCandSize\n\n**Double (dblParams):**\n- cutFactor, cutoff, objTol, integerTol, coneTol\n- optimalRelGap, optimalAbsGap\n- pseudoWeight, tailOff\n- OA parameters: cutOaBeta, cutOaSlack1/2\n\n**Serialization:**\n- pack()/unpack(): Encode for parallel distribution",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoPresolve",
+      "brief": "Presolve/preprocessing for MISOCP problems\n\nDcoPresolve extends OsiPresolve to handle conic problems,\napplying reductions before branch-and-bound.\n\n**Supported Operations:**\n- Bound tightening (improve_bounds)\n- Redundant row/column removal (from OsiPresolve)\n- Problem scaling and reformulation\n\n**Two Modes (compile-time):**\n- OA mode (__OA__): Uses OsiSolverInterface\n- Direct mode: Uses OsiConicSolverInterface\n\n**Usage:**\n1. DcoPresolve(origModel) - Initialize with original model\n2. presolve() - Apply reductions, create presolvedModel_\n3. Solve presolved problem\n4. postsolve() - Restore solution to original space",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoSolution",
+      "brief": "Incumbent solution for MISOCP\n\nDcoSolution stores a feasible solution found during branch-and-bound,\nincluding the variable values and objective quality.\n\n**Inheritance:** DcoSolution -> BcpsSolution -> AlpsSolution -> AlpsKnowledge\n\n**From BcpsSolution (inherited):**\n- size_: Number of variables\n- values_: Solution vector\n- quality_: Objective value\n\n**Selection Methods:**\n- selectNonzeros(): Return solution with only non-zero entries\n- selectFractional(): Return entries with fractional values\n\n**Solution Sources:**\n- DcoSolutionTypeBounding: From node relaxation\n- DcoSolutionTypeHeuristic: From primal heuristics\n- DcoSolutionTypeStrong: From strong branching",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoSubTree",
+      "brief": "Subtree representation for parallel search\n\nDcoSubTree extends BcpsSubTree to represent a portion of the\nbranch-and-bound tree for parallel distribution.\n\n**Inheritance:** DcoSubTree -> BcpsSubTree -> AlpsSubTree\n\n**Usage in Parallel:**\n- Subtrees are work units distributed to workers\n- Contains subset of tree nodes for processing\n- Supports encode/decode for network transmission\n\nNote: Currently minimal implementation - most logic in base class.",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoTreeNode",
+      "brief": "Branch-and-bound tree node for MISOCP\n\nDcoTreeNode inherits BcpsTreeNode->AlpsTreeNode and implements\nthe core branch-and-cut loop for conic optimization.\n\n**Inheritance:** DcoTreeNode -> BcpsTreeNode -> AlpsTreeNode\n\n**Node Status (inherited from ALPS):**\n- Candidate: Fresh, unprocessed\n- Evaluated: Processed, may need more cuts\n- Pregnant: Ready to branch\n- Branched: Children created\n- Fathomed/Discarded: Pruned\n\n**Processing Flow:**\n1. process(): Main entry point called by ALPS\n2. installSubProblem(): Load bounds from node descriptor\n3. boundingLoop(): Iterate solve->cuts until done\n4. bound(): Solve conic/LP relaxation\n5. generateConstraints(): Add MILP and conic cuts\n6. branchConstrainOrPrice(): Decide next action\n7. branch(): Create child nodes\n\n**BcpStats Structure:**\nTracks cuts, bounds, and objective improvement per node.",
+      "has_algorithm": false
+    },
+    {
+      "name": "DcoVariable",
+      "brief": "Variable representation for MISOCP\n\nDcoVariable represents a decision variable in the optimization problem,\nstoring bounds, integrality type, and branching information.\n\n**Inheritance:** DcoVariable -> BcpsVariable -> BcpsObject -> AlpsKnowledge\n\n**BcpsObject Fields (inherited):**\n- lbHard_/ubHard_: Original bounds\n- lbSoft_/ubSoft_: Current bounds (may be tighter from branching)\n- intType_: Integer ('I'), binary ('B'), or continuous ('C')\n- objectIndex_: Position in model's variable array\n\n**Key Methods:**\n- infeasibility(): Returns integrality violation (for integer variables)\n- createBranchObject(): Create DcoBranchObject for branching on this\n- clone(): Deep copy for node differencing\n\n**Storage:**\nVariables are stored in BcpsModel::variables_ (inherited by DcoModel).\nInteger variable indices are tracked in DcoModel::integerCols_.",
+      "has_algorithm": false
+    }
+  ]
+}

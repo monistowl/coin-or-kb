@@ -1,0 +1,9 @@
+{
+  "name": "subgraph_reverse",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/subgraph_reverse.hpp",
+  "brief": "Core AD functionality: subgraph reverse",
+  "algorithms": [],
+  "methods": []
+}

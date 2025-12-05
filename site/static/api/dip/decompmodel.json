@@ -1,0 +1,13 @@
+{
+  "name": "DecompModel",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompModel.h",
+  "brief": "Wrapper classes for constraint sets used in decomposition\n\nProvides model containers that wrap DecompConstraintSet with\nmetadata and optional solver interfaces.\n\n**DecompModel:**\nBasic wrapper for a constraint set (A'x >= b' or A''x >= b'')\n- m_model: Pointer to the constraint set\n- m_modelName: Human-readable name for debugging\n- m_blockId: Which block this belongs to (-1 for core)\n\n**DecompSubModel:**\nExtended model with OsiSolverInterface for subproblem solving\n- m_osi: Solver interface (Clp, Cpx, Grb, etc.)\n- solveAsMIP(): Solve subproblem as MIP\n- Used when user doesn't provide custom solveRelaxed()\n\n**Usage in Decomposition:**\n- Core model (A''): Linking constraints kept in master\n- Relax models (A'): Block constraints for subproblems\n- Each block b has m_modelRelax[b] in DecompApp",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompConstraintSet.h for underlying matrix storage",
+    "DecompApp.h for model decomposition setup"
+  ]
+}

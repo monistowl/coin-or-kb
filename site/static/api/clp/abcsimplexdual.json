@@ -1,0 +1,21 @@
+{
+  "name": "AbcSimplexDual",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcSimplexDual.hpp",
+  "brief": "AVX-optimized dual simplex algorithm",
+  "algorithms": [
+    {
+      "name": "Dual Simplex Flow (unchanged from Clp):\n```\nwhile (not finished) {\n  while (not clean) { Factorize, flip for dual feasibility }\n  while (iterating) {\n    Choose leaving variable (most infeasible)\n    Get pivot row (BTRAN + matrix multiply)\n    Choose entering variable (ratio test) \u2190 VECTORIZED\n    Update basis (FTRAN + rank-1 updates)\n  }\n}\n```",
+      "math": "",
+      "complexity": "Same O(m\u00b2n) worst case as standard dual simplex,\nbut ~2-4\u00d7 faster constant factor from SIMD and cache optimization.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcSimplex for the base optimized simplex class",
+    "AbcSimplexPrimal for optimized primal simplex",
+    "ClpSimplexDual for the standard (non-AVX) implementation"
+  ]
+}

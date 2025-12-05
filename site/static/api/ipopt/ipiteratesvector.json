@@ -1,0 +1,20 @@
+{
+  "name": "IpIteratesVector",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpIteratesVector.hpp",
+  "brief": "Combined primal-dual iterate vector for IPM algorithm\n\nIteratesVector is a specialized CompoundVector with fixed 8 components\nrepresenting the complete primal-dual iterate of the interior point method:",
+  "algorithms": [
+    {
+      "name": "Primal-Dual Iterate Storage:\n  IteratesVector stores the complete IPM iterate:\n  - Primal: x (variables), s (inequality slacks).\n  - Constraint multipliers: y_c (equality), y_d (inequality).\n  - Bound multipliers: z_L, z_U (on x), v_L, v_U (on s).\n  Used for curr_, trial_, delta_ in IpoptData.\n  Inherits Vector ops: Norm(), Axpy(), Copy() operate on full iterate.",
+      "math": "KKT system variables:\n  Primal feasibility: c(x) = 0, d(x) - s = 0.\n  Dual feasibility: \u2207f + J_c^T\u00b7y_c + J_d^T\u00b7y_d - z_L + z_U = 0.\n  Complementarity: z_L\u00b7(x-x_L) = \u03bce, z_U\u00b7(x_U-x) = \u03bce, etc.\n\nComponents (indices 0-7):\n- x (0): Primal variables\n- s (1): Inequality slacks\n- y_c (2): Equality constraint multipliers\n- y_d (3): Inequality constraint multipliers\n- z_L (4): Lower bound multipliers on x\n- z_U (5): Upper bound multipliers on x\n- v_L (6): Lower bound multipliers on s\n- v_U (7): Upper bound multipliers on s\n\nThis allows the iterate to participate in vector operations (norms,\nscaling, axpy) while providing type-safe accessors for each component.\nIpoptData stores curr_, trial_, delta_ as IteratesVectors.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpCompoundVector.hpp for the base class",
+    "IpIpoptData.hpp for storage of current/trial/delta iterates"
+  ]
+}

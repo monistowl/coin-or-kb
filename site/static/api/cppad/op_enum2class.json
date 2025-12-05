@@ -1,0 +1,9 @@
+{
+  "name": "op_enum2class",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/op_enum2class.hpp",
+  "brief": "Value graph: op_enum2class",
+  "algorithms": [],
+  "methods": []
+}

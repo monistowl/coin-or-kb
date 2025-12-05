@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_QPBoundary",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_QPBoundary.hpp",
+  "brief": "QP boundary initialization from graph partition\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPBoundary initializes QP state from discrete partition, setting\nx values based on partition assignment and identifying boundary\nvertices (those with neighbors in opposite partition) as the\nactive set for optimization.",
+  "algorithms": [
+    {
+      "name": "QP Initialization from Discrete Partition:\nConverts binary partition to QP starting point:\n1. Set x_v = 0 for vertices in partition A, x_v = 1 for partition B\n2. Compute initial gradient g = Lx (graph Laplacian times x)\n3. Identify boundary vertices: those with edges crossing cut\n4. Add boundary vertices to free set (can move in [0,1])\n5. Mark interior vertices as bound (fixed at 0 or 1)",
+      "math": "Boundary-only optimization:\nInterior vertices have all neighbors in same partition, so\nmoving them always increases cut. Only boundary vertices can\nimprove cut, so we optimize only over them (free set).\n\nReduces effective problem size from n to |boundary| << n.",
+      "complexity": "O(|E|) to identify boundary vertices via edge scan.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_QPDelta.hpp for QP state structure",
+    "Mongoose_QPGradProj.hpp for subsequent optimization"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "CglMixedIntegerRounding2",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglMixedIntegerRounding2/CglMixedIntegerRounding2.hpp",
+  "brief": "Enhanced MIR (Mixed Integer Rounding) cut generator",
+  "algorithms": [
+    {
+      "name": "c-MIR (Complemented Mixed Integer Rounding) Separation:\n  Generates MIR cuts with variable bound substitution:\n  1. Preprocess: Classify rows, identify VUBs (x \u2264 a\u00b7y) and VLBs (x \u2265 a\u00b7y)\n  2. For each ROW_MIX row with fractional RHS:\n  3. Aggregate: Combine rows to improve cut coefficients\n  4. Substitute: Replace continuous vars using VUB/VLB constraints\n     c_j \u2264 u_j\u00b7y_k \u2192 substitute c_j = u_j\u00b7y_k - s_j, s_j \u2265 0\n  5. Apply MIR: round coefficients, derive valid inequality\n  6. Complementation: Choose C \u2286 integers to complement\n     x_j \u2192 u_j - x_j for j \u2208 C to maximize violation",
+      "math": "MIR function and c-MIR derivation:\n  Base inequality: \u03a3 a_j\u00b7x_j \u2264 b (mixed integer)\n  Let f = b - \u230ab\u230b (fractional part of RHS)\n  MIR cut: \u03a3_{j: f_j \u2264 f} f_j\u00b7x_j + \u03a3_{j: f_j > f} (f/(1-f))(1-f_j)\u00b7x_j\n          + continuous terms \u2265 f\n  c-MIR adds complementation: for each j, choose x_j or (u_j - x_j)",
+      "complexity": "O(m\u00b2) for aggregation, O(n\u00b72^k) for complementation search\n  where k = integer vars (usually limited by MAXAGGR_).\n  Aggregation limited by MAXAGGR_ parameter.",
+      "ref": [
+        "Marchand & Wolsey (2001). \"Aggregation and Mixed Integer Rounding to\n     Solve MIPs\". Operations Research 49:363-371.\n\nRow classification (RowType):\n- ROW_VARUB/VARLB: Variable bound rows (x <= ay or x >= ay)\n- ROW_VAREQ: Equality variable bound\n- ROW_MIX: Mixed continuous/integer\n- ROW_CONT/ROW_INT: All continuous or all integer\n\nKey classes:\n- CglMixIntRoundVUB2/VLB2: Variable bound structures\n\nParameters:\n- MAXAGGR_: Max rows to aggregate (-1/-2 for unlimited)\n- MULTIPLY_: Also try row * (-1)\n- CRITERION_: Bound substitution strategy (1, 2, or 3)"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglMixedIntegerRounding for original implementation",
+    "CglTwomir for two-step MIR"
+  ]
+}

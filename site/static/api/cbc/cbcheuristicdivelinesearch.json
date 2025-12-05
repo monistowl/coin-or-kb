@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicDiveLineSearch",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicDiveLineSearch.hpp",
+  "brief": "Dive heuristic along line to LP optimum\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDiveLineSearch: Geometric diving approach.\nSelects variables along the line from current point to LP optimum.",
+  "algorithms": [
+    {
+      "name": "Line Search Diving:\n  Geometric diving that follows ray toward LP optimum:\n  1. Compute direction: d = x_LP - x_current (vector to LP optimum)\n  2. For each fractional variable x_j:\n     - Calculate how rounding affects position along d\n     - Score: progress toward LP optimum vs integer violation\n  3. Select x_j* that maximizes progress when rounded\n  4. Fix x_j* to nearest integer, resolve LP\n  5. Repeat until integer feasible or stuck",
+      "math": "Selection criterion:\n  Let f_j = fraction of x_j, d_j = direction component\n  Round down: progress = f_j \u00b7 |d_j| toward LP optimum\n  Round up: progress = (1-f_j) \u00b7 |d_j| toward LP optimum\n  Select: argmax_j {progress_j / violation_j}",
+      "complexity": "O(n) per variable selection\n  Total: O(k \u00b7 LP) where k = diving depth\n  Typically faster than branching for finding feasible solutions\n\nselectVariableToBranch() considers how rounding affects\nmovement toward the LP optimal solution. Picks variables\nwhere rounding makes most progress along this direction.\n\nCombines geometric intuition with integer rounding.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicDive for base class and diving algorithm",
+    "CbcHeuristicFPump for related LP-based approach"
+  ]
+}

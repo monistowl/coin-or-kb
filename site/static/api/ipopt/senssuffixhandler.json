@@ -1,0 +1,9 @@
+{
+  "name": "SensSuffixHandler",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensSuffixHandler.hpp",
+  "brief": "sIPOPT AMPL suffix handler\n\nSensSuffixHandler: processes AMPL suffixes for sensitivity analysis.\nReads parameter indices and perturbation values from .row/.col suffixes.\nEnables AMPL-based sensitivity specification.",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,21 @@
+{
+  "name": "IpAugSystemSolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpAugSystemSolver.hpp",
+  "brief": "Abstract interface for solving the 4x4 augmented KKT system\n\nAugSystemSolver defines the interface for solving the reduced\naugmented system obtained by eliminating bound multiplier equations:\n\n  [W + Dx + \u03b4x*I      0        Jc^T      Jd^T  ] [sol_x]   [rhs_x]\n  [    0         Ds + \u03b4s*I     0         -I   ] [sol_s] = [rhs_s]\n  [   Jc             0      Dc - \u03b4c*I    0    ] [sol_c]   [rhs_c]\n  [   Jd            -I         0      Dd - \u03b4d*I] [sol_d]   [rhs_d]",
+  "algorithms": [
+    {
+      "name": "Augmented System Factorization:\n  1. Assemble symmetric indefinite matrix K from blocks.\n  2. Factor K = P\u00b7L\u00b7D\u00b7L^T\u00b7P^T (symmetric indefinite factorization).\n  3. Solve K\u00b7x = b using forward/back substitution.\n  Factorization reused for multiple RHS (predictor-corrector).\n  Inertia check: verify (n+, n-, n0) matches expected (nx+ns, nc+nd, 0).",
+      "math": "Inertia correction via regularization:\n  If inertia incorrect: increase \u03b4x (primal reg) or \u03b4c,\u03b4d (dual reg).\n  Primal reg \u03b4x > 0 ensures positive inertia on (1,1) block.\n  Dual reg \u03b4c,\u03b4d < 0 controls negative inertia on (2,2),(3,3),(4,4) blocks.\n  Target: n+ = nx+ns (primal dim), n- = nc+nd (dual dim), n0 = 0.",
+      "complexity": "O(nnz\u00b2/n) for sparse Cholesky-like factorization.\n  O(n\u00b2) worst case for dense submatrices.\n  Strategy pattern: different solvers (MA27, MA57, Pardiso, MUMPS).\n\nKey parameters:\n- W: Hessian of Lagrangian (or approximation)\n- Dx, Ds: Barrier diagonal contributions (\u03a3x, \u03a3s)\n- \u03b4x, \u03b4s, \u03b4c, \u03b4d: Regularization parameters for inertia control",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpStdAugSystemSolver.hpp for the main implementation",
+    "IpSymLinearSolver.hpp for the underlying sparse solver",
+    "IpPDFullSpaceSolver.hpp for the caller"
+  ]
+}

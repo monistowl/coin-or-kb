@@ -1,0 +1,9 @@
+{
+  "name": "adubswigfuncs",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/swig/adubswigfuncs.hpp",
+  "brief": "SWIG operator overloads for badouble/adub types",
+  "algorithms": [],
+  "methods": []
+}

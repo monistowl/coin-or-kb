@@ -1,0 +1,9 @@
+{
+  "name": "adolc_alloc_mat",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "speed/adolc/adolc_alloc_mat.hpp",
+  "brief": "Speed testing: adolc_alloc_mat",
+  "algorithms": [],
+  "methods": []
+}

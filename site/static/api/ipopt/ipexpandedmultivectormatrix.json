@@ -1,0 +1,21 @@
+{
+  "name": "IpExpandedMultiVectorMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpExpandedMultiVectorMatrix.hpp",
+  "brief": "Short-fat matrix V^T*P^T with expansion for KKT construction\n\nExpandedMultiVectorMatrix represents a k x n matrix (k << n) as\nV^T * P^T where V is a MultiVectorMatrix-like collection of row\nvectors and P is an optional ExpansionMatrix.",
+  "algorithms": [
+    {
+      "name": "Expanded Row-Vector Matrix Operations:\n  M = V^T \u00b7 P^T where V is k row vectors, P is expansion matrix.\n  MultVector: y \u2190 \u03b1Mx + \u03b2y = \u03b1V^T(P^T x) + \u03b2y.\n  TransMultVector: y \u2190 \u03b1M^T x = \u03b1P(Vx) + \u03b2y.\n  If P is null, treated as identity (no expansion).\n  Null row vectors treated as zero (sparse row structure).",
+      "math": "KKT system with low-rank Hessian:\n  When H \u2248 D + VV^T (limited-memory), augmented system:\n  [D   V   A^T] [\u0394x]   [r_x]\n  [V^T -I   0 ] [w ] = [0  ]\n  [A   0   0  ] [\u0394y]   [r_c]\n  V^T block maps primal space to low-rank space (k dimensions).",
+      "complexity": "O(k\u00b7m) storage for k row vectors of length m.\n  MultVector: O(k\u00b7m) if P present, otherwise O(k\u00b7n).\n  Sparse row support: null vectors cost nothing.\n\nUsed in Ipopt's KKT system construction for low-rank Hessian:\nWhen Hessian is D + V*V^T, the augmented system includes blocks\ninvolving V^T that map to different dimensions.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMultiVectorMatrix.hpp for column-vector variant",
+    "IpExpansionMatrix.hpp for P expansion",
+    "IpLowRankUpdateSymMatrix.hpp for Hessian structure"
+  ]
+}

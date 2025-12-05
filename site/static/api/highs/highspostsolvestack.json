@@ -1,0 +1,13 @@
+{
+  "name": "HighsPostsolveStack",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/presolve/HighsPostsolveStack.h",
+  "brief": "Postsolve stack to recover original-space solutions\n\nRecords all presolve transformations to enable solution recovery.\n\n**HighsPostsolveStack Class:**\nStack of reduction operations that can be undone in reverse order.\n\n**Reduction Types (ReductionType enum):**\nEach presolve operation has a corresponding undo:\n- kLinearTransform: x = scale * x' + constant\n- kFreeColSubstitution: Free variable substituted via equation\n- kDoubletonEquation: Two-variable equation eliminated\n- kSingletonRow/kFixedCol: Single-entry row or fixed column\n- kRedundantRow/kForcingRow: Redundant or forcing constraints\n- kDuplicateRow/kDuplicateColumn: Parallel rows/columns merged\n\n**Index Mapping:**\n- origColIndex[], origRowIndex[]: Map reduced indices to original\n- compressIndexMaps(): Update after columns/rows removed\n\n**Postsolve Operations:**\n- undo(): Reverse all reductions (primal, dual, basis)\n- undoPrimal(): Reverse only primal solution\n- getReducedPrimalSolution(): Map original solution to reduced space\n\n**Data Storage:**\n- reductionValues: HighsDataStack for reduction parameters\n- reductions[]: Vector of (type, stack_position) pairs\n- rowValues[], colValues[]: Temporary storage for sparse vectors",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "presolve/HPresolve.h for presolve engine",
+    "util/HighsDataStack.h for stack implementation"
+  ]
+}

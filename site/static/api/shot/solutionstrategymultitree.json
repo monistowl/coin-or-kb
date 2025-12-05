@@ -1,0 +1,19 @@
+{
+  "name": "SolutionStrategyMultiTree",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/SolutionStrategy/SolutionStrategyMultiTree.h",
+  "brief": "Iterative outer approximation strategy (multi-tree)\n\nClassic outer approximation loop for convex MINLP.\n\n**Algorithm Pattern:**\n1. Solve MIP relaxation to get candidate point\n2. Generate supporting hyperplanes at violated points\n3. Add cuts to MIP and resolve\n4. Repeat until convergence or termination\n\n**Task Flow (initializeStrategy):**\n- CreateDualProblem \u2192 SolveIteration \u2192 SelectHyperplanes\n- AddHyperplanes \u2192 CheckTermination \u2192 loop\n\n**Advantages:**\n- No callback complexity\n- Can use any MIP solver\n- Easier debugging/logging\n\n**Disadvantages:**\n- Multiple MIP solves\n- May regenerate same B&B tree work",
+  "algorithms": [
+    {
+      "name": "Standard ESH outer approximation",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "SolutionStrategySingleTree for callback-based variant"
+  ]
+}

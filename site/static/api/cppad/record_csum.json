@@ -1,0 +1,9 @@
+{
+  "name": "record_csum",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/optimize/record_csum.hpp",
+  "brief": "Tape optimization: record_csum",
+  "algorithms": [],
+  "methods": []
+}

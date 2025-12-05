@@ -1,0 +1,9 @@
+{
+  "name": "macros",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/routing/diversity/macros.hpp",
+  "brief": "cuOpt VRP diversity management\n\nPopulation diversity for evolutionary VRP.\nPrevents premature convergence.",
+  "algorithms": [],
+  "methods": []
+}

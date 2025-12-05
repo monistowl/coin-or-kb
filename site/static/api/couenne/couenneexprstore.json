@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprStore",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneExprStore.hpp",
+  "brief": "Expression that returns previously stored value\n\nReturns the Value() of the pointed-to expression rather than\nre-evaluating it. Used for efficiency when an expression has\nalready been evaluated and the value cached.\n\n**Key difference from exprCopy/exprClone:**\n- exprCopy: Calls (*copy_)() to evaluate\n- exprClone: Calls (*copy_)() to evaluate\n- exprStore: Calls copy_->Value() to get cached value\n\n**Usage pattern:**\nWhen an expression tree is evaluated top-down, intermediate\nresults can be stored in value_ fields. exprStore allows\nretrieval of these stored values without re-computation.\n\n**Destructor:**\nLike exprClone, sets copy_ = NULL to prevent deletion.\nDoes NOT own the pointed-to expression.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprCopy which owns and evaluates",
+    "exprClone which references and evaluates"
+  ]
+}

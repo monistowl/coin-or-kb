@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprBSin",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/bounds/CouenneExprBSin.hpp",
+  "brief": "Bound operators for sine expressions\n\nComputes tight bounds for sin(x) given bounds [l, u] on x.\nUsed by FBBT (feasibility-based bound tightening) to propagate\nbounds through trigonometric expressions.\n\n**exprLBSin (lower bound):**\n- Returns -1 if interval spans full period (u - l >= 2\u03c0)\n- Returns -1 if interval contains 3\u03c0/2 + 2k\u03c0 (minimum of sin)\n- Otherwise returns min(sin(l), sin(u))\n\n**exprUBSin (upper bound):**\n- Returns +1 if interval spans full period\n- Returns +1 if interval contains \u03c0/2 + 2k\u03c0 (maximum of sin)\n- Otherwise returns max(sin(l), sin(u))\n\n**Period handling:**\nUses floor(l/2\u03c0 - offset) < floor(u/2\u03c0 - offset) to detect\nif critical points lie within [l, u]:\n- offset = 0.75 for min (3\u03c0/2)\n- offset = 0.25 for max (\u03c0/2)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprSin for the sine expression itself",
+    "CouenneExprBCos for cosine bound computation"
+  ]
+}

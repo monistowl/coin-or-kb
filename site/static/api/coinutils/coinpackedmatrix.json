@@ -1,0 +1,20 @@
+{
+  "name": "CoinPackedMatrix",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPackedMatrix.hpp",
+  "brief": "Sparse matrix stored in compressed row or column format\n\nCoinPackedMatrix represents a sparse matrix using compressed storage.\nCan be stored row-major or column-major. Efficient for major-dimension\noperations (accessing rows in row-major, columns in column-major).",
+  "algorithms": [
+    {
+      "name": "Compressed Sparse Column/Row (CSC/CSR) format",
+      "math": "Storage arrays for m\u00d7n matrix with nnz nonzeros:\n      - elements[nnz]: coefficient values\n      - indices[nnz]: minor indices (row indices for CSC, column for CSR)\n      - starts[major+1]: start position of each major vector\n      Memory: O(nnz + major) vs O(m\u00b7n) for dense",
+      "complexity": "Major vector access: O(1) to get start, O(nnz_j) to iterate\n            Minor vector access: O(nnz) full scan required\n            Matrix-vector multiply: O(nnz)\n\n@note Column-major (CSC) is standard for LP constraint matrices since\n      simplex primarily accesses columns (entering variables).",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPackedVector for sparse vector storage",
+    "CoinShallowPackedVector for row/column views"
+  ]
+}

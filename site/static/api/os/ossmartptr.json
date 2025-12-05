@@ -1,0 +1,9 @@
+{
+  "name": "OSSmartPtr",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSUtils/OSSmartPtr.hpp",
+  "brief": "OS smart pointer implementation\n\nIntrusive smart pointer for OSReferenced objects.\nSimilar to Ipopt SmartPtr for reference counting.",
+  "algorithms": [],
+  "methods": []
+}

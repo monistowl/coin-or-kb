@@ -1,0 +1,9 @@
+{
+  "name": "list_setvec",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/sparse/list_setvec.hpp",
+  "brief": "Internal implementation: list_setvec",
+  "algorithms": [],
+  "methods": []
+}

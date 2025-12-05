@@ -1,0 +1,12 @@
+{
+  "name": "advector",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/advector.h",
+  "brief": "Traceable vector with differentiable subscript operations\n\nProvides advector, a vector of adoubles that can trace subscripting\nwith adouble indices. This enables automatic differentiation through\narray lookups where the index itself depends on independent variables.\n\n**Key classes:**\n- advector: Vector container with contiguous tape locations\n- adubref: Reference type returned when indexing with adouble (lvalue case)\n\n**Use case example:**\n@code\nadvector table(n);        // Create table of adoubles\nadouble index = ...;      // Index depends on independent variables\nadouble result = table[index];  // Differentiation tracks index dependency\n@endcode\n\n@note This is only for taped (not tapeless) ADOL-C mode",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "adtb_types.h for adouble and pdouble definitions"
+  ]
+}

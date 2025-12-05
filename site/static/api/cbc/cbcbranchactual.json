@@ -1,0 +1,19 @@
+{
+  "name": "CbcBranchActual",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcBranchActual.hpp",
+  "brief": "Aggregator for concrete branching classes",
+  "algorithms": [
+    {
+      "name": "Branching Object Implementation Collection\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nConvenience header that includes all concrete branching implementations:\n- CbcSimpleInteger, CbcSimpleIntegerPseudoCost: Integer variables\n- CbcClique, CbcSOS, CbcNWay: Constraint branching\n- CbcFollowOn, CbcFixVariable: Derived bound manipulation\n- CbcGeneral, CbcGeneralDepth: Advanced branching strategies\n\nMost code should include CbcBranchBase.hpp instead for just the\nabstract interfaces; use this header when concrete classes are needed.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcBranchBase.hpp for abstract interface aggregation"
+  ]
+}

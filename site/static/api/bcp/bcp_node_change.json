@@ -1,0 +1,21 @@
+{
+  "name": "BCP_node_change",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_node_change.hpp",
+  "brief": "Complete node delta encoding for tree storage",
+  "algorithms": [
+    {
+      "name": "Node Delta Encoding: Compact Tree Storage via Parent Diffs\n\nBCP_node_change aggregates all changes between parent and child nodes\nfor compact tree storage.\n\n**Components:**\n- core_change: Changes to core var/cut bounds (BCP_problem_core_change)\n- var_change: Changes to algorithmic variables (BCP_obj_set_change)\n- cut_change: Changes to algorithmic cuts (BCP_obj_set_change)\n- warmstart: LP warm start information\n\n**Purpose:**\nEnables efficient tree storage by encoding only deltas between\nparent and child nodes instead of full formulations. Critical for\nscaling to large trees where each node may have thousands of vars/cuts.\n\n**Reconstruction:**\nTo reconstruct a node's formulation, start from root (or checkpoint)\nand apply node_change deltas along the path to the target node.\n\n**Serialization:**\npack()/unpack() methods handle inter-process transfer, using\nBCP_user_pack for user-defined warmstart serialization.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_problem_core.hpp for core formulation",
+    "BCP_obj_change.hpp for object set deltas",
+    "BCP_tm_node.hpp for TM node representation"
+  ]
+}

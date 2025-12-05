@@ -1,0 +1,13 @@
+{
+  "name": "HighsHash",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsHash.h",
+  "brief": "Hash functions and hash table for HiGHS\n\nProvides high-quality hashing with Mersenne prime arithmetic.\n\n**HighsHashHelpers:**\n- hash<T>(): Fast hash for trivially copyable types (up to 64 bytes)\n- vector_hash(): Hash for vectors using pair_hash with random constants\n- sparse_combine(): Order-independent hash for sparse vectors\n- multiply_modM61(): Multiply mod Mersenne prime 2^61-1\n- double_hash_code(): Hash for doubles handling epsilon equality\n\n**Sparse Hashing (for symmetry detection):**\nEvaluates polynomial over finite field GF(2^61-1):\n- sparse_combine(hash, index, value): Add term to polynomial\n- sparse_inverse_combine(): Remove term (for partition refinement)\n- Enables order-independent hashing of sparse vectors\n\n**HighsHashTable<K,V>:**\nRobin Hood hashing with linear probing:\n- 7-bit hash stored in metadata for fast comparison\n- Automatic grow/shrink at 7/8 and 1/4 load factors\n- Steals positions from entries closer to ideal slot\n\n**HighsHashTableEntry<K,V>:**\n- Specialized for void value (set behavior)\n- key(), value() accessors\n- forward() for functional-style iteration",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "util/HighsHashTree.h for ordered hash structures",
+    "mip/HighsCliqueTable.h for hash-based clique storage"
+  ]
+}

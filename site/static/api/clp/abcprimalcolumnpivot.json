@@ -1,0 +1,21 @@
+{
+  "name": "AbcPrimalColumnPivot",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcPrimalColumnPivot.hpp",
+  "brief": "Abstract base class for primal pivot column selection in ABC",
+  "algorithms": [
+    {
+      "name": "Weight Update Protocol:\n  updateWeights(): After pivot, update ||\u0101_j||\u00b2 estimates\n  saveWeights(): Preserve weights across refactorizations",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcPrimalColumnDantzig for simple most-negative reduced cost",
+    "AbcPrimalColumnSteepest for steepest edge/Devex variants",
+    "ClpPrimalColumnPivot for the standard (non-ABC) interface"
+  ]
+}

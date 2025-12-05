@@ -1,0 +1,20 @@
+{
+  "name": "IpDenseGenMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpDenseGenMatrix.hpp",
+  "brief": "Dense general (non-symmetric) matrix with linear algebra operations\n\nDenseGenMatrix stores elements in column-major (Fortran) format\nand provides direct factorization capabilities:\n- Cholesky factorization (for positive definite matrices)\n- LU factorization with pivoting (for general matrices)\n- Forward/back substitution solves",
+  "algorithms": [
+    {
+      "name": "Dense Matrix Operations via LAPACK:\n  - Cholesky: A = L\u00b7L^T for SPD matrices (DPOTRF + DPOTRS)\n  - LU: A = P\u00b7L\u00b7U with partial pivoting (DGETRF + DGETRS)\n  - Eigendecomp: A = V\u00b7\u039b\u00b7V^T for inertia computation (DSYEV)\n  Factorization state tracked to avoid redundant computation.",
+      "math": "Column-major storage: A[i,j] at position i + j*nRows.\n  Matrix-vector: y \u2190 \u03b1A\u00b7x + \u03b2y via DGEMV.\n  Matrix-matrix: C \u2190 \u03b1A\u00b7B + \u03b2C via DGEMM.\n  High-rank update: C \u2190 \u03b1V\u2081^T\u00b7V\u2082 + \u03b2C for L-BFGS inner products.",
+      "complexity": "O(n\u00b3) for factorization, O(n\u00b2) for solve, O(n\u00b2) for matvec.\n  Only suitable for small dense subproblems (n \u2264 few hundred).\n\nUsed in Ipopt for:\n- Small dense subsystems in limited-memory quasi-Newton\n- Eigenvalue decomposition for inertia correction\n- Dense reduced-space methods",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpDenseSymMatrix.hpp for symmetric variant",
+    "IpLapack.hpp for underlying LAPACK routines"
+  ]
+}

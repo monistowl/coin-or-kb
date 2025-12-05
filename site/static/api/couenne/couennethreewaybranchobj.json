@@ -1,0 +1,22 @@
+{
+  "name": "CouenneThreeWayBranchObj",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneThreeWayBranchObj.hpp",
+  "brief": "Three-way spatial branching for continuous variables",
+  "algorithms": [
+    {
+      "name": "Three-Way Spatial Branching\n\nDivides a variable's domain into three parts instead of two,\nwhich can provide better convexification around the current\nLP solution point.\n\n**Three-way split:**\nGiven interval [l, u] and dividers lcrop_ and rcrop_:\n- Left branch:   [l, lcrop_]\n- Center branch: [lcrop_, rcrop_]\n- Right branch:  [rcrop_, u]\n\n**When useful:**\n- Current LP solution is interior to [l, u]\n- Better convexification needed around that point\n- Two-way split would create very unbalanced children\n\n**Branch order (firstBranch_):**\n- 0: left first\n- 1: center first (THREE_CENTER default)\n- 2: right first\n\nCenter-first often preferred since it contains the current point\nand may quickly find improving solutions.\n\n**Comparison to two-way:**\nThree-way creates more nodes but can reduce overall tree size\nby getting better bounds faster near the current solution.",
+      "math": "Split: [l,u] \u2192 [l,lcrop_] \u222a [lcrop_,rcrop_] \u222a [rcrop_,u]",
+      "complexity": "O(1) per branch operation; increases node count by 50%",
+      "ref": [
+        "Belotti, \"Couenne: a user's manual\", 2009"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneBranchingObject for standard two-way branching",
+    "CouenneVarObject which can create three-way branches"
+  ]
+}

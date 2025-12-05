@@ -1,0 +1,9 @@
+{
+  "name": "compare_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/compare_op.hpp",
+  "brief": "Internal implementation: compare_op",
+  "algorithms": [],
+  "methods": []
+}

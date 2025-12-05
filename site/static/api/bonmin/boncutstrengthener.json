@@ -1,0 +1,20 @@
+{
+  "name": "BonCutStrengthener",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonCutStrengthener.hpp",
+  "brief": "Strengthening OA cuts via NLP optimization\n\nImproves outer approximation cuts by solving auxiliary NLPs to find\ntighter bounds on linearizations. Also supports disjunctive cuts.",
+  "algorithms": [
+    {
+      "name": "OA Cut Strengthening via NLP:\n  Tightens outer approximation cuts by optimizing linearization RHS:\n  1. **Initial OA cut:** \u2207g(x*)\u1d40x \u2264 \u2207g(x*)\u1d40x* - g(x*) (linearization at x*)\n  2. **Strengthening NLP:** min {\u2207g(x*)\u1d40x : g(x) \u2264 0, l \u2264 x \u2264 u}\n     - Finds point minimizing LHS over original feasible region\n  3. **Tightened cut:** \u2207g(x*)\u1d40x \u2264 optimal_value (strictly tighter RHS)\n  4. **Disjunctive option:** Generate cuts for branching disjunction\n     - Split on most fractional integer, strengthen each branch",
+      "math": "Strengthening validity:\n  If x' solves min{\u2207g(x*)\u1d40x : g(x) \u2264 0, x \u2208 bounds}, then\n  \u2207g(x*)\u1d40x \u2265 \u2207g(x*)\u1d40x' for all feasible x\n  The strengthened RHS = \u2207g(x*)\u1d40x' cuts off more infeasible region.",
+      "complexity": "O(NLP solve) per cut strengthened.\n  Trade-off: tighter LP vs NLP overhead.\n  Most effective for cuts active at optimum.\n\n**Cut strengthening types:**\n- CS_None: No strengthening\n- CS_StrengthenedGlobal: Strengthen cuts globally\n- CS_UnstrengthenedGlobal_StrengthenedLocal: Global weak, local strong\n- CS_StrengthenedGlobal_StrengthenedLocal: Both global and local strong",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BonOaDecBase for OA cut generation",
+    "StrengtheningTNLP for the internal NLP formulation"
+  ]
+}

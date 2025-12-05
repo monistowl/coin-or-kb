@@ -1,0 +1,23 @@
+{
+  "name": "ClpPresolve",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPresolve.hpp",
+  "brief": "Clp interface to CoinPresolve for LP preprocessing",
+  "algorithms": [
+    {
+      "name": "LP Presolve (Preprocessing):\nApplies reversible transformations to simplify LP before solving:\n- Singleton rows/columns: substitute and eliminate\n- Doubleton: eliminate free column in 2-element row\n- Forcing/dominated constraints: fix variables\n- Duplicate rows/columns: merge or eliminate\n- Implied free: detect columns with implied bounds from constraints\n- Bound tightening: propagate bounds through constraints\n\nTransformations saved as list of CoinPresolveAction objects.\nAfter solving presolved model, postsolve applies actions in reverse\nto recover solution to original model.\n\nMultiple passes until no more reductions. Each transformation must\npreserve optimal solution recovery.",
+      "math": "Presolve operations:\nSingleton row a_j x_j = b: fix x_j = b/a_j, eliminate row\nDoubleton col in a_i x_i + a_j x_j = b with x_j free: x_j = (b - a_i x_i)/a_j\nForcing: if all coeffs same sign and bound known, may fix variables\nImplied free: if x_j bounded by constraints, can treat as free\nBound tightening: l_x = max{l_j : a_ij > 0} helps detect fixed vars",
+      "complexity": "Each pass O(nnz) for most transformations. Total typically\nO(passes \u00d7 nnz) with 3-10 passes common. Can reduce problem size 50-90%.",
+      "ref": [
+        "Andersen & Andersen, \"Presolving in LP\", Mathematical Programming 71 (1995)",
+        "Gondzio, \"Presolve analysis of LP problems prior to IPM\",\n     Optimization Methods and Software 10 (1997)\n\nWraps the CoinPresolve framework for use with Clp models. Presolve\nsimplifies an LP before solving by applying reversible transformations:\nremoving fixed variables, empty rows/columns, redundant constraints, etc.\n\nThe typical workflow is:\n1. presolvedModel() - create simplified model\n2. Solve the presolved model\n3. postsolve() - recover solution to original model"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix in CoinUtils for the transformation framework",
+    "ClpSimplex::initialSolve() which can invoke presolve automatically"
+  ]
+}

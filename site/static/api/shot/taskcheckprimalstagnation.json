@@ -1,0 +1,13 @@
+{
+  "name": "TaskCheckPrimalStagnation",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskCheckPrimalStagnation.h",
+  "brief": "Detect stalled primal bound improvement\n\nTriggers NLP solves when primal bound stops improving.\n\n**TaskCheckPrimalStagnation Class:**\n- taskIDIfTrue/False: Branch targets for stagnation state\n- run(): Check if primal bound unchanged for N iterations\n\n**Stagnation Recovery:**\n- May trigger fixed-integer NLP to find better solutions\n- Indicates MIP solutions aren't improving primal",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskCheckDualStagnation.h for dual stagnation",
+    "PrimalSolver.h for primal bound computation"
+  ]
+}

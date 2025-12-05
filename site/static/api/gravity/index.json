@@ -1,0 +1,141 @@
+{
+  "library": "Gravity",
+  "layer": "layer-4",
+  "classes": [
+    {
+      "name": "AmplTNLP",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "Arc",
+      "brief": "Directed arc/edge for network optimization models\n\nRepresents an arc (edge) connecting two nodes in a graph.\n\n**Arc Class:**\n- _id: Numeric identifier\n- _name: String name\n- _src, _dest: Source and destination Node pointers\n- _weight: Arc weight/cost\n- _len: Arc length\n\n**Power System Attributes:**\n- _is_transformer: True if arc represents a transformer\n- _phases: Set of phases (for 3-phase systems)\n- _parallel: True if parallel arc exists\n\n**Planning Attributes:**\n- _active: Whether arc is active in model\n- _expansion: True if potential expansion arc\n- _imaginary: Imaginary arc for algorithm use\n\n**Graph Algorithm Support:**\n- in_cycle: True if arc is in a cycle\n- horton_path: Pointer to Horton path through this arc\n- _intersection: Common neighbors of src and dest\n- _intersection_clique: For clique tree algorithms\n\n**Methods:**\n- neighbour(Node* n): Get other endpoint\n- clone(): Deep copy arc",
+      "has_algorithm": false
+    },
+    {
+      "name": "Auxiliary",
+      "brief": "Base class for auxiliary network objects (generators, loads)\n\nProvides a base class for objects attached to network nodes.\n\n**aux Class:**\n- _active: Whether this auxiliary is active in the model\n- _name: Identifier string\n- _phases: Set of electrical phases (for power systems)\n\n**Phase Support:**\n- set_phases(str): Parse phase string (e.g., \"1,2,3\")\n- has_phase(ph): Check if auxiliary has given phase\n\n**Usage in Power Systems:**\n- Generators attached to buses\n- Loads at network nodes\n- Capacitors, transformers, etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CplexProgram",
+      "brief": "IBM CPLEX solver interface for LP/MIP/QP problems\n\nAdapts Gravity models to the IBM ILOG CPLEX C++ API.\n\n**CplexProgram Class:**\n- _cplex_env: IloEnv (CPLEX environment)\n- _cplex_model: IloModel (CPLEX model)\n- _cplex_vars: Mapping from Gravity vars to IloNumVarArray\n\n**Model Building:**\n- prepare_model(): Initial conversion from Gravity\n- fill_in_cplex_vars(): Create IloNumVar for each variable\n- create_cplex_constraints(): Add constraints\n- set_cplex_objective(): Set objective function\n\n**Solving:**\n- solve(relax, mipgap): Optimize with optional LP relaxation\n- warm_start(): Initialize from current solution\n- relax_model(): Remove integrality constraints\n\n**Callback Support:**\n- _cplex_contextmask: Context for callback location\n- create_callback(): Set up user callbacks",
+      "has_algorithm": false
+    },
+    {
+      "name": "GurobiProgram",
+      "brief": "Gurobi solver interface for LP/MIP/QP problems\n\nAdapts Gravity models to the Gurobi C++ API.\n\n**GurobiProgram Class:**\n- grb_env: Gurobi environment\n- grb_mod: Gurobi model\n- _grb_vars: Mapping from Gravity vars to GRBVar\n- _model: Pointer to Gravity Model\n\n**Model Building:**\n- prepare_model(): Initial conversion from Gravity\n- fill_in_grb_vmap(): Create GRBVar for each variable\n- create_grb_constraints(): Add constraints (linear/quadratic)\n- set_grb_objective(): Set objective function\n\n**Solving:**\n- solve(relax, mipgap): Optimize with optional LP relaxation\n- relax_model(): Remove integrality constraints\n- update_solution(): Copy solution back to Gravity model\n\n**Supported Problem Types:**\n- LP: Linear programming\n- MIP: Mixed-integer programming\n- QP: Quadratic programming (convex)\n- MIQP: Mixed-integer QP",
+      "has_algorithm": false
+    },
+    {
+      "name": "HSLLoader",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "HiGHSProgram",
+      "brief": "HiGHS solver interface for LP/MIP problems\n\nAdapts Gravity models to the HiGHS open-source LP/MIP solver.\n\n**HiGHSProgram Class:**\n- Highs_mod: HighsModel (HiGHS model container)\n- Highs_inst: Highs solver instance\n\n**Model Building:**\n- prepare_model(): Initial conversion from Gravity\n- fill_in_var_map(): Create variable mappings\n- create_constraints(): Add linear constraints\n- set_objective(): Set linear objective\n\n**Solving:**\n- solve(relax, mipgap): Optimize with optional LP relaxation\n- update_solution(): Copy solution back to Gravity model\n- relax_model(): Remove integrality constraints\n\n**Supported Problem Types:**\n- LP: Linear programming\n- MIP: Mixed-integer programming\n\n@note HiGHS is an open-source solver that excels at large-scale LP\n      and MIP problems with state-of-the-art performance.",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpIpoptApplication",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "IpoptProgram",
+      "brief": "Ipopt solver interface implementing TNLP callbacks\n\nAdapts Gravity models to Ipopt's TNLP (Templated NLP) interface.\n\n**IpoptProgram<type> Class:**\n- Inherits from Ipopt::TNLP and Program<type>\n- _model: Pointer to Gravity Model\n\n**Required TNLP Callbacks:**\n- get_nlp_info(): Return problem dimensions (n, m, nnz_jac, nnz_hess)\n- get_bounds_info(): Variable and constraint bounds\n- get_starting_point(): Initial x, z_L, z_U, lambda\n- eval_f(): Objective function value\n- eval_grad_f(): Objective gradient\n- eval_g(): Constraint values\n- eval_jac_g(): Jacobian values and structure\n- eval_h(): Hessian of Lagrangian\n- finalize_solution(): Copy solution back to model\n\n**Sparsity Pattern:**\n- First call to eval_jac_g/eval_h: return structure (iRow, jCol)\n- Subsequent calls: return values only\n- Gravity tracks via _first_call_jac, _first_call_hess\n\n**Solution Recovery:**\n- finalize_solution() copies x values to model variables\n- Retrieves dual values (lambda) for constraints\n- Retrieves bound multipliers (z_L, z_U)",
+      "has_algorithm": true
+    },
+    {
+      "name": "MosekProgram",
+      "brief": "Mosek Fusion API interface for conic optimization\n\nAdapts Gravity models to Mosek's Fusion API for conic programming.\n\n**MosekProgram Class:**\n- _mosek_model: Mosek Fusion Model\n- _mosek_vars: Vector of Mosek Variable::t handles\n\n**Conic Capabilities:**\n- Second-order cone (SOCP)\n- Semidefinite programming (SDP)\n- Exponential cone\n\n**Expression Building:**\n- form_Fx(qterms): Build quadratic matrix form F*x\n- create_lin_expr(lterms, cst): Linear expression construction\n\n**Model Building:**\n- fill_in_mosek_vars(): Create Mosek variables\n- create_mosek_constraints(): Add conic constraints\n- set_mosek_objective(): Set objective\n\n@note Mosek Fusion is designed specifically for conic optimization,\n      making it ideal for SOCP and SDP problems in power systems.",
+      "has_algorithm": false
+    },
+    {
+      "name": "Net",
+      "brief": "Graph/network data structure for power systems and network optimization\n\nRepresents graphs with nodes, arcs, and cycles for network-based models.\n\n**Net Class:**\n- nodes: Vector of Node pointers\n- arcs: All arcs (existing + potential)\n- _exist_arcs: Only existing arcs\n- conting_arcs: Contingency arcs (for N-1 analysis)\n\n**Indexing Structures:**\n- nodeID: Map from node name to Node*\n- arcID: Map from (src_name, dest_name) to Arc*\n- arcMap: Map from arc name to Arc*\n\n**Node Pairs (for SDP relaxations):**\n- _node_pairs: Bus pairs for standard formulation\n- _node_pairs_chord: Bus pairs in chordal completion\n\n**Cycle Basis (for Kirchhoff constraints):**\n- cycle_basis: Vector of Path* forming basis\n- horton_net: Subnetwork for Horton algorithm\n\n**Tree Decomposition:**\n- _bags: Cliques from chordal extension\n- Used for SDP rank-1 constraints\n\n**Graph Algorithms:**\n- clone(), clone_undirected(): Copy graphs\n- Cycle detection, shortest paths\n- Chordal completion",
+      "has_algorithm": false
+    },
+    {
+      "name": "Node",
+      "brief": "Graph node/vertex for network optimization models\n\nRepresents a node in network graphs (power systems, transportation, etc.).\n\n**Node Class:**\n- _name: Unique string identifier\n- _id: Numeric ID within container\n- _type_name: \"Nodes\" (for indexing)\n- _active: Whether node is active in model\n\n**Connectivity:**\n- branches: Vector of incident Arc pointers\n- degree(): Number of incident arcs\n- addArc(), removeArc(): Modify adjacency\n\n**Graph Algorithms:**\n- explored: BFS/DFS traversal flag\n- cycle: True if node is in a cycle\n- predecessor: Parent in BFS tree\n- distance: Distance from source in BFS\n- fill_in: Edges needed to make neighbors a clique\n\n**Power System Extensions:**\n- _phases: Set of phases (for 3-phase systems)",
+      "has_algorithm": false
+    },
+    {
+      "name": "PardisoLoader",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "Path",
+      "brief": "Graph path/cycle representation for network algorithms\n\nRepresents a sequence of nodes forming a path or cycle in a network.\n\n**Path Class:**\n- nodes: List of Node pointers in sequence\n\n**Methods:**\n- source_dest(n1, n2): Check if path connects n1 to n2\n- length(): Number of edges in path\n- cycle(): True if path is a closed cycle\n- clone(): Deep copy path\n- to_str(): String representation\n\n**Usage in Gravity:**\n- cycle_basis in Net: Fundamental cycles for Kirchhoff constraints\n- horton_path in Arc: Horton algorithm shortest paths\n- Power flow loop constraints",
+      "has_algorithm": false
+    },
+    {
+      "name": "constant",
+      "brief": "Scalar and vector constants with type tracking\n\nBase constant class and typed constant templates for numeric values.\n\n**constant_ Base Class:**\n- _type: CType enum (binary_c, integer_c, double_c, complex_c, etc.)\n- _is_transposed: Transpose flag for matrix operations\n- _is_vector: True if vector/matrix\n- _dim[2]: Dimensions (rows, cols)\n- _polar: Complex polar representation flag\n\n**CType Classification:**\n- Scalar types: binary_c, short_c, integer_c, float_c, double_c, long_c\n- Special types: par_c (param), var_c (variable), func_c (function)\n- Expression types: uexp_c (unary), bexp_c (binary)\n\n**constant<type> Template:**\n- Holds single typed value\n- Implicit conversion from numeric types\n- String conversion with precision\n\n**Helper Functions:**\n- to_string_with_precision(): Format numbers\n- unit<type>(): Multiplicative identity (1)\n- zero<type>(): Additive identity (0)\n\n**Complex Support:**\n- Cpx typedef for complex<double>\n- Polar/rectangular representation",
+      "has_algorithm": false
+    },
+    {
+      "name": "constraint",
+      "brief": "Constraint classes with type, duals, and lazy evaluation\n\nConstraints are functions with a constraint type (<=, >=, ==) and bounds.",
+      "has_algorithm": true
+    },
+    {
+      "name": "expr",
+      "brief": "Expression tree nodes for unary and binary operations\n\nExpressions are the building blocks for functions and constraints.",
+      "has_algorithm": true
+    },
+    {
+      "name": "func",
+      "brief": "Expression functions with automatic differentiation and convexity tracking\n\nThe func class represents mathematical expressions with symbolic analysis.",
+      "has_algorithm": true
+    },
+    {
+      "name": "model",
+      "brief": "Main optimization model class combining variables, constraints, objective\n\nThe Model class is the central container for building optimization problems.",
+      "has_algorithm": true
+    },
+    {
+      "name": "param",
+      "brief": "Parameters (data constants) indexed over sets\n\nParameters hold fixed data values used in optimization models.\n\n**param_ Base Class:**\n- _name: Parameter name\n- _id: Unique identifier\n- _indices: Index set this parameter is defined over\n- _intype: Internal storage type (double_, integer_, etc.)\n\n**Complex Number Support:**\n- _is_conjugate: Complex conjugate flag\n- _is_sqrmag: Magnitude squared\n- _is_angle: Phase angle\n- _real, _imag: Real/imaginary part pointers\n- _mag, _ang: Magnitude/angle pointers\n\n**Ipopt Integration:**\n- _l_dual, _u_dual: Dual values for bound constraints\n- _off: On/off flags per instance\n\n**param<type> Template Class:**\n- _val: Vector of values\n- _range: Min/max bounds\n- Indexed access via operator()\n\n**Usage:**\n```cpp\nparam<> cost(\"cost\");\ncost.in(Nodes);                    // Index over Nodes\ncost.set_val(node_costs);          // Set values\ncost(\"node1\");                     // Access by key\n```",
+      "has_algorithm": false
+    },
+    {
+      "name": "poly",
+      "brief": "Polynomial term representations (linear, quadratic, polynomial)\n\nTerm classes for building polynomial expressions.\n\n**lterm (Linear Term):**\n- _coef: Coefficient (constant or param)\n- _p: Variable/parameter pointer\n- _sign: True if positive, false if negative\n- Represents: \u00b1coef \u00d7 p\n\n**qterm (Quadratic Term):**\n- _coef: Coefficient\n- _p1, _p2: Two variable/parameter pointers\n- _sign: Sign flag\n- Represents: \u00b1coef \u00d7 p1 \u00d7 p2\n\n**pterm (Polynomial Term):**\n- _coef: Coefficient\n- _l: List of (param, power) pairs\n- Represents: coef \u00d7 \u220f(p\u1d62^k\u1d62)\n\n**Usage in Functions:**\n```cpp\nfunc.add_lterm(coef, x);      // coef*x\nfunc.add_qterm(coef, x, y);   // coef*x*y\n```",
+      "has_algorithm": false
+    },
+    {
+      "name": "presolve",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "rapidcsv",
+      "brief": "Datastructure holding parameters controlling how invalid numbers (including\n           empty strings) should be handled.",
+      "has_algorithm": false
+    },
+    {
+      "name": "solver",
+      "brief": "Unified solver interface for multiple optimization backends\n\nDispatches Gravity models to various solver implementations.",
+      "has_algorithm": true
+    },
+    {
+      "name": "types",
+      "brief": "Core type definitions and index set infrastructure for Gravity\n\nFoundational enums and classes for the Gravity modeling language.\n\n**Convexity Tracking:**\n- Convexity: linear_, convex_, concave_, undet_\n- Sign: neg_, non_pos_, zero_, non_neg_, pos_, unknown_\n- Enables automatic convexity detection in expressions\n\n**Function Classification:**\n- FType: const_, lin_, quad_, pol_, nlin_ (constraint complexity)\n- MType: lin_m, quad_m, pol_m, nlin_m (model type)\n- OperatorType: All mathematical operations (+, -, *, /, ^, sin, cos, etc.)\n\n**Index Set System (indices class):**\n- Defines sets over which variables/constraints are declared\n- Supports: ordered pairs, time expansion, matrix indexing\n- Operations: union, combine, exclude, filter\n- Used for: \"for all i in Nodes, j in Arcs\" style modeling\n\n**Space Types:**\n- R: Real numbers (R^n)\n- R_p: Positive reals\n- C: Complex numbers",
+      "has_algorithm": false
+    },
+    {
+      "name": "utils",
+      "brief": "Utility functions for timing, printing, and sign operations\n\nGeneral utilities used throughout the Gravity library.\n\n**Timing:**\n- get_wall_time(): Wall clock time in seconds\n- get_cpu_time(): CPU time in seconds\n\n**Printing:**\n- clean_print(): Format value with sign for display\n- RESET macro: Terminal color reset code\n\n**Parallelism:**\n- bounds(parts, mem): Split memory/indices into chunks\n  for parallel processing\n\n**Sign Arithmetic:**\n- reverse(Sign): Negate sign\n- sign_add(s1, s2): Result sign of sum\n- sign_product(s1, s2): Result sign of product\n\n**Time Indexing:**\n- time(p1, p2): Create time-indexed set [p1, p2]\n- time(idx1, ...): Variadic time index construction\n\n**Complex Number Support:**\n- Comparison operators for Cpx type",
+      "has_algorithm": false
+    },
+    {
+      "name": "var",
+      "brief": "Decision variables with bounds for optimization models\n\nVariables are parameters with lower and upper bounds that the solver optimizes.\n\n**var<type> Template Class:**\n- Inherits from param<type> (shares indexing, values storage)\n- Adds _lb, _ub as func<type> (bounds can be expressions)\n- Supports: double, int, bool (binary), complex<double>\n\n**Bound Types:**\n- Unbounded: var(\"x\") - uses numeric_limits\n- Non-negative: var(\"x\", non_neg_)\n- Non-positive: var(\"x\", non_pos_)\n- Bounded: var(\"x\", lb, ub)\n- Indexed bounds: var(\"x\", lb_param, ub_param) over indices\n\n**Lifted Variables:**\n- _lift flag for McCormick/RLT linearization\n- _original_vars: pointers to variables being lifted\n- _lift_lb, _lift_ub: whether lifted var needs bounding functions\n\n**Mosek/SDP Support:**\n- _in_q_cone: variable in quadratic cone\n- _psd: positive semidefinite matrix variable\n\n**Usage Example:**\n```cpp\nvar<> x(\"x\", 0, 1);           // x in [0,1]\nvar<int> y(\"y\", 0, 10);       // integer y in [0,10]\nvar<bool> z(\"z\");             // binary z\nx.in(Nodes);                   // x indexed over Nodes\n```",
+      "has_algorithm": false
+    }
+  ]
+}

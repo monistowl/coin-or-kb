@@ -1,0 +1,20 @@
+{
+  "name": "IpoptProgram",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/IpoptProgram.h",
+  "brief": "Ipopt solver interface implementing TNLP callbacks\n\nAdapts Gravity models to Ipopt's TNLP (Templated NLP) interface.\n\n**IpoptProgram<type> Class:**\n- Inherits from Ipopt::TNLP and Program<type>\n- _model: Pointer to Gravity Model\n\n**Required TNLP Callbacks:**\n- get_nlp_info(): Return problem dimensions (n, m, nnz_jac, nnz_hess)\n- get_bounds_info(): Variable and constraint bounds\n- get_starting_point(): Initial x, z_L, z_U, lambda\n- eval_f(): Objective function value\n- eval_grad_f(): Objective gradient\n- eval_g(): Constraint values\n- eval_jac_g(): Jacobian values and structure\n- eval_h(): Hessian of Lagrangian\n- finalize_solution(): Copy solution back to model\n\n**Sparsity Pattern:**\n- First call to eval_jac_g/eval_h: return structure (iRow, jCol)\n- Subsequent calls: return values only\n- Gravity tracks via _first_call_jac, _first_call_hess\n\n**Solution Recovery:**\n- finalize_solution() copies x values to model variables\n- Retrieves dual values (lambda) for constraints\n- Retrieves bound multipliers (z_L, z_U)",
+  "algorithms": [
+    {
+      "name": "Interior Point Method via Ipopt",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "gravity/solver.h for unified solver interface",
+    "layer-2/Ipopt/ for Ipopt implementation details"
+  ]
+}

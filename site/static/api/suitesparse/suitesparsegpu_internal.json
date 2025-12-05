@@ -1,0 +1,12 @@
+{
+  "name": "SuiteSparseGPU_internal",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPURuntime/Include/SuiteSparseGPU_internal.hpp",
+  "brief": "Internal includes for SuiteSparse GPU runtime\nCopyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nConditionally includes CUDA runtime when SPQR_HAS_CUDA defined. Forward\ndeclares Workspace class. Includes SuiteSparse_config.h, macros, and\nWorkspace header. Also includes version header unconditionally.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SuiteSparseGPU_Workspace.hpp for Workspace class definition"
+  ]
+}

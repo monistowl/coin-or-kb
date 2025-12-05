@@ -1,0 +1,9 @@
+{
+  "name": "uniform_01",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/speed/uniform_01.hpp",
+  "brief": "Speed testing: uniform_01",
+  "algorithms": [],
+  "methods": []
+}

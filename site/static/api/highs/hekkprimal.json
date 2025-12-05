@@ -1,0 +1,20 @@
+{
+  "name": "HEkkPrimal",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/HEkkPrimal.h",
+  "brief": "Phase 2 primal simplex solver for HiGHS",
+  "algorithms": [
+    {
+      "name": "Primal Simplex with Hyper-Sparse CHUZC\n\nImplements primal simplex with column selection (CHUZC) and row\nselection (CHUZR). Primarily used for Phase 1 when dual is infeasible.\n\n**Key Operations:**\n- chuzc()/chooseColumn(): Select entering variable (violating bound)\n- chooseRow(): Ratio test to find leaving variable\n- considerBoundSwap(): Handle bound-to-bound moves\n- updateDual(): Maintain reduced costs after pivot\n\n**Hyper-Sparse CHUZC:**\n- hyper_chuzc_candidate[]: Top candidates for entering\n- hyperChooseColumn*(): Efficient candidate tracking\n\n**Edge Weights:**\n- edge_weight_[]: Pricing weights (Devex or Steepest Edge)\n- devex_index_[]: Reference set for Devex framework\n- updatePrimalSteepestEdgeWeights(): Exact weight updates\n\n**Phase 1:**\n- phase1ChooseRow(): Modified ratio test for feasibility\n- phase1ComputeDual(): Dual values for infeasibility measure",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "simplex/HEkk.h for main simplex class",
+    "simplex/HEkkDual.h for dual simplex"
+  ]
+}

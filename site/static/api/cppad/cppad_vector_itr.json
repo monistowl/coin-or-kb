@@ -1,0 +1,9 @@
+{
+  "name": "cppad_vector_itr",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/utility/cppad_vector_itr.hpp",
+  "brief": "CppAD utility: cppad vector itr",
+  "algorithms": [],
+  "methods": []
+}

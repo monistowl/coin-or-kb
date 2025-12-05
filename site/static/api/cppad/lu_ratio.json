@@ -1,0 +1,9 @@
+{
+  "name": "lu_ratio",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/lu_ratio.hpp",
+  "brief": "Core AD functionality: lu ratio",
+  "algorithms": [],
+  "methods": []
+}

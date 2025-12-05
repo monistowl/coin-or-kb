@@ -1,0 +1,21 @@
+{
+  "name": "DcoHeuristic",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoHeuristic.hpp",
+  "brief": "Abstract base class for primal heuristics",
+  "algorithms": [
+    {
+      "name": "Primal Heuristic Framework for Mixed-Integer Conic Optimization",
+      "math": "Heuristics find feasible solutions x\u0303 satisfying:\n      Ax\u0303 \u2264 b, x\u0303_j \u2208 Z for j \u2208 I, x\u0303 \u2208 K (conic constraints)\n      Good incumbents enable pruning: nodes with LB \u2265 UB(x\u0303) are pruned.\n\nDcoHeuristic provides the interface for heuristics that search\nfor feasible solutions during branch-and-bound.\n\n**Heuristic Types (DcoHeurType):**\n- DcoHeurTypeRounding: Round fractional solution\n\n**Strategies (DcoHeurStrategy):**\n- None: Disabled\n- Root: Only at root node\n- Auto: System decides\n- Periodic: Every N nodes\n- BeforeRoot: Before first LP solve\n\n**Statistics (DcoHeurStats):**\n- numCalls_: Times heuristic invoked\n- numNoSolCalls_: Calls with no solution found\n- time_: CPU time consumed\n- numSolutions_: Solutions found\n\n**Pure Virtual:**\n- searchSolution(): Find and return feasible solution or NULL",
+      "complexity": "Varies by heuristic: O(n) for rounding to O(solve) for sub-MIP",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DcoHeurRounding.hpp for simple rounding heuristic",
+    "DcoTreeNode.hpp::callHeuristics() for invocation",
+    "DcoModel.hpp::heuristics_ for storage"
+  ]
+}

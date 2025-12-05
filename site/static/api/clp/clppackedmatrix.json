@@ -1,0 +1,22 @@
+{
+  "name": "ClpPackedMatrix",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPackedMatrix.hpp",
+  "brief": "Standard sparse matrix implementation for Clp (wraps CoinPackedMatrix)\n\nThe default matrix type for Clp, implementing ClpMatrixBase using\nCoinPackedMatrix for sparse storage. This is appropriate for general\nsparse LP matrices without special structure.",
+  "algorithms": [
+    {
+      "name": "Scaling Integration:\nRow/column scaling applied on-the-fly in times()/transposeTimes():\n  scaled_A[i,j] = rowScale[i] * A[i,j] * columnScale[j]\nAvoids storing scaled copy.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpMatrixBase for the abstract interface",
+    "CoinPackedMatrix in CoinUtils for underlying storage",
+    "ClpNetworkMatrix for network-structured problems",
+    "ClpPlusMinusOneMatrix for \u00b11 matrices"
+  ]
+}

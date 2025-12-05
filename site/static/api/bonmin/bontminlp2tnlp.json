@@ -1,0 +1,21 @@
+{
+  "name": "BonTMINLP2TNLP",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonTMINLP2TNLP.hpp",
+  "brief": "Adapter converting TMINLP (MINLP) to TNLP (NLP) for Ipopt",
+  "algorithms": [
+    {
+      "name": "MINLP\u2192NLP Adapter for B&B Node Processing\n\nThis adapter pattern allows an external caller to modify variable bounds,\nenabling treatment of binary/integer variables as either relaxed (continuous)\nor fixed. Essential for branch-and-bound where each node fixes or bounds\ninteger variables differently.\n\n**Key functionality:**\n- SetVariableBounds(): Modify bounds for branching\n- SetVariableType(): Change variable types (for probing/fixing)\n- x_sol()/duals_sol(): Access solution after optimization\n- get_starting_point(): Provide initial/warm start point\n\n**Usage in B&B:**\n1. Root node: All integers relaxed to continuous\n2. Branching: Fix or bound integer variables\n3. Each node: Solve NLP relaxation via Ipopt\n4. Warm start: Use parent's solution for faster convergence",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "TMINLP for the original MINLP problem interface",
+    "IpTNLP for Ipopt's NLP interface",
+    "OsiTMINLPInterface for the higher-level solver interface"
+  ]
+}

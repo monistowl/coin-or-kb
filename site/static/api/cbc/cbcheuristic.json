@@ -1,0 +1,25 @@
+{
+  "name": "CbcHeuristic",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristic.hpp",
+  "brief": "Base class for MIP primal heuristics\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+  "algorithms": [
+    {
+      "name": "MIP Primal Heuristics Framework:\nPrimal heuristics find feasible integer solutions during B&C search.\nGood solutions improve the upper bound, enabling more pruning.\n\nHeuristic Categories:\n1. Construction: Build solution from scratch (rounding, greedy)\n2. Improvement: Refine existing solution (local search, RINS)\n3. Diving: Fix variables sequentially toward integrality\n4. Large Neighborhood Search: Fix subset, re-optimize remainder\n\nIncluded heuristics:\n- CbcRounding: Round LP solution using constraint \"locks\"\n  Lock = coefficient sign \u00d7 bound direction. Round toward locked side.\n- CbcHeuristicPartial: Fix high-priority variables, solve sub-MIP\n- CbcSerendipity: Capture solutions found incidentally by solver\n\nScheduling via when_/whereFrom_/howOften_ controls invocation frequency\nand timing (root vs tree, before/after cuts).",
+      "math": "Rounding with locks: For x_j fractional, count constraints where\nrounding down vs up would help feasibility. Round toward majority vote.\nQuality vs speed tradeoff: quick heuristics often, expensive ones rarely.",
+      "complexity": "Rounding: O(nnz). Sub-MIP heuristics: depends on time limit.\nHeuristics typically limited to fraction of total solve time.",
+      "ref": [
+        "Berthold, \"Primal heuristics for mixed integer programs\", PhD thesis (2006)",
+        "Achterberg, \"Constraint Integer Programming\", TU Berlin (2007), Ch. 7\n\nCbcHeuristic: Abstract base for primal heuristics that find feasible\nsolutions during branch-and-cut search. Key method is solution() which\nreturns 1 if a valid solution is found, 0 otherwise.\n\nExecution control:\n- when_: 0=off, 1=root only, 2=non-root, 3=always\n- whereFrom_: Bit field for timing (before/during/after cuts)\n- howOften_: Frequency of invocation\n\nIncludes several concrete heuristics:\n- CbcRounding: Simple rounding with lock-based feasibility\n- CbcHeuristicPartial: Fix priority-based partial solution\n- CbcSerendipity: Capture solver-found solutions\n- CbcHeuristicJustOne: Randomly select one from multiple heuristics\n\nAlso includes CbcHeuristicNode/NodeList for tracking where heuristics\nhave been invoked (distance-based diversification)."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicFPump for Feasibility Pump",
+    "CbcHeuristicDive for diving heuristics",
+    "CbcHeuristicRINS, CbcHeuristicRENS for neighborhood search",
+    "CbcHeuristicLocal for local search"
+  ]
+}

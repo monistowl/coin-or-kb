@@ -1,0 +1,9 @@
+{
+  "name": "OSStringUtil",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSUtils/OSStringUtil.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

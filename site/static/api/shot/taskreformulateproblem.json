@@ -1,0 +1,22 @@
+{
+  "name": "TaskReformulateProblem",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskReformulateProblem.h",
+  "brief": "Transform problem for efficient outer approximation\n\nKey preprocessing: converts problem to reformulated form.\n\n**TaskReformulateProblem Class:**\n- reformulateObjectiveFunction(): Handle nonlinear objective\n- reformulateConstraint(): Process each constraint type\n- createEpigraphConstraint(): Epigraph reformulation\n\n**Reformulation Techniques:**\n- Bilinear terms: McCormick envelopes (addBilinearMcCormickEnvelope)\n- Integer products: Binary expansion\n- Eigenvalue decomposition: Convexify quadratics\n- Term extraction: Separate linear/quadratic/monomial/signomial\n\n**Auxiliary Variables:**\n- Created for bilinear products, squares, absolute values\n- Tracked in squareAuxVariables, bilinearAuxVariables maps",
+  "algorithms": [
+    {
+      "name": "MINLP Reformulation via Auxiliary Variables",
+      "math": "Key transformations:\n      - Bilinear xy: McCormick envelopes w \u2265 xL_y + yL_x - L_xL_y, etc.\n      - Squares x\u00b2: w = x\u00b2, with 2D outer approximation\n      - Indefinite quadratics: Eigenvalue decomposition Q = Q\u208a - Q\u208b\n      - Integer products: Binary expansion z = \u03a3 2\u2071b\u1d62",
+      "complexity": "O(terms \u00d7 reformulation cost). McCormick: O(1) per bilinear.",
+      "ref": [
+        "McCormick (1976). \"Computability of global solutions to factorable\n     nonconvex programs\". Math. Program."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AuxiliaryVariables.h for auxiliary variable types",
+    "Problem.h for reformulated problem storage"
+  ]
+}

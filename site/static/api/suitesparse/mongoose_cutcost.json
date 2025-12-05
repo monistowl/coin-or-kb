@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_CutCost",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_CutCost.hpp",
+  "brief": "Partition quality metrics structure\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nCutCost struct holds partition quality metrics: heuCost (cut + balance\npenalty), cutCost (edge weight sum), W[2] (partition weights), and\nimbalance (deviation from target split). Used internally to evaluate\nand compare partitions during refinement.",
+  "algorithms": [
+    {
+      "name": "Partition Quality Evaluation:\nTracks two competing objectives during partitioning:\n\nFields:\n- cutCost: \u03a3 w_ij for edges (i,j) crossing the partition\n- W[0], W[1]: Total vertex weight in each partition\n- imbalance: target_split - W[0]/W (deviation from ideal)\n- heuCost: Combined cost = cutCost + penalty(imbalance)",
+      "math": "Heuristic cost with balance penalty:\n$$heuCost = cutCost + \\lambda \\cdot (imbalance)^2$$\n\nPenalty term ensures algorithm finds balanced partitions.\n\u03bb trades off cut quality vs balance: higher \u03bb \u2192 more balanced.",
+      "complexity": "O(1) to store and compare; O(|E|) to recompute from scratch.\nIncremental updates during FM: O(degree) per vertex move.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_EdgeCut.hpp for public partition result",
+    "Mongoose_ImproveFM.hpp for gain calculations"
+  ]
+}

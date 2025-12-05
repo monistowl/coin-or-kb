@@ -1,0 +1,22 @@
+{
+  "name": "factor",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/factor.hpp",
+  "brief": "HiGHS QP reduced Hessian Cholesky factorization\n\nBasis factorization for QP solver. Cholesky decomposition\nof reduced Hessian Z'QZ for efficient direction computation.",
+  "algorithms": [
+    {
+      "name": "Cholesky Factorization for Reduced Hessian:\n  Maintains L L' = Z'QZ for null-space QP direction computation:\n  1. Factor reduced Hessian: Z'QZ = LL' (dense Cholesky)\n  2. Solve for direction: LL'p_Z = -Z'g \u2192 p_Z\n  3. Update L when active set changes (rank-1 updates)\n  4. Detect negative eigenvalues (non-convex warning)",
+      "math": "Cholesky update formulas:\n  Adding constraint: Delete row/col from L, shift remaining\n  Dropping constraint: Rank-1 update L'L' = L'L + vv' via Givens rotations\n  Solve: Forward solve Ly = b, backward solve L'x = y",
+      "complexity": "Factor: O(k\u00b3) for k = n - |active_set| (null-space dimension)\n  Solve: O(k\u00b2)\n  Update: O(k\u00b2) per constraint change",
+      "ref": [
+        "Nocedal & Wright, \"Numerical Optimization\", Ch. 16.5 (active set)"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Basis for active set tracking",
+    "HFactor for constraint matrix factorization"
+  ]
+}

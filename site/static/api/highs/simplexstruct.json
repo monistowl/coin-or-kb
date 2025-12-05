@@ -1,0 +1,13 @@
+{
+  "name": "SimplexStruct",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/SimplexStruct.h",
+  "brief": "Core data structures for HiGHS simplex solvers\n\n**SimplexBasis:**\nLow-level basis representation:\n- basicIndex_[row]: Variable index of basic variable in each row\n- nonbasicFlag_[var]: 0=basic, 1=nonbasic\n- nonbasicMove_[var]: Direction to move (-1=lower, +1=upper, 0=fixed/free)\n- hash: Basis fingerprint for debugging\n\n**HighsSimplexStatus:**\nSimplex solver state flags:\n- has_basis, has_ar_matrix, has_nla, has_invert\n- has_dual_steepest_edge_weights\n- is_dualized, is_permuted (problem transformations)\n\n**HighsSimplexInfo:**\nWorking data for simplex iterations:\n- workCost_/workDual_/workShift_: Objective and dual values\n- workLower_/workUpper_/workRange_/workValue_: Nonbasic variable bounds\n- baseLower_/baseUpper_/baseValue_: Basic variable data\n- Perturbation flags: costs_perturbed, bounds_perturbed\n- Infeasibility counts: num_primal/dual_infeasibilities\n- Backtracking data for singular basis recovery\n- DSE (Dual Steepest Edge) control parameters\n\n**HighsSimplexBadBasisChangeRecord:**\nTracks tabooed pivot operations to avoid cycling.\n\n**HighsRayRecord:**\nStores primal/dual ray for unbounded/infeasible detection.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "simplex/HEkk.h for simplex solver using these structures",
+    "simplex/SimplexConst.h for simplex constants"
+  ]
+}

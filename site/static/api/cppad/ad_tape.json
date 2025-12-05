@@ -1,0 +1,9 @@
+{
+  "name": "ad_tape",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/ad_tape.hpp",
+  "brief": "Internal implementation: ad_tape",
+  "algorithms": [],
+  "methods": []
+}

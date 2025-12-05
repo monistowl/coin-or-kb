@@ -1,0 +1,9 @@
+{
+  "name": "ad_io",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/ad_io.hpp",
+  "brief": "Core AD functionality: ad io",
+  "algorithms": [],
+  "methods": []
+}

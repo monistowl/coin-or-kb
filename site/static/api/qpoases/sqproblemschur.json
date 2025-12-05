@@ -1,0 +1,22 @@
+{
+  "name": "SQProblemSchur",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/SQProblemSchur.hpp",
+  "brief": "Sparse QP solver using Schur complement for active-set updates",
+  "algorithms": [
+    {
+      "name": "Schur Complement Active-Set Method:\nExploits sparsity in QPs with changing active sets using Schur complement\nupdates instead of full refactorization.\n\nKKT SYSTEM STRUCTURE:\nAt each iteration, solve:\n  [H   A\u2090'] [x]   [-g ]\n  [A\u2090  0  ] [\u03bb] = [b\u2090 ]\nwhere A\u2090 is the active constraint matrix.\n\nSCHUR COMPLEMENT APPROACH:\nFactor H once (sparse Cholesky/LDL): H = LDL'\nWhen active set changes by adding/removing constraint i:\n\nAdding constraint (rank-1 update):\n  New KKT = Old KKT + [0; a\u1d62][0; a\u1d62]'\n  Schur complement: S_new = S + a\u1d62'H\u207b\u00b9a\u1d62\n  Update S via low-rank formula (no refactor of H)\n\nRemoving constraint:\n  Downdate Schur complement analogously\n\nSOLVE WITH SCHUR:\n  1. Solve H\u00b7y = g (using fixed factorization)\n  2. Solve S\u00b7\u03bb = A\u2090y - b\u2090 (small dense system)\n  3. Solve H\u00b7x = g - A\u2090'\u03bb (reuse factorization)",
+      "math": "Schur complement:\n  S = A\u2090\u00b7H\u207b\u00b9\u00b7A\u2090'\n  dim(S) = |active_set| << n (typically small)\n\nWhen active set changes by \u00b11:\n  S_new = S \u00b1 (H\u207b\u00b9a\u1d62)(H\u207b\u00b9a\u1d62)' / (a\u1d62'H\u207b\u00b9a\u1d62)",
+      "complexity": "- Initial H factorization: O(nnz(H)^{3/2}) sparse Cholesky\n- Schur update per active-set change: O(|A|\u00b2) dense operations\n- Total per QP: O(nnz + |A|\u00b2\u00b7k) for k iterations\n- Advantage: avoids O(n\u00b3) refactorization each iteration",
+      "ref": [
+        "Waechter & Biegler (2006). \"On the Implementation of an Interior-Point\n  Filter Line-Search Algorithm for Large-Scale Nonlinear Programming\".\n  Mathematical Programming 106(1):25-57."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "SQProblem for dense version",
+    "SparseSolver for underlying sparse factorization"
+  ]
+}

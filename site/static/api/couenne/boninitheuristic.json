@@ -1,0 +1,13 @@
+{
+  "name": "BonInitHeuristic",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/heuristics/BonInitHeuristic.hpp",
+  "brief": "Heuristic to inject initial NLP solution into Cbc\n\nCommunicates the initial NLP solution (computed before B&B starts)\nto Cbc as a known feasible solution.\n\n**Purpose:**\nWhen Couenne solves the root node NLP and finds a feasible MINLP\nsolution, this heuristic stores it so Cbc can use it as the\ninitial incumbent.\n\n**Usage:**\n```cpp\n// After initial NLP solve\nInitHeuristic heur(objValue, solution, problem);\ncbcModel.addHeuristic(&heur);\n```\n\n**solution() method:**\nReturns the stored initial solution on first call. Subsequent\ncalls return 0 (no new solution) since the initial solution\nhas already been provided.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneBab which adds this heuristic",
+    "NlpSolveHeuristic for NLP solves during B&B"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "QProblem",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/QProblem.hpp",
+  "brief": "QP solver with general linear constraints\n\nSolves convex QPs with bounds and linear constraints:",
+  "algorithms": [
+    {
+      "name": "Online Active Set Strategy:\n  1. Start from a primal-dual feasible point\n  2. Track active set (constraints at bounds)\n  3. Update active set incrementally when parameters change\n  Efficient for parametric QPs where data varies smoothly.",
+      "math": "lb  <= x <= ub       (bounds)\n\nKey methods:\n- init(): First QP solve (cold start)\n- hotstart(): Subsequent solves with modified data",
+      "complexity": "O(n^3) worst case per iteration, but typically much\n            faster due to hot-starting and sparse updates.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "QProblemB for box-constrained QPs (no A matrix)",
+    "SQProblem for varying Hessian"
+  ]
+}

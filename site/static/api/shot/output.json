@@ -1,0 +1,12 @@
+{
+  "name": "Output",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Output.h",
+  "brief": "Logging infrastructure using spdlog\n\nCentralized logging with console and file sinks.\n\n**Output Class:**\n- outputCritical/Error/Warning/Info/Debug/Trace(): Log methods\n- setLogLevels(): Configure console and file verbosity\n- setConsoleSink(): Custom console output\n- setFileSink(): Enable file logging\n\n**E_LogLevel (Enums.h):**\n- Off, Critical, Error, Warning, Info, Debug, Trace\n\n**OutputStream Class:**\n- std::ostream wrapper for solver output redirection\n- Routes external solver output through SHOT logging\n- Used by CPLEX, Gurobi, Ipopt adapters\n\n**Implementation:**\n- Uses spdlog library for fast, thread-safe logging\n- consoleSink: stdout sink\n- fileSink: basic_file_sink for persistence",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Environment.h for Output access"
+  ]
+}

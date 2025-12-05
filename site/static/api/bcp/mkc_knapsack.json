@@ -1,0 +1,19 @@
+{
+  "name": "MKC_knapsack",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Mkc/include/MKC_knapsack.hpp",
+  "brief": "MKC knapsack subproblem for column generation",
+  "algorithms": [
+    {
+      "name": "Knapsack Pricing: Column Generation Subproblem\n\nKnapsack subproblem solver for Multi-Knapsack Cover problem.\n\n**Role in column generation:**\nMaster problem has covering constraints (each item covered at least once).\nPricing subproblem finds knapsack packings with negative reduced cost.\n\n**MKC_knapsack_entry:**\n- orig_cost: Original item value\n- cost: Modified cost using dual values from master\n- ratio: cost/weight for greedy/DP ordering\n\n**Sorting functions:** Support greedy heuristics and DP bounds.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "MKC_vargen.hpp for variable generation implementation"
+  ]
+}

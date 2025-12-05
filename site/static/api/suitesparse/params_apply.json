@@ -1,0 +1,12 @@
+{
+  "name": "params_apply",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/Kernel/Apply/params_apply.hpp",
+  "brief": "Apply kernel parameters, macros, and function declarations\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nConstants: MAX_ROW_TILES=3, MAX_COL_TILES=2. Shared memory accessors:\nshV, shC, SHV(t,i,j), SHA(i,j), ST(i,j). Global memory: GLVT, GLF,\nIFRONT. Thread indexing: iv, jv, VCHUNKSIZE, NVCHUNKS. Device functions:\nblock_apply_3/2/1, block_apply_3_by_1/2_by_1/1_by_1 variants.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Kernel/sharedMemory.hpp for shared memory union"
+  ]
+}

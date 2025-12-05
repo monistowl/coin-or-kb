@@ -1,0 +1,14 @@
+{
+  "name": "DcoPresolve",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoPresolve.hpp",
+  "brief": "Presolve/preprocessing for MISOCP problems\n\nDcoPresolve extends OsiPresolve to handle conic problems,\napplying reductions before branch-and-bound.\n\n**Supported Operations:**\n- Bound tightening (improve_bounds)\n- Redundant row/column removal (from OsiPresolve)\n- Problem scaling and reformulation\n\n**Two Modes (compile-time):**\n- OA mode (__OA__): Uses OsiSolverInterface\n- Direct mode: Uses OsiConicSolverInterface\n\n**Usage:**\n1. DcoPresolve(origModel) - Initialize with original model\n2. presolve() - Apply reductions, create presolvedModel_\n3. Solve presolved problem\n4. postsolve() - Restore solution to original space",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoModel.hpp::preprocess() for integration",
+    "OsiPresolve (Osi) for base class",
+    "DcoParams.hpp::presolve for enable/disable"
+  ]
+}

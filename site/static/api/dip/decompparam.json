@@ -1,0 +1,13 @@
+{
+  "name": "DecompParam",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompParam.h",
+  "brief": "Comprehensive parameter class for DIP algorithm configuration\n\nDecompParam contains 100+ parameters controlling all aspects of DIP\ndecomposition algorithms. Parameters read from file via UtilParameters.\n\n**Logging Parameters:**\n- LogLevel: Verbosity (0=silent to 5=debug)\n- LogDumpModel: When to dump LP models (0=never, 2=always)\n- LogObjHistory: Print objective progress\n\n**Algorithm Limits:**\n- TotalCutItersLimit, TotalPriceItersLimit: Iteration caps\n- RoundCutItersLimit, RoundPriceItersLimit: Per-round limits\n- TimeLimit: Wall clock limit\n- NodeLimit: Max B&B nodes\n\n**Subproblem Control:**\n- SubProbTimeLimitExact: Time for exact subproblem solves\n- SubProbTimeLimitHeur: Time for heuristic solves\n- SubProbNumSolLimit: Max solutions per subproblem\n- SubProbParallelType: OpenMP scheduling strategy\n\n**Dual Stabilization:**\n- DualStab: Enable Wentges stabilization\n- DualStabAlpha: Smoothing parameter [0,1]\n\n**Branching:**\n- BranchEnforceInSubProb: Branch on x in subproblems\n- BranchEnforceInMaster: Branch on lambda in master\n\n**Strategy:**\n- PCStrategy: Balance pricing vs cutting\n- CutCglStrategy: Which CGL cuts to use",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompApp.h where m_param is stored",
+    "UtilParameters for parameter file parsing"
+  ]
+}

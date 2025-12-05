@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprBound",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneExprBound.hpp",
+  "brief": "Expressions representing variable bounds (l_i, u_i)\n\nExpression nodes that evaluate to the current lower/upper bound\nof a variable. Used in parametric convexification to express\nbound-dependent cuts.\n\n**exprLowerBound:**\n- Evaluates to domain_->lb(varIndex_)\n- Prints as \"l_i\" where i is variable index\n- Derivative is 0 (bounds are parameters, not variables)\n\n**exprUpperBound:**\n- Evaluates to domain_->ub(varIndex_)\n- Prints as \"u_i\" where i is variable index\n- Derivative is 0\n\n**Usage example:**\nFor convexification cut on f(x) with x \u2208 [l, u]:\nThe secant line passes through (l, f(l)) and (u, f(u)).\nThe cut coefficients depend on l and u, represented\nas exprLowerBound and exprUpperBound.\n\n**Note:**\nThese behave like constants for differentiation purposes\nbut their values change during B&B as bounds tighten.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneDomain which provides the bound values",
+    "exprVar for variable expressions"
+  ]
+}

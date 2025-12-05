@@ -1,0 +1,23 @@
+{
+  "name": "CglResidualCapacity",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglResidualCapacity/CglResidualCapacity.hpp",
+  "brief": "Residual capacity cuts for network design",
+  "algorithms": [
+    {
+      "name": "Residual Capacity Cut Separation:\n  For rows with structure: \u03a3 a_i\u00b7c_i - d\u00b7\u03a3 z_j \u2264 b (c continuous, z integer):\n  1. Preprocess: Classify rows as ROW_L/ROW_G/ROW_BOTH/ROW_OTHER\n  2. For each suitable row, identify: continuous flows c, integer design z\n  3. Compute residual capacity: r = b + d\u00b7\u230a\u03a3z_j*\u230b - \u03a3 a_i\u00b7c_i*\n  4. If r < 0, derive cut: \u03a3 a_i\u00b7c_i \u2264 b + d\u00b7\u230a\u03a3z_j*\u230b\n  5. Strengthen using integrality of design variables",
+      "math": "Residual capacity inequality derivation:\n  Original: \u03a3_i a_i\u00b7c_i \u2264 b + d\u00b7\u03a3_j z_j where z_j \u2208 {0,1}\n  At solution (c*, z*): capacity slack = b + d\u00b7\u03a3z_j* - \u03a3a_i\u00b7c_i*\n  Since \u03a3z_j \u2208 \u2124: valid cut uses \u230a\u03a3z_j*\u230b or \u2308\u03a3z_j*\u2309\n  Residual capacity cut: \u03a3a_i\u00b7c_i \u2264 b + d\u00b7\u230a\u03a3z_j*\u230b",
+      "complexity": "O(m\u00b7n) for preprocessing, O(m) per cut separation\n  where m = rows, n = columns. Total O(m\u00b2) per generateCuts call.",
+      "ref": [
+        "Magnanti, Mirchandani, Vachani (1993). \"The convex hull of two core\n     capacitated network design problems\". Math Programming 60:233-250.",
+        "Atamt\u00fcrk & Rajan (2002). \"On splittable and unsplittable flow\n     capacitated network design arc-set polyhedra\". Math Programming 92:315-333.\n\nRow types detected:\n- ROW_L: a_1*c_1 + ... + a_k*c_k - d*z_1 - ... - d*z_p <= b\n  (continuous c_i, integer z_j with common coefficient d)\n- ROW_G: Same structure with >= sense\n- ROW_BOTH: Equations treatable as both\n- ROW_OTHER: Doesn't fit the pattern\n\nTarget problems: Capacitated network design where flows are\ncontinuous but arc installation decisions are integer."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglFlowCover for related flow-based cuts",
+    "CglMixedIntegerRounding for general MIR approach"
+  ]
+}

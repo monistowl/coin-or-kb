@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprConst",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneExprConst.hpp",
+  "brief": "Constant expression node\n\nRepresents a constant value in the expression DAG.\nLeaf node with fixed value that never changes.\n\n**Properties:**\n- Type: CONST (leaf node)\n- Linearity: ZERO if |value| < \u03b5, else CONSTANT\n- Bounds: [value, value] (trivial)\n- Differentiation: Always returns 0\n- Rank: 0 (lowest priority for branching)\n\n**isInteger():**\nChecks if the constant value is an integer (within tolerance).\nUsed for determining integrality of expressions.\n\n**Usage:**\n- Constant terms in objective/constraints\n- Right-hand sides of constraints\n- Exponents in power expressions",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "expression base class",
+    "exprVar for variable expressions"
+  ]
+}

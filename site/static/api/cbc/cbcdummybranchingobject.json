@@ -1,0 +1,19 @@
+{
+  "name": "CbcDummyBranchingObject",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcDummyBranchingObject.hpp",
+  "brief": "No-op branching object for special cases",
+  "algorithms": [
+    {
+      "name": "Placeholder One-Way Branch (No-Op)\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcDummyBranchingObject: A placeholder branch that does nothing.\nUsed when the branching framework requires a branching object\nbut no actual branching action is needed.\n\nUse cases:\n- Continue tree exploration when LP appears feasible but isn't\n- Placeholder for deferred branching decisions\n- Testing and debugging the branching infrastructure\n\nThe branch() method returns immediately without modifying bounds.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcBranchingObject for base class\n\nEdwin 11/10/2009 carved out of CbcBranchActual"
+  ]
+}

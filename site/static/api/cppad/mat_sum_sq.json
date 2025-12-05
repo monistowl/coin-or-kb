@@ -1,0 +1,9 @@
+{
+  "name": "mat_sum_sq",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/speed/mat_sum_sq.hpp",
+  "brief": "Speed testing: mat_sum_sq",
+  "algorithms": [],
+  "methods": []
+}

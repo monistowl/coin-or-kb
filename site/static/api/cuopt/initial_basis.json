@@ -1,0 +1,9 @@
+{
+  "name": "initial_basis",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/dual_simplex/initial_basis.hpp",
+  "brief": "cuOpt dual simplex basis management\n\nLU factorization and basis updates for GPU simplex.",
+  "algorithms": [],
+  "methods": []
+}

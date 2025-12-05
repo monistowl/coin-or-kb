@@ -1,0 +1,13 @@
+{
+  "name": "spqrgpu",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/Include/spqrgpu.hpp",
+  "brief": "GPU kernel interfaces for SPQR sparse QR factorization\nCopyright (c) 2008-2023, Timothy A Davis. GPL-2.0+ license.\n\nGPU acceleration entry points: spqrgpu_kernel (processes spqr_blob on GPU),\nspqrgpu_computeFrontStaging (plans front staging by GPU memory capacity),\nspqrgpu_buildAssemblyMaps (constructs Rimap/Rjmap for contribution assembly).\nTemplates for double/Complex Entry types. Requires GPUQREngine_SuiteSparse.hpp.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_SuiteSparse.hpp for underlying GPU engine",
+    "spqr.hpp for spqr_blob structure"
+  ]
+}

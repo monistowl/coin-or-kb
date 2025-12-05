@@ -1,0 +1,13 @@
+{
+  "name": "ICrash",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/presolve/ICrash.h",
+  "brief": "Iterative crash procedure for LP starting points",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "presolve/ICrashUtil.h for helper functions",
+    "presolve/ICrashX.h for extended crash variants"
+  ]
+}

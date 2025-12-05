@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprSum",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprSum.hpp",
+  "brief": "N-ary sum expression w = sum(f_i(x))\n\nRepresents sum of multiple expressions. Sums are linear in their\narguments if all arguments are linear.\n\n**Implied bounds for w = a0 + sum(a_i * x_i):**\nGiven bounds w in [l,u] and coefficients partitioned by sign:\n- I1: indices where a_i > 0\n- I2: indices where a_i < 0\n\nFor i in I1:\n- x_i >= (l - a0 - sum_{j!=i,j in I1}(a_j*u_j) - sum_{j in I2}(a_j*l_j)) / a_i\n- x_i <= (u - a0 - sum_{j!=i,j in I1}(a_j*l_j) - sum_{j in I2}(a_j*u_j)) / a_i\n\n**Quadratic detection:**\ncreateQuadratic() scans sum terms for products and creates exprQuad\nif enough quadratic terms exist for alpha-convexification.\n\n**Linearity:**\nReturns maximum linearity level among all arguments.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprGroup for constant + linear + nonlinear terms",
+    "CouenneExprQuad for quadratic expressions"
+  ]
+}

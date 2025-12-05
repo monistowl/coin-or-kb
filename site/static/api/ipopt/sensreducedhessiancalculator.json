@@ -1,0 +1,9 @@
+{
+  "name": "SensReducedHessianCalculator",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensReducedHessianCalculator.hpp",
+  "brief": "sIPOPT reduced Hessian computation\n\nSensReducedHessianCalculator: computes reduced Hessian of Lagrangian.\nProjects full Hessian onto null space of active constraints.\nUsed for computing second-order sensitivity information.",
+  "algorithms": [],
+  "methods": []
+}

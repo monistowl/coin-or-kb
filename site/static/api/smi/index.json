@@ -1,0 +1,51 @@
+{
+  "library": "Smi",
+  "layer": "layer-3",
+  "classes": [
+    {
+      "name": "SmiCoreCombineRule",
+      "brief": "Rules for combining core and stochastic data in SMPS\n\nIn SMPS, stochastic data is a \"diff\" from the core problem. This file\ndefines how to apply that diff (combine core + stochastic \u2192 scenario).\n\n**SmiCoreCombineRule (Abstract Base):**\nVirtual interface for combination rules:\n- Process(d1, offset, cpv): Modify dense array d1 using sparse cpv\n- Process(cpv1, cpv2): Combine two sparse vectors\n\n**SmiCoreCombineReplace (Singleton):**\nDefault SMPS rule - stochastic values REPLACE core values:\n- scenario[i] = stochastic[i] if defined, else core[i]\n- Use case: Changing a coefficient value entirely\n\n**SmiCoreCombineAdd (Singleton):**\nAlternative rule - stochastic values ADD to core values:\n- scenario[i] = core[i] + stochastic[i]\n- Use case: Perturbations, additive uncertainty\n\n**Singleton Pattern:**\nBoth concrete rules use singleton pattern for efficiency:\n- SmiCoreCombineReplace::Instance()\n- SmiCoreCombineAdd::Instance()\n\n**Usage:**\nRules are passed to generateScenario() or readSmps() to control\nhow scenario data is constructed from core + stochastic inputs.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SmiDiscreteDistribution",
+      "brief": "Discrete probability distributions for stochastic programming\n\nClasses for representing discrete random variables and their distributions,\nused to generate scenario trees from independent stochastic elements.\n\n**SmiDiscreteDistribution Class:**\nContainer for multiple discrete random variables:\n- smiDiscrete_: Vector of SmiDiscreteRV objects\n- core_: Link to core problem data\n- combineRule_: How to merge events with core\n\n**SmiDiscreteRV Class:**\nSingle discrete random variable at a specific stage:\n- events_: Vector of SmiDiscreteEvent outcomes\n- stg_: Stage index for this RV\n- prob_: Total probability across events\n- addEvent(): Add outcome with LP data and probability\n\n**SmiDiscreteEvent Class:**\nOne possible outcome (realization) of a random variable:\n- Inherits SmiLinearData: matrix, bounds, objective changes\n- prob_: Probability of this event\n\n**Usage Pattern:**\n```cpp\nSmiDiscreteDistribution dist(core, rule);\nSmiDiscreteRV* rv = new SmiDiscreteRV(stage);\nrv->addEvent(matrix, clo, cup, obj, rlo, rup, 0.5);  // 50% chance\nrv->addEvent(..., 0.5);  // 50% chance\ndist.addDiscreteRV(rv);\nsmiModel.processDiscreteDistributionIntoScenarios(&dist);\n```",
+      "has_algorithm": false
+    },
+    {
+      "name": "SmiLinearData",
+      "brief": "Container for linear programming data (matrix + bounds + objective)\n\nSmiLinearData bundles all LP data needed to define a linear subproblem\nor modification in stochastic programming.\n\n**Data Members:**\n- matrix_: Constraint matrix (CoinPackedMatrix)\n- dclo_, dcup_: Column (variable) bounds\n- drlo_, drup_: Row (constraint) bounds\n- dobj_: Objective coefficients\n\n**Constructors:**\n- Default: Empty data\n- Copy: From another SmiLinearData\n- From components: matrix + 5 sparse vectors\n- From OSI: Extract from OsiSolverInterface\n\n**Accessors:**\n- getMatrix(), getColLower(), etc.: Const references\n- getMutableMatrix(), etc.: Non-const for modification\n\n**Usage:**\nUsed as base class for SmiDiscreteEvent and as a data container\nfor passing LP modifications around the Smi system.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SmiMessage",
+      "brief": "Message handler and codes for Smi logging\n\nSmiMessage extends CoinMessages to provide structured logging\nfor the stochastic programming interface.\n\n**SMI_Message Enum:**\n- SMI_SCENARIO_FINISHED: Scenario processing complete\n- SMI_DUMMY_END: End marker\n\n**SmiMessage Class:**\nCoinMessages-based message handler:\n- Constructor sets up message text templates\n- Supports multiple languages (default us_en)",
+      "has_algorithm": false
+    },
+    {
+      "name": "SmiQuadratic",
+      "brief": "Quadratic objective data for stochastic quadratic programming\n\nClasses for storing quadratic objective terms in stochastic QP problems.\nThe quadratic objective is: (1/2) x' Q x + c' x\n\n**SmiQuadraticData Class:**\nBase class storing Q matrix in compressed sparse column format:\n- _n: Number of columns\n- _starts: Column start indices (size n+1)\n- _indx: Row indices of nonzeros\n- _els: Values of nonzeros\n- _coff: Column offset for stage-based indexing\n- _hasData: Flag for valid data\n\n**CSC Format:**\nFor column j, nonzeros are at positions [starts[j], starts[j+1]):\n- Row indices: indx[starts[j]] ... indx[starts[j+1]-1]\n- Values: els[starts[j]] ... els[starts[j+1]-1]\n\n**SmiQuadraticDataDC Class:**\n\"Data Container\" subclass that owns its memory:\n- Constructor allocates arrays\n- Destructor frees arrays",
+      "has_algorithm": false
+    },
+    {
+      "name": "SmiScenarioTree",
+      "brief": "Scenario tree data structure for stochastic programming\n\nSmiScenarioTree is a template class for storing and navigating scenario\ntrees. Each root-to-leaf path represents one complete scenario.\n\n**SmiTreeNode<T> Template:**\nGeneric tree node with navigation:\n- parent_, child_, sibling_: Tree structure pointers\n- depth_: Distance from root (root = 0)\n- scen_: Scenario index for leaf nodes\n- child_labels_: Map for label-based child lookup\n\n**SmiScenarioTree<T> Template:**\nTree container with:\n- root_: Root node pointer\n- leaf_: Vector of leaf node pointers (one per scenario)\n- node_data: All node data in tree traversal order\n- scen_data: Temporary buffer for scenario path extraction\n\n**Key Operations:**\n- addPathtoLeaf(): Add new scenario path from branch point\n- find(scenario, stage): Get node at specific (scenario, stage)\n- find(labels): Get node by following label sequence\n- getScenario(s): Get vector of data along scenario s path\n\n**Tree Structure:**\n```\n      root (stage 0)\n     /    \\\n  node    node (stage 1)\n  / \\      |\nleaf leaf leaf (scenarios 0,1,2)\n```",
+      "has_algorithm": false
+    },
+    {
+      "name": "SmiScnData",
+      "brief": "Core and node data classes for stochastic models\n\nContains SmiCoreData (deterministic base LP) and SmiNodeData (scenario\nmodifications) that together define stochastic linear programs.\n\n**SmiCoreData Class:**\nStores the deterministic \"core\" LP problem with stage structure:\n- nrow_, ncol_: Total rows/columns in core problem\n- nstag_: Number of stages (periods)\n- stageRowPtr_[t], stageColPtr_[t]: Row/col offsets for stage t\n- nRowInStage_[t], nColInStage_[t]: Counts per stage\n- nodes_[t]: Core SmiNodeData for each stage\n- Dense bound arrays: cdrlo_, cdrup_, cdclo_, cdcup_, cdobj_\n\n**SmiNodeData Class:**\nStores LP modifications for a tree node (scenario/stage):\n- Sparse delta data: matrix rows, bounds, objective\n- combineRule_: How to merge with core (replace/add)\n- Stage membership and core linkage\n- Dense row map for efficient access\n\n**SMPS Data Flow:**\n1. Core MPS \u2192 SmiCoreData (base LP with stage assignments)\n2. Stoch file \u2192 SmiNodeData (per-scenario modifications)\n3. Combine with rule \u2192 Full scenario LP data\n\n**Type Aliases:**\n- SmiCoreIndex, SmiScenarioIndex, SmiStageIndex: int aliases",
+      "has_algorithm": false
+    },
+    {
+      "name": "SmiScnModel",
+      "brief": "Main scenario model class for stochastic linear/quadratic programming\n\nSmiScnModel is the central class for representing and solving scenario-based\nstochastic programs. It builds deterministic equivalent (DE) formulations\nfrom scenario trees.\n\n**Typical Usage:**\n```cpp\nSmiScnModel smi;\nsmi.readSmps(\"problem\");              // Read SMPS files\nsmi.setOsiSolverHandle(new OsiClpSolverInterface());\nOsiSolverInterface* osi = smi.loadOsiSolverData();  // Build DE\nosi->initialSolve();                  // Solve extensive form\n```\n\n**Key Methods:**\n- readSmps(): Parse SMPS files (core + time + stoch)\n- generateScenario(): Add scenario with probability and branching info\n- loadOsiSolverData(): Build deterministic equivalent LP\n- getColSolution(scenario): Extract solution for specific scenario\n\n**Solution Values:**\n- solveWS(): Wait-and-See solution (perfect information)\n- solveEV(): Expected Value solution (average scenario)\n- solveEEV(): Expected result of using EV solution\n\n**SmiScnNode Class:**\nRepresents a node in the scenario tree with:\n- Stage index, probability, parent link\n- Column/row offsets into DE matrix\n- Link to SmiNodeData for LP data",
+      "has_algorithm": false
+    },
+    {
+      "name": "SmiSmpsIO",
+      "brief": "SMPS (Stochastic MPS) file format reader and writer\n\nSmiSmpsIO extends CoinMpsIO to read/write the industry-standard SMPS\nformat for stochastic programming problems.\n\n**SMPS File Format (3 files):**\n- {name}.core: Core LP in MPS format (deterministic base problem)\n- {name}.time: Stage assignments (PERIODS section maps rows/cols to stages)\n- {name}.stoch: Stochastic data (SCENARIOS or INDEP sections)\n\n**SmiSectionType Enum:**\n- SMI_TIME_SECTION: PERIODS in time file\n- SMI_SCENARIOS_SECTION: SCENARIOS in stoch file\n- SMI_INDEPENDENT_SECTION: INDEP in stoch file\n\n**SmiSmpsType Enum:**\n- SMI_SC_CARD: SC card (scenario definition)\n- SMI_BL_CARD: BL card (branch location)\n- SMI_SMPS_COMBINE_ADD/REPLACE: Data combination rules\n\n**SmiSmpsCardReader Class:**\nExtends CoinMpsCardReader for SMPS-specific parsing:\n- periodName(): Stage name from time file\n- scenarioNew/Anc(): Scenario branching info\n- getProb(): Scenario probability\n\n**Key Methods:**\n- readTimeFile(): Parse stage assignments\n- readStochFile(): Parse stochastic data\n- writeSmps(): Output SMPS files",
+      "has_algorithm": false
+    }
+  ]
+}

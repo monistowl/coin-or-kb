@@ -1,0 +1,19 @@
+{
+  "name": "IpInexactRegOp",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/Inexact/IpInexactRegOp.hpp",
+  "brief": "Registration function for all inexact algorithm options\n\nRegisterOptions_Inexact() registers all configurable parameters\nfor the inexact Newton algorithm variant with the options system.",
+  "algorithms": [
+    {
+      "name": "Option Registration:\n  RegisterOptions_Inexact(roptions):\n  1. Calls RegisterOptions() on all Inexact* classes.\n  2. Registers termination test parameters (tcc_*, tt_*).\n  3. Registers Pardiso iterative parameters (dropping, fill, etc.).\n  4. Registers decomposition and line search options.\n  Centralizes registration for clean algorithm construction.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpAlgBuilder.hpp for how options are used during construction"
+  ]
+}

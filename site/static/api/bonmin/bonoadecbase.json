@@ -1,0 +1,25 @@
+{
+  "name": "BonOaDecBase",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/OaGenerators/BonOaDecBase.hpp",
+  "brief": "Base class for Outer Approximation (OA) decomposition algorithms\n\nImplements the foundation for OA-based MINLP algorithms. OA iterates between\nsolving MILP subproblems and NLP subproblems, generating linear outer\napproximations of the nonlinear constraints.\n\n**OA algorithm outline:**\n1. Solve MILP relaxation \u2192 get integer solution x*\n2. Fix integers to x*, solve NLP \u2192 get nonlinear solution y*\n3. Generate linearization cuts at y* (gradient-based)\n4. Add cuts to MILP, repeat until convergence\n\n**Key components:**\n- solverManip: RAII helper to save/restore solver state\n- performOa(): Virtual method implementing specific OA variant\n- post_nlp_solve(): Handle NLP solution and update bounds\n\n**Parameters:**\n- global_: Add cuts globally (valid at all nodes)\n- addOnlyViolated_: Only add cuts violated by current solution\n- maxLocalSearch_: Limit on local search iterations",
+  "algorithms": [
+    {
+      "name": "Outer Approximation (OA) Decomposition:\nBenders-style decomposition for convex MINLP. Master problem is MILP\ncontaining linearizations of nonlinear constraints. Subproblem is NLP\nwith integers fixed. Iterate until master and sub agree.\n\nKey insight: For convex MINLP, linearization at any feasible point\nprovides valid outer approximation. Accumulating cuts from multiple\nNLP solves progressively tightens the MILP approximation.",
+      "math": "Given convex MINLP: min f(x,y) s.t. g(x,y) \u2264 0, y \u2208 {0,1}\n\nOA Master (MILP): min \u03b7 s.t. \u03b7 \u2265 f(x^k) + \u2207f(x^k)\u1d40(x-x^k) \u2200k\n                           0 \u2265 g(x^k) + \u2207g(x^k)\u1d40(x-x^k) \u2200k\n\nNLP Sub (y=y*): min f(x,y*) s.t. g(x,y*) \u2264 0\n\nConvergence: For convex problems, finite \u03b5-convergence. Each NLP solve\neither provides improving incumbent or cut proving master solution\ninfeasible. MILP bound increases monotonically.",
+      "complexity": "#iterations typically small (tens to hundreds).\nPer iteration: O(MILP) + O(NLP). MILP grows with accumulated cuts.\nTotal: problem-dependent, but often beats pure B&B for structured problems.",
+      "ref": [
+        "Duran & Grossmann (1986). \"An outer-approximation algorithm for\n  a class of mixed-integer nonlinear programs\". Math. Prog. 36:307-339.",
+        "Fletcher & Leyffer (1994). \"Solving mixed integer nonlinear programs\n  by outer approximation\". Math. Prog. 66:327-349.",
+        "Quesada & Grossmann (1992). \"An LP/NLP based branch and bound\n  algorithm for convex MINLP\". Comp. & Chem. Eng. 16:937-947."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OACutGenerator2 for classical OA implementation",
+    "BonOaNlpOptim for NLP-based OA variant",
+    "CglCutGenerator for the cut generator interface"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "OsiXprSolverInterface",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/OsiXpr/OsiXprSolverInterface.hpp",
+  "brief": "Osi interface for FICO XPRESS-MP solver\nCopyright (C) 2000, International Business Machines Corporation.\nEPL-1.0 license.\n\nOsiXprSolverInterface wraps XPRESS-MP via the Osi abstraction. Uses XPRSprob\nhandle for XPRESS API. Implements initialSolve/resolve/branchAndBound,\nrow/column access, parameter get/set, and problem loading from MPS/LP files.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiSolverInterface for base class"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "DcoConicConGenerator",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoConicConGenerator.hpp",
+  "brief": "Wrapper for conic outer approximation cut generators\n\nDcoConicConGenerator wraps CglConicCutGenerator to generate linear\ncuts that approximate conic constraints (Outer Approximation).\n\n**Conic Cut Types (DcoConicCutType):**\n- IPM: Interior point method based\n- IPMInt: Integer-aware IPM cuts\n- OA: Standard outer approximation\n- MIR: Conic MIR cuts\n- GD1: Gradient descent cuts\n\n**OA Algorithm:**\nFor a Lorentz cone ||x|| <= t, generate linear supports:\n- At current solution point x*, generate tangent hyperplane\n- a'x <= b where (a,b) defines supporting hyperplane\n\n**generateConstraints() Flow:**\n1. Call CglConicCutGenerator::generateCuts()\n2. Convert OsiConicCuts to DcoLinearConstraint objects\n3. Add to BcpsConstraintPool",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoConGenerator.hpp for base class",
+    "DcoLinearConGenerator.hpp for MILP cuts",
+    "DcoConicConstraint.hpp for conic constraint storage"
+  ]
+}

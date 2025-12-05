@@ -1,0 +1,13 @@
+{
+  "name": "isfeas",
+  "library": "Creme",
+  "layer": "layer-4",
+  "header": "Creme/src/Base/isfeas.h",
+  "brief": "Feasibility checking for Creme LP solutions\n\nisFeas(): Verify if a point satisfies LP constraints.\nReturns number of satisfied constraints and updates satisfaction flags.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "locsrch.h for local search that uses feasibility checks",
+    "sparse.h for LP data structure"
+  ]
+}

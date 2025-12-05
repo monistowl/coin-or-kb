@@ -1,0 +1,13 @@
+{
+  "name": "CouenneSolverInterface",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/problem/CouenneSolverInterface.hpp",
+  "brief": "OsiSolverInterface wrapper with bound tightening integration\n\nTemplate class wrapping any OsiSolverInterface (typically OsiClpSolverInterface)\nwith Couenne-specific enhancements for spatial B&B.\n\n**Key features:**\n1. Applies FBBT before resolve() to tighten bounds\n2. Uses expression-based isInteger() for auxiliary variables\n3. Integrates NLP solutions into branching decisions\n\n**Bound tightening integration:**\n- tightenBounds(): Apply FBBT before LP solve\n- tightenBoundsCLP(): Clp-specific variable bound analysis\n- tightenBoundsCLP_Light(): Lightweight version for hot starts\n\n**Infeasibility tracking:**\n- knowInfeasible_: Detected during bound tightening\n- knowDualInfeasible_: Continuous relaxation is unbounded\n- isProvenPrimalInfeasible(): May detect before LP solve\n\n**Template usage:**\nCouenneSolverInterface<OsiClpSolverInterface> wraps Clp\nwith Couenne's bound tightening infrastructure.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneCutGenerator for the convexification engine",
+    "CouenneFixPoint for FBBT implementation"
+  ]
+}

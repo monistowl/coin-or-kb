@@ -1,0 +1,23 @@
+{
+  "name": "DcoBranchStrategyMaxInf",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoBranchStrategyMaxInf.hpp",
+  "brief": "Maximum infeasibility branching strategy",
+  "algorithms": [
+    {
+      "name": "Maximum Infeasibility Branching (Most Fractional)",
+      "math": "Variable selection: j* = argmax_j min(f_j, 1-f_j)\n      where f_j = x_j - \u230ax_j\u230b is fractional part.\n      Equivalent to selecting variable closest to 0.5.\n\nMaximum infeasibility branching selects the variable with the\nlargest integrality violation (closest to 0.5 fractional part).\n\n**Algorithm:**\nFor each fractional integer variable x_j with value v:\n- Compute fractionality = min(v - floor(v), ceil(v) - v)\n- Select variable with maximum fractionality\n\n**Branching Flow:**\n1. createCandBranchObjects(): Check all integer variables\n2. Create DcoBranchObject for each fractional variable\n3. betterBranchObject(): Compare by infeasibility score\n4. bestBranchObject_ set by BcpsBranchStrategy\n\n**Trade-offs:**\n- Pro: Simple, fast, no historical data needed\n- Con: Often poor branching decisions, larger trees",
+      "complexity": "O(n) per node, no storage overhead",
+      "ref": [
+        "Land, A.H. & Doig, A.G. (1960). \"An Automatic Method of\n     Solving Discrete Programming Problems\". Econometrica 28(3):497-520."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DcoBranchStrategyPseudo.hpp for pseudocost (smarter)",
+    "DcoBranchStrategyStrong.hpp for strong (best but slow)",
+    "DcoVariable.hpp::infeasibility() for violation calculation"
+  ]
+}

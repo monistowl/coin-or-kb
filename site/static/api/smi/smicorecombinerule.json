@@ -1,0 +1,14 @@
+{
+  "name": "SmiCoreCombineRule",
+  "library": "Smi",
+  "layer": "layer-3",
+  "header": "Smi/src/SmiCoreCombineRule.hpp",
+  "brief": "Rules for combining core and stochastic data in SMPS\n\nIn SMPS, stochastic data is a \"diff\" from the core problem. This file\ndefines how to apply that diff (combine core + stochastic \u2192 scenario).\n\n**SmiCoreCombineRule (Abstract Base):**\nVirtual interface for combination rules:\n- Process(d1, offset, cpv): Modify dense array d1 using sparse cpv\n- Process(cpv1, cpv2): Combine two sparse vectors\n\n**SmiCoreCombineReplace (Singleton):**\nDefault SMPS rule - stochastic values REPLACE core values:\n- scenario[i] = stochastic[i] if defined, else core[i]\n- Use case: Changing a coefficient value entirely\n\n**SmiCoreCombineAdd (Singleton):**\nAlternative rule - stochastic values ADD to core values:\n- scenario[i] = core[i] + stochastic[i]\n- Use case: Perturbations, additive uncertainty\n\n**Singleton Pattern:**\nBoth concrete rules use singleton pattern for efficiency:\n- SmiCoreCombineReplace::Instance()\n- SmiCoreCombineAdd::Instance()\n\n**Usage:**\nRules are passed to generateScenario() or readSmps() to control\nhow scenario data is constructed from core + stochastic inputs.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SmiScnModel.hpp::generateScenario() for usage",
+    "SmiSmpsIO.hpp::readStochFile() for SMPS parsing",
+    "SmiScnData.hpp::SmiNodeData for node-level application"
+  ]
+}

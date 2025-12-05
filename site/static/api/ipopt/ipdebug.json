@@ -1,0 +1,12 @@
+{
+  "name": "IpDebug",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpDebug.hpp",
+  "brief": "Debug assertion and verbose tracing macros\n\nProvides compile-time controlled debugging facilities:\n\nIPOPT_CHECKLEVEL > 0 enables:\n- DBG_ASSERT(cond): Runtime assertions\n- DBG_ASSERT_EXCEPTION(cond, type, msg): Conditional exceptions\n- DBG_DO(cmd): Execute only in debug mode\n\nIPOPT_VERBOSITY >= 1 enables tracing:\n- DBG_START_FUN/DBG_START_METH: Trace function entry/exit\n- DBG_PRINT: Printf-style debug output with indentation\n- DBG_EXEC: Conditional execution based on verbosity\n\nAll macros compile to nothing when disabled (zero overhead).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpJournalist.hpp for production-level logging"
+  ]
+}

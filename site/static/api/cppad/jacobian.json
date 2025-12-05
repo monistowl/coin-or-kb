@@ -1,0 +1,9 @@
+{
+  "name": "jacobian",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/jacobian.hpp",
+  "brief": "Core AD functionality: jacobian",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "mul",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/mul.hpp",
+  "brief": "Core AD functionality: mul",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "BonHeuristicLocalBranching",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonHeuristicLocalBranching.hpp",
+  "brief": "Local Branching heuristic for MINLP improvement",
+  "algorithms": [
+    {
+      "name": "Local Branching via Hamming Distance (Fischetti-Lodi)\n\nSearches for improved solutions in a Hamming distance neighborhood\nof the current incumbent by adding a local branching constraint.\n\n**Algorithm:**\n1. Add constraint: sum |x_i - x*_i| <= k (Hamming distance <= k)\n2. Solve restricted MINLP in this neighborhood\n3. If improved solution found, update incumbent\n4. Optionally expand neighborhood if no improvement\n\n**Local branching constraint:**\nFor binary variables: sum_{x*_i=1}(1-x_i) + sum_{x*_i=0}(x_i) <= k",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "LocalSolverBasedHeuristic for base class",
+    "TNLP2FPNLP for local branching constraint implementation"
+  ]
+}

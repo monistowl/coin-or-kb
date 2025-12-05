@@ -1,0 +1,20 @@
+{
+  "name": "BCP_problem_core",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_problem_core.hpp",
+  "brief": "Core problem formulation for BCP Branch-Cut-Price",
+  "algorithms": [
+    {
+      "name": "Core Formulation: Immutable Base with Delta Tracking\n\nDefines the permanent part of the MIP formulation that never changes.\n\n**BCP_problem_core:**\nThe immutable core problem:\n- vars: Vector of BCP_var_core* (always in formulation)\n- cuts: Vector of BCP_cut_core* (always in formulation)\n- matrix: Constraint matrix for core vars \u00d7 core cuts\n\nCreated once via BCP_tm_user::initialize_core() and shared\nacross all tree nodes.\n\n**BCP_problem_core_change:**\nTracks how core object bounds/stati differ from original:\n- _storage: Explicit, WrtCore, or WrtParent\n- var_pos, var_ch: Changed variable indices and new (lb,ub,status)\n- cut_pos, cut_ch: Changed cut indices and new (lb,ub,status)\n\n**Storage modes:**\n- Explicit: Full bounds for all core objects (root node)\n- WrtCore: Changes relative to original core (compact)\n- WrtParent: Incremental changes from parent (for tree traversal)\n\n**Key methods:**\n- ensure_explicit(): Convert delta to full representation\n- make_wrtcore_if_shorter(): Optimize storage size\n- update(): Apply incremental changes",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm_user::initialize_core() for core setup",
+    "BCP_node_change.hpp for full node deltas"
+  ]
+}

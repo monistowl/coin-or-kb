@@ -1,0 +1,9 @@
+{
+  "name": "abs_normal_fun",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/abs_normal_fun.hpp",
+  "brief": "Core AD functionality: abs normal fun",
+  "algorithms": [],
+  "methods": []
+}

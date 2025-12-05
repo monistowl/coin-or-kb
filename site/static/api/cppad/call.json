@@ -1,0 +1,9 @@
+{
+  "name": "call",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/atomic/four/call.hpp",
+  "brief": "Core AD functionality: call",
+  "algorithms": [],
+  "methods": []
+}

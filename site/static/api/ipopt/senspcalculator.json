@@ -1,0 +1,9 @@
+{
+  "name": "SensPCalculator",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensPCalculator.hpp",
+  "brief": "sIPOPT perturbation calculator interface\n\nSensPCalculator: abstract interface for computing perturbations.\nCalculates right-hand sides for sensitivity linear systems based\non how parameters affect KKT conditions.",
+  "algorithms": [],
+  "methods": []
+}

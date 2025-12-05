@@ -1,0 +1,24 @@
+{
+  "name": "CglRedSplit2",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglRedSplit2/CglRedSplit2.hpp",
+  "brief": "Enhanced Reduce-and-Split cuts with multiple strategies",
+  "algorithms": [
+    {
+      "name": "Enhanced Reduce-and-Split with Row Selection Strategies:\n  Generates strong GMI cuts via systematic row combination:\n  1. Select columns for reduction (fill_workNonBasicTab):\n     - Strategy 1: All continuous nonbasics\n     - Strategy 2: Only those with positive reduced cost\n  2. Select rows to combine (get_list_rows_reduction):\n     - BRS1: Fewest nonzeros overlapping with target row\n     - BRS2: Greedy nonzero coverage minimization\n     - BRS3: Maximum |cos(\u03b8)| angle alignment (most effective)\n  3. Solve small linear systems to find optimal integer multipliers\n  4. Apply reduction, generate GMI cut from combined row",
+      "math": "Row selection by cosine (BRS3):\n  cos(\u03b8_{ij}) = (a^i \u00b7 a^j) / (||a^i|| \u00b7 ||a^j||)\n  Rows with |cos(\u03b8)| \u2248 1 are most effective for reduction.\n  L&P tilting: \u03bb' = \u03bb + \u03a0\u00b7\u03bc where \u03a0 = reduction multipliers",
+      "complexity": "O(mTab\u00b2 \u00b7 max(mTab, nTab)) per row selection strategy.\n  Multiple strategies run sequentially: total O(k \u00b7 mTab\u00b2 \u00b7 nTab)\n  where k = number of strategies enabled. Time limit available.",
+      "ref": [
+        "Cornu\u00e9jols & Nannicini (2011). \"Practical strategies for generating\n     rank-1 split cuts\". Math. Programming Computation 3:281-318.",
+        "Balas, Cornu\u00e9jols, Kis, Nannicini (2013). \"Combining Lift-and-Project\n     and Reduce-and-Split\". INFORMS J. Computing 25:475-487.\n\nEnhanced version of CglRedSplit with:\n- Multiple column selection strategies (fill_workNonBasicTab)\n- Multiple row selection strategies (get_list_rows_reduction)\n- Integration with Lift-and-Project (tiltLandPcut)\n- Time limits and more parameters\n\nRow selection strategies:\n- sort_rows_by_nonzeroes: BRS1 - fewest nonzeros first\n- sort_rows_by_nonzeroes_greedy: BRS2 - greedy nonzero selection\n- sort_rows_by_cosine: BRS3 - angle-based (most effective)\n\nL&P integration:\n- generateMultipliers(): Get row multipliers for L&P\n- tiltLandPcut(): Improve L&P cut via reduction\n\nDoes NOT generate same cuts as CglRedSplit - use both for best results."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglRedSplit2Param for extensive parameter control",
+    "CglRedSplit for original implementation",
+    "CglLandP for combined L&P + R&S cuts"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "IpGenTMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/TMatrices/IpGenTMatrix.hpp",
+  "brief": "General sparse matrix in triplet (COO) format\n\nGenTMatrix stores a general (non-symmetric) sparse matrix using\ntriplet/coordinate format: three arrays for row indices, column\nindices, and values.",
+  "algorithms": [
+    {
+      "name": "Triplet Matrix-Vector Multiplication:\n  y \u2190 \u03b1Ax + \u03b2y computed as:\n  1. If \u03b2 \u2260 1: y \u2190 \u03b2\u00b7y (scale).\n  2. For each triplet (i, j, v): y[i] += \u03b1\u00b7v\u00b7x[j].\n  Transpose: swap roles of i and j.\n  Duplicate entries: values are implicitly summed.",
+      "math": "COO sparse format properties:\n  Storage: O(3\u00b7nnz) (iRow, jCol, values arrays).\n  No ordering requirements (unlike CSR/CSC).\n  1-based indexing: iRow[k], jCol[k] \u2208 {1, ..., n} (HSL convention).\n  Duplicates allowed: A[i,j] = \u03a3{v : (i,j,v) in triplets}.",
+      "complexity": "MultVector: O(nnz) for nnz nonzeros.\n  SetValues: O(nnz) copy from user array.\n  Structure fixed at creation; only values change.\n\nUsed for Jacobians (J_c, J_d) in Ipopt's internal representation.\nStructure (sparsity pattern) is fixed; values updated per iteration.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpSymTMatrix.hpp for symmetric triplet storage",
+    "IpTripletHelper.hpp for triplet extraction utilities"
+  ]
+}

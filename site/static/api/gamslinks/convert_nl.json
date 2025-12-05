@@ -1,0 +1,9 @@
+{
+  "name": "convert_nl",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/amplsolver/convert_nl.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

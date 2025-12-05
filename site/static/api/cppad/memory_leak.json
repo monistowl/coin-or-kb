@@ -1,0 +1,9 @@
+{
+  "name": "memory_leak",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/memory_leak.hpp",
+  "brief": "CppAD utility: memory leak",
+  "algorithms": [],
+  "methods": []
+}

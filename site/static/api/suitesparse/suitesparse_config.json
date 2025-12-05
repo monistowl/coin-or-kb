@@ -1,0 +1,20 @@
+{
+  "name": "SuiteSparse_config",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SuiteSparse_config/SuiteSparse_config.h",
+  "brief": "Central configuration and utility header for all SuiteSparse libraries\n\nThis file provides the shared foundation for the entire SuiteSparse\ncollection of sparse matrix algorithms. Key features include:\n\n- Compiler and platform detection (GCC, Clang, MSVC, ICC, NVCC)\n- Configurable memory management with replaceable malloc/calloc/realloc/free\n- Portable BLAS/LAPACK interface handling Fortran name mangling and integer sizes\n- OpenMP detection and thread-safe timing utilities\n- Complex number type definitions for C/C++ interoperability\n\n@note Applications can customize memory allocation by calling the\n      SuiteSparse_config_*_set functions before using any SuiteSparse library.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "amd.h, colamd.h, cholmod.h, umfpack.h, klu.h for library-specific headers",
+    "SuiteSparse_finish()",
+    "SuiteSparse_start()",
+    "SuiteSparse_calloc(), SuiteSparse_free()",
+    "SuiteSparse_malloc(), SuiteSparse_free()",
+    "SuiteSparse_malloc(), SuiteSparse_free()",
+    "SuiteSparse_malloc(), SuiteSparse_calloc()",
+    "SuiteSparse_toc(), SuiteSparse_time()",
+    "SuiteSparse_tic()"
+  ]
+}

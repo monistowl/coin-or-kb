@@ -1,0 +1,13 @@
+{
+  "name": "HighsParallel",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/parallel/HighsParallel.h",
+  "brief": "High-level parallel execution API with spawn/sync pattern\n\nTask-based parallelism modeled on Intel TBB / Cilk Plus semantics.\n\n**Initialization:**\n- initialize_scheduler(): Set up thread pool\n  - Default: hardware_concurrency/2 threads\n  - HIGHS_NO_DEFAULT_THREADS: Force single-threaded\n\n**Spawn/Sync Pattern:**\n- spawn(f): Push task to local deque, may be stolen\n- sync(): Wait for most recent spawn to complete\n- Child stealing: spawned tasks run depth-first or stolen\n\n**TaskGroup:**\n- RAII wrapper for spawn/sync blocks\n- taskWait(): Wait for all spawned tasks\n- cancel(): Mark pending tasks as cancelled\n- Destructor ensures cleanup\n\n**Parallel Loops:**\n- for_each(start, end, f, grainSize): Recursive binary splitting\n  - Splits until range <= grainSize\n  - Spawns right half, executes left half\n  - Task parallelism with load balancing\n\n**Thread Info:**\n- num_threads(): Total worker count\n- thread_num(): Current worker ID",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "parallel/HighsTaskExecutor.h for executor implementation",
+    "parallel/HighsSplitDeque.h for work-stealing deque"
+  ]
+}

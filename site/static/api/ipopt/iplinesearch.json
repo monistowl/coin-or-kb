@@ -1,0 +1,21 @@
+{
+  "name": "IpLineSearch",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpLineSearch.hpp",
+  "brief": "Strategy interface for globalization via line search\n\nLineSearch is the abstract base for all line search strategies\nin Ipopt's globalization framework. Given a search direction\n(from IpData.delta()), finds an acceptable trial point.",
+  "algorithms": [
+    {
+      "name": "Backtracking Line Search with Globalization:\n  Given direction \u0394w from Newton step:\n  1. Initialize \u03b1 = 1 (full Newton step).\n  2. Compute trial point: w_trial = w + \u03b1\u00b7\u0394w.\n  3. Apply fraction-to-boundary: \u03b1 \u2190 min(\u03b1, \u03c4\u00b7\u03b1_max) to stay positive.\n  4. Check acceptance criterion (filter or merit function).\n  5. If rejected: \u03b1 \u2190 \u03c1\u00b7\u03b1 (backtrack, \u03c1 \u2248 0.5) and goto 3.\n  6. If \u03b1 < \u03b1_min: activate fallback (restoration phase).",
+      "math": "Filter-based acceptance (W\u00e4chter-Biegler):\n  Accept w_trial if it improves either objective \u03c6(w) OR constraint\n  violation \u03b8(w) = ||c(x)||, and is not dominated by filter entries.\n  Filter F = {(\u03b8_i, \u03c6_i)}: reject if \u03b8(w_trial) \u2265 \u03b8_i AND \u03c6(w_trial) \u2265 \u03c6_i.\n  Switching condition: use Armijo on \u03c6 when \u03b8 is small enough.",
+      "complexity": "O(n_backtrack \u00b7 eval_cost) where n_backtrack typically O(1)-O(10).\n  Each trial requires function/constraint evaluation.\n  Filter operations O(|F|) comparisons, |F| typically small.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpBacktrackingLineSearch.hpp for the main implementation",
+    "IpFilterLSAcceptor.hpp for filter-based acceptance",
+    "IpRestoPhase.hpp for the fallback restoration mechanism"
+  ]
+}

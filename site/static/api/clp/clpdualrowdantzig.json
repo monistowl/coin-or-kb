@@ -1,0 +1,24 @@
+{
+  "name": "ClpDualRowDantzig",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpDualRowDantzig.hpp",
+  "brief": "Dantzig's rule for dual simplex pivot selection\n\nImplements the simplest pivot row selection: choose the basic variable\nwith the largest primal infeasibility. Simple and fast per iteration,\nbut may require many more iterations than steepest edge on degenerate\nor difficult problems.\n\nThis is Dantzig's original 1947 rule applied to dual simplex.\nUse ClpDualRowSteepest for better performance on most problems.",
+  "algorithms": [
+    {
+      "name": "Dantzig's Rule (Dual Simplex Leaving Variable Selection):\nScans all basic variables and selects the one most infeasible w.r.t. bounds.\nFor variable x_B[i] with bounds [l_i, u_i]:\n- If x_B[i] < l_i: infeasibility = l_i - x_B[i] (want to increase)\n- If x_B[i] > u_i: infeasibility = x_B[i] - u_i (want to decrease)\nChoose the row with maximum infeasibility magnitude.\nNo weight storage needed - stateless selection on current solution.",
+      "math": "In dual simplex, select leaving row i* = argmax{|x_B[i] - bound_i|}\nover all basic variables violating their bounds.\nThe direction of movement (toward lower or upper bound) determines\nwhich reduced costs are candidates for the entering variable.\nIf all basic variables feasible, current solution is optimal.",
+      "complexity": "O(m) per iteration to scan all basic variables.\nSame worst-case issues as primal Dantzig (exponential on Klee-Minty\nvariants). Dual steepest edge typically 2-3x fewer iterations.",
+      "ref": [
+        "Lemke, C.E. (1954). \"The dual method of solving the linear programming\n  problem\". Naval Research Logistics Quarterly. [Early dual simplex]",
+        "Dantzig, G.B. (1963). \"Linear Programming and Extensions\".\n  Princeton University Press. [Comprehensive treatment]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpDualRowPivot for the base interface",
+    "ClpDualRowSteepest for recommended steepest edge variant",
+    "ClpSimplexDual for the dual simplex algorithm"
+  ]
+}

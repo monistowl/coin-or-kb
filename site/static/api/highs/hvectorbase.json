@@ -1,0 +1,13 @@
+{
+  "name": "HVectorBase",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HVectorBase.h",
+  "brief": "Template sparse vector for simplex operations\n\nHybrid-storage vector supporting both sparse and dense access patterns.\n\n**Storage Model:**\n- array[]: Full-length value storage (dense access)\n- index[]: Packed nonzero indices (sparse iteration)\n- count: Number of nonzeros\n- Enables O(nnz) operations while allowing O(1) element access\n\n**Core Operations:**\n- setup(): Initialize to dimension\n- clear(): Reset all values and count\n- saxpy(): y += alpha * x (sparse BLAS-1)\n- pack(): Compress to packIndex/packValue arrays\n- reIndex(): Rebuild index[] from array[] (after cancellation)\n- norm2(): Squared 2-norm computation\n\n**Packing System:**\n- packFlag: Enable/disable packing\n- packIndex/packValue: Compressed representation\n- tight(): Zero small values exceeding kHighsTiny\n\n**PAMI Support:**\n- next: Link pointer for parallel minor iteration chains\n- cwork/iwork: Scratch buffers for UPDATE operations\n- synthetic_tick: Profiling counter for operation costs",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "simplex/HEkkDual.h for PAMI parallelization",
+    "util/HFactor.h for BTRAN/FTRAN using HVector"
+  ]
+}

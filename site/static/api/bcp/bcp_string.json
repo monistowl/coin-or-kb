@@ -1,0 +1,16 @@
+{
+  "name": "BCP_string",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_string.hpp",
+  "brief": "Simple string class for BCP",
+  "algorithms": [
+    {
+      "name": "BCP_string: Safe Fixed-Length String\n\nMinimal string class avoiding std::string ABI issues across\ncompilers and avoiding C-string buffer overflow risks.\n\n**Features:**\n- Owns memory (RAII cleanup)\n- Copy construction/assignment\n- C-string interoperability via c_str()\n- Equality comparison operators\n\nUsed for executable names, machine names, and log file paths\nin message passing configuration.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

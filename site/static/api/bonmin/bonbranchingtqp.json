@@ -1,0 +1,20 @@
+{
+  "name": "BonBranchingTQP",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonBranchingTQP.hpp",
+  "brief": "QP adapter for strong branching in MINLP\nCopyright (C) International Business Machines Corporation and\nCarnegie Mellon University 2006, 2008. All Rights Reserved.\nThis code is published under the Eclipse Public License.",
+  "algorithms": [
+    {
+      "name": "QP-Based Strong Branching for MINLP:\n  Accelerates strong branching by solving QP approximations:\n  1. **Reference point:** Store NLP solution x* with gradient g, Hessian H\n  2. **QP formulation:** For displacement d = x - x*:\n     min  g'd + \u00bdd'Hd  (quadratic Taylor approximation)\n     s.t. J\u00b7d \u2264 b - g(x*)  (linearized constraints at x*)\n  3. **Strong branching:** For each candidate variable x_i:\n     - Fix x_i at floor/ceil bounds\n     - Solve QP (much faster than full NLP)\n     - Estimate objective degradation\n  4. **Selection:** Branch on variable with best degradation estimate",
+      "math": "Taylor approximation:\n  f(x) \u2248 f(x*) + \u2207f(x*)'(x-x*) + \u00bd(x-x*)'\u2207\u00b2f(x*)(x-x*)\n  Constraints: g(x) \u2248 g(x*) + J(x*)(x-x*) \u2264 0\n  Variables d represent displacement: d = x - x*",
+      "complexity": "O(n\u00b3) for QP solve vs O(NLP iterations \u00d7 n\u00b3) for full NLP.\n  Typically 10-100\u00d7 faster per strong branching evaluation.\n  Accuracy degrades far from x*.\n\nAuthors: Andreas Waechter, IBM (derived from BonTMINLP2TNLP.hpp)\nDate: December 22, 2006",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "TMINLP2TNLP for the wrapped MINLP interface",
+    "BqpdSolver for QP solver used with this adapter"
+  ]
+}

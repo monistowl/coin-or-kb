@@ -1,0 +1,20 @@
+{
+  "name": "BCP_enum_branch",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_enum_branch.hpp",
+  "brief": "Branching-related enumerations for BCP",
+  "algorithms": [
+    {
+      "name": "Branching Enums: Child Selection and Diving Control\n\nEnumerations controlling branching decisions and child management:\n\n**BCP_child_preference:**\nChild selection criteria for diving: LowBound, HighBound,\nMoreFractional, LessFractional, PreferDiveDown, PreferDiveUp.\n\n**BCP_branching_result:**\nOutcomes: FathomedThisNode, DivedIntoNewNode, ContinueThisNode.\n\n**BCP_branching_decision:**\nUser decisions: DoNotBranch_Fathomed, DoNotBranch, DoBranch.\n\n**BCP_branching_object_relation:**\nStrong branching comparison: OldPresolvedIsBetter,\nNewPresolvedIsBetter, NewPresolvedIsBetter_BranchOnIt.\n\n**BCP_branching_object_comparison:**\nComparison criteria using objective bounds and averages.\n\n**BCP_child_action:**\nPer-child: FathomChild, ReturnChild, KeepChild.\n\n**BCP_diving_status:**\nDiving control: DoNotDive, DoDive, TestBeforeDive.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_lp_user.hpp for branching hooks",
+    "BCP_lp_branch.hpp for branching objects"
+  ]
+}

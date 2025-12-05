@@ -1,0 +1,13 @@
+{
+  "name": "HighsIntegers",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsIntegers.h",
+  "brief": "Integer arithmetic utilities for cut generation\n\nNumber-theoretic functions critical for MIP cut generation.\n\n**Basic Operations:**\n- mod(): Proper modulo (always non-negative result)\n- gcd(): Euclidean algorithm for GCD\n- nearestInteger(): Round to nearest int64\n- isIntegral(): Test if double is within eps of integer\n\n**Modular Arithmetic:**\n- modularInverse(): Extended Euclidean algorithm for a^{-1} mod m\n  - Used in mod-k cut generation (GF(k) arithmetic)\n\n**Rational Approximation:**\n- denominator(): Continued fraction algorithm to find\n  smallest denominator d such that |x - p/d| < eps\n  - Used for detecting integer structure in coefficients\n\n**Integral Scaling:**\n- integralScale(): Find multiplier to make all values integral\n  - Combines continued fractions with GCD reduction\n  - Used for strengthening MIR/GMI cuts\n  - Returns 0 if no small denominator exists\n\n**Usage in HiGHS:**\n- HighsGFkSolve: Modular inverse for GF(k) systems\n- HighsTableauSeparator: Finding integral structure in cuts\n- Cut coefficient strengthening",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsGFkSolve.h for GF(k) cut generation",
+    "mip/HighsTableauSeparator.h for Gomory cuts"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "temp_file",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/temp_file.hpp",
+  "brief": "Internal implementation: temp_file",
+  "algorithms": [],
+  "methods": []
+}

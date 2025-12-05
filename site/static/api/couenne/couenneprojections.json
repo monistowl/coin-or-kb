@@ -1,0 +1,19 @@
+{
+  "name": "CouenneProjections",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneProjections.hpp",
+  "brief": "Point-to-segment projection utilities\n\nGeometric utilities for projecting points onto line segments,\nused in convexification cut generation and branching point selection.",
+  "algorithms": [
+    {
+      "name": "Point-to-Segment Projection:\n  Projects point p = (x\u2080,y\u2080) onto line segment S:\n  1. Compute foot of perpendicular to line: ax + by + c = 0\n     q = p - [(ap + c)/(a\u00b2 + b\u00b2)]\u00b7(a,b)\u1d40 (orthogonal projection)\n  2. If q_x \u2208 [lb, ub]: projection is q (on segment interior)\n  3. Else: projection is nearest endpoint (lb,y(lb)) or (ub,y(ub))\n  4. Return Euclidean distance ||p - projection||",
+      "math": "Projection formula:\n  Line L: ax + by + c = 0, point p = (x\u2080,y\u2080)\n  Distance to line: d = |ax\u2080 + by\u2080 + c|/\u221a(a\u00b2 + b\u00b2)\n  Projection: (xp,yp) = (x\u2080,y\u2080) - d\u00b7(a,b)/||(a,b)||\n  Segment clipping: xp = max(lb, min(ub, xp))",
+      "complexity": "O(1) per projection - constant time operations\n  Used extensively in convexification and branching heuristics\n\n**Usage in branching:**\nHelps compute optimal branching points by finding closest\nfeasible points to current LP solution.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneBranchingObject for branching point selection"
+  ]
+}

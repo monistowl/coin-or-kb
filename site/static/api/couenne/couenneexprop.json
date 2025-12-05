@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprOp",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneExprOp.hpp",
+  "brief": "Base class for n-ary operators in expression DAG\n\nBase for all non-leaf operators (sum, mul, pow, div, etc.).\nProvides argument list management and common functionality.\n\n**Key attributes:**\n- arglist_: Array of pointers to child expressions\n- nargs_: Number of arguments\n\n**Derived operator classes:**\n- exprSum, exprSub: Addition and subtraction\n- exprMul, exprDiv: Multiplication and division\n- exprPow: Power function x^k\n- exprLog, exprExp: Logarithm and exponential\n- exprSin, exprCos: Trigonometric functions\n- exprMin, exprMax: Min/max functions\n- exprAbs: Absolute value\n\n**Methods:**\n- standardize(): Replace with auxiliary variable w = f(x)\n- clonearglist(): Deep copy argument list for cloning\n- rank(): Maximum rank of arguments + 1",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprUnary for unary operators (single argument)",
+    "CouenneProblem for expression tree container"
+  ]
+}

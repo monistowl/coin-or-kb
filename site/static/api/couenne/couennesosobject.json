@@ -1,0 +1,22 @@
+{
+  "name": "CouenneSOSObject",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneSOSObject.hpp",
+  "brief": "Special Ordered Set (SOS) branching for Couenne",
+  "algorithms": [
+    {
+      "name": "Special Ordered Set Branching with Bound Tightening\n\nExtends OsiSOS to include Couenne-specific functionality like\nbound tightening and convexification cut generation at branching.\n\n**SOS Types:**\n- SOS Type 1: At most one variable can be nonzero\n- SOS Type 2: At most two adjacent variables can be nonzero\n\n**CouenneSOSObject:**\nWraps OsiSOS with:\n- problem_: Link to CouenneProblem for bound tightening\n- reference_: Associated auxiliary variable\n- doFBBT_: Enable FBBT at branching\n- doConvCuts_: Add convexification cuts at branching\n\n**CouenneSOSBranchingObject:**\nExecutes the SOS branching, dividing variables into sets\nwhere the SOS constraint can be separately enforced.\n\n**TODO in code:**\nNotes extension to handle \u03a3x\u1d62 \u2264 k constraints with small k\nusing SOS-like branching instead of individual variable branching.",
+      "math": "SOS2: at most 2 adjacent of {x\u2081,...,x\u2099} nonzero",
+      "complexity": "O(n log n) for initial ordering; O(log n) per branch",
+      "ref": [
+        "Beale & Tomlin, \"Special Facilities in a General Mathematical\n     Programming System for Non-convex Problems Using Ordered Sets\n     of Variables\", 1970"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiSOS base class",
+    "CbcSOS for CBC's SOS implementation"
+  ]
+}

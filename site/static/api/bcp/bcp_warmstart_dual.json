@@ -1,0 +1,20 @@
+{
+  "name": "BCP_warmstart_dual",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_warmstart_dual.hpp",
+  "brief": "Dual-only warm start for BCP",
+  "algorithms": [
+    {
+      "name": "Dual Warmstart: LP Restart from Dual Vector\n\nBCP_warmstart_dual stores just dual (row) values for LP warmstart.\nUses BCP_vec_change<double> for delta encoding (WrtParent/Explicit).\n\n**Operations:**\n- convert_to_CoinWarmStart(): Creates CoinWarmStartDual for LP solver\n- as_change(): Computes delta vs. parent (for tree storage)\n- update(): Applies delta to reconstruct full warmstart\n\n**Use case:** Problems where primal solution changes significantly\nbut dual solution is stable (constraint-focused problems).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_warmstart_basis.hpp for full basis warmstart",
+    "BCP_warmstart_primaldual.hpp for primal+dual warmstart"
+  ]
+}

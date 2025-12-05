@@ -1,0 +1,9 @@
+{
+  "name": "csum_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/csum_op.hpp",
+  "brief": "Internal implementation: csum_op",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,15 @@
+{
+  "name": "SmiScnModel",
+  "library": "Smi",
+  "layer": "layer-3",
+  "header": "Smi/src/SmiScnModel.hpp",
+  "brief": "Main scenario model class for stochastic linear/quadratic programming\n\nSmiScnModel is the central class for representing and solving scenario-based\nstochastic programs. It builds deterministic equivalent (DE) formulations\nfrom scenario trees.\n\n**Typical Usage:**\n```cpp\nSmiScnModel smi;\nsmi.readSmps(\"problem\");              // Read SMPS files\nsmi.setOsiSolverHandle(new OsiClpSolverInterface());\nOsiSolverInterface* osi = smi.loadOsiSolverData();  // Build DE\nosi->initialSolve();                  // Solve extensive form\n```\n\n**Key Methods:**\n- readSmps(): Parse SMPS files (core + time + stoch)\n- generateScenario(): Add scenario with probability and branching info\n- loadOsiSolverData(): Build deterministic equivalent LP\n- getColSolution(scenario): Extract solution for specific scenario\n\n**Solution Values:**\n- solveWS(): Wait-and-See solution (perfect information)\n- solveEV(): Expected Value solution (average scenario)\n- solveEEV(): Expected result of using EV solution\n\n**SmiScnNode Class:**\nRepresents a node in the scenario tree with:\n- Stage index, probability, parent link\n- Column/row offsets into DE matrix\n- Link to SmiNodeData for LP data",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SmiScenarioTree.hpp for tree data structure",
+    "SmiScnData.hpp for core/node data classes",
+    "SmiSmpsIO.hpp for SMPS file I/O",
+    "SmiCoreCombineRule.hpp for replace/add rules"
+  ]
+}

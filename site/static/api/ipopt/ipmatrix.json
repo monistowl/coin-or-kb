@@ -1,0 +1,20 @@
+{
+  "name": "IpMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpMatrix.hpp",
+  "brief": "Abstract base class for all (unsymmetric) matrix types\n\nMatrix provides the abstraction for general (non-symmetric) matrices.\nPrimary operations: MultVector (y = \u03b1*A*x + \u03b2*y) and TransMultVector.",
+  "algorithms": [
+    {
+      "name": "Template Method + Abstract Factory Pattern:\n  - MultVector/TransMultVector delegate to *_Impl for type-specific code\n  - MatrixSpace factories create compatible matrices of same structure\n  - Enables uniform interface across dense, sparse, structured matrices",
+      "math": "BLAS Level-2 style operations on A \u2208 \u211d^{m\u00d7n}:\n  - MultVector: y \u2190 \u03b1Ax + \u03b2y  (DGEMV with no transpose)\n  - TransMultVector: y \u2190 \u03b1A^T x + \u03b2y  (DGEMV with transpose)\n  - AddMSinvZ: X \u2190 X + \u03b1(A\u00b7S\u207b\u00b9\u00b7Z)  (specialized for ExpansionMatrix)\n  Row/column norms for scaling: ||A_{i,:}||_\u221e and ||A_{:,j}||_\u221e\n\nKey design features:\n- MatrixSpace factory for creating compatible matrices\n- Template Method pattern: override *_Impl methods\n- Dimension information via OwnerSpace()\n- Optional methods: ComputeRowAMax, ComputeColAMax, HasValidNumbers\n\nImplementations include:\n- Dense: DenseGenMatrix\n- Structured: CompoundMatrix, SumMatrix, ScaledMatrix\n- Special: ExpansionMatrix, TransposeMatrix, DiagMatrix",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpSymMatrix.hpp for symmetric matrices",
+    "IpVector.hpp for vector abstraction"
+  ]
+}

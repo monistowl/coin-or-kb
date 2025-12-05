@@ -1,0 +1,13 @@
+{
+  "name": "BonCbcNode",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/BonCbcNode.hpp",
+  "brief": "Extended node information classes for MINLP branch-and-bound\n\nExtends Cbc's node information to track MINLP-specific data like sequences\nof infeasible or unsolved subproblems along a branch.\n\n**Classes:**\n- BonCbcFullNodeInfo: Complete node recreation from scratch\n- BonCbcPartialNodeInfo: Incremental node changes from parent\n\n**MINLP-specific tracking:**\n- sequenceOfInfeasiblesSize_: Consecutive infeasible NLP subproblems\n- sequenceOfUnsolvedSize_: Consecutive NLP solver failures\n\nThese counts help detect problematic branches where NLP solves consistently\nfail, enabling early pruning heuristics to avoid wasted computation.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CbcFullNodeInfo for base class",
+    "CbcPartialNodeInfo for base class"
+  ]
+}

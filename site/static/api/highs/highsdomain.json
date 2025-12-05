@@ -1,0 +1,22 @@
+{
+  "name": "HighsDomain",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsDomain.h",
+  "brief": "Bound tracking, propagation, and conflict analysis for MIP\n\n**HighsDomain Class:**\nManages variable bounds during MIP branch-and-bound with:\n- col_lower_[], col_upper_[]: Current variable bounds\n- domchgstack_[]: Stack of bound changes (for backtracking)\n- domchgreason_[]: Reason for each bound change (branching, row, clique)\n\n**Bound Propagation:**\n- propagate(): Deduce implied bounds from constraints\n- activitymin_[]/activitymax_[]: Row activity bounds for propagation\n- markPropagate(): Queue row for propagation\n- ObjectivePropagation: Deduce bounds from objective cutoff\n\n**Reason Tracking:**\nEach bound change records its cause:\n- kBranching: B&B branching decision\n- kModelRowUpper/Lower: Implied by constraint\n- kCliqueTable: Clique conflict\n- kObjective: Objective bound\n- cut(pool,index): Cut from cut pool\n\n**Conflict Analysis (ConflictSet):**\nLearns from infeasibility:\n- conflictAnalysis(): Build conflict clause from infeasibility proof\n- reasonSideFrontier: Domain changes causing infeasibility\n- Generates learned conflicts for HighsConflictPool\n\n**Cut Pool Integration (CutpoolPropagation):**\n- Tracks activity of cuts for cut-based propagation\n- Updates when bounds change\n\n**Backtracking:**\n- backtrack(): Undo bound changes\n- backtrackToGlobal(): Reset to root node bounds\n- branchPos_[]: Positions of branching decisions in stack",
+  "algorithms": [
+    {
+      "name": "Objective Propagation:\n  Given incumbent z* and objective c'x:\n  For each variable, derive bound from c'x < z* constraint.\n  Particularly effective when objective has large coefficients.",
+      "math": "",
+      "complexity": "propagate(): O(nnz \u00d7 propagation_rounds) amortized\n  conflictAnalysis(): O(conflict_clause_length \u00d7 reason_chain_depth)\n  backtrack(): O(number_of_bound_changes_to_undo)",
+      "ref": [
+        "Achterberg, T. (2007). \"Conflict analysis in mixed integer\n  programming\". Discrete Optimization 4:4-20."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "mip/HighsDomainChange.h for bound change struct",
+    "mip/HighsConflictPool.h for learned conflicts"
+  ]
+}

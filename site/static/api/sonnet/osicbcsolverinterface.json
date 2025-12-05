@@ -1,0 +1,13 @@
+{
+  "name": "OsiCbcSolverInterface",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/OsiCbcSolverInterface.h",
+  "brief": ".NET wrapper for OsiCbcSolverInterface (CBC via OSI)\n\nC++/CLI wrapper exposing CBC MIP solver through OSI interface.\nProvides access to CbcModel for node count, strategy, and solution.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CbcModel.h for CBC model wrapper",
+    "OsiClpSolverInterface.h for CLP solver wrapper"
+  ]
+}

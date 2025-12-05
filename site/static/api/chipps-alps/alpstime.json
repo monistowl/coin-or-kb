@@ -1,0 +1,13 @@
+{
+  "name": "AlpsTime",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsTime.h",
+  "brief": "Timer utilities for ALPS search (CPU and wall clock)\n\nProvides timing functions and AlpsTimer class for measuring execution time.\n\n**Free functions:**\n- AlpsCpuTime(): Alias for CoinCpuTime()\n- AlpsGetTimeOfDay(): Wall clock (MPI_Wtime if MPI, else CoinGetTimeOfDay)\n\n**AlpsTimer class:**\n- start()/stop(): Control timing interval\n- getCpuTime()/getWallClockTime(): Get elapsed time\n- getTime(): Returns CPU or wall based on clockType_\n- reachCpuLimit()/reachWallLimit(): Check time limits\n- setLimit(): Set time limit for checks\n\n**Clock types (AlpsClockType):**\n- AlpsClockTypeCpu: Process CPU time\n- AlpsClockTypeWallClock: Real elapsed time (default)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsParams::timeLimit for search time limit",
+    "AlpsKnowledgeBroker timers for search statistics"
+  ]
+}

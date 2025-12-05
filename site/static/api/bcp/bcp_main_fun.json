@@ -1,0 +1,20 @@
+{
+  "name": "BCP_main_fun",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_main_fun.hpp",
+  "brief": "Process entry point functions for BCP",
+  "algorithms": [
+    {
+      "name": "Process Entry Points: Main Functions per Process Type\n\nEntry point functions for each BCP process type. Called by message\nenvironment when spawning workers:\n\n- BCP_tm_main(): Tree Manager (coordinator, command line parsing)\n- BCP_tmstorage_main(): Tree Storage (external node storage)\n- BCP_lp_main(): LP worker (relaxation solving)\n- BCP_cg_main(): Cut Generator (separation)\n- BCP_vg_main(): Variable Generator (pricing)\n\n**Parameters:**\n- msg_env: Message passing environment\n- user_init: User's initialization object\n- my_id: Process identifier\n- parent: Parent process ID\n- ub: Initial upper bound\n\n**Return:**\nBCP_process_t indicating process type or termination reason.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_USER.hpp for USER_initialize",
+    "bcp_main() for top-level entry"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "OsiCollections",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiCollections.hpp",
+  "brief": "STL container typedefs for Osi cut and data collections\nCopyright (C) 2000, International Business Machines Corporation.\nEPL-1.0 license.\n\nStandard typedefs: OsiVectorInt, OsiVectorDouble, OsiVectorColCutPtr,\nOsiVectorRowCutPtr, OsiVectorCutPtr. Provides cleaner syntax for\nfrequently-used vector types throughout Osi code.",
+  "algorithms": [],
+  "methods": []
+}

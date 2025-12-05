@@ -1,0 +1,12 @@
+{
+  "name": "CoinModelUseful",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinModelUseful.hpp",
+  "brief": "Helper classes for CoinModel (Link, LinkedList, Hash)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinModel for the main model building interface"
+  ]
+}

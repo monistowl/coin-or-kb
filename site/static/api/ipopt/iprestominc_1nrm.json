@@ -1,0 +1,23 @@
+{
+  "name": "IpRestoMinC_1Nrm",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpRestoMinC_1Nrm.hpp",
+  "brief": "Restoration phase minimizing 1-norm of constraint violation\n\nMinC_1NrmRestorationPhase is the main restoration phase implementation.\nWhen the line search cannot make progress, it minimizes constraint\nviolation to find a feasible point from which optimization can continue.\n\nRestoration NLP formulation:\n  min  \u03c1 * ||[p_c; n_c; p_d; n_d]||_1 + (\u03b7/2) * ||D_r(x - x_ref)||_2^2\n  s.t. c(x) - p_c + n_c = 0\n       d_L <= d(x) - p_d + n_d <= d_U\n       x_L <= x <= x_U\n       p_c, n_c, p_d, n_d >= 0\n\nWhere:\n- \u03c1: Penalty on infeasibility (resto_penalty_parameter)\n- \u03b7: Proximity weight (resto_proximity_weight * sqrt(mu))\n- D_r: Diagonal scaling based on reference point\n- x_ref: Starting point for restoration\n\nKey behaviors:\n- Uses nested IpoptAlgorithm to solve restoration NLP\n- eq_mult_calculator_ reinitializes multipliers after restoration\n- bound_mult_reset_threshold_: Limits post-restoration bound multipliers\n- count_restorations_: Tracks restoration phase calls",
+  "algorithms": [
+    {
+      "name": "Restoration Phase (\u2113\u2081 Feasibility Minimization):\nSolve modified NLP to find feasible point when main algorithm stuck:\n1. Formulate restoration NLP (RestoIpoptNLP):\n   - Add slack pairs (p,n) to each constraint: c(x) = p - n\n   - Minimize \u03c1\u00b7(\u03a3p + \u03a3n) (penalized infeasibility)\n   - Add proximity term \u03b7\u00b7||D(x - x_ref)||\u00b2 (stay near reference)\n2. Run nested Ipopt on restoration NLP:\n   - Uses its own filter, barrier parameter, line search\n   - Converges when infeasibility sufficiently reduced\n3. Post-processing:\n   - Reset constraint multipliers via least-squares (eq_mult_calculator_)\n   - Cap bound multipliers at threshold to prevent blow-up\n   - Return to main algorithm with new feasible iterate",
+      "math": "Restoration NLP (smooth \u2113\u2081 via slack decomposition):\n  min_{x,p,n} \u03c1\u00b7e\u1d40(p+n) + (\u03b6/2)\u00b7||D_R\u00b7(x - x_R)||\u00b2\n  s.t. c(x) - p + n = 0\n       x_L \u2264 x \u2264 x_U\n       p \u2265 0, n \u2265 0\n\nwhere D_R = diag(min(1, 1/|x_R|)) provides scaling,\n\u03c1 penalizes constraint violation, \u03b6 prevents wandering.\n\n\u2113\u2081 equivalence: At solution, either p_i=0 or n_i=0 for each i,\nso ||p+n||\u2081 = ||c(x)||\u2081 at optimum (complementarity).",
+      "complexity": "Same as main Ipopt: O(n\u00b3) per iteration for linear algebra.\nRestoration may require many iterations; worst case certifies infeasibility.",
+      "ref": [
+        "W\u00e4chter & Biegler (2006). \"On the implementation of an interior-point\n  filter line-search algorithm for large-scale nonlinear programming\".\n  Mathematical Programming 106(1):25-57. [Section 3.3: Restoration phase]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpRestoPhase.hpp for the base interface",
+    "IpRestoIpoptNLP.hpp for the restoration NLP formulation",
+    "IpRestoFilterConvCheck.hpp for restoration convergence criteria"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "poly",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/poly.h",
+  "brief": "Polynomial term representations (linear, quadratic, polynomial)\n\nTerm classes for building polynomial expressions.\n\n**lterm (Linear Term):**\n- _coef: Coefficient (constant or param)\n- _p: Variable/parameter pointer\n- _sign: True if positive, false if negative\n- Represents: \u00b1coef \u00d7 p\n\n**qterm (Quadratic Term):**\n- _coef: Coefficient\n- _p1, _p2: Two variable/parameter pointers\n- _sign: Sign flag\n- Represents: \u00b1coef \u00d7 p1 \u00d7 p2\n\n**pterm (Polynomial Term):**\n- _coef: Coefficient\n- _l: List of (param, power) pairs\n- Represents: coef \u00d7 \u220f(p\u1d62^k\u1d62)\n\n**Usage in Functions:**\n```cpp\nfunc.add_lterm(coef, x);      // coef*x\nfunc.add_qterm(coef, x, y);   // coef*x*y\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/func.h for functions using these terms",
+    "gravity/expr.h for expression tree nodes"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "IpSparseSymLinearSolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpSparseSymLinearSolverInterface.hpp",
+  "brief": "Interface for sparse symmetric indefinite linear solvers\n\nSparseSymLinearSolverInterface defines the interface that concrete\nlinear solvers (MA27, MA57, MUMPS, Pardiso, etc.) must implement.",
+  "algorithms": [
+    {
+      "name": "Strategy Pattern for Sparse Symmetric Indefinite Solvers:\n  All Ipopt linear solvers implement this interface for the KKT system:\n  [W + \u03a3_x    A^T   ] [\u0394x]   [r_d]\n  [A          -\u03a3_c  ] [\u0394\u03bb] = [r_p]\n  where W is the Hessian, A is the Jacobian, and \u03a3 are regularization.\n  The system is symmetric but indefinite (n positive, m negative eigenvalues\n  at a local minimum).",
+      "math": "Inertia requirement: At a local minimum, the KKT matrix must have\n  inertia (n, m, 0) where n = number of variables, m = number of constraints.\n  If wrong inertia is detected, Ipopt adds regularization to correct it.\n\nMatrix formats (EMatrixFormat):\n- Triplet_Format: (row, col, val) triplets, lower triangular (MA27 style)\n- CSR_Format_0_Offset: CSR with 0-based indexing (C-style)\n- CSR_Format_1_Offset: CSR with 1-based indexing (Fortran-style)\n- CSR_Full_Format_*: Full matrix (both triangles) CSR\n\nUsage protocol:\n1. Initialize(): Set options, allocate internal structures\n2. MatrixFormat(): Query required input format\n3. InitializeStructure(): Provide sparsity pattern, do symbolic factorization\n4. GetValuesArrayPtr(): Get array for matrix values\n5. MultiSolve(): Factorize (if new_matrix) and solve\n\nDuplicate entries in triplet format are summed. Warm start support\nallows reusing symbolic factorization across optimizations.",
+      "complexity": "Typical sparse direct solver complexity:\n  - Symbolic factorization: O(nnz) to O(n\u00b2) depending on fill-in\n  - Numerical factorization: O(nnz(L)\u00b2/n) for multifrontal methods\n  - Solve: O(nnz(L)) for triangular solves",
+      "ref": [
+        "Duff, Erisman & Reid (1986). \"Direct Methods for Sparse Matrices\".\n     Oxford University Press. [Foundational text on sparse direct methods]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMa27TSolverInterface.hpp for Harwell MA27",
+    "IpMumpsSolverInterface.hpp for MUMPS",
+    "IpPardisoSolverInterface.hpp for Pardiso"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "AlpsNodePool",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsNodePool.h",
+  "brief": "Priority queue for tree nodes awaiting processing\n\nAlpsNodePool stores candidate nodes ordered by search strategy.\nUses AlpsPriorityQueue with AlpsSearchStrategy comparison.\n\n**Storage:**\n- candidateList_: Priority queue of AlpsTreeNode pointers\n- searchStrategy_: Comparison function for ordering\n\n**Key operations:**\n- addKnowledge(): Add node with quality as priority\n- getKnowledge()/popKnowledge(): Access/remove best node\n- setNodeSelection(): Change search strategy (re-heaps)\n- getBestNode(): Get node with best quality\n\n**Search strategies supported:**\n- BestFirst: Lowest quality value first\n- DepthFirst: Deepest node first\n- BreadthFirst: Shallowest node first\n- BestEstimate: Best estimated solution first",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsKnowledgePool for base class",
+    "AlpsPriorityQueue for heap implementation",
+    "AlpsSearchStrategy for comparison classes"
+  ]
+}

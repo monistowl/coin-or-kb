@@ -1,0 +1,9 @@
+{
+  "name": "user_ad",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/user_ad.hpp",
+  "brief": "Core AD functionality: user ad",
+  "algorithms": [],
+  "methods": []
+}

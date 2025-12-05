@@ -1,0 +1,22 @@
+{
+  "name": "CoinOslFactorization",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinOslFactorization.hpp",
+  "brief": "LU factorization derived from IBM OSL (Optimization Subroutine Library)\n\nPort of OSL's factorization code. Provides alternative to CoinFactorization\nwith different numerical characteristics and update strategies.",
+  "algorithms": [
+    {
+      "name": "OSL-style Sparse LU Factorization:\n  Implements B = L\u00b7U with OSL's eta-file based update scheme:\n  1. Factor sparse basis B using Markowitz pivot selection\n  2. Store L and U in packed sparse format (EKKfactinfo structure)\n  3. After pivot: B_new = B_old\u00b7E_k where E_k is elementary matrix\n  4. Accumulate eta vectors in R_etas_* arrays for efficient FTRAN/BTRAN",
+      "math": "Eta vector update representation:\n  After basis change replacing column p with column q:\n  B_new = B_old \u00b7 E where E = I + (e_p - B_old^{-1}\u00b7a_q)\u00b7e_p'\n  FTRAN: solve by applying L^{-1}, then U^{-1}, then eta sequence\n  BTRAN: solve by applying eta sequence inverse, then U^{-T}, then L^{-T}",
+      "complexity": "Factorization: O(n\u00b7nnz) typical with good pivot ordering\n  FTRAN/BTRAN: O(nnz(L) + nnz(U) + sum(eta_lengths))\n  Eta vectors grow linearly with pivots; refactorize every ~100 iterations",
+      "ref": [
+        "IBM OSL (Optimization Subroutine Library) sparse factorization\n\nKey OSL structures:\n- EKKfactinfo: Contains all factorization state and working arrays\n- R_etas_*: Row-wise storage of accumulated eta vectors\n- kp1adr/kp2adr: Linked lists for sparse row/column management"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinOtherFactorization for the base class",
+    "CoinFactorization for the primary sparse implementation"
+  ]
+}

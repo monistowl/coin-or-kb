@@ -1,0 +1,9 @@
+{
+  "name": "put_var_vecad",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/record/put_var_vecad.hpp",
+  "brief": "Operation recording: put_var_vecad",
+  "algorithms": [],
+  "methods": []
+}

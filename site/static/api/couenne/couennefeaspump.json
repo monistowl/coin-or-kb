@@ -1,0 +1,22 @@
+{
+  "name": "CouenneFeasPump",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/heuristics/CouenneFeasPump.hpp",
+  "brief": "Feasibility Pump heuristic for nonconvex MINLP\n\nAlternates between NLP and MILP solves to find feasible solutions:\n- MILP phase: Find integer point closest to NLP solution\n- NLP phase: Find NLP-feasible point closest to integer solution",
+  "algorithms": [
+    {
+      "name": "Feasibility Pump for Nonconvex MINLP:\nAlternating projection between continuous and integer feasible sets:\n1. Solve NLP relaxation: nSol = argmin{f(x) : g(x) \u2264 0}\n2. MILP phase (milpPhase):\n   iSol = argmin{w_D\u00b7||x_I - nSol_I|| + w_H\u00b7x\u1d40Hx + w_O\u00b7c\u1d40x : Ax \u2264 b, x_I \u2208 Z}\n   where w_D = multDistMILP_, w_H = multHessMILP_, w_O = multObjFMILP_\n3. NLP phase (nlpPhase):\n   nSol = argmin{w_D\u00b7||x_I - iSol_I|| + w_H\u00b7x\u1d40Hx + w_O\u00b7f(x) : g(x) \u2264 0}\n4. If ||nSol_I - iSol_I|| < \u03b5: return nSol (feasible found)\n5. Tabu management: If cycling detected, apply tabuMgt_ policy\n6. Fade weights: w\u1d62 \u2190 fadeMult_\u00b7w\u1d62, goto step 2\n\nDistance options (compDistInt_):\n- FP_DIST_INT: Only integer variables\n- FP_DIST_ALL: All variables\n- FP_DIST_POST: Post-process with LP",
+      "math": "Weighted objective in MILP phase:\n  min \u03b1\u00b7\u03a3\u1d62|x\u1d62 - nSol\u1d62| + \u03b2\u00b7x\u1d40Hx + \u03b3\u00b7c\u1d40x\nwhere \u03b1 + \u03b2 + \u03b3 = 1 and coefficients fade toward \u03b3 = 1 (original objective).",
+      "complexity": "O(maxIter_ \u00b7 (MILP_solve + NLP_solve)).\nEach iteration: MILP is O(2^|I|) worst, NLP is O(n\u00b3) per Newton step.",
+      "ref": [
+        "Bonami, Gon\u00e7alves (2012). \"Heuristics for convex mixed integer nonlinear\n  programs\". Computational Optimization and Applications 51(2):729-747."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneTNLP for the NLP interface",
+    "CouenneFPpool for solution pool management"
+  ]
+}

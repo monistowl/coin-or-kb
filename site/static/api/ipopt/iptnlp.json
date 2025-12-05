@@ -1,0 +1,20 @@
+{
+  "name": "IpTNLP",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Interfaces/IpTNLP.hpp",
+  "brief": "User interface for defining NLP problems in standard form\n\nTNLP (Templated NLP) is the primary user-facing class for defining\noptimization problems. Users inherit from TNLP and implement:",
+  "algorithms": [
+    {
+      "name": "User NLP Callback Interface:\n  Ipopt calls user methods in this order during optimization:\n  1. get_nlp_info() - once: dimensions n, m, nnz_jac_g, nnz_h_lag.\n  2. get_bounds_info() - once: fill x_L, x_U, g_L, g_U arrays.\n  3. get_starting_point() - once: initial x (and optionally z, \u03bb).\n  4. Per iteration (possibly multiple times):\n     - eval_f(x) \u2192 f(x): scalar objective value.\n     - eval_grad_f(x) \u2192 \u2207f(x): n-vector.\n     - eval_g(x) \u2192 g(x): m-vector of constraint values.\n     - eval_jac_g(x) \u2192 J_g(x): sparse Jacobian (triplet format).\n     - eval_h(x, \u03c3, \u03bb) \u2192 H: sparse Hessian of Lagrangian.\n  5. finalize_solution() - once: receive final x*, \u03bb*, z* and status.",
+      "math": "Standard NLP formulation:\n  min  f(x)  subject to  g_L \u2264 g(x) \u2264 g_U,  x_L \u2264 x \u2264 x_U.\n  Equality: set g_L[i] = g_U[i].  No bound: \u00b1nlp_lower/upper_bound_inf.\n  Hessian: H = \u03c3\u00b7\u2207\u00b2f + \u03a3\u1d62 \u03bb\u1d62\u00b7\u2207\u00b2g\u1d62 (lower triangle in triplet format).",
+      "complexity": "User-defined. Ipopt benefits from:\n  - Exploiting sparsity: provide true nnz counts, not dense.\n  - new_x flag: cache intermediate results when x unchanged.\n  - Exact Hessian: superlinear convergence vs quasi-Newton.\n\nRequired methods:\n- get_nlp_info(): Problem dimensions and sparsity\n- get_bounds_info(): Variable and constraint bounds\n- get_starting_point(): Initial primal/dual values\n- eval_f(): Objective function value\n- eval_grad_f(): Objective gradient\n- eval_g(): Constraint function values\n- eval_jac_g(): Constraint Jacobian (sparse triplet format)\n- finalize_solution(): Receive final solution\n\nOptional methods:\n- eval_h(): Hessian of Lagrangian (or use quasi-Newton)\n- intermediate_callback(): Monitor progress per iteration",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpIpoptApplication.hpp for solving TNLP problems",
+    "IpTNLPAdapter.hpp for internal conversion to NLP interface"
+  ]
+}

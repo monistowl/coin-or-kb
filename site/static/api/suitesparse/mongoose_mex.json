@@ -1,0 +1,12 @@
+{
+  "name": "mongoose_mex",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/MATLAB/mongoose_mex.hpp",
+  "brief": "MATLAB MEX interface for Mongoose graph partitioning\nCopyright (C) 2017-2018, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nMATLAB interface utilities: conversion between MATLAB sparse matrices\nand Mongoose cs/Graph structures, option struct marshalling, result\nconversion to MATLAB arrays. Enables 'mongoose' MEX function for\ngraph partitioning from MATLAB.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Mongoose.hpp for C++ library interface"
+  ]
+}

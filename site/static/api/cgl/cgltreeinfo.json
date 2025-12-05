@@ -1,0 +1,13 @@
+{
+  "name": "CglTreeInfo",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglCommon/CglTreeInfo.hpp",
+  "brief": "Context information for cut generation in branch-and-cut\n\nPasses branch-and-cut tree state to cut generators so they can adapt\ntheir behavior based on tree depth, pass number, and other factors.\n\nCglTreeInfo fields:\n- level: Search tree depth (0 = root)\n- pass: Which cut generation round at this node\n- formulation_rows: Original row count (before generated cuts)\n- inTree: True after first branch\n- options: Bit flags for various modes (see below)\n\nOption flags (can be combined):\n- 1: Treat costed integers as important\n- 4/8: Set global cut flag at root\n- 16: Make cuts globally valid\n- 32: Last round ineffective - be more aggressive\n- 64: In preprocessing stage\n- 128: Looks like we found a solution\n- 8192: Problem is infeasible\n\nCglTreeProbingInfo (derived class):\nExtends CglTreeInfo with variable fixing implications from probing.\n- fixEntries_: What gets fixed when a variable is set\n- toZero_/toOne_: Starts of implication lists\n- Supports analyze() to derive implied bounds",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglCutGenerator for the generator interface",
+    "CglProbing which populates probing info"
+  ]
+}

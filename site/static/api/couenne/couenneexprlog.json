@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprLog",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprLog.hpp",
+  "brief": "Natural logarithm expression w = log(x)\n\nRepresents the natural logarithm function. This is a concave function\non its domain (x > 0), so convexification uses tangent cuts for\noverestimation and secant cuts for underestimation.\n\n**Convexification for w = log(x) on [l,u]:**\n- Overestimator (tangent): w <= log(x0) + (x - x0)/x0 at any x0 in (l,u)\n- Underestimator (secant): w >= log(l) + (log(u) - log(l))/(u - l) * (x - l)\n\n**Implied bounds:**\n- Given w in [wl, wu]: x in [exp(wl), exp(wu)]\n- Given x in [xl, xu] with xl > 0: w in [log(xl), log(xu)]\n\n**Bijective property:**\nLog is bijective with inverse exp(), enabling tighter bound propagation.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprExp for the inverse function",
+    "CouenneExprUnary for base class"
+  ]
+}

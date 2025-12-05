@@ -1,0 +1,9 @@
+{
+  "name": "opt_val_hes",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/opt_val_hes.hpp",
+  "brief": "Core AD functionality: opt val hes",
+  "algorithms": [],
+  "methods": []
+}

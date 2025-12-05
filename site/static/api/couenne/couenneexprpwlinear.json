@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprPWLinear",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprPWLinear.hpp",
+  "brief": "Piecewise linear function expression\n\nRepresents piecewise linear (PWL) functions defined by breakpoints\nand slopes or by point sequences.\n\n**Status:** This is a placeholder/stub class.\n\n**Mathematical form:**\nf(x) = a\u1d62 * x + b\u1d62  for  x\u1d62 \u2264 x < x\u1d62\u208a\u2081\n\n**Convexification:**\n- If convex (slopes increasing): trivial envelope\n- If concave (slopes decreasing): trivial envelope\n- If neither: requires disjunctive handling\n\n**Standard MIP formulation:**\nUses binary variables to select active segment:\n- \u03bb\u1d62 \u2208 [0,1], \u03a3\u03bb\u1d62 = 1, at most 2 adjacent \u03bb\u1d62 positive (SOS2)\n- x = \u03a3\u03bb\u1d62x\u1d62, y = \u03a3\u03bb\u1d62y\u1d62\n\n**Usage:**\nCommon in approximating nonlinear functions or modeling\ncosts with quantity discounts.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprAbs for a simple PWL function (V-shape)",
+    "exprOp base class"
+  ]
+}

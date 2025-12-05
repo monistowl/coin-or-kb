@@ -1,0 +1,13 @@
+{
+  "name": "BonCouenneInfo",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/main/BonCouenneInfo.hpp",
+  "brief": "Information passing between B&B components\n\nExtends Bonmin's BabInfo with Couenne-specific information,\nparticularly storage of NLP solutions found during search.\n\n**NlpSolution class:**\nReference-counted storage for NLP solutions:\n- n_: Number of variables\n- sol_[]: Variable values\n- objVal_: Objective function value\n\n**CouenneInfo:**\n- nlpSols_: List of all NLP solutions found\n- addSolution(): Record a new NLP solution\n- NlpSolutions(): Access stored solutions\n\n**Usage:**\nWhen Couenne finds feasible NLP solutions (from heuristics\nor at B&B nodes), they are stored here for incumbent tracking\nand warm-starting purposes.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Bonmin::BabInfo base class",
+    "CouenneFeasPump which generates NLP solutions"
+  ]
+}

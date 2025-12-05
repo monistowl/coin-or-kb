@@ -1,0 +1,13 @@
+{
+  "name": "TaskCalculateSolutionChangeNorm",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskCalculateSolutionChangeNorm.h",
+  "brief": "Compute solution movement between iterations\n\nTracks convergence via solution change magnitude.\n\n**TaskCalculateSolutionChangeNorm Class:**\n- run(): Compute ||x_new - x_old|| norm\n\n**Usage:**\n- Detect solution stagnation\n- Used in convergence criteria\n- May trigger algorithm strategy changes",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Utilities.h for L2Norm computation",
+    "TaskCheckDualStagnation.h for stagnation handling"
+  ]
+}

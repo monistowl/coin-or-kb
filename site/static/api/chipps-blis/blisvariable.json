@@ -1,0 +1,13 @@
+{
+  "name": "BlisVariable",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisVariable.h",
+  "brief": "Variable representation for column generation in BLIS\n\nExtends BcpsVariable with sparse column representation for LP.\nUsed when variables are generated dynamically (column generation).\n\n**Data members:**\n- objCoef_: Objective coefficient for this variable\n- size_, indices_, values_: Sparse column in constraint matrix\n\n**Usage:**\nIn standard MILP solving, variables are implicit in the LP solver.\nBlisVariable is used when variables need to be:\n- Communicated between processes (parallel B&C)\n- Generated dynamically (column generation/branch-and-price)\n- Stored in variable pools for sharing",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisConstraint for the dual (row) representation",
+    "BcpsVariablePool for variable storage"
+  ]
+}

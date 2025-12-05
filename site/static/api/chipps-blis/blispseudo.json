@@ -1,0 +1,14 @@
+{
+  "name": "BlisPseudo",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisPseudo.h",
+  "brief": "Pseudo-cost data structure for branching variable selection\n\nTracks historical LP objective degradation when branching on a variable.\nUsed to estimate branching quality without solving child LPs.\n\n**Pseudo-cost formula:**\nFor variable x\u2c7c branched with fractional part f:\n- Up cost: \u03c8\u207a = \u0394obj\u207a / (1 - f), averaged over up branches\n- Down cost: \u03c8\u207b = \u0394obj\u207b / f, averaged over down branches\n\n**Score calculation:**\nscore_ = weight_ * min(downCost_, upCost_) + (1 - weight_) * max(...)\nDefault weight_ = 1.0 emphasizes minimum degradation.\n\n**Key members:**\n- upCost_/downCost_: Average per-unit objective change\n- upCount_/downCount_: Number of observations (for reliability)\n- weight_: Weighting in score formula [0, 1]\n\n**Usage:**\n- update(): Called after branching to incorporate new observation\n- getScore(): Returns estimated branching quality\n- Serializable via AlpsKnowledge for parallel sharing",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisBranchStrategyPseudo for pseudo-cost branching",
+    "BlisBranchStrategyRel for reliability branching",
+    "BlisObjectInt::pseudocost() which stores per-variable costs"
+  ]
+}

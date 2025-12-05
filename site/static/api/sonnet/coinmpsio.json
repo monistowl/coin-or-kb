@@ -1,0 +1,13 @@
+{
+  "name": "CoinMpsIO",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CoinMpsIO.h",
+  "brief": ".NET wrapper for CoinMpsIO (MPS file I/O)\n\nC++/CLI wrapper for reading LP problems from MPS format files.\nExposes row/column bounds, objective coefficients, and matrix data.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinPackedMatrix.h for sparse matrix wrapper",
+    "CoinMessageHandler.h for custom logging"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "AbcPrimalColumnDantzig",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcPrimalColumnDantzig.hpp",
+  "brief": "Dantzig's rule for ABC primal simplex pivot selection",
+  "algorithms": [
+    {
+      "name": "FULL PRICING:\nMust examine all n-m nonbasic variables to find minimum.\n\"Lumbers over all columns\" - no sophisticated screening.",
+      "math": "REDUCED COST:\nc\u0304_j = c_j - \u03c0'A_j  where \u03c0 = c_B'\u00b7B\u207b\u00b9 are dual variables\n\nc\u0304_j < 0 means increasing x_j will decrease objective.\nChoose most negative = steepest descent in reduced cost space.",
+      "complexity": "O(n) per pricing iteration.\nSimple but can be slow on large problems.\n\nWHEN TO USE:\n- Debugging: Simplest rule, easiest to verify\n- Small problems: Overhead of steepest edge not worth it\n- Dense problems: Steepest edge weight updates expensive\n\nWHEN TO AVOID:\n- Large sparse problems: Use partial pricing or steepest edge\n- Degenerate problems: Dantzig can cycle; steepest edge more stable\n\nABC optimization: Uses CoinPartitionedVector for cache-friendly\nscanning of reduced costs.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcPrimalColumnPivot for the base interface",
+    "AbcPrimalColumnSteepest for recommended steepest edge variant",
+    "ClpPrimalColumnDantzig for the standard (non-ABC) implementation"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprBQuad",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/bounds/CouenneExprBQuad.hpp",
+  "brief": "Bound expressions for quadratic forms\n\nExpression classes that compute bounds on quadratic forms\n\u2211 q\u1d62\u2c7c\u00b7x\u1d62\u00b7x\u2c7c + \u2211 b\u1d62\u00b7x\u1d62 + c given variable bounds.\n\n**exprLBQuad:**\nReturns lower bound on the quadratic form by calling\ncomputeQBound(-1) on the referenced exprQuad.\n\n**exprUBQuad:**\nReturns upper bound on the quadratic form by calling\ncomputeQBound(+1) on the referenced exprQuad.\n\n**Bound computation (in exprQuad):**\nUses eigenvalue-based approach when Q is indefinite:\n- Decompose Q = \u2211 \u03bb\u1d62\u00b7v\u1d62\u00b7v\u1d62\u1d40\n- Bound each eigenterm using variable bounds\n- Sum contributions accounting for sign of \u03bb\u1d62\n\n**Usage in FBBT:**\nThese expressions enable bound tightening on quadratic\nconstraints without explicitly enumerating all bilinear terms.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprQuad which implements computeQBound()",
+    "CouenneExprBMul for bilinear bound operators"
+  ]
+}

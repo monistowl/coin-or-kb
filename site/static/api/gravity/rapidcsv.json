@@ -1,0 +1,9 @@
+{
+  "name": "rapidcsv",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/rapidcsv.h",
+  "brief": "Datastructure holding parameters controlling how invalid numbers (including\n           empty strings) should be handled.",
+  "algorithms": [],
+  "methods": []
+}

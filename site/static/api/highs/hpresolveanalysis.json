@@ -1,0 +1,13 @@
+{
+  "name": "HPresolveAnalysis",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/presolve/HPresolveAnalysis.h",
+  "brief": "Presolve statistics and rule control\n\nTracks presolve reductions and controls which rules are enabled.\n\n**HPresolveAnalysis Class:**\n- model, options: References to problem being presolved\n- allow_rule_[]: Per-rule enable flags (from options->presolve_rule_off)\n- numDeletedRows, numDeletedCols: Reduction counts\n- presolve_log_: Detailed reduction history\n\n**Rule Control:**\n- setup(): Initialize rule flags from options\n- allow_rule_[]: Boolean array indexed by PresolveRuleType\n- Disabled rules are skipped during presolve passes\n\n**Logging:**\n- allow_logging_/logging_on_: Control verbosity\n- startPresolveRuleLog()/stopPresolveRuleLog(): Bracket rule execution\n- analysePresolveRuleLog(): Summarize effectiveness of rules\n- presolveReductionTypeToString(): Convert rule type to name\n\n**Statistics:**\n- original_num_col_/row_: Problem size before presolve\n- num_deleted_rows0_/cols0_: Running deletion counts",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "presolve/HPresolve.h for presolve engine using this",
+    "lp_data/HConst.h for PresolveRuleType enum"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "CbcEventHandler",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcEventHandler.hpp",
+  "brief": "Event handling and callbacks for Cbc",
+  "algorithms": [
+    {
+      "name": "Callback Mechanism for B&C Control\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcEventHandler: Callback mechanism for monitoring and controlling B&C.\nProvides hooks at key points in the search process.\n\nEvents (CbcEvent enum):\n- node: After processing a node\n- solution: Integer solution found\n- heuristicSolution: Solution from heuristic\n- treeStatus: Periodic tree status report\n- endSearch: Search termination\n- afterRootCuts: Root node complete\n\nActions (CbcAction enum):\n- noAction: Continue normally\n- stop: Abort search\n- restart: Restart from current point\n- restartRoot: Restart from scratch\n- killSolution: Reject found solution\n\nUsage: Derive subclass, override event() method.\nDefault implementation uses event/action map (eaMap_).\n\nDesign matches ClpEventHandler for Clp compatibility.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcModel::setEventHandler()",
+    "ClpEventHandler for Clp equivalent"
+  ]
+}

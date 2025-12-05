@@ -1,0 +1,13 @@
+{
+  "name": "IpJournalist",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpJournalist.hpp",
+  "brief": "Logging and output management system for Ipopt\n\nImplements a flexible logging framework with multiple output destinations\n(Journals) and fine-grained control over verbosity by category.\n\nPrint levels (EJournalLevel): J_NONE < J_ERROR < J_WARNING < J_SUMMARY\n  < J_ITERSUMMARY < J_DETAILED < J_VECTOR < J_MATRIX < J_ALL\n\nCategories (EJournalCategory): J_MAIN, J_LINE_SEARCH, J_LINEAR_ALGEBRA,\n  J_BARRIER_UPDATE, J_SOLVE_PD_SYSTEM, etc. plus J_USER1-J_USER17 for apps.\n\nEach Journal (console, file, stream) can have independent level settings\nper category. Printf-style and stream-style output both supported.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpIpoptApplication.hpp for setting up output journals",
+    "IpOptionsList.hpp for print_level option"
+  ]
+}

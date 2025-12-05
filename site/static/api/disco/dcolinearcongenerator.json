@@ -1,0 +1,14 @@
+{
+  "name": "DcoLinearConGenerator",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoLinearConGenerator.hpp",
+  "brief": "Wrapper for CGL linear cut generators\n\nDcoLinearConGenerator wraps CglCutGenerator objects to integrate\nstandard MILP cutting planes into DisCO's branch-and-cut.\n\n**Available CGL Generators:**\n- CglClique: Clique cuts\n- CglOddHole: Odd hole cuts\n- CglFlowCover: Flow cover cuts\n- CglKnapsackCover: Knapsack cover cuts\n- CglMixedIntegerRounding: MIR cuts\n- CglGomory: Gomory cuts\n- CglProbing: Probing cuts\n- CglTwomir: Two-MIR cuts\n\n**generateConstraints() Flow:**\n1. Call CglCutGenerator::generateCuts()\n2. Convert OsiCuts to DcoLinearConstraint objects\n3. Add to BcpsConstraintPool\n4. Update statistics",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoConGenerator.hpp for base class",
+    "DcoConicConGenerator.hpp for conic cuts",
+    "CglCutGenerator (CGL) for interface"
+  ]
+}

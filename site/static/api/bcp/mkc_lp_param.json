@@ -1,0 +1,16 @@
+{
+  "name": "MKC_lp_param",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Mkc/include/MKC_lp_param.hpp",
+  "brief": "MKC LP parameters",
+  "algorithms": [
+    {
+      "name": "MKC LP Params: Pricing and Solver Options\n\nParameters for LP process:\n- CheckForTailoff: Detect slow progress\n- DoLogicalFixing: Implied variable fixing\n- ExactFallbackAtVargen: Use exact pricing when heuristic fails\n- UseVolume/UseClp: Solver selection",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

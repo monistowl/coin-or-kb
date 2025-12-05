@@ -1,0 +1,20 @@
+{
+  "name": "IpOrigIterationOutput",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpOrigIterationOutput.hpp",
+  "brief": "Standard iteration output for original NLP problem\n\nOrigIterationOutput displays the per-iteration summary line\nfor the original (non-restoration) NLP problem.",
+  "algorithms": [
+    {
+      "name": "Iteration Summary Output:\n  WriteOutput() at each iteration:\n  1. Check print frequency: skip if not due (by iter or time).\n  2. Format iteration data into fixed-width columns.\n  3. Append info string suffix if enabled (e.g., 'r' for resto).\n  4. Write to Journalist at J_ITERSUMMARY level.\n  First iteration writes header line with column names.",
+      "math": "Iteration metrics displayed:\n  inf_pr = ||c(x)||\u221e or ||r||\u2081/n (primal feasibility measure).\n  inf_du = ||\u2207L||\u221e scaled (dual feasibility / optimality).\n  lg(mu) = log\u2081\u2080(\u03bc) (barrier parameter in log scale).\n  lg(rg) = log\u2081\u2080(\u03b4x) (regularization for inertia control).\n  alpha_pr, alpha_du = primal/dual step lengths \u2208 (0,1].",
+      "complexity": "O(1) per iteration (just formatting and printing).\n  Controlled by print_frequency_iter and print_frequency_time options.\n\nOutput format (one line per iteration):\n  iter  objective  inf_pr  inf_du  lg(mu)  ||d||  lg(rg)  alpha_du  alpha_pr  ls\n\nWhere:\n- iter: Iteration number\n- objective: Current objective value (scaled)\n- inf_pr: Primal infeasibility (see inf_pr_output_)\n- inf_du: Dual infeasibility\n- lg(mu): Log10 of barrier parameter\n- ||d||: Norm of search direction\n- lg(rg): Log10 of regularization delta_x\n- alpha_du: Dual step size\n- alpha_pr: Primal step size\n- ls: Line search trials\n\nConfiguration:\n- print_info_string_: Append info character (e.g., 'r' for resto)\n- inf_pr_output_: What to show in inf_pr column\n- print_frequency_iter_: Print every N iterations\n- print_frequency_time_: Print every T seconds",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpIterationOutput.hpp for base interface",
+    "IpRestoIterationOutput.hpp for restoration phase output"
+  ]
+}

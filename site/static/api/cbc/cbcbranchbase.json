@@ -1,0 +1,22 @@
+{
+  "name": "CbcBranchBase",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcBranchBase.hpp",
+  "brief": "Base includes for CBC branching model",
+  "algorithms": [
+    {
+      "name": "Three-Class Branching Model (Object/BranchingObject/Decision)\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nAggregates the three-class branching model:\n- CbcObject: What to branch on (integer vars, SOS, cliques)\n- CbcBranchingObject: How to branch (bound changes per arm)\n- CbcBranchDecision: How to choose (compare candidates)\n\nAlso defines CbcRangeCompare enum for bound comparisons\nand CbcCompareRanges() utility function.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcObject for branching candidates",
+    "CbcBranchingObject for branching actions",
+    "CbcBranchDecision for selection criteria",
+    "OsiBranchingObject for OSI-level interface"
+  ]
+}

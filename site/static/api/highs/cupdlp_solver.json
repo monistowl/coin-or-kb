@@ -1,0 +1,23 @@
+{
+  "name": "cupdlp_solver",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/pdlp/cupdlp/cupdlp_solver.h",
+  "brief": "PDHG (Primal-Dual Hybrid Gradient) Solver for Linear Programming\n\nImplements the PDLP (Primal-Dual Linear Programming) algorithm using\nfirst-order optimization methods instead of traditional simplex or IPM.",
+  "algorithms": [
+    {
+      "name": "PDHG (Primal-Dual Hybrid Gradient) for LP:\nA first-order method for solving the saddle-point formulation of LP.\n\nLP SADDLE-POINT FORMULATION:\nmin_x max_y  c'x + y'(b - Ax)  s.t. l \u2264 x \u2264 u\n\nEquivalent to: min c'x  s.t. Ax = b, l \u2264 x \u2264 u\nThe Lagrangian couples primal (x) and dual (y) variables.\n\nPDHG ITERATION:\nGiven step sizes \u03c4 (primal) and \u03c3 (dual):\n\n  x\u0304 = x^k - \u03c4\u00b7(c - A'y^k)           // primal gradient step\n  x^{k+1} = proj_{[l,u]}(x\u0304)         // project onto bounds\n\n  \u0177 = y^k + \u03c3\u00b7(b - A\u00b7(2x^{k+1} - x^k))  // dual gradient with extrapolation\n  y^{k+1} = \u0177                        // no projection for free dual\n\nKEY FEATURE: Extrapolation (2x^{k+1} - x^k) accelerates convergence\ncompared to standard gradient descent.\n\nSTEP SIZE SELECTION:\nFor convergence: \u03c4\u00b7\u03c3\u00b7\u2016A\u2016\u00b2 < 1\nTypically: \u03c4 = \u03c3 = 1/(\u2016A\u2016_2) or adaptive schemes\n\nRESTART STRATEGIES:\nPeriodically restart to accelerate when making progress:\n- Fixed frequency restart\n- Adaptive restart on normalized duality gap improvement\n- Restart on primal-dual distance decrease\n\nTERMINATION CRITERIA:\nCheck primal/dual feasibility and duality gap:\n- Primal feasibility: \u2016Ax - b\u2016 / (1 + \u2016b\u2016) \u2264 \u03b5\n- Dual feasibility: \u2016c - A'y - zl + zu\u2016 / (1 + \u2016c\u2016) \u2264 \u03b5\n- Gap: |c'x - b'y| / (1 + |c'x| + |b'y|) \u2264 \u03b5",
+      "math": "Convergence rate:\n- O(1/k) ergodic convergence for duality gap\n- O(1/k\u00b2) with acceleration (momentum/restart)\n- Not polynomial in problem dimension (unlike IPM)\n- But: iteration cost is O(nnz) vs O(n\u00b3) for IPM\n\nComparison with other LP methods:\n- Simplex: exact but exponential worst-case\n- IPM: polynomial O(\u221an\u00b7log(1/\u03b5)) but O(n\u00b3) per iteration\n- PDHG: cheap O(nnz) iterations, good for huge sparse LPs",
+      "complexity": "- Per iteration: O(nnz) for matrix-vector products\n- Iterations to \u03b5-accuracy: O(\u2016A\u2016/\u03b5) without restart\n- Total for moderate accuracy: competitive with IPM on large sparse problems\n- Memory: O(n + m) vs O(fill) for factorization methods",
+      "ref": [
+        "Chambolle & Pock (2011). \"A First-Order Primal-Dual Algorithm for\n  Convex Problems with Applications to Imaging\". J. Math. Imaging Vis.",
+        "Applegate et al. (2021). \"Practical Large-Scale Linear Programming\n  using Primal-Dual Hybrid Gradient\". NeurIPS."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "cupdlp_step.h for step computation details",
+    "cupdlp_restart.h for restart strategies"
+  ]
+}

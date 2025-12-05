@@ -1,0 +1,25 @@
+{
+  "name": "ClpInterior",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpInterior.hpp",
+  "brief": "Interior point (barrier) method for LP",
+  "algorithms": [
+    {
+      "name": "Interior Point Method (Barrier Method):\nSolves LP by following central path through interior of feasible region.\nMain variant is Mehrotra predictor-corrector:\n1. Affine scaling direction: solve Newton system for complementarity\n2. Centering direction: correct toward central path with adaptive \u03bc\n3. Combined step: predictor + corrector with step length limiting\n4. Update (x, y, s) and reduce barrier parameter \u03bc\n\nPer iteration solves normal equations: (ADA^T)\u0394y = rhs\nwhere D is diagonal scaling matrix from current iterate.\nCholesky factorization of ADA^T is computational bottleneck.\n\nConverges in O(\u221an log(1/\u03b5)) iterations (polynomial complexity).\nEach iteration O(m\u00b2n + m\u00b3) for forming/factoring normal equations.",
+      "math": "Barrier problem: min c^Tx - \u03bc\u2211log(x_j-l_j) - \u03bc\u2211log(u_j-x_j)\nKKT conditions: Ax=b, A^Ty+s=c, XSe=\u03bce (complementarity)\nNormal equations: (ADA^T)\u0394y = A(D*r_c - X^{-1}r_xs) + r_b\nwhere D = X/S diagonal, r_b, r_c, r_xs are residuals.",
+      "complexity": "O(\u221an log(1/\u03b5)) iterations for \u03b5-optimality.\nPer iteration: O(nnz(A)m) to form ADA^T, O(m\u00b3) for dense Cholesky,\nor O(nnz(L)\u00b2) for sparse Cholesky. Total typically O(n^{1.5}) to O(n\u00b3).",
+      "ref": [
+        "Mehrotra, \"On the implementation of a primal-dual interior point method\",\n     SIAM Journal on Optimization 2 (1992) 575-601",
+        "Andersen & Andersen, \"The MOSEK interior point optimizer for LP\",\n     High Performance Optimization, Kluwer (2000)\n\nImplements interior point methods as an alternative to simplex for LP.\nInterior point follows a central path through the interior of the feasible\nregion, converging to optimality. Often faster than simplex for very large\nor dense problems.\n\nTwo main variants supported:\n- Predictor-Corrector: Standard Mehrotra-style algorithm\n- PDCO: Primal-Dual Barrier method with regularization\n\nRequires Cholesky factorization for the normal equations A*D*A'.\nMultiple Cholesky backends available (dense, MUMPS, TAUCS, etc.)"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPredictorCorrector for the predictor-corrector implementation",
+    "ClpPdco for PDCO variant",
+    "ClpCholeskyBase for Cholesky factorization interface",
+    "ClpSimplex for the alternative simplex method"
+  ]
+}

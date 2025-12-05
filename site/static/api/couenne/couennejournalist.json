@@ -1,0 +1,12 @@
+{
+  "name": "CouenneJournalist",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/problem/CouenneJournalist.hpp",
+  "brief": "Couenne-specific logging categories using Ipopt's Journalist\n\nExtends Ipopt's Journalist logging facility with Couenne-specific\ncategories for selective debug output.\n\n**Log categories defined:**\n- J_BRANCHING: Branch-and-bound variable selection\n- J_BOUNDTIGHTENING: FBBT and OBBT progress\n- J_CONVEXIFYING: Cut generation and convexification\n- J_PROBLEM: Problem construction and reformulation\n- J_NLPHEURISTIC: NLP solve heuristics\n- J_DISJCUTS: Disjunctive cut generation (CGLP)\n- J_REFORMULATE: Expression reformulation\n- J_COUENNE: General Couenne messages\n\n**Usage:**\n```cpp\njnlst->Printf(J_SUMMARY, J_BRANCHING,\n              \"Selected var %d with score %.2f\\n\", idx, score);\n```\n\n**Verbosity levels (from Ipopt):**\n- J_NONE, J_ERROR, J_WARNING, J_SUMMARY, J_DETAILED, ...",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Ipopt::Journalist for full logging API"
+  ]
+}

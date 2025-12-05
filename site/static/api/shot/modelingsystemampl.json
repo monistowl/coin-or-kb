@@ -1,0 +1,12 @@
+{
+  "name": "ModelingSystemAMPL",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/ModelingSystem/ModelingSystemAMPL.h",
+  "brief": "AMPL nl-file format reader for optimization problems\n\nReads AMPL .nl (nonlinear) binary problem files.\n\n**ModelingSystemAMPL Class:**\n- createProblem(): Parse .nl file into Problem\n- augmentSettings(): Add AMPL-specific options\n- finalizeSolution(): Write .sol solution file\n\n**AMPL nl Format:**\n- Binary format for optimization instances\n- Contains variables, bounds, constraints, expressions\n- Used by AMPL-compatible solvers\n\n**Usage:**\n- Standalone: SHOT problem.nl\n- Via AMPL: option solver shot; solve;",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ASL (AMPL Solver Library) for nl format details"
+  ]
+}

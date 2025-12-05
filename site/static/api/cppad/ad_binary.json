@@ -1,0 +1,9 @@
+{
+  "name": "ad_binary",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/ad_binary.hpp",
+  "brief": "Core AD functionality: ad binary",
+  "algorithms": [],
+  "methods": []
+}

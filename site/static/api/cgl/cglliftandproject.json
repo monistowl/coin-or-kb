@@ -1,0 +1,22 @@
+{
+  "name": "CglLiftAndProject",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglLiftAndProject/CglLiftAndProject.hpp",
+  "brief": "Lift-and-project cuts for 0-1 programming\n\nImplements lift-and-project cuts based on Balas, Ceria, and Cornuejols.\nCreates cuts by \"lifting\" the problem into higher dimensions where\nthe LP relaxation is tighter, then \"projecting\" back.",
+  "algorithms": [
+    {
+      "name": "Lift-and-Project Cut Generation (Balas):\n  Generates cuts from simple disjunctions x_j \u2208 {0,1}:\n  1. For fractional x_j*, consider disjunction (x_j=0) \u2228 (x_j=1)\n  2. Lift: Create extended formulation in higher dimension\n     - Variables: (x\u2070,x\u00b9,\u03bb) where x = \u03bbx\u00b9 + (1-\u03bb)x\u2070\n     - Constraints: Ax\u2070 \u2264 b, Ax\u00b9 \u2264 b, x\u2070_j = 0, x\u00b9_j = 1, \u03bb \u2208 [0,1]\n  3. Optimize: Find deepest cut separating x* from lifted polytope\n     max (\u03b1'x* - \u03b2) s.t. \u03b1'x \u2264 \u03b2 valid for lifted set\n  4. Project: Cut \u03b1'x \u2264 \u03b2 is valid in original space",
+      "math": "Lift-and-project formulation (Balas, Ceria, Cornu\u00e9jols 1993):\n  P = {x : Ax \u2264 b, 0 \u2264 x \u2264 1}\n  Disjunction D_j: (x_j = 0) \u2228 (x_j = 1)\n  Lifted set: conv(P \u2229 D_j) via higher-dimensional representation\n  Normalization: \u03b2 = \u00b11 (parameter) determines cut family",
+      "complexity": "O(n\u00b3) per cut for solving the LP in lifted space.\n  Each disjunction variable requires a separate LP solve.\n  Computationally expensive; typically limited to root node.",
+      "ref": [
+        "Balas, Ceria, Cornu\u00e9jols (1993). \"A lift-and-project cutting plane\n     algorithm for mixed 0-1 programs\". Math. Programming 58:295-324.\n\nFor a disjunction x_j = 0 OR x_j = 1:\n- Create two copies of constraints: one with x_j=0, one with x_j=1\n- Convexify the union of these two polyhedra\n- Project back to original space\n- The projection gives a valid cut\n\nNormalization:\n- beta_ = +1 or -1 controls the normalization constraint\n- Choice affects which cuts are generated\n\nThis is a foundational method - computationally expensive but\ntheoretically powerful. Modern implementations often use\nspecialized variants like split cuts."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglLandP for related Lift-and-Project implementation (Bonami)",
+    "CglGomory which can be viewed as a special case"
+  ]
+}

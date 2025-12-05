@@ -1,0 +1,13 @@
+{
+  "name": "BonCouenneSetup",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/main/BonCouenneSetup.hpp",
+  "brief": "Main setup class for Couenne global optimizer\n\nExtends Bonmin's setup to configure Couenne's global optimization\ncomponents including cut generators, bound tightening, and heuristics.\n\n**Initialization (InitializeCouenne):**\n1. Read AMPL model and options\n2. Create CouenneProblem representation\n3. Standardize problem (create auxiliary variables)\n4. Register cut generators (convexification, bound tightening)\n5. Configure branching and heuristics\n\n**Key components configured:**\n- CouenneCutGenerator: Convexification cuts\n- CouenneFixPoint: FBBT bound tightening\n- CouenneFeasPump: Feasibility pump heuristic\n- CouenneChooseVariable: Branching variable selection\n\n**SmartAsl:**\nReference-counted wrapper for ASL pointer (AMPL Solver Library).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BonminSetup for base class",
+    "CouenneProblem for the problem representation"
+  ]
+}

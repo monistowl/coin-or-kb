@@ -1,0 +1,21 @@
+{
+  "name": "ClpSolver",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpSolver.hpp",
+  "brief": "Standalone Clp solver driver and command-line interface",
+  "algorithms": [
+    {
+      "name": "Clp Main Driver with ABC Dispatch\nProvides the main entry points for running Clp as a standalone solver:\n- ClpMain0(): Initialize model with default settings\n- ClpMain1(): Process command queue or command-line arguments\n\nFeatures:\n- Signal handler: Ctrl+C sets iteration limit to 0 for graceful stop\n- BLAS threading control: Defaults to single-thread (openblas_set_num_threads)\n- AMPL interface: clpReadAmpl() reads .nl files\n- FOREIGN_BARRIER: Detects availability of external Cholesky solvers\n\nABC_INHERIT mode: When enabled, uses AbcSimplex instead of ClpSimplex\nfor SIMD-optimized solving.\n\nUser-driven extensions (CLP_USER_DRIVEN1):\n- userChoiceValid1(): Validate leaving variable choice\n- userChoiceValid2(): Validate in/out pair\n- userChoiceWasGood(): Post-pivot callback",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpParameters for parameter handling",
+    "AbcSimplex for the ABC optimized variant",
+    "Clp_C_Interface.h for C language bindings"
+  ]
+}

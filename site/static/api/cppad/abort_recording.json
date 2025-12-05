@@ -1,0 +1,9 @@
+{
+  "name": "abort_recording",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/abort_recording.hpp",
+  "brief": "Core AD functionality: abort recording",
+  "algorithms": [],
+  "methods": []
+}

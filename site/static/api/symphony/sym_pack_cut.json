@@ -1,0 +1,14 @@
+{
+  "name": "sym_pack_cut",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_pack_cut.h",
+  "brief": "Cut serialization for PVM communication\n\nPack/unpack functions for cut_data in parallel mode.\n\n**Cut packing:**\n- pack_cut(): Serialize cut_data for transmission\n- unpack_cut(): Deserialize received cut_data",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_proccomm.h for communication functions",
+    "sym_types.h for cut_data structure",
+    "sym_cp.h for cut pool using these functions"
+  ]
+}

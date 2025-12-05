@@ -1,0 +1,12 @@
+{
+  "name": "CoinMessageHandler",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CoinMessageHandler.h",
+  "brief": ".NET wrapper for CoinMessageHandler (logging)\n\nC++/CLI wrapper for COIN-OR logging infrastructure.\nCoinMessageHandlerProxy bridges .NET virtual methods to native callbacks.\nCoinOneMessage and CoinMessages for custom message definitions.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMpsIO.h for file I/O using message handler"
+  ]
+}

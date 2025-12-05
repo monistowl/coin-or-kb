@@ -1,0 +1,20 @@
+{
+  "name": "CoinConflictGraph",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinConflictGraph.hpp",
+  "brief": "Conflict graph for binary variable incompatibilities in MIP",
+  "algorithms": [
+    {
+      "name": "Conflict Graph Construction:\n  For binary variables x_i \u2208 {0,1}, build graph G where:\n  - Nodes: original variables x_i and complements x\u0304_i = 1 - x_i\n  - Edges: (u,v) if u=1 and v=1 simultaneously infeasible\n  Sources of conflicts:\n  1. Set packing constraints: x_i + x_j \u2264 1 \u2192 edge (x_i, x_j)\n  2. Variable bounds: x_i \u2264 x_j \u2192 edge (x_i, x\u0304_j)\n  3. Clique constraints: \u03a3x_i \u2264 1 \u2192 complete subgraph",
+      "math": "Independent set in conflict graph \u2194 feasible partial assignment.\n  Clique C in conflict graph \u2192 valid inequality \u03a3_{i\u2208C} x_i \u2264 1.\n  Maximum clique gives strongest clique cut.",
+      "complexity": "Space: O(n\u00b2) worst case, but typically sparse O(n + m)\n  Conflict check: O(1) with adjacency matrix, O(degree) with lists\n  Clique storage: large cliques stored explicitly to save space",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinBronKerbosch for clique enumeration",
+    "CoinCliqueList for clique storage\n\n\\copyright{Copyright 2020 Brito, S.S. and Santos, H.G.}\n\\license{This This code is licensed under the terms of the Eclipse Public License (EPL).}"
+  ]
+}

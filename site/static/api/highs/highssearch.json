@@ -1,0 +1,20 @@
+{
+  "name": "HighsSearch",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsSearch.h",
+  "brief": "Branch-and-bound tree search for MIP solver\n\nImplements depth-first search with backtracking and node evaluation.",
+  "algorithms": [
+    {
+      "name": "Child Selection Direction:\nDetermines which child to explore first at each branch.\n\n  kRootSol:  Direction toward LP relaxation solution\n  kBestCost: Direction with lower pseudocost estimate\n  kObj:      Direction that doesn't worsen objective\n  kHybrid:   Weighted combination of inference and cost\n\n**Node Management:**\n- nodestack[]: Stack of NodeData for current branch\n- NodeData: {lower_bound, estimate, branchingdecision, nodeBasis, etc.}\n- localdom: HighsDomain for current node's variable bounds\n\n**NodeResult Enum:**\n- kBoundExceeding: Node bound exceeds cutoff\n- kDomainInfeasible: Domain propagation found infeasibility\n- kLpInfeasible: LP relaxation infeasible\n- kBranched: Node branched on integer variable\n- kSubOptimal: Node proven suboptimal\n\n**Child Selection Rules:**\n- kUp/kDown: Always branch up/down first\n- kRootSol: Prefer direction toward root solution\n- kBestCost/kWorstCost: Use pseudocost estimates\n- kHybridInferenceCost: Combine inference and cost scores\n\n**Key Operations:**\n- dive(): Descend tree solving LP at each node\n- evaluateNode(): Solve LP relaxation, check bounds\n- branch(): Select variable and create child nodes\n- selectBranchingCandidate(): Strong branching + pseudocosts\n- backtrack(): Return to parent node\n- backtrackPlunge(): Intelligent backtracking with node queue\n\n**Heuristic Support:**\n- setRINSNeighbourhood(): Fix variables from incumbent\n- setRENSNeighbourhood(): Round LP solution",
+      "math": "",
+      "complexity": "- Node evaluation: O(LP_solve) = O(m^2 * n) worst case\n- Strong branching: O(candidates * LP_iterations)\n- Pseudocost lookup: O(1)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "mip/HighsNodeQueue.h for best-first node storage",
+    "mip/HighsPseudocost.h for branching scores"
+  ]
+}

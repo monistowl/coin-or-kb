@@ -1,0 +1,21 @@
+{
+  "name": "ClpCholeskyWssmp",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpCholeskyWssmp.hpp",
+  "brief": "WSSMP sparse direct solver interface for Cholesky factorization\n\nWraps IBM's Watson Sparse Matrix Package (WSSMP) for Cholesky factorization\nof normal equations in interior point methods.",
+  "algorithms": [
+    {
+      "name": "WSSMP Features:\n- Multifrontal sparse Cholesky: O(n^1.5 to n^2) for 2D/3D problems\n- Shared memory parallelism (OpenMP)\n- Dense column handling: columns with >threshold nonzeros\n  treated as dense for cache efficiency\n- Symbolic factorization reuse: factor pattern once, update numerics",
+      "math": "NORMAL EQUATIONS:\nGiven step direction system:  [D  A'] [\u0394x]   [r\u2081]\n                              [A  0 ] [\u0394y] = [r\u2082]\n\nEliminate \u0394x: (A\u00b7D\u207b\u00b9\u00b7A')\u00b7\u0394y = r\u2082 - A\u00b7D\u207b\u00b9\u00b7r\u2081\n              M\u00b7\u0394y = rhs  where M = A\u00b7D\u207b\u00b9\u00b7A'\n\nThen: \u0394x = D\u207b\u00b9\u00b7(r\u2081 - A'\u00b7\u0394y)",
+      "complexity": "Symbolic: O(nnz\u00b2/n) typical for sparse\nNumeric: O(nnz(L)\u00b7n_ops) where L is Cholesky factor\nSolve: O(nnz(L)) triangular solves\n\nRequires WSSMP library to be installed and linked.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpCholeskyBase for the abstract interface",
+    "ClpCholeskyWssmpKKT for KKT system variant",
+    "ClpInterior which uses this factorization"
+  ]
+}

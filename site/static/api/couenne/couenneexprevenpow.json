@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprEvenPow",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprEvenPow.hpp",
+  "brief": "Even integer power w = x^k where k is even\n\nHandles x^2, x^4, x^6, etc. These have special structure:\n- Always non-negative: w >= 0\n- Symmetric about y-axis: f(x) = f(-x)\n- NOT bijective: x and -x give same w\n\n**Convexity:**\nEven powers are convex everywhere (sum of squares is convex).\nThis greatly simplifies the convex relaxation.\n\n**Bound propagation:**\n- lb(w) = 0 if [lb(x), ub(x)] contains 0\n- lb(w) = min(lb(x)^k, ub(x)^k) otherwise\n- ub(w) = max(lb(x)^k, ub(x)^k)\n\n**Implied bounds (non-bijective!):**\nFrom w = x^k where k even:\n- |x| <= w^(1/k), so -w^(1/k) <= x <= w^(1/k)\n- Cannot determine sign of x from w alone\n\n**Convexification:**\nSince convex: tangent line underestimators everywhere.\nSecant line is the overestimator.\n\n**Special case x^2:**\nMost common even power, often handled separately for efficiency.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprOddPow for odd powers (bijective, S-shaped)",
+    "exprQuad for sum of squares"
+  ]
+}

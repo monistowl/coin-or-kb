@@ -1,0 +1,13 @@
+{
+  "name": "HighsDisjointSets",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsDisjointSets.h",
+  "brief": "Union-Find data structure for disjoint sets\n\nEfficient partition management with path compression and union-by-size.\n\n**Template Parameter:**\n- kMinimalRepresentative: If true, smaller index becomes representative\n  (useful for symmetry detection where order matters)\n\n**Data Structure:**\n- sets[]: Parent pointers (self-loop = representative)\n- sizes[]: Set sizes for union-by-size\n- linkCompressionStack: Workspace for path compression\n\n**Operations:**\n- getSet(): Find representative with path compression\n  - Amortized O(\u03b1(n)) via iterative compression\n- merge(): Union two sets\n  - Union-by-size keeps tree balanced\n  - Or union-by-min-index if kMinimalRepresentative\n- getSetSize(): Size of set containing item\n\n**Usage in HiGHS:**\n- Symmetry detection: orbit computation (HighsSymmetry)\n- Clique merging (HighsCliqueTable)\n- Connected component identification",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "presolve/HighsSymmetry.h for orbit computation",
+    "mip/HighsCliqueTable.h for clique management"
+  ]
+}

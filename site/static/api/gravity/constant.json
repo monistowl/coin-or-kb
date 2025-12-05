@@ -1,0 +1,13 @@
+{
+  "name": "constant",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/constant.h",
+  "brief": "Scalar and vector constants with type tracking\n\nBase constant class and typed constant templates for numeric values.\n\n**constant_ Base Class:**\n- _type: CType enum (binary_c, integer_c, double_c, complex_c, etc.)\n- _is_transposed: Transpose flag for matrix operations\n- _is_vector: True if vector/matrix\n- _dim[2]: Dimensions (rows, cols)\n- _polar: Complex polar representation flag\n\n**CType Classification:**\n- Scalar types: binary_c, short_c, integer_c, float_c, double_c, long_c\n- Special types: par_c (param), var_c (variable), func_c (function)\n- Expression types: uexp_c (unary), bexp_c (binary)\n\n**constant<type> Template:**\n- Holds single typed value\n- Implicit conversion from numeric types\n- String conversion with precision\n\n**Helper Functions:**\n- to_string_with_precision(): Format numbers\n- unit<type>(): Multiplicative identity (1)\n- zero<type>(): Additive identity (0)\n\n**Complex Support:**\n- Cpx typedef for complex<double>\n- Polar/rectangular representation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/param.h for indexed parameters",
+    "gravity/var.h for optimization variables"
+  ]
+}

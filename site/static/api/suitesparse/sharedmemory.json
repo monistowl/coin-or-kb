@@ -1,0 +1,12 @@
+{
+  "name": "sharedMemory",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/Kernel/sharedMemory.hpp",
+  "brief": "GPU shared memory layout for QR kernel operations\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nSharedMemory union overlays three kernel types: factorize (A, T, Z tiles\nfor Householder), apply (V, C matrices for block update), packassemble\n(Rimap/Rjmap for contribution assembly). Global __shared__ shMemory,\nmyTask (current task), IsApplyFactorize flag. Sized for PANELSIZE\u00d7TILESIZE.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_Common.hpp for TILESIZE, PANELSIZE constants"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "SolutionStrategyMIQCQP",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/SolutionStrategy/SolutionStrategyMIQCQP.h",
+  "brief": "Direct MIQCQP solver for convex quadratic problems\n\nBypasses ESH for problems solvable by CPLEX/Gurobi MIQCQP.\n\n**SolutionStrategyMIQCQP Class:**\n- initializeStrategy(): Configure for direct MIQCQP solve\n- solveProblem(): Single solver call, no outer approximation\n\n**Use Case:**\n- Convex MIQCQP (quadratic constraints, convex)\n- CPLEX and Gurobi support convex QCQP natively\n- Faster than iterative linearization for small problems\n\n**Problem Classification:**\n- All constraints must be convex quadratic\n- Solver must support QCQP (supportsQuadraticConstraints)",
+  "algorithms": [
+    {
+      "name": "Direct MIQCQP branch-and-bound",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "SolutionStrategyMultiTree.h for general MINLP"
+  ]
+}

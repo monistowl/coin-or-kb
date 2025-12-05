@@ -1,0 +1,12 @@
+{
+  "name": "OsiSolverParameters",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiSolverParameters.hpp",
+  "brief": "Parameter enums for cross-solver configuration in Osi\nCopyright (C) 2000, International Business Machines Corporation.\nEPL-1.0 license.\n\nDefines OsiIntParam (iteration limits, name discipline), OsiDblParam\n(objective limits, tolerances, offset), OsiStrParam (problem/solver names),\nOsiHintParam (crash, presolve, scaling, pivoting hints with OsiHintStrength).\nSolvers implement these via get/setIntParam, get/setDblParam, etc.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiSolverInterface::setIntParam, setDblParam, setHintParam"
+  ]
+}

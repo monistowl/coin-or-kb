@@ -1,0 +1,12 @@
+{
+  "name": "GraphBLAS_cuda",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/CUDA/include/GraphBLAS_cuda.hpp",
+  "brief": "Main GraphBLAS CUDA include with C++ complex type definitions\nCopyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.\n\nCUDA-compatible GraphBLAS header. Defines C++ complex types: GxB_FC32_t\n(std::complex<float>), GxB_FC64_t (std::complex<double>). Macros GxB_CMPLXF,\nGxB_CMPLX for construction. Includes GB_cuda_geometry.hpp. Used by JIT\nkernels requiring complex arithmetic.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GB_cuda.hpp for host-side CUDA utilities"
+  ]
+}

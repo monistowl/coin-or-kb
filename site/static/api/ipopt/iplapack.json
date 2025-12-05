@@ -1,0 +1,22 @@
+{
+  "name": "IpLapack",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpLapack.hpp",
+  "brief": "C++ wrappers for LAPACK (Linear Algebra PACKage) routines\n\nProvides platform-independent access to LAPACK for dense matrices.",
+  "algorithms": [
+    {
+      "name": "Dense Matrix Factorization Methods:\n  - Cholesky: A = L\u00b7L^T for symmetric positive definite (SPD)\n  - LU: A = P\u00b7L\u00b7U with partial pivoting for general matrices\n  - Symmetric indefinite: A = L\u00b7D\u00b7L^T with Bunch-Kaufman pivoting",
+      "math": "Eigenvalue decomposition (Syev):\n  For symmetric A, compute A = V\u00b7\u039b\u00b7V^T where \u039b = diag(\u03bb_1,...,\u03bb_n).\n  Returns eigenvalues in ascending order. Eigenvectors in columns of V.",
+      "complexity": "Cholesky: O(n\u00b3/3), LU: O(2n\u00b3/3), Eigenvalues: O(n\u00b3)\n  Dense methods - use sparse solvers for large problems.",
+      "ref": [
+        "Anderson et al. (1999). \"LAPACK Users' Guide\". 3rd ed. SIAM."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpBlas.hpp for lower-level vector operations",
+    "Linear solver interfaces for sparse factorization"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "IpSlackBasedTSymScalingMethod",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpSlackBasedTSymScalingMethod.hpp",
+  "brief": "Simple scaling based on current slack values\n\nSlackBasedTSymScalingMethod computes scaling factors using only\nthe current slack values, without requiring external HSL routines.\nDesigned for use with inexact/iterative linear solvers.\n\nUnlike MC19 which performs full equilibration, this method uses\na simpler heuristic based on:\n- Current slack variable values s\n- Diagonal elements of the KKT system\n\nBenefits:\n- No external library dependencies\n- Lightweight computation\n- Suitable when full equilibration is unnecessary\n\nLimitations:\n- May not achieve as good conditioning as MC19\n- Best for problems where slacks dominate scaling needs",
+  "algorithms": [
+    {
+      "name": "Slack-Based Scaling Heuristic:\nLightweight scaling using interior-point slack values:\n1. Extract diagonal elements from KKT matrix\n2. Scale based on current slack values s and multipliers\n3. Avoid expensive equilibration when simple scaling suffices\nTrade-off: faster but potentially worse conditioning than MC19.",
+      "math": "Heuristic scaling for interior-point:\nIn barrier method, slacks s provide natural scaling information.\nFor KKT diagonals involving Z\u00b7S\u207b\u00b9 (where Z = dual slacks):\n$$d_i \\approx \\sqrt{s_i}$$ (simple heuristic)\n\nFull equilibration (MC19) minimizes max|D\u00b7A\u00b7D| but costs O(nnz\u00b7iter).\nSlack-based scaling: O(n) using readily available iterate values.",
+      "complexity": "O(n) per call: single pass over slack variables.\nNo matrix traversal or iterative refinement required.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTSymScalingMethod.hpp for base interface",
+    "IpMc19TSymScalingMethod.hpp for full equilibration"
+  ]
+}

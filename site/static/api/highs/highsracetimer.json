@@ -1,0 +1,12 @@
+{
+  "name": "HighsRaceTimer",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/parallel/HighsRaceTimer.h",
+  "brief": "Lock-free timer for parallel algorithm racing\n\nAllows multiple threads to race, with early termination when limit reached.\n\n**HighsRaceTimer<T> Class:**\nAtomic limit value that can only decrease:\n- Constructor: Initialize limit to max value (no limit)\n- decreaseLimit(newLimit): Atomically reduce limit (CAS loop)\n- limitReached(currentTime): Check if time exceeds limit\n\n**Memory Ordering:**\nUses relaxed ordering since:\n- Only one direction (decrease) of updates\n- Eventual consistency sufficient for early termination\n- No happens-before relationships required\n\n**Usage:**\nMultiple solvers race; first to find solution decreases limit.\nSlower solvers check limitReached() and abort early.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsSearch.h for parallel node processing"
+  ]
+}

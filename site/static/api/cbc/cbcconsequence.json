@@ -1,0 +1,20 @@
+{
+  "name": "CbcConsequence",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcConsequence.hpp",
+  "brief": "Abstract base for bound implications from branching",
+  "algorithms": [
+    {
+      "name": "Branch Consequence Interface for Implied Bounds\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcConsequence: Abstract interface for side effects when branching.\nWhen a variable is fixed, other variables may have implied bounds\nthat go beyond what LP constraint propagation would derive.\n\nExample: Binary y controls whether continuous x can be nonzero.\nWhen y=0, we know x=0 even if the constraint linking them is weak.\n\nThe applyToSolver() method is called after branching to impose\nthese derived bounds on the solver, based on the branch state.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcFixVariable for concrete implementation",
+    "CbcObject for objects that may have consequences\n\nEdwin 11/12/2009 carved from CbcBranchBase"
+  ]
+}

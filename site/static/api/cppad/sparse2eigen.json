@@ -1,0 +1,9 @@
+{
+  "name": "sparse2eigen",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/sparse2eigen.hpp",
+  "brief": "CppAD utility: sparse2eigen",
+  "algorithms": [],
+  "methods": []
+}

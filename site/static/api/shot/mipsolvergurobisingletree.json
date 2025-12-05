@@ -1,0 +1,12 @@
+{
+  "name": "MIPSolverGurobiSingleTree",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/MIPSolverGurobiSingleTree.h",
+  "brief": "Gurobi with lazy constraint callback for single-tree ESH\n\nExtends MIPSolverGurobi with callback-based cut generation.\n\n**GurobiCallbackSingleTree Class:**\n- Inherits GRBCallback + MIPSolverCallbackBase\n- callback(): Called at candidate solution points\n- createHyperplane()/createIntegerCut(): Add lazy constraints\n- addLazyConstraint(): Generate ESH cuts from solution\n\n**MIPSolverGurobiSingleTree Class:**\n- solveProblem(): Single MIP solve with callbacks enabled\n- isCallbackInitialized: Track callback registration\n\n**Node Information:**\n- lastExploredNodes/lastOpenNodes: B&B tree progress\n- Used for iteration reporting within callback",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SolutionStrategySingleTree.h for algorithm context"
+  ]
+}

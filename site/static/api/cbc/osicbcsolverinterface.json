@@ -1,0 +1,13 @@
+{
+  "name": "OsiCbcSolverInterface",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/OsiCbc/OsiCbcSolverInterface.hpp",
+  "brief": "OSI-compliant solver interface wrapping Cbc\nCopyright (C) 2000, International Business Machines Corporation.\nThis code is licensed under the Eclipse Public License (EPL).\n\nOsiCbcSolverInterface: Implements OsiSolverInterface by wrapping a\nCbcModel. Provides standard OSI methods (initialSolve, resolve,\nbranchAndBound) that delegate to Cbc's MIP solver. Enables Cbc\nto be used as a plug-in solver in OSI-based applications.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiSolverInterface for base OSI interface",
+    "CbcModel for underlying MIP solver"
+  ]
+}

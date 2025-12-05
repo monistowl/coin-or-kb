@@ -1,0 +1,22 @@
+{
+  "name": "ClpCholeskyPardiso",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpCholeskyPardiso.hpp",
+  "brief": "Intel MKL Pardiso sparse direct solver for Cholesky factorization\n\nWraps Intel's Pardiso solver from the Math Kernel Library (MKL) for\nCholesky factorization of normal equations in interior point methods.",
+  "algorithms": [
+    {
+      "name": "Intel MKL Pardiso Sparse Cholesky:\n  Highly optimized parallel sparse factorization A = LL':\n  1. Reordering phase: Nested dissection or minimum degree ordering\n  2. Symbolic factorization: Determine nonzero structure of L\n  3. Numerical factorization: Compute L with OpenMP parallelism\n     - Supernodal blocking for BLAS-3 efficiency\n     - Two-level parallelism: task + loop\n  4. Solve: Forward/backward substitution (parallelized)",
+      "math": "Supernodal factorization:\n  Group consecutive pivots with same sparsity pattern.\n  Supernode operations: dense BLAS-3 on column panels.\n  L_JI = A_JI \u00b7 L_II\u207b\u1d40 where I is supernode, J below.",
+      "complexity": "O(nnz(L)\u00b7supernode_size) for factorization.\n  Parallel efficiency 70-90% with OpenMP on multi-core.\n  Out-of-core mode enables problems larger than RAM.",
+      "ref": [
+        "Schenk & G\u00e4rtner (2004). \"Solving unsymmetric sparse systems of linear\n     equations with PARDISO\". Future Generation Computer Systems 20:475-487.\n\nPardiso provides:\n- Highly optimized sparse direct solving on Intel CPUs\n- Parallel factorization using OpenMP\n- Out-of-core capability for large problems\n\nRequires Intel MKL library and PARDISO_BARRIER compile flag."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpCholeskyBase for the abstract interface",
+    "ClpInterior which uses this factorization"
+  ]
+}

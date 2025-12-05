@@ -1,0 +1,12 @@
+{
+  "name": "BonStartPointReader",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonStartPointReader.hpp",
+  "brief": "Reader for Ipopt initialization point files\nCopyright (C) Carnegie Mellon University 2005. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nStartPointReader: Reads .initP files containing starting point\ninformation for Ipopt initialization. File format is: number of\nprimals, number of duals, then values. Variables ordered as:\nprimals, dual lower bounds, dual upper bounds, constraint duals.\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: May 26, 2005",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiTMINLPInterface for applying the starting point"
+  ]
+}

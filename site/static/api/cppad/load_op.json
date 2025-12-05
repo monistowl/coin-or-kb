@@ -1,0 +1,9 @@
+{
+  "name": "load_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/load_op.hpp",
+  "brief": "Internal implementation: load_op",
+  "algorithms": [],
+  "methods": []
+}

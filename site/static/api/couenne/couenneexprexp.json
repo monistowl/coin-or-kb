@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprExp",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprExp.hpp",
+  "brief": "Exponential expression w = exp(x)\n\nRepresents the exponential function e^x. This is a convex function\nover all of R, so convexification uses secant cuts for overestimation\nand tangent cuts for underestimation.\n\n**Convexification for w = exp(x) on [l,u]:**\n- Underestimator (tangent): w >= exp(x0) + exp(x0)*(x - x0) at any x0 in [l,u]\n- Overestimator (secant): w <= exp(l) + (exp(u) - exp(l))/(u - l) * (x - l)\n\n**Implied bounds:**\n- Given w in [wl, wu] with wl > 0: x in [log(wl), log(wu)]\n- Given x in [xl, xu]: w in [exp(xl), exp(xu)]\n\n**Bijective property:**\nExp is bijective with inverse log(), enabling tighter bound propagation.\n\n**Convexity:** Convex everywhere, simplifying global optimization.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprLog for the inverse function",
+    "CouenneExprUnary for base class"
+  ]
+}

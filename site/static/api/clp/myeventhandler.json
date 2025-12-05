@@ -1,0 +1,13 @@
+{
+  "name": "MyEventHandler",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/MyEventHandler.hpp",
+  "brief": "Example event handler demonstrating callback customization\n\nSample implementation of ClpEventHandler showing how users can\nintercept simplex events for custom processing. Used in unit tests.\n\nTo create your own handler:\n1. Inherit from ClpEventHandler\n2. Override event() method\n3. Return 0 to continue, non-zero to stop\n4. Attach via ClpSimplex::passInEventHandler()\n\nAvailable events (see ClpEventHandler::Event):\n- endOfIteration: After each pivot\n- endOfFactorization: After basis refactorization\n- endOfValuesPass: After crash/values pass\n- node: During B&B (if used with Cbc)\n\nThe model_ pointer gives access to full solver state including\ncurrent solution, basis, and objective value.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ClpEventHandler for the event types and interface",
+    "ClpSimplex::passInEventHandler() to install"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "GPUQREngine_TaskDescriptor",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_TaskDescriptor.hpp",
+  "brief": "GPU task types and metadata for QR kernel dispatch\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nTaskType enum: Factorize variants (3x1, 2x1, 1x1, edge cases), Apply\nvariants (Apply3/2/1), Assembly (SAssembly, PackAssembly). TaskDescriptor\nstruct contains F pointer, AuxAddress[4] (VT blocks, maps), dimensions,\nextra[10] (tile indices, ranges). Used by UberKernel for dispatch.\ngetFlops/getWeightedFlops for work queue balancing.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_Internal.hpp for UberKernel declaration"
+  ]
+}

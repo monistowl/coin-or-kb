@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_IO",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_IO.hpp",
+  "brief": "Matrix Market file I/O for graphs and matrices\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nFile I/O for Mongoose: read_graph creates Graph from Matrix Market file,\nread_matrix creates cs struct. Handles symmetrization (A+A')/2 for\nasymmetric matrices, extracts largest connected component, removes\ndiagonal. Accepts C string or std::string filenames.",
+  "algorithms": [
+    {
+      "name": "Matrix Market Import Pipeline:\nReads standard sparse matrix format into Mongoose graph:\n\n1. Parse Matrix Market header (format, type, symmetry)\n2. Read coordinate entries into triplet form\n3. Convert triplet to CSC via cs_compress\n4. Symmetrize if needed: A = (A + A^T)/2\n5. Remove diagonal (self-loops)\n6. Extract largest connected component (via BFS)\n7. Return Graph or cs struct",
+      "math": "Connected component extraction:\nBFS from arbitrary vertex marks reachable set.\nIf not all vertices reached, restart BFS from unmarked vertex.\nKeep only largest component for partitioning.",
+      "complexity": "O(n + nz) for parsing and preprocessing.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_Graph.hpp for Graph class",
+    "Mongoose_CSparse.hpp for cs matrix struct"
+  ]
+}

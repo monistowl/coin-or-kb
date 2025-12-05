@@ -1,0 +1,23 @@
+{
+  "name": "CglClique",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglClique/CglClique.hpp",
+  "brief": "Clique cuts from set packing structure\n\nGenerates clique inequalities by finding maximal cliques in the\nconflict graph of binary variables. Two binaries conflict if they\ncannot both be 1 in any feasible solution.\n\nClique inequality: sum_{j in C} x_j <= 1 (or = 1 if equality)\n\nGraph construction (frac_graph):\n- Nodes: Binary variables at fractional LP values\n- Edges: Variables that conflict (appear in same set packing row)\n- Edge costs: 1 - x_i - x_j (for odd hole detection)\n\nTwo clique-finding methods:\n1. Star clique (do_star_clique):\n   - Pick a center node, find all neighbors (star)\n   - Enumerate maximal cliques in the star\n   - SCL_MIN_DEGREE/MAX_DEGREE/MAX_XJ_MAX_DEG selection rules\n2. Row clique (do_row_clique):\n   - Start from existing set packing row\n   - Extend to larger clique using adjacent variables\n\nThresholds:\n- scl_candidate_length_threshold: Max size for exact enumeration\n- rcl_candidate_length_threshold: Same for row clique method\n- Beyond threshold: use greedy heuristic\n\nCglFakeClique (derived class):\n- Works on \"fake\" solver with invented rows from probing\n- Integrates with CglProbing for stronger implications",
+  "algorithms": [
+    {
+      "name": "Greedy Maximal Clique (greedy_maximal_clique):\n  When candidate list exceeds threshold:",
+      "math": "Greedily add highest-degree nodes until no more fit\n  Fast but may miss maximum violated clique.",
+      "complexity": "O(n\u00b2 * d) for greedy approach",
+      "ref": [
+        "Padberg (1973) - On the facial structure of set packing",
+        "Bron-Kerbosch (1973) - Algorithm for finding all cliques"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglOddHole for odd-hole cuts (related conflict graph structure)",
+    "CglProbing for variable fixing from cliques"
+  ]
+}

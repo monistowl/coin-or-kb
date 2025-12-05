@@ -1,0 +1,9 @@
+{
+  "name": "CoinTime",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinTime.hpp",
+  "brief": "Cross-platform timing utilities (CPU and wall clock)\n\nProvides CoinCpuTime() and CoinWallclockTime() that work on\nWindows, Mac, and Unix/Linux platforms.",
+  "algorithms": [],
+  "methods": []
+}

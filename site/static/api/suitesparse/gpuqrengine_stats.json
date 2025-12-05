@@ -1,0 +1,12 @@
+{
+  "name": "GPUQREngine_Stats",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_Stats.hpp",
+  "brief": "Performance statistics for GPU QR factorization\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nQREngineStats template struct: kernelTime (total GPU kernel time across\nlaunches), numLaunches (kernel invocation count), flopsActual (total\nfloating-point operations). Optional output parameter for GPUQREngine_Internal.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_Internal.hpp uses stats parameter"
+  ]
+}

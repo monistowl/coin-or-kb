@@ -1,0 +1,14 @@
+{
+  "name": "SmiQuadratic",
+  "library": "Smi",
+  "layer": "layer-3",
+  "header": "Smi/src/SmiQuadratic.hpp",
+  "brief": "Quadratic objective data for stochastic quadratic programming\n\nClasses for storing quadratic objective terms in stochastic QP problems.\nThe quadratic objective is: (1/2) x' Q x + c' x\n\n**SmiQuadraticData Class:**\nBase class storing Q matrix in compressed sparse column format:\n- _n: Number of columns\n- _starts: Column start indices (size n+1)\n- _indx: Row indices of nonzeros\n- _els: Values of nonzeros\n- _coff: Column offset for stage-based indexing\n- _hasData: Flag for valid data\n\n**CSC Format:**\nFor column j, nonzeros are at positions [starts[j], starts[j+1]):\n- Row indices: indx[starts[j]] ... indx[starts[j+1]-1]\n- Values: els[starts[j]] ... els[starts[j+1]-1]\n\n**SmiQuadraticDataDC Class:**\n\"Data Container\" subclass that owns its memory:\n- Constructor allocates arrays\n- Destructor frees arrays",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SmiScnData.hpp::SmiNodeData::addQuadraticObjective()",
+    "SmiScnModel.hpp::loadQuadraticSolverData()",
+    "ClpModel (Clp) for QP solving"
+  ]
+}

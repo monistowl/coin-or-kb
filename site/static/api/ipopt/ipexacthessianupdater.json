@@ -1,0 +1,20 @@
+{
+  "name": "IpExactHessianUpdater",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpExactHessianUpdater.hpp",
+  "brief": "Hessian updater using exact second derivatives from NLP\n\nExactHessianUpdater is a trivial HessianUpdater implementation that\nsimply retrieves the exact Hessian of the Lagrangian from the NLP\nat each iteration.",
+  "algorithms": [
+    {
+      "name": "Exact Hessian Computation:\n  UpdateHessian() at each iteration:\n  1. Get current x from IpData::curr()->x().\n  2. Get current multipliers y_c, y_d from IpData::curr().\n  3. Call IpoptNLP::h(x, obj_factor, y_c, y_d) \u2192 W.\n  4. Store W in IpData for PDSystemSolver.\n  NLP caching handles redundant evaluation avoidance.",
+      "math": "Hessian of Lagrangian:\n  W = \u03c3\u00b7\u2207\u00b2f(x) + \u03a3\u1d62 (y_c)\u1d62\u00b7\u2207\u00b2c\u1d62(x) + \u03a3\u2c7c (y_d)\u2c7c\u00b7\u2207\u00b2d\u2c7c(x)\n  where \u03c3 = obj_factor (typically 1, or barrier-related in restoration).\n  Symmetric matrix, stored in lower triangular sparse format.",
+      "complexity": "O(nnz_hessian) per evaluation.\n  Enables quadratic convergence: ||x_{k+1} - x*|| \u2264 C\u00b7||x_k - x*||\u00b2.\n  Quasi-Newton: only superlinear ||x_{k+1} - x*|| \u2264 C\u00b7||x_k - x*||^{1.5-2}.\n\nThe Hessian is:\n  W = \u2207\u00b2f(x) + \u03a3 y_c[i] * \u2207\u00b2c_i(x) + \u03a3 y_d[j] * \u2207\u00b2d_j(x)\n\nUpdateHessian() method:\n- Calls IpoptNLP::h() with current x and multipliers\n- Stores result in IpData for use by PDSystemSolver\n\nRequirements:\n- User NLP must provide eval_h callback (TNLP) or h() method\n- Option hessian_approximation must be \"exact\"\n\nAdvantages over quasi-Newton:\n- Quadratic local convergence rate\n- Accurate curvature for non-convex problems\n- Better inertia detection\n\nDisadvantages:\n- User must implement second derivatives\n- More function evaluations per iteration\n- Hessian evaluation can be expensive",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpHessianUpdater.hpp for the base interface",
+    "IpLimMemQuasiNewtonUpdater.hpp for L-BFGS alternative"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicDiveGuided",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicDiveGuided.hpp",
+  "brief": "Dive heuristic guided by incumbent solution\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDiveGuided: Uses existing incumbent to guide diving.\nRequires a feasible solution (canHeuristicRun checks this).",
+  "algorithms": [
+    {
+      "name": "Guided Dive Variable Selection (Danna, Rothberg, Le Pape):\n  selectVariableToBranch() given incumbent x*:\n  1. For each fractional integer x_j, compute distance to x*_j.\n  2. Select j* with largest discrepancy: |x\u0304_j - x*_j|.\n  3. Round toward incumbent: bestRound = round(x\u0304_j toward x*_j).\n  Requires incumbent: canHeuristicRun() returns false if none.",
+      "math": "Incumbent-guided rounding:\n  Score_j = |x\u0304_j - x*_j| for fractional j.\n  Intuition: Variables far from incumbent are \"wrong\"; fix them first.\n  Rounds toward x*_j to stay in proven-good neighborhood.\n  Similar to RINS but integrated into diving framework.\n\nPart of the \"Guided Dive\" approach from Danna et al.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicDive for base class and diving algorithm",
+    "CbcHeuristicRINS for related incumbent-guided search"
+  ]
+}

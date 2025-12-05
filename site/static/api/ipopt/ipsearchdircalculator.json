@@ -1,0 +1,21 @@
+{
+  "name": "IpSearchDirCalculator",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpSearchDirCalculator.hpp",
+  "brief": "Strategy interface for computing the Newton search direction\n\nSearchDirectionCalculator is the strategy interface for computing\nthe search direction at each IPM iteration. The computed direction\nis stored in IpData().delta() (an IteratesVector).",
+  "algorithms": [
+    {
+      "name": "Newton Search Direction Computation:\n  Given current iterate w = (x, s, y_c, y_d, z_L, z_U, v_L, v_U):\n  1. Form KKT system with current W (Hessian), J_c, J_d (Jacobians).\n  2. Compute RHS from gradient, constraint residuals, complementarity.\n  3. Solve KKT system: K\u00b7\u0394w = -r (via PDSystemSolver).\n  4. Store \u0394w in IpData().delta() for line search.\n  For predictor-corrector: compute affine direction (\u03bc=0), then corrected.",
+      "math": "Newton direction satisfies linearized KKT conditions:\n  \u2207\u00b2L\u00b7\u0394x + A^T\u00b7\u0394y + \u0394z = -\u2207L (stationarity)\n  A\u00b7\u0394x = -c(x) (feasibility)\n  X\u00b7\u0394z + Z\u00b7\u0394x = \u03c3\u03bce - XZe (complementarity)\n  where \u03c3 \u2208 (0,1) is centering parameter, \u03bc is barrier parameter.",
+      "complexity": "O(n\u00b2) to O(n\u00b3) per iteration depending on KKT structure.\n  Dominated by linear system solve (see PDSystemSolver, AugSystemSolver).",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpPDSearchDirCalc.hpp for the standard implementation",
+    "IpPDSystemSolver.hpp for the linear system solver",
+    "IpIpoptAlg.hpp for where ComputeSearchDirection() is called"
+  ]
+}

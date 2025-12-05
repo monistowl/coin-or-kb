@@ -1,0 +1,13 @@
+{
+  "name": "rtr",
+  "library": "Creme",
+  "layer": "layer-4",
+  "header": "Creme/src/Base/rtr.h",
+  "brief": "Randomized rounding algorithm for Creme LP solver\n\nImplements rtr() to find maximal feasible subsystems (MFS) using\nrandomized iterative rounding. USE_RTR/USE_LOCSRCH mode selection.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "locsrch.h for local search alternative",
+    "sparse.h for LP data structure"
+  ]
+}

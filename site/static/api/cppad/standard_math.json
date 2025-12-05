@@ -1,0 +1,9 @@
+{
+  "name": "standard_math",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/standard_math.hpp",
+  "brief": "Core AD functionality: standard math",
+  "algorithms": [],
+  "methods": []
+}

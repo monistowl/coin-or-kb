@@ -1,0 +1,9 @@
+{
+  "name": "base_float",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/base_float.hpp",
+  "brief": "Core AD functionality: base float",
+  "algorithms": [],
+  "methods": []
+}

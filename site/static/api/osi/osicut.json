@@ -1,0 +1,22 @@
+{
+  "name": "OsiCut",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiCut.hpp",
+  "brief": "Abstract base class for cutting planes in branch-and-cut\n\nCutting planes are linear inequalities that can be added to an LP\nrelaxation to tighten the formulation without cutting off any\ninteger-feasible solutions.",
+  "algorithms": [
+    {
+      "name": "Global vs Local Cuts:\nScope of cut validity in B&B tree.\n\n  GLOBAL (globallyValid_ = true):\n    Valid throughout entire B&B tree\n    Can be added at any node\n    Example: Gomory cuts from root LP\n\n  LOCAL (globallyValid_ = false):\n    Valid only in subtree where generated\n    Must track node of origin\n    Example: Cuts using branching bounds",
+      "math": "A valid inequality (cut) a'x \u2265 \u03b2 satisfies:\n  - a'x* \u2265 \u03b2 for all x* \u2208 conv(feasible integer solutions)\n  - May be violated by LP optimum x_LP: a'x_LP < \u03b2\n\nCUTTING PLANE METHOD:\n  1. Solve LP relaxation \u2192 x_LP\n  2. If x_LP integer: DONE (optimal)\n  3. Find violated cut: a'x \u2265 \u03b2 with a'x_LP < \u03b2\n  4. Add cut to LP, goto 1",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiRowCut for linear inequality cuts",
+    "OsiColCut for variable bound cuts",
+    "OsiCuts for managing collections of cuts",
+    "Cgl (Cut Generation Library) for cut generators"
+  ]
+}

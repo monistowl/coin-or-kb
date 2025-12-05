@@ -1,0 +1,9 @@
+{
+  "name": "undef",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/undef.hpp",
+  "brief": "Core AD functionality: undef",
+  "algorithms": [],
+  "methods": []
+}

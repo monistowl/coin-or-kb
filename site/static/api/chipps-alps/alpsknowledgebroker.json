@@ -1,0 +1,14 @@
+{
+  "name": "AlpsKnowledgeBroker",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsKnowledgeBroker.h",
+  "brief": "Central manager for parallel tree search knowledge and coordination\n\nAlpsKnowledgeBroker is the abstract base class for search coordination.\nIt manages knowledge pools, search strategy, and execution statistics.\n\n**Key responsibilities:**\n- Manage SubTreePool and SolutionPool\n- Register knowledge types for serialization\n- Track search statistics (nodes processed, branched, etc.)\n- Apply search strategy (node/tree selection)\n\n**Knowledge pool management:**\n- addKnowledge()/getKnowledge(): Store/retrieve knowledge\n- registerClass(): Register decode functions for parallel\n- decoderObject(): Get decoder for knowledge type\n\n**Search phases (AlpsPhase):**\n- Rampup: Initial node generation and distribution\n- Search: Main parallel exploration\n- Rampdown: Collect results and terminate\n\n**Implementations:**\n- AlpsKnowledgeBrokerSerial: Single-process execution\n- AlpsKnowledgeBrokerMPI: MPI-based parallel execution",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsKnowledgeBrokerSerial for serial implementation",
+    "AlpsKnowledgeBrokerMPI for parallel implementation",
+    "AlpsSearchStrategy for node/tree selection"
+  ]
+}

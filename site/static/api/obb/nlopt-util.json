@@ -1,0 +1,13 @@
+{
+  "name": "nlopt-util",
+  "library": "oBB",
+  "layer": "layer-3",
+  "header": "nlopt/nlopt-util.h",
+  "brief": "NLopt utility functions and stopping criteria - bundled with oBB\n\nInternal utilities for NLopt algorithms including floating-point\nhelpers, timing, stopping criteria, and constraint handling.\n\n**Floating-Point Helpers:**\n- nlopt_isinf(), nlopt_isfinite(), nlopt_istiny(), nlopt_isnan()\n\n**Timing:**\n- nlopt_seconds(): Current time in seconds\n- nlopt_time_seed(): Seed based on current time\n\n**nlopt_stopping Struct:**\nStopping criteria state:\n- n: Problem dimension\n- minf_max: Stop if f <= minf_max\n- ftol_rel, ftol_abs: Function tolerance (relative/absolute)\n- xtol_rel, xtol_abs: Variable tolerance\n- nevals, maxeval: Evaluation count/limit\n- maxtime, start: Time limit and start time\n- force_stop: External stop signal\n\n**Stopping Tests:**\n- nlopt_stop_f(): Check function value convergence\n- nlopt_stop_x(), nlopt_stop_dx(): Check variable convergence\n- nlopt_stop_evals(), nlopt_stop_time(): Check limits\n\n**nlopt_constraint Struct:**\nConstraint representation (f <= 0 or f = 0):\n- m: Constraint dimension\n- f/mf: Scalar or vector constraint function\n- tol: Feasibility tolerance",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "nlopt.h for public API",
+    "nlopt-internal.h for optimizer structure"
+  ]
+}

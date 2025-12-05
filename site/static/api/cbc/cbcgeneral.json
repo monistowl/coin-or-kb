@@ -1,0 +1,20 @@
+{
+  "name": "CbcGeneral",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcGeneral.hpp",
+  "brief": "Abstract base for general multi-way branching",
+  "algorithms": [
+    {
+      "name": "Abstract Base for Multi-Way/Lookahead Branching\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcGeneral: Abstract base class for advanced branching strategies\nthat create lists of subproblems beyond simple two-way branching.\n\nDesigned for:\n- Partial evaluation (lookahead) branching\n- Multi-way branching strategies\n- Complex branching objects that need customized subproblem generation\n\nPure virtual class - see CbcGeneralDepth for main implementation.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcGeneralDepth for depth-limited partial evaluation",
+    "CbcNWay for simpler N-way branching\n\nEdwin 11/10/2009 carved out of CbcBranchActual"
+  ]
+}

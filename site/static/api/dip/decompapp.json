@@ -1,0 +1,21 @@
+{
+  "name": "DecompApp",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompApp.h",
+  "brief": "User application interface - derive to define your decomposition\n\nDecompApp is the main user-facing class. Derive from it to define:\n- Model decomposition (core vs relaxed constraints)\n- Subproblem solvers\n- Problem-specific heuristics",
+  "algorithms": [
+    {
+      "name": "Primal Heuristics (APPheuristics):\nGenerate feasible solutions during branch-and-price.\n\n  INPUT: Current fractional solution x\u0302\n  OUTPUT: Feasible integer solutions (incumbents)\n\n  Good incumbents:\n    - Improve global upper bound\n    - Enable more pruning in B&B tree\n    - Guide branching decisions",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DecompModel.h for model container classes",
+    "DecompAlgo.h for algorithm that uses this app",
+    "DecompParam.h for configuration parameters"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "IpOptErrorConvCheck",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpOptErrorConvCheck.hpp",
+  "brief": "Standard convergence check based on optimality error tolerances\n\nOptimalityErrorConvergenceCheck implements the standard termination\ncriteria for Ipopt based on KKT optimality conditions.\n\nOptimal convergence (tol):\n- Dual infeasibility <= dual_inf_tol_\n- Constraint violation <= constr_viol_tol_\n- Complementarity <= compl_inf_tol_\n- Overall scaled error <= tol\n\nAcceptable convergence (acceptable_tol):\n- Less stringent tolerances applied for acceptable_iter_ iterations\n- Terminates early if stuck near acceptable solution\n- acceptable_obj_change_tol_: Detects stagnation in objective\n\nFailure conditions:\n- max_iterations_: Iteration limit exceeded\n- max_wall_time_, max_cpu_time_: Time limits\n- diverging_iterates_tol_: Primal variables diverging\n- mu_target_: Target barrier parameter reached\n\nCurrentIsAcceptable():\n- Returns true if acceptable-level tolerances are met\n- Used by line search to decide on restoration phase",
+  "algorithms": [
+    {
+      "name": "KKT Optimality Convergence Check:\nTests first-order optimality conditions (scaled and unscaled):\n1. Optimal convergence (all must hold):\n   - ||\u2207L||\u221e \u2264 dual_inf_tol (dual feasibility)\n   - ||c(x)||\u221e \u2264 constr_viol_tol (primal feasibility)\n   - ||X\u00b7Z\u00b7e - \u03bc\u00b7e||\u221e \u2264 compl_inf_tol (complementarity)\n   - Overall scaled error \u2264 tol\n2. Acceptable convergence (fallback after acceptable_iter_ iterations):\n   - Same conditions with relaxed tolerances (acceptable_*)\n   - Plus objective stagnation check: |f_k - f_{k-1}| \u2264 acceptable_obj_change_tol\n3. Failure conditions:\n   - iter > max_iterations_\n   - time > max_wall_time_ or max_cpu_time_\n   - ||x||\u221e > diverging_iterates_tol (divergence)\n   - \u03bc \u2264 mu_target_ (target barrier reached)",
+      "math": "First-order KKT conditions:\n  \u2207f(x) + \u2207c(x)\u1d40\u03bb + \u2207g(x)\u1d40\u03bd - z = 0  (stationarity)\n  c(x) = 0                             (equality constraints)\n  g(x) - s = 0, s \u2265 0                  (inequality slacks)\n  X\u00b7Z\u00b7e = \u03bc\u00b7e                          (complementarity)\n  x \u2265 0, z \u2265 0                         (bounds)\n\nScaled error: E_\u03bc(x,\u03bb,z) = max(||\u2207L||/(s_d+1), ||c||/(s_c+1), ||XZe-\u03bce||/s_c)\nwhere s_d, s_c are scaling factors from NLP scaling.",
+      "complexity": "O(n + m) per check for computing norms of residuals.\nCalled once per iteration.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpConvCheck.hpp for the base interface",
+    "IpRestoConvCheck.hpp for restoration phase convergence"
+  ]
+}

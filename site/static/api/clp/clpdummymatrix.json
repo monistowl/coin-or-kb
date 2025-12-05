@@ -1,0 +1,21 @@
+{
+  "name": "ClpDummyMatrix",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpDummyMatrix.hpp",
+  "brief": "Placeholder matrix with dimensions but no data\n\nImplements ClpMatrixBase with only dimensions (rows, columns, elements)\nbut no actual matrix data. Used primarily with ClpPdco where the user\nprovides custom matrix-vector products via callbacks.",
+  "algorithms": [
+    {
+      "name": "Matrix-Free Optimization:\nFor problems where A is too large to store or has special structure\n(e.g., discretizations, FFT-based), represent matrix implicitly.\n\nINTERFACE PATTERN:\n  User provides: matVecMult(mode, x, y)\n    mode=1: y := y + A\u00b7x\n    mode=2: x := x + A'\u00b7y\n\n  ClpDummyMatrix provides: dimensions for size checking\n    getNumRows(), getNumCols(), getNumElements()\n\nAll matrix operations return empty/zero results:\n  times()/transposeTimes(): No-op (matrix is empty)\n  getElements()/getIndices(): Return NULL\n  unpack(): Produces empty sparse vector\n\nUSE CASES:\n  - PDCO interior point: User implements matrix products in ClpPdcoBase\n  - Large-scale problems: Matrix arises from operator, not explicit data\n  - Testing: Mock matrix object for algorithm development",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPdco for the interior point method using this",
+    "ClpPdcoBase for user-defined objective/matrix interface",
+    "ClpMatrixBase for the full matrix interface"
+  ]
+}

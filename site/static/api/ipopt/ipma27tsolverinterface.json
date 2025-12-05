@@ -1,0 +1,22 @@
+{
+  "name": "IpMa27TSolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpMa27TSolverInterface.hpp",
+  "brief": "Interface to HSL MA27 sparse symmetric indefinite solver\n\nMa27TSolverInterface wraps the Harwell MA27 subroutine for solving\nsparse symmetric indefinite linear systems using multifrontal\nfactorization with threshold pivoting.",
+  "algorithms": [
+    {
+      "name": "Multifrontal LDL^T Factorization with Threshold Pivoting:\n  MA27 computes A = P\u00b7L\u00b7D\u00b7L^T\u00b7P^T where:\n  - P is a permutation matrix (determined by AMD-like ordering)\n  - L is unit lower triangular\n  - D is block diagonal (1\u00d71 or 2\u00d72 blocks for indefinite matrices)\n  Uses Duff-Reid multifrontal method with assembly tree traversal.",
+      "math": "Threshold pivoting: Accept pivot a_kk if |a_kk| \u2265 pivtol \u00b7 max_i |a_ik|.\n  Larger pivtol \u2192 more stable but more fill-in. Default 1e-8, max 0.5.\n  2\u00d72 pivots handle indefiniteness: [a b; b c] when ac-b\u00b2 < 0.",
+      "complexity": "O(n\u00b7f\u00b2) where f is the \"frontsize\" (width of elimination fronts).\n  For well-ordered sparse matrices, f \u226a n. Memory: O(nnz(L)).",
+      "ref": [
+        "Duff & Reid (1983). \"The Multifrontal Solution of Indefinite Sparse\n     Symmetric Linear Equations\". ACM TOMS 9(3):302-325.\n\nMA27 characteristics:\n- Input format: Triplet (lower triangular)\n- Provides inertia (negative eigenvalue count)\n- Classic serial solver, still widely used\n\nPhases (MA27A/B/C):\n- MA27A: Symbolic factorization, determines pivoting order\n- MA27B: Numerical factorization with threshold pivoting\n- MA27C: Forward/backward solve\n\nKey parameters:\n- pivtol_/pivtolmax_: Pivot tolerance (default 1e-8, max 0.5)\n- liw_init_factor_, la_init_factor_: Workspace sizing\n- meminc_factor_: Memory growth factor when reallocation needed\n\nThe solver may request memory reallocation (SYMSOLVER_CALL_AGAIN)\nif initial workspace estimates prove insufficient."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMa57TSolverInterface.hpp for improved MA57",
+    "IpSparseSymLinearSolverInterface.hpp for interface"
+  ]
+}

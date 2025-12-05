@@ -1,0 +1,9 @@
+{
+  "name": "exp_2",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "introduction/exp_2.hpp",
+  "brief": "CppAD: exp 2",
+  "algorithms": [],
+  "methods": []
+}

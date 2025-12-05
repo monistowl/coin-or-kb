@@ -1,0 +1,13 @@
+{
+  "name": "BonPumpForMinlp",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonPumpForMinlp.hpp",
+  "brief": "Feasibility Pump heuristic adapted for MINLP\nCopyright (C) CNRS\nThis code is published under the Eclipse Public License.\n\nPumpForMinlp: Feasibility Pump heuristic for nonlinear mixed-integer\nprogramming. Extends the MIP Feasibility Pump to handle nonlinear\nconstraints by using NLP subproblem solves.\n\nAlternates between:\n- Rounding current NLP solution to integer\n- Solving NLP with objective minimizing distance to rounded point\n\nAuthors: Pierre Bonami, LIF Universit\u00e9 de la M\u00e9diterran\u00e9e-CNRS\nDate: 02/18/2009",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "LocalSolverBasedHeuristic for base class",
+    "CbcHeuristicFPump for MIP feasibility pump"
+  ]
+}

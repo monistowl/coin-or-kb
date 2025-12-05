@@ -1,0 +1,13 @@
+{
+  "name": "TaskInitializeRootsearch",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskInitializeRootsearch.h",
+  "brief": "Setup rootsearch method for ESH\n\nOne-time initialization of boundary finding algorithm.\n\n**TaskInitializeRootsearch Class:**\n- run(): Create and configure rootsearch method\n\n**Rootsearch Setup:**\n- Select algorithm (TOMS 748, bisection)\n- Configure tolerances and iteration limits\n- Required for ESH hyperplane generation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "RootsearchMethod/ for algorithm implementations",
+    "TaskSelectHyperplanePointsESH.h for usage"
+  ]
+}

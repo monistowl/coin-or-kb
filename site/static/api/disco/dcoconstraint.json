@@ -1,0 +1,14 @@
+{
+  "name": "DcoConstraint",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoConstraint.hpp",
+  "brief": "Abstract base class for DisCO constraints\n\nDcoConstraint is the base class for all constraints in DisCO,\nsupporting both linear and conic constraint types.\n\n**Inheritance:** DcoConstraint -> BcpsConstraint -> BcpsObject -> AlpsKnowledge\n\n**Constraint Hierarchy:**\n- DcoConstraint (ABC)\n  - DcoLinearConstraint: Linear row with coefficients\n  - DcoConicConstraint: Lorentz or rotated Lorentz cone\n\n**Type Field (DcoConstraintType):**\n- Core: Original problem constraints\n- MILP cuts: Clique, Gomory, MIR, etc.\n- Conic cuts: IPM, OA approximations\n\n**Key Methods:**\n- createOsiRowCut(): Convert to OsiRowCut (returns NULL for conic)\n- constraintType(): Get/set the constraint source type",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoLinearConstraint.hpp for linear constraints",
+    "DcoConicConstraint.hpp for conic constraints",
+    "Dco.hpp for DcoConstraintType enum"
+  ]
+}

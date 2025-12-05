@@ -1,0 +1,23 @@
+{
+  "name": "crossover",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/crossover.h",
+  "brief": "Crossover from Interior Point to Basic Solution\n\nConverts an interior point solution (all variables strictly between bounds)\nto a vertex (basic) solution required for simplex methods and post-processing.",
+  "algorithms": [
+    {
+      "name": "Crossover (IPM-to-Basis Conversion):\nTransforms interior solution to basic solution via two push phases that\nsystematically eliminate \"superbasic\" variables.\n\nDEFINITIONS:\n- Basic solution: x[nonbasic] at bounds, z[basic] = 0\n- Primal superbasic: nonbasic j with lb[j] < x[j] < ub[j]\n- Dual superbasic: basic j with z[j] \u2260 0\n\nIPM solutions are \"superbasic everywhere\" - all variables are strictly\ninterior. Crossover makes them basic by pushing variables to bounds.\n\nINVARIANTS MAINTAINED:\n1. lb[j] \u2264 x[j] \u2264 ub[j] for all j\n2. z[j] \u2264 0 if x[j] > lb[j] (complementarity)\n3. z[j] \u2265 0 if x[j] < ub[j] (complementarity)\n4. Ax remains unchanged (primal feasibility)\n5. A'y + z remains unchanged (dual feasibility)\n\nDUAL PUSH PHASE:\nFor each dual superbasic jb (basic with z[jb] \u2260 0):\n1. Compute: \u0394z = -z[jb] \u00b7 (B\u207b\u00b9\u00b7a_jb)_N for nonbasic indices\n2. Find blocking: jn = argmax{\u03b1 : z + \u03b1\u00b7\u0394z satisfies sign constraints}\n3. If jb reaches zero: push complete\n   Else: basis update swaps jb \u2194 jn\n\nPRIMAL PUSH PHASE:\nFor each primal superbasic jn (nonbasic with lb < x[jn] < ub):\n1. Choose target bound (nearer, or 0 for free variables)\n2. Compute: \u0394x_B = -B\u207b\u00b9\u00b7a_jn \u00b7 \u0394x_jn (basic variable update)\n3. Find blocking: jb = argmax{\u03b1 : x + \u03b1\u00b7\u0394x satisfies bounds}\n4. If jn reaches bound: push complete\n   Else: basis update swaps jb \u2194 jn",
+      "math": "Crossover preserves optimality:\nStarting from IPM optimal (x,y,z) satisfying KKT conditions with \u03bc \u2192 0,\ncrossover produces vertex optimal solution because:\n- Objective c'x unchanged (same optimal value)\n- Feasibility Ax = b, l \u2264 x \u2264 u maintained\n- Complementarity x\u00b7z = 0 achieved (not approximately)",
+      "complexity": "- Each push: O(m\u00b2) for LU update + FTRAN/BTRAN\n- Worst case: O(n+m) pushes needed\n- Total: O((n+m) \u00b7 m\u00b2), but usually much faster\n- Often O(n+m) total pivots (one per superbasic variable)",
+      "ref": [
+        "Megiddo (1991). \"On Finding Primal- and Dual-Optimal Bases\".\n  ORSA Journal on Computing 3(1):63-65.",
+        "Bixby & Saltzman (1994). \"Recovering an Optimal LP Basis from an\n  Interior Point Solution\". Operations Research Letters 15:169-178."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ipm.h for interior point solver producing input",
+    "basis.h for basis representation and updates"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "CoinMessage",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinMessage.hpp",
+  "brief": "Standard COIN-OR message definitions (enum and preloaded set)\n\nDefines COIN_Message enum for standard messages (MPS errors, presolve\ninfo, etc.) and CoinMessage class that preloads these into a handler.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMessageHandler for the message handling facilities",
+    "CoinOneMessage for individual message storage"
+  ]
+}

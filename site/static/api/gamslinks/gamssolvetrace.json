@@ -1,0 +1,9 @@
+{
+  "name": "GamsSolveTrace",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/utils/GamsSolveTrace.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

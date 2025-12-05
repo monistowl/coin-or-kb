@@ -1,0 +1,20 @@
+{
+  "name": "IpZeroSymMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpZeroSymMatrix.hpp",
+  "brief": "Symmetric matrix with all zero entries\n\nZeroSymMatrix represents a symmetric zero matrix (n x n).\nNo storage required. Inherits from SymMatrix for type safety.",
+  "algorithms": [
+    {
+      "name": "Zero Symmetric Matrix:\n  Z = 0 \u2208 \u211d^{n\u00d7n}, Z = Z^T trivially satisfied.\n  MultVector: y \u2190 \u03b2y (no \u03b1 term contributes).\n  Type-safe placeholder preserving symmetry structure.",
+      "math": "Linear objective functions:\n  f(x) = c^T x has \u2207\u00b2f = 0 (zero Hessian).\n  Hessian of Lagrangian: W = \u2207\u00b2f + \u03a3\u1d62 \u03bb\u1d62\u2207\u00b2g\u1d62.\n  When f linear and constraints linear: W = 0.",
+      "complexity": "O(1) storage and O(n) for matvec scaling.\n  Null Object pattern for symmetric matrices.\n\nUsed in Ipopt for:\n- Problems with linear objectives (zero Hessian of objective)\n- Placeholder in CompoundSymMatrix for zero blocks\n- Default Hessian when user doesn't provide one",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpZeroMatrix.hpp for non-symmetric version",
+    "IpSymMatrix.hpp for base class"
+  ]
+}

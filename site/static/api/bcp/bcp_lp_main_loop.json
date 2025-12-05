@@ -1,0 +1,20 @@
+{
+  "name": "BCP_lp_main_loop",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_lp_main_loop.hpp",
+  "brief": "LP process main loop entry point",
+  "algorithms": [
+    {
+      "name": "LP Main Loop: Node Processing Cycle\n\nBCP_lp_main_loop() is the top-level driver for LP process execution:\n\n1. Wait for node from Tree Manager\n2. Reconstruct node (apply deltas to get vars/cuts/warmstart)\n3. Solve LP relaxation\n4. Generate cuts/variables\n5. Check for integer feasibility\n6. Branch or fathom\n7. Report results to TM\n8. Repeat until termination message",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_lp.hpp for BCP_lp_prob state",
+    "BCP_lp_user.hpp for user callbacks invoked during loop"
+  ]
+}

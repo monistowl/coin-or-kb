@@ -1,0 +1,9 @@
+{
+  "name": "CoinAlloc",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinAlloc.hpp",
+  "brief": "Memory pool allocator for small fixed-size blocks\n\nOptional memory pool that reduces malloc overhead for small allocations.\nConfigure with COINUTILS_MEMPOOL_MAXPOOLED and COINUTILS_MEMPOOL_ALIGNMENT.",
+  "algorithms": [],
+  "methods": []
+}

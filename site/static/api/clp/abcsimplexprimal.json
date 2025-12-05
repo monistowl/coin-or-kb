@@ -1,0 +1,21 @@
+{
+  "name": "AbcSimplexPrimal",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcSimplexPrimal.hpp",
+  "brief": "AVX-optimized primal simplex algorithm",
+  "algorithms": [
+    {
+      "name": "AVX-Optimized Primal Simplex:\n  Vectorized primal simplex with partitioned sparse operations:\n  1. **Pricing (primalColumn):** Scan reduced costs for entering variable\n     - AVX-parallel: Process 4 doubles simultaneously\n     - Partitioned: CoinPartitionedVector enables cache-local scans\n     - Early termination: Stop when \"good enough\" candidate found\n  2. **FTRAN:** Compute pivot column B\u207b\u00b9\u00b7a_j\n     - Uses AbcSimplex's optimized factorization\n     - Exploits sparsity through CoinIndexedVector\n  3. **Ratio test (primalRow):** Select leaving variable\n     - Harris two-pass: First find \u03b8_max, then select leaving\n     - Vectorized bound comparisons\n  4. **Update:** Modify basis and solution\n     - Minor iterations: Multiple pivots per factorization check\n     - Partial BTRAN for cost updates",
+      "math": "Primal simplex optimality and feasibility:\n  Maintain: x_B = B\u207b\u00b9b - B\u207b\u00b9N\u00b7x_N (primal feasible if x \u2265 0)\n  Reduced costs: c\u0304_N = c_N - N'\u00b7\u03c0 where \u03c0 = B\u207b\u1d40c_B\n  Optimal when: c\u0304_N \u2265 0 (minimization) and x_B \u2265 0\n  Step: \u03b8* = min{x_Bi/\u03b1_i : \u03b1_i > 0} (ratio test)",
+      "complexity": "Per iteration:\n  Pricing: O(n) but ~n/4 with AVX vectorization\n  FTRAN: O(nnz(L) + nnz(U)) with sparse factorization\n  Ratio test: O(m) worst case, sparse typically\n  Minor iterations reduce factorization overhead by k\u00d7 for k pivots\n\nKey optimizations over ClpSimplexPrimal:\n- Vectorized column selection in primalColumn()\n- Optimized ratio test in primalRow()\n- Better cache utilization through partitioned vectors\n- Support for minor iterations (multiple pivots per factorization check)\n\nThe algorithm structure mirrors ClpSimplexPrimal:\n- Choose incoming column (pivot column)\n- Compute pivot column in tableau\n- Choose outgoing row via ratio test\n- Update solution and basis\n\nSpecial features:\n- alwaysOptimal(): Don't change infeasibility cost, always report optimal\n- exactOutgoing(): Prevent variables from going slightly negative\n- lexSolve(): Lexicographic resolution for degeneracy",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcSimplex for the base optimized simplex class",
+    "AbcSimplexDual for optimized dual simplex",
+    "ClpSimplexPrimal for the standard (non-AVX) implementation"
+  ]
+}

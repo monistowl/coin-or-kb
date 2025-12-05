@@ -1,0 +1,13 @@
+{
+  "name": "CoinFileIO",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinFileIO.hpp",
+  "brief": "Abstract file I/O with automatic compression detection\n\nProvides CoinFileInput and CoinFileOutput base classes with factory\nmethods that auto-detect gzip/bzip2 compression. Used by CoinMpsIO\nand CoinLpIO for reading/writing problem files.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMpsIO for MPS file format",
+    "CoinLpIO for LP file format"
+  ]
+}

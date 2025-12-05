@@ -1,0 +1,13 @@
+{
+  "name": "GurobiProgram",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/GurobiProgram.h",
+  "brief": "Gurobi solver interface for LP/MIP/QP problems\n\nAdapts Gravity models to the Gurobi C++ API.\n\n**GurobiProgram Class:**\n- grb_env: Gurobi environment\n- grb_mod: Gurobi model\n- _grb_vars: Mapping from Gravity vars to GRBVar\n- _model: Pointer to Gravity Model\n\n**Model Building:**\n- prepare_model(): Initial conversion from Gravity\n- fill_in_grb_vmap(): Create GRBVar for each variable\n- create_grb_constraints(): Add constraints (linear/quadratic)\n- set_grb_objective(): Set objective function\n\n**Solving:**\n- solve(relax, mipgap): Optimize with optional LP relaxation\n- relax_model(): Remove integrality constraints\n- update_solution(): Copy solution back to Gravity model\n\n**Supported Problem Types:**\n- LP: Linear programming\n- MIP: Mixed-integer programming\n- QP: Quadratic programming (convex)\n- MIQP: Mixed-integer QP",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/solver.h for unified solver dispatch",
+    "gravity/model.h for Gravity model definition"
+  ]
+}

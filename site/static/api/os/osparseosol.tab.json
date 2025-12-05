@@ -1,0 +1,9 @@
+{
+  "name": "OSParseosol.tab",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSParsers/OSParseosol.tab.hpp",
+  "brief": "OSoL XML parser (bison-generated)\n\nBison-generated parser for OS Option Language (OSoL).\nParses solver options in XML format.",
+  "algorithms": [],
+  "methods": []
+}

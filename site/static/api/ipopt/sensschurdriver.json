@@ -1,0 +1,9 @@
+{
+  "name": "SensSchurDriver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensSchurDriver.hpp",
+  "brief": "sIPOPT Schur complement driver interface\n\nSensSchurDriver: abstract interface for Schur complement operations.\nManages factorization and solve phases for sensitivity analysis.\nImplementations handle dense, sparse, or iterative approaches.",
+  "algorithms": [],
+  "methods": []
+}

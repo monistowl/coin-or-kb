@@ -1,0 +1,14 @@
+{
+  "name": "DecompAlgoCGL",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompAlgoCGL.h",
+  "brief": "Interface to CGL (COIN-OR Cut Generation Library)\n\nDecompAlgoCGL wraps CGL cut generators for use in DIP algorithms.\nProvides automatic generation of standard MIP cuts.\n\n**Available CGL Generators:**\n- CglClique: Clique cuts from conflict graph\n- CglOddHole: Odd hole inequalities\n- CglFlowCover: Flow cover cuts\n- CglKnapsackCover: Knapsack cover cuts\n- CglMixedIntegerRounding2: MIR cuts\n- CglGomory: Gomory mixed-integer cuts\n\n**Usage:**\n- Created by DecompAlgo during initialization\n- Called during PHASE_CUT to generate cuts\n- Returns cuts via DecompCutOsi wrapper\n\n**Configuration:**\n- Generators enabled/disabled via DecompParam\n- Per-generator parameters can be set\n- Different strategies for PC vs C algorithms\n\n**Integration:**\nCGL generates cuts in x-space. For Price-and-Cut, these are\nreformulated to lambda-space before adding to master.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompCutPool.h for cut storage",
+    "DecompParam.h for CGL configuration",
+    "CglCutGenerator (CGL) for base generator interface"
+  ]
+}

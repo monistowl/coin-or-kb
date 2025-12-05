@@ -1,0 +1,61 @@
+{
+  "library": "Creme",
+  "layer": "layer-4",
+  "classes": [
+    {
+      "name": "chooseblock",
+      "brief": "Constraint block selection for Creme RTR algorithm\n\nchoose_block(): Select a block of constraints for randomized\nrounding based on violation and satisfaction status.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cmdline",
+      "brief": "Command-line argument parsing for Creme solver\n\ntpar struct: Defines command-line options (short/long flags, types, defaults).\nreadargs(): Parse argc/argv against option definitions.\nprint_help(): Display usage information.",
+      "has_algorithm": false
+    },
+    {
+      "name": "init",
+      "brief": "Solution initialization for Creme randomized LP solver\n\ninit_x(): Initialize primal variable values.\ninit_sat(): Initialize constraint satisfaction tracking (b-Ax, sat flags).\ncalc_lhs(): Compute left-hand side of constraints (with SIMD pragmas).",
+      "has_algorithm": false
+    },
+    {
+      "name": "isfeas",
+      "brief": "Feasibility checking for Creme LP solutions\n\nisFeas(): Verify if a point satisfies LP constraints.\nReturns number of satisfied constraints and updates satisfaction flags.",
+      "has_algorithm": false
+    },
+    {
+      "name": "linopt",
+      "brief": "One-variable local optimization for Creme\n\nImplements one_opt() for single-variable neighborhood search.",
+      "has_algorithm": false
+    },
+    {
+      "name": "locsrch",
+      "brief": "Local search algorithm for Creme LP solver\n\nImplements locsrch() with dvar (delta variable) and frontier structures.",
+      "has_algorithm": false
+    },
+    {
+      "name": "lpio",
+      "brief": "LP file I/O functions for Creme solver\n\nread_problem(): Parse LP problem from file into sparseLP structure.\nprintLP(): Display LP problem contents.\nclearLP(): Deallocate LP memory.",
+      "has_algorithm": false
+    },
+    {
+      "name": "misc",
+      "brief": "Miscellaneous utilities for Creme solver\n\nMemory allocation helpers (reallocate_double/int), bzip2 file I/O,\nmatrix transpose creation, and vector norm computation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "move",
+      "brief": "Variable move operation for Creme local search\n\nmove(): Perform a single variable update in local search,\nadjusting primal values and updating constraint satisfaction.",
+      "has_algorithm": false
+    },
+    {
+      "name": "rtr",
+      "brief": "Randomized rounding algorithm for Creme LP solver\n\nImplements rtr() to find maximal feasible subsystems (MFS) using\nrandomized iterative rounding. USE_RTR/USE_LOCSRCH mode selection.",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse",
+      "brief": "Sparse LP data structures for Creme solver\n\nCore data structure (sparseLP) for randomized LP solving.\nStores constraint matrix in sparse row format with bounds.",
+      "has_algorithm": false
+    }
+  ]
+}

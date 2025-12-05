@@ -1,0 +1,16 @@
+{
+  "name": "MC_lp_param",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/MaxCut/include/MC_lp_param.hpp",
+  "brief": "Max-cut LP parameters",
+  "algorithms": [
+    {
+      "name": "Max-Cut LP Params: Solver and Cut Configuration\n\nMC_lp_par defines parameters for max-cut LP process:\n\n**Solver selection:**\n- MC_UseVol: Volume algorithm (Lagrangean)\n- MC_UseClp: CLP simplex solver\n\n**Cycle cut generation:**\n- MC_SPCycleCutGen: Shortest-path cycle cuts (never/last resort/always)\n- MC_MstCycleCutGen: MST-based cycle cuts (never/last resort/always)\n\n**Heuristics:**\n- DoEdgeSwitchHeur: Edge swap local search\n- StructSwitchHeur: Structure-based improvement",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

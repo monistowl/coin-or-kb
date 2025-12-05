@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprMultiLin",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprMultiLin.hpp",
+  "brief": "Multilinear product w = x1 * x2 * ... * xn\n\nProduct of n expressions. Generalizes bilinear (n=2) and trilinear (n=3)\nto arbitrary number of factors.\n\n**Standardization approaches:**\n1. Recursive bilinear: w = ((x1*x2)*x3)*... using nested aux variables\n2. Trilinear grouping: group into triplets when n >= 3\n3. Direct multilinear relaxation (more complex cuts)\n\n**Convexification complexity:**\n- Bilinear (n=2): 4 McCormick cuts\n- Trilinear (n=3): 8 Meyer-Floudas cuts\n- n-linear: 2^n cuts (exponential in n)\n\nFor large n, recursive bilinear decomposition is preferred despite\nintroducing auxiliary variables.\n\n**Bound propagation:**\nProduct of intervals requires considering all 2^n corner combinations\nto find the true bounds. Simplified by interval arithmetic.\n\n**Implied bounds (impliedBoundMul):**\nFrom w = x1*x2*...*xn and bounds on w, derive bounds on factors.\nMore complex than bilinear case.\n\n**Branching:**\nbalancedMul() selects branching point to balance the relaxation\nimprovement across all factors.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprMul for bilinear terms (base class)",
+    "exprTrilinear for direct trilinear relaxation"
+  ]
+}

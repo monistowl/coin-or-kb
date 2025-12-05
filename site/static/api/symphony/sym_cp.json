@@ -1,0 +1,20 @@
+{
+  "name": "sym_cp",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_cp.h",
+  "brief": "Cut Pool process for SYMPHONY\n\nThe Cut Pool (CP) stores generated cuts for potential reuse\nacross multiple B&C nodes. Manages cut quality and deduplication.",
+  "algorithms": [
+    {
+      "name": "Pool Size Management:\nPrevent memory exhaustion from unbounded cut storage.\n\n  delete_ineffective_cuts():\n    Remove cuts with quality below threshold\n    Called when pool exceeds size limit\n\n  delete_duplicate_cuts():\n    Hash-based comparison via cutcmp()\n    Keep one copy of identical cuts\n\n  order_cuts_by_quality():\n    High-quality cuts checked first\n    Improves separation efficiency",
+      "math": "Quality factors:\n  - touches: Times cut was binding (higher = better)\n  - level: Tree depth where generated (root cuts more valuable)\n  - check_num: How often checked without being useful\n\n  Effective cuts: touches >> check_num\n  Ineffective cuts: touches << check_num",
+      "complexity": "check_cut: O(nnz(cut)) per cut\n  delete_duplicates: O(n log n) with sorting\n  order_by_quality: O(n log n) sort",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sym_cg.h for cut generation",
+    "sym_lp.h for cut addition to LP"
+  ]
+}

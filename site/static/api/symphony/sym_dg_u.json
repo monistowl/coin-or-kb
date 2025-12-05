@@ -1,0 +1,13 @@
+{
+  "name": "sym_dg_u",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_dg_u.h",
+  "brief": "User callbacks for Draw Graph visualization\n\nDefines callbacks for custom visualization behavior.\n\n**User callbacks:**\n- user_initialize_dg(): Global DG initialization\n- user_free_dg(): Global DG cleanup\n- user_dg_init_window(): Per-window setup\n- user_dg_free_window(): Per-window cleanup\n- user_dg_process_message(): Handle custom messages\n- user_interpret_text(): Process text input",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_dg.h for draw graph process",
+    "sym_dg_params.h for message constants"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "SensAmplTNLP",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/AmplSolver/SensAmplTNLP.hpp",
+  "brief": "sIPOPT AMPL interface with sensitivity support\n\nSensAmplTNLP extends AmplTNLP with sensitivity parameter handling.\nReads sens_init_constr suffix for constraint parameter indices.\nEnables parametric sensitivity analysis for AMPL models.",
+  "algorithms": [],
+  "methods": []
+}

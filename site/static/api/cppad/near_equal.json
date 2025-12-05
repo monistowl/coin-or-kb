@@ -1,0 +1,9 @@
+{
+  "name": "near_equal",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/near_equal.hpp",
+  "brief": "CppAD utility: near equal",
+  "algorithms": [],
+  "methods": []
+}

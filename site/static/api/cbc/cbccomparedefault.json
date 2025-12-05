@@ -1,0 +1,22 @@
+{
+  "name": "CbcCompareDefault",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcCompareDefault.hpp",
+  "brief": "Default adaptive node comparison strategy\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+  "algorithms": [
+    {
+      "name": "Adaptive Hybrid Node Selection:\nDynamically switches between search strategies based on solve progress.\n\nPhase 1 (Before first solution):\n- weight_ = -1: Fewest infeasibilities (greedy toward integrality)\n- weight_ = -2: Breadth-first for 1000 nodes (explore diversity)\n- weight_ = -3: Depth-first (find solution fast, low memory)\n\nPhase 2 (After solution found):\n- weight_ = 0: Auto-compute from gap to balance exploration/exploitation\n- weight_ > 0: Hybrid score = objective + weight \u00d7 numInfeasibilities\n  Higher weight emphasizes depth, lower weight emphasizes best-bound\n\nAdaptive adjustments:\n- newSolution(): Recalibrate weight based on improvement\n- every1000Nodes(): Check tree size, possibly switch strategy or dive\n- Diving: Temporary depth-first from promising node to find solution",
+      "math": "Node score: S(n) = z(n) + w \u00d7 k(n)\nwhere z(n) = LP bound, k(n) = number of infeasibilities, w = weight.\nOptimal w depends on gap: w \u2248 (z* - z_LP) / k_avg",
+      "complexity": "Comparison: O(1). Strategy switches: O(n log n) for re-heapify.\nAdaptive strategies typically 20-50% faster than fixed strategies.",
+      "ref": [
+        "Linderoth & Savelsbergh, \"A computational study of search strategies\",\n     INFORMS Journal on Computing 11 (1999) 173-187\n\nCbcCompareDefault: Sophisticated hybrid search strategy.\nAdapts behavior based on search phase and solution history.\n\nStrategy phases:\n- Before solution: Use depth-first (weight_ < 0) or breadth-first\n- After solution: Weight-based hybrid of objective and infeasibilities\n\nweight_ special values:\n- 0.0: Auto-compute from first solution\n- -1.0: Fewest infeasibilities (before solution)\n- -2.0: Breadth-first for first 1000 nodes\n- -3.0: Depth-first before solution\n\nAdaptive callbacks:\n- newSolution(): Recomputes weight from solution gap\n- every1000Nodes(): Adjusts for tree size, triggers diving\n\nDiving support:\n- startDive()/cleanDive(): Focused depth search from promising node"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcCompareBase for interface",
+    "CbcCompareDepth for simple depth-first\n\nEdwin 11/25/09 carved out of CbcCompareActual"
+  ]
+}

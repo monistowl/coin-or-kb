@@ -1,0 +1,9 @@
+{
+  "name": "val_optimize",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/val_optimize.hpp",
+  "brief": "Value graph: val_optimize",
+  "algorithms": [],
+  "methods": []
+}

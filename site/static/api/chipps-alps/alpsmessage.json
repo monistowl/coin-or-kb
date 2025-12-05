@@ -1,0 +1,14 @@
+{
+  "name": "AlpsMessage",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsMessage.h",
+  "brief": "Log messages for ALPS search status and events\n\nDefines ALPS_Message enum for CoinMessageHandler logging.\nNOT the MPI message tags (see AlpsMessageTag.h).\n\n**Message categories:**\n- ALPS_DONATE_*: Work donation events\n- ALPS_LOADBAL_*: Load balancing status\n- ALPS_RAMPUP_*: Initial distribution phase\n- ALPS_TERM_*: Termination detection\n- ALPS_S_*: Serial-only messages\n- ALPS_T_*: Termination reasons\n\n**AlpsMessage class:**\nExtends CoinMessages with ALPS-specific message definitions.\nUsed with CoinMessageHandler for consistent logging.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMessageHandler for message output control",
+    "AlpsParams::msgLevel for verbosity settings",
+    "AlpsMessageTag.h for MPI message tags"
+  ]
+}

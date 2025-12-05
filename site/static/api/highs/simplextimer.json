@@ -1,0 +1,13 @@
+{
+  "name": "SimplexTimer",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/SimplexTimer.h",
+  "brief": "Timer clock indices for profiling simplex operations\n\nDefines clock identifiers for fine-grained simplex timing.\n\n**iClockSimplex Enum:**\nClock indices for HighsTimer used by simplex:\n\n**Top-Level Clocks:**\n- SimplexTotalClock: Total simplex time\n- SimplexDualPhase1/2Clock: Dual simplex phases\n- SimplexPrimalPhase1/2Clock: Primal simplex phases\n\n**Iteration Clocks:**\n- IterateClock: Per-iteration timing\n- IterateChuzrClock: CHUZR (row selection)\n- IterateChuzcClock: CHUZC (column selection)\n- IterateFtranClock: FTRAN operations\n- IterateDualClock: Dual value updates\n- IteratePrimalClock: Primal value updates\n\n**Infrastructure Clocks:**\n- InvertClock: Basis factorization\n- BasisConditionClock: Condition estimation\n- DseIzClock: DSE weight initialization",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "util/HighsTimer.h for timer implementation",
+    "simplex/HighsSimplexAnalysis.h for timing analysis"
+  ]
+}

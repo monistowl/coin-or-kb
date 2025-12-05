@@ -1,0 +1,22 @@
+{
+  "name": "CouenneChooseStrong",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneChooseStrong.hpp",
+  "brief": "Strong branching for global MINLP optimization\n\nExtends Bonmin's strong branching to handle nonconvex constraints\nby evaluating actual LP bound improvement from branching.",
+  "algorithms": [
+    {
+      "name": "Strong Branching for Nonconvex MINLP:\n  Selects branching variable by evaluating actual bound improvement:\n  1. Build candidate list from fractional/violated variables\n  2. For each candidate x_j in list (up to limit):\n     a. simulateBranch(down): Solve LP with x_j \u2264 \u230ax_j*\u230b\n     b. simulateBranch(up): Solve LP with x_j \u2265 \u2308x_j*\u2309\n     c. Record \u0394_down, \u0394_up = bound improvements\n  3. Score: s_j = (1-\u03bc)\u00b7min(\u0394_down,\u0394_up) + \u03bc\u00b7max(\u0394_down,\u0394_up)\n     or product: s_j = (\u03b5 + \u0394_down)\u00b7\u0394_up (reliability-like)\n  4. Select j* = argmax s_j, prune if both branches infeasible",
+      "math": "Pseudocost updates from strong branching:\n  If pseudoUpdateLP_: update pseudocosts from LP improvement\n  \u03c8_j^- = \u0394_down/(x_j* - \u230ax_j*\u230b), \u03c8_j^+ = \u0394_up/(\u2308x_j*\u2309 - x_j*)\n  These improve future branching decisions without strong branching",
+      "complexity": "O(k \u00b7 LP) where k = candidates evaluated\n  Expensive but critical for global optimization bound quality\n  Trade-off: evaluation cost vs. tree size reduction",
+      "ref": [
+        "Achterberg, Koch, Martin (2005). \"Branching rules revisited\".\n     Operations Research Letters 33:42-54.\n\n**Selection criteria (estimateProduct_):**\n- false: Convex combination of min/max estimates (classic)\n- true: Product (1e-6 + min) * max (reliability-like)\n\n**Pseudocost updates (pseudoUpdateLP_):**\nIf true, updates pseudocosts using distance between LP point\nand resulting branch LP solutions."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneChooseVariable for simpler selection",
+    "CouenneBranchingObject for branch execution"
+  ]
+}

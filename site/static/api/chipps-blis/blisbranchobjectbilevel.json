@@ -1,0 +1,13 @@
+{
+  "name": "BlisBranchObjectBilevel",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisBranchObjectBilevel.h",
+  "brief": "Branching object for bilevel programming problems\n\nSpecialized branching object for bilevel optimization where\nbranching may involve multiple variables (a \"branching set\").\n\n**branchingSet_:**\nA deque of variable indices that are affected by this branch.\nUnlike standard integer branching (single variable), bilevel\nproblems may require coordinated changes to multiple variables.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisBranchStrategyBilevel for bilevel branching strategy",
+    "BlisBranchObjectInt for standard integer branching"
+  ]
+}

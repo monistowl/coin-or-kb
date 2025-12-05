@@ -1,0 +1,9 @@
+{
+  "name": "HighsInt",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsInt.h",
+  "brief": "The definition for the integer type to use",
+  "algorithms": [],
+  "methods": []
+}

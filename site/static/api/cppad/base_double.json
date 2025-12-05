@@ -1,0 +1,9 @@
+{
+  "name": "base_double",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/base_double.hpp",
+  "brief": "Core AD functionality: base double",
+  "algorithms": [],
+  "methods": []
+}

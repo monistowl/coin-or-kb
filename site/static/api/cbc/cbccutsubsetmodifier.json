@@ -1,0 +1,20 @@
+{
+  "name": "CbcCutSubsetModifier",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcCutSubsetModifier.hpp",
+  "brief": "Cut modifier that filters cuts based on variable indices",
+  "algorithms": [
+    {
+      "name": "Variable-Index Cut Filtering for Decomposition\nCopyright (C) 2003, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCutSubsetModifier: Filters cuts to exclude those involving certain variables.\nUsed in decomposition-style approaches where only a subset of variables\nshould appear in cuts.\n\nPrimary use case:\n- Remove cuts that reference variables >= firstOdd_\n- Useful when auxiliary variables shouldn't appear in cuts\n- Can weaken cuts instead of deleting (future enhancement)\n\nmodify() return values:\n- 0: Cut unchanged\n- 1: Cut strengthened\n- 2: Cut weakened\n- 3: Cut deleted (set to NULL)",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcCutModifier for base class",
+    "CbcCutGenerator for cut generation"
+  ]
+}

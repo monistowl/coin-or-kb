@@ -1,0 +1,13 @@
+{
+  "name": "HighsCDouble",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsCDouble.h",
+  "brief": "Compensated double for quad precision arithmetic\n\nImplements quad precision using error-free transformations (Knuth/Rump).\n\n**Representation:**\n- hi: Primary double value\n- lo: Compensation term (error from previous operations)\n- Value = hi + lo with |lo| << |hi|\n\n**Error-Free Transformations:**\n- two_sum(x,y,a,b): Exact a+b=x+y with x=double(a+b), 6 FLOPs\n- two_product(x,y,a,b): Exact a*b=x+y with x=double(a*b), 17 FLOPs\n- split(x,y,a): Split 53-bit mantissa into two 26-bit parts\n\n**Supported Operations:**\n- +, -, *, / with double and HighsCDouble operands\n- Comparison operators (using double(hi+lo))\n- abs(), sqrt(), floor(), ceil(), round(), ldexp()\n- renormalize(): Restore |lo| << |hi| invariant\n\n**Usage:**\nCritical for accurate summation in LP (objective, constraint activity)\nand avoiding catastrophic cancellation in bound computations.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "util/HVector.h for HVectorQuad using HighsCDouble",
+    "mip/HighsNodeQueue.h for tree weight tracking"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicVND",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicVND.hpp",
+  "brief": "VND - Variable Neighborhood Descent\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicVND: Variable Neighborhood Descent metaheuristic.\nSystematically explores neighborhoods of increasing size.",
+  "algorithms": [
+    {
+      "name": "VND - Variable Neighborhood Descent (Hansen & Mladenovic):\n  solution() systematic neighborhood exploration:\n  1. k \u2190 1; x \u2190 baseSolution_.\n  2. Search N_k(x) using solutionFix() (restrict k\u00b7stepSize_ vars).\n  3. If improved: x \u2190 x', k \u2190 1 (restart from smallest).\n  4. Else: k \u2190 k + 1 (expand neighborhood).\n  5. Repeat until k > kmax_.\n  Systematic intensification with dynamic neighborhood sizing.",
+      "math": "Neighborhood structure:\n  N_k(x) = {x' : |{j : x'_j \u2260 x_j}| \u2264 k\u00b7stepSize_}.\n  Size increases as k increases: |N_1| \u2286 |N_2| \u2286 ... \u2286 |N_kmax|.\n  On improvement: restart with small neighborhood (intensify).\n  On failure: expand neighborhood (diversify).\n\nParameters:\n- stepSize_: Base neighborhood size\n- k_, kmax_: Current and maximum neighborhood index\n- nDifferent_: Tracks solution diversity\n- baseSolution_: Starting point for descent\n\nUses solutionFix() to solve restricted MIPs.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicRINS for related neighborhood search",
+    "CbcHeuristicLocal for simpler local search\n\nEdwin 12/5/09 carved out of CbcHeuristicRINS"
+  ]
+}

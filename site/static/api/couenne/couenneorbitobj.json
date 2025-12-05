@@ -1,0 +1,20 @@
+{
+  "name": "CouenneOrbitObj",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneOrbitObj.hpp",
+  "brief": "Orbital branching using symmetry detection (DISABLED)",
+  "algorithms": [
+    {
+      "name": "Orbital Branching via Nauty Symmetry Detection\n\nNOTE: This code is currently commented out/disabled.\n\nImplements orbital branching which exploits problem symmetry to\nreduce the search space. Uses nauty library to detect symmetries\nand organize variables into orbits.\n\n**Orbital branching concept:**\nIf variables {x1, x2, x3} are symmetric (permutable without\nchanging the problem), then branching on any one of them is\nequivalent. The orbit {x1, x2, x3} can be treated as a single\nbranching decision, pruning symmetric subtrees.\n\n**Node class:**\nStores variable metadata for symmetry detection:\n- index: variable index\n- coeff, lb, ub: bounds and coefficients\n- color: vertex coloring for nauty\n\n**Integration with nauty:**\n- Compute_Symmetry(): Calls nauty to find automorphisms\n- Print_Orbits(): Display detected orbits\n- ChangeBounds(): Update bounds respecting symmetry",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneNauty for nauty integration",
+    "CouenneObject base class"
+  ]
+}

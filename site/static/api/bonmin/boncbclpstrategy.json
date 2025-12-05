@@ -1,0 +1,20 @@
+{
+  "name": "BonCbcLpStrategy",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/BonCbcLpStrategy.hpp",
+  "brief": "Cbc strategy for configuring cut generators in OA\nCopyright (C) Carnegie Mellon University 2006. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nCbcStrategyChooseCuts: Strategy class extending CbcStrategyDefault\nto configure cut generators (Gomory, MIR, etc.) for use in Outer\nApproximation LP subproblems. Sets generator frequencies based on\nBabSetupBase configuration.\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: March 15, 2006",
+  "algorithms": [
+    {
+      "name": "Cut Generator Strategy for OA LP Subproblems",
+      "math": "Configure which cutting planes to use in LP relaxations:\n      - Gomory cuts: fractional variables \u2192 valid inequalities\n      - MIR (Mixed Integer Rounding): based on rounding fractional coefs\n      Generator frequencies balance cut quality vs overhead.",
+      "complexity": "O(strategy setup). Cut costs vary by generator type.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcStrategyDefault for base strategy",
+    "BabSetupBase for cut generator configuration"
+  ]
+}

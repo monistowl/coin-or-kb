@@ -1,0 +1,9 @@
+{
+  "name": "HighsComponent",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsComponent.h",
+  "brief": "The HiGHS class",
+  "algorithms": [],
+  "methods": []
+}

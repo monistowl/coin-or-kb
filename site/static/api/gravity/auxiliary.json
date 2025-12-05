@@ -1,0 +1,13 @@
+{
+  "name": "Auxiliary",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/Auxiliary.h",
+  "brief": "Base class for auxiliary network objects (generators, loads)\n\nProvides a base class for objects attached to network nodes.\n\n**aux Class:**\n- _active: Whether this auxiliary is active in the model\n- _name: Identifier string\n- _phases: Set of electrical phases (for power systems)\n\n**Phase Support:**\n- set_phases(str): Parse phase string (e.g., \"1,2,3\")\n- has_phase(ph): Check if auxiliary has given phase\n\n**Usage in Power Systems:**\n- Generators attached to buses\n- Loads at network nodes\n- Capacitors, transformers, etc.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/Net.h for network container",
+    "gravity/Node.h for bus/node representation"
+  ]
+}

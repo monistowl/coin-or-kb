@@ -1,0 +1,13 @@
+{
+  "name": "HSimplexDebug",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/HSimplexDebug.h",
+  "brief": "Debug utilities for simplex algorithm validation\n\nFunctions to detect numerical issues and algorithm failures.\n\n**CHUZC Failure Diagnosis:**\n- debugDualChuzcFailNorms(): Compute norms for failure analysis\n- debugDualChuzcFailQuad0/1(): Check quadratic pricing failures\n- debugDualChuzcFailHeap(): Check heap-based pricing failures\n\n**Basis Validation:**\n- debugNonbasicFlagConsistent(): Verify nonbasicFlag matches basis\n\n**Usage:**\nCalled when simplex encounters unexpected conditions:\n- Ratio test returns no candidate\n- Basis becomes numerically unstable\n- Iteration cycling detected\n\n**Return Type:**\nHighsDebugStatus indicates severity:\n- kOk: No issues detected\n- kWarning: Potential numerical concern\n- kError: Algorithmic failure",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "simplex/HEkkDual.h for dual simplex CHUZC",
+    "simplex/HEkkPrimal.h for primal simplex CHUZR"
+  ]
+}

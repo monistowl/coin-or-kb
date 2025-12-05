@@ -1,0 +1,21 @@
+{
+  "name": "CbcHeuristicLocal",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicLocal.hpp",
+  "brief": "Local search and related improvement heuristics\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nContains several improvement heuristics for MIP:",
+  "algorithms": [
+    {
+      "name": "Crossover/Path Relinking - CbcHeuristicCrossover:\n  solution() combines multiple solutions:\n  1. Fix variables where all useNumber_ solutions agree.\n  2. Use random_ for tie-breaking diversification.\n  3. Solve restricted MIP on free variables.\n  Path relinking through solution pool agreement.\n\nCbcHeuristicNaive: Simple construction heuristic.\n(a) Fix integers close to zero\n(b) Fix integers with small costs to zero\n(c) Tighten continuous bounds and optimize",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicFPump for Feasibility Pump",
+    "CbcHeuristicRINS for neighborhood search",
+    "CbcHeuristic for base class"
+  ]
+}

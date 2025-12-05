@@ -1,0 +1,9 @@
+{
+  "name": "atomic_index",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/atomic_index.hpp",
+  "brief": "Internal implementation: atomic_index",
+  "algorithms": [],
+  "methods": []
+}

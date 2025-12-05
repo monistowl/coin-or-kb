@@ -1,0 +1,9 @@
+{
+  "name": "AmplTNLP",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Apps/AmplSolver/AmplTNLP.hpp",
+  "brief": "AMPL interface for Ipopt via .nl files\n\nAmplTNLP: TNLP implementation reading AMPL .nl files via ASL library.\nHandles variable bounds, constraint types, sparse Jacobian/Hessian.\nSupports warm starting, dual initialization, and AMPL suffixes.\nPrimary interface for AMPL-based optimization models.",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "IpoptRJournal",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/RInterface/src/IpoptRJournal.hpp",
+  "brief": "R output journal for Ipopt progress messages\n\nIpoptRJournal derives from Journal to redirect Ipopt output to R.\nSends iteration progress and solver messages to R console via Rprintf.\nAllows R users to monitor optimization progress interactively.",
+  "algorithms": [],
+  "methods": []
+}

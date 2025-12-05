@@ -1,0 +1,16 @@
+{
+  "name": "CSP_var",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Csp/include/CSP_var.hpp",
+  "brief": "CSP variable/pattern definitions",
+  "algorithms": [
+    {
+      "name": "CSP Variable: Cutting Pattern as Column\n\nEach CSP_var represents a cutting pattern (column in master problem).\nMultiple inheritance: BCP_var_algo (LP variable) + PATTERN (items cut).\n\nPattern cost = raw material cost; coefficients = items produced.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

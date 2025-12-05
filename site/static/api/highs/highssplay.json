@@ -1,0 +1,13 @@
+{
+  "name": "HighsSplay",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsSplay.h",
+  "brief": "Splay tree operations for array-based binary search trees\n\nTop-down splay tree using indices instead of pointers for cache efficiency.\n\n**Splay Operation:**\n- highs_splay(): Move accessed node to root via rotations\n- Amortized O(log n) operations through self-adjusting\n- Zig-zig and zig-zag rotations for balanced restructuring\n\n**Tree Operations:**\n- highs_splay_link(): Insert new node, splay to root\n- highs_splay_unlink(): Remove node, restructure tree\n\n**Lambda Interface:**\nTemplate parameters for flexible storage:\n- GetLeft: lambda(index) \u2192 reference to left child index\n- GetRight: lambda(index) \u2192 reference to right child index\n- GetKey: lambda(index) \u2192 comparable key value\n\n**Usage in HiGHS:**\n- HPresolve: Row-wise nonzero storage (ARleft, ARright, rowroot)\n- HighsGFkSolve: Sparse storage for GF(k) systems\n- Efficient O(1) access to recently accessed elements",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "presolve/HPresolve.h for row iteration via splay tree",
+    "mip/HighsGFkSolve.h for GF(k) sparse storage"
+  ]
+}

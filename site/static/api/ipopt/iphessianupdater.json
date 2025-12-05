@@ -1,0 +1,21 @@
+{
+  "name": "IpHessianUpdater",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpHessianUpdater.hpp",
+  "brief": "Strategy interface for Hessian computation/approximation\n\nHessianUpdater is the abstract base for strategies that provide\nthe Hessian of the Lagrangian (or an approximation) to the algorithm.\nThe result is stored in IpData.W().",
+  "algorithms": [
+    {
+      "name": "Hessian Approximation Strategies:\n  Exact: W = \u2207\u00b2_xx L(x, y) evaluated via NLP second derivatives.\n  L-BFGS: W \u2248 D + \u03a3 (y\u1d62y\u1d62\u1d40/y\u1d62\u1d40s\u1d62 - Bs\u1d62s\u1d62\u1d40/s\u1d62\u1d40Bs\u1d62) (secant updates).\n  L-SR1: W \u2248 D + \u03a3 ((y-Bs)(y-Bs)\u1d40/(y-Bs)\u1d40s) (symmetric rank-1).\n  Store m recent {s\u2096, y\u2096} pairs where s\u2096 = x\u2096\u208a\u2081 - x\u2096, y\u2096 = \u2207L\u2096\u208a\u2081 - \u2207L\u2096.\n  Limited memory: O(m\u00b7n) storage vs O(n\u00b2) for full Hessian.",
+      "math": "Hessian of Lagrangian:\n  L(x,y) = f(x) - y_c^T c(x) - y_d^T d(x) (Lagrangian function).\n  W = \u2207\u00b2f(x) - \u03a3\u1d62 yc_i\u00b7\u2207\u00b2c_i(x) - \u03a3\u2c7c yd_j\u00b7\u2207\u00b2d_j(x).\n  Secant equation: B_{k+1}\u00b7s_k = y_k (quasi-Newton condition).\n  Positive definiteness: BFGS maintains if y^T s > 0; damped BFGS if not.",
+      "complexity": "Exact: O(eval_hess) user-provided, often O(nnz_H).\n  L-BFGS/L-SR1: O(m\u00b7n) per update, O(m\u00b7n) per matvec via two-loop.\n  Trade-off: exact more accurate, L-BFGS cheaper when n >> m pairs.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpExactHessianUpdater.hpp for exact Hessian",
+    "IpLimMemQuasiNewtonUpdater.hpp for quasi-Newton",
+    "IpLowRankUpdateSymMatrix.hpp for L-BFGS matrix representation"
+  ]
+}

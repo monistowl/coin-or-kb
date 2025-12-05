@@ -1,0 +1,13 @@
+{
+  "name": "AlpsParams",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsParams.h",
+  "brief": "Parameter set for ALPS tree search configuration\n\nAlpsParams extends AlpsParameterSet with ALPS-specific parameters.\nParameters control search strategy, limits, load balancing, and logging.\n\n**Boolean parameters (boolParams):**\n- deleteDeadNode: Remove fathomed nodes (default: true)\n- interClusterBalance: Master balances hubs (default: true)\n- intraClusterBalance: Hub balances workers (default: true)\n\n**Integer parameters (intParams):**\n- nodeLimit: Max nodes to process (default: INT_MAX)\n- solLimit: Max solutions to store (default: INT_MAX)\n- searchStrategy: 0=best, 1=estimate, 2=BFS, 3=DFS, 4=hybrid\n- msgLevel: Output verbosity (0=none, 1=summary, 2=moderate, 3=verbose)\n- hubNum: Number of hub processes\n- unitWorkNodes: Nodes per work unit\n\n**Double parameters (dblParams):**\n- timeLimit: Max search time in seconds\n- tolerance: Numerical tolerance (default: 1e-6)\n- donorThreshold/receiverThreshold: Load balancing thresholds",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsParameterBase for parameter infrastructure",
+    "AlpsModel::readParameters() for loading from file"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "BCP_indexed_pricing",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_indexed_pricing.hpp",
+  "brief": "Indexed pricing list for column generation",
+  "algorithms": [
+    {
+      "name": "Indexed Pricing: Partial Column Selection for VG\n\nBCP_indexed_pricing_list tracks which variable indices to price.\nAllows selective pricing rather than full pricing each iteration.\n\n**Note:** Currently disabled (#if 0) - placeholder for future use.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_vg.hpp for Variable Generator process"
+  ]
+}

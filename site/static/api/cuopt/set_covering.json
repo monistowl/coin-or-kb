@@ -1,0 +1,9 @@
+{
+  "name": "set_covering",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/routing/crossovers/set_covering.hpp",
+  "brief": "cuOpt VRP genetic crossover\n\nCrossover operators for evolutionary VRP algorithm.\nEAX (edge assembly), OX (order crossover), etc.",
+  "algorithms": [],
+  "methods": []
+}

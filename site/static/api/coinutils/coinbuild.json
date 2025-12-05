@@ -1,0 +1,13 @@
+{
+  "name": "CoinBuild",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinBuild.hpp",
+  "brief": "Efficient row-by-row or column-by-column model construction\n\nCoinBuild accumulates rows or columns for batch addition to a model.\nMore efficient than adding one row/column at a time to CoinPackedMatrix.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinModel for flexible model building with names and expressions",
+    "CoinPackedMatrix for the final sparse matrix format"
+  ]
+}

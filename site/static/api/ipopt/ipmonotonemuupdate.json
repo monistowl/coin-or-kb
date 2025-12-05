@@ -1,0 +1,23 @@
+{
+  "name": "IpMonotoneMuUpdate",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpMonotoneMuUpdate.hpp",
+  "brief": "Standard monotone barrier parameter update strategy\n\nMonotoneMuUpdate implements the classical IPM approach where the\nbarrier parameter mu is reduced monotonically as the subproblem\nconverges.\n\nUpdate rule:\n1. Solve barrier subproblem to tolerance barrier_tol_factor_ * mu\n2. Reduce mu: new_mu = max(mu_target_, min(kappa_mu * mu, mu^theta_mu))\n   where kappa_mu = mu_linear_decrease_factor_\n   and theta_mu = mu_superlinear_decrease_power_\n3. Update tau (fraction-to-boundary): tau = max(tau_min_, 1 - mu)\n\nKey parameters:\n- mu_init_: Initial barrier parameter\n- mu_linear_decrease_factor_: Linear decrease factor kappa_mu\n- mu_superlinear_decrease_power_: Superlinear power theta_mu\n- tau_min_: Minimum fraction-to-boundary parameter\n- mu_target_: Target mu for termination\n\nFast decrease heuristic:\n- mu_allow_fast_monotone_decrease_: Allow faster decrease when\n  complementarity is already small\n\nInteractions:\n- Calls linesearch_->Reset() when mu changes\n- Filter is cleared on barrier parameter update",
+  "algorithms": [
+    {
+      "name": "Monotone Barrier Parameter Update (Classical IPM):\nStandard approach where \u03bc decreases monotonically each outer iteration:\n1. Solve barrier subproblem: minimize f(x) - \u03bc\u00b7\u03a3log(x_i) to tolerance \u03b5(\u03bc)\n2. When converged (E(\u03bc) \u2264 barrier_tol_factor\u00b7\u03bc), reduce \u03bc\n3. Repeat until \u03bc < \u03bc_target and KKT conditions satisfied",
+      "math": "Barrier parameter update formula:\n  \u03bc_{k+1} = max(\u03bc_target, min(\u03ba_\u03bc \u00b7 \u03bc_k, \u03bc_k^{\u03b8_\u03bc}))\nwhere \u03ba_\u03bc \u2208 (0,1) is linear factor, \u03b8_\u03bc > 1 gives superlinear decrease.\n\nFraction-to-boundary parameter:\n  \u03c4_k = max(\u03c4_min, 1 - \u03bc_k)\nensures iterates stay strictly positive: x_{k+1} \u2265 (1-\u03c4_k)\u00b7x_k > 0.",
+      "complexity": "O(1) per update: simple formula evaluation after convergence\ncheck. The work is in the inner iterations (Newton steps per \u03bc value).",
+      "ref": [
+        "Fiacco & McCormick (1968). \"Nonlinear Programming: Sequential\n  Unconstrained Minimization Techniques\". Wiley. [Original barrier method]",
+        "Wright (1997). \"Primal-Dual Interior-Point Methods\". SIAM.\n  Chapter 6: Practical algorithms. [Modern IPM treatment]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMuUpdate.hpp for the base interface",
+    "IpAdaptiveMuUpdate.hpp for non-monotone alternative"
+  ]
+}

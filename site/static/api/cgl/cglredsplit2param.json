@@ -1,0 +1,14 @@
+{
+  "name": "CglRedSplit2Param",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglRedSplit2/CglRedSplit2Param.hpp",
+  "brief": "Parameters for the enhanced Reduce-and-Split cut generator",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglRedSplit2 for the generator using these parameters",
+    "CglRedSplitParam for simpler parameter version",
+    "CglLandP for Lift & Project integration\n\nDate:     03/09/09\n-----------------------------------------------------------------------------\nCopyright (C) 2010, Giacomo Nannicini and others.  All Rights Reserved."
+  ]
+}

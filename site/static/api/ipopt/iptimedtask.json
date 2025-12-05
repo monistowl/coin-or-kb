@@ -1,0 +1,12 @@
+{
+  "name": "IpTimedTask",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpTimedTask.hpp",
+  "brief": "Timer class for profiling algorithm components\n\nTimedTask provides RAII-style timing measurement for code blocks.\nTracks CPU time, system time, and wall clock time. Multiple\nStart()/End() pairs accumulate total time across invocations.\n\nUsage:\n  TimedTask timer;\n  timer.Start();\n  // ... expensive operation ...\n  timer.End();\n  double elapsed = timer.TotalCpuTime();\n\nUsed throughout Ipopt to report timing breakdown by category\n(function evaluation, linear solve, line search, etc.).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpUtils.hpp for CpuTime(), WallclockTime() functions"
+  ]
+}

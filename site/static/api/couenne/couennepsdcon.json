@@ -1,0 +1,13 @@
+{
+  "name": "CouennePSDcon",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/cut/sdpcuts/CouennePSDcon.hpp",
+  "brief": "Positive semidefinite constraint X \u2ab0 0\n\nRepresents a constraint that a matrix of expressions must be\npositive semidefinite (all eigenvalues non-negative).\n\n**Mathematical meaning:**\nX \u2ab0 0 is equivalent to:\n- All eigenvalues of X are non-negative\n- v'Xv >= 0 for all vectors v\n- X can be written as X = A'A for some matrix A\n\n**Common usage:**\n- Product matrices: X_ij = x_i * x_j must be PSD\n- Covariance matrices in statistics\n- Second-order cone constraints (via PSD embedding)\n\n**Handling in Couenne:**\nPSD constraints are not directly enforceable in MILP/NLP.\nInstead, they are enforced via:\n1. SDP cuts (see CouenneSdpCuts)\n2. Eigenvalue constraints (expensive)\n3. Principal minor constraints",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneSdpCuts for cut generation from PSD constraints",
+    "CouenneExprMatrix for matrix representation"
+  ]
+}

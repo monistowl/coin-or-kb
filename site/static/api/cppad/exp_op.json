@@ -1,0 +1,9 @@
+{
+  "name": "exp_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/exp_op.hpp",
+  "brief": "Internal implementation: exp_op",
+  "algorithms": [],
+  "methods": []
+}

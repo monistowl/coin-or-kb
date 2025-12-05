@@ -1,0 +1,321 @@
+{
+  "library": "OS",
+  "layer": "layer-4",
+  "classes": [
+    {
+      "name": "OSBase64",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSBearcatSolverXij",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSBearcatSolverXkij",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSBonminSolver",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSCoinSolver",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSColGenApp",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSCommandLine",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSCommandLineReader",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSCouenneSolver",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSCsdpSolver",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSDataStructures",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSDecompFactoryInitializer",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSDecompParam",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSDecompSolver",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSDecompSolverFactory",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSDefaultSolver",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSErrorClass",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSExpressionTree",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSFileUtil",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSGeneral",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSInstance",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSIpoptSolver",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSKnitroSolver",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSLindoSolver",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSMathUtil",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSMatlabSolver",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSMatrix",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSNode",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSOption",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSOptionsStruc",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSOutput",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSParameters",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSParseosil.tab",
+      "brief": "OSiL XML parser (bison-generated)\n\nBison-generated parser for OS Instance Language (OSiL).\nParses XML optimization problem instances.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSParseosol.tab",
+      "brief": "OSoL XML parser (bison-generated)\n\nBison-generated parser for OS Option Language (OSoL).\nParses solver options in XML format.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSParseosrl.tab",
+      "brief": "OSrL XML parser (bison-generated)\n\nBison-generated parser for OS Result Language (OSrL).\nParses optimization results in XML format.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSReferenced",
+      "brief": "OS reference counting base class\n\nReference-counted base class for OS objects.\nEnables automatic memory management via smart pointers.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSResult",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSRunSolver",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSSmartPtr",
+      "brief": "OS smart pointer implementation\n\nIntrusive smart pointer for OSReferenced objects.\nSimilar to Ipopt SmartPtr for reference counting.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSSolverAgent",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSStringUtil",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSWSUtil",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSdtoa",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSgLParserData",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSgLWriter",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSgams2osil",
+      "brief": "GAMS to OSiL model converter\n\nConverts GAMS optimization models to OS Instance Language (OSiL).\nReads GAMS .gms files and produces XML-based OSiL representation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OShL",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSiLParserData",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSiLReader",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSiLWriter",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSmps2OS",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSmps2osil",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSnLNode",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSnLParserData",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSnl2OS",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSoLParserData",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSoLReader",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSoLWriter",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSosrl2ampl",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSosrl2gams",
+      "brief": "OSrL to GAMS solution converter\n\nConverts OS Result Language (OSrL) to GAMS solution format.\nWrites solution back to GAMS for post-processing.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSrLParserData",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSrLReader",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "OSrLWriter",
+      "brief": "",
+      "has_algorithm": false
+    }
+  ]
+}

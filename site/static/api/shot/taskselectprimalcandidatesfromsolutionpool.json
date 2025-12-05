@@ -1,0 +1,13 @@
+{
+  "name": "TaskSelectPrimalCandidatesFromSolutionPool",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskSelectPrimalCandidatesFromSolutionPool.h",
+  "brief": "Check MIP solution pool for feasible MINLP solutions\n\nExtracts primal candidates from MIP solver's solution pool.\n\n**TaskSelectPrimalCandidatesFromSolutionPool Class:**\n- run(): Iterate through MIP solution pool\n- Check each solution for original constraint feasibility\n\n**Primal Candidate Processing:**\n- MIP solution may violate nonlinear constraints\n- Feasible solutions update primal bound\n- Infeasible solutions generate hyperplanes",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DualSolver.h for solution pool access",
+    "PrimalSolver.h for feasibility checking"
+  ]
+}

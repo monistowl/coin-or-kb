@@ -1,0 +1,9 @@
+{
+  "name": "convert",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/convert.hpp",
+  "brief": "Core AD functionality: convert",
+  "algorithms": [],
+  "methods": []
+}

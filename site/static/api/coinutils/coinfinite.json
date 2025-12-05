@@ -1,0 +1,14 @@
+{
+  "name": "CoinFinite",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinFinite.hpp",
+  "brief": "Numeric limit constants and floating-point validation functions\n\nProvides platform-independent definitions for numeric limits (COIN_DBL_MAX,\nCOIN_INT_MAX, etc.) and functions to check for special floating-point values\n(infinity, NaN). These are fundamental utilities used throughout COIN-OR\nfor bounds checking and numerical validation.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinIsnan(), CoinFinite()",
+    "CoinIsnan()",
+    "CoinFinite()"
+  ]
+}

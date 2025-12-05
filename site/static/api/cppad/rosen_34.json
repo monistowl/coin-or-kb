@@ -1,0 +1,9 @@
+{
+  "name": "rosen_34",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/rosen_34.hpp",
+  "brief": "CppAD utility: rosen 34",
+  "algorithms": [],
+  "methods": []
+}

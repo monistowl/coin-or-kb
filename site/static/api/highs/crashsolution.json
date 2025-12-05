@@ -1,0 +1,16 @@
+{
+  "name": "crashsolution",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/crashsolution.hpp",
+  "brief": "HiGHS QP crash solution\n\nInitial solution heuristic for QP solver.\nGenerates starting point for active set method.",
+  "algorithms": [
+    {
+      "name": "Crash Start for QP Active Set",
+      "math": "Identify free variables (no finite bounds) as potential basis.\n      Free variables can be nonbasic at zero or basic at any value.\n      Provides initial active set guess before main solve.",
+      "complexity": "O(n) for variable classification.",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

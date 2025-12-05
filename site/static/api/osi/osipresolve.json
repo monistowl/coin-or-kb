@@ -1,0 +1,22 @@
+{
+  "name": "OsiPresolve",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiPresolve.hpp",
+  "brief": "OSI interface to problem simplification (presolve)\n\nPresolve reduces problem size before solving by applying\ntransformations that preserve optimal solutions:\n- Singleton row/column removal\n- Bound tightening\n- Coefficient reduction\n- Duplicate row/column detection",
+  "algorithms": [
+    {
+      "name": "Presolve Transformations:\nProblem reductions that simplify LP/MIP while preserving optimality.\nEach transform has a postsolve reverse to recover original solution.\n\nSINGLETON ROW (doubleton elimination):\nRow with single variable: a\u2c7cx\u2c7c = b \u2192 fix x\u2c7c = b/a\u2c7c\nRemoves row and substitutes variable throughout\n\nSINGLETON COLUMN:\nVariable appears in one constraint only:\nCompute implied bounds from that constraint, fix if possible\n\nFORCED ROW:\nRow bounds force all variables to their bounds:\nIf lb = ub for a constraint, all variables are determined\n\nDOMINATED COLUMN:\nVariable dominated by another with better objective:\nx\u2c7c can be set to bound if another variable is always better\n\nBOUND TIGHTENING:\nDerive tighter bounds from constraints:\nFrom \u03a3a\u1d62\u2c7cx\u2c7c \u2264 b with known bounds, improve variable bounds\n\nPROBING:\nTemporarily fix binary to 0/1, propagate implications:\nMay discover fixed variables, tightened bounds, or cuts",
+      "math": "Bound propagation:\nFor constraint \u03a3\u2c7c a\u2c7cx\u2c7c \u2264 b:\n  x\u1d62 \u2264 (b - \u03a3\u2c7c\u2260\u1d62 min(a\u2c7cl\u2c7c, a\u2c7cu\u2c7c)) / a\u1d62 when a\u1d62 > 0\n\nProblem reduction: typically 10-50% smaller after presolve",
+      "complexity": "- Single pass: O(nnz) scan of matrix\n- Full presolve: O(k\u00b7nnz) for k iterations until fixpoint\n- Postsolve: O(transforms) reverse order application",
+      "ref": [
+        "Andersen & Andersen (1995). \"Presolving in Linear Programming\".\n  Mathematical Programming 71:221-245.\n\nWorkflow:\n1. presolvedModel() creates simplified problem\n2. Solve the simplified problem\n3. postsolve() transforms solution back to original space"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for implementation details",
+    "ClpPresolve for Clp-specific presolve"
+  ]
+}

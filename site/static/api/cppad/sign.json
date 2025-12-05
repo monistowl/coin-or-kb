@@ -1,0 +1,9 @@
+{
+  "name": "sign",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/sign.hpp",
+  "brief": "Core AD functionality: sign",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "TaskCheckTimeLimit",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskCheckTimeLimit.h",
+  "brief": "Termination check for wall-clock time limit\n\nPart of termination check sequence.\n\n**TaskCheckTimeLimit Class:**\n- taskIDIfTrue: Jump target when limit exceeded\n- run(): Compare elapsed vs Settings.TimeLimit\n\n**Behavior:**\n- If exceeded: Jump to termination task\n- If not: Continue to next task",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Timer.h for elapsed time tracking",
+    "TaskTerminate.h for termination handling"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "IpTNLPReducer",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Interfaces/IpTNLPReducer.hpp",
+  "brief": "Wrapper to solve subproblems with fewer constraints\n\nTNLPReducer wraps an existing TNLP and presents a reduced problem\nwith specified constraints, lower bounds, and upper bounds removed.\nUseful for experimentation with constraint subsets.\n\nCan skip:\n- Constraints (by index)\n- Lower bounds on variables\n- Upper bounds on variables\n- Fix certain variables\n\n@note Not efficient - still evaluates full problem internally.\nPrimarily for debugging and experimentation.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpTNLP.hpp for the underlying interface"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "CbcBranchDynamic",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcBranchDynamic.hpp",
+  "brief": "Dynamic pseudocost-based branching decision\nCopyright (C) 2005, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcBranchDynamicDecision: Selects branches using dynamic pseudocosts.\n- Before first solution: Uses infeasibility counts\n- After first solution: Uses objective change estimates\n\nPseudocosts are updated during search based on observed\nobjective changes from actual branching decisions.",
+  "algorithms": [
+    {
+      "name": "Dynamic Branching Selection (betterBranch):\n  Phase 1 (before solution): Score = numInfUp \u00d7 numInfDn (product score).\n  Phase 2 (after solution): Score = (1-\u03bb)\u00b7min(\u0394up,\u0394dn) + \u03bb\u00b7max(\u0394up,\u0394dn).\n  Where \u0394up, \u0394dn = predicted objective changes from pseudocosts.\n  Select variable maximizing score.",
+      "math": "Pseudocost update:\n  After branching on x_j with \u0394x = |x_j - x\u0304_j|:\n  \u03c8_j^+ \u2190 (n\u00b7\u03c8_j^+ + \u0394z^+/\u0394x) / (n+1) for up branch,\n  \u03c8_j^- \u2190 (n\u00b7\u03c8_j^- + \u0394z^-/\u0394x) / (n+1) for down branch.\n  n = number of previous observations.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcBranchDecision for base class",
+    "CbcSimpleIntegerDynamicPseudoCost for dynamic pseudocost objects",
+    "CbcBranchDefaultDecision for simpler selection"
+  ]
+}

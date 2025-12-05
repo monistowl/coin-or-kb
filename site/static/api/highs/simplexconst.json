@@ -1,0 +1,13 @@
+{
+  "name": "SimplexConst",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/SimplexConst.h",
+  "brief": "Constants and enums for HiGHS simplex solvers\n\n**SimplexStrategy Enum:**\n- kSimplexStrategyDual: Serial dual simplex\n- kSimplexStrategyDualTasks: SIP parallel dual\n- kSimplexStrategyDualMulti: PAMI parallel dual\n- kSimplexStrategyPrimal: Primal simplex\n\n**SimplexSolvePhase Enum:**\n- kSolvePhase1: Finding feasible basis\n- kSolvePhase2: Optimizing objective\n- kSolvePhaseOptimalCleanup: Removing perturbations\n\n**EdgeWeightMode Enum:**\n- kDantzig: Original pricing\n- kDevex: Approximate steepest edge\n- kSteepestEdge: Exact steepest edge\n\n**RebuildReason Enum:**\nReasons to reinvert basis matrix (INVERT):\n- kRebuildReasonUpdateLimitReached: Too many eta factors\n- kRebuildReasonSyntheticClockSaysInvert: Time-based trigger\n- kRebuildReasonPossiblyOptimal: Check optimality\n\n**Nonbasic Status Constants:**\n- kNonbasicMoveUp/Dn/Ze: Variable movement directions\n- kNonbasicFlagTrue/False: Basic/nonbasic indicator",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "simplex/HEkk.h for simplex implementation",
+    "lp_data/HConst.h for general constants"
+  ]
+}

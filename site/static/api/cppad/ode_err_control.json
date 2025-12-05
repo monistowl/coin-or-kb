@@ -1,0 +1,9 @@
+{
+  "name": "ode_err_control",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/ode_err_control.hpp",
+  "brief": "CppAD utility: ode err control",
+  "algorithms": [],
+  "methods": []
+}

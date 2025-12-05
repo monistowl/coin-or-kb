@@ -1,0 +1,24 @@
+{
+  "name": "IpFilterLSAcceptor",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpFilterLSAcceptor.hpp",
+  "brief": "Filter line search acceptor using W\u00e4chter-Biegler method\n\nFilterLSAcceptor implements the filter globalization strategy where\nstep acceptance is based on improvement in either constraint violation\n(theta) or barrier objective (phi).\n\nAcceptance criteria:\n- Armijo sufficient decrease in barrier function, OR\n- Sufficient reduction in constraint violation (switching condition)\n- Point must be acceptable to current filter\n\nKey parameters:\n- theta_max_fact_: Upper bound factor on infeasibility\n- gamma_phi_, gamma_theta_: Margin parameters for filter\n- eta_phi_: Armijo parameter\n- s_phi_, s_theta_: Exponents in switching condition\n\nSecond-order correction (SOC):\n- When step is rejected, solves for constraint linearization error\n- Up to max_soc_ corrections tried\n- kappa_soc_ controls required constraint reduction between SOCs\n\nCorrector steps:\n- Affine or primal-dual corrector for fast local convergence\n- Applied even when step is acceptable\n\nFilter management:\n- Dominated entries removed on filter augmentation\n- Filter reset heuristic when repeatedly rejected by filter",
+  "algorithms": [
+    {
+      "name": "Filter Method for Nonlinear Optimization:\nBi-objective approach replacing traditional merit functions. Track pairs\n(\u03b8, \u03c6) where \u03b8 = constraint violation, \u03c6 = barrier objective.\nAccept trial point if:\n1. Sufficient \u03c6 decrease (Armijo): \u03c6(x+\u03b1d) \u2264 \u03c6(x) - \u03b7*\u03b1*\u2207\u03c6^T*d, OR\n2. Switching to feasibility: \u03b8 sufficient, \u2207\u03c6^T*d < 0, AND \u03b1*(-\u2207\u03c6^T*d)^s\u03c6 > \u03b4*\u03b8^s\u03b8\n3. Filter acceptable: (\u03b8_new, \u03c6_new) not dominated by any (\u03b8_i, \u03c6_i) in filter\nDominance: (\u03b8,\u03c6) dominates (\u03b8',\u03c6') if \u03b8 \u2264 (1-\u03b3_\u03b8)\u03b8' AND \u03c6 \u2264 \u03c6' - \u03b3_\u03c6*\u03b8'",
+      "math": "Filter entries F = {(\u03b8_i, \u03c6_i)}. Accept x_new if \u2200(\u03b8_i,\u03c6_i) \u2208 F:\n\u03b8(x_new) \u2264 (1-\u03b3_\u03b8)\u03b8_i  OR  \u03c6(x_new) \u2264 \u03c6_i - \u03b3_\u03c6*\u03b8_i\nSwitching condition: if \u03b1*(-\u2207\u03c6^T d)^s_\u03c6 > \u03b4*\u03b8^s_\u03b8, prioritize optimality.\nOtherwise prioritize feasibility. Prevents Maratos effect via SOC.\nFilter augmented when accepting step improving only constraint violation.",
+      "complexity": "O(|F|) per acceptance test where |F| = filter size.\nFilter size bounded by O(k) where k = iteration count; dominated entries pruned.\nSOC: O(m\u00b3) per correction for linear solve.",
+      "ref": [
+        "Fletcher & Leyffer (2002). \"Nonlinear programming without a penalty function\".\n  Mathematical Programming 91:239-269. [Filter method introduction]",
+        "Fletcher, Leyffer & Toint (2002). \"On the global convergence of a filter-SQP\n  algorithm\". SIAM J. Optim. 13:44-59. [Global convergence theory]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpBacktrackingLSAcceptor.hpp for the base interface",
+    "IpFilter.hpp for the filter data structure",
+    "IpBacktrackingLineSearch.hpp for usage"
+  ]
+}

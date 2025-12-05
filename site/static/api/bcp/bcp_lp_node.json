@@ -1,0 +1,20 @@
+{
+  "name": "BCP_lp_node",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_lp_node.hpp",
+  "brief": "LP process node representation",
+  "algorithms": [
+    {
+      "name": "LP Node: Parent Info and Storage Strategy Tracking\n\nTracks node information within LP process including parent\ndescription and storage strategies for tree reconstruction.\n\n**BCP_node_storage_in_tm:** How each piece is stored (explicit vs delta).\n**BCP_lp_parent:** Parent node info (bounds, user data, diving info).\n**BCP_lp_node:** Current node being processed.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm_node.hpp for Tree Manager side node representation",
+    "BCP_node_change.hpp for delta encoding"
+  ]
+}

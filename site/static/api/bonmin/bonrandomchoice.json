@@ -1,0 +1,12 @@
+{
+  "name": "BonRandomChoice",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/Branching/BonRandomChoice.hpp",
+  "brief": "Random variable selection for branching\nCopyright (C) CNRS 2008. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nBonRandomChoice: Variable selection strategy that randomly picks from\nunsatisfied integer variables. Useful for diversification in search\nor as baseline for comparison with sophisticated selection rules.\n\nAuthors: Pierre Bonami, LIF, CNRS-Marseille Universites\nDate: March 17, 2008",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiChooseVariable for base variable chooser interface"
+  ]
+}

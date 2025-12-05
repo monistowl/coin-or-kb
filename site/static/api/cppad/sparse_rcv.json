@@ -1,0 +1,9 @@
+{
+  "name": "sparse_rcv",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/sparse_rcv.hpp",
+  "brief": "CppAD utility: sparse rcv",
+  "algorithms": [],
+  "methods": []
+}

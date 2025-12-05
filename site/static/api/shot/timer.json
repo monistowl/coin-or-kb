@@ -1,0 +1,12 @@
+{
+  "name": "Timer",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Timer.h",
+  "brief": "High-resolution stopwatch for performance measurement\n\nLightweight timer using std::chrono::high_resolution_clock.\n\n**Timer Class:**\n- start()/stop(): Pause/resume timing\n- restart(): Reset to zero and start\n- elapsed(): Get cumulative time in seconds\n\n**Properties:**\n- name: Timer identifier (for Timing registry)\n- description: Human-readable label\n\n**Usage:**\nTimer t(\"SolveMIP\", \"MIP solver time\");\nt.start();\n// ... computation ...\nt.stop();\ndouble seconds = t.elapsed();",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Timing.h for timer registry"
+  ]
+}

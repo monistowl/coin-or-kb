@@ -1,0 +1,9 @@
+{
+  "name": "OSParameters",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSUtils/OSParameters.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

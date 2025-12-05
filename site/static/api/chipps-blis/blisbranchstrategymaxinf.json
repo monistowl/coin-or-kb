@@ -1,0 +1,13 @@
+{
+  "name": "BlisBranchStrategyMaxInf",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisBranchStrategyMaxInf.h",
+  "brief": "Maximum infeasibility branching strategy\n\nThe simplest branching variable selection: branch on the integer\nvariable that is furthest from being integer.\n\n**Algorithm:**\n1. For each fractional integer variable x\u2c7c with value x\u2c7c*:\n   - Compute infeasibility: inf = min(x\u2c7c* - floor(x\u2c7c*), ceil(x\u2c7c*) - x\u2c7c*)\n   - This is the distance to nearest integer\n2. Select variable with maximum infeasibility\n\n**Rationale:**\nVariables far from integrality are \"more fractional\" and branching\non them may force larger changes to the LP solution.\n\n**Trade-offs:**\n- Very fast: O(n) scan of integer variables\n- No learning or LP solves required\n- Generally produces larger search trees than pseudo-cost or strong\n- Good for initial exploration or when speed matters more than tree size",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisBranchStrategyPseudo for pseudo-cost branching (learned estimates)",
+    "BlisBranchStrategyStrong for strong branching (accurate but slow)"
+  ]
+}

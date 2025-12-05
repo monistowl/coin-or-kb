@@ -1,0 +1,12 @@
+{
+  "name": "Helpers",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/Helpers.h",
+  "brief": "Core wrapper infrastructure for Sonnet .NET bindings\n\nTemplate base classes for C++/CLI wrappers around native COIN-OR objects.\nWrapperAbstractBase<T> and WrapperBase<T> handle ownership and lifetime.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiSolverInterface.h, ClpModel.h, CbcModel.h for concrete wrappers"
+  ]
+}

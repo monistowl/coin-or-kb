@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprInv",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprInv.hpp",
+  "brief": "Reciprocal function w = 1/x\n\nHyperbolic function that is convex on (0, \u221e) and (-\u221e, 0) separately.\nSingular at x = 0, so domain handling is critical.\n\n**Convexification by domain:**\n- x > 0: 1/x is convex, use secant overestimator and tangent underestimators\n- x < 0: 1/x is convex, same approach\n- If x can cross zero: must handle carefully, possible branching\n\n**Tangent line at x = a:**\nw = 1/a - (x - a)/a\u00b2 = 2/a - x/a\u00b2\n\n**Secant between (a, 1/a) and (b, 1/b):**\nw = 1/a + (1/b - 1/a)/(b - a) * (x - a) = 1/a - (x - a)/(ab)\n\n**Properties:**\n- Bijective: inverse of 1/x is 1/x (self-inverse)\n- Used in division: x/y reformulated as x * (1/y)\n- Derivatives: d(1/x)/dx = -1/x\u00b2, d\u00b2(1/x)/dx\u00b2 = 2/x\u00b3",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprDiv which uses exprInv internally",
+    "exprMul for the multiplication component"
+  ]
+}

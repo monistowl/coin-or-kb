@@ -1,0 +1,9 @@
+{
+  "name": "call_atomic",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/sweep/call_atomic.hpp",
+  "brief": "Internal sweep implementation: call_atomic",
+  "algorithms": [],
+  "methods": []
+}

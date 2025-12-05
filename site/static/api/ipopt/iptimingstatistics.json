@@ -1,0 +1,20 @@
+{
+  "name": "IpTimingStatistics",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpTimingStatistics.hpp",
+  "brief": "Collection of timing statistics for algorithm profiling\n\nTimingStatistics aggregates TimedTask objects for all major\nalgorithm components, enabling performance profiling and\nbottleneck identification.\n\nTiming categories:\n- Algorithm phases: InitializeIterates, UpdateHessian, OutputIteration,\n  UpdateBarrierParameter, ComputeSearchDirection, etc.\n- Linear system: PDSystemSolverTotal, LinearSystemFactorization,\n  LinearSystemBackSolve, LinearSystemScaling\n- NLP evaluations: f_eval_time, grad_f_eval_time, c_eval_time,\n  jac_c_eval_time, d_eval_time, jac_d_eval_time, h_eval_time\n- Auxiliary: Task1-Task6 for ad-hoc profiling\n\nKey methods:\n- ResetTimes(): Clear all accumulated times\n- EnableTimes()/DisableTimes(): Control timing overhead\n- PrintAllTimingStatistics(): Output formatted timing report\n- TotalFunctionEvaluationCpuTime(): Sum of NLP evaluation times\n\nEach TimedTask tracks CPU time, system time, and wall-clock time.",
+  "algorithms": [
+    {
+      "name": "Performance Profiling Infrastructure:\nHierarchical timing collection for identifying bottlenecks:\n- OverallAlgorithm: total solve time\n- ComputeSearchDirection \u2192 PDSystemSolverTotal \u2192 LinearSystemFactorization\n- NLP evaluations: f, grad_f, c, jac_c, d, jac_d, h\n\nTypical breakdown for large NLPs:\n- 60-80%: LinearSystemFactorization (sparse direct solve)\n- 10-20%: NLP evaluations (function/Jacobian/Hessian)\n- 5-10%: ComputeAcceptableTrialPoint (line search)\n- Remainder: bookkeeping, output, convergence checks",
+      "math": "",
+      "complexity": "O(1) overhead per task start/stop (clock queries).\nPrintAllTimingStatistics: O(# tasks) to format output.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTimedTask.hpp for individual task timing",
+    "IpIpoptAlg.hpp for timing during main loop"
+  ]
+}

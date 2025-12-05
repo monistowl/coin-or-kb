@@ -1,0 +1,20 @@
+{
+  "name": "IpRestoIpoptNLP",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpRestoIpoptNLP.hpp",
+  "brief": "IpoptNLP adapter for restoration phase feasibility problem\n\nRestoIpoptNLP transforms the original NLP into a feasibility problem\nfor the restoration phase. It introduces slack variables to allow\nconstraint violations and penalizes them in the objective.",
+  "algorithms": [
+    {
+      "name": "Restoration Phase Problem Formulation:\n  Original: min f(x) s.t. c(x)=0, d_L \u2264 d(x) \u2264 d_U.\n  Restoration: min \u03c1\u00b7(||p||\u2081 + ||n||\u2081) + (\u03b7/2)\u00b7||D_r(x-x_ref)||\u2082\u00b2\n               s.t. c(x) - p_c + n_c = 0, d(x) - p_d + n_d \u2208 [d_L, d_U]\n                    p_c, n_c, p_d, n_d \u2265 0.\n  Where: \u03c1 = resto_penalty_parameter (default 1000).\n         \u03b7 = \u03b7_factor\u00b7\u03bc^\u03b7_exp (proximity weight, depends on barrier \u03bc).\n         D_r = diag(1/max(1, |x_ref_i|)) for scaling.",
+      "math": "Restoration NLP structure:\n  Variables: (x, p_c, n_c, p_d, n_d) \u2208 \u211d\u207f \u00d7 \u211d\u208a^{m_c} \u00d7 \u211d\u208a^{m_c} \u00d7 ...\n  Gradient: \u2207f = (\u03b7\u00b7D_r\u00b2\u00b7(x-x_ref), \u03c1\u00b7e, \u03c1\u00b7e, \u03c1\u00b7e, \u03c1\u00b7e).\n  Jacobian: Block structure [J_c, -I, I, 0, 0; J_d, 0, 0, -I, I].\n  Hessian: Block diag(W + \u03b7\u00b7D_r\u00b2, 0, 0, 0, 0).\n\nVariable structure (CompoundVector):\n- x: Original primal variables\n- p_c, n_c: Positive/negative slacks for equality constraints\n- p_d, n_d: Positive/negative slacks for inequality constraints\n\nObjective function:\n  f_resto = \u03c1 * (e'p_c + e'n_c + e'p_d + e'n_d)\n          + (\u03b7/2) * ||D_r(x - x_ref)||_2^2\nWhere \u03b7 = \u03b7_factor * \u03bc^\u03b7_mu_exponent (mu-dependent)\n\nModified constraints:\n- c(x) - p_c + n_c = 0  (equality)\n- d(x) - p_d + n_d (bounded by d_L, d_U)\n\nMatrix structure:\n- Jacobians: Block structure with original Jac and identity blocks\n- Hessian: Original Hessian + diagonal D_r^2 for proximity term\n\nKey methods:\n- f(), grad_f(): Depend on mu (objective_depends_on_mu() = true)\n- Eta(): Computes proximity weight from current mu\n- DR_x(): Scaling factors 1/max(1, |x_ref_i|)",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpRestoMinC_1Nrm.hpp for the restoration phase algorithm",
+    "IpIpoptNLP.hpp for the base interface"
+  ]
+}

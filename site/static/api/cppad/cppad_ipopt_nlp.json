@@ -1,0 +1,9 @@
+{
+  "name": "cppad_ipopt_nlp",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "cppad_ipopt/src/cppad_ipopt_nlp.hpp",
+  "brief": "Ipopt interface: cppad_ipopt_nlp",
+  "algorithms": [],
+  "methods": []
+}

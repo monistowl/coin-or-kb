@@ -1,0 +1,13 @@
+{
+  "name": "CouenneInfeasCut",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/bound_tightening/CouenneInfeasCut.hpp",
+  "brief": "Signal infeasibility via fictitious cut\n\nMechanism for bound tighteners to signal detected infeasibility\nto the node solver without early termination.\n\n**WipeMakeInfeas():**\nAdds a fictitious cut 1 \u2264 x\u2080 \u2264 -1 to the cut set. This\nimpossible constraint signals to subsequent components that\nthe node is infeasible.\n\n**isWiped():**\nChecks whether the cut set contains the infeasibility signal.\nCut generators should check this before expensive operations.\n\n**Why needed:**\nIn Cgl's cut generator framework, generators cannot directly\nprune nodes. This sentinel cut mechanism allows bound tighteners\nto signal infeasibility discovered during FBBT/OBBT.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneFixPoint which may detect infeasibility",
+    "CouenneAggrProbing which may detect infeasibility"
+  ]
+}

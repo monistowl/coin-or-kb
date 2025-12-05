@@ -1,0 +1,111 @@
+{
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "classes": [
+    {
+      "name": "Alps",
+      "brief": "Core definitions for ALPS parallel tree search framework\n\nCentral header defining enumerations, constants, and types for the\nAbstract Library for Parallel Search (ALPS).\n\n**Core enumerations:**\n- AlpsNodeStatus: Node states (Candidate, Evaluated, Pregnant, Branched, Fathomed)\n- AlpsSearchType: Search strategies (BestFirst, BreadthFirst, DepthFirst, Hybrid)\n- AlpsKnowledgeType: Knowledge categories (Model, Node, Solution, SubTree)\n- AlpsExitStatus: Termination status (Optimal, TimeLimit, NodeLimit, etc.)\n- AlpsPhase: Execution phase (Rampup, Search, Rampdown)\n\n**Key constants:**\n- ALPS_OBJ_MAX, ALPS_BND_MAX: Numerical bounds\n- ALPS_ZERO, ALPS_GEN_TOL: Numerical tolerances\n\n**Design philosophy:**\n- Subtree is the basic unit of work in parallel execution\n- Workers process subtrees autonomously\n- Hub brokers coordinate work distribution",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsEncoded",
+      "brief": "Serialization buffer for ALPS knowledge objects\n\nAlpsEncoded is the binary buffer for packing/unpacking AlpsKnowledge\nobjects for network transmission in parallel search.\n\n**Buffer structure:**\n- type_: Integer identifying the knowledge type\n- size_: Current data size in bytes\n- representation_: Raw byte buffer\n- pos_: Current read position\n\n**Template methods for serialization:**\n- writeRep(T): Write single value\n- readRep(T): Read single value\n- writeRep(T*, len): Write array with length prefix\n- readRep(T*, len): Read array\n- writeRep/readRep for std::string, std::vector\n\n**Memory management:**\n- Default: 16KB initial allocation\n- make_fit(): Grows buffer as needed (4x growth)\n- clear(): Reset buffer to empty state\n\nBased on BCP_buffer and CoinEncoded designs.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsKnowledge",
+      "brief": "Base class for all ALPS knowledge types (Model, Node, Solution, SubTree)\n\nAlpsKnowledge is the abstract base for all sharable data in parallel search.\nDerived classes must implement encode()/decode() for serialization.\n\n**Knowledge types (AlpsKnowledgeType):**\n- Model: Problem data shared at initialization\n- Node: Search tree nodes processed by workers\n- Solution: Feasible solutions found during search\n- SubTree: Collections of nodes for work distribution\n\n**Serialization for parallel execution:**\n- encode(): Pack object into AlpsEncoded buffer\n- decode(): Create new object from AlpsEncoded\n- decodeToSelf(): Unpack into existing object\n\nSimple contiguous classes can use default encode/decode.\nClasses with pointers or STL containers must override.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsKnowledgeBroker",
+      "brief": "Central manager for parallel tree search knowledge and coordination\n\nAlpsKnowledgeBroker is the abstract base class for search coordination.\nIt manages knowledge pools, search strategy, and execution statistics.\n\n**Key responsibilities:**\n- Manage SubTreePool and SolutionPool\n- Register knowledge types for serialization\n- Track search statistics (nodes processed, branched, etc.)\n- Apply search strategy (node/tree selection)\n\n**Knowledge pool management:**\n- addKnowledge()/getKnowledge(): Store/retrieve knowledge\n- registerClass(): Register decode functions for parallel\n- decoderObject(): Get decoder for knowledge type\n\n**Search phases (AlpsPhase):**\n- Rampup: Initial node generation and distribution\n- Search: Main parallel exploration\n- Rampdown: Collect results and terminate\n\n**Implementations:**\n- AlpsKnowledgeBrokerSerial: Single-process execution\n- AlpsKnowledgeBrokerMPI: MPI-based parallel execution",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsKnowledgeBrokerMPI",
+      "brief": "MPI-based parallel implementation of ALPS knowledge broker\n\nAlpsKnowledgeBrokerMPI provides scalable parallel tree search using MPI.\nImplements hierarchical Master-Hub-Worker architecture.\n\n**Process hierarchy:**\n- Master (rank 0): Inter-cluster load balancing, termination detection\n- Hubs: Manage worker clusters, intra-cluster load balancing\n- Workers: Process subtrees, report status to hub\n\n**Core methods per process type:**\n- masterMain(): Balance hubs, check termination\n- hubMain(): Balance workers, report to master\n- workerMain(): Explore subtrees, request work\n\n**Load balancing:**\n- Inter-cluster: Master moves work between hubs\n- Intra-cluster: Hub moves work between workers\n- Work donation: Split subtrees when requested\n\n**Static initialization schemes:**\n- Root initialization: Master generates nodes, distributes\n- Spiral: Distribute initial work in spiral pattern\n\n**MPI communicators:**\n- MPI_COMM_WORLD: All processes\n- clusterComm_: Hub and its workers\n- hubComm_: Master and all hubs",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsKnowledgeBrokerSerial",
+      "brief": "Serial (single-process) implementation of ALPS knowledge broker\n\nAlpsKnowledgeBrokerSerial provides single-threaded tree search.\nUse this for debugging or when parallel execution is not needed.\n\n**Usage:**\n@code\nMyModel model;\nAlpsKnowledgeBrokerSerial broker(argc, argv, model);\nbroker.search(&model);\nbroker.printBestSolution();\n@endcode\n\n**Key methods:**\n- initializeSearch(): Read parameters and problem data\n- rootSearch(): Execute tree search from root\n- searchLog(): Print search statistics\n- printBestSolution(): Output best solution found\n\n**Differences from MPI version:**\n- Single subtree pool (no distribution)\n- No message passing or load balancing\n- All phases (rampup/search/rampdown) in one process",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsKnowledgePool",
+      "brief": "Abstract base class for knowledge storage pools\n\nAlpsKnowledgePool defines the API for all pool types in ALPS.\nKnowledge is stored with associated priority values for ordering.\n\n**Pool types (AlpsKnowledgePoolType):**\n- NodePool: Stores tree nodes awaiting processing\n- SolutionPool: Stores feasible solutions found\n- SubTreePool: Stores subtrees for parallel distribution\n\n**Core API:**\n- addKnowledge(kl, priority): Add with ordering priority\n- getKnowledge(): Peek at highest-priority item\n- popKnowledge(): Remove highest-priority item\n- getBestKnowledge(): Get best quality item\n- hasKnowledge(): Check if pool is non-empty",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsMessage",
+      "brief": "Log messages for ALPS search status and events\n\nDefines ALPS_Message enum for CoinMessageHandler logging.\nNOT the MPI message tags (see AlpsMessageTag.h).\n\n**Message categories:**\n- ALPS_DONATE_*: Work donation events\n- ALPS_LOADBAL_*: Load balancing status\n- ALPS_RAMPUP_*: Initial distribution phase\n- ALPS_TERM_*: Termination detection\n- ALPS_S_*: Serial-only messages\n- ALPS_T_*: Termination reasons\n\n**AlpsMessage class:**\nExtends CoinMessages with ALPS-specific message definitions.\nUsed with CoinMessageHandler for consistent logging.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsModel",
+      "brief": "Abstract base class for user problem data in ALPS tree search\n\nAlpsModel holds problem-specific data (constraints, objectives, variables).\nUsers inherit this class and implement virtual methods for their application.\n\n**Key virtual methods to implement:**\n- readInstance(): Read problem from file (master process only)\n- setupSelf(): Initialize model after data loaded/received\n- preprocess(): Preprocessing before search\n- createRoot(): Create the root tree node\n- encode()/decodeToSelf(): Serialize for parallel distribution\n\n**Parallel execution flow:**\n1. Master: readInstance() \u2192 setupSelf() \u2192 preprocess() \u2192 createRoot()\n2. Master: encode() model and send to workers\n3. Workers: decodeToSelf() \u2192 setupSelf() \u2192 begin processing nodes\n4. All: postprocess() after search completes",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsNodeDesc",
+      "brief": "Node description holding subproblem-specific data\n\nAlpsNodeDesc holds problem data for a tree node separate from tree\nstructure data. Users inherit this class for application-specific data.\n\n**Design rationale:**\n- AlpsTreeNode: Tree structure (parent, children, status)\n- AlpsNodeDesc: Subproblem data (bounds, constraints, etc.)\n\nThis separation simplifies parallel communication: only the\ndescription needs to be encoded for node transfer.\n\n**Representation modes:**\n- Explicit: Full problem data stored\n- Relative: Differences from parent node",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsNodePool",
+      "brief": "Priority queue for tree nodes awaiting processing\n\nAlpsNodePool stores candidate nodes ordered by search strategy.\nUses AlpsPriorityQueue with AlpsSearchStrategy comparison.\n\n**Storage:**\n- candidateList_: Priority queue of AlpsTreeNode pointers\n- searchStrategy_: Comparison function for ordering\n\n**Key operations:**\n- addKnowledge(): Add node with quality as priority\n- getKnowledge()/popKnowledge(): Access/remove best node\n- setNodeSelection(): Change search strategy (re-heaps)\n- getBestNode(): Get node with best quality\n\n**Search strategies supported:**\n- BestFirst: Lowest quality value first\n- DepthFirst: Deepest node first\n- BreadthFirst: Shallowest node first\n- BestEstimate: Best estimated solution first",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsParameterBase",
+      "brief": "Generic parameter management infrastructure for ALPS\n\nBase classes for defining and parsing typed parameter sets.\nDerived from BCP_parameters.hpp design.\n\n**AlpsParameterT enum:**\n- AlpsBoolPar, AlpsIntPar, AlpsDoublePar, AlpsStringPar\n- AlpsStringArrayPar: Multiple values per key\n\n**AlpsParameter class:**\nIdentifies a single parameter by type and index within type.\n\n**AlpsParameterSet class:**\nContainer for typed parameter arrays with file parsing.\nSubclasses must implement:\n- createKeywordList(): Define keyword\u2192parameter mappings\n- setDefaultEntries(): Set default values\n\n**Reading parameters:**\n- readFromFile(): Parse parameter file\n- readFromStream(): Parse from istream\n- readFromArglist(): Parse command-line args",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsParams",
+      "brief": "Parameter set for ALPS tree search configuration\n\nAlpsParams extends AlpsParameterSet with ALPS-specific parameters.\nParameters control search strategy, limits, load balancing, and logging.\n\n**Boolean parameters (boolParams):**\n- deleteDeadNode: Remove fathomed nodes (default: true)\n- interClusterBalance: Master balances hubs (default: true)\n- intraClusterBalance: Hub balances workers (default: true)\n\n**Integer parameters (intParams):**\n- nodeLimit: Max nodes to process (default: INT_MAX)\n- solLimit: Max solutions to store (default: INT_MAX)\n- searchStrategy: 0=best, 1=estimate, 2=BFS, 3=DFS, 4=hybrid\n- msgLevel: Output verbosity (0=none, 1=summary, 2=moderate, 3=verbose)\n- hubNum: Number of hub processes\n- unitWorkNodes: Nodes per work unit\n\n**Double parameters (dblParams):**\n- timeLimit: Max search time in seconds\n- tolerance: Numerical tolerance (default: 1e-6)\n- donorThreshold/receiverThreshold: Load balancing thresholds",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsSearchStrategy",
+      "brief": "Node and subtree selection strategies for ALPS tree search\n\nDefines comparison classes for selecting which node or subtree to explore next.\ncompare(x,y) returns true if y should be processed before x.\n\n**Subtree selection (AlpsTreeSelection):**\n- AlpsTreeSelectionBest: Best quality subtree first\n- AlpsTreeSelectionBreadth: Shallowest root first\n- AlpsTreeSelectionDepth: Deepest root first\n- AlpsTreeSelectionEstimate: Best estimated solution first\n\n**Node selection (AlpsNodeSelection):**\n- AlpsNodeSelectionBest: Best bound first (minimize dual gap)\n- AlpsNodeSelectionBreadth: BFS (shallowest first)\n- AlpsNodeSelectionDepth: DFS (deepest first, finds solutions fast)\n- AlpsNodeSelectionEstimate: Best estimated solution first\n- AlpsNodeSelectionHybrid: Combination strategy\n\n**Hybrid strategy:**\nCombines best-first selection with diving for solution finding.\nselectNextNode() and createNewNodes() can be overridden.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsSearchStrategyBase",
+      "brief": "Template base class for search strategy comparison functions\n\nDefines the template interface for node and subtree comparison.\nUsed in priority queues to order items for selection.\n\n**AlpsSearchStrategy<T> template:**\n- compare(x, y): Return true if y preferred over x\n- operator(): Calls compare() for STL compatibility\n- weight_: Optional parameter for tuning\n- type_: Strategy identifier (BestFirst, DFS, etc.)\n\n**Virtual methods for advanced strategies:**\n- selectNextNode(): Custom node selection logic\n- createNewNodes(): Custom branching logic\n\n**AlpsCompare<T> wrapper:**\nAdapter holding strategy pointer for use with std::priority_queue.\nUsed in AlpsPriorityQueue.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsSolution",
+      "brief": "Base class for solutions found during ALPS tree search\n\nAlpsSolution is the abstract base class for feasible solutions.\nUsers inherit this class to store application-specific solution data.\n\n**Base class data:**\n- index_: Node index where solution was found\n- depth_: Tree depth where solution was found\n\n**Key virtual methods:**\n- print(): Output solution to stream\n- encode()/decodeToSelf(): Serialize for parallel sharing\n\nSolutions are stored in AlpsSolutionPool with their quality values.\nThe incumbent (best solution) is tracked and used for pruning.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsSolutionPool",
+      "brief": "Storage for feasible solutions found during search\n\nAlpsSolutionPool stores solutions ordered by quality (priority).\nLower priority value = better solution (for minimization).\n\n**Storage:**\n- solutions_: multimap<double, AlpsSolution*> ordered by quality\n- maxNumSolutions_: Maximum solutions to retain\n\n**Key operations:**\n- addKnowledge(): Add solution, possibly discard worst if at limit\n- getBestKnowledge(): Get solution with lowest priority (best)\n- getAllKnowledges(): Get all solutions for output\n- clean(): Delete all solutions\n\n**AlpsSolutionInterface macro:**\nConvenience macro defining getNumSolutions, getBestSolution, etc.\nfor use in classes that contain a solution pool.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsSubTree",
+      "brief": "Subtree management for ALPS parallel tree search\n\nAlpsSubTree is the basic unit of work in parallel ALPS. Workers process\nentire subtrees autonomously, enabling scalable parallelism.\n\n**Key components:**\n- root_: Root node of this subtree\n- nodePool_: Leaf nodes awaiting processing\n- diveNodePool_: Nodes for diving exploration\n- activeNode_: Currently being processed\n\n**Core operations:**\n- exploreSubTree(): Process nodes up to limits\n- exploreUnitWork(): Process bounded amount of work\n- createChildren(): Branch and add children to pool\n- splitSubTree(): Split off portion for redistribution\n- rampUp(): Generate initial nodes for parallel start\n\n**Diving strategy:**\n- diveNodePool_ holds nodes for deep exploration\n- diveDepth_ tracks current dive depth\n- Helps find feasible solutions quickly\n\n**Dead node removal:**\n- removeDeadNodes(): Recursively remove fathomed branches\n- fathomAllNodes(): Clear entire subtree",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsSubTreePool",
+      "brief": "Pool of subtrees for work distribution in parallel search\n\nAlpsSubTreePool stores subtrees for load balancing between processes.\nKey component for parallel scalability in ALPS.\n\n**Storage:**\n- subTreeList_: Priority queue of AlpsSubTree pointers\n- Ordering by subtree quality for work distribution\n\n**Key operations:**\n- addKnowledge(): Add subtree from work donation\n- getKnowledge()/popKnowledge(): Get subtree for processing\n- setComparison(): Set subtree selection strategy\n- getBestQuality(): Get quality of best subtree\n\n**Parallel use:**\n- Serial: Single subtree in pool\n- Parallel: Multiple subtrees for load balancing\n- Subtrees split/merged for work sharing",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsTime",
+      "brief": "Timer utilities for ALPS search (CPU and wall clock)\n\nProvides timing functions and AlpsTimer class for measuring execution time.\n\n**Free functions:**\n- AlpsCpuTime(): Alias for CoinCpuTime()\n- AlpsGetTimeOfDay(): Wall clock (MPI_Wtime if MPI, else CoinGetTimeOfDay)\n\n**AlpsTimer class:**\n- start()/stop(): Control timing interval\n- getCpuTime()/getWallClockTime(): Get elapsed time\n- getTime(): Returns CPU or wall based on clockType_\n- reachCpuLimit()/reachWallLimit(): Check time limits\n- setLimit(): Set time limit for checks\n\n**Clock types (AlpsClockType):**\n- AlpsClockTypeCpu: Process CPU time\n- AlpsClockTypeWallClock: Real elapsed time (default)",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsTreeNode",
+      "brief": "Search tree node abstraction for ALPS parallel tree search\n\nAlpsTreeNode represents a single node in the search tree. Users inherit\nthis class to implement application-specific node processing.\n\n**Node status lifecycle (AlpsNodeStatus):**\n- Candidate: Waiting in pool for processing\n- Evaluated: Processed, waiting for branching decision\n- Pregnant: Ready to branch, has child descriptions\n- Branched: Children created and added to pool\n- Fathomed: Pruned (by bound, infeasibility, or solution)\n\n**Key virtual methods:**\n- process(): Perform bounding operation (e.g., LP solve)\n- branch(): Create child nodes from pregnant node\n- createNewTreeNode(): Factory for child node creation\n\n**Node data:**\n- quality_: Node quality for selection (lower = better)\n- solEstimate_: Estimated solution quality\n- desc_: AlpsNodeDesc holding problem-specific data\n- explicit_: 1=full description, 0=relative/diff",
+      "has_algorithm": false
+    }
+  ]
+}

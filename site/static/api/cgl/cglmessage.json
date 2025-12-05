@@ -1,0 +1,13 @@
+{
+  "name": "CglMessage",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglCommon/CglMessage.hpp",
+  "brief": "Message definitions for CGL cut generators\n\nDefines CGL_Message enum codes and CglMessage class for\ninternationalized message output through CoinMessageHandler.\n\nMessage categories:\n- Infeasibility detection: CGL_INFEASIBLE, CGL_UNBOUNDED\n- Preprocessing results: CGL_FIXED, CGL_MADE_INTEGER, CGL_ADDED_INTEGERS\n- Statistics: CGL_PROCESS_STATS, CGL_PROCESS_STATS2\n- Clique processing: CGL_CLIQUES, CGL_PROCESS_CLQSTR, CGL_WARNING_CLQSTR\n- SOS handling: CGL_PROCESS_SOS1, CGL_PROCESS_SOS2\n- Postsolve: CGL_POST_INFEASIBLE, CGL_POST_CHANGED\n- Matrix changes: CGL_ELEMENTS_CHANGED1, CGL_ELEMENTS_CHANGED2",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMessageHandler for the message output system",
+    "CoinMessages for base message collection class"
+  ]
+}

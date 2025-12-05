@@ -1,0 +1,21 @@
+{
+  "name": "BCP_branch",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_branch.hpp",
+  "brief": "Internal branching object for BCP Branch-Cut-Price",
+  "algorithms": [
+    {
+      "name": "Internal Branching Representation: Bound Changes per Child\n\nRepresents the result of a branching decision as bound changes\non variables and cuts across children nodes.\n\n**BCP_internal_brobj:**\nCreated AFTER any cuts/variables from branching are added.\nStores only bound changes, not the branching object itself.\n\n**Data structure:**\n- _child_num: Number of children (typically 2 for binary branching)\n- _var_positions: Indices of variables with changed bounds\n- _cut_positions: Indices of cuts with changed bounds\n- _var_bounds: New [lb, ub] pairs for each child \u00d7 each affected var\n- _cut_bounds: New [lb, ub] pairs for each child \u00d7 each affected cut\n\n**Memory layout:**\nBounds are stored as: child0_var0_lb, child0_var0_ub, child0_var1_lb, ...\nthen child1_var0_lb, child1_var0_ub, ...\nTotal length: 2 \u00d7 child_num \u00d7 var_positions.size()\n\n**Usage:**\n- apply_child_bounds(): Modify LP solver for child's bounds\n- pack()/unpack(): Serialize for sending to TM",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_lp_branch.hpp for LP-side branching object",
+    "BCP_enum_branch.hpp for branching enumerations",
+    "BCP_lp_user::select_branching_candidates() for branching logic"
+  ]
+}

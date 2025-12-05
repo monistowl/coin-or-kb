@@ -1,0 +1,14 @@
+{
+  "name": "AlpsSubTree",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsSubTree.h",
+  "brief": "Subtree management for ALPS parallel tree search\n\nAlpsSubTree is the basic unit of work in parallel ALPS. Workers process\nentire subtrees autonomously, enabling scalable parallelism.\n\n**Key components:**\n- root_: Root node of this subtree\n- nodePool_: Leaf nodes awaiting processing\n- diveNodePool_: Nodes for diving exploration\n- activeNode_: Currently being processed\n\n**Core operations:**\n- exploreSubTree(): Process nodes up to limits\n- exploreUnitWork(): Process bounded amount of work\n- createChildren(): Branch and add children to pool\n- splitSubTree(): Split off portion for redistribution\n- rampUp(): Generate initial nodes for parallel start\n\n**Diving strategy:**\n- diveNodePool_ holds nodes for deep exploration\n- diveDepth_ tracks current dive depth\n- Helps find feasible solutions quickly\n\n**Dead node removal:**\n- removeDeadNodes(): Recursively remove fathomed branches\n- fathomAllNodes(): Clear entire subtree",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsTreeNode for individual nodes",
+    "AlpsNodePool for node storage",
+    "AlpsSubTreePool for subtree collection"
+  ]
+}

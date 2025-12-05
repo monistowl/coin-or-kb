@@ -1,0 +1,21 @@
+{
+  "name": "IpLeastSquareMults",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpLeastSquareMults.hpp",
+  "brief": "Least-squares estimation of equality constraint multipliers\n\nLeastSquareMultipliers computes initial estimates for the equality\nconstraint multipliers y_c and y_d by solving a least-squares problem.\n\nFormulation: Find y minimizing ||\u2207_x L(x,y)||^2 where\n  \u2207_x L = \u2207f(x) + J_c^T y_c + J_d^T y_d - z_L + z_U\n\nThis is equivalent to solving the normal equations:\n  [J_c J_c^T    0    ] [y_c]   [-J_c (\u2207f - z_L + z_U)]\n  [   0     J_d J_d^T] [y_d] = [-J_d (\u2207f - z_L + z_U)]\n\nActually solved via augmented system:\n  [0  J_c^T  J_d^T] [r  ]   [\u2207f - z_L + z_U]\n  [J_c  0     0   ] [y_c] = [     0        ]\n  [J_d  0     0   ] [y_d]   [     0        ]\n\nUses AugSystemSolver to solve the linear system with W=0.\n\nUsage:\n- DefaultIterateInitializer: Initial multiplier estimates\n- MinC_1NrmRestorationPhase: Post-restoration multiplier reset",
+  "algorithms": [
+    {
+      "name": "Least-Squares Multiplier Estimation:\nFind y minimizing ||\u2207_x L(x,y)||\u00b2 via normal equations:\n1. Form gradient residual: g = \u2207f(x) - z_L + z_U (bound multiplier contribution)\n2. Solve augmented system with W=0:\n   [0     J_c^T   J_d^T] [r  ]   [g]\n   [J_c    0       0   ] [y_c] = [0]\n   [J_d    0       0   ] [y_d]   [0]\n3. Discard residual r; extract y_c, y_d as multiplier estimates",
+      "math": "Least-squares formulation:\nmin_y ||\u2207f + J\u1d40y - (z_L - z_U)||\u00b2\n\nNormal equations: (J\u00b7J\u1d40)\u00b7y = -J\u00b7(\u2207f - z_L + z_U)\n\nAugmented system form solves this without forming JJ\u1d40 explicitly,\npreserving sparsity: J\u1d40y = r, Jx = 0 \u2192 y = (JJ\u1d40)\u207b\u00b9J\u00b7(-g).\n\nSingular case: If J is rank-deficient, minimum-norm solution is obtained.",
+      "complexity": "Same as one augmented system solve: O(nnz(J)\u00b7fill) for sparse,\nO(n\u00b3) for dense factorization.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpEqMultCalculator.hpp for base interface",
+    "IpAugSystemSolver.hpp for the linear solver",
+    "IpDefaultIterateInitializer.hpp for initialization usage"
+  ]
+}

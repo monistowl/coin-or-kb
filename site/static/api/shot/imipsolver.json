@@ -1,0 +1,25 @@
+{
+  "name": "IMIPSolver",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/IMIPSolver.h",
+  "brief": "Abstract interface for MIP solver backends\n\nPure virtual interface for dual problem MIP solvers.\n\n**Problem Construction:**\n- initializeProblem(), finalizeProblem(): Setup/teardown\n- addVariable(): With type, bounds, and semi-bounds\n- addLinearTermToObjective/Constraint(): Build incrementally\n- addQuadraticTermToObjective/Constraint(): For MIQP/MIQCQP\n\n**Solution Methods:**\n- solveProblem(): Execute MIP solver\n- repairInfeasibility(): Attempt feasibility repair\n- getObjectiveValue(), getDualObjectiveValue(): Bounds\n- getVariableSolution(), getAllVariableSolutions(): Points\n\n**Hyperplane/Cut Management:**\n- createHyperplane(): Add supporting hyperplane linearization\n- createInteriorHyperplane(): Interior point cuts\n- createIntegerCut(): No-good cuts for integer variables\n\n**Bound Management:**\n- setCutOff(): Objective cutoff for pruning\n- fixVariable(), unfixVariables(): For integer fixing\n- presolveAndUpdateBounds(): Bound tightening\n\n**Implementations:**\n- MIPSolverCplex, MIPSolverGurobi, MIPSolverCbc\n- SingleTree variants for callback-based cut addition",
+  "algorithms": [
+    {
+      "name": "MIP Start (Warm Starting) (addMIPStart):\n  Provide known feasible solution to MIP solver:\n  - From NLP subproblem solutions in outer approximation\n  - Improves primal bound immediately\n  - Guides B&B exploration toward good solutions",
+      "math": "Prune node n if: LP(n) >= z* (current best solution)\n  Can be set as hard cutoff or as objective constraint.",
+      "complexity": "",
+      "ref": [
+        "Kronqvist et al. (2016) - Extended Supporting Hyperplane Algorithm",
+        "Kelley (1960) - Cutting-plane method for convex programming",
+        "Achterberg et al. (2007) - Conflict analysis in MIP solving",
+        "Achterberg (2007) - SCIP: Solving Constraint Integer Programs"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DualSolver.h for MIP solver orchestration",
+    "IRelaxationStrategy.h for LP relaxation handling"
+  ]
+}

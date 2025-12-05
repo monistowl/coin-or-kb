@@ -1,0 +1,31 @@
+{
+  "name": "amd",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "AMD/Include/amd.h",
+  "brief": "Approximate Minimum Degree ordering for sparse matrix factorization\n\nAMD computes a fill-reducing permutation P for sparse Cholesky or LU\nfactorization. Given a symmetric matrix A (or A+A' if A is unsymmetric),\nAMD finds P such that P*A*P' has fewer nonzeros in its Cholesky factor\nthan A would.",
+  "algorithms": [
+    {
+      "name": "Approximate Minimum Degree (AMD)\n  Repeatedly eliminates the node with minimum approximate external degree:\n  1. Select pivot i with minimum approximate degree d\u0303(i)\n  2. Form element e from eliminated node and merge with adjacent elements\n  3. Update approximate degrees for remaining nodes\n  4. Apply aggressive absorption: absorb element e into element f if\n     adj(e) \u2286 adj(f), even when f is not adjacent to current pivot",
+      "math": "Approximate external degree:\n  d\u0303(i) \u2248 |adj(i) \u222a (\u222a adj(e) : e \u2208 elements adjacent to i)| - |absorbed|\n  The true minimum degree would require d(i) = |L_{*i}| - 1 (column count\n  in Cholesky factor), but this is expensive to compute exactly.",
+      "complexity": "Time: O(nnz(A)\u00b7\u03b1(n)) average case with aggressive absorption,\n  where \u03b1 is the inverse Ackermann function. Worst case O(n\u00b7nnz).\n  Space: O(nnz(A) + n) for the quotient graph representation.",
+      "ref": [
+        "Amestoy, Davis, Duff (1996). \"An Approximate Minimum Degree Ordering\n     Algorithm\". SIAM J. Matrix Analysis and Applications 17(4):886-905.",
+        "George, Liu (1989). \"The Evolution of the Minimum Degree Ordering\n     Algorithm\". SIAM Review 31(1):1-19.\n\nKey features:\n- Aggressive absorption for better approximate degrees\n- Dense row/column detection and deferral\n- Post-ordering of the elimination tree\n- Both int32_t and int64_t versions available"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "colamd.h for column ordering of unsymmetric matrices",
+    "cholmod.h for sparse Cholesky factorization using AMD",
+    "amd_l_order() for 64-bit integer version",
+    "amd_defaults() to initialize Control array",
+    "amd_order() for full parameter documentation",
+    "amd_order()",
+    "amd_valid() for full documentation",
+    "amd_defaults()",
+    "amd_control()",
+    "amd_info()"
+  ]
+}

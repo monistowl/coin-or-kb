@@ -1,0 +1,24 @@
+{
+  "name": "Problem",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Model/Problem.h",
+  "brief": "Core problem representation with variables, constraints, and objective\n\nCentral data structure holding the optimization problem definition.\n\n**ProblemProperties Struct:**\n- Convexity classification (Convex, Nonconvex, NotSet)\n- Problem type flags (MINLP, MIQP, MILP, NLP, etc.)\n- Variable counts by type (real, binary, integer, auxiliary)\n- Constraint counts by type (linear, quadratic, nonlinear)\n\n**SpecialOrderedSet Struct:**\n- SOS1 (at most one variable nonzero) or SOS2 (contiguous nonzeros)\n- Variables and optional weights\n\n**Problem Class:**\n- allVariables, realVariables, binaryVariables, etc.\n- linearConstraints, quadraticConstraints, nonlinearConstraints\n- objectiveFunction (linear, quadratic, or nonlinear)\n- Sparsity patterns for Jacobian and Hessian\n- Feasibility bound propagation (FBBT) for tightening bounds\n\n**Key Methods:**\n- add(): Add variables, constraints, objective\n- finalize(): Compute properties and sparsity patterns\n- getMostDeviatingNumericConstraint(): Find worst violation\n- createCopy(): Clone for reformulation",
+  "algorithms": [
+    {
+      "name": "Sparsity Pattern Extraction (getConstraintsJacobianSparsityPattern):\n  Identifies nonzero structure for efficient derivative computation:",
+      "math": "Jacobian \u2202g_i/\u2202x_j: sparse pattern for AD evaluation\n  Used by NLP solvers (Ipopt) and for hyperplane construction.",
+      "complexity": "O(nnz) where nnz = number of variable appearances in constraints",
+      "ref": [
+        "Belotti et al. (2009) - Branching and bounds tightening techniques",
+        "ESH (Extended Supporting Hyperplane) uses this for cut generation",
+        "McCormick (1976) - Convex relaxations via factorable functions"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Solver.h for problem loading via setProblem()",
+    "ReformulatedProblem for auxiliary variable introduction"
+  ]
+}

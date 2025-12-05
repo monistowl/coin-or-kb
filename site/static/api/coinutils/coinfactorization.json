@@ -1,0 +1,27 @@
+{
+  "name": "CoinFactorization",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinFactorization.hpp",
+  "brief": "LU factorization of sparse basis matrix for simplex\n\nImplements LU factorization with hyper-sparse handling for efficient\nFTRAN/BTRAN operations. Supports rank-one updates during pivoting.",
+  "algorithms": [
+    {
+      "name": "LU factorization with Markowitz pivot selection",
+      "math": "Decomposes basis matrix B = L\u00b7U where:\n      - L is lower triangular (stored by columns, implicit unit diagonal)\n      - U is upper triangular (stored by columns)\n      FTRAN solves Bx = b via: Ly = b, then Ux = y\n      BTRAN solves B'y = c via: U'z = c, then L'y = z",
+      "complexity": "Factorization: O(nnz * fill) where fill depends on pivot order\n            FTRAN/BTRAN: O(nnz(L) + nnz(U)) per solve\n            Rank-one update: O(nnz(column)) via Forrest-Tomlin",
+      "ref": [
+        "Forrest, Tomlin (1972). \"Updated Triangular Factors of the Basis\n     to Maintain Sparsity in the Product Form Simplex Method\".\n     Mathematical Programming 2:263-278.",
+        "Suhl, Suhl (1990). \"Computing Sparse LU Factorizations for\n     Large-Scale Linear Programming Bases\". ORSA J. Computing 2:325-335.",
+        "Forrest, Tomlin (1972). Mathematical Programming 2:263-278."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinDenseFactorization for dense matrices",
+    "CoinOslFactorization for OSL-derived implementation",
+    "forrestTomlin() to check which update method is active",
+    "updateColumnTranspose for BTRAN (B'y = c)",
+    "updateColumnFT for FTRAN (Bx = b)"
+  ]
+}

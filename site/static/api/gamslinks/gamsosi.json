@@ -1,0 +1,12 @@
+{
+  "name": "GamsOsi",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/osi/GamsOsi.hpp",
+  "brief": "GAMS interface to OSI-compatible solvers\n\nConnects GAMS to commercial solvers (CPLEX, Gurobi, Mosek, Xpress)\nvia the COIN-OR Open Solver Interface.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GamsOsiHelper.hpp, GamsMessageHandler.hpp"
+  ]
+}

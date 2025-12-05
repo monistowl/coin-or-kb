@@ -1,0 +1,16 @@
+{
+  "name": "NLPSolverCuttingPlaneMinimax",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/NLPSolver/NLPSolverCuttingPlaneMinimax.h",
+  "brief": "Cutting-plane solver for minimax LP problems\n\nBuilt-in LP-based solver for simple minimax problems.\n\n**NLPSolverCuttingPlaneMinimax Class:**\n- Uses MIP solver (CPLEX/Gurobi/Cbc) as LP engine\n- Iteratively adds cutting planes\n- No external NLP solver dependency\n\n**Minimax Problem Form:**\n- min t\n- s.t. f_i(x) <= t for all i\n\n**Use Case:**\n- Finding interior points when Ipopt unavailable\n- Solving auxiliary minimax subproblems",
+  "algorithms": [
+    {
+      "name": "Iterative Cutting Plane for Convex Minimax",
+      "math": "Solve minimax LP: min t s.t. f_i(x) \u2264 t for i = 1,...,k.\n      Iteratively linearize: f_i(x) \u2248 f_i(x^j) + \u2207f_i(x^j)\u00b7(x - x^j).\n      Add cuts until |t - max_i f_i(x*)| < \u03b5.",
+      "complexity": "O(iterations \u00d7 LP solve). Converges for convex f_i.",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

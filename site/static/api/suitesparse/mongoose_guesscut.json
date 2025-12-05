@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_GuessCut",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_GuessCut.hpp",
+  "brief": "Initial partition generation at coarsest level\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nGuessCut creates initial partition for coarsest graph before refinement\nbegins. Strategies include QP relaxation, random assignment, or natural\nvertex order. Quality of initial guess affects final partition quality\ndespite refinement. Selected via initial_cut_type option.",
+  "algorithms": [
+    {
+      "name": "Initial Partition Strategies:\nCreates first partition at coarsest level in multilevel hierarchy:\n\n1. QP (InitialEdgeCut_QP): Solve QP relaxation, round to {0,1}\n   - Best quality but highest cost\n   - Recommended for small coarse graphs (<100 vertices)\n\n2. Random (InitialEdgeCut_Random): Random assignment respecting balance\n   - Fast but may need many FM passes to reach good cut\n\n3. Natural (InitialEdgeCut_Natural): First half vs second half\n   - Fastest, works well if input has locality",
+      "math": "Quality impact on final result:\nGood initial cut reduces FM iterations needed during uncoarsening.\nWith multilevel: even random starts converge to similar quality,\nbut better starts reduce total work.",
+      "complexity": "O(n\u00b2) for QP, O(n) for random/natural on coarse graph.\nCoarse graph typically has O(\u221an) vertices, so even QP is cheap.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_EdgeCutOptions.hpp for InitialEdgeCutType selection",
+    "Mongoose_ImproveQP.hpp for QP-based initial cut"
+  ]
+}

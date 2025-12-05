@@ -1,0 +1,13 @@
+{
+  "name": "CouenneGlobalCutOff",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/problem/CouenneGlobalCutOff.hpp",
+  "brief": "Global best solution and cutoff value storage\n\nManages the incumbent (best known feasible solution) and its\nobjective value across the entire B&B search.\n\n**Role in B&B:**\n- Provides cutoff value for pruning nodes\n- Stores best solution found so far\n- Updated when heuristics or B&B find improvements\n\n**Members:**\n- cutoff_: Objective value of best solution (upper bound for min)\n- sol_: Variable values of best solution\n- valid_: Whether stored solution corresponds to cutoff\n\n**Thread safety note:**\nIn parallel environments, this would need synchronization.\nCurrently assumes sequential access.\n\n**setCutOff():**\nUpdates cutoff and optionally stores the solution vector.\nRequires CouenneProblem pointer for size information.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneProblem which owns the GlobalCutOff",
+    "CouenneFeasPump which updates cutoff when finding solutions"
+  ]
+}

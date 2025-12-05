@@ -1,0 +1,9 @@
+{
+  "name": "GB_cuda_timer",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/CUDA/include/GB_cuda_timer.hpp",
+  "brief": "CUDA event-based GPU timer class\nCopyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.\nNVIDIA CORPORATION contributions (c) 2024-2025.\n\nGpuTimer class: Start() records start event, Stop() records stop event,\nElapsed() synchronizes and returns milliseconds between. Uses cudaEvent_t\nfor precise GPU timing. Useful for kernel performance measurement.",
+  "algorithms": [],
+  "methods": []
+}

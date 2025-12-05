@@ -1,0 +1,13 @@
+{
+  "name": "TaskSelectPrimalCandidatesFromNLP",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskSelectPrimalCandidatesFromNLP.h",
+  "brief": "Solve fixed-integer NLP for primal candidates\n\nUses NLP solver (Ipopt) with fixed integer variables.\n\n**TaskSelectPrimalCandidatesFromNLP Class:**\n- solveFixedNLP(): Fix integers, solve continuous NLP\n- createInfeasibilityCut(): Handle infeasible NLP\n- createIntegerCut(): Exclude tested integer assignment\n\n**Fixed-Integer NLP:**\n- Take MIP solution's integer values\n- Solve continuous relaxation with fixed integers\n- Provides locally optimal primal candidates\n\n**Usage:**\n- Triggered by primal stagnation\n- May improve primal bound significantly",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "NLPSolver/ for Ipopt interface",
+    "TaskCheckPrimalStagnation.h for trigger"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "BonAmplTMINLP",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/Ampl/BonAmplTMINLP.hpp",
+  "brief": "AMPL interface for MINLP problems via .nl files\n\nImplements TMINLP by reading AMPL .nl files, extracting integer variable\ninformation, SOS constraints, branching priorities, and convexity markers.\n\n**AMPL suffix reading:**\n- read_priorities(): Variable branching priorities\n- read_sos(): SOS1/SOS2 constraint definitions\n- read_convexities(): Constraint convexity markers (for OA)\n- read_onoff(): Perspective reformulation indicators\n- read_obj_suffixes(): Upper bounding objective (UBObj prefix)\n\n**AMPL solve_result_num codes:**\n- 3: Integer optimal\n- 220: Proven infeasible\n- 421: Limit reached with feasible solution\n- 410: Limit reached, no feasible solution\n- 500: Error",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TMINLP for the base interface",
+    "AmplInterface for the OsiSolverInterface wrapper"
+  ]
+}

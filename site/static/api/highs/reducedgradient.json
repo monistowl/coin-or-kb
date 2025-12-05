@@ -1,0 +1,16 @@
+{
+  "name": "reducedgradient",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/reducedgradient.hpp",
+  "brief": "HiGHS QP reduced gradient",
+  "algorithms": [
+    {
+      "name": "Reduced Gradient for QP Active Set",
+      "math": "For active constraints Ax_A = b, compute gradient in null space:\n      \u2207_Z f(x) = Z'\u2207f(x) where Z spans null(A) for active constraints.\n      When \u2207_Z f(x) = 0, KKT conditions satisfied for current active set.\n      Non-zero reduced gradient \u2192 direction of descent exists.\n\nReduced gradient computation for active set method.\nProjects objective gradient onto null space of active constraints.\n\n**Key operations:**\n- recompute(): Full Z'\u2207f computation via basis\n- reduce(): Update when constraint added to active set\n- expand(): Update when constraint dropped from active set\n- update(): Scale after step (minor) or invalidate (major)",
+      "complexity": "O(n \u00d7 |inactive|) for full computation.\nIncremental updates: O(|inactive|) per active set change.",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

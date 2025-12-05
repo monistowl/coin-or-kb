@@ -1,0 +1,20 @@
+{
+  "name": "BCP_process",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_process.hpp",
+  "brief": "BCP process base class and scheduler",
+  "algorithms": [
+    {
+      "name": "Process Management: Base Class and Load Scheduler\n\n**BCP_process:**\nAbstract base for all BCP processes (TM, LP, CG, VG, TS).\n- get_process_id(): Unique process identifier\n- get_parent(): Parent process that spawned this one\n- get_message_buffer(): Buffer for IPC\n- process_message(): Handle incoming messages\n\n**BCP_scheduler:**\nDynamic load balancer for allocating LP and strong-branching IDs.\nUses rate-based allocation when many processes are busy, static\noverestimation otherwise.\n\n**Scheduling strategies:**\n- Static: Allocate rho_static_ * requested IDs\n- Rate-based: Track request/release rates over time horizon\n- Switch when busy count exceeds switch_thresh_ * total\n\n**ID types:**\n- Node IDs: For processing search tree nodes\n- SB IDs: For strong branching evaluations",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm.hpp for Tree Manager process",
+    "BCP_lp.hpp for LP process"
+  ]
+}

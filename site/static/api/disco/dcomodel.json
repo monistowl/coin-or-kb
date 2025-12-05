@@ -1,0 +1,14 @@
+{
+  "name": "DcoModel",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoModel.hpp",
+  "brief": "Main model class for Mixed-Integer Conic Optimization\n\nDcoModel derives from BcpsModel and represents the master MISOCP problem.\nIt manages problem data, solver interfaces, and algorithm configuration.\n\n**Two Solving Modes:**\n- Direct conic: Uses OsiConicSolverInterface (CPLEX, Mosek)\n- OA (Outer Approximation): Uses OsiSolverInterface with linear cuts\n\n**Problem Structure:**\n- matrix_: Linear constraint matrix (CoinPackedMatrix)\n- coneStart_, coneMembers_, coneType_: Conic constraints\n- integerCols_: Indices of integer variables\n- relaxedCols_, relaxedRows_: Objects with relaxed integrality/cone\n\n**Algorithm Components:**\n- branchStrategy_: Variable selection (MaxInf, Pseudo, Strong, Reliability)\n- conGenerators_: Map of constraint generators (MILP + conic cuts)\n- heuristics_: Primal heuristics (rounding)\n\n**Key Virtual Methods:**\n- readInstance(): Load MPS or CBF files\n- setupSelf(): Initialize solver, cuts, heuristics\n- createRoot(): Create root DcoTreeNode\n- feasibleSolution(): Check integer and cone feasibility",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoTreeNode.hpp for tree node processing",
+    "DcoConGenerator.hpp for cut generation interface",
+    "DcoParams.hpp for configuration parameters"
+  ]
+}

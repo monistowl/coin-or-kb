@@ -1,0 +1,13 @@
+{
+  "name": "TaskInitializeIteration",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskInitializeIteration.h",
+  "brief": "Per-iteration setup and housekeeping\n\nPrepares state for new iteration cycle.\n\n**TaskInitializeIteration Class:**\n- run(): Reset iteration-local state\n\n**Initialization Steps:**\n- Increment iteration counter\n- Clear iteration-specific storage\n- Update timing information",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskPrintIterationReport.h for iteration summary",
+    "Timing.h for time tracking"
+  ]
+}

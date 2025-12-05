@@ -1,0 +1,22 @@
+{
+  "name": "IpMc19TSymScalingMethod",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpMc19TSymScalingMethod.hpp",
+  "brief": "Matrix scaling using HSL MC19 equilibration\n\nMc19TSymScalingMethod uses the HSL subroutine MC19 to compute\nequilibration scaling factors for symmetric matrices.",
+  "algorithms": [
+    {
+      "name": "MC19 Iterative Row/Column Equilibration:\n  MC19 computes diagonal scaling D such that ||D\u00b7A\u00b7D||_\u221e \u2248 1.\n  Algorithm iteratively updates scaling factors:\n  1. Compute r_i = max_j |a_ij| (row infinity norms)\n  2. Update D_i = D_i / sqrt(r_i)\n  3. Repeat until convergence (typically 3-5 iterations)\n  Result: scaled matrix has row/column norms near 1.",
+      "math": "Equilibration reduces condition number \u03ba(A):\n  For sparse symmetric A, equilibration typically reduces \u03ba by factor\n  of 10-1000. Better conditioning \u2192 fewer delayed pivots, more accurate\n  factorization, better convergence of iterative refinement.\n  D returned as exp(R) where R is in single precision.",
+      "complexity": "O(nnz) per iteration, typically 3-5 iterations = O(nnz).\n  Memory: O(n) for scaling factors.",
+      "ref": [
+        "Duff & Koster (1999). \"The design and use of algorithms for\n     permuting large entries to the diagonal of sparse matrices\".\n     SIAM J. Matrix Anal. Appl. 20(4):889-901.\n\nMC19 interface (Fortran):\n  MC19A(N, NZ, A, IRN, ICN, R, C, W)\nNote: R, C, W are single precision (float) even in double version.\n\nLibrary loading:\n- Can be linked at compile time\n- Or loaded dynamically via LibraryLoader at runtime\n- SetFunctions() allows setting function pointer globally\n\nThe scaling factors returned satisfy ||D*A*D||_inf \u2248 1 where\nD = diag(exp(R)) and the matrix is approximately equilibrated."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTSymScalingMethod.hpp for base interface",
+    "IpEquilibrationScaling.hpp for NLP-level scaling"
+  ]
+}

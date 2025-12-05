@@ -1,0 +1,23 @@
+{
+  "name": "ClpGubMatrix",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpGubMatrix.hpp",
+  "brief": "Generalized Upper Bound (GUB) matrix for special LP structure\n\nImplements GUB constraints - sets of variables where exactly one (or at\nmost one) must be in the basis. This structure appears in problems like\nassignment, crew scheduling, and set partitioning.",
+  "algorithms": [
+    {
+      "name": "GUB Simplex with Implicit Rows:\n  Exploits constraint structure \u03a3_{j\u2208S_k} x_j = 1 (or \u22641) for each set S_k:\n  1. **Key variable selection:** For each set, designate one \"key\" variable\n     - If any x_j in set is basic, key is basic; others are at bounds\n     - Key status determines set's contribution to RHS\n  2. **Basis reduction:** k GUB sets reduce basis size by k rows\n     - Factor (m-k)\u00d7(m-k) matrix instead of m\u00d7m\n     - Pivot operations proportionally cheaper\n  3. **Pricing:** For each set, only key or one bound variable can price\n     - Reduced cost of entering variable adjusts for GUB dual\n  4. **Ratio test:** Standard but respects set membership constraints\n     - Entering non-key forces current key to bound\n  5. **Basis update:** Key may change within set during pivot",
+      "math": "GUB constraint handling:\n  Original: min c'x, Ax = b, \u03a3_{j\u2208S_k} x_j = d_k for k=1..K\n  GUB stores: d_k - \u03a3_{j\u2208S_k, j\u2260key} x_j = x_key implicitly\n  Dual multiplier \u03c0_k adjusts reduced costs: c\u0304_j = c_j - \u03c0'A_j - \u03c0_k\n  Only (m-K) explicit constraints need factorization",
+      "complexity": "Basis factorization: O((m-K)\u00b3) vs O(m\u00b3) for explicit rows\n  Pricing: O(n) but faster due to set structure exploitation\n  Memory: O(n) for GUB data + standard matrix storage\n  Most beneficial when K/m is large (many GUB sets relative to rows)",
+      "ref": [
+        "Dantzig & Van Slyke (1967). \"Generalized Upper Bounding Techniques\".\n     Journal of Computer and System Sciences 1:213-226.\n\nGUB structure: For each \"set\" of columns, sum(x_j for j in set) = 1 (or \u22641).\nInstead of adding these as explicit rows, GUB exploits the structure to:\n- Reduce basis size (fewer rows to factorize)\n- Speed up pricing (only one variable per set can improve)\n- Handle larger problems efficiently\n\nKey concepts:\n- Each set has a \"key\" variable that's basic if any in set is basic\n- Hidden rows track GUB constraints implicitly\n- Special pivot logic handles set membership constraints"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPackedMatrix which this extends",
+    "ClpDynamicMatrix for column generation with GUB structure",
+    "ClpSimplex for the solver that uses this matrix"
+  ]
+}

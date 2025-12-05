@@ -1,0 +1,9 @@
+{
+  "name": "nan",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/nan.hpp",
+  "brief": "CppAD utility: nan",
+  "algorithms": [],
+  "methods": []
+}

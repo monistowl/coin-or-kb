@@ -1,0 +1,13 @@
+{
+  "name": "CbcDebug",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcDebug.hpp",
+  "brief": "Debugging utilities and test message handlers\n\nCbcDebug: Contains debug memory allocation routines and test message handlers.\n\nFeatures when CLP_DEBUG_MALLOC defined:\n- clp_memory(): Memory debugging\n- clp_malloc()/clp_free(): Custom allocation with tracking\n\nFeatures when TEST_MESSAGE_HANDLER defined:\n- MyMessageHandler2: Example custom message handler\n- Demonstrates trapping and customizing Cbc messages\n- Prefixes messages with \"==\" for identification\n\nThis file is primarily for testing and debugging purposes.\nProduction builds typically have neither macro defined.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMessageHandler for message handling base",
+    "CbcMessage for Cbc message definitions"
+  ]
+}

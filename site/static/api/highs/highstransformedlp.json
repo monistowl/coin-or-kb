@@ -1,0 +1,14 @@
+{
+  "name": "HighsTransformedLp",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsTransformedLp.h",
+  "brief": "LP bound transformations for cutting plane separation\n\nTransforms LP rows into single-row relaxations suitable for cut generation\nby substituting bounds and handling complementation.\n\n**Bound Substitution Types (BoundType enum):**\n- kSimpleLb/kSimpleUb: Direct variable bounds (x \u2265 lb, x \u2264 ub)\n- kVariableLb/kVariableUb: VLB/VUB from implications (x \u2265 a*y + b)\n\n**Bound Selection:**\n- bestVlb/bestVub[]: Tightest variable bound for each column\n- simpleLbDist/simpleUbDist[]: Distance of LP value from simple bounds\n- lbDist/ubDist[]: Distance considering all bound types\n- boundDist[]: Minimum distance (used for coefficient strengthening)\n\n**Transform Operations:**\n- transform(): Convert row to standard form for cut generation\n  - Substitutes bounds to get non-negative variables\n  - Tracks which bound type used per variable\n  - Returns integralPositive flag for MIR applicability\n- untransform(): Reverse transformation to original space\n\n**Cut Generation Flow:**\n1. Aggregate LP rows (via HighsLpAggregator)\n2. Transform to standard form (substitute bounds)\n3. Apply cut procedure (Gomory, MIR, etc.)\n4. Untransform back to original variables",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsLpAggregator.h for row aggregation",
+    "mip/HighsImplications.h for VUB/VLB structures",
+    "mip/HighsSeparation.h for cut orchestration"
+  ]
+}

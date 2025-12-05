@@ -1,0 +1,12 @@
+{
+  "name": "NLPSolverIpoptRelaxed",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/NLPSolver/NLPSolverIpoptRelaxed.h",
+  "brief": "Ipopt solver for continuous relaxation problems\n\nSolves NLP with integer variables relaxed to continuous.\n\n**NLPSolverIpoptRelaxed Class:**\n- Multiple inheritance: NLPSolverBase + NLPSolverIpoptBase\n- setSolverSpecificInitialSettings(): Configure for relaxed solve\n- getSolution(): Return continuous solution values\n\n**Use Case:**\n- Find interior points for ESH algorithm\n- Check feasibility of relaxed problem\n- Generate starting points for primal heuristics",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "NLPSolverIpoptBase.h for fixed-integer variant"
+  ]
+}

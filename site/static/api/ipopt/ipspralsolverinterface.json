@@ -1,0 +1,22 @@
+{
+  "name": "IpSpralSolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpSpralSolverInterface.hpp",
+  "brief": "Interface to SPRAL SSIDS sparse symmetric solver\n\nSpralSolverInterface wraps SPRAL (Sparse Parallel Robust Algorithms\nLibrary), an open-source alternative to HSL solvers developed by\nSTFC RAL. SSIDS is SPRAL's symmetric indefinite direct solver.",
+  "algorithms": [
+    {
+      "name": "Hybrid CPU/GPU Multifrontal LDL^T:\n  SPRAL SSIDS uses multifrontal method with hybrid parallelism:\n  - CPU path: OpenMP-parallel supernodal factorization\n  - GPU path: CUDA kernels for large frontal matrices\n  - Automatic work distribution between CPU and GPU\n  - Delayed pivots handled with 2\u00d72 Bunch-Kaufman pivoting\n  Open-source BSD-3 license enables unrestricted use.",
+      "math": "Computes A = P\u00b7L\u00b7D\u00b7L^T\u00b7P^T where:\n  - P = fill-reducing permutation (METIS or AMD)\n  - L = unit lower triangular, supernodal storage\n  - D = block diagonal with 1\u00d71 and 2\u00d72 blocks\n  Threshold pivoting with dynamic scaling for stability.",
+      "complexity": "O(n\u00b7f\u00b2) factorization. GPU acceleration provides 2-5\u00d7\n  speedup on large problems with dense fronts. CPU fallback for\n  small problems or when GPU unavailable.",
+      "ref": [
+        "Hogg, Sherwood-Taylor, Scott (2021). \"SSIDS: A Sparse Symmetric\n     Indefinite Direct Solver for Modern Architectures\". ACM TOMS.\n\nSPRAL/SSIDS characteristics:\n- Open source (BSD-3-Clause license)\n- Parallel: GPU (CUDA) and multi-core CPU support\n- Input format: CSR_Format_1_Offset (upper triangular)\n- Provides inertia\n- Dynamic scaling strategies (same as MA97)\n\nScaling strategies (scaling_opts):\n- SWITCH_NEVER: No dynamic scaling\n- SWITCH_AT_START: Scale on first factorization\n- SWITCH_ON_DEMAND: Scale when needed\n- SWITCH_NDELAY: Scale based on delayed pivots\n\nSimilar API to MA97 with akeep/fkeep separation for\nanalysis and factorization phases.\n\nRecommended when HSL is unavailable and GPU acceleration is desired.\n\n@since 3.14.0"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMa97SolverInterface.hpp for similar HSL solver",
+    "IpMumpsSolverInterface.hpp for open-source CPU alternative"
+  ]
+}

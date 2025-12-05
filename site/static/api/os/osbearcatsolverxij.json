@@ -1,0 +1,9 @@
+{
+  "name": "OSBearcatSolverXij",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/applications/columnGen/code/OSBearcatSolverXij.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "omp_max_thread",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/omp_max_thread.hpp",
+  "brief": "Core AD functionality: omp max thread",
+  "algorithms": [],
+  "methods": []
+}

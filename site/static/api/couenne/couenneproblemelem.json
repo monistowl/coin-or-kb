@@ -1,0 +1,13 @@
+{
+  "name": "CouenneProblemElem",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/problem/CouenneProblemElem.hpp",
+  "brief": "Constraint and objective classes for Couenne problems\n\nDefines the building blocks for optimization problems:\nconstraints with expression bounds and objective functions.\n\n**CouenneConstraint:**\nRepresents lb_ <= body_ <= ub_ where all three are expressions:\n- body_: The constraint expression (e.g., exp(x1+x2))\n- lb_: Lower bound expression (defaults to 0 or -INFINITY)\n- ub_: Upper bound expression (defaults to 0 or +INFINITY)\n\n**Default bound handling:**\n- Both NULL \u2192 equality constraint (lb = ub = 0)\n- lb NULL, ub set \u2192 lb = -INFINITY (one-sided upper)\n- ub NULL, lb set \u2192 ub = +INFINITY (one-sided lower)\n\n**CouenneObjective:**\nMinimization objective wrapper. Maximization problems are\nconverted by negating the objective during problem input.\n\n**standardize():**\nDecomposes complex expressions into auxiliary variable\ndefinitions for reformulation-linearization.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneProblem which owns constraints and objectives",
+    "expression for the expression tree classes"
+  ]
+}

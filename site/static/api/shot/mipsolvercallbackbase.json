@@ -1,0 +1,12 @@
+{
+  "name": "MIPSolverCallbackBase",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/MIPSolverCallbackBase.h",
+  "brief": "Shared logic for single-tree callback handlers\n\nBase class for CPLEX and Gurobi callback implementations.\n\n**MIPSolverCallbackBase Class:**\n- addLazyConstraint(): Generate and add ESH cuts\n- checkFixedNLPStrategy(): Decide if NLP should be called\n- checkIterationLimit()/checkUserTermination(): Termination checks\n- printIterationReport(): Console output in callback\n\n**Task Objects:**\n- taskSelectPrimNLPOriginal/Reformulated: Fixed-integer NLP\n- taskSelectHPPts: ESH/ECP hyperplane selection\n- taskSelectPrimalSolutionFromRootsearch: Rootsearch primal\n- tUpdateInteriorPoint: Interior point maintenance",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "MIPSolverCplexSingleTree.h, MIPSolverGurobiSingleTree.h"
+  ]
+}

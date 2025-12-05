@@ -1,0 +1,9 @@
+{
+  "name": "DippyDecompAlgo",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/dippy/DippyDecompAlgo.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

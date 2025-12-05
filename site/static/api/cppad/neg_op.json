@@ -1,0 +1,9 @@
+{
+  "name": "neg_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/neg_op.hpp",
+  "brief": "Internal implementation: neg_op",
+  "algorithms": [],
+  "methods": []
+}

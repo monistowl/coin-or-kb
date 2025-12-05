@@ -1,0 +1,20 @@
+{
+  "name": "BCP_message_tag",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_message_tag.hpp",
+  "brief": "Message tag enumeration for BCP inter-process communication",
+  "algorithms": [
+    {
+      "name": "Message Tags: Protocol Types for Process Coordination\n\nBCP_message_tag defines all message types in BCP's protocol:\n\n**Control messages:**\n- CONFIG_*: Configurator \u2194 TM for runtime changes\n- FinishedBCP, ProcessType, ProcessParameters, CoreDescription\n\n**TM \u2194 Storage:**\n- NodeList*, VarList*, CutList*: Tree storage operations\n\n**TM \u2194 LP:**\n- ActiveNodeData, WarmstartRoot, DivingInfo: Node dispatch\n- NodeDescription*: Node results (fathomed, branched, etc.)\n- FeasibleSolution, UpperBound: Incumbent updates\n\n**LP \u2194 CG/VG:**\n- ForCG_*, ForVG_*: Primal/dual solutions for separation/pricing\n- CutDescription, VarDescription: Generated cuts/columns\n- NoMoreCuts, NoMoreVars: Generator completion",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_message.hpp for message passing interface",
+    "BCP_buffer.hpp for message serialization"
+  ]
+}

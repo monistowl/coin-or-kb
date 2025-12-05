@@ -1,0 +1,21 @@
+{
+  "name": "ClpConstraintLinear",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpConstraintLinear.hpp",
+  "brief": "Linear constraint implementation for nonlinear extensions\n\nImplements ClpConstraint for a linear constraint: sum(a_j * x_j) = b.\nUsed with ClpSimplexNonlinear when linear constraints appear alongside\nnonlinear objective or other nonlinear constraints.",
+  "algorithms": [
+    {
+      "name": "Use in SLP (Sequential Linear Programming):\nFor mixed linear/nonlinear problems, linear constraints provide exact\nlinearization (no approximation error) at any point. This allows SLP\nto handle them without trust region restrictions.\n\nStorage is sparse: parallel column_ and coefficient_ arrays store\nonly non-zero coefficients. This is efficient when linear constraints\nare embedded within larger nonlinear models.",
+      "math": "CONSTRAINT FORM:\n  g(x) = \u03a3\u2c7c a\u2c7cx\u2c7c - b = 0 (equality) or \u2264 0 (inequality)",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpConstraint for the abstract interface",
+    "ClpConstraintQuadratic for quadratic constraints",
+    "ClpSimplexNonlinear for the nonlinear solver"
+  ]
+}

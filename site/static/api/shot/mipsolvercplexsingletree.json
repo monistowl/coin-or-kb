@@ -1,0 +1,12 @@
+{
+  "name": "MIPSolverCplexSingleTree",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/MIPSolverCplexSingleTree.h",
+  "brief": "CPLEX with lazy constraint callback for single-tree ESH\n\nExtends MIPSolverCplex with callback-based cut generation.\n\n**MIPSolverCplexSingleTree Class:**\n- solveProblem(): Single MIP solve with callbacks enabled\n- Uses generic callback API (Context-based)\n\n**CplexCallback Class:**\n- Inherits IloCplex::Callback::Function + MIPSolverCallbackBase\n- invoke(): Called at candidate solution points\n- createHyperplane()/createIntegerCut(): Add lazy constraints\n- addLazyConstraint(): Generate ESH cuts from solution\n\n**Threading:**\n- callbackMutex: Protect shared state in multi-threaded solve\n- CPLEX invokes callbacks from multiple threads",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SolutionStrategySingleTree.h for algorithm context"
+  ]
+}

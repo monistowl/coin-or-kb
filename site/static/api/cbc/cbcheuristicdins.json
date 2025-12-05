@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicDINS",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicDINS.hpp",
+  "brief": "DINS - Distance-Induced Neighborhood Search\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDINS: Uses multiple solutions to define neighborhoods.\nMaintains a pool of solutions and fixes variables based on\nagreement across the solution pool (Ghosh 2007).",
+  "algorithms": [
+    {
+      "name": "DINS - Distance-Induced Neighborhood Search (Ghosh 2007):\n  solution() with solution pool {x^1,...,x^k}:\n  1. Fix variable j if x^1_j = x^2_j = ... = x^k_j (unanimous).\n  2. Add distance constraint: \u03a3|x_j - x^best_j| \u2264 localSpace_.\n  3. Solve restricted MIP with distance bound.\n  4. If improved, add to pool; maintain maximumKeepSolutions_.\n  Uses multiple solutions for more informed fixing.",
+      "math": "Distance neighborhood:\n  N_DINS = {x : x_j = v_j \u2200j unanimous, dist(x, x^best) \u2264 r}.\n  dist(x, y) = \u03a3_j |x_j - y_j| (Hamming for binary, L1 for general).\n  Pool-based: More robust than two-solution RINS.\n\nKey parameters:\n- maximumKeepSolutions_: Size of solution pool\n- localSpace_: Tightness of distance constraint\n- howOften_: Frequency of application",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicRINS for two-solution comparison",
+    "CbcHeuristic for base class\n\nEdwin 12/5/09 carved out of CbcHeuristicRINS"
+  ]
+}

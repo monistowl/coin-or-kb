@@ -1,0 +1,26 @@
+{
+  "name": "CglKnapsackCover",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglKnapsackCover/CglKnapsackCover.hpp",
+  "brief": "Knapsack cover cuts for binary packing constraints\n\nGenerates cover inequalities for knapsack constraints of the form\nsum_j a_j * x_j <= b where x_j are binary. A cover C is a subset\nwhere sum_{j in C} a_j > b, making x_j = 1 for all j in C infeasible.\n\nCover inequality: sum_{j in C} x_j <= |C| - 1\n\nAlgorithm phases:\n1. deriveAKnapsack(): Convert constraint to canonical binary knapsack\n2. Find minimal violated cover using:\n   - findExactMostViolatedMinCover(): Exact via Horowitz-Sahni\n   - findLPMostViolatedMinCover(): LP relaxation heuristic\n   - findGreedyCover(): Simple greedy heuristic\n3. Lifting: Strengthen cover to full-dimensional inequality\n   - liftCoverCut(): Sequence-independent lifting\n   - seqLiftAndUncomplementAndAdd(): Sequence-dependent lifting\n   - liftUpDownAndUncomplementAndAdd(): Up/down lifting for binaries\n\nAdditional features:\n- createCliques(): Build clique structure for probing\n- Horowitz-Sahni algorithm for exact knapsack solving\n- John-Ellis cover finding from OSL (IBM's solver)\n\nKey parameters:\n- maxInKnapsack_: Maximum variables in processed knapsack\n- expensiveCuts_: Enable/disable costly exact methods\n- rowsToCheck_: Restrict which rows to examine",
+  "algorithms": [
+    {
+      "name": "Greedy Cover Heuristic (findGreedyCover):\n  Order variables by a_j/x\u0304_j ratio (LP solution weighted):",
+      "math": "Add variables greedily until \u2211_{j\u2208C} a_j > b\n  Fast but may miss most violated cover.",
+      "complexity": "O(2^n) worst case, often O(n * c) practical",
+      "ref": [
+        "Balas & Zemel (1978) - Facets of the knapsack polytope",
+        "Crowder, Johnson, Padberg (1983) - Solving large-scale 0-1 LPs",
+        "Zemel (1989) - Easily computable facets of the knapsack polytope",
+        "Horowitz & Sahni (1974) - Computing partitions",
+        "Martello & Toth (1990) - Knapsack Problems (p. 30)"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglProbing for variable implications derived from covers",
+    "CglClique for clique cuts (special case of covers)"
+  ]
+}

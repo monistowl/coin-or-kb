@@ -1,0 +1,14 @@
+{
+  "name": "CglLandPTabRow",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglLandP/CglLandPTabRow.hpp",
+  "brief": "Tableau row structure for Lift-and-Project simplex",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglLandPSimplex for the simplex using these rows",
+    "CglLandPUtils for row manipulation utilities",
+    "CoinIndexedVector for sparse vector base\n\nDate:     02/23/08\n\nCopyright (C) 2005-2009, Pierre Bonami and others.  All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL)."
+  ]
+}

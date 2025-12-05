@@ -1,0 +1,101 @@
+{
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "classes": [
+    {
+      "name": "GamsBonmin",
+      "brief": "GAMS interface to Bonmin MINLP solver\n\nConnects GAMS to COIN-OR Bonmin for mixed-integer nonlinear programming.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsCbc",
+      "brief": "GAMS interface to CBC MIP solver\n\nConnects GAMS modeling environment to COIN-OR CBC.\n\n**GamsCbc Class:**\n- gmo/gev: GAMS modeling object and environment handles\n- setupProblem()/setupParameters(): Configure CBC from GAMS\n- Solve trace support for performance analysis",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsCbcHeurSolveTrace",
+      "brief": "CBC heuristic for GAMS solve trace reporting\n\nCbcHeuristic implementation that reports bound progress\nto GAMS solve trace data structure for performance analysis.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsCouenne",
+      "brief": "GAMS interface to Couenne global optimizer\n\nConnects GAMS to COIN-OR Couenne for global optimization of\nnon-convex MINLP problems via spatial branch-and-bound.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsIpopt",
+      "brief": "GAMS interface to Ipopt NLP solver\n\nConnects GAMS modeling environment to COIN-OR Ipopt.\n\n**GamsIpopt Class:**\n- ipopt: SmartPtr to IpoptApplication\n- nlp: GamsNLP problem representation\n- Warmstart support for sequential solves",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsJournal",
+      "brief": "Ipopt Journal implementation for GAMS output\n\nRoutes Ipopt logging through GAMS environment (gev) routines.\nSupports configurable status file output levels.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsLicensing",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsMINLP",
+      "brief": "Bonmin TMINLP implementation for GAMS models\n\nGamsMINLP: Implements Bonmin::TMINLP using GMO for MINLP evaluation.\nHandles variable types, SOS constraints, and branching priorities.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsMessageHandler",
+      "brief": "CoinMessageHandler implementation for GAMS output\n\nRoutes COIN-OR messages through GAMS environment (gev) logging.\nThread-safe via shared mutex for concurrent solver access.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsNLP",
+      "brief": "Ipopt TNLP implementation for GAMS models\n\nGamsNLP: Implements Ipopt::TNLP using GMO (GAMS Modeling Object)\nfor objective/constraint evaluation, Jacobian sparsity, Hessian.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsOptionsSpecWriter",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsOsi",
+      "brief": "GAMS interface to OSI-compatible solvers\n\nConnects GAMS to commercial solvers (CPLEX, Gurobi, Mosek, Xpress)\nvia the COIN-OR Open Solver Interface.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsOsiHelper",
+      "brief": "GAMS-OSI data transfer utilities\n\nHelper functions for loading LP problems from GMO to OSI,\nstoring solutions from OSI to GMO, and writing problem files.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsScip",
+      "brief": "GAMS interface to SCIP solver\n\nConnects GAMS to SCIP for constraint integer programming.\nSupports LP, MIP, MINLP, and general constraint optimization.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsSoPlex",
+      "brief": "GAMS interface to SoPlex LP solver\n\nConnects GAMS modeling environment to the ZIB SoPlex\nsimplex-based LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsSolveTrace",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "convert_nl",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "event_solvetrace",
+      "brief": "event handler to write GAMS solve trace file",
+      "has_algorithm": false
+    },
+    {
+      "name": "reader_gmo",
+      "brief": "GMO file reader",
+      "has_algorithm": false
+    }
+  ]
+}

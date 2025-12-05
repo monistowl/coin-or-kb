@@ -1,0 +1,20 @@
+{
+  "name": "TaskPerformBoundTightening",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskPerformBoundTightening.h",
+  "brief": "Tighten variable bounds via optimization\n\nUses optimization-based bound tightening (OBBT).\n\n**TaskPerformBoundTightening Class:**\n- POASolver: Polyhedral outer approximation solver\n- createPOA(): Build relaxed problem for bound tightening\n\n**OBBT Algorithm:**\n- For each variable: min/max subject to relaxation\n- Tightens bounds beyond constraint propagation\n- Improves relaxation quality",
+  "algorithms": [
+    {
+      "name": "Optimization-Based Bound Tightening (OBBT)",
+      "math": "For each variable x_i with bounds [l_i, u_i]:\n      Solve l_i' = min{x_i : x \u2208 POA(f)}, u_i' = max{x_i : x \u2208 POA(f)}\n      where POA(f) is polyhedral outer approximation.\n      Tighter bounds reduce relaxation gap.",
+      "complexity": "O(2n \u00d7 LP solve). Use selectively on important variables.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "NLPSolverSHOT.h for POA solver",
+    "Problem.h for bound storage"
+  ]
+}

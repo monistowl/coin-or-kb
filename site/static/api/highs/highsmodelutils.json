@@ -1,0 +1,14 @@
+{
+  "name": "HighsModelUtils",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsModelUtils.h",
+  "brief": "Utility functions for model analysis and solution output\n\nFree functions for analyzing models and writing solution files.\n\n**Model Analysis:**\n- analyseModelBounds(): Report statistics on variable/constraint bounds\n- hasNamesWithSpaces(): Check for problematic whitespace in names\n\n**Solution Output:**\n- writeModelBoundSolution(): Write variable/constraint solution to file\n- writeModelObjective(): Write objective function evaluation\n- writeLpObjective(): Write LP objective evaluation\n- writeObjectiveValue(): Write scalar objective value\n- writePrimalSolution()/writeDualSolution(): Export primal/dual values\n- writeSolutionFile(): Write complete solution to file\n\n**Model Status:**\n- utilModelStatusToString(): Convert HighsModelStatus to string\n- utilBasisStatusToString(): Convert HighsBasisStatus to string",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lp_data/HighsLpUtils.h for LP-specific utilities",
+    "model/HighsModel.h for model data structure",
+    "lp_data/HighsSolution.h for solution structure"
+  ]
+}

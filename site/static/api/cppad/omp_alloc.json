@@ -1,0 +1,9 @@
+{
+  "name": "omp_alloc",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/omp_alloc.hpp",
+  "brief": "CppAD utility: omp alloc",
+  "algorithms": [],
+  "methods": []
+}

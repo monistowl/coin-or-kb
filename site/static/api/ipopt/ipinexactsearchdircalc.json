@@ -1,0 +1,20 @@
+{
+  "name": "IpInexactSearchDirCalc",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/Inexact/IpInexactSearchDirCalc.hpp",
+  "brief": "Search direction via normal-tangential decomposition\n\nInexactSearchDirCalculator computes the search direction using\niterative linear solvers by decomposing into normal and tangential\ncomponents, enabling inexact Newton methods.",
+  "algorithms": [
+    {
+      "name": "Normal-Tangential Step Decomposition:\n  ComputeSearchDirection():\n  1. Compute normal step \u0394x_n via InexactNormalStepCalculator:\n     - Solves: min ||\u0394x_n||\u00b2 s.t. ||A\u00b7\u0394x_n + c|| \u2264 \u03ba\u00b7||c|| (feasibility).\n  2. Compute tangential step \u0394x_t via InexactPDSolver:\n     - Solves primal-dual system with modified RHS.\n     - \u0394x_t \u2208 null(A) approximately (tangent to constraints).\n  3. Combine: \u0394x = \u0394x_n + \u0394x_t, store in InexactData.\n  4. Check local infeasibility: ||A\u00b7\u0394x_n||\u2082 \u2264 local_inf_Ac_tol.",
+      "math": "Decomposition strategy:\n  Normal step: \u0394x_n = -A^\u2020\u00b7c(x) (minimum norm solution toward feasibility).\n  Tangential step: \u0394x_t = (I - A^\u2020A)\u00b7d (projects optimality onto null(A)).\n  Full step: \u0394x = \u0394x_n + \u0394x_t achieves both feasibility and optimality.\n  Decomposition modes: ALWAYS, ADAPTIVE, SWITCH_ONCE (based on progress).",
+      "complexity": "Normal step: O(nnz\u00b7k_n) for iterative solve.\n  Tangential step: O(nnz\u00b7k_t) for primal-dual solve.\n  Total: O(nnz\u00b7(k_n + k_t)), typically k_n, k_t << n.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpInexactNormalStepCalc.hpp for normal step interface",
+    "IpInexactPDSolver.hpp for tangential step solver"
+  ]
+}

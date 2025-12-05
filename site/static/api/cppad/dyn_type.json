@@ -1,0 +1,9 @@
+{
+  "name": "dyn_type",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/dyn_type.hpp",
+  "brief": "Value graph: dyn_type",
+  "algorithms": [],
+  "methods": []
+}

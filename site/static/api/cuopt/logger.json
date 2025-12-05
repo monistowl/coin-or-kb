@@ -1,0 +1,12 @@
+{
+  "name": "logger",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/include/cuopt/logger.hpp",
+  "brief": "Logging infrastructure for cuOpt based on rapids_logger\n\nProvides configurable logging for cuOpt operations.\n\n**Configuration:**\n- CUOPT_DEBUG_LOG_FILE env var: Log to file instead of stderr\n- Log levels: trace, debug, info, warn, error, critical\n\n**Functions:**\n- default_logger(): Get/create the global cuOpt logger\n- reset_default_logger(): Reset to default configuration\n- default_sink(): Get file or stderr sink\n- default_pattern(): Timestamp format string",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cuopt/logger_macros.hpp for logging macros"
+  ]
+}

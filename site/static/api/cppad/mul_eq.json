@@ -1,0 +1,9 @@
+{
+  "name": "mul_eq",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/mul_eq.hpp",
+  "brief": "Core AD functionality: mul eq",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "ClpAmplObjective",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/ClpAmplObjective.hpp",
+  "brief": "AMPL-interface nonlinear objective for Clp",
+  "algorithms": [
+    {
+      "name": "AMPL ASL Nonlinear Objective Gradient\nCopyright (C) 2007, International Business Machines Corporation.\nThis code is licensed under the Eclipse Public License (EPL).\n\nClpAmplObjective: Nonlinear objective function using AMPL's ASL\nfor gradient evaluation. Provides gradient, reduced gradient, and\nstep length computation for line search in nonlinear Clp.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpObjective for base objective interface",
+    "ClpConstraintAmpl for corresponding constraint class"
+  ]
+}

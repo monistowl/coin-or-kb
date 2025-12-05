@@ -1,0 +1,20 @@
+{
+  "name": "IpTaggedObject",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpTaggedObject.hpp",
+  "brief": "Base class for objects with change-tracking tags\n\nTaggedObject provides efficient change detection for expensive\ncomputations. Each object maintains a unique tag that changes whenever\nthe object's internal state is modified. Consumers compare stored tags\nto detect changes and avoid redundant recalculation.",
+  "algorithms": [
+    {
+      "name": "Change-Tracking via Versioning Tags:\n  Each TaggedObject maintains a monotonically increasing tag (version):\n  1. On creation: tag \u2190 next_unique_id++ (global counter).\n  2. On modification: ObjectChanged() \u2192 tag \u2190 next_unique_id++.\n  3. Consumer stores last_seen_tag after using object.\n  4. Before recomputation: if (obj.GetTag() != last_seen_tag) recompute.\n  Avoids redundant NLP evaluations when iterate hasn't changed.",
+      "math": "Correctness invariant:\n  \u2200 objects A, B: A.tag == B.tag \u27f9 A and B are the same object instance\n  with identical state (since tags are globally unique and monotonic).\n  Tag comparison is equality-based: O(1) check, no deep comparison.",
+      "complexity": "O(1) for GetTag(), HasChanged(), ObjectChanged().\n  Memory: single integer per object.\n  Combined with Observer pattern for automatic cache invalidation.\n\nUsage pattern:\n1. Store last-used tag locally\n2. Before computation, call HasChanged(stored_tag)\n3. If changed: recompute and update stored tag via GetTag()\n4. If unchanged: reuse cached result\n\nInherits from both ReferencedObject (for SmartPtr) and Subject\n(to notify Observers of changes).",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpCachedResults.hpp for cached computation with auto-invalidation",
+    "IpObserver.hpp for the Observer pattern"
+  ]
+}

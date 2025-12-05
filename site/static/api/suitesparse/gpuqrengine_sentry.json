@@ -1,0 +1,12 @@
+{
+  "name": "GPUQREngine_SEntry",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_SEntry.hpp",
+  "brief": "Sparse entry tuple for GPU front assembly\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nSEntry struct: (findex, value) tuple for placing sparse matrix values\ninto dense frontal matrices. findex is linear index into front, value\nis numeric entry. Used in S assembly phase (ASSEMBLE_S state) to transfer\ninput matrix to GPU fronts via cpuS/gpuS arrays in SparseMeta.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_SparseMeta.hpp uses SEntry arrays"
+  ]
+}

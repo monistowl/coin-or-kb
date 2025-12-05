@@ -1,0 +1,9 @@
+{
+  "name": "romberg_one",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/romberg_one.hpp",
+  "brief": "CppAD utility: romberg one",
+  "algorithms": [],
+  "methods": []
+}

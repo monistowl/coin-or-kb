@@ -1,0 +1,21 @@
+{
+  "name": "BCP_lp_result",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_lp_result.hpp",
+  "brief": "LP solve results for BCP Branch-Cut-Price",
+  "algorithms": [
+    {
+      "name": "LP Result Capture: Primal/Dual Solutions and Termination\n\nBCP_lp_result stores the output from solving an LP relaxation.\nUsed throughout BCP for accessing LP solution data.\n\n**BCP_termcode (LP termination codes):**\n- BCP_Abandoned: Solver gave up\n- BCP_ProvenOptimal: Optimal solution found\n- BCP_ProvenPrimalInf: Primal infeasible\n- BCP_ProvenDualInf: Dual infeasible (unbounded)\n- BCP_PrimalObjLimReached: Cutoff triggered\n- BCP_DualObjLimReached: Lower bound exceeded cutoff\n- BCP_IterationLimit: Iteration limit hit\n- BCP_TimeLimit: Time limit hit\n\n**BCP_lp_result data:**\n- _termcode: How LP terminated\n- _iternum: Iterations used\n- _objval: Objective value (or bound)\n- _x: Primal solution vector\n- _pi: Dual solution (row prices)\n- _dj: Reduced costs\n- _lhs: Left-hand side values (Ax)\n- _primal_tolerance, _dual_tolerance: Solver tolerances\n\n**Usage:**\nCall get_results(OsiSolverInterface&) after LP solve to\npopulate all fields from the solver.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_lp.hpp for LP process",
+    "BCP_lp_branch.hpp for strong branching results",
+    "OsiSolverInterface for LP solver interface"
+  ]
+}

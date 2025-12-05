@@ -1,0 +1,9 @@
+{
+  "name": "rev_depend",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/atomic/four/rev_depend.hpp",
+  "brief": "Core AD functionality: rev depend",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "zstd_ldm",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/zstd/zstd_subset/compress/zstd_ldm.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

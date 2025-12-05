@@ -1,0 +1,9 @@
+{
+  "name": "matrix",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/matrix.hpp",
+  "brief": "HiGHS QP matrix operations\n\nSparse matrix utilities for QP solver. Row/column access,\nproducts, and basis matrix maintenance.",
+  "algorithms": [],
+  "methods": []
+}

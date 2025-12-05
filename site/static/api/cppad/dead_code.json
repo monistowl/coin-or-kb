@@ -1,0 +1,9 @@
+{
+  "name": "dead_code",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/dead_code.hpp",
+  "brief": "Value graph: dead_code",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "CouenneIterativeRounding",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/heuristics/CouenneIterativeRounding.hpp",
+  "brief": "Iterative rounding heuristic for nonconvex MINLP",
+  "algorithms": [
+    {
+      "name": "Iterative Rounding Heuristic (F-IR / I-IR)\n\nAlternates between MILP and NLP solves to find feasible solutions:\n1. Solve MILP relaxation to get integer assignment\n2. Fix integers, solve NLP for continuous variables\n3. Add cuts, iterate\n\n**Two modes:**\n- F-IR (Feasibility): Find first feasible solution using interior-point warmstart\n- I-IR (Improvement): Improve existing solution using local branching\n\n**Key parameters:**\n- maxRoundingIter_: Max MILP-NLP iterations per call\n- maxFirPoints_: Number of starting points in F-IR\n- omega_: Factor for log-barrier parameter (interior point)\n- baseLbRhs_: Local branching neighborhood size\n\n**Aggressiveness levels:**\n- 0: Light (5 iterations, 60s)\n- 1: Medium (10 iterations, 120s)\n- 2: Heavy (20 iterations, 300s)\n\n**CPLEX integration:**\nIf CPLEX available, uses it for MILP; otherwise uses CBC heuristics.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneFeasPump for the specialized feasibility pump",
+    "CbcHeuristic base class"
+  ]
+}

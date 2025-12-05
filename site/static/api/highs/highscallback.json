@@ -1,0 +1,13 @@
+{
+  "name": "HighsCallback",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsCallback.h",
+  "brief": "Callback mechanism for solver events and user interaction\n\nEnables user code to receive solver events and inject solutions.\n\n**HighsCallbackOutput:**\nData provided to callback during solver execution:\n- running_time, iteration counts (simplex, ipm, pdlp)\n- objective_function_value\n- MIP data: node_count, primal/dual bounds, gap, incumbent solution\n- Cut pool data for callback-based cuts\n\n**HighsCallbackInput:**\nData provided by user callback:\n- user_interrupt: Signal early termination\n- user_solution: Provide heuristic solution to MIP\n- setSolution(): Set solution (dense or sparse)\n- repairSolution(): Fix partial solution to feasibility\n\n**HighsCallback:**\nMain callback container:\n- user_callback: std::function for C++/Python\n- c_callback: C function pointer\n- active[]: Bitmask of enabled callback types\n- callbackAction(): Trigger callback and process response\n\n**Callback Types (from HighsCallbackStruct.h):**\nLogging, SimplexInterrupt, IpmInterrupt, MipSolution, MipLogging, etc.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "interfaces/highs_c_api.h for C callback constants",
+    "lp_data/HighsCallbackStruct.h for callback type enum"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "OsiSymSolverParameters",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "src/OsiSym/OsiSymSolverParameters.hpp",
+  "brief": "SYMPHONY solver parameter enums\n\nParameter type enumerations for OsiSymSolverInterface.\nMaps Osi generic parameters to SYMPHONY-specific settings.",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "BonNWayChoose",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "experimental/RobotBonmin/BonNWayChoose.hpp",
+  "brief": "Bonmin N-way branching choice\n\nN-way branching variable selection for robot path planning.\nExperimental: selects among multiple branching candidates.",
+  "algorithms": [],
+  "methods": []
+}

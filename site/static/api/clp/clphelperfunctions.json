@@ -1,0 +1,20 @@
+{
+  "name": "ClpHelperFunctions",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpHelperFunctions.hpp",
+  "brief": "BLAS-1 style dense vector operations for Clp",
+  "algorithms": [
+    {
+      "name": "Dense BLAS-1 Operations (AXPY, Dot, Norms)\nNon-templated dense array operations optimized for LP use. These exist\nseparately from CoinDenseVector to enable architecture-specific optimization\nwithout template overhead (per JJF's design note).\n\nBasic operations (double and CoinWorkDouble variants):\n- maximumAbsElement(): L-infinity norm (max |x_i|)\n- setElements(): Fill array with constant\n- multiplyAdd(): y = a1*x + a2*y (AXPY variant)\n- innerProduct(): x'y dot product\n- getNorms(): Simultaneous L1 and L2 norm computation\n\nExtended precision support (COIN_LONG_WORK):\nWhen enabled, provides long double versions for extra precision in\nnumerically sensitive computations (e.g., basis factorization).\n\nPDCO helper functions (when ClpPdco_H defined):\n- pdxxxmerit(): Merit function for Newton's method\n- pdxxxresid1(): Primal-dual residuals\n- pdxxxresid2(): Complementarity residuals\n- pdxxxstep(): Line search step length\n\nClpTraceDebug: Debug assertion macro (active when NDEBUG not defined).",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinHelperFunctions for general utility functions",
+    "ClpPdco for the PDCO interior point method"
+  ]
+}

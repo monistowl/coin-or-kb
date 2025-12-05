@@ -1,0 +1,20 @@
+{
+  "name": "CoinWarmStartBasis",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinWarmStartBasis.hpp",
+  "brief": "Simplex basis warm start with variable status (basic/nonbasic)\n\nStores status of each variable (structural and artificial) using\n2 bits per variable. Includes diff capability for branch-and-bound.",
+  "algorithms": [
+    {
+      "name": "Simplex Basis Warm Start:\n  For LP with m constraints and n variables, a basis B identifies\n  m basic variables. Restarting from a known basis avoids Phase I.\n  Status encoding (2 bits per variable):\n  - 00 (isFree): nonbasic at zero\n  - 01 (basic): in the basis (value determined by constraints)\n  - 10 (atUpperBound): nonbasic at upper bound\n  - 11 (atLowerBound): nonbasic at lower bound",
+      "math": "Basis matrix B is m\u00d7m submatrix of A with basic columns.\n  Basic solution: x_B = B\u207b\u00b9b, x_N = 0 (or at bounds)\n  Warm start restores this basis without recomputing from scratch.",
+      "complexity": "Space: O((m+n)/4) bytes using 2-bit packing (4 vars per byte)\n  Diff operations for B&B: O(changed variables) instead of O(m+n)\n  generateDiff/applyDiff enable efficient tree-based warm starting",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinWarmStart for the abstract base class",
+    "CoinWarmStartDual for dual-only warm start"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "HighsSimplexAnalysis",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/HighsSimplexAnalysis.h",
+  "brief": "Analyse simplex iterations, both for run-time control and data\ngathering",
+  "algorithms": [],
+  "methods": []
+}

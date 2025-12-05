@@ -1,0 +1,14 @@
+{
+  "name": "SmiDiscreteDistribution",
+  "library": "Smi",
+  "layer": "layer-3",
+  "header": "Smi/src/SmiDiscreteDistribution.hpp",
+  "brief": "Discrete probability distributions for stochastic programming\n\nClasses for representing discrete random variables and their distributions,\nused to generate scenario trees from independent stochastic elements.\n\n**SmiDiscreteDistribution Class:**\nContainer for multiple discrete random variables:\n- smiDiscrete_: Vector of SmiDiscreteRV objects\n- core_: Link to core problem data\n- combineRule_: How to merge events with core\n\n**SmiDiscreteRV Class:**\nSingle discrete random variable at a specific stage:\n- events_: Vector of SmiDiscreteEvent outcomes\n- stg_: Stage index for this RV\n- prob_: Total probability across events\n- addEvent(): Add outcome with LP data and probability\n\n**SmiDiscreteEvent Class:**\nOne possible outcome (realization) of a random variable:\n- Inherits SmiLinearData: matrix, bounds, objective changes\n- prob_: Probability of this event\n\n**Usage Pattern:**\n```cpp\nSmiDiscreteDistribution dist(core, rule);\nSmiDiscreteRV* rv = new SmiDiscreteRV(stage);\nrv->addEvent(matrix, clo, cup, obj, rlo, rup, 0.5);  // 50% chance\nrv->addEvent(..., 0.5);  // 50% chance\ndist.addDiscreteRV(rv);\nsmiModel.processDiscreteDistributionIntoScenarios(&dist);\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SmiScnModel.hpp::processDiscreteDistributionIntoScenarios()",
+    "SmiLinearData.hpp for LP data container",
+    "SmiCoreCombineRule.hpp for combination rules"
+  ]
+}

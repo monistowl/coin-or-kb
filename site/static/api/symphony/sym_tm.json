@@ -1,0 +1,20 @@
+{
+  "name": "sym_tm",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_tm.h",
+  "brief": "Tree Manager for SYMPHONY's parallel B&C\n\nThe Tree Manager (TM) maintains the branch-and-cut search tree,\ndispatches nodes to LP workers, and coordinates cut generation.",
+  "algorithms": [
+    {
+      "name": "Tree Management for Branch-and-Cut:\nMaintains B&B tree data structure and orchestrates parallel node processing.\n\nTREE DATA STRUCTURE:\n- Binary tree of bc_node structures linked by parent/child pointers\n- Each node stores: bounds, branching decision, LP basis, active cuts\n- Candidate lists maintain nodes awaiting processing\n\nNODE SELECTION STRATEGIES:\n- LOWEST_LP_FIRST (best-bound): Minimizes total nodes explored\n  Best for proving optimality; high memory usage\n- DEPTH_FIRST_SEARCH: Minimal memory, finds feasible solutions fast\n  May explore many suboptimal nodes\n- BEST_FIRST_SEARCH: Uses LP estimate + pseudo-cost prediction\n- DEPTH_FIRST_THEN_BEST_FIRST: Hybrid approach\n\nDIVING STRATEGY (shall_we_dive):\nAfter processing a node, decide:\n- Continue diving: Process a child immediately (depth-first locally)\n- Backtrack: Select best node from candidate list\nDiving maintains LP basis warmth but may miss better nodes.\n\nPRUNING (install_new_ub):\nWhen new incumbent found:\n1. Update global upper bound\n2. Scan candidate lists, prune nodes with lb \u2265 ub\n3. Mark active nodes for potential pruning\n\nTWO-PHASE ALGORITHM:\nPhase 1: Explore with minimal cutting (fast but weak bounds)\nPhase 2: Add aggressive cuts to promising nodes\nBalances exploration speed with bound quality.",
+      "math": "Node ordering:\nBest-bound: Select n* = argmin{lb(n) : n \u2208 candidates}\nDepth-first: Select n* = argmax{depth(n) : n \u2208 candidates}",
+      "complexity": "- Insert node: O(log |candidates|) with heap\n- Select best: O(log |candidates|)\n- Pruning: O(|candidates|) per new incumbent\n\n**tm_prob structure:**\n- rootnode: Root of the B&C tree\n- active_nodes: Nodes currently being processed\n- samephase_cand: Nodes ready for processing in current phase\n- nextphase_cand: Nodes for next phase (two-phase algorithm)\n- lp/cg/cp: Process sets for LP solvers, cut generators, cut pools\n- pcost_down/pcost_up: Pseudo-costs for branching decisions\n- cuts: Global cut list\n\n**Node selection (del_best_node):**\n- LOWEST_LP_FIRST: Best-bound search\n- DEPTH_FIRST_SEARCH: Dive to find feasible solutions\n- BREADTH_FIRST_SEARCH: Level-by-level\n- BEST_FIRST_SEARCH: Estimate-based\n\n**Key operations:**\n- tm_initialize(): Set up tree from root description\n- solve(): Main tree search loop\n- generate_children(): Create child nodes after branching\n- shall_we_dive(): Decide diving vs backtracking\n- install_new_ub(): Update incumbent and prune\n\n**Two-phase algorithm:**\nPhase 1 explores with fewer cuts, Phase 2 adds more cuts\nto nodes marked for reconsideration.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sym_master.h for master process",
+    "sym_lp.h for LP solver process"
+  ]
+}

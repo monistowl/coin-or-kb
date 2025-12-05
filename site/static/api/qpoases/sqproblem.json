@@ -1,0 +1,22 @@
+{
+  "name": "SQProblem",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/SQProblem.hpp",
+  "brief": "Sequential QP solver with varying Hessian and constraint matrices\n\nSQProblem extends QProblem to handle QPs where the Hessian H and\nconstraint matrix A change between solves. This is common in:\n- Nonlinear MPC (linearization changes each step)\n- Sequential Quadratic Programming (SQP) for NLP\n- Moving horizon estimation",
+  "algorithms": [
+    {
+      "name": "Sequential QP with Matrix Updates:\nEfficiently solves sequences of related QPs where both H and A change.\n\nHOTSTART WITH MATRIX CHANGES:\nGiven previous optimal active set W*, when H, A change:\n1. Update factorization of reduced Hessian Z'HZ\n2. Recompute KKT system factors with new matrices\n3. Use W* as initial working set (likely still optimal or close)\n4. Apply standard active-set iterations if needed\n\nMATRIX UPDATE STRATEGY:\n- Small changes: Rank-k updates to existing factorization\n- Large changes: Full refactorization (still faster than cold start)\n- Sparse matrices: Use SQProblemSchur for Schur complement approach\n\nSQP APPLICATION:\nFor min f(x) s.t. c(x)=0, g(x)\u22640:\n  At iterate x\u2096, solve QP subproblem:\n  min \u2207f'p + \u00bdp'\u2207\u00b2Lp  s.t. \u2207c'p + c = 0, \u2207g'p + g \u2264 0\n  where L is Lagrangian, H = \u2207\u00b2L changes each iteration",
+      "math": "QP subproblem at SQP iteration k:\n  H\u2096 = \u2207\u00b2\u2093\u2093L(x\u2096, \u03bb\u2096)  (Hessian of Lagrangian)\n  A\u2096 = [\u2207c(x\u2096)'; \u2207g(x\u2096)']  (Jacobian of constraints)\n  Both vary with x\u2096, requiring matrix updates each iteration",
+      "complexity": "- Hotstart with matrix update: O(n\u00b3) for factorization update\n- Typically 1-5 active-set iterations after matrix change\n- Much faster than cold-start from scratch",
+      "ref": [
+        "Ferreau, Bock & Diehl (2008). \"An online active set strategy to\n  overcome the limitations of explicit MPC\". Int. J. Robust Nonlinear\n  Control 18(8):816-830."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "QProblem for fixed H and A",
+    "Ipopt for full NLP solving that uses QP subproblems"
+  ]
+}

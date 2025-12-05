@@ -1,0 +1,14 @@
+{
+  "name": "Net",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/Net.h",
+  "brief": "Graph/network data structure for power systems and network optimization\n\nRepresents graphs with nodes, arcs, and cycles for network-based models.\n\n**Net Class:**\n- nodes: Vector of Node pointers\n- arcs: All arcs (existing + potential)\n- _exist_arcs: Only existing arcs\n- conting_arcs: Contingency arcs (for N-1 analysis)\n\n**Indexing Structures:**\n- nodeID: Map from node name to Node*\n- arcID: Map from (src_name, dest_name) to Arc*\n- arcMap: Map from arc name to Arc*\n\n**Node Pairs (for SDP relaxations):**\n- _node_pairs: Bus pairs for standard formulation\n- _node_pairs_chord: Bus pairs in chordal completion\n\n**Cycle Basis (for Kirchhoff constraints):**\n- cycle_basis: Vector of Path* forming basis\n- horton_net: Subnetwork for Horton algorithm\n\n**Tree Decomposition:**\n- _bags: Cliques from chordal extension\n- Used for SDP rank-1 constraints\n\n**Graph Algorithms:**\n- clone(), clone_undirected(): Copy graphs\n- Cycle detection, shortest paths\n- Chordal completion",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/Node.h for node data",
+    "gravity/Arc.h for arc/edge data",
+    "gravity/Path.h for paths/cycles"
+  ]
+}

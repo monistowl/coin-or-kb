@@ -1,0 +1,19 @@
+{
+  "name": "OsiSolverBranch",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiSolverBranch.hpp",
+  "brief": "Branch information with tighter bounds for both directions",
+  "algorithms": [
+    {
+      "name": "Floor/Ceiling Branch Storage with Bound Arrays\nCopyright (C) 2005, International Business Machines Corporation.\nEPL-1.0 license.\n\nOsiSolverBranch stores branch decisions as bound changes: addBranch creates\nfloor/ceil branches on integer variables, applyBounds installs bounds for\na given direction (way=-1 first child, +1 second). Compact storage via\nstart_[5] indices and indices_/bound_ arrays. Supports column or row bounds.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiSolverInterface for applying branches during B&B"
+  ]
+}

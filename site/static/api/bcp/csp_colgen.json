@@ -1,0 +1,16 @@
+{
+  "name": "CSP_colgen",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Csp/include/CSP_colgen.hpp",
+  "brief": "CSP column generation",
+  "algorithms": [
+    {
+      "name": "CSP Pricing: Knapsack Column Generation\n\nGenerate improving cutting patterns by solving knapsack subproblems.\n\n**Pricing problem:** max {\u03c0\u00b7a - c : a valid pattern}\n- \u03c0 = dual prices from demand constraints\n- c = pattern cost (raw material)\n- Solve bounded knapsack with binary expansion\n\n**Features:**\n- Perturbation for diversity (perturb_factor, perturb_num)\n- Exclusion constraints for branching",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

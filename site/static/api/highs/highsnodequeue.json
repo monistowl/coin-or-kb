@@ -1,0 +1,20 @@
+{
+  "name": "HighsNodeQueue",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsNodeQueue.h",
+  "brief": "Priority queue for branch-and-bound nodes",
+  "algorithms": [
+    {
+      "name": "Best-First Search Node Management with Red-Black Trees\n\nManages open nodes for best-first search with efficient memory allocation.\n\n**OpenNode Structure:**\n- domchgstack: Vector of bound changes from root to node\n- branchings: Indices of branching decisions\n- lower_bound, estimate: Node bounds and estimates\n- depth: Node depth in tree\n- lowerLinks, hybridEstimLinks: Red-black tree links for ordering\n\n**Custom Allocator:**\n- AllocatorState: Chunk-based allocation with freelist\n- NodesetAllocator: STL-compatible allocator for NodeSet\n- Reduces allocation overhead for many small nodes\n\n**Node Indexing:**\n- colLowerNodes/colUpperNodes: Nodes indexed by bound changes\n- Enables efficient global bound propagation\n- numNodesUp/Down(col, val): Count nodes with given bound\n\n**Selection Strategies:**\n- popBestBoundNode(): Best-first search by lower_bound\n- popBestNode(): Hybrid using estimate\n- performBounding(): Prune nodes exceeding upper limit\n\n**Key Operations:**\n- emplaceNode(): Add new node with bound changes\n- pruneInfeasibleNodes(): Remove nodes with tightened global bounds\n- checkGlobalBounds(): Update tree weight from bound changes",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "mip/HighsSearch.h for depth-first search",
+    "mip/HighsDomainChange.h for bound change structure"
+  ]
+}

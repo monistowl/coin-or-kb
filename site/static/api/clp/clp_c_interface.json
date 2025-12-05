@@ -1,0 +1,20 @@
+{
+  "name": "Clp_C_Interface",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/Clp_C_Interface.h",
+  "brief": "C language interface to Clp solver\n\nPure C API for embedding Clp in C programs or creating language bindings.\nDesign follows OSL V3 conventions for familiarity.\n\nOpaque handles:\n- Clp_Simplex: Pointer to internal ClpSimplex object\n- Clp_Solve: Pointer to ClpSolve options object\n\nNaming convention: C++ method foo() becomes Clp_foo(model, ...)\nwhere model is the first parameter.\n\nKey function groups:\n- Construction: Clp_newModel(), Clp_deleteModel()\n- Problem setup: Clp_loadProblem(), Clp_readMps()\n- Solving: Clp_dual(), Clp_primal(), Clp_initialSolve()\n- Solution access: Clp_getColSolution(), Clp_getRowActivity()\n- Parameters: Clp_setLogLevel(), Clp_setMaximumIterations()\n\nCallback support: clp_callback typedef for user message handling.\n\nThread safety: Each Clp_Simplex is independent; do not share across threads.",
+  "algorithms": [
+    {
+      "name": "Warm-Starting Protocol:\n  1. Solve initial LP: Clp_initialSolve()\n  2. Modify problem (bounds, RHS, etc.)\n  3. Re-solve from basis: Clp_dual() or Clp_primal()\n  Warm start typically requires O(k) iterations where k << m+n.",
+      "math": "",
+      "complexity": "Same as underlying ClpSimplex methods:\n  Per-iteration: O(m\u00b2) average, O(m\u00b3) worst-case for factorization\n  Total: O(m\u00b7n\u00b7iterations) for complete solve",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpSimplex for the C++ class being wrapped",
+    "ClpSolve for solve options"
+  ]
+}

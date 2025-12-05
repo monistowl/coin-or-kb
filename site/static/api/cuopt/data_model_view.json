@@ -1,0 +1,9 @@
+{
+  "name": "data_model_view",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/libmps_parser/include/mps_parser/data_model_view.hpp",
+  "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+  "algorithms": [],
+  "methods": []
+}

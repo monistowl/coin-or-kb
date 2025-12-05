@@ -1,0 +1,12 @@
+{
+  "name": "config_default",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/config_default.h",
+  "brief": "Default build configuration for SYMPHONY library\n\nDefines package dependencies when not using autoconf.\nEdit this file to enable/disable optional solver backends.\n\n**Required packages (always enabled):**\n- COIN_HAS_CGL: CGL cut generators\n- COIN_HAS_CLP: CLP linear solver\n- COIN_HAS_COINUTILS: CoinUtils foundation\n- COIN_HAS_OSI: OSI solver interface\n\n**Optional packages (commented by default):**\n- COIN_HAS_CBC: Cbc MIP solver\n- COIN_HAS_VOL: Volume algorithm\n- COIN_HAS_CPX: CPLEX\n- COIN_HAS_GLPK: GLPK\n- COIN_HAS_MSK: Mosek\n- COIN_HAS_XPR: Xpress\n- COIN_DEBUG: Runtime sanity checks",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SymConfig.h for configuration selection"
+  ]
+}

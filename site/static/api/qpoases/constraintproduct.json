@@ -1,0 +1,16 @@
+{
+  "name": "ConstraintProduct",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/ConstraintProduct.hpp",
+  "brief": "User-defined constraint evaluation interface for structured matrices",
+  "algorithms": [
+    {
+      "name": "User-Defined Constraint Product for Structured QPs\nAllows exploiting constraint matrix structure (banded, sparse patterns,\nnetwork flows) by providing custom Ax evaluation instead of dense GEMV.\nCritical for MPC applications with predictable sparsity.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

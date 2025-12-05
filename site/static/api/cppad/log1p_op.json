@@ -1,0 +1,9 @@
+{
+  "name": "log1p_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/log1p_op.hpp",
+  "brief": "Internal implementation: log1p_op",
+  "algorithms": [],
+  "methods": []
+}

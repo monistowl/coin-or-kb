@@ -1,0 +1,20 @@
+{
+  "name": "CouenneExprQuad",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprQuad.hpp",
+  "brief": "Quadratic expression with alpha-convexification",
+  "algorithms": [
+    {
+      "name": "Alpha-Convexification via Eigenvalue Analysis\n\nRepresents expressions of the form:\n  w = a0 + a'x + x'Qx + sum(nonlinear_terms)\n\nUses alpha-convexification (Adjiman-Floudas, LaGO/Nowak-Vigerske)\nto create convex/concave envelopes based on eigenvalue analysis.\n\n**Alpha-convexification algorithm:**\n1. Scale Q by variable bounds: A = Diag(u-l) * Q * Diag(u-l)\n2. Compute min/max eigenvalues lambda_min, lambda_max\n3. Under-estimator: x'Qx + sum(lambda_min_i * (x_i - l_i)(u_i - x_i))\n4. Over-estimator: x'Qx + sum(lambda_max_i * (x_i - l_i)(u_i - x_i))\n\n**Data structures:**\n- matrix_: Sparse Q matrix as vector of (variable, column) pairs\n- eigen_: Cached eigenvalues/eigenvectors for convexification\n- bounds_: Cached bounds to detect when recomputation needed\n\n**Key methods:**\n- alphaConvexify(): Compute eigenvalues for convexification\n- quadCuts(): Generate OA cuts from alpha-convexification",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneExprGroup for linear + nonlinear base class",
+    "CouenneExprMul for bilinear terms (McCormick)"
+  ]
+}

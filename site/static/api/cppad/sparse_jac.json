@@ -1,0 +1,20 @@
+{
+  "name": "sparse_jac",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/sparse_jac.hpp",
+  "brief": "Sparse Jacobian computation using graph coloring",
+  "algorithms": [
+    {
+      "name": "Reverse Mode Sparse Jacobian (sparse_jac_rev):\nCompute multiple rows per sweep using row coloring.\n\n  For each color c:\n    1. Set adjoint seed: u_i = 1 if color[i]==c, else 0\n    2. Reverse sweep: v = J'\u00b7u\n    3. Extract: J_{ij} = v_j for rows i with color c\n\n  CHOICE:\n    sparse_jac_for better when n << m (tall Jacobian)\n    sparse_jac_rev better when m << n (wide Jacobian)",
+      "math": "Jacobian: J_{ij} = \u2202F_i/\u2202x_j\n\n  KEY INSIGHT:\n    If columns j and k have disjoint row sparsity patterns,\n    they can be computed simultaneously in one forward sweep.\n\n  GRAPH COLORING:\n    Column intersection graph: edge (j,k) if some row i has\n    both J_{ij} \u2260 0 and J_{ik} \u2260 0\n    Color columns so adjacent columns get different colors\n    #forward_sweeps = #colors (much less than n for sparse J)",
+      "complexity": "Graph coloring: O(nnz + n) for greedy\n  Jacobian: O(colors \u00d7 tape_ops)\n  For many NLP problems: colors \u2248 5-20 regardless of n",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sparse_hes.hpp for sparse Hessian",
+    "coloring algorithms in local/color_*.hpp"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "sym_cg",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_cg.h",
+  "brief": "Cut Generator process for SYMPHONY\n\nThe Cut Generator (CG) receives LP solutions and generates\nviolated cutting planes. Can run as separate process or\ncompiled into LP process (SYM_COMPILE_IN_CG).",
+  "algorithms": [
+    {
+      "name": "Explicit vs User Cuts:\nTwo paradigms for cut representation.\n\n  EXPLICIT CUTS (create_explicit_cut):\n    Full coefficient vector stored\n    Direct addition to LP matrix\n    Memory: O(nonzeros in cut)\n\n  USER CUTS (cg_add_user_cut):\n    Compact representation (e.g., set for subtour)\n    Requires expansion callback\n    Memory-efficient for structured cuts",
+      "math": "",
+      "complexity": "Separation: User-defined, typically O(n\u00b2) to O(n\u00b3)\n  Cut addition: O(nnz(cut)) per cut\n  Communication: O(cuts \u00d7 avg_cut_size)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sym_lp.h for LP process which calls CG",
+    "sym_cp.h for cut pool storage",
+    "sym_cg_u.h for user callback declarations"
+  ]
+}

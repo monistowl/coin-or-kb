@@ -1,0 +1,14 @@
+{
+  "name": "PresolveComponent",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/presolve/PresolveComponent.h",
+  "brief": "Presolve component for HiGHS pipeline integration\n\nEncapsulates presolve as a modular component with data and statistics.\n\n**PresolveComponentData:**\nState managed by presolve component:\n- reduced_lp_: Presolved LP (smaller problem)\n- postSolveStack: Operations to undo presolve\n- recovered_solution_/recovered_basis_: Original-space solution\n- presolve_log_: Reduction history\n\n**PresolveComponentInfo:**\nStatistics exposed for reporting:\n- n_rows_removed, n_cols_removed, n_nnz_removed: Reduction counts\n- Timing information from HighsComponentInfo base\n\n**PresolveComponentOptions:**\nComponent-specific settings (extends HighsComponentOptions):\n- iteration_limit: Maximum presolve passes\n- Timeout and other controls\n\n**PresolveComponent Class:**\nMain component implementing HighsComponent interface:\n- init(): Setup with options\n- run(): Execute presolve\n- has_run_: Track execution state",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "presolve/HPresolve.h for presolve engine",
+    "util/HighsComponent.h for component base class",
+    "presolve/HighsPostsolveStack.h for solution recovery"
+  ]
+}

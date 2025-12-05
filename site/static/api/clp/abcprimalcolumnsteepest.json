@@ -1,0 +1,23 @@
+{
+  "name": "AbcPrimalColumnSteepest",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcPrimalColumnSteepest.hpp",
+  "brief": "Steepest edge and Devex for ABC primal simplex",
+  "algorithms": [
+    {
+      "name": "Devex (Approximate Steepest Edge):\n  Cheaper alternative maintaining reference framework weights:\n  1. Initialize w_j = 1 for all nonbasic columns\n  2. After pivot, update only: w_s' = ||B\u207b\u00b9\u00b7a_s||\u00b2, w_j' = max(w_j, w_j_hat\u00b2)\n     where w_j_hat is contribution from pivot column\n  3. Reset all weights to 1 periodically (every ~factorization)\n  Typically 80-90% as effective as full steepest edge at lower cost.",
+      "math": "Steepest edge weight update (Harris, 1973):\n  Let \u03b1 = B\u207b\u00b9\u00b7a_s (pivot column). After pivot where row r leaves:\n  w_j' = w_j - 2\u00b7\u03b1_j\u00b7(a_j^T\u00b7\u03c4) + \u03b1_j\u00b2\u00b7w_s where \u03c4 = (B\u207b\u1d40\u00b7e_r)/\u03b1_r\n  Incoming column: w_s' = 1/\u03b1_r\u00b2 (becomes basic, new row weight)",
+      "complexity": "Steepest edge: O(m) per pivot for weight update.\n  Devex: O(nnz(pivot_column)) per pivot, much sparser.\n  Both reduce iteration count significantly vs Dantzig.",
+      "ref": [
+        "Harris (1973). \"Pivot selection methods of the Devex LP code\".\n     Mathematical Programming 5:1-28.\n\nModes (controlled by constructor parameter):\n- 0: Exact Devex\n- 1: Full steepest edge\n- 2: Partial exact Devex (scan subset of nonbasics)\n- 3: Switches between 0/2 based on factorization (default)\n- 4: Starts as partial Dantzig/Devex, may switch\n- 5: Always partial Dantzig\n- >=10: Mini-sprint mode\n\nKey optimizations over ClpPrimalColumnSteepest:\n- Uses CoinPartitionedVector for parallel column blocks\n- Vectorized weight updates in djsAndDevex()\n- Efficient partial pricing with partialPricing()"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcPrimalColumnPivot for the base interface",
+    "AbcPrimalColumnDantzig for simpler alternative",
+    "ClpPrimalColumnSteepest for the standard (non-ABC) implementation"
+  ]
+}

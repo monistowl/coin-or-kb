@@ -1,0 +1,9 @@
+{
+  "name": "op_hash_table",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/op_hash_table.hpp",
+  "brief": "Value graph: op_hash_table",
+  "algorithms": [],
+  "methods": []
+}

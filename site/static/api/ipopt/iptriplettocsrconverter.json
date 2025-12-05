@@ -1,0 +1,19 @@
+{
+  "name": "IpTripletToCSRConverter",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpTripletToCSRConverter.hpp",
+  "brief": "Convert sparse matrix from triplet to CSR format\n\nTripletToCSRConverter converts symmetric matrices from triplet\n(COO) format to Compressed Sparse Row (CSR) format. Handles both\nupper-triangular-only and full-matrix storage.",
+  "algorithms": [
+    {
+      "name": "Triplet-to-CSR Conversion with Duplicate Summation:\n  1. Sort triplet entries by (row, col) lexicographically\n  2. Scan sorted entries, merging duplicates to same CSR position\n  3. Build ia (row pointers) and ja (column indices) arrays\n  4. Record mapping for value conversion (ipos_first_, ipos_double_*)\n  Conversion separates structure (once) from values (each solve).",
+      "math": "Duplicate handling: If triplet has entries (i,j,a_1), (i,j,a_2),...\n  the CSR value at (i,j) is sum: a_1 + a_2 + ... This is essential for\n  finite element assembly where element matrices overlap.",
+      "complexity": "InitializeConverter: O(nnz\u00b7log(nnz)) for sort + O(nnz) scan.\n  ConvertValues: O(nnz) to copy and sum values.\n  Memory: O(nnz) for mapping arrays.\n\nTriplet format: (row[k], col[k], val[k]) for k=0..nnz-1\n- May contain duplicates (summed during conversion)\n- May have entries in either triangle (normalized to upper)\n\nCSR format: ia[0..n], ja[0..nnz_csr-1]\n- ia[i] = start of row i in ja\n- ja = column indices, sorted by row then column\n- Offset 0 (C-style) or 1 (Fortran-style) supported\n\nConversion process:\n1. InitializeConverter(): Build mapping structure (once per pattern)\n2. ConvertValues(): Apply mapping to convert values (each factorization)\n\nDuplicate handling:\n- ipos_first_[i]: First triplet entry contributing to CSR position i\n- ipos_double_*: Additional triplet entries to add",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTSymLinearSolver.hpp for usage"
+  ]
+}

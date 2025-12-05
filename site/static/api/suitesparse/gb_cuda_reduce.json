@@ -1,0 +1,12 @@
+{
+  "name": "GB_cuda_reduce",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/CUDA/GB_cuda_reduce.hpp",
+  "brief": "CUDA JIT kernel launcher for GraphBLAS reductions\nCopyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.\n\nGB_cuda_reduce_to_scalar_jit: GPU reduction of matrix A to scalar z using\nmonoid. Output to z (scalar) or V (1\u00d71 matrix) based on has_cheeseburger\nflag. Takes stream/grid/block parameters for kernel launch.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GB_cuda.hpp for common CUDA utilities"
+  ]
+}

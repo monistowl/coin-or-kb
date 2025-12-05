@@ -1,0 +1,24 @@
+{
+  "name": "AbcSimplex",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcSimplex.hpp",
+  "brief": "AVX/SIMD-optimized simplex solver (\"A Better Clp\")",
+  "algorithms": [
+    {
+      "name": "Data Layout Optimization:\n      All arrays use [structural|slack] layout instead of separate storage.\n      This improves cache locality during basis updates. Key arrays:\n      - abcSolution_[0..n+m]: primal solution values\n      - abcDj_[0..n+m]: reduced costs (dual solution)\n      - abcLower_/abcUpper_[0..n+m]: variable bounds",
+      "math": "",
+      "complexity": "Same asymptotic complexity as ClpSimplex:\n      Per-iteration: O(m\u00b2) average for basis update\n      Practical speedup: 2-4x from SIMD, additional from parallelism",
+      "ref": [
+        "Forrest, J.J. and Goldfarb, D. (1992). \"Steepest-edge simplex\n      algorithms for linear programming\". Math. Programming 57:341-374."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpSimplex for the standard (non-AVX) implementation",
+    "AbcSimplexDual for AVX-optimized dual simplex",
+    "AbcSimplexPrimal for AVX-optimized primal simplex",
+    "AbcMatrix for the optimized matrix class"
+  ]
+}

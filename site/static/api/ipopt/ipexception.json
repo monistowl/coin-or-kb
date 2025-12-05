@@ -1,0 +1,12 @@
+{
+  "name": "IpException",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpException.hpp",
+  "brief": "Exception base class and macros for Ipopt error handling\n\nProvides IpoptException base class and convenience macros:\n- DECLARE_STD_EXCEPTION(Type): Define new exception class\n- THROW_EXCEPTION(Type, msg): Throw with file/line info\n- ASSERT_EXCEPTION(cond, Type, msg): Conditional throw\n\nExceptions carry source location (file, line) and message for\ndebugging. Can be reported via Journalist::ReportException().\n\nUses special visibility attributes on macOS to ensure exceptions\ncan be caught across shared library boundaries.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpJournalist.hpp for exception reporting"
+  ]
+}

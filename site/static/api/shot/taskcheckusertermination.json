@@ -1,0 +1,13 @@
+{
+  "name": "TaskCheckUserTermination",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskCheckUserTermination.h",
+  "brief": "Check for external termination request\n\nAllows user to interrupt solver gracefully.\n\n**TaskCheckUserTermination Class:**\n- taskIDIfTrue: Jump target when user requests stop\n- run(): Check for CTRL+C, callback termination, etc.\n\n**Usage:**\n- Called every iteration to check for interrupts\n- Returns best solution found so far",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "EventHandler.h for termination callbacks",
+    "TaskTerminate.h for graceful shutdown"
+  ]
+}

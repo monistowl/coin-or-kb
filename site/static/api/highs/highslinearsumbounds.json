@@ -1,0 +1,14 @@
+{
+  "name": "HighsLinearSumBounds",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsLinearSumBounds.h",
+  "brief": "Row activity bounds for bound tightening (FBBT)\n\nIncrementally maintains min/max activity bounds for linear constraints.\n\n**Activity Computation:**\nFor row sum = \u03a3(a_i * x_i):\n- sumLower: Minimum activity using a_i>0 with lb_i, a_i<0 with ub_i\n- sumUpper: Maximum activity using a_i>0 with ub_i, a_i<0 with lb_i\n- numInfSumLower/Upper: Count of infinite contributions\n\n**Original vs Implied Bounds:**\n- sumLowerOrig/sumUpperOrig: Using original variable bounds only\n- sumLower/sumUpper: Using tightest of original and implied bounds\n- implVarLower/implVarUpper: Implied bounds from other constraints\n- Source tracking: implVarLowerSource[] for circular dependency detection\n\n**Incremental Updates:**\n- add(): Add variable contribution to sum\n- remove(): Remove variable contribution from sum\n- updatedVarLower/Upper(): Update after bound tightening\n- updatedImplVarLower/Upper(): Update after implied bound discovery\n\n**Residual Computation:**\n- getResidualSumLower/Upper(): Activity excluding specific variable\n  - Used for FBBT: derive x_i bounds from row \u2264 rhs - residual\n  - Optional boundVar parameter for conditional bounds\n\n**Quad Precision:**\nUses HighsCDouble for activity sums to avoid numerical issues.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "presolve/HPresolve.h for presolve bound tightening",
+    "mip/HighsDomain.h for MIP propagation",
+    "util/HighsCDouble.h for compensated double arithmetic"
+  ]
+}

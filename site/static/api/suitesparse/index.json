@@ -1,0 +1,481 @@
+{
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "classes": [
+    {
+      "name": "GB_cuda",
+      "brief": "Host-side CUDA utilities for GraphBLAS GPU operations\nCopyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.\nNVIDIA CORPORATION contributions (c) 2024-2025.\n\nHost CUDA includes and utilities (not for JIT kernels). Matrix prefetch\nfunctions with component flags (P/H/Y/B/I/X for pointers/hyperstart/y/bitmap/\nindices/values). GB_cuda_upscale_identity for monoid identity. Stream pool\nacquire/release for CUDA stream management.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GB_cuda_AxB",
+      "brief": "CUDA JIT kernel launcher for GraphBLAS matrix multiplication\nCopyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.\n\nGB_cuda_AxB_dot3_jit: GPU sparse matrix-matrix multiply C=A*B using dot\nproduct method (dot3). Supports masked operation (M, Mask_struct), semiring\nselection, and flipxy. Takes device and number_of_sms for launch config.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GB_cuda_apply",
+      "brief": "CUDA JIT kernel launchers for GraphBLAS apply operations\nSPDX-License-Identifier: Apache-2.0\n\nGPU apply operations: GB_cuda_apply_unop_jit (unary operator with optional\nflipij), GB_cuda_apply_bind1st_jit (binary op with scalar bound to first),\nGB_cuda_apply_bind2nd_jit (scalar bound to second). All take stream, grid\nand block size parameters for kernel launch.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GB_cuda_error",
+      "brief": "CUDA error checking macro for GraphBLAS GPU operations\nCopyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.\n\nCUDA_OK macro: wraps CUDA API calls with error checking. On failure,\nmaps cudaErrorMemoryAllocation to GrB_OUT_OF_MEMORY, other errors to\nGxB_GPU_ERROR. Prints error info via printf and GBURBLE, calls GB_FREE_ALL.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GB_cuda_ewise",
+      "brief": "CUDA JIT kernel launchers for GraphBLAS element-wise operations\nSPDX-License-Identifier: Apache-2.0\n\nGPU element-wise scaling: GB_cuda_rowscale_jit (C = D.*B row scaling),\nGB_cuda_colscale_jit (C = A.*D column scaling). Both support flipxy for\noperand order and take stream/grid/block parameters.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GB_cuda_geometry",
+      "brief": "CUDA kernel launch geometry constants\nCopyright (c) 2017-2025, Timothy A. Davis.\n\nBlock and chunk size constants for CUDA kernels, used by host and JIT.\nSelect sparse: BLOCKDIM1=512, CHUNKSIZE1=4096; BLOCKDIM2=256, CHUNKSIZE2=1024.\nSelect bitmap: BLOCKDIM=512. Includes log2 variants for bit shifts.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GB_cuda_reduce",
+      "brief": "CUDA JIT kernel launcher for GraphBLAS reductions\nCopyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.\n\nGB_cuda_reduce_to_scalar_jit: GPU reduction of matrix A to scalar z using\nmonoid. Output to z (scalar) or V (1\u00d71 matrix) based on has_cheeseburger\nflag. Takes stream/grid/block parameters for kernel launch.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GB_cuda_select",
+      "brief": "CUDA JIT kernel launchers for GraphBLAS select operations\nSPDX-License-Identifier: Apache-2.0\n\nGPU select operations: GB_cuda_select_bitmap_jit (bitmap format input),\nGB_cuda_select_sparse_jit (sparse format input). Both apply IndexUnaryOp\nwith optional flipij and ythunk scalar. Returns selected entries in C.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GB_cuda_timer",
+      "brief": "CUDA event-based GPU timer class\nCopyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.\nNVIDIA CORPORATION contributions (c) 2024-2025.\n\nGpuTimer class: Start() records start event, Stop() records stop event,\nElapsed() synchronizes and returns milliseconds between. Uses cudaEvent_t\nfor precise GPU timing. Useful for kernel performance measurement.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine",
+      "brief": "Version information for GPUQREngine CUDA library\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nVersion macros for GPUQREngine GPU-accelerated QR factorization.\nCurrent version 4.3.4 (June 2024). Part of SuiteSparse SPQR.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_BucketList",
+      "brief": "Tile bucket management and GPU task generation\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nBucketList manages LLBundles in doubly-linked lists organized by column\nbucket. Tracks idle tiles (head/next/prev), generates Factorize/Apply\ntasks. Wavefront advances through buckets. VT block allocation via\nwsMongoVT workspace. Methods: Initialize, AdvanceBundles, CreateBundles,\nFillWorkQueue. Supports staircase exploitation for sparse factorization.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_Common",
+      "brief": "GPU thread geometry, tile constants, and common macros\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nCore constants: TILESIZE=32 (tile dimension), PANELSIZE=3 (tiles per\npanel), NUMTHREADS=384 (threads per kernel), PADDING=1 (bank conflicts).\nCommon macros: CEIL, MIN, MAX, EMPTY sentinel. Optional GPUQRENGINE_RENDER\nfor GraphViz visualization, experimental GPUQRENGINE_PIPELINING.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_Front",
+      "brief": "Frontal matrix class for GPU QR factorization\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nFront class encapsulates frontal matrix metadata: dimensions (fm\u00d7fn),\nCPU/GPU pointers (F, gpuF, cpuR), factorization state, staircase for\nexploiting block zeros. SparseMeta member extends for multifrontal\nsparse factorization. State machine tracks: ALLOCATE_WAIT \u2192 FACTORIZE \u2192 DONE.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_FrontState",
+      "brief": "Finite state machine for front factorization lifecycle\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nFrontState enum defines 9-state FSM: ALLOCATE_WAIT (0) \u2192 ASSEMBLE_S (1) \u2192\nCHILD_WAIT (2) \u2192 FACTORIZE (3) \u2192 FACTORIZE_COMPLETE (4) \u2192 PARENT_WAIT (5) \u2192\nPUSH_ASSEMBLE (6) \u2192 CLEANUP (7) \u2192 DONE (8). Transitions driven by\nFillWorkQueue and PostProcessing. Scheduler uses states to coordinate work.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_GraphVizHelper",
+      "brief": "Debug visualization for bucket list state\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nGPUQREngine_RenderBuckets function generates GraphViz output for\nBucketList visualization. Only compiled when GPUQRENGINE_RENDER defined.\nUsed for debugging factorization scheduling and tile progression.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_Internal",
+      "brief": "Internal API and UberKernel declaration\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nInternal includes (Common, TaskDescriptor, Front, Stats, SuiteSparse).\nGPUQREngine_UberKernel: launches GPU kernel on stream with work queue.\nGPUQREngine_Internal: main factorization entry with Parent/Child arrays\nfor multifrontal tree traversal. Returns QREngineResultCode.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_LLBundle",
+      "brief": "Bundle of row tiles for GPU factorization tasks\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nLLBundle groups row tiles for Factorize/Apply tasks. Tracks: First (smallest\nrowtile, made triangular), Shadow (memento of factorized First), Last,\nDelta (pipelining), Max. VT[2] pointers for Householder vectors. Methods:\nAddTileToSlots, Advance, gpuPack. CurrentTask indicates GenericFactorize/Apply.\nManaged by BucketList in doubly-linked structure.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_SEntry",
+      "brief": "Sparse entry tuple for GPU front assembly\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nSEntry struct: (findex, value) tuple for placing sparse matrix values\ninto dense frontal matrices. findex is linear index into front, value\nis numeric entry. Used in S assembly phase (ASSEMBLE_S state) to transfer\ninput matrix to GPU fronts via cpuS/gpuS arrays in SparseMeta.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_Scheduler",
+      "brief": "Central coordinator for GPU QR factorization tasks\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nScheduler manages fronts and GPU resources: frontList with numFronts,\nbucketLists for task generation, workQueues (double-buffered), CUDA\nstreams (kernelStreams[2], memoryStreamH2D/D2H). Main loop: fillWorkQueue \u2192\nlaunchKernel \u2192 postProcess. Tracks completion via FrontDataPulled events.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_SparseMeta",
+      "brief": "Sparse multifrontal factorization metadata\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nSparseMeta extends Front for sparse factorization: fp (pivotal columns),\nnc (remaining children), isStaged/pushOnly flags for staging. S assembly\nmetadata (cpuS/gpuS SEntry arrays, Scount). Pack assembly: contribution\nblock dimensions (cm\u00d7cn), parent info (pn, gpuP), row/col maps (gpuRimap/gpuRjmap).",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_Stats",
+      "brief": "Performance statistics for GPU QR factorization\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nQREngineStats template struct: kernelTime (total GPU kernel time across\nlaunches), numLaunches (kernel invocation count), flopsActual (total\nfloating-point operations). Optional output parameter for GPUQREngine_Internal.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_SuiteSparse",
+      "brief": "Public SuiteSparse API for GPU QR factorization\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nMain entry point for SPQR GPU support. QREngineResultCode enum: SUCCESS,\nOUTOFMEMORY, GPUERROR. GPUQREngine template functions: dense (fronts only)\nand sparse (with Parent/Childp/Child tree). GPUQREngine_FindStaircase\ncomputes staircase for block zero exploitation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_TaskDescriptor",
+      "brief": "GPU task types and metadata for QR kernel dispatch\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nTaskType enum: Factorize variants (3x1, 2x1, 1x1, edge cases), Apply\nvariants (Apply3/2/1), Assembly (SAssembly, PackAssembly). TaskDescriptor\nstruct contains F pointer, AuxAddress[4] (VT blocks, maps), dimensions,\nextra[10] (tile indices, ranges). Used by UberKernel for dispatch.\ngetFlops/getWeightedFlops for work queue balancing.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GPUQREngine_Timing",
+      "brief": "CUDA event-based timing macros for kernel profiling\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nTiming macros enabled by TIMING define: TIMER_INIT (create cudaEvents),\nTIMER_START (record start), TIMER_STOP (synchronize and get elapsed),\nTIMER_FINISH (destroy events). Compiles to no-ops when TIMING undefined.\nUsed for kernel performance measurement and optimization.",
+      "has_algorithm": false
+    },
+    {
+      "name": "GraphBLAS_cuda",
+      "brief": "Main GraphBLAS CUDA include with C++ complex type definitions\nCopyright (c) 2017-2025, Timothy A. Davis. Apache-2.0 license.\n\nCUDA-compatible GraphBLAS header. Defines C++ complex types: GxB_FC32_t\n(std::complex<float>), GxB_FC64_t (std::complex<double>). Macros GxB_CMPLXF,\nGxB_CMPLX for construction. Includes GB_cuda_geometry.hpp. Used by JIT\nkernels requiring complex arithmetic.",
+      "has_algorithm": false
+    },
+    {
+      "name": "LAGraphX",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "Mongoose",
+      "brief": "Main public API for Mongoose graph partitioning library\nCopyright (C) 2017-2018, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nMongoose: High-quality graph partitioning via multilevel coarsening\nwith Fiduccia-Mattheyses and quadratic programming refinement.\nPublic interface includes Graph, EdgeCut, EdgeCut_Options classes\nand read_graph/edge_cut functions for partitioning workflows.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_BoundaryHeap",
+      "brief": "Boundary vertex heap for FM partition refinement\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nManages heaps of boundary vertices (those with edges crossing cut)\nfor FM algorithm. Two heaps (one per partition) ordered by vertex\ngain. Operations: load, clear, insert, remove, heapifyUp/Down.\nCritical for efficient O(n log n) FM refinement.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_CSparse",
+      "brief": "Sparse matrix operations subset from CSparse library\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nProvides CSparse subset for sparse matrix operations: cs struct\n(compressed column/triplet format), cs_add (matrix addition),\ncs_transpose, cs_compress (triplet to CSC), and allocation.\nUses int64_t (csi) matching Mongoose's Int type.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_Coarsening",
+      "brief": "Graph coarsening via vertex matching for multilevel partitioning\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nCoarsening reduces graph size while preserving structure by contracting\nmatched vertices. Given a matching (HEM, random, etc.), creates coarser\ngraph with merged vertices and aggregated edge weights. Essential for\nmultilevel partitioning to handle large graphs efficiently.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_CutCost",
+      "brief": "Partition quality metrics structure\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nCutCost struct holds partition quality metrics: heuCost (cut + balance\npenalty), cutCost (edge weight sum), W[2] (partition weights), and\nimbalance (deviation from target split). Used internally to evaluate\nand compare partitions during refinement.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_Debug",
+      "brief": "Debug macros, assertions, and diagnostic print functions\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nDebug infrastructure: ASSERT/DEBUG macros (disabled by NDEBUG),\nPR macro for printf debugging, IMPLIES/IFF logic macros. Print\nfunctions for cs matrices, EdgeCutProblem graphs, and QP state.\nEnable debugging by uncommenting #undef NDEBUG (very slow).",
+      "has_algorithm": false
+    },
+    {
+      "name": "Mongoose_EdgeCut",
+      "brief": "Edge cut result structure and partitioning entry points\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nEdgeCut struct holds partitioning results: boolean partition array,\ncut_cost (edge weight sum), cut_size (edge count), partition weights\n(w0, w1), and imbalance metric. edge_cut() functions are main entry\npoints for computing graph partitions.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_EdgeCutOptions",
+      "brief": "Configuration options for edge cut partitioning algorithms\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nEdgeCut_Options controls all algorithm parameters: coarsening (limit,\nmatching strategy, community detection), initial cut type (QP/random),\nFiduccia-Mattheyses (search depth, refinement count), QP gradient\nprojection (tolerance, iteration limit), and partition targets\n(split ratio, balance tolerance).",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_EdgeCutProblem",
+      "brief": "Extended graph with matching and partition state for algorithms\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nEdgeCutProblem extends Graph with algorithm state: partition array,\nvertex gains, external degrees, boundary heaps, cut metrics. Also\nstores matching data (matchmap, invmatchmap, matchtype) for multilevel\nhierarchy. Provides inline helpers for boundary heap and mark array.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_Graph",
+      "brief": "Graph data structure for Mongoose partitioning\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nGraph class stores adjacency in CSC format (p, i arrays) with optional\nedge weights (x) and vertex weights (w). Factory methods create from\nraw arrays or CSparse matrices. Shallow copy flags track ownership.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_GuessCut",
+      "brief": "Initial partition generation at coarsest level\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nGuessCut creates initial partition for coarsest graph before refinement\nbegins. Strategies include QP relaxation, random assignment, or natural\nvertex order. Quality of initial guess affects final partition quality\ndespite refinement. Selected via initial_cut_type option.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_IO",
+      "brief": "Matrix Market file I/O for graphs and matrices\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nFile I/O for Mongoose: read_graph creates Graph from Matrix Market file,\nread_matrix creates cs struct. Handles symmetrization (A+A')/2 for\nasymmetric matrices, extracts largest connected component, removes\ndiagonal. Accepts C string or std::string filenames.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_ImproveFM",
+      "brief": "Fiduccia-Mattheyses partition refinement algorithm\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nFM algorithm improves partitions via gain-based vertex swapping.\nSwapCandidate tracks vertex, partition side, weight, gain, and heap\nposition. Algorithm maintains boundary heaps, selects highest-gain\nboundary vertex, swaps, and updates neighbor gains. Allows non-positive\nmoves within search_depth to escape local minima.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_ImproveQP",
+      "brief": "Quadratic programming partition improvement via continuous relaxation\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQP improvement relaxes discrete partition to continuous [0,1] variables,\noptimizes via gradient projection with balance constraints, then rounds\nto discrete partition. Complements FM by exploring continuous solution\nspace; combined in waterdance for best results.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_Internal",
+      "brief": "Internal type definitions and enumerations for Mongoose\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nDefines Int type (int64_t), matching strategies (Random, HEM, HEMSR,\nHEMSRdeg), initial cut types (QP, Random, NaturalOrder), and match\ntypes (Orphan, Standard, Brotherly, Community) used throughout Mongoose.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_Logger",
+      "brief": "Debug logging and performance timing utilities\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nLogger class provides runtime debug level control and tic/toc timing\nfor algorithm phases: Matching, Coarsening, Refinement, FM, QP, IO.\nLogError/Warn/Info/Test macros for conditional output. Timing tracks\ncumulative time per phase for profiling.",
+      "has_algorithm": false
+    },
+    {
+      "name": "Mongoose_Matching",
+      "brief": "Vertex matching algorithms for graph coarsening\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nImplements matching strategies: Random (random neighbor), HEM (heavy\nedge matching), SR/SRdeg (sorted/degree-sorted heavy edge). Matching\npairs vertices for coarsening; heavier edges are preferred to preserve\ngraph structure. Cleanup handles unmatched (orphan) vertices.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_QPBoundary",
+      "brief": "QP boundary initialization from graph partition\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPBoundary initializes QP state from discrete partition, setting\nx values based on partition assignment and identifying boundary\nvertices (those with neighbors in opposite partition) as the\nactive set for optimization.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_QPDelta",
+      "brief": "QP solver state: solution, gradient, free set, and workspace\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPDelta stores iterative QP solver state: current solution x, gradient,\nfree set (variables not at bounds), balance constraint bounds (lo/hi),\nLagrange multiplier lambda, and workspace arrays. FreeSet_status tracks\nwhether each x_i is at 0, 1, or strictly between (free).",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_QPGradProj",
+      "brief": "Projected gradient descent for QP partition optimization\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPGradProj implements gradient projection for bound-constrained QP:\nminimizes quadratic cut objective subject to box constraints [0,1]\nand balance constraint (lo <= a'x <= hi). Projects gradient onto\nfeasible region, iterates until convergence or iteration limit.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_QPLinks",
+      "brief": "QP free set rounding and partition conversion\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPLinks converts continuous QP solution to discrete partition by\nrounding fractional variables and updating free set. Handles the\ninterface between continuous relaxation and discrete partition\nrepresentation in the waterdance refinement cycle.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_QPMaxHeap",
+      "brief": "Max-heap for QP napsack breakpoint processing\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPMaxHeap provides max-heap operations (build, delete, add, heapify)\nfor efficient breakpoint processing in napsack solver. Extracts\nbreakpoints in descending order, complementing min-heap for\nbidirectional lambda search.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_QPMinHeap",
+      "brief": "Min-heap for QP napsack breakpoint processing\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPMinHeap provides min-heap operations (build, delete, add, heapify)\nfor efficient breakpoint processing in napsack solver. Extracts\nbreakpoints in ascending order to find optimal lambda for balance\nconstraint satisfaction.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_QPNapDown",
+      "brief": "Downward lambda search in napsack solver\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPNapDown searches for lambda in decreasing direction when current\nsolution violates lower balance bound (b < lo). Processes breakpoints\nvia heaps until constraint is satisfied, returning optimal lambda.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_QPNapUp",
+      "brief": "Upward lambda search in napsack solver\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPNapUp searches for lambda in increasing direction when current\nsolution violates upper balance bound (b > hi). Processes breakpoints\nvia heaps until constraint is satisfied, returning optimal lambda.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_QPNapsack",
+      "brief": "Napsack subproblem solver for QP balance constraint\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPNapsack solves the napsack subproblem: find lambda such that the\nprojected solution satisfies balance constraint lo <= a'x <= hi.\nUses breakpoint method with heaps to efficiently find optimal lambda.\nCore subroutine in QP gradient projection.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_Random",
+      "brief": "Random number generation for Mongoose algorithms\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nSimple random number interface: random() returns Int, setRandomSeed()\ninitializes generator. Used by random matching, random initial cuts,\nand tie-breaking in algorithms. Seed set via EdgeCut_Options::random_seed.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_Refinement",
+      "brief": "Partition projection during uncoarsening phase\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nRefinement projects partition from coarse to fine graph during\nuncoarsening. Maps coarse partition to fine vertices via inverse\nmatchmap, then applies FM/QP improvement (waterdance) at each level\nfor high-quality final partition.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_Sanitize",
+      "brief": "Matrix preprocessing for graph partitioning\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nMatrix sanitization prepares input for partitioning: sanitizeMatrix\nhandles symmetry and binary weights, removeDiagonal strips self-loops,\nmirrorTriangular expands triangular to symmetric. Ensures valid\nundirected graph representation for algorithms.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Mongoose_Waterdance",
+      "brief": "Alternating FM/QP refinement passes for partition improvement\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nWaterdance alternates between FM (discrete swaps) and QP (continuous\noptimization) refinement passes. The interplay (\"dance\") between methods\nescapes local minima that either method alone would get stuck in.\nNumber of dances controlled by num_dances option.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ParU",
+      "brief": "Parallel unsymmetric multifrontal sparse LU factorization\nCopyright (c) 2022-2025, Mohsen Aznaveh and Timothy A. Davis. GPL-3.0-or-later.\n\nParU is a parallel sparse direct solver using OpenMP tasking for task-based\nparallelism combined with parallel BLAS (nested parallelism). Solves Ax = b\nfor sparse A via LU factorization with partial pivoting.",
+      "has_algorithm": true
+    },
+    {
+      "name": "RBio",
+      "brief": "Rutherford-Boeing sparse matrix I/O library\nCopyright (c) 2009-2023, Timothy A. Davis. GPL-2.0+ license.\n\nRBio reads and writes sparse matrices in Rutherford-Boeing format,\na standard format for exchanging sparse matrices. Supports real, complex,\ninteger, and pattern-only matrices in assembled or elemental forms.",
+      "has_algorithm": true
+    },
+    {
+      "name": "SuiteSparseGPU_Workspace",
+      "brief": "Unified CPU/GPU memory workspace management class\nCopyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nWorkspace class manages paired CPU/GPU memory allocations: nitems \u00d7 size_of_item\nbytes on both devices. Static methods: cpu_malloc/calloc/free, gpu_malloc/calloc/free.\nInstance methods: allocate (with cpu/gpu/pageLocked flags), destroy, transfer\n(cudaMemcpyKind with sync option). Accessors: cpu(), gpu(), getCount(), getStride().",
+      "has_algorithm": false
+    },
+    {
+      "name": "SuiteSparseGPU_debug",
+      "brief": "Debug verbosity levels for SuiteSparse GPU runtime\nCopyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nDebug levels: OFF (0), ERRORONLY (1), CASUAL (2), VERBOSE (3), EXTREME (4).\nGPURUNTIME_DLEVEL set based on NDEBUG: CASUAL when debugging, OFF otherwise.\nConvenience macros: DEBUG_ATLEAST_ERRORONLY/CASUAL/VERBOSE/EXTREME.\nGPURUNTIME_LOGFILE_PATH defaults to \"SuiteSparse_GPURuntime-logfile.txt\".",
+      "has_algorithm": false
+    },
+    {
+      "name": "SuiteSparseGPU_internal",
+      "brief": "Internal includes for SuiteSparse GPU runtime\nCopyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nConditionally includes CUDA runtime when SPQR_HAS_CUDA defined. Forward\ndeclares Workspace class. Includes SuiteSparse_config.h, macros, and\nWorkspace header. Also includes version header unconditionally.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SuiteSparseGPU_macros",
+      "brief": "Common macros for SuiteSparse GPU components\nCopyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nIMPLIES(p,q) logical implication macro: true unless p is true and q is false.\nIncludes debug level macros and workspace accessor macros. Used throughout\nGPURuntime and GPUQREngine.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SuiteSparseGPU_workspace_macros",
+      "brief": "Convenience macros for accessing Workspace CPU/GPU pointers\nCopyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nGPU_REFERENCE(ws, TYPE): safely get GPU pointer from Workspace with NULL check.\nCPU_REFERENCE(ws, TYPE): safely get CPU pointer from Workspace with NULL check.\nBoth cast to TYPE and handle NULL workspace gracefully.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SuiteSparseQR",
+      "brief": "User C++ API for sparse multifrontal QR factorization\nCopyright (c) 2008-2023, Timothy A Davis. GPL-2.0+ license.\n\nMain user interface for SPQR: SuiteSparseQR overloads for [Q,R,E]=qr(A),\nX=A\\B, qmult. Structures: spqr_symbolic (pattern analysis), spqr_numeric\n(R values, Householder H), spqr_gpu (GPU staging). Expert functions:\nSuiteSparseQR_factorize, _solve, _min2norm, _symbolic, _numeric for\nfactorization reuse. Supports real/complex, int32/int64.",
+      "has_algorithm": true
+    },
+    {
+      "name": "SuiteSparse_GPURuntime",
+      "brief": "Version information for SuiteSparse GPU runtime library\nCopyright (c) 2013-2016, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nVersion macros for SuiteSparse_GPURuntime shared GPU infrastructure.\nCurrent version 4.3.4 (June 2024). Provides common GPU utilities used\nby GPUQREngine and other SuiteSparse GPU components.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SuiteSparse_config",
+      "brief": "Central configuration and utility header for all SuiteSparse libraries\n\nThis file provides the shared foundation for the entire SuiteSparse\ncollection of sparse matrix algorithms. Key features include:\n\n- Compiler and platform detection (GCC, Clang, MSVC, ICC, NVCC)\n- Configurable memory management with replaceable malloc/calloc/realloc/free\n- Portable BLAS/LAPACK interface handling Fortran name mangling and integer sizes\n- OpenMP detection and thread-safe timing utilities\n- Complex number type definitions for C/C++ interoperability\n\n@note Applications can customize memory allocation by calling the\n      SuiteSparse_config_*_set functions before using any SuiteSparse library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "amd",
+      "brief": "Approximate Minimum Degree ordering for sparse matrix factorization\n\nAMD computes a fill-reducing permutation P for sparse Cholesky or LU\nfactorization. Given a symmetric matrix A (or A+A' if A is unsymmetric),\nAMD finds P such that P*A*P' has fewer nonzeros in its Cholesky factor\nthan A would.",
+      "has_algorithm": true
+    },
+    {
+      "name": "amd_internal",
+      "brief": "Internal definitions for AMD (Approximate Minimum Degree) ordering\nCopyright (c) 1996-2023, Timothy A. Davis, Patrick R. Amestoy,\nand Iain S. Duff. BSD-3-clause license.\n\nAMD computes fill-reducing orderings for sparse matrix factorization.\nUses approximate minimum degree heuristic with quotient graph representation\nfor efficient O(|A|) ordering of symmetric matrices (or A'A for unsymmetric).",
+      "has_algorithm": true
+    },
+    {
+      "name": "btf",
+      "brief": "Block Triangular Form permutation for sparse matrices\n\nBTF computes permutations to transform a sparse matrix into block upper\ntriangular form (BTF). This decomposes the matrix into independent blocks\nthat can be processed separately, improving efficiency for factorization.\n\nThree main routines:\n- btf_maxtrans: Maximum transversal (zero-free diagonal matching)\n- btf_strongcomp: Strongly connected components (block decomposition)\n- btf_order: Combined BTF ordering (calls both above)",
+      "has_algorithm": true
+    },
+    {
+      "name": "btf_internal",
+      "brief": "Internal definitions for BTF (Block Triangular Form) permutation\nCopyright (c) 2004-2023, University of Florida. LGPL-2.1+ license.\n\nBTF finds permutation matrices P and Q such that P\u00b7A\u00b7Q has block upper\ntriangular form with square diagonal blocks that are irreducible\n(strongly connected components). Essential preprocessing for sparse LU.",
+      "has_algorithm": true
+    },
+    {
+      "name": "camd",
+      "brief": "Constrained Approximate Minimum Degree ordering for symmetric matrices\nCopyright (c) 1996-2024, Timothy A. Davis, Yanqing Chen,\nPatrick R. Amestoy, and Iain S. Duff. BSD-3-clause license.\n\nCAMD computes fill-reducing orderings for sparse Cholesky factorization\nwith user-specified constraints. Extends AMD to support constraint sets\nthat force certain nodes to be ordered before others.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ccolamd",
+      "brief": "Constrained Column Approximate Minimum Degree ordering\nCopyright (c) 1996-2024, Timothy A. Davis, Sivasankaran Rajamanickam,\nand Stefan Larimore. BSD-3-clause license.\n\nCCOLAMD computes column orderings for sparse QR and LU factorization with\nuser-specified constraints. Extends COLAMD with constraint sets that force\ncertain columns to appear before or after others in the ordering.",
+      "has_algorithm": true
+    },
+    {
+      "name": "cholmod",
+      "brief": "Comprehensive sparse Cholesky factorization library\n\nCHOLMOD provides high-performance sparse Cholesky factorization for\nsymmetric positive definite (SPD) and symmetric positive semi-definite\nmatrices. It supports:\n\nKey features:\n- Supernodal and simplicial Cholesky (LL' and LDL')\n- Fill-reducing orderings: AMD, COLAMD, METIS, CAMD\n- Real, complex, and pattern-only matrices\n- Single and double precision (float/double)\n- Row/column updates and downdates\n- GPU acceleration (NVIDIA CUDA)\n\nTypical workflow:\n1. cholmod_start: Initialize Common workspace\n2. cholmod_analyze: Symbolic analysis (fill-reducing ordering)\n3. cholmod_factorize: Numerical Cholesky factorization\n4. cholmod_solve: Solve Ax = b using the factors\n5. cholmod_finish: Free workspace",
+      "has_algorithm": true
+    },
+    {
+      "name": "cholmod_internal",
+      "brief": "Internal definitions for CHOLMOD sparse Cholesky factorization\nCopyright (C) 2005-2023, Timothy A. Davis. Apache-2.0 license.\n\nCHOLMOD is a comprehensive sparse Cholesky factorization package supporting\nsupernodal and simplicial methods, update/downdate, and multiple orderings.\nHandles symmetric positive definite systems A\u00b7x = b via L\u00b7L' = A.",
+      "has_algorithm": true
+    },
+    {
+      "name": "colamd",
+      "brief": "Column Approximate Minimum Degree ordering for sparse LU factorization\n\nCOLAMD computes a column permutation Q that reduces fill-in during LU\nfactorization of an unsymmetric matrix A. The ordering minimizes the\nfill-in of A*Q when factored as LU.\n\nSYMAMD computes a symmetric ordering for a symmetric matrix, using COLAMD\non the matrix's structure. Both are related to the minimum degree family\nof algorithms.",
+      "has_algorithm": true
+    },
+    {
+      "name": "cs",
+      "brief": "Concise Sparse matrix library - teaching implementation of sparse algorithms\n\nCSparse provides a minimal, readable implementation of core sparse matrix\noperations. It serves as both a standalone library and educational reference\nfor sparse linear algebra algorithms.\n\nKey features:\n- Sparse matrix in triplet or compressed-column (CSC) format\n- Sparse Cholesky (cs_chol), LU (cs_lu), and QR (cs_qr) factorization\n- Fill-reducing orderings via AMD\n- Direct solvers: cs_cholsol, cs_lusol, cs_qrsol\n- Dulmage-Mendelsohn decomposition (cs_dmperm)",
+      "has_algorithm": true
+    },
+    {
+      "name": "huf",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "klu",
+      "brief": "Sparse LU factorization optimized for circuit simulation matrices\n\nKLU computes a sparse LU factorization of a square matrix A:\n  P*A*Q = L*U\nwhere P and Q are permutation matrices, L is unit lower triangular,\nand U is upper triangular.\n\nKLU is specifically designed for matrices arising from circuit simulation,\nwhich tend to be sparse and nearly block-triangular. The factorization\nproceeds in three phases:\n1. klu_analyze: BTF pre-ordering + fill-reducing ordering (AMD/COLAMD)\n2. klu_factor: Numerical LU factorization (left-looking, column-by-column)\n3. klu_solve: Forward/back substitution to solve Ax = b",
+      "has_algorithm": true
+    },
+    {
+      "name": "klu_internal",
+      "brief": "Internal definitions for KLU sparse LU factorization\nCopyright (c) 2004-2023, University of Florida. LGPL-2.1+ license.\n\nKLU is a sparse LU factorization package designed for circuit simulation\nmatrices, which are typically highly sparse with near-diagonal structure.\nUses BTF (Block Triangular Form) permutation to exploit structure.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ldl",
+      "brief": "Simple sparse LDL' factorization for symmetric matrices\n\nLDL computes a sparse LDL' factorization of a symmetric matrix A:\n  A = L * D * L'\nwhere L is unit lower triangular and D is diagonal. This factorization\nworks for symmetric indefinite matrices (D may have negative entries).\n\nThe factorization is performed in two phases:\n1. ldl_symbolic: Compute elimination tree and allocate storage\n2. ldl_numeric: Compute numerical values of L and D\n\nTriangular solves (ldl_lsolve, ldl_dsolve, ldl_ltsolve) complete the\nsolution of Ax = b.",
+      "has_algorithm": true
+    },
+    {
+      "name": "mongoose_mex",
+      "brief": "MATLAB MEX interface for Mongoose graph partitioning\nCopyright (C) 2017-2018, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nMATLAB interface utilities: conversion between MATLAB sparse matrices\nand Mongoose cs/Graph structures, option struct marshalling, result\nconversion to MATLAB arrays. Enables 'mongoose' MEX function for\ngraph partitioning from MATLAB.",
+      "has_algorithm": false
+    },
+    {
+      "name": "params_apply",
+      "brief": "Apply kernel parameters, macros, and function declarations\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nConstants: MAX_ROW_TILES=3, MAX_COL_TILES=2. Shared memory accessors:\nshV, shC, SHV(t,i,j), SHA(i,j), ST(i,j). Global memory: GLVT, GLF,\nIFRONT. Thread indexing: iv, jv, VCHUNKSIZE, NVCHUNKS. Device functions:\nblock_apply_3/2/1, block_apply_3_by_1/2_by_1/1_by_1 variants.",
+      "has_algorithm": false
+    },
+    {
+      "name": "paru_cov",
+      "brief": "Test coverage utilities for ParU sparse LU\nCopyright (c) 2022-2025, Mohsen Aznaveh and Timothy A. Davis.\nGPL-3.0-or-later license.\n\nTesting infrastructure: TEST_PASSES (success exit), TEST_ASSERT/TEST_ASSERT_INFO\n(abort on failure). paru_backward for residual computation. BRUTAL_ALLOC_TEST\nmacro: iteratively runs method with increasing malloc failure counts to test\nall allocation paths. Enabled by PARU_ALLOC_TESTING define.",
+      "has_algorithm": false
+    },
+    {
+      "name": "paru_internal",
+      "brief": "Internal data structures and functions for ParU sparse LU\nCopyright (c) 2022-2025, Mohsen Aznaveh and Timothy A. Davis.\nGPL-3.0-or-later license.\n\nCore ParU structures: ParU_Symbolic_struct (row-form S, singletons, fronts,\ntask tree), ParU_Numeric_struct (LU factors, permutations, scaling),\nParU_Control_struct (tolerances, threading). paru_element (contribution\nblock), paru_work (workspace), paru_tuple (element lists). Internal\nfunctions: front assembly/factorization, heap management, BLAS threading.\nIncludes UMFPACK SymbolicType/SWType for singleton detection.",
+      "has_algorithm": true
+    },
+    {
+      "name": "paru_omp",
+      "brief": "OpenMP abstraction layer for ParU parallel LU\nCopyright (c) 2022-2025, Mohsen Aznaveh and Timothy A. Davis.\nGPL-3.0-or-later license.\n\nPortable OpenMP wrappers: PARU_omp_get_wtime, get_max_threads, get_num_threads,\nset_num_threads, get/set_dynamic, get_active_level, get_max_active_levels,\nget_thread_num. When _OPENMP undefined, provides stub implementations returning\nsequential defaults (1 thread, 0 wtime). Defines PARU_1TASK when no OpenMP.",
+      "has_algorithm": false
+    },
+    {
+      "name": "rmm_wrap",
+      "brief": "RMM (RAPIDS Memory Manager) wrapper types for GraphBLAS GPU memory\nSPDX-License-Identifier: Apache-2.0\n\nType aliases for RMM memory resources: host_mr (new/delete), pinned_mr\n(pinned host), device_mr (CUDA malloc), managed_mr (unified memory).\nPool variants: host_pool_mr, host_pinned_pool_mr, device_pool_mr,\nmanaged_pool_mr. Stream types: cuda_stream_pool, cuda_stream_view.",
+      "has_algorithm": false
+    },
+    {
+      "name": "sharedMemory",
+      "brief": "GPU shared memory layout for QR kernel operations\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nSharedMemory union overlays three kernel types: factorize (A, T, Z tiles\nfor Householder), apply (V, C matrices for block update), packassemble\n(Rimap/Rjmap for contribution assembly). Global __shared__ shMemory,\nmyTask (current task), IsApplyFactorize flag. Sized for PANELSIZE\u00d7TILESIZE.",
+      "has_algorithm": false
+    },
+    {
+      "name": "spqr",
+      "brief": "Internal SPQR implementation functions and data structures\nCopyright (c) 2008-2023, Timothy A Davis. GPL-2.0+ license.\n\nNon-user-callable routines: spqr_analyze (symbolic), spqr_factorize (numeric),\nspqr_kernel (parallel front factorization), spqr_assemble/cpack/rhpack (front\nassembly). Support: spqr_tol, stranspose1/2, larftb (block reflectors),\nhapply, panel, 1colamd, 1fixed. Helper structs: spqr_work, spqr_blob.\nMacros: FLIP/UNFLIP for marking, INDEX for column-major.",
+      "has_algorithm": true
+    },
+    {
+      "name": "spqr_cholmod_wrappers",
+      "brief": "Template wrappers for CHOLMOD functions with int32/int64 support\nCopyright (c) 2008-2023, Timothy A Davis. GPL-2.0+ license.\n\nTemplate wrappers enabling SPQR to use CHOLMOD with either int32_t or int64_t\nindices. Functions: spqr_start/finish (init), memory (malloc/calloc/free/realloc),\nsparse matrix ops (allocate_sparse, free_sparse, transpose, copy), dense\n(allocate_dense, zeros, ones), ordering (amd, metis, colamd, postorder),\nutility (norm_sparse/dense, sdmult, ssmult, ssadd). Each has explicit\ntemplate specializations for int32_t and int64_t.",
+      "has_algorithm": false
+    },
+    {
+      "name": "spqrgpu",
+      "brief": "GPU kernel interfaces for SPQR sparse QR factorization\nCopyright (c) 2008-2023, Timothy A Davis. GPL-2.0+ license.\n\nGPU acceleration entry points: spqrgpu_kernel (processes spqr_blob on GPU),\nspqrgpu_computeFrontStaging (plans front staging by GPU memory capacity),\nspqrgpu_buildAssemblyMaps (constructs Rimap/Rjmap for contribution assembly).\nTemplates for double/Complex Entry types. Requires GPUQREngine_SuiteSparse.hpp.",
+      "has_algorithm": false
+    },
+    {
+      "name": "umf_internal",
+      "brief": "Internal definitions for UMFPACK sparse LU factorization\nCopyright (c) 2005-2023, Timothy A. Davis. GPL-2.0+ license.\n\nUMFPACK is an unsymmetric multifrontal sparse LU factorization package.\nComputes P\u00b7A\u00b7Q = L\u00b7U via supernodal factorization with partial pivoting.\nHandles real and complex matrices in single and double precision.",
+      "has_algorithm": true
+    },
+    {
+      "name": "umfpack",
+      "brief": "Multifrontal sparse LU factorization for unsymmetric matrices\n\nUMFPACK computes a sparse LU factorization of a general (unsymmetric)\nsquare matrix A:\n  P*R*A*Q = L*U\nwhere P and Q are permutation matrices, R is diagonal scaling, L is\nunit lower triangular, and U is upper triangular.\n\nKey features:\n- Multifrontal algorithm with BLAS-3 dense kernels\n- Automatic strategy selection (symmetric vs unsymmetric)\n- Fill-reducing orderings: AMD (symmetric), COLAMD (unsymmetric)\n- Real and complex matrices (double precision)\n- Row scaling for numerical stability\n\nTypical workflow:\n1. umfpack_di_symbolic: Symbolic analysis (ordering, memory estimates)\n2. umfpack_di_numeric: Numerical LU factorization\n3. umfpack_di_solve: Solve Ax = b, A'x = b, etc.\n4. umfpack_di_free_symbolic, umfpack_di_free_numeric: Free memory",
+      "has_algorithm": true
+    },
+    {
+      "name": "zstd_compress_internal",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "zstd_ldm",
+      "brief": "",
+      "has_algorithm": false
+    },
+    {
+      "name": "zstd_trace",
+      "brief": "",
+      "has_algorithm": false
+    }
+  ]
+}

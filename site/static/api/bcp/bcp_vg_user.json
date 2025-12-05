@@ -1,0 +1,21 @@
+{
+  "name": "BCP_vg_user",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_vg_user.hpp",
+  "brief": "User customization interface for Variable Generator process",
+  "algorithms": [
+    {
+      "name": "Variable Generator User Interface for Custom Pricing\n\nBCP_vg_user is the base class for user-defined column generation\n(pricing) in a separate process. Users derive and override virtual methods.\n\n**Key methods to override:**\n- unpack_module_data(): Receive initialization from TM\n- unpack_dual_solution(): Receive LP dual values\n- generate_vars(): Main pricing subproblem logic\n\n**Usage pattern:**\n1. LP sends dual solution (pi) to VG process\n2. VG unpacks duals via unpack_dual_solution()\n3. generate_vars() solves pricing problem for negative reduced cost columns\n4. For each variable found, call send_var() to send to LP\n\n**Informational methods:**\n- upper_bound(): Current best solution value\n- current_phase/level/index/iteration(): Search position\n- get_param()/set_param(): BCP_vg_par parameters\n\n**When to use VG process:**\nUse when pricing subproblem is computationally expensive (e.g.,\nshortest path, knapsack) and benefits from separate process.\nFor simple pricing, generate locally in BCP_lp_user instead.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_vg.hpp for Variable Generator process internals",
+    "BCP_lp_user for LP-side column generation",
+    "BCP_vg_param.hpp for VG parameters"
+  ]
+}

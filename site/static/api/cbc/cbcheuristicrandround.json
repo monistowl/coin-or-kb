@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicRandRound",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicRandRound.hpp",
+  "brief": "Randomized rounding heuristic\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicRandRound: Probabilistic rounding of LP solution.\nRounds fractional variables randomly with probabilities based on\ntheir fractional values (e.g., x=0.7 rounds up with prob 0.7).",
+  "algorithms": [
+    {
+      "name": "Randomized Rounding Heuristic:\n  solution() from LP solution x\u0304:\n  1. For each fractional integer x_j with f = x\u0304_j - \u230ax\u0304_j\u230b:\n     - Round up with probability f (x\u0302_j = \u2308x\u0304_j\u2309).\n     - Round down with probability 1-f (x\u0302_j = \u230ax\u0304_j\u230b).\n  2. Check feasibility of rounded solution x\u0302.\n  3. If feasible and improving, accept; else retry with new seed.",
+      "math": "Expected value preservation:\n  E[x\u0302_j] = f\u00b7\u2308x\u0304_j\u2309 + (1-f)\u00b7\u230ax\u0304_j\u230b = x\u0304_j.\n  Rounded solution is unbiased estimator of LP solution.\n  For packing/covering: Pr[constraint satisfied] analyzable.\n  Often O(log m) factor from optimal in expectation.\n\nMultiple trials with different random seeds can find diverse solutions.\nSimple but can be surprisingly effective for certain problem structures.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for base class",
+    "CbcHeuristicFPump for deterministic rounding approach"
+  ]
+}

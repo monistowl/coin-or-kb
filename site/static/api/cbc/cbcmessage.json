@@ -1,0 +1,13 @@
+{
+  "name": "CbcMessage",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcMessage.hpp",
+  "brief": "Message IDs and handler for Cbc output\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcMessage: Defines message IDs (CBC_Message enum) for Cbc logging.\nUses COIN message handling framework (CoinMessageHandler).\n\nKey message categories:\n- CBC_SOLUTION: Integer solution found\n- CBC_STATUS/CBC_STATUS2/CBC_STATUS3: Progress reports\n- CBC_GAP: Optimality gap information\n- CBC_ROOT: Root node summary\n- CBC_GENERATOR: Cut generator statistics\n- CBC_BRANCH: Branching decisions\n- CBC_THREAD_STATS: Parallel statistics\n\nText in CbcMessage.cpp supports multiple languages (default: us_en).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMessageHandler for message handling infrastructure",
+    "CbcGenMessages.hpp for command-line solver messages"
+  ]
+}

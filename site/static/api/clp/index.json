@@ -1,0 +1,441 @@
+{
+  "library": "Clp",
+  "layer": "layer-1",
+  "classes": [
+    {
+      "name": "AbcCommon",
+      "brief": "Configuration macros for ABC (A Better Clp) build modes",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcDualRowDantzig",
+      "brief": "Dantzig's rule for ABC dual simplex pivot selection",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcDualRowPivot",
+      "brief": "Abstract base class for dual pivot row selection in ABC",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcDualRowSteepest",
+      "brief": "Steepest edge pivot selection for ABC dual simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcMatrix",
+      "brief": "Cache-optimized matrix for ABC simplex with multiple copies",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcNonLinearCost",
+      "brief": "Piecewise linear cost and infeasibility tracking for ABC",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcPrimalColumnDantzig",
+      "brief": "Dantzig's rule for ABC primal simplex pivot selection",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcPrimalColumnPivot",
+      "brief": "Abstract base class for primal pivot column selection in ABC",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcPrimalColumnSteepest",
+      "brief": "Steepest edge and Devex for ABC primal simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcSimplex",
+      "brief": "AVX/SIMD-optimized simplex solver (\"A Better Clp\")",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcSimplexDual",
+      "brief": "AVX-optimized dual simplex algorithm",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcSimplexFactorization",
+      "brief": "LU factorization wrapper for ABC simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcSimplexPrimal",
+      "brief": "AVX-optimized primal simplex algorithm",
+      "has_algorithm": true
+    },
+    {
+      "name": "AbcWarmStart",
+      "brief": "Extended warm start with factorization caching for ABC",
+      "has_algorithm": true
+    },
+    {
+      "name": "CbcOrClpParam",
+      "brief": "Shared parameter codes for Cbc and Clp solvers\n\nLegacy parameter handling shared between Cbc (branch-and-cut) and Clp\n(linear programming). This file is intentionally duplicated between\nCbc/Test and Clp/Test for simplicity.\n\nParameter code ranges (CbcOrClpParameterType):\n- 1-100: Double parameters (CLP_PARAM_DBL_*, CBC_PARAM_DBL_*)\n- 101-200: Integer parameters (CLP_PARAM_INT_*, CBC_PARAM_INT_*)\n- 201-300: Clp string parameters\n- 301-400: Cbc string parameters\n- 401-500: Clp actions (mostly)\n- 501-600: Cbc actions (mostly)\n\nConditional compilation:\n- COIN_HAS_CBC: Include Cbc-specific parameters\n- COIN_HAS_CLP: Include Clp-specific parameters\n\nNote: Being superseded by ClpParam/CbcParam for cleaner separation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "ClpCholeskyBase",
+      "brief": "Cholesky factorization base class for interior point methods\n\nProvides Cholesky factorization of the normal equations matrix A*D*A'\nused in predictor-corrector interior point methods. The factorization\nuses AMD ordering to reduce fill-in.\n\nThe base class provides a simple sparse Cholesky implementation with\nsupernodal dense blocks. Derived classes can interface to more\nsophisticated factorizations (MUMPS, Pardiso, TAUCS, etc.).\n\nKey methods:\n- order(): Compute fill-reducing ordering (AMD by default)\n- symbolic(): Set up sparsity structure of factor\n- factorize(): Numeric factorization of A*D*A'\n- solve(): Solve system using computed factors",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpCholeskyDense",
+      "brief": "Dense Cholesky factorization for interior point methods\n\nImplements Cholesky factorization when A*D*A' becomes effectively dense.\nUses blocked recursive algorithms for cache efficiency and supports\nparallel execution via ClpCholeskySpawn.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpCholeskyMumps",
+      "brief": "MUMPS sparse direct solver interface for Cholesky factorization\n\nWraps the MUMPS (MUltifrontal Massively Parallel sparse direct Solver)\nlibrary for Cholesky factorization of normal equations in interior point.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpCholeskyPardiso",
+      "brief": "Intel MKL Pardiso sparse direct solver for Cholesky factorization\n\nWraps Intel's Pardiso solver from the Math Kernel Library (MKL) for\nCholesky factorization of normal equations in interior point methods.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpCholeskyTaucs",
+      "brief": "TAUCS sparse solver interface for Cholesky factorization\n\nWraps Sivan Toledo's TAUCS library for Cholesky factorization of normal\nequations in interior point methods.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpCholeskyUfl",
+      "brief": "SuiteSparse CHOLMOD interface for Cholesky factorization\n\nWraps the CHOLMOD library from SuiteSparse (University of Florida) for\nCholesky factorization of normal equations in interior point methods.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpCholeskyWssmp",
+      "brief": "WSSMP sparse direct solver interface for Cholesky factorization\n\nWraps IBM's Watson Sparse Matrix Package (WSSMP) for Cholesky factorization\nof normal equations in interior point methods.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpCholeskyWssmpKKT",
+      "brief": "WSSMP solver for KKT system (augmented system) formulation\n\nVariant of ClpCholeskyWssmp that solves the KKT/augmented system directly\ninstead of forming and factoring the normal equations A*D*A'.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpConfig",
+      "brief": "Clp configuration and platform detection\n\nHandles build configuration for cross-platform compatibility:\n- HAVE_CONFIG_H: Uses autoconf-generated config.h\n- CLPLIB_BUILD: Building the library vs. using it\n- DLL_EXPORT: Windows DLL export declarations\n- GCC visibility: Hidden visibility with explicit exports\n\nDefines CLPLIB_EXPORT macro for public API symbols.\n\nConfiguration precedence:\n1. config.h (autoconf) when HAVE_CONFIG_H defined\n2. config_clp.h for configured installations\n3. config_clp_default.h for manual builds",
+      "has_algorithm": false
+    },
+    {
+      "name": "ClpConstraint",
+      "brief": "Abstract base class for nonlinear constraints\n\nDefines the interface for general (potentially nonlinear) constraints\nused in nonlinear programming extensions. The standard LP constraints\n(Ax \u2264 b) are handled directly by ClpModel; this class is for more\ngeneral constraint forms g(x) \u2264 0.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpConstraintLinear",
+      "brief": "Linear constraint implementation for nonlinear extensions\n\nImplements ClpConstraint for a linear constraint: sum(a_j * x_j) = b.\nUsed with ClpSimplexNonlinear when linear constraints appear alongside\nnonlinear objective or other nonlinear constraints.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpConstraintQuadratic",
+      "brief": "Quadratic constraint implementation: x'Qx + c'x \u2264 b\n\nImplements ClpConstraint for quadratic constraints. The constraint\nfunction is: 0.5 * sum_{ij}(Q_ij * x_i * x_j) + sum_j(c_j * x_j) \u2264 b",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpDualRowDantzig",
+      "brief": "Dantzig's rule for dual simplex pivot selection\n\nImplements the simplest pivot row selection: choose the basic variable\nwith the largest primal infeasibility. Simple and fast per iteration,\nbut may require many more iterations than steepest edge on degenerate\nor difficult problems.\n\nThis is Dantzig's original 1947 rule applied to dual simplex.\nUse ClpDualRowSteepest for better performance on most problems.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpDualRowPivot",
+      "brief": "Abstract base class for dual simplex pivot row selection\n\nIn dual simplex, the pivot row (leaving variable) is chosen based on\nprimal infeasibility. This class defines the interface for different\nselection strategies. Derived classes implement specific rules.\n\nKey methods:\n- pivotRow(): Select which row (basic variable) leaves the basis\n- updateWeights(): Maintain pricing information after pivots\n- updatePrimalSolution(): Update solution after basis change",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpDualRowSteepest",
+      "brief": "Steepest edge pivot selection for dual simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpDummyMatrix",
+      "brief": "Placeholder matrix with dimensions but no data\n\nImplements ClpMatrixBase with only dimensions (rows, columns, elements)\nbut no actual matrix data. Used primarily with ClpPdco where the user\nprovides custom matrix-vector products via callbacks.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpDynamicMatrix",
+      "brief": "Dynamic column generation matrix with GUB structure\n\nSupports column generation by maintaining a pool of potential columns\nand dynamically adding promising ones to the active working matrix.\nBuilt on GUB structure where each \"set\" can generate multiple columns.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpEventHandler",
+      "brief": "Callback interface for handling solver events during optimization\n\nProvides a mechanism for user code to receive callbacks during the solve\nprocess. Users derive from ClpEventHandler and override event() to handle\nevents like end of iteration, factorization, or presolve stages.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpFactorization",
+      "brief": "Wrapper around CoinFactorization for use within Clp simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpGubDynamicMatrix",
+      "brief": "Dynamic column generation with Generalized Upper Bound structure\n\nCombines GUB constraints with dynamic column generation. Columns are\npartitioned into GUB sets where at most one column per set can be basic.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpGubMatrix",
+      "brief": "Generalized Upper Bound (GUB) matrix for special LP structure\n\nImplements GUB constraints - sets of variables where exactly one (or at\nmost one) must be in the basis. This structure appears in problems like\nassignment, crew scheduling, and set partitioning.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpHelperFunctions",
+      "brief": "BLAS-1 style dense vector operations for Clp",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpInterior",
+      "brief": "Interior point (barrier) method for LP",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpLinearObjective",
+      "brief": "Standard linear objective function (c'x)",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpLsqr",
+      "brief": "LSQR iterative solver for sparse least-squares problems\n\nImplements the LSQR algorithm of Paige and Saunders (1982) for solving:\n- Ax = b (exact solve)\n- min ||b - Ax||_2 (least squares)\n- min ||(b) - (A    )x||_2 (damped/regularized)\n      ||(0)   (damp*I)  ||",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpMatrixBase",
+      "brief": "Abstract base class for constraint matrices in Clp\n\nDefines the interface that all matrix types must implement for use with\nClp algorithms. The abstraction allows specialized matrix formats that\nexploit structure (network, GUB, \u00b11 matrices) while providing a uniform\ninterface to the simplex solver.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpMessage",
+      "brief": "Message codes and localization for Clp solver output\n\nDefines the CLP_Message enum with all status and diagnostic message codes\nused by Clp during optimization. Messages are organized by solver phase:\n- CLP_SIMPLEX_*: General simplex status (finished, infeasible, etc.)\n- CLP_DUAL_*: Dual simplex specific messages\n- CLP_PRIMAL_*: Primal simplex specific messages\n- CLP_BARRIER_*: Interior point method messages\n\nClpMessage inherits from CoinMessages to provide localized message text.\nControl output verbosity via ClpSimplex::setLogLevel().",
+      "has_algorithm": false
+    },
+    {
+      "name": "ClpModel",
+      "brief": "Base class for LP/QP models - stores problem data without algorithm logic\n\nClpModel holds the complete representation of a linear or quadratic program:\nconstraint matrix, variable bounds, objective coefficients, and solution vectors.\nThis is the base class inherited by ClpSimplex and ClpInterior - it knows about\nproblem data but nothing about solution algorithms.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpModelParameters",
+      "brief": "Enumeration types for ClpModel parameter access\n\nDefines typed parameter indices for ClpModel's get/set methods:\n\nClpIntParam - Integer parameters:\n- ClpMaxNumIteration: Maximum simplex iterations\n- ClpMaxNumIterationHotStart: Hot start iteration limit\n- ClpNameDiscipline: Row/column naming mode (0=auto, 1=lazy, 2=full)\n\nClpDblParam - Double parameters:\n- ClpDualObjectiveLimit: Stop when dual objective exceeds\n- ClpPrimalObjectiveLimit: Stop when primal objective exceeds\n- ClpDualTolerance: Dual feasibility tolerance\n- ClpPrimalTolerance: Primal feasibility tolerance\n- ClpObjOffset: Constant term in objective\n- ClpMaxSeconds/ClpMaxWallSeconds: Time limits\n- ClpPresolveTolerance: Presolve zero tolerance\n\nClpStrParam - String parameters:\n- ClpProbName: Problem name from MPS file\n\nUtility templates for array operations:\n- ClpDisjointCopyN(), ClpFillN(), ClpCopyOfArray(): Non-COIN versions\n\nClpTrustedData: Opaque structure for passing user data to trusted code.",
+      "has_algorithm": false
+    },
+    {
+      "name": "ClpNetworkBasis",
+      "brief": "Specialized factorization for pure network problems",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpNetworkMatrix",
+      "brief": "Specialized matrix for pure network LP problems\n\nImplements efficient storage for network flow problems where each column\n(arc) has exactly two nonzeros: +1 at the head node and -1 at the tail node.\nThis representation requires only O(n) storage for row indices vs O(2n) for\na general sparse matrix.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpNode",
+      "brief": "Node representation for branch-and-bound fathoming\n\nSupport classes for Clp's fathom capability - solving subproblems\nin a branch-and-bound tree. Used when Clp is embedded in CBC.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpNonLinearCost",
+      "brief": "Piecewise linear cost handling and bound infeasibility tracking\n\nManages piecewise linear objective functions and tracks bound violations\nduring primal simplex. When variables move outside their bounds, this class\ncomputes the appropriate infeasibility penalty costs.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpObjective",
+      "brief": "Abstract base class for objective functions",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPEDualRowDantzig",
+      "brief": "Positive Edge enhanced Dantzig pricing for dual simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPEDualRowSteepest",
+      "brief": "Positive Edge enhanced steepest edge for dual simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPEPrimalColumnDantzig",
+      "brief": "Positive Edge enhanced Dantzig pricing for primal simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPEPrimalColumnSteepest",
+      "brief": "Positive Edge enhanced steepest edge for primal simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPESimplex",
+      "brief": "Positive Edge anti-degeneracy framework for simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPackedMatrix",
+      "brief": "Standard sparse matrix implementation for Clp (wraps CoinPackedMatrix)\n\nThe default matrix type for Clp, implementing ClpMatrixBase using\nCoinPackedMatrix for sparse storage. This is appropriate for general\nsparse LP matrices without special structure.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpParam",
+      "brief": "Individual parameter definitions for Clp control",
+      "has_algorithm": false
+    },
+    {
+      "name": "ClpParam",
+      "brief": "Parameter type enums for Clp and CBC command-line interface (legacy)\nCopyright (C) 2002, International Business Machines Corporation.\nEPL-1.0 license.\n\nClpParameterType enum: ranges 1-100 (double), 101-200 (int), 201-300\n(Clp string), 301-400 (Cbc string), 401-500 (Clp actions), 501-600 (Cbc\nactions). Parameters for tolerances, limits, scaling, algorithms, output.\nThis file is in Attic (deprecated) - see ClpParameters.hpp for current version.\n\n@deprecated Replaced by ClpParameters.hpp",
+      "has_algorithm": false
+    },
+    {
+      "name": "ClpParamUtils",
+      "brief": "Parameter handler callback functions for ClpParam",
+      "has_algorithm": false
+    },
+    {
+      "name": "ClpParameters",
+      "brief": "Command-line and runtime parameter management",
+      "has_algorithm": false
+    },
+    {
+      "name": "ClpPdco",
+      "brief": "PDCO (Primal-Dual interior point for Convex Objectives) algorithm",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPdcoBase",
+      "brief": "Abstract base class for PDCO problem customization\n\nStrategy pattern interface for defining custom convex objectives in PDCO.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPlusMinusOneMatrix",
+      "brief": "Specialized matrix where all nonzeros are +1 or -1\n\nEfficient storage for constraint matrices where every coefficient is either\n+1 or -1. Common in set partitioning, covering, and assignment problems.\nNo element values are stored - only row indices, with separate start arrays\nfor positive and negative entries in each column.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPredictorCorrector",
+      "brief": "Mehrotra's predictor-corrector interior point algorithm",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPresolve",
+      "brief": "Clp interface to CoinPresolve for LP preprocessing",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPrimalColumnDantzig",
+      "brief": "Dantzig's rule for primal simplex pivot selection\n\nImplements the simplest pivot column selection: choose the nonbasic variable\nwith the most negative reduced cost (for minimization). This is Dantzig's\noriginal 1947 rule.\n\nSimple and fast per iteration, but typically requires more iterations than\nsteepest edge methods on degenerate or difficult problems. Use\nClpPrimalColumnSteepest for better performance on most problems.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPrimalColumnPivot",
+      "brief": "Abstract base class for primal simplex pivot column selection\n\nIn primal simplex, the pivot column (entering variable) is chosen based on\nreduced cost. This class defines the interface for different selection\nstrategies. Derived classes implement specific rules.\n\nKey methods:\n- pivotColumn(): Select which column (variable) enters the basis\n- updateWeights(): Maintain pricing information after pivots\n- saveWeights(): Preserve weights across refactorizations",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPrimalColumnSteepest",
+      "brief": "Steepest edge and Devex pivot selection for primal simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpPrimalQuadraticDantzig",
+      "brief": "Dantzig-style pricing for quadratic programming\n\nExtends ClpPrimalColumnPivot for QP problems where the reduced cost\ndepends on the current solution (due to the quadratic objective).",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpQuadraticObjective",
+      "brief": "Quadratic objective function for convex QP (x'Qx/2 + c'x)\n\nImplements convex quadratic objectives for quadratic programming.\nThe quadratic term is stored as a CoinPackedMatrix Q, supporting\nboth full symmetric and half (lower triangular) storage.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpSimplex",
+      "brief": "Main simplex solver class - orchestrates primal and dual simplex algorithms",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpSimplexDual",
+      "brief": "Dual simplex algorithm implementation",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpSimplexNonlinear",
+      "brief": "Nonlinear LP solver using reduced gradient and SLP methods",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpSimplexOther",
+      "brief": "Auxiliary simplex operations: ranging, parametrics, and utilities",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpSimplexPrimal",
+      "brief": "Primal simplex algorithm implementation",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpSolve",
+      "brief": "Algorithm selection and configuration for ClpSimplex::initialSolve()",
+      "has_algorithm": true
+    },
+    {
+      "name": "ClpSolver",
+      "brief": "Standalone Clp solver driver and command-line interface",
+      "has_algorithm": true
+    },
+    {
+      "name": "Clp_C_Interface",
+      "brief": "C language interface to Clp solver\n\nPure C API for embedding Clp in C programs or creating language bindings.\nDesign follows OSL V3 conventions for familiarity.\n\nOpaque handles:\n- Clp_Simplex: Pointer to internal ClpSimplex object\n- Clp_Solve: Pointer to ClpSolve options object\n\nNaming convention: C++ method foo() becomes Clp_foo(model, ...)\nwhere model is the first parameter.\n\nKey function groups:\n- Construction: Clp_newModel(), Clp_deleteModel()\n- Problem setup: Clp_loadProblem(), Clp_readMps()\n- Solving: Clp_dual(), Clp_primal(), Clp_initialSolve()\n- Solution access: Clp_getColSolution(), Clp_getRowActivity()\n- Parameters: Clp_setLogLevel(), Clp_setMaximumIterations()\n\nCallback support: clp_callback typedef for user message handling.\n\nThread safety: Each Clp_Simplex is independent; do not share across threads.",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinAbcBaseFactorization",
+      "brief": "Core ABC SIMD-optimized LU factorization implementation",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinAbcCommon",
+      "brief": "Common definitions for ABC (A Better Coin) optimized simplex",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinAbcCommonFactorization",
+      "brief": "Common infrastructure for ABC SIMD-optimized factorization",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinAbcDenseFactorization",
+      "brief": "Abstract base class for ABC factorization and dense submatrix handling",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinAbcFactorization",
+      "brief": "ABC optimized LU factorization variants",
+      "has_algorithm": true
+    },
+    {
+      "name": "CoinAbcHelperFunctions",
+      "brief": "SIMD-optimized scatter/gather operations for ABC factorization\n\nHigh-performance kernels for sparse matrix operations using:\n- Manual loop unrolling (UNROLL_SCATTER, UNROLL_GATHER)\n- AVX/AVX2 intrinsics when available\n- Cilk parallel loops with configurable grainsize\n- Prefetching hints (coin_prefetch macros)\n\nKey operations:\n- CoinAbcScatterUpdate: region[index[j]] -= value[j] * pivot\n- CoinAbcGatherUpdate: dot product over sparse indices\n- Memory utilities: CoinAbcMemcpyLong, CoinAbcMemset0Long\n\nIncludes specialized ScatterUpdateN functions for N=1..8 and 4N variants\nusing function pointer dispatch (scatterStruct) for optimal performance.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Idiot",
+      "brief": "Heuristic crash procedure for finding initial LP solutions\n\nThe \"Idiot\" algorithm is a simple heuristic that finds approximate primal\nsolutions quickly. Despite its self-deprecating name (which is copylefted!),\nit serves as an effective \"crash\" procedure to warm-start the simplex method.",
+      "has_algorithm": true
+    },
+    {
+      "name": "MyEventHandler",
+      "brief": "Example event handler demonstrating callback customization\n\nSample implementation of ClpEventHandler showing how users can\nintercept simplex events for custom processing. Used in unit tests.\n\nTo create your own handler:\n1. Inherit from ClpEventHandler\n2. Override event() method\n3. Return 0 to continue, non-zero to stop\n4. Attach via ClpSimplex::passInEventHandler()\n\nAvailable events (see ClpEventHandler::Event):\n- endOfIteration: After each pivot\n- endOfFactorization: After basis refactorization\n- endOfValuesPass: After crash/values pass\n- node: During B&B (if used with Cbc)\n\nThe model_ pointer gives access to full solver state including\ncurrent solution, basis, and objective value.",
+      "has_algorithm": false
+    },
+    {
+      "name": "MyMessageHandler",
+      "brief": "Example message handler demonstrating custom logging\n\nSample implementation of CoinMessageHandler showing how users can\ncustomize message output. Used in unit tests to demonstrate\ncapturing solver progress and collecting feasible extreme points.\n\nFeatures demonstrated:\n- Override print() to intercept all solver messages\n- Access to model_ for querying current solution\n- Collection of feasible extreme points during solve\n- Custom file output via FILE* pointer\n\nUse case - Feasible point enumeration:\nDuring optimization, each time the solver finds a new feasible\nextreme point (basic feasible solution), the handler captures it.\nUseful for problems where alternative optima matter.\n\nTo create your own handler:\n1. Inherit from CoinMessageHandler\n2. Override print() method\n3. Attach via ClpSimplex::passInMessageHandler()",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiClpSolverInterface",
+      "brief": "Osi interface for CLP simplex solver\nCopyright (C) 2000, International Business Machines Corporation.\nEPL-1.0 license.\n\nOsiClpSolverInterface wraps ClpSimplex via the Osi abstraction, enabling\nClp use within CBC and with Cgl cut generators. Key features: hot-starting\nfor strong branching (markHotStart/solveFromHotStart), simplex tableau\naccess (getBInvARow/getBInvACol), disaster recovery for numerical issues.",
+      "has_algorithm": true
+    }
+  ]
+}

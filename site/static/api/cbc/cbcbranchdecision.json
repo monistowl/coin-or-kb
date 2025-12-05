@@ -1,0 +1,24 @@
+{
+  "name": "CbcBranchDecision",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcBranchDecision.hpp",
+  "brief": "Abstract base for branching variable selection\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+  "algorithms": [
+    {
+      "name": "Branching Variable Selection Strategies:\nAfter identifying fractional variables, must choose which to branch on.\nDifferent strategies trade off computational cost vs tree size.\n\nCommon Scoring Functions:\n- Most infeasible: max |x_j - round(x_j)| - cheap but often poor\n- Product score: score_j = max(D\u207a_j\u00b7D\u207b_j, \u03b5) where D are degradations\n- Hybrid: (1-\u03bc)\u00b7min(D\u207a,D\u207b) + \u03bc\u00b7max(D\u207a,D\u207b), \u03bc typically 1/6\n- Pseudo-costs: \u03c8\u207a_j\u00b7(\u2308x_j\u2309-x_j) \u00d7 \u03c8\u207b_j\u00b7(x_j-\u230ax_j\u230b)\n\nStrong branching workflow:\n1. Select k candidates (most fractional or pseudocost-based)\n2. For each candidate, solve LP for both branches (with iteration limit)\n3. Record D\u207a_j = z\u207a_j - z, D\u207b_j = z\u207b_j - z (or infeasible/cutoff)\n4. Score candidates, pick best\n5. Update pseudo-costs from observed degradations",
+      "math": "Reliability branching: Use pseudo-costs \u03c8_j unless branched on\nvariable < \u03b7_rel times, then strong branch to improve estimate.\nBalances accuracy vs cost of strong branching.",
+      "complexity": "Strong branching: O(k \u00d7 LP_iterations) per node.\nPseudo-costs: O(n) after warmup. Reliability: adaptive O(k') where k' \u2264 k.",
+      "ref": [
+        "Achterberg, Koch & Martin, \"Branching rules revisited\",\n     Operations Research Letters 33 (2005) 42-54\n\nCbcBranchDecision defines HOW TO CHOOSE between branching candidates:\n- betterBranch(): Compare two CbcBranchingObjects after strong branching\n- bestBranch(): Compare N candidates and return best index\n\nUsed after strong branching evaluates candidates. Decision considers:\n- changeUp/changeDown: Objective change estimates\n- numInfeasibilitiesUp/Down: Remaining infeasibilities"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcBranchDefaultDecision for simple selection",
+    "CbcBranchDynamicDecision for pseudocost-based selection",
+    "CbcBranchingObject for what gets compared",
+    "OsiChooseVariable for variable selection integration\n\nEdwin 11/12/2009 carved from CbcBranchBase"
+  ]
+}

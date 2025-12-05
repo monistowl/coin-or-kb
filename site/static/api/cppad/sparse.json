@@ -1,0 +1,9 @@
+{
+  "name": "sparse",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/sparse.hpp",
+  "brief": "Core AD functionality: sparse",
+  "algorithms": [],
+  "methods": []
+}

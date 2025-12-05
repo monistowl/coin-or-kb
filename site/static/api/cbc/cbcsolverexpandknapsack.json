@@ -1,0 +1,20 @@
+{
+  "name": "CbcSolverExpandKnapsack",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcSolverExpandKnapsack.hpp",
+  "brief": "Knapsack constraint expansion for tighter formulations",
+  "algorithms": [
+    {
+      "name": "Knapsack Enumeration Reformulation\nCopyright (C) 2007, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nexpandKnapsack(): Transforms x*y products (both integer) into knapsack form.\n\nCreates tighter formulation by:\n- Enumerating possible x*y values\n- Creating auxiliary binary variables for each value\n- Adding SOS constraints for mutual exclusion\n\nOutputs:\n- whichColumn: Mapping from new to original columns\n- knapsackStart/knapsackRow: Structure of expanded knapsacks\n- stored: Generated cuts from expansion\n- tightenedModel: Reformulated CoinModel\n\nafterKnapsack(): Recovers original solution from expanded form.\nMaps knapsackSolution back to original variable values.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinModel for model representation",
+    "CglStored for storing generated cuts"
+  ]
+}

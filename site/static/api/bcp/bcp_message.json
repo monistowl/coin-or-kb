@@ -1,0 +1,21 @@
+{
+  "name": "BCP_message",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_message.hpp",
+  "brief": "Abstract message passing interface for BCP parallelism",
+  "algorithms": [
+    {
+      "name": "Message Passing: PVM/MPI/Single Process Abstraction\n\nBCP_message_environment is the base class for all message passing\nimplementations. Derived classes implement the protocol:\n\n**Implementations:**\n- BCP_message_single: Single-process (no parallelism)\n- BCP_message_pvm: PVM (Parallel Virtual Machine)\n- BCP_message_mpi: MPI (Message Passing Interface)\n\n**Core operations:**\n- register_process(): Get process ID\n- parent_process(): Get spawning process ID\n- alive(): Test if processes are running\n\n**Point-to-point:**\n- send(): Send message to specific process\n- receive(): Blocking receive with timeout\n- probe(): Non-blocking check for messages\n\n**Collective:**\n- multicast(): Send to multiple processes\n- start_process(): Spawn new process\n- start_processes(): Spawn multiple processes\n\n**Message tags (BCP_message_tag):**\nPredefined tags for different message types (node data,\nsolutions, cuts, variables, etc.)",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_buffer.hpp for message serialization",
+    "BCP_message_tag.hpp for tag definitions",
+    "BCP_message_single.hpp for single-process implementation"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "MKC_solution",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Mkc/include/MKC_solution.hpp",
+  "brief": "MKC solution representation",
+  "algorithms": [
+    {
+      "name": "MKC Solution: Selected Column Set\n\nStores integer solution: set of selected MKC_var columns\nthat cover all orders exactly once.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

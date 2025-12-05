@@ -1,0 +1,9 @@
+{
+  "name": "ctor",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/atomic/four/ctor.hpp",
+  "brief": "Core AD functionality: ctor",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,28 @@
+{
+  "name": "btf",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "BTF/Include/btf.h",
+  "brief": "Block Triangular Form permutation for sparse matrices\n\nBTF computes permutations to transform a sparse matrix into block upper\ntriangular form (BTF). This decomposes the matrix into independent blocks\nthat can be processed separately, improving efficiency for factorization.\n\nThree main routines:\n- btf_maxtrans: Maximum transversal (zero-free diagonal matching)\n- btf_strongcomp: Strongly connected components (block decomposition)\n- btf_order: Combined BTF ordering (calls both above)",
+  "algorithms": [
+    {
+      "name": "Tarjan's Strongly Connected Components:\n  Find permutation P such that P*A*P' is block upper triangular.\n  1. Build directed graph: edge i\u2192j if A(i,j) \u2260 0 and i \u2260 j\n  2. Find SCCs using depth-first search with low-link values\n  3. Order SCCs in reverse topological order",
+      "math": "Structural rank: max # nonzeros achievable on diagonal = sprank(A)\n  If sprank(A) < n, matrix is structurally singular.\n  BTF form: P*A*Q = | B_11  B_12 ... | with square diagonal blocks B_ii\n                    |  0   B_22 ... |",
+      "complexity": "Maximum transversal: O(nnz + n) time and O(n) space\n  SCC decomposition: O(nnz + n) time (single DFS pass)\n  Total BTF ordering: O(nnz + n) time and space",
+      "ref": [
+        "Duff (1981). \"On Algorithms for Obtaining a Maximum Transversal\".\n     ACM Trans. Math. Software 7(3):315-330.",
+        "Tarjan (1972). \"Depth-first search and linear graph algorithms\".\n     SIAM J. Computing 1(2):146-160."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "klu.h for sparse LU factorization using BTF",
+    "btf_order() for combined BTF ordering",
+    "btf_maxtrans()",
+    "btf_order() for combined BTF ordering",
+    "btf_strongcomp()",
+    "btf_maxtrans(), btf_strongcomp()",
+    "btf_order()"
+  ]
+}

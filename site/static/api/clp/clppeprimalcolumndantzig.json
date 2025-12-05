@@ -1,0 +1,23 @@
+{
+  "name": "ClpPEPrimalColumnDantzig",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPEPrimalColumnDantzig.hpp",
+  "brief": "Positive Edge enhanced Dantzig pricing for primal simplex",
+  "algorithms": [
+    {
+      "name": "Bi-Dimensional Pricing:\nScore(j) = |c\u0304_j|^(1-\u03c8) \u00d7 Compat(j)^\u03c8\n\nWhere \u03c8 \u2208 [0,1] controls priority (default 0.5):\n  \u03c8 = 0: Pure Dantzig (ignore compatibility)\n  \u03c8 = 1: Pure compatibility (ignore reduced cost)\n  \u03c8 = 0.5: Balanced - good default",
+      "math": "DEGENERACY PROBLEM:\nWhen basic variables are at bounds, ratio test gives \u03b8 = 0.\nPivot changes basis but x, z unchanged \u2192 no progress.\nDegenerate pivots can cycle or stall for many iterations.",
+      "complexity": "O(n) per pricing like Dantzig, but with compatibility\ncheck overhead. Compatibility set updated periodically, not every iter.",
+      "ref": [
+        "Towhidi, Desrosiers, Soumis (2014): \"The positive edge criterion\n     within COIN-OR's CLP\""
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPESimplex for the compatibility framework",
+    "ClpPrimalColumnDantzig for the base pricing rule",
+    "ClpPEPrimalColumnSteepest for steepest edge variant"
+  ]
+}

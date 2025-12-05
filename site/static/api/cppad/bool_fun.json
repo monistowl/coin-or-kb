@@ -1,0 +1,9 @@
+{
+  "name": "bool_fun",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/bool_fun.hpp",
+  "brief": "Core AD functionality: bool fun",
+  "algorithms": [],
+  "methods": []
+}

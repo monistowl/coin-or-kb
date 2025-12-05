@@ -1,0 +1,23 @@
+{
+  "name": "CglZeroHalf",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglZeroHalf/CglZeroHalf.hpp",
+  "brief": "Zero-half ({0,1/2}) cutting planes\n\nGenerates {0,1/2}-cuts by taking mod-2 combinations of constraint rows.\nBased on Andreello, Caprara, Fischetti (INFORMS J. Computing, 2007).\n\nTheory: If we combine constraints with {0, 1/2} multipliers such that\nall LHS coefficients become even, we get a valid cut by dividing by 2\nand rounding down the RHS.\n\nAlgorithm outline:\n1. Convert constraint matrix to integers (scaling)\n2. Reduce coefficients mod 2 (0-1 matrix)\n3. Find combinations where LHS sums to 0 mod 2 per column\n4. These yield valid {0,1/2}-cuts when RHS is odd\n\nInternal representation:\n- mr_, mc_, mnz_: Matrix dimensions and nonzeros\n- mtbeg_, mtcnt_, mtind_, mtval_: Sparse row storage\n- vlb_, vub_: Variable bounds (integer scaled)\n- Cgl012Cut cutInfo_: Separation algorithm state\n\nUses Dijkstra shortest path (cglShortestPath) for separation.",
+  "algorithms": [
+    {
+      "name": "{0,1/2}-Chv\u00e1tal-Gomory Cuts via Mod-2 Separation:\nWorking over GF(2), find row combinations that zero out LHS coefficients:\n1. Scale and round matrix to integers\n2. Reduce all coefficients mod 2 \u2192 binary (0-1) matrix A'\n3. Find subset S of rows where \u03a3_{i\u2208S} A'_{ij} \u2261 0 (mod 2) for all j\n4. If \u03a3_{i\u2208S} b_i is odd \u2192 valid cut: (1/2)\u03a3_{i\u2208S} (a_i x \u2264 b_i)\n   becomes \u03a3_{i\u2208S} \u230aa_ij/2\u230b x_j \u2264 \u230a(\u03a3b_i)/2\u230b",
+      "math": "The validity comes from Chv\u00e1tal-Gomory closure theory:\nGiven Ax \u2264 b, x \u2265 0 integer, any combination u\u1d40A with u \u2208 {0, 1/2}\u1d50\nwhere u\u1d40A is integral gives valid inequality: \u230au\u1d40A\u230bx \u2264 \u230au\u1d40b\u230b\n\nThe separation problem reduces to finding odd cycles in an auxiliary\ngraph, solved via shortest-path algorithms. The graph encodes:\n- Nodes: variables and their complements\n- Edges: constraints linking variable parities",
+      "complexity": "Separation via shortest path: O(V + E log V) per source.\nGraph construction: O(m\u00b7n) where m = rows, n = columns.\nHeuristic enumeration may be polynomial in practice.",
+      "ref": [
+        "Andreello, Caprara & Fischetti (2007). \"Embedding Cuts in a Branch\n  and Cut Framework: a Computational Study with {0,1/2}-Cuts\".\n  INFORMS J. Computing 19(2):229-238. [Implementation reference]",
+        "Caprara & Fischetti (1996). \"{0,1/2}-Chv\u00e1tal-Gomory Cuts\".\n  Mathematical Programming 74:221-235. [Theory foundation]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Cgl012cut.hpp for internal separation machinery",
+    "CglGomory for related MIP cutting plane approach"
+  ]
+}

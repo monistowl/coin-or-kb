@@ -1,0 +1,14 @@
+{
+  "name": "AlpsSolutionPool",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsSolutionPool.h",
+  "brief": "Storage for feasible solutions found during search\n\nAlpsSolutionPool stores solutions ordered by quality (priority).\nLower priority value = better solution (for minimization).\n\n**Storage:**\n- solutions_: multimap<double, AlpsSolution*> ordered by quality\n- maxNumSolutions_: Maximum solutions to retain\n\n**Key operations:**\n- addKnowledge(): Add solution, possibly discard worst if at limit\n- getBestKnowledge(): Get solution with lowest priority (best)\n- getAllKnowledges(): Get all solutions for output\n- clean(): Delete all solutions\n\n**AlpsSolutionInterface macro:**\nConvenience macro defining getNumSolutions, getBestSolution, etc.\nfor use in classes that contain a solution pool.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsSolution for solution base class",
+    "AlpsKnowledgePool for base interface",
+    "AlpsKnowledgeBroker::solPool_ for broker's solution pool"
+  ]
+}

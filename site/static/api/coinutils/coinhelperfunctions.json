@@ -1,0 +1,26 @@
+{
+  "name": "CoinHelperFunctions",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinHelperFunctions.hpp",
+  "brief": "Low-level utility functions for array manipulation, copying, and comparison\n\nProvides optimized template functions for common array operations used throughout\nCOIN-OR: copying (with Duff's device optimization), filling, zeroing, sorting checks,\niota generation, and element deletion. Also includes random number generation and\nfile I/O utilities.\n\nMany functions offer ~2x speedup over naive loops via loop unrolling and\nDuff's device techniques.",
+  "algorithms": [
+    {
+      "name": "Duff's device - Tom Duff's loop unrolling technique that uses switch\n           statement fall-through to handle remainder elements, reducing loop\n           overhead from O(n) branches to O(n/8) branches.",
+      "math": "",
+      "complexity": "Summary of major functions:\n            - CoinCopyN, CoinDisjointCopyN, CoinFillN, CoinZeroN: O(n)\n            - CoinIsSorted: O(n)\n            - CoinIotaN: O(n)\n            - CoinDeleteEntriesFromArray: O(n + k log k) where k = deletions\n            - CoinDrand48: O(1) per call",
+      "ref": [
+        "Duff, T. (1983). \"Duff's Device\" - Usenet comp.lang.c posting.\n     Originally for copying to memory-mapped display registers."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinSort.hpp for sorting functions",
+    "CoinError.hpp for exception handling",
+    "CoinDisjointCopyN for faster non-overlapping copy",
+    "CoinCopyN for count-based interface",
+    "CoinCopyN for overlap-safe copy",
+    "CoinDrand48 for global (non-thread-safe) random numbers"
+  ]
+}

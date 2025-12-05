@@ -1,0 +1,13 @@
+{
+  "name": "TaskCheckDualStagnation",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskCheckDualStagnation.h",
+  "brief": "Detect stalled dual bound improvement\n\nTriggers countermeasures when dual bound stops improving.\n\n**TaskCheckDualStagnation Class:**\n- taskIDIfTrue: Jump target when stagnation detected\n- run(): Check if dual bound unchanged for N iterations\n\n**Stagnation Recovery:**\n- May trigger stronger cuts or reformulation\n- Indicates outer approximation isn't tightening",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskCheckPrimalStagnation.h for primal stagnation",
+    "DualSolver.h for dual bound computation"
+  ]
+}

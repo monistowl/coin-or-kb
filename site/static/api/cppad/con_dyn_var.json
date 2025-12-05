@@ -1,0 +1,9 @@
+{
+  "name": "con_dyn_var",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/con_dyn_var.hpp",
+  "brief": "Core AD functionality: con dyn var",
+  "algorithms": [],
+  "methods": []
+}

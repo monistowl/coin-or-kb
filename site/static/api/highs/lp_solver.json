@@ -1,0 +1,14 @@
+{
+  "name": "lp_solver",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/lp_solver.h",
+  "brief": "IPX interior point LP solver main class\n\nImplements primal-dual interior point method with crossover to basic solution.\n\n**Model Loading:**\n- LoadModel(): LP in standard form (c, lb, ub, A, rhs, constr_type)\n- LoadIPMStartingPoint(): User-provided initial point (x, xl, xu, y, zl, zu)\n\n**Solution Methods:**\n- Solve(): Run IPM + optional crossover to basis\n- CrossoverFromStartingPoint(): Convert complementary point to basis\n\n**Solution Access:**\n- GetInfo(): Solver status and statistics\n- GetInteriorSolution(): IPM iterate (primal, slack, dual)\n- GetBasicSolution(): Basic solution with basis status (vbasis, cbasis)\n\n**IPM Pipeline (InteriorPointSolve):**\n1. RunInitialIPM(): Initial centering iterations\n2. BuildStartingBasis(): Construct basis from weighted columns\n3. RunMainIPM(): Main IPM iterations with basis preconditioning\n4. RunCrossover(): Push to basis via dual/primal pushes\n\n**Key Components:**\n- control_: Parameters and logging\n- model_: Preprocessed LP data\n- iterate_: Current IPM point (x, y, z, slacks)\n- basis_: Basis for preconditioning and crossover",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipm/ipx/basis.h for basis management",
+    "ipm/ipx/ipm.h for IPM algorithm details",
+    "ipm/IpxWrapper.h for HiGHS integration"
+  ]
+}

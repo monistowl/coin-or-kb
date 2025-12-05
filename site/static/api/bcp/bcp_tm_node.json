@@ -1,0 +1,21 @@
+{
+  "name": "BCP_tm_node",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_tm_node.hpp",
+  "brief": "Search tree node representation in Tree Manager",
+  "algorithms": [
+    {
+      "name": "Search Tree Management: Delta Encoding & Distributed Storage\n\nDefines how the TM represents and manages the branch-and-bound tree.\n\n**BCP_tm_node_status:**\n- BCP_DefaultNode: Initial state\n- BCP_ProcessedNode: Fully processed\n- BCP_ActiveNode: Currently being processed by LP\n- BCP_PrunedNode_*: Pruned (by bound, infeasibility, or discarded)\n- BCP_CandidateNode: In candidate queue\n- BCP_NextPhaseNode_*: Deferred to next phase\n\n**BCP_tm_node:**\nExtends CoinTreeNode with BCP-specific data:\n- status: Current node status\n- _index: Unique node identifier\n- _parent: Parent node pointer\n- _children: Child node pointers\n- lp, cg, cp, vg, vp: Process assignments\n- _*_storage: How vars/cuts/warmstart stored (explicit vs. delta)\n- _data: Node description and user data\n\n**BCP_tree:**\nContainer for all nodes with:\n- root(): Get root node\n- size(): Total nodes created\n- maxdepth(): Deepest level reached\n- true_lower_bound(): Global lower bound\n\n**BCP_tm_node_to_send:**\nHandles asynchronous node transmission to LP, collecting\nancestor data as needed for explicit storage reconstruction.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm.hpp for Tree Manager",
+    "BCP_node_change.hpp for node delta encoding",
+    "CoinSearchTree for node selection strategies"
+  ]
+}

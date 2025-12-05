@@ -1,0 +1,20 @@
+{
+  "name": "IpGenAugSystemSolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpGenAugSystemSolver.hpp",
+  "brief": "Augmented system solver using GenKKTSolverInterface\n\nGenAugSystemSolver adapts the AugSystemSolver interface to use\nGenKKTSolverInterface, which provides a more generic linear solver\ninterface supporting iterative methods.\n\nThis class:\n- Extracts raw Number* arrays from Vector objects\n- Passes Matrix objects directly from the NLP\n- Manages caching to avoid redundant matrix updates\n\nMultiSolve() implementation:\n1. Check if augmented system matrices have changed (via tags)\n2. If changed, update solver_interface_ with new matrices\n3. Extract RHS vectors to raw arrays\n4. Call solver_interface_->Solve()\n5. Copy solutions back to Vector objects\n\nTag-based caching tracks:\n- W matrix and W_factor\n- Diagonal matrices D_x, D_s, D_c, D_d\n- Jacobians J_c, J_d\n- Regularization deltas\n\nInertia and quality:\n- NumberOfNegEVals(): Query solver for eigenvalue count\n- ProvidesInertia(): Check if solver supports this\n- IncreaseQuality(): Request better pivoting/tolerance",
+  "algorithms": [
+    {
+      "name": "Generic Augmented System Solver (Adapter Pattern):\nAdapts AugSystemSolver interface to GenKKTSolverInterface:\n1. Check matrix change via tag comparison (O(1))\n2. If matrices changed:\n   a. Extract diagonal values to Number* arrays\n   b. Pass matrices to solver_interface_->InitializeStructure()\n   c. Update internal tags\n3. For each RHS:\n   a. Extract Vector data to Number* arrays\n   b. Call solver_interface_->Solve()\n   c. Copy solution back to Vector objects",
+      "math": "Tag-based caching:\nEach matrix/vector has monotonic tag that changes on modification.\nComparison: current_tag != cached_tag \u2192 matrix changed.\nAvoids redundant matrix assembly/factorization when data unchanged.",
+      "complexity": "Tag check: O(1). Matrix update: O(nnz).\nSolve dominated by underlying solver: O(nnz\u00b7fill) sparse, O(n\u00b3) dense.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpAugSystemSolver.hpp for base interface",
+    "IpGenKKTSolverInterface.hpp for the solver interface"
+  ]
+}

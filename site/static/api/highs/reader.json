@@ -1,0 +1,9 @@
+{
+  "name": "reader",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "extern/filereaderlp/reader.hpp",
+  "brief": "HiGHS QP solver component\n\nPart of HiGHS quadratic programming active set solver.",
+  "algorithms": [],
+  "methods": []
+}

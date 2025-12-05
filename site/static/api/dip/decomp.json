@@ -1,0 +1,23 @@
+{
+  "name": "Decomp",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/Decomp.h",
+  "brief": "Central header with enums, constants, and solver interfaces for DIP\n\nThis is the foundational include for DIP (Decomposition for Integer\nProgramming). It provides all enums, constants, and conditional solver\ninterface includes.",
+  "algorithms": [
+    {
+      "name": "Decomposition Methods for Integer Programming:\nExploit problem structure by partitioning constraints into\n\"easy\" subproblems and \"complicating\" linking constraints.\n\nDANTZIG-WOLFE DECOMPOSITION (Price-and-Cut):\nOriginal:  min c'x s.t. A\u00b7x \u2265 b, D\u00b7x \u2265 d, x \u2208 Z\nMaster:    min \u03a3\u2096 (c's\u2096)\u03bb\u2096 s.t. \u03a3\u2096 (A\u00b7s\u2096)\u03bb\u2096 \u2265 b, \u03a3\u03bb\u2096 = 1\nwhere s\u2096 are extreme points of P = conv{x: D\u00b7x \u2265 d, x \u2208 Z}\n\nPricing subproblem: min (c - \u03c0'A)\u00b7x over x \u2208 P\nColumn s\u2096 has negative reduced cost if min_x < \u03c0\u2080\n\nLAGRANGIAN RELAXATION (Relax-and-Cut):\nRelax complicating constraints with multipliers \u03bc:\n  L(\u03bc) = min c'x + \u03bc'(b - A\u00b7x) s.t. D\u00b7x \u2265 d\n       = \u03bc'b + min (c - A'\u03bc)'x s.t. D\u00b7x \u2265 d\nL(\u03bc) is lower bound; maximize over \u03bc (Lagrangian dual)\n\nBRANCH-PRICE-CUT:\nCombines: B&B tree search + column generation + cut generation\nAt each node: price columns, add cuts, then branch",
+      "math": "Dantzig-Wolfe bound:\nz_DW \u2265 z_LP (at least as tight as LP relaxation)\nEquality when linking constraints have block-angular structure\n\nLagrangian bound: z_LR = max_\u03bc L(\u03bc) \u2265 z_LP\nz_DW = z_LR under mild conditions (no duality gap)",
+      "complexity": "- Pricing: complexity of subproblem (e.g., knapsack = O(nW))\n- Master LP: O(iterations \u00d7 columns \u00d7 linking_rows)\n- Overall: pseudo-polynomial for structured problems",
+      "ref": [
+        "Vanderbeck & Wolsey (2010). \"Reformulation and Decomposition\n  of Integer Programs\". 50 Years of Integer Programming.\n\n**Algorithm Types (DecompAlgoType):**\n- CUT: Cutting plane method only\n- PRICE_AND_CUT: Dantzig-Wolfe column generation with cuts\n- RELAX_AND_CUT: Lagrangian relaxation with cuts\n- VOL_AND_CUT: Volume algorithm variant\n\n**Algorithm Phases (DecompPhase):**\n- PHASE_PRICE1: Restricted master with artificial columns\n- PHASE_PRICE2: Normal pricing after Phase 1 feasibility\n- PHASE_CUT: Cut generation phase\n- PHASE_DONE: Node processing complete\n\n**Solver Support:**\nConditionally includes OSI interfaces for:\n- Clp (DIP_HAS_CLP): Default open-source LP\n- CPLEX (DIP_HAS_CPX): IBM commercial solver\n- Gurobi (DIP_HAS_GRB): Commercial solver\n- Xpress (DIP_HAS_XPR): FICO commercial solver\n- CBC (DIP_HAS_CBC): COIN-OR MIP solver\n- SYMPHONY (DIP_HAS_SYMPHONY): Parallel MIP solver\n\n**Key Constants:**\n- DecompBigNum: Large value for infinity (1e21)\n- DecompEpsilon: Numerical tolerance (1e-6)\n- DecompZero: Near-zero threshold (1e-14)"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DecompAlgo.h for base algorithm class",
+    "DecompApp.h for user application interface",
+    "DecompParam.h for algorithm parameters"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "BonFpForMinlp",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/OaGenerators/BonFpForMinlp.hpp",
+  "brief": "Feasibility Pump for MINLP via Outer Approximation\nCopyright (C) CNRS 2008. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nMinlpFeasPump: Feasibility Pump implementation for MINLP using OA\ndecomposition. Alternates between solving MIP with distance-to-integer\nobjective and NLP with fixed integers to find feasible solutions.",
+  "algorithms": [
+    {
+      "name": "Feasibility Pump for MINLP (OA-based):\n  Heuristic to find MINLP-feasible solutions via alternating projections:\n  1. Solve NLP relaxation \u2192 get (x*, y*) with y* fractional integers\n  2. Set MIP objective: min \u03a3_j |y_j - round(y_j*)| (distance to integrality)\n  3. Solve MIP with OA cuts \u2192 get integer \u0177\n  4. Fix integers: y = \u0177, solve NLP(y) for continuous x\n  5. If feasible: done. Else: add OA cuts, goto 2\n  6. Perturb objective if cycling detected",
+      "math": "Distance-to-integer objective:\n  \u0394(y, \u0177) = \u03a3_j (y_j - \u0177_j)\u00b2 or L1 norm \u03a3_j |y_j - \u0177_j|\n  For binary: \u0394 = \u03a3_{\u0177_j=0} y_j + \u03a3_{\u0177_j=1} (1 - y_j)\n  OA linearization: g(x*) + \u2207g(x*)\u1d40(x - x*) \u2264 0",
+      "complexity": "O(k \u00b7 (MIP + NLP)) where k = iterations until feasible.\n  Typically 5-50 iterations. Each MIP uses OA approximation.",
+      "ref": [
+        "Bonami, Cornu\u00e9jols, Lodi, Margot (2009). \"A Feasibility Pump for\n     Mixed Integer Nonlinear Programs\". Math. Programming 119:331-352.\n\nAuthors: Pierre Bonami, CNRS\nDate: February 13, 2009"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OaDecompositionBase for base OA framework",
+    "PumpForMinlp for alternative FP implementation"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "HighsLp",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsLp.h",
+  "brief": "Linear programming model data structure\n\n**HighsLp Class:**\nCore LP representation: min/max c'x s.t. row_lower <= Ax <= row_upper,\ncol_lower <= x <= col_upper\n\n**Data Members:**\n- num_col_, num_row_: Problem dimensions\n- col_cost_: Objective coefficients (c)\n- col_lower_, col_upper_: Variable bounds\n- row_lower_, row_upper_: Constraint bounds\n- a_matrix_: Constraint matrix A (HighsSparseMatrix, CSC or CSR)\n- sense_: Minimize (1) or Maximize (-1)\n- offset_: Constant objective offset\n- integrality_: Variable types (continuous, integer, semi-continuous, etc.)\n\n**Naming:**\n- col_names_, row_names_: Optional variable/constraint names\n- col_hash_, row_hash_: Name lookup hash tables\n\n**Scaling:**\n- scale_: Row/column scaling factors\n- is_scaled_: Whether scaling has been applied",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "model/HighsModel.h for LP + Hessian (QP)",
+    "HStruct.h for supporting types (ObjSense, HighsScale, etc.)",
+    "util/HighsSparseMatrix.h for matrix storage"
+  ]
+}

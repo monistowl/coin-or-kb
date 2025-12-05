@@ -1,0 +1,12 @@
+{
+  "name": "CoinParam",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinParam.hpp",
+  "brief": "Command line parameter parsing with keyword matching\n\nProvides base class for 'keyword value' parameters with support for\ninteger, double, string, and keyword-set values. Includes partial\nkeyword matching, range validation, and help text.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinParamUtils namespace for parsing utilities"
+  ]
+}

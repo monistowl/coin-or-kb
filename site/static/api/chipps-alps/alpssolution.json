@@ -1,0 +1,14 @@
+{
+  "name": "AlpsSolution",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsSolution.h",
+  "brief": "Base class for solutions found during ALPS tree search\n\nAlpsSolution is the abstract base class for feasible solutions.\nUsers inherit this class to store application-specific solution data.\n\n**Base class data:**\n- index_: Node index where solution was found\n- depth_: Tree depth where solution was found\n\n**Key virtual methods:**\n- print(): Output solution to stream\n- encode()/decodeToSelf(): Serialize for parallel sharing\n\nSolutions are stored in AlpsSolutionPool with their quality values.\nThe incumbent (best solution) is tracked and used for pruning.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsSolutionPool for solution storage",
+    "AlpsKnowledge for serialization interface",
+    "AlpsKnowledgeBroker::getBestKnowledge() for retrieving best solution"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "OSDecompSolverFactory",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/applications/columnGen/code/OSDecompSolverFactory.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "misc",
+  "library": "Creme",
+  "layer": "layer-4",
+  "header": "Creme/src/Base/misc.h",
+  "brief": "Miscellaneous utilities for Creme solver\n\nMemory allocation helpers (reallocate_double/int), bzip2 file I/O,\nmatrix transpose creation, and vector norm computation.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lpio.h for LP file reading",
+    "sparse.h for LP data structure"
+  ]
+}

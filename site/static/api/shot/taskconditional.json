@@ -1,0 +1,13 @@
+{
+  "name": "TaskConditional",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskConditional.h",
+  "brief": "Branching task based on runtime condition\n\nIf-then-else logic for task workflows.\n\n**TaskConditional Class:**\n- setCondition(fn): Boolean predicate to evaluate\n- setTaskIfTrue/False(): Branch targets\n- run(): Evaluate condition and execute appropriate branch\n\n**Usage in SHOT:**\n- Branch on problem type (MINLP vs NLP)\n- Skip tasks based on solver state",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskBase.h for task interface",
+    "TaskSequential.h for sequential execution"
+  ]
+}

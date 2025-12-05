@@ -1,0 +1,22 @@
+{
+  "name": "ClpSolve",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpSolve.hpp",
+  "brief": "Algorithm selection and configuration for ClpSimplex::initialSolve()",
+  "algorithms": [
+    {
+      "name": "Presolve Options:\nControls problem reduction before solving:\n  - Singleton: Remove rows/cols with single nonzero\n  - Doubleton: Substitute variables appearing in 2 rows\n  - Tripleton: Handle 3-row patterns\n  - Forcing: Detect implied bound constraints\n  - ImpliedFree: Find unbounded variables that are implicitly bounded\n  - Dupcol: Remove duplicate columns\n  - Duprow: Remove duplicate rows\n  - Tighten: Strengthen variable bounds\n\nnumberPasses controls how many presolve passes to run.\n\nAlso contains ClpSimplexProgress for detecting cycling during iteration.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpSimplex::initialSolve() which uses this class",
+    "ClpInterior for barrier/interior point implementation",
+    "Idiot.hpp for the Idiot crash procedure",
+    "ClpPresolve for the presolve implementation"
+  ]
+}

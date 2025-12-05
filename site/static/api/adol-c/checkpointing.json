@@ -1,0 +1,23 @@
+{
+  "name": "checkpointing",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/checkpointing.h",
+  "brief": "Checkpointing support for memory-efficient reverse mode AD\n\nImplements checkpointing (also known as \"time-stepping\" or \"revolve\")\nfor computing adjoints of long time-stepping computations with bounded\nmemory. Instead of storing all intermediate states, only selected\n\"checkpoints\" are stored, and segments are recomputed as needed.",
+  "algorithms": [
+    {
+      "name": "Binomial Checkpointing for Reverse Mode AD:\nEnables reverse-mode differentiation of N-step computations with only\ns checkpoints (where s << N) by intelligently scheduling recomputation.\n\nPROBLEM:\nReverse mode AD of y = F_N(F_{N-1}(...F_1(x)...)) requires storing all\nintermediate states x_1, x_2, ..., x_N to compute adjoints. For long\ntime-stepping simulations with N = 10^6+ steps, this is infeasible.\n\nSOLUTION (Optimal Binomial Schedule):\n1. Divide N steps into segments using s checkpoint slots\n2. Store state at strategically chosen checkpoints\n3. During reverse sweep:\n   a. Restore from nearest checkpoint before current position\n   b. Recompute forward to current position\n   c. Perform single reverse step\n   d. Repeat with optimal checkpoint repositioning\n\nThe binomial schedule is provably optimal: with s checkpoints and\nallowing r repetitions of each step, exactly C(s+r, r) steps can\nbe differentiated (where C is the binomial coefficient).",
+      "math": "Memory-computation trade-off:\n- Without checkpointing: Memory O(N), Recomputation O(1)\n- With s checkpoints: Memory O(s), Recomputation O(log(N)\u00b7N/s)\n- Optimal s \u2248 \u221a(N/c) where c = ratio of checkpoint to compute cost\n\nFor N steps with s checkpoints allowing r=1 repetition:\nMaximum steps: C(s+1,1) = s+1 (linear)\nMaximum steps with r repetitions: C(s+r,r) (grows super-linearly)",
+      "complexity": "O(N\u00b7log(N)) total forward evaluations for N steps with\nO(\u221aN) checkpoints. Per-step reverse cost remains O(1).",
+      "ref": [
+        "Griewank & Walther (2000). \"Algorithm 799: Revolve: An\n  Implementation of Checkpointing for the Reverse or Adjoint Mode\n  of Computational Differentiation\". ACM TOMS 26(1):19-45.",
+        "Griewank & Walther (2008). \"Evaluating Derivatives\", Ch. 12.\n\nUse cases:\n- Time-stepping ODEs/PDEs where storing all steps would exhaust memory\n- Long computational chains with limited storage budget\n- Trade-off between memory usage and recomputation cost"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "revolve.h for the underlying scheduling algorithm",
+    "externfcts.h for external function differentiation"
+  ]
+}

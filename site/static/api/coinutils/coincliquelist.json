@@ -1,0 +1,20 @@
+{
+  "name": "CoinCliqueList",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinCliqueList.hpp",
+  "brief": "Sequential storage for cliques found in conflict graphs",
+  "algorithms": [
+    {
+      "name": "Clique Storage:\n  Stores cliques as variable-length arrays with shared element pool\n  Operations:\n  - addClique(size, elements[]): append new clique\n  - cliqueElements(idx): retrieve clique by index\n  - computeNodeOccurrences: build inverse index (node \u2192 cliques)\n\n  Inverse index enables efficient lookup of which cliques contain a node",
+      "math": "Clique C \u2286 V is complete subgraph: \u2200u,v \u2208 C, (u,v) \u2208 E\n  Used in conflict graphs where edges represent incompatibility\n  Clique inequality: \u03a3_{i\u2208C} x_i \u2264 1 (at most one var in clique can be 1)",
+      "complexity": "addClique: O(clique_size) for copying elements\n  cliqueElements/cliqueSize: O(1) random access\n  computeNodeOccurrences: O(total_elements) one-time setup\n  nNodeOccurrences: O(1) after setup",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinBronKerbosch for clique enumeration algorithm",
+    "CoinConflictGraph for the underlying conflict structure\n\n\\copyright{Copyright 2020 Brito, S.S. and Santos, H.G.}\n\\license{This This code is licensed under the terms of the Eclipse Public License (EPL).}"
+  ]
+}

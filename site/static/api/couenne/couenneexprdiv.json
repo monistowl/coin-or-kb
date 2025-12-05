@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprDiv",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprDiv.hpp",
+  "brief": "Division expression w = x / y\n\nRepresents division of two expressions. Division is reformulated as\nmultiplication: w = x/y becomes w*y = x, using bilinear convexification.\n\n**Standardization:**\nDivision x/y is converted to x * (1/y), where 1/y is handled by exprInv.\nThis allows reuse of McCormick envelope cuts for the product.\n\n**Linearity check:**\nIf denominator is constant, expression inherits linearity of numerator.\nOtherwise, expression is nonlinear.\n\n**Bound safety:**\n- is_boundbox_regular(): Checks if bounds are suitable for convexification\n- SAFE_COEFFICIENT (1e9): Maximum coefficient for OsiRowCut\n- BR_NEXT_ZERO: Safety margin near zero denominator\n\n**Not cuttable:**\nLike products, division is concave on both sides and cannot be\nfurther linearized - only bound tightening helps.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprMul for product convexification",
+    "CouenneExprInv for 1/x handling"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "GamsNLP",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/ipopt/GamsNLP.hpp",
+  "brief": "Ipopt TNLP implementation for GAMS models\n\nGamsNLP: Implements Ipopt::TNLP using GMO (GAMS Modeling Object)\nfor objective/constraint evaluation, Jacobian sparsity, Hessian.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GamsIpopt.hpp for solver driver",
+    "GamsJournal.hpp for output handling"
+  ]
+}

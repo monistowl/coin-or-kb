@@ -1,0 +1,9 @@
+{
+  "name": "fold_con",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/fold_con.hpp",
+  "brief": "Value graph: fold_con",
+  "algorithms": [],
+  "methods": []
+}

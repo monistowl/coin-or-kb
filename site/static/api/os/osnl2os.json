@@ -1,0 +1,9 @@
+{
+  "name": "OSnl2OS",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSModelInterfaces/OSnl2OS.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,22 @@
+{
+  "name": "ClpCholeskyDense",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpCholeskyDense.hpp",
+  "brief": "Dense Cholesky factorization for interior point methods\n\nImplements Cholesky factorization when A*D*A' becomes effectively dense.\nUses blocked recursive algorithms for cache efficiency and supports\nparallel execution via ClpCholeskySpawn.",
+  "algorithms": [
+    {
+      "name": "Blocked Dense Cholesky Factorization:\n  Recursive blocked algorithm for cache-efficient A = LL':\n  1. Partition A into blocks: [A\u2081\u2081 A\u2081\u2082; A\u2082\u2081 A\u2082\u2082]\n  2. Factor diagonal block: L\u2081\u2081 = chol(A\u2081\u2081)\n  3. Solve for off-diagonal: L\u2082\u2081 = A\u2082\u2081 \u00b7 L\u2081\u2081\u207b\u1d40\n  4. Update Schur complement: A\u2082\u2082' = A\u2082\u2082 - L\u2082\u2081 \u00b7 L\u2082\u2081'\n  5. Recurse on A\u2082\u2082'\n  Block size chosen for L1/L2 cache efficiency (typically 64-256).",
+      "math": "Cholesky factorization of normal equations:\n  For LP: factor M = ADA' where D = X\u00b2S\u207b\u00b2 (primal-dual scaling)\n  Solve: M\u00b7\u0394y = r via L\u00b7L'\u00b7\u0394y = r\n  Forward: L\u00b7z = r, Backward: L'\u00b7\u0394y = z",
+      "complexity": "Factorization: O(n\u00b3/3) flops, O(n\u00b3/(3p)) with p processors.\n  Solve: O(n\u00b2) per right-hand side.\n  Memory: O(n\u00b2) for dense storage.",
+      "ref": [
+        "Golub & Van Loan (2013). \"Matrix Computations\", 4th ed., Ch. 4.2.\n\nThis is used as a fallback from sparse Cholesky when fill-in is excessive,\nor for problems with inherently dense normal equations.\n\nKey methods:\n- factorize(): Dense LL' factorization with row dropping for singularity\n- solve(): Forward/backward triangular solves (solveF1/B1 variants)\n\nAlso exports C functions for recursive blocked factorization that can be\nparallelized (ClpCholeskyCfactor, etc.)."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpCholeskyBase for the abstract interface",
+    "ClpInterior which uses Cholesky for normal equations"
+  ]
+}

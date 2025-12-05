@@ -1,0 +1,9 @@
+{
+  "name": "forward",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/atomic/four/forward.hpp",
+  "brief": "Core AD functionality: forward",
+  "algorithms": [],
+  "methods": []
+}

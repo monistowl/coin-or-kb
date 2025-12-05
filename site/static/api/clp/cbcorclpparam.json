@@ -1,0 +1,13 @@
+{
+  "name": "CbcOrClpParam",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/CbcOrClpParam.hpp",
+  "brief": "Shared parameter codes for Cbc and Clp solvers\n\nLegacy parameter handling shared between Cbc (branch-and-cut) and Clp\n(linear programming). This file is intentionally duplicated between\nCbc/Test and Clp/Test for simplicity.\n\nParameter code ranges (CbcOrClpParameterType):\n- 1-100: Double parameters (CLP_PARAM_DBL_*, CBC_PARAM_DBL_*)\n- 101-200: Integer parameters (CLP_PARAM_INT_*, CBC_PARAM_INT_*)\n- 201-300: Clp string parameters\n- 301-400: Cbc string parameters\n- 401-500: Clp actions (mostly)\n- 501-600: Cbc actions (mostly)\n\nConditional compilation:\n- COIN_HAS_CBC: Include Cbc-specific parameters\n- COIN_HAS_CLP: Include Clp-specific parameters\n\nNote: Being superseded by ClpParam/CbcParam for cleaner separation.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ClpParam for modern Clp parameter handling",
+    "ClpParameters for parameter container\n@deprecated Use ClpParam for new code"
+  ]
+}

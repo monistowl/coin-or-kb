@@ -1,0 +1,16 @@
+{
+  "name": "CSP",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Csp/include/CSP.hpp",
+  "brief": "Cutting stock problem definitions",
+  "algorithms": [
+    {
+      "name": "Cutting Stock: One-Dimensional Bin Packing\n\nCSP_problem: cutting stock data with stock widths and patterns.\nStores demands, pattern costs, column generation state.\n\n**Problem:** Cut standard-width stock into demanded pieces,\nminimizing number of stock pieces used (minimizing waste).\n\n**Column generation approach:**\n- Master: Select patterns to cover all demands\n- Pricing: Solve bounded knapsack to find improving patterns\n- PATTERN: Specifies how many of each piece width to cut from one stock\n\n**CSP_packedVector:** Sparse representation for patterns\n(most patterns use few piece types from many available).",
+      "math": "",
+      "complexity": "Weakly NP-hard; solved well by column generation + branching",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

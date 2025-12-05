@@ -1,0 +1,16 @@
+{
+  "name": "BCP_error",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_error.hpp",
+  "brief": "Fatal error handling for BCP",
+  "algorithms": [
+    {
+      "name": "Error Handling: BCP_fatal_error Class\n\nSimple error handling via BCP_fatal_error exception-like class.\nConstruction triggers error message output and optional abort().\n\n**Behavior:**\n- Prints formatted error message to stdout\n- Flushes all buffers\n- Calls abort() if abort_on_error is true (creates core dump)\n\n**Control:**\n- BCP_fatal_error::abort_on_error: Static flag to enable/disable abort\n\n@note Not a proper C++ exception - uses abort() for distributed debugging.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

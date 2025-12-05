@@ -1,0 +1,20 @@
+{
+  "name": "BCP_tm",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_tm.hpp",
+  "brief": "Tree Manager process for BCP Branch-Cut-Price framework",
+  "algorithms": [
+    {
+      "name": "Tree Manager: Parallel B&B Coordinator with Distributed Scheduling\n\nThe Tree Manager (TM) coordinates the entire BCP algorithm:\n- Manages the search tree and candidate node selection\n- Tracks global upper/lower bounds\n- Schedules work to LP processes\n- Stores variables/cuts both locally and distributed\n\n**Key classes:**\n- BCP_tm_prob: Central TM state (search tree, bounds, problem core)\n- BCP_tm_stat: Statistics (wait time, queue length by LP count)\n- BCP_slave_params: Parameter sets for LP/CG/VG processes\n\n**Process coordination:**\n- lp_procs: Vector of LP process IDs\n- active_nodes: Map from process ID to current node\n- candidate_list: CoinSearchTreeManager for node selection\n\n**Bound tracking:**\n- lower_bounds: Multiset of unexplored node bounds\n- upper_bound: Best known feasible solution value\n- lb_multiplier: Floor(lb*multiplier) to avoid rounding errors",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm_user for user customization hooks",
+    "BCP_lp.hpp for LP process that receives work"
+  ]
+}

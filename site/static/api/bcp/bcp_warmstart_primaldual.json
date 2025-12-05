@@ -1,0 +1,20 @@
+{
+  "name": "BCP_warmstart_primaldual",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_warmstart_primaldual.hpp",
+  "brief": "Primal-dual warm start for BCP",
+  "algorithms": [
+    {
+      "name": "Primal-Dual Warmstart: Full Solution Restart\n\nBCP_warmstart_primaldual stores both primal and dual vectors.\nEach uses BCP_vec_change<double> for independent delta encoding.\n\n**Storage logic:**\nCombined storage type determined by 4x4 matrix lookup based on\nindividual primal/dual storage types. Returns best available mode.\n\n**Operations:**\n- convert_to_CoinWarmStart(): Creates CoinWarmStartPrimalDual\n- as_change(): Computes delta for both vectors independently\n- update(): Applies deltas to reconstruct full warmstart\n\n**Use case:** Interior point methods or problems where both primal\nand dual solutions are valuable for warmstarting.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_warmstart_basis.hpp for simplex basis warmstart",
+    "BCP_warmstart_dual.hpp for dual-only warmstart"
+  ]
+}

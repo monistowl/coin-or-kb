@@ -1,0 +1,20 @@
+{
+  "name": "CouenneExprAux",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneExprAux.hpp",
+  "brief": "Auxiliary variable class for reformulated nonlinear expressions\n\nAuxiliary variables replace nonlinear terms during standardization,\nenabling generation of convex relaxations. If w = f(x), then cuts\nare generated for the relation between w and f(x).",
+  "algorithms": [
+    {
+      "name": "Multiplicity-Based Selection:\nVariables appearing more often have higher branching value.\n\n  multiplicity_ counts occurrences in reformulated problem\n  Higher multiplicity \u2192 branching affects more constraints\n  Used to break ties in branching variable selection\n\n**Key attributes:**\n- image_: The expression f(x) this auxiliary represents\n- sign_: Relation type (AUX_LEQ: w <= f(x), AUX_EQ: w = f(x), AUX_GEQ)\n- rank_: Depth in expression DAG (used for branching priority)\n- multiplicity_: How many times this aux appears in reformulation",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "exprVar for base class",
+    "CouenneProblem::standardize() for auxiliary creation"
+  ]
+}

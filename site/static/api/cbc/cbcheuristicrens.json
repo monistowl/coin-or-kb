@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicRENS",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicRENS.hpp",
+  "brief": "RENS - Relaxation Enforced Neighborhood Search\nCopyright (C) 2006, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicRENS: Fixes variables based on LP relaxation solution.\nUnlike RINS (which needs an incumbent), RENS works from LP alone.",
+  "algorithms": [
+    {
+      "name": "RENS - Relaxation Enforced Neighborhood Search:\n  solution() from LP solution x\u0304 (no incumbent required):\n  1. For integer variable j: If x\u0304_j at bound, fix x_j = round(x\u0304_j).\n  2. Fixing strategy controlled by rensType_ (bounds, dj, priorities).\n  3. Solve restricted MIP on free variables.\n  4. Return solution if found, else continue B&C.\n  No incumbent needed - works early in search tree.",
+      "math": "Reduced cost fixing in RENS:\n  rensType_=1: Fix x_j if d\u0304_j > threshold (reduced cost high).\n  rensType_=3: Fix if d\u0304_j > 0.01 \u00d7 avg(d\u0304).\n  Variables with high reduced cost unlikely to change in optimal.\n\nrensType_ controls fixing strategy:\n- 0: Fix at lower bound only\n- 1: Fix based on reduced costs\n- 2: Fix at upper bound as well\n- 3: Fix based on 0.01*average reduced cost\n- +16: Allow two tries\n- +32: Use existing solution to keep more variables\n- +64: Honor high priority variables\n- +128: Honor low priority variables",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicRINS for incumbent-based neighborhood",
+    "CbcHeuristic for base class\n\nEdwin 12/5/09 carved out of CbcHeuristicRINS"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "feasibility_bounded",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/feasibility_bounded.hpp",
+  "brief": "HiGHS QP bounded feasibility\n\nBounded feasibility subroutine for QP.\nHandles box constraints during active set updates.",
+  "algorithms": [
+    {
+      "name": "Bounded QP Starting Point via Cholesky",
+      "math": "For box-constrained QP: min \u00bdx'Qx + c'x s.t. l \u2264 x \u2264 u.\n      1. Solve Qx = -c via Cholesky: LL' = Q, then L\u207b\u00b9(-c), L'\u207b\u00b9(\u00b7).\n      2. Project to bounds: x\u0303_i = max(l_i, min(u_i, x_i)).\n      3. Collect active bounds for initial working set.",
+      "complexity": "O(n\u00b3) for Cholesky, O(n\u00b2) for solves, O(n) for projection.",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

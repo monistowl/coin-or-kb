@@ -1,0 +1,13 @@
+{
+  "name": "DecompWaitingRow",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompWaitingRow.h",
+  "brief": "Wrapper pairing DecompCut with its row coefficients\n\nDecompWaitingRow bundles a DecompCut with both its x-space row\nand reformulated lambda-space row for the master problem.\n\n**Data Members:**\n- m_cut: The cut object with bounds and metadata\n- m_row: CoinPackedVector in original x-space\n- m_rowReform: CoinPackedVector in lambda-space for master\n\n**Reformulation:**\nOriginal cut: a'x >= b\nIn master: sum_s (a's)lambda_s >= b\nm_rowReform stores coefficients (a's) for each lambda variable.\n\n**Lifecycle:**\n- Created during cut generation\n- Stored in DecompCutPool\n- m_rowReform computed via createRowReform()\n- Eventually added to master LP",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompCut.h for the cut itself",
+    "DecompCutPool.h for cut pool management"
+  ]
+}

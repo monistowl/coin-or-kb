@@ -1,0 +1,9 @@
+{
+  "name": "cond_exp",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/record/cond_exp.hpp",
+  "brief": "Operation recording: cond_exp",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,22 @@
+{
+  "name": "ccolamd",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "CCOLAMD/Include/ccolamd.h",
+  "brief": "Constrained Column Approximate Minimum Degree ordering\nCopyright (c) 1996-2024, Timothy A. Davis, Sivasankaran Rajamanickam,\nand Stefan Larimore. BSD-3-clause license.\n\nCCOLAMD computes column orderings for sparse QR and LU factorization with\nuser-specified constraints. Extends COLAMD with constraint sets that force\ncertain columns to appear before or after others in the ordering.",
+  "algorithms": [
+    {
+      "name": "Constrained Column AMD (CCOLAMD):\nCOLAMD with constraint satisfaction for column ordering:\n1. CONSTRAINT PROCESSING:\n   - User specifies groups: columns in group k ordered before group k+1\n   - Columns within same group ordered freely by COLAMD heuristic\n2. COLAMD WITHIN GROUPS:\n   - Column elimination on A'A pattern (without forming A'A)\n   - Approximate minimum degree with aggressive absorption\n   - Supercolumn detection for efficiency\n3. POSTORDERING: Optional elimination tree postorder for supernodes",
+      "math": "Fill reduction for unsymmetric matrices:\nFor A \u2208 \u211d^(m\u00d7n), ordering columns of A affects fill in A'A\n(Cholesky factor of normal equations) or R factor (QR of A).\nDegree of column j in A'A graph = |{i : A_ij \u2260 0}| - 1 + indegree.\n\nConstraint sets: cmember[j] = k means column j is in group k.\nAll group-0 columns ordered first, then group-1, etc.",
+      "complexity": "O(n + nz) for ordering, where nz = nnz(A).",
+      "ref": [
+        "Davis, Gilbert, Larimore, Ng (2004). \"A Column Approximate Minimum\n  Degree Ordering Algorithm\". ACM TOMS 30(3):353-376."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "COLAMD for unconstrained column ordering",
+    "SPQR, UMFPACK for sparse factorization using CCOLAMD"
+  ]
+}

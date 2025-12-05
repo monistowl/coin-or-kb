@@ -1,0 +1,12 @@
+{
+  "name": "linopt",
+  "library": "Creme",
+  "layer": "layer-4",
+  "header": "Creme/src/Base/linopt.h",
+  "brief": "One-variable local optimization for Creme\n\nImplements one_opt() for single-variable neighborhood search.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sparse.h for LP data structure"
+  ]
+}

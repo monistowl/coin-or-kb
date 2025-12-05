@@ -1,0 +1,22 @@
+{
+  "name": "DcoBranchStrategyRel",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoBranchStrategyRel.hpp",
+  "brief": "DisCO reliability branching",
+  "algorithms": [
+    {
+      "name": "Reliability Branching",
+      "math": "Hybrid strategy combining strong and pseudocost branching:\n      - If observations(j) < \u03b7_rel (reliability threshold): strong branch\n      - If observations(j) \u2265 \u03b7_rel: use pseudocost estimate\n      Default \u03b7_rel = 4-8 observations before trusting pseudocosts.\n\nReliability branching combines strong branching initialization\nwith pseudocost-based selection after reliability threshold.\n\n**Rationale:** Strong branching is accurate but expensive. Pseudocosts\nare cheap but need calibration. Reliability branching uses strong\nbranching to initialize pseudocosts, then switches to cheap estimation.\n\n**Algorithm:**\n1. For unreliable variables (few observations), do strong branching\n2. Update pseudocost estimates from strong branching results\n3. Once reliable (\u03b7_rel observations), use pseudocost scoring",
+      "complexity": "O(N\u00b7LP) early in tree, O(n) per node after warmup",
+      "ref": [
+        "Achterberg, T. et al. (2005). \"Branching rules revisited\".\n     Operations Research Letters 33(1):42-54."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DcoBranchStrategyStrong.hpp for pure strong branching",
+    "DcoBranchStrategyPseudo.hpp for pure pseudocost branching"
+  ]
+}

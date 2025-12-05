@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprBCos",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/bounds/CouenneExprBCos.hpp",
+  "brief": "Bound operators for cosine expressions\n\nComputes tight bounds for cos(x) given bounds [l, u] on x.\nUsed by FBBT (feasibility-based bound tightening) to propagate\nbounds through trigonometric expressions.\n\n**exprLBCos (lower bound):**\n- Returns -1 if interval spans full period (u - l >= 2\u03c0)\n- Returns -1 if interval contains \u03c0 + 2k\u03c0 (minimum of cos)\n- Otherwise returns min(cos(l), cos(u))\n\n**exprUBCos (upper bound):**\n- Returns +1 if interval spans full period\n- Returns +1 if interval contains 2k\u03c0 (maximum of cos)\n- Otherwise returns max(cos(l), cos(u))\n\n**Period handling:**\nUses floor(l/2\u03c0 - offset) < floor(u/2\u03c0 - offset) to detect\nif critical points lie within [l, u].",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprCos for the cosine expression itself",
+    "CouenneExprBSin for sine bound computation"
+  ]
+}

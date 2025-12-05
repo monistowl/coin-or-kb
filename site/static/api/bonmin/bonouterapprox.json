@@ -1,0 +1,22 @@
+{
+  "name": "BonOuterApprox",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/QuadCuts/BonOuterApprox.hpp",
+  "brief": "Concrete outer approximation extractor for MINLP\n\nBuilds linear outer approximations of nonlinear constraints by\nlinearizing at a given point (typically NLP solution).",
+  "algorithms": [
+    {
+      "name": "Outer Approximation Linearization:\n  Constructs LP relaxation of convex MINLP via first-order Taylor:\n  1. At point x*, evaluate nonlinear constraint g(x)\n  2. Compute gradient \u2207g(x*) via automatic differentiation\n  3. Add linearization: g(x*) + \u2207g(x*)\u1d40(x - x*) \u2264 0\n  4. Clean coefficients: remove tiny coefficients, absorb into bounds\n  5. Repeat for each nonlinear constraint",
+      "math": "First-order Taylor approximation:\n  For convex g: g(x) \u2265 g(x*) + \u2207g(x*)\u1d40(x - x*) (supporting hyperplane)\n  Linearization is valid cut: {x : g(x*) + \u2207g(x*)\u1d40(x-x*) \u2264 0} \u2287 {x : g(x) \u2264 0}\n  For non-convex: linearization is relaxation, not exact",
+      "complexity": "O(n) per constraint linearization where n = variables.\n  Gradient computation via AD is O(n) for each constraint.\n  Total O(m\u00b7n) for m constraints.",
+      "ref": [
+        "Duran & Grossmann (1986). \"An outer-approximation algorithm for a\n     class of mixed-integer nonlinear programs\". Math. Programming 36:307-339.\n\n**Coefficient cleaning (cleanNnz):**\nSmall coefficients are handled to avoid numerical issues:\n- >= tiny_: Keep as-is\n- < veryTiny_: Remove (absorb into RHS if possible)\n- Between: Try to absorb, else bump to tiny_"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "TMINLP2OsiLP for abstract base class",
+    "BonOaDecBase for OA algorithm driver"
+  ]
+}

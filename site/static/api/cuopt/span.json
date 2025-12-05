@@ -1,0 +1,9 @@
+{
+  "name": "span",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/libmps_parser/include/mps_parser/utilities/span.hpp",
+  "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+  "algorithms": [],
+  "methods": []
+}

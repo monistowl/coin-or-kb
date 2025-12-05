@@ -1,0 +1,13 @@
+{
+  "name": "BlisBranchStrategyBilevel",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisBranchStrategyBilevel.h",
+  "brief": "Branching strategy for bilevel programming problems\n\nSpecialized branching for bilevel optimization problems where there\nis a leader (upper-level) and follower (lower-level) decision maker.\n\n**Bilevel programming:**\n- Leader optimizes over (x, y) where y solves follower's problem\n- min_x { F(x, y) : G(x, y) \u2265 0, y \u2208 argmin_y { f(x, y) : g(x, y) \u2265 0 } }\n- MILP reformulation uses complementarity or indicator constraints\n\n**Branching approach:**\nTypically branches on complementarity-related variables or\nuses specialized selection for leader vs. follower variables.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisBranchObjectBilevel for bilevel branching objects",
+    "BlisBranchStrategyStrong for standard strong branching"
+  ]
+}

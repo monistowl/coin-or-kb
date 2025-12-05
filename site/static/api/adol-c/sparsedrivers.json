@@ -1,0 +1,31 @@
+{
+  "name": "sparsedrivers",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/sparse/sparsedrivers.h",
+  "brief": "High-level drivers for sparse Jacobian and Hessian computation\n\nProvides efficient computation of sparse derivatives by exploiting\nsparsity structure using graph coloring and compressed computation.",
+  "algorithms": [
+    {
+      "name": "Sparse Derivative Computation via Graph Coloring:\nReduces the number of directional derivative evaluations by exploiting\nsparsity structure:\n\nPHASE 1 - SPARSITY DETECTION (jac_pat, hess_pat):\nPropagate bit-patterns through the tape to determine structural non-zeros:\n- Initialize: each input gets unique bit (e.g., x_1 = 0001, x_2 = 0010)\n- Propagate: output bits = OR of dependent input bits\n- Result: J[i,j] \u2260 0 iff bit j is set in output i's pattern\n\nPHASE 2 - SEED MATRIX via GRAPH COLORING (generate_seed_jac/hess):\nConstruct seed matrix S such that J\u00b7S has recoverable columns:\n- Build column intersection graph: edge (i,j) if columns i,j share a row\n- Color graph: adjacent columns get different colors\n- Seed matrix: S[:,c] = sum of unit vectors for columns with color c\n\nPHASE 3 - COMPRESSED EVALUATION (sparse_jac, sparse_hess):\nCompute B = J\u00b7S using p directional derivative evaluations (p = #colors)\nRecover J[i,j] = B[i, color(j)] since non-zero positions are known",
+      "math": "Complexity analysis:\nLet nnz = number of non-zeros, p = chromatic number of intersection graph\n\nFor Jacobian (m\u00d7n):\n- Dense: O(min(m,n)) tape evaluations\n- Sparse: O(p) tape evaluations where p \u2264 max_row_degree + 1\n\nFor Hessian (n\u00d7n, symmetric):\n- Dense: O(n) tape evaluations\n- Sparse: O(p) where p = chromatic number of adjacency graph\n- Symmetry exploitation: use symmetric coloring (fewer colors needed)\n\nFor banded/sparse structures (p = O(1)), cost is O(1) tape evaluations\nregardless of matrix dimension! This is the key advantage.",
+      "complexity": "- Sparsity detection: O(ops \u00b7 n/wordsize) for n inputs, ops tape operations\n- Graph coloring: O(nnz) greedy, optimal coloring is NP-hard\n- Sparse evaluation: O(p \u00b7 ops) where p = number of colors",
+      "ref": [
+        "Curtis, Powell & Reid (1974). \"On the Estimation of Sparse Jacobian\n  Matrices\". J. Inst. Math. Appl. 13:117-119.",
+        "Gebremedhin, Manne & Pothen (2005). \"What Color Is Your Jacobian?\n  Graph Coloring for Computing Derivatives\". SIAM Review 47(4):629-705."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "drivers/drivers.h for dense derivative computation",
+    "sparse/sparse_fo_rev.h for bit-pattern forward/reverse modes",
+    "generate_seed_jac for computing seed matrix from pattern",
+    "sparse_jac for computing values",
+    "jac_pat for sparsity detection only",
+    "jacobian for dense Jacobian computation",
+    "generate_seed_hess for computing seed matrix from pattern",
+    "sparse_hess for computing values",
+    "hess_pat for sparsity detection only",
+    "hessian for dense Hessian computation"
+  ]
+}

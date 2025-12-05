@@ -1,0 +1,21 @@
+{
+  "name": "IpCompoundMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpCompoundMatrix.hpp",
+  "brief": "Block-structured matrix composed of sub-matrices\n\nCompoundMatrix implements the Composite pattern for matrices,\nrepresenting a block matrix: M = [M_00, M_01, ...; M_10, ...]",
+  "algorithms": [
+    {
+      "name": "Composite Pattern for Block Matrices:\n  CompoundMatrix stores a grid of sub-matrices M_{ij}. Operations like\n  MultVector are computed block-wise: y_i = \u03a3_j M_{ij}\u00b7x_j.\n  This recursive structure allows mixing different matrix types\n  (dense, sparse, diagonal) in a single unified representation.",
+      "math": "Block matrix-vector multiplication:\n  For M = [M_{ij}] with i=0..r-1, j=0..c-1:\n  y = M\u00b7x computes y_i = \u03a3_j M_{ij}\u00b7x_j for each block row i.\n  NULL blocks M_{ij} are treated as zero: 0\u00b7x_j = 0.\n\nUsed in Ipopt for KKT system structure:\n  [W + \u03a3_x   A^T ] [\u0394x]   [r_d]\n  [A        -\u03a3_c ] [\u0394\u03bb] = [r_p]\n  where W = Hessian, A = Jacobian, \u03a3 = barrier regularization.\n\nNull components are treated as zero blocks. Operations recurse\nto sub-matrices. Each block can be from different MatrixSpace.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMatrix.hpp for base interface",
+    "IpCompoundSymMatrix.hpp for symmetric version",
+    "IpCompoundVector.hpp for vector counterpart"
+  ]
+}

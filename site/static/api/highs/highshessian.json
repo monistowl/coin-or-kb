@@ -1,0 +1,13 @@
+{
+  "name": "HighsHessian",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/model/HighsHessian.h",
+  "brief": "Sparse Hessian matrix for QP objective\n\n**HighsHessian Class:**\nStores quadratic objective term Q for QP: min 0.5*x'Qx + c'x\n\n**Sparse Storage (CSC-like):**\n- dim_: Number of variables (Q is dim_ x dim_)\n- format_: kTriangular (lower triangle) or kSquare (full matrix)\n- start_[]: Column start indices\n- index_[]: Row indices\n- value_[]: Non-zero values\n\n**Operations:**\n- product(): Compute Qx (Hessian-vector product)\n- objectiveValue(): Compute 0.5*x'Qx\n- objectiveCDoubleValue(): High-precision objective using HighsCDouble\n- deleteCols(): Remove columns/rows for presolve",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "HighsModel.h for combined LP+Hessian model",
+    "HConst.h for HessianFormat enum"
+  ]
+}

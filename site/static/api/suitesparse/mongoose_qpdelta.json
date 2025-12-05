@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_QPDelta",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_QPDelta.hpp",
+  "brief": "QP solver state: solution, gradient, free set, and workspace\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPDelta stores iterative QP solver state: current solution x, gradient,\nfree set (variables not at bounds), balance constraint bounds (lo/hi),\nLagrange multiplier lambda, and workspace arrays. FreeSet_status tracks\nwhether each x_i is at 0, 1, or strictly between (free).",
+  "algorithms": [
+    {
+      "name": "Active Set Representation for Bound-Constrained QP:\nMaintains partition of variables into three sets:\n- FreeSet (status = 0): 0 < x_i < 1, can move freely\n- LowerBound (status = -1): x_i = 0, held at lower bound\n- UpperBound (status = +1): x_i = 1, held at upper bound\n\nKey invariants:\n- Gradient and x always consistent: g = Lx\n- Balance constraint tracked: b = a'x \u2208 [lo, hi]\n- Free set list enables O(|F|) iteration over free variables",
+      "math": "Optimality via KKT conditions:\nAt solution: g_i = \u03bba_i for free variables (gradient aligned with constraint).\nFor bound variables: sign of (g_i - \u03bba_i) confirms bound is correct.",
+      "complexity": "O(n) storage for solution, gradient, and status arrays.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_QPGradProj.hpp for gradient projection using this state",
+    "Mongoose_QPLinks.hpp for free set management"
+  ]
+}

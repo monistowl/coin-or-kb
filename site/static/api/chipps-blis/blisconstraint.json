@@ -1,0 +1,14 @@
+{
+  "name": "BlisConstraint",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisConstraint.h",
+  "brief": "Constraint (cut) representation for BLIS branch-and-cut\n\nRepresents a linear constraint (row) that can be added to the LP.\nUsed for both original constraints and generated cutting planes.\n\n**Data members:**\n- size_, indices_, values_: Sparse row representation\n- Bounds inherited from BcpsConstraint (lbHard, ubHard, lbSoft, ubSoft)\n\n**Key methods:**\n- createOsiRowCut(): Convert to OsiRowCut for LP solver\n- violation(): Compute constraint violation for given LP solution\n- hashing(): Compute hash key for duplicate detection\n\n**Usage in branch-and-cut:**\n1. CglCutGenerator produces OsiRowCut objects\n2. Converted to BlisConstraint for storage in pool\n3. Applied to LP via createOsiRowCut() when needed",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisConGenerator for cut generation management",
+    "BlisVariable for the dual (column) representation",
+    "BcpsConstraintPool for constraint storage"
+  ]
+}

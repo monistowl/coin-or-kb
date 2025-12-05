@@ -1,0 +1,22 @@
+{
+  "name": "ParU",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "ParU/Include/ParU.h",
+  "brief": "Parallel unsymmetric multifrontal sparse LU factorization\nCopyright (c) 2022-2025, Mohsen Aznaveh and Timothy A. Davis. GPL-3.0-or-later.\n\nParU is a parallel sparse direct solver using OpenMP tasking for task-based\nparallelism combined with parallel BLAS (nested parallelism). Solves Ax = b\nfor sparse A via LU factorization with partial pivoting.",
+  "algorithms": [
+    {
+      "name": "Parallel Multifrontal LU Factorization:\nSparse unsymmetric LU with task-parallel numeric phase:\n1. SYMBOLIC ANALYSIS (via UMFPACK):\n   - Compute fill-reducing permutation (AMD, COLAMD, METIS)\n   - Build elimination/assembly tree\n   - Identify singleton rows/columns for special handling\n2. FRONTAL MATRIX FACTORIZATION:\n   - Process fronts in topological (child-before-parent) order\n   - Each front: dense LU with partial pivoting via BLAS\n   - Assemble contributions from children (extend-add)\n   - Task parallelism: independent fronts processed concurrently\n3. SOLVE PHASE:\n   - Forward solve: L\u00b7y = P\u00b7b\n   - Backward solve: U\u00b7x = y\n   - Apply permutations",
+      "math": "Multifrontal LU factorization:\nP\u00b7A\u00b7Q = L\u00b7U where P,Q are permutation matrices.\nEach frontal matrix F_k \u2208 \u211d^(m_k \u00d7 n_k) factored densely:\nF_k = [L_k 0; L_21 I] \u00b7 [U_k U_12; 0 S_k]\nSchur complement S_k assembled to parent front.\n\nSingleton handling: rows/columns with single nonzero factored trivially,\nremoved before main factorization for efficiency.",
+      "complexity": "O(n + symbolic) for analysis, O(flops) for factorization.\nFlop count depends on matrix structure and fill-reducing ordering quality.\nTypically O(n^1.5) to O(n^2) for 2D/3D mesh problems.",
+      "ref": [
+        "Aznaveh & Davis (2024). \"ParU: A Parallel Unsymmetric Multifrontal\n  Sparse LU Factorization\". ACM Trans. Math. Software."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "UMFPACK for sequential sparse LU (used for symbolic analysis)",
+    "CHOLMOD for sparse matrix data structures"
+  ]
+}

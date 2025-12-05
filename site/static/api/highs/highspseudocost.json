@@ -1,0 +1,13 @@
+{
+  "name": "HighsPseudocost",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsPseudocost.h",
+  "brief": "Pseudocost branching for MIP variable selection\n\nEstimates objective change from branching based on historical observations.\n\n**Score Components:**\n- pseudocostup/down[col]: Average unit objective change per direction\n- inferencesup/down[col]: Average domain reductions (bound tightenings)\n- ncutoffsup/down[col]: Count of subtree cutoffs per direction\n- conflictscoreup/down[col]: Conflict analysis contribution\n\n**Reliability:**\n- nsamplesup/down[col]: Number of observations per direction\n- minreliable: Threshold for reliable pseudocost estimate\n- isReliable(): True when min(up_samples, down_samples) >= minreliable\n- Unreliable estimates blend with global average (cost_total)\n\n**Scoring (getScore):**\nCombines multiple signals into branching score:\n- costScore: Pseudocost product (up * down) / avg^2\n- inferenceScore: Domain reduction product\n- cutoffScore: Historical cutoff frequency\n- conflictScore: Conflict analysis contribution\n- degeneracyFactor: Adjusts weighting for degenerate LPs\n\n**Key Methods:**\n- addObservation(): Record objective change from branching\n- addInferenceObservation(): Record domain reductions\n- getPseudocostUp/Down(): Get estimated change for given fraction",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsSearch.h for branching variable selection",
+    "mip/HighsConflictPool.h for conflict scoring"
+  ]
+}

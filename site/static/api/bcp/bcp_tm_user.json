@@ -1,0 +1,20 @@
+{
+  "name": "BCP_tm_user",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_tm_user.hpp",
+  "brief": "User customization interface for Tree Manager process",
+  "algorithms": [
+    {
+      "name": "Tree Manager User Interface for Problem-Specific B&B\n\nBCP_tm_user is the base class for user-defined Tree Manager behavior.\nUsers derive their own class and override virtual methods.\n\n**Setup methods:**\n- initialize_core(): Define core variables, cuts, and matrix\n- create_root(): Set up the root node (extra vars/cuts, user data)\n- init_new_phase(): Initialize each algorithm phase\n\n**Solution handling:**\n- unpack_feasible_solution(): Deserialize solutions from LP\n- display_feasible_solution(): Output best solution\n- replace_solution(): Secondary objective tie-breaking\n\n**Tree management:**\n- change_candidate_heap(): Modify node selection strategy\n- display_node_information(): Status output before/after processing\n- display_final_information(): Summary after search completes\n\n**Communication:**\n- pack_module_data(): Send initialization to LP/CG/VG processes\n- process_message(): Handle user-defined messages\n\n**Parameter access:**\n- get_param()/set_param(): Query/modify BCP_tm_par parameters\n- upper_bound()/lower_bound(): Access global bounds",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm.hpp for Tree Manager process",
+    "BCP_lp_user for LP process user interface"
+  ]
+}

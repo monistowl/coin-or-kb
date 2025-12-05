@@ -1,0 +1,20 @@
+{
+  "name": "CbcSolverHeuristics",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcSolverHeuristics.hpp",
+  "brief": "Heuristic setup and execution routines for cbc-generic",
+  "algorithms": [
+    {
+      "name": "VUB Fixing and Heuristic Orchestration\nCopyright (C) 2007, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nHelper functions used by the standalone solver for heuristic management.\n\ncrunchIt(): Compress/simplify a ClpSimplex model.\n\nfixVubs(): Fix variable upper bound constraints.\n- doAction values:\n  - 0: Just fix in original, return NULL\n  - 1: Return fixed non-presolved solver\n  - 2: Use presolve internally\n  - 3: Presolve and fix high-cost variables\n  - 10+: Use lastSolution and relax a few\n  - -2: Cleanup after mode 2\n- Returns number of variables fixed\n\ndoHeuristics(): Configure and run heuristics.\n- type 1: Add heuristics to model\n- type 2: Run heuristics (set cutoff and solution)\n- type 3: For miplib testing (skip some)",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for heuristic base class",
+    "CbcParameters for parameter management"
+  ]
+}

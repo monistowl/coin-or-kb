@@ -1,0 +1,9 @@
+{
+  "name": "eventhandler",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/eventhandler.hpp",
+  "brief": "HiGHS QP event handler\n\nCallback interface for QP solver events. Iteration callbacks,\nlogging, and early termination hooks.",
+  "algorithms": [],
+  "methods": []
+}

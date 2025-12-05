@@ -1,0 +1,9 @@
+{
+  "name": "CoinPragma",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPragma.hpp",
+  "brief": "Compiler-specific pragma settings (mainly MSVC warnings)",
+  "algorithms": [],
+  "methods": []
+}

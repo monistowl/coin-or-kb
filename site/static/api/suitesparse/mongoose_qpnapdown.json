@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_QPNapDown",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_QPNapDown.hpp",
+  "brief": "Downward lambda search in napsack solver\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPNapDown searches for lambda in decreasing direction when current\nsolution violates lower balance bound (b < lo). Processes breakpoints\nvia heaps until constraint is satisfied, returning optimal lambda.",
+  "algorithms": [
+    {
+      "name": "Downward Breakpoint Search:\nDecreases \u03bb to increase a'x (currently b < lo, need b \u2265 lo):\n1. Build heaps of breakpoints: \u03bb values where variables hit bounds\n   - bound_heap: \u03bb where free x_i hits 1 (upper bound)\n   - free_heap: \u03bb where bound x_i = 0 becomes free\n2. Process breakpoints in decreasing \u03bb order:\n   - At each breakpoint, variable changes status (free\u2194bound)\n   - Update b = a'x incrementally\n   - Stop when b \u2265 lo\n3. Interpolate final \u03bb if stopping between breakpoints",
+      "math": "Symmetric to QPNapUp but decreasing \u03bb:\nFor free variable i: \u0394x_i = -a_i\u00b7\u03b4 (\u03b4 < 0) \u2192 \u0394b > 0 for a_i > 0\nDecreasing \u03bb increases x values, increasing a'x.",
+      "complexity": "O(n log n) for heap operations over n variables.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_QPNapsack.hpp for main napsack solver",
+    "Mongoose_QPNapUp.hpp for upward search"
+  ]
+}

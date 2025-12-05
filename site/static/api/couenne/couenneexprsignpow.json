@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprSignPow",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprSignPow.hpp",
+  "brief": "Signed power function w = x * |x|^(k-1) = sign(x) * |x|^k\n\nGeneralizes power to handle negative arguments while preserving\nsign, creating a bijective function for any real k.\n\n**Definition:**\nsignpow(x, k) = x * |x|^(k-1) = sign(x) * |x|^k\n- For x >= 0: same as x^k\n- For x < 0: -|x|^k (preserves sign)\n\n**Key property:**\nUnlike standard power x^k which is undefined for x < 0 when k is\nnon-integer, signpow is defined and continuous for all x.\n\n**Convexification:**\n- For k > 1: convex for x > 0, concave for x < 0\n- For 0 < k < 1: concave for x > 0, convex for x < 0\n- Point x = 0 is an inflection point\n\n**Bijectivity:**\nInverse is sign(y) * |y|^(1/k), enabling exact reverse propagation.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprPow for standard power (handles only x >= 0 for non-integer k)",
+    "exprOddPow for integer odd powers"
+  ]
+}

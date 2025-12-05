@@ -1,0 +1,14 @@
+{
+  "name": "types",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/types.h",
+  "brief": "Core type definitions and index set infrastructure for Gravity\n\nFoundational enums and classes for the Gravity modeling language.\n\n**Convexity Tracking:**\n- Convexity: linear_, convex_, concave_, undet_\n- Sign: neg_, non_pos_, zero_, non_neg_, pos_, unknown_\n- Enables automatic convexity detection in expressions\n\n**Function Classification:**\n- FType: const_, lin_, quad_, pol_, nlin_ (constraint complexity)\n- MType: lin_m, quad_m, pol_m, nlin_m (model type)\n- OperatorType: All mathematical operations (+, -, *, /, ^, sin, cos, etc.)\n\n**Index Set System (indices class):**\n- Defines sets over which variables/constraints are declared\n- Supports: ordered pairs, time expansion, matrix indexing\n- Operations: union, combine, exclude, filter\n- Used for: \"for all i in Nodes, j in Arcs\" style modeling\n\n**Space Types:**\n- R: Real numbers (R^n)\n- R_p: Positive reals\n- C: Complex numbers",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "gravity/var.h for variable declarations over indices",
+    "gravity/constraint.h for constraints over index sets",
+    "gravity/model.h for combining all components"
+  ]
+}

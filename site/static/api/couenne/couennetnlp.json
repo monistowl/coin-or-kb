@@ -1,0 +1,14 @@
+{
+  "name": "CouenneTNLP",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/interfaces/CouenneTNLP.hpp",
+  "brief": "Ipopt TNLP interface for Couenne problems\n\nWraps CouenneProblem as an Ipopt::TNLP for NLP solving.\nComputes derivatives using Couenne's symbolic expression DAG.\n\n**Purpose:**\nAllows Ipopt to solve the continuous relaxation or NLP\nsubproblems arising during Couenne's spatial B&B.\n\n**Derivative computation:**\n- Gradient: Via expression differentiation (gradient_ vector)\n- Jacobian: Via ExprJac symbolic Jacobian structure\n- Hessian: Via ExprHess symbolic Hessian of Lagrangian\n\n**Key methods (Ipopt callbacks):**\n- get_nlp_info(): Returns dimensions and sparsity info\n- get_bounds_info(): Variable/constraint bounds\n- eval_f(), eval_grad_f(): Objective and gradient\n- eval_g(), eval_jac_g(): Constraints and Jacobian\n- eval_h(): Hessian of Lagrangian\n- finalize_solution(): Store optimal solution\n\n**Hessian storage:**\noptHessian_ can store the optimal Hessian for later use\n(e.g., in distance computations for Feasibility Pump).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneProblem which provides the expression DAG",
+    "ExprJac for Jacobian computation",
+    "ExprHess for Hessian computation"
+  ]
+}

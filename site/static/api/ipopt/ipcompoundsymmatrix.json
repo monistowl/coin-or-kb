@@ -1,0 +1,20 @@
+{
+  "name": "IpCompoundSymMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpCompoundSymMatrix.hpp",
+  "brief": "Block-structured symmetric matrix (lower triangle storage)\n\nCompoundSymMatrix implements a symmetric block matrix where only\nthe lower triangular blocks are stored: M[i][j] with j <= i.\nDiagonal blocks must themselves be SymMatrix types.",
+  "algorithms": [
+    {
+      "name": "Block Symmetric Matrix-Vector Multiply:\n  M = [M\u2080\u2080          ]    (symmetric block structure)\n      [M\u2081\u2080  M\u2081\u2081     ]\n      [M\u2082\u2080  M\u2082\u2081  M\u2082\u2082]\n  MultVector computes y_i = \u03a3\u2c7c\u2264\u1d62 M\u1d62\u2c7c\u00b7x\u2c7c + \u03a3\u2c7c>\u1d62 M\u2c7c\u1d62^T\u00b7x\u2c7c.\n  Lower blocks and their transposes both contribute.",
+      "math": "KKT system structure in Ipopt:\n  K = [W + \u03a3_x   A^T] where W = \u2207\u00b2L (Hessian of Lagrangian)\n      [  A      -D  ] where A = [J_c; J_d] (constraint Jacobians)\n  \u03a3_x = barrier Hessian diagonal, D = regularization diagonal.\n  Symmetric indefinite system requiring inertia-correcting factorization.",
+      "complexity": "O(sum of block costs) for matvec.\n  Storage: pointers to block matrices only.\n  Null blocks treated as zero (no storage or computation).",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpCompoundMatrix.hpp for non-symmetric version",
+    "IpSymMatrix.hpp for base class"
+  ]
+}

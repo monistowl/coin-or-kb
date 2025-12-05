@@ -1,0 +1,21 @@
+{
+  "name": "CbcGeneralDepth",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcGeneralDepth.hpp",
+  "brief": "Depth-limited partial evaluation branching",
+  "algorithms": [
+    {
+      "name": "Lookahead Branching with Partial Evaluation\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcGeneralDepth: Advanced branching using partial evaluation (lookahead).\nInstead of simple two-way branch, evaluates the search tree to a\nspecified depth and creates subproblems from the resulting nodes.\n\nUses ClpNode infrastructure (from Clp) for efficient node representation\nduring the lookahead phase. Can generate multiple subproblems from a\nsingle branching decision.\n\nAlso includes:\n- CbcGeneralBranchingObject: Multi-subproblem branching action\n- CbcOneGeneralBranchingObject: Single subproblem selection\n\nSupports orbital branching for symmetry handling.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcGeneral for base class",
+    "CbcSubProblem for subproblem representation",
+    "ClpNode, ClpNodeStuff for Clp integration\n\nEdwin 11/10/2009 carved out of CbcBranchActual"
+  ]
+}

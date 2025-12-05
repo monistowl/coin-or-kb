@@ -1,0 +1,20 @@
+{
+  "name": "CbcCompareDepth",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcCompareDepth.hpp",
+  "brief": "Depth-first node selection strategy\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCompareDepth: Implements depth-first search (DFS).\nDefault strategy before first solution is found.\n\ntest(x,y) returns true if y is deeper than x in the tree.\nDeepest nodes explored first -> LIFO stack behavior.",
+  "algorithms": [
+    {
+      "name": "Depth-First Search (DFS) Node Selection:\n  test(x, y) comparison for heap ordering:\n  Returns true if depth(y) > depth(x).\n  Effect: Deepest nodes processed first (LIFO behavior).\n  Memory: O(depth) nodes stored vs O(breadth) for best-first.\n  Finds feasible solution quickly; weak bounds until backtrack.",
+      "math": "Complexity trade-off:\n  DFS memory: O(d) where d = tree depth.\n  Best-first memory: O(2^d) worst case.\n  DFS bound gap: May be large until substantial backtracking.\n  Best-first bound: Optimal LP bound tracked throughout.\n\nAdvantages:\n- Low memory (linear in depth)\n- Fast to first feasible solution\n- Good for proving feasibility\n\nDisadvantages:\n- May miss better solutions at other branches\n- Weak objective bounds early in search",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcCompareObjective for best-bound search",
+    "CbcCompareDefault for hybrid approach\n\nEdwin 11/24/09 carved out of CbcCompareActual"
+  ]
+}

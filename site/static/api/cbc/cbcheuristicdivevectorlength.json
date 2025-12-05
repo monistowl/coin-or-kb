@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicDiveVectorLength",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicDiveVectorLength.hpp",
+  "brief": "Dive heuristic based on constraint participation\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDiveVectorLength: Selects variables by column density.\nVariables appearing in many constraints are fixed first.",
+  "algorithms": [
+    {
+      "name": "Vector Length Variable Selection:\n  selectVariableToBranch() for fractional integer x_j:\n  1. Compute column length: len_j = |{i : a_ij \u2260 0}| (nonzeros).\n  2. Select j* = argmax{len_j : j \u2208 fractional integers}.\n  3. Round based on lock counts (from base CbcHeuristicDive).\n  Rationale: High-density columns affect many constraints.",
+      "math": "Column density propagation:\n  Fixing x_j propagates to len_j constraints via bound tightening.\n  High len_j \u2192 more constraint propagation \u2192 faster feasibility detection.\n  Similar logic to \"most constrained variable\" in constraint programming.\n  Uses matrix_ from base class for efficient column length lookup.\n\nUses matrix_ from CbcHeuristicDive base class for column lengths.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicDive for base class and diving algorithm",
+    "CbcHeuristicDiveFractional for simpler selection"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "stringutil",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/stringutil.h",
+  "brief": "String manipulation utilities for file parsing\n\nHelper functions for trimming, case conversion, and tokenization.\n\n**Case Conversion:**\n- tolower(): Convert string to lowercase in-place\n- toupper(): Convert string to uppercase in-place\n\n**Trimming:**\n- ltrim(): Remove leading whitespace\n- rtrim(): Remove trailing whitespace\n- trim(): Remove leading and trailing whitespace\n- default_non_chars: Standard whitespace characters\n\n**Predicates:**\n- is_empty(): Check if string contains only whitespace\n- is_end(): Check if position is at end of content\n\n**Tokenization:**\n- first_word(): Extract first word from position\n- first_word_end(): Find end position of first word\n\n**Usage:**\nUsed by MPS/LP parsers for section and field extraction.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "io/HMpsFF.h for MPS parsing",
+    "io/FilereaderLp.h for LP parsing"
+  ]
+}

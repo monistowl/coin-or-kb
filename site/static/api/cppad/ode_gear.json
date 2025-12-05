@@ -1,0 +1,9 @@
+{
+  "name": "ode_gear",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/ode_gear.hpp",
+  "brief": "CppAD utility: ode gear",
+  "algorithms": [],
+  "methods": []
+}

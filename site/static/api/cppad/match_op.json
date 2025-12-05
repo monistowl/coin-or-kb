@@ -1,0 +1,9 @@
+{
+  "name": "match_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/optimize/match_op.hpp",
+  "brief": "Tape optimization: match_op",
+  "algorithms": [],
+  "methods": []
+}

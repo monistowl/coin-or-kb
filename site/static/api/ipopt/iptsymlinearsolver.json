@@ -1,0 +1,21 @@
+{
+  "name": "IpTSymLinearSolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpTSymLinearSolver.hpp",
+  "brief": "Driver connecting SymMatrix to sparse linear solver interfaces\n\nTSymLinearSolver is the main driver that connects Ipopt's SymMatrix\nobjects to concrete sparse linear solvers. It handles:\n- Matrix format conversion (SymMatrix to triplet/CSR)\n- Optional matrix scaling\n- Delegation to SparseSymLinearSolverInterface implementations",
+  "algorithms": [
+    {
+      "name": "Triplet Linear Solver Driver:\n  MultiSolve(A, rhs, sol):\n  1. Check if structure changed via atag_ (TaggedObject comparison).\n  2. If new structure: InitializeStructure() extracts triplet indices.\n  3. GiveMatrixToSolver(): Copy values, apply scaling if enabled.\n  4. Call solver_interface_->MultiSolve() for factorization + solve.\n  5. Unscale solution: x = D\u00b7x_scaled where D = diag(scaling_factors_).\n  On IncreaseQuality(): Enable scaling if linear_scaling_on_demand_.",
+      "math": "Matrix scaling for conditioning:\n  Scaled system: D\u00b7A\u00b7D\u00b7(D^{-1}\u00b7x) = D\u00b7b where D = diag(d_i).\n  Goal: equilibrate rows/columns so max|A_scaled[i,j]| \u2248 1.\n  Improves numerical stability and convergence of iterative refinement.\n\nFormat handling:\n- Queries solver's MatrixFormat() preference\n- Uses TripletToCSRConverter if solver needs CSR format\n- Stores triplet indices in airn_/ajcn_ arrays\n\nScaling support:\n- Optional TSymScalingMethod for equilibration\n- Scales matrix, RHS, and solution: D*A*D, D*b, D^{-1}*x\n- linear_scaling_on_demand_: Enable scaling when quality increase requested\n\nThe tag system (atag_) tracks matrix changes to avoid redundant\nfactorizations when the matrix hasn't changed.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpSparseSymLinearSolverInterface.hpp for solver interface",
+    "IpTripletToCSRConverter.hpp for format conversion",
+    "IpTSymScalingMethod.hpp for scaling"
+  ]
+}

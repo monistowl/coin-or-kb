@@ -1,0 +1,22 @@
+{
+  "name": "BonEcpCuts",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/OaGenerators/BonEcpCuts.hpp",
+  "brief": "Extended Cutting Plane (ECP) cut generator for MINLP\n\nGenerates OA cuts iteratively at LP solution points, refining the\nlinear approximation without requiring NLP solves at every iteration.",
+  "algorithms": [
+    {
+      "name": "Extended Cutting Plane (ECP) Method:\nIterative linearization without explicit NLP solves:\n1. Solve LP relaxation \u2192 x^k\n2. Evaluate nonlinear constraints: v\u1d62 = g\u1d62(x^k) for all i\n3. Find most violated: i* = argmax{v\u1d62 : v\u1d62 > 0}\n4. If max violation < abs_violation_tol_: STOP (feasible)\n5. Add OA cut at x^k for constraint i*:\n   g\u1d62*(x^k) + \u2207g\u1d62*(x^k)\u1d40(x - x^k) \u2264 0\n6. k \u2190 k+1; if k < numRounds_: goto step 1\n\nRandomization via beta_:\n- Skip cut with probability (1 - \u03b2^violation_count)\n- Prevents overgeneration on nearly feasible constraints",
+      "math": "Convergence for convex constraints:\nLP optimal value z^k \u2192 NLP optimal value z* as k \u2192 \u221e\n(since linear underestimators converge to convex envelope)",
+      "complexity": "O(k \u00b7 LP_solve + k \u00b7 nnz(\u2207g)) where k = numRounds_.\nMuch cheaper than OA since no NLP solves during iterations.",
+      "ref": [
+        "Kelley (1960). \"The cutting-plane method for solving convex programs\".\n  Journal of the SIAM 8(4):703-712."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OaDecompositionBase for base class",
+    "LpBranchingSolver for use in strong branching"
+  ]
+}

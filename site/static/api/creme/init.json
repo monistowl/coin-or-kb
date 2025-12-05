@@ -1,0 +1,13 @@
+{
+  "name": "init",
+  "library": "Creme",
+  "layer": "layer-4",
+  "header": "Creme/src/Base/init.h",
+  "brief": "Solution initialization for Creme randomized LP solver\n\ninit_x(): Initialize primal variable values.\ninit_sat(): Initialize constraint satisfaction tracking (b-Ax, sat flags).\ncalc_lhs(): Compute left-hand side of constraints (with SIMD pragmas).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "rtr.h for randomized rounding algorithm",
+    "sparse.h for LP data structure"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "HighsAnalysis",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsAnalysis.h",
+  "brief": "Timer clock aggregation for performance analysis\n\nGroups named timer clocks for measuring algorithm phases.\n\n**HighsTimerClock:**\n- timer_pointer_: Reference to parent HighsTimer\n- clock_[]: Vector of clock indices for this group\n\n**Usage:**\n- Simplex phases (pricing, ratio test, update)\n- IPM iterations\n- MIP operations (cuts, branching, heuristics)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "util/HighsTimer.h for clock management"
+  ]
+}

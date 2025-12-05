@@ -1,0 +1,26 @@
+{
+  "name": "adolc",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adolc.h",
+  "brief": "Master include file for ADOL-C automatic differentiation library\n\nADOL-C (Automatic Differentiation by Overloading in C++) computes derivatives\nof mathematical functions via operator overloading and tape-based recording.\nRecords computation as a \"tape\" then replays in forward/reverse mode.",
+  "algorithms": [
+    {
+      "name": "Tape-Based Automatic Differentiation:\nComputes exact derivatives using operator overloading and tape replay:\n\nRECORDING PHASE:\n1. trace_on(tag) - Begin recording to tape with identifier 'tag'\n2. Use adouble type - Operations recorded as instruction sequence\n3. trace_off() - Finalize tape, optionally write to disk\n\nFORWARD MODE (compute directional derivatives):\n- Propagate derivatives from inputs to outputs: \u1e8f = J\u00b7\u1e8b\n- Cost: O(p\u00b7ops) for p directions, 'ops' = tape operations\n- Modes: zos (0th order), fos (1st order scalar), hos (higher order)\n\nREVERSE MODE (compute gradients/adjoints):\n- Propagate adjoints from outputs to inputs: x\u0304 = J\u1d40\u00b7\u0233\n- Cost: O(q\u00b7ops) for q adjoints, independent of input dimension!\n- Modes: fos_reverse, hos_reverse, hov_reverse",
+      "math": "Forward vs Reverse complexity:\nFor f: \u211d\u207f \u2192 \u211d\u1d50, computing full Jacobian J \u2208 \u211d\u1d50\u02e3\u207f:\n- Forward mode: O(n) tape evaluations (one per input direction)\n- Reverse mode: O(m) tape evaluations (one per output adjoint)\nReverse is O(n/m) faster for m << n (e.g., scalar objective functions).\n\nHigher-order Taylor coefficients computed via univariate Taylor propagation.",
+      "complexity": "O(ops) per tape evaluation, where ops = number of recorded operations.\nMemory: O(ops) for tape storage + O(ops) for reverse mode intermediates.",
+      "ref": [
+        "Griewank & Walther (2008). \"Evaluating Derivatives: Principles and\n  Techniques of Algorithmic Differentiation\", 2nd ed. SIAM.",
+        "Walther & Griewank (2012). \"Getting Started with ADOL-C\".\n  Combinatorial Scientific Computing, Chapman & Hall/CRC."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "adtb_types.h for adouble/pdouble class definitions",
+    "interfaces.h for low-level forward/reverse mode calls",
+    "drivers/drivers.h for high-level derivative computation",
+    "tape_interface.h for tape management functions",
+    "Ipopt for NLP optimization using ADOL-C derivatives"
+  ]
+}

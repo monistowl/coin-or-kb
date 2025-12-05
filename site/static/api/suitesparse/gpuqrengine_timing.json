@@ -1,0 +1,9 @@
+{
+  "name": "GPUQREngine_Timing",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_Timing.hpp",
+  "brief": "CUDA event-based timing macros for kernel profiling\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nTiming macros enabled by TIMING define: TIMER_INIT (create cudaEvents),\nTIMER_START (record start), TIMER_STOP (synchronize and get elapsed),\nTIMER_FINISH (destroy events). Compiles to no-ops when TIMING undefined.\nUsed for kernel performance measurement and optimization.",
+  "algorithms": [],
+  "methods": []
+}

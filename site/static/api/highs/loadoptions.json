@@ -1,0 +1,13 @@
+{
+  "name": "LoadOptions",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/io/LoadOptions.h",
+  "brief": "Load solver options from file\n\nParses options files into HighsOptions structure.\n\n**HighsLoadOptionsStatus:**\n- kError: Parse failure or invalid option\n- kOk: Options loaded successfully\n- kEmpty: File exists but contains no options\n\n**loadOptionsFromFile():**\nReads option file with key=value pairs:\n- Recognizes all HighsOptions fields\n- Validates option names and value types\n- Logs warnings for unknown options\n\n**File Format:**\nSimple text format with one option per line:\n```\npresolve = on\ntime_limit = 3600.0\nmip_rel_gap = 0.01\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lp_data/HighsOptions.h for option definitions",
+    "Highs::readOptions() for user-facing API"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "lu_factor",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/lu_factor.hpp",
+  "brief": "CppAD utility: lu factor",
+  "algorithms": [],
+  "methods": []
+}

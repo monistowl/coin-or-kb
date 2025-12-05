@@ -1,0 +1,23 @@
+{
+  "name": "DecompAlgoPC",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompAlgoPC.h",
+  "brief": "Price-and-Cut algorithm (Dantzig-Wolfe decomposition with cuts)\n\nDecompAlgoPC implements the most powerful DIP algorithm combining:\n- Column generation (pricing subproblems)\n- Cut generation (violated inequalities)\n- Branch-and-bound integration via ALPS",
+  "algorithms": [
+    {
+      "name": "Price-and-Cut (Column Generation with Cuts):\nSolves reformulated MIP by iterating between pricing and cutting.\n\nCOLUMN GENERATION LOOP:\n  while (has_negative_reduced_cost):\n    1. Solve restricted master LP \u2192 duals \u03c0\n    2. For each subproblem k:\n       Solve: min (c - A'\u03c0)\u00b7x s.t. x \u2208 P\u2096\n       If optimal < convexity_dual: add column\n    3. If no columns added: optimal for current cut set\n\nCUT GENERATION:\n  After pricing converges:\n  1. Compute x = \u03a3\u2096 s\u2096\u03bb\u2096 (convex combination)\n  2. Search for violated cuts: a'x > b\n  3. Add cuts to master, return to pricing\n\nBRANCHING:\n  When both pricing and cutting converge with fractional solution:\n  Branch on \u03bb variables or original x variables\n\nDUAL STABILIZATION (Wentges smoothing):\n  Raw duals \u03c0_RM from master may oscillate wildly.\n  Stabilized: \u03c0_stab = \u03b1\u00b7\u03c0_RM + (1-\u03b1)\u00b7\u03c0_prev\n  Better subproblem objectives, faster convergence.",
+      "math": "Reduced cost for column s from subproblem k:\n  r\u0304\u209b = c's\u2096 - \u03c0'(A\u00b7s\u2096) - \u03bc\u2096\n  where \u03bc\u2096 is dual of convexity constraint for block k\n\nPricing oracle: min_{x \u2208 P\u2096} (c - A'\u03c0)'x\nAdd column if optimal value < \u03bc\u2096",
+      "complexity": "- Per pricing iteration: k \u00d7 subproblem_complexity\n- Per master solve: O(cols \u00d7 rows) simplex\n- Total: difficult to bound, empirically fast for structured problems",
+      "ref": [
+        "Barnhart, Johnson, Nemhauser, Savelsbergh & Vance (1998).\n  \"Branch-and-Price: Column Generation for Solving Huge Integer Programs\".\n  Operations Research 46(3):316-329.\n\n**Dantzig-Wolfe Reformulation:**\nOriginal: min c'x s.t. A''x >= b'', A'x >= b', x integer\nReformulated: min sum_s (c's_s)lambda_s s.t. sum_s (A''s_s)lambda_s >= b''\nwhere s_s are extreme points of conv{x: A'x >= b', x integer}\n\n**Dual Stabilization:**\n- m_dual: Stabilized dual used for pricing\n- m_dualRM: Raw dual from restricted master\n- m_dualST: Smoothed dual (Wentges smoothing)\nPrevents oscillation and improves convergence using:\n  dual_stab = alpha * dual_RM + (1-alpha) * dual_prev\n\n**Key Overrides:**\n- createMasterProblem(): Build restricted master with convexity rows\n- getMasterDualSolution(): Return stabilized duals for pricing\n- phaseUpdate(): Manage PRICE1->PRICE2->CUT transitions\n\n**Phases:**\n- PHASE_PRICE1: Generate initial columns, drive out artificials\n- PHASE_PRICE2: Normal pricing until no negative reduced cost\n- PHASE_CUT: Add cuts, then return to pricing if cuts found"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DecompAlgo.h for base class interface",
+    "DecompVar.h for column representation",
+    "DecompCut.h for cut representation"
+  ]
+}

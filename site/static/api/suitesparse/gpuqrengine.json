@@ -1,0 +1,9 @@
+{
+  "name": "GPUQREngine",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine.hpp",
+  "brief": "Version information for GPUQREngine CUDA library\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nVersion macros for GPUQREngine GPU-accelerated QR factorization.\nCurrent version 4.3.4 (June 2024). Part of SuiteSparse SPQR.",
+  "algorithms": [],
+  "methods": []
+}

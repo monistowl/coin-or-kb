@@ -1,0 +1,19 @@
+{
+  "name": "CoinNodeHeap",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinNodeHeap.hpp",
+  "brief": "Monotone min-heap for Dijkstra's algorithm",
+  "algorithms": [
+    {
+      "name": "Monotone Min-Heap:\n  Binary heap with decreasing-key only (no arbitrary updates).\n  Heap property: parent.cost \u2264 children.cost\n  Operations:\n  - update(node, newCost): decrease key, bubble up (newCost < oldCost)\n  - removeFirst(): extract minimum, bubble down replacement\n  - isEmpty(): check if all nodes at infinity",
+      "math": "Used in Dijkstra where distances only decrease.\n  Monotonicity allows simpler implementation than general heap.\n  Position array enables O(1) node lookup for decrease-key.",
+      "complexity": "update: O(log n) for bubble-up\n  removeFirst: O(log n) for bubble-down\n  isEmpty: O(1)\n  Space: O(n) for heap + position array",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinShortestPath for Dijkstra implementation using this heap\n\n\\copyright{Copyright 2020 Brito, S.S. and Santos, H.G.}\n\\license{This This code is licensed under the terms of the Eclipse Public License (EPL).}"
+  ]
+}

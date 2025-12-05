@@ -1,0 +1,23 @@
+{
+  "name": "ClpCholeskyMumps",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpCholeskyMumps.hpp",
+  "brief": "MUMPS sparse direct solver interface for Cholesky factorization\n\nWraps the MUMPS (MUltifrontal Massively Parallel sparse direct Solver)\nlibrary for Cholesky factorization of normal equations in interior point.",
+  "algorithms": [
+    {
+      "name": "MUMPS Multifrontal Sparse Cholesky:\n  Parallel sparse direct factorization A = LL':\n  1. Analyze phase: Fill-reducing ordering (AMD/METIS/SCOTCH)\n  2. Build elimination tree and allocate frontal matrices\n  3. Factor via multifrontal method:\n     - Assemble contributions into frontal matrix F_k\n     - Factor dense block: F_k = L_k \u00b7 L_k'\n     - Form update matrix (Schur complement) for parent\n  4. Solve via forward/backward substitution through tree",
+      "math": "Multifrontal factorization:\n  Elimination tree defines partial ordering of pivots.\n  Frontal matrix F_k contains all fill-in for subtree rooted at k.\n  Dense BLAS-3 operations on fronts for efficiency.",
+      "complexity": "O(n\u00b7f\u00b2) where f = max frontal matrix size.\n  Parallel: O(n\u00b7f\u00b2/p) with p MPI processes.\n  Memory: O(n\u00b7f) for frontal storage.",
+      "ref": [
+        "Amestoy et al. (2001). \"A Fully Asynchronous Multifrontal Solver Using\n     Distributed Dynamic Scheduling\". SIAM J. Matrix Anal. Appl. 23:15-41.\n\nMUMPS provides:\n- Multifrontal factorization with supernodes\n- Distributed memory parallelism (MPI)\n- Dense column handling for improved performance\n\nRequires MUMPS library to be installed and linked. The DMUMPS_STRUC_C\nstructure is forward-declared as void for compilation without MUMPS headers."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpCholeskyBase for the abstract interface",
+    "ClpInterior which uses this factorization",
+    "http://mumps.enseeiht.fr/ for MUMPS documentation"
+  ]
+}

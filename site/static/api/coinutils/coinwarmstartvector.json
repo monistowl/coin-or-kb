@@ -1,0 +1,13 @@
+{
+  "name": "CoinWarmStartVector",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinWarmStartVector.hpp",
+  "brief": "Template warm start storing a single typed vector",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinWarmStart for the abstract base class",
+    "CoinWarmStartDual which uses this for dual vector storage"
+  ]
+}

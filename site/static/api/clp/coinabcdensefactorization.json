@@ -1,0 +1,20 @@
+{
+  "name": "CoinAbcDenseFactorization",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/CoinAbcDenseFactorization.hpp",
+  "brief": "Abstract base class for ABC factorization and dense submatrix handling",
+  "algorithms": [
+    {
+      "name": "When Dense Beats Sparse:\n- Small m (< 200): BLAS-3 efficiency dominates\n- Nearly dense basis: Sparse overhead not worth it\n- Numerical difficulty: Dense more stable",
+      "math": "LU WITH PARTIAL PIVOTING:\nFactor B = PLU where:\n  P = permutation matrix (row interchanges for stability)\n  L = unit lower triangular\n  U = upper triangular",
+      "complexity": "Dense factorization: O(m\u00b3)\nDense FTRAN/BTRAN: O(m\u00b2)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinAbcBaseFactorization for sparse LU implementation",
+    "CoinAbcFactorization for template-instantiated variants"
+  ]
+}

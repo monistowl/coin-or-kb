@@ -1,0 +1,13 @@
+{
+  "name": "sym_cg_u",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_cg_u.h",
+  "brief": "User callbacks for cut generator process\n\nDefines callbacks for custom cut generation in SYMPHONY.\nUsers implement problem-specific separation routines here.\n\n**Cut addition helpers (non-user):**\n- cg_add_explicit_cut(): Add cut with explicit coefficients\n- cg_add_user_cut(): Add packed user-defined cut\n- cg_send_cut(): Send cut to LP (internal)\n\n**User callbacks:**\n- user_receive_cg_data(): Receive problem-specific data\n- user_free_cg(): Clean up user data\n- user_find_cuts(): Main separation routine\n  - Called with LP solution (indices, values, objval)\n  - Populates cuts array via cg_add_* helpers\n- user_receive_lp_solution_cg(): Custom solution handling\n- user_check_validity_of_cut(): Debug validation (ifdef)\n\n**Example user_find_cuts implementation:**\n```c\nint user_find_cuts(void *user, int varnum, ...) {\n    // Check for violated inequalities\n    for (each inequality class) {\n        if (is_violated(values, ...)) {\n            cg_add_explicit_cut(nz, ind, val, rhs, 0.0,\n                                'L', TRUE, num_cuts, ...);\n        }\n    }\n    return USER_SUCCESS;\n}\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_cg.h for cut generator process",
+    "sym_lp_u.h for LP-side cut callbacks"
+  ]
+}

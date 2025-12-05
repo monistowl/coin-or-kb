@@ -1,0 +1,451 @@
+{
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "classes": [
+    {
+      "name": "BB_cut",
+      "brief": "Bonmin BCP cutting plane interface\n\nCutting plane interface for Bonmin integrated with BCP framework.\nExperimental: combines branch-cut-price with MINLP solving.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BM",
+      "brief": "Bonmin BCP main interface\n\nMain interface for experimental Bonmin-BCP integration.\nCombines branch-cut-price parallel framework with MINLP.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BONMIN_ReferenceManual",
+      "brief": "Bonmin Doxygen documentation main page\n\nMain page for Bonmin reference manual. Provides overview of Mixed\nInteger Nonlinear Programming solver combining B&B with Ipopt NLP.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonAmplInterface",
+      "brief": "OsiSolverInterface for AMPL .nl file input\n\nExtends OsiTMINLPInterface to read problems from AMPL .nl files.\nProvides convenient entry point for AMPL-based modeling.\n\n**Usage:**\n@code\nAmplInterface solver;\nsolver.readAmplNlFile(argv, roptions, options, journalist);\n@endcode\n\n**Additional features:**\n- readNames(): Read variable/row names from .col/.row files\n- amplModel(): Access underlying AmplTMINLP",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonAmplSetup",
+      "brief": "AMPL-specific Bonmin setup and initialization\n\nExtends BonminSetup to initialize from AMPL command-line arguments\nand .nl files. Handles reading options and model from AMPL.\n\n**Initialization methods:**\n- initialize(argv): Read from command line and files\n- initialize(argv, opt_content, nl_content): Read from strings (for Bcp)\n- fillOsiInterface(): Initialize existing interface from strings",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonAmplTMINLP",
+      "brief": "AMPL interface for MINLP problems via .nl files\n\nImplements TMINLP by reading AMPL .nl files, extracting integer variable\ninformation, SOS constraints, branching priorities, and convexity markers.\n\n**AMPL suffix reading:**\n- read_priorities(): Variable branching priorities\n- read_sos(): SOS1/SOS2 constraint definitions\n- read_convexities(): Constraint convexity markers (for OA)\n- read_onoff(): Perspective reformulation indicators\n- read_obj_suffixes(): Upper bounding objective (UBObj prefix)\n\n**AMPL solve_result_num codes:**\n- 3: Integer optimal\n- 220: Proven infeasible\n- 421: Limit reached with feasible solution\n- 410: Limit reached, no feasible solution\n- 500: Error",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonArraysHelpers",
+      "brief": "Array resize and copy utilities for Bonmin\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nTemplate functions for resizing arrays while preserving content:\n- resizeAndCopyArray: Resize and copy up to min(old,new) elements\n- resizeAndCopyArray with capacity: Only reallocate if needed\n\nAuthors: Pierre Bonami, IBM\nDate: October 6, 2007",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonAuxInfos",
+      "brief": "Auxiliary information passing between Bonmin B&B components\n\nExtends OsiBabSolver to pass solver-specific information during\nbranch-and-cut, including NLP solutions found by heuristics.\n\n**Key functionality:**\n- nlpSolution_: Store solutions from NLP solves/heuristics\n- infeasibleNode_: Flag for cut generator detected infeasibility\n- bestSolution2_: Alternate objective tracking (for bi-objective)\n\n**Usage pattern:**\nCut generators and heuristics store found solutions here;\nthe B&B framework queries for incumbents.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonBabInfos",
+      "brief": "Information passing between Bonmin B&B components\n\nExtends OsiAuxInfo to pass Bonmin-specific information between components\nduring branch-and-cut. Provides access to the Bab solver and solution info.\n\n**Key functionality:**\n- babPtr_: Access to the Bab object (and via it, CbcModel)\n- hasSolution(): Check if incumbent exists\n- bestSolution_: Current best known solution (from AuxInfo)\n\nUsed by cut generators and heuristics to query current B&B state.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonBabSetupBase",
+      "brief": "Base configuration class for branch-and-bound MINLP solvers\n\nAggregates all components needed to run branch-and-bound: NLP solver,\ncut generators, heuristics, branching rules, and tree traversal strategy.\nServes as the central configuration point for Bonmin algorithms.\n\n**Key components:**\n- nonlinearSolver_: OsiTMINLPInterface for NLP subproblems\n- cutGenerators_: List of CglCutGenerator (OA, ECP, Gomory, etc.)\n- heuristics_: List of CbcHeuristic (feasibility pump, rounding, etc.)\n- branchingMethod_: OsiChooseVariable for variable selection\n\n**Tree search strategies:**\n- NodeComparison: bestBound, DFS, BFS, dynamic, bestGuess\n- TreeTraversal: HeapOnly, DiveFromBest, ProbedDive, DfsDiveFromBest\n\n**Branching strategies (VarSelectStra_Enum):**\n- MOST_FRACTIONAL: Simple, fast, often poor\n- STRONG_BRANCHING: Evaluate candidates via LP/NLP solves\n- RELIABILITY_BRANCHING: Use pseudo-costs when trusted",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonBonminSetup",
+      "brief": "Main Bonmin algorithm configuration and initialization\n\nExtends BabSetupBase with Bonmin-specific algorithm selection and\ninitialization for all MINLP algorithms.\n\n**Algorithm enum:**\n- B_BB (0): NLP-based branch-and-bound\n- B_OA (1): Pure Outer Approximation decomposition\n- B_QG (2): Quesada-Grossmann branch-and-cut\n- B_Hyb (3): Hybrid OA with NLP at nodes (default)\n- B_Ecp (4): Extended Cutting Plane (FilMINT-style)\n- B_IFP (5): Iterated Feasibility Pump\n\n**Initialization:**\n- initializeBBB(): Pure B&B with NLP at every node\n- initializeBHyb(): Hybrid with OA cuts + occasional NLP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonBoundsReader",
+      "brief": "Reader for variable bound modification files\nCopyright (C) Carnegie Mellon University 2005. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nBoundsReader: Reads files containing variable bound changes in\nMPS-like format. Applies bound modifications to OsiTMINLPInterface\nfor scenario analysis or user-specified bound tightening.\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: May 26, 2005",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonBqpdSolver",
+      "brief": "Interface to BQPD quadratic programming solver\nCopyright (C) International Business Machines Corporation, 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nBqpdSolver: TNLPSolver implementation wrapping the BQPD Fortran solver\nfor solving quadratic programs during strong branching. Provides hot\nstart capability for efficient re-optimization with changed bounds.\n\nUses BranchingTQP to create QP approximations of the MINLP.\n\nAuthors: Andreas Waechter, IBM (based on BonFilterSolver.cpp)\nDate: July 9, 2007",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonBqpdWarmStart",
+      "brief": "Warm start information for BQPD solver\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nBqpdWarmStart: Stores warm start information for BQPD QP solver.\nInherits from both CoinWarmStartPrimalDual (actual warm start data)\nand CoinWarmStartBasis (for Cbc integration compatibility).\n\nAuthors: Andreas Waechter, IBM (based on BonFilterWarmStart.hpp)\nDate: August 3, 2007",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonBranchingTQP",
+      "brief": "QP adapter for strong branching in MINLP\nCopyright (C) International Business Machines Corporation and\nCarnegie Mellon University 2006, 2008. All Rights Reserved.\nThis code is published under the Eclipse Public License.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonCbc",
+      "brief": "Main branch-and-bound driver for Bonmin using Cbc\n\nThe Bab class is the entry point for solving MINLPs with Bonmin. It wraps\nCbcModel to provide branch-and-bound with NLP solvers for subproblems.\n\n**Key method:**\n- branchAndBound(BabSetupBase&): Main solve routine\n\n**Return statuses (MipStatuses):**\n- FeasibleOptimal: Optimal solution found and proven\n- ProvenInfeasible: Problem proven infeasible\n- Feasible: Integer solution found (not proven optimal)\n- UnboundedOrInfeasible: Continuous relaxation unbounded\n- NoSolutionKnown: No feasible solution found\n\n**Solution access:**\n- bestSolution(): Primal solution vector\n- bestObj(): Objective value of best solution\n- bestBound(): Best known lower bound",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonCbcLpStrategy",
+      "brief": "Cbc strategy for configuring cut generators in OA\nCopyright (C) Carnegie Mellon University 2006. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nCbcStrategyChooseCuts: Strategy class extending CbcStrategyDefault\nto configure cut generators (Gomory, MIR, etc.) for use in Outer\nApproximation LP subproblems. Sets generator frequencies based on\nBabSetupBase configuration.\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: March 15, 2006",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonCbcNlpStrategy",
+      "brief": "NLP failure handling strategy for Cbc in MINLP context\nCopyright (C) International Business Machines Corporation and\nCarnegie Mellon University 2006. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nCbcNlpStrategy: Strategy class for handling NLP solve failures during\nbranch-and-bound. Tracks consecutive failures and infeasibilities,\noptionally treating failures as infeasible to continue search.\n\nAuthors: John J. Forrest, IBM; Pierre Bonami, CMU\nDate: March 15, 2006",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonCbcNode",
+      "brief": "Extended node information classes for MINLP branch-and-bound\n\nExtends Cbc's node information to track MINLP-specific data like sequences\nof infeasible or unsolved subproblems along a branch.\n\n**Classes:**\n- BonCbcFullNodeInfo: Complete node recreation from scratch\n- BonCbcPartialNodeInfo: Incremental node changes from parent\n\n**MINLP-specific tracking:**\n- sequenceOfInfeasiblesSize_: Consecutive infeasible NLP subproblems\n- sequenceOfUnsolvedSize_: Consecutive NLP solver failures\n\nThese counts help detect problematic branches where NLP solves consistently\nfail, enabling early pruning heuristics to avoid wasted computation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonChooseVariable",
+      "brief": "Strong branching and pseudo-cost based variable selection for MINLP\n\nImplements branching variable selection for nonlinear branch-and-bound.\nCombines strong branching (solving LP/NLP relaxations) with pseudo-costs\n(estimates from historical branching information).\n\n**Key classes:**\n- BonChooseVariable: Main branching decision maker (extends OsiChooseVariable)\n- HotInfo: Stores strong branching results for a candidate\n\n**Branching decision process:**\n1. setupList(): Identify fractional variables, rank by pseudo-costs\n2. doStrongBranching(): Evaluate top candidates via LP/NLP solves\n3. chooseVariable(): Select best candidate based on objective change\n\n**Pseudo-cost computation:**\n- Estimates objective change per unit change in variable value\n- Updated after each branching decision using actual results\n- Used to avoid expensive strong branching after trust is established",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonColReader",
+      "brief": "Reader for AMPL .col and .row name files\nCopyright (C) Carnegie Mellon University 2005. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nNamesReader: Reads variable and constraint names from AMPL-generated\n.col (column names) and .row (row names) files. Provides bidirectional\nlookup between indices and names via hash map.\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: May 26, 2005",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonCurvBranchingSolver",
+      "brief": "Curvature-based branching solver (DEPRECATED)\nCopyright (C) 2006, 2007 International Business Machines Corporation.\nAll Rights Reserved.\n\nCurvBranchingSolver: Strong branching solver that uses curvature\nestimation to predict bound changes. Uses second-order information\nfrom the Hessian to guide variable selection.\n\nNOTE: This code is no longer supported.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonCurvatureEstimator",
+      "brief": "Curvature estimation for branching decisions (NOT SUPPORTED)",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonCutStrengthener",
+      "brief": "Strengthening OA cuts via NLP optimization\n\nImproves outer approximation cuts by solving auxiliary NLPs to find\ntighter bounds on linearizations. Also supports disjunctive cuts.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonDiver",
+      "brief": "Diving-based tree traversal strategies for MINLP branch-and-bound\n\nImplements tree traversal strategies that \"dive\" down branches before\nbacktracking, often finding feasible solutions faster than pure best-bound.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonDummyHeuristic",
+      "brief": "Simple placeholder heuristic wrapping NLP solver\nCopyright (C) Carnegie Mellon University 2005. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nDummyHeuristic: Minimal heuristic that calls NLP solver to provide\nsolutions. Used for testing or as template for new heuristics.\nAlways reports ready to run (shouldHeurRun returns true).\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: May 26, 2005",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonDummyPump",
+      "brief": "Placeholder/testing heuristic for feasibility pump\nCopyright (C) CNRS\nThis code is published under the Eclipse Public License.\n\nDummyPump: Simple placeholder heuristic extending LocalSolverBasedHeuristic.\nUsed for testing or as template for new heuristics.\n\nProvides minimal implementation of solution() method.\n\nAuthors: Pierre Bonami, LIF Universit\u00e9 de la M\u00e9diterran\u00e9e-CNRS\nDate: 06/18/2008",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonEcpCuts",
+      "brief": "Extended Cutting Plane (ECP) cut generator for MINLP\n\nGenerates OA cuts iteratively at LP solution points, refining the\nlinear approximation without requiring NLP solves at every iteration.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonExitCodes",
+      "brief": "Error codes for uncatchable errors in Bonmin\n\nDefines error codes for fatal errors that cannot be handled via exceptions.\n\n**Error codes:**\n- ERROR_IN_AMPL_SUFFIXES (111): Invalid AMPL suffix specification\n- UNSUPPORTED_CBC_OBJECT: CbcObject type not supported by Bonmin",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonFilterSolver",
+      "brief": "FilterSQP implementation of TNLPSolver for NLP subproblems",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonFilterTypes",
+      "brief": "Fortran type definitions for FilterSQP interface\n\nDefines type aliases for interfacing with the Fortran FilterSQP library.\nUses FORTRAN_INTEGER_TYPE from Ipopt's configuration for portability\nacross different Fortran compilers (32-bit vs 64-bit integers).",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonFilterWarmStart",
+      "brief": "Warm start storage for FilterSQP solver\n\nStores warm start information for FilterSQP, including primal/dual values\nand FilterSQP's internal lws (integer working set) array. Inherits from both\nCoinWarmStartPrimalDual and CoinWarmStartBasis for Cbc compatibility.\n\n**Data stored:**\n- x: Primal variables (from CoinWarmStartPrimalDual)\n- lam: Dual multipliers (from CoinWarmStartPrimalDual)\n- lws: FilterSQP's integer working set array (active set info)\n- istat[14]: FilterSQP status array\n\n**Classes:**\n- FilterWarmStart: Main warm start container\n- FilterWarmStartDiff: Differential update for tree traversal",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonFixAndSolveHeuristic",
+      "brief": "Fix-and-Solve heuristic for MINLP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonFpForMinlp",
+      "brief": "Feasibility Pump for MINLP via Outer Approximation\nCopyright (C) CNRS 2008. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nMinlpFeasPump: Feasibility Pump implementation for MINLP using OA\ndecomposition. Alternates between solving MIP with distance-to-integer\nobjective and NLP with fixed integers to find feasible solutions.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonGuessHeuristic",
+      "brief": "Pseudocost-based initial guess heuristic for MINLP\nCopyright (C) International Business Machines 2007. All Rights Reserved.\nThis code is published under the Eclipse Public License.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonHeuristicDive",
+      "brief": "Base class for diving heuristics in MINLP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonHeuristicDiveFractional",
+      "brief": "NLP-based diving heuristic selecting most fractional variable\nCopyright (C) 2007, International Business Machines Corporation and others.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonHeuristicDiveMIP",
+      "brief": "Base class for MIP-based diving heuristics in MINLP\nCopyright (C) 2007, International Business Machines Corporation and others.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonHeuristicDiveMIPFractional",
+      "brief": "MIP-based diving heuristic selecting most fractional variable\nCopyright (C) 2007, International Business Machines Corporation and others.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonHeuristicDiveMIPVectorLength",
+      "brief": "MIP-based diving heuristic selecting by constraint participation\nCopyright (C) 2007, International Business Machines Corporation and others.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonHeuristicDiveVectorLength",
+      "brief": "NLP-based diving heuristic selecting by constraint participation\nCopyright (C) 2007, International Business Machines Corporation and others.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonHeuristicFPump",
+      "brief": "Feasibility Pump heuristic for MINLP\n\nImplements the Feasibility Pump algorithm adapted for nonlinear problems.\nAlternates between:\n1. Rounding to nearest integer solution\n2. Projecting back to feasible continuous space via NLP\n\n**Classes:**\n- HeuristicFPump: Main feasibility pump heuristic (CbcHeuristic)\n- RoundingFPump: Helper for intelligent rounding considering constraints",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonHeuristicInnerApproximation",
+      "brief": "Bonmin inner approximation heuristic for MINLP\n\nPrimal heuristic using inner approximation of feasible region.\nGenerates feasible MINLP solutions from LP relaxations.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonHeuristicLocalBranching",
+      "brief": "Local Branching heuristic for MINLP improvement",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonHeuristicRINS",
+      "brief": "Relaxation Induced Neighborhood Search (RINS) heuristic for MINLP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonIpoptInteriorWarmStarter",
+      "brief": "Interior point warm start for Ipopt in branch-and-bound\n\nStores interior point iterates from a solved NLP for warm starting child\nnodes. Unlike simple optimal-point warm start, this preserves barrier\nparameter (mu) and interior structure, enabling faster convergence.\n\n**Key methods:**\n- UpdateStoredIterates(): Called during optimization to save promising iterates\n- WarmStartIterate(): Computes initial point for new problem from stored data\n- Finalize(): Post-processing after parent NLP solve completes\n\n**Stored data per iterate:**\n- Primal/dual iterate vectors\n- Barrier parameter mu\n- NLP error, primal/dual infeasibility, complementarity",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonIpoptSolver",
+      "brief": "Ipopt implementation of TNLPSolver for NLP subproblems",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonIpoptWarmStart",
+      "brief": "Warm start storage for Ipopt within branch-and-bound\n\nStores primal and dual solution values for warm starting subsequent NLP\nsolves. Inherits from both CoinWarmStartPrimalDual (for actual data) and\nCoinWarmStartBasis (for Cbc integration compatibility).\n\n**Data layout (dual part has 2*n + m values):**\n- [0, n): Dual multipliers for lower bounds (z_L for x >= l)\n- [n, 2n): Dual multipliers for upper bounds (z_U for x <= u)\n- [2n, 2n+m): Dual multipliers for constraints (lambda for g(x))\n\n**Classes:**\n- IpoptWarmStart: Main warm start container\n- IpoptWarmStartDiff: Differential update for tree traversal",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonLinearCutsGenerator",
+      "brief": "Composite cut generator managing multiple linear cut generators\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonLocalSolverBasedHeuristic",
+      "brief": "Base class for heuristics using local NLP/MINLP solves",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonLpBranchingSolver",
+      "brief": "LP-based strong branching solver using ECP cuts\n\nImplements strong branching by solving LP relaxations enhanced with\nExtended Cutting Plane (ECP) cuts, avoiding full NLP solves.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonMilpRounding",
+      "brief": "MILP-based rounding heuristic for MINLP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonMsgUtils",
+      "brief": "Message utilities and macros for Bonmin\nThis code is published under the Eclipse Public License.\n\nProvides ADD_MSG macro and message ID functions for standard,\nwarning, and error messages in the COIN message system.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonNWayChoose",
+      "brief": "Bonmin N-way branching choice\n\nN-way branching variable selection for robot path planning.\nExperimental: selects among multiple branching candidates.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonNWayObject",
+      "brief": "Bonmin N-way branching object\n\nN-way branching object for robot planning applications.\nCreates multi-way branches instead of binary left/right.",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonOACutGenerator2",
+      "brief": "Classical Outer Approximation cut generator for MINLP\n\nImplements the standard OA algorithm of Duran & Grossmann (1986) for convex\nMINLP. Generates linearization cuts by Taylor expansion of nonlinear\nconstraints at NLP solutions.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonOAMessages",
+      "brief": "Message definitions for Outer Approximation algorithms\nCopyright (C) Carnegie Mellon University 2006. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nDefines message IDs and OaMessages class for output during\nOuter Approximation cutting plane algorithms. Messages include\nNLP solve status, bound updates, and iteration statistics.\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: July 15, 2005",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonOaDecBase",
+      "brief": "Base class for Outer Approximation (OA) decomposition algorithms\n\nImplements the foundation for OA-based MINLP algorithms. OA iterates between\nsolving MILP subproblems and NLP subproblems, generating linear outer\napproximations of the nonlinear constraints.\n\n**OA algorithm outline:**\n1. Solve MILP relaxation \u2192 get integer solution x*\n2. Fix integers to x*, solve NLP \u2192 get nonlinear solution y*\n3. Generate linearization cuts at y* (gradient-based)\n4. Add cuts to MILP, repeat until convergence\n\n**Key components:**\n- solverManip: RAII helper to save/restore solver state\n- performOa(): Virtual method implementing specific OA variant\n- post_nlp_solve(): Handle NLP solution and update bounds\n\n**Parameters:**\n- global_: Add cuts globally (valid at all nodes)\n- addOnlyViolated_: Only add cuts violated by current solution\n- maxLocalSearch_: Limit on local search iterations",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonOaFeasChecker",
+      "brief": "OA-based feasibility checker for MILP solutions\n\nChecks if MILP solution is feasible for original MINLP by evaluating\nnonlinear constraints and generating OA/Benders cuts if infeasible.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonOaNlpOptim",
+      "brief": "NLP-based outer approximation cut generator\n\nGenerates OA cuts by solving NLP relaxations at B&B nodes, rather than\nat integer feasible points (as in classical OA). More expensive per cut,\nbut can improve bounds at fractional nodes.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonOsiTMINLPInterface",
+      "brief": "OsiSolverInterface wrapper for TMINLP problems",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonOuterApprox",
+      "brief": "Concrete outer approximation extractor for MINLP\n\nBuilds linear outer approximations of nonlinear constraints by\nlinearizing at a given point (typically NLP solution).",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonOuterDescription",
+      "brief": "Bonmin outer approximation description for convex MINLP\n\nOuter approximation (OA) cut management for MINLP.\nLinearization-based approach for convex MINLP.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonPseudoCosts",
+      "brief": "Pseudo-cost storage and update for MINLP branching\n\nExtends OsiPseudoCosts to track branching history for integer variables.\nPseudo-costs estimate the objective change per unit change in a variable,\nenabling efficient branching decisions without expensive strong branching.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonPumpForMinlp",
+      "brief": "Feasibility Pump heuristic adapted for MINLP\nCopyright (C) CNRS\nThis code is published under the Eclipse Public License.\n\nPumpForMinlp: Feasibility Pump heuristic for nonlinear mixed-integer\nprogramming. Extends the MIP Feasibility Pump to handle nonlinear\nconstraints by using NLP subproblem solves.\n\nAlternates between:\n- Rounding current NLP solution to integer\n- Solving NLP with objective minimizing distance to rounded point\n\nAuthors: Pierre Bonami, LIF Universit\u00e9 de la M\u00e9diterran\u00e9e-CNRS\nDate: 02/18/2009",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonQpBranchingSolver",
+      "brief": "QP-based strong branching solver\n\nImplements strong branching by solving QP approximations of the NLP\nsubproblems. Faster than full NLP but more accurate than LP.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonQuadCut",
+      "brief": "Quadratic cutting plane for MINLP\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nQuadCut: Extends OsiRowCut to include quadratic term x'Qx.\nStores c + ax + x'Qx with upper/lower storage modes for Q.\n\nCuts: Collection class extending OsiCuts to manage QuadCut objects\nalongside standard linear cuts.\n\nAuthors: Pierre Bonami, IBM\nDate: October 6, 2007",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonQuadRow",
+      "brief": "Quadratic row storage for NLP solver interface\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nQuadRow: Stores quadratic constraint l < c + ax + x'Qx < u with\nefficient gradient and Hessian evaluation. Provides methods for\nNLP solver interface: eval_f, eval_grad, eval_hessian.\n\nCan be initialized from QuadCut or linear OsiRowCut.\n\nAuthors: Pierre Bonami, IBM\nDate: October 6, 2007",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonRandomChoice",
+      "brief": "Random variable selection for branching\nCopyright (C) CNRS 2008. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nBonRandomChoice: Variable selection strategy that randomly picks from\nunsatisfied integer variables. Useful for diversification in search\nor as baseline for comparison with sophisticated selection rules.\n\nAuthors: Pierre Bonami, LIF, CNRS-Marseille Universites\nDate: March 17, 2008",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonRegisteredOptions",
+      "brief": "Extended option registration with algorithm validity tracking\n\nExtends Ipopt's RegisteredOptions to track which options are valid for\nwhich Bonmin algorithms, enabling algorithm-specific option filtering.\n\n**Algorithm validity bits (ExtraOptInfosBits):**\n- validInHybrid (1): B-Hyb algorithm\n- validInQG (2): Quesada-Grossmann B-QG\n- validInOA (4): Pure outer approximation B-OA\n- validInBBB (8): Pure NLP-based branch-and-bound B-BB\n- validInEcp (16): Extended cutting plane B-Ecp\n- validIniFP (32): Iterated feasibility pump B-iFP\n- validInCbc (64): Cbc parallel mode\n\n**Category types (ExtraCategoriesInfo):**\n- BonminCategory, IpoptCategory, FilterCategory, BqpdCategory, CouenneCategory",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonSolReader",
+      "brief": "Reader for AMPL .sol solution files\nCopyright (C) CNRS 2011. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nSolReader: Reads solution files in AMPL .sol format containing\nvariable values. Used to load known solutions for warm starting\nor comparison with computed solutions.\n\nAuthors: Pierre Bonami, LIF, CNRS\nDate: March 1, 2011",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonSolverHelp",
+      "brief": "Utility functions for OA and Feasibility Pump algorithms\nCopyright (C) International Business Machines (IBM) 2006.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nHelper functions for manipulating solver state during OA decomposition\nand Feasibility Pump: checking integer feasibility, fixing/relaxing\ninteger variables, comparing solutions, and installing cuts.\n\nAuthors: Pierre Bonami, IBM\nDate: December 7, 2006",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonStartPointReader",
+      "brief": "Reader for Ipopt initialization point files\nCopyright (C) Carnegie Mellon University 2005. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nStartPointReader: Reads .initP files containing starting point\ninformation for Ipopt initialization. File format is: number of\nprimals, number of duals, then values. Variables ordered as:\nprimals, dual lower bounds, dual upper bounds, constraint duals.\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: May 26, 2005",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonStdInterfaceTMINLP",
+      "brief": "C-callback based TMINLP implementation for standard interface\nCopyright (C) Shaurya Sharma. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nStdInterfaceTMINLP: TMINLP implementation using C function pointers\nfor callbacks (eval_f, eval_g, eval_grad_f, etc.). Enables use of\nBonmin from C or languages with C FFI. Mirrors Ipopt's StdCInterface.\n\nAuthors: Shaurya Sharma\nDate: June 7, 2015",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonStrongBranchingSolver",
+      "brief": "Abstract base class for strong branching NLP solves",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonSubMipSolver",
+      "brief": "Unified interface for solving MILP subproblems in OA decomposition\n\nProvides a common interface for solving MILP subproblems using either\nCbc (via OsiClpSolverInterface) or CPLEX (via OsiCpxSolverInterface).\nUsed by OA decomposition algorithms to solve the linearized master problem.",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonTMINLP",
+      "brief": "Base class for Mixed-Integer Nonlinear Programs (MINLP)",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonTMINLP2OsiLP",
+      "brief": "Abstract transformer from MINLP to LP outer approximation\n\nBase class for building linear outer approximations of nonlinear problems.\nUsed to create MILP relaxations for OA-based algorithms.\n\n**Key methods:**\n- extract(): Build initial OA in an OsiSolverInterface\n- get_oas(): Generate OA cuts at a given point\n- get_refined_oa(): Get refined OA cuts\n\n**Coefficient cleaning (cleanNnz):**\nSmall coefficients are handled specially to avoid numerical issues:\n- Values < very_tiny_: Ignored completely\n- Values < tiny_: Try to absorb into RHS if bounds allow",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonTMINLP2Quad",
+      "brief": "TMINLP2TNLP extension supporting quadratic cuts\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nTMINLP2TNLPQuadCuts: Extends TMINLP2TNLP to handle quadratic cuts\nin the NLP subproblem. Manages adding/removing cuts, updating\nJacobian and Hessian structures, and evaluating cut contributions.\n\nSupports both linear (OsiRowCut) and quadratic (QuadCut) cuts.\n\nAuthors: Pierre Bonami, IBM\nDate: October 6, 2007",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonTMINLP2TNLP",
+      "brief": "Adapter converting TMINLP (MINLP) to TNLP (NLP) for Ipopt",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonTMINLPLinObj",
+      "brief": "TMINLP adapter that linearizes the objective function\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nTMINLPLinObj: Transforms a TMINLP by moving the objective into a\nconstraint, adding epigraph variable \u03b7. Converts min f(x) to\nmin \u03b7 s.t. f(x) - \u03b7 \u2264 0. Useful for algorithms requiring linear\nobjectives (e.g., some OA variants).\n\nAuthors: Pierre Bonami, IBM\nDate: August 16, 2007",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonTMatrix",
+      "brief": "Sparse triangular matrix storage for quadratic forms\nCopyright (C) International Business Machines Corporation 2007.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nTMat: Sparse matrix storage in triplet format (iRow, jCol, value).\nProvides ordering by rows/columns, duplicate removal, and conversion\nto upper triangular form for quadratic forms x'Qx.\n\nUsed for efficient gradient and Hessian computation in QuadRow.\n\nAuthors: Pierre Bonami, IBM\nDate: October 6, 2007",
+      "has_algorithm": false
+    },
+    {
+      "name": "BonTNLP2FPNLP",
+      "brief": "Adapter for Feasibility Pump NLP formulation\n\nWraps a TNLP to create Feasibility Pump subproblems by modifying the\nobjective to minimize distance to a target integer point.\n\n**Modified objective:**\nf_FP(x) = lambda * ||x_I - x\u0303_I||_p + (1-lambda) * sigma * f(x)\nwhere x\u0303_I is the target integer point, p is norm (1 or 2).\n\n**Optional constraints:**\n- Cutoff constraint: f(x) <= cutoff (improve on incumbent)\n- Local branching: sum |x_i - x\u0303_i| <= rhs (neighborhood search)\n\n**Key parameters:**\n- lambda_: Weight on distance (vs original objective)\n- sigma_: Scaling for original objective\n- norm_: L1 or L2 distance metric",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonTNLPSolver",
+      "brief": "Abstract interface for NLP solvers used in branch-and-bound",
+      "has_algorithm": true
+    },
+    {
+      "name": "BonTypes",
+      "brief": "Type utilities for Bonmin (vector wrapper, reference counting)\nThis code is published under the Eclipse Public License.\n\nProvides:\n- Bonmin::vector: std::vector wrapper with pointer access for Fortran\n- SimpleReferenced: Wrapper to store objects in Coin::ReferencedObject\n- SimpleReferencedPtr: Wrapper to store pointers in ReferencedObject\n- make_referenced: Factory functions for creating referenced wrappers",
+      "has_algorithm": false
+    },
+    {
+      "name": "RobotSetup",
+      "brief": "Bonmin robot planning setup\n\nConfiguration for robot path planning MINLP application.\nSets up Bonmin solver for robotics optimization problems.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SepaHeuristicInnerApproximation",
+      "brief": "Separable MINLP inner approximation\n\nInner approximation heuristic for separable MINLP problems.\nExploits problem structure for better approximations.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SepaSetup",
+      "brief": "Separable MINLP setup\n\nConfiguration for separable MINLP solver variant.\nSpecialized setup exploiting separability in objective/constraints.",
+      "has_algorithm": false
+    },
+    {
+      "name": "SepaTMINLP2OsiLP",
+      "brief": "Separable MINLP to LP conversion\n\nConverts separable TMINLP to Osi LP relaxation.\nCreates piecewise linear approximations for separable functions.",
+      "has_algorithm": false
+    }
+  ]
+}

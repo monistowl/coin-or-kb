@@ -1,0 +1,21 @@
+{
+  "name": "AbcMatrix",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcMatrix.hpp",
+  "brief": "Cache-optimized matrix for ABC simplex with multiple copies",
+  "algorithms": [
+    {
+      "name": "Row Copy Organization:\nFor dual simplex ratio test (dualColumn1):\n  1. Compute \u03c0 = c_B'\u00b7B\u207b\u00b9 (BTRAN)\n  2. For each nonbasic j: compute \u03c0\u00b7A_j using row copy\n  3. Partitioned row copy skips basic columns",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcSimplex which uses this matrix",
+    "ClpPackedMatrix for the standard (non-ABC) matrix",
+    "CoinPackedMatrix in CoinUtils for underlying storage"
+  ]
+}

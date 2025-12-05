@@ -1,0 +1,22 @@
+{
+  "name": "Mongoose_ImproveQP",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_ImproveQP.hpp",
+  "brief": "Quadratic programming partition improvement via continuous relaxation\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQP improvement relaxes discrete partition to continuous [0,1] variables,\noptimizes via gradient projection with balance constraints, then rounds\nto discrete partition. Complements FM by exploring continuous solution\nspace; combined in waterdance for best results.",
+  "algorithms": [
+    {
+      "name": "Quadratic Programming Partition Refinement:\nContinuous relaxation approach for edge cut minimization:\n1. Relax discrete x_i \u2208 {0,1} to continuous x_i \u2208 [0,1]\n2. Formulate QP: min \u00bdx\u1d40Lx s.t. \u2211w_i\u00b7x_i = W/2, 0\u2264x\u22641\n3. Solve via gradient projection (projected gradient descent)\n4. Round continuous solution to discrete partition\n5. Use rounded solution to warm-start FM",
+      "math": "Graph Laplacian QP formulation:\n$$\\min_{x} \\frac{1}{2} x^T L x = \\frac{1}{4} \\sum_{(i,j)\\in E} w_{ij}(x_i - x_j)^2$$\nwhere L = D - A is the graph Laplacian (D = degree matrix, A = adjacency).\n\nBalance constraint as equality: \u2211 w_i\u00b7x_i = W\u00b7target_split\nBox constraints: 0 \u2264 x_i \u2264 1 (relaxation of binary)",
+      "complexity": "O(k\u00b7|E|) where k = gradient projection iterations.\nMatrix-vector product Lx costs O(|E|).",
+      "ref": [
+        "Hager et al. (2018). \"A graph partitioning algorithm based on\n  continuous quadratic programming\". SIAM J. Sci. Comput."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_QPGradProj.hpp for gradient projection solver",
+    "Mongoose_ImproveFM.hpp for discrete FM alternative"
+  ]
+}

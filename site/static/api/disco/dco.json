@@ -1,0 +1,14 @@
+{
+  "name": "Dco",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/Dco.hpp",
+  "brief": "Central header defining DisCO enums, types, and constants\n\nThis header defines all enumeration types used throughout DisCO\n(Discrete Conic Optimization), a Mixed-Integer Second-Order Cone\nProgramming (MISOCP) solver.\n\n**Constraint Types (DcoConstraintType):**\n- Core constraints from the original problem\n- MILP cuts: Clique, FlowCover, Gomory, Knapsack, MIR, OddHole, Probe, TwoMIR\n- Conic cuts: IPM, IPMint, OA (Outer Approximation), CMIR, GD1\n\n**Cone Types (DcoLorentzConeType):**\n- DcoLorentzCone: Standard ||x|| <= t\n- DcoRotatedLorentzCone: 2*x1*x2 >= ||x_rest||^2\n\n**Cut Strategies (DcoCutStrategy):**\n- None, Root only, Auto, Periodic\n\n**Branching Strategies (DcoBranchingStrategy):**\n- MaxInfeasibility, PseudoCost, Reliability, Strong, Bilevel",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoModel.hpp for the main model class",
+    "DcoConstraint.hpp for constraint hierarchy",
+    "DcoConicConstraint.hpp for conic constraint handling"
+  ]
+}

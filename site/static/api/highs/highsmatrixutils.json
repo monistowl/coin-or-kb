@@ -1,0 +1,9 @@
+{
+  "name": "HighsMatrixUtils",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsMatrixUtils.h",
+  "brief": "Class-independent utilities for HiGHS",
+  "algorithms": [],
+  "methods": []
+}

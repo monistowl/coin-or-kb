@@ -1,0 +1,9 @@
+{
+  "name": "sub_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/sub_op.hpp",
+  "brief": "Internal implementation: sub_op",
+  "algorithms": [],
+  "methods": []
+}

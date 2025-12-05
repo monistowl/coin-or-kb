@@ -1,0 +1,13 @@
+{
+  "name": "AlpsEncoded",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsEncoded.h",
+  "brief": "Serialization buffer for ALPS knowledge objects\n\nAlpsEncoded is the binary buffer for packing/unpacking AlpsKnowledge\nobjects for network transmission in parallel search.\n\n**Buffer structure:**\n- type_: Integer identifying the knowledge type\n- size_: Current data size in bytes\n- representation_: Raw byte buffer\n- pos_: Current read position\n\n**Template methods for serialization:**\n- writeRep(T): Write single value\n- readRep(T): Read single value\n- writeRep(T*, len): Write array with length prefix\n- readRep(T*, len): Read array\n- writeRep/readRep for std::string, std::vector\n\n**Memory management:**\n- Default: 16KB initial allocation\n- make_fit(): Grows buffer as needed (4x growth)\n- clear(): Reset buffer to empty state\n\nBased on BCP_buffer and CoinEncoded designs.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsKnowledge::encode()/decode() for usage",
+    "AlpsKnowledgeBroker::registerClass() for type registration"
+  ]
+}

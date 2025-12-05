@@ -1,0 +1,13 @@
+{
+  "name": "TaskGoto",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskGoto.h",
+  "brief": "Jump to labeled task in workflow\n\nEnables non-linear control flow in task sequences.\n\n**TaskGoto Class:**\n- gotoTaskID: Target task identifier\n- run(): Signal TaskHandler to jump to target\n\n**Usage in SHOT:**\n- Loop back to iteration start\n- Jump to termination on error",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskHandler.h for jump resolution",
+    "TaskTerminate.h for exit handling"
+  ]
+}

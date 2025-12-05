@@ -1,0 +1,9 @@
+{
+  "name": "HEkkDualRow",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/HEkkDualRow.h",
+  "brief": "Dual simplex ratio test for HiGHS",
+  "algorithms": [],
+  "methods": []
+}

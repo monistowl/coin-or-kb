@@ -1,0 +1,25 @@
+{
+  "name": "CglGMI",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglGMI/CglGMI.hpp",
+  "brief": "Gomory Mixed-Integer cuts with numerical safety testing",
+  "algorithms": [
+    {
+      "name": "Slack Elimination (eliminateSlack):\n  GMI from tableau uses slack variables; convert to original:",
+      "math": "Substitute s_i = b_i - a_i'x using original constraint\n  Produces cut in terms of structural variables only.",
+      "complexity": "O(nnz * log(maxdenom)) for rational approximation",
+      "ref": [
+        "Gomory (1960) - An algorithm for mixed-integer problems",
+        "Cornu\u00e9jols (2008) - Valid inequalities for MIP",
+        "Cook, Kannan, Schrijver (1990) - Chv\u00e1tal closures",
+        "Continued fraction algorithm for rational approximation"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglGMIParam for parameter settings",
+    "CglGomory for simpler Gomory implementation"
+  ]
+}

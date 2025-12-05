@@ -1,0 +1,12 @@
+{
+  "name": "GPUQREngine_Common",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_Common.hpp",
+  "brief": "GPU thread geometry, tile constants, and common macros\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nCore constants: TILESIZE=32 (tile dimension), PANELSIZE=3 (tiles per\npanel), NUMTHREADS=384 (threads per kernel), PADDING=1 (bank conflicts).\nCommon macros: CEIL, MIN, MAX, EMPTY sentinel. Optional GPUQRENGINE_RENDER\nfor GraphViz visualization, experimental GPUQRENGINE_PIPELINING.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_BucketList.hpp uses these constants"
+  ]
+}

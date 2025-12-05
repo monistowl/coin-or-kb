@@ -1,0 +1,9 @@
+{
+  "name": "OSdtoa",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSUtils/OSdtoa.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

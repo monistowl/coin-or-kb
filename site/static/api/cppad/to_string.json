@@ -1,0 +1,9 @@
+{
+  "name": "to_string",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/to_string.hpp",
+  "brief": "CppAD utility: to string",
+  "algorithms": [],
+  "methods": []
+}

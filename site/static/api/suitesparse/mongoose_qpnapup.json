@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_QPNapUp",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_QPNapUp.hpp",
+  "brief": "Upward lambda search in napsack solver\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nQPNapUp searches for lambda in increasing direction when current\nsolution violates upper balance bound (b > hi). Processes breakpoints\nvia heaps until constraint is satisfied, returning optimal lambda.",
+  "algorithms": [
+    {
+      "name": "Upward Breakpoint Search:\nIncreases \u03bb to decrease a'x (currently b > hi, need b \u2264 hi):\n1. Build heaps of breakpoints: \u03bb values where variables hit bounds\n   - bound_heap: \u03bb where free x_i hits 0 (lower bound)\n   - free_heap: \u03bb where bound x_i = 1 becomes free\n2. Process breakpoints in increasing \u03bb order:\n   - At each breakpoint, variable changes status (free\u2194bound)\n   - Update b = a'x incrementally\n   - Stop when b \u2264 hi\n3. Interpolate final \u03bb if stopping between breakpoints",
+      "math": "Incremental b update as \u03bb increases by \u03b4:\nFor free variable i: \u0394x_i = -a_i\u00b7\u03b4 \u2192 \u0394b = -a_i\u00b2\u00b7\u03b4\nVariables hitting bounds contribute discrete jumps.",
+      "complexity": "O(n log n) for heap operations over n variables.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_QPNapsack.hpp for main napsack solver",
+    "Mongoose_QPNapDown.hpp for downward search"
+  ]
+}

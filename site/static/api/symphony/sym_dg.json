@@ -1,0 +1,13 @@
+{
+  "name": "sym_dg",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_dg.h",
+  "brief": "Draw Graph (DG) process for SYMPHONY visualization\n\nInteractive graphical display of solutions and search progress.\nCommunicates with Tcl/Tk-based GUI via pipes.\n\n**dg_prob structure:**\n- windows: Array of display windows\n- par: Visualization parameters\n- master: Master process tid\n\n**Window management:**\n- win_desc: Window display settings (size, fonts, scale)\n- dg_graph: Graph data (nodes, edges)\n- buf_fifo: Message buffer queue\n\n**dg_node:**\n- node_id, posx, posy: Identifier and position\n- radius, label, weight: Display properties\n- dash: Line pattern for node border\n\n**dg_edge:**\n- edge_id, tail, head: Identifier and endpoints\n- weight, dash: Display properties\n\n**Main functions:**\n- init_dgwin(): Create new window\n- display_graph_on_canvas(): Render graph\n- copy_window_structure(): Clone window\n- find_node(), find_edge(): Lookup elements\n- compress_graph(): Remove deleted elements\n\n**Communication:**\n- spprint(): Printf to pipe\n- start_child(): Launch GUI process\n- wait_for_you_can_die(): Graceful shutdown",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_dg_params.h for visualization parameters",
+    "sym_dg_u.h for user callbacks"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "TaskSelectHyperplanePointsESH",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskSelectHyperplanePointsESH.h",
+  "brief": "Extended Supporting Hyperplane point selection\n\nCore ESH algorithm: finds boundary points for hyperplane generation.\n\n**TaskSelectHyperplanePointsESH Class:**\n- run(): Process current MIP solutions\n- run(solPoints): Process specific solution points\n\n**ESH Algorithm:**\n1. Take infeasible MIP solution point\n2. Use rootsearch to find boundary with feasible region\n3. Generate supporting hyperplane at boundary\n\n**Extends ECP:**\n- ESH uses interior point + rootsearch\n- ECP generates cuts at infeasible point directly",
+  "algorithms": [
+    {
+      "name": "Extended Supporting Hyperplane (ESH)",
+      "math": "Given infeasible x\u0302 and interior x\u00b0, find boundary point x* via:\n      x* = argmin_{0\u2264\u03bb\u22641} {\u03bb : g(\u03bbx\u00b0 + (1-\u03bb)x\u0302) \u2264 0}\n      Generate cut: \u2207g(x*)\u00b7(x - x*) \u2264 0 (supporting hyperplane)\n      Tighter than ECP cuts generated at x\u0302.",
+      "complexity": "O(rootsearch iterations \u00d7 gradient eval) per cut.",
+      "ref": [
+        "Kronqvist et al. (2016). \"The extended supporting hyperplane algorithm\n     for convex mixed-integer nonlinear programming\". J. Global Optim."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "RootsearchMethod/ for boundary finding",
+    "TaskAddHyperplanes.h for cut addition"
+  ]
+}

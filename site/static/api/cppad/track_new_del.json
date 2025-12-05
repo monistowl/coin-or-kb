@@ -1,0 +1,9 @@
+{
+  "name": "track_new_del",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/track_new_del.hpp",
+  "brief": "CppAD utility: track new del",
+  "algorithms": [],
+  "methods": []
+}

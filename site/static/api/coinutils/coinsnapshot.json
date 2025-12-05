@@ -1,0 +1,12 @@
+{
+  "name": "CoinSnapshot",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinSnapshot.hpp",
+  "brief": "Lightweight read-only snapshot of problem state at a B&B node\n\nCoinSnapshot captures problem data for cut generators and branching code.\nMay own or reference external arrays (see owned_ flag). Designed for\npassing problem state without copying full solver structures.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinPackedMatrix for the constraint matrix format"
+  ]
+}

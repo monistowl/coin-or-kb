@@ -1,0 +1,22 @@
+{
+  "name": "IpTSymDependencyDetector",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpTSymDependencyDetector.hpp",
+  "brief": "Dependency detection using symmetric linear solver\n\nTSymDependencyDetector detects linearly dependent constraint rows\nby using a TSymLinearSolver that provides degeneracy detection.\n\nMethod:\nSome symmetric linear solvers (e.g., MA57 via ProvidesDegeneracyDetection)\ncan identify dependent rows during factorization. This class\nleverages that capability.\n\nAlgorithm:\n1. Form symmetric matrix J*J^T (or equivalent structure)\n2. Attempt factorization with the TSymLinearSolver\n3. If solver detects singularity, query dependent row indices\n4. Return list of dependent rows in c_deps\n\nRequirements:\n- The underlying linear solver must implement\n  ProvidesDegeneracyDetection() returning true\n- Must implement DetermineDependentRows() for the sparse format\n\nThis is preferred over MA28-based detection when using a solver\nthat already provides this capability.",
+  "algorithms": [
+    {
+      "name": "Symmetric Normal Equations Dependency Detection:\nUses symmetric indefinite factorization for rank detection:\n1. Form normal equations: A = J\u00b7J\u1d40 (or augmented system)\n2. Attempt LDL\u1d40 or Bunch-Kaufman factorization\n3. Zero/small diagonal pivots indicate dependent rows\n4. Extract row indices from solver's singularity info",
+      "math": "Normal equations approach: A = J\u00b7J\u1d40 \u2208 \u211d^{m\u00d7m}\n- rank(A) = rank(J\u00b7J\u1d40) = rank(J) (assuming full column rank)\n- A is symmetric positive semi-definite\n- A_{ii} = 0 \u27f9 row i of J is zero (trivially dependent)\n- Pivot d_i \u2248 0 during LDL\u1d40 \u27f9 row i depends on rows 1,...,i-1",
+      "complexity": "O(m\u00b3) worst case for dense; O(fill-in) for sparse.\nSymmetric factorization typically faster than unsymmetric MA28.",
+      "ref": [
+        "Duff (2004). \"MA57 - a code for the solution of sparse symmetric\n  definite and indefinite systems\". ACM TOMS 30(2):118-144."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTDependencyDetector.hpp for base interface",
+    "IpTSymLinearSolver.hpp for symmetric solver"
+  ]
+}

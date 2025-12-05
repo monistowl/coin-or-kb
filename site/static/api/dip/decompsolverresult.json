@@ -1,0 +1,13 @@
+{
+  "name": "DecompSolverResult",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompSolverResult.h",
+  "brief": "Container for subproblem/LP solver results\n\nDecompSolverResult captures all outputs from solving a subproblem\nor LP relaxation, including status, bounds, and solutions.\n\n**Status Information:**\n- m_solStatus: Solver-specific status code\n- m_isOptimal: True if proven optimal\n- m_isUnbounded: True if unbounded detected\n- m_isCutoff: True if cutoff by bound\n\n**Bounds:**\n- m_objLB: Lower bound on optimal value\n- m_objUB: Upper bound / incumbent value\n\n**Solutions:**\n- m_nSolutions: Number of solutions found\n- m_solution: Vector of solution vectors (for solution pools)\n\n**Usage:**\nReturned by subproblem solvers to DecompAlgo. Used for:\n- Generating new columns (m_solution contains extreme points)\n- Checking feasibility (m_isOptimal, m_solStatus)\n- Updating bounds (m_objLB, m_objUB)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompSubModel.h for subproblem solving",
+    "DecompAlgo.h for result processing"
+  ]
+}

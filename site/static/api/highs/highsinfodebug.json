@@ -1,0 +1,9 @@
+{
+  "name": "HighsInfoDebug",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsInfoDebug.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

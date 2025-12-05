@@ -1,0 +1,9 @@
+{
+  "name": "atomic_xam",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "val_graph/atomic_xam.hpp",
+  "brief": "CppAD: atomic xam",
+  "algorithms": [],
+  "methods": []
+}

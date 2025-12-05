@@ -1,0 +1,13 @@
+{
+  "name": "IpStdInterfaceTNLP",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Interfaces/IpStdInterfaceTNLP.hpp",
+  "brief": "TNLP implementation wrapping C function pointer interface\n\nStdInterfaceTNLP implements TNLP by delegating to C function pointers\nprovided through IpStdCInterface.h. This enables C programs to use\nIpopt without C++ inheritance.\n\nThe C interface passes:\n- Problem dimensions (n_var, n_con, nele_jac, nele_hess)\n- Bounds arrays (x_L, x_U, g_L, g_U)\n- Starting points (start_x, start_lam, start_z_L, start_z_U)\n- Function pointers for eval_f, eval_g, eval_grad_f, eval_jac_g, eval_h\n\nStdInterfaceTNLP converts C callbacks to TNLP virtual method calls.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpStdCInterface.h for C API documentation",
+    "IpTNLP.hpp for the underlying interface"
+  ]
+}

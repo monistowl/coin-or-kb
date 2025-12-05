@@ -1,0 +1,13 @@
+{
+  "name": "CouenneRootQ",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/util/CouenneRootQ.hpp",
+  "brief": "Root finding for Q^k(x) polynomials in power convexification\n\nFinds roots of the polynomial Q^k(x) = \u03a3\u1d62\u208c\u2081^{2k} i\u00b7x^{i-1} used in\nconvexification of odd powers. Based on Liberti & Pantelides (2003).\n\n**Mathematical background:**\nFor odd power expressions w = x^k, the convex/concave envelope\nrequires finding specific points where tangent lines from the\nboundary touch the curve. The Q^k polynomial characterizes these.\n\n**Usage:**\n- rootQ(k): Computes root for exponent 2k+1\n- Qroot class: Caches computed roots in static map for efficiency\n\n**Implementation:**\n- Odd k: Computed via Newton's method, cached in Qmap\n- Even k (2,4,6,8,10): Hardcoded analytical values\n  - k=2: -(\u221a2 - 1) \u2248 -0.414\n  - k=4: \u2248 -0.560\n  - k=6: \u2248 -0.641\n  - etc.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprOddPow which uses these roots",
+    "CouenneExprSignPow for signed power convexification"
+  ]
+}

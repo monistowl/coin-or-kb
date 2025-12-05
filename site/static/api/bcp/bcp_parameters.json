@@ -1,0 +1,19 @@
+{
+  "name": "BCP_parameters",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_parameters.hpp",
+  "brief": "BCP parameters",
+  "algorithms": [
+    {
+      "name": "Parameter Management: Type-Safe Configuration System\n\nParameter handling for BCP framework configuration.\n\n**BCP_parameter_set<Par>:**\nTemplate class holding char, int, double, string, and string-array parameters.\nEach parameter type has its own typed array for efficient access.\n\n**Key features:**\n- Keyword-value file parsing with environment variable expansion\n- Type-safe entry() and set_entry() accessors\n- pack()/unpack() for inter-process parameter transfer\n- Support for ParamFile directive to include nested files\n\n**Usage:**\nDefine a struct with parameter enums, then instantiate BCP_parameter_set<>.\nImplement create_keyword_list() and set_default_entries() for the struct.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_tm_param.hpp, BCP_lp_param.hpp for TM/LP parameters"
+  ]
+}

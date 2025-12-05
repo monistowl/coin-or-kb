@@ -1,0 +1,13 @@
+{
+  "name": "externfcts",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/externfcts.h",
+  "brief": "Support for externally differentiated functions in ADOL-C tapes\n\nProvides mechanisms to incorporate user-supplied derivative code for\nfunctions that cannot or should not be traced (e.g., library calls,\nspecialized solvers, discontinuous functions). The user registers\ncallback functions for forward and reverse mode evaluation.\n\nUse cases:\n- Integrating external solvers (linear algebra, sparse systems)\n- Hand-coded derivatives for performance-critical sections\n- Functions from non-ADOL-C libraries\n- Discontinuous or non-differentiable operations with custom handling\n\nCallback modes:\n- zos_forward: zero-order scalar (function evaluation only)\n- fos_forward/fos_reverse: first-order scalar\n- fov_forward/fov_reverse: first-order vector\n- hos_forward/hos_reverse: higher-order scalar\n- hov_forward/hov_reverse: higher-order vector",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "interfaces.h for standard AD interfaces",
+    "checkpointing.h for memory-efficient reverse mode"
+  ]
+}

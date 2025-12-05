@@ -1,0 +1,20 @@
+{
+  "name": "CbcSymmetry",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcSymmetry.hpp",
+  "brief": "Symmetry detection and orbital branching using nauty\nAuthors: Pietro Belotti (Lehigh), Andreas Waechter (IBM)\nAdapted from Couenne (Carnegie-Mellon University, 2006-11)\nThis file is licensed under the Eclipse Public License (EPL)\n\nCbcSymmetry: Detects problem symmetry and exploits it for faster solving.\nUses the nauty library for automorphism group computation.",
+  "algorithms": [
+    {
+      "name": "Orbital Branching - CbcOrbitalBranchingObject:\n  branch() exploits symmetry to avoid symmetric subtrees:\n  1. Down branch: Fix x_column = 0, all orbit members = 0.\n  2. Up branch: Fix x_column = 1.\n  Breaks symmetry: symmetric nodes pruned implicitly.",
+      "math": "Automorphism group:\n  Aut(G) = {\u03c0 : V \u2192 V | \u03c0 preserves edges and colors}.\n  |Aut(G)| can be exponential; nauty computes generators.\n  Orbit O(v) = {\u03c0(v) : \u03c0 \u2208 Aut(G)} - equivalence class.\n\nKey concepts:\n- Orbits: Sets of symmetric variables\n- Orbital fixing: If one variable in orbit is fixed, fix others by symmetry\n- Orbital branching: Branch to break symmetry\n\nBuild requirements (when CBC_HAS_NAUTY defined):\n- nauty library (configure with --enable-tls --enable-wordsize=32)\n- Add -DCBC_HAS_NAUTY and -DNTY_TRACES (optional) to CXXDEFS\n- Link with -lnauty\n\nRuntime: Use -orbit on to enable\n\nCbcNauty: Wrapper for nauty graph automorphism library.\nHandles graph construction, partition refinement, and orbit computation.\n\nCbcOrbitalBranchingObject: Branching object that exploits symmetry.\nOn one branch, fix variable to 1 and symmetric variables to 0.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcBranchingObject for branching base class",
+    "nauty documentation for algorithm details"
+  ]
+}

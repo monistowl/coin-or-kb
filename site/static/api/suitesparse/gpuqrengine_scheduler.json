@@ -1,0 +1,13 @@
+{
+  "name": "GPUQREngine_Scheduler",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_Scheduler.hpp",
+  "brief": "Central coordinator for GPU QR factorization tasks\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nScheduler manages fronts and GPU resources: frontList with numFronts,\nbucketLists for task generation, workQueues (double-buffered), CUDA\nstreams (kernelStreams[2], memoryStreamH2D/D2H). Main loop: fillWorkQueue \u2192\nlaunchKernel \u2192 postProcess. Tracks completion via FrontDataPulled events.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_Front.hpp for front structure",
+    "GPUQREngine_BucketList.hpp for task generation"
+  ]
+}

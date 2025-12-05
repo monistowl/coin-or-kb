@@ -1,0 +1,12 @@
+{
+  "name": "IpBlas",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpBlas.hpp",
+  "brief": "C++ wrappers for BLAS (Basic Linear Algebra Subprograms)\n\nProvides platform-independent access to BLAS Level 1, 2, and 3 routines.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpLapack.hpp for higher-level linear algebra (factorization, solve)"
+  ]
+}

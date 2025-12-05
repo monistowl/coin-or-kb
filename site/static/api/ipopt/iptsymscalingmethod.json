@@ -1,0 +1,23 @@
+{
+  "name": "IpTSymScalingMethod",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpTSymScalingMethod.hpp",
+  "brief": "Base class for matrix scaling in triplet format\n\nTSymScalingMethod is the abstract base class for computing diagonal\nscaling factors for symmetric matrices. Scaling improves numerical\nconditioning of the linear system.\n\nScaling transformation:\n  Original: A * x = b\n  Scaled:   (D*A*D) * (D^{-1}*x) = D*b\nwhere D = diag(scaling_factors).\n\nThe ComputeSymTScalingFactors method takes:\n- n: matrix dimension\n- nnz: number of nonzeros\n- airn, ajcn: row/column indices (triplet format)\n- a: matrix values\n- scaling_factors: output array of length n\n\nImplementations:\n- Mc19TSymScalingMethod: HSL MC19 equilibration\n- SlackBasedTSymScalingMethod: Simple slack-based scaling",
+  "algorithms": [
+    {
+      "name": "Symmetric Matrix Scaling (Row/Column Equilibration):\nComputes diagonal D to improve \u03ba(DAD) for better solver accuracy:\n1. Analyze matrix structure in triplet (i, j, a_ij) format\n2. Compute scaling factors d_i (implementation-specific)\n3. Apply: \u0100 = DAD, x\u0304 = D\u207b\u00b9x, b\u0304 = Db\nGoal: Reduce condition number and improve pivot selection.",
+      "math": "Symmetric scaling with D = diag(d\u2081,...,d\u2099):\n$$\\bar{A}_{ij} = d_i \\cdot A_{ij} \\cdot d_j$$\n\nEquilibration goal: make row/column norms approximately equal\n$$\\|(\\bar{A})_i\\| \\approx \\|(\\bar{A})_j\\| \\approx 1$$\n\nCondition number improvement: \u03ba(DAD) << \u03ba(A) typically.",
+      "complexity": "O(nnz) for computing scaling factors.\nSingle pass through nonzero entries required.",
+      "ref": [
+        "Duff & Koster (2001). \"On algorithms for permuting large entries\n  to the diagonal of a sparse matrix\". SIAM J. Matrix Anal. Appl. 22(4).",
+        "Curtis & Reid (1972). \"On the automatic scaling of matrices for\n  Gaussian elimination\". IMA J. Appl. Math. 10(1):118-124."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMc19TSymScalingMethod.hpp for MC19 implementation",
+    "IpTSymLinearSolver.hpp for usage"
+  ]
+}

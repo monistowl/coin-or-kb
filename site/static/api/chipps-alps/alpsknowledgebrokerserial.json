@@ -1,0 +1,13 @@
+{
+  "name": "AlpsKnowledgeBrokerSerial",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsKnowledgeBrokerSerial.h",
+  "brief": "Serial (single-process) implementation of ALPS knowledge broker\n\nAlpsKnowledgeBrokerSerial provides single-threaded tree search.\nUse this for debugging or when parallel execution is not needed.\n\n**Usage:**\n@code\nMyModel model;\nAlpsKnowledgeBrokerSerial broker(argc, argv, model);\nbroker.search(&model);\nbroker.printBestSolution();\n@endcode\n\n**Key methods:**\n- initializeSearch(): Read parameters and problem data\n- rootSearch(): Execute tree search from root\n- searchLog(): Print search statistics\n- printBestSolution(): Output best solution found\n\n**Differences from MPI version:**\n- Single subtree pool (no distribution)\n- No message passing or load balancing\n- All phases (rampup/search/rampdown) in one process",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsKnowledgeBroker for base class",
+    "AlpsKnowledgeBrokerMPI for parallel version"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "CbcFixVariable",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcFixVariable.hpp",
+  "brief": "Fix variable bounds as branching consequence",
+  "algorithms": [
+    {
+      "name": "State-Based Variable Fixing from Branch Decisions\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcFixVariable: Concrete CbcConsequence that fixes variable bounds\nbased on branching decisions. Implements state-dependent bound changes\nthat go beyond LP propagation.\n\nState encoding:\n- -9999: Variable at lower bound\n- +9999: Variable at upper bound\n- Other: Variable fixed to that specific value\n\nFor each state, stores arrays of:\n- Variables to modify (variable_)\n- New bounds to apply (newBound_)\n- Ranges for lower vs upper bound changes (startLower_, startUpper_)\n\nExample: Binary y controls continuous x. When y=0 (state -9999),\nfix x to 0; when y=1 (state +9999), x can be in [0, 100].",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcConsequence for base class",
+    "CbcObject for objects with consequences\n\nEdwin 11/10/2009 carved out of CbcBranchActual"
+  ]
+}

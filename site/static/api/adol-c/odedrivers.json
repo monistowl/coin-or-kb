@@ -1,0 +1,23 @@
+{
+  "name": "odedrivers",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/drivers/odedrivers.h",
+  "brief": "Taylor-based ODE integration drivers\n\nProvides drivers for solving and differentiating ODEs of the form\nx' = f(x) using Taylor series expansion. The tape records f(x),\nthen these drivers compute higher-order Taylor coefficients.",
+  "algorithms": [
+    {
+      "name": "Taylor Series ODE Integration:\nComputes Taylor coefficients of ODE solution via automatic differentiation\nof the right-hand side.\n\nPROBLEM: Given autonomous ODE x'(t) = f(x(t)) with initial condition x(0) = x\u2080,\ncompute Taylor expansion: x(t) = \u03a3\u2096 x[k] \u00b7 t\u1d4f\n\nMETHOD (forode):\n1. Record tape of f(x) = x' mapping state to derivative\n2. Given x[0] = x\u2080, iteratively compute higher coefficients:\n\n   x[k+1] = (1/(k+1)) \u00b7 f[k]\n\nwhere f[k] is the k-th Taylor coefficient of f(x(t)), computed by\npropagating x[0..k] through the tape.\n\nRECURRENCE RELATION:\nFor x' = f(x): x[k+1] = (\u03c4/(k+1)) \u00b7 [f(x)]_k\nwhere \u03c4 is a time scaling factor and [\u00b7]_k denotes k-th Taylor coefficient.\n\nThe coefficients are computed via the composition rule:\n[f(g)]_k = \u03a3\u1d62 (\u2202f/\u2202x\u1d62)[k] \u00b7 [g\u1d62]_k + lower order terms",
+      "math": "Taylor coefficient extraction:\nFor function y = f(x), the Taylor coefficient relationship:\ny(t) = f(x(t)) where x(t) = \u03a3\u2096 x[k] \u00b7 t\u1d4f\nyields y[k] = (1/k!) \u00b7 (d\u1d4fy/dt\u1d4f)|_{t=0}\n\nSENSITIVITY COMPUTATION (accode):\nGiven partial Jacobians A[i][j][k] = \u2202x[k]_i/\u2202x[0]_j at each order,\naccumulate total Jacobians B via the chain rule:\n\nB[i][j][k] = A[i][j][k] + \u03a3\u2097 (\u2202x[k]_i/\u2202x[\u2113]) \u00b7 B[\u2113][j][k-1]",
+      "complexity": "- forode: O(d \u00b7 ops) for d Taylor coefficients, ops = tape operations\n- accode: O(d \u00b7 n\u00b2) for n-dimensional state with d coefficients",
+      "ref": [
+        "Jorba & Zou (2005). \"A Software Package for the Numerical Integration\n  of ODEs by Means of High-Order Taylor Methods\".",
+        "Griewank & Walther (2008). \"Evaluating Derivatives\", Section 13.2."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "interfaces.h for forward/reverse mode primitives",
+    "drivers/taylor.h for general tensor computation"
+  ]
+}

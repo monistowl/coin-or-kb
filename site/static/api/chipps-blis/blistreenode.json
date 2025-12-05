@@ -1,0 +1,14 @@
+{
+  "name": "BlisTreeNode",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisTreeNode.h",
+  "brief": "Concrete branch-and-bound tree node for MILP solving\n\nBlisTreeNode extends BcpsTreeNode with LP-based bounding and cut generation.\nImplements the main node processing loop for branch-and-cut.\n\n**Node processing (process()):**\n1. installSubProblem(): Set up LP with current bounds\n2. bound(): Solve LP relaxation\n3. callHeuristics(): Search for integer solutions\n4. generateConstraints(): Add cutting planes\n5. selectBranchObject(): Choose branching variable\n6. branch(): Create child nodes\n\n**Cut generation workflow:**\n- generateConstraints(): Call registered CglCutGenerators\n- getViolatedConstraints(): Check for violated cuts\n- applyConstraints(): Add cuts to LP and re-solve\n- parallel(): Remove duplicate/parallel cuts\n\n**Bound tightening:**\n- reducedCostFix(): Fix variables using reduced costs\n\n**Node descriptions:**\n- convertToExplicit(): Full bound/cut information\n- convertToRelative(): Delta from parent (space-efficient)\n\n**Branching:**\n- selectBranchObject(): Use model's BcpsBranchStrategy\n- branch(): Create children with modified bounds",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisModel for the model containing LP solver and generators",
+    "BlisNodeDesc for node description structure",
+    "BcpsBranchStrategy for branching variable selection"
+  ]
+}

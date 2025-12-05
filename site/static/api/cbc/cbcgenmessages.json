@@ -1,0 +1,13 @@
+{
+  "name": "CbcGenMessages",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcGenMessages.hpp",
+  "brief": "Message IDs for cbc-generic standalone solver\nCopyright (C) 2007, Lou Hafer, IBM Corporation and others.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcGenMsgCode: Enum of message IDs for the cbc-generic application.\nThese are distinct from CbcMessage (library messages) and are used\nonly by the standalone command-line solver.\n\nMessage codes:\n- CBCGEN_TEST_MSG: Test/debug message\n- CBCGEN_NEW_SOLVER: Solver change notification\n- CBCGEN_CONFUSION: Error/confusion state\n\nThe actual message text is defined in CbcGenMessages.cpp.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CbcMessage for library-level messages",
+    "CoinMessageHandler for message infrastructure"
+  ]
+}

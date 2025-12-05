@@ -1,0 +1,21 @@
+{
+  "name": "CbcHeuristicDive",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicDive.hpp",
+  "brief": "Abstract base for diving heuristics\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDive: Abstract base for diving heuristics that explore\nthe tree greedily by fixing variables and re-solving LPs.",
+  "algorithms": [
+    {
+      "name": "Diving Heuristic Framework:\n  solution() greedy feasibility search:\n  1. Solve LP relaxation at current node.\n  2. While fractional variables exist:\n     a. selectVariableToBranch() \u2192 bestColumn, bestRound.\n     b. Fix x[bestColumn] in direction bestRound.\n     c. Re-solve LP; if infeasible, backtrack or fail.\n  3. If integer feasible: Return solution.\n  4. Apply reduced cost fixing during dive for speedup.",
+      "math": "Lock counting for variable selection:\n  downLocks_[j] = #{constraints where x_j has positive coefficient}.\n  upLocks_[j] = #{constraints where x_j has negative coefficient}.\n  Variables with fewer locks are easier to round feasibly.\n\nSubclasses implement selectVariableToBranch() with different strategies:\n- Fractional: Most fractional variable\n- PseudoCost: Best pseudocost estimate\n- VectorLength: Based on constraint participation\n- Coefficient: Based on objective coefficients\n- Guided: Guided by incumbent solution\n- LineSearch: Along line to LP optimum\n\nUses lock counting for feasibility analysis.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicDiveFractional, CbcHeuristicDivePseudoCost, etc.",
+    "CbcHeuristic for base class",
+    "CbcHeuristicFPump for related approach"
+  ]
+}

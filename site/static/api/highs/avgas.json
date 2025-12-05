@@ -1,0 +1,9 @@
+{
+  "name": "Avgas",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "check/Avgas.h",
+  "brief": "Utilities for tests with AVGAS",
+  "algorithms": [],
+  "methods": []
+}

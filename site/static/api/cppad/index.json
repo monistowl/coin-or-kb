@@ -1,0 +1,1556 @@
+{
+  "library": "CppAD",
+  "layer": "layer-1",
+  "classes": [
+    {
+      "name": "abort_recording",
+      "brief": "Core AD functionality: abort recording",
+      "has_algorithm": false
+    },
+    {
+      "name": "abs",
+      "brief": "Core AD functionality: abs",
+      "has_algorithm": false
+    },
+    {
+      "name": "abs_normal_fun",
+      "brief": "Core AD functionality: abs normal fun",
+      "has_algorithm": false
+    },
+    {
+      "name": "abs_op",
+      "brief": "Internal implementation: abs_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "acos_op",
+      "brief": "Internal implementation: acos_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "acosh_op",
+      "brief": "Internal implementation: acosh_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "ad",
+      "brief": "Core AD<Base> automatic differentiation scalar type\n\nAD<Base> is the fundamental type for automatic differentiation.\nOperations on AD<Base> values are recorded on a \"tape\" which can\nlater be used to compute derivatives.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ad_binary",
+      "brief": "Core AD functionality: ad binary",
+      "has_algorithm": false
+    },
+    {
+      "name": "ad_fun",
+      "brief": "ADFun class - function object storing recorded AD operations\n\nADFun<Base> stores a recorded sequence of operations and provides\nmethods to evaluate the function and its derivatives.\n\nKey methods:\n- **Forward(p, x)**: p-th order forward mode Taylor coefficient\n- **Reverse(q, w)**: q-th order reverse mode derivative\n- **Jacobian(x)**: Full Jacobian matrix\n- **Hessian(x, w)**: Weighted Hessian matrix\n- **SparseJacobian/SparseHessian**: Sparse derivative computation",
+      "has_algorithm": true
+    },
+    {
+      "name": "ad_io",
+      "brief": "Core AD functionality: ad io",
+      "has_algorithm": false
+    },
+    {
+      "name": "ad_tape",
+      "brief": "Internal implementation: ad_tape",
+      "has_algorithm": false
+    },
+    {
+      "name": "ad_to_string",
+      "brief": "Core AD functionality: ad to string",
+      "has_algorithm": false
+    },
+    {
+      "name": "ad_type",
+      "brief": "Core AD functionality: ad type",
+      "has_algorithm": false
+    },
+    {
+      "name": "ad_valued",
+      "brief": "Core AD functionality: ad valued",
+      "has_algorithm": false
+    },
+    {
+      "name": "add",
+      "brief": "Core AD functionality: add",
+      "has_algorithm": false
+    },
+    {
+      "name": "add_eq",
+      "brief": "Core AD functionality: add eq",
+      "has_algorithm": false
+    },
+    {
+      "name": "add_op",
+      "brief": "Internal implementation: add_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "adolc_alloc_mat",
+      "brief": "Speed testing: adolc_alloc_mat",
+      "has_algorithm": false
+    },
+    {
+      "name": "arithmetic",
+      "brief": "Core AD functionality: arithmetic",
+      "has_algorithm": false
+    },
+    {
+      "name": "asin_op",
+      "brief": "Internal implementation: asin_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "asinh_op",
+      "brief": "Internal implementation: asinh_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "atan2",
+      "brief": "Core AD functionality: atan2",
+      "has_algorithm": false
+    },
+    {
+      "name": "atan_op",
+      "brief": "Internal implementation: atan_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "atanh_op",
+      "brief": "Internal implementation: atanh_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "atom_state",
+      "brief": "Internal implementation: atom_state",
+      "has_algorithm": false
+    },
+    {
+      "name": "atomic",
+      "brief": "Core AD functionality: atomic",
+      "has_algorithm": false
+    },
+    {
+      "name": "atomic",
+      "brief": "Core AD functionality: atomic",
+      "has_algorithm": false
+    },
+    {
+      "name": "atomic",
+      "brief": "Core AD functionality: atomic",
+      "has_algorithm": false
+    },
+    {
+      "name": "atomic",
+      "brief": "Core AD functionality: atomic",
+      "has_algorithm": false
+    },
+    {
+      "name": "atomic_index",
+      "brief": "Internal implementation: atomic_index",
+      "has_algorithm": false
+    },
+    {
+      "name": "atomic_op",
+      "brief": "Internal implementation: atomic_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "atomic_xam",
+      "brief": "CppAD: atomic xam",
+      "has_algorithm": false
+    },
+    {
+      "name": "azmul",
+      "brief": "Core AD functionality: azmul",
+      "has_algorithm": false
+    },
+    {
+      "name": "base_complex",
+      "brief": "Core AD functionality: base complex",
+      "has_algorithm": false
+    },
+    {
+      "name": "base_cond_exp",
+      "brief": "Core AD functionality: base cond exp",
+      "has_algorithm": false
+    },
+    {
+      "name": "base_double",
+      "brief": "Core AD functionality: base double",
+      "has_algorithm": false
+    },
+    {
+      "name": "base_float",
+      "brief": "Core AD functionality: base float",
+      "has_algorithm": false
+    },
+    {
+      "name": "base_hash",
+      "brief": "Core AD functionality: base hash",
+      "has_algorithm": false
+    },
+    {
+      "name": "base_limits",
+      "brief": "Core AD functionality: base limits",
+      "has_algorithm": false
+    },
+    {
+      "name": "base_op",
+      "brief": "Value graph: base_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "base_require",
+      "brief": "CppAD: base require",
+      "has_algorithm": false
+    },
+    {
+      "name": "base_std_math",
+      "brief": "Core AD functionality: base std math",
+      "has_algorithm": false
+    },
+    {
+      "name": "base_to_string",
+      "brief": "Core AD functionality: base to string",
+      "has_algorithm": false
+    },
+    {
+      "name": "bender_quad",
+      "brief": "Core AD functionality: bender quad",
+      "has_algorithm": false
+    },
+    {
+      "name": "binary_op",
+      "brief": "Value graph: binary_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "bool_fun",
+      "brief": "Core AD functionality: bool fun",
+      "has_algorithm": false
+    },
+    {
+      "name": "bool_valued",
+      "brief": "Core AD functionality: bool valued",
+      "has_algorithm": false
+    },
+    {
+      "name": "call",
+      "brief": "Core AD functionality: call",
+      "has_algorithm": false
+    },
+    {
+      "name": "call_atomic",
+      "brief": "Value graph: call_atomic",
+      "has_algorithm": false
+    },
+    {
+      "name": "call_atomic",
+      "brief": "Internal sweep implementation: call_atomic",
+      "has_algorithm": false
+    },
+    {
+      "name": "call_op",
+      "brief": "Value graph: call_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "capacity_order",
+      "brief": "Core AD functionality: capacity order",
+      "has_algorithm": false
+    },
+    {
+      "name": "cexp_info",
+      "brief": "Tape optimization: cexp_info",
+      "has_algorithm": false
+    },
+    {
+      "name": "cexp_op",
+      "brief": "Value graph: cexp_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "cexp_op",
+      "brief": "Internal implementation: cexp_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "check_for_nan",
+      "brief": "Core AD functionality: check for nan",
+      "has_algorithm": false
+    },
+    {
+      "name": "check_numeric_type",
+      "brief": "CppAD utility: check numeric type",
+      "has_algorithm": false
+    },
+    {
+      "name": "check_simple_vector",
+      "brief": "CppAD utility: check simple vector",
+      "has_algorithm": false
+    },
+    {
+      "name": "comp_op",
+      "brief": "Value graph: comp_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "comp_op",
+      "brief": "Operation recording: comp_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "compare",
+      "brief": "Core AD functionality: compare",
+      "has_algorithm": false
+    },
+    {
+      "name": "compare_op",
+      "brief": "Internal implementation: compare_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "compound_assign",
+      "brief": "Core AD functionality: compound assign",
+      "has_algorithm": false
+    },
+    {
+      "name": "compress",
+      "brief": "Value graph: compress",
+      "has_algorithm": false
+    },
+    {
+      "name": "con_dyn_var",
+      "brief": "Core AD functionality: con dyn var",
+      "has_algorithm": false
+    },
+    {
+      "name": "con_op",
+      "brief": "Value graph: con_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "cond_exp",
+      "brief": "Core AD functionality: cond exp",
+      "has_algorithm": false
+    },
+    {
+      "name": "cond_exp",
+      "brief": "Operation recording: cond_exp",
+      "has_algorithm": false
+    },
+    {
+      "name": "convert",
+      "brief": "Core AD functionality: convert",
+      "has_algorithm": false
+    },
+    {
+      "name": "cos_op",
+      "brief": "Internal implementation: cos_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "cosh_op",
+      "brief": "Internal implementation: cosh_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "cpp_graph",
+      "brief": "Core AD functionality: cpp graph",
+      "has_algorithm": false
+    },
+    {
+      "name": "cpp_graph_itr",
+      "brief": "Computational graph: cpp_graph_itr",
+      "has_algorithm": false
+    },
+    {
+      "name": "cpp_graph_op",
+      "brief": "Computational graph: cpp_graph_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "cppad",
+      "brief": "Contains all variables and functions defined by CppAD package",
+      "has_algorithm": true
+    },
+    {
+      "name": "cppad_ipopt_nlp",
+      "brief": "Ipopt interface: cppad_ipopt_nlp",
+      "has_algorithm": false
+    },
+    {
+      "name": "cppad_vector_itr",
+      "brief": "CppAD utility: cppad vector itr",
+      "has_algorithm": false
+    },
+    {
+      "name": "create_dll_lib",
+      "brief": "CppAD utility: create dll lib",
+      "has_algorithm": false
+    },
+    {
+      "name": "cskip_op",
+      "brief": "Internal implementation: cskip_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "csrc_writer",
+      "brief": "Computational graph: csrc_writer",
+      "has_algorithm": false
+    },
+    {
+      "name": "csum_op",
+      "brief": "Value graph: csum_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "csum_op",
+      "brief": "Internal implementation: csum_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "ctor",
+      "brief": "Core AD functionality: ctor",
+      "has_algorithm": false
+    },
+    {
+      "name": "ctor",
+      "brief": "Core AD functionality: ctor",
+      "has_algorithm": false
+    },
+    {
+      "name": "ctor",
+      "brief": "Core AD functionality: ctor",
+      "has_algorithm": false
+    },
+    {
+      "name": "ctor",
+      "brief": "Core AD functionality: ctor",
+      "has_algorithm": false
+    },
+    {
+      "name": "ctor",
+      "brief": "Core AD functionality: ctor",
+      "has_algorithm": false
+    },
+    {
+      "name": "cumulative",
+      "brief": "Value graph: cumulative",
+      "has_algorithm": false
+    },
+    {
+      "name": "dead_code",
+      "brief": "Value graph: dead_code",
+      "has_algorithm": false
+    },
+    {
+      "name": "dependent",
+      "brief": "Core AD functionality: dependent",
+      "has_algorithm": false
+    },
+    {
+      "name": "det_33",
+      "brief": "Speed testing: det_33",
+      "has_algorithm": false
+    },
+    {
+      "name": "det_by_lu",
+      "brief": "Speed testing: det_by_lu",
+      "has_algorithm": false
+    },
+    {
+      "name": "det_by_minor",
+      "brief": "Speed testing: det_by_minor",
+      "has_algorithm": false
+    },
+    {
+      "name": "det_grad_33",
+      "brief": "Speed testing: det_grad_33",
+      "has_algorithm": false
+    },
+    {
+      "name": "det_of_minor",
+      "brief": "Speed testing: det_of_minor",
+      "has_algorithm": false
+    },
+    {
+      "name": "dis_op",
+      "brief": "Value graph: dis_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "dis_op",
+      "brief": "Internal implementation: dis_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "discrete",
+      "brief": "Core AD functionality: discrete",
+      "has_algorithm": false
+    },
+    {
+      "name": "div",
+      "brief": "Core AD functionality: div",
+      "has_algorithm": false
+    },
+    {
+      "name": "div_eq",
+      "brief": "Core AD functionality: div eq",
+      "has_algorithm": false
+    },
+    {
+      "name": "div_op",
+      "brief": "Internal implementation: div_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "drivers",
+      "brief": "Core AD functionality: drivers",
+      "has_algorithm": false
+    },
+    {
+      "name": "dyn_player",
+      "brief": "Tape playback: dyn_player",
+      "has_algorithm": false
+    },
+    {
+      "name": "dyn_recorder",
+      "brief": "Operation recording: dyn_recorder",
+      "has_algorithm": false
+    },
+    {
+      "name": "dyn_type",
+      "brief": "Value graph: dyn_type",
+      "has_algorithm": false
+    },
+    {
+      "name": "elapsed_seconds",
+      "brief": "CppAD utility: elapsed seconds",
+      "has_algorithm": false
+    },
+    {
+      "name": "enable_parallel",
+      "brief": "Value graph: enable_parallel",
+      "has_algorithm": false
+    },
+    {
+      "name": "epsilon",
+      "brief": "Core AD functionality: epsilon",
+      "has_algorithm": false
+    },
+    {
+      "name": "equal_op_seq",
+      "brief": "Core AD functionality: equal op seq",
+      "has_algorithm": false
+    },
+    {
+      "name": "error_handler",
+      "brief": "CppAD utility: error handler",
+      "has_algorithm": false
+    },
+    {
+      "name": "exp_2",
+      "brief": "CppAD: exp 2",
+      "has_algorithm": false
+    },
+    {
+      "name": "exp_eps",
+      "brief": "CppAD: exp eps",
+      "has_algorithm": false
+    },
+    {
+      "name": "exp_op",
+      "brief": "Internal implementation: exp_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "expm1_op",
+      "brief": "Internal implementation: expm1_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "extract_option",
+      "brief": "Tape optimization: extract_option",
+      "has_algorithm": false
+    },
+    {
+      "name": "fold_con",
+      "brief": "Value graph: fold_con",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_hes",
+      "brief": "Internal sweep implementation: for_hes",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_hes_sparsity",
+      "brief": "Core AD functionality: for hes sparsity",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_jac_sparsity",
+      "brief": "Core AD functionality: for jac sparsity",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_one",
+      "brief": "Core AD functionality: for one",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_sparse_hes",
+      "brief": "Core AD functionality: for sparse hes",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_sparse_hes",
+      "brief": "Core AD functionality: for sparse hes",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_sparse_jac",
+      "brief": "Core AD functionality: for sparse jac",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_sparse_jac",
+      "brief": "Core AD functionality: for sparse jac",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_sparse_jac",
+      "brief": "Core AD functionality: for sparse jac",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_two",
+      "brief": "Core AD functionality: for two",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_type",
+      "brief": "Core AD functionality: for type",
+      "has_algorithm": false
+    },
+    {
+      "name": "for_type",
+      "brief": "Core AD functionality: for type",
+      "has_algorithm": false
+    },
+    {
+      "name": "forward",
+      "brief": "Core AD functionality: forward",
+      "has_algorithm": false
+    },
+    {
+      "name": "forward",
+      "brief": "Core AD functionality: forward mode differentiation",
+      "has_algorithm": true
+    },
+    {
+      "name": "forward",
+      "brief": "Core AD functionality: forward",
+      "has_algorithm": false
+    },
+    {
+      "name": "forward",
+      "brief": "Core AD functionality: forward",
+      "has_algorithm": false
+    },
+    {
+      "name": "forward",
+      "brief": "Core AD functionality: forward",
+      "has_algorithm": false
+    },
+    {
+      "name": "forward_0",
+      "brief": "Internal sweep implementation: forward_0",
+      "has_algorithm": false
+    },
+    {
+      "name": "forward_any",
+      "brief": "Internal sweep implementation: forward_any",
+      "has_algorithm": false
+    },
+    {
+      "name": "forward_dir",
+      "brief": "Internal sweep implementation: forward_dir",
+      "has_algorithm": false
+    },
+    {
+      "name": "from_graph",
+      "brief": "Core AD functionality: from graph",
+      "has_algorithm": false
+    },
+    {
+      "name": "from_json",
+      "brief": "Core AD functionality: from json",
+      "has_algorithm": false
+    },
+    {
+      "name": "fun2val",
+      "brief": "Value graph: fun2val",
+      "has_algorithm": false
+    },
+    {
+      "name": "fun_check",
+      "brief": "Core AD functionality: fun check",
+      "has_algorithm": false
+    },
+    {
+      "name": "fun_construct",
+      "brief": "Core AD functionality: fun construct",
+      "has_algorithm": false
+    },
+    {
+      "name": "fun_eval",
+      "brief": "Core AD functionality: fun eval",
+      "has_algorithm": false
+    },
+    {
+      "name": "get_cexp_info",
+      "brief": "Tape optimization: get_cexp_info",
+      "has_algorithm": false
+    },
+    {
+      "name": "get_op_previous",
+      "brief": "Tape optimization: get_op_previous",
+      "has_algorithm": false
+    },
+    {
+      "name": "get_op_usage",
+      "brief": "Tape optimization: get_op_usage",
+      "has_algorithm": false
+    },
+    {
+      "name": "graph_op_enum",
+      "brief": "Core AD functionality: graph op enum",
+      "has_algorithm": false
+    },
+    {
+      "name": "hes_sparsity",
+      "brief": "Core AD functionality: hes sparsity",
+      "has_algorithm": false
+    },
+    {
+      "name": "hes_sparsity",
+      "brief": "Core AD functionality: hes sparsity",
+      "has_algorithm": false
+    },
+    {
+      "name": "hes_sparsity",
+      "brief": "Core AD functionality: hes sparsity",
+      "has_algorithm": false
+    },
+    {
+      "name": "hessian",
+      "brief": "Core AD functionality: hessian",
+      "has_algorithm": false
+    },
+    {
+      "name": "independent",
+      "brief": "Core AD functionality: independent",
+      "has_algorithm": false
+    },
+    {
+      "name": "integer",
+      "brief": "Core AD functionality: integer",
+      "has_algorithm": false
+    },
+    {
+      "name": "is_pod",
+      "brief": "Internal implementation: is_pod",
+      "has_algorithm": false
+    },
+    {
+      "name": "jac_sparsity",
+      "brief": "Core AD functionality: jac sparsity",
+      "has_algorithm": false
+    },
+    {
+      "name": "jac_sparsity",
+      "brief": "Core AD functionality: jac sparsity",
+      "has_algorithm": false
+    },
+    {
+      "name": "jac_sparsity",
+      "brief": "Core AD functionality: jac sparsity",
+      "has_algorithm": false
+    },
+    {
+      "name": "jacobian",
+      "brief": "Core AD functionality: jacobian",
+      "has_algorithm": false
+    },
+    {
+      "name": "json_lexer",
+      "brief": "Computational graph: json_lexer",
+      "has_algorithm": false
+    },
+    {
+      "name": "json_parser",
+      "brief": "Computational graph: json_parser",
+      "has_algorithm": false
+    },
+    {
+      "name": "json_writer",
+      "brief": "Computational graph: json_writer",
+      "has_algorithm": false
+    },
+    {
+      "name": "link_dll_lib",
+      "brief": "CppAD utility: link dll lib",
+      "has_algorithm": false
+    },
+    {
+      "name": "link_sparse_hessian",
+      "brief": "Speed testing: link_sparse_hessian",
+      "has_algorithm": false
+    },
+    {
+      "name": "link_sparse_jacobian",
+      "brief": "Speed testing: link_sparse_jacobian",
+      "has_algorithm": false
+    },
+    {
+      "name": "list_setvec",
+      "brief": "Internal implementation: list_setvec",
+      "has_algorithm": false
+    },
+    {
+      "name": "load_op",
+      "brief": "Internal implementation: load_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "log1p_op",
+      "brief": "Internal implementation: log1p_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "log_op",
+      "brief": "Internal implementation: log_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "lu_factor",
+      "brief": "CppAD utility: lu factor",
+      "has_algorithm": false
+    },
+    {
+      "name": "lu_invert",
+      "brief": "CppAD utility: lu invert",
+      "has_algorithm": false
+    },
+    {
+      "name": "lu_ratio",
+      "brief": "Core AD functionality: lu ratio",
+      "has_algorithm": false
+    },
+    {
+      "name": "lu_solve",
+      "brief": "CppAD utility: lu solve",
+      "has_algorithm": false
+    },
+    {
+      "name": "mat_sum_sq",
+      "brief": "Speed testing: mat_sum_sq",
+      "has_algorithm": false
+    },
+    {
+      "name": "match_op",
+      "brief": "Tape optimization: match_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "memory_leak",
+      "brief": "CppAD utility: memory leak",
+      "has_algorithm": false
+    },
+    {
+      "name": "mul",
+      "brief": "Core AD functionality: mul",
+      "has_algorithm": false
+    },
+    {
+      "name": "mul_eq",
+      "brief": "Core AD functionality: mul eq",
+      "has_algorithm": false
+    },
+    {
+      "name": "mul_op",
+      "brief": "Internal implementation: mul_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "nan",
+      "brief": "CppAD utility: nan",
+      "has_algorithm": false
+    },
+    {
+      "name": "near_equal",
+      "brief": "CppAD utility: near equal",
+      "has_algorithm": false
+    },
+    {
+      "name": "near_equal_ext",
+      "brief": "Core AD functionality: near equal ext",
+      "has_algorithm": false
+    },
+    {
+      "name": "neg_op",
+      "brief": "Internal implementation: neg_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "new_dynamic",
+      "brief": "Core AD functionality: new dynamic",
+      "has_algorithm": false
+    },
+    {
+      "name": "num_skip",
+      "brief": "Core AD functionality: num skip",
+      "has_algorithm": false
+    },
+    {
+      "name": "numeric_limits",
+      "brief": "Core AD functionality: numeric limits",
+      "has_algorithm": false
+    },
+    {
+      "name": "ode_err_control",
+      "brief": "CppAD utility: ode err control",
+      "has_algorithm": false
+    },
+    {
+      "name": "ode_evaluate",
+      "brief": "Speed testing: ode_evaluate",
+      "has_algorithm": false
+    },
+    {
+      "name": "ode_gear",
+      "brief": "CppAD utility: ode gear",
+      "has_algorithm": false
+    },
+    {
+      "name": "ode_gear_control",
+      "brief": "CppAD utility: ode gear control",
+      "has_algorithm": false
+    },
+    {
+      "name": "omp_alloc",
+      "brief": "CppAD utility: omp alloc",
+      "has_algorithm": false
+    },
+    {
+      "name": "omp_max_thread",
+      "brief": "Core AD functionality: omp max thread",
+      "has_algorithm": false
+    },
+    {
+      "name": "one_var",
+      "brief": "Internal implementation: one_var",
+      "has_algorithm": false
+    },
+    {
+      "name": "op2arg_index",
+      "brief": "Value graph: op2arg_index",
+      "has_algorithm": false
+    },
+    {
+      "name": "op_code_dyn",
+      "brief": "Internal implementation: op_code_dyn",
+      "has_algorithm": false
+    },
+    {
+      "name": "op_code_var",
+      "brief": "Internal implementation: op_code_var",
+      "has_algorithm": false
+    },
+    {
+      "name": "op_enum2class",
+      "brief": "Value graph: op_enum2class",
+      "has_algorithm": false
+    },
+    {
+      "name": "op_hash_table",
+      "brief": "Value graph: op_hash_table",
+      "has_algorithm": false
+    },
+    {
+      "name": "op_iterator",
+      "brief": "Value graph: op_iterator",
+      "has_algorithm": false
+    },
+    {
+      "name": "opt_val_hes",
+      "brief": "Core AD functionality: opt val hes",
+      "has_algorithm": false
+    },
+    {
+      "name": "optimize",
+      "brief": "Core AD functionality: optimize",
+      "has_algorithm": false
+    },
+    {
+      "name": "optimize_run",
+      "brief": "Tape optimization: optimize_run",
+      "has_algorithm": false
+    },
+    {
+      "name": "option",
+      "brief": "Value graph: option",
+      "has_algorithm": false
+    },
+    {
+      "name": "option",
+      "brief": "Core AD functionality: option",
+      "has_algorithm": false
+    },
+    {
+      "name": "pack_setvec",
+      "brief": "Internal implementation: pack_setvec",
+      "has_algorithm": false
+    },
+    {
+      "name": "par_op",
+      "brief": "Internal implementation: par_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "parallel_ad",
+      "brief": "Core AD functionality: parallel ad",
+      "has_algorithm": false
+    },
+    {
+      "name": "pod_vector",
+      "brief": "Internal implementation: pod_vector",
+      "has_algorithm": false
+    },
+    {
+      "name": "poly",
+      "brief": "CppAD utility: poly",
+      "has_algorithm": false
+    },
+    {
+      "name": "pow",
+      "brief": "Core AD functionality: pow",
+      "has_algorithm": false
+    },
+    {
+      "name": "pow_int",
+      "brief": "CppAD utility: pow int",
+      "has_algorithm": false
+    },
+    {
+      "name": "pri_op",
+      "brief": "Value graph: pri_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "pri_op",
+      "brief": "Internal implementation: pri_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "print_for",
+      "brief": "Core AD functionality: print for",
+      "has_algorithm": false
+    },
+    {
+      "name": "print_op",
+      "brief": "Value graph: print_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "put_dyn_atomic",
+      "brief": "Operation recording: put_dyn_atomic",
+      "has_algorithm": false
+    },
+    {
+      "name": "put_var_atomic",
+      "brief": "Operation recording: put_var_atomic",
+      "has_algorithm": false
+    },
+    {
+      "name": "put_var_vecad",
+      "brief": "Operation recording: put_var_vecad",
+      "has_algorithm": false
+    },
+    {
+      "name": "record",
+      "brief": "Value graph: record",
+      "has_algorithm": false
+    },
+    {
+      "name": "record_csum",
+      "brief": "Tape optimization: record_csum",
+      "has_algorithm": false
+    },
+    {
+      "name": "record_new",
+      "brief": "Value graph: record_new",
+      "has_algorithm": false
+    },
+    {
+      "name": "recorder",
+      "brief": "Operation recording: recorder",
+      "has_algorithm": false
+    },
+    {
+      "name": "renumber",
+      "brief": "Value graph: renumber",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_depend",
+      "brief": "Value graph: rev_depend",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_depend",
+      "brief": "Core AD functionality: rev depend",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_depend",
+      "brief": "Core AD functionality: rev depend",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_hes_sparsity",
+      "brief": "Core AD functionality: rev hes sparsity",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_jac",
+      "brief": "Internal sweep implementation: rev_jac",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_jac_sparsity",
+      "brief": "Core AD functionality: rev jac sparsity",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_one",
+      "brief": "Core AD functionality: rev one",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_sparse_hes",
+      "brief": "Core AD functionality: rev sparse hes",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_sparse_hes",
+      "brief": "Core AD functionality: rev sparse hes",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_sparse_hes",
+      "brief": "Core AD functionality: rev sparse hes",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_sparse_jac",
+      "brief": "Core AD functionality: rev sparse jac",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_sparse_jac",
+      "brief": "Core AD functionality: rev sparse jac",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_sparse_jac",
+      "brief": "Core AD functionality: rev sparse jac",
+      "has_algorithm": false
+    },
+    {
+      "name": "rev_two",
+      "brief": "Core AD functionality: rev two",
+      "has_algorithm": false
+    },
+    {
+      "name": "reverse",
+      "brief": "Reverse mode automatic differentiation",
+      "has_algorithm": true
+    },
+    {
+      "name": "reverse",
+      "brief": "Core AD functionality: reverse",
+      "has_algorithm": false
+    },
+    {
+      "name": "reverse",
+      "brief": "Core AD functionality: reverse",
+      "has_algorithm": false
+    },
+    {
+      "name": "reverse",
+      "brief": "Core AD functionality: reverse",
+      "has_algorithm": false
+    },
+    {
+      "name": "reverse",
+      "brief": "Core AD functionality: reverse",
+      "has_algorithm": false
+    },
+    {
+      "name": "romberg_mul",
+      "brief": "CppAD utility: romberg mul",
+      "has_algorithm": false
+    },
+    {
+      "name": "romberg_one",
+      "brief": "CppAD utility: romberg one",
+      "has_algorithm": false
+    },
+    {
+      "name": "rosen_34",
+      "brief": "CppAD utility: rosen 34",
+      "has_algorithm": false
+    },
+    {
+      "name": "runge_45",
+      "brief": "CppAD utility: runge 45",
+      "has_algorithm": false
+    },
+    {
+      "name": "set_get_in_parallel",
+      "brief": "Internal implementation: set_get_in_parallel",
+      "has_algorithm": false
+    },
+    {
+      "name": "set_hes_sparse_bool",
+      "brief": "Core AD functionality: set hes sparse bool",
+      "has_algorithm": false
+    },
+    {
+      "name": "set_hes_sparse_set",
+      "brief": "Core AD functionality: set hes sparse set",
+      "has_algorithm": false
+    },
+    {
+      "name": "set_jac_sparse_bool",
+      "brief": "Core AD functionality: set jac sparse bool",
+      "has_algorithm": false
+    },
+    {
+      "name": "set_jac_sparse_set",
+      "brief": "Core AD functionality: set jac sparse set",
+      "has_algorithm": false
+    },
+    {
+      "name": "set_union",
+      "brief": "CppAD utility: set union",
+      "has_algorithm": false
+    },
+    {
+      "name": "sign",
+      "brief": "Core AD functionality: sign",
+      "has_algorithm": false
+    },
+    {
+      "name": "sign_op",
+      "brief": "Internal implementation: sign_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "sin_op",
+      "brief": "Internal implementation: sin_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "sinh_op",
+      "brief": "Internal implementation: sinh_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "size_setvec",
+      "brief": "Internal implementation: size_setvec",
+      "has_algorithm": false
+    },
+    {
+      "name": "solve",
+      "brief": "Ipopt interface: solve",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse",
+      "brief": "Core AD functionality: sparse",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse2eigen",
+      "brief": "CppAD utility: sparse2eigen",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse_hes",
+      "brief": "Sparse Hessian computation using automatic differentiation",
+      "has_algorithm": true
+    },
+    {
+      "name": "sparse_hes_fun",
+      "brief": "Speed testing: sparse_hes_fun",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse_hessian",
+      "brief": "Core AD functionality: sparse hessian",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse_jac",
+      "brief": "Sparse Jacobian computation using graph coloring",
+      "has_algorithm": true
+    },
+    {
+      "name": "sparse_jac_fun",
+      "brief": "Speed testing: sparse_jac_fun",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse_jacobian",
+      "brief": "Core AD functionality: sparse jacobian",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse_rc",
+      "brief": "CppAD utility: sparse rc",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse_rcv",
+      "brief": "CppAD utility: sparse rcv",
+      "has_algorithm": false
+    },
+    {
+      "name": "sqrt_op",
+      "brief": "Internal implementation: sqrt_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "standard_math",
+      "brief": "Core AD functionality: standard math",
+      "has_algorithm": false
+    },
+    {
+      "name": "std_math_11",
+      "brief": "Core AD functionality: std math 11",
+      "has_algorithm": false
+    },
+    {
+      "name": "store_op",
+      "brief": "Internal implementation: store_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "sub",
+      "brief": "Core AD functionality: sub",
+      "has_algorithm": false
+    },
+    {
+      "name": "sub_eq",
+      "brief": "Core AD functionality: sub eq",
+      "has_algorithm": false
+    },
+    {
+      "name": "sub_op",
+      "brief": "Internal implementation: sub_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "subgraph_jac_rev",
+      "brief": "Core AD functionality: subgraph jac rev",
+      "has_algorithm": false
+    },
+    {
+      "name": "subgraph_reverse",
+      "brief": "Core AD functionality: subgraph reverse",
+      "has_algorithm": false
+    },
+    {
+      "name": "subgraph_sparsity",
+      "brief": "Core AD functionality: subgraph sparsity",
+      "has_algorithm": false
+    },
+    {
+      "name": "summation",
+      "brief": "Value graph: summation",
+      "has_algorithm": false
+    },
+    {
+      "name": "tan_op",
+      "brief": "Internal implementation: tan_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "tanh_op",
+      "brief": "Internal implementation: tanh_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "tape",
+      "brief": "Value graph: tape",
+      "has_algorithm": false
+    },
+    {
+      "name": "temp_file",
+      "brief": "Internal implementation: temp_file",
+      "has_algorithm": false
+    },
+    {
+      "name": "to_csrc",
+      "brief": "Core AD functionality: to csrc",
+      "has_algorithm": false
+    },
+    {
+      "name": "to_graph",
+      "brief": "Core AD functionality: to graph",
+      "has_algorithm": false
+    },
+    {
+      "name": "to_json",
+      "brief": "Core AD functionality: to json",
+      "has_algorithm": false
+    },
+    {
+      "name": "to_string",
+      "brief": "CppAD utility: to string",
+      "has_algorithm": false
+    },
+    {
+      "name": "track_new_del",
+      "brief": "CppAD utility: track new del",
+      "has_algorithm": false
+    },
+    {
+      "name": "two_var",
+      "brief": "Internal implementation: two_var",
+      "has_algorithm": false
+    },
+    {
+      "name": "unary_minus",
+      "brief": "Core AD functionality: unary minus",
+      "has_algorithm": false
+    },
+    {
+      "name": "unary_op",
+      "brief": "Value graph: unary_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "unary_plus",
+      "brief": "Core AD functionality: unary plus",
+      "has_algorithm": false
+    },
+    {
+      "name": "undef",
+      "brief": "Core AD functionality: undef",
+      "has_algorithm": false
+    },
+    {
+      "name": "uniform_01",
+      "brief": "Speed testing: uniform_01",
+      "has_algorithm": false
+    },
+    {
+      "name": "usage",
+      "brief": "Tape optimization: usage",
+      "has_algorithm": false
+    },
+    {
+      "name": "user_ad",
+      "brief": "Core AD functionality: user ad",
+      "has_algorithm": false
+    },
+    {
+      "name": "utility",
+      "brief": "CppAD utility: utility",
+      "has_algorithm": false
+    },
+    {
+      "name": "val2fun",
+      "brief": "Value graph: val2fun",
+      "has_algorithm": false
+    },
+    {
+      "name": "val_optimize",
+      "brief": "Value graph: val_optimize",
+      "has_algorithm": false
+    },
+    {
+      "name": "val_type",
+      "brief": "Value graph: val_type",
+      "has_algorithm": false
+    },
+    {
+      "name": "value",
+      "brief": "Core AD functionality: value",
+      "has_algorithm": false
+    },
+    {
+      "name": "var2par",
+      "brief": "Core AD functionality: var2par",
+      "has_algorithm": false
+    },
+    {
+      "name": "var_op",
+      "brief": "Internal implementation: var_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "var_type",
+      "brief": "Value graph: var_type",
+      "has_algorithm": false
+    },
+    {
+      "name": "vec_ad",
+      "brief": "Core AD functionality: vec ad",
+      "has_algorithm": false
+    },
+    {
+      "name": "vector",
+      "brief": "CppAD utility: vector",
+      "has_algorithm": false
+    },
+    {
+      "name": "vector_bool",
+      "brief": "CppAD utility: vector bool",
+      "has_algorithm": false
+    },
+    {
+      "name": "vector_bool",
+      "brief": "CppAD utility: vector bool",
+      "has_algorithm": false
+    },
+    {
+      "name": "vector_op",
+      "brief": "Value graph: vector_op",
+      "has_algorithm": false
+    },
+    {
+      "name": "wno_conversion",
+      "brief": "CppAD: wno conversion",
+      "has_algorithm": false
+    },
+    {
+      "name": "zdouble",
+      "brief": "Core AD functionality: zdouble",
+      "has_algorithm": false
+    },
+    {
+      "name": "zmul_op",
+      "brief": "Internal implementation: zmul_op",
+      "has_algorithm": false
+    }
+  ]
+}

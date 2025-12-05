@@ -1,0 +1,23 @@
+{
+  "name": "conjugate_residuals",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/conjugate_residuals.h",
+  "brief": "Conjugate Residuals Method for Symmetric Positive Definite Systems\n\nImplements preconditioned Conjugate Residuals (CR) for iteratively solving\nthe KKT system in interior point methods.",
+  "algorithms": [
+    {
+      "name": "Conjugate Residuals (CR):\nA Krylov subspace method for solving Cx = b where C is symmetric positive\ndefinite.\n\nKEY DIFFERENCE FROM CG:\n- CG minimizes \u2016x - x*\u2016_C (error in C-norm)\n- CR minimizes \u2016Cx - b\u2016\u2082 (residual in 2-norm)\nCR is preferred when monitoring residual convergence directly.\n\nUNPRECONDITIONED CR:\n  r\u2080 = b - C\u00b7x\u2080\n  p\u2080 = r\u2080, s\u2080 = C\u00b7r\u2080\n  for k = 0, 1, 2, ...\n    \u03b1 = (r\u2096, s\u2096) / (s\u2096, s\u2096)\n    x\u2096\u208a\u2081 = x\u2096 + \u03b1\u00b7p\u2096\n    r\u2096\u208a\u2081 = r\u2096 - \u03b1\u00b7C\u00b7p\u2096\n    s\u2096\u208a\u2081 = C\u00b7r\u2096\u208a\u2081\n    \u03b2 = (r\u2096\u208a\u2081, s\u2096\u208a\u2081) / (r\u2096, s\u2096)\n    p\u2096\u208a\u2081 = r\u2096\u208a\u2081 + \u03b2\u00b7p\u2096\n\nPRECONDITIONED CR (with preconditioner P \u2248 C\u207b\u00b9):\n  Effectively solves: P^{1/2}\u00b7C\u00b7P^{1/2}\u00b7y = P^{1/2}\u00b7b, x = P^{1/2}\u00b7y\n  - Apply P to residual: z = P\u00b7r\n  - Update formulas modified to use preconditioned vectors\n\nTERMINATION CRITERION:\n- Without scaling: \u2016r\u2096\u2016_\u221e \u2264 tol\n- With scaling: \u2016D\u00b7r\u2096\u2016_\u221e \u2264 tol where D = diag(resscale)\n\nThe scaled criterion is important for IPM where different components\nhave vastly different magnitudes.",
+      "math": "Convergence analysis:\nAfter k iterations: \u2016r\u2096\u2016 \u2264 2\u00b7((\u221a\u03ba-1)/(\u221a\u03ba+1))^k\u00b7\u2016r\u2080\u2016\nwhere \u03ba = cond(C) = \u03bb_max/\u03bb_min\n\nPreconditioning reduces effective condition number:\n\u03ba_eff = cond(P\u00b7C) << \u03ba\n\nFor IPM: C is the reduced KKT system (normal equations form),\nP is basis-based preconditioner using approximate LU factors.",
+      "complexity": "- Per iteration: 1 mat-vec with C + 1 preconditioner apply (if used)\n- Typical iterations: O(\u221a\u03ba) or O(\u221a\u03ba_eff) with preconditioning\n- Total: O(k \u00b7 nnz) for k iterations",
+      "ref": [
+        "Saad (2003). \"Iterative Methods for Sparse Linear Systems\", 2nd ed.\n  Algorithm 6.20.",
+        "Schork (2018). \"Basis Preconditioning in Interior Point Methods\".\n  PhD thesis, Section 6.3."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "kkt_solver.h for iterative KKT solver using this method",
+    "linear_operator.h for matrix/preconditioner interface"
+  ]
+}

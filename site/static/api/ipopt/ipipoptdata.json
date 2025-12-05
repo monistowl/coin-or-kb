@@ -1,0 +1,20 @@
+{
+  "name": "IpIpoptData",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpIpoptData.hpp",
+  "brief": "Central storage for all iteration data in Ipopt\n\nIpoptData holds the algorithmic state across iterations:\n- curr_: Current iterate (x, s, y_c, y_d, z_L, z_U, v_L, v_U)\n- trial_: Trial point from line search\n- delta_: Search direction from KKT solve\n- delta_aff_: Affine-scaling step (for Mehrotra predictor-corrector)\n- W_: Hessian or Hessian approximation",
+  "algorithms": [
+    {
+      "name": "IPM Iterate Management:\n  Per iteration: curr \u2192 trial (via delta + line search) \u2192 accept.\n  Predictor-corrector: delta_aff (\u03bc=0 step), then delta (corrected).\n  Step: trial = curr + \u03b1\u00b7delta where \u03b1 from line search.\n  AcceptTrialPoint: curr \u2190 trial, reset delta flags.",
+      "math": "Primal-dual iterate structure:\n  w = (x, s, y_c, y_d, z_L, z_U, v_L, v_U) \u2208 \u211d\u207f\u00d7\u211d\u02e2\u00d7\u211d\u1d50\u00d7...\n  x: primal variables, s: slack variables\n  y_c, y_d: equality/inequality constraint multipliers\n  z_L, z_U: bound multipliers (x \u2265 x_L, x \u2264 x_U)\n  v_L, v_U: slack bound multipliers",
+      "complexity": "O(1) storage per iterate beyond vectors themselves.\n  Smart pointer caching with tags for invalidation tracking.\n  Memento pattern: stores algorithm state for rollback.\n\nAlso tracks: barrier parameter mu, iteration count, timing stats,\nconvergence tolerance, and iteration output information.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpIteratesVector.hpp for iterate vector structure",
+    "IpIpoptAlg.hpp for algorithm using this data"
+  ]
+}

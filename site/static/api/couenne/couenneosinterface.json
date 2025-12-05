@@ -1,0 +1,13 @@
+{
+  "name": "CouenneOSInterface",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/main/CouenneOSInterface.hpp",
+  "brief": "Optimization Services (OS) interface for Couenne\n\nReads optimization problems from OSInstance format (COIN-OR\nOptimization Services) and converts to Couenne representation.\n\n**OSInstance format:**\nXML-based representation for optimization problems defined by\nthe Optimization Services project. Supports linear, quadratic,\nand nonlinear constraints with expression trees.\n\n**Key methods:**\n- getCouenneProblem(): Convert OSInstance \u2192 CouenneProblem\n- getTMINLP(): Wrap as Bonmin TMINLP\n- writeSolution(): Output in OS solution format\n\n**Usage:**\nAlternative to AMPL interface for problems defined via\nOptimization Services XML or programmatic APIs.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneUserInterface base class",
+    "CouenneAmplInterface alternative AMPL input"
+  ]
+}

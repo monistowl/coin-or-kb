@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_EdgeCutProblem",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_EdgeCutProblem.hpp",
+  "brief": "Extended graph with matching and partition state for algorithms\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nEdgeCutProblem extends Graph with algorithm state: partition array,\nvertex gains, external degrees, boundary heaps, cut metrics. Also\nstores matching data (matchmap, invmatchmap, matchtype) for multilevel\nhierarchy. Provides inline helpers for boundary heap and mark array.",
+  "algorithms": [
+    {
+      "name": "Multilevel Algorithm State Management:\nEncapsulates all mutable state for partition algorithms:\n\nPartition state:\n- partition[v]: Boolean, which side vertex v is on\n- vertexGains[v]: Current FM gain for moving v\n- externalDegree[v]: # edges crossing cut from v\n- bhHeap[2], bhSize[2]: Boundary heaps for each partition\n\nMatching state (for coarsening):\n- matchmap[v]: Coarse vertex ID that v maps to\n- invmatchmap[c]: Fine vertex that coarse c came from\n- matchtype[v]: How v was matched (standard, brotherly, community)",
+      "math": "Mark array with O(1) amortized clear:\nInstead of clearing n elements, increment markValue.\nmark(v): markArray[v] = markValue\nisMarked(v): markArray[v] == markValue\nAmortized O(1) clear by incrementing markValue.",
+      "complexity": "O(n) storage for all per-vertex arrays.\nTotal memory: ~10n integers + 5n doubles for n-vertex graph.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_Graph.hpp for base graph structure",
+    "Mongoose_BoundaryHeap.hpp for heap operations"
+  ]
+}

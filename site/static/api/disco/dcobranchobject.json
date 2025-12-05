@@ -1,0 +1,14 @@
+{
+  "name": "DcoBranchObject",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoBranchObject.hpp",
+  "brief": "Branching decision for integer variable dichotomy\n\nDcoBranchObject stores the information needed to create two child\nnodes by branching on a fractional integer variable.\n\n**Branching Dichotomy:**\nFor variable x_i with fractional value v:\n- Down branch: x_i <= floor(v) (ubDownBranch_)\n- Up branch: x_i >= ceil(v) (lbUpBranch_)\n\n**Inherited from BcpsBranchObject:**\n- objectIndex_: Variable index being branched\n- score_: Branching score (from strategy)\n- value_: Current fractional value\n- direction_: Which branch to explore next\n\n**Key Methods:**\n- numBranches(): Returns 2 (binary branching)\n- branch(): Apply bound change to solver, return new bound",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoVariable.hpp::createBranchObject()",
+    "DcoTreeNode.hpp::branch() for child creation",
+    "DcoBranchStrategyStrong.hpp for scoring"
+  ]
+}

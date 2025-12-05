@@ -1,0 +1,13 @@
+{
+  "name": "HighsHessianUtils",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/model/HighsHessianUtils.h",
+  "brief": "Utility functions for Hessian matrix manipulation\n\nFree functions for validating, transforming, and operating on Hessian matrices.\n\n**Validation:**\n- assessHessian(): Comprehensive Hessian validation\n- assessHessianDimensions(): Check dimension consistency\n- okHessianDiagonal(): Verify positive diagonal for convexity\n\n**Transformation:**\n- normaliseHessian(): Standardize Hessian format\n- extractTriangularHessian(): Convert to lower-triangular storage\n- triangularToSquareHessian(): Expand to full symmetric matrix\n- completeHessianDiagonal(): Add missing diagonal entries\n- completeHessian(): Extend to full variable dimension\n\n**Scaling:**\n- userScaleHessian(): Apply/remove user-provided scaling factors\n\n**Reporting:**\n- reportHessian(): Print Hessian structure and values",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "model/HighsHessian.h for Hessian data structure",
+    "model/HighsModel.h for combined LP+QP model"
+  ]
+}

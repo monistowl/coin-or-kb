@@ -1,0 +1,20 @@
+{
+  "name": "CoinSearchTree",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinSearchTree.hpp",
+  "brief": "Search tree data structures for branch-and-bound\n\nProvides tree node management with various comparison strategies\n(best-first, depth-first, breadth-first).",
+  "algorithms": [
+    {
+      "name": "Branch-and-Bound Tree Search:\n  Maintains a priority queue of open nodes, each representing a subproblem.\n  Node selection strategies:\n  - Best-first: select node with best LP bound (minimize gap)\n  - Depth-first: select deepest node (find solutions quickly)\n  - Breadth-first: select shallowest node (explore broadly)\n  - Best-estimate: use estimated integer solution quality",
+      "math": "Node attributes:\n  - depth: distance from root (root = 0)\n  - quality: LP relaxation value (lower bound for minimization)\n  - fractionality: number of integer-infeasible variables\n  - true_lower_bound: valid dual bound (may differ with column generation)",
+      "complexity": "Node operations: O(log n) insertion, O(log n) extraction\n  where n = number of open nodes. Uses heap-based priority queue.\n  Sibling nodes stored together for efficient processing.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinTreeNode for node data interface",
+    "CoinTreeSiblings for sibling node grouping"
+  ]
+}

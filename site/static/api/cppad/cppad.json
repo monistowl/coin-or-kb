@@ -1,0 +1,23 @@
+{
+  "name": "cppad",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/cppad.hpp",
+  "brief": "Contains all variables and functions defined by CppAD package",
+  "algorithms": [
+    {
+      "name": "Operator overloading records a \"tape\" of operations.\n           Forward mode: propagates derivatives from inputs to outputs.\n           Reverse mode: propagates derivatives from outputs to inputs.\n           Reverse mode is more efficient for many inputs, few outputs.",
+      "math": "",
+      "complexity": "",
+      "ref": [
+        "Griewank, Walther (2008). \"Evaluating Derivatives: Principles and\n     Techniques of Algorithmic Differentiation\", 2nd ed. SIAM."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AD for the automatic differentiation scalar type",
+    "ADFun for the recorded function object",
+    "Ipopt for nonlinear optimization using CppAD derivatives\n\n@namespace CppAD"
+  ]
+}

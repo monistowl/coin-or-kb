@@ -1,0 +1,12 @@
+{
+  "name": "Environment",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Environment.h",
+  "brief": "Shared state container for SHOT solver components\n\nCentral hub connecting all solver subsystems.\n\n**Environment Class Members:**\n- problem: Original problem formulation\n- reformulatedProblem: Convexified/linearized version\n- modelingSystem: GAMS/AMPL/OSiL interface\n\n**Solver Components:**\n- dualSolver: MIP solver for dual problem (CPLEX/Gurobi/CBC)\n- primalSolver: NLP solver for primal bounds (Ipopt)\n- rootsearchMethod: Line search for hyperplanes\n\n**Infrastructure:**\n- settings: Solver configuration parameters\n- results: Solution and statistics\n- output: Logging via spdlog\n- timing: Performance profiling\n- events: Callback event handler\n- tasks: Asynchronous task manager",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Solver.h for the main solver interface"
+  ]
+}

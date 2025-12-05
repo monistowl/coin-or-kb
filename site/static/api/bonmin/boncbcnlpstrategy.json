@@ -1,0 +1,19 @@
+{
+  "name": "BonCbcNlpStrategy",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/BonCbcNlpStrategy.hpp",
+  "brief": "NLP failure handling strategy for Cbc in MINLP context\nCopyright (C) International Business Machines Corporation and\nCarnegie Mellon University 2006. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nCbcNlpStrategy: Strategy class for handling NLP solve failures during\nbranch-and-bound. Tracks consecutive failures and infeasibilities,\noptionally treating failures as infeasible to continue search.\n\nAuthors: John J. Forrest, IBM; Pierre Bonami, CMU\nDate: March 15, 2006",
+  "algorithms": [
+    {
+      "name": "NLP Failure Handling Strategy for MINLP",
+      "math": "Track consecutive NLP failures during branch-and-bound:\n      - hasFailed_: current solve status\n      - maxFailure_: threshold for abandoning branch\n      - pretendFailIsInfeasible_: treat failures as infeasible nodes\n      Enables robust B&B search despite numerical difficulties.",
+      "complexity": "O(1) per status check. Bounds failure tolerance.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcStrategy for base strategy interface"
+  ]
+}

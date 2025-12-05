@@ -1,0 +1,13 @@
+{
+  "name": "BonBabInfos",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/BonBabInfos.hpp",
+  "brief": "Information passing between Bonmin B&B components\n\nExtends OsiAuxInfo to pass Bonmin-specific information between components\nduring branch-and-cut. Provides access to the Bab solver and solution info.\n\n**Key functionality:**\n- babPtr_: Access to the Bab object (and via it, CbcModel)\n- hasSolution(): Check if incumbent exists\n- bestSolution_: Current best known solution (from AuxInfo)\n\nUsed by cut generators and heuristics to query current B&B state.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AuxInfo for the base class",
+    "Bab for the branch-and-bound driver"
+  ]
+}

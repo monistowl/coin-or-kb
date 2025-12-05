@@ -1,0 +1,13 @@
+{
+  "name": "TaskSolveIteration",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskSolveIteration.h",
+  "brief": "Solve MIP relaxation for current iteration\n\nCore MIP solve step in outer approximation loop.\n\n**TaskSolveIteration Class:**\n- run(): Call DualSolver to solve MIP with current cuts\n\n**Iteration Flow:**\n1. MIP has linear approximation of nonlinear constraints\n2. Solve gives candidate solution + dual bound\n3. Candidate checked for feasibility\n4. New cuts generated at infeasible points",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DualSolver.h for MIP solve call",
+    "TaskSelectHyperplanePointsESH.h for cut generation"
+  ]
+}

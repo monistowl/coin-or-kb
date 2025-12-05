@@ -1,0 +1,22 @@
+{
+  "name": "IpLowRankAugSystemSolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpLowRankAugSystemSolver.hpp",
+  "brief": "Low-rank Hessian handling via Sherman-Morrison (multiple backsolves)\n\nLowRankAugSystemSolver handles LowRankUpdateSymMatrix Hessians\n(from L-BFGS quasi-Newton) using the Sherman-Morrison formula.\n\nL-BFGS Hessian: W = sigma*I + V*M*V^T (compact representation)\n- V: n x 2k matrix of gradient/step differences\n- M: 2k x 2k small dense matrix\n- k: number of stored corrections (limited memory)\n\nSherman-Morrison approach:\n(A + UV^T)^{-1} = A^{-1} - A^{-1}U(I + V^TA^{-1}U)^{-1}V^TA^{-1}\n\nImplementation:\n1. Solve diagonal system: Vtilde = A^{-1}*V (2k backsolves)\n2. Form small dense matrix: J = I + V^T*Vtilde\n3. Solve J*y = V^T*A^{-1}*rhs (small dense solve)\n4. Correct: x = A^{-1}*rhs - Vtilde*y\n\nStorage:\n- J1_, J2_: Dense matrices for correction\n- Vtilde1_, Utilde2_: MultiVectorMatrix backsolve results\n- Wdiag_: Diagonal part passed to base solver",
+  "algorithms": [
+    {
+      "name": "Sherman-Morrison Low-Rank Augmented System Solver:\nEfficiently solve augmented system when Hessian has low-rank update:\n1. Decompose Hessian: W = \u03c3I + V\u00b7M\u00b7V\u1d40 (L-BFGS compact form)\n2. Solve 2k auxiliary systems: \u1e7c = (A_diag)\u207b\u00b9\u00b7V\n   where A_diag is augmented system with \u03c3I Hessian\n3. Form small (2k \u00d7 2k) correction matrix: J = M\u207b\u00b9 + V\u1d40\u00b7\u1e7c\n4. Solve base system: x\u2080 = A_diag\u207b\u00b9\u00b7b\n5. Solve correction: J\u00b7y = V\u1d40\u00b7x\u2080\n6. Return: x = x\u2080 - \u1e7c\u00b7y (Sherman-Morrison correction)",
+      "math": "Sherman-Morrison-Woodbury formula:\n(A + UCV^T)^{-1} = A^{-1} - A^{-1}U(C^{-1} + V^TA^{-1}U)^{-1}V^TA^{-1}\n\nFor L-BFGS: A = augmented(\u03c3I), U = V = [S, Y], C = M (2k \u00d7 2k).\n\nKey insight: 2k backsolves with simpler (diagonal Hessian) system\ncheaper than one solve with dense/indefinite L-BFGS Hessian.",
+      "complexity": "2k augmented system solves with diagonal W: O(2k\u00b7nnz(J)\u00b7fill).\nPlus O(k\u00b3) for small dense correction system.\nTotal often cheaper than one solve with explicit L-BFGS matrix.",
+      "ref": [
+        "Nocedal & Wright (2006). Numerical Optimization. Chapter 7: Large-Scale\n  Unconstrained Optimization. [Limited-memory quasi-Newton methods]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpLowRankSSAugSystemSolver.hpp for single-backsolve version",
+    "IpLimMemQuasiNewtonUpdater.hpp for L-BFGS Hessian"
+  ]
+}

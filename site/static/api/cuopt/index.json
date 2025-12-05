@@ -1,0 +1,681 @@
+{
+  "library": "cuopt",
+  "layer": "layer-4",
+  "classes": [
+    {
+      "name": "ab_cycle",
+      "brief": "cuOpt VRP genetic crossover\n\nCrossover operators for evolutionary VRP algorithm.\nEAX (edge assembly), OX (order crossover), etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "adaptive_step_size_strategy",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "arc_value",
+      "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "assignment",
+      "brief": "VRP solution output container with routes and timing\n\nContainer for Vehicle Routing Problem solver output.\n\n**assignment_t Class:**\n- Optimized routes stored in GPU device memory\n- Arrival times, truck assignments, node types\n- Objective values and solution status\n\n**Solution Data:**\n- get_route(): Ordered sequence of node IDs\n- get_truck_id(): Vehicle assignment per stop\n- get_arrival_stamp(): Arrival time at each stop\n- get_unserviced_nodes(): Orders not serviced (if any)\n\n**Solution Status (solution_status_t):**\n- SUCCESS: Feasible solution found\n- INFEASIBLE: No feasible solution exists\n- TIMEOUT: Time limit reached\n- EMPTY: Solver did not run\n- ERROR: Runtime error occurred\n\n**host_assignment_t:**\n- Host-side copy for CPU access\n- std::vector storage for routes and stamps",
+      "has_algorithm": false
+    },
+    {
+      "name": "barrier",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basis_solves",
+      "brief": "cuOpt dual simplex basis management\n\nLU factorization and basis updates for GPU simplex.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basis_updates",
+      "brief": "cuOpt dual simplex basis management\n\nLU factorization and basis updates for GPU simplex.",
+      "has_algorithm": false
+    },
+    {
+      "name": "benchmark_helper",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "branch_and_bound",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "callbacks_implems",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "check_input",
+      "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "conjugate_gradient",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "constants",
+      "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "convergence_information",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "copy_helpers",
+      "brief": "cuOpt utility functions\n\nCommon utilities for cuOpt library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "crossover",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cuopt_c",
+      "brief": "A ``cuOptOptimizationProblem`` object contains a representation of\nan LP or MIP. It is created by ``cuOptCreateProblem`` or ``cuOptCreateRangedProblem``.\nIt is passed to ``cuOptSolve``. It should be destroyed using ``cuOptDestroyProblem``.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cusparse_info",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cusparse_view",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cusparse_view",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cycle",
+      "brief": "cuOpt VRP local search\n\nLocal search moves for route improvement.\n2-opt, Or-opt, swap, relocate operators.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cycle_finder",
+      "brief": "cuOpt VRP local search\n\nLocal search moves for route improvement.\n2-opt, Or-opt, swap, relocate operators.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cycle_graph",
+      "brief": "cuOpt VRP local search\n\nLocal search moves for route improvement.\n2-opt, Or-opt, swap, relocate operators.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cython",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cython_mps_parser",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cython_solve",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "data_model_view",
+      "brief": "VRP problem definition via non-owning GPU memory views\n\nContainer for Vehicle Routing Problem input data.\n\n**data_model_view_t Class:**\n- Non-owning views to GPU memory for routing problem data\n- Supports heterogeneous fleet with multiple vehicle types\n- Configurable constraints and objectives\n\n**Cost/Time Matrices:**\n- add_cost_matrix(): Travel cost between locations\n- add_transit_time_matrix(): Travel time for constraint checking\n- Multiple matrices for heterogeneous fleet\n\n**Constraints:**\n- add_capacity_dimension(): Vehicle capacity limits (CVRP)\n- set_order_time_windows(): Delivery time windows (VRPTW)\n- set_pickup_delivery_pairs(): PDP pickup-before-delivery\n- add_order_precedence(): Order sequencing constraints\n- set_vehicle_time_windows(): Vehicle availability windows\n- add_vehicle_break(): Required driver breaks\n\n**Fleet Configuration:**\n- set_vehicle_locations(): Start/return depot per vehicle\n- set_vehicle_types(): Vehicle type identifiers\n- set_drop_return_trips(): Open-ended routes\n- add_vehicle_order_match(): Vehicle-order compatibility",
+      "has_algorithm": false
+    },
+    {
+      "name": "data_model_view",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "dense_matrix",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "dense_vector",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "device_bitset",
+      "brief": "cuOpt VRP local search\n\nLocal search moves for route improvement.\n2-opt, Or-opt, swap, relocate operators.",
+      "has_algorithm": false
+    },
+    {
+      "name": "dispose",
+      "brief": "cuOpt VRP genetic crossover\n\nCrossover operators for evolutionary VRP algorithm.\nEAX (edge assembly), OX (order crossover), etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "distance",
+      "brief": "cuOpt distance computation\n\nDistance/time matrix computation for routing.\nHaversine, Euclidean, and graph-based distances.",
+      "has_algorithm": false
+    },
+    {
+      "name": "diverse_solver",
+      "brief": "cuOpt VRP diversity management\n\nPopulation diversity for evolutionary VRP.\nPrevents premature convergence.",
+      "has_algorithm": false
+    },
+    {
+      "name": "diversity_config",
+      "brief": "cuOpt VRP diversity management\n\nPopulation diversity for evolutionary VRP.\nPrevents premature convergence.",
+      "has_algorithm": false
+    },
+    {
+      "name": "diversity_config",
+      "brief": "cuOpt MIP solver component\n\nPart of GPU-accelerated mixed-integer solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "double_buffer",
+      "brief": "cuOpt utility functions\n\nCommon utilities for cuOpt library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "eax_recombiner",
+      "brief": "cuOpt VRP genetic crossover\n\nCrossover operators for evolutionary VRP algorithm.\nEAX (edge assembly), OX (order crossover), etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "env_utils",
+      "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "error",
+      "brief": "Error handling and exception types for cuOpt\n\nDefines error types and macros for cuOpt error handling.\n\n**Error Types (error_type_t):**\n- Success: Operation completed successfully\n- ValidationError: Input validation failed\n- OutOfMemoryError: GPU/CPU memory allocation failed\n- RuntimeError: General runtime error\n\n**Exception Class:**\n- logic_error: Exception with error_type_t classification\n\n**Macros:**\n- EXE_CUOPT_EXPECTS(cond, fmt, ...): Assert with formatted message\n- EXE_CUOPT_FAIL(fmt, ...): Unconditional failure",
+      "has_algorithm": false
+    },
+    {
+      "name": "error",
+      "brief": "cuOpt MPS file parser\n\nReads LP/MIP problems in MPS format.\nHandles fixed and free format MPS files.",
+      "has_algorithm": false
+    },
+    {
+      "name": "fleet_info",
+      "brief": "cuOpt VRP vehicle/fleet model\n\nVehicle capacity, time windows, and fleet constraints.",
+      "has_algorithm": false
+    },
+    {
+      "name": "fleet_order_constraints",
+      "brief": "cuOpt VRP vehicle/fleet model\n\nVehicle capacity, time windows, and fleet constraints.",
+      "has_algorithm": false
+    },
+    {
+      "name": "fleet_order_info",
+      "brief": "cuOpt VRP vehicle/fleet model\n\nVehicle capacity, time windows, and fleet constraints.",
+      "has_algorithm": false
+    },
+    {
+      "name": "folding",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "generator",
+      "brief": "cuOpt VRP solution generator\n\nInitial solution construction for VRP.",
+      "has_algorithm": false
+    },
+    {
+      "name": "generator",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "gf2_presolve",
+      "brief": "cuOpt MIP solver component\n\nPart of GPU-accelerated mixed-integer solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "helpers",
+      "brief": "cuOpt VRP diversity management\n\nPopulation diversity for evolutionary VRP.\nPrevents premature convergence.",
+      "has_algorithm": false
+    },
+    {
+      "name": "high_res_timer",
+      "brief": "cuOpt timing utilities\n\nPerformance timing and profiling.",
+      "has_algorithm": false
+    },
+    {
+      "name": "hyper_params",
+      "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "infeasibility_information",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "initial_basis",
+      "brief": "cuOpt dual simplex basis management\n\nLU factorization and basis updates for GPU simplex.",
+      "has_algorithm": false
+    },
+    {
+      "name": "initial_problem_check",
+      "brief": "cuOpt LP problem representation\n\nSparse matrix storage for LP constraints.",
+      "has_algorithm": false
+    },
+    {
+      "name": "initial_solution_reader",
+      "brief": "cuOpt LP solution storage\n\nPrimal/dual solution and basis information.",
+      "has_algorithm": false
+    },
+    {
+      "name": "injection_info",
+      "brief": "cuOpt VRP diversity management\n\nPopulation diversity for evolutionary VRP.\nPrevents premature convergence.",
+      "has_algorithm": false
+    },
+    {
+      "name": "internals",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "inversion_recombiner",
+      "brief": "cuOpt VRP genetic crossover\n\nCrossover operators for evolutionary VRP algorithm.\nEAX (edge assembly), OX (order crossover), etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "iterative_refinement",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "local_search_config",
+      "brief": "cuOpt MIP solver component\n\nPart of GPU-accelerated mixed-integer solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "localized_duality_gap_container",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "logger",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "logger",
+      "brief": "cuOpt MIP solver component\n\nPart of GPU-accelerated mixed-integer solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "logger",
+      "brief": "Logging infrastructure for cuOpt based on rapids_logger\n\nProvides configurable logging for cuOpt operations.\n\n**Configuration:**\n- CUOPT_DEBUG_LOG_FILE env var: Log to file instead of stderr\n- Log levels: trace, debug, info, warn, error, critical\n\n**Functions:**\n- default_logger(): Get/create the global cuOpt logger\n- reset_default_logger(): Reset to default configuration\n- default_sink(): Get file or stderr sink\n- default_pattern(): Timestamp format string",
+      "has_algorithm": false
+    },
+    {
+      "name": "logger_init",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "macros",
+      "brief": "cuOpt VRP diversity management\n\nPopulation diversity for evolutionary VRP.\nPrevents premature convergence.",
+      "has_algorithm": false
+    },
+    {
+      "name": "md_utils",
+      "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "mip_constants",
+      "brief": "cuOpt MIP solver component\n\nPart of GPU-accelerated mixed-integer solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "mip_node",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "mps_data_model",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "mps_parser",
+      "brief": "cuOpt MPS file parser\n\nReads LP/MIP problems in MPS format.\nHandles fixed and free format MPS files.",
+      "has_algorithm": false
+    },
+    {
+      "name": "mps_writer",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "omp_helpers",
+      "brief": "cuOpt utility functions\n\nCommon utilities for cuOpt library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "optimization_problem",
+      "brief": "GPU-resident linear/integer programming problem representation\n\nContainer for LP/MIP optimization problems stored in GPU memory.\n\n**optimization_problem_t Class:**\n- Represents: min/max c'x s.t. Ax \u2264/=/\u2265 b, l \u2264 x \u2264 u\n- Constraint matrix A in CSR (Compressed Sparse Row) format\n- GPU device memory via rmm::device_uvector\n\n**Problem Components:**\n- set_csr_constraint_matrix(): Sparse constraint matrix\n- set_constraint_bounds(): RHS values (b)\n- set_objective_coefficients(): Cost vector (c)\n- set_variable_lower/upper_bounds(): Variable bounds\n- set_variable_types(): CONTINUOUS or INTEGER\n\n**Variable Types:**\n- var_t::CONTINUOUS: Real-valued variable\n- var_t::INTEGER: Integer-valued variable\n\n**Problem Categories:**\n- LP: All continuous variables\n- MIP: Mixed integer and continuous\n- IP: All integer variables",
+      "has_algorithm": false
+    },
+    {
+      "name": "order_info",
+      "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "ox_graph",
+      "brief": "cuOpt VRP genetic crossover\n\nCrossover operators for evolutionary VRP algorithm.\nEAX (edge assembly), OX (order crossover), etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "parser",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "pdhg",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "pdlp_constants",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "pdlp_warm_start_data",
+      "brief": "cuOpt GPU linear programming API\n\nPublic API for GPU-accelerated linear programming.\nCUDA-based simplex and interior point methods.",
+      "has_algorithm": false
+    },
+    {
+      "name": "phase1",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "phase2",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "pinned_host_allocator",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "population",
+      "brief": "cuOpt VRP diversity management\n\nPopulation diversity for evolutionary VRP.\nPrevents premature convergence.",
+      "has_algorithm": false
+    },
+    {
+      "name": "presolve",
+      "brief": "cuOpt LP presolve\n\nBound tightening and constraint reduction for LP.",
+      "has_algorithm": false
+    },
+    {
+      "name": "primal",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "pseudo_costs",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "random",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "recombiner_configs",
+      "brief": "cuOpt MIP solver component\n\nPart of GPU-accelerated mixed-integer solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "recombiner_stats",
+      "brief": "cuOpt MIP solver component\n\nPart of GPU-accelerated mixed-integer solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "right_looking_lu",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "routing_details",
+      "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "routing_structures",
+      "brief": "Core data structures for VRP problem specification\n\nEnums and helper classes for VRP constraint modeling.\n\n**Objective Types (objective_t):**\n- COST: Total route cost from cost matrix\n- TRAVEL_TIME: Total driving time (excluding waits)\n- VARIANCE_ROUTE_SIZE: Balance route lengths\n- VARIANCE_ROUTE_SERVICE_TIME: Balance service times\n- PRIZE: Sum of collected order prizes\n- VEHICLE_FIXED_COST: Per-vehicle usage cost\n\n**Node Types (node_type_t):**\n- DEPOT: Start/end location for vehicles\n- PICKUP: Pickup location for PDP\n- DELIVERY: Delivery location for PDP\n- BREAK: Driver break location\n\n**Internal Detail Classes:**\n- break_dimension_t: Uniform break constraints\n- vehicle_break_t: Per-vehicle break constraints\n- capacity_t: Capacity dimension (demand/capacity pair)\n- order_time_window_t: Time window bounds\n- vehicle_time_window_t: Vehicle availability bounds",
+      "has_algorithm": false
+    },
+    {
+      "name": "saddle_point",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "scaling",
+      "brief": "cuOpt matrix preprocessing\n\nScaling and permutation for numerical stability.",
+      "has_algorithm": false
+    },
+    {
+      "name": "scope_guard",
+      "brief": "cuOpt utility functions\n\nCommon utilities for cuOpt library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "set_covering",
+      "brief": "cuOpt VRP genetic crossover\n\nCrossover operators for evolutionary VRP algorithm.\nEAX (edge assembly), OX (order crossover), etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "simplex_solver_settings",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "singletons",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "solution",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "solution_reader",
+      "brief": "cuOpt optimization utilities\n\nCommon utilities for mathematical optimization.",
+      "has_algorithm": false
+    },
+    {
+      "name": "solution_writer",
+      "brief": "cuOpt optimization utilities\n\nCommon utilities for mathematical optimization.",
+      "has_algorithm": false
+    },
+    {
+      "name": "solve",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "solve",
+      "brief": "GPU-accelerated Vehicle Routing Problem (VRP) solver entry point\n\nMain solve function for vehicle routing optimization on GPU.\n\n**solve() Function:**\n- Takes data_model_view_t (problem) and solver_settings_t (config)\n- Returns assignment_t with optimized routes\n\n**Supported VRP Variants:**\n- CVRP: Capacitated VRP with vehicle capacity constraints\n- VRPTW: VRP with time windows at customer locations\n- VRPPD: VRP with pickup and delivery pairs\n- Heterogeneous fleet: Different vehicle types/costs\n- Multi-depot: Multiple start/return locations\n\n**Algorithm:**\n- Genetic algorithm with GPU-parallel population\n- EAX/SREX crossover operators\n- Local search refinement",
+      "has_algorithm": false
+    },
+    {
+      "name": "solve",
+      "brief": "GPU-accelerated LP and MIP solving functions\n\nMain entry points for linear programming optimization on GPU.\n\n**LP Solving (PDLP):**\n- solve_lp(): GPU-accelerated first-order LP solver\n- Uses Primal-Dual Hybrid Gradient (PDHG) algorithm\n- Supports warm starting from previous solutions\n\n**MIP Solving:**\n- solve_mip(): Mixed-integer programming with GPU B&B\n- Branch-and-bound with LP relaxations\n\n**Input Formats:**\n- optimization_problem_t: Native cuOpt problem representation\n- mps_data_model_t: MPS file format parser output",
+      "has_algorithm": false
+    },
+    {
+      "name": "solver",
+      "brief": "cuOpt VRP solver\n\nMain VRP solver orchestrating metaheuristics.",
+      "has_algorithm": false
+    },
+    {
+      "name": "solver_settings",
+      "brief": "Configuration options for VRP solver behavior\n\nControls solver runtime behavior and output options.\n\n**solver_settings_t Class:**\n- set_time_limit(): Maximum solving time in seconds\n- set_verbose_mode(): Enable internal progress output\n- set_error_logging_mode(): Log constraint violations\n- dump_best_results(): Write progress to CSV file\n\n**Time Limit Guidelines:**\n- Small problems (<100 locations): ~1 second\n- Large problems: num_locations/5 seconds default\n- More time \u2192 better solution quality",
+      "has_algorithm": false
+    },
+    {
+      "name": "solver_settings",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "solver_settings",
+      "brief": "PDLP first-order LP solver configuration\n\nSettings for GPU-accelerated Primal-Dual Hybrid Gradient LP solver.\n\n**pdlp_solver_mode_t Modes:**\n- Stable3: Best overall balance (default)\n- Stable2: Legacy stable mode\n- Methodical1: Slower steps but fewer iterations, 1.3-1.7x memory\n- Fast1: Highest speed, lower convergence success\n\n**pdlp_solver_settings_t Class:**\n- set_solver_mode(): Select algorithm mode\n- set_eps_optimal(): Primal/dual convergence tolerance\n- set_time_limit(): Maximum solve time\n- set_warm_start(): Initialize from previous solution\n\n**Algorithm (PDHG):**\n- First-order method, highly parallelizable on GPU\n- O(1/k) convergence for LP\n- Efficient for large sparse problems",
+      "has_algorithm": false
+    },
+    {
+      "name": "solver_settings",
+      "brief": "Mixed-integer programming solver configuration\n\nSettings for GPU-accelerated MIP solver.\n\n**mip_solver_settings_t Class:**\n- set_mip_callback(): User callback for incumbent solutions\n- set_time_limit(): Maximum solve time\n- set_mip_gap(): Optimality gap tolerance\n- set_verbosity(): Output level control\n\n**MIP Algorithm:**\n- Branch-and-bound with GPU LP relaxations\n- Population-based heuristics\n- Recombination operators for primal improvement",
+      "has_algorithm": false
+    },
+    {
+      "name": "solver_solution",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "solver_solution",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "solver_stats",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "span",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse_matrix",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse_vector",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "srex_recombiner",
+      "brief": "cuOpt VRP genetic crossover\n\nCrossover operators for evolutionary VRP algorithm.\nEAX (edge assembly), OX (order crossover), etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "strided_span",
+      "brief": "cuOpt utility functions\n\nCommon utilities for cuOpt library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "structures",
+      "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "termination_strategy",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "third_party_presolve",
+      "brief": "cuOpt MIP solver component\n\nPart of GPU-accelerated mixed-integer solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "tic_toc",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "timer",
+      "brief": "cuOpt timing utilities\n\nPerformance timing and profiling.",
+      "has_algorithm": false
+    },
+    {
+      "name": "timestamp_utils",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "translate",
+      "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "triangle_solve",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "types",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "unique_pinned_ptr",
+      "brief": "cuOpt utility functions\n\nCommon utilities for cuOpt library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "user_problem",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "vector_math",
+      "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+      "has_algorithm": false
+    },
+    {
+      "name": "vehicle_info",
+      "brief": "cuOpt VRP vehicle/fleet model\n\nVehicle capacity, time windows, and fleet constraints.",
+      "has_algorithm": false
+    },
+    {
+      "name": "version_info",
+      "brief": "cuOpt utility functions\n\nCommon utilities for cuOpt library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "waypoint_matrix",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    },
+    {
+      "name": "weighted_average_solution",
+      "brief": "cuOpt LP solution storage\n\nPrimal/dual solution and basis information.",
+      "has_algorithm": false
+    },
+    {
+      "name": "writer",
+      "brief": "cuOpt public API header\n\nPublic interface for NVIDIA cuOpt optimization library.",
+      "has_algorithm": false
+    }
+  ]
+}

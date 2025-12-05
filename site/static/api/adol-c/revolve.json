@@ -1,0 +1,22 @@
+{
+  "name": "revolve",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/revolve.h",
+  "brief": "Optimal binomial checkpointing for memory-efficient reverse mode\n\nImplements the revolve algorithm (Griewank & Walther) for optimal\ncheckpoint placement in reverse mode automatic differentiation.",
+  "algorithms": [
+    {
+      "name": "Revolve - Optimal Checkpointing Schedule:\nComputes the provably optimal sequence of checkpoint operations to\nminimize total recomputation while staying within memory budget.\n\nSTATE MACHINE:\nThe revolve() function returns action codes that drive the outer loop:\n\n  revolve_advance   \u2192 Run forward computation from 'capo' to new position\n  revolve_takeshot  \u2192 Save current state to checkpoint slot 'check'\n  revolve_restore   \u2192 Restore state from checkpoint slot 'check'\n  revolve_firsturn  \u2192 Begin reverse sweep (first reverse step)\n  revolve_youturn   \u2192 Continue reverse sweep (subsequent steps)\n  revolve_terminate \u2192 Adjoint computation complete\n\nTYPICAL USAGE PATTERN:\n```\nwhile ((action = revolve(&check, &capo, &fine, snaps, &info)) != terminate) {\n  switch(action) {\n    case advance:   forward_sweep(capo, fine); break;\n    case takeshot:  save_checkpoint(check); break;\n    case restore:   load_checkpoint(check); break;\n    case firsturn:\n    case youturn:   reverse_step(); fine--; break;\n  }\n}\n```",
+      "math": "Binomial Bound:\nWith s checkpoint slots and r repetitions allowed, revolve handles exactly:\n  N_max = C(s+r, r) = (s+r)! / (s! \u00b7 r!)\nsteps optimally.\n\nFor r=1: N_max = s+1 (minimal repetition)\nFor large r: N_max grows super-exponentially in s\n\nThe schedule minimizes total forward evaluations subject to checkpoint\nbudget constraint. This is achieved by placing checkpoints at binomial\ncoefficients: if you have s checkpoints for N steps, place first checkpoint\nat position C(s-1+r,r)/C(s+r,r) \u00b7 N.",
+      "complexity": "Total forward evaluations: O(r\u00b7N) for N steps with r repetitions.\nWith s = O(log N) checkpoints and r = O(log N), achieves O(N log N) work.\nSpace: O(s \u00b7 state_size) for checkpoint storage.",
+      "ref": [
+        "Griewank & Walther (2000). \"Algorithm 799: Revolve\". ACM TOMS.",
+        "Stumm & Walther (2010). \"New Algorithms for Optimal Online\n  Checkpointing\". SIAM J. Sci. Comput."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "checkpointing.h for ADOL-C checkpointing interface"
+  ]
+}

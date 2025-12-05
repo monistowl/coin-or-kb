@@ -1,0 +1,21 @@
+{
+  "name": "CbcStrategy",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcStrategy.hpp",
+  "brief": "Strategy pattern for configuring CbcModel components",
+  "algorithms": [
+    {
+      "name": "Strategy Pattern for B&C Configuration\nCopyright (C) 2005, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcStrategy provides a strategy pattern for bundling solver configuration.\nSubclasses define complete solving strategies by implementing:\n- setupCutGenerators(): Configure cutting plane generators\n- setupHeuristics(): Configure primal heuristics\n- setupPrinting(): Configure output/logging\n- setupOther(): Strong branching, preprocessing, etc.\n\nSupports nested models (depth_) and preprocessing state tracking.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcStrategyDefault for default strategy",
+    "CbcModel::setStrategy() to apply a strategy",
+    "CglPreProcess for preprocessing integration"
+  ]
+}

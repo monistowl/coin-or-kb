@@ -1,0 +1,22 @@
+{
+  "name": "BonHeuristicFPump",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonHeuristicFPump.hpp",
+  "brief": "Feasibility Pump heuristic for MINLP\n\nImplements the Feasibility Pump algorithm adapted for nonlinear problems.\nAlternates between:\n1. Rounding to nearest integer solution\n2. Projecting back to feasible continuous space via NLP\n\n**Classes:**\n- HeuristicFPump: Main feasibility pump heuristic (CbcHeuristic)\n- RoundingFPump: Helper for intelligent rounding considering constraints",
+  "algorithms": [
+    {
+      "name": "Feasibility Pump for MINLP:\nFind feasible integer solution by alternating rounding and projection:\n1. Solve NLP relaxation: x* = argmin{f(x) : g(x) \u2264 0}\n2. Round integers: x\u0303_i = round(x*_i) for i \u2208 I (integer variables)\n3. Projection NLP: x* = argmin{||x_I - x\u0303_I||_p : g(x) \u2264 0}\n   where p = objective_norm_ (1 or 2)\n4. If x*_I = x\u0303_I, return feasible solution\n5. Else repeat from step 2 (with cycle detection)\n\nRoundingFPump provides constraint-aware rounding:\n- Considers Jacobian structure for better rounding decisions\n- Respects integerTolerance for near-integer values",
+      "math": "Projection objective (step 3):\n  L\u2081 norm: min \u03a3\u1d62 |x\u1d62 - x\u0303\u1d62|  (reformulated with auxiliary variables)\n  L\u2082 norm: min \u03a3\u1d62 (x\u1d62 - x\u0303\u1d62)\u00b2  (smooth, faster convergence)",
+      "complexity": "O(k \u00b7 NLP_solve) where k = iterations until convergence.\nTypically k = 10-100. Each NLP solve is O(n\u00b3) worst case for Newton.",
+      "ref": [
+        "Bonami, Cornu\u00e9jols, Lodi, Margot (2009). \"A feasibility pump for\n  mixed integer nonlinear programs\". Mathematical Programming 119(2):331-352."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for the base class",
+    "BonminSetup for configuration"
+  ]
+}

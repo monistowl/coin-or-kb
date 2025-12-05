@@ -1,0 +1,12 @@
+{
+  "name": "GamsCbcHeurSolveTrace",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/cbc/GamsCbcHeurSolveTrace.hpp",
+  "brief": "CBC heuristic for GAMS solve trace reporting\n\nCbcHeuristic implementation that reports bound progress\nto GAMS solve trace data structure for performance analysis.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GamsCbc.hpp for main GAMS-CBC interface"
+  ]
+}

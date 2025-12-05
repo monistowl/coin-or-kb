@@ -1,0 +1,20 @@
+{
+  "name": "IpSymMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpSymMatrix.hpp",
+  "brief": "Abstract base class for symmetric matrices\n\nSymMatrix extends Matrix for symmetric matrices (A = A^T).\nTransMultVector automatically delegates to MultVector since\ntranspose is a no-op for symmetric matrices.",
+  "algorithms": [
+    {
+      "name": "Symmetry Exploitation:\n  A = A^T implies TransMultVector \u2261 MultVector.\n  ComputeColAMax \u2261 ComputeRowAMax (row/col norms identical).\n  Subclasses only implement MultVector; transpose is automatic.",
+      "math": "Symmetric matrices in optimization:\n  Hessian \u2207\u00b2f symmetric by Schwarz's theorem (\u2202\u00b2f/\u2202x\u1d62\u2202x\u2c7c = \u2202\u00b2f/\u2202x\u2c7c\u2202x\u1d62).\n  KKT matrix: indefinite symmetric (positive and negative eigenvalues).\n  Inertia (n\u208a, n\u208b, n\u2080): counts of positive/negative/zero eigenvalues.",
+      "complexity": "Subclass-dependent. Symmetry halves storage for dense.\n  Template Method pattern: base provides transpose, subclass provides mult.\n\nImplementations include:\n- DenseSymMatrix: Full dense lower-triangular storage\n- CompoundSymMatrix, SumSymMatrix: Structured composites\n- LowRankUpdateSymMatrix: Limited-memory representations",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMatrix.hpp for general (unsymmetric) matrices",
+    "IpDenseSymMatrix.hpp for dense implementation"
+  ]
+}

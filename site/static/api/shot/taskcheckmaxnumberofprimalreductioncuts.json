@@ -1,0 +1,13 @@
+{
+  "name": "TaskCheckMaxNumberOfPrimalReductionCuts",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskCheckMaxNumberOfPrimalReductionCuts.h",
+  "brief": "Limit number of objective cutoff updates\n\nPrevents excessive cutoff constraint modifications.\n\n**TaskCheckMaxNumberOfPrimalReductionCuts Class:**\n- taskIDIfTrue: Jump target when limit reached\n- run(): Check cutoff update count\n\n**Usage:**\n- Limit objective bound updates per iteration\n- Avoid MIP solver overhead from repeated bound changes",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskAddPrimalReductionCut.h for cutoff addition",
+    "Settings.h for limit configuration"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "BCP_matrix",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_matrix.hpp",
+  "brief": "Matrix and vector representations for BCP LP relaxation",
+  "algorithms": [
+    {
+      "name": "LP Relaxation Matrix with Dynamic Column/Row Addition\n\nExtends CoinPackedVector/Matrix with bounds for LP formulation:\n\n**BCP_col (extends CoinPackedVector):**\n- Sparse column with objective coefficient + lb/ub\n- Used for column generation (new variables)\n- Default bounds: [0, +\u221e), obj = 0\n\n**BCP_row (extends CoinPackedVector):**\n- Sparse row with lb/ub (constraint bounds)\n- Used for cut generation (new constraints)\n- Default bounds: [-\u221e, +\u221e]\n\n**BCP_lp_relax (extends CoinPackedMatrix):**\n- Full LP relaxation: matrix + bounds + objective\n- _Objective: Variable costs\n- _ColLowerBound, _ColUpperBound: Variable bounds\n- _RowLowerBound, _RowUpperBound: Constraint bounds\n- Can be row-major or column-major ordered\n- pack()/unpack() for serialization\n\n**Usage:**\nCore matrix defined in initialize_core(), columns added\nvia column generation, rows added via cut generation.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_var.hpp for variable representation",
+    "BCP_cut.hpp for cut representation",
+    "CoinPackedMatrix for underlying sparse matrix"
+  ]
+}

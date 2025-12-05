@@ -1,0 +1,20 @@
+{
+  "name": "CbcCountRowCut",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcCountRowCut.hpp",
+  "brief": "Reference-counted row cuts with ownership tracking",
+  "algorithms": [
+    {
+      "name": "Reference-Counted Cuts with Hash Deduplication\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCountRowCut: OsiRowCut with reference counting for memory management.\nTracks which nodes use the cut and auto-deletes when count reaches zero.\n\nBookkeeping:\n- numberPointingToThis_: Reference count\n- owner_/ownerCut_: Back-pointer to creating node\n- whichCutGenerator_: ID of generator (+10000 if global)\n\nUsage pattern:\n- Increment when child nodes inherit the cut\n- Decrement when cut becomes loose or node is fathomed\n- Delete when count reaches zero\n\nCbcRowCuts: Collection class for cuts with hash-based deduplication.\nPrevents duplicate cuts from being added multiple times.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcNodeInfo for cut ownership",
+    "CbcCutGenerator for cut generation"
+  ]
+}

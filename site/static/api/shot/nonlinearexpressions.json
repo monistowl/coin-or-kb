@@ -1,0 +1,12 @@
+{
+  "name": "NonlinearExpressions",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Model/NonlinearExpressions.h",
+  "brief": "Expression tree nodes for nonlinear functions\n\nDAG-based representation of nonlinear expressions with convexity analysis.\n\n**E_NonlinearExpressionTypes:**\n- Constant, Variable: Leaf nodes\n- Unary: Negate, Invert, SquareRoot, Log, Exp, Square, Sin, Cos, etc.\n- Binary: Divide, Power\n- N-ary: Sum, Product\n\n**NonlinearExpression Base Class:**\n- calculate(point): Evaluate at numeric point\n- calculate(intervals): Interval arithmetic evaluation\n- getFactorableFunction(): CppAD automatic differentiation\n- getConvexity(): Analyze convexity via composition rules\n- getMonotonicity(): Analyze monotonicity\n- tightenBounds(): FBBT bound propagation\n\n**Expression Subclasses:**\n- ExpressionConstant, ExpressionVariable\n- ExpressionNegate, ExpressionSquare, ExpressionSquareRoot\n- ExpressionLog, ExpressionExp\n- ExpressionSin, ExpressionCos\n- ExpressionSum, ExpressionProduct\n- ExpressionDivide, ExpressionPower\n\n**Convexity Rules:**\n- Based on composition theorems (e.g., convex \u2218 nondecreasing convex = convex)\n- Interval bounds inform sign-dependent rules\n\n@note Convexity analysis influenced by SUSPECT library",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Constraints.h for expressions in constraints"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "subgraph_sparsity",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/subgraph_sparsity.hpp",
+  "brief": "Core AD functionality: subgraph sparsity",
+  "algorithms": [],
+  "methods": []
+}

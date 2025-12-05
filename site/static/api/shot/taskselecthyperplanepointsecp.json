@@ -1,0 +1,22 @@
+{
+  "name": "TaskSelectHyperplanePointsECP",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskSelectHyperplanePointsECP.h",
+  "brief": "Extended Cutting Plane point selection\n\nClassic outer approximation: linearize at infeasible points.\n\n**TaskSelectHyperplanePointsECP Class:**\n- run(): Process current MIP solutions\n- run(solPoints): Process specific solution points\n\n**ECP Algorithm:**\n- Generate gradient cut at infeasible solution\n- Simpler than ESH but may converge slower\n- Used as fallback when ESH rootsearch fails",
+  "algorithms": [
+    {
+      "name": "Extended Cutting Plane (ECP)",
+      "math": "Given infeasible point x\u0302 with g(x\u0302) > 0, generate linearization:\n      g(x\u0302) + \u2207g(x\u0302)\u00b7(x - x\u0302) \u2264 0\n      Valid for convex g. Cut separates x\u0302 from feasible region.",
+      "complexity": "O(gradient evaluation) per cut. Simpler than ESH.",
+      "ref": [
+        "Westerlund & Pettersson (1995). \"An extended cutting plane method\n     for solving convex MINLP problems\". Computers Chem. Engng."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "TaskSelectHyperplanePointsESH.h for ESH variant",
+    "TaskAddHyperplanes.h for cut addition"
+  ]
+}

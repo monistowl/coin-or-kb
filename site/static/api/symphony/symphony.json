@@ -1,0 +1,22 @@
+{
+  "name": "symphony",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/symphony.h",
+  "brief": "Main public API for SYMPHONY MILP solver\n\nSYMPHONY is a parallel branch-cut-price framework for solving\nMixed Integer Linear Programs (MILPs). Supports both shared-memory\nand distributed-memory (MPI) parallelism.",
+  "algorithms": [
+    {
+      "name": "Branch-Cut-Price Framework:\nSYMPHONY implements a parallel branch-cut-price algorithm combining\nthree techniques for solving MILPs.\n\nBRANCH-AND-BOUND:\n- Divide problem by branching on integer variables\n- Maintain tree of subproblems with LP relaxation bounds\n- Prune nodes where LB \u2265 best known UB (incumbent)\n\nCUTTING PLANES:\n- Strengthen LP relaxation at nodes via valid inequalities\n- Supports Gomory cuts, CGL cuts, and user-defined cuts\n- Cut pools allow reuse of cuts across subtrees\n\nCOLUMN GENERATION (PRICE):\n- Dynamically add variables with negative reduced cost\n- Enables huge implicit formulations (e.g., set covering)\n- User callback interface for pricing subproblems\n\nPARALLELISM:\n- Master-worker architecture for distributed B&B\n- Multiple tree managers can run concurrently\n- Load balancing via dynamic work stealing",
+      "math": "Convergence guarantee:\nAt termination: lb \u2264 z* \u2264 ub, where:\n- lb = best lower bound (max LP bound over open nodes)\n- ub = objective of best feasible solution (incumbent)\n- Gap = (ub - lb) / |ub| \u2192 0 proves optimality\n\nNode selection affects performance:\n- BEST_FIRST: Minimizes total nodes but uses more memory\n- DEPTH_FIRST: Low memory, finds feasible solutions fast\n- LOWEST_LP_FIRST: Good lower bound improvement",
+      "complexity": "- Worst case: O(2^n) nodes for n binary variables\n- Practice: Strong cuts and branching reduce tree dramatically\n- LP solve: O(m\u00b2n) per node with basis warm-start",
+      "ref": [
+        "Ralphs & Lad\u00e1nyi (2001). \"SYMPHONY: A Framework for Branch and Cut\".\n\n**Core API workflow:**\n```c\nsym_environment *env = sym_open_environment();\nsym_read_mps(env, \"problem.mps\");  // or sym_explicit_load_problem()\nsym_solve(env);\nsym_get_col_solution(env, solution);\nsym_close_environment(env);\n```\n\n**Problem input methods:**\n- sym_read_mps(): Read MPS format\n- sym_read_lp(): Read LP format\n- sym_read_gmpl(): Read GMPL/AMPL format\n- sym_explicit_load_problem(): Load from arrays\n\n**Solve methods:**\n- sym_solve(): Standard solve\n- sym_warm_solve(): Warm start from previous solution\n- sym_mc_solve(): Multi-criteria (bicriteria) solve\n\n**Return codes:**\n- TM_OPTIMAL_SOLUTION_FOUND (227): Optimal found\n- TM_TIME_LIMIT_EXCEEDED (228): Time limit\n- TM_NODE_LIMIT_EXCEEDED (229): Node limit\n- TM_FEASIBLE_SOLUTION_FOUND (235): Feasible but not proven optimal\n\n**Key parameters (via sym_set_int_param):**\n- \"node_selection_rule\": LOWEST_LP_FIRST, DEPTH_FIRST_SEARCH, etc.\n- \"time_limit\": Maximum solve time in seconds\n- \"gap_limit\": Relative MIP gap tolerance"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sym_master.h for internal master process structure",
+    "sym_tm.h for tree manager internals"
+  ]
+}

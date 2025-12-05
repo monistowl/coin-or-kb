@@ -1,0 +1,9 @@
+{
+  "name": "SensRegOp",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensRegOp.hpp",
+  "brief": "sIPOPT registration operations for options\n\nSensRegOp: registers sIPOPT-specific options with Ipopt.\nAdds sensitivity analysis parameters like n_sens_steps, sens_prefix,\nand computation modes to Ipopt option system.",
+  "algorithms": [],
+  "methods": []
+}

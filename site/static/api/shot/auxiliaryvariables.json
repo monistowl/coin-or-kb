@@ -1,0 +1,13 @@
+{
+  "name": "AuxiliaryVariables",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Model/AuxiliaryVariables.h",
+  "brief": "Variables introduced during problem reformulation\n\nVariables created to linearize or convexify expressions.\n\n**AuxiliaryVariable Class:**\n- Extends Variable with expression components\n- calculate(): Evaluate auxiliary from original variables\n- Properties: constant, linear/quadratic/monomial/signomial terms\n\n**Auxiliary Variable Types (E_AuxiliaryVariableType):**\n- NonlinearObjectiveFunction: Epigraph reformulation\n- BilinearTerms: McCormick relaxation variables\n- MonomialPartitioning: Product term linearization\n- EigenvalueDecomposition: Convexification variables\n\n**AuxiliaryVariables Collection:**\n- Vector of AuxiliaryVariablePtr with Problem ownership\n- sortByIndex(): Order by variable index",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Variables.h for base Variable class",
+    "Problem.h for reformulated problem usage"
+  ]
+}

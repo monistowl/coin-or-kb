@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprBMul",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/bounds/CouenneExprBMul.hpp",
+  "brief": "Bound operators for bilinear product expressions\n\nComputes tight bounds for x * y given bounds [n, N] on x\nand [d, D] on y. Used by FBBT for bound propagation.\n\n**safeProd():**\nUtility for safe multiplication avoiding overflow:\n- Handles \u00b1\u221e * 0 \u2192 0\n- Handles \u00b1\u221e * finite \u2192 \u00b1\u221e (sign-aware)\n- Otherwise returns a * b\n\n**exprLBMul (lower bound):**\nFor bounds [n, N] \u00d7 [d, D]:\n- d \u2265 0, n \u2265 0: lb = n * d\n- d \u2265 0, n < 0: lb = n * D\n- d < 0, N > 0: lb = min(N * d, n * D)\n- d < 0, N \u2264 0, D > 0: lb = n * D\n- d < 0, N \u2264 0, D \u2264 0: lb = N * D\n\n**exprUBMul (upper bound):**\nSymmetric case analysis yielding max of corner products.\n\n**Note:** The four corners {n, N} \u00d7 {d, D} contain the\nextrema for bilinear functions over boxes.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprMul for the multiplication expression",
+    "CouenneExprBDiv for division bounds"
+  ]
+}

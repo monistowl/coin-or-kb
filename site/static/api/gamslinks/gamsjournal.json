@@ -1,0 +1,13 @@
+{
+  "name": "GamsJournal",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/ipopt/GamsJournal.hpp",
+  "brief": "Ipopt Journal implementation for GAMS output\n\nRoutes Ipopt logging through GAMS environment (gev) routines.\nSupports configurable status file output levels.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GamsIpopt.hpp for main GAMS-Ipopt interface",
+    "GamsNLP.hpp for NLP problem formulation"
+  ]
+}

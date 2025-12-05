@@ -1,0 +1,13 @@
+{
+  "name": "HighsSolution",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsSolution.h",
+  "brief": "Solution validation and KKT condition checking utilities\n\nProvides functions to validate solutions and compute optimality metrics.\n\n**KKT Failure Analysis:**\n- getKktFailures(): Compute primal/dual infeasibilities for LP/QP\n- getLpKktFailures(): LP-specific KKT checking\n- getVariableKktFailures(): Per-variable bound/dual violations\n\n**Error Tracking (HighsError, HighsPrimalDualErrors):**\n- Absolute/relative primal infeasibility\n- Absolute/relative dual infeasibility\n- Nonzero basic duals, off-bound nonbasics\n- Glpsol-compatible residual output\n\n**Solution Utilities:**\n- computeObjectiveValue(): Evaluate c'x\n- computeDualObjectiveValue(): Dual objective for LP/QP\n- getComplementarityViolations(): x_i * s_i deviations\n- refineBasis(): Improve basis from solution values\n\n**IPX Integration:**\n- ipxSolutionToHighsSolution(): Convert IPX (interior point) solution\n- ipxBasicSolutionToHighsBasicSolution(): Convert IPX basis + crossover result",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "HStruct.h for HighsSolution, HighsBasis structs",
+    "HighsInfo.h for solver info output"
+  ]
+}

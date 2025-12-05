@@ -1,0 +1,9 @@
+{
+  "name": "HEkkDualRHS",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/HEkkDualRHS.h",
+  "brief": "Dual simplex optimality test for HiGHS",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "unary_minus",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/unary_minus.hpp",
+  "brief": "Core AD functionality: unary minus",
+  "algorithms": [],
+  "methods": []
+}

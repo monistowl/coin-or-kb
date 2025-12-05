@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprVar",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneExprVar.hpp",
+  "brief": "Variable expression class for original decision variables\n\nRepresents decision variables in the expression DAG. All problem\nvariables (original and auxiliary) derive from this class.\n\n**Key attributes:**\n- varIndex_: Index in the problem's variable vector\n- domain_: Pointer to current point and bounds\n\n**Methods:**\n- operator()(): Return current variable value from domain\n- lb()/ub(): Access current lower/upper bounds\n- differentiate(): Returns 1 if differentiating w.r.t. this variable\n- impliedBound(): Propagate bounds from auxiliary to original variables\n\n**Linearity:**\nOriginal variables have Linearity() = LINEAR (affine in themselves).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprAux for auxiliary variables w = f(x)",
+    "Domain for point/bounds container"
+  ]
+}

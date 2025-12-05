@@ -1,0 +1,21 @@
+{
+  "name": "SuiteSparseQR",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/Include/SuiteSparseQR.hpp",
+  "brief": "User C++ API for sparse multifrontal QR factorization\nCopyright (c) 2008-2023, Timothy A Davis. GPL-2.0+ license.\n\nMain user interface for SPQR: SuiteSparseQR overloads for [Q,R,E]=qr(A),\nX=A\\B, qmult. Structures: spqr_symbolic (pattern analysis), spqr_numeric\n(R values, Householder H), spqr_gpu (GPU staging). Expert functions:\nSuiteSparseQR_factorize, _solve, _min2norm, _symbolic, _numeric for\nfactorization reuse. Supports real/complex, int32/int64.",
+  "algorithms": [
+    {
+      "name": "Sparse Multifrontal QR Factorization:\nComputes A\u00b7P = Q\u00b7R where P is fill-reducing permutation:\n\n1. Symbolic Analysis (spqr_symbolic):\n   - Compute column elimination tree of A'A\n   - Find supernodal structure (frontal matrices)\n   - Allocate Householder vector storage\n\n2. Numeric Factorization (spqr_numeric):\n   - Process fronts bottom-up in elimination tree\n   - Each front: dense QR via Householder reflections\n   - Assemble contribution blocks from children\n   - Store R factor and optionally H vectors\n\n3. Solve (optional):\n   - Q'b via applying H vectors\n   - R\\(Q'b) via back-substitution",
+      "math": "Householder QR at each front:\nFor front F = [A_rows; C_children], compute F = Q_F \u00b7 [R_F; 0]\nusing Householder reflections H_i = I - \u03c4_i v_i v_i'.",
+      "complexity": "O(nnz(R)\u00b2/n) for sparse QR, where nnz(R) depends on fill-in.\nMultifrontal organization enables parallelism across independent fronts.",
+      "ref": [
+        "Davis (2011). \"Algorithm 915: SuiteSparseQR, a multifrontal\n  multithreaded sparse QR factorization package\". ACM TOMS 38(1)."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "spqr.hpp for internal implementation"
+  ]
+}

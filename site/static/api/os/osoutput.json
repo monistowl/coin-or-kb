@@ -1,0 +1,9 @@
+{
+  "name": "OSOutput",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSUtils/OSOutput.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "SensSimpleBacksolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensSimpleBacksolver.hpp",
+  "brief": "sIPOPT simple backsolver implementation\n\nSensSimpleBacksolver: basic implementation using Ipopt linear solver.\nWraps existing factorized KKT system for back-substitution.\nReuses factorization from optimization for sensitivity solves.",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,22 @@
+{
+  "name": "CouenneSdpCuts",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/cut/sdpcuts/CouenneSdpCuts.hpp",
+  "brief": "SDP-based cutting planes using matrix positive semidefiniteness\n\nGenerates cuts exploiting that product matrices X = (x_ij) where x_ij = x_i*x_j\nmust be positive semidefinite. These cuts strengthen the LP relaxation beyond\nwhat McCormick envelopes provide.",
+  "algorithms": [
+    {
+      "name": "SDP Cut Generation (Qualizza-Belotti-Margot):\n  Eigenvalue-based separation for PSD constraint X \u2ab0 0:\n  1. **Matrix construction:** Build X* from current LP (x_ij = w_ij values)\n  2. **Eigendecomposition:** Compute X* = V\u039bV' (symmetric EVD)\n  3. **Violation detection:** Find \u03bb_min < 0 (X* not PSD)\n  4. **Cut generation:** For eigenvector v with \u03bb < 0:\n     - Cut: v'Xv \u2265 0 (linear in original variables)\n     - Translates to: \u03a3 v_i\u00b7v_j\u00b7x_ij \u2265 0\n  5. **Sparsification:** Remove small coefficients for stability\n  6. Add cuts to LP, iterate",
+      "math": "PSD relaxation theory:\n  For X \u2ab0 0: v'Xv \u2265 0 for all v (infinite constraints)\n  Current X* violates PSD if min eigenvalue \u03bb < 0\n  Corresponding v gives most violated constraint v'Xv \u2265 0\n  These cuts are valid because X \u2ab0 0 implies all v'Xv \u2265 0",
+      "complexity": "O(n\u00b3) per eigendecomposition (n = matrix dimension)\n  Each minor generates up to numEigVec_ cuts\n  Sparsification is O(n\u00b2) but improves cut quality",
+      "ref": [
+        "Qualizza, Belotti, Margot (2012). \"Linear Programming Relaxations\n     of Quadratically Constrained Quadratic Programs\". Mixed Integer\n     Nonlinear Programming, Springer.\n\n**Parameters:**\n- numEigVec_: Number of eigenvectors to use (default: all)\n- onlyNegEV_: Only use negative eigenvalues (default: yes)\n- useSparsity_: Sparsify eigenvalues (default: no)\n- fillMissingTerms_: Add fictitious aux vars for denser minors"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouennePSDcon for explicit PSD constraints",
+    "CouenneExprMatrix for sparse matrix representation"
+  ]
+}

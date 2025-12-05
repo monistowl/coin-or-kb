@@ -1,0 +1,19 @@
+{
+  "name": "OsiAuxInfo",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiAuxInfo.hpp",
+  "brief": "Auxiliary information for algorithm-specific solver customization",
+  "algorithms": [
+    {
+      "name": "B&B Solver Customization Interface (Soft/Hard Bounds, Callbacks)\nCopyright (C) 2006, International Business Machines Corporation.\nEPL-1.0 license.\n\nOsiAuxInfo: structured replacement for appData_ pointer, enabling algorithm\ncustomization. OsiBabSolver: derived class for exotic solvers (nonlinear,\nvolume algorithm) in branch-and-bound - tracks solutions, enables\ntryCut/tryBranch callbacks, supports soft/hard bounds and priority-based cuts.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OsiSolverInterface for main solver abstraction"
+  ]
+}

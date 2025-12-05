@@ -1,0 +1,18 @@
+{
+  "name": "Cbc_C_Interface",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/Cbc_C_Interface.h",
+  "brief": "Creates an empty problem",
+  "algorithms": [
+    {
+      "name": "LP Method Selection (LPMethod enum):\n  - LPM_Dual: Dual simplex (default, best for warm starts)\n  - LPM_Primal: Primal simplex\n  - LPM_Barrier: Interior-point with crossover to basis\n  - LPM_BarrierNoCross: IPM without crossover (for large LPs)",
+      "math": "",
+      "complexity": "MIP: Exponential worst-case, highly structure-dependent\n  Each LP solve: O(m\u00b7n\u00b7iterations) for simplex",
+      "ref": [
+        "Land, A.H. and Doig, A.G. (1960). \"An automatic method of solving\n  discrete programming problems\". Econometrica 28(3):497-520."
+      ]
+    }
+  ],
+  "methods": []
+}

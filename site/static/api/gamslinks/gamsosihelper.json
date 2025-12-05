@@ -1,0 +1,12 @@
+{
+  "name": "GamsOsiHelper",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/osi/GamsOsiHelper.hpp",
+  "brief": "GAMS-OSI data transfer utilities\n\nHelper functions for loading LP problems from GMO to OSI,\nstoring solutions from OSI to GMO, and writing problem files.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GamsOsi.hpp for OSI-based solver driver"
+  ]
+}

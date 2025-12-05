@@ -1,0 +1,20 @@
+{
+  "name": "BonStrongBranchingSolver",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonStrongBranchingSolver.hpp",
+  "brief": "Abstract base class for strong branching NLP solves",
+  "algorithms": [
+    {
+      "name": "Hot-Start Strong Branching for MINLP (LP/QP/Curvature Methods)\n\nProvides interface for efficiently solving modified NLPs during strong\nbranching evaluation. Supports hot-start capability to reuse factorizations.\n\n**Hot-start protocol:**\n1. markHotStart(): Save current solver state before branching evaluations\n2. solveFromHotStart(): Solve with changed bounds (fast, reuses state)\n3. unmarkHotStart(): Restore original state after all evaluations\n\n**Implementations:**\n- LpBranchingSolver: LP-based strong branching\n- QpBranchingSolver: QP approximation for strong branching\n- CurvBranchingSolver: Curvature-based branching",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BonChooseVariable for the variable selection driver",
+    "LpBranchingSolver, QpBranchingSolver for implementations"
+  ]
+}

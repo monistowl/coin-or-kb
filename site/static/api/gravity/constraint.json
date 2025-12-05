@@ -1,0 +1,20 @@
+{
+  "name": "constraint",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/constraint.h",
+  "brief": "Constraint classes with type, duals, and lazy evaluation\n\nConstraints are functions with a constraint type (<=, >=, ==) and bounds.",
+  "algorithms": [
+    {
+      "name": "Dual Recovery:\nStore Lagrange multipliers from KKT conditions.",
+      "math": "KKT conditions at optimal x*:\n    \u2207f(x*) + \u03a3_i \u03bb_i \u2207g_i(x*) = 0\n    \u03bb_i \u2265 0 for g_i(x) \u2264 0 (inequality)\n    \u03bb_i unrestricted for h_i(x) = 0 (equality)\n\n  _dual[i] stores \u03bb for constraint instance i\n  Retrieved via finalize_solution() callback\n\n**Constraint_ Base Class:**\n- _id: Unique constraint identifier\n- _ctype: ConstraintType (leq, geq, eq)\n- _dual: Lagrange multipliers at KKT point\n- _jac_cstr_idx: First index in Jacobian nonzeros\n\n**Lazy Constraint Support:**\n- _all_lazy: Flag if all instances are lazy\n- _lazy: Per-instance lazy flags\n- _violated: Tracks which instances are violated\n- Used for cutting plane methods\n\n**On/Off Constraints:**\n- _onCoef, _offCoef: Coefficient vectors\n- For indicator constraints or big-M reformulations\n\n**Constraint<type> Template:**\n- Inherits from Constraint_ and func<type>\n- Combines function expression with constraint metadata\n\n**Creating Constraints:**\n```cpp\nConstraint<> c(\"flow_balance\", eq);\n// Or via operator overloading:\nauto c = (sum(x) <= 10);  // Creates leq constraint\nauto c = (y == 5);         // Creates eq constraint\n```",
+      "complexity": "Constraint evaluation: O(nnz in expression)\n  Violation check: O(1) after evaluation\n  Lazy separation: O(nb_lazy \u00d7 eval_cost)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "gravity/func.h for expression functionality",
+    "gravity/model.h for adding constraints to models"
+  ]
+}

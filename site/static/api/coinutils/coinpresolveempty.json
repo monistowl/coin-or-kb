@@ -1,0 +1,19 @@
+{
+  "name": "CoinPresolveEmpty",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPresolveEmpty.hpp",
+  "brief": "Drop and reinsert empty rows/columns\n\nShould be last presolve step. Physical removal of empty entities.",
+  "algorithms": [
+    {
+      "name": "Empty Row/Column Removal:\n  drop_empty_cols_action:\n  - Compress column arrays, renumber remaining columns\n  - Store original bounds, cost, solution for postsolve\n  - Adjust objective constant for fixed-at-bound variables\n\n  drop_empty_rows_action:\n  - Renumber rows, compress row bounds\n  - Track which row filled each position for postsolve",
+      "math": "Empty column j: a_*j = 0 (all zeros in column)\n  For minimization: set x_j = l_j if c_j > 0, x_j = u_j if c_j < 0\n  Empty row i: a_i* = 0 \u2192 constraint always satisfied, remove",
+      "complexity": "Time: O(m + n) for scanning and renumbering\n  Must be done last: other transforms may create empty rows/cols\n  Postsolve reinserts in reverse order, first step after solve",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPresolveMatrix for the presolve framework"
+  ]
+}

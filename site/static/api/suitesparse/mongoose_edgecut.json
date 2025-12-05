@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_EdgeCut",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_EdgeCut.hpp",
+  "brief": "Edge cut result structure and partitioning entry points\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nEdgeCut struct holds partitioning results: boolean partition array,\ncut_cost (edge weight sum), cut_size (edge count), partition weights\n(w0, w1), and imbalance metric. edge_cut() functions are main entry\npoints for computing graph partitions.",
+  "algorithms": [
+    {
+      "name": "Edge Cut Computation Entry Point:\nMain driver executing multilevel partitioning pipeline:\n1. Build coarsening hierarchy (Mongoose_Coarsening)\n2. Compute initial partition on coarsest graph\n3. Uncoarsen with FM/QP refinement at each level\n4. Return EdgeCut with partition[], cut_cost, imbalance",
+      "math": "Cut quality metrics:\n- cut_cost = \u2211_{(i,j)\u2208cut} w_{ij} (minimize this)\n- imbalance = |0.5 - W\u2080/W| where W = W\u2080 + W\u2081\n- Target: imbalance \u2264 soft_split_tolerance",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_EdgeCutOptions.hpp for algorithm parameters",
+    "Mongoose_EdgeCutProblem.hpp for internal problem representation"
+  ]
+}

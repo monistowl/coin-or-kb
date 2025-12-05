@@ -1,0 +1,20 @@
+{
+  "name": "IpRestoConvCheck",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpRestoConvCheck.hpp",
+  "brief": "Base class for restoration phase convergence checking\n\nRestoConvergenceCheck extends OptimalityErrorConvergenceCheck for\nthe restoration phase, adding termination criteria based on\nacceptability to the original problem's globalization mechanism.",
+  "algorithms": [
+    {
+      "name": "Restoration Phase Termination:\n  CheckConvergence() tests (in order):\n  1. Standard KKT convergence on restoration problem (inherited).\n  2. TestOrigProgress(): Is current (\u03b8, \u03c6) acceptable to original filter?\n  3. Sufficient infeasibility reduction: \u03b8_new \u2264 \u03ba_resto\u00b7\u03b8_start.\n  4. Iteration limits: iter \u2264 maximum_iters_, resto_iter \u2264 maximum_resto_iters_.\n  Returns CONVERGED if restoration found point acceptable to original.",
+      "math": "Restoration exit conditions:\n  \u03b8 = ||c(x)||\u2081 (constraint violation / infeasibility).\n  \u03c6 = f(x) + barrier terms (merit / objective).\n  Accept if (\u03b8, \u03c6) not dominated by original filter AND \u03b8 sufficiently small.\n  kappa_resto_ controls required infeasibility reduction fraction.\n\nTermination conditions (checked in order):\n1. Standard optimality error convergence (inherited)\n2. Acceptable to original problem (via TestOrigProgress)\n3. Sufficient reduction in infeasibility (kappa_resto_)\n4. Iteration limits (maximum_iters_, maximum_resto_iters_)\n\nTestOrigProgress (pure virtual):\n- Implemented by subclasses for specific globalization\n- RestoFilterConvergenceCheck: Check filter acceptability\n- Returns CONVERGED if original algorithm can accept point\n\nKey parameters:\n- kappa_resto_: Required infeasibility reduction fraction\n- maximum_resto_iters_: Max successive restoration iterations\n- orig_constr_viol_tol_: Original constraint tolerance\n\nSetOrigLSAcceptor():\n- Must be called to link restoration check to original problem\n- Provides access to original filter/acceptor state",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpOptErrorConvCheck.hpp for base convergence check",
+    "IpRestoFilterConvCheck.hpp for filter implementation"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "HighsCliqueTable",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsCliqueTable.h",
+  "brief": "Clique detection and storage for MIP solver",
+  "algorithms": [
+    {
+      "name": "Conflict Graph with Bron-Kerbosch Clique Separation\n\nMaintains cliques (sets of binary variables where at most one can be 1).\n\n**CliqueVar:**\nRepresents a literal (variable=0 or variable=1):\n- col: Variable index\n- val: 0 or 1 (whether literal is x or (1-x))\n- weight(sol): Contribution to clique violation (val ? sol : 1-sol)\n\n**Clique:**\nA set of CliqueVars where sum <= 1 (or ==1 for equality cliques).\n- start/end: Range in cliqueentries[] array\n- equality: True for \"exactly one\" (SOS1) constraints\n- origin: Row index if derived from constraint\n\n**Key Operations:**\n- addClique(): Store clique with subsumption checking\n- haveCommonClique(): Test if two literals conflict (fast conflict detection)\n- separateCliques(): Find violated clique inequalities (Bron-Kerbosch)\n- extractCliques(): Derive cliques from constraints\n- runCliqueMerging(): Extend cliques using transitivity\n\n**Substitution Support:**\nWhen x1 + x2 = 1 is detected, substitute x2 = 1 - x1:\n- colsubstituted[], substitutions[]: Track substitutions\n- resolveSubstitution(): Apply substitutions to variables\n\n**Conflict Graph:**\n- invertedHashList[]: Maps literal\u2192cliques containing it\n- sizeTwoCliques: Fast lookup for pairwise conflicts\n- addImplications(): Add implied fixings when literal is set",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "mip/HighsCutPool.h for cut management",
+    "mip/HighsDomain.h for domain propagation"
+  ]
+}

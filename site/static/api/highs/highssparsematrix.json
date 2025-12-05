@@ -1,0 +1,13 @@
+{
+  "name": "HighsSparseMatrix",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsSparseMatrix.h",
+  "brief": "Sparse matrix in CSC or CSR format\n\n**HighsSparseMatrix Class:**\nStores constraint matrix A for LP/QP in compressed format.\n\n**Storage Format (MatrixFormat):**\n- kColwise (CSC): start_[col], index_[]/value_[] are row indices and values\n- kRowwise (CSR): start_[row], index_[]/value_[] are column indices and values\n- p_end_[]: Optional end pointers for partitioned/incremental updates\n\n**Format Conversion:**\n- ensureColwise()/ensureRowwise(): Convert to desired format\n- createColwise()/createRowwise(): Create from existing matrix\n- setFormat(): Set target format\n\n**Operations:**\n- product()/productTranspose(): Ax, A'x multiplication\n- productQuad(): Quad-precision multiplication\n- alphaProductPlusY(): y += alpha*Ax\n\n**Simplex PRICE Operations:**\n- priceByColumn()/priceByRow(): Compute pi'A\n- priceByRowWithSwitch(): Switch strategy based on density\n- createRowwisePartitioned(): Partition for hyper-sparse PRICE\n\n**Modification:**\n- addCols()/addRows(): Extend matrix\n- deleteCols()/deleteRows(): Remove columns/rows\n- scaleCol()/scaleRow(): Apply scaling",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lp_data/HighsLp.h for HighsLp.a_matrix_ usage",
+    "HConst.h for MatrixFormat enum"
+  ]
+}

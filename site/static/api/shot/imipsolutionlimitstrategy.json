@@ -1,0 +1,12 @@
+{
+  "name": "IMIPSolutionLimitStrategy",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/IMIPSolutionLimitStrategy.h",
+  "brief": "Interface for MIP solution pool limit strategies\n\nControls how many solutions MIP solver collects per iteration.\n\n**IMIPSolutionLimitStrategy Interface:**\n- updateLimit(): Adjust limit based on progress\n- getNewLimit(): Current solution limit value\n- getInitialLimit(): Starting limit\n\n**Implementations:**\n- MIPSolutionLimitStrategyIncrease: Grow limit over time\n- MIPSolutionLimitStrategyUnlimited: No limit\n- MIPSolutionLimitStrategyAdaptive: Adjust based on gap\n\n**Purpose:**\n- Balance cut generation vs solver time per iteration\n- More solutions = more hyperplane generation points\n- Fewer solutions = faster MIP solves",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskExecuteSolutionLimitStrategy for strategy execution"
+  ]
+}

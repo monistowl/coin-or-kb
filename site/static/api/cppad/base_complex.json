@@ -1,0 +1,9 @@
+{
+  "name": "base_complex",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/base_complex.hpp",
+  "brief": "Core AD functionality: base complex",
+  "algorithms": [],
+  "methods": []
+}

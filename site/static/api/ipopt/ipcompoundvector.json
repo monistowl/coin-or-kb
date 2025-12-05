@@ -1,0 +1,20 @@
+{
+  "name": "IpCompoundVector",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpCompoundVector.hpp",
+  "brief": "Composite vector stacking multiple sub-vectors\n\nCompoundVector implements the Composite pattern for vectors,\nrepresenting: x_compound = [x_0; x_1; ...; x_{n-1}]",
+  "algorithms": [
+    {
+      "name": "Recursive Vector Operations:\n  Dot product: x^T y = \u03a3\u1d62 x\u1d62^T y\u1d62 (sum over components).\n  Axpy: y \u2190 \u03b1x + y applied component-wise: y\u1d62 \u2190 \u03b1x\u1d62 + y\u1d62.\n  FracToBound: returns min over components (for step length).\n  All ops delegate to typed component implementations.",
+      "math": "IPM iterate structure:\n  Primal-dual iterate: w = (x, s, y_c, y_d, z_L, z_U, v_L, v_U).\n  Search direction: \u0394w computed by KKT system solve.\n  Step length: \u03b1 = min{1, \u03c4\u00b7FracToBound} for bound constraints.",
+      "complexity": "O(n) for n = total dimension across all components.\n  Storage: k pointers for k components.\n  Heterogeneous: each component can use different VectorSpace.\n\nUsed in Ipopt for structured iterate vectors combining:\n- Primal variables x, slack variables s\n- Dual variables (y_c, y_d, z_L, z_U)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpVector.hpp for base interface",
+    "IpCompoundMatrix.hpp for matrix counterpart"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "TaskExecuteSolutionLimitStrategy",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskExecuteSolutionLimitStrategy.h",
+  "brief": "Control MIP solution pool size dynamically\n\nAdjusts how many MIP solutions are collected per iteration.\n\n**TaskExecuteSolutionLimitStrategy Class:**\n- solutionLimitStrategy: Strategy implementation\n- previousSolLimit: Track limit changes\n- run(): Apply current solution limit\n\n**Strategy Control:**\n- Start with small limit for fast iterations\n- Increase when MIP optimal to explore pool\n- Balance speed vs solution diversity",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IMIPSolutionLimitStrategy.h for strategy interface",
+    "MIPSolutionLimitStrategyIncrease.h for default strategy"
+  ]
+}

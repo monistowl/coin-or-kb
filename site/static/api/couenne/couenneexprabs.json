@@ -1,0 +1,12 @@
+{
+  "name": "CouenneExprAbs",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprAbs.hpp",
+  "brief": "Absolute value expression w = |x|\n\nRepresents the absolute value function. This is a convex function\nwith a non-differentiable point at x = 0.\n\n**Convexification for w = |x| on [l,u]:**\n- If l >= 0: w = x (identity)\n- If u <= 0: w = -x (negation)\n- If l < 0 < u: convex envelope is\n  - w >= x (right branch)\n  - w >= -x (left branch)\n  - w <= ((u+l)*x + u*(-l) - l*u) / (u - l) (secant from (l,-l) to (u,u))\n\n**Implied bounds:**\n- w >= 0 always\n- Given w in [0, wu]: x in [-wu, wu] \u2229 [l, u]\n- Given x in [l, u]: w in [min(|l|,|u|)?, max(|l|,|u|)]\n\n**Integer preservation:**\nIf argument is integer, |x| is also integer.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneExprUnary for base class"
+  ]
+}

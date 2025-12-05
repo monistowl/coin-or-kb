@@ -1,0 +1,9 @@
+{
+  "name": "OSExpressionTree",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSCommonInterfaces/OSExpressionTree.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

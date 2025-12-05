@@ -1,0 +1,22 @@
+{
+  "name": "CbcCompareBase",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcCompareBase.hpp",
+  "brief": "Abstract base class for node comparison/selection",
+  "algorithms": [
+    {
+      "name": "Search Tree Node Priority Strategy Interface\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcCompareBase: Defines interface for search tree node prioritization.\nThe node list is stored as a heap where test(x,y) returns true if\nnode y is \"better\" (higher priority) than node x.\n\nKey methods:\n- test(x,y): Core comparison - returns true if y preferred over x\n- newSolution(): Called when incumbent found, can change strategy\n- every1000Nodes(): Periodic callback for strategy adjustment\n- equalityTest(): Tiebreaker using node numbers\n\nNode selection strategies critically affect B&C performance:\n- Depth-first: Low memory, finds feasible solutions quickly\n- Best-first: Optimal objective bound, may use much memory\n- Hybrid: Combine based on search phase",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcCompareDepth for depth-first search",
+    "CbcCompareObjective for best-bound search",
+    "CbcCompareDefault for adaptive hybrid strategy",
+    "CbcTree for tree management"
+  ]
+}

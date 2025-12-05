@@ -1,0 +1,13 @@
+{
+  "name": "HighsLpRelaxation",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsLpRelaxation.h",
+  "brief": "LP relaxation management for MIP branch-and-bound\n\nManages the LP relaxation at each B&B node with cut handling.\n\n**Status enum:**\n- kOptimal: LP solved to optimality\n- kInfeasible: LP is infeasible (node can be pruned)\n- kUnscaledDualFeasible: Dual feasible (valid bound)\n- kUnscaledPrimalFeasible: Primal feasible (valid solution)\n- kUnbounded/kError: Problem states\n\n**LpRow Tracking:**\n- origin: kModel (original constraint) or kCutPool (added cut)\n- index: Row index in model or cut pool\n- age: Iterations since cut was binding (for aging/removal)\n\n**Key Operations:**\n- run(): Solve LP relaxation\n- addCuts(): Add cuts from HighsCutSet\n- flushDomain(): Apply bound changes from HighsDomain\n- performAging(): Age cuts, remove old non-binding cuts\n- removeObsoleteRows(): Delete aged-out cuts\n\n**Solution Access:**\n- getObjective(): LP objective value\n- getSolution(): Primal/dual values\n- getFractionalIntegers(): Integer vars with fractional values\n- integerFeasible(): True if LP solution is MIP-feasible\n\n**Dual Proofs:**\n- computeDualProof(): Derive valid inequality from LP dual\n- storeDualInfProof(): Store proof when LP is infeasible\n- getDualProof(): Retrieve stored proof for conflict analysis\n\n**Playground (nested class):**\nRAII wrapper for temporary LP modifications (e.g., strong branching).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsMipSolver.h for MIP solver using this",
+    "mip/HighsCutPool.h for cut management"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "ipm",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/ipm.h",
+  "brief": "Mehrotra's Predictor-Corrector Interior Point Method\n\nImplements an interior point method (IPM) for linear programming using\nMehrotra's predictor-corrector technique with two KKT solves per iteration.",
+  "algorithms": [
+    {
+      "name": "Mehrotra's Predictor-Corrector IPM:\nA two-stage Newton method that achieves superlinear convergence in practice.\n\nPRIMAL-DUAL FORMULATION:\nLP: min c'x  s.t. Ax = b, l \u2264 x \u2264 u\nIntroducing slacks: xl = x - l, xu = u - x (both \u2265 0)\n\nKKT conditions with barrier:\n  Ax = b                    (primal feasibility)\n  A'y + zl - zu = c         (dual feasibility)\n  Xl\u00b7Zl = \u03bce                (complementarity, xl \u2218 zl = \u03bc)\n  Xu\u00b7Zu = \u03bce                (complementarity, xu \u2218 zu = \u03bc)\n  xl, xu, zl, zu \u2265 0        (non-negativity)\n\nPREDICTOR STEP (Affine Scaling):\nSolve Newton system with \u03bc = 0 (pure Newton toward boundary):\n  [G   A'] [\u0394x]   [rb - A'\u0394y - \u0394zl + \u0394zu]\n  [A   0 ] [\u0394y] = [rc]\n  \u0394zl = -zl - (Zl/Xl)\u00b7\u0394xl\n  \u0394zu = -zu - (Zu/Xu)\u00b7\u0394xu\n\nCORRECTOR STEP (Centering + Higher-order):\nBased on predictor's step length \u03b1_aff, choose target:\n  \u03bc_target = \u03c3 \u00b7 \u03bc,  \u03c3 = (\u03bc_aff / \u03bc)\u00b3\nAdd correction terms for better centrality:\n  sl = \u03c3\u03bce - \u0394Xl_aff \u00b7 \u0394Zl_aff\n  su = \u03c3\u03bce - \u0394Xu_aff \u00b7 \u0394Zu_aff\n\nSTEP SIZE SELECTION:\n\u03b1_primal = max{\u03b1 : x + \u03b1\u00b7\u0394x \u2265 0} \u00b7 0.9995\n\u03b1_dual   = max{\u03b1 : z + \u03b1\u00b7\u0394z \u2265 0} \u00b7 0.9995",
+      "math": "Convergence behavior:\n- Theoretical: O(\u221an \u00b7 log(1/\u03b5)) iterations for \u03b5-optimality\n- Practical: 20-60 iterations regardless of problem size\n- Superlinear convergence in terminal phase (\u03c3 \u2192 0)\n\nCentering parameter \u03c3 \u2208 [0,1]:\n- \u03c3 = 0: Pure Newton (fast but may leave feasible region)\n- \u03c3 = 1: Pure centering (stays centered but slow)\n- Mehrotra: \u03c3 = (\u03bc_aff/\u03bc)\u00b3 adapts to iterate quality",
+      "complexity": "- Per iteration: O(KKT_solve) = O(m\u00b2n) for dense, O(nnz \u00b7 fill) for sparse\n- Two KKT solves per iteration (predictor + corrector)\n- Total: O(\u221an \u00b7 log(1/\u03b5) \u00b7 KKT_solve) theoretical, much less in practice",
+      "ref": [
+        "Mehrotra (1992). \"On the Implementation of a Primal-Dual Interior\n  Point Method\". SIAM Journal on Optimization 2(4):575-601.",
+        "Wright (1997). \"Primal-Dual Interior-Point Methods\". SIAM."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "kkt_solver.h for linear system solver interface",
+    "crossover.h for converting IPM solution to basic solution",
+    "iterate.h for iterate data structure"
+  ]
+}

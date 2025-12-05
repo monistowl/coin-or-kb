@@ -1,0 +1,16 @@
+{
+  "name": "CoinAdjacencyVector",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinAdjacencyVector.hpp",
+  "brief": "Vector of growable vectors",
+  "algorithms": [
+    {
+      "name": "Dynamic Adjacency List with Deferred Sorting\n\nClass to store a (growable) list of neighbors for each node\nInitially implemented to be used in the Conflict Graph\n\n**Design:**\nEach node has a dynamic vector of neighbors. Supports both\nimmediate sorted insertion and batch insertion with deferred sort.\n\n**Batch mode:**\nDuring graph construction, use addNeighborsBuffer() for bulk additions\nwithout maintaining sorted order. Call flush() once construction is\ncomplete to sort all adjacency lists and remove duplicates.\n\n**Sorted mode:**\nUse addNeighbor() for incremental updates to a constructed graph.\nMaintains sorted order via binary search insertion.",
+      "math": "",
+      "complexity": "isNeighbor: O(log d) via binary search",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

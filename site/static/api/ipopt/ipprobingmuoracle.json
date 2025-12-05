@@ -1,0 +1,22 @@
+{
+  "name": "IpProbingMuOracle",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpProbingMuOracle.hpp",
+  "brief": "Mehrotra's probing heuristic for barrier parameter selection\n\nProbingMuOracle implements Mehrotra's predictor-corrector approach\nto compute the barrier parameter mu. This is the strategy used in\nmany interior point codes like LOQO and PCx.\n\nAlgorithm:\n1. Compute affine scaling direction (predictor step) with sigma=0\n2. Find maximum step to boundary (alpha_aff)\n3. Compute complementarity after affine step: mu_aff\n4. Compute centering parameter: sigma = (mu_aff/mu)^3\n5. Use sigma in corrector step\n\nThe centering parameter sigma controls the balance between:\n- sigma=0: Pure affine scaling (aggressive, may overshoot)\n- sigma=1: Pure centering (conservative, slow progress)\n\nKey parameter:\n- sigma_max_: Upper bound on sigma to prevent excessive centering",
+  "algorithms": [
+    {
+      "name": "Mehrotra Predictor-Corrector (Probing):\nAdaptively select centering parameter by probing pure Newton direction:\n1. Solve predictor (affine) system with \u03bc=0 to get \u0394_aff\n2. Compute \u03b1_aff = max step to boundary for affine direction\n3. Compute \u03bc_aff = complementarity after affine step:\n   \u03bc_aff = (x + \u03b1_aff\u00b7\u0394x_aff)\u1d40(z + \u03b1_aff\u00b7\u0394z_aff) / n\n4. Set centering: \u03c3 = (\u03bc_aff / \u03bc)\u00b3\n5. Solve corrector with \u03bc_new = \u03c3 \u00b7 \u03bc_aff",
+      "math": "Centering parameter derivation (Mehrotra):\n  \u03c3 = (\u03bc_aff / \u03bc)\u00b3\n\nIntuition:\n- Large \u03b1_aff \u2192 small \u03bc_aff \u2192 small \u03c3 \u2192 aggressive\n- Small \u03b1_aff \u2192 large \u03bc_aff \u2192 large \u03c3 \u2192 centering\n\nCube power: empirically good balance across problem classes.\nSafeguard: \u03c3 \u2190 min(\u03c3, \u03c3_max) prevents excessive centering.",
+      "complexity": "One affine solve O(n\u00b3) + O(n) for step length and \u03bc_aff.\nTotal: similar to one Newton iteration.",
+      "ref": [
+        "Mehrotra (1992). \"On the Implementation of a Primal-Dual Interior\n  Point Method\". SIAM J. Optim. 2(4):575-601."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMuOracle.hpp for base interface",
+    "IpQualityFunctionMuOracle.hpp for alternative mu strategy"
+  ]
+}

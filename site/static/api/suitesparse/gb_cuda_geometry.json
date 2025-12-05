@@ -1,0 +1,12 @@
+{
+  "name": "GB_cuda_geometry",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "GraphBLAS/CUDA/include/GB_cuda_geometry.hpp",
+  "brief": "CUDA kernel launch geometry constants\nCopyright (c) 2017-2025, Timothy A. Davis.\n\nBlock and chunk size constants for CUDA kernels, used by host and JIT.\nSelect sparse: BLOCKDIM1=512, CHUNKSIZE1=4096; BLOCKDIM2=256, CHUNKSIZE2=1024.\nSelect bitmap: BLOCKDIM=512. Includes log2 variants for bit shifts.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GB_cuda_select.hpp uses these constants"
+  ]
+}

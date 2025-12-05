@@ -1,0 +1,20 @@
+{
+  "name": "IpCGPerturbationHandler",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/contrib/CGPenalty/IpCGPerturbationHandler.hpp",
+  "brief": "Perturbation handler for Chen-Goldfarb penalty method",
+  "algorithms": [
+    {
+      "name": "KKT Perturbation for Chen-Goldfarb Method\n\nCGPerturbationHandler manages the diagonal perturbations (\u03b4_x,\n\u03b4_s, \u03b4_c, \u03b4_d) for the KKT system when using the\nChen-Goldfarb penalty function approach.\n\n**Perturbation purposes:**\n- Handle singular or nearly singular KKT matrices\n- Correct wrong inertia in factorization\n- Switch between pure Newton and penalty-regularized steps\n\n**Regularized KKT system:**",
+      "math": "[   A       -I    -\u03b4_c I  ] [\u0394y]   [r_c]\n\n**Adaptive strategy:**\nStart with \u03b4 = 0 for pure Newton. If factorization fails or has\nwrong inertia, increase perturbations geometrically until success.",
+      "complexity": "O(1) per perturbation decision",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpPDPerturbationHandler.hpp for base class",
+    "IpCGSearchDirCalc.hpp for direction computation"
+  ]
+}

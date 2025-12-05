@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprIVar",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneExprIVar.hpp",
+  "brief": "Integer variable expression node\n\nRepresents an integer-restricted decision variable in the\nexpression DAG. Inherits from exprVar with additional\nintegrality information.\n\n**Integer markers:**\n- isInteger(): Always returns true (variable is integer-valued)\n- isDefinedInteger(): Always returns true (defined as integer)\n\n**Printed notation:**\nPrints as \"y_i\" where i is the variable index, distinguishing\nfrom continuous variables which print as \"x_i\".\n\n**Usage:**\nInteger variables require special handling in:\n- Branch-and-bound (must branch to enforce integrality)\n- Feasibility checking (must satisfy x \u2208 \u2124)\n- Solution rounding in heuristics",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprVar base class for continuous variables",
+    "CouenneProblem::addVariable() for variable creation"
+  ]
+}

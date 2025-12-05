@@ -1,0 +1,25 @@
+{
+  "name": "ClpSimplexDual",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpSimplexDual.hpp",
+  "brief": "Dual simplex algorithm implementation",
+  "algorithms": [
+    {
+      "name": "Dual Simplex Method:\nSolves LP by maintaining dual feasibility (reduced costs have correct signs)\nwhile iterating toward primal feasibility. Each iteration:\n1. Choose leaving variable (pivot row) - infeasible basic variable\n2. Compute pivot row of tableau: r^T = e_i^T B^{-1} A\n3. Choose entering variable (pivot column) - via ratio test on reduced costs\n4. Update basis: swap entering/leaving variables\n5. Update dual solution and reduced costs\n\nUses single-phase approach with fake bounds (updatedDualBound_) to handle\ndual infeasibility. Steepest edge or Dantzig strategies for pivot selection.\nAnti-degeneracy via cost perturbation (OSL heritage).\n\nThree nested loops: outer handles fake bounds, middle handles refactorization,\ninner performs pivots until optimality or infeasibility detected.",
+      "math": "min c^T x s.t. Ax=b, l\u2264x\u2264u (primal)\nDual: max b^T y s.t. A^T y + s = c, s_j\u22650 for x_j at lower, s_j\u22640 for x_j at upper\nReduced cost: s_j = c_j - a_j^T y where y = B^{-T} c_B\nDual feasible when reduced costs have correct signs for non-basic variables.\nRatio test: \u03b8* = min{s_j/r_j : r_j has correct sign} determines entering var.",
+      "complexity": "O(m^2 n) per iteration typical (dominated by BTRAN/FTRAN).\nIteration count highly problem-dependent. Often faster than primal simplex\nfor problems with many constraints, especially after adding cuts in B&B.",
+      "ref": [
+        "Forrest & Goldfarb, \"Steepest-edge simplex algorithms for LP\",\n     Mathematical Programming 57 (1992) 341-374",
+        "Koberstein, \"Progress in the dual simplex algorithm\",\n     Computers & Operations Research 35 (2008) 2297-2320\n\nImplements the dual simplex method for LP. This is a \"mix-in\" class that\ninherits from ClpSimplex but adds no data - ClpSimplex objects are cast\nto this type when running dual simplex.\n\nThe dual simplex maintains dual feasibility (reduced costs have correct signs)\nwhile iterating toward primal feasibility. It's typically faster than primal\nsimplex for most problems, especially after adding cuts in branch-and-bound.\n\nKey algorithmic features:\n- Single-phase approach with weighted objective for dual feasibility\n- Fake bounds (updatedDualBound_) to handle dual infeasibility\n- Sparse data structures to exploit problem sparsity\n- Steepest edge or Dantzig pivot selection for choosing leaving variable\n- Anti-degeneracy via cost perturbation (from OSL heritage)"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpSimplex for the base simplex class",
+    "ClpSimplexPrimal for primal simplex variant",
+    "ClpDualRowPivot for pivot row selection strategies",
+    "ClpDualRowSteepest, ClpDualRowDantzig for specific strategies"
+  ]
+}

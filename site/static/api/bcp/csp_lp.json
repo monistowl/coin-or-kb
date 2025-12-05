@@ -1,0 +1,16 @@
+{
+  "name": "CSP_lp",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Csp/include/CSP_lp.hpp",
+  "brief": "CSP LP relaxation for BCP",
+  "algorithms": [
+    {
+      "name": "CSP LP Process: Solve and Price\n\nLP relaxation management for cutting stock:\n- compute_lower_bound: Solve LP, generate columns via knapsack pricing\n- generate_vars_in_lp: Call CSP_colgen for improving patterns\n- select_branching_candidates: Branch on fractional patterns\n\nUses Clp or Volume algorithm for LP solves.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

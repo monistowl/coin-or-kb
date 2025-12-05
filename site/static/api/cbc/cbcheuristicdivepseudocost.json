@@ -1,0 +1,20 @@
+{
+  "name": "CbcHeuristicDivePseudoCost",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcHeuristicDivePseudoCost.hpp",
+  "brief": "Dive heuristic using pseudocost estimates\nCopyright (C) 2008, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcHeuristicDivePseudoCost: Most informed diving strategy.\nUses pseudocosts to estimate objective change from fixing.",
+  "algorithms": [
+    {
+      "name": "Pseudocost-Guided Variable Selection:\n  selectVariableToBranch() for fractional integer x_j:\n  1. Compute f_j = x\u0304_j - \u230ax\u0304_j\u230b (fractional part).\n  2. Down estimate: D_j = f_j \u00d7 \u03c8_j^- (from downArray_).\n  3. Up estimate: U_j = (1-f_j) \u00d7 \u03c8_j^+ (from upArray_).\n  4. Score_j = product or weighted combination of D_j, U_j.\n  5. Select j* = argmax{Score_j}; round toward smaller estimate.",
+      "math": "Pseudocost scoring for diving:\n  \u03c8_j^- \u2248 (\u0394obj/\u0394x\u0304_j) for down branches on x_j.\n  \u03c8_j^+ \u2248 (\u0394obj/\u0394x\u0304_j) for up branches on x_j.\n  Score typically: (1-f)\u00b7\u03c8^- + f\u00b7\u03c8^+ or product-based.\n  fixOtherVariables() exploits reduced costs: fix if |r\u0304_j| > gap.\n\ninitializeData() prepares pseudocost arrays (downArray_, upArray_).\nfixOtherVariables() uses reduced costs for additional fixing.\n\nGenerally most effective but requires pseudocost information.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristicDive for base class and diving algorithm",
+    "CbcSimpleIntegerDynamicPseudoCost for pseudocost learning"
+  ]
+}

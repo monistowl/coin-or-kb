@@ -1,0 +1,9 @@
+{
+  "name": "SensStdStepCalc",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensStdStepCalc.hpp",
+  "brief": "sIPOPT standard sensitivity step calculator\n\nSensStdStepCalc: standard implementation of SensitivityStepCalculator.\nComputes sensitivity steps using Schur complement and back-solves.\nHandles bound corrections for perturbed solutions.",
+  "algorithms": [],
+  "methods": []
+}

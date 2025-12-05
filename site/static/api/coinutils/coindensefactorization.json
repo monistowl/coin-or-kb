@@ -1,0 +1,20 @@
+{
+  "name": "CoinDenseFactorization",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinDenseFactorization.hpp",
+  "brief": "Dense matrix factorization and CoinOtherFactorization base class\n\nProvides CoinOtherFactorization abstract base class for alternative\nfactorization methods, plus CoinDenseFactorization for small dense\nproblems using LAPACK-style LU.",
+  "algorithms": [
+    {
+      "name": "Dense LU Factorization (LAPACK-style):\n  Computes PA = LU using partial pivoting (row interchanges).\n  1. For k = 1 to n: find pivot = max|A(i,k)| for i >= k\n  2. Swap rows k and pivot row\n  3. Compute L(i,k) = A(i,k) / A(k,k) for i > k\n  4. Update A(i,j) -= L(i,k) * A(k,j) for i,j > k",
+      "math": "Dense LU: PA = LU where P is permutation, L unit lower triangular,\n  U upper triangular. FTRAN solves Lx = b then Ux = y.\n  BTRAN solves U'y = b then L'x = y.",
+      "complexity": "Time: O(n\u00b3/3) for factorization, O(n\u00b2) per solve\n  Space: O(n\u00b2) for dense storage\n  Use only for small basis matrices (n < 100-200)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinFactorization for sparse factorization",
+    "CoinSimpFactorization for simple implementation"
+  ]
+}

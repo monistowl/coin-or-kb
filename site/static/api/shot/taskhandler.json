@@ -1,0 +1,13 @@
+{
+  "name": "TaskHandler",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/TaskHandler.h",
+  "brief": "Task scheduling and execution control\n\nOrchestrates the modular task-based algorithm workflow.\n\n**Task Management:**\n- addTask(): Register task with string identifier\n- getTask(): Retrieve task by ID\n- clearTasks(): Reset for new solve\n\n**Execution Control:**\n- getNextTask(): Dequeue next task to run\n- setNextTask(): Jump to specific task (for goto/branching)\n- terminate(): Signal algorithm termination\n- isTerminated(): Check termination flag\n\n**Workflow Pattern:**\n1. SolutionStrategy adds tasks in order\n2. Solver calls getNextTask() in loop\n3. Tasks execute and may setNextTask() for control flow\n4. Termination tasks set terminate()\n\n**Task ID Naming:**\n- \"InitializeIteration\", \"SolveIteration\"\n- \"CheckTimeLimit\", \"CheckAbsoluteGap\"\n- \"SelectHyperplanes\", \"AddHyperplanes\"",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskBase.h for task interface",
+    "SolutionStrategy/ for task configuration"
+  ]
+}

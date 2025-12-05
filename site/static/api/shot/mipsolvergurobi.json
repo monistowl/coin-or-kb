@@ -1,0 +1,12 @@
+{
+  "name": "MIPSolverGurobi",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/MIPSolverGurobi.h",
+  "brief": "Gurobi implementation of IMIPSolver interface\n\nProvides MIP solving for SHOT's dual problem using Gurobi C++ API.\n\n**MIPSolverGurobi Class:**\n- Implements full IMIPSolver interface\n- Uses GRBModel for problem representation\n- Supports LP, MIP, QP, MIQP, QCQP problem types\n\n**Key Data Structures:**\n- gurobiModel: Shared GRBModel pointer\n- objectiveLinearExpression, objectiveQuadraticExpression\n- constraintLinearExpression, constraintQuadraticExpression\n\n**GurobiCallbackMultiTree:**\n- GRBCallback for multi-tree algorithm\n- Handles termination checks during solve\n\n**Quadratic Support:**\n- supportsQuadraticObjective(): Yes\n- supportsQuadraticConstraints(): Yes (QCQP)\n\n@note Requires Gurobi C++ headers",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "MIPSolverGurobSingleTree for lazy constraint callback"
+  ]
+}

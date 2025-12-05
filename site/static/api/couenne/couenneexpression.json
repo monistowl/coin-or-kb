@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExpression",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneExpression.hpp",
+  "brief": "Base class for expression DAG nodes in Couenne\n\nDefines the abstract interface for all expression types (constants,\nvariables, operators). Each expression can evaluate itself, generate\nconvex relaxation cuts, and participate in bound propagation.\n\n**Expression hierarchy:**\n- exprConst: Constant values\n- exprVar/exprAux: Original and auxiliary variables\n- exprOp: Operators (unary, binary, n-ary)\n- exprCopy/exprClone: References to other expressions\n\n**Key virtual methods:**\n- operator()(): Evaluate expression at current point\n- generateCuts(): Generate OA-style convexification cuts for w = f(x)\n- impliedBound(): Backward bound propagation (w bounds \u2192 x bounds)\n- getBounds(): Forward bound propagation (x bounds \u2192 w bounds)\n- standardize(): Convert to auxiliary variable form\n\n**auxSign enum:**\nDefines how auxiliary w relates to its expression f(x):\n- AUX_LEQ: w <= f(x) (under-estimator)\n- AUX_EQ: w = f(x) (equality definition)\n- AUX_GEQ: w >= f(x) (over-estimator)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneProblem for problem container",
+    "exprOp for operator implementations"
+  ]
+}

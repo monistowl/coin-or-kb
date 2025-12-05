@@ -1,0 +1,13 @@
+{
+  "name": "GamsScip",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/scip/GamsScip.hpp",
+  "brief": "GAMS interface to SCIP solver\n\nConnects GAMS to SCIP for constraint integer programming.\nSupports LP, MIP, MINLP, and general constraint optimization.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "reader_gmo.h for GAMS model reader plugin",
+    "event_solvetrace.h for solve tracing"
+  ]
+}

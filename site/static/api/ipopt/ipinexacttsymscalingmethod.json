@@ -1,0 +1,20 @@
+{
+  "name": "IpInexactTSymScalingMethod",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/Inexact/IpInexactTSymScalingMethod.hpp",
+  "brief": "Slack-based matrix scaling for inexact algorithm\n\nInexactTSymScalingMethod computes symmetric scaling factors for the\naugmented system, using current slack values for the inexact algorithm.",
+  "algorithms": [
+    {
+      "name": "Slack-Based Symmetric Scaling:\n  ComputeSymTScalingFactors(A) \u2192 diagonal scaling D:\n  1. For rows/cols corresponding to slack variables:\n     D[i] = 1/\u221a(curr_scaling_slacks[i]) from InexactCq.\n  2. For other rows/cols: D[i] = 1 (no scaling).\n  3. Scale matrix: \u00c3 = D\u00b7A\u00b7D (symmetric similarity transform).\n  Result: better conditioned system for iterative solver.",
+      "math": "Slack scaling rationale:\n  Augmented system has (1,1) block W and (2,2) block with slack terms.\n  Slack values s can vary widely (near bounds vs interior).\n  Scaling by s^{-1/2} equilibrates the blocks.\n  Improves convergence of Krylov methods (GMRES, CG).",
+      "complexity": "O(nnz) to apply scaling factors.\n  Scaling factors from cached InexactCq quantities.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpTSymScalingMethod.hpp for base scaling interface",
+    "IpInexactCq.hpp for curr_scaling_slacks computation"
+  ]
+}

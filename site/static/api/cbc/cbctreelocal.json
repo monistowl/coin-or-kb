@@ -1,0 +1,22 @@
+{
+  "name": "CbcTreeLocal",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcTreeLocal.hpp",
+  "brief": "Local branching search tree (Fischetti-Lodi 2002)\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).",
+  "algorithms": [
+    {
+      "name": "Local Branching (Fischetti-Lodi):\n  Neighborhood search around incumbent using Hamming distance cuts:\n  1. **Initialize:** Obtain feasible solution x*\n  2. **Local search:** Add cut \u03a3 |x_i - x*_i| \u2264 k (k-neighborhood)\n     - For 0-1: \u03a3_{i:x*=1}(1-x_i) + \u03a3_{i:x*=0}x_i \u2264 k\n  3. **Solve subproblem:** B&C in restricted region (time/node limits)\n  4. **Improvement found:** Update x* = new solution, goto 2\n  5. **No improvement (optimal in neighborhood):**\n     - Reverse cut: \u03a3 |x_i - x*_i| \u2265 k+1 (exclude region)\n     - Widen search: increase k (diversification_++)\n  6. **Termination:** maxDiversification reached or global optimum proved",
+      "math": "Local branching cut for binary variables:\n  Let S = {i : x*_i = 1}. The k-neighborhood constraint is:\n  \u03a3_{i\u2208S} (1-x_i) + \u03a3_{i\u2209S} x_i \u2264 k\n  \u27fa |S| - \u03a3_{i\u2208S} x_i + \u03a3_{i\u2209S} x_i \u2264 k\n  This limits Hamming distance from x* to at most k.",
+      "complexity": "Each subproblem bounded by timeLimit_/nodeLimit_.\n  Total: O(maxDiversification_ \u00d7 subproblem_limit).\n  Effective when incumbent is near-optimal.",
+      "ref": [
+        "Fischetti & Lodi (2003). \"Local Branching\". Mathematical\n     Programming 98:23-47.\n\n**Parameters:**\n- range_: Initial neighborhood radius k\n- typeCuts_: 0 = 0-1 only, 1 = general integer (weaker cuts)\n- maxDiversification_: Max radius increases before giving up\n- timeLimit_/nodeLimit_: Sub-tree resource limits\n- refine_: Whether to prove optimality fixing 0-1 vars"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcTree for base tree class",
+    "CbcHeuristicLocal for related local search heuristic"
+  ]
+}

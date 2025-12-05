@@ -1,0 +1,12 @@
+{
+  "name": "sym_dg_params",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_dg_params.h",
+  "brief": "Draw Graph parameters and message constants\n\nParameters for visualization and GUI communication constants.\n\n**dg_params structure:**\n- canvas_width/height: Drawing area size\n- viewable_width/height: Visible window size\n- disp_nodelabels/nodeweights/edgeweights: Show labels\n- node_radius: Default node size\n- scale_factor: Zoom level\n- *_font: Font specifications\n- interactive_mode: Enable user interaction\n- mouse_tracking: Track mouse position\n\n**Message protocols (CTOI_* = Client to Intermediary):**\n- CTOI_INITIALIZE_WINDOW: Create new window\n- CTOI_SET_GRAPH: Load graph data\n- CTOI_DRAW_GRAPH: Render current graph\n- CTOI_MODIFY_GRAPH: Update graph elements\n- CTOI_WAIT_FOR_CLICK_*: User interaction\n\n**Messages (ITOC_* = Intermediary to Client):**\n- ITOC_CLICK_HAPPENED: User clicked\n- ITOC_WINDOW_*: Window status responses\n\n**Modification types (MODIFY_*):**\n- ADD_NODES, DELETE_NODES: Node operations\n- ADD_EDGES, DELETE_EDGES: Edge operations\n- CHANGE_WEIGHTS_*: Update labels\n- CHANGE_DASH_*: Update line styles",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_dg.h for draw graph process"
+  ]
+}

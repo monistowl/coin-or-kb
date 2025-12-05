@@ -1,0 +1,20 @@
+{
+  "name": "BCP_lp_param",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_lp_param.hpp",
+  "brief": "LP process parameters for BCP Branch-Cut-Price",
+  "algorithms": [
+    {
+      "name": "LP Parameters: Cut/Branch/Pricing Configuration\n\nBCP_lp_par defines all configurable parameters for LP processes.\nSet via parameter file: BCP_{param_name} {value}\n\n**Character (boolean) parameters:**\n- BranchOnCuts: Enable branching on slack cuts\n- CompareNew{Cuts,Vars}ToOldOnes: Duplicate detection\n- DoReducedCostFixing*: Variable fixing strategies\n- SendFathomedNodeDesc: Return fathomed nodes to TM\n- LpVerb_*: Verbosity flags for LP events\n\n**Integer parameters:**\n- SlackCutDiscardingStrategy: When to purge slack cuts\n- CutEffectiveCountBeforePool: Iterations before pooling cut\n- CutPoolCheckFrequency: How often to query cut pool\n- IneffectiveConstraints: Definition of ineffective rows\n- MaxCutsAddedPerIteration: Limit on cuts per round\n- MaxPresolveIter: Strong branching iteration limit\n- StrongBranchNum: Candidates for strong branching\n- BranchingObjectComparison: Branch selection rule\n\n**Double parameters:**\n- Granularity: Objective discretization\n- IntegerTolerance: Integer feasibility tolerance\n- *Timeout: Waiting times for cuts/vars\n- MaxRunTime: Time limit",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_lp.hpp for LP process",
+    "BCP_tm_param.hpp for TM parameters"
+  ]
+}

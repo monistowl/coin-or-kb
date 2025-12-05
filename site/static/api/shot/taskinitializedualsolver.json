@@ -1,0 +1,13 @@
+{
+  "name": "TaskInitializeDualSolver",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskInitializeDualSolver.h",
+  "brief": "Configure and create MIP solver instance\n\nOne-time setup for MIP solver before main loop.\n\n**TaskInitializeDualSolver Class:**\n- useLazyStrategy: Single-tree (true) or multi-tree (false)\n- run(): Create appropriate MIP solver type\n\n**Solver Selection:**\n- CPLEX: MIPSolverCplex or MIPSolverCplexSingleTree\n- Gurobi: MIPSolverGurobi or MIPSolverGurobiSingleTree\n- CBC: MIPSolverCbc (multi-tree only)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DualSolver.h for solver management",
+    "MIPSolver/ for solver implementations"
+  ]
+}

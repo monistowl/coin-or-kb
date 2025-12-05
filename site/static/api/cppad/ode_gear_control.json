@@ -1,0 +1,9 @@
+{
+  "name": "ode_gear_control",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/utility/ode_gear_control.hpp",
+  "brief": "CppAD utility: ode gear control",
+  "algorithms": [],
+  "methods": []
+}

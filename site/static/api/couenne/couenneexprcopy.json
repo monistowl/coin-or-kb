@@ -1,0 +1,14 @@
+{
+  "name": "CouenneExprCopy",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/CouenneExprCopy.hpp",
+  "brief": "Reference copy of an expression\n\nPoints to another expression and delegates all operations to it.\nUsed to share expressions without duplicating the entire subtree.\n\n**Key concept:**\nexprCopy owns its copy_ pointer and destroys it in destructor.\nThis is the \"owning\" copy - use exprClone for non-owning.\n\n**Delegation pattern:**\nAll methods (evaluate, differentiate, bounds, etc.) forward\nto the underlying copy_ expression.\n\n**Original():**\nReturns the ultimate underlying expression, chasing through\nany chain of copies to find the actual expr.\n\n**value_:**\nCaches the last computed value for use by exprStore expressions.\n\n**Important warning:**\nThis destructor deletes copy_, unlike exprClone and exprStore.\nBe careful about ownership when using expression copies.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprClone for non-owning copy (different destructor behavior)",
+    "exprStore for stored value version",
+    "expression base class"
+  ]
+}

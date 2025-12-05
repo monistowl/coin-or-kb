@@ -1,0 +1,9 @@
+{
+  "name": "put_var_atomic",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/record/put_var_atomic.hpp",
+  "brief": "Operation recording: put_var_atomic",
+  "algorithms": [],
+  "methods": []
+}

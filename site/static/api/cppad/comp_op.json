@@ -1,0 +1,9 @@
+{
+  "name": "comp_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/record/comp_op.hpp",
+  "brief": "Operation recording: comp_op",
+  "algorithms": [],
+  "methods": []
+}

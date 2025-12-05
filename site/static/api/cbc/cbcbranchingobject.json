@@ -1,0 +1,21 @@
+{
+  "name": "CbcBranchingObject",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcBranchingObject.hpp",
+  "brief": "Abstract base for branching actions",
+  "algorithms": [
+    {
+      "name": "Branch-and-Bound: Branching Action Interface\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcBranchingObject describes HOW to branch (the action):\n- branch(): Execute next branch arm, modify solver bounds\n- numberBranches(): Total arms (typically 2)\n- way(): Current branch direction (+1 up, -1 down)\n\nCbcBranchObjType enum identifies concrete types:\nSimpleIntegerBranchObj, CliqueBranchObj, SoSBranchObj,\nNWayBranchObj, CutBranchingObj, etc.\n\nExtends OsiBranchingObject with CBC-specific features.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcObject for what creates branching objects",
+    "CbcBranchDecision for choosing between objects",
+    "CbcIntegerBranchingObject for integer variable branching\n\nEdwin 11/12/2009 carved from CbcBranchBase"
+  ]
+}

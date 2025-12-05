@@ -1,0 +1,20 @@
+{
+  "name": "CoinAbcCommonFactorization",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/CoinAbcCommonFactorization.hpp",
+  "brief": "Common infrastructure for ABC SIMD-optimized factorization",
+  "algorithms": [
+    {
+      "name": "ABC Factorization Infrastructure (LAPACK LU, Blocking)\nShared definitions, statistics tracking, and LAPACK interfaces for\nABC factorization variants. Provides:\n\n- ABC_SMALL modes: Controls memory copies for factorization\n  - -1: Force copies (no tests)\n  - 0: Force copy of U\n  - 2: Force no copies (no tests)\n\n- CoinAbcStatistics: Tracks element counts through L, R, U phases\n- CoinAbcStack: Stack structure for depth-first traversal\n- CoinAbcDgetrf/Dgetrs: LAPACK-compatible LU routines (homegrown or external)\n\nBlocking parameters for cache-friendly factorization:\n- BLOCKING8: 8-element blocks for SIMD alignment\n- SWAP_FACTOR: Controls swap threshold",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinAbcBaseFactorization for the main implementation",
+    "CoinAbcDenseFactorization for dense submatrix handling"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "OsiSolverInterface",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/OsiSolverInterface.h",
+  "brief": ".NET wrapper for OsiSolverInterface (Open Solver Interface)\n\nC++/CLI wrapper exposing OsiSolverInterface to .NET languages.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ClpModel.h, CbcModel.h for solver wrappers"
+  ]
+}

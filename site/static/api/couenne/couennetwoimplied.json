@@ -1,0 +1,20 @@
+{
+  "name": "CouenneTwoImplied",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/bound_tightening/twoImpliedBT/CouenneTwoImplied.hpp",
+  "brief": "Bound tightening from pairs of linear constraints",
+  "algorithms": [
+    {
+      "name": "Two-Implied Bound Tightening via Convex Combinations\n\nDerives implied bounds by combining two linear inequalities via\nconvex combinations. Standard FBBT uses single constraints; this\nextends to pairs for tighter bounds.\n\n**Algorithm:**\nGiven constraints h and k, form convex combination with \u03b1 \u2208 [0,1]:\n  \u2113' \u2264 \u03a3\u1d62 b\u1d62(\u03b1) x\u1d62 \u2264 u'\n\nFor each variable x\u1d62, the implied bounds are piecewise rational\nfunctions of \u03b1. Find optimal \u03b1 to maximize lower bounds / minimize\nupper bounds.\n\n**Key insight:**\nDivide [0,1] into intervals at breakpoints c\u1d62 where coefficients\nchange sign. On each interval, functions are differentiable and\noptima can be found analytically.\n\n**Example:**\nFor x + y \u2265 2 and x - y \u2265 1 with x \u2208 [0,4], y \u2208 [0,1]:\n- Single-constraint FBBT: x \u2265 1\n- Two-implied (sum): x \u2265 1.5",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneFixPoint for standard single-constraint FBBT",
+    "CouenneAggrProbing for OBBT"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "HighsStatus",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsStatus.h",
+  "brief": "Return status enum for HiGHS API calls\n\n**HighsStatus enum:**\n- kError (-1): Operation failed\n- kOk (0): Operation succeeded\n- kWarning (1): Operation succeeded with warnings\n\n**Functions:**\n- highsStatusToString(): Convert status to string\n- interpretCallStatus(): Combine call and return status with logging\n- worseStatus(): Return max(status0, status1) for status propagation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "HConst.h for HighsModelStatus (solver termination status)"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "BonRegisteredOptions",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonRegisteredOptions.hpp",
+  "brief": "Extended option registration with algorithm validity tracking\n\nExtends Ipopt's RegisteredOptions to track which options are valid for\nwhich Bonmin algorithms, enabling algorithm-specific option filtering.\n\n**Algorithm validity bits (ExtraOptInfosBits):**\n- validInHybrid (1): B-Hyb algorithm\n- validInQG (2): Quesada-Grossmann B-QG\n- validInOA (4): Pure outer approximation B-OA\n- validInBBB (8): Pure NLP-based branch-and-bound B-BB\n- validInEcp (16): Extended cutting plane B-Ecp\n- validIniFP (32): Iterated feasibility pump B-iFP\n- validInCbc (64): Cbc parallel mode\n\n**Category types (ExtraCategoriesInfo):**\n- BonminCategory, IpoptCategory, FilterCategory, BqpdCategory, CouenneCategory",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BonBabSetupBase for algorithm configuration",
+    "Ipopt::RegisteredOptions for base functionality"
+  ]
+}

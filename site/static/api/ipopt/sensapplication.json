@@ -1,0 +1,9 @@
+{
+  "name": "SensApplication",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensApplication.hpp",
+  "brief": "sIPOPT application wrapper for sensitivity analysis\n\nSensApplication wraps IpoptApplication with sensitivity extensions.\nEntry point for sIPOPT: runs optimization then sensitivity analysis.\nManages parameter perturbations and extracts sensitivity information.",
+  "algorithms": [],
+  "methods": []
+}

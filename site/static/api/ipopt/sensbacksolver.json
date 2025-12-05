@@ -1,0 +1,9 @@
+{
+  "name": "SensBacksolver",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensBacksolver.hpp",
+  "brief": "sIPOPT backsolver interface for linear systems\n\nSensBacksolver: abstract interface for solving linear systems in sIPOPT.\nUsed for Schur complement right-hand side solutions. Implementations\nleverage existing Ipopt linear solvers for efficient back-substitution.",
+  "algorithms": [],
+  "methods": []
+}

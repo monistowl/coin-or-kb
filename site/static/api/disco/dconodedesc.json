@@ -1,0 +1,14 @@
+{
+  "name": "DcoNodeDesc",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoNodeDesc.hpp",
+  "brief": "Tree node description storing branching and warm-start data\n\nDcoNodeDesc stores the information that distinguishes a tree node\nfrom its parent, enabling node reconstruction and pseudocost updates.\n\n**Inheritance:** DcoNodeDesc -> BcpsNodeDesc -> AlpsNodeDesc\n\n**Branching Data (for pseudocost updates):**\n- branchedDir_: Up or down branch direction\n- branchedInd_: Index of variable branched on\n- branchedVal_: Value at which branching occurred\n\n**Warm Start:**\n- basis_: CoinWarmStartBasis for LP warm-starting\n\n**From BcpsNodeDesc (inherited):**\n- vars_: Variable bound modifications (BcpsObjectListMod)\n- cons_: Constraint modifications (BcpsObjectListMod)\n\n**Serialization:**\nencode()/decode() for parallel tree distribution.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DcoTreeNode.hpp for the node using this descriptor",
+    "DcoBranchObject.hpp for branching decisions",
+    "CoinWarmStartBasis (CoinUtils) for LP basis"
+  ]
+}

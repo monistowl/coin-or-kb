@@ -1,0 +1,21 @@
+{
+  "name": "CbcObjectUpdateData",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcObjectUpdateData.hpp",
+  "brief": "Data carrier for updating branching objects after branching",
+  "algorithms": [
+    {
+      "name": "Feedback Carrier for Dynamic Pseudocost Learning\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcObjectUpdateData: Encapsulates information about a completed branch\nto update the originating CbcObject. Used primarily for learning\ndynamic pseudocosts from actual branching outcomes.\n\nCaptured data:\n- change_: Actual objective change from this branch\n- status_: LP outcome (0=optimal, 1=infeasible, 2=unknown)\n- intDecrease_: Reduction in integer infeasibilities\n- way_: Branch direction taken (-1 down, +1 up)\n\nFlow: After solving a child node, CbcNode creates this object\nand calls object_->updateInformation() to feed back the results.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcSimpleIntegerDynamicPseudoCost for main consumer",
+    "CbcObject::createUpdateInformation() for creation",
+    "CbcObject::updateInformation() for consumption\n\nEdwin 11/12/2009 carved from CbcBranchBase"
+  ]
+}

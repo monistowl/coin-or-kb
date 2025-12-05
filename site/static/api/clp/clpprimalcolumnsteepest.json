@@ -1,0 +1,25 @@
+{
+  "name": "ClpPrimalColumnSteepest",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPrimalColumnSteepest.hpp",
+  "brief": "Steepest edge and Devex pivot selection for primal simplex",
+  "algorithms": [
+    {
+      "name": "Steepest Edge and Devex Primal Pivot Selection:\nSelects entering variable (pivot column) by normalizing reduced cost by weight.\nInstead of choosing most negative reduced cost (Dantzig), computes:\n  score_j = (reduced_cost_j)\u00b2 / weight_j\nSteepest edge: weight_j = ||d_j||\u00b2 = ||B^{-1}a_j||\u00b2 (exact column norm)\nDevex: approximate weights, reference framework tracks recent pivots.\n\nModes: 0=exact Devex, 1=full steepest, 2=partial Devex (sparse scan),\n3=auto-switch 0/2, 4=partial Dantzig then switch. Mode 3 is default.\n\nWeight update after pivot: uses FTRAN result d = B^{-1}a_j directly.\nSteepest: weight_k := ||d_k||\u00b2 computed from tableau column.\nDevex: weight_k := max(weight_k, (d_k/d_p)\u00b2 * weight_p) for columns in ref set.",
+      "math": "Column weight: \u03b3_j = ||B^{-1}a_j||\u00b2 = d_j^T d_j where d_j is FTRAN of a_j.\nNormalized ratio: |c\u0304_j|/\u221a\u03b3_j gives steepest descent direction in primal space.\nDevex approximation: track reference set R, update \u03b3_j \u2248 max over iterations.",
+      "complexity": "Steepest: O(m\u00b2) per iteration (FTRAN for each candidate column).\nDevex: O(m) per pivot with reference framework. Typically 30-50% fewer\niterations than Dantzig at modest extra cost per iteration.",
+      "ref": [
+        "Forrest & Goldfarb, \"Steepest-edge simplex algorithms for LP\",\n     Mathematical Programming 57 (1992) 341-374",
+        "Harris, \"Pivot selection methods of the Devex LP code\",\n     Mathematical Programming 5 (1973) 1-28\n\nImplements advanced pivot column selection strategies for primal simplex:\n- Steepest Edge: normalizes reduced costs by column norms for faster convergence\n- Devex: approximate steepest edge with cheaper weight updates\n\nThe mode parameter controls behavior:\n- 0: Exact Devex\n- 1: Full steepest edge\n- 2: Partial exact Devex (only scans some nonbasics)\n- 3: Switches between 0 and 2 based on factorization (default)\n- 4: Starts partial Dantzig/Devex, may switch to 0 or 2"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "\"Implementing the Dantzig-Wolfe decomposition\" by Forrest & Goldfarb",
+    "ClpPrimalColumnPivot for the base interface",
+    "ClpPrimalColumnDantzig for simpler Dantzig rule",
+    "ClpSimplexPrimal for the primal simplex algorithm"
+  ]
+}

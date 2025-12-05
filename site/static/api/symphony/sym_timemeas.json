@@ -1,0 +1,12 @@
+{
+  "name": "sym_timemeas",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_timemeas.h",
+  "brief": "Time measurement utilities for SYMPHONY\n\nPortable timing functions and timeval manipulation macros.\nUses Windows time on MSVC, sys/time.h otherwise.\n\n**Timing functions:**\n- start_time(): Start timer\n- used_time(): CPU time since last call\n- wall_clock(): Wall-clock elapsed time\n\n**timeval manipulation macros:**\n- TVCLEAR(tv): Zero a timeval\n- TVISSET(tv): Check if timeval is non-zero\n- TVXLTY(x,y): Compare x < y\n- TVXADDY(z,x,y): z = x + y\n- TVXSUBY(z,x,y): z = x - y\n- TVTODBL(tv): Convert to double seconds\n- DBLTOTV(d,tv): Convert double to timeval\n\n**VBC output macros:**\n- PRINT_TIME(tm, f): Print HH:MM:SS:MS format\n- PRINT_TIME2(tm, f): Print decimal seconds",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_win32_time.h for Windows implementation"
+  ]
+}

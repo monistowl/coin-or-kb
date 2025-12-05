@@ -1,0 +1,21 @@
+{
+  "name": "SolutionAnalysis",
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "header": "include/qpOASES/extras/SolutionAnalysis.hpp",
+  "brief": "Post-optimality analysis: KKT verification and sensitivity",
+  "algorithms": [
+    {
+      "name": "QP Solution Analysis and Sensitivity\n\nSolutionAnalysis provides tools for verifying QP solutions and\ncomputing sensitivity information for uncertain problem data.\n\n**KKT violation analysis:**\nComputes maximum violation of optimality conditions:",
+      "math": "Var(x*, \u03bb*, z*) = J \u00b7 Var(g, b) \u00b7 J'\nwhere J is the sensitivity Jacobian at the solution.\n\n**Curvature analysis:**\ncheckCurvatureOnStronglyActiveConstraints() verifies positive\ndefiniteness of reduced Hessian on strongly active constraints,\ndetecting potential negative curvature directions.",
+      "complexity": "O(n\u00b2) for KKT check, O(n\u00b3) for variance-covariance",
+      "ref": [
+        "Ferreau et al., \"qpOASES: A parametric active-set algorithm\n     for quadratic programming\", Math. Prog. Comp., 2014"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "QProblem.hpp, SQProblem.hpp for QP solvers"
+  ]
+}

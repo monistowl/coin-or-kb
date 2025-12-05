@@ -1,0 +1,21 @@
+{
+  "name": "ClpCholeskyWssmpKKT",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpCholeskyWssmpKKT.hpp",
+  "brief": "WSSMP solver for KKT system (augmented system) formulation\n\nVariant of ClpCholeskyWssmp that solves the KKT/augmented system directly\ninstead of forming and factoring the normal equations A*D*A'.",
+  "algorithms": [
+    {
+      "name": "Indefinite Factorization:\nKKT matrix is symmetric indefinite \u2192 use LDL' with pivoting.\nWSSMP handles this with Bunch-Kaufman pivoting.",
+      "math": "NORMAL EQUATIONS (Alternative):\n  (A\u00b7D\u207b\u00b9\u00b7A')\u00b7\u0394y = r\u2082 - A\u00b7D\u207b\u00b9\u00b7r\u2081",
+      "complexity": "KKT: O((m+n)^\u03b1) where \u03b1 depends on sparsity\nOften better constant than forming A\u00b7D\u00b7A' explicitly.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpCholeskyWssmp for the normal equations variant",
+    "ClpCholeskyBase for the abstract interface",
+    "ClpInterior which uses this factorization"
+  ]
+}

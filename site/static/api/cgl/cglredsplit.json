@@ -1,0 +1,23 @@
+{
+  "name": "CglRedSplit",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglRedSplit/CglRedSplit.hpp",
+  "brief": "Reduce-and-Split cuts for enhanced Gomory generation",
+  "algorithms": [
+    {
+      "name": "Reduce-and-Split Cut Generation:\n  Strengthens Gomory cuts by reducing continuous variable coefficients:\n  1. Extract simplex tableau rows for fractional integer basic vars\n  2. Build contNonBasicTab: coefficients for continuous nonbasics\n  3. Reduce: For each row pair (r1, r2), find integer k minimizing\n     ||row1 + k\u00b7row2||, update pi_mat with multipliers\n  4. Generate GMI cut from reduced row using Chvatal-Gomory formula\n  5. Eliminate slacks by substituting original constraint rows",
+      "math": "Reduction operation:\n  Let a^i = row i of continuous nonbasic tableau\n  Goal: minimize ||a^i + k\u00b7a^j||\u00b2 over k \u2208 \u2124\n  Optimal k = round(-(a^i\u00b7a^j)/(a^j\u00b7a^j))\n  Accept if ||a^i + k\u00b7a^j|| < (1 - minReduc)\u00b7||a^i||\n\n  GMI cut from reduced row: \u03a3_N f\u0304_j\u00b7x_j \u2265 f\u2080/(1-f\u2080)\n  where f\u0304_j = f_j if j integer, else max(f_j, (f\u2080/(1-f\u2080))(1-f_j))",
+      "complexity": "O(mTab\u00b2 \u00b7 max(mTab, nTab)) where mTab = fractional integer\n  basic vars, nTab = continuous nonbasics. Controlled by maxTab parameter.\n  Typically 10-100x slower than basic Gomory but produces stronger cuts.",
+      "ref": [
+        "Anderson, Cornu\u00e9jols, Li (2005). \"Reduce-and-Split Cuts: Improving\n     the Performance of Mixed Integer Gomory Cuts\". Management Science 51:1720-1732.\n\nKey idea: Combine simplex tableau rows to reduce coefficients on\ncontinuous non-basic variables before applying Gomory formula.\nThis produces stronger cuts with better numerical properties.\n\nReduction process:\n- pi_mat: Integer multipliers for row combinations\n- test_pair(r1,r2): Check if combining rows reduces norm\n- find_step(): Optimal integer step for reduction\n- update_pi_mat()/update_redTab(): Apply reduction\n\nComplexity control:\n- maxTab_: Limits mTab * mTab * max(mTab,nTab) computation\n- Reducing maxTab makes generator faster but weaker\n\nRequires optimal basis (Clp or CPLEX)."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglRedSplitParam for parameters (away, LUB, tolerances)",
+    "CglRedSplit2 for enhanced version",
+    "CglGomory for basic Gomory cuts"
+  ]
+}

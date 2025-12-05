@@ -1,0 +1,22 @@
+{
+  "name": "cholmod_internal",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "CHOLMOD/Include/cholmod_internal.h",
+  "brief": "Internal definitions for CHOLMOD sparse Cholesky factorization\nCopyright (C) 2005-2023, Timothy A. Davis. Apache-2.0 license.\n\nCHOLMOD is a comprehensive sparse Cholesky factorization package supporting\nsupernodal and simplicial methods, update/downdate, and multiple orderings.\nHandles symmetric positive definite systems A\u00b7x = b via L\u00b7L' = A.",
+  "algorithms": [
+    {
+      "name": "CHOLMOD Sparse Cholesky Factorization:\nSupernodal and simplicial methods for symmetric positive definite matrices:\n\nSUPERNODAL (default for large matrices):\n1. SYMBOLIC ANALYSIS: Compute elimination tree, supernodes, nonzero counts\n2. NUMERIC: For each supernode (group of consecutive pivots):\n   - Assemble frontal matrix from children and original entries\n   - Factor dense submatrix via LAPACK (BLAS-3 for performance)\n   - Store L columns in packed supernodal form\n\nSIMPLICIAL (for very sparse or ill-conditioned):\n1. Process columns left-to-right\n2. Column j: L_j = (A_j - \u2211_{k<j} L_jk\u00b7L_k) / sqrt(A_jj - \u2211L_jk\u00b2)\n3. LDL' variant available for indefinite matrices",
+      "math": "Cholesky decomposition:\nA = L\u00b7L' where L is lower triangular with positive diagonal.\nFor each column j: L_j = (A_j - L\u00b7L_j) / L_jj\nSupernodes: columns j...j+k with identical nonzero patterns in L.\n\nUpdate/downdate: rank-1 modifications L\u00b7L' \u00b1 w\u00b7w' in O(|L|) time.",
+      "complexity": "O(flops) for factorization, typically O(n^1.5) for 2D, O(n\u00b2) for 3D.\nSupernodal: better BLAS utilization, ~2-10x faster than simplicial.",
+      "ref": [
+        "Chen, Davis, Hager & Rajamanickam (2008). \"Algorithm 887: CHOLMOD,\n  Supernodal Sparse Cholesky Factorization and Update/Downdate\". ACM TOMS."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AMD, CAMD, METIS for fill-reducing orderings",
+    "UMFPACK, KLU for unsymmetric systems"
+  ]
+}

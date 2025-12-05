@@ -1,0 +1,12 @@
+{
+  "name": "dsyevx_wrapper",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/cut/sdpcuts/dsyevx_wrapper.hpp",
+  "brief": "LAPACK dsyevx wrapper for symmetric eigenvalue computation\n\nC++ interface to LAPACK's dsyevx routine for computing selected\neigenvalues and eigenvectors of a real symmetric matrix.\n\n**dsyevx_interface parameters:**\n- n: Matrix dimension\n- A: Input symmetric matrix (upper or lower triangle)\n- m: [out] Number of eigenvalues found\n- w: [out] Eigenvalues in ascending order\n- z: [out] Eigenvectors (column-wise)\n- tolerance: Relative accuracy for eigenvalues\n- lb_ev, ub_ev: Eigenvalue range to compute (RANGE='V')\n- firstidx, lastidx: Index range to compute (RANGE='I')\n\n**Usage in Couenne:**\nUsed by CouenneSdpCuts to compute negative eigenvalues of the\nlifted matrix X - xx\u1d40, where violations indicate cuts.\n\n**Algorithm:**\nDSYEVX uses bisection followed by inverse iteration for\nselected eigenvalues, more efficient than full diagonalization.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneSdpCuts which uses this for semidefinite cuts"
+  ]
+}

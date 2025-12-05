@@ -1,0 +1,13 @@
+{
+  "name": "BonOAMessages",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/OaGenerators/BonOAMessages.hpp",
+  "brief": "Message definitions for Outer Approximation algorithms\nCopyright (C) Carnegie Mellon University 2006. All Rights Reserved.\nThis code is published under the Eclipse Public License.\n\nDefines message IDs and OaMessages class for output during\nOuter Approximation cutting plane algorithms. Messages include\nNLP solve status, bound updates, and iteration statistics.\n\nAuthors: Pierre Bonami, Carnegie Mellon University\nDate: July 15, 2005",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinMessages for COIN message framework",
+    "OaDecompositionBase for OA algorithm using these messages"
+  ]
+}

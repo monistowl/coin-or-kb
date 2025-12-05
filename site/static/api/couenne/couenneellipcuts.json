@@ -1,0 +1,13 @@
+{
+  "name": "CouenneEllipCuts",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/cut/ellipcuts/CouenneEllipCuts.hpp",
+  "brief": "Ellipsoidal cuts for nonconvex quadratic constraints\n\nPlaceholder for ellipsoidal cutting planes derived from\nthe geometry of quadratic constraints.\n\n**Concept (not yet implemented):**\nFor a quadratic constraint x\u1d40Qx + b\u1d40x \u2264 c, the feasible\nregion forms an ellipsoid (if Q \u227b 0). Ellipsoidal cuts\nexploit this structure for tighter relaxations.\n\n@note Currently empty - functionality may be in development\n      or handled elsewhere (e.g., CouenneSdpCuts).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneSdpCuts for SDP-based cuts on quadratics",
+    "CouenneExprQuad for quadratic expression handling"
+  ]
+}

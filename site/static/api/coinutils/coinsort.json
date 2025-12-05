@@ -1,0 +1,19 @@
+{
+  "name": "CoinSort",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinSort.hpp",
+  "brief": "Sorting utilities for pairs, triples, and parallel arrays\n\nProvides CoinPair, CoinTriple, and sort functions for sorting\nmultiple related arrays together (e.g., indices and values).",
+  "algorithms": [
+    {
+      "name": "Parallel Array Sorting:\n  Problem: sort array A while permuting arrays B, C, ... identically\n  Approach 1 (standard): Create array of tuples, sort, scatter back\n  Approach 2 (EKK sort): In-place quicksort carrying parallel arrays\n\n  EKK Quicksort variant (COIN_USE_EKK_SORT):\n  1. Check if already sorted (linear scan)\n  2. Median-of-three pivot selection\n  3. Non-recursive stack-based partitioning\n  4. Insertion sort for small subarrays (n \u2264 10)\n  Falls back to std::sort for n > 10000",
+      "math": "",
+      "complexity": "CoinSort_2/3: O(n log n) average, O(n\u00b2) worst\n  CoinShortSort_2: O(n log n) but optimized for small n\n  Space: O(n) for tuple approach, O(log n) stack for EKK",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinPackedVector for typical use case (sorting indices with values)"
+  ]
+}

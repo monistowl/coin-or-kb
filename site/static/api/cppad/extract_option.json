@@ -1,0 +1,9 @@
+{
+  "name": "extract_option",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/optimize/extract_option.hpp",
+  "brief": "Tape optimization: extract_option",
+  "algorithms": [],
+  "methods": []
+}

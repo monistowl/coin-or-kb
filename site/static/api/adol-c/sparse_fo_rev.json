@@ -1,0 +1,12 @@
+{
+  "name": "sparse_fo_rev",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/sparse/sparse_fo_rev.h",
+  "brief": "Bit-pattern propagation for sparsity detection\n\nProvides forward and reverse mode interfaces that propagate bit patterns\ninstead of numerical values. Used to efficiently determine the sparsity\nstructure of Jacobian and Hessian matrices.\n\nBit patterns are packed into size_t words for efficiency. For n independent\nvariables, the seed matrix X[n][p] uses p = ceil(n / bits_per_long) words\nper row, where bits_per_long = 8 * sizeof(size_t).\n\nTwo modes:\n- **Tight**: Uses actual values x[] during propagation (more accurate)\n- **Safe**: Uses only bit patterns (faster, may overestimate sparsity)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sparse/sparsedrivers.h for high-level sparse derivative computation"
+  ]
+}

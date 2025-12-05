@@ -1,0 +1,12 @@
+{
+  "name": "IpReferenced",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpReferenced.hpp",
+  "brief": "Reference counting base class for SmartPtr management\n\nDefines ReferencedObject - the base class that any object must inherit\nfrom to be managed by SmartPtr<T>. Implements intrusive reference counting\nwhere the count is stored in the object itself rather than externally.\n\nAlso defines Referencer pseudo-class used to track which SmartPtr\ninstances hold references (useful for debugging circular references).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpSmartPtr.hpp for the SmartPtr template class"
+  ]
+}

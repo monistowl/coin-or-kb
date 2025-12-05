@@ -1,0 +1,13 @@
+{
+  "name": "INLPSolver",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/NLPSolver/INLPSolver.h",
+  "brief": "Abstract interface for NLP solver backends\n\nPure virtual interface for primal bound NLP solvers.\n\n**Starting Point:**\n- setStartingPoint(): Initialize solver from MIP solution\n- clearStartingPoint(): Reset to default\n\n**Variable Fixing:**\n- fixVariables(): Fix integer variables for NLP subproblem\n- unfixVariables(): Restore full problem\n\n**Solution Methods:**\n- solveProblem(): Execute NLP solver\n- getSolution(): Retrieve primal point\n- getObjectiveValue(): Primal objective value\n\n**Bound Management:**\n- getVariableLowerBounds(), getVariableUpperBounds()\n- updateVariableLowerBound(), updateVariableUpperBound()\n\n**Implementations:**\n- NLPSolverIpoptBase: Ipopt interior point solver\n- NLPSolverGAMS: GAMS NLP solvers\n- NLPSolverSHOT: Recursive SHOT for NLP",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "PrimalSolver.h for fixed-integer NLP subproblems",
+    "NLPSolverBase.h for implementation utilities"
+  ]
+}

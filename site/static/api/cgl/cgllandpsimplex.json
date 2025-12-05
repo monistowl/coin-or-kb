@@ -1,0 +1,24 @@
+{
+  "name": "CglLandPSimplex",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglLandP/CglLandPSimplex.hpp",
+  "brief": "Simplex algorithm for Lift-and-Project cut generation",
+  "algorithms": [
+    {
+      "name": "Lift-and-Project Cutting Planes:\n  Given MIP with integrality on x_j, the L&P disjunction is:\n    (x_j \u2264 \u230ax*_j\u230b) OR (x_j \u2265 \u2308x*_j\u2309)\n\n  Cut generation via CGLP (Cut Generation LP):\n  1. Formulate normalization: ||cut|| = 1 (various norms)\n  2. For each disjunction term, lift the LP relaxation\n  3. Find cut valid for intersection of lifted polyhedra\n  4. Project cut back to original variable space\n\n  This class optimizes the CGLP by pivoting through adjacent bases,\n  seeking the most violated intersection cut.",
+      "math": "For source row i with f_i fractional:\n  Intersection cut: \u03a3 (a_j/f_i if a_j \u2265 0, else a_j/(f_i-1)) x_j \u2265 1\n  L&P strengthens by optimizing choice of disjunction via pivoting.",
+      "complexity": "O(pivots \u00d7 m \u00d7 n) where pivots typically O(m).\n  Each pivot requires tableau row computation O(m) and ratio test O(n).\n  Heuristics limit pivot count to avoid excessive computation.",
+      "ref": [
+        "Balas, E. (1979). \"Disjunctive Programming\". Annals of Discrete\n  Mathematics 5:3-51. [Theoretical foundation]",
+        "Balas, E. and Perregaard, M. (2003). \"A precise correspondence between\n  lift-and-project cuts, simple disjunctive cuts, and mixed integer\n  Gomory cuts for 0-1 programming\". Math. Programming 94:221-245."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CglLandP for the main cut generator interface",
+    "CglLandPTabRow for tableau row structure",
+    "CglLandPValidator for cut acceptance criteria\n\nDate:     21/07/05\n\nCopyright (C) 2005-2009 Pierre Bonami and others.  All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL)."
+  ]
+}

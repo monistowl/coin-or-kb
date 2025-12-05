@@ -1,0 +1,20 @@
+{
+  "name": "IpIterateInitializer",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpIterateInitializer.hpp",
+  "brief": "Strategy interface for computing initial iterates\n\nIterateInitializer is the abstract base for strategies that\ncompute the starting point (x, s, y_c, y_d, z_L, z_U, v_L, v_U)\nfor the interior point algorithm.",
+  "algorithms": [
+    {
+      "name": "Starting Point Initialization:\n  1. Primal variables x:\n     - Use user-provided x\u2080 if available.\n     - Project to bounds: x \u2190 max(x_L + \u03ba, min(x, x_U - \u03ba)).\n     - Push away from bounds by \u03ba = bound_push\u00b7max(1, |x_L|).\n  2. Slack variables s: s \u2190 d(x), projected to [d_L + \u03ba, d_U - \u03ba].\n  3. Dual variables y_c, y_d:\n     - Least squares: min ||\u2207f - J^T y||\u00b2 to estimate multipliers.\n     - Or use user-provided values if warm starting.\n  4. Bound multipliers z_L, z_U, v_L, v_U:\n     - From complementarity: z_L = \u03bc/(x - x_L), z_U = \u03bc/(x_U - x).\n     - Clamp to [bound_mult_init_val, \u221e) for stability.",
+      "math": "Initial complementarity products:\n  Want (x - x_L)\u00b7z_L \u2248 \u03bc, so z_L = \u03bc / (x - x_L).\n  Initial \u03bc from average: \u03bc\u2080 = (x - x_L)^T z_L / n_bounds.\n  Slack complementarity: (s - d_L)\u00b7v_L \u2248 \u03bc similarly.",
+      "complexity": "O(n + m) for cold start (vector operations).\n  O(m\u00b2) for least-squares dual initialization if done explicitly.\n  Warm start: O(n + m) using provided values directly.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpDefaultIterateInitializer.hpp for standard initialization",
+    "IpWarmStartIterateInitializer.hpp for warm starts"
+  ]
+}

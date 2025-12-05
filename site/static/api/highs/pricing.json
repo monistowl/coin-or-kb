@@ -1,0 +1,9 @@
+{
+  "name": "pricing",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/pricing.hpp",
+  "brief": "HiGHS QP pricing base class\n\nAbstract pricing strategy interface for QP active set method.\nSelects entering variable for basis change.",
+  "algorithms": [],
+  "methods": []
+}

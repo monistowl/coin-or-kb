@@ -1,0 +1,9 @@
+{
+  "name": "benchmark_helper",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "benchmarks/linear_programming/cuopt/benchmark_helper.hpp",
+  "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
+  "algorithms": [],
+  "methods": []
+}

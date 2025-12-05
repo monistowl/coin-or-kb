@@ -1,0 +1,9 @@
+{
+  "name": "call_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/call_op.hpp",
+  "brief": "Value graph: call_op",
+  "algorithms": [],
+  "methods": []
+}

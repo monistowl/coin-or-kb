@@ -1,0 +1,13 @@
+{
+  "name": "ISolutionStrategy",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/SolutionStrategy/ISolutionStrategy.h",
+  "brief": "Abstract interface for solution strategies\n\nBase interface for algorithm selection.\n\n**Strategy Interface:**\n- initializeStrategy(): Configure tasks and solvers\n- solveProblem(): Execute the solution algorithm\n\n**Strategy Implementations:**\n- SolutionStrategyMultiTree: Iterative outer approximation\n  - Solve MIP, add cuts, repeat\n- SolutionStrategySingleTree: Lazy constraint callback\n  - Single MIP with callback cut injection\n- SolutionStrategyNLP: Pure NLP (no integer variables)\n- SolutionStrategyMIQP/MIQCQP: Direct quadratic solving\n\n**Selection Logic:**\n- Problem classification determines best strategy\n- Convex MINLP \u2192 ESH (multi-tree or single-tree)\n- QP/QCQP \u2192 Direct solver if supported\n- NLP \u2192 Interior point only",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskHandler.h for task execution flow",
+    "Solver.h for strategy selection"
+  ]
+}

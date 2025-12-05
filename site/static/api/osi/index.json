@@ -1,0 +1,106 @@
+{
+  "library": "Osi",
+  "layer": "layer-1",
+  "classes": [
+    {
+      "name": "OsiAuxInfo",
+      "brief": "Auxiliary information for algorithm-specific solver customization",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiBranchingObject",
+      "brief": "Branch-and-bound objects and branching decisions\n\nThis file defines the object-oriented framework for branching in MIP:\n\n- **OsiObject**: Abstract base for anything that can be branched on\n  (integer variables, SOS constraints, etc.)\n- **OsiBranchingObject**: Describes how to perform a specific branch\n- **OsiBranchingInformation**: Solver state passed to branching decisions",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiChooseVariable",
+      "brief": "Variable selection strategies for branch-and-bound\n\nIn MIP solving, choosing which variable to branch on significantly\naffects tree size and solve time. This file provides:\n\n- OsiChooseVariable: Base class for branching variable selection\n- OsiChooseStrong: Strong branching (evaluates candidates by solving LPs)",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiColCut",
+      "brief": "Column-based cuts for variable bound tightening\n\nColumn cuts represent bound changes on variables rather than\nadding new constraints. They are used for:\n- Bound tightening from probing\n- Implication-based bound strengthening\n- Reduced cost fixing",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiCollections",
+      "brief": "STL container typedefs for Osi cut and data collections\nCopyright (C) 2000, International Business Machines Corporation.\nEPL-1.0 license.\n\nStandard typedefs: OsiVectorInt, OsiVectorDouble, OsiVectorColCutPtr,\nOsiVectorRowCutPtr, OsiVectorCutPtr. Provides cleaner syntax for\nfrequently-used vector types throughout Osi code.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiCpxSolverInterface",
+      "brief": "Osi interface for IBM ILOG CPLEX optimizer\nAuthor: Tobias Pfender (ZIB Berlin). EPL license.\n\nOsiCpxSolverInterface wraps CPLEX via the Osi abstraction. Uses CPXLPptr\nand CPXENVptr handles for CPLEX Callable Library. Implements initialSolve/\nresolve/branchAndBound, row/column manipulation (OsiRowCut, OsiColCut),\nwarm starts via CoinWarmStartBasis, and CPLEX-specific parameter handling.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiCut",
+      "brief": "Abstract base class for cutting planes in branch-and-cut\n\nCutting planes are linear inequalities that can be added to an LP\nrelaxation to tighten the formulation without cutting off any\ninteger-feasible solutions.",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiCuts",
+      "brief": "Container for collections of row cuts and column cuts",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiFeatures",
+      "brief": "MIP problem features for algorithm selection and parameter tuning",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiGlpkSolverInterface",
+      "brief": "Osi interface for GNU Linear Programming Kit (GLPK)\nCopyright (C) 2001, Vivian De Smedt, Braden Hunsaker. EPL license.\n\nOsiGlpkSolverInterface wraps GLPK via the Osi abstraction. Uses glp_prob\nhandle (LPX typedef for compatibility). Implements initialSolve/resolve/\nbranchAndBound, warm starts via CoinWarmStartBasis, and GLPK-specific\nparameter handling. Supports both simplex and MIP solving.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiGrbSolverInterface",
+      "brief": "Osi interface for Gurobi optimizer\nAuthor: Stefan Vigerske (HU Berlin), based on Cplex interface by T. Achterberg.\nEPL license.\n\nOsiGrbSolverInterface wraps Gurobi via the Osi abstraction. Uses GRBmodel\nand GRBenv handles for Gurobi C API. Implements initialSolve/resolve/\nbranchAndBound, row/column manipulation, warm starts, and parameter passing.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiMskSolverInterface",
+      "brief": "Osi interface for MOSEK optimizer (version 5.0+)\nAuthor: Bo Jensen (MOSEK ApS). EPL license.\n\nOsiMskSolverInterface wraps MOSEK via the Osi abstraction. Uses MSKtask_t\nand MSKenv_t handles (void* for forward declaration without mosek.h).\nImplements initialSolve/resolve/branchAndBound, parameter handling, and\nsupports LP/MIP/QP/conic solving through MOSEK's unified interface.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiPresolve",
+      "brief": "OSI interface to problem simplification (presolve)\n\nPresolve reduces problem size before solving by applying\ntransformations that preserve optimal solutions:\n- Singleton row/column removal\n- Bound tightening\n- Coefficient reduction\n- Duplicate row/column detection",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiRowCut",
+      "brief": "Row-based cutting plane (linear inequality)\n\nRow cuts are the most common form of cutting planes, representing\na linear inequality constraint: lb <= a'x <= ub",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiRowCutDebugger",
+      "brief": "Validate cuts against known optimal solutions",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiSolverBranch",
+      "brief": "Branch information with tighter bounds for both directions",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiSolverInterface",
+      "brief": "Abstract base class defining the Open Solver Interface (OSI)\n\nOSI provides a uniform API for accessing different LP/MIP solvers\n(Clp, CPLEX, Gurobi, GLPK, etc.) through a common interface. This\nallows solver-independent application code.\n\nKey capabilities:\n- LP relaxation solving (initialSolve, resolve)\n- Model query (getColLower, getRowUpper, getObjCoefficients)\n- Solution query (getColSolution, getRowPrice, getReducedCost)\n- Problem modification (setColBounds, addRow, addCol)\n- Warm starting (getWarmStart, setWarmStart)\n- Cut management (applyCuts, applyRowCuts)\n- MIP support (setInteger, branchAndBound)\n\nTypical workflow:\n1. Create solver-specific instance (e.g., OsiClpSolverInterface)\n2. Load problem via loadProblem() or readMps()\n3. Call initialSolve() for first LP solution\n4. Call resolve() after modifications\n5. Query solution via getColSolution(), getObjValue()",
+      "has_algorithm": true
+    },
+    {
+      "name": "OsiSolverParameters",
+      "brief": "Parameter enums for cross-solver configuration in Osi\nCopyright (C) 2000, International Business Machines Corporation.\nEPL-1.0 license.\n\nDefines OsiIntParam (iteration limits, name discipline), OsiDblParam\n(objective limits, tolerances, offset), OsiStrParam (problem/solver names),\nOsiHintParam (crash, presolve, scaling, pivoting hints with OsiHintStrength).\nSolvers implement these via get/setIntParam, get/setDblParam, etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiSpxSolverInterface",
+      "brief": "Osi interface for SoPlex LP solver\nAuthors: Tobias Pfender, Ambros Gleixner, Wei Huang (ZIB Berlin).\nEPL license.\n\nOsiSpxSolverInterface wraps SoPlex >= 1.4.2c via the Osi abstraction.\nImplements initialSolve/resolve/branchAndBound, parameter get/set,\nrow/column access, warm start via CoinWarmStartBasis. Uses soplex::SoPlex\ninternally with DVector/DIdxSet for sparse operations.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiXprSolverInterface",
+      "brief": "Osi interface for FICO XPRESS-MP solver\nCopyright (C) 2000, International Business Machines Corporation.\nEPL-1.0 license.\n\nOsiXprSolverInterface wraps XPRESS-MP via the Osi abstraction. Uses XPRSprob\nhandle for XPRESS API. Implements initialSolve/resolve/branchAndBound,\nrow/column access, parameter get/set, and problem loading from MPS/LP files.",
+      "has_algorithm": false
+    }
+  ]
+}

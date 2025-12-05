@@ -1,0 +1,13 @@
+{
+  "name": "IpUtils",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Common/IpUtils.hpp",
+  "brief": "General utility functions for Ipopt\n\nProvides platform-independent utility functions:\n- Min/Max template functions for up to 4 arguments\n- IsFiniteNumber() for NaN/Inf detection\n- CpuTime(), SysTime(), WallclockTime() for profiling\n- IpRandom01() for random number generation\n- Snprintf() for safe formatted output\n- Compare_le() for numerical comparison with tolerance\n- Signal handling for graceful interrupt",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "IpTypes.hpp for Number and Index type definitions",
+    "IpTimedTask.hpp for high-level timing wrapper"
+  ]
+}

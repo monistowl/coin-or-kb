@@ -1,0 +1,23 @@
+{
+  "name": "kkt_solver",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/kkt_solver.h",
+  "brief": "KKT System Solver Interface for Interior Point Methods\n\nDefines the interface for solving the augmented system (KKT system) that\narises in each iteration of primal-dual interior point methods.",
+  "algorithms": [
+    {
+      "name": "KKT System in IPM:\nThe Newton step in interior point methods requires solving:\n\n  [ G   A' ] [\u0394x]   [a]\n  [ A   0  ] [\u0394y] = [b]\n\nwhere:\n- G = diagonal matrix with G[j,j] = zl[j]/xl[j] + zu[j]/xu[j]\n- A = m\u00d7(n+m) constraint matrix [A | -I]\n- (a,b) = right-hand side from Newton linearization\n\nSOLUTION APPROACHES:\n\n1. AUGMENTED SYSTEM (Direct):\n   Factor and solve the full (n+m+m) \u00d7 (n+m+m) symmetric indefinite system.\n   Uses LDL' or similar factorization with pivoting.\n\n2. NORMAL EQUATIONS (Direct):\n   Eliminate \u0394x: A\u00b7G\u207b\u00b9\u00b7A'\u00b7\u0394y = b - A\u00b7G\u207b\u00b9\u00b7a\n   Smaller system (m\u00d7m) but squares condition number.\n\n3. ITERATIVE (Krylov):\n   Use CG/MINRES with preconditioner. The residual tolerance must satisfy:\n   \u2016D\u00b7res\u2016_\u221e \u2264 tol, where D[i,i] = \u221a(1/G[i,i]) or 1 if G[i,i] = 0\n\nREGULARIZATION:\nNear-optimal iterates have G[j,j] \u2192 \u221e for variables at bounds, causing\nill-conditioning. Regularization adds small \u03b5 to diagonal:\n- Primal regularization: G + \u03b5P\u00b7I\n- Dual regularization: zero block becomes -\u03b5D\u00b7I",
+      "math": "Condition number analysis:\n- cond(KKT) \u2248 max(G)/min(G) \u00b7 cond(A)\n- Near optimum: max(G)/min(G) \u2192 \u221e (ill-conditioned)\n- Regularization bounds condition: max \u2248 1/\u03b5\n- Normal equations: cond(A\u00b7G\u207b\u00b9\u00b7A') \u2248 cond(KKT)\u00b2",
+      "complexity": "- Direct (augmented): O((n+m)\u00b3) dense, O(nnz \u00b7 fill\u00b2) sparse\n- Direct (normal): O(m\u00b3) dense, O(m \u00b7 nnz + m\u00b2 \u00b7 fill) sparse\n- Iterative: O(k \u00b7 nnz) where k = iterations to convergence",
+      "ref": [
+        "Benzi, Golub & Liesen (2005). \"Numerical Solution of Saddle Point\n  Problems\". Acta Numerica 14:1-137.",
+        "Nocedal & Wright (2006). \"Numerical Optimization\", Chapter 16."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ipm.h for interior point method using this interface",
+    "kkt_solver_basis.h for basis-based implementation"
+  ]
+}

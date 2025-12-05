@@ -1,0 +1,13 @@
+{
+  "name": "BlisBranchStrategyStrong",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisBranchStrategyStrong.h",
+  "brief": "Strong branching strategy for MILP variable selection\n\nStrong branching is the most accurate (but expensive) branching strategy.\nFor each candidate variable, it actually solves child LP relaxations\nto measure the objective degradation.\n\n**Algorithm:**\n1. For each fractional integer variable x\u2c7c:\n   - Create down branch (x\u2c7c \u2264 floor(x\u2c7c*))\n   - Create up branch (x\u2c7c \u2265 ceil(x\u2c7c*))\n   - Solve both LPs (limited iterations)\n   - Record objective change \u0394Down, \u0394Up\n2. Score = \u03bc\u00b7min(\u0394Down, \u0394Up) + (1-\u03bc)\u00b7max(\u0394Down, \u0394Up)\n3. Select variable with highest score\n\n**BlisStrong struct:**\nStores results for one candidate: objective changes, infeasibility counts,\nsolver completion status for up/down branches.\n\n**Trade-offs:**\n- Produces smallest search trees (best variable selection)\n- Very expensive at each node (many LP solves)\n- Typically used with iteration limits per candidate LP",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisBranchStrategyRel for reliability branching (strong + pseudo-cost hybrid)",
+    "BlisBranchStrategyPseudo for pure pseudo-cost branching"
+  ]
+}

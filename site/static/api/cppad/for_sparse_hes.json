@@ -1,0 +1,9 @@
+{
+  "name": "for_sparse_hes",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/atomic/two/for_sparse_hes.hpp",
+  "brief": "Core AD functionality: for sparse hes",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_Matching",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_Matching.hpp",
+  "brief": "Vertex matching algorithms for graph coarsening\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nImplements matching strategies: Random (random neighbor), HEM (heavy\nedge matching), SR/SRdeg (sorted/degree-sorted heavy edge). Matching\npairs vertices for coarsening; heavier edges are preferred to preserve\ngraph structure. Cleanup handles unmatched (orphan) vertices.",
+  "algorithms": [
+    {
+      "name": "Heavy Edge Matching (HEM):\nPairs vertices connected by heaviest edges to preserve structure:\n1. Visit vertices in random order (for randomization)\n2. For unmatched vertex v, find heaviest edge to unmatched neighbor u\n3. Match v with u: match[v] = u, match[u] = v\n4. Continue until all vertices matched or isolated\n5. Cleanup: handle orphan vertices (no valid matches)",
+      "math": "Heavy edge principle: prefer matching (i,j) if w_ij is large.\nRationale: heavy edges likely internal to optimal partition,\nso collapsing them preserves cut structure on coarser graph.\n\nVariants:\n- Random: match with random neighbor (fastest)\n- HEM: match with heaviest-edge neighbor\n- HEMSR: sorted random ordering for HEM\n- HEMSRdeg: degree-sorted ordering (low-degree first)",
+      "complexity": "O(|E|) for all variants (single pass through edges).",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_Coarsening.hpp for graph contraction using matches",
+    "Mongoose_Internal.hpp for MatchingStrategy enum"
+  ]
+}

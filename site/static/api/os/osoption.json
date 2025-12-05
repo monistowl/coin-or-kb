@@ -1,0 +1,9 @@
+{
+  "name": "OSOption",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSCommonInterfaces/OSOption.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

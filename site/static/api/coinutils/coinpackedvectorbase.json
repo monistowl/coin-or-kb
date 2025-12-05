@@ -1,0 +1,13 @@
+{
+  "name": "CoinPackedVectorBase",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinPackedVectorBase.hpp",
+  "brief": "Abstract base class for read-only sparse vector access\n\nProvides the read-only interface for sparse vectors stored as parallel\nindex/value arrays. This is the base class for CoinPackedVector (owning)\nand CoinShallowPackedVector (non-owning reference).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinPackedVector for a modifiable sparse vector",
+    "CoinShallowPackedVector for a lightweight view"
+  ]
+}

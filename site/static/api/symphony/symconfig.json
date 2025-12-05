@@ -1,0 +1,13 @@
+{
+  "name": "SymConfig",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/SymConfig.h",
+  "brief": "Build configuration for SYMPHONY\n\nManages platform-specific configuration and symbol visibility.\n\n**Configuration modes:**\n- HAVE_CONFIG_H: Uses autoconf-generated config.h\n- Otherwise: Uses config_default.h / config_sym_default.h\n\n**Symbol visibility:**\n- SYMPHONYLIB_EXPORT: DLL export on Windows\n- __visibility__(\"default\"): GCC visibility for -fvisibility=hidden\n\n**Include hierarchy:**\n- SYMPHONYLIB_BUILD + HAVE_CONFIG_H \u2192 config.h\n- Client + HAVE_CONFIG_H \u2192 config_sym.h\n- SYMPHONYLIB_BUILD no autoconf \u2192 config_default.h\n- Client no autoconf \u2192 config_sym_default.h",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_default.h for package dependencies",
+    "config_sym_default.h for public API config"
+  ]
+}

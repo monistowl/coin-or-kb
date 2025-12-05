@@ -1,0 +1,20 @@
+{
+  "name": "BCP_message_mpi",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_message_mpi.hpp",
+  "brief": "MPI message passing for BCP",
+  "algorithms": [
+    {
+      "name": "MPI Backend: BCP_mpi_environment Implementation\n\nMPI implementation of BCP_message_environment interface.\nRequires COIN_HAS_MPI to be defined.\n\n**Key methods:**\n- is_mpi(): Detects MPI environment and process count\n- send/receive(): Point-to-point messaging with tags\n- multicast(): Broadcast to multiple targets\n- start_processes(): Spawn workers on machines\n- probe(): Non-blocking message check\n\n**Process management:**\nTracks process IDs, handles initialization/finalization,\nchecks liveness of remote processes.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BCP_message.hpp for abstract interface",
+    "BCP_message_pvm.hpp for PVM backend"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "move",
+  "library": "Creme",
+  "layer": "layer-4",
+  "header": "Creme/src/Base/move.h",
+  "brief": "Variable move operation for Creme local search\n\nmove(): Perform a single variable update in local search,\nadjusting primal values and updating constraint satisfaction.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "locsrch.h for local search algorithm",
+    "linopt.h for one-opt improvement"
+  ]
+}

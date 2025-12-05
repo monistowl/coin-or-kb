@@ -1,0 +1,13 @@
+{
+  "name": "HighsTask",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/parallel/HighsTask.h",
+  "brief": "Fixed-size task for work-stealing scheduler\n\nInline callable storage with atomic state for task synchronization.\n\n**Memory Layout:**\n- taskData[]: 64-sizeof(Metadata) bytes for callable storage\n- metadata.stealer: Atomic for stealer pointer + status flags\n- Total: kMaxTaskSize = 64 bytes (cache line sized)\n\n**Status Flags (packed in stealer pointer):**\n- kFinishedFlag: Task execution completed\n- kCancelFlag: Task marked for cancellation\n- Pointer bits: Which worker stole this task\n\n**Callable Storage:**\n- Type-erased via virtual CallableBase interface\n- Placement new into taskData buffer\n- Requires trivially destructible callables\n\n**State Transitions:**\n- setTaskData(): Initialize with callable, stealer=0\n- run() by owner: Execute if not cancelled\n- run(stealer): Execute and mark stealer, return owner to notify\n- markAsFinished(): Set finished flag, return waiting owner\n- cancel(): Set cancel flag atomically\n\n**Interrupt Handling:**\n- HighsTask::Interrupt exception for task cancellation\n- Propagates up through task tree on cancel",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "parallel/HighsSplitDeque.h for task queuing",
+    "parallel/HighsTaskExecutor.h for execution"
+  ]
+}

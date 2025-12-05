@@ -1,0 +1,13 @@
+{
+  "name": "GPUQREngine_SparseMeta",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "SPQR/GPUQREngine/Include/GPUQREngine_SparseMeta.hpp",
+  "brief": "Sparse multifrontal factorization metadata\nCopyright (c) 2013, Timothy A Davis, Sencer Nuri Yeralan,\nand Sanjay Ranka. GPL-2.0+ license.\n\nSparseMeta extends Front for sparse factorization: fp (pivotal columns),\nnc (remaining children), isStaged/pushOnly flags for staging. S assembly\nmetadata (cpuS/gpuS SEntry arrays, Scount). Pack assembly: contribution\nblock dimensions (cm\u00d7cn), parent info (pn, gpuP), row/col maps (gpuRimap/gpuRjmap).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GPUQREngine_Front.hpp for containing class",
+    "GPUQREngine_SEntry.hpp for SEntry structure"
+  ]
+}

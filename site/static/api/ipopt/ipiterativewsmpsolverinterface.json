@@ -1,0 +1,22 @@
+{
+  "name": "IpIterativeWsmpSolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpIterativeWsmpSolverInterface.hpp",
+  "brief": "Interface to IBM WSMP iterative (WISMP) solver\n\nIterativeWsmpSolverInterface wraps the iterative variant of WSMP\n(called WISMP), which uses incomplete LU factorization as a\npreconditioner for iterative refinement.",
+  "algorithms": [
+    {
+      "name": "Preconditioned Iterative Solver with Incomplete LDL^T:\n  WISMP uses incomplete factorization as preconditioner for iterative solve:\n  - ILU(k) or ILUT: incomplete factorization with level-k fill or threshold\n  - Drop tolerance controls fill-in vs preconditioner quality tradeoff\n  - Preconditioned conjugate gradient or GMRES iteration\n  - Memory-efficient for very large problems where exact factors don't fit",
+      "math": "Incomplete factorization A \u2248 L\u0303\u00b7D\u0303\u00b7L\u0303^T where:\n  - L\u0303 = unit lower triangular, entries dropped if |l_ij| < droptol\n  - Fill-in limited by fillin_limit factor relative to original nnz\n  - Preconditioner M = L\u0303\u00b7D\u0303\u00b7L\u0303^T applied in each iteration\n  - No inertia information available (pivots may be altered by dropping)",
+      "complexity": "O(nnz(L\u0303)) per iteration, typically O(k\u00b7nnz(A)) total\n  where k = iteration count. Memory: O(fillin_limit \u00d7 nnz(A)).\n  Suitable when direct factorization exceeds memory.",
+      "ref": [
+        "Gupta (2000). \"WSMP: Watson Sparse Matrix Package\".\n     IBM Research Technical Report RC 21886.\n\nKey characteristics:\n- ProvidesInertia: false (unlike direct WSMP)\n- Input format: CSR_Format_1_Offset (upper triangular)\n- Uses incomplete factorization with drop tolerance\n\nIterative-specific parameters:\n- wsmp_inexact_droptol_: Drop tolerance for incomplete factorization\n- wsmp_inexact_fillin_limit_: Maximum fill-in allowed\n\nSince WISMP cannot determine inertia (negative eigenvalue count),\nit may not be suitable for all Ipopt applications that rely on\ninertia correction for KKT system validity.\n\nUseful for very large problems where direct factorization memory\nrequirements are prohibitive."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpWsmpSolverInterface.hpp for direct solver variant",
+    "IpGenKKTSolverInterface.hpp for generic iterative interface"
+  ]
+}

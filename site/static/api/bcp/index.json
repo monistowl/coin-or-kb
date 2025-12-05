@@ -1,0 +1,466 @@
+{
+  "library": "Bcp",
+  "layer": "layer-3",
+  "classes": [
+    {
+      "name": "BCP_USER",
+      "brief": "User initialization and packing interface for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_branch",
+      "brief": "Internal branching object for BCP Branch-Cut-Price",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_buffer",
+      "brief": "Message buffer for BCP inter-process communication",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_cg",
+      "brief": "Cut Generator process for BCP Branch-Cut-Price framework",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_cg_param",
+      "brief": "Cut Generator parameters for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_cg_user",
+      "brief": "User customization interface for Cut Generator process",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_cut",
+      "brief": "Cut (constraint) representation for BCP Branch-Cut-Price",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_enum",
+      "brief": "Core enumerations for BCP Branch-Cut-Price framework",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_enum_branch",
+      "brief": "Branching-related enumerations for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_enum_process_t",
+      "brief": "Process type enumeration for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_enum_tm",
+      "brief": "Tree Manager enumerations for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_error",
+      "brief": "Fatal error handling for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_functions",
+      "brief": "Warmstart serialization utilities",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_indexed_pricing",
+      "brief": "Indexed pricing list for column generation",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_lp",
+      "brief": "LP process for BCP Branch-Cut-Price framework",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_lp_branch",
+      "brief": "LP-side branching objects for BCP Branch-Cut-Price",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_lp_functions",
+      "brief": "LP process internal function declarations",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_lp_main_loop",
+      "brief": "LP process main loop entry point",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_lp_node",
+      "brief": "LP process node representation",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_lp_param",
+      "brief": "LP process parameters for BCP Branch-Cut-Price",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_lp_pool",
+      "brief": "Cut and variable pools for LP process",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_lp_result",
+      "brief": "LP solve results for BCP Branch-Cut-Price",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_lp_user",
+      "brief": "User customization interface for LP process",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_main_fun",
+      "brief": "Process entry point functions for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_math",
+      "brief": "Mathematical constants for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_matrix",
+      "brief": "Matrix and vector representations for BCP LP relaxation",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_mempool",
+      "brief": "Memory pool allocator for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_message",
+      "brief": "Abstract message passing interface for BCP parallelism",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_message_mpi",
+      "brief": "MPI message passing for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_message_pvm",
+      "brief": "PVM message passing for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_message_single",
+      "brief": "Single-process message passing for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_message_tag",
+      "brief": "Message tag enumeration for BCP inter-process communication",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_node_change",
+      "brief": "Complete node delta encoding for tree storage",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_obj_change",
+      "brief": "Delta encoding for variable/cut bound changes",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_os",
+      "brief": "OS abstraction layer for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_parameters",
+      "brief": "BCP parameters",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_problem_core",
+      "brief": "Core problem formulation for BCP Branch-Cut-Price",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_process",
+      "brief": "BCP process base class and scheduler",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_set_intersects",
+      "brief": "Set intersection test utility",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_solution",
+      "brief": "Solution representation for BCP Branch-Cut-Price",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_string",
+      "brief": "Simple string class for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_tm",
+      "brief": "Tree Manager process for BCP Branch-Cut-Price framework",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_tm_functions",
+      "brief": "Tree Manager internal function declarations",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_tm_node",
+      "brief": "Search tree node representation in Tree Manager",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_tm_param",
+      "brief": "Tree Manager parameters for BCP Branch-Cut-Price",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_tm_user",
+      "brief": "User customization interface for Tree Manager process",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_tmstorage",
+      "brief": "BCP tree storage process",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_var",
+      "brief": "Variable representation for BCP Branch-Cut-Price",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vector",
+      "brief": "Custom vector class for BCP with performance optimizations",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vector_bool",
+      "brief": "BCP_vec<bool> specialization",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vector_change",
+      "brief": "Delta-encoded vector storage for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vector_char",
+      "brief": "BCP_vec<char> specialization",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vector_double",
+      "brief": "BCP_vec<double> specialization",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vector_general",
+      "brief": "Generic BCP_vec<T> method implementations",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vector_int",
+      "brief": "BCP_vec<int> specialization",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vector_sanity",
+      "brief": "Position vector validation utility",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vector_short",
+      "brief": "BCP_vec<short> specialization",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vg",
+      "brief": "Variable Generator process for BCP Branch-Cut-Price (pricing)",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vg_param",
+      "brief": "Variable Generator parameters for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_vg_user",
+      "brief": "User customization interface for Variable Generator process",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_warmstart",
+      "brief": "LP warm start information for BCP Branch-Cut-Price",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_warmstart_basis",
+      "brief": "BCP warm start basis implementation",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_warmstart_dual",
+      "brief": "Dual-only warm start for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "BCP_warmstart_primaldual",
+      "brief": "Primal-dual warm start for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "CSP",
+      "brief": "Cutting stock problem definitions",
+      "has_algorithm": true
+    },
+    {
+      "name": "CSP_colgen",
+      "brief": "CSP column generation",
+      "has_algorithm": true
+    },
+    {
+      "name": "CSP_init",
+      "brief": "CSP BCP initialization",
+      "has_algorithm": true
+    },
+    {
+      "name": "CSP_lp",
+      "brief": "CSP LP relaxation for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "CSP_lp_param",
+      "brief": "CSP LP parameters",
+      "has_algorithm": true
+    },
+    {
+      "name": "CSP_tm",
+      "brief": "CSP tree manager for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "CSP_tm_param",
+      "brief": "CSP tree manager parameters",
+      "has_algorithm": true
+    },
+    {
+      "name": "CSP_userexits",
+      "brief": "CSP user exit callbacks",
+      "has_algorithm": true
+    },
+    {
+      "name": "CSP_var",
+      "brief": "CSP variable/pattern definitions",
+      "has_algorithm": true
+    },
+    {
+      "name": "KS",
+      "brief": "Knapsack solver for CSP column generation",
+      "has_algorithm": true
+    },
+    {
+      "name": "MC",
+      "brief": "Max-cut problem data structures",
+      "has_algorithm": true
+    },
+    {
+      "name": "MC_cut",
+      "brief": "Max-cut cutting planes",
+      "has_algorithm": true
+    },
+    {
+      "name": "MC_init",
+      "brief": "Max-cut BCP initialization",
+      "has_algorithm": true
+    },
+    {
+      "name": "MC_lp",
+      "brief": "Max-cut LP relaxation for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "MC_lp_param",
+      "brief": "Max-cut LP parameters",
+      "has_algorithm": true
+    },
+    {
+      "name": "MC_solution",
+      "brief": "Max-cut solution representation",
+      "has_algorithm": true
+    },
+    {
+      "name": "MC_tm",
+      "brief": "Max-cut tree manager for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "MC_tm_param",
+      "brief": "Max-cut TM parameters",
+      "has_algorithm": true
+    },
+    {
+      "name": "MKC_init",
+      "brief": "MKC BCP initialization",
+      "has_algorithm": true
+    },
+    {
+      "name": "MKC_knapsack",
+      "brief": "MKC knapsack subproblem for column generation",
+      "has_algorithm": true
+    },
+    {
+      "name": "MKC_lp",
+      "brief": "MKC LP relaxation for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "MKC_lp_param",
+      "brief": "MKC LP parameters",
+      "has_algorithm": true
+    },
+    {
+      "name": "MKC_optim",
+      "brief": "MKC optimization routines",
+      "has_algorithm": true
+    },
+    {
+      "name": "MKC_solution",
+      "brief": "MKC solution representation",
+      "has_algorithm": true
+    },
+    {
+      "name": "MKC_tm",
+      "brief": "MKC tree manager for BCP",
+      "has_algorithm": true
+    },
+    {
+      "name": "MKC_tm_param",
+      "brief": "MKC TM parameters",
+      "has_algorithm": true
+    },
+    {
+      "name": "MKC_var",
+      "brief": "MKC variable/column definitions",
+      "has_algorithm": true
+    },
+    {
+      "name": "MKC_vargen",
+      "brief": "MKC variable generation (pricing)",
+      "has_algorithm": true
+    }
+  ]
+}

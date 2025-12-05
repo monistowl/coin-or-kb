@@ -1,0 +1,9 @@
+{
+  "name": "OsiSymConfig",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "src/OsiSym/OsiSymConfig.hpp",
+  "brief": "SYMPHONY build configuration\n\nBuild configuration macros from autotools/cmake for OsiSym.",
+  "algorithms": [],
+  "methods": []
+}

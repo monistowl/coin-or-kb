@@ -1,0 +1,20 @@
+{
+  "name": "IpZeroMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpZeroMatrix.hpp",
+  "brief": "Matrix with all zero entries (null matrix)\n\nZeroMatrix represents a matrix of zeros with given dimensions.\nNo storage required. Matrix-vector multiply just scales y by beta.",
+  "algorithms": [
+    {
+      "name": "Zero Matrix Operations:\n  Z = 0 \u2208 \u211d^{m\u00d7n} (all elements zero).\n  MultVector: y \u2190 \u03b1\u00b70\u00b7x + \u03b2y = \u03b2y (just scaling).\n  Row/ColNorms: no-op (norms are already zero or don't change).\n  No storage or computation proportional to dimensions.",
+      "math": "Null Space Representation:\n  Z\u00b7v = 0 for all v (annihilator property).\n  rank(Z) = 0, null space = \u211d\u207f.\n  Used as structural placeholder, not computed.",
+      "complexity": "O(1) storage, O(n) for matvec (just scaling output).\n  Null Object pattern: provides interface without real computation.\n\nUsed in Ipopt for:\n- Placeholder in CompoundMatrix for absent blocks\n- Problems with no constraints (zero Jacobian)\n- Structural zeros in KKT system",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpZeroSymMatrix.hpp for symmetric version",
+    "IpCompoundMatrix.hpp where null blocks appear"
+  ]
+}

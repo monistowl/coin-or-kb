@@ -1,0 +1,9 @@
+{
+  "name": "instance",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/instance.hpp",
+  "brief": "HiGHS QP solver component\n\nPart of HiGHS quadratic programming active set solver.",
+  "algorithms": [],
+  "methods": []
+}

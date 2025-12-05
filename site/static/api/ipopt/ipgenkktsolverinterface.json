@@ -1,0 +1,23 @@
+{
+  "name": "IpGenKKTSolverInterface",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/LinearSolvers/IpGenKKTSolverInterface.hpp",
+  "brief": "Generic interface for iterative/matrix-free KKT solvers\n\nGenKKTSolverInterface provides an alternative to\nSparseSymLinearSolverInterface for solvers that work with the\nfull KKT structure rather than requiring explicit sparse matrices.\n\nThe 4x4 block KKT system:\n  [W + D_x + delta_x*I,  0,         J_c^T,  J_d^T ] [sol_x]   [rhs_x]\n  [0,          D_s + delta_s*I,   0,     -I     ] [sol_s] = [rhs_s]\n  [J_c,        0,         D_c - delta_c*I,  0  ] [sol_c]   [rhs_c]\n  [J_d,       -I,         0,    D_d - delta_d*I] [sol_d]   [rhs_d]\n\nInterface differences from SparseSymLinearSolverInterface:\n- Receives Matrix/SymMatrix objects directly (not sparse arrays)\n- Diagonal arrays (D_x, D_s, D_c, D_d) as Number* pointers\n- Better suited for iterative solvers (Krylov, GMRES)\n- Can use matrix-vector products without explicit assembly\n\nUsed by GenAugSystemSolver to adapt this interface to AugSystemSolver.",
+  "algorithms": [
+    {
+      "name": "Generic KKT System Solver Interface:\nDefines matrix-free/iterative solver interface for the primal-dual KKT system.\nUnlike sparse direct solvers, implementations can use:\n- Krylov subspace methods (CG, MINRES, GMRES)\n- Matrix-free products via Jacobian/Hessian callbacks\n- Preconditioners built from block structure",
+      "math": "The regularized symmetric indefinite KKT system:\n$$\\begin{bmatrix} W + D_x + \\delta_x I & 0 & J_c^T & J_d^T \\\\\n                  0 & D_s + \\delta_s I & 0 & -I \\\\\n                  J_c & 0 & D_c - \\delta_c I & 0 \\\\\n                  J_d & -I & 0 & D_d - \\delta_d I \\end{bmatrix}\n\\begin{pmatrix} \\Delta x \\\\ \\Delta s \\\\ \\Delta y_c \\\\ \\Delta y_d \\end{pmatrix}\n= \\begin{pmatrix} r_x \\\\ r_s \\\\ r_c \\\\ r_d \\end{pmatrix}$$\n\nInertia requirement: n_x + n_s positive eigenvalues, n_c + n_d negative.\nRegularization \u03b4_x, \u03b4_s, \u03b4_c, \u03b4_d ensures correct inertia.",
+      "complexity": "Iterative: O(k\u00b7nnz) where k = iterations to convergence.\nTypically k << n for well-preconditioned systems.\nStorage: O(nnz) vs O(n\u00b2) for dense factorizations.",
+      "ref": [
+        "Benzi et al. (2005). \"Numerical solution of saddle point problems\".\n  Acta Numerica 14:1-137. [Comprehensive survey of iterative methods]",
+        "W\u00e4chter & Biegler (2006). Section 4: Linear algebra strategies."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpGenAugSystemSolver.hpp for adapter class",
+    "IpSparseSymLinearSolverInterface.hpp for sparse direct solvers"
+  ]
+}

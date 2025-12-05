@@ -1,0 +1,21 @@
+{
+  "name": "ClpLinearObjective",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpLinearObjective.hpp",
+  "brief": "Standard linear objective function (c'x)",
+  "algorithms": [
+    {
+      "name": "Linear Objective c'x with Gradient Access\nImplements the standard LP objective: minimize c'x. This is a thin wrapper\naround a coefficient vector that implements the ClpObjective interface.\n\nFor quadratic objectives (x'Qx/2 + c'x), see ClpQuadraticObjective.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpObjective for the abstract objective interface",
+    "ClpQuadraticObjective for convex QP objectives",
+    "ClpModel for how objectives are stored in the model"
+  ]
+}

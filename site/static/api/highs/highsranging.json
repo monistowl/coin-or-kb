@@ -1,0 +1,12 @@
+{
+  "name": "HighsRanging",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsRanging.h",
+  "brief": "Sensitivity analysis (ranging) for LP optimal solutions\n\nComputes allowable ranges for objective coefficients and bounds.\n\n**HighsRangingRecord:**\n- value_[]: New coefficient/bound value at range limit\n- objective_[]: Objective value at range limit\n- in_var_[]: Variable entering basis at limit\n- ou_var_[]: Variable leaving basis at limit\n\n**HighsRanging Structure:**\n- col_cost_up/dn: Objective coefficient increase/decrease\n- col_bound_up/dn: Variable bound increase/decrease\n- row_bound_up/dn: Constraint RHS increase/decrease\n\n**Sensitivity Analysis:**\n- For costs: Range where current basis remains optimal\n- For bounds: Range where current basis remains primal feasible\n- Shadow prices from dual variables",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lp_data/HighsLpSolverObject.h for solver state"
+  ]
+}

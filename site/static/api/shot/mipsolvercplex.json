@@ -1,0 +1,12 @@
+{
+  "name": "MIPSolverCplex",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/MIPSolver/MIPSolverCplex.h",
+  "brief": "IBM CPLEX implementation of IMIPSolver interface\n\nProvides MIP solving for SHOT's dual problem using CPLEX Concert API.\n\n**MIPSolverCplex Class:**\n- Implements full IMIPSolver interface\n- Uses IloModel, IloCplex for problem representation\n- Supports LP, MIP, QP, MIQP, QCQP problem types\n\n**Key Data Structures:**\n- cplexModel: IloModel for optimization model\n- cplexInstance: IloCplex solver instance\n- cplexVars: Variable array\n- cplexConstrs: Constraint array\n\n**Quadratic Support:**\n- supportsQuadraticObjective(): Yes\n- supportsQuadraticConstraints(): Yes (QCQP)\n\n**UserTerminationCallbackI:**\n- MIP info callback for user termination\n- Allows early termination on events\n\n@note Requires CPLEX Concert Technology headers",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "MIPSolverCplexSingleTree for lazy constraint callback"
+  ]
+}

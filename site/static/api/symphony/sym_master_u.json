@@ -1,0 +1,13 @@
+{
+  "name": "sym_master_u",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_master_u.h",
+  "brief": "User callbacks for master process\n\nDefines callbacks for customizing problem setup and solution handling.\nReturn USER_DEFAULT to use built-in behavior for standard MIP solving.\n\n**Initialization callbacks:**\n- user_usage(): Print custom command-line help\n- user_initialize(): Allocate user data structure\n- user_free_master(): Clean up user data\n- user_readparams(): Read custom parameters\n- user_io(): Custom problem input\n\n**Problem setup:**\n- user_initialize_root_node(): Define base problem\n  - Set base variables, base cuts, column gen strategy\n  - This is the main hook for problem definition\n- user_start_heurs(): Run initial heuristics for bounds\n- user_init_draw_graph(): Setup visualization\n\n**Solution handling:**\n- user_receive_feasible_solution(): Process new incumbent\n- user_display_solution(): Custom solution output\n- user_send_feas_sol(): Known feasible solution for warm start\n\n**Data distribution (parallel mode):**\n- user_send_lp_data(): Send data to LP workers\n- user_send_cg_data(): Send data to cut generators\n- user_send_cp_data(): Send data to cut pools\n\n**Warm start support:**\n- user_ws_update_cuts(): Update cuts for modified problem\n- user_process_own_messages(): Custom message handling",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_master.h for master process",
+    "sym_lp_u.h for LP process callbacks"
+  ]
+}

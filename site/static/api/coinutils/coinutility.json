@@ -1,0 +1,14 @@
+{
+  "name": "CoinUtility",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinUtility.hpp",
+  "brief": "Factory functions for CoinPair and CoinTriple\n\nProvides convenience functions for creating CoinPair and CoinTriple objects\nwith automatic template argument deduction, similar to std::make_pair.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinSort.hpp for CoinPair and CoinTriple definitions",
+    "CoinPair, CoinMakeTriple()",
+    "CoinTriple, CoinMakePair()"
+  ]
+}

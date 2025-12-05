@@ -1,0 +1,20 @@
+{
+  "name": "IpDenseSymMatrix",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/LinAlg/IpDenseSymMatrix.hpp",
+  "brief": "Dense symmetric matrix in BLAS lower-triangular storage\n\nDenseSymMatrix stores only the lower triangle in column-major format,\nfollowing BLAS/LAPACK conventions for symmetric matrices.",
+  "algorithms": [
+    {
+      "name": "Lower-Triangular Symmetric Storage:\n  Only A[i,j] for j \u2264 i stored (lower triangle).\n  Column-major: A[i,j] at position i + j*ldim in array.\n  BLAS routines (DSYMV, DSYRK) access symmetric structure.\n  Half storage: n(n+1)/2 effective elements in n\u00d7n array.",
+      "math": "Quasi-Newton update operations:\n  HighRankUpdate: B \u2190 \u03b1VV^T + \u03b2B (BFGS outer product form).\n  SpecialAddForLMSR1: B \u2190 B + D + L + L^T for SR1 representation.\n  SR1: B\u2096\u208a\u2081 = B\u2096 + (y-Bs)(y-Bs)^T / (y-Bs)^T s (rank-1 update).",
+      "complexity": "O(n\u00b2) storage (half of general n\u00d7n).\n  O(n\u00b2) for matvec via DSYMV. O(n\u00b2k) for rank-k update via DSYRK.\n\nUsed in Ipopt for:\n- Limited-memory quasi-Newton Hessian approximations (L-BFGS, L-SR1)\n- Dense KKT subsystems in reduced-space methods\n- Eigenvalue computations for inertia",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpDenseGenMatrix.hpp for general (non-symmetric) variant",
+    "IpMultiVectorMatrix.hpp for high-rank update operands"
+  ]
+}

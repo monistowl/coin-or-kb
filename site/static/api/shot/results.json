@@ -1,0 +1,12 @@
+{
+  "name": "Results",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Results.h",
+  "brief": "Solution results storage and optimality gap tracking\n\nCentral repository for primal/dual solutions and algorithm progress.\n\n**Primal Solutions:**\n- primalSolutions: All found feasible points\n- addPrimalSolution(): Submit new incumbent\n- getPrimalBound(): Best objective value\n- primalSolutionSourceStatistics: Track solution origins\n\n**Dual Solutions:**\n- dualSolutions: Lower/upper bounds from MIP\n- getCurrentDualBound(), getGlobalDualBound()\n- setDualBound(): Update relaxation bound\n\n**Optimality Gap:**\n- getAbsoluteGlobalObjectiveGap(): |primal - dual|\n- getRelativeGlobalObjectiveGap(): |gap| / |primal|\n- isRelativeObjectiveGapToleranceMet(): Termination check\n\n**Iteration Tracking:**\n- iterations: Per-iteration state snapshots\n- createIteration(), getCurrentIteration()\n\n**Output Formats:**\n- getResultsOSrL(): XML Optimization Services format\n- getResultsTrace(): GAMS trace format\n- getResultsSol(): AMPL .sol format",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Solver.h for getPrimalSolution(), getResultsOSrL()"
+  ]
+}

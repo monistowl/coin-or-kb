@@ -1,0 +1,13 @@
+{
+  "name": "HighsOptions",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsOptions.h",
+  "brief": "Solver configuration options system\n\n**OptionRecord Hierarchy:**\nBase class with derived types for each option type:\n- OptionRecordBool: Boolean options\n- OptionRecordInt: Integer options with bounds\n- OptionRecordDouble: Double options with bounds\n- OptionRecordString: String options\n\n**HighsOptions Class:**\nContainer holding all solver options:\n- records: Vector of OptionRecord pointers\n- Options by category: solving, tolerances, output, limits, etc.\n\n**Key Option Categories:**\n- Solver selection: solver (\"simplex\", \"ipm\", \"choose\"), run_crossover\n- Tolerances: primal_feasibility_tolerance, dual_feasibility_tolerance\n- Limits: time_limit, iteration_limit, solution_limit\n- Output: output_flag, log_to_console, log_file\n- Presolve: presolve (\"on\", \"off\", \"choose\")\n- Simplex: simplex_strategy, simplex_scale_strategy\n- IPM: ipm_iteration_limit\n- MIP: mip_max_nodes, mip_abs_gap, mip_rel_gap",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Highs.h for setOptionValue/getOptionValue API",
+    "HConst.h for option type enums"
+  ]
+}

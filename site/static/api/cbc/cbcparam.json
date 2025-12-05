@@ -1,0 +1,14 @@
+{
+  "name": "CbcParam",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcParam.hpp",
+  "brief": "Individual parameter definitions for cbc-generic\nCopyright (C) 2007, Lou Hafer, IBM Corporation and others.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcParam: Extends CoinParam with Cbc-specific parameter codes.\nUsed by the standalone cbc-generic solver for command-line processing.\n\nParameter categories (CbcParamCode enum):\n- Help: GENERALQUERY, HELP\n- Action: BAB, IMPORT, EXPORT, PRINTSOL, READMIPSTART\n- File: IMPORTFILE, EXPORTFILE, SOLUTIONFILE, MIPSTARTFILE\n- Cut: GOMORYCUTS, MIRCUTS, PROBINGCUTS, KNAPSACKCUTS, etc.\n- Heuristic: FPUMP, RINS, RENS, DIVINGC, GREEDY, etc.\n- Boolean: CPX, DOHEURISTIC, SOS, USESOLUTION\n- Keyword: STRATEGY, PREPROCESS, NODESTRATEGY, ORBITAL\n- Integer: LOGLEVEL, THREADS, CUTDEPTH, MAXNODES, etc.\n- Double: CUTOFF, ALLOWABLEGAP, TIMELIMIT, INCREMENT, etc.\n\nEach parameter links to:\n- parameters_: Parent CbcParameters collection\n- model_: Associated CbcModel (for model parameters)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinParam for base parameter class",
+    "CbcParameters for parameter collection",
+    "CbcParamUtils for push/pull functions"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "adolcerror",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adolcerror.h",
+  "brief": "Exception class for ADOL-C errors with source location tracking.\n\nThis exception captures the error message and the source location (file,\nline, column) where it was thrown. Integrates with the C++ standard exception\nhierarchy through std::runtime_error.\n\n@example\nThrow example:\n@code\nthrow ADOLCError(\"wrong number of independents\");  // Auto-captures source\nlocation\n@endcode\n\nHandle example:\n@code\ntry {\n  // ADOL-C operations...\n}\ncatch (ADOLCError& e) {\n  std::cerr << e.what() << std::endl;         // Formatted message\n  std::cerr << \"Error occurred at: \"\n            << e.where().file() << \":\"\n            << e.where().func() << \":\"\n            << e.where().line() << std::endl; // Direct source location\naccess\n}\n@endcode",
+  "algorithms": [],
+  "methods": []
+}

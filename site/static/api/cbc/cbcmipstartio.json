@@ -1,0 +1,20 @@
+{
+  "name": "CbcMipStartIO",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcMipStartIO.hpp",
+  "brief": "Read MIP starting solutions from files",
+  "algorithms": [
+    {
+      "name": "MIP Warm-Start Solution I/O\nCbcMipStartIO: Utilities for reading partial or complete MIP solutions.\nWarm-starting B&C with a known solution can dramatically speed up solving.\n\nread(): Parses solution file in format: varname value\n- Returns 0 on success, 1 on failure\n- Fills colValues with (name, value) pairs\n- Reports objective value if available\n\ncomputeCompleteSolution(): Extends partial solution to all variables.\n- extraActions controls how unmentioned integers are set:\n  - 0: Default handling\n  - 1: Set to lower bound\n  - 2: Set to upper bound\n  - 3,5: Without costs as 1,2; with costs to cheapest\n  - 4,6: Without costs as 1,2; with costs to expensive\n\nUse case: Providing initial solutions from heuristics, previous runs,\nor domain knowledge to accelerate MIP solving.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcModel::setBestSolution for using solutions",
+    "CbcHeuristic for algorithmic solution generation"
+  ]
+}

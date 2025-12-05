@@ -1,0 +1,16 @@
+{
+  "name": "MKC_optim",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Mkc/include/MKC_optim.hpp",
+  "brief": "MKC optimization routines",
+  "algorithms": [
+    {
+      "name": "Greedy Knapsack: Fast Packing Heuristic\n\nMKC_greedy_knapsack: Greedy packing algorithm for knapsack\nsubproblems. Sorts items by cost/weight ratio, adds greedily.\n\nUsed for generating initial columns and as heuristic bound\nduring pricing.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

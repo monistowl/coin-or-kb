@@ -1,0 +1,16 @@
+{
+  "name": "BCP_vector_int",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Bcp/src/include/BCP_vector_int.hpp",
+  "brief": "BCP_vec<int> specialization",
+  "algorithms": [
+    {
+      "name": "POD Vector Specialization: int\n\nTemplate specializations for BCP_vec<int> that skip\nconstruct/destroy overhead since int is a POD type.\nSame optimization pattern as BCP_vector_double.hpp.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

@@ -1,0 +1,21 @@
+{
+  "name": "IpRestoPenaltyConvCheck",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpRestoPenaltyConvCheck.hpp",
+  "brief": "Restoration phase convergence for penalty line search\n\nRestoPenaltyConvergenceCheck extends RestoConvergenceCheck for use\nwhen the original algorithm uses penalty function globalization\n(as opposed to filter method).",
+  "algorithms": [
+    {
+      "name": "Penalty-Based Restoration Termination:\n  TestOrigProgress(\u03c6_trial, \u03b8_trial) from restoration iterate:\n  1. Query original penalty acceptor: IsAcceptableToCurrentIterate(\u03b8, \u03c6).\n  2. Check Armijo-like decrease: \u03c6_trial \u2264 \u03c6_ref - \u03b7\u00b7\u0394\u03c6_pred.\n  3. Check infeasibility: \u03b8_trial \u2264 \u03b8_ref (or sufficient reduction).\n  4. If acceptable to original penalty \u2192 exit restoration with CONVERGED.\n  5. Otherwise continue restoration iterations.",
+      "math": "Penalty acceptance from restoration:\n  Merit function: \u03c8(x) = \u03c6(x) + \u03bd\u00b7\u03b8(x) where \u03bd = penalty parameter.\n  Accept if \u03c8_trial \u2264 \u03c8_ref - \u03b7\u00b7\u03b1\u00b7\u2207\u03c8^T\u00b7d (Armijo on merit).\n  Penalty method has no filter history, simpler acceptance test.\n\nPurpose:\nDuring restoration phase, check if current point would be\nacceptable to the original penalty line search acceptor.\n\nTermination:\n- Restoration succeeds when IsAcceptableToCurrentIterate() returns\n  true for the original penalty acceptor\n- This tests if trial_barr and trial_theta would be accepted\n\nSetup requirement:\n- SetOrigLSAcceptor() must be called before Initialize()\n- Links to the PenaltyLSAcceptor from the original algorithm\n\nNote: Uses raw pointer (not SmartPtr) to avoid circular reference\nbetween restoration phase and original algorithm objects.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpRestoConvCheck.hpp for base restoration convergence",
+    "IpRestoFilterConvCheck.hpp for filter-based restoration",
+    "IpPenaltyLSAcceptor.hpp for penalty line search"
+  ]
+}

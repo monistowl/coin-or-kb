@@ -1,0 +1,9 @@
+{
+  "name": "pri_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/pri_op.hpp",
+  "brief": "Internal implementation: pri_op",
+  "algorithms": [],
+  "methods": []
+}

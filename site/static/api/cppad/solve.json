@@ -1,0 +1,9 @@
+{
+  "name": "solve",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/ipopt/solve.hpp",
+  "brief": "Ipopt interface: solve",
+  "algorithms": [],
+  "methods": []
+}

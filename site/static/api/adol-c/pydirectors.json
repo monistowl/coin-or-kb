@@ -1,0 +1,9 @@
+{
+  "name": "pydirectors",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/swig/pydirectors.hpp",
+  "brief": "Python director classes for external differentiated functions",
+  "algorithms": [],
+  "methods": []
+}

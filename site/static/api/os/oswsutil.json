@@ -1,0 +1,9 @@
+{
+  "name": "OSWSUtil",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSAgent/OSWSUtil.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

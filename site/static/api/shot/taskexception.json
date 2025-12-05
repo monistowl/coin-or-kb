@@ -1,0 +1,13 @@
+{
+  "name": "TaskException",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskException.h",
+  "brief": "Exception types for task framework errors\n\nSpecialized exceptions for task-related failures.\n\n**Exception Classes:**\n- TaskException: General task error\n- TaskExceptionFunctionNotDefined: Missing run() implementation\n- TaskExceptionNotFound: Invalid task ID in goto/jump\n\n**Usage:**\n- Thrown by TaskHandler and individual tasks\n- Caught and handled in main solve loop",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskHandler.h for exception handling",
+    "TaskGoto.h for task lookups"
+  ]
+}

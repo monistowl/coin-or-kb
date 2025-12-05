@@ -1,0 +1,9 @@
+{
+  "name": "SepaSetup",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "experimental/Separable/SepaSetup.hpp",
+  "brief": "Separable MINLP setup\n\nConfiguration for separable MINLP solver variant.\nSpecialized setup exploiting separability in objective/constraints.",
+  "algorithms": [],
+  "methods": []
+}

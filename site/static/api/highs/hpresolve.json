@@ -1,0 +1,23 @@
+{
+  "name": "HPresolve",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/presolve/HPresolve.h",
+  "brief": "LP/MIP presolve engine\n\n**HPresolve Class:**\nReduces problem size and tightens bounds before solving.\n\n**Matrix Storage:**\nTriplet format with linked list (column) and splay tree (row) for fast access:\n- Avalue[], Arow[], Acol[]: Non-zero storage\n- colhead[], Anext[], Aprev[]: Column-wise linked list\n- rowroot[], ARleft[], ARright[]: Row-wise splay tree\n- rowsize[], colsize[]: Current row/column lengths\n\n**Bound Tracking:**\n- implColLower[]/implColUpper[]: Implied variable bounds\n- rowDualLower[]/rowDualUpper[]: Dual bounds\n- impliedRowBounds, impliedDualRowBounds: Row activity bounds\n\n**Presolve Techniques (Result enum):**\n- singletonRow()/singletonCol(): Remove singleton rows/columns\n- emptyCol(): Remove columns with no constraints\n- doubletonEq(): Eliminate doubleton equalities\n- dominatedColumns(): Remove dominated variables\n- aggregator(): Aggregate rows/columns\n- runProbing(): Probing for integer variables\n- sparsify(): Reduce matrix density\n- detectParallelRowsAndCols(): Remove parallel constraints/variables",
+  "algorithms": [
+    {
+      "name": "Sparsification (sparsify):\n  Combine rows to create zeros in dense columns:\n  For equation row i with coefficient a_ij in column j:\n  - For each row k with coefficient a_kj:\n    - Add scaled row i to row k: row_k += (\u2212a_kj/a_ij) * row_i\n    - If fill-in acceptable, apply permanently",
+      "math": "Compute implied lower bound on x_k:\n    x_k >= (L - sum_{j\u2260k}(a_j * u_j if a_j>0 else a_j * l_j)) / a_k\n  If tighter than current l_k, update and propagate.\n  Dual analog: implied dual bounds from reduced cost constraints.",
+      "complexity": "Matrix access: O(1) amortized via splay trees (row) and linked lists (col)\n  Singleton elimination: O(nnz) per pass\n  Probing: O(#binaries * propagation_depth)\n  Full presolve: typically O(nnz * #passes), bounded by reductionLimit",
+      "ref": [
+        "Savelsbergh, M.W.P. (1994). \"Preprocessing and probing techniques\n       for mixed integer programming problems\". ORSA J. Computing 6(4).",
+        "Achterberg, T. et al. (2020). \"Presolve reductions in mixed\n       integer programming\". INFORMS J. Computing 32(2)."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "presolve/HighsPostsolveStack.h for solution recovery",
+    "presolve/HPresolveAnalysis.h for presolve statistics"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "azmul",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/azmul.hpp",
+  "brief": "Core AD functionality: azmul",
+  "algorithms": [],
+  "methods": []
+}

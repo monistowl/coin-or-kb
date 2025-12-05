@@ -1,0 +1,20 @@
+{
+  "name": "TaskSelectPrimalCandidatesFromRootsearch",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskSelectPrimalCandidatesFromRootsearch.h",
+  "brief": "Extract primal candidates from ESH rootsearch\n\nByproduct of boundary finding: feasible points near boundary.\n\n**TaskSelectPrimalCandidatesFromRootsearch Class:**\n- run(): Check rootsearch intermediate points\n- run(solPoints): Process specific solution points\n\n**Rootsearch Byproduct:**\n- ESH rootsearch traverses from infeasible to interior\n- Intermediate points may be feasible primal candidates\n- Cheap way to discover feasible solutions",
+  "algorithms": [
+    {
+      "name": "Primal Extraction from ESH Rootsearch",
+      "math": "During rootsearch from interior x\u00b0 to infeasible x\u0302:\n      Check intermediate points x(\u03bb) = \u03bbx\u00b0 + (1-\u03bb)x\u0302.\n      Points with g(x(\u03bb)) \u2264 0 and integer feasibility \u2192 primal candidates.",
+      "complexity": "O(rootsearch iterations). No additional NLP solves required.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "RootsearchMethod/ for boundary finding",
+    "TaskSelectHyperplanePointsESH.h for ESH main task"
+  ]
+}

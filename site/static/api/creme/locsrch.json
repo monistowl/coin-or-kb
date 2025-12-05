@@ -1,0 +1,13 @@
+{
+  "name": "locsrch",
+  "library": "Creme",
+  "layer": "layer-4",
+  "header": "Creme/src/Base/locsrch.h",
+  "brief": "Local search algorithm for Creme LP solver\n\nImplements locsrch() with dvar (delta variable) and frontier structures.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "rtr.h for randomized rounding alternative",
+    "sparse.h for LP data structure"
+  ]
+}

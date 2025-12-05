@@ -1,0 +1,9 @@
+{
+  "name": "OSReferenced",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSUtils/OSReferenced.hpp",
+  "brief": "OS reference counting base class\n\nReference-counted base class for OS objects.\nEnables automatic memory management via smart pointers.",
+  "algorithms": [],
+  "methods": []
+}

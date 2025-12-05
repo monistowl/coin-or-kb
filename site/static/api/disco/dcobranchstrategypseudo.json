@@ -1,0 +1,23 @@
+{
+  "name": "DcoBranchStrategyPseudo",
+  "library": "DisCO",
+  "layer": "layer-3",
+  "header": "src/DcoBranchStrategyPseudo.hpp",
+  "brief": "Pseudocost branching variable selection",
+  "algorithms": [
+    {
+      "name": "Pseudocost Branching",
+      "math": "Pseudocost \u03c6_j estimates objective gain per unit fractionality:\n      \u03c6_j^- = avg(\u0394_j^- / f_j^-), \u03c6_j^+ = avg(\u0394_j^+ / f_j^+)\n      where f_j^- = x_j - \u230ax_j\u230b, f_j^+ = \u2308x_j\u2309 - x_j\n      Weighted score: s = (1-\u03bc)\u00b7min(\u03c6^-, \u03c6^+) + \u03bc\u00b7max(\u03c6^-, \u03c6^+), \u03bc=1/6\n      Select j* = argmax_j s(\u03c6_j^-, \u03c6_j^+)\n\nPseudocost branching uses historical data about variable branching\nperformance to estimate which variable will improve bounds most.\n\n**Pseudocost Definitions (from Achterberg):**\n- f_j^+ = ceil(x_j) - x_j (fractional up)\n- f_j^- = x_j - floor(x_j) (fractional down)\n- phi_j^- = avg(Delta_j^- / f_j^-) over all down branches on j\n- phi_j^+ = avg(Delta_j^+ / f_j^+) over all up branches on j\n\n**Scoring Formula:**\nscore = (1-u)*min(phi^-, phi^+) + u*max(phi^-, phi^+)\nwhere u = 1/6 (score_factor_)\n\n**Statistics Tracked:**\n- down_num_/up_num_: Observation counts per variable\n- down_derivative_/up_derivative_: phi values",
+      "complexity": "O(n) per node; O(n) storage for statistics",
+      "ref": [
+        "Achterberg, T. (2007). \"Constraint Integer Programming\".\n     PhD thesis, TU Berlin. Section 7.2."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "DcoBranchStrategyStrong.hpp for initial pseudocost estimation",
+    "DcoBranchStrategyRel.hpp for reliability branching (hybrid)",
+    "DcoParams.hpp::pseudoWeight for score factor"
+  ]
+}

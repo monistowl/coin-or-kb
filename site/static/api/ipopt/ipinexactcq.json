@@ -1,0 +1,20 @@
+{
+  "name": "IpInexactCq",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/Inexact/IpInexactCq.hpp",
+  "brief": "Cached quantities for inexact Newton / Chen-Goldfarb penalty method\n\nInexactCq provides precomputed and cached quantities specific to the\ninexact Newton algorithm, extending IpoptCalculatedQuantities.",
+  "algorithms": [
+    {
+      "name": "Cached Inexact Newton Quantities:\n  Each quantity computed on-demand and cached:\n  - curr_jac_cdT_times_curr_cdminuss(): J^T\u00b7c for gradient of infeasibility.\n  - curr_scaling_slacks(): Slack-based scaling factors for conditioning.\n  - curr_slack_scaled_d_minus_s(): Scaled inequality residuals.\n  - curr_scaled_Ac_norm(): ||J\u00b7c||\u2082 scaled for termination tests.\n  - curr_Wu_x/s(): W\u00b7u products for tangential step Hessian terms.\n  - curr_jac_times_normal_c/d(): J\u00b7\u0394x_n for normal step quality.\n  Caching via CachedResults with dependency-based invalidation.",
+      "math": "Key quantities:\n  Infeasibility gradient: \u2207\u03b8 = J_c^T\u00b7c + J_d^T\u00b7(d-s) (gradient of ||c||\u00b2).\n  Slack scaling: \u03c3\u1d62 = min(slack_scale_max, s\u1d62) improves conditioning.\n  Scaled residuals: s\u207b\u00b9\u00b7(d-s) for slack-scaled linear systems.\n  W\u00b7u: Hessian-tangential product for curvature along step.",
+      "complexity": "O(nnz) for each Jacobian-vector product.\n  Caching amortizes cost when same quantity needed multiple times.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpInexactData.hpp for storage of normal/tangential steps",
+    "IpIpoptCalculatedQuantities.hpp for base cached quantities"
+  ]
+}

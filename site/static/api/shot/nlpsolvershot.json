@@ -1,0 +1,9 @@
+{
+  "name": "NLPSolverSHOT",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/NLPSolver/NLPSolverSHOT.h",
+  "brief": "SHOT as NLP solver for convex subproblems\n\nRecursive use of SHOT to solve fixed-integer NLP.\n\n**NLPSolverSHOT Class:**\n- Creates nested SHOT solver instance\n- Solves convex NLP after fixing integer variables\n- Useful when Ipopt is unavailable\n\n**Fixed-Integer NLP:**\n- fixVariables(): Fix discrete variables to integer values\n- solveProblemInstance(): Solve continuous subproblem\n- getSolution(): Return primal solution\n\n**Nested Architecture:**\n- Outer SHOT: Full MINLP (uses this as primal solver)\n- Inner SHOT: Convex NLP (fixed integers)\n\n@note Self-referential design for solver-agnostic NLP solving",
+  "algorithms": [],
+  "methods": []
+}

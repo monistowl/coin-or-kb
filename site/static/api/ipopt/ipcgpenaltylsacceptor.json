@@ -1,0 +1,23 @@
+{
+  "name": "IpCGPenaltyLSAcceptor",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/contrib/CGPenalty/IpCGPenaltyLSAcceptor.hpp",
+  "brief": "Chen-Goldfarb penalty function line search acceptor",
+  "algorithms": [
+    {
+      "name": "Chen-Goldfarb Penalty Line Search\n\nCGPenaltyLSAcceptor implements the backtracking line search acceptor\nbased on the Chen-Goldfarb penalty function approach, providing an\nalternative to the standard filter method.\n\n**Merit Function:**",
+      "math": "\u03c6_\u03c1(x) = f(x) + \u03c1 \u00b7 \u2016c(x)\u2016\u2081\n\n**Acceptance criteria:**\n1. Armijo condition: \u03c6_\u03c1(x + \u03b1d) \u2264 \u03c6_\u03c1(x) + \u03b7\u00b7\u03b1\u00b7\u2207\u03c6_\u03c1(x)'d\n2. Piecewise linear penalty function (PLPF) acceptability\n\n**PLPF Non-monotone Acceptance:**\nMaintains envelope of (\u03c1, f, \u2016c\u2016) triples defining acceptable region.\nAllows steps rejected by Armijo if they make progress toward feasibility,\navoiding the Maratos effect while ensuring global convergence.",
+      "complexity": "O(1) per acceptance check; O(k) PLPF update where k = breakpoints",
+      "ref": [
+        "Chen & Goldfarb, \"Interior-point l2-penalty methods for nonlinear\n     programming with strong global convergence properties\", Math. Prog., 2006"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpPiecewisePenalty.hpp for the PLPF data structure",
+    "IpCGSearchDirCalc.hpp for direction computation",
+    "IpBacktrackingLSAcceptor.hpp for base interface"
+  ]
+}

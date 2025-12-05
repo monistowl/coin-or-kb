@@ -1,0 +1,12 @@
+{
+  "name": "routing_structures",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/include/cuopt/routing/routing_structures.hpp",
+  "brief": "Core data structures for VRP problem specification\n\nEnums and helper classes for VRP constraint modeling.\n\n**Objective Types (objective_t):**\n- COST: Total route cost from cost matrix\n- TRAVEL_TIME: Total driving time (excluding waits)\n- VARIANCE_ROUTE_SIZE: Balance route lengths\n- VARIANCE_ROUTE_SERVICE_TIME: Balance service times\n- PRIZE: Sum of collected order prizes\n- VEHICLE_FIXED_COST: Per-vehicle usage cost\n\n**Node Types (node_type_t):**\n- DEPOT: Start/end location for vehicles\n- PICKUP: Pickup location for PDP\n- DELIVERY: Delivery location for PDP\n- BREAK: Driver break location\n\n**Internal Detail Classes:**\n- break_dimension_t: Uniform break constraints\n- vehicle_break_t: Per-vehicle break constraints\n- capacity_t: Capacity dimension (demand/capacity pair)\n- order_time_window_t: Time window bounds\n- vehicle_time_window_t: Vehicle availability bounds",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cuopt/routing/data_model_view.hpp for using these structures"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "fleet_order_constraints",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/routing/fleet_order_constraints.hpp",
+  "brief": "cuOpt VRP vehicle/fleet model\n\nVehicle capacity, time windows, and fleet constraints.",
+  "algorithms": [],
+  "methods": []
+}

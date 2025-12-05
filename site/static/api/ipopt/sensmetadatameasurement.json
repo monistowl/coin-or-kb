@@ -1,0 +1,9 @@
+{
+  "name": "SensMetadataMeasurement",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/sIPOPT/src/SensMetadataMeasurement.hpp",
+  "brief": "sIPOPT metadata-based measurement\n\nSensMetadataMeasurement: reads parameter perturbations from NLP metadata.\nExtracts sensitivity parameters from AMPL suffixes or TNLP metadata.\nEnables automatic parameter identification from problem definition.",
+  "algorithms": [],
+  "methods": []
+}

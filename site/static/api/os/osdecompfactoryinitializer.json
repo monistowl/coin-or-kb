@@ -1,0 +1,9 @@
+{
+  "name": "OSDecompFactoryInitializer",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/applications/columnGen/code/OSDecompFactoryInitializer.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

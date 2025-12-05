@@ -1,0 +1,9 @@
+{
+  "name": "compress",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/compress.hpp",
+  "brief": "Value graph: compress",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,91 @@
+{
+  "library": "qpOASES",
+  "layer": "layer-1",
+  "classes": [
+    {
+      "name": "Bounds",
+      "brief": "",
+      "has_algorithm": true
+    },
+    {
+      "name": "ConstraintProduct",
+      "brief": "User-defined constraint evaluation interface for structured matrices",
+      "has_algorithm": true
+    },
+    {
+      "name": "Constraints",
+      "brief": "Working set management for general constraints in active-set QP",
+      "has_algorithm": true
+    },
+    {
+      "name": "Flipper",
+      "brief": "",
+      "has_algorithm": true
+    },
+    {
+      "name": "Indexlist",
+      "brief": "Sorted index lists for efficient working set operations",
+      "has_algorithm": true
+    },
+    {
+      "name": "LapackBlasReplacement",
+      "brief": "LAPACK/BLAS interface declarations for qpOASES linear algebra",
+      "has_algorithm": true
+    },
+    {
+      "name": "Matrices",
+      "brief": "Matrix classes for QP data with working-set-aware operations",
+      "has_algorithm": true
+    },
+    {
+      "name": "OQPinterface",
+      "brief": "Online QP Benchmark Collection interface",
+      "has_algorithm": true
+    },
+    {
+      "name": "Options",
+      "brief": "Configuration options for qpOASES QP solver\n\nThe Options class controls solver behavior including:\n- Termination criteria (tolerances, iteration limits)\n- Numerical parameters (regularization, pivoting)\n- Output/printing verbosity\n- Initial homotopy and scaling options\n\nPreset configurations:\n- setToDefault(): Balanced defaults\n- setToReliable(): Maximum robustness\n- setToMPC(): Fast for model predictive control\n- setToFast(): Maximum speed, less robust",
+      "has_algorithm": false
+    },
+    {
+      "name": "QProblem",
+      "brief": "QP solver with general linear constraints\n\nSolves convex QPs with bounds and linear constraints:",
+      "has_algorithm": true
+    },
+    {
+      "name": "QProblemB",
+      "brief": "Box-constrained QP solver (bounds only, no linear constraints)\n\nSolves QPs with only variable bounds (no constraint matrix A):",
+      "has_algorithm": true
+    },
+    {
+      "name": "SQProblem",
+      "brief": "Sequential QP solver with varying Hessian and constraint matrices\n\nSQProblem extends QProblem to handle QPs where the Hessian H and\nconstraint matrix A change between solves. This is common in:\n- Nonlinear MPC (linearization changes each step)\n- Sequential Quadratic Programming (SQP) for NLP\n- Moving horizon estimation",
+      "has_algorithm": true
+    },
+    {
+      "name": "SQProblemSchur",
+      "brief": "Sparse QP solver using Schur complement for active-set updates",
+      "has_algorithm": true
+    },
+    {
+      "name": "SolutionAnalysis",
+      "brief": "Post-optimality analysis: KKT verification and sensitivity",
+      "has_algorithm": true
+    },
+    {
+      "name": "SparseSolver",
+      "brief": "Sparse linear solver interfaces for Schur-complement QP method",
+      "has_algorithm": true
+    },
+    {
+      "name": "SubjectTo",
+      "brief": "Base class for working set management in active-set QP",
+      "has_algorithm": true
+    },
+    {
+      "name": "qpOASES",
+      "brief": "Main include file for qpOASES quadratic programming solver\n\nqpOASES solves convex quadratic programs (QPs) of the form:",
+      "has_algorithm": true
+    }
+  ]
+}

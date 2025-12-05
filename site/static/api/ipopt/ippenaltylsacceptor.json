@@ -1,0 +1,22 @@
+{
+  "name": "IpPenaltyLSAcceptor",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpPenaltyLSAcceptor.hpp",
+  "brief": "Penalty function line search using Waltz-Morales-Nocedal-Orban method\n\nPenaltyLSAcceptor implements exact penalty function globalization\nas an alternative to filter line search. Based on the paper by\nWaltz, Morales, Nocedal, and Orban.\n\nMerit function: phi_nu(x) = f(x) + nu * ||c(x)||_1\n\nAcceptance criterion:\n  phi_nu(x + alpha*d) <= phi_nu(x) + eta * alpha * pred\nwhere pred is the predicted reduction.\n\nPenalty parameter nu:\n- Automatically updated to ensure descent direction\n- Increased by nu_inc_ when direction is not descent\n- nu_init_ provides starting value\n\nKey parameters:\n- nu_init_, nu_inc_: Penalty parameter initialization/increment\n- eta_: Sufficient decrease parameter (Armijo)\n- rho_: Parameter for predicted reduction calculation\n- max_soc_: Maximum second order correction steps",
+  "algorithms": [
+    {
+      "name": "Exact Penalty Line Search (Waltz-Morales-Nocedal-Orban):\nGlobalization using \u2113\u2081 exact penalty merit function:\n1. Compute merit: \u03c6_\u03bd(x) = f(x) + \u03bd\u00b7||c(x)||\u2081\n2. Compute predicted reduction: pred = -\u2207f\u00b7d - \u03bd\u00b7(||c+J\u00b7d||\u2081 - ||c||\u2081)\n3. Update penalty \u03bd if d is not descent for current \u03bd:\n   \u03bd \u2190 max(\u03bd, (\u2207f\u00b7d + \u03c1\u00b7d\u1d40Wd) / ((1-\u03c1)\u00b7(||c||\u2081 - ||c+Jd||\u2081)))\n4. Armijo backtracking: accept \u03b1 if \u03c6_\u03bd(x+\u03b1d) \u2264 \u03c6_\u03bd(x) + \u03b7\u00b7\u03b1\u00b7pred\n5. Optional: Second order correction for constraint violation",
+      "math": "Exact penalty merit function:\n  \u03c6_\u03bd(x) = f(x) + \u03bd\u00b7||c(x)||\u2081\n\nDescent condition for direction d:\n  D_d \u03c6_\u03bd(x) = \u2207f(x)\u1d40d - \u03bd\u00b7||c(x)||\u2081 < 0\n(if ||c|| > 0 and d reduces linearized constraints)\n\nPenalty update ensures descent:\n  \u03bd \u2265 ||\u2207L(x)||\u221e / (1 - \u03b5) for some \u03b5 > 0",
+      "complexity": "O(n + m) per function evaluation. Backtracking may require\nmultiple evaluations. Second order correction adds one linear solve.",
+      "ref": [
+        "Waltz, Morales, Nocedal, Orban (2006). \"An interior algorithm for\n  nonlinear optimization that combines line search and trust region steps\".\n  Mathematical Programming 107(3):391-408."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpFilterLSAcceptor.hpp for filter-based alternative",
+    "IpBacktrackingLSAcceptor.hpp for base interface"
+  ]
+}

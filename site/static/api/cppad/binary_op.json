@@ -1,0 +1,9 @@
+{
+  "name": "binary_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/val_graph/binary_op.hpp",
+  "brief": "Value graph: binary_op",
+  "algorithms": [],
+  "methods": []
+}

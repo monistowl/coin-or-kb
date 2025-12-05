@@ -1,0 +1,14 @@
+{
+  "name": "BlisBranchStrategyPseudo",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisBranchStrategyPseudo.h",
+  "brief": "Pseudo-cost branching strategy based on historical LP degradation\n\nPseudo-cost branching uses learned estimates of objective degradation\nto select branching variables without solving child LPs.\n\n**Pseudo-cost definition:**\nFor variable x\u2c7c with fractional value f\u2c7c = x\u2c7c* - floor(x\u2c7c*):\n- \u03c8\u2c7c\u207b = average (\u0394Obj / f\u2c7c) over down branches\n- \u03c8\u2c7c\u207a = average (\u0394Obj / (1-f\u2c7c)) over up branches\n\n**Algorithm:**\n1. For each fractional integer variable x\u2c7c with value x\u2c7c*:\n   - Estimate down degradation: \u0394\u207b = \u03c8\u2c7c\u207b \u00b7 f\u2c7c\n   - Estimate up degradation: \u0394\u207a = \u03c8\u2c7c\u207a \u00b7 (1-f\u2c7c)\n   - Score = \u03bc\u00b7min(\u0394\u207b, \u0394\u207a) + (1-\u03bc)\u00b7max(\u0394\u207b, \u0394\u207a)\n2. Select variable with highest score\n\n**Initialization:**\nBefore enough observations, uses default pseudo-costs or\nfalls back to other criteria (objective coefficient, etc.)\n\n**Complexity:** O(n) where n = number of integer variables\nMuch faster than strong branching but less accurate.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisPseudo for pseudo-cost data structure",
+    "BlisBranchStrategyRel for reliability branching (hybrid approach)",
+    "BlisBranchStrategyStrong for strong branching"
+  ]
+}

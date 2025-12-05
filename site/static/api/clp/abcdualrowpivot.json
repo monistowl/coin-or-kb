@@ -1,0 +1,21 @@
+{
+  "name": "AbcDualRowPivot",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcDualRowPivot.hpp",
+  "brief": "Abstract base class for dual pivot row selection in ABC",
+  "algorithms": [
+    {
+      "name": "ABC Optimizations:\n- CoinIndexedVector references (not pointers) for cache locality\n- Weights computed in chunks for vectorization\n- FT update integrated with weight maintenance",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcDualRowDantzig for simple largest-infeasibility selection",
+    "AbcDualRowSteepest for steepest edge variant",
+    "ClpDualRowPivot for the standard (non-ABC) interface"
+  ]
+}

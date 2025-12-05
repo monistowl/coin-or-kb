@@ -1,0 +1,26 @@
+{
+  "name": "HEkkDual",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/HEkkDual.h",
+  "brief": "Dual simplex solver for HiGHS\n\nImplements dual simplex algorithm with CHUZR (row selection), PRICE\n(pivot row computation), CHUZC (column selection), and basis update.\n\n**Parallelization Strategies:**\n- Plain: Serial dual simplex (kSimplexStrategyDualPlain)\n- SIP: Suboptimization with Independent Parallelism (Tasks)\n- PAMI: Parallel Minor Iterations (Multi)\n\n**Key Phases:**\n- Phase 1: Minimize sum of infeasibilities to find feasible basis\n- Phase 2: Optimize objective maintaining dual feasibility\n\n**Edge Weight Modes:**\n- Dantzig: Simple pricing\n- Devex: Approximate steepest edge\n- Steepest Edge: Exact steepest edge with DSE vector updates\n\n**PAMI Data Structures:**\n- MChoice: Multiple row candidates from CHUZR\n- MFinish: Minor iteration data for parallel updates\n- slice_*: Partitioned matrix for parallel PRICE",
+  "algorithms": [
+    {
+      "name": "PAMI - Parallel Minor Iterations (iterateMulti):\n  Exploit parallelism by batching multiple pivots:\n  1. majorChooseRow: Select k candidate leaving rows in parallel\n  2. majorChooseRowBtran: Parallel BTRAN for all k row_ep vectors\n  3. For each minor iteration i = 1..k:\n     a. minorChooseRow: Pick best from remaining candidates\n     b. chooseColumnSlice: Parallel PRICE across matrix slices\n     c. minorUpdate: Update data structures locally\n  4. majorUpdate: Apply all k updates to LU factors at once",
+      "math": "Edge weight \u03b3_i = ||B^{-1} e_i||\u00b2 = ||\u03c4_i||\u00b2\n  After basis change with pivot row r and column s:\n  - Compute \u03c4_s = B^{-1} e_s (FTRAN of unit vector)\n  - Update weights: \u03b3_i' = \u03b3_i - 2(\u03c4_r \u00b7 a_q)\u03b1_i/\u03b1_r + \u03b3_r(\u03b1_i/\u03b1_r)\u00b2\n  Cost: one extra FTRAN per iteration, but ~40% fewer iterations.",
+      "complexity": "Serial iteration: O(nnz) for BTRAN/FTRAN, O(m) for ratio test\n  PAMI: O(k \u00d7 nnz/p + k\u00b2 \u00d7 m) for k pivots on p processors\n  Total iterations: typically O(m) to O(2m) for dual simplex",
+      "ref": [
+        "Maros, I. (2003). \"Computational Techniques of the Simplex Method\".\n       Springer, Chapters 9-10.",
+        "Forrest, J.J. and Goldfarb, D. (1992). \"Steepest-edge simplex\n       algorithms for linear programming\". Math. Programming 57:341-374.",
+        "Harris, P.M.J. (1973). \"Pivot selection methods of the Devex\n       LP code\". Math. Programming Study 4:30-57.",
+        "Hall, J.A.J. and McKinnon, K.I.M. (2005). \"Hyper-sparsity in the\n       revised simplex method and how to exploit it\". CMS 2(1):21-40."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "simplex/HEkk.h for main simplex class",
+    "simplex/HEkkDualRow.h for pivot row handling",
+    "simplex/HEkkDualRHS.h for RHS management"
+  ]
+}

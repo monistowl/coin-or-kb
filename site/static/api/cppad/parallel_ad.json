@@ -1,0 +1,9 @@
+{
+  "name": "parallel_ad",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/parallel_ad.hpp",
+  "brief": "Core AD functionality: parallel ad",
+  "algorithms": [],
+  "methods": []
+}

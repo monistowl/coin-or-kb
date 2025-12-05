@@ -1,0 +1,25 @@
+{
+  "name": "ClpPrimalColumnPivot",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpPrimalColumnPivot.hpp",
+  "brief": "Abstract base class for primal simplex pivot column selection\n\nIn primal simplex, the pivot column (entering variable) is chosen based on\nreduced cost. This class defines the interface for different selection\nstrategies. Derived classes implement specific rules.\n\nKey methods:\n- pivotColumn(): Select which column (variable) enters the basis\n- updateWeights(): Maintain pricing information after pivots\n- saveWeights(): Preserve weights across refactorizations",
+  "algorithms": [
+    {
+      "name": "Primal Simplex Pivot Column Selection (Strategy Pattern):\nChooses which nonbasic variable enters the basis in primal simplex iteration.\nThe entering variable has a favorable reduced cost for improving the objective.\nCommon strategies:\n- Dantzig: Choose most negative reduced cost (simple, fast per iteration)\n- Steepest edge: Normalize by ||B^{-1}A_j|| (fewer iterations overall)\n- Devex: Approximate steepest edge with less overhead\n- Partial pricing: Only scan subset of columns (for large problems)",
+      "math": "In primal simplex, we maintain primal feasibility and iterate toward\ndual feasibility. Reduced cost d_j = c_j - c_B^T B^{-1} A_j.\n- Dantzig: Select j with min{d_j | d_j < 0}\n- Steepest: Select j with min{d_j / ||B^{-1}A_j||} among d_j < 0\nThe ||B^{-1}A_j|| norms are maintained incrementally across iterations.",
+      "complexity": "Dantzig: O(n) scan of nonbasic variables per iteration.\nSteepest edge: O(n) scan + O(m*nnz) weight updates per iteration.\nSteepest edge typically reduces total iteration count by 2-3x,\noutweighing higher per-iteration cost for most problems.",
+      "ref": [
+        "Dantzig, G.B. (1963). \"Linear Programming and Extensions\".\n  Princeton University Press. [Original Dantzig rule]",
+        "Goldfarb, D. & Reid, J.K. (1977). \"A practicable steepest-edge simplex\n  algorithm\". Mathematical Programming 12:361-371."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpPrimalColumnDantzig for simple most-negative reduced cost",
+    "ClpPrimalColumnSteepest for steepest edge pricing (recommended)",
+    "ClpSimplexPrimal for the primal simplex algorithm",
+    "ClpDualRowPivot for the dual simplex equivalent"
+  ]
+}

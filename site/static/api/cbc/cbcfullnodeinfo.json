@@ -1,0 +1,21 @@
+{
+  "name": "CbcFullNodeInfo",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcFullNodeInfo.hpp",
+  "brief": "Complete subproblem state storage (typically for root node)",
+  "algorithms": [
+    {
+      "name": "Full State Storage for Root Node\nCopyright (C) 2002, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcFullNodeInfo stores complete information to recreate a subproblem:\n- Full warm start basis\n- Complete variable bounds\n- All active cutting planes\n\nUsed at root node or when incremental storage isn't beneficial.\nChild nodes typically use CbcPartialNodeInfo to save memory.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcNodeInfo for base class",
+    "CbcPartialNodeInfo for incremental storage",
+    "CbcNode for live node information\n\nEdwin 11/24/09 carved from CbcNode"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "BonOACutGenerator2",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/OaGenerators/BonOACutGenerator2.hpp",
+  "brief": "Classical Outer Approximation cut generator for MINLP\n\nImplements the standard OA algorithm of Duran & Grossmann (1986) for convex\nMINLP. Generates linearization cuts by Taylor expansion of nonlinear\nconstraints at NLP solutions.",
+  "algorithms": [
+    {
+      "name": "Outer Approximation (Duran-Grossmann):\nDecomposition method for convex MINLP via MILP master + NLP subproblems:\n1. Solve NLP relaxation: y\u2070 = argmin{f(x): g(x) \u2264 0, x \u2208 X}\n2. Generate OA cuts for each constraint i:\n   g\u1d62(y\u2070) + \u2207g\u1d62(y\u2070)\u1d40(x - y\u2070) \u2264 0  (linearization)\n3. Solve MILP master: min{c\u1d40x : OA cuts, x_I \u2208 Z}\n4. Fix integers at x*: solve NLP(x*_I) \u2192 new point y*\n5. Add OA cuts at y*, update upper/lower bounds\n6. Terminate when UB - LB < \u03b5 or iteration limit",
+      "math": "OA cut derivation (convex g):\nFor convex g\u1d62: g\u1d62(x) \u2265 g\u1d62(y) + \u2207g\u1d62(y)\u1d40(x-y)  (first-order condition)\nCut: \u2207g\u1d62(y)\u1d40x \u2264 \u2207g\u1d62(y)\u1d40y - g\u1d62(y)  (valid for feasible region)",
+      "complexity": "O(k\u00b7(MILP + NLP)) where k = iterations.\nFinite convergence for convex MINLP. Typically k = O(2^|I|) worst case,\nbut often polynomial in practice for well-structured problems.",
+      "ref": [
+        "Duran, Grossmann (1986). \"An outer-approximation algorithm for a class\n  of mixed-integer nonlinear programs\". Mathematical Programming 36:307-339."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "OaDecompositionBase for the base class",
+    "SubMipSolver for MILP subproblem solving"
+  ]
+}

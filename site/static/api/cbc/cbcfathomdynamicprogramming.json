@@ -1,0 +1,20 @@
+{
+  "name": "CbcFathomDynamicProgramming",
+  "library": "Cbc",
+  "layer": "layer-2",
+  "header": "src/CbcFathomDynamicProgramming.hpp",
+  "brief": "Dynamic programming fathoming for special problem structures\nCopyright (C) 2004, IBM Corporation and others. All Rights Reserved.\nThis code is licensed under the terms of the Eclipse Public License (EPL).\n\nCbcFathomDynamicProgramming: Exact enumeration via DP for small subproblems.\nAfter branching reduces the problem sufficiently, DP may be faster than B&C.\n\nRequirements for DP applicability:\n- Small integral RHS values\n- All-integer problem with positive integral coefficients\n- Currently: set partitioning (not general covering)",
+  "algorithms": [
+    {
+      "name": "Dynamic Programming Fathoming:\n  fathom() for set partitioning with small integral data:\n  1. Encode constraint satisfaction as bit pattern (state).\n  2. For each column j: tryColumn() updates reachable states.\n  3. cost_[state] = minimum cost to reach state.\n  4. back_[state] = column that achieved minimum.\n  5. Return solution achieving cost_[target_].\n  Exact enumeration when state space tractable.",
+      "math": "State space size:\n  Each constraint with RHS=1 contributes 1 bit \u2192 2\u00d7 states.\n  RHS=b contributes \u2308log\u2082(b+1)\u2309 bits \u2192 (b+1)\u00d7 states.\n  Total: \u03a0(RHS_i + 1) states, bounded by maximumSizeAllowed_.\n  Type 0 (all RHS=1): 2^m states for m constraints.\n\nState space considerations:\n- Each RHS=1 doubles state space\n- RHS=2,3 quadruples; RHS=4-7 multiplies by 8\n- maximumSizeAllowed_ controls maximum tractable size\n\nAlgorithm types:\n- Type 0: All coefficients and RHS are 1\n- Type 1: General case with coefficients > 1 or RHS > 1\n\nUses bit patterns to encode constraint satisfaction states.\nFinds optimal solution by enumeration over all feasible states.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcFathom for base class",
+    "CbcModel::fathom for integration point"
+  ]
+}

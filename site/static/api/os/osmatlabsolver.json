@@ -1,0 +1,9 @@
+{
+  "name": "OSMatlabSolver",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSSolverInterfaces/OSMatlabSolver.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

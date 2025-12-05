@@ -1,0 +1,12 @@
+{
+  "name": "CouenneSparseBndVec",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/bound_tightening/CouenneSparseBndVec.hpp",
+  "brief": "Sparse vector with O(1) initialization for bound tracking\n\nEfficient sparse+dense hybrid data structure for tracking which\nvariables had bounds tightened. Avoids O(n) initialization cost.\n\n**Data structure (Briggs-Torczon):**\n- dInd_[0..n_-1]: Dense list of assigned indices\n- sInd_[i]: Position of index i in dense list (garbage if unset)\n- data_[i]: Value at index i (garbage if unset)\n\n**Key operations:**\n- operator[](i): O(1) access, auto-initializes new entries\n- reset(): O(1) clear (just set n_ = 0)\n- nElements(): Number of assigned entries\n- indices()/data(): Access for iteration\n\n**Why useful in FBBT:**\nIn bound tightening, typically k << n variables have bounds\ntightened. This structure allows O(k) iteration over tightened\nbounds without O(n) initialization/cleanup overhead.\n\n**Note:**\nValgrind will complain about uninitialized reads - this is expected\ndue to the lazy initialization design.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneFixPoint which uses this for bound change tracking"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "OShL",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSAgent/OShL.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

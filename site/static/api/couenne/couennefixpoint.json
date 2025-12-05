@@ -1,0 +1,22 @@
+{
+  "name": "CouenneFixPoint",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/bound_tightening/CouenneFixPoint.hpp",
+  "brief": "Fixpoint-based bound tightening via constraint propagation\n\nImplements Feasibility-Based Bound Tightening (FBBT) using fixpoint\niteration. Propagates bounds through expression DAG until no further\ntightening is possible.",
+  "algorithms": [
+    {
+      "name": "Feasibility-Based Bound Tightening (FBBT):\nPropagate variable bounds through constraint DAG to fixpoint:\n1. Initialize: [l\u2070, u\u2070] from problem definition\n2. Forward propagation for each expression w = f(x):\n   - Compute [w_L, w_U] from [x_L, x_U] using interval arithmetic\n3. Backward propagation (implied bounds):\n   - For w = f(x) with [w_L, w_U], derive tighter [x_L, x_U]\n   - Example: w = x\u00b7y, w_U = 10, y \u2208 [2,5] \u27f9 x \u2264 10/2 = 5\n4. Iterate until fixpoint: [l^k, u^k] = [l^{k-1}, u^{k-1}] or k > limit\n\nextendedModel_ creates auxiliary LP rows for tighter propagation.",
+      "math": "Interval arithmetic rules (forward):\n  [a,b] + [c,d] = [a+c, b+d]\n  [a,b] \u00b7 [c,d] = [min(ac,ad,bc,bd), max(ac,ad,bc,bd)]\n  exp([a,b]) = [exp(a), exp(b)]  (monotone functions)",
+      "complexity": "O(k \u00b7 |V| \u00b7 |E|) where k = iterations, |V| = variables,\n|E| = expression nodes. Typically k = O(1) to O(depth of DAG).",
+      "ref": [
+        "Belotti et al. (2009). \"Branching and bounds tightening techniques for\n  non-convex MINLP\". Optimization Methods & Software 24(4-5):597-634."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneProblem::boundTightening() for main bound tightening entry",
+    "expression::impliedBound() for backward propagation"
+  ]
+}

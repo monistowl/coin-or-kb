@@ -1,0 +1,21 @@
+{
+  "name": "ClpConstraintQuadratic",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpConstraintQuadratic.hpp",
+  "brief": "Quadratic constraint implementation: x'Qx + c'x \u2264 b\n\nImplements ClpConstraint for quadratic constraints. The constraint\nfunction is: 0.5 * sum_{ij}(Q_ij * x_i * x_j) + sum_j(c_j * x_j) \u2264 b",
+  "algorithms": [
+    {
+      "name": "Use in SLP (Sequential Linear Programming):\nAt point x\u0304, linearize: g(x) \u2248 g(x\u0304) + \u2207g(x\u0304)'(x - x\u0304)\nConstraint becomes: \u2207g(x\u0304)'x \u2264 -g(x\u0304) + \u2207g(x\u0304)'x\u0304\n\nTrust region limits step size to control linearization error.\nFor convex constraints (Q PSD), linearization underestimates\ntrue constraint, maintaining feasibility.",
+      "math": "CONSTRAINT FORM:\n  g(x) = (1/2)x'Qx + c'x - b \u2264 0\n\nwhere Q is symmetric (but not necessarily PSD for constraints).",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpConstraint for the abstract interface",
+    "ClpConstraintLinear for purely linear constraints",
+    "ClpSimplexNonlinear for the SLP solver"
+  ]
+}

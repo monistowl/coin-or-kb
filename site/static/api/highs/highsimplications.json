@@ -1,0 +1,20 @@
+{
+  "name": "HighsImplications",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsImplications.h",
+  "brief": "Implication graphs and variable bound relationships for MIP",
+  "algorithms": [
+    {
+      "name": "Probing and Variable Bound Propagation\n\n**HighsImplications Class:**\nTracks logical implications and variable bounds derived from binary variables.\n\n**Implications Storage:**\n- implications[2*col + val]: Bound changes implied when col=val\n- computeImplications(): Derives implications via probing\n- getImplications(): Returns cached or computes implications\n\n**Variable Upper/Lower Bounds (VUB/VLB):**\nLinear bounds of form: x_j <= coef * y + constant (VUB)\n- vubs[col], vlbs[col]: Hash trees of variable bounds\n- VarBound: {coef, constant} with minValue()/maxValue()\n- getBestVub/Vlb(): Find tightest VUB/VLB given LP solution\n\n**Key Operations:**\n- runProbing(): Test fixing binary variable and propagate\n- separateImpliedBounds(): Generate cuts from VUB/VLB\n- addVUB/addVLB(): Store new variable bounds\n- columnTransformed(): Update VBDs after variable scaling\n\n**Substitutions:**\n- substitutions[], colsubstituted[]: Track variable substitutions\n- storeLiftingOpportunity: Callback for cut strengthening",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "mip/HighsDomain.h for bound propagation",
+    "mip/HighsCliqueTable.h for clique-based implications"
+  ]
+}

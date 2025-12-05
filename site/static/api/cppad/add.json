@@ -1,0 +1,9 @@
+{
+  "name": "add",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/add.hpp",
+  "brief": "Core AD functionality: add",
+  "algorithms": [],
+  "methods": []
+}

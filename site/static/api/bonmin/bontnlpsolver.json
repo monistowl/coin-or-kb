@@ -1,0 +1,21 @@
+{
+  "name": "BonTNLPSolver",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Interfaces/BonTNLPSolver.hpp",
+  "brief": "Abstract interface for NLP solvers used in branch-and-bound",
+  "algorithms": [
+    {
+      "name": "NLP Solver Abstraction for B&B (Ipopt/FilterSQP Backend)\n\nProvides a generic interface for calling NLP solvers to solve continuous\nrelaxations of MINLPs. This abstraction allows Bonmin to use different\nNLP solvers (Ipopt, FilterSQP) interchangeably.\n\n**Key methods:**\n- OptimizeTNLP(): Solve an NLP from scratch\n- ReOptimizeTNLP(): Resolve with warm start (for B&B efficiency)\n- setWarmStart()/getWarmStart(): Manage warm start information\n- enableWarmStart()/disableWarmStart(): Control warm starting\n\n**Return statuses:**\n- solvedOptimal: Problem solved to optimality\n- provenInfeasible: Infeasibility proven\n- iterationLimit/timeLimit: Resource limits reached\n- computationError/exception: Solver failures\n\nImplementations: BonIpoptSolver (Ipopt), BonFilterSolver (FilterSQP)",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "BonIpoptSolver.hpp for Ipopt-specific implementation",
+    "BonFilterSolver.hpp for FilterSQP implementation",
+    "IpTNLP.hpp for the NLP problem interface"
+  ]
+}

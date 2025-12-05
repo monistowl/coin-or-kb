@@ -1,0 +1,546 @@
+{
+  "library": "SHOT",
+  "layer": "layer-4",
+  "classes": [
+    {
+      "name": "AuxiliaryVariables",
+      "brief": "Variables introduced during problem reformulation\n\nVariables created to linearize or convexify expressions.\n\n**AuxiliaryVariable Class:**\n- Extends Variable with expression components\n- calculate(): Evaluate auxiliary from original variables\n- Properties: constant, linear/quadratic/monomial/signomial terms\n\n**Auxiliary Variable Types (E_AuxiliaryVariableType):**\n- NonlinearObjectiveFunction: Epigraph reformulation\n- BilinearTerms: McCormick relaxation variables\n- MonomialPartitioning: Product term linearization\n- EigenvalueDecomposition: Convexification variables\n\n**AuxiliaryVariables Collection:**\n- Vector of AuxiliaryVariablePtr with Problem ownership\n- sortByIndex(): Order by variable index",
+      "has_algorithm": false
+    },
+    {
+      "name": "Constraints",
+      "brief": "Constraint hierarchy: linear, quadratic, and nonlinear\n\nConstraint classes forming an inheritance hierarchy.\n\n**Constraint Properties:**\n- classification: Linear, Quadratic, Signomial, Nonlinear\n- convexity: Linear, Convex, Concave, Nonconvex, Unknown\n- type: Equality, LessThan, GreaterThan\n\n**NumericConstraintValue Struct:**\n- functionValue: f(x) at evaluation point\n- normalizedLHSValue: L - f(x), normalizedRHSValue: f(x) - U\n- error: max(0, max(L - f(x), f(x) - U))\n\n**Constraint Class Hierarchy:**\n- Constraint (abstract): Base with index, name, properties\n- NumericConstraint: LHS/RHS bounds, gradient/Hessian computation\n- LinearConstraint: linearTerms, sparse gradient\n- QuadraticConstraint: + quadraticTerms, Hessian\n- NonlinearConstraint: + monomials, signomials, nonlinearExpression\n\n**Derivative Computation:**\n- calculateGradient(): Sparse first derivatives\n- calculateHessian(): Upper triangular second derivatives\n- Sparsity patterns for efficient NLP solver interfaces",
+      "has_algorithm": false
+    },
+    {
+      "name": "DualSolver",
+      "brief": "MIP-based dual bound computation via supporting hyperplanes\n\nManages the linearization-based dual problem.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Enums",
+      "brief": "Enumeration types for SHOT solver states and options\n\nComprehensive enums for algorithm configuration and status tracking.\n\n**Problem Classification:**\n- E_Convexity: Linear, Convex, Concave, Nonconvex, Unknown\n- E_DualProblemClass: LP, QP, QCQP, MIP, MIQP, MIQCQP\n\n**Auxiliary Variable Types:**\n- E_AuxiliaryVariableType: NonlinearObjectiveFunction (epigraph),\n  BilinearTerms, MonomialPartitioning, etc.\n\n**Hyperplane Sources (E_HyperplaneSource):**\n- MIPOptimalRootsearch, MIPSolutionPoolRootsearch\n- LPRelaxedRootsearch, InteriorPointSearch\n- PrimalSolutionSearch, ObjectiveCuttingPlane\n\n**Event Types (E_EventType):**\n- NewPrimalSolution: New incumbent found\n- UserTerminationCheck: Allow user termination\n\n**Termination Reasons (E_TerminationReason):**\n- Optimal, ObjectiveGapTolerance, TimeLimit\n- IterationLimit, InfeasibleProblem, NoDualCutsAdded",
+      "has_algorithm": false
+    },
+    {
+      "name": "Environment",
+      "brief": "Shared state container for SHOT solver components\n\nCentral hub connecting all solver subsystems.\n\n**Environment Class Members:**\n- problem: Original problem formulation\n- reformulatedProblem: Convexified/linearized version\n- modelingSystem: GAMS/AMPL/OSiL interface\n\n**Solver Components:**\n- dualSolver: MIP solver for dual problem (CPLEX/Gurobi/CBC)\n- primalSolver: NLP solver for primal bounds (Ipopt)\n- rootsearchMethod: Line search for hyperplanes\n\n**Infrastructure:**\n- settings: Solver configuration parameters\n- results: Solution and statistics\n- output: Logging via spdlog\n- timing: Performance profiling\n- events: Callback event handler\n- tasks: Asynchronous task manager",
+      "has_algorithm": false
+    },
+    {
+      "name": "EventHandler",
+      "brief": "Observer pattern for algorithm events and callbacks\n\nAllows external code to respond to solver events.\n\n**Event Types (E_EventType):**\n- NewPrimalSolution: New feasible solution found\n- UserTerminationCheck: Allow user to request termination\n\n**Callback Registration:**\n- registerCallback(event, callback): Register handler\n- Callback signature: void()\n- Multiple callbacks per event supported\n\n**Event Notification:**\n- notify(event): Invoke all registered callbacks\n- Called by solver at appropriate points\n\n**Usage Example:**\n```cpp\neventHandler->registerCallback(E_EventType::NewPrimalSolution,\n    [&]() { std::cout << \"New solution found!\" << std::endl; });\n```",
+      "has_algorithm": false
+    },
+    {
+      "name": "GamsNLinstr",
+      "brief": "GAMS nonlinear instruction opcodes and function codes\n\nDefines GAMS bytecode for nonlinear expressions.\n\n**GamsOpCode Enum:**\n- Stack operations: nlPushV, nlPushI, nlStore\n- Arithmetic: nlAdd, nlSub, nlMul, nlDiv, nlUMin\n- Function calls: nlCallArg1, nlCallArg2, nlCallArgN\n\n**GamsFuncCode Enum:**\n- Math functions: fnexp, fnlog, fnsqrt, fnabs, fnsin, fncos\n- Comparison: fnmin, fnmax, fnifthen\n- Special: fnpower, fnsignpower, fnentropy\n\n@warning Bytecode format may change without notice",
+      "has_algorithm": false
+    },
+    {
+      "name": "IMIPSolutionLimitStrategy",
+      "brief": "Interface for MIP solution pool limit strategies\n\nControls how many solutions MIP solver collects per iteration.\n\n**IMIPSolutionLimitStrategy Interface:**\n- updateLimit(): Adjust limit based on progress\n- getNewLimit(): Current solution limit value\n- getInitialLimit(): Starting limit\n\n**Implementations:**\n- MIPSolutionLimitStrategyIncrease: Grow limit over time\n- MIPSolutionLimitStrategyUnlimited: No limit\n- MIPSolutionLimitStrategyAdaptive: Adjust based on gap\n\n**Purpose:**\n- Balance cut generation vs solver time per iteration\n- More solutions = more hyperplane generation points\n- Fewer solutions = faster MIP solves",
+      "has_algorithm": false
+    },
+    {
+      "name": "IMIPSolver",
+      "brief": "Abstract interface for MIP solver backends\n\nPure virtual interface for dual problem MIP solvers.\n\n**Problem Construction:**\n- initializeProblem(), finalizeProblem(): Setup/teardown\n- addVariable(): With type, bounds, and semi-bounds\n- addLinearTermToObjective/Constraint(): Build incrementally\n- addQuadraticTermToObjective/Constraint(): For MIQP/MIQCQP\n\n**Solution Methods:**\n- solveProblem(): Execute MIP solver\n- repairInfeasibility(): Attempt feasibility repair\n- getObjectiveValue(), getDualObjectiveValue(): Bounds\n- getVariableSolution(), getAllVariableSolutions(): Points\n\n**Hyperplane/Cut Management:**\n- createHyperplane(): Add supporting hyperplane linearization\n- createInteriorHyperplane(): Interior point cuts\n- createIntegerCut(): No-good cuts for integer variables\n\n**Bound Management:**\n- setCutOff(): Objective cutoff for pruning\n- fixVariable(), unfixVariables(): For integer fixing\n- presolveAndUpdateBounds(): Bound tightening\n\n**Implementations:**\n- MIPSolverCplex, MIPSolverGurobi, MIPSolverCbc\n- SingleTree variants for callback-based cut addition",
+      "has_algorithm": true
+    },
+    {
+      "name": "IModelingSystem",
+      "brief": "Abstract interface for problem input formats\n\nBase interface for parsing optimization problem files.\n\n**E_ProblemCreationStatus Enum:**\n- NormalCompletion: Problem loaded successfully\n- FileDoesNotExist, ErrorInFile: I/O errors\n- ErrorInVariables/Constraints/Objective: Parse errors\n- CapabilityProblem: Unsupported problem features\n\n**IModelingSystem Interface:**\n- augmentSettings(): Add format-specific settings\n- updateSettings(): Extract settings from problem file\n- finalizeSolution(): Write solution back to format\n\n**Implementations:**\n- ModelingSystemOSiL: XML OSiL format (Optimization Services)\n- ModelingSystemAMPL: .nl format from AMPL\n- ModelingSystemGAMS: GAMS interface\n- ModelingSystemOS: Optimization Services framework",
+      "has_algorithm": false
+    },
+    {
+      "name": "INLPSolver",
+      "brief": "Abstract interface for NLP solver backends\n\nPure virtual interface for primal bound NLP solvers.\n\n**Starting Point:**\n- setStartingPoint(): Initialize solver from MIP solution\n- clearStartingPoint(): Reset to default\n\n**Variable Fixing:**\n- fixVariables(): Fix integer variables for NLP subproblem\n- unfixVariables(): Restore full problem\n\n**Solution Methods:**\n- solveProblem(): Execute NLP solver\n- getSolution(): Retrieve primal point\n- getObjectiveValue(): Primal objective value\n\n**Bound Management:**\n- getVariableLowerBounds(), getVariableUpperBounds()\n- updateVariableLowerBound(), updateVariableUpperBound()\n\n**Implementations:**\n- NLPSolverIpoptBase: Ipopt interior point solver\n- NLPSolverGAMS: GAMS NLP solvers\n- NLPSolverSHOT: Recursive SHOT for NLP",
+      "has_algorithm": false
+    },
+    {
+      "name": "IRelaxationStrategy",
+      "brief": "Interface for LP relaxation control strategies\n\nManages when to solve LP relaxation vs full MIP.\n\n**IRelaxationStrategy Interface:**\n- executeStrategy(): Apply relaxation decision\n- setActive()/setInactive(): Enable/disable strategy\n- setInitial(): Reset to initial state\n\n**Implementations:**\n- RelaxationStrategyStandard: Periodic LP solves\n- RelaxationStrategyNone: Always solve full MIP\n\n**Use Case:**\n- LP relaxations generate more hyperplanes quickly\n- MIP solves provide better candidate points\n- Strategy balances cut generation vs exploration",
+      "has_algorithm": false
+    },
+    {
+      "name": "IRootsearchMethod",
+      "brief": "Interface for constraint boundary rootsearch algorithms\n\nFinds points on constraint boundaries for ESH hyperplane generation.\n\n**Purpose:**\nGiven interior point A and exterior point B, find point on boundary\nwhere constraint function equals zero (feasibility boundary).\n\n**Constraint Rootsearch:**\n- findZero(ptA, ptB, ...): Search along line segment A\u2192B\n- Returns (boundary point, exterior point) pair\n- lambdaTol: Tolerance on line parameter\n- constrTol: Tolerance on constraint violation\n\n**Objective Rootsearch:**\n- findZero(pt, objLB, objUB, ...): Find objective level set\n- Used for objective function cuts\n\n**Algorithm:**\n- Uses bisection or hybrid methods (TOMS 748)\n- Requires f(A) < 0 (feasible) and f(B) > 0 (infeasible)\n\n**Implementations:**\n- RootsearchMethodBoost: Boost.Math TOMS 748 or bisection",
+      "has_algorithm": true
+    },
+    {
+      "name": "ISolutionStrategy",
+      "brief": "Abstract interface for solution strategies\n\nBase interface for algorithm selection.\n\n**Strategy Interface:**\n- initializeStrategy(): Configure tasks and solvers\n- solveProblem(): Execute the solution algorithm\n\n**Strategy Implementations:**\n- SolutionStrategyMultiTree: Iterative outer approximation\n  - Solve MIP, add cuts, repeat\n- SolutionStrategySingleTree: Lazy constraint callback\n  - Single MIP with callback cut injection\n- SolutionStrategyNLP: Pure NLP (no integer variables)\n- SolutionStrategyMIQP/MIQCQP: Direct quadratic solving\n\n**Selection Logic:**\n- Problem classification determines best strategy\n- Convex MINLP \u2192 ESH (multi-tree or single-tree)\n- QP/QCQP \u2192 Direct solver if supported\n- NLP \u2192 Interior point only",
+      "has_algorithm": false
+    },
+    {
+      "name": "Iteration",
+      "brief": "Per-iteration state snapshot for algorithm progress tracking\n\nCaptures the state of the solver at each outer approximation iteration.\n\n**Problem State:**\n- dualProblemClass: LP, QP, MIP, MIQP, etc.\n- isDualProblemDiscrete: Whether MIP or LP relaxation\n- solutionStatus: Optimal, Feasible, Infeasible, etc.\n\n**Solution Data:**\n- solutionPoints: All solutions from MIP solution pool\n- objectiveValue: Best objective value\n- currentObjectiveBounds: (dual, primal) bounds\n\n**Constraint Violation:**\n- constraintDeviations: Per-constraint violations\n- maxDeviation, maxDeviationConstraint: Worst violation\n- usedConstraintTolerance: Tolerance for this iteration\n\n**Hyperplane Statistics:**\n- numHyperplanesAdded: Cuts added this iteration\n- totNumHyperplanes: Cumulative cuts\n- hyperplanePoints: Generation points\n\n**Node Statistics:**\n- numberOfExploredNodes, numberOfOpenNodes: B&B tree\n\n**Helper Methods:**\n- getSolutionPointWithSmallestDeviation()\n- isMIP(): Check if discrete problem",
+      "has_algorithm": false
+    },
+    {
+      "name": "MIPSolutionLimitStrategyAdaptive",
+      "brief": "Adaptive solution limit based on solver progress\n\nAdjusts limit based on optimization state.\n\n**MIPSolutionLimitStrategyAdaptive Class:**\n- lastIterSolLimIncreased: Track when limit changed\n- numSolLimIncremented: Count of increases\n\n**Adaptive Logic:**\n- Increase when finding good solutions\n- Decrease when solver is struggling\n- Balances exploration vs speed",
+      "has_algorithm": true
+    },
+    {
+      "name": "MIPSolutionLimitStrategyIncrease",
+      "brief": "Solution limit strategy with gradual increase\n\nIncreases MIP solution pool limit over iterations.\n\n**MIPSolutionLimitStrategyIncrease Class:**\n- updateLimit(): Increase limit when MIP finds optimal\n- getNewLimit()/getInitialLimit(): Current and start values\n\n**State Tracking:**\n- lastIterSolLimIncreased: When limit was last raised\n- numSolLimIncremented: Total increases performed\n- lastIterOptimal: Last iteration with optimal MIP\n\n**Algorithm:**\n- Start with low limit for fast initial iterations\n- Increase when solver proves optimality\n- More solutions = more hyperplane generation points",
+      "has_algorithm": false
+    },
+    {
+      "name": "MIPSolutionLimitStrategyUnlimited",
+      "brief": "No limit on MIP solution pool size\n\nAllows solver to collect all feasible solutions.\n\n**MIPSolutionLimitStrategyUnlimited Class:**\n- getInitialLimit(): Returns maximum integer\n- updateLimit(): No-op (always unlimited)\n\n**Use Case:**\n- Thorough exploration of solution space\n- May slow down iterations",
+      "has_algorithm": false
+    },
+    {
+      "name": "MIPSolverBase",
+      "brief": "Common base class for MIP solver implementations\n\nShared functionality for CPLEX, Gurobi, and Cbc backends.\n\n**Problem State:**\n- numberOfVariables, numberOfConstraints: Problem size\n- variableTypes, variableLowerBounds, variableUpperBounds\n- isMinimizationProblem, isProblemDiscrete\n\n**Hyperplane Creation:**\n- createHyperplane(): Add supporting hyperplane cut\n- createInteriorHyperplane(): Interior point cut\n- createHyperplaneTerms(): Compute cut coefficients\n- getConstraintIdentifier(): Named constraint IDs\n\n**Variable Fixing:**\n- fixVariable(), fixVariables(): Fix for NLP subproblem\n- unfixVariables(): Restore original bounds\n- updateVariableBound(): Dynamic bound update\n\n**Relaxation Strategy:**\n- relaxationStrategy: LP relaxation handling\n- executeRelaxationStrategy(): Apply relaxation\n\n**Dual Auxiliary Variable:**\n- Tracks epigraph variable for nonlinear objective\n- hasDualAuxiliaryObjectiveVariable(), getDualAuxiliaryObjectiveVariableIndex()",
+      "has_algorithm": false
+    },
+    {
+      "name": "MIPSolverCallbackBase",
+      "brief": "Shared logic for single-tree callback handlers\n\nBase class for CPLEX and Gurobi callback implementations.\n\n**MIPSolverCallbackBase Class:**\n- addLazyConstraint(): Generate and add ESH cuts\n- checkFixedNLPStrategy(): Decide if NLP should be called\n- checkIterationLimit()/checkUserTermination(): Termination checks\n- printIterationReport(): Console output in callback\n\n**Task Objects:**\n- taskSelectPrimNLPOriginal/Reformulated: Fixed-integer NLP\n- taskSelectHPPts: ESH/ECP hyperplane selection\n- taskSelectPrimalSolutionFromRootsearch: Rootsearch primal\n- tUpdateInteriorPoint: Interior point maintenance",
+      "has_algorithm": false
+    },
+    {
+      "name": "MIPSolverCbc",
+      "brief": "COIN-OR Cbc implementation of IMIPSolver interface\n\nProvides open-source MIP solving using Cbc branch-and-cut solver.\n\n**MIPSolverCbc Class:**\n- Implements IMIPSolver interface\n- Uses OsiClpSolverInterface for LP subproblems\n- CbcModel for branch-and-cut\n- CoinModel for problem construction\n\n**Key Data Structures:**\n- osiInterface: OSI LP solver (Clp)\n- cbcModel: MIP solver model\n- coinModel: Problem builder\n- objectiveLinearExpression: CoinPackedVector\n\n**CbcMessageHandler:**\n- Custom message handler for SHOT logging\n- Routes Cbc output through SHOT's Output system\n\n**Limitations:**\n- supportsQuadraticObjective(): No\n- supportsQuadraticConstraints(): No\n- LP/MIP only (no MIQP/QCQP)\n\n@note Default open-source MIP solver, no license required",
+      "has_algorithm": true
+    },
+    {
+      "name": "MIPSolverCplex",
+      "brief": "IBM CPLEX implementation of IMIPSolver interface\n\nProvides MIP solving for SHOT's dual problem using CPLEX Concert API.\n\n**MIPSolverCplex Class:**\n- Implements full IMIPSolver interface\n- Uses IloModel, IloCplex for problem representation\n- Supports LP, MIP, QP, MIQP, QCQP problem types\n\n**Key Data Structures:**\n- cplexModel: IloModel for optimization model\n- cplexInstance: IloCplex solver instance\n- cplexVars: Variable array\n- cplexConstrs: Constraint array\n\n**Quadratic Support:**\n- supportsQuadraticObjective(): Yes\n- supportsQuadraticConstraints(): Yes (QCQP)\n\n**UserTerminationCallbackI:**\n- MIP info callback for user termination\n- Allows early termination on events\n\n@note Requires CPLEX Concert Technology headers",
+      "has_algorithm": false
+    },
+    {
+      "name": "MIPSolverCplexSingleTree",
+      "brief": "CPLEX with lazy constraint callback for single-tree ESH\n\nExtends MIPSolverCplex with callback-based cut generation.\n\n**MIPSolverCplexSingleTree Class:**\n- solveProblem(): Single MIP solve with callbacks enabled\n- Uses generic callback API (Context-based)\n\n**CplexCallback Class:**\n- Inherits IloCplex::Callback::Function + MIPSolverCallbackBase\n- invoke(): Called at candidate solution points\n- createHyperplane()/createIntegerCut(): Add lazy constraints\n- addLazyConstraint(): Generate ESH cuts from solution\n\n**Threading:**\n- callbackMutex: Protect shared state in multi-threaded solve\n- CPLEX invokes callbacks from multiple threads",
+      "has_algorithm": false
+    },
+    {
+      "name": "MIPSolverCplexSingleTreeLegacy",
+      "brief": "Legacy CPLEX callback API for single-tree ESH\n\nUses older callback API (pre-CPLEX 12.10 generic callbacks).\n\n**Legacy Callback Classes:**\n- HCallbackI: Heuristic callback for primal solutions\n- InfoCallbackI: Progress information callback\n- CtCallbackI: Lazy constraint callback for hyperplanes\n\n**MIPSolverCplexSingleTreeLegacy Class:**\n- Inherits MIPSolverCplex for base functionality\n- Uses IloCplex::LazyConstraintCallbackI/HeuristicCallbackI\n\n@deprecated Prefer MIPSolverCplexSingleTree with generic callbacks",
+      "has_algorithm": false
+    },
+    {
+      "name": "MIPSolverGurobi",
+      "brief": "Gurobi implementation of IMIPSolver interface\n\nProvides MIP solving for SHOT's dual problem using Gurobi C++ API.\n\n**MIPSolverGurobi Class:**\n- Implements full IMIPSolver interface\n- Uses GRBModel for problem representation\n- Supports LP, MIP, QP, MIQP, QCQP problem types\n\n**Key Data Structures:**\n- gurobiModel: Shared GRBModel pointer\n- objectiveLinearExpression, objectiveQuadraticExpression\n- constraintLinearExpression, constraintQuadraticExpression\n\n**GurobiCallbackMultiTree:**\n- GRBCallback for multi-tree algorithm\n- Handles termination checks during solve\n\n**Quadratic Support:**\n- supportsQuadraticObjective(): Yes\n- supportsQuadraticConstraints(): Yes (QCQP)\n\n@note Requires Gurobi C++ headers",
+      "has_algorithm": false
+    },
+    {
+      "name": "MIPSolverGurobiSingleTree",
+      "brief": "Gurobi with lazy constraint callback for single-tree ESH\n\nExtends MIPSolverGurobi with callback-based cut generation.\n\n**GurobiCallbackSingleTree Class:**\n- Inherits GRBCallback + MIPSolverCallbackBase\n- callback(): Called at candidate solution points\n- createHyperplane()/createIntegerCut(): Add lazy constraints\n- addLazyConstraint(): Generate ESH cuts from solution\n\n**MIPSolverGurobiSingleTree Class:**\n- solveProblem(): Single MIP solve with callbacks enabled\n- isCallbackInitialized: Track callback registration\n\n**Node Information:**\n- lastExploredNodes/lastOpenNodes: B&B tree progress\n- Used for iteration reporting within callback",
+      "has_algorithm": false
+    },
+    {
+      "name": "ModelingSystemAMPL",
+      "brief": "AMPL nl-file format reader for optimization problems\n\nReads AMPL .nl (nonlinear) binary problem files.\n\n**ModelingSystemAMPL Class:**\n- createProblem(): Parse .nl file into Problem\n- augmentSettings(): Add AMPL-specific options\n- finalizeSolution(): Write .sol solution file\n\n**AMPL nl Format:**\n- Binary format for optimization instances\n- Contains variables, bounds, constraints, expressions\n- Used by AMPL-compatible solvers\n\n**Usage:**\n- Standalone: SHOT problem.nl\n- Via AMPL: option solver shot; solve;",
+      "has_algorithm": false
+    },
+    {
+      "name": "ModelingSystemGAMS",
+      "brief": "GAMS interface for optimization problem input\n\nReads GAMS models via GMO/GEV API.\n\n**ModelingSystemGAMS Class:**\n- setModelingObject(): Accept gmoHandle_t from GAMS\n- createProblem(): Convert GMO model to SHOT Problem\n- finalizeSolution(): Return solution to GAMS\n\n**GAMS Integration:**\n- gmoHandle_t: GAMS Model Object (GMO)\n- gevHandle_t: GAMS Environment (GEV)\n- palHandle_t: GAMS Audit Licensing (PAL)\n\n**Model Conversion:**\n- copyVariables/Constraints/ObjectiveFunction()\n- parseGamsInstructions(): Bytecode to expression conversion\n\n**GamsOutputSink:**\n- spdlog sink routing to GAMS log\n- gevLogPChar() for normal messages\n- gevLogStatPChar() for warnings/errors",
+      "has_algorithm": false
+    },
+    {
+      "name": "ModelingSystemOS",
+      "brief": "Optimization Services library integration\n\nFull OS library integration for OSiL and AMPL files.\n\n**ModelingSystemOS Class:**\n- createProblem(filename, format): Read OSiL or nl files\n- createProblem(OSInstance): Use existing OS instance\n- finalizeSolution(): Generate OSrL output\n\n**File Formats:**\n- E_OSInputFileFormat::OSiL: XML format\n- E_OSInputFileFormat::Ampl: nl binary via OSnl2OS\n\n**OS Library Classes:**\n- OSiLReader: Parse OSiL XML\n- OSInstance: In-memory problem representation\n- OSnl2OS: Convert nl to OSInstance\n- OSnLNode: Nonlinear expression tree nodes\n\n**Expression Conversion:**\n- convertOSNonlinearNode(): OSnLNode to SHOT expression\n- Preserves convexity annotations if available\n\n@note Uses COIN-OR OS library (github.com/coin-or/OS)",
+      "has_algorithm": false
+    },
+    {
+      "name": "ModelingSystemOSiL",
+      "brief": "OSiL XML format reader for optimization problems\n\nReads Optimization Services instance Language (OSiL) files.\n\n**ModelingSystemOSiL Class:**\n- createProblem(): Parse OSiL XML into Problem\n- augmentSettings(): Add OSiL-specific options\n- finalizeSolution(): Write OSrL result format\n\n**OSiL Format:**\n- XML-based optimization instance representation\n- <instanceData> contains variables, objectives, constraints\n- <nonlinearExpressions> for NLP terms (OSnL format)\n\n**XML Parsing:**\n- Uses tinyxml2 for XML processing\n- convertNonlinearNode(): OSnL to SHOT expression conversion\n\n@note OSiL is part of COIN-OR Optimization Services",
+      "has_algorithm": false
+    },
+    {
+      "name": "NLPSolverBase",
+      "brief": "Base implementation for NLP solver interface\n\nProvides shared solve logic for all NLP solvers.\n\n**NLPSolverBase Class:**\n- solveProblem(): Template method calling solveProblemInstance()\n- Derived classes implement solveProblemInstance() hook\n\n**Inheritance:**\n- Virtually inherits from INLPSolver\n- Used with multiple inheritance (NLPSolverIpoptRelaxed)",
+      "has_algorithm": false
+    },
+    {
+      "name": "NLPSolverCuttingPlaneMinimax",
+      "brief": "Cutting-plane solver for minimax LP problems\n\nBuilt-in LP-based solver for simple minimax problems.\n\n**NLPSolverCuttingPlaneMinimax Class:**\n- Uses MIP solver (CPLEX/Gurobi/Cbc) as LP engine\n- Iteratively adds cutting planes\n- No external NLP solver dependency\n\n**Minimax Problem Form:**\n- min t\n- s.t. f_i(x) <= t for all i\n\n**Use Case:**\n- Finding interior points when Ipopt unavailable\n- Solving auxiliary minimax subproblems",
+      "has_algorithm": true
+    },
+    {
+      "name": "NLPSolverGAMS",
+      "brief": "GAMS-based NLP solver for fixed-integer subproblems\n\nUses GAMS modeling system to call NLP solvers.\n\n**NLPSolverGAMS Class:**\n- Uses gmoHandle_t from GAMS modeling system\n- Calls user-selected NLP solver (CONOPT, IPOPT, etc.)\n- Manages variable bounds and starting points\n\n**GAMS Handles:**\n- modelingObject: GMO for problem data\n- modelingEnvironment: GEV for GAMS environment\n\n**Solver Configuration:**\n- nlpsolver: Solver name (e.g., \"CONOPT\", \"IPOPT\")\n- timelimit, iterlimit: Resource limits\n- solvelink: Execution mode\n\n@note Requires GAMS license for commercial NLP solvers",
+      "has_algorithm": false
+    },
+    {
+      "name": "NLPSolverIpoptBase",
+      "brief": "Ipopt implementation of INLPSolver interface\n\nProvides NLP solving for SHOT's primal problem using Ipopt interior point.\n\n**IpoptProblem Class (Ipopt::TNLP):**\n- Implements Ipopt's TNLP interface\n- Provides callbacks for function/gradient/Hessian evaluation\n- Sparse Jacobian/Hessian via index placement maps\n\n**TNLP Callbacks:**\n- get_nlp_info(): Problem dimensions and sparsity\n- get_bounds_info(): Variable and constraint bounds\n- eval_f(): Objective function value\n- eval_grad_f(): Objective gradient\n- eval_g(): Constraint function values\n- eval_jac_g(): Constraint Jacobian (sparse)\n- eval_h(): Lagrangian Hessian (sparse)\n- finalize_solution(): Store optimal point\n\n**NLPSolverIpoptBase Class:**\n- Wraps IpoptApplication for solve control\n- Variable fixing for integer-fixed NLP subproblems\n- Starting point management\n\n**IpoptJournal:**\n- Routes Ipopt output through SHOT logging system\n\n@note Used for fixed-integer NLP subproblems in primal bound computation",
+      "has_algorithm": true
+    },
+    {
+      "name": "NLPSolverIpoptRelaxed",
+      "brief": "Ipopt solver for continuous relaxation problems\n\nSolves NLP with integer variables relaxed to continuous.\n\n**NLPSolverIpoptRelaxed Class:**\n- Multiple inheritance: NLPSolverBase + NLPSolverIpoptBase\n- setSolverSpecificInitialSettings(): Configure for relaxed solve\n- getSolution(): Return continuous solution values\n\n**Use Case:**\n- Find interior points for ESH algorithm\n- Check feasibility of relaxed problem\n- Generate starting points for primal heuristics",
+      "has_algorithm": false
+    },
+    {
+      "name": "NLPSolverSHOT",
+      "brief": "SHOT as NLP solver for convex subproblems\n\nRecursive use of SHOT to solve fixed-integer NLP.\n\n**NLPSolverSHOT Class:**\n- Creates nested SHOT solver instance\n- Solves convex NLP after fixing integer variables\n- Useful when Ipopt is unavailable\n\n**Fixed-Integer NLP:**\n- fixVariables(): Fix discrete variables to integer values\n- solveProblemInstance(): Solve continuous subproblem\n- getSolution(): Return primal solution\n\n**Nested Architecture:**\n- Outer SHOT: Full MINLP (uses this as primal solver)\n- Inner SHOT: Convex NLP (fixed integers)\n\n@note Self-referential design for solver-agnostic NLP solving",
+      "has_algorithm": false
+    },
+    {
+      "name": "NonlinearExpressions",
+      "brief": "Expression tree nodes for nonlinear functions\n\nDAG-based representation of nonlinear expressions with convexity analysis.\n\n**E_NonlinearExpressionTypes:**\n- Constant, Variable: Leaf nodes\n- Unary: Negate, Invert, SquareRoot, Log, Exp, Square, Sin, Cos, etc.\n- Binary: Divide, Power\n- N-ary: Sum, Product\n\n**NonlinearExpression Base Class:**\n- calculate(point): Evaluate at numeric point\n- calculate(intervals): Interval arithmetic evaluation\n- getFactorableFunction(): CppAD automatic differentiation\n- getConvexity(): Analyze convexity via composition rules\n- getMonotonicity(): Analyze monotonicity\n- tightenBounds(): FBBT bound propagation\n\n**Expression Subclasses:**\n- ExpressionConstant, ExpressionVariable\n- ExpressionNegate, ExpressionSquare, ExpressionSquareRoot\n- ExpressionLog, ExpressionExp\n- ExpressionSin, ExpressionCos\n- ExpressionSum, ExpressionProduct\n- ExpressionDivide, ExpressionPower\n\n**Convexity Rules:**\n- Based on composition theorems (e.g., convex \u2218 nondecreasing convex = convex)\n- Interval bounds inform sign-dependent rules\n\n@note Convexity analysis influenced by SUSPECT library",
+      "has_algorithm": false
+    },
+    {
+      "name": "ObjectiveFunction",
+      "brief": "Objective function hierarchy with derivative computation\n\nObjective function classes mirroring the constraint hierarchy.\n\n**ObjectiveFunctionProperties:**\n- direction: Minimize or Maximize\n- classification: Linear, Quadratic, Signomial, Nonlinear\n- convexity: Convex, Concave, Linear, Nonconvex\n- Term presence flags for structure detection\n\n**ObjectiveFunction Base:**\n- calculateValue(): Evaluate at point or interval\n- calculateGradient(), calculateHessian(): Derivatives\n- getGradientSparsityPattern(): Nonzero structure\n\n**LinearObjectiveFunction:**\n- linearTerms + constant\n- isDualUnbounded(): Unboundedness detection\n\n**QuadraticObjectiveFunction:**\n- + quadraticTerms\n- Inherits from LinearObjectiveFunction\n\n**NonlinearObjectiveFunction:**\n- + monomialTerms, signomialTerms, nonlinearExpression\n- factorableFunction: CppAD automatic differentiation\n- Inherits from QuadraticObjectiveFunction\n\n@note For minimization with nonlinear objective, SHOT uses\n      epigraph reformulation: min t s.t. f(x) <= t",
+      "has_algorithm": false
+    },
+    {
+      "name": "Output",
+      "brief": "Logging infrastructure using spdlog\n\nCentralized logging with console and file sinks.\n\n**Output Class:**\n- outputCritical/Error/Warning/Info/Debug/Trace(): Log methods\n- setLogLevels(): Configure console and file verbosity\n- setConsoleSink(): Custom console output\n- setFileSink(): Enable file logging\n\n**E_LogLevel (Enums.h):**\n- Off, Critical, Error, Warning, Info, Debug, Trace\n\n**OutputStream Class:**\n- std::ostream wrapper for solver output redirection\n- Routes external solver output through SHOT logging\n- Used by CPLEX, Gurobi, Ipopt adapters\n\n**Implementation:**\n- Uses spdlog library for fast, thread-safe logging\n- consoleSink: stdout sink\n- fileSink: basic_file_sink for persistence",
+      "has_algorithm": false
+    },
+    {
+      "name": "PrimalSolver",
+      "brief": "NLP-based primal bound computation and solution repair\n\nFinds feasible solutions and improves the primal bound.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Problem",
+      "brief": "Core problem representation with variables, constraints, and objective\n\nCentral data structure holding the optimization problem definition.\n\n**ProblemProperties Struct:**\n- Convexity classification (Convex, Nonconvex, NotSet)\n- Problem type flags (MINLP, MIQP, MILP, NLP, etc.)\n- Variable counts by type (real, binary, integer, auxiliary)\n- Constraint counts by type (linear, quadratic, nonlinear)\n\n**SpecialOrderedSet Struct:**\n- SOS1 (at most one variable nonzero) or SOS2 (contiguous nonzeros)\n- Variables and optional weights\n\n**Problem Class:**\n- allVariables, realVariables, binaryVariables, etc.\n- linearConstraints, quadraticConstraints, nonlinearConstraints\n- objectiveFunction (linear, quadratic, or nonlinear)\n- Sparsity patterns for Jacobian and Hessian\n- Feasibility bound propagation (FBBT) for tightening bounds\n\n**Key Methods:**\n- add(): Add variables, constraints, objective\n- finalize(): Compute properties and sparsity patterns\n- getMostDeviatingNumericConstraint(): Find worst violation\n- createCopy(): Clone for reformulation",
+      "has_algorithm": true
+    },
+    {
+      "name": "RelaxationStrategyBase",
+      "brief": "Shared helper methods for relaxation strategies\n\nCommon termination checks for LP/MIP relaxation control.\n\n**RelaxationStrategyBase Class:**\n- isRelaxedSolutionInterior(): Check if LP solution is interior\n- isConstraintToleranceReached(): Feasibility achieved\n- isGapReached(): Optimality gap tolerance met\n\n**Use Case:**\n- Determines when to stop LP phase and switch to MIP\n- Checks convergence criteria during relaxation",
+      "has_algorithm": false
+    },
+    {
+      "name": "RelaxationStrategyNone",
+      "brief": "No-op relaxation strategy (always MIP)\n\nDisables LP relaxation phase, always solves full MIP.\n\n**RelaxationStrategyNone Class:**\n- executeStrategy(): No-op (MIP always active)\n- setActive()/setInactive()/setInitial(): State management\n\n**Use Case:**\n- Problems where LP phase doesn't help\n- When integer solutions are needed immediately\n- Benchmarking MIP-only performance\n\n**Behavior:**\n- Every iteration solves full MIP problem\n- No LP warm-start phase for hyperplane generation",
+      "has_algorithm": false
+    },
+    {
+      "name": "RelaxationStrategyStandard",
+      "brief": "Standard LP-to-MIP relaxation strategy\n\nImplements the default relaxation phase behavior.\n\n**RelaxationStrategyStandard Class:**\n- executeStrategy(): Decide LP vs MIP solve\n- setActive()/setInactive(): Control strategy state\n- setInitial(): Reset for new problem\n\n**LP Phase Termination:**\n- isIterationLimitReached(): Max LP iterations\n- isTimeLimitReached(): LP time budget\n- isLPStepFinished(): Convergence detection\n- isObjectiveStagnant(): No bound improvement\n\n**Algorithm:**\n- Initial iterations solve LP for fast hyperplanes\n- Switch to MIP after LP phase completion\n- LPFinished flag tracks phase transition",
+      "has_algorithm": true
+    },
+    {
+      "name": "Report",
+      "brief": "Formatted console output for solver progress\n\nGenerates iteration tables and summary reports.\n\n**Report Class:**\n- outputSolverHeader(): Version and license info\n- outputOptionsReport(): Active settings summary\n- outputProblemInstanceReport(): Problem statistics\n\n**Iteration Reporting:**\n- outputIterationDetailHeader(): Column headers\n- outputIterationDetail(): Per-iteration progress line\n- Shows: iteration, time, cuts, bounds, gap\n\n**Solution Reporting:**\n- outputSolutionReport(): Final summary\n- outputPrimalSolutionDetailedReport(): Full solution\n\n**Output Control:**\n- Tracks last values to avoid redundant output\n- Respects ES_IterationOutputDetail setting",
+      "has_algorithm": false
+    },
+    {
+      "name": "Results",
+      "brief": "Solution results storage and optimality gap tracking\n\nCentral repository for primal/dual solutions and algorithm progress.\n\n**Primal Solutions:**\n- primalSolutions: All found feasible points\n- addPrimalSolution(): Submit new incumbent\n- getPrimalBound(): Best objective value\n- primalSolutionSourceStatistics: Track solution origins\n\n**Dual Solutions:**\n- dualSolutions: Lower/upper bounds from MIP\n- getCurrentDualBound(), getGlobalDualBound()\n- setDualBound(): Update relaxation bound\n\n**Optimality Gap:**\n- getAbsoluteGlobalObjectiveGap(): |primal - dual|\n- getRelativeGlobalObjectiveGap(): |gap| / |primal|\n- isRelativeObjectiveGapToleranceMet(): Termination check\n\n**Iteration Tracking:**\n- iterations: Per-iteration state snapshots\n- createIteration(), getCurrentIteration()\n\n**Output Formats:**\n- getResultsOSrL(): XML Optimization Services format\n- getResultsTrace(): GAMS trace format\n- getResultsSol(): AMPL .sol format",
+      "has_algorithm": false
+    },
+    {
+      "name": "RootsearchMethodBoost",
+      "brief": "Boost.Math rootfinding for constraint boundaries\n\nFinds constraint boundary points using TOMS 748 or bisection.\n\n**RootsearchMethodBoost Class:**\n- findZero(ptA, ptB, constraints): Find boundary between points\n- findZero(pt, objLB, objUB, objective): Objective rootsearch\n\n**Helper Classes:**\n- Test: Functor for constraint max-violation evaluation\n- TestObjective: Functor for objective function evaluation\n- TerminationCondition: Convergence criterion\n\n**Algorithm:**\n- TOMS 748: Optimal bracketing algorithm (4th order)\n- Bisection: Fallback for difficult cases\n- Returns boundary point for hyperplane generation",
+      "has_algorithm": true
+    },
+    {
+      "name": "Settings",
+      "brief": "Solver configuration and option management\n\nHierarchical settings system for SHOT algorithm parameters.\n\n**Settings Categories:**\n- Termination: TimeLimit, IterationLimit, ObjectiveGap\n- Subsolver: MIP backend, NLP backend\n- Algorithm: Cut generation, reformulation options\n- Output: Verbosity, logging levels\n\n**Exception Classes:**\n- SettingKeyNotFoundException: Unknown setting key\n- SettingSetWrongTypeException: Type mismatch on set\n- SettingGetWrongTypeException: Type mismatch on get\n\n**Settings Types:**\n- E_SettingType: Integer, Double, String, Boolean, Enum\n\n**File Formats:**\n- OSoL XML format (Options Service Language)\n- Simple key=value format",
+      "has_algorithm": false
+    },
+    {
+      "name": "Simplifications",
+      "brief": "Expression tree simplification and term extraction\n\nAlgebraic simplification and structured term extraction.\n\n**Simplification Functions:**\n- simplify(): Recursive expression simplification\n- simplifyExpression(ExprType): Type-specific handlers\n- Constant folding, negation cancellation, identity removal\n\n**Term Extraction:**\n- extractTermsAndConstant(): Decompose expression into:\n  LinearTerms, QuadraticTerms, MonomialTerms, SignomialTerms,\n  NonlinearExpression remainder, and constant\n\n**Conversion Functions:**\n- convertProductToLinearTerm/QuadraticTerm/MonomialTerm()\n- convertPowerToLinearTerm/QuadraticTerm()\n- convertToSignomialTerm(): Extract signomial structure\n\n**Use Case:**\n- Problem reformulation for better convexity analysis\n- Extract quadratics for QCQP solvers\n- Identify linear/quadratic substructure in NLP",
+      "has_algorithm": false
+    },
+    {
+      "name": "SolutionStrategyMIQCQP",
+      "brief": "Direct MIQCQP solver for convex quadratic problems\n\nBypasses ESH for problems solvable by CPLEX/Gurobi MIQCQP.\n\n**SolutionStrategyMIQCQP Class:**\n- initializeStrategy(): Configure for direct MIQCQP solve\n- solveProblem(): Single solver call, no outer approximation\n\n**Use Case:**\n- Convex MIQCQP (quadratic constraints, convex)\n- CPLEX and Gurobi support convex QCQP natively\n- Faster than iterative linearization for small problems\n\n**Problem Classification:**\n- All constraints must be convex quadratic\n- Solver must support QCQP (supportsQuadraticConstraints)",
+      "has_algorithm": true
+    },
+    {
+      "name": "SolutionStrategyMultiTree",
+      "brief": "Iterative outer approximation strategy (multi-tree)\n\nClassic outer approximation loop for convex MINLP.\n\n**Algorithm Pattern:**\n1. Solve MIP relaxation to get candidate point\n2. Generate supporting hyperplanes at violated points\n3. Add cuts to MIP and resolve\n4. Repeat until convergence or termination\n\n**Task Flow (initializeStrategy):**\n- CreateDualProblem \u2192 SolveIteration \u2192 SelectHyperplanes\n- AddHyperplanes \u2192 CheckTermination \u2192 loop\n\n**Advantages:**\n- No callback complexity\n- Can use any MIP solver\n- Easier debugging/logging\n\n**Disadvantages:**\n- Multiple MIP solves\n- May regenerate same B&B tree work",
+      "has_algorithm": true
+    },
+    {
+      "name": "SolutionStrategyNLP",
+      "brief": "Direct NLP solver for continuous problems\n\nBypasses ESH for purely continuous NLP problems.\n\n**SolutionStrategyNLP Class:**\n- initializeStrategy(): Configure for direct NLP solve\n- solveProblem(): Single NLP solver call (Ipopt)\n\n**Use Case:**\n- Problems with no integer variables\n- Convex NLP where outer approximation is unnecessary\n- Falls back to standard NLP solvers (Ipopt)\n\n**When Selected:**\n- Problem type is NLP (no discrete variables)\n- Simpler than ESH for continuous problems",
+      "has_algorithm": true
+    },
+    {
+      "name": "SolutionStrategySingleTree",
+      "brief": "Lazy constraint callback strategy (single-tree)\n\nCallback-based outer approximation within single B&B tree.\n\n**Algorithm Pattern:**\n1. Solve MIP with lazy constraint callback\n2. Callback checks integer solutions for feasibility\n3. Generate hyperplanes for violated constraints\n4. Add as lazy constraints, solver continues\n\n**Task Flow (initializeStrategy):**\n- CreateDualProblem \u2192 ConfigureCallback \u2192 SolveProblem\n- (cuts added via callback during solve)\n\n**Advantages:**\n- Single B&B tree exploration\n- Potentially fewer node evaluations\n- Better integration with MIP solver\n\n**Disadvantages:**\n- Requires solver callback support\n- Limited to CPLEX/Gurobi\n- More complex debugging",
+      "has_algorithm": true
+    },
+    {
+      "name": "Solver",
+      "brief": "Main solver interface for convex MINLP problems\n\nPrimary entry point for the SHOT optimizer.",
+      "has_algorithm": true
+    },
+    {
+      "name": "Structs",
+      "brief": "Core data structures and type definitions for SHOT\n\nFundamental types, forward declarations, and helper structures.\n\n**Constants:**\n- SHOT_DBL_MIN/MAX/INF/EPS: Double precision limits\n- SHOT_INT_MAX, SHOT_LONG_MAX: Integer limits\n\n**Smart Pointer Typedefs:**\n- ProblemPtr, SettingsPtr, ResultsPtr, etc.\n- Shared ownership via std::shared_ptr\n\n**Solution Structures:**\n- PrimalSolution: Variable values + objective + source\n- DualSolution: Dual bound + iteration + source\n- SolutionPoint: Point with constraint deviation\n\n**Hyperplane Structures:**\n- Hyperplane: Supporting hyperplane cut\n- GeneratedHyperplane: Hyperplane with metadata\n- IntegerCut: No-good cut for integer variables\n\n**Utility Types:**\n- VectorDouble, VectorInteger, VectorString\n- PairIndexValue: (index, value) pair",
+      "has_algorithm": false
+    },
+    {
+      "name": "SyclMemoryModel",
+      "brief": "Returns an accessor to the buffer of the given virtual pointer",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskAddHyperplanes",
+      "brief": "Add generated hyperplanes to MIP relaxation\n\nTransfers cuts from hyperplane pool to MIP solver.\n\n**TaskAddHyperplanes Class:**\n- run(): Add pending hyperplanes to dual problem\n- itersWithoutAddedHPs: Track stagnation\n\n**Cut Management:**\n- Filters duplicate/dominated cuts\n- Respects cut limit per iteration\n- May trigger lazy vs pool constraint handling",
+      "has_algorithm": true
+    },
+    {
+      "name": "TaskAddIntegerCuts",
+      "brief": "Add integer cuts to exclude visited solutions\n\nPrevents revisiting same integer assignment.\n\n**TaskAddIntegerCuts Class:**\n- run(): Generate cut excluding current integer solution\n\n**Integer Cut Types:**\n- No-good cuts: Exclude exact binary assignment\n- Local branching: Limit Hamming distance\n\n**Usage:**\n- Multi-tree strategy uses these extensively\n- Prevents cycling through same MIP solutions",
+      "has_algorithm": true
+    },
+    {
+      "name": "TaskAddPrimalReductionCut",
+      "brief": "Add objective cutoff based on incumbent\n\nUses primal bound to tighten MIP relaxation.\n\n**TaskAddPrimalReductionCut Class:**\n- currentLowerBoundForReductionCut: Current cutoff value\n- run(): Update objective bound constraint\n\n**Cutoff Strategy:**\n- Adds constraint: objective <= bestPrimal - epsilon\n- Forces MIP to find improving solutions only\n- Updated when primal bound improves",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskBase",
+      "brief": "Base class for modular algorithm tasks\n\nFoundation for task-based algorithm composition.\n\n**TaskBase Class:**\n- isActive(), activate(), deactivate(): Enable/disable tasks\n- initialize(): Setup before first run\n- run(): Execute the task logic\n- getType(): Task identifier for debugging\n\n**Task Categories:**\n- Termination: TimeLimit, IterationLimit, Gap checks\n- Hyperplane: SelectHyperplanePointsESH/ECP, AddHyperplanes\n- Primal: SelectPrimalCandidates, NLP solving\n- Dual: SolveIteration, CreateDualProblem\n- Control: Sequential, Conditional, Goto\n\n**Task Composition:**\n- TaskSequential: Run tasks in order\n- TaskConditional: Branch on conditions\n- TaskGoto: Jump to labeled task",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCalculateSolutionChangeNorm",
+      "brief": "Compute solution movement between iterations\n\nTracks convergence via solution change magnitude.\n\n**TaskCalculateSolutionChangeNorm Class:**\n- run(): Compute ||x_new - x_old|| norm\n\n**Usage:**\n- Detect solution stagnation\n- Used in convergence criteria\n- May trigger algorithm strategy changes",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCheckAbsoluteGap",
+      "brief": "Termination check for absolute optimality gap\n\nTerminates when |primal - dual| < tolerance.\n\n**TaskCheckAbsoluteGap Class:**\n- taskIDIfTrue: Jump target when gap closed\n- run(): Check |bestPrimal - bestDual| < AbsoluteGapTol\n\n**Optimality Gap:**\n- Primal bound: Best feasible solution value\n- Dual bound: Relaxation optimal value\n- Gap closed = provably optimal",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCheckConstraintTolerance",
+      "brief": "Termination check for constraint feasibility\n\nVerifies primal solution satisfies all constraints.\n\n**TaskCheckConstraintTolerance Class:**\n- taskIDIfTrue: Jump target when feasible\n- run(): Check max constraint violation < ConstraintTolerance\n\n**Usage:**\n- Validates feasibility of best primal solution\n- Required for declaring optimality",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCheckDualStagnation",
+      "brief": "Detect stalled dual bound improvement\n\nTriggers countermeasures when dual bound stops improving.\n\n**TaskCheckDualStagnation Class:**\n- taskIDIfTrue: Jump target when stagnation detected\n- run(): Check if dual bound unchanged for N iterations\n\n**Stagnation Recovery:**\n- May trigger stronger cuts or reformulation\n- Indicates outer approximation isn't tightening",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCheckIterationError",
+      "brief": "Detect errors during iteration\n\nHandles solver failures and numerical issues.\n\n**TaskCheckIterationError Class:**\n- taskIDIfTrue: Jump target when error detected\n- run(): Check for MIP solver errors, infeasibility, etc.\n\n**Error Types:**\n- MIP solver failure or timeout\n- Numerical issues in cut generation\n- Unexpected infeasibility",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCheckIterationLimit",
+      "brief": "Termination check for iteration count limit\n\nPart of termination check sequence.\n\n**TaskCheckIterationLimit Class:**\n- taskIDIfTrue: Jump target when limit reached\n- run(): Compare iteration count vs Settings.IterationLimit\n\n**Behavior:**\n- If exceeded: Jump to termination task\n- If not: Continue to next task",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCheckMaxNumberOfPrimalReductionCuts",
+      "brief": "Limit number of objective cutoff updates\n\nPrevents excessive cutoff constraint modifications.\n\n**TaskCheckMaxNumberOfPrimalReductionCuts Class:**\n- taskIDIfTrue: Jump target when limit reached\n- run(): Check cutoff update count\n\n**Usage:**\n- Limit objective bound updates per iteration\n- Avoid MIP solver overhead from repeated bound changes",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCheckPrimalStagnation",
+      "brief": "Detect stalled primal bound improvement\n\nTriggers NLP solves when primal bound stops improving.\n\n**TaskCheckPrimalStagnation Class:**\n- taskIDIfTrue/False: Branch targets for stagnation state\n- run(): Check if primal bound unchanged for N iterations\n\n**Stagnation Recovery:**\n- May trigger fixed-integer NLP to find better solutions\n- Indicates MIP solutions aren't improving primal",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCheckRelativeGap",
+      "brief": "Termination check for relative optimality gap\n\nTerminates when |primal - dual| / |primal| < tolerance.\n\n**TaskCheckRelativeGap Class:**\n- taskIDIfTrue: Jump target when gap closed\n- run(): Check (|bestPrimal - bestDual| / max(1, |bestPrimal|)) < RelativeGapTol\n\n**Usage:**\n- More common than absolute gap for practical problems\n- Scales with solution magnitude",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCheckTimeLimit",
+      "brief": "Termination check for wall-clock time limit\n\nPart of termination check sequence.\n\n**TaskCheckTimeLimit Class:**\n- taskIDIfTrue: Jump target when limit exceeded\n- run(): Compare elapsed vs Settings.TimeLimit\n\n**Behavior:**\n- If exceeded: Jump to termination task\n- If not: Continue to next task",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCheckUserTermination",
+      "brief": "Check for external termination request\n\nAllows user to interrupt solver gracefully.\n\n**TaskCheckUserTermination Class:**\n- taskIDIfTrue: Jump target when user requests stop\n- run(): Check for CTRL+C, callback termination, etc.\n\n**Usage:**\n- Called every iteration to check for interrupts\n- Returns best solution found so far",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskClearFixedPrimalCandidates",
+      "brief": "Clear pending fixed-integer NLP candidates\n\nResets candidate queue between iterations.\n\n**TaskClearFixedPrimalCandidates Class:**\n- run(): Empty the fixed-NLP candidate list\n\n**Usage:**\n- Called at start of each iteration\n- Ensures fresh candidate selection each cycle",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskConditional",
+      "brief": "Branching task based on runtime condition\n\nIf-then-else logic for task workflows.\n\n**TaskConditional Class:**\n- setCondition(fn): Boolean predicate to evaluate\n- setTaskIfTrue/False(): Branch targets\n- run(): Evaluate condition and execute appropriate branch\n\n**Usage in SHOT:**\n- Branch on problem type (MINLP vs NLP)\n- Skip tasks based on solver state",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskCreateDualProblem",
+      "brief": "Build MIP relaxation from reformulated problem\n\nTranslates SHOT's problem representation to MIP solver format.\n\n**TaskCreateDualProblem Class:**\n- run(): Create initial MIP in DualSolver\n- createProblem(): Transfer variables, constraints, objective\n\n**MIP Construction:**\n- Linear constraints: Added directly\n- Quadratic constraints: Added if solver supports MIQCQP\n- Nonlinear constraints: Omitted (handled via hyperplanes)\n- Integer variables: Marked as such in MIP",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskException",
+      "brief": "Exception types for task framework errors\n\nSpecialized exceptions for task-related failures.\n\n**Exception Classes:**\n- TaskException: General task error\n- TaskExceptionFunctionNotDefined: Missing run() implementation\n- TaskExceptionNotFound: Invalid task ID in goto/jump\n\n**Usage:**\n- Thrown by TaskHandler and individual tasks\n- Caught and handled in main solve loop",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskExecuteRelaxationStrategy",
+      "brief": "Execute LP/MIP relaxation strategy step\n\nControls transition from LP to MIP solving.\n\n**TaskExecuteRelaxationStrategy Class:**\n- run(): Invoke current relaxation strategy\n\n**Strategy Control:**\n- Calls IRelaxationStrategy to decide LP vs MIP\n- May enable/disable integer constraints\n- Affects DualSolver solve behavior",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskExecuteSolutionLimitStrategy",
+      "brief": "Control MIP solution pool size dynamically\n\nAdjusts how many MIP solutions are collected per iteration.\n\n**TaskExecuteSolutionLimitStrategy Class:**\n- solutionLimitStrategy: Strategy implementation\n- previousSolLimit: Track limit changes\n- run(): Apply current solution limit\n\n**Strategy Control:**\n- Start with small limit for fast iterations\n- Increase when MIP optimal to explore pool\n- Balance speed vs solution diversity",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskFindInteriorPoint",
+      "brief": "Find strictly feasible interior point for ESH\n\nCritical for ESH: rootsearch needs interior point endpoint.\n\n**TaskFindInteriorPoint Class:**\n- NLPSolvers: Solvers for finding interior\n- run(): Attempt to find strictly feasible point\n\n**Interior Point Methods:**\n- Solve feasibility problem with slack maximization\n- Use NLP solver (Ipopt) with modified objective\n- Required for ESH rootsearch to work",
+      "has_algorithm": true
+    },
+    {
+      "name": "TaskGoto",
+      "brief": "Jump to labeled task in workflow\n\nEnables non-linear control flow in task sequences.\n\n**TaskGoto Class:**\n- gotoTaskID: Target task identifier\n- run(): Signal TaskHandler to jump to target\n\n**Usage in SHOT:**\n- Loop back to iteration start\n- Jump to termination on error",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskHandler",
+      "brief": "Task scheduling and execution control\n\nOrchestrates the modular task-based algorithm workflow.\n\n**Task Management:**\n- addTask(): Register task with string identifier\n- getTask(): Retrieve task by ID\n- clearTasks(): Reset for new solve\n\n**Execution Control:**\n- getNextTask(): Dequeue next task to run\n- setNextTask(): Jump to specific task (for goto/branching)\n- terminate(): Signal algorithm termination\n- isTerminated(): Check termination flag\n\n**Workflow Pattern:**\n1. SolutionStrategy adds tasks in order\n2. Solver calls getNextTask() in loop\n3. Tasks execute and may setNextTask() for control flow\n4. Termination tasks set terminate()\n\n**Task ID Naming:**\n- \"InitializeIteration\", \"SolveIteration\"\n- \"CheckTimeLimit\", \"CheckAbsoluteGap\"\n- \"SelectHyperplanes\", \"AddHyperplanes\"",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskInitializeDualSolver",
+      "brief": "Configure and create MIP solver instance\n\nOne-time setup for MIP solver before main loop.\n\n**TaskInitializeDualSolver Class:**\n- useLazyStrategy: Single-tree (true) or multi-tree (false)\n- run(): Create appropriate MIP solver type\n\n**Solver Selection:**\n- CPLEX: MIPSolverCplex or MIPSolverCplexSingleTree\n- Gurobi: MIPSolverGurobi or MIPSolverGurobiSingleTree\n- CBC: MIPSolverCbc (multi-tree only)",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskInitializeIteration",
+      "brief": "Per-iteration setup and housekeeping\n\nPrepares state for new iteration cycle.\n\n**TaskInitializeIteration Class:**\n- run(): Reset iteration-local state\n\n**Initialization Steps:**\n- Increment iteration counter\n- Clear iteration-specific storage\n- Update timing information",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskInitializeRootsearch",
+      "brief": "Setup rootsearch method for ESH\n\nOne-time initialization of boundary finding algorithm.\n\n**TaskInitializeRootsearch Class:**\n- run(): Create and configure rootsearch method\n\n**Rootsearch Setup:**\n- Select algorithm (TOMS 748, bisection)\n- Configure tolerances and iteration limits\n- Required for ESH hyperplane generation",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskPerformBoundTightening",
+      "brief": "Tighten variable bounds via optimization\n\nUses optimization-based bound tightening (OBBT).\n\n**TaskPerformBoundTightening Class:**\n- POASolver: Polyhedral outer approximation solver\n- createPOA(): Build relaxed problem for bound tightening\n\n**OBBT Algorithm:**\n- For each variable: min/max subject to relaxation\n- Tightens bounds beyond constraint propagation\n- Improves relaxation quality",
+      "has_algorithm": true
+    },
+    {
+      "name": "TaskPresolve",
+      "brief": "Initial problem simplification\n\nApplies presolve techniques before main algorithm.\n\n**TaskPresolve Class:**\n- isPresolved: Track if presolve completed\n- run(): Apply presolve routines\n\n**Presolve Techniques:**\n- Bound propagation\n- Fixed variable removal\n- Redundant constraint detection\n- Expression simplification",
+      "has_algorithm": true
+    },
+    {
+      "name": "TaskPrintIterationReport",
+      "brief": "Output iteration progress to console\n\nFormatted progress line for each iteration.\n\n**TaskPrintIterationReport Class:**\n- lastNumHyperplane: Track hyperplanes added\n- run(): Format and print iteration status\n\n**Report Contents:**\n- Iteration number, elapsed time\n- Primal bound, dual bound, gap\n- Number of hyperplanes added",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskReformulateProblem",
+      "brief": "Transform problem for efficient outer approximation\n\nKey preprocessing: converts problem to reformulated form.\n\n**TaskReformulateProblem Class:**\n- reformulateObjectiveFunction(): Handle nonlinear objective\n- reformulateConstraint(): Process each constraint type\n- createEpigraphConstraint(): Epigraph reformulation\n\n**Reformulation Techniques:**\n- Bilinear terms: McCormick envelopes (addBilinearMcCormickEnvelope)\n- Integer products: Binary expansion\n- Eigenvalue decomposition: Convexify quadratics\n- Term extraction: Separate linear/quadratic/monomial/signomial\n\n**Auxiliary Variables:**\n- Created for bilinear products, squares, absolute values\n- Tracked in squareAuxVariables, bilinearAuxVariables maps",
+      "has_algorithm": true
+    },
+    {
+      "name": "TaskRepairInfeasibleDualProblem",
+      "brief": "Recover from infeasible MIP relaxation\n\nAttempts to restore feasibility when cuts cause infeasibility.\n\n**TaskRepairInfeasibleDualProblem Class:**\n- mainRepairTries, totRepairTries: Repair attempt counters\n- run(): Attempt repair strategies\n\n**Repair Strategies:**\n- Remove recently added cuts\n- Relax cut coefficients\n- Remove dominated cuts\n\n**When Called:**\n- MIP solver returns infeasible\n- May indicate numerical issues with cuts",
+      "has_algorithm": true
+    },
+    {
+      "name": "TaskRepairableBase",
+      "brief": "Base class for tasks that can repair failures\n\nExtension point for failure recovery logic.\n\n**TaskRepairableBase Class:**\n- repair(): Attempt to fix failed task\n\n**Usage:**\n- Subclassed by tasks that can recover from errors\n- Called when initial run() fails",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskSelectHyperplanePointsECP",
+      "brief": "Extended Cutting Plane point selection\n\nClassic outer approximation: linearize at infeasible points.\n\n**TaskSelectHyperplanePointsECP Class:**\n- run(): Process current MIP solutions\n- run(solPoints): Process specific solution points\n\n**ECP Algorithm:**\n- Generate gradient cut at infeasible solution\n- Simpler than ESH but may converge slower\n- Used as fallback when ESH rootsearch fails",
+      "has_algorithm": true
+    },
+    {
+      "name": "TaskSelectHyperplanePointsESH",
+      "brief": "Extended Supporting Hyperplane point selection\n\nCore ESH algorithm: finds boundary points for hyperplane generation.\n\n**TaskSelectHyperplanePointsESH Class:**\n- run(): Process current MIP solutions\n- run(solPoints): Process specific solution points\n\n**ESH Algorithm:**\n1. Take infeasible MIP solution point\n2. Use rootsearch to find boundary with feasible region\n3. Generate supporting hyperplane at boundary\n\n**Extends ECP:**\n- ESH uses interior point + rootsearch\n- ECP generates cuts at infeasible point directly",
+      "has_algorithm": true
+    },
+    {
+      "name": "TaskSelectHyperplanePointsObjectiveFunction",
+      "brief": "Hyperplane selection for nonlinear objective\n\nGenerates cuts for epigraph of nonlinear objective.\n\n**TaskSelectHyperplanePointsObjectiveFunction Class:**\n- run(): Process objective at current solutions\n- run(solPoints): Process specific solution points\n\n**Epigraph Linearization:**\n- Nonlinear objective reformulated as: min t, f(x) <= t\n- Generates cuts to approximate f(x) <= t constraint",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskSelectPrimalCandidatesFromNLP",
+      "brief": "Solve fixed-integer NLP for primal candidates\n\nUses NLP solver (Ipopt) with fixed integer variables.\n\n**TaskSelectPrimalCandidatesFromNLP Class:**\n- solveFixedNLP(): Fix integers, solve continuous NLP\n- createInfeasibilityCut(): Handle infeasible NLP\n- createIntegerCut(): Exclude tested integer assignment\n\n**Fixed-Integer NLP:**\n- Take MIP solution's integer values\n- Solve continuous relaxation with fixed integers\n- Provides locally optimal primal candidates\n\n**Usage:**\n- Triggered by primal stagnation\n- May improve primal bound significantly",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskSelectPrimalCandidatesFromRootsearch",
+      "brief": "Extract primal candidates from ESH rootsearch\n\nByproduct of boundary finding: feasible points near boundary.\n\n**TaskSelectPrimalCandidatesFromRootsearch Class:**\n- run(): Check rootsearch intermediate points\n- run(solPoints): Process specific solution points\n\n**Rootsearch Byproduct:**\n- ESH rootsearch traverses from infeasible to interior\n- Intermediate points may be feasible primal candidates\n- Cheap way to discover feasible solutions",
+      "has_algorithm": true
+    },
+    {
+      "name": "TaskSelectPrimalCandidatesFromSolutionPool",
+      "brief": "Check MIP solution pool for feasible MINLP solutions\n\nExtracts primal candidates from MIP solver's solution pool.\n\n**TaskSelectPrimalCandidatesFromSolutionPool Class:**\n- run(): Iterate through MIP solution pool\n- Check each solution for original constraint feasibility\n\n**Primal Candidate Processing:**\n- MIP solution may violate nonlinear constraints\n- Feasible solutions update primal bound\n- Infeasible solutions generate hyperplanes",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskSelectPrimalFixedNLPPointsFromSolutionPool",
+      "brief": "Select MIP solutions for fixed-integer NLP solving\n\nChooses promising candidates for NLP refinement.\n\n**TaskSelectPrimalFixedNLPPointsFromSolutionPool Class:**\n- run(): Select best candidates from solution pool\n\n**Selection Criteria:**\n- Prioritize solutions close to feasibility\n- Avoid already-tested integer assignments\n- Respect NLP solve budget",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskSequential",
+      "brief": "Container task that runs subtasks in sequence\n\nComposite pattern for building task workflows.\n\n**TaskSequential Class:**\n- addTask()/addTasks(): Build task list\n- run(): Execute all subtasks in order\n\n**Usage in SHOT:**\n- Main iteration loop as sequential task chain\n- Groups related operations (all termination checks)",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskSimple",
+      "brief": "Lightweight task wrapper for lambda functions\n\nAdapts arbitrary callable to task interface.\n\n**TaskSimple Class:**\n- setFunction(fn): Set callable to execute\n- run(): Invoke the stored function\n\n**Usage:**\n- Quick inline tasks without subclassing\n- Adapts existing functions to task framework",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskSolveIteration",
+      "brief": "Solve MIP relaxation for current iteration\n\nCore MIP solve step in outer approximation loop.\n\n**TaskSolveIteration Class:**\n- run(): Call DualSolver to solve MIP with current cuts\n\n**Iteration Flow:**\n1. MIP has linear approximation of nonlinear constraints\n2. Solve gives candidate solution + dual bound\n3. Candidate checked for feasibility\n4. New cuts generated at infeasible points",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskTerminate",
+      "brief": "Signals end of optimization algorithm\n\nFinal task that stops the main loop.\n\n**TaskTerminate Class:**\n- run(): Set termination flag in TaskHandler\n\n**Called When:**\n- Optimal solution found (gap closed)\n- Resource limit exceeded (time, iteration)\n- Infeasibility proven",
+      "has_algorithm": false
+    },
+    {
+      "name": "TaskUpdateInteriorPoint",
+      "brief": "Update interior point during optimization\n\nImproves ESH quality by updating interior point.\n\n**TaskUpdateInteriorPoint Class:**\n- run(): Recompute or update interior point\n\n**Update Strategy:**\n- Use new primal solutions as interior candidates\n- Average with existing interior point\n- Improves cut quality as algorithm progresses",
+      "has_algorithm": false
+    },
+    {
+      "name": "Terms",
+      "brief": "Term hierarchy for linear, quadratic, monomial, and signomial expressions\n\nBuilding blocks for constraint and objective function representation.\n\n**Term Base Class:**\n- coefficient: Scaling factor\n- calculate(): Evaluate at point or interval\n- getConvexity(): Linear, Convex, Concave, Nonconvex\n- getMonotonicity(): Nondecreasing, Nonincreasing, Constant\n\n**LinearTerm:** coeff * x\n- Always linear convexity\n- Monotonicity depends on coefficient sign\n\n**QuadraticTerm:** coeff * x1 * x2\n- isSquare: x1 == x2 (convex if coeff > 0)\n- isBilinear: x1 != x2 (nonconvex)\n- isBinary, isInteger: Type detection for reformulation\n\n**QuadraticTerms Collection:**\n- Eigenvalue analysis via Eigen for convexity\n- allSquares, allPositive flags for structure detection\n\n**MonomialTerm:** coeff * x1 * x2 * ... * xn\n- isBinary: All variables binary (linearizable)\n- Generally nonconvex\n\n**SignomialTerm:** coeff * x1^p1 * x2^p2 * ... * xn^pn\n- SignomialElement: (variable, power) pair\n- Convexity rules based on power signs and sums\n\n**Gradient/Hessian Methods:**\n- calculateGradient(): Sparse first derivatives\n- calculateHessian(): Upper triangular second derivatives",
+      "has_algorithm": false
+    },
+    {
+      "name": "Timer",
+      "brief": "High-resolution stopwatch for performance measurement\n\nLightweight timer using std::chrono::high_resolution_clock.\n\n**Timer Class:**\n- start()/stop(): Pause/resume timing\n- restart(): Reset to zero and start\n- elapsed(): Get cumulative time in seconds\n\n**Properties:**\n- name: Timer identifier (for Timing registry)\n- description: Human-readable label\n\n**Usage:**\nTimer t(\"SolveMIP\", \"MIP solver time\");\nt.start();\n// ... computation ...\nt.stop();\ndouble seconds = t.elapsed();",
+      "has_algorithm": false
+    },
+    {
+      "name": "Timing",
+      "brief": "Named timer registry for profiling solver phases\n\nCollection of named timers for performance analysis.\n\n**Timing Class:**\n- createTimer(): Register new timer with name/description\n- startTimer()/stopTimer(): Control by name\n- getElapsedTime(): Query accumulated time\n\n**Typical Timers:**\n- \"Total\": Overall solve time\n- \"DualMIP\": MIP solver calls\n- \"PrimalNLP\": NLP subproblem solves\n- \"Reformulation\": Problem transformation\n\n**Thread Safety:**\n- Timers are not thread-safe\n- Use in single-threaded solver context",
+      "has_algorithm": false
+    },
+    {
+      "name": "Utilities",
+      "brief": "Helper functions for vectors, hashing, and I/O\n\nStandalone utility functions in SHOT::Utilities namespace.\n\n**Vector Operations:**\n- L2Norm(): Euclidean distance between points\n- calculateCenterPoint(): Centroid of point set\n- displayVector(): Debug output for vectors\n\n**Hashing:**\n- calculateHash(): Hash function for duplicate detection\n- Used by hyperplane/integer cut deduplication\n\n**File I/O:**\n- writeStringToFile(), getFileAsString()\n- saveVariablePointVectorToFile(): Solution output\n\n**Numeric:**\n- isAlmostEqual(), isAlmostZero(): Tolerance comparisons\n- isInteger(): Check for integer values\n\n**Sparse Containers:**\n- SparseVariableVector: Variable\u2192coefficient map\n- SparseVariableMatrix: (Variable,Variable)\u2192coefficient\n- combineSparseVariable*(): Merge operations",
+      "has_algorithm": false
+    },
+    {
+      "name": "Variables",
+      "brief": "Decision variable representation with bounds and types\n\nVariable classes for MINLP problem modeling.\n\n**VariableProperties Struct:**\n- type: Real, Binary, Integer, Semicontinuous, Semiinteger\n- auxiliaryType: Tracks origin of reformulation variables\n- Context flags: inObjectiveFunction, inLinearConstraints, etc.\n- Bound tightening status\n\n**Variable Class:**\n- index, name: Problem identifier\n- lowerBound, upperBound: Variable domain\n- semiBound: For semicontinuous/semiinteger types\n- calculate(): Evaluate at a point\n- getBound(): Interval arithmetic bounds\n- tightenBounds(): FBBT bound update\n\n**Variables Collection:**\n- Vector wrapper with ownership tracking\n- sortByIndex(): Reorder for solver compatibility\n\n**Interval Arithmetic (CppAD):**\n- Uses mc::Interval for bound propagation\n- FactorableFunction for automatic differentiation",
+      "has_algorithm": false
+    },
+    {
+      "name": "ref",
+      "brief": "Contains a reference to an object of type `T`.\n\n `reference_wrapper` is primarily used to \"feed\" references to\n function templates (algorithms) that take their parameter by\n value. It provides an implicit conversion to `T&`, which\n usually allows the function templates to work on references\n unmodified.",
+      "has_algorithm": false
+    },
+    {
+      "name": "tmodel",
+      "brief": "Taylor Model Arithmetic for Rigorous Bound Propagation",
+      "has_algorithm": true
+    }
+  ]
+}

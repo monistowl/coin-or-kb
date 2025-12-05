@@ -1,0 +1,21 @@
+{
+  "name": "ClpGubDynamicMatrix",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpGubDynamicMatrix.hpp",
+  "brief": "Dynamic column generation with Generalized Upper Bound structure\n\nCombines GUB constraints with dynamic column generation. Columns are\npartitioned into GUB sets where at most one column per set can be basic.",
+  "algorithms": [
+    {
+      "name": "Effective RHS:\nInstead of explicit GUB rows, track effective RHS implicitly:\n  effectiveRHS_k = u_k - \u03a3_{j\u2208S\u2096, j nonbasic} x_j\nThis avoids adding m_gub rows to the constraint matrix.\n\nAPPLICATIONS:\n- Cutting stock: patterns as columns, roll types as GUB sets\n- Vehicle routing: routes as columns, vehicles as GUB sets\n- Crew scheduling: pairings as columns, days as GUB sets",
+      "math": "GUB STRUCTURE:\n  Variables partitioned into sets S\u2081, S\u2082, ..., S\u2096\n  GUB constraint for set k: \u03a3_{j\u2208S\u2096} x\u2c7c \u2264 u\u2096 (or = u\u2096)\n\nKey property: At most ONE variable from each GUB set can be basic.\nThis reduces effective basis size and enables implicit handling.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpGubMatrix for static GUB handling",
+    "ClpDynamicMatrix for non-GUB dynamic columns",
+    "ClpDynamicExampleMatrix for column generation example"
+  ]
+}

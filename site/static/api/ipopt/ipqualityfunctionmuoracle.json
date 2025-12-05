@@ -1,0 +1,23 @@
+{
+  "name": "IpQualityFunctionMuOracle",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpQualityFunctionMuOracle.hpp",
+  "brief": "Barrier parameter selection via quality function minimization\n\nQualityFunctionMuOracle computes the barrier parameter by minimizing\na quality function that measures how close the predictor-corrector\nstep brings the iterate to optimality.\n\nAlgorithm:\n1. Compute affine scaling direction (mu = 0)\n2. Compute centering direction (pure mu term)\n3. For combined step (sigma * centering + affine), find optimal sigma\n4. Convert optimal sigma to mu = sigma * average_complementarity\n\nQuality function Q(sigma) measures (configurable):\n- Primal-dual error norm after step\n- Centrality deviation from mu-centered path\n- Balancing term for primal/dual progress\n\nConfiguration options:\n- quality_function_norm_: NM_NORM_1, NM_NORM_2, NM_NORM_MAX\n- quality_function_centrality_: CEN_NONE, CEN_LOG, CEN_RECIPROCAL\n- quality_function_balancing_term_: BT_NONE, BT_CUBIC\n\nGolden section search:\n- Finds optimal sigma in [sigma_min_, sigma_max_]\n- Tolerances: quality_function_section_sigma_tol_, _qf_tol_\n- Maximum iterations: quality_function_max_section_steps_",
+  "algorithms": [
+    {
+      "name": "Quality Function Barrier Parameter Oracle:\nChooses \u03bc by minimizing predicted error after a predictor-corrector step:\n1. Solve affine direction: Newton step with \u03bc=0 (predictor)\n2. Solve centering direction: pure \u03bc contribution (corrector)\n3. Combined step: \u0394 = \u0394_aff + \u03c3\u00b7\u0394_cen parameterized by \u03c3 \u2208 [0,1]\n4. Golden section search minimizes Q(\u03c3) over [\u03c3_min, \u03c3_max]\n5. Return \u03bc = \u03c3* \u00b7 (average complementarity)",
+      "math": "Quality function evaluates predicted iterate quality:\n  Q(\u03c3) = ||\u2207L(x+\u0394x)||_p + C(x+\u0394x) + B(x+\u0394x)\nwhere:\n  ||\u00b7||_p is configurable norm (1, 2, \u221e)\n  C(\u00b7) = centrality measure: none, \u03a3log(x_iz_i/\u03bc), or \u03a3(1/(x_iz_i) - 1/\u03bc)\n  B(\u00b7) = balancing term penalizing unequal primal/dual progress\n\nPredictor-corrector interpretation (Mehrotra):\n  \u03c3 = 0 \u2192 pure affine scaling (aggressive)\n  \u03c3 = 1 \u2192 pure centering (conservative)\n  \u03c3* \u2208 (0,1) \u2192 adaptive balance",
+      "complexity": "Per oracle call: 2 linear solves (affine + centering) plus\nO(n \u00b7 max_section_steps) quality function evaluations for golden section.",
+      "ref": [
+        "Nocedal et al. (2009). \"Adaptive Barrier Update Strategies for\n  Nonlinear Interior Methods\". SIAM J. Optim. 19(4):1674-1693.",
+        "Mehrotra (1992). \"On the Implementation of a Primal-Dual Interior\n  Point Method\". SIAM J. Optim. 2(4):575-601. [Predictor-corrector]"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpMuOracle.hpp for the base interface",
+    "IpAdaptiveMuUpdate.hpp for usage"
+  ]
+}

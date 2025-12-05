@@ -1,0 +1,9 @@
+{
+  "name": "vector_bool",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/utility/vector_bool.hpp",
+  "brief": "CppAD utility: vector bool",
+  "algorithms": [],
+  "methods": []
+}

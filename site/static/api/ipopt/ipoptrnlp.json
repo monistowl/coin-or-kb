@@ -1,0 +1,9 @@
+{
+  "name": "IpoptRNLP",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "contrib/RInterface/src/IpoptRNLP.hpp",
+  "brief": "R language interface for Ipopt TNLP\n\nIpoptRNLP derives from TNLP to bridge Ipopt with R. Handles callback\nto R functions for objective (eval_f), gradient (eval_grad_f),\nconstraints (eval_g), Jacobian (eval_jac_g), and Hessian (eval_h).\nManages R SEXP objects for environment, bounds, and sparse structures.\nSupports Hessian approximation mode. Part of ipoptr R package.",
+  "algorithms": [],
+  "methods": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "IpGradientScaling",
+  "library": "Ipopt",
+  "layer": "layer-2",
+  "header": "src/Algorithm/IpGradientScaling.hpp",
+  "brief": "NLP scaling based on gradient magnitudes at initial point\n\nGradientScaling computes scaling factors for the NLP based on the\nmaximum gradient norms at the user-provided starting point. This\nimproves problem conditioning by normalizing objective and constraint\nmagnitudes.",
+  "algorithms": [
+    {
+      "name": "Gradient-Based Automatic Scaling:\n  DetermineScalingParametersImpl() at x\u2080:\n  1. Evaluate \u2207f(x\u2080), J_c(x\u2080), J_d(x\u2080) at starting point.\n  2. For objective: df = min(1, target_grad / ||\u2207f||\u221e).\n  3. For each constraint i: dc[i] = min(1, target_grad / ||J_c[i,:]||\u221e).\n  4. Apply minimum: df, dc, dd \u2265 scaling_min_value.\n  5. Skip if ||\u2207f||\u221e < scaling_max_gradient (already well-scaled).",
+      "math": "Scaling rationale:\n  Goal: ||\u2207f\u0303||\u221e \u2248 target_grad, ||J\u0303[i,:]||\u221e \u2248 target_grad.\n  Makes Newton step components comparable magnitude.\n  Improves convergence for poorly scaled problems.\n\nScaling computation:\n- Evaluate gradients at x0\n- s_f = 1 / max(1, ||\u2207f||_\u221e / target_grad)\n- s_c[i] = 1 / max(1, ||\u2207c_i||_\u221e / target_grad)\n- s_d[i] = 1 / max(1, ||\u2207d_i||_\u221e / target_grad)\n\nKey parameters:\n- scaling_max_gradient_: Skip scaling if gradients below this\n- scaling_obj_target_gradient_: Target norm for objective gradient\n- scaling_constr_target_gradient_: Target norm for constraint gradients\n- scaling_min_value_: Lower bound on scaling factors\n\nNote: Variable scaling (d_x) is not computed by this class;\nuses identity scaling for x.",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "IpNLPScaling.hpp for the scaling framework",
+    "IpEquilibrationScaling.hpp for MC19-based alternative"
+  ]
+}

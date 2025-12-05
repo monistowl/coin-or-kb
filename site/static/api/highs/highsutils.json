@@ -1,0 +1,13 @@
+{
+  "name": "HighsUtils",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/util/HighsUtils.h",
+  "brief": "Index collections, sparse transpose, and statistical utilities\n\nMiscellaneous utility types and functions used across HiGHS.\n\n**HighsIndexCollection:**\nFlexible index specification for API operations:\n- interval: Range [from_, to_]\n- set: Explicit index array\n- mask: Boolean array\n\n**Sparse Matrix Operations:**\n- highsSparseTranspose(): CSC to CSR conversion\n\n**Value Distribution:**\n- HighsValueDistribution: Histogram for analyzing value ranges\n- HighsScatterData: Scatter plot data for analysis\n\n**Index Collection Status:**\n- kIndexCollectionCreateOk: Valid collection\n- kIndexCollectionCreateIllegalInterval/Set/Mask: Error codes",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lp_data/HighsLp.h for LP index operations",
+    "model/HighsModel.h for model modifications using indices"
+  ]
+}

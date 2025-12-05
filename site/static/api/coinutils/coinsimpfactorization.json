@@ -1,0 +1,20 @@
+{
+  "name": "CoinSimpFactorization",
+  "library": "CoinUtils",
+  "layer": "layer-0",
+  "header": "src/CoinSimpFactorization.hpp",
+  "brief": "Simple LU factorization for LP basis matrices\n\nStraightforward LU factorization implementation. Less optimized than\nCoinFactorization but simpler and useful as reference implementation.",
+  "algorithms": [
+    {
+      "name": "Sparse LU with Markowitz Pivoting:\n  Computes PA = LU minimizing fill-in during elimination.\n  1. Find pivot (r,s) minimizing Markowitz count: (nnz_row - 1)(nnz_col - 1)\n  2. Swap row r to current position, column s to current position\n  3. Perform Gaussian elimination on remaining submatrix\n  4. Store L factors by row and column, U factors by row and column\n  Updates via eta vectors (product form of inverse):\n  B_{k+1}^{-1} = E_k * B_k^{-1} where E_k is eta matrix",
+      "math": "LU factorization: PA = LU, L unit lower triangular, U upper triangular\n  FTRAN: solve Bx = b via Ly = Pb, Ux = y\n  BTRAN: solve B'x = b via U'y = b, L'z = y, x = P'z\n  Update: B_new = B_old + (a_q - B*e_p)*e_p' handled by eta vectors",
+      "complexity": "Factorization: O(n\u00b3) worst, typically O(n\u00b7nnz) with good pivoting\n  FTRAN/BTRAN: O(nnz(L) + nnz(U)) per solve\n  Update: O(n) per eta vector, refactorize after ~100 pivots",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CoinOtherFactorization for the base class",
+    "CoinFactorization for the optimized sparse implementation"
+  ]
+}

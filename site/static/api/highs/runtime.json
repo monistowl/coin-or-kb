@@ -1,0 +1,9 @@
+{
+  "name": "runtime",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/qpsolver/runtime.hpp",
+  "brief": "HiGHS QP runtime data\n\nRuntime state for QUASS algorithm.\nStores iteration counts, timers, and status.",
+  "algorithms": [],
+  "methods": []
+}

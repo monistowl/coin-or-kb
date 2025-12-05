@@ -1,0 +1,14 @@
+{
+  "name": "HighsSolve",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsSolve.h",
+  "brief": "Top-level LP solve dispatch and special case handling\n\nEntry points for solving LPs with solver selection and preprocessing.\n\n**Main Solve Functions:**\n- solveLp(): Primary entry point dispatching to simplex/IPM\n- solveUnconstrainedLp(): Handle LPs with no constraints\n\n**Solver Selection:**\n- useIpm(): Check if IPM should be used based on options\n- useHipo(): Check if parallel HIPO IPM is appropriate\n  - Considers problem size, structure, and options\n\n**Preprocessing:**\n- assessExcessiveObjectiveBoundScaling(): Detect numerical issues\n  - Warns if objective/bound ratio is extreme\n  - Populates user_scale_data for remediation\n\n**Dispatch Logic:**\n1. Check for special cases (unconstrained, trivially infeasible)\n2. Select solver (simplex vs IPM vs HIPO)\n3. Call appropriate solver with prepared solver object",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lp_data/HighsLpSolverObject.h for solver state container",
+    "simplex/HEkk.h for simplex implementation",
+    "ipm/IpxWrapper.h for IPM implementation"
+  ]
+}

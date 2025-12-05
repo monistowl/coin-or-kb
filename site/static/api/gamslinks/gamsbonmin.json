@@ -1,0 +1,12 @@
+{
+  "name": "GamsBonmin",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/bonmin/GamsBonmin.hpp",
+  "brief": "GAMS interface to Bonmin MINLP solver\n\nConnects GAMS to COIN-OR Bonmin for mixed-integer nonlinear programming.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "GamsMINLP.hpp for NLP subproblem representation"
+  ]
+}

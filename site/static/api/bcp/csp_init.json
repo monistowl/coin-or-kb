@@ -1,0 +1,16 @@
+{
+  "name": "CSP_init",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Csp/include/CSP_init.hpp",
+  "brief": "CSP BCP initialization",
+  "algorithms": [
+    {
+      "name": "CSP Init: Process Factory\n\nUSER_initialize subclass creating CSP_tm and CSP_lp processes.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

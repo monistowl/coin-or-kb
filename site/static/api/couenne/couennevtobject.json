@@ -1,0 +1,22 @@
+{
+  "name": "CouenneVTObject",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneVTObject.hpp",
+  "brief": "Violation transfer branching for MINLP variables",
+  "algorithms": [
+    {
+      "name": "Violation Transfer Branching\n\nComputes variable infeasibility by aggregating violations from\nall auxiliary variables whose definitions depend on this variable.\n\n**Violation transfer concept:**\nFor variable x, measure infeasibility as:\nsum/min/max over all auxiliaries w where w = f(...,x,...):\n  |w - f(...,x,...)|\n\n**Rationale:**\nVariables appearing in many violated auxiliary definitions\nare good branching candidates since branching on them can\nsimultaneously reduce multiple auxiliary violations.\n\n**Comparison to CouenneVarObject:**\n- CouenneVarObject: Direct integrality/bound violation\n- CouenneVTObject: Aggregated auxiliary violations",
+      "math": "VT_score(x) = \u03a3_{w: w=f(...,x,...)} |w - f(...,x,...)|",
+      "complexity": "O(deg(x)) per variable where deg(x) = auxiliaries depending on x",
+      "ref": [
+        "Belotti et al., \"Branching and bounds tightening techniques\n     for non-convex MINLP\", Optimization Methods & Software, 2009"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneVarObject base class",
+    "CouenneDepGraph for variable dependencies"
+  ]
+}

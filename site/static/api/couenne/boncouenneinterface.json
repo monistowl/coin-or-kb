@@ -1,0 +1,13 @@
+{
+  "name": "BonCouenneInterface",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/interfaces/BonCouenneInterface.hpp",
+  "brief": "Couenne's interface to Bonmin/AMPL\n\nExtends Bonmin's AmplInterface to read AMPL models and build\nCouenne's symbolic problem representation with convex relaxations.\n\n**Key methods:**\n- readAmplNlFile(): Read AMPL .nl file into Couenne structures\n- extractLinearRelaxation(): Build initial LP relaxation with OA cuts\n\n**Linear relaxation extraction:**\n1. Solve continuous NLP relaxation\n2. Generate linearization cuts at NLP optimum\n3. Load cuts into OsiSolverInterface for B&B",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CouenneProblem for the symbolic representation",
+    "CouenneCutGenerator for cut generation"
+  ]
+}

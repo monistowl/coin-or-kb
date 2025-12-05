@@ -1,0 +1,9 @@
+{
+  "name": "sparse_jac_fun",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/speed/sparse_jac_fun.hpp",
+  "brief": "Speed testing: sparse_jac_fun",
+  "algorithms": [],
+  "methods": []
+}

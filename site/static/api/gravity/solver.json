@@ -1,0 +1,21 @@
+{
+  "name": "solver",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/solver.h",
+  "brief": "Unified solver interface for multiple optimization backends\n\nDispatches Gravity models to various solver implementations.",
+  "algorithms": [
+    {
+      "name": "Warm Starting:\nReuse previous solution for faster convergence.\n\n  For NLP (Ipopt):\n    - Primal: x_init = previous x*\n    - Dual: lambda_init = previous lambda*\n    - Bound multipliers: z_L, z_U from previous solve\n\n  For LP/MIP:\n    - Basis information (if available)\n    - MIP start from previous incumbent\n\n**Supported Solvers (via SolverType enum):**\n- ipopt: Interior point NLP (nonlinear)\n- gurobi: Commercial LP/QP/MIP\n- cplex: Commercial LP/QP/MIP\n- bonmin: Open-source MINLP (NLP-based B&B)\n- mosek: Commercial conic/SDP\n- clp: COIN-OR simplex LP\n- highs: Open-source LP/MIP\n- sdpa: SDP solver\n\n**solver<type> Template Class:**\n- _model: Pointer to Gravity Model\n- _prog: Solver-specific program adapter\n- _stype: Which solver to use\n- _tol: Solver tolerance (default 1e-6)\n\n**Solver Options:**\n- set_option(string, string): String options\n- set_option(string, int): Integer options\n- set_option(string, double): Numeric options\n\n**Usage:**\n```cpp\nModel<> m;\n// ... build model ...\nsolver<> s(m, ipopt);\ns.run();\n```\n\n**Conditional Compilation:**\n- USE_IPOPT, USE_GUROBI, USE_CPLEX, etc.\n- SolverNotAvailable() throws if solver not compiled in",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "gravity/model.h for model building",
+    "gravity/IpoptProgram.h for Ipopt adapter",
+    "gravity/GurobiProgram.h for Gurobi adapter"
+  ]
+}

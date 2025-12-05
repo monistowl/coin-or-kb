@@ -1,0 +1,9 @@
+{
+  "name": "OSCouenneSolver",
+  "library": "OS",
+  "layer": "layer-4",
+  "header": "OS/src/OSSolverInterfaces/OSCouenneSolver.h",
+  "brief": "",
+  "algorithms": [],
+  "methods": []
+}

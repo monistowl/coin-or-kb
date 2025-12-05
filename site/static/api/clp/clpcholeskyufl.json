@@ -1,0 +1,23 @@
+{
+  "name": "ClpCholeskyUfl",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/ClpCholeskyUfl.hpp",
+  "brief": "SuiteSparse CHOLMOD interface for Cholesky factorization\n\nWraps the CHOLMOD library from SuiteSparse (University of Florida) for\nCholesky factorization of normal equations in interior point methods.",
+  "algorithms": [
+    {
+      "name": "CHOLMOD Supernodal Sparse Cholesky:\n  Hybrid supernodal/simplicial factorization A = LL':\n  1. Ordering: Fill-reducing permutation via AMD, COLAMD, or METIS\n  2. Symbolic: Analyze sparsity of L, allocate memory\n  3. Numeric: Factor using supernodal method (large fronts) or\n     simplicial (small problems) - automatically selected\n  4. Solve: Forward L\u00b7z = b, backward L'\u00b7x = z",
+      "math": "Supernodal vs simplicial:\n  Supernodal: Groups consecutive pivots with same sparsity pattern\n  Uses dense BLAS-3 on column panels for cache efficiency\n  Simplicial: Classical left-looking algorithm for small/sparse problems\n  CHOLMOD auto-selects based on estimated flop count",
+      "complexity": "Supernodal: O(nnz(L)\u00b7f\u0304) where f\u0304 = average supernode size\n  Typically 5-10x faster than simplicial for large problems\n  Memory: O(nnz(L)) with efficient compressed storage",
+      "ref": [
+        "Davis & Hager (2009). \"Dynamic Supernodes in Sparse Cholesky Update/\n     Downdate and Triangular Solves\". ACM TOMS 35:27.\n\nCHOLMOD provides:\n- Supernodal and simplicial Cholesky modes\n- Automatic fill-reducing ordering (AMD, METIS)\n- Efficient memory management for sparse factors\n\nThis is the most portable high-quality option across platforms.\nRequires SuiteSparse/CHOLMOD library."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ClpCholeskyBase for the abstract interface",
+    "ClpInterior which uses this factorization",
+    "http://www.cise.ufl.edu/research/sparse/cholmod"
+  ]
+}

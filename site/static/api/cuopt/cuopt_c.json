@@ -1,0 +1,9 @@
+{
+  "name": "cuopt_c",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/include/cuopt/linear_programming/cuopt_c.h",
+  "brief": "A ``cuOptOptimizationProblem`` object contains a representation of\nan LP or MIP. It is created by ``cuOptCreateProblem`` or ``cuOptCreateRangedProblem``.\nIt is passed to ``cuOptSolve``. It should be destroyed using ``cuOptDestroyProblem``.",
+  "algorithms": [],
+  "methods": []
+}

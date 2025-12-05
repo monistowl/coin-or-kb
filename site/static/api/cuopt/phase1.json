@@ -1,0 +1,9 @@
+{
+  "name": "phase1",
+  "library": "cuopt",
+  "layer": "layer-4",
+  "header": "cpp/src/dual_simplex/phase1.hpp",
+  "brief": "cuOpt GPU dual simplex component\n\nPart of CUDA-accelerated dual simplex LP solver.",
+  "algorithms": [],
+  "methods": []
+}

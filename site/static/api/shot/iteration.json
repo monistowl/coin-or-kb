@@ -1,0 +1,12 @@
+{
+  "name": "Iteration",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Iteration.h",
+  "brief": "Per-iteration state snapshot for algorithm progress tracking\n\nCaptures the state of the solver at each outer approximation iteration.\n\n**Problem State:**\n- dualProblemClass: LP, QP, MIP, MIQP, etc.\n- isDualProblemDiscrete: Whether MIP or LP relaxation\n- solutionStatus: Optimal, Feasible, Infeasible, etc.\n\n**Solution Data:**\n- solutionPoints: All solutions from MIP solution pool\n- objectiveValue: Best objective value\n- currentObjectiveBounds: (dual, primal) bounds\n\n**Constraint Violation:**\n- constraintDeviations: Per-constraint violations\n- maxDeviation, maxDeviationConstraint: Worst violation\n- usedConstraintTolerance: Tolerance for this iteration\n\n**Hyperplane Statistics:**\n- numHyperplanesAdded: Cuts added this iteration\n- totNumHyperplanes: Cumulative cuts\n- hyperplanePoints: Generation points\n\n**Node Statistics:**\n- numberOfExploredNodes, numberOfOpenNodes: B&B tree\n\n**Helper Methods:**\n- getSolutionPointWithSmallestDeviation()\n- isMIP(): Check if discrete problem",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "Results.h for iterations collection"
+  ]
+}

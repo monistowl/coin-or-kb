@@ -1,0 +1,9 @@
+{
+  "name": "sqrt_op",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/local/var_op/sqrt_op.hpp",
+  "brief": "Internal implementation: sqrt_op",
+  "algorithms": [],
+  "methods": []
+}

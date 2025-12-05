@@ -1,0 +1,13 @@
+{
+  "name": "HighsLpSolverObject",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/lp_data/HighsLpSolverObject.h",
+  "brief": "Aggregation of all objects needed for LP solving\n\n**HighsLpSolverObject:**\nBundles references to all components needed to solve an LP:\n- lp_: The LP model data (HighsLp)\n- basis_: Current simplex basis (HighsBasis)\n- solution_: Primal/dual solution vectors (HighsSolution)\n- highs_info_: Solver statistics and output (HighsInfo)\n- ekk_instance_: Edinburgh simplex kernel (HEkk)\n- callback_: User callback handler (HighsCallback)\n- options_: Solver options (HighsOptions)\n- timer_: Performance timer (HighsTimer)\n- sub_solver_call_time_: Timing breakdown for sub-solvers\n- model_status_: Current model status (kNotset, kOptimal, etc.)\n\nUsed to pass solver context between functions without long parameter lists.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "simplex/HEkk.h for simplex implementation",
+    "lp_data/HighsLp.h for LP data structure"
+  ]
+}

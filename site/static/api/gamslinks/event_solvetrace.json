@@ -1,0 +1,9 @@
+{
+  "name": "event_solvetrace",
+  "library": "GAMSlinks",
+  "layer": "layer-4",
+  "header": "src/scip/event_solvetrace.h",
+  "brief": "event handler to write GAMS solve trace file",
+  "algorithms": [],
+  "methods": []
+}

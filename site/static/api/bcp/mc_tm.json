@@ -1,0 +1,19 @@
+{
+  "name": "MC_tm",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/MaxCut/include/MC_tm.hpp",
+  "brief": "Max-cut tree manager for BCP",
+  "algorithms": [
+    {
+      "name": "Max-Cut TM: Search Tree Coordination\n\nTree manager process for coordinating max-cut search tree.\nInherits from BCP_tm_user to customize tree management.\n\n**Responsibilities:**\n- Pack/unpack MC_problem graph to LP processes\n- Manage best known solution (MC_solution)\n- Serialize/deserialize cycle cuts between processes",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "MC_lp.hpp for LP node processing"
+  ]
+}

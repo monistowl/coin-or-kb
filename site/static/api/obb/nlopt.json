@@ -1,0 +1,14 @@
+{
+  "name": "nlopt",
+  "library": "oBB",
+  "layer": "layer-3",
+  "header": "nlopt/nlopt.h",
+  "brief": "NLopt (Nonlinear Optimization) C API - bundled with oBB\n\nNLopt is a library for nonlinear optimization providing a common\ninterface to many algorithms. This is a subset bundled with oBB.\n\n**nlopt_algorithm Enum (in this subset):**\n- NLOPT_LD_SLSQP: Sequential Least Squares Programming (local, derivative)\n\n**nlopt_result Enum:**\n- NLOPT_SUCCESS: Generic success\n- NLOPT_STOPVAL_REACHED, FTOL_REACHED, XTOL_REACHED: Convergence\n- NLOPT_MAXEVAL_REACHED, MAXTIME_REACHED: Limits hit\n- NLOPT_FAILURE, INVALID_ARGS, OUT_OF_MEMORY: Errors\n\n**Object-Oriented API:**\n- nlopt_create(algorithm, n): Create optimizer for n dimensions\n- nlopt_set_min/max_objective(): Set objective function\n- nlopt_set_lower/upper_bounds(): Set variable bounds\n- nlopt_add_inequality/equality_constraint(): Add constraints\n- nlopt_set_ftol_rel/abs(), xtol_rel/abs(): Set tolerances\n- nlopt_optimize(opt, x, &f): Run optimization\n- nlopt_destroy(opt): Clean up\n\n**Function Types:**\n- nlopt_func: double f(n, x, grad, data) - objective/constraint\n- nlopt_mfunc: void f(m, result, n, x, grad, data) - vector constraint",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "nlopt.hpp for C++ wrapper",
+    "slsqp.h for SLSQP implementation",
+    "https://nlopt.readthedocs.io/ for full NLopt documentation"
+  ]
+}

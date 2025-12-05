@@ -1,0 +1,23 @@
+{
+  "name": "BonHeuristicDiveMIP",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonHeuristicDiveMIP.hpp",
+  "brief": "Base class for MIP-based diving heuristics in MINLP\nCopyright (C) 2007, International Business Machines Corporation and others.\nAll Rights Reserved.\nThis code is published under the Eclipse Public License.",
+  "algorithms": [
+    {
+      "name": "MIP-Guided Diving Heuristic Framework",
+      "math": "Uses MIP subproblem to guide diving in MINLP:\n      Given MINLP relaxation solution x*, solve MIP:\n        min ||x - x*||  s.t. Ax \u2264 b, x_j \u2208 Z (integer vars)\n      MIP solution suggests which integers to fix and their values.\n\nHeuristicDiveMIP: Abstract base class for diving heuristics that solve\nMIP subproblems during the dive. Unlike pure NLP-based diving, this\nuses a SubMipSolver (mip_) to handle integer feasibility more robustly.\n\n**Key advantage over NLP diving:**\n- MIP solver handles combinatorial structure better\n- Can find feasible integer assignments that NLP diving misses\n- Useful when NLP relaxation is far from integer feasible\n\n**Trade-off:** More expensive per iteration (MIP solve vs O(n) selection)\nbut may require fewer total iterations.\n\nDerived classes implement:\n- setInternalVariables(): Setup for variable selection\n- selectVariableToBranch(): Variable and rounding direction choice",
+      "complexity": "O(MIP) per diving step; MIP complexity depends on formulation",
+      "ref": [
+        "Bonami, P. et al. (2008). \"An algorithmic framework for convex\n     mixed integer nonlinear programs\". Discrete Optimization 5(2):186-204.\n\nAuthors: Joao P. Goncalves, IBM\nDate: November 12, 2007"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "HeuristicDiveMIPFractional for fractional selection",
+    "HeuristicDiveMIPVectorLength for column-density selection",
+    "HeuristicDive for NLP-only base class"
+  ]
+}

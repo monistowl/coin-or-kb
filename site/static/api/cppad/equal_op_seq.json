@@ -1,0 +1,9 @@
+{
+  "name": "equal_op_seq",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/equal_op_seq.hpp",
+  "brief": "Core AD functionality: equal op seq",
+  "algorithms": [],
+  "methods": []
+}

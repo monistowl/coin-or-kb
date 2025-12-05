@@ -1,0 +1,9 @@
+{
+  "name": "var2par",
+  "library": "CppAD",
+  "layer": "layer-1",
+  "header": "include/cppad/core/var2par.hpp",
+  "brief": "Core AD functionality: var2par",
+  "algorithms": [],
+  "methods": []
+}

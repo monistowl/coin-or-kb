@@ -1,0 +1,23 @@
+{
+  "name": "HighsPrimalHeuristics",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsPrimalHeuristics.h",
+  "brief": "Primal heuristics for finding MIP feasible solutions\n\nCollection of primal heuristics to discover incumbent solutions.",
+  "algorithms": [
+    {
+      "name": "ZI-Round (Zero-One Rounding):\nShifts variables one at a time to improve integrality.\n\n  For each fractional integer variable x_j:\n    Test shifting up: x_j -> ceil(x_j)\n    Test shifting down: x_j -> floor(x_j)\n    Choose shift that maintains feasibility\n    Update constraint slacks incrementally",
+      "math": "",
+      "complexity": "- RINS/RENS: O(sub-MIP size) - typically much smaller than original\n- Feasibility pump: O(iterations * LP_solve)\n- ZI-Round: O(n * m) for n variables, m constraints",
+      "ref": [
+        "Danna, Rothberg & Le Pape (2005). \"Exploring Relaxation Induced\n  Neighborhoods to Improve MIP Solutions\". Math. Programming 102(1):71-90.",
+        "Berthold (2014). \"RENS: The Optimal Rounding\". Math. Programming Comp.\n\n**Sub-MIP Heuristics:**\n- solveSubMip(): Solve restricted MIP with fixed/bounded variables\n- RENS(): Relaxation Enforced Neighborhood Search (fix non-LP-integer vars)\n- RINS(): Relaxation Induced Neighborhood Search (fix incumbent-matching vars)\n\n**Rounding Heuristics:**\n- feasibilityPump(): Iterate between LP and MIP rounding until feasible\n- centralRounding(): Round from analytic center\n- randomizedRounding(): Probabilistic rounding based on fractionality\n- ziRound(): Berthold's ZI-Round shifting\n- tryRoundedPoint(): Simple rounding with constraint repair\n- linesearchRounding(): Round along line between two points\n\n**Other Methods:**\n- rootReducedCost(): Fix variables using reduced costs at root\n- shifting(): Variable shifting to repair constraint violations\n\n**Adaptive Targeting:**\n- determineTargetFixingRate(): Adjust fixing rate based on success history\n- successObservations/infeasObservations: Track heuristic effectiveness"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "mip/HighsMipSolverData.h for heuristic controller",
+    "mip/HighsLpRelaxation.h for LP solution access"
+  ]
+}

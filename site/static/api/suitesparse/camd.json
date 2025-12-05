@@ -1,0 +1,22 @@
+{
+  "name": "camd",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "CAMD/Include/camd.h",
+  "brief": "Constrained Approximate Minimum Degree ordering for symmetric matrices\nCopyright (c) 1996-2024, Timothy A. Davis, Yanqing Chen,\nPatrick R. Amestoy, and Iain S. Duff. BSD-3-clause license.\n\nCAMD computes fill-reducing orderings for sparse Cholesky factorization\nwith user-specified constraints. Extends AMD to support constraint sets\nthat force certain nodes to be ordered before others.",
+  "algorithms": [
+    {
+      "name": "Constrained Approximate Minimum Degree (CAMD):\nAMD ordering with constraint satisfaction for symmetric matrices:\n1. CONSTRAINT PROCESSING:\n   - User specifies C[i] = k meaning vertex i in constraint set k\n   - All vertices in set k ordered before any vertex in set k+1\n   - Within each set, AMD heuristic orders vertices freely\n2. AMD ORDERING (per constraint set):\n   - Quotient graph maintains elimination graph implicitly\n   - Select vertex with approximate minimum degree\n   - Eliminate, update quotient graph, absorb indistinguishable vertices\n3. OUTPUT: Permutation P such that P\u00b7A\u00b7P' has reduced fill",
+      "math": "Constrained ordering for Cholesky:\nL\u00b7L' = P\u00b7A\u00b7P' where P respects constraints C[\u00b7].\nFill(L) depends on elimination order of A+A' (symmetrized pattern).\nConstraint sets useful for:\n- Nested dissection separators (must be ordered last)\n- Known dense rows/columns (order last to limit fill)\n- Hierarchical structures",
+      "complexity": "O(n\u00b7m) worst case, typically O(n\u00b7m/log(n)) for sparse matrices.\nConstraint overhead: O(n) additional work.",
+      "ref": [
+        "Amestoy, Davis & Duff (1996). \"An Approximate Minimum Degree Ordering\n  Algorithm\". SIAM J. Matrix Anal. Appl. 17(4):886-905."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AMD for unconstrained approximate minimum degree",
+    "CHOLMOD for sparse Cholesky using CAMD ordering"
+  ]
+}

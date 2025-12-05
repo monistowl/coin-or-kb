@@ -1,0 +1,13 @@
+{
+  "name": "BonCurvBranchingSolver",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/Algorithms/Branching/BonCurvBranchingSolver.hpp",
+  "brief": "Curvature-based branching solver (DEPRECATED)\nCopyright (C) 2006, 2007 International Business Machines Corporation.\nAll Rights Reserved.\n\nCurvBranchingSolver: Strong branching solver that uses curvature\nestimation to predict bound changes. Uses second-order information\nfrom the Hessian to guide variable selection.\n\nNOTE: This code is no longer supported.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "StrongBranchingSolver for base interface",
+    "CurvatureEstimator for curvature computation"
+  ]
+}

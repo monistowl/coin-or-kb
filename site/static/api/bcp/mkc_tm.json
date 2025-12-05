@@ -1,0 +1,16 @@
+{
+  "name": "MKC_tm",
+  "library": "Bcp",
+  "layer": "layer-3",
+  "header": "Applications/Mkc/include/MKC_tm.hpp",
+  "brief": "MKC tree manager for BCP",
+  "algorithms": [
+    {
+      "name": "MKC TM: Search Tree Coordination\n\nTree manager for multi-knapsack cover branch-and-price.\n\n**State:**\n- kss: Knapsack set (problem definition)\n- input_vars: Initial columns (greedy or heuristic)\n- clp: CLP instance for root processing\n\nCoordinates LP processes, manages incumbent solution.",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": []
+}

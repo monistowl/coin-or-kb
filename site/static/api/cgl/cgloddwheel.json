@@ -1,0 +1,14 @@
+{
+  "name": "CglOddWheel",
+  "library": "Cgl",
+  "layer": "layer-2",
+  "header": "src/CglOddWheel/CglOddWheel.hpp",
+  "brief": "Odd-wheel cut separator (odd cycles with lifting)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglOddHole for simpler odd-hole cuts",
+    "CglBKClique for clique cuts from same conflict graph",
+    "CoinConflictGraph for conflict graph structure\n\n\\copyright{Copyright 2020 Brito, S.S. and Santos, H.G.}\n\\license{This This code is licensed under the terms of the Eclipse Public License (EPL).}"
+  ]
+}

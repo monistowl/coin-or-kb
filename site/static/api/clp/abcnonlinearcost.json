@@ -1,0 +1,20 @@
+{
+  "name": "AbcNonLinearCost",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/AbcNonLinearCost.hpp",
+  "brief": "Piecewise linear cost and infeasibility tracking for ABC",
+  "algorithms": [
+    {
+      "name": "Cost Change Computation:\nchangeInCost(i, \u03b1): When x_i changes by \u03b8 in direction \u03b1,\ncost changes by \u00b1w depending on crossing a bound.",
+      "math": "PIECEWISE LINEAR COST:\n\n       cost\n         \u2502      /\n   w\u00b7(l-x)     /  w\u00b7(x-u)\n         \u2502    /\n         \u2502   /\u2502\n   \u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500/\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192 x\n         l    u\n          \\  /\n           \\/  original cost c\u00b7x (feasible region)\n\nTotal cost = c'x + w\u00b7\u03a3(violations)",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcSimplexPrimal which uses this for infeasibility tracking",
+    "ClpNonLinearCost for the standard (non-ABC) implementation"
+  ]
+}

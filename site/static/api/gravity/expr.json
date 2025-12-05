@@ -1,0 +1,20 @@
+{
+  "name": "expr",
+  "library": "Gravity",
+  "layer": "layer-4",
+  "header": "include/gravity/expr.h",
+  "brief": "Expression tree nodes for unary and binary operations\n\nExpressions are the building blocks for functions and constraints.",
+  "algorithms": [
+    {
+      "name": "Sign Analysis:\nTrack sign of expressions for bound tightening.\n\n  SIGN TYPES: pos_ (\u22650), neg_ (\u22640), zero_, unknown_\n\n  RULES:\n    x\u00b2 \u2192 pos_ (always non-negative)\n    exp(x) \u2192 pos_\n    x*y: pos_*pos_ \u2192 pos_, neg_*neg_ \u2192 pos_\n         pos_*neg_ \u2192 neg_, otherwise unknown_\n\n**expr<type> Base Class:**\n- _coef: Coefficient multiplying expression\n- _all_convexity: Convexity type (linear, convex, concave, undet)\n- _all_sign: Sign type (pos, neg, zero, unknown)\n- _range: (min, max) value bounds\n- _to_str: String representation\n\n**uexpr<type> (Unary Expression):**\n- _otype: Operator type (cos_, sin_, exp_, log_, sqrt_, abs_, etc.)\n- _son: Child expression/constant\n- Used for: sin(x), cos(x), exp(x), log(x), sqrt(x), abs(x)\n\n**bexpr<type> (Binary Expression):**\n- _otype: Operator type (plus_, minus_, product_, div_, power_)\n- _lson, _rson: Left and right children\n- Used for: x+y, x-y, x*y, x/y, x^n\n\n**Expression Tree:**\n- Trees are built via operator overloading\n- Convexity propagates through operations\n- Sign analysis for bound tightening",
+      "math": "Composition rules:\n    f(g(x)) convex if: f convex increasing, g convex\n                    or: f convex decreasing, g concave\n    f + g convex if: both f, g convex\n    \u03b1\u00b7f convex if: f convex, \u03b1 > 0\n\n  PROPAGATION:\n    - Leaf: linear (unless nonlinear param)\n    - Unary: lookup table for each operator\n    - Binary: combine based on operator rules\n    - Result: linear_, convex_, concave_, or undet_",
+      "complexity": "Tree construction: O(1) per operator\n  Evaluation: O(nodes) with memoization\n  Convexity analysis: O(nodes) single pass",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "gravity/func.h for complete function class",
+    "gravity/types.h for OperatorType enum"
+  ]
+}

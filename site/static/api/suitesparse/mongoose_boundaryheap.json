@@ -1,0 +1,20 @@
+{
+  "name": "Mongoose_BoundaryHeap",
+  "library": "SuiteSparse",
+  "layer": "layer-0",
+  "header": "Mongoose/Include/Mongoose_BoundaryHeap.hpp",
+  "brief": "Boundary vertex heap for FM partition refinement\nCopyright (C) 2017-2023, Scott P. Kolodziej, Nuri S. Yeralan,\nTimothy A. Davis, William W. Hager. GPL-3.0-only license.\n\nManages heaps of boundary vertices (those with edges crossing cut)\nfor FM algorithm. Two heaps (one per partition) ordered by vertex\ngain. Operations: load, clear, insert, remove, heapifyUp/Down.\nCritical for efficient O(n log n) FM refinement.",
+  "algorithms": [
+    {
+      "name": "Boundary Heap for FM Refinement:\nMax-heap of boundary vertices ordered by move gain:\n\nStructure: Two heaps, one per partition (A and B).\n- Only boundary vertices (with edges to other partition) are in heap\n- Interior vertices excluded (moving them always hurts cut)\n\nOperations:\n- bhLoad: Initialize heaps with all boundary vertices, O(n)\n- bhInsert: Add vertex to appropriate heap, O(log n)\n- bhRemove: Remove vertex (after move), O(log n)\n- heapifyUp/Down: Restore heap property after gain update, O(log n)",
+      "math": "Gain ordering enables greedy selection:\nFM always moves vertex with maximum gain (heap top).\ngain(v) = external_edges(v) - internal_edges(v)\nPositive gain \u2192 moving v reduces cut.",
+      "complexity": "Each FM pass: O(n log n) for n heap operations.\nHeap property ensures O(1) access to best move.",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Mongoose_ImproveFM.hpp for FM algorithm using boundary heaps",
+    "Mongoose_EdgeCutProblem.hpp for bhHeap storage"
+  ]
+}

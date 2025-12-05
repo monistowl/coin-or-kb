@@ -1,0 +1,13 @@
+{
+  "name": "chooseblock",
+  "library": "Creme",
+  "layer": "layer-4",
+  "header": "Creme/src/Base/chooseblock.h",
+  "brief": "Constraint block selection for Creme RTR algorithm\n\nchoose_block(): Select a block of constraints for randomized\nrounding based on violation and satisfaction status.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "rtr.h for randomized rounding algorithm",
+    "sparse.h for LP data structure"
+  ]
+}

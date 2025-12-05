@@ -1,0 +1,13 @@
+{
+  "name": "CouenneExprBinProd",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/expression/operators/CouenneExprBinProd.hpp",
+  "brief": "Product of binary variables (specialized multilinear)\n\nRepresents products of binary (0-1) variables: w = x\u2081 * x\u2082 * ... * x\u2099\nwhere each x\u1d62 \u2208 {0, 1}. Inherits from exprMul but exploits the\nbinary domain for tighter cuts.\n\n**Key simplification:**\nFor binary variables, w = 1 iff all x\u1d62 = 1, otherwise w = 0.\nThis is equivalent to logical AND.\n\n**Linearization (standard form):**\nFor n binaries, the product can be linearized exactly with:\n- w \u2264 x\u1d62 for all i (w = 0 if any x\u1d62 = 0)\n- w \u2265 \u03a3x\u1d62 - (n-1) (w = 1 if all x\u1d62 = 1)\n\n**Bounds:**\n- Lower bound: 0 always (product of non-negative)\n- Upper bound: 1 always (product of binaries \u2264 1)\n\n**isCuttable():**\nReturns false - binary products are fully linearizable,\nno convexification cuts beyond the standard form needed.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "exprMul which this specializes",
+    "CouenneExprMultiLin for general multilinear products"
+  ]
+}

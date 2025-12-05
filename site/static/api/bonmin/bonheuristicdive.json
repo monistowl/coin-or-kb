@@ -1,0 +1,20 @@
+{
+  "name": "BonHeuristicDive",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/Heuristics/BonHeuristicDive.hpp",
+  "brief": "Base class for diving heuristics in MINLP",
+  "algorithms": [
+    {
+      "name": "NLP Diving Heuristic Framework\n\nImplements diving heuristics that repeatedly fix integer variables and solve\nNLP relaxations until a feasible integer solution is found or infeasibility.\n\n**Algorithm:**\n1. Solve NLP relaxation\n2. Select fractional variable via selectVariableToBranch()\n3. Fix variable to floor or ceil\n4. Resolve NLP, repeat until all integers fixed\n\n**Subclasses implement different selection rules:**\n- HeuristicDiveFractional: Branch on most fractional\n- HeuristicDiveVectorLength: Use gradient information\n- HeuristicDiveMIP: Solve MIP subproblem for selection\n\n**Helper functions:**\n- isNlpFeasible(): Check NLP constraint satisfaction\n- adjustPrimalTolerance(): Handle near-feasible solutions",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcHeuristic for the base class",
+    "HeuristicDiveFractional for a concrete implementation"
+  ]
+}

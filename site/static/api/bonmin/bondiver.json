@@ -1,0 +1,20 @@
+{
+  "name": "BonDiver",
+  "library": "Bonmin",
+  "layer": "layer-3",
+  "header": "src/CbcBonmin/BonDiver.hpp",
+  "brief": "Diving-based tree traversal strategies for MINLP branch-and-bound\n\nImplements tree traversal strategies that \"dive\" down branches before\nbacktracking, often finding feasible solutions faster than pure best-bound.",
+  "algorithms": [
+    {
+      "name": "Diving Tree Search:\n  Depth-first exploration with controlled backtracking:\n  1. **Dive phase:** Follow current branch down (one child per node)\n     - CbcDiver: Always take first child\n     - CbcProbedDiver: Evaluate both children, take better one\n     - CbcDfsDiver: Follow DFS with backtrack limits\n  2. **Termination conditions:**\n     - Hit leaf (feasible solution or pruned)\n     - maxDiveDepth_ exceeded\n     - maxDiveBacktracks_ exhausted\n     - Guessed objective \u2265 incumbent (stop_diving_on_cutoff_)\n  3. **Backtrack phase:** Pop from dive stack or return to best-bound heap\n  4. **Mode switching (CbcDfsDiver):**\n     - Enlarge: Build initial tree (BFS-like)\n     - FindSolutions: Aggressive diving\n     - CloseBound: Best-bound focus\n     - LimitTreeSize: Depth-first to control memory",
+      "math": "Diving vs best-bound trade-off:\n  Best-bound: guarantees smallest gap but may miss feasible solutions\n  Diving: finds incumbents fast, enables early pruning\n  Hybrid: start diving, switch to best-bound after n solutions found\n  DiverCompare.newSolution() triggers mode transitions",
+      "complexity": "Diving: O(depth) memory for dive stack.\n  Hybrid manages heap of O(nodes) with dive stack overlay.\n  Mode switches trigger O(dive_stack) heap insertions.\n\n**Strategies:**\n- CbcDiver: Simple diving to leaves before returning to heap\n- CbcProbedDiver: Two-child look-ahead for dive direction\n- CbcDfsDiver: Configurable DFS with mode-based behavior\n- DiverCompare: Adaptive comparison switching modes on events",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CbcTree for the base tree class",
+    "BabSetupBase for tree traversal configuration"
+  ]
+}

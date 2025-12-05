@@ -1,0 +1,20 @@
+{
+  "name": "CoinAbcCommon",
+  "library": "Clp",
+  "layer": "layer-1",
+  "header": "src/CoinAbcCommon.hpp",
+  "brief": "Common definitions for ABC (A Better Coin) optimized simplex",
+  "algorithms": [
+    {
+      "name": "ABC SIMD Foundation (Types, Tolerances, IEEE Zero Tests)\nCore type definitions and macros for the FasterCoin 2012 SIMD-optimized\nsimplex implementation. Provides:\n- Type aliases: CoinSimplexDouble, CoinSimplexInt\n- Compiler-specific forced inlining (ABC_INLINE)\n- Parallelism control: ABC_PARALLEL (0=none, 1=pthreads, 2=Cilk)\n- LAPACK integration options (ABC_USE_LAPACK, ABC_DENSE_CODE)\n- Low-level zero testing macros using IEEE 754 bit patterns\n- AbcTolerancesEtc class for algorithm tolerance parameters",
+      "math": "",
+      "complexity": "",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "AbcSimplex for the main ABC simplex implementation",
+    "CoinAbcFactorization for the optimized factorization"
+  ]
+}

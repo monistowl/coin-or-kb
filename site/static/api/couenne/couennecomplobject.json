@@ -1,0 +1,22 @@
+{
+  "name": "CouenneComplObject",
+  "library": "Couenne",
+  "layer": "layer-3",
+  "header": "src/branch/CouenneComplObject.hpp",
+  "brief": "Branching object for complementarity constraints",
+  "algorithms": [
+    {
+      "name": "Complementarity Object for MPEC Branching\n\nHandles branching on complementarity conditions x\u2081 \u00b7 x\u2082 \u2264 0,\nx\u2081 \u00b7 x\u2082 \u2265 0, or x\u2081 \u00b7 x\u2082 = 0. Common in equilibrium problems,\nKKT conditions, and MPECs (Mathematical Programs with\nEquilibrium Constraints).\n\n**Complementarity branching:**\nFor x\u2081 \u00b7 x\u2082 = 0, branch on either:\n- x\u2081 = 0 (one child node)\n- x\u2082 = 0 (other child node)\n\n**Sign handling (sign_):**\n- sign_ = 0: Classical x\u2081 \u00b7 x\u2082 = 0\n- sign_ = +1: x\u2081 \u00b7 x\u2082 \u2264 0\n- sign_ = -1: x\u2081 \u00b7 x\u2082 \u2265 0\n\n**Infeasibility:**\nMeasures how much the complementarity is violated\nto determine branching priority.",
+      "math": "inf(x\u2081,x\u2082) = max(0, sign_ \u00d7 x\u2081 \u00d7 x\u2082) for sign_ \u2208 {-1,0,+1}",
+      "complexity": "O(1) infeasibility check; creates CouenneComplBranchingObject",
+      "ref": [
+        "Ferris & Pang, \"Engineering and Economic Applications of\n     Complementarity Problems\", SIAM Review, 1997"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "CouenneObject base class",
+    "CouenneComplBranchingObject for the branching execution"
+  ]
+}

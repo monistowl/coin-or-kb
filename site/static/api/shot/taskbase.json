@@ -1,0 +1,13 @@
+{
+  "name": "TaskBase",
+  "library": "SHOT",
+  "layer": "layer-4",
+  "header": "src/Tasks/TaskBase.h",
+  "brief": "Base class for modular algorithm tasks\n\nFoundation for task-based algorithm composition.\n\n**TaskBase Class:**\n- isActive(), activate(), deactivate(): Enable/disable tasks\n- initialize(): Setup before first run\n- run(): Execute the task logic\n- getType(): Task identifier for debugging\n\n**Task Categories:**\n- Termination: TimeLimit, IterationLimit, Gap checks\n- Hyperplane: SelectHyperplanePointsESH/ECP, AddHyperplanes\n- Primal: SelectPrimalCandidates, NLP solving\n- Dual: SolveIteration, CreateDualProblem\n- Control: Sequential, Conditional, Goto\n\n**Task Composition:**\n- TaskSequential: Run tasks in order\n- TaskConditional: Branch on conditions\n- TaskGoto: Jump to labeled task",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "TaskHandler.h for task scheduling",
+    "SolutionStrategy/ for task workflow definition"
+  ]
+}
