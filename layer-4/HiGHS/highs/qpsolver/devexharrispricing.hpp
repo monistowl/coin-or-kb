@@ -11,6 +11,14 @@
  *
  * Combined Devex and Harris ratio test for QP pricing.
  * Balances accuracy and numerical stability.
+ *
+ * @algorithm Devex-Harris Pricing for QP
+ * @math Select leaving variable: p = argmax_i λ_i²/w_i (weighted DSE-like).
+ *       Weight update: w_i ← max(w_i, (a_q[i]/a_q[p])² · w_p²).
+ *       Approximates steepest edge without full recomputation.
+ *       Reset weights when they grow too large (> 10⁷).
+ * @complexity O(|active set|) per pricing. O(n) per weight update.
+ * @ref Harris (1973). Devex pricing for numerical stability.
  */
 #ifndef __SRC_LIB_PRICING_DEVEXHARRISPRICING_HPP__
 #define __SRC_LIB_PRICING_DEVEXHARRISPRICING_HPP__

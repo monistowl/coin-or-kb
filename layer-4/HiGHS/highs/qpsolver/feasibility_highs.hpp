@@ -7,10 +7,18 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /**
  * @file feasibility_highs.hpp
- * @brief HiGHS QP feasibility restoration
+ * @brief HiGHS QP feasibility restoration via LP
  *
  * Feasibility restoration using HiGHS LP solver.
  * Handles infeasible iterates during QP solving.
+ *
+ * @algorithm LP-Based Feasibility for QP Starting Point
+ * @math For QP with linear constraints Ax ∈ [l, u]:
+ *       1. Solve LP with zero objective (pure feasibility).
+ *       2. Obtain feasible basis from HiGHS solution.
+ *       3. Convert HiGHS basis status → QP active/inactive sets.
+ *       Active at bound → constraint in working set.
+ * @complexity O(LP solve). Leverages optimized simplex for feasibility.
  */
 #ifndef __SRC_LIB_FEASIBILITYHIGHS_HPP__
 #define __SRC_LIB_FEASIBILITYHIGHS_HPP__

@@ -11,6 +11,13 @@
  *
  * Bounded feasibility subroutine for QP.
  * Handles box constraints during active set updates.
+ *
+ * @algorithm Bounded QP Starting Point via Cholesky
+ * @math For box-constrained QP: min ½x'Qx + c'x s.t. l ≤ x ≤ u.
+ *       1. Solve Qx = -c via Cholesky: LL' = Q, then L⁻¹(-c), L'⁻¹(·).
+ *       2. Project to bounds: x̃_i = max(l_i, min(u_i, x_i)).
+ *       3. Collect active bounds for initial working set.
+ * @complexity O(n³) for Cholesky, O(n²) for solves, O(n) for projection.
  */
 #ifndef __SRC_LIB_FEASIBILITYBOUNDED_HPP__
 #define __SRC_LIB_FEASIBILITYBOUNDED_HPP__

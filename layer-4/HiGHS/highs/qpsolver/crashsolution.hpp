@@ -11,6 +11,12 @@
  *
  * Initial solution heuristic for QP solver.
  * Generates starting point for active set method.
+ *
+ * @algorithm Crash Start for QP Active Set
+ * @math Identify free variables (no finite bounds) as potential basis.
+ *       Free variables can be nonbasic at zero or basic at any value.
+ *       Provides initial active set guess before main solve.
+ * @complexity O(n) for variable classification.
  */
 #ifndef __SRC_LIB_CRASHSOLUTION_HPP__
 #define __SRC_LIB_CRASHSOLUTION_HPP__

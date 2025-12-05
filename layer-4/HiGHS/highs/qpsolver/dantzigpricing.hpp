@@ -7,9 +7,16 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /**
  * @file dantzigpricing.hpp
- * @brief HiGHS QP solver component
+ * @brief HiGHS QP Dantzig pricing rule
  *
- * Part of HiGHS quadratic programming active set solver.
+ * Classic Dantzig pricing: select constraint with largest dual infeasibility.
+ *
+ * @algorithm Dantzig Pricing for QP Active Set
+ * @math Select constraint to drop: p = argmax_i |λ_i| where λ_i violates sign.
+ *       For constraint active at lower bound: drop if λ_i < 0.
+ *       For constraint active at upper bound: drop if λ_i > 0.
+ *       Simplest pivot rule but may cycle without perturbation.
+ * @complexity O(|active set|) per pricing. No weight maintenance.
  */
 #ifndef __SRC_LIB_PRICING_DANTZIGPRICING_HPP__
 #define __SRC_LIB_PRICING_DANTZIGPRICING_HPP__

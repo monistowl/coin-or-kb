@@ -7,9 +7,16 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /**
  * @file gradient.hpp
- * @brief HiGHS QP solver component
+ * @brief HiGHS QP gradient maintenance
  *
- * Part of HiGHS quadratic programming active set solver.
+ * Incremental gradient updates for QP active set method.
+ *
+ * @algorithm Incremental QP Gradient Update
+ * @math Gradient ∇f(x) = Qx + c. After step x → x + αp:
+ *       ∇f(x+αp) = Q(x+αp) + c = ∇f(x) + αQp.
+ *       Update via SAXPY: gradient ← gradient + α·(Qp).
+ *       Recompute periodically to prevent numerical drift.
+ * @complexity O(nnz(Q)) for full recompute. O(nnz(Qp)) per update.
  */
 #ifndef __SRC_LIB_GRADIENT_HPP__
 #define __SRC_LIB_GRADIENT_HPP__
