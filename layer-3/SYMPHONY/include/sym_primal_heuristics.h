@@ -21,41 +21,65 @@
  * Collection of heuristics to find feasible MIP solutions quickly.
  * Called during B&C to improve incumbent and provide bounds.
  *
- * **Feasibility Pump (FP):**
- * - Alternates between LP and rounding to find feasible point
- * - FPdata: State for pumping iterations
- * - FPvars: Variable info (binary, integer, auxiliary)
- * - fp_round(): Round LP solution
- * - fp_solve_lp(): Solve pumping LP
- * - Adds auxiliary vars (x+, x-) for distance minimization
+ * @algorithm Feasibility Pump (Fischetti, Glover, Lodi 2005):
+ * Alternate between LP and rounding to find feasible integer point.
  *
- * **Rounding heuristics:**
- * - round_solution(): Simple rounding of LP relaxation
- * - shift_solution(): Shift rounding with constraint repair
+ * ALGORITHM:
+ *   1. Solve LP relaxation → x_LP
+ *   2. Round to nearest integer: x̃ = round(x_LP)
+ *   3. If x̃ feasible: DONE
+ *   4. Solve: min ||x - x̃|| s.t. Ax ≥ b (pump LP)
+ *   5. Goto 2 until feasible or iteration limit
  *
- * **Local search:**
- * - local_search(): Neighborhood search from current solution
- * - apply_local_search(): Wrapper with gap checking
+ * @math Pump LP objective:
+ *   min Σ_i∈B |x_i - x̃_i| + Σ_i∈I |x_i - x̃_i|
+ *   Linearized via auxiliary x+, x-: |x-x̃| = x+ + x-
  *
- * **Diving heuristics (ds_*):**
- * - Probe fixing decisions along promising directions
- * - ds_fix_vars(): Choose variables to fix
- * - ds_get_frac_vars(): Identify fractional variables
- * - Types: fractional, guided, crossover, euclidean, rank
+ * ANTI-CYCLING:
+ *   - alpha parameter blends distance with original obj
+ *   - Track previous x̃ to detect cycles
+ *   - Random perturbation if cycling detected
  *
- * **Restricted search (fr_*):**
- * - Solve reduced MIP near current solution
- * - restricted_search(): Main entry point
- * - fr_force_feasible(): Fix subset of variables
+ * @algorithm Diving Heuristics (ds_*):
+ * Iteratively fix variables and solve LP.
  *
- * **Local branching (lb_*):**
- * - Add neighborhood constraint around incumbent
- * - lbranching_search(): Solve constrained sub-MIP
+ * TYPES:
+ *   - Fractional: Fix most fractional variable
+ *   - Guided: Fix toward incumbent solution
+ *   - Euclidean: Fix to minimize distance to integer
+ *   - Rank-based: Use variable ranking for fixing order
  *
- * **Solution pool (sp_*):**
- * - sp_add_solution(): Store new solution
- * - sp_delete_solution(): Remove from pool
- * - sp_is_solution_in_sp(): Check for duplicates
+ * ALGORITHM:
+ *   1. Solve LP → identify fractional variables
+ *   2. Select variable x_k by diving strategy
+ *   3. Fix x_k to floor or ceil
+ *   4. Resolve LP, repeat until integer or infeasible
+ *   5. If infeasible, backtrack and try opposite fixing
+ *
+ * @algorithm Local Branching (Fischetti & Lodi 2003):
+ * Search neighborhood around incumbent.
+ *
+ * @math Local branching cut:
+ *   Σ_{i: x*_i=0} x_i + Σ_{i: x*_i=1} (1-x_i) ≤ k
+ *   Hamming distance from x* at most k
+ *
+ * Add cut to MIP and solve restricted sub-problem.
+ *
+ * @algorithm RINS (Danna, Rothberg, Le Pape 2005):
+ * Relaxation Induced Neighborhood Search.
+ *
+ * restricted_search() with fr_force_feasible():
+ *   Fix variables where LP = incumbent
+ *   Free variables where LP ≠ incumbent
+ *   Solve resulting smaller MIP
+ *
+ * @complexity
+ *   Feasibility pump: O(iterations × LP_solve)
+ *   Diving: O(n × LP_solve) worst case
+ *   Local branching: O(sub-MIP solve)
+ *
+ * @ref Fischetti, M., Glover, F., & Lodi, A. (2005).
+ *   "The feasibility pump". Math Programming 104:91-104.
  *
  * @see sym_lp_params.h for heuristic parameters (fp_*, fr_*, rs_*, lb_*, ds_*)
  * @see sym_lp.h for LP process calling heuristics

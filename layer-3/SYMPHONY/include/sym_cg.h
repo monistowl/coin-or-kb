@@ -20,27 +20,45 @@
  * violated cutting planes. Can run as separate process or
  * compiled into LP process (SYM_COMPILE_IN_CG).
  *
- * **cg_prob structure:**
- * - cur_sol: Current LP solution to separate
- * - par: Cut generator parameters
- * - ub: Current upper bound for validity checking
- * - cuts_to_add: Generated cuts pending addition
+ * @algorithm Cut Generation in Branch-and-Cut:
+ * Separate current LP solution to find violated valid inequalities.
  *
- * **Workflow:**
- * 1. Receive LP solution from LP process
- * 2. Call user's find_cuts_u() callback
- * 3. User calls cg_add_explicit_cut() or cg_add_user_cut()
- * 4. Send cuts back to LP process
+ * SEPARATION WORKFLOW:
+ *   1. LP solver returns fractional solution x*
+ *   2. CG receives x* from LP process
+ *   3. User's find_cuts_u() searches for cuts violated at x*
+ *   4. Found cuts: a'x ≥ β with a'x* < β (violated)
+ *   5. Cuts sent back to LP for addition to relaxation
  *
- * **Cut creation:**
- * - create_explicit_cut(): Build cut from explicit coefficients
- * - cg_add_explicit_cut(): Add explicit cut to list
- * - cg_add_user_cut(): Add user-defined packed cut
+ * @algorithm Valid Inequality Verification:
+ * Ensure generated cuts are correct.
  *
- * **User callbacks:**
- * - find_cuts_u(): Main separation routine
- * - check_validity_of_cut_u(): Verify cut correctness
- * - receive_cg_data_u(): Receive problem-specific data
+ *   VALIDITY CONDITIONS:
+ *     - Cut satisfied by all feasible integer solutions
+ *     - Can verify via incumbent: if a'x_IP ≥ β, likely valid
+ *     - ub field stores current incumbent for checking
+ *
+ *   check_validity_of_cut_u():
+ *     User callback to verify problem-specific cuts
+ *     Should return TRUE only if cut provably valid
+ *
+ * @algorithm Explicit vs User Cuts:
+ * Two paradigms for cut representation.
+ *
+ *   EXPLICIT CUTS (create_explicit_cut):
+ *     Full coefficient vector stored
+ *     Direct addition to LP matrix
+ *     Memory: O(nonzeros in cut)
+ *
+ *   USER CUTS (cg_add_user_cut):
+ *     Compact representation (e.g., set for subtour)
+ *     Requires expansion callback
+ *     Memory-efficient for structured cuts
+ *
+ * @complexity
+ *   Separation: User-defined, typically O(n²) to O(n³)
+ *   Cut addition: O(nnz(cut)) per cut
+ *   Communication: O(cuts × avg_cut_size)
  *
  * @see sym_lp.h for LP process which calls CG
  * @see sym_cp.h for cut pool storage

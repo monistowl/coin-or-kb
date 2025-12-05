@@ -19,30 +19,53 @@
  * The Cut Pool (CP) stores generated cuts for potential reuse
  * across multiple B&C nodes. Manages cut quality and deduplication.
  *
- * **cut_pool structure:**
- * - cuts: Array of cp_cut_data with quality tracking
- * - size: Total memory used by cuts
- * - cut_num: Number of cuts in pool
- * - cur_sol: Solution being checked for violations
+ * @algorithm Cut Pool Management in Branch-and-Cut:
+ * Store and reuse cuts across the B&B tree.
  *
- * **cp_cut_data extends cut_data with:**
- * - touches: How many times cut was useful
- * - level: Tree level where cut was generated
- * - quality: Cut quality score for prioritization
+ * MOTIVATION:
+ *   - Cut generation is expensive (separation algorithms)
+ *   - Same cuts often violated at multiple nodes
+ *   - Pool enables cut reuse without re-separation
+ *   - Memory vs computation tradeoff
  *
- * **Cut management:**
- * - delete_ineffective_cuts(): Remove rarely-used cuts
- * - delete_duplicate_cuts(): Remove identical cuts
- * - order_cuts_by_quality(): Sort for violation checking
+ * CUT LIFECYCLE:
+ *   1. Generated: Cut created by CG at some node
+ *   2. Stored: Added to pool with metadata
+ *   3. Checked: Tested for violation at new nodes
+ *   4. Reused: If violated, added to LP
+ *   5. Aged: Quality decreases if unused
+ *   6. Deleted: Removed when quality too low
  *
- * **Check phases (CHECK_ONE_CUT pattern):**
- * 1. PREPARE_TO_CHECK_CUTS: Initialize checking
- * 2. CHECK_ONE_CUT: Evaluate single cut
- * 3. FINISH_TO_CHECK_CUTS: Finalize checking
+ * @algorithm Cut Quality Scoring:
+ * Prioritize useful cuts, remove dead weight.
  *
- * **User callbacks:**
- * - check_cut_u(): Check if cut is violated
- * - check_cuts_u(): Batch cut checking
+ * @math Quality factors:
+ *   - touches: Times cut was binding (higher = better)
+ *   - level: Tree depth where generated (root cuts more valuable)
+ *   - check_num: How often checked without being useful
+ *
+ *   Effective cuts: touches >> check_num
+ *   Ineffective cuts: touches << check_num
+ *
+ * @algorithm Pool Size Management:
+ * Prevent memory exhaustion from unbounded cut storage.
+ *
+ *   delete_ineffective_cuts():
+ *     Remove cuts with quality below threshold
+ *     Called when pool exceeds size limit
+ *
+ *   delete_duplicate_cuts():
+ *     Hash-based comparison via cutcmp()
+ *     Keep one copy of identical cuts
+ *
+ *   order_cuts_by_quality():
+ *     High-quality cuts checked first
+ *     Improves separation efficiency
+ *
+ * @complexity
+ *   check_cut: O(nnz(cut)) per cut
+ *   delete_duplicates: O(n log n) with sorting
+ *   order_by_quality: O(n log n) sort
  *
  * @see sym_cg.h for cut generation
  * @see sym_lp.h for cut addition to LP

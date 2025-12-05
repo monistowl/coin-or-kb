@@ -21,44 +21,55 @@
  * Preprocessing reduces problem size before B&C by fixing variables,
  * removing redundant constraints, and tightening bounds.
  *
- * **PREPdesc structure:**
- * - mip: Current (preprocessed) problem
- * - orig_mip: Original problem for solution recovery
- * - stats: Preprocessing statistics
- * - params: Preprocessing parameters
- * - sr: Single-row relaxation data
- * - impl_*: Implication data for logical fixing
+ * @algorithm MIP Preprocessing (Presolve):
+ * Reduce problem before branch-and-bound via logical deductions.
  *
- * **Modification types:**
- * - FIX_BINARY, FIX_OTHER: Variable fixing
- * - IMPROVE_UB, IMPROVE_LB: Bound tightening
- * - IMPROVE_COEF: Coefficient strengthening
- * - FIX_AGGREGATE: Variable aggregation
+ * PREPROCESSING LOOP (prep_basic):
+ *   repeat until no changes:
+ *     1. Bound tightening: Derive tighter l_i, u_i
+ *     2. Fix variables: If l_i = u_i, variable is fixed
+ *     3. Redundant rows: Remove rows always satisfied
+ *     4. Singleton rows: Fix the single variable
+ *     5. Coefficient strengthening: Tighten a_ij values
+ *     6. Duplicate detection: Remove redundant rows/cols
  *
- * **prep_stats tracks:**
- * - rows_deleted: Redundant constraints removed
- * - vars_fixed: Variables fixed to bounds
- * - coeffs_changed: Strengthened coefficients
- * - bounds_tightened: Improved variable bounds
- * - vars_integerized: Continuous→integer conversions
+ * @algorithm Bound Tightening (prep_improve_variable):
+ * Derive implied bounds from constraints.
  *
- * **Single-row relaxation (SRdesc):**
- * - Bounds derivation from single constraints
- * - Used for probing and bound tightening
+ * @math From constraint: Σ_j a_ij x_j ≤ b_i
+ *   Upper bound on x_k (if a_ik > 0):
+ *     x_k ≤ (b_i - Σ_{j≠k} a_ij·L_j) / a_ik  where L_j = lower bound
  *
- * **Main functions:**
- * - sym_presolve(): Entry point for preprocessing
- * - prep_basic(): Main preprocessing loop
- * - prep_improve_variable(): Bound tightening
- * - prep_check_redundancy(): Detect redundant rows
- * - prep_delete_duplicate_rows_cols(): Remove duplicates
- * - prep_substitute_cols(): Variable substitution
+ *   Lower bound on x_k (if a_ik > 0):
+ *     x_k ≥ (b_i - Σ_{j≠k} a_ij·U_j) / a_ik  where U_j = upper bound
  *
- * **Return codes:**
- * - PREP_UNMODIFIED: No changes made
- * - PREP_MODIFIED: Problem reduced
- * - PREP_INFEAS: Infeasibility detected
- * - PREP_SOLVED: Optimal found during presolve
+ * @algorithm Redundancy Detection (prep_check_redundancy):
+ * Identify constraints always satisfied.
+ *
+ * @math Row i is redundant if:
+ *   max Σ_j a_ij x_j ≤ b_i (row never binding)
+ *   Compute row activity bounds to verify
+ *
+ * @algorithm Single-Row Relaxation (SRdesc):
+ * Solve optimization over single constraint for probing.
+ *
+ *   sr_solve_bounded_prob():
+ *     Solve: min/max c'x s.t. a'x ≤ b, l ≤ x ≤ u
+ *     Fast O(n log n) via ratio sorting
+ *     Derives valid bounds for each variable
+ *
+ * @algorithm Implication Analysis (impl_*):
+ * Derive logical consequences of fixing variables.
+ *
+ *   If x_k = 0 implies x_j = 1 (from constraints):
+ *     Record in implication list
+ *     Use during probing and fixing
+ *
+ * @complexity
+ *   prep_basic iteration: O(nnz) for bound propagation
+ *   prep_delete_duplicate: O(m log m + n log n) with sorting
+ *   sr_solve: O(n log n) per row
+ *   Total: O(iterations × nnz), typically few iterations
  *
  * @see sym_prep_params.h for preprocessing parameters
  * @see sym_types.h for ROWinfo, COLinfo structures
