@@ -1378,11 +1378,9 @@
 
     // Get library slug from header path (e.g., "layer-0/CoinUtils/CoinFactorization" -> "coinutils")
     function getLibrarySlug(info) {
-        if (info && info.header) {
-            var parts = info.header.split('/');
-            if (parts.length >= 2) {
-                return parts[1].toLowerCase();
-            }
+        // Use library field directly if available
+        if (info && info.library) {
+            return info.library.toLowerCase();
         }
         return 'coinutils'; // fallback
     }
@@ -1617,7 +1615,7 @@
             if (classDataCache[cacheKey]) {
                 data = classDataCache[cacheKey];
             } else {
-                var resp = await fetch(BASE_URL + '/api/' + libSlug + '/' + className + '.json');
+                var resp = await fetch(BASE_URL + '/api/' + libSlug + '/' + className.toLowerCase() + '.json');
                 if (!resp.ok) throw new Error('Not found');
                 data = await resp.json();
                 classDataCache[cacheKey] = data;
@@ -1789,9 +1787,20 @@
         }
     }
 
-    // Parse @algorithm annotation string
-    function parseAlgorithm(str) {
+    // Parse @algorithm annotation - handles both string and object formats
+    function parseAlgorithm(alg) {
+        // If already an object with name/math/complexity, return it directly
+        if (typeof alg === 'object' && alg !== null) {
+            return {
+                name: alg.name || '',
+                math: alg.math || '',
+                complexity: alg.complexity || ''
+            };
+        }
+
+        // Parse string format with @algorithm/@math/@complexity markers
         var result = { name: '', math: '', complexity: '' };
+        var str = String(alg);
 
         // Extract @algorithm name
         var algMatch = str.match(/@algorithm\s+([^@]+)/);
