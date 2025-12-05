@@ -2,9 +2,31 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_message_tag.hpp
- * @brief BCP messaging
+ * @brief Message tag enumeration for BCP inter-process communication
  *
- * Message passing interface for parallel BCP.
+ * @algorithm Message Tags: Protocol Types for Process Coordination
+ *
+ * BCP_message_tag defines all message types in BCP's protocol:
+ *
+ * **Control messages:**
+ * - CONFIG_*: Configurator ↔ TM for runtime changes
+ * - FinishedBCP, ProcessType, ProcessParameters, CoreDescription
+ *
+ * **TM ↔ Storage:**
+ * - NodeList*, VarList*, CutList*: Tree storage operations
+ *
+ * **TM ↔ LP:**
+ * - ActiveNodeData, WarmstartRoot, DivingInfo: Node dispatch
+ * - NodeDescription*: Node results (fathomed, branched, etc.)
+ * - FeasibleSolution, UpperBound: Incumbent updates
+ *
+ * **LP ↔ CG/VG:**
+ * - ForCG_*, ForVG_*: Primal/dual solutions for separation/pricing
+ * - CutDescription, VarDescription: Generated cuts/columns
+ * - NoMoreCuts, NoMoreVars: Generator completion
+ *
+ * @see BCP_message.hpp for message passing interface
+ * @see BCP_buffer.hpp for message serialization
  */
 #ifndef _BCP_MESSAGE_TAG_H
 #define _BCP_MESSAGE_TAG_H

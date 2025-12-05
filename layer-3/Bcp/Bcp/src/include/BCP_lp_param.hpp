@@ -5,6 +5,8 @@
  * @file BCP_lp_param.hpp
  * @brief LP process parameters for BCP Branch-Cut-Price
  *
+ * @algorithm LP Parameters: Cut/Branch/Pricing Configuration
+ *
  * BCP_lp_par defines all configurable parameters for LP processes.
  * Set via parameter file: BCP_{param_name} {value}
  *

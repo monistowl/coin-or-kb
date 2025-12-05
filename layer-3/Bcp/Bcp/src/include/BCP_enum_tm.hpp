@@ -2,9 +2,24 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file BCP_enum_tm.hpp
- * @brief BCP tree manager
+ * @brief Tree Manager enumerations for BCP
  *
- * Tree manager process: coordinates B&B tree across processes.
+ * @algorithm TM Enums: Search Strategy and Node Dispatch
+ *
+ * **BCP_tree_search_method:**
+ * Search order for tree exploration:
+ * - BestFirstSearch: Best bound first (minimize gap)
+ * - BreadthFirstSearch: Level-by-level
+ * - DepthFirstSearch: Dive to leaves (finds solutions fast)
+ * - PreferredFirstSearch: User-defined comparison
+ *
+ * **BCP_node_start_result:**
+ * Outcome of attempting to dispatch a node:
+ * - NoNode: No nodes available
+ * - Error: Dispatch failed
+ * - OK: Node successfully sent to LP
+ *
+ * @see BCP_tm.hpp for Tree Manager
  */
 #ifndef _BCP_ENUM_TM_H
 #define _BCP_ENUM_TM_H
