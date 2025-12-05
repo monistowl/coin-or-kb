@@ -11,6 +11,49 @@
  *
  * The Model class is the central container for building optimization problems.
  *
+ * @algorithm Parallel Function Evaluation:
+ * Gravity parallelizes constraint and derivative evaluation across threads.
+ *
+ * PARALLEL CONSTRAINT EVALUATION:
+ *   Split constraint vector into chunks:
+ *     Thread 0: constraints[0, n/T)
+ *     Thread 1: constraints[n/T, 2n/T)
+ *     ...
+ *     Thread T-1: constraints[(T-1)n/T, n)
+ *
+ *   Each thread evaluates g[i] = c->evaluate(i) independently
+ *   No synchronization needed (read-only variable access)
+ *
+ * PARALLEL JACOBIAN COMPUTATION:
+ *   For constraint c with variables x1, x2, ..., xk:
+ *     J[c->_id + i][xj] = partial(c(i))/partial(xj)
+ *
+ *   Parallelization by constraint (not by entry):
+ *     - Each constraint block assigned to one thread
+ *     - Thread computes all partial derivatives for its constraints
+ *     - Results written to disjoint Jacobian regions
+ *
+ * HESSIAN OF LAGRANGIAN:
+ *   H = sigma * grad2(f) + sum_i lambda_i * grad2(g_i)
+ *
+ *   Parallel accumulation:
+ *     - Each constraint contributes to overlapping Hessian entries
+ *     - _hess_link precomputes which (i,j) pairs are nonzero
+ *     - Atomic updates or thread-local accumulation + merge
+ *
+ * @algorithm Automatic Model Classification:
+ * Problem type determined by analyzing expressions:
+ *
+ *   MType = lin_m   iff all constraints/objective are linear
+ *   MType = quad_m  iff max degree = 2 (quadratic)
+ *   MType = pol_m   iff polynomial with degree > 2
+ *   MType = nlin_m  iff contains transcendental functions
+ *
+ * Solver selection based on MType:
+ *   lin_m  -> CLP, Gurobi LP, CPLEX LP, HiGHS
+ *   quad_m -> Gurobi QP, CPLEX QP, MOSEK
+ *   nlin_m -> Ipopt, Bonmin (with integers)
+ *
  * **Model<type> Template Class:**
  * - type: Numeric type (default double)
  * - _vars: Map of all variables
@@ -47,6 +90,11 @@
  * **I/O Support:**
  * - MPS format (via CoinUtils)
  * - NL format (AMPL, via mp library)
+ *
+ * @complexity
+ * - Constraint evaluation: O(nnz_constraints / num_threads)
+ * - Jacobian evaluation: O(nnz_jacobian / num_threads)
+ * - Hessian evaluation: O(nnz_hessian / num_threads)
  *
  * @see gravity/solver.h for solving models
  * @see gravity/constraint.h for constraint types

@@ -11,6 +11,60 @@
  *
  * The func class represents mathematical expressions with symbolic analysis.
  *
+ * @algorithm Symbolic Automatic Differentiation:
+ * Gravity uses symbolic differentiation on expression DAGs (Directed Acyclic Graphs).
+ *
+ * EXPRESSION TREE STRUCTURE:
+ *   f(x,y) = x² + sin(x·y)
+ *
+ *        [+]
+ *       /   \
+ *    [x²]  [sin]
+ *           |
+ *         [·]
+ *        /   \
+ *       x     y
+ *
+ * SYMBOLIC DIFFERENTIATION RULES:
+ *   d/dx(c) = 0                    (constant)
+ *   d/dx(x) = 1                    (identity)
+ *   d/dx(f+g) = f' + g'            (sum)
+ *   d/dx(f·g) = f'·g + f·g'        (product)
+ *   d/dx(f/g) = (f'·g - f·g')/g²   (quotient)
+ *   d/dx(f(g)) = f'(g)·g'          (chain rule)
+ *
+ * DERIVATIVE STORAGE:
+ *   - First derivatives stored via get_stored_derivative(var)
+ *   - _hess_link maps variable pairs to Hessian entries
+ *   - Sparsity patterns computed once, reused for multiple evaluations
+ *
+ * @algorithm Convexity Analysis (DCP Rules):
+ * Disciplined Convex Programming rules propagate convexity through expressions.
+ *
+ * ATOMIC CONVEXITIES:
+ *   linear: ax + b                     → linear
+ *   convex: x², |x|, exp(x), -log(x)   → convex
+ *   concave: log(x), sqrt(x), -x²      → concave
+ *
+ * COMPOSITION RULES:
+ *   convex(linear)   → convex         exp(ax+b) is convex
+ *   concave(linear)  → concave        log(ax+b) is concave (a>0)
+ *   convex(convex)   → convex         exp(x²) is convex
+ *   convex(concave)  → unknown        exp(log(x)) needs analysis
+ *
+ * SIGN PROPAGATION (for multiplication):
+ *   pos × convex   → convex
+ *   neg × convex   → concave
+ *   pos × concave  → concave
+ *   neg × concave  → convex
+ *
+ * QUADRATIC ANALYSIS:
+ *   Σᵢⱼ aᵢⱼxᵢxⱼ is convex iff matrix A is positive semidefinite
+ *   For single variable: ax² convex iff a ≥ 0
+ *
+ * @math For multivariate f(x), convexity requires ∇²f(x) ≽ 0 (PSD Hessian).
+ *   Gravity uses composition rules to determine convexity without computing Hessian.
+ *
  * **func_ Base Class:**
  * - _ftype: Function type (const_, lin_, quad_, pol_, nlin_)
  * - _return_type: Numeric type (double_, integer_, binary_, complex_)
@@ -40,6 +94,14 @@
  * - x² → convex, -x² → concave
  * - exp(linear) → convex, log(linear) → concave
  * - Composition rules applied automatically
+ *
+ * @complexity
+ * - Derivative computation: O(expression_size) per variable
+ * - Sparsity detection: O(vars × expression_depth)
+ * - Convexity analysis: O(expression_size)
+ *
+ * @ref Grant, Boyd & Ye (2006). "Disciplined Convex Programming".
+ *   Global Optimization: From Theory to Implementation, pp. 155-210.
  *
  * @see gravity/expr.h for expression tree nodes
  * @see gravity/constraint.h for constraints built from functions
