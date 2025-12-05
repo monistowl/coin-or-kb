@@ -4,7 +4,13 @@
  * @file MC_lp.hpp
  * @brief Max-cut LP relaxation for BCP
  *
- * LP process implementation for max-cut branch-and-cut.
+ * @algorithm Max-Cut LP: Cycle Cut Generation
+ *
+ * LP process with multiple cut generation strategies:
+ * - generate_mst_cuts: MST-based cycle detection
+ * - generate_sp_cuts: Shortest path cycle separation
+ * - mc_generate_heuristic_solution: Local search improvement
+ * - Tailoff detection for switching to exact solve
  */
 #ifndef _MC_LP_H
 #define _MC_LP_H

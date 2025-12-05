@@ -4,7 +4,9 @@
  * @file MC_init.hpp
  * @brief Max-cut BCP initialization
  *
- * Initialization routines for max-cut branch-and-cut application.
+ * @algorithm Max-Cut Init: Process Factory
+ *
+ * USER_initialize creating MC_tm, MC_lp, and MC_packer for cycle cuts.
  */
 #ifndef _MC_INIT_H
 #define _MC_INIT_H

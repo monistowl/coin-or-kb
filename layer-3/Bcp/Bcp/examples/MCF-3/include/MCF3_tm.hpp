@@ -2,7 +2,11 @@
  * @file MCF3_tm.hpp
  * @brief MCF tree manager for BCP
  *
- * Tree manager for multi-commodity flow search.
+ * @algorithm MCF3 Tree Manager: User Data Packing
+ *
+ * Coordinates branch-and-price with user_data:
+ * - MCF3_packer: Serializes both variables and MCF3_user objects
+ * - Enables clean separation of node state from LP state
  */
 #ifndef MCF3_tm_hpp
 #define MCF3_tm_hpp

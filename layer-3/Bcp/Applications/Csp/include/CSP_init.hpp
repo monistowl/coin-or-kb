@@ -4,7 +4,9 @@
  * @file CSP_init.hpp
  * @brief CSP BCP initialization
  *
- * Initialization for cutting stock application.
+ * @algorithm CSP Init: Process Factory
+ *
+ * USER_initialize subclass creating CSP_tm and CSP_lp processes.
  */
 #ifndef _CSP_INIT_H
 #define _CSP_INIT_H

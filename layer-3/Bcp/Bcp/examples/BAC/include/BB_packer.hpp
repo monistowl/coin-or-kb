@@ -10,9 +10,14 @@
 // Copyright (C) 2007, Francois Margot, IBM and others. All Rights Reserved.
 /**
  * @file BB_packer.hpp
- * @brief BCP framework component
+ * @brief BCP packing utilities
  *
- * Part of Branch-Cut-Price parallel optimization framework.
+ * @algorithm BB Packer: Serialization for Parallel BCP
+ *
+ * BCP_user_pack subclass for serializing:
+ * - Warmstart information (basis)
+ * - Algorithmic cuts (BB_cut, BB_indexed_cut)
+ * - User data (MY_user_data)
  */
 
 #ifndef _BB_PACKER_H

@@ -13,7 +13,12 @@
  * @file BB_tm.hpp
  * @brief BCP tree manager
  *
- * Tree manager process: coordinates B&B tree across processes.
+ * @algorithm BB Tree Manager: MIP Coordination
+ *
+ * Generic branch-and-cut tree manager:
+ * - readInput: Parse MPS/problem file into BB_prob
+ * - initialize_core: Set up core constraints and variables
+ * - create_root: Initialize root node with indexed cuts
  */
 
 #ifndef _BB_TM_H

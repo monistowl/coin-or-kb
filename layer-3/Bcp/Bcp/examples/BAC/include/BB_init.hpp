@@ -4,7 +4,9 @@
  * @file BB_init.hpp
  * @brief BCP framework component
  *
- * Part of Branch-Cut-Price parallel optimization framework.
+ * @algorithm BB Init: Process Factory
+ *
+ * USER_initialize creating BB_tm, BB_lp, and BB_packer.
  */
 
 #ifndef _BB_INIT_H

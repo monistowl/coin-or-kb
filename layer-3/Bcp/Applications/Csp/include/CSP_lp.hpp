@@ -4,7 +4,14 @@
  * @file CSP_lp.hpp
  * @brief CSP LP relaxation for BCP
  *
- * LP process for cutting stock branch-and-cut-price.
+ * @algorithm CSP LP Process: Solve and Price
+ *
+ * LP relaxation management for cutting stock:
+ * - compute_lower_bound: Solve LP, generate columns via knapsack pricing
+ * - generate_vars_in_lp: Call CSP_colgen for improving patterns
+ * - select_branching_candidates: Branch on fractional patterns
+ *
+ * Uses Clp or Volume algorithm for LP solves.
  */
 #ifndef _CSP_LP_H
 #define _CSP_LP_H

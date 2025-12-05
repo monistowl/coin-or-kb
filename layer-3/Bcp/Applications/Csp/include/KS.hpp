@@ -4,7 +4,18 @@
  * @file KS.hpp
  * @brief Knapsack solver for CSP column generation
  *
- * Knapsack subproblem solver for generating cutting patterns.
+ * @algorithm Horowitz-Sahni: Exact Knapsack Solver
+ *
+ * Branch-and-bound algorithm for 0-1 knapsack problems.
+ *
+ * **Method:**
+ * 1. Sort items by profit/weight ratio (Dantzig ordering)
+ * 2. Compute LP upper bound via greedy fractional solution
+ * 3. Forward step: greedily add items while capacity permits
+ * 4. Backtrack when bound proves no improvement possible
+ *
+ * @ref Martello & Toth, "Knapsack Problems" (1990), pp. 30-31
+ * @complexity O(2^n) worst case, but efficient with good bounds
  */
 #ifndef _KS_HPP
 #define _KS_HPP

@@ -13,7 +13,13 @@
  * @file BB_lp.hpp
  * @brief BCP LP process
  *
- * LP relaxation process: solves node relaxations, generates cuts.
+ * @algorithm BB LP Process: Cut Generation Framework
+ *
+ * Generic branch-and-cut LP process:
+ * - generate_cuts_in_lp: Add violated indexed and algorithmic cuts
+ * - logical_fixing: Propagate branching implications
+ * - generate_heuristic_solution: Simple rounding heuristic
+ * - set_user_data_for_children: Pass branch info to child nodes
  */
 
 #ifndef _BB_LP_H

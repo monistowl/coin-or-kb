@@ -2,7 +2,9 @@
  * @file MCF2_par.hpp
  * @brief MCF parameters
  *
- * Parameters for multi-commodity flow BCP application.
+ * @algorithm MCF2 Params: Input Configuration
+ *
+ * Parameters: AddDummySourceSinkArcs, InputFilename.
  */
 #ifndef MCF2_par_hpp
 #define MCF2_par_hpp

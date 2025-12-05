@@ -13,7 +13,12 @@
  * @file BB.hpp
  * @brief BCP framework component
  *
- * Part of Branch-Cut-Price parallel optimization framework.
+ * @algorithm BB Problem Data: Core and Indexed Matrices
+ *
+ * Generic MIP problem data structure:
+ * - core: Always-present constraint matrix
+ * - indexed: Pre-defined cuts added on demand
+ * - Variable bounds, integrality, and objective coefficients
  */
 
 #ifndef _BB_H

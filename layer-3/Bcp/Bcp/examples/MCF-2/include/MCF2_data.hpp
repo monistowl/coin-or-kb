@@ -2,7 +2,11 @@
  * @file MCF2_data.hpp
  * @brief MCF problem data
  *
- * Network and demand data for multi-commodity flow.
+ * @algorithm MCF2 Data: Network and Commodity Definitions
+ *
+ * Problem input for multi-commodity flow (variant 2):
+ * - arcs: tail, head, lb, ub, weight (cost)
+ * - commodities: source, sink, demand
  */
 #ifndef MCF2_data_hpp
 #define MCF2_data_hpp

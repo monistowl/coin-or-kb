@@ -10,9 +10,14 @@
 // Copyright (C) 2003, Francois Margot. All Rights Reserved.
 /**
  * @file BB_user_data.hpp
- * @brief BCP user interface
+ * @brief BCP user data
  *
- * User-defined callbacks for customizing BCP behavior.
+ * @algorithm BB User Data: Branching History
+ *
+ * Tracks branching decisions for node processing:
+ * - set_zero: Variables fixed to zero by branching
+ * - MY_user_data: BCP_user_data wrapper with pack/unpack
+ * - is_processed: Memory management flag
  */
 
 #ifndef _BB_UD_H

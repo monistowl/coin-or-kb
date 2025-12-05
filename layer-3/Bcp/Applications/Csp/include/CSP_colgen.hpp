@@ -4,7 +4,18 @@
  * @file CSP_colgen.hpp
  * @brief CSP column generation
  *
- * Pattern generation for cutting stock via knapsack pricing.
+ * @algorithm CSP Pricing: Knapsack Column Generation
+ *
+ * Generate improving cutting patterns by solving knapsack subproblems.
+ *
+ * **Pricing problem:** max {π·a - c : a valid pattern}
+ * - π = dual prices from demand constraints
+ * - c = pattern cost (raw material)
+ * - Solve bounded knapsack with binary expansion
+ *
+ * **Features:**
+ * - Perturbation for diversity (perturb_factor, perturb_num)
+ * - Exclusion constraints for branching
  */
 #ifndef _CSP_COLGEN_H
 #define _CSP_COLGEN_H

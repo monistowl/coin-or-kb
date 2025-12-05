@@ -4,7 +4,13 @@
  * @file BB_cut.hpp
  * @brief BCP cut base class
  *
- * Base class for cutting planes in branch-cut-price.
+ * @algorithm BB Cuts: Indexed vs Algorithmic
+ *
+ * Two cut representations with BCP_MemPool allocation:
+ * - BB_indexed_cut: Stores only index; row from pre-defined matrix
+ * - BB_cut: Full OsiRowCut for dynamically generated cuts
+ *
+ * Sprint-style separation: start with few cuts, add as violated.
  */
 
 #ifndef _BB_CUT_H

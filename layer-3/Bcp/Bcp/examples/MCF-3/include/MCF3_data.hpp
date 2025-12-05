@@ -2,7 +2,14 @@
  * @file MCF3_data.hpp
  * @brief MCF problem data
  *
- * Network and demand data for multi-commodity flow.
+ * @algorithm MCF3 Data: Network with User Data
+ *
+ * Problem input for multi-commodity flow (variant 3):
+ * - MCF3_data: arcs, commodities, node/arc counts
+ * - MCF3_user: BCP_user_data with per-commodity branch history
+ *
+ * MCF3 uses user_data to pass branch decisions between nodes,
+ * enabling parallel processing of search tree.
  */
 #ifndef MCF3_data_hpp
 #define MCF3_data_hpp

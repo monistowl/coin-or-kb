@@ -2,7 +2,11 @@
  * @file MCF2_tm.hpp
  * @brief MCF tree manager for BCP
  *
- * Tree manager for multi-commodity flow search.
+ * @algorithm MCF2 Tree Manager: Master Problem Setup
+ *
+ * Coordinates branch-and-price for multi-commodity flow:
+ * - initialize_core: Arc capacity + convexity constraints
+ * - MCF2_packer: Serialize variables between processes
  */
 #ifndef MCF2_tm_hpp
 #define MCF2_tm_hpp

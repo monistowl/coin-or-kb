@@ -2,9 +2,12 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file CSP_tm_param.hpp
- * @brief CSP tree manager for BCP
+ * @brief CSP tree manager parameters
  *
- * Tree manager for cutting stock search tree.
+ * @algorithm CSP TM Params: Cutting Strategy Options
+ *
+ * Parameters: combineExclusionConstraints, addKnapsackMirConstraints,
+ * addKnifeMirConstraints for strengthening the formulation.
  */
 #ifndef _CSP_TM_PARAM_H
 #define _CSP_TM_PARAM_H

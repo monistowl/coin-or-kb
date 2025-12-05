@@ -2,7 +2,12 @@
  * @file MCF3_lp.hpp
  * @brief MCF LP relaxation for BCP
  *
- * LP process for multi-commodity flow branch-and-cut.
+ * @algorithm MCF3 LP Process: User Data Branching
+ *
+ * LP subproblem for multi-commodity flow (variant 3):
+ * - set_user_data_for_children: Propagate branch decisions via user_data
+ * - Uses MCF3_user to track per-commodity arc bound changes
+ * - Enables parallel node processing without shared state
  */
 #ifndef MCF3_lp_hpp
 #define MCF3_lp_hpp

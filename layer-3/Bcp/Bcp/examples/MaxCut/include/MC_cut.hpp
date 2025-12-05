@@ -4,7 +4,14 @@
  * @file MC_cut.hpp
  * @brief Max-cut cutting planes
  *
- * Cut generation for max-cut: cycle inequalities, odd-wheel cuts.
+ * @algorithm Max-Cut Cuts: Cycle Inequalities
+ *
+ * Valid inequalities for max-cut LP relaxation:
+ * - MC_cycle_cut: Cycle with odd number of "in cut" edges
+ * - MC_mst_cutgen: Kruskal-based cycle detection
+ * - MC_generate_shortest_path_cycles: All violated odd cycles
+ *
+ * @math For cycle C: sum(e in C) x_e <= |C| - 1 (odd cycle)
  */
 #ifndef _MC_CUT_H
 #define _MC_CUT_H

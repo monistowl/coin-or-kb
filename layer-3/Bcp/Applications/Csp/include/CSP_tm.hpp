@@ -4,7 +4,12 @@
  * @file CSP_tm.hpp
  * @brief CSP tree manager for BCP
  *
- * Tree manager for cutting stock search tree.
+ * @algorithm CSP Tree Manager: Search Coordination
+ *
+ * Coordinates branch-and-price search for cutting stock:
+ * - initialize_core: Set packing constraints (each demand met)
+ * - create_root: Initial patterns from enumeration
+ * - compare_tree_nodes: Best-first search by lower bound
  */
 #ifndef _CSP_TM_H
 #define _CSP_TM_H

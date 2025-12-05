@@ -2,7 +2,10 @@
  * @file MCF1_par.hpp
  * @brief MCF parameters
  *
- * Parameters for multi-commodity flow BCP application.
+ * @algorithm MCF Params: Input and Preprocessing
+ *
+ * Parameters: AddDummySourceSinkArcs for network augmentation,
+ * InputFilename for DIMACS-format problem file.
  */
 #ifndef MCF1_par_hpp
 #define MCF1_par_hpp

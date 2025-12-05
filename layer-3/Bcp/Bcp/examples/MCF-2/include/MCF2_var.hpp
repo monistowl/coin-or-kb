@@ -2,7 +2,11 @@
  * @file MCF2_var.hpp
  * @brief MCF variable definitions
  *
- * Flow variables for multi-commodity network flow.
+ * @algorithm MCF2 Variables: Flow Columns and Branching
+ *
+ * Two variable types for Dantzig-Wolfe decomposition:
+ * - MCF2_var: Flow column (commodity, arc flow vector, weight)
+ * - MCF2_branching_var: Encodes branch decision (arc bounds per child)
  */
 #ifndef MCF2_var_hpp
 #define MCF2_var_hpp

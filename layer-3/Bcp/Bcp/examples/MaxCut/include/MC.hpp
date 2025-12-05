@@ -4,9 +4,14 @@
  * @file MC.hpp
  * @brief Max-cut problem data structures
  *
+ * @algorithm Max-Cut: Graph Partitioning
+ *
  * MC_problem: graph representation for max-cut optimization.
  * Stores nodes, edges, adjacency lists. Supports Ising problem variant
  * with four-cycles and triangles. MC_feas_sol stores cut solutions.
+ *
+ * **Problem:** Partition nodes into S/T to maximize cut weight.
+ * **Special case:** Ising problems on grids with external field.
  */
 #ifndef _MC_H
 #define _MC_H

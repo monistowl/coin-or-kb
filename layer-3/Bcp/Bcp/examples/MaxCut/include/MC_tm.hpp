@@ -4,7 +4,12 @@
  * @file MC_tm.hpp
  * @brief Max-cut tree manager for BCP
  *
- * Tree manager process for coordinating max-cut search tree.
+ * @algorithm Max-Cut TM: Search Coordination
+ *
+ * Coordinates branch-and-cut for max-cut:
+ * - initialize_core: One variable per edge (in cut or not)
+ * - create_root: Initial cycle cuts from graph structure
+ * - Maintains best_soln for incumbent tracking
  */
 #ifndef _MC_TM_H
 #define _MC_TM_H

@@ -2,9 +2,15 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file MC_lp_param.hpp
- * @brief Max-cut LP relaxation for BCP
+ * @brief Max-cut LP parameters
  *
- * LP process implementation for max-cut branch-and-cut.
+ * @algorithm Max-Cut LP Params: Cut Generation Strategy
+ *
+ * Parameters controlling cut generation:
+ * - MstCycleCutGeneration: When to use MST-based separation
+ * - SPCycleCutGeneration: When to use shortest path separation
+ * - Volume algorithm parameters for Lagrangian relaxation
+ * - Tailoff detection thresholds
  */
 #ifndef _MC_LP_PARAM_H
 #define _MC_LP_PARAM_H

@@ -4,7 +4,13 @@
  * @file MC_solution.hpp
  * @brief Max-cut solution representation
  *
- * Stores max-cut solution: node partition and objective value.
+ * @algorithm Max-Cut Solution: Partition Improvement
+ *
+ * Stores node partition (sig) and cut value. Local search methods:
+ * - switch_improve: Flip single nodes
+ * - edge_switch_improve: Swap adjacent pairs
+ * - lk_switch_improve: Lin-Kernighan style moves
+ * - structure_switch_improve: Ising grid-specific moves
  */
 #ifndef _MC_SOLUTION_H
 #define _MC_SOLUTION_H

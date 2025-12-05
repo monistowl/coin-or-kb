@@ -2,7 +2,12 @@
  * @file MCF3_var.hpp
  * @brief MCF variable definitions
  *
- * Flow variables for multi-commodity network flow.
+ * @algorithm MCF3 Variables: Flow Columns
+ *
+ * MCF3_var: Flow column (commodity, arc flow vector, weight).
+ * UB=2 prevents variables at upper bound killing column gen.
+ *
+ * Note: MCF3 stores branching info in user_data, not branching_var.
  */
 #ifndef MCF3_var_hpp
 #define MCF3_var_hpp

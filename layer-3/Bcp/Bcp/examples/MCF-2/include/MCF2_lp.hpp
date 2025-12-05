@@ -2,7 +2,11 @@
  * @file MCF2_lp.hpp
  * @brief MCF LP relaxation for BCP
  *
- * LP process for multi-commodity flow branch-and-cut.
+ * @algorithm MCF2 LP Process: Column Generation
+ *
+ * LP subproblem for multi-commodity flow (variant 2):
+ * - generate_vars_in_lp: Shortest path pricing per commodity
+ * - select_branching_candidates: Branch on aggregate arc flow
  */
 #ifndef MCF2_lp_hpp
 #define MCF2_lp_hpp

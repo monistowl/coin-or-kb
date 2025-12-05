@@ -2,7 +2,9 @@
  * @file MCF2_init.hpp
  * @brief MCF BCP initialization
  *
- * Initialization for multi-commodity flow application.
+ * @algorithm MCF2 Init: Process Factory
+ *
+ * USER_initialize creating MCF2_tm, MCF2_lp, and MCF2_packer.
  */
 #ifndef MCF2_init_hpp
 #define MCF2_init_hpp

@@ -4,7 +4,12 @@
  * @file CSP_var.hpp
  * @brief CSP variable/pattern definitions
  *
- * Cutting pattern representation as BCP variables.
+ * @algorithm CSP Variable: Cutting Pattern as Column
+ *
+ * Each CSP_var represents a cutting pattern (column in master problem).
+ * Multiple inheritance: BCP_var_algo (LP variable) + PATTERN (items cut).
+ *
+ * Pattern cost = raw material cost; coefficients = items produced.
  */
 #ifndef _CSP_VAR_H
 #define _CSP_VAR_H

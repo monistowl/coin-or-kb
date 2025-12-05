@@ -4,7 +4,11 @@
  * @file CSP_userexits.hpp
  * @brief CSP user exit callbacks
  *
- * Custom callbacks for cutting stock application.
+ * @algorithm CSP User Data: Solution Pool
+ *
+ * UserData maintains pool of diverse solutions found during pricing:
+ * - denseSols: Solution vectors
+ * - addSol: Deduplicates based on objective and full vector comparison
  */
 #ifndef CSP_USEREXITS_H
 #define CSP_USEREXITS_H

@@ -2,9 +2,12 @@
 // Corporation and others.  All Rights Reserved.
 /**
  * @file CSP_lp_param.hpp
- * @brief CSP LP relaxation for BCP
+ * @brief CSP LP parameters
  *
- * LP process for cutting stock branch-and-cut-price.
+ * @algorithm CSP LP Params: Solver and Heuristic Options
+ *
+ * Parameters: LpSolver (Simplex/Volume), BranchingStrategy,
+ * HeurIpFrequency, PerturbFactor/PerturbNum for pricing diversity.
  */
 #ifndef _CSP_LP_PARAM_H
 #define _CSP_LP_PARAM_H
