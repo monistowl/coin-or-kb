@@ -1,0 +1,628 @@
+# COIN-OR Mathematical Concept Knowledge Graph
+# Seed file for core optimization concepts
+#
+# Categories:
+#   problem_class - Types of optimization problems
+#   algorithm     - Solution methods
+#   optimality    - Conditions and theory
+#   structure     - Mathematical properties
+#   technique     - Implementation techniques
+
+concepts:
+
+  # ============================================================================
+  # PROBLEM CLASSES
+  # ============================================================================
+
+  - id: linear_programming
+    name: Linear Programming
+    aliases: [LP]
+    category: problem_class
+    definition: >
+      Optimization with linear objective and linear constraints.
+      min c^T x  s.t.  Ax ≤ b, x ≥ 0
+    intuition: >
+      Find the best point in a convex polytope. Optimal solution always at a vertex.
+    key_equations:
+      - "min c^T x"
+      - "Ax ≤ b"
+      - "x ≥ 0"
+    relationships:
+      - { type: generalizes, target: quadratic_programming }
+      - { type: requires, target: convexity }
+
+  - id: quadratic_programming
+    name: Quadratic Programming
+    aliases: [QP]
+    category: problem_class
+    definition: >
+      Optimization with quadratic objective and linear constraints.
+      min (1/2)x^T Q x + c^T x  s.t.  Ax ≤ b
+    intuition: >
+      LP plus a bowl-shaped or saddle-shaped objective. Convex if Q is positive semidefinite.
+    key_equations:
+      - "min (1/2)x^T Q x + c^T x"
+      - "Ax ≤ b"
+    relationships:
+      - { type: requires, target: linear_programming }
+      - { type: generalizes, target: nonlinear_programming }
+
+  - id: nonlinear_programming
+    name: Nonlinear Programming
+    aliases: [NLP]
+    category: problem_class
+    definition: >
+      Optimization with nonlinear objective or constraints.
+      min f(x)  s.t.  g(x) ≤ 0, h(x) = 0
+    intuition: >
+      General smooth optimization. Find local optima; global optimality only guaranteed if convex.
+    key_equations:
+      - "min f(x)"
+      - "g(x) ≤ 0"
+      - "h(x) = 0"
+    relationships:
+      - { type: requires, target: quadratic_programming }
+      - { type: requires, target: KKT_conditions }
+
+  - id: mixed_integer_programming
+    name: Mixed-Integer Programming
+    aliases: [MIP, MILP]
+    category: problem_class
+    definition: >
+      Linear programming with some integer-constrained variables.
+      min c^T x  s.t.  Ax ≤ b, x_i ∈ Z for i ∈ I
+    intuition: >
+      LP with discrete choices. NP-hard in general; solved via branch-and-bound with LP relaxations.
+    key_equations:
+      - "min c^T x"
+      - "Ax ≤ b"
+      - "x_i ∈ Z"
+    relationships:
+      - { type: requires, target: linear_programming }
+      - { type: generalizes, target: mixed_integer_nonlinear_programming }
+      - { type: requires, target: LP_relaxation }
+
+  - id: mixed_integer_nonlinear_programming
+    name: Mixed-Integer Nonlinear Programming
+    aliases: [MINLP]
+    category: problem_class
+    definition: >
+      Nonlinear programming with some integer-constrained variables.
+      min f(x,y)  s.t.  g(x,y) ≤ 0, y ∈ Z^m
+    intuition: >
+      Combines discrete choices with nonlinear physics. Convex MINLP is tractable; nonconvex needs global methods.
+    key_equations:
+      - "min f(x,y)"
+      - "g(x,y) ≤ 0"
+      - "y ∈ Z^m"
+    relationships:
+      - { type: requires, target: nonlinear_programming }
+      - { type: requires, target: mixed_integer_programming }
+
+  - id: convex_optimization
+    name: Convex Optimization
+    category: problem_class
+    definition: >
+      Optimization where objective and feasible region are convex.
+      Any local minimum is global minimum.
+    intuition: >
+      The "easy" class of optimization. Polynomial-time algorithms exist; no need to worry about local optima.
+    relationships:
+      - { type: requires, target: convexity }
+      - { type: contains, target: linear_programming }
+      - { type: contains, target: quadratic_programming }
+
+  - id: nonconvex_optimization
+    name: Nonconvex Optimization
+    aliases: [global optimization]
+    category: problem_class
+    definition: >
+      Optimization where convexity does not hold.
+      Local optima may not be global; exhaustive search or clever bounding required.
+    intuition: >
+      The "hard" class. Must actively search for global optimum or prove bounds.
+    relationships:
+      - { type: requires, target: convexification }
+
+  # ============================================================================
+  # ALGORITHMS
+  # ============================================================================
+
+  - id: simplex_method
+    name: Simplex Method
+    aliases: [simplex algorithm]
+    category: algorithm
+    definition: >
+      Iteratively moves between adjacent vertices of the feasible polytope,
+      improving objective at each step until optimal vertex reached.
+    intuition: >
+      Walk along edges of the polytope, always going "downhill". Worst-case exponential but fast in practice.
+    key_equations:
+      - "Select entering variable: max reduced cost"
+      - "Select leaving variable: min ratio test"
+      - "Pivot: update basis"
+    relationships:
+      - { type: solves, target: linear_programming }
+      - { type: requires, target: LU_factorization }
+      - { type: requires, target: basis }
+      - { type: alternative_to, target: interior_point_method }
+      - { type: contains, target: dual_simplex }
+      - { type: contains, target: primal_simplex }
+
+  - id: dual_simplex
+    name: Dual Simplex Method
+    category: algorithm
+    definition: >
+      Simplex variant that maintains dual feasibility (optimality) while
+      working toward primal feasibility.
+    intuition: >
+      Start with optimal-but-infeasible solution, pivot to restore feasibility. Great for re-optimization.
+    relationships:
+      - { type: requires, target: simplex_method }
+      - { type: requires, target: LP_duality }
+      - { type: implemented_in, target: "Clp/ClpDualRowSteepest.hpp" }
+
+  - id: primal_simplex
+    name: Primal Simplex Method
+    category: algorithm
+    definition: >
+      Classic simplex that maintains primal feasibility while
+      improving toward optimality.
+    intuition: >
+      Start with feasible solution, pivot to improve objective.
+    relationships:
+      - { type: requires, target: simplex_method }
+      - { type: implemented_in, target: "Clp/ClpPrimalColumnSteepest.hpp" }
+
+  - id: interior_point_method
+    name: Interior Point Method
+    aliases: [IPM, barrier method]
+    category: algorithm
+    definition: >
+      Solves optimization by traversing the interior of the feasible region,
+      using barrier functions to stay away from boundaries.
+    intuition: >
+      Stay inside constraints using a "force field" (barrier). Follow the central path as barrier weakens.
+    key_equations:
+      - "min f(x) - μ Σ log(s_i)"
+      - "Central path: μ → 0"
+      - "Newton step for KKT system"
+    relationships:
+      - { type: solves, target: linear_programming }
+      - { type: solves, target: nonlinear_programming }
+      - { type: requires, target: newton_method }
+      - { type: requires, target: barrier_function }
+      - { type: requires, target: KKT_conditions }
+      - { type: alternative_to, target: simplex_method }
+      - { type: implemented_in, target: "Ipopt/IpIpoptAlg.hpp" }
+
+  - id: newton_method
+    name: Newton's Method
+    aliases: [Newton-Raphson]
+    category: algorithm
+    definition: >
+      Second-order optimization using Hessian to compute descent direction.
+      Δx = -H^{-1} ∇f(x)
+    intuition: >
+      Approximate function as quadratic, jump to minimum of quadratic. Fast convergence near optimum.
+    key_equations:
+      - "Δx = -H^{-1} ∇f"
+      - "Quadratic convergence"
+    relationships:
+      - { type: requires, target: hessian }
+      - { type: requires, target: linear_system_solve }
+
+  - id: branch_and_bound
+    name: Branch and Bound
+    aliases: [B&B]
+    category: algorithm
+    definition: >
+      Systematic enumeration of candidate solutions via tree search,
+      using bounds to prune suboptimal branches.
+    intuition: >
+      Divide problem into subproblems, solve relaxations to get bounds, prune branches that can't improve.
+    key_equations:
+      - "Lower bound from relaxation"
+      - "Upper bound from feasible solutions"
+      - "Prune if LB ≥ UB"
+    relationships:
+      - { type: solves, target: mixed_integer_programming }
+      - { type: requires, target: LP_relaxation }
+      - { type: requires, target: branching }
+      - { type: requires, target: node_selection }
+      - { type: implemented_in, target: "Cbc/CbcModel.hpp" }
+
+  - id: spatial_branch_and_bound
+    name: Spatial Branch and Bound
+    aliases: [sBB]
+    category: algorithm
+    definition: >
+      Extends branch-and-bound to continuous variables for nonconvex problems.
+      Branches on continuous variables to tighten convex relaxations.
+    intuition: >
+      Standard B&B branches on integers; spatial B&B also subdivides continuous domains to make relaxations tighter.
+    relationships:
+      - { type: requires, target: branch_and_bound }
+      - { type: requires, target: convexification }
+      - { type: requires, target: bound_tightening }
+      - { type: solves, target: nonconvex_optimization }
+      - { type: implemented_in, target: "Couenne/CouenneObject.hpp" }
+
+  - id: outer_approximation
+    name: Outer Approximation
+    aliases: [OA]
+    category: algorithm
+    definition: >
+      Alternates between MILP master problem and NLP subproblems.
+      Adds linearization cuts from NLP solutions to tighten MILP.
+    intuition: >
+      Approximate nonlinear constraints with tangent planes. Iterate: solve MILP, get point, add tangent cuts.
+    key_equations:
+      - "g(x*) + ∇g(x*)^T (x - x*) ≤ 0"
+    relationships:
+      - { type: solves, target: mixed_integer_nonlinear_programming }
+      - { type: requires, target: convexity }
+      - { type: requires, target: linear_programming }
+      - { type: implemented_in, target: "Bonmin/BonOACutGenerator2.hpp" }
+
+  - id: cutting_planes
+    name: Cutting Planes
+    aliases: [cuts]
+    category: algorithm
+    definition: >
+      Strengthen LP relaxation by adding valid inequalities that cut off
+      fractional solutions without removing integer-feasible points.
+    intuition: >
+      LP relaxation too loose? Add constraints that trim the polytope closer to the integer hull.
+    relationships:
+      - { type: requires, target: LP_relaxation }
+      - { type: contains, target: Gomory_cuts }
+      - { type: contains, target: MIR_cuts }
+      - { type: implemented_in, target: "Cgl/" }
+
+  - id: Gomory_cuts
+    name: Gomory Cuts
+    aliases: [Gomory mixed-integer cuts, GMI]
+    category: algorithm
+    definition: >
+      Cuts derived from the simplex tableau that are violated by the current
+      fractional solution but valid for all integer solutions.
+    intuition: >
+      Read off a valid inequality directly from the optimal tableau row of a fractional basic variable.
+    key_equations:
+      - "Σ (f_j / f_0) x_j ≥ 1  (simplified)"
+    relationships:
+      - { type: requires, target: cutting_planes }
+      - { type: requires, target: basis }
+      - { type: implemented_in, target: "Cgl/CglGomory.hpp" }
+
+  - id: MIR_cuts
+    name: Mixed-Integer Rounding Cuts
+    aliases: [MIR]
+    category: algorithm
+    definition: >
+      Cuts derived by rounding continuous coefficients in mixed-integer constraints.
+    intuition: >
+      If x + y ≤ 2.7 and y is integer, then we can derive x + y ≤ 2.
+    relationships:
+      - { type: requires, target: cutting_planes }
+      - { type: implemented_in, target: "Cgl/CglMixedIntegerRounding.hpp" }
+
+  - id: active_set_method
+    name: Active Set Method
+    category: algorithm
+    definition: >
+      Solves QP by maintaining a working set of active constraints,
+      iteratively adding/dropping constraints.
+    intuition: >
+      Guess which constraints are tight at the optimum, solve the resulting equality-constrained problem.
+    relationships:
+      - { type: solves, target: quadratic_programming }
+      - { type: implemented_in, target: "qpOASES/" }
+
+  - id: feasibility_pump
+    name: Feasibility Pump
+    aliases: [FP]
+    category: algorithm
+    definition: >
+      Heuristic for finding feasible MIP solutions by alternating between
+      rounding and projection.
+    intuition: >
+      Round fractional solution to integers, then find closest LP-feasible point. Repeat until integer-feasible.
+    relationships:
+      - { type: solves, target: mixed_integer_programming }
+      - { type: implemented_in, target: "Bonmin/BonHeuristicFPump.hpp" }
+
+  # ============================================================================
+  # OPTIMALITY CONDITIONS & THEORY
+  # ============================================================================
+
+  - id: KKT_conditions
+    name: Karush-Kuhn-Tucker Conditions
+    aliases: [KKT, first-order conditions]
+    category: optimality
+    definition: >
+      Necessary conditions for optimality in constrained optimization:
+      stationarity, primal feasibility, dual feasibility, complementary slackness.
+    intuition: >
+      At optimum, gradient of objective is a combination of constraint gradients. Active constraints have positive multipliers.
+    key_equations:
+      - "∇f = Σ λ_i ∇g_i  (stationarity)"
+      - "g(x) ≤ 0  (primal feasibility)"
+      - "λ ≥ 0  (dual feasibility)"
+      - "λ_i g_i(x) = 0  (complementarity)"
+    relationships:
+      - { type: requires, target: Lagrangian }
+      - { type: contains, target: complementary_slackness }
+
+  - id: LP_duality
+    name: LP Duality
+    aliases: [linear programming duality]
+    category: optimality
+    definition: >
+      Every LP has a dual LP. At optimality, primal and dual objectives are equal.
+      Primal: min c^T x, Dual: max b^T y
+    intuition: >
+      Dual variables are prices on constraints. Strong duality: optimal prices give same value as optimal solution.
+    key_equations:
+      - "Primal: min c^T x s.t. Ax ≥ b"
+      - "Dual: max b^T y s.t. A^T y ≤ c"
+      - "c^T x* = b^T y*"
+    relationships:
+      - { type: requires, target: linear_programming }
+      - { type: requires, target: Lagrangian }
+      - { type: contains, target: complementary_slackness }
+
+  - id: Lagrangian
+    name: Lagrangian Function
+    aliases: [Lagrange function]
+    category: optimality
+    definition: >
+      L(x,λ) = f(x) + λ^T g(x). Combines objective and constraints with multipliers.
+    intuition: >
+      Price the constraint violations. Optimal multipliers λ* are the right prices to make x* optimal.
+    key_equations:
+      - "L(x,λ) = f(x) + Σ λ_i g_i(x)"
+    relationships:
+      - { type: contains, target: KKT_conditions }
+
+  - id: complementary_slackness
+    name: Complementary Slackness
+    category: optimality
+    definition: >
+      At optimality, either a constraint is tight (g_i = 0) or its multiplier is zero (λ_i = 0).
+    intuition: >
+      You don't pay for slack constraints. If constraint is loose, its price is zero.
+    key_equations:
+      - "λ_i g_i(x) = 0"
+    relationships:
+      - { type: requires, target: KKT_conditions }
+
+  # ============================================================================
+  # STRUCTURES & PROPERTIES
+  # ============================================================================
+
+  - id: convexity
+    name: Convexity
+    category: structure
+    definition: >
+      A set is convex if line segments between any two points stay in the set.
+      A function is convex if its epigraph is convex.
+    intuition: >
+      No "dents" or "holes". Can't get stuck in local optima because there's only one valley.
+    key_equations:
+      - "f(θx + (1-θ)y) ≤ θf(x) + (1-θ)f(y)"
+    relationships:
+      - { type: required_by, target: convex_optimization }
+
+  - id: sparsity
+    name: Sparsity
+    category: structure
+    definition: >
+      Matrix has mostly zero entries. Enables efficient storage and computation.
+    intuition: >
+      Real-world problems often have structure—each variable affects only a few constraints.
+    relationships:
+      - { type: enables, target: LU_factorization }
+
+  - id: LP_relaxation
+    name: LP Relaxation
+    category: structure
+    definition: >
+      Drop integrality constraints from MIP to get an LP.
+      Provides lower bound on MIP optimal value.
+    intuition: >
+      Allow fractional solutions. Easier to solve; optimal value ≤ true MIP optimum.
+    relationships:
+      - { type: requires, target: linear_programming }
+      - { type: required_by, target: branch_and_bound }
+
+  - id: convexification
+    name: Convexification
+    aliases: [convex relaxation, convex envelope]
+    category: structure
+    definition: >
+      Replace nonconvex functions with convex under/over-estimators.
+      Tightest convex relaxation is the convex envelope.
+    intuition: >
+      Wrap the nonconvex function in a convex "envelope". Gives valid bounds for global optimization.
+    relationships:
+      - { type: required_by, target: spatial_branch_and_bound }
+      - { type: contains, target: McCormick_envelopes }
+
+  - id: McCormick_envelopes
+    name: McCormick Envelopes
+    category: structure
+    definition: >
+      Convex and concave envelopes for bilinear terms w = xy over a box.
+      Four linear inequalities that tightly bound the product.
+    intuition: >
+      The product xy is nonconvex, but on a bounded box we can "wrap" it with four planes.
+    key_equations:
+      - "w ≥ l_x y + x l_y - l_x l_y"
+      - "w ≥ u_x y + x u_y - u_x u_y"
+      - "w ≤ u_x y + x l_y - u_x l_y"
+      - "w ≤ l_x y + x u_y - l_x u_y"
+    relationships:
+      - { type: requires, target: convexification }
+      - { type: implemented_in, target: "Couenne/" }
+
+  - id: basis
+    name: Basis
+    aliases: [basic solution]
+    category: structure
+    definition: >
+      Set of m linearly independent columns of A in LP standard form.
+      Basic solution: set non-basic variables to zero, solve for basic variables.
+    intuition: >
+      A vertex of the polytope corresponds to a basis. Simplex moves between bases.
+    relationships:
+      - { type: required_by, target: simplex_method }
+      - { type: implemented_in, target: "CoinUtils/CoinFactorization.hpp" }
+
+  # ============================================================================
+  # TECHNIQUES
+  # ============================================================================
+
+  - id: LU_factorization
+    name: LU Factorization
+    aliases: [LU decomposition]
+    category: technique
+    definition: >
+      Decompose matrix A = LU where L is lower triangular, U is upper triangular.
+      Enables efficient solving of Ax = b via forward/back substitution.
+    intuition: >
+      Break matrix into triangular pieces. Solving triangular systems is O(n²) not O(n³).
+    key_equations:
+      - "A = LU"
+      - "Solve Ly = b, then Ux = y"
+    relationships:
+      - { type: required_by, target: simplex_method }
+      - { type: requires, target: sparsity }
+      - { type: implemented_in, target: "CoinUtils/CoinFactorization.hpp" }
+
+  - id: presolve
+    name: Presolve
+    aliases: [preprocessing]
+    category: technique
+    definition: >
+      Simplify problem before solving: remove redundant constraints,
+      fix variables, tighten bounds, detect infeasibility.
+    intuition: >
+      Clean up the problem first. Often dramatically reduces size and improves conditioning.
+    relationships:
+      - { type: implemented_in, target: "CoinUtils/CoinPresolveMatrix.hpp" }
+      - { type: implemented_in, target: "Clp/ClpPresolve.hpp" }
+
+  - id: warm_start
+    name: Warm Start
+    aliases: [hot start]
+    category: technique
+    definition: >
+      Initialize solver with information from a previous solve (basis, solution, bounds).
+      Reduces iterations needed for similar problems.
+    intuition: >
+      Don't start from scratch. Use the old answer as a starting point for the modified problem.
+    relationships:
+      - { type: implemented_in, target: "CoinUtils/CoinWarmStart.hpp" }
+      - { type: implemented_in, target: "Clp/ClpSimplex.hpp" }
+
+  - id: bound_tightening
+    name: Bound Tightening
+    aliases: [domain reduction]
+    category: technique
+    definition: >
+      Infer tighter variable bounds from constraints.
+      FBBT: propagate through constraint graph. OBBT: solve optimization subproblems.
+    intuition: >
+      If x + y ≤ 10 and y ≥ 3, then x ≤ 7. Propagate these implications to shrink the search space.
+    relationships:
+      - { type: required_by, target: spatial_branch_and_bound }
+      - { type: contains, target: FBBT }
+      - { type: implemented_in, target: "Couenne/CouenneFixPoint.hpp" }
+
+  - id: FBBT
+    name: Feasibility-Based Bound Tightening
+    category: technique
+    definition: >
+      Propagate bounds through constraint graph without solving subproblems.
+      Fast but may miss tightenings that require global reasoning.
+    intuition: >
+      Local constraint propagation—what can I infer about each variable from its immediate constraints?
+    relationships:
+      - { type: requires, target: bound_tightening }
+      - { type: implemented_in, target: "Couenne/CouenneFixPoint.hpp" }
+
+  - id: branching
+    name: Branching
+    aliases: [variable selection]
+    category: technique
+    definition: >
+      Choose which variable to branch on and what value to split at.
+      Strong branching: test candidates. Pseudocost: use history.
+    intuition: >
+      Which split will help most? Try a few candidates (expensive) or use past experience (cheap).
+    relationships:
+      - { type: required_by, target: branch_and_bound }
+      - { type: implemented_in, target: "Cbc/CbcBranchActual.hpp" }
+
+  - id: node_selection
+    name: Node Selection
+    category: technique
+    definition: >
+      Choose which node in the B&B tree to explore next.
+      Best-first: chase best bound. Depth-first: find feasible solutions fast.
+    intuition: >
+      Explore the tree strategically. Best-bound proves optimality; depth-first finds solutions.
+    relationships:
+      - { type: required_by, target: branch_and_bound }
+      - { type: implemented_in, target: "Cbc/CbcCompareActual.hpp" }
+
+  - id: linear_system_solve
+    name: Linear System Solve
+    category: technique
+    definition: >
+      Solve Ax = b for x. Foundation of most numerical optimization.
+    intuition: >
+      The workhorse computation. Interior point needs it for Newton; simplex for basis updates.
+    relationships:
+      - { type: contains, target: LU_factorization }
+      - { type: required_by, target: newton_method }
+
+  - id: barrier_function
+    name: Barrier Function
+    aliases: [log barrier]
+    category: technique
+    definition: >
+      Add -μ Σ log(x_i) to objective to keep x > 0.
+      As μ → 0, solutions approach boundary (constraint satisfaction).
+    intuition: >
+      Create a "force field" that repels from boundaries. Weaken it gradually to approach the optimum.
+    key_equations:
+      - "-μ log(x)  →  +∞ as x → 0"
+    relationships:
+      - { type: required_by, target: interior_point_method }
+
+  - id: hessian
+    name: Hessian Matrix
+    category: technique
+    definition: >
+      Matrix of second partial derivatives. H_ij = ∂²f/∂x_i∂x_j.
+      Describes local curvature of the function.
+    intuition: >
+      How curved is the function? Positive definite Hessian means convex (bowl-shaped).
+    relationships:
+      - { type: required_by, target: newton_method }
+
+  - id: automatic_differentiation
+    name: Automatic Differentiation
+    aliases: [AD, autodiff]
+    category: technique
+    definition: >
+      Compute derivatives exactly by applying chain rule to program operations.
+      Forward mode: Jacobian-vector products. Reverse mode: gradient.
+    intuition: >
+      Don't derive gradients by hand or use finite differences. Let the computer apply calculus rules automatically.
+    relationships:
+      - { type: implemented_in, target: "CppAD/" }
+      - { type: implemented_in, target: "ADOL-C/" }

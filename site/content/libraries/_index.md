@@ -186,29 +186,33 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 
 <div class="library-grid">
 
-<div class="library-card">
-<h3><a href="/browser/?library=Bonmin">Bonmin</a></h3>
-<p class="brief">Basic Open-source Nonlinear Mixed INteger programming</p>
+<div class="library-card documented">
+<h3><a href="/libraries/bonmin/">Bonmin</a></h3>
+<p class="brief">Basic Open-source Nonlinear Mixed INteger programming for convex MINLP</p>
 <div class="meta">
-<span class="badge headers">45 headers</span>
+<span class="badge documented">35 files annotated</span>
+<span class="headers">45 headers</span>
 </div>
 <div class="topics">
 <span>MINLP</span>
 <span>B&B</span>
 <span>OA</span>
+<span>Feasibility Pump</span>
 </div>
 </div>
 
-<div class="library-card">
-<h3><a href="/browser/?library=Couenne">Couenne</a></h3>
-<p class="brief">Convex Over and Under ENvelopes for MINLP with spatial B&B</p>
+<div class="library-card documented">
+<h3><a href="/libraries/couenne/">Couenne</a></h3>
+<p class="brief">Convex Over and Under ENvelopes for global MINLP with spatial B&B</p>
 <div class="meta">
-<span class="badge headers">70 headers</span>
+<span class="badge documented">32 files annotated</span>
+<span class="headers">70 headers</span>
 </div>
 <div class="topics">
 <span>Global</span>
 <span>Spatial B&B</span>
 <span>Convexification</span>
+<span>FBBT</span>
 </div>
 </div>
 
@@ -262,15 +266,18 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 </div>
 </div>
 
-<div class="library-card">
-<h3><a href="/browser/?library=Bcp">Bcp</a></h3>
-<p class="brief">Branch-Cut-Price framework for column generation</p>
+<div class="library-card documented">
+<h3><a href="/libraries/bcp/">Bcp</a></h3>
+<p class="brief">Branch-Cut-Price parallel framework for column generation</p>
 <div class="meta">
-<span class="badge headers">Headers only</span>
+<span class="badge documented">125 files annotated</span>
+<span class="headers">75 headers</span>
 </div>
 <div class="topics">
 <span>Column Gen</span>
+<span>Parallel</span>
 <span>Pricing</span>
+<span>Decomposition</span>
 </div>
 </div>
 
@@ -430,15 +437,15 @@ The COIN-OR project is organized into **dependency layers**, where each layer bu
 
 ## Documentation Status
 
-| Layer | Libraries | Documented Classes |
-|-------|-----------|-------------------|
-| Layer 0 | 2 | CoinUtils (122), SuiteSparse (9) |
-| Layer 1 | 4 | Clp (13), Osi (2), CppAD (2), qpOASES (3) |
-| Layer 2 | 4 | Cbc (4), Cgl (6), Ipopt (1), ADOL-C (1) |
-| Layer 3 | 10 | Dip (1) |
-| Layer 4 | 8 | SHOT (15), HiGHS (5), Gravity (1) |
+| Layer | Libraries | Documentation |
+|-------|-----------|---------------|
+| Layer 0 | 2 | CoinUtils (122 classes), SuiteSparse (9 classes) |
+| Layer 1 | 4 | Clp (13 classes), Osi (2 classes), CppAD (2 classes), qpOASES (3 classes) |
+| Layer 2 | 4 | Cbc (4 classes), Cgl (6 classes), Ipopt (1 class), ADOL-C (1 class) |
+| Layer 3 | 10 | BCP (125 files), Bonmin (35 files), Couenne (32 files), Dip (1 class) |
+| Layer 4 | 8 | SHOT (15 classes), HiGHS (5 classes), Gravity (1 class) |
 
-**Total:** 28 libraries, 185 classes documented, ~600 headers indexed
+**Total:** 28 libraries, 185 classes documented, 192 algorithm-annotated files, ~600 headers indexed
 
 ---
 

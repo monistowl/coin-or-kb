@@ -1,0 +1,380 @@
+# Algorithm Selection Guidance
+# Practical advice for choosing algorithms based on problem characteristics
+#
+# Used by the suggest_approach tool to recommend algorithms
+
+algorithms:
+
+  simplex_method:
+    complexity:
+      worst_case: "O(2^n) pivots"
+      typical: "O(n) to O(n²) pivots for practical problems"
+      per_iteration: "O(n²) for basis update"
+
+    strengths:
+      - "Excellent warm starting - reoptimize similar problems quickly"
+      - "Provides basic feasible solutions (vertices)"
+      - "Efficient for small to medium LPs"
+      - "Good for problems with changing RHS or bounds"
+      - "Mature, robust implementations"
+
+    weaknesses:
+      - "Can be slow on very large sparse problems"
+      - "Worst-case exponential (rare in practice)"
+      - "Degeneracy can cause cycling"
+
+    when_to_use:
+      - "Re-solving many similar LPs (cutting plane methods, B&B)"
+      - "Need exact vertex solutions"
+      - "Problem size < 100K variables"
+      - "Dense or moderately sparse problems"
+
+    when_to_avoid:
+      - "Very large sparse LPs (millions of variables)"
+      - "One-shot solve of huge problem"
+
+    scale_guidance:
+      small: "< 10K vars: simplex is usually best"
+      medium: "10K-100K vars: either works, test both"
+      large: "> 100K vars: prefer interior point"
+
+    examples:
+      - name: "Production planning with varying demands"
+        description: |
+          Factory schedules production across multiple products. Each day, demand
+          changes and they re-solve with new RHS values. Simplex with warm start
+          from previous day's basis converges in 5-10 pivots instead of 1000+.
+        key_insight: "Warm starting makes daily re-optimization nearly instant"
+
+      - name: "Transportation problem"
+        description: |
+          Shipping goods from warehouses to stores. Network structure means
+          constraint matrix is sparse and well-conditioned. Simplex exploits
+          this structure naturally; typical problems solve in O(m+n) pivots.
+        key_insight: "Network simplex variant handles millions of arcs"
+
+  dual_simplex:
+    complexity:
+      typical: "Similar to primal simplex"
+      per_iteration: "O(n²) for basis update"
+
+    strengths:
+      - "Starts dual feasible - great after adding constraints"
+      - "Natural for cutting plane methods"
+      - "Handles RHS changes efficiently"
+      - "Often faster than primal for MIP node LPs"
+
+    weaknesses:
+      - "Needs dual feasible start"
+      - "Same scaling limitations as primal"
+
+    when_to_use:
+      - "Branch-and-bound node processing"
+      - "Adding cuts to existing solution"
+      - "RHS perturbations"
+      - "Infeasibility detection"
+
+    when_to_avoid:
+      - "Starting from scratch with no dual-feasible point"
+
+    examples:
+      - name: "MIP branch-and-bound node solving"
+        description: |
+          At each B&B node, add a branching constraint (x_j ≤ floor or x_j ≥ ceil).
+          The previous LP solution is dual feasible but primal infeasible. Dual
+          simplex restores primal feasibility in few pivots while maintaining
+          optimality direction.
+        key_insight: "Cbc uses dual simplex for all node LPs by default"
+
+      - name: "Cutting plane method"
+        description: |
+          After solving LP relaxation, add Gomory cuts that are violated by the
+          current solution. These new constraints don't affect dual feasibility
+          (just added rows), so dual simplex can continue from current basis.
+        key_insight: "Adding cuts = primal infeasible, dual feasible → dual simplex"
+
+  interior_point_method:
+    complexity:
+      worst_case: "O(√n L) iterations (polynomial)"
+      typical: "20-100 iterations regardless of problem size"
+      per_iteration: "O(n³) for dense, O(nnz) for sparse factorization"
+
+    strengths:
+      - "Iteration count nearly independent of problem size"
+      - "Excellent for very large sparse problems"
+      - "Polynomial worst-case complexity"
+      - "Natural for NLP extension"
+
+    weaknesses:
+      - "Poor warm starting (must restart from scratch)"
+      - "Returns interior point, not vertex"
+      - "Each iteration more expensive than simplex"
+      - "Crossover to vertex can be costly"
+
+    when_to_use:
+      - "Large sparse LPs (> 100K variables)"
+      - "One-shot solves (no re-optimization)"
+      - "NLP problems"
+      - "When vertex solution not required"
+
+    when_to_avoid:
+      - "Many similar LPs to solve"
+      - "Need exact vertex solution quickly"
+      - "Small problems (simplex overhead lower)"
+
+    scale_guidance:
+      small: "< 10K vars: simplex usually faster"
+      medium: "10K-100K vars: test both"
+      large: "> 100K vars: IPM usually wins"
+
+    examples:
+      - name: "Power grid optimization"
+        description: |
+          Optimal power flow with millions of variables (generators, loads, lines).
+          Matrix is extremely sparse (each line connects just 2 buses). IPM
+          needs ~50 iterations regardless of grid size. Sparse Cholesky
+          factorization exploits tree-like structure.
+        key_insight: "IPM scales to continental-scale power grids"
+
+      - name: "Multicommodity flow"
+        description: |
+          Route multiple commodities through a network. Variables scale as
+          O(nodes × commodities). For 10K nodes, 100 commodities = 1M variables.
+          IPM iteration count stays ~60 while simplex struggles.
+        key_insight: "Problem size growth doesn't affect IPM iterations"
+
+  branch_and_bound:
+    complexity:
+      worst_case: "O(2^n) nodes"
+      typical: "Highly problem-dependent"
+      per_node: "One LP solve"
+
+    strengths:
+      - "Guarantees optimal integer solution"
+      - "Provides bounds during search"
+      - "Can be stopped early for good solution"
+      - "Natural parallelization"
+
+    weaknesses:
+      - "Exponential worst case"
+      - "Performance highly problem-dependent"
+      - "Memory for large trees"
+
+    when_to_use:
+      - "Need proven optimal MIP solution"
+      - "Good LP relaxation (small integrality gap)"
+      - "Structured problems (scheduling, routing)"
+
+    when_to_avoid:
+      - "Huge integrality gap"
+      - "Just need feasible solution"
+      - "Extreme time constraints"
+
+    tuning_tips:
+      - "Use cuts to tighten LP relaxation"
+      - "Good branching strategy crucial"
+      - "Invest in primal heuristics"
+      - "Set appropriate gap tolerance"
+
+    examples:
+      - name: "Vehicle routing (CVRP)"
+        description: |
+          Assign customers to vehicles and sequence visits to minimize total
+          distance. LP relaxation often within 5% of optimal. B&B explores
+          10K-100K nodes. Strong branching on which customer serves which
+          vehicle creates balanced trees.
+        key_insight: "Tight relaxations mean small B&B trees"
+
+      - name: "Facility location"
+        description: |
+          Choose which warehouses to open to serve customers at minimum cost.
+          Binary variables for open/closed. LP relaxation gives fractional
+          openings. Gomory cuts tighten relaxation; B&B proves optimality.
+        key_insight: "Cuts + B&B = modern MIP solving"
+
+  spatial_branch_and_bound:
+    complexity:
+      worst_case: "Exponential in both integer and continuous dimensions"
+      typical: "Slower than B&B, but guarantees global optimum"
+
+    strengths:
+      - "Proves global optimality for nonconvex problems"
+      - "Handles general MINLP"
+      - "Systematic domain reduction"
+
+    weaknesses:
+      - "Much slower than local methods"
+      - "Requires convex relaxations"
+      - "Scaling challenges"
+
+    when_to_use:
+      - "Need proven global optimum"
+      - "Nonconvex constraints/objectives"
+      - "Process design, pooling problems"
+
+    when_to_avoid:
+      - "Problem is convex (use Bonmin instead)"
+      - "Local optimum is acceptable"
+      - "Very large problems"
+
+    examples:
+      - name: "Pooling problem (petroleum blending)"
+        description: |
+          Blend crude oils through intermediate pools to meet product specs.
+          Bilinear terms (flow × quality) create nonconvexity. Multiple local
+          optima exist. Spatial B&B with McCormick envelopes proves global
+          optimum by subdividing flow variable domains.
+        key_insight: "Bilinear → McCormick → spatial branching"
+
+      - name: "Process network synthesis"
+        description: |
+          Design chemical plant with equipment selection (discrete) and
+          operating conditions (continuous, nonlinear). Objective has multiple
+          local minima. Couenne proves global optimum by combining integer
+          branching with domain subdivision.
+        key_insight: "Global guarantee requires spatial + integer branching"
+
+  outer_approximation:
+    complexity:
+      typical: "Master MIP + NLP subproblems"
+      iterations: "Often 10-50 major iterations"
+
+    strengths:
+      - "Exploits MIP solver strength"
+      - "Works well when few nonlinear constraints"
+      - "Natural decomposition"
+
+    weaknesses:
+      - "Requires convexity"
+      - "Many NLP subproblems can be slow"
+      - "Sensitive to NLP solver failures"
+
+    when_to_use:
+      - "Convex MINLP"
+      - "Many integer variables, few nonlinear constraints"
+      - "Strong MILP formulation available"
+
+    when_to_avoid:
+      - "Nonconvex problems"
+      - "Many nonlinear constraints"
+      - "NLP subproblems are hard"
+
+    examples:
+      - name: "Heat exchanger network design"
+        description: |
+          Select which heat exchangers to install (binary) and determine their
+          areas (continuous, convex cost). Linearize nonlinear cost at current
+          solution, solve MIP master, fix integer vars, solve NLP subproblem,
+          add OA cut from NLP gradient, repeat.
+        key_insight: "Alternate MILP master + NLP subproblem"
+
+      - name: "Convex portfolio with cardinality"
+        description: |
+          Minimize risk (convex quadratic) selecting at most k assets (integer).
+          OA linearizes quadratic at each solution, adds cut to MILP master.
+          Converges in ~20 iterations to global optimum.
+        key_insight: "Convexity guarantees OA cuts are valid everywhere"
+
+  cutting_planes:
+    complexity:
+      per_round: "LP solve + cut generation"
+      rounds: "Typically 5-20 rounds at root"
+
+    strengths:
+      - "Tightens LP relaxation"
+      - "Reduces B&B tree size"
+      - "Many automatic cut families"
+
+    weaknesses:
+      - "Cut selection crucial"
+      - "Too many cuts slow LP"
+      - "Diminishing returns"
+
+    when_to_use:
+      - "Always for MIP (at root node)"
+      - "When LP relaxation is weak"
+      - "Problem has exploitable structure"
+
+    tuning_tips:
+      - "Limit cuts per round"
+      - "Purge ineffective cuts"
+      - "Balance cut generation time vs improvement"
+
+  feasibility_pump:
+    complexity:
+      typical: "10-100 LP/NLP solves"
+
+    strengths:
+      - "Fast feasible solutions"
+      - "Simple, robust"
+      - "Good starting points for B&B"
+
+    weaknesses:
+      - "No optimality guarantee"
+      - "May not find feasible point"
+      - "Solution quality varies"
+
+    when_to_use:
+      - "Need quick feasible solution"
+      - "As MIP heuristic"
+      - "Warm start for other methods"
+
+    when_to_avoid:
+      - "Need optimal solution"
+      - "Problem structure enables better heuristics"
+
+# Problem characteristic rules for suggest_approach
+problem_characteristics:
+
+  large_sparse_lp:
+    indicators:
+      - "variables > 100000"
+      - "sparsity > 99%"
+      - "one-shot solve"
+    recommendation: interior_point_method
+    rationale: "IPM iteration count independent of size; sparse factorization efficient"
+
+  reoptimization_lp:
+    indicators:
+      - "many similar LPs"
+      - "cutting plane method"
+      - "branch and bound"
+    recommendation: dual_simplex
+    rationale: "Excellent warm start; adding cuts maintains dual feasibility"
+
+  small_dense_lp:
+    indicators:
+      - "variables < 10000"
+      - "dense or moderately sparse"
+    recommendation: simplex_method
+    rationale: "Lower overhead; warm starting useful"
+
+  convex_minlp:
+    indicators:
+      - "convex constraints"
+      - "integer variables"
+      - "nonlinear"
+    recommendation: outer_approximation
+    rationale: "Bonmin's hybrid OA+B&B effective for convex MINLP"
+
+  nonconvex_minlp:
+    indicators:
+      - "nonconvex constraints"
+      - "bilinear terms"
+      - "need global optimum"
+    recommendation: spatial_branch_and_bound
+    rationale: "Couenne provides global optimality guarantee"
+
+  mip_good_relaxation:
+    indicators:
+      - "small integrality gap"
+      - "tight LP bound"
+    recommendation: branch_and_bound
+    rationale: "Standard B&B with cuts; Cbc effective"
+
+  mip_weak_relaxation:
+    indicators:
+      - "large integrality gap"
+      - "need primal solutions fast"
+    recommendation: feasibility_pump
+    rationale: "Find feasible solutions first, then improve"

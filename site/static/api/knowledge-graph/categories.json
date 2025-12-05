@@ -1,0 +1,226 @@
+{
+  "categories": {
+    "problem_class": [
+      {
+        "id": "linear_programming",
+        "name": "Linear Programming",
+        "brief": "Optimization with linear objective and linear constraints. min c^T x  s.t.  Ax \u2264 b, x \u2265 0\n..."
+      },
+      {
+        "id": "quadratic_programming",
+        "name": "Quadratic Programming",
+        "brief": "Optimization with quadratic objective and linear constraints. min (1/2)x^T Q x + c^T x  s.t.  Ax \u2264 b..."
+      },
+      {
+        "id": "nonlinear_programming",
+        "name": "Nonlinear Programming",
+        "brief": "Optimization with nonlinear objective or constraints. min f(x)  s.t.  g(x) \u2264 0, h(x) = 0\n..."
+      },
+      {
+        "id": "mixed_integer_programming",
+        "name": "Mixed-Integer Programming",
+        "brief": "Linear programming with some integer-constrained variables. min c^T x  s.t.  Ax \u2264 b, x_i \u2208 Z for i \u2208..."
+      },
+      {
+        "id": "mixed_integer_nonlinear_programming",
+        "name": "Mixed-Integer Nonlinear Programming",
+        "brief": "Nonlinear programming with some integer-constrained variables. min f(x,y)  s.t.  g(x,y) \u2264 0, y \u2208 Z^m..."
+      },
+      {
+        "id": "convex_optimization",
+        "name": "Convex Optimization",
+        "brief": "Optimization where objective and feasible region are convex. Any local minimum is global minimum.\n..."
+      },
+      {
+        "id": "nonconvex_optimization",
+        "name": "Nonconvex Optimization",
+        "brief": "Optimization where convexity does not hold. Local optima may not be global; exhaustive search or cle..."
+      }
+    ],
+    "algorithm": [
+      {
+        "id": "simplex_method",
+        "name": "Simplex Method",
+        "brief": "Iteratively moves between adjacent vertices of the feasible polytope, improving objective at each st..."
+      },
+      {
+        "id": "dual_simplex",
+        "name": "Dual Simplex Method",
+        "brief": "Simplex variant that maintains dual feasibility (optimality) while working toward primal feasibility..."
+      },
+      {
+        "id": "primal_simplex",
+        "name": "Primal Simplex Method",
+        "brief": "Classic simplex that maintains primal feasibility while improving toward optimality.\n..."
+      },
+      {
+        "id": "interior_point_method",
+        "name": "Interior Point Method",
+        "brief": "Solves optimization by traversing the interior of the feasible region, using barrier functions to st..."
+      },
+      {
+        "id": "newton_method",
+        "name": "Newton's Method",
+        "brief": "Second-order optimization using Hessian to compute descent direction. \u0394x = -H^{-1} \u2207f(x)\n..."
+      },
+      {
+        "id": "branch_and_bound",
+        "name": "Branch and Bound",
+        "brief": "Systematic enumeration of candidate solutions via tree search, using bounds to prune suboptimal bran..."
+      },
+      {
+        "id": "spatial_branch_and_bound",
+        "name": "Spatial Branch and Bound",
+        "brief": "Extends branch-and-bound to continuous variables for nonconvex problems. Branches on continuous vari..."
+      },
+      {
+        "id": "outer_approximation",
+        "name": "Outer Approximation",
+        "brief": "Alternates between MILP master problem and NLP subproblems. Adds linearization cuts from NLP solutio..."
+      },
+      {
+        "id": "cutting_planes",
+        "name": "Cutting Planes",
+        "brief": "Strengthen LP relaxation by adding valid inequalities that cut off fractional solutions without remo..."
+      },
+      {
+        "id": "Gomory_cuts",
+        "name": "Gomory Cuts",
+        "brief": "Cuts derived from the simplex tableau that are violated by the current fractional solution but valid..."
+      },
+      {
+        "id": "MIR_cuts",
+        "name": "Mixed-Integer Rounding Cuts",
+        "brief": "Cuts derived by rounding continuous coefficients in mixed-integer constraints.\n..."
+      },
+      {
+        "id": "active_set_method",
+        "name": "Active Set Method",
+        "brief": "Solves QP by maintaining a working set of active constraints, iteratively adding/dropping constraint..."
+      },
+      {
+        "id": "feasibility_pump",
+        "name": "Feasibility Pump",
+        "brief": "Heuristic for finding feasible MIP solutions by alternating between rounding and projection.\n..."
+      }
+    ],
+    "optimality": [
+      {
+        "id": "KKT_conditions",
+        "name": "Karush-Kuhn-Tucker Conditions",
+        "brief": "Necessary conditions for optimality in constrained optimization: stationarity, primal feasibility, d..."
+      },
+      {
+        "id": "LP_duality",
+        "name": "LP Duality",
+        "brief": "Every LP has a dual LP. At optimality, primal and dual objectives are equal. Primal: min c^T x, Dual..."
+      },
+      {
+        "id": "Lagrangian",
+        "name": "Lagrangian Function",
+        "brief": "L(x,\u03bb) = f(x) + \u03bb^T g(x). Combines objective and constraints with multipliers.\n..."
+      },
+      {
+        "id": "complementary_slackness",
+        "name": "Complementary Slackness",
+        "brief": "At optimality, either a constraint is tight (g_i = 0) or its multiplier is zero (\u03bb_i = 0).\n..."
+      }
+    ],
+    "structure": [
+      {
+        "id": "convexity",
+        "name": "Convexity",
+        "brief": "A set is convex if line segments between any two points stay in the set. A function is convex if its..."
+      },
+      {
+        "id": "sparsity",
+        "name": "Sparsity",
+        "brief": "Matrix has mostly zero entries. Enables efficient storage and computation.\n..."
+      },
+      {
+        "id": "LP_relaxation",
+        "name": "LP Relaxation",
+        "brief": "Drop integrality constraints from MIP to get an LP. Provides lower bound on MIP optimal value.\n..."
+      },
+      {
+        "id": "convexification",
+        "name": "Convexification",
+        "brief": "Replace nonconvex functions with convex under/over-estimators. Tightest convex relaxation is the con..."
+      },
+      {
+        "id": "McCormick_envelopes",
+        "name": "McCormick Envelopes",
+        "brief": "Convex and concave envelopes for bilinear terms w = xy over a box. Four linear inequalities that tig..."
+      },
+      {
+        "id": "basis",
+        "name": "Basis",
+        "brief": "Set of m linearly independent columns of A in LP standard form. Basic solution: set non-basic variab..."
+      }
+    ],
+    "technique": [
+      {
+        "id": "LU_factorization",
+        "name": "LU Factorization",
+        "brief": "Decompose matrix A = LU where L is lower triangular, U is upper triangular. Enables efficient solvin..."
+      },
+      {
+        "id": "presolve",
+        "name": "Presolve",
+        "brief": "Simplify problem before solving: remove redundant constraints, fix variables, tighten bounds, detect..."
+      },
+      {
+        "id": "warm_start",
+        "name": "Warm Start",
+        "brief": "Initialize solver with information from a previous solve (basis, solution, bounds). Reduces iteratio..."
+      },
+      {
+        "id": "bound_tightening",
+        "name": "Bound Tightening",
+        "brief": "Infer tighter variable bounds from constraints. FBBT: propagate through constraint graph. OBBT: solv..."
+      },
+      {
+        "id": "FBBT",
+        "name": "Feasibility-Based Bound Tightening",
+        "brief": "Propagate bounds through constraint graph without solving subproblems. Fast but may miss tightenings..."
+      },
+      {
+        "id": "branching",
+        "name": "Branching",
+        "brief": "Choose which variable to branch on and what value to split at. Strong branching: test candidates. Ps..."
+      },
+      {
+        "id": "node_selection",
+        "name": "Node Selection",
+        "brief": "Choose which node in the B&B tree to explore next. Best-first: chase best bound. Depth-first: find f..."
+      },
+      {
+        "id": "linear_system_solve",
+        "name": "Linear System Solve",
+        "brief": "Solve Ax = b for x. Foundation of most numerical optimization.\n..."
+      },
+      {
+        "id": "barrier_function",
+        "name": "Barrier Function",
+        "brief": "Add -\u03bc \u03a3 log(x_i) to objective to keep x > 0. As \u03bc \u2192 0, solutions approach boundary (constraint sati..."
+      },
+      {
+        "id": "hessian",
+        "name": "Hessian Matrix",
+        "brief": "Matrix of second partial derivatives. H_ij = \u2202\u00b2f/\u2202x_i\u2202x_j. Describes local curvature of the function..."
+      },
+      {
+        "id": "automatic_differentiation",
+        "name": "Automatic Differentiation",
+        "brief": "Compute derivatives exactly by applying chain rule to program operations. Forward mode: Jacobian-vec..."
+      }
+    ]
+  },
+  "category_descriptions": {
+    "problem_class": "Types of optimization problems (LP, QP, NLP, MIP, MINLP)",
+    "algorithm": "Solution methods and procedures",
+    "optimality": "Conditions, theorems, and duality theory",
+    "structure": "Mathematical properties and structures",
+    "technique": "Implementation techniques and computational methods"
+  }
+}

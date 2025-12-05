@@ -2,12 +2,22 @@
 """
 MCP Server for COIN-OR Knowledge Base
 
-Provides tools for querying optimization solver annotations:
+Provides tools for querying optimization solver annotations and knowledge graph:
+
+Annotation Tools:
 - search_algorithms: Find implementations of specific algorithms
 - search_math: Find files with specific mathematical concepts
 - get_library: Get overview and files for a library
 - get_file: Get all annotations for a specific file
 - list_algorithms: List all documented algorithms
+
+Knowledge Graph Tools:
+- explore_concept: Get concept details and relationships
+- find_path: Navigate between concepts
+- prerequisites_for: Get learning dependencies for a concept
+- implementations_of: Find source files for a concept
+- search_concepts: Search concepts by keyword
+- list_concepts: List all concepts, optionally by category
 
 Run: python coin_or_kb_server.py
 """
@@ -17,6 +27,8 @@ import re
 import sys
 from pathlib import Path
 from typing import Any
+
+from knowledge_graph import KnowledgeGraph
 
 # MCP protocol via stdio
 def send_response(response: dict):
@@ -166,8 +178,9 @@ class CoinORKnowledgeBase:
         return self.data.get('stats', {})
 
 
-# Global knowledge base instance
+# Global knowledge base instances
 kb = CoinORKnowledgeBase()
+kg = KnowledgeGraph()
 
 
 def handle_initialize(params: dict) -> dict:
@@ -250,6 +263,125 @@ def handle_tools_list() -> dict:
                     "properties": {}
                 }
             },
+            # Knowledge Graph Tools
+            {
+                "name": "explore_concept",
+                "description": "Get concept details and relationships (e.g., 'interior_point_method', 'KKT_conditions', 'branch_and_bound')",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "concept_id": {"type": "string", "description": "Concept ID or name to explore"}
+                    },
+                    "required": ["concept_id"]
+                }
+            },
+            {
+                "name": "find_path",
+                "description": "Find relationship path between two mathematical concepts",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "from_concept": {"type": "string", "description": "Starting concept ID"},
+                        "to_concept": {"type": "string", "description": "Target concept ID"},
+                        "max_depth": {"type": "integer", "description": "Maximum path length (default: 5)"}
+                    },
+                    "required": ["from_concept", "to_concept"]
+                }
+            },
+            {
+                "name": "prerequisites_for",
+                "description": "Get prerequisite concepts needed to understand a concept (learning dependencies)",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "concept_id": {"type": "string", "description": "Concept to get prerequisites for"},
+                        "depth": {"type": "integer", "description": "How deep to recurse (default: 3)"}
+                    },
+                    "required": ["concept_id"]
+                }
+            },
+            {
+                "name": "implementations_of",
+                "description": "Find source files that implement a mathematical concept",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "concept_id": {"type": "string", "description": "Concept to find implementations for"}
+                    },
+                    "required": ["concept_id"]
+                }
+            },
+            {
+                "name": "search_concepts",
+                "description": "Search mathematical concepts by keyword (searches names, aliases, definitions)",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "query": {"type": "string", "description": "Search term"}
+                    },
+                    "required": ["query"]
+                }
+            },
+            {
+                "name": "list_concepts",
+                "description": "List all concepts in the knowledge graph, optionally filtered by category",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "category": {"type": "string", "description": "Optional: problem_class, algorithm, optimality, structure, or technique"}
+                    }
+                }
+            },
+            {
+                "name": "solvers_for",
+                "description": "Find algorithms that solve a specific problem class (e.g., 'LP', 'MIP', 'NLP')",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "problem_class": {"type": "string", "description": "Problem class to find solvers for"}
+                    },
+                    "required": ["problem_class"]
+                }
+            },
+            {
+                "name": "compare_algorithms",
+                "description": "Compare two algorithms - what problems they solve, what they require, how they differ",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "algo1": {"type": "string", "description": "First algorithm to compare"},
+                        "algo2": {"type": "string", "description": "Second algorithm to compare"}
+                    },
+                    "required": ["algo1", "algo2"]
+                }
+            },
+            {
+                "name": "get_algorithm_guidance",
+                "description": "Get practical guidance for an algorithm - complexity, when to use, strengths/weaknesses",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "algorithm": {"type": "string", "description": "Algorithm name (e.g., 'simplex', 'interior_point', 'branch_and_bound')"}
+                    },
+                    "required": ["algorithm"]
+                }
+            },
+            {
+                "name": "suggest_approach",
+                "description": "Get algorithm recommendations based on problem type and characteristics",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "problem_type": {"type": "string", "description": "Problem type: LP, QP, NLP, MIP, MINLP"},
+                        "characteristics": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                            "description": "Problem characteristics like: large, sparse, dense, reoptimization, convex, nonconvex, one-shot"
+                        }
+                    },
+                    "required": ["problem_type"]
+                }
+            },
         ]
     }
 
@@ -280,6 +412,60 @@ def handle_tool_call(name: str, arguments: dict) -> dict:
         result = kb.get_stats()
         return {"content": [{"type": "text", "text": json.dumps(result, indent=2)}]}
 
+    # Knowledge Graph tools
+    elif name == "explore_concept":
+        result = kg.explore_concept(arguments.get("concept_id", ""))
+        return {"content": [{"type": "text", "text": json.dumps(result, indent=2)}]}
+
+    elif name == "find_path":
+        result = kg.find_path(
+            arguments.get("from_concept", ""),
+            arguments.get("to_concept", ""),
+            arguments.get("max_depth", 5)
+        )
+        return {"content": [{"type": "text", "text": json.dumps(result, indent=2)}]}
+
+    elif name == "prerequisites_for":
+        result = kg.prerequisites_for(
+            arguments.get("concept_id", ""),
+            arguments.get("depth", 3)
+        )
+        return {"content": [{"type": "text", "text": json.dumps(result, indent=2)}]}
+
+    elif name == "implementations_of":
+        result = kg.implementations_of(arguments.get("concept_id", ""))
+        return {"content": [{"type": "text", "text": json.dumps(result, indent=2)}]}
+
+    elif name == "search_concepts":
+        results = kg.search_concepts(arguments.get("query", ""))
+        return {"content": [{"type": "text", "text": json.dumps(results, indent=2)}]}
+
+    elif name == "list_concepts":
+        results = kg.list_concepts(arguments.get("category"))
+        return {"content": [{"type": "text", "text": json.dumps(results, indent=2)}]}
+
+    elif name == "solvers_for":
+        result = kg.solvers_for(arguments.get("problem_class", ""))
+        return {"content": [{"type": "text", "text": json.dumps(result, indent=2)}]}
+
+    elif name == "compare_algorithms":
+        result = kg.compare_algorithms(
+            arguments.get("algo1", ""),
+            arguments.get("algo2", "")
+        )
+        return {"content": [{"type": "text", "text": json.dumps(result, indent=2)}]}
+
+    elif name == "get_algorithm_guidance":
+        result = kg.get_algorithm_guidance(arguments.get("algorithm", ""))
+        return {"content": [{"type": "text", "text": json.dumps(result, indent=2)}]}
+
+    elif name == "suggest_approach":
+        result = kg.suggest_approach(
+            arguments.get("problem_type", ""),
+            arguments.get("characteristics", [])
+        )
+        return {"content": [{"type": "text", "text": json.dumps(result, indent=2)}]}
+
     return {"content": [{"type": "text", "text": f"Unknown tool: {name}"}], "isError": True}
 
 
@@ -290,7 +476,19 @@ def handle_resources_list() -> dict:
             {
                 "uri": "coinor://annotations",
                 "name": "Full Annotations JSON",
-                "description": "Complete knowledge base as JSON",
+                "description": "Complete source code annotations as JSON",
+                "mimeType": "application/json"
+            },
+            {
+                "uri": "coinor://knowledge-graph",
+                "name": "Mathematical Concept Knowledge Graph",
+                "description": "41 optimization concepts with relationships (requires, solves, implements)",
+                "mimeType": "application/json"
+            },
+            {
+                "uri": "coinor://concepts",
+                "name": "Concept List",
+                "description": "Quick reference list of all concepts by category",
                 "mimeType": "application/json"
             }
         ]
@@ -306,6 +504,37 @@ def handle_resource_read(uri: str) -> dict:
                     "uri": uri,
                     "mimeType": "application/json",
                     "text": json.dumps(kb.data)
+                }
+            ]
+        }
+    elif uri == "coinor://knowledge-graph":
+        return {
+            "contents": [
+                {
+                    "uri": uri,
+                    "mimeType": "application/json",
+                    "text": json.dumps(kg.data)
+                }
+            ]
+        }
+    elif uri == "coinor://concepts":
+        # Return a compact concept list by category
+        concepts_by_category = {}
+        for cid, concept in kg.data.get('concepts', {}).items():
+            cat = concept.get('category', 'unknown')
+            if cat not in concepts_by_category:
+                concepts_by_category[cat] = []
+            concepts_by_category[cat].append({
+                'id': cid,
+                'name': concept.get('name', cid),
+                'aliases': concept.get('aliases', []),
+            })
+        return {
+            "contents": [
+                {
+                    "uri": uri,
+                    "mimeType": "application/json",
+                    "text": json.dumps(concepts_by_category, indent=2)
                 }
             ]
         }

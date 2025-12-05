@@ -43,7 +43,7 @@ Welcome! These guided paths will take you from foundational concepts to understa
 <span class="duration">~5 hours</span>
 <span class="prereqs">Calculus, LP Fundamentals</span>
 </div>
-<a href="nonlinear-optimization/" class="path-start coming-soon">Coming Soon</a>
+<a href="nonlinear-optimization/" class="path-start">Start Learning →</a>
 </div>
 
 </div>
