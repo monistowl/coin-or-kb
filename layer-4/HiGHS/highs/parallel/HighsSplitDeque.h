@@ -11,16 +11,28 @@
  *
  * Lock-free concurrent deque enabling efficient task-parallel execution.
  *
- * **Chase-Lev Deque:**
- * - Owner pushes/pops from head (LIFO for locality)
- * - Thieves steal from tail (FIFO for load balancing)
- * - Single-word CAS for conflict resolution
+ * @algorithm Chase-Lev Work-Stealing Deque (2005):
+ *   Lock-free deque supporting concurrent owner/stealer access:
+ *   @math Owner: push/pop at head (LIFO for cache locality)
+ *         Thieves: steal from tail (FIFO for load balance)
+ *         Conflict: single CAS resolves owner-stealer races
+ *   @complexity O(1) per operation, wait-free stealing
+ *   @ref Chase & Lev (2005) "Dynamic Circular Work-Stealing Deque"
  *
- * **Split Point Optimization:**
- * - tail/split packed in 64-bit atomic (ts)
- * - Split divides deque: [tail, split) available for stealing
- * - Owner controls split growth via growShared()/shrinkShared()
- * - Reduces contention when deque not fully shared
+ * @algorithm Split Point Optimization:
+ *   Reduce contention by limiting shared portion:
+ *   @math Pack tail|split in 64-bit atomic (ts)
+ *         [tail, split): available for stealing
+ *         [split, head): private to owner
+ *         growShared(): Expand when work available
+ *         shrinkShared(): Contract when thieves caught up
+ *   Fewer CAS conflicts than fully-shared deque.
+ *
+ * @algorithm ABA-Safe Sleeper Stack:
+ *   Lock-free stack for sleeping workers with ABA prevention:
+ *   @math sleeperStack: 64-bit = (ABA_tag << 20) | worker_id
+ *         Push/pop via CAS with incrementing tag
+ *   Avoids ABA problem in wait-free wake protocol.
  *
  * **Memory Layout (Cache-Aligned):**
  * - OwnerData (64B): head, split copy, workers, RNG

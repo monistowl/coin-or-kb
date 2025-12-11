@@ -11,22 +11,31 @@
  *
  * Manages worker threads and coordinates task execution via work stealing.
  *
+ * @algorithm Randomized Work Stealing (Blumofe-Leiserson 1999):
+ *   Load-balanced task scheduling via theft:
+ *   @math Idle worker picks random victim, steals oldest task
+ *         Expected completion: T_p ≤ T_1/p + O(T_∞)
+ *         where T_1 = total work, T_∞ = critical path, p = processors
+ *   random_steal_loop() implements this with exponential backoff.
+ *   @ref Blumofe & Leiserson (1999) "Scheduling Multithreaded Computations"
+ *
+ * @algorithm Leapfrog Task Synchronization:
+ *   Avoid idle waiting when task stolen by recursive stealing:
+ *   @math Owner waits for stolen task T executed by stealer S
+ *         Instead of blocking: owner steals from S's deque
+ *         Recursive: if S's task stolen by S', steal from S'
+ *   Keeps all processors productive during sync.
+ *
+ * @algorithm Adaptive Backoff:
+ *   Balance responsiveness vs CPU usage during idle periods:
+ *   @math Spin stealing: numTries *= 2 every kMicroSecsBeforeGlobalSync
+ *         After timeout: push to sleeper stack, wait on semaphore
+ *   Avoids both busy-waiting and excessive context switches.
+ *
  * **Thread Pool:**
  * - Main thread (worker 0) + N-1 spawned workers
  * - Each worker has own HighsSplitDeque for local tasks
  * - Thread-local storage for current worker's deque
- *
- * **Work Stealing Loop:**
- * - random_steal_loop(): Try stealing from random victims
- *   - Exponential backoff with microsecond timing
- *   - Falls back to global sync after timeout
- * - Workers sleep when no work available (WorkerBunk)
- *
- * **Stolen Task Sync:**
- * - sync_stolen_task(): Wait for task stolen by another worker
- *   - Leapfrog stealing: steal from the stealer
- *   - Spin wait with exponential backoff
- *   - Sleep with notification when timeout exceeded
  *
  * **Lifecycle:**
  * - initialize(): Create executor singleton
