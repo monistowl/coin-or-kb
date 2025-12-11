@@ -7,6 +7,10 @@
  *
  * C++/CLI wrapper exposing CoinUtils sparse matrix to .NET languages.
  *
+ * @algorithm Sparse Matrix Storage (via CoinPackedMatrix wrapper)
+ * @math Compressed sparse column/row format: values[], indices[], starts[].
+ *       getVector(i) returns i-th column/row as shallow view (no copy).
+ *       O(nnz) storage, O(1) column access, O(nnz_col) element iteration.
  * @see CoinShallowPackedVector.h for vector wrapper
  */
 

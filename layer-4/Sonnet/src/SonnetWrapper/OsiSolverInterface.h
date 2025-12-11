@@ -5,7 +5,14 @@
  * @brief .NET wrapper for OsiSolverInterface (Open Solver Interface)
  *
  * C++/CLI wrapper exposing OsiSolverInterface to .NET languages.
+ * Provides solver-independent API for LP/MIP optimization.
  *
+ * @algorithm Open Solver Interface Abstraction (via OSI wrapper)
+ * @math Unified API for optimization solvers:
+ *       - initialSolve(): Solve LP from scratch
+ *       - resolve(): Re-optimize after modifications (warm start)
+ *       - branchAndBound(): Solve MIP via B&B
+ *       Abstracts CLP, CBC, CPLEX, Gurobi behind common interface.
  * @see ClpModel.h, CbcModel.h for solver wrappers
  */
 

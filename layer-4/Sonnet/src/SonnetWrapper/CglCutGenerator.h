@@ -7,6 +7,11 @@
  * C++/CLI wrapper exposing CGL cut generators to .NET languages.
  * Generic template CglCutGeneratorGeneric<T> for derived generators.
  *
+ * @algorithm Cut Generation Library Interface (via CGL wrapper)
+ * @math Base class for cutting plane generators that strengthen LP relaxation.
+ *       Cuts are valid inequalities ax ≤ b satisfied by all integer feasible
+ *       points but violated by current LP optimum. Derived generators:
+ *       Gomory, MIR, clique, probing, flow cover, knapsack covers.
  * @see CglProbing.h for probing cut generator
  * @see CbcCutGenerator.h for CBC integration
  */

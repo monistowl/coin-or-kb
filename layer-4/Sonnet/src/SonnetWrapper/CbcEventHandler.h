@@ -9,6 +9,12 @@
  * CbcAction enum (noAction, stop, restart, killSolution).
  * CbcDelegateEventHandlerProxy bridges .NET delegates to native callbacks.
  *
+ * @algorithm Branch-and-Cut Event Callbacks (via CbcEventHandler wrapper)
+ * @math User-defined callbacks at B&C milestones:
+ *       - node: after processing each B&B tree node
+ *       - solution: when feasible integer solution found
+ *       - generatedCuts: after cut separation round
+ *       Actions: stop (abort), restart (warm restart), killSolution (reject)
  * @see CbcModel.h for model wrapper
  * @see CbcSolver.h for solver entry points
  */

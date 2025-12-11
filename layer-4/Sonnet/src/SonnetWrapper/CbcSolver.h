@@ -7,6 +7,13 @@
  * C++/CLI wrapper for CBC solver with callback support.
  * CbcSolverCallBack delegate for monitoring solve phases.
  *
+ * @algorithm CBC Solver Main Entry Point (via CbcSolver wrapper)
+ * @math CbcMain0/CbcMain1 execute full MIP solve pipeline:
+ *       1. Initial LP solve (dual simplex)
+ *       2. Preprocessing (probing, clique detection)
+ *       3. Branch-and-bound with cuts
+ *       4. Postprocessing (solution recovery)
+ *       Callbacks at phases 1-6 allow user intervention.
  * @see CbcModel.h for model wrapper
  * @see CbcEventHandler.h for event handling
  */

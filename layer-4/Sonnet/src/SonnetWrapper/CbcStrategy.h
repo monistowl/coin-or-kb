@@ -7,6 +7,12 @@
  * Strategies configure cut generators, heuristics, preprocessing,
  * and other branch-and-cut parameters as reusable bundles.
  *
+ * @algorithm Branch-and-Cut Strategy Configuration (via CBC wrapper)
+ * @math Configures MIP solver behavior:
+ *       - cutsOnlyAtRoot: Generate cuts only at root (faster tree search)
+ *       - numberStrong: Strong branching candidates to evaluate
+ *       - numberBeforeTrust: Pseudocost reliability threshold
+ *       CbcStrategyDefaultSubTree enables nested B&C for local search.
  * @see CbcCutGenerator.h for individual cut generator control
  * @see CbcModel for solver that uses these strategies
  */

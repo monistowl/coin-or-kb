@@ -7,6 +7,13 @@
  * configuration for pass limits, variable limits, and root node
  * vs tree node behavior.
  *
+ * @algorithm Probing Cut Generation (via CGL wrapper)
+ * @math Temporarily fix binary xⱼ to 0 or 1, propagate implications:
+ *       - If xⱼ=1 forces xₖ=0 and xⱼ=0 forces xₖ=0, then xₖ=0 globally
+ *       - If xⱼ=1 forces xₖ=1, add implication cut xⱼ ≤ xₖ
+ *       - Detects infeasibility when fixing leads to contradiction
+ * @complexity O(passes × probed_vars × LP_pivots) per node
+ * @ref Savelsbergh (1994). "Preprocessing and Probing for MIP"
  * @see CglCutGenerator.h for base cut generator wrapper
  * @see CbcCutGenerator.h for integrating with branch-and-cut
  */

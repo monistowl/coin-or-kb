@@ -7,6 +7,13 @@
  * are generated during branch-and-cut search (frequency, depth,
  * at solution, etc.).
  *
+ * @algorithm Cut Generator Scheduling in Branch-and-Cut (via CBC wrapper)
+ * @math Controls cut generation policy during B&C:
+ *       - howOften: Frequency (every n nodes, -1=root only, -100=off)
+ *       - whatDepth: Maximum tree depth for cut generation
+ *       - atSolution: Generate cuts when integer feasible found
+ *       - normal/infeasible: When to invoke based on LP status
+ *       Balances cut strength vs computational overhead.
  * @see CglCutGenerator.h for wrapped cut generator algorithms
  * @see CbcModel for branch-and-cut model using these generators
  */

@@ -7,6 +7,10 @@
  * C++/CLI wrapper exposing CLP solver through OSI interface to .NET.
  * Includes matrix access methods and optional CPLEX/Gurobi support.
  *
+ * @algorithm CLP Simplex Solver via OSI (via OsiClp wrapper)
+ * @math Dual revised simplex: maintains B⁻¹ via LU factorization,
+ *       selects entering variable by reduced cost, leaving by ratio test.
+ *       Steepest-edge pricing weights updated via BFRT formula.
  * @see ClpModel.h for direct CLP wrapper
  * @see OsiSolverInterface.h for base OSI wrapper
  */

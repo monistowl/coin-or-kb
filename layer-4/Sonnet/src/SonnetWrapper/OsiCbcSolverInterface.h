@@ -7,6 +7,10 @@
  * C++/CLI wrapper exposing CBC MIP solver through OSI interface.
  * Provides access to CbcModel for node count, strategy, and solution.
  *
+ * @algorithm CBC Branch-and-Cut via OSI (via OsiCbc wrapper)
+ * @math Branch-and-bound with LP relaxation at each node.
+ *       Cutting planes (Gomory, MIR, clique) tighten relaxation.
+ *       getNodeCount() returns B&B tree nodes explored.
  * @see CbcModel.h for CBC model wrapper
  * @see OsiClpSolverInterface.h for CLP solver wrapper
  */
