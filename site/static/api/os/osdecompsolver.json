@@ -3,7 +3,16 @@
   "library": "OS",
   "layer": "layer-4",
   "header": "OS/applications/columnGen/code/OSDecompSolver.h",
-  "brief": "",
-  "algorithms": [],
+  "brief": "Column generation decomposition solver framework\n\nVirtual base class for Dantzig-Wolfe decomposition solvers.",
+  "algorithms": [
+    {
+      "name": "Branch-and-Price:\n  Combine column generation with branch-and-bound for MIP:",
+      "math": "At each B&B node: solve LP relaxation via column generation\n        Branch on fractional variables (original or master space)\n        Branching constraints added to B matrix (tour-breaking, etc.)\n  getColumns() generates new columns from subproblem\n  getCutsTheta() generates cutting planes in master space\n\n**Key Methods:**\n- getInitialRestrictedMaster(): Create initial master LP\n- getColumns(): Solve pricing subproblem, return columns\n- getCutsTheta(): Generate cuts in theta (column) space\n- getCutsMultiCommod(): Multi-commodity flow cuts\n- getBranchingCut(): Variable branching constraints\n\n@remarks\nCopyright (C) 2005-2008, Horand Gassmann, Jun Ma, Kipp Martin,\nNorthwestern University, and the University of Chicago.\nAll Rights Reserved.\nThis software is licensed under the Eclipse Public License.\nPlease see the accompanying LICENSE file in root directory for terms.",
+      "complexity": "Depends on subproblem structure; typically polynomial per iter",
+      "ref": [
+        "Dantzig & Wolfe (1960) \"Decomposition Principle for Linear Programs\""
+      ]
+    }
+  ],
   "methods": []
 }

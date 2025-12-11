@@ -7,6 +7,9 @@
  * C++/CLI wrapper exposing CLP simplex solver to .NET languages.
  * Supports quadratic objectives via loadQuadraticObjective().
  *
+ * @algorithm Simplex Method for LP/QP (via CLP wrapper)
+ * @math Solves min c'x + ½x'Qx s.t. Ax ≤ b using dual simplex with
+ *       steepest-edge pricing and Forrest-Tomlin LU updates.
  * @see ClpObjective.h, OsiClpSolverInterface.h
  */
 

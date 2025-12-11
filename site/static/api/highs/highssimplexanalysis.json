@@ -3,7 +3,20 @@
   "library": "HiGHS",
   "layer": "layer-4",
   "header": "highs/simplex/HighsSimplexAnalysis.h",
-  "brief": "Analyse simplex iterations, both for run-time control and data\ngathering",
-  "algorithms": [],
-  "methods": []
+  "brief": "Simplex iteration analysis for run-time control and performance tuning\n\nCollects and analyzes data during simplex iterations to support:\n- Adaptive algorithm selection (sparse vs hyper-sparse FTRAN/BTRAN)\n- DSE-to-Devex switching decisions\n- INVERT timing via synthetic clock\n- Performance profiling and debugging\n\n**TranStageAnalysis:**\nTracks density predictions vs actuals for FTRAN/BTRAN stages:\n- FTRAN_LOWER, FTRAN_UPPER, FTRAN_UPPER_FT\n- BTRAN_UPPER, BTRAN_UPPER_FT, BTRAN_LOWER\nUsed to tune hyper-sparse vs traditional algorithm selection.\n\n**HighsSimplexAnalysis:**\nPer-iteration data for adaptive control:\n- col_aq_density, row_ep_density, row_ap_density: Operation densities\n- edge_weight_error: DSE weight accuracy tracking\n- numerical_trouble: Pivot accuracy monitoring\n- rebuild_reason: Why INVERT was triggered",
+  "algorithms": [
+    {
+      "name": "Adaptive Density-Based Algorithm Selection:\n  Choose hyper-sparse vs traditional FTRAN/BTRAN based on RHS density:",
+      "math": "if density < threshold: use hyper-sparse (O(nnz result))\n        else: use traditional (O(nnz factor))\n  Threshold ~5-10% depends on factor structure.\n  TranStageAnalysis tracks prediction accuracy for threshold tuning.",
+      "complexity": "",
+      "ref": [
+        "Huangfu, Q. and Hall, J.A.J. (2018). \"Parallelizing the dual\n       revised simplex method\". Math. Prog. Computation 10:119-142."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "simplex/HSimplexNla.h for FTRAN/BTRAN operations",
+    "simplex/HEkk.h for simplex kernel using this analysis"
+  ]
 }

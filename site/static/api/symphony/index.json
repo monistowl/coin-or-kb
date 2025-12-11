@@ -28,6 +28,11 @@
       "has_algorithm": false
     },
     {
+      "name": "cluster_heur",
+      "brief": "Cluster-first route-second heuristic for VRP\n\nTwo-phase heuristic that clusters customers then sequences each cluster.",
+      "has_algorithm": true
+    },
+    {
       "name": "config_default",
       "brief": "Default build configuration for SYMPHONY library\n\nDefines package dependencies when not using autoconf.\nEdit this file to enable/disable optional solver backends.\n\n**Required packages (always enabled):**\n- COIN_HAS_CGL: CGL cut generators\n- COIN_HAS_CLP: CLP linear solver\n- COIN_HAS_COINUTILS: CoinUtils foundation\n- COIN_HAS_OSI: OSI solver interface\n\n**Optional packages (commented by default):**\n- COIN_HAS_CBC: Cbc MIP solver\n- COIN_HAS_VOL: Volume algorithm\n- COIN_HAS_CPX: CPLEX\n- COIN_HAS_GLPK: GLPK\n- COIN_HAS_MSK: Mosek\n- COIN_HAS_XPR: Xpress\n- COIN_DEBUG: Runtime sanity checks",
       "has_algorithm": false
@@ -40,7 +45,7 @@
     {
       "name": "decomp",
       "brief": "Decomposition-based column generation for SYMPHONY\n\nImplements column generation via Dantzig-Wolfe decomposition\nfor problems with special structure.\n\n**Core functions:**\n- decomp(): Main decomposition algorithm\n- create_initial_lp(): Build restricted master problem\n- generate_new_cols(): Solve pricing subproblem\n- generate_cuts(): Cut generation in master\n- add_dcmp_cols(): Add columns to master LP\n\n**Column management:**\n- receive_cols(): Receive columns from subproblems\n- get_cols_from_pool(): Retrieve from column pool\n- free_dcmp_col_set(): Cleanup column set\n\n**User callbacks:**\n- user_generate_new_cols(): Custom pricing routine\n- user_unpack_col(): Expand packed column\n- user_pack_col(): Compress column for storage\n- user_check_col(): Verify column validity\n- user_set_rhs(): Define subproblem RHS\n- user_send_to_sol_pool(): Store promising columns",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "decomp_lp",
@@ -53,9 +58,64 @@
       "has_algorithm": false
     },
     {
+      "name": "exchange_heur",
+      "brief": "Inter-route exchange improvement heuristic for VRP\n\nLocal search heuristic that improves VRP solutions via customer exchanges.",
+      "has_algorithm": true
+    },
+    {
+      "name": "ins_routines",
+      "brief": "TSP insertion heuristics for VRP route construction\n\nConstruction heuristics that build tours by sequential insertion.",
+      "has_algorithm": true
+    },
+    {
+      "name": "lower_bound",
+      "brief": "Lower bound computation for VRP branch-and-bound\n\nComputes lower bounds for pruning in the B&B tree.",
+      "has_algorithm": true
+    },
+    {
+      "name": "mst_ins_rout",
+      "brief": "MST-based insertion and k-tree lower bound for VRP\n\nMinimum spanning tree based routines for bounds and construction.",
+      "has_algorithm": true
+    },
+    {
+      "name": "network",
+      "brief": "Support graph representation for VRP cut generation\n\nAdjacency list graph representation constructed from LP solution.\n\n**Network structure:**\n- vertex: Node with adjacency list, demand, component number\n- edge: Edge with endpoints, weight (LP value), cost\n- elist: Linked list entry in adjacency list\n- network: Complete graph with vertex/edge arrays",
+      "has_algorithm": true
+    },
+    {
+      "name": "route_heur",
+      "brief": "Route-first cluster-second heuristic for VRP\n\nTwo-phase heuristic that builds giant tour then partitions into routes.",
+      "has_algorithm": true
+    },
+    {
+      "name": "s_path",
+      "brief": "Shortest path computation for VRP tour splitting\n\nDijkstra-based shortest path for partitioning TSP tours into routes.\n\n**adj_list structure:**\n- custnum: Adjacent customer number\n- cost: Edge cost to adjacent customer\n- next: Pointer to next adjacency",
+      "has_algorithm": true
+    },
+    {
+      "name": "savings",
+      "brief": "Clarke-Wright Savings heuristic for VRP\n\nClassic construction heuristic for Vehicle Routing Problem.",
+      "has_algorithm": true
+    },
+    {
       "name": "sp_params",
       "brief": "Solution/column pool parameters for decomposition\n\nParameters controlling column storage and management.\n\n**sp_params structure:**\n- verbosity: Output level\n- etol: Numerical tolerance\n- block_size: Allocation granularity\n- max_size: Maximum pool memory\n- max_number_of_sols: Hard limit on columns\n- min_to_delete: Minimum batch deletion size\n- touches_until_deletion: Inactivity threshold\n- compress_num/ratio: When to compress pool\n\n**Check strategies (check_which):**\n- CHECK_ALL_COLS: Check everything\n- CHECK_COL_LEVEL: By tree depth\n- CHECK_COL_TOUCHES: By activity\n- CHECK_COL_LEVEL_AND_TOUCHES: Combined\n\n**Delete strategies (delete_which):**\n- DELETE_DUPLICATE_COLS: Only duplicates\n- DELETE_DUPLICATE_AND_INEFFECTIVE_COLS: Also inactive",
       "has_algorithm": false
+    },
+    {
+      "name": "spp_cg",
+      "brief": "Cut generator for Set Partitioning Problem\n\nImplements specialized cut separation for SPP using conflict graph.\n\n**Fractional graph (frac_graph):**\n- Nodes = variables with fractional LP values\n- Edges connect conflicting (non-orthogonal) columns\n- Used as intersection graph for cut separation\n\n**Level graph (level_graph):**\n- BFS enumeration from root node\n- Used for odd hole detection",
+      "has_algorithm": true
+    },
+    {
+      "name": "spp_cg_clique",
+      "brief": "Clique cut separation for Set Partitioning Problem\n\nSpecialized clique finding algorithms for SPP cut generation.",
+      "has_algorithm": true
+    },
+    {
+      "name": "sweep",
+      "brief": "Sweep heuristic for VRP construction\n\nClassic construction heuristic that builds routes by angular sweep.\n\n**sweep_data structure:**\n- angle: Polar angle from depot\n- cust: Customer identifier",
+      "has_algorithm": true
     },
     {
       "name": "sym_cg",
@@ -120,7 +180,7 @@
     {
       "name": "sym_lp_solver",
       "brief": "LP solver abstraction layer for SYMPHONY\n\nProvides uniform interface to multiple LP solvers via OSI\n(Open Solver Interface) or native APIs.\n\n**Supported solvers (via compile flags):**\n- __OSI_CLP__: COIN-OR CLP (default, open source)\n- __OSI_CPLEX__: IBM CPLEX\n- __OSI_XPRESS__: FICO Xpress\n- __OSI_GLPK__: GNU Linear Programming Kit\n- __CPLEX__: Native CPLEX API\n- __OSL__: IBM OSL (legacy)\n\n**LPdata structure:**\n- si: OsiSolverInterface pointer (OSI mode)\n- lp: Native solver object (CPLEX/OSL mode)\n- n, m, nz: Columns, rows, nonzeros\n- x, dj, dualsol, slacks: Solution vectors\n- vars: Variable descriptors with bounds/status\n- mip: Original problem description\n- cgl: CGL cut generation parameters\n\n**Core LP operations:**\n- open/close_lp_solver(): Initialize/cleanup\n- load_lp_prob(): Load problem into solver\n- initial_lp_solve(): First solve from scratch\n- dual_simplex(): Resolve after modifications\n- solve_hotstart(): Quick re-solve with basis\n\n**Matrix modification:**\n- add_rows(), add_cols(): Extend problem\n- delete_rows(), delete_cols(): Remove elements\n- change_bounds(), change_rhs(): Modify constraints\n\n**Solution access:**\n- get_x(), get_dj_pi(), get_slacks(): Retrieve solutions\n- get_basis(), load_basis(): Basis manipulation\n\n**CGL cut generation:**\n- generate_cgl_cuts(): Call CGL generators\n- Supports: Gomory, MIR, Probing, Knapsack, Clique, etc.",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "sym_lp_u",
@@ -190,7 +250,7 @@
     {
       "name": "sym_qsort",
       "brief": "Quicksort variants and utility functions\n\nSpecialized quicksort implementations for common data patterns.\n\n**Quicksort variants:**\n- qsort_i(): Sort integer array\n- qsort_id(): Sort int array, permute double array\n- qsort_ic(): Sort int array, permute char array\n- qsort_ii(): Sort int array, permute second int array\n- qsort_di(): Sort double array, permute int array\n\n**Utility functions:**\n- sym_gcd(): Greatest common divisor\n- d_gap(): Compute optimality gap percentage",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "sym_timemeas",
@@ -226,6 +286,16 @@
       "name": "symphony_api",
       "brief": "Internal API header (legacy, includes sym_master.h)\n\nThis header provides the internal API declarations using the\nPROTO() macro for K&R C compatibility. Modern code should use\nsymphony.h which provides the same functions with standard\nANSI C prototypes.\n\n**Included headers:**\n- sym_proto.h: PROTO() macro definition\n- sym_master.h: Master process data structures\n- sym_messages.h: Message type definitions\n\n@note Prefer using symphony.h for new code",
       "has_algorithm": false
+    },
+    {
+      "name": "tsp_ins_rout",
+      "brief": "TSP insertion heuristics (uncapacitated version)\n\nInsertion heuristics for pure TSP without capacity constraints.\nUsed to build single vehicle tours within VRP routes.",
+      "has_algorithm": true
+    },
+    {
+      "name": "vrp_cg",
+      "brief": "Cut generator for VRP branch-and-cut\n\nImplements specialized cut separation algorithms for capacitated VRP.",
+      "has_algorithm": true
     }
   ]
 }

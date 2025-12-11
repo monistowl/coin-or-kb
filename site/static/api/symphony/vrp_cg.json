@@ -1,0 +1,23 @@
+{
+  "name": "vrp_cg",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "Applications/VRP/include/vrp_cg.h",
+  "brief": "Cut generator for VRP branch-and-cut\n\nImplements specialized cut separation algorithms for capacitated VRP.",
+  "algorithms": [
+    {
+      "name": "TSP Cuts:\n  Subtour elimination for TSP subproblems:",
+      "math": "tsp_cuts(): Find violated subtour elimination constraints\n          x(E(S)) \u2264 |S| - 1 for S \u2282 V\n        Equivalent to connectivity: x(\u03b4(S)) \u2265 2",
+      "complexity": "O(|V|\u00b7|E|) via min-cut computation",
+      "ref": [
+        "Laporte, G. et al. (1985). \"Optimal routing under capacity\n       and distance restrictions\". Operations Research 33(5).",
+        "Tarjan, R. (1972). \"Depth-first search and linear graph\n       algorithms\". SIAM J. Computing 1(2):146-160."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "network.h for support graph representation",
+    "sym_cg.h for cut generator framework"
+  ]
+}

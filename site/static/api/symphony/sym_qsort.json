@@ -4,7 +4,14 @@
   "layer": "layer-3",
   "header": "include/sym_qsort.h",
   "brief": "Quicksort variants and utility functions\n\nSpecialized quicksort implementations for common data patterns.\n\n**Quicksort variants:**\n- qsort_i(): Sort integer array\n- qsort_id(): Sort int array, permute double array\n- qsort_ic(): Sort int array, permute char array\n- qsort_ii(): Sort int array, permute second int array\n- qsort_di(): Sort double array, permute int array\n\n**Utility functions:**\n- sym_gcd(): Greatest common divisor\n- d_gap(): Compute optimality gap percentage",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Optimality Gap Calculation:\n  Compute relative gap between bounds:",
+      "math": "d_gap(ub, lb, offset, sense) =\n        100 \u00b7 |ub - lb| / max(|ub|, |lb|, 1)\n  Handles minimization/maximization via sense parameter.\n  Used for termination criteria in B&B.",
+      "complexity": "O(n log n) average, O(n\u00b2) worst case",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "sym_lp.h for LP process using sort functions"

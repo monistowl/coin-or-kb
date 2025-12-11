@@ -4,7 +4,17 @@
   "layer": "layer-3",
   "header": "include/decomp/decomp.h",
   "brief": "Decomposition-based column generation for SYMPHONY\n\nImplements column generation via Dantzig-Wolfe decomposition\nfor problems with special structure.\n\n**Core functions:**\n- decomp(): Main decomposition algorithm\n- create_initial_lp(): Build restricted master problem\n- generate_new_cols(): Solve pricing subproblem\n- generate_cuts(): Cut generation in master\n- add_dcmp_cols(): Add columns to master LP\n\n**Column management:**\n- receive_cols(): Receive columns from subproblems\n- get_cols_from_pool(): Retrieve from column pool\n- free_dcmp_col_set(): Cleanup column set\n\n**User callbacks:**\n- user_generate_new_cols(): Custom pricing routine\n- user_unpack_col(): Expand packed column\n- user_pack_col(): Compress column for storage\n- user_check_col(): Verify column validity\n- user_set_rhs(): Define subproblem RHS\n- user_send_to_sol_pool(): Store promising columns",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Column Pool Management:\n  Store and retrieve columns across B&B tree:",
+      "math": "Pool stores (column, reduced_cost) pairs\n        get_cols_from_pool() retrieves columns with negative reduced cost\n        user_send_to_sol_pool() archives promising columns\n  Avoids regenerating columns found in other nodes.",
+      "complexity": "O(pool_size) per lookup",
+      "ref": [
+        "Dantzig, G. and Wolfe, P. (1960). \"Decomposition principle for\n       linear programs\". Operations Research 8(1):101-111.",
+        "L\u00fcbbecke, M. and Desrosiers, J. (2005). \"Selected topics in\n       column generation\". Operations Research 53(6):1007-1023."
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "decomp_types.h for col_data, dcmp_col_set",

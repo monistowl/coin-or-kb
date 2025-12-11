@@ -13695,9 +13695,9 @@
     "library": "SYMPHONY",
     "layer": "layer-3",
     "header": "include/sym_lp_solver.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "SymConfig": {
     "brief": "Build configuration for SYMPHONY\n\nManages platform-specific configuration and symbol visibility.\n\n**Configuration modes:**\n- HAVE_CONFIG_H: Uses autoconf-generated config.h\n- Otherwise: Uses config_default.h / config_sym_default.h\n\n**Symbol visibility:**\n- SYMPHONYLIB_EXPORT: DLL export on Windows\n- __visibility__(\"default\"): GCC visibility for -fvisibility=hidden\n\n**Include hierarchy:**\n- SYMPHONYLIB_BUILD + HAVE_CONFIG_H \u2192 config.h\n- Client + HAVE_CONFIG_H \u2192 config_sym.h\n- SYMPHONYLIB_BUILD no autoconf \u2192 config_default.h\n- Client no autoconf \u2192 config_sym_default.h",
@@ -13725,9 +13725,9 @@
     "library": "SYMPHONY",
     "layer": "layer-3",
     "header": "include/sym_qsort.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "sym_dg_u": {
     "brief": "User callbacks for Draw Graph visualization\n\nDefines callbacks for custom visualization behavior.\n\n**User callbacks:**\n- user_initialize_dg(): Global DG initialization\n- user_free_dg(): Global DG cleanup\n- user_dg_init_window(): Per-window setup\n- user_dg_free_window(): Per-window cleanup\n- user_dg_process_message(): Handle custom messages\n- user_interpret_text(): Process text input",
@@ -13769,6 +13769,146 @@
     "methods": 0,
     "has_pass2": false
   },
+  "spp_cg": {
+    "brief": "Cut generator for Set Partitioning Problem\n\nImplements specialized cut separation for SPP using conflict graph.\n\n**Fractional graph (frac_graph):**\n- Nodes = variables with fractional LP values\n- Edges connect conflicting (non-orthogonal) columns\n- Used as intersection graph for cut separation\n\n**Level graph (level_graph):**\n- BFS enumeration from root node\n- Used for odd hole detection",
+    "file": "spp_cg",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/SPP+CUTS/include/spp_cg.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "spp_cg_clique": {
+    "brief": "Clique cut separation for Set Partitioning Problem\n\nSpecialized clique finding algorithms for SPP cut generation.",
+    "file": "spp_cg_clique",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/SPP+CUTS/include/spp_cg_clique.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "vrp_cg": {
+    "brief": "Cut generator for VRP branch-and-cut\n\nImplements specialized cut separation algorithms for capacitated VRP.",
+    "file": "vrp_cg",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/vrp_cg.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "network": {
+    "brief": "Support graph representation for VRP cut generation\n\nAdjacency list graph representation constructed from LP solution.\n\n**Network structure:**\n- vertex: Node with adjacency list, demand, component number\n- edge: Edge with endpoints, weight (LP value), cost\n- elist: Linked list entry in adjacency list\n- network: Complete graph with vertex/edge arrays",
+    "file": "network",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/network.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "s_path": {
+    "brief": "Shortest path computation for VRP tour splitting\n\nDijkstra-based shortest path for partitioning TSP tours into routes.\n\n**adj_list structure:**\n- custnum: Adjacent customer number\n- cost: Edge cost to adjacent customer\n- next: Pointer to next adjacency",
+    "file": "s_path",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/heurs/s_path.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "ins_routines": {
+    "brief": "TSP insertion heuristics for VRP route construction\n\nConstruction heuristics that build tours by sequential insertion.",
+    "file": "ins_routines",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/heurs/ins_routines.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "tsp_ins_rout": {
+    "brief": "TSP insertion heuristics (uncapacitated version)\n\nInsertion heuristics for pure TSP without capacity constraints.\nUsed to build single vehicle tours within VRP routes.",
+    "file": "tsp_ins_rout",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/heurs/tsp_ins_rout.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "exchange_heur": {
+    "brief": "Inter-route exchange improvement heuristic for VRP\n\nLocal search heuristic that improves VRP solutions via customer exchanges.",
+    "file": "exchange_heur",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/heurs/exchange_heur.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "sweep": {
+    "brief": "Sweep heuristic for VRP construction\n\nClassic construction heuristic that builds routes by angular sweep.\n\n**sweep_data structure:**\n- angle: Polar angle from depot\n- cust: Customer identifier",
+    "file": "sweep",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/heurs/sweep.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "mst_ins_rout": {
+    "brief": "MST-based insertion and k-tree lower bound for VRP\n\nMinimum spanning tree based routines for bounds and construction.",
+    "file": "mst_ins_rout",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/heurs/mst_ins_rout.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "lower_bound": {
+    "brief": "Lower bound computation for VRP branch-and-bound\n\nComputes lower bounds for pruning in the B&B tree.",
+    "file": "lower_bound",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/heurs/lower_bound.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "savings": {
+    "brief": "Clarke-Wright Savings heuristic for VRP\n\nClassic construction heuristic for Vehicle Routing Problem.",
+    "file": "savings",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/heurs/savings.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "route_heur": {
+    "brief": "Route-first cluster-second heuristic for VRP\n\nTwo-phase heuristic that builds giant tour then partitions into routes.",
+    "file": "route_heur",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/heurs/route_heur.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "cluster_heur": {
+    "brief": "Cluster-first route-second heuristic for VRP\n\nTwo-phase heuristic that clusters customers then sequences each cluster.",
+    "file": "cluster_heur",
+    "library": "SYMPHONY",
+    "layer": "layer-3",
+    "header": "Applications/VRP/include/heurs/cluster_heur.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
   "sp_params": {
     "brief": "Solution/column pool parameters for decomposition\n\nParameters controlling column storage and management.\n\n**sp_params structure:**\n- verbosity: Output level\n- etol: Numerical tolerance\n- block_size: Allocation granularity\n- max_size: Maximum pool memory\n- max_number_of_sols: Hard limit on columns\n- min_to_delete: Minimum batch deletion size\n- touches_until_deletion: Inactivity threshold\n- compress_num/ratio: When to compress pool\n\n**Check strategies (check_which):**\n- CHECK_ALL_COLS: Check everything\n- CHECK_COL_LEVEL: By tree depth\n- CHECK_COL_TOUCHES: By activity\n- CHECK_COL_LEVEL_AND_TOUCHES: Combined\n\n**Delete strategies (delete_which):**\n- DELETE_DUPLICATE_COLS: Only duplicates\n- DELETE_DUPLICATE_AND_INEFFECTIVE_COLS: Also inactive",
     "file": "sp_params",
@@ -13795,9 +13935,9 @@
     "library": "SYMPHONY",
     "layer": "layer-3",
     "header": "include/decomp/decomp.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "decomp_types": {
     "brief": "Data structures for decomposition column generation\n\nTypes for representing columns in Dantzig-Wolfe decomposition.\n\n**col_data (packed column):**\n- size: Size of coef array\n- coef: Packed column data\n- level: Tree level where generated\n- touches: Inactivity counter for deletion\n\n**dcmp_col_set (column batch):**\n- lb, ub, obj: Column bounds and costs\n- matbeg, matind, matval: CSC format matrix\n- num_cols, nzcnt: Dimensions\n- bd_type, ubnd: Bound type info",
@@ -14300,14 +14440,14 @@
     "has_pass2": true
   },
   "Net": {
-    "brief": "Graph/network data structure for power systems and network optimization\n\nRepresents graphs with nodes, arcs, and cycles for network-based models.\n\n**Net Class:**\n- nodes: Vector of Node pointers\n- arcs: All arcs (existing + potential)\n- _exist_arcs: Only existing arcs\n- conting_arcs: Contingency arcs (for N-1 analysis)\n\n**Indexing Structures:**\n- nodeID: Map from node name to Node*\n- arcID: Map from (src_name, dest_name) to Arc*\n- arcMap: Map from arc name to Arc*\n\n**Node Pairs (for SDP relaxations):**\n- _node_pairs: Bus pairs for standard formulation\n- _node_pairs_chord: Bus pairs in chordal completion\n\n**Cycle Basis (for Kirchhoff constraints):**\n- cycle_basis: Vector of Path* forming basis\n- horton_net: Subnetwork for Horton algorithm\n\n**Tree Decomposition:**\n- _bags: Cliques from chordal extension\n- Used for SDP rank-1 constraints\n\n**Graph Algorithms:**\n- clone(), clone_undirected(): Copy graphs\n- Cycle detection, shortest paths\n- Chordal completion",
+    "brief": "Graph/network data structure for power systems and network optimization\n\nRepresents graphs with nodes, arcs, and cycles for network-based models.",
     "file": "Net",
     "library": "Gravity",
     "layer": "layer-4",
     "header": "include/gravity/Net.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "IpoptProgram": {
     "brief": "Ipopt solver interface implementing TNLP callbacks\n\nAdapts Gravity models to Ipopt's TNLP (Templated NLP) interface.\n\n**IpoptProgram<type> Class:**\n- Inherits from Ipopt::TNLP and Program<type>\n- _model: Pointer to Gravity Model\n\n**Required TNLP Callbacks:**\n- get_nlp_info(): Return problem dimensions (n, m, nnz_jac, nnz_hess)\n- get_bounds_info(): Variable and constraint bounds\n- get_starting_point(): Initial x, z_L, z_U, lambda\n- eval_f(): Objective function value\n- eval_grad_f(): Objective gradient\n- eval_g(): Constraint values\n- eval_jac_g(): Jacobian values and structure\n- eval_h(): Hessian of Lagrangian\n- finalize_solution(): Copy solution back to model\n\n**Sparsity Pattern:**\n- First call to eval_jac_g/eval_h: return structure (iRow, jCol)\n- Subsequent calls: return values only\n- Gravity tracks via _first_call_jac, _first_call_hess\n\n**Solution Recovery:**\n- finalize_solution() copies x values to model variables\n- Retrieves dual values (lambda) for constraints\n- Retrieves bound multipliers (z_L, z_U)",
@@ -14605,9 +14745,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/ipm/ipx/basis.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "reducedgradient": {
     "brief": "HiGHS QP reduced gradient",
@@ -14880,14 +15020,14 @@
     "has_pass2": false
   },
   "HighsIis": {
-    "brief": "Irreducible Infeasible Set (IIS) computation for infeasible LPs\n\nIdentifies minimal subset of constraints that cannot be satisfied.\n\n**IIS Definition:**\n- Minimal infeasible subsystem: removing any constraint makes it feasible\n- Helps diagnose why an LP is infeasible\n- Also identifies which variable bounds participate\n\n**IisBoundStatus:**\n- kDropped: Bound removed from IIS\n- kNull: Not yet classified\n- kFree: Variable is free (not in IIS)\n- kLower/kUpper/kBoxed: Which bound(s) are in IIS\n\n**Algorithm:**\n- compute(): Main IIS computation using simplex iterations\n- trivial(): Check for obviously infeasible (single row/col)\n- rowValueBounds(): Check row activity vs bounds\n\n**Strategy:**\n- kIisStrategyMin: Minimize IIS size (more iterations)\n- Iteratively removes constraints until minimal set remains\n\n**Output:**\n- col_index_/row_index_: Variables/constraints in IIS\n- col_bound_/row_bound_: Which bounds contribute\n- info_: Simplex stats per iteration",
+    "brief": "Irreducible Infeasible Set (IIS) computation for infeasible LPs\n\nIdentifies minimal subset of constraints that cannot be satisfied.",
     "file": "HighsIis",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/lp_data/HighsIis.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsAnalysis": {
     "brief": "Timer clock aggregation for performance analysis\n\nGroups named timer clocks for measuring algorithm phases.\n\n**HighsTimerClock:**\n- timer_pointer_: Reference to parent HighsTimer\n- clock_[]: Vector of clock indices for this group\n\n**Usage:**\n- Simplex phases (pricing, ratio test, update)\n- IPM iterations\n- MIP operations (cuts, branching, heuristics)",
@@ -14910,14 +15050,14 @@
     "has_pass2": false
   },
   "HighsRanging": {
-    "brief": "Sensitivity analysis (ranging) for LP optimal solutions\n\nComputes allowable ranges for objective coefficients and bounds.\n\n**HighsRangingRecord:**\n- value_[]: New coefficient/bound value at range limit\n- objective_[]: Objective value at range limit\n- in_var_[]: Variable entering basis at limit\n- ou_var_[]: Variable leaving basis at limit\n\n**HighsRanging Structure:**\n- col_cost_up/dn: Objective coefficient increase/decrease\n- col_bound_up/dn: Variable bound increase/decrease\n- row_bound_up/dn: Constraint RHS increase/decrease\n\n**Sensitivity Analysis:**\n- For costs: Range where current basis remains optimal\n- For bounds: Range where current basis remains primal feasible\n- Shadow prices from dual variables",
+    "brief": "Sensitivity analysis (ranging) for LP optimal solutions\n\nComputes allowable ranges for objective coefficients and bounds.",
     "file": "HighsRanging",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/lp_data/HighsRanging.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsSolve": {
     "brief": "Top-level LP solve dispatch and special case handling\n\nEntry points for solving LPs with solver selection and preprocessing.\n\n**Main Solve Functions:**\n- solveLp(): Primary entry point dispatching to simplex/IPM\n- solveUnconstrainedLp(): Handle LPs with no constraints\n\n**Solver Selection:**\n- useIpm(): Check if IPM should be used based on options\n- useHipo(): Check if parallel HIPO IPM is appropriate\n  - Considers problem size, structure, and options\n\n**Preprocessing:**\n- assessExcessiveObjectiveBoundScaling(): Detect numerical issues\n  - Warns if objective/bound ratio is extreme\n  - Populates user_scale_data for remediation\n\n**Dispatch Logic:**\n1. Check for special cases (unconstrained, trivially infeasible)\n2. Select solver (simplex vs IPM vs HIPO)\n3. Call appropriate solver with prepared solver object",
@@ -15065,9 +15205,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/simplex/HSimplexNla.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "SimplexConst": {
     "brief": "Constants and enums for HiGHS simplex solvers\n\n**SimplexStrategy Enum:**\n- kSimplexStrategyDual: Serial dual simplex\n- kSimplexStrategyDualTasks: SIP parallel dual\n- kSimplexStrategyDualMulti: PAMI parallel dual\n- kSimplexStrategyPrimal: Primal simplex\n\n**SimplexSolvePhase Enum:**\n- kSolvePhase1: Finding feasible basis\n- kSolvePhase2: Optimizing objective\n- kSolvePhaseOptimalCleanup: Removing perturbations\n\n**EdgeWeightMode Enum:**\n- kDantzig: Original pricing\n- kDevex: Approximate steepest edge\n- kSteepestEdge: Exact steepest edge\n\n**RebuildReason Enum:**\nReasons to reinvert basis matrix (INVERT):\n- kRebuildReasonUpdateLimitReached: Too many eta factors\n- kRebuildReasonSyntheticClockSaysInvert: Time-based trigger\n- kRebuildReasonPossiblyOptimal: Check optimality\n\n**Nonbasic Status Constants:**\n- kNonbasicMoveUp/Dn/Ze: Variable movement directions\n- kNonbasicFlagTrue/False: Basic/nonbasic indicator",
@@ -15115,19 +15255,19 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/simplex/HApp.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HEkkDualRHS": {
-    "brief": "Dual simplex optimality test for HiGHS",
+    "brief": "Dual simplex row selection (CHUZR) for HiGHS\n\nImplements CHUZR (CHoose Row) for selecting the leaving variable in dual\nsimplex. Maintains primal infeasibility data for efficient row selection.\n\n**Key Operations:**\n- chooseNormal(): Single row selection for serial dual simplex\n- chooseMultiGlobal(): Multiple row selection for PAMI\n- chooseMultiHyperGraph*(): Hyper-sparse multi-row selection\n- updatePrimal(): Apply pivot column to basic values\n- createInfeasList(): Build heap of most infeasible rows\n\n**Data Structures:**\n- work_infeasibility[row]: Primal infeasibility |x_i - bound|\n- workIndex[]: Heap of rows with largest infeasibilities\n- workMark[]: Flags for rows in the heap\n- workCutoff: Threshold for heap membership",
     "file": "HEkkDualRHS",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/simplex/HEkkDualRHS.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HSimplex": {
     "brief": "Simplex utility functions\n\nStandalone functions for simplex basis and scaling operations.\n\n**Basis Extension:**\n- appendNonbasicColsToBasis(): Add new columns as nonbasic\n- appendBasicRowsToBasis(): Add new rows as basic (slack variables)\nWorks with both HighsBasis and SimplexBasis.\n\n**Solution Status:**\n- getUnscaledInfeasibilities(): Compute infeasibilities in original space\n- setSolutionStatus(): Set primal/dual solution status in HighsInfo\n\n**Scaling:**\n- scaleSimplexCost(): Scale objective coefficients\n- unscaleSimplexCost(): Reverse objective scaling\n\n**Validation:**\n- isBasisRightSize(): Check SimplexBasis dimensions match LP",
@@ -15170,14 +15310,14 @@
     "has_pass2": true
   },
   "HighsSimplexAnalysis": {
-    "brief": "Analyse simplex iterations, both for run-time control and data\ngathering",
+    "brief": "Simplex iteration analysis for run-time control and performance tuning\n\nCollects and analyzes data during simplex iterations to support:\n- Adaptive algorithm selection (sparse vs hyper-sparse FTRAN/BTRAN)\n- DSE-to-Devex switching decisions\n- INVERT timing via synthetic clock\n- Performance profiling and debugging\n\n**TranStageAnalysis:**\nTracks density predictions vs actuals for FTRAN/BTRAN stages:\n- FTRAN_LOWER, FTRAN_UPPER, FTRAN_UPPER_FT\n- BTRAN_UPPER, BTRAN_UPPER_FT, BTRAN_LOWER\nUsed to tune hyper-sparse vs traditional algorithm selection.\n\n**HighsSimplexAnalysis:**\nPer-iteration data for adaptive control:\n- col_aq_density, row_ep_density, row_ap_density: Operation densities\n- edge_weight_error: DSE weight accuracy tracking\n- numerical_trouble: Pivot accuracy monitoring\n- rebuild_reason: Why INVERT was triggered",
     "file": "HighsSimplexAnalysis",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/simplex/HighsSimplexAnalysis.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "SimplexStruct": {
     "brief": "Core data structures for HiGHS simplex solvers\n\n**SimplexBasis:**\nLow-level basis representation:\n- basicIndex_[row]: Variable index of basic variable in each row\n- nonbasicFlag_[var]: 0=basic, 1=nonbasic\n- nonbasicMove_[var]: Direction to move (-1=lower, +1=upper, 0=fixed/free)\n- hash: Basis fingerprint for debugging\n\n**HighsSimplexStatus:**\nSimplex solver state flags:\n- has_basis, has_ar_matrix, has_nla, has_invert\n- has_dual_steepest_edge_weights\n- is_dualized, is_permuted (problem transformations)\n\n**HighsSimplexInfo:**\nWorking data for simplex iterations:\n- workCost_/workDual_/workShift_: Objective and dual values\n- workLower_/workUpper_/workRange_/workValue_: Nonbasic variable bounds\n- baseLower_/baseUpper_/baseValue_: Basic variable data\n- Perturbation flags: costs_perturbed, bounds_perturbed\n- Infeasibility counts: num_primal/dual_infeasibilities\n- Backtracking data for singular basis recovery\n- DSE (Dual Steepest Edge) control parameters\n\n**HighsSimplexBadBasisChangeRecord:**\nTracks tabooed pivot operations to avoid cycling.\n\n**HighsRayRecord:**\nStores primal/dual ray for unbounded/infeasible detection.",
@@ -15190,14 +15330,14 @@
     "has_pass2": false
   },
   "HEkkDualRow": {
-    "brief": "Dual simplex ratio test for HiGHS",
+    "brief": "Dual simplex ratio test and BFRT for HiGHS\n\nImplements the dual ratio test (CHUZC) including Bound-Flipping Ratio Test\n(BFRT) for selecting the entering variable in dual simplex.\n\n**Key Operations:**\n- chooseMakepack(): Pack pivot row entries for ratio test\n- choosePossible(): Find candidates satisfying dual feasibility\n- chooseFinal(): Execute BFRT to select entering variable\n- updateDual(): Apply dual updates after pivot\n- updateFlip(): Handle bound flips from BFRT\n\n**BFRT Data Structures:**\n- packIndex/packValue: Sparse pivot row representation\n- workData: Index-value pairs sorted by ratio\n- workGroup: Degenerate group boundaries",
     "file": "HEkkDualRow",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/simplex/HEkkDualRow.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsParallel": {
     "brief": "High-level parallel execution API with spawn/sync pattern\n\nTask-based parallelism modeled on Intel TBB / Cilk Plus semantics.\n\n**Initialization:**\n- initialize_scheduler(): Set up thread pool\n  - Default: hardware_concurrency/2 threads\n  - HIGHS_NO_DEFAULT_THREADS: Force single-threaded\n\n**Spawn/Sync Pattern:**\n- spawn(f): Push task to local deque, may be stolen\n- sync(): Wait for most recent spawn to complete\n- Child stealing: spawned tasks run depth-first or stolen\n\n**TaskGroup:**\n- RAII wrapper for spawn/sync blocks\n- taskWait(): Wait for all spawned tasks\n- cancel(): Mark pending tasks as cancelled\n- Destructor ensures cleanup\n\n**Parallel Loops:**\n- for_each(start, end, f, grainSize): Recursive binary splitting\n  - Splits until range <= grainSize\n  - Spawns right half, executes left half\n  - Task parallelism with load balancing\n\n**Thread Info:**\n- num_threads(): Total worker count\n- thread_num(): Current worker ID",
@@ -15250,14 +15390,14 @@
     "has_pass2": false
   },
   "HighsSplitDeque": {
-    "brief": "Chase-Lev work-stealing deque with split point optimization\n\nLock-free concurrent deque enabling efficient task-parallel execution.\n\n**Chase-Lev Deque:**\n- Owner pushes/pops from head (LIFO for locality)\n- Thieves steal from tail (FIFO for load balancing)\n- Single-word CAS for conflict resolution\n\n**Split Point Optimization:**\n- tail/split packed in 64-bit atomic (ts)\n- Split divides deque: [tail, split) available for stealing\n- Owner controls split growth via growShared()/shrinkShared()\n- Reduces contention when deque not fully shared\n\n**Memory Layout (Cache-Aligned):**\n- OwnerData (64B): head, split copy, workers, RNG\n- splitRequest (64B): Flag for thieves requesting more work\n- StealerData (64B): semaphore, injectedTask, ts atomic\n- WorkerBunkData (64B): nextSleeper for sleep stack\n- taskArray: 8192 task slots\n\n**WorkerBunk:**\n- Global sleep/wake coordination across workers\n- Lock-free sleeper stack with ABA-safe CAS\n- publishWork(): Wake sleepers when work available\n\n**Pop Status:**\n- kEmpty: No tasks\n- kStolen: Task was stolen, need sync\n- kWork: Task available for execution\n- kOverflown: Queue full, task executed inline",
+    "brief": "Chase-Lev work-stealing deque with split point optimization\n\nLock-free concurrent deque enabling efficient task-parallel execution.",
     "file": "HighsSplitDeque",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/parallel/HighsSplitDeque.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsCacheAlign": {
     "brief": "Cache-line aligned memory allocation for parallel performance\n\nPrevents false sharing by ensuring separate objects reside on different cache lines.\n\n**cache_aligned Struct:**\nStatic utilities for aligned allocation:\n- alignment() \u2192 64 bytes (typical cache line size)\n- alloc(size): Allocate with 64-byte alignment\n- free(ptr): Deallocate aligned memory\n\n**Implementation:**\n- Over-allocates by alignment bytes\n- Stores original pointer before aligned address\n- Retrieves original pointer for deallocation\n\n**Smart Pointer Support:**\n- Deleter<T>: Custom deleter calling destructor + free\n- unique_ptr<T>: Alias with custom deleter\n- make_unique<T>(): Factory function\n- make_unique_array<T>(n): Array allocation\n\n**Usage:**\nWrap thread-local data in cache_aligned::unique_ptr to prevent\nperformance degradation from false sharing in parallel algorithms.",
@@ -15290,14 +15430,14 @@
     "has_pass2": false
   },
   "HighsTaskExecutor": {
-    "brief": "Work-stealing thread pool for task parallelism\n\nManages worker threads and coordinates task execution via work stealing.\n\n**Thread Pool:**\n- Main thread (worker 0) + N-1 spawned workers\n- Each worker has own HighsSplitDeque for local tasks\n- Thread-local storage for current worker's deque\n\n**Work Stealing Loop:**\n- random_steal_loop(): Try stealing from random victims\n  - Exponential backoff with microsecond timing\n  - Falls back to global sync after timeout\n- Workers sleep when no work available (WorkerBunk)\n\n**Stolen Task Sync:**\n- sync_stolen_task(): Wait for task stolen by another worker\n  - Leapfrog stealing: steal from the stealer\n  - Spin wait with exponential backoff\n  - Sleep with notification when timeout exceeded\n\n**Lifecycle:**\n- initialize(): Create executor singleton\n- shutdown(): Stop all workers, join or detach threads\n- ExecutorHandle: RAII cleanup on thread exit",
+    "brief": "Work-stealing thread pool for task parallelism\n\nManages worker threads and coordinates task execution via work stealing.",
     "file": "HighsTaskExecutor",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/parallel/HighsTaskExecutor.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsRaceTimer": {
     "brief": "Lock-free timer for parallel algorithm racing\n\nAllows multiple threads to race, with early termination when limit reached.\n\n**HighsRaceTimer<T> Class:**\nAtomic limit value that can only decrease:\n- Constructor: Initialize limit to max value (no limit)\n- decreaseLimit(newLimit): Atomically reduce limit (CAS loop)\n- limitReached(currentTime): Check if time exceeds limit\n\n**Memory Ordering:**\nUses relaxed ordering since:\n- Only one direction (decrease) of updates\n- Eventual consistency sufficient for early termination\n- No happens-before relationships required\n\n**Usage:**\nMultiple solvers race; first to find solution decreases limit.\nSlower solvers check limitReached() and abort early.",
@@ -15385,9 +15525,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/mip/HighsRedcostFixing.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsDebugSol": {
     "brief": "Debug solution tracking for MIP solver validation\n\nConditionally compiled (HIGHS_DEBUGSOL) facility to verify MIP solver\ncorrectness against a known optimal solution.\n\n**When HIGHS_DEBUGSOL Defined:**\n- debugSolution[]: Known optimal solution values\n- debugSolObjective: Optimal objective value\n- conflictingBounds: Tracks domain changes inconsistent with debug solution\n\n**Validation Methods:**\n- checkCut(): Verify cut doesn't exclude debug solution\n- checkRow(): Verify row bounds contain debug solution\n- checkClique(): Verify clique is satisfied by debug solution\n- checkVub/Vlb(): Verify variable bounds contain debug solution\n- nodePruned(): Alert if node containing debug solution is pruned\n\n**Domain Tracking:**\n- registerDomain(): Track a HighsDomain instance\n- boundChangeAdded/Removed(): Monitor bound changes\n- resetDomain(): Clear domain tracking\n\n**Conflict Analysis:**\n- checkConflictReasonFrontier(): Verify conflict derivation\n- checkConflictReconvergenceFrontier(): Verify reconvergence\n\n**When HIGHS_DEBUGSOL Not Defined:**\nAll methods become empty stubs with zero overhead.",
@@ -15410,14 +15550,14 @@
     "has_pass2": true
   },
   "HighsTableauSeparator": {
-    "brief": "Gomory mixed-integer cuts from LP tableau\n\nGenerates cuts by applying MIR procedure to simplex tableau rows.\n\n**Gomory Cut Generation:**\nFor each fractional basic integer variable:\n1. Extract tableau row: x_B[i] = f_0 - sum(a_j * x_N[j])\n2. Apply mixed-integer rounding (MIR)\n3. Produce cut: sum(floor(a_j) * x_j) \u2264 floor(f_0) (simplified)\n\n**Separation Flow:**\n1. Get fractional integer variables from LP relaxation\n2. For each candidate, extract tableau row via BTRAN\n3. Transform using HighsTransformedLp (bound substitution)\n4. Apply MIR strengthening\n5. Add valid cuts to cut pool\n\n**Implementation:**\n- numTries: Counter for separation attempts (controls effort)\n- Uses kTableauSepaString identifier for statistics\n- Inherits run() timing from HighsSeparator base class",
+    "brief": "Gomory mixed-integer cuts from LP tableau\n\nGenerates cuts by applying MIR procedure to simplex tableau rows.",
     "file": "HighsTableauSeparator",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/mip/HighsTableauSeparator.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsGFkSolve": {
     "brief": "Linear system solver over finite field GF(k)\n\nSolves congruence systems for mod-k cut generation.\n\n**HighsGFk<k> Template:**\nCompile-time multiplicative inverse via Fermat's little theorem:\n- inverse(a) = a^(k-2) mod k (when k prime)\n- powk(): Recursive repeated squaring for a^k\n- Specializations for k=2,3 (trivial inverses)\n\n**HighsGFkSolve Class:**\nSparse LU factorization in GF(k):\n\n**Storage:**\n- Triplet format: Arow[], Acol[], Avalue[] (mod k)\n- Column-wise linked list: colhead, Anext, Aprev\n- Row-wise splay tree: rowroot, ARleft, ARright\n\n**Factorization:**\n- Markowitz-style pivot selection (min row \u00d7 col size)\n- factorColPerm/factorRowPerm: Pivot order recording\n- colBasisStatus/rowUsed: Track basic columns and used rows\n\n**Solution:**\n- solve<k>(): Enumerate basic solutions\n- SolutionEntry: (index, weight) for solution vector\n- Reports multiple solutions via basis swapping\n\n**Usage:**\n1. fromCSC<k>(): Load constraint matrix modulo k\n2. setRhs<k>(): Set right-hand side (k-1 for mod-k MIR)\n3. solve<k>(): Find row weights yielding maximally violated cuts",
@@ -15425,9 +15565,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/mip/HighsGFkSolve.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsCutPool": {
     "brief": "Cutting plane storage and separation for MIP solver\n\n**HighsCutSet:**\nContainer for cuts to add to LP relaxation:\n- cutindices: Indices into cut pool\n- ARstart_/ARindex_/ARvalue_: CSR storage for cut coefficients\n- lower_/upper_: Cut bounds (typically -inf, rhs)\n\n**HighsCutPool:**\nManages all generated cutting planes:\n- matrix_: HighsDynamicRowMatrix storing all cuts\n- rhs_[]: Right-hand sides\n- ages_[]: Cut age (incremented when not binding, reset when used)\n- hashToCutMap: Duplicate detection via row hashing\n\n**Cut Lifecycle:**\n- addCut(): Add new cut with duplicate detection and clique extraction\n- separate(): Select violated cuts for LP (scoring + density limits)\n- performAging(): Increment ages, remove old cuts (age > agelim_)\n- lpCutRemoved(): Called when cut leaves LP\n\n**Cut Propagation:**\n- propagationDomains: Registered domains for cut-based bound tightening\n- propRows: Active propagation rows",
@@ -15435,9 +15575,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/mip/HighsCutPool.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsMipSolver": {
     "brief": "Branch-and-cut MIP solver",
@@ -15450,24 +15590,24 @@
     "has_pass2": true
   },
   "HighsDynamicRowMatrix": {
-    "brief": "Dynamic row matrix with efficient column-sign iteration\n\nSparse row-wise matrix supporting efficient row add/remove with\nseparate iteration over positive and negative column entries.\n\n**Row Storage:**\n- ARrange_[row]: (start, end) range in ARindex_/ARvalue_\n- ARindex_[]/ARvalue_[]: Column indices and values\n- ARrowindex_[]: Row index for each nonzero position\n\n**Column Iteration by Sign:**\nSeparate doubly-linked lists for positive and negative entries:\n- AheadPos_[col], AnextPos_[], AprevPos_[]: Positive entry list\n- AheadNeg_[col], AnextNeg_[], AprevNeg_[]: Negative entry list\n\n**Template Iterators:**\n- forEachPositiveColumnEntry(): Iterate positive entries in column\n- forEachNegativeColumnEntry(): Iterate negative entries in column\n- Useful for implication detection (sign determines bound type)\n\n**Dynamic Operations:**\n- addRow(): Insert row, reusing deleted space from freespaces_ set\n- removeRow(): Remove row, add index to deletedrows_ for reuse\n- unlinkColumns(): Disconnect row from column lists",
+    "brief": "Dynamic row matrix with efficient column-sign iteration\n\nSparse row-wise matrix supporting efficient row add/remove with\nseparate iteration over positive and negative column entries.",
     "file": "HighsDynamicRowMatrix",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/mip/HighsDynamicRowMatrix.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsTransformedLp": {
-    "brief": "LP bound transformations for cutting plane separation\n\nTransforms LP rows into single-row relaxations suitable for cut generation\nby substituting bounds and handling complementation.\n\n**Bound Substitution Types (BoundType enum):**\n- kSimpleLb/kSimpleUb: Direct variable bounds (x \u2265 lb, x \u2264 ub)\n- kVariableLb/kVariableUb: VLB/VUB from implications (x \u2265 a*y + b)\n\n**Bound Selection:**\n- bestVlb/bestVub[]: Tightest variable bound for each column\n- simpleLbDist/simpleUbDist[]: Distance of LP value from simple bounds\n- lbDist/ubDist[]: Distance considering all bound types\n- boundDist[]: Minimum distance (used for coefficient strengthening)\n\n**Transform Operations:**\n- transform(): Convert row to standard form for cut generation\n  - Substitutes bounds to get non-negative variables\n  - Tracks which bound type used per variable\n  - Returns integralPositive flag for MIR applicability\n- untransform(): Reverse transformation to original space\n\n**Cut Generation Flow:**\n1. Aggregate LP rows (via HighsLpAggregator)\n2. Transform to standard form (substitute bounds)\n3. Apply cut procedure (Gomory, MIR, etc.)\n4. Untransform back to original variables",
+    "brief": "LP bound transformations for cutting plane separation\n\nTransforms LP rows into single-row relaxations suitable for cut generation\nby substituting bounds and handling complementation.",
     "file": "HighsTransformedLp",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/mip/HighsTransformedLp.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "MipTimer": {
     "brief": "Indices of mip iClocks",
@@ -15490,14 +15630,14 @@
     "has_pass2": false
   },
   "HighsObjectiveFunction": {
-    "brief": "Objective function analysis for MIP solving\n\nAnalyzes objective structure to enable specialized bound propagation.\n\n**Objective Structure:**\n- objectiveNonzeros[]: Columns with nonzero objective (binaries first)\n- objectiveVals[]: Packed objective coefficients\n- numBinary/numIntegral: Variable counts by type\n\n**Integrality Detection:**\n- objIntScale: Scale factor making all integer coefficients integral\n- isIntegral(): True if objective is integer for integer solutions\n- checkIntegrality(): Verify/update integrality with epsilon\n- Enables objective cutoff rounding\n\n**Clique Partitioning:**\nPartitions binary objective variables into cliques:\n- cliquePartitionStart[]: Start indices per partition\n- colToPartition[]: Maps column to its partition\n- At most one variable per clique can be 1\n- Enables tighter objective bounds from clique constraints\n\n**Usage:**\n- Objective bound computation during propagation\n- Detecting integral objectives for cutoff strengthening\n- Clique-based objective probing",
+    "brief": "Objective function analysis for MIP solving\n\nAnalyzes objective structure to enable specialized bound propagation.",
     "file": "HighsObjectiveFunction",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/mip/HighsObjectiveFunction.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsModkSeparator": {
     "brief": "Class for separating maximally violated mod-k MIR cuts",
@@ -15515,9 +15655,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/mip/HighsPseudocost.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsMipAnalysis": {
     "brief": "Analyse MIP iterations, both for run-time control and data\ngathering",
@@ -15560,14 +15700,14 @@
     "has_pass2": true
   },
   "HighsLpAggregator": {
-    "brief": "Row aggregation for cut generation\n\nCombines LP rows with weights to create mixed-integer Gomory source rows.\n\n**Core Operations:**\n- addRow(): Add weighted LP row to current aggregation\n- getCurrentAggregation(): Extract combined row as sparse vector\n- clear(): Reset for next aggregation\n\n**Aggregation Format:**\nResult includes slack variables making it an equation with RHS = 0:\n  sum(a_ij * x_j) + s_i = b_i  \u2192  aggregated as equality\n\n**Implementation:**\n- Uses HighsSparseVectorSum for efficient sparse combination\n- Tracks nonzero indices incrementally\n- negate parameter for sign flip (row sense conversion)\n\n**Cut Generation Context:**\n1. Start from LP tableau row (basis row)\n2. Aggregate additional rows to eliminate non-integer variables\n3. Pass to HighsTransformedLp for bound substitution\n4. Generate Gomory mixed-integer cuts",
+    "brief": "Row aggregation for cut generation\n\nCombines LP rows with weights to create mixed-integer Gomory source rows.",
     "file": "HighsLpAggregator",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/mip/HighsLpAggregator.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsSeparator": {
     "brief": "Abstract base class for cut separators",
@@ -15605,9 +15745,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/mip/HighsConflictPool.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsImplications": {
     "brief": "Implication graphs and variable bound relationships for MIP",
@@ -15625,9 +15765,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/mip/HighsLpRelaxation.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsNodeQueue": {
     "brief": "Priority queue for branch-and-bound nodes",
@@ -15680,14 +15820,14 @@
     "has_pass2": false
   },
   "HighsHashTree": {
-    "brief": "Adaptive hash-array mapped trie (HAMT) container\n\nCache-efficient hash map using trie structure with occupation bitmaps.\n\n**Node Types:**\n- InnerLeaf<SizeClass>: Leaf with 6-54 entries (4 size classes)\n- BranchNode: Internal node with 64-way branching via hash chunks\n- ListLeaf: Collision list at maximum depth (rare)\n\n**Hash Structure:**\n- 6 bits per level \u2192 64-way branching (kBranchFactor)\n- Up to 9 depth levels (54 bits of 64-bit hash)\n- Occupation bitmap tracks which children exist\n\n**InnerLeaf Features:**\n- Linear probing within leaf for hash collisions\n- 16-bit hash prefix for fast filtering\n- Size class promotion/demotion on insert/erase\n\n**Burst Behavior:**\n- Leaf bursts to branch when exceeding kLeafBurstThreshold (54)\n- Branch merges back to leaf when children fit in threshold\n\n**Key Methods:**\n- insert/insert_or_get(): Add entry, return value pointer\n- find(): Lookup by key\n- erase(): Remove entry\n- find_common(): Find intersection with another tree\n- for_each(): Iterate all entries\n\n**Usage:**\nUsed for lifting opportunities in presolve (HPresolve.liftingOpportunities)",
+    "brief": "Adaptive hash-array mapped trie (HAMT) container\n\nCache-efficient hash map using trie structure with occupation bitmaps.",
     "file": "HighsHashTree",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/util/HighsHashTree.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsSparseMatrix": {
     "brief": "Sparse matrix in CSC or CSR format\n\n**HighsSparseMatrix Class:**\nStores constraint matrix A for LP/QP in compressed format.\n\n**Storage Format (MatrixFormat):**\n- kColwise (CSC): start_[col], index_[]/value_[] are row indices and values\n- kRowwise (CSR): start_[row], index_[]/value_[] are column indices and values\n- p_end_[]: Optional end pointers for partitioned/incremental updates\n\n**Format Conversion:**\n- ensureColwise()/ensureRowwise(): Convert to desired format\n- createColwise()/createRowwise(): Create from existing matrix\n- setFormat(): Set target format\n\n**Operations:**\n- product()/productTranspose(): Ax, A'x multiplication\n- productQuad(): Quad-precision multiplication\n- alphaProductPlusY(): y += alpha*Ax\n\n**Simplex PRICE Operations:**\n- priceByColumn()/priceByRow(): Compute pi'A\n- priceByRowWithSwitch(): Switch strategy based on density\n- createRowwisePartitioned(): Partition for hyper-sparse PRICE\n\n**Modification:**\n- addCols()/addRows(): Extend matrix\n- deleteCols()/deleteRows(): Remove columns/rows\n- scaleCol()/scaleRow(): Apply scaling",
@@ -15720,14 +15860,14 @@
     "has_pass2": false
   },
   "HighsRbTree": {
-    "brief": "Array-based Red-Black tree with CRTP interface\n\nSelf-balancing BST using indices instead of pointers for cache efficiency.\n\n**CRTP Pattern:**\n- RbTreeTraits<Impl>: Define KeyType and LinkType\n- Impl::getRbTreeLinks(): Return reference to RbTreeLinks\n- Impl::getKey(): Return comparable key value\n\n**RbTreeLinks Structure:**\n- child[2]: Left/right child indices\n- parentAndColor: Parent packed with color bit (saves storage)\n- Works with both integer and pointer LinkTypes\n\n**Tree Operations:**\n- link(): Insert node, rebalance via red-black rotations\n- unlink(): Remove node with transplant and fixup\n- find(): Search returning (node, exact_match) pair\n- first()/last(): Minimum/maximum in subtree\n- successor()/predecessor(): In-order traversal\n\n**CacheMinRbTree Variant:**\n- Maintains cached pointer to minimum element\n- O(1) access to first() for priority queue usage\n\n**Usage in HiGHS:**\n- HighsNodeQueue: Priority queue for B&B nodes by bound\n- Efficient ordered containers with O(log n) operations",
+    "brief": "Array-based Red-Black tree with CRTP interface\n\nSelf-balancing BST using indices instead of pointers for cache efficiency.",
     "file": "HighsRbTree",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/util/HighsRbTree.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsMatrixPic": {
     "brief": "Class-independent utilities for HiGHS",
@@ -15740,14 +15880,14 @@
     "has_pass2": false
   },
   "HighsLinearSumBounds": {
-    "brief": "Row activity bounds for bound tightening (FBBT)\n\nIncrementally maintains min/max activity bounds for linear constraints.\n\n**Activity Computation:**\nFor row sum = \u03a3(a_i * x_i):\n- sumLower: Minimum activity using a_i>0 with lb_i, a_i<0 with ub_i\n- sumUpper: Maximum activity using a_i>0 with ub_i, a_i<0 with lb_i\n- numInfSumLower/Upper: Count of infinite contributions\n\n**Original vs Implied Bounds:**\n- sumLowerOrig/sumUpperOrig: Using original variable bounds only\n- sumLower/sumUpper: Using tightest of original and implied bounds\n- implVarLower/implVarUpper: Implied bounds from other constraints\n- Source tracking: implVarLowerSource[] for circular dependency detection\n\n**Incremental Updates:**\n- add(): Add variable contribution to sum\n- remove(): Remove variable contribution from sum\n- updatedVarLower/Upper(): Update after bound tightening\n- updatedImplVarLower/Upper(): Update after implied bound discovery\n\n**Residual Computation:**\n- getResidualSumLower/Upper(): Activity excluding specific variable\n  - Used for FBBT: derive x_i bounds from row \u2264 rhs - residual\n  - Optional boundVar parameter for conditional bounds\n\n**Quad Precision:**\nUses HighsCDouble for activity sums to avoid numerical issues.",
+    "brief": "Row activity bounds for bound tightening (FBBT)\n\nIncrementally maintains min/max activity bounds for linear constraints.",
     "file": "HighsLinearSumBounds",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/util/HighsLinearSumBounds.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HVectorBase": {
     "brief": "Template sparse vector for simplex operations\n\nHybrid-storage vector supporting both sparse and dense access patterns.\n\n**Storage Model:**\n- array[]: Full-length value storage (dense access)\n- index[]: Packed nonzero indices (sparse iteration)\n- count: Number of nonzeros\n- Enables O(nnz) operations while allowing O(1) element access\n\n**Core Operations:**\n- setup(): Initialize to dimension\n- clear(): Reset all values and count\n- saxpy(): y += alpha * x (sparse BLAS-1)\n- pack(): Compress to packIndex/packValue arrays\n- reIndex(): Rebuild index[] from array[] (after cancellation)\n- norm2(): Squared 2-norm computation\n\n**Packing System:**\n- packFlag: Enable/disable packing\n- packIndex/packValue: Compressed representation\n- tight(): Zero small values exceeding kHighsTiny\n\n**PAMI Support:**\n- next: Link pointer for parallel minor iteration chains\n- cwork/iwork: Scratch buffers for UPDATE operations\n- synthetic_tick: Profiling counter for operation costs",
@@ -15830,14 +15970,14 @@
     "has_pass2": false
   },
   "HighsSort": {
-    "brief": "Heap-based sorting routines for HiGHS\n\nIn-place heapsort implementations for indices and value-index pairs.\n\n**Algorithm:**\n- Build max-heap in O(n) via buildMaxheap()\n- Extract elements in O(n log n) via maxHeapsort()\n- Result: increasing order (max-heap yields ascending sort)\n\n**Functions:**\n- maxheapsort(): Combined build + sort\n- buildMaxheap() + maxHeapsort(): Separate phases\n- maxHeapify(): Sift-down operation\n\n**Overloads:**\n- (HighsInt*): Sort indices only\n- (double*, HighsInt*): Sort values with corresponding indices\n- (HighsInt*, HighsInt*): Sort HighsInt values with indices\n\n**Decreasing Heap Utilities:**\n- addToDecreasingHeap(): Insert into bounded min-heap\n- sortDecreasingHeap(): Extract in decreasing order\n\n**Validation:**\n- increasingSetOk(): Check sorted order and bounds\n- sortSetData(): Sort indices and reorder associated data arrays\n\n@note Arrays use 1-based indexing: heap[1..n]",
+    "brief": "Heap-based sorting routines for HiGHS\n\nIn-place heapsort implementations for indices and value-index pairs.",
     "file": "HighsSort",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/util/HighsSort.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsMatrixUtils": {
     "brief": "Class-independent utilities for HiGHS",
@@ -15850,14 +15990,14 @@
     "has_pass2": false
   },
   "HighsDisjointSets": {
-    "brief": "Union-Find data structure for disjoint sets\n\nEfficient partition management with path compression and union-by-size.\n\n**Template Parameter:**\n- kMinimalRepresentative: If true, smaller index becomes representative\n  (useful for symmetry detection where order matters)\n\n**Data Structure:**\n- sets[]: Parent pointers (self-loop = representative)\n- sizes[]: Set sizes for union-by-size\n- linkCompressionStack: Workspace for path compression\n\n**Operations:**\n- getSet(): Find representative with path compression\n  - Amortized O(\u03b1(n)) via iterative compression\n- merge(): Union two sets\n  - Union-by-size keeps tree balanced\n  - Or union-by-min-index if kMinimalRepresentative\n- getSetSize(): Size of set containing item\n\n**Usage in HiGHS:**\n- Symmetry detection: orbit computation (HighsSymmetry)\n- Clique merging (HighsCliqueTable)\n- Connected component identification",
+    "brief": "Union-Find data structure for disjoint sets\n\nEfficient partition management with path compression and union-by-size.",
     "file": "HighsDisjointSets",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/util/HighsDisjointSets.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HVector": {
     "brief": "Sparse vector types for HiGHS simplex operations\n\nType aliases for HVectorBase with different precision.\n\n**Types:**\n- HVector: HVectorBase<double> - Standard precision sparse vector\n- HVectorQuad: HVectorBase<HighsCDouble> - Quad precision for accuracy\n- HVector_ptr, HVectorQuad_ptr: Pointer types for array storage\n\n**HVectorBase Features (from HVectorBase.h):**\n- Sparse representation: index[] + array[] with count\n- Dense operations: clear(), setup(), collectDense()\n- SAXPY: Add scalar multiple of another vector\n- Packed format for BLAS-style operations",
@@ -15900,24 +16040,24 @@
     "has_pass2": false
   },
   "HFactor": {
-    "brief": "Basis matrix factorization, update and solves for HiGHS",
+    "brief": "Basis matrix factorization, update and solves for HiGHS\n\nLU factorization with Markowitz pivoting for simplex basis matrices,\nsupporting FTRAN, BTRAN, and various update methods.",
     "file": "HFactor",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/util/HFactor.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsIntegers": {
-    "brief": "Integer arithmetic utilities for cut generation\n\nNumber-theoretic functions critical for MIP cut generation.\n\n**Basic Operations:**\n- mod(): Proper modulo (always non-negative result)\n- gcd(): Euclidean algorithm for GCD\n- nearestInteger(): Round to nearest int64\n- isIntegral(): Test if double is within eps of integer\n\n**Modular Arithmetic:**\n- modularInverse(): Extended Euclidean algorithm for a^{-1} mod m\n  - Used in mod-k cut generation (GF(k) arithmetic)\n\n**Rational Approximation:**\n- denominator(): Continued fraction algorithm to find\n  smallest denominator d such that |x - p/d| < eps\n  - Used for detecting integer structure in coefficients\n\n**Integral Scaling:**\n- integralScale(): Find multiplier to make all values integral\n  - Combines continued fractions with GCD reduction\n  - Used for strengthening MIR/GMI cuts\n  - Returns 0 if no small denominator exists\n\n**Usage in HiGHS:**\n- HighsGFkSolve: Modular inverse for GF(k) systems\n- HighsTableauSeparator: Finding integral structure in cuts\n- Cut coefficient strengthening",
+    "brief": "Integer arithmetic utilities for cut generation\n\nNumber-theoretic functions critical for MIP cut generation.",
     "file": "HighsIntegers",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/util/HighsIntegers.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HighsMemoryAllocation": {
     "brief": "Utilities for memory allocation that return true if successful",
@@ -16035,9 +16175,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/presolve/ICrash.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "HPresolveAnalysis": {
     "brief": "Presolve statistics and rule control\n\nTracks presolve reductions and controls which rules are enabled.\n\n**HPresolveAnalysis Class:**\n- model, options: References to problem being presolved\n- allow_rule_[]: Per-rule enable flags (from options->presolve_rule_off)\n- numDeletedRows, numDeletedCols: Reduction counts\n- presolve_log_: Detailed reduction history\n\n**Rule Control:**\n- setup(): Initialize rule flags from options\n- allow_rule_[]: Boolean array indexed by PresolveRuleType\n- Disabled rules are skipped during presolve passes\n\n**Logging:**\n- allow_logging_/logging_on_: Control verbosity\n- startPresolveRuleLog()/stopPresolveRuleLog(): Bracket rule execution\n- analysePresolveRuleLog(): Summarize effectiveness of rules\n- presolveReductionTypeToString(): Convert rule type to name\n\n**Statistics:**\n- original_num_col_/row_: Problem size before presolve\n- num_deleted_rows0_/cols0_: Running deletion counts",
@@ -16055,9 +16195,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/presolve/HighsPostsolveStack.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "ICrashX": {
     "brief": "Crossover from interior point to basic solution\n\nProvides simplex crossover after IPM solve to obtain vertex solution.\n\n**callCrossover():**\nConverts interior point solution to basic feasible solution:\n- Input: IPM solution (may be interior to polytope)\n- Output: Basis + vertex solution for post-processing\n\n**Why Crossover:**\n- IPM returns interior solutions, not vertices\n- Basic solutions needed for warm-starting, sensitivity analysis\n- Crossover pushes solution to vertex via simplex pivots\n\n**Process:**\n1. Identify near-bound variables\n2. Construct initial basis from binding constraints\n3. Run simplex cleanup to reach vertex",
@@ -16065,9 +16205,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/presolve/ICrashX.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "PresolveComponent": {
     "brief": "Presolve component for HiGHS pipeline integration\n\nEncapsulates presolve as a modular component with data and statistics.\n\n**PresolveComponentData:**\nState managed by presolve component:\n- reduced_lp_: Presolved LP (smaller problem)\n- postSolveStack: Operations to undo presolve\n- recovered_solution_/recovered_basis_: Original-space solution\n- presolve_log_: Reduction history\n\n**PresolveComponentInfo:**\nStatistics exposed for reporting:\n- n_rows_removed, n_cols_removed, n_nnz_removed: Reduction counts\n- Timing information from HighsComponentInfo base\n\n**PresolveComponentOptions:**\nComponent-specific settings (extends HighsComponentOptions):\n- iteration_limit: Maximum presolve passes\n- Timeout and other controls\n\n**PresolveComponent Class:**\nMain component implementing HighsComponent interface:\n- init(): Setup with options\n- run(): Execute presolve\n- has_run_: Track execution state",
@@ -16085,29 +16225,29 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/presolve/HighsSymmetry.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "cupdlp_proj": {
-    "brief": "Projection operations for PDHG algorithm\n\nImplements projection onto variable bounds and restart operations:\n- PDHG_Project_Bounds(): Projects x onto [l, u] box constraints\n- PDHG_Restart_Iterate(): Resets iterate to current or average point\n\nIn PDHG, primal projection is: x^{k+1} = proj_{[l,u]}(x\u0304)\nwhere x\u0304 is the gradient step result.",
+    "brief": "Projection operations for PDHG algorithm\n\nImplements projection onto variable bounds and restart operations.",
     "file": "cupdlp_proj",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/pdlp/cupdlp/cupdlp_proj.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "cupdlp_restart": {
-    "brief": "Adaptive restart strategies for PDHG convergence acceleration\n\nImplements restart heuristics that periodically reset iterates to\naccelerate PDHG convergence from O(1/k) to O(1/k\u00b2).\n\n**Restart Strategies:**\n- PDHG_NO_RESTART: Continue without restart\n- PDHG_RESTART_TO_CURRENT: Reset to current iterate\n- PDHG_RESTART_TO_AVERAGE: Reset to running average\n\nDecision based on normalized duality gap improvement via merit function.",
+    "brief": "Adaptive restart strategies for PDHG convergence acceleration\n\nImplements restart heuristics that periodically reset iterates to\naccelerate PDHG convergence from O(1/k) to O(1/k\u00b2).",
     "file": "cupdlp_restart",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/pdlp/cupdlp/cupdlp_restart.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "cupdlp_solver": {
     "brief": "PDHG (Primal-Dual Hybrid Gradient) Solver for Linear Programming\n\nImplements the PDLP (Primal-Dual Linear Programming) algorithm using\nfirst-order optimization methods instead of traditional simplex or IPM.",
@@ -16140,14 +16280,14 @@
     "has_pass2": false
   },
   "cupdlp_scaling": {
-    "brief": "Matrix scaling for PDHG numerical stability\n\nImplements equilibration scaling to improve PDHG convergence by\nbalancing row and column norms of the constraint matrix A.\n\n**Scaling Methods:**\n- Ruiz equilibration: Iterative row/column scaling to unit \u221e-norms\n- L2 scaling: Scale to unit 2-norms\n- PC (Pock-Chambolle) scaling: Scale based on degree\n\nScaling affects step size selection: \u03c4\u03c3\u2016A\u2016\u00b2 < 1 becomes easier\nto satisfy when \u2016A\u2016 is reduced through scaling.",
+    "brief": "Matrix scaling for PDHG numerical stability\n\nImplements equilibration scaling to improve PDHG convergence by\nbalancing row and column norms of the constraint matrix A.",
     "file": "cupdlp_scaling",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/pdlp/cupdlp/cupdlp_scaling.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "cupdlp_linalg": {
     "brief": "Linear algebra operations for PDHG algorithm\n\nCore numerical kernels for the PDHG iteration:\n- Ax(), ATy(): Sparse matrix-vector products (CSC/CSR)\n- Vector norms: twoNorm, infNorm, GenNorm\n- BLAS-1 operations: axpy, dot, scaleVector\n- Bound projections: projlb, projub, projPos, projNeg\n\nAll operations have both CPU and CUDA implementations, selected\nat compile time via CUPDLP_CPU define.",
@@ -16160,14 +16300,14 @@
     "has_pass2": false
   },
   "cupdlp_step": {
-    "brief": "Step size selection and PDHG iterate updates\n\nCore PDHG iteration logic including step size computation and updates.\n\n**Step Size Methods:**\n- Constant: \u03c4 = \u03c3 = 1/\u2016A\u2016, computed via power method\n- Malitsky-Pock: Adaptive based on primal-dual interaction\n- Adaptive linesearch: Backtracking with growth/reduction\n\n**PDHG Update (each iteration):**\n1. Primal step: x\u0304 = x - \u03c4\u00b7(c - A'y)\n2. Projection: x\u207a = proj_{[l,u]}(x\u0304)\n3. Dual step: y\u207a = y + \u03c3\u00b7(b - A\u00b7(2x\u207a - x))",
+    "brief": "Step size selection and PDHG iterate updates\n\nCore PDHG iteration logic including step size computation and updates.",
     "file": "cupdlp_step",
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/pdlp/cupdlp/cupdlp_step.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "cupdlp_cs": {
     "brief": "Sparse matrix utilities for CUPDLP\n\nCSparse-style routines for compressed sparse column (CSC) matrices.\nProvides triplet-to-CSC conversion, matrix allocation, transpose,\nand basic operations needed for PDHG matrix-vector products.\n\nBased on Tim Davis's CSparse library conventions.",
@@ -16235,9 +16375,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/ipm/ipx/lu_update.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "symbolic_invert": {
     "brief": "Symbolic nonzero pattern analysis of basis inverse\n\nComputes structural nonzero counts per row and column of B\u207b\u00b9\nwithout numerical factorization. Uses DFS-based reachability\nin the elimination tree to count fill-in patterns.\n\nResults indicate which rows/columns of the inverse are dense,\nguiding pivot selection in maxvolume algorithm.",
@@ -16295,9 +16435,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/ipm/ipx/starting_basis.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "control": {
     "brief": "Solver control: parameters, output, timing, and interruption for IPX\n\nThe Control class is the central coordinator for IPX solver state:\n\n**Parameter Access:**\n- Provides read-only access to all solver parameters\n- Parameters include tolerances, iteration limits, algorithm choices\n\n**Output Management:**\n- Debug() stream with configurable verbosity levels\n- Interval logging to avoid flooding output\n- Integration with HiGHS logging system\n\n**Timing:**\n- Total elapsed time via Elapsed()\n- Print interval control for periodic status updates\n\n**Interruption:**\n- InterruptCheck() for time limit enforcement\n- Designed for single-threaded access (no copy/move)\n\nAlso provides formatting utilities (Format, Scientific, Fixed, Textline)\nfor consistent log output formatting.",
@@ -16355,9 +16495,9 @@
     "library": "HiGHS",
     "layer": "layer-4",
     "header": "highs/ipm/ipx/normal_matrix.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "splitted_normal_matrix": {
     "brief": "Basis-preconditioned normal matrix operator\n\nLinearOperator for the matrix C = B\u207b\u00b9\u00b7A\u00b7A'\u00b7B\u207b\u1d40 = I + B\u207b\u00b9\u00b7N\u00b7N'\u00b7B\u207b\u1d40,\nwhere B is the basis matrix and N the nonbasic columns. This\nformulation provides better conditioning than the standard normal\nequations A\u00b7W\u00b7A'.\n\nThe Apply() method computes y = C\u00b7x via:\n1. Solve B'\u00b7w = x (triangular with U')\n2. Compute z = N'\u00b7w (sparse matvec)\n3. Compute v = N\u00b7z (sparse matvec)\n4. Solve B\u00b7y = v (triangular with L,U)\n5. Return y + x",
@@ -16759,6 +16899,36 @@
     "methods": 0,
     "has_pass2": false
   },
+  "Factorise": {
+    "brief": "Numerical phase of sparse LDL^T factorization\n\nSupernodal numerical factorization for symmetric indefinite matrices\narising in interior point method normal equations.",
+    "file": "Factorise",
+    "library": "HiGHS",
+    "layer": "layer-4",
+    "header": "highs/ipm/hipo/factorhighs/Factorise.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "Analyse": {
+    "brief": "Symbolic analysis phase for sparse Cholesky factorization\n\nComputes fill-reducing ordering and symbolic factorization structure\nbefore numerical factorization in HiGHS interior point solver.",
+    "file": "Analyse",
+    "library": "HiGHS",
+    "layer": "layer-4",
+    "header": "highs/ipm/hipo/factorhighs/Analyse.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
+  "Solver": {
+    "brief": "Main solver interface for convex MINLP problems\n\nPrimary entry point for the SHOT optimizer.",
+    "file": "Solver",
+    "library": "SHOT",
+    "layer": "layer-4",
+    "header": "src/Solver.h",
+    "algorithms": 1,
+    "methods": 0,
+    "has_pass2": true
+  },
   "OSReferenced": {
     "brief": "OS reference counting base class\n\nReference-counted base class for OS objects.\nEnables automatic memory management via smart pointers.",
     "file": "OSReferenced",
@@ -16870,14 +17040,14 @@
     "has_pass2": false
   },
   "OSDecompSolver": {
-    "brief": "",
+    "brief": "Column generation decomposition solver framework\n\nVirtual base class for Dantzig-Wolfe decomposition solvers.",
     "file": "OSDecompSolver",
     "library": "OS",
     "layer": "layer-4",
     "header": "OS/applications/columnGen/code/OSDecompSolver.h",
-    "algorithms": 0,
+    "algorithms": 1,
     "methods": 0,
-    "has_pass2": false
+    "has_pass2": true
   },
   "OSDecompParam": {
     "brief": "",
@@ -17458,16 +17628,6 @@
     "algorithms": 0,
     "methods": 0,
     "has_pass2": false
-  },
-  "Solver": {
-    "brief": "Main solver interface for convex MINLP problems\n\nPrimary entry point for the SHOT optimizer.",
-    "file": "Solver",
-    "library": "SHOT",
-    "layer": "layer-4",
-    "header": "src/Solver.h",
-    "algorithms": 1,
-    "methods": 0,
-    "has_pass2": true
   },
   "Timer": {
     "brief": "High-resolution stopwatch for performance measurement\n\nLightweight timer using std::chrono::high_resolution_clock.\n\n**Timer Class:**\n- start()/stop(): Pause/resume timing\n- restart(): Reset to zero and start\n- elapsed(): Get cumulative time in seconds\n\n**Properties:**\n- name: Timer identifier (for Timing registry)\n- description: Human-readable label\n\n**Usage:**\nTimer t(\"SolveMIP\", \"MIP solver time\");\nt.start();\n// ... computation ...\nt.stop();\ndouble seconds = t.elapsed();",

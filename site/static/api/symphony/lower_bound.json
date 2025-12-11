@@ -1,0 +1,22 @@
+{
+  "name": "lower_bound",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "Applications/VRP/include/heurs/lower_bound.h",
+  "brief": "Lower bound computation for VRP branch-and-bound\n\nComputes lower bounds for pruning in the B&B tree.",
+  "algorithms": [
+    {
+      "name": "VRP Lower Bounds:\n  Compute bounds by relaxing integrality or capacity:",
+      "math": "1. LP relaxation: Solve continuous relaxation of VRP\n        2. 1-tree bound: MST + two shortest edges at depot\n             LB = MST(V\\{depot}) + 2 shortest depot edges\n        3. Bin packing bound: \u2308\u03a3 demands / capacity\u2309 vehicles\n  Bounds used to prune B&B nodes where LB \u2265 UB.",
+      "complexity": "O(n\u00b2) for 1-tree, O(n log n) for bin packing",
+      "ref": [
+        "Christofides, N. et al. (1981). \"Exact algorithms for the\n       vehicle routing problem\". Discrete Applied Mathematics."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "vrp_types.h for problem structure",
+    "lb_params.h for bound computation parameters"
+  ]
+}

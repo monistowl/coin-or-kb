@@ -1,0 +1,20 @@
+{
+  "name": "cluster_heur",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "Applications/VRP/include/heurs/cluster_heur.h",
+  "brief": "Cluster-first route-second heuristic for VRP\n\nTwo-phase heuristic that clusters customers then sequences each cluster.",
+  "algorithms": [
+    {
+      "name": "Cluster-First Route-Second:\n  Build VRP solution by first clustering, then routing:",
+      "math": "Phase 1 (Cluster): Partition customers into k groups\n          - generate_starter() creates initial cluster seeds\n          - Assign customers to nearest seed respecting capacity\n        Phase 2 (Route): Solve TSP for each cluster\n          - Each cluster becomes one vehicle route\n  Randomization via different starter seeds enables multiple trials.",
+      "complexity": "O(n\u00b7k) clustering + O(k \u00b7 n_cluster!) TSP per cluster\n  @note Supports parallel execution across multiple worker processes",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sweep.h for single-phase construction",
+    "exchange_heur.h for improvement phase"
+  ]
+}

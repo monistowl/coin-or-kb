@@ -34,6 +34,15 @@
  * - Extract quadratics for QCQP solvers
  * - Identify linear/quadratic substructure in NLP
  *
+ * @algorithm Expression Simplification and Term Extraction
+ * @math Recursive bottom-up simplification on expression DAG:
+ *       - Constant folding: c₁ op c₂ → compute(c₁ op c₂)
+ *       - Identity removal: x + 0 → x, x × 1 → x, x^1 → x
+ *       - Inverse cancellation: -(-x) → x, √(x²) → |x|, exp(log(x)) → x
+ *       - Product distribution: a(b+c) → ab + ac for term extraction
+ *       Term extraction decomposes f(x) = Σcᵢxᵢ + Σqᵢⱼxᵢxⱼ + Σmonomials
+ *       + Σsignomials + g(x) where g is the irreducible nonlinear part.
+ * @complexity O(n) where n = expression tree size (single bottom-up pass).
  * @see NonlinearExpressions.h for expression tree nodes
  */
 #pragma once

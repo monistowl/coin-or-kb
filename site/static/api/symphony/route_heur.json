@@ -1,0 +1,22 @@
+{
+  "name": "route_heur",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "Applications/VRP/include/heurs/route_heur.h",
+  "brief": "Route-first cluster-second heuristic for VRP\n\nTwo-phase heuristic that builds giant tour then partitions into routes.",
+  "algorithms": [
+    {
+      "name": "Route-First Cluster-Second:\n  Build VRP solution by routing all customers then partitioning:",
+      "math": "Phase 1 (Route): Build giant TSP tour through all customers\n          - Ignores vehicle capacity\n          - Uses insertion heuristic or 2-opt improvement\n        Phase 2 (Cluster): Partition tour into feasible routes\n          - Split tour at capacity-violating positions\n          - Each segment becomes one vehicle route\n  Giant tour quality affects final solution quality.",
+      "complexity": "O(n\u00b2) TSP construction + O(n) partitioning",
+      "ref": [
+        "Beasley, J. (1983). \"Route first--cluster second methods for\n       vehicle routing\". Omega 11(4):403-408."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "cluster_heur.h for cluster-first approach",
+    "ins_routines.h for TSP insertion methods"
+  ]
+}

@@ -4,9 +4,19 @@
   "layer": "layer-4",
   "header": "highs/mip/HighsLpRelaxation.h",
   "brief": "LP relaxation management for MIP branch-and-bound\n\nManages the LP relaxation at each B&B node with cut handling.\n\n**Status enum:**\n- kOptimal: LP solved to optimality\n- kInfeasible: LP is infeasible (node can be pruned)\n- kUnscaledDualFeasible: Dual feasible (valid bound)\n- kUnscaledPrimalFeasible: Primal feasible (valid solution)\n- kUnbounded/kError: Problem states\n\n**LpRow Tracking:**\n- origin: kModel (original constraint) or kCutPool (added cut)\n- index: Row index in model or cut pool\n- age: Iterations since cut was binding (for aging/removal)\n\n**Key Operations:**\n- run(): Solve LP relaxation\n- addCuts(): Add cuts from HighsCutSet\n- flushDomain(): Apply bound changes from HighsDomain\n- performAging(): Age cuts, remove old non-binding cuts\n- removeObsoleteRows(): Delete aged-out cuts\n\n**Solution Access:**\n- getObjective(): LP objective value\n- getSolution(): Primal/dual values\n- getFractionalIntegers(): Integer vars with fractional values\n- integerFeasible(): True if LP solution is MIP-feasible\n\n**Dual Proofs:**\n- computeDualProof(): Derive valid inequality from LP dual\n- storeDualInfProof(): Store proof when LP is infeasible\n- getDualProof(): Retrieve stored proof for conflict analysis\n\n**Playground (nested class):**\nRAII wrapper for temporary LP modifications (e.g., strong branching).",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Warm-Start Management:\n  Preserve basis across node transitions:\n  - Store checkpoint basis before temporary modifications\n  - Restore after strong branching or diving\n  - Basis valid if columns/rows not deleted",
+      "math": "If y \u2265 0 satisfies y'A \u2264 0 and y'b > 0, LP is infeasible\n  The sparse inequality \u03a3 y_i \u00b7 (row_i) \u2264 0 proves infeasibility.\n  Used for conflict analysis and nogood learning.",
+      "complexity": "O(m + n) for basis save/restore",
+      "ref": [
+        "Achterberg, T. (2007). \"Constraint Integer Programming\".\n       PhD thesis, TU Berlin, Section 7.3."
+      ]
+    }
+  ],
   "methods": [],
   "see": [
+    "mip/HighsConflictPool.h for conflict storage",
     "mip/HighsMipSolver.h for MIP solver using this",
     "mip/HighsCutPool.h for cut management"
   ]

@@ -1,0 +1,22 @@
+{
+  "name": "spp_cg_clique",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "Applications/SPP+CUTS/include/spp_cg_clique.h",
+  "brief": "Clique cut separation for Set Partitioning Problem\n\nSpecialized clique finding algorithms for SPP cut generation.",
+  "algorithms": [
+    {
+      "name": "Greedy Maximal Clique:\n  Fast heuristic clique construction:",
+      "math": "greedy_maximal_clique(): Iteratively add highest-degree node\n        from common neighbors until no extension possible\n  Trade-off: faster than enumeration but may miss violations.",
+      "complexity": "O(|V|\u00b2) per clique",
+      "ref": [
+        "Bron, C. and Kerbosch, J. (1973). \"Finding all cliques\n       of an undirected graph\". CACM 16(9):575-577."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "spp_cg.h for fractional graph representation",
+    "sym_cg.h for cut generator framework"
+  ]
+}

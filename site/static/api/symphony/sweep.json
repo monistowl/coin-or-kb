@@ -1,0 +1,22 @@
+{
+  "name": "sweep",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "Applications/VRP/include/heurs/sweep.h",
+  "brief": "Sweep heuristic for VRP construction\n\nClassic construction heuristic that builds routes by angular sweep.\n\n**sweep_data structure:**\n- angle: Polar angle from depot\n- cust: Customer identifier",
+  "algorithms": [
+    {
+      "name": "Sweep Heuristic:\n  Construct VRP solution by sweeping customers angularly from depot:",
+      "math": "1. Compute polar angle \u03b8_i = atan2(y_i - y_depot, x_i - x_depot)\n        2. Sort customers by angle \u03b8\n        3. Starting from angle 0, add customers to current route\n        4. When capacity exceeded, start new route\n        5. Optimize each route as TSP (via make_tour)",
+      "complexity": "O(n log n) for sorting + O(n\u00b7k) route construction",
+      "ref": [
+        "Gillett, B. and Miller, L. (1974). \"A heuristic algorithm for\n       the vehicle-dispatch problem\". Operations Research 22(2):340-349."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "savings.h for alternative construction heuristic",
+    "heur_routines.h for TSP improvement"
+  ]
+}

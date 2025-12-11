@@ -3,8 +3,17 @@
   "library": "HiGHS",
   "layer": "layer-4",
   "header": "highs/mip/HighsTableauSeparator.h",
-  "brief": "Gomory mixed-integer cuts from LP tableau\n\nGenerates cuts by applying MIR procedure to simplex tableau rows.\n\n**Gomory Cut Generation:**\nFor each fractional basic integer variable:\n1. Extract tableau row: x_B[i] = f_0 - sum(a_j * x_N[j])\n2. Apply mixed-integer rounding (MIR)\n3. Produce cut: sum(floor(a_j) * x_j) \u2264 floor(f_0) (simplified)\n\n**Separation Flow:**\n1. Get fractional integer variables from LP relaxation\n2. For each candidate, extract tableau row via BTRAN\n3. Transform using HighsTransformedLp (bound substitution)\n4. Apply MIR strengthening\n5. Add valid cuts to cut pool\n\n**Implementation:**\n- numTries: Counter for separation attempts (controls effort)\n- Uses kTableauSepaString identifier for statistics\n- Inherits run() timing from HighsSeparator base class",
-  "algorithms": [],
+  "brief": "Gomory mixed-integer cuts from LP tableau\n\nGenerates cuts by applying MIR procedure to simplex tableau rows.",
+  "algorithms": [
+    {
+      "name": "Gomory Mixed-Integer (GMI) Cut Generation:\n  Derive valid cuts from simplex tableau rows:",
+      "math": "For fractional basic integer x_i with tableau row:\n          x_i = f_0 + \u03a3_j a_j\u00b7x_j where 0 < f_0 < 1\n        GMI cut: \u03a3_j c_j\u00b7x_j \u2265 1 where\n          c_j = a_j / f_0           if a_j \u2265 0\n          c_j = -a_j / (1-f_0)      if a_j < 0 and x_j integer\n          c_j = a_j / f_0           if a_j \u2265 0 and x_j continuous\n          c_j = -a_j / (1-f_0)      if a_j < 0 and x_j continuous\n  BTRAN extracts tableau row, HighsTransformedLp handles bounds.",
+      "complexity": "O(nnz_row) per cut generation",
+      "ref": [
+        "Gomory, R. (1960). \"An algorithm for the mixed integer problem\".\n       Technical Report RM-2597, RAND Corporation.\n\n**Gomory Cut Generation:**\nFor each fractional basic integer variable:\n1. Extract tableau row: x_B[i] = f_0 - sum(a_j * x_N[j])\n2. Apply mixed-integer rounding (MIR)\n3. Produce cut: sum(floor(a_j) * x_j) \u2264 floor(f_0) (simplified)\n\n**Separation Flow:**\n1. Get fractional integer variables from LP relaxation\n2. For each candidate, extract tableau row via BTRAN\n3. Transform using HighsTransformedLp (bound substitution)\n4. Apply MIR strengthening\n5. Add valid cuts to cut pool\n\n**Implementation:**\n- numTries: Counter for separation attempts (controls effort)\n- Uses kTableauSepaString identifier for statistics\n- Inherits run() timing from HighsSeparator base class"
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "mip/HighsSeparator.h for base class interface",

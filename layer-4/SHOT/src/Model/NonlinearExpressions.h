@@ -42,6 +42,18 @@
  * - Based on composition theorems (e.g., convex ∘ nondecreasing convex = convex)
  * - Interval bounds inform sign-dependent rules
  *
+ * @algorithm Disciplined Convex Programming (DCP) Convexity Analysis
+ * @math Convexity propagation via composition rules:
+ *       - convex ∘ affine = convex
+ *       - convex ∘ (nondecreasing ∩ convex) = convex
+ *       - concave ∘ (nonincreasing ∩ convex) = convex
+ *       - positive × convex = convex; negative × convex = concave
+ *       Sign-dependent rules use interval bounds [L,U] to determine
+ *       monotonicity on restricted domains.
+ * @complexity O(n) single pass over expression DAG for convexity propagation.
+ * @ref Grant, Boyd, Ye (2006). "Disciplined Convex Programming".
+ *      Ceccon et al. (2018). "SUSPECT: Framework for Detecting
+ *      Structure in Mathematical Programming" (convexity detection).
  * @note Convexity analysis influenced by SUSPECT library
  * @see Constraints.h for expressions in constraints
  */

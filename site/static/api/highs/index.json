@@ -3,6 +3,11 @@
   "layer": "layer-4",
   "classes": [
     {
+      "name": "Analyse",
+      "brief": "Symbolic analysis phase for sparse Cholesky factorization\n\nComputes fill-reducing ordering and symbolic factorization structure\nbefore numerical factorization in HiGHS interior point solver.",
+      "has_algorithm": true
+    },
+    {
       "name": "Avgas",
       "brief": "Utilities for tests with AVGAS",
       "has_algorithm": false
@@ -21,6 +26,11 @@
       "name": "FactorTimer",
       "brief": "Indices of factor iClocks",
       "has_algorithm": false
+    },
+    {
+      "name": "Factorise",
+      "brief": "Numerical phase of sparse LDL^T factorization\n\nSupernodal numerical factorization for symmetric indefinite matrices\narising in interior point method normal equations.",
+      "has_algorithm": true
     },
     {
       "name": "Filereader",
@@ -45,7 +55,7 @@
     {
       "name": "HApp",
       "brief": "High-level simplex application interface\n\nEntry point for solving LPs via simplex method with automatic handling\nof scaling, unscaling, and solution refinement.\n\n**solveLpSimplex() Workflow:**\n1. Scale LP if beneficial (using Ruiz equilibration)\n2. Move LP to Ekk (simplex kernel)\n3. Setup basis (from HiGHS basis or logical start)\n4. Consider dualizing if rows >> cols\n5. Solve scaled LP, get scaled solution\n6. Unscale solution and check tolerances\n7. If needed, refine by re-solving unscaled LP with scaled NLA\n\n**Scaling Strategy:**\n- None: Solve original LP directly\n- Refine: Solve scaled, then refine unscaled\n- Direct: Ignore scaling, solve unscaled",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "HConst",
@@ -64,13 +74,13 @@
     },
     {
       "name": "HEkkDualRHS",
-      "brief": "Dual simplex optimality test for HiGHS",
-      "has_algorithm": false
+      "brief": "Dual simplex row selection (CHUZR) for HiGHS\n\nImplements CHUZR (CHoose Row) for selecting the leaving variable in dual\nsimplex. Maintains primal infeasibility data for efficient row selection.\n\n**Key Operations:**\n- chooseNormal(): Single row selection for serial dual simplex\n- chooseMultiGlobal(): Multiple row selection for PAMI\n- chooseMultiHyperGraph*(): Hyper-sparse multi-row selection\n- updatePrimal(): Apply pivot column to basic values\n- createInfeasList(): Build heap of most infeasible rows\n\n**Data Structures:**\n- work_infeasibility[row]: Primal infeasibility |x_i - bound|\n- workIndex[]: Heap of rows with largest infeasibilities\n- workMark[]: Flags for rows in the heap\n- workCutoff: Threshold for heap membership",
+      "has_algorithm": true
     },
     {
       "name": "HEkkDualRow",
-      "brief": "Dual simplex ratio test for HiGHS",
-      "has_algorithm": false
+      "brief": "Dual simplex ratio test and BFRT for HiGHS\n\nImplements the dual ratio test (CHUZC) including Bound-Flipping Ratio Test\n(BFRT) for selecting the entering variable in dual simplex.\n\n**Key Operations:**\n- chooseMakepack(): Pack pivot row entries for ratio test\n- choosePossible(): Find candidates satisfying dual feasibility\n- chooseFinal(): Execute BFRT to select entering variable\n- updateDual(): Apply dual updates after pivot\n- updateFlip(): Handle bound flips from BFRT\n\n**BFRT Data Structures:**\n- packIndex/packValue: Sparse pivot row representation\n- workData: Index-value pairs sorted by ratio\n- workGroup: Degenerate group boundaries",
+      "has_algorithm": true
     },
     {
       "name": "HEkkPrimal",
@@ -79,8 +89,8 @@
     },
     {
       "name": "HFactor",
-      "brief": "Basis matrix factorization, update and solves for HiGHS",
-      "has_algorithm": false
+      "brief": "Basis matrix factorization, update and solves for HiGHS\n\nLU factorization with Markowitz pivoting for simplex basis matrices,\nsupporting FTRAN, BTRAN, and various update methods.",
+      "has_algorithm": true
     },
     {
       "name": "HFactorConst",
@@ -130,7 +140,7 @@
     {
       "name": "HSimplexNla",
       "brief": "Numerical linear algebra interface for simplex\n\nWraps HFactor with scaling, product-form updates, and iterate storage.\n\n**ProductFormUpdate:**\nStores basis updates as explicit \u03b7-vectors when HFactor update fails:\n- pivot_index/value[]: Pivot positions and values\n- start/index/value[]: Eta-file sparse storage\n- btran/ftran(): Apply product form to vectors\n- Allows continued solve after HFactor becomes unstable\n\n**SimplexIterate:**\nCheckpoint storage for basis state:\n- basis_: Basis column indices and status\n- invert_: Factorization representation\n- dual_edge_weight_[]: DSE weights for restoration\n\n**Scaling Operations:**\n- btranInScaledSpace/ftranInScaledSpace(): Solve in scaled coordinates\n- applyBasisMatrixColScale/RowScale(): Transform vectors\n- variableScaleFactor(): Individual column/row scales\n\n**Key Methods:**\n- invert(): Refactorize basis via HFactor\n- btran(): B^(-T) * rhs (row pricing)\n- ftran(): B^(-1) * rhs (column evaluation)\n- update(): Basis update with pivot\n- putInvert/getInvert(): Save/restore iterate state\n\n**Debug Support:**\n- debugCheckInvert(): Verify factorization accuracy\n- debugInvertResidualError(): Measure solution error",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "HSimplexReport",
@@ -205,7 +215,7 @@
     {
       "name": "HighsConflictPool",
       "brief": "Storage for learned conflict constraints\n\nManages nogood constraints derived from infeasible subproblems.\n\n**Conflict Storage:**\n- conflictEntries_[]: Domain changes forming each conflict\n- conflictRanges_[]: {start, end} pairs indexing entries\n- Each conflict: set of HighsDomainChange that together are infeasible\n\n**Aging System:**\n- ages_[]: Tracks how long since conflict was active\n- ageDistribution_[]: Count of conflicts at each age\n- performAging(): Increment ages, remove old conflicts\n- resetAge(): Reset age when conflict becomes active\n- agelim_: Maximum age before deletion\n\n**Memory Management:**\n- freeSpaces_: Ordered set of reusable entry ranges\n- deletedConflicts_: Reusable conflict indices\n- softlimit_: Target maximum conflicts\n\n**Key Methods:**\n- addConflictCut(): Store conflict from infeasibility analysis\n- addReconvergenceCut(): Store conflict with reconvergence point\n- removeConflict(): Delete conflict and free space\n\n**Propagation Integration:**\n- propagationDomains[]: Domains using conflicts for propagation\n- modification_[]: Version counter for conflict updates",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "HighsCutGeneration",
@@ -215,7 +225,7 @@
     {
       "name": "HighsCutPool",
       "brief": "Cutting plane storage and separation for MIP solver\n\n**HighsCutSet:**\nContainer for cuts to add to LP relaxation:\n- cutindices: Indices into cut pool\n- ARstart_/ARindex_/ARvalue_: CSR storage for cut coefficients\n- lower_/upper_: Cut bounds (typically -inf, rhs)\n\n**HighsCutPool:**\nManages all generated cutting planes:\n- matrix_: HighsDynamicRowMatrix storing all cuts\n- rhs_[]: Right-hand sides\n- ages_[]: Cut age (incremented when not binding, reset when used)\n- hashToCutMap: Duplicate detection via row hashing\n\n**Cut Lifecycle:**\n- addCut(): Add new cut with duplicate detection and clique extraction\n- separate(): Select violated cuts for LP (scoring + density limits)\n- performAging(): Increment ages, remove old cuts (age > agelim_)\n- lpCutRemoved(): Called when cut leaves LP\n\n**Cut Propagation:**\n- propagationDomains: Registered domains for cut-based bound tightening\n- propRows: Active propagation rows",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "HighsDataStack",
@@ -234,8 +244,8 @@
     },
     {
       "name": "HighsDisjointSets",
-      "brief": "Union-Find data structure for disjoint sets\n\nEfficient partition management with path compression and union-by-size.\n\n**Template Parameter:**\n- kMinimalRepresentative: If true, smaller index becomes representative\n  (useful for symmetry detection where order matters)\n\n**Data Structure:**\n- sets[]: Parent pointers (self-loop = representative)\n- sizes[]: Set sizes for union-by-size\n- linkCompressionStack: Workspace for path compression\n\n**Operations:**\n- getSet(): Find representative with path compression\n  - Amortized O(\u03b1(n)) via iterative compression\n- merge(): Union two sets\n  - Union-by-size keeps tree balanced\n  - Or union-by-min-index if kMinimalRepresentative\n- getSetSize(): Size of set containing item\n\n**Usage in HiGHS:**\n- Symmetry detection: orbit computation (HighsSymmetry)\n- Clique merging (HighsCliqueTable)\n- Connected component identification",
-      "has_algorithm": false
+      "brief": "Union-Find data structure for disjoint sets\n\nEfficient partition management with path compression and union-by-size.",
+      "has_algorithm": true
     },
     {
       "name": "HighsDomain",
@@ -249,13 +259,13 @@
     },
     {
       "name": "HighsDynamicRowMatrix",
-      "brief": "Dynamic row matrix with efficient column-sign iteration\n\nSparse row-wise matrix supporting efficient row add/remove with\nseparate iteration over positive and negative column entries.\n\n**Row Storage:**\n- ARrange_[row]: (start, end) range in ARindex_/ARvalue_\n- ARindex_[]/ARvalue_[]: Column indices and values\n- ARrowindex_[]: Row index for each nonzero position\n\n**Column Iteration by Sign:**\nSeparate doubly-linked lists for positive and negative entries:\n- AheadPos_[col], AnextPos_[], AprevPos_[]: Positive entry list\n- AheadNeg_[col], AnextNeg_[], AprevNeg_[]: Negative entry list\n\n**Template Iterators:**\n- forEachPositiveColumnEntry(): Iterate positive entries in column\n- forEachNegativeColumnEntry(): Iterate negative entries in column\n- Useful for implication detection (sign determines bound type)\n\n**Dynamic Operations:**\n- addRow(): Insert row, reusing deleted space from freespaces_ set\n- removeRow(): Remove row, add index to deletedrows_ for reuse\n- unlinkColumns(): Disconnect row from column lists",
-      "has_algorithm": false
+      "brief": "Dynamic row matrix with efficient column-sign iteration\n\nSparse row-wise matrix supporting efficient row add/remove with\nseparate iteration over positive and negative column entries.",
+      "has_algorithm": true
     },
     {
       "name": "HighsGFkSolve",
       "brief": "Linear system solver over finite field GF(k)\n\nSolves congruence systems for mod-k cut generation.\n\n**HighsGFk<k> Template:**\nCompile-time multiplicative inverse via Fermat's little theorem:\n- inverse(a) = a^(k-2) mod k (when k prime)\n- powk(): Recursive repeated squaring for a^k\n- Specializations for k=2,3 (trivial inverses)\n\n**HighsGFkSolve Class:**\nSparse LU factorization in GF(k):\n\n**Storage:**\n- Triplet format: Arow[], Acol[], Avalue[] (mod k)\n- Column-wise linked list: colhead, Anext, Aprev\n- Row-wise splay tree: rowroot, ARleft, ARright\n\n**Factorization:**\n- Markowitz-style pivot selection (min row \u00d7 col size)\n- factorColPerm/factorRowPerm: Pivot order recording\n- colBasisStatus/rowUsed: Track basic columns and used rows\n\n**Solution:**\n- solve<k>(): Enumerate basic solutions\n- SolutionEntry: (index, weight) for solution vector\n- Reports multiple solutions via basis swapping\n\n**Usage:**\n1. fromCSC<k>(): Load constraint matrix modulo k\n2. setRhs<k>(): Set right-hand side (k-1 for mod-k MIR)\n3. solve<k>(): Find row weights yielding maximally violated cuts",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "HighsHash",
@@ -264,8 +274,8 @@
     },
     {
       "name": "HighsHashTree",
-      "brief": "Adaptive hash-array mapped trie (HAMT) container\n\nCache-efficient hash map using trie structure with occupation bitmaps.\n\n**Node Types:**\n- InnerLeaf<SizeClass>: Leaf with 6-54 entries (4 size classes)\n- BranchNode: Internal node with 64-way branching via hash chunks\n- ListLeaf: Collision list at maximum depth (rare)\n\n**Hash Structure:**\n- 6 bits per level \u2192 64-way branching (kBranchFactor)\n- Up to 9 depth levels (54 bits of 64-bit hash)\n- Occupation bitmap tracks which children exist\n\n**InnerLeaf Features:**\n- Linear probing within leaf for hash collisions\n- 16-bit hash prefix for fast filtering\n- Size class promotion/demotion on insert/erase\n\n**Burst Behavior:**\n- Leaf bursts to branch when exceeding kLeafBurstThreshold (54)\n- Branch merges back to leaf when children fit in threshold\n\n**Key Methods:**\n- insert/insert_or_get(): Add entry, return value pointer\n- find(): Lookup by key\n- erase(): Remove entry\n- find_common(): Find intersection with another tree\n- for_each(): Iterate all entries\n\n**Usage:**\nUsed for lifting opportunities in presolve (HPresolve.liftingOpportunities)",
-      "has_algorithm": false
+      "brief": "Adaptive hash-array mapped trie (HAMT) container\n\nCache-efficient hash map using trie structure with occupation bitmaps.",
+      "has_algorithm": true
     },
     {
       "name": "HighsHessian",
@@ -284,8 +294,8 @@
     },
     {
       "name": "HighsIis",
-      "brief": "Irreducible Infeasible Set (IIS) computation for infeasible LPs\n\nIdentifies minimal subset of constraints that cannot be satisfied.\n\n**IIS Definition:**\n- Minimal infeasible subsystem: removing any constraint makes it feasible\n- Helps diagnose why an LP is infeasible\n- Also identifies which variable bounds participate\n\n**IisBoundStatus:**\n- kDropped: Bound removed from IIS\n- kNull: Not yet classified\n- kFree: Variable is free (not in IIS)\n- kLower/kUpper/kBoxed: Which bound(s) are in IIS\n\n**Algorithm:**\n- compute(): Main IIS computation using simplex iterations\n- trivial(): Check for obviously infeasible (single row/col)\n- rowValueBounds(): Check row activity vs bounds\n\n**Strategy:**\n- kIisStrategyMin: Minimize IIS size (more iterations)\n- Iteratively removes constraints until minimal set remains\n\n**Output:**\n- col_index_/row_index_: Variables/constraints in IIS\n- col_bound_/row_bound_: Which bounds contribute\n- info_: Simplex stats per iteration",
-      "has_algorithm": false
+      "brief": "Irreducible Infeasible Set (IIS) computation for infeasible LPs\n\nIdentifies minimal subset of constraints that cannot be satisfied.",
+      "has_algorithm": true
     },
     {
       "name": "HighsImplications",
@@ -309,13 +319,13 @@
     },
     {
       "name": "HighsIntegers",
-      "brief": "Integer arithmetic utilities for cut generation\n\nNumber-theoretic functions critical for MIP cut generation.\n\n**Basic Operations:**\n- mod(): Proper modulo (always non-negative result)\n- gcd(): Euclidean algorithm for GCD\n- nearestInteger(): Round to nearest int64\n- isIntegral(): Test if double is within eps of integer\n\n**Modular Arithmetic:**\n- modularInverse(): Extended Euclidean algorithm for a^{-1} mod m\n  - Used in mod-k cut generation (GF(k) arithmetic)\n\n**Rational Approximation:**\n- denominator(): Continued fraction algorithm to find\n  smallest denominator d such that |x - p/d| < eps\n  - Used for detecting integer structure in coefficients\n\n**Integral Scaling:**\n- integralScale(): Find multiplier to make all values integral\n  - Combines continued fractions with GCD reduction\n  - Used for strengthening MIR/GMI cuts\n  - Returns 0 if no small denominator exists\n\n**Usage in HiGHS:**\n- HighsGFkSolve: Modular inverse for GF(k) systems\n- HighsTableauSeparator: Finding integral structure in cuts\n- Cut coefficient strengthening",
-      "has_algorithm": false
+      "brief": "Integer arithmetic utilities for cut generation\n\nNumber-theoretic functions critical for MIP cut generation.",
+      "has_algorithm": true
     },
     {
       "name": "HighsLinearSumBounds",
-      "brief": "Row activity bounds for bound tightening (FBBT)\n\nIncrementally maintains min/max activity bounds for linear constraints.\n\n**Activity Computation:**\nFor row sum = \u03a3(a_i * x_i):\n- sumLower: Minimum activity using a_i>0 with lb_i, a_i<0 with ub_i\n- sumUpper: Maximum activity using a_i>0 with ub_i, a_i<0 with lb_i\n- numInfSumLower/Upper: Count of infinite contributions\n\n**Original vs Implied Bounds:**\n- sumLowerOrig/sumUpperOrig: Using original variable bounds only\n- sumLower/sumUpper: Using tightest of original and implied bounds\n- implVarLower/implVarUpper: Implied bounds from other constraints\n- Source tracking: implVarLowerSource[] for circular dependency detection\n\n**Incremental Updates:**\n- add(): Add variable contribution to sum\n- remove(): Remove variable contribution from sum\n- updatedVarLower/Upper(): Update after bound tightening\n- updatedImplVarLower/Upper(): Update after implied bound discovery\n\n**Residual Computation:**\n- getResidualSumLower/Upper(): Activity excluding specific variable\n  - Used for FBBT: derive x_i bounds from row \u2264 rhs - residual\n  - Optional boundVar parameter for conditional bounds\n\n**Quad Precision:**\nUses HighsCDouble for activity sums to avoid numerical issues.",
-      "has_algorithm": false
+      "brief": "Row activity bounds for bound tightening (FBBT)\n\nIncrementally maintains min/max activity bounds for linear constraints.",
+      "has_algorithm": true
     },
     {
       "name": "HighsLp",
@@ -324,13 +334,13 @@
     },
     {
       "name": "HighsLpAggregator",
-      "brief": "Row aggregation for cut generation\n\nCombines LP rows with weights to create mixed-integer Gomory source rows.\n\n**Core Operations:**\n- addRow(): Add weighted LP row to current aggregation\n- getCurrentAggregation(): Extract combined row as sparse vector\n- clear(): Reset for next aggregation\n\n**Aggregation Format:**\nResult includes slack variables making it an equation with RHS = 0:\n  sum(a_ij * x_j) + s_i = b_i  \u2192  aggregated as equality\n\n**Implementation:**\n- Uses HighsSparseVectorSum for efficient sparse combination\n- Tracks nonzero indices incrementally\n- negate parameter for sign flip (row sense conversion)\n\n**Cut Generation Context:**\n1. Start from LP tableau row (basis row)\n2. Aggregate additional rows to eliminate non-integer variables\n3. Pass to HighsTransformedLp for bound substitution\n4. Generate Gomory mixed-integer cuts",
-      "has_algorithm": false
+      "brief": "Row aggregation for cut generation\n\nCombines LP rows with weights to create mixed-integer Gomory source rows.",
+      "has_algorithm": true
     },
     {
       "name": "HighsLpRelaxation",
       "brief": "LP relaxation management for MIP branch-and-bound\n\nManages the LP relaxation at each B&B node with cut handling.\n\n**Status enum:**\n- kOptimal: LP solved to optimality\n- kInfeasible: LP is infeasible (node can be pruned)\n- kUnscaledDualFeasible: Dual feasible (valid bound)\n- kUnscaledPrimalFeasible: Primal feasible (valid solution)\n- kUnbounded/kError: Problem states\n\n**LpRow Tracking:**\n- origin: kModel (original constraint) or kCutPool (added cut)\n- index: Row index in model or cut pool\n- age: Iterations since cut was binding (for aging/removal)\n\n**Key Operations:**\n- run(): Solve LP relaxation\n- addCuts(): Add cuts from HighsCutSet\n- flushDomain(): Apply bound changes from HighsDomain\n- performAging(): Age cuts, remove old non-binding cuts\n- removeObsoleteRows(): Delete aged-out cuts\n\n**Solution Access:**\n- getObjective(): LP objective value\n- getSolution(): Primal/dual values\n- getFractionalIntegers(): Integer vars with fractional values\n- integerFeasible(): True if LP solution is MIP-feasible\n\n**Dual Proofs:**\n- computeDualProof(): Derive valid inequality from LP dual\n- storeDualInfProof(): Store proof when LP is infeasible\n- getDualProof(): Retrieve stored proof for conflict analysis\n\n**Playground (nested class):**\nRAII wrapper for temporary LP modifications (e.g., strong branching).",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "HighsLpSolverObject",
@@ -404,8 +414,8 @@
     },
     {
       "name": "HighsObjectiveFunction",
-      "brief": "Objective function analysis for MIP solving\n\nAnalyzes objective structure to enable specialized bound propagation.\n\n**Objective Structure:**\n- objectiveNonzeros[]: Columns with nonzero objective (binaries first)\n- objectiveVals[]: Packed objective coefficients\n- numBinary/numIntegral: Variable counts by type\n\n**Integrality Detection:**\n- objIntScale: Scale factor making all integer coefficients integral\n- isIntegral(): True if objective is integer for integer solutions\n- checkIntegrality(): Verify/update integrality with epsilon\n- Enables objective cutoff rounding\n\n**Clique Partitioning:**\nPartitions binary objective variables into cliques:\n- cliquePartitionStart[]: Start indices per partition\n- colToPartition[]: Maps column to its partition\n- At most one variable per clique can be 1\n- Enables tighter objective bounds from clique constraints\n\n**Usage:**\n- Objective bound computation during propagation\n- Detecting integral objectives for cutoff strengthening\n- Clique-based objective probing",
-      "has_algorithm": false
+      "brief": "Objective function analysis for MIP solving\n\nAnalyzes objective structure to enable specialized bound propagation.",
+      "has_algorithm": true
     },
     {
       "name": "HighsOptions",
@@ -425,7 +435,7 @@
     {
       "name": "HighsPostsolveStack",
       "brief": "Postsolve stack to recover original-space solutions\n\nRecords all presolve transformations to enable solution recovery.\n\n**HighsPostsolveStack Class:**\nStack of reduction operations that can be undone in reverse order.\n\n**Reduction Types (ReductionType enum):**\nEach presolve operation has a corresponding undo:\n- kLinearTransform: x = scale * x' + constant\n- kFreeColSubstitution: Free variable substituted via equation\n- kDoubletonEquation: Two-variable equation eliminated\n- kSingletonRow/kFixedCol: Single-entry row or fixed column\n- kRedundantRow/kForcingRow: Redundant or forcing constraints\n- kDuplicateRow/kDuplicateColumn: Parallel rows/columns merged\n\n**Index Mapping:**\n- origColIndex[], origRowIndex[]: Map reduced indices to original\n- compressIndexMaps(): Update after columns/rows removed\n\n**Postsolve Operations:**\n- undo(): Reverse all reductions (primal, dual, basis)\n- undoPrimal(): Reverse only primal solution\n- getReducedPrimalSolution(): Map original solution to reduced space\n\n**Data Storage:**\n- reductionValues: HighsDataStack for reduction parameters\n- reductions[]: Vector of (type, stack_position) pairs\n- rowValues[], colValues[]: Temporary storage for sparse vectors",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "HighsPrimalHeuristics",
@@ -435,7 +445,7 @@
     {
       "name": "HighsPseudocost",
       "brief": "Pseudocost branching for MIP variable selection\n\nEstimates objective change from branching based on historical observations.\n\n**Score Components:**\n- pseudocostup/down[col]: Average unit objective change per direction\n- inferencesup/down[col]: Average domain reductions (bound tightenings)\n- ncutoffsup/down[col]: Count of subtree cutoffs per direction\n- conflictscoreup/down[col]: Conflict analysis contribution\n\n**Reliability:**\n- nsamplesup/down[col]: Number of observations per direction\n- minreliable: Threshold for reliable pseudocost estimate\n- isReliable(): True when min(up_samples, down_samples) >= minreliable\n- Unreliable estimates blend with global average (cost_total)\n\n**Scoring (getScore):**\nCombines multiple signals into branching score:\n- costScore: Pseudocost product (up * down) / avg^2\n- inferenceScore: Domain reduction product\n- cutoffScore: Historical cutoff frequency\n- conflictScore: Conflict analysis contribution\n- degeneracyFactor: Adjusts weighting for degenerate LPs\n\n**Key Methods:**\n- addObservation(): Record objective change from branching\n- addInferenceObservation(): Record domain reductions\n- getPseudocostUp/Down(): Get estimated change for given fraction",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "HighsRaceTimer",
@@ -449,18 +459,18 @@
     },
     {
       "name": "HighsRanging",
-      "brief": "Sensitivity analysis (ranging) for LP optimal solutions\n\nComputes allowable ranges for objective coefficients and bounds.\n\n**HighsRangingRecord:**\n- value_[]: New coefficient/bound value at range limit\n- objective_[]: Objective value at range limit\n- in_var_[]: Variable entering basis at limit\n- ou_var_[]: Variable leaving basis at limit\n\n**HighsRanging Structure:**\n- col_cost_up/dn: Objective coefficient increase/decrease\n- col_bound_up/dn: Variable bound increase/decrease\n- row_bound_up/dn: Constraint RHS increase/decrease\n\n**Sensitivity Analysis:**\n- For costs: Range where current basis remains optimal\n- For bounds: Range where current basis remains primal feasible\n- Shadow prices from dual variables",
-      "has_algorithm": false
+      "brief": "Sensitivity analysis (ranging) for LP optimal solutions\n\nComputes allowable ranges for objective coefficients and bounds.",
+      "has_algorithm": true
     },
     {
       "name": "HighsRbTree",
-      "brief": "Array-based Red-Black tree with CRTP interface\n\nSelf-balancing BST using indices instead of pointers for cache efficiency.\n\n**CRTP Pattern:**\n- RbTreeTraits<Impl>: Define KeyType and LinkType\n- Impl::getRbTreeLinks(): Return reference to RbTreeLinks\n- Impl::getKey(): Return comparable key value\n\n**RbTreeLinks Structure:**\n- child[2]: Left/right child indices\n- parentAndColor: Parent packed with color bit (saves storage)\n- Works with both integer and pointer LinkTypes\n\n**Tree Operations:**\n- link(): Insert node, rebalance via red-black rotations\n- unlink(): Remove node with transplant and fixup\n- find(): Search returning (node, exact_match) pair\n- first()/last(): Minimum/maximum in subtree\n- successor()/predecessor(): In-order traversal\n\n**CacheMinRbTree Variant:**\n- Maintains cached pointer to minimum element\n- O(1) access to first() for priority queue usage\n\n**Usage in HiGHS:**\n- HighsNodeQueue: Priority queue for B&B nodes by bound\n- Efficient ordered containers with O(log n) operations",
-      "has_algorithm": false
+      "brief": "Array-based Red-Black tree with CRTP interface\n\nSelf-balancing BST using indices instead of pointers for cache efficiency.",
+      "has_algorithm": true
     },
     {
       "name": "HighsRedcostFixing",
       "brief": "Reduced cost fixing and lurking bounds for MIP\n\nUses LP reduced costs to fix variable bounds based on cutoff.\n\n**Reduced Cost Fixing:**\nIf fixing variable j to its bound would increase objective beyond cutoff,\nthe opposite bound becomes valid. For minimization:\n- If reduced_cost[j] > 0 and x[j] = lb: fixing to ub proves lb valid\n- If reduced_cost[j] < 0 and x[j] = ub: fixing to lb proves ub valid\n\n**Lurking Bounds:**\nBounds that become valid at specific objective values:\n- lurkingColUpper[col]: (objective_threshold, bound_value) pairs\n- lurkingColLower[col]: Maps threshold to tighter bound\n- getLurkingBounds(): Extract bounds valid at current cutoff\n\n**Propagation Methods:**\n- propagateRootRedcost(): Apply fixings at root using stored costs\n- propagateRedCost(): Apply fixings at any node using LP reduced costs\n- addRootRedcost(): Store root LP reduced costs for later use\n\n**Integration:**\n- Called when incumbent improves (new cutoff enables more fixings)\n- Provides global domain tightening from LP dual information",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "HighsSchedulerConstants",
@@ -484,8 +494,8 @@
     },
     {
       "name": "HighsSimplexAnalysis",
-      "brief": "Analyse simplex iterations, both for run-time control and data\ngathering",
-      "has_algorithm": false
+      "brief": "Simplex iteration analysis for run-time control and performance tuning\n\nCollects and analyzes data during simplex iterations to support:\n- Adaptive algorithm selection (sparse vs hyper-sparse FTRAN/BTRAN)\n- DSE-to-Devex switching decisions\n- INVERT timing via synthetic clock\n- Performance profiling and debugging\n\n**TranStageAnalysis:**\nTracks density predictions vs actuals for FTRAN/BTRAN stages:\n- FTRAN_LOWER, FTRAN_UPPER, FTRAN_UPPER_FT\n- BTRAN_UPPER, BTRAN_UPPER_FT, BTRAN_LOWER\nUsed to tune hyper-sparse vs traditional algorithm selection.\n\n**HighsSimplexAnalysis:**\nPer-iteration data for adaptive control:\n- col_aq_density, row_ep_density, row_ap_density: Operation densities\n- edge_weight_error: DSE weight accuracy tracking\n- numerical_trouble: Pivot accuracy monitoring\n- rebuild_reason: Why INVERT was triggered",
+      "has_algorithm": true
     },
     {
       "name": "HighsSolution",
@@ -504,8 +514,8 @@
     },
     {
       "name": "HighsSort",
-      "brief": "Heap-based sorting routines for HiGHS\n\nIn-place heapsort implementations for indices and value-index pairs.\n\n**Algorithm:**\n- Build max-heap in O(n) via buildMaxheap()\n- Extract elements in O(n log n) via maxHeapsort()\n- Result: increasing order (max-heap yields ascending sort)\n\n**Functions:**\n- maxheapsort(): Combined build + sort\n- buildMaxheap() + maxHeapsort(): Separate phases\n- maxHeapify(): Sift-down operation\n\n**Overloads:**\n- (HighsInt*): Sort indices only\n- (double*, HighsInt*): Sort values with corresponding indices\n- (HighsInt*, HighsInt*): Sort HighsInt values with indices\n\n**Decreasing Heap Utilities:**\n- addToDecreasingHeap(): Insert into bounded min-heap\n- sortDecreasingHeap(): Extract in decreasing order\n\n**Validation:**\n- increasingSetOk(): Check sorted order and bounds\n- sortSetData(): Sort indices and reorder associated data arrays\n\n@note Arrays use 1-based indexing: heap[1..n]",
-      "has_algorithm": false
+      "brief": "Heap-based sorting routines for HiGHS\n\nIn-place heapsort implementations for indices and value-index pairs.",
+      "has_algorithm": true
     },
     {
       "name": "HighsSparseMatrix",
@@ -529,8 +539,8 @@
     },
     {
       "name": "HighsSplitDeque",
-      "brief": "Chase-Lev work-stealing deque with split point optimization\n\nLock-free concurrent deque enabling efficient task-parallel execution.\n\n**Chase-Lev Deque:**\n- Owner pushes/pops from head (LIFO for locality)\n- Thieves steal from tail (FIFO for load balancing)\n- Single-word CAS for conflict resolution\n\n**Split Point Optimization:**\n- tail/split packed in 64-bit atomic (ts)\n- Split divides deque: [tail, split) available for stealing\n- Owner controls split growth via growShared()/shrinkShared()\n- Reduces contention when deque not fully shared\n\n**Memory Layout (Cache-Aligned):**\n- OwnerData (64B): head, split copy, workers, RNG\n- splitRequest (64B): Flag for thieves requesting more work\n- StealerData (64B): semaphore, injectedTask, ts atomic\n- WorkerBunkData (64B): nextSleeper for sleep stack\n- taskArray: 8192 task slots\n\n**WorkerBunk:**\n- Global sleep/wake coordination across workers\n- Lock-free sleeper stack with ABA-safe CAS\n- publishWork(): Wake sleepers when work available\n\n**Pop Status:**\n- kEmpty: No tasks\n- kStolen: Task was stolen, need sync\n- kWork: Task available for execution\n- kOverflown: Queue full, task executed inline",
-      "has_algorithm": false
+      "brief": "Chase-Lev work-stealing deque with split point optimization\n\nLock-free concurrent deque enabling efficient task-parallel execution.",
+      "has_algorithm": true
     },
     {
       "name": "HighsStatus",
@@ -540,12 +550,12 @@
     {
       "name": "HighsSymmetry",
       "brief": "Symmetry detection and orbital fixing for MIP",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "HighsTableauSeparator",
-      "brief": "Gomory mixed-integer cuts from LP tableau\n\nGenerates cuts by applying MIR procedure to simplex tableau rows.\n\n**Gomory Cut Generation:**\nFor each fractional basic integer variable:\n1. Extract tableau row: x_B[i] = f_0 - sum(a_j * x_N[j])\n2. Apply mixed-integer rounding (MIR)\n3. Produce cut: sum(floor(a_j) * x_j) \u2264 floor(f_0) (simplified)\n\n**Separation Flow:**\n1. Get fractional integer variables from LP relaxation\n2. For each candidate, extract tableau row via BTRAN\n3. Transform using HighsTransformedLp (bound substitution)\n4. Apply MIR strengthening\n5. Add valid cuts to cut pool\n\n**Implementation:**\n- numTries: Counter for separation attempts (controls effort)\n- Uses kTableauSepaString identifier for statistics\n- Inherits run() timing from HighsSeparator base class",
-      "has_algorithm": false
+      "brief": "Gomory mixed-integer cuts from LP tableau\n\nGenerates cuts by applying MIR procedure to simplex tableau rows.",
+      "has_algorithm": true
     },
     {
       "name": "HighsTask",
@@ -554,8 +564,8 @@
     },
     {
       "name": "HighsTaskExecutor",
-      "brief": "Work-stealing thread pool for task parallelism\n\nManages worker threads and coordinates task execution via work stealing.\n\n**Thread Pool:**\n- Main thread (worker 0) + N-1 spawned workers\n- Each worker has own HighsSplitDeque for local tasks\n- Thread-local storage for current worker's deque\n\n**Work Stealing Loop:**\n- random_steal_loop(): Try stealing from random victims\n  - Exponential backoff with microsecond timing\n  - Falls back to global sync after timeout\n- Workers sleep when no work available (WorkerBunk)\n\n**Stolen Task Sync:**\n- sync_stolen_task(): Wait for task stolen by another worker\n  - Leapfrog stealing: steal from the stealer\n  - Spin wait with exponential backoff\n  - Sleep with notification when timeout exceeded\n\n**Lifecycle:**\n- initialize(): Create executor singleton\n- shutdown(): Stop all workers, join or detach threads\n- ExecutorHandle: RAII cleanup on thread exit",
-      "has_algorithm": false
+      "brief": "Work-stealing thread pool for task parallelism\n\nManages worker threads and coordinates task execution via work stealing.",
+      "has_algorithm": true
     },
     {
       "name": "HighsTimer",
@@ -564,8 +574,8 @@
     },
     {
       "name": "HighsTransformedLp",
-      "brief": "LP bound transformations for cutting plane separation\n\nTransforms LP rows into single-row relaxations suitable for cut generation\nby substituting bounds and handling complementation.\n\n**Bound Substitution Types (BoundType enum):**\n- kSimpleLb/kSimpleUb: Direct variable bounds (x \u2265 lb, x \u2264 ub)\n- kVariableLb/kVariableUb: VLB/VUB from implications (x \u2265 a*y + b)\n\n**Bound Selection:**\n- bestVlb/bestVub[]: Tightest variable bound for each column\n- simpleLbDist/simpleUbDist[]: Distance of LP value from simple bounds\n- lbDist/ubDist[]: Distance considering all bound types\n- boundDist[]: Minimum distance (used for coefficient strengthening)\n\n**Transform Operations:**\n- transform(): Convert row to standard form for cut generation\n  - Substitutes bounds to get non-negative variables\n  - Tracks which bound type used per variable\n  - Returns integralPositive flag for MIR applicability\n- untransform(): Reverse transformation to original space\n\n**Cut Generation Flow:**\n1. Aggregate LP rows (via HighsLpAggregator)\n2. Transform to standard form (substitute bounds)\n3. Apply cut procedure (Gomory, MIR, etc.)\n4. Untransform back to original variables",
-      "has_algorithm": false
+      "brief": "LP bound transformations for cutting plane separation\n\nTransforms LP rows into single-row relaxations suitable for cut generation\nby substituting bounds and handling complementation.",
+      "has_algorithm": true
     },
     {
       "name": "HighsUtils",
@@ -575,7 +585,7 @@
     {
       "name": "ICrash",
       "brief": "Iterative crash procedure for LP starting points",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "ICrashUtil",
@@ -585,7 +595,7 @@
     {
       "name": "ICrashX",
       "brief": "Crossover from interior point to basic solution\n\nProvides simplex crossover after IPM solve to obtain vertex solution.\n\n**callCrossover():**\nConverts interior point solution to basic feasible solution:\n- Input: IPM solution (may be interior to polytope)\n- Output: Basis + vertex solution for post-processing\n\n**Why Crossover:**\n- IPM returns interior solutions, not vertices\n- Basic solutions needed for warm-starting, sensitivity analysis\n- Crossover pushes solution to vertex via simplex pivots\n\n**Process:**\n1. Identify near-bound variables\n2. Construct initial basis from binding constraints\n3. Run simplex cleanup to reach vertex",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "IpxSolution",
@@ -626,6 +636,11 @@
       "name": "SimplexTimer",
       "brief": "Timer clock indices for profiling simplex operations\n\nDefines clock identifiers for fine-grained simplex timing.\n\n**iClockSimplex Enum:**\nClock indices for HighsTimer used by simplex:\n\n**Top-Level Clocks:**\n- SimplexTotalClock: Total simplex time\n- SimplexDualPhase1/2Clock: Dual simplex phases\n- SimplexPrimalPhase1/2Clock: Primal simplex phases\n\n**Iteration Clocks:**\n- IterateClock: Per-iteration timing\n- IterateChuzrClock: CHUZR (row selection)\n- IterateChuzcClock: CHUZC (column selection)\n- IterateFtranClock: FTRAN operations\n- IterateDualClock: Dual value updates\n- IteratePrimalClock: Primal value updates\n\n**Infrastructure Clocks:**\n- InvertClock: Basis factorization\n- BasisConditionClock: Condition estimation\n- DseIzClock: DSE weight initialization",
       "has_algorithm": false
+    },
+    {
+      "name": "Solver",
+      "brief": "HiPO interior point method solver for linear programming\n\nPrimal-dual interior point implementation with Mehrotra predictor-corrector\nand Gondzio multiple centrality corrections.",
+      "has_algorithm": true
     },
     {
       "name": "SpecialLps",
@@ -745,7 +760,7 @@
     {
       "name": "basis",
       "brief": "Basis management for IPX interior point solver\n\nManages simplex-style basis for IPM preconditioning and crossover.\n\n**BasicStatus Enum:**\n- NONBASIC_FIXED: Fixed at bound, never enters basis\n- NONBASIC: At bound, may enter basis\n- BASIC: In basis, may leave\n- BASIC_FREE: In basis, never leaves\n\n**Basis Storage:**\n- basis_[p]: Column index at position p (0 <= p < m)\n- map2basis_[j]: Position of variable j, or -1/-2 if nonbasic\n- StatusOf(), PositionOf(), IsBasic(): Query methods\n\n**Linear Algebra Operations:**\n- Factorize(): LU factorization with stability check\n- SolveDense(): FTRAN/BTRAN for dense RHS\n- SolveForUpdate(): Prepare for basis exchange\n- TableauRow(): Compute simplex tableau row\n- ExchangeIfStable(): Pivot with stability check\n\n**Basis Construction:**\n- SetToSlackBasis(): Initialize to identity\n- Load(): Load user-provided basis\n- ConstructBasisFromWeights(): Crash procedure\n- CrashBasis(): Fast weighted crash\n- Repair(): Fix singularities with slack columns\n\n**Statistics:**\n- factorizations(), updates_total(): Counts\n- frac_ftran_sparse(), frac_btran_sparse(): Sparsity metrics\n- mean_fill(), max_fill(): LU fill factors",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "builder",
@@ -799,18 +814,18 @@
     },
     {
       "name": "cupdlp_proj",
-      "brief": "Projection operations for PDHG algorithm\n\nImplements projection onto variable bounds and restart operations:\n- PDHG_Project_Bounds(): Projects x onto [l, u] box constraints\n- PDHG_Restart_Iterate(): Resets iterate to current or average point\n\nIn PDHG, primal projection is: x^{k+1} = proj_{[l,u]}(x\u0304)\nwhere x\u0304 is the gradient step result.",
-      "has_algorithm": false
+      "brief": "Projection operations for PDHG algorithm\n\nImplements projection onto variable bounds and restart operations.",
+      "has_algorithm": true
     },
     {
       "name": "cupdlp_restart",
-      "brief": "Adaptive restart strategies for PDHG convergence acceleration\n\nImplements restart heuristics that periodically reset iterates to\naccelerate PDHG convergence from O(1/k) to O(1/k\u00b2).\n\n**Restart Strategies:**\n- PDHG_NO_RESTART: Continue without restart\n- PDHG_RESTART_TO_CURRENT: Reset to current iterate\n- PDHG_RESTART_TO_AVERAGE: Reset to running average\n\nDecision based on normalized duality gap improvement via merit function.",
-      "has_algorithm": false
+      "brief": "Adaptive restart strategies for PDHG convergence acceleration\n\nImplements restart heuristics that periodically reset iterates to\naccelerate PDHG convergence from O(1/k) to O(1/k\u00b2).",
+      "has_algorithm": true
     },
     {
       "name": "cupdlp_scaling",
-      "brief": "Matrix scaling for PDHG numerical stability\n\nImplements equilibration scaling to improve PDHG convergence by\nbalancing row and column norms of the constraint matrix A.\n\n**Scaling Methods:**\n- Ruiz equilibration: Iterative row/column scaling to unit \u221e-norms\n- L2 scaling: Scale to unit 2-norms\n- PC (Pock-Chambolle) scaling: Scale based on degree\n\nScaling affects step size selection: \u03c4\u03c3\u2016A\u2016\u00b2 < 1 becomes easier\nto satisfy when \u2016A\u2016 is reduced through scaling.",
-      "has_algorithm": false
+      "brief": "Matrix scaling for PDHG numerical stability\n\nImplements equilibration scaling to improve PDHG convergence by\nbalancing row and column norms of the constraint matrix A.",
+      "has_algorithm": true
     },
     {
       "name": "cupdlp_solver",
@@ -819,8 +834,8 @@
     },
     {
       "name": "cupdlp_step",
-      "brief": "Step size selection and PDHG iterate updates\n\nCore PDHG iteration logic including step size computation and updates.\n\n**Step Size Methods:**\n- Constant: \u03c4 = \u03c3 = 1/\u2016A\u2016, computed via power method\n- Malitsky-Pock: Adaptive based on primal-dual interaction\n- Adaptive linesearch: Backtracking with growth/reduction\n\n**PDHG Update (each iteration):**\n1. Primal step: x\u0304 = x - \u03c4\u00b7(c - A'y)\n2. Projection: x\u207a = proj_{[l,u]}(x\u0304)\n3. Dual step: y\u207a = y + \u03c3\u00b7(b - A\u00b7(2x\u207a - x))",
-      "has_algorithm": false
+      "brief": "Step size selection and PDHG iterate updates\n\nCore PDHG iteration logic including step size computation and updates.",
+      "has_algorithm": true
     },
     {
       "name": "cupdlp_utils",
@@ -1005,7 +1020,7 @@
     {
       "name": "lu_update",
       "brief": "Abstract interface for LU factorization with rank-1 updates\n\nExtends LuFactorization to support efficient Forrest-Tomlin updates\nfor changing one column at a time (as in simplex iterations).\n\n**Workflow:**\n1. Factorize(): Compute B = L\u00b7U\n2. FtranForUpdate(): Solve B\u00b7x = b (incoming column)\n3. BtranForUpdate(): Solve B'\u00b7y = e_j (outgoing column)\n4. Update(): Apply Forrest-Tomlin update B_new = B with col j \u2190 b\n\n**Return Codes:**\n- Factorize: 0=OK, 1=unstable, 2=singular, 3=both\n- Update: <0 singular, >0 unstable, 0=OK",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "matrix",
@@ -1040,7 +1055,7 @@
     {
       "name": "normal_matrix",
       "brief": "Normal equations matrix operator A\u00b7W\u00b7A'\n\nLinearOperator implementation for the normal equations matrix\nused in IPM. Computes y = (A\u00b7W\u00b7A')\u00b7x efficiently using sparse\nmatrix-vector products.\n\nThe weight matrix W is diagonal and set via Prepare(). If W is NULL,\nuses W = [I; 0] (identity for structural, zero for slack columns).",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "perturbation",
@@ -1125,7 +1140,7 @@
     {
       "name": "starting_basis",
       "brief": "Initial basis construction from interior point iterates\n\nConstructs a starting basis for crossover using interior point scaling\nfactors as column weights. Handles special cases:\n- Free variables (lb=-\u221e, ub=+\u221e): BASIC_FREE or NONBASIC_FIXED\n- Fixed slacks (lb=ub): BASIC_FREE or NONBASIC_FIXED\n- Fixed structural: NONBASIC_FIXED\n- Others: BASIC or NONBASIC\n\nLinear dependencies among free variables or equality constraints\nare resolved by fixing dependent variables at zero.",
-      "has_algorithm": false
+      "has_algorithm": true
     },
     {
       "name": "statistics",

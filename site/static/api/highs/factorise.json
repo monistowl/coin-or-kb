@@ -1,0 +1,23 @@
+{
+  "name": "Factorise",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/hipo/factorhighs/Factorise.h",
+  "brief": "Numerical phase of sparse LDL^T factorization\n\nSupernodal numerical factorization for symmetric indefinite matrices\narising in interior point method normal equations.",
+  "algorithms": [
+    {
+      "name": "Static Regularization:\n  Add diagonal perturbation for near-singular systems:",
+      "math": "If |d_kk| < threshold: d_kk += sign(d_kk) \u00b7 regul_value\n        total_reg_ tracks cumulative regularization per column\n  Prevents breakdown on ill-conditioned IPM systems.",
+      "complexity": "O(n) diagonal checks",
+      "ref": [
+        "Ashcraft, C. and Grimes, R. (1999). \"SPOOLES: An object-oriented\n       sparse matrix library\". PPSC.",
+        "Bunch, J. and Kaufman, L. (1977). \"Some stable methods for\n       calculating inertia and solving symmetric linear systems\"."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Analyse.h for symbolic phase producing Symbolic structure",
+    "Numeric.h for output numerical factorization"
+  ]
+}

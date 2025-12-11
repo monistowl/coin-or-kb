@@ -1,0 +1,23 @@
+{
+  "name": "Analyse",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/hipo/factorhighs/Analyse.h",
+  "brief": "Symbolic analysis phase for sparse Cholesky factorization\n\nComputes fill-reducing ordering and symbolic factorization structure\nbefore numerical factorization in HiGHS interior point solver.",
+  "algorithms": [
+    {
+      "name": "Relative Index Computation:\n  Map between supernode and global indices:",
+      "math": "relativeIndCols(): Map original columns to L positions\n        relativeIndClique(): Map update positions in Schur complement\n  Enables O(1) lookup during numeric factorization updates.",
+      "complexity": "O(nnz_L) for supernode identification",
+      "ref": [
+        "Liu, J. (1990). \"The role of elimination trees in sparse\n       factorization\". SIAM J. Matrix Anal. Appl. 11(1):134-172.",
+        "Ng, E. and Peyton, B. (1993). \"Block sparse Cholesky algorithms\n       on advanced uniprocessor computers\". SIAM SISC 14(5):1034-1056."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Symbolic.h for output symbolic factorization structure",
+    "Factorise.h for numerical factorization using this analysis"
+  ]
+}

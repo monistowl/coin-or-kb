@@ -3,7 +3,21 @@
   "library": "HiGHS",
   "layer": "layer-4",
   "header": "highs/util/HFactor.h",
-  "brief": "Basis matrix factorization, update and solves for HiGHS",
-  "algorithms": [],
-  "methods": []
+  "brief": "Basis matrix factorization, update and solves for HiGHS\n\nLU factorization with Markowitz pivoting for simplex basis matrices,\nsupporting FTRAN, BTRAN, and various update methods.",
+  "algorithms": [
+    {
+      "name": "Alternative Update Methods:",
+      "math": "updatePF(): Product form of inverse (simpler, more fill)\n        updateMPF(): Modified PF with better numerical stability\n        updateAPF(): Alternative PF variant\n  kUpdateMethodFt selects Forrest-Tomlin by default.",
+      "complexity": "O(nnz_eta) per update, O(m \u00d7 updates) accumulated",
+      "ref": [
+        "Markowitz, H. (1957). \"The elimination form of the inverse and\n       its application to linear programming\". Management Science.",
+        "Forrest, J. and Tomlin, J. (1972). \"Updated triangular factors\n       of the basis to maintain sparsity\". Math Programming 2(1)."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "HSimplexNla.h for simplex linear algebra interface",
+    "HVector.h for sparse vector operations"
+  ]
 }

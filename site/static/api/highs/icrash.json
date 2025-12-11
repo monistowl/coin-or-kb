@@ -4,7 +4,17 @@
   "layer": "layer-4",
   "header": "highs/presolve/ICrash.h",
   "brief": "Iterative crash procedure for LP starting points",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Crossover to Basic Solution:\n  Convert crash point to basic feasible solution:",
+      "math": "Given x_crash, find basis B such that x_B = B\u207b\u00b9b is feasible\n        Uses primal/dual simplex pivots from crash point\n  callCrossover() integrates with HiGHS simplex.",
+      "complexity": "O(m\u00b2) typical for crossover phase",
+      "ref": [
+        "Nocedal, J. and Wright, S. (2006). \"Numerical Optimization\".\n       Springer, Chapter 17.",
+        "Boyd, S. et al. (2011). \"Distributed optimization and statistical\n       learning via ADMM\". Foundations and Trends in ML 3(1):1-122."
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "presolve/ICrashUtil.h for helper functions",

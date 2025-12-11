@@ -3,8 +3,17 @@
   "library": "HiGHS",
   "layer": "layer-4",
   "header": "highs/pdlp/cupdlp/cupdlp_restart.h",
-  "brief": "Adaptive restart strategies for PDHG convergence acceleration\n\nImplements restart heuristics that periodically reset iterates to\naccelerate PDHG convergence from O(1/k) to O(1/k\u00b2).\n\n**Restart Strategies:**\n- PDHG_NO_RESTART: Continue without restart\n- PDHG_RESTART_TO_CURRENT: Reset to current iterate\n- PDHG_RESTART_TO_AVERAGE: Reset to running average\n\nDecision based on normalized duality gap improvement via merit function.",
-  "algorithms": [],
+  "brief": "Adaptive restart strategies for PDHG convergence acceleration\n\nImplements restart heuristics that periodically reset iterates to\naccelerate PDHG convergence from O(1/k) to O(1/k\u00b2).",
+  "algorithms": [
+    {
+      "name": "Restart Decision Logic:\n  Three options based on current vs average iterate quality:",
+      "math": "If M(x^curr, y^curr) < M(x^avg, y^avg): restart to current\n        Else if M(x^avg, y^avg) < \u03b2\u00b7M_prev: restart to average\n        Else: no restart (continue averaging)\n        Typically \u03b2 \u2248 0.8 for sufficient improvement.\n\n**Restart Strategies:**\n- PDHG_NO_RESTART: Continue without restart\n- PDHG_RESTART_TO_CURRENT: Reset to current iterate\n- PDHG_RESTART_TO_AVERAGE: Reset to running average",
+      "complexity": "O(n+m) to evaluate merit function.",
+      "ref": [
+        "O'Donoghue & Candes (2015). \"Adaptive restart for accelerated\n       gradient schemes\"."
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "cupdlp_solver.h for restart integration in main loop",

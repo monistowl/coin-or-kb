@@ -3,8 +3,15 @@
   "library": "HiGHS",
   "layer": "layer-4",
   "header": "highs/mip/HighsObjectiveFunction.h",
-  "brief": "Objective function analysis for MIP solving\n\nAnalyzes objective structure to enable specialized bound propagation.\n\n**Objective Structure:**\n- objectiveNonzeros[]: Columns with nonzero objective (binaries first)\n- objectiveVals[]: Packed objective coefficients\n- numBinary/numIntegral: Variable counts by type\n\n**Integrality Detection:**\n- objIntScale: Scale factor making all integer coefficients integral\n- isIntegral(): True if objective is integer for integer solutions\n- checkIntegrality(): Verify/update integrality with epsilon\n- Enables objective cutoff rounding\n\n**Clique Partitioning:**\nPartitions binary objective variables into cliques:\n- cliquePartitionStart[]: Start indices per partition\n- colToPartition[]: Maps column to its partition\n- At most one variable per clique can be 1\n- Enables tighter objective bounds from clique constraints\n\n**Usage:**\n- Objective bound computation during propagation\n- Detecting integral objectives for cutoff strengthening\n- Clique-based objective probing",
-  "algorithms": [],
+  "brief": "Objective function analysis for MIP solving\n\nAnalyzes objective structure to enable specialized bound propagation.",
+  "algorithms": [
+    {
+      "name": "Clique-Based Objective Bounds:\n  Partition binary variables into cliques for tighter bounds:",
+      "math": "For clique C: \u03a3_{i\u2208C} x_i \u2264 1\n        Objective contribution: max_{i\u2208C} c_i (at most one is 1)\n        Tighter than: \u03a3_{i\u2208C} c_i (assuming all could be 1)\n  setupCliquePartition() finds disjoint cliques covering binaries.",
+      "complexity": "O(n_binary \u00b7 clique_lookup)\n\n**Objective Structure:**\n- objectiveNonzeros[]: Columns with nonzero objective (binaries first)\n- objectiveVals[]: Packed objective coefficients\n- numBinary/numIntegral: Variable counts by type\n\n**Integrality Detection:**\n- objIntScale: Scale factor making all integer coefficients integral\n- isIntegral(): True if objective is integer for integer solutions\n- checkIntegrality(): Verify/update integrality with epsilon\n- Enables objective cutoff rounding\n\n**Clique Partitioning:**\nPartitions binary objective variables into cliques:\n- cliquePartitionStart[]: Start indices per partition\n- colToPartition[]: Maps column to its partition\n- At most one variable per clique can be 1\n- Enables tighter objective bounds from clique constraints\n\n**Usage:**\n- Objective bound computation during propagation\n- Detecting integral objectives for cutoff strengthening\n- Clique-based objective probing",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "mip/HighsCliqueTable.h for clique detection",

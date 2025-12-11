@@ -1,0 +1,22 @@
+{
+  "name": "exchange_heur",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "Applications/VRP/include/heurs/exchange_heur.h",
+  "brief": "Inter-route exchange improvement heuristic for VRP\n\nLocal search heuristic that improves VRP solutions via customer exchanges.",
+  "algorithms": [
+    {
+      "name": "Inter-Route Exchange:\n  Improve VRP solution by moving/swapping customers between routes:",
+      "math": "Exchange moves:\n          - Relocate: Move customer i from route r to route s\n          - Swap: Exchange customer i in route r with j in route s\n          - 2-opt*: Reconnect route tails (cross-exchange)\n        Accept move if:\n          - Total distance decreases\n          - Both routes remain capacity-feasible\n        Iterate until no improving move found.",
+      "complexity": "O(n\u00b2 \u00b7 k) per pass for n customers, k routes",
+      "ref": [
+        "Van Breedam, A. (2001). \"Comparing descent heuristics and\n       metaheuristics for the vehicle routing problem\"."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "cluster_heur.h for construction phase",
+    "route_heur.h for intra-route improvement"
+  ]
+}

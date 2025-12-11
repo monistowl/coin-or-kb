@@ -1,0 +1,22 @@
+{
+  "name": "mst_ins_rout",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "Applications/VRP/include/heurs/mst_ins_rout.h",
+  "brief": "MST-based insertion and k-tree lower bound for VRP\n\nMinimum spanning tree based routines for bounds and construction.",
+  "algorithms": [
+    {
+      "name": "MST-Based Insertion:\n  Build tour by inserting nodes from MST edges:",
+      "math": "1. Compute MST of all customers\n        2. Traverse MST in some order (e.g., DFS)\n        3. Insert nodes into tour following traversal order\n  ni_insert_edges() inserts based on nearest neighbor in tree.",
+      "complexity": "O(n\u00b2 log n) for MST + O(n\u00b2) for insertions",
+      "ref": [
+        "Held, M. and Karp, R. (1971). \"The traveling-salesman problem\n       and minimum spanning trees: Part II\". Math Programming 1(1)."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "ins_routines.h for standard insertion heuristics",
+    "lb_types.h for lower bound data structures"
+  ]
+}

@@ -3,7 +3,21 @@
   "library": "HiGHS",
   "layer": "layer-4",
   "header": "highs/simplex/HEkkDualRow.h",
-  "brief": "Dual simplex ratio test for HiGHS",
-  "algorithms": [],
-  "methods": []
+  "brief": "Dual simplex ratio test and BFRT for HiGHS\n\nImplements the dual ratio test (CHUZC) including Bound-Flipping Ratio Test\n(BFRT) for selecting the entering variable in dual simplex.\n\n**Key Operations:**\n- chooseMakepack(): Pack pivot row entries for ratio test\n- choosePossible(): Find candidates satisfying dual feasibility\n- chooseFinal(): Execute BFRT to select entering variable\n- updateDual(): Apply dual updates after pivot\n- updateFlip(): Handle bound flips from BFRT\n\n**BFRT Data Structures:**\n- packIndex/packValue: Sparse pivot row representation\n- workData: Index-value pairs sorted by ratio\n- workGroup: Degenerate group boundaries",
+  "algorithms": [
+    {
+      "name": "Harris Ratio Test Tolerance:\n  Allow small dual infeasibility by using \u03b8_j + tol instead of \u03b8_j:",
+      "math": "\u03b8'_j = (d_j + sign(\u03b1_{rj}) \u00b7 tol) / \u03b1_{rj}\n  This prevents excessive bound flipping on near-degenerate pivots.",
+      "complexity": "O(nnz(row) \u00b7 log(nnz(row))) for heap-based group sort\n  O(nnz(row)) for ratio test scan\n  Dominated by sparse BTRAN cost in practice",
+      "ref": [
+        "Koberstein, A. (2008). \"The dual simplex method, techniques for a\n       fast and stable implementation\". PhD thesis, Universit\u00e4t Paderborn.",
+        "Harris, P.M.J. (1973). \"Pivot selection methods of the Devex LP code\".\n       Mathematical Programming Study 4:30-57."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "simplex/HEkkDual.h for dual simplex main loop",
+    "simplex/HEkkDualRHS.h for CHUZR (row selection)"
+  ]
 }

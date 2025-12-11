@@ -3,8 +3,18 @@
   "library": "HiGHS",
   "layer": "layer-4",
   "header": "highs/pdlp/cupdlp/cupdlp_scaling.h",
-  "brief": "Matrix scaling for PDHG numerical stability\n\nImplements equilibration scaling to improve PDHG convergence by\nbalancing row and column norms of the constraint matrix A.\n\n**Scaling Methods:**\n- Ruiz equilibration: Iterative row/column scaling to unit \u221e-norms\n- L2 scaling: Scale to unit 2-norms\n- PC (Pock-Chambolle) scaling: Scale based on degree\n\nScaling affects step size selection: \u03c4\u03c3\u2016A\u2016\u00b2 < 1 becomes easier\nto satisfy when \u2016A\u2016 is reduced through scaling.",
-  "algorithms": [],
+  "brief": "Matrix scaling for PDHG numerical stability\n\nImplements equilibration scaling to improve PDHG convergence by\nbalancing row and column norms of the constraint matrix A.",
+  "algorithms": [
+    {
+      "name": "Pock-Chambolle Degree Scaling:\n  Scale based on matrix sparsity pattern:",
+      "math": "\u03c4_j = 1/\u221a(\u03a3_i A_{ij}\u00b2), \u03c3_i = 1/\u221a(\u03a3_j A_{ij}\u00b2)\n        Makes step sizes \u03c4\u03c3\u2016A\u2016\u00b2 < 1 automatically satisfied.",
+      "complexity": "O(nnz) single pass.",
+      "ref": [
+        "Ruiz (2001). \"A scaling algorithm to equilibrate both rows and\n       columns norms in matrices\".",
+        "Pock & Chambolle (2011). \"Diagonal preconditioning for first order\n       primal-dual algorithms in convex optimization\".\n\n**Scaling Methods:**\n- Ruiz equilibration: Iterative row/column scaling to unit \u221e-norms\n- L2 scaling: Scale to unit 2-norms\n- PC (Pock-Chambolle) scaling: Scale based on degree"
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "cupdlp_step.h for step size computation using scaled matrix",

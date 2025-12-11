@@ -4,9 +4,19 @@
   "layer": "layer-4",
   "header": "highs/mip/HighsConflictPool.h",
   "brief": "Storage for learned conflict constraints\n\nManages nogood constraints derived from infeasible subproblems.\n\n**Conflict Storage:**\n- conflictEntries_[]: Domain changes forming each conflict\n- conflictRanges_[]: {start, end} pairs indexing entries\n- Each conflict: set of HighsDomainChange that together are infeasible\n\n**Aging System:**\n- ages_[]: Tracks how long since conflict was active\n- ageDistribution_[]: Count of conflicts at each age\n- performAging(): Increment ages, remove old conflicts\n- resetAge(): Reset age when conflict becomes active\n- agelim_: Maximum age before deletion\n\n**Memory Management:**\n- freeSpaces_: Ordered set of reusable entry ranges\n- deletedConflicts_: Reusable conflict indices\n- softlimit_: Target maximum conflicts\n\n**Key Methods:**\n- addConflictCut(): Store conflict from infeasibility analysis\n- addReconvergenceCut(): Store conflict with reconvergence point\n- removeConflict(): Delete conflict and free space\n\n**Propagation Integration:**\n- propagationDomains[]: Domains using conflicts for propagation\n- modification_[]: Version counter for conflict updates",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Conflict Aging:\n  Same aging scheme as cut pool:",
+      "math": "age_i += 1 when conflict not used, reset to 0 when active\n  Removes old conflicts to bound memory: O(softlimit_) conflicts.",
+      "complexity": "O(conflict_size) per propagation check",
+      "ref": [
+        "Achterberg, T. (2007). \"Conflict analysis in mixed integer\n       programming\". Discrete Optimization 4(1):4-20."
+      ]
+    }
+  ],
   "methods": [],
   "see": [
+    "mip/HighsDomain.h for ConflictSet::computeReconvergenceFrontier()",
     "mip/HighsDomain.h for conflict derivation",
     "mip/HighsSearch.h for conflict generation during search"
   ]

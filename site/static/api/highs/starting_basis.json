@@ -4,7 +4,14 @@
   "layer": "layer-4",
   "header": "highs/ipm/ipx/starting_basis.h",
   "brief": "Initial basis construction from interior point iterates\n\nConstructs a starting basis for crossover using interior point scaling\nfactors as column weights. Handles special cases:\n- Free variables (lb=-\u221e, ub=+\u221e): BASIC_FREE or NONBASIC_FIXED\n- Fixed slacks (lb=ub): BASIC_FREE or NONBASIC_FIXED\n- Fixed structural: NONBASIC_FIXED\n- Others: BASIC or NONBASIC\n\nLinear dependencies among free variables or equality constraints\nare resolved by fixing dependent variables at zero.",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Dependency Resolution:\n  Handle free variables and equality constraints:",
+      "math": "Free vars: columns may be linearly dependent \u2192 fix some at zero\n        Equality rows: may have dependent columns \u2192 fix slack\n  Dependent variables get BASIC_FREE or NONBASIC_FIXED status.\n  Maintains primal/dual residual invariance during fixing.\n  @note TODO: check for primal/dual infeasibility after resolution",
+      "complexity": "O(m \u00b7 nnz) for weighted crash procedure",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "guess_basis.h for basis construction from weights",

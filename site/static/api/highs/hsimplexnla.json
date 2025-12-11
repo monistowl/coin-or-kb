@@ -4,7 +4,16 @@
   "layer": "layer-4",
   "header": "highs/simplex/HSimplexNla.h",
   "brief": "Numerical linear algebra interface for simplex\n\nWraps HFactor with scaling, product-form updates, and iterate storage.\n\n**ProductFormUpdate:**\nStores basis updates as explicit \u03b7-vectors when HFactor update fails:\n- pivot_index/value[]: Pivot positions and values\n- start/index/value[]: Eta-file sparse storage\n- btran/ftran(): Apply product form to vectors\n- Allows continued solve after HFactor becomes unstable\n\n**SimplexIterate:**\nCheckpoint storage for basis state:\n- basis_: Basis column indices and status\n- invert_: Factorization representation\n- dual_edge_weight_[]: DSE weights for restoration\n\n**Scaling Operations:**\n- btranInScaledSpace/ftranInScaledSpace(): Solve in scaled coordinates\n- applyBasisMatrixColScale/RowScale(): Transform vectors\n- variableScaleFactor(): Individual column/row scales\n\n**Key Methods:**\n- invert(): Refactorize basis via HFactor\n- btran(): B^(-T) * rhs (row pricing)\n- ftran(): B^(-1) * rhs (column evaluation)\n- update(): Basis update with pivot\n- putInvert/getInvert(): Save/restore iterate state\n\n**Debug Support:**\n- debugCheckInvert(): Verify factorization accuracy\n- debugInvertResidualError(): Measure solution error",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Iterate Checkpointing:\n  Save/restore basis state for backtracking on singular basis:\n  - putInvert(): Snapshot current basis, factors, DSE weights\n  - getInvert(): Restore to checkpoint after failed pivot\n  Enables recovery from rank-deficient basis updates.",
+      "math": "Given scaling D_r (rows) and D_c (cols):\n        Scaled basis: B\u0303 = D_r \u00b7 B \u00b7 D_c\n        FTRAN: x = D_c \u00b7 B\u0303^{-1} \u00b7 D_r \u00b7 b\n        BTRAN: y = D_r \u00b7 B\u0303^{-T} \u00b7 D_c \u00b7 c\n  Scaling factors stored per-variable, applied on-the-fly.",
+      "complexity": "O(k \u00b7 nnz(\u03b7)) per solve, where k = update count\n  @note PFI is fallback when Forrest-Tomlin update becomes unstable",
+      "ref": [
+        "Dantzig, G.B. (1963). \"Linear Programming and Extensions\".\n       Princeton University Press, Chapter 7."
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "util/HFactor.h for LU factorization",

@@ -1,0 +1,22 @@
+{
+  "name": "savings",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "Applications/VRP/include/heurs/savings.h",
+  "brief": "Clarke-Wright Savings heuristic for VRP\n\nClassic construction heuristic for Vehicle Routing Problem.",
+  "algorithms": [
+    {
+      "name": "Clarke-Wright Savings:\n  Build VRP solution by merging routes based on savings:",
+      "math": "savings(i,j) = d(depot,i) + d(depot,j) - d(i,j)\n        Start with n routes (depot \u2192 customer \u2192 depot)\n        Sort customer pairs by savings (descending)\n        Merge routes i-depot and depot-j if:\n          - i is last on its route, j is first on its route\n          - Merged route satisfies capacity constraint\n        Repeat until no feasible merges remain",
+      "complexity": "O(n\u00b2 log n) for sorting + O(n\u00b2) for merges",
+      "ref": [
+        "Clarke, G. and Wright, J. (1964). \"Scheduling of vehicles\n       from a central depot to a number of delivery points\".\n       Operations Research 12(4):568-581."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "savings2.h, savings3.h for variants",
+    "heur_types.h for heur_prob structure"
+  ]
+}

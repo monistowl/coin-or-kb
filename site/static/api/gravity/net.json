@@ -3,8 +3,17 @@
   "library": "Gravity",
   "layer": "layer-4",
   "header": "include/gravity/Net.h",
-  "brief": "Graph/network data structure for power systems and network optimization\n\nRepresents graphs with nodes, arcs, and cycles for network-based models.\n\n**Net Class:**\n- nodes: Vector of Node pointers\n- arcs: All arcs (existing + potential)\n- _exist_arcs: Only existing arcs\n- conting_arcs: Contingency arcs (for N-1 analysis)\n\n**Indexing Structures:**\n- nodeID: Map from node name to Node*\n- arcID: Map from (src_name, dest_name) to Arc*\n- arcMap: Map from arc name to Arc*\n\n**Node Pairs (for SDP relaxations):**\n- _node_pairs: Bus pairs for standard formulation\n- _node_pairs_chord: Bus pairs in chordal completion\n\n**Cycle Basis (for Kirchhoff constraints):**\n- cycle_basis: Vector of Path* forming basis\n- horton_net: Subnetwork for Horton algorithm\n\n**Tree Decomposition:**\n- _bags: Cliques from chordal extension\n- Used for SDP rank-1 constraints\n\n**Graph Algorithms:**\n- clone(), clone_undirected(): Copy graphs\n- Cycle detection, shortest paths\n- Chordal completion",
-  "algorithms": [],
+  "brief": "Graph/network data structure for power systems and network optimization\n\nRepresents graphs with nodes, arcs, and cycles for network-based models.",
+  "algorithms": [
+    {
+      "name": "Chordal Extension (Tree Decomposition):\n  Add edges to make graph chordal for SDP relaxations:",
+      "math": "Perfect elimination ordering via maximum cardinality search\n        Fill-in edges form cliques (bags) in tree decomposition\n        Enables sparse SDP formulations with rank-1 constraints.",
+      "complexity": "O(V + E) for chordal check, O(V\u00b3) worst-case for extension\n\n**Net Class:**\n- nodes: Vector of Node pointers\n- arcs: All arcs (existing + potential)\n- _exist_arcs: Only existing arcs\n- conting_arcs: Contingency arcs (for N-1 analysis)\n\n**Node Pairs (for SDP relaxations):**\n- _node_pairs: Bus pairs for standard formulation\n- _node_pairs_chord: Bus pairs in chordal completion\n\n**Cycle Basis (for Kirchhoff constraints):**\n- cycle_basis: Vector of Path* forming basis\n- horton_net: Subnetwork for Horton algorithm",
+      "ref": [
+        "Horton (1987) \"A polynomial-time algorithm for minimum cycle basis\""
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "gravity/Node.h for node data",

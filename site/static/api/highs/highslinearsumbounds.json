@@ -3,8 +3,17 @@
   "library": "HiGHS",
   "layer": "layer-4",
   "header": "highs/util/HighsLinearSumBounds.h",
-  "brief": "Row activity bounds for bound tightening (FBBT)\n\nIncrementally maintains min/max activity bounds for linear constraints.\n\n**Activity Computation:**\nFor row sum = \u03a3(a_i * x_i):\n- sumLower: Minimum activity using a_i>0 with lb_i, a_i<0 with ub_i\n- sumUpper: Maximum activity using a_i>0 with ub_i, a_i<0 with lb_i\n- numInfSumLower/Upper: Count of infinite contributions\n\n**Original vs Implied Bounds:**\n- sumLowerOrig/sumUpperOrig: Using original variable bounds only\n- sumLower/sumUpper: Using tightest of original and implied bounds\n- implVarLower/implVarUpper: Implied bounds from other constraints\n- Source tracking: implVarLowerSource[] for circular dependency detection\n\n**Incremental Updates:**\n- add(): Add variable contribution to sum\n- remove(): Remove variable contribution from sum\n- updatedVarLower/Upper(): Update after bound tightening\n- updatedImplVarLower/Upper(): Update after implied bound discovery\n\n**Residual Computation:**\n- getResidualSumLower/Upper(): Activity excluding specific variable\n  - Used for FBBT: derive x_i bounds from row \u2264 rhs - residual\n  - Optional boundVar parameter for conditional bounds\n\n**Quad Precision:**\nUses HighsCDouble for activity sums to avoid numerical issues.",
-  "algorithms": [],
+  "brief": "Row activity bounds for bound tightening (FBBT)\n\nIncrementally maintains min/max activity bounds for linear constraints.",
+  "algorithms": [
+    {
+      "name": "Feasibility-Based Bound Tightening (FBBT):\n  Derive variable bounds from constraint feasibility:",
+      "math": "For constraint: L \u2264 \u03a3 a\u1d62x\u1d62 \u2264 U\n        Activity bounds: sumLower = \u03a3 min(a\u1d62l\u1d62, a\u1d62u\u1d62)\n                         sumUpper = \u03a3 max(a\u1d62l\u1d62, a\u1d62u\u1d62)\n        Residual for x\u2c7c: resLower = sumLower - contrib(x\u2c7c)\n        New bound: a\u2c7c > 0 \u2192 x\u2c7c \u2264 (U - resLower)/a\u2c7c\n                   a\u2c7c < 0 \u2192 x\u2c7c \u2265 (U - resLower)/a\u2c7c",
+      "complexity": "O(1) per bound update with incremental maintenance",
+      "ref": [
+        "Belotti et al. (2009) \"Branching and bounds tightening for MINLPs\"\n\n**Activity Computation:**\nFor row sum = \u03a3(a_i * x_i):\n- sumLower: Minimum activity using a_i>0 with lb_i, a_i<0 with ub_i\n- sumUpper: Maximum activity using a_i>0 with ub_i, a_i<0 with lb_i\n- numInfSumLower/Upper: Count of infinite contributions\n\n**Original vs Implied Bounds:**\n- sumLowerOrig/sumUpperOrig: Using original variable bounds only\n- sumLower/sumUpper: Using tightest of original and implied bounds\n- implVarLower/implVarUpper: Implied bounds from other constraints\n- Source tracking: implVarLowerSource[] for circular dependency detection\n\n**Incremental Updates:**\n- add(): Add variable contribution to sum\n- remove(): Remove variable contribution from sum\n- updatedVarLower/Upper(): Update after bound tightening\n- updatedImplVarLower/Upper(): Update after implied bound discovery\n\n**Residual Computation:**\n- getResidualSumLower/Upper(): Activity excluding specific variable\n  - Used for FBBT: derive x_i bounds from row \u2264 rhs - residual\n  - Optional boundVar parameter for conditional bounds\n\n**Quad Precision:**\nUses HighsCDouble for activity sums to avoid numerical issues."
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "presolve/HPresolve.h for presolve bound tightening",

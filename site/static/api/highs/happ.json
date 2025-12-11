@@ -4,7 +4,16 @@
   "layer": "layer-4",
   "header": "highs/simplex/HApp.h",
   "brief": "High-level simplex application interface\n\nEntry point for solving LPs via simplex method with automatic handling\nof scaling, unscaling, and solution refinement.\n\n**solveLpSimplex() Workflow:**\n1. Scale LP if beneficial (using Ruiz equilibration)\n2. Move LP to Ekk (simplex kernel)\n3. Setup basis (from HiGHS basis or logical start)\n4. Consider dualizing if rows >> cols\n5. Solve scaled LP, get scaled solution\n6. Unscale solution and check tolerances\n7. If needed, refine by re-solving unscaled LP with scaled NLA\n\n**Scaling Strategy:**\n- None: Solve original LP directly\n- Refine: Solve scaled, then refine unscaled\n- Direct: Ignore scaling, solve unscaled",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Solution Refinement:\n  If scaled solution violates unscaled tolerances:\n  1. Warm-start from scaled solution in unscaled space\n  2. Re-solve with tighter tolerances\n  3. May iterate if still infeasible\n  @note Refinement uses scaled factorization for stability",
+      "math": "Original: n variables, m constraints\n        Dual: m variables, n constraints\n  HiGHS auto-dualizes when m > 2n (heuristic threshold).",
+      "complexity": "O(nnz \u00b7 k) for k iterations (typically k \u2264 10)",
+      "ref": [
+        "Ruiz, D. (2001). \"A Scaling Algorithm to Equilibrate Both Rows\n       and Columns Norms in Matrices\". Technical Report RAL-TR-2001-034."
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "simplex/HEkk.h for simplex kernel",

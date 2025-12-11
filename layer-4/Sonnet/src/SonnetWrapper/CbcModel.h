@@ -7,6 +7,10 @@
  * C++/CLI wrapper exposing CBC MIP solver to .NET languages.
  * Wraps branch-and-bound with cut generation capabilities.
  *
+ * @algorithm Branch-and-Cut for MIP (via CBC wrapper)
+ * @math Solves min c'x s.t. Ax ≤ b, x ∈ {0,1}ⁿ × ℝᵐ via LP relaxation,
+ *       branching on fractional integer variables, and cutting planes
+ *       (Gomory, MIR, clique cuts) to tighten the relaxation.
  * @see CbcEventHandler.h, CbcCutGenerator.h, CbcStrategy.h
  */
 

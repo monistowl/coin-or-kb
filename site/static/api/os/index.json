@@ -69,8 +69,8 @@
     },
     {
       "name": "OSDecompSolver",
-      "brief": "",
-      "has_algorithm": false
+      "brief": "Column generation decomposition solver framework\n\nVirtual base class for Dantzig-Wolfe decomposition solvers.",
+      "has_algorithm": true
     },
     {
       "name": "OSDecompSolverFactory",

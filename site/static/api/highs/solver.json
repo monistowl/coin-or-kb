@@ -1,0 +1,24 @@
+{
+  "name": "Solver",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/hipo/ipm/Solver.h",
+  "brief": "HiPO interior point method solver for linear programming\n\nPrimal-dual interior point implementation with Mehrotra predictor-corrector\nand Gondzio multiple centrality corrections.",
+  "algorithms": [
+    {
+      "name": "Crossover to Basic Solution:\n  Convert interior solution to vertex via IPX:",
+      "math": "refineWithIpx(): Polish solution if not precise\n        runCrossover(): Push variables to bounds, identify basis\n  Required for warm-starting simplex or extracting basis.",
+      "complexity": "O(iterations \u00d7 factorization) where factorization is O(n^{1.5}\u00b7m)",
+      "ref": [
+        "Wright, S. (1997). \"Primal-Dual Interior-Point Methods\". SIAM.",
+        "Mehrotra, S. (1992). \"On the implementation of a primal-dual\n       interior point method\". SIAM J. Optimization 2(4):575-601.",
+        "Gondzio, J. (1996). \"Multiple centrality corrections in a\n       primal-dual method for linear programming\". Comp. Opt. Appl."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "Iterate.h for primal-dual iterate state",
+    "LinearSolver.h for Newton system solution"
+  ]
+}

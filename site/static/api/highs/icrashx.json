@@ -4,7 +4,16 @@
   "layer": "layer-4",
   "header": "highs/presolve/ICrashX.h",
   "brief": "Crossover from interior point to basic solution\n\nProvides simplex crossover after IPM solve to obtain vertex solution.\n\n**callCrossover():**\nConverts interior point solution to basic feasible solution:\n- Input: IPM solution (may be interior to polytope)\n- Output: Basis + vertex solution for post-processing\n\n**Why Crossover:**\n- IPM returns interior solutions, not vertices\n- Basic solutions needed for warm-starting, sensitivity analysis\n- Crossover pushes solution to vertex via simplex pivots\n\n**Process:**\n1. Identify near-bound variables\n2. Construct initial basis from binding constraints\n3. Run simplex cleanup to reach vertex",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "IPM-to-Simplex Crossover:\n  Convert interior point solution to basic feasible solution:",
+      "math": "Given interior x*: identify active set A(x*) = {i : |g_i(x*)| < \u03b5}\n        Construct basis B from nearly-active constraints\n        Simplex pivots: move to vertex while maintaining feasibility\n  Three phases: (1) identify near-bound vars, (2) build initial basis,\n  (3) run primal/dual simplex to optimal vertex.",
+      "complexity": "O(m\u00b2) typical, O(m\u00b3) worst case for crossover",
+      "ref": [
+        "Andersen, E. and Ye, Y. (1999). \"A computational study of the\n       homogeneous algorithm for large-scale convex optimization\".\n       Computational Optimization and Applications 10:243-269."
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "ipm/IpxWrapper.h for IPM solver calling crossover",

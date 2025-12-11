@@ -4,7 +4,18 @@
   "layer": "layer-4",
   "header": "highs/presolve/HighsSymmetry.h",
   "brief": "Symmetry detection and orbital fixing for MIP",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Stabilizer Orbit Computation:\n  Compute orbits under subgroup fixing certain variables:",
+      "math": "Stab(S) = {\u03c0 : \u03c0(s) = s for all s \u2208 S}\n        Orbits of Stab(S) partition unfixed variables\n  Used for dynamic orbital fixing during branch-and-bound.",
+      "complexity": "O(|generators| \u00b7 |unfixed|) per computation",
+      "ref": [
+        "McKay, B. and Piperno, A. (2014). \"Practical graph isomorphism II\".\n       Journal of Symbolic Computation 60:94-112.",
+        "Margot, F. (2003). \"Exploiting orbits in symmetric ILP\".\n       Mathematical Programming 98:3-21.",
+        "Kaibel, V. and Pfetsch, M. (2008). \"Packing and partitioning\n       orbitopes\". Mathematical Programming 114:1-36."
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "mip/HighsDomain.h for orbital fixing application",

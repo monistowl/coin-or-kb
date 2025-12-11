@@ -3,8 +3,18 @@
   "library": "HiGHS",
   "layer": "layer-4",
   "header": "highs/lp_data/HighsIis.h",
-  "brief": "Irreducible Infeasible Set (IIS) computation for infeasible LPs\n\nIdentifies minimal subset of constraints that cannot be satisfied.\n\n**IIS Definition:**\n- Minimal infeasible subsystem: removing any constraint makes it feasible\n- Helps diagnose why an LP is infeasible\n- Also identifies which variable bounds participate\n\n**IisBoundStatus:**\n- kDropped: Bound removed from IIS\n- kNull: Not yet classified\n- kFree: Variable is free (not in IIS)\n- kLower/kUpper/kBoxed: Which bound(s) are in IIS\n\n**Algorithm:**\n- compute(): Main IIS computation using simplex iterations\n- trivial(): Check for obviously infeasible (single row/col)\n- rowValueBounds(): Check row activity vs bounds\n\n**Strategy:**\n- kIisStrategyMin: Minimize IIS size (more iterations)\n- Iteratively removes constraints until minimal set remains\n\n**Output:**\n- col_index_/row_index_: Variables/constraints in IIS\n- col_bound_/row_bound_: Which bounds contribute\n- info_: Simplex stats per iteration",
-  "algorithms": [],
+  "brief": "Irreducible Infeasible Set (IIS) computation for infeasible LPs\n\nIdentifies minimal subset of constraints that cannot be satisfied.",
+  "algorithms": [
+    {
+      "name": "Elastic Filter Enhancement:\n  Speed up IIS identification using elastic variables:",
+      "math": "Add elastic variables e_i \u2265 0 to each constraint: a_i'x \u2264 b_i + e_i\n        Minimize \u03a3 e_i. Constraints with e_i > 0 in optimal are candidates.\n        Reduces number of LP solves needed for deletion filter.",
+      "complexity": "O(k\u00b7LP) where k \u2264 m is IIS size. Each check is one LP solve.",
+      "ref": [
+        "Gleeson & Ryan (1990). \"Identifying minimally infeasible subsystems\n       of inequalities\". ORSA Journal on Computing.",
+        "Chinneck & Dravnieks (1991). \"Locating minimal infeasible constraint\n       sets in linear programs\".\n\n**IIS Definition:**\n- Minimal infeasible subsystem: removing any constraint makes it feasible\n- Helps diagnose why an LP is infeasible\n- Also identifies which variable bounds participate\n\n**Output:**\n- col_index_/row_index_: Variables/constraints in IIS\n- col_bound_/row_bound_: Which bounds contribute\n- info_: Simplex stats per iteration"
+      ]
+    }
+  ],
   "methods": [],
   "see": [
     "Highs.h for getIis() API"

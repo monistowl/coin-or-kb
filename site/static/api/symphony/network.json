@@ -1,0 +1,20 @@
+{
+  "name": "network",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "Applications/VRP/include/network.h",
+  "brief": "Support graph representation for VRP cut generation\n\nAdjacency list graph representation constructed from LP solution.\n\n**Network structure:**\n- vertex: Node with adjacency list, demand, component number\n- edge: Edge with endpoints, weight (LP value), cost\n- elist: Linked list entry in adjacency list\n- network: Complete graph with vertex/edge arrays",
+  "algorithms": [
+    {
+      "name": "Graph Contraction:\n  Support shrinking operations for cut separation:",
+      "math": "Vertex has orig_node_list for contracted \"super nodes\"\n        Edge has can_be_doubled flag for 1-customer routes\n  reduce_graph() in vrp_cg.h performs actual shrinking.",
+      "complexity": "O(|V| + |E|) via DFS",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "vrp_cg.h for cut separation using network",
+    "small_graph.h for graph preprocessing"
+  ]
+}

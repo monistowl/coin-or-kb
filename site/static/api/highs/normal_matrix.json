@@ -4,7 +4,14 @@
   "layer": "layer-4",
   "header": "highs/ipm/ipx/normal_matrix.h",
   "brief": "Normal equations matrix operator A\u00b7W\u00b7A'\n\nLinearOperator implementation for the normal equations matrix\nused in IPM. Computes y = (A\u00b7W\u00b7A')\u00b7x efficiently using sparse\nmatrix-vector products.\n\nThe weight matrix W is diagonal and set via Prepare(). If W is NULL,\nuses W = [I; 0] (identity for structural, zero for slack columns).",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Normal Equations Matrix-Vector Product:\n  Compute y = (A\u00b7W\u00b7A')\u00b7x via two-pass sparse matvec:",
+      "math": "Pass 1: t = A'\u00b7x     (sparse A' times dense x)\n        Scale:  t = W\u00b7t      (diagonal scaling)\n        Pass 2: y = A\u00b7t      (sparse A times sparse/dense t)\n  Avoids explicit formation of dense m\u00d7m matrix A\u00b7W\u00b7A'.",
+      "complexity": "O(nnz(A)) per matrix-vector product\n  @note For IPM, W = diag(x/z) where x, z are primal/dual slacks",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "linear_operator.h for the interface",

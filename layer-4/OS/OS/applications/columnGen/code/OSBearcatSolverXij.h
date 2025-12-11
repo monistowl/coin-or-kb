@@ -1,13 +1,23 @@
 /* $Id: OSBearcatSolverXij.h 3038 2009-11-07 11:43:44Z kmartin $ */
-/** @file OSBearcatSolverXij.h
- * 
+/**
+ * @file OSBearcatSolverXij.h
+ * @brief School bus routing via column generation (Bearcat formulation)
+ *
+ * Implements branch-and-price for multi-hub school bus routing.
+ *
+ * @algorithm Branch-and-Price for School Bus Routing
+ * @math Dantzig-Wolfe decomposition with hub-indexed pricing subproblems.
+ *       Master: select routes (columns) covering students with min cost.
+ *       Pricing: shortest path with capacity constraints for each hub.
+ *       Multi-commodity flow cuts strengthen the formulation.
+ * @ref Martin (2001). "Large-Scale Linear and Integer Optimization"
+ *
  * \remarks
  * Copyright (C) 2005-2010, Horand Gassmann, Jun Ma, Kipp Martin,
  * Northwestern University, and the University of Chicago.
  * All Rights Reserved.
- * This software is licensed under the Eclipse Public License. 
+ * This software is licensed under the Eclipse Public License.
  * Please see the accompanying LICENSE file in root directory for terms.
- * 
  */
 
 #ifndef OSBEARCATSOLVERXIJ_H

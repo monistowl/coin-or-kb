@@ -1,0 +1,22 @@
+{
+  "name": "spp_cg",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "Applications/SPP+CUTS/include/spp_cg.h",
+  "brief": "Cut generator for Set Partitioning Problem\n\nImplements specialized cut separation for SPP using conflict graph.\n\n**Fractional graph (frac_graph):**\n- Nodes = variables with fractional LP values\n- Edges connect conflicting (non-orthogonal) columns\n- Used as intersection graph for cut separation\n\n**Level graph (level_graph):**\n- BFS enumeration from root node\n- Used for odd hole detection",
+  "algorithms": [
+    {
+      "name": "Odd Antiholes:\n  Cuts from complement graph odd cycles:",
+      "math": "Odd antihole in G = odd hole in complement G'\n        construct_complement_graph(): Build G'\n        find_violated_odd_antiholes(): Search in complement\n        lift_nonviolated_odd_antihole(): Strengthen cuts",
+      "complexity": "Same as odd holes on complement graph",
+      "ref": [
+        "Nemhauser, G. and Sigismondi, G. (1992). \"A strong cutting\n       plane/branch-and-bound algorithm for node packing\". JORS."
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "spp_cg_clique.h for clique cuts",
+    "sym_cg.h for cut generator framework"
+  ]
+}
