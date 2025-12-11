@@ -21,6 +21,13 @@
  * - Average with existing interior point
  * - Improves cut quality as algorithm progresses
  *
+ * @algorithm Dynamic Interior Point Update for ESH
+ * @math ESH requires interior point x° in convex feasible region.
+ *       As algorithm progresses, update x° for better cuts:
+ *       - New primal solution x̄ feasible → candidate for x°
+ *       - Convex combination: x°_new = α·x°_old + (1-α)·x̄
+ *       Better interior point → tighter hyperplane cuts.
+ *       Particularly valuable when initial x° was near boundary.
  * @see TaskFindInteriorPoint.h for initial computation
  * @see TaskSelectHyperplanePointsESH.h for usage
  */

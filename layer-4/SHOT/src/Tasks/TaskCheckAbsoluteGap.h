@@ -22,6 +22,13 @@
  * - Dual bound: Relaxation optimal value
  * - Gap closed = provably optimal
  *
+ * @algorithm Absolute Optimality Gap Termination Criterion
+ * @math For minimization, let z̄ = primal bound, z̲ = dual bound:
+ *       - Absolute gap: |z̄ - z̲|
+ *       - Terminate when |z̄ - z̲| ≤ ε_abs
+ *       - Proves solution within ε_abs of optimal
+ *       Dual bound from MIP relaxation, primal from feasible solutions.
+ *       Complements relative gap check for problems near zero optimal.
  * @see TaskCheckRelativeGap.h for relative gap check
  * @see Results.h for bound storage
  */

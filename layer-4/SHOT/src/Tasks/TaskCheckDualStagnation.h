@@ -21,6 +21,13 @@
  * - May trigger stronger cuts or reformulation
  * - Indicates outer approximation isn't tightening
  *
+ * @algorithm Dual Bound Stagnation Detection
+ * @math Monitor dual bound improvement over iterations:
+ *       - Stagnation: z̲(k) ≈ z̲(k-N) for N consecutive iterations
+ *       - Indicates hyperplanes not tightening approximation
+ *       - Recovery strategies: add stronger cuts, reformulate,
+ *         solve fixed-integer NLP, or terminate early
+ *       Common in convex MINLP near optimality.
  * @see TaskCheckPrimalStagnation.h for primal stagnation
  * @see DualSolver.h for dual bound computation
  */

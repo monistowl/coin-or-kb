@@ -23,6 +23,14 @@
  * - Check feasibility of relaxed problem
  * - Generate starting points for primal heuristics
  *
+ * @algorithm Continuous Relaxation NLP via Ipopt
+ * @math Relax integrality constraints to solve continuous NLP:
+ *       min f(x) s.t. g(x) ≤ 0, x ∈ [l,u] (ignoring x ∈ ℤ)
+ *       Key uses in ESH:
+ *       1. Find interior point x° in relaxed feasible region
+ *       2. Check relaxed problem feasibility before MINLP solve
+ *       3. Generate starting points for primal heuristics
+ *       Solved by Ipopt primal-dual interior point method.
  * @see NLPSolverIpoptBase.h for fixed-integer variant
  */
 #pragma once

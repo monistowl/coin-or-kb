@@ -21,6 +21,12 @@
  * - May enable/disable integer constraints
  * - Affects DualSolver solve behavior
  *
+ * @algorithm LP/MIP Relaxation Strategy Execution
+ * @math In multi-tree ESH, alternating LP and MIP phases:
+ *       - LP phase: fast iteration, many hyperplanes from continuous solutions
+ *       - MIP phase: slower, but integer solutions trigger NLP primal heuristics
+ *       Strategy decides based on iteration count, gap reduction, or time.
+ *       IRelaxationStrategy.executeStrategy() toggles integrality constraints.
  * @see IRelaxationStrategy.h for strategy interface
  * @see RelaxationStrategyStandard.h for default strategy
  */

@@ -38,6 +38,14 @@
  * - getResultsTrace(): GAMS trace format
  * - getResultsSol(): AMPL .sol format
  *
+ * @algorithm Primal-Dual Bound Tracking for MINLP Optimality
+ * @math Maintains bounds throughout algorithm:
+ *       - Primal bound z̄: best feasible objective (from NLP or feasible MIP)
+ *       - Dual bound z̲: relaxation optimal (from MIP outer approximation)
+ *       - Global gap: |z̄ - z̲|, proves optimality when small
+ *       - Relative gap: |z̄ - z̲| / max(|z̄|, ε) for termination criterion
+ *       primalSolutionSourceStatistics tracks where solutions came from
+ *       (NLP, rootsearch, solution pool, etc.) for algorithm analysis.
  * @see Solver.h for getPrimalSolution(), getResultsOSrL()
  */
 #pragma once
