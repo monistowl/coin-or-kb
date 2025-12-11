@@ -33,6 +33,21 @@
  *
  * Converts conditional (if-then) constraints to linear form.
  *
+ * @algorithm Implication Constraint Linearization:
+ *   Transform "p ⟹ q" (if p then q) to linear constraints:
+ *   @math Equivalent to "¬p ∨ q" (not-p or q).
+ *         If p is a linear inequality (g(x) ≤ 0), represent as binary:
+ *         b = 1 ⟺ g(x) ≤ 0 (using Big-M)
+ *         Then: b = 1 ⟹ enforce q
+ *   @complexity Depends on p and q structure. Binary + Big-M constraints.
+ *
+ * @algorithm Conditional Value Assignment:
+ *   Model "v = (condition ? a : b)":
+ *   @math Introduce binary b for condition truth:
+ *         v ≤ a + M·(1-b)  and  v ≥ a - M·(1-b)  (when b=1, v=a)
+ *         v ≤ b + M·b      and  v ≥ b - M·b      (when b=0, v=b)
+ *   @ref Also known as ternary operator or if-then-else linearization.
+ *
  * **LinearConditional Class:**
  * - Extends LinearLogCon for conditional handling
  * - linearizeConditionalCond(): Main linearization entry

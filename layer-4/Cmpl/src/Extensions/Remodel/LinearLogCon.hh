@@ -33,13 +33,40 @@
  *
  * Converts logical AND/OR connected constraints to linear form.
  *
+ * @algorithm Big-M Method for Indicator Constraints:
+ *   Express "b = 1 ⟹ g(x) ≤ 0" using large constant M:
+ *   @math g(x) ≤ M·(1 - b)
+ *         When b = 1: g(x) ≤ 0 (active constraint)
+ *         When b = 0: g(x) ≤ M (inactive, assuming M large enough)
+ *   @complexity O(1) per indicator. Weakness: requires valid M bound.
+ *   @ref Nemhauser & Wolsey (1988). "Integer and Combinatorial Optimization".
+ *
+ * @algorithm Logical AND Linearization:
+ *   c₁ AND c₂ AND ... AND cₙ equivalent to all constraints active:
+ *   @math Simply include all constraints c₁, c₂, ..., cₙ in model.
+ *         No additional binary variables needed.
+ *   @complexity O(n) constraints.
+ *
+ * @algorithm Logical OR Linearization:
+ *   c₁ OR c₂ OR ... OR cₙ requires at least one constraint satisfied:
+ *   @math Introduce binary yᵢ for each cᵢ:
+ *         cᵢ + Mᵢ·(1 - yᵢ) ≥ 0  for each i
+ *         Σᵢ yᵢ ≥ 1  (at least one active)
+ *   @complexity O(n) binaries and O(n+1) constraints.
+ *
+ * @algorithm Condition-to-Binary Mapping:
+ *   Express "g(x) ≤ 0" as binary b via delta variables:
+ *   @math b = 1 ⟺ g(x) ≤ 0 requires both directions:
+ *         g(x) ≤ M·(1 - b)     (b=1 ⟹ g≤0)
+ *         g(x) ≥ ε - M·b       (b=0 ⟹ g>0)
+ *         where ε is tolerance for strict inequality.
+ *   @ref Used for indicator constraint preprocessing.
+ *
  * **LinearLogCon Class:**
  * - linearizeAnd()/linearizeOr(): Logical operator linearization
  * - linearizeNeg(): Negated comparison linearization
  * - linearizeCondToBin(): Express condition via binary variable
  * - _linOrCache: Cache for OR linearizations
- *
- * Uses Big-M method for indicator constraints.
  *
  * @see RemodelBase.hh for base class
  * @see LinearConditional.hh for conditional constraints

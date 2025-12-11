@@ -33,6 +33,27 @@
  *
  * Special Ordered Sets definition and optional linearization.
  *
+ * @algorithm SOS1 Constraints (Special Ordered Set Type 1):
+ *   At most one variable in the set can be nonzero:
+ *   @math Given variables x₁, x₂, ..., xₙ:
+ *         At most one xᵢ ≠ 0.
+ *         Linearization: introduce binary bᵢ for each xᵢ
+ *         xᵢ ≤ Uᵢ·bᵢ, Σᵢ bᵢ ≤ 1
+ *   @complexity O(n) binary variables and O(n+1) constraints.
+ *   @ref Beale & Tomlin (1970). "Special facilities in a general
+ *        mathematical programming system for non-convex problems".
+ *
+ * @algorithm SOS2 Constraints (Special Ordered Set Type 2):
+ *   At most two consecutive variables can be nonzero:
+ *   @math Given ordered variables x₁, x₂, ..., xₙ:
+ *         If xᵢ ≠ 0 and xⱼ ≠ 0 then |i - j| ≤ 1.
+ *         Key application: piecewise-linear functions via convex combination.
+ *         For f(z) = Σᵢ λᵢ·f(aᵢ) with z = Σᵢ λᵢ·aᵢ, Σᵢ λᵢ = 1,
+ *         SOS2 on λ ensures interpolation between adjacent breakpoints.
+ *   @complexity O(n) binary variables for linearization.
+ *   @ref Dantzig (1960). "On the significance of solving linear programming
+ *        problems with some integer variables".
+ *
  * **LinearSos Class:**
  * - _storeSos: Storage for SOS definitions
  * - remodelSOS(): Linearize SOS constraint

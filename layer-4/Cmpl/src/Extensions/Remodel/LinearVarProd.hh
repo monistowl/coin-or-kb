@@ -33,6 +33,33 @@
  *
  * Converts products of optimization variables to linear form.
  *
+ * @algorithm Glover Linearization (Binary × Continuous):
+ *   Replace w = b·x where b ∈ {0,1} and x ∈ [L, U]:
+ *   @math Add auxiliary w with constraints:
+ *         w ≤ U·b              (w = 0 when b = 0)
+ *         w ≥ L·b              (w = 0 when b = 0)
+ *         w ≤ x - L·(1-b)      (w = x when b = 1)
+ *         w ≥ x - U·(1-b)      (w = x when b = 1)
+ *   @complexity O(1) per product: 4 linear constraints.
+ *   @ref Glover (1975). "Improved Linear Integer Programming Formulations
+ *        of Nonlinear Integer Problems". Management Science.
+ *
+ * @algorithm Binary Decomposition (Integer Variables):
+ *   Replace integer z ∈ [0, 2^k-1] with binary representation:
+ *   @math z = Σᵢ 2ⁱ · bᵢ where bᵢ ∈ {0,1}
+ *         Then z·x = Σᵢ 2ⁱ · (bᵢ · x), each linearized via Glover.
+ *   @complexity O(log(U-L)) binary variables per integer.
+ *   @ref Uses _intBinCache to avoid recomputing decomposition.
+ *
+ * @algorithm McCormick Envelopes (Real × Real):
+ *   Convex relaxation of w = x·y where x ∈ [L_x, U_x], y ∈ [L_y, U_y]:
+ *   @math w ≥ L_x·y + x·L_y - L_x·L_y    (lower envelope 1)
+ *         w ≥ U_x·y + x·U_y - U_x·U_y    (lower envelope 2)
+ *         w ≤ U_x·y + x·L_y - U_x·L_y    (upper envelope 1)
+ *         w ≤ L_x·y + x·U_y - L_x·U_y    (upper envelope 2)
+ *   @ref McCormick (1976). "Computability of global solutions to factorable
+ *        nonconvex programs: Part I". Mathematical Programming.
+ *
  * **LinearVarProd Class:**
  * - _prodLinearLvl: Linearization level (bin/int/real)
  * - linearizeProdBin(): Binary-other variable product
