@@ -5,8 +5,59 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/**@file util/HFactor.h
+/**
+ * @file util/HFactor.h
  * @brief Basis matrix factorization, update and solves for HiGHS
+ *
+ * LU factorization with Markowitz pivoting for simplex basis matrices,
+ * supporting FTRAN, BTRAN, and various update methods.
+ *
+ * @algorithm LU Factorization with Markowitz Pivoting:
+ *   Factor basis B into PBQ = LU with fill-reducing pivot selection:
+ *   @math build(): Factorize basis matrix B
+ *         Markowitz criterion: Choose pivot minimizing (r_i - 1)(c_j - 1)
+ *           where r_i = row count, c_j = column count
+ *         col_link/row_link: Doubly-linked lists by count for O(1) access
+ *         Threshold pivoting: |a_ij| ≥ pivot_threshold × max_col
+ *   buildKernel() performs elimination on active submatrix.
+ *   @complexity O(nnz²/n) average with good pivot selection
+ *   @ref Markowitz, H. (1957). "The elimination form of the inverse and
+ *        its application to linear programming". Management Science.
+ *
+ * @algorithm FTRAN (Forward Transformation):
+ *   Solve Bx = b via LU factors:
+ *   @math ftranCall(): x = U⁻¹ L⁻¹ P b
+ *         ftranL(): Forward solve with L (sparse or hyper-sparse)
+ *         ftranU(): Backward solve with U
+ *   Exploits sparsity with expected_density parameter.
+ *   @complexity O(nnz_L + nnz_U) for sparse, O(m²) dense
+ *
+ * @algorithm BTRAN (Backward Transformation):
+ *   Solve B'x = b via LU factors:
+ *   @math btranCall(): x = P' L⁻' U⁻' b
+ *         btranU(): Forward solve with U'
+ *         btranL(): Backward solve with L'
+ *   Used for computing simplex multipliers π = c_B' B⁻¹.
+ *   @complexity O(nnz_L + nnz_U) for sparse, O(m²) dense
+ *
+ * @algorithm Forrest-Tomlin Update (FT):
+ *   Rank-1 update B' = B + (a_q - Be_p)e_p' via eta matrices:
+ *   @math updateFT(): Add eta vector to product form
+ *         pf_start/pf_index/pf_value: Eta file storage
+ *         Periodic refactorization when fill-in excessive
+ *   ftranFT/btranFT apply eta transformations.
+ *   @complexity O(nnz_eta) per update, O(m × updates) accumulated
+ *   @ref Forrest, J. and Tomlin, J. (1972). "Updated triangular factors
+ *        of the basis to maintain sparsity". Math Programming 2(1).
+ *
+ * @algorithm Alternative Update Methods:
+ *   @math updatePF(): Product form of inverse (simpler, more fill)
+ *         updateMPF(): Modified PF with better numerical stability
+ *         updateAPF(): Alternative PF variant
+ *   kUpdateMethodFt selects Forrest-Tomlin by default.
+ *
+ * @see HSimplexNla.h for simplex linear algebra interface
+ * @see HVector.h for sparse vector operations
  */
 #ifndef HFACTOR_H_
 #define HFACTOR_H_

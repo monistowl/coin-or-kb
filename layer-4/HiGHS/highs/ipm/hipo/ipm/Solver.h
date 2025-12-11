@@ -1,3 +1,55 @@
+/**
+ * @file Solver.h
+ * @brief HiPO interior point method solver for linear programming
+ *
+ * Primal-dual interior point implementation with Mehrotra predictor-corrector
+ * and Gondzio multiple centrality corrections.
+ *
+ * @algorithm Primal-Dual Interior Point Method:
+ *   Solve LP by following central path to optimality:
+ *   @math min c'x s.t. Ax = b, x ≥ 0 (primal)
+ *         max b'y s.t. A'y + s = c, s ≥ 0 (dual)
+ *         KKT conditions: Ax = b, A'y + s = c, XS·e = μ·e
+ *   runIpm() iterates: solve Newton system, compute stepsize, update.
+ *   @complexity O(iterations × factorization) where factorization is O(n^{1.5}·m)
+ *   @ref Wright, S. (1997). "Primal-Dual Interior-Point Methods". SIAM.
+ *
+ * @algorithm Mehrotra Predictor-Corrector:
+ *   Two-phase Newton step for faster convergence:
+ *   @math Predictor: Solve with σ = 0 (affine scaling direction)
+ *           Compute μ_aff from trial step
+ *         Corrector: σ = (μ_aff/μ)³, add centering and second-order terms
+ *   predictor() and correctors() implement this scheme.
+ *   stepsToBoundary() computes maximum feasible step lengths.
+ *   @ref Mehrotra, S. (1992). "On the implementation of a primal-dual
+ *        interior point method". SIAM J. Optimization 2(4):575-601.
+ *
+ * @algorithm Multiple Centrality Corrections (Gondzio):
+ *   Iteratively improve direction with additional correctors:
+ *   @math For each corrector k:
+ *           Compute target complementarity range [μ_L, μ_U]
+ *           Add correction for products outside range
+ *           Accept if stepsizes improve
+ *   centralityCorrectors() with maxCorrectors() heuristic.
+ *   @ref Gondzio, J. (1996). "Multiple centrality corrections in a
+ *        primal-dual method for linear programming". Comp. Opt. Appl.
+ *
+ * @algorithm Starting Point (Mehrotra):
+ *   Compute initial feasible interior point:
+ *   @math startingPoint(): Solve two A·A' systems
+ *         x⁰ = A'(AA')⁻¹b, shift to ensure x⁰ > 0
+ *         s⁰ = c - A'y⁰, shift to ensure s⁰ > 0
+ *   Good starting point reduces total iterations.
+ *
+ * @algorithm Crossover to Basic Solution:
+ *   Convert interior solution to vertex via IPX:
+ *   @math refineWithIpx(): Polish solution if not precise
+ *         runCrossover(): Push variables to bounds, identify basis
+ *   Required for warm-starting simplex or extracting basis.
+ *
+ * @see Iterate.h for primal-dual iterate state
+ * @see LinearSolver.h for Newton system solution
+ */
 #ifndef HIPO_SOLVER_H
 #define HIPO_SOLVER_H
 

@@ -1,3 +1,43 @@
+/**
+ * @file Analyse.h
+ * @brief Symbolic analysis phase for sparse Cholesky factorization
+ *
+ * Computes fill-reducing ordering and symbolic factorization structure
+ * before numerical factorization in HiGHS interior point solver.
+ *
+ * @algorithm Symbolic Cholesky Analysis:
+ *   Compute non-zero structure of L before numerical factorization:
+ *   @math 1. getPermutation(): Fill-reducing ordering via Metis
+ *         2. eTree(): Compute elimination tree parent[j] for each column
+ *         3. postorder(): Topological sort of elimination tree
+ *         4. colCount(): Count non-zeros per column of L
+ *         5. fundamentalSupernodes(): Identify dense column blocks
+ *   Elimination tree enables efficient symbolic and numeric phases.
+ *   @complexity O(nnz) for tree, O(nnz·α(n)) for column counts
+ *   @ref Liu, J. (1990). "The role of elimination trees in sparse
+ *        factorization". SIAM J. Matrix Anal. Appl. 11(1):134-172.
+ *
+ * @algorithm Supernodal Factorization Structure:
+ *   Group columns into supernodes for BLAS-3 efficiency:
+ *   @math fundamentalSupernodes(): Columns j,j+1 in same supernode if:
+ *           - parent[j] = j+1 in elimination tree
+ *           - L[:,j] and L[:,j+1] have same sparsity below diagonal
+ *         relaxSupernodes(): Merge small supernodes accepting fill-in
+ *         snPattern(): Compute row indices for each supernode
+ *   Dense supernode columns enable efficient matrix-matrix operations.
+ *   @complexity O(nnz_L) for supernode identification
+ *   @ref Ng, E. and Peyton, B. (1993). "Block sparse Cholesky algorithms
+ *        on advanced uniprocessor computers". SIAM SISC 14(5):1034-1056.
+ *
+ * @algorithm Relative Index Computation:
+ *   Map between supernode and global indices:
+ *   @math relativeIndCols(): Map original columns to L positions
+ *         relativeIndClique(): Map update positions in Schur complement
+ *   Enables O(1) lookup during numeric factorization updates.
+ *
+ * @see Symbolic.h for output symbolic factorization structure
+ * @see Factorise.h for numerical factorization using this analysis
+ */
 #ifndef FACTORHIGHS_ANALYSE_H
 #define FACTORHIGHS_ANALYSE_H
 
