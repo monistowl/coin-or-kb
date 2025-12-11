@@ -12,6 +12,25 @@
  * Sparse row-wise matrix supporting efficient row add/remove with
  * separate iteration over positive and negative column entries.
  *
+ * @algorithm Sign-Separated Column Lists:
+ *   Maintain separate linked lists for positive/negative entries:
+ *   @math For column j:
+ *         AheadPos_[j] → positive entries (a_ij > 0) in column j
+ *         AheadNeg_[j] → negative entries (a_ij < 0) in column j
+ *   forEachPositiveColumnEntry/forEachNegativeColumnEntry iterate.
+ *   Enables O(1) sign-specific iteration for bound propagation:
+ *     - Positive coef + lower bound change → constraint tightens
+ *     - Negative coef + lower bound change → constraint loosens
+ *   @complexity O(1) per nonzero for sign-aware iteration
+ *
+ * @algorithm Dynamic Row Storage with Freelist:
+ *   Reuse deleted storage via ordered freelist:
+ *   @math freespaces_: Set of (start, length) free blocks
+ *         addRow(): First-fit allocation from freespaces_
+ *         removeRow(): Add range to freespaces_, merge adjacent
+ *         deletedrows_: Row indices available for reuse
+ *   Avoids fragmentation; amortized O(log k) for k free blocks.
+ *
  * **Row Storage:**
  * - ARrange_[row]: (start, end) range in ARindex_/ARvalue_
  * - ARindex_[]/ARvalue_[]: Column indices and values

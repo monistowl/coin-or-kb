@@ -12,6 +12,15 @@
  * Transforms LP rows into single-row relaxations suitable for cut generation
  * by substituting bounds and handling complementation.
  *
+ * @algorithm Bound Substitution for MIR Cuts:
+ *   Transform row to make all variables non-negative:
+ *   @math For variable x with bounds l ≤ x ≤ u:
+ *         Complementation: x' = x - l (if using lower bound)
+ *                          x' = u - x (if using upper bound)
+ *         Variable bound: x ≥ a·y + b substituted directly
+ *   transform() selects bound minimizing |x* - bound| at LP solution.
+ *   @complexity O(nnz_row) per transformation
+ *
  * **Bound Substitution Types (BoundType enum):**
  * - kSimpleLb/kSimpleUb: Direct variable bounds (x ≥ lb, x ≤ ub)
  * - kVariableLb/kVariableUb: VLB/VUB from implications (x ≥ a*y + b)

@@ -11,6 +11,14 @@
  *
  * Combines LP rows with weights to create mixed-integer Gomory source rows.
  *
+ * @algorithm Row Aggregation for Gomory Cuts:
+ *   Combine LP rows to create stronger cut source rows:
+ *   @math Given rows: Σ_j a_ij·x_j {≤,=,≥} b_i
+ *         Aggregation: Σ_i λ_i·(Σ_j a_ij·x_j) = Σ_i λ_i·b_i
+ *         Result: Σ_j (Σ_i λ_i·a_ij)·x_j = Σ_i λ_i·b_i
+ *   addRow() accumulates weighted rows; λ can eliminate non-integers.
+ *   @complexity O(nnz) per row addition via sparse vector sum
+ *
  * **Core Operations:**
  * - addRow(): Add weighted LP row to current aggregation
  * - getCurrentAggregation(): Extract combined row as sparse vector

@@ -11,6 +11,23 @@
  *
  * Analyzes objective structure to enable specialized bound propagation.
  *
+ * @algorithm Objective Integrality Detection:
+ *   Determine if objective is integer for integer solutions:
+ *   @math Find objIntScale s.t. s·c_j ∈ Z for all integer x_j
+ *         If all integer vars have scaled integer coefficients:
+ *           z* must be multiple of 1/objIntScale
+ *         Cutoff strengthening: ⌊objIntScale·UB - 1⌋/objIntScale
+ *   checkIntegrality() finds minimal objIntScale via GCD.
+ *   @complexity O(n_integer) for integrality check
+ *
+ * @algorithm Clique-Based Objective Bounds:
+ *   Partition binary variables into cliques for tighter bounds:
+ *   @math For clique C: Σ_{i∈C} x_i ≤ 1
+ *         Objective contribution: max_{i∈C} c_i (at most one is 1)
+ *         Tighter than: Σ_{i∈C} c_i (assuming all could be 1)
+ *   setupCliquePartition() finds disjoint cliques covering binaries.
+ *   @complexity O(n_binary · clique_lookup)
+ *
  * **Objective Structure:**
  * - objectiveNonzeros[]: Columns with nonzero objective (binaries first)
  * - objectiveVals[]: Packed objective coefficients

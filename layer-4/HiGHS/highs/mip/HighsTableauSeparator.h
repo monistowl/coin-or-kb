@@ -11,6 +11,20 @@
  *
  * Generates cuts by applying MIR procedure to simplex tableau rows.
  *
+ * @algorithm Gomory Mixed-Integer (GMI) Cut Generation:
+ *   Derive valid cuts from simplex tableau rows:
+ *   @math For fractional basic integer x_i with tableau row:
+ *           x_i = f_0 + Σ_j a_j·x_j where 0 < f_0 < 1
+ *         GMI cut: Σ_j c_j·x_j ≥ 1 where
+ *           c_j = a_j / f_0           if a_j ≥ 0
+ *           c_j = -a_j / (1-f_0)      if a_j < 0 and x_j integer
+ *           c_j = a_j / f_0           if a_j ≥ 0 and x_j continuous
+ *           c_j = -a_j / (1-f_0)      if a_j < 0 and x_j continuous
+ *   BTRAN extracts tableau row, HighsTransformedLp handles bounds.
+ *   @complexity O(nnz_row) per cut generation
+ *   @ref Gomory, R. (1960). "An algorithm for the mixed integer problem".
+ *        Technical Report RM-2597, RAND Corporation.
+ *
  * **Gomory Cut Generation:**
  * For each fractional basic integer variable:
  * 1. Extract tableau row: x_B[i] = f_0 - sum(a_j * x_N[j])
