@@ -39,4 +39,5 @@ Time: O(nnz) for hashing, O(candidates × nnz) for verification
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinPresolveDupcol.hpp") }}** - Detect and remove duplicate columns and rows
+- **[CoinPresolveDupcol.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Detect and remove duplicate columns and rows
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinPresolveDupcol.hpp)

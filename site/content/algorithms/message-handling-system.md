@@ -25,10 +25,11 @@ Message lookup: O(1) by message number
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinMessageHandler.hpp") }}** - Flexible message handling with severity levels and i18n support
+- **[CoinMessageHandler.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Flexible message handling with severity levels and i18n support
 
 Provides CoinMessageHandler for formatted output with:
 - Severity-based filtering (warnings, errors, info)
 - Detail/logging levels
 - Multi-language support (messages default to US English)
 - Output to stdout or FILE pointer
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinMessageHandler.hpp)

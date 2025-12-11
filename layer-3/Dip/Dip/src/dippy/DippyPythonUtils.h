@@ -1,3 +1,15 @@
+/**
+ * @file DippyPythonUtils.h
+ * @brief Conversion utilities between Python objects and C++ data
+ *
+ * Provides functions for converting between Python dictionaries/lists
+ * and COIN-OR data structures: packed vectors, packed matrices, and
+ * index/coefficient arrays. Used by Dippy to pass data between
+ * Python PuLP models and DIP's C++ decomposition algorithms.
+ *
+ * @see DippyDecompApp.h for Python callback integration
+ * @see DippyDecompAlgo.h for algorithm-level Python hooks
+ */
 #ifndef DIPPY_PYTHONUTILS_INCLUDED
 #define DIPPY_PYTHONUTILS_INCLUDED
 

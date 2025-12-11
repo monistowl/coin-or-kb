@@ -3,6 +3,16 @@
   "layer": "layer-4",
   "classes": [
     {
+      "name": "AssemblyInfo",
+      "brief": "Version and assembly metadata for SonnetWrapper DLL\n\nDefines version numbers, copyright, and description strings used\nby the Windows resource file (app.rc) and .NET assembly metadata.\nSupports conditional compilation for different .NET targets\n(net6.0, net5.0, net48) and architectures (x86, x64).",
+      "has_algorithm": false
+    },
+    {
+      "name": "CbcCutGenerator",
+      "brief": ".NET wrapper for Cbc cut generator management\n\nProvides managed CbcCutGenerator class that wraps the native\n::CbcCutGenerator. Controls when and how CGL cutting planes\nare generated during branch-and-cut search (frequency, depth,\nat solution, etc.).",
+      "has_algorithm": false
+    },
+    {
       "name": "CbcEventHandler",
       "brief": ".NET wrapper for CBC event handling\n\nCbcEvent enum (node, solution, treeStatus, endSearch, etc.) and\nCbcAction enum (noAction, stop, restart, killSolution).\nCbcDelegateEventHandlerProxy bridges .NET delegates to native callbacks.",
       "has_algorithm": false
@@ -18,13 +28,38 @@
       "has_algorithm": false
     },
     {
+      "name": "CbcStrategy",
+      "brief": ".NET wrappers for Cbc solver configuration strategies\n\nProvides managed wrappers for CbcStrategy and derived classes\n(CbcStrategyNull, CbcStrategyDefault, CbcStrategyDefaultSubTree).\nStrategies configure cut generators, heuristics, preprocessing,\nand other branch-and-cut parameters as reusable bundles.",
+      "has_algorithm": false
+    },
+    {
       "name": "CglCutGenerator",
       "brief": ".NET wrapper for CglCutGenerator (cut generator base class)\n\nC++/CLI wrapper exposing CGL cut generators to .NET languages.\nGeneric template CglCutGeneratorGeneric<T> for derived generators.",
       "has_algorithm": false
     },
     {
+      "name": "CglProbing",
+      "brief": ".NET wrapper for CGL probing cut generator\n\nWraps ::CglProbing which generates cuts by probing: fixing\nbinary variables to 0/1 and detecting implications. Exposes\nconfiguration for pass limits, variable limits, and root node\nvs tree node behavior.",
+      "has_algorithm": false
+    },
+    {
       "name": "ClpModel",
       "brief": ".NET wrapper for ClpModel (COIN-OR LP solver)\n\nC++/CLI wrapper exposing CLP simplex solver to .NET languages.\nSupports quadratic objectives via loadQuadraticObjective().",
+      "has_algorithm": false
+    },
+    {
+      "name": "ClpObjective",
+      "brief": ".NET wrappers for Clp objective function classes\n\nProvides managed wrappers for ClpObjective base class and derived\nClpLinearObjective and ClpQuadraticObjective. Enables .NET code\nto query and work with linear and quadratic objective functions\nin LP/QP models.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinError",
+      "brief": ".NET exception wrapper for COIN-OR CoinError\n\nConverts native ::CoinError exceptions to managed\nSystem::ApplicationException derivatives, enabling .NET\ntry/catch blocks to handle COIN-OR library errors.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinLpIO",
+      "brief": ".NET wrapper for LP file format reader\n\nWraps ::CoinLpIO for reading LP-format optimization problems\ninto .NET. Provides access to problem dimensions, bounds,\nobjective coefficients, constraint matrix, row/column names,\nand integrality information.",
       "has_algorithm": false
     },
     {
@@ -40,6 +75,21 @@
     {
       "name": "CoinPackedMatrix",
       "brief": ".NET wrapper for CoinPackedMatrix (sparse matrix)\n\nC++/CLI wrapper exposing CoinUtils sparse matrix to .NET languages.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinShallowPackedVector",
+      "brief": ".NET wrapper for sparse vector (non-owning view)\n\nWraps ::CoinShallowPackedVector which provides a lightweight\nview of index/element pairs without memory ownership. Used\nto access rows or columns from packed matrices efficiently.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinUtils",
+      "brief": ".NET wrapper for CoinUtils helper functions\n\nProvides managed access to low-level COIN-OR utilities:\narray allocation/deallocation, bulk copy/zero operations,\nand CPU time measurement. Useful for .NET code that needs\nto work directly with native memory buffers.",
+      "has_algorithm": false
+    },
+    {
+      "name": "CoinWarmStart",
+      "brief": ".NET wrapper for solver warm start information\n\nWraps ::CoinWarmStart for persisting and restoring solver\nstate (basis information). Enables efficient re-optimization\nafter small problem modifications without restarting from scratch.",
       "has_algorithm": false
     },
     {
@@ -60,6 +110,11 @@
     {
       "name": "OsiSolverInterface",
       "brief": ".NET wrapper for OsiSolverInterface (Open Solver Interface)\n\nC++/CLI wrapper exposing OsiSolverInterface to .NET languages.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiSolverParameters",
+      "brief": ".NET enumerations for OSI solver parameters\n\nDefines managed enums mirroring native OsiIntParam, OsiDblParam,\nOsiStrParam, OsiHintParam, and OsiHintStrength. Provides conversion\nfunctions between managed and native enum values for solver\nconfiguration through OsiSolverInterface.",
       "has_algorithm": false
     }
   ]

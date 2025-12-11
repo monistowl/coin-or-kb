@@ -1,3 +1,13 @@
+/**
+ * @file basiclu_obj_solve_dense.h
+ * @brief Solve linear system with dense RHS using BasicLU object
+ *
+ * Object-oriented wrapper for basiclu_solve_dense().
+ * Solves B·x = b or B'·y = c with dense vectors.
+ *
+ * @see basiclu_solve_dense.h for algorithm details
+ * @see basiclu_obj_solve_sparse.h for sparse RHS
+ */
 lu_int basiclu_obj_solve_dense
 (
     struct basiclu_object *obj,

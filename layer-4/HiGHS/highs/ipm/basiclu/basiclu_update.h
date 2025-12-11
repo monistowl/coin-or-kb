@@ -1,3 +1,32 @@
+/**
+ * @file basiclu_update.h
+ * @brief Forrest-Tomlin update for basis column replacement
+ *
+ * Updates the LU factorization when one column of B is replaced,
+ * without performing a full refactorization. This is the key operation
+ * for efficient simplex iterations.
+ *
+ * **Forrest-Tomlin Update:**
+ * Given B_new = B_old with column j replaced by a:
+ * 1. The spike from FTRAN(a) creates fill in row j of U
+ * 2. Apply row operations to eliminate the spike
+ * 3. Store operations as "eta vectors" in Wi/Wx arrays
+ * 4. Update permutations to maintain triangularity
+ *
+ * **Update Cost Tracking:**
+ * - xstore[BASICLU_UPDATE_COST] increases with each update
+ * - When > 1.0, refactorization improves performance
+ * - xstore[BASICLU_NFORREST] counts updates since last factorize
+ * - Maximum m Forrest-Tomlin updates before mandatory refactorization
+ *
+ * **Stability Monitoring:**
+ * - xtbl parameter enables pivot error estimation
+ * - xstore[BASICLU_MAX_ETA] tracks largest eta entry (> 1e6 suggests instability)
+ * - xstore[BASICLU_PIVOT_ERROR] measures numerical accuracy
+ *
+ * @see basiclu_solve_for_update.h for required preparation
+ * @see basiclu_factorize.h for full refactorization
+ */
 lu_int basiclu_update
 (
     lu_int istore[],

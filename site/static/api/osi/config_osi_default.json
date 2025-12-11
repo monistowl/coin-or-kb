@@ -1,0 +1,13 @@
+{
+  "name": "config_osi_default",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/config_osi_default.h",
+  "brief": "Public Osi version macros for non-autotools builds\n\nDefines version information and OSILIB_EXPORT macro for client code.\nThis is the public header included by users of the Osi library, while\nconfig_default.h is used internally when building Osi itself.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_default.h for internal build configuration",
+    "OsiConfig.h for unified configuration entry point"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "adtl_hov",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adtl_hov.h",
+  "brief": "Higher-order vector traceless forward mode\n\nProvides the adtl_hov::adouble class supporting traceless automatic\ndifferentiation with higher-order Taylor coefficients in multiple\ndirections simultaneously. Configurable via setNumDir(), setDegree(),\nand setMode().\n\n**Modes:**\n- ADTL_ZOS: Zero-order scalar (function value only)\n- ADTL_FOV: First-order vector (Jacobian computation)\n- ADTL_INDO: Index domain propagation (sparsity)\n- ADTL_HOV: Higher-order vector (full Taylor coefficients)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "adtl.h for first-order traceless mode",
+    "adtl_indo.h for sparsity pattern detection"
+  ]
+}

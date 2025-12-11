@@ -26,7 +26,7 @@ Prune node n if: LP(n) >= z* (current best solution)
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="IMIPSolver.h") }}** - Abstract interface for MIP solver backends
+- **[IMIPSolver.h](/coin-or-kb/browser/?library=SHOT)** - Abstract interface for MIP solver backends
 
 Pure virtual interface for dual problem MIP solvers.
 
@@ -55,6 +55,7 @@ Pure virtual interface for dual problem MIP solvers.
 **Implementations:**
 - MIPSolverCplex, MIPSolverGurobi, MIPSolverCbc
 - SingleTree variants for callback-based cut addition
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/MIPSolver/IMIPSolver.h)
 
 ## References
 

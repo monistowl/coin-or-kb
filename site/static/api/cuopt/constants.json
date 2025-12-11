@@ -2,8 +2,12 @@
   "name": "constants",
   "library": "cuopt",
   "layer": "layer-4",
-  "header": "cpp/src/routing/utilities/constants.hpp",
-  "brief": "cuOpt vehicle routing component\n\nPart of GPU-accelerated VRP solver.",
+  "header": "cpp/include/cuopt/linear_programming/constants.h",
+  "brief": "Constants and parameter names for cuOpt LP/MIP solver\n\nDefines compile-time configuration, parameter string constants,\ntermination status codes, and constraint/variable type markers.\n\n**Type Configuration:**\n- CUOPT_INSTANTIATE_DOUBLE=1: Use double precision (default)\n- CUOPT_INSTANTIATE_INT32=1: Use 32-bit integers (default)\n\n**Parameter Categories:**\n- Tolerances: CUOPT_ABSOLUTE_DUAL_TOLERANCE, CUOPT_RELATIVE_PRIMAL_TOLERANCE, etc.\n- Limits: CUOPT_ITERATION_LIMIT, CUOPT_TIME_LIMIT\n- Methods: CUOPT_METHOD (CONCURRENT, PDLP, DUAL_SIMPLEX, BARRIER)\n- MIP: CUOPT_MIP_RELATIVE_GAP, CUOPT_MIP_INTEGRALITY_TOLERANCE\n\n**Termination Status:**\n- CUOPT_TERIMINATION_STATUS_OPTIMAL (1): Optimal solution found\n- CUOPT_TERIMINATION_STATUS_INFEASIBLE (2): Problem infeasible\n- CUOPT_TERIMINATION_STATUS_UNBOUNDED (3): Problem unbounded",
   "algorithms": [],
-  "methods": []
+  "methods": [],
+  "see": [
+    "cuopt_c.h for C API using these constants",
+    "pdlp/solver_settings.hpp for PDLP-specific settings"
+  ]
 }

@@ -1,0 +1,13 @@
+{
+  "name": "sparse_utils",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/sparse_utils.h",
+  "brief": "Graph algorithms for sparse matrix operations\n\nProvides DFS traversal and augmenting path algorithms adapted from\nTim Davis's CSparse library. Used for symbolic analysis in sparse\nfactorization and maximum matching in basis construction.\n\n**Algorithms:**\n- DepthFirstSearch(): Iterative DFS with marking for reachability\n- AugmentingPath(): Extends row/column matching via alternating paths",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "guess_basis.h for maximum matching in basis construction",
+    "symbolic_invert.h for symbolic inverse computation"
+  ]
+}

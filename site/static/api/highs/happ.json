@@ -1,0 +1,13 @@
+{
+  "name": "HApp",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/simplex/HApp.h",
+  "brief": "High-level simplex application interface\n\nEntry point for solving LPs via simplex method with automatic handling\nof scaling, unscaling, and solution refinement.\n\n**solveLpSimplex() Workflow:**\n1. Scale LP if beneficial (using Ruiz equilibration)\n2. Move LP to Ekk (simplex kernel)\n3. Setup basis (from HiGHS basis or logical start)\n4. Consider dualizing if rows >> cols\n5. Solve scaled LP, get scaled solution\n6. Unscale solution and check tolerances\n7. If needed, refine by re-solving unscaled LP with scaled NLA\n\n**Scaling Strategy:**\n- None: Solve original LP directly\n- Refine: Solve scaled, then refine unscaled\n- Direct: Ignore scaling, solve unscaled",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "simplex/HEkk.h for simplex kernel",
+    "simplex/HSimplex.h for simplex algorithms"
+  ]
+}

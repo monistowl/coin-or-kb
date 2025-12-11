@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="SolutionStrategyNLP.h") }}** - Direct NLP solver for continuous problems
+- **[SolutionStrategyNLP.h](/coin-or-kb/browser/?library=SHOT)** - Direct NLP solver for continuous problems
 
 Bypasses ESH for purely continuous NLP problems.
 
@@ -28,3 +28,4 @@ Bypasses ESH for purely continuous NLP problems.
 **When Selected:**
 - Problem type is NLP (no discrete variables)
 - Simpler than ESH for continuous problems
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/SolutionStrategy/SolutionStrategyNLP.h)

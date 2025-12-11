@@ -1,0 +1,13 @@
+{
+  "name": "AlpsHelperFunctions",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsHelperFunctions.h",
+  "brief": "Utility functors and helper functions for ALPS\n\nProvides TotalWorkload functor for computing workload estimates across\nnode pools (used in load balancing), DeletePtrObject functor for cleanup,\nand AlpsSleep() for CPU-based delays. Used internally by node pool and\nload balancing mechanisms.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsNodePool.h for node pool management",
+    "AlpsTreeNode.h for tree node base class"
+  ]
+}

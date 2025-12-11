@@ -1,0 +1,13 @@
+{
+  "name": "HighsSchedulerConstants",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/parallel/HighsSchedulerConstants.h",
+  "brief": "Tuning constants for work-stealing scheduler\n\nTiming thresholds controlling spin-wait vs blocking behavior.\n\n**Constants:**\n- kNumTryFac (16): Multiplier for steal attempts per worker\n- kMicroSecsBeforeSleep (5000): Spin duration before blocking\n- kMicroSecsBeforeGlobalSync (1000): Spin before global coordination\n\nThese values balance latency (fast response to new work) against\nCPU usage (avoiding wasteful spinning).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "parallel/HighsBinarySemaphore.h for sleep timing",
+    "parallel/HighsTaskExecutor.h for steal loop timing"
+  ]
+}

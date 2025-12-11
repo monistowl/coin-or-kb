@@ -1,3 +1,17 @@
+/**
+ * @file utils.h
+ * @brief Vector utilities and permutation operations
+ *
+ * Core numerical utilities for IPX:
+ * - Vector norms: Onenorm(), Twonorm(), Infnorm()
+ * - Dot product and element search
+ * - Permutation operations: Permute(), PermuteBack(), InversePerm()
+ * - Sorting permutations: Sortperm()
+ * - Validity checking: AllFinite()
+ *
+ * @see ipx_internal.h for Vector type definition
+ * @see sparse_matrix.h for sparse operations
+ */
 #ifndef IPX_UTILS_H_
 #define IPX_UTILS_H_
 

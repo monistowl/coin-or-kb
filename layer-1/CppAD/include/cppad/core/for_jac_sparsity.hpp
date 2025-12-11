@@ -6,7 +6,36 @@
 // ----------------------------------------------------------------------------
 /**
  * @file for_jac_sparsity.hpp
- * @brief Core AD functionality: for jac sparsity
+ * @brief Forward mode Jacobian sparsity pattern computation
+ *
+ * @algorithm Forward Sparsity Propagation:
+ * Determines which Jacobian entries J_{ij} may be nonzero without
+ * computing actual values. Key for efficient sparse derivatives.
+ *
+ *   FORWARD SWEEP (symbolic):
+ *     For each operation v = op(u₁, u₂, ...) in tape order:
+ *       sparsity(v) = union of sparsity(uᵢ) for nonzero partials
+ *
+ *   BOOLEAN SPARSITY (conservative):
+ *     Track set S_v ⊆ {0,...,n-1} of input indices v may depend on
+ *     S_v is superset of true sparsity (no false negatives)
+ *
+ *   OUTPUT:
+ *     For each output y_i: set S_i of inputs it depends on
+ *     Jacobian pattern: J_{ij} possibly nonzero iff j ∈ S_i
+ *
+ * @math
+ *   Pattern matrix P: P_{ij} = 1 if ∂y_i/∂x_j may be nonzero
+ *   Forward computes P given R: pattern_out = P·R (matrix multiply)
+ *   With R = I (identity): pattern_out = P (Jacobian pattern)
+ *
+ * @complexity
+ * - Time: O(ops × average_sparsity) single sweep
+ * - Memory: O(n × tape_size) for sparsity sets
+ * - vs numerical: identifies zero entries without n AD sweeps
+ *
+ * @see rev_jac_sparsity.hpp for reverse mode (more efficient for m << n)
+ * @see sparse_jac.hpp uses sparsity for graph coloring
  */
 /*
 {xrst_begin for_jac_sparsity}

@@ -1,4 +1,15 @@
-
+/**
+ * @file config_default.h
+ * @brief Default build configuration for Alps without autotools
+ *
+ * Provides configuration for builds not using the configure script.
+ * Includes system-specific settings via configall_system.h and public
+ * version macros. Defines debug levels (COIN_ALPS_CHECKLEVEL, VERBOSITY)
+ * and package dependencies (ALPS_HAS_COINUTILS, ALPS_HAS_CLP).
+ *
+ * @see config_alps_default.h for public version macros
+ * @see AlpsConfig.h for unified configuration entry point
+ */
 
 /* include the COIN-OR-wide system specific configure header */
 #include "configall_system.h"

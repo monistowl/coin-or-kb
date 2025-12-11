@@ -1,0 +1,13 @@
+{
+  "name": "UtilMacrosAlps",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/UtilMacrosAlps.h",
+  "brief": "Alps serialization utilities for warm start basis\n\nProvides functions to encode/decode CoinWarmStartBasis objects\nto/from AlpsEncoded for parallel tree search checkpointing and\nmessage passing. Bridges COIN-OR warm start with Alps framework.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsDecompParam.h for Alps parameter configuration",
+    "AlpsDecompTreeNode.h for tree node serialization"
+  ]
+}

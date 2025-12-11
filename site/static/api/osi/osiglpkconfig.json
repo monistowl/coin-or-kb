@@ -1,0 +1,13 @@
+{
+  "name": "OsiGlpkConfig",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/OsiGlpk/OsiGlpkConfig.h",
+  "brief": "Configuration header for OsiGlpk (GNU GLPK interface)\n\nProvides build configuration for the Osi adapter to GNU Linear Programming\nKit (GLPK). Defines OSIGLPKLIB_EXPORT for DLL import/export based on build\nenvironment and platform. GLPK is open source (GPL licensed).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiGlpkSolverInterface.h for GLPK adapter class",
+    "OsiConfig.h for main Osi configuration"
+  ]
+}

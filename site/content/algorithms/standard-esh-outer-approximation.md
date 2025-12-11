@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="SolutionStrategyMultiTree.h") }}** - Iterative outer approximation strategy (multi-tree)
+- **[SolutionStrategyMultiTree.h](/coin-or-kb/browser/?library=SHOT)** - Iterative outer approximation strategy (multi-tree)
 
 Classic outer approximation loop for convex MINLP.
 
@@ -34,3 +34,4 @@ Classic outer approximation loop for convex MINLP.
 **Disadvantages:**
 - Multiple MIP solves
 - May regenerate same B&B tree work
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/SolutionStrategy/SolutionStrategyMultiTree.h)

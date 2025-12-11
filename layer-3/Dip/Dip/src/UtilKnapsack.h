@@ -1,3 +1,14 @@
+/**
+ * @file UtilKnapsack.h
+ * @brief Knapsack problem solver utilities
+ *
+ * Provides data structures (SOR_IntDbl arrays) and solver function
+ * KnapsackOptimizeHS for continuous relaxation knapsack problems.
+ * Used in pricing subproblems and heuristics where knapsack structure
+ * can be exploited.
+ *
+ * @see DecompAlgo.h for pricing problem integration
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

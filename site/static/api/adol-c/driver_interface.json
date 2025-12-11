@@ -1,0 +1,13 @@
+{
+  "name": "driver_interface",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/c_interface/driver_interface.h",
+  "brief": "C interface for ADOL-C forward and reverse mode drivers\n\nProvides C-callable wrappers for the overloaded C++ forward() and\nreverse() functions with varying parameter combinations for:\n- Zero-order (ZOS), first-order (FOS/FOV), higher-order (HOS/HOV)\n- Scalar and vector modes\n- With/without sparsity detection (nz arrays)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "drivers/drivers.h for C++ driver interface",
+    "ADOLC_TB_interface.h for tape management"
+  ]
+}

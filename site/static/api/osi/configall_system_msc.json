@@ -1,0 +1,13 @@
+{
+  "name": "configall_system_msc",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/configall_system_msc.h",
+  "brief": "MSVC-specific configuration macros for Windows builds\n\nDefines feature detection macros for Microsoft Visual C++ compiler:\n- Standard header availability (HAVE_CASSERT, HAVE_CMATH, etc.)\n- Fortran name mangling (F77_FUNC, F77_FUNC_)\n- Platform-specific type sizes (SIZEOF_INT, SIZEOF_DOUBLE, etc.)\n- Available functions (HAVE_RAND, HAVE__SNPRINTF)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "configall_system.h for compiler routing",
+    "OsiConfig.h for main configuration"
+  ]
+}

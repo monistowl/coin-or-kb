@@ -37,4 +37,5 @@ Time: O(1) per singleton processed
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinPresolveSingleton.hpp") }}** - Singleton row/column presolve transforms
+- **[CoinPresolveSingleton.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Singleton row/column presolve transforms
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinPresolveSingleton.hpp)

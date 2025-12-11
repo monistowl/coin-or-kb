@@ -1,3 +1,16 @@
+/**
+ * @file basiclu_obj_solve_for_update.h
+ * @brief Solve and prepare for update using BasicLU object
+ *
+ * Object-oriented wrapper for basiclu_solve_for_update() with automatic
+ * memory reallocation. The want_solution parameter controls whether the
+ * full solution is computed (requires extra triangular solve).
+ *
+ * Solution stored in obj->lhs with pattern in obj->ilhs[0..obj->nzlhs-1].
+ *
+ * @see basiclu_solve_for_update.h for FTRAN/BTRAN details
+ * @see basiclu_obj_update.h for completing the basis update
+ */
 lu_int basiclu_obj_solve_for_update
 (
     struct basiclu_object *obj,

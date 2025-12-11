@@ -1,0 +1,13 @@
+{
+  "name": "splitted_normal_matrix",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/splitted_normal_matrix.h",
+  "brief": "Basis-preconditioned normal matrix operator\n\nLinearOperator for the matrix C = B\u207b\u00b9\u00b7A\u00b7A'\u00b7B\u207b\u1d40 = I + B\u207b\u00b9\u00b7N\u00b7N'\u00b7B\u207b\u1d40,\nwhere B is the basis matrix and N the nonbasic columns. This\nformulation provides better conditioning than the standard normal\nequations A\u00b7W\u00b7A'.\n\nThe Apply() method computes y = C\u00b7x via:\n1. Solve B'\u00b7w = x (triangular with U')\n2. Compute z = N'\u00b7w (sparse matvec)\n3. Compute v = N\u00b7z (sparse matvec)\n4. Solve B\u00b7y = v (triangular with L,U)\n5. Return y + x",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "kkt_solver_basis.h for usage in KKT preconditioning",
+    "basis.h for LU factors of B"
+  ]
+}

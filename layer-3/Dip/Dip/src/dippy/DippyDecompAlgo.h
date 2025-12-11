@@ -1,3 +1,15 @@
+/**
+ * @file DippyDecompAlgo.h
+ * @brief Python-enabled DIP decomposition algorithms via Dippy
+ *
+ * Provides DippyAlgoMixin and concrete classes (DippyAlgoC, DippyAlgoPC,
+ * DippyAlgoRC) that extend DIP algorithms with Python callbacks for
+ * branching, post-processing, and custom node handling. Enables PuLP
+ * models to use decomposition methods with Python-defined subproblems.
+ *
+ * @see DippyDecompApp.h for Python-enabled application class
+ * @see DecompAlgoC.h, DecompAlgoPC.h, DecompAlgoRC.h for base algorithms
+ */
 #ifndef DIPPY_DECOMPALGO_INCLUDED
 #define DIPPY_DECOMPALGO_INCLUDED
 

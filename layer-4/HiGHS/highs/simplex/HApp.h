@@ -5,6 +5,30 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/**
+ * @file simplex/HApp.h
+ * @brief High-level simplex application interface
+ *
+ * Entry point for solving LPs via simplex method with automatic handling
+ * of scaling, unscaling, and solution refinement.
+ *
+ * **solveLpSimplex() Workflow:**
+ * 1. Scale LP if beneficial (using Ruiz equilibration)
+ * 2. Move LP to Ekk (simplex kernel)
+ * 3. Setup basis (from HiGHS basis or logical start)
+ * 4. Consider dualizing if rows >> cols
+ * 5. Solve scaled LP, get scaled solution
+ * 6. Unscale solution and check tolerances
+ * 7. If needed, refine by re-solving unscaled LP with scaled NLA
+ *
+ * **Scaling Strategy:**
+ * - None: Solve original LP directly
+ * - Refine: Solve scaled, then refine unscaled
+ * - Direct: Ignore scaling, solve unscaled
+ *
+ * @see simplex/HEkk.h for simplex kernel
+ * @see simplex/HSimplex.h for simplex algorithms
+ */
 #ifndef SIMPLEX_HAPP_H_
 #define SIMPLEX_HAPP_H_
 

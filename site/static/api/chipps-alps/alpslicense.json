@@ -1,0 +1,12 @@
+{
+  "name": "AlpsLicense",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsLicense.h",
+  "brief": "License and copyright header for ALPS library\n\nContains the standard ALPS copyright notice and Eclipse Public License\nheader. Included for license compliance in source distributions.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "https://www.eclipse.org/legal/epl-2.0/ for EPL 2.0 terms"
+  ]
+}

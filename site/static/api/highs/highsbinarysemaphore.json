@@ -1,0 +1,13 @@
+{
+  "name": "HighsBinarySemaphore",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/parallel/HighsBinarySemaphore.h",
+  "brief": "Binary semaphore with adaptive spinning before blocking\n\nSynchronization primitive for signaling between threads with spin-wait\noptimization before falling back to OS blocking.\n\n**State Values:**\n- count = 1: Released (signaled)\n- count = 0: Acquired (not signaled)\n- count = -1: Acquired and waiter is blocked on condvar\n\n**Acquire Strategy:**\n1. try_acquire(): Fast CAS attempt\n2. Spin with exponential backoff (up to kMicroSecsBeforeSleep)\n3. Fall back to condvar wait if spinning times out\n\nUsed for worker thread sleep/wake in WorkerBunk.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "parallel/HighsSplitDeque.h for usage in work stealing",
+    "parallel/HighsSchedulerConstants.h for timing thresholds"
+  ]
+}

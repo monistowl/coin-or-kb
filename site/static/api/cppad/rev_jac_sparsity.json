@@ -3,7 +3,18 @@
   "library": "CppAD",
   "layer": "layer-1",
   "header": "include/cppad/core/rev_jac_sparsity.hpp",
-  "brief": "Core AD functionality: rev jac sparsity",
-  "algorithms": [],
-  "methods": []
+  "brief": "Reverse mode Jacobian sparsity pattern computation",
+  "algorithms": [
+    {
+      "name": "Reverse Sparsity Propagation:\nComputes Jacobian sparsity by traversing tape backwards.\nMore efficient than forward when m << n.\n\n  REVERSE SWEEP (symbolic):\n    Initialize: output variables have sparsity = {own_index}\n    For each operation v = op(u\u2081, u\u2082) in reverse order:\n      Add sparsity(v) to sparsity(u\u1d62) for nonzero partials\n\n  OUTPUT:\n    For each input x_j: set T_j of outputs that depend on it\n    Jacobian pattern: J_{ij} possibly nonzero iff i \u2208 T_j",
+      "math": "Pattern matrix P: P_{ij} = 1 if \u2202y_i/\u2202x_j may be nonzero\n  Reverse computes R\u00b7P given R: pattern_out = R\u00b7P\n  With R = I: pattern_out = P (transposed Jacobian pattern)",
+      "complexity": "- Time: O(ops \u00d7 average_row_sparsity) single sweep\n- Forward vs Reverse:\n  - Forward efficient when n << m (few inputs)\n  - Reverse efficient when m << n (few outputs)\n- Sparsity detection: O(ops) vs O(n\u00b7ops) numerical",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "for_jac_sparsity.hpp for forward mode",
+    "rev_hes_sparsity.hpp for Hessian sparsity"
+  ]
 }

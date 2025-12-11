@@ -1,0 +1,12 @@
+{
+  "name": "ipx_status",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/ipx_status.h",
+  "brief": "Status codes, error flags, and basis status constants\n\n**Overall Status (info.status):**\n- IPX_STATUS_solved (1000): Optimal solution found\n- IPX_STATUS_stopped (1005): Stopped early (time/iter limit)\n- IPX_STATUS_no_model (1006): No model loaded\n\n**Phase Status (status_ipm, status_crossover):**\n- IPX_STATUS_optimal (1): Converged to optimality\n- IPX_STATUS_imprecise (2): Optimal but tolerances not met\n- IPX_STATUS_primal_infeas (3): Primal infeasible\n- IPX_STATUS_dual_infeas (4): Dual infeasible (unbounded)\n\n**Error Flags:**\n- IPX_ERROR_argument_null (102): NULL pointer argument\n- IPX_ERROR_cr_* (201-205): CR method errors\n- IPX_ERROR_basis_* (301-306): Basis factorization errors\n\n**Basis Status:**\n- IPX_basic (0), IPX_nonbasic_lb (-1), IPX_nonbasic_ub (-2)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipx_info.h for status field locations"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "HighsDomainChange",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/mip/HighsDomainChange.h",
+  "brief": "Variable bound modifications for MIP branch-and-bound\n\nRepresents changes to variable bounds during MIP solving.\n\n**HighsDomainChange:**\n- column: Variable index\n- boundtype: kLower or kUpper\n- boundval: New bound value\n- Comparable for storage in sorted containers\n\nUsed in branching, propagation, and conflict analysis to track\nand undo bound changes during tree search.\n\n**HighsSubstitution:**\nRecords variable substitution: staycol = scale * substcol + offset.\nUsed when presolve eliminates variables.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "mip/HighsDomain.h for domain propagation",
+    "mip/HighsSearch.h for branch-and-bound"
+  ]
+}

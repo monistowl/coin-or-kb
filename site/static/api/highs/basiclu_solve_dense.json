@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_solve_dense",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_solve_dense.h",
+  "brief": "Solve linear system with dense right-hand side\n\nSolves B\u00b7x = b (trans='N') or B'\u00b7y = c (trans='T') given dense vectors.\nThe solution overwrites or is written to lhs; rhs and lhs may alias.\n\n**Algorithm:**\n- Forward system: x = U\u207b\u00b9(L\u207b\u00b9(P\u00b7b)), then permute by Q\n- Transpose system: y = P'(L\u207b\u1d40(U\u207b\u1d40(Q'\u00b7c)))\n\nFor sparse right-hand sides, prefer basiclu_solve_sparse() which\nexploits sparsity via Gilbert-Peierls symbolic analysis.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_solve_sparse.h for sparse RHS (more efficient for sparse b)",
+    "basiclu_solve_for_update.h for solves that prepare basis updates"
+  ]
+}

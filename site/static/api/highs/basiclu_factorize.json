@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_factorize",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_factorize.h",
+  "brief": "Sparse LU factorization with Markowitz pivot selection\n\nComputes B = L\u00b7U factorization using columnwise threshold pivoting.\nPivots are chosen by Markowitz criterion (minimize fill-in) subject\nto numerical stability constraints.\n\n**Factorization Phases:**\n1. SINGLETONS: Extract initial triangular factors from singleton rows/cols\n2. SETUP_BUMP: Initialize the \"bump\" (non-triangular active submatrix)\n3. FACTORIZE_BUMP: Main elimination with Markowitz search\n4. BUILD_FACTORS: Construct final L, U in storage format\n\n**Pivot Selection:**\n- Markowitz cost: (row_count - 1) \u00d7 (col_count - 1)\n- Threshold: |pivot| \u2265 reltol \u00d7 max|column entry|\n- Search terminates after MAXN_SEARCH_PIVOT stable pivots found\n\n**Memory Management:**\nReturns BASICLU_REALLOCATE if arrays need growth; caller reallocates\nand calls again with c0ntinue=1 to resume.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu.h for parameters (DROP_TOLERANCE, ABS_PIVOT_TOLERANCE, etc.)",
+    "basiclu_get_factors.h to extract L, U in standard sparse format"
+  ]
+}

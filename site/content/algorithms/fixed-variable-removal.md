@@ -37,4 +37,5 @@ Time: O(nnz(column_j)) per fixed variable
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinPresolveFixed.hpp") }}** - Remove fixed variables and make variables fixed
+- **[CoinPresolveFixed.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Remove fixed variables and make variables fixed
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinPresolveFixed.hpp)

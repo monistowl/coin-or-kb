@@ -589,13 +589,13 @@
     },
     {
       "name": "for_hes_sparsity",
-      "brief": "Core AD functionality: for hes sparsity",
-      "has_algorithm": false
+      "brief": "Forward mode Hessian sparsity pattern computation",
+      "has_algorithm": true
     },
     {
       "name": "for_jac_sparsity",
-      "brief": "Core AD functionality: for jac sparsity",
-      "has_algorithm": false
+      "brief": "Forward mode Jacobian sparsity pattern computation",
+      "has_algorithm": true
     },
     {
       "name": "for_one",
@@ -749,8 +749,8 @@
     },
     {
       "name": "hessian",
-      "brief": "Core AD functionality: hessian",
-      "has_algorithm": false
+      "brief": "Dense Hessian driver using reverse-on-forward AD",
+      "has_algorithm": true
     },
     {
       "name": "independent",
@@ -784,8 +784,8 @@
     },
     {
       "name": "jacobian",
-      "brief": "Core AD functionality: jacobian",
-      "has_algorithm": false
+      "brief": "Full dense Jacobian driver using forward or reverse mode",
+      "has_algorithm": true
     },
     {
       "name": "json_lexer",
@@ -994,8 +994,8 @@
     },
     {
       "name": "optimize",
-      "brief": "Core AD functionality: optimize",
-      "has_algorithm": false
+      "brief": "Tape optimization for faster derivative computation",
+      "has_algorithm": true
     },
     {
       "name": "optimize_run",
@@ -1124,8 +1124,8 @@
     },
     {
       "name": "rev_hes_sparsity",
-      "brief": "Core AD functionality: rev hes sparsity",
-      "has_algorithm": false
+      "brief": "Reverse mode Hessian sparsity pattern computation",
+      "has_algorithm": true
     },
     {
       "name": "rev_jac",
@@ -1134,8 +1134,8 @@
     },
     {
       "name": "rev_jac_sparsity",
-      "brief": "Core AD functionality: rev jac sparsity",
-      "has_algorithm": false
+      "brief": "Reverse mode Jacobian sparsity pattern computation",
+      "has_algorithm": true
     },
     {
       "name": "rev_one",
@@ -1369,8 +1369,8 @@
     },
     {
       "name": "subgraph_jac_rev",
-      "brief": "Core AD functionality: subgraph jac rev",
-      "has_algorithm": false
+      "brief": "Sparse Jacobian via subgraph reverse mode",
+      "has_algorithm": true
     },
     {
       "name": "subgraph_reverse",

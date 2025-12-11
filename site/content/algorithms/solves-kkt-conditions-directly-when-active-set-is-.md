@@ -29,6 +29,7 @@ Key methods:
 
 ### qpOASES
 
-- **{{ link(path="/browser/?library=qpOASES", text="QProblemB.hpp") }}** - Box-constrained QP solver (bounds only, no linear constraints)
+- **[QProblemB.hpp](/coin-or-kb/browser/?library=qpOASES)** - Box-constrained QP solver (bounds only, no linear constraints)
 
 Solves QPs with only variable bounds (no constraint matrix A):
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-1/qpOASES/include/qpOASES/QProblemB.hpp)

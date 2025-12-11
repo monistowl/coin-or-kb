@@ -44,7 +44,7 @@ Time: O(Σ nnz(L_i)·nnz(U_i)/n_i + off-diagonal work)
 
 ### SuiteSparse
 
-- **{{ link(path="/browser/?library=SuiteSparse", text="klu.h") }}** - Sparse LU factorization optimized for circuit simulation matrices
+- **[klu.h](/coin-or-kb/browser/?library=SuiteSparse)** - Sparse LU factorization optimized for circuit simulation matrices
 
 KLU computes a sparse LU factorization of a square matrix A:
   P*A*Q = L*U
@@ -57,6 +57,7 @@ proceeds in three phases:
 1. klu_analyze: BTF pre-ordering + fill-reducing ordering (AMD/COLAMD)
 2. klu_factor: Numerical LU factorization (left-looking, column-by-column)
 3. klu_solve: Forward/back substitution to solve Ax = b
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/SuiteSparse/KLU/Include/klu.h)
 
 ## References
 

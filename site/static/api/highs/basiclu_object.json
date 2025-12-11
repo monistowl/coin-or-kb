@@ -1,0 +1,14 @@
+{
+  "name": "basiclu_object",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_object.h",
+  "brief": "Object-oriented wrapper for BasicLU with automatic memory management\n\nProvides a simplified interface that manages internal arrays automatically.\nThe basiclu_obj_* functions handle allocation, reallocation, and deallocation\nof the istore, xstore, Li, Lx, Ui, Ux, Wi, Wx arrays.\n\n**User-Accessible Members:**\n- xstore: Read/write parameters and statistics\n- lhs, ilhs, nzlhs: Solution after solve_sparse/solve_for_update (read-only)\n- realloc_factor: Growth multiplier for reallocations (default 1.5)\n\n**Usage Pattern:**\n```c\nstruct basiclu_object obj;\nbasiclu_obj_initialize(&obj, m);\nbasiclu_obj_factorize(&obj, Bbegin, Bend, Bi, Bx);\nbasiclu_obj_solve_sparse(&obj, nzrhs, irhs, xrhs, 'N');\n// Solution in obj.lhs[obj.ilhs[0..obj.nzlhs-1]]\nbasiclu_obj_free(&obj);\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu.h for the low-level array-based interface",
+    "basiclu_obj_initialize.h for initialization",
+    "basiclu_obj_free.h for cleanup"
+  ]
+}

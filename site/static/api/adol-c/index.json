@@ -3,6 +3,21 @@
   "layer": "layer-2",
   "classes": [
     {
+      "name": "ADOLC_TB_interface",
+      "brief": "Pure C interface for tape-based ADOL-C\n\nProvides C-callable functions for tape-based automatic differentiation\nusing opaque TBAdoubleHandle pointers. Enables use of ADOL-C from\nlanguages without C++ FFI (Fortran, Python via ctypes, etc.).\n\n**Categories:**\n- create_tb_adouble/free_tb_adouble: Lifecycle management\n- Arithmetic: add_tb_adouble, mult_tb_adouble, etc.\n- Transcendental: tb_sin, tb_cos, tb_exp, tb_log, etc.\n- Tape control: c_trace_on, c_trace_off\n- Independent/dependent: create_independent, create_dependent",
+      "has_algorithm": false
+    },
+    {
+      "name": "ADOLC_TL_interface",
+      "brief": "Pure C interface for traceless (tapeless) ADOL-C\n\nProvides C-callable functions for traceless forward-mode automatic\ndifferentiation using opaque TLAdoubleHandle pointers. Each adouble\ncarries derivative values for multiple directions.\n\n**Categories:**\n- create_tl_adouble/free_tl_adouble: Lifecycle management\n- set_num_dir: Configure number of derivative directions\n- Derivative access: get_tl_ad_values, set_tl_ad_value_idx\n- Arithmetic: add_tl_adouble, mult_tl_adouble, etc.\n- Transcendental: tl_sin, tl_cos, tl_exp, tl_log, etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "adalloc",
+      "brief": "Multi-dimensional array allocation for ADOL-C\n\nProvides memory allocation utilities for 1D, 2D, and 3D double arrays\nused throughout ADOL-C for storing Taylor coefficients, Jacobians,\nand intermediate values during tape evaluation.\n\n**Key Functions:**\n- myalloc1/2/3(): Allocate 1D/2D/3D double arrays\n- myfree1/2/3(): Deallocate corresponding arrays\n- myallocI2(): Allocate identity matrix representation",
+      "has_algorithm": false
+    },
+    {
       "name": "adolc",
       "brief": "Master include file for ADOL-C automatic differentiation library\n\nADOL-C (Automatic Differentiation by Overloading in C++) computes derivatives\nof mathematical functions via operator overloading and tape-based recording.\nRecords computation as a \"tape\" then replays in forward/reverse mode.",
       "has_algorithm": true
@@ -13,13 +28,28 @@
       "has_algorithm": false
     },
     {
+      "name": "adolc_openmp",
+      "brief": "OpenMP parallel differentiation support for ADOL-C\n\nProvides thread-safe automatic differentiation using OpenMP directives.\nADOLC_OpenMP and ADOLC_OpenMP_NC handler classes manage tape state\nacross parallel regions.\n\n**Usage:**\n```cpp\n#pragma omp parallel ADOLC_OPENMP\n{\n    // Each thread gets independent tape state\n    trace_on(tag);\n    // ... AD computations ...\n    trace_off();\n}\n```\n\n@note Requires compilation with -fopenmp or equivalent",
+      "has_algorithm": false
+    },
+    {
       "name": "adolc_sparse",
       "brief": "Convenience header for sparse derivative computation\n\nInclude this file to access all sparse derivative functionality:\n- sparse_jac(): Sparse Jacobian computation\n- sparse_hess(): Sparse Hessian computation\n- jac_pat() / hess_pat(): Sparsity pattern detection\n- Bit-pattern forward/reverse modes",
       "has_algorithm": false
     },
     {
       "name": "adolcerror",
-      "brief": "Exception class for ADOL-C errors with source location tracking.\n\nThis exception captures the error message and the source location (file,\nline, column) where it was thrown. Integrates with the C++ standard exception\nhierarchy through std::runtime_error.\n\n@example\nThrow example:\n@code\nthrow ADOLCError(\"wrong number of independents\");  // Auto-captures source\nlocation\n@endcode\n\nHandle example:\n@code\ntry {\n  // ADOL-C operations...\n}\ncatch (ADOLCError& e) {\n  std::cerr << e.what() << std::endl;         // Formatted message\n  std::cerr << \"Error occurred at: \"\n            << e.where().file() << \":\"\n            << e.where().func() << \":\"\n            << e.where().line() << std::endl; // Direct source location\naccess\n}\n@endcode",
+      "brief": "ADOL-C error handling and exception framework\n\nDefines the ADOLCError exception class and ErrorType enum for\nstructured error reporting with source location tracking.\n\n**Key Components:**\n- ADOLCError: Exception with file/line/function information\n- ErrorType: Enumeration of all ADOL-C error categories\n- CURRENT_LOCATION: Macro capturing source location\n- fail(): Function to throw typed errors with context",
+      "has_algorithm": false
+    },
+    {
+      "name": "adolcexport",
+      "brief": "DLL export/import macros for ADOL-C shared library builds\n\nDefines the ADOLC_API macro for Windows DLL symbol visibility.\nOn Windows with ADOLC_SHARED defined, symbols are decorated with\ndllexport (when building ADOL-C) or dllimport (when using ADOL-C).\nOn other platforms, ADOLC_API is empty.",
+      "has_algorithm": false
+    },
+    {
+      "name": "adoublecuda",
+      "brief": "CUDA-enabled adouble class for GPU automatic differentiation\n\nProvides an adouble implementation compatible with NVIDIA CUDA for\ntraceless forward-mode AD on GPUs. Supports single and multiple\ndirectional derivatives with configurable NUMBER_DIRECTIONS.\n\n**Features:**\n- Device-callable operators and math functions\n- Multi-direction derivative propagation\n- Unified memory support with __managed__ variables\n\n**Compilation:**\nDefine NUMBER_DIRECTIONS for vector mode, optionally DYNAMIC_DIRECTIONS\nfor runtime-configurable direction count.",
       "has_algorithm": false
     },
     {
@@ -33,8 +63,28 @@
       "has_algorithm": true
     },
     {
+      "name": "adtl_hov",
+      "brief": "Higher-order vector traceless forward mode\n\nProvides the adtl_hov::adouble class supporting traceless automatic\ndifferentiation with higher-order Taylor coefficients in multiple\ndirections simultaneously. Configurable via setNumDir(), setDegree(),\nand setMode().\n\n**Modes:**\n- ADTL_ZOS: Zero-order scalar (function value only)\n- ADTL_FOV: First-order vector (Jacobian computation)\n- ADTL_INDO: Index domain propagation (sparsity)\n- ADTL_HOV: Higher-order vector (full Taylor coefficients)",
+      "has_algorithm": false
+    },
+    {
+      "name": "adtl_indo",
+      "brief": "Traceless forward mode for Jacobian sparsity pattern detection\n\nProvides a specialized adouble class (adtl_indo::adouble) that propagates\nindex sets instead of derivative values. Used to determine Jacobian\nsparsity structure without computing actual derivatives.\n\n**Key Functions:**\n- ADOLC_Init_sparse_pattern(): Initialize input sparsity patterns\n- ADOLC_get_sparse_pattern(): Extract output sparsity patterns\n- ADOLC_get_sparse_jacobian(): Compute sparse Jacobian efficiently",
+      "has_algorithm": false
+    },
+    {
       "name": "adubswigfuncs",
       "brief": "SWIG operator overloads for badouble/adub types",
+      "has_algorithm": false
+    },
+    {
+      "name": "adutils",
+      "brief": "Legacy compatibility header (deprecated)\n\nThis file is kept for backward compatibility only.\nNew code should include adolc/adolc.h directly.\n\n@deprecated Use adolc/adolc.h instead",
+      "has_algorithm": false
+    },
+    {
+      "name": "adutilsc",
+      "brief": "Legacy compatibility header (deprecated)\n\nThis file is kept for backward compatibility only.\nNew code should include adolc/adolc.h directly.\n\n@deprecated Use adolc/adolc.h instead",
       "has_algorithm": false
     },
     {
@@ -43,9 +93,44 @@
       "has_algorithm": false
     },
     {
+      "name": "ampisupportAdolc",
+      "brief": "AMPI (Adjoint MPI) tangent linear model support\n\nProvides ADOLC_TLM_AMPI_* wrappers for MPI communication routines\nthat propagate derivative information through MPI calls during\ntangent linear model evaluation.\n\n**Supported Operations:**\n- Point-to-point: Send, Recv, Isend, Irecv, Wait\n- Collective: Barrier, Gather, Scatter, Allgather, Bcast\n- Reduction: Reduce, Allreduce\n\n@note Requires ADOLC_AMPI_SUPPORT and AMPI library",
+      "has_algorithm": false
+    },
+    {
+      "name": "array_handler",
+      "brief": "Array index accessors for C interface\n\nProvides C-callable functions for indexing into 1D, 2D, and 3D\narrays used by ADOL-C drivers. Enables languages without native\nC multi-dimensional array support to access derivative results.",
+      "has_algorithm": false
+    },
+    {
+      "name": "buffer_temp",
+      "brief": "Template buffer class for struct storage with linked sub-buffers\n\nProvides Buffer<T, buff_size> template class that manages a linked list\nof fixed-size arrays for efficient struct allocation. Used internally\nby ADOL-C for external function descriptors and checkpointing data.\n\n**Design:**\nBuffers grow by allocating new SubBuffer nodes rather than reallocating,\navoiding pointer invalidation. Requires types with an `allmem` member\n(enforced via AllMemType concept).",
+      "has_algorithm": false
+    },
+    {
       "name": "checkpointing",
       "brief": "Checkpointing support for memory-efficient reverse mode AD\n\nImplements checkpointing (also known as \"time-stepping\" or \"revolve\")\nfor computing adjoints of long time-stepping computations with bounded\nmemory. Instead of storing all intermediate states, only selected\n\"checkpoints\" are stored, and segments are recomputed as needed.",
       "has_algorithm": true
+    },
+    {
+      "name": "checkpointing_p",
+      "brief": "Private/internal checkpointing utilities\n\nInternal implementation details for ADOL-C's checkpointing (revolve)\nsystem. Defines CP_BLOCK_SIZE and init_CpInfos for checkpoint buffer\nmanagement.\n\n@note This is an internal header; use checkpointing.h for public API",
+      "has_algorithm": false
+    },
+    {
+      "name": "common",
+      "brief": "Core ADOL-C type definitions and platform configuration\n\nProvides fundamental type definitions (locint, revreal), platform\ndetection, memory allocation wrappers, and C/C++ interoperability\nmacros used throughout ADOL-C.\n\n**Key Macros:**\n- BEGIN_C_DECLS/END_C_DECLS: extern \"C\" wrappers\n- MAXDEC/MINDEC: Safe max/min update macros\n- ADOLC_MATH_NSP: Math function namespace",
+      "has_algorithm": false
+    },
+    {
+      "name": "convolut",
+      "brief": "Convolution routines for higher-order reverse mode\n\nProvides Taylor coefficient convolution operations for evaluating\nhigher-order derivatives during reverse mode tape interpretation.\n\n**Key Operations:**\n- conv/conv0: Standard convolution c = a * b (Taylor product)\n- inconv/inconv0/inconv1: Incremental convolution c += a * b\n- deconv/deconv0/deconv1: Decremental convolution c -= a * b\n- divide, recipr: Division-related convolutions\n\nThese implement the chain rule for Taylor series at arbitrary order.",
+      "has_algorithm": false
+    },
+    {
+      "name": "driver_interface",
+      "brief": "C interface for ADOL-C forward and reverse mode drivers\n\nProvides C-callable wrappers for the overloaded C++ forward() and\nreverse() functions with varying parameter combinations for:\n- Zero-order (ZOS), first-order (FOS/FOV), higher-order (HOS/HOV)\n- Scalar and vector modes\n- With/without sparsity detection (nz arrays)",
+      "has_algorithm": false
     },
     {
       "name": "drivers",
@@ -55,6 +140,11 @@
     {
       "name": "drivers",
       "brief": "Lie derivative computation for nonlinear control systems\n\nComputes Lie derivatives used in nonlinear control theory for:\n- Observability analysis (lie_scalar, lie_gradient)\n- Controllability analysis (lie_covector, lie_bracket)\n\n**Mathematical background:**\nGiven vector field f(x) and scalar function h(x), the Lie derivative is:\n  L_f h = \u2207h \u00b7 f = \u03a3 (\u2202h/\u2202x_i) f_i(x)\n\nHigher-order Lie derivatives (L_f^k h) reveal observability structure.\nLie brackets [f,g] = \u2202g/\u2202x\u00b7f - \u2202f/\u2202x\u00b7g reveal controllability structure.\n\n**Functions:**\n- lie_scalar(): Compute L_f^k h (scalar Lie derivatives)\n- lie_gradient(): Compute \u2207(L_f^k h) (gradients of Lie derivatives)\n- lie_covector(): Compute covector fields\n- lie_bracket(): Compute Lie bracket [f,g]",
+      "has_algorithm": false
+    },
+    {
+      "name": "dvlparms",
+      "brief": "Developer/maintainer configuration parameters\n\nInternal ADOL-C library-wide definitions for tape format versioning,\nfile naming, and system configuration. These parameters control\ntape compatibility and file I/O behavior.\n\n**Key Definitions:**\n- ADOLC_NEW_TAPE_VERSION/SUBVERSION/PATCHLEVEL: Tape format version\n- TAPE_DIR: Directory for tape files\n- ADOLC_*_NAME: Tape file naming patterns\n- statSpace: Statistics array size\n\n@note Modifying these may break tape compatibility",
       "has_algorithm": false
     },
     {
@@ -68,8 +158,23 @@
       "has_algorithm": false
     },
     {
+      "name": "externfcts2",
+      "brief": "External differentiated functions API (version 2)\n\nProvides interface for registering user-supplied derivative functions\nfor external code that cannot be traced by ADOL-C. Supports variable-\nsized input/output arrays with forward and reverse mode callbacks.\n\n**Workflow:**\n1. Define derivative callbacks (zos_forward, fos_forward, fos_reverse, etc.)\n2. Register with reg_ext_fct()\n3. Call within traced code using call_ext_fct()\n\n**Callback Types:**\n- ADOLC_ext_fct_v2: Zero-order (function evaluation)\n- ADOLC_ext_fct_v2_fos_forward: First-order scalar forward\n- ADOLC_ext_fct_v2_fov_forward: First-order vector forward\n- ADOLC_ext_fct_v2_fos_reverse: First-order scalar reverse\n- ADOLC_ext_fct_v2_fov_reverse: First-order vector reverse",
+      "has_algorithm": false
+    },
+    {
       "name": "fixpoint",
       "brief": "Differentiation through fixed-point iterations\n\nEnables automatic differentiation of implicit functions defined as\nfixed points x* = G(x*, u), where u are parameters.\n\n**Problem:** Many numerical methods involve iterative solvers:\n- Newton's method: x_{k+1} = x_k - f(x_k)/f'(x_k)\n- Nonlinear system solvers\n- Implicit time integrators\n\n**Solution:** fp_iteration() differentiates through the converged result\nwithout differentiating through all iteration steps, using the implicit\nfunction theorem: dx",
+      "has_algorithm": false
+    },
+    {
+      "name": "fortutils",
+      "brief": "Fortran array layout conversion utilities\n\nProvides functions to convert between Fortran column-major and\nC row-major array layouts for interoperability with Fortran code.\n\n**Functions:**\n- spread1/2/3(): Fortran \u2192 C (1D/2D/3D arrays)\n- pack1/2/3(): C \u2192 Fortran (1D/2D/3D arrays)\n\nUsed by the Fortran-callable wrappers of ADOL-C drivers.",
+      "has_algorithm": false
+    },
+    {
+      "name": "globaltapevarscl",
+      "brief": "Global tape variables for ADOL-C taping state\n\nDefines GlobalTapeVarsCL class containing per-tape global state:\nthe `store` array holding adouble values, buffer size configurations,\nparallel region flags, and StoreManager instances.",
       "has_algorithm": false
     },
     {
@@ -83,9 +188,29 @@
       "has_algorithm": false
     },
     {
+      "name": "medipacksupport",
+      "brief": "MeDiPack integration for MPI-parallel automatic differentiation\n\nProvides the AdolcTool class that integrates ADOL-C with MeDiPack for\ndifferentiating MPI-parallel programs. Defines type mappings and\ncallbacks required by MeDiPack's adjoint MPI framework.\n\n**Features:**\n- Automatic adjoint communication handling\n- Support for MPI collectives (reduce, gather, etc.)\n- Primal value caching for reverse mode\n\n@note Requires MeDiPack library and MPI",
+      "has_algorithm": false
+    },
+    {
+      "name": "medipacksupport_p",
+      "brief": "Private MeDiPack callbacks for tape interpretation\n\nInternal functions called during tape forward/reverse sweeps to\nhandle MeDiPack handle callbacks for MPI communication adjoints.\n\n@note Internal header; use medipacksupport.h for public API",
+      "has_algorithm": false
+    },
+    {
       "name": "odedrivers",
       "brief": "Taylor-based ODE integration drivers\n\nProvides drivers for solving and differentiating ODEs of the form\nx' = f(x) using Taylor series expansion. The tape records f(x),\nthen these drivers compute higher-order Taylor coefficients.",
       "has_algorithm": true
+    },
+    {
+      "name": "oplate",
+      "brief": "Operation tape opcode definitions\n\nDefines the OPCODES enum containing all operation codes recorded\non ADOL-C tapes during tracing. Each opcode represents a primitive\noperation (arithmetic, transcendental, control flow) that the tape\ninterpreter executes during forward/reverse sweeps.\n\n**Opcode Categories:**\n- Assignment: assign_ind, assign_dep, assign_a, assign_d\n- Arithmetic: plus_a_a, mult_a_a, div_a_a, etc.\n- Transcendental: exp_op, sin_op, log_op, etc.\n- Conditional: cond_assign, eq_zero, lt_zero, etc.\n- External: ext_diff, ext_diff_v2\n- MPI (optional): ampi_send, ampi_recv, etc.",
+      "has_algorithm": false
+    },
+    {
+      "name": "persistanttapeinfos",
+      "brief": "Persistent tape metadata surviving across tape re-use\n\nDefines PersistantTapeInfos struct containing file names, solver state\n(Jacobian solver, forward ODE solver), and keep flags that persist\nwhen a tape is re-used rather than recreated.",
+      "has_algorithm": false
     },
     {
       "name": "psdrivers",
@@ -108,6 +233,11 @@
       "has_algorithm": true
     },
     {
+      "name": "rpl_malloc",
+      "brief": "Replacement malloc/realloc for non-GNU systems\n\nProvides rpl_malloc, rpl_calloc, and rpl_realloc as fallbacks when\nthe system's malloc implementation is not GNU-compatible (e.g., on\nsome embedded systems or older Unix variants).\n\nOnly used internally when HAVE_MALLOC or HAVE_REALLOC are not set\nduring autoconf configuration.\n\n@note Internal header; not for direct use",
+      "has_algorithm": false
+    },
+    {
       "name": "sparse_fo_rev",
       "brief": "Bit-pattern propagation for sparsity detection\n\nProvides forward and reverse mode interfaces that propagate bit patterns\ninstead of numerical values. Used to efficiently determine the sparsity\nstructure of Jacobian and Hessian matrices.\n\nBit patterns are packed into size_t words for efficiency. For n independent\nvariables, the seed matrix X[n][p] uses p = ceil(n / bits_per_long) words\nper row, where bits_per_long = 8 * sizeof(size_t).\n\nTwo modes:\n- **Tight**: Uses actual values x[] during propagation (more accurate)\n- **Safe**: Uses only bit patterns (faster, may overestimate sparsity)",
       "has_algorithm": false
@@ -118,14 +248,39 @@
       "has_algorithm": true
     },
     {
+      "name": "storemanager",
+      "brief": "Variable location allocation for adouble values\n\nManages the global `store` array that holds adouble values during taping.\nImplements efficient allocation/deallocation of tape location indices\nusing free-list algorithms inspired by Stroustrup's allocator pattern.\n\n**Implementations:**\n- StoreManager: Abstract base class\n- StoreManagerLocint: Singleton location allocation with free list\n- StoreManagerLocintBlock: Block allocation for contiguous locations\n\n**Design Notes:**\nStoreManagerLocintBlock supports allocating contiguous blocks for vector\noperations while StoreManagerLocint is simpler for scalar-only use.\nBoth double the store size when exhausted.",
+      "has_algorithm": false
+    },
+    {
       "name": "tape_interface",
       "brief": "Tape management interface for ADOL-C automatic differentiation\n\nProvides functions for managing the \"tape\" - a recorded sequence of\noperations that can be replayed in forward or reverse mode to compute\nderivatives.",
       "has_algorithm": true
     },
     {
+      "name": "tapedoc",
+      "brief": "Tape documentation driver for debugging\n\nProvides tape_doc() function that prints a human-readable description\nof all operations recorded on a tape. Useful for debugging tape\nstructure and understanding what ADOL-C has recorded.\n\n**Usage:**\n```c\ntape_doc(tag, m, n, x, y);  // Prints tape 'tag' operations to stdout\n```",
+      "has_algorithm": false
+    },
+    {
+      "name": "tapeinfos",
+      "brief": "Core tape state for operation/location/value buffers\n\nDefines TapeInfos struct containing tape buffers (operations, locations,\nvalues, Taylors), file handles, buffer pointers, statistics, and\nlow-level tape I/O operations.\n\nAlso defines SparseJacInfos/SparseHessInfos for ColPack integration.",
+      "has_algorithm": false
+    },
+    {
       "name": "taylor",
       "brief": "Higher-order derivative tensors and implicit function differentiation\n\nProvides drivers for computing higher-order derivative tensors and\ndifferentiating through implicit/inverse functions.",
       "has_algorithm": true
+    },
+    {
+      "name": "usrparms",
+      "brief": "User-configurable ADOL-C performance parameters\n\nDefines buffer sizes and constants that can be tuned for specific\napplications. Larger buffers reduce file I/O but increase memory use.\n\n**Buffer Sizes:**\n- OBUFSIZE: Operation tape buffer (default 512KB)\n- LBUFSIZE: Location tape buffer (default 512KB)\n- VBUFSIZE: Value tape buffer (default 512KB)\n- TBUFSIZE: Taylor coefficient buffer (default 512KB)\n- TBUFNUM: Number of Taylor buffers (default 32)\n\n**Other Settings:**\n- fint/fdouble: Fortran interoperability types\n- ADOLC_EPS: Zero tolerance for numerical tests\n- ADOLC_CHECKUP/REPSUP: Checkpointing limits",
+      "has_algorithm": false
+    },
+    {
+      "name": "valuetape",
+      "brief": "Central ValueTape class orchestrating ADOL-C tape management\n\nComposes TapeInfos, GlobalTapeVarsCL, PersistantTapeInfos, and buffers\nfor checkpointing and external functions into a unified interface.\nProvides methods for tape creation, forward/reverse sweep initialization,\nTaylor coefficient management, and external function handling.\n\n**Key Operations:**\n- start_trace()/stop_trace(): Tape recording\n- init_for_sweep()/init_rev_sweep(): Sweep initialization\n- write_taylor()/get_taylor(): Taylor buffer management\n- next_loc()/free_loc(): Variable location allocation",
+      "has_algorithm": false
     }
   ]
 }

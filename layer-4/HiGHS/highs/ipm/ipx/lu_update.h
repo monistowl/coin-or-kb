@@ -1,3 +1,23 @@
+/**
+ * @file lu_update.h
+ * @brief Abstract interface for LU factorization with rank-1 updates
+ *
+ * Extends LuFactorization to support efficient Forrest-Tomlin updates
+ * for changing one column at a time (as in simplex iterations).
+ *
+ * **Workflow:**
+ * 1. Factorize(): Compute B = L·U
+ * 2. FtranForUpdate(): Solve B·x = b (incoming column)
+ * 3. BtranForUpdate(): Solve B'·y = e_j (outgoing column)
+ * 4. Update(): Apply Forrest-Tomlin update B_new = B with col j ← b
+ *
+ * **Return Codes:**
+ * - Factorize: 0=OK, 1=unstable, 2=singular, 3=both
+ * - Update: <0 singular, >0 unstable, 0=OK
+ *
+ * @see basiclu_wrapper.h for BasicLU implementation
+ * @see basis.h for usage in basis management
+ */
 #ifndef IPX_LU_UPDATE_H_
 #define IPX_LU_UPDATE_H_
 

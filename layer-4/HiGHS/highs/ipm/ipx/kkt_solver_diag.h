@@ -1,5 +1,27 @@
 // Copyright (c) 2018-2019 ERGO-Code. See license.txt for license.
 
+/**
+ * @file kkt_solver_diag.h
+ * @brief KKT solver using CR with diagonal preconditioning
+ *
+ * Implements the KKT system solver for IPX using conjugate residuals (CR)
+ * with diagonal preconditioning of the normal equations.
+ *
+ * **Algorithm:**
+ * Solves the augmented system by reducing to normal equations
+ * (A·W·A')·y = b, then applies CR with preconditioner M = diag(A·W·A').
+ *
+ * **Regularization:**
+ * If the (1,1) block is not positive definite, adds regularization
+ * to ensure convergence.
+ *
+ * Simpler than basis preconditioning but less effective for
+ * ill-conditioned problems.
+ *
+ * @see kkt_solver.h for the abstract interface
+ * @see kkt_solver_basis.h for basis preconditioning alternative
+ * @see diagonal_precond.h for the preconditioner
+ */
 #ifndef IPX_KKT_SOLVER_DIAG_H_
 #define IPX_KKT_SOLVER_DIAG_H_
 

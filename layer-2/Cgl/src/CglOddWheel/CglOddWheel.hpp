@@ -12,17 +12,37 @@
  * Contact: samuelbrito@ufop.edu.br and haroldo@ufop.edu.br
  * @date 03/27/2020
  *
- * An odd wheel is an odd hole (chordless odd cycle) with a "center"
- * vertex connected to all cycle vertices. The wheel inequality:
- *   sum_{i in cycle} x_i + (k)*x_center <= k
- * where k = (cycle_length - 1) / 2.
+ * @algorithm Odd-Wheel Separation:
+ * Find violated odd-cycle inequalities and lift to odd-wheels.
+ *
+ *   ODD HOLE (base):
+ *     Chordless cycle C = (v₁,v₂,...,v₂ₖ₊₁,v₁) of odd length
+ *     Cut: Σᵢ xᵢ ≤ k  where k = (2k+1-1)/2 = k
+ *     Valid because at most k non-adjacent vertices in cycle
+ *
+ *   ODD WHEEL (lifted):
+ *     Odd hole C plus center vertex c adjacent to all of C
+ *     Cut: Σᵢ∈C xᵢ + k·x_c ≤ k
+ *     Stronger: center connected to entire cycle
+ *
+ *   SEPARATION:
+ *     Build conflict graph G (edges = binary incompatibilities)
+ *     Find shortest odd path between x and x̄ for each variable
+ *     Violated if fractional LP value > RHS
+ *
+ * @math
+ *   Odd hole: cycle length 2k+1, at most k vertices can be 1
+ *   Wheel inequality coefficient for center:
+ *     k = floor(|cycle|/2)
  *
  * Lifting strategies (extMethod_):
  * - 0: No lifting (just odd holes)
  * - 1: Single variable as wheel center
  * - 2: Clique as wheel center (strongest)
  *
- * Uses CoinConflictGraph to find odd cycles via shortest paths.
+ * @complexity
+ *   Finding odd cycles: O(n × m) BFS from each variable
+ *   Lifting: O(|cycle| × |neighbors|) per cycle
  *
  * @see CglOddHole for simpler odd-hole cuts
  * @see CglBKClique for clique cuts from same conflict graph

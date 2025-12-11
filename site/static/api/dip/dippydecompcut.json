@@ -1,0 +1,13 @@
+{
+  "name": "DippyDecompCut",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/dippy/DippyDecompCut.h",
+  "brief": "Python-compatible DecompCut for Dippy user-defined cuts\n\nImplements DippyDecompCut which stores cuts generated from Python\ncallbacks using simple index/element arrays. Allows Python code\nto define cutting planes that integrate with DIP's cut management.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DippyDecompApp.h for Python cut generation callback",
+    "DecompCut.h for base cut interface"
+  ]
+}

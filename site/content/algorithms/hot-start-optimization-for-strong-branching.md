@@ -30,7 +30,8 @@ Most operations O(1) delegations to ClpSimplex
 
 ### Clp
 
-- **{{ link(path="/browser/?library=Clp", text="OsiClpSolverInterface.hpp") }}** - 
+- **[OsiClpSolverInterface.hpp](/coin-or-kb/browser/?library=Clp)** - 
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-1/Clp/src/OsiClp/OsiClpSolverInterface.hpp)
 
 ## References
 

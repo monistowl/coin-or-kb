@@ -8,8 +8,33 @@
       "has_algorithm": false
     },
     {
+      "name": "AlpsAix43",
+      "brief": "Platform-specific definitions for IBM AIX 4.3\n\nProvides AIX-specific system includes, type definitions, and compiler\nmacros for the ALPS parallel search framework. Includes gettimeofday(),\ngetrusage(), and memory management macros for GCC and IBM compilers.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsConfig",
+      "brief": "Unified configuration header for Alps library\n\nMain entry point for Alps configuration that routes to the appropriate\nsettings based on build environment. With autotools (HAVE_CONFIG_H),\nincludes generated config.h. Without autotools, uses config_default.h\nfor building or config_alps_default.h for clients. Sets up ALPSLIB_EXPORT\nfor proper DLL import/export on Windows and GCC visibility.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsCygwin",
+      "brief": "Platform-specific definitions for Cygwin (Windows POSIX layer)\n\nProvides Cygwin-specific system includes, type definitions, and compiler\nmacros. Disables setpriority() (not available on Cygwin), defines memory\nmanagement macros for GCC 2.x vs 3.x+.",
+      "has_algorithm": false
+    },
+    {
       "name": "AlpsEncoded",
       "brief": "Serialization buffer for ALPS knowledge objects\n\nAlpsEncoded is the binary buffer for packing/unpacking AlpsKnowledge\nobjects for network transmission in parallel search.\n\n**Buffer structure:**\n- type_: Integer identifying the knowledge type\n- size_: Current data size in bytes\n- representation_: Raw byte buffer\n- pos_: Current read position\n\n**Template methods for serialization:**\n- writeRep(T): Write single value\n- readRep(T): Read single value\n- writeRep(T*, len): Write array with length prefix\n- readRep(T*, len): Read array\n- writeRep/readRep for std::string, std::vector\n\n**Memory management:**\n- Default: 16KB initial allocation\n- make_fit(): Grows buffer as needed (4x growth)\n- clear(): Reset buffer to empty state\n\nBased on BCP_buffer and CoinEncoded designs.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsEnumProcessT",
+      "brief": "Process type enumeration for parallel search\n\nDefines AlpsProcessType enum identifying roles in distributed computing:\nSerial (single process), Master (coordinator), Hub (cluster manager),\nWorker (search executor), and specialized generators (CG/VG cut/variable,\nCP/VP constraint/variable pool managers).",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsHelperFunctions",
+      "brief": "Utility functors and helper functions for ALPS\n\nProvides TotalWorkload functor for computing workload estimates across\nnode pools (used in load balancing), DeletePtrObject functor for cleanup,\nand AlpsSleep() for CPU-based delays. Used internally by node pool and\nload balancing mechanisms.",
       "has_algorithm": false
     },
     {
@@ -19,8 +44,8 @@
     },
     {
       "name": "AlpsKnowledgeBroker",
-      "brief": "Central manager for parallel tree search knowledge and coordination\n\nAlpsKnowledgeBroker is the abstract base class for search coordination.\nIt manages knowledge pools, search strategy, and execution statistics.\n\n**Key responsibilities:**\n- Manage SubTreePool and SolutionPool\n- Register knowledge types for serialization\n- Track search statistics (nodes processed, branched, etc.)\n- Apply search strategy (node/tree selection)\n\n**Knowledge pool management:**\n- addKnowledge()/getKnowledge(): Store/retrieve knowledge\n- registerClass(): Register decode functions for parallel\n- decoderObject(): Get decoder for knowledge type\n\n**Search phases (AlpsPhase):**\n- Rampup: Initial node generation and distribution\n- Search: Main parallel exploration\n- Rampdown: Collect results and terminate\n\n**Implementations:**\n- AlpsKnowledgeBrokerSerial: Single-process execution\n- AlpsKnowledgeBrokerMPI: MPI-based parallel execution",
-      "has_algorithm": false
+      "brief": "Central manager for parallel tree search knowledge and coordination\n\nAlpsKnowledgeBroker is the abstract base class for search coordination.\nIt manages knowledge pools, search strategy, and execution statistics.",
+      "has_algorithm": true
     },
     {
       "name": "AlpsKnowledgeBrokerMPI",
@@ -38,8 +63,28 @@
       "has_algorithm": false
     },
     {
+      "name": "AlpsLicense",
+      "brief": "License and copyright header for ALPS library\n\nContains the standard ALPS copyright notice and Eclipse Public License\nheader. Included for license compliance in source distributions.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsLinux",
+      "brief": "Platform-specific definitions for Linux systems\n\nProvides Linux-specific system includes, type definitions, and compiler\nmacros for GCC 2.x and 3.x+. Includes gettimeofday(), setpriority(),\ngethostname(), and memory management macros (ALPS_CONSTRUCT, ALPS_DESTROY).",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsMACH",
+      "brief": "Platform-specific definitions for macOS (Darwin/Mach)\n\nProvides macOS-specific system includes, type definitions, and compiler\nmacros for GCC on Darwin kernel. Includes gettimeofday(), setpriority(),\ngethostname(), and memory management macros for GCC 2.x vs 3.x+.",
+      "has_algorithm": false
+    },
+    {
       "name": "AlpsMessage",
       "brief": "Log messages for ALPS search status and events\n\nDefines ALPS_Message enum for CoinMessageHandler logging.\nNOT the MPI message tags (see AlpsMessageTag.h).\n\n**Message categories:**\n- ALPS_DONATE_*: Work donation events\n- ALPS_LOADBAL_*: Load balancing status\n- ALPS_RAMPUP_*: Initial distribution phase\n- ALPS_TERM_*: Termination detection\n- ALPS_S_*: Serial-only messages\n- ALPS_T_*: Termination reasons\n\n**AlpsMessage class:**\nExtends CoinMessages with ALPS-specific message definitions.\nUsed with CoinMessageHandler for consistent logging.",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsMessageTag",
+      "brief": "MPI message tag enumeration for parallel search\n\nDefines 45+ AlpsMessageTag values for inter-process communication in\ndistributed tree search. Categories include:\n- Control: termination, pause, continue (AlpsMsgContOrTerm, AlpsMsgAskTerminate)\n- Load balancing: donate requests, workload sharing (AlpsMsgAskDonate, AlpsMsgLoadInfo)\n- Status: hub/worker status reporting (AlpsMsgHubStatus, AlpsMsgWorkerStatus)\n- Data: model/node/subtree transfer (AlpsMsgModel, AlpsMsgNode, AlpsMsgSubTree)",
       "has_algorithm": false
     },
     {
@@ -58,6 +103,11 @@
       "has_algorithm": false
     },
     {
+      "name": "AlpsOs",
+      "brief": "Platform detection and routing for ALPS\n\nDetects the current operating system and includes the appropriate\nplatform-specific header. Supports Linux (AlpsLinux.h), Cygwin\n(AlpsCygwin.h), AIX 4.3 (AlpsAix43.h), SunOS (AlpsSunos.h), and\nmacOS/Darwin (AlpsMACH.h).",
+      "has_algorithm": false
+    },
+    {
       "name": "AlpsParameterBase",
       "brief": "Generic parameter management infrastructure for ALPS\n\nBase classes for defining and parsing typed parameter sets.\nDerived from BCP_parameters.hpp design.\n\n**AlpsParameterT enum:**\n- AlpsBoolPar, AlpsIntPar, AlpsDoublePar, AlpsStringPar\n- AlpsStringArrayPar: Multiple values per key\n\n**AlpsParameter class:**\nIdentifies a single parameter by type and index within type.\n\n**AlpsParameterSet class:**\nContainer for typed parameter arrays with file parsing.\nSubclasses must implement:\n- createKeywordList(): Define keyword\u2192parameter mappings\n- setDefaultEntries(): Set default values\n\n**Reading parameters:**\n- readFromFile(): Parse parameter file\n- readFromStream(): Parse from istream\n- readFromArglist(): Parse command-line args",
       "has_algorithm": false
@@ -68,9 +118,14 @@
       "has_algorithm": false
     },
     {
-      "name": "AlpsSearchStrategy",
-      "brief": "Node and subtree selection strategies for ALPS tree search\n\nDefines comparison classes for selecting which node or subtree to explore next.\ncompare(x,y) returns true if y should be processed before x.\n\n**Subtree selection (AlpsTreeSelection):**\n- AlpsTreeSelectionBest: Best quality subtree first\n- AlpsTreeSelectionBreadth: Shallowest root first\n- AlpsTreeSelectionDepth: Deepest root first\n- AlpsTreeSelectionEstimate: Best estimated solution first\n\n**Node selection (AlpsNodeSelection):**\n- AlpsNodeSelectionBest: Best bound first (minimize dual gap)\n- AlpsNodeSelectionBreadth: BFS (shallowest first)\n- AlpsNodeSelectionDepth: DFS (deepest first, finds solutions fast)\n- AlpsNodeSelectionEstimate: Best estimated solution first\n- AlpsNodeSelectionHybrid: Combination strategy\n\n**Hybrid strategy:**\nCombines best-first selection with diving for solution finding.\nselectNextNode() and createNewNodes() can be overridden.",
+      "name": "AlpsPriorityQueue",
+      "brief": "Template priority queue with dynamic comparison function\n\nProvides AlpsPriorityQueue template class that wraps std::vector with\nheap operations, supporting dynamic comparison function changes. Used\nfor node pool management where search strategy can change at runtime\n(best-first, depth-first, breadth-first, etc.).",
       "has_algorithm": false
+    },
+    {
+      "name": "AlpsSearchStrategy",
+      "brief": "Node and subtree selection strategies for ALPS tree search",
+      "has_algorithm": true
     },
     {
       "name": "AlpsSearchStrategyBase",
@@ -89,12 +144,17 @@
     },
     {
       "name": "AlpsSubTree",
-      "brief": "Subtree management for ALPS parallel tree search\n\nAlpsSubTree is the basic unit of work in parallel ALPS. Workers process\nentire subtrees autonomously, enabling scalable parallelism.\n\n**Key components:**\n- root_: Root node of this subtree\n- nodePool_: Leaf nodes awaiting processing\n- diveNodePool_: Nodes for diving exploration\n- activeNode_: Currently being processed\n\n**Core operations:**\n- exploreSubTree(): Process nodes up to limits\n- exploreUnitWork(): Process bounded amount of work\n- createChildren(): Branch and add children to pool\n- splitSubTree(): Split off portion for redistribution\n- rampUp(): Generate initial nodes for parallel start\n\n**Diving strategy:**\n- diveNodePool_ holds nodes for deep exploration\n- diveDepth_ tracks current dive depth\n- Helps find feasible solutions quickly\n\n**Dead node removal:**\n- removeDeadNodes(): Recursively remove fathomed branches\n- fathomAllNodes(): Clear entire subtree",
-      "has_algorithm": false
+      "brief": "Subtree management for ALPS parallel tree search\n\nAlpsSubTree is the basic unit of work in parallel ALPS. Workers process\nentire subtrees autonomously, enabling scalable parallelism.",
+      "has_algorithm": true
     },
     {
       "name": "AlpsSubTreePool",
       "brief": "Pool of subtrees for work distribution in parallel search\n\nAlpsSubTreePool stores subtrees for load balancing between processes.\nKey component for parallel scalability in ALPS.\n\n**Storage:**\n- subTreeList_: Priority queue of AlpsSubTree pointers\n- Ordering by subtree quality for work distribution\n\n**Key operations:**\n- addKnowledge(): Add subtree from work donation\n- getKnowledge()/popKnowledge(): Get subtree for processing\n- setComparison(): Set subtree selection strategy\n- getBestQuality(): Get quality of best subtree\n\n**Parallel use:**\n- Serial: Single subtree in pool\n- Parallel: Multiple subtrees for load balancing\n- Subtrees split/merged for work sharing",
+      "has_algorithm": false
+    },
+    {
+      "name": "AlpsSunos",
+      "brief": "Platform-specific definitions for SunOS/Solaris (SPARC)\n\nProvides SunOS-specific system includes, type definitions, and compiler\nmacros for GCC on SPARC architecture. Includes gettimeofday(), setpriority(),\ngethostname(), and memory management macros.",
       "has_algorithm": false
     },
     {
@@ -105,6 +165,16 @@
     {
       "name": "AlpsTreeNode",
       "brief": "Search tree node abstraction for ALPS parallel tree search\n\nAlpsTreeNode represents a single node in the search tree. Users inherit\nthis class to implement application-specific node processing.\n\n**Node status lifecycle (AlpsNodeStatus):**\n- Candidate: Waiting in pool for processing\n- Evaluated: Processed, waiting for branching decision\n- Pregnant: Ready to branch, has child descriptions\n- Branched: Children created and added to pool\n- Fathomed: Pruned (by bound, infeasibility, or solution)\n\n**Key virtual methods:**\n- process(): Perform bounding operation (e.g., LP solve)\n- branch(): Create child nodes from pregnant node\n- createNewTreeNode(): Factory for child node creation\n\n**Node data:**\n- quality_: Node quality for selection (lower = better)\n- solEstimate_: Estimated solution quality\n- desc_: AlpsNodeDesc holding problem-specific data\n- explicit_: 1=full description, 0=relative/diff",
+      "has_algorithm": false
+    },
+    {
+      "name": "config_alps_default",
+      "brief": "Public Alps version macros for non-autotools builds\n\nDefines version information (ALPS_VERSION, ALPS_VERSION_MAJOR/MINOR/RELEASE)\nand optional MPI availability (COIN_HAS_MPI). This is the public header\nincluded by users of the Alps library when not using autotools.",
+      "has_algorithm": false
+    },
+    {
+      "name": "config_default",
+      "brief": "Default build configuration for Alps without autotools\n\nProvides configuration for builds not using the configure script.\nIncludes system-specific settings via configall_system.h and public\nversion macros. Defines debug levels (COIN_ALPS_CHECKLEVEL, VERBOSITY)\nand package dependencies (ALPS_HAS_COINUTILS, ALPS_HAS_CLP).",
       "has_algorithm": false
     }
   ]

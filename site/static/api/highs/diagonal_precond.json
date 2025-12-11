@@ -1,0 +1,13 @@
+{
+  "name": "diagonal_precond",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/diagonal_precond.h",
+  "brief": "Diagonal preconditioner for normal equations: diag(A\u00b7W\u00b7A')\n\nImplements a simple diagonal preconditioner for the KKT solver.\nComputes and applies M\u207b\u00b9 where M = diag(AI\u00b7W\u00b7AI').\n\nWhile less effective than basis preconditioning for ill-conditioned\nproblems, diagonal preconditioning is cheaper to compute and update.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "linear_operator.h for the operator interface",
+    "kkt_solver_diag.h for the KKT solver using this"
+  ]
+}

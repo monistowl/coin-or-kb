@@ -26,8 +26,9 @@ Insertion: O(1) amortized with dynamic arrays
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinModel.hpp") }}** - High-level model building with string names and expressions
+- **[CoinModel.hpp](/coin-or-kb/browser/?library=CoinUtils)** - High-level model building with string names and expressions
 
 CoinModel provides a flexible interface for constructing LP/MIP models.
 Supports row/column names, string-based expressions, and incremental
 building. Convert to CoinPackedMatrix for solver use.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinModel.hpp)

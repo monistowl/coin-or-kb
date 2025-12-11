@@ -1,3 +1,14 @@
+/**
+ * @file DecompConfig.h
+ * @brief Unified configuration header for DIP decomposition framework
+ *
+ * Selects between autotools-generated config.h and default configuration
+ * headers based on HAVE_CONFIG_H. Provides a single include point for
+ * build-time configuration regardless of build system used.
+ *
+ * @see config_default.h for non-autotools internal config
+ * @see config_dip_default.h for non-autotools public macros
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

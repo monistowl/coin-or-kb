@@ -16,7 +16,7 @@ Reverse mode computes derivatives from outputs backward.
 
 ### CppAD
 
-- **{{ link(path="/browser/?library=CppAD", text="ad_fun.hpp") }}** - ADFun class - function object storing recorded AD operations
+- **[ad_fun.hpp](/coin-or-kb/browser/?library=CppAD)** - ADFun class - function object storing recorded AD operations
 
 ADFun<Base> stores a recorded sequence of operations and provides
 methods to evaluate the function and its derivatives.
@@ -27,3 +27,4 @@ Key methods:
 - **Jacobian(x)**: Full Jacobian matrix
 - **Hessian(x, w)**: Weighted Hessian matrix
 - **SparseJacobian/SparseHessian**: Sparse derivative computation
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-1/CppAD/include/cppad/core/ad_fun.hpp)

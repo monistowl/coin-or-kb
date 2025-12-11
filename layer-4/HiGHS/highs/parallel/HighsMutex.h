@@ -5,7 +5,32 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
+/**
+ * @file parallel/HighsMutex.h
+ * @brief Scheduler-aware mutex with work stealing during wait
+ *
+ * Mutex that yields to task scheduler when spinning, allowing useful
+ * work to continue while waiting for lock acquisition.
+ *
+ * **Lock Strategy (3 phases):**
+ * 1. Fast path: Direct CAS for uncontended case
+ * 2. Spin phase: Yield to scheduler, execute stolen tasks
+ * 3. Wait phase: Register as next owner, block until notified
+ *
+ * **State Encoding:**
+ * - 0: Unlocked
+ * - 1: Locked, no waiters
+ * - (ownerId+1)<<1 | 1: Locked with waiting owner encoded
+ *
+ * **Integration with Task Scheduler:**
+ * - localDeque->yield(): Try stealing work during spin
+ * - localDeque->wait()/notify(): Sleep/wake coordination
+ *
+ * Exported as highs::parallel::mutex for user code.
+ *
+ * @see parallel/HighsParallel.h for mutex alias
+ * @see parallel/HighsSplitDeque.h for yield/wait implementation
+ */
 #ifndef HIGHS_MUTEX_H_
 #define HIGHS_MUTEX_H_
 

@@ -1,0 +1,12 @@
+{
+  "name": "CoinWarmStart",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CoinWarmStart.h",
+  "brief": ".NET wrapper for solver warm start information\n\nWraps ::CoinWarmStart for persisting and restoring solver\nstate (basis information). Enables efficient re-optimization\nafter small problem modifications without restarting from scratch.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiSolverInterface for getWarmStart/setWarmStart methods"
+  ]
+}

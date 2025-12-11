@@ -1,0 +1,13 @@
+{
+  "name": "AlpsMACH",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsMACH.h",
+  "brief": "Platform-specific definitions for macOS (Darwin/Mach)\n\nProvides macOS-specific system includes, type definitions, and compiler\nmacros for GCC on Darwin kernel. Includes gettimeofday(), setpriority(),\ngethostname(), and memory management macros for GCC 2.x vs 3.x+.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsOs.h for platform detection",
+    "AlpsLinux.h for Linux equivalents"
+  ]
+}

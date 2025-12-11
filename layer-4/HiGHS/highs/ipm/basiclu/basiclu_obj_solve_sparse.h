@@ -1,3 +1,13 @@
+/**
+ * @file basiclu_obj_solve_sparse.h
+ * @brief Solve linear system with sparse RHS using BasicLU object
+ *
+ * Object-oriented wrapper for basiclu_solve_sparse().
+ * Solution stored in obj->lhs with pattern in obj->ilhs[0..obj->nzlhs-1].
+ *
+ * @see basiclu_solve_sparse.h for Gilbert-Peierls algorithm
+ * @see basiclu_object.h for accessing solution
+ */
 lu_int basiclu_obj_solve_sparse
 (
     struct basiclu_object *obj,

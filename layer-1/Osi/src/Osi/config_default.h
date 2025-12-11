@@ -1,3 +1,15 @@
+/**
+ * @file config_default.h
+ * @brief Default build configuration for Osi without autotools
+ *
+ * Provides configuration for builds not using the configure script.
+ * Sets OSILIB_EXPORT for DLL building and includes public version macros.
+ * Defines which solver interfaces are available (CPLEX, GLPK, Gurobi,
+ * Mosek, SoPlex, Xpress) - uncomment the appropriate OSI_HAS_* macros.
+ *
+ * @see config_osi_default.h for public version macros
+ * @see configall_system.h for system-specific settings
+ */
 
 /* include the COIN-OR-wide system specific configure header */
 #include "configall_system.h"

@@ -1,3 +1,15 @@
+/**
+ * @file BlisPresolve.h
+ * @brief LP presolve interface for BLIS solver
+ *
+ * Provides BlisPresolve class that wraps OsiPresolve/CoinPresolve for model
+ * preprocessing before branch-and-bound. Simplifies LP relaxations through
+ * bound tightening, redundant constraint removal, and variable fixing.
+ * Supports postsolve to recover original variable values.
+ *
+ * @see OsiPresolve.hpp for base class
+ * @see BlisModel.h for BLIS model using presolve
+ */
 /*===========================================================================*
  * This file is part of the BiCePS Linear Integer Solver (BLIS).             *
  *                                                                           *

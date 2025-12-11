@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_wrapper",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/basiclu_wrapper.h",
+  "brief": "C++ wrapper for BasicLU with LuUpdate interface\n\nImplements LuUpdate interface using BasicLU for sparse LU factorization\nwith Forrest-Tomlin updates. Provides RAII memory management.\n\n**Features:**\n- Automatic memory reallocation (kReallocFactor = 1.5)\n- FTRAN/BTRAN for update preparation\n- Fill factor tracking for refactorization decisions",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lu_update.h for the interface",
+    "basiclu.h for the underlying library"
+  ]
+}

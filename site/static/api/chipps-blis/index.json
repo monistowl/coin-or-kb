@@ -29,8 +29,8 @@
     },
     {
       "name": "BlisBranchStrategyPseudo",
-      "brief": "Pseudo-cost branching strategy based on historical LP degradation\n\nPseudo-cost branching uses learned estimates of objective degradation\nto select branching variables without solving child LPs.\n\n**Pseudo-cost definition:**\nFor variable x\u2c7c with fractional value f\u2c7c = x\u2c7c* - floor(x\u2c7c*):\n- \u03c8\u2c7c\u207b = average (\u0394Obj / f\u2c7c) over down branches\n- \u03c8\u2c7c\u207a = average (\u0394Obj / (1-f\u2c7c)) over up branches\n\n**Algorithm:**\n1. For each fractional integer variable x\u2c7c with value x\u2c7c*:\n   - Estimate down degradation: \u0394\u207b = \u03c8\u2c7c\u207b \u00b7 f\u2c7c\n   - Estimate up degradation: \u0394\u207a = \u03c8\u2c7c\u207a \u00b7 (1-f\u2c7c)\n   - Score = \u03bc\u00b7min(\u0394\u207b, \u0394\u207a) + (1-\u03bc)\u00b7max(\u0394\u207b, \u0394\u207a)\n2. Select variable with highest score\n\n**Initialization:**\nBefore enough observations, uses default pseudo-costs or\nfalls back to other criteria (objective coefficient, etc.)\n\n**Complexity:** O(n) where n = number of integer variables\nMuch faster than strong branching but less accurate.",
-      "has_algorithm": false
+      "brief": "Pseudo-cost branching strategy based on historical LP degradation",
+      "has_algorithm": true
     },
     {
       "name": "BlisBranchStrategyRel",
@@ -39,12 +39,17 @@
     },
     {
       "name": "BlisBranchStrategyStrong",
-      "brief": "Strong branching strategy for MILP variable selection\n\nStrong branching is the most accurate (but expensive) branching strategy.\nFor each candidate variable, it actually solves child LP relaxations\nto measure the objective degradation.\n\n**Algorithm:**\n1. For each fractional integer variable x\u2c7c:\n   - Create down branch (x\u2c7c \u2264 floor(x\u2c7c*))\n   - Create up branch (x\u2c7c \u2265 ceil(x\u2c7c*))\n   - Solve both LPs (limited iterations)\n   - Record objective change \u0394Down, \u0394Up\n2. Score = \u03bc\u00b7min(\u0394Down, \u0394Up) + (1-\u03bc)\u00b7max(\u0394Down, \u0394Up)\n3. Select variable with highest score\n\n**BlisStrong struct:**\nStores results for one candidate: objective changes, infeasibility counts,\nsolver completion status for up/down branches.\n\n**Trade-offs:**\n- Produces smallest search trees (best variable selection)\n- Very expensive at each node (many LP solves)\n- Typically used with iteration limits per candidate LP",
-      "has_algorithm": false
+      "brief": "Strong branching strategy for MILP variable selection",
+      "has_algorithm": true
     },
     {
       "name": "BlisConGenerator",
       "brief": "Interface between BLIS and CGL cut generators\n\nWraps a CglCutGenerator with configuration controlling when and how\ncutting planes are generated during branch-and-cut.\n\n**Strategy options (BlisCutStrategy):**\n- None: Cut generator disabled\n- Root: Generate cuts only at root node\n- Auto: BLIS decides based on effectiveness\n- Periodic: Generate every cutGenerationFrequency_ nodes\n\n**Trigger conditions:**\n- normal_: Call in standard cut generation loop\n- atSolution_: Call when integer solution found\n- whenInfeasible_: Call when LP becomes infeasible\n\n**Statistics tracked:**\n- numConsGenerated_/numConsUsed_: Cut effectiveness\n- time_: CPU time spent in generator\n- calls_/noConsCalls_: Call frequency tracking\n\n**Usage:**\n1. Create: BlisConGenerator(model, new CglGomory(), \"Gomory\")\n2. Register: model->addCutGenerator(generator)\n3. BLIS calls generateConstraints() based on strategy",
+      "has_algorithm": false
+    },
+    {
+      "name": "BlisConfig",
+      "brief": "Unified configuration header for BLIS library\n\nMain entry point for BLIS configuration that routes to the appropriate\nsettings based on build environment. With autotools (HAVE_CONFIG_H),\nincludes generated config.h. Without autotools, uses config_default.h\nfor building or config_blis_default.h for clients. Sets up BLISLIB_EXPORT\nfor proper DLL import/export on Windows and GCC visibility.",
       "has_algorithm": false
     },
     {
@@ -68,14 +73,19 @@
       "has_algorithm": false
     },
     {
+      "name": "BlisLicense",
+      "brief": "License and copyright header for BLIS library\n\nContains the standard BLIS copyright notice and Eclipse Public License\nheader. Included for license compliance in source distributions.",
+      "has_algorithm": false
+    },
+    {
       "name": "BlisMessage",
       "brief": "Log messages for BLIS MILP solver events\n\nDefines BLIS_Message enum for CoinMessageHandler logging.\nSimilar to CoinMessages but specialized for BLIS output.\n\n**Message types:**\n- BLIS_CUTOFF_INC: Cutoff improvement\n- BLIS_CUT_STAT_*: Cut generation statistics\n- BLIS_GAP_*: Optimality gap status\n- BLIS_HEUR_*: Heuristic events and statistics\n- BLIS_ROOT_*: Root node processing info",
       "has_algorithm": false
     },
     {
       "name": "BlisModel",
-      "brief": "MILP model class extending BiCePS for branch-and-cut\n\nBlisModel is the main model class for the BLIS MILP solver.\nExtends BcpsModel with LP solver, cut generators, heuristics, and branching.\n\n**Initialization workflow:**\n1. readInstance() or importModel(): Load problem data\n2. readParameters(): Configure solver behavior\n3. setupSelf(): Initialize LP solver, objects, strategies\n4. preprocess(): Apply presolve transformations\n5. createRoot(): Create initial search tree node\n\n**LP Solver integration:**\n- origLpSolver_: User-provided OsiSolverInterface\n- presolvedLpSolver_: After presolve transformations\n- lpSolver_: Active solver (presolved or original)\n\n**Cut generation:**\n- addCutGenerator(): Register CglCutGenerator or BlisConGenerator\n- cutStrategy_: When to generate (Root, Auto, Periodic)\n- constraintPool_: Store generated cuts\n\n**Branching:**\n- branchStrategy_: BcpsBranchStrategy for variable selection\n- objects_: BcpsObject array (integer variables, SOS, etc.)\n- priority_: Branching priorities per object\n\n**Heuristics:**\n- addHeuristic(): Register BlisHeuristic instances\n- heurStrategy_: When to call (Root, Auto, Periodic, BeforeRoot)\n\n**Solution management:**\n- incumbent_: Best integer solution found\n- cutoff_: Objective bound for pruning\n- storeSolution(): Record new solutions\n\n**Parallel support:**\n- encode()/decodeToSelf(): Serialize model for MPI\n- packSharedKnowledge(): Share pseudo-costs, cuts, variables",
-      "has_algorithm": false
+      "brief": "MILP model class extending BiCePS for branch-and-cut\n\nBlisModel is the main model class for the BLIS MILP solver.\nExtends BcpsModel with LP solver, cut generators, heuristics, and branching.",
+      "has_algorithm": true
     },
     {
       "name": "BlisNodeDesc",
@@ -93,6 +103,11 @@
       "has_algorithm": false
     },
     {
+      "name": "BlisPresolve",
+      "brief": "LP presolve interface for BLIS solver\n\nProvides BlisPresolve class that wraps OsiPresolve/CoinPresolve for model\npreprocessing before branch-and-bound. Simplifies LP relaxations through\nbound tightening, redundant constraint removal, and variable fixing.\nSupports postsolve to recover original variable values.",
+      "has_algorithm": false
+    },
+    {
       "name": "BlisPseudo",
       "brief": "Pseudo-cost data structure for branching variable selection\n\nTracks historical LP objective degradation when branching on a variable.\nUsed to estimate branching quality without solving child LPs.\n\n**Pseudo-cost formula:**\nFor variable x\u2c7c branched with fractional part f:\n- Up cost: \u03c8\u207a = \u0394obj\u207a / (1 - f), averaged over up branches\n- Down cost: \u03c8\u207b = \u0394obj\u207b / f, averaged over down branches\n\n**Score calculation:**\nscore_ = weight_ * min(downCost_, upCost_) + (1 - weight_) * max(...)\nDefault weight_ = 1.0 emphasizes minimum degradation.\n\n**Key members:**\n- upCost_/downCost_: Average per-unit objective change\n- upCount_/downCount_: Number of observations (for reliability)\n- weight_: Weighting in score formula [0, 1]\n\n**Usage:**\n- update(): Called after branching to incorporate new observation\n- getScore(): Returns estimated branching quality\n- Serializable via AlpsKnowledge for parallel sharing",
       "has_algorithm": false
@@ -103,6 +118,11 @@
       "has_algorithm": false
     },
     {
+      "name": "BlisSubTree",
+      "brief": "Branch-and-bound tree node processing (legacy/stub)\n\nDefines BlisTreeNode class for branch-and-bound node processing.\nHandles LP solving, branching decisions, and node fathoming. This is\na legacy stub file - the main implementation is in BlisTreeNode.h.",
+      "has_algorithm": false
+    },
+    {
       "name": "BlisTreeNode",
       "brief": "Concrete branch-and-bound tree node for MILP solving\n\nBlisTreeNode extends BcpsTreeNode with LP-based bounding and cut generation.\nImplements the main node processing loop for branch-and-cut.\n\n**Node processing (process()):**\n1. installSubProblem(): Set up LP with current bounds\n2. bound(): Solve LP relaxation\n3. callHeuristics(): Search for integer solutions\n4. generateConstraints(): Add cutting planes\n5. selectBranchObject(): Choose branching variable\n6. branch(): Create child nodes\n\n**Cut generation workflow:**\n- generateConstraints(): Call registered CglCutGenerators\n- getViolatedConstraints(): Check for violated cuts\n- applyConstraints(): Add cuts to LP and re-solve\n- parallel(): Remove duplicate/parallel cuts\n\n**Bound tightening:**\n- reducedCostFix(): Fix variables using reduced costs\n\n**Node descriptions:**\n- convertToExplicit(): Full bound/cut information\n- convertToRelative(): Delta from parent (space-efficient)\n\n**Branching:**\n- selectBranchObject(): Use model's BcpsBranchStrategy\n- branch(): Create children with modified bounds",
       "has_algorithm": false
@@ -110,6 +130,16 @@
     {
       "name": "BlisVariable",
       "brief": "Variable representation for column generation in BLIS\n\nExtends BcpsVariable with sparse column representation for LP.\nUsed when variables are generated dynamically (column generation).\n\n**Data members:**\n- objCoef_: Objective coefficient for this variable\n- size_, indices_, values_: Sparse column in constraint matrix\n\n**Usage:**\nIn standard MILP solving, variables are implicit in the LP solver.\nBlisVariable is used when variables need to be:\n- Communicated between processes (parallel B&C)\n- Generated dynamically (column generation/branch-and-price)\n- Stored in variable pools for sharing",
+      "has_algorithm": false
+    },
+    {
+      "name": "config_blis_default",
+      "brief": "Public BLIS version macros for non-autotools builds\n\nDefines version information (BLIS_VERSION, BLIS_VERSION_MAJOR/MINOR/RELEASE)\nfor client code. This is the public header included by users of the BLIS\nlibrary when not using autotools.",
+      "has_algorithm": false
+    },
+    {
+      "name": "config_default",
+      "brief": "Default build configuration for BLIS without autotools\n\nProvides configuration for builds not using the configure script.\nIncludes system-specific settings and public version macros. Defines\ndebug levels (COIN_BLIS_CHECKLEVEL, VERBOSITY) and package dependencies\n(BLIS_HAS_ALPS, BLIS_HAS_BCPS, BLIS_HAS_COINUTILS, BLIS_HAS_CLP).",
       "has_algorithm": false
     }
   ]

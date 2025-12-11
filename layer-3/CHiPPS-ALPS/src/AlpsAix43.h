@@ -1,3 +1,14 @@
+/**
+ * @file AlpsAix43.h
+ * @brief Platform-specific definitions for IBM AIX 4.3
+ *
+ * Provides AIX-specific system includes, type definitions, and compiler
+ * macros for the ALPS parallel search framework. Includes gettimeofday(),
+ * getrusage(), and memory management macros for GCC and IBM compilers.
+ *
+ * @see AlpsOs.h for platform detection
+ * @see AlpsLinux.h for Linux equivalents
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

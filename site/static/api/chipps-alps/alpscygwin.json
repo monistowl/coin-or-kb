@@ -1,0 +1,13 @@
+{
+  "name": "AlpsCygwin",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsCygwin.h",
+  "brief": "Platform-specific definitions for Cygwin (Windows POSIX layer)\n\nProvides Cygwin-specific system includes, type definitions, and compiler\nmacros. Disables setpriority() (not available on Cygwin), defines memory\nmanagement macros for GCC 2.x vs 3.x+.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsOs.h for platform detection",
+    "AlpsLinux.h for native Linux equivalents"
+  ]
+}

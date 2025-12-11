@@ -1,0 +1,12 @@
+{
+  "name": "UtilKnapsack",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/UtilKnapsack.h",
+  "brief": "Knapsack problem solver utilities\n\nProvides data structures (SOR_IntDbl arrays) and solver function\nKnapsackOptimizeHS for continuous relaxation knapsack problems.\nUsed in pricing subproblems and heuristics where knapsack structure\ncan be exploited.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompAlgo.h for pricing problem integration"
+  ]
+}

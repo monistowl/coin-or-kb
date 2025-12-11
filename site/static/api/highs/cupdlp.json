@@ -1,0 +1,13 @@
+{
+  "name": "cupdlp",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/pdlp/cupdlp/cupdlp.h",
+  "brief": "Master include for CUPDLP (CUDA/CPU PDLP) solver\n\nAggregates all CUPDLP headers for the Primal-Dual Linear Programming\nsolver. CUPDLP implements the PDHG (Primal-Dual Hybrid Gradient)\nalgorithm for solving large-scale LPs using first-order methods.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cupdlp_solver.h for main algorithm",
+    "cupdlp_defs.h for data structures"
+  ]
+}

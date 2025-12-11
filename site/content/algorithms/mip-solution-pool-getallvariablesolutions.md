@@ -31,7 +31,7 @@ Each MIP solve is NP-hard; CBC uses B&C with CGL cuts
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="MIPSolverCbc.h") }}** - COIN-OR Cbc implementation of IMIPSolver interface
+- **[MIPSolverCbc.h](/coin-or-kb/browser/?library=SHOT)** - COIN-OR Cbc implementation of IMIPSolver interface
 
 Provides open-source MIP solving using Cbc branch-and-cut solver.
 
@@ -57,6 +57,7 @@ Provides open-source MIP solving using Cbc branch-and-cut solver.
 - LP/MIP only (no MIQP/QCQP)
 
 @note Default open-source MIP solver, no license required
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/MIPSolver/MIPSolverCbc.h)
 
 ## References
 

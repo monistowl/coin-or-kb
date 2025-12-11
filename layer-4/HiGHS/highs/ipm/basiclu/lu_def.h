@@ -1,3 +1,17 @@
+/**
+ * @file lu_def.h
+ * @brief Basic definitions, macros, and inline utilities for BasicLU
+ *
+ * Provides foundational types and helper functions used throughout BasicLU:
+ * - Standard library includes (stdlib, math, stdint, assert)
+ * - MIN/MAX macros for value comparisons
+ * - Inline swap functions for lu_int and double arrays
+ * - Task enumeration for factorization phases
+ * - BASICLU_HASH constant for instance validation
+ *
+ * @see basiclu.h for the public interface
+ * @see lu_internal.h for the main internal data structure
+ */
 #ifndef _LU_DEF_H
 #define _LU_DEF_H
 

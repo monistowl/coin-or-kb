@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="TaskSelectHyperplanePointsECP.h") }}** - Extended Cutting Plane point selection
+- **[TaskSelectHyperplanePointsECP.h](/coin-or-kb/browser/?library=SHOT)** - Extended Cutting Plane point selection
 
 Classic outer approximation: linearize at infeasible points.
 
@@ -24,3 +24,4 @@ Classic outer approximation: linearize at infeasible points.
 - Generate gradient cut at infeasible solution
 - Simpler than ESH but may converge slower
 - Used as fallback when ESH rootsearch fails
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/Tasks/TaskSelectHyperplanePointsECP.h)

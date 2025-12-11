@@ -1,3 +1,27 @@
+/**
+ * @file sparse_matrix.h
+ * @brief Compressed Sparse Column (CSC) matrix with incremental construction
+ *
+ * Sparse matrix storage with features for efficient IPM operations:
+ *
+ * **CSC Format:**
+ * - colptr[j]: Start index of column j in rowidx/values
+ * - rowidx[]: Row indices (can be sorted via SortIndices())
+ * - values[]: Nonzero values
+ *
+ * **Incremental Construction:**
+ * - Queue mechanism for building columns incrementally
+ * - push_back() adds to queue, commit() finalizes column
+ * - Efficient for constructing matrices column-by-column
+ *
+ * **Matrix Operations:**
+ * - ScatterColumn: Scatter column j to dense vector
+ * - MultiplyAdd: y += α·A·x or y += α·A'·x
+ * - AddNormalProduct: Compute A·D·A' product for KKT system
+ *
+ * @see model.h for usage in LP representation
+ * @see normal_matrix.h for normal equation operations
+ */
 #ifndef IPX_SPARSE_MATRIX_H_
 #define IPX_SPARSE_MATRIX_H_
 

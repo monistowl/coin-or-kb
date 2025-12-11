@@ -1,0 +1,12 @@
+{
+  "name": "BlisLicense",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisLicense.h",
+  "brief": "License and copyright header for BLIS library\n\nContains the standard BLIS copyright notice and Eclipse Public License\nheader. Included for license compliance in source distributions.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "https://www.eclipse.org/legal/epl-2.0/ for EPL 2.0 terms"
+  ]
+}

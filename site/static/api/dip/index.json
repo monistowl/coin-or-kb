@@ -13,6 +13,11 @@
       "has_algorithm": false
     },
     {
+      "name": "AlpsDecompParam",
+      "brief": "Alps-specific parameters for DIP decomposition framework\n\nConfigures Alps tree search behavior: logging verbosity, node limits,\nsolution printing, and memory checking. Parameters are read from\nUtilParameters configuration files under the [ALPS] section.",
+      "has_algorithm": false
+    },
+    {
       "name": "AlpsDecompSolution",
       "brief": "ALPS solution wrapper for DIP incumbent solutions\n\nAlpsDecompSolution derives from AlpsSolution to integrate DIP\nsolutions with ALPS's solution management and reporting.\n\n**Data Members:**\n- m_size: Number of variables\n- m_values: Solution vector\n- m_quality: Objective value\n- m_app: Pointer to DecompApp for printing\n\n**ALPS Integration:**\n- Stored in ALPS solution pool\n- Used for incumbent tracking\n- Supports encode/decode for parallelism\n\n**Lifecycle:**\n- Created when DIP finds integer-feasible solution\n- Passed to ALPS via registerKnowledge()\n- Best solution reported at termination",
       "has_algorithm": false
@@ -43,6 +48,11 @@
       "has_algorithm": false
     },
     {
+      "name": "DecompAlgoD",
+      "brief": "DECOMP algorithm variant for DIP column generation\n\nImplements DecompAlgoD, a specialized column generation algorithm\nderived from DecompAlgoPC. Used internally for generating cuts\nvia pricing without cutting plane iterations. Operates with modified\nparameters to focus on pricing-only mode.",
+      "has_algorithm": false
+    },
+    {
       "name": "DecompAlgoPC",
       "brief": "Price-and-Cut algorithm (Dantzig-Wolfe decomposition with cuts)\n\nDecompAlgoPC implements the most powerful DIP algorithm combining:\n- Column generation (pricing subproblems)\n- Cut generation (violated inequalities)\n- Branch-and-bound integration via ALPS",
       "has_algorithm": true
@@ -58,6 +68,11 @@
       "has_algorithm": true
     },
     {
+      "name": "DecompConfig",
+      "brief": "Unified configuration header for DIP decomposition framework\n\nSelects between autotools-generated config.h and default configuration\nheaders based on HAVE_CONFIG_H. Provides a single include point for\nbuild-time configuration regardless of build system used.",
+      "has_algorithm": false
+    },
+    {
       "name": "DecompConstraintSet",
       "brief": "Storage for constraint matrix and bounds (A, b, l, u)\n\nDecompConstraintSet stores the full specification of a constraint set\nused in decomposition: matrix, row/column bounds, integrality markers.\n\n**Matrix Storage:**\n- M: CoinPackedMatrix (row-major or column-major)\n- rowLB, rowUB: Row bounds (rowLB <= Ax <= rowUB)\n- colLB, colUB: Variable bounds\n- rowSense, rowRhs: Alternative row format ('L', 'G', 'E', 'R')\n\n**Variable Information:**\n- integerVars: Indices of integer variables\n- integerMark: 'I' for integer, 'C' for continuous\n- colNames, rowNames: Human-readable names\n\n**Block Structure:**\n- activeColumns: Which columns appear in this block\n- activeColumnsS: Set version for O(1) lookup\n- masterOnlyCols: Columns that only appear in master\n\n**Sparse Representation:**\nFor blocks with few active columns:\n- m_isSparse: Enable sparse mode\n- m_origToSparse, m_sparseToOrig: Column mappings\nReduces memory for blocks with disjoint variable sets.",
       "has_algorithm": false
@@ -66,6 +81,11 @@
       "name": "DecompCut",
       "brief": "Cut representation in original x-space\n\nDecompCut represents a cutting plane (valid inequality) that can be\nadded to strengthen the formulation. Cuts are defined in original\nx-space and expanded to the master problem.",
       "has_algorithm": true
+    },
+    {
+      "name": "DecompCutOsi",
+      "brief": "DecompCut implementation wrapping OsiRowCut\n\nProvides DecompCutOsi class that wraps an OsiRowCut for use in\nDIP's decomposition framework. Handles sense/rhs conversion with\ndifferent infinity values across solvers and generates string\nhashes for cut pooling and duplicate detection.",
+      "has_algorithm": false
     },
     {
       "name": "DecompCutPool",
@@ -124,7 +144,77 @@
     },
     {
       "name": "DippyDecompAlgo",
-      "brief": "",
+      "brief": "Python-enabled DIP decomposition algorithms via Dippy\n\nProvides DippyAlgoMixin and concrete classes (DippyAlgoC, DippyAlgoPC,\nDippyAlgoRC) that extend DIP algorithms with Python callbacks for\nbranching, post-processing, and custom node handling. Enables PuLP\nmodels to use decomposition methods with Python-defined subproblems.",
+      "has_algorithm": false
+    },
+    {
+      "name": "DippyDecompApp",
+      "brief": "Python-enabled DecompApp for Dippy/PuLP integration\n\nImplements DippyDecompApp which links Python PuLP models to DIP.\nSupports Python callbacks for relaxed subproblem solving, feasibility\nchecking, cut generation, heuristics, and initial variable generation.\nMaintains mappings between Python row/column objects and indices.",
+      "has_algorithm": false
+    },
+    {
+      "name": "DippyDecompCut",
+      "brief": "Python-compatible DecompCut for Dippy user-defined cuts\n\nImplements DippyDecompCut which stores cuts generated from Python\ncallbacks using simple index/element arrays. Allows Python code\nto define cutting planes that integrate with DIP's cut management.",
+      "has_algorithm": false
+    },
+    {
+      "name": "DippyPythonUtils",
+      "brief": "Conversion utilities between Python objects and C++ data\n\nProvides functions for converting between Python dictionaries/lists\nand COIN-OR data structures: packed vectors, packed matrices, and\nindex/coefficient arrays. Used by Dippy to pass data between\nPython PuLP models and DIP's C++ decomposition algorithms.",
+      "has_algorithm": false
+    },
+    {
+      "name": "UtilGraphLib",
+      "brief": "TSPLIB/VRPLIB data file reader for graph problems\n\nProvides UtilGraphLib class for reading problem instances from\nTSPLIB and VRPLIB file formats. Stores vertex/edge counts,\ncapacities, coordinates, and edge weights for routing and\nvehicle scheduling applications.",
+      "has_algorithm": false
+    },
+    {
+      "name": "UtilHash",
+      "brief": "String hash generation for cut/variable duplicate detection\n\nProvides UtilCreateStringHash functions that create deterministic\nstring representations of sparse vectors and rows for use in\nhash-based duplicate detection in cut and variable pools.",
+      "has_algorithm": false
+    },
+    {
+      "name": "UtilKnapsack",
+      "brief": "Knapsack problem solver utilities\n\nProvides data structures (SOR_IntDbl arrays) and solver function\nKnapsackOptimizeHS for continuous relaxation knapsack problems.\nUsed in pricing subproblems and heuristics where knapsack structure\ncan be exploited.",
+      "has_algorithm": false
+    },
+    {
+      "name": "UtilMacros",
+      "brief": "Comprehensive utility macros and functions for DIP\n\nProvides a rich library of utilities: memory management (UTIL_DELPTR),\ndebug macros, undirected graph edge indexing (UtilIndexU, UtilBothEndsU),\narray fill/iota, random number generation, statistics (average),\nstring manipulation, integrality checks, file I/O, and more.",
+      "has_algorithm": false
+    },
+    {
+      "name": "UtilMacrosAlps",
+      "brief": "Alps serialization utilities for warm start basis\n\nProvides functions to encode/decode CoinWarmStartBasis objects\nto/from AlpsEncoded for parallel tree search checkpointing and\nmessage passing. Bridges COIN-OR warm start with Alps framework.",
+      "has_algorithm": false
+    },
+    {
+      "name": "UtilMacrosDecomp",
+      "brief": "Decomposition-specific macros and COIN utility functions\n\nProvides debug/timing macros (UtilPrintFuncBegin/End), exception\nhelpers, gap calculation, and CoinPackedVector utilities specific\nto decomposition algorithms. Includes global timer for profiling.",
+      "has_algorithm": false
+    },
+    {
+      "name": "UtilParameters",
+      "brief": "Configuration file and command-line parameter parsing\n\nProvides UtilParameters class for reading INI-style parameter files\nand command-line arguments. Supports typed GetSetting methods for\nstring, int, bool, long, and double parameters with defaults.\nParameters are organized by [section] in config files.",
+      "has_algorithm": false
+    },
+    {
+      "name": "UtilTimer",
+      "brief": "CPU and wall-clock timer for profiling\n\nProvides UtilTimer class that wraps CoinCpuTime and CoinGetTimeOfDay\nfor measuring both CPU time and real (wall-clock) time. Used for\nalgorithm profiling and time limit enforcement.",
+      "has_algorithm": false
+    },
+    {
+      "name": "config_default",
+      "brief": "Default build configuration for DIP (non-autotools builds)\n\nIncludes system-wide COIN-OR config, DIP-specific macros, and\nMSVC pragma settings. Defines availability of CGL, CoinUtils,\nOsi, and optional debug/verbosity levels for non-configure builds.",
+      "has_algorithm": false
+    },
+    {
+      "name": "config_dip_default",
+      "brief": "Public DIP version macros and solver availability flags\n\nDefines DIP_VERSION, DIP_VERSION_MAJOR/MINOR/RELEASE and flags\nfor optional solver availability (DIP_HAS_CLP, DIP_HAS_CBC).\nUsed when building without autotools configure.",
+      "has_algorithm": false
+    },
+    {
+      "name": "hmetis",
+      "brief": "C declarations for hMETIS hypergraph partitioning library\n\nDeclares external hMETIS functions for k-way and recursive bisection\nhypergraph partitioning. Used by DIP for decomposing constraint\nmatrices into block structures for Dantzig-Wolfe decomposition.\n\n@note Requires linking against hMETIS library",
       "has_algorithm": false
     }
   ]

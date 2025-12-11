@@ -1,0 +1,14 @@
+{
+  "name": "basiclu_obj_initialize",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_obj_initialize.h",
+  "brief": "Initialize a BasicLU object with automatic memory management\n\nAllocates and initializes all internal arrays (istore, xstore, Li, Lx,\nUi, Ux, Wi, Wx, lhs, ilhs) for processing m\u00d7m matrices.\n\nWhen m=0, creates a \"null object\" that cannot factorize but can be\npassed to basiclu_obj_free(). Use m=0 for deferred initialization.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_object.h for the object structure",
+    "basiclu_obj_free.h for cleanup",
+    "basiclu_obj_factorize.h for the next step"
+  ]
+}

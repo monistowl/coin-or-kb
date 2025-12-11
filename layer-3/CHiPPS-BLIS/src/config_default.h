@@ -1,3 +1,15 @@
+/**
+ * @file config_default.h
+ * @brief Default build configuration for BLIS without autotools
+ *
+ * Provides configuration for builds not using the configure script.
+ * Includes system-specific settings and public version macros. Defines
+ * debug levels (COIN_BLIS_CHECKLEVEL, VERBOSITY) and package dependencies
+ * (BLIS_HAS_ALPS, BLIS_HAS_BCPS, BLIS_HAS_COINUTILS, BLIS_HAS_CLP).
+ *
+ * @see config_blis_default.h for public version macros
+ * @see BlisConfig.h for unified configuration entry point
+ */
 /*===========================================================================*
  * This file is part of the BiCePS Linear Integer Solver (BLIS).             *
  *                                                                           *
@@ -15,7 +27,7 @@
  *          Ted Ralphs, Lehigh University                                    *
  *          Laszlo Ladanyi, IBM T.J. Watson Research Center                  *
  *          Matthew Saltzman, Clemson University                             *
- *                                                                           * 
+ *                                                                           *
  *                                                                           *
  * Copyright (C) 2001-2023, Lehigh University, Yan Xu, and Ted Ralphs.       *
  * All Rights Reserved.                                                      *

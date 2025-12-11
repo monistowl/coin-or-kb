@@ -1,0 +1,13 @@
+{
+  "name": "DippyDecompApp",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/dippy/DippyDecompApp.h",
+  "brief": "Python-enabled DecompApp for Dippy/PuLP integration\n\nImplements DippyDecompApp which links Python PuLP models to DIP.\nSupports Python callbacks for relaxed subproblem solving, feasibility\nchecking, cut generation, heuristics, and initial variable generation.\nMaintains mappings between Python row/column objects and indices.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DippyDecompAlgo.h for Python-enabled algorithms",
+    "DippyPythonUtils.h for Python/C++ conversion utilities"
+  ]
+}

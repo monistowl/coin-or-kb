@@ -50,7 +50,7 @@ CoinRelFltEq follows the same pattern.
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinFloatEqual.hpp") }}** - Function objects for testing equality of real numbers
+- **[CoinFloatEqual.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Function objects for testing equality of real numbers
 
 Two objects are provided; one tests for equality to an absolute tolerance,
 one to a scaled tolerance. The tests will handle IEEE floating point, but
@@ -58,3 +58,4 @@ note that infinity == infinity. Mathematicians are rolling in their graves,
 but this matches the behaviour for the common practice of using
 <code>DBL_MAX</code> (<code>numeric_limits<double>::max()</code>, or similar
 large finite number) as infinity.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinFloatEqual.hpp)

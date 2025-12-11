@@ -3,7 +3,18 @@
   "library": "CppAD",
   "layer": "layer-1",
   "header": "include/cppad/core/rev_hes_sparsity.hpp",
-  "brief": "Core AD functionality: rev hes sparsity",
-  "algorithms": [],
-  "methods": []
+  "brief": "Reverse mode Hessian sparsity pattern computation",
+  "algorithms": [
+    {
+      "name": "Reverse Hessian Sparsity:\nDetermines which entries H_{ij} of the Hessian may be nonzero.\nTwo-pass algorithm combining forward and reverse sparsity.\n\n  PREREQUISITE:\n    Must first call for_jac_sparsity to compute Jacobian sparsity\n\n  REVERSE PASS (second-order):\n    For scalar g = w\u00b7F(x):\n    Track pairs (i,j) where \u2202\u00b2g/\u2202x\u1d62\u2202x\u2c7c may be nonzero\n\n  HESSIAN STRUCTURE:\n    For v = u\u2081 \u00b7 u\u2082: cross-derivative nonzero if both depend on different inputs\n    H_{ij} nonzero if exists path through tape linking x\u1d62 and x\u2c7c",
+      "math": "H(x) = \u2207\u00b2(w'F(x)) = \u03a3\u2096 w\u2096\u00b7\u2207\u00b2F\u2096(x)\n  Sparsity: H_{ij} possibly nonzero iff (i,j) in pattern\n  Symmetry: H_{ij} = H_{ji}, so only store upper/lower triangle",
+      "complexity": "- Time: O(ops \u00d7 sparsity\u00b2) for second-order propagation\n- Memory: O(n\u00b2 \u00d7 nnz_ratio) for sparse pattern storage\n- Key for sparse Hessian: identifies structure for graph coloring",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "for_hes_sparsity.hpp for alternative forward approach",
+    "sparse_hes.hpp uses sparsity for efficient computation"
+  ]
 }

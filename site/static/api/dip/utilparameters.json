@@ -1,0 +1,13 @@
+{
+  "name": "UtilParameters",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/UtilParameters.h",
+  "brief": "Configuration file and command-line parameter parsing\n\nProvides UtilParameters class for reading INI-style parameter files\nand command-line arguments. Supports typed GetSetting methods for\nstring, int, bool, long, and double parameters with defaults.\nParameters are organized by [section] in config files.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsDecompParam.h for Alps-specific parameters",
+    "DecompParam.h for DIP algorithm parameters"
+  ]
+}

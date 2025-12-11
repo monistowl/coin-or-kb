@@ -1,3 +1,17 @@
+/**
+ * @file normal_matrix.h
+ * @brief Normal equations matrix operator A·W·A'
+ *
+ * LinearOperator implementation for the normal equations matrix
+ * used in IPM. Computes y = (A·W·A')·x efficiently using sparse
+ * matrix-vector products.
+ *
+ * The weight matrix W is diagonal and set via Prepare(). If W is NULL,
+ * uses W = [I; 0] (identity for structural, zero for slack columns).
+ *
+ * @see linear_operator.h for the interface
+ * @see kkt_solver_diag.h for usage with diagonal preconditioning
+ */
 #ifndef IPX_NORMAL_MATRIX_H_
 #define IPX_NORMAL_MATRIX_H_
 

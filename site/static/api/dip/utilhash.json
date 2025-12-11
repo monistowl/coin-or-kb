@@ -1,0 +1,13 @@
+{
+  "name": "UtilHash",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/UtilHash.h",
+  "brief": "String hash generation for cut/variable duplicate detection\n\nProvides UtilCreateStringHash functions that create deterministic\nstring representations of sparse vectors and rows for use in\nhash-based duplicate detection in cut and variable pools.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompCutOsi.h for usage in cut duplicate detection",
+    "DecompCutPool.h for cut pool management"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "kkt_solver_basis",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/kkt_solver_basis.h",
+  "brief": "KKT solver using CR method with basis preconditioning\n\nImplements the KKT system solver for IPX using conjugate residuals (CR)\nwith a basis matrix as preconditioner. This is the primary KKT solver\nfor the interior point iterations.\n\n**Preconditioning Strategy:**\nThe basis matrix B is used to precondition the normal equations,\nreducing condition number and accelerating CR convergence.\n\n**Degenerate Variable Handling:**\n- DropPrimal(): Variables near bounds are pivoted out or implied\n- DropDual(): Variables with near-zero duals are pivoted in or fixed\n- Controlled by ipm_drop_primal and ipm_drop_dual parameters\n\nThis technique removes near-degenerate variables from the optimization,\nimproving numerical stability in late IPM iterations.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "kkt_solver.h for the abstract interface",
+    "basis.h for basis matrix management",
+    "conjugate_residuals.h for the CR algorithm"
+  ]
+}

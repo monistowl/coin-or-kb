@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="SolutionStrategyMIQCQP.h") }}** - Direct MIQCQP solver for convex quadratic problems
+- **[SolutionStrategyMIQCQP.h](/coin-or-kb/browser/?library=SHOT)** - Direct MIQCQP solver for convex quadratic problems
 
 Bypasses ESH for problems solvable by CPLEX/Gurobi MIQCQP.
 
@@ -28,3 +28,4 @@ Bypasses ESH for problems solvable by CPLEX/Gurobi MIQCQP.
 **Problem Classification:**
 - All constraints must be convex quadratic
 - Solver must support QCQP (supportsQuadraticConstraints)
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/SolutionStrategy/SolutionStrategyMIQCQP.h)

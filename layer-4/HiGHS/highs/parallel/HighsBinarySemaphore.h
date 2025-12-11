@@ -5,7 +5,28 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
+/**
+ * @file parallel/HighsBinarySemaphore.h
+ * @brief Binary semaphore with adaptive spinning before blocking
+ *
+ * Synchronization primitive for signaling between threads with spin-wait
+ * optimization before falling back to OS blocking.
+ *
+ * **State Values:**
+ * - count = 1: Released (signaled)
+ * - count = 0: Acquired (not signaled)
+ * - count = -1: Acquired and waiter is blocked on condvar
+ *
+ * **Acquire Strategy:**
+ * 1. try_acquire(): Fast CAS attempt
+ * 2. Spin with exponential backoff (up to kMicroSecsBeforeSleep)
+ * 3. Fall back to condvar wait if spinning times out
+ *
+ * Used for worker thread sleep/wake in WorkerBunk.
+ *
+ * @see parallel/HighsSplitDeque.h for usage in work stealing
+ * @see parallel/HighsSchedulerConstants.h for timing thresholds
+ */
 #ifndef HIGHS_BINARY_SEMAPHORE_H_
 #define HIGHS_BINARY_SEMAPHORE_H_
 

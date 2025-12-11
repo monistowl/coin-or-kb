@@ -26,7 +26,8 @@ Bernstein conversion: O(n^q * 2^n) but provides hull property
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="tmodel.hpp") }}** - Taylor Model Arithmetic for Rigorous Bound Propagation
+- **[tmodel.hpp](/coin-or-kb/browser/?library=SHOT)** - Taylor Model Arithmetic for Rigorous Bound Propagation
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/ThirdParty/mc++/include/tmodel.hpp)
 
 ## References
 

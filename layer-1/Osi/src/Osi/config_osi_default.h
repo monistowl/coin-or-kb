@@ -1,3 +1,14 @@
+/**
+ * @file config_osi_default.h
+ * @brief Public Osi version macros for non-autotools builds
+ *
+ * Defines version information and OSILIB_EXPORT macro for client code.
+ * This is the public header included by users of the Osi library, while
+ * config_default.h is used internally when building Osi itself.
+ *
+ * @see config_default.h for internal build configuration
+ * @see OsiConfig.h for unified configuration entry point
+ */
 
 /***************************************************************************/
 /*           HERE DEFINE THE PROJECT SPECIFIC PUBLIC MACROS                */

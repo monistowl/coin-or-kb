@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_obj_factorize",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_obj_factorize.h",
+  "brief": "Factorize matrix using BasicLU object interface\n\nObject-oriented wrapper for basiclu_factorize() with automatic\nmemory reallocation. If arrays need growth, reallocates using\nobj->realloc_factor multiplier and retries.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_factorize.h for algorithm details",
+    "basiclu_object.h for the object structure"
+  ]
+}

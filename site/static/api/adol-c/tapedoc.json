@@ -1,0 +1,12 @@
+{
+  "name": "tapedoc",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/tapedoc/tapedoc.h",
+  "brief": "Tape documentation driver for debugging\n\nProvides tape_doc() function that prints a human-readable description\nof all operations recorded on a tape. Useful for debugging tape\nstructure and understanding what ADOL-C has recorded.\n\n**Usage:**\n```c\ntape_doc(tag, m, n, x, y);  // Prints tape 'tag' operations to stdout\n```",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "tape_handling.h for tape management functions"
+  ]
+}

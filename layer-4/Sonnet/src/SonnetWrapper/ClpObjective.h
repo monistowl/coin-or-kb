@@ -1,4 +1,16 @@
-// Copyright (C) 2011, Jan-Willem Goossens 
+/**
+ * @file ClpObjective.h
+ * @brief .NET wrappers for Clp objective function classes
+ *
+ * Provides managed wrappers for ClpObjective base class and derived
+ * ClpLinearObjective and ClpQuadraticObjective. Enables .NET code
+ * to query and work with linear and quadratic objective functions
+ * in LP/QP models.
+ *
+ * @see CoinPackedMatrix.h for quadratic objective matrix access
+ * @see OsiSolverInterface for model-level objective management
+ */
+// Copyright (C) 2011, Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 
 #pragma once

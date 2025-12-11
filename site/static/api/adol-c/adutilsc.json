@@ -1,0 +1,12 @@
+{
+  "name": "adutilsc",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adutilsc.h",
+  "brief": "Legacy compatibility header (deprecated)\n\nThis file is kept for backward compatibility only.\nNew code should include adolc/adolc.h directly.\n\n@deprecated Use adolc/adolc.h instead",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "adolc.h for current ADOL-C interface"
+  ]
+}

@@ -1,3 +1,20 @@
+/**
+ * @file cupdlp_restart.h
+ * @brief Adaptive restart strategies for PDHG convergence acceleration
+ *
+ * Implements restart heuristics that periodically reset iterates to
+ * accelerate PDHG convergence from O(1/k) to O(1/k²).
+ *
+ * **Restart Strategies:**
+ * - PDHG_NO_RESTART: Continue without restart
+ * - PDHG_RESTART_TO_CURRENT: Reset to current iterate
+ * - PDHG_RESTART_TO_AVERAGE: Reset to running average
+ *
+ * Decision based on normalized duality gap improvement via merit function.
+ *
+ * @see cupdlp_solver.h for restart integration in main loop
+ * @see cupdlp_proj.h for restart execution
+ */
 //
 // Created by chuwen on 23-11-28.
 //

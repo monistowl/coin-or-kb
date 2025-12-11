@@ -1,0 +1,13 @@
+{
+  "name": "cupdlp_restart",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/pdlp/cupdlp/cupdlp_restart.h",
+  "brief": "Adaptive restart strategies for PDHG convergence acceleration\n\nImplements restart heuristics that periodically reset iterates to\naccelerate PDHG convergence from O(1/k) to O(1/k\u00b2).\n\n**Restart Strategies:**\n- PDHG_NO_RESTART: Continue without restart\n- PDHG_RESTART_TO_CURRENT: Reset to current iterate\n- PDHG_RESTART_TO_AVERAGE: Reset to running average\n\nDecision based on normalized duality gap improvement via merit function.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cupdlp_solver.h for restart integration in main loop",
+    "cupdlp_proj.h for restart execution"
+  ]
+}

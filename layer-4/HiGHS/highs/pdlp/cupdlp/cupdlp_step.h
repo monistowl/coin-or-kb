@@ -1,3 +1,22 @@
+/**
+ * @file cupdlp_step.h
+ * @brief Step size selection and PDHG iterate updates
+ *
+ * Core PDHG iteration logic including step size computation and updates.
+ *
+ * **Step Size Methods:**
+ * - Constant: τ = σ = 1/‖A‖, computed via power method
+ * - Malitsky-Pock: Adaptive based on primal-dual interaction
+ * - Adaptive linesearch: Backtracking with growth/reduction
+ *
+ * **PDHG Update (each iteration):**
+ * 1. Primal step: x̄ = x - τ·(c - A'y)
+ * 2. Projection: x⁺ = proj_{[l,u]}(x̄)
+ * 3. Dual step: y⁺ = y + σ·(b - A·(2x⁺ - x))
+ *
+ * @see cupdlp_solver.h for main iteration loop
+ * @see cupdlp_linalg.h for matrix-vector products
+ */
 //
 // Created by chuwen on 23-11-28.
 //

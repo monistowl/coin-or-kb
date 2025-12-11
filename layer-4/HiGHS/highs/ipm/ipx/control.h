@@ -1,3 +1,32 @@
+/**
+ * @file control.h
+ * @brief Solver control: parameters, output, timing, and interruption for IPX
+ *
+ * The Control class is the central coordinator for IPX solver state:
+ *
+ * **Parameter Access:**
+ * - Provides read-only access to all solver parameters
+ * - Parameters include tolerances, iteration limits, algorithm choices
+ *
+ * **Output Management:**
+ * - Debug() stream with configurable verbosity levels
+ * - Interval logging to avoid flooding output
+ * - Integration with HiGHS logging system
+ *
+ * **Timing:**
+ * - Total elapsed time via Elapsed()
+ * - Print interval control for periodic status updates
+ *
+ * **Interruption:**
+ * - InterruptCheck() for time limit enforcement
+ * - Designed for single-threaded access (no copy/move)
+ *
+ * Also provides formatting utilities (Format, Scientific, Fixed, Textline)
+ * for consistent log output formatting.
+ *
+ * @see ipx_parameters.h for parameter definitions
+ * @see timer.h for timing implementation
+ */
 #ifndef IPX_CONTROL_H_
 #define IPX_CONTROL_H_
 

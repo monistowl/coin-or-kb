@@ -1,0 +1,13 @@
+{
+  "name": "guess_basis",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/guess_basis.h",
+  "brief": "Heuristic starting basis selection from IPM solution\n\nGuessBasis() constructs an initial basis from column weights,\npreferring columns with larger weights. Used by crossover to\nselect basic variables from the interior point solution.\n\nThe returned basis may be singular and requires repair before use.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "starting_basis.h for crash basis construction",
+    "crossover.h for the crossover algorithm"
+  ]
+}

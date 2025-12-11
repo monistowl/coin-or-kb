@@ -1,3 +1,24 @@
+/**
+ * @file indexed_vector.h
+ * @brief Sparse vector with explicit nonzero pattern tracking
+ *
+ * IndexedVector stores both dense element array and sparse pattern,
+ * enabling hyper-sparse operations when beneficial:
+ *
+ * **Sparse Mode (nnz ≥ 0):**
+ * - pattern[0..nnz-1] holds indices of nonzeros
+ * - Iteration uses indirect addressing over pattern
+ *
+ * **Dense Mode (nnz < 0):**
+ * - Pattern unknown or too dense
+ * - Iteration uses direct addressing over all elements
+ *
+ * The for_each_nonzero() template selects mode automatically based
+ * on kHypersparseThreshold. Used for FTRAN/BTRAN in basis updates.
+ *
+ * @see sparse_utils.h for related operations
+ * @see lu_update.h for usage in basis updates
+ */
 #ifndef IPX_INDEXED_VECTOR_H_
 #define IPX_INDEXED_VECTOR_H_
 

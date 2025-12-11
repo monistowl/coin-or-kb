@@ -1,3 +1,16 @@
+/**
+ * @file OsiConfig.h
+ * @brief Unified configuration header for Osi library
+ *
+ * Main entry point for Osi configuration that routes to the appropriate
+ * settings based on build environment. With autotools (HAVE_CONFIG_H),
+ * includes generated config.h. Without autotools, uses config_default.h
+ * for building or config_osi_default.h for clients. Sets up OSILIB_EXPORT
+ * for proper DLL import/export on Windows and GCC visibility.
+ *
+ * @see config_default.h for non-autotools build configuration
+ * @see config_osi_default.h for public version macros
+ */
 /* Copyright (C) 2011
  * All Rights Reserved.
  * This code is published under the Eclipse Public License.

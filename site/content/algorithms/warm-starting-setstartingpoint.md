@@ -30,7 +30,7 @@ O(nnz) vs O(n²) for dense evaluation
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="NLPSolverIpoptBase.h") }}** - Ipopt implementation of INLPSolver interface
+- **[NLPSolverIpoptBase.h](/coin-or-kb/browser/?library=SHOT)** - Ipopt implementation of INLPSolver interface
 
 Provides NLP solving for SHOT's primal problem using Ipopt interior point.
 
@@ -58,6 +58,7 @@ Provides NLP solving for SHOT's primal problem using Ipopt interior point.
 - Routes Ipopt output through SHOT logging system
 
 @note Used for fixed-integer NLP subproblems in primal bound computation
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/NLPSolver/NLPSolverIpoptBase.h)
 
 ## References
 

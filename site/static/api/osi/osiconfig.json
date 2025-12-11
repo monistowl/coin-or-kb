@@ -1,0 +1,13 @@
+{
+  "name": "OsiConfig",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/OsiConfig.h",
+  "brief": "Unified configuration header for Osi library\n\nMain entry point for Osi configuration that routes to the appropriate\nsettings based on build environment. With autotools (HAVE_CONFIG_H),\nincludes generated config.h. Without autotools, uses config_default.h\nfor building or config_osi_default.h for clients. Sets up OSILIB_EXPORT\nfor proper DLL import/export on Windows and GCC visibility.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_default.h for non-autotools build configuration",
+    "config_osi_default.h for public version macros"
+  ]
+}

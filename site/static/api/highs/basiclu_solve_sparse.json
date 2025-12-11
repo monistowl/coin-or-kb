@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_solve_sparse",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_solve_sparse.h",
+  "brief": "Solve linear system with sparse right-hand side\n\nSolves B\u00b7x = b or B'\u00b7y = c exploiting sparsity in both RHS and solution.\nUses Gilbert-Peierls two-phase algorithm for sparse triangular solves.\n\n**Gilbert-Peierls Method:**\n1. Symbolic phase: DFS to find nonzero pattern of solution\n2. Numeric phase: Solve only for nonzeros in topological order\n\n**Hybrid Strategy:**\n- First triangular solve always uses sparse method\n- Second solve uses sparse if nnz(intermediate) \u2264 m \u00d7 SPARSE_THRESHOLD\n- Otherwise falls back to sequential (dense) solve\n\n**Input/Output:**\n- Input: (irhs, xrhs) in compressed format, nzrhs nonzeros\n- Output: lhs[] scattered, ilhs[] indices, *p_nzlhs count\n- lhs must be initialized to zero; ilhs uninitialized",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_solve_dense.h for dense RHS",
+    "Gilbert & Peierls, \"Sparse Partial Pivoting in Time Proportional to\n     Arithmetic Operations\", SIAM J. Sci. Stat. Comput., 1988"
+  ]
+}

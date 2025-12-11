@@ -16,7 +16,8 @@ Forward mode: propagates derivatives from inputs to outputs.
 
 ### CppAD
 
-- **{{ link(path="/browser/?library=CppAD", text="cppad.hpp") }}** - Contains all variables and functions defined by CppAD package
+- **[cppad.hpp](/coin-or-kb/browser/?library=CppAD)** - Contains all variables and functions defined by CppAD package
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-1/CppAD/include/cppad/cppad.hpp)
 
 ## References
 

@@ -1,3 +1,15 @@
+/**
+ * @file UtilParameters.h
+ * @brief Configuration file and command-line parameter parsing
+ *
+ * Provides UtilParameters class for reading INI-style parameter files
+ * and command-line arguments. Supports typed GetSetting methods for
+ * string, int, bool, long, and double parameters with defaults.
+ * Parameters are organized by [section] in config files.
+ *
+ * @see AlpsDecompParam.h for Alps-specific parameters
+ * @see DecompParam.h for DIP algorithm parameters
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

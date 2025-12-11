@@ -1,4 +1,18 @@
-
+/**
+ * @file config_sym_default.h
+ * @brief Default SYMPHONY configuration for non-autoconf builds
+ *
+ * Provides version macros and DLL export definitions when building
+ * without autotools/configure. Used on Windows with Visual Studio
+ * or other environments without autoconf.
+ *
+ * **Macros Defined:**
+ * - SYMPHONY_VERSION: Version string
+ * - SYMPHONY_VERSION_MAJOR/MINOR/RELEASE: Numeric version components
+ * - SYMPHONYLIB_EXPORT: DLL import/export decoration
+ *
+ * @see SymConfig.h for autoconf-generated configuration
+ */
 /***************************************************************************/
 /*           HERE DEFINE THE PROJECT SPECIFIC PUBLIC MACROS                */
 /*    These are only in effect in a setting that doesn't use configure     */

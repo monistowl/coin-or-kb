@@ -1,0 +1,12 @@
+{
+  "name": "adoublecuda",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adoublecuda.h",
+  "brief": "CUDA-enabled adouble class for GPU automatic differentiation\n\nProvides an adouble implementation compatible with NVIDIA CUDA for\ntraceless forward-mode AD on GPUs. Supports single and multiple\ndirectional derivatives with configurable NUMBER_DIRECTIONS.\n\n**Features:**\n- Device-callable operators and math functions\n- Multi-direction derivative propagation\n- Unified memory support with __managed__ variables\n\n**Compilation:**\nDefine NUMBER_DIRECTIONS for vector mode, optionally DYNAMIC_DIRECTIONS\nfor runtime-configurable direction count.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "adtl.h for CPU traceless forward mode"
+  ]
+}

@@ -1,4 +1,14 @@
-// Copyright (C) Jan-Willem Goossens 
+/**
+ * @file CoinError.h
+ * @brief .NET exception wrapper for COIN-OR CoinError
+ *
+ * Converts native ::CoinError exceptions to managed
+ * System::ApplicationException derivatives, enabling .NET
+ * try/catch blocks to handle COIN-OR library errors.
+ *
+ * @see CoinLpIO.h for example usage in file I/O operations
+ */
+// Copyright (C) Jan-Willem Goossens
 // All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 

@@ -1,3 +1,15 @@
+/**
+ * @file DecompAlgoD.h
+ * @brief DECOMP algorithm variant for DIP column generation
+ *
+ * Implements DecompAlgoD, a specialized column generation algorithm
+ * derived from DecompAlgoPC. Used internally for generating cuts
+ * via pricing without cutting plane iterations. Operates with modified
+ * parameters to focus on pricing-only mode.
+ *
+ * @see DecompAlgoPC.h for price-and-cut base algorithm
+ * @see DecompAlgo.h for base decomposition algorithm interface
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

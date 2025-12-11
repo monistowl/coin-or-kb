@@ -1,0 +1,13 @@
+{
+  "name": "lu_update",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/lu_update.h",
+  "brief": "Abstract interface for LU factorization with rank-1 updates\n\nExtends LuFactorization to support efficient Forrest-Tomlin updates\nfor changing one column at a time (as in simplex iterations).\n\n**Workflow:**\n1. Factorize(): Compute B = L\u00b7U\n2. FtranForUpdate(): Solve B\u00b7x = b (incoming column)\n3. BtranForUpdate(): Solve B'\u00b7y = e_j (outgoing column)\n4. Update(): Apply Forrest-Tomlin update B_new = B with col j \u2190 b\n\n**Return Codes:**\n- Factorize: 0=OK, 1=unstable, 2=singular, 3=both\n- Update: <0 singular, >0 unstable, 0=OK",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_wrapper.h for BasicLU implementation",
+    "basis.h for usage in basis management"
+  ]
+}

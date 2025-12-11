@@ -1,0 +1,12 @@
+{
+  "name": "lu_file",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/lu_file.h",
+  "brief": "Sparse matrix file management for dynamic row/column storage\n\nManages dynamic sparse storage where rows/columns can grow during\nfactorization. Uses a file-based metaphor where each \"line\" (row or column)\noccupies a contiguous range in the index/value arrays.\n\n**Storage Layout:**\n- begin[i], end[i]: Range of entries for line i\n- next[i], prev[i]: Doubly linked list for memory management\n- index[], value[]: Actual sparse data\n\n**Operations:**\n- lu_file_empty: Initialize empty file structure\n- lu_file_reappend: Move line to end with extra space for growth\n- lu_file_compress: Garbage collection to reclaim fragmented space\n- lu_file_diff: Compute storage difference between row/column views\n\nThe reappend operation adds padding (xstore[BASICLU_PAD] + nz \u00d7 stretch)\nto reduce frequency of moves as fill-in occurs during elimination.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lu_internal.h for W array usage (Wi, Wx, Wbegin, Wend, Wflink, Wblink)"
+  ]
+}

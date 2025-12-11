@@ -1,3 +1,19 @@
+/**
+ * @file cupdlp_utils.h
+ * @brief Utility functions for CUPDLP solver
+ *
+ * Memory management, allocation, and I/O utilities:
+ * - PDHG_Create/Destroy: Solver lifecycle management
+ * - Alloc/Clear functions: Per-component memory handling
+ * - Matrix format conversions: dense↔CSR↔CSC
+ * - Timing: my_clock(), getTimeStamp()
+ * - Output: vecPrint, writeJson, writeSol
+ *
+ * Also handles user parameter parsing and solver configuration.
+ *
+ * @see cupdlp_defs.h for data structures being managed
+ * @see glbopts.h for memory allocation macros
+ */
 //
 // Created by chuwen on 23-11-26.
 //

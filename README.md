@@ -127,13 +127,13 @@ coin-or-kb/
 
 | Layer | Status | Libraries | Files | Pass 2 |
 |-------|--------|-----------|-------|--------|
-| Layer 0 | **Pass 2 In Progress** | CoinUtils, SuiteSparse | 77 | 43 |
-| Layer 1 | **Pass 2 In Progress** | Osi, Clp, CppAD, qpOASES | 207 | 87 |
-| Layer 2 | **Pass 2 In Progress** | Cgl, Cbc, Ipopt, ADOL-C | 536 | 213 |
-| Layer 3 | Pass 2 In Progress | 10 libraries | 572 | 254 |
-| Layer 4 | Pass 1 Complete | HiGHS + 10 others | 510 | 82 |
+| Layer 0 | **Pass 2 Complete** | CoinUtils, SuiteSparse | 163 | 95 |
+| Layer 1 | **Pass 2 In Progress** | Clp, Osi, CppAD, qpOASES | 445 | 120 |
+| Layer 2 | **Pass 2 In Progress** | Cbc, Cgl, Ipopt, ADOL-C | 358 | 247 |
+| Layer 3 | Pass 2 In Progress | 10 libraries | 476 | 197 |
+| Layer 4 | Pass 1 Complete | HiGHS + 7 others | 620 | 69 |
 
-**Total:** 1,902 annotated files, 679 with semantic (Pass 2) annotations across 28 libraries
+**Total:** 2,062 annotated files, 728 with semantic (Pass 2) annotations across 28 libraries
 
 ## Knowledge Graph
 
@@ -371,6 +371,97 @@ See [AGENTS.md](AGENTS.md) for detailed instructions on:
 - **qpOASES** - Online active-set QP solver
 - **CppAD/ADOL-C** - Automatic differentiation
 - **Gravity** - Nonlinear optimization modeling
+
+## Optional Dependencies (archive/)
+
+The `archive/` directory contains source packages for optional third-party dependencies. These are not annotated but are required for building certain COIN-OR solvers with full functionality.
+
+### Build Infrastructure
+| Package | Purpose |
+|---------|---------|
+| **coinbrew** | COIN-OR fetch/build/install helper script - the standard way to build COIN-OR from source |
+| **COIN-OR-OptimizationSuite** | Meta-project that builds all COIN-OR solvers together |
+| **Data-Sample** | Test problem instances (MPS, LP files) for solver validation |
+
+### Linear Algebra Dependencies
+| Package | Purpose | Used By |
+|---------|---------|---------|
+| **ThirdParty-Blas** | Basic Linear Algebra Subprograms | Most solvers (matrix operations) |
+| **ThirdParty-Lapack** | Linear Algebra Package | Ipopt, HSL, MUMPS (dense linear algebra) |
+| **ThirdParty-Metis** | Graph partitioning (METIS 4/5) | HSL, MUMPS, Ipopt (sparse matrix ordering) |
+| **metis-4.0.3** | METIS source code | ThirdParty-Metis |
+
+### Sparse Direct Solvers (for Ipopt)
+| Package | Purpose | License |
+|---------|---------|---------|
+| **ThirdParty-HSL** | Harwell Subroutine Library wrapper | Academic/Commercial (MA27, MA57, MA77, MA86, MA97) |
+| **ThirdParty-Mumps** | MUMPS sparse direct solver wrapper | Public domain |
+| **MUMPS_5.8.1** | MUMPS source code | CeCILL-C (LGPL-compatible) |
+| **mumps** | MUMPS build scripts | - |
+
+### LP/MIP Solver Interfaces
+| Package | Purpose | License |
+|---------|---------|---------|
+| **ThirdParty-Glpk** | GNU Linear Programming Kit wrapper | GPL |
+| **ThirdParty-SoPlex** | ZIB SoPlex LP solver wrapper | ZIB Academic |
+| **ThirdParty-SCIP** | ZIB SCIP MIP solver wrapper | ZIB Academic |
+
+### NLP Components
+| Package | Purpose | Used By |
+|---------|---------|---------|
+| **ThirdParty-ASL** | AMPL Solver Library (expression parsing) | Ipopt, Bonmin, Couenne (AMPL interface) |
+| **ThirdParty-FilterSQP** | FilterSQP NLP solver wrapper | Bonmin (alternative to Ipopt) |
+
+### Dependency Graph
+
+```
+                    ┌─────────────────────────────────────────────────────────┐
+                    │                    COIN-OR Solvers                      │
+                    └─────────────────────────────────────────────────────────┘
+                                              │
+          ┌───────────────┬─────────────┬─────┴─────┬─────────────┐
+          ▼               ▼             ▼           ▼             ▼
+       Bonmin          Couenne       Ipopt      SYMPHONY        Cbc
+          │               │             │           │             │
+          └───────┬───────┴─────────────┤           │             │
+                  │                     │           │             │
+                  ▼                     ▼           ▼             ▼
+              ThirdParty-ASL     ┌──────────┐   ThirdParty-    Osi
+              (AMPL interface)   │  Linear  │     Glpk       (solver
+                                 │  Solvers │                interface)
+                                 └────┬─────┘
+                    ┌─────────────────┼─────────────────┐
+                    ▼                 ▼                 ▼
+             ThirdParty-HSL    ThirdParty-Mumps   SuiteSparse
+             (MA27/57/77/86/97)    (MUMPS)       (included)
+                    │                 │
+                    └────────┬────────┘
+                             ▼
+                    ┌────────────────┐
+                    │  ThirdParty-   │
+                    │    Metis       │
+                    └────────┬───────┘
+                             │
+               ┌─────────────┴─────────────┐
+               ▼                           ▼
+        ThirdParty-Blas            ThirdParty-Lapack
+```
+
+### Installation Notes
+
+Most ThirdParty-* packages are **build wrappers** that download source code on demand:
+
+```bash
+# Example: Building MUMPS for Ipopt
+cd ThirdParty-Mumps
+./get.Mumps          # Downloads MUMPS source
+./configure
+make && make install
+```
+
+For **HSL** (required for best Ipopt performance), you must obtain a license from STFC:
+- Academic: https://licences.stfc.ac.uk/product/coin-hsl
+- Archive (free, MA27/28/MC19 only): https://licences.stfc.ac.uk/product/coin-hsl-archive
 
 ## License
 

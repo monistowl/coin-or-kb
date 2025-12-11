@@ -1,3 +1,13 @@
+/**
+ * @file basiclu_obj_get_factors.h
+ * @brief Extract L and U factors from BasicLU object
+ *
+ * Object-oriented wrapper for basiclu_get_factors().
+ * Extracts permutations and factors in compressed column format.
+ *
+ * @see basiclu_get_factors.h for output format details
+ * @see basiclu_object.h for the object structure
+ */
 lu_int basiclu_obj_get_factors
 (
     struct basiclu_object *obj,

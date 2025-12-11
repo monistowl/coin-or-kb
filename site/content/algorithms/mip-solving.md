@@ -22,7 +22,7 @@ LP: O(m·n·iterations) simplex, O(n³) per IPM iteration
 
 ### HiGHS
 
-- **{{ link(path="/browser/?library=HiGHS", text="Highs.h") }}** - Main HiGHS solver class - high-performance LP/MIP/QP optimization
+- **[Highs.h](/coin-or-kb/browser/?library=HiGHS)** - Main HiGHS solver class - high-performance LP/MIP/QP optimization
 
 HiGHS (High-performance Interior point and Gradient descent Solvers) is
 an open-source solver for LP, MIP, and convex QP problems.
@@ -52,6 +52,7 @@ Primary interface for model input, solving, and solution retrieval:
 **Options and Info:**
 - setOptionValue/getOptionValue: Configure solver behavior
 - getInfo: Retrieve solve statistics (iterations, time, etc.)
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/HiGHS/highs/Highs.h)
 
 ## References
 

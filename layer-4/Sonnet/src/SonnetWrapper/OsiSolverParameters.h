@@ -1,4 +1,15 @@
-// Copyright (C) Jan-Willem Goossens 
+/**
+ * @file OsiSolverParameters.h
+ * @brief .NET enumerations for OSI solver parameters
+ *
+ * Defines managed enums mirroring native OsiIntParam, OsiDblParam,
+ * OsiStrParam, OsiHintParam, and OsiHintStrength. Provides conversion
+ * functions between managed and native enum values for solver
+ * configuration through OsiSolverInterface.
+ *
+ * @see OsiSolverInterface for parameter get/set methods
+ */
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 
 #pragma once

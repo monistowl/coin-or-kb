@@ -1,0 +1,13 @@
+{
+  "name": "ADOLC_TL_interface",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/c_interface/ADOLC_TL_interface.h",
+  "brief": "Pure C interface for traceless (tapeless) ADOL-C\n\nProvides C-callable functions for traceless forward-mode automatic\ndifferentiation using opaque TLAdoubleHandle pointers. Each adouble\ncarries derivative values for multiple directions.\n\n**Categories:**\n- create_tl_adouble/free_tl_adouble: Lifecycle management\n- set_num_dir: Configure number of derivative directions\n- Derivative access: get_tl_ad_values, set_tl_ad_value_idx\n- Arithmetic: add_tl_adouble, mult_tl_adouble, etc.\n- Transcendental: tl_sin, tl_cos, tl_exp, tl_log, etc.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ADOLC_TB_interface.h for tape-based mode",
+    "adtl.h for C++ traceless interface"
+  ]
+}

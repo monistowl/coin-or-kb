@@ -25,27 +25,35 @@
  * @file BlisBranchStrategyStrong.h
  * @brief Strong branching strategy for MILP variable selection
  *
- * Strong branching is the most accurate (but expensive) branching strategy.
- * For each candidate variable, it actually solves child LP relaxations
- * to measure the objective degradation.
+ * @algorithm Strong Branching:
+ * Most accurate but expensive branching variable selection.
+ * Actually solves child LP relaxations to measure bound improvement.
  *
- * **Algorithm:**
- * 1. For each fractional integer variable xⱼ:
- *    - Create down branch (xⱼ ≤ floor(xⱼ*))
- *    - Create up branch (xⱼ ≥ ceil(xⱼ*))
- *    - Solve both LPs (limited iterations)
- *    - Record objective change ΔDown, ΔUp
- * 2. Score = μ·min(ΔDown, ΔUp) + (1-μ)·max(ΔDown, ΔUp)
- * 3. Select variable with highest score
+ *   PROCEDURE:
+ *     For each fractional integer variable xⱼ with value x*_j:
+ *       1. DOWN: Fix xⱼ ≤ ⌊x*_j⌋, solve LP (limited iterations)
+ *          Record ΔDown = z_down - z_parent
+ *       2. UP: Fix xⱼ ≥ ⌈x*_j⌉, solve LP (limited iterations)
+ *          Record ΔUp = z_up - z_parent
  *
- * **BlisStrong struct:**
- * Stores results for one candidate: objective changes, infeasibility counts,
- * solver completion status for up/down branches.
+ *   SCORING:
+ *     score(j) = μ·min(ΔDown, ΔUp) + (1-μ)·max(ΔDown, ΔUp)
+ *     Balances worst-case vs best-case improvement
+ *     μ = 1/6 typical (prioritize weak side slightly)
  *
- * **Trade-offs:**
- * - Produces smallest search trees (best variable selection)
- * - Very expensive at each node (many LP solves)
- * - Typically used with iteration limits per candidate LP
+ *   SELECTION:
+ *     Choose j* = argmax_j score(j)
+ *     Highest score = most balanced bound improvement
+ *
+ * @math
+ *   Ideal: both branches improve bound significantly
+ *   If one branch infeasible: even better (immediate pruning)
+ *   Expected tree size minimized by strong branching
+ *
+ * @complexity
+ *   Per node: O(k × LP_time) where k = candidates tested
+ *   k typically = numIntegerInf (all fractional integers)
+ *   With limits: k bounded, LP iterations bounded
  *
  * @see BlisBranchStrategyRel for reliability branching (strong + pseudo-cost hybrid)
  * @see BlisBranchStrategyPseudo for pure pseudo-cost branching

@@ -1,4 +1,14 @@
-
+/**
+ * @file cupdlp.h
+ * @brief Master include for CUPDLP (CUDA/CPU PDLP) solver
+ *
+ * Aggregates all CUPDLP headers for the Primal-Dual Linear Programming
+ * solver. CUPDLP implements the PDHG (Primal-Dual Hybrid Gradient)
+ * algorithm for solving large-scale LPs using first-order methods.
+ *
+ * @see cupdlp_solver.h for main algorithm
+ * @see cupdlp_defs.h for data structures
+ */
 #ifndef CUPDLP_H
 #define CUPDLP_H
 

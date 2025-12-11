@@ -1,3 +1,20 @@
+/**
+ * @file power_method.h
+ * @brief Power iteration for maximum eigenvalue estimation
+ *
+ * Template function implementing power method to estimate λ_max of
+ * a symmetric positive semi-definite linear operator.
+ *
+ * **Algorithm:**
+ * 1. Start with v = [1, 1/2, 1/3, ...] normalized
+ * 2. Iterate: v ← f(v)/‖f(v)‖, λ ← ‖f(v)‖
+ * 3. Converge when |λ_new - λ_old| ≤ 10⁻³·λ
+ *
+ * Maximum 100 iterations. Returns λ_max estimate and eigenvector in v.
+ * Used for condition number estimation in maxvolume algorithm.
+ *
+ * @see maxvolume.h for usage in basis analysis
+ */
 #ifndef IPX_POWER_METHOD_H_
 #define IPX_POWER_METHOD_H_
 

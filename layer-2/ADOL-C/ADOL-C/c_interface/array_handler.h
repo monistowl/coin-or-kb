@@ -1,3 +1,13 @@
+/**
+ * @file array_handler.h
+ * @brief Array index accessors for C interface
+ *
+ * Provides C-callable functions for indexing into 1D, 2D, and 3D
+ * arrays used by ADOL-C drivers. Enables languages without native
+ * C multi-dimensional array support to access derivative results.
+ *
+ * @see driver_interface.h for ADOL-C driver C interface
+ */
 #ifndef ARRAY_HANDLER_H
 #define ARRAY_HANDLER_H
 

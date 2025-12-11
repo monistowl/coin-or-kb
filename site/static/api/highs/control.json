@@ -1,0 +1,13 @@
+{
+  "name": "control",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/control.h",
+  "brief": "Solver control: parameters, output, timing, and interruption for IPX\n\nThe Control class is the central coordinator for IPX solver state:\n\n**Parameter Access:**\n- Provides read-only access to all solver parameters\n- Parameters include tolerances, iteration limits, algorithm choices\n\n**Output Management:**\n- Debug() stream with configurable verbosity levels\n- Interval logging to avoid flooding output\n- Integration with HiGHS logging system\n\n**Timing:**\n- Total elapsed time via Elapsed()\n- Print interval control for periodic status updates\n\n**Interruption:**\n- InterruptCheck() for time limit enforcement\n- Designed for single-threaded access (no copy/move)\n\nAlso provides formatting utilities (Format, Scientific, Fixed, Textline)\nfor consistent log output formatting.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipx_parameters.h for parameter definitions",
+    "timer.h for timing implementation"
+  ]
+}

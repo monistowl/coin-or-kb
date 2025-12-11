@@ -1,0 +1,13 @@
+{
+  "name": "ipx_parameters",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/ipx_parameters.h",
+  "brief": "Solver parameters and configuration options\n\nC-compatible structure for all IPX solver parameters:\n\n**Control:** display, logfile, time_limit\n**Preprocessing:** dualize (-1=auto), scale\n**IPM:** ipm_maxiter, tolerances (feasibility, optimality, drop)\n**KKT Solver:** kkt_tol\n**Basis:** crash_basis, dependency_tol, volume_tol, rows_per_slice\n**LU:** lu_kernel, lu_pivottol\n**Crossover:** run_crossover, tolerances\n**Centring:** run_centring, max_centring_steps, ratio parameters",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipx_internal.h for default values (Parameters struct)",
+    "control.h for parameter access during solve"
+  ]
+}

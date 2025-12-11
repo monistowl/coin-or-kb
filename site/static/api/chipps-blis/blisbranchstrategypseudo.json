@@ -3,8 +3,15 @@
   "library": "CHiPPS-BLIS",
   "layer": "layer-3",
   "header": "src/BlisBranchStrategyPseudo.h",
-  "brief": "Pseudo-cost branching strategy based on historical LP degradation\n\nPseudo-cost branching uses learned estimates of objective degradation\nto select branching variables without solving child LPs.\n\n**Pseudo-cost definition:**\nFor variable x\u2c7c with fractional value f\u2c7c = x\u2c7c* - floor(x\u2c7c*):\n- \u03c8\u2c7c\u207b = average (\u0394Obj / f\u2c7c) over down branches\n- \u03c8\u2c7c\u207a = average (\u0394Obj / (1-f\u2c7c)) over up branches\n\n**Algorithm:**\n1. For each fractional integer variable x\u2c7c with value x\u2c7c*:\n   - Estimate down degradation: \u0394\u207b = \u03c8\u2c7c\u207b \u00b7 f\u2c7c\n   - Estimate up degradation: \u0394\u207a = \u03c8\u2c7c\u207a \u00b7 (1-f\u2c7c)\n   - Score = \u03bc\u00b7min(\u0394\u207b, \u0394\u207a) + (1-\u03bc)\u00b7max(\u0394\u207b, \u0394\u207a)\n2. Select variable with highest score\n\n**Initialization:**\nBefore enough observations, uses default pseudo-costs or\nfalls back to other criteria (objective coefficient, etc.)\n\n**Complexity:** O(n) where n = number of integer variables\nMuch faster than strong branching but less accurate.",
-  "algorithms": [],
+  "brief": "Pseudo-cost branching strategy based on historical LP degradation",
+  "algorithms": [
+    {
+      "name": "Pseudo-Cost Branching:\nFast variable selection using learned estimates from history.\nKey observation: similar variables cause similar objective changes.\n\n  PSEUDO-COST DEFINITION:\n    For variable x\u2c7c with fractional value f = x*_j - \u230ax*_j\u230b:\n      \u03c8\u2c7c\u207b = (1/n_down) \u00d7 \u03a3 (\u0394Obj_k / f_k)  over down branches\n      \u03c8\u2c7c\u207a = (1/n_up) \u00d7 \u03a3 (\u0394Obj_k / (1-f_k))  over up branches\n    Normalized by fractional part for scale-invariance\n\n  PREDICTION:\n    \u0394_down \u2248 \u03c8\u2c7c\u207b \u00d7 f     (expected down degradation)\n    \u0394_up \u2248 \u03c8\u2c7c\u207a \u00d7 (1-f)   (expected up degradation)\n\n  SCORING (same as strong branching):\n    score(j) = \u03bc\u00b7min(\u0394_down, \u0394_up) + (1-\u03bc)\u00b7max(\u0394_down, \u0394_up)\n\n  LEARNING:\n    After each branch, update pseudo-cost:\n    \u03c8\u2c7c\u207b = (old_sum + new_sample) / (old_count + 1)",
+      "math": "Assumption: \u0394Obj \u221d fractional part (linear approximation)\n  Better estimate with more samples: variance ~ 1/n\n  Initialization problem: no data for variables not yet branched on",
+      "complexity": "O(k) per node where k = number of fractional integers\n  No LP solves required (vs O(k \u00d7 LP_time) for strong branching)\n  Trade-off: larger tree but faster node processing",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "BlisPseudo for pseudo-cost data structure",

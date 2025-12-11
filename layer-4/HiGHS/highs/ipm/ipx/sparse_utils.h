@@ -1,3 +1,18 @@
+/**
+ * @file sparse_utils.h
+ * @brief Graph algorithms for sparse matrix operations
+ *
+ * Provides DFS traversal and augmenting path algorithms adapted from
+ * Tim Davis's CSparse library. Used for symbolic analysis in sparse
+ * factorization and maximum matching in basis construction.
+ *
+ * **Algorithms:**
+ * - DepthFirstSearch(): Iterative DFS with marking for reachability
+ * - AugmentingPath(): Extends row/column matching via alternating paths
+ *
+ * @see guess_basis.h for maximum matching in basis construction
+ * @see symbolic_invert.h for symbolic inverse computation
+ */
 #ifndef IPX_SPARSE_UTILS_H_
 #define IPX_SPARSE_UTILS_H_
 

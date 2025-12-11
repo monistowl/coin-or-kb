@@ -1,0 +1,13 @@
+{
+  "name": "config_alps_default",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/config_alps_default.h",
+  "brief": "Public Alps version macros for non-autotools builds\n\nDefines version information (ALPS_VERSION, ALPS_VERSION_MAJOR/MINOR/RELEASE)\nand optional MPI availability (COIN_HAS_MPI). This is the public header\nincluded by users of the Alps library when not using autotools.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_default.h for internal build configuration",
+    "AlpsConfig.h for unified configuration entry point"
+  ]
+}

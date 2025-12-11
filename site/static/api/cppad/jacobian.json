@@ -3,7 +3,18 @@
   "library": "CppAD",
   "layer": "layer-1",
   "header": "include/cppad/core/jacobian.hpp",
-  "brief": "Core AD functionality: jacobian",
-  "algorithms": [],
-  "methods": []
+  "brief": "Full dense Jacobian driver using forward or reverse mode",
+  "algorithms": [
+    {
+      "name": "Dense Jacobian Computation:\nComputes J(x) = F'(x) \u2208 R^{m\u00d7n} for F: R^n \u2192 R^m.\n\n  MODE SELECTION:\n    Forward mode: Sweep once per column (n sweeps total)\n      For j = 0,...,n-1: J[:,j] = F'(x)\u00b7e_j via forward\n    Reverse mode: Sweep once per row (m sweeps total)\n      For i = 0,...,m-1: J[i,:] = e_i'\u00b7F'(x) via reverse\n\n  AUTOMATIC CHOICE:\n    Uses forward if n <= m, reverse if m < n\n    Minimizes total number of AD sweeps",
+      "math": "J_{ij} = \u2202F_i/\u2202x_j\n  Forward: J\u00b7v computed in O(ops) for any direction v\n  Reverse: u'\u00b7J computed in O(ops) for any adjoint u",
+      "complexity": "- Forward mode: O(n\u00b7ops) operations, O(ops) memory\n- Reverse mode: O(m\u00b7ops) operations, O(ops) memory\n- Best mode: O(min(n,m)\u00b7ops) operations",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sparse_jac.hpp for efficient sparse Jacobians",
+    "forward.hpp, reverse.hpp for AD sweep details"
+  ]
 }

@@ -34,8 +34,9 @@ Time: O(n³/3) for factorization, O(n²) per solve
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinDenseFactorization.hpp") }}** - Dense matrix factorization and CoinOtherFactorization base class
+- **[CoinDenseFactorization.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Dense matrix factorization and CoinOtherFactorization base class
 
 Provides CoinOtherFactorization abstract base class for alternative
 factorization methods, plus CoinDenseFactorization for small dense
 problems using LAPACK-style LU.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinDenseFactorization.hpp)

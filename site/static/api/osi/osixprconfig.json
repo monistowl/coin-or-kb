@@ -1,0 +1,13 @@
+{
+  "name": "OsiXprConfig",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/OsiXpr/OsiXprConfig.h",
+  "brief": "Configuration header for OsiXpr (FICO Xpress interface)\n\nProvides build configuration for the Osi adapter to FICO Xpress-MP\nOptimizer. Defines OSIXPRLIB_EXPORT for DLL import/export based on build\nenvironment and platform. Requires separate Xpress installation and license.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiXprSolverInterface.h for Xpress adapter class",
+    "OsiConfig.h for main Osi configuration"
+  ]
+}

@@ -1,3 +1,19 @@
+/**
+ * @file ampisupportAdolc.h
+ * @brief AMPI (Adjoint MPI) tangent linear model support
+ *
+ * Provides ADOLC_TLM_AMPI_* wrappers for MPI communication routines
+ * that propagate derivative information through MPI calls during
+ * tangent linear model evaluation.
+ *
+ * **Supported Operations:**
+ * - Point-to-point: Send, Recv, Isend, Irecv, Wait
+ * - Collective: Barrier, Gather, Scatter, Allgather, Bcast
+ * - Reduction: Reduce, Allreduce
+ *
+ * @note Requires ADOLC_AMPI_SUPPORT and AMPI library
+ * @see medipacksupport.h for adjoint MPI via MeDiPack
+ */
 /*----------------------------------------------------------------------------
  ADOL-C -- Automatic Differentiation by Overloading in C++
  File:     ampisupportAdolc.cpp

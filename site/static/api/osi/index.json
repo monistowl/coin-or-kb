@@ -28,6 +28,16 @@
       "has_algorithm": false
     },
     {
+      "name": "OsiConfig",
+      "brief": "Unified configuration header for Osi library\n\nMain entry point for Osi configuration that routes to the appropriate\nsettings based on build environment. With autotools (HAVE_CONFIG_H),\nincludes generated config.h. Without autotools, uses config_default.h\nfor building or config_osi_default.h for clients. Sets up OSILIB_EXPORT\nfor proper DLL import/export on Windows and GCC visibility.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiCpxConfig",
+      "brief": "Configuration header for OsiCpx (IBM CPLEX interface)\n\nProvides build configuration for the Osi adapter to IBM CPLEX solver.\nDefines OSICPXLIB_EXPORT for DLL import/export based on build environment\nand platform. Requires separate CPLEX installation and license.",
+      "has_algorithm": false
+    },
+    {
       "name": "OsiCpxSolverInterface",
       "brief": "Osi interface for IBM ILOG CPLEX optimizer\nAuthor: Tobias Pfender (ZIB Berlin). EPL license.\n\nOsiCpxSolverInterface wraps CPLEX via the Osi abstraction. Uses CPXLPptr\nand CPXENVptr handles for CPLEX Callable Library. Implements initialSolve/\nresolve/branchAndBound, row/column manipulation (OsiRowCut, OsiColCut),\nwarm starts via CoinWarmStartBasis, and CPLEX-specific parameter handling.",
       "has_algorithm": false
@@ -48,13 +58,28 @@
       "has_algorithm": true
     },
     {
+      "name": "OsiGlpkConfig",
+      "brief": "Configuration header for OsiGlpk (GNU GLPK interface)\n\nProvides build configuration for the Osi adapter to GNU Linear Programming\nKit (GLPK). Defines OSIGLPKLIB_EXPORT for DLL import/export based on build\nenvironment and platform. GLPK is open source (GPL licensed).",
+      "has_algorithm": false
+    },
+    {
       "name": "OsiGlpkSolverInterface",
       "brief": "Osi interface for GNU Linear Programming Kit (GLPK)\nCopyright (C) 2001, Vivian De Smedt, Braden Hunsaker. EPL license.\n\nOsiGlpkSolverInterface wraps GLPK via the Osi abstraction. Uses glp_prob\nhandle (LPX typedef for compatibility). Implements initialSolve/resolve/\nbranchAndBound, warm starts via CoinWarmStartBasis, and GLPK-specific\nparameter handling. Supports both simplex and MIP solving.",
       "has_algorithm": false
     },
     {
+      "name": "OsiGrbConfig",
+      "brief": "Configuration header for OsiGrb (Gurobi interface)\n\nProvides build configuration for the Osi adapter to Gurobi Optimizer.\nDefines OSIGRBLIB_EXPORT for DLL import/export based on build environment\nand platform. Requires separate Gurobi installation and license.",
+      "has_algorithm": false
+    },
+    {
       "name": "OsiGrbSolverInterface",
       "brief": "Osi interface for Gurobi optimizer\nAuthor: Stefan Vigerske (HU Berlin), based on Cplex interface by T. Achterberg.\nEPL license.\n\nOsiGrbSolverInterface wraps Gurobi via the Osi abstraction. Uses GRBmodel\nand GRBenv handles for Gurobi C API. Implements initialSolve/resolve/\nbranchAndBound, row/column manipulation, warm starts, and parameter passing.",
+      "has_algorithm": false
+    },
+    {
+      "name": "OsiMskConfig",
+      "brief": "Configuration header for OsiMsk (MOSEK interface)\n\nProvides build configuration for the Osi adapter to MOSEK Optimization\nSoftware. Defines OSIMSKLIB_EXPORT for DLL import/export based on build\nenvironment and platform. Requires separate MOSEK installation and license.",
       "has_algorithm": false
     },
     {
@@ -93,13 +118,43 @@
       "has_algorithm": false
     },
     {
+      "name": "OsiSpxConfig",
+      "brief": "Configuration header for OsiSpx (SoPlex interface)\n\nProvides build configuration for the Osi adapter to SoPlex LP solver\nfrom ZIB (Zuse Institute Berlin). Defines OSISPXLIB_EXPORT for DLL\nimport/export based on build environment and platform. SoPlex is\nopen source under the ZIB academic license.",
+      "has_algorithm": false
+    },
+    {
       "name": "OsiSpxSolverInterface",
       "brief": "Osi interface for SoPlex LP solver\nAuthors: Tobias Pfender, Ambros Gleixner, Wei Huang (ZIB Berlin).\nEPL license.\n\nOsiSpxSolverInterface wraps SoPlex >= 1.4.2c via the Osi abstraction.\nImplements initialSolve/resolve/branchAndBound, parameter get/set,\nrow/column access, warm start via CoinWarmStartBasis. Uses soplex::SoPlex\ninternally with DVector/DIdxSet for sparse operations.",
       "has_algorithm": false
     },
     {
+      "name": "OsiXprConfig",
+      "brief": "Configuration header for OsiXpr (FICO Xpress interface)\n\nProvides build configuration for the Osi adapter to FICO Xpress-MP\nOptimizer. Defines OSIXPRLIB_EXPORT for DLL import/export based on build\nenvironment and platform. Requires separate Xpress installation and license.",
+      "has_algorithm": false
+    },
+    {
       "name": "OsiXprSolverInterface",
       "brief": "Osi interface for FICO XPRESS-MP solver\nCopyright (C) 2000, International Business Machines Corporation.\nEPL-1.0 license.\n\nOsiXprSolverInterface wraps XPRESS-MP via the Osi abstraction. Uses XPRSprob\nhandle for XPRESS API. Implements initialSolve/resolve/branchAndBound,\nrow/column access, parameter get/set, and problem loading from MPS/LP files.",
+      "has_algorithm": false
+    },
+    {
+      "name": "config_default",
+      "brief": "Default build configuration for Osi without autotools\n\nProvides configuration for builds not using the configure script.\nSets OSILIB_EXPORT for DLL building and includes public version macros.\nDefines which solver interfaces are available (CPLEX, GLPK, Gurobi,\nMosek, SoPlex, Xpress) - uncomment the appropriate OSI_HAS_* macros.",
+      "has_algorithm": false
+    },
+    {
+      "name": "config_osi_default",
+      "brief": "Public Osi version macros for non-autotools builds\n\nDefines version information and OSILIB_EXPORT macro for client code.\nThis is the public header included by users of the Osi library, while\nconfig_default.h is used internally when building Osi itself.",
+      "has_algorithm": false
+    },
+    {
+      "name": "configall_system",
+      "brief": "Compiler-specific configuration router for non-autotools builds\n\nRoutes to the appropriate compiler-specific configuration header based\non the detected compiler. Currently supports MSVC via configall_system_msc.h.\nUsed by *Config.h headers when HAVE_CONFIG_H is not defined.",
+      "has_algorithm": false
+    },
+    {
+      "name": "configall_system_msc",
+      "brief": "MSVC-specific configuration macros for Windows builds\n\nDefines feature detection macros for Microsoft Visual C++ compiler:\n- Standard header availability (HAVE_CASSERT, HAVE_CMATH, etc.)\n- Fortran name mangling (F77_FUNC, F77_FUNC_)\n- Platform-specific type sizes (SIZEOF_INT, SIZEOF_DOUBLE, etc.)\n- Available functions (HAVE_RAND, HAVE__SNPRINTF)",
       "has_algorithm": false
     }
   ]

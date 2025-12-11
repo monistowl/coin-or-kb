@@ -1,0 +1,13 @@
+{
+  "name": "lu_def",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/lu_def.h",
+  "brief": "Basic definitions, macros, and inline utilities for BasicLU\n\nProvides foundational types and helper functions used throughout BasicLU:\n- Standard library includes (stdlib, math, stdint, assert)\n- MIN/MAX macros for value comparisons\n- Inline swap functions for lu_int and double arrays\n- Task enumeration for factorization phases\n- BASICLU_HASH constant for instance validation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu.h for the public interface",
+    "lu_internal.h for the main internal data structure"
+  ]
+}

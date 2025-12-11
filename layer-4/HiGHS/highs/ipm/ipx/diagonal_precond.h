@@ -1,5 +1,18 @@
 // Copyright (c) 2018-2019 ERGO-Code. See license.txt for license.
 
+/**
+ * @file diagonal_precond.h
+ * @brief Diagonal preconditioner for normal equations: diag(A·W·A')
+ *
+ * Implements a simple diagonal preconditioner for the KKT solver.
+ * Computes and applies M⁻¹ where M = diag(AI·W·AI').
+ *
+ * While less effective than basis preconditioning for ill-conditioned
+ * problems, diagonal preconditioning is cheaper to compute and update.
+ *
+ * @see linear_operator.h for the operator interface
+ * @see kkt_solver_diag.h for the KKT solver using this
+ */
 #ifndef IPX_DIAGONAL_PRECOND_H_
 #define IPX_DIAGONAL_PRECOND_H_
 

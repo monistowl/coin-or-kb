@@ -3,7 +3,18 @@
   "library": "CppAD",
   "layer": "layer-1",
   "header": "include/cppad/core/for_jac_sparsity.hpp",
-  "brief": "Core AD functionality: for jac sparsity",
-  "algorithms": [],
-  "methods": []
+  "brief": "Forward mode Jacobian sparsity pattern computation",
+  "algorithms": [
+    {
+      "name": "Forward Sparsity Propagation:\nDetermines which Jacobian entries J_{ij} may be nonzero without\ncomputing actual values. Key for efficient sparse derivatives.\n\n  FORWARD SWEEP (symbolic):\n    For each operation v = op(u\u2081, u\u2082, ...) in tape order:\n      sparsity(v) = union of sparsity(u\u1d62) for nonzero partials\n\n  BOOLEAN SPARSITY (conservative):\n    Track set S_v \u2286 {0,...,n-1} of input indices v may depend on\n    S_v is superset of true sparsity (no false negatives)\n\n  OUTPUT:\n    For each output y_i: set S_i of inputs it depends on\n    Jacobian pattern: J_{ij} possibly nonzero iff j \u2208 S_i",
+      "math": "Pattern matrix P: P_{ij} = 1 if \u2202y_i/\u2202x_j may be nonzero\n  Forward computes P given R: pattern_out = P\u00b7R (matrix multiply)\n  With R = I (identity): pattern_out = P (Jacobian pattern)",
+      "complexity": "- Time: O(ops \u00d7 average_sparsity) single sweep\n- Memory: O(n \u00d7 tape_size) for sparsity sets\n- vs numerical: identifies zero entries without n AD sweeps",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "rev_jac_sparsity.hpp for reverse mode (more efficient for m << n)",
+    "sparse_jac.hpp uses sparsity for graph coloring"
+  ]
 }

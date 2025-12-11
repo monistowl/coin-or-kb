@@ -1,3 +1,35 @@
+/**
+ * @file basiclu.h
+ * @brief BasicLU - Sparse LU factorization library for simplex basis updates
+ *
+ * BasicLU provides sparse LU factorization with efficient rank-1 updates,
+ * designed for use in LP simplex solvers where basis matrices change by
+ * one column per iteration.
+ *
+ * **Core Features:**
+ * - Markowitz pivot selection with threshold pivoting for numerical stability
+ * - Forrest-Tomlin updates for efficient basis changes without refactorization
+ * - Sparse triangular solves using Gilbert-Peierls symbolic analysis
+ * - Condition number estimation via LINPACK algorithm
+ *
+ * **Data Organization:**
+ * - istore[]: Integer workspace (permutations, indices, linked lists)
+ * - xstore[]: Double workspace (values, parameters, statistics)
+ * - Li/Lx, Ui/Ux: L and U factors in compressed sparse format
+ * - Wi/Wx: Working space for eta-file updates
+ *
+ * **Workflow:**
+ * 1. basiclu_initialize() - Set up instance for dimension m
+ * 2. basiclu_factorize() - Compute B = L·U with pivoting
+ * 3. basiclu_solve_sparse() - Solve B·x = b or B'·y = c
+ * 4. basiclu_solve_for_update() - Prepare for basis change
+ * 5. basiclu_update() - Apply Forrest-Tomlin column replacement
+ * 6. Repeat 3-5 until refactorization needed
+ *
+ * @see lu_internal.h for internal data structures
+ * @see basiclu_factorize.h for factorization details
+ * @see basiclu_update.h for Forrest-Tomlin update algorithm
+ */
 #ifndef _BASICLU_H
 #define _BASICLU_H
 

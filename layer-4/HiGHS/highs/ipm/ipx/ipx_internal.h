@@ -1,3 +1,24 @@
+/**
+ * @file ipx_internal.h
+ * @brief Internal types, constants, and default parameters for IPX solver
+ *
+ * Defines the core internal infrastructure for the IPX interior point solver:
+ *
+ * **Types:**
+ * - Int: Integer type alias (ipxint)
+ * - Vector: std::valarray<double> for dense vectors
+ * - Info: Statistics and status information structure
+ * - Parameters: Solver configuration with sensible defaults
+ *
+ * **Numerical Constants:**
+ * - kHypersparseThreshold (0.1): Sparsity threshold for hyper-sparse operations
+ * - kLuDependencyTol (1e-3): Absolute pivot tolerance for rank detection
+ * - kLuStabilityThreshold (1e-12): Maximum acceptable residual for LU stability
+ * - kFtDiagErrorTol (1e-8): Forrest-Tomlin diagonal error tolerance
+ *
+ * @see ipx_parameters.h for parameter documentation
+ * @see ipx_info.h for output statistics
+ */
 #ifndef IPX_INTERNAL_H_
 #define IPX_INTERNAL_H_
 

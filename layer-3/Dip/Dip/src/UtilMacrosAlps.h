@@ -1,3 +1,14 @@
+/**
+ * @file UtilMacrosAlps.h
+ * @brief Alps serialization utilities for warm start basis
+ *
+ * Provides functions to encode/decode CoinWarmStartBasis objects
+ * to/from AlpsEncoded for parallel tree search checkpointing and
+ * message passing. Bridges COIN-OR warm start with Alps framework.
+ *
+ * @see AlpsDecompParam.h for Alps parameter configuration
+ * @see AlpsDecompTreeNode.h for tree node serialization
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

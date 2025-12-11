@@ -1,0 +1,13 @@
+{
+  "name": "lu_internal",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/lu_internal.h",
+  "brief": "Internal data structure and function prototypes for BasicLU\n\nDefines struct lu, the core internal data structure that provides access\nto all factorization state. The struct contains:\n\n**User Parameters:**\n- Memory sizes (Lmem, Umem, Wmem)\n- Pivot tolerances (abstol, reltol, droptol)\n- Search parameters (maxsearch, nzbias, search_rows)\n\n**Statistics:**\n- Nonzero counts (Lnz, Unz, Rnz)\n- Pivot extremes (min_pivot, max_pivot)\n- Timing and flop counts\n- Condition estimates (condestL, condestU)\n\n**Factorization State:**\n- Permutation arrays (p, pinv, qinv, pmap, qmap)\n- L factor: Lbegin, Lindex, Lvalue (by rows)\n- U factor: Ubegin, Uindex, Uvalue (by columns)\n- Eta vectors: Rbegin, eta_row in W arrays\n\n**Internal Functions:**\n- lu_load/lu_save: Transfer between istore/xstore and struct lu\n- lu_markowitz: Pivot selection with fill-in minimization\n- lu_pivot: Elimination step with rank-1 update\n- lu_singletons: Initial triangular factor extraction\n- lu_dfs: Depth-first search for symbolic analysis\n- lu_condest: Condition number estimation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu.h for the public interface",
+    "lu_def.h for basic definitions"
+  ]
+}

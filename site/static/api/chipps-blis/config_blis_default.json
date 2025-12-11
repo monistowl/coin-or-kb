@@ -1,0 +1,13 @@
+{
+  "name": "config_blis_default",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/config_blis_default.h",
+  "brief": "Public BLIS version macros for non-autotools builds\n\nDefines version information (BLIS_VERSION, BLIS_VERSION_MAJOR/MINOR/RELEASE)\nfor client code. This is the public header included by users of the BLIS\nlibrary when not using autotools.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_default.h for internal build configuration",
+    "BlisConfig.h for unified configuration entry point"
+  ]
+}

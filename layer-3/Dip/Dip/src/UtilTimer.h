@@ -1,3 +1,14 @@
+/**
+ * @file UtilTimer.h
+ * @brief CPU and wall-clock timer for profiling
+ *
+ * Provides UtilTimer class that wraps CoinCpuTime and CoinGetTimeOfDay
+ * for measuring both CPU time and real (wall-clock) time. Used for
+ * algorithm profiling and time limit enforcement.
+ *
+ * @see UtilMacrosDecomp.h for function timing macros
+ * @see DecompParam.h for time limit parameters
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

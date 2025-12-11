@@ -1,3 +1,22 @@
+/**
+ * @file splitted_normal_matrix.h
+ * @brief Basis-preconditioned normal matrix operator
+ *
+ * LinearOperator for the matrix C = B⁻¹·A·A'·B⁻ᵀ = I + B⁻¹·N·N'·B⁻ᵀ,
+ * where B is the basis matrix and N the nonbasic columns. This
+ * formulation provides better conditioning than the standard normal
+ * equations A·W·A'.
+ *
+ * The Apply() method computes y = C·x via:
+ * 1. Solve B'·w = x (triangular with U')
+ * 2. Compute z = N'·w (sparse matvec)
+ * 3. Compute v = N·z (sparse matvec)
+ * 4. Solve B·y = v (triangular with L,U)
+ * 5. Return y + x
+ *
+ * @see kkt_solver_basis.h for usage in KKT preconditioning
+ * @see basis.h for LU factors of B
+ */
 #ifndef IPX_SPLITTED_NORMAL_MATRIX_H_
 #define IPX_SPLITTED_NORMAL_MATRIX_H_
 

@@ -1,0 +1,13 @@
+{
+  "name": "info",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/info.h",
+  "brief": "Formatted output utilities for solver statistics\n\nProvides stream output for Info structure and status code formatting.\nOutput format is designed to be parseable by external tools (e.g., Julia).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipx_info.h for the Info structure definition",
+    "ipx_status.h for status codes"
+  ]
+}

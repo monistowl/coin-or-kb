@@ -1,4 +1,14 @@
-// Copyright (C) Jan-Willem Goossens 
+/**
+ * @file CoinShallowPackedVector.h
+ * @brief .NET wrapper for sparse vector (non-owning view)
+ *
+ * Wraps ::CoinShallowPackedVector which provides a lightweight
+ * view of index/element pairs without memory ownership. Used
+ * to access rows or columns from packed matrices efficiently.
+ *
+ * @see CoinPackedMatrix.h for the matrix this accesses
+ */
+// Copyright (C) Jan-Willem Goossens
 // All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 

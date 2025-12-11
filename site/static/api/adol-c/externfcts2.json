@@ -1,0 +1,12 @@
+{
+  "name": "externfcts2",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/externfcts2.h",
+  "brief": "External differentiated functions API (version 2)\n\nProvides interface for registering user-supplied derivative functions\nfor external code that cannot be traced by ADOL-C. Supports variable-\nsized input/output arrays with forward and reverse mode callbacks.\n\n**Workflow:**\n1. Define derivative callbacks (zos_forward, fos_forward, fos_reverse, etc.)\n2. Register with reg_ext_fct()\n3. Call within traced code using call_ext_fct()\n\n**Callback Types:**\n- ADOLC_ext_fct_v2: Zero-order (function evaluation)\n- ADOLC_ext_fct_v2_fos_forward: First-order scalar forward\n- ADOLC_ext_fct_v2_fov_forward: First-order vector forward\n- ADOLC_ext_fct_v2_fos_reverse: First-order scalar reverse\n- ADOLC_ext_fct_v2_fov_reverse: First-order vector reverse",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "externfcts.h for simpler fixed-size external function interface"
+  ]
+}

@@ -1,8 +1,16 @@
-/*
-This file generates an interface to the overloaded forward and reverse mode
-calls.
-*/
-
+/**
+ * @file driver_interface.h
+ * @brief C interface for ADOL-C forward and reverse mode drivers
+ *
+ * Provides C-callable wrappers for the overloaded C++ forward() and
+ * reverse() functions with varying parameter combinations for:
+ * - Zero-order (ZOS), first-order (FOS/FOV), higher-order (HOS/HOV)
+ * - Scalar and vector modes
+ * - With/without sparsity detection (nz arrays)
+ *
+ * @see drivers/drivers.h for C++ driver interface
+ * @see ADOLC_TB_interface.h for tape management
+ */
 #ifndef DRIVER_INTERFACE_H
 #define DRIVER_INTERFACE_H
 

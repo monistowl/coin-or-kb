@@ -1,0 +1,13 @@
+{
+  "name": "sparse_matrix",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/sparse_matrix.h",
+  "brief": "Compressed Sparse Column (CSC) matrix with incremental construction\n\nSparse matrix storage with features for efficient IPM operations:\n\n**CSC Format:**\n- colptr[j]: Start index of column j in rowidx/values\n- rowidx[]: Row indices (can be sorted via SortIndices())\n- values[]: Nonzero values\n\n**Incremental Construction:**\n- Queue mechanism for building columns incrementally\n- push_back() adds to queue, commit() finalizes column\n- Efficient for constructing matrices column-by-column\n\n**Matrix Operations:**\n- ScatterColumn: Scatter column j to dense vector\n- MultiplyAdd: y += \u03b1\u00b7A\u00b7x or y += \u03b1\u00b7A'\u00b7x\n- AddNormalProduct: Compute A\u00b7D\u00b7A' product for KKT system",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "model.h for usage in LP representation",
+    "normal_matrix.h for normal equation operations"
+  ]
+}

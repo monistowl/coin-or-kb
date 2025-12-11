@@ -1,3 +1,26 @@
+/**
+ * @file basiclu_solve_for_update.h
+ * @brief Solve linear system while preparing for basis update
+ *
+ * Performs FTRAN (forward transformation) or BTRAN (backward transformation)
+ * while storing intermediate results needed by basiclu_update().
+ *
+ * **For Basis Updates (simplex method):**
+ * 1. FTRAN: Solve B·x = a for entering column a → stores spike column
+ * 2. BTRAN: Solve B'·y = eⱼ for leaving variable j → stores pivot row
+ * 3. Call basiclu_update() to perform Forrest-Tomlin update
+ *
+ * **Partial Solve Optimization:**
+ * If solution not requested (p_nzlhs=NULL), only one triangular solve
+ * is performed, storing data for update. Full solution requires both.
+ *
+ * **Memory Growth:**
+ * May return BASICLU_REALLOCATE if Li/Lx or Ui/Ux arrays need expansion
+ * to store update data. Reallocate and retry.
+ *
+ * @see basiclu_update.h for applying the Forrest-Tomlin update
+ * @see basiclu_solve_sparse.h for solves without update preparation
+ */
 lu_int basiclu_solve_for_update
 (
     lu_int istore[],

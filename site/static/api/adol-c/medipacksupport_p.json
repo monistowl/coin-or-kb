@@ -1,0 +1,12 @@
+{
+  "name": "medipacksupport_p",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/medipacksupport_p.h",
+  "brief": "Private MeDiPack callbacks for tape interpretation\n\nInternal functions called during tape forward/reverse sweeps to\nhandle MeDiPack handle callbacks for MPI communication adjoints.\n\n@note Internal header; use medipacksupport.h for public API",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "medipacksupport.h for public MeDiPack integration"
+  ]
+}

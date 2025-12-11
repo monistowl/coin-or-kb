@@ -1,3 +1,14 @@
+/**
+ * @file basiclu_obj_factorize.h
+ * @brief Factorize matrix using BasicLU object interface
+ *
+ * Object-oriented wrapper for basiclu_factorize() with automatic
+ * memory reallocation. If arrays need growth, reallocates using
+ * obj->realloc_factor multiplier and retries.
+ *
+ * @see basiclu_factorize.h for algorithm details
+ * @see basiclu_object.h for the object structure
+ */
 lu_int basiclu_obj_factorize
 (
     struct basiclu_object *obj,

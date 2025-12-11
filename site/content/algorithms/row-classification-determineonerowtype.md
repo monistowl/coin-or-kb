@@ -31,7 +31,8 @@ O(nnz) per row for classification
 
 ### Cgl
 
-- **{{ link(path="/browser/?library=Cgl", text="CglFlowCover.hpp") }}** - Lifted Simple Generalized Flow Cover cuts
+- **[CglFlowCover.hpp](/coin-or-kb/browser/?library=Cgl)** - Lifted Simple Generalized Flow Cover cuts
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Cgl/src/CglFlowCover/CglFlowCover.hpp)
 
 ## References
 

@@ -6,7 +6,35 @@
 // ----------------------------------------------------------------------------
 /**
  * @file rev_jac_sparsity.hpp
- * @brief Core AD functionality: rev jac sparsity
+ * @brief Reverse mode Jacobian sparsity pattern computation
+ *
+ * @algorithm Reverse Sparsity Propagation:
+ * Computes Jacobian sparsity by traversing tape backwards.
+ * More efficient than forward when m << n.
+ *
+ *   REVERSE SWEEP (symbolic):
+ *     Initialize: output variables have sparsity = {own_index}
+ *     For each operation v = op(u₁, u₂) in reverse order:
+ *       Add sparsity(v) to sparsity(uᵢ) for nonzero partials
+ *
+ *   OUTPUT:
+ *     For each input x_j: set T_j of outputs that depend on it
+ *     Jacobian pattern: J_{ij} possibly nonzero iff i ∈ T_j
+ *
+ * @math
+ *   Pattern matrix P: P_{ij} = 1 if ∂y_i/∂x_j may be nonzero
+ *   Reverse computes R·P given R: pattern_out = R·P
+ *   With R = I: pattern_out = P (transposed Jacobian pattern)
+ *
+ * @complexity
+ * - Time: O(ops × average_row_sparsity) single sweep
+ * - Forward vs Reverse:
+ *   - Forward efficient when n << m (few inputs)
+ *   - Reverse efficient when m << n (few outputs)
+ * - Sparsity detection: O(ops) vs O(n·ops) numerical
+ *
+ * @see for_jac_sparsity.hpp for forward mode
+ * @see rev_hes_sparsity.hpp for Hessian sparsity
  */
 /*
 {xrst_begin rev_jac_sparsity}

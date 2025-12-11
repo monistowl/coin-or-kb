@@ -1,0 +1,13 @@
+{
+  "name": "persistanttapeinfos",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/valuetape/persistanttapeinfos.h",
+  "brief": "Persistent tape metadata surviving across tape re-use\n\nDefines PersistantTapeInfos struct containing file names, solver state\n(Jacobian solver, forward ODE solver), and keep flags that persist\nwhen a tape is re-used rather than recreated.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "valuetape.h for ValueTape class composition",
+    "tapeinfos.h for ephemeral tape state"
+  ]
+}

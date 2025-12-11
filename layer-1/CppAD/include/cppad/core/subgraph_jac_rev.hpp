@@ -6,7 +6,40 @@
 // ----------------------------------------------------------------------------
 /**
  * @file subgraph_jac_rev.hpp
- * @brief Core AD functionality: subgraph jac rev
+ * @brief Sparse Jacobian via subgraph reverse mode
+ *
+ * @algorithm Subgraph Sparsity Method:
+ * Compute sparse Jacobian by processing only relevant subgraphs.
+ * Alternative to graph coloring that can be faster for very sparse cases.
+ *
+ *   KEY INSIGHT:
+ *     Each output y_i depends on a small subgraph of operations
+ *     Only need reverse sweep through that subgraph
+ *
+ *   SUBGRAPH REVERSE:
+ *     For each output i in select_range:
+ *       1. Identify subgraph: ops that affect y_i
+ *       2. Reverse sweep only through subgraph
+ *       3. Extract J[i, select_domain] entries
+ *
+ *   vs GRAPH COLORING:
+ *     Coloring: groups columns, sweeps full tape
+ *     Subgraph: groups rows, sweeps partial tape
+ *     Subgraph wins when subgraphs are small (localized dependencies)
+ *
+ * @math
+ *   Partition tape T into subgraphs T_1, ..., T_m
+ *   |T_i| = ops affecting output i
+ *   Cost: Σ_i |T_i| vs coloring: colors × |T|
+ *
+ * @complexity
+ * - Time: O(Σᵢ |subgraph_i|) for sparse structure
+ * - Best case: O(nnz) when dependencies very localized
+ * - Worst case: O(m·ops) when all outputs depend on all ops
+ * - No graph coloring overhead
+ *
+ * @see sparse_jac.hpp for graph coloring approach
+ * @see subgraph_reverse.hpp for underlying subgraph sweep
  */
 /*
 {xrst_begin subgraph_jac_rev}

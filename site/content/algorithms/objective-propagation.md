@@ -22,7 +22,7 @@ propagate(): O(nnz × propagation_rounds) amortized
 
 ### HiGHS
 
-- **{{ link(path="/browser/?library=HiGHS", text="HighsDomain.h") }}** - Bound tracking, propagation, and conflict analysis for MIP
+- **[HighsDomain.h](/coin-or-kb/browser/?library=HiGHS)** - Bound tracking, propagation, and conflict analysis for MIP
 
 **HighsDomain Class:**
 Manages variable bounds during MIP branch-and-bound with:
@@ -58,6 +58,7 @@ Learns from infeasibility:
 - backtrack(): Undo bound changes
 - backtrackToGlobal(): Reset to root node bounds
 - branchPos_[]: Positions of branching decisions in stack
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/HiGHS/highs/mip/HighsDomain.h)
 
 ## References
 

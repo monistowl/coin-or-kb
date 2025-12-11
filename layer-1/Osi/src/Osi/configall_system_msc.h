@@ -1,3 +1,16 @@
+/**
+ * @file configall_system_msc.h
+ * @brief MSVC-specific configuration macros for Windows builds
+ *
+ * Defines feature detection macros for Microsoft Visual C++ compiler:
+ * - Standard header availability (HAVE_CASSERT, HAVE_CMATH, etc.)
+ * - Fortran name mangling (F77_FUNC, F77_FUNC_)
+ * - Platform-specific type sizes (SIZEOF_INT, SIZEOF_DOUBLE, etc.)
+ * - Available functions (HAVE_RAND, HAVE__SNPRINTF)
+ *
+ * @see configall_system.h for compiler routing
+ * @see OsiConfig.h for main configuration
+ */
 /* This is the header file for the Microsoft compiler, defining all
  * system and compiler dependent configuration macros */
 

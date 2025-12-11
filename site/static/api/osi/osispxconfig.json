@@ -1,0 +1,13 @@
+{
+  "name": "OsiSpxConfig",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/OsiSpx/OsiSpxConfig.h",
+  "brief": "Configuration header for OsiSpx (SoPlex interface)\n\nProvides build configuration for the Osi adapter to SoPlex LP solver\nfrom ZIB (Zuse Institute Berlin). Defines OSISPXLIB_EXPORT for DLL\nimport/export based on build environment and platform. SoPlex is\nopen source under the ZIB academic license.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiSpxSolverInterface.h for SoPlex adapter class",
+    "OsiConfig.h for main Osi configuration"
+  ]
+}

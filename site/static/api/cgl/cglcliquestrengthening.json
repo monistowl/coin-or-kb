@@ -4,7 +4,14 @@
   "layer": "layer-2",
   "header": "src/CglCliqueStrengthening/CglCliqueStrengthening.hpp",
   "brief": "Preprocessing to extend and merge clique constraints",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Greedy Clique Extension:\nStrengthen set packing constraints \u03a3 x\u1d62 \u2264 1 by adding variables.\n\n  EXTENSION:\n    Given clique C = {x\u2081,...,x\u2096} with \u03a3 x\u1d62 \u2264 1\n    Find x\u2c7c \u2209 C that conflicts with all x\u1d62 \u2208 C\n    Add x\u2c7c to get stronger: \u03a3 x\u1d62 + x\u2c7c \u2264 1\n\n  GREEDY SELECTION (by method):\n    1: Random\n    2: Max degree in conflict graph\n    3: Max modified degree (degree among unfixed variables)\n    4: Reduced cost priority (default) - favor cheap additions\n    5: Combined reduced cost + modified degree\n\n  MERGING (domination removal):\n    If clique A \u2282 B, then A is dominated by B\n    Remove dominated cliques (subsets of larger ones)",
+      "math": "Original: x\u2081 + x\u2082 \u2264 1 (pairwise conflict)\n  Extended: x\u2081 + x\u2082 + x\u2083 \u2264 1 (if x\u2083 conflicts with both)\n  Stronger constraints = tighter LP relaxation",
+      "complexity": "Extension: O(|C| \u00d7 |neighbors|) per clique\n  Domination check: O(total_clique_elements\u00b2)",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "CglBKClique for cut generation (vs preprocessing)",

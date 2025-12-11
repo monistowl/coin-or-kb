@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="SolutionStrategySingleTree.h") }}** - Lazy constraint callback strategy (single-tree)
+- **[SolutionStrategySingleTree.h](/coin-or-kb/browser/?library=SHOT)** - Lazy constraint callback strategy (single-tree)
 
 Callback-based outer approximation within single B&B tree.
 
@@ -35,3 +35,4 @@ Callback-based outer approximation within single B&B tree.
 - Requires solver callback support
 - Limited to CPLEX/Gurobi
 - More complex debugging
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/SolutionStrategy/SolutionStrategySingleTree.h)

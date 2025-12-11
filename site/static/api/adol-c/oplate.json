@@ -1,0 +1,12 @@
+{
+  "name": "oplate",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/oplate.h",
+  "brief": "Operation tape opcode definitions\n\nDefines the OPCODES enum containing all operation codes recorded\non ADOL-C tapes during tracing. Each opcode represents a primitive\noperation (arithmetic, transcendental, control flow) that the tape\ninterpreter executes during forward/reverse sweeps.\n\n**Opcode Categories:**\n- Assignment: assign_ind, assign_dep, assign_a, assign_d\n- Arithmetic: plus_a_a, mult_a_a, div_a_a, etc.\n- Transcendental: exp_op, sin_op, log_op, etc.\n- Conditional: cond_assign, eq_zero, lt_zero, etc.\n- External: ext_diff, ext_diff_v2\n- MPI (optional): ampi_send, ampi_recv, etc.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "tape_handling.h for tape interpretation"
+  ]
+}

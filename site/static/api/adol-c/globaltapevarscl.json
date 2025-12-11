@@ -1,0 +1,13 @@
+{
+  "name": "globaltapevarscl",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/valuetape/globaltapevarscl.h",
+  "brief": "Global tape variables for ADOL-C taping state\n\nDefines GlobalTapeVarsCL class containing per-tape global state:\nthe `store` array holding adouble values, buffer size configurations,\nparallel region flags, and StoreManager instances.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "valuetape.h for ValueTape class composition",
+    "storemanager.h for location allocation"
+  ]
+}

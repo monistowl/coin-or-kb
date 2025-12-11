@@ -1,3 +1,14 @@
+/**
+ * @file AlpsMACH.h
+ * @brief Platform-specific definitions for macOS (Darwin/Mach)
+ *
+ * Provides macOS-specific system includes, type definitions, and compiler
+ * macros for GCC on Darwin kernel. Includes gettimeofday(), setpriority(),
+ * gethostname(), and memory management macros for GCC 2.x vs 3.x+.
+ *
+ * @see AlpsOs.h for platform detection
+ * @see AlpsLinux.h for Linux equivalents
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

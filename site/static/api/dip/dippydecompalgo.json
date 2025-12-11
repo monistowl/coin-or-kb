@@ -3,7 +3,11 @@
   "library": "Dip",
   "layer": "layer-3",
   "header": "Dip/src/dippy/DippyDecompAlgo.h",
-  "brief": "",
+  "brief": "Python-enabled DIP decomposition algorithms via Dippy\n\nProvides DippyAlgoMixin and concrete classes (DippyAlgoC, DippyAlgoPC,\nDippyAlgoRC) that extend DIP algorithms with Python callbacks for\nbranching, post-processing, and custom node handling. Enables PuLP\nmodels to use decomposition methods with Python-defined subproblems.",
   "algorithms": [],
-  "methods": []
+  "methods": [],
+  "see": [
+    "DippyDecompApp.h for Python-enabled application class",
+    "DecompAlgoC.h, DecompAlgoPC.h, DecompAlgoRC.h for base algorithms"
+  ]
 }

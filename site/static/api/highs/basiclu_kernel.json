@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_kernel",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/basiclu_kernel.h",
+  "brief": "BasicLU implementation of LuFactorization interface\n\nImplements LuFactorization using the BasicLU library for sparse\nLU factorization with Markowitz pivoting.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lu_factorization.h for the interface",
+    "basiclu.h for the underlying library"
+  ]
+}

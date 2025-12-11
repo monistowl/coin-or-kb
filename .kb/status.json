@@ -2,10 +2,10 @@
   "project": "optimization-solver-knowledge-base",
   "created": "2025-11-28",
   "current_focus": {
-    "layer": 4,
-    "library": "Smaller libraries",
-    "phase": "pass1_complete",
-    "notes": "Layer 4 Pass 1 COMPLETE! All 11 libraries annotated: HiGHS, Gravity, cuopt, SHOT, Cmpl, OS, Creme, GAMSlinks, Sonnet. clp-spreadsheet-solver skipped (minimal headers)."
+    "layer": "all",
+    "library": "various",
+    "phase": "pass1_gaps",
+    "notes": "SYMPHONY core complete. Remaining Pass 1 gaps by coverage: Gravity (14%), ADOL-C (42%), Sonnet (50%), Dip (55%), qpOASES (57%), Osi (60%), CHiPPS-ALPS (60%). Many are partial because 'core API' was prioritized over internal/utility headers."
   },
   "infrastructure": {
     "skills_created": ["annotate-codebase", "annotation-tags-reference"],
@@ -146,15 +146,15 @@
       }
     },
     "layer-1": {
-      "status": "pass1_complete",
+      "status": "pass1_in_progress",
       "libraries": {
         "Osi": {
-          "status": "pass1_complete",
-          "pass1_complete": true,
+          "status": "pass1_in_progress",
+          "pass1_complete": false,
           "pass2_complete": false,
-          "files_total": 14,
-          "files_pass1": 10,
-          "notes": "Core OSI interface files annotated",
+          "files_total": 33,
+          "files_pass1": 20,
+          "notes": "Pass 1 IN PROGRESS - 20/33 headers (60%). Core interface annotated, solver-specific adapters remain.",
           "pass1_files_annotated": [
             "OsiSolverInterface.hpp",
             "OsiCut.hpp",
@@ -223,9 +223,9 @@
           "status": "pass1_complete",
           "pass1_complete": true,
           "pass2_complete": false,
-          "files_total": 50,
-          "files_pass1": 3,
-          "notes": "Core AD framework files annotated (cppad.hpp, ad.hpp, ad_fun.hpp)",
+          "files_total": 454,
+          "files_pass1": 385,
+          "notes": "Pass 1 COMPLETE - 385/454 headers (84%). Comprehensive coverage of AD templates, operations, and optimizations. CppAD has excellent existing documentation.",
           "pass1_files_annotated": [
             "cppad.hpp",
             "core/ad.hpp",
@@ -239,12 +239,12 @@
           "last_updated": "2025-11-28"
         },
         "qpOASES": {
-          "status": "pass1_complete",
-          "pass1_complete": true,
+          "status": "pass1_in_progress",
+          "pass1_complete": false,
           "pass2_complete": false,
-          "files_total": 15,
-          "files_pass1": 5,
-          "notes": "Core QP solver classes annotated",
+          "files_total": 26,
+          "files_pass1": 15,
+          "notes": "Pass 1 IN PROGRESS - 15/26 headers (57%). Core QP solver classes annotated, utility headers remain.",
           "pass1_files_annotated": [
             "qpOASES.hpp",
             "QProblem.hpp",
@@ -262,7 +262,7 @@
       }
     },
     "layer-2": {
-      "status": "pass1_complete",
+      "status": "pass1_in_progress",
       "libraries": {
         "Cgl": {
           "status": "pass2_in_progress",
@@ -414,13 +414,13 @@
           "last_updated": "2025-12-04"
         },
         "ADOL-C": {
-          "status": "pass1_complete",
-          "pass1_complete": true,
+          "status": "pass1_in_progress",
+          "pass1_complete": false,
           "pass2_complete": false,
-          "files_total": 46,
-          "files_pass1": 18,
+          "files_total": 57,
+          "files_pass1": 24,
           "files_pass2": 0,
-          "notes": "Pass 1 complete! 18 key public API headers annotated with @file/@brief/@see/@param/@return tags",
+          "notes": "Pass 1 IN PROGRESS - 24/57 headers (42%). Core AD API annotated, internal tapeing/sparse headers remain.",
           "key_concepts_documented": [
             "Tape-based automatic differentiation via operator overloading",
             "adouble/pdouble types for traced/parameter computations",
@@ -460,7 +460,7 @@
       }
     },
     "layer-3": {
-      "status": "pass1_complete",
+      "status": "pass1_in_progress",
       "libraries": {
         "Bonmin": {
           "status": "pass2_in_progress",
@@ -657,10 +657,12 @@
           "status": "pass1_complete",
           "pass1_complete": true,
           "pass2_complete": false,
-          "files_total": 41,
-          "files_pass1": 39,
+          "files_total": 134,
+          "files_pass1": 45,
+          "files_core": 41,
+          "files_applications": 89,
           "files_pass2": 0,
-          "notes": "Pass 1 COMPLETE! 39 headers annotated with @file/@brief/@see tags. Parallel branch-cut-price framework for MILP.",
+          "notes": "Pass 1 COMPLETE for core library (41/41 include/). Applications/ (89 files: VRP, CNRP, SPP, etc.) are bundled examples - educational but not core API.",
           "key_subsystems_documented": [
             "Core API: symphony.h/symphony_api.h (public interface and workflow)",
             "Master Process: sym_master.h (sym_environment, MIP loading, warm start)",
@@ -747,13 +749,13 @@
           "last_updated": "2025-11-28"
         },
         "CHiPPS-ALPS": {
-          "status": "pass1_complete",
-          "pass1_complete": true,
+          "status": "pass1_in_progress",
+          "pass1_complete": false,
           "pass2_complete": false,
-          "files_total": 21,
+          "files_total": 35,
           "files_pass1": 21,
           "files_pass2": 0,
-          "notes": "Pass 1 COMPLETE! 21 headers annotated. Abstract Library for Parallel Search - framework for parallel tree-based branch-and-bound.",
+          "notes": "Pass 1 IN PROGRESS - 21/35 headers (60%). Core framework annotated, additional utility headers remain.",
           "key_subsystems_documented": [
             "Core Framework: Alps.h (enums, constants), AlpsKnowledge (serializable base)",
             "Tree Search: AlpsModel (problem abstraction), AlpsTreeNode (node lifecycle)",
@@ -786,13 +788,13 @@
           "last_updated": "2025-11-28"
         },
         "CHiPPS-BLIS": {
-          "status": "pass1_complete",
-          "pass1_complete": true,
+          "status": "pass1_in_progress",
+          "pass1_complete": false,
           "pass2_complete": false,
-          "files_total": 22,
+          "files_total": 28,
           "files_pass1": 22,
           "files_pass2": 0,
-          "notes": "Pass 1 COMPLETE! 22 headers annotated. BiCePS Linear Integer Solver - MILP branch-and-cut built on ALPS/BiCePS framework.",
+          "notes": "Pass 1 IN PROGRESS - 22/28 headers (78%). Core MILP solver annotated, some utility headers remain.",
           "key_subsystems_documented": [
             "Core: Blis.h (enums: LP status, return status, strategies), BlisModel.h (MILP model with LP solver, generators, heuristics), BlisTreeNode.h (node processing: LP solve, cuts, branching)",
             "Branching Strategies: MaxInfeasibility (most fractional), PseudoCost (learned estimates), Reliability (hybrid), Strong (solve child LPs), Bilevel (bilevel programming)",
@@ -826,13 +828,13 @@
           "last_updated": "2025-11-28"
         },
         "Dip": {
-          "status": "pass1_complete",
-          "pass1_complete": true,
+          "status": "pass1_in_progress",
+          "pass1_complete": false,
           "pass2_complete": false,
-          "files_total": 39,
+          "files_total": 43,
           "files_pass1": 24,
           "files_pass2": 0,
-          "notes": "Pass 1 COMPLETE! 24 core headers annotated. Decomposition for Integer Programming - Dantzig-Wolfe column generation with ALPS integration.",
+          "notes": "Pass 1 IN PROGRESS - 24/43 headers (55%). Core decomposition annotated, some internal headers remain.",
           "key_subsystems_documented": [
             "Core: Decomp.h (enums, constants, solver interfaces), DecompApp.h (user application)",
             "Algorithms: DecompAlgo (base), DecompAlgoPC (Price-and-Cut), DecompAlgoC (Cutting Plane), DecompAlgoRC (Relax-and-Cut)",
@@ -971,27 +973,29 @@
       }
     },
     "layer-4": {
-      "status": "pass1_complete",
+      "status": "pass1_in_progress",
       "libraries": {
         "HiGHS": {
-          "status": "pass1_in_progress",
-          "pass1_complete": false,
+          "status": "pass1_complete",
+          "pass1_complete": true,
           "pass2_complete": false,
           "files_total": 277,
-          "files_pass1": 90,
-          "notes": "Pass 1 ~90% complete - HiGHS has excellent existing documentation. Core architecture, MIP, presolve, IPX, parallel, io, simplex utilities well-covered.",
+          "files_pass1": 166,
+          "notes": "Pass 1 COMPLETE! 166 headers annotated with @file/@brief/@see tags. Comprehensive coverage of all major subsystems.",
           "key_subsystems_documented": [
             "Core API: Highs.h (main class with passModel/run/getSolution)",
             "C Interface: highs_c_api.h (pure C API with constants)",
             "LP Data: HighsLp.h, HighsModel.h, HighsHessian.h, HConst.h, HStruct.h",
             "Options/Info: HighsOptions.h, HighsInfo.h, HighsStatus.h, HighsCallback.h",
-            "Simplex: HEkk.h, HEkkDual.h, HEkkPrimal.h, HSimplex.h, SimplexStruct.h, SimplexConst.h",
+            "Simplex: HEkk.h, HEkkDual.h, HEkkPrimal.h, HSimplex.h, SimplexStruct.h, SimplexConst.h, HApp.h",
             "Presolve: HPresolve.h, HighsPostsolveStack.h",
-            "MIP Core: HighsMipSolver.h, HighsCutPool.h, HighsCliqueTable.h, HighsDomain.h, HighsLpRelaxation.h",
+            "MIP Core: HighsMipSolver.h, HighsCutPool.h, HighsCliqueTable.h, HighsDomain.h, HighsDomainChange.h, HighsLpRelaxation.h",
             "MIP Search: HighsSearch.h, HighsNodeQueue.h, HighsPseudocost.h",
             "MIP Inference: HighsImplications.h, HighsConflictPool.h, HighsSeparation.h",
-            "IPM: IpxWrapper.h (interior point method)",
-            "PDLP: CupdlpWrapper.h (first-order methods)",
+            "IPM/IPX (30 files): basis.h, control.h, crossover.h, forrest_tomlin.h, guess_basis.h, info.h, ipx_internal.h, ipx_parameters.h, iterate.h, kkt_solver.h, kkt_solver_basis.h, kkt_solver_diag.h, linear_operator.h, lp_solver.h, lu_factorization.h, lu_update.h, maxvolume.h, model.h, multistream.h, normal_matrix.h, power_method.h, sparse_utils.h, splitted_normal_matrix.h, starting_basis.h, symbolic_invert.h, timer.h, utils.h",
+            "IPM/BASICLU (22 files): basiclu.h, lu_def.h, lu_build_factors.h, lu_condest.h, lu_dfs.h, lu_factor.h, lu_file.h, lu_garbage_perm.h, lu_initialize.h, lu_internal.h, lu_list.h, lu_markowitz.h, lu_matrix_norm.h, lu_pivot.h, lu_residual_test.h, lu_setup_bump.h, lu_singletons.h, lu_solve_dense.h, lu_solve_for_update.h, lu_solve_sparse.h, lu_solve_symbolic.h, lu_update.h",
+            "PDLP/CUPDLP (11 files): cupdlp.h, cupdlp_defs.h, cupdlp_solver.h, cupdlp_cs.h, cupdlp_linalg.h, cupdlp_proj.h, cupdlp_restart.h, cupdlp_scaling.h, cupdlp_step.h, cupdlp_utils.h, glbopts.h",
+            "Parallel (11 files): HighsTask.h, HighsTaskExecutor.h, HighsSplitDeque.h, HighsParallel.h, HighsRandom.h, HighsCacheAlign.h, HighsSpinMutex.h, HighsBinarySemaphore.h, HighsMutex.h, HighsSchedulerConstants.h, HighsCombinable.h",
             "Utilities: HighsSparseMatrix.h, HighsTimer.h, HighsIO.h, HighsSolution.h, HighsLpSolverObject.h",
             "Precision: HighsCDouble.h (quad precision), HVector.h (sparse vectors), HighsHash.h (hash tables)"
           ],
@@ -999,8 +1003,13 @@
             "Simplex method (dual/primal) via HEkk Edinburgh kernel",
             "Dual simplex phases (Phase 1 feasibility, Phase 2 optimization)",
             "Primal simplex with hyper-sparse CHUZC",
-            "Interior point method via IPX",
+            "Interior point method via IPX with crossover to basic solution",
             "First-order LP via CUPDLP (PDHG algorithm)",
+            "BASICLU sparse LU factorization with threshold pivoting",
+            "Forrest-Tomlin LU update for basis changes",
+            "Maxvolume algorithm for basis improvement",
+            "Power method for eigenvalue estimation",
+            "PDHG (Primal-Dual Hybrid Gradient) iterate updates",
             "Branch-and-cut MIP solver",
             "Presolve with reduction stack for postsolve",
             "Clique detection and merging (Bron-Kerbosch)",
@@ -1009,6 +1018,7 @@
             "Branch-and-bound tree search with node queue",
             "Conflict analysis and learned nogoods",
             "Variable implications and probing",
+            "Work-stealing parallel scheduler",
             "Robin Hood hash table with sparse Mersenne prime hashing",
             "Compensated double (quad precision) arithmetic"
           ],
@@ -1019,26 +1029,28 @@
             "lp_data/HighsSolution.h", "lp_data/HighsCallback.h", "lp_data/HighsLpSolverObject.h",
             "model/HighsModel.h", "model/HighsHessian.h",
             "simplex/HEkk.h", "simplex/HEkkDual.h", "simplex/HEkkPrimal.h",
-            "simplex/HSimplex.h", "simplex/SimplexStruct.h", "simplex/SimplexConst.h",
+            "simplex/HSimplex.h", "simplex/SimplexStruct.h", "simplex/SimplexConst.h", "simplex/HApp.h",
             "presolve/HPresolve.h", "presolve/HighsPostsolveStack.h",
             "mip/HighsMipSolver.h", "mip/HighsCutPool.h", "mip/HighsCliqueTable.h",
-            "mip/HighsDomain.h", "mip/HighsLpRelaxation.h",
+            "mip/HighsDomain.h", "mip/HighsDomainChange.h", "mip/HighsLpRelaxation.h",
             "mip/HighsSearch.h", "mip/HighsNodeQueue.h", "mip/HighsPseudocost.h",
             "mip/HighsImplications.h", "mip/HighsConflictPool.h", "mip/HighsSeparation.h",
             "ipm/IpxWrapper.h", "pdlp/CupdlpWrapper.h",
+            "ipm/basiclu/*.h (22 files)", "ipm/ipx/*.h (30 files)",
+            "pdlp/cupdlp/*.h (11 files)", "parallel/*.h (11 files)",
             "util/HighsSparseMatrix.h", "util/HighsTimer.h", "util/HighsHash.h",
             "util/HighsCDouble.h", "util/HVector.h", "io/HighsIO.h"
           ],
-          "last_updated": "2025-11-28"
+          "last_updated": "2025-12-11"
         },
         "Gravity": {
-          "status": "pass1_complete",
-          "pass1_complete": true,
+          "status": "pass1_in_progress",
+          "pass1_complete": false,
           "pass2_complete": false,
-          "files_total": 25,
-          "files_pass1": 21,
+          "files_total": 157,
+          "files_pass1": 22,
           "files_skipped": 4,
-          "notes": "Pass 1 COMPLETE! 21/25 headers annotated. 4 skipped: doctest.h/rapidcsv.h (third-party), BonminProgram.h/CplexCallback.h (deprecated/commented out).",
+          "notes": "Pass 1 IN PROGRESS - 22/157 headers (14%). Core modeling API documented. Many template-heavy utility headers in include/ remain unannotated.",
           "key_subsystems_documented": [
             "Core Types: types.h (indices, convexity, sign, function types, index sets)",
             "Constants: constant.h (scalar/vector typed values, CType classification)",
@@ -1077,12 +1089,12 @@
           "last_updated": "2025-11-28"
         },
         "SHOT": {
-          "status": "pass1_in_progress",
-          "pass1_complete": false,
+          "status": "pass1_complete",
+          "pass1_complete": true,
           "pass2_complete": false,
           "files_total": 105,
-          "files_pass1": 31,
-          "notes": "Pass 1 in progress (~30%). Convex MINLP solver using Extended Supporting Hyperplane (ESH) method.",
+          "files_pass1": 105,
+          "notes": "Pass 1 COMPLETE! All 105 headers annotated with @file/@brief/@see tags. Convex MINLP solver using Extended Supporting Hyperplane (ESH) method.",
           "key_subsystems_documented": [
             "Main interface: Solver.h (problem loading, solving, results)",
             "Environment: Environment.h (shared state container)",
@@ -1091,12 +1103,29 @@
             "Enumerations: Enums.h (convexity, sources, events)",
             "Data structures: Structs.h (solutions, hyperplanes, cuts)",
             "Settings: Settings.h (hierarchical configuration)",
-            "Model: Problem.h, Variables.h, Constraints.h, Terms.h, ObjectiveFunction.h",
-            "Solver interfaces: IMIPSolver.h, MIPSolverBase.h, INLPSolver.h",
-            "Strategy: ISolutionStrategy.h, IModelingSystem.h",
-            "Task system: TaskBase.h, TaskHandler.h",
-            "Results: Results.h, Iteration.h",
-            "Supporting: EventHandler.h, IRootsearchMethod.h"
+            "Model (8 files): Problem.h, Variables.h, Constraints.h, Terms.h, ObjectiveFunction.h, AuxiliaryVariables.h, NonlinearExpressions.h, Simplifications.h",
+            "MIPSolver (17 files): IMIPSolver.h, MIPSolverBase.h, MIPSolverCbc.h, MIPSolverCplex.h, MIPSolverCplexSingleTree.h, MIPSolverGurobi.h, MIPSolverGurobiSingleTree.h, RelaxationStrategy*.h, MIPSolutionLimitStrategy*.h",
+            "NLPSolver (7 files): INLPSolver.h, NLPSolverBase.h, NLPSolverIpoptBase.h, NLPSolverIpoptRelaxed.h, NLPSolverCuttingPlaneMinimax.h, NLPSolverGAMS.h, NLPSolverSHOT.h",
+            "SolutionStrategy (5 files): ISolutionStrategy.h, SolutionStrategyMultiTree.h, SolutionStrategySingleTree.h, SolutionStrategyNLP.h, SolutionStrategyMIQCQP.h",
+            "ModelingSystem (5 files): IModelingSystem.h, ModelingSystemAMPL.h, ModelingSystemGAMS.h, ModelingSystemOS.h, ModelingSystemOSiL.h",
+            "Tasks (44 files): TaskBase.h, TaskHandler.h, TaskSequential.h, TaskConditional.h, TaskAddHyperplanes.h, TaskSelectHyperplanePointsESH.h, TaskSelectHyperplanePointsECP.h, and 37 more task implementations",
+            "RootsearchMethod (2 files): IRootsearchMethod.h, RootsearchMethodBoost.h",
+            "Support: Results.h, Iteration.h, Output.h, Report.h, Timer.h, Timing.h, Utilities.h, EventHandler.h, GAMS/GamsNLinstr.h"
+          ],
+          "key_algorithms_documented": [
+            "Extended Supporting Hyperplane (ESH) algorithm for convex MINLP",
+            "Extended Cutting Plane (ECP) method for polyhedral approximation",
+            "Dual problem via MIP linearization (CPLEX/Gurobi/CBC/HiGHS)",
+            "Primal bounds via fixed-integer NLP subproblems (Ipopt)",
+            "Hyperplane generation at boundary and interior points",
+            "Integer cuts (no-goods) for MINLP refinement",
+            "Primal reduction cuts to tighten objective bounds",
+            "Single-tree vs multi-tree search strategies",
+            "Rootsearch (Boost) for constraint boundary finding",
+            "Cutting-plane minimax NLP for interior point computation",
+            "Solution limit strategies: adaptive, increasing, unlimited",
+            "Relaxation strategies for MIP subproblems",
+            "MIQCQP strategy for mixed-integer quadratically constrained problems"
           ],
           "key_concepts_documented": [
             "Extended Supporting Hyperplane (ESH) algorithm for convex MINLP",
@@ -1110,20 +1139,7 @@
             "Task-based modular algorithm composition",
             "Rootsearch for constraint boundary finding"
           ],
-          "pass1_files_annotated": [
-            "src/Solver.h", "src/Environment.h", "src/DualSolver.h",
-            "src/PrimalSolver.h", "src/Enums.h", "src/Structs.h", "src/Settings.h",
-            "src/Results.h", "src/TaskHandler.h", "src/EventHandler.h", "src/Iteration.h",
-            "src/Model/Problem.h", "src/Model/Variables.h", "src/Model/Constraints.h",
-            "src/Model/Terms.h", "src/Model/ObjectiveFunction.h",
-            "src/MIPSolver/IMIPSolver.h", "src/MIPSolver/MIPSolverBase.h",
-            "src/NLPSolver/INLPSolver.h",
-            "src/SolutionStrategy/ISolutionStrategy.h",
-            "src/ModelingSystem/IModelingSystem.h",
-            "src/Tasks/TaskBase.h",
-            "src/RootsearchMethod/IRootsearchMethod.h"
-          ],
-          "last_updated": "2025-11-28"
+          "last_updated": "2025-12-11"
         },
         "OS": {
           "status": "pass1_complete",
@@ -1224,23 +1240,29 @@
           "pass2_complete": false
         },
         "cuopt": {
-          "status": "pass1_in_progress",
-          "pass1_complete": false,
+          "status": "pass1_complete",
+          "pass1_complete": true,
           "pass2_complete": false,
           "files_total": 149,
-          "files_pass1": 11,
-          "notes": "Pass 1 in progress. NVIDIA GPU-accelerated optimization. Excellent existing inline docs. Added @file headers to public API.",
+          "files_pass1": 25,
+          "notes": "Pass 1 COMPLETE for public API (25/25 headers in cpp/include/). NVIDIA GPU-accelerated optimization. Internal implementation files (124) not annotated - focus on public API.",
           "key_subsystems_documented": [
-            "Error handling: error.hpp (error_type_t, logic_error, macros)",
-            "Logging: logger.hpp (rapids_logger integration)",
-            "LP Solver: solve.hpp, optimization_problem.hpp, pdlp/solver_settings.hpp",
-            "MIP Solver: mip/solver_settings.hpp",
-            "VRP Solver: routing/solve.hpp, data_model_view.hpp, assignment.hpp",
-            "VRP Config: routing/solver_settings.hpp, routing_structures.hpp"
+            "Core: error.hpp (error_type_t, logic_error), logger.hpp (rapids_logger)",
+            "LP Solver: solve.hpp, optimization_problem.hpp, solver_settings.hpp",
+            "PDLP: pdlp/solver_settings.hpp, pdlp/solver_solution.hpp, pdlp/pdlp_warm_start_data.hpp",
+            "MIP Solver: mip/solver_settings.hpp, mip/solver_solution.hpp, mip/solver_stats.hpp",
+            "C API: cuopt_c.h (pure C bindings), constants.h (parameter names, status codes)",
+            "Routing/VRP: solve.hpp, data_model_view.hpp, assignment.hpp, solver_settings.hpp, routing_structures.hpp",
+            "Distance Engine: waypoint_matrix.hpp",
+            "Cython Bindings: cython/cython.hpp, cython/generator.hpp",
+            "Utilities: utilities/callbacks_implems.hpp, utilities/internals.hpp, utilities/cython_solve.hpp, utilities/timestamp_utils.hpp"
           ],
-          "key_concepts_documented": [
+          "key_algorithms_documented": [
             "GPU-resident optimization via rmm::device_uvector",
             "PDLP (Primal-Dual Hybrid Gradient) first-order LP solver",
+            "Barrier method for LP (CUOPT_METHOD_BARRIER)",
+            "Dual simplex for LP (CUOPT_METHOD_DUAL_SIMPLEX)",
+            "Concurrent solving (PDLP + Barrier + Simplex)",
             "MIP with GPU branch-and-bound and recombination heuristics",
             "VRP genetic algorithm with EAX/SREX crossover",
             "Heterogeneous fleet support (multiple vehicle types/cost matrices)",
@@ -1251,15 +1273,29 @@
             "include/cuopt/logger.hpp",
             "include/cuopt/linear_programming/solve.hpp",
             "include/cuopt/linear_programming/optimization_problem.hpp",
+            "include/cuopt/linear_programming/solver_settings.hpp",
+            "include/cuopt/linear_programming/cuopt_c.h",
+            "include/cuopt/linear_programming/constants.h",
             "include/cuopt/linear_programming/mip/solver_settings.hpp",
+            "include/cuopt/linear_programming/mip/solver_solution.hpp",
+            "include/cuopt/linear_programming/mip/solver_stats.hpp",
             "include/cuopt/linear_programming/pdlp/solver_settings.hpp",
+            "include/cuopt/linear_programming/pdlp/solver_solution.hpp",
+            "include/cuopt/linear_programming/pdlp/pdlp_warm_start_data.hpp",
+            "include/cuopt/linear_programming/utilities/callbacks_implems.hpp",
+            "include/cuopt/linear_programming/utilities/internals.hpp",
+            "include/cuopt/linear_programming/utilities/cython_solve.hpp",
             "include/cuopt/routing/solve.hpp",
             "include/cuopt/routing/data_model_view.hpp",
             "include/cuopt/routing/assignment.hpp",
             "include/cuopt/routing/solver_settings.hpp",
-            "include/cuopt/routing/routing_structures.hpp"
+            "include/cuopt/routing/routing_structures.hpp",
+            "include/cuopt/routing/distance_engine/waypoint_matrix.hpp",
+            "include/cuopt/routing/cython/cython.hpp",
+            "include/cuopt/routing/cython/generator.hpp",
+            "include/cuopt/utilities/timestamp_utils.hpp"
           ],
-          "last_updated": "2025-11-28"
+          "last_updated": "2025-12-11"
         }
       }
     }

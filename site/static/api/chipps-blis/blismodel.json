@@ -3,8 +3,15 @@
   "library": "CHiPPS-BLIS",
   "layer": "layer-3",
   "header": "src/BlisModel.h",
-  "brief": "MILP model class extending BiCePS for branch-and-cut\n\nBlisModel is the main model class for the BLIS MILP solver.\nExtends BcpsModel with LP solver, cut generators, heuristics, and branching.\n\n**Initialization workflow:**\n1. readInstance() or importModel(): Load problem data\n2. readParameters(): Configure solver behavior\n3. setupSelf(): Initialize LP solver, objects, strategies\n4. preprocess(): Apply presolve transformations\n5. createRoot(): Create initial search tree node\n\n**LP Solver integration:**\n- origLpSolver_: User-provided OsiSolverInterface\n- presolvedLpSolver_: After presolve transformations\n- lpSolver_: Active solver (presolved or original)\n\n**Cut generation:**\n- addCutGenerator(): Register CglCutGenerator or BlisConGenerator\n- cutStrategy_: When to generate (Root, Auto, Periodic)\n- constraintPool_: Store generated cuts\n\n**Branching:**\n- branchStrategy_: BcpsBranchStrategy for variable selection\n- objects_: BcpsObject array (integer variables, SOS, etc.)\n- priority_: Branching priorities per object\n\n**Heuristics:**\n- addHeuristic(): Register BlisHeuristic instances\n- heurStrategy_: When to call (Root, Auto, Periodic, BeforeRoot)\n\n**Solution management:**\n- incumbent_: Best integer solution found\n- cutoff_: Objective bound for pruning\n- storeSolution(): Record new solutions\n\n**Parallel support:**\n- encode()/decodeToSelf(): Serialize model for MPI\n- packSharedKnowledge(): Share pseudo-costs, cuts, variables",
-  "algorithms": [],
+  "brief": "MILP model class extending BiCePS for branch-and-cut\n\nBlisModel is the main model class for the BLIS MILP solver.\nExtends BcpsModel with LP solver, cut generators, heuristics, and branching.",
+  "algorithms": [
+    {
+      "name": "Branch-and-Cut for Mixed Integer Linear Programming:\nSolve MILP via LP relaxation, cutting planes, and enumeration.\n\n  PROBLEM FORMULATION:\n    min  c'x\n    s.t. Ax \u2264 b\n         x_j \u2208 Z for j \u2208 I (integer variables)\n         l \u2264 x \u2264 u (bounds)\n\n  NODE PROCESSING:\n    1. Solve LP relaxation (continuous)\n    2. If LP infeasible \u2192 fathom node\n    3. If LP bound \u2265 incumbent \u2192 prune by bound\n    4. If LP solution integer-feasible \u2192 update incumbent\n    5. Generate cutting planes to tighten LP\n    6. Select branching variable \u2192 create children\n\n  CUT GENERATION:\n    Gomory, MIR, clique, flow cover, etc. via Cgl\n    Cuts improve LP bound without excluding integer solutions\n\n  BRANCHING:\n    Select fractional integer variable x_j\n    Create two children: x_j \u2264 \u230ax*_j\u230b and x_j \u2265 \u2308x*_j\u2309\n    Strategies: most infeasible, strong branching, pseudo-cost",
+      "math": "LP relaxation: z_LP \u2264 z_IP (lower bound on optimal)\n  Gap: (incumbent - z_LP) / |incumbent|\n  Cutting plane: \u03c0'x \u2264 \u03c0\u2080 valid for conv(MILP), violated by LP",
+      "complexity": "Worst case: O(2^n) nodes (NP-hard problem)\n  Practical: strong bounds + cuts prune most of tree",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "BlisTreeNode for node processing using this model",

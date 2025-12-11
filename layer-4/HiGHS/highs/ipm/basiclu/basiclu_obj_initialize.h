@@ -1,3 +1,17 @@
+/**
+ * @file basiclu_obj_initialize.h
+ * @brief Initialize a BasicLU object with automatic memory management
+ *
+ * Allocates and initializes all internal arrays (istore, xstore, Li, Lx,
+ * Ui, Ux, Wi, Wx, lhs, ilhs) for processing m×m matrices.
+ *
+ * When m=0, creates a "null object" that cannot factorize but can be
+ * passed to basiclu_obj_free(). Use m=0 for deferred initialization.
+ *
+ * @see basiclu_object.h for the object structure
+ * @see basiclu_obj_free.h for cleanup
+ * @see basiclu_obj_factorize.h for the next step
+ */
 lu_int basiclu_obj_initialize
 (
     struct basiclu_object *obj,

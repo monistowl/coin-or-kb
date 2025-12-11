@@ -32,7 +32,7 @@ Per iteration: O(n³) for dense, O(nnz^{1.5-2}) for sparse
 
 ### Ipopt
 
-- **{{ link(path="/browser/?library=Ipopt", text="IpAlgBuilder.hpp") }}** - Builder pattern for constructing configured IpoptAlgorithm
+- **[IpAlgBuilder.hpp](/coin-or-kb/browser/?library=Ipopt)** - Builder pattern for constructing configured IpoptAlgorithm
 
 AlgorithmBuilder assembles a complete IpoptAlgorithm from components
 based on user options. This implements the Builder design pattern,
@@ -47,6 +47,7 @@ Build order (with dependency chain):
 
 Customization: Subclass and override virtual Build* methods,
 or provide custom_solver in constructor.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Ipopt/src/Algorithm/IpAlgBuilder.hpp)
 
 ## References
 

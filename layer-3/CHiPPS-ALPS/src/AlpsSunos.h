@@ -1,3 +1,14 @@
+/**
+ * @file AlpsSunos.h
+ * @brief Platform-specific definitions for SunOS/Solaris (SPARC)
+ *
+ * Provides SunOS-specific system includes, type definitions, and compiler
+ * macros for GCC on SPARC architecture. Includes gettimeofday(), setpriority(),
+ * gethostname(), and memory management macros.
+ *
+ * @see AlpsOs.h for platform detection
+ * @see AlpsLinux.h for Linux equivalents
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

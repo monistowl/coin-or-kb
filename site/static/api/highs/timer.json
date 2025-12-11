@@ -1,0 +1,13 @@
+{
+  "name": "timer",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/timer.h",
+  "brief": "High-resolution wall-clock timer\n\nSimple timer class using std::chrono::high_resolution_clock\nfor measuring elapsed time in seconds. Used throughout IPX\nto profile solver phases and report timing statistics.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "control.h for timer usage in solver logging",
+    "info.h for timing statistics storage"
+  ]
+}

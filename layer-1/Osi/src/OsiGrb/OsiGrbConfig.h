@@ -1,3 +1,14 @@
+/**
+ * @file OsiGrbConfig.h
+ * @brief Configuration header for OsiGrb (Gurobi interface)
+ *
+ * Provides build configuration for the Osi adapter to Gurobi Optimizer.
+ * Defines OSIGRBLIB_EXPORT for DLL import/export based on build environment
+ * and platform. Requires separate Gurobi installation and license.
+ *
+ * @see OsiGrbSolverInterface.h for Gurobi adapter class
+ * @see OsiConfig.h for main Osi configuration
+ */
 /* Copyright (C) 2011
  * All Rights Reserved.
  * This code is published under the Eclipse Public License.

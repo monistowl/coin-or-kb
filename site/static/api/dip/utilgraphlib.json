@@ -1,0 +1,12 @@
+{
+  "name": "UtilGraphLib",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/UtilGraphLib.h",
+  "brief": "TSPLIB/VRPLIB data file reader for graph problems\n\nProvides UtilGraphLib class for reading problem instances from\nTSPLIB and VRPLIB file formats. Stores vertex/edge counts,\ncapacities, coordinates, and edge weights for routing and\nvehicle scheduling applications.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "UtilMacros.h for graph edge indexing utilities"
+  ]
+}

@@ -1,4 +1,15 @@
-// Copyright (C) Jan-Willem Goossens 
+/**
+ * @file AssemblyInfo.h
+ * @brief Version and assembly metadata for SonnetWrapper DLL
+ *
+ * Defines version numbers, copyright, and description strings used
+ * by the Windows resource file (app.rc) and .NET assembly metadata.
+ * Supports conditional compilation for different .NET targets
+ * (net6.0, net5.0, net48) and architectures (x86, x64).
+ *
+ * @see SonnetWrapper.dll for the compiled managed wrapper
+ */
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 
 // The properties defined below are used in app.rc and AssemblyInfo.cpp

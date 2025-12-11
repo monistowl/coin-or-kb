@@ -27,7 +27,8 @@ O(nnz * log(maxdenom)) for rational approximation
 
 ### Cgl
 
-- **{{ link(path="/browser/?library=Cgl", text="CglGMI.hpp") }}** - Gomory Mixed-Integer cuts with numerical safety testing
+- **[CglGMI.hpp](/coin-or-kb/browser/?library=Cgl)** - Gomory Mixed-Integer cuts with numerical safety testing
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Cgl/src/CglGMI/CglGMI.hpp)
 
 ## References
 

@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="NLPSolverCuttingPlaneMinimax.h") }}** - Cutting-plane solver for minimax LP problems
+- **[NLPSolverCuttingPlaneMinimax.h](/coin-or-kb/browser/?library=SHOT)** - Cutting-plane solver for minimax LP problems
 
 Built-in LP-based solver for simple minimax problems.
 
@@ -28,3 +28,4 @@ Built-in LP-based solver for simple minimax problems.
 **Use Case:**
 - Finding interior points when Ipopt unavailable
 - Solving auxiliary minimax subproblems
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/NLPSolver/NLPSolverCuttingPlaneMinimax.h)

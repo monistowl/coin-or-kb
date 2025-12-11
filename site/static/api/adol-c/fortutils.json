@@ -1,0 +1,12 @@
+{
+  "name": "fortutils",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/fortutils.h",
+  "brief": "Fortran array layout conversion utilities\n\nProvides functions to convert between Fortran column-major and\nC row-major array layouts for interoperability with Fortran code.\n\n**Functions:**\n- spread1/2/3(): Fortran \u2192 C (1D/2D/3D arrays)\n- pack1/2/3(): C \u2192 Fortran (1D/2D/3D arrays)\n\nUsed by the Fortran-callable wrappers of ADOL-C drivers.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "drivers/psdrivers.c for Fortran driver interfaces"
+  ]
+}

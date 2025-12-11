@@ -37,4 +37,5 @@ addClique: O(clique_size) for copying elements
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinCliqueList.hpp") }}** - Sequential storage for cliques found in conflict graphs
+- **[CoinCliqueList.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Sequential storage for cliques found in conflict graphs
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinCliqueList.hpp)

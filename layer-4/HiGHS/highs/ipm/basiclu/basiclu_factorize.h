@@ -1,3 +1,29 @@
+/**
+ * @file basiclu_factorize.h
+ * @brief Sparse LU factorization with Markowitz pivot selection
+ *
+ * Computes B = L·U factorization using columnwise threshold pivoting.
+ * Pivots are chosen by Markowitz criterion (minimize fill-in) subject
+ * to numerical stability constraints.
+ *
+ * **Factorization Phases:**
+ * 1. SINGLETONS: Extract initial triangular factors from singleton rows/cols
+ * 2. SETUP_BUMP: Initialize the "bump" (non-triangular active submatrix)
+ * 3. FACTORIZE_BUMP: Main elimination with Markowitz search
+ * 4. BUILD_FACTORS: Construct final L, U in storage format
+ *
+ * **Pivot Selection:**
+ * - Markowitz cost: (row_count - 1) × (col_count - 1)
+ * - Threshold: |pivot| ≥ reltol × max|column entry|
+ * - Search terminates after MAXN_SEARCH_PIVOT stable pivots found
+ *
+ * **Memory Management:**
+ * Returns BASICLU_REALLOCATE if arrays need growth; caller reallocates
+ * and calls again with c0ntinue=1 to resume.
+ *
+ * @see basiclu.h for parameters (DROP_TOLERANCE, ABS_PIVOT_TOLERANCE, etc.)
+ * @see basiclu_get_factors.h to extract L, U in standard sparse format
+ */
 lu_int basiclu_factorize
 (
     lu_int istore[],

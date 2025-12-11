@@ -1,3 +1,14 @@
+/**
+ * @file OsiXprConfig.h
+ * @brief Configuration header for OsiXpr (FICO Xpress interface)
+ *
+ * Provides build configuration for the Osi adapter to FICO Xpress-MP
+ * Optimizer. Defines OSIXPRLIB_EXPORT for DLL import/export based on build
+ * environment and platform. Requires separate Xpress installation and license.
+ *
+ * @see OsiXprSolverInterface.h for Xpress adapter class
+ * @see OsiConfig.h for main Osi configuration
+ */
 /* Copyright (C) 2011
  * All Rights Reserved.
  * This code is published under the Eclipse Public License.

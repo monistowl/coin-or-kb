@@ -1,0 +1,12 @@
+{
+  "name": "config_sym_default",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/config_sym_default.h",
+  "brief": "Default SYMPHONY configuration for non-autoconf builds\n\nProvides version macros and DLL export definitions when building\nwithout autotools/configure. Used on Windows with Visual Studio\nor other environments without autoconf.\n\n**Macros Defined:**\n- SYMPHONY_VERSION: Version string\n- SYMPHONY_VERSION_MAJOR/MINOR/RELEASE: Numeric version components\n- SYMPHONYLIB_EXPORT: DLL import/export decoration",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SymConfig.h for autoconf-generated configuration"
+  ]
+}

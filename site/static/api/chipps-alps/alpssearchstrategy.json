@@ -3,8 +3,15 @@
   "library": "CHiPPS-ALPS",
   "layer": "layer-3",
   "header": "src/AlpsSearchStrategy.h",
-  "brief": "Node and subtree selection strategies for ALPS tree search\n\nDefines comparison classes for selecting which node or subtree to explore next.\ncompare(x,y) returns true if y should be processed before x.\n\n**Subtree selection (AlpsTreeSelection):**\n- AlpsTreeSelectionBest: Best quality subtree first\n- AlpsTreeSelectionBreadth: Shallowest root first\n- AlpsTreeSelectionDepth: Deepest root first\n- AlpsTreeSelectionEstimate: Best estimated solution first\n\n**Node selection (AlpsNodeSelection):**\n- AlpsNodeSelectionBest: Best bound first (minimize dual gap)\n- AlpsNodeSelectionBreadth: BFS (shallowest first)\n- AlpsNodeSelectionDepth: DFS (deepest first, finds solutions fast)\n- AlpsNodeSelectionEstimate: Best estimated solution first\n- AlpsNodeSelectionHybrid: Combination strategy\n\n**Hybrid strategy:**\nCombines best-first selection with diving for solution finding.\nselectNextNode() and createNewNodes() can be overridden.",
-  "algorithms": [],
+  "brief": "Node and subtree selection strategies for ALPS tree search",
+  "algorithms": [
+    {
+      "name": "Search Tree Node Selection:\nStrategies for choosing which node to explore next in branch-and-bound.\n\n  BEST-FIRST (AlpsNodeSelectionBest):\n    Select node with best (lowest) bound\n    Minimizes dual gap, proves optimality fastest\n    Memory: O(nodes) - may keep many open nodes\n\n  DEPTH-FIRST (AlpsNodeSelectionDepth):\n    Select deepest node (LIFO stack)\n    Finds feasible solutions quickly\n    Memory: O(depth) - very memory efficient\n\n  BREADTH-FIRST (AlpsNodeSelectionBreadth):\n    Select shallowest node (FIFO queue)\n    Explores level by level\n    Memory: O(branching_factor^depth) - exponential\n\n  HYBRID:\n    Combines best-first with diving phases\n    Dives to find solutions, then switches to best-first",
+      "math": "Best-first: priority = node.bound\n  Depth-first: priority = node.depth (higher = earlier)\n  Estimate: priority = estimated_solution_value",
+      "complexity": "Selection: O(log n) with priority queue\n  Insertion: O(log n) with priority queue\n  Best-first typically explores fewer nodes but uses more memory\n\ncompare(x,y) returns true if y should be processed before x.",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "AlpsSearchStrategyBase for template base class",

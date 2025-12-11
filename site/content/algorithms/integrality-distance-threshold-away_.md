@@ -27,7 +27,7 @@ O(m) per cut for m nonzeros in tableau row
 
 ### Cgl
 
-- **{{ link(path="/browser/?library=Cgl", text="CglGomory.hpp") }}** - Gomory mixed-integer cuts from optimal LP basis
+- **[CglGomory.hpp](/coin-or-kb/browser/?library=Cgl)** - Gomory mixed-integer cuts from optimal LP basis
 
 Generates Gomory fractional cuts, the classic MIP cutting planes
 derived by Ralph Gomory in the 1950s-60s. For each fractional basic
@@ -54,6 +54,7 @@ Numerical considerations:
 
 Gomory cuts are finite and can solve pure integer programs in theory,
 but numerically fragile. Modern solvers combine with other cuts.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Cgl/src/CglGomory/CglGomory.hpp)
 
 ## References
 

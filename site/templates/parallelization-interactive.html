@@ -1,0 +1,961 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article class="learning-path-page">
+    <h1>{{ page.title }}</h1>
+
+    <div class="content-box">
+        {{ page.content | safe }}
+    </div>
+
+    <!-- Status Panel -->
+    <div class="parallel-status-bar">
+        <div class="status-item">
+            <span class="status-label">Time Step</span>
+            <span class="status-value" id="time-step">0</span>
+        </div>
+        <div class="status-item">
+            <span class="status-label">Global Bound</span>
+            <span class="status-value" id="global-bound">∞</span>
+        </div>
+        <div class="status-item">
+            <span class="status-label">Incumbent</span>
+            <span class="status-value" id="incumbent">—</span>
+        </div>
+        <div class="status-item">
+            <span class="status-label">Nodes Explored</span>
+            <span class="status-value" id="nodes-explored">0</span>
+        </div>
+        <div class="status-item">
+            <span class="status-label">Nodes Pruned</span>
+            <span class="status-value" id="nodes-pruned">0</span>
+        </div>
+    </div>
+
+    <!-- Step Indicators -->
+    <div class="step-dots" id="step-dots"></div>
+
+    <!-- Main Visualization -->
+    <div class="parallel-viz-container">
+        <!-- Worker Status Panel -->
+        <div class="workers-panel">
+            <h4>Workers</h4>
+            <div class="worker-list" id="worker-list"></div>
+        </div>
+
+        <!-- Tree Visualization -->
+        <div class="tree-panel">
+            <h4>Search Tree</h4>
+            <svg id="tree-svg" width="600" height="400"></svg>
+        </div>
+
+        <!-- Queue Panel -->
+        <div class="queue-panel">
+            <h4>Node Queue</h4>
+            <div class="node-queue" id="node-queue"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-buttons">
+        <button id="prev-btn" disabled>← Previous</button>
+        <button id="next-btn">Next Step →</button>
+    </div>
+
+    <!-- Explanation Panel -->
+    <div class="explanation-panel" id="explanation-panel">
+        <h3 id="step-title">Initial State</h3>
+        <div id="step-explanation"></div>
+    </div>
+</article>
+
+<style>
+.parallel-status-bar {
+    display: flex;
+    justify-content: space-around;
+    background: var(--surface-color, #1a1a2e);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.status-item {
+    text-align: center;
+    min-width: 100px;
+}
+
+.status-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--muted-color, #888);
+    margin-bottom: 0.25rem;
+}
+
+.status-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color, #4ecdc4);
+}
+
+.step-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 1rem 0;
+}
+
+.step-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--muted-color, #444);
+    transition: background 0.3s;
+}
+
+.step-dot.active {
+    background: var(--accent-color, #4ecdc4);
+}
+
+.step-dot.completed {
+    background: var(--success-color, #2ecc71);
+}
+
+.parallel-viz-container {
+    display: grid;
+    grid-template-columns: 150px 1fr 150px;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    min-height: 420px;
+}
+
+@media (max-width: 900px) {
+    .parallel-viz-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.workers-panel, .queue-panel {
+    background: var(--surface-color, #1a1a2e);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.workers-panel h4, .queue-panel h4, .tree-panel h4 {
+    margin: 0 0 0.75rem 0;
+    color: var(--accent-color, #4ecdc4);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.tree-panel {
+    background: var(--surface-color, #1a1a2e);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+#tree-svg {
+    width: 100%;
+    height: 380px;
+}
+
+.worker-card {
+    background: var(--bg-color, #0d0d1a);
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid var(--muted-color, #444);
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.worker-card.active {
+    border-left-color: var(--success-color, #2ecc71);
+    background: rgba(46, 204, 113, 0.1);
+}
+
+.worker-card.idle {
+    border-left-color: var(--muted-color, #666);
+}
+
+.worker-name {
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.worker-status {
+    font-size: 0.75rem;
+    color: var(--muted-color, #888);
+}
+
+.worker-node {
+    font-size: 0.8rem;
+    color: var(--accent-color, #4ecdc4);
+    margin-top: 0.25rem;
+}
+
+.queue-node {
+    background: var(--bg-color, #0d0d1a);
+    border-radius: 4px;
+    padding: 0.5rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.queue-node.processing {
+    background: rgba(78, 205, 196, 0.2);
+    border: 1px solid var(--accent-color, #4ecdc4);
+}
+
+.queue-bound {
+    color: var(--warning-color, #f39c12);
+}
+
+/* SVG Tree Styles */
+.tree-node {
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.tree-node circle {
+    stroke-width: 2;
+    transition: fill 0.3s, stroke 0.3s;
+}
+
+.tree-node.unexplored circle {
+    fill: var(--bg-color, #0d0d1a);
+    stroke: var(--muted-color, #666);
+}
+
+.tree-node.exploring circle {
+    fill: var(--accent-color, #4ecdc4);
+    stroke: var(--accent-color, #4ecdc4);
+    animation: pulse 1s infinite;
+}
+
+.tree-node.explored circle {
+    fill: var(--info-color, #3498db);
+    stroke: var(--info-color, #3498db);
+}
+
+.tree-node.integer circle {
+    fill: var(--success-color, #2ecc71);
+    stroke: var(--success-color, #2ecc71);
+}
+
+.tree-node.pruned circle {
+    fill: var(--error-color, #e74c3c);
+    stroke: var(--error-color, #e74c3c);
+}
+
+.tree-node.infeasible circle {
+    fill: var(--muted-color, #666);
+    stroke: var(--muted-color, #666);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.tree-link {
+    fill: none;
+    stroke: var(--muted-color, #444);
+    stroke-width: 2;
+}
+
+.tree-link.active {
+    stroke: var(--accent-color, #4ecdc4);
+}
+
+.node-label {
+    font-size: 10px;
+    fill: var(--text-color, #e0e0e0);
+    text-anchor: middle;
+}
+
+.node-bound {
+    font-size: 9px;
+    fill: var(--warning-color, #f39c12);
+    text-anchor: middle;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.nav-buttons button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s, opacity 0.3s;
+}
+
+.nav-buttons button:first-child {
+    background: var(--surface-color, #2a2a3e);
+    color: var(--text-color, #e0e0e0);
+}
+
+.nav-buttons button:last-child {
+    background: var(--accent-color, #4ecdc4);
+    color: var(--bg-color, #0d0d1a);
+}
+
+.nav-buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.explanation-panel {
+    background: var(--surface-color, #1a1a2e);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.explanation-panel h3 {
+    color: var(--accent-color, #4ecdc4);
+    margin: 0 0 1rem 0;
+}
+
+.action-tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+}
+
+.action-tag.assign { background: rgba(52, 152, 219, 0.3); color: #3498db; }
+.action-tag.solve { background: rgba(78, 205, 196, 0.3); color: #4ecdc4; }
+.action-tag.branch { background: rgba(155, 89, 182, 0.3); color: #9b59b6; }
+.action-tag.prune { background: rgba(231, 76, 60, 0.3); color: #e74c3c; }
+.action-tag.update { background: rgba(46, 204, 113, 0.3); color: #2ecc71; }
+.action-tag.sync { background: rgba(243, 156, 18, 0.3); color: #f39c12; }
+
+.worker-activity {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background: var(--bg-color, #0d0d1a);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.parallel-note {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(243, 156, 18, 0.1);
+    border-left: 3px solid var(--warning-color, #f39c12);
+    font-size: 0.9rem;
+}
+</style>
+
+<script>
+(function() {
+    var STEPS = [
+        {
+            title: "Initial State",
+            time: 0,
+            globalBound: Infinity,
+            incumbent: null,
+            explored: 0,
+            pruned: 0,
+            workers: [
+                { id: 0, status: "idle", node: null },
+                { id: 1, status: "idle", node: null },
+                { id: 2, status: "idle", node: null }
+            ],
+            queue: [{ id: "N0", bound: 25.0 }],
+            tree: {
+                nodes: [{ id: "N0", x: 300, y: 30, bound: 25.0, status: "unexplored", parent: null }],
+                links: []
+            },
+            explanationLines: [
+                "Three workers ready, one root node in queue.",
+                "Root node N0 has LP bound 25.0 (maximization problem).",
+                "Workers will process nodes from the queue in parallel."
+            ],
+            actionType: null
+        },
+        {
+            title: "Assign Root to Worker 0",
+            time: 1,
+            globalBound: 25.0,
+            incumbent: null,
+            explored: 0,
+            pruned: 0,
+            workers: [
+                { id: 0, status: "active", node: "N0" },
+                { id: 1, status: "idle", node: null },
+                { id: 2, status: "idle", node: null }
+            ],
+            queue: [],
+            tree: {
+                nodes: [{ id: "N0", x: 300, y: 30, bound: 25.0, status: "exploring", parent: null }],
+                links: []
+            },
+            explanationLines: [
+                "Worker 0 takes root node N0 from queue.",
+                "Workers 1 and 2 are idle (no nodes available yet).",
+                "Worker 0 will solve the LP relaxation."
+            ],
+            actionType: "assign"
+        },
+        {
+            title: "Worker 0 Solves Root, Creates Children",
+            time: 2,
+            globalBound: 25.0,
+            incumbent: null,
+            explored: 1,
+            pruned: 0,
+            workers: [
+                { id: 0, status: "idle", node: null },
+                { id: 1, status: "idle", node: null },
+                { id: 2, status: "idle", node: null }
+            ],
+            queue: [
+                { id: "N1", bound: 23.5 },
+                { id: "N2", bound: 22.0 }
+            ],
+            tree: {
+                nodes: [
+                    { id: "N0", x: 300, y: 30, bound: 25.0, status: "explored", parent: null },
+                    { id: "N1", x: 200, y: 100, bound: 23.5, status: "unexplored", parent: "N0" },
+                    { id: "N2", x: 400, y: 100, bound: 22.0, status: "unexplored", parent: "N0" }
+                ],
+                links: [
+                    { source: "N0", target: "N1" },
+                    { source: "N0", target: "N2" }
+                ]
+            },
+            explanationLines: [
+                "Worker 0 solved LP: bound = 25.0, x1 = 2.5 (fractional).",
+                "Branched on x1: N1 (x1 <= 2) and N2 (x1 >= 3).",
+                "Both children added to queue, sorted by bound."
+            ],
+            actionType: "branch"
+        },
+        {
+            title: "Parallel Assignment: Workers 0 and 1",
+            time: 3,
+            globalBound: 23.5,
+            incumbent: null,
+            explored: 1,
+            pruned: 0,
+            workers: [
+                { id: 0, status: "active", node: "N1" },
+                { id: 1, status: "active", node: "N2" },
+                { id: 2, status: "idle", node: null }
+            ],
+            queue: [],
+            tree: {
+                nodes: [
+                    { id: "N0", x: 300, y: 30, bound: 25.0, status: "explored", parent: null },
+                    { id: "N1", x: 200, y: 100, bound: 23.5, status: "exploring", parent: "N0" },
+                    { id: "N2", x: 400, y: 100, bound: 22.0, status: "exploring", parent: "N0" }
+                ],
+                links: [
+                    { source: "N0", target: "N1" },
+                    { source: "N0", target: "N2" }
+                ]
+            },
+            explanationLines: [
+                "Both N1 and N2 assigned to workers simultaneously!",
+                "Worker 0 -> N1 (bound 23.5), Worker 1 -> N2 (bound 22.0).",
+                "This is where parallelism pays off: two LPs solving at once."
+            ],
+            actionType: "assign",
+            parallelNote: "True parallelism: 2 nodes processing simultaneously"
+        },
+        {
+            title: "Worker 1 Finds Integer Solution!",
+            time: 4,
+            globalBound: 23.5,
+            incumbent: 21,
+            explored: 2,
+            pruned: 0,
+            workers: [
+                { id: 0, status: "active", node: "N1" },
+                { id: 1, status: "idle", node: null },
+                { id: 2, status: "idle", node: null }
+            ],
+            queue: [],
+            tree: {
+                nodes: [
+                    { id: "N0", x: 300, y: 30, bound: 25.0, status: "explored", parent: null },
+                    { id: "N1", x: 200, y: 100, bound: 23.5, status: "exploring", parent: "N0" },
+                    { id: "N2", x: 400, y: 100, bound: 21.0, status: "integer", parent: "N0" }
+                ],
+                links: [
+                    { source: "N0", target: "N1" },
+                    { source: "N0", target: "N2" }
+                ]
+            },
+            explanationLines: [
+                "Worker 1 finished N2: LP solution is INTEGER!",
+                "Objective value = 21. New incumbent!",
+                "Worker 0 still processing N1 (does not know about incumbent yet)."
+            ],
+            actionType: "update",
+            parallelNote: "Incumbent found, but Worker 0 does not see it immediately"
+        },
+        {
+            title: "Worker 0 Branches (Before Sync)",
+            time: 5,
+            globalBound: 23.5,
+            incumbent: 21,
+            explored: 3,
+            pruned: 0,
+            workers: [
+                { id: 0, status: "idle", node: null },
+                { id: 1, status: "idle", node: null },
+                { id: 2, status: "idle", node: null }
+            ],
+            queue: [
+                { id: "N3", bound: 22.5 },
+                { id: "N4", bound: 20.5 }
+            ],
+            tree: {
+                nodes: [
+                    { id: "N0", x: 300, y: 30, bound: 25.0, status: "explored", parent: null },
+                    { id: "N1", x: 200, y: 100, bound: 23.5, status: "explored", parent: "N0" },
+                    { id: "N2", x: 400, y: 100, bound: 21.0, status: "integer", parent: "N0" },
+                    { id: "N3", x: 130, y: 170, bound: 22.5, status: "unexplored", parent: "N1" },
+                    { id: "N4", x: 270, y: 170, bound: 20.5, status: "unexplored", parent: "N1" }
+                ],
+                links: [
+                    { source: "N0", target: "N1" },
+                    { source: "N0", target: "N2" },
+                    { source: "N1", target: "N3" },
+                    { source: "N1", target: "N4" }
+                ]
+            },
+            explanationLines: [
+                "Worker 0 finished N1: bound = 23.5, x2 = 1.5 (fractional).",
+                "Created children N3 (x2 <= 1, bound 22.5) and N4 (x2 >= 2, bound 20.5).",
+                "Note: N4 bound 20.5 < incumbent 21. It should be pruned!"
+            ],
+            actionType: "branch",
+            parallelNote: "Wasted work: N4 created despite bound < incumbent (sync delay)"
+        },
+        {
+            title: "Bound Synchronization and Pruning",
+            time: 6,
+            globalBound: 22.5,
+            incumbent: 21,
+            explored: 3,
+            pruned: 1,
+            workers: [
+                { id: 0, status: "idle", node: null },
+                { id: 1, status: "idle", node: null },
+                { id: 2, status: "idle", node: null }
+            ],
+            queue: [
+                { id: "N3", bound: 22.5 }
+            ],
+            tree: {
+                nodes: [
+                    { id: "N0", x: 300, y: 30, bound: 25.0, status: "explored", parent: null },
+                    { id: "N1", x: 200, y: 100, bound: 23.5, status: "explored", parent: "N0" },
+                    { id: "N2", x: 400, y: 100, bound: 21.0, status: "integer", parent: "N0" },
+                    { id: "N3", x: 130, y: 170, bound: 22.5, status: "unexplored", parent: "N1" },
+                    { id: "N4", x: 270, y: 170, bound: 20.5, status: "pruned", parent: "N1" }
+                ],
+                links: [
+                    { source: "N0", target: "N1" },
+                    { source: "N0", target: "N2" },
+                    { source: "N1", target: "N3" },
+                    { source: "N1", target: "N4" }
+                ]
+            },
+            explanationLines: [
+                "Synchronization: all workers now see incumbent = 21.",
+                "N4 pruned: bound 20.5 <= incumbent 21 (cannot improve).",
+                "Global bound updated to 22.5 (best remaining node)."
+            ],
+            actionType: "sync"
+        },
+        {
+            title: "Worker 0 Takes Final Node",
+            time: 7,
+            globalBound: 22.5,
+            incumbent: 21,
+            explored: 3,
+            pruned: 1,
+            workers: [
+                { id: 0, status: "active", node: "N3" },
+                { id: 1, status: "idle", node: null },
+                { id: 2, status: "idle", node: null }
+            ],
+            queue: [],
+            tree: {
+                nodes: [
+                    { id: "N0", x: 300, y: 30, bound: 25.0, status: "explored", parent: null },
+                    { id: "N1", x: 200, y: 100, bound: 23.5, status: "explored", parent: "N0" },
+                    { id: "N2", x: 400, y: 100, bound: 21.0, status: "integer", parent: "N0" },
+                    { id: "N3", x: 130, y: 170, bound: 22.5, status: "exploring", parent: "N1" },
+                    { id: "N4", x: 270, y: 170, bound: 20.5, status: "pruned", parent: "N1" }
+                ],
+                links: [
+                    { source: "N0", target: "N1" },
+                    { source: "N0", target: "N2" },
+                    { source: "N1", target: "N3" },
+                    { source: "N1", target: "N4" }
+                ]
+            },
+            explanationLines: [
+                "Only N3 remains. Worker 0 takes it.",
+                "Workers 1 and 2 are idle (work imbalance late in search).",
+                "This is common: parallelism helps most early in the tree."
+            ],
+            actionType: "assign"
+        },
+        {
+            title: "Worker 0 Finds Better Solution!",
+            time: 8,
+            globalBound: 22,
+            incumbent: 22,
+            explored: 4,
+            pruned: 1,
+            workers: [
+                { id: 0, status: "idle", node: null },
+                { id: 1, status: "idle", node: null },
+                { id: 2, status: "idle", node: null }
+            ],
+            queue: [],
+            tree: {
+                nodes: [
+                    { id: "N0", x: 300, y: 30, bound: 25.0, status: "explored", parent: null },
+                    { id: "N1", x: 200, y: 100, bound: 23.5, status: "explored", parent: "N0" },
+                    { id: "N2", x: 400, y: 100, bound: 21.0, status: "integer", parent: "N0" },
+                    { id: "N3", x: 130, y: 170, bound: 22.0, status: "integer", parent: "N1" },
+                    { id: "N4", x: 270, y: 170, bound: 20.5, status: "pruned", parent: "N1" }
+                ],
+                links: [
+                    { source: "N0", target: "N1" },
+                    { source: "N0", target: "N2" },
+                    { source: "N1", target: "N3" },
+                    { source: "N1", target: "N4" }
+                ]
+            },
+            explanationLines: [
+                "Worker 0 solved N3: INTEGER solution with objective 22!",
+                "New incumbent = 22 (better than previous 21).",
+                "Queue is empty. All nodes explored or pruned."
+            ],
+            actionType: "update"
+        },
+        {
+            title: "Optimal Solution Found",
+            time: 9,
+            globalBound: 22,
+            incumbent: 22,
+            explored: 4,
+            pruned: 1,
+            workers: [
+                { id: 0, status: "idle", node: null },
+                { id: 1, status: "idle", node: null },
+                { id: 2, status: "idle", node: null }
+            ],
+            queue: [],
+            tree: {
+                nodes: [
+                    { id: "N0", x: 300, y: 30, bound: 25.0, status: "explored", parent: null },
+                    { id: "N1", x: 200, y: 100, bound: 23.5, status: "explored", parent: "N0" },
+                    { id: "N2", x: 400, y: 100, bound: 21.0, status: "integer", parent: "N0" },
+                    { id: "N3", x: 130, y: 170, bound: 22.0, status: "integer", parent: "N1" },
+                    { id: "N4", x: 270, y: 170, bound: 20.5, status: "pruned", parent: "N1" }
+                ],
+                links: [
+                    { source: "N0", target: "N1" },
+                    { source: "N0", target: "N2" },
+                    { source: "N1", target: "N3" },
+                    { source: "N1", target: "N4" }
+                ]
+            },
+            explanationLines: [
+                "Search complete! Optimal value = 22 (from node N3).",
+                "Parallel speedup: 2 nodes processed simultaneously at step 4.",
+                "Trade-off: N4 was created before sync (minor wasted work)."
+            ],
+            actionType: null,
+            summaryItems: [
+                "Optimal value: 22",
+                "Nodes explored: 4",
+                "Nodes pruned: 1",
+                "Parallel benefit: 2 nodes at step 4",
+                "Sync overhead: N4 created before prune"
+            ]
+        }
+    ];
+
+    var currentStep = 0;
+
+    function init() {
+        renderStepDots();
+        renderStep(0);
+
+        document.getElementById("prev-btn").addEventListener("click", function() {
+            if (currentStep > 0) {
+                currentStep--;
+                renderStep(currentStep);
+            }
+        });
+
+        document.getElementById("next-btn").addEventListener("click", function() {
+            if (currentStep < STEPS.length - 1) {
+                currentStep++;
+                renderStep(currentStep);
+            }
+        });
+    }
+
+    function renderStepDots() {
+        var container = document.getElementById("step-dots");
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+        for (var i = 0; i < STEPS.length; i++) {
+            var dot = document.createElement("div");
+            dot.className = "step-dot";
+            container.appendChild(dot);
+        }
+    }
+
+    function updateStepDots(idx) {
+        var dots = document.querySelectorAll(".step-dot");
+        for (var i = 0; i < dots.length; i++) {
+            dots[i].className = "step-dot";
+            if (i < idx) dots[i].classList.add("completed");
+            if (i === idx) dots[i].classList.add("active");
+        }
+    }
+
+    function renderStep(idx) {
+        var step = STEPS[idx];
+
+        document.getElementById("time-step").textContent = step.time;
+        document.getElementById("global-bound").textContent =
+            step.globalBound === Infinity ? "\u221E" : step.globalBound.toFixed(1);
+        document.getElementById("incumbent").textContent =
+            step.incumbent === null ? "\u2014" : step.incumbent;
+        document.getElementById("nodes-explored").textContent = step.explored;
+        document.getElementById("nodes-pruned").textContent = step.pruned;
+
+        updateStepDots(idx);
+        renderWorkers(step.workers);
+        renderQueue(step.queue);
+        renderTree(step.tree);
+        renderExplanation(step);
+
+        document.getElementById("prev-btn").disabled = (idx === 0);
+        var nextBtn = document.getElementById("next-btn");
+        if (idx === STEPS.length - 1) {
+            nextBtn.textContent = "Complete!";
+            nextBtn.disabled = true;
+        } else {
+            nextBtn.textContent = "Next Step \u2192";
+            nextBtn.disabled = false;
+        }
+    }
+
+    function renderWorkers(workers) {
+        var container = document.getElementById("worker-list");
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+
+        for (var i = 0; i < workers.length; i++) {
+            var w = workers[i];
+            var card = document.createElement("div");
+            card.className = "worker-card " + w.status;
+
+            var name = document.createElement("div");
+            name.className = "worker-name";
+            name.textContent = "Worker " + w.id;
+            card.appendChild(name);
+
+            var status = document.createElement("div");
+            status.className = "worker-status";
+            status.textContent = w.status === "active" ? "Processing" : "Idle";
+            card.appendChild(status);
+
+            if (w.node) {
+                var node = document.createElement("div");
+                node.className = "worker-node";
+                node.textContent = "\u2192 " + w.node;
+                card.appendChild(node);
+            }
+
+            container.appendChild(card);
+        }
+    }
+
+    function renderQueue(queue) {
+        var container = document.getElementById("node-queue");
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+
+        if (queue.length === 0) {
+            var empty = document.createElement("div");
+            empty.className = "queue-node";
+            empty.textContent = "(empty)";
+            empty.style.color = "var(--muted-color)";
+            empty.style.fontStyle = "italic";
+            container.appendChild(empty);
+            return;
+        }
+
+        for (var i = 0; i < queue.length; i++) {
+            var q = queue[i];
+            var node = document.createElement("div");
+            node.className = "queue-node";
+
+            var label = document.createElement("span");
+            label.textContent = q.id;
+            node.appendChild(label);
+
+            var bound = document.createElement("span");
+            bound.className = "queue-bound";
+            bound.textContent = q.bound.toFixed(1);
+            node.appendChild(bound);
+
+            container.appendChild(node);
+        }
+    }
+
+    function renderTree(treeData) {
+        var svg = document.getElementById("tree-svg");
+        while (svg.firstChild) {
+            svg.removeChild(svg.firstChild);
+        }
+
+        var nodeMap = {};
+        for (var i = 0; i < treeData.nodes.length; i++) {
+            nodeMap[treeData.nodes[i].id] = treeData.nodes[i];
+        }
+
+        for (var i = 0; i < treeData.links.length; i++) {
+            var link = treeData.links[i];
+            var source = nodeMap[link.source];
+            var target = nodeMap[link.target];
+
+            var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("class", "tree-link");
+            line.setAttribute("x1", source.x);
+            line.setAttribute("y1", source.y);
+            line.setAttribute("x2", target.x);
+            line.setAttribute("y2", target.y);
+            svg.appendChild(line);
+        }
+
+        for (var i = 0; i < treeData.nodes.length; i++) {
+            var n = treeData.nodes[i];
+            var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            g.setAttribute("class", "tree-node " + n.status);
+            g.setAttribute("transform", "translate(" + n.x + "," + n.y + ")");
+
+            var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("r", 18);
+            g.appendChild(circle);
+
+            var label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("class", "node-label");
+            label.setAttribute("dy", "0.35em");
+            label.textContent = n.id;
+            g.appendChild(label);
+
+            var bound = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            bound.setAttribute("class", "node-bound");
+            bound.setAttribute("dy", "2.5em");
+            bound.textContent = n.bound.toFixed(1);
+            g.appendChild(bound);
+
+            svg.appendChild(g);
+        }
+    }
+
+    function renderExplanation(step) {
+        var title = document.getElementById("step-title");
+        title.textContent = step.title;
+
+        var container = document.getElementById("step-explanation");
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+
+        if (step.actionType) {
+            var tag = document.createElement("div");
+            tag.className = "action-tag " + step.actionType;
+            var tagNames = {
+                assign: "Node Assignment",
+                solve: "Solve LP",
+                branch: "Branching",
+                prune: "Pruning",
+                update: "Incumbent Update",
+                sync: "Synchronization"
+            };
+            tag.textContent = tagNames[step.actionType] || step.actionType;
+            container.appendChild(tag);
+        }
+
+        for (var i = 0; i < step.explanationLines.length; i++) {
+            var p = document.createElement("p");
+            p.textContent = step.explanationLines[i];
+            container.appendChild(p);
+        }
+
+        if (step.parallelNote) {
+            var note = document.createElement("div");
+            note.className = "parallel-note";
+            note.textContent = "\u26A1 " + step.parallelNote;
+            container.appendChild(note);
+        }
+
+        if (step.summaryItems) {
+            var summary = document.createElement("div");
+            summary.style.marginTop = "1rem";
+            summary.style.padding = "1rem";
+            summary.style.background = "rgba(46, 204, 113, 0.1)";
+            summary.style.borderRadius = "6px";
+
+            var h4 = document.createElement("h4");
+            h4.style.color = "var(--success-color)";
+            h4.style.marginTop = "0";
+            h4.textContent = "Summary";
+            summary.appendChild(h4);
+
+            var ul = document.createElement("ul");
+            ul.style.margin = "0";
+            ul.style.paddingLeft = "1.5rem";
+
+            for (var i = 0; i < step.summaryItems.length; i++) {
+                var li = document.createElement("li");
+                li.textContent = step.summaryItems[i];
+                ul.appendChild(li);
+            }
+            summary.appendChild(ul);
+            container.appendChild(summary);
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+    } else {
+        init();
+    }
+})();
+</script>
+{% endblock %}

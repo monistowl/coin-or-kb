@@ -34,7 +34,7 @@ Maximum transversal: O(nnz + n) time and O(n) space
 
 ### SuiteSparse
 
-- **{{ link(path="/browser/?library=SuiteSparse", text="btf.h") }}** - Block Triangular Form permutation for sparse matrices
+- **[btf.h](/coin-or-kb/browser/?library=SuiteSparse)** - Block Triangular Form permutation for sparse matrices
 
 BTF computes permutations to transform a sparse matrix into block upper
 triangular form (BTF). This decomposes the matrix into independent blocks
@@ -44,6 +44,7 @@ Three main routines:
 - btf_maxtrans: Maximum transversal (zero-free diagonal matching)
 - btf_strongcomp: Strongly connected components (block decomposition)
 - btf_order: Combined BTF ordering (calls both above)
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/SuiteSparse/BTF/Include/btf.h)
 
 ## References
 

@@ -23,7 +23,7 @@ generateCuts: O(generator_cost × frequency)
 
 ### Cbc
 
-- **{{ link(path="/browser/?library=Cbc", text="CbcCutGenerator.hpp") }}** - Interface between Cbc and Cut Generation Library (CGL)
+- **[CbcCutGenerator.hpp](/coin-or-kb/browser/?library=Cbc)** - Interface between Cbc and Cut Generation Library (CGL)
 Copyright (C) 2003, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
 
@@ -45,6 +45,7 @@ Supports adaptive behavior:
 - Can be switched off if ineffective
 - Tracks cuts at root vs tree
 - Global cuts and Lagrangean relaxation support
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Cbc/src/CbcCutGenerator.hpp)
 
 ## References
 

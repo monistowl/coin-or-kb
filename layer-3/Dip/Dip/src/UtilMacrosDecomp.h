@@ -1,3 +1,14 @@
+/**
+ * @file UtilMacrosDecomp.h
+ * @brief Decomposition-specific macros and COIN utility functions
+ *
+ * Provides debug/timing macros (UtilPrintFuncBegin/End), exception
+ * helpers, gap calculation, and CoinPackedVector utilities specific
+ * to decomposition algorithms. Includes global timer for profiling.
+ *
+ * @see UtilMacros.h for general utility macros
+ * @see UtilTimer.h for timer implementation
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

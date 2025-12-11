@@ -30,25 +30,32 @@
  * AlpsKnowledgeBroker is the abstract base class for search coordination.
  * It manages knowledge pools, search strategy, and execution statistics.
  *
- * **Key responsibilities:**
- * - Manage SubTreePool and SolutionPool
- * - Register knowledge types for serialization
- * - Track search statistics (nodes processed, branched, etc.)
- * - Apply search strategy (node/tree selection)
+ * @algorithm Knowledge-Based Parallel Search Framework:
+ * Coordinates distributed tree search via knowledge sharing.
  *
- * **Knowledge pool management:**
- * - addKnowledge()/getKnowledge(): Store/retrieve knowledge
- * - registerClass(): Register decode functions for parallel
- * - decoderObject(): Get decoder for knowledge type
+ *   KNOWLEDGE TYPES:
+ *     - AlpsSubTree: Portion of B&B tree to explore
+ *     - AlpsSolution: Incumbent solutions (primal bounds)
+ *     - AlpsNode: Individual search tree nodes
  *
- * **Search phases (AlpsPhase):**
- * - Rampup: Initial node generation and distribution
- * - Search: Main parallel exploration
- * - Rampdown: Collect results and terminate
+ *   POOL MANAGEMENT:
+ *     SubTreePool: Priority queue of subtrees to explore
+ *     SolutionPool: Best solutions found (for pruning)
  *
- * **Implementations:**
- * - AlpsKnowledgeBrokerSerial: Single-process execution
- * - AlpsKnowledgeBrokerMPI: MPI-based parallel execution
+ *   PARALLEL COORDINATION:
+ *     1. Rampup: Generate initial subtrees, distribute to workers
+ *     2. Search: Parallel exploration with load balancing
+ *     3. Rampdown: Collect results, verify optimality
+ *
+ * @math
+ *   Load balance: work donation when idle workers detected
+ *   Termination: all workers idle AND no pending messages
+ *   Optimality: best solution when global bound ≥ incumbent
+ *
+ * @complexity
+ *   Serial: O(nodes_explored × node_processing_time)
+ *   Parallel: O(nodes_explored / p × node_time + communication)
+ *   Speedup limited by: tree shape, load imbalance, sync overhead
  *
  * @see AlpsKnowledgeBrokerSerial for serial implementation
  * @see AlpsKnowledgeBrokerMPI for parallel implementation

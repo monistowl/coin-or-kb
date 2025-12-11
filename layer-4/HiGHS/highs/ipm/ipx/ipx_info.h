@@ -1,3 +1,31 @@
+/**
+ * @file ipx_info.h
+ * @brief Solver statistics and output information structure
+ *
+ * C-compatible structure containing comprehensive solve statistics:
+ *
+ * **Status Fields:**
+ * - status: Overall solver status (IPX_STATUS_*)
+ * - status_ipm: Interior point phase status
+ * - status_crossover: Crossover phase status
+ *
+ * **Problem Dimensions:**
+ * - num_var, num_constr: User model dimensions
+ * - num_rows_solver, num_cols_solver: Internal solver dimensions
+ *
+ * **Solution Quality:**
+ * - abs/rel_presidual/dresidual: Feasibility measures
+ * - pobjval, dobjval: Primal/dual objectives
+ * - complementarity: Complementarity gap
+ *
+ * **Performance:**
+ * - iter: IPM iteration count
+ * - time_total, time_ipm*, time_crossover: Timing breakdown
+ * - time_kkt_*: KKT solver profiling
+ *
+ * @see ipx_status.h for status code definitions
+ * @see info.h for C++ output utilities
+ */
 #ifndef IPX_INFO_H_
 #define IPX_INFO_H_
 

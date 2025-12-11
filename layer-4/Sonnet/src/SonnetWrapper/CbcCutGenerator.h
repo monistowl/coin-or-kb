@@ -1,4 +1,16 @@
-// Copyright (C) Jan-Willem Goossens 
+/**
+ * @file CbcCutGenerator.h
+ * @brief .NET wrapper for Cbc cut generator management
+ *
+ * Provides managed CbcCutGenerator class that wraps the native
+ * ::CbcCutGenerator. Controls when and how CGL cutting planes
+ * are generated during branch-and-cut search (frequency, depth,
+ * at solution, etc.).
+ *
+ * @see CglCutGenerator.h for wrapped cut generator algorithms
+ * @see CbcModel for branch-and-cut model using these generators
+ */
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 
 #pragma once

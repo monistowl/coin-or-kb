@@ -1,0 +1,13 @@
+{
+  "name": "AlpsAix43",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsAix43.h",
+  "brief": "Platform-specific definitions for IBM AIX 4.3\n\nProvides AIX-specific system includes, type definitions, and compiler\nmacros for the ALPS parallel search framework. Includes gettimeofday(),\ngetrusage(), and memory management macros for GCC and IBM compilers.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsOs.h for platform detection",
+    "AlpsLinux.h for Linux equivalents"
+  ]
+}

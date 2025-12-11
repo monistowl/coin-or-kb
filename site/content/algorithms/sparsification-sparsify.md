@@ -36,7 +36,7 @@ Matrix access: O(1) amortized via splay trees (row) and linked lists (col)
 
 ### HiGHS
 
-- **{{ link(path="/browser/?library=HiGHS", text="HPresolve.h") }}** - LP/MIP presolve engine
+- **[HPresolve.h](/coin-or-kb/browser/?library=HiGHS)** - LP/MIP presolve engine
 
 **HPresolve Class:**
 Reduces problem size and tightens bounds before solving.
@@ -62,6 +62,7 @@ Triplet format with linked list (column) and splay tree (row) for fast access:
 - runProbing(): Probing for integer variables
 - sparsify(): Reduce matrix density
 - detectParallelRowsAndCols(): Remove parallel constraints/variables
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/HiGHS/highs/presolve/HPresolve.h)
 
 ## References
 

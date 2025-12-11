@@ -38,4 +38,5 @@ Time: O(nnz) to compute activity bounds for all rows
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinPresolveForcing.hpp") }}** - Forcing and useless constraint detection
+- **[CoinPresolveForcing.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Forcing and useless constraint detection
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinPresolveForcing.hpp)

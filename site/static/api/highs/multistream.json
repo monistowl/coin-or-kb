@@ -1,0 +1,12 @@
+{
+  "name": "multistream",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/multistream.h",
+  "brief": "Output stream that writes to multiple destinations\n\nMultistream allows simultaneous output to multiple std::ostreams,\nused for writing log messages to both console and file.\n\nInherits from std::ostream with a custom streambuf that forwards\neach character to all registered output buffers.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "control.h for usage in solver output"
+  ]
+}

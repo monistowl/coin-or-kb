@@ -1,0 +1,13 @@
+{
+  "name": "DecompAlgoD",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompAlgoD.h",
+  "brief": "DECOMP algorithm variant for DIP column generation\n\nImplements DecompAlgoD, a specialized column generation algorithm\nderived from DecompAlgoPC. Used internally for generating cuts\nvia pricing without cutting plane iterations. Operates with modified\nparameters to focus on pricing-only mode.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompAlgoPC.h for price-and-cut base algorithm",
+    "DecompAlgo.h for base decomposition algorithm interface"
+  ]
+}

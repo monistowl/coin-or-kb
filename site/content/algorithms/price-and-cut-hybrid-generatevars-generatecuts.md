@@ -36,7 +36,7 @@ Column generation: O(#iterations × pricing_cost)
 
 ### Dip
 
-- **{{ link(path="/browser/?library=Dip", text="DecompAlgo.h") }}** - Base class for all DIP decomposition algorithms
+- **[DecompAlgo.h](/coin-or-kb/browser/?library=Dip)** - Base class for all DIP decomposition algorithms
 
 DecompAlgo is the algorithmic engine that orchestrates:
 - Master problem management (LP relaxation)
@@ -67,6 +67,7 @@ DecompAlgo is the algorithmic engine that orchestrates:
 - DecompAlgoPC: Price-and-Cut (Dantzig-Wolfe)
 - DecompAlgoC: Cutting plane only
 - DecompAlgoRC: Relax-and-Cut (Lagrangian)
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-3/Dip/Dip/src/DecompAlgo.h)
 
 ## References
 

@@ -1,3 +1,14 @@
+/**
+ * @file UtilGraphLib.h
+ * @brief TSPLIB/VRPLIB data file reader for graph problems
+ *
+ * Provides UtilGraphLib class for reading problem instances from
+ * TSPLIB and VRPLIB file formats. Stores vertex/edge counts,
+ * capacities, coordinates, and edge weights for routing and
+ * vehicle scheduling applications.
+ *
+ * @see UtilMacros.h for graph edge indexing utilities
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

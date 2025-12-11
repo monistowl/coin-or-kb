@@ -1,3 +1,28 @@
+/**
+ * @file basiclu_solve_sparse.h
+ * @brief Solve linear system with sparse right-hand side
+ *
+ * Solves B·x = b or B'·y = c exploiting sparsity in both RHS and solution.
+ * Uses Gilbert-Peierls two-phase algorithm for sparse triangular solves.
+ *
+ * **Gilbert-Peierls Method:**
+ * 1. Symbolic phase: DFS to find nonzero pattern of solution
+ * 2. Numeric phase: Solve only for nonzeros in topological order
+ *
+ * **Hybrid Strategy:**
+ * - First triangular solve always uses sparse method
+ * - Second solve uses sparse if nnz(intermediate) ≤ m × SPARSE_THRESHOLD
+ * - Otherwise falls back to sequential (dense) solve
+ *
+ * **Input/Output:**
+ * - Input: (irhs, xrhs) in compressed format, nzrhs nonzeros
+ * - Output: lhs[] scattered, ilhs[] indices, *p_nzlhs count
+ * - lhs must be initialized to zero; ilhs uninitialized
+ *
+ * @see basiclu_solve_dense.h for dense RHS
+ * @see Gilbert & Peierls, "Sparse Partial Pivoting in Time Proportional to
+ *      Arithmetic Operations", SIAM J. Sci. Stat. Comput., 1988
+ */
 lu_int basiclu_solve_sparse
 (
     lu_int istore[],

@@ -34,7 +34,8 @@ Parsing: O(file_size), token-based lexer
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinLpIO.hpp") }}** - LP file format reader/writer for linear programming problems
+- **[CoinLpIO.hpp](/coin-or-kb/browser/?library=CoinUtils)** - LP file format reader/writer for linear programming problems
 
 Reads/writes CPLEX LP format with Min/Max objective, constraints,
 bounds, and integer/binary variable declarations.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinLpIO.hpp)

@@ -36,4 +36,5 @@ Time: O(nnz(col_j) × nnz(row_i)) per substitution
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinPresolveSubst.hpp") }}** - Variable substitution from equality constraints
+- **[CoinPresolveSubst.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Variable substitution from equality constraints
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinPresolveSubst.hpp)

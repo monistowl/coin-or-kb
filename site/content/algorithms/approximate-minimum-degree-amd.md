@@ -36,12 +36,13 @@ Time: O(nnz(A)·α(n)) average case with aggressive absorption,
 
 ### SuiteSparse
 
-- **{{ link(path="/browser/?library=SuiteSparse", text="amd.h") }}** - Approximate Minimum Degree ordering for sparse matrix factorization
+- **[amd.h](/coin-or-kb/browser/?library=SuiteSparse)** - Approximate Minimum Degree ordering for sparse matrix factorization
 
 AMD computes a fill-reducing permutation P for sparse Cholesky or LU
 factorization. Given a symmetric matrix A (or A+A' if A is unsymmetric),
 AMD finds P such that P*A*P' has fewer nonzeros in its Cholesky factor
 than A would.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/SuiteSparse/AMD/Include/amd.h)
 
 ## References
 

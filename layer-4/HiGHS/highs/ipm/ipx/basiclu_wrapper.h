@@ -1,3 +1,18 @@
+/**
+ * @file basiclu_wrapper.h
+ * @brief C++ wrapper for BasicLU with LuUpdate interface
+ *
+ * Implements LuUpdate interface using BasicLU for sparse LU factorization
+ * with Forrest-Tomlin updates. Provides RAII memory management.
+ *
+ * **Features:**
+ * - Automatic memory reallocation (kReallocFactor = 1.5)
+ * - FTRAN/BTRAN for update preparation
+ * - Fill factor tracking for refactorization decisions
+ *
+ * @see lu_update.h for the interface
+ * @see basiclu.h for the underlying library
+ */
 #ifndef IPX_BASICLU_WRAPPER_H_
 #define IPX_BASICLU_WRAPPER_H_
 

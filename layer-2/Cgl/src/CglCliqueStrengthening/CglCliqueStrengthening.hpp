@@ -12,24 +12,33 @@
  * Contact: samuelbrito@ufop.edu.br and haroldo@ufop.edu.br
  * @date 03/27/2020
  *
- * Not a CglCutGenerator - this is preprocessing that modifies the model.
- * Strengthens set packing constraints sum x_i <= 1 by:
- * 1. Extending: Add variables that conflict with all in the clique
- * 2. Merging: Remove dominated cliques (subsets of stronger ones)
+ * @algorithm Greedy Clique Extension:
+ * Strengthen set packing constraints Σ xᵢ ≤ 1 by adding variables.
  *
- * Extension methods:
- * - 0: No extension
- * - 1: Random
- * - 2: Max degree
- * - 3: Max modified degree
- * - 4: Reduced cost (inversely proportional) - default
- * - 5: Reduced cost + modified degree
+ *   EXTENSION:
+ *     Given clique C = {x₁,...,xₖ} with Σ xᵢ ≤ 1
+ *     Find xⱼ ∉ C that conflicts with all xᵢ ∈ C
+ *     Add xⱼ to get stronger: Σ xᵢ + xⱼ ≤ 1
  *
- * Helper classes:
- * - CliqueRows: Storage for clique constraints
- * - CliqueRowStatus: NotDominated or Dominated
+ *   GREEDY SELECTION (by method):
+ *     1: Random
+ *     2: Max degree in conflict graph
+ *     3: Max modified degree (degree among unfixed variables)
+ *     4: Reduced cost priority (default) - favor cheap additions
+ *     5: Combined reduced cost + modified degree
  *
- * Uses CoinConflictGraph to find extension candidates.
+ *   MERGING (domination removal):
+ *     If clique A ⊂ B, then A is dominated by B
+ *     Remove dominated cliques (subsets of larger ones)
+ *
+ * @math
+ *   Original: x₁ + x₂ ≤ 1 (pairwise conflict)
+ *   Extended: x₁ + x₂ + x₃ ≤ 1 (if x₃ conflicts with both)
+ *   Stronger constraints = tighter LP relaxation
+ *
+ * @complexity
+ *   Extension: O(|C| × |neighbors|) per clique
+ *   Domination check: O(total_clique_elements²)
  *
  * @see CglBKClique for cut generation (vs preprocessing)
  * @see CoinCliqueSet for clique storage

@@ -1,3 +1,13 @@
+/**
+ * @file info.h
+ * @brief Formatted output utilities for solver statistics
+ *
+ * Provides stream output for Info structure and status code formatting.
+ * Output format is designed to be parseable by external tools (e.g., Julia).
+ *
+ * @see ipx_info.h for the Info structure definition
+ * @see ipx_status.h for status codes
+ */
 #ifndef IPX_INFO_CPP_H_
 #define IPX_INFO_CPP_H_
 

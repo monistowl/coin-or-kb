@@ -1,3 +1,20 @@
+/**
+ * @file basiclu_solve_dense.h
+ * @brief Solve linear system with dense right-hand side
+ *
+ * Solves B·x = b (trans='N') or B'·y = c (trans='T') given dense vectors.
+ * The solution overwrites or is written to lhs; rhs and lhs may alias.
+ *
+ * **Algorithm:**
+ * - Forward system: x = U⁻¹(L⁻¹(P·b)), then permute by Q
+ * - Transpose system: y = P'(L⁻ᵀ(U⁻ᵀ(Q'·c)))
+ *
+ * For sparse right-hand sides, prefer basiclu_solve_sparse() which
+ * exploits sparsity via Gilbert-Peierls symbolic analysis.
+ *
+ * @see basiclu_solve_sparse.h for sparse RHS (more efficient for sparse b)
+ * @see basiclu_solve_for_update.h for solves that prepare basis updates
+ */
 lu_int basiclu_solve_dense
 (
     lu_int istore[],

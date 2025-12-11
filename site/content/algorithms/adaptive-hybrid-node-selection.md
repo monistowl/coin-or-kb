@@ -44,9 +44,10 @@ Adaptive strategies typically 20-50% faster than fixed strategies.
 
 ### Cbc
 
-- **{{ link(path="/browser/?library=Cbc", text="CbcCompareDefault.hpp") }}** - Default adaptive node comparison strategy
+- **[CbcCompareDefault.hpp](/coin-or-kb/browser/?library=Cbc)** - Default adaptive node comparison strategy
 Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Cbc/src/CbcCompareDefault.hpp)
 
 ## References
 

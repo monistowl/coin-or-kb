@@ -1,0 +1,13 @@
+{
+  "name": "CglProbing",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CglProbing.h",
+  "brief": ".NET wrapper for CGL probing cut generator\n\nWraps ::CglProbing which generates cuts by probing: fixing\nbinary variables to 0/1 and detecting implications. Exposes\nconfiguration for pass limits, variable limits, and root node\nvs tree node behavior.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglCutGenerator.h for base cut generator wrapper",
+    "CbcCutGenerator.h for integrating with branch-and-cut"
+  ]
+}

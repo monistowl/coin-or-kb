@@ -1,3 +1,17 @@
+/**
+ * @file symbolic_invert.h
+ * @brief Symbolic nonzero pattern analysis of basis inverse
+ *
+ * Computes structural nonzero counts per row and column of B⁻¹
+ * without numerical factorization. Uses DFS-based reachability
+ * in the elimination tree to count fill-in patterns.
+ *
+ * Results indicate which rows/columns of the inverse are dense,
+ * guiding pivot selection in maxvolume algorithm.
+ *
+ * @see sparse_utils.h for DFS implementation
+ * @see maxvolume.h for basis improvement using these counts
+ */
 #ifndef IPX_SYMBOLIC_INVERT_H_
 #define IPX_SYMBOLIC_INVERT_H_
 

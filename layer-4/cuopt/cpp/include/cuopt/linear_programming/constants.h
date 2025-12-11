@@ -14,6 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @file constants.h
+ * @brief Constants and parameter names for cuOpt LP/MIP solver
+ *
+ * Defines compile-time configuration, parameter string constants,
+ * termination status codes, and constraint/variable type markers.
+ *
+ * **Type Configuration:**
+ * - CUOPT_INSTANTIATE_DOUBLE=1: Use double precision (default)
+ * - CUOPT_INSTANTIATE_INT32=1: Use 32-bit integers (default)
+ *
+ * **Parameter Categories:**
+ * - Tolerances: CUOPT_ABSOLUTE_DUAL_TOLERANCE, CUOPT_RELATIVE_PRIMAL_TOLERANCE, etc.
+ * - Limits: CUOPT_ITERATION_LIMIT, CUOPT_TIME_LIMIT
+ * - Methods: CUOPT_METHOD (CONCURRENT, PDLP, DUAL_SIMPLEX, BARRIER)
+ * - MIP: CUOPT_MIP_RELATIVE_GAP, CUOPT_MIP_INTEGRALITY_TOLERANCE
+ *
+ * **Termination Status:**
+ * - CUOPT_TERIMINATION_STATUS_OPTIMAL (1): Optimal solution found
+ * - CUOPT_TERIMINATION_STATUS_INFEASIBLE (2): Problem infeasible
+ * - CUOPT_TERIMINATION_STATUS_UNBOUNDED (3): Problem unbounded
+ *
+ * @see cuopt_c.h for C API using these constants
+ * @see pdlp/solver_settings.hpp for PDLP-specific settings
+ */
 
 #ifndef CUOPT_CONSTANTS_H
 #define CUOPT_CONSTANTS_H

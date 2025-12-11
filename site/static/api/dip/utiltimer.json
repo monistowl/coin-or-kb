@@ -1,0 +1,13 @@
+{
+  "name": "UtilTimer",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/UtilTimer.h",
+  "brief": "CPU and wall-clock timer for profiling\n\nProvides UtilTimer class that wraps CoinCpuTime and CoinGetTimeOfDay\nfor measuring both CPU time and real (wall-clock) time. Used for\nalgorithm profiling and time limit enforcement.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "UtilMacrosDecomp.h for function timing macros",
+    "DecompParam.h for time limit parameters"
+  ]
+}

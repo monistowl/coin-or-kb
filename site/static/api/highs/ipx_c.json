@@ -1,0 +1,13 @@
+{
+  "name": "ipx_c",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/ipx_c.h",
+  "brief": "C language interface to IPX interior point solver\n\nProvides a C-compatible API for the IPX solver, enabling use from C code\nor other languages via FFI.\n\n**Main Functions:**\n- ipx_load_model: Load LP in standard form\n- ipx_solve: Solve the loaded model\n- ipx_get_info: Get solve statistics\n- ipx_get_interior_solution: Extract primal/dual interior solution\n- ipx_get_basic_solution: Extract vertex (basic) solution after crossover",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "lp_solver.h for the C++ interface",
+    "ipx_status.h for return codes"
+  ]
+}

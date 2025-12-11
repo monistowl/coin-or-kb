@@ -1,0 +1,13 @@
+{
+  "name": "OsiCpxConfig",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/OsiCpx/OsiCpxConfig.h",
+  "brief": "Configuration header for OsiCpx (IBM CPLEX interface)\n\nProvides build configuration for the Osi adapter to IBM CPLEX solver.\nDefines OSICPXLIB_EXPORT for DLL import/export based on build environment\nand platform. Requires separate CPLEX installation and license.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiCpxSolverInterface.h for CPLEX adapter class",
+    "OsiConfig.h for main Osi configuration"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "ClpObjective",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/ClpObjective.h",
+  "brief": ".NET wrappers for Clp objective function classes\n\nProvides managed wrappers for ClpObjective base class and derived\nClpLinearObjective and ClpQuadraticObjective. Enables .NET code\nto query and work with linear and quadratic objective functions\nin LP/QP models.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinPackedMatrix.h for quadratic objective matrix access",
+    "OsiSolverInterface for model-level objective management"
+  ]
+}

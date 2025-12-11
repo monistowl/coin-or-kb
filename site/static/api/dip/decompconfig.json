@@ -1,0 +1,13 @@
+{
+  "name": "DecompConfig",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompConfig.h",
+  "brief": "Unified configuration header for DIP decomposition framework\n\nSelects between autotools-generated config.h and default configuration\nheaders based on HAVE_CONFIG_H. Provides a single include point for\nbuild-time configuration regardless of build system used.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_default.h for non-autotools internal config",
+    "config_dip_default.h for non-autotools public macros"
+  ]
+}

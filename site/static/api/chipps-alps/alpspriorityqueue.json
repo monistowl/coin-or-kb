@@ -1,0 +1,13 @@
+{
+  "name": "AlpsPriorityQueue",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsPriorityQueue.h",
+  "brief": "Template priority queue with dynamic comparison function\n\nProvides AlpsPriorityQueue template class that wraps std::vector with\nheap operations, supporting dynamic comparison function changes. Used\nfor node pool management where search strategy can change at runtime\n(best-first, depth-first, breadth-first, etc.).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsNodePool.h for node pool using this priority queue",
+    "AlpsSearchStrategyBase.h for comparison strategies"
+  ]
+}

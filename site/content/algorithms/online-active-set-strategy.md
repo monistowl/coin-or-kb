@@ -34,6 +34,7 @@ O(n^3) worst case per iteration, but typically much
 
 ### qpOASES
 
-- **{{ link(path="/browser/?library=qpOASES", text="QProblem.hpp") }}** - QP solver with general linear constraints
+- **[QProblem.hpp](/coin-or-kb/browser/?library=qpOASES)** - QP solver with general linear constraints
 
 Solves convex QPs with bounds and linear constraints:
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-1/qpOASES/include/qpOASES/QProblem.hpp)

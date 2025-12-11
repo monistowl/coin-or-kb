@@ -36,7 +36,8 @@ Time: O(3^(n/3)) worst case for all maximal cliques
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinBronKerbosch.hpp") }}** - Bron-Kerbosch Algorithm for maximal clique enumeration
+- **[CoinBronKerbosch.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Bron-Kerbosch Algorithm for maximal clique enumeration
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinBronKerbosch.hpp)
 
 ## References
 

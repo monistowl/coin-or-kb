@@ -1,0 +1,12 @@
+{
+  "name": "dvlparms",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/dvlparms.h",
+  "brief": "Developer/maintainer configuration parameters\n\nInternal ADOL-C library-wide definitions for tape format versioning,\nfile naming, and system configuration. These parameters control\ntape compatibility and file I/O behavior.\n\n**Key Definitions:**\n- ADOLC_NEW_TAPE_VERSION/SUBVERSION/PATCHLEVEL: Tape format version\n- TAPE_DIR: Directory for tape files\n- ADOLC_*_NAME: Tape file naming patterns\n- statSpace: Statistics array size\n\n@note Modifying these may break tape compatibility",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "usrparms.h for user-configurable parameters"
+  ]
+}

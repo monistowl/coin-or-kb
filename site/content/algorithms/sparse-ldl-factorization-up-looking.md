@@ -38,7 +38,7 @@ Time: O(nnz(L)²/n) average, O(nnz(L)·nnz(A)) worst case
 
 ### SuiteSparse
 
-- **{{ link(path="/browser/?library=SuiteSparse", text="ldl.h") }}** - Simple sparse LDL' factorization for symmetric matrices
+- **[ldl.h](/coin-or-kb/browser/?library=SuiteSparse)** - Simple sparse LDL' factorization for symmetric matrices
 
 LDL computes a sparse LDL' factorization of a symmetric matrix A:
   A = L * D * L'
@@ -51,6 +51,7 @@ The factorization is performed in two phases:
 
 Triangular solves (ldl_lsolve, ldl_dsolve, ldl_ltsolve) complete the
 solution of Ax = b.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/SuiteSparse/LDL/Include/ldl.h)
 
 ## References
 

@@ -1,0 +1,12 @@
+{
+  "name": "valuetape",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/valuetape/valuetape.h",
+  "brief": "Central ValueTape class orchestrating ADOL-C tape management\n\nComposes TapeInfos, GlobalTapeVarsCL, PersistantTapeInfos, and buffers\nfor checkpointing and external functions into a unified interface.\nProvides methods for tape creation, forward/reverse sweep initialization,\nTaylor coefficient management, and external function handling.\n\n**Key Operations:**\n- start_trace()/stop_trace(): Tape recording\n- init_for_sweep()/init_rev_sweep(): Sweep initialization\n- write_taylor()/get_taylor(): Taylor buffer management\n- next_loc()/free_loc(): Variable location allocation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "adolc.h for user-facing API built on ValueTape"
+  ]
+}

@@ -23,7 +23,7 @@ Same as underlying ClpSimplex methods:
 
 ### Clp
 
-- **{{ link(path="/browser/?library=Clp", text="Clp_C_Interface.h") }}** - C language interface to Clp solver
+- **[Clp_C_Interface.h](/coin-or-kb/browser/?library=Clp)** - C language interface to Clp solver
 
 Pure C API for embedding Clp in C programs or creating language bindings.
 Design follows OSL V3 conventions for familiarity.
@@ -45,3 +45,4 @@ Key function groups:
 Callback support: clp_callback typedef for user message handling.
 
 Thread safety: Each Clp_Simplex is independent; do not share across threads.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-1/Clp/src/Clp_C_Interface.h)

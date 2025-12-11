@@ -1,3 +1,14 @@
+/**
+ * @file OsiGlpkConfig.h
+ * @brief Configuration header for OsiGlpk (GNU GLPK interface)
+ *
+ * Provides build configuration for the Osi adapter to GNU Linear Programming
+ * Kit (GLPK). Defines OSIGLPKLIB_EXPORT for DLL import/export based on build
+ * environment and platform. GLPK is open source (GPL licensed).
+ *
+ * @see OsiGlpkSolverInterface.h for GLPK adapter class
+ * @see OsiConfig.h for main Osi configuration
+ */
 /* Copyright (C) 2011
  * All Rights Reserved.
  * This code is published under the Eclipse Public License.

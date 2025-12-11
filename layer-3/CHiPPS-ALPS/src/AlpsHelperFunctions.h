@@ -1,3 +1,15 @@
+/**
+ * @file AlpsHelperFunctions.h
+ * @brief Utility functors and helper functions for ALPS
+ *
+ * Provides TotalWorkload functor for computing workload estimates across
+ * node pools (used in load balancing), DeletePtrObject functor for cleanup,
+ * and AlpsSleep() for CPU-based delays. Used internally by node pool and
+ * load balancing mechanisms.
+ *
+ * @see AlpsNodePool.h for node pool management
+ * @see AlpsTreeNode.h for tree node base class
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_obj_solve_dense",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_obj_solve_dense.h",
+  "brief": "Solve linear system with dense RHS using BasicLU object\n\nObject-oriented wrapper for basiclu_solve_dense().\nSolves B\u00b7x = b or B'\u00b7y = c with dense vectors.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_solve_dense.h for algorithm details",
+    "basiclu_obj_solve_sparse.h for sparse RHS"
+  ]
+}

@@ -6,7 +6,34 @@
 // ----------------------------------------------------------------------------
 /**
  * @file hessian.hpp
- * @brief Core AD functionality: hessian
+ * @brief Dense Hessian driver using reverse-on-forward AD
+ *
+ * @algorithm Dense Hessian Computation:
+ * Computes H(x) = ∇²(w'F(x)) for scalar output or weighted sum.
+ *
+ *   REVERSE-ON-FORWARD:
+ *     1. Forward sweep order 1: v = ∇F(x)·d for direction d = e_j
+ *     2. Reverse sweep: ∇(w'v) = w'·H·e_j = j-th column of w'H
+ *     Repeat for j = 0,...,n-1 to build full Hessian
+ *
+ *   EXPLOITING SYMMETRY:
+ *     H is symmetric: H_{ij} = H_{ji}
+ *     Only compute upper (or lower) triangle: n(n+1)/2 entries
+ *     Still requires n forward+reverse sweep pairs
+ *
+ * @math
+ *   H_{ij} = ∂²(w'F)/∂x_i∂x_j = Σ_k w_k · ∂²F_k/∂x_i∂x_j
+ *
+ *   For scalar F: Hessian is ∇²F(x)
+ *   For vector F with weight w: Lagrangian Hessian Σ_i w_i·∇²F_i
+ *
+ * @complexity
+ * - Time: O(n·ops) for n forward+reverse sweep pairs
+ * - Memory: O(ops) for tape storage
+ * - Full matrix: n² values (n(n+1)/2 unique due to symmetry)
+ *
+ * @see sparse_hes.hpp for efficient sparse Hessians
+ * @see Ipopt uses sparse Hessians for large-scale NLP
  */
 
 /*

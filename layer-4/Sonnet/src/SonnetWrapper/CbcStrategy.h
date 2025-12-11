@@ -1,4 +1,16 @@
-// Copyright (C) Jan-Willem Goossens 
+/**
+ * @file CbcStrategy.h
+ * @brief .NET wrappers for Cbc solver configuration strategies
+ *
+ * Provides managed wrappers for CbcStrategy and derived classes
+ * (CbcStrategyNull, CbcStrategyDefault, CbcStrategyDefaultSubTree).
+ * Strategies configure cut generators, heuristics, preprocessing,
+ * and other branch-and-cut parameters as reusable bundles.
+ *
+ * @see CbcCutGenerator.h for individual cut generator control
+ * @see CbcModel for solver that uses these strategies
+ */
+// Copyright (C) Jan-Willem Goossens
 // All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 

@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_initialize",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_initialize.h",
+  "brief": "Initialize a BasicLU instance for a given matrix dimension\n\nSets up istore and xstore arrays for processing m\u00d7m matrices.\nMust be called once before any other basiclu_ function.\n\n**Memory Requirements:**\n- istore: BASICLU_SIZE_ISTORE_1 + BASICLU_SIZE_ISTORE_M \u00d7 m elements\n- xstore: BASICLU_SIZE_XSTORE_1 + BASICLU_SIZE_XSTORE_M \u00d7 m elements\n\nAfter initialization, xstore contains default parameters and statistics\ntracking is enabled. The dimension is fixed and stored in xstore[BASICLU_DIM].",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu.h for status codes and parameter indices",
+    "basiclu_factorize.h for the next step in the workflow"
+  ]
+}

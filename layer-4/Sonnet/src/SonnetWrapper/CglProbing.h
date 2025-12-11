@@ -1,4 +1,16 @@
-// Copyright (C) Jan-Willem Goossens 
+/**
+ * @file CglProbing.h
+ * @brief .NET wrapper for CGL probing cut generator
+ *
+ * Wraps ::CglProbing which generates cuts by probing: fixing
+ * binary variables to 0/1 and detecting implications. Exposes
+ * configuration for pass limits, variable limits, and root node
+ * vs tree node behavior.
+ *
+ * @see CglCutGenerator.h for base cut generator wrapper
+ * @see CbcCutGenerator.h for integrating with branch-and-cut
+ */
+// Copyright (C) Jan-Willem Goossens
 // All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 

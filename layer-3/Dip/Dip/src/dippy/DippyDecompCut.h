@@ -1,3 +1,14 @@
+/**
+ * @file DippyDecompCut.h
+ * @brief Python-compatible DecompCut for Dippy user-defined cuts
+ *
+ * Implements DippyDecompCut which stores cuts generated from Python
+ * callbacks using simple index/element arrays. Allows Python code
+ * to define cutting planes that integrate with DIP's cut management.
+ *
+ * @see DippyDecompApp.h for Python cut generation callback
+ * @see DecompCut.h for base cut interface
+ */
 #ifndef DIPPY_DECOMP_CUT_H
 #define DIPPY_DECOMP_CUT_H
 

@@ -3,7 +3,19 @@
   "library": "CppAD",
   "layer": "layer-1",
   "header": "include/cppad/core/for_hes_sparsity.hpp",
-  "brief": "Core AD functionality: for hes sparsity",
-  "algorithms": [],
-  "methods": []
+  "brief": "Forward mode Hessian sparsity pattern computation",
+  "algorithms": [
+    {
+      "name": "Forward Hessian Sparsity:\nAlternative to reverse mode for Hessian sparsity detection.\nUses forward-over-forward approach.\n\n  APPROACH:\n    Track second-order dependencies in forward direction\n    For each intermediate variable v:\n      - First-order: which inputs does v depend on?\n      - Second-order: which input pairs have nonzero cross-derivative?\n\n  PROPAGATION:\n    For v = u\u2081 \u00b7 u\u2082:\n      Linear part: inherits first-order from both\n      Quadratic part: cross-product of first-order sets",
+      "math": "Edge detection: if v depends linearly on u\u1d62 and u\u2c7c\n  then v\u00b2 depends quadratically on x\u1d62, x\u2c7c if they appear in u\u1d62, u\u2c7c\n\n  Pattern propagation through nonlinear ops (*, exp, sin, etc.)\n  generates second-order dependencies",
+      "complexity": "- Time: O(ops \u00d7 sparsity\u00b2) similar to reverse\n- Choice: forward may be better when tracking few directions",
+      "ref": [
+        "Griewank & Walther (2008), Section 6.3"
+      ]
+    }
+  ],
+  "methods": [],
+  "see": [
+    "rev_hes_sparsity.hpp for reverse mode alternative"
+  ]
 }

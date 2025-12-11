@@ -1,3 +1,20 @@
+/**
+ * @file ipx_c.h
+ * @brief C language interface to IPX interior point solver
+ *
+ * Provides a C-compatible API for the IPX solver, enabling use from C code
+ * or other languages via FFI.
+ *
+ * **Main Functions:**
+ * - ipx_load_model: Load LP in standard form
+ * - ipx_solve: Solve the loaded model
+ * - ipx_get_info: Get solve statistics
+ * - ipx_get_interior_solution: Extract primal/dual interior solution
+ * - ipx_get_basic_solution: Extract vertex (basic) solution after crossover
+ *
+ * @see lp_solver.h for the C++ interface
+ * @see ipx_status.h for return codes
+ */
 #ifndef IPX_C_H_
 #define IPX_C_H_
 

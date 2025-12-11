@@ -27,25 +27,39 @@
  * @file AlpsSearchStrategy.h
  * @brief Node and subtree selection strategies for ALPS tree search
  *
- * Defines comparison classes for selecting which node or subtree to explore next.
+ * @algorithm Search Tree Node Selection:
+ * Strategies for choosing which node to explore next in branch-and-bound.
+ *
+ *   BEST-FIRST (AlpsNodeSelectionBest):
+ *     Select node with best (lowest) bound
+ *     Minimizes dual gap, proves optimality fastest
+ *     Memory: O(nodes) - may keep many open nodes
+ *
+ *   DEPTH-FIRST (AlpsNodeSelectionDepth):
+ *     Select deepest node (LIFO stack)
+ *     Finds feasible solutions quickly
+ *     Memory: O(depth) - very memory efficient
+ *
+ *   BREADTH-FIRST (AlpsNodeSelectionBreadth):
+ *     Select shallowest node (FIFO queue)
+ *     Explores level by level
+ *     Memory: O(branching_factor^depth) - exponential
+ *
+ *   HYBRID:
+ *     Combines best-first with diving phases
+ *     Dives to find solutions, then switches to best-first
+ *
+ * @math
+ *   Best-first: priority = node.bound
+ *   Depth-first: priority = node.depth (higher = earlier)
+ *   Estimate: priority = estimated_solution_value
+ *
+ * @complexity
+ *   Selection: O(log n) with priority queue
+ *   Insertion: O(log n) with priority queue
+ *   Best-first typically explores fewer nodes but uses more memory
+ *
  * compare(x,y) returns true if y should be processed before x.
- *
- * **Subtree selection (AlpsTreeSelection):**
- * - AlpsTreeSelectionBest: Best quality subtree first
- * - AlpsTreeSelectionBreadth: Shallowest root first
- * - AlpsTreeSelectionDepth: Deepest root first
- * - AlpsTreeSelectionEstimate: Best estimated solution first
- *
- * **Node selection (AlpsNodeSelection):**
- * - AlpsNodeSelectionBest: Best bound first (minimize dual gap)
- * - AlpsNodeSelectionBreadth: BFS (shallowest first)
- * - AlpsNodeSelectionDepth: DFS (deepest first, finds solutions fast)
- * - AlpsNodeSelectionEstimate: Best estimated solution first
- * - AlpsNodeSelectionHybrid: Combination strategy
- *
- * **Hybrid strategy:**
- * Combines best-first selection with diving for solution finding.
- * selectNextNode() and createNewNodes() can be overridden.
  *
  * @see AlpsSearchStrategyBase for template base class
  * @see AlpsKnowledgeBroker::setNodeSelection() for configuration

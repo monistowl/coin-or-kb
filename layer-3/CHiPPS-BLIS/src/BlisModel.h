@@ -28,40 +28,40 @@
  * BlisModel is the main model class for the BLIS MILP solver.
  * Extends BcpsModel with LP solver, cut generators, heuristics, and branching.
  *
- * **Initialization workflow:**
- * 1. readInstance() or importModel(): Load problem data
- * 2. readParameters(): Configure solver behavior
- * 3. setupSelf(): Initialize LP solver, objects, strategies
- * 4. preprocess(): Apply presolve transformations
- * 5. createRoot(): Create initial search tree node
+ * @algorithm Branch-and-Cut for Mixed Integer Linear Programming:
+ * Solve MILP via LP relaxation, cutting planes, and enumeration.
  *
- * **LP Solver integration:**
- * - origLpSolver_: User-provided OsiSolverInterface
- * - presolvedLpSolver_: After presolve transformations
- * - lpSolver_: Active solver (presolved or original)
+ *   PROBLEM FORMULATION:
+ *     min  c'x
+ *     s.t. Ax ≤ b
+ *          x_j ∈ Z for j ∈ I (integer variables)
+ *          l ≤ x ≤ u (bounds)
  *
- * **Cut generation:**
- * - addCutGenerator(): Register CglCutGenerator or BlisConGenerator
- * - cutStrategy_: When to generate (Root, Auto, Periodic)
- * - constraintPool_: Store generated cuts
+ *   NODE PROCESSING:
+ *     1. Solve LP relaxation (continuous)
+ *     2. If LP infeasible → fathom node
+ *     3. If LP bound ≥ incumbent → prune by bound
+ *     4. If LP solution integer-feasible → update incumbent
+ *     5. Generate cutting planes to tighten LP
+ *     6. Select branching variable → create children
  *
- * **Branching:**
- * - branchStrategy_: BcpsBranchStrategy for variable selection
- * - objects_: BcpsObject array (integer variables, SOS, etc.)
- * - priority_: Branching priorities per object
+ *   CUT GENERATION:
+ *     Gomory, MIR, clique, flow cover, etc. via Cgl
+ *     Cuts improve LP bound without excluding integer solutions
  *
- * **Heuristics:**
- * - addHeuristic(): Register BlisHeuristic instances
- * - heurStrategy_: When to call (Root, Auto, Periodic, BeforeRoot)
+ *   BRANCHING:
+ *     Select fractional integer variable x_j
+ *     Create two children: x_j ≤ ⌊x*_j⌋ and x_j ≥ ⌈x*_j⌉
+ *     Strategies: most infeasible, strong branching, pseudo-cost
  *
- * **Solution management:**
- * - incumbent_: Best integer solution found
- * - cutoff_: Objective bound for pruning
- * - storeSolution(): Record new solutions
+ * @math
+ *   LP relaxation: z_LP ≤ z_IP (lower bound on optimal)
+ *   Gap: (incumbent - z_LP) / |incumbent|
+ *   Cutting plane: π'x ≤ π₀ valid for conv(MILP), violated by LP
  *
- * **Parallel support:**
- * - encode()/decodeToSelf(): Serialize model for MPI
- * - packSharedKnowledge(): Share pseudo-costs, cuts, variables
+ * @complexity
+ *   Worst case: O(2^n) nodes (NP-hard problem)
+ *   Practical: strong bounds + cuts prune most of tree
  *
  * @see BlisTreeNode for node processing using this model
  * @see BlisBranchStrategy* for branching strategies

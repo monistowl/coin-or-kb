@@ -1,0 +1,13 @@
+{
+  "name": "AlpsConfig",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsConfig.h",
+  "brief": "Unified configuration header for Alps library\n\nMain entry point for Alps configuration that routes to the appropriate\nsettings based on build environment. With autotools (HAVE_CONFIG_H),\nincludes generated config.h. Without autotools, uses config_default.h\nfor building or config_alps_default.h for clients. Sets up ALPSLIB_EXPORT\nfor proper DLL import/export on Windows and GCC visibility.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_default.h for non-autotools build configuration",
+    "config_alps_default.h for public version macros"
+  ]
+}

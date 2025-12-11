@@ -1,0 +1,14 @@
+{
+  "name": "linear_operator",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/linear_operator.h",
+  "brief": "Abstract interface for linear operators (preconditioners, matrices)\n\nDefines the LinearOperator base class used by iterative solvers.\nImplementations include diagonal preconditioner, normal matrix,\nand splitted normal matrix.\n\nThe Apply() method computes lhs = F(rhs) and optionally returns\nthe inner product dot(rhs, lhs) for efficiency.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "diagonal_precond.h for diagonal preconditioner",
+    "normal_matrix.h for A\u00b7W\u00b7A' operator",
+    "splitted_normal_matrix.h for basis-preconditioned normal matrix"
+  ]
+}

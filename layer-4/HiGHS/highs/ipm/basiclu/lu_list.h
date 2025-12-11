@@ -1,3 +1,30 @@
+/**
+ * @file lu_list.h
+ * @brief Doubly linked list implementation for Markowitz pivot selection
+ *
+ * Implements efficient doubly linked lists used to organize rows and columns
+ * by their nonzero counts during LU factorization. This enables O(1) access
+ * to the sparsest rows/columns for Markowitz pivot selection.
+ *
+ * **Data Structure:**
+ * - flink[0..nelem-1]: Forward links for elements
+ * - blink[0..nelem-1]: Backward links for elements
+ * - flink[nelem..nelem+nlist-1]: List heads (first element)
+ * - blink[nelem..nelem+nlist-1]: List tails (last element)
+ *
+ * **Operations (all O(1)):**
+ * - lu_list_init: Initialize all lists to empty
+ * - lu_list_add: Append element to end of list
+ * - lu_list_remove: Remove element from its list
+ * - lu_list_move: Move element between lists
+ * - lu_list_swap: Swap positions of two elements
+ *
+ * Elements not in any list have self-referencing links (flink[i] = blink[i] = i).
+ * The min_list optimization tracks the first non-empty list for faster scanning.
+ *
+ * @see Maros, "Computational Techniques of the Simplex Method", Section 5.5
+ * @see lu_internal.h for usage in struct lu
+ */
 #ifndef _LU_LIST_H
 #define _LU_LIST_H
 

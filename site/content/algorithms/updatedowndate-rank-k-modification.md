@@ -31,7 +31,7 @@ Factorization: O(nnz(L)²/m) with supernodal method
 
 ### SuiteSparse
 
-- **{{ link(path="/browser/?library=SuiteSparse", text="cholmod.h") }}** - Comprehensive sparse Cholesky factorization library
+- **[cholmod.h](/coin-or-kb/browser/?library=SuiteSparse)** - Comprehensive sparse Cholesky factorization library
 
 CHOLMOD provides high-performance sparse Cholesky factorization for
 symmetric positive definite (SPD) and symmetric positive semi-definite
@@ -51,6 +51,7 @@ Typical workflow:
 3. cholmod_factorize: Numerical Cholesky factorization
 4. cholmod_solve: Solve Ax = b using the factors
 5. cholmod_finish: Free workspace
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/SuiteSparse/CHOLMOD/Include/cholmod.h)
 
 ## References
 

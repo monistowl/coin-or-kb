@@ -43,6 +43,11 @@
       "has_algorithm": false
     },
     {
+      "name": "HApp",
+      "brief": "High-level simplex application interface\n\nEntry point for solving LPs via simplex method with automatic handling\nof scaling, unscaling, and solution refinement.\n\n**solveLpSimplex() Workflow:**\n1. Scale LP if beneficial (using Ruiz equilibration)\n2. Move LP to Ekk (simplex kernel)\n3. Setup basis (from HiGHS basis or logical start)\n4. Consider dualizing if rows >> cols\n5. Solve scaled LP, get scaled solution\n6. Unscale solution and check tolerances\n7. If needed, refine by re-solving unscaled LP with scaled NLA\n\n**Scaling Strategy:**\n- None: Solve original LP directly\n- Refine: Solve scaled, then refine unscaled\n- Direct: Ignore scaling, solve unscaled",
+      "has_algorithm": false
+    },
+    {
       "name": "HConst",
       "brief": "Constants, enums, and type definitions for HiGHS\n\nCentral definitions for HiGHS types and enumerations.\n\n**Numeric Constants:**\n- kHighsInf: Infinity value (std::numeric_limits<double>::infinity())\n- kHighsIInf: Integer infinity (max HighsInt)\n- kHighsTiny, kHighsMacheps, kHighsZero: Numerical tolerances\n\n**Core Enums:**\n- HighsModelStatus: Optimization result (kOptimal, kInfeasible, kUnbounded, etc.)\n- HighsVarType: Variable types (kContinuous, kInteger, kSemiContinuous, etc.)\n- HighsBasisStatus: Basis state (kLower, kBasic, kUpper, kZero, kNonbasic)\n- ObjSense: Minimize (+1) or Maximize (-1)\n\n**Format Enums:**\n- MatrixFormat: kColwise (CSC), kRowwise (CSR), kRowwisePartitioned\n- HessianFormat: kTriangular, kSquare\n\n**Status Enums:**\n- HighsPresolveStatus: Presolve outcomes\n- SolutionStatus: kNone, kInfeasible, kFeasible\n- BasisValidity: kInvalid, kValid\n\n**Callback Types:**\n- HighsCallbackType: Logging, interrupt, MIP solution events\n\n**Presolve Rules:**\n- PresolveRuleType: EmptyRow, SingletonRow, FixedCol, ForcingRow, etc.",
       "has_algorithm": false
@@ -158,6 +163,11 @@
       "has_algorithm": false
     },
     {
+      "name": "HighsBinarySemaphore",
+      "brief": "Binary semaphore with adaptive spinning before blocking\n\nSynchronization primitive for signaling between threads with spin-wait\noptimization before falling back to OS blocking.\n\n**State Values:**\n- count = 1: Released (signaled)\n- count = 0: Acquired (not signaled)\n- count = -1: Acquired and waiter is blocked on condvar\n\n**Acquire Strategy:**\n1. try_acquire(): Fast CAS attempt\n2. Spin with exponential backoff (up to kMicroSecsBeforeSleep)\n3. Fall back to condvar wait if spinning times out\n\nUsed for worker thread sleep/wake in WorkerBunk.",
+      "has_algorithm": false
+    },
+    {
       "name": "HighsCDouble",
       "brief": "Compensated double for quad precision arithmetic\n\nImplements quad precision using error-free transformations (Knuth/Rump).\n\n**Representation:**\n- hi: Primary double value\n- lo: Compensation term (error from previous operations)\n- Value = hi + lo with |lo| << |hi|\n\n**Error-Free Transformations:**\n- two_sum(x,y,a,b): Exact a+b=x+y with x=double(a+b), 6 FLOPs\n- two_product(x,y,a,b): Exact a*b=x+y with x=double(a*b), 17 FLOPs\n- split(x,y,a): Split 53-bit mantissa into two 26-bit parts\n\n**Supported Operations:**\n- +, -, *, / with double and HighsCDouble operands\n- Comparison operators (using double(hi+lo))\n- abs(), sqrt(), floor(), ceil(), round(), ldexp()\n- renormalize(): Restore |lo| << |hi| invariant\n\n**Usage:**\nCritical for accurate summation in LP (objective, constraint activity)\nand avoiding catastrophic cancellation in bound computations.",
       "has_algorithm": false
@@ -231,6 +241,11 @@
       "name": "HighsDomain",
       "brief": "Bound tracking, propagation, and conflict analysis for MIP\n\n**HighsDomain Class:**\nManages variable bounds during MIP branch-and-bound with:\n- col_lower_[], col_upper_[]: Current variable bounds\n- domchgstack_[]: Stack of bound changes (for backtracking)\n- domchgreason_[]: Reason for each bound change (branching, row, clique)\n\n**Bound Propagation:**\n- propagate(): Deduce implied bounds from constraints\n- activitymin_[]/activitymax_[]: Row activity bounds for propagation\n- markPropagate(): Queue row for propagation\n- ObjectivePropagation: Deduce bounds from objective cutoff\n\n**Reason Tracking:**\nEach bound change records its cause:\n- kBranching: B&B branching decision\n- kModelRowUpper/Lower: Implied by constraint\n- kCliqueTable: Clique conflict\n- kObjective: Objective bound\n- cut(pool,index): Cut from cut pool\n\n**Conflict Analysis (ConflictSet):**\nLearns from infeasibility:\n- conflictAnalysis(): Build conflict clause from infeasibility proof\n- reasonSideFrontier: Domain changes causing infeasibility\n- Generates learned conflicts for HighsConflictPool\n\n**Cut Pool Integration (CutpoolPropagation):**\n- Tracks activity of cuts for cut-based propagation\n- Updates when bounds change\n\n**Backtracking:**\n- backtrack(): Undo bound changes\n- backtrackToGlobal(): Reset to root node bounds\n- branchPos_[]: Positions of branching decisions in stack",
       "has_algorithm": true
+    },
+    {
+      "name": "HighsDomainChange",
+      "brief": "Variable bound modifications for MIP branch-and-bound\n\nRepresents changes to variable bounds during MIP solving.\n\n**HighsDomainChange:**\n- column: Variable index\n- boundtype: kLower or kUpper\n- boundval: New bound value\n- Comparable for storage in sorted containers\n\nUsed in branching, propagation, and conflict analysis to track\nand undo bound changes during tree search.\n\n**HighsSubstitution:**\nRecords variable substitution: staycol = scale * substcol + offset.\nUsed when presolve eliminates variables.",
+      "has_algorithm": false
     },
     {
       "name": "HighsDynamicRowMatrix",
@@ -378,6 +393,11 @@
       "has_algorithm": true
     },
     {
+      "name": "HighsMutex",
+      "brief": "Scheduler-aware mutex with work stealing during wait\n\nMutex that yields to task scheduler when spinning, allowing useful\nwork to continue while waiting for lock acquisition.\n\n**Lock Strategy (3 phases):**\n1. Fast path: Direct CAS for uncontended case\n2. Spin phase: Yield to scheduler, execute stolen tasks\n3. Wait phase: Register as next owner, block until notified\n\n**State Encoding:**\n- 0: Unlocked\n- 1: Locked, no waiters\n- (ownerId+1)<<1 | 1: Locked with waiting owner encoded\n\n**Integration with Task Scheduler:**\n- localDeque->yield(): Try stealing work during spin\n- localDeque->wait()/notify(): Sleep/wake coordination\n\nExported as highs::parallel::mutex for user code.",
+      "has_algorithm": false
+    },
+    {
       "name": "HighsNodeQueue",
       "brief": "Priority queue for branch-and-bound nodes",
       "has_algorithm": true
@@ -440,6 +460,11 @@
     {
       "name": "HighsRedcostFixing",
       "brief": "Reduced cost fixing and lurking bounds for MIP\n\nUses LP reduced costs to fix variable bounds based on cutoff.\n\n**Reduced Cost Fixing:**\nIf fixing variable j to its bound would increase objective beyond cutoff,\nthe opposite bound becomes valid. For minimization:\n- If reduced_cost[j] > 0 and x[j] = lb: fixing to ub proves lb valid\n- If reduced_cost[j] < 0 and x[j] = ub: fixing to lb proves ub valid\n\n**Lurking Bounds:**\nBounds that become valid at specific objective values:\n- lurkingColUpper[col]: (objective_threshold, bound_value) pairs\n- lurkingColLower[col]: Maps threshold to tighter bound\n- getLurkingBounds(): Extract bounds valid at current cutoff\n\n**Propagation Methods:**\n- propagateRootRedcost(): Apply fixings at root using stored costs\n- propagateRedCost(): Apply fixings at any node using LP reduced costs\n- addRootRedcost(): Store root LP reduced costs for later use\n\n**Integration:**\n- Called when incumbent improves (new cutoff enables more fixings)\n- Provides global domain tightening from LP dual information",
+      "has_algorithm": false
+    },
+    {
+      "name": "HighsSchedulerConstants",
+      "brief": "Tuning constants for work-stealing scheduler\n\nTiming thresholds controlling spin-wait vs blocking behavior.\n\n**Constants:**\n- kNumTryFac (16): Multiplier for steal attempts per worker\n- kMicroSecsBeforeSleep (5000): Spin duration before blocking\n- kMicroSecsBeforeGlobalSync (1000): Spin before global coordination\n\nThese values balance latency (fast response to new work) against\nCPU usage (avoiding wasteful spinning).",
       "has_algorithm": false
     },
     {
@@ -618,6 +643,101 @@
       "has_algorithm": true
     },
     {
+      "name": "basiclu",
+      "brief": "BasicLU - Sparse LU factorization library for simplex basis updates\n\nBasicLU provides sparse LU factorization with efficient rank-1 updates,\ndesigned for use in LP simplex solvers where basis matrices change by\none column per iteration.\n\n**Core Features:**\n- Markowitz pivot selection with threshold pivoting for numerical stability\n- Forrest-Tomlin updates for efficient basis changes without refactorization\n- Sparse triangular solves using Gilbert-Peierls symbolic analysis\n- Condition number estimation via LINPACK algorithm\n\n**Data Organization:**\n- istore[]: Integer workspace (permutations, indices, linked lists)\n- xstore[]: Double workspace (values, parameters, statistics)\n- Li/Lx, Ui/Ux: L and U factors in compressed sparse format\n- Wi/Wx: Working space for eta-file updates\n\n**Workflow:**\n1. basiclu_initialize() - Set up instance for dimension m\n2. basiclu_factorize() - Compute B = L\u00b7U with pivoting\n3. basiclu_solve_sparse() - Solve B\u00b7x = b or B'\u00b7y = c\n4. basiclu_solve_for_update() - Prepare for basis change\n5. basiclu_update() - Apply Forrest-Tomlin column replacement\n6. Repeat 3-5 until refactorization needed",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_factorize",
+      "brief": "Sparse LU factorization with Markowitz pivot selection\n\nComputes B = L\u00b7U factorization using columnwise threshold pivoting.\nPivots are chosen by Markowitz criterion (minimize fill-in) subject\nto numerical stability constraints.\n\n**Factorization Phases:**\n1. SINGLETONS: Extract initial triangular factors from singleton rows/cols\n2. SETUP_BUMP: Initialize the \"bump\" (non-triangular active submatrix)\n3. FACTORIZE_BUMP: Main elimination with Markowitz search\n4. BUILD_FACTORS: Construct final L, U in storage format\n\n**Pivot Selection:**\n- Markowitz cost: (row_count - 1) \u00d7 (col_count - 1)\n- Threshold: |pivot| \u2265 reltol \u00d7 max|column entry|\n- Search terminates after MAXN_SEARCH_PIVOT stable pivots found\n\n**Memory Management:**\nReturns BASICLU_REALLOCATE if arrays need growth; caller reallocates\nand calls again with c0ntinue=1 to resume.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_get_factors",
+      "brief": "Extract L and U factors in compressed column format\n\nAfter factorization, retrieves the permutation and factors:\n  B[rowperm, colperm] = L \u00d7 U\n\n**Output Format:**\n- L: Unit lower triangular in CSC, diagonal elements explicit (value 1.0)\n- U: Upper triangular in CSC, diagonal at end of each column\n- rowperm, colperm: Permutation vectors of length m\n\n**Singular Matrix Handling:**\nIf rank < m, columns colperm[rank..m-1] were linearly dependent and\nreplaced by unit columns with 1 in rows rowperm[rank..m-1].\n\n**Note:** Only valid after basiclu_factorize() completes and before\nany call to basiclu_update(). For solving systems, use the solve\nfunctions directly rather than extracting factors.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_initialize",
+      "brief": "Initialize a BasicLU instance for a given matrix dimension\n\nSets up istore and xstore arrays for processing m\u00d7m matrices.\nMust be called once before any other basiclu_ function.\n\n**Memory Requirements:**\n- istore: BASICLU_SIZE_ISTORE_1 + BASICLU_SIZE_ISTORE_M \u00d7 m elements\n- xstore: BASICLU_SIZE_XSTORE_1 + BASICLU_SIZE_XSTORE_M \u00d7 m elements\n\nAfter initialization, xstore contains default parameters and statistics\ntracking is enabled. The dimension is fixed and stored in xstore[BASICLU_DIM].",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_kernel",
+      "brief": "BasicLU implementation of LuFactorization interface\n\nImplements LuFactorization using the BasicLU library for sparse\nLU factorization with Markowitz pivoting.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_obj_factorize",
+      "brief": "Factorize matrix using BasicLU object interface\n\nObject-oriented wrapper for basiclu_factorize() with automatic\nmemory reallocation. If arrays need growth, reallocates using\nobj->realloc_factor multiplier and retries.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_obj_free",
+      "brief": "Free memory allocated for a BasicLU object\n\nReleases all dynamically allocated arrays in the BasicLU object.\nSafe to call on NULL or already-freed objects (no-op).\nAfter freeing, the object can be reinitialized with basiclu_obj_initialize().",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_obj_get_factors",
+      "brief": "Extract L and U factors from BasicLU object\n\nObject-oriented wrapper for basiclu_get_factors().\nExtracts permutations and factors in compressed column format.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_obj_initialize",
+      "brief": "Initialize a BasicLU object with automatic memory management\n\nAllocates and initializes all internal arrays (istore, xstore, Li, Lx,\nUi, Ux, Wi, Wx, lhs, ilhs) for processing m\u00d7m matrices.\n\nWhen m=0, creates a \"null object\" that cannot factorize but can be\npassed to basiclu_obj_free(). Use m=0 for deferred initialization.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_obj_solve_dense",
+      "brief": "Solve linear system with dense RHS using BasicLU object\n\nObject-oriented wrapper for basiclu_solve_dense().\nSolves B\u00b7x = b or B'\u00b7y = c with dense vectors.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_obj_solve_for_update",
+      "brief": "Solve and prepare for update using BasicLU object\n\nObject-oriented wrapper for basiclu_solve_for_update() with automatic\nmemory reallocation. The want_solution parameter controls whether the\nfull solution is computed (requires extra triangular solve).\n\nSolution stored in obj->lhs with pattern in obj->ilhs[0..obj->nzlhs-1].",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_obj_solve_sparse",
+      "brief": "Solve linear system with sparse RHS using BasicLU object\n\nObject-oriented wrapper for basiclu_solve_sparse().\nSolution stored in obj->lhs with pattern in obj->ilhs[0..obj->nzlhs-1].",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_obj_update",
+      "brief": "Apply Forrest-Tomlin update using BasicLU object\n\nObject-oriented wrapper for basiclu_update() with automatic\nmemory reallocation for Wi/Wx arrays if needed.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_object",
+      "brief": "Object-oriented wrapper for BasicLU with automatic memory management\n\nProvides a simplified interface that manages internal arrays automatically.\nThe basiclu_obj_* functions handle allocation, reallocation, and deallocation\nof the istore, xstore, Li, Lx, Ui, Ux, Wi, Wx arrays.\n\n**User-Accessible Members:**\n- xstore: Read/write parameters and statistics\n- lhs, ilhs, nzlhs: Solution after solve_sparse/solve_for_update (read-only)\n- realloc_factor: Growth multiplier for reallocations (default 1.5)\n\n**Usage Pattern:**\n```c\nstruct basiclu_object obj;\nbasiclu_obj_initialize(&obj, m);\nbasiclu_obj_factorize(&obj, Bbegin, Bend, Bi, Bx);\nbasiclu_obj_solve_sparse(&obj, nzrhs, irhs, xrhs, 'N');\n// Solution in obj.lhs[obj.ilhs[0..obj.nzlhs-1]]\nbasiclu_obj_free(&obj);\n```",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_solve_dense",
+      "brief": "Solve linear system with dense right-hand side\n\nSolves B\u00b7x = b (trans='N') or B'\u00b7y = c (trans='T') given dense vectors.\nThe solution overwrites or is written to lhs; rhs and lhs may alias.\n\n**Algorithm:**\n- Forward system: x = U\u207b\u00b9(L\u207b\u00b9(P\u00b7b)), then permute by Q\n- Transpose system: y = P'(L\u207b\u1d40(U\u207b\u1d40(Q'\u00b7c)))\n\nFor sparse right-hand sides, prefer basiclu_solve_sparse() which\nexploits sparsity via Gilbert-Peierls symbolic analysis.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_solve_for_update",
+      "brief": "Solve linear system while preparing for basis update\n\nPerforms FTRAN (forward transformation) or BTRAN (backward transformation)\nwhile storing intermediate results needed by basiclu_update().\n\n**For Basis Updates (simplex method):**\n1. FTRAN: Solve B\u00b7x = a for entering column a \u2192 stores spike column\n2. BTRAN: Solve B'\u00b7y = e\u2c7c for leaving variable j \u2192 stores pivot row\n3. Call basiclu_update() to perform Forrest-Tomlin update\n\n**Partial Solve Optimization:**\nIf solution not requested (p_nzlhs=NULL), only one triangular solve\nis performed, storing data for update. Full solution requires both.\n\n**Memory Growth:**\nMay return BASICLU_REALLOCATE if Li/Lx or Ui/Ux arrays need expansion\nto store update data. Reallocate and retry.",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_solve_sparse",
+      "brief": "Solve linear system with sparse right-hand side\n\nSolves B\u00b7x = b or B'\u00b7y = c exploiting sparsity in both RHS and solution.\nUses Gilbert-Peierls two-phase algorithm for sparse triangular solves.\n\n**Gilbert-Peierls Method:**\n1. Symbolic phase: DFS to find nonzero pattern of solution\n2. Numeric phase: Solve only for nonzeros in topological order\n\n**Hybrid Strategy:**\n- First triangular solve always uses sparse method\n- Second solve uses sparse if nnz(intermediate) \u2264 m \u00d7 SPARSE_THRESHOLD\n- Otherwise falls back to sequential (dense) solve\n\n**Input/Output:**\n- Input: (irhs, xrhs) in compressed format, nzrhs nonzeros\n- Output: lhs[] scattered, ilhs[] indices, *p_nzlhs count\n- lhs must be initialized to zero; ilhs uninitialized",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_update",
+      "brief": "Forrest-Tomlin update for basis column replacement\n\nUpdates the LU factorization when one column of B is replaced,\nwithout performing a full refactorization. This is the key operation\nfor efficient simplex iterations.\n\n**Forrest-Tomlin Update:**\nGiven B_new = B_old with column j replaced by a:\n1. The spike from FTRAN(a) creates fill in row j of U\n2. Apply row operations to eliminate the spike\n3. Store operations as \"eta vectors\" in Wi/Wx arrays\n4. Update permutations to maintain triangularity\n\n**Update Cost Tracking:**\n- xstore[BASICLU_UPDATE_COST] increases with each update\n- When > 1.0, refactorization improves performance\n- xstore[BASICLU_NFORREST] counts updates since last factorize\n- Maximum m Forrest-Tomlin updates before mandatory refactorization\n\n**Stability Monitoring:**\n- xtbl parameter enables pivot error estimation\n- xstore[BASICLU_MAX_ETA] tracks largest eta entry (> 1e6 suggests instability)\n- xstore[BASICLU_PIVOT_ERROR] measures numerical accuracy",
+      "has_algorithm": false
+    },
+    {
+      "name": "basiclu_wrapper",
+      "brief": "C++ wrapper for BasicLU with LuUpdate interface\n\nImplements LuUpdate interface using BasicLU for sparse LU factorization\nwith Forrest-Tomlin updates. Provides RAII memory management.\n\n**Features:**\n- Automatic memory reallocation (kReallocFactor = 1.5)\n- FTRAN/BTRAN for update preparation\n- Fill factor tracking for refactorization decisions",
+      "has_algorithm": false
+    },
+    {
       "name": "basis",
       "brief": "HiGHS QP basis management for active set method\n\nWorking set (active set) management for QP solver.\nTracks which constraints are currently active.",
       "has_algorithm": true
@@ -643,6 +763,11 @@
       "has_algorithm": true
     },
     {
+      "name": "control",
+      "brief": "Solver control: parameters, output, timing, and interruption for IPX\n\nThe Control class is the central coordinator for IPX solver state:\n\n**Parameter Access:**\n- Provides read-only access to all solver parameters\n- Parameters include tolerances, iteration limits, algorithm choices\n\n**Output Management:**\n- Debug() stream with configurable verbosity levels\n- Interval logging to avoid flooding output\n- Integration with HiGHS logging system\n\n**Timing:**\n- Total elapsed time via Elapsed()\n- Print interval control for periodic status updates\n\n**Interruption:**\n- InterruptCheck() for time limit enforcement\n- Designed for single-threaded access (no copy/move)\n\nAlso provides formatting utilities (Format, Scientific, Fixed, Textline)\nfor consistent log output formatting.",
+      "has_algorithm": false
+    },
+    {
       "name": "crashsolution",
       "brief": "HiGHS QP crash solution\n\nInitial solution heuristic for QP solver.\nGenerates starting point for active set method.",
       "has_algorithm": true
@@ -653,9 +778,54 @@
       "has_algorithm": true
     },
     {
+      "name": "cupdlp",
+      "brief": "Master include for CUPDLP (CUDA/CPU PDLP) solver\n\nAggregates all CUPDLP headers for the Primal-Dual Linear Programming\nsolver. CUPDLP implements the PDHG (Primal-Dual Hybrid Gradient)\nalgorithm for solving large-scale LPs using first-order methods.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cupdlp_cs",
+      "brief": "Sparse matrix utilities for CUPDLP\n\nCSparse-style routines for compressed sparse column (CSC) matrices.\nProvides triplet-to-CSC conversion, matrix allocation, transpose,\nand basic operations needed for PDHG matrix-vector products.\n\nBased on Tim Davis's CSparse library conventions.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cupdlp_defs",
+      "brief": "Core data structures for CUPDLP solver\n\nDefines all primary types for the PDHG algorithm:\n- CUPDLPproblem: LP data (A, b, c, bounds)\n- CUPDLPiterates: Primal/dual variables x, y and averages\n- CUPDLPstepsize: Step size parameters \u03c4, \u03c3 and linesearch state\n- CUPDLPresobj: Residuals, objectives, and termination status\n- CUPDLPscaling: Row/column scaling factors (Ruiz, L2, PC)\n- CUPDLPwork: Main solver workspace combining all components\n\nSupports both CPU and GPU (CUDA) execution via conditional compilation.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cupdlp_linalg",
+      "brief": "Linear algebra operations for PDHG algorithm\n\nCore numerical kernels for the PDHG iteration:\n- Ax(), ATy(): Sparse matrix-vector products (CSC/CSR)\n- Vector norms: twoNorm, infNorm, GenNorm\n- BLAS-1 operations: axpy, dot, scaleVector\n- Bound projections: projlb, projub, projPos, projNeg\n\nAll operations have both CPU and CUDA implementations, selected\nat compile time via CUPDLP_CPU define.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cupdlp_proj",
+      "brief": "Projection operations for PDHG algorithm\n\nImplements projection onto variable bounds and restart operations:\n- PDHG_Project_Bounds(): Projects x onto [l, u] box constraints\n- PDHG_Restart_Iterate(): Resets iterate to current or average point\n\nIn PDHG, primal projection is: x^{k+1} = proj_{[l,u]}(x\u0304)\nwhere x\u0304 is the gradient step result.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cupdlp_restart",
+      "brief": "Adaptive restart strategies for PDHG convergence acceleration\n\nImplements restart heuristics that periodically reset iterates to\naccelerate PDHG convergence from O(1/k) to O(1/k\u00b2).\n\n**Restart Strategies:**\n- PDHG_NO_RESTART: Continue without restart\n- PDHG_RESTART_TO_CURRENT: Reset to current iterate\n- PDHG_RESTART_TO_AVERAGE: Reset to running average\n\nDecision based on normalized duality gap improvement via merit function.",
+      "has_algorithm": false
+    },
+    {
+      "name": "cupdlp_scaling",
+      "brief": "Matrix scaling for PDHG numerical stability\n\nImplements equilibration scaling to improve PDHG convergence by\nbalancing row and column norms of the constraint matrix A.\n\n**Scaling Methods:**\n- Ruiz equilibration: Iterative row/column scaling to unit \u221e-norms\n- L2 scaling: Scale to unit 2-norms\n- PC (Pock-Chambolle) scaling: Scale based on degree\n\nScaling affects step size selection: \u03c4\u03c3\u2016A\u2016\u00b2 < 1 becomes easier\nto satisfy when \u2016A\u2016 is reduced through scaling.",
+      "has_algorithm": false
+    },
+    {
       "name": "cupdlp_solver",
       "brief": "PDHG (Primal-Dual Hybrid Gradient) Solver for Linear Programming\n\nImplements the PDLP (Primal-Dual Linear Programming) algorithm using\nfirst-order optimization methods instead of traditional simplex or IPM.",
       "has_algorithm": true
+    },
+    {
+      "name": "cupdlp_step",
+      "brief": "Step size selection and PDHG iterate updates\n\nCore PDHG iteration logic including step size computation and updates.\n\n**Step Size Methods:**\n- Constant: \u03c4 = \u03c3 = 1/\u2016A\u2016, computed via power method\n- Malitsky-Pock: Adaptive based on primal-dual interaction\n- Adaptive linesearch: Backtracking with growth/reduction\n\n**PDHG Update (each iteration):**\n1. Primal step: x\u0304 = x - \u03c4\u00b7(c - A'y)\n2. Projection: x\u207a = proj_{[l,u]}(x\u0304)\n3. Dual step: y\u207a = y + \u03c3\u00b7(b - A\u00b7(2x\u207a - x))",
+      "has_algorithm": false
+    },
+    {
+      "name": "cupdlp_utils",
+      "brief": "Utility functions for CUPDLP solver\n\nMemory management, allocation, and I/O utilities:\n- PDHG_Create/Destroy: Solver lifecycle management\n- Alloc/Clear functions: Per-component memory handling\n- Matrix format conversions: dense\u2194CSR\u2194CSC\n- Timing: my_clock(), getTimeStamp()\n- Output: vecPrint, writeJson, writeSol\n\nAlso handles user parameter parsing and solver configuration.",
+      "has_algorithm": false
     },
     {
       "name": "dantzigpricing",
@@ -676,6 +846,11 @@
       "name": "devexpricing",
       "brief": "HiGHS Devex pricing for QP active set method\n\nDevex pricing strategy: approximate steepest edge using\nreference framework with periodic weight updates.",
       "has_algorithm": true
+    },
+    {
+      "name": "diagonal_precond",
+      "brief": "Diagonal preconditioner for normal equations: diag(A\u00b7W\u00b7A')\n\nImplements a simple diagonal preconditioner for the KKT solver.\nComputes and applies M\u207b\u00b9 where M = diag(AI\u00b7W\u00b7AI').\n\nWhile less effective than basis preconditioning for ill-conditioned\nproblems, diagonal preconditioning is cheaper to compute and update.",
+      "has_algorithm": false
     },
     {
       "name": "eventhandler",
@@ -703,13 +878,33 @@
       "has_algorithm": true
     },
     {
+      "name": "glbopts",
+      "brief": "Global options, types, and macros for CUPDLP\n\nPlatform abstraction layer providing:\n- Type definitions: cupdlp_int, cupdlp_float, cupdlp_bool\n- Memory macros: CUPDLP_INIT_*, CUPDLP_FREE, CUPDLP_CALL\n- Vector operations: CUPDLP_COPY_VEC, CUPDLP_ZERO_VEC\n- Constants: EPS, INFINITY, OUR_DBL_MAX\n- Return codes: RETCODE_OK, RETCODE_FAILED\n\nSupports MATLAB MEX, Python, and standalone C compilation.\nCPU vs GPU memory operations selected via CUPDLP_CPU define.",
+      "has_algorithm": false
+    },
+    {
       "name": "gradient",
       "brief": "HiGHS QP gradient maintenance\n\nIncremental gradient updates for QP active set method.",
       "has_algorithm": true
     },
     {
+      "name": "guess_basis",
+      "brief": "Heuristic starting basis selection from IPM solution\n\nGuessBasis() constructs an initial basis from column weights,\npreferring columns with larger weights. Used by crossover to\nselect basic variables from the interior point solution.\n\nThe returned basis may be singular and requires repair before use.",
+      "has_algorithm": false
+    },
+    {
       "name": "highs_c_api",
       "brief": "Pure C interface to HiGHS solver\n\nProvides C-compatible API for LP/MIP/QP solving without C++ dependencies.\n\n**Quick-Start Functions:**\n- Highs_lpCall(): Solve LP in one call with solution returned\n- Highs_mipCall(): Solve MIP in one call\n- Highs_qpCall(): Solve QP in one call\n\n**Full API (via Highs pointer):**\n- Highs_create()/Highs_destroy(): Instance management\n- Highs_passLp()/Highs_passMip(): Pass model data\n- Highs_run(): Solve current model\n- Highs_getSolution()/Highs_getBasis(): Retrieve results\n- Highs_setOption*(): Configure solver options\n- Highs_getInfo*(): Query solver statistics\n\n**Status Constants:**\n- kHighsStatus{Ok,Warning,Error}: Return codes\n- kHighsModelStatus*: Optimal, Infeasible, Unbounded, etc.\n- kHighsBasisStatus*: Lower, Basic, Upper, Zero, Nonbasic\n\n**Type Constants:**\n- kHighsVarType*: Continuous, Integer, SemiContinuous, etc.\n- kHighsOptionType*: Bool, Int, Double, String\n- kHighsMatrixFormat*: Colwise, Rowwise",
+      "has_algorithm": false
+    },
+    {
+      "name": "indexed_vector",
+      "brief": "Sparse vector with explicit nonzero pattern tracking\n\nIndexedVector stores both dense element array and sparse pattern,\nenabling hyper-sparse operations when beneficial:\n\n**Sparse Mode (nnz \u2265 0):**\n- pattern[0..nnz-1] holds indices of nonzeros\n- Iteration uses indirect addressing over pattern\n\n**Dense Mode (nnz < 0):**\n- Pattern unknown or too dense\n- Iteration uses direct addressing over all elements\n\nThe for_each_nonzero() template selects mode automatically based\non kHypersparseThreshold. Used for FTRAN/BTRAN in basis updates.",
+      "has_algorithm": false
+    },
+    {
+      "name": "info",
+      "brief": "Formatted output utilities for solver statistics\n\nProvides stream output for Info structure and status code formatting.\nOutput format is designed to be parseable by external tools (e.g., Julia).",
       "has_algorithm": false
     },
     {
@@ -723,6 +918,36 @@
       "has_algorithm": true
     },
     {
+      "name": "ipx_c",
+      "brief": "C language interface to IPX interior point solver\n\nProvides a C-compatible API for the IPX solver, enabling use from C code\nor other languages via FFI.\n\n**Main Functions:**\n- ipx_load_model: Load LP in standard form\n- ipx_solve: Solve the loaded model\n- ipx_get_info: Get solve statistics\n- ipx_get_interior_solution: Extract primal/dual interior solution\n- ipx_get_basic_solution: Extract vertex (basic) solution after crossover",
+      "has_algorithm": false
+    },
+    {
+      "name": "ipx_config",
+      "brief": "IPX integer type configuration\n\nDefines ipxint as alias for HighsInt, enabling 32-bit or 64-bit\ninteger support based on build configuration.",
+      "has_algorithm": false
+    },
+    {
+      "name": "ipx_info",
+      "brief": "Solver statistics and output information structure\n\nC-compatible structure containing comprehensive solve statistics:\n\n**Status Fields:**\n- status: Overall solver status (IPX_STATUS_*)\n- status_ipm: Interior point phase status\n- status_crossover: Crossover phase status\n\n**Problem Dimensions:**\n- num_var, num_constr: User model dimensions\n- num_rows_solver, num_cols_solver: Internal solver dimensions\n\n**Solution Quality:**\n- abs/rel_presidual/dresidual: Feasibility measures\n- pobjval, dobjval: Primal/dual objectives\n- complementarity: Complementarity gap\n\n**Performance:**\n- iter: IPM iteration count\n- time_total, time_ipm*, time_crossover: Timing breakdown\n- time_kkt_*: KKT solver profiling",
+      "has_algorithm": false
+    },
+    {
+      "name": "ipx_internal",
+      "brief": "Internal types, constants, and default parameters for IPX solver\n\nDefines the core internal infrastructure for the IPX interior point solver:\n\n**Types:**\n- Int: Integer type alias (ipxint)\n- Vector: std::valarray<double> for dense vectors\n- Info: Statistics and status information structure\n- Parameters: Solver configuration with sensible defaults\n\n**Numerical Constants:**\n- kHypersparseThreshold (0.1): Sparsity threshold for hyper-sparse operations\n- kLuDependencyTol (1e-3): Absolute pivot tolerance for rank detection\n- kLuStabilityThreshold (1e-12): Maximum acceptable residual for LU stability\n- kFtDiagErrorTol (1e-8): Forrest-Tomlin diagonal error tolerance",
+      "has_algorithm": false
+    },
+    {
+      "name": "ipx_parameters",
+      "brief": "Solver parameters and configuration options\n\nC-compatible structure for all IPX solver parameters:\n\n**Control:** display, logfile, time_limit\n**Preprocessing:** dualize (-1=auto), scale\n**IPM:** ipm_maxiter, tolerances (feasibility, optimality, drop)\n**KKT Solver:** kkt_tol\n**Basis:** crash_basis, dependency_tol, volume_tol, rows_per_slice\n**LU:** lu_kernel, lu_pivottol\n**Crossover:** run_crossover, tolerances\n**Centring:** run_centring, max_centring_steps, ratio parameters",
+      "has_algorithm": false
+    },
+    {
+      "name": "ipx_status",
+      "brief": "Status codes, error flags, and basis status constants\n\n**Overall Status (info.status):**\n- IPX_STATUS_solved (1000): Optimal solution found\n- IPX_STATUS_stopped (1005): Stopped early (time/iter limit)\n- IPX_STATUS_no_model (1006): No model loaded\n\n**Phase Status (status_ipm, status_crossover):**\n- IPX_STATUS_optimal (1): Converged to optimality\n- IPX_STATUS_imprecise (2): Optimal but tolerances not met\n- IPX_STATUS_primal_infeas (3): Primal infeasible\n- IPX_STATUS_dual_infeas (4): Dual infeasible (unbounded)\n\n**Error Flags:**\n- IPX_ERROR_argument_null (102): NULL pointer argument\n- IPX_ERROR_cr_* (201-205): CR method errors\n- IPX_ERROR_basis_* (301-306): Basis factorization errors\n\n**Basis Status:**\n- IPX_basic (0), IPX_nonbasic_lb (-1), IPX_nonbasic_ub (-2)",
+      "has_algorithm": false
+    },
+    {
       "name": "iterate",
       "brief": "IPM Iterate Management with Variable States\n\nManages the primal-dual iterate for interior point methods, including\nvariable states (fixed/free/barrier) and convergence monitoring.",
       "has_algorithm": true
@@ -733,8 +958,53 @@
       "has_algorithm": true
     },
     {
+      "name": "kkt_solver_basis",
+      "brief": "KKT solver using CR method with basis preconditioning\n\nImplements the KKT system solver for IPX using conjugate residuals (CR)\nwith a basis matrix as preconditioner. This is the primary KKT solver\nfor the interior point iterations.\n\n**Preconditioning Strategy:**\nThe basis matrix B is used to precondition the normal equations,\nreducing condition number and accelerating CR convergence.\n\n**Degenerate Variable Handling:**\n- DropPrimal(): Variables near bounds are pivoted out or implied\n- DropDual(): Variables with near-zero duals are pivoted in or fixed\n- Controlled by ipm_drop_primal and ipm_drop_dual parameters\n\nThis technique removes near-degenerate variables from the optimization,\nimproving numerical stability in late IPM iterations.",
+      "has_algorithm": false
+    },
+    {
+      "name": "kkt_solver_diag",
+      "brief": "KKT solver using CR with diagonal preconditioning\n\nImplements the KKT system solver for IPX using conjugate residuals (CR)\nwith diagonal preconditioning of the normal equations.\n\n**Algorithm:**\nSolves the augmented system by reducing to normal equations\n(A\u00b7W\u00b7A')\u00b7y = b, then applies CR with preconditioner M = diag(A\u00b7W\u00b7A').\n\n**Regularization:**\nIf the (1,1) block is not positive definite, adds regularization\nto ensure convergence.\n\nSimpler than basis preconditioning but less effective for\nill-conditioned problems.",
+      "has_algorithm": false
+    },
+    {
+      "name": "linear_operator",
+      "brief": "Abstract interface for linear operators (preconditioners, matrices)\n\nDefines the LinearOperator base class used by iterative solvers.\nImplementations include diagonal preconditioner, normal matrix,\nand splitted normal matrix.\n\nThe Apply() method computes lhs = F(rhs) and optionally returns\nthe inner product dot(rhs, lhs) for efficiency.",
+      "has_algorithm": false
+    },
+    {
       "name": "lp_solver",
       "brief": "IPX interior point LP solver main class\n\nImplements primal-dual interior point method with crossover to basic solution.\n\n**Model Loading:**\n- LoadModel(): LP in standard form (c, lb, ub, A, rhs, constr_type)\n- LoadIPMStartingPoint(): User-provided initial point (x, xl, xu, y, zl, zu)\n\n**Solution Methods:**\n- Solve(): Run IPM + optional crossover to basis\n- CrossoverFromStartingPoint(): Convert complementary point to basis\n\n**Solution Access:**\n- GetInfo(): Solver status and statistics\n- GetInteriorSolution(): IPM iterate (primal, slack, dual)\n- GetBasicSolution(): Basic solution with basis status (vbasis, cbasis)\n\n**IPM Pipeline (InteriorPointSolve):**\n1. RunInitialIPM(): Initial centering iterations\n2. BuildStartingBasis(): Construct basis from weighted columns\n3. RunMainIPM(): Main IPM iterations with basis preconditioning\n4. RunCrossover(): Push to basis via dual/primal pushes\n\n**Key Components:**\n- control_: Parameters and logging\n- model_: Preprocessed LP data\n- iterate_: Current IPM point (x, y, z, slacks)\n- basis_: Basis for preconditioning and crossover",
+      "has_algorithm": false
+    },
+    {
+      "name": "lu_def",
+      "brief": "Basic definitions, macros, and inline utilities for BasicLU\n\nProvides foundational types and helper functions used throughout BasicLU:\n- Standard library includes (stdlib, math, stdint, assert)\n- MIN/MAX macros for value comparisons\n- Inline swap functions for lu_int and double arrays\n- Task enumeration for factorization phases\n- BASICLU_HASH constant for instance validation",
+      "has_algorithm": false
+    },
+    {
+      "name": "lu_factorization",
+      "brief": "Abstract interface for LU factorization in IPX\n\nDefines the interface for sparse LU factorization implementations\nused by the basis preconditioning in IPX's interior point solver.\n\n**Factorization:**\n  B[rowperm, colperm] = (L + I) \u00b7 U\n\nWhere L is strict lower triangular and U is upper triangular.\nSingular columns are replaced with unit vectors.\n\n**Features:**\n- Threshold pivoting with configurable tolerance\n- Strict absolute pivot tolerance option for rank detection\n- Stability metric for assessing numerical quality\n- Returns dependent columns for basis repair\n\nImplementations include BasicLU kernel (basiclu_kernel.h).",
+      "has_algorithm": false
+    },
+    {
+      "name": "lu_file",
+      "brief": "Sparse matrix file management for dynamic row/column storage\n\nManages dynamic sparse storage where rows/columns can grow during\nfactorization. Uses a file-based metaphor where each \"line\" (row or column)\noccupies a contiguous range in the index/value arrays.\n\n**Storage Layout:**\n- begin[i], end[i]: Range of entries for line i\n- next[i], prev[i]: Doubly linked list for memory management\n- index[], value[]: Actual sparse data\n\n**Operations:**\n- lu_file_empty: Initialize empty file structure\n- lu_file_reappend: Move line to end with extra space for growth\n- lu_file_compress: Garbage collection to reclaim fragmented space\n- lu_file_diff: Compute storage difference between row/column views\n\nThe reappend operation adds padding (xstore[BASICLU_PAD] + nz \u00d7 stretch)\nto reduce frequency of moves as fill-in occurs during elimination.",
+      "has_algorithm": false
+    },
+    {
+      "name": "lu_internal",
+      "brief": "Internal data structure and function prototypes for BasicLU\n\nDefines struct lu, the core internal data structure that provides access\nto all factorization state. The struct contains:\n\n**User Parameters:**\n- Memory sizes (Lmem, Umem, Wmem)\n- Pivot tolerances (abstol, reltol, droptol)\n- Search parameters (maxsearch, nzbias, search_rows)\n\n**Statistics:**\n- Nonzero counts (Lnz, Unz, Rnz)\n- Pivot extremes (min_pivot, max_pivot)\n- Timing and flop counts\n- Condition estimates (condestL, condestU)\n\n**Factorization State:**\n- Permutation arrays (p, pinv, qinv, pmap, qmap)\n- L factor: Lbegin, Lindex, Lvalue (by rows)\n- U factor: Ubegin, Uindex, Uvalue (by columns)\n- Eta vectors: Rbegin, eta_row in W arrays\n\n**Internal Functions:**\n- lu_load/lu_save: Transfer between istore/xstore and struct lu\n- lu_markowitz: Pivot selection with fill-in minimization\n- lu_pivot: Elimination step with rank-1 update\n- lu_singletons: Initial triangular factor extraction\n- lu_dfs: Depth-first search for symbolic analysis\n- lu_condest: Condition number estimation",
+      "has_algorithm": false
+    },
+    {
+      "name": "lu_list",
+      "brief": "Doubly linked list implementation for Markowitz pivot selection\n\nImplements efficient doubly linked lists used to organize rows and columns\nby their nonzero counts during LU factorization. This enables O(1) access\nto the sparsest rows/columns for Markowitz pivot selection.\n\n**Data Structure:**\n- flink[0..nelem-1]: Forward links for elements\n- blink[0..nelem-1]: Backward links for elements\n- flink[nelem..nelem+nlist-1]: List heads (first element)\n- blink[nelem..nelem+nlist-1]: List tails (last element)\n\n**Operations (all O(1)):**\n- lu_list_init: Initialize all lists to empty\n- lu_list_add: Append element to end of list\n- lu_list_remove: Remove element from its list\n- lu_list_move: Move element between lists\n- lu_list_swap: Swap positions of two elements\n\nElements not in any list have self-referencing links (flink[i] = blink[i] = i).\nThe min_list optimization tracks the first non-empty list for faster scanning.",
+      "has_algorithm": false
+    },
+    {
+      "name": "lu_update",
+      "brief": "Abstract interface for LU factorization with rank-1 updates\n\nExtends LuFactorization to support efficient Forrest-Tomlin updates\nfor changing one column at a time (as in simplex iterations).\n\n**Workflow:**\n1. Factorize(): Compute B = L\u00b7U\n2. FtranForUpdate(): Solve B\u00b7x = b (incoming column)\n3. BtranForUpdate(): Solve B'\u00b7y = e_j (outgoing column)\n4. Update(): Apply Forrest-Tomlin update B_new = B with col j \u2190 b\n\n**Return Codes:**\n- Factorize: 0=OK, 1=unstable, 2=singular, 3=both\n- Update: <0 singular, >0 unstable, 0=OK",
       "has_algorithm": false
     },
     {
@@ -748,13 +1018,38 @@
       "has_algorithm": false
     },
     {
+      "name": "maxvolume",
+      "brief": "Maximum volume basis selection algorithm\n\nImplements the maxvolume algorithm for improving the basis matrix\ncondition number by maximizing |det(B)|. Used during IPM to maintain\na well-conditioned preconditioner.\n\n**Algorithms:**\n- RunSequential(): Full tableau scan with greedy pivot selection\n- RunHeuristic(): Sliced computation for large problems\n\n**Statistics:**\n- updates(): Basis changes performed\n- skipped(): Columns computed but not swapped\n- volinc(): log\u2082(|det(B_new)|/|det(B_old)|)",
+      "has_algorithm": false
+    },
+    {
       "name": "model",
       "brief": "HiGHS QP solver component\n\nPart of HiGHS quadratic programming active set solver.",
       "has_algorithm": false
     },
     {
+      "name": "model",
+      "brief": "LP model transformation from user form to computational form\n\nTransforms user LP model to the standard form used internally by IPX:\n\n**User Form:**\n  minimize   obj'x\n  subject to A\u00b7x {=,<,>} rhs\n             lb_user \u2264 x \u2264 ub_user\n\n**Computational Form:**\n  minimize   c'x\n  subject to AI\u00b7x = b         (dual: y)\n             x - xl = lb      (dual: zl \u2265 0)\n             x + xu = ub      (dual: zu \u2265 0)\n\n**Preprocessing Steps:**\n1. Scaling: Equilibration of A, variable flipping for infinite lb\n2. Dualization: Optional based on problem structure (Flippo test)\n3. Slack addition: Inequalities become equalities with slacks\n\nThe Model stores both CSC (AI_) and CSR (AIt_) representations\nfor efficient access patterns in different solver phases.",
+      "has_algorithm": false
+    },
+    {
+      "name": "multistream",
+      "brief": "Output stream that writes to multiple destinations\n\nMultistream allows simultaneous output to multiple std::ostreams,\nused for writing log messages to both console and file.\n\nInherits from std::ostream with a custom streambuf that forwards\neach character to all registered output buffers.",
+      "has_algorithm": false
+    },
+    {
+      "name": "normal_matrix",
+      "brief": "Normal equations matrix operator A\u00b7W\u00b7A'\n\nLinearOperator implementation for the normal equations matrix\nused in IPM. Computes y = (A\u00b7W\u00b7A')\u00b7x efficiently using sparse\nmatrix-vector products.\n\nThe weight matrix W is diagonal and set via Prepare(). If W is NULL,\nuses W = [I; 0] (identity for structural, zero for slack columns).",
+      "has_algorithm": false
+    },
+    {
       "name": "perturbation",
       "brief": "HiGHS QP perturbation\n\nPerturbation for handling degeneracy in QP.\nAdds small shifts to ensure unique optima.",
+      "has_algorithm": false
+    },
+    {
+      "name": "power_method",
+      "brief": "Power iteration for maximum eigenvalue estimation\n\nTemplate function implementing power method to estimate \u03bb_max of\na symmetric positive semi-definite linear operator.\n\n**Algorithm:**\n1. Start with v = [1, 1/2, 1/3, ...] normalized\n2. Iterate: v \u2190 f(v)/\u2016f(v)\u2016, \u03bb \u2190 \u2016f(v)\u2016\n3. Converge when |\u03bb_new - \u03bb_old| \u2264 10\u207b\u00b3\u00b7\u03bb\n\nMaximum 100 iterations. Returns \u03bb_max estimate and eigenvector in v.\nUsed for condition number estimation in maxvolume algorithm.",
       "has_algorithm": false
     },
     {
@@ -813,6 +1108,26 @@
       "has_algorithm": false
     },
     {
+      "name": "sparse_matrix",
+      "brief": "Compressed Sparse Column (CSC) matrix with incremental construction\n\nSparse matrix storage with features for efficient IPM operations:\n\n**CSC Format:**\n- colptr[j]: Start index of column j in rowidx/values\n- rowidx[]: Row indices (can be sorted via SortIndices())\n- values[]: Nonzero values\n\n**Incremental Construction:**\n- Queue mechanism for building columns incrementally\n- push_back() adds to queue, commit() finalizes column\n- Efficient for constructing matrices column-by-column\n\n**Matrix Operations:**\n- ScatterColumn: Scatter column j to dense vector\n- MultiplyAdd: y += \u03b1\u00b7A\u00b7x or y += \u03b1\u00b7A'\u00b7x\n- AddNormalProduct: Compute A\u00b7D\u00b7A' product for KKT system",
+      "has_algorithm": false
+    },
+    {
+      "name": "sparse_utils",
+      "brief": "Graph algorithms for sparse matrix operations\n\nProvides DFS traversal and augmenting path algorithms adapted from\nTim Davis's CSparse library. Used for symbolic analysis in sparse\nfactorization and maximum matching in basis construction.\n\n**Algorithms:**\n- DepthFirstSearch(): Iterative DFS with marking for reachability\n- AugmentingPath(): Extends row/column matching via alternating paths",
+      "has_algorithm": false
+    },
+    {
+      "name": "splitted_normal_matrix",
+      "brief": "Basis-preconditioned normal matrix operator\n\nLinearOperator for the matrix C = B\u207b\u00b9\u00b7A\u00b7A'\u00b7B\u207b\u1d40 = I + B\u207b\u00b9\u00b7N\u00b7N'\u00b7B\u207b\u1d40,\nwhere B is the basis matrix and N the nonbasic columns. This\nformulation provides better conditioning than the standard normal\nequations A\u00b7W\u00b7A'.\n\nThe Apply() method computes y = C\u00b7x via:\n1. Solve B'\u00b7w = x (triangular with U')\n2. Compute z = N'\u00b7w (sparse matvec)\n3. Compute v = N\u00b7z (sparse matvec)\n4. Solve B\u00b7y = v (triangular with L,U)\n5. Return y + x",
+      "has_algorithm": false
+    },
+    {
+      "name": "starting_basis",
+      "brief": "Initial basis construction from interior point iterates\n\nConstructs a starting basis for crossover using interior point scaling\nfactors as column weights. Handles special cases:\n- Free variables (lb=-\u221e, ub=+\u221e): BASIC_FREE or NONBASIC_FIXED\n- Fixed slacks (lb=ub): BASIC_FREE or NONBASIC_FIXED\n- Fixed structural: NONBASIC_FIXED\n- Others: BASIC or NONBASIC\n\nLinear dependencies among free variables or equality constraints\nare resolved by fixing dependent variables at zero.",
+      "has_algorithm": false
+    },
+    {
       "name": "statistics",
       "brief": "HiGHS QP solver component\n\nPart of HiGHS quadratic programming active set solver.",
       "has_algorithm": false
@@ -830,6 +1145,21 @@
     {
       "name": "stringutil",
       "brief": "String manipulation utilities for file parsing\n\nHelper functions for trimming, case conversion, and tokenization.\n\n**Case Conversion:**\n- tolower(): Convert string to lowercase in-place\n- toupper(): Convert string to uppercase in-place\n\n**Trimming:**\n- ltrim(): Remove leading whitespace\n- rtrim(): Remove trailing whitespace\n- trim(): Remove leading and trailing whitespace\n- default_non_chars: Standard whitespace characters\n\n**Predicates:**\n- is_empty(): Check if string contains only whitespace\n- is_end(): Check if position is at end of content\n\n**Tokenization:**\n- first_word(): Extract first word from position\n- first_word_end(): Find end position of first word\n\n**Usage:**\nUsed by MPS/LP parsers for section and field extraction.",
+      "has_algorithm": false
+    },
+    {
+      "name": "symbolic_invert",
+      "brief": "Symbolic nonzero pattern analysis of basis inverse\n\nComputes structural nonzero counts per row and column of B\u207b\u00b9\nwithout numerical factorization. Uses DFS-based reachability\nin the elimination tree to count fill-in patterns.\n\nResults indicate which rows/columns of the inverse are dense,\nguiding pivot selection in maxvolume algorithm.",
+      "has_algorithm": false
+    },
+    {
+      "name": "timer",
+      "brief": "High-resolution wall-clock timer\n\nSimple timer class using std::chrono::high_resolution_clock\nfor measuring elapsed time in seconds. Used throughout IPX\nto profile solver phases and report timing statistics.",
+      "has_algorithm": false
+    },
+    {
+      "name": "utils",
+      "brief": "Vector utilities and permutation operations\n\nCore numerical utilities for IPX:\n- Vector norms: Onenorm(), Twonorm(), Infnorm()\n- Dot product and element search\n- Permutation operations: Permute(), PermuteBack(), InversePerm()\n- Sorting permutations: Sortperm()\n- Validity checking: AllFinite()",
       "has_algorithm": false
     },
     {

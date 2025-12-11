@@ -1,3 +1,13 @@
+/**
+ * @file basiclu_kernel.h
+ * @brief BasicLU implementation of LuFactorization interface
+ *
+ * Implements LuFactorization using the BasicLU library for sparse
+ * LU factorization with Markowitz pivoting.
+ *
+ * @see lu_factorization.h for the interface
+ * @see basiclu.h for the underlying library
+ */
 #ifndef IPX_BASICLU_KERNEL_H_
 #define IPX_BASICLU_KERNEL_H_
 

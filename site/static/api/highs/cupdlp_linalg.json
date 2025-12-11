@@ -1,0 +1,13 @@
+{
+  "name": "cupdlp_linalg",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/pdlp/cupdlp/cupdlp_linalg.h",
+  "brief": "Linear algebra operations for PDHG algorithm\n\nCore numerical kernels for the PDHG iteration:\n- Ax(), ATy(): Sparse matrix-vector products (CSC/CSR)\n- Vector norms: twoNorm, infNorm, GenNorm\n- BLAS-1 operations: axpy, dot, scaleVector\n- Bound projections: projlb, projub, projPos, projNeg\n\nAll operations have both CPU and CUDA implementations, selected\nat compile time via CUPDLP_CPU define.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cupdlp_step.h for PDHG iteration using these operations",
+    "cupdlp_defs.h for vector/matrix types"
+  ]
+}

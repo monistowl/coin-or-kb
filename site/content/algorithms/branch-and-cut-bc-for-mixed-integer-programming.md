@@ -8,22 +8,6 @@ category = "Branch and Bound"
 implementation_count = 1
 +++
 
-## Why This Matters
-
-Branch-and-cut is the algorithm behind modern MIP solvers like Cbc, CPLEX, and Gurobi. It combines three powerful ideas:
-
-1. **Branch-and-bound**: Divide the search space systematically
-2. **Cutting planes**: Tighten the LP relaxation to reduce the gap
-3. **Primal heuristics**: Find good feasible solutions quickly to enable pruning
-
-**Why cuts matter so much**: Without cuts, the LP relaxation may be very weak — meaning a 10% gap between the LP bound and the best integer solution. With good cuts, this gap shrinks dramatically, allowing the solver to prune most of the tree.
-
-**The interplay is subtle**: Cuts improve bounds but slow down LP solves. Branching explores the tree but may miss easy improvements. Heuristics find solutions but may not be optimal. Getting the balance right is what makes a solver fast.
-
-**Key insight**: Cbc doesn't implement one fixed algorithm — it implements a *framework* where you can plug in different branching strategies, cut generators, heuristics, and node selection rules. Understanding the framework is more important than memorizing any single algorithm.
-
----
-
 1. Solve LP relaxation at root node
   2. While open nodes remain:
      a. Select node from priority queue (best-first or depth-first)
@@ -46,7 +30,7 @@ Worst-case O(2^n) where n = number of integer variables.
 
 ### Cbc
 
-- **{{ link(path="/browser/?library=Cbc", text="CbcModel.hpp") }}** - Main branch-and-cut MIP solver class
+- **[CbcModel.hpp](/coin-or-kb/browser/?library=Cbc)** - Main branch-and-cut MIP solver class
 Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
 
@@ -61,6 +45,7 @@ Architecture:
 - CbcCutGenerator: Wrapper for CGL cut generators
 - CbcHeuristic: Primal heuristics for finding solutions
 - CbcBranchingObject: Branching decisions
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Cbc/src/CbcModel.hpp)
 
 ## References
 

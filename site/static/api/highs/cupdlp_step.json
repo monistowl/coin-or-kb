@@ -1,0 +1,13 @@
+{
+  "name": "cupdlp_step",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/pdlp/cupdlp/cupdlp_step.h",
+  "brief": "Step size selection and PDHG iterate updates\n\nCore PDHG iteration logic including step size computation and updates.\n\n**Step Size Methods:**\n- Constant: \u03c4 = \u03c3 = 1/\u2016A\u2016, computed via power method\n- Malitsky-Pock: Adaptive based on primal-dual interaction\n- Adaptive linesearch: Backtracking with growth/reduction\n\n**PDHG Update (each iteration):**\n1. Primal step: x\u0304 = x - \u03c4\u00b7(c - A'y)\n2. Projection: x\u207a = proj_{[l,u]}(x\u0304)\n3. Dual step: y\u207a = y + \u03c3\u00b7(b - A\u00b7(2x\u207a - x))",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cupdlp_solver.h for main iteration loop",
+    "cupdlp_linalg.h for matrix-vector products"
+  ]
+}

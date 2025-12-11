@@ -1,0 +1,12 @@
+{
+  "name": "usrparms",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/internal/usrparms.h",
+  "brief": "User-configurable ADOL-C performance parameters\n\nDefines buffer sizes and constants that can be tuned for specific\napplications. Larger buffers reduce file I/O but increase memory use.\n\n**Buffer Sizes:**\n- OBUFSIZE: Operation tape buffer (default 512KB)\n- LBUFSIZE: Location tape buffer (default 512KB)\n- VBUFSIZE: Value tape buffer (default 512KB)\n- TBUFSIZE: Taylor coefficient buffer (default 512KB)\n- TBUFNUM: Number of Taylor buffers (default 32)\n\n**Other Settings:**\n- fint/fdouble: Fortran interoperability types\n- ADOLC_EPS: Zero tolerance for numerical tests\n- ADOLC_CHECKUP/REPSUP: Checkpointing limits",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "dvlparms.h for developer/internal parameters"
+  ]
+}

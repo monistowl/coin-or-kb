@@ -1,3 +1,15 @@
+/**
+ * @file DippyDecompApp.h
+ * @brief Python-enabled DecompApp for Dippy/PuLP integration
+ *
+ * Implements DippyDecompApp which links Python PuLP models to DIP.
+ * Supports Python callbacks for relaxed subproblem solving, feasibility
+ * checking, cut generation, heuristics, and initial variable generation.
+ * Maintains mappings between Python row/column objects and indices.
+ *
+ * @see DippyDecompAlgo.h for Python-enabled algorithms
+ * @see DippyPythonUtils.h for Python/C++ conversion utilities
+ */
 #ifndef DIPPY_DECOMPAPP_INCLUDED
 #define DIPPY_DECOMPAPP_INCLUDED
 

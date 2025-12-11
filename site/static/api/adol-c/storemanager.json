@@ -1,0 +1,13 @@
+{
+  "name": "storemanager",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/storemanager.h",
+  "brief": "Variable location allocation for adouble values\n\nManages the global `store` array that holds adouble values during taping.\nImplements efficient allocation/deallocation of tape location indices\nusing free-list algorithms inspired by Stroustrup's allocator pattern.\n\n**Implementations:**\n- StoreManager: Abstract base class\n- StoreManagerLocint: Singleton location allocation with free list\n- StoreManagerLocintBlock: Block allocation for contiguous locations\n\n**Design Notes:**\nStoreManagerLocintBlock supports allocating contiguous blocks for vector\noperations while StoreManagerLocint is simpler for scalar-only use.\nBoth double the store size when exhausted.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "adouble.h for adouble class using store locations",
+    "tape_handling.h for tape management"
+  ]
+}

@@ -45,9 +45,10 @@ O(depth) to replay bound changes from root.
 
 ### Cbc
 
-- **{{ link(path="/browser/?library=Cbc", text="CbcNode.hpp") }}** - Search tree node for branch-and-cut
+- **[CbcNode.hpp](/coin-or-kb/browser/?library=Cbc)** - Search tree node for branch-and-cut
 Copyright (C) 2002, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Cbc/src/CbcNode.hpp)
 
 ## References
 

@@ -1,0 +1,13 @@
+{
+  "name": "AlpsSunos",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsSunos.h",
+  "brief": "Platform-specific definitions for SunOS/Solaris (SPARC)\n\nProvides SunOS-specific system includes, type definitions, and compiler\nmacros for GCC on SPARC architecture. Includes gettimeofday(), setpriority(),\ngethostname(), and memory management macros.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsOs.h for platform detection",
+    "AlpsLinux.h for Linux equivalents"
+  ]
+}

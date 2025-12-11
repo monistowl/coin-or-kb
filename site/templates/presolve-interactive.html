@@ -1,0 +1,753 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} - {{ config.title }}{% endblock %}
+
+{% block extra_head %}
+<style>
+.presolve-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.problem-statement {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.status-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.status-item {
+    background: var(--bg);
+    padding: 0.75rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.status-item .label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.status-item .value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.status-item.vars .value { color: #4ecdc4; }
+.status-item.cons .value { color: #f59e0b; }
+.status-item.nnz .value { color: #a855f7; }
+.status-item.reduction .value { color: #22c55e; }
+
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.step-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    transition: all 0.2s;
+}
+
+.step-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.step-dot.completed {
+    background: #22c55e;
+    border-color: #22c55e;
+}
+
+.matrices-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: start;
+    margin: 1.5rem 0;
+}
+
+.matrix-panel {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.matrix-panel h4 {
+    margin: 0 0 0.75rem 0;
+    color: var(--accent-light);
+    font-size: 0.9rem;
+}
+
+.arrow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--accent);
+    padding-top: 2rem;
+}
+
+.matrix-table {
+    border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.matrix-table th, .matrix-table td {
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.6rem;
+    text-align: center;
+}
+
+.matrix-table th {
+    background: var(--bg);
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.matrix-table .row-label {
+    background: var(--bg);
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.matrix-table .eliminated {
+    background: rgba(255, 107, 107, 0.15);
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.matrix-table .modified {
+    background: rgba(255, 200, 50, 0.15);
+}
+
+.matrix-table .new-bound {
+    background: rgba(34, 197, 94, 0.15);
+}
+
+.matrix-table .highlight {
+    background: rgba(168, 85, 247, 0.2);
+    font-weight: bold;
+}
+
+.step-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.step-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.step-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.step-btn.prev {
+    background: var(--bg-secondary);
+    color: var(--text);
+}
+
+.step-btn.next {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.step-btn:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.explanation {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    min-height: 180px;
+}
+
+.explanation h3 {
+    margin: 0 0 1rem 0;
+    color: var(--accent-light);
+}
+
+.action-type {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.action-type.remove { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+.action-type.substitute { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+.action-type.tighten { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+.action-type.fix { background: rgba(255, 200, 50, 0.2); color: #ffc832; }
+
+.math-step {
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.postsolve-note {
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.solution-box {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.solution-box h4 {
+    color: #22c55e;
+    margin: 0 0 0.5rem 0;
+}
+
+.bounds-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.bound-item {
+    background: var(--bg);
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.bound-item.fixed {
+    background: rgba(255, 200, 50, 0.15);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<article class="presolve-container">
+    <h1>{{ page.title }}</h1>
+
+    <div class="problem-statement">
+        {{ page.content | safe }}
+    </div>
+
+    <div class="status-bar">
+        <div class="status-item vars">
+            <div class="label">Variables</div>
+            <div class="value" id="var-count">6</div>
+        </div>
+        <div class="status-item cons">
+            <div class="label">Constraints</div>
+            <div class="value" id="con-count">5</div>
+        </div>
+        <div class="status-item nnz">
+            <div class="label">Nonzeros</div>
+            <div class="value" id="nnz-count">15</div>
+        </div>
+        <div class="status-item reduction">
+            <div class="label">Reduction</div>
+            <div class="value" id="reduction">0%</div>
+        </div>
+    </div>
+
+    <div class="step-indicator" id="step-indicator"></div>
+
+    <div class="matrices-container">
+        <div class="matrix-panel">
+            <h4>Before</h4>
+            <table class="matrix-table" id="before-matrix"></table>
+        </div>
+        <div class="arrow-container">→</div>
+        <div class="matrix-panel">
+            <h4>After</h4>
+            <table class="matrix-table" id="after-matrix"></table>
+        </div>
+    </div>
+
+    <div class="step-controls">
+        <button class="step-btn prev" id="prev-btn" disabled>← Previous</button>
+        <button class="step-btn next" id="next-btn">Next Reduction →</button>
+    </div>
+
+    <div class="explanation" id="explanation"></div>
+</article>
+
+<script>
+(function() {
+    'use strict';
+
+    // Presolve steps for the example problem
+    const STEPS = [
+        {
+            title: "Original Problem",
+            actionType: null,
+            vars: 6,
+            cons: 5,
+            nnz: 15,
+            before: {
+                headers: ["", "x1", "x2", "x3", "x4", "x5", "x6", "RHS", "Type"],
+                rows: [
+                    ["R1", "2", "1", "", "", "", "", "<= 6", ""],
+                    ["R2", "", "1", "1", "", "", "", "= 4", ""],
+                    ["R3", "", "", "2", "3", "", "", "<= 12", ""],
+                    ["R4", "", "", "", "", "1", "", "<= 5", "singleton"],
+                    ["R5", "1", "", "", "", "", "1", "= 3", "doubleton"]
+                ],
+                bounds: ["[0,inf)", "[0,inf)", "[0,inf)", "[0,inf)", "[0,5]", "[0,inf)"],
+                obj: ["3", "2", "1", "4", "0", "1"]
+            },
+            after: null,
+            explanationLines: [
+                "Starting LP has 6 variables, 5 constraints, 15 nonzeros.",
+                "Notice the structure: R4 is a singleton (one variable), R5 is a doubleton (two variables in equality).",
+                "The objective is min 3x1 + 2x2 + x3 + 4x4 + x6."
+            ],
+            postsolve: null
+        },
+        {
+            title: "Remove Singleton Row R4",
+            actionType: "remove",
+            vars: 5,
+            cons: 4,
+            nnz: 14,
+            before: {
+                headers: ["", "x1", "x2", "x3", "x4", "x5", "x6", "RHS", "Type"],
+                rows: [
+                    ["R1", "2", "1", "", "", "", "", "<= 6", ""],
+                    ["R2", "", "1", "1", "", "", "", "= 4", ""],
+                    ["R3", "", "", "2", "3", "", "", "<= 12", ""],
+                    ["R4", "", "", "", "", "1", "", "<= 5", "highlight"],
+                    ["R5", "1", "", "", "", "", "1", "= 3", ""]
+                ],
+                bounds: ["[0,inf)", "[0,inf)", "[0,inf)", "[0,inf)", "[0,5]", "[0,inf)"],
+                obj: ["3", "2", "1", "4", "0", "1"]
+            },
+            after: {
+                headers: ["", "x1", "x2", "x3", "x4", "x6", "RHS", "Type"],
+                rows: [
+                    ["R1", "2", "1", "", "", "", "<= 6", ""],
+                    ["R2", "", "1", "1", "", "", "= 4", ""],
+                    ["R3", "", "", "2", "3", "", "<= 12", ""],
+                    ["R5", "1", "", "", "", "1", "= 3", ""]
+                ],
+                bounds: ["[0,inf)", "[0,inf)", "[0,inf)", "[0,inf)", "[0,inf)"],
+                obj: ["3", "2", "1", "4", "1"]
+            },
+            explanationLines: [
+                "R4 is a singleton row: x5 <= 5 with only one variable.",
+                "Since x5 has bounds [0,5] and c5 = 0 (not in objective), the constraint just confirms the upper bound.",
+                "We tighten x5 <= 5 (already known) and remove the row.",
+                "x5 doesn't appear elsewhere, so we remove the column too."
+            ],
+            postsolve: "Set x5 = 0 (at lower bound since c5 = 0)"
+        },
+        {
+            title: "Eliminate Doubleton R5",
+            actionType: "substitute",
+            vars: 4,
+            cons: 3,
+            nnz: 10,
+            before: {
+                headers: ["", "x1", "x2", "x3", "x4", "x6", "RHS", "Type"],
+                rows: [
+                    ["R1", "2", "1", "", "", "", "<= 6", ""],
+                    ["R2", "", "1", "1", "", "", "= 4", ""],
+                    ["R3", "", "", "2", "3", "", "<= 12", ""],
+                    ["R5", "1", "", "", "", "1", "= 3", "highlight"]
+                ],
+                bounds: ["[0,inf)", "[0,inf)", "[0,inf)", "[0,inf)", "[0,inf)"],
+                obj: ["3", "2", "1", "4", "1"]
+            },
+            after: {
+                headers: ["", "x1", "x2", "x3", "x4", "RHS", "Type"],
+                rows: [
+                    ["R1", "2", "1", "", "", "<= 6", "modified"],
+                    ["R2", "", "1", "1", "", "= 4", ""],
+                    ["R3", "", "", "2", "3", "<= 12", ""]
+                ],
+                bounds: ["[0,3]", "[0,inf)", "[0,inf)", "[0,inf)"],
+                obj: ["2", "2", "1", "4"]
+            },
+            explanationLines: [
+                "R5 is x1 + x6 = 3 (doubleton equality). Solve for x6: x6 = 3 - x1.",
+                "Substitute everywhere:",
+                "- Objective: x6 -> (3-x1), so +x6 becomes -x1+3. New obj coefficient for x1: 3-1=2",
+                "- Bounds: x6 >= 0 implies x1 <= 3. Updated bound on x1: [0,3]",
+                "Remove R5 and column x6."
+            ],
+            postsolve: "Recover x6 = 3 - x1* from optimal x1*"
+        },
+        {
+            title: "Bound Tightening on R1",
+            actionType: "tighten",
+            vars: 4,
+            cons: 3,
+            nnz: 10,
+            before: {
+                headers: ["", "x1", "x2", "x3", "x4", "RHS", "Type"],
+                rows: [
+                    ["R1", "2", "1", "", "", "<= 6", "highlight"],
+                    ["R2", "", "1", "1", "", "= 4", ""],
+                    ["R3", "", "", "2", "3", "<= 12", ""]
+                ],
+                bounds: ["[0,3]", "[0,inf)", "[0,inf)", "[0,inf)"],
+                obj: ["2", "2", "1", "4"]
+            },
+            after: {
+                headers: ["", "x1", "x2", "x3", "x4", "RHS", "Type"],
+                rows: [
+                    ["R1", "2", "1", "", "", "<= 6", ""],
+                    ["R2", "", "1", "1", "", "= 4", ""],
+                    ["R3", "", "", "2", "3", "<= 12", ""]
+                ],
+                bounds: ["[0,3]", "[0,6]", "[0,inf)", "[0,inf)"],
+                obj: ["2", "2", "1", "4"]
+            },
+            explanationLines: [
+                "From R1: 2x1 + x2 <= 6. With x1 in [0,3]:",
+                "- If x1 = 0: x2 <= 6",
+                "- If x1 = 3: 6 + x2 <= 6, so x2 <= 0, meaning x2 = 0",
+                "We can derive x2 <= 6 as an upper bound (not tight yet).",
+                "Bound propagation often runs multiple passes to find all implications."
+            ],
+            postsolve: null
+        },
+        {
+            title: "Eliminate Doubleton R2",
+            actionType: "substitute",
+            vars: 3,
+            cons: 2,
+            nnz: 6,
+            before: {
+                headers: ["", "x1", "x2", "x3", "x4", "RHS", "Type"],
+                rows: [
+                    ["R1", "2", "1", "", "", "<= 6", ""],
+                    ["R2", "", "1", "1", "", "= 4", "highlight"],
+                    ["R3", "", "", "2", "3", "<= 12", ""]
+                ],
+                bounds: ["[0,3]", "[0,6]", "[0,inf)", "[0,inf)"],
+                obj: ["2", "2", "1", "4"]
+            },
+            after: {
+                headers: ["", "x1", "x3", "x4", "RHS", "Type"],
+                rows: [
+                    ["R1", "2", "-1", "", "<= 2", "modified"],
+                    ["R3", "", "2", "3", "<= 12", ""]
+                ],
+                bounds: ["[0,3]", "[0,4]", "[0,inf)"],
+                obj: ["2", "-1", "4"]
+            },
+            explanationLines: [
+                "R2 is x2 + x3 = 4. Solve for x2: x2 = 4 - x3.",
+                "- Substitute in R1: 2x1 + (4-x3) <= 6 -> 2x1 - x3 <= 2",
+                "- Substitute in obj: 2x2 -> 2(4-x3) = 8 - 2x3. Net: obj constant +8, x3 coeff: 1-2 = -1",
+                "- Bounds: x2 >= 0 implies x3 <= 4",
+                "Remove R2 and column x2."
+            ],
+            postsolve: "Recover x2 = 4 - x3* from optimal x3*"
+        },
+        {
+            title: "Final Presolved Problem",
+            actionType: null,
+            vars: 3,
+            cons: 2,
+            nnz: 6,
+            before: null,
+            after: {
+                headers: ["", "x1", "x3", "x4", "RHS", "Type"],
+                rows: [
+                    ["R1'", "2", "-1", "", "<= 2", ""],
+                    ["R3", "", "2", "3", "<= 12", ""]
+                ],
+                bounds: ["[0,3]", "[0,4]", "[0,inf)"],
+                obj: ["2", "-1", "4"]
+            },
+            explanationLines: [
+                "Presolve complete! Reduced from 6->3 variables, 5->2 constraints, 15->6 nonzeros (60% reduction).",
+                "",
+                "Presolved problem: min 2x1 - x3 + 4x4 + 11 (constant from substitutions)",
+                "Subject to: 2x1 - x3 <= 2, 2x3 + 3x4 <= 12",
+                "Bounds: x1 in [0,3], x3 in [0,4], x4 >= 0"
+            ],
+            postsolve: null,
+            final: true
+        },
+        {
+            title: "Postsolve: Recover Original Solution",
+            actionType: null,
+            vars: 6,
+            cons: 5,
+            nnz: 15,
+            before: null,
+            after: null,
+            explanationLines: [
+                "After solving the presolved problem, suppose optimal is x1*=1, x3*=4, x4*=0.",
+                "",
+                "Postsolve (reverse order):",
+                "1. x2 = 4 - x3* = 4 - 4 = 0",
+                "2. x6 = 3 - x1* = 3 - 1 = 2",
+                "3. x5 = 0 (was at lower bound)",
+                "",
+                "Original solution: (x1,x2,x3,x4,x5,x6) = (1, 0, 4, 0, 0, 2)",
+                "Objective: 3(1) + 2(0) + 1(4) + 4(0) + 0(0) + 1(2) = 9"
+            ],
+            postsolve: null,
+            final: true,
+            optimal: true
+        }
+    ];
+
+    let currentStep = 0;
+
+    function clearElement(el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+    }
+
+    function renderMatrix(tableEl, data) {
+        clearElement(tableEl);
+        if (!data) {
+            var msg = document.createElement('tr');
+            var td = document.createElement('td');
+            td.textContent = '(see explanation)';
+            td.style.color = 'var(--text-muted)';
+            td.style.fontStyle = 'italic';
+            msg.appendChild(td);
+            tableEl.appendChild(msg);
+            return;
+        }
+
+        // Header row
+        var thead = document.createElement('thead');
+        var headerRow = document.createElement('tr');
+        data.headers.forEach(function(h) {
+            var th = document.createElement('th');
+            th.textContent = h;
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        tableEl.appendChild(thead);
+
+        // Body rows
+        var tbody = document.createElement('tbody');
+        data.rows.forEach(function(row) {
+            var tr = document.createElement('tr');
+            var rowClass = row[row.length - 1]; // Last element is class
+            row.slice(0, -1).forEach(function(cell, idx) {
+                var td = document.createElement(idx === 0 ? 'th' : 'td');
+                if (idx === 0) td.className = 'row-label';
+                td.textContent = cell || '';
+                if (rowClass === 'highlight' && idx > 0) td.classList.add('highlight');
+                if (rowClass === 'modified' && idx > 0) td.classList.add('modified');
+                if (rowClass === 'eliminated' && idx > 0) td.classList.add('eliminated');
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+
+        // Bounds row
+        if (data.bounds) {
+            var boundsRow = document.createElement('tr');
+            var boundsLabel = document.createElement('th');
+            boundsLabel.className = 'row-label';
+            boundsLabel.textContent = 'Bounds';
+            boundsRow.appendChild(boundsLabel);
+            data.bounds.forEach(function(b) {
+                var td = document.createElement('td');
+                td.textContent = b;
+                td.style.fontSize = '0.75rem';
+                if (b.indexOf(',') >= 0 && b.indexOf('inf') < 0) td.classList.add('new-bound');
+                boundsRow.appendChild(td);
+            });
+            // Pad for RHS and Type columns
+            boundsRow.appendChild(document.createElement('td'));
+            boundsRow.appendChild(document.createElement('td'));
+            tbody.appendChild(boundsRow);
+        }
+
+        // Objective row
+        if (data.obj) {
+            var objRow = document.createElement('tr');
+            var objLabel = document.createElement('th');
+            objLabel.className = 'row-label';
+            objLabel.textContent = 'Obj';
+            objRow.appendChild(objLabel);
+            data.obj.forEach(function(c) {
+                var td = document.createElement('td');
+                td.textContent = c;
+                td.style.fontWeight = 'bold';
+                td.style.color = 'var(--accent-light)';
+                objRow.appendChild(td);
+            });
+            objRow.appendChild(document.createElement('td'));
+            objRow.appendChild(document.createElement('td'));
+            tbody.appendChild(objRow);
+        }
+
+        tableEl.appendChild(tbody);
+    }
+
+    function renderExplanation(step) {
+        var el = document.getElementById('explanation');
+        clearElement(el);
+
+        var h3 = document.createElement('h3');
+        h3.textContent = step.title;
+        el.appendChild(h3);
+
+        if (step.actionType) {
+            var badge = document.createElement('span');
+            badge.className = 'action-type ' + step.actionType;
+            var labels = {
+                'remove': 'Remove Row/Column',
+                'substitute': 'Substitute Variable',
+                'tighten': 'Bound Tightening',
+                'fix': 'Fix Variable'
+            };
+            badge.textContent = labels[step.actionType] || step.actionType;
+            el.appendChild(badge);
+        }
+
+        // Render explanation lines safely
+        step.explanationLines.forEach(function(line) {
+            var p = document.createElement('p');
+            if (line === '') {
+                p.style.marginBottom = '0.5rem';
+            }
+            p.textContent = line;
+            el.appendChild(p);
+        });
+
+        if (step.postsolve) {
+            var note = document.createElement('div');
+            note.className = 'postsolve-note';
+            var strong = document.createElement('strong');
+            strong.textContent = 'Postsolve: ';
+            note.appendChild(strong);
+            var text = document.createTextNode(step.postsolve);
+            note.appendChild(text);
+            el.appendChild(note);
+        }
+
+        if (step.optimal) {
+            var box = document.createElement('div');
+            box.className = 'solution-box';
+            var h4 = document.createElement('h4');
+            h4.textContent = 'Solution Recovered!';
+            box.appendChild(h4);
+            var p1 = document.createElement('p');
+            var strong1 = document.createElement('strong');
+            strong1.textContent = 'Original optimal: ';
+            p1.appendChild(strong1);
+            p1.appendChild(document.createTextNode('(1, 0, 4, 0, 0, 2)'));
+            box.appendChild(p1);
+            var p2 = document.createElement('p');
+            var strong2 = document.createElement('strong');
+            strong2.textContent = 'Objective value: ';
+            p2.appendChild(strong2);
+            p2.appendChild(document.createTextNode('9'));
+            box.appendChild(p2);
+            el.appendChild(box);
+        }
+    }
+
+    function renderStepIndicator() {
+        var el = document.getElementById('step-indicator');
+        clearElement(el);
+        STEPS.forEach(function(_, i) {
+            var dot = document.createElement('div');
+            dot.className = 'step-dot';
+            if (i < currentStep) dot.classList.add('completed');
+            if (i === currentStep) dot.classList.add('active');
+            el.appendChild(dot);
+        });
+    }
+
+    function updateStatusBar(step) {
+        document.getElementById('var-count').textContent = step.vars;
+        document.getElementById('con-count').textContent = step.cons;
+        document.getElementById('nnz-count').textContent = step.nnz;
+        var original = STEPS[0];
+        var reduction = Math.round(100 * (1 - step.nnz / original.nnz));
+        document.getElementById('reduction').textContent = reduction + '%';
+    }
+
+    function updateUI() {
+        var step = STEPS[currentStep];
+
+        if (step.before) {
+            renderMatrix(document.getElementById('before-matrix'), step.before);
+        } else if (currentStep === 0) {
+            renderMatrix(document.getElementById('before-matrix'), step.before);
+        } else {
+            // Use previous step's "after" as "before"
+            var prev = STEPS[currentStep - 1];
+            renderMatrix(document.getElementById('before-matrix'), prev.after);
+        }
+
+        renderMatrix(document.getElementById('after-matrix'), step.after);
+        renderExplanation(step);
+        renderStepIndicator();
+        updateStatusBar(step);
+
+        document.getElementById('prev-btn').disabled = currentStep === 0;
+        var nextBtn = document.getElementById('next-btn');
+        nextBtn.disabled = currentStep === STEPS.length - 1;
+        nextBtn.textContent = currentStep === STEPS.length - 1 ? 'Complete!' : 'Next Reduction \u2192';
+    }
+
+    document.getElementById('prev-btn').addEventListener('click', function() {
+        if (currentStep > 0) {
+            currentStep--;
+            updateUI();
+        }
+    });
+
+    document.getElementById('next-btn').addEventListener('click', function() {
+        if (currentStep < STEPS.length - 1) {
+            currentStep++;
+            updateUI();
+        }
+    });
+
+    updateUI();
+})();
+</script>
+{% endblock %}

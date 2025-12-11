@@ -1,0 +1,13 @@
+{
+  "name": "utils",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/utils.h",
+  "brief": "Vector utilities and permutation operations\n\nCore numerical utilities for IPX:\n- Vector norms: Onenorm(), Twonorm(), Infnorm()\n- Dot product and element search\n- Permutation operations: Permute(), PermuteBack(), InversePerm()\n- Sorting permutations: Sortperm()\n- Validity checking: AllFinite()",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipx_internal.h for Vector type definition",
+    "sparse_matrix.h for sparse operations"
+  ]
+}

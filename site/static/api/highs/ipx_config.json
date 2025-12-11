@@ -1,0 +1,12 @@
+{
+  "name": "ipx_config",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/ipx_config.h",
+  "brief": "IPX integer type configuration\n\nDefines ipxint as alias for HighsInt, enabling 32-bit or 64-bit\ninteger support based on build configuration.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipx_internal.h for internal type definitions using ipxint"
+  ]
+}

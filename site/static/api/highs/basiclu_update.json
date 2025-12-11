@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_update",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_update.h",
+  "brief": "Forrest-Tomlin update for basis column replacement\n\nUpdates the LU factorization when one column of B is replaced,\nwithout performing a full refactorization. This is the key operation\nfor efficient simplex iterations.\n\n**Forrest-Tomlin Update:**\nGiven B_new = B_old with column j replaced by a:\n1. The spike from FTRAN(a) creates fill in row j of U\n2. Apply row operations to eliminate the spike\n3. Store operations as \"eta vectors\" in Wi/Wx arrays\n4. Update permutations to maintain triangularity\n\n**Update Cost Tracking:**\n- xstore[BASICLU_UPDATE_COST] increases with each update\n- When > 1.0, refactorization improves performance\n- xstore[BASICLU_NFORREST] counts updates since last factorize\n- Maximum m Forrest-Tomlin updates before mandatory refactorization\n\n**Stability Monitoring:**\n- xtbl parameter enables pivot error estimation\n- xstore[BASICLU_MAX_ETA] tracks largest eta entry (> 1e6 suggests instability)\n- xstore[BASICLU_PIVOT_ERROR] measures numerical accuracy",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_solve_for_update.h for required preparation",
+    "basiclu_factorize.h for full refactorization"
+  ]
+}

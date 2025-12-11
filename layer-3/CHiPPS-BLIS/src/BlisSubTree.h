@@ -1,3 +1,14 @@
+/**
+ * @file BlisSubTree.h
+ * @brief Branch-and-bound tree node processing (legacy/stub)
+ *
+ * Defines BlisTreeNode class for branch-and-bound node processing.
+ * Handles LP solving, branching decisions, and node fathoming. This is
+ * a legacy stub file - the main implementation is in BlisTreeNode.h.
+ *
+ * @see BlisTreeNode.h for complete tree node implementation
+ * @see BcpsTreeNode.h for BiCePS base class
+ */
 /*===========================================================================*
  * This file is part of the BiCePS Linear Integer Solver (BLIS).             *
  *                                                                           *

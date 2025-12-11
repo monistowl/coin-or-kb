@@ -1,0 +1,12 @@
+{
+  "name": "CoinError",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CoinError.h",
+  "brief": ".NET exception wrapper for COIN-OR CoinError\n\nConverts native ::CoinError exceptions to managed\nSystem::ApplicationException derivatives, enabling .NET\ntry/catch blocks to handle COIN-OR library errors.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinLpIO.h for example usage in file I/O operations"
+  ]
+}

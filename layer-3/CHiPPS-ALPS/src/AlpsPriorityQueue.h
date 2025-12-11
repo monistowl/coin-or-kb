@@ -1,3 +1,15 @@
+/**
+ * @file AlpsPriorityQueue.h
+ * @brief Template priority queue with dynamic comparison function
+ *
+ * Provides AlpsPriorityQueue template class that wraps std::vector with
+ * heap operations, supporting dynamic comparison function changes. Used
+ * for node pool management where search strategy can change at runtime
+ * (best-first, depth-first, breadth-first, etc.).
+ *
+ * @see AlpsNodePool.h for node pool using this priority queue
+ * @see AlpsSearchStrategyBase.h for comparison strategies
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

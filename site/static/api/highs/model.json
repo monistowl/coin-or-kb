@@ -2,8 +2,12 @@
   "name": "model",
   "library": "HiGHS",
   "layer": "layer-4",
-  "header": "extern/filereaderlp/model.hpp",
-  "brief": "HiGHS QP solver component\n\nPart of HiGHS quadratic programming active set solver.",
+  "header": "highs/ipm/ipx/model.h",
+  "brief": "LP model transformation from user form to computational form\n\nTransforms user LP model to the standard form used internally by IPX:\n\n**User Form:**\n  minimize   obj'x\n  subject to A\u00b7x {=,<,>} rhs\n             lb_user \u2264 x \u2264 ub_user\n\n**Computational Form:**\n  minimize   c'x\n  subject to AI\u00b7x = b         (dual: y)\n             x - xl = lb      (dual: zl \u2265 0)\n             x + xu = ub      (dual: zu \u2265 0)\n\n**Preprocessing Steps:**\n1. Scaling: Equilibration of A, variable flipping for infinite lb\n2. Dualization: Optional based on problem structure (Flippo test)\n3. Slack addition: Inequalities become equalities with slacks\n\nThe Model stores both CSC (AI_) and CSR (AIt_) representations\nfor efficient access patterns in different solver phases.",
   "algorithms": [],
-  "methods": []
+  "methods": [],
+  "see": [
+    "sparse_matrix.h for matrix storage",
+    "lp_solver.h for main solver using this model"
+  ]
 }

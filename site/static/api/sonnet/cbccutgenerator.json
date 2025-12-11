@@ -1,0 +1,13 @@
+{
+  "name": "CbcCutGenerator",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CbcCutGenerator.h",
+  "brief": ".NET wrapper for Cbc cut generator management\n\nProvides managed CbcCutGenerator class that wraps the native\n::CbcCutGenerator. Controls when and how CGL cutting planes\nare generated during branch-and-cut search (frequency, depth,\nat solution, etc.).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CglCutGenerator.h for wrapped cut generator algorithms",
+    "CbcModel for branch-and-cut model using these generators"
+  ]
+}

@@ -3,7 +3,18 @@
   "library": "CppAD",
   "layer": "layer-1",
   "header": "include/cppad/core/hessian.hpp",
-  "brief": "Core AD functionality: hessian",
-  "algorithms": [],
-  "methods": []
+  "brief": "Dense Hessian driver using reverse-on-forward AD",
+  "algorithms": [
+    {
+      "name": "Dense Hessian Computation:\nComputes H(x) = \u2207\u00b2(w'F(x)) for scalar output or weighted sum.\n\n  REVERSE-ON-FORWARD:\n    1. Forward sweep order 1: v = \u2207F(x)\u00b7d for direction d = e_j\n    2. Reverse sweep: \u2207(w'v) = w'\u00b7H\u00b7e_j = j-th column of w'H\n    Repeat for j = 0,...,n-1 to build full Hessian\n\n  EXPLOITING SYMMETRY:\n    H is symmetric: H_{ij} = H_{ji}\n    Only compute upper (or lower) triangle: n(n+1)/2 entries\n    Still requires n forward+reverse sweep pairs",
+      "math": "H_{ij} = \u2202\u00b2(w'F)/\u2202x_i\u2202x_j = \u03a3_k w_k \u00b7 \u2202\u00b2F_k/\u2202x_i\u2202x_j\n\n  For scalar F: Hessian is \u2207\u00b2F(x)\n  For vector F with weight w: Lagrangian Hessian \u03a3_i w_i\u00b7\u2207\u00b2F_i",
+      "complexity": "- Time: O(n\u00b7ops) for n forward+reverse sweep pairs\n- Memory: O(ops) for tape storage\n- Full matrix: n\u00b2 values (n(n+1)/2 unique due to symmetry)",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sparse_hes.hpp for efficient sparse Hessians",
+    "Ipopt uses sparse Hessians for large-scale NLP"
+  ]
 }

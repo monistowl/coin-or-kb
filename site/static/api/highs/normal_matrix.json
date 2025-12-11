@@ -1,0 +1,13 @@
+{
+  "name": "normal_matrix",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/normal_matrix.h",
+  "brief": "Normal equations matrix operator A\u00b7W\u00b7A'\n\nLinearOperator implementation for the normal equations matrix\nused in IPM. Computes y = (A\u00b7W\u00b7A')\u00b7x efficiently using sparse\nmatrix-vector products.\n\nThe weight matrix W is diagonal and set via Prepare(). If W is NULL,\nuses W = [I; 0] (identity for structural, zero for slack columns).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "linear_operator.h for the interface",
+    "kkt_solver_diag.h for usage with diagonal preconditioning"
+  ]
+}

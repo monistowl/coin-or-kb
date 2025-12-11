@@ -1,0 +1,13 @@
+{
+  "name": "cupdlp_defs",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/pdlp/cupdlp/cupdlp_defs.h",
+  "brief": "Core data structures for CUPDLP solver\n\nDefines all primary types for the PDHG algorithm:\n- CUPDLPproblem: LP data (A, b, c, bounds)\n- CUPDLPiterates: Primal/dual variables x, y and averages\n- CUPDLPstepsize: Step size parameters \u03c4, \u03c3 and linesearch state\n- CUPDLPresobj: Residuals, objectives, and termination status\n- CUPDLPscaling: Row/column scaling factors (Ruiz, L2, PC)\n- CUPDLPwork: Main solver workspace combining all components\n\nSupports both CPU and GPU (CUDA) execution via conditional compilation.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cupdlp_solver.h for algorithm using these structures",
+    "glbopts.h for type definitions and macros"
+  ]
+}

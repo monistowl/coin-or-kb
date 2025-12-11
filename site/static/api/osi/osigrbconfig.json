@@ -1,0 +1,13 @@
+{
+  "name": "OsiGrbConfig",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/OsiGrb/OsiGrbConfig.h",
+  "brief": "Configuration header for OsiGrb (Gurobi interface)\n\nProvides build configuration for the Osi adapter to Gurobi Optimizer.\nDefines OSIGRBLIB_EXPORT for DLL import/export based on build environment\nand platform. Requires separate Gurobi installation and license.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiGrbSolverInterface.h for Gurobi adapter class",
+    "OsiConfig.h for main Osi configuration"
+  ]
+}

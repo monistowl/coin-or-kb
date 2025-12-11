@@ -1,0 +1,13 @@
+{
+  "name": "adtl_indo",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adtl_indo.h",
+  "brief": "Traceless forward mode for Jacobian sparsity pattern detection\n\nProvides a specialized adouble class (adtl_indo::adouble) that propagates\nindex sets instead of derivative values. Used to determine Jacobian\nsparsity structure without computing actual derivatives.\n\n**Key Functions:**\n- ADOLC_Init_sparse_pattern(): Initialize input sparsity patterns\n- ADOLC_get_sparse_pattern(): Extract output sparsity patterns\n- ADOLC_get_sparse_jacobian(): Compute sparse Jacobian efficiently",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sparse/sparse_fo_rev.h for sparse derivative computation",
+    "adtl.h for traceless forward mode with actual derivatives"
+  ]
+}

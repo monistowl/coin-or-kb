@@ -1,3 +1,23 @@
+/**
+ * @file maxvolume.h
+ * @brief Maximum volume basis selection algorithm
+ *
+ * Implements the maxvolume algorithm for improving the basis matrix
+ * condition number by maximizing |det(B)|. Used during IPM to maintain
+ * a well-conditioned preconditioner.
+ *
+ * **Algorithms:**
+ * - RunSequential(): Full tableau scan with greedy pivot selection
+ * - RunHeuristic(): Sliced computation for large problems
+ *
+ * **Statistics:**
+ * - updates(): Basis changes performed
+ * - skipped(): Columns computed but not swapped
+ * - volinc(): log₂(|det(B_new)|/|det(B_old)|)
+ *
+ * @see basis.h for basis matrix management
+ * @see kkt_solver_basis.h for usage in preconditioning
+ */
 #ifndef IPX_MAXVOLUME_H_
 #define IPX_MAXVOLUME_H_
 

@@ -1,0 +1,14 @@
+{
+  "name": "kkt_solver_diag",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/kkt_solver_diag.h",
+  "brief": "KKT solver using CR with diagonal preconditioning\n\nImplements the KKT system solver for IPX using conjugate residuals (CR)\nwith diagonal preconditioning of the normal equations.\n\n**Algorithm:**\nSolves the augmented system by reducing to normal equations\n(A\u00b7W\u00b7A')\u00b7y = b, then applies CR with preconditioner M = diag(A\u00b7W\u00b7A').\n\n**Regularization:**\nIf the (1,1) block is not positive definite, adds regularization\nto ensure convergence.\n\nSimpler than basis preconditioning but less effective for\nill-conditioned problems.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "kkt_solver.h for the abstract interface",
+    "kkt_solver_basis.h for basis preconditioning alternative",
+    "diagonal_precond.h for the preconditioner"
+  ]
+}

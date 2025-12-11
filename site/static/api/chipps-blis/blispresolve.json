@@ -1,0 +1,13 @@
+{
+  "name": "BlisPresolve",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisPresolve.h",
+  "brief": "LP presolve interface for BLIS solver\n\nProvides BlisPresolve class that wraps OsiPresolve/CoinPresolve for model\npreprocessing before branch-and-bound. Simplifies LP relaxations through\nbound tightening, redundant constraint removal, and variable fixing.\nSupports postsolve to recover original variable values.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiPresolve.hpp for base class",
+    "BlisModel.h for BLIS model using presolve"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_obj_update",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_obj_update.h",
+  "brief": "Apply Forrest-Tomlin update using BasicLU object\n\nObject-oriented wrapper for basiclu_update() with automatic\nmemory reallocation for Wi/Wx arrays if needed.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_update.h for Forrest-Tomlin algorithm",
+    "basiclu_obj_solve_for_update.h for required preparation"
+  ]
+}

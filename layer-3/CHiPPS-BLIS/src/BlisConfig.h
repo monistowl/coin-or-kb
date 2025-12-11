@@ -1,3 +1,16 @@
+/**
+ * @file BlisConfig.h
+ * @brief Unified configuration header for BLIS library
+ *
+ * Main entry point for BLIS configuration that routes to the appropriate
+ * settings based on build environment. With autotools (HAVE_CONFIG_H),
+ * includes generated config.h. Without autotools, uses config_default.h
+ * for building or config_blis_default.h for clients. Sets up BLISLIB_EXPORT
+ * for proper DLL import/export on Windows and GCC visibility.
+ *
+ * @see config_default.h for non-autotools build configuration
+ * @see config_blis_default.h for public version macros
+ */
 /*===========================================================================*
  * This file is part of the BiCePS Linear Integer Solver (BLIS).             *
  *                                                                           *
@@ -15,7 +28,7 @@
  *          Ted Ralphs, Lehigh University                                    *
  *          Laszlo Ladanyi, IBM T.J. Watson Research Center                  *
  *          Matthew Saltzman, Clemson University                             *
- *                                                                           * 
+ *                                                                           *
  *                                                                           *
  * Copyright (C) 2001-2023, Lehigh University, Yan Xu, and Ted Ralphs.       *
  * All Rights Reserved.                                                      *

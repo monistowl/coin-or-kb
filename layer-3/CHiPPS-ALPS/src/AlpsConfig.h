@@ -1,3 +1,16 @@
+/**
+ * @file AlpsConfig.h
+ * @brief Unified configuration header for Alps library
+ *
+ * Main entry point for Alps configuration that routes to the appropriate
+ * settings based on build environment. With autotools (HAVE_CONFIG_H),
+ * includes generated config.h. Without autotools, uses config_default.h
+ * for building or config_alps_default.h for clients. Sets up ALPSLIB_EXPORT
+ * for proper DLL import/export on Windows and GCC visibility.
+ *
+ * @see config_default.h for non-autotools build configuration
+ * @see config_alps_default.h for public version macros
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

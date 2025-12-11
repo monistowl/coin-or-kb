@@ -68,6 +68,11 @@
       "has_algorithm": false
     },
     {
+      "name": "constants",
+      "brief": "Constants and parameter names for cuOpt LP/MIP solver\n\nDefines compile-time configuration, parameter string constants,\ntermination status codes, and constraint/variable type markers.\n\n**Type Configuration:**\n- CUOPT_INSTANTIATE_DOUBLE=1: Use double precision (default)\n- CUOPT_INSTANTIATE_INT32=1: Use 32-bit integers (default)\n\n**Parameter Categories:**\n- Tolerances: CUOPT_ABSOLUTE_DUAL_TOLERANCE, CUOPT_RELATIVE_PRIMAL_TOLERANCE, etc.\n- Limits: CUOPT_ITERATION_LIMIT, CUOPT_TIME_LIMIT\n- Methods: CUOPT_METHOD (CONCURRENT, PDLP, DUAL_SIMPLEX, BARRIER)\n- MIP: CUOPT_MIP_RELATIVE_GAP, CUOPT_MIP_INTEGRALITY_TOLERANCE\n\n**Termination Status:**\n- CUOPT_TERIMINATION_STATUS_OPTIMAL (1): Optimal solution found\n- CUOPT_TERIMINATION_STATUS_INFEASIBLE (2): Problem infeasible\n- CUOPT_TERIMINATION_STATUS_UNBOUNDED (3): Problem unbounded",
+      "has_algorithm": false
+    },
+    {
       "name": "convergence_information",
       "brief": "cuOpt linear programming component\n\nPart of GPU-accelerated LP solver.",
       "has_algorithm": false
@@ -84,7 +89,7 @@
     },
     {
       "name": "cuopt_c",
-      "brief": "A ``cuOptOptimizationProblem`` object contains a representation of\nan LP or MIP. It is created by ``cuOptCreateProblem`` or ``cuOptCreateRangedProblem``.\nIt is passed to ``cuOptSolve``. It should be destroyed using ``cuOptDestroyProblem``.",
+      "brief": "Pure C API for NVIDIA cuOpt LP/MIP solver\n\nProvides C language bindings for GPU-accelerated linear and mixed-integer\nprogramming. Supports both standard form (Ax {=,\u2264,\u2265} b) and ranged\nconstraints (bl \u2264 Ax \u2264 bu).\n\n**Workflow:**\n1. Create problem: cuOptCreateProblem() or cuOptReadProblem()\n2. Configure: cuOptCreateSolverSettings(), cuOptSetParameter()\n3. Solve: cuOptSolve()\n4. Extract: cuOptGetPrimalSolution(), cuOptGetObjectiveValue()\n5. Cleanup: cuOptDestroySolution(), cuOptDestroyProblem()\n\n**Data Types:**\n- cuopt_float_t: double (configurable via CUOPT_INSTANTIATE_DOUBLE)\n- cuopt_int_t: int32_t (configurable via CUOPT_INSTANTIATE_INT32)\n- Constraint matrix in CSR format (row_offsets, column_indices, values)",
       "has_algorithm": false
     },
     {

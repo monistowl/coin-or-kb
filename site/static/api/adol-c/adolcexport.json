@@ -1,0 +1,12 @@
+{
+  "name": "adolcexport",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adolcexport.h",
+  "brief": "DLL export/import macros for ADOL-C shared library builds\n\nDefines the ADOLC_API macro for Windows DLL symbol visibility.\nOn Windows with ADOLC_SHARED defined, symbols are decorated with\ndllexport (when building ADOL-C) or dllimport (when using ADOL-C).\nOn other platforms, ADOLC_API is empty.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "adolc.h for main ADOL-C interface"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "sym_win32_time",
+  "library": "SYMPHONY",
+  "layer": "layer-3",
+  "header": "include/sym_win32_time.h",
+  "brief": "POSIX time structures for Windows compatibility\n\nProvides struct timeval and struct rusage definitions for Windows\nplatforms (MSVC, Cygwin) that lack POSIX sys/time.h and sys/resource.h.\n\nRequired for SYMPHONY's wall-clock timing via sym_timemeas.h when\nbuilding on Windows without MinGW's POSIX emulation layer.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sym_timemeas.h for SYMPHONY timing functions"
+  ]
+}

@@ -41,9 +41,10 @@ Typical MIP: live nodes peaks at thousands to millions depending on strategy.
 
 ### Cbc
 
-- **{{ link(path="/browser/?library=Cbc", text="CbcTree.hpp") }}** - Heap-based storage for live search tree nodes
+- **[CbcTree.hpp](/coin-or-kb/browser/?library=Cbc)** - Heap-based storage for live search tree nodes
 Copyright (C) 2004, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Cbc/src/CbcTree.hpp)
 
 ## References
 

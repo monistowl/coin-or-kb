@@ -4,7 +4,14 @@
   "layer": "layer-2",
   "header": "src/CglOddWheel/CglOddWheel.hpp",
   "brief": "Odd-wheel cut separator (odd cycles with lifting)",
-  "algorithms": [],
+  "algorithms": [
+    {
+      "name": "Odd-Wheel Separation:\nFind violated odd-cycle inequalities and lift to odd-wheels.\n\n  ODD HOLE (base):\n    Chordless cycle C = (v\u2081,v\u2082,...,v\u2082\u2096\u208a\u2081,v\u2081) of odd length\n    Cut: \u03a3\u1d62 x\u1d62 \u2264 k  where k = (2k+1-1)/2 = k\n    Valid because at most k non-adjacent vertices in cycle\n\n  ODD WHEEL (lifted):\n    Odd hole C plus center vertex c adjacent to all of C\n    Cut: \u03a3\u1d62\u2208C x\u1d62 + k\u00b7x_c \u2264 k\n    Stronger: center connected to entire cycle\n\n  SEPARATION:\n    Build conflict graph G (edges = binary incompatibilities)\n    Find shortest odd path between x and x\u0304 for each variable\n    Violated if fractional LP value > RHS",
+      "math": "Odd hole: cycle length 2k+1, at most k vertices can be 1\n  Wheel inequality coefficient for center:\n    k = floor(|cycle|/2)\n\nLifting strategies (extMethod_):\n- 0: No lifting (just odd holes)\n- 1: Single variable as wheel center\n- 2: Clique as wheel center (strongest)",
+      "complexity": "Finding odd cycles: O(n \u00d7 m) BFS from each variable\n  Lifting: O(|cycle| \u00d7 |neighbors|) per cycle",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "CglOddHole for simpler odd-hole cuts",

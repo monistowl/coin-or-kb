@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="TaskPerformBoundTightening.h") }}** - Tighten variable bounds via optimization
+- **[TaskPerformBoundTightening.h](/coin-or-kb/browser/?library=SHOT)** - Tighten variable bounds via optimization
 
 Uses optimization-based bound tightening (OBBT).
 
@@ -24,3 +24,4 @@ Uses optimization-based bound tightening (OBBT).
 - For each variable: min/max subject to relaxation
 - Tightens bounds beyond constraint propagation
 - Improves relaxation quality
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/Tasks/TaskPerformBoundTightening.h)

@@ -1,3 +1,13 @@
+/**
+ * @file basiclu_obj_update.h
+ * @brief Apply Forrest-Tomlin update using BasicLU object
+ *
+ * Object-oriented wrapper for basiclu_update() with automatic
+ * memory reallocation for Wi/Wx arrays if needed.
+ *
+ * @see basiclu_update.h for Forrest-Tomlin algorithm
+ * @see basiclu_obj_solve_for_update.h for required preparation
+ */
 lu_int basiclu_obj_update
 (
     struct basiclu_object *obj,

@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### Gravity
 
-- **{{ link(path="/browser/?library=Gravity", text="IpoptProgram.h") }}** - Ipopt solver interface implementing TNLP callbacks
+- **[IpoptProgram.h](/coin-or-kb/browser/?library=Gravity)** - Ipopt solver interface implementing TNLP callbacks
 
 Adapts Gravity models to Ipopt's TNLP (Templated NLP) interface.
 
@@ -40,3 +40,4 @@ Adapts Gravity models to Ipopt's TNLP (Templated NLP) interface.
 - finalize_solution() copies x values to model variables
 - Retrieves dual values (lambda) for constraints
 - Retrieves bound multipliers (z_L, z_U)
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/Gravity/include/gravity/IpoptProgram.h)

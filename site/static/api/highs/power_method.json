@@ -1,0 +1,12 @@
+{
+  "name": "power_method",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/power_method.h",
+  "brief": "Power iteration for maximum eigenvalue estimation\n\nTemplate function implementing power method to estimate \u03bb_max of\na symmetric positive semi-definite linear operator.\n\n**Algorithm:**\n1. Start with v = [1, 1/2, 1/3, ...] normalized\n2. Iterate: v \u2190 f(v)/\u2016f(v)\u2016, \u03bb \u2190 \u2016f(v)\u2016\n3. Converge when |\u03bb_new - \u03bb_old| \u2264 10\u207b\u00b3\u00b7\u03bb\n\nMaximum 100 iterations. Returns \u03bb_max estimate and eigenvector in v.\nUsed for condition number estimation in maxvolume algorithm.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "maxvolume.h for usage in basis analysis"
+  ]
+}

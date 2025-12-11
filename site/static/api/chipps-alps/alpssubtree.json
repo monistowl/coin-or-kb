@@ -3,8 +3,15 @@
   "library": "CHiPPS-ALPS",
   "layer": "layer-3",
   "header": "src/AlpsSubTree.h",
-  "brief": "Subtree management for ALPS parallel tree search\n\nAlpsSubTree is the basic unit of work in parallel ALPS. Workers process\nentire subtrees autonomously, enabling scalable parallelism.\n\n**Key components:**\n- root_: Root node of this subtree\n- nodePool_: Leaf nodes awaiting processing\n- diveNodePool_: Nodes for diving exploration\n- activeNode_: Currently being processed\n\n**Core operations:**\n- exploreSubTree(): Process nodes up to limits\n- exploreUnitWork(): Process bounded amount of work\n- createChildren(): Branch and add children to pool\n- splitSubTree(): Split off portion for redistribution\n- rampUp(): Generate initial nodes for parallel start\n\n**Diving strategy:**\n- diveNodePool_ holds nodes for deep exploration\n- diveDepth_ tracks current dive depth\n- Helps find feasible solutions quickly\n\n**Dead node removal:**\n- removeDeadNodes(): Recursively remove fathomed branches\n- fathomAllNodes(): Clear entire subtree",
-  "algorithms": [],
+  "brief": "Subtree management for ALPS parallel tree search\n\nAlpsSubTree is the basic unit of work in parallel ALPS. Workers process\nentire subtrees autonomously, enabling scalable parallelism.",
+  "algorithms": [
+    {
+      "name": "Subtree-Based Parallel Branch-and-Bound:\nDistribute work by transferring subtrees between processors.\n\n  SUBTREE AS WORK UNIT:\n    Each subtree = root node + all descendants to explore\n    Worker owns subtree exclusively during processing\n    Granularity: subtrees vs individual nodes\n\n  EXPLORATION LOOP (exploreSubTree):\n    while (nodePool not empty AND within limits):\n      1. Select node via search strategy\n      2. Process node (bound computation)\n      3. Prune if bound >= incumbent\n      4. Branch: create children, add to pool\n\n  DIVING STRATEGY:\n    Prioritize depth-first exploration down promising paths\n    diveNodePool_: candidates for deep dive\n    Goal: find feasible solutions quickly (improve incumbent)\n\n  LOAD BALANCING (splitSubTree):\n    When idle worker requests work:\n    Split nodePool into two parts\n    Send subtree with larger nodes to requester",
+      "math": "Work granularity tradeoff:\n    - Small subtrees: more communication, better balance\n    - Large subtrees: less overhead, potential imbalance",
+      "complexity": "exploreSubTree: O(nodes \u00d7 process_time)\n  splitSubTree: O(nodePool_size) for selection\n  Serialization: O(subtree_size) for MPI transfer",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "AlpsTreeNode for individual nodes",

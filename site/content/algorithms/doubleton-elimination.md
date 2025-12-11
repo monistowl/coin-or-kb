@@ -35,4 +35,5 @@ Time: O(nnz(col_y)) per doubleton - updating all rows with y
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinPresolveDoubleton.hpp") }}** - Doubleton row presolve: substitute y from ax+by=c
+- **[CoinPresolveDoubleton.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Doubleton row presolve: substitute y from ax+by=c
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinPresolveDoubleton.hpp)

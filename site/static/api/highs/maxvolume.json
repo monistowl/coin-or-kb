@@ -1,0 +1,13 @@
+{
+  "name": "maxvolume",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/maxvolume.h",
+  "brief": "Maximum volume basis selection algorithm\n\nImplements the maxvolume algorithm for improving the basis matrix\ncondition number by maximizing |det(B)|. Used during IPM to maintain\na well-conditioned preconditioner.\n\n**Algorithms:**\n- RunSequential(): Full tableau scan with greedy pivot selection\n- RunHeuristic(): Sliced computation for large problems\n\n**Statistics:**\n- updates(): Basis changes performed\n- skipped(): Columns computed but not swapped\n- volinc(): log\u2082(|det(B_new)|/|det(B_old)|)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basis.h for basis matrix management",
+    "kkt_solver_basis.h for usage in preconditioning"
+  ]
+}

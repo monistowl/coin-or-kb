@@ -30,27 +30,40 @@
  * AlpsSubTree is the basic unit of work in parallel ALPS. Workers process
  * entire subtrees autonomously, enabling scalable parallelism.
  *
- * **Key components:**
- * - root_: Root node of this subtree
- * - nodePool_: Leaf nodes awaiting processing
- * - diveNodePool_: Nodes for diving exploration
- * - activeNode_: Currently being processed
+ * @algorithm Subtree-Based Parallel Branch-and-Bound:
+ * Distribute work by transferring subtrees between processors.
  *
- * **Core operations:**
- * - exploreSubTree(): Process nodes up to limits
- * - exploreUnitWork(): Process bounded amount of work
- * - createChildren(): Branch and add children to pool
- * - splitSubTree(): Split off portion for redistribution
- * - rampUp(): Generate initial nodes for parallel start
+ *   SUBTREE AS WORK UNIT:
+ *     Each subtree = root node + all descendants to explore
+ *     Worker owns subtree exclusively during processing
+ *     Granularity: subtrees vs individual nodes
  *
- * **Diving strategy:**
- * - diveNodePool_ holds nodes for deep exploration
- * - diveDepth_ tracks current dive depth
- * - Helps find feasible solutions quickly
+ *   EXPLORATION LOOP (exploreSubTree):
+ *     while (nodePool not empty AND within limits):
+ *       1. Select node via search strategy
+ *       2. Process node (bound computation)
+ *       3. Prune if bound >= incumbent
+ *       4. Branch: create children, add to pool
  *
- * **Dead node removal:**
- * - removeDeadNodes(): Recursively remove fathomed branches
- * - fathomAllNodes(): Clear entire subtree
+ *   DIVING STRATEGY:
+ *     Prioritize depth-first exploration down promising paths
+ *     diveNodePool_: candidates for deep dive
+ *     Goal: find feasible solutions quickly (improve incumbent)
+ *
+ *   LOAD BALANCING (splitSubTree):
+ *     When idle worker requests work:
+ *     Split nodePool into two parts
+ *     Send subtree with larger nodes to requester
+ *
+ * @math
+ *   Work granularity tradeoff:
+ *     - Small subtrees: more communication, better balance
+ *     - Large subtrees: less overhead, potential imbalance
+ *
+ * @complexity
+ *   exploreSubTree: O(nodes × process_time)
+ *   splitSubTree: O(nodePool_size) for selection
+ *   Serialization: O(subtree_size) for MPI transfer
  *
  * @see AlpsTreeNode for individual nodes
  * @see AlpsNodePool for node storage

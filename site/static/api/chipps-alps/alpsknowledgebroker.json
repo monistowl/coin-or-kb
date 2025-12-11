@@ -3,8 +3,15 @@
   "library": "CHiPPS-ALPS",
   "layer": "layer-3",
   "header": "src/AlpsKnowledgeBroker.h",
-  "brief": "Central manager for parallel tree search knowledge and coordination\n\nAlpsKnowledgeBroker is the abstract base class for search coordination.\nIt manages knowledge pools, search strategy, and execution statistics.\n\n**Key responsibilities:**\n- Manage SubTreePool and SolutionPool\n- Register knowledge types for serialization\n- Track search statistics (nodes processed, branched, etc.)\n- Apply search strategy (node/tree selection)\n\n**Knowledge pool management:**\n- addKnowledge()/getKnowledge(): Store/retrieve knowledge\n- registerClass(): Register decode functions for parallel\n- decoderObject(): Get decoder for knowledge type\n\n**Search phases (AlpsPhase):**\n- Rampup: Initial node generation and distribution\n- Search: Main parallel exploration\n- Rampdown: Collect results and terminate\n\n**Implementations:**\n- AlpsKnowledgeBrokerSerial: Single-process execution\n- AlpsKnowledgeBrokerMPI: MPI-based parallel execution",
-  "algorithms": [],
+  "brief": "Central manager for parallel tree search knowledge and coordination\n\nAlpsKnowledgeBroker is the abstract base class for search coordination.\nIt manages knowledge pools, search strategy, and execution statistics.",
+  "algorithms": [
+    {
+      "name": "Knowledge-Based Parallel Search Framework:\nCoordinates distributed tree search via knowledge sharing.\n\n  KNOWLEDGE TYPES:\n    - AlpsSubTree: Portion of B&B tree to explore\n    - AlpsSolution: Incumbent solutions (primal bounds)\n    - AlpsNode: Individual search tree nodes\n\n  POOL MANAGEMENT:\n    SubTreePool: Priority queue of subtrees to explore\n    SolutionPool: Best solutions found (for pruning)\n\n  PARALLEL COORDINATION:\n    1. Rampup: Generate initial subtrees, distribute to workers\n    2. Search: Parallel exploration with load balancing\n    3. Rampdown: Collect results, verify optimality",
+      "math": "Load balance: work donation when idle workers detected\n  Termination: all workers idle AND no pending messages\n  Optimality: best solution when global bound \u2265 incumbent",
+      "complexity": "Serial: O(nodes_explored \u00d7 node_processing_time)\n  Parallel: O(nodes_explored / p \u00d7 node_time + communication)\n  Speedup limited by: tree shape, load imbalance, sync overhead",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "AlpsKnowledgeBrokerSerial for serial implementation",

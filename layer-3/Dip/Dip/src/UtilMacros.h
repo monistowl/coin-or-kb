@@ -1,3 +1,15 @@
+/**
+ * @file UtilMacros.h
+ * @brief Comprehensive utility macros and functions for DIP
+ *
+ * Provides a rich library of utilities: memory management (UTIL_DELPTR),
+ * debug macros, undirected graph edge indexing (UtilIndexU, UtilBothEndsU),
+ * array fill/iota, random number generation, statistics (average),
+ * string manipulation, integrality checks, file I/O, and more.
+ *
+ * @see UtilMacrosDecomp.h for decomposition-specific utilities
+ * @see UtilParameters.h for configuration file parsing
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

@@ -1,0 +1,13 @@
+{
+  "name": "OsiMskConfig",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/OsiMsk/OsiMskConfig.h",
+  "brief": "Configuration header for OsiMsk (MOSEK interface)\n\nProvides build configuration for the Osi adapter to MOSEK Optimization\nSoftware. Defines OSIMSKLIB_EXPORT for DLL import/export based on build\nenvironment and platform. Requires separate MOSEK installation and license.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "OsiMskSolverInterface.h for MOSEK adapter class",
+    "OsiConfig.h for main Osi configuration"
+  ]
+}

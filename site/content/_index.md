@@ -13,17 +13,17 @@ Semantically annotated documentation for the [COIN-OR](https://www.coin-or.org/)
 <strong>Start Learning</strong>
 <span>Guided paths for students</span>
 </a>
-<a href="derivations/" class="nav-card">
-<strong>Derivations</strong>
-<span>Step-by-step proofs</span>
+<a href="algorithms/" class="nav-card">
+<strong>Algorithm Index</strong>
+<span>100 documented algorithms</span>
 </a>
-<a href="libraries/coinutils/" class="nav-card">
-<strong>Browse CoinUtils</strong>
-<span>122 foundation classes</span>
+<a href="browser/" class="nav-card">
+<strong>Source Browser</strong>
+<span>1,963 annotated classes</span>
 </a>
-<a href="api/index.json" class="nav-card">
-<strong>JSON API</strong>
-<span>Machine-readable docs</span>
+<a href="dependencies/" class="nav-card">
+<strong>Dependencies</strong>
+<span>Third-party libraries</span>
 </a>
 </div>
 
@@ -201,15 +201,17 @@ https://monistowl.github.io/coin-or-kb/api/annotations.json
 
 **Example prompt for Claude, GPT, or any LLM:**
 
-> Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 1,902 files across 28 libraries (688 with semantic annotations).
+> Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 2,062 files across 28 libraries (728 with semantic annotations).
 
 **API Endpoints:**
 
 | Endpoint | Description |
 |----------|-------------|
 | [`/api/annotations.json`](api/annotations.json) | Full knowledge base with semantic annotations (2.1 MB) |
+| [`/api/class-briefs.json`](api/class-briefs.json) | Lightweight class index for browser (1,963 classes) |
 | [`/api/knowledge-graph/`](api/knowledge-graph/) | Concept graph with 41 concepts, 1,471 relationships |
-| [`/algorithms/`](algorithms/) | Human-readable algorithm cross-reference |
+| [`/algorithms/`](algorithms/) | Human-readable algorithm cross-reference (100 algorithms) |
+| [`/dependencies/`](dependencies/) | Third-party library documentation |
 
 ---
 
@@ -286,6 +288,7 @@ for layer in kb['layers'].values():
 
 **API Endpoints:**
 - [`/api/annotations.json`](api/annotations.json) — Full knowledge base (2.1 MB)
+- [`/api/class-briefs.json`](api/class-briefs.json) — Class index for browser/search (1,963 classes)
 - [`/api/knowledge-graph/`](api/knowledge-graph/) — Concept graph and relationships
 
 ### What's in the Annotations?
@@ -301,4 +304,4 @@ Each annotated file can include:
 | `@brief` | One-line summary of the file's purpose |
 | `@see` | Cross-references to related code |
 
-**Coverage:** 1,902 annotated files across 28 libraries. 688 files have deep semantic annotations (`@algorithm`, `@math`, `@complexity`).
+**Coverage:** 2,062 annotated files across 28 libraries. 728 files have deep semantic annotations (`@algorithm`, `@math`, `@complexity`).

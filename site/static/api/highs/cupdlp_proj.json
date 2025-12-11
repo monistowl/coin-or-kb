@@ -1,0 +1,13 @@
+{
+  "name": "cupdlp_proj",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/pdlp/cupdlp/cupdlp_proj.h",
+  "brief": "Projection operations for PDHG algorithm\n\nImplements projection onto variable bounds and restart operations:\n- PDHG_Project_Bounds(): Projects x onto [l, u] box constraints\n- PDHG_Restart_Iterate(): Resets iterate to current or average point\n\nIn PDHG, primal projection is: x^{k+1} = proj_{[l,u]}(x\u0304)\nwhere x\u0304 is the gradient step result.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cupdlp_step.h for PDHG update using projections",
+    "cupdlp_restart.h for restart decision logic"
+  ]
+}

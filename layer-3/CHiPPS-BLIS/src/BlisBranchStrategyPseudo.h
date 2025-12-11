@@ -25,27 +25,36 @@
  * @file BlisBranchStrategyPseudo.h
  * @brief Pseudo-cost branching strategy based on historical LP degradation
  *
- * Pseudo-cost branching uses learned estimates of objective degradation
- * to select branching variables without solving child LPs.
+ * @algorithm Pseudo-Cost Branching:
+ * Fast variable selection using learned estimates from history.
+ * Key observation: similar variables cause similar objective changes.
  *
- * **Pseudo-cost definition:**
- * For variable xⱼ with fractional value fⱼ = xⱼ* - floor(xⱼ*):
- * - ψⱼ⁻ = average (ΔObj / fⱼ) over down branches
- * - ψⱼ⁺ = average (ΔObj / (1-fⱼ)) over up branches
+ *   PSEUDO-COST DEFINITION:
+ *     For variable xⱼ with fractional value f = x*_j - ⌊x*_j⌋:
+ *       ψⱼ⁻ = (1/n_down) × Σ (ΔObj_k / f_k)  over down branches
+ *       ψⱼ⁺ = (1/n_up) × Σ (ΔObj_k / (1-f_k))  over up branches
+ *     Normalized by fractional part for scale-invariance
  *
- * **Algorithm:**
- * 1. For each fractional integer variable xⱼ with value xⱼ*:
- *    - Estimate down degradation: Δ⁻ = ψⱼ⁻ · fⱼ
- *    - Estimate up degradation: Δ⁺ = ψⱼ⁺ · (1-fⱼ)
- *    - Score = μ·min(Δ⁻, Δ⁺) + (1-μ)·max(Δ⁻, Δ⁺)
- * 2. Select variable with highest score
+ *   PREDICTION:
+ *     Δ_down ≈ ψⱼ⁻ × f     (expected down degradation)
+ *     Δ_up ≈ ψⱼ⁺ × (1-f)   (expected up degradation)
  *
- * **Initialization:**
- * Before enough observations, uses default pseudo-costs or
- * falls back to other criteria (objective coefficient, etc.)
+ *   SCORING (same as strong branching):
+ *     score(j) = μ·min(Δ_down, Δ_up) + (1-μ)·max(Δ_down, Δ_up)
  *
- * **Complexity:** O(n) where n = number of integer variables
- * Much faster than strong branching but less accurate.
+ *   LEARNING:
+ *     After each branch, update pseudo-cost:
+ *     ψⱼ⁻ = (old_sum + new_sample) / (old_count + 1)
+ *
+ * @math
+ *   Assumption: ΔObj ∝ fractional part (linear approximation)
+ *   Better estimate with more samples: variance ~ 1/n
+ *   Initialization problem: no data for variables not yet branched on
+ *
+ * @complexity
+ *   O(k) per node where k = number of fractional integers
+ *   No LP solves required (vs O(k × LP_time) for strong branching)
+ *   Trade-off: larger tree but faster node processing
  *
  * @see BlisPseudo for pseudo-cost data structure
  * @see BlisBranchStrategyRel for reliability branching (hybrid approach)

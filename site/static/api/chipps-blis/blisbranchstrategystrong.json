@@ -3,8 +3,15 @@
   "library": "CHiPPS-BLIS",
   "layer": "layer-3",
   "header": "src/BlisBranchStrategyStrong.h",
-  "brief": "Strong branching strategy for MILP variable selection\n\nStrong branching is the most accurate (but expensive) branching strategy.\nFor each candidate variable, it actually solves child LP relaxations\nto measure the objective degradation.\n\n**Algorithm:**\n1. For each fractional integer variable x\u2c7c:\n   - Create down branch (x\u2c7c \u2264 floor(x\u2c7c*))\n   - Create up branch (x\u2c7c \u2265 ceil(x\u2c7c*))\n   - Solve both LPs (limited iterations)\n   - Record objective change \u0394Down, \u0394Up\n2. Score = \u03bc\u00b7min(\u0394Down, \u0394Up) + (1-\u03bc)\u00b7max(\u0394Down, \u0394Up)\n3. Select variable with highest score\n\n**BlisStrong struct:**\nStores results for one candidate: objective changes, infeasibility counts,\nsolver completion status for up/down branches.\n\n**Trade-offs:**\n- Produces smallest search trees (best variable selection)\n- Very expensive at each node (many LP solves)\n- Typically used with iteration limits per candidate LP",
-  "algorithms": [],
+  "brief": "Strong branching strategy for MILP variable selection",
+  "algorithms": [
+    {
+      "name": "Strong Branching:\nMost accurate but expensive branching variable selection.\nActually solves child LP relaxations to measure bound improvement.\n\n  PROCEDURE:\n    For each fractional integer variable x\u2c7c with value x*_j:\n      1. DOWN: Fix x\u2c7c \u2264 \u230ax*_j\u230b, solve LP (limited iterations)\n         Record \u0394Down = z_down - z_parent\n      2. UP: Fix x\u2c7c \u2265 \u2308x*_j\u2309, solve LP (limited iterations)\n         Record \u0394Up = z_up - z_parent\n\n  SCORING:\n    score(j) = \u03bc\u00b7min(\u0394Down, \u0394Up) + (1-\u03bc)\u00b7max(\u0394Down, \u0394Up)\n    Balances worst-case vs best-case improvement\n    \u03bc = 1/6 typical (prioritize weak side slightly)\n\n  SELECTION:\n    Choose j* = argmax_j score(j)\n    Highest score = most balanced bound improvement",
+      "math": "Ideal: both branches improve bound significantly\n  If one branch infeasible: even better (immediate pruning)\n  Expected tree size minimized by strong branching",
+      "complexity": "Per node: O(k \u00d7 LP_time) where k = candidates tested\n  k typically = numIntegerInf (all fractional integers)\n  With limits: k bounded, LP iterations bounded",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "BlisBranchStrategyRel for reliability branching (strong + pseudo-cost hybrid)",

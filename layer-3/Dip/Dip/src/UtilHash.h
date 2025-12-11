@@ -1,3 +1,14 @@
+/**
+ * @file UtilHash.h
+ * @brief String hash generation for cut/variable duplicate detection
+ *
+ * Provides UtilCreateStringHash functions that create deterministic
+ * string representations of sparse vectors and rows for use in
+ * hash-based duplicate detection in cut and variable pools.
+ *
+ * @see DecompCutOsi.h for usage in cut duplicate detection
+ * @see DecompCutPool.h for cut pool management
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

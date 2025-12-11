@@ -1,0 +1,12 @@
+{
+  "name": "rpl_malloc",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/rpl_malloc.h",
+  "brief": "Replacement malloc/realloc for non-GNU systems\n\nProvides rpl_malloc, rpl_calloc, and rpl_realloc as fallbacks when\nthe system's malloc implementation is not GNU-compatible (e.g., on\nsome embedded systems or older Unix variants).\n\nOnly used internally when HAVE_MALLOC or HAVE_REALLOC are not set\nduring autoconf configuration.\n\n@note Internal header; not for direct use",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "common.h for malloc wrapper selection"
+  ]
+}

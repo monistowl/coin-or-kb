@@ -1,3 +1,15 @@
+/**
+ * @file sym_win32_time.h
+ * @brief POSIX time structures for Windows compatibility
+ *
+ * Provides struct timeval and struct rusage definitions for Windows
+ * platforms (MSVC, Cygwin) that lack POSIX sys/time.h and sys/resource.h.
+ *
+ * Required for SYMPHONY's wall-clock timing via sym_timemeas.h when
+ * building on Windows without MinGW's POSIX emulation layer.
+ *
+ * @see sym_timemeas.h for SYMPHONY timing functions
+ */
 #ifndef WIN32_TIME_H
 #define WIN32_TIME_H
 

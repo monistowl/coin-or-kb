@@ -34,8 +34,9 @@ Element access: O(1)
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinDenseVector.hpp") }}** - Dense vector template with element-wise arithmetic operations
+- **[CoinDenseVector.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Dense vector template with element-wise arithmetic operations
 
 CoinDenseVector<T> stores all elements in a contiguous array.
 Unlike sparse vectors, every position has storage. Supports
 arithmetic operators (+, -, *, /) with other dense vectors.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinDenseVector.hpp)

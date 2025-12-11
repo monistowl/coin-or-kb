@@ -1,3 +1,26 @@
+/**
+ * @file basiclu_get_factors.h
+ * @brief Extract L and U factors in compressed column format
+ *
+ * After factorization, retrieves the permutation and factors:
+ *   B[rowperm, colperm] = L × U
+ *
+ * **Output Format:**
+ * - L: Unit lower triangular in CSC, diagonal elements explicit (value 1.0)
+ * - U: Upper triangular in CSC, diagonal at end of each column
+ * - rowperm, colperm: Permutation vectors of length m
+ *
+ * **Singular Matrix Handling:**
+ * If rank < m, columns colperm[rank..m-1] were linearly dependent and
+ * replaced by unit columns with 1 in rows rowperm[rank..m-1].
+ *
+ * **Note:** Only valid after basiclu_factorize() completes and before
+ * any call to basiclu_update(). For solving systems, use the solve
+ * functions directly rather than extracting factors.
+ *
+ * @see basiclu_factorize.h for computing the factorization
+ * @see basiclu_solve_sparse.h for solving without extracting factors
+ */
 lu_int basiclu_get_factors
 (
     lu_int istore[],

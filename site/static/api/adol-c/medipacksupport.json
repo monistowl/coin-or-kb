@@ -1,0 +1,12 @@
+{
+  "name": "medipacksupport",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/medipacksupport.h",
+  "brief": "MeDiPack integration for MPI-parallel automatic differentiation\n\nProvides the AdolcTool class that integrates ADOL-C with MeDiPack for\ndifferentiating MPI-parallel programs. Defines type mappings and\ncallbacks required by MeDiPack's adjoint MPI framework.\n\n**Features:**\n- Automatic adjoint communication handling\n- Support for MPI collectives (reduce, gather, etc.)\n- Primal value caching for reverse mode\n\n@note Requires MeDiPack library and MPI",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "medipacksupport_p.h for internal callbacks"
+  ]
+}

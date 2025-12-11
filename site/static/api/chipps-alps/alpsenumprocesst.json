@@ -1,0 +1,13 @@
+{
+  "name": "AlpsEnumProcessT",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsEnumProcessT.h",
+  "brief": "Process type enumeration for parallel search\n\nDefines AlpsProcessType enum identifying roles in distributed computing:\nSerial (single process), Master (coordinator), Hub (cluster manager),\nWorker (search executor), and specialized generators (CG/VG cut/variable,\nCP/VP constraint/variable pool managers).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsKnowledgeBrokerMPI.h for MPI process management",
+    "AlpsMessageTag.h for inter-process communication"
+  ]
+}

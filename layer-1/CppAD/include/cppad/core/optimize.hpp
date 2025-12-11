@@ -6,7 +6,38 @@
 // ----------------------------------------------------------------------------
 /**
  * @file optimize.hpp
- * @brief Core AD functionality: optimize
+ * @brief Tape optimization for faster derivative computation
+ *
+ * @algorithm Operation Sequence Optimization:
+ * Transforms recorded tape to reduce operations and memory.
+ * Critical for computational efficiency in derivative evaluation.
+ *
+ *   OPTIMIZATIONS PERFORMED:
+ *     1. Dead code elimination: remove ops not affecting outputs
+ *     2. Constant folding: precompute ops with constant operands
+ *     3. Common subexpression elimination (CSE): reuse identical ops
+ *     4. Algebraic simplification: x+0=x, x*1=x, x*0=0
+ *
+ *   VARIABLE REDUCTION:
+ *     Fewer variables = less memory per sweep
+ *     Fewer operations = faster forward/reverse passes
+ *
+ *   WHEN TO USE:
+ *     After recording, before calling Jacobian/Hessian many times
+ *     One-time optimization cost, ongoing evaluation savings
+ *
+ * @math
+ *   Original tape: n_orig operations, m_orig variables
+ *   Optimized tape: n_opt ≤ n_orig ops, m_opt ≤ m_orig vars
+ *   Speedup: proportional to reduction ratio
+ *
+ * @complexity
+ * - Optimization: O(n_orig) single pass analysis
+ * - Per-evaluation savings: O(n_orig - n_opt) per sweep
+ * - Typical reduction: 10-50% fewer operations
+ *
+ * @see ADFun::optimize() to apply optimization
+ * @see checkpoint_two.hpp for reusable optimized subgraphs
  */
 
 # define CPPAD_CORE_OPTIMIZE_PRINT_RESULT 0

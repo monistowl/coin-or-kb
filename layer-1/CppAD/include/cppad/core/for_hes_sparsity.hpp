@@ -6,7 +6,37 @@
 // ----------------------------------------------------------------------------
 /**
  * @file for_hes_sparsity.hpp
- * @brief Core AD functionality: for hes sparsity
+ * @brief Forward mode Hessian sparsity pattern computation
+ *
+ * @algorithm Forward Hessian Sparsity:
+ * Alternative to reverse mode for Hessian sparsity detection.
+ * Uses forward-over-forward approach.
+ *
+ *   APPROACH:
+ *     Track second-order dependencies in forward direction
+ *     For each intermediate variable v:
+ *       - First-order: which inputs does v depend on?
+ *       - Second-order: which input pairs have nonzero cross-derivative?
+ *
+ *   PROPAGATION:
+ *     For v = u₁ · u₂:
+ *       Linear part: inherits first-order from both
+ *       Quadratic part: cross-product of first-order sets
+ *
+ * @math
+ *   Edge detection: if v depends linearly on uᵢ and uⱼ
+ *   then v² depends quadratically on xᵢ, xⱼ if they appear in uᵢ, uⱼ
+ *
+ *   Pattern propagation through nonlinear ops (*, exp, sin, etc.)
+ *   generates second-order dependencies
+ *
+ * @complexity
+ * - Time: O(ops × sparsity²) similar to reverse
+ * - Choice: forward may be better when tracking few directions
+ *
+ * @ref Griewank & Walther (2008), Section 6.3
+ *
+ * @see rev_hes_sparsity.hpp for reverse mode alternative
  */
 /*
 {xrst_begin for_hes_sparsity}

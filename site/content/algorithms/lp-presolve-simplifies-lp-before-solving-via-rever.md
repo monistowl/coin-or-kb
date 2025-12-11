@@ -24,11 +24,12 @@ Presolve applies a sequence of transformations T_k to original LP:
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinPresolveMatrix.hpp") }}** - Core presolve data structures and action base class
+- **[CoinPresolveMatrix.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Core presolve data structures and action base class
 
 Defines CoinPrePostsolveMatrix (common base), CoinPresolveMatrix (for
 presolve), CoinPostsolveMatrix (for postsolve), and CoinPresolveAction
 (base class for all presolve transformations).
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinPresolveMatrix.hpp)
 
 ## References
 

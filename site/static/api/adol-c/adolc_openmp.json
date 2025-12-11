@@ -1,0 +1,12 @@
+{
+  "name": "adolc_openmp",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adolc_openmp.h",
+  "brief": "OpenMP parallel differentiation support for ADOL-C\n\nProvides thread-safe automatic differentiation using OpenMP directives.\nADOLC_OpenMP and ADOLC_OpenMP_NC handler classes manage tape state\nacross parallel regions.\n\n**Usage:**\n```cpp\n#pragma omp parallel ADOLC_OPENMP\n{\n    // Each thread gets independent tape state\n    trace_on(tag);\n    // ... AD computations ...\n    trace_off();\n}\n```\n\n@note Requires compilation with -fopenmp or equivalent",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "adolc.h for sequential ADOL-C interface"
+  ]
+}

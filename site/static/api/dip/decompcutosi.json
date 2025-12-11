@@ -1,0 +1,13 @@
+{
+  "name": "DecompCutOsi",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/DecompCutOsi.h",
+  "brief": "DecompCut implementation wrapping OsiRowCut\n\nProvides DecompCutOsi class that wraps an OsiRowCut for use in\nDIP's decomposition framework. Handles sense/rhs conversion with\ndifferent infinity values across solvers and generates string\nhashes for cut pooling and duplicate detection.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DecompCut.h for base cut interface",
+    "UtilHash.h for string hash generation"
+  ]
+}

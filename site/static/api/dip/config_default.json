@@ -1,0 +1,13 @@
+{
+  "name": "config_default",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/config_default.h",
+  "brief": "Default build configuration for DIP (non-autotools builds)\n\nIncludes system-wide COIN-OR config, DIP-specific macros, and\nMSVC pragma settings. Defines availability of CGL, CoinUtils,\nOsi, and optional debug/verbosity levels for non-configure builds.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_dip_default.h for public version macros",
+    "DecompConfig.h for unified configuration header"
+  ]
+}

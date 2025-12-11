@@ -1,0 +1,12 @@
+{
+  "name": "array_handler",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/c_interface/array_handler.h",
+  "brief": "Array index accessors for C interface\n\nProvides C-callable functions for indexing into 1D, 2D, and 3D\narrays used by ADOL-C drivers. Enables languages without native\nC multi-dimensional array support to access derivative results.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "driver_interface.h for ADOL-C driver C interface"
+  ]
+}

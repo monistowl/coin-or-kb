@@ -1,0 +1,13 @@
+{
+  "name": "AlpsMessageTag",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsMessageTag.h",
+  "brief": "MPI message tag enumeration for parallel search\n\nDefines 45+ AlpsMessageTag values for inter-process communication in\ndistributed tree search. Categories include:\n- Control: termination, pause, continue (AlpsMsgContOrTerm, AlpsMsgAskTerminate)\n- Load balancing: donate requests, workload sharing (AlpsMsgAskDonate, AlpsMsgLoadInfo)\n- Status: hub/worker status reporting (AlpsMsgHubStatus, AlpsMsgWorkerStatus)\n- Data: model/node/subtree transfer (AlpsMsgModel, AlpsMsgNode, AlpsMsgSubTree)",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsKnowledgeBrokerMPI.h for MPI message handling",
+    "AlpsEnumProcessT.h for process type definitions"
+  ]
+}

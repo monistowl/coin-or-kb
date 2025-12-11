@@ -1,0 +1,13 @@
+{
+  "name": "ipx_internal",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/ipx_internal.h",
+  "brief": "Internal types, constants, and default parameters for IPX solver\n\nDefines the core internal infrastructure for the IPX interior point solver:\n\n**Types:**\n- Int: Integer type alias (ipxint)\n- Vector: std::valarray<double> for dense vectors\n- Info: Statistics and status information structure\n- Parameters: Solver configuration with sensible defaults\n\n**Numerical Constants:**\n- kHypersparseThreshold (0.1): Sparsity threshold for hyper-sparse operations\n- kLuDependencyTol (1e-3): Absolute pivot tolerance for rank detection\n- kLuStabilityThreshold (1e-12): Maximum acceptable residual for LU stability\n- kFtDiagErrorTol (1e-8): Forrest-Tomlin diagonal error tolerance",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipx_parameters.h for parameter documentation",
+    "ipx_info.h for output statistics"
+  ]
+}

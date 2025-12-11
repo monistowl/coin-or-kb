@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_obj_get_factors",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_obj_get_factors.h",
+  "brief": "Extract L and U factors from BasicLU object\n\nObject-oriented wrapper for basiclu_get_factors().\nExtracts permutations and factors in compressed column format.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_get_factors.h for output format details",
+    "basiclu_object.h for the object structure"
+  ]
+}

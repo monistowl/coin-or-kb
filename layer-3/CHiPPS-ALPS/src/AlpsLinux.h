@@ -1,3 +1,14 @@
+/**
+ * @file AlpsLinux.h
+ * @brief Platform-specific definitions for Linux systems
+ *
+ * Provides Linux-specific system includes, type definitions, and compiler
+ * macros for GCC 2.x and 3.x+. Includes gettimeofday(), setpriority(),
+ * gethostname(), and memory management macros (ALPS_CONSTRUCT, ALPS_DESTROY).
+ *
+ * @see AlpsOs.h for platform detection
+ * @see AlpsCygwin.h for Cygwin equivalents
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

@@ -1,0 +1,13 @@
+{
+  "name": "CbcStrategy",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CbcStrategy.h",
+  "brief": ".NET wrappers for Cbc solver configuration strategies\n\nProvides managed wrappers for CbcStrategy and derived classes\n(CbcStrategyNull, CbcStrategyDefault, CbcStrategyDefaultSubTree).\nStrategies configure cut generators, heuristics, preprocessing,\nand other branch-and-cut parameters as reusable bundles.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CbcCutGenerator.h for individual cut generator control",
+    "CbcModel for solver that uses these strategies"
+  ]
+}

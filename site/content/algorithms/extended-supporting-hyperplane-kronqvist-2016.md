@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="TaskSelectHyperplanePointsESH.h") }}** - Extended Supporting Hyperplane point selection
+- **[TaskSelectHyperplanePointsESH.h](/coin-or-kb/browser/?library=SHOT)** - Extended Supporting Hyperplane point selection
 
 Core ESH algorithm: finds boundary points for hyperplane generation.
 
@@ -28,3 +28,4 @@ Core ESH algorithm: finds boundary points for hyperplane generation.
 **Extends ECP:**
 - ESH uses interior point + rootsearch
 - ECP generates cuts at infeasible point directly
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/Tasks/TaskSelectHyperplanePointsESH.h)

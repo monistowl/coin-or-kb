@@ -1,0 +1,13 @@
+{
+  "name": "configall_system",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/configall_system.h",
+  "brief": "Compiler-specific configuration router for non-autotools builds\n\nRoutes to the appropriate compiler-specific configuration header based\non the detected compiler. Currently supports MSVC via configall_system_msc.h.\nUsed by *Config.h headers when HAVE_CONFIG_H is not defined.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "configall_system_msc.h for MSVC-specific settings",
+    "OsiConfig.h for main Osi configuration"
+  ]
+}

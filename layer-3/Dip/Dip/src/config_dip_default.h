@@ -1,3 +1,14 @@
+/**
+ * @file config_dip_default.h
+ * @brief Public DIP version macros and solver availability flags
+ *
+ * Defines DIP_VERSION, DIP_VERSION_MAJOR/MINOR/RELEASE and flags
+ * for optional solver availability (DIP_HAS_CLP, DIP_HAS_CBC).
+ * Used when building without autotools configure.
+ *
+ * @see config_default.h for internal build configuration
+ * @see DecompConfig.h for unified configuration header
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

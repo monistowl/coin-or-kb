@@ -36,4 +36,5 @@ update: O(log n) for bubble-up
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinNodeHeap.hpp") }}** - Monotone min-heap for Dijkstra's algorithm
+- **[CoinNodeHeap.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Monotone min-heap for Dijkstra's algorithm
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinNodeHeap.hpp)

@@ -1,3 +1,20 @@
+/**
+ * @file starting_basis.h
+ * @brief Initial basis construction from interior point iterates
+ *
+ * Constructs a starting basis for crossover using interior point scaling
+ * factors as column weights. Handles special cases:
+ * - Free variables (lb=-∞, ub=+∞): BASIC_FREE or NONBASIC_FIXED
+ * - Fixed slacks (lb=ub): BASIC_FREE or NONBASIC_FIXED
+ * - Fixed structural: NONBASIC_FIXED
+ * - Others: BASIC or NONBASIC
+ *
+ * Linear dependencies among free variables or equality constraints
+ * are resolved by fixing dependent variables at zero.
+ *
+ * @see guess_basis.h for basis construction from weights
+ * @see iterate.h for interior point state
+ */
 #ifndef IPX_STARTING_BASIS_H_
 #define IPX_STARTING_BASIS_H_
 

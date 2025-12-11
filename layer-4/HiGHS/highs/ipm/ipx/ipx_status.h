@@ -1,3 +1,28 @@
+/**
+ * @file ipx_status.h
+ * @brief Status codes, error flags, and basis status constants
+ *
+ * **Overall Status (info.status):**
+ * - IPX_STATUS_solved (1000): Optimal solution found
+ * - IPX_STATUS_stopped (1005): Stopped early (time/iter limit)
+ * - IPX_STATUS_no_model (1006): No model loaded
+ *
+ * **Phase Status (status_ipm, status_crossover):**
+ * - IPX_STATUS_optimal (1): Converged to optimality
+ * - IPX_STATUS_imprecise (2): Optimal but tolerances not met
+ * - IPX_STATUS_primal_infeas (3): Primal infeasible
+ * - IPX_STATUS_dual_infeas (4): Dual infeasible (unbounded)
+ *
+ * **Error Flags:**
+ * - IPX_ERROR_argument_null (102): NULL pointer argument
+ * - IPX_ERROR_cr_* (201-205): CR method errors
+ * - IPX_ERROR_basis_* (301-306): Basis factorization errors
+ *
+ * **Basis Status:**
+ * - IPX_basic (0), IPX_nonbasic_lb (-1), IPX_nonbasic_ub (-2)
+ *
+ * @see ipx_info.h for status field locations
+ */
 #ifndef IPX_STATUS_H_
 #define IPX_STATUS_H_
 

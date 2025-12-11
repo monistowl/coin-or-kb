@@ -1,3 +1,14 @@
+/**
+ * @file config_default.h
+ * @brief Default build configuration for DIP (non-autotools builds)
+ *
+ * Includes system-wide COIN-OR config, DIP-specific macros, and
+ * MSVC pragma settings. Defines availability of CGL, CoinUtils,
+ * Osi, and optional debug/verbosity levels for non-configure builds.
+ *
+ * @see config_dip_default.h for public version macros
+ * @see DecompConfig.h for unified configuration header
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

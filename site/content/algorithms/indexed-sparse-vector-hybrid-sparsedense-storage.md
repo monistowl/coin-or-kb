@@ -33,9 +33,10 @@ Element access: O(1) via dense array
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinIndexedVector.hpp") }}** - Sparse vector with dense backing array for O(1) element access
+- **[CoinIndexedVector.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Sparse vector with dense backing array for O(1) element access
 
 CoinIndexedVector combines sparse index storage with a dense values array,
 enabling O(1) random access while tracking which positions are non-zero.
 Designed for simplex operations where sparse updates need fast access.
 Has optional "packed" mode that behaves more like CoinPackedVector.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinIndexedVector.hpp)

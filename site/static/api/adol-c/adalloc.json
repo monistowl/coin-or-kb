@@ -1,0 +1,13 @@
+{
+  "name": "adalloc",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/adalloc.h",
+  "brief": "Multi-dimensional array allocation for ADOL-C\n\nProvides memory allocation utilities for 1D, 2D, and 3D double arrays\nused throughout ADOL-C for storing Taylor coefficients, Jacobians,\nand intermediate values during tape evaluation.\n\n**Key Functions:**\n- myalloc1/2/3(): Allocate 1D/2D/3D double arrays\n- myfree1/2/3(): Deallocate corresponding arrays\n- myallocI2(): Allocate identity matrix representation",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "adolc.h for main ADOL-C interface",
+    "drivers/drivers.h for higher-level driver functions using these arrays"
+  ]
+}

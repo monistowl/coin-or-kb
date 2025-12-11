@@ -1,3 +1,15 @@
+/**
+ * @file AlpsOs.h
+ * @brief Platform detection and routing for ALPS
+ *
+ * Detects the current operating system and includes the appropriate
+ * platform-specific header. Supports Linux (AlpsLinux.h), Cygwin
+ * (AlpsCygwin.h), AIX 4.3 (AlpsAix43.h), SunOS (AlpsSunos.h), and
+ * macOS/Darwin (AlpsMACH.h).
+ *
+ * @see AlpsLinux.h for Linux-specific definitions
+ * @see AlpsCygwin.h for Cygwin-specific definitions
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

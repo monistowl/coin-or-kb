@@ -1,3 +1,14 @@
+/**
+ * @file config_alps_default.h
+ * @brief Public Alps version macros for non-autotools builds
+ *
+ * Defines version information (ALPS_VERSION, ALPS_VERSION_MAJOR/MINOR/RELEASE)
+ * and optional MPI availability (COIN_HAS_MPI). This is the public header
+ * included by users of the Alps library when not using autotools.
+ *
+ * @see config_default.h for internal build configuration
+ * @see AlpsConfig.h for unified configuration entry point
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

@@ -1,0 +1,12 @@
+{
+  "name": "ADOLC_TB_interface",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/c_interface/ADOLC_TB_interface.h",
+  "brief": "Pure C interface for tape-based ADOL-C\n\nProvides C-callable functions for tape-based automatic differentiation\nusing opaque TBAdoubleHandle pointers. Enables use of ADOL-C from\nlanguages without C++ FFI (Fortran, Python via ctypes, etc.).\n\n**Categories:**\n- create_tb_adouble/free_tb_adouble: Lifecycle management\n- Arithmetic: add_tb_adouble, mult_tb_adouble, etc.\n- Transcendental: tb_sin, tb_cos, tb_exp, tb_log, etc.\n- Tape control: c_trace_on, c_trace_off\n- Independent/dependent: create_independent, create_dependent",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ADOLC_TL_interface.h for traceless forward mode"
+  ]
+}

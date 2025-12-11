@@ -24,7 +24,7 @@ Summary of major functions:
 
 ### CoinUtils
 
-- **{{ link(path="/browser/?library=CoinUtils", text="CoinHelperFunctions.hpp") }}** - Low-level utility functions for array manipulation, copying, and comparison
+- **[CoinHelperFunctions.hpp](/coin-or-kb/browser/?library=CoinUtils)** - Low-level utility functions for array manipulation, copying, and comparison
 
 Provides optimized template functions for common array operations used throughout
 COIN-OR: copying (with Duff's device optimization), filling, zeroing, sorting checks,
@@ -33,6 +33,7 @@ file I/O utilities.
 
 Many functions offer ~2x speedup over naive loops via loop unrolling and
 Duff's device techniques.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/CoinUtils/src/CoinHelperFunctions.hpp)
 
 ## References
 

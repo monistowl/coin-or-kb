@@ -1,4 +1,16 @@
-// Copyright (C) Jan-Willem Goossens 
+/**
+ * @file NativeTests.h
+ * @brief .NET entry points for native COIN-OR test suites
+ *
+ * Provides managed wrappers to invoke native Cbc and Clp unit tests
+ * (CoinSolve, GamsTest, OsiCbcUnitTest, OsiClpUnitTest) from .NET.
+ * Uses macro redefinition to rename main() functions and allow
+ * multiple test programs to coexist in a single DLL.
+ *
+ * @note Test data directories (Sample, miplib3) must be provided
+ * @see SonnetWrapper for production managed API
+ */
+// Copyright (C) Jan-Willem Goossens
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 
 #pragma once

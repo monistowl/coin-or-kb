@@ -1,0 +1,13 @@
+{
+  "name": "cupdlp_utils",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/pdlp/cupdlp/cupdlp_utils.h",
+  "brief": "Utility functions for CUPDLP solver\n\nMemory management, allocation, and I/O utilities:\n- PDHG_Create/Destroy: Solver lifecycle management\n- Alloc/Clear functions: Per-component memory handling\n- Matrix format conversions: dense\u2194CSR\u2194CSC\n- Timing: my_clock(), getTimeStamp()\n- Output: vecPrint, writeJson, writeSol\n\nAlso handles user parameter parsing and solver configuration.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cupdlp_defs.h for data structures being managed",
+    "glbopts.h for memory allocation macros"
+  ]
+}

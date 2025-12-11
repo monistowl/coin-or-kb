@@ -8,20 +8,6 @@ category = "Primal Heuristics"
 implementation_count = 1
 +++
 
-## Why This Matters
-
-The Feasibility Pump is one of the most successful **primal heuristics** in MIP solving. Its job is simple but crucial: find *any* integer-feasible solution quickly, so the solver has a bound to prune with.
-
-- **Fast incumbents**: Before Feasibility Pump, MIP solvers often explored thousands of nodes before finding a single feasible solution. FP typically finds one in seconds, even for hard instances.
-- **Enables aggressive pruning**: Once you have a feasible solution with objective value z*, any node with LP relaxation > z* can be pruned. This can eliminate most of the search tree.
-- **~80% success rate**: On MIPLIB benchmark instances, FP finds feasible solutions about 80% of the time. Combined with other heuristics, this covers almost all solvable problems.
-
-**The key insight**: Instead of searching the combinatorial space of integer assignments, FP solves a sequence of easy LPs. Each LP minimizes distance to the nearest integer point. You alternate: solve LP → round → solve LP toward that rounding → round → ... until the LP solution and rounding coincide (integer feasible!).
-
-**When it struggles**: FP can cycle (visiting the same roundings repeatedly) or get stuck far from any feasible point. Modern implementations add perturbations, objective blending, and random flips to escape these traps.
-
----
-
 Alternates between LP relaxation and rounding to find feasible MIP solution.
 
 Basic Algorithm:
@@ -58,9 +44,10 @@ Success rate ~80% on MIPLIB instances.
 
 ### Cbc
 
-- **{{ link(path="/browser/?library=Cbc", text="CbcHeuristicFPump.hpp") }}** - Feasibility Pump heuristic (Fischetti, Glover & Lodi)
+- **[CbcHeuristicFPump.hpp](/coin-or-kb/browser/?library=Cbc)** - Feasibility Pump heuristic (Fischetti, Glover & Lodi)
 Copyright (C) 2004, IBM Corporation and others. All Rights Reserved.
 This code is licensed under the terms of the Eclipse Public License (EPL).
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Cbc/src/CbcHeuristicFPump.hpp)
 
 ## References
 

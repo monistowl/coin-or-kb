@@ -1,3 +1,14 @@
+/**
+ * @file config_blis_default.h
+ * @brief Public BLIS version macros for non-autotools builds
+ *
+ * Defines version information (BLIS_VERSION, BLIS_VERSION_MAJOR/MINOR/RELEASE)
+ * for client code. This is the public header included by users of the BLIS
+ * library when not using autotools.
+ *
+ * @see config_default.h for internal build configuration
+ * @see BlisConfig.h for unified configuration entry point
+ */
 /*===========================================================================*
  * This file is part of the BiCePS Linear Integer Solver (BLIS).             *
  *                                                                           *
@@ -15,7 +26,7 @@
  *          Ted Ralphs, Lehigh University                                    *
  *          Laszlo Ladanyi, IBM T.J. Watson Research Center                  *
  *          Matthew Saltzman, Clemson University                             *
- *                                                                           * 
+ *                                                                           *
  *                                                                           *
  * Copyright (C) 2001-2023, Lehigh University, Yan Xu, and Ted Ralphs.       *
  * All Rights Reserved.                                                      *

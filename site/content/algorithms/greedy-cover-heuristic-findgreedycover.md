@@ -27,7 +27,7 @@ O(2^n) worst case, often O(n * c) practical
 
 ### Cgl
 
-- **{{ link(path="/browser/?library=Cgl", text="CglKnapsackCover.hpp") }}** - Knapsack cover cuts for binary packing constraints
+- **[CglKnapsackCover.hpp](/coin-or-kb/browser/?library=Cgl)** - Knapsack cover cuts for binary packing constraints
 
 Generates cover inequalities for knapsack constraints of the form
 sum_j a_j * x_j <= b where x_j are binary. A cover C is a subset
@@ -55,6 +55,7 @@ Key parameters:
 - maxInKnapsack_: Maximum variables in processed knapsack
 - expensiveCuts_: Enable/disable costly exact methods
 - rowsToCheck_: Restrict which rows to examine
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Cgl/src/CglKnapsackCover/CglKnapsackCover.hpp)
 
 ## References
 

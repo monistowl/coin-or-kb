@@ -1,0 +1,13 @@
+{
+  "name": "cupdlp_cs",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/pdlp/cupdlp/cupdlp_cs.h",
+  "brief": "Sparse matrix utilities for CUPDLP\n\nCSparse-style routines for compressed sparse column (CSC) matrices.\nProvides triplet-to-CSC conversion, matrix allocation, transpose,\nand basic operations needed for PDHG matrix-vector products.\n\nBased on Tim Davis's CSparse library conventions.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "cupdlp_linalg.h for matrix-vector products using these formats",
+    "cupdlp_defs.h for CUPDLPcsc/CUPDLPcsr structures"
+  ]
+}

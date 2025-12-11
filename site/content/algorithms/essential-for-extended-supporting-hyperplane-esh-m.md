@@ -12,7 +12,7 @@ implementation_count = 1
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="IRootsearchMethod.h") }}** - Interface for constraint boundary rootsearch algorithms
+- **[IRootsearchMethod.h](/coin-or-kb/browser/?library=SHOT)** - Interface for constraint boundary rootsearch algorithms
 
 Finds points on constraint boundaries for ESH hyperplane generation.
 
@@ -36,3 +36,4 @@ where constraint function equals zero (feasibility boundary).
 
 **Implementations:**
 - RootsearchMethodBoost: Boost.Math TOMS 748 or bisection
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/RootsearchMethod/IRootsearchMethod.h)

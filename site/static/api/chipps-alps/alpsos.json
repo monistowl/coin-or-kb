@@ -1,0 +1,13 @@
+{
+  "name": "AlpsOs",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsOs.h",
+  "brief": "Platform detection and routing for ALPS\n\nDetects the current operating system and includes the appropriate\nplatform-specific header. Supports Linux (AlpsLinux.h), Cygwin\n(AlpsCygwin.h), AIX 4.3 (AlpsAix43.h), SunOS (AlpsSunos.h), and\nmacOS/Darwin (AlpsMACH.h).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsLinux.h for Linux-specific definitions",
+    "AlpsCygwin.h for Cygwin-specific definitions"
+  ]
+}

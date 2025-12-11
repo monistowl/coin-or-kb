@@ -1,3 +1,15 @@
+/**
+ * @file DecompCutOsi.h
+ * @brief DecompCut implementation wrapping OsiRowCut
+ *
+ * Provides DecompCutOsi class that wraps an OsiRowCut for use in
+ * DIP's decomposition framework. Handles sense/rhs conversion with
+ * different infinity values across solvers and generates string
+ * hashes for cut pooling and duplicate detection.
+ *
+ * @see DecompCut.h for base cut interface
+ * @see UtilHash.h for string hash generation
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

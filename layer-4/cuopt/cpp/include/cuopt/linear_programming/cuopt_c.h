@@ -14,6 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * @file cuopt_c.h
+ * @brief Pure C API for NVIDIA cuOpt LP/MIP solver
+ *
+ * Provides C language bindings for GPU-accelerated linear and mixed-integer
+ * programming. Supports both standard form (Ax {=,≤,≥} b) and ranged
+ * constraints (bl ≤ Ax ≤ bu).
+ *
+ * **Workflow:**
+ * 1. Create problem: cuOptCreateProblem() or cuOptReadProblem()
+ * 2. Configure: cuOptCreateSolverSettings(), cuOptSetParameter()
+ * 3. Solve: cuOptSolve()
+ * 4. Extract: cuOptGetPrimalSolution(), cuOptGetObjectiveValue()
+ * 5. Cleanup: cuOptDestroySolution(), cuOptDestroyProblem()
+ *
+ * **Data Types:**
+ * - cuopt_float_t: double (configurable via CUOPT_INSTANTIATE_DOUBLE)
+ * - cuopt_int_t: int32_t (configurable via CUOPT_INSTANTIATE_INT32)
+ * - Constraint matrix in CSR format (row_offsets, column_indices, values)
+ *
+ * @see constants.h for CUOPT_SUCCESS, CUOPT_MINIMIZE, etc.
+ * @see linear_programming/solve.hpp for C++ API
+ */
 
 #ifndef CUOPT_C_API_H
 #define CUOPT_C_API_H

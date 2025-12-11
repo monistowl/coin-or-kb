@@ -1,4 +1,16 @@
-// Copyright (C) Jan-Willem Goossens 
+/**
+ * @file CoinLpIO.h
+ * @brief .NET wrapper for LP file format reader
+ *
+ * Wraps ::CoinLpIO for reading LP-format optimization problems
+ * into .NET. Provides access to problem dimensions, bounds,
+ * objective coefficients, constraint matrix, row/column names,
+ * and integrality information.
+ *
+ * @see CoinPackedMatrix.h for constraint matrix access
+ * @see CoinError.h for exception handling during file I/O
+ */
+// Copyright (C) Jan-Willem Goossens
 // All Rights Reserved.
 // This code is licensed under the terms of the Eclipse Public License (EPL).
 

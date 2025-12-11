@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_solve_for_update",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_solve_for_update.h",
+  "brief": "Solve linear system while preparing for basis update\n\nPerforms FTRAN (forward transformation) or BTRAN (backward transformation)\nwhile storing intermediate results needed by basiclu_update().\n\n**For Basis Updates (simplex method):**\n1. FTRAN: Solve B\u00b7x = a for entering column a \u2192 stores spike column\n2. BTRAN: Solve B'\u00b7y = e\u2c7c for leaving variable j \u2192 stores pivot row\n3. Call basiclu_update() to perform Forrest-Tomlin update\n\n**Partial Solve Optimization:**\nIf solution not requested (p_nzlhs=NULL), only one triangular solve\nis performed, storing data for update. Full solution requires both.\n\n**Memory Growth:**\nMay return BASICLU_REALLOCATE if Li/Lx or Ui/Ux arrays need expansion\nto store update data. Reallocate and retry.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_update.h for applying the Forrest-Tomlin update",
+    "basiclu_solve_sparse.h for solves without update preparation"
+  ]
+}

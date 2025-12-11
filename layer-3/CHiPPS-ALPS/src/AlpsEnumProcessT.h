@@ -1,3 +1,15 @@
+/**
+ * @file AlpsEnumProcessT.h
+ * @brief Process type enumeration for parallel search
+ *
+ * Defines AlpsProcessType enum identifying roles in distributed computing:
+ * Serial (single process), Master (coordinator), Hub (cluster manager),
+ * Worker (search executor), and specialized generators (CG/VG cut/variable,
+ * CP/VP constraint/variable pool managers).
+ *
+ * @see AlpsKnowledgeBrokerMPI.h for MPI process management
+ * @see AlpsMessageTag.h for inter-process communication
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

@@ -1,0 +1,13 @@
+{
+  "name": "buffer_temp",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/buffer_temp.h",
+  "brief": "Template buffer class for struct storage with linked sub-buffers\n\nProvides Buffer<T, buff_size> template class that manages a linked list\nof fixed-size arrays for efficient struct allocation. Used internally\nby ADOL-C for external function descriptors and checkpointing data.\n\n**Design:**\nBuffers grow by allocating new SubBuffer nodes rather than reallocating,\navoiding pointer invalidation. Requires types with an `allmem` member\n(enforced via AllMemType concept).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "externfcts2.h for ext_diff_fct_v2 struct using this buffer",
+    "checkpointing.h for checkpoint storage"
+  ]
+}

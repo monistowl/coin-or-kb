@@ -6,31 +6,35 @@
  * @file CglDuplicateRow.hpp
  * @brief Detect and eliminate duplicate/dominated rows
  *
- * Preprocessing generator that identifies:
- * - Duplicate rows (identical constraints)
- * - Dominated rows (one implies another)
- * - Variables fixable due to coefficient > effective RHS
+ * @algorithm Duplicate and Dominated Row Detection:
+ * Preprocessing to simplify constraint systems.
  *
- * Designed for problems with few rows, many integer variables,
- * <= or == constraints, and small integer coefficients/RHS.
+ *   DUPLICATE ROWS:
+ *     Rows A and B identical if same support and coefficients
+ *     Keep one, mark other as duplicate (duplicate_[i] = j)
  *
- * duplicate_ array interpretation:
- * - -1: Row still active
- * - -2: Row removed (all variables fixed)
- * - k >= 0: Row is same as row k
+ *   DOMINATED ROWS:
+ *     Row A dominates B if A ⊂ B (same vars with tighter bound)
+ *     B redundant given A; can fix variables in B \ A
  *
- * Modes (mode_):
+ *   VARIABLE FIXING:
+ *     If coefficient aᵢⱼ > effective RHS for row i
+ *     Then xⱼ = 0 is forced (would violate constraint alone)
+ *
+ * @math
+ *   Effective RHS: b' = b - Σ (aᵢⱼ for fixed vars)
+ *   Subset detection: support(A) ⊆ support(B)
+ *   Domination: A ⊆ B and rhs(A) ≤ rhs(B) (for ≤ constraints)
+ *
+ * MODES:
  * - 1: Process rows only
- * - 2: Process columns only (dominated columns)
- * - 3: Process both rows and columns
+ * - 2: Process columns (dominated columns)
+ * - 3: Both rows and columns
  * - 4/8: Alternative algorithms
  *
- * Algorithm for duplicate detection:
- * - If row A is subset of row B with same effective RHS
- * - Can fix variables in B not in A
- * - Then rows become identical
- *
- * Should be called before first solve (preprocessing phase).
+ * @complexity
+ *   Row comparison: O(m² × avg_row_length) naive
+ *   With hashing: O(m × avg_row_length) expected
  *
  * @see CglPreProcess which uses this for preprocessing
  * @see CglStored for storing cuts from dominated columns

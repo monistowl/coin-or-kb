@@ -1,0 +1,13 @@
+{
+  "name": "DippyPythonUtils",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/dippy/DippyPythonUtils.h",
+  "brief": "Conversion utilities between Python objects and C++ data\n\nProvides functions for converting between Python dictionaries/lists\nand COIN-OR data structures: packed vectors, packed matrices, and\nindex/coefficient arrays. Used by Dippy to pass data between\nPython PuLP models and DIP's C++ decomposition algorithms.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "DippyDecompApp.h for Python callback integration",
+    "DippyDecompAlgo.h for algorithm-level Python hooks"
+  ]
+}

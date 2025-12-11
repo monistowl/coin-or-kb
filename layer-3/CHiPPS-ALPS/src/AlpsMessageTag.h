@@ -1,3 +1,17 @@
+/**
+ * @file AlpsMessageTag.h
+ * @brief MPI message tag enumeration for parallel search
+ *
+ * Defines 45+ AlpsMessageTag values for inter-process communication in
+ * distributed tree search. Categories include:
+ * - Control: termination, pause, continue (AlpsMsgContOrTerm, AlpsMsgAskTerminate)
+ * - Load balancing: donate requests, workload sharing (AlpsMsgAskDonate, AlpsMsgLoadInfo)
+ * - Status: hub/worker status reporting (AlpsMsgHubStatus, AlpsMsgWorkerStatus)
+ * - Data: model/node/subtree transfer (AlpsMsgModel, AlpsMsgNode, AlpsMsgSubTree)
+ *
+ * @see AlpsKnowledgeBrokerMPI.h for MPI message handling
+ * @see AlpsEnumProcessT.h for process type definitions
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

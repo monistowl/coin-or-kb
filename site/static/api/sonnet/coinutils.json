@@ -1,0 +1,12 @@
+{
+  "name": "CoinUtils",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CoinUtils.h",
+  "brief": ".NET wrapper for CoinUtils helper functions\n\nProvides managed access to low-level COIN-OR utilities:\narray allocation/deallocation, bulk copy/zero operations,\nand CPU time measurement. Useful for .NET code that needs\nto work directly with native memory buffers.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "array_handler.h for related array utilities"
+  ]
+}

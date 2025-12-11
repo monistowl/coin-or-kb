@@ -1,0 +1,13 @@
+{
+  "name": "CoinLpIO",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/CoinLpIO.h",
+  "brief": ".NET wrapper for LP file format reader\n\nWraps ::CoinLpIO for reading LP-format optimization problems\ninto .NET. Provides access to problem dimensions, bounds,\nobjective coefficients, constraint matrix, row/column names,\nand integrality information.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "CoinPackedMatrix.h for constraint matrix access",
+    "CoinError.h for exception handling during file I/O"
+  ]
+}

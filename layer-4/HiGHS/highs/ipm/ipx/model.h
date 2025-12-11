@@ -1,3 +1,31 @@
+/**
+ * @file model.h
+ * @brief LP model transformation from user form to computational form
+ *
+ * Transforms user LP model to the standard form used internally by IPX:
+ *
+ * **User Form:**
+ *   minimize   obj'x
+ *   subject to A·x {=,<,>} rhs
+ *              lb_user ≤ x ≤ ub_user
+ *
+ * **Computational Form:**
+ *   minimize   c'x
+ *   subject to AI·x = b         (dual: y)
+ *              x - xl = lb      (dual: zl ≥ 0)
+ *              x + xu = ub      (dual: zu ≥ 0)
+ *
+ * **Preprocessing Steps:**
+ * 1. Scaling: Equilibration of A, variable flipping for infinite lb
+ * 2. Dualization: Optional based on problem structure (Flippo test)
+ * 3. Slack addition: Inequalities become equalities with slacks
+ *
+ * The Model stores both CSC (AI_) and CSR (AIt_) representations
+ * for efficient access patterns in different solver phases.
+ *
+ * @see sparse_matrix.h for matrix storage
+ * @see lp_solver.h for main solver using this model
+ */
 #ifndef IPX_MODEL_H_
 #define IPX_MODEL_H_
 

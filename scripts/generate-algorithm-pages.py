@@ -199,8 +199,14 @@ def generate_algorithm_page(slug, alg, base_path=''):
         content.append(f'### {lib}')
         content.append('')
         for f in files:
+            # Link to browser with library filter - browser search can find the class
             link = f'{base_path}/browser/?library={lib}'
+            # Add GitHub source link for direct code access
+            # f["path"] already includes layer/lib/src/file.hpp
+            github_base = 'https://github.com/monistowl/coin-or-kb/blob/master'
+            github_link = f'{github_base}/{f["path"]}'
             content.append(f'- **[{f["filename"]}]({link})** - {f["brief"]}')
+            content.append(f'  - [View source on GitHub]({github_link})')
         content.append('')
 
     # References

@@ -6,7 +6,35 @@
 // ----------------------------------------------------------------------------
 /**
  * @file rev_hes_sparsity.hpp
- * @brief Core AD functionality: rev hes sparsity
+ * @brief Reverse mode Hessian sparsity pattern computation
+ *
+ * @algorithm Reverse Hessian Sparsity:
+ * Determines which entries H_{ij} of the Hessian may be nonzero.
+ * Two-pass algorithm combining forward and reverse sparsity.
+ *
+ *   PREREQUISITE:
+ *     Must first call for_jac_sparsity to compute Jacobian sparsity
+ *
+ *   REVERSE PASS (second-order):
+ *     For scalar g = w·F(x):
+ *     Track pairs (i,j) where ∂²g/∂xᵢ∂xⱼ may be nonzero
+ *
+ *   HESSIAN STRUCTURE:
+ *     For v = u₁ · u₂: cross-derivative nonzero if both depend on different inputs
+ *     H_{ij} nonzero if exists path through tape linking xᵢ and xⱼ
+ *
+ * @math
+ *   H(x) = ∇²(w'F(x)) = Σₖ wₖ·∇²Fₖ(x)
+ *   Sparsity: H_{ij} possibly nonzero iff (i,j) in pattern
+ *   Symmetry: H_{ij} = H_{ji}, so only store upper/lower triangle
+ *
+ * @complexity
+ * - Time: O(ops × sparsity²) for second-order propagation
+ * - Memory: O(n² × nnz_ratio) for sparse pattern storage
+ * - Key for sparse Hessian: identifies structure for graph coloring
+ *
+ * @see for_hes_sparsity.hpp for alternative forward approach
+ * @see sparse_hes.hpp uses sparsity for efficient computation
  */
 /*
 {xrst_begin rev_hes_sparsity}

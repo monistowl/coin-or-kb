@@ -1,3 +1,12 @@
+/**
+ * @file AlpsLicense.h
+ * @brief License and copyright header for ALPS library
+ *
+ * Contains the standard ALPS copyright notice and Eclipse Public License
+ * header. Included for license compliance in source distributions.
+ *
+ * @see https://www.eclipse.org/legal/epl-2.0/ for EPL 2.0 terms
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

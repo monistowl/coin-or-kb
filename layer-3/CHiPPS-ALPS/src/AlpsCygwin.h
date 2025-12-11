@@ -1,3 +1,14 @@
+/**
+ * @file AlpsCygwin.h
+ * @brief Platform-specific definitions for Cygwin (Windows POSIX layer)
+ *
+ * Provides Cygwin-specific system includes, type definitions, and compiler
+ * macros. Disables setpriority() (not available on Cygwin), defines memory
+ * management macros for GCC 2.x vs 3.x+.
+ *
+ * @see AlpsOs.h for platform detection
+ * @see AlpsLinux.h for native Linux equivalents
+ */
 /*===========================================================================*
  * This file is part of the Abstract Library for Parallel Search (ALPS).     *
  *                                                                           *

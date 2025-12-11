@@ -22,7 +22,8 @@ MIP: Exponential worst-case, highly structure-dependent
 
 ### Cbc
 
-- **{{ link(path="/browser/?library=Cbc", text="Cbc_C_Interface.h") }}** - Creates an empty problem
+- **[Cbc_C_Interface.h](/coin-or-kb/browser/?library=Cbc)** - Creates an empty problem
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-2/Cbc/src/Cbc_C_Interface.h)
 
 ## References
 

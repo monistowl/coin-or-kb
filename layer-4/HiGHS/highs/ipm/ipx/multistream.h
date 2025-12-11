@@ -1,3 +1,15 @@
+/**
+ * @file multistream.h
+ * @brief Output stream that writes to multiple destinations
+ *
+ * Multistream allows simultaneous output to multiple std::ostreams,
+ * used for writing log messages to both console and file.
+ *
+ * Inherits from std::ostream with a custom streambuf that forwards
+ * each character to all registered output buffers.
+ *
+ * @see control.h for usage in solver output
+ */
 #ifndef IPX_MULTISTREAM_H_
 #define IPX_MULTISTREAM_H_
 

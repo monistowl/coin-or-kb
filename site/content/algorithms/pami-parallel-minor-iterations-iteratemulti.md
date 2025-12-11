@@ -39,7 +39,7 @@ Serial iteration: O(nnz) for BTRAN/FTRAN, O(m) for ratio test
 
 ### HiGHS
 
-- **{{ link(path="/browser/?library=HiGHS", text="HEkkDual.h") }}** - Dual simplex solver for HiGHS
+- **[HEkkDual.h](/coin-or-kb/browser/?library=HiGHS)** - Dual simplex solver for HiGHS
 
 Implements dual simplex algorithm with CHUZR (row selection), PRICE
 (pivot row computation), CHUZC (column selection), and basis update.
@@ -62,6 +62,7 @@ Implements dual simplex algorithm with CHUZR (row selection), PRICE
 - MChoice: Multiple row candidates from CHUZR
 - MFinish: Minor iteration data for parallel updates
 - slice_*: Partitioned matrix for parallel PRICE
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/HiGHS/highs/simplex/HEkkDual.h)
 
 ## References
 

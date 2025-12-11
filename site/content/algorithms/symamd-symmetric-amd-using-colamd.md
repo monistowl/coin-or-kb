@@ -30,7 +30,7 @@ Time: O(nnz(A)·α(n)) average with aggressive absorption
 
 ### SuiteSparse
 
-- **{{ link(path="/browser/?library=SuiteSparse", text="colamd.h") }}** - Column Approximate Minimum Degree ordering for sparse LU factorization
+- **[colamd.h](/coin-or-kb/browser/?library=SuiteSparse)** - Column Approximate Minimum Degree ordering for sparse LU factorization
 
 COLAMD computes a column permutation Q that reduces fill-in during LU
 factorization of an unsymmetric matrix A. The ordering minimizes the
@@ -39,6 +39,7 @@ fill-in of A*Q when factored as LU.
 SYMAMD computes a symmetric ordering for a symmetric matrix, using COLAMD
 on the matrix's structure. Both are related to the minimum degree family
 of algorithms.
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/SuiteSparse/COLAMD/Include/colamd.h)
 
 ## References
 

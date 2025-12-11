@@ -40,7 +40,7 @@ Time: O(nnz(L+U)·f̄) where f̄ is average front size
 
 ### SuiteSparse
 
-- **{{ link(path="/browser/?library=SuiteSparse", text="umfpack.h") }}** - Multifrontal sparse LU factorization for unsymmetric matrices
+- **[umfpack.h](/coin-or-kb/browser/?library=SuiteSparse)** - Multifrontal sparse LU factorization for unsymmetric matrices
 
 UMFPACK computes a sparse LU factorization of a general (unsymmetric)
 square matrix A:
@@ -60,6 +60,7 @@ Typical workflow:
 2. umfpack_di_numeric: Numerical LU factorization
 3. umfpack_di_solve: Solve Ax = b, A'x = b, etc.
 4. umfpack_di_free_symbolic, umfpack_di_free_numeric: Free memory
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-0/SuiteSparse/UMFPACK/Include/umfpack.h)
 
 ## References
 

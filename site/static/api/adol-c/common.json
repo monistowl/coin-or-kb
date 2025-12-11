@@ -1,0 +1,13 @@
+{
+  "name": "common",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/internal/common.h",
+  "brief": "Core ADOL-C type definitions and platform configuration\n\nProvides fundamental type definitions (locint, revreal), platform\ndetection, memory allocation wrappers, and C/C++ interoperability\nmacros used throughout ADOL-C.\n\n**Key Macros:**\n- BEGIN_C_DECLS/END_C_DECLS: extern \"C\" wrappers\n- MAXDEC/MINDEC: Safe max/min update macros\n- ADOLC_MATH_NSP: Math function namespace",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "usrparms.h for user-configurable buffer sizes",
+    "adolc_settings.h for type definitions (locint, revreal)"
+  ]
+}

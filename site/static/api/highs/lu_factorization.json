@@ -1,0 +1,14 @@
+{
+  "name": "lu_factorization",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/lu_factorization.h",
+  "brief": "Abstract interface for LU factorization in IPX\n\nDefines the interface for sparse LU factorization implementations\nused by the basis preconditioning in IPX's interior point solver.\n\n**Factorization:**\n  B[rowperm, colperm] = (L + I) \u00b7 U\n\nWhere L is strict lower triangular and U is upper triangular.\nSingular columns are replaced with unit vectors.\n\n**Features:**\n- Threshold pivoting with configurable tolerance\n- Strict absolute pivot tolerance option for rank detection\n- Stability metric for assessing numerical quality\n- Returns dependent columns for basis repair\n\nImplementations include BasicLU kernel (basiclu_kernel.h).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_kernel.h for BasicLU implementation",
+    "lu_update.h for rank-1 updates",
+    "basis.h for basis management using this interface"
+  ]
+}

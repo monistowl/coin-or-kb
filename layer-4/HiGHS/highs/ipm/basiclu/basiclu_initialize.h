@@ -1,3 +1,20 @@
+/**
+ * @file basiclu_initialize.h
+ * @brief Initialize a BasicLU instance for a given matrix dimension
+ *
+ * Sets up istore and xstore arrays for processing m×m matrices.
+ * Must be called once before any other basiclu_ function.
+ *
+ * **Memory Requirements:**
+ * - istore: BASICLU_SIZE_ISTORE_1 + BASICLU_SIZE_ISTORE_M × m elements
+ * - xstore: BASICLU_SIZE_XSTORE_1 + BASICLU_SIZE_XSTORE_M × m elements
+ *
+ * After initialization, xstore contains default parameters and statistics
+ * tracking is enabled. The dimension is fixed and stored in xstore[BASICLU_DIM].
+ *
+ * @see basiclu.h for status codes and parameter indices
+ * @see basiclu_factorize.h for the next step in the workflow
+ */
 lu_int basiclu_initialize
 (
     lu_int m,

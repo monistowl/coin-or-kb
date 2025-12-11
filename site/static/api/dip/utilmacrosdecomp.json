@@ -1,0 +1,13 @@
+{
+  "name": "UtilMacrosDecomp",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/UtilMacrosDecomp.h",
+  "brief": "Decomposition-specific macros and COIN utility functions\n\nProvides debug/timing macros (UtilPrintFuncBegin/End), exception\nhelpers, gap calculation, and CoinPackedVector utilities specific\nto decomposition algorithms. Includes global timer for profiling.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "UtilMacros.h for general utility macros",
+    "UtilTimer.h for timer implementation"
+  ]
+}

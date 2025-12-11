@@ -1,0 +1,12 @@
+{
+  "name": "hmetis",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/hmetis.h",
+  "brief": "C declarations for hMETIS hypergraph partitioning library\n\nDeclares external hMETIS functions for k-way and recursive bisection\nhypergraph partitioning. Used by DIP for decomposing constraint\nmatrices into block structures for Dantzig-Wolfe decomposition.\n\n@note Requires linking against hMETIS library",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "UtilGraphLib.h for graph-based problem utilities"
+  ]
+}

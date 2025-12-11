@@ -1,3 +1,19 @@
+/**
+ * @file glbopts.h
+ * @brief Global options, types, and macros for CUPDLP
+ *
+ * Platform abstraction layer providing:
+ * - Type definitions: cupdlp_int, cupdlp_float, cupdlp_bool
+ * - Memory macros: CUPDLP_INIT_*, CUPDLP_FREE, CUPDLP_CALL
+ * - Vector operations: CUPDLP_COPY_VEC, CUPDLP_ZERO_VEC
+ * - Constants: EPS, INFINITY, OUR_DBL_MAX
+ * - Return codes: RETCODE_OK, RETCODE_FAILED
+ *
+ * Supports MATLAB MEX, Python, and standalone C compilation.
+ * CPU vs GPU memory operations selected via CUPDLP_CPU define.
+ *
+ * @see cupdlp_defs.h for structures using these types
+ */
 #ifndef GLB_H_GUARD
 #define GLB_H_GUARD
 

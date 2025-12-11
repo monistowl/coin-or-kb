@@ -1,0 +1,13 @@
+{
+  "name": "indexed_vector",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/indexed_vector.h",
+  "brief": "Sparse vector with explicit nonzero pattern tracking\n\nIndexedVector stores both dense element array and sparse pattern,\nenabling hyper-sparse operations when beneficial:\n\n**Sparse Mode (nnz \u2265 0):**\n- pattern[0..nnz-1] holds indices of nonzeros\n- Iteration uses indirect addressing over pattern\n\n**Dense Mode (nnz < 0):**\n- Pattern unknown or too dense\n- Iteration uses direct addressing over all elements\n\nThe for_each_nonzero() template selects mode automatically based\non kHypersparseThreshold. Used for FTRAN/BTRAN in basis updates.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "sparse_utils.h for related operations",
+    "lu_update.h for usage in basis updates"
+  ]
+}

@@ -1,3 +1,16 @@
+/**
+ * @file guess_basis.h
+ * @brief Heuristic starting basis selection from IPM solution
+ *
+ * GuessBasis() constructs an initial basis from column weights,
+ * preferring columns with larger weights. Used by crossover to
+ * select basic variables from the interior point solution.
+ *
+ * The returned basis may be singular and requires repair before use.
+ *
+ * @see starting_basis.h for crash basis construction
+ * @see crossover.h for the crossover algorithm
+ */
 #ifndef IPX_GUESS_BASIS_H_
 #define IPX_GUESS_BASIS_H_
 

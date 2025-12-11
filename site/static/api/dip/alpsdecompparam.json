@@ -1,0 +1,13 @@
+{
+  "name": "AlpsDecompParam",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/AlpsDecompParam.h",
+  "brief": "Alps-specific parameters for DIP decomposition framework\n\nConfigures Alps tree search behavior: logging verbosity, node limits,\nsolution printing, and memory checking. Parameters are read from\nUtilParameters configuration files under the [ALPS] section.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "UtilParameters.h for parameter file parsing",
+    "DecompParam.h for DIP-specific decomposition parameters"
+  ]
+}

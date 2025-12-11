@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_obj_solve_sparse",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_obj_solve_sparse.h",
+  "brief": "Solve linear system with sparse RHS using BasicLU object\n\nObject-oriented wrapper for basiclu_solve_sparse().\nSolution stored in obj->lhs with pattern in obj->ilhs[0..obj->nzlhs-1].",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_solve_sparse.h for Gilbert-Peierls algorithm",
+    "basiclu_object.h for accessing solution"
+  ]
+}

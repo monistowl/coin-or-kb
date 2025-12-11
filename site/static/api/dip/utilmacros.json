@@ -1,0 +1,13 @@
+{
+  "name": "UtilMacros",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/UtilMacros.h",
+  "brief": "Comprehensive utility macros and functions for DIP\n\nProvides a rich library of utilities: memory management (UTIL_DELPTR),\ndebug macros, undirected graph edge indexing (UtilIndexU, UtilBothEndsU),\narray fill/iota, random number generation, statistics (average),\nstring manipulation, integrality checks, file I/O, and more.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "UtilMacrosDecomp.h for decomposition-specific utilities",
+    "UtilParameters.h for configuration file parsing"
+  ]
+}

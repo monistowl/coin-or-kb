@@ -1,0 +1,13 @@
+{
+  "name": "config_default",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/config_default.h",
+  "brief": "Default build configuration for Alps without autotools\n\nProvides configuration for builds not using the configure script.\nIncludes system-specific settings via configall_system.h and public\nversion macros. Defines debug levels (COIN_ALPS_CHECKLEVEL, VERBOSITY)\nand package dependencies (ALPS_HAS_COINUTILS, ALPS_HAS_CLP).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_alps_default.h for public version macros",
+    "AlpsConfig.h for unified configuration entry point"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_obj_free",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_obj_free.h",
+  "brief": "Free memory allocated for a BasicLU object\n\nReleases all dynamically allocated arrays in the BasicLU object.\nSafe to call on NULL or already-freed objects (no-op).\nAfter freeing, the object can be reinitialized with basiclu_obj_initialize().",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_obj_initialize.h for allocation",
+    "basiclu_object.h for the object structure"
+  ]
+}

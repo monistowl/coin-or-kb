@@ -1,0 +1,13 @@
+{
+  "name": "AlpsLinux",
+  "library": "CHiPPS-ALPS",
+  "layer": "layer-3",
+  "header": "src/AlpsLinux.h",
+  "brief": "Platform-specific definitions for Linux systems\n\nProvides Linux-specific system includes, type definitions, and compiler\nmacros for GCC 2.x and 3.x+. Includes gettimeofday(), setpriority(),\ngethostname(), and memory management macros (ALPS_CONSTRUCT, ALPS_DESTROY).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "AlpsOs.h for platform detection",
+    "AlpsCygwin.h for Cygwin equivalents"
+  ]
+}

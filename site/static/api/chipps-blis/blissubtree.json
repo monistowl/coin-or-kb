@@ -1,0 +1,13 @@
+{
+  "name": "BlisSubTree",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/BlisSubTree.h",
+  "brief": "Branch-and-bound tree node processing (legacy/stub)\n\nDefines BlisTreeNode class for branch-and-bound node processing.\nHandles LP solving, branching decisions, and node fathoming. This is\na legacy stub file - the main implementation is in BlisTreeNode.h.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "BlisTreeNode.h for complete tree node implementation",
+    "BcpsTreeNode.h for BiCePS base class"
+  ]
+}

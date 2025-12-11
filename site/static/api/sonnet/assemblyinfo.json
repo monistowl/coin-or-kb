@@ -1,0 +1,12 @@
+{
+  "name": "AssemblyInfo",
+  "library": "Sonnet",
+  "layer": "layer-4",
+  "header": "src/SonnetWrapper/AssemblyInfo.h",
+  "brief": "Version and assembly metadata for SonnetWrapper DLL\n\nDefines version numbers, copyright, and description strings used\nby the Windows resource file (app.rc) and .NET assembly metadata.\nSupports conditional compilation for different .NET targets\n(net6.0, net5.0, net48) and architectures (x86, x64).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "SonnetWrapper.dll for the compiled managed wrapper"
+  ]
+}

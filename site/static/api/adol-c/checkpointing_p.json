@@ -1,0 +1,13 @@
+{
+  "name": "checkpointing_p",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/checkpointing_p.h",
+  "brief": "Private/internal checkpointing utilities\n\nInternal implementation details for ADOL-C's checkpointing (revolve)\nsystem. Defines CP_BLOCK_SIZE and init_CpInfos for checkpoint buffer\nmanagement.\n\n@note This is an internal header; use checkpointing.h for public API",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "checkpointing.h for public checkpointing interface",
+    "buffer_temp.h for underlying buffer implementation"
+  ]
+}

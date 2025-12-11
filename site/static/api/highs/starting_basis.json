@@ -1,0 +1,13 @@
+{
+  "name": "starting_basis",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/starting_basis.h",
+  "brief": "Initial basis construction from interior point iterates\n\nConstructs a starting basis for crossover using interior point scaling\nfactors as column weights. Handles special cases:\n- Free variables (lb=-\u221e, ub=+\u221e): BASIC_FREE or NONBASIC_FIXED\n- Fixed slacks (lb=ub): BASIC_FREE or NONBASIC_FIXED\n- Fixed structural: NONBASIC_FIXED\n- Others: BASIC or NONBASIC\n\nLinear dependencies among free variables or equality constraints\nare resolved by fixing dependent variables at zero.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "guess_basis.h for basis construction from weights",
+    "iterate.h for interior point state"
+  ]
+}

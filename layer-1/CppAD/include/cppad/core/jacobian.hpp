@@ -6,7 +6,33 @@
 // ----------------------------------------------------------------------------
 /**
  * @file jacobian.hpp
- * @brief Core AD functionality: jacobian
+ * @brief Full dense Jacobian driver using forward or reverse mode
+ *
+ * @algorithm Dense Jacobian Computation:
+ * Computes J(x) = F'(x) ∈ R^{m×n} for F: R^n → R^m.
+ *
+ *   MODE SELECTION:
+ *     Forward mode: Sweep once per column (n sweeps total)
+ *       For j = 0,...,n-1: J[:,j] = F'(x)·e_j via forward
+ *     Reverse mode: Sweep once per row (m sweeps total)
+ *       For i = 0,...,m-1: J[i,:] = e_i'·F'(x) via reverse
+ *
+ *   AUTOMATIC CHOICE:
+ *     Uses forward if n <= m, reverse if m < n
+ *     Minimizes total number of AD sweeps
+ *
+ * @math
+ *   J_{ij} = ∂F_i/∂x_j
+ *   Forward: J·v computed in O(ops) for any direction v
+ *   Reverse: u'·J computed in O(ops) for any adjoint u
+ *
+ * @complexity
+ * - Forward mode: O(n·ops) operations, O(ops) memory
+ * - Reverse mode: O(m·ops) operations, O(ops) memory
+ * - Best mode: O(min(n,m)·ops) operations
+ *
+ * @see sparse_jac.hpp for efficient sparse Jacobians
+ * @see forward.hpp, reverse.hpp for AD sweep details
  */
 
 /*

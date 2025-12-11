@@ -1,0 +1,12 @@
+{
+  "name": "convolut",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/convolut.h",
+  "brief": "Convolution routines for higher-order reverse mode\n\nProvides Taylor coefficient convolution operations for evaluating\nhigher-order derivatives during reverse mode tape interpretation.\n\n**Key Operations:**\n- conv/conv0: Standard convolution c = a * b (Taylor product)\n- inconv/inconv0/inconv1: Incremental convolution c += a * b\n- deconv/deconv0/deconv1: Decremental convolution c -= a * b\n- divide, recipr: Division-related convolutions\n\nThese implement the chain rule for Taylor series at arbitrary order.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ho_rev.mc for higher-order reverse mode using these routines"
+  ]
+}

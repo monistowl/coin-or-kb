@@ -27,7 +27,7 @@ O(nnz) where nnz = number of variable appearances in constraints
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="Problem.h") }}** - Core problem representation with variables, constraints, and objective
+- **[Problem.h](/coin-or-kb/browser/?library=SHOT)** - Core problem representation with variables, constraints, and objective
 
 Central data structure holding the optimization problem definition.
 
@@ -53,6 +53,7 @@ Central data structure holding the optimization problem definition.
 - finalize(): Compute properties and sparsity patterns
 - getMostDeviatingNumericConstraint(): Find worst violation
 - createCopy(): Clone for reformulation
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/Model/Problem.h)
 
 ## References
 

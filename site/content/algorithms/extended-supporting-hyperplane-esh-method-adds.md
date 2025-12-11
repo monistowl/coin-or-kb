@@ -14,7 +14,7 @@ linearizations at boundary and interior points
 
 ### SHOT
 
-- **{{ link(path="/browser/?library=SHOT", text="DualSolver.h") }}** - MIP-based dual bound computation via supporting hyperplanes
+- **[DualSolver.h](/coin-or-kb/browser/?library=SHOT)** - MIP-based dual bound computation via supporting hyperplanes
 
 Manages the linearization-based dual problem.
 
@@ -35,3 +35,4 @@ Manages the linearization-based dual problem.
 **Interior Points:**
 - interiorPointCandidates: Candidate interior points
 - interiorPts: Verified interior points for ESH
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-4/SHOT/src/DualSolver.h)

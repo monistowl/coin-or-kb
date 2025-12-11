@@ -5,7 +5,28 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
+/**
+ * @file mip/HighsDomainChange.h
+ * @brief Variable bound modifications for MIP branch-and-bound
+ *
+ * Represents changes to variable bounds during MIP solving.
+ *
+ * **HighsDomainChange:**
+ * - column: Variable index
+ * - boundtype: kLower or kUpper
+ * - boundval: New bound value
+ * - Comparable for storage in sorted containers
+ *
+ * Used in branching, propagation, and conflict analysis to track
+ * and undo bound changes during tree search.
+ *
+ * **HighsSubstitution:**
+ * Records variable substitution: staycol = scale * substcol + offset.
+ * Used when presolve eliminates variables.
+ *
+ * @see mip/HighsDomain.h for domain propagation
+ * @see mip/HighsSearch.h for branch-and-bound
+ */
 #ifndef HIGHS_DOMAIN_CHANGE_H_
 #define HIGHS_DOMAIN_CHANGE_H_
 

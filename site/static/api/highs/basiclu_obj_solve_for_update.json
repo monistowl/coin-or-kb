@@ -1,0 +1,13 @@
+{
+  "name": "basiclu_obj_solve_for_update",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/basiclu/basiclu_obj_solve_for_update.h",
+  "brief": "Solve and prepare for update using BasicLU object\n\nObject-oriented wrapper for basiclu_solve_for_update() with automatic\nmemory reallocation. The want_solution parameter controls whether the\nfull solution is computed (requires extra triangular solve).\n\nSolution stored in obj->lhs with pattern in obj->ilhs[0..obj->nzlhs-1].",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "basiclu_solve_for_update.h for FTRAN/BTRAN details",
+    "basiclu_obj_update.h for completing the basis update"
+  ]
+}

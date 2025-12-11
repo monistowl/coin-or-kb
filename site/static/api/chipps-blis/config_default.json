@@ -1,0 +1,13 @@
+{
+  "name": "config_default",
+  "library": "CHiPPS-BLIS",
+  "layer": "layer-3",
+  "header": "src/config_default.h",
+  "brief": "Default build configuration for BLIS without autotools\n\nProvides configuration for builds not using the configure script.\nIncludes system-specific settings and public version macros. Defines\ndebug levels (COIN_BLIS_CHECKLEVEL, VERBOSITY) and package dependencies\n(BLIS_HAS_ALPS, BLIS_HAS_BCPS, BLIS_HAS_COINUTILS, BLIS_HAS_CLP).",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_blis_default.h for public version macros",
+    "BlisConfig.h for unified configuration entry point"
+  ]
+}

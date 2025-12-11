@@ -1,0 +1,13 @@
+{
+  "name": "ipx_info",
+  "library": "HiGHS",
+  "layer": "layer-4",
+  "header": "highs/ipm/ipx/ipx_info.h",
+  "brief": "Solver statistics and output information structure\n\nC-compatible structure containing comprehensive solve statistics:\n\n**Status Fields:**\n- status: Overall solver status (IPX_STATUS_*)\n- status_ipm: Interior point phase status\n- status_crossover: Crossover phase status\n\n**Problem Dimensions:**\n- num_var, num_constr: User model dimensions\n- num_rows_solver, num_cols_solver: Internal solver dimensions\n\n**Solution Quality:**\n- abs/rel_presidual/dresidual: Feasibility measures\n- pobjval, dobjval: Primal/dual objectives\n- complementarity: Complementarity gap\n\n**Performance:**\n- iter: IPM iteration count\n- time_total, time_ipm*, time_crossover: Timing breakdown\n- time_kkt_*: KKT solver profiling",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "ipx_status.h for status code definitions",
+    "info.h for C++ output utilities"
+  ]
+}

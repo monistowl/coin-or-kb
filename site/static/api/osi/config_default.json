@@ -1,0 +1,13 @@
+{
+  "name": "config_default",
+  "library": "Osi",
+  "layer": "layer-1",
+  "header": "src/Osi/config_default.h",
+  "brief": "Default build configuration for Osi without autotools\n\nProvides configuration for builds not using the configure script.\nSets OSILIB_EXPORT for DLL building and includes public version macros.\nDefines which solver interfaces are available (CPLEX, GLPK, Gurobi,\nMosek, SoPlex, Xpress) - uncomment the appropriate OSI_HAS_* macros.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_osi_default.h for public version macros",
+    "configall_system.h for system-specific settings"
+  ]
+}

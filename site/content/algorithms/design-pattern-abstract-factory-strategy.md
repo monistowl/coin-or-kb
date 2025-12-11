@@ -31,7 +31,7 @@ All query methods (getColSolution, etc.): O(1) pointer return
 
 ### Osi
 
-- **{{ link(path="/browser/?library=Osi", text="OsiSolverInterface.hpp") }}** - Abstract base class defining the Open Solver Interface (OSI)
+- **[OsiSolverInterface.hpp](/coin-or-kb/browser/?library=Osi)** - Abstract base class defining the Open Solver Interface (OSI)
 
 OSI provides a uniform API for accessing different LP/MIP solvers
 (Clp, CPLEX, Gurobi, GLPK, etc.) through a common interface. This
@@ -52,6 +52,7 @@ Typical workflow:
 3. Call initialSolve() for first LP solution
 4. Call resolve() after modifications
 5. Query solution via getColSolution(), getObjValue()
+  - [View source on GitHub](https://github.com/monistowl/coin-or-kb/blob/master/layer-1/Osi/src/Osi/OsiSolverInterface.hpp)
 
 ## References
 

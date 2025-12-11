@@ -1,3 +1,15 @@
+/**
+ * @file OsiSpxConfig.h
+ * @brief Configuration header for OsiSpx (SoPlex interface)
+ *
+ * Provides build configuration for the Osi adapter to SoPlex LP solver
+ * from ZIB (Zuse Institute Berlin). Defines OSISPXLIB_EXPORT for DLL
+ * import/export based on build environment and platform. SoPlex is
+ * open source under the ZIB academic license.
+ *
+ * @see OsiSpxSolverInterface.h for SoPlex adapter class
+ * @see OsiConfig.h for main Osi configuration
+ */
 /* Copyright (C) 2011
  * All Rights Reserved.
  * This code is published under the Eclipse Public License.

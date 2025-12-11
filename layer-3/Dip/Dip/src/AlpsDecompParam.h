@@ -1,3 +1,14 @@
+/**
+ * @file AlpsDecompParam.h
+ * @brief Alps-specific parameters for DIP decomposition framework
+ *
+ * Configures Alps tree search behavior: logging verbosity, node limits,
+ * solution printing, and memory checking. Parameters are read from
+ * UtilParameters configuration files under the [ALPS] section.
+ *
+ * @see UtilParameters.h for parameter file parsing
+ * @see DecompParam.h for DIP-specific decomposition parameters
+ */
 //===========================================================================//
 // This file is part of the DIP Solver Framework.                            //
 //                                                                           //

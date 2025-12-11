@@ -3,8 +3,15 @@
   "library": "Cgl",
   "layer": "layer-2",
   "header": "src/CglDuplicateRow/CglDuplicateRow.hpp",
-  "brief": "Detect and eliminate duplicate/dominated rows\n\nPreprocessing generator that identifies:\n- Duplicate rows (identical constraints)\n- Dominated rows (one implies another)\n- Variables fixable due to coefficient > effective RHS\n\nDesigned for problems with few rows, many integer variables,\n<= or == constraints, and small integer coefficients/RHS.\n\nduplicate_ array interpretation:\n- -1: Row still active\n- -2: Row removed (all variables fixed)\n- k >= 0: Row is same as row k\n\nModes (mode_):\n- 1: Process rows only\n- 2: Process columns only (dominated columns)\n- 3: Process both rows and columns\n- 4/8: Alternative algorithms\n\nAlgorithm for duplicate detection:\n- If row A is subset of row B with same effective RHS\n- Can fix variables in B not in A\n- Then rows become identical\n\nShould be called before first solve (preprocessing phase).",
-  "algorithms": [],
+  "brief": "Detect and eliminate duplicate/dominated rows",
+  "algorithms": [
+    {
+      "name": "Duplicate and Dominated Row Detection:\nPreprocessing to simplify constraint systems.\n\n  DUPLICATE ROWS:\n    Rows A and B identical if same support and coefficients\n    Keep one, mark other as duplicate (duplicate_[i] = j)\n\n  DOMINATED ROWS:\n    Row A dominates B if A \u2282 B (same vars with tighter bound)\n    B redundant given A; can fix variables in B \\ A\n\n  VARIABLE FIXING:\n    If coefficient a\u1d62\u2c7c > effective RHS for row i\n    Then x\u2c7c = 0 is forced (would violate constraint alone)",
+      "math": "Effective RHS: b' = b - \u03a3 (a\u1d62\u2c7c for fixed vars)\n  Subset detection: support(A) \u2286 support(B)\n  Domination: A \u2286 B and rhs(A) \u2264 rhs(B) (for \u2264 constraints)\n\nMODES:\n- 1: Process rows only\n- 2: Process columns (dominated columns)\n- 3: Both rows and columns\n- 4/8: Alternative algorithms",
+      "complexity": "Row comparison: O(m\u00b2 \u00d7 avg_row_length) naive\n  With hashing: O(m \u00d7 avg_row_length) expected",
+      "ref": ""
+    }
+  ],
   "methods": [],
   "see": [
     "CglPreProcess which uses this for preprocessing",

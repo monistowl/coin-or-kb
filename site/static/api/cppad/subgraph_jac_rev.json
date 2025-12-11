@@ -3,7 +3,18 @@
   "library": "CppAD",
   "layer": "layer-1",
   "header": "include/cppad/core/subgraph_jac_rev.hpp",
-  "brief": "Core AD functionality: subgraph jac rev",
-  "algorithms": [],
-  "methods": []
+  "brief": "Sparse Jacobian via subgraph reverse mode",
+  "algorithms": [
+    {
+      "name": "Subgraph Sparsity Method:\nCompute sparse Jacobian by processing only relevant subgraphs.\nAlternative to graph coloring that can be faster for very sparse cases.\n\n  KEY INSIGHT:\n    Each output y_i depends on a small subgraph of operations\n    Only need reverse sweep through that subgraph\n\n  SUBGRAPH REVERSE:\n    For each output i in select_range:\n      1. Identify subgraph: ops that affect y_i\n      2. Reverse sweep only through subgraph\n      3. Extract J[i, select_domain] entries\n\n  vs GRAPH COLORING:\n    Coloring: groups columns, sweeps full tape\n    Subgraph: groups rows, sweeps partial tape\n    Subgraph wins when subgraphs are small (localized dependencies)",
+      "math": "Partition tape T into subgraphs T_1, ..., T_m\n  |T_i| = ops affecting output i\n  Cost: \u03a3_i |T_i| vs coloring: colors \u00d7 |T|",
+      "complexity": "- Time: O(\u03a3\u1d62 |subgraph_i|) for sparse structure\n- Best case: O(nnz) when dependencies very localized\n- Worst case: O(m\u00b7ops) when all outputs depend on all ops\n- No graph coloring overhead",
+      "ref": ""
+    }
+  ],
+  "methods": [],
+  "see": [
+    "sparse_jac.hpp for graph coloring approach",
+    "subgraph_reverse.hpp for underlying subgraph sweep"
+  ]
 }

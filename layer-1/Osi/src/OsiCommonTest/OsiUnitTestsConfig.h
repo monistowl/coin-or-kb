@@ -1,3 +1,15 @@
+/**
+ * @file OsiUnitTestsConfig.h
+ * @brief Configuration header for OsiCommonTest unit test library
+ *
+ * Provides build configuration for the common Osi unit test infrastructure.
+ * Defines OSICOMMONTESTLIB_EXPORT for DLL import/export based on build
+ * environment (autotools vs non-autotools) and platform (Windows DLL vs
+ * GCC visibility attributes).
+ *
+ * @see OsiUnitTests.h for test framework functions
+ * @see OsiConfig.h for main Osi configuration
+ */
 /* Copyright (C) 2011
  * All Rights Reserved.
  * This code is published under the Eclipse Public License.

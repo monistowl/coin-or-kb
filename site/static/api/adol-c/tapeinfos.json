@@ -1,0 +1,13 @@
+{
+  "name": "tapeinfos",
+  "library": "ADOL-C",
+  "layer": "layer-2",
+  "header": "ADOL-C/include/adolc/valuetape/tapeinfos.h",
+  "brief": "Core tape state for operation/location/value buffers\n\nDefines TapeInfos struct containing tape buffers (operations, locations,\nvalues, Taylors), file handles, buffer pointers, statistics, and\nlow-level tape I/O operations.\n\nAlso defines SparseJacInfos/SparseHessInfos for ColPack integration.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "valuetape.h for ValueTape class composition",
+    "persistanttapeinfos.h for persistent metadata"
+  ]
+}

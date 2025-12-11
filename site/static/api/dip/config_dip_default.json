@@ -1,0 +1,13 @@
+{
+  "name": "config_dip_default",
+  "library": "Dip",
+  "layer": "layer-3",
+  "header": "Dip/src/config_dip_default.h",
+  "brief": "Public DIP version macros and solver availability flags\n\nDefines DIP_VERSION, DIP_VERSION_MAJOR/MINOR/RELEASE and flags\nfor optional solver availability (DIP_HAS_CLP, DIP_HAS_CBC).\nUsed when building without autotools configure.",
+  "algorithms": [],
+  "methods": [],
+  "see": [
+    "config_default.h for internal build configuration",
+    "DecompConfig.h for unified configuration header"
+  ]
+}

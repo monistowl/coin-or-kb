@@ -1,3 +1,16 @@
+/**
+ * @file cupdlp_cs.h
+ * @brief Sparse matrix utilities for CUPDLP
+ *
+ * CSparse-style routines for compressed sparse column (CSC) matrices.
+ * Provides triplet-to-CSC conversion, matrix allocation, transpose,
+ * and basic operations needed for PDHG matrix-vector products.
+ *
+ * Based on Tim Davis's CSparse library conventions.
+ *
+ * @see cupdlp_linalg.h for matrix-vector products using these formats
+ * @see cupdlp_defs.h for CUPDLPcsc/CUPDLPcsr structures
+ */
 #ifndef CUPDLP_CS_H
 #define CUPDLP_CS_H
 
