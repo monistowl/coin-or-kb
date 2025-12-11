@@ -35,6 +35,14 @@
  * - NLPSolverGAMS: GAMS NLP solvers
  * - NLPSolverSHOT: Recursive SHOT for NLP
  *
+ * @algorithm Fixed-Integer NLP for Primal Bound Computation
+ * @math In outer approximation, given integer candidate x̄_I from MIP:
+ *       1. Fix integer variables: x_I = x̄_I
+ *       2. Solve continuous NLP: min f(x) s.t. g(x) ≤ 0, x_I fixed
+ *       3. If feasible: update primal bound with f(x*)
+ *       4. If infeasible: add infeasibility cut to MIP
+ *       Key primal heuristic in convex MINLP algorithms.
+ * @ref Bonami et al. (2008). "An algorithmic framework for convex MINLP"
  * @see PrimalSolver.h for fixed-integer NLP subproblems
  * @see NLPSolverBase.h for implementation utilities
  */

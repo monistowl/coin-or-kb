@@ -35,6 +35,14 @@
  * - calculateHessian(): Upper triangular second derivatives
  * - Sparsity patterns for efficient NLP solver interfaces
  *
+ * @algorithm Constraint Evaluation and Derivative Computation
+ * @math For constraint L ≤ g(x) ≤ U:
+ *       - calculateFunctionValue(): evaluate g(x) at point
+ *       - calculateGradient(): compute ∇g(x) in sparse format
+ *       - calculateHessian(): compute ∇²g(x) upper triangular
+ *       Sparsity patterns {(i,j) : ∂²g/∂xᵢ∂xⱼ ≠ 0} precomputed for NLP.
+ *       Used by Ipopt interface for efficient derivative evaluation.
+ * @complexity Gradient O(nnz), Hessian O(nnz²) worst case.
  * @see Terms.h for LinearTerm, QuadraticTerm definitions
  * @see NonlinearExpressions.h for expression tree evaluation
  */

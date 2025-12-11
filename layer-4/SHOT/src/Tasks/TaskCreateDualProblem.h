@@ -23,6 +23,13 @@
  * - Nonlinear constraints: Omitted (handled via hyperplanes)
  * - Integer variables: Marked as such in MIP
  *
+ * @algorithm Initial MIP Relaxation Construction
+ * @math Build polyhedral outer approximation P⁰ of feasible region:
+ *       - Include all linear constraints Ax ≤ b directly
+ *       - Include quadratic constraints if solver supports MIQCQP
+ *       - Omit nonlinear g(x) ≤ 0 (approximated via ESH cuts later)
+ *       - Epigraph reformulation: min t, f(x) ≤ t if objective nonlinear
+ *       Initial MIP provides first dual bound and candidate points.
  * @see DualSolver.h for MIP solver interface
  * @see Problem.h for source representation
  */

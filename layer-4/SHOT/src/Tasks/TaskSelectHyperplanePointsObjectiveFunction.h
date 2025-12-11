@@ -21,6 +21,13 @@
  * - Nonlinear objective reformulated as: min t, f(x) <= t
  * - Generates cuts to approximate f(x) <= t constraint
  *
+ * @algorithm Epigraph Objective Cut Generation
+ * @math For nonlinear objective min f(x), SHOT uses epigraph reformulation:
+ *       min t  s.t. f(x) ≤ t (treated as additional constraint)
+ *       At solution x̄ with f(x̄) > t̄ (objective cut violated):
+ *       - Use rootsearch to find boundary point x*
+ *       - Generate cut: f(x*) + ∇f(x*)·(x - x*) ≤ t
+ *       Improves objective bound approximation as MIP explores.
  * @see AuxiliaryVariables.h for epigraph variable
  * @see TaskSelectHyperplanePointsESH.h for constraint cuts
  */

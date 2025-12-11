@@ -28,6 +28,13 @@
  * - Vector of AuxiliaryVariablePtr with Problem ownership
  * - sortByIndex(): Order by variable index
  *
+ * @algorithm Auxiliary Variable Introduction for Reformulation
+ * @math Reformulation introduces auxiliary variables to simplify structure:
+ *       - Epigraph: min f(x) → min t, f(x) ≤ t (t is auxiliary)
+ *       - McCormick: w = x·y → l ≤ w ≤ u via envelope bounds
+ *       - Bilinear: z = x₁·x₂ represented by z with McCormick bounds
+ *       - Eigenvalue: convexify Q via Q = L·D·Lᵀ decomposition
+ *       calculate() reconstructs auxiliary value from original variables.
  * @see Variables.h for base Variable class
  * @see Problem.h for reformulated problem usage
  */

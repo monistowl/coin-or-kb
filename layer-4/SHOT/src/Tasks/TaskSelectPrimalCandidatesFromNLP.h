@@ -27,6 +27,16 @@
  * - Triggered by primal stagnation
  * - May improve primal bound significantly
  *
+ * @algorithm Fixed-Integer NLP Primal Heuristic
+ * @math Given MIP solution x̄ with integer values x̄_I:
+ *       1. Fix: x_I = x̄_I (set bounds l_i = u_i = x̄_i)
+ *       2. Solve NLP: min f(x) s.t. g(x) ≤ 0, x_I fixed
+ *       3. If feasible: candidate x* may improve primal bound
+ *       4. If infeasible: add integer cut Σ(1-y_i) + Σy_j ≥ 1
+ *          to exclude this integer assignment
+ *       Key primal bound improvement in BONMIN-style algorithms.
+ * @complexity O(NLP solve time). Ipopt typically O(iterations × n³).
+ * @ref Bonami et al. (2008). "An algorithmic framework for convex MINLP"
  * @see NLPSolver/ for Ipopt interface
  * @see TaskCheckPrimalStagnation.h for trigger
  */

@@ -27,6 +27,13 @@
  * - Outer SHOT: Full MINLP (uses this as primal solver)
  * - Inner SHOT: Convex NLP (fixed integers)
  *
+ * @algorithm Recursive SHOT for Fixed-Integer NLP
+ * @math When Ipopt unavailable, use SHOT recursively:
+ *       Outer SHOT (MINLP) → calls NLPSolverSHOT → Inner SHOT (convex NLP)
+ *       Inner problem: min f(x) s.t. g(x) ≤ 0 (all continuous after fixing)
+ *       Inner SHOT uses LP-based ESH since no integer variables remain.
+ *       Provides solver-agnostic primal bound computation.
+ * @complexity Nested ESH iterations; may be slower than direct Ipopt.
  * @note Self-referential design for solver-agnostic NLP solving
  */
 #pragma once

@@ -22,6 +22,14 @@
  * - Feasible solutions update primal bound
  * - Infeasible solutions generate hyperplanes
  *
+ * @algorithm Solution Pool Primal Extraction
+ * @math MIP solvers maintain pool of feasible solutions found during B&B.
+ *       For each pool solution x̄:
+ *       1. Evaluate nonlinear constraints: g_i(x̄)
+ *       2. If max_i g_i(x̄) ≤ ε: x̄ is MINLP-feasible → update primal bound
+ *       3. If violated: generate ESH hyperplanes at x̄
+ *       Multiple solutions per MIP iteration → more cut generation points.
+ * @complexity O(pool_size × constraint_evaluation).
  * @see DualSolver.h for solution pool access
  * @see PrimalSolver.h for feasibility checking
  */

@@ -22,6 +22,13 @@
  * - Forces MIP to find improving solutions only
  * - Updated when primal bound improves
  *
+ * @algorithm Primal Cutoff Constraint (Objective Reduction Cut)
+ * @math When primal bound z̄ improves, add cutoff constraint to MIP:
+ *       - Minimization: f(x) ≤ z̄ - ε (or t ≤ z̄ - ε for epigraph)
+ *       - Prevents MIP from returning non-improving solutions
+ *       - ε > 0 ensures strict improvement
+ *       Updates dynamically as better incumbents are found.
+ *       Reduces explored B&B nodes by tightening dual bound gap.
  * @see Results.h for primal bound tracking
  * @see TaskCheckMaxNumberOfPrimalReductionCuts.h for limit
  */
