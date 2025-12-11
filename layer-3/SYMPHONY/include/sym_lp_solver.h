@@ -56,6 +56,27 @@
  * - generate_cgl_cuts(): Call CGL generators
  * - Supports: Gomory, MIR, Probing, Knapsack, Clique, etc.
  *
+ * @algorithm LP Solver Abstraction:
+ *   Unified interface to multiple LP solvers via OSI or native APIs:
+ *   @math All solvers implement: solve(min c'x s.t. Ax {≤,=,≥} b, l ≤ x ≤ u)
+ *         Returns primal x, dual π, reduced costs d_j = c_j - π'A_j
+ *   OsiSolverInterface provides compile-time solver selection.
+ *   @complexity Solver-dependent; typically O(m²n) to O(m³) per solve
+ *
+ * @algorithm Hotstart LP Solving:
+ *   Exploit basis from previous solve for warm-start:
+ *   @math Given optimal basis B, re-solve after small changes (bounds, RHS)
+ *         solve_hotstart() restores basis, solves in fewer iterations
+ *   mark_hotstart()/unmark_hotstart() manage checkpoint.
+ *   @complexity O(k · m) for k pivots vs O(m²) cold start
+ *
+ * @algorithm CGL Cut Generation Integration:
+ *   Interface to COIN-OR Cut Generation Library:
+ *   @math generate_cgl_cuts() calls: Gomory, MIR, Probing, Knapsack,
+ *         Clique, FlowCover, TwoMIR, LiftAndProject, OddHole, RedSplit
+ *   Cuts added to LP via add_rows(), aged if non-binding.
+ *   @see layer-1/Cgl for cut generator implementations
+ *
  * @see sym_lp.h for LP process using this interface
  * @see CoinUtils for OSI documentation
  */

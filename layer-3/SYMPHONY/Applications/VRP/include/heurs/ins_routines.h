@@ -14,6 +14,38 @@
 /*                                                                           */
 /*===========================================================================*/
 
+/**
+ * @file heurs/ins_routines.h
+ * @brief TSP insertion heuristics for VRP route construction
+ *
+ * Construction heuristics that build tours by sequential insertion.
+ *
+ * @algorithm Nearest Insertion:
+ *   Build tour by inserting nearest unvisited node:
+ *   @math 1. Start with depot
+ *         2. Find unvisited node k closest to any tour node
+ *              k = argmin_{j ∉ tour} min_{i ∈ tour} d(i,j)
+ *         3. Insert k at position minimizing tour length increase
+ *         4. Repeat until all nodes inserted
+ *   nearest_ins_from_to() implements this strategy.
+ *   @complexity O(n²) for n insertions
+ *
+ * @algorithm Farthest Insertion:
+ *   Build tour by inserting farthest unvisited node:
+ *   @math 1. Start with depot
+ *         2. Find unvisited node k farthest from tour
+ *              k = argmax_{j ∉ tour} min_{i ∈ tour} d(i,j)
+ *         3. Insert k at position minimizing tour length increase
+ *         4. Repeat until all nodes inserted
+ *   farthest_ins_from_to() implements this strategy.
+ *   Often yields better tours than nearest insertion.
+ *   @complexity O(n²) for n insertions
+ *   @ref Rosenkrantz, D. et al. (1977). "An analysis of several
+ *        heuristics for the traveling salesman problem". SIAM J. Computing.
+ *
+ * @see tsp_ins_rout.h for TSP-specific routines
+ * @see mst_ins_rout.h for MST-based insertion
+ */
 #ifndef _INS_ROUTINES
 #define _INS_ROUTINES
 

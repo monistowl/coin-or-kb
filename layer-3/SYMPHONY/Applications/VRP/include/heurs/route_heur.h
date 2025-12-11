@@ -14,6 +14,28 @@
 /*                                                                           */
 /*===========================================================================*/
 
+/**
+ * @file heurs/route_heur.h
+ * @brief Route-first cluster-second heuristic for VRP
+ *
+ * Two-phase heuristic that builds giant tour then partitions into routes.
+ *
+ * @algorithm Route-First Cluster-Second:
+ *   Build VRP solution by routing all customers then partitioning:
+ *   @math Phase 1 (Route): Build giant TSP tour through all customers
+ *           - Ignores vehicle capacity
+ *           - Uses insertion heuristic or 2-opt improvement
+ *         Phase 2 (Cluster): Partition tour into feasible routes
+ *           - Split tour at capacity-violating positions
+ *           - Each segment becomes one vehicle route
+ *   Giant tour quality affects final solution quality.
+ *   @complexity O(n²) TSP construction + O(n) partitioning
+ *   @ref Beasley, J. (1983). "Route first--cluster second methods for
+ *        vehicle routing". Omega 11(4):403-408.
+ *
+ * @see cluster_heur.h for cluster-first approach
+ * @see ins_routines.h for TSP insertion methods
+ */
 #ifndef ROUTE_HEUR_H
 #define ROUTE_HEUR_H 
 

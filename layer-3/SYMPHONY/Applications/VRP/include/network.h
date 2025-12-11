@@ -13,6 +13,45 @@
 /*                                                                           */
 /*===========================================================================*/
 
+/**
+ * @file network.h
+ * @brief Support graph representation for VRP cut generation
+ *
+ * Adjacency list graph representation constructed from LP solution.
+ *
+ * **Network structure:**
+ * - vertex: Node with adjacency list, demand, component number
+ * - edge: Edge with endpoints, weight (LP value), cost
+ * - elist: Linked list entry in adjacency list
+ * - network: Complete graph with vertex/edge arrays
+ *
+ * @algorithm Support Graph Construction:
+ *   Build graph from fractional LP solution:
+ *   @math createnet(xind, xval, edgenum):
+ *         Include edge (i,j) if x_ij > etol
+ *         Weight = LP variable value x_ij
+ *         Cost = distance d_ij
+ *   Graph structure enables efficient cut separation.
+ *   @complexity O(|E| + |V|) for construction
+ *
+ * @algorithm Connected Components:
+ *   Identify disconnected regions in support graph:
+ *   @math connected(): DFS-based component labeling
+ *         compnodes[k] = number of nodes in component k
+ *         compdemands[k] = total demand in component k
+ *         compcuts[k] = total edge weight crossing component k
+ *   Disconnected components yield violated subtour cuts.
+ *   @complexity O(|V| + |E|) via DFS
+ *
+ * @algorithm Graph Contraction:
+ *   Support shrinking operations for cut separation:
+ *   @math Vertex has orig_node_list for contracted "super nodes"
+ *         Edge has can_be_doubled flag for 1-customer routes
+ *   reduce_graph() in vrp_cg.h performs actual shrinking.
+ *
+ * @see vrp_cg.h for cut separation using network
+ * @see small_graph.h for graph preprocessing
+ */
 #ifndef _NETWORK
 #define _NETWORK
 

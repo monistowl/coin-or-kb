@@ -14,6 +14,29 @@
 /*                                                                           */
 /*===========================================================================*/
 
+/**
+ * @file heurs/exchange_heur.h
+ * @brief Inter-route exchange improvement heuristic for VRP
+ *
+ * Local search heuristic that improves VRP solutions via customer exchanges.
+ *
+ * @algorithm Inter-Route Exchange:
+ *   Improve VRP solution by moving/swapping customers between routes:
+ *   @math Exchange moves:
+ *           - Relocate: Move customer i from route r to route s
+ *           - Swap: Exchange customer i in route r with j in route s
+ *           - 2-opt*: Reconnect route tails (cross-exchange)
+ *         Accept move if:
+ *           - Total distance decreases
+ *           - Both routes remain capacity-feasible
+ *         Iterate until no improving move found.
+ *   @complexity O(n² · k) per pass for n customers, k routes
+ *   @ref Van Breedam, A. (2001). "Comparing descent heuristics and
+ *        metaheuristics for the vehicle routing problem".
+ *
+ * @see cluster_heur.h for construction phase
+ * @see route_heur.h for intra-route improvement
+ */
 #ifndef _EXCHANGE_HEUR_H
 #define _EXCHANGE_HEUR_H
 

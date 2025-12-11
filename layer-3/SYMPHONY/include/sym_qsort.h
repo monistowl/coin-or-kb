@@ -29,6 +29,20 @@
  * - sym_gcd(): Greatest common divisor
  * - d_gap(): Compute optimality gap percentage
  *
+ * @algorithm Paired Quicksort:
+ *   Sort array while maintaining correspondence with secondary array:
+ *   @math qsort_id(keys, vals, n): sort keys[0..n-1], permute vals accordingly
+ *         Partitions both arrays around pivot, recurses on subarrays
+ *   Used for sorting variable indices by reduced cost, etc.
+ *   @complexity O(n log n) average, O(n²) worst case
+ *
+ * @algorithm Optimality Gap Calculation:
+ *   Compute relative gap between bounds:
+ *   @math d_gap(ub, lb, offset, sense) =
+ *         100 · |ub - lb| / max(|ub|, |lb|, 1)
+ *   Handles minimization/maximization via sense parameter.
+ *   Used for termination criteria in B&B.
+ *
  * @see sym_lp.h for LP process using sort functions
  */
 #ifndef _QSORT_H

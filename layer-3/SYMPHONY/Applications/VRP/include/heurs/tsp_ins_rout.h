@@ -14,6 +14,32 @@
 /*                                                                           */
 /*===========================================================================*/
 
+/**
+ * @file heurs/tsp_ins_rout.h
+ * @brief TSP insertion heuristics (uncapacitated version)
+ *
+ * Insertion heuristics for pure TSP without capacity constraints.
+ * Used to build single vehicle tours within VRP routes.
+ *
+ * @algorithm TSP Insertion:
+ *   Build tour by iteratively inserting unvisited nodes:
+ *   @math tsp_nearest_ins_from_to(): Insert nearest unvisited node
+ *         tsp_farthest_ins_from_to(): Insert farthest unvisited node
+ *         tsp_insert_into_tour(): Insert at minimum cost position
+ *           position p* = argmin_{p} (d(prev_p, new) + d(new, next_p) - d(prev_p, next_p))
+ *   No capacity check (pure TSP), faster than VRP variants.
+ *   @complexity O(n²) for building complete tour
+ *
+ * @algorithm Best Insertion Position:
+ *   Find optimal position to insert new node:
+ *   @math For each edge (i,j) in tour, compute:
+ *           cost_increase = d(i,new) + d(new,j) - d(i,j)
+ *         Insert after position minimizing cost_increase
+ *   tsp_fi_insert_edges() and tsp_ni_insert_edges() update neighbor trees.
+ *
+ * @see ins_routines.h for VRP insertion (with capacity)
+ * @see heur_types.h for _node and neighbor structures
+ */
 #ifndef _TSP_INS_ROUT_H
 #define _TSP_INS_ROUT_H
 

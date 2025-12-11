@@ -25,6 +25,35 @@
  * - user_set_rhs(): Define subproblem RHS
  * - user_send_to_sol_pool(): Store promising columns
  *
+ * @algorithm Dantzig-Wolfe Decomposition:
+ *   Reformulate MIP by representing feasible region as convex hull:
+ *   @math Original: min c'x s.t. Ax ≥ b, Dx ≥ d, x ∈ Z
+ *         Master: min Σ(c'x^k)λ_k s.t. Σ(Ax^k)λ_k ≥ b, Σλ_k = 1
+ *         where {x^k} are extreme points of {x : Dx ≥ d}
+ *   Linking constraints (Ax ≥ b) in master, block constraints (Dx ≥ d)
+ *   handled implicitly via extreme point enumeration.
+ *   @complexity Depends on subproblem; master LP has exponential columns
+ *   @ref Dantzig, G. and Wolfe, P. (1960). "Decomposition principle for
+ *        linear programs". Operations Research 8(1):101-111.
+ *
+ * @algorithm Column Generation:
+ *   Solve master LP with subset of columns, add improving columns:
+ *   @math Pricing subproblem: min (c - π'A)x s.t. Dx ≥ d
+ *         If reduced cost < 0, add column to restricted master
+ *         Terminate when no negative reduced cost column exists
+ *   generate_new_cols() solves pricing via user_generate_new_cols().
+ *   @complexity Each master solve is O(m²·|active_cols|)
+ *   @ref Lübbecke, M. and Desrosiers, J. (2005). "Selected topics in
+ *        column generation". Operations Research 53(6):1007-1023.
+ *
+ * @algorithm Column Pool Management:
+ *   Store and retrieve columns across B&B tree:
+ *   @math Pool stores (column, reduced_cost) pairs
+ *         get_cols_from_pool() retrieves columns with negative reduced cost
+ *         user_send_to_sol_pool() archives promising columns
+ *   Avoids regenerating columns found in other nodes.
+ *   @complexity O(pool_size) per lookup
+ *
  * @see decomp_types.h for col_data, dcmp_col_set
  * @see decomp_lp.h for LP interface
  * @see sp_params.h for column pool parameters

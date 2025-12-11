@@ -14,6 +14,30 @@
 /*                                                                           */
 /*===========================================================================*/
 
+/**
+ * @file heurs/sweep.h
+ * @brief Sweep heuristic for VRP construction
+ *
+ * Classic construction heuristic that builds routes by angular sweep.
+ *
+ * **sweep_data structure:**
+ * - angle: Polar angle from depot
+ * - cust: Customer identifier
+ *
+ * @algorithm Sweep Heuristic:
+ *   Construct VRP solution by sweeping customers angularly from depot:
+ *   @math 1. Compute polar angle θ_i = atan2(y_i - y_depot, x_i - x_depot)
+ *         2. Sort customers by angle θ
+ *         3. Starting from angle 0, add customers to current route
+ *         4. When capacity exceeded, start new route
+ *         5. Optimize each route as TSP (via make_tour)
+ *   @complexity O(n log n) for sorting + O(n·k) route construction
+ *   @ref Gillett, B. and Miller, L. (1974). "A heuristic algorithm for
+ *        the vehicle-dispatch problem". Operations Research 22(2):340-349.
+ *
+ * @see savings.h for alternative construction heuristic
+ * @see heur_routines.h for TSP improvement
+ */
 #ifndef SWEEP_H
 #define SWEEP_H
 

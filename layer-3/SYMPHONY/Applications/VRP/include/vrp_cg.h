@@ -13,6 +13,51 @@
 /*                                                                           */
 /*===========================================================================*/
 
+/**
+ * @file vrp_cg.h
+ * @brief Cut generator for VRP branch-and-cut
+ *
+ * Implements specialized cut separation algorithms for capacitated VRP.
+ *
+ * @algorithm Capacity Cuts (Rounded Capacity Inequalities):
+ *   Enforce vehicle capacity on customer subsets:
+ *   @math For customer set S ⊆ V\{depot}:
+ *           x(δ(S)) ≥ 2·⌈Σ_{i∈S} d_i / Q⌉
+ *         where Q = vehicle capacity, d_i = demand, δ(S) = cut edges
+ *   check_connectivity() finds violated cuts via connected components.
+ *   @complexity O(|E|·α(|V|)) using union-find for connectivity
+ *   @ref Laporte, G. et al. (1985). "Optimal routing under capacity
+ *        and distance restrictions". Operations Research 33(5).
+ *
+ * @algorithm Greedy Shrinking Heuristic:
+ *   Find violated capacity cuts by shrinking graph:
+ *   @math greedy_shrinking1/6(): Iteratively merge vertices
+ *         - Combine adjacent vertices with high edge weight
+ *         - Check capacity violation after each merge
+ *         - Report cut when violation found
+ *   Randomization via trial_num and prob parameters.
+ *   @complexity O(|V|² · |E|) for full shrinking sequence
+ *
+ * @algorithm Biconnected Components:
+ *   Identify cut vertices and blocks for connectivity cuts:
+ *   @math biconnected(): Tarjan's algorithm via DFS
+ *         depth_first_search(): Compute dfnumber, low values
+ *         compute_comp_nums(): Label biconnected components
+ *   Used to decompose graph for cut separation.
+ *   @complexity O(|V| + |E|) via single DFS pass
+ *   @ref Tarjan, R. (1972). "Depth-first search and linear graph
+ *        algorithms". SIAM J. Computing 1(2):146-160.
+ *
+ * @algorithm TSP Cuts:
+ *   Subtour elimination for TSP subproblems:
+ *   @math tsp_cuts(): Find violated subtour elimination constraints
+ *           x(E(S)) ≤ |S| - 1 for S ⊂ V
+ *         Equivalent to connectivity: x(δ(S)) ≥ 2
+ *   @complexity O(|V|·|E|) via min-cut computation
+ *
+ * @see network.h for support graph representation
+ * @see sym_cg.h for cut generator framework
+ */
 #ifndef _VRP_CG_H
 #define _VRP_CG_H
 

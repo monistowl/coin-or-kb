@@ -14,6 +14,60 @@
 /*                                                                           */
 /*===========================================================================*/
 
+/**
+ * @file spp_cg.h
+ * @brief Cut generator for Set Partitioning Problem
+ *
+ * Implements specialized cut separation for SPP using conflict graph.
+ *
+ * **Fractional graph (frac_graph):**
+ * - Nodes = variables with fractional LP values
+ * - Edges connect conflicting (non-orthogonal) columns
+ * - Used as intersection graph for cut separation
+ *
+ * **Level graph (level_graph):**
+ * - BFS enumeration from root node
+ * - Used for odd hole detection
+ *
+ * @algorithm Conflict Graph Construction:
+ *   Build graph from fractional LP solution:
+ *   @math construct_fractional_graph(): Include var i if 0 < x_i < 1
+ *         Edge (i,j) if columns i,j share a row (non-orthogonal)
+ *         node_node matrix: O(1) adjacency lookup
+ *   Edge costs = 1 - x_i - x_j for odd hole weights.
+ *   @complexity O(n²·m) for n fractional vars, m rows
+ *
+ * @algorithm Odd Hole Cuts:
+ *   Find violated odd hole inequalities:
+ *   @math For odd cycle C = {v_1, ..., v_{2k+1}} in conflict graph:
+ *           Σ_{i∈C} x_i ≤ k (odd hole inequality)
+ *         find_violated_odd_holes() uses BFS level graph
+ *         find_chordless_oh(): Ensure hole has no chords
+ *         min_path_to_root(): Shortest path for minimum weight cycle
+ *   Violated when Σ x_i > k for odd cycle of length 2k+1.
+ *   @complexity O(|V|²·|E|) for exhaustive search
+ *   @ref Nemhauser, G. and Sigismondi, G. (1992). "A strong cutting
+ *        plane/branch-and-bound algorithm for node packing". JORS.
+ *
+ * @algorithm Lifted Odd Holes:
+ *   Strengthen odd hole cuts by lifting:
+ *   @math lift_nonviolated_odd_hole(): Add hub vertices
+ *         Hubs are nodes adjacent to multiple hole vertices
+ *         max_lhs_of_lifted_odd_hole(): Compute lift coefficients
+ *   Lifting strengthens the inequality without losing validity.
+ *   @complexity O(k·|V|) per lift for k-hub lifting
+ *
+ * @algorithm Odd Antiholes:
+ *   Cuts from complement graph odd cycles:
+ *   @math Odd antihole in G = odd hole in complement G'
+ *         construct_complement_graph(): Build G'
+ *         find_violated_odd_antiholes(): Search in complement
+ *         lift_nonviolated_odd_antihole(): Strengthen cuts
+ *   @complexity Same as odd holes on complement graph
+ *
+ * @see spp_cg_clique.h for clique cuts
+ * @see sym_cg.h for cut generator framework
+ */
 #ifndef _SPP_CG_H
 #define _SPP_CG_H
 
