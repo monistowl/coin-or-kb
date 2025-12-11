@@ -27,6 +27,13 @@
  * - Increase when solver proves optimality
  * - More solutions = more hyperplane generation points
  *
+ * @algorithm Adaptive MIP Solution Pool Limit
+ * @math Controls how many MIP solutions are collected per iteration:
+ *       - Low limit (1-3): Fast MIP solve, few hyperplane generation points
+ *       - High limit: More candidate points, but slower solve
+ *       Adaptive strategy: increase limit when MIP proves optimality
+ *       (all solutions found), indicating room for deeper exploration.
+ *       Balances cut generation diversity vs iteration speed.
  * @see IMIPSolutionLimitStrategy.h for interface
  */
 #pragma once

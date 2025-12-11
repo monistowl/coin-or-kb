@@ -32,7 +32,19 @@
  * - Multiple MIP solves
  * - May regenerate same B&B tree work
  *
- * @algorithm Standard ESH outer approximation
+ * @algorithm Multi-Tree Outer Approximation for Convex MINLP
+ * @math Iterative refinement of polyhedral approximation:
+ *       repeat {
+ *         x̄ ← solve MIP relaxation (linear outer approx)
+ *         if g(x̄) ≤ 0: x̄ is MINLP-feasible, update primal bound
+ *         else: for violated g_i(x̄) > 0:
+ *           x* ← ESH rootsearch boundary point
+ *           Add cut: ∇g_i(x*)·(x - x*) ≤ 0
+ *       } until gap ≤ ε or iteration limit
+ *       Each MIP solve explores fresh B&B tree with accumulated cuts.
+ * @complexity O(iterations × MIP_solve_time + cuts × rootsearch_cost).
+ * @ref Duran & Grossmann (1986). "An outer-approximation algorithm for
+ *      a class of mixed-integer nonlinear programs". Math. Programming.
  * @see SolutionStrategySingleTree for callback-based variant
  */
 #pragma once

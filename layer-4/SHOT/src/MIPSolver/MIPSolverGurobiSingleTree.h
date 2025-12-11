@@ -27,6 +27,14 @@
  * - lastExploredNodes/lastOpenNodes: B&B tree progress
  * - Used for iteration reporting within callback
  *
+ * @algorithm Gurobi Lazy Constraint Callback for Branch-and-Cut ESH
+ * @math Uses Gurobi's callback API with GRB_CB_MIPSOL:
+ *       - callback() triggered at integer-feasible solutions
+ *       - cbGetSolution() retrieves candidate values
+ *       - cbLazy() adds violated cuts to B&B tree
+ *       GRB.LazyConstraints=1 enables lazy cut mode.
+ * @complexity Callback overhead per integer solution found in tree.
+ * @ref Gurobi Reference Manual: Callbacks
  * @see SolutionStrategySingleTree.h for algorithm context
  */
 #pragma once

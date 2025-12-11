@@ -31,6 +31,12 @@
  * - QP/QCQP → Direct solver if supported
  * - NLP → Interior point only
  *
+ * @algorithm SHOT Strategy Selection Framework
+ * @math Problem classification determines algorithm:
+ *       - Convex MINLP: ESH outer approximation (multi/single-tree)
+ *       - MIQCQP: Direct solver if convex quadratics only
+ *       - NLP (continuous): Interior point method (Ipopt)
+ *       Strategy pattern decouples problem classification from solution.
  * @see TaskHandler.h for task execution flow
  * @see Solver.h for strategy selection
  */

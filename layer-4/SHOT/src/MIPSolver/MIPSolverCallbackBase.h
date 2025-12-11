@@ -25,6 +25,16 @@
  * - taskSelectPrimalSolutionFromRootsearch: Rootsearch primal
  * - tUpdateInteriorPoint: Interior point maintenance
  *
+ * @algorithm Single-Tree Lazy Constraint Callback Pattern
+ * @math At integer candidate x̄ from B&B, the callback:
+ *       1. Evaluates nonlinear constraints g_i(x̄)
+ *       2. For violated g_i(x̄) > 0, generates ESH cut via rootsearch
+ *       3. Adds cut as lazy constraint: ∇g(x*)·(x - x*) ≤ 0
+ *       4. Optionally solves fixed-integer NLP for primal bound
+ *       Cuts are generated within solver's branch-and-bound, avoiding
+ *       the multiple MIP solves of multi-tree outer approximation.
+ * @complexity O(callback invocations × cuts per callback × rootsearch cost).
+ * @ref Bonami et al. (2008). "An algorithmic framework for convex MINLP"
  * @see MIPSolverCplexSingleTree.h, MIPSolverGurobiSingleTree.h
  */
 #pragma once

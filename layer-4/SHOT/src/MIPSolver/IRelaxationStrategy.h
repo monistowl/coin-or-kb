@@ -27,6 +27,12 @@
  * - MIP solves provide better candidate points
  * - Strategy balances cut generation vs exploration
  *
+ * @algorithm LP/MIP Relaxation Alternation Strategy
+ * @math In multi-tree ESH, alternating LP and MIP solves can improve performance:
+ *       - LP solves: fast, generate many cuts at continuous relaxation
+ *       - MIP solves: slower, but yield integer candidate points
+ *       Strategy decides each iteration: solve LP (integrality relaxed)
+ *       or full MIP based on iteration count, bound gap, or time.
  * @see RelaxationStrategyBase.h for base implementation
  */
 #pragma once

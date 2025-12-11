@@ -27,6 +27,14 @@
  * - callbackMutex: Protect shared state in multi-threaded solve
  * - CPLEX invokes callbacks from multiple threads
  *
+ * @algorithm CPLEX Generic Callback for Branch-and-Cut ESH
+ * @math Uses CPLEX's Context-based callback API (v12.8+):
+ *       - CPX_CALLBACKCONTEXT_CANDIDATE: Integer-feasible node
+ *       - invoke() checks nonlinear feasibility at candidate
+ *       - IloCplex::Callback::Context::rejectCandidate() + addUserCut()
+ *       Mutex ensures thread-safe shared state access in parallel B&B.
+ * @complexity Callback overhead per B&B node with integer solution.
+ * @ref IBM ILOG CPLEX Optimization Studio Documentation
  * @see SolutionStrategySingleTree.h for algorithm context
  */
 #pragma once
