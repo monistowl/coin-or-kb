@@ -9,16 +9,40 @@
  *
  * Represents graphs with nodes, arcs, and cycles for network-based models.
  *
+ * @algorithm Dijkstra's Shortest Path:
+ *   Find shortest path between two nodes in weighted graph:
+ *   @math Priority queue ordered by distance d[v]
+ *         Relax edges: if d[u] + w(u,v) < d[v], update d[v]
+ *         Returns shortest path for cycle basis computation.
+ *   @complexity O((V + E) log V) with binary heap
+ *
+ * @algorithm Kruskal's Minimum Spanning Tree:
+ *   Build MST via greedy edge selection:
+ *   @math Sort edges by weight, add if doesn't create cycle
+ *         Uses Union-Find for cycle detection
+ *         Used in Horton's algorithm for cycle basis.
+ *   @complexity O(E log E) for sorting + O(E α(V)) for unions
+ *
+ * @algorithm Horton's Minimum Cycle Basis:
+ *   Compute fundamental cycle basis of graph:
+ *   @math For each node v: compute SPT, form cycles with non-tree edges
+ *         Filter to O(VE) candidates, select V-E+1 independent cycles
+ *         Via Gaussian elimination on cycle incidence matrix.
+ *   @complexity O(V E² / log V) improved algorithm
+ *   @ref Horton (1987) "A polynomial-time algorithm for minimum cycle basis"
+ *
+ * @algorithm Chordal Extension (Tree Decomposition):
+ *   Add edges to make graph chordal for SDP relaxations:
+ *   @math Perfect elimination ordering via maximum cardinality search
+ *         Fill-in edges form cliques (bags) in tree decomposition
+ *         Enables sparse SDP formulations with rank-1 constraints.
+ *   @complexity O(V + E) for chordal check, O(V³) worst-case for extension
+ *
  * **Net Class:**
  * - nodes: Vector of Node pointers
  * - arcs: All arcs (existing + potential)
  * - _exist_arcs: Only existing arcs
  * - conting_arcs: Contingency arcs (for N-1 analysis)
- *
- * **Indexing Structures:**
- * - nodeID: Map from node name to Node*
- * - arcID: Map from (src_name, dest_name) to Arc*
- * - arcMap: Map from arc name to Arc*
  *
  * **Node Pairs (for SDP relaxations):**
  * - _node_pairs: Bus pairs for standard formulation
@@ -27,15 +51,6 @@
  * **Cycle Basis (for Kirchhoff constraints):**
  * - cycle_basis: Vector of Path* forming basis
  * - horton_net: Subnetwork for Horton algorithm
- *
- * **Tree Decomposition:**
- * - _bags: Cliques from chordal extension
- * - Used for SDP rank-1 constraints
- *
- * **Graph Algorithms:**
- * - clone(), clone_undirected(): Copy graphs
- * - Cycle detection, shortest paths
- * - Chordal completion
  *
  * @see gravity/Node.h for node data
  * @see gravity/Arc.h for arc/edge data
