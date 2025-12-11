@@ -15,11 +15,11 @@ Semantically annotated documentation for the [COIN-OR](https://www.coin-or.org/)
 </a>
 <a href="algorithms/" class="nav-card">
 <strong>Algorithm Index</strong>
-<span>100 documented algorithms</span>
+<span>130+ documented algorithms</span>
 </a>
 <a href="browser/" class="nav-card">
 <strong>Source Browser</strong>
-<span>1,963 annotated classes</span>
+<span>2,079 annotated files</span>
 </a>
 <a href="dependencies/" class="nav-card">
 <strong>Dependencies</strong>
@@ -201,7 +201,7 @@ https://monistowl.github.io/coin-or-kb/api/annotations.json
 
 **Example prompt for Claude, GPT, or any LLM:**
 
-> Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 2,062 files across 28 libraries (728 with semantic annotations).
+> Fetch https://monistowl.github.io/coin-or-kb/api/annotations.json and use it to answer questions about COIN-OR optimization libraries. This contains algorithm descriptions, mathematical formulations, and complexity analysis for 2,079 files across 28 libraries (789 with semantic annotations).
 
 **API Endpoints:**
 
@@ -304,4 +304,4 @@ Each annotated file can include:
 | `@brief` | One-line summary of the file's purpose |
 | `@see` | Cross-references to related code |
 
-**Coverage:** 2,062 annotated files across 28 libraries. 728 files have deep semantic annotations (`@algorithm`, `@math`, `@complexity`).
+**Coverage:** 2,079 annotated files across 28 libraries. 789 files have deep semantic annotations (`@algorithm`, `@math`, `@complexity`).
