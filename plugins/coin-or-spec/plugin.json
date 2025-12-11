@@ -1,0 +1,8 @@
+{
+  "name": "coin-or-spec",
+  "version": "0.1.0",
+  "description": "Extract language-agnostic pseudocode specifications from COIN-OR classes for porters and new solver authors",
+  "mcp": {
+    "server": "mcp-server.py"
+  }
+}
