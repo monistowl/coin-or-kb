@@ -1,13 +1,40 @@
 /* $Id: OSDecompSolver.h 3038 2009-11-07 11:43:44Z Gassmann $ */
-/** @file OSDecompSolver.h
- * 
- * \remarks
+/**
+ * @file OSDecompSolver.h
+ * @brief Column generation decomposition solver framework
+ *
+ * Virtual base class for Dantzig-Wolfe decomposition solvers.
+ *
+ * @algorithm Dantzig-Wolfe Decomposition (Column Generation):
+ *   Solve large structured LP/MIP via master + subproblems:
+ *   @math Master: min{c'θ : Aθ = b, θ ≥ 0} over convex combinations
+ *         Subproblem: min{(c - πA)x : x ∈ X_k} for each block k
+ *         If reduced cost < 0: add column θ = x to master
+ *         Iterate until no negative reduced cost columns.
+ *   @complexity Depends on subproblem structure; typically polynomial per iter
+ *   @ref Dantzig & Wolfe (1960) "Decomposition Principle for Linear Programs"
+ *
+ * @algorithm Branch-and-Price:
+ *   Combine column generation with branch-and-bound for MIP:
+ *   @math At each B&B node: solve LP relaxation via column generation
+ *         Branch on fractional variables (original or master space)
+ *         Branching constraints added to B matrix (tour-breaking, etc.)
+ *   getColumns() generates new columns from subproblem
+ *   getCutsTheta() generates cutting planes in master space
+ *
+ * **Key Methods:**
+ * - getInitialRestrictedMaster(): Create initial master LP
+ * - getColumns(): Solve pricing subproblem, return columns
+ * - getCutsTheta(): Generate cuts in theta (column) space
+ * - getCutsMultiCommod(): Multi-commodity flow cuts
+ * - getBranchingCut(): Variable branching constraints
+ *
+ * @remarks
  * Copyright (C) 2005-2008, Horand Gassmann, Jun Ma, Kipp Martin,
  * Northwestern University, and the University of Chicago.
  * All Rights Reserved.
- * This software is licensed under the Eclipse Public License. 
+ * This software is licensed under the Eclipse Public License.
  * Please see the accompanying LICENSE file in root directory for terms.
- * 
  */
 
 #ifndef OSDECOMPSOLVER_H
