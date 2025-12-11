@@ -11,26 +11,35 @@
  *
  * Number-theoretic functions critical for MIP cut generation.
  *
+ * @algorithm Extended Euclidean Algorithm:
+ *   Compute modular inverse a⁻¹ mod m:
+ *   @math Maintain: a·x + m·y = gcd(a,m)
+ *         Iterate: (a,m) ← (m, a mod m), update x,y
+ *         If gcd=1: x ≡ a⁻¹ (mod m)
+ *   @complexity O(log(min(a,m))) iterations
+ *   Used in GF(k) arithmetic for mod-k cuts.
+ *
+ * @algorithm Continued Fraction Rational Approximation:
+ *   Find smallest denominator d with |x - p/d| < ε:
+ *   @math Iterate: x = a₀ + 1/(a₁ + 1/(a₂ + ...))
+ *         Convergents p_n/q_n satisfy |x - p_n/q_n| < 1/(q_n·q_{n+1})
+ *         Stop when q exceeds maxdenom or error < ε
+ *   @complexity O(log maxdenom) iterations
+ *   @ref Khinchin (1964) "Continued Fractions"
+ *
+ * @algorithm Integral Scaling via Common Denominator:
+ *   Find scale s making all values integral:
+ *   @math Start with s = 75·2^k (covers many small denoms)
+ *         For each val: find d via continued fractions
+ *         Update s = lcm(s, d), reduce by gcd
+ *         Return s/gcd(scaled values)
+ *   Used for cut coefficient strengthening.
+ *
  * **Basic Operations:**
  * - mod(): Proper modulo (always non-negative result)
  * - gcd(): Euclidean algorithm for GCD
  * - nearestInteger(): Round to nearest int64
  * - isIntegral(): Test if double is within eps of integer
- *
- * **Modular Arithmetic:**
- * - modularInverse(): Extended Euclidean algorithm for a^{-1} mod m
- *   - Used in mod-k cut generation (GF(k) arithmetic)
- *
- * **Rational Approximation:**
- * - denominator(): Continued fraction algorithm to find
- *   smallest denominator d such that |x - p/d| < eps
- *   - Used for detecting integer structure in coefficients
- *
- * **Integral Scaling:**
- * - integralScale(): Find multiplier to make all values integral
- *   - Combines continued fractions with GCD reduction
- *   - Used for strengthening MIR/GMI cuts
- *   - Returns 0 if no small denominator exists
  *
  * **Usage in HiGHS:**
  * - HighsGFkSolve: Modular inverse for GF(k) systems

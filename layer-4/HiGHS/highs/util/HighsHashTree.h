@@ -11,6 +11,22 @@
  *
  * Cache-efficient hash map using trie structure with occupation bitmaps.
  *
+ * @algorithm Hash Array Mapped Trie (HAMT):
+ *   Memory-efficient hash table using trie structure:
+ *   @math Hash partitioned: h = h₁|h₂|...|h₉ (6 bits each, 54 total)
+ *         Level i branches on hᵢ into 64-way child array
+ *         Occupation bitmap: only allocate existing children
+ *         Leaf nodes: small arrays with linear probing
+ *   @complexity O(1) average for insert/find/erase (bounded depth ≤ 9)
+ *   @ref Bagwell (2001) "Ideal Hash Trees" - HAMT persistent structure
+ *
+ * @algorithm Adaptive Leaf Sizing:
+ *   Dynamically resize leaf nodes based on occupancy:
+ *   @math 4 size classes: 6, 22, 38, 54 entries (linear progression)
+ *         Burst threshold: 54 entries → convert to branch node
+ *         Merge threshold: total children fit → collapse to leaf
+ *   Balances memory usage vs tree depth.
+ *
  * **Node Types:**
  * - InnerLeaf<SizeClass>: Leaf with 6-54 entries (4 size classes)
  * - BranchNode: Internal node with 64-way branching via hash chunks

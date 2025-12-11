@@ -11,6 +11,17 @@
  *
  * Incrementally maintains min/max activity bounds for linear constraints.
  *
+ * @algorithm Feasibility-Based Bound Tightening (FBBT):
+ *   Derive variable bounds from constraint feasibility:
+ *   @math For constraint: L ≤ Σ aᵢxᵢ ≤ U
+ *         Activity bounds: sumLower = Σ min(aᵢlᵢ, aᵢuᵢ)
+ *                          sumUpper = Σ max(aᵢlᵢ, aᵢuᵢ)
+ *         Residual for xⱼ: resLower = sumLower - contrib(xⱼ)
+ *         New bound: aⱼ > 0 → xⱼ ≤ (U - resLower)/aⱼ
+ *                    aⱼ < 0 → xⱼ ≥ (U - resLower)/aⱼ
+ *   @complexity O(1) per bound update with incremental maintenance
+ *   @ref Belotti et al. (2009) "Branching and bounds tightening for MINLPs"
+ *
  * **Activity Computation:**
  * For row sum = Σ(a_i * x_i):
  * - sumLower: Minimum activity using a_i>0 with lb_i, a_i<0 with ub_i

@@ -11,6 +11,24 @@
  *
  * Self-balancing BST using indices instead of pointers for cache efficiency.
  *
+ * @algorithm Red-Black Tree (Guibas-Sedgewick 1978):
+ *   Self-balancing BST with color-based invariants:
+ *   @math Properties: (1) Every node red or black
+ *                     (2) Root and NIL nodes black
+ *                     (3) Red node has black children
+ *                     (4) All root-to-leaf paths have equal black nodes
+ *         Insert: Color red, fix via rotations/recoloring (≤2 rotations)
+ *         Delete: Transplant + fixup (≤3 rotations)
+ *   @complexity O(log n) for insert/delete/search, worst-case guaranteed
+ *   @ref Guibas & Sedgewick (1978) "A Dichromatic Framework for Balanced Trees"
+ *
+ * @algorithm Index-Based Storage (Cache Optimization):
+ *   Use array indices instead of pointers for improved locality:
+ *   @math child[2]: left/right indices into node array
+ *         parentAndColor: parent index with color bit packed (saves 8 bytes)
+ *         CRTP: zero-overhead polymorphism via Curiously Recurring Template
+ *   Enables contiguous storage of tree nodes.
+ *
  * **CRTP Pattern:**
  * - RbTreeTraits<Impl>: Define KeyType and LinkType
  * - Impl::getRbTreeLinks(): Return reference to RbTreeLinks

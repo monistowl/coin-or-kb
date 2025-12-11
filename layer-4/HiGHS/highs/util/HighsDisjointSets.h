@@ -11,6 +11,15 @@
  *
  * Efficient partition management with path compression and union-by-size.
  *
+ * @algorithm Union-Find with Path Compression (Tarjan 1975):
+ *   Maintain disjoint sets with near-constant-time operations:
+ *   @math Forest representation: sets[i] = parent, sets[r] = r for root
+ *         Find(x): Follow parent pointers, compress path to root
+ *         Union(x,y): Link smaller tree under larger (union-by-size)
+ *   @complexity O(α(n)) amortized per operation
+ *     where α is inverse Ackermann function (α(n) ≤ 4 for all practical n)
+ *   @ref Tarjan (1975) "Efficiency of a Good but Not Linear Set Union Algorithm"
+ *
  * **Template Parameter:**
  * - kMinimalRepresentative: If true, smaller index becomes representative
  *   (useful for symmetry detection where order matters)

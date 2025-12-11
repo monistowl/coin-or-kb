@@ -11,10 +11,20 @@
  *
  * In-place heapsort implementations for indices and value-index pairs.
  *
- * **Algorithm:**
- * - Build max-heap in O(n) via buildMaxheap()
- * - Extract elements in O(n log n) via maxHeapsort()
- * - Result: increasing order (max-heap yields ascending sort)
+ * @algorithm Heapsort (Williams 1964, Floyd 1964):
+ *   In-place comparison sort using binary heap:
+ *   @math Phase 1 (Build): Bottom-up heapify in O(n)
+ *           for i = n/2 downto 1: maxHeapify(i)
+ *         Phase 2 (Sort): Extract max n times in O(n log n)
+ *           for i = n downto 2: swap(1,i), maxHeapify(1)
+ *   @complexity O(n log n) worst-case, O(1) extra space
+ *   @ref Williams (1964) "Algorithm 232: Heapsort"
+ *
+ * @algorithm Bounded Decreasing Heap:
+ *   Maintain k largest elements seen in stream:
+ *   @math Min-heap of size k, reject if new < heap[1]
+ *         Insert: push then sift-up, eject min if full
+ *   Used for top-k selection in ratio tests.
  *
  * **Functions:**
  * - maxheapsort(): Combined build + sort
