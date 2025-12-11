@@ -37,6 +37,42 @@
  * - reductions[]: Vector of (type, stack_position) pairs
  * - rowValues[], colValues[]: Temporary storage for sparse vectors
  *
+ * @algorithm Postsolve Stack Architecture:
+ *   LIFO stack for undoing presolve reductions:
+ *   @math Each reduction r_i stores: type, position_in_data_stack
+ *         undo(r_1, r_2, ..., r_k) = undo(r_k) ∘ ... ∘ undo(r_1)
+ *   Discriminated union of reduction structs minimizes storage overhead.
+ *   @complexity O(1) per reduction push, O(k) total undo for k reductions
+ *
+ * @algorithm Doubleton Equation Elimination:
+ *   Remove row with exactly two variables:
+ *   @math Given a·x_i + b·x_j = c, substitute x_j = (c - a·x_i)/b
+ *         Updates x_j bounds from x_i bounds
+ *         Postsolve: x_j = (c - a·x_i)/b, dual_j from row dual
+ *   @complexity O(nnz_column) per elimination
+ *   @ref Andersen, E. and Andersen, K. (1995). "Presolving in linear
+ *        programming". Mathematical Programming 71:221-245.
+ *
+ * @algorithm Forcing Row Detection:
+ *   Row where bound forces all variables to their bounds:
+ *   @math If min Σ a_j·x_j = b (row lower bound), then for all a_j > 0:
+ *         x_j = l_j (at lower), and for all a_j < 0: x_j = u_j (at upper)
+ *   Remove row and fix all variables in it.
+ *   @complexity O(nnz_row) per forcing row
+ *
+ * @algorithm Duplicate Column Merging:
+ *   Merge columns with parallel constraint coefficients:
+ *   @math If A_j = λ·A_k (same column pattern scaled), combine:
+ *         x_j' = x_j + λ·x_k with adjusted bounds
+ *   Postsolve splits merged value back to originals.
+ *   @note Handles both integer and continuous variables with care
+ *
+ * @algorithm Index Compression:
+ *   Maintain mapping between reduced and original indices:
+ *   @math origColIndex[reduced_col] = original_col
+ *   undoIterateBackwards() expands solution to original space in O(n).
+ *   Enables efficient sparse representation during presolve.
+ *
  * @see presolve/HPresolve.h for presolve engine
  * @see util/HighsDataStack.h for stack implementation
  */

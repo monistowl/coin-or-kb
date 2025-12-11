@@ -32,6 +32,35 @@
  * - propagationDomains: Registered domains for cut-based bound tightening
  * - propRows: Active propagation rows
  *
+ * @algorithm Cut Selection (separate):
+ *   Select violated cuts balancing efficacy and sparsity:
+ *   @math score = violation · efficacy_factor / (1 + density_penalty)
+ *   where violation = a'x - b for cut a'x ≤ b
+ *   Filters: minScoreFactor × bestObservedScore, density < minDensityLim
+ *   Returns top-k cuts by score avoiding near-parallel cuts.
+ *   @complexity O(ncuts · ncols) for scoring all cuts
+ *
+ * @algorithm Duplicate Detection:
+ *   Hash-based detection prevents adding equivalent cuts:
+ *   @math hash = Σ (coef_i × index_i × prime_i) mod 2^64
+ *   On collision, compare coefficients directly.
+ *   Normalized cuts (||a|| = 1) compared with tolerance.
+ *   @complexity O(nnz) per cut, amortized O(1) lookup
+ *
+ * @algorithm Cut Aging:
+ *   Track cut usefulness via age counter:
+ *   @math age_i += 1 if slack_i > 0, else age_i = 0
+ *   Remove cut when age_i > agelim_ (default ~10)
+ *   Keeps pool size bounded: softlimit_ triggers aggressive aging.
+ *   @ref Achterberg, T. (2007). "Constraint Integer Programming".
+ *        PhD thesis, TU Berlin, Chapter 7.
+ *
+ * @algorithm Cut Parallelism:
+ *   Avoid adding near-parallel cuts to same LP:
+ *   @math parallelism(a, b) = |a'b| / (||a|| · ||b||)
+ *   Reject if parallelism > 0.9 with existing LP cut.
+ *   @complexity O(nnz) per comparison
+ *
  * @see mip/HighsDynamicRowMatrix.h for cut storage
  * @see mip/HighsDomain.h for domain propagation
  */

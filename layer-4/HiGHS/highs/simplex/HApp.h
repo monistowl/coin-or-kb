@@ -26,6 +26,29 @@
  * - Refine: Solve scaled, then refine unscaled
  * - Direct: Ignore scaling, solve unscaled
  *
+ * @algorithm Ruiz Equilibration Scaling:
+ *   Iteratively scale rows and columns to improve conditioning:
+ *   @math D_r · A · D_c where D_r, D_c are diagonal
+ *   Each iteration: scale row/col by 1/max|entry|
+ *   Converges when max|entry| ≈ 1 in each row/column.
+ *   @complexity O(nnz · k) for k iterations (typically k ≤ 10)
+ *   @ref Ruiz, D. (2001). "A Scaling Algorithm to Equilibrate Both Rows
+ *        and Columns Norms in Matrices". Technical Report RAL-TR-2001-034.
+ *
+ * @algorithm Dualization for Row-Heavy LPs:
+ *   When m >> n, dualize: max c'x, Ax ≤ b → min b'y, A'y = c, y ≥ 0
+ *   Simplex typically faster on problems with fewer constraints.
+ *   @math Original: n variables, m constraints
+ *         Dual: m variables, n constraints
+ *   HiGHS auto-dualizes when m > 2n (heuristic threshold).
+ *
+ * @algorithm Solution Refinement:
+ *   If scaled solution violates unscaled tolerances:
+ *   1. Warm-start from scaled solution in unscaled space
+ *   2. Re-solve with tighter tolerances
+ *   3. May iterate if still infeasible
+ *   @note Refinement uses scaled factorization for stability
+ *
  * @see simplex/HEkk.h for simplex kernel
  * @see simplex/HSimplex.h for simplex algorithms
  */

@@ -32,6 +32,33 @@
  * - Called when incumbent improves (new cutoff enables more fixings)
  * - Provides global domain tightening from LP dual information
  *
+ * @algorithm Reduced Cost Fixing:
+ *   Derive variable bounds from LP reduced costs and cutoff:
+ *   @math For minimization with cutoff z̄:
+ *         If d_j > 0 and x_j at lower bound l_j:
+ *           x_j ≤ l_j + (z̄ - z_LP) / d_j
+ *         If d_j < 0 and x_j at upper bound u_j:
+ *           x_j ≥ u_j + (z̄ - z_LP) / d_j
+ *   When gap = z̄ - z_LP is small, bounds become tight.
+ *   @complexity O(n) per LP solution
+ *   @ref Nemhauser, G. and Wolsey, L. (1988). "Integer and Combinatorial
+ *        Optimization". Wiley, Section II.1.
+ *
+ * @algorithm Lurking Bounds:
+ *   Precompute bounds that activate at specific objective thresholds:
+ *   @math lurking_bound_j(z̄) = l_j + (z̄ - z_root) / d_j^{root}
+ *   Stored as multimap: objective_threshold → bound_value
+ *   When incumbent improves, extract all bounds with threshold ≥ new_cutoff.
+ *   @complexity O(log n) per lookup via std::multimap
+ *   @note More effective than repeated propagation on incumbent updates
+ *
+ * @algorithm Root Reduced Cost Caching:
+ *   Store root LP reduced costs for global bound tightening:
+ *   - Root LP typically tightest bounds (no branching)
+ *   - Reduced costs stable across B&B tree
+ *   - propagateRootRedcost() applies cached costs with current cutoff
+ *   @complexity O(n) storage, O(n) per propagation
+ *
  * @see mip/HighsDomain.h for bound propagation
  * @see mip/HighsLpRelaxation.h for LP solution access
  */

@@ -42,6 +42,50 @@
  * - run(): Find automorphism generators via search tree
  * - Uses nauty-style partition refinement with certificate comparison
  *
+ * @algorithm Graph Automorphism for Symmetry Detection:
+ *   Convert MIP to vertex-colored graph, find automorphisms:
+ *   @math Graph G = (V, E) where V = {rows} ∪ {cols} ∪ {bound_vertices}
+ *         E connects row i to col j iff a_ij ≠ 0
+ *         Colors encode coefficient values, bounds, integrality
+ *   Variable permutation π is symmetry iff graph automorphism.
+ *   @complexity Worst case exponential, typically polynomial in practice
+ *   @ref McKay, B. and Piperno, A. (2014). "Practical graph isomorphism II".
+ *        Journal of Symbolic Computation 60:94-112.
+ *
+ * @algorithm Partition Refinement (Nauty-style):
+ *   Iteratively refine partition until discrete or certificate diverges:
+ *   @math Partition P = {C_1, ..., C_k} where each C_i is equivalence class
+ *         Refinement: split cell C by neighbor counts in other cells
+ *         Certificate: sequence of cell sizes during refinement
+ *   First discrete partition is canonical labeling.
+ *   @complexity O(|V|² · log|V|) typical, O(|V|⁴) worst case
+ *
+ * @algorithm Orbital Fixing:
+ *   Fix symmetric variables when one orbit representative is fixed:
+ *   @math If x_i fixed to v, and π(i) = j for symmetry π,
+ *         then solution with x_i = v has symmetric solution with x_j = v.
+ *   Fix all orbit members to lexicographically first assignment.
+ *   @complexity O(orbit_size) per fixing
+ *   @ref Margot, F. (2003). "Exploiting orbits in symmetric ILP".
+ *        Mathematical Programming 98:3-21.
+ *
+ * @algorithm Orbitope Propagation:
+ *   Specialized handling for matrix of symmetric binary variables:
+ *   @math Full orbitope: all row and column permutations are symmetries
+ *         Packing orbitope: rows are set-packing constraints
+ *   Enforce lexicographic ordering on columns to break symmetry.
+ *   More efficient than general orbital fixing for this structure.
+ *   @complexity O(rows · cols) per propagation
+ *   @ref Kaibel, V. and Pfetsch, M. (2008). "Packing and partitioning
+ *        orbitopes". Mathematical Programming 114:1-36.
+ *
+ * @algorithm Stabilizer Orbit Computation:
+ *   Compute orbits under subgroup fixing certain variables:
+ *   @math Stab(S) = {π : π(s) = s for all s ∈ S}
+ *         Orbits of Stab(S) partition unfixed variables
+ *   Used for dynamic orbital fixing during branch-and-bound.
+ *   @complexity O(|generators| · |unfixed|) per computation
+ *
  * @see mip/HighsDomain.h for orbital fixing application
  * @see mip/HighsMipSolverData.h for symmetry integration
  */

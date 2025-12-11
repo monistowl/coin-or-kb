@@ -15,6 +15,23 @@
  * - Factorize: 0=OK, 1=unstable, 2=singular, 3=both
  * - Update: <0 singular, >0 unstable, 0=OK
  *
+ * @algorithm LU Update Interface (Forrest-Tomlin):
+ *   Abstract interface for O(nnz) column replacement in LU factors:
+ *   @math Given B = L·U and new column b replacing column j:
+ *         B_new = B + (b - B_{:,j})·e_j' (rank-1 update)
+ *         Update L, U factors incrementally without full refactorization
+ *   Interface methods: Factorize, FtranForUpdate, BtranForUpdate, Update.
+ *   @complexity O(nnz(update)) per column replacement vs O(m²) refactor
+ *   @ref Forrest, J. and Tomlin, J. (1972). "Updated triangular factors
+ *        of the basis to maintain sparsity". Mathematical Programming 2:263-278.
+ *
+ * @algorithm Singularity Handling:
+ *   Detect and handle rank-deficient columns during factorization:
+ *   @math If column k becomes zero in active submatrix, replace by unit column
+ *         Returns flag 2 to indicate singularity was patched
+ *   Allows crossover to proceed even with degenerate bases.
+ *   @note strict_abs_pivottol uses kLuDependencyTol for earlier detection
+ *
  * @see basiclu_wrapper.h for BasicLU implementation
  * @see basis.h for usage in basis management
  */

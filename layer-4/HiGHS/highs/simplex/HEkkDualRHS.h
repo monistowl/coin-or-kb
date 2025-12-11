@@ -5,8 +5,51 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/**@file simplex/HEkkDualRHS.h
- * @brief Dual simplex optimality test for HiGHS
+/**
+ * @file simplex/HEkkDualRHS.h
+ * @brief Dual simplex row selection (CHUZR) for HiGHS
+ *
+ * Implements CHUZR (CHoose Row) for selecting the leaving variable in dual
+ * simplex. Maintains primal infeasibility data for efficient row selection.
+ *
+ * **Key Operations:**
+ * - chooseNormal(): Single row selection for serial dual simplex
+ * - chooseMultiGlobal(): Multiple row selection for PAMI
+ * - chooseMultiHyperGraph*(): Hyper-sparse multi-row selection
+ * - updatePrimal(): Apply pivot column to basic values
+ * - createInfeasList(): Build heap of most infeasible rows
+ *
+ * **Data Structures:**
+ * - work_infeasibility[row]: Primal infeasibility |x_i - bound|
+ * - workIndex[]: Heap of rows with largest infeasibilities
+ * - workMark[]: Flags for rows in the heap
+ * - workCutoff: Threshold for heap membership
+ *
+ * @algorithm Dual CHUZR (Row Selection):
+ *   Select leaving variable x_r that maximizes weighted infeasibility:
+ *   @math r = argmax_i { |x_i - bound_i| / γ_i : x_i infeasible }
+ *   where γ_i is the dual steepest edge weight (||B^{-1} e_i||²).
+ *   This minimizes expected dual objective change per unit of work.
+ *   For Dantzig pricing (γ_i = 1), simply picks most infeasible.
+ *
+ * @algorithm Heap-Based Infeasibility Tracking:
+ *   Maintain partial heap of O(√m) most infeasible rows:
+ *   1. Full scan only when heap is depleted or after rebuild
+ *   2. Incremental updates after each pivot via updatePrimal()
+ *   3. workCutoff dynamically adjusted to heap size
+ *   @complexity Amortized O(log m) per CHUZR vs O(m) for full scan
+ *   @ref Huangfu, Q. (2013). "High performance simplex solver".
+ *        PhD thesis, University of Edinburgh.
+ *
+ * @algorithm Multi-Row CHUZR for PAMI:
+ *   Select k independent leaving candidates for parallel pivots:
+ *   1. Sort infeasibilities, pick top k
+ *   2. Ensure rows are "independent" (non-overlapping pivot columns)
+ *   3. Return set for parallel BTRAN operations
+ *   @complexity O(m) scan + O(k log k) heap operations
+ *
+ * @see simplex/HEkkDual.h for dual simplex main loop
+ * @see simplex/HEkkDualRow.h for CHUZC (column selection)
  */
 #ifndef SIMPLEX_HEKKDUALRHS_H_
 #define SIMPLEX_HEKKDUALRHS_H_

@@ -34,6 +34,37 @@
  * - frac_ftran_sparse(), frac_btran_sparse(): Sparsity metrics
  * - mean_fill(), max_fill(): LU fill factors
  *
+ * @algorithm Weighted Crash Basis Construction:
+ *   Build initial basis preferring high-weight columns:
+ *   @math weight[j] = priority for column j in basis
+ *         Infinite weight → always basic (unless dependent)
+ *         Zero weight → always nonbasic (unless required for rank)
+ *   Sort columns by weight descending, greedily add if independent.
+ *   @complexity O(m · nnz) for crash procedure
+ *   @ref Maros, I. (2003). "Computational Techniques of the Simplex
+ *        Method". Springer, Chapter 10.
+ *
+ * @algorithm LU Factorization with Stability Control:
+ *   Factor basis matrix with adaptive pivot tolerance:
+ *   @math B = L · U with stability check ||B⁻¹||_∞ < threshold
+ *         If unstable, tighten pivot tolerance and refactorize
+ *   TightenLuPivotTol() progressively reduces tolerance.
+ *   @complexity O(nnz(L) + nnz(U)) per factorization
+ *
+ * @algorithm Basis Repair for Singularities:
+ *   Fix singular or near-singular basis matrices:
+ *   @math Replace ill-conditioned columns with slack columns
+ *         Iterate until ||B⁻¹||_∞ < kBasisRepairThreshold (10⁵)
+ *   At most kMaxBasisRepair (200) repairs per factorization.
+ *   @complexity O(m²) worst case for repair sequence
+ *
+ * @algorithm Sparse FTRAN/BTRAN:
+ *   Exploit sparsity in triangular solves:
+ *   @math FTRAN: solve L·U·x = b (forward transformation)
+ *         BTRAN: solve U'·L'·y = c (backward transformation)
+ *   frac_ftran_sparse(), frac_btran_sparse() track solution density.
+ *   @complexity O(nnz(solution)) for sparse solve
+ *
  * @see ipm/ipx/lu_update.h for LU factorization
  * @see ipm/ipx/lp_solver.h for usage context
  */

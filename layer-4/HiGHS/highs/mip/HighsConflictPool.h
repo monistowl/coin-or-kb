@@ -37,6 +37,34 @@
  * - propagationDomains[]: Domains using conflicts for propagation
  * - modification_[]: Version counter for conflict updates
  *
+ * @algorithm Conflict-Driven Clause Learning (CDCL):
+ *   When LP infeasibility detected, derive nogood from branching decisions:
+ *   @math If decisions D₁ ∧ D₂ ∧ ... ∧ Dₖ lead to infeasibility,
+ *         then ¬D₁ ∨ ¬D₂ ∨ ... ∨ ¬Dₖ is a valid constraint.
+ *   Stored as set of HighsDomainChange that cannot all be active.
+ *   @ref Achterberg, T. (2007). "Conflict analysis in mixed integer
+ *        programming". Discrete Optimization 4(1):4-20.
+ *
+ * @algorithm Reconvergence Cuts:
+ *   Strengthen conflicts using reconvergence analysis:
+ *   @math If conflict C holds at node N, and bound change b
+ *         is implied on all paths from root to N,
+ *         then C ∪ {b} is also valid.
+ *   Enables learning more general conflicts from specific failures.
+ *   @see mip/HighsDomain.h for ConflictSet::computeReconvergenceFrontier()
+ *
+ * @algorithm Conflict Propagation:
+ *   Use conflicts for bound tightening at B&B nodes:
+ *   @math If conflict is {x₁ ≥ a₁, x₂ ≤ b₂, ...} and all but one
+ *         condition holds, the remaining condition must be false.
+ *   propagationDomains[] tracks which domains use conflicts.
+ *   @complexity O(conflict_size) per propagation check
+ *
+ * @algorithm Conflict Aging:
+ *   Same aging scheme as cut pool:
+ *   @math age_i += 1 when conflict not used, reset to 0 when active
+ *   Removes old conflicts to bound memory: O(softlimit_) conflicts.
+ *
  * @see mip/HighsDomain.h for conflict derivation
  * @see mip/HighsSearch.h for conflict generation during search
  */

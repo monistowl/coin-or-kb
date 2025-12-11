@@ -36,6 +36,38 @@
  * - addInferenceObservation(): Record domain reductions
  * - getPseudocostUp/Down(): Get estimated change for given fraction
  *
+ * @algorithm Pseudocost Branching:
+ *   Estimate objective degradation from branching on integer variable x_j:
+ *   @math Ψ_j^+ = Δz / (⌈x_j⌉ - x_j) for up-branch (x_j ≥ ⌈x_j⌉)
+ *         Ψ_j^- = Δz / (x_j - ⌊x_j⌋) for down-branch (x_j ≤ ⌊x_j⌋)
+ *   Average over observations: Ψ_j = (1/n) Σ Ψ observed
+ *   @complexity O(1) per query after O(branching_count) observations
+ *   @ref Benichou et al. (1971). "Experiments in mixed-integer linear
+ *        programming". Mathematical Programming 1(1):76-94.
+ *
+ * @algorithm Reliability Branching:
+ *   Blend unreliable pseudocosts with global average:
+ *   @math Ψ' = w·Ψ_j + (1-w)·Ψ_avg where w = 0.9 + 0.1·(n/minreliable)
+ *   Increases reliability weight as more samples are collected.
+ *   Variable is "reliable" when min(n_up, n_down) >= minreliable.
+ *   @ref Achterberg et al. (2005). "Branching rules revisited".
+ *        Operations Research Letters 33(1):42-54.
+ *
+ * @algorithm Multi-Signal Scoring:
+ *   Combine multiple branching signals with product scoring:
+ *   @math score = mapScore(cost) / λ + λ·(0.01·conflict + 0.0001·(cutoff + inference))
+ *   where mapScore(s) = 1 - 1/(1+s) maps [0,∞) → [0,1)
+ *   λ = degeneracyFactor adjusts balance for degenerate LPs
+ *   Product of up/down scores favors balanced branching.
+ *
+ * @algorithm Conflict Score Aging:
+ *   Decay old conflict contributions via weight scaling:
+ *   @math conflict_weight *= 1.02 per conflict added
+ *   When weight > 1000, rescale all scores by 1/weight
+ *   Recent conflicts weighted more heavily than old ones.
+ *   @ref Achterberg, T. (2007). "Conflict analysis in mixed integer
+ *        programming". Discrete Optimization 4(1):4-20.
+ *
  * @see mip/HighsSearch.h for branching variable selection
  * @see mip/HighsConflictPool.h for conflict scoring
  */

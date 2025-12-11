@@ -5,9 +5,46 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/**@file simplex/HighsSimplexAnalysis.h
- * @brief Analyse simplex iterations, both for run-time control and data
- * gathering
+/**
+ * @file simplex/HighsSimplexAnalysis.h
+ * @brief Simplex iteration analysis for run-time control and performance tuning
+ *
+ * Collects and analyzes data during simplex iterations to support:
+ * - Adaptive algorithm selection (sparse vs hyper-sparse FTRAN/BTRAN)
+ * - DSE-to-Devex switching decisions
+ * - INVERT timing via synthetic clock
+ * - Performance profiling and debugging
+ *
+ * **TranStageAnalysis:**
+ * Tracks density predictions vs actuals for FTRAN/BTRAN stages:
+ * - FTRAN_LOWER, FTRAN_UPPER, FTRAN_UPPER_FT
+ * - BTRAN_UPPER, BTRAN_UPPER_FT, BTRAN_LOWER
+ * Used to tune hyper-sparse vs traditional algorithm selection.
+ *
+ * **HighsSimplexAnalysis:**
+ * Per-iteration data for adaptive control:
+ * - col_aq_density, row_ep_density, row_ap_density: Operation densities
+ * - edge_weight_error: DSE weight accuracy tracking
+ * - numerical_trouble: Pivot accuracy monitoring
+ * - rebuild_reason: Why INVERT was triggered
+ *
+ * @algorithm Synthetic Clock for INVERT Timing:
+ *   Tracks estimated operation counts rather than wall time:
+ *   @math tick = Σ (flops for each FTRAN/BTRAN/SpMV)
+ *   Trigger INVERT when tick exceeds threshold (based on m, nnz).
+ *   More stable than wall time across varying system loads.
+ *   @ref Huangfu, Q. and Hall, J.A.J. (2018). "Parallelizing the dual
+ *        revised simplex method". Math. Prog. Computation 10:119-142.
+ *
+ * @algorithm Adaptive Density-Based Algorithm Selection:
+ *   Choose hyper-sparse vs traditional FTRAN/BTRAN based on RHS density:
+ *   @math if density < threshold: use hyper-sparse (O(nnz result))
+ *         else: use traditional (O(nnz factor))
+ *   Threshold ~5-10% depends on factor structure.
+ *   TranStageAnalysis tracks prediction accuracy for threshold tuning.
+ *
+ * @see simplex/HSimplexNla.h for FTRAN/BTRAN operations
+ * @see simplex/HEkk.h for simplex kernel using this analysis
  */
 #ifndef SIMPLEX_HIGHSSIMPLEXANALYSIS_H_
 #define SIMPLEX_HIGHSSIMPLEXANALYSIS_H_

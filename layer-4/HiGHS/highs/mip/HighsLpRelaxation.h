@@ -44,6 +44,29 @@
  * **Playground (nested class):**
  * RAII wrapper for temporary LP modifications (e.g., strong branching).
  *
+ * @algorithm Cut Aging and Removal:
+ *   Manage LP size by removing non-binding cuts:
+ *   @math age_i = iterations since cut i had slack = 0
+ *   Remove cut when age_i > maxAge (typically 10-30)
+ *   Prevents LP from growing unboundedly during B&B.
+ *   @complexity O(ncuts) per aging pass
+ *   @ref Achterberg, T. (2007). "Constraint Integer Programming".
+ *        PhD thesis, TU Berlin, Section 7.3.
+ *
+ * @algorithm Dual Proof Generation:
+ *   When LP is infeasible, extract valid inequality from dual ray:
+ *   @math If y ≥ 0 satisfies y'A ≤ 0 and y'b > 0, LP is infeasible
+ *   The sparse inequality Σ y_i · (row_i) ≤ 0 proves infeasibility.
+ *   Used for conflict analysis and nogood learning.
+ *   @see mip/HighsConflictPool.h for conflict storage
+ *
+ * @algorithm Warm-Start Management:
+ *   Preserve basis across node transitions:
+ *   - Store checkpoint basis before temporary modifications
+ *   - Restore after strong branching or diving
+ *   - Basis valid if columns/rows not deleted
+ *   @complexity O(m + n) for basis save/restore
+ *
  * @see mip/HighsMipSolver.h for MIP solver using this
  * @see mip/HighsCutPool.h for cut management
  */

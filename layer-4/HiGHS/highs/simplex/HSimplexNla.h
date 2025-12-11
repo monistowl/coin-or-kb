@@ -40,6 +40,31 @@
  * - debugCheckInvert(): Verify factorization accuracy
  * - debugInvertResidualError(): Measure solution error
  *
+ * @algorithm Product Form of the Inverse (PFI):
+ *   When LU update fails (numerical instability), store explicit η-vectors:
+ *   @math B_{k+1}^{-1} = E_k · B_k^{-1} where E_k = I + (a_q - e_r) · e_r'
+ *   η-vector: η = B_k^{-1} · a_q with η[r] modified for pivot
+ *   FTRAN: solve B·x = b by x = E_k · ... · E_1 · L^{-1} · U^{-1} · b
+ *   BTRAN: solve B'·y = c by y = U^{-T} · L^{-T} · E_1' · ... · E_k' · c
+ *   @complexity O(k · nnz(η)) per solve, where k = update count
+ *   @note PFI is fallback when Forrest-Tomlin update becomes unstable
+ *   @ref Dantzig, G.B. (1963). "Linear Programming and Extensions".
+ *        Princeton University Press, Chapter 7.
+ *
+ * @algorithm Scaled Space Operations:
+ *   Solve in scaled coordinates for numerical stability:
+ *   @math Given scaling D_r (rows) and D_c (cols):
+ *         Scaled basis: B̃ = D_r · B · D_c
+ *         FTRAN: x = D_c · B̃^{-1} · D_r · b
+ *         BTRAN: y = D_r · B̃^{-T} · D_c · c
+ *   Scaling factors stored per-variable, applied on-the-fly.
+ *
+ * @algorithm Iterate Checkpointing:
+ *   Save/restore basis state for backtracking on singular basis:
+ *   - putInvert(): Snapshot current basis, factors, DSE weights
+ *   - getInvert(): Restore to checkpoint after failed pivot
+ *   Enables recovery from rank-deficient basis updates.
+ *
  * @see util/HFactor.h for LU factorization
  * @see simplex/HEkk.h for simplex kernel using HSimplexNla
  */

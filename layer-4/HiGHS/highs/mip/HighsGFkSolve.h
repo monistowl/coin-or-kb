@@ -40,6 +40,34 @@
  * 2. setRhs<k>(): Set right-hand side (k-1 for mod-k MIR)
  * 3. solve<k>(): Find row weights yielding maximally violated cuts
  *
+ * @algorithm Fermat's Little Theorem Inverse:
+ *   Compute multiplicative inverse in GF(k) for prime k:
+ *   @math a^{-1} ≡ a^{k-2} (mod k) since a^{k-1} ≡ 1 (mod k)
+ *   Uses recursive repeated squaring: a^n = (a^{n/2})² or a·a^{n-1}
+ *   @complexity O(log k) multiplications, computed at compile time
+ *
+ * @algorithm Sparse LU Factorization in GF(k):
+ *   Gaussian elimination with Markowitz pivot selection:
+ *   @math A = P·L·U·Q where L, U are triangular mod k
+ *   Markowitz cost: (row_count - 1) × (col_count - 1)
+ *   Fill-in minimization crucial for sparse mod-k systems.
+ *   @complexity O(nnz² / min(m,n)) worst case, typically O(nnz^{1.5})
+ *
+ * @algorithm Mod-k MIR Cut Generation:
+ *   Given A·x = b (mod k) with x integer, find valid inequalities:
+ *   @math Multiply rows by weights λ ∈ GF(k)^m to get (λ'A)x ≡ λ'b (mod k)
+ *   If (λ'A)_j ≡ 0 for all continuous vars, MIR cut can be derived.
+ *   solve<k>() enumerates weight vectors λ yielding violated cuts.
+ *   @ref Caprara, A. and Letchford, A.N. (2003). "On the separation of
+ *        split cuts and related inequalities". Math. Programming 94:279-294.
+ *
+ * @algorithm Splay Tree Row Storage:
+ *   Amortized O(log n) access for row operations:
+ *   - ARleft/ARright: Binary search tree per row
+ *   - Self-adjusting: recently accessed elements move to root
+ *   Efficient for repeated row scans during factorization.
+ *   @complexity Amortized O(log n) per access
+ *
  * @see mip/HighsModkSeparator.h for mod-k cut generation using this solver
  */
 

@@ -5,8 +5,50 @@
 /*    Available as open-source under the MIT License                     */
 /*                                                                       */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/**@file simplex/HEkkDualRow.h
- * @brief Dual simplex ratio test for HiGHS
+/**
+ * @file simplex/HEkkDualRow.h
+ * @brief Dual simplex ratio test and BFRT for HiGHS
+ *
+ * Implements the dual ratio test (CHUZC) including Bound-Flipping Ratio Test
+ * (BFRT) for selecting the entering variable in dual simplex.
+ *
+ * **Key Operations:**
+ * - chooseMakepack(): Pack pivot row entries for ratio test
+ * - choosePossible(): Find candidates satisfying dual feasibility
+ * - chooseFinal(): Execute BFRT to select entering variable
+ * - updateDual(): Apply dual updates after pivot
+ * - updateFlip(): Handle bound flips from BFRT
+ *
+ * **BFRT Data Structures:**
+ * - packIndex/packValue: Sparse pivot row representation
+ * - workData: Index-value pairs sorted by ratio
+ * - workGroup: Degenerate group boundaries
+ *
+ * @algorithm Bound-Flipping Ratio Test (BFRT):
+ *   Given pivot row a'_r = e_r' B^{-1} A_N and leaving variable x_r:
+ *   1. Compute ratios θ_j = d_j / α_{rj} for nonbasics with α_{rj} ≠ 0
+ *   2. Sort by increasing |θ_j| (Harris-style with tolerance)
+ *   3. As θ increases, nonbasics "flip" from one bound to another
+ *   4. Track cumulative primal change Δx_r from flips
+ *   5. Stop when Δx_r reaches infeasibility of x_r
+ *   @math θ* = min{θ : Σ_{j flipped} |range_j| · |α_{rj}| ≥ |x_r - bound_r|}
+ *   The entering variable is the one that causes this threshold crossing.
+ *   @ref Koberstein, A. (2008). "The dual simplex method, techniques for a
+ *        fast and stable implementation". PhD thesis, Universität Paderborn.
+ *
+ * @algorithm Harris Ratio Test Tolerance:
+ *   Allow small dual infeasibility by using θ_j + tol instead of θ_j:
+ *   @math θ'_j = (d_j + sign(α_{rj}) · tol) / α_{rj}
+ *   This prevents excessive bound flipping on near-degenerate pivots.
+ *   @ref Harris, P.M.J. (1973). "Pivot selection methods of the Devex LP code".
+ *        Mathematical Programming Study 4:30-57.
+ *
+ * @complexity O(nnz(row) · log(nnz(row))) for heap-based group sort
+ *   O(nnz(row)) for ratio test scan
+ *   Dominated by sparse BTRAN cost in practice
+ *
+ * @see simplex/HEkkDual.h for dual simplex main loop
+ * @see simplex/HEkkDualRHS.h for CHUZR (row selection)
  */
 #ifndef SIMPLEX_HEKKDUALROW_H_
 #define SIMPLEX_HEKKDUALROW_H_

@@ -26,6 +26,18 @@
  * 2. Construct initial basis from binding constraints
  * 3. Run simplex cleanup to reach vertex
  *
+ * @algorithm IPM-to-Simplex Crossover:
+ *   Convert interior point solution to basic feasible solution:
+ *   @math Given interior x*: identify active set A(x*) = {i : |g_i(x*)| < ε}
+ *         Construct basis B from nearly-active constraints
+ *         Simplex pivots: move to vertex while maintaining feasibility
+ *   Three phases: (1) identify near-bound vars, (2) build initial basis,
+ *   (3) run primal/dual simplex to optimal vertex.
+ *   @complexity O(m²) typical, O(m³) worst case for crossover
+ *   @ref Andersen, E. and Ye, Y. (1999). "A computational study of the
+ *        homogeneous algorithm for large-scale convex optimization".
+ *        Computational Optimization and Applications 10:243-269.
+ *
  * @see ipm/IpxWrapper.h for IPM solver calling crossover
  * @see simplex/HEkk.h for simplex cleanup phase
  */

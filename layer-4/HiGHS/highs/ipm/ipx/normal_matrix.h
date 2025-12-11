@@ -9,6 +9,15 @@
  * The weight matrix W is diagonal and set via Prepare(). If W is NULL,
  * uses W = [I; 0] (identity for structural, zero for slack columns).
  *
+ * @algorithm Normal Equations Matrix-Vector Product:
+ *   Compute y = (A·W·A')·x via two-pass sparse matvec:
+ *   @math Pass 1: t = A'·x     (sparse A' times dense x)
+ *         Scale:  t = W·t      (diagonal scaling)
+ *         Pass 2: y = A·t      (sparse A times sparse/dense t)
+ *   Avoids explicit formation of dense m×m matrix A·W·A'.
+ *   @complexity O(nnz(A)) per matrix-vector product
+ *   @note For IPM, W = diag(x/z) where x, z are primal/dual slacks
+ *
  * @see linear_operator.h for the interface
  * @see kkt_solver_diag.h for usage with diagonal preconditioning
  */

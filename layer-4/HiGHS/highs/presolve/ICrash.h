@@ -35,6 +35,40 @@
  * - dualize: Work with dual LP
  * - Strategy selection and parameters
  *
+ * @algorithm Penalty Method for Crash:
+ *   Find approximately feasible point by penalizing violations:
+ *   @math min c'x + μ · ||Ax - b||₂² subject to l ≤ x ≤ u
+ *         As μ → ∞, solution approaches feasibility
+ *   Quadratic term makes subproblem have closed-form solution.
+ *   @complexity O(m·n) per iteration (matrix-vector products)
+ *   @ref Nocedal, J. and Wright, S. (2006). "Numerical Optimization".
+ *        Springer, Chapter 17.
+ *
+ * @algorithm ADMM for Crash:
+ *   Alternating Direction Method of Multipliers:
+ *   @math Split: min c'x + μ·||z||₂² s.t. Ax - z = b, l ≤ x ≤ u
+ *         x-update: separable QP with box constraints
+ *         z-update: soft thresholding z = (Ax-b+λ/ρ)/(1+μ/ρ)
+ *         λ-update: λ += ρ(Ax - z - b)
+ *   Converges to feasible point with bounded multipliers.
+ *   @complexity O(m·n) per iteration
+ *   @ref Boyd, S. et al. (2011). "Distributed optimization and statistical
+ *        learning via ADMM". Foundations and Trends in ML 3(1):1-122.
+ *
+ * @algorithm Iterative Constraint Activation (ICA):
+ *   Progressively activate constraints during crash:
+ *   @math Start with bounds only, iteratively add most violated constraints
+ *         Each subproblem is easier (fewer constraints)
+ *   Combines well with warm-starting from previous iteration.
+ *   @complexity O(k·n) where k is constraints added per iteration
+ *
+ * @algorithm Crossover to Basic Solution:
+ *   Convert crash point to basic feasible solution:
+ *   @math Given x_crash, find basis B such that x_B = B⁻¹b is feasible
+ *         Uses primal/dual simplex pivots from crash point
+ *   callCrossover() integrates with HiGHS simplex.
+ *   @complexity O(m²) typical for crossover phase
+ *
  * @see presolve/ICrashUtil.h for helper functions
  * @see presolve/ICrashX.h for extended crash variants
  */

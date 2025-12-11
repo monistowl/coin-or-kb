@@ -12,6 +12,22 @@
  * Linear dependencies among free variables or equality constraints
  * are resolved by fixing dependent variables at zero.
  *
+ * @algorithm IPM-to-Basis Conversion:
+ *   Use interior point scaling factors as basis selection weights:
+ *   @math weight[j] = x[j]/z[j] (primal/dual slack ratio from IPM)
+ *         Large weight → variable likely basic (away from bound)
+ *         Small weight → variable likely nonbasic (near bound)
+ *   Calls ConstructBasisFromWeights() with these weights.
+ *   @complexity O(m · nnz) for weighted crash procedure
+ *
+ * @algorithm Dependency Resolution:
+ *   Handle free variables and equality constraints:
+ *   @math Free vars: columns may be linearly dependent → fix some at zero
+ *         Equality rows: may have dependent columns → fix slack
+ *   Dependent variables get BASIC_FREE or NONBASIC_FIXED status.
+ *   Maintains primal/dual residual invariance during fixing.
+ *   @note TODO: check for primal/dual infeasibility after resolution
+ *
  * @see guess_basis.h for basis construction from weights
  * @see iterate.h for interior point state
  */
