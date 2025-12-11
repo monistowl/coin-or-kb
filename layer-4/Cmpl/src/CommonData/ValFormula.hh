@@ -48,6 +48,12 @@
  * - canonicalForm(): Normalize expression structure
  * - Used for output and solver interface
  *
+ * @algorithm Expression Canonicalization and Linearity Detection
+ * @math Transforms expressions to canonical form:
+ *       Linear: Σ aᵢxᵢ + b (coefficients collected, like terms merged)
+ *       Compare: expr ⊴ rhs normalized to standard constraint form
+ *       Logical: CNF/DNF normal forms for indicator constraints
+ *       isLinear() returns true iff formula contains no products of variables.
  * @see OptModel.hh for usage in constraints
  * @see CmplVal.hh for TP_FORMULA type
  */

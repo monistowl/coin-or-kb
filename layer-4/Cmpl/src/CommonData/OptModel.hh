@@ -50,6 +50,11 @@
  * - Constraint or objective formula
  * - linearConstraint(): Check if linear
  *
+ * @algorithm Optimization Model Data Structure
+ * @math Standard form: min c'x s.t. Ax ⊴ b, l ≤ x ≤ u, x_I ∈ Z
+ *       LinearModel exports as column-major (for simplex) or row-major.
+ *       Coefficient matrix A stored sparsely as (row, col, value) triples.
+ *       getColModel()/getRowModel() convert between orientations.
  * @see CmplVal.hh for value representation
  * @see ValFormula.hh for constraint formulas
  */

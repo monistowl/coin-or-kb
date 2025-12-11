@@ -43,6 +43,12 @@
  * - Thread-safe caching of remodeling results
  * - Prevents duplicate linearizations
  *
+ * @algorithm Constraint Remodeling Framework
+ * @math Base class for automatic linearization transformations:
+ *       - Big-M method: indicator constraints y=1 ⟹ ax ≤ b become ax ≤ b + M(1-y)
+ *       - Auxiliary variable generation for products and piecewise functions
+ *       - Thread-safe caching prevents redundant reformulations
+ *       Derived classes implement specific transformations (Glover, McCormick, etc.)
  * @see RemodelBaseMod.hh for module interface
  * @see LinearLogCon.hh for logical constraint linearization
  */

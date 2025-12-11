@@ -40,6 +40,12 @@
  * - checkSetBound(): Validate and set bound on variable
  * - _accessGuardCache: Thread-safe access control
  *
+ * @algorithm Bound Row Presolve
+ * @math Converts singleton rows ax ⊴ b to variable bounds:
+ *       - ax ≤ b with a > 0 → x ≤ b/a (tighten upper bound)
+ *       - ax ≥ b with a > 0 → x ≥ b/a (tighten lower bound)
+ *       - ax = b → x = b/a (fix variable)
+ *       Reduces matrix size and improves solver performance.
  * @see RemodelBase.hh for base class
  * @see BoundRowMod.hh for module interface
  */

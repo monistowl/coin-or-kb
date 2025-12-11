@@ -45,6 +45,12 @@
  * - INTCODE_CONSTRUCT: Build arrays/tuples/sets
  * - INTCODE_CODEBLOCK: Control flow blocks
  *
+ * @algorithm Stack-Based Virtual Machine Bytecode
+ * @math Postfix evaluation model: operands pushed, operators pop and push result.
+ *       IcCommand encodes: major (category), minor (specific op), par (mode), cnt (args).
+ *       Example: "x + 2*y" → FETCH x, LIT 2, FETCH y, MUL, ADD
+ *       Constraints become matrix rows via linearization during interpretation.
+ * @complexity O(code_length) execution, O(1) per instruction.
  * @see Modules/Compiler/ for code generation
  * @see Modules/Interpreter/ for code execution
  */

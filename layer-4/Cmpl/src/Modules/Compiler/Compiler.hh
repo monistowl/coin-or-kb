@@ -40,6 +40,12 @@
  * - run(): Execute parser and generate intermediary code
  * - error(): Multi-signature error reporting
  *
+ * @algorithm CMPL Parser and Code Generator
+ * @math Bison/Flex-based parser generates stack-based intermediary code:
+ *       Source → Lexer → Parser → AST → Code Generator → IntCode
+ *       Symbol table tracks variables, parameters, and constraints.
+ *       Type inference determines numeric/boolean expression types.
+ * @complexity O(n) parsing where n = source token count.
  * @see CompilerContext.hh for parser context
  * @see CommonData/IntCode.hh for output format
  */

@@ -41,6 +41,14 @@
  * - _dataTypes: Type object registry
  * - run(): Execute intermediary code
  *
+ * @algorithm CMPL Virtual Machine Interpreter
+ * @math Stack-based execution of intermediary code:
+ *       - Fetch/store operations access symbol table
+ *       - Arithmetic builds ValFormula expressions
+ *       - Constraints added to OptModel as they're evaluated
+ *       - Iteration over index sets generates constraint families
+ *       Thread handler enables parallel constraint generation.
+ * @complexity O(code × index_set_size) for indexed constraint generation.
  * @see ExecContext.hh for execution state
  * @see CommonData/IntCode.hh for code format
  * @see CommonData/OptModel.hh for output

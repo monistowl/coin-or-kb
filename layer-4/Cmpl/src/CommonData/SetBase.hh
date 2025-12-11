@@ -45,6 +45,12 @@
  * - SetFinite: General finite set
  * - SetWithOrder: Set with user-defined ordering
  *
+ * @algorithm Index Set Representations for Modeling Languages
+ * @math SetAlg: {a..b} stored as (a,b) pair, O(1) membership test via bounds.
+ *       SetRecMult: S₁×S₂×...×Sₖ stored as component sets, |S| = ∏|Sᵢ|.
+ *       SetEnum: explicit element list, O(log n) membership via sorted search.
+ *       SetFinite: general finite set with arbitrary tuple ranks.
+ *       Canonical form ensures unique representation for equality testing.
  * @see SetIterator.hh for traversing sets
  * @see Tuple.hh for set elements
  */
