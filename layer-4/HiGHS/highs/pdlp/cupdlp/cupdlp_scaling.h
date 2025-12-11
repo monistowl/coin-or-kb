@@ -5,13 +5,28 @@
  * Implements equilibration scaling to improve PDHG convergence by
  * balancing row and column norms of the constraint matrix A.
  *
+ * @algorithm Ruiz Equilibration:
+ *   Iteratively scale rows and columns to unit infinity norm:
+ *   @math D_r^{(k)} = diag(1/max_j |A^{(k)}_{ij}|)  (row scaling)
+ *         D_c^{(k)} = diag(1/max_i |A^{(k)}_{ij}|)  (column scaling)
+ *         A^{(k+1)} = D_r^{(k)} · A^{(k)} · D_c^{(k)}
+ *         Converges to matrix with all row/col ∞-norms equal to 1.
+ *   @complexity O(k · nnz) for k iterations (typically 10-20).
+ *   @ref Ruiz (2001). "A scaling algorithm to equilibrate both rows and
+ *        columns norms in matrices".
+ *
+ * @algorithm Pock-Chambolle Degree Scaling:
+ *   Scale based on matrix sparsity pattern:
+ *   @math τ_j = 1/√(Σ_i A_{ij}²), σ_i = 1/√(Σ_j A_{ij}²)
+ *         Makes step sizes τσ‖A‖² < 1 automatically satisfied.
+ *   @complexity O(nnz) single pass.
+ *   @ref Pock & Chambolle (2011). "Diagonal preconditioning for first order
+ *        primal-dual algorithms in convex optimization".
+ *
  * **Scaling Methods:**
  * - Ruiz equilibration: Iterative row/column scaling to unit ∞-norms
  * - L2 scaling: Scale to unit 2-norms
  * - PC (Pock-Chambolle) scaling: Scale based on degree
- *
- * Scaling affects step size selection: τσ‖A‖² < 1 becomes easier
- * to satisfy when ‖A‖ is reduced through scaling.
  *
  * @see cupdlp_step.h for step size computation using scaled matrix
  * @see cupdlp_defs.h for CUPDLPscaling structure

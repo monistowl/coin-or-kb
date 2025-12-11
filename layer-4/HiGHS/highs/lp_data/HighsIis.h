@@ -11,25 +11,28 @@
  *
  * Identifies minimal subset of constraints that cannot be satisfied.
  *
+ * @algorithm IIS Computation via Deletion Filter:
+ *   Find minimal infeasible subsystem by iterative constraint removal:
+ *   @math Given infeasible Ax ≤ b, find minimal I ⊆ {1,...,m}
+ *         such that A_I x ≤ b_I infeasible, but removing any row makes feasible.
+ *         Deletion: For each row i in current set, check if feasible without i.
+ *         If feasible: keep row in IIS. If infeasible: row not essential.
+ *   @complexity O(k·LP) where k ≤ m is IIS size. Each check is one LP solve.
+ *   @ref Gleeson & Ryan (1990). "Identifying minimally infeasible subsystems
+ *        of inequalities". ORSA Journal on Computing.
+ *
+ * @algorithm Elastic Filter Enhancement:
+ *   Speed up IIS identification using elastic variables:
+ *   @math Add elastic variables e_i ≥ 0 to each constraint: a_i'x ≤ b_i + e_i
+ *         Minimize Σ e_i. Constraints with e_i > 0 in optimal are candidates.
+ *         Reduces number of LP solves needed for deletion filter.
+ *   @ref Chinneck & Dravnieks (1991). "Locating minimal infeasible constraint
+ *        sets in linear programs".
+ *
  * **IIS Definition:**
  * - Minimal infeasible subsystem: removing any constraint makes it feasible
  * - Helps diagnose why an LP is infeasible
  * - Also identifies which variable bounds participate
- *
- * **IisBoundStatus:**
- * - kDropped: Bound removed from IIS
- * - kNull: Not yet classified
- * - kFree: Variable is free (not in IIS)
- * - kLower/kUpper/kBoxed: Which bound(s) are in IIS
- *
- * **Algorithm:**
- * - compute(): Main IIS computation using simplex iterations
- * - trivial(): Check for obviously infeasible (single row/col)
- * - rowValueBounds(): Check row activity vs bounds
- *
- * **Strategy:**
- * - kIisStrategyMin: Minimize IIS size (more iterations)
- * - Iteratively removes constraints until minimal set remains
  *
  * **Output:**
  * - col_index_/row_index_: Variables/constraints in IIS

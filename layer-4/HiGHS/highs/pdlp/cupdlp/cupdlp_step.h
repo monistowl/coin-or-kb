@@ -4,15 +4,33 @@
  *
  * Core PDHG iteration logic including step size computation and updates.
  *
+ * @algorithm Primal-Dual Hybrid Gradient (PDHG):
+ *   First-order method for LP: min{c'x : Ax=b, l≤x≤u}:
+ *   @math Each iteration performs:
+ *         x̄ = x - τ·(c - A'y)           (primal gradient)
+ *         x⁺ = proj_{[l,u]}(x̄)          (projection onto bounds)
+ *         y⁺ = y + σ·(b - A·(2x⁺ - x))  (dual gradient with extrapolation)
+ *   @complexity O(nnz(A)) per iteration. Converges O(1/k) ergodically.
+ *   @ref Chambolle & Pock (2011). "A first-order primal-dual algorithm
+ *        for convex problems with applications to imaging".
+ *
+ * @algorithm Power Method for Spectral Norm:
+ *   Compute ‖A‖₂ to set step sizes τ, σ satisfying τσ‖A‖² < 1:
+ *   @math Iterate: v ← A'Av / ‖A'Av‖, λ ← v'A'Av
+ *         Converges to largest eigenvalue of A'A.
+ *   @complexity O(k·nnz(A)) for k iterations.
+ *
+ * @algorithm Malitsky-Pock Adaptive Steps:
+ *   Update step sizes based on actual primal-dual coupling:
+ *   @math θ = τ_k/τ_{k-1}, τ_{k+1} = τ_k·√(1 + θ),
+ *         σ_{k+1} = τ_{k+1}/(τ_k·σ_k·‖A‖²)
+ *   @ref Malitsky & Pock (2018). "A first-order primal-dual algorithm
+ *        with linesearch".
+ *
  * **Step Size Methods:**
  * - Constant: τ = σ = 1/‖A‖, computed via power method
  * - Malitsky-Pock: Adaptive based on primal-dual interaction
  * - Adaptive linesearch: Backtracking with growth/reduction
- *
- * **PDHG Update (each iteration):**
- * 1. Primal step: x̄ = x - τ·(c - A'y)
- * 2. Projection: x⁺ = proj_{[l,u]}(x̄)
- * 3. Dual step: y⁺ = y + σ·(b - A·(2x⁺ - x))
  *
  * @see cupdlp_solver.h for main iteration loop
  * @see cupdlp_linalg.h for matrix-vector products
